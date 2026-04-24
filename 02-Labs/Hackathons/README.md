@@ -33,6 +33,8 @@
 
 ## Discarded / Skipped
 
+- [ ] `[X]` **ETHGlobal Open Agents** — May 3 | 💰 $50K | DROPPED — looking for experienced builders, not beginner-friendly
+- [ ] `[X]` **ARC Hackathon** — Apr 25 | 💰 $10K | Past deadline
 - [ ] `[X]` **ElevenHacks #4 (Kiro + ElevenLabs)** — Apr 20 | 💰 $11,980 | Voting closes too soon, no submission ready
 - [ ] `[X]` **ElevenHacks #0-3** | Past | Ended
 
@@ -61,26 +63,20 @@ All submissions share the same 5-layer architecture. Only the **adapter layer** 
 └─────────────────────────────────────┘
 ```
 
-## Sprint Schedule: Sequence → Swap
+## Sprint Schedule: Focus
 
 ```
-THIS WEEK (Apr 20-26): SEQUENTIAL BUILD
-├── PHASE 1: ARC HACKATHON (Submit Apr 25)
-│   ├── Core: AgentEscrow + x402 nanopayments + enforcement
-│   ├── Jordan: Record demo video (use Desmond's script)
-│   └── Submit → lablab.ai + video
-│
-├── PHASE 2: SWAP ADAPTERS → KITE AI (Submit Apr 26)
-│   ├── Swap: Arc x402 → GenLayer enforcement + Kite chain
+THIS WEEK (Apr 24-26): KITE AI SPRINT
+├── Kite AI Global (Submit Apr 26)
+│   ├── Core: AgentEscrow + GenLayer enforcement + Kite chain
 │   ├── Dmob: Fix test fixtures, deploy to Kite testnet
 │   └── Submit → Kite portal + demo video
-│
-└── PHASE 3: ETHGLOBAL PREP (Starts Apr 27)
+└── ElevenLabs Hackathon — scoping + prep
 
 Week of Apr 27 - May 3
-├── 🔴 ETHGlobal Open Agents (May 3)
+├── Norris Research Hackathon — scoping + prep
 ├── Solana: Start AgentRegistry + JobEscrow (Anchor)
-├── ElevenHacks #5 scoping (if pursued)
+├── ElevenHacks #6 scoping (if pursued)
 └── Beam grant polish + submit
 
 Week of May 4-10
