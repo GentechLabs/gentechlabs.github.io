@@ -7,7 +7,7 @@
 - VPS Device ID: UW6WN6J-RNNYEML-K2Q7IBG-AUIKVQZ-LJIYAUE-F2UNOAH-2PX5JNY-AU5YWAH
 - Desktop Device ID: FVUGXBO-D5Z2DJK-CWLKXSU-OADVYJR-NKDMV4L-YDZYG7B-PDVAP5N-DTSXYAZ
 - Folder: "Gentech Obsidian Vault" → /root/Documents/Obsidian Vault
-- GUI: http://2.24.195.196:8384 (jordan / Gentech2026!)
+- GUI: http://[REDACTED]:8384 (jordan / [REDACTED — see secure vault])
 - Status: 59 files synced, idle
 
 ## Sync Status

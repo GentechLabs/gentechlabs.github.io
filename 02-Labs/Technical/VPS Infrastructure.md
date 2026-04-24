@@ -30,7 +30,7 @@ tags: [infrastructure, vps, devops]
 | 23:30 | Ollama models | Ollama |
 
 ## Workspace Password
-- Password: Gentech2026!
+- Password: [REDACTED — see secure vault]
 
 ## Common Paths
 | Path | Purpose |
@@ -48,21 +48,21 @@ tags: [infrastructure, vps, devops]
 - Paperclip: replaced (historical issue)
 
 ## Telegram Infrastructure
-- **Bot ID**: 8710327768
-- **Users**: Jordan (7105876857), Desmond (8774981477), Dadrain (6842745592)
+- **Bot ID**: [REDACTED]
+- **Users**: Jordan, Desmond, Dadrian [IDs REDACTED]
 - **Groups**:
-  - HQ (brainstorm/orchestration): `-1003863540828`
-  - Strategies (investing/DeFi): `-1002916759037`
-  - Labs (dev/learning): `-1003872552815`
-  - Entertainment (content): `-1003893562036`
+  - HQ (brainstorm/orchestration): [REDACTED]
+  - Strategies (investing/DeFi): [REDACTED]
+  - Labs (dev/learning): [REDACTED]
+  - Entertainment (content): [REDACTED]
 - Gateway runs as systemd user service
 
 ## Paperclip Dashboard
-- URL: `http://159.203.125.252:3102` (auto-detects 3100-3102)
-- Login: `jordan@gentech.agency` / `Gentech2026!`
-- API Base: `http://127.0.0.1:3102/api`
-- Agent ID: `14285a24-beee-4e5b-bc53-b27dd2de5b09`
-- Company ID: `d0377ff1-e888-4c09-9869-5ebb7cd8c148`
+- URL: [REDACTED — see secure vault]
+- Login: [REDACTED — see secure vault]
+- API Base: [REDACTED]
+- Agent ID: [REDACTED]
+- Company ID: [REDACTED]
 - Auth: Session cookie + Origin header required for mutations
 - Login: `POST /api/auth/sign-in/email`
 - Unpause agent: `UPDATE agents SET status='idle' WHERE id='...'`
@@ -76,7 +76,7 @@ tags: [infrastructure, vps, devops]
 ### Avalanche Agent Economy (AAE)
 - Avalanche social AI agent platform, solo dev
 - Retro9000 grant ($75K) at `/tmp/retro9000-grant-outline.md`
-- PentAGI: `https://127.0.0.1:8443` (admin@pentagi.com/admin)
+- PentAGI: [REDACTED — see secure vault]
 - Nous API 404 from Go client known issue
 - VPS 48GB at 92%, warn at 95%, upgrade Hetzner CX41 when ready
 

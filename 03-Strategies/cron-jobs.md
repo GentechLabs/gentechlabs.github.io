@@ -1,62 +1,62 @@
 # YoYo Cron Jobs — Active Manifest
 > Last updated: 2026-04-24
 > Models: YoYo/Gentech/Desmond → `kimi-k2.6` | DMOB → `qwen3-coder-next` | Provider: Ollama Cloud
-> Delivery: All jobs → Strategies group (-1002916759037)
+> Delivery: Strategies group (-1002916759037)
 
 ---
 
-## 📊 Crypto Watchlist
-**Job ID:** `675ae691c53e`
-**Schedule:** Every 2 hours (7, 9, 11, 13, 15, 17, 19, 21)
-**Status:** ✅ Active
-
-- CMC API prices: BTC, ETH, AVAX, SOL, LINK + token-watchlist.md
-- Includes LP pool status (consolidated — no separate LP message)
-- Macro "why" context (1-2 lines)
-- On-chain signal → `keccak256("CMC_WATCHLIST")` to SharedMemory
-
----
-
-## 💧 LP Watchlist (AVAX/USDC) — Combined with Crypto Watchlist
+## 📊 Unified Crypto Watchlist + LP Monitor
 **Job ID:** `faed4f588aef`
 **Schedule:** `15 8,12,16,20 * * *` (4x/day: 8:15, 12:15, 16:15, 20:15 UTC)
 **Model:** `kimi-k2.6`
-**Status:** ✅ Active (fixed Apr 24 — reduced from 15x/day to avoid 429 rate limits)
+**Status:** ✅ Active (unified Apr 24 — watchlist + LP + milestones in one report)
 
-| Field | Value |
-|-------|-------|
-| Pool | LFJ V2.2 (binStep 10) |
-| Address | `0x864d4e5Ee7318e97483DB7EB0912E09F161516EA` |
-| Range | $9.10 — $9.65 |
-| Shape | Curve |
-| Position Entry | $31.16 (Mar 31) |
-| Tracker Script | `lp-unified-monitor.py` (consolidated watchlist + P&L) |
-| Position File | `~/.hermes/scripts/.lfj-position-tracker.json` |
+**Scope:** Full investment dashboard — market prices AND position tracking.
 
 **Report includes:**
-1. Crypto watchlist (BTC, SOL, LINK, AVAX, TAO, XAUt, BEAM)
-2. LP pool health (volume, liquidity, APR, range status)
-3. Position P&L (entry, IL, fees, net, vs HODL)
-4. Weekly deep-dive triggers (>5% AVAX move or Sundays)
+1. CMC prices for watchlist tokens (BTC, ETH, AVAX, SOL, LINK, TAO, XAUt, BEAM)
+2. 24h % change + volume trends + macro "why" context
+3. LP pool health (price, volume, liquidity, APR, range status)
+4. Position P&L (entry, IL, fees earned, net, vs HODL)
+5. Milestone progress (current tier, daily fee estimate)
+6. Compound readiness + DCA reminders
 
 **Alert Logic:**
-- 75-100% efficiency → 🤫 Silent
+- 75-100% efficiency → 🤫 Silent (1-line LP status included)
 - <75% efficiency → ⚠️ "Consider rebalancing"
 - Out of range → 🚨 URGENT alert
+- Milestone hit → 🏆 Celebration alert
 
-**Consolidation Rule:**
-During Crypto Watchlist hours (7,9,11,13,15,17,19,21), LP is SILENT unless URGENT (out of range).
+**Data Sources:**
+- Prices: CoinGecko (with User-Agent header)
+- LP Data: `lp-unified-monitor.py` (Birdeye → DexScreener fallback)
+- Position File: `~/.hermes/scripts/.lfj-position-tracker.json`
+- Range updated dynamically from screenshot snapshots
 
-**On-chain signal:** `keccak256("AVAX_LP_MONITOR")` → SharedMemory
+**On-chain signals:**
+- `keccak256("CMC_WATCHLIST")` → SharedMemory
+- `keccak256("AVAX_LP_MONITOR")` → SharedMemory
+
+**Master source:** `03-Strategies/token-watchlist.md`
 
 ---
 
 ## ⏸️ Overnight Pause/Resume
-Handled internally by `faed4f588aef` quiet-hours logic (11 PM – 6:30 AM EDT). No separate pause/resume jobs needed.
+**Pause Job:** `a5a8aa5c64db` — 11:00 PM daily → pauses LP monitor
+**Resume Job:** `390536c113fb` — 6:30 AM daily → resumes LP monitor
 
 ---
 
-## All Jobs (30 active across all departments)
+## Screenshot → LP Update Workflow
+When Jordan sends LP screenshots:
+1. Extract data (price, balance, AVAX/USDC amounts, fees, range)
+2. Update `~/.hermes/scripts/.lfj-position-tracker.json` with new snapshot
+3. Update `03-Strategies/LFJ-AVAX-USDC-5bps-Analysis.md` with latest data
+4. The unified cron job reads from the JSON automatically on next run
+
+---
+
+## All Jobs (active across all departments)
 
 | # | Name | Schedule | Delivery |
 |---|------|----------|----------|
@@ -65,7 +65,7 @@ Handled internally by `faed4f588aef` quiet-hours logic (11 PM – 6:30 AM EDT). 
 | 3 | Mess Hall — Agent Check-in | 2:00 PM daily | HQ |
 | 4 | End of Shift Wrap-Up | 4:30 PM Thu-Sat | HQ |
 | 5 | Vault Maintenance — Weekly | Sun 10:30 PM | HQ |
-| 6 | **YoYo — Crypto Watchlist + LP** | 8:15, 12:15, 16:15, 20:15 UTC | Strategies |
+| 6 | **YoYo — Unified Watchlist + LP** | 8:15, 12:15, 16:15, 20:15 UTC | Strategies |
 | 7 | Protocol Due Diligence | Thu 6:00 AM | Strategies |
 | 8 | Hermes Agent Daily Sync | 6:00 AM daily | Labs |
 | 9 | Weekly Opportunity Scanner | Mon/Thu 6 AM | Labs |
@@ -75,5 +75,7 @@ Handled internally by `faed4f588aef` quiet-hours logic (11 PM – 6:30 AM EDT). 
 | 13 | The Brain — Daily | 4:00 PM daily | Local |
 | 14 | Mess Hall — Daily Rotation | 3:00 AM daily | Local |
 | 15 | Sunday Skill Update | Sun 10:00 AM | HQ |
-| 16 | Vault Manager — Nightly | 11:00 PM daily | HQ |
-| 17 | Brain Backup | Every 6h | Local |
+| 16 | LP Monitor — Pause | 11:00 PM daily | Local |
+| 17 | LP Monitor — Resume | 6:30 AM daily | Local |
+| 18 | Vault Manager — Nightly | 11:00 PM daily | HQ |
+| 19 | Brain Backup | Every 6h | Origin |

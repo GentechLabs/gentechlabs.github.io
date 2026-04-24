@@ -4,8 +4,8 @@
 
 ## Paperclip Dashboard
 
-- **Dashboard URL**: http://159.203.125.252:3102
-- **Login**: jordan@gentech.agency / Gentech2026!
+- **Dashboard URL**: [REDACTED — see secure vault]
+- **Login**: [REDACTED — see secure vault]
 - **API**: http://127.0.0.1:3102/api
 - **Auth**: Cookie + Origin header for mutations
 - **Skills path**: auto-discovers ~/.hermes/skills/
@@ -14,8 +14,8 @@
 
 ## PentAGI Admin Panel
 
-- **URL**: https://127.0.0.1:8443
-- **Login**: admin / pentagi.com/admin
+- **URL**: [REDACTED — see secure vault]
+- **Login**: [REDACTED — see secure vault]
 
 ## VPS Specs
 

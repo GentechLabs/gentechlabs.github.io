@@ -2,8 +2,8 @@
 
 **Status:** #status:active
 **Date:** 2026-04-13
-**URL:** http://2.24.195.196:3001
-**Password:** Gentech2026!
+**URL:** http://[REDACTED]:3001
+**Password:** [REDACTED — see secure vault]
 **Repo:** https://github.com/outsourc-e/hermes-workspace (1241 ⭐)
 
 ## Features

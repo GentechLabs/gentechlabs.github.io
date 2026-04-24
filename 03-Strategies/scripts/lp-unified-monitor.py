@@ -123,13 +123,12 @@ def load_position() -> dict:
     except Exception: return {"entry_total_usd": 83.92, "entry_avax": 3.762, "entry_usdc": 48.37}
 
 def load_range() -> tuple:
-    """Load range from tracker file. Falls back to defaults."""
+    """Load range from tracker file (updated via screenshots). Falls back to defaults."""
     try:
         with open(POSITION_FILE, "r") as f:
             data = json.load(f)
-        rng = data.get("position", {}).get("range", {})
-        low = rng.get("low", 9.10)
-        high = rng.get("high", 9.65)
+        low = data.get("range_low", 9.10)
+        high = data.get("range_high", 9.65)
         return (float(low), float(high))
     except Exception:
         return (9.10, 9.65)
@@ -218,19 +217,20 @@ def main():
         print("QUIET_HOURS"); sys.exit(0)
     pos_data = load_position()
     p_usd = pos_data.get("entry_total_usd", 83.92)
+    range_low, range_high = load_range()
     birdeye = fetch_birdeye()
     try: pool = fetch_dexscreener()
     except Exception:
         if birdeye: pool = { "source": "birdeye", "price": birdeye["price"], "volume_24h": birdeye["volume_24h"], "liquidity_usd": birdeye["liquidity_usd"], "price_change_24h": birdeye["price_change_24h"] }
         else: print("ERROR"); sys.exit(1)
     price = birdeye["price"] if birdeye else pool["price"]
-    in_range = RANGE_LOW <= price <= RANGE_HIGH
-    efficiency = calc_fee_efficiency(price)
+    in_range = range_low <= price <= range_high
+    efficiency = calc_fee_efficiency(price, range_low, range_high)
     state = load_state()
     apr = calc_apr_from_volume(pool)
     est_fees = estimate_daily_fees(pool, p_usd)
     state = update_compound_tracking(state, in_range, est_fees)
-    report = format_report(price, in_range, efficiency, pool, state, birdeye, est_fees, apr)
+    report = format_report(price, in_range, efficiency, pool, state, birdeye, est_fees, apr, range_low, range_high)
     if not in_range or efficiency < 75:
         print("OK\n" + report)
     else:
