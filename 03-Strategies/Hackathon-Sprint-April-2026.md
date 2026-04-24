@@ -7,12 +7,15 @@
 
 ## Active Hackathons (organized by deadline)
 
-### 1. ElevenHacks #5 ⚡ SOONER
+### 1. ElevenHacks #6 ⚡ ACTIVE
 - **Prize:** $10K cash + ElevenLabs credits
 - **Announced:** April 16, 2026
-- **Deadline:** TBD (check @ElevenLabsDevs — may be short window)
-- **Focus:** Build with @kirodotdev + ElevenLabs APIs
+- **Started:** April 23, 2026
+- **Deadline:** ~May 7, 2026 (~16-day window)
+- **Focus:** Build a game with Zed + ElevenLabs APIs
+- **SDK:** ElevenAgents React SDK v1.0 (released Apr 23)
 - **Found via:** @ElevenLabsDevs on X
+- **GenTech Concept:** AAE Trading Arena — voice-driven educational trading simulator in Zed
 
 ### 2. ETHGlobal Open Agents 💰 BIGGER
 - **Prize:** $50K total (0G: $15K | Uniswap: $5K | Gensyn: $5K | KeeperHub: $5K)
@@ -47,7 +50,7 @@
 Build ONE project that qualifies for both:
 - **Voice-enabled on-chain AI agent** — agents that talk, execute on-chain, and build reputation
 - ETHGlobal angle: agents interacting with Ethereum
-- ElevenHacks angle: voice layer using ElevenLabs + Kiro
+- ElevenHacks angle: voice layer using ElevenLabs + Zed (Trading Arena)
 
 ### What We Already Have
 - ✅ Hermes agent framework (4 agents running)
@@ -104,14 +107,14 @@ User (voice) → Telegram → Hermes Agent → ElevenLabs TTS
 
 ### Sign-Ups Needed
 - [ ] ETHGlobal Open Agents: https://ethglobal.com/events/openagents — **apply by Apr 23**
-- [ ] ElevenHacks #5: check @ElevenLabsDevs for link
+- [x] ElevenHacks #6: Zed × ElevenLabs — concept locked, build ready
 - [ ] Kiro account (whatever it is — need to research)
 - [ ] 0G account (if submitting for their $15K prize)
 - [ ] ETH stake: 0.005 ETH (returned after submission)
 
 ### API Keys Needed
 - [ ] ElevenLabs API key (hackathon may provide credits)
-- [ ] Kiro API key
+- [ ] ElevenLabs hackathon credits (request via hackathon portal)
 - [ ] Ethereum RPC (Infura/Alchemy free tier)
 - [ ] Agent wallet (MetaMask or similar for demo)
 

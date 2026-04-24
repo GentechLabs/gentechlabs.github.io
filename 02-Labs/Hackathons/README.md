@@ -20,10 +20,10 @@
 ## Upcoming
 
 - [ ] `[Q]` **Dev3pack Global** — May 8-10 | 💰 TBA | Solana/Web3+AI | Social Layer | 🔍 Exploring
-- [ ] `[Q]` **ElevenHacks #5 (Zed + ElevenLabs)** — Apr 23 start | 💰 $11,980 | Voice AI | 🔍 Scoping
-- [ ] `[Q]` **ElevenHacks #6 (v0 + ElevenLabs)** — Apr 30 | 💰 $6,780 | Voice AI | ⏳ Upcoming
-- [ ] `[Q]` **ElevenHacks #7 (Cursor + ElevenLabs)** — May 7 | 💰 TBD | Voice AI | ⏳ Upcoming
-- [ ] `[Q]` **ElevenHacks #8 (Stripe + ElevenLabs)** — May 14 | 💰 $18,980 | Voice AI | ⏳ Upcoming
+- [ ] `[Q]` **ElevenHacks #6 (Zed + ElevenLabs)** — Apr 23 start | 💰 $10K + credits | Voice AI | 🔲 Build ready — AAE Trading Arena concept locked
+- [ ] `[Q]` **ElevenHacks #7 (v0 + ElevenLabs)** — Apr 30 | 💰 $6,780 | Voice AI | ⏳ Upcoming
+- [ ] `[Q]` **ElevenHacks #8 (Cursor + ElevenLabs)** — May 7 | 💰 TBD | Voice AI | ⏳ Upcoming
+- [ ] `[Q]` **ElevenHacks #9 (Stripe + ElevenLabs)** — May 14 | 💰 $18,980 | Voice AI | ⏳ Upcoming
 
 ## Grants (Rolling)
 

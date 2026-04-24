@@ -30,8 +30,9 @@
 
 ### Dmob — Code (Labs)
 - [x] **[X]** ARC Hackathon — AgentEscrow + x402 nanopayments | **Due: Apr 25** | ❌ **WITHDRAWN (Apr 22)** — see `arc-salvage-log.md`
-- [ ] **[P]** Kite AI Hackathon — 14/14 tests ✅ (fixed daily reset bug) | **Due: May 11** | 🟡 Needs demo scope + Kite deployment
-- [x] **[X]** ETHGlobal Open Agents — DROPPED. Assets salvaged to `10-Archive/Salvaged-Assets/ethglobal-patterns/`. Focus on Kite AI.
+- [ ] **[P]** **Solana Frontier** — PRIMARY focus. Identify tracks, build plan, start execution | **Due: May 11** | 🟥 **ACTIVE**
+- [ ] **[P]** Kite AI Hackathon — 14/14 tests ✅ (fixed daily reset bug) | **Due: May 11** | 🟡 Back-burner / stopping-point work
+- [x] **[X]** ETHGlobal Open Agents — DROPPED. Assets salvaged to `10-Archive/Salvaged-Assets/ethglobal-patterns/`. Focus on Solana Frontier.
 - [ ] **[Q]** Dynamic burn rate smart contract feasibility — on-chain revenue tracking, gas optimization | **Due: TBD** | ⏳ Pending
 - [ ] **[Q]** claude-obsidian integration evaluation — vault linting, hot cache compatibility | **Due: TBD** | ⏳ Pending
 - [ ] **[Q]** Opportunity monitoring cron expansion — grants, audit marketplace, tool alternatives | **Due: TBD** | ⏳ Pending
@@ -60,7 +61,7 @@
 ## 🟢 WAITING ON TRIGGER
 
 → *May 11: Kite AI Hackathon submission deadline*  
-→ *Next ElevenHacks sprint: Watch for announcement (YoYo monitors)*
+→ *ElevenHacks #6 (Zed × ElevenLabs): Concept locked, build-ready — trigger when Solana + Kite stable*
 
 ## ❌ DISCARDED
 
