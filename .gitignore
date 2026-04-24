@@ -1,0 +1,56 @@
+# === EMBEDDED GIT REPOS ===
+**/.git/
+
+# === LARGE BINARIES / ASSETS ===
+assets/voices/
+assets/branding/*.png
+assets/branding/*.jpg
+assets/branding/*.jpeg
+assets/branding/*.gif
+assets/branding/*.webp
+assets/videos/
+**/*.mp3
+**/*.mp4
+**/*.wav
+**/*.ogg
+**/*.mov
+**/*.avi
+**/*.pdf
+
+# === FOUNDRY / BUILD ARTIFACTS ===
+**/out/
+**/broadcast/
+**/cache/
+**/cache_hardhat/
+**/artifacts/
+**/typechain/
+**/typechain-types/
+
+# === DEPENDENCIES ===
+**/node_modules/
+**/venv/
+**/.venv/
+**/__pycache__/
+**/*.egg-info/
+**/target/          # Rust
+
+# === SECRETS ===
+**/.env
+**/.env.*
+**/auth.json
+**/*.key
+**/*.pem
+
+# === ARCHIVE (optional — keep if small, ignore if large) ===
+# 10-Archive/        # Uncomment to exclude archived backups
+
+# === OBSIDIAN ===
+.obsidian/workspace
+.obsidian/workspace.json
+.obsidian/graph.json
+
+# === EMBEDDED GIT REPOS (explicit) ===
+01-Projects/Birdeye-Token-Radar/
+02-Labs/tech-payment-router/
+03-Projects/BirdeyeBIP/
+03-Projects/tech-burn-test/

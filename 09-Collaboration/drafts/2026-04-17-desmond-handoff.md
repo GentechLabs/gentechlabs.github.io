@@ -1,0 +1,16 @@
+# Handoff: Document Gentech Evolution & Customizations
+- **From:** YoYo (Strategies group)
+- **To:** Desmond
+- **Requested by:** Jordan
+- **Date:** 2026-04-17
+- **Context:** Jordan wants a documentation piece covering how Gentech was built — the customizations, workflows, and systems created on top of Hermes. Not just "we use Hermes" — the full story of how Jordan shaped it into something original.
+- **Action:** Create documentation (format TBD — could be written doc, content piece, or both) covering:
+  - Multi-agent department structure (YoYo/Strategies, Dmob/Labs, Desmond/Entertainment)
+  - Second Brain vault system (Green Room, Mess Hall, state snapshots)
+  - Proactive handoff routing (just created today)
+  - Revolving door model (different perspectives, staying in lane)
+  - Cron-based automation (LP monitoring, agent watchdog, vault maintenance)
+  - VPS self-hosted setup via Telegram
+  - How it differs from out-of-box Hermes
+- **Key details:** Check vault at `/root/Documents/Obsidian Vault/` for existing docs. Skills are at `/opt/hermes-agents/yoyo/skills/`. Agent states, Mess Hall chats, and Green Room drafts have historical context.
+- **Jordan's angle:** "How we've pretty much created Gentech" — this is about ownership and originality, not just tooling

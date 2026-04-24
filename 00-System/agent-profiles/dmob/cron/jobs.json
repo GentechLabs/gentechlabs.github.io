@@ -1,0 +1,199 @@
+{
+  "jobs": [
+    {
+      "id": "3a2856084f88",
+      "name": "Sunday Skill Update Check",
+      "prompt": "Check for skill updates across all installed skills. For each skill:\n1. Check if the source repo has newer commits than what's installed\n2. If updates are available, note the skill name and what changed\n3. Do NOT auto-update \u2014 just report what's available\n4. Also check https://github.com/0xNyk/awesome-hermes-agent for new resources relevant to blockchain/smart contract/DeFi work\n\nReport a summary to HQ with:\n- Skills with available updates (name + what changed)\n- New resources from awesome list that match GenTech's focus (AAE, smart contracts, DeFi, hackathons)\n- Any security advisories for installed skills\n\nKeep it concise \u2014 one-line per item unless something major changed.",
+      "skills": [],
+      "skill": null,
+      "model": null,
+      "provider": null,
+      "base_url": null,
+      "script": null,
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 12 * * 0",
+        "display": "0 12 * * 0"
+      },
+      "schedule_display": "0 12 * * 0",
+      "repeat": {
+        "times": null,
+        "completed": 0
+      },
+      "enabled": true,
+      "state": "scheduled",
+      "paused_at": null,
+      "paused_reason": null,
+      "created_at": "2026-04-20T11:47:19.726056+00:00",
+      "next_run_at": "2026-04-26T12:00:00+00:00",
+      "last_run_at": null,
+      "last_status": null,
+      "last_error": null,
+      "last_delivery_error": null,
+      "deliver": "telegram:-1003863540828",
+      "origin": {
+        "platform": "telegram",
+        "chat_id": "-1003863540828",
+        "chat_name": "Gentech HQ",
+        "thread_id": null
+      }
+    },
+    {
+      "id": "3044d70c58bc",
+      "name": "brain-backup",
+      "prompt": "Run a full brain backup to the hermes-brain-backup repo. Steps:\n\n1. **Memory backup**: Run `python3 /root/hermes-brain-backup/scripts/backup-brain.py`\n2. **Vault sync**: If /root/vaults/gentech exists, copy/sync vault structure to /root/hermes-brain-backup/vault/ (exclude .obsidian, audio files, and large binaries)\n3. **Git commit & push**: \n   - cd /root/hermes-brain-backup\n   - git add -A\n   - git diff --cached --stat (check if changes exist)\n   - If changes: git commit -m \"\ud83e\udde0 Daily backup \u2014 [date]\" && git push\n4. **Report**: Summarize what was backed up (files changed, memory status, vault health)\n\nDeliver the summary to telegram:-1003872552815",
+      "skills": [],
+      "skill": null,
+      "model": null,
+      "provider": null,
+      "base_url": null,
+      "script": null,
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 6 * * *",
+        "display": "0 6 * * *"
+      },
+      "schedule_display": "0 6 * * *",
+      "repeat": {
+        "times": null,
+        "completed": 4
+      },
+      "enabled": true,
+      "state": "scheduled",
+      "paused_at": null,
+      "paused_reason": null,
+      "created_at": "2026-04-20T15:46:52.926582+00:00",
+      "next_run_at": "2026-04-25T06:00:00+00:00",
+      "last_run_at": "2026-04-24T06:04:14.969745+00:00",
+      "last_status": "ok",
+      "last_error": null,
+      "last_delivery_error": null,
+      "deliver": "telegram:-1003872552815",
+      "origin": {
+        "platform": "telegram",
+        "chat_id": "-1003863540828",
+        "chat_name": "Gentech HQ",
+        "thread_id": "14553"
+      }
+    },
+    {
+      "id": "f7c7b1dc89a9",
+      "name": "x402 Ecosystem Watch (Bi-Weekly)",
+      "prompt": "## x402 Ecosystem Research \u2014 Gentech Labs Bi-Weekly Check\n\nYou are DMOB, head of Labs. Research the current state of the x402 protocol ecosystem and report what matters for smart contract development and infrastructure.\n\n### What to check:\n1. **x402.org** \u2014 Visit the site, get current stats (tx count, volume, buyers/sellers), new ecosystem adopters, any protocol changes\n2. **Dexter x402 SDK** \u2014 Check npm package `@dexterai/x402` for version updates, changelog, breaking changes\n3. **GitHub** \u2014 Search for new x402 SDKs, facilitators, or infra repos. Check `coinbase/x402` for protocol updates\n4. **Base ecosystem** \u2014 Any new x402 integrations from major players (Stripe, AWS, Alchemy, etc.)\n5. **Security** \u2014 Any known vulnerabilities, exploits, or audit reports related to x402\n\n### Report format:\n- \ud83d\udcca **Stats**: Current transaction/volume numbers vs last check\n- \ud83c\udd95 **What's New**: New SDKs, facilitators, breaking changes\n- \ud83d\udd12 **Security**: Any vulnerabilities or audit findings\n- \u26a1 **Labs Relevance**: What we should care about for our builds\n- \ud83c\udfd7\ufe0f **Build Opportunities**: Hackathon ideas, PoC suggestions\n\n### Style:\n- Paranoid auditor lens \u2014 every new integration is attack surface until proven otherwise\n- Keep it tight \u2014 bullet points, no fluff\n- Deliver to the Labs group",
+      "skills": [],
+      "skill": null,
+      "model": null,
+      "provider": null,
+      "base_url": null,
+      "script": null,
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 10 */14 * *",
+        "display": "0 10 */14 * *"
+      },
+      "schedule_display": "0 10 */14 * *",
+      "repeat": {
+        "times": null,
+        "completed": 0
+      },
+      "enabled": true,
+      "state": "scheduled",
+      "paused_at": null,
+      "paused_reason": null,
+      "created_at": "2026-04-21T02:55:34.132188+00:00",
+      "next_run_at": "2026-04-29T10:00:00+00:00",
+      "last_run_at": null,
+      "last_status": null,
+      "last_error": null,
+      "last_delivery_error": null,
+      "deliver": "origin",
+      "origin": {
+        "platform": "telegram",
+        "chat_id": "-1003872552815",
+        "chat_name": "Gentech Labs",
+        "thread_id": "2762"
+      }
+    },
+    {
+      "id": "99575a3aa4b6",
+      "name": "LayerZero DVN Monitor (3-day)",
+      "prompt": "## LayerZero DVN Security Monitor \u2014 DMOB Labs\n\nYou are DMOB, head of Labs at Gentech. Monitor LayerZero DVN (Decentralized Verification Network) security and official responses.\n\n**Priority Focus**: \n1. **GenLayer Integration**: Specifically monitor any response or architectural shift from LayerZero that affects how GenLayer (intelligent contracts) interacts with cross-chain messaging. Look for mentions of \"intelligent contracts,\" \"AI-driven verification,\" or specific GenLayer-related security patches.\n2. **KelpDAO Hack Response**: Track the official post-mortem and any subsequent changes to DVN enforcement. Are they tightening the default configurations?\n3. **DVN Security Enforcement**: Look for shifts in how multi-DVN setups are handled. Are they pushing for more robust, multi-DVN requirements by default?\n4. **GitHub Activity**: Monitor `LayerZero-Labs` for any PRs or issues related to DVN security, GenLayer, or cross-chain validation logic.\n\n**Reporting Requirements**:\n- Report to HQ with a high-signal summary.\n- Use Severity levels (Low/Med/High/Critical) for any security findings.\n- If nothing is found, report \"No significant movement\" but confirm that specific GenLayer/KelpDAO keywords were checked.\n- If the response to the KelpDAO hack is lacking or slow, explicitly flag this as a \"lack of priority on integration security.\"\n\n**Search Keywords**: \"GenLayer\", \"KelpDAO\", \"DVN\", \"multi-DVN\", \"security enforcement\", \"verification network\".",
+      "skills": [],
+      "skill": null,
+      "model": null,
+      "provider": null,
+      "base_url": null,
+      "script": null,
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 10 */3 * *",
+        "display": "0 10 */3 * *"
+      },
+      "schedule_display": "0 10 */3 * *",
+      "repeat": {
+        "times": null,
+        "completed": 1
+      },
+      "enabled": true,
+      "state": "scheduled",
+      "paused_at": null,
+      "paused_reason": null,
+      "created_at": "2026-04-21T10:14:42.044668+00:00",
+      "next_run_at": "2026-04-25T10:00:00+00:00",
+      "last_run_at": "2026-04-22T10:00:07.341440+00:00",
+      "last_status": "error",
+      "last_error": "RuntimeError: Refresh session has been revoked Run `hermes model` to re-authenticate.",
+      "last_delivery_error": null,
+      "deliver": "origin",
+      "origin": {
+        "platform": "telegram",
+        "chat_id": "-1003872552815",
+        "chat_name": "Gentech Labs",
+        "thread_id": "3256"
+      }
+    },
+    {
+      "id": "3fc1a11a88d7",
+      "name": "Defi Milestone",
+      "prompt": "Analyze the current DeFi position and capital accumulation based on the most recent Yield Farm Tracker data and vault updates.\n\nTarget: Track progress toward 'S2S' (Safe-to-Safe) milestones.\nCurrent Milestone Logic:\n- M1: $5/day (Completed)\n- M2: $20/day (Target)\n\nUser's Specific DCA Cadence:\n- Frequency: 2x per week (Split: Sun-Wed and Thu-Sat)\n- Current Rate: $50-100/week (Reduced for vacation savings)\n\nTask:\n1. Detect Capital Increase: Compare current Total Position against the last recorded value. If an increase is detected (e.g., a new $55 injection), explicitly highlight this as a 'DCA Boost'.\n2. Calculate current daily yield (Fees + Rewards APR).\n3. Compare current daily yield against the next milestone target.\n4. Calculate the 'Capital Gap': How much more principal is needed at current APR to hit the next milestone.\n5. Provide a 'DCA Path' analysis: Based on the current $50-100/week rate, project how many cycles/weeks remain to close the gap.\n6. Give 2-3 actionable tips on optimization (e.g., range adjustments, compounding frequency, or asset rebalancing) to accelerate the timeline.\n\nOutput Format:\n- \ud83d\udcb0 Capital Update: [Detected Increase or 'Steady']\n- \ud83c\udfc1 Progress: [Current Yield] / [Target Yield]\n- \u23f3 Gap: [Amount needed in USD]\n- \ud83d\udee0\ufe0f DCA Path: [X] weeks at current rate (Sun-Wed/Thu-Sat split)\n- \ud83d\udca1 Pro Tips: [Strategic advice]\n\nThis data will also serve as a backend specification for the AAE project frontend.",
+      "skills": [
+        "Consolidated Crypto Watchlist",
+        "LP Position Monitor",
+        "trade-off-platform"
+      ],
+      "skill": "Consolidated Crypto Watchlist",
+      "model": "anthropic/claude-3-5-sonnet",
+      "provider": "anthropic",
+      "base_url": null,
+      "script": null,
+      "schedule": {
+        "kind": "interval",
+        "minutes": 1440,
+        "display": "every 1440m"
+      },
+      "schedule_display": "every 1440m",
+      "repeat": {
+        "times": null,
+        "completed": 2
+      },
+      "enabled": true,
+      "state": "scheduled",
+      "paused_at": null,
+      "paused_reason": null,
+      "created_at": "2026-04-22T23:12:15.916042+00:00",
+      "next_run_at": "2026-04-25T11:10:20.760739+00:00",
+      "last_run_at": "2026-04-24T11:10:20.760739+00:00",
+      "last_status": "error",
+      "last_error": "RuntimeError: No Anthropic credentials found. Set ANTHROPIC_TOKEN or ANTHROPIC_API_KEY, run 'claude setup-token', or authenticate with 'claude /login'.",
+      "last_delivery_error": null,
+      "deliver": "origin",
+      "origin": {
+        "platform": "telegram",
+        "chat_id": "-1002916759037",
+        "chat_name": "Gentech Strategies",
+        "thread_id": "5930"
+      }
+    }
+  ],
+  "updated_at": "2026-04-24T11:10:20.760939+00:00"
+}

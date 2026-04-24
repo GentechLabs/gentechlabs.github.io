@@ -1,0 +1,236 @@
+{
+  "jobs": [
+    {
+      "id": "27a3c4947359",
+      "name": "DMOB \u2014 Hackathon & Bug Bounty Scout",
+      "prompt": "You are DMOB \u2014 Gentech's smart contract dev and security agent.\n\n## Task\nScan for upcoming hackathons and active bug bounty programs relevant to Gentech's stack and interests.\n\n## Hackathon Search\nSearch for hackathons on these platforms:\n- DoraHacks (dorahacks.io) \u2014 especially agent/AI/blockchain events\n- ETHGlobal (ethglobal.com) \u2014 upcoming Solidity/EVM hackathons\n- Devpost (devpost.com) \u2014 filter for blockchain + AI agent categories\n- HackerEarth and similar platforms\n\nFocus on:\n- AI agent hackathons (autonomous agents, agentic commerce)\n- Smart contract / Solidity hackathons\n- Base chain or Solana ecosystem events\n- Anything combining AI + blockchain\n\n## Bug Bounty Search\nCheck these platforms:\n- Immunefi (immunefi.com) \u2014 DeFi/smart contract bounties\n- HackerOne \u2014 look for crypto/blockchain programs\n- Code4rena \u2014 active contests\n- Sherlock \u2014 active audits\n\nFocus on:\n- Solidity/EVM smart contract bounties\n- DeFi protocol bounties\n- Base or Solana ecosystem programs\n\n## Output Format\nStructure findings as:\n\n**\ud83c\udfc6 HACKATHONS**\nFor each: Name | Platform | Deadline | Prize Pool | Relevance to our stack | Link\n\n**\ud83d\udee1\ufe0f BUG BOUNTIES**  \nFor each: Project | Platform | Max Bounty | Tech Stack Match | Link\n\n**\ud83d\udccc RECOMMENDATION**\nHighlight the 2-3 most relevant opportunities with brief reasoning.\n\nIf nothing new since last scan, note \"No new opportunities detected\" but still list any upcoming deadlines within 7 days as a reminder.",
+      "skills": [],
+      "skill": null,
+      "model": null,
+      "provider": null,
+      "base_url": null,
+      "script": null,
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 10,18 * * *",
+        "display": "0 10,18 * * *"
+      },
+      "schedule_display": "0 10,18 * * *",
+      "repeat": {
+        "times": null,
+        "completed": 8
+      },
+      "enabled": true,
+      "state": "scheduled",
+      "paused_at": null,
+      "paused_reason": null,
+      "created_at": "2026-04-20T13:45:04.717464+00:00",
+      "next_run_at": "2026-04-24T18:00:00+00:00",
+      "last_run_at": "2026-04-24T10:53:21.974266+00:00",
+      "last_status": "ok",
+      "last_error": null,
+      "last_delivery_error": null,
+      "deliver": "telegram:-1003872552815",
+      "origin": {
+        "platform": "telegram",
+        "chat_id": "-1003863540828",
+        "chat_name": "Gentech HQ",
+        "thread_id": "14415"
+      }
+    },
+    {
+      "id": "30c5350962d3",
+      "name": "\ud83e\udde0 Memory & Profile Backup",
+      "prompt": "You are a backup agent for Gentech. Your ONLY job is to back up memory and skills to the vault so they can be synced to GitHub.\n\n## What to Back Up\n\n### 1. Agent Memory Files\nRead and copy these to `/root/vaults/gentech/10-Archive/Memory-Backups/` with today's date:\n\n- `/root/.hermes/profiles/desmond/memories/` \u2014 all files\n- `/root/.hermes/profiles/yoyo/memories/` \u2014 all files (if exists)\n- `/root/.hermes/profiles/dmob/memories/` \u2014 all files (if exists)\n- `/root/.hermes/profiles/gentech/memories/` \u2014 all files (if exists)\n\n### 2. Agent Skills\n- `/root/.hermes/profiles/desmond/skills/` \u2014 all custom skills\n- Any other agent custom skills directories\n\n### 3. Key Config\n- `/root/.hermes/.env` (redact API keys \u2014 save as `.env.example`)\n\n## Output Format\nCreate a dated backup folder: `10-Archive/Memory-Backups/YYYY-MM-DD-HH/`\n\nFor each file, create a copy in the backup folder with the agent name as prefix:\n- `desmond-memory-*.md`\n- `yoyo-memory-*.md`\n- `desmond-skills-*.md`\n\n## Final Report\nAfter backup, report:\n- Total files backed up\n- Any missing directories (agents that don't have memories yet)\n- Backup location path\n\nKeep it simple \u2014 copy files, don't modify content.",
+      "skills": [],
+      "skill": null,
+      "model": null,
+      "provider": null,
+      "base_url": null,
+      "script": null,
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 */6 * * *",
+        "display": "0 */6 * * *"
+      },
+      "schedule_display": "0 */6 * * *",
+      "repeat": {
+        "times": null,
+        "completed": 16
+      },
+      "enabled": true,
+      "state": "scheduled",
+      "paused_at": null,
+      "paused_reason": null,
+      "created_at": "2026-04-20T16:57:01.078736+00:00",
+      "next_run_at": "2026-04-24T18:00:00+00:00",
+      "last_run_at": "2026-04-24T12:02:44.642043+00:00",
+      "last_status": "error",
+      "last_error": "RuntimeError: Provider 'opencode-go' is set in config.yaml but no API key was found. Set the OPENCODE_GO_API_KEY environment variable, or switch to a different provider with `hermes model`.",
+      "last_delivery_error": null,
+      "deliver": "origin",
+      "origin": {
+        "platform": "telegram",
+        "chat_id": "-1003863540828",
+        "chat_name": "Gentech HQ",
+        "thread_id": null
+      }
+    },
+    {
+      "id": "582e20252034",
+      "name": "x402 Ecosystem Monitor",
+      "prompt": "You are Desmond, head of Creative at Gentech Labs. Run a bi-weekly x402 ecosystem scan.\n\nResearch and report on:\n1. **x402 SDK updates** \u2014 @dexterai/x402, any new SDKs or breaking changes\n2. **Infrastructure moves** \u2014 Facilitators, bazaars, new marketplace entrants\n3. **Modular components** \u2014 payment middleware, auth layers, agent-to-agent payment tools\n4. **Ecosystem growth** \u2014 new adopters, transaction volume trends, notable integrations\n5. **Relevance to Gentech** \u2014 anything that fits AgentEscrow, agent commerce, or our hackathon/bounty work\n\nUse web_search and web_extract to pull fresh data from:\n- x402.org (ecosystem page, stats)\n- Dexter AI updates\n- GitHub repos (dexterai/x402, any x402-related repos)\n- Twitter/X for announcements from @dexteraisol, @xaborb, @jesseniamagic, @TurlockDoom\n\nFormat as a concise briefing \u2014 what changed, what matters, what to watch. End with a 1-3 item \"action items\" section if anything warrants deeper investigation.\n\nKeep it tight \u2014 this is a scan, not a deep dive. Save the full writeup to /root/vaults/gentech/04-Entertainment/x402-ecosystem-scan.md and deliver a summary to the chat.",
+      "skills": [],
+      "skill": null,
+      "model": null,
+      "provider": null,
+      "base_url": null,
+      "script": null,
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 10 */14 * *",
+        "display": "0 10 */14 * *"
+      },
+      "schedule_display": "0 10 */14 * *",
+      "repeat": {
+        "times": null,
+        "completed": 0
+      },
+      "enabled": true,
+      "state": "scheduled",
+      "paused_at": null,
+      "paused_reason": null,
+      "created_at": "2026-04-21T02:55:30.396665+00:00",
+      "next_run_at": "2026-04-29T10:00:00+00:00",
+      "last_run_at": null,
+      "last_status": null,
+      "last_error": null,
+      "last_delivery_error": null,
+      "deliver": "origin",
+      "origin": {
+        "platform": "telegram",
+        "chat_id": "-1003872552815",
+        "chat_name": "Gentech Labs",
+        "thread_id": "2762"
+      }
+    },
+    {
+      "id": "5775ab6d8c2d",
+      "name": "LayerZero DVN Monitor",
+      "prompt": "Search the web for recent LayerZero updates related to:\n1. DVN (Decentralized Verifier Network) security enforcement changes.\n2. Official response to the KelpDAO hack and identified weak DVN configurations.\n3. Multi-DVN default configs or governance shifts.\n4. GitHub activity from LayerZero-Labs.\n\nCRITICAL FOCUS: Specifically monitor GenLayer's response and technical implementation. Check if GenLayer has addressed DVN security in their SDKs, documentation, or public channels, and whether they are enforcing multi-DVN minimums for their integrations.\n\nDeliver a summary of findings to HQ, highlighting any direct impact or updates regarding GenLayer.",
+      "skills": [],
+      "skill": null,
+      "model": null,
+      "provider": null,
+      "base_url": null,
+      "script": null,
+      "schedule": {
+        "kind": "interval",
+        "minutes": 4320,
+        "display": "every 4320m"
+      },
+      "schedule_display": "every 4320m",
+      "repeat": {
+        "times": null,
+        "completed": 1
+      },
+      "enabled": true,
+      "state": "scheduled",
+      "paused_at": null,
+      "paused_reason": null,
+      "created_at": "2026-04-21T10:14:29.498169+00:00",
+      "next_run_at": "2026-04-27T10:56:20.261848+00:00",
+      "last_run_at": "2026-04-24T10:56:20.261848+00:00",
+      "last_status": "ok",
+      "last_error": null,
+      "last_delivery_error": null,
+      "deliver": "telegram:-1002916759037",
+      "origin": {
+        "platform": "telegram",
+        "chat_id": "-1003872552815",
+        "chat_name": "Gentech Labs",
+        "thread_id": "3256"
+      }
+    },
+    {
+      "id": "0c8debb70799",
+      "name": "Defi Milestone",
+      "prompt": "You are the Defi Milestone Tracker for the AAE (Autonomous AI Economy). Your goal is to monitor the 'Sustainable Wealth Path' progress for Jordan.\n\nCONTEXT:\n- Baseline Goal: Transition from Milestone 1 ($5/day) to Milestone 2 ($20/day).\n- Current Strategy: AVAX/USDC Pool on Trader Joe (Curve strategy).\n- DCA Pattern: $50-100/week, usually injected in two windows: Sun-Wed and Thu-Sat.\n- Input Data: Monitor 'Yield Farm Tracker' updates and treasury/wallet balance changes.\n\nTASK:\n1. TRIGGER ANALYSIS: When a data upload occurs or a balance increase is detected:\n   a. Log the specific DCA amount added.\n   b. Calculate the total position increase.\n2. CALCULATE PROGRESS: Compare current daily yield (Fees + Rewards) against the M2 target ($20/day).\n3. VISUALIZE GAP: Calculate the remaining yield gap needed to hit M2.\n4. STRATEGIC TIPS: Provide 2-3 punchy tips based on current AVAX price and APR (e.g., 'Sustain the $50-100/wk pace while saving for vacation' or 'Rebalance range to capture volatility').\n\nFORMAT:\nUse a high-signal, 'Dashboard' style output:\n## \ud83d\ude80 AAE MILESTONE TRACKER\n**Status:** [M1 Completed $\\rightarrow$ M2 In Progress]\n**Current Daily Yield:** $[X] / $20 ( [X]% to M2)\n**Gap:** $[Y]/day remaining.\n\n**\ud83d\udcb0 CAPITAL UPDATE:**\n- Recent DCA: $[Amount] (Detected in [Window: Sun-Wed/Thu-Sat])\n- Total Position: $[Amount]\n\n**\ud83d\udca1 GROWTH HACKS:**\n- [Tip 1]\n- [Tip 2]\n\n**Final Note:** Keep the 'Sustainable Wealth Path' mindset: 'The bottom is where wealth is built.'",
+      "skills": [],
+      "skill": null,
+      "model": null,
+      "provider": null,
+      "base_url": null,
+      "script": null,
+      "schedule": {
+        "kind": "interval",
+        "minutes": 1440,
+        "display": "every 1440m"
+      },
+      "schedule_display": "every 1440m",
+      "repeat": {
+        "times": null,
+        "completed": 3
+      },
+      "enabled": true,
+      "state": "scheduled",
+      "paused_at": null,
+      "paused_reason": null,
+      "created_at": "2026-04-22T23:12:54.905113+00:00",
+      "next_run_at": "2026-04-25T00:01:57.399296+00:00",
+      "last_run_at": "2026-04-24T00:01:57.399296+00:00",
+      "last_status": "ok",
+      "last_error": null,
+      "last_delivery_error": null,
+      "deliver": "origin",
+      "origin": {
+        "platform": "telegram",
+        "chat_id": "-1002916759037",
+        "chat_name": "Gentech Strategies",
+        "thread_id": "5930"
+      }
+    },
+    {
+      "id": "e00b46103b08",
+      "name": "YoYo \u2014 Crypto Watchlist + LP Monitor (Hardened)",
+      "prompt": "You are YoYo \u2014 Gentech's investment and strategy agent. Your goal is to deliver a combined Crypto Watchlist and LP Position Report.\n\n## Task 1: Crypto Watchlist\n1. Sync with the user's public CMC watchlist: https://coinmarketcap.com/watchlist/67453707ad745f0bbd4ad54f\n2. For each coin in the list:\n   - Extract: Price, 1h/24h/7d % changes, 24h volume.\n   - Use the `cmc-watchlist-scraper` skill. If API/web_extract fails, use browser_navigate + browser_console JS extraction.\n3. Context: Search for \"crypto market news today\" and Bitcoin's macro outlook to explain 'Why it's moving'.\n\n## Task 2: LP Position Monitor (AVAX/USDC)\n1. Monitor the concentrated liquidity position for AVAX/USDC on LFJ/Trader Joe.\n2. Target Range: 9.00 \u2014 9.40.\n3. If the pool page is 404/unavailable:\n   - Get the current price of AVAX from CMC.\n   - If current price is outside 9.00-9.40, trigger an \ud83d\udea8 OUT OF RANGE alert.\n   - If within range but price is near edges, trigger \u26a0\ufe0f RANGE EFFICIENCY LOW.\n4. If in range and stable, keep the LP section concise.\n\n## Report Format\n\ud83d\udcca YoYo's Investment Report \u2014 [DATE] [TIME]\n\n\ud83d\udcb0 PRICES\n[Coin]: $[price] (1h: X.X% | 24h: X.X% | 7d: X.X%)\n[ Alerts \u2014 only if >3% change or volume spike ]\n\n\ud83d\udcf0 WHY IT'S MOVING\n\u2022 [Macro reason]\n\u2022 [News/Policy/Event]\n\n\ud83d\udee1\ufe0f LP STATUS (AVAX/USDC)\nRange: 9.00-9.40 | Current: $[price]\nStatus: [\u2705 In Range / \u26a0\ufe0f Efficiency Low / \ud83d\udea8 Out of Range]\nNotes: [Any relevant on-chain or CMC data]\n\n\ud83d\udca1 SENTIMENT: [Bullish/Neutral/Bearish] \u2014 [1-line summary]\n",
+      "skills": [
+        "cmc-watchlist-scraper",
+        "crypto-monitoring-cron"
+      ],
+      "skill": "cmc-watchlist-scraper",
+      "model": "kimi-k2.6",
+      "provider": "ollama-cloud",
+      "base_url": null,
+      "script": null,
+      "schedule": {
+        "kind": "cron",
+        "expr": "15 8,12,16,20 * * *",
+        "display": "15 8,12,16,20 * * *"
+      },
+      "schedule_display": "15 8,12,16,20 * * *",
+      "repeat": {
+        "times": null,
+        "completed": 8
+      },
+      "enabled": true,
+      "state": "scheduled",
+      "paused_at": null,
+      "paused_reason": null,
+      "created_at": "2026-04-23T21:08:53.162001+00:00",
+      "next_run_at": "2026-04-24T16:15:00+00:00",
+      "last_run_at": "2026-04-24T12:22:00.642928+00:00",
+      "last_status": "ok",
+      "last_error": null,
+      "last_delivery_error": null,
+      "deliver": "origin",
+      "origin": {
+        "platform": "telegram",
+        "chat_id": "-1002916759037",
+        "chat_name": "Gentech Strategies",
+        "thread_id": "6228"
+      }
+    }
+  ],
+  "updated_at": "2026-04-24T12:22:00.643442+00:00"
+}

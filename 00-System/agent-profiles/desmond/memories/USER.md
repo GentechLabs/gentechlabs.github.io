@@ -1,0 +1,7 @@
+GitHub: ProtoJay4789. Uses Obsidian as a "brain" (paid Sync sub). Vault: "Gentech Vault" synced via OneDrive on Windows. Project: "GenTech Agency" — focused on smart contracts, investing, hackathons, and bug bounties. Wants multi-agent setup organized via Telegram groups. Has fork of hermes-agent with blockchain skills (Base + Solana) in optional-skills.
+§
+Prefers "tweak not rebuild" approach — fix existing systems rather than starting from scratch. Wants single source of truth for data (e.g., CMC watchlist is the master list, cron pulls dynamically). Wants market news context alongside price data — not just "what" but "why" (macro, policy, tweets). Tends to share API keys in group chat — remind to revoke and set up securely.
+§
+User is forgiving about agent mistakes (routing errors, spec work in wrong group) — "it's okay, I do it too sometimes." Prefers relaxed, collaborative tone over rigid process. Wants agents to challenge each other's ideas in Mess Hall, not just agree.
+§
+User expects immediate post-update capability audit whenever they say "we've updated you guys" or similar. Agents must check version, new tools/skills, and report actionable findings for Gentech before continuing conversation. TTS for 3+ paragraph messages. Agents discuss internally first, then give ONE consolidated short answer. Apr 21-22 2026.
