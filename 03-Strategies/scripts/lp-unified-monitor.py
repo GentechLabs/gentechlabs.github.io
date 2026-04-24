@@ -127,11 +127,11 @@ def load_range() -> tuple:
     try:
         with open(POSITION_FILE, "r") as f:
             data = json.load(f)
-        low = data.get("range_low", 9.10)
-        high = data.get("range_high", 9.65)
+        low = data.get("position", {}).get("range", {}).get("low", 9.26)
+        high = data.get("position", {}).get("range", {}).get("high", 9.46)
         return (float(low), float(high))
     except Exception:
-        return (9.10, 9.65)
+        return (9.26, 9.46)
 
 def load_state() -> dict:
     default = {"out_of_range_since": None, "last_alert": None, "last_price": None, "last_check": None, "tracking_started": None, "total_fees_earned_usd": 0.0, "total_days_in_range": 0.0, "last_in_range_check": None, "current_milestone_idx": 0, "last_compound_date": None, "last_dca_date": None, "compound_events": [], "daily_fee_log": []}
@@ -187,7 +187,7 @@ def update_compound_tracking(state: dict, in_range: bool, est_fees: float) -> di
 def format_report(price, in_range, efficiency, pool, state, birdeye, est_fees, apr, range_low, range_high) -> str:
     eastern = timezone(timedelta(hours=-4))
     now_str = datetime.now(eastern).strftime("%I:%M %p EDT")
-    status = "🚨 OUT OF RANGE" if not in_range else ("⚠️ LOW EFFICIENCY" if efficiency < 75 else "✅ ALL GOOD")
+    status = "🚨 OUT OF RANGE" if not in_range else ("⚠️ LOW EFFICIENCY" if efficiency < 50 else "✅ ALL GOOD")
     source_tag = "🐦 Birdeye" if birdeye else "📊 DexScreener"
     lines = [
         f"**AVAX/USDC LP Monitor** — {now_str}",
@@ -231,7 +231,7 @@ def main():
     est_fees = estimate_daily_fees(pool, p_usd)
     state = update_compound_tracking(state, in_range, est_fees)
     report = format_report(price, in_range, efficiency, pool, state, birdeye, est_fees, apr, range_low, range_high)
-    if not in_range or efficiency < 75:
+    if not in_range or efficiency < 50:
         print("OK\n" + report)
     else:
         print("SILENT")

@@ -1,7 +1,7 @@
 # 🏆 Kite AI Global Hackathon
 
 **Status:** ✅ BUILDING
-**Deadline:** Apr 26, 23:59 UTC-12
+**Deadline:** May 11, 2026 ✅ CORRECTED
 **Prize:** TBA
 **Chain:** Kite AI
 **Theme:** Agentic Commerce — autonomous agents on-chain

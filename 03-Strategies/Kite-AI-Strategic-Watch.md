@@ -1,8 +1,8 @@
 # Kite AI — Strategic Watch List
 
-**Status:** 🟢 GO — submitting to the hackathon
-**Strategy:** 10 days is enough. Build, learn, ship. Even if we don't win, it's portfolio + experience.
-**Deadline:** April 26, 2026, 23:59 UTC-12
+**Deadline:** May 11, 2026
+**Strategy:** Deadline extended. Build modular agent economy that works across chains.
+**Deadline:** May 11, 2026, 23:59 UTC-12 ✅ CORRECTED
 **Repo:** https://github.com/ProtoJay4789/agent-escrow
 
 ## Jordan's Mindset Shift
@@ -17,7 +17,7 @@
 ## Why Kite AI Matters
 - Positioning as major player on Avalanche for agentic economy
 - Had a bug bounty (Code4rena — Jordan waiting on KYC approval)
-- Now running Encode Club hackathon (deadline Apr 26)
+- Now running Encode Club hackathon (deadline May 11, updated from Apr 26)
 - Agentic economy is inevitable — Kite wants to own the infrastructure layer
 
 ## Jordan's Approach

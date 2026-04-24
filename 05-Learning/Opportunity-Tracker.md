@@ -88,10 +88,10 @@
 | Opportunity | Prize | Deadline | Priority | Status |
 |-------------|-------|----------|----------|--------|
 | Arc Hackathon | Partnership | Apr 25 (5d) | 🔴 CRITICAL | ⚠️ Code blocked |
-| Kite AI Hackathon | TBD | Apr 26 (6d) | 🔴 HIGH | ✅ 14/14 tests |
+| Kite AI Hackathon | TBD | May 11 (17d) | 🔴 HIGH | ✅ 14/14 tests |
 | Frontier - Payments | $10k | May 11 (21d) | 🟡 MEDIUM | 📋 Queued |
 | Frontier - Security | $50k | May 11 (21d) | 🟡 MEDIUM | 📋 Queued |
-| ETHGlobal Open Agents | TBD | May 3 (13d) | 🟡 MEDIUM | ⏳ After ARC+Kite |
+| ETHGlobal Open Agents | TBD | May 3 (10d) | 🔴 DROPPED — not beginner-friendly | ❌ Skip |
 | Retro9000 Grant | $75k | Rolling | 🟢 LOW | ⏸️ Later |
 
 ---

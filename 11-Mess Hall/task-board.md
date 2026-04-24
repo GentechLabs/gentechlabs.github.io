@@ -1,10 +1,16 @@
 # Gentech Task Board
 
-*Updated: 2026-04-20 11:45 UTC*
+## 📄 Communication Protocol
 
-**Rule:** HQ = dispatch. Work happens in departments. Track assignments here.
-**Org Chart:** `01-GenTech HQ/Org Chart.md` — see reporting structure and accountability protocol.
-**Dashboard:** `01-GenTech HQ/Org Agent Board.html` — interactive visualization of org + tasks + handoffs.
+**HQ = Default conversation space.** All general chat, alerts, and cross-team coordination happens here.
+
+**Specialized groups = Work only.** Labs, Entertainment, Strategies groups are for focused workstreams. No general chat in those groups.
+
+**Smart Routing:**
+- Route work to specialized groups when it requires focused execution
+- Keep alerts, quick questions, and coordination in HQ
+- Green Room = war room during active work sessions
+- Mess Hall = status updates and stopping points
 
 **Enforcement:** Cron job `d31c330959de` (Handoff Enforcement Monitor) runs every 15 min. ACK deadline: 5 min. Escalation: 15 min. Stalled: 24h. Agents must check green room before responding — no exceptions.
 
@@ -24,8 +30,8 @@
 
 ### Dmob — Code (Labs)
 - [x] **[X]** ARC Hackathon — AgentEscrow + x402 nanopayments | **Due: Apr 25** | ❌ **WITHDRAWN (Apr 22)** — see `arc-salvage-log.md`
-- [ ] **[P]** Kite AI Hackathon — 14/14 tests ✅ (fixed daily reset bug) | **Due: Apr 26** | 🟡 Needs demo scope
-- [ ] **[Q]** ETHGlobal Open Agents — 0G Storage + KeeperHub integration | **Due: May 3** | ⏳ Pending
+- [ ] **[P]** Kite AI Hackathon — 14/14 tests ✅ (fixed daily reset bug) | **Due: May 11** | 🟡 Needs demo scope + Kite deployment
+- [x] **[X]** ETHGlobal Open Agents — DROPPED. Assets salvaged to `10-Archive/Salvaged-Assets/ethglobal-patterns/`. Focus on Kite AI.
 - [ ] **[Q]** Dynamic burn rate smart contract feasibility — on-chain revenue tracking, gas optimization | **Due: TBD** | ⏳ Pending
 - [ ] **[Q]** claude-obsidian integration evaluation — vault linting, hot cache compatibility | **Due: TBD** | ⏳ Pending
 - [ ] **[Q]** Opportunity monitoring cron expansion — grants, audit marketplace, tool alternatives | **Due: TBD** | ⏳ Pending
@@ -40,7 +46,7 @@
 ### Desmond — Content + Submissions (Entertainment)
 - [x] **[X]** ARC submission materials — README, pitch deck, demo script | **Due: Apr 25** | ❌ **CANCELLED** — ARC withdrawn, assets salvaged to `arc-salvage-log.md`
 - [ ] **[Q]** Kite AI submission materials — README, demo outline | **Due: Apr 26** | ⏳ Pending
-- [ ] **[Q]** ETHGlobal submission materials — README, narrative, demo video script, partner prize apps | **Due: May 3** | ⏳ Pending
+- [x] **[X]** ETHGlobal submission materials — DROPPED. See `10-Archive/Salvaged-Assets/ethglobal-patterns/`.
 - [ ] **[Q]** Gentech evolution documentation — multi-agent story, customizations, originality | **Due: TBD** | ⏳ Pending
 - [ ] **[Q]** Bin-AMM content series — explainer thread on LFJ Liquidity Book, why Gentech is building in-house, custom LP visualizations | **Due: Post-hackathon sprint** | ⏳ Pending | Source: Dmob scoping doc (`/root/aae-contracts/docs/bin-amm-scoping.md`)
 
@@ -51,9 +57,9 @@
 
 ---
 
-## 🟡 WAITING ON TRIGGER
+## 🟢 WAITING ON TRIGGER
 
-→ *Apr 26: After ARC + Kite submit — full pivot to ETHGlobal Open Agents (Apr 26 → May 3)*
+→ *May 11: Kite AI Hackathon submission deadline*  
 → *Next ElevenHacks sprint: Watch for announcement (YoYo monitors)*
 
 ## ❌ DISCARDED
@@ -71,10 +77,8 @@
 ## Sprint Flow
 
 ```
-Apr 22-26: Kite ← Dmob codes, Desmond packages  
-Apr 26:    Kite SUBMIT
-Apr 26-May 3: ETHGlobal ← full team pivot
-May 3:     ETHGlobal SUBMIT (4 PM UTC)
+Apr 22-May 11: Kite AI ← Dmob codes, Desmond packages  
+May 11:    Kite AI SUBMIT
 ```
 
 **NOTE:** ARC hackathon withdrawn (Apr 22). AgentEscrow assets salvaged for other projects.

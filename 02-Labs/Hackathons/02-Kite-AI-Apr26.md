@@ -1,6 +1,6 @@
 # 🏆 Kite AI Global Hackathon
 **Status:** ✅ SIGNED UP
-**Deadline:** Apr 26
+**Deadline:** May 11 ✅ CORRECTED
 **Prize:** TBA
 **Chain:** Kite AI
 **Theme:** AI Agents

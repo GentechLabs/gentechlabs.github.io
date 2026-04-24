@@ -2,8 +2,8 @@
   "meta": {
     "version": "unified-v1",
     "updated_by": "Desmond",
-    "updated_at": "2026-04-24T13:30:00Z",
-    "update_source": "screenshot"
+    "updated_at": "2026-04-24T14:35:00Z",
+    "update_source": "screenshot_rebalance"
   },
   "pool": {
     "name": "AVAX/USDC 5bps",
@@ -22,9 +22,9 @@
     "entry_total_usd": 83.92,
     "shape": "Curve",
     "range": {
-      "low": 9.10,
-      "high": 9.65,
-      "updated_at": "2026-04-24T13:30:00Z"
+      "low": 9.26,
+      "high": 9.46,
+      "updated_at": "2026-04-24T14:35:00Z"
     }
   },
   "snapshots": [
@@ -42,12 +42,28 @@
       "apr_7d": 88.77,
       "status": "IN_RANGE",
       "source": "screenshot"
+    },
+    {
+      "date": "2026-04-24",
+      "avax_price": 9.38127,
+      "deposit_balance_usd": 83.14,
+      "avax_holdings": 3.311,
+      "usdc_holdings": 52.08,
+      "fees_24h_usd": null,
+      "claimable_rewards_usd": 0.0075,
+      "pool_tvl_usd": null,
+      "pool_vol_24h_usd": null,
+      "pool_fees_24h_usd": null,
+      "apr_7d": null,
+      "status": "IN_RANGE",
+      "source": "screenshot_rebalance"
     }
   ],
   "history": [
     {"date": "2026-03-31", "value_usd": 31.16, "event": "Entry"},
     {"date": "2026-04-21", "value_usd": 28.66, "event": "Snapshot"},
     {"date": "2026-04-22", "value_usd": 83.92, "event": "Manual Sync / Photo Update"},
-    {"date": "2026-04-24", "value_usd": 83.37, "event": "Screenshot Update"}
+    {"date": "2026-04-24", "value_usd": 83.37, "event": "Screenshot Update"},
+    {"date": "2026-04-24", "value_usd": 83.14, "event": "Rebalance — Range updated 9.26–9.46"}
   ]
 }

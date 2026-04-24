@@ -49,6 +49,22 @@ Gentech is not a solo operator. It's a multi-agent organization with clear repor
 3. **Jordan → Any**: Direct command. Jordan overrides any protocol.
 4. **Cross-department**: Via Gentech. No direct specialist-to-specialist commands.
 
+## Group Usage Protocol (Updated Apr 24, 2026)
+
+**HQ = Default Conversation Space**
+- All general discourse between Jordan and agents happens in HQ
+- Status updates, questions, approvals, brainstorming → HQ
+- Agents speak to each other in HQ, not siloed in specialist groups
+
+**Specialist Groups = Work-Only**
+- Strategies group: YoYo's research outputs, market data, LP tracking
+- Labs group: DMOB's code commits, contract deploys, security audits
+- Entertainment group: Desmond's content drafts, social posts, media
+- Alerts and task assignments can be posted in specialist groups
+- BUT responses and discussion happen back in HQ
+
+**Why:** Reduces fragmentation. Jordan doesn't have to check 4 groups for one conversation.
+
 ## Governance Rules
 
 ### Authority Levels

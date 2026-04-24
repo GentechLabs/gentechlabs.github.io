@@ -7,30 +7,29 @@
 
 ## 📊 Unified Crypto Watchlist + LP Monitor
 **Job ID:** `faed4f588aef`
-**Schedule:** `15 8,12,16,20 * * *` (4x/day: 8:15, 12:15, 16:15, 20:15 UTC)
-**Model:** `kimi-k2.6`
-**Status:** ✅ Active (unified Apr 24 — watchlist + LP + milestones in one report)
+**Schedule:** `15 8,12,16,20 * * *` (4×/day UTC)
+**Model:** `kimi-k2.6` | **Skill:** `crypto-lp-monitoring`
+**Status:** ✅ Active — single source of truth
 
-**Scope:** Full investment dashboard — market prices AND position tracking.
+**Scope:** Market prices + LP position tracking in one report.
 
 **Report includes:**
-1. CMC prices for watchlist tokens (BTC, ETH, AVAX, SOL, LINK, TAO, XAUt, BEAM)
-2. 24h % change + volume trends + macro "why" context
+1. CoinGecko prices (BTC, ETH, SOL, LINK, AVAX, TAO, BEAM, XAUt)
+2. 24h/7d changes + macro context
 3. LP pool health (price, volume, liquidity, APR, range status)
 4. Position P&L (entry, IL, fees earned, net, vs HODL)
-5. Milestone progress (current tier, daily fee estimate)
-6. Compound readiness + DCA reminders
+5. Milestone progress + compound readiness
 
 **Alert Logic:**
 - 75-100% efficiency → 🤫 Silent (1-line LP status included)
 - <75% efficiency → ⚠️ "Consider rebalancing"
-- Out of range → 🚨 URGENT alert
+- Out of range → 🚨 URGENT
 - Milestone hit → 🏆 Celebration alert
 
 **Data Sources:**
-- Prices: CoinGecko (with User-Agent header)
-- LP Data: `lp-unified-monitor.py` (Birdeye → DexScreener fallback)
-- Position File: `~/.hermes/scripts/.lfj-position-tracker.json`
+- Prices: CoinGecko (User-Agent header)
+- LP: `lp-unified-monitor.py` (Birdeye → DexScreener fallback)
+- Position: `~/.hermes/scripts/.lfj-position-tracker.json`
 - Range updated dynamically from screenshot snapshots
 
 **On-chain signals:**
@@ -42,8 +41,7 @@
 ---
 
 ## ⏸️ Overnight Pause/Resume
-**Pause Job:** `a5a8aa5c64db` — 11:00 PM daily → pauses LP monitor
-**Resume Job:** `390536c113fb` — 6:30 AM daily → resumes LP monitor
+Handled internally by `lp-unified-monitor.py` quiet-hours logic (11 PM – 6:30 AM EDT).
 
 ---
 
@@ -63,7 +61,7 @@ When Jordan sends LP screenshots:
 | 1 | Master Morning Digest | 11:30 AM daily | HQ |
 | 2 | Gentech LLC Reminder | 15th of month | HQ |
 | 3 | Mess Hall — Agent Check-in | 2:00 PM daily | HQ |
-| 4 | End of Shift Wrap-Up | 4:30 PM Thu-Sat | HQ |
+| 4 | End of Shift Wrap-Up | 4:30 PM Thu–Sat | HQ |
 | 5 | Vault Maintenance — Weekly | Sun 10:30 PM | HQ |
 | 6 | **YoYo — Unified Watchlist + LP** | 8:15, 12:15, 16:15, 20:15 UTC | Strategies |
 | 7 | Protocol Due Diligence | Thu 6:00 AM | Strategies |
@@ -75,7 +73,5 @@ When Jordan sends LP screenshots:
 | 13 | The Brain — Daily | 4:00 PM daily | Local |
 | 14 | Mess Hall — Daily Rotation | 3:00 AM daily | Local |
 | 15 | Sunday Skill Update | Sun 10:00 AM | HQ |
-| 16 | LP Monitor — Pause | 11:00 PM daily | Local |
-| 17 | LP Monitor — Resume | 6:30 AM daily | Local |
-| 18 | Vault Manager — Nightly | 11:00 PM daily | HQ |
-| 19 | Brain Backup | Every 6h | Origin |
+| 16 | Vault Manager — Nightly | 11:00 PM daily | HQ |
+| 17 | Brain Backup | Every 6h | Origin |

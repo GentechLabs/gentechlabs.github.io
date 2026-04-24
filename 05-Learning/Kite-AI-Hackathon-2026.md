@@ -1,7 +1,7 @@
 # Kite AI Global Hackathon 2026 — Reference
 
 **Status:** 📌 Saved for reference — revisit when ready
-**Deadline:** April 26, 2026, 23:59 UTC-12 (10 days from Apr 16)
+**Deadline:** May 11, 2026, 23:59 UTC-12 (updated from Apr 26)
 **Source:** https://www.encodeclub.com/programmes/kites-hackathon-ai-agentic-economy
 
 ## Overview

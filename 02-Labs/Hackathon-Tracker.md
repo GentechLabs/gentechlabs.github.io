@@ -72,7 +72,7 @@
     40|
     41|## 📅 UPCOMING
     42|
-    43|- **Open Agents (ETHGlobal)** — Apr 24 – May 6 (virtual, ⭐⭐⭐ AgentEscrow fit)
+    43|- ~~**Open Agents (ETHGlobal)** — DROPPED Apr 24~~
     44|- **ETHGlobal New York** — Jun 12–14 ($100K+)
     45|- **ETHGlobal Lisbon** — Jul 24–26 ($100K+)
     46|- **Fall 2026 (Colosseum)** — September ($125K+)

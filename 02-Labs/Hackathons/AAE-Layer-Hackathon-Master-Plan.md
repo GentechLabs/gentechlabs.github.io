@@ -27,8 +27,8 @@
 | Date | Event | Layer | Prize | Owner |
 |------|-------|-------|-------|-------|
 | Apr 20-26 | ARC | Escrow | $10K | Dmob + Jordan |
-| Apr 26 | Kite AI | Marketplace | — | Dmob + Jordan |
-| May 3 | ETHGlobal Open Agents | L2+L3+L4+L5 | $50K | Dmob + Jordan |
+| May 11 | Kite AI | Marketplace | — | Dmob + Jordan |
+| ~~May 3~~ | ~~ETHGlobal Open Agents~~ | ~~L2+L3+L4+L5~~ | ~~$50K~~ | ~~DROPPED~~ |
 | May 8-10 | Dev3pack | Brain | TBA | Dmob + Jordan |
 | May 11 | **Superteam Earn Sidetracks** | **L2+L3+L5+Foundation** | **$680K+** | **Full team** |
 | May 11 | Solana Frontier (main) | All layers | $230K+ | Full team |

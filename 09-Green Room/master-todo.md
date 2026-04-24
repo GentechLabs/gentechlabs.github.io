@@ -1,6 +1,6 @@
 # Master To-Do — 2026-04-22
 
-## 🟡 In Progress — Kite AI Hackathon (Apr 26)
+## 🟡 In Progress — Kite AI Hackathon (May 11)
 - [x] Brain backup to GitHub ✅ (github.com/Gentech-Labs/hermes-brain-backup)
 - [x] ElevenLabs voices configured ✅
 - [x] All 4 agents connected + running ✅
@@ -25,8 +25,8 @@
 ## ⏪ Upcoming Hackathons
 | Hackathon | Deadline | Priority |
 |-----------|----------|----------|
-| Kite AI | Apr 26 | 🟡 PRIMARY |
-| ETHGlobal Open Agents | May 3 | 🟢 STRONG |
+| Kite AI | May 11 | 🟡 PRIMARY |
+| ETHGlobal Open Agents | May 3 | 🔴 DROPPED — not beginner-friendly |
 | Solana Frontier | May 11 | ⚪ WAIT |
 
 ## 📋 Backlog

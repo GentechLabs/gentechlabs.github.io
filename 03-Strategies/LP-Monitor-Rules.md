@@ -7,8 +7,8 @@
 
 ## Current Position
 
-- **Range:** $9.31 — $9.53 (rebalanced Apr 24)
-- **Position:** ~$83.37 (3.88 AVAX + $46.82 USDC)
+- **Range:** $9.26 — $9.46 (rebalanced Apr 24)
+- **Position:** ~$83.14 (3.31 AVAX + $52.08 USDC)
 - **Shape:** Curve
 - **Strategy:** Bear market accumulation — farm the bottom, compound rewards
 
@@ -17,13 +17,13 @@
 ## Monitoring Rules (Jordan's Exact Spec)
 
 ### Rule 1 — Check Frequency
-⏱️ Check every **10 minutes** (cron runs 4x/day: 8:15, 12:15, 16:15, 20:15 UTC)
+⏰ D5 Milestone + LP Monitor runs **every hour** (6:30 AM – 8:30 PM ET) via cron job `268ac3d50ce9`. Capital addition detection is active all week (Sun–Sat).
 
 ### Rule 2 — In Range + High Efficiency → SILENT
-🤫 Price in range AND fee efficiency **75–100%** → **no alert, stay silent** (compact log only)
+🤫 Price in range AND fee efficiency **50–100%** → **no alert, stay silent** (compact log only)
 
 ### Rule 3 — In Range + Low Efficiency → ALERT
-⚠️ Price in range BUT fee efficiency **< 75%** → alert: *"fee efficiency dropping — consider rebalancing"*
+⚠️ Price in range BUT fee efficiency **< 50%** → alert: *"fee efficiency dropping — consider rebalancing"*
 
 ### Rule 4 — Out of Range → Confirm Then ALERT
 ⚠️ Price out of range → **wait 5 minutes** for confirmation, then alert if still out
@@ -84,13 +84,13 @@ daily_fees = pool_volume_24h × 0.0005 × (position_usd / pool_liquidity)
 
 ## Cron Jobs
 
-| Job | ID | Schedule |
-|-----|----|----------|
-| LP + Milestone Tracker | `0c8debb70799` | `15 8,12,16,20 * * *` |
-| LP Monitor — Pause (11 PM) | `a5a8aa5c64db` | `0 23 * * *` |
-| LP Monitor — Resume (6:30 AM) | `390536c113fb` | `30 6 * * *` |
-
----
+| Job | ID | Schedule | Status |
+|-----|----|----------|--------|
+| **YoYo — Unified Crypto Watchlist + LP** | `faed4f588aef` | `15 8,12,16,20 * * *` | ✅ Active |
+| ~~LP Unified Monitor (10min)~~ | ~~`00ef264dbdab`~~ | ~~`*/10 * * * *`~~ | ❌ Removed |
+| ~~LP Monitor — Pause~~ | ~~`2f58ab69f4d2`~~ | ~~`0 23 * * *`~~ | ❌ Removed |
+| ~~LP Monitor — Resume~~ | ~~`ef9aa51eedbc`~~ | ~~`30 6 * * *`~~ | ❌ Removed |
+| ~~YoYo — D5 Milestone + LP~~ | ~~`268ac3d50ce9`~~ | ~~`:30 hourly`~~ | ❌ Removed (dup, merged into `faed4f588aef`) |
 
 ## Fee Efficiency Formula (Curve Shape)
 
@@ -108,7 +108,7 @@ fee_efficiency = (1 - abs(position - 0.5) * 2) * 100
 
 **"Bear market accumulation play — farm the bottom, compound rewards"**
 
-- LP generates fees in the $9.31-$9.53 range
+- LP generates fees in the $9.26-$9.46 range
 - Compound weekly: reinvest accumulated fees + $50-100 DCA
 - Target: $5/day → $20/day by July
 - Each compound increases position → more fees → faster milestone progression
@@ -125,8 +125,9 @@ fee_efficiency = (1 - abs(position - 0.5) * 2) * 100
 
 ## Related Files
 
-- Script: `/root/vaults/gentech/03-Strategies/scripts/lp-milestone-monitor.py`
-- Synced to: `~/.hermes/scripts/lp-milestone-monitor.py`
-- State: `~/.hermes/scripts/.lfj-lp-milestone-state.json`
+- Script: `/root/vaults/gentech/03-Strategies/scripts/lp-unified-monitor.py`
+- Synced to: `~/.hermes/scripts/lp-unified-monitor.py`
+- Position: `~/.hermes/scripts/.lfj-position-tracker.json`
+- State: `~/.hermes/scripts/.lfj-unified-state.json`
 - Analysis: `/root/vaults/gentech/03-Strategies/LFJ-AVAX-USDC-5bps-Analysis.md`
 - Crypto Watchlist (standalone): `/root/vaults/gentech/03-Strategies/token-watchlist.md`
