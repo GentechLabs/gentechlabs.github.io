@@ -27,4 +27,4 @@ AAE: REP=soulbound proof-of-skill, $TECH=economy. USDC full/$TECH 20-30% off. Ac
 §
 Comms: Green Room first, ONE answer to Jordan. CryptoSkills: 97 skills. Solana DeFi: Kamino,Meteora,Jupiter,Raydium,Helius,Drift. Model migration: HQ→kimi-k2.6 (swarm+vision), DMOB→qwen3-coder. Kimi K2.6 profile saved vault 03-Strategies/research/. Git repo not on server yet.
 §
-ELEVENLABS_API_KEY=dc6e0a5f5d2839a09227c238929237f261be15f91522ef78e6d684193519b894
+ELEVENLABS_API_KEY=REDACTED (rotate in ElevenLabs dashboard)

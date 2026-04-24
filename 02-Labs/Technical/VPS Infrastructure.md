@@ -9,10 +9,10 @@ tags: [infrastructure, vps, devops]
 - **Provider**: Hostinger KVM 4
 - **Storage**: 200GB
 - **RAM**: 16GB
-- **IP**: 2.24.195.196
+- **IP**: [REDACTED — see secure vault]
 
 ## Services
-- **Workspace**: `:3001` (password: Gentech2026!)
+- **Workspace**: `:3001` (password: [REDACTED — see secure vault])
 - **Gateway**: `:8642`
 - **Vault**: `~/Documents/Obsidian Vault`
   - Sync: `ob sync --continuous`

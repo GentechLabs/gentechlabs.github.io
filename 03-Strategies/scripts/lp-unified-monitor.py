@@ -24,10 +24,6 @@ from typing import Optional
 POOL_ADDRESS = "0x864d4e5ee7318e97483db7eb0912e09f161516ea"
 CHAIN = "avalanche"
 
-# Range loaded dynamically from tracker file (updated via screenshots)
-RANGE_LOW = 9.10
-RANGE_HIGH = 9.65
-
 STATE_FILE = os.path.expanduser("~/.hermes/scripts/.lfj-unified-state.json")
 POSITION_FILE = os.path.expanduser("~/.hermes/scripts/.lfj-position-tracker.json")
 
@@ -126,6 +122,18 @@ def load_position() -> dict:
         with open(POSITION_FILE, "r") as f: return json.load(f)
     except Exception: return {"entry_total_usd": 83.92, "entry_avax": 3.762, "entry_usdc": 48.37}
 
+def load_range() -> tuple:
+    """Load range from tracker file. Falls back to defaults."""
+    try:
+        with open(POSITION_FILE, "r") as f:
+            data = json.load(f)
+        rng = data.get("position", {}).get("range", {})
+        low = rng.get("low", 9.10)
+        high = rng.get("high", 9.65)
+        return (float(low), float(high))
+    except Exception:
+        return (9.10, 9.65)
+
 def load_state() -> dict:
     default = {"out_of_range_since": None, "last_alert": None, "last_price": None, "last_check": None, "tracking_started": None, "total_fees_earned_usd": 0.0, "total_days_in_range": 0.0, "last_in_range_check": None, "current_milestone_idx": 0, "last_compound_date": None, "last_dca_date": None, "compound_events": [], "daily_fee_log": []}
     try:
@@ -141,9 +149,9 @@ def save_state(state: dict):
 
 # ── Analysis ────────────────────────────────────────────────────────────────
 
-def calc_fee_efficiency(price: float) -> float:
-    if price < RANGE_LOW or price > RANGE_HIGH: return 0.0
-    position = (price - RANGE_LOW) / (RANGE_HIGH - RANGE_LOW)
+def calc_fee_efficiency(price: float, range_low: float, range_high: float) -> float:
+    if price < range_low or price > range_high: return 0.0
+    position = (price - range_low) / (range_high - range_low)
     return round(max(0, min(100, (1 - abs(position - 0.5) * 2) * 100)), 1)
 
 def is_quiet_hours() -> bool:
@@ -177,7 +185,7 @@ def update_compound_tracking(state: dict, in_range: bool, est_fees: float) -> di
         else: break
     return state
 
-def format_report(price, in_range, efficiency, pool, state, birdeye, est_fees, apr) -> str:
+def format_report(price, in_range, efficiency, pool, state, birdeye, est_fees, apr, range_low, range_high) -> str:
     eastern = timezone(timedelta(hours=-4))
     now_str = datetime.now(eastern).strftime("%I:%M %p EDT")
     status = "🚨 OUT OF RANGE" if not in_range else ("⚠️ LOW EFFICIENCY" if efficiency < 75 else "✅ ALL GOOD")
@@ -188,7 +196,7 @@ def format_report(price, in_range, efficiency, pool, state, birdeye, est_fees, a
         f"",
         f"**Status:** {status}",
         f"**AVAX Price:** ${price:.4f}",
-        f"**Your Range:** ${RANGE_LOW:.2f} – ${RANGE_HIGH:.2f}",
+        f"**Your Range:** ${range_low:.2f} – ${range_high:.2f}",
         f"**Fee Efficiency:** {efficiency:.1f}%",
         f"",
         f"**Pool (24h):**",
