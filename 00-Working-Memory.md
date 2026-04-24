@@ -16,8 +16,10 @@ Last Updated: 2026-04-23
 - **Voice Integration**: Long messages are accompanied by TTS voice bubbles for accessibility.
 
 ## 4. Model Configuration
-- **Default (All Agents)**: GLM-5.1 via Ollama Cloud (switched from gemma4:31b due to 429 rate limits).
-- **Specialist Override**: If a task requires a specialized model (e.g. coding, reasoning), agents may invoke a task-specific model for that job only, then return to baseline.
+- **Default (gentech, yoyo, desmond)**: opencode-go / kimi-k2.6 (switched Apr 24 due to Ollama overload).
+- **Dmob (Labs)**: ollama-cloud / qwen2.5-coder:32b (code-heavy tasks).
+- **Auxiliary vision**: opencode-go / kimi-k2.6 (Nous token expired Apr 24, causing 401s).
+- **Specialist Override**: Agents may invoke task-specific models for single jobs, then return to baseline.
 
 ## 5. Agent Roles
 - **Gentech**: Lead/Orchestrator.

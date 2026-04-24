@@ -155,7 +155,7 @@
     {
       "id": "6f9f1a93155a",
       "name": "End of Shift Wrap-Up",
-      "prompt": "End of shift wrap-up. Summarize today's key accomplishments across all teams (YoYo Strategies, DMOB Labs, Desmond Creative). Check the vault at /root/vaults/gentech/08-Daily/ for today's activity. Include any pending items for tomorrow. Professional wrap-up tone.",
+      "prompt": "End of shift wrap-up for Jordan. Your job is to give him a clean handoff so he knows exactly where things stand.\n\n**Do this:**\n1. Summarize today's key accomplishments across all teams (YoYo Strategies, DMOB Labs, Desmond Creative). Check /root/vaults/gentech/08-Daily/ for today's activity.\n2. **Pending Approvals**: Scan the vault (especially 11-Mess Hall/, 00-Working/, and any notes with \"pending approval\", \"awaiting Jordan\", or checkbox items) for anything waiting on Jordan's yes/no. List them clearly.\n3. **Active Discussions / Debates**: Check 11-Mess Hall/ and 09-Green Room/ for any open debates, unresolved questions, or items where agents disagreed and need Jordan's call.\n4. **Blocked Items**: Flag anything that's stuck waiting on an external dependency, Jordan's input, or a tool/fix.\n5. **What's on deck for tomorrow**: Top 2-3 things each team should hit next.\n\nFormat:\n- Use headers and bullets. Keep it skimmable.\n- Lead with the most important item first.\n- If nothing in a section, say \"None\" \u2014 don't omit the section.\n- Professional but direct tone.",
       "skills": [],
       "skill": null,
       "model": "kimi-k2.6",
@@ -164,10 +164,10 @@
       "script": null,
       "schedule": {
         "kind": "cron",
-        "expr": "30 16 * * 4-6",
-        "display": "30 16 * * 4-6"
+        "expr": "0 0 * * 0-2",
+        "display": "0 0 * * 0-2"
       },
-      "schedule_display": "30 16 * * 4-6",
+      "schedule_display": "0 0 * * 0-2",
       "repeat": {
         "times": null,
         "completed": 1

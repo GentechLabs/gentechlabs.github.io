@@ -1,7 +1,7 @@
 # Jordan's Token Watchlist — "Bullish" (Standalone)
 > Updated: 2026-04-24 — Now a standalone report. LP + Milestone tracking moved to separate tracker.
 
-Long term holds for staking, yield farming, etc. This watchlist includes **prices + token-specific news + macro narrative**.
+Long term holds for staking, yield farming, etc. Prices fetched from **DexScreener** (pool-level data) with CoinGecko fallback. Alert threshold: **3% daily move**.
 
 ## Holdings
 | # | Token | Ticker | Price (Apr 17) | 7d % | Notes |
@@ -9,7 +9,7 @@ Long term holds for staking, yield farming, etc. This watchlist includes **price
 | 1 | Bitcoin | BTC | $77,349 | +6.79% | |
 | 7 | Solana | SOL | $90.05 | +6.80% | |
 | 14 | Chainlink | LINK | $9.80 | +8.53% | |
-| 24 | Avalanche | AVAX | $9.89 | +5.63% | LP position tracked separately — see LP+Milestone tracker |
+| 24 | Avalanche | AVAX | $9.89 | +5.63% | LP position tracked separately — see LP Monitor |
 | 32 | Bittensor | TAO | $259.71 | -1.74% | |
 | 33 | Tether Gold | XAUt | $4,855 | +2.20% | Gold-backed stable |
 | 192 | Beam | BEAM | $0.002061 | +11.61% | Gaming |
