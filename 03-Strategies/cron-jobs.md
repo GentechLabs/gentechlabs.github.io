@@ -52,33 +52,28 @@ During Crypto Watchlist hours (7,9,11,13,15,17,19,21), LP is SILENT unless URGEN
 ---
 
 ## ⏸️ Overnight Pause/Resume
-**Pause Job:** `a5a8aa5c64db` — 11:00 PM daily → pauses LP monitor
-**Resume Job:** `390536c113fb` — 6:30 AM daily → resumes LP monitor
+Handled internally by `faed4f588aef` quiet-hours logic (11 PM – 6:30 AM EDT). No separate pause/resume jobs needed.
 
 ---
 
-## All Jobs (21 total)
+## All Jobs (30 active across all departments)
 
 | # | Name | Schedule | Delivery |
 |---|------|----------|----------|
-| 1 | Daily Briefing + Stars | 6:30 AM daily | HQ |
-| 2 | Morning Briefing | 4:30 AM Mon-Sat | HQ |
-| 3 | Gentech LLC Reminder | 15th of month | HQ |
-| 4 | Mess Hall — Agent Check-in | 2:00 PM daily | HQ |
-| 5 | End of Shift Wrap-Up | 4:30 PM Thu-Sat | HQ |
-| 6 | Vault Maintenance — Weekly | Sun 10:30 PM | HQ |
-| 7 | **YoYo — LP Watchlist** | Every 10 min | Strategies |
-| 8 | **YoYo — Crypto Watchlist** | Every 2h (7-21) | Strategies |
-| 9 | Protocol Due Diligence | Thu 6:00 AM | Strategies |
-| 10 | Hermes Agent Daily Sync | 6:00 AM daily | Labs |
-| 11 | Weekly Opportunity Scanner | Mon/Thu 6 AM | Labs |
-| 12 | Kite AI Hackathon Check | 10:00 AM daily | Labs |
-| 13 | Security → Content Pipeline | Tue/Fri 7 AM | Creative |
-| 14 | Gentech X Content Extractor | 5:00 PM daily | Creative |
-| 15 | The Brain — Daily | 4:00 PM daily | Local |
-| 16 | Mess Hall — Daily Rotation | 3:00 AM daily | Local |
-| 17 | Sunday Skill Update | Sun 10:00 AM | HQ |
-| 18 | LP Monitor — Pause | 11:00 PM daily | Local |
-| 19 | LP Monitor — Resume | 6:30 AM daily | Local |
-| 20 | Vault Manager — Nightly | 11:00 PM daily | HQ |
-| 21 | Brain Backup | Every 6h | Origin |
+| 1 | Master Morning Digest | 11:30 AM daily | HQ |
+| 2 | Gentech LLC Reminder | 15th of month | HQ |
+| 3 | Mess Hall — Agent Check-in | 2:00 PM daily | HQ |
+| 4 | End of Shift Wrap-Up | 4:30 PM Thu-Sat | HQ |
+| 5 | Vault Maintenance — Weekly | Sun 10:30 PM | HQ |
+| 6 | **YoYo — Crypto Watchlist + LP** | 8:15, 12:15, 16:15, 20:15 UTC | Strategies |
+| 7 | Protocol Due Diligence | Thu 6:00 AM | Strategies |
+| 8 | Hermes Agent Daily Sync | 6:00 AM daily | Labs |
+| 9 | Weekly Opportunity Scanner | Mon/Thu 6 AM | Labs |
+| 10 | Kite AI Hackathon Check | 10:00 AM daily | Labs |
+| 11 | Security → Content Pipeline | Tue/Fri 7 AM | Creative |
+| 12 | Gentech X Content Extractor | 5:00 PM daily | Creative |
+| 13 | The Brain — Daily | 4:00 PM daily | Local |
+| 14 | Mess Hall — Daily Rotation | 3:00 AM daily | Local |
+| 15 | Sunday Skill Update | Sun 10:00 AM | HQ |
+| 16 | Vault Manager — Nightly | 11:00 PM daily | HQ |
+| 17 | Brain Backup | Every 6h | Local |

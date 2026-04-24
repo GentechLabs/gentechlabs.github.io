@@ -31,20 +31,39 @@
 - **AVAX:** 0xb31f66aa3c1e785363f0875a1b74e27b85fd66c7
 - **USDC:** 0xb97ef9ef8734c71904d8002f8b6bc66dd9c48a6e
 
-## Jordan's Active Position (Apr 23, 2026)
+## Jordan's Active Position (Apr 24, 2026)
 
-- **Entry:** $31.16 (Mar 31, 2026)
-- **Deposit Balance:** $82.80 (Apr 23)
-- **AVAX:** 0.383
-- **USDC:** 79.23
-- **AVAX Price:** ~$9.37
-- **Range:** 9.18 – 9.40 (Curve Shape, tightened for reward bin capture)
+- **Entry:** $83.92 (Mar 31, 2026)
+- **Deposit Balance:** $83.37 (Apr 24)
+- **AVAX:** 3.88 (~$36.56)
+- **USDC:** 46.82 (~$46.81)
+- **AVAX Price:** ~$9.418
+- **Range:** $9.10 – $9.65 (Curve Shape)
 - **Status:** In range, earning fees
-- **Pool APR:** ~122% (7D)
+- **Fees 24H:** $0.58 (~0.7% daily → ~255% APR implied)
+- **Claimable Rewards:** $0.0075
+- **Pool APR (7D):** 88.77%
 - **Platform:** LFJ mobile app
-- **Risk Note:** Tight range — needs rebalance if AVAX moves >3.5% either direction
+- **Risk Note:** Moderate range — rebalance if AVAX moves >5% either direction
 - **Tracker Script:** `03-Strategies/scripts/lp-unified-monitor.py` (consolidated watchlist + P&L)
 - **Position File:** `~/.hermes/scripts/.lfj-position-tracker.json`
+
+## Pool Health (Apr 24, 2026)
+
+| Metric | Value | Change |
+|--------|-------|--------|
+| TVL | $3.98M | +11.8% since Apr 14 |
+| Volume (24h) | $21.5M | -28.4% since Apr 14 spike |
+| Fees (24h) | $10,967 | -32.7% since Apr 14 spike |
+| APR (7d) | 88.77% | -4.72pp since Apr 14 |
+| AVAX Price | $9.418 | — |
+
+## Snapshot Log
+
+| Date | Deposit | AVAX | USDC | AVAX Price | Fees 24H | Source |
+|------|---------|------|------|------------|----------|--------|
+| Mar 31 | $83.92 | 3.762 | 48.37 | $9.45 | — | Entry |
+| Apr 24 | $83.37 | 3.88 | 46.82 | $9.418 | $0.58 | Screenshot |
 
 ## Analysis Requested
 

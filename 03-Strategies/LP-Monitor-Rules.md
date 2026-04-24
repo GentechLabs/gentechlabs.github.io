@@ -8,16 +8,17 @@
 ## Current Position
 
 - **Range:** $9.10 — $9.65
-- **Position:** ~$28.66 (1.538 AVAX + 14.2 USDC)
+- **Position:** ~$83.37 (3.88 AVAX + 46.82 USDC) — *last updated from screenshot 2026-04-24*
 - **Shape:** Curve
 - **Strategy:** Bear market accumulation — farm the bottom, compound rewards
+- **Entry:** $83.92 (Mar 31, 3.762 AVAX + 48.37 USDC @ $9.4498/AVAX)
 
 ---
 
 ## Monitoring Rules (Jordan's Exact Spec)
 
 ### Rule 1 — Check Frequency
-⏱️ Check every **10 minutes**
+⏱️ Check **4× daily** via unified cron (`faed4f588aef` at 8:15, 12:15, 16:15, 20:15 UTC). Manual screenshot updates → immediate position file refresh.
 
 ### Rule 2 — In Range + High Efficiency → SILENT
 🤫 Price in range AND fee efficiency **75–100%** → **no alert, stay silent** (compact log only)
@@ -29,7 +30,7 @@
 ⚠️ Price out of range → **wait 5 minutes** for confirmation, then alert if still out
 
 ### Rule 5 — Overnight Pause
-🌙 **Pause at 11 PM**, resume at **6:30 AM** (EDT/EST)
+🌙 **Pause at 11 PM**, resume at **6:30 AM** (EDT/EST). Handled by unified job quiet-hours logic.
 
 ### Rule 6 — Recovery Alert
 🔔 When price returns to range after being out → alert with "recovered"
@@ -73,6 +74,7 @@
 
 - **Primary:** Birdeye x402 (if API key configured)
 - **Fallback:** DexScreener (free, no key)
+- **Position Data:** `~/.hermes/scripts/.lfj-position-tracker.json` (updated from Jordan screenshots)
 
 ## Fee Estimation Formula
 
@@ -84,11 +86,12 @@ daily_fees = pool_volume_24h × 0.0005 × (position_usd / pool_liquidity)
 
 ## Cron Jobs
 
-| Job | ID | Schedule |
-|-----|----|----------|
-| LP Unified Monitor (10min) | `00ef264dbdab` | `*/10 * * * *` |
-| LP Monitor — Pause (11 PM) | `2f58ab69f4d2` | `0 23 * * *` |
-| LP Monitor — Resume (6:30 AM) | `ef9aa51eedbc` | `30 6 * * *` |
+| Job | ID | Schedule | Status |
+|-----|----|----------|--------|
+| **Crypto Watchlist + LP Monitor** (unified) | `faed4f588aef` | `15 8,12,16,20 * * *` | ✅ Active |
+| ~~LP Unified Monitor (10min)~~ | ~~`00ef264dbdab`~~ | ~~`*/10 * * * *`~~ | ❌ Removed (unified into `faed4f588aef`) |
+| ~~LP Monitor — Pause~~ | ~~`2f58ab69f4d2`~~ | ~~`0 23 * * *`~~ | ❌ Removed (quiet-hours logic in unified job) |
+| ~~LP Monitor — Resume~~ | ~~`ef9aa51eedbc`~~ | ~~`30 6 * * *`~~ | ❌ Removed (quiet-hours logic in unified job) |
 
 ---
 

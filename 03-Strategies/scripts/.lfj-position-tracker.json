@@ -1,37 +1,53 @@
 {
-  "pool": "AVAX/USDC 5bps",
-  "pool_address": "0x864d4e50e7318e97483db7cb0912e09f161516ea",
-  "last_snapshot": {
-    "timestamp": "2026-04-22T21:30:00Z",
-    "current_price": 9.45658,
-    "total_value_usd": 83.92,
-    "balances": {
-      "AVAX": 3.762,
-      "USDC": 48.37
-    },
-    "rewards_claimable_usd": 0.00756,
-    "status": "IN_RANGE",
+  "meta": {
+    "version": "unified-v1",
+    "updated_by": "Desmond",
+    "updated_at": "2026-04-24T13:30:00Z",
+    "update_source": "screenshot"
+  },
+  "pool": {
+    "name": "AVAX/USDC 5bps",
+    "version": "v2.2",
+    "address": "0x864d4e5Ee7318e97483DB7EB0912E09F161516EA",
+    "chain": "avalanche",
+    "bin_step": "10bps",
+    "base_fee": "0.05%",
+    "max_fee": "0.54%"
+  },
+  "position": {
+    "entry_date": "2026-03-31",
+    "entry_avax": 3.762,
+    "entry_usdc": 48.37,
+    "entry_avax_price": 9.4498,
+    "entry_total_usd": 83.92,
+    "shape": "Curve",
     "range": {
-      "low": 9.36,
-      "high": 9.53,
-      "shape": "Curve"
+      "low": 9.10,
+      "high": 9.65,
+      "updated_at": "2026-04-24T13:30:00Z"
     }
   },
-  "history": [
+  "snapshots": [
     {
-      "date": "2026-03-31",
-      "value_usd": 31.16,
-      "event": "Entry"
-    },
-    {
-      "date": "2026-04-21",
-      "value_usd": 28.66,
-      "event": "Snapshot"
-    },
-    {
-      "date": "2026-04-22",
-      "value_usd": 83.92,
-      "event": "Manual Sync / Photo Update"
+      "date": "2026-04-24",
+      "avax_price": 9.418,
+      "deposit_balance_usd": 83.37,
+      "avax_holdings": 3.88,
+      "usdc_holdings": 46.82,
+      "fees_24h_usd": 0.58,
+      "claimable_rewards_usd": 0.0075,
+      "pool_tvl_usd": 3980000,
+      "pool_vol_24h_usd": 21500000,
+      "pool_fees_24h_usd": 10967,
+      "apr_7d": 88.77,
+      "status": "IN_RANGE",
+      "source": "screenshot"
     }
+  ],
+  "history": [
+    {"date": "2026-03-31", "value_usd": 31.16, "event": "Entry"},
+    {"date": "2026-04-21", "value_usd": 28.66, "event": "Snapshot"},
+    {"date": "2026-04-22", "value_usd": 83.92, "event": "Manual Sync / Photo Update"},
+    {"date": "2026-04-24", "value_usd": 83.37, "event": "Screenshot Update"}
   ]
 }
