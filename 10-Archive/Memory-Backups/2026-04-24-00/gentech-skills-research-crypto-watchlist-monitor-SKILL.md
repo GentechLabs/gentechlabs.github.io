@@ -17,11 +17,11 @@ tags: [crypto, defi, monitoring, watchlist, prices, cron]
 - Vision tool with MiMo v2 Pro — text-only model, can't see images. Use mimo-v2-omni for vision.
 
 ## CMC API (Preferred — use for cron jobs)
-- **API Key:** `ff52c5f015c3490da49adf12513a6d55` (in `/root/.hermes/.env` as `COINMARKETCAP_API_KEY`)
+- **API Key:** `[CMC-API-KEY-REDACTED]` (in `/root/.hermes/.env` as `COINMARKETCAP_API_KEY`)
 - **Quote endpoint:** `https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?symbol=BTC,SOL,LINK,AVAX,TAO,XAUt,BEAM&convert=USD`
-- **Watchlist endpoint:** `https://pro-api.coinmarketcap.com/v1/watchlist/list?id=67453707ad745f0bbd4ad54f` (may not work on free tier)
+- **Watchlist endpoint:** `https://pro-api.coinmarketcap.com/v1/watchlist/list?id=[CMC-WATCHLIST-ID-REDACTED]` (may not work on free tier)
 - **Vault source:** `/root/vaults/gentech/03-Strategies/token-watchlist.md` — check for newly added tokens before running
-- **CMC Watchlist URL:** https://coinmarketcap.com/watchlist/67453707ad745f0bbd4ad54f
+- **CMC Watchlist URL:** https://coinmarketcap.com/watchlist/[CMC-WATCHLIST-ID-REDACTED]
 
 ### Parsing CMC API Response
 ```python

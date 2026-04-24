@@ -88,5 +88,20 @@ GenLayer is building "Intelligent Contracts" — contracts that can make subject
 
 ---
 
+## Community Projects Watch
+
+### genscope — 3D Block Explorer (2026-04-24)
+- **Builder:** @gaymused (0xgayyy)
+- **Live:** [genscope.vercel.app](https://genscope.vercel.app)
+- **What it does:** Real-time 3D visualization of GenLayer Bradbury testnet
+  - Blocks stack in real time as they're mined
+  - Transactions orbit each block as glowing entities
+  - AI consensus views
+- **Source:** GenLayer official X post quote-tweet — [link](https://x.com/i/status/2047671130287214968)
+- **Status:** Community contribution, not official GenLayer tooling
+- **Relevance:** Shows ecosystem maturity — builders are creating rich visual tooling on top of testnet. Could inspire our own explorer/dashboard work.
+
+---
+
 ## Tags
 #GenLayer #competitive-analysis #research #AI-contracts

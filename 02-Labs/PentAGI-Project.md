@@ -8,7 +8,7 @@
 ## What It Was
 - Self-hosted PentAGI instance (AI agent platform)
 - Ran on VPS at https://127.0.0.1:8443
-- Admin creds: admin@pentagi.com / admin
+- Admin creds: [PENTAGI-ADMIN-REDACTED] / admin
 - Nous API integration was attempted but returned 404 from Go client
 
 ## Current State

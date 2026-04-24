@@ -30,7 +30,7 @@ Long term holds for staking, yield farming, etc. This watchlist includes **price
 - 🏦 **Regulatory:** SEC actions, exchange delistings
 
 ## Sources to Monitor
-- CoinMarketCap watchlist: https://coinmarketcap.com/watchlist/67453707ad745f0bbd4ad54f
+- CoinMarketCap watchlist: https://coinmarketcap.com/watchlist/[CMC-WATCHLIST-ID-REDACTED]
 - Twitter/X accounts for each project
 - On-chain data (DeFiLlama for TVL changes)
 

@@ -75,7 +75,7 @@ def calc_position_pnl(price: float, position: dict, fees_earned: float = 0) -> d
 ## Data Sources
 1. **DexScreener** (free, no key): `https://api.dexscreener.com/latest/dex/pairs/{chain}/{pool_address}`
 2. **Birdeye x402** ($0.003/req): token overview, security, trade data — primary source
-3. **CMC API** (key: ff52c5f015c3490da49adf12513a6d55): watchlist token prices
+3. **CMC API** (key: [CMC-API-KEY-REDACTED]): watchlist token prices
 
 ## Pool Details (LFJ AVAX/USDC)
 - Pool: `0x864d4e5ee7318e97483db7eb0912e09f161516ea`

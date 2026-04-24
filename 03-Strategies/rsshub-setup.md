@@ -4,7 +4,7 @@
 
 **Date:** 2026-04-24
 **Location:** `/opt/rsshub/`
-**Public URL:** `http://2.24.195.196:1200`
+**Public URL:** `http://[VPS-IP-REDACTED]:1200`
 **Local URL:** `http://localhost:1200`
 
 ---
