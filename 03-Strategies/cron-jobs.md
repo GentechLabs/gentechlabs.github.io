@@ -1,5 +1,5 @@
 # YoYo Cron Jobs — Active Manifest
-> Last updated: 2026-04-24
+> Last updated: 2026-04-25
 > Models: YoYo/Gentech/Desmond → `kimi-k2.6` | DMOB → `qwen3-coder-next` | Provider: Ollama Cloud
 > Delivery: Strategies group (-1002916759037)
 
@@ -50,9 +50,10 @@
 - Out of range → 🚨 URGENT
 
 **Data Sources:**
-- Pool: `lp-unified-monitor.py` (Birdeye → DexScreener fallback)
+- Pool: `lp-unified-monitor.py` (Birdeye → DexScreener → on-chain RPC fallback)
 - Position: `~/.hermes/scripts/.lfj-position-tracker.json`
 - Range updated dynamically from screenshot snapshots or rebalance events
+- On-chain fallback uses `getSwapOut()` + `getReserves()` directly from pool contract via Avalanche C-Chain RPC
 
 ---
 
