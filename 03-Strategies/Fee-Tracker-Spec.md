@@ -151,10 +151,12 @@ Users write natural-language strategies. The system compiles them into executabl
 | Data | Source | Fallback |
 |------|--------|----------|
 | Pool volume, TVL, APR | AAE signal (Birdeye → DexScreener → on-chain) | Same cascade |
-| Position value | User input or wallet read | Manual entry |
+| Position value, range, IL | **LP Cron** (`lp-aae-signal-monitor.py`) → structured JSON | Manual entry |
 | Fee tier | Pool contract config | Default 5bps |
 | X sentiment (custom triggers) | X API / xurl skill / browser scrape | Manual trigger only |
 | Gas price | On-chain RPC | Skip gas-aware strategies |
+
+> **Frontend Contract**: Any new metric added to the LP Cron must have a corresponding UI card in `DeFi-Milestone-Tracker.html` and a preset mapping in this spec. See `02-Labs/LP-Tracker-Config.md` §Frontend Contract.
 
 ---
 

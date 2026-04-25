@@ -250,3 +250,21 @@ apr = (daily_fees × 365 / position_usd) × 100
 - **Analysis:** `/root/vaults/gentech/03-Strategies/LFJ-AVAX-USDC-5bps-Analysis.md`
 - **Crypto Watchlist (standalone):** `/root/vaults/gentech/03-Strategies/token-watchlist.md`
 - **AAE Signal Spec:** `/root/vaults/gentech/03-Strategies/AAE-Signal-Spec.md`
+
+---
+
+## ✅ Optimization Milestone — Apr 25 2026
+
+Jordan approved the optimized cron output format:
+> *"You guys did a great job optimizing the cron job. It looks fantastic. This is not only something that our users are gonna love, but our community."*
+
+**What changed:**
+- Clean emoji taxonomy (💧 WARNING header, 📊 DexScreener attribution)
+- Compact P&L block (Est. Daily Fees, Cumulative Fees, LP Value vs HODL)
+- Inline pool context (Vol 24h, TVL)
+- Squad-aware tier progression (Scout → Raider → Warlord → Sovereign)
+
+**Frontend Impact Principle logged:**
+> *"As we add more layers, we're always going to consider how this is going to affect our front end, our DeFi milestone tracker."*
+
+All future LP layer additions must pass a frontend compatibility check before deployment.
