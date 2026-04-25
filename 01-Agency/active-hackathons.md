@@ -5,8 +5,12 @@ Status: Updated Apr 24, 2026
 - **Kite AI Hackathon**: AgentEscrow on Kite AI chain. **Deadline: May 11**.
 - **Frontier Hackathon (Colosseum)**: Global online accelerator. (Ends May 11).
 - **ElevenHacks #6**: Build a game with Zed + ElevenLabs APIs. $10K cash + credits. (Started Apr 23) — SDK v1.0 released.
-- **Nous Hermes Agent Creative Hackathon**: $25K, 16-day window.
+- **Surge Ignition Race — Season 1**: Build in public, show proof (GitHub commits, revenue, traction). $250K prize. 300+ founders. Hub profile + proof of work submissions. Perfect for Kite AI or AAE projects. **Live Apr 23-24**.
 - **Google Cloud Rapid Agent Hackathon**: Build agents with Gemini + Google Cloud. (Closes Jun 11).
+
+## Skipped
+- **Nous Hermes Agent Creative Hackathon**: Skipped per Jordan's directive.
+- **Dev3pack Global**: Skipped per Jordan's directive.
 
 ## Pipeline/Watchlist
 - **Bags App (Next Window)**: Monitoring for the next opportunity.

@@ -29,8 +29,8 @@
 | Apr 20-26 | ARC | Escrow | $10K | Dmob + Jordan |
 | May 11 | Kite AI | Marketplace | — | Dmob + Jordan |
 | ~~May 3~~ | ~~ETHGlobal Open Agents~~ | ~~L2+L3+L4+L5~~ | ~~$50K~~ | ~~DROPPED~~ |
-| May 8-10 | Dev3pack | Brain | TBA | Dmob + Jordan |
-| May 11 | **Superteam Earn Sidetracks** | **L2+L3+L5+Foundation** | **$680K+** | **Full team** |
+| ~~May 8-10~~ | ~~Dev3pack~~ | ~~Brain~~ | ~~TBA~~ | ~~SKIPPED per Jordan directive~~ |
+| May 11 | **Kite AI** | **Marketplace** | **—** | **Dmob + Jordan** |
 | May 11 | Solana Frontier (main) | All layers | $230K+ | Full team |
 | Jul 14 | Retro9000 | Full stack (AVAX) | $75K | Full team |
 
@@ -70,7 +70,8 @@ Not a standalone submission. Embedded in every hackathon:
 
 - [x] ARC — signed up, repo exists
 - [x] Kite AI — registered, multi-SDK strategy (GenLayer L4+L5, Beam L3)
-- [ ] Dev3pack — register
+- [x] Dev3pack — SKIPPED per Jordan directive
+- [ ] Surge Ignition Race — sign up, submit proof of work
 - [ ] Solana Frontier — register
 - [ ] Retro9000 — planning phase
 

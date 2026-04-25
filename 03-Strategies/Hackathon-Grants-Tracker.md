@@ -11,7 +11,9 @@
 | **Kite AI** | Arbitrum | — | Apr 26 | 🔴 ACTIVE | AgentEscrow — modular SDK strategy |
 | **ETHGlobal Open Agents** | 0G Chain | $50K | May 3 | 🟡 SCAFFOLDED | L3 Brain + L4 Enforcement + L5 Escrow |
 | **ElevenHacks #6** | Zed + ElevenLabs | $10K + credits | ~16 days | 🟡 NEW | Build game with Zed + ElevenLabs APIs. ElevenAgents React SDK v1.0 just dropped — unified API, granular hooks, dynamic client tools, React Native support. Use v1.0 from start. |
-| **Nous Hermes Creative** | Agent | $25K | ~16 days | 🟡 NEW | Creative domains (video, audio, 3D, writing) |
+| **Nous Hermes Creative** | Agent | $25K | ~16 days | 🔴 SKIPPED | Creative domains (video, audio, 3D, writing) |
+| **Dev3pack** | Solana | TBA | May 8-10 | 🔴 SKIPPED | Brain layer — not registered, ElevenLabs not configured |
+| **Surge Ignition Race S1** | Build in public | $250K | Apr 23-24 | 🔴 ACTIVE | Proof of work (GitHub, revenue, traction). 300+ founders. Perfect for Kite AI/AAE projects. |
 | **Google Cloud Rapid Agent** | Google Cloud + Gemini | TBD (announced May 5) | Jun 11 | 🟡 NEW | Agents solving real-world challenges. Must integrate ≥1 MCP server. 6-week build window. Register now, commit after May 5 prize reveal. |
 | **Solana Frontier** | Solana | $230K+ | May 11 | 🟡 DECIDE | Requires full Solana rewrite — high effort |
 | **Superteam Earn Sidetracks** | Solana | $680K+ (multiple) | May 11 | 🟡 EVALUATE | Pick 2-3 sidetracks, not all |
@@ -34,8 +36,8 @@
 | Name | Reason |
 |------|--------|
 | Ranger Build-A-Bear | Deadline passed (Apr 17) |
-| Nous Creative | Low priority, unclear fit |
-| Dev3pack | Not registered, ElevenLabs not configured, unclear prize |
+| Nous Creative | Skipped per Jordan directive |
+| Dev3pack | Skipped per Jordan directive — not registered, ElevenLabs not configured, unclear prize |
 | Chainlink Convergence | Completed — winners announced |
 | Bags App | Needed working app in 1 day — not viable. Monitoring next window. |
 

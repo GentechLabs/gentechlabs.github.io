@@ -20,7 +20,7 @@
 - **Prizes:** $25k
 - **Type:** Creative/Agentic
 - **Relevance:** ⭐⭐⭐ High for Creative/Interactive media
-- **Status:** 🟢 ACTIVE
+- **Status:** 🔴 SKIPPED per Jordan directive
 
 ### ElevenHacks #6 (@ElevenLabsDevs + @zeddotdev)
 - **Dates:** Starts Apr 23, 2026
@@ -28,6 +28,14 @@
 - **Type:** Build a game with Zed + ElevenLabs APIs
 - **Relevance:** ⭐⭐⭐ PERFECT FIT — we already have the ElevenLabs key! SDK v1.0 released Apr 23 with useConversationClientTool hook (dynamic tool registration from React components)
 - **Status:** 🟡 BRAINSTORMING
+
+### Surge Ignition Race — Season 1
+- **Dates:** Live Apr 23-24, 2026
+- **Prizes:** $250K
+- **Type:** Build in public, proof of work submissions
+- **Platform:** Surge.xyz / LabLab Builders
+- **Relevance:** ⭐⭐⭐ PERFECT FIT — "Traction is the pitch" aligns with GenTech shipping culture. Great for Kite AI or AAE projects. 300+ founders already joined.
+- **Status:** 🔴 ACTIVE / SIGN UP NOW
 
 ### Google Cloud Rapid Agent Hackathon
 - **Dates:** Closes Jun 11, 2026
