@@ -1,45 +1,44 @@
-# Content Queue — Desmond
+# Content Queue — GenTech Creative
 
-**Updated**: 2025-04-25
-**Next Review**: Daily
+**Last Updated:** April 25, 2026
+**Owner:** Desmond (Creative)
 
 ---
 
-## Ready to Record (Phone Videos)
+## Ready to Record
 
 | # | Title | Channel | Source | Status |
 |---|-------|---------|--------|--------|
-| 1 | "The Squad Economy" — Platform Orchestration Thesis | Gentech Labs | HQ brainstorm, Apr 25 | ✅ Script ready |
-| 2 | "From $3 to Freedom" — Milestone Rank System | Gentech Labs | DMOB spec, Apr 25 | ✅ Script ready |
+| — | — | — | — | — |
 
 ---
 
-## Drafting (Need More Context)
+## Drafting
 
-| # | Title | Channel | Source | Blocker |
-|---|-------|---------|--------|---------|
-| 3 | "Why We Dropped 3 Hackathons in 1 Week" | Gentech Entertainment | ARC/ETHGlobal drops, Apr 22 | Need Jordan's honest take |
-| 4 | "Bin-AMM Explained in 60 Seconds" | Gentech Labs | DMOB scoping doc | Waiting for build to start |
-| 5 | "Meet the Agents — Who Does What at GenTech" | Gentech Entertainment | Team structure | Need agent intro quotes |
+| # | Title | Channel | Blocker |
+|---|-------|---------|---------|
+| 1 | Unified V5 Milestone + LP Cron + DCA Engines | Gentech Labs | Waiting for DMOB technical specs |
+| 2 | ElevenLabs Voice Setup — 4 Agents, 4 Voices | Gentech Entertainment | Waiting for demo footage |
 
 ---
 
-## Ideas (Need Trigger)
+## Ideas
 
 | # | Title | Channel | Trigger |
 |---|-------|---------|---------|
-| 6 | "We Survived the Solana Frontier Build Sprint" | Gentech Labs | May 11 submission |
-| 7 | "Philippines Remote Work Test — Week 1" | Gentech Entertainment | Sep 2026 trip |
-| 8 | "How 4 AI Agents Replaced a Dev Team" | Gentech Labs | Major milestone |
-| 9 | "Code4rena or Bust — Our Q4 2026 Plan" | Gentech Entertainment | Jordan decides |
+| 1 | Solana Frontier Hackathon Submission Story | Gentech Labs | May 11 deadline / submit |
+| 2 | ElevenHacks v0 Sprint — Behind the Build | Gentech Entertainment | Apr 30 sprint start |
+| 3 | Stripe × ElevenLabs — The Big Score | Gentech Labs | May 14 submission |
+| 4 | From Amazon to DeFi — Jordan's Transition | Both | Q4 2026 milestone |
 
 ---
 
-## Production Pipeline
+## Published
 
-```
-Conversation → Capture → Script → Queue → Jordan says "make it" → Record → Edit → Publish
-```
+| # | Title | Channel | Date | Link |
+|---|-------|---------|------|------|
+| — | — | — | — | — |
 
-**My job**: Conversations → Capture → Script → Queue (automated)
-**Jordan's job**: Review queue → Pick → Record on phone → Send back → I edit/publish
+---
+
+*To add: Drop a note in Green Room or tag Desmond in Mess Hall.*
