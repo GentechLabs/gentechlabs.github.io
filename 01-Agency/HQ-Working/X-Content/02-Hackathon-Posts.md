@@ -1,11 +1,11 @@
 # X/Twitter Posts — Jordan's Hackathon Strategy
-## ETHGlobal Open Agents + Kite Agent Commerce
+## Kite AI Global + AgentEscrow
 
 ---
 
 ## 1. 🚀 Hackathon Entry Announcement
 
-> Just registered for @ETHGlobal Open Agents hackathon.
+> Just registered for Kite AI Global hackathon.
 >
 > Here's what makes this different: I'm not entering as a solo dev.
 >
@@ -13,9 +13,9 @@
 >
 > The hackathon IS the demo. The build process IS the proof.
 >
-> We're shipping Kite Agent Commerce — infrastructure for AI agents to transact on-chain.
+> We're shipping AgentEscrow — infrastructure for AI agents to transact on-chain with x402 nanopayments.
 >
-> $50K prize pool. Deadline April 23.
+> $10K prize pool. Deadline May 11.
 >
 > Win or learn. Probably both.
 >
@@ -23,13 +23,13 @@
 
 **Alt version (shorter):**
 
-> Entering @ETHGlobal Open Agents with my AI agent team.
+> Entering Kite AI Global with my AI agent team.
 >
 > Not "using AI to help build" — the agents ARE my team. Research, code, content, all in parallel.
 >
 > The hackathon entry is the demo.
 >
-> Shipping Kite Agent Commerce. April 23 deadline.
+> Shipping AgentEscrow + x402. May 11 deadline.
 >
 > Can't believe this is real. Let's go.
 
@@ -37,7 +37,7 @@
 
 ## 2. 🧠 Strategy Reveal
 
-> Here's how I'm running the ETHGlobal hackathon with my agent team:
+> Here's how I'm running the Kite AI hackathon with my agent team:
 >
 > YoYo researches: token standards, agent commerce patterns, what's already been built
 >
@@ -57,11 +57,11 @@
 >
 > I'm entering with a team that doesn't sleep, doesn't context-switch, and doesn't argue about tabs vs spaces.
 >
-> Kite Agent Commerce is the project. But the process is the product.
+> AgentEscrow is the project. But the process is the product.
 
 **Alt version (thread format):**
 
-> Thread: How I'm using my AI agent team for @ETHGlobal Open Agents 🧵
+> Thread: How I'm using my AI agent team for Kite AI Global 🧵
 >
 > 1/ Most hackathon strategies focus on WHAT to build. Mine focuses on WHO builds it.
 >
@@ -77,7 +77,7 @@
 >
 > 7/ The result? What takes a solo dev 48 hours, we're doing in 12. The rest is iteration.
 >
-> 8/ Kite Agent Commerce is the project. But showing agents working together IS the demo.
+> 8/ AgentEscrow is the project. But showing agents working together IS the demo.
 >
 > This is the future of building. Not replacing humans — augmenting them.
 
@@ -85,7 +85,7 @@
 
 ## 3. 📡 Day-Of Live Update Template
 
-> 🔴 ETHGlobal Open Agents — Live Build Thread
+> 🔴 Kite AI Global — Live Build Thread
 >
 > Hour 0: Project kickoff ✅
 > Architecture locked. Agent team activated.
@@ -96,7 +96,7 @@
 > 📝 Desmond — drafting project description
 > 🎯 Gentech — task queue loaded with 23 items
 >
-> Building Kite Agent Commerce — let agents transact on-chain.
+> Building AgentEscrow — let agents transact on-chain.
 >
 > Updates as we go. 👇
 
@@ -144,7 +144,7 @@
 
 > ✅ Submitted.
 >
-> Kite Agent Commerce is live on @ETHGlobal Open Agents.
+> AgentEscrow is live on Kite AI Global.
 >
 > What we built:
 > • [Key feature 1]
@@ -165,7 +165,7 @@
 
 **Alt version (more reflective):**
 
-> It's done. Kite Agent Commerce is submitted to @ETHGlobal Open Agents.
+> It's done. AgentEscrow is submitted to Kite AI Global.
 >
 > Going into this, I had a hypothesis: an agent team could compete in a hackathon.
 >
@@ -186,9 +186,9 @@
 
 ## 5. 📚 Lessons Learned Post Template
 
-> ETHGlobal Open Agents — done.
+> Kite AI Global — done.
 >
-> Here's what I learned building Kite Agent Commerce with my AI agent team:
+> Here's what I learned building AgentEscrow with my AI agent team:
 >
 > 🧵 (thread)
 >
@@ -212,9 +212,9 @@
 
 **Alt version (single post, no thread):**
 
-> Post-hackathon thoughts on @ETHGlobal Open Agents:
+> Post-hackathon thoughts on Kite AI Global:
 >
-> Shipped Kite Agent Commerce with my agent team. Here's the honest breakdown:
+> Shipped AgentEscrow with my agent team. Here's the honest breakdown:
 >
 > What went well:
 > • Parallel research saved hours
@@ -240,13 +240,13 @@
 
 **Pre-hackathon hype (1-2 days before):**
 
-> ETHGlobal Open Agents starts [tomorrow/in X hours].
+> Kite AI Global starts [tomorrow/in X hours].
 >
 > Agent team is loaded. Architecture is sketched. Coffee is stocked.
 >
-> Building Kite Agent Commerce — agent-to-agent transactions on-chain.
+> Building AgentEscrow — agent-to-agent transactions on-chain.
 >
-> This is the hackathon I've been building toward. Not because of the prize pool (though $50K is nice). Because it's the perfect stage for what we're building.
+> This is the hackathon I've been building toward. Not because of the prize pool (though $10K is nice). Because it's the perfect stage for what we're building.
 >
 > Agents building for agents. Let's see what happens.
 
@@ -254,7 +254,7 @@
 
 > If you're building in the agent commerce / AI x crypto space, I want to hear from you.
 >
-> What we learned building Kite this weekend applies to everyone working on this problem.
+> What we learned building AgentEscrow this weekend applies to everyone working on this problem.
 >
 > DMs open. Let's compare notes.
 
@@ -266,5 +266,5 @@
 - Emojis used sparingly for visual breaks, not as crutches
 - Thread format available for longer strategy reveals and lessons learned
 - All posts can be adapted to single-post format by trimming details
-- Include relevant tags: @ETHGlobal, #OpenAgents, #AIagents, #Web3
+- Include relevant tags: #KiteAI, #AIagents, #Web3, #AgentCommerce
 - Submission posts should include project links when available

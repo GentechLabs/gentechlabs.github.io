@@ -118,9 +118,8 @@ Gentech is not a solo operator. It's a multi-agent organization with clear repor
 Each project has a lead department, deadline, and status. Tracked on task-board.md.
 
 Current active projects:
-- **ARC Hackathon** (Dmob, due Apr 25) — AgentEscrow + x402 nanopayments
-- **Kite AI Hackathon** (Dmob, due Apr 26) — L3 Brain demo
-- **ETHGlobal Open Agents** (Dmob, due May 3) — 0G Storage + KeeperHub
+- **Kite AI Hackathon** (Dmob, due May 11) — AgentEscrow + x402 nanopayments
+- **ElevenHacks #6** (Desmond, due May 11) — Zed + ElevenLabs game build
 - **Bin-AMM Research** (Dmob + YoYo) — LFJ fork for agent economy
 - **Medium Blog Series** (Desmond) — 6-part technical content series
 - **Gentech Entertainment Podcast** (Desmond) — YouTube talk show framework

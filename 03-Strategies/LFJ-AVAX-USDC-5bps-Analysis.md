@@ -45,6 +45,8 @@
 - **Pool APR (7D):** 88.77%
 - **Platform:** LFJ mobile app
 - **Risk Note:** Moderate-tight range — rebalance if AVAX moves >3% either direction
+- **Crash Scenario (Dadrian):** If AVAX drops to $8.30-9.00, DCA will naturally offset IL through continuous cheaper entries. Rebalance to Curve shape (70 USDC / 30 AVAX) during crash for optimal fee capture.
+- **Current Tool:** Curve shape for slow-moving markets; consider concentrated (bid-ask) during volatility spikes
 - **Tracker Script:** `03-Strategies/scripts/lp-unified-monitor.py` (consolidated watchlist + P&L)
 - **Position File:** `~/.hermes/scripts/.lfj-position-tracker.json`
 
@@ -75,6 +77,7 @@
 4. **TVL Trend** — Steady growth to $3.5M — is this organic?
 5. **Position Sizing** — If Jordan wanted to LP here, what size makes sense?
 6. **Comparison** — How does this compare to other AVAX/USDC pools on LFJ?
+7. **Crash Strategy** — How to adjust strategy if AVAX drops to $8.30-9.00?
 
 ## Jordan's DeFi Context
 - Ex-DeFi strategist and market maker

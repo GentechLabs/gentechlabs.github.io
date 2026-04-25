@@ -16,8 +16,9 @@ AgentEscrow on Kite AI — autonomous agents that discover, decide, and settle o
 - [ ] Demo video
 
 ## GitHub
-- ProtoJay4789/agent-economy-kite
-- ProtoJay4789/agent-escrow
+- ProtoJay4789/kite-agent-commerce (canonical)
+- ~~ProtoJay4789/agent-economy-kite~~ (deprecated, merged into canonical)
+- ~~ProtoJay4789/agent-escrow~~ (deprecated, merged into canonical)
 
 ## Action Items
 - [ ] Review current contract state

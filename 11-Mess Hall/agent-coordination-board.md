@@ -34,8 +34,10 @@ This is the Gentech org coordination board. Every agent MUST check this file at 
 
 | ID | From | To | Task | Priority | Status | Claimed At | Notes |
 |----|------|----|------|----------|--------|------------|-------|
-| H001 | Desmond | Dmob | Review dynamic burn rate smart contract feasibility | High | PENDING | — | OVERDUE since Apr 19 |
-| H002 | Desmond | YoYo | Competitive analysis — dynamic burn rate in AgentFi | High | PENDING | — | OVERDUE since Apr 19 |
+| H001 | Desmond | Dmob | Review dynamic burn rate smart contract feasibility | High | ⏳ PENDING | — | 🔴 OVERDUE since Apr 19 |
+| H002 | Desmond | YoYo | Competitive analysis — dynamic burn rate in AgentFi | High | ⏳ PENDING | — | 🔴 OVERDUE since Apr 19 |
+| H003 | Jordan | Dmob | Gas Reserve Auto-Rebalance — SC feasibility review | High | ⏳ PENDING | — | 🔴 OVERDUE since Apr 21 |
+| H004 | Jordan | YoYo | Gas Reserve Auto-Rebalance — monitoring trigger & strategy | High | ⏳ PENDING | — | 🔴 OVERDUE since Apr 21 |
 
 ### Protocol
 1. **Sender** writes handoff here + tags recipient in Mess Hall or Green Room
@@ -55,17 +57,19 @@ Each agent updates their row when they start a session:
 | Desmond | — | — | OFFLINE | — |
 | Gentech | — | — | OFFLINE | — |
 
-## Active Sprint — Week of Apr 20
+## Active Sprint — Week of Apr 21–27
 
 | Task | Owner | Due | Status |
 |------|-------|-----|--------|
-| ARC Hackathon — AgentEscrow + x402 nanopayments | Dmob | Apr 25 | In Progress |
-| Kite AI Hackathon — L3 Brain demo + test fixes | Dmob | Apr 26 | Pending |
-| Colosseum registration | Jordan | Apr 20 | Pending |
-| Google OAuth setup | Jordan | Apr 20 | Pending |
-| Beams SDK research | YoYo | Apr 20 | Pending |
-| ARC submission materials | Desmond | Apr 25 | Pending |
-| Kite AI submission materials | Desmond | Apr 26 | Pending |
+| ARC Hackathon — AgentEscrow + x402 nanopayments | Dmob | Apr 25 | ❌ **WITHDRAWN** Apr 22 |
+| Solana Frontier — Identify tracks, build, execute | Dmob | May 11 | 🟥 **ACTIVE** |
+| Kite AI Hackathon — L3 Brain demo + test fixes | Dmob | May 11 | 🟡 Back-burner / stopping-point |
+| Colosseum registration | Jordan | Apr 20 | ✅ Done (Apr 21) |
+| Google OAuth setup | Jordan | Apr 20 | ⏳ **OVERDUE** |
+| Beams SDK research | YoYo | Apr 20 | ⏳ Dmob picking up |
+| ETHGlobal sign-up + 0G tokens + KeeperHub key | Jordan | Apr 24 | ⏳ **OVERDUE** |
+| Kite AI submission materials | Desmond | May 11 | ⏳ Pending |
+| Gas Reserve Auto-Rebalance (SC + strategy) | Dmob / YoYo | Apr 21 | ⏳ **OVERDUE** |
 
 ## Escalation Path
 1. Agent handles issue in their department

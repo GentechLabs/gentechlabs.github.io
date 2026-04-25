@@ -13,6 +13,11 @@
 | **Deadline** | ~May 7, 2026 (~16-day window) |
 | **SDK** | ElevenAgents React SDK v1.0 |
 
+## Status: DROPPED (Apr 25)
+**Reason:** 5 days remaining is insufficient for a quality game build. Existing research and concept work will be leveraged for the next ElevenHacks sprint.
+
+---
+
 ## Concept: AAE Trading Arena
 An immersive, audio-driven educational trading simulator built inside Zed. Instead of a static tutorial, users experience historical market crashes and pattern-recognition training coached by the GenTech agents' voices via ElevenLabs.
 

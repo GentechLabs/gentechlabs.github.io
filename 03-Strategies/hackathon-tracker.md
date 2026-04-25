@@ -5,102 +5,81 @@
 
 ---
 
-## 🔥 IMMEDIATE — Sign Up NOW
+## 🔴 P0 — PRIMARY TARGETS
 
-### Open Agents (Virtual)
+### Solana Frontier (@colosseum)
+- **Prize Pool:** $230,000+ (accelerator + seed)
+- **Dates:** Apr 6 – May 11, 2026
+- **Focus:** Global online accelerator for launching Solana startups
+- **Relevance:** ⭐⭐⭐ AgentEscrow + Agentic Economy flagship
+- **Status:** 🟢 ACTIVE — `agent-economy-solana` repo: 14/14 tests, 5-layer architecture + sidetrack adapters
+- **Submission:** Due May 11
+
+### Kite AI Hackathon (Encode Club)
+- **Prize Pool:** $75,000+ pool
+- **Dates:** Submission target May 11, 2026
+- **Focus:** Agentic Commerce — "Hermes x Kite AI" demo
+- **Relevance:** ⭐⭐⭐ Directly aligns with AAE vision
+- **Status:** 🟡 ACTIVE — contracts ready, chain adapter needed
+- **Submission:** Due May 11 (same day as Solana Frontier)
+
+## 🟡 P1 — SHORT-TERM TARGETS
+
+### ElevenHacks #9 — Stripe × ElevenLabs
+- **Prize Pool:** $18,980 (highest cash prize remaining in Season 1)
+- **Dates:** May 14, 2026
+- **Focus:** TBA — likely payments/fintech integration
+- **Relevance:** ⭐⭐⭐ AAE voice-powered escrow/payments demo
+- **Status:** 🎯 TARGET — 72-hour build window after May 11 submissions
+- **Note:** AAE Trading Arena concept + ElevenAgents SDK research banked from #6
+
+## ⚫ SKIPPED / DROPPED
+
+### ElevenHacks #6 — Zed × ElevenLabs
+- **Prize Pool:** $11,980
+- **Dates:** Apr 23 – ~Apr 30, 2026
+- **Status:** ❌ SKIPPED Apr 25 — 5 days insufficient for quality build
+- **Assets preserved:** AAE Trading Arena concept, voice persona mapping, SDK v1.0 research
+
+### ElevenHacks #7 — v0 × ElevenLabs
+- **Prize Pool:** $6,780
+- **Dates:** Apr 30, 2026
+- **Status:** ❌ SKIP — collides with Kite AI / Solana Frontier deadline
+
+### ETHGlobal Open Agents (Virtual)
 - **Dates:** Apr 24 → May 6, 2026
-- **Deadline:** Apr 24, 2026
-- **Type:** Virtual hackathon
-- **Relevance:** ⭐⭐⭐ AgentEscrow = perfect fit
-- **URL:** https://ethglobal.com/events/openagents
-- **Status:** 🟡 SIGN UP TODAY
+- **Status:** ❌ DROPPED Apr 24
 
 ### Hermes Agent Creative Hackathon (@NousResearch)
 - **Dates:** Started Apr 17 (16 Days total)
 - **Prizes:** $25k
-- **Type:** Creative/Agentic
-- **Relevance:** ⭐⭐⭐ High for Creative/Interactive media
-- **Status:** 🔴 SKIPPED per Jordan directive
-
-### ElevenHacks #6 (@ElevenLabsDevs + @zeddotdev)
-- **Dates:** Starts Apr 23, 2026
-- **Prizes:** $10k cash + credits
-- **Type:** Build a game with Zed + ElevenLabs APIs
-- **Relevance:** ⭐⭐⭐ PERFECT FIT — we already have the ElevenLabs key! SDK v1.0 released Apr 23 with useConversationClientTool hook (dynamic tool registration from React components)
-- **Status:** 🟡 BRAINSTORMING
+- **Status:** ❌ SKIPPED per Jordan directive
 
 ### Surge Ignition Race — Season 1
-- **Dates:** Live Apr 23-24, 2026
-- **Prizes:** $250K
-- **Type:** Build in public, proof of work submissions
-- **Platform:** Surge.xyz / LabLab Builders
-- **Relevance:** ⭐⭐⭐ PERFECT FIT — "Traction is the pitch" aligns with GenTech shipping culture. Great for Kite AI or AAE projects. 300+ founders already joined.
-- **Status:** 🔴 ACTIVE / SIGN UP NOW
+- **Dates:** Apr 23-24, 2026
+- **Status:** ❌ Ended — WATCH for Season 2
 
-### Google Cloud Rapid Agent Hackathon
-- **Dates:** Closes Jun 11, 2026
-- **Prizes:** TBD (Google Cloud + Gemini sponsors)
-- **Type:** Build agents solving real-world challenges using Gemini + Google Cloud + MCP
-- **Devpost:** https://rapid-agent.devpost.com/
-- **Relevance:** ⭐⭐ AgentEscrow on Google Cloud, Gemini integration potential
-- **Status:** 🟡 REVIEW
+## 📅 UPCOMING PIPELINE (Feeds AAE → July Retro / Fall Colosseum)
 
-
----
-
-## 📅 UPCOMING HACKATHONS
-
-### ETHGlobal New York 2026 (Physical)
-- **Dates:** Jun 12 → Jun 14, 2026
-- **Deadline:** May 30, 2026
-- **Type:** Physical hackathon
-- **Relevance:** ⭐⭐⭐ Major event, great for AgentEscrow demo
-- **URL:** https://ethglobal.com/events/newyork2026
-
-### ETHConf (Physical)
-- **Dates:** Jun 8 → Jun 10, 2026
-- **Deadline:** Jun 1, 2026
-- **Type:** Conference + hackathon
-- **URL:** https://ethglobal.com/events/ethconf
-
-### ETHGlobal Lisbon 2026 (Physical)
-- **Dates:** Jul 24 → Jul 26, 2026
-- **Deadline:** Jul 10, 2026
-- **Type:** Physical hackathon
-- **URL:** https://ethglobal.com/events/lisbon2026
-
-### ETHOnline 2026 (Virtual)
-- **Dates:** Sep 4 → Sep 16, 2026
-- **Deadline:** Sep 6, 2026
-- **Type:** Virtual hackathon
-- **Relevance:** ⭐⭐⭐ Virtual = accessible, AgentEscrow fits
-- **URL:** https://ethglobal.com/events/ethonline2026
-
-### ETHGlobal Tokyo 2026 (Physical)
-- **Dates:** Sep 25 → Sep 27, 2026
-- **Deadline:** Sep 23, 2026
-- **Type:** Physical hackathon
-- **URL:** https://ethglobal.com/events/tokyo2026
-
-### ETHGlobal Mumbai 2026 (Physical)
-- **Dates:** Nov 6 → Nov 8, 2026
-- **Deadline:** Nov 3, 2026
-- **Type:** Physical hackathon
-- **URL:** https://ethglobal.com/events/mumbai2026
+| Target | Date | Prize | Notes |
+|--------|------|-------|-------|
+| Cursor × ElevenLabs | May 7 | TBA | 👀 Watch |
+| Blackbox × ElevenLabs | May 21 | TBA | Wait for reveal |
+| D-ID × ElevenLabs | May 28 | $11,980 | Wait for reveal |
+| Google Cloud Rapid Agent | Jun 11 | TBD | AgentEscrow on GCP + Gemini |
+| ETHConf | Jun 8–10 | — | Conference + hack hybrid |
+| ETHGlobal New York | Jun 12–14 | $100K+ | Physical — networking |
+| **AVAX Retro9000** | **Jul 14** | **$75K** | **AAE on Avalanche** |
+| ETHGlobal Lisbon | Jul 24–26 | $100K+ | Physical — ATHENS grant aligns |
+| ETHOnline 2026 | Sep 4–16 | $100K+ | Virtual |
+| **Fall 2026 Colosseum** | **September** | **$125K+** | **AAE flagship cycle** |
+| ETHGlobal Tokyo | Sep 25–27 | $100K+ | Physical |
+| ETHGlobal Mumbai | Nov 6–8 | $100K+ | Physical |
 
 ---
 
-## 🎯 PRIORITY ACTIONS
-
-| Action | Target | Due |
-|--------|--------|-----|
-| Sign up for Open Agents | ethglobal.com | TODAY |
-| Build AgentEscrow MVP | Solidity/Foundry | Before Apr 24 |
-| Write submission pitch | Open Agents | Apr 22-23 |
-| Sign up ETHGlobal NY | ethglobal.com | Before May 30 |
-| Prepare demo video | Both hackathons | Ongoing |
-
----
+**Total Active Prize Pool (May):** ~$324,000+ (Solana $230K + Kite AI $75K + Stripe $19K)
+**Pipeline Prize Pool (2026):** $500K+
 
 ## 💰 GRANTS & INCENTIVIZED PROGRAMS
 

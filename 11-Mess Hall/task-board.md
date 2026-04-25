@@ -33,9 +33,14 @@
 - [ ] **[P]** **Solana Frontier** — PRIMARY focus. Identify tracks, build plan, start execution | **Due: May 11** | 🟥 **ACTIVE**
 - [ ] **[P]** Kite AI Hackathon — 14/14 tests ✅ (fixed daily reset bug) | **Due: May 11** | 🟡 Back-burner / stopping-point work
 - [x] **[X]** ETHGlobal Open Agents — DROPPED. Assets salvaged to `10-Archive/Salvaged-Assets/ethglobal-patterns/`. Focus on Solana Frontier.
+- [x] **[X]** Nous Hermes Creative — SKIPPED per Jordan
+- [x] **[X]** Dev3pack Global — SKIPPED per Jordan
 - [ ] **[Q]** Dynamic burn rate smart contract feasibility — on-chain revenue tracking, gas optimization | **Due: TBD** | ⏳ Pending
 - [ ] **[Q]** claude-obsidian integration evaluation — vault linting, hot cache compatibility | **Due: TBD** | ⏳ Pending
 - [ ] **[Q]** Opportunity monitoring cron expansion — grants, audit marketplace, tool alternatives | **Due: TBD** | ⏳ Pending
+
+### HQ / Cross-Team
+- [ ] **[P]** **Platform Orchestration Thesis** — agent brainstorm on network effects, ecosystem integration, squad monetization | **Due: Apr 25** | 🟡 Agents pinged (Strategies, Labs, Entertainment)
 
 ### Jordan — Sign-ups + Ops (HQ)
 - [x] **[P]** Colosseum registration — arena.colosseum.org | **Due: Apr 20** | ✅ Done (Apr 21)
@@ -46,8 +51,9 @@
 
 ### Desmond — Content + Submissions (Entertainment)
 - [x] **[X]** ARC submission materials — README, pitch deck, demo script | **Due: Apr 25** | ❌ **CANCELLED** — ARC withdrawn, assets salvaged to `arc-salvage-log.md`
-- [ ] **[Q]** Kite AI submission materials — README, demo outline | **Due: Apr 26** | ⏳ Pending
+- [ ] **[Q]** Kite AI submission materials — README, demo outline | **Due: May 11** | ⏳ Pending
 - [x] **[X]** ETHGlobal submission materials — DROPPED. See `10-Archive/Salvaged-Assets/ethglobal-patterns/`.
+- [ ] **[Q]** Surge Ignition Race — monitor Season 2 launch, prepare GenTech Hub profile | **Due: TBD** | ⏳ Pending
 - [ ] **[Q]** Gentech evolution documentation — multi-agent story, customizations, originality | **Due: TBD** | ⏳ Pending
 - [ ] **[Q]** Bin-AMM content series — explainer thread on LFJ Liquidity Book, why Gentech is building in-house, custom LP visualizations | **Due: Post-hackathon sprint** | ⏳ Pending | Source: Dmob scoping doc (`/root/aae-contracts/docs/bin-amm-scoping.md`)
 

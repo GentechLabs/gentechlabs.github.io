@@ -2,7 +2,7 @@
   "meta": {
     "version": "unified-v1",
     "updated_by": "Desmond",
-    "updated_at": "2026-04-24T14:35:00Z",
+    "updated_at": "2026-04-24T19:00:00Z",
     "update_source": "screenshot_rebalance"
   },
   "pool": {
@@ -22,11 +22,13 @@
     "entry_total_usd": 83.92,
     "shape": "Curve",
     "range": {
-      "low": 9.26,
-      "high": 9.46,
-      "updated_at": "2026-04-24T14:35:00Z"
+      "low": 9.33,
+      "high": 9.52,
+      "updated_at": "2026-04-24T19:00:00Z"
     }
   },
+  "range_low": 9.33,
+  "range_high": 9.52,
   "snapshots": [
     {
       "date": "2026-04-24",
@@ -57,6 +59,21 @@
       "apr_7d": null,
       "status": "IN_RANGE",
       "source": "screenshot_rebalance"
+    },
+    {
+      "date": "2026-04-24",
+      "avax_price": 9.43769,
+      "deposit_balance_usd": 83.37,
+      "avax_holdings": 3.333,
+      "usdc_holdings": 51.91,
+      "fees_24h_usd": null,
+      "claimable_rewards_usd": 0.00755,
+      "pool_tvl_usd": null,
+      "pool_vol_24h_usd": null,
+      "pool_fees_24h_usd": null,
+      "apr_7d": null,
+      "status": "IN_RANGE",
+      "source": "screenshot_rebalance"
     }
   ],
   "history": [
@@ -64,6 +81,24 @@
     {"date": "2026-04-21", "value_usd": 28.66, "event": "Snapshot"},
     {"date": "2026-04-22", "value_usd": 83.92, "event": "Manual Sync / Photo Update"},
     {"date": "2026-04-24", "value_usd": 83.37, "event": "Screenshot Update"},
-    {"date": "2026-04-24", "value_usd": 83.14, "event": "Rebalance — Range updated 9.26–9.46"}
-  ]
+    {"date": "2026-04-24", "value_usd": 83.14, "event": "Rebalance — Range updated 9.26–9.46"},
+    {"date": "2026-04-24", "value_usd": 83.37, "event": "Rebalance — Range updated 9.33–9.52"}
+  ],
+  "strategy_notes": {
+    "worst_case_range": "8.30\u20139.00",
+    "dca_plan": "If AVAX drops to 8.30\u20139.00, DCA strategy absorbs impermanent loss via accumulated fees + dollar-cost averaging into lower prices.",
+    "shape_strategy": {
+      "current": "Curve",
+      "current_reason": "Market is slow/ranging \u2014 Curve (bell curve) maximizes fee capture near current price",
+      "crash_protocol": {
+        "trigger": "Price breaks below ~9.10 and trending down",
+        "new_shape": "Bid-Ask",
+        "new_shape_reason": "Bid-Ask concentrates liquidity at edges \u2014 as price trends down, you accumulate AVAX at lower prices (DCA via IL)",
+        "allocation": "70 USDC / 30 AVAX \u2014 more USDC = more buying power as price drops",
+        "range_adjustment": "Widen toward 8.30\u20139.00 support zone"
+      }
+    },
+    "added_by": "Jordan",
+    "added_at": "2026-04-24T19:00:00Z"
+  }
 }

@@ -1,0 +1,58 @@
+{
+  "pool_address": "0x864d4e5ee7318e97483db7eb0912e09f161516ea",
+  "chain": "avalanche",
+  "rpc_url": "https://api.avax.network/ext/bc/C/rpc",
+  "token0": {
+    "symbol": "AVAX",
+    "address": "0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7",
+    "decimals": 18
+  },
+  "token1": {
+    "symbol": "USDC",
+    "address": "0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E",
+    "decimals": 6
+  },
+  "bin_step": 10,
+  "fee_tier_bps": 5,
+  "position": {
+    "total_usd": 83.92,
+    "token0_amount": 3.762,
+    "token1_amount": 48.37,
+    "range_low": 9.33,
+    "range_high": 9.52,
+    "shape": "curve"
+  },
+  "milestones": [
+    {"tier": 1, "label": "Scout", "daily_fees": 3.0, "description": "Entry rank \u2014 basic strategies unlocked"},
+    {"tier": 2, "label": "Scout+", "daily_fees": 5.0, "description": "Consistent earner \u2014 tighter ranges unlocked"},
+    {"tier": 3, "label": "Raider", "daily_fees": 8.0, "description": "Intermediate \u2014 SPOT shape unlocked"},
+    {"tier": 4, "label": "Raider+", "daily_fees": 10.0, "description": "Advanced single-pool \u2014 bidirectional unlocked"},
+    {"tier": 5, "label": "Warlord", "daily_fees": 15.0, "description": "Multi-pool ready \u2014 portfolio strategies"},
+    {"tier": 6, "label": "Warlord+", "daily_fees": 20.0, "description": "High capital efficiency \u2014 custom ranges"},
+    {"tier": 7, "label": "Sovereign", "daily_fees": 55.0, "description": "Squad-level coordination \u2014 treasury mgmt"},
+    {"tier": 8, "label": "Freedom", "daily_fees": 200.0, "description": "Freedom milestone \u2014 custom strategy creation"}
+  ],
+  "compound_threshold_usd": 50.0,
+  "dca": {
+    "base_amount": 50,
+    "boost_amount": 15,
+    "boost_trigger_efficiency": 50,
+    "day_of_week": 0,
+    "enabled": true,
+    "mode": "hybrid"
+  },
+  "quiet_hours": {
+    "start": 23,
+    "end": 6,
+    "timezone_offset": -4
+  },
+  "squad": {
+    "squad_id": null,
+    "contribution_pct": 100.0
+  },
+  "alert_rules": {
+    "silent_if": ["in_range", "efficiency_ok", "no_action_needed"],
+    "alert_if": ["out_of_range", "efficiency_low", "milestone_hit", "compound_ready", "dca_day"],
+    "critical_if": ["price_crash", "il_severe"]
+  }
+}

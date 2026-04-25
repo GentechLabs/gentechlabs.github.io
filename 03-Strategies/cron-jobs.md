@@ -6,45 +6,56 @@
 ---
 
 ## 📊 Crypto Watchlist (DexScreener)
-**Job ID:** `bce87f59b79e`
-**Schedule:** `0 * * * *` (hourly)
-**Model:** `kimi-k2.6` | **Skill:** none (script-driven)
-**Status:** ✅ Active
+**Job ID:** `faed4f588aef` (YoYo — Unified Watchlist + LP Monitor)
+**Schedule:** `15 8,12,16,20 * * *` (4×/day UTC)
+**Model:** `kimi-k2.6` | **Skills:** `lp-position-tracker`, `crypto-watchlist-monitor`
+**Status:** ✅ Active — sole watchlist cron
 
-**Scope:** Silent price monitoring using DexScreener pool data. Only alerts on significant moves.
+**Scope:** Tracks Jordan's holdings + LP position health. Silent unless significant moves or LP out of range.
 
-**Logic:**
-- Fetches BTC, ETH, SOL, LINK, AVAX, TAO, BEAM, XAUt from DexScreener search API
-- Picks highest-liquidity USD-stable pair for each token
-- Falls back to CoinGecko if DexScreener has no coverage
-- Compares 24h change against 3% threshold
-- Tracks last-reported prices to avoid spam on sustained moves
+**Tokens monitored:**
+`BTC, ETH, SOL, LINK, AVAX, TAO, XAUt, BEAM`
+
+**Data flow:**
+- DexScreener search API → highest-liquidity USD-stable pair per token
+- CoinGecko fallback if DexScreener has no coverage
+- LP pool data from DexScreener (AVAX/USDC TraderJoe v2.2)
+
+**Alert threshold:** 3% daily move for watchlist | Out-of-range or efficiency < 75% for LP
 
 **Silent rules:**
 - All moves < 3% → no message
 - Same token already reported today at similar price → no message
+- In-range LP + efficiency ≥ 75% → 🤐 Silent
 - Script error → ⚠️ alert
 
-**Script:** `~/.hermes/scripts/dexscreener-watchlist.py`
-**State:** `~/.hermes/scripts/.watchlist-state.json`
+**Scripts:**
+- Watchlist: `~/.hermes/scripts/dexscreener-watchlist.py`
+- LP tracker: `~/.hermes/scripts/lp-unified-monitor.py`
+- State: `~/.hermes/scripts/.watchlist-state.json`
+- LP state: `~/.hermes/scripts/.lfj-position-tracker.json`
+
+> **Note:** A deprecated DMOB watchlist script (`crypto-watchlist.py`) using CoinMarketCap with a generic 20-token list has been archived. Only YoYo's unified watchlist remains active.
 
 ---
 
-## 💹 LP Monitor
-**Job ID:** `faed4f588aef`
+## 💹 LP Monitor (Unified with Watchlist)
+**Job ID:** `faed4f588aef` (same as above — unified report)
 **Schedule:** `15 8,12,16,20 * * *` (4×/day UTC)
-**Model:** `kimi-k2.6` | **Skill:** `crypto-lp-monitoring`
-**Status:** ✅ Active — LP-only since Apr 24 split
+**Model:** `kimi-k2.6` | **Skills:** `lp-position-tracker`, `crypto-watchlist-monitor`
+**Status:** ✅ Active — merged into unified report since Apr 24
 
-**Scope:** LFJ AVAX/USDC position health only. No watchlist prices.
+**Scope:** LFJ AVAX/USDC position health + watchlist prices in a single report.
 
 **Report includes:**
-1. AVAX price vs range (loaded dynamically from tracker JSON)
-2. Fee efficiency (%)
-3. Pool health (TVL, volume, APR from DexScreener)
-4. Position status: in-range / out-of-range / low-efficiency
+1. Watchlist prices + 24h moves for all tracked tokens
+2. AVAX price vs LP range (loaded dynamically from tracker JSON)
+3. Fee efficiency (%)
+4. Pool health (TVL, volume, APR from DexScreener)
+5. Position status: in-range / out-of-range / low-efficiency
 
 **Alert Logic:**
+- Watchlist token moves ≥ 3% in 24h → 🚨 Alert
 - In range + efficiency ≥ 75% → 🤐 Silent
 - In range + efficiency < 75% → ⚠️ "Consider rebalancing"
 - Out of range → 🚨 URGENT

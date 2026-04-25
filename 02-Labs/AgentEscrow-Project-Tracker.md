@@ -4,7 +4,7 @@
 **Status:** Active — modular SDK strategy adopted
 **Repos:** 
 - https://github.com/ProtoJay4789/agent-escrow (L5 foundation)
-- https://github.com/ProtoJay4789/ethglobal-open-agents (L3+L4)
+- https://github.com/ProtoJay4789/kite-agent-commerce (L3+L4)
 **Started:** April 16, 2026
 
 ## Modular SDK Strategy (Apr 19 Decision)
@@ -13,9 +13,9 @@
 
 | Layer | SDK | Hackathon Target |
 |---|---|---|
-| L3 (Brain) | Beam Cloud (stateful bots) | ETHGlobal Open Agents |
-| L4 (Enforcement) | GenLayer (subjective consensus) | ETHGlobal Open Agents |
-| L5 (Escrow) | Solidity/Foundry → GenLayer hybrid | Arc Hackathon + ETHGlobal |
+| L3 (Brain) | Beam Cloud (stateful bots) | Kite AI Global |
+| L4 (Enforcement) | GenLayer (subjective consensus) | Kite AI Global |
+| L5 (Escrow) | Solidity/Foundry → GenLayer hybrid | Arc Hackathon + Kite AI |
 | L2 (Risk Intel) | Beam Cloud (fast inference) | Future |
 | L1 (Fee LP) | Solana/AVAX native | AVAX Retro9000 |
 

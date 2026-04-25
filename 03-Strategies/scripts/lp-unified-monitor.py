@@ -1,11 +1,14 @@
 #!/usr/bin/env python3
 """
-Unified LP Monitor — LFJ AVAX/USDC Pool
+Unified LP Monitor — LFJ AVAX/USDC Pool + Gas-Aware Chain Adapter
 Combines range monitoring + compound milestone tracking in one script.
 
 Features:
   - Range monitoring (price vs range, fee efficiency, quiet hours)
   - Compound milestone tracking (fees earned, days to next milestone, DCA schedule)
+  - Gas cost estimation per chain (AVAX, Base, Solana)
+  - Health scorer with gas-aware scoring
+  - Dynamic DCA pacing (adjust weekly cap based on fee acceleration)
   - Birdeye x402 primary → DexScreener fallback → on-chain RPC fallback
   - State persistence across runs for cumulative tracking
 
@@ -20,10 +23,34 @@ import urllib.request
 from datetime import datetime, timezone, timedelta
 from typing import Optional
 
+# ── Chain Adapters ────────────────────────────────────────────────────────────
+CHAIN_ADAPTERS = {
+    "avalanche": {
+        "rpc_url": "https://api.avax.network/ext/bc/C/rpc",
+        "chain_id": 43114,
+        "native_symbol": "AVAX",
+        "gas_oracle": "https://api.gassless.io/v1/gas/avalanche",
+        "deployer_address": "0x0000000000000000000000000000000000000000",
+    },
+    "base": {
+        "rpc_url": "https://mainnet.base.org",
+        "chain_id": 8453,
+        "native_symbol": "ETH",
+        "gas_oracle": "https://api.gassless.io/v1/gas/base",
+        "deployer_address": "0x0000000000000000000000000000000000000000",
+    },
+    "solana": {
+        "rpc_url": "https://api.mainnet-beta.solana.com",
+        "chain_id": "solana-mainnet",
+        "native_symbol": "SOL",
+        "gas_oracle": "https://api.gassless.io/v1/gas/solana",
+        "deployer_address": "11111111111111111111111111111111",
+    },
+}
+
 # ── Config ──────────────────────────────────────────────────────────────────
 POOL_ADDRESS = "0x864d4e5ee7318e97483db7eb0912e09f161516ea"
 CHAIN = "avalanche"
-RPC_URL = "https://api.avax.network/ext/bc/C/rpc"
 
 STATE_FILE = os.path.expanduser("~/.hermes/scripts/.lfj-unified-state.json")
 POSITION_FILE = os.path.expanduser("~/.hermes/scripts/.lfj-position-tracker.json")
@@ -32,7 +59,7 @@ POSITION_FILE = os.path.expanduser("~/.hermes/scripts/.lfj-position-tracker.json
 AVAX_ADDRESS = "0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7"
 USDC_USDC_ADDRESS = "0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E"
 
-# Data source
+# DexScreener config
 DEXSCREENER_URL = f"https://api.dexscreener.com/latest/dex/pairs/{CHAIN}/{POOL_ADDRESS}"
 
 # Quiet hours (Eastern Time)
@@ -70,6 +97,33 @@ try:
     BIRDEYE_AVAILABLE = True
 except ImportError:
     pass
+
+# ── Gas Oracles ─────────────────────────────────────────────────────────────
+def fetch_gas_cost(chain: str) -> dict:
+    """Fetch current gas cost in USD for chain. Returns {cost_usd, gas_price_gwei, optimized_route, cache_ms}."""
+    import time
+    adapter = CHAIN_ADAPTERS.get(chain)
+    if not adapter: return {"cost_usd": 0.0, "gas_price_gwei": 0, "optimized_route": "direct", "cache_ms": 0, "error": f"Unsupported chain: {chain}"}
+    
+    now = int(time.time() * 1000)
+    cache_ms = 30000  # Cache gas for 30s
+    
+    try:
+        url = adapter["gas_oracle"]
+        req = urllib.request.Request(url, headers={"User-Agent": "Gentech-Labs/1.0"})
+        with urllib.request.urlopen(req, timeout=5) as resp:
+            data = json.loads(resp.read().decode())
+        cost = float(data.get("cost_usd", data.get("estimated_cost", 0)))
+        gwei = float(data.get("gas_price_gwei", data.get("gas_price", 0)))
+        route = data.get("recommended_route", "direct")
+        return {"cost_usd": cost, "gas_price_gwei": gwei, "optimized_route": route, "cache_ms": now, "error": None}
+    except Exception as e:
+        fallbacks = {"avalanche": 0.10, "base": 0.50, "solana": 0.20}
+        return {"cost_usd": fallbacks.get(chain, 0.10), "gas_price_gwei": 0, "optimized_route": "direct", "cache_ms": now, "error": str(e)}
+
+def get_chain_from_pool(pool_address: str) -> str:
+    """Detect chain from pool address or config. Default to AVAX."""
+    return CHAIN
 
 # ── Data Fetchers ───────────────────────────────────────────────────────────
 
@@ -180,7 +234,25 @@ def load_range() -> tuple:
         return (9.33, 9.52)
 
 def load_state() -> dict:
-    default = {"out_of_range_since": None, "last_alert": None, "last_price": None, "last_check": None, "tracking_started": None, "total_fees_earned_usd": 0.0, "total_days_in_range": 0.0, "last_in_range_check": None, "current_milestone_idx": 0, "last_compound_date": None, "last_dca_date": None, "compound_events": [], "daily_fee_log": []}
+    default = {
+        "out_of_range_since": None,
+        "last_alert": None,
+        "last_price": None,
+        "last_check": None,
+        "tracking_started": None,
+        "total_fees_earned_usd": 0.0,
+        "total_days_in_range": 0.0,
+        "last_in_range_check": None,
+        "current_milestone_idx": 0,
+        "last_compound_date": None,
+        "last_dca_date": None,
+        "compound_events": [],
+        "daily_fee_log": [],
+        "dynamic_dca_enabled": True,
+        "dca_cap": DCA_AMOUNT,
+        "dca_reason": "Baseline: avg <$2/day → $50/wk DCA",
+        "dca_last_adjusted": None,
+    }
     try:
         with open(STATE_FILE, "r") as f:
             state = json.load(f)
@@ -219,34 +291,107 @@ def calc_apr_from_volume(pool: dict) -> float:
     return round(((volume_24h * fee_rate) / liquidity) * 100 * 365, 1)
 
 def update_compound_tracking(state: dict, in_range: bool, est_fees: float) -> dict:
+    """Update compound tracking and add DCA pacing logic. Returns updated state."""
     eastern = timezone(timedelta(hours=-4))
     now = datetime.now(eastern)
     if state["tracking_started"] is None: state["tracking_started"] = now.isoformat()
     if in_range:
         state["total_days_in_range"] = round(state["total_days_in_range"] + (1.0/144.0), 4)
         state["total_fees_earned_usd"] = round(state["total_fees_earned_usd"] + (est_fees * (1.0/144.0)), 4)
+    
+    # Log daily fee for dynamic DCA analysis
+    if len(state.get("daily_fee_log", [])) >= 7:
+        state["daily_fee_log"] = state["daily_fee_log"][1:] + [est_fees]
+    else:
+        state.setdefault("daily_fee_log", []).append(est_fees)
+    
+    # Dynamic DCA pacing — adjust weekly amount based on fee acceleration
+    if state.get("dynamic_dca_enabled", False) and len(state.get("daily_fee_log", [])) >= 7:
+        fees_7d = state["daily_fee_log"][-7:]
+        avg = sum(fees_7d) / 7
+        if avg >= 5.0:  # If avg daily fees >= $5, increase DCA cap to $100/week
+            state["dca_cap"] = 100.0
+            state["dca_reason"] = "Fee acceleration enabled: avg $5+/day → $100/wk DCA"
+        elif avg >= 2.0:  # else if >= $2/day, keep $75/wk
+            state["dca_cap"] = 75.0
+            state["dca_reason"] = "Steady yield: avg $2–5/day → $75/wk DCA"
+        else:  # else $50/wk baseline
+            state["dca_cap"] = 50.0
+            state["dca_reason"] = "Baseline: avg <$2/day → $50/wk DCA"
+        # Log adaptive decision
+        state["dca_last_adjusted"] = now.isoformat()
+    
     for i, ms in enumerate(MILESTONES):
         if est_fees >= ms["daily_fees"]: state["current_milestone_idx"] = i
         else: break
     return state
 
+def calc_health_score(in_range: bool, efficiency: float, est_fees: float, gas_cost_usd: float, pool_liquidity_usd: float) -> dict:
+    """Calculate composite health score with gas-aware scoring."""
+    composites = []
+    
+    # In range score
+    in_range_score = 100 if in_range else (50 if efficiency >= 25 else 20)
+    composites.append(("In Range", in_range_score))
+    
+    # Fee growth score (top out at 100, linear up to $5/day)
+    fee_growth_score = min(100, int(est_fees / 0.5 * 10))
+    composites.append(("Fee Growth", fee_growth_score))
+    
+    # Gas efficiency score
+    gas_score = 100 if gas_cost_usd <= 0.25 else (50 if gas_cost_usd <= 0.5 else 20)
+    composites.append(("Gas Efficiency", gas_score))
+    
+    # Pool liquidity score
+    pool_liquidity_score = 100 if pool_liquidity_usd >= 100000 else (60 if pool_liquidity_usd >= 50000 else 30)
+    composites.append(("Pool Liquidity", pool_liquidity_score))
+    
+    composite_score = sum(s for _, s in composites) // len(composites)
+    
+    recommendations = []
+    if not in_range: recommendations.append("🚨 Rebalance position back into range")
+    if gas_cost_usd > 0.50: recommendations.append("⚠️ Wait for gas drop (<$0.50) before compound/claim")
+    if est_fees < 1.0: recommendations.append("💰 Consider increasing DCA to boost fee accrual")
+    if composite_score < 60: recommendations.append("📊 Review pool health and range configuration")
+    
+    return {
+        "composite_score": composite_score,
+        "components": {
+            "in_range_score": in_range_score,
+            "fee_growth_score": fee_growth_score,
+            "gas_efficiency_score": gas_score,
+            "pool_liquidity_score": pool_liquidity_score,
+        },
+        "recommendations": recommendations,
+    }
+
 def format_report(price, in_range, efficiency, pool, state, birdeye, est_fees, apr, range_low, range_high) -> str:
+    """Format report with gas-aware health scoring, chain adapter info, and dynamic DCA."""
     eastern = timezone(timedelta(hours=-4))
     now_str = datetime.now(eastern).strftime("%I:%M %p EDT")
+    
+    # Fetch gas cost per chain
+    chain = get_chain_from_pool(POOL_ADDRESS)
+    gas = fetch_gas_cost(chain)
+    
+    # Health scorer
+    pool_liquidity = pool.get("liquidity_usd", 0)
+    health = calc_health_score(in_range, efficiency, est_fees, gas.get("cost_usd", 0), pool_liquidity)
+    
+    # Dynamic DCA status
+    dca_cap = state.get("dca_cap", DCA_AMOUNT)
+    dca_reason = state.get("dca_reason", "Baseline: avg <$2/day → $50/wk DCA")
+    
     status = "🚨 OUT OF RANGE" if not in_range else ("⚠️ LOW EFFICIENCY" if efficiency < 50 else "✅ ALL GOOD")
-    source_map = {
-        "onchain": "⛓️ On-chain",
-        "birdeye": "🐦 Birdeye",
-        "dexscreener": "📊 DexScreener"
-    }
+    source_map = {"onchain": "⛓️ On-chain", "birdeye": "🐦 Birdeye", "dexscreener": "📊 DexScreener"}
     source_tag = source_map.get(pool.get("source", "dexscreener"), "📊 " + pool.get("source", "DexScreener"))
-    # Handle missing on-chain fields gracefully
     vol_str = f"${pool['volume_24h']:,.0f}" if pool.get("volume_24h") else "N/A (on-chain fallback)"
     liq_str = f"${pool['liquidity_usd']:,.0f}" if pool.get("liquidity_usd") else "N/A"
     chg_str = f"{pool['price_change_24h']:+.1f}%" if pool.get("price_change_24h") is not None else "N/A"
+    
     lines = [
         f"**AVAX/USDC LP Monitor** — {now_str}",
-        f"Data: {source_tag}",
+        f"Data: {source_tag} | Chain: {chain.title()} ({CHAIN_ADAPTERS.get(chain, {}).get('chain_id', 'N/A')})",
         f"",
         f"**Status:** {status}",
         f"**AVAX Price:** ${price:.4f}",
@@ -259,12 +404,28 @@ def format_report(price, in_range, efficiency, pool, state, birdeye, est_fees, a
         f"- Price Δ24h: {chg_str}",
         f"- Est. APR: {apr:.1f}%",
         f"",
+        f"**Gas & Health:**",
+        f"- Gas Cost: {'$' + str(gas['cost_usd']) if not gas.get('error') else 'ERR'}",
+        f"- Optimized Route: {gas.get('optimized_route', 'direct')}",
+        f"- Composite Health: {health['composite_score']}/100",
+        f"",
         f"**Compound Tracker:**",
         f"- Est. Daily Fees: ${est_fees:.2f}",
         f"- Cumulative Fees: ${state['total_fees_earned_usd']:.2f}",
         f"- Days in Range: {state['total_days_in_range']:.1f}",
         f"- Current Milestone: {MILESTONES[state['current_milestone_idx']]['label']} ✅",
+        f"",
+        f"**Dynamic DCA:**",
+        f"- Weekly Cap: ${dca_cap}",
+        f"- Reason: {dca_reason}",
+        f"",
     ]
+    
+    if health["recommendations"]:
+        lines.append("**Recommendations:**")
+        for r in health["recommendations"]:
+            lines.append(f"- {r}")
+    
     return "\n".join(lines)
 
 def main():

@@ -21,8 +21,8 @@ tags: [jordan, profile, schedule, preferences]
 ## Primary Projects
 1. **Kite Agent Commerce** — main focus
 2. **Hackathons**:
-   - ETHGlobal Open Agents ($50K, Apr 23)
-   - ElevenHacks #5 ($10K)
+   - Kite AI Hackathon (May 11)
+   - ElevenHacks #6 (May 11)
 
 ## Content Style
 - Data-first, builder energy

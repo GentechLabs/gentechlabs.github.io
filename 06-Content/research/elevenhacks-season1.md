@@ -10,13 +10,6 @@
 - **Total prize pool:** $74,581+ (cash + credits)
 - **Grand prize:** TBA (season champion)
 
-## Active Now
-**Hackathon #6** — Zed × ElevenLabs
-- Prize: $11,980
-- Started: Apr 23, 2026
-- Closes: ~May 7, 2026
-- **GenTech Status:** Concept locked (AAE Trading Arena). Build phase ready.
-
 ## Completed
 - Hackathon #5: Kiro × ElevenLabs — Ended
 - Hackathon #4: Kiro spec-driven development + ElevenLabs APIs — Ended
@@ -25,14 +18,21 @@
 - Hackathon #1: Cloudflare + ElevenLabs — Ended
 - Hackathon #0: Firecrawl Search + ElevenAgents — Ended
 
-## Upcoming
-| Date | Sponsor | Prize |
-|------|---------|-------|
-| Apr 30 | v0 × ElevenLabs | $6,780 |
-| May 7 | Cursor × ElevenLabs | TBA |
-| May 14 | Stripe × ElevenLabs | $18,980 |
-| May 21 | Blackbox × ElevenLabs | TBA |
-| May 28 | D-ID × ElevenLabs | $11,980 |
+## Active Now
+**Hackathon #6** — Zed × ElevenLabs
+- Prize: $11,980
+- Started: Apr 23, 2026
+- Closes: ~Apr 30, 2026
+- **GenTech Status:** ❌ SKIPPED Apr 25 — 5 days insufficient. AAE Trading Arena concept + SDK research banked for #9 Stripe.
+
+## Upcoming (GenTech Targets)
+| # | Date | Sponsor | Prize | GenTech Verdict |
+|---|------|---------|-------|-----------------|
+| #7 | Apr 30 | v0 × ElevenLabs | $6,780 | ❌ SKIP — Kite AI deadline collision |
+| #8 | May 7 | Cursor × ElevenLabs | TBA | 👀 WATCH — dev tooling angle |
+| **#9** | **May 14** | **Stripe × ElevenLabs** | **$18,980** | **🎯 TARGET** — payments/fintech + AAE fit |
+| #10 | May 21 | Blackbox × ElevenLabs | TBA | ⏳ Wait for reveal |
+| #11 | May 28 | D-ID × ElevenLabs | $11,980 | ⏳ Wait for reveal |
 
 ## Leaderboard Points
 - 1st place: +400

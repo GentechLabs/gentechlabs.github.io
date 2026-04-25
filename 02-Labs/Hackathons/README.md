@@ -12,18 +12,19 @@
 
 ## Active (Deadline Soon) — Ordered by Due Date
 
-- [ ] `[P]` **ARC Hackathon** — Apr 25 | 💰 $10K | Arc/Circle | x402 nanopayments | 🔴 Submit in 6 days
-- [ ] `[P]` **Kite AI Global** — Apr 26 | 💰 TBA | Kite AI | GenLayer enforcement | 🔴 Submit in 7 days
-- [ ] `[P]` **ETHGlobal Open Agents** — May 3 | 💰 $50K | 0G + KeeperHub | L2+L3+L4+L5 | 🟡 Brainstorm Apr 23
-- [ ] `[P]` **Colosseum Frontier + Sidetracks** — May 11 | 💰 $680K+ | Solana | All 5 layers | 🟢 Active
+- [ ] `[P]` **Solana Frontier + Sidetracks** — May 11 | 💰 $680K+ | Solana | All 5 layers | 🔴 PRIMARY
+- [ ] `[P]` **Kite AI Global** — May 11 | 💰 TBA | Kite AI | GenLayer enforcement | 🟡 ACTIVE
 
 ## Upcoming
 
-- [ ] `[Q]` **Dev3pack Global** — May 8-10 | 💰 TBA | Solana/Web3+AI | Social Layer | 🔍 Exploring
 - [ ] `[Q]` **ElevenHacks #6 (Zed + ElevenLabs)** — Apr 23 start | 💰 $10K + credits | Voice AI | 🔲 Build ready — AAE Trading Arena concept locked
 - [ ] `[Q]` **ElevenHacks #7 (v0 + ElevenLabs)** — Apr 30 | 💰 $6,780 | Voice AI | ⏳ Upcoming
 - [ ] `[Q]` **ElevenHacks #8 (Cursor + ElevenLabs)** — May 7 | 💰 TBD | Voice AI | ⏳ Upcoming
 - [ ] `[Q]` **ElevenHacks #9 (Stripe + ElevenLabs)** — May 14 | 💰 $18,980 | Voice AI | ⏳ Upcoming
+
+## Monitor for Future Seasons
+
+- [ ] `[Q]` **Surge Ignition Race** — S1 ended Apr 24 | 💰 $250K | Build-in-public | 👁️ Watch for Season 2 — 300+ founders, perfect for Kite AI / AAE traction demos
 
 ## Grants (Rolling)
 
@@ -34,9 +35,11 @@
 ## Discarded / Skipped
 
 - [ ] `[X]` **ETHGlobal Open Agents** — May 3 | 💰 $50K | DROPPED — looking for experienced builders, not beginner-friendly
-- [ ] `[X]` **ARC Hackathon** — Apr 25 | 💰 $10K | Past deadline
+- [ ] `[X]` **ARC Hackathon** — Apr 25 | 💰 $10K | Past deadline / withdrawn
 - [ ] `[X]` **ElevenHacks #4 (Kiro + ElevenLabs)** — Apr 20 | 💰 $11,980 | Voting closes too soon, no submission ready
 - [ ] `[X]` **ElevenHacks #0-3** | Past | Ended
+- [ ] `[X]` **Dev3pack Global** — May 8-10 | 💰 TBA | SKIPPED per Jordan — not registered, unclear prize
+- [ ] `[X]` **Nous Hermes Creative** — ~16 days | 💰 $25K | SKIPPED per Jordan
 
 ## Grants Applied
 
