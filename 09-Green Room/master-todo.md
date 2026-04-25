@@ -30,14 +30,29 @@
 **Spec:** `01-Agency/AAE-Signal-Spec-Structured.md` (40+ fields, 9 sections)
 
 - [ ] **YoYo** — Optimize LP Monitor cron (`faed4f588aef`) to fetch all structured fields
-- [ ] **YoYo** — Optimize DeFi Milestone tracker with new rank ladder ($3→$200/day)
+- [x] **YoYo** — Draft Personal Goal Engine spec (`03-Strategies/Personal-Goal-Engine-Spec.md`) ✅
+- [ ] **YoYo** — Update AAE Signal Spec to v2.1 with PGE fields ✅
 - [ ] **DMOB** — Scaffold contract structs (Position, Range, Yield, Milestone, Alert)
 - [ ] **DMOB** — Design rank-gated access control (Scout → Freedom)
+- [ ] **DMOB** — PGE contract structs + functions (handoff: `09-Green Room/handoff-pge-dmob-contracts.md`)
 - [ ] **DMOB** — Auto-compound trigger smart contract logic
 - [ ] **Desmond** — Alert severity microcopy (SILENT/LOW/HIGH/CELEBRATE)
 - [ ] **Desmond** — Rank tier UX + unlock descriptions
 - [ ] **Desmond** — Milestone shareable cards + empty state copy
+- [ ] **Desmond** — PGE celebration/reflection/module copy (handoff: `09-Green Room/handoff-pge-desmond-content.md`)
 - [ ] **Gentech** — Review + consolidate reports from all three agents
+
+## 🟢 P2 — Personal Goal Engine (New)
+**Source:** Jordan approved education layer + personalized ladders  
+**Spec:** `03-Strategies/Personal-Goal-Engine-Spec.md`
+
+- [x] Draft full spec ✅
+- [x] AAE Signal Spec v2.1 extension ✅
+- [ ] DMOB: Solidity structs + functions
+- [ ] Desmond: Celebration/reflection/module copy
+- [ ] YoYo: Cron integration for PGE signals
+- [ ] Gentech: Front-end wireframes / review
+- [ ] Jordan: Review spec, approve priority vs Solana Frontier
 
 ## ⚫ SKIPPED / DROPPED
 

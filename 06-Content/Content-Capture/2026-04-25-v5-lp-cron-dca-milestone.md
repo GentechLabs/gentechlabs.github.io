@@ -92,11 +92,21 @@ Dogfood first. Ship second.
 
 ## Next Steps
 
+- [x] LP cron job optimized — **Jordan approved Apr 25**
+- [x] Frontend Impact Principle logged to brain — *"As we add more layers, consider front end / DeFi milestone tracker impact"*
 - [ ] Get technical specs from DMOB on V5 milestone architecture
 - [ ] Get LP cron job logic / code snippets for B-roll
 - [ ] Get DCA engine strategy parameters
 - [ ] Record screen capture of dashboards in action
 - [ ] Move status to "Ready to Record" once specs are in
+
+---
+
+## Jordan Approval Note
+
+> *"You guys did a great job optimizing the cron job. It looks fantastic. This is not only something that our users are gonna love, but our community."* — Jordan, Apr 25 2026
+
+This validates the dogfooding angle. Jordan is living the "User #1" story in real time. When we cut the YouTube short, this voice note is gold — authentic, unscripted, and exactly the reaction we want from future users.
 
 ---
 

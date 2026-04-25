@@ -216,12 +216,29 @@ efficiency = abs(position - 0.5) * 2 * 100
 
 ---
 
+## PGE Extension (v2.1)
+
+Personal Goal Engine fields added to Position and Milestone signals:
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `goal_profile_id` | string | Links to user's GoalProfile |
+| `personal_daily_target` | float | User's current tier daily target (personalized) |
+| `personal_progress_pct` | float | Progress to THEIR next tier (not default ladder) |
+| `goal_readiness_score` | float | 0.0–4.0 |
+| `celebration_queue` | string[] | Pending celebrations to render |
+| `reflection_prompt` | string \| null | Active reflection prompt if any |
+| `module_unlocked` | string \| null | Newly unlocked module ID |
+| `days_in_current_tier` | int | Streak counter for current tier |
+| `loss_reframe` | string \| null | Contextual message when underperforming |
+
 ## Version History
 
 | Version | Date | Changes |
 |---------|------|---------|
 | 1.0 | 2026-04-18 | Initial LP monitor (text output only) |
 | 2.0 | 2026-04-25 | Structured AAE signals, tier system, multi-shape support, squad context |
+| 2.1 | 2026-04-25 | Personal Goal Engine extension — adaptive ladders, celebrations, reflections |
 
 ---
 
