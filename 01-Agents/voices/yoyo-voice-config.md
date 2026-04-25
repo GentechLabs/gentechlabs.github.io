@@ -51,8 +51,8 @@
 
 ---
 
-## 🎙️ Voice Cloning Strategy
+## 🎥 Voice Cloning Strategy
 
-**Priority:** Voice clone to Peter Cullen (Optimus Prime) inspired gravelly baritone  
+**Priority:** Voice clone to Peter Cullen (Optimus Prime) inspired gravelly male baritone  
 **If unavailable:** Use deep male voices from ElevenLabs catalog  
-**Alternative:** Keep Sarah as fallback (current ID: `EXAVITQu4vr4xnSDxMaL`). We can re-clone later when custom voices are available.
+**Alternative:** Use Kokoro Daniel as local fallback (male, free)

@@ -52,8 +52,8 @@
 
 ---
 
-## 🎙️ Voice Cloning Strategy
+## 🎥 Voice Cloning Strategy
 
-**Priority:** Voice clone to Steve Harvey inspired tone  
-**If unavailable:** Use Optimus Prime/Big Hero 6 voice as backup  
-**Alternative:** Keep Laura as fallback (current ID: `FGY2WhTYpPnrIDTdsKH5`). We can re-clone later when custom voices are available.
+**Priority:** Voice clone to Steve Harvey inspired booming male baritone  
+**If unavailable:** Use Optimus Prime/Big Hero 6 voice as backup (both male)  
+**Alternative:** Use Kokoro Puck or Echo as local fallback (male, free)

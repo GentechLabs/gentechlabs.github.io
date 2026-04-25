@@ -1,19 +1,20 @@
 # Agent Voice Assignments
 
-**Last Updated:** April 25, 2026
-**TTS Provider:** ElevenLabs
+**Last Updated:** April 26, 2026
+**Policy:** ALL MALE VOICES — Jordan confirmed all agents are "dudes."
+**TTS Provider:** ElevenLabs (primary) / Kokoro (backup)
 **Model:** eleven_multilingual_v2
 
 ---
 
 ## Active Voices
 
-| Agent | Persona | Voice Name | Voice ID | Notes |
-|---|---|---|---|---|
-| **Gentech** | Orchestrator, decisive leader | **Gentech-Mako** | `TkEJnN27nf5BsX1xwrLB` | Mako Iwamatsu style — commanding, wise |
-| **DMOB** | Technical, precise, coder | **D-Mob** | `n2icbiwmCen7udwM65GS` | Deep, resonant, analytical |
-| **YoYo** | Strategist, finance-focused | **YoYo** | `xQbwtCgzouB5QdCSd0Z7` | Peter Cullen / Optimus Prime style — authoritative, calm |
-| **Desmond** | Creative, brand, expressive | **Desmond-SteveHarvey** | `Rxk9LQxvNFEplpjjsjuN` | Charismatic, energetic, showman |
+| Agent | Persona | Voice Name | Voice ID | Gender | Notes |
+|---|---|---|---|---|---|
+| **Gentech** | Orchestrator, decisive leader | **George** | `JBFqnCBsd6RMkjVDRZzb` | Male | Warm British storyteller |
+| **DMOB** | Technical, precise, coder | **Charlie** | `IKne3meq5aSn9XLyUdCD` | Male | Deep Aussie, fast, techy |
+| **YoYo** | Strategist, finance-focused | **YoYo** | `EXAVITQu4vr4xnSDxMaL` | Male | Gravelly baritone, Optimus Prime energy |
+| **Desmond** | Creative, brand, expressive | **Desmond** | `FGY2WhTYpPnrIDTdsKH5` | Male | Booming charismatic showman |
 
 ---
 
