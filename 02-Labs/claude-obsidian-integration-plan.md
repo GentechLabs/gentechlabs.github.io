@@ -116,6 +116,14 @@ Add wiki lint to the daily 4 AM vault manager cron:
 | Cron job conflict | Add wiki lint as separate step, not replacing existing |
 | Skill overlap with existing skills | Only add skills we'll actually use (wiki-lint, save) |
 
+## Optional Plugins (Add Later)
+
+| Plugin | Status | Notes |
+|---|---|---|
+| **Calendar** | ⏳ Add later | Daily note integration |
+| **Thino** | ⏳ Add later | Quick capture / memos |
+| **Banners** | ⏳ Add later | Header images for notes |
+
 ## What We Skip (for now)
 
 - Excalidraw plugin (8MB, not essential)

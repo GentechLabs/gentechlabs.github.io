@@ -1,6 +1,6 @@
 # Hackathon & Bounty Tracker — 2026
 
-**Last Updated:** 2026-04-18
+| **Last Updated:** 2026-04-24
 **Source:** ethglobal.com/events (scraped live)
 
 ---

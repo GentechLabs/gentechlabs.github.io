@@ -11,8 +11,8 @@
 - ETH Global Open Agents (May 3) — Not beginner-friendly, targeting experienced builders
 
 **ACTIVE FOCUS:**
-1. **Kite AI** (Apr 26) — PRIMARY, 2 days left
-2. **Solana Frontier** (May 11) — STRONG, next up
+1. **Solana Frontier** (May 11) — **🔴 PRIMARY** — bigger bet, $250K VC fund + accelerator
+2. **Kite AI** (May 11) — **🟡 SECONDARY** — stopping-point work, agent-escrow stays warm
 3. **Norns Research** (TBD) — ACTIVE, research phase
 4. **ElevenLabs** (TBD) — ACTIVE, SDK v1.0 opportunity
 

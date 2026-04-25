@@ -103,5 +103,24 @@ GenLayer is building "Intelligent Contracts" — contracts that can make subject
 
 ---
 
+## GenLayer vs UMA Protocol — Oracle Wars (2026-04-24)
+
+**Source:** https://x.com/i/status/2047673282481078346
+
+**What happened:**
+- GenLayer publicly called out Polymarket — said they should replace UMAprotocol with **intelligentoracle.com** (GenLayer's oracle)
+- GenLayer's take: "0 marketing btw" (throwing shade at UMA)
+
+**Why this matters:**
+- **UMA** is the oracle backbone of Polymarket (biggest prediction market)
+- **GenLayer** is positioning their AI consensus as a *better* oracle for subjective outcomes
+- If Polymarket actually switches, that's a massive validation of AI-based oracle resolution
+- This directly competes with Chainlink, UMA, and other oracle providers
+
+**Strategic implications:**
+- GenLayer isn't just a smart contract platform — they're going after the **oracle market**
+- AI consensus for subjective events (sports, elections, disputes) could be superior to human oracle panels
+- Our AgentEscrow project should monitor this — oracle selection is critical for agent-mediated transactions
+
 ## Tags
-#GenLayer #competitive-analysis #research #AI-contracts
+#GenLayer #competitive-analysis #research #AI-contracts #oracle #UMA #Polymarket
