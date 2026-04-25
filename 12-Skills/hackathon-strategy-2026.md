@@ -1,14 +1,15 @@
 ---
 # 🎯 GenTech Hackathon Strategy 2026
 
-## Current Focus (April 24, 2026)
+## Current Focus (April 25, 2026)
 
 | Hackathon | Status | Why |
 |-----------|--------|-----|
 | **ETH Global — Open Agents** | ❌ DEPRECATED | Too advanced — not beginner-friendly |
 | **Kite AI (Solana Frontier)** | ✅ PRIMARY FOCUS | Aligns with agent-native work |
-| **Norris Research Hackathon** | 🟡 SECONDARY | Research-focused, good for DeFi/agent patterns |
-| **11Labs Hackathon** | 🟡 SECONDARY | Creative/tech blend — good for TTS/Voice UI experiments |
+| **Norris Research Hackathon** | ❌ SKIPPED | Dropped per Jordan — focus restraint |
+| **11Labs Hackathon** | ❌ SKIPPED | Dropped per Jordan — focus restraint |
+| **GenLayer Builder** | ⏸️ PAUSED | May resume post-May 11 |
 
 ## Why Kite AI — Solana Frontier?
 
@@ -22,11 +23,12 @@
 |------|----------|-----------|
 | 2026-04-24 | De-prioritize ETH Global | Team recognized competition too advanced for current ramp-up pace |
 | 2026-04-24 | Focus on Kite AI — Solana Frontier | Leverages agent architecture, Solana tooling, and GenTech’s AAE stack |
+| 2026-04-25 | Drop Norris, 11Labs, GenLayer Builder | Jordan: "Don’t want to spread too thin." Two hackathons max. |
 
 ## Next Steps
 
 1. **Kite AI Sprint** → Break down into tasks in `09-Green Room/`
-2. **Norris/11Labs** → Poll for interest, assign owners if pursuing
+2. **Solana Frontier Sprint** → Parallel build with DMOB
 3. **Labs Academy** → Continue as-is — independent of hackathons
 
 ## Related Threads

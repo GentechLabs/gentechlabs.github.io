@@ -9,7 +9,9 @@
 
 ## 📝 Context
 
-Jordan wants to add a **personal finance tracker** as a REP system unlock/reward in the AAE Trading Arena. He has existing code he's used personally and will send it to you on his next break (~6:20 PM today).
+Jordan wants to add a **personal finance tracker** as a REP system unlock/reward in the AAE Trading Arena. ~~He has existing code he's used personally and will send it to you on his next break (~6:20 PM today).~~
+
+**UPDATE (Apr 26):** Jordan confirms the HTML file was **already dropped in DMOB's group earlier today.** DMOB — check your group history if you haven't seen it yet.
 
 ## 🎯 What We Need
 

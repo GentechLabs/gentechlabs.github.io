@@ -31,10 +31,13 @@
 ### Dmob — Code (Labs)
 - [x] **[X]** ARC Hackathon — AgentEscrow + x402 nanopayments | **Due: Apr 25** | ❌ **WITHDRAWN (Apr 22)** — see `arc-salvage-log.md`
 - [ ] **[P]** **Solana Frontier** — PRIMARY focus. Identify tracks, build plan, start execution | **Due: May 11** | 🟥 **ACTIVE**
-- [ ] **[P]** Kite AI Hackathon — 14/14 tests ✅ (fixed daily reset bug) | **Due: May 11** | 🟡 Back-burner / stopping-point work
+- [ ] **[P]** **Kite AI Hackathon** — PRIMARY focus alongside Solana Frontier | **Due: May 11** | 🟥 **ACTIVE**
 - [x] **[X]** ETHGlobal Open Agents — DROPPED. Assets salvaged to `10-Archive/Salvaged-Assets/ethglobal-patterns/`. Focus on Solana Frontier.
 - [x] **[X]** Nous Hermes Creative — SKIPPED per Jordan
 - [x] **[X]** Dev3pack Global — SKIPPED per Jordan
+- [x] **[X]** Norris Research Hackathon — SKIPPED per Jordan (Apr 25)
+- [x] **[X]** ElevenHacks #6-9 — SKIPPED per Jordan (Apr 25)
+- [x] **[X]** GenLayer Builder — PAUSED per Jordan (Apr 25), may resume post-May 11
 - [ ] **[Q]** Dynamic burn rate smart contract feasibility — on-chain revenue tracking, gas optimization | **Due: TBD** | ⏳ Pending
 - [ ] **[Q]** claude-obsidian integration evaluation — vault linting, hot cache compatibility | **Due: TBD** | ⏳ Pending
 - [ ] **[Q]** Opportunity monitoring cron expansion — grants, audit marketplace, tool alternatives | **Due: TBD** | ⏳ Pending
@@ -45,7 +48,7 @@
 ### Jordan — Sign-ups + Ops (HQ)
 - [x] **[P]** Colosseum registration — arena.colosseum.org | **Due: Apr 20** | ✅ Done (Apr 21)
 - [ ] **[P]** Google OAuth setup — add test user, paste code | **Due: Apr 20** | ⏳ Pending
-- [ ] **[P]** ETHGlobal Open Agents — sign up + claim 0G tokens + KeeperHub API key | **Due: Apr 24** | ⏳ Pending
+- [x] **[X]** ETHGlobal Open Agents — sign up + claim 0G tokens + KeeperHub API key | **Due: Apr 24** | ❌ **DROPPED** — not beginner-friendly
 - [ ] **[Q]** Beam Grant Application — review draft | **Due: TBD** | ⏳ Pending
 - [ ] **[Q]** ETHGlobal NY — sign up | **Due: May 30** | ⏳ Pending
 
@@ -66,12 +69,13 @@
 
 ## 🟢 WAITING ON TRIGGER
 
-→ *May 11: Kite AI Hackathon submission deadline*  
-→ *ElevenHacks #6 (Zed × ElevenLabs): Concept locked, build-ready — trigger when Solana + Kite stable*
+→ *May 11: Kite AI + Solana Frontier submission deadlines*
 
 ## ❌ DISCARDED
 
 - [x] **[X]** ElevenHacks #4 (Kiro + ElevenLabs) — missed voting window | ✅ Skipped
+- [x] **[X]** ElevenHacks #6-9 (Zed / v0 / Cursor / Stripe × ElevenLabs) — SKIPPED per Jordan (Apr 25) — focus restraint
+- [x] **[X]** Norris Research Hackathon — SKIPPED per Jordan (Apr 25)
 
 ## ✅ COMPLETED
 
@@ -84,11 +88,11 @@
 ## Sprint Flow
 
 ```
-Apr 22-May 11: Kite AI ← Dmob codes, Desmond packages  
-May 11:    Kite AI SUBMIT
+Apr 25-May 11: Kite AI + Solana Frontier ← Dmob codes, Desmond packages
+May 11:    SUBMIT BOTH
 ```
 
-**NOTE:** ARC hackathon withdrawn (Apr 22). AgentEscrow assets salvaged for other projects.
+**NOTE:** All other hackathons dropped (Apr 25). Focus narrowed to two submissions.
 
 ---
 

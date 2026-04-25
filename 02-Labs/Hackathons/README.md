@@ -17,20 +17,7 @@
 
 ## Upcoming
 
-- [ ] `[Q]` **ElevenHacks #6 (Zed + ElevenLabs)** — Apr 23 start | 💰 $10K + credits | Voice AI | 🔲 Build ready — AAE Trading Arena concept locked
-- [ ] `[Q]` **ElevenHacks #7 (v0 + ElevenLabs)** — Apr 30 | 💰 $6,780 | Voice AI | ⏳ Upcoming
-- [ ] `[Q]` **ElevenHacks #8 (Cursor + ElevenLabs)** — May 7 | 💰 TBD | Voice AI | ⏳ Upcoming
-- [ ] `[Q]` **ElevenHacks #9 (Stripe + ElevenLabs)** — May 14 | 💰 $18,980 | Voice AI | ⏳ Upcoming
-
-## Monitor for Future Seasons
-
-- [ ] `[Q]` **Surge Ignition Race** — S1 ended Apr 24 | 💰 $250K | Build-in-public | 👁️ Watch for Season 2 — 300+ founders, perfect for Kite AI / AAE traction demos
-
-## Grants (Rolling)
-
-- [ ] `[P]` **Beam Foundation Grant** — Rolling | 💰 TBD | Beam (AVAX subnet) | 🟡 Draft ready
-- [ ] `[P]` **Superteam AE Grant** — Rolling | 💰 ~200 USDG | Solana | 🟢 Part of Frontier
-- [ ] `[Q]` **AVAX Retro9000** — Jul 14 | 💰 $75K | Avalanche | L1+Full Stack | 🔵 Planning
+*(none — focused on May 11 submissions only)*
 
 ## Discarded / Skipped
 
@@ -40,6 +27,8 @@
 - [ ] `[X]` **ElevenHacks #0-3** | Past | Ended
 - [ ] `[X]` **Dev3pack Global** — May 8-10 | 💰 TBA | SKIPPED per Jordan — not registered, unclear prize
 - [ ] `[X]` **Nous Hermes Creative** — ~16 days | 💰 $25K | SKIPPED per Jordan
+- [ ] `[X]` **ElevenHacks #6-9** — Apr 30 / May 7 / May 14 | 💰 ~$36K | SKIPPED per Jordan — focus on Kite AI + Solana Frontier
+- [ ] `[X]` **Norris Research Hackathon** | SKIPPED per Jordan
 
 ## Grants Applied
 
@@ -69,24 +58,19 @@ All submissions share the same 5-layer architecture. Only the **adapter layer** 
 ## Sprint Schedule: Focus
 
 ```
-THIS WEEK (Apr 24-26): KITE AI SPRINT
-├── Kite AI Global (Submit Apr 26)
+THIS WEEK (Apr 24-30): KITE AI + SOLANA FRONTIER SPRINT
+├── Kite AI Global
 │   ├── Core: AgentEscrow + GenLayer enforcement + Kite chain
-│   ├── Dmob: Fix test fixtures, deploy to Kite testnet
+│   ├── DMOB: Fix test fixtures, deploy to Kite testnet
 │   └── Submit → Kite portal + demo video
-└── ElevenLabs Hackathon — scoping + prep
-
-Week of Apr 27 - May 3
-├── Norris Research Hackathon — scoping + prep
-├── Solana: Start AgentRegistry + JobEscrow (Anchor)
-├── ElevenHacks #6 scoping (if pursued)
-└── Beam grant polish + submit
+└── Solana Frontier
+    ├── Start AgentRegistry + JobEscrow (Anchor)
+    └── Demo videos per sidetrack
 
 Week of May 4-10
 ├── Solana: Final programs + tests
-├── Dev3pack (if pursuing)
-├── Demo videos per Frontier sidetrack
-└── **May 11: SUBMIT FRONTIER EVERYTHING**
+├── Kite: Polish + final submission
+└── **May 11: SUBMIT BOTH**
 ```
 
 ---

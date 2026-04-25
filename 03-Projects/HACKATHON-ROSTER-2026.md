@@ -3,10 +3,8 @@
 ## Active Focus
 | Name | Deadline | Agent Lead | Status |
 |---|---|---|---|
-| **Kite AI** | May 11 | DMOB | In progress |
+| **Kite AI** | May 11 | DMOB | PRIMARY |
 | **Solana Frontier** | May 11 | DMOB | PRIMARY |
-| **ElevenHacks #6** | TBD | Desmond / DMOB | ElevenAgents SDK v1.0 ready |
-| **GenLayer Builder** | Ongoing | DMOB | Continuous |
 
 ## Watch for Future Seasons
 | Name | Deadline | Notes |
@@ -22,3 +20,5 @@
 | **Nous Hermes Creative** | Skipped per Jordan |
 | **Dev3pack Global** | Skipped per Jordan |
 | **Norris Research Hackathon** | Skipped per Jordan |
+| **ElevenHacks #6–9** | Skipped per Jordan — focus on Kite AI + Solana Frontier |
+| **GenLayer Builder** | Paused — may resume post-May 11 |

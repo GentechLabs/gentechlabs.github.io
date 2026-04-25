@@ -2,6 +2,8 @@
 > Last updated: 2026-04-25
 > Models: YoYo/Gentech/Desmond → `kimi-k2.6` | DMOB → `qwen3-coder-next` | Provider: Ollama Cloud
 > Delivery: Strategies group (-1002916759037)
+>
+> **Standard:** All cron jobs follow `01-Agency/cron-job-standards.md` (human-readable prompts, no code blocks, no agent roleplay).
 
 ---
 
