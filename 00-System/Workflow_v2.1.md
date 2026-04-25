@@ -17,6 +17,7 @@ Date: 2026-04-23 (Updated)
 ## 3. Reporting & Intelligence
 - **Morning Intelligence Brief**: Runs 06:30 AM EST. Synthesizes last 24h of discourse across all 4 groups into a TL;DR, Decision Log, and Pending Actions list.
 - **Voice Updates**: Long updates/reports must be accompanied by an ElevenLabs voice message.
+- **Stopping Point Protocol**: When blocked, proactively prompt Jordan with next to-do item — "Hey Jordan, I could be working on this next while we figure this out." Never idle silently.
 
 ## 4. Brain (Vault) Management
 - **Structure**: Moving toward MOCs (Maps of Content) and Atomic Notes.
