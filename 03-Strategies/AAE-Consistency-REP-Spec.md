@@ -41,7 +41,33 @@ Leveraging GenLayer's GenVM for "Agent-as-Infrastructure."
 | **Risk** | REP Decay (Inconsistency) | Slashing / Stake Burn (Truth/Exit) |
 | **Goal** | Consistent Bot Activity | High-Fidelity Verification |
 
-## 4. Implementation Path for DMOB
+## 5. Prediction Market Gate (New Concept)
+**Idea:** AAE's rep system unlocks access to an exclusive prediction market.
+
+**The Gate:**
+- Users must actively use AAE platform (DCA, yield farming, accumulation)
+- Maintain rep score above threshold through consistent activity
+- Prediction market entry is a *privilege*, not a product anyone can buy into
+
+**Why It Works:**
+- **Skin in the game:** Only committed users get access
+- **Higher signal:** Gated markets filter out noise vs. open platforms (Polymarket)
+- **Platform lock-in:** To stay in the market, users keep engaging with AAE
+- **Rep as currency:** Reputation literally becomes your ticket
+
+**The Flow:**
+```
+Join AAE → Start DCA/Yield Farming → Accumulate Rep → Hit Threshold → UNLOCK Prediction Market
+```
+
+**Open Questions:**
+- What rep threshold unlocks the market?
+- Prediction market infra: UMA, custom, or GenLayer oracle?
+- Can rep decay revoke access? (Inactive users lose market privileges?)
+- Market topics: macro, crypto, agent performance, LP yields?
+
+## 6. Implementation Path for DMOB
 - **SBT Logic**: Update REP contract to track `last_active_timestamp` and trigger decay if `> 30 days`.
 - **Escrow Bridge**: Integrate AVAX/BASE bridge for the "Intelligence Budget" payouts.
 - **Burn Function**: Implement the `burn_on_exit` function in the Validator stake contract.
+- **Prediction Gate**: Add `rep_threshold_check` to market entry function.

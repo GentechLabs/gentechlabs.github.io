@@ -7,7 +7,32 @@
 
 ---
 
-##Executive Summary
+## Executive Summary
+
+### ASCII Art Reference — Engine Architecture
+
+```
+           _______                                _    _____             _
+          |__   __|                              | |  / ____|           | |
+             | | ___ _ __ ___  ___  _ __   __ _| | | |  __  ___   __ _| |
+             | |/ _ \ '__/ __|/ _ \| '_ \ / _` | | | | |_ |/ _ \ / _` | |
+             | |  __/ |  \__ \ (_) | | | | (_| | | | |__| | (_) | (_| | |
+             |_|\___|_|  |___/\___/|_| |_|\__,_|_|  \_____|\___/ \__,_|_|
+
+
+ ______             _            _____             _ _
+|  ____|           (_)           |  _ \           | | |
+| |__   _ __   __ _ _ _ __   ___| |_) | ___  _ __| | |
+|  __| | '_ \ / _` | | '_ \ / _ \  _ < / _ \| '__| | |
+| |____| | | | (_| | | | | |  __/ |_) | (_) | |  |_|_|
+|______|_| |_|\__, |_|_| |_|\___|____/ \___/|_|  (_|_)
+             __/ |
+            |___/
+```
+
+---
+
+## Core Philosophy: More Winners Than Losers
 
 The **Personal Goal Engine** is a behavioral learning engine embedded within the AAE (Auto-Agent Economy) education layer. It operationalizes Jordan's core insight:
 

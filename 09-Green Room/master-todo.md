@@ -42,17 +42,31 @@
 - [ ] **Desmond** — PGE celebration/reflection/module copy (handoff: `09-Green Room/handoff-pge-desmond-content.md`)
 - [ ] **Gentech** — Review + consolidate reports from all three agents
 
-## 🟢 P2 — Personal Goal Engine (New)
+## 🟢 P2 — Personal Goal Engine (In Progress)
 **Source:** Jordan approved education layer + personalized ladders  
 **Spec:** `03-Strategies/Personal-Goal-Engine-Spec.md`
 
 - [x] Draft full spec ✅
 - [x] AAE Signal Spec v2.1 extension ✅
-- [ ] DMOB: Solidity structs + functions
-- [ ] Desmond: Celebration/reflection/module copy
-- [ ] YoYo: Cron integration for PGE signals
-- [ ] Gentech: Front-end wireframes / review
-- [ ] Jordan: Review spec, approve priority vs Solana Frontier
+- [x] **YoYo** — Draft 10 Academy module scripts (`02-Labs/PGE-Academy-Modules.md`) ✅
+- [x] **YoYo** — Integrate PGE track into Academy curriculum ✅
+- [ ] **Desmond** — Review module scripts, voice/tone pass, reflection prompts (`09-Green Room/handoff-pge-academy-desmond.md`)
+- [ ] **Desmond** — Celebration/reflection/module copy (original handoff: `09-Green Room/handoff-pge-desmond-content.md`)
+- [ ] **DMOB** — PGE contract structs + functions (`09-Green Room/handoff-pge-dmob-contracts.md`)
+- [ ] **YoYo** — Cron integration for PGE signals
+- [ ] **Gentech** — Front-end wireframes / review
+- [ ] **Jordan** — Review spec + Academy modules, approve priority vs Solana Frontier
+
+## 🟢 P2 — Prediction Market Layer (NEW — Cross-Team)
+**Source:** Jordan voice memo, Layer 10/11 of PGE  
+**Scope**: Social/game layer, NOT education tier. Market-making predictions + leaderboards.
+
+- [ ] **YoYo** — Feasibility: prediction market vs social betting, oracle options, game theory
+- [ ] **DMOB** — Contract architecture: binary markets, escrow, scoring, GenLayer oracle fit
+- [ ] **Desmond** — UX framing: separate from edu flow, leaderboard design, copy
+- [ ] **Gentech** — Consolidate assessments into recommendation for Jordan
+
+**Handoff:** `09-Green Room/2026-04-25-pge-prediction-market-handoff.md`
 
 ## ⚫ SKIPPED / DROPPED
 

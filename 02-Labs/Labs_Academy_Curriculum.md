@@ -57,7 +57,51 @@ This curriculum maps the high-level security and architecture concepts from Cyfr
 
 ---
 
-## 🚩 Exercise Pipeline
-1.  **The Audit**: Take a Cyfrin lesson $\rightarrow$ find the equivalent line of code in `AgentEscrow.sol` $\rightarrow$ explain why it was implemented that way.
+## 🎓 Module 3: Personal Goal Engine — The Mindset Track
+**Goal**: Teach users to think like traders while the system trades for them.  
+**Primary Target**: `03-Strategies/Personal-Goal-Engine-Spec.md`  
+**Format**: 10 interactive modules across 4 tiers (Scout → Raider → Warlord → Sovereign)  
+**Full Curriculum**: `02-Labs/PGE-Academy-Modules.md`
+
+### 3.1 Tier 1 — Scout (Foundations)
+*   **What Is Liquidity Provision?** — The pool, the position, the risk. Simulator included.
+*   **Range Shapes** — Curve, Spot, Bidirectional. Visual shape simulator.
+*   **Impermanent Loss** — The math that matters. IL calculator + fee breakeven.
+
+### 3.2 Tier 2 — Raider (Strategy)
+*   **Reading DexScreener** — Pool selection via 5 metrics. Scavenger hunt exercise.
+*   **Multi-Shape Strategies** — Multi-position design. 7-day sandbox simulation.
+*   **Gas Optimization** — Timing, batching, breakeven. Gas tracker exercise.
+
+### 3.3 Tier 3 — Warlord (Portfolio)
+*   **Portfolio LP** — Multi-pool allocation, correlation risk. Portfolio builder sim.
+*   **Custom Range Design** — Support/resistance, backtesting. Blueprint exercise.
+
+### 3.4 Tier 4 — Sovereign (Mastery)
+*   **Risk Management** — 1% rule, stop-ranges, risk matrix. Timed scenario game.
+*   **Building a System** — Automation, compounding, weekly ritual. Playbook template.
+
+### Completion Rewards
+- **Per module**: 10–50 REP (total 225 REP for full track)
+- **Per tier unlock**: Badge + ladder advancement eligibility
+- **Capstone (Module 10)**: Exportable personal playbook PDF
+
+---
+
+## 🎓 Module 4: Content & Communication
+**Goal**: Build the voice of GenTech.  
+**Primary Target**: Desmond's content pipeline.
+
+*   **Brand Voice**: "More winners than losers" — grounded, no hype, process over outcome.
+*   **Alert Microcopy**: SILENT / OK / ALERT / CRITICAL severity tones.
+*   **Celebration Copy**: Making $5/day feel like a win. Reframe losses as learning.
+*   **Community Playbooks**: Squad onboarding, dispute resolution scripts.
+
+---
+
+## 📈 Exercise Pipeline
+1.  **The Audit**: Take a Cyfrin lesson → find the equivalent line of code in `AgentEscrow.sol` → explain why it was implemented that way.
 2.  **The Break**: Attempt to write a Foundry test that breaks the `AgentEscrow` contract by ignoring one of these patterns (e.g., removing the state update before transfer).
 3.  **The Fix**: Patch the vulnerability using the correct security pattern.
+4.  **The Simulate**: Complete a PGE Academy module sandbox → apply the lesson to a live or paper position → log reflections.
+5.  **The Build**: Design a custom range or multi-position strategy → backtest → present rationale.

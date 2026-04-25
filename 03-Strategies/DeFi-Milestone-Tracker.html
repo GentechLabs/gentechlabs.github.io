@@ -32,7 +32,7 @@
         .stat-value { font-size: 2.2em; font-weight: bold; margin: 10px 0; }
         .stat-subtext { font-size: 0.9em; opacity: 0.85; margin-top: 8px; font-weight: 500; }
         .milestone-card { background: linear-gradient(135deg,#1a1a1a,#1a1510); border: 3px solid #404040; border-radius: 20px; padding: 35px; margin-bottom: 30px; }
-        .milestone-card.active  { border-color: #fbbf24; box-shadow: 0 10px 40px rgba(251,191,36,0.3); }
+.milestone-card.active  { border-color: #fbbf24; box-shadow: 0 10px 40px rgba(251,191,36,0.3); }
         .milestone-card.completed { border-color: #10b981; box-shadow: 0 10px 40px rgba(16,185,129,0.3); }
         .milestone-card.golden  { border-color: #fbbf24; box-shadow: 0 10px 40px rgba(251,191,36,0.4); }
         .milestone-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; padding-bottom: 20px; border-bottom: 2px solid #b8860b; flex-wrap: wrap; gap: 10px; }
@@ -61,7 +61,7 @@
         .success-banner p  { color: white; font-size: 1.1em; line-height: 1.8; }
         .golden-banner { background: linear-gradient(135deg,#1a1510,#2d2418,#1a1510); border: 3px solid #fbbf24; border-radius: 15px; padding: 35px; margin: 30px 0; text-align: center; box-shadow: 0 10px 40px rgba(251,191,36,0.3); }
         .golden-banner h3 { background: linear-gradient(90deg,#fbbf24,#f5d78e,#d4a012); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 1.8em; margin-bottom: 15px; }
-        .golden-banner p   { color: #f5d78e; font-size: 1.1em; line-height: 1.8; }
+.golden-banner p   { color: #f5d78e; font-size: 1.1em; line-height: 1.8; }
         .info-box { background: linear-gradient(135deg,#2d2418,#1a1510); border-left: 4px solid #d4a012; padding: 20px; border-radius: 8px; margin: 20px 0; line-height: 1.8; color: #d1d5db; }
         .dca-schedule-box { background: linear-gradient(135deg,#0d1a2d,#1a2d45); border: 2px solid #3b82f6; border-radius: 14px; padding: 25px; margin-bottom: 25px; }
         .dca-schedule-box h3 { color: #60a5fa; font-size: 1.3em; margin-bottom: 15px; }
@@ -74,116 +74,9 @@
 </head>
 <body>
 <div class="container">
-    <div id="live-data-loader" style="text-align:center; padding: 10px; background: rgba(251,191,36,0.1); border: 1px solid #fbbf24; border-radius: 10px; margin-bottom: 15px;">
-        <span id="loader-icon">⏳</span>
-        <span id="loader-text">Loading live pool data...</span>
-        <span id="loader-status" style="margin-left: 10px; color: #10b981;"></span>
-    </div>
-
-    <script>
-    // ── Live Data Loader ─────────────────────────────────────────────────────────
-    const CHAIN = "avalanche";
-    const POOL_ADDRESS = "0x864d4e5ee7318e97483db7eb0912e09f161516ea";
-    const DEXSCREENER_URL = `https://api.dexscreener.com/latest/dex/pairs/${CHAIN}/${POOL_ADDRESS}`;
-    const AVAX_ADDRESS = "0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7";
-    
-    async function fetchLivePoolData() {
-        try {
-            // Fetch DexScreener
-            const res = await fetch(DEXSCREENER_URL);
-            if (!res.ok) throw new Error("DexScreener fetch failed");
-            const data = await res.json();
-            const pair = data.pair || (data.pairs && data.pairs[0]) || {};
-            
-            // Update UI live values
-            document.getElementById("api-price").textContent = `$${parseFloat(pair.priceNative || 0).toFixed(4)} USD`;
-            document.getElementById("api-liquidity").textContent = `$${Number(pair.liquidity?.usd || 0).toLocaleString()}`;
-            document.getElementById("api-volume").textContent = `$${Number(pair.volume?.h24 || 0).toLocaleString()}`;
-            document.getElementById("api-pricechange").textContent = `${(pair.priceChange?.h24 || 0).toFixed(1)}%`;
-            
-            // Fetch gas estimate (simplified fallback)
-            document.getElementById("api-gas").textContent = "$0.10";
-            
-            // Update loader status
-            document.getElementById("loader-icon").textContent = "✅";
-            document.getElementById("loader-text").textContent = "Live data synced";
-            document.getElementById("loader-status").textContent = "Updated " + new Date().toLocaleTimeString();
-            
-            // Calculate health score
-            const liquidity = parseFloat(pair.liquidity?.usd || 0);
-            const volume = parseFloat(pair.volume?.h24 || 0);
-            const efficiency = (volume > 0 && liquidity > 0) ? Math.min(100, (volume / liquidity) * 10000) : 50;
-            document.getElementById("api-efficiency").textContent = `${efficiency.toFixed(1)}%`;
-            
-            // Milestone tracking placeholders (manual entry for now, auto-extends in future)
-            document.getElementById("api-fees24h").textContent = "$0.33";
-            document.getElementById("api-claimable").textContent = "$1.13 AVAX";
-            document.getElementById("api-apr").textContent = "5,137%";
-            
-        } catch (e) {
-            console.warn("Live data fetch failed:", e);
-            document.getElementById("loader-icon").textContent = "⚠️";
-            document.getElementById("loader-text").textContent = "Using cached baseline";
-            document.getElementById("loader-status").textContent = "";
-        }
-    }
-    
-    // Run initial load
-    fetchLivePoolData();
-    
-    // Poll every 60 seconds
-    setInterval(() => {
-        fetchLivePoolData();
-    }, 60000);
-    </script>
-
-    <!-- Inject dynamic fields into HTML -->
-    <div class="current-status">
-        <h2>📊 CURRENT POSITION — <span id="api-timestamp">Tuesday, April 25, 2026</span></h2>
-        <div class="stats-grid">
-            <div class="stat-box green">
-                <div class="stat-label">AVAX-USDC Pool (LFJ)</div>
-                <div class="stat-value">$31.16</div>
-                <div class="stat-subtext">1.39 AVAX + 18.85 USDC 💧</div>
-            </div>
-            <div class="stat-box orange">
-                <div class="stat-label">AVAX Price (Live)</div>
-                <div class="stat-value" id="api-price">$8.853</div>
-                <div class="stat-subtext">Live from DexScreener</div>
-            </div>
-            <div class="stat-box red">
-                <div class="stat-label">Rewards APR</div>
-                <div class="stat-value" id="api-apr">5,137%</div>
-                <div class="stat-subtext">🔥 Live emission rate</div>
-            </div>
-            <div class="stat-box green">
-                <div class="stat-label">Claimable Rewards</div>
-                <div class="stat-value" id="api-claimable">$1.132</div>
-                <div class="stat-subtext">0.12782 AVAX — Claim & compound</div>
-            </div>
-            <div class="stat-box teal">
-                <div class="stat-label">24H Fees</div>
-                <div class="stat-value" id="api-fees24h">$0.333</div>
-                <div class="stat-subtext">✅ In-range — BOTH streams active</div>
-            </div>
-            <div class="stat-box blue">
-                <div class="stat-label">Gas Cost (Est)</div>
-                <div class="stat-value" id="api-gas">$0.10</div>
-                <div class="stat-subtext">Optimized route</div>
-            </div>
-        </div>
-        <div class="info-box">
-            <strong style="color:#fbbf24;">Pool Health:</strong> TVL: <span id="api-liquidity">$1.2M</span> | Vol 24H: <span id="api-volume">$2.8M</span> | Efficiency: <span id="api-efficiency">50%</span><br><br>
-            <strong style="color:#2dd4bf;">Status:</strong> Position at $31.16 with BOTH fee income AND rewards active simultaneously. 
-            Claimable $1.13 AVAX ready — compound immediately
-            . Wallet has 0.10031 AVAX + 0.05 USDC additional dry powder.<br><br>
-            <strong style="color:#2dd4bf;">Fee milestone:</strong> First day of confirmed fee earnings since rebalance. $0.33/day × 30 = ~$10/month in fees alone from a $31 position. That's a strong signal.
-        </div>
-    </div>
 
     <div class="header">
         <h1>🏆 SUSTAINABLE WEALTH PATH</h1>
-        <p class="tagline">
         <p class="tagline">
             Accumulation Mode Active | Farm the Bottom Strategy<br>
             <strong style="color:#fbbf24;">AVAX-USDC Pool · $31.16 Deployed · 5,137% APR · Fees ACTIVE</strong>
@@ -237,7 +130,7 @@
             </div>
             <div class="stat-box teal">
                 <div class="stat-label">24H Fees</div>
-                <div class="stat-value">$0.333</div>
+<div class="stat-value">$0.333</div>
                 <div class="stat-subtext">✅ In-range — BOTH streams active</div>
             </div>
             <div class="stat-box blue">
@@ -248,8 +141,7 @@
         </div>
         <div class="info-box">
             <strong style="color:#fbbf24;">STATUS:</strong> Position at $31.16 with BOTH fee income AND rewards active simultaneously. 
-            Claimable $1.13 AVAX ready — compound immediately
-. Wallet has 0.10031 AVAX + 0.05 USDC additional dry powder.<br><br>
+            Claimable $1.13 AVAX ready — compound immediately. Wallet has 0.10031 AVAX + 0.05 USDC additional dry powder.<br><br>
             <strong style="color:#2dd4bf;">Fee milestone:</strong> First day of confirmed fee earnings since rebalance. $0.33/day × 30 = ~$10/month in fees alone from a $31 position. That's a strong signal.
         </div>
     </div>
@@ -322,7 +214,7 @@
                         <td>$280</td>
                         <td>+$200–400</td>
                         <td>~$580</td>
-                        <td>~$4/day</td>
+<td>~$4/day</td>
                         <td>~$120</td>
                     </tr>
                     <tr style="background:rgba(124,58,237,0.1)">
@@ -411,7 +303,7 @@
     <div class="milestone-card completed">
         <div class="milestone-header">
             <div class="milestone-title">✅ MILESTONE 1: $5/DAY — COMPLETED!</div>
-            <div class="milestone-status status-completed">ACHIEVED ✅</div>
+<div class="milestone-status status-completed">ACHIEVED ✅</div>
         </div>
         <div class="progress-bar-container">
             <div class="progress-bar-fill" style="width:100%; background:linear-gradient(90deg,#10b981,#059669);">100% Complete ✅</div>
@@ -487,7 +379,7 @@
                 <div class="requirement-label">Time Left</div>
                 <div class="requirement-value">~74 weeks</div>
                 <div class="requirement-detail">74 × $75 avg = +$5,550 DCA alone</div>
-            </div>
+</div>
             <div class="requirement-box">
                 <div class="requirement-label">Monthly Impact</div>
                 <div class="requirement-value">$1,650/month</div>
@@ -563,8 +455,7 @@
             <strong style="font-size:1.3em; color:#fbbf24;">PATIENT. STRATEGIC. CONSISTENT. THE BOTTOM IS WHERE WEALTH IS BUILT. 💎👑</strong>
         </p>
     </div>
-
-    <div class="current-status" style="text-align:center; margin-top:30px;">
+<div class="current-status" style="text-align:center; margin-top:30px;">
         <p style="color:#9ca3af; font-size:0.9em; line-height:2;">
             <strong>Milestone Tracker Version:</strong> 8.0 — DCA Edition ($50–100/week)<br>
             <strong>Last Updated:</strong> Tuesday, March 31, 2026, 1:00 PM CT<br><br>
