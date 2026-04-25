@@ -38,13 +38,13 @@
 - **AVAX:** 3.88 (~$36.56)
 - **USDC:** 46.82 (~$46.81)
 - **AVAX Price:** ~$9.418
-- **Range:** $9.26 – $9.46 (Curve Shape) — *rebalanced Apr 24*
+- **Range:** $9.33 – $9.52 (Curve Shape) — *rebalanced Apr 24 (2nd time)*
 - **Status:** In range, earning fees
 - **Fees 24H:** $0.58 (~0.7% daily → ~255% APR implied)
 - **Claimable Rewards:** $0.0075
 - **Pool APR (7D):** 88.77%
 - **Platform:** LFJ mobile app
-- **Risk Note:** Tight range — rebalance if AVAX moves >3% either direction
+- **Risk Note:** Moderate-tight range — rebalance if AVAX moves >3% either direction
 - **Tracker Script:** `03-Strategies/scripts/lp-unified-monitor.py` (consolidated watchlist + P&L)
 - **Position File:** `~/.hermes/scripts/.lfj-position-tracker.json`
 
@@ -65,6 +65,7 @@
 | Mar 31 | $83.92 | 3.762 | 48.37 | $9.45 | — | Entry |
 | Apr 24 | $83.37 | 3.88 | 46.82 | $9.418 | $0.58 | Screenshot |
 | Apr 24 | $83.37 | 3.88 | 46.82 | $9.418 | — | Rebalance: range 9.10-9.65 → 9.26-9.46 |
+| Apr 24 | $83.14 | 3.311 | 52.08 | $9.381 | — | Rebalance: range 9.26-9.46 → 9.33-9.52 |
 
 ## Analysis Requested
 
