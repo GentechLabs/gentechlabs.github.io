@@ -71,6 +71,6 @@ After gathering context, send a message in your group:
 
 ## 📂 Vault
 - Local path: `/root/vaults/gentech/`
-- Sync command: `cd /root/vaults/gentech && ob sync`
-- Read from any folder, write to your domain only
+- Sync: Obsidian syncs via OneDrive. For manual mirrors, use `cp` — no `ob sync` CLI exists.
+- Read from any folder, write to your domain only.
 
