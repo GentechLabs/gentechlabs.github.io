@@ -152,6 +152,8 @@ def main():
     global_efficiency = None
 
     for pool in POOLS:
+        # Dynamic position USD from state or tracker, so DCA additions are reflected
+        position_usd = state.get("position_usd", pool["position_usd"])
         data = fetch_dexscreener(pool["pool_address"], pool["chain"])
         price = data.get("price", 0)
         volume = data.get("volume_24h", 0)
@@ -160,7 +162,7 @@ def main():
 
         in_range = pool["range_low"] <= price <= pool["range_high"]
         efficiency = calc_efficiency(price, pool["range_low"], pool["range_high"], pool["shape"])
-        est_fees = estimate_daily_fees(volume, liquidity, pool["position_usd"], pool["fee_tier_bps"])
+        est_fees = estimate_daily_fees(volume, liquidity, position_usd, pool["fee_tier_bps"])
 
         global_efficiency = efficiency
         current_idx, current_label, next_idx, next_label, progress_pct = get_current_tier(est_fees)
@@ -232,8 +234,8 @@ def main():
 
         # ── Daily Snapshot ────────────────────────────────────
         lines.append(f"📸 **Daily Snapshot**")
-        total_position = pool["position_usd"] + cumulative_fees
-        lines.append(f"• Position Value: ${pool['position_usd']:.2f}")
+        total_position = position_usd + cumulative_fees
+        lines.append(f"• Position Value: ${position_usd:.2f}")
         lines.append(f"• + Cumulative Fees: ${cumulative_fees:.2f}")
         lines.append(f"• Total Value: ${total_position:.2f}")
         lines.append(f"• Next Milestone: ${MILESTONES[min(current_idx + 1, len(MILESTONES)-1)]['daily_fees']:.1f}/day")

@@ -7,53 +7,40 @@
 
 ---
 
-## 📊 Consolidated Crypto Watchlist (CMC + LP Monitor)
-**Job ID:** `bce87f59b79e` (YoYo — CMC Watchlist + LP Monitor)
+## 📊 Strategies Cron Jobs
+
+### D5 Unified Master Cron (CMC + LP Milestones)
+**Job ID:** `7180d8a26738`
 **Schedule:** `15 8,12,16,20 * * *` (4×/day: 8:15, 12:15, 16:15, 20:15 ET)
-**Model:** `kimi-k2.6` | **Script:** `cmc-watchlist.py`
-**Status:** ✅ Active — sole watchlist cron (consolidated Apr 26)
+**Script:** `scripts/d5-master-cron.py`
+**Status:** ✅ Active — sole Strategies cron
 
-**Scope:** Tracks Jordan's holdings + LP position health. Silent unless significant moves or LP out of range.
+**Scope:** Consolidated report. One script covers everything Jordan needs:
+- CMC watchlist for 7 tokens (BTC, SOL, LINK, AVAX, TAO, XAUt, BEAM)
+- D5 Milestone LP report (AVAX/USDC on LFJ/TraderJoe)
+- Shape-aware DCA sizing ($50→$30→$20→$10)
+- Tier progression ladder with progress bars
+- Compound threshold tracking
 
-**Tokens monitored:**
-- BTC, SOL, LINK, AVAX, TAO, XAUt, BEAM (CMC prices)
-- LFJ AVAX/USDC TraderJoe v2.2 (DexScreener + state tracking)
-
-**Data flow:**
-1. CMC API → quotes for 7 tokens + 1-day state tracking
-2. DexScreener API → LFJ pool price, liquidity, volume
-3. State file `.lfj-aae-state.json` → cumulative fees
-
-** LP position monitoring:**
-- Price vs range (9.33–9.52)
-- Fee efficiency calculation (curve shape)
-- In-range/Out-of-range status
-- Cumulative fees tracking
-
-**Alert threshold:** 3% daily move for watchlist | Out-of-range or efficiency < 75% for LP
-
-**Silent rules:**
-- All moves < 3% → no message
-- Same token already reported today at similar price → no message
-- In-range LP + efficiency ≥ 75% → 🤐 Silent
-- Script error → ⚠️ alert
+**Silent rules:** 🤐 Only speaks if:
+- Any CMC token moves ≥3% in 24h
+- LP out of range OR efficiency <50%
+- Monday DCA day
+- Compound threshold crossed ($50)
+- Script error
 
 **State files:**
 - Watchlist: `~/.hermes/scripts/.cmc-watchlist-state.json`
-- LP position: `~/.hermes/scripts/.lfj-aae-state.json`
-- LP tracker: `~/.hermes/scripts/.lfj-position-tracker.json`
+- D5 LP: `~/.hermes/scripts/.lfj-aae-state.json`
 
 ---
 
-## ⏸️ Disabled Cron Jobs
+## ⏸️ Retired Cron Jobs
+
 | Job ID | Name | Reason |
 |--------|------|--------|
-| `faed4f588aef` | AAE DeFi Milestone + LP Monitor | **Consolidated with `bce87f59b79e`** — daily milestone tracking merged into 4×/day consolidated report |
-
-| Job | ID | Schedule | Status |
-|-----|-----|----------|--------|
-| 6 | **Consolidated Watchlist (CMC + LP)** | 4×/day | ✅ Active |
-| 7 | **AAE Milestone + LP (disabled)** | — | ⏸️ Paused |
+| `bce87f59b79e` | YoYo — CMC Crypto Watchlist | **Retired** — merged into unified D5 Master Cron (`7180d8a26738`) |
+| `faed4f588aef` | YoYo — Daily LP + D5 Milestone | **Retired** — merged into unified D5 Master Cron (`7180d8a26738`) |
 
 ---
 

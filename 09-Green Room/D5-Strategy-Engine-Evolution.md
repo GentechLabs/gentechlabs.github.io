@@ -37,10 +37,15 @@ Upgrade the D5 from a static threshold-DCA into a **dynamic strategy engine** th
 ## Context
 Current unified cron (`YoYo — AAE DeFi Milestone + LP Monitor`) already pulls:
 - TVL, APY, IL vs HODL for AVAX/USDC pool (0x864d...16EA)
-- D5 capital-add threshold ($50) and DCA window (Monday)
-- **NEW:** Micro-DCA triggers at 40%/50% efficiency thresholds
+Current unified cron (`YoYo — AAE DeFi Milestone + LP Monitor`) now runs `lp-aae-signal-monitor.py` directly:
+- Hourly (7AM–9PM EDT), silent unless alert
+- Position value, splits, price, range, efficiency, APR
+- Revenue: 24H fees, cumulative, claimable, days in range
+- Progression: Scout→Raider→Warlord→Sovereign tier tracking
+- Action: HOLD / WATCH / COMPOUND / DCA / REBALANCE
+- **NEW (Apr 26):** Bid-ask-aware micro-DCA sizing ($10–$20) based on efficiency thresholds
 
-This is the foundation. The next layer is **strategy intelligence** — fee-growth-based DCA, liquidity shape integration, and dynamic thresholds.
+This is the single source of truth.
 
 ---
 

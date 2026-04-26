@@ -1,0 +1,25 @@
+{
+  "updated_at": "2026-04-26T17:00:00Z",
+  "jobs": {
+    "watchlist": {
+      "job_id": "1f10f10b2a07",
+      "name": "YoYo — CMC Crypto Watchlist",
+      "schedule": "15 8,12,16,20 * * *",
+      "content": "Prices only — no LP, no milestones",
+      "next_run": "Next: 20:15 ET today"
+    },
+    "lp_d5": {
+      "job_id": "504ac01d54ed",
+      "name": "YoYo — Daily LP + D5 Milestone",
+      "schedule": "0 10 * * *",
+      "content": "LP position + fee tracking + D5 milestone progress",
+      "next_run": "Tomorrow 10:00 ET"
+    }
+  },
+  "removed": [
+    "7180d8a26738 — D5 Unified Master Cron (collision at 8:15/12:15/16:15/20:15)",
+    "c9c6766b6039 — D5 Milestone Summary standalone",
+    "bce87f59b79e — old CMC Watchlist (rebuilt as 1f10f10b2a07)",
+    "faed4f588aef — old AAE DeFi Milestone (rebuilt as 504ac01d54ed)"
+  ]
+}
