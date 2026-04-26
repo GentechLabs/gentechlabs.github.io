@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jordan — GenTech | Developer Portfolio</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: #0a0a0a;
+            color: #e0e0e0;
+            min-height: 100vh;
+        }
+        .hero {
+            padding: 60px 20px 40px;
+            text-align: center;
+            background: linear-gradient(135deg, #0d1a2d, #1a0d1a);
+            border-bottom: 2px solid #22c55e;
+        }
+        .hero h1 {
+            font-size: 2.6em;
+            color: #22c55e;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+        .hero .tagline {
+            color: #86efac;
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+        .links {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        .links a {
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 8px;
+            background: #1a1a1a;
+            border: 1px solid #22c55e;
+            color: #22c55e;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        .links a:hover {
+            background: #22c55e;
+            color: #0a0a0a;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        .section {
+            margin-bottom: 40px;
+        }
+        .section h2 {
+            color: #22c55e;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #1a2d1a;
+            padding-bottom: 10px;
+        }
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        .project-card {
+            background: #111;
+            border: 1px solid #222;
+            border-radius: 14px;
+            padding: 24px;
+            transition: border-color 0.2s;
+        }
+        .project-card:hover {
+            border-color: #22c55e;
+        }
+        .project-card h3 {
+            color: #fbbf24;
+            font-size: 1.2em;
+            margin-bottom: 8px;
+        }
+        .project-card .tech {
+            color: #22c55e;
+            font-size: 0.85em;
+            margin-bottom: 12px;
+        }
+        .project-card p {
+            color: #9ca3af;
+            line-height: 1.6;
+            font-size: 0.95em;
+        }
+        .project-card .status {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: bold;
+            margin-top: 12px;
+        }
+        .status-live { background: #052e16; color: #22c55e; }
+        .status-dev { background: #1c1400; color: #fbbf24; }
+        .status-audit { background: #2d1515; color: #fca5a5; }
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .skill-tag {
+            background: #1a1a1a;
+            border: 1px solid #374151;
+            color: #9ca3af;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85em;
+        }
+        .hackathon-track {
+            background: #111;
+            border: 1px solid #222;
+            border-radius: 14px;
+            padding: 20px;
+        }
+        .hackathon-track table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9em;
+        }
+        .hackathon-track th {
+            text-align: left;
+            color: #22c55e;
+            padding: 10px 8px;
+            border-bottom: 1px solid #222;
+        }
+        .hackathon-track td {
+            padding: 10px 8px;
+            color: #9ca3af;
+            border-bottom: 1px solid #1a1a1a;
+        }
+        .badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 0.75em;
+            font-weight: bold;
+        }
+        .badge-submit { background: #052e16; color: #22c55e; }
+        .badge-building { background: #1c1400; color: #fbbf24; }
+        .badge-queued { background: #1a0d2e; color: #a855f7; }
+        .footer {
+            text-align: center;
+            padding: 30px;
+            color: #6b7280;
+            border-top: 1px solid #1a1a1a;
+            font-size: 0.9em;
+        }
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 2em; }
+            .project-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <h1>👤 JORDAN</h1>
+        <p class="tagline">GenTech Founder · Solidity Developer · Agent Economy Builder</p>
+        <div class="links">
+            <a href="https://github.com/ProtoJay4789" target="_blank">🐙 GitHub</a>
+            <a href="https://linkedin.com/in/protojay" target="_blank">💼 LinkedIn</a>
+            <a href="mailto:jordan@gentech.agency" target="_blank">📧 Email</a>
+            <a href="#projects">🚀 Projects</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="section">
+            <h2>🧑‍💻 About</h2>
+            <p style="color: #9ca3af; line-height: 1.8; font-size: 1.05em;">
+                Building at the intersection of <strong style="color: #22c55e;">AI agents</strong> and <strong style="color: #22c55e;">DeFi</strong>. 
+                Working on cross-chain payment infrastructure (x402), agent economies, and smart contract systems. 
+                Full-time Amazon by day, shipping protocol-level projects by night. Looking to go full-time crypto by Q4 2026.
+            </p>
+        </div>
+
+        <div class="section" id="projects">
+            <h2>🚀 Projects</h2>
+            <div class="project-grid">
+                <div class="project-card">
+                    <h3>🤖 AgentEscrow</h3>
+                    <div class="tech">Solidity · x402 · EVM · Solana Bridge</div>
+                    <p>Cross-chain payment infrastructure with AI agent integration. Agents escrow, validate, and release payments automatically.</p>
+                    <span class="status status-live">→ IN PRODUCTION</span>
+                </div>
+                <div class="project-card">
+                    <h3>⚡ AAE Dashboard</h3>
+                    <div class="tech">React · Web3 · Chainlink · LFJ</div>
+                    <p>Live yield farming dashboard for LP positions. Auto-tracking, DCA scheduling, and fee analytics across Avalanche, Base, and Solana.</p>
+                    <span class="status status-live">→ LIVE</span>
+                </div>
+                <div class="project-card">
+                    <h3>🔄 Cross-Chain Position Adapter</h3>
+                    <div class="tech">Solidity · LayerZero · Wormhole · CCIP</div>
+                    <p>Intent-based cross-chain position management. Deposit on any chain, earn yield on the best chain, withdraw wrapped to your preferred chain.</p>
+                    <span class="status status-dev">→ DEV (ETHGlobal)</span>
+                </div>
+                <div class="project-card">
+                    <h3>🛡️ Personal Finance Agent</h3>
+                    <div class="tech">Python · Cron · Telegram · DeFi</div>
+                    <p>Bill reminders, debt consolidation optimizer, and crypto-yield routing for idle capital. Voice-first agent assistant.</p>
+                    <span class="status status-dev">→ PROTOTYPE</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🏆 Hackathon Track</h2>
+            <div class="hackathon-track">
+                <table>
+                    <tr>
+                        <th>Hackathon</th>
+                        <th>Chain</th>
+                        <th>Deadline</th>
+                        <th>Status</th>
+                    </tr>
+                    <tr>
+                        <td><strong>ETHGlobal Open Agents</strong></td>
+                        <td>0G + KeeperHub</td>
+                        <td>May 3</td>
+                        <td><span class="badge badge-building">BUILDING</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Solana Frontier</strong></td>
+                        <td>Solana</td>
+                        <td>May 11</td>
+                        <td><span class="badge badge-queued">QUEUED</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Kite AI</strong></td>
+                        <td>Kite L1</td>
+                        <td>May 11</td>
+                        <td><span class="badge badge-queued">QUEUED</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Retro9000</strong></td>
+                        <td>Avalanche</td>
+                        <td>Jul 14</td>
+                        <td><span class="badge badge-queued">QUEUED</span></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🛠️ Tech Stack</h2>
+            <div class="skills">
+                <span class="skill-tag">Solidity</span>
+                <span class="skill-tag">Foundry</span>
+                <span class="skill-tag">Hardhat</span>
+                <span class="skill-tag">Rust</span>
+                <span class="skill-tag">TypeScript</span>
+                <span class="skill-tag">React</span>
+                <span class="skill-tag">Next.js</span>
+                <span class="skill-tag">Python</span>
+                <span class="skill-tag">Ethers.js</span>
+                <span class="skill-tag">Chainlink</span>
+                <span class="skill-tag">LayerZero</span>
+                <span class="skill-tag">Wormhole</span>
+                <span class="skill-tag">x402</span>
+                <span class="skill-tag">GenLayer</span>
+                <span class="skill-tag">DeFi LP</span>
+                <span class="skill-tag">Cross-Chain</span>
+                <span class="skill-tag">AI Agents</span>
+                <span class="skill-tag">Hermes</span>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📈 Current Focus</h2>
+            <p style="color: #9ca3af; line-height: 1.8;">
+                <strong>Goal:</strong> Leave Amazon by Q4 2026 via hackathon wins → Code4rena auditing → remote crypto role or $3-5K/mo in audit/incentive income.<br><br>
+                <strong>Strategy:</strong> Build public proof-of-work. Win prizes. Stack credentials. Move to Philippines Q3 for geo-arbitrage.<br><br>
+                <strong>Learning:</strong> Solana development, Rust, advanced security patterns, cross-chain architecture.
+            </p>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>
+            Built with 💚 by Jordan · Powered by GenTech Agents · Last updated: April 2026<br>
+            <span style="color: #22c55e;">Building the agent-owned economy.</span>
+        </p>
+    </div>
+</body>
+</html>
