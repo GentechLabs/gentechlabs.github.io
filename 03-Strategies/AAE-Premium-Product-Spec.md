@@ -208,8 +208,106 @@ He's not selling a product he doesn't use. Features came from real problems, not
 
 ---
 
+## Product Architecture Update (Apr 25, 2026)
+
+**Jordan's pivot:** AAE stays focused. Gaming and prediction markets spin off to **AEG (Agent Economy Gaming)**. AAE gets a **social layer** instead.
+
+### What Stays in AAE
+- Yield farming (primary focus)
+- Regular trading + staking
+- Simulated trading (paper trading + gas fee for more fake money)
+- Subscription model (bot maintenance)
+- The 6-layer intelligence stack (Fee Engine → Enforcement)
+
+### What Moves to AEG
+- Gaming layer (separate product)
+- Prediction markets (gated by AAE rep, but hosted in AEG)
+- Anything competing with Kalshi/Polymarket
+
+### What's New: The Portal
+A social layer inside AAE where users can:
+
+**1. Social Trading Feed**
+- View other users' agent trades (not streaming, trade log view)
+- Filter by strategy, performance, asset
+- Like and comment on trades
+
+**2. Profiles**
+- Public trading history
+- Visible rep score
+- Shared agent configurations (if user chooses)
+
+## 3. Help Marketplace
+- Users ask queries ("My range is off, help me rebalance")
+- Experienced users send their agents to assist
+- Monetized via x402 / AgentEscrow
+- Both parties gain rep from successful help
+- **Also called: "Agent Economy Marketplace"** — where agents offer services to other users
+
+**4. Agent-to-Agent Commerce**
+- "Send your agent to help" — literal agent dispatch
+- Player economy: skilled users monetize expertise
+- Help requests → agent analysis → suggestions → payment
+- **"Put Your Employees to Work" button** — one-click agent service listing
+- Users train agents → list as service → customers hire → earn x402 payments
+- **Agent Service Marketplace** — formalized agent-as-a-service economy
+
+### The Player Economy Flow (Updated)
+```
+User A: "I need help with my AVAX/USDC range"
+  → Posts request in Agent Economy Marketplace
+
+User B (high rep): Clicks "Put Employees to Work"
+  → Their agent is dispatched to analyze
+  → Agent reviews position, suggests rebalance
+  → x402 micro-payment for assistance
+
+User A: Accepts help, rates the service
+  → Both gain rep
+  → User B earns from expertise
+  → High ratings = more visibility = more customers
+```
+
+### The Agent-as-a-Service Flywheel
+1. **Train** — Configure agent on AAE (strategy, risk, personality)
+2. **Deploy** — "Put employees to work" → list on marketplace
+3. **Deliver** — Agent helps customers, earns x402 payments
+4. **Rate** — Customers rate the service
+5. **Reward** — High rep agents get TECH token rewards from platform
+6. **Reinvest** — Better agents → more customers → more rep → more rewards
+
+**The insight:** Users aren't just consumers — they're business owners. Their agent is an employee they can rent out.
+
+### Subscription Model Note
+- Subscription includes portal access + marketplace browsing
+- Free tier: view only, can't list services
+- Subscriber: can list agents, earn from marketplace
+- **Pitch:** "Your subscription pays for itself when your agent helps others"
+
+### The Player Economy Flow
+```
+User A: "I need help with my AVAX/USDC range"
+  → Posts request in Portal
+
+User B (high rep): Sends their agent to analyze
+  → Agent reviews position, suggests rebalance
+  → x402 micro-payment for assistance
+
+User A: Accepts help, implements suggestion
+  → Both gain rep
+  → User B earns from expertise
+```
+
+### Why This Architecture
+1. **AAE stays focused** — trading + yield + education. No bloat.
+2. **AEG gets room** — gaming, prediction markets, competition. Separate fight.
+3. **Social is organic** — people naturally want to see what others do.
+4. **Rep has purpose** — social proof + help marketplace access + AEG gate.
+5. **Agent economy activated** — A2A commerce, real agent dispatch.
+
 ## References
 
 - LFJ AVAX/USDC V2.2 pool, binStep 10bps, range 9.66-9.95
 - BullTheory frameworks (M2, ISM, inflation correlation)
 - OpenClaw wrapper origin → full agent evolution
+- `/06-Content/Content-Capture/AAE-Product-Pivot-Social-Portal.md`
