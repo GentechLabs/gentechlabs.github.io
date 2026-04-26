@@ -42,3 +42,17 @@
 - Extra top-level dirs flagged for manual review: 01-Agents, 02-AAE, 02-Audits, 06-Security
 - Duplicate filenames detected in strategies/content/entertainment (cross-references intentional)
 - Vault Health Score: 8/10 (-1 for missing standard until just created, -1 for context staleness)
+
+
+## Post-Commit Finalization (2026-04-26 23:10 UTC)
+
+- **Git commit**: `0d42fe0` — all changes committed to `main`
+- **Moved 2025-04-25-desmond-status.md**: Reclassified from 2026-04-25 to dedicated year-folder `2025-04-25/` (filename typo suspected, preserved for review)
+- **Fixed misfiled archives**: 11 files extracted from `archive/2026-04/` blob into chronological date folders (`2026-04-21`, `2026-04-22`, `2026-04-23`)
+- **Fixed path escape artifact**: `09-Green\ Room/...` and `11-Mess\ Hall/...` normalized to proper spaced-directory names
+- **Removed stale submodule pointers**: `02-Audits/intelligent-oracle/intelligent-oracle`, `03-Projects/Birdeye-Token-Radar`
+
+### Remaining for next sweep or manual review
+1. **Extra top-level dirs**: `01-Agents`, `02-AAE`, `02-Audits`, `06-Security` — each contains 1-7 files that should be merged into canonical folders (`01-Agency`, `02-Labs`) or archived.
+2. **Mess Hall persistent boards**: `task-board.md`, `handoff-board.md` still show stale sprint entries (ARC hackathon "WITHDRAWN" already noted — boards themselves need status updates).
+3. **Board updates**: `handoff-board.md` shows ⏳/🔴 escalated items that are 7+ days old — recommend marking `[X]` Completed or `❌ Cancelled`.
