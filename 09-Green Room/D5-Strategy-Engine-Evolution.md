@@ -25,10 +25,13 @@ Upgrade the D5 from a static threshold-DCA into a **dynamic strategy engine** th
 
 **Rationale:** Weekly base builds position size predictably. Micro-DCA capitalizes on temporary range edge positioning without overcommitting to stale ranges. Never DCA without considering a rebalance first.
 
-## Action Items
-- [x] **YoYo** — Model ROI potential of each enhancement, rank by alpha-per-complexity. What's the lowest-hanging fruit?
+## Completed
+- [x] **YoYo** — Model ROI potential of each enhancement, rank by alpha-per-complexity
 - [x] **YoYo** — Implement hybrid DCA strategy in LP monitor (v2.1)
-- [ ] **DMOB** — Scope on-chain data requirements: fee growth oracles, liquidity shape APIs (e.g., Gamma, Beefy, or direct subgraph queries), bid-ask depth feeds, execution complexity for automated rebalancing.
+- [x] **Gentech** — Consolidation (Apr 26): Merged D5 milestone tracking into hourly unified cron (`faed4f588aef`). Paused standalone daily D5 cron (`76d0ee972be9`). D5 block now appears in every hourly report with tier progression, efficiency, and action recommendations.
+
+## Action Items
+- [ ] **DMOB** — Scope on-chain data requirements: fee growth oracles, liquidity shape APIs, bid-ask depth feeds, execution complexity for automated rebalancing.
 - [ ] **Gentech** — Once YoYo + DMOB report, consolidate into a phased roadmap for Jordan.
 
 ## Context
@@ -38,3 +41,17 @@ Current unified cron (`YoYo — AAE DeFi Milestone + LP Monitor`) already pulls:
 - **NEW:** Micro-DCA triggers at 40%/50% efficiency thresholds
 
 This is the foundation. The next layer is **strategy intelligence** — fee-growth-based DCA, liquidity shape integration, and dynamic thresholds.
+
+---
+
+## Live LP Snapshot (Apr 26, 2026)
+
+| Metric | Value | Status |
+|--------|-------|--------|
+| Pool | LFJ V2.2 AVAX/USDC | ✅ Active |
+| Efficiency | ≥50% | ✅ In-range |
+| D5 Progress | $0 / $50 | ⏳ Pending |
+| DCA Trigger | None | ⏳ Wait for efficiency drop |
+| Pool fees (24h) | — | 🟡 Awaiting next cron |
+
+> _“This could literally run, and it's easy to look at.”_ — Jordan, Apr 26 — consolidated LP + D5 status in one view.
