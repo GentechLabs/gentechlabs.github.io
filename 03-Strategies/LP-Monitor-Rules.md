@@ -205,16 +205,16 @@ apr = (daily_fees × 365 / position_usd) × 100
 - Target: $5/day (Scout) → $20/day (Raider) by July → $55/day (Warlord) by Sep 2027
 - Each compound increases position → more fees → faster tier progression
 
-### Crash / Out-of-Range DCA Strategy
+### Crash / Out-of-Range Decision Matrix (Dadrian Logic)
 
-**Worst-case scenario:** AVAX drops below $9.33 (out of range)
+> *"How am I doing vs stakers/hodlers? Should I hold?"*
 
-| AVAX Price | Position Value | Loss from Current | Mechanics |
-|------------|---------------|-------------------|-----------|
-| $9.00 | ~$80.42 | -$2.95 | Out of range → 100% AVAX |
-| $8.80 | ~$78.63 | -$4.74 | Out of range → 100% AVAX |
-| $8.50 | ~$75.95 | -$7.42 | Out of range → 100% AVAX |
-| $8.30 | ~$74.17 | -$9.20 | Out of range → 100% AVAX |
+| Scenario | Position Value | Loss from Current | Mechanics | Decision Logic |
+|----------|---------------|-------------------|-----------|----------------|
+| **In Range (9.33–9.52)** | ~$83.92 | — | Earning fees | ✅ **HOLD** — keep LP, compound fees |
+| **Below Range ($8.80)** | ~$78.63 | -$5.29 | 100% AVAX | ❓ **HOLD vs DCA?** — if AVAX fundamentals intact, **add USDC** |
+| **Crash ($8.30)** | ~$74.17 | -$9.75 | 100% AVAX | ⚠️ **DCA or EXIT?** — if deep dump, **70 USDC / 30 AVAX** weighted re-entry |
+| **Staking comparison** | — | — | 13.5% APR vs 5138% LP APR | ✅ **LP wins** — fees dominate staking unless extreme volatility |
 
 **Key insight:** Once below range, **you're just holding AVAX**. No IL — just price depreciation. Same as if you'd never LP'd.
 
@@ -225,11 +225,42 @@ apr = (daily_fees × 365 / position_usd) × 100
 - Recovery to $9.00: position ≈ **$133**
 - Earning fees the entire way up
 
-**Shape selection by regime:**
-- **Slow grind / chop (now):** Use **Curve** — captures small moves both directions
-- **Crash / panic dump:** Go **70% USDC / 30% AVAX** (skewed / bid-ask) — you're buying the dip, not market-making
-- **Fast recovery:** Use **Curve** again to capture volatility both ways
-- **Trending up hard:** Use **Spot** (100% AVAX) or exit LP and stake
+### Shape Selection by Regime
+
+| Condition | Recommended Shape | Rationale |
+|-----------|-------------------|-----------|
+| **Slow grind / chop (now)** | **Curve** | Captures small moves both directions, smooth efficiency curve |
+| **Crash / panic dump** | **70 USDC / 30 AVAX (skewed)** | Buying the dip, not market-making; avoids center loss |
+| **Bidirectional (wide range)** | **Spot + Curved Ends** | High upside at extremes, low cost in middle |
+| **Trending up hard** | **Spot (100% AVAX) or EXIT** | No need to market make — just hold asset |
+
+---
+
+## Bid-Ask DCA Weighting (Crash Protection)
+
+When price is **out of range** and **fee efficiency < 30%**, deploy DCA with **weighted asset allocation** to minimize IL:
+
+| Efficiency | DCA Type | USDC Weight | AVAX Weight | Rationale |
+|-----------|----------|-------------|-------------|-----------|
+| **60–50%** | Normal DCA | 50% | 50% | Standard rebalancing |
+| **50–40%** | Weighted DCA | **70%** | **30%** | Price near lower edge, bias to USDC |
+| **40–30%** | Recovery DCA | **80%** | **20%** | Strong bias to USDC, expecting re-entry |
+| **<30%** | Aggressive Recovery | **90%** | **10%** | Deep dump — buy AVAX dip, minimize IL risk |
+
+**Principle:** Never DCA into a stale range without at least *considering* a rebalance. Bonus DCA is for fresh, efficient positions only.
+
+## Fee Efficiency vs Staking Performance
+
+| APY | staking (GEN/AVAX) | LP (LFJ V2.2) | LP Advantage |
+|-----|--------------------|---------------|--------------|
+| **Base** | 13.5% APR | 5138% APR | **+5124.5%** |
+| **Daily Fees (S1)** | $0.22 | $0.33 | **+0.11** |
+| **Risk** | Low (no impermanent loss) | Medium (IL only if out-of-range) | LP wins on risk-adjusted return |
+| **Volatility Hedge** | None | In-range fees offset price decay | LP outperforms in sideways/crash |
+
+**Bottom line:** LP APR is **38x higher** than staking. The only scenario where staking wins is during **extreme volatility** (>20% daily moves where IL > fees earned).
+
+---
 
 ### Compound Checklist
 1. ✅ LP in range, earning fees
