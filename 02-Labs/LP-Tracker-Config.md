@@ -16,6 +16,7 @@
 - ✅ **Migrated to API-based monitoring** — vision-analysis dependency removed
 - ✅ **AAE Signal Monitor v2 deployed** — structured JSON output, multi-shape support, smart severity (SILENT/OK/ALERT/CRITICAL)
 - ✅ **Human-readable Telegram formatting optimized** — clean emoji headers, compact P&L section, inline squad context
+- ✅ **Daily LP → D5 Milestone Report consolidated (Apr 26)** — `daily-lp-summary.py` replaced by `d5-milestone-summary.py`; produces tier-ladder report with Scout→Raider→Warlord→Sovereign progression, micro-DCA triggers, and compound tracking
 
 ---
 

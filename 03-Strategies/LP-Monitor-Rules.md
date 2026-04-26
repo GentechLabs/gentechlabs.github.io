@@ -264,7 +264,22 @@ Jordan approved the optimized cron output format:
 - Inline pool context (Vol 24h, TVL)
 - Squad-aware tier progression (Scout → Raider → Warlord → Sovereign)
 
-**Frontend Impact Principle logged:**
+## ✅ D5 Milestone Summary Consolidated — Apr 26 2026
+
+Jordan's directive: Consolidate the daily LP summary into the D5 milestone format.
+
+**What changed:**
+- daily-lp-summary.py → replaced by d5-milestone-summary.py
+- Daily 8 AM cron now produces structured D5 Milestone Report:
+  - Full tier ladder display (Scout→Raider→Warlord→Sovereign) with progress bars
+  - Micro-DCA triggers with efficiency-based bonus amounts ($10/$20)
+  - Compound threshold tracking ($50 target)
+  - Action items ranked by severity
+  - Revenue summary (daily fees, implied APR, cumulative fees)
+  - Monday DCA reminder
+- Frontend Impact Principle applies — feeds the DeFi Milestone Tracker data layer
+
+**Frontend Impact Principle logged:
 > *"As we add more layers, we're always going to consider how this is going to affect our front end, our DeFi milestone tracker."*
 
 All future LP layer additions must pass a frontend compatibility check before deployment.

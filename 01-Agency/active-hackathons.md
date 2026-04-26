@@ -1,9 +1,11 @@
 # Active Hackathons & Bounties
 Status: Updated Apr 25, 2026
 
-## Current Focus
-- **Kite AI Hackathon**: AgentEscrow on Kite AI chain. **Deadline: May 11**. Three tracks: Agentic Commerce (x402 + USDC), Agentic Trading (yield/arb), Novel. $10K pool. Full intel: `02-Labs/Hackathons/Kite-AI-Hackathon-Full-Intel.md`
-- **Solana Frontier (Colosseum)**: Strategy kickoff queued after Kite AI submission. **Ends May 11**. Leverage `solana.new` pipeline + GenLayer Consensus of Experts architecture.
+|## Current Focus
+|- **Kite AI Hackathon** 🟠: Agent Economy — AAE lifecycle landing on Kite AI settlement. **Deadline: May 11**. $10K pool. Track: Agentic Commerce.
+|- **Solana Frontier (Colosseum)** 🟢: Agent Economy — Solana-native high-throughput labor market. **Deadline: May 11**. $230K+ pool + $250K accelerator.
+|- **ElevenHacks #6** 🔴: Agent Economy — Voice interface for agent hiring. ~**May 7**. $10K + credits.
+|- **ARC Hackathon**: Escrow foundation of the agent economy. (Details TBD.)
 
 ## Opportunistic / Back-Burner
 - **ElevenHacks #6**: Build a game with Zed + ElevenLabs APIs. $10K cash + credits. (Started Apr 23) — SDK v1.0 released.
@@ -20,4 +22,6 @@ Status: Updated Apr 25, 2026
 - **GenLayer Incentivized Builder Program**: ⭐ HIGH PRIORITY — Register as Builders. Points system live. 12.6K builders, 932K points distributed. Referral: 10% of referred users' points forever. https://portal.genlayer.foundation/
 
 ## Strategy Note
-- Kite AI is the primary focus through May 11. Leverage the `solana.new` pipeline and agent commerce architecture for a high-quality submission.
+- **PIVOT: AAE Economy Narrative** — We don't ship contracts. We ship the agent labor market (train → REP → deploy → earn).
+- Every hackathon gets the same lifecycle, different chain deployment. See `03-Strategies/Hackathon-Strategy-AAE-Economy.md`.
+- Proof: Our 4 running Hermes agents with real chat history. No competitor has this.

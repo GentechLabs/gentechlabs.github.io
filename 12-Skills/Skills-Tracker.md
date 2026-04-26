@@ -1,6 +1,6 @@
 # Skills Tracker — Gentech Agent Stack
 
-Last updated: 2026-04-17
+Last updated: 2026-04-26
 
 Master list of all skills installed across the Gentech agent ecosystem. Review pending installs here, suggest removals, track what's active.
 
