@@ -1,15 +1,15 @@
 # LP + Milestone Tracker Rules — AVAX/USDC (AAE v2)
 
 > Established: 2026-04-18
-> Updated: 2026-04-25 — AAE Signal Monitor v2, new milestone tiers, structured output
+> Updated: 2026-04-27 — Range rebalanced to 9.00–9.30 (bid-ask), tiered alert system
 > Status: Active
 > Pool: LFJ V2.2 AVAX/USDC (binStep 10, pool 0x864d4e5ee7318e97483db7eb0912e09f161516ea)
 
 ## Current Position
 
-- **Range:** $9.10 — $9.40 (rebalanced Apr 27)
+- **Range:** $9.00 — $9.30 (rebalanced Apr 27 — bid-ask shape)
 - **Position:** ~$83.37 (3.33 AVAX + $51.91 USDC)
-- **Shape:** Curve
+- **Shape:** Bid-Ask
 - **Strategy:** Bear market accumulation — farm the bottom, compound rewards
 - **Crash Scenario (Dadrian):** If AVAX drops to $8.30-9.00, DCA strategy will work itself out through Impermanent Loss (IL). Continuous DCA at lower prices builds cheaper positions—IL math naturally offsets price decay over time.
 - **Optimal Entry Range:** During crash, consider 70 USDC / 30 AVAX bid-ask weighting (Curve-style concentrated liquidity).
