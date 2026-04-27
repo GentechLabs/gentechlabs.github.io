@@ -373,15 +373,24 @@ def calc_progress_to_next(est_fees: float, current_idx: int, milestones: List[Di
     return round(max(0, min(100, progress)), 1)
 
 def determine_severity(in_range: bool, efficiency: float, compound_ready: bool, dca_ready: bool,
-                       milestone_changed: bool, pool_tvl_drop_pct: float, micro_dca_ready: bool, cfg: Dict) -> str:
-    """Determine alert severity matching AAE Signal Spec (SILENT / LOW / HIGH / CELEBRATE)."""
+                       milestone_changed: bool, pool_tvl_drop_pct: float, micro_dca_ready: bool, cfg: Dict,
+                       out_of_range_confirmed: bool = True) -> str:
+    """Determine alert severity matching AAE Signal Spec (SILENT / LOW / HIGH / CELEBRATE).
+    
+    out_of_range_confirmed: False means first check out of range (2-check confirmation delay).
+    Only alerts on the SECOND consecutive out-of-range check.
+    """
     if milestone_changed:
         return "CELEBRATE"
-    if not in_range or pool_tvl_drop_pct > 30:
+    if not in_range and out_of_range_confirmed:
+        return "HIGH"
+    if not in_range and not out_of_range_confirmed:
+        # First time out of range — don't alert yet (confirmation pending)
+        return "SILENT"
+    if pool_tvl_drop_pct > 30:
         return "HIGH"
     if efficiency < 75 or (compound_ready and cfg.get("compound_threshold_usd", 50) > 0):
-        # Distinguish real alerts from minor nudges
-        if not in_range or pool_tvl_drop_pct > 30:
+        if pool_tvl_drop_pct > 30:
             return "HIGH"
         return "LOW"
     if dca_ready or micro_dca_ready:
@@ -427,7 +436,8 @@ def calc_pool_tvl_drop(tvl_history: List[float]) -> float:
     return round(((peak - current) / peak) * 100, 2)
 
 def build_aae_signal(cfg: Dict, state: Dict, pool: Dict, price: float, in_range: bool,
-                     efficiency: float, est_fees: float, apr: float, pool_tvl_drop_pct: float) -> AAESignal:
+                     efficiency: float, est_fees: float, apr: float, pool_tvl_drop_pct: float,
+                     out_of_range_confirmed: bool = True) -> AAESignal:
     """Build structured AAE signal from all computed data."""
 
     eastern = timezone(timedelta(hours=cfg.get("quiet_hours", {}).get("timezone_offset", -4)))
@@ -478,7 +488,8 @@ def build_aae_signal(cfg: Dict, state: Dict, pool: Dict, price: float, in_range:
             micro_dca_amount = 20
 
     # Severity (AAE Signal Spec: SILENT / LOW / HIGH / CELEBRATE)
-    severity = determine_severity(in_range, efficiency, compound_ready, dca_ready, milestone_changed, pool_tvl_drop_pct, micro_dca_ready, cfg)
+    severity = determine_severity(in_range, efficiency, compound_ready, dca_ready, milestone_changed, pool_tvl_drop_pct, micro_dca_ready, cfg,
+                                  out_of_range_confirmed=out_of_range_confirmed)
 
     # Suggested action
     suggested = get_suggested_action(in_range, efficiency, compound_ready, dca_ready, milestone_changed, current_idx, pool_tvl_drop_pct, micro_dca_ready, micro_dca_amount, cfg)
@@ -626,6 +637,23 @@ def main():
     pool_tvl_drop_pct = calc_pool_tvl_drop(state["tvl_history"])
     tvl_trend_7d = calc_tvl_trend(state["tvl_history"])
     
+    # 2-check confirmation for out-of-range (ported from lp-range-monitor.py)
+    out_of_range_confirmed = True
+    if not in_range:
+        if state.get("out_of_range_since") is None:
+            # First check out of range — note it, don't alert yet
+            state["out_of_range_since"] = now.isoformat()
+            state["out_of_range_first_check"] = True
+            out_of_range_confirmed = False
+        elif state.get("out_of_range_first_check"):
+            # Second consecutive check — now confirmed
+            out_of_range_confirmed = True
+            state["out_of_range_first_check"] = False
+    else:
+        # Back in range — clear confirmation state
+        state["out_of_range_since"] = None
+        state["out_of_range_first_check"] = False
+    
     # Update state
     eastern = timezone(timedelta(hours=cfg.get("quiet_hours", {}).get("timezone_offset", -4)))
     now = datetime.now(eastern)
@@ -645,8 +673,9 @@ def main():
     milestone_changed = current_idx > state.get("current_milestone_idx", -1)
     state["current_milestone_idx"] = current_idx
     
-    # Build AAE signal
-    signal = build_aae_signal(cfg, state, pool, price, in_range, efficiency, est_fees, apr, pool_tvl_drop_pct)
+    # Build AAE signal (with 2-check confirmation)
+    signal = build_aae_signal(cfg, state, pool, price, in_range, efficiency, est_fees, apr, pool_tvl_drop_pct,
+                              out_of_range_confirmed=out_of_range_confirmed)
 
     # Update alert history (only non-silent alerts)
     if signal.severity != "SILENT":

@@ -9,27 +9,19 @@
 
 ## 📊 Strategies Cron Jobs (Consolidated)
 
-### 🏆 DeFi Milestone + LP Tracker (Consolidated)
-**Job ID:** `0b2beec3f702`
-**Name:** YoYo — DeFi Milestone + LP Tracker (Consolidated)
+### 🏆 DeFi Milestone + LP Monitor (Canonical)
+**Job ID:** `44f7c2028766`
+**Name:** YoYo — DeFi Milestone + LP Monitor
 **Schedule:** `25 8,12,16,20 * * *` (4×/day at 8:25, 12:25, 4:25, 8:25 ET)
-**Script:** Inline prompt (consolidated — all rules in cron prompt)
-**Status:** ✅ Active — canonical LP + milestone monitor
+**Script:** `lp-aae-signal-monitor.py` (AAE Signal Monitor v2 — consolidated)
+**Status:** ✅ Active — sole LP + milestone cron
 
 **Consolidated from (Apr 27):**
-| Former Job | Function |
-### 🏆 DeFi Milestone + LP Monitor (Canonical — Consolidated)
-**Job ID:** `2563e78bcf72`
-**Name:** YoYo — DeFi Milestone + LP Monitor
-**Schedule:** `25 8,12,16,20 * * *` (4×/day at :25 past, ET)
-**Script:** `lp-aae-signal-monitor.py` (AAE Signal Monitor v2)
-**Status:** ✅ Active — canonical LP + milestone monitor
-
-**Consolidated from:**
 | Former Job | ID | Reason Removed |
 |------------|-----|----------------|
-| LP Fee Efficiency Monitor | `c2c2e40b440e` | Merged into this job (was every 10 min) |
-| DeFi Milestone Tracker | `2563e78bcf72` | Updated to include LP fee rules |
+| LP Range Monitor | `b2bb2bae4fc5` | Merged (was every 10 min) |
+| Daily LP + D5 Milestone | `504ac01d54ed` | Merged (never ran) |
+| LP Fee Efficiency Monitor | `c2c2e40b440e` | Merged (was every 10 min) |
 
 **What it does:**
 1. Fetches live pool data (Birdeye x402 → DexScreener → on-chain RPC fallback)
@@ -77,9 +69,10 @@
 
 | Job ID | Name | Reason |
 |--------|------|--------|
-| `bce87f59b79e` | CMC Watchlist (old) | Replaced by `862ae0c1f85d` with DexScreener |
-| `faed4f588aef` | Daily LP + D5 (old) | Replaced by `0b2beec3f702` consolidated tracker |
-| `0b2beec3f702` (old) | LP Position Monitor (every 10 min) | Consolidated into DeFi Milestone + LP Tracker |
+| `bce87f59b79e` | CMC Watchlist (old) | Replaced by `1f10f10b2a07` with DexScreener |
+| `faed4f588aef` | Daily LP + D5 (old) | Replaced by `44f7c2028766` consolidated tracker |
+| `b2bb2bae4fc5` | LP Range Monitor (every 10 min) | Consolidated into `44f7c2028766` |
+| `504ac01d54ed` | Daily LP + D5 (never ran) | Consolidated into `44f7c2028766` |
 
 ---
 
@@ -107,7 +100,7 @@
 | 3 | Mess Hall — Agent Check-in | 2:00 PM daily | HQ |
 | 4 | End of Shift Wrap-Up | 8 PM Sun–Tue | HQ |
 | 5 | Vault Maintenance — Weekly | Sun 10:30 PM | HQ |
-| 6 | **DeFi Milestone LP Tracker** | 10:00 AM daily | Strategies |
+| 6 | **DeFi Milestone + LP Monitor** | 4×/day (8:25, 12:25, 16:25, 20:25 ET) | Strategies |
 | 7 | **CMC Crypto Watchlist** | 4×/day | Strategies |
 | 8 | Protocol Due Diligence | Thu 6:00 AM | Strategies |
 | 9 | x402 Ecosystem Monitor | Every 14 days | Strategies |
@@ -125,4 +118,4 @@
 
 ---
 
-*Canonical LP tracker: `lp-default-tracker.py` — always run this for LP status.*
+*Canonical LP tracker: `lp-aae-signal-monitor.py` (job `44f7c2028766`) — single source of truth for LP + milestones.*

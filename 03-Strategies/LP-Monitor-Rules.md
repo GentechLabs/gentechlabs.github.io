@@ -77,7 +77,7 @@ The monitor now outputs **structured JSON signals** for AAE squad treasury + pro
 ## Monitoring Rules (Jordan's Exact Spec)
 
 ### Rule 1 — Check Frequency
-⏰ LP Monitor runs **every 4 hours** (8:25 AM, 12:25 PM, 4:25 PM, 8:25 PM ET) via cron job `2ca757ee055c`.
+⏰ LP Monitor runs **4×/day** (8:25 AM, 12:25 PM, 4:25 PM, 8:25 PM ET) via consolidated cron job `44f7c2028766`.
 
 ### Rule 2 — In Range + High Efficiency → SILENT
 🤫 Price in range AND fee efficiency **50–100%** → **no alert, stay silent** (compact log only)
@@ -194,13 +194,10 @@ apr = (daily_fees × 365 / position_usd) × 100
 |-----|----|----------|--------|--------|
 | **YoYo — DeFi Milestone + LP Monitor** | `44f7c2028766` | `25 8,12,16,20 * * *` | ✅ Active | `lp-aae-signal-monitor.py` |
 
-> **Consolidated (Apr 27):** Merged LP Range Monitor (every 10 min) into DeFi Milestone tracker.
+> **Consolidated (Apr 27, final):** Merged LP Range Monitor (every 10 min) into DeFi Milestone tracker.
 > Preserved 2-check out-of-range confirmation, quiet hours, and all fee efficiency rules.
-> Old jobs removed: `b2bb2bae4fc5` (LP Range Monitor), `504ac01d54ed` (old daily LP+D5).
-
-> **Consolidated (Apr 27):** Merged LP Fee Efficiency Monitor (`c2c2e40b440e`, was every 10 min) into this job. Single source of truth for LP monitoring + milestone tracking.
-
-> **Consolidated (Apr 27):** Merged standalone LP Position Monitor into DeFi Milestone tracker. All LP fee monitor rules (range, efficiency, micro-DCA, compound, tier progression) now run in a single job.
+> Single source of truth: `lp-aae-signal-monitor.py` — all LP + milestone logic in one script.
+> Old jobs removed: `b2bb2bae4fc5`, `504ac01d54ed`, `c2c2e40b440e`.
 
 ---
 

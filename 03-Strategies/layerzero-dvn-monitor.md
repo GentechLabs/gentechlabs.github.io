@@ -53,3 +53,20 @@
     52|    53|- [ ] Continue polling Dune dashboard directly or via screenshot/vision tool once bot-detection workaround is available to confirm if 1-of-1 DVN share is declining post-incident.
     53|    54|- [ ] Monitor LayerZero governance channels (Snapshot, forum) for any formal proposals to enforce minimum DVN thresholds at the protocol level.
     54|    55|- [ ] Track competitor messaging (Wormhole, Axelar, Hyperlane) for opportunistic “security-first” campaigns targeting current LayerZero integrators.
+
+# LayerZero DVN Security Monitor Report - 2026-04-27
+
+**Date Checked:** 2026-04-27
+**Risk Level:** Unchanged (High for 1/1 configs, Low for multi-DVN)
+
+## Key Findings
+- **New Security Advisories / CVEs:** None detected. GitHub Security Advisories page is empty. NVD search yields no LayerZero-specific CVEs. No emergency patches or new releases on the LayerZero-v2 repo since prior check.
+- **Official Blog Status (layerzero.network/blog):** Most recent posts remain the KelpDAO Incident Statement (Apr 19), Worldpay Payments DVN launch (Mar 31), and institutional partnership announcements (Canton, Centrifuge, KorDA). No new security updates in the past 7 days.
+- **Protocol Configuration Changes:** LayerZero has not published any protocol-level mandatory DVN configuration changes. Multi-DVN redundancy remains a recommendation, not an on-chain enforcement. No new governance proposals (Snapshot/forum) detected.
+- **Exploit / Disclosure Status:** No new critical exploits disclosed since the KelpDAO incident. Post-incident media coverage continues (e.g., “Ripple CTO Flags Bridge Security Gaps,” “~47% of OApps still use 1-of-1 DVN”). These are retrospective analyses, not new breaches.
+- **DVN Infrastructure / Validator Updates:** No new validator set rotations or DVN operator announcements detected. Worldpay’s Payments DVN (enterprise-grade, 9+ chains) is still the most recent major DVN entrant.
+
+## Action Items
+- [ ] Continue verifying Gentech-linked integrations are not on 1/1 DVN configs.
+- [ ] Track if LayerZero makes multi-DVN mandatory at the protocol level.
+- [ ] Re-poll Dune dashboard once access is restored to confirm 1/1 DVN share trend.

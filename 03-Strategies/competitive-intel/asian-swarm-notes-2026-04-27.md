@@ -23,3 +23,9 @@
 **Swarms by Kye Gomez**
 - GitHub: `github.com/kyegomez/swarms`
 - Scan requested by Jordan for emulation targets + integration gaps
+
+## Additional Competitive Intel
+**PolyBaskets — Agent Arena**
+- URL: `https://polybaskets.xyz/`
+- Segment: On-chain agent arena/competition
+- Relevance: Directly comparable to GenTech's Agent Economy + competitive agent ecosystem
