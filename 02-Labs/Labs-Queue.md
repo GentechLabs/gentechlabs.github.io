@@ -50,18 +50,34 @@
 ---
 
 ## 🟡 Priority 4: Swarms Solana Adapter
-**Status:** Concept → Scaffold
+**Status:** v0.1.0 Pushed ✅ — In Polish
+**Repo:** `agent-escrow-solana/swarms-solana-adapter/`
 **File:** `02-Labs/Swarms-Solana-Adapter.md`
 **Source:** Jordan directive in HQ thread 22473
 
-### What We're Building
-- `pip install agentech-solana` — one-line Swarms agent → Solana bridge
-- Anchor CPI wrappers in Python (`solana-py` + codegen from IDL)
-- Ed25519 signing bridge (Swarms agent keypair → on-chain validation)
-- Competitive play: undercut Swarms marketplace SaaS with on-chain escrow settlement
+### Completed (v0.1.0)
+- [x] `pyproject.toml` — pip package scaffold, MIT license, Python 3.10+
+- [x] `client.py` — async Anchor client (315 LOC), 7 instructions wrapped
+- [x] `accounts.py` — PDA derivations (config, escrow, vault)
+- [x] `swarms_shim.py` — `SwarmsEscrowAdapter` + `EscrowResult` (140 LOC)
+- [x] `idl.json` — bundled Anchor IDL (program `DKx16ix...`)
+- [x] CLI example (`example_worker.py`)
+
+### Gaps to Close
+- [ ] `Dmob`: Fix `tx_signature` TODO in shim (always None)
+- [ ] `Dmob`: Re-add Swarms `@tool` decorators (deleted in refactor)
+- [ ] `Dmob`: Clarify `anchorpy` dep vs "no runtime dep" in README
+- [ ] `Dmob`: `pytest` suite against devnet or mocked RPC
+- [ ] `Dmob`: Env-overridable `PROGRAM_ID` (currently hardcoded)
+- [ ] `Desmond`: Draft Swarms marketplace listing pitch
+- [ ] `YoYo`: x402 middleware spec (intercept Swarms billing → AAE escrow)
+
+### Blockers for v0.2.0
+- Devnet program deployment (currently has placeholder ID)
+- Live end-to-end test with funded wallet
 
 ### Next Steps
-- [ ] `Dmob`: pip scaffold + `solana-py` RPC client
-- [ ] `Dmob`: Anchor IDL → Python dataclass codegen
-- [ ] `Desmond`: Swarms marketplace fee research (what % do they charge?)
-- [ ] `Desmond`: Adapter README + quickstart draft
+1. `Dmob`: Close polish gaps above (1–2 days)
+2. `Desmond`: Marketplace fee research + listing pitch
+3. `YoYo`: x402 bridge design doc
+
