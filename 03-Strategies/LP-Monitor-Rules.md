@@ -7,7 +7,7 @@
 
 ## Current Position
 
-- **Range:** $9.33 — $9.52 (rebalanced Apr 24)
+- **Range:** $9.10 — $9.40 (rebalanced Apr 27)
 - **Position:** ~$83.37 (3.33 AVAX + $51.91 USDC)
 - **Shape:** Curve
 - **Strategy:** Bear market accumulation — farm the bottom, compound rewards
@@ -192,7 +192,15 @@ apr = (daily_fees × 365 / position_usd) × 100
 
 | Job | ID | Schedule | Status | Script |
 |-----|----|----------|--------|--------|
-| **YoYo — LP + DeFi Milestone Tracker** | `2ca757ee055c` | `25 8,12,16,20 * * *` | ✅ Active | `lp-aae-signal-monitor.py` |
+| **YoYo — DeFi Milestone + LP Monitor** | `44f7c2028766` | `25 8,12,16,20 * * *` | ✅ Active | `lp-aae-signal-monitor.py` |
+
+> **Consolidated (Apr 27):** Merged LP Range Monitor (every 10 min) into DeFi Milestone tracker.
+> Preserved 2-check out-of-range confirmation, quiet hours, and all fee efficiency rules.
+> Old jobs removed: `b2bb2bae4fc5` (LP Range Monitor), `504ac01d54ed` (old daily LP+D5).
+
+> **Consolidated (Apr 27):** Merged LP Fee Efficiency Monitor (`c2c2e40b440e`, was every 10 min) into this job. Single source of truth for LP monitoring + milestone tracking.
+
+> **Consolidated (Apr 27):** Merged standalone LP Position Monitor into DeFi Milestone tracker. All LP fee monitor rules (range, efficiency, micro-DCA, compound, tier progression) now run in a single job.
 
 ---
 
