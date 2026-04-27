@@ -46,3 +46,22 @@
 ## 🟢 Priority 3: Retro9000 Grant
 **Status:** Planning
 **Plan:** `/tmp/retro9000-grant-outline.md`
+
+---
+
+## 🟡 Priority 4: Swarms Solana Adapter
+**Status:** Concept → Scaffold
+**File:** `02-Labs/Swarms-Solana-Adapter.md`
+**Source:** Jordan directive in HQ thread 22473
+
+### What We're Building
+- `pip install agentech-solana` — one-line Swarms agent → Solana bridge
+- Anchor CPI wrappers in Python (`solana-py` + codegen from IDL)
+- Ed25519 signing bridge (Swarms agent keypair → on-chain validation)
+- Competitive play: undercut Swarms marketplace SaaS with on-chain escrow settlement
+
+### Next Steps
+- [ ] `Dmob`: pip scaffold + `solana-py` RPC client
+- [ ] `Dmob`: Anchor IDL → Python dataclass codegen
+- [ ] `Desmond`: Swarms marketplace fee research (what % do they charge?)
+- [ ] `Desmond`: Adapter README + quickstart draft
