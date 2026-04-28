@@ -15,22 +15,62 @@
   "bin_step": 10,
   "fee_tier_bps": 5,
   "position": {
-    "total_usd": 83.92,
-    "token0_amount": 3.762,
-    "token1_amount": 48.37,
+    "total_usd": 134.94,
+    "token0_amount": 3.446,
+    "token1_amount": 103.38,
     "range_low": 9.33,
     "range_high": 9.52,
     "shape": "curve"
   },
   "milestones": [
-    {"tier": 1, "label": "Scout", "daily_fees": 3.0, "description": "Entry rank \u2014 basic strategies unlocked"},
-    {"tier": 2, "label": "Scout+", "daily_fees": 5.0, "description": "Consistent earner \u2014 tighter ranges unlocked"},
-    {"tier": 3, "label": "Raider", "daily_fees": 8.0, "description": "Intermediate \u2014 SPOT shape unlocked"},
-    {"tier": 4, "label": "Raider+", "daily_fees": 10.0, "description": "Advanced single-pool \u2014 bidirectional unlocked"},
-    {"tier": 5, "label": "Warlord", "daily_fees": 15.0, "description": "Multi-pool ready \u2014 portfolio strategies"},
-    {"tier": 6, "label": "Warlord+", "daily_fees": 20.0, "description": "High capital efficiency \u2014 custom ranges"},
-    {"tier": 7, "label": "Sovereign", "daily_fees": 55.0, "description": "Squad-level coordination \u2014 treasury mgmt"},
-    {"tier": 8, "label": "Freedom", "daily_fees": 200.0, "description": "Freedom milestone \u2014 custom strategy creation"}
+    {
+      "tier": 1,
+      "label": "Scout",
+      "daily_fees": 3.0,
+      "description": "Entry rank \u2014 basic strategies unlocked"
+    },
+    {
+      "tier": 2,
+      "label": "Scout+",
+      "daily_fees": 5.0,
+      "description": "Consistent earner \u2014 tighter ranges unlocked"
+    },
+    {
+      "tier": 3,
+      "label": "Raider",
+      "daily_fees": 8.0,
+      "description": "Intermediate \u2014 SPOT shape unlocked"
+    },
+    {
+      "tier": 4,
+      "label": "Raider+",
+      "daily_fees": 10.0,
+      "description": "Advanced single-pool \u2014 bidirectional unlocked"
+    },
+    {
+      "tier": 5,
+      "label": "Warlord",
+      "daily_fees": 15.0,
+      "description": "Multi-pool ready \u2014 portfolio strategies"
+    },
+    {
+      "tier": 6,
+      "label": "Warlord+",
+      "daily_fees": 20.0,
+      "description": "High capital efficiency \u2014 custom ranges"
+    },
+    {
+      "tier": 7,
+      "label": "Sovereign",
+      "daily_fees": 55.0,
+      "description": "Squad-level coordination \u2014 treasury mgmt"
+    },
+    {
+      "tier": 8,
+      "label": "Freedom",
+      "daily_fees": 200.0,
+      "description": "Freedom milestone \u2014 custom strategy creation"
+    }
   ],
   "compound_threshold_usd": 50.0,
   "dca": {
@@ -51,8 +91,21 @@
     "contribution_pct": 100.0
   },
   "alert_rules": {
-    "silent_if": ["in_range", "efficiency_ok", "no_action_needed"],
-    "alert_if": ["out_of_range", "efficiency_low", "milestone_hit", "compound_ready", "dca_day"],
-    "critical_if": ["price_crash", "il_severe"]
+    "silent_if": [
+      "in_range",
+      "efficiency_ok",
+      "no_action_needed"
+    ],
+    "alert_if": [
+      "out_of_range",
+      "efficiency_low",
+      "milestone_hit",
+      "compound_ready",
+      "dca_day"
+    ],
+    "critical_if": [
+      "price_crash",
+      "il_severe"
+    ]
   }
 }
