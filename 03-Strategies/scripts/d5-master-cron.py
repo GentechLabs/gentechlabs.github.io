@@ -49,6 +49,8 @@ COINS = [
 # ── LP Config ─────────────────────────────────────────────────────────────────
 # ── LP Config ─────────────────────────────────────────────────────────────────
 JORDAN_WALLET = "0x7ebff188f2Eba16518C02864589b1403a5d1296a"
+USDC_ADDRESS = "0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E"
+AVAX_GAS_LOW_THRESHOLD = 0.05  # Alert if AVAX below this (for gas)
 
 POOL = {
     "name": "AVAX/USDC",
@@ -123,6 +125,58 @@ def fetch_dexscreener():
     except Exception:
         return {}
 
+# ── On-Chain Position Fetcher ────────────────────────────────────────────────────
+
+def fetch_wallet_position():
+    """Fetch LP position data from Avalanche blockchain via DeBank API"""
+    wallet = POOL.get("wallet", "")
+    if not wallet:
+        return {}
+
+    # DeBank API for portfolio breakdown (free, no key needed)
+    url = f"https://api.debank.com/user/addr/{wallet}"
+    req = urllib.request.Request(url, headers={"User-Agent": "Gentech-Labs/1.0"})
+    try:
+        with urllib.request.urlopen(req, timeout=10) as resp:
+            data = json.loads(resp.read().decode())
+        # Returns total balance and protocol list
+        return {
+            "total_usd": data.get("total_usd", 0),
+            "chain_list": data.get("chain_list", []),
+        }
+    except Exception:
+        return {}
+
+def fetch_wallet_tokens():
+    """Fetch token balances for wallet via DeBank"""
+    wallet = POOL.get("wallet", "")
+    if not wallet:
+        return []
+
+    url = f"https://api.debank.com/user/token_list?addr={wallet}&is_all=false&chain=avax"
+    req = urllib.request.Request(url, headers={"User-Agent": "Gentech-Labs/1.0"})
+    try:
+        with urllib.request.urlopen(req, timeout=10) as resp:
+            data = json.loads(resp.read().decode())
+        return data.get("token_list", [])
+    except Exception:
+        return []
+
+def fetch_wallet_protocols():
+    """Fetch DeFi protocol positions for wallet"""
+    wallet = POOL.get("wallet", "")
+    if not wallet:
+        return []
+
+    url = f"https://api.debank.com/user/protocol_list?addr={wallet}"
+    req = urllib.request.Request(url, headers={"User-Agent": "Gentech-Labs/1.0"})
+    try:
+        with urllib.request.urlopen(req, timeout=10) as resp:
+            data = json.loads(resp.read().decode())
+        return data.get("protocol_list", [])
+    except Exception:
+        return []
+
 def calc_efficiency(price, low, high, shape):
     if price < low or price > high:
         return 0.0
@@ -172,6 +226,47 @@ def fmt_price(p):
 
 def em(change):
     return "🟢" if change >= 0 else "🔴"
+
+# ── Wallet Balance ──────────────────────────────────────────────────────────────
+
+def fetch_wallet_balances():
+    """Fetch AVAX + USDC balances from Snowtrace"""
+    balances = {"avax": 0.0, "usdc": 0.0, "avax_usd": 0.0}
+    wallet = JORDAN_WALLET
+
+    # AVAX native balance
+    try:
+        url = f"https://api.snowtrace.io/api?module=account&action=balance&address={wallet}&tag=latest"
+        req = urllib.request.Request(url, headers={"User-Agent": "Gentech-Labs/1.0"})
+        with urllib.request.urlopen(req, timeout=10) as resp:
+            data = json.loads(resp.read().decode())
+            if data.get("status") == "1":
+                balances["avax"] = round(int(data["result"]) / 1e18, 6)
+    except Exception:
+        pass
+
+    # USDC balance (6 decimals)
+    try:
+        url = f"https://api.snowtrace.io/api?module=account&action=tokenbalance&contractaddress={USDC_ADDRESS}&address={wallet}&tag=latest"
+        req = urllib.request.Request(url, headers={"User-Agent": "Gentech-Labs/1.0"})
+        with urllib.request.urlopen(req, timeout=10) as resp:
+            data = json.loads(resp.read().decode())
+            if data.get("status") == "1":
+                balances["usdc"] = round(int(data["result"]) / 1e6, 2)
+    except Exception:
+        pass
+
+    return balances
+
+def wallet_alerts(balances, avax_price):
+    """Check if wallet needs attention"""
+    alerts = []
+    if balances["avax"] < AVAX_GAS_LOW_THRESHOLD:
+        alerts.append(f"⛽ Low AVAX for gas ({balances['avax']:.4f} AVAX)")
+    if balances["usdc"] < 1.0:
+        alerts.append(f"💸 Near-zero USDC (${balances['usdc']:.2f})")
+    balances["avax_usd"] = round(balances["avax"] * avax_price, 2) if avax_price else 0
+    return alerts
 
 # ── CMC Watchlist Builder ──────────────────────────────────────────────────────
 
@@ -244,6 +339,8 @@ def should_alert(alerts, lp):
     if lp["comp_ready"]:
         return True
     if lp["is_monday"]:
+        return True
+    if lp.get("wallet_alerts"):
         return True
     return False
 
@@ -331,6 +428,18 @@ def print_report(results, alerts, lp):
     lines.append(f"• Next Milestone: ${MILESTONES[min(lp['curr_idx']+1, len(MILESTONES)-1)]['daily_fees']:.1f}/day")
     lines.append(f"• Next Compound: ${max(0, COMPOUND_THRESHOLD - lp['cum']):.2f} away")
 
+    # Wallet Balances
+    balances = lp.get("balances", {"avax": 0, "usdc": 0, "avax_usd": 0})
+    w_alerts = lp.get("wallet_alerts", [])
+
+    lines.append("")
+    lines.append("🏦 **Wallet Balances:**")
+    lines.append(f"• AVAX: {balances['avax']:.4f} (~${balances['avax_usd']:.2f})")
+    lines.append(f"• USDC: ${balances['usdc']:.2f}")
+    if w_alerts:
+        for a in w_alerts:
+            lines.append(f"⚠️ {a}")
+
     lines.append("")
     lines.append("💡 **Strategy**: Bear market accumulation — farm the bottom, compound rewards.")
     lines.append("📊 Data: CMC + DexScreener | D5 Engine v1")
@@ -347,6 +456,12 @@ def main():
 
     results, alerts = build_watchlist(cmc_data)
     lp = build_lp()
+
+    # Wallet balance check
+    balances = fetch_wallet_balances()
+    w_alerts = wallet_alerts(balances, lp.get("price", 0))
+    lp["wallet_alerts"] = w_alerts
+    lp["balances"] = balances
 
     if not should_alert(alerts, lp):
         print("[SILENT]")
