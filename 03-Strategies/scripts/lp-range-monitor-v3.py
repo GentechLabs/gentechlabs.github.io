@@ -4,7 +4,7 @@ LP Range Monitor v3 — LFJ AVAX/USDC Pool
 Milestone tracker + tiered breakout alerts.
 
 New in v3:
-  - Range updated to 9.00–9.30
+  - Range updated to 9.02–9.32 (Curve shape)
   - Fee efficiency milestone tracker (cumulative fees, milestones)
   - Tiered alerts: ⚠️ light warning → 🔴 red alert (5-min escalation)
   - Breakout direction tracking (upside/downside)
@@ -20,8 +20,8 @@ from typing import Optional
 # ── Config ──────────────────────────────────────────────────────────────────
 POOL_ADDRESS = "0x864d4e5ee7318e97483db7eb0912e09f161516ea"
 CHAIN = "avalanche"
-RANGE_LOW = 9.00
-RANGE_HIGH = 9.30
+RANGE_LOW = 9.02
+RANGE_HIGH = 9.32
 STATE_FILE = os.path.expanduser("~/.hermes/scripts/.lfj-range-state.json")
 POSITION_FILE = os.path.expanduser("~/.hermes/scripts/.lfj-position-tracker.json")
 MILESTONE_FILE = os.path.expanduser("~/.hermes/scripts/.lfj-milestone-tracker.json")

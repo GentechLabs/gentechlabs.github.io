@@ -38,9 +38,9 @@ DEFAULT_CONFIG = {
         "total_usd": 134.94,
         "token0_amount": 3.446,
         "token1_amount": 103.38,
-        "range_low": 9.00,
-        "range_high": 9.30,
-        "shape": "bid-ask"
+        "range_low": 9.02,
+        "range_high": 9.32,
+        "shape": "curve"
     },
     "milestones": [
         {"tier": 1, "label": "Scout", "daily_fees": 3.0, "description": "Entry rank — basic strategies unlocked"},
