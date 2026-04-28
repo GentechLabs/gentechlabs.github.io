@@ -7,13 +7,13 @@
 
 ## Current Position
 
-- **Range:** $9.00 — $9.30 (rebalanced Apr 27 — bid-ask shape)
-- **Position:** ~$83.37 (3.33 AVAX + $51.91 USDC)
+- **Range:** $9.00 — $9.30 (rebalanced Apr 27, bid-ask)
+- **Position:** ~$135.24 (3.446 AVAX @ $31.87 + 103.38 USDC @ $103.37)
 - **Shape:** Bid-Ask
 - **Strategy:** Bear market accumulation — farm the bottom, compound rewards
 - **Crash Scenario (Dadrian):** If AVAX drops to $8.30-9.00, DCA strategy will work itself out through Impermanent Loss (IL). Continuous DCA at lower prices builds cheaper positions—IL math naturally offsets price decay over time.
 - **Optimal Entry Range:** During crash, consider 70 USDC / 30 AVAX bid-ask weighting (Curve-style concentrated liquidity).
-- **Current Tool:** Using Curve shape while moving slowly (low volatility)
+- **Current Tool:** Bid-Ask shape — range widened for stability
 
 ---
 
@@ -192,7 +192,8 @@ apr = (daily_fees × 365 / position_usd) × 100
 
 | Job | ID | Schedule | Status | Script |
 |-----|----|----------|--------|--------|
-| **YoYo — DeFi Milestone + LP Monitor** | `44f7c2028766` | `25 8,12,16,20 * * *` | ✅ Active | `lp-aae-signal-monitor.py` |
+|| **LP Range Monitor v3** | `03b4cc0310ba` | `*/10 * * * *` | ✅ Active | `lp-range-monitor-v3.py` |
+| **YoYo — DeFi Milestone + LP Monitor (Consolidated)** | `2563e78bcf72` | `25 8,12,16,20 * * *` | ✅ Active | Prompt-driven (DexScreener) |
 
 > **Consolidated (Apr 27, final):** Merged LP Range Monitor (every 10 min) into DeFi Milestone tracker.
 > Preserved 2-check out-of-range confirmation, quiet hours, and all fee efficiency rules.
@@ -205,7 +206,7 @@ apr = (daily_fees × 365 / position_usd) × 100
 
 **"Bear market accumulation play — farm the bottom, compound rewards"**
 
-- LP generates fees in the $9.33-$9.52 range
+- LP generates fees in the $9.00-$9.30 range
 - Compound weekly: reinvest accumulated fees + $50-100 DCA
 - Target: $5/day (Scout) → $20/day (Raider) by July → $55/day (Warlord) by Sep 2027
 - Each compound increases position → more fees → faster tier progression
@@ -216,7 +217,7 @@ apr = (daily_fees × 365 / position_usd) × 100
 
 | Scenario | Position Value | Loss from Current | Mechanics | Decision Logic |
 |----------|---------------|-------------------|-----------|----------------|
-| **In Range (9.33–9.52)** | ~$83.92 | — | Earning fees | ✅ **HOLD** — keep LP, compound fees |
+|| **In Range (9.00–9.30)** | ~$83.92 | — | Earning fees | ✅ **HOLD** — keep LP, compound fees |
 | **Below Range ($8.80)** | ~$78.63 | -$5.29 | 100% AVAX | ❓ **HOLD vs DCA?** — if AVAX fundamentals intact, **add USDC** |
 | **Crash ($8.30)** | ~$74.17 | -$9.75 | 100% AVAX | ⚠️ **DCA or EXIT?** — if deep dump, **70 USDC / 30 AVAX** weighted re-entry |
 | **Staking comparison** | — | — | 13.5% APR vs 5138% LP APR | ✅ **LP wins** — fees dominate staking unless extreme volatility |

@@ -1,7 +1,7 @@
 # LFJ AVAX/USDC 5bps Pool — Analysis
 
 **Date Queued:** April 14, 2026
-**Status:** 🟢 Active — monitored by LP Watchlist cron (every 2 hrs, 6:30 AM–11 PM Eastern)
+**Status:** 🟢 Active — monitored by DeFi Milestone + LP Monitor (every 10 min, tiered alerts)
 **Priority:** Active Position
 **Agent:** YoYo (Strategies)
 
@@ -38,7 +38,7 @@
 - **AVAX:** 3.88 (~$36.56)
 - **USDC:** 46.82 (~$46.81)
 - **AVAX Price:** ~$9.418
-- **Range:** $9.33 – $9.52 (Curve Shape) — *rebalanced Apr 24 (2nd time)*
+- **Range:** $9.00 – $9.30 (Bid-Ask) — *rebalanced Apr 27 (3rd time)*
 - **Status:** In range, earning fees
 - **Fees 24H:** $0.58 (~0.7% daily → ~255% APR implied)
 - **Claimable Rewards:** $0.0075
@@ -68,6 +68,7 @@
 | Apr 24 | $83.37 | 3.88 | 46.82 | $9.418 | $0.58 | Screenshot |
 | Apr 24 | $83.37 | 3.88 | 46.82 | $9.418 | — | Rebalance: range 9.10-9.65 → 9.26-9.46 |
 | Apr 24 | $83.14 | 3.311 | 52.08 | $9.381 | — | Rebalance: range 9.26-9.46 → 9.33-9.52 |
+| Apr 27 | $83.37 | 3.33 | 51.91 | — | — | Rebalance: range 9.33-9.52 → 9.00-9.30 (bid-ask) |
 
 ## Analysis Requested
 

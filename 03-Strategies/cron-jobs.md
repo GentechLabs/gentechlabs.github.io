@@ -1,5 +1,5 @@
 # YoYo Cron Jobs — Active Manifest
-> Last updated: 2026-04-27
+> Last updated: 2026-04-27 (consolidated LP + DeFi into single YoYo job)
 > Models: YoYo/Gentech/Desmond → `kimi-k2.6` | DMOB → `qwen3-coder-next` | Provider: Ollama Cloud
 > Delivery: Strategies group (-1002916759037)
 >
@@ -10,26 +10,30 @@
 ## 📊 Strategies Cron Jobs (Consolidated)
 
 ### 🏆 DeFi Milestone + LP Monitor (Canonical)
-**Job ID:** `44f7c2028766`
-**Name:** YoYo — DeFi Milestone + LP Monitor
+**Job ID:** `2563e78bcf72`
+**Name:** YoYo — DeFi Milestone + LP Monitor (Consolidated)
+**Profile:** YoYo
 **Schedule:** `25 8,12,16,20 * * *` (4×/day at 8:25, 12:25, 4:25, 8:25 ET)
-**Script:** `lp-aae-signal-monitor.py` (AAE Signal Monitor v2 — consolidated)
+**Script:** None (prompt-driven, uses DexScreener API)
 **Status:** ✅ Active — sole LP + milestone cron
 
 **Consolidated from (Apr 27):**
-| Former Job | ID | Reason Removed |
-|------------|-----|----------------|
-| LP Range Monitor | `b2bb2bae4fc5` | Merged (was every 10 min) |
-| Daily LP + D5 Milestone | `504ac01d54ed` | Merged (never ran) |
-| LP Fee Efficiency Monitor | `c2c2e40b440e` | Merged (was every 10 min) |
+| Former Job | Profile | ID | Reason Removed |
+|------------|---------|-----|----------------|
+| DeFi Milestone + LP Monitor | DMOB | `44f7c2028766` | Merged into YoYo canonical |
+| LP Position Monitor + Alerts | Desmond | `0b2beec3f702` | Merged into YoYo canonical |
+| LP Fee Efficiency Monitor | YoYo | (old) | Replaced with consolidated |
+| LP Range Monitor | DMOB | `b2bb2bae4fc5` | Previously merged |
 
 **What it does:**
-1. Fetches live pool data (Birdeye x402 → DexScreener → on-chain RPC fallback)
-2. Calculates fee efficiency + position status (in/out of range) with shape awareness
-3. Tracks D5 Milestone progression (Scout $5/day → Raider $20 → Warlord $55 → Sovereign $200)
-4. Micro-DCA triggers based on efficiency thresholds
-5. Compound threshold tracking ($50)
-6. TVL trend monitoring (7-day)
+1. Fetches live pool data (DexScreener primary → DeFiLlama → CoinGecko fallback)
+2. Calculates fee efficiency + position status (in/out of range) with Curve formula
+3. LP monitoring rules (Jordan's exact spec: silent thresholds, recovery alerts, quiet hours)
+4. Tracks D5 Milestone / Squad Progression (Scout $5/day → Raider $20 → Warlord $55 → Sovereign $200)
+5. Micro-DCA triggers with bid-ask weighting (crash protection)
+6. Compound threshold tracking ($50)
+7. Market scenario detection (Bullish/Bearish/Ranging) with shape recommendations
+8. DeFi milestone check from vault
 
 **LP Fee Monitoring Rules (Jordan's Spec):**
 - **SILENT:** In range + efficiency ≥ 50% + no action → no Telegram alert
@@ -38,14 +42,17 @@
 - **CRITICAL:** Efficiency < 30% or price crash → immediate alert
 - **Quiet hours:** 11 PM – 6:30 AM ET → no alerts
 - **Recovery alert:** Price returns to range after being out
+- **Silent rules:** Only alert if eff < 60%, Monday DCA, AVAX ±5% from entry, or OOR/recovery
 
 **Micro-DCA Triggers:**
-| Efficiency | Flag | Bonus DCA | Action |
-|-----------|------|-----------|--------|
-| 60–50% | 🟡 Yellow | $0 | Watch only |
-| 50–40% | 🟠 Orange | $10 | Micro-DCA + monitor |
-| 40–30% | 🔴 Red | $20 | Consider rebalance |
-| <30% | 🔴 Critical | $20 + rebalance | Shift range immediately |
+| Efficiency | Flag | Bonus DCA | USDC/AVAX Weight | Action |
+|-----------|------|-----------|-----------------|--------|
+| 60–50% | 🟡 Yellow | $0 | 50/50 | Watch only |
+| 50–40% | 🟠 Orange | $10 | 70/30 | Micro-DCA + monitor |
+| 40–30% | 🔴 Red | $20 | 80/20 | Consider rebalance |
+| <30% | ⚫ Critical | $20 + rebalance | 90/10 | Shift range immediately |
+
+**Position:** Range $9.10–$9.40 (rebalanced Apr 27), Curve shape, ~$83.37
 
 **State files:**
 - Config: `~/.hermes/scripts/.lfj-aae-config.json`
@@ -67,12 +74,14 @@
 
 ## ⏸️ Retired / Merged
 
-| Job ID | Name | Reason |
-|--------|------|--------|
-| `bce87f59b79e` | CMC Watchlist (old) | Replaced by `1f10f10b2a07` with DexScreener |
-| `faed4f588aef` | Daily LP + D5 (old) | Replaced by `44f7c2028766` consolidated tracker |
-| `b2bb2bae4fc5` | LP Range Monitor (every 10 min) | Consolidated into `44f7c2028766` |
-| `504ac01d54ed` | Daily LP + D5 (never ran) | Consolidated into `44f7c2028766` |
+| Job ID | Profile | Name | Reason |
+|--------|---------|------|--------|
+| `44f7c2028766` | DMOB | DeFi Milestone + LP Monitor | Consolidated into YoYo `2563e78bcf72` |
+| `0b2beec3f702` | Desmond | LP Position Monitor + Alerts | Consolidated into YoYo `2563e78bcf72` |
+| `bce87f59b79e` | YoYo | CMC Watchlist (old) | Replaced by `1f10f10b2a07` with DexScreener |
+| `faed4f588aef` | YoYo | Daily LP + D5 (old) | Replaced by consolidated tracker |
+| `b2bb2bae4fc5` | DMOB | LP Range Monitor (every 10 min) | Previously consolidated |
+| `504ac01d54ed` | YoYo | Daily LP + D5 (never ran) | Previously consolidated |
 
 ---
 
@@ -118,4 +127,4 @@
 
 ---
 
-*Canonical LP tracker: `lp-aae-signal-monitor.py` (job `44f7c2028766`) — single source of truth for LP + milestones.*
+*Canonical LP + DeFi tracker: YoYo job `2563e78bcf72` — single source of truth for LP monitoring + milestones. Consolidated Apr 27 from YoYo/DMOB/Desmond duplicates.*

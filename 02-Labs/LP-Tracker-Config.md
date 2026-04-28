@@ -8,7 +8,7 @@
 - **USDC Address**: `0x9b7e9f9ef8734c71904d002f8b6bc66dd9c48a6e`
 
 ## Strategy Configuration
-- **Target Range**: 9.36 - 9.53 USDC per AVAX
+- **Target Range**: 9.00 - 9.30 USDC per AVAX (rebalanced Apr 27)
 - **Monitoring Frequency**: Every 2 hours (7 AM - 9 PM EDT)
 - **Data Sources**: DexScreener API, LFI API
 
