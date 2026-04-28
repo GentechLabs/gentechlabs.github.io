@@ -47,6 +47,8 @@ COINS = [
 ]
 
 # ── LP Config ─────────────────────────────────────────────────────────────────
+# ── LP Config ─────────────────────────────────────────────────────────────────
+JORDAN_WALLET = "0x7ebff188f2Eba16518C02864589b1403a5d1296a"
 
 POOL = {
     "name": "AVAX/USDC",
@@ -57,6 +59,7 @@ POOL = {
     "shape": "curve",
     "position_usd": 138.92,
     "fee_tier_bps": 5,
+    "wallet": JORDAN_WALLET,
 }
 
 MILESTONES = [

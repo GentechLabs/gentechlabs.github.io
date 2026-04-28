@@ -1,33 +1,37 @@
+---
+type: index
+title: "Travel"
+updated: 2026-04-28
+tags: [travel, vacation]
+---
+
 # ✈️ Travel
 
-Travel planning and trip research. Each country gets its own subfolder.
-
-## Structure
-
-```
-Travel/
-├── README.md
-├── Philippines/
-│   ├── 2026-Birthday-Trip-Pampanga.md   (master trip doc)
-│   └── flights.md                       (detailed flight research)
-├── Thailand/
-│   └── {Year}-{Trip-Name}.md
-└── {Country}/
-    └── ...
-```
-
-## Convention
-
-When planning a trip:
-1. Check if a folder for the destination country exists
-2. If not, create it
-3. Create or update the trip file inside that country folder
-4. Include: weather, pricing, routing, accommodation, budget, TODOs
+All trip planning lives here. Each country gets its own folder.
 
 ## Active Trips
 
-- **Philippines + Thailand** — September 2026 Birthday Trip (Jordan + Angela)
-  - CVG → Bangkok → Clark/Angeles City → CVG
-  - Status: Planning — flight routing in progress
-  - Master doc: `Philippines/2026-Birthday-Trip-Pampanga.md`
-  - Flight details: `Philippines/flights.md`
+| Trip | Status | Dates | Folder |
+|------|--------|-------|--------|
+| 🇩🇴 Dominican Republic (Sosua) | Planning | Late May / Early Jun 2026 | [Dominican-Republic/](Dominican-Republic/) |
+| 🇵🇭 Philippines + 🇹🇭 Thailand | Planning | Sep 2026 | [Philippines/](Philippines/) |
+
+## Wishlist
+
+- [ ] Beach vibes — somewhere with sand and no WiFi obligations
+- [ ] Digital nomad trip — build from a beach, agents run the show
+
+## Budget Tracker
+
+| Source | Status | Amount |
+|--------|--------|--------|
+| Kite AI Hackathon | In progress | TBD |
+| ARC Hackathon | In progress | TBD |
+| AgentEscrow | Building | Future revenue |
+| Amazon | Active | Day job |
+
+## Notes
+
+- Hackathon wins → vacation fund
+- AgentEscrow revenue → sustainable travel budget
+- Flight search: LetsFG skill installed (`letsfg search`)

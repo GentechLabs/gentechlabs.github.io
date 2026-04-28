@@ -170,10 +170,20 @@ Sep 12 — Clark → CVG (home)
 - [ ] Travel insurance
 - [ ] Pack list for rainy season
 
+## SFO Alternative (Desmond Analysis)
+
+If Jordan flies out of SFO instead of CVG:
+- **SFO → CRK:** $799 (cheapest found)
+- **10-day trip total:** ~$1,614 (~₱98K)
+- **On-the-ground budget:** $35-50/day
+- **Peso rate:** ₱60.77 (record weak — 11% more purchasing power than 2025)
+- Clark (CRK) is 20-30 min from Angeles City
+
 ## Research History
 
 - **2026-04-28:** Initial trip planning — flight routing, pricing research
 - **Key finding:** Open-jaw CVG → BKK → CRK → CVG is cheapest route
+- **SFO alternative:** $799 flights, ~$1,614 total trip from SFO
 - **Skill needed:** Flight search skill (Jordan looking for LetsFG repo)
 - LetsFG integration pending — will replace browser-based flight search
 

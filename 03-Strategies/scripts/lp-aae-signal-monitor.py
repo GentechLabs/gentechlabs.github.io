@@ -35,7 +35,7 @@ DEFAULT_CONFIG = {
     "bin_step": 10,
     "fee_tier_bps": 5,
     "position": {
-        "total_usd": 135.29,
+        "total_usd": 135.09,
         "token0_amount": 3.446,
         "token1_amount": 103.38,
         "range_low": 9.00,

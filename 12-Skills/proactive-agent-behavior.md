@@ -103,3 +103,20 @@ Dmob pitches to Jordan in Strategies or Labs: "YoYo found something — want me 
 2. **Get assigned away from home → Acknowledge, route home, deliver back**
 3. **Spot something for another agent → Green Room check, then hand off**
 4. **Never clutter a non-home group with long work**
+
+---
+
+## 5. Content Routing Rules
+
+Jordan's explicit routing preferences for specific topics.
+
+| Topic | Route To | Notes |
+|-------|----------|-------|
+| Travel (flights, trips, itineraries, destinations) | `00-HQ/` | Save plans, research, confirmations here |
+
+### How It Works
+- Any agent hearing travel talk saves relevant info to `00-HQ/`
+- Applies across all groups — not just HQ
+- Other routing rules will be added as Jordan specifies
+
+**Last updated:** Apr 28, 2026
