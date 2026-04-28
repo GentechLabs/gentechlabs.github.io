@@ -11,7 +11,7 @@
 |-----------|----------|-----------|----------|--------|
 | **Solana Frontier** | May 11 | **13** | 🔴 PRIMARY | Core + Layer 2 built → deploy |
 | **Kite AI** | May 17 | **19** | 🔴 PRIMARY | 52/52 tests → deploy |
-| **Google Cloud Rapid Agent** | Jun 11 | **44** | 🟡 QUEUED | Starts after Solana/Kite |
+| **Google Cloud Rapid Agent** | Jun 11 | **44** | 🟡 REGISTERED | Starts after Solana/Kite |
 | **Google for Startups AI Agents** | Jun 5 | **38** | 🟡 REGISTERED | $60K + credits |
 | **AVAX Retro9000** | Jul 14 | 77 | ⚪ FUTURE | Full stack showcase |
 | **ETHGlobal NYC** | Jun 12-14 | 45 | ⚪ FUTURE | Networking + AAE |

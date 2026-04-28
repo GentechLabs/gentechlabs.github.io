@@ -1,6 +1,6 @@
 # Google Cloud Rapid Agent Hackathon
 
-**Status:** 🟡 QUEUED — starts after Solana Frontier + Kite AI
+**Status:** 🟡 REGISTERED — starts after Solana Frontier + Kite AI
 **Deadline:** May 5 – Jun 11, 2026
 **Prize:** $60,000 total pool
 **Platform:** Devpost (managed by Google)
