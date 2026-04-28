@@ -2,7 +2,7 @@
 Status: Updated Apr 25, 2026
 
 |## Current Focus
-|- **Kite AI Hackathon** 🟠: Agent Economy — AAE lifecycle landing on Kite AI settlement. **Deadline: May 11**. $10K pool. Track: Agentic Commerce.
+|- **Kite AI Hackathon** 🟠: Agent Economy — AAE lifecycle landing on Kite AI settlement. **Deadline: May 17** (updated Apr 28). $10K pool. Track: Agentic Commerce.
 |- **Solana Frontier (Colosseum)** 🟢: Agent Economy — Solana-native high-throughput labor market. **Deadline: May 11**. $230K+ pool + $250K accelerator.
 |- **ElevenHacks #6** 🔴: Agent Economy — Voice interface for agent hiring. ~**May 7**. $10K + credits.
 |- **ARC Hackathon**: Escrow foundation of the agent economy. (Details TBD.)

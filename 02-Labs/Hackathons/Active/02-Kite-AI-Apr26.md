@@ -1,7 +1,7 @@
 |# 🏆 Kite AI Global Hackathon
 
 **Status:** ✅ BUILDING
-**Deadline:** May 11, 2026
+**Deadline:** May 17, 2026 (extended from May 11)
 **Prize:** $10,000
 **Chain:** Kite AI
 **Theme:** Agentic Commerce — the **agent labor market** landing on Kite AI

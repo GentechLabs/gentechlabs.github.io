@@ -13,7 +13,7 @@
 ## Active (Deadline Soon) — Ordered by Due Date
 
 - [ ] `[P]` **Solana Frontier + Sidetracks** — May 11 | 💰 $680K+ | Solana | All 5 layers | 🔴 PRIMARY
-- [ ] `[P]` **Kite AI Global** — May 11 | 💰 TBA | Kite AI | GenLayer enforcement | 🟡 ACTIVE
+- [ ] `[P]` **Kite AI Global** — May 17 (extended) | 💰 TBA | Kite AI | GenLayer enforcement | 🟡 ACTIVE
 
 ## Upcoming
 

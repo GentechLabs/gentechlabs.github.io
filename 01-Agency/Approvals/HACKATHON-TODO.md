@@ -10,7 +10,7 @@
 | Hackathon | Deadline | Days Left | Priority | Status |
 |-----------|----------|-----------|----------|--------|
 | **Solana Frontier** | May 11 | **13** | 🔴 PRIMARY | Build + deploy + demo |
-| **Kite AI** | May 11 | **13** | 🔴 PRIMARY | Deploy + demo |
+| **Kite AI** | May 17 | **19** | 🔴 PRIMARY | Deploy + demo |
 | **Superteam Earn (Zerion)** | May 11 | 13 | 🟡 SIDETRACK | $5K — reuse AgentKeeper |
 | **Superteam Earn (GoldRush)** | May 11 | 13 | 🟡 SIDETRACK | $3K — reuse AgentKeeper |
 | **AVAX Retro9000** | Jul 14 | 77 | ⚪ FUTURE | Full stack showcase |

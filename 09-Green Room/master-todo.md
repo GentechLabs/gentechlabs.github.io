@@ -6,7 +6,7 @@
 - [ ] Sidetrack adapter submissions (Zerion $5K, GoldRush $3K)
 - [ ] Submit to Colosseum portal
 
-## 🟡 P1 — Kite AI Hackathon (May 11)
+## 🟡 P1 — Kite AI Hackathon (May 17 — updated Apr 28)
 - [x] Brain backup to GitHub ✅ (github.com/Gentech-Labs/hermes-brain-backup)
 - [x] ElevenLabs voices configured ✅
 - [x] All 4 agents connected + running ✅

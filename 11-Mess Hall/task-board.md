@@ -31,7 +31,7 @@
 ### Dmob — Code (Labs)
 - [x] **[X]** ARC Hackathon — AgentEscrow + x402 nanopayments | **Due: Apr 25** | ❌ **WITHDRAWN (Apr 22)** — see `arc-salvage-log.md`
 - [ ] **[P]** **Solana Frontier** — PRIMARY focus. Identify tracks, build plan, start execution | **Due: May 11** | 🟥 **ACTIVE**
-- [ ] **[P]** **Kite AI Hackathon** — PRIMARY focus alongside Solana Frontier | **Due: May 11** | 🟥 **ACTIVE**
+- [ ] **[P]** **Kite AI Hackathon** — PRIMARY focus alongside Solana Frontier | **Due: May 17** | 🟥 **ACTIVE**
 - [x] **[X]** ETHGlobal Open Agents — DROPPED. Assets salvaged to `10-Archive/Salvaged-Assets/ethglobal-patterns/`. Focus on Solana Frontier.
 - [x] **[X]** Nous Hermes Creative — SKIPPED per Jordan
 - [x] **[X]** Dev3pack Global — SKIPPED per Jordan
@@ -69,7 +69,8 @@
 
 ## 🟢 WAITING ON TRIGGER
 
-→ *May 11: Kite AI + Solana Frontier submission deadlines*
+→ *May 11: Solana Frontier submission deadline*
+→ *May 17: Kite AI submission deadline (extended)*
 
 ## ❌ DISCARDED
 
