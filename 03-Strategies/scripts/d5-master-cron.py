@@ -22,7 +22,18 @@ from datetime import datetime, timezone, timedelta
 
 # ── CMC ───────────────────────────────────────────────────────────────────────
 
-CMC_API_KEY = "ff52c5f015c3490da49adf12513a6d55"
+def load_cmc_key():
+    """Load CMC API key from config file or environment"""
+    # Try config file first (absolute path)
+    config_path = "/root/.hermes/scripts/cmc_config.json"
+    if os.path.exists(config_path):
+        with open(config_path) as f:
+            config = json.load(f)
+            return config.get("coinmarketcap_api_key", "")
+    # Fallback to environment variable
+    return os.environ.get("CMC_API_KEY", "")
+
+CMC_API_KEY = load_cmc_key()
 CMC_THRESHOLD = 3.0
 
 COINS = [
@@ -41,8 +52,8 @@ POOL = {
     "name": "AVAX/USDC",
     "chain": "avalanche",
     "pool_address": "0x864d4e5ee7318e97483db7eb0912e09f161516ea",
-    "range_low": 9.10,
-    "range_high": 9.40,
+    "range_low": 9.00,
+    "range_high": 9.30,
     "shape": "curve",
     "position_usd": 138.92,
     "fee_tier_bps": 5,

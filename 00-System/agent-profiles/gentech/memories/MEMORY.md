@@ -4,7 +4,7 @@ Gentech=HQ coordinator, YoYo=Investor, DMOB=Dev/Auditor, Desmond=Content. Collab
 §
 Model stack (Apr 24): Target models active. HQ=Gentech/YoYo/Desmond jobs run on `kimi-k2.6`, DMOB jobs run on `qwen3-coder-next`. All 30 cron jobs migrated from `gemma4:31b` Apr 24. config.yaml=source of truth (NOT Telegram /model). Jordan handles model switches on laptop at home via config directly.
 §
-AAE: REP=soulbound proof-of-skill, $TECH=economy. USDC full/$TECH 20-30% off. Birdeye x402 $0.003/req. Active LP: LFJ AVAX/USDC 5bps (pool 0x864d4e5e...16ea), entry $31.16 Mar 31, range $9.10-$9.65. P&L tracker in 03-Strategies/scripts/. Combined cron faed4f588aef = watchlist+LP hourly.
+AAE: REP=soulbound proof-of-skill, $TECH=economy. USDC full/$TECH 20-30% off. Birdeye x402 $0.003/req. Active LP: LFJ AVAX/USDC 5bps (pool 0x864d4e5e...16ea), entry $31.16 Mar 31, range $9.00-$9.30. P&L tracker in 03-Strategies/scripts/. Combined cron faed4f588aef = watchlist+LP hourly.
 §
 Routing Workflow: Links (especially X) trigger 'Smart Routing'. Keep work in the group where the link was posted unless Jordan explicitly requests 'Bring this to HQ'. Cross-agent coordination for links happens in Mess Hall/Green Room first.
 §

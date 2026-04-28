@@ -1,7 +1,7 @@
 # 🎯 Hackathon Command Center — April 2026
 
-**Last updated:** April 20, 2026
-**Status:** Active sprint — ARC is LIVE
+**Last updated:** April 28, 2026
+**Status:** Active sprint — Solana Frontier + Kite AI (May 11)
 
 ---
 
@@ -9,55 +9,75 @@
 
 | Hackathon | Deadline | Days Left | Priority | Status |
 |-----------|----------|-----------|----------|--------|
-| **ARC (x402)** | Apr 25 | **5** | 🔴 CRITICAL | Deploy + video + submit |
-| **Kite AI** | Apr 26 | 6 | 🟡 SECONDARY | Pivot after ARC |
-| **ETHGlobal Open Agents** | May 3 | 13 | 🟢 STRONG | 7/7 tests, need deploy |
-| **Solana Frontier** | May 11 | 21 | ⚪ WAIT | Start after May 3 |
-| **Dev3pack** | May 8 | 18 | ⚪ EVALUATE | After ETHGlobal |
-| **Retro9000 (AVAX)** | Jul 14 | 85 | ⚪ SAFE | Full stack showcase |
+| **Solana Frontier** | May 11 | **13** | 🔴 PRIMARY | Build + deploy + demo |
+| **Kite AI** | May 11 | **13** | 🔴 PRIMARY | Deploy + demo |
+| **Superteam Earn (Zerion)** | May 11 | 13 | 🟡 SIDETRACK | $5K — reuse AgentKeeper |
+| **Superteam Earn (GoldRush)** | May 11 | 13 | 🟡 SIDETRACK | $3K — reuse AgentKeeper |
+| **AVAX Retro9000** | Jul 14 | 77 | ⚪ FUTURE | Full stack showcase |
+| **ETHGlobal NYC** | Jun 12-14 | 45 | ⚪ FUTURE | Networking + AAE |
 
 ---
 
-## 🔴 ARC Hackathon — DO FIRST
+## 🔴 Solana Frontier — PRIMARY
 
-**Deadline:** Apr 25 | **Prize:** $10K | **Chain:** Arc (USDC)
+**Deadline:** May 11 | **Prize:** $230K+ | **Repo:** `agent-economy-solana`
+**Tests:** 14/14 ✅ | **Status:** Core + Layer 2 built
 
-- [ ] Review + finalize AgentEscrow contracts
-- [ ] Deploy to Arc testnet
-- [ ] Build demo flow (escrow → validate → release)
+### TODO
+- [ ] Deploy AgentRegistry + JobEscrow to Solana devnet
+- [ ] Deploy AgentKeeper to Solana devnet
+- [ ] Build Layer 3 (Brain — Evolve/Learn/Memory)
+- [ ] Build Layer 4 (Social Leaderboards / Reputation)
+- [ ] Build Layer 5 (Cross-Agent Coordination — TaskManager)
 - [ ] Record 2-min demo video
 - [ ] Write submission README
-- [ ] Submit on lablab.ai
+- [ ] Submit to Colosseum portal
+
+### Sidetracks
+- [ ] Zerion CLI adapter — submit for $5K
+- [ ] GoldRush adapter — submit for $3K
+- [ ] Dune adapter — submit if prize revealed
 
 ---
 
-## 🟡 ETHGlobal Open Agents
+## 🔴 Kite AI — PRIMARY
 
-**Deadline:** May 3 | **Prize:** $50K ($15K 0G + $5K KeeperHub)
+**Deadline:** May 11 | **Repo:** `kite-agent-commerce`
+**Tests:** 52/52 ✅ | **Status:** Contracts built, needs deployment
 
-- [x] Foundry scaffold + 7/7 tests passing
-- [x] AgentRegistry, TaskManager, AgentKeeper contracts
-- [ ] Get 0G testnet tokens (faucet.0g.ai)
-- [ ] Get KeeperHub API key (app.keeperhub.com)
-- [ ] Deploy to 0G Galileo testnet
-- [ ] Integrate 0G Storage SDK
-- [ ] Integrate KeeperHub execution
-- [ ] Demo video + README
-
----
-
-## 🟡 Kite AI — IF ARC FINISHES EARLY
-
-**Deadline:** Apr 26 | **Chain:** Kite AI
-
-- [ ] Port AgentEscrow to Kite testnet
-- [ ] Demo video
-- [ ] Submit
+### TODO
+- [ ] Get Kite testnet gas (DEPLOYER_PRIVATE_KEY)
+- [ ] Deploy AgentEscrow to Kite testnet
+- [ ] Deploy TECHPaymentRouter to Kite testnet
+- [ ] Deploy MockTECH to Kite testnet
+- [ ] Record demo video
+- [ ] Write submission README
+- [ ] Submit to Kite AI hackathon portal
 
 ---
 
-## ⏳ Not Started Yet
+## ⏳ Future Pipeline
 
-- **Solana Frontier** — Start May 3 after ETHGlobal
-- **Dev3pack** — Evaluate after ETHGlobal
-- **Retro9000** — June/July
+| Hackathon | Date | Prize | Notes |
+|-----------|------|-------|-------|
+| AVAX Retro9000 | Jul 14 | $75K | AAE on Avalanche — full stack |
+| ETHGlobal NYC | Jun 12-14 | $100K+ | Physical — networking play |
+| Fall Colosseum | Sep | $125K+ | AAE flagship cycle repeats |
+
+---
+
+## 📊 Test Status (All Green)
+
+| Repo | Tests | Status |
+|------|-------|--------|
+| agent-economy-solana | 14 | ✅ |
+| kite-agent-commerce | 52 | ✅ |
+| aae-contracts | 75 | ✅ |
+| birdeye-adapter-bip | 14 | ✅ |
+| agent-economy-kite | 6 | ✅ |
+| **TOTAL** | **161** | **✅ 100%** |
+
+---
+
+**Last updated:** 2026-04-28
+**Updated by:** Gentech (CEO)

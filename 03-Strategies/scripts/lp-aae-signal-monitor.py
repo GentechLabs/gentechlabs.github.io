@@ -35,12 +35,12 @@ DEFAULT_CONFIG = {
     "bin_step": 10,
     "fee_tier_bps": 5,
     "position": {
-        "total_usd": 83.92,
-        "token0_amount": 3.762,
-        "token1_amount": 48.37,
-        "range_low": 9.33,
-        "range_high": 9.52,
-        "shape": "curve"
+        "total_usd": 135.29,
+        "token0_amount": 3.446,
+        "token1_amount": 103.38,
+        "range_low": 9.00,
+        "range_high": 9.30,
+        "shape": "bid-ask"
     },
     "milestones": [
         {"tier": 1, "label": "Scout", "daily_fees": 3.0, "description": "Entry rank — basic strategies unlocked"},
@@ -538,6 +538,65 @@ def build_aae_signal(cfg: Dict, state: Dict, pool: Dict, price: float, in_range:
 
 # ── Report Formatters ────────────────────────────────────────────────────────────────────────
 
+def format_liquidity_shape(price: float, range_low: float, range_high: float, shape: str, width: int = 20) -> str:
+    """Generate ASCII liquidity shape visualization showing price position within range."""
+    if range_high <= range_low:
+        return ""
+    
+    # Normalize price position (0.0 = bottom, 1.0 = top)
+    pos = (price - range_low) / (range_high - range_low)
+    pos = max(0.0, min(1.0, pos))
+    
+    # Generate shape profile (liquidity density at each point)
+    profile = []
+    for i in range(width):
+        x = i / (width - 1)  # 0.0 to 1.0
+        if shape == "spot":
+            # Uniform distribution
+            density = 1.0
+        elif shape == "bidirectional":
+            # Higher at edges, lower at center
+            density = 0.3 + 0.7 * abs(x - 0.5) * 2
+        else:  # curve (default)
+            # Bell curve — highest at center
+            density = 0.3 + 0.7 * (1 - abs(x - 0.5) * 2)
+        profile.append(density)
+    
+    # Normalize profile to max 4 bars height
+    max_d = max(profile) if profile else 1
+    bars = [max(1, round((d / max_d) * 4)) for d in profile]
+    
+    # Find price column
+    price_col = int(pos * (width - 1))
+    price_col = max(0, min(width - 1, price_col))
+    
+    # Build visualization (bottom-up, 4 rows)
+    rows = []
+    for level in range(4, 0, -1):
+        row = ""
+        for i, bar in enumerate(bars):
+            if i == price_col:
+                row += "◆"  # Price marker
+            elif bar >= level:
+                row += "█"  # Liquidity present
+            else:
+                row += "·"  # No liquidity
+        rows.append(row)
+    
+    # Bottom axis with range labels
+    axis = f"${range_low:.2f}" + " " * (width - len(f"${range_low:.2f}") - len(f"${range_high:.2f}")) + f"${range_high:.2f}"
+    
+    # Shape label and description
+    shape_labels = {
+        "spot": "SPOT — uniform liquidity across range",
+        "bidirectional": "BID-ASK — concentrated at edges, fee-optimized for swings",
+        "curve": "CURVE — concentrated at center, fee-optimized for ranging",
+    }
+    shape_desc = shape_labels.get(shape, f"{shape.upper()} shape")
+    
+    viz = "\n".join(rows) + "\n" + axis + f"\n◆ = price (${price:.4f})\n{shape_desc}"
+    return viz
+
 def format_human_report(signal: AAESignal, cfg: Dict) -> str:
     """Format human-readable Telegram report from AAE signal."""
     
@@ -552,6 +611,11 @@ def format_human_report(signal: AAESignal, cfg: Dict) -> str:
     
     range_emoji = "🟩" if signal.in_range else "🟥"
     
+    # Liquidity shape visualization
+    liq_shape = format_liquidity_shape(
+        signal.price, signal.range_low, signal.range_high, signal.shape
+    )
+    
     lines = [
         f"**{signal.token0_symbol}/{signal.token1_symbol} Squad Treasury** — {now_str}",
         f"",
@@ -563,6 +627,9 @@ def format_human_report(signal: AAESignal, cfg: Dict) -> str:
         f"• Range: ${signal.range_low:.2f} – ${signal.range_high:.2f} {range_emoji}",
         f"• Efficiency: {signal.fee_efficiency}% ({signal.shape.upper()})",
         f"• APR: {signal.apr}%",
+        f"",
+        f"**Liquidity Shape:**",
+        f"```{liq_shape}```",
         f"",
         f"**Revenue:**",
         f"• 24H Fees: ${signal.fees_24h}",

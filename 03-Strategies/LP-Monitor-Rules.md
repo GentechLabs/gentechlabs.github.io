@@ -1,7 +1,7 @@
 # LP + Milestone Tracker Rules — AVAX/USDC (AAE v2)
 
 > Established: 2026-04-18
-> Updated: 2026-04-27 — Range rebalanced to 9.00–9.30 (bid-ask), tiered alert system
+> Updated: 2026-04-28 — Position confirmed: $135.24, range $9.00–$9.30 (bid-ask), fees 0.47%
 > Status: Active
 > Pool: LFJ V2.2 AVAX/USDC (binStep 10, pool 0x864d4e5ee7318e97483db7eb0912e09f161516ea)
 
@@ -77,7 +77,7 @@ The monitor now outputs **structured JSON signals** for AAE squad treasury + pro
 ## Monitoring Rules (Jordan's Exact Spec)
 
 ### Rule 1 — Check Frequency
-⏰ LP Monitor runs **4×/day** (8:25 AM, 12:25 PM, 4:25 PM, 8:25 PM ET) via consolidated cron job `44f7c2028766`.
+⏰ LP Monitor runs **frequently** via consolidated cron job `2563e78bcf72` (currently every 10 min — may adjust to 4×/day per preference).
 
 ### Rule 2 — In Range + High Efficiency → SILENT
 🤫 Price in range AND fee efficiency **50–100%** → **no alert, stay silent** (compact log only)
@@ -193,12 +193,14 @@ apr = (daily_fees × 365 / position_usd) × 100
 | Job | ID | Schedule | Status | Script |
 |-----|----|----------|--------|--------|
 || **LP Range Monitor v3** | `03b4cc0310ba` | `*/10 * * * *` | ✅ Active | `lp-range-monitor-v3.py` |
-| **YoYo — DeFi Milestone + LP Monitor (Consolidated)** | `2563e78bcf72` | `25 8,12,16,20 * * *` | ✅ Active | Prompt-driven (DexScreener) |
+|| **YoYo — DeFi Milestone (Fee Efficiency Tracker)** | `2563e78bcf72` | `0 * * * *` | ✅ Active | Prompt-driven (DexScreener) |
 
-> **Consolidated (Apr 27, final):** Merged LP Range Monitor (every 10 min) into DeFi Milestone tracker.
+> **Updated Apr 28 per Jordan:** Hourly fee efficiency monitor with conditional alerting.
+> **Only delivers output when fee efficiency trends below 30%.** Otherwise silent (STATUS:OK).
+> When below threshold, includes rebalance recommendation with liquidity shape and range.
+> History tracked in `/root/.hermes/profiles/yoyo/defi-lp-history.json`.
+> **Consolidated (Apr 27):** Merged LP Range Monitor into DeFi Milestone tracker.
 > Preserved 2-check out-of-range confirmation, quiet hours, and all fee efficiency rules.
-> Single source of truth: `lp-aae-signal-monitor.py` — all LP + milestone logic in one script.
-> Old jobs removed: `b2bb2bae4fc5`, `504ac01d54ed`, `c2c2e40b440e`.
 
 ---
 
@@ -217,10 +219,10 @@ apr = (daily_fees × 365 / position_usd) × 100
 
 | Scenario | Position Value | Loss from Current | Mechanics | Decision Logic |
 |----------|---------------|-------------------|-----------|----------------|
-|| **In Range (9.00–9.30)** | ~$83.92 | — | Earning fees | ✅ **HOLD** — keep LP, compound fees |
+|| **In Range (9.00–9.30)** | ~$135.24 | — | Earning fees | ✅ **HOLD** — keep LP, compound fees |
 | **Below Range ($8.80)** | ~$78.63 | -$5.29 | 100% AVAX | ❓ **HOLD vs DCA?** — if AVAX fundamentals intact, **add USDC** |
 | **Crash ($8.30)** | ~$74.17 | -$9.75 | 100% AVAX | ⚠️ **DCA or EXIT?** — if deep dump, **70 USDC / 30 AVAX** weighted re-entry |
-| **Staking comparison** | — | — | 13.5% APR vs 5138% LP APR | ✅ **LP wins** — fees dominate staking unless extreme volatility |
+|| **Staking comparison** | — | — | 13.5% APR vs LP APR | ✅ **LP wins** — fees dominate staking unless extreme volatility |
 
 **Key insight:** Once below range, **you're just holding AVAX**. No IL — just price depreciation. Same as if you'd never LP'd.
 
@@ -259,12 +261,12 @@ When price is **out of range** and **fee efficiency < 30%**, deploy DCA with **w
 
 | APY | staking (GEN/AVAX) | LP (LFJ V2.2) | LP Advantage |
 |-----|--------------------|---------------|--------------|
-| **Base** | 13.5% APR | 5138% APR | **+5124.5%** |
-| **Daily Fees (S1)** | $0.22 | $0.33 | **+0.11** |
+| **Base** | 13.5% APR | LP APR | **LP advantage** |
+| **Daily Fees (S1)** | $0.22 | $0.47 | **+$0.25** |
 | **Risk** | Low (no impermanent loss) | Medium (IL only if out-of-range) | LP wins on risk-adjusted return |
 | **Volatility Hedge** | None | In-range fees offset price decay | LP outperforms in sideways/crash |
 
-**Bottom line:** LP APR is **38x higher** than staking. The only scenario where staking wins is during **extreme volatility** (>20% daily moves where IL > fees earned).
+**Bottom line:** LP fees are **2x higher** than staking. The only scenario where staking wins is during **extreme volatility** (>20% daily moves where IL > fees earned).
 
 ---
 
