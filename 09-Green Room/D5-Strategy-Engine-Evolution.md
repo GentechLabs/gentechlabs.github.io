@@ -29,6 +29,7 @@ Upgrade the D5 from a static threshold-DCA into a **dynamic strategy engine** th
 - [x] **YoYo** — Model ROI potential of each enhancement, rank by alpha-per-complexity
 - [x] **YoYo** — Implement hybrid DCA strategy in LP monitor (v2.1)
 - [x] **Gentech** — Consolidation (Apr 26): Merged D5 milestone tracking into hourly unified cron (`faed4f588aef`). Paused standalone daily D5 cron (`76d0ee972be9`). D5 block now appears in every hourly report with tier progression, efficiency, and action recommendations.
+- [x] **DMOB** — Wallet Monitor (Apr 28): Created `wallet-monitor.py` script tracking AVAX, WAVAX, USDC balances on Avalanche C-Chain. State file tracks deltas between checks. Cron job `81c989cc5886` runs every 3h (local delivery). Feeds D5 with DCA readiness + portfolio value context.
 
 ## Action Items
 - [ ] **DMOB** — Scope on-chain data requirements: fee growth oracles, liquidity shape APIs, bid-ask depth feeds, execution complexity for automated rebalancing.
