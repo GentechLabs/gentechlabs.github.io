@@ -1,16 +1,17 @@
-# Hackathon Roster — April 25, 2026
+# Hackathon Roster — April 28, 2026
 
 ## Active Focus
 | Name | Deadline | Agent Lead | Status |
 |---|---|---|---|
-| **Kite AI** | May 11 | DMOB | PRIMARY |
-| **Solana Frontier** | May 11 | DMOB | PRIMARY |
+| **Solana Frontier** | May 11 | DMOB | 🔴 PRIMARY — core built, needs deploy + layers |
+| **Kite AI** | May 17 | DMOB | 🔴 PRIMARY — 52/52 tests, needs deploy |
+| **Google Cloud Rapid Agent** | Jun 11 | TBD | 🟡 QUEUED — starts after Solana/Kite |
 
 ## Watch for Future Seasons
 | Name | Deadline | Notes |
 |---|---|---|
 | **Surge Ignition Race** | S1 ended Apr 24 | $250K pool, 300+ founders. Monitor for Season 2. |
-| Google Cloud Rapid Agent | Jun 11 | On radar |
+| **Google for Startups AI Agents** | Jun 5 | $60K + credits. Register: https://goo.gle/486nbl4 |
 
 ## Skipped / Dropped
 | Name | Reason |

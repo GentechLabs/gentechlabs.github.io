@@ -56,13 +56,15 @@
     32|- **Relevance:** ⭐⭐⭐ Directly aligns with AAE vision
     33|- **Status:** 🟡 Final push — demo due Apr 26
     34|
-    35|### 5. Google Cloud Rapid Agent Hackathon
-- **Prize Pool:** TBD (Google Cloud + Gemini sponsors)
-- **Dates:** Closes Jun 11, 2026
-- **Focus:** Build agents solving real-world challenges using Gemini + Google Cloud + MCP
+    35|### 5. Google Cloud Rapid Agent Hackathon 🆕
+- **Prize Pool:** TBA (announced ~May 5). Previous Google events: $60K cash + $37.5K Cloud credits + $500/participant.
+- **Dates:** May 5 – Jun 11, 2026
+- **Focus:** Build agents with Gemini + Google Cloud Agent Builder + at least one Partner MCP server
 - **Devpost:** https://rapid-agent.devpost.com/
-- **Relevance:** ⭐⭐ AgentEscrow on Google Cloud infra, Gemini integration
-- **Status:** 🟡 REVIEW — sign up, evaluate fit
+- **Participants:** 383 (as of Apr 28)
+- **Relevance:** ⭐⭐⭐ Perfect fit — our Hermes agents ARE multi-step task agents with tool use. We already run MCP.
+- **Requirements:** Google Cloud Agent Builder + Gemini + Partner MCP integration + hosted project + public repo
+- **Status:** 🟢 REGISTER — after Solana Frontier & Kite AI submit, this is next up. 37 days runway.
 
 ### 6. Bags App Hackathon (@BagsApp)
     36|- **Prize Pool:** $4,000,000 ($1M direct prizes + $3M fund)
