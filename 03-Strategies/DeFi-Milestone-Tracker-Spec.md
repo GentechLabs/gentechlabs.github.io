@@ -37,7 +37,7 @@ An automated, scheduled pipeline that:
 
 📍 Position Status
 - AVAX Price: $9.3500 | 24h: -0.8%
-- Range: $9.33 – $9.52 | Shape: Curve
+- Range: $9.00 – $9.30 | Shape: Curve
 - In Range: ✅ Yes | Efficiency: 21%
 - Entry: $9.45 | IL: -0.00%
 
