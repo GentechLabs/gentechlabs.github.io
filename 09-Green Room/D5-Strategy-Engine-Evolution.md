@@ -34,6 +34,9 @@ Upgrade the D5 from a static threshold-DCA into a **dynamic strategy engine** th
 ## Action Items
 - [ ] **DMOB** — Scope on-chain data requirements: fee growth oracles, liquidity shape APIs, bid-ask depth feeds, execution complexity for automated rebalancing.
 - [ ] **Gentech** — Once YoYo + DMOB report, consolidate into a phased roadmap for Jordan.
+- [ ] **DMOB** — Build "Go Spot" indicator script (regime detection: AVAX hold, BTC trend, macro pivot, volume, higher lows). See `03-Strategies/hybrid-lp-spot-strategy.md` for full spec.
+- [ ] **YoYo** — Integrate regime signals into hourly LP monitor. When 3+ signals fire → recommend "EXIT LP → SPOT".
+- [ ] **Gentech** — Finalize indicator thresholds after backtesting on historical AVAX data.
 
 ## Context
 Current unified cron (`YoYo — AAE DeFi Milestone + LP Monitor`) already pulls:
