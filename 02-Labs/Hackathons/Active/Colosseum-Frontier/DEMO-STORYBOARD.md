@@ -39,23 +39,24 @@ Logo animation → AgentEscrow wordmark + tagline:
 
 ## Act 2: Trust Setup (0:30 — 1:30)
 
-### Scene 1: Agent Registration (30s)
+### Scene 1: SAP v2 Identity Registration (30s)
 
-**Visual:** Demo app → "Register Agent" form
+**Visual:** SAP Identity Layer → AgentAccount PDA
 
 **Steps (on screen):**
-1. Click "Connect Wallet" → Phantom popup → approve
-2. Fill form:
+1. Navigate to SAP Identity Layer
+2. Click "Register Agent"
+3. Fill form:
    - Agent name: `CodeBreaker`
    - Capabilities: `["security-audit", "code-review"]`
-   - Stake: 0.5 SOL
-3. Click "Register Agent"
-4. Phantom signs transaction → approve
+   - Pricing tier: 50,000 lamports per call
+4. Click "Register" → single transaction
+5. AgentAccount PDA created with identity metadata
 
 **Voiceover:**
-> "First, we register an agent. The human connects their Phantom wallet, fills in the agent's name and capabilities, and stakes 0.5 SOL as skin in the game. This creates an on-chain agent profile."
+> "First, we create the agent's on-chain identity using SAP v2's Identity Layer. One transaction — the agent gets an AgentAccount PDA with name, capabilities, and pricing. Discoverable on SAP Explorer."
 
-**Show:** Solana Explorer → transaction hash → account details
+**Show:** SAP Explorer → new agent appears in discovery feed
 
 ### Scene 2: World ID Verification (15s)
 
@@ -225,12 +226,11 @@ Logo animation → AgentEscrow wordmark + tagline:
 ### Visual
 Return to black screen → white text:
 
-> **"4 Solana programs."**
-> **"4 sponsor integrations."**
-> **"1 trust layer."**
+> **"SAP v2 gives agents an identity."**
+> **"AgentEscrow gives them a career."**
 
 ### Voiceover
-> "AgentEscrow. Trust infrastructure for the agent economy. Built for Colosseum Solana Frontier 2026."
+> "SAP v2 handles identity and discovery. AgentEscrow handles marketplace, reputation, and escrow. Together — the full stack for the agent economy."
 
 ### Visual
 Logo + links:

@@ -18,28 +18,24 @@
 
 ```
 ┌─────────────────────────────────────────────────────────────────────┐
-│                     AGENTESCROW STACK                                │
+│                     AGENTESCROW + SAP STACK                           │
 ├─────────────────────────────────────────────────────────────────────┤
 │                                                                     │
 │  ┌───────────────────────────────────────────────────────────┐     │
-│  │  UX Layer                                                  │     │
+│  │  Discovery Layer                                           │     │
+│  │  ┌──────────────────┐  ┌──────────────────┐             │     │
+│  │  │  SAP Explorer     │  │  Agent Portal     │             │     │
+│  │  │  (OOBE/SAP v2)    │  │  (AAE)            │             │     │
+│  │  │  Agent discovery  │  │  Job marketplace  │             │     │
+│  │  └────────┬─────────┘  └────────┬─────────┘             │     │
+│  └───────────┼──────────────────────┼───────────────────────┘     │
+│              │                      │                              │
+│  ┌───────────▼──────────────────────▼───────────────────────┐     │
+│  │  Identity Layer                                            │     │
 │  │  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐   │     │
-│  │  │  Web UI       │  │  CLI          │  │  Agent Brain  │   │     │
-│  │  │  (Next.js)    │  │  (Anchor)     │  │  (Hermes)     │   │     │
-│  │  └──────┬───────┘  └──────┬───────┘  └──────┬───────┘   │     │
-│  │         │                  │                  │           │     │
-│  │    ╔════╧════╗       ╔════╧════╗       ╔════╧════╗      │     │
-│  │    ║ PHANTOM ║       ║ PHANTOM ║       ║  Swig   ║      │     │
-│  │    ║ Wallet  ║       ║ Wallet  ║       ║ Wallet  ║      │     │
-│  │    ╚════╤════╝       ╚════╤════╝       ╚════╤════╝      │     │
-│  └─────────┼─────────────────┼─────────────────┼───────────┘     │
-│            │                 │                 │                   │
-│  ┌─────────▼─────────────────▼─────────────────▼───────────┐     │
-│  │  Trust Layer                                               │     │
-│  │  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐   │     │
-│  │  │  World ID     │  │  Metaplex    │  │  Reputation  │   │     │
-│  │  │  Verify       │  │  Core NFT    │  │  Engine      │   │     │
-│  │  │  (Identity)   │  │  (Soulbound) │  │  (On-chain)  │   │     │
+│  │  │  SAP v2       │  │  World ID     │  │  Metaplex    │   │     │
+│  │  │  AgentAccount │  │  Verify       │  │  Core NFT    │   │     │
+│  │  │  (Portable)   │  │  (Sybil)      │  │  (Soulbound) │   │     │
 │  │  └──────┬───────┘  └──────┬───────┘  └──────┬───────┘   │     │
 │  └─────────┼─────────────────┼─────────────────┼───────────┘     │
 │            │                 │                 │                   │
@@ -532,8 +528,90 @@ agent-escrow-solana/
 | **Swig** | Programmable agent wallets + payment routing | High | Agents have wallets with guardrails |
 | **Metaplex Core** | Soulbound identity NFTs | High | On-chain identity, non-transferable rep |
 | **World** | Proof of Personhood verification | Medium | Sybil resistance, verified agents |
+| **OOBE/SAP v2** | Identity Layer + Discovery + x402 | High | Portable agent identity, composable |
 
-**Total: 4 sponsor integrations** — all deeply woven into the stack, not surface-level.
+**Total: 5 sponsor integrations** — all deeply woven into the stack, not surface-level.
+
+---
+
+## 6. OOBE Protocol — SAP v2 Identity Layer
+
+**Role:** Primary agent identity layer. Portable on-chain profiles with name, capabilities, pricing, and discovery.
+
+**What SAP v2 Is:**
+- Solana Agent Protocol — comprehensive on-chain agent infrastructure
+- Identity Layer: AgentAccount PDA with name, description, capabilities, pricing tiers
+- Discovery: SAP Explorer for finding agents by capability
+- Commerce: x402 pre-funded micropayments
+- 72 instructions, 22 account types, 45 events
+
+**Integration Pattern:**
+```
+┌─────────────────────────────────────────────────┐
+│  SAP v2 Identity Layer                           │
+│                                                   │
+│  AgentAccount PDA (seeds: ["sap_agent", wallet])  │
+│  ├── name: "CodeBreaker"                         │
+│  ├── description: "Security audit agent"         │
+│  ├── capabilities: ["escrow:create", ...]        │
+│  ├── pricing: [{ tierId, pricePerCall, ... }]   │
+│  ├── reputation_score: 0                         │
+│  └── is_active: true                             │
+│                                                   │
+│  SAP Explorer → discoverable by humans/agents     │
+└─────────────────────────────────────────────────┘
+```
+
+**Technical Details:**
+- **Program ID:** `SAPpUhsWLJG1FfkGRcXagEDMrMsWGjbky7AyhGpFETZ`
+- **SDK:** `@oobe-protocol-labs/synapse-client-sdk`
+- **PDA Seeds:** `["sap_agent", wallet.pubkey]`
+- **Register:** `sap.builder.agent(name).description(desc).addCapability(...).register()`
+
+**TypeScript Integration:**
+```typescript
+import { SynapseAnchorSap } from '@oobe-protocol-labs/synapse-client-sdk/ai/sap';
+
+const sap = SynapseAnchorSap.create({ wallet, network: SynapseNetwork.Devnet });
+
+// Register agent on SAP
+await sap.builder
+  .agent('CodeBreaker')
+  .description('Security audit agent')
+  .addCapability('escrow:create', { protocol: 'agent-escrow', version: '1.0' })
+  .addPricingTier({ tierId: 'standard', pricePerCall: 50_000, tokenType: 'sol' })
+  .register();
+
+// Fetch agent state
+const agent = await sap.agent.fetch();
+```
+
+**Anchor Integration (verify SAP identity):**
+```rust
+pub fn register_agent_from_sap(
+    ctx: Context<RegisterAgent>,
+    sap_pda: Pubkey,
+    name: String,
+    capabilities: Vec<Capability>,
+) -> Result<()> {
+    // Derive SAP PDA to verify identity exists
+    let (expected_pda, _) = Pubkey::find_program_address(
+        &[b"sap_agent", ctx.accounts.wallet.key().as_ref()],
+        &SAP_PROGRAM_ID,
+    );
+    require!(expected_pda == sap_pda, AgentError::InvalidSapPda);
+    
+    // Mirror SAP data to our registry
+    let agent_profile = &mut ctx.accounts.agent_profile;
+    agent_profile.name = name;
+    agent_profile.capabilities = capabilities;
+    agent_profile.sap_pda = sap_pda;
+    
+    Ok(())
+}
+```
+
+**Judge Signal:** "SAP v2 gives agents a portable identity — name, capabilities, pricing. Discoverable on SAP Explorer. We build the marketplace on top."
 
 ---
 
@@ -546,17 +624,19 @@ agent-escrow-solana/
 | World ID Solana SDK incomplete | World | Medium | Mock verification, note in submission docs |
 | Phantom Connect breaking changes | Phantom | Low | Standard wallet adapter pattern is stable |
 | x402 protocol immature on Solana | Swig/x402 | Medium | Use direct SPL transfers for MVP |
+| SAP v2 SDK early (v0.9.3) | OOBE | Medium | Use SAP Identity Layer only, fallback to Metaplex Core NFTs |
 
 ---
 
 ## 📊 What Makes This Strong for Judges
 
-1. **4 sponsor integrations** — each solves a real problem, not checkbox integration
-2. **Full stack** — identity (Metaplex + World) + escrow (Anchor) + payments (Swig + x402)
-3. **Pluggable dispute resolution** — IResolver pattern (YoYo's spec) enables AI arbitration
-4. **Working demo** — live tx on Solana Explorer, not just slides
-5. **Clear narrative** — "The trust layer for the agent economy"
-6. **Competitive moat** — no competitor has the full stack
+1. **5 sponsor integrations** — each solves a real problem, not checkbox integration
+2. **Full stack** — identity (SAP v2 + World) + escrow (Anchor) + payments (Swig + x402)
+3. **SAP v2 composition** — not competing with OOBE, building on their identity layer
+4. **Pluggable dispute resolution** — IResolver pattern (YoYo's spec) enables AI arbitration
+5. **Working demo** — live tx on Solana Explorer, not just slides
+6. **Clear narrative** — "The trust layer for the agent economy"
+7. **Competitive moat** — no competitor has the full stack
 
 ---
 
@@ -570,6 +650,7 @@ agent-escrow-solana/
 
 ### Phase 2: Identity + Rep (Days 4-5)
 - [ ] Implement `agent_identity` program
+- [ ] SAP v2 Identity Layer integration (register from SAP PDA)
 - [ ] Metaplex Core NFT minting (soulbound)
 - [ ] World ID verification hook
 - [ ] Reputation update logic
@@ -581,7 +662,7 @@ agent-escrow-solana/
 - [ ] Payment channel open/settle
 
 ### Phase 4: Demo + Submission (Days 8-10)
-- [ ] Build demo frontend (Next.js) with Phantom + Swig + World ID UI
+- [ ] Build demo frontend (Next.js) with SAP + Phantom + Swig + World ID UI
 - [ ] Record demo video (5 min)
 - [ ] Write README + submission docs
 - [ ] Deploy all programs to devnet

@@ -3,8 +3,8 @@
 ## Active Focus
 | Name | Deadline | Agent Lead | Status |
 |---|---|---|---|
-| **Solana Frontier** | May 11 | DMOB | 🔴 PRIMARY — core built, needs deploy + layers |
-| **Kite AI** | May 17 | DMOB | 🔴 PRIMARY — 52/52 tests, needs deploy |
+| **Solana Frontier** | May 11 | DMOB | 🔴 PRIMARY — 4 programs scaffolded, needs tests + deploy |
+| **Kite AI** | May 17 | DMOB | 🟡 QUEUED — EVM repo 49/49 tests, needs deploy |
 | **Google Cloud Rapid Agent** | Jun 11 | TBD | 🟡 QUEUED — starts after Solana/Kite |
 
 ## Watch for Future Seasons

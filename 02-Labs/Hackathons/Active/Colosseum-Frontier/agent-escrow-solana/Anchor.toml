@@ -1,0 +1,20 @@
+[toolchain]
+
+[features]
+resolution = false
+skip-lint = false
+
+[programs.devnet]
+agent_registry = "E9vTr1CWGEUKWQSUYJJYHMPzQJQ7itqwHgKHacEvNryb"
+dispute_resolver = "Bh52utiFR5LDqKezKVigzWqX5nuY95996vEXuGCMr12X"
+job_escrow = "4hSRLrZjpqACt2Zn5ar7W16zoWwknhKCqprg2p8Hdyfz"
+reputation = "EDfNfjFZ9pSjohsjLpp8NUeXcgUiAn5FbCFqVjEhUVxA"
+
+[provider]
+cluster = "devnet"
+wallet = "~/.config/solana/id.json"
+
+[scripts]
+test = "yarn run ts-mocha -p ./tsconfig.json -t 1000000 tests/**/*.ts"
+
+[hooks]
