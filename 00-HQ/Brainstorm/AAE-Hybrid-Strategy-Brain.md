@@ -126,6 +126,45 @@ The user doesn't lose control. They **train** the system. Their edge becomes the
 
 The AAE doesn't just execute — it **decides**. It watches the market, compares strategy performance, and rotates capital. The user can override, but the default is smart.
 
+## Architecture — Three Agents + Enforcement Layer
+
+The hybrid brain runs as a **three-agent pipeline** with an enforcement layer (not a fourth agent) that acts as a circuit breaker between strategy decisions and execution.
+
+### Agent 1: 🔍 Analyst Agent — "The Eyes"
+- Monitors market regime (volatility, trend, volume, TVL shifts, yield changes)
+- Classifies regime: High Volatility Breakout / Range-Bound / Sideways / Macro Uncertainty
+- Feeds structured signals to Strategy Brain
+- **Tech:** Extends existing LP Monitor cron, outputs JSON signals
+
+### Agent 2: 🧠 Strategy Brain — "The Brain"
+- Receives analyst signals + user preferences + current allocation
+- Decides portfolio allocation: LP → Stake → HODL → Farm rotation
+- Manages hybrid allocation model (baseline + active bucket)
+- Learns from user overrides (style fingerprinting)
+- Three modes: Shadow → Supervised → Autonomous
+- **Tech:** LLM-powered reasoning, SQLite user preferences, maps to L1 Brain + L3 Strategy
+
+### Agent 3: ⚡ Executor Agent — "The Hands"
+- Converts Strategy Brain decisions to on-chain transactions
+- Manages LP positions (LFJ), staking (Benqi), swaps (DEX), farming
+- Tracks execution success/failure, reports back
+- **Tech:** Extends LP execution infrastructure, multi-protocol adapters, maps to L7 Execution
+
+### 🛡️ Enforcement Layer (L6) — The Validator
+Not a fourth agent — deterministic circuit breaker between Strategy → Execution:
+- Position size limits, protocol whitelist, loss limits, cooldowns, gas caps
+- Blocks bad trades instantly (no LLM call needed = zero latency)
+- When blocked: notifies user, Strategy Brain logs and learns
+
+```
+Analyst → Strategy Brain → Enforcement Check → Executor → User Notification
+"Eyes"      "Brain"          "Shield"           "Hands"    "Alert"
+```
+
+**Why not a 4th agent?** Enforcement rules are `require()` logic, not probabilistic AI. An agent would add latency + cost for what should be instant if/then checks.
+
+---
+
 ## Implementation Phases
 
 ### Phase 1 — The Brain (Now → Hackathon)
@@ -133,18 +172,21 @@ The AAE doesn't just execute — it **decides**. It watches the market, compares
 - [ ] Strategy performance tracker (LP APR vs staking vs HODL)
 - [ ] Basic rotation logic (if/then rules)
 - [ ] User notification on strategy shifts
+- [ ] **Agent pipeline: Analyst + Strategy Brain + Enforcement (hackathon demo)**
 
 ### Phase 2 — The Hybrid (Post-Hackathon)
 - [ ] Weighted allocation engine
 - [ ] Dynamic rebalancing based on signals
 - [ ] Multi-chain support (AVAX, SOL, ETH)
 - [ ] Historical backtesting of rotation decisions
+- [ ] **Executor Agent with full on-chain execution**
 
 ### Phase 3 — The Intelligence (Long-term)
 - [ ] ML-based regime prediction
 - [ ] Correlation analysis across strategies
 - [ ] Portfolio optimization (Sharpe ratio, max drawdown)
 - [ ] Cross-agent coordination (multiple AAEs sharing signals)
+- [ ] **Full learning layer: Shadow → Supervised → Autonomous progression**
 
 ---
 
@@ -155,6 +197,8 @@ The AAE doesn't just execute — it **decides**. It watches the market, compares
 3. **Prototype the rotation logic** — Start with simple rules, evolve to adaptive
 4. **Integrate with existing LP monitor rules** — Extend D5 with hybrid allocation
 5. **Hackathon angle** — "The only agent that knows WHERE to put your money"
+6. **DMOB technical scoping** — Feasibility assessment, execution complexity, data requirements
+7. **Green Room collab** — Desmond × DMOB on architecture spec (`09-Green Room/aae-hybrid-brain-architecture-spec.md`)
 
 ---
 

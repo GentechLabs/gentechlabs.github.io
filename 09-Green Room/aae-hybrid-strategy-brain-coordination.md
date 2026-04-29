@@ -28,9 +28,10 @@ status: active
 3. **DMOB Scoping Handoff** — `09-Green Room/handoff-dmob-aae-strategy-engine-scoping.md`
    - Awaiting DMOB's technical scoping response
 
-### Jordan's Architecture Question (Answered)
+### Jordan's Architecture Question (Answered ✅)
 Jordan asked: "Did we decide if we were still doing three agents or two or one?"
 **Answer:** Four logical agents, three decision-making units. DMOB formalized this in the architecture doc.
+**Jordan confirmed: Three-agent stack. ✅** (Apr 29, ~2:20 PM)
 
 ### What's Next
 - [ ] DMOB: Complete technical scoping (current infra capacity, yield oracle, execution complexity, learning system)
