@@ -1,13 +1,13 @@
 # LP + Milestone Tracker Rules — AVAX/USDC (AAE v2)
 
 > Established: 2026-04-18
-> Updated: 2026-04-28 — Position: range $9.02–$9.32 (curve), fees 0.47%
+> Updated: 2026-04-28 — Position: range $9.00–$9.45 (curve), rebalanced Apr 29
 > Status: Active
 > Pool: LFJ V2.2 AVAX/USDC (binStep 10, pool 0x864d4e5ee7318e97483db7eb0912e09f161516ea)
 
 ## Current Position
 
-- **Range:** $9.02 — $9.30 (rebalanced Apr 28, curve)
+- **Range:** $9.00 — $9.45 (rebalanced Apr 29, curve)
 - **Position:** ~$135.24 (3.446 AVAX @ $31.87 + 103.38 USDC @ $103.37)
 - **Shape:** Curve
 - **Strategy:** Bear market accumulation — farm the bottom, compound rewards
@@ -34,8 +34,8 @@ The monitor now outputs **structured JSON signals** for AAE squad treasury + pro
     "token1_symbol": "USDC",
     "price": 9.4566,
     "price_change_24h": -2.5,
-    "range_low": 9.02,
-    "range_high": 9.32,
+"range_low": 9.00,
+        "range_high": 9.45,
     "in_range": true,
     "fee_efficiency": 87.5,
     "shape": "curve",
@@ -241,6 +241,101 @@ apr = (daily_fees × 365 / position_usd) × 100
 | **Crash / panic dump** | **70 USDC / 30 AVAX (skewed)** | Buying the dip, not market-making; avoids center loss |
 | **Bidirectional (wide range)** | **Spot + Curved Ends** | High upside at extremes, low cost in middle |
 | **Trending up hard** | **Spot (100% AVAX) or EXIT** | No need to market make — just hold asset |
+| **Bull breakout** | **EXIT LP → HOLD AVAX** | Capture full upside, re-enter LP at next resistance |
+
+---
+
+## 🐂 Bull Market Exit Strategy (D5 Addendum — Apr 29, 2026)
+
+> *"When there is a bull market, maybe we could pull out 75% of that to ride it up."* — Jordan
+
+### Core Principle
+In a bull market, LP underperforms holding due to impermanent loss. The strategy:
+1. **Exit 75% of LP** when bull breakout confirmed
+2. **Hold spot AVAX** to capture full upside
+3. **Keep 25% in LP** at key resistance levels (bid-ask) to earn fees from traders
+4. **Re-enter LP** when price consolidates at new support
+
+### Exit Signal Triggers
+**When to pull out of LP (75% → spot AVAX):**
+
+| Signal | Condition | Confidence | Action |
+|--------|-----------|------------|--------|
+| **Volume Breakout** | AVAX breaks resistance with >1.5x average 24h volume | High | Exit 75% immediately |
+| **Momentum Surge** | 2h RSI > 70 + price above range high + volume spike | High | Exit 75%, keep 25% bid-ask at current level |
+| **Macro Catalyst** | Major bullish event (peace deal, rate cut, ETF approval) | Medium | Exit 50% now, 25% on confirmation |
+| **Trend Confirmation** | Price closes above resistance on 4h chart + rising volume | Medium | Exit 75%, set bid-ask at resistance as new floor |
+| **Parabolic Move** | >15% gain in 24h with no pullback | Low (too late) | Exit remaining LP, don't chase |
+
+### Resistance Ladder (AVAX)
+Key levels where price historically sells off — set bid-ask LP at these zones:
+
+| Level | Significance | LP Strategy |
+|-------|-------------|-------------|
+| **$10.00** | Psychological, round number | Exit 25% here, keep LP running |
+| **$12.00** | Previous support/resistance flip | Exit 25% more, rebalance LP to $11–$12 bid-ask |
+| **$15.00** | Major resistance (2024 level) | Exit 25%, rebalance LP to $14–$15 bid-ask |
+| **$18.00** | Breakout zone | Exit final 25%, go 100% spot or tight LP |
+| **$20.00+** | Price discovery / new ATH zone | Full spot hold, LP re-entry on pullback |
+
+### Re-Entry Rules
+**When to go back into LP (spot → LP):**
+
+| Signal | Condition | Action |
+|--------|-----------|--------|
+| **Consolidation** | Price trades in a $0.50 range for 48+ hours | Re-enter LP at consolidation range (curve) |
+| **Pullback to Support** | Price retraces 15-20% from local high, holds a level | Re-enter LP at support zone (curve) |
+| **Volume Decline** | Volume drops below 0.8x average after a rally | Re-enter — less directional pressure = LP earns |
+| **RSI Reset** | RSI drops from >70 to 40-50 range | Re-enter — momentum cooled, range likely |
+
+### Position Sizing During Transition
+```
+BULL BREAKOUT DETECTED:
+├── 75% → Spot AVAX (hold for upside)
+├── 15% → Bid-Ask LP at current resistance (earn fees on pullback)
+└── 10% → USDC reserve (dry powder for DCA on dips)
+
+PRICE HITS RESISTANCE + CONSOLIDATES:
+├── Re-enter LP at new range (curve shape)
+├── Keep 50% spot AVAX (still bullish)
+└── 25% USDC reserve
+
+PRICE BREAKS DOWN FROM RESISTANCE:
+├── Exit LP (out of range)
+├── Hold spot AVAX (already in)
+└── Wait for next support level to re-enter LP
+```
+
+### Monitor Integration
+Add to LP Monitor cron job output:
+```json
+{
+  "bull_exit_signal": {
+    "triggered": false,
+    "reason": null,
+    "confidence": null,
+    "next_resistance": 10.00,
+    "recommended_action": "HOLD_LP",
+    "spot_allocation_pct": 0
+  }
+}
+```
+
+### Alert Format
+```
+🐂 BULL EXIT SIGNAL — [timestamp]
+⚡ Trigger: [Volume Breakout / Momentum Surge / Macro Catalyst]
+📊 Confidence: [High / Medium / Low]
+🎯 Next Resistance: $[level]
+💰 Recommended: Exit [X]% to spot AVAX, keep [Y]% in bid-ask LP
+⚠️ Action required within [timeframe]
+```
+
+### Risk Management
+- **Never exit 100%** — always keep some LP for fee income + re-entry flexibility
+- **Scale out, don't dump** — exit in tranches, not all at once
+- **Set stop-loss on spot** — if AVAX drops 20% from exit price, reconsider
+- **Track entry/exit** — log every transition in state file for P&L analysis
 
 ---
 
