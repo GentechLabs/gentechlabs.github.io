@@ -21,10 +21,13 @@ Futuristic digital passport/agent ID card in cyberpunk/HUD style:
 - Identity verification for agent reputation scoring?
 
 ## Open Questions
-- What chain is Kite Passport built on?
+- ~~What chain is Kite Passport built on?~~ → **Avalanche L1 (dedicated chain)** ✓
 - Is there a token? What's the business model?
-- How does "transact in the real world" work? (Off-ramp? Fiat bridge?)
-- How does identity verification work? (ZK proofs? Soulbound?)
+- ~~How does "transact in the real world" work?~~ → **X402 HTTP-native payments + stablecoin settlement on L1** ✓
+- ~~How does identity verification work?~~ → **BIP-32 HDK derivation + selective disclosure (not ZK, not soulbound)** ✓
+
+## Full Technical Deep Dive
+→ See [[03-Projects/AAE/kite-passport-technical-deep-dive]] (Apr 28, 2026, sourced from Avalanche Builder Hub)
 
 ## Routing
 - DMOB: Technical architecture review
