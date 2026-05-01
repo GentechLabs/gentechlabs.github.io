@@ -1,0 +1,3 @@
+Hackathon prize pool evaluation and hackathon-related tasks route to Gentech Labs agent, not YoYo. YoYo handles DeFi/LP analysis and portfolio strategy only.
+§
+User prefers concise, direct communication and expects agents to avoid redundant messages. When multiple agents are involved, coordinate responses to ensure clarity and avoid repetition. Prioritize unique insights or actions over duplicative updates.

@@ -1,72 +1,167 @@
-     1|# LayerZero DVN Security Monitor
-     2|
-     3|## 2026-04-23
-     4|- **Key Findings**: 
-     5|    - LayerZero Labs published a detailed "KelpDAO Incident Statement" (April 19, 2026) regarding a ~$290M exploit.
-     6|    - The attack was an RPC-spoofing and DDoS attack likely by Lazarus Group (TraderTraitor), targeting the LayerZero Labs DVN's downstream RPC infrastructure.
-     7|    - The vulnerability was realized only because KelpDAO used a **1-of-1 DVN configuration** (LayerZero Labs as sole verifier), contradicting the protocol's recommended multi-DVN redundancy model.
-     8|    - LayerZero Labs has deprecated affected RPC nodes, replaced them, and is now actively reaching out to all 1/1 configurations to migrate to multi-DVN setups.
-     9|    - No protocol-level "mandatory" DVN changes were announced, but the "Integrations Checklist" is being heavily emphasized as the standard.
-    10|    10|- **Risk Level**: Unchanged (The protocol itself remains modular; the risk is shifted to application-level configuration).
-    11|    11|- **Action Items**: 
-    12|    12|    - Verify all Gentech-linked integrations are NOT using 1/1 DVN configurations.
-    13|    13|    - Audit DVN diversity (ensure no single provider is a systemic dependency).
-    14|    14|    - Monitor for any formal "security standard" mandates that might emerge from the community or Labs.
-    15|    15|
-    16|    16|
-    17|    17|# LayerZero DVN Security Monitor Report - 2026-04-24
-    18|    18|
-    19|    19|**Date Checked:** 2026-04-24
-    20|    20|**Risk Level:** Unchanged (High for 1/1 configs, Low for multi-DVN)
-    21|    21|
-    22|    22|## Key Findings
-    23|    23|- **Incident Status:** The KelpDAO exploit ($290M) was confirmed to be an RPC-spoofing attack targeting the LayerZero Labs DVN, likely by Lazarus Group (TraderTraitor).
-    24|    24|- **Root Cause:** Attackers poisoned downstream RPC infrastructure and used DDoS to force failover to malicious nodes.
-    25|    25|- **Protocol Response:** LayerZero Labs has deprecated the affected RPC nodes and resumed DVN operations. They maintain that the protocol itself was not exploited, but rather the infrastructure upon which the DVN relied.
-    26|    26|- **Security Standards:** LayerZero is actively urging all applications with 1/1 DVN configurations to migrate to multi-DVN setups. They reiterate that no single DVN should be a unilateral point of trust.
-    27|    27|- **Contagion:** LayerZero claims zero contagion to other assets/applications, as the exploit specifically targeted KelpDAO's rsETH 1/1 configuration.
-    28|    28|- **Industry Context:** This highlights a fundamental risk in off-chain RPC verification shared by many bridges and services.
-    29|    29|
-    30|    30|## Action Items
-    31|    31|- [ ] Monitor LayerZero's official channels for any mandatory DVN configuration updates or new minimum security standards.
-    32|    32|- [ ] Verify if any Gentech-related integrations are using 1/1 DVN setups; if so, migrate to multi-DVN immediately.
-    32|    33|- [ ] Track any competitive responses from Wormhole/Axelar regarding their own RPC dependency risks.
-    33|    34|
-    34|    35|# LayerZero DVN Security Monitor Report - 2026-04-25
-    35|    36|**Date Checked:** 2026-04-25
-    36|    37|**Risk Level:** Unchanged (High for 1/1 configs, Low for multi-DVN)
-    37|    38|
-    38|    39|## Key Findings
-    39|    40|- **Incident Status:** No new protocol-level security updates or mandatory DVN changes published since the April 19 KelpDAO Incident Statement.
-    40|    41|- **Official Blog Snapshot (layerzero.network/blog):**
-    41|    42|  1. **KelpDAO Incident Statement** (Apr 19) — Still pinned/prominent. Reiterates Lazarus/TraderTraitor attribution, RPC-spoofing via downstream node poisoning, zero contagion, and active outreach to 1/1 DVN integrators. Labs DVN is live after deprecating affected RPC nodes.
-    42|    43|  2. **Worldpay “Payments DVN” Launch** — New announcement (post-incident). Worldpay/Global Payments is now offering an enterprise-grade Payments DVN across 9+ blockchains. This signals continued institutional trust in the DVN model rather than a retreat.
-    43|    44|  3. **Canton & Centrifuge Partnerships** — LayerZero continues institutional onboarding (Canton Network for institutional finance; Centrifuge tokenization infrastructure). No mention of security overhauls tied to these launches.
-    44|    45|  4. **Zero Blockchain Announcements** — Several posts on “Zero: The Decentralized Multi-Core World Computer.” Unrelated to immediate DVN security but indicates engineering bandwidth is on the new chain, not an emergency protocol patch.
-    45|    46|- **Protocol Position:** LayerZero maintains the protocol functioned as intended and continues to treat multi-DVN redundancy as a *recommendation*, not a protocol-enforced mandate. No new governance proposals or minimum security standards (e.g., requiring ≥2 DVNs at the protocol level) were detected.
-    46|    47|- **Dune Dashboard:** Unable to verify live DVN distribution stats today due to Cloudflare bot detection on dune.com. Based on prior reports (Apr 23-24), the ~47% 1-of-1, ~45% 2-of-2, ~5% 3-of-3+ distribution is assumed stable until next successful poll.
-    47|    48|- **Competitor / Market Response:** No widely publicized competitive capitalizing statements from Wormhole, Axelar, or Hyperlane detected via open-source sweep today. Bing/X searches did not surface any new competitor blog posts or governance actions referencing the KelpDAO incident to poach integrators.
-    48|    49|- **KelpDAO / Blame Narrative:** CoinDesk article “Kelp DAO hits back at LayerZero” (Apr 20) was referenced in search results, indicating KelpDAO disputes the blame-shift narrative, but no new public rebuttals from either side surfaced today.
-    49|    50|
-    50|    51|## Action Items
-    51|    52|- [ ] Verify all Gentech-linked integrations are NOT using 1/1 DVN configurations; prioritize migration to ≥2 independent DVNs.
-    52|    53|- [ ] Continue polling Dune dashboard directly or via screenshot/vision tool once bot-detection workaround is available to confirm if 1-of-1 DVN share is declining post-incident.
-    53|    54|- [ ] Monitor LayerZero governance channels (Snapshot, forum) for any formal proposals to enforce minimum DVN thresholds at the protocol level.
-    54|    55|- [ ] Track competitor messaging (Wormhole, Axelar, Hyperlane) for opportunistic “security-first” campaigns targeting current LayerZero integrators.
+# LayerZero DVN Security Monitor — Intelligence Report
 
-# LayerZero DVN Security Monitor Report - 2026-04-27
+**Checked:** Thursday, April 30, 2026 UTC
+**Analyst:** YoYo, Head of Strategies @ Gentech
+**Source:** layerzero.network/blog, LayerZero official statements, web reconnaissance
 
-**Date Checked:** 2026-04-27
-**Risk Level:** Unchanged (High for 1/1 configs, Low for multi-DVN)
+---
 
-## Key Findings
-- **New Security Advisories / CVEs:** None detected. GitHub Security Advisories page is empty. NVD search yields no LayerZero-specific CVEs. No emergency patches or new releases on the LayerZero-v2 repo since prior check.
-- **Official Blog Status (layerzero.network/blog):** Most recent posts remain the KelpDAO Incident Statement (Apr 19), Worldpay Payments DVN launch (Mar 31), and institutional partnership announcements (Canton, Centrifuge, KorDA). No new security updates in the past 7 days.
-- **Protocol Configuration Changes:** LayerZero has not published any protocol-level mandatory DVN configuration changes. Multi-DVN redundancy remains a recommendation, not an on-chain enforcement. No new governance proposals (Snapshot/forum) detected.
-- **Exploit / Disclosure Status:** No new critical exploits disclosed since the KelpDAO incident. Post-incident media coverage continues (e.g., “Ripple CTO Flags Bridge Security Gaps,” “~47% of OApps still use 1-of-1 DVN”). These are retrospective analyses, not new breaches.
-- **DVN Infrastructure / Validator Updates:** No new validator set rotations or DVN operator announcements detected. Worldpay’s Payments DVN (enterprise-grade, 9+ chains) is still the most recent major DVN entrant.
+## Executive Summary
 
-## Action Items
-- [ ] Continue verifying Gentech-linked integrations are not on 1/1 DVN configs.
-- [ ] Track if LayerZero makes multi-DVN mandatory at the protocol level.
-- [ ] Re-poll Dune dashboard once access is restored to confirm 1/1 DVN share trend.
+**Risk Level: UNCHANGED — protocol-level DVN minimums still not enforced.**
+
+LayerZero Labs has taken a **single concrete action** post-KelpDAO: its own DVN will refuse to sign for any 1-of-1 configurations. However, the protocol **still does not mandate multi-DVN setups at the smart-contract level**. The blame remains squarely placed on KelpDAO for "choosing" a 1/1 setup, reinforcing a "buyer beware" security model rather than systemic hardening.
+
+---
+
+## 1. Protocol-Level Changes
+
+**Finding:** No new protocol upgrade or governance proposal detected that would enforce minimum DVN redundancy (e.g., require ≥2 DVNs at the Endpoint/OApp level).
+
+- The KelpDAO Incident Statement (Apr 19, 2026) explicitly states: *"The LayerZero protocol is built on a foundation of modular, application-configurable security... the protocol does not prescribe a single security configuration."*
+- This means 1-of-1 DVN configurations remain **technically possible** even if LayerZero Labs refuses to participate in them.
+
+**New Policy from LayerZero Labs:**
+- LayerZero Labs DVN **will no longer sign or attest messages for any 1/1 configuration**.
+- Team is reaching out to all 1/1-configured apps to migrate to multi-DVN setups.
+- All compromised RPC nodes deprecated and replaced; DVN is back online.
+
+---
+
+## 2. Official Blog & Communications
+
+**Latest blog posts (most recent first):**
+
+| Date | Title | Category | Relevance |
+|------|-------|----------|-----------|
+| Apr 19 | **KelpDAO Incident Statement** | Announcements | **Primary response** — blames KelpDAO 1/1 config, attributes to Lazarus/TraderTraitor |
+| Mar 31 | Worldpay's "Payments DVN" | Announcements | Pre-incident; enterprise DVN option live on 9+ chains |
+| Mar 26 | LayerZero Partners with Canton | Announcements | Institutional tokenization |
+| Feb 10 | Zero: The Decentralized Multi-Core World Computer | Announcements | Zero blockchain launch (zk-based world computer) |
+
+**No new DVN-security-specific posts since Apr 19.**
+
+---
+
+## 3. LayerZero Labs Public Response Assessment
+
+**Beyond blaming KelpDAO:** Yes, but only incrementally.
+
+- Attribution: Highly-sophisticated state actor, likely DPRK Lazarus Group (TraderTraitor).
+- Attack vector: RPC infrastructure poisoning + DDoS on uncompromised nodes to force failover.
+- Defensive posture: SOC2 audit/verification in final stages; full EDR; least-privilege access controls.
+- Cooperation: Direct contact with multiple global law enforcement agencies; supporting Seal911 to track funds.
+
+**However:** The framing remains *"protocol functioned exactly as intended — zero contagion risk throughout the system."* This is technically true for modular architecture, but it does not address the **moral hazard** of allowing $290M to drain because a default/allowed configuration was insecure.
+
+---
+
+## 4. DVN Minimum Security Standards
+
+**Finding:** No formally announced "DVN minimum security standards" as a protocol-wide rule.
+
+- Current standard: **Best-practice recommendation** (multi-DVN with diversity and redundancy).
+- Enforcement: **Soft** — LayerZero Labs DVN opt-out of 1/1, but other DVNs may still participate in 1/1 configs.
+- Gap: No on-chain enforcement (e.g., Endpoint rejecting 1/1 configs during `setConfig`).
+
+---
+
+## 5. Competitor Responses
+
+**Finding:** No explicit public competitor campaigns detected capitalizing on the KelpDAO incident.
+
+Search attempted for Wormhole, Axelar, Hyperlane responses. No blog posts, Twitter threads, or marketing materials found explicitly contrasting their security model vs. LayerZero's DVN model in the wake of the exploit.
+
+*Note: Web search heavily rate-limited during this run; competitor social channels may have organic commentary not captured.*
+
+---
+
+## 6. Dune Dashboard — DVN Stats
+
+**Finding:** Dune.com blocked by Cloudflare bot detection during reconnaissance. Could not verify current percentages for 1-of-1 vs 2-of-2 vs 3-of-3+.
+
+- **Baseline from prior monitoring:** ~47% 1-of-1, ~45% 2-of-2, ~5% 3-of-3+.
+- **Hypothesis:** 1-of-1 percentage likely declining as LayerZero Labs pushes migrations, but hard data unavailable.
+- **Action:** Recommend manual check of Dune dashboard when possible, or query LayerZero Scan API directly.
+
+---
+
+## 7. Action Items
+
+| Priority | Action | Owner |
+|----------|--------|-------|
+| 🔴 HIGH | Verify if Gentech/any portfolio exposure uses LayerZero with <2 DVNs | DeFi Risk |
+| 🔴 HIGH | Re-run Dune DVN stats query when possible to measure migration velocity | YoYo |
+| 🟡 MEDIUM | Monitor for any on-chain protocol upgrade that enforces ≥2 DVNs | YoYo |
+| 🟡 MEDIUM | Track if competitors (Wormhole, Axelar, Hyperlane) launch security-marketing campaigns | Comms |
+| 🟢 LOW | Evaluate Worldpay DVN as a credible institutional verifier option | DeFi Risk |
+
+---
+
+## Risk Assessment
+
+| Dimension | Status |
+|-----------|--------|
+| Protocol-level mandatory DVN minimums | **NOT IMPLEMENTED** |
+| LayerZero Labs DVN participation in 1/1 | **BLOCKED** ✅ |
+| Third-party DVN 1/1 participation | **Still possible** ⚠️ |
+| Competitor capitalizing on incident | **Not detected** |
+| Public blame posture | **Shifted to KelpDAO + state actor** |
+| Fund recovery / law enforcement | **Active cooperation** |
+
+**Overall Risk: UNCHANGED.** The modular-security model continues to place the burden on individual applications. Until the protocol itself rejects 1-of-1 configurations at the configuration layer, similar incidents remain possible with other DVN operators.
+
+---
+
+*Report generated by YoYo (Gentech Strategies) via autonomous monitor.*
+
+---
+
+## Supplement — May 1, 2026 Check
+
+**Checked:** Friday, May 1, 2026 09:47 UTC
+**Analyst:** YoYo, Head of Strategies @ Gentech
+
+### Delta Since Apr 30 Report
+
+**No new material changes detected.**
+
+| Item | Apr 30 Status | May 1 Status |
+|------|---------------|--------------|
+| Latest official blog post | Apr 19 KelpDAO Incident Statement | **Still Apr 19** — no new DVN/security posts |
+| GitHub LayerZero-v2 commits | Last Feb 27, 2026 | **Still Feb 27, 2026** — zero post-incident commits |
+| GitHub releases | Last May 6, 2025 | **Unchanged** — no security patch releases |
+| Protocol-level mandatory DVN minimums | Not implemented | **Still not implemented** |
+| Governance proposals (Snapshot, etc.) | None detected | **Still none detected** |
+| Competitor capitalizing (Wormhole, Axelar, Hyperlane) | Not detected | **Still not detected** |
+| Dune DVN stats dashboard | Blocked by Cloudflare | **Still blocked** — stats unavailable |
+| LayerZero Labs DVN 1/1 signing | Blocked | **Still blocked** |
+
+### Detail
+
+1. **Official Blog (layerzero.network/blog):** Re-crawled. Most recent posts remain Apr 19 KelpDAO statement, followed by pre-incident partnership announcements (KorDA $KGLD, Worldpay Payments DVN, Canton, Centrifuge). No new security updates, no clarifying follow-ups, no "Path Forward Part 2."
+
+2. **Public Response Beyond KelpDAO Blame:** Unchanged. The Apr 19 statement remains LayerZero Labs' sole extended public response. It continues to frame the incident as: (a) KelpDAO's fault for choosing 1/1, (b) protocol architecture worked as designed (zero contagion), (c) state-actor sophistication excuses single-point failure. No new statements from leadership on X/Twitter beyond what was in the blog.
+
+3. **Code/Protocol Activity:** No commits, no PRs, no releases since Feb 27, 2026 on the public v2 repo. There is **zero on-chain or code-level reaction** to the $290M exploit visible in open-source repositories.
+
+4. **DVN Minimum Security Standards:** Still a recommendation, not a requirement. The integration checklist continues to advise multi-DVN setups, but there is no evidence of an on-chain `setConfig` guardrail that would reject 1-of-1 configurations.
+
+5. **Competitor Responses:** Searches for Wormhole, Axelar, Hyperlane blog posts, security updates, or competitive messaging referencing LayerZero or KelpDAO returned no results in this monitoring window. The competitor landscape remains silent on public channels.
+
+### Risk Assessment (May 1)
+
+**Risk Level: UNCHANGED.**
+
+The 12-day window since the exploit has produced no protocol hardening, no governance action, and no additional public accountability beyond the initial Apr 19 statement. LayerZero Labs is relying on voluntary integrator migration away from 1/1 and its own DVN's refusal to participate. This remains a soft-pressure mechanism, not a systemic fix.
+
+**Key concern:** If another integrator (especially a smaller team) is running 1/1 with a non-LayerZero-Labs DVN, the exact same exploit path is still viable against that DVN operator.
+
+### Action Items (Carried Forward)
+
+- 🔴 Verify Gentech portfolio for any 1/1 DVN exposure immediately.
+- 🔴 Source alternative Dune DVN migration data (via API, subgraph, or community dashboard) to quantify whether 1-of-1 % is actually declining.
+- 🟡 Monitor GitHub commits daily for any sudden post-incident protocol patch.
+- 🟡 Track competitor social channels manually if search remains rate-limited.
+
+*— YoYo, Gentech Strategies*

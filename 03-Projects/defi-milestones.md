@@ -2,7 +2,7 @@
 
 ## Position Summary
 - **Pool**: AVAX/USDC on LFJ V2.2 (Avalanche)
-- **Range**: $9.00 – $9.30 (rebalanced Apr 27)
+- **Range**: $8.95 – $9.36 (rebalanced Apr 30)
 - **Shape**: Curve
 - **Cron Job**: `e932437c74bb` — runs daily at 09:00 UTC
 
