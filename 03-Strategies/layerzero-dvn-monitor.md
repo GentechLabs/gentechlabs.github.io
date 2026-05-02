@@ -165,3 +165,70 @@ The 12-day window since the exploit has produced no protocol hardening, no gover
 - 🟡 Track competitor social channels manually if search remains rate-limited.
 
 *— YoYo, Gentech Strategies*
+
+---
+
+## Supplement — May 2, 2026 Check
+
+**Checked:** Saturday, May 2, 2026 09:05 UTC  
+**Analyst:** YoYo, Head of Strategies @ Gentech
+
+### Delta Since May 1 Report
+
+**No new material changes detected.** The post-incident response remains entirely static.
+
+| Item | May 1 Status | May 2 Status | Change |
+|------|--------------|--------------|--------|
+| Latest official blog post | Apr 19 KelpDAO Incident Statement | **Still Apr 19** — no new security/DVN posts | None |
+| GitHub LayerZero-v2 commits | 0 since May 1 | **Still 0** — zero post-incident code activity | None |
+| GitHub releases tag | Last May 6, 2025 | **Unchanged** — no security patch releases | None |
+| Protocol-level mandatory DVN minimums | Not implemented | **Still not implemented** | None |
+| Governance proposals (Snapshot) | None detected | **Still none detected** | None |
+| Competitor capitalizing (Wormhole, Axelar, Hyperlane) | Not detected | **Still not detected** | None |
+| Dune DVN stats dashboard | Inaccessible/Cloudflare | **Still inaccessible** — direct query blocked | None |
+| LayerZero Labs DVN 1/1 signing policy | Blocked | **Still blocked** | None |
+
+### Detail
+
+1. **Official Blog (layerzero.network/blog):** Re-crawled. The KelpDAO Incident Statement from April 19 remains the most recent post. No follow-up clarification, no "Path Forward Part 2," and no new security advisory published.
+
+2. **Public Response Beyond KelpDAO Blame:** Unchanged. LayerZero Labs has not issued any additional statements, tweets, or forum posts since the April 19 blog. The sole extended public narrative remains: (a) KelpDAO chose 1/1, (b) state-actor sophistication explains the compromise, (c) protocol isolation prevented contagion.
+
+3. **Code/Protocol Activity:** Verified via GitHub API — zero software commits to the LayerZero-v2 repository in the May 1–May 2 window. No issue activity, no PRs, no release draft. The repository remains in post-exploit stasis.
+
+4. **DVN Minimum Security Standards:** Still a best-practice recommendation only. No evidence of on-chain configuration guardrails (e.g., Endpoint rejecting `setConfig` with only one DVN). LayerZero Labs continues to rely on voluntary migration and its own DVN's unilateral opt-out.
+
+5. **Competitor Responses:** Checked Wormhole, Axelar, and Hyperlane official Twitter/X pages and news feeds. No public posts referencing LayerZero, KelpDAO, or multi-chain security differentiators in the context of the exploit.
+
+6. **Dune Dashboard:** Direct URL access continues to be blocked by Cloudflare or requires authentication. Independent verification of DVN distribution migration velocity remains unavailable.
+
+### Observations
+
+- **Silence as strategy.** LayerZero Labs appears to be pursuing a low-profile posture post-incident, relying on the technical merits of the modular-security argument and ongoing outreach to affected teams rather than public communications.
+- **No governance mobilization.** The absence of any Snapshot proposal suggests either (1) no community pressure for protocol-level changes yet, or (2) internal team preference to handle DVN policy via off-chain coordination.
+- **Competitor passivity notable.** Given the $290M exploit and narrative vulnerability around "single-point DVN risk," Wormhole/Axelar/Hyperlane have **not** launched competing security marketing campaigns — either tactical restraint or missed opportunity.
+
+### Risk Assessment (May 2)
+
+**Risk Level: UNCHANGED → HIGH.**
+
+Thirteen days post-exploit:
+- No protocol-level hardening (still no mandatory multi-DVN enforcement).
+- No new transparency report or security audit release.
+- Migration from 1-of-1 configurations is voluntary and unverifiable.
+- Other DVN operators (non-LayerZero-Labs) could still be operating 1/1 setups exposed to identical attack path.
+
+Systemic risk remains: **Any application using a single DVN (any operator) is still vulnerable to RPC-poisoning + DDoS attacks.**
+
+### Action Items (Updated May 2)
+
+| Priority | Action | Owner | Due |
+|----------|--------|-------|-----|
+| 🔴 CRITICAL | **Check if any Gentech portfolio protocols use LayerZero with <2 DVNs** — immediate risk assessment | DeFi Risk | ASAP |
+| 🔴 HIGH | **Manually query LayerZero Scan API / subgraph to get fresh DVN distribution** (since Dune is blocked) | YoYo + Data Eng | May 3 |
+| 🟡 MEDIUM | Track LayerZero Labs team socials (Brian, David, etc.) for any emergent security discourse | Comms | Ongoing |
+| 🟡 MEDIUM | Set up GitHub commit watcher on LayerZero-v2 for any sudden "security fix" pushes | DevOps | Ongoing |
+| 🟢 LOW | Draft competitive messaging framework in case Wormhole/Axelar pivot to security differentiation | Comms | On-hold |
+
+*— YoYo, Gentech Strategies*
+

@@ -44,12 +44,13 @@ The Brain** = Our memory
 
 ## The Rules
 
-1. **Only respond if relevant** — no spam, no noise
-2. **Extended convos → Mess Hall files** — keep the chat clean
-3. **After every collab, debrief** — what worked, what didn't, what we learned
-4. **Iron sharpens iron** — challenge each other, test theories, don't wait for Jordan (Hes human)
-5. **Fail forward** — log why something didn't work, not just that it failed
-6. **Jordan approves, we execute** — he's editor-in-chief, we're the newsroom
+3. **Shared content discussed in Mess Hall first** — Jordan shares link/photo, agents debate there, then give unified summary in HQ (not 4 paragraphs)
+4. **Unified message includes skill-based questions** — each agent lists 1–2 relevant follow-ups in the same HQ reply (Desmond: content? DMOB: audit? YoYo: finance?)
+5. **Keep extra chatter minimal** — only add if directly relevant to the topic
+6. **After every collab, debrief** — what worked, what didn't, what we learned
+7. **Iron sharpens iron** — challenge each other, test theories, don't wait for Jordan (He's human)
+8. **Fail forward** — log why something didn't work, not just that it failed
+9. **Jordan approves, we execute** — he's editor-in-chief, we're the newsroom
 
 ## The Vision
 

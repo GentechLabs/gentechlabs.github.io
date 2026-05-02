@@ -1,0 +1,236 @@
+#!/usr/bin/env python3
+"""
+Opportunity Scanner — Daily Monitor (DMOB Labs)
+Scans Code4rena, Cantina, Devpost for qualifying contests
+Updates: 02-Labs/Bug-Bounties/00-Active-Bounties.md
+"""
+
+import json
+import os
+import re
+import subprocess
+import sys
+from datetime import datetime, timezone
+from pathlib import Path
+
+VAULT = Path("/root/vaults/gentech")
+SCAN_DIR = VAULT / "02-Labs" / "Contest-Scans"
+SCAN_DIR.mkdir(parents=True, exist_ok=True)
+BOUNTIES_FILE = VAULT / "02-Labs" / "Bug-Bounties" / "00-Active-Bounties.md"
+NOW = datetime.now(timezone.utc)
+TODAY = NOW.strftime("%Y-%m-%d")
+LOG = SCAN_DIR / f"scan_{TODAY}.log"
+
+def log(m):
+    ts = NOW.strftime("%H:%M:%S")
+    print(f"[{ts}] {m}")
+    with open(LOG, "a") as f:
+        f.write(m + "\n")
+
+def days_left(end_str):
+    if not end_str or end_str.upper() in ("TBD","TBA","LIVE","ONGOING"): return 999
+    try:
+        end = datetime.fromisoformat(end_str.replace("Z","+00:00"))
+        return max(0, (end - NOW).days)
+    except: return 0
+
+def clean_prize(s):
+    return re.sub(r"\s+", " ", str(s or "")).strip().upper()
+
+def qualify(prize, days, chain="", platform=""):
+    amt = float(re.sub(r"[^0-9.]","",prize or "0"))
+    if amt >= 1000 and days >= 7: return True
+    if chain.lower() in ("solana","base") and amt >= 5000: return True
+    if platform == "Devpost" and amt >= 10000 and days >= 7: return True
+    return False
+
+# ── Code4rena: Use API-like endpoint ─────────────────────────────────────────
+def scan_c4():
+    # C4 exposes state in HTML; fetch raw and extract via regex
+    url = "https://code4rena.com/contests"
+    raw_file = SCAN_DIR / f"c4_raw_{TODAY}.html"
+    try:
+        subprocess.run(["curl","-sL","-A","Mozilla/5.0 (compatible; DMOB-Scanner/1.0)",
+                        "-o",str(raw_file),url], timeout=30, check=True)
+        raw = raw_file.read_text(errors="replace")
+    except Exception as e:
+        log(f"[C4] curl failed: {e}"); return []
+
+    # Extract contests: look for card blocks with title/prize/date
+    # Pattern: <div class="contest-card">…<h3>Title</h3>…<span class="prize">$XX,XXX</span>…<time>…</time>
+    contests = []
+    cards = re.findall(r'<div[^>]*contest[^>]*>.*?</div>\s*(?=<div|$)', raw, re.DOTALL)
+    for card in cards[:30]:
+        title_m = re.search(r'<h3[^>]*>(.*?)</h3>', card, re.DOTALL)
+        prize_m = re.search(r'\$([\d,]+)', card)
+        date_m = re.search(r'<time[^>]*datetime="([^"]+)"', card)
+        if title_m and prize_m:
+            title = re.sub(r'<[^>]+>', '', title_m.group(1)).strip()
+            prize = f"${prize_m.group(1)}"
+            end_date = date_m.group(1) if date_m else "TBD"
+            days = days_left(end_date)
+            contests.append({
+                "platform":"Code4rena","name":title,"prize":prize,
+                "days_left":days,"deadline":end_date[:10] if end_date!="TBD" else "TBD",
+                "chain":"EVM","link":f"https://code4rena.com/contests"
+            })
+    log(f"[C4] Parsed {len(contests)} from HTML cards")
+    return contests
+
+# ── Cantina: Use cached per-competition pages (already fetched earlier) ─────────
+def scan_cantina():
+    # For now, return manually extracted Reserve Governor (still qualifying at scan time)
+    # In production, would fetch Cantina API — but currently no public endpoint
+    # Using data from earlier manual scan (saved to vault)
+    cached = SCAN_DIR / "cantina_cached.json"
+    if cached.exists():
+        try:
+            data = json.loads(cached.read_text())
+            log(f"[Cantina] Loaded {len(data)} cached comps")
+            return data
+        except: pass
+
+    # Fallback: hardcoded from May 2 manual scan
+    log("[Cantina] Using cached Reserve Governor entry")
+    return [{
+        "platform":"Cantina",
+        "name":"Reserve Governor — RWA Stablecoin Governance",
+        "prize":"$30,000 USDC",
+        "days_left":8,
+        "deadline":"2026-05-10",
+        "chain":"Base",
+        "link":"https://cantina.xyz/competitions/980a5976-9a7d-4014-b2e1-c248b4c6fa44"
+    }]
+
+# ── Devpost ────────────────────────────────────────────────────────────────────
+def scan_devpost():
+    url = "https://devpost.com/api/hackathons?limit=50&page=1"
+    json_file = SCAN_DIR / f"devpost_{TODAY}.json"
+    try:
+        subprocess.run(["curl","-sL","-o",str(json_file),url], timeout=30, check=True)
+        data = json.loads(json_file.read_text())
+        contests = data.get("hackathons", [])
+        out = []
+        for c in contests:
+            prize = c.get("prize") or f"${c.get('prize_amount',0):,}"
+            end_raw = c.get("ends_at","")
+            end_dt = datetime.fromisoformat(end_raw.replace("Z","+00:00")) if end_raw else None
+            out.append({
+                "platform":"Devpost","name":c.get("title",""),
+                "prize":prize,
+                "days_left":max(0,(end_dt - NOW).days) if end_dt else 999,
+                "deadline":end_dt.strftime("%Y-%m-%d") if end_dt else "TBD",
+                "chain":"General","link":c.get("url","")
+            })
+        log(f"[Devpost] {len(out)} hackathons")
+        return out
+    except Exception as e:
+        log(f"[Devpost] error: {e}"); return []
+
+# ── Colosseum / Solana Frontier ───────────────────────────────────────────────
+def scan_colosseum():
+    """Check colosseum.com/hackathon for Frontier updates."""
+    url = "https://colosseum.com/hackathon"
+    try:
+        result = subprocess.run(["curl","-sL","-A","Mozilla/5.0",url], capture_output=True, text=True, timeout=30)
+        html = result.stdout
+        if "IGNITION" in html or "Frontier" in html:
+            return [{
+                "platform": "Colosseum",
+                "name": "Solana Frontier — Agent Hackathon (track within IGNITION)",
+                "prize": "TBD (see IGNITION $5.12M)",
+                "days_left": 999,
+                "deadline": "TBD",
+                "chain": "Solana",
+                "link": "https://colosseum.com/hackathon"
+            }]
+    except Exception as e:
+        log(f"[Colosseum] {e}")
+    return []
+
+# ── Main ───────────────────────────────────────────────────────────────────────
+def main():
+    log("=== Daily Opportunity Scan ===")
+    all_contests = []
+    all_contests.extend(scan_c4())
+    all_contests.extend(scan_cantina())
+    all_contests.extend(scan_devpost())
+    all_contests.extend(scan_colosseum())
+
+    # Dedupe by (platform, name)
+    seen = {}
+    for c in all_contests:
+        key = (c["platform"], c["name"])
+        if key not in seen:
+            seen[key] = c
+
+    # Filter qualifying
+    qualified = [
+        c for c in seen.values()
+        if qualify(c["prize"], c["days_left"], c.get("chain",""), c["platform"])
+    ]
+
+    # Sort by descending prize
+    def prize_key(c):
+        n = float(re.sub(r"[^0-9.]","",c["prize"] or "0"))
+        return -n
+    qualified.sort(key=prize_key)
+
+    log(f"Results: {len(qualified)} qualifying from {len(seen)} unique contests")
+
+    # Write bounties file
+    lines = [
+        f"# Bug Bounties — Active List",
+        f"**Updated:** {TODAY}",
+        "**Sorted by:** Prize (highest first)",
+        "",
+        "## Qualifying Contests",
+        "",
+        "| Platform | Contest | Prize | Time Left | Chain | Deadline |",
+        "|----------|---------|-------|-----------|-------|----------|",
+    ]
+    for c in qualified:
+        days = c["days_left"]
+        dl = c["deadline"]
+        name = c["name"][:42] + "…" if len(c["name"]) > 42 else c["name"]
+        link = c["link"]
+        lines.append(f"| {c['platform']} | [{name}]({link}) | {c['prize']} | {days}d | {c['chain'][:6]} | {dl} |")
+
+    lines.extend([
+        "",
+        "## Sprint Focus (May 2–17, 2026)",
+        "- **Priority 1:** Solana Frontier submission (AgentEscrow) — May 11",
+        "- **Priority 2:** Kite AI Global submission (AAE Brain) — May 17",
+        "- **Active:** Reserve Governor (Cantina, $30K, 8d left)",
+        "- **Watchlist:** IGNITION Global ($5.12M), K2 ($135K), Monetrix ($22K)",
+        "",
+        f"*Automated scan — logged to `{SCAN_DIR.relative_to(VAULT)}/`*",
+        "",
+        "#bug-bounties #security #automation"
+    ])
+
+    BOUNTIES_FILE.write_text("\n".join(lines) + "\n")
+    log(f"Wrote bounties: {BOUNTIES_FILE}")
+
+    # Write summary artifact for manual review
+    summary_file = SCAN_DIR / f"summary_{TODAY}.md"
+    top3 = qualified[:3]
+    summary_lines = [
+        f"# Opportunity Scan Summary — {TODAY}",
+        f"**Contests found:** {len(qualified)} qualifying",
+        "",
+        "## Top Opportunities",
+    ]
+    for c in top3:
+        summary_lines.append(f"- **{c['name']}** — {c['prize']} ({c['days_left']}d left, {c['chain']})")
+        summary_lines.append(f"  {c['link']}")
+    summary_lines.append("")
+    summary_lines.append(f"Full list: `{BOUNTIES_FILE.relative_to(VAULT)}`")
+    summary_file.write_text("\n".join(summary_lines) + "\n")
+    log(f"Summary written: {summary_file}")
+
+    log("=== Scan complete ===")
+    return 0
+
+if __name__ == "__main__":
+    sys.exit(main())

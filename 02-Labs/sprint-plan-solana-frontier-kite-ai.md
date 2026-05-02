@@ -141,6 +141,46 @@ DMOB's assessment: Kite's track literally asks for what we brainstormed. The str
 
 ---
 
+## 📅 May 2 Coordination Update
+
+**Morning brief (May 2) — Smart routing activated per Jordan directive:**
+
+| Department | Agent | Priority Tasks Assigned (May 2–3) |
+|------------|-------|--------------------------------|
+| **Labs** | DMOB | 1. Deploy Reputation program to devnet 2. Finish DisputeResolver + deploy 3. Start TypeScript SDK scaffolding 4. Devnet verification checklist |
+| **Creative** | Desmond | 1. Demo storyboard (5-min flow) 2. Voiceover script draft 3. Research Agents Assemble Healthcare AI (Devpost) 4. Set up Excalidraw for storyboard frames |
+| **Strategies** | YoYo | 1. Scan Superteam Earn sidetrack eligibility list 2. Identify high-value, low-effort sidetracks 3. X402 payments protocol ($135K) opportunity assessment 4. Code4rena contest filter (≥5 days, relevance ≥3/5) |
+
+**Dependencies:** DMOB has until May 5–6 to deliver working devnet MVP before Desmond begins video production.
+
+**Additionally flagged:** Colosseum registration check (colosseum.build) — confirm DMOB account registered to avoid forfeiture.
+
+---
+
+## 📦 Scanner Integration (May 2 Addendum)
+
+**Opportunity scanner cron installed:**
+- Script: `02-Labs/scripts/opportunity_scanner_daily.py` (executable, 09:00 UTC daily)
+- Data source: Validated cache + live API fallback (C4/Cantina/Devpost)
+- Output: `02-Labs/Bug-Bounties/00-Active-Bounties.md` + daily summary in `Contest-Scans/`
+- Crontab entry confirmed: `0 9 * * * /usr/bin/env python3 /root/vaults/gentech/02-Labs/scripts/opportunity_scanner_daily.py`
+
+**Qualifying contests currently tracked:**
+| Platform | Contest | Prize | Days Left | Deadline |
+|----------|---------|-------|-----------|----------|
+| Devpost IGNITION | Global Solana Hackathon | $5.12M | ∞ | TBD |
+| Code4rena K2 | K2 | $135K | 90 | 2026-08-01 |
+| Code4rena Monetrix | Monetrix | $22K | 62 | 2026-07-04 |
+| Devpost Agents Assemble | Healthcare AI | $32.5K | 9 | 2026-05-11 |
+| Cantina Reserve Governor | Reserve Governor | $30K | 8 | 2026-05-10 ⏰ |
+
+**PAT note:** Colosseum Copilot API PAT available in `00-HQ/Credentials/colosseum-copilot-token.md`; current token expired/invalid — requires regeneration at arena.colosseum.org/copilot. Once refreshed, the scanner can be extended to fetch Frontier track details via Copilot `/filters` and `/search/projects` endpoints.
+
+**Next:** Update cached data with full Frontier track prize breakdown after arena login.
+
+---
+
 *Created by: Desmond (Creative)*
 *Approved by: Jordan*
+*Date: 2026-04-29*
 *Date: 2026-04-29*

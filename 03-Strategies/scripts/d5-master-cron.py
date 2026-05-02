@@ -20,6 +20,12 @@ import sys
 import urllib.request
 from datetime import datetime, timezone, timedelta
 
+# ── Alert Thresholds ───────────────────────────────────────────────────────────
+EFFICIENCY_WARNING_THRESHOLD = 30.0  # Below 30% → efficiency warning  
+EFFICIENCY_RED_THRESHOLD = 25.0      # Below 25% → red alert (severe)
+OUT_OF_RANGE_WARNING_MINUTES = 10    # After 10min out of range → warning
+OUT_OF_RANGE_RED_MINUTES = 15        # After 15min total → red alert
+
 # ── CMC ───────────────────────────────────────────────────────────────────────
 
 def load_cmc_key():
@@ -67,8 +73,8 @@ POOL = {
 MILESTONES = [
     {"tier": 1, "label": "Scout",     "daily_fees": 5.0,   "unlocks": "Entry strategies (CURVE)"},
     {"tier": 2, "label": "Raider",    "daily_fees": 20.0,  "unlocks": "SPOT + BIDIRECTIONAL shapes"},
-    {"tier": 3, "label": "Warlord",   "daily_fees": 55.0,  "unlocks": "Multi-pool positions"},
-    {"tier": 4, "label": "Sovereign", "daily_fees": 200.0, "unlocks": "Custom strategy creation"},
+    {"tier": 3, "label": "Warlord",   "daily_fees": 50.0,  "unlocks": "Multi-pool positions"},
+    {"tier": 4, "label": "Sovereign", "daily_fees": 100.0, "unlocks": "Custom strategy creation + mentorship"},
 ]
 
 COMPOUND_THRESHOLD = 50.0
@@ -296,6 +302,9 @@ def build_watchlist(data):
 def build_lp():
     data = fetch_dexscreener()
     state = load_json(LP_STATE, {})
+    # Ensure state has required tracking keys
+    state.setdefault("out_of_range_since", None)
+    state.setdefault("out_of_range_first_check", False)
     price = data.get("price", 0)
     vol = data.get("volume_24h", 0)
     liq = data.get("liquidity", 0)
@@ -304,6 +313,34 @@ def build_lp():
     eff = calc_efficiency(price, POOL["range_low"], POOL["range_high"], POOL["shape"])
     in_range = POOL["range_low"] <= price <= POOL["range_high"]
     fees = est_daily_fees(vol, liq, POOL["position_usd"], POOL["fee_tier_bps"])
+
+    # Out-of-range time tracking with confirmation delay
+    out_of_range_duration = 0.0
+    if not in_range:
+        if state.get("out_of_range_since") is None:
+            # First time out of range
+            state["out_of_range_since"] = now_eastern().isoformat()
+            state["out_of_range_first_check"] = True
+            out_of_range_duration = 0.0
+        elif state.get("out_of_range_first_check"):
+            # Second consecutive check — confirmed out of range
+            try:
+                first = datetime.fromisoformat(state["out_of_range_since"])
+                out_of_range_duration = (now_eastern() - first).total_seconds() / 60.0
+            except:
+                out_of_range_duration = 10.0  # fallback estimate
+        else:
+            # Already confirmed, track cumulative duration
+            try:
+                first = datetime.fromisoformat(state["out_of_range_since"])
+                out_of_range_duration = (now_eastern() - first).total_seconds() / 60.0
+            except:
+                out_of_range_duration = 10.0
+    else:
+        # Back in range — clear tracking
+        state["out_of_range_since"] = None
+        state["out_of_range_first_check"] = False
+        out_of_range_duration = 0.0
     apr = round((fees * 365 / POOL["position_usd"]) * 100, 1) if POOL["position_usd"] > 0 else 0
     cum = state.get("total_fees_earned_usd", 0)
     days = state.get("total_days_in_range", 0)
@@ -319,7 +356,10 @@ def build_lp():
         "cum": cum, "days": days, "curr_idx": curr_idx, "curr_lab": curr_lab,
         "nxt_lab": nxt_lab, "pct": pct, "comp_ready": comp_ready,
         "is_monday": is_monday, "dca_msg": dca_msg,
+        "oor_duration": out_of_range_duration,
     }
+    # Persist updated state
+    save_json(LP_STATE, state)
     return lp
 
 # ── Silent vs Alert Logic ──────────────────────────────────────────────────────
@@ -412,11 +452,19 @@ def print_report(results, alerts, lp):
     lines.append(f"📉 **Shape-Aware DCA**: {lp['dca_msg']}")
 
     if not lp["in_range"]:
-        lines.append(f"🚨 **Rebalance Required** — Price out of range! Shift range to capture volatility.")
+        dur = lp.get("oor_duration", 0)
+        if dur >= OUT_OF_RANGE_RED_MINUTES:
+            lines.append(f"🚨 RED ALERT — Rebalance IMMEDIATE — {dur:.0f}min out ⚠️")
+        elif dur >= OUT_OF_RANGE_WARNING_MINUTES:
+            lines.append(f"⚠️ OUT OF RANGE WARNING — {dur:.0f}min out. Rebalance soon.")
+        else:
+            lines.append(f"👀 Monitoring — {dur:.0f}min elapsed. Confirming...")
     elif lp["eff"] < 40:
-        lines.append(f"⚠️ **Consider Rebalancing** — Fee efficiency low ({lp['eff']}%). A fresh range earns more.")
-    elif lp["eff"] >= 70:
-        lines.append(f"🏅 **Position Healthy** — Keep earning. Efficiency is strong.")
+        lines.append(f"🚨 CRITICAL EFFICIENCY — {lp['eff']:.1f}%. Rebalance immediately.")
+    else:
+        lines.append(f"🏅 Healthy — Efficiency {lp['eff']:.1f}%")
+        lines.append(f"🏅 Healthy — Efficiency {lp['eff']:.1f}%")
+
 
     # Daily Snapshot
     total = POOL["position_usd"] + lp["cum"]

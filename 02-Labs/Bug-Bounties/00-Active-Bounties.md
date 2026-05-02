@@ -1,45 +1,23 @@
 # Bug Bounties — Active List
-**Updated:** 2026-04-18
+**Updated:** 2026-05-02
 **Sorted by:** Prize (highest first)
 
-## Top Targets (High Value)
+## Qualifying Contests
 
-| Platform | Protocol | Prize | Focus | Status |
-|----------|----------|-------|-------|--------|
-| Cantina | Uniswap | $15.5M | DEX core | 🟢 Always |
-| Sherlock | Usual Labs | $16M | Stablecoin | 🟢 Always |
-| Cantina | Reserve | $10M | RWA/stablecoin | 🟢 Always |
-| Cantina | Euler | $7.5M | Lending | 🟢 Always |
-| Cantina | Polymarket | $5M | Prediction markets | 🟢 Always |
-| Cantina | Coinbase | $5M | Exchange | 🟢 Always |
+| Platform | Contest | Prize | Time Left | Chain | Deadline |
+|----------|---------|-------|-----------|-------|----------|
+| Devpost | [IGNITION | Global Solana Hackathon](https://ignition.devpost.com/) | $5,120,000 | 999d | Solana | TBD |
+| Code4rena | [K2](https://code4rena.com/contests/2026-04-k2) | $135,000 USDC | 90d | Stella | 2026-08-01 |
+| Devpost | [Agents Assemble — The Healthcare AI Endgam…](https://agents-assemble.devpost.com/) | $32,500 | 9d | Genera | 2026-05-11 |
+| Cantina | [Reserve Governor — RWA Stablecoin Governan…](https://cantina.xyz/competitions/980a5976-9a7d-4014-b2e1-c248b4c6fa44) | $30,000 USDC | 8d | Base | 2026-05-10 |
+| Code4rena | [Monetrix](https://code4rena.com/contests/2026-04-monetrix) | $22,000 USDC | 62d | Hyperl | 2026-07-04 |
 
-## Mid Targets (Approachable)
+## Sprint Focus (May 2–17, 2026)
+- Priority 1: Solana Frontier (AgentEscrow) — May 11
+- Priority 2: Kite AI Global (AAE Brain) — May 17
+- Active: Reserve Governor (Cantina, $30K, 8d left)
+- Watchlist: IGNITION ($5.12M), K2 ($135K), Monetrix ($22K)
 
-| Platform | Protocol | Prize | Focus | Status |
-|----------|----------|-------|-------|--------|
-| Cantina | Morpho | $2.5M | Lending | 🟢 Always |
-| Sherlock | Flying Tulip | $1M | DEX | 🟢 Always |
-| Sherlock | Cap | $1M | Perps | 🟢 Always |
-| Sherlock | Aave V4 | $500K | Lending (Jordan's focus) | 🟢 Always |
-| Sherlock | Fira | $500K | DeFi | 🟢 Always |
+*Automated — logged to `02-Labs/Contest-Scans/`*
 
-## Entry Targets (Start Here)
-
-| Platform | Protocol | Prize | Focus | Status |
-|----------|----------|-------|-------|--------|
-| Code4rena | Moonwell | $250K | Lending | 🟢 Always |
-| Code4rena | Intuition | $100K | Identity | 🟢 Always |
-| Code4rena | Legion | $75K | DeFi | 🟢 Always |
-| AVAX | Immunefi | Up to $100K | Avalanche ecosystem | 🟢 Always |
-
-## Jordan's Path
-1. Start with Moonwell ($250K) — approachable, good learning
-2. Graduate to Aave V4 ($500K) — matches his lending interest
-3. Eventually target Uniswap/Usual ($15M+) — long-term goal
-
-## Notes
-- All Solidity/EVM — matches Jordan's primary learning path
-- Security auditing skills from Cyfrin Updraft directly apply
-- Each bounty is an income opportunity + portfolio piece
-
-#bug-bounties #security #income
+#bug-bounties #security #automation

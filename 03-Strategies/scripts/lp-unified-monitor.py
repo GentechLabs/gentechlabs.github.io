@@ -74,12 +74,10 @@ POSITION_USDC = 48.37
 
 # Milestone schedule (daily fee targets)
 MILESTONES = [
-    {"label": "$3/day",   "daily_fees": 3.0},
-    {"label": "$5/day",   "daily_fees": 5.0},
-    {"label": "$8/day",   "daily_fees": 8.0},
-    {"label": "$10/day",  "daily_fees": 10.0},
-    {"label": "$15/day",  "daily_fees": 15.0},
-    {"label": "$20/day",  "daily_fees": 20.0},
+    {"tier": 1, "label": "Scout",     "daily_fees": 5.0,   "unlocks": "Entry strategies (CURVE)"},
+    {"tier": 2, "label": "Raider",    "daily_fees": 20.0,  "unlocks": "SPOT + BIDIRECTIONAL shapes"},
+    {"tier": 3, "label": "Warlord",   "daily_fees": 50.0,  "unlocks": "Multi-pool positions"},
+    {"tier": 4, "label": "Sovereign", "daily_fees": 100.0, "unlocks": "Custom strategy creation + mentorship"},
 ]
 
 # DCA schedule

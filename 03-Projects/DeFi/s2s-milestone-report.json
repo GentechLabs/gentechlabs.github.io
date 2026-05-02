@@ -1,0 +1,62 @@
+{
+  "timestamp": "2026-05-02T10:24:22.316110Z",
+  "capital_update": {
+    "status": "DCA_BOOST_DETECTED",
+    "dca_injection_usd": 54.999999999999986,
+    "dca_date": "2026-04-26",
+    "last_recorded_total": 138.92,
+    "current_total": 135.83,
+    "net_change_since_injection": -3.089999999999975
+  },
+  "milestone_progress": {
+    "milestone": "M2",
+    "milestone_label": "Warlord+",
+    "target_daily_fees_usd": 20.0,
+    "current_daily_fees_est_usd": 0.19,
+    "daily_yield_pct": 0.14,
+    "apr_estimate_pct": 51.4,
+    "fees_gap_daily_usd": 19.81,
+    "gap_pct_of_target": 99.0
+  },
+  "capital_gap": {
+    "principal_needed_at_current_yield_usd": 14205.26,
+    "current_position_usd": 135.83,
+    "gap_usd": 14069.43
+  },
+  "dca_path": {
+    "weekly_dca_range_usd": [
+      50,
+      100
+    ],
+    "schedule": "Sun-Wed + Thu-Sat split",
+    "weeks_to_target_at_50_usd": 281.4,
+    "weeks_to_target_at_75_usd": 187.6,
+    "weeks_to_target_at_100_usd": 140.7,
+    "years_to_target_avg": 3.6
+  },
+  "pro_tips": [
+    {
+      "priority": 1,
+      "title": "Range efficiency",
+      "action": "Narrow range to $9.12\u2013$9.18 (centered on $9.15)",
+      "expected_impact": "Efficiency \u219142% \u2192 70%+, daily fees $0.19 \u2192 ~$0.50"
+    },
+    {
+      "priority": 2,
+      "title": "Config drift fix",
+      "action": "Sync lp-range-monitor-v2.py RANGE_LOW/HIGH to tracker (config: $9.00\u2013$9.30)",
+      "expected_impact": "Accurate metrics + early edge warnings"
+    },
+    {
+      "priority": 3,
+      "title": "Compounding cadence",
+      "action": "Reinvest DCA bi-weekly (not monthly) to capture yield-on-yield",
+      "expected_impact": "Timeline -10%, breakeven acceleration"
+    }
+  ],
+  "data_sources": {
+    "position_tracker": "03-Strategies/scripts/.lfj-position-tracker.json",
+    "config": "03-Strategies/scripts/.lfj-aae-config.json",
+    "vault_sync": "02-AAE/defi-position-log.md (May 2 update)"
+  }
+}

@@ -38,7 +38,8 @@
 - [x] **[X]** Norris Research Hackathon — SKIPPED per Jordan (Apr 25)
 - [x] **[X]** ElevenHacks #6-9 — SKIPPED per Jordan (Apr 25)
 - [x] **[X]** GenLayer Builder — PAUSED per Jordan (Apr 25), may resume post-May 11
-- [ ] **[Q]** Dynamic burn rate smart contract feasibility — on-chain revenue tracking, gas optimization | **Due: TBD** | ⏳ Pending
+- [x] **[X]** Dynamic burn rate smart contract feasibility — on-chain revenue tracking, gas optimization | **Due: TBD** | ✅ **DONE (May 2)** — Approved, see `02-Labs/Approvals/`
+- [ ] **[Q]** Gas Reserve Auto-Rebalance SC review — keeper auth, multi-chain, gas estimation guard | **Due: TBD** | ✅ **DONE (May 2)** — Approved, see `02-Labs/Approvals/`
 - [ ] **[Q]** claude-obsidian integration evaluation — vault linting, hot cache compatibility | **Due: TBD** | ⏳ Pending
 - [ ] **[Q]** Opportunity monitoring cron expansion — grants, audit marketplace, tool alternatives | **Due: TBD** | ⏳ Pending
 

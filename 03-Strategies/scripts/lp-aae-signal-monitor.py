@@ -68,6 +68,12 @@ DEFAULT_CONFIG = {
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 STATE_DIR = os.path.expanduser("~/.hermes/scripts")
 STATE_FILE = os.path.join(STATE_DIR, ".lfj-aae-state.json")
+
+# --- Alert thresholds ---
+EFFICIENCY_WARNING_THRESHOLD = 30.0  # Below 30% → efficiency warning
+EFFICIENCY_RED_THRESHOLD = 25.0      # Below 25% → red alert (severe)
+OUT_OF_RANGE_WARNING_MINUTES = 10    # After 10min out of range → warning
+OUT_OF_RANGE_RED_MINUTES = 15        # After 15min total → red alert (10 + 5 confirm)
 CONFIG_FILE = os.path.join(STATE_DIR, ".lfj-aae-config.json")
 
 # Import Birdeye client if available
@@ -374,49 +380,67 @@ def calc_progress_to_next(est_fees: float, current_idx: int, milestones: List[Di
 
 def determine_severity(in_range: bool, efficiency: float, compound_ready: bool, dca_ready: bool,
                        milestone_changed: bool, pool_tvl_drop_pct: float, micro_dca_ready: bool, cfg: Dict,
-                       out_of_range_confirmed: bool = True) -> str:
-    """Determine alert severity matching AAE Signal Spec (SILENT / LOW / HIGH / CELEBRATE).
+                       out_of_range_confirmed: bool = True, oor_duration_minutes: float = 0.0) -> str:
+    """Determine alert severity using time-based out-of-range escalation.
     
-    out_of_range_confirmed: False means first check out of range (2-check confirmation delay).
-    Only alerts on the SECOND consecutive out-of-range check.
+    Severity: SILENT (first check / monitoring), LOW (warning), HIGH (action required), CELEBRATE (milestone)
     """
+    # Milestone celebration
     if milestone_changed:
         return "CELEBRATE"
-    if not in_range and out_of_range_confirmed:
-        return "HIGH"
-    if not in_range and not out_of_range_confirmed:
-        # First time out of range — don't alert yet (confirmation pending)
-        return "SILENT"
+    
+    # TVL collapse — always high
     if pool_tvl_drop_pct > 30:
         return "HIGH"
-    if efficiency < 75 or (compound_ready and cfg.get("compound_threshold_usd", 50) > 0):
-        if pool_tvl_drop_pct > 30:
-            return "HIGH"
+    
+    # Out-of-range escalation based on duration
+    if not in_range:
+        if oor_duration_minutes >= OUT_OF_RANGE_RED_MINUTES:
+            return "HIGH"    # 15+ min out → RED alert
+        elif oor_duration_minutes >= OUT_OF_RANGE_WARNING_MINUTES:
+            return "LOW"     # 10–15 min → WARNING
+        else:
+            return "SILENT"  # <10min, still in confirmation window
+    
+    # Efficiency tiered alerts
+    if efficiency < EFFICIENCY_RED_THRESHOLD:
+        return "HIGH"    # <25% → critically low
+    if efficiency < EFFICIENCY_WARNING_THRESHOLD:
+        return "LOW"     # 25–30% → warning
+    
+    # Action triggers that merit attention even if range/efficiency ok
+    if compound_ready or dca_ready or micro_dca_ready:
         return "LOW"
-    if dca_ready or micro_dca_ready:
-        return "LOW"
+    
     return "SILENT"
-
 def get_suggested_action(in_range: bool, efficiency: float, compound_ready: bool, dca_ready: bool,
-                        milestone_changed: bool, current_tier: int, pool_tvl_drop_pct: float, micro_dca_ready: bool, micro_dca_amount: int, cfg: Dict) -> str:
-    """Generate human-readable suggested action matching Alert Matrix."""
+                        milestone_changed: bool, current_tier: int, pool_tvl_drop_pct: float,
+                        micro_dca_ready: bool, micro_dca_amount: int, cfg: Dict,
+                        oor_duration_minutes: float = 0.0) -> str:
+    """Generate human-readable suggested action with duration-based out-of-range guidance."""
     if milestone_changed:
         tier_label = cfg["milestones"][current_tier]["label"]
-        return f"MILESTONE: Promoted to {tier_label}! New strategies unlocked."
+        return f"MILESTONE: {tier_label} unlocked! New strategies available."
     if not in_range:
-        return "OUT OF RANGE: Price outside range. Rebalance or wait."
+        dur = oor_duration_minutes
+        if dur >= OUT_OF_RANGE_RED_MINUTES:
+            return "🚨 RED ALERT — Rebalance IMMEDIATE"
+        elif dur >= OUT_OF_RANGE_WARNING_MINUTES:
+            return f"⚠️ WARNING — {dur:.0f}min out of range. Rebalance soon."
+        else:
+            return f"👀 Monitoring — {dur:.0f}min elapsed. Confirming..."
     if pool_tvl_drop_pct > 30:
-        return "POOL TVL COLLAPSING: Consider exit or reduce exposure."
+        return "🚨 POOL TVL COLLAPSING: Consider exit or reduce exposure."
+    if efficiency < EFFICIENCY_RED_THRESHOLD:
+        return f"🚨 CRITICAL EFFICIENCY {efficiency:.1f}% — rebalance immediately."
+    if efficiency < EFFICIENCY_WARNING_THRESHOLD:
+        return f"⚠️ Efficiency low ({efficiency:.1f}%) — consider rebalancing."
     if compound_ready:
-        return f"COMPOUND: Fees exceed ${cfg['compound_threshold_usd']}. Reinvest + DCA."
-    if dca_ready:
-        return f"DCA: ${cfg['dca']['amount']} weekly DCA ready to deploy."
-    if micro_dca_ready:
-        return f"MICRO-DCA: Efficiency at {efficiency}% — deploy ${micro_dca_amount} bonus DCA + consider rebalance."
-    if efficiency < 75:
-        return f"Consider rebalancing — efficiency at {efficiency}%."
-    return "HOLD: Position healthy. Continue earning."
-
+        return f"💰 Compound ready — {state['total_fees_earned_usd']:.2f} USD"
+    if dca_ready or micro_dca_ready:
+        amount = micro_dca_amount if micro_dca_ready else cfg["dca"]["amount"]
+        return f"📈 DCA day — auto-buy ${amount} USDC"
+    return "✅ Position healthy — maintain current range."
 def calc_tvl_trend(tvl_history: List[float]) -> float:
     """Calculate 7-day TVL trend percentage. Returns 0.0 if insufficient data."""
     if len(tvl_history) < 2 or tvl_history[0] <= 0:
@@ -437,7 +461,7 @@ def calc_pool_tvl_drop(tvl_history: List[float]) -> float:
 
 def build_aae_signal(cfg: Dict, state: Dict, pool: Dict, price: float, in_range: bool,
                      efficiency: float, est_fees: float, apr: float, pool_tvl_drop_pct: float,
-                     out_of_range_confirmed: bool = True) -> AAESignal:
+                     out_of_range_confirmed: bool = True, oor_duration_minutes: float = 0.0) -> AAESignal:
     """Build structured AAE signal from all computed data."""
 
     eastern = timezone(timedelta(hours=cfg.get("quiet_hours", {}).get("timezone_offset", -4)))
@@ -489,10 +513,12 @@ def build_aae_signal(cfg: Dict, state: Dict, pool: Dict, price: float, in_range:
 
     # Severity (AAE Signal Spec: SILENT / LOW / HIGH / CELEBRATE)
     severity = determine_severity(in_range, efficiency, compound_ready, dca_ready, milestone_changed, pool_tvl_drop_pct, micro_dca_ready, cfg,
-                                  out_of_range_confirmed=out_of_range_confirmed)
+                                  out_of_range_confirmed=out_of_range_confirmed,
+                                  oor_duration_minutes=out_of_range_duration_minutes)
 
     # Suggested action
-    suggested = get_suggested_action(in_range, efficiency, compound_ready, dca_ready, milestone_changed, current_idx, pool_tvl_drop_pct, micro_dca_ready, micro_dca_amount, cfg)
+    suggested = get_suggested_action(in_range, efficiency, compound_ready, dca_ready, milestone_changed, current_idx, pool_tvl_drop_pct, micro_dca_ready, micro_dca_amount, cfg,
+                               oor_duration_minutes=out_of_range_duration_minutes)
 
     # Claimable rewards estimate (fees since last compound)
     claimable = round(state["total_fees_earned_usd"], 2)
@@ -705,22 +731,31 @@ def main():
     tvl_trend_7d = calc_tvl_trend(state["tvl_history"])
     
     # 2-check confirmation for out-of-range (ported from lp-range-monitor.py)
-    out_of_range_confirmed = True
+    # Duration-based out-of-range escalation (10min monitor → 5min wait → red)
+    out_of_range_duration_minutes = 0.0
+    out_of_range_confirmed = False
     if not in_range:
         if state.get("out_of_range_since") is None:
-            # First check out of range — note it, don't alert yet
+            # First time out of range — note timestamp
             state["out_of_range_since"] = now.isoformat()
-            state["out_of_range_first_check"] = True
             out_of_range_confirmed = False
-        elif state.get("out_of_range_first_check"):
-            # Second consecutive check — now confirmed
-            out_of_range_confirmed = True
-            state["out_of_range_first_check"] = False
+            out_of_range_duration_minutes = 0.0
+        else:
+            # Already out of range previously — compute elapsed duration
+            try:
+                since_dt = datetime.fromisoformat(state["out_of_range_since"])
+                delta = now - since_dt
+                out_of_range_duration_minutes = delta.total_seconds() / 60.0
+                # Cap at red threshold for display purposes
+                out_of_range_duration_minutes = min(out_of_range_duration_minutes, OUT_OF_RANGE_RED_MINUTES + 10)
+            except Exception:
+                out_of_range_duration_minutes = 0.0
+            out_of_range_confirmed = out_of_range_duration_minutes >= OUT_OF_RANGE_WARNING_MINUTES
     else:
-        # Back in range — clear confirmation state
+        # Back in range — clear state
         state["out_of_range_since"] = None
-        state["out_of_range_first_check"] = False
-    
+        out_of_range_confirmed = False
+        out_of_range_duration_minutes = 0.0
     # Update state
     eastern = timezone(timedelta(hours=cfg.get("quiet_hours", {}).get("timezone_offset", -4)))
     now = datetime.now(eastern)
@@ -742,7 +777,8 @@ def main():
     
     # Build AAE signal (with 2-check confirmation)
     signal = build_aae_signal(cfg, state, pool, price, in_range, efficiency, est_fees, apr, pool_tvl_drop_pct,
-                              out_of_range_confirmed=out_of_range_confirmed)
+                              out_of_range_confirmed=out_of_range_confirmed,
+                              oor_duration_minutes=out_of_range_duration_minutes)
 
     # Update alert history (only non-silent alerts)
     if signal.severity != "SILENT":

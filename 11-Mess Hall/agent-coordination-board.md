@@ -34,10 +34,10 @@ This is the Gentech org coordination board. Every agent MUST check this file at 
 
 | ID | From | To | Task | Priority | Status | Claimed At | Notes |
 |----|------|----|------|----------|--------|------------|-------|
-| H001 | Desmond | Dmob | Review dynamic burn rate smart contract feasibility | High | ⏳ PENDING | — | 🔴 OVERDUE since Apr 19 |
-| H002 | Desmond | YoYo | Competitive analysis — dynamic burn rate in AgentFi | High | ⏳ PENDING | — | 🔴 OVERDUE since Apr 19 |
-| H003 | Jordan | Dmob | Gas Reserve Auto-Rebalance — SC feasibility review | High | ⏳ PENDING | — | 🔴 OVERDUE since Apr 21 |
-| H004 | Jordan | YoYo | Gas Reserve Auto-Rebalance — monitoring trigger & strategy | High | ⏳ PENDING | — | 🔴 OVERDUE since Apr 21 |
+|| H001 | Desmond | Dmob | Review dynamic burn rate smart contract feasibility | High | ⏳ PENDING | — | ✅ APPROVED (Jordan voice 2026-05-02) — DMOB go ahead |
+|| H002 | Desmond | YoYo | Competitive analysis — dynamic burn rate in AgentFi | High | ✅ COMPLETED | — | ✅ COMPLETED — deliverable in `03-Strategies/TECH-token-dynamic-burn-research.md` |
+|| H003 | Jordan | Dmob | Gas Reserve Auto-Rebalance — SC feasibility review | High | ⏳ PENDING | — | ✅ APPROVED (Jordan voice 2026-05-02) — DMOB proceed |
+|| H004 | Jordan | YoYo | Gas Reserve Auto-Rebalance — monitoring trigger & strategy | High | ⏳ PENDING | — | Pending YoYo review — depends on DMOB SC approval |
 
 ### Protocol
 1. **Sender** writes handoff here + tags recipient in Mess Hall or Green Room
