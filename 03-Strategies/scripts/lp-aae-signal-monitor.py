@@ -182,6 +182,7 @@ def load_state() -> Dict[str, Any]:
         "tvl_history": [],  # Last 168 checks (7 days @ 1h) for TVL trend
         "pool_dominant_pair": None,
         "last_check": None,
+        "last_position_usd": None,
     }
     try:
         with open(STATE_FILE, "r") as f:
@@ -380,7 +381,8 @@ def calc_progress_to_next(est_fees: float, current_idx: int, milestones: List[Di
 
 def determine_severity(in_range: bool, efficiency: float, compound_ready: bool, dca_ready: bool,
                        milestone_changed: bool, pool_tvl_drop_pct: float, micro_dca_ready: bool, cfg: Dict,
-                       out_of_range_confirmed: bool = True, oor_duration_minutes: float = 0.0) -> str:
+                       out_of_range_confirmed: bool = True, oor_duration_minutes: float = 0.0,
+                       just_recovered: bool = False) -> str:
     """Determine alert severity using time-based out-of-range escalation.
     
     Severity: SILENT (first check / monitoring), LOW (warning), HIGH (action required), CELEBRATE (milestone)
@@ -388,6 +390,10 @@ def determine_severity(in_range: bool, efficiency: float, compound_ready: bool, 
     # Milestone celebration
     if milestone_changed:
         return "CELEBRATE"
+    
+    # Recovery alert — price returned to range after being out
+    if just_recovered:
+        return "OK"
     
     # TVL collapse — always high
     if pool_tvl_drop_pct > 30:
@@ -416,11 +422,13 @@ def determine_severity(in_range: bool, efficiency: float, compound_ready: bool, 
 def get_suggested_action(in_range: bool, efficiency: float, compound_ready: bool, dca_ready: bool,
                         milestone_changed: bool, current_tier: int, pool_tvl_drop_pct: float,
                         micro_dca_ready: bool, micro_dca_amount: int, cfg: Dict,
-                        oor_duration_minutes: float = 0.0) -> str:
+                        oor_duration_minutes: float = 0.0, just_recovered: bool = False) -> str:
     """Generate human-readable suggested action with duration-based out-of-range guidance."""
     if milestone_changed:
         tier_label = cfg["milestones"][current_tier]["label"]
         return f"MILESTONE: {tier_label} unlocked! New strategies available."
+    if just_recovered:
+        return "🟢 Recovered — back in range"
     if not in_range:
         dur = oor_duration_minutes
         if dur >= OUT_OF_RANGE_RED_MINUTES:
@@ -461,7 +469,8 @@ def calc_pool_tvl_drop(tvl_history: List[float]) -> float:
 
 def build_aae_signal(cfg: Dict, state: Dict, pool: Dict, price: float, in_range: bool,
                      efficiency: float, est_fees: float, apr: float, pool_tvl_drop_pct: float,
-                     out_of_range_confirmed: bool = True, oor_duration_minutes: float = 0.0) -> AAESignal:
+                     out_of_range_confirmed: bool = True, oor_duration_minutes: float = 0.0,
+                     just_recovered: bool = False) -> AAESignal:
     """Build structured AAE signal from all computed data."""
 
     eastern = timezone(timedelta(hours=cfg.get("quiet_hours", {}).get("timezone_offset", -4)))
@@ -514,11 +523,13 @@ def build_aae_signal(cfg: Dict, state: Dict, pool: Dict, price: float, in_range:
     # Severity (AAE Signal Spec: SILENT / LOW / HIGH / CELEBRATE)
     severity = determine_severity(in_range, efficiency, compound_ready, dca_ready, milestone_changed, pool_tvl_drop_pct, micro_dca_ready, cfg,
                                   out_of_range_confirmed=out_of_range_confirmed,
-                                  oor_duration_minutes=out_of_range_duration_minutes)
+                                  oor_duration_minutes=oor_duration_minutes,
+                                  just_recovered=just_recovered)
 
     # Suggested action
     suggested = get_suggested_action(in_range, efficiency, compound_ready, dca_ready, milestone_changed, current_idx, pool_tvl_drop_pct, micro_dca_ready, micro_dca_amount, cfg,
-                               oor_duration_minutes=out_of_range_duration_minutes)
+                               oor_duration_minutes=oor_duration_minutes,
+                               just_recovered=just_recovered)
 
     # Claimable rewards estimate (fees since last compound)
     claimable = round(state["total_fees_earned_usd"], 2)
@@ -693,6 +704,14 @@ def main():
     
     state = load_state()
     position = cfg["position"]
+    # Capital injection detection
+    current_position_usd = position["total_usd"]
+    last_position_usd = state.get("last_position_usd")
+    capital_injection_usd = 0.0
+    if last_position_usd is not None and current_position_usd > last_position_usd:
+        capital_injection_usd = round(current_position_usd - last_position_usd, 2)
+    state["last_position_usd"] = current_position_usd
+
     
     # Fetch data with fallback chain
     birdeye = fetch_birdeye(cfg)
@@ -732,6 +751,7 @@ def main():
     
     # 2-check confirmation for out-of-range (ported from lp-range-monitor.py)
     # Duration-based out-of-range escalation (10min monitor → 5min wait → red)
+    was_out = state.get("out_of_range_since") is not None
     out_of_range_duration_minutes = 0.0
     out_of_range_confirmed = False
     if not in_range:
@@ -756,6 +776,7 @@ def main():
         state["out_of_range_since"] = None
         out_of_range_confirmed = False
         out_of_range_duration_minutes = 0.0
+    just_recovered = in_range and was_out
     # Update state
     eastern = timezone(timedelta(hours=cfg.get("quiet_hours", {}).get("timezone_offset", -4)))
     now = datetime.now(eastern)
@@ -778,7 +799,8 @@ def main():
     # Build AAE signal (with 2-check confirmation)
     signal = build_aae_signal(cfg, state, pool, price, in_range, efficiency, est_fees, apr, pool_tvl_drop_pct,
                               out_of_range_confirmed=out_of_range_confirmed,
-                              oor_duration_minutes=out_of_range_duration_minutes)
+                              oor_duration_minutes=out_of_range_duration_minutes,
+                              just_recovered=just_recovered)
 
     # Update alert history (only non-silent alerts)
     if signal.severity != "SILENT":
@@ -795,13 +817,18 @@ def main():
     save_state(state)
     
     # Output structured JSON for AAE ingestion
+    human_report = format_human_report(signal, cfg)
+    if capital_injection_usd > 0:
+        human_report = f"💸 Capital added: ${capital_injection_usd:.2f} — progress recalculated.\n\n" + human_report
     output = {
         "status": signal.severity,
         "signal": signal.to_dict(),
-        "human_report": format_human_report(signal, cfg),
+        "human_report": human_report,
         "config_hash": hash(json.dumps(cfg, sort_keys=True)) & 0xFFFFFFFF,
     }
-    
+    if capital_injection_usd > 0:
+        output["capital_injection_usd"] = capital_injection_usd
+
     print(json.dumps(output, indent=2))
 
 if __name__ == "__main__":
