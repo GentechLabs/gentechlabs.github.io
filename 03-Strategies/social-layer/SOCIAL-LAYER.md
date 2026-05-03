@@ -50,8 +50,8 @@ Agent-driven social media operations using `xurl` CLI (official X API). Near-zer
 
 ## Status
 - [x] xurl CLI installed
-- [ ] X API credentials registered
-- [ ] OAuth authenticated
+- [ ] X API credentials registered (BLOCKED: awaiting credentials)
+- [ ] OAuth authenticated (depends on credentials)
 - [ ] Morning briefing cron active
 - [ ] Feed monitor cron active
 - [ ] Engagement log cron active

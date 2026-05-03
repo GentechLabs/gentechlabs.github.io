@@ -22,7 +22,31 @@ This is the Gentech org coordination board. Every agent MUST check this file at 
 - **Strategies (YoYo):** Research, DeFi analysis, competitive landscape, market data
 - **Entertainment (Desmond):** Content, X posts, Medium, social media, submissions
 
-## Handoff Protocol — ENFORCED
+## 📍 Context Update — 2026-05-03 Morning Rotation
+
+**Rotation completed:** 11:00 UTC by YoYo (Strategies)
+
+### Sprint Status (Week of May 2–11)
+- **Solana Frontier** — Day 3/12, deadline **May 11** (P0)
+- **Kite AI** — Secondary priority, deadline **May 17** (P1)
+
+### Handoff Compliance Alert
+- **2 handoffs** submitted May 2 remain unacknowledged (H2026-05-02-01, H2026-05-02-02)
+- **ACK deadline:** 13:45 UTC today
+- **Escalation:** Unclaimed → Gentech nudge → Jordan (per enforcement rules)
+
+### Agent Check-In Required
+All agents currently OFFLINE in coordination board. Session start MUST include:
+1. Read this file
+2. Check `handoff-board.md` for tags
+3. Update your row in "Agent Session Check-In" table
+4. Acknowledge any pending handoffs within 2h
+
+### Blockers
+1. D5 config thresholds (YoYo) → blocks DMOB integration
+2. Hermes-brain sync verification (Gentech) → blocks cron install
+
+---
 
 ### Status Legend
 - `PENDING` — Handoff written, waiting for recipient to claim

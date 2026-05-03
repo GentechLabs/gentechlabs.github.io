@@ -26,6 +26,7 @@
 | Date | Price | Action | Rationale |
 |---|---|---|---|
 | 2026-04-30 | $9.11 | — | No rebalance needed, position healthy |
+| 2026-05-03 | $9.07 | 🚨 Review | IL spiked to -17.65% (>2% threshold); on-chain verification required |
 
 ---
 

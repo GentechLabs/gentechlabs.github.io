@@ -16,10 +16,23 @@
     16|    16|| Gentech | DMOB | D5 Milestone Cron: Add 5-min breakout confirmation, efficiency≤30% immediate alert, bid-ask edge strategy | P0 | 🚀 Pending Ack | May 2 | May 2 23:59 UTC | Ref: 03-Strategies/Defi-Monitor/d5-milestone-enhancements-2026-05.md
     17|    17|| Gentech | YoYo | D5 Strategy Params: Define BID_ASK_BOOST_MULTIPLIER, efficiency thresholds, update defi-lp-config.env | P0 | 🚀 Pending Ack | May 2 | May 2 23:59 UTC | Strategy doc + config update
     18|    18|| Gentech | dmoB | **D5 Cron Consolidation**: Merge AAE LP alerts into `d5-master-cron.py`, add `--json` flag, implement capital-add detection (deposit delta → recalc remaining to goal) | P0 | 🚀 Pending Ack | May 2 | May 2 23:59 UTC | Decision: single unified script. Vault: `11-Mess Hall/2026/W18/2026-05-02-d5-consolidation-decision.md` |
-    19|    19|| Dmob | Dmob | Review dynamic burn rate mechanism for smart contract feasibility | High | ✅ Claimed (Apr 19) | Apr 19 00:00 UTC | Apr 19 00:05 UTC | **WAS OVERDUE** — Dmob claimed |
-    20|    20|| Desmond | YoYo | Competitive analysis — dynamic burn rate in AgentFi/DeFi | High | ⏳ Pending | Apr 19 00:00 UTC | Apr 19 00:05 UTC | 🔴 **ESCALATED** — YoYo overdue, flagged to Jordan |
-    21|    21|| Jordan | Dmob | Gas Reserve Auto-Rebalance — smart contract feasibility review | High | ⏳ Pending | Apr 21 12:00 UTC | Apr 21 12:05 UTC | Spec: `09-Green Room/gas-reserve-autorebalance-spec.md`. Need: gas estimation, keeper auth, multi-chain, batch rebalancing |
-    22|    22|| Jordan | YoYo | Gas Reserve Auto-Rebalance — monitoring trigger & strategy review | High | ⏳ Pending | Apr 21 12:00 UTC | Apr 21 12:05 UTC | Spec: `09-Green Room/gas-reserve-autorebalance-spec.md`. Need: rebalance trigger threshold, execution method, gas cost transparency |
+|| Dmob | Dmob | Review dynamic burn rate mechanism for smart contract feasibility | High | ✅ Claimed (Apr 19) | Apr 19 00:00 UTC | Apr 19 00:05 UTC | **WAS OVERDUE** — Dmob claimed |
+|| Desmond | YoYo | Competitive analysis — dynamic burn rate in AgentFi/DeFi | High | ⏳ Pending | Apr 19 00:00 UTC | Apr 19 00:05 UTC | 🔴 **ESCALATED** — YoYo overdue, flagged to Jordan |
+|| Jordan | Dmob | Gas Reserve Auto-Rebalance — smart contract feasibility review | High | ⏳ Pending | Apr 21 12:00 UTC | Apr 21 12:05 UTC | Spec: `09-Green Room/gas-reserve-autorebalance-spec.md`. Need: gas estimation, keeper auth, multi-chain, batch rebalancing |
+|| Jordan | YoYo | Gas Reserve Auto-Rebalance — monitoring trigger & strategy review | High | ⏳ Pending | Apr 21 12:00 UTC | Apr 21 12:05 UTC | Spec: `09-Green Room/gas-reserve-autorebalance-spec.md`. Need: rebalance trigger threshold, execution method, gas cost transparency |
+
+|---
+
+## ⚠️ Today's Enforcement Window (May 3)
+
+**ACK Deadline:** 13:45 UTC for handoffs submitted May 2  
+**Handoffs pending acknowledgment:**
+| ID | From | To | Task | Submitted | Deadline |
+|----|------|----|------|-----------|----------|
+| H2026-05-02-01 | Gentech | DMOB | D5 Cron Enhancements — 5-min debounce, eff ≤30% alert, bid-ask edge | May 2 12:45 | **May 2 23:59 UTC** |
+| H2026-05-02-02 | Gentech | YoYo | D5 Strategy Params — define thresholds, update config | May 2 12:45 | **May 2 23:59 UTC** |
+
+**Action:** Both DMOB and YoYo must update `handoff-board.md` to `🟡 CLAIMED` before 13:45 UTC or escalation to Jordan is triggered.
     23|    23|
     24|    24|---
     25|    25|

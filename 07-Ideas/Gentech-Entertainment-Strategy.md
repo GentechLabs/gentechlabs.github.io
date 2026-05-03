@@ -24,7 +24,7 @@ Entertainment (personality) → plugs → Labs (technical proof) → credibility
 - **Entity:** Gentech Entertainment LLC
 - **Purpose:** Cover podcast production costs, equipment, editing, guest expenses
 - **Tax benefit:** Content expenses become business deductions
-- **Target:** Before Jordan's birthday — September 2nd
+- **Target:** Fall 2026
 - Clean separation for future co-hosts/guests as contractors
 
 ## Content Collaboration

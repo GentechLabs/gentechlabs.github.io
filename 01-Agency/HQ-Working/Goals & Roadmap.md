@@ -9,7 +9,7 @@
 - [ ] Start Avalanche Academy courses
 - [ ] Deploy first smart contract
 - [ ] Participate in first hackathon/bounty
-- [ ] Form Gentech Entertainment LLC
+- [ ] Form Gentech Entertainment LLC *(target: Fall 2026)*
 
 ### Year 2
 - [ ] Smart contract security fundamentals

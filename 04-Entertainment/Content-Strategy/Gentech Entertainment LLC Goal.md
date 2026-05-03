@@ -1,6 +1,6 @@
 # Gentech Entertainment LLC Goal
 
-**Target:** Before September 2, 2026 (Jordan's birthday)
+**Target:** Fall 2026 (pre-September 2 deadline no longer binding)
 **Purpose:** Cover podcast production costs, equipment, liability, revenue
 **Status:** Future plan — not immediate priority
 
