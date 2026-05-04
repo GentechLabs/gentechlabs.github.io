@@ -173,7 +173,182 @@
             .hero h1 { font-size: 2em; }
             .project-grid { grid-template-columns: 1fr; }
         }
-    </style>
+    
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .hero h1 { font-size: 1.8em; }
+  .hero .avatar { width: 48px; height: 48px; margin-right: 8px; }
+  .links { flex-direction: column; align-items: center; }
+  .links a { width: 100%; text-align: center; margin: 5px 0; }
+  .project-grid { grid-template-columns: 1fr; }
+  .hackathon-track table { font-size: 0.85em; display: block; overflow-x: auto; }
+  .section { margin-bottom: 30px; }
+  .container { padding: 20px 10px; }
+  .hero { padding: 40px 15px 30px; }
+}
+
+/* Smooth scrolling anchor */
+html { scroll-behavior: smooth; }
+
+
+/* Project card enhancements */
+.project-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.project-cat {
+  font-size: 0.75em;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #86efac;
+  background: rgba(34, 197, 94, 0.15);
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+.project-team {
+  font-size: 0.85em;
+  color: #9ca3af;
+  margin: 12px 0 8px 0;
+  padding-top: 8px;
+  border-top: 1px dashed #333;
+}
+.project-link {
+  font-size: 0.9em;
+  text-align: right;
+  margin-top: 8px;
+}
+.project-link a {
+  color: #22c55e;
+  text-decoration: none;
+  font-weight: 600;
+}
+.project-link a:hover { text-decoration: underline; }
+
+/* Prototype status variant */
+.status-prototype {
+  background: #1c1400;
+  color: #fbbf24;
+  border: 1px dashed #fbbf24;
+}
+
+/* Section description */
+.section-desc {
+  color: #9ca3af;
+  font-size: 0.95em;
+  margin-bottom: 24px;
+  line-height: 1.6;
+  max-width: 800px;
+}
+
+/* Roadmap vertical timeline */
+.roadmap {
+  position: relative;
+  margin: 30px 0;
+  padding-left: 30px;
+  border-left: 3px solid #22c55e;
+}
+.roadmap-phase {
+  margin-bottom: 30px;
+  position: relative;
+}
+.phase-label {
+  position: absolute;
+  left: -45px;
+  top: 0;
+  font-size: 0.75em;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: #86efac;
+  width: 35px;
+  text-align: right;
+  padding-right: 10px;
+}
+.phase-items { margin-left: 15px; }
+.phase-item {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 16px;
+  position: relative;
+}
+.phase-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #22c55e;
+  border: 2px solid #0a0a0a;
+  margin-right: 12px;
+  margin-top: 4px;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+.phase-content strong {
+  color: #fbbf24;
+  font-size: 1em;
+  display: block;
+  margin-bottom: 2px;
+}
+.phase-date {
+  font-size: 0.8em;
+  color: #6b7280;
+  font-weight: 500;
+}
+.phase-content p {
+  color: #9ca3af;
+  font-size: 0.9em;
+  line-height: 1.5;
+  margin-top: 4px;
+}
+
+/* Methodology / storytelling section */
+.methodology-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+.methodology-card {
+  background: #111;
+  border: 1px solid #222;
+  border-radius: 14px;
+  padding: 24px;
+  transition: border-color 0.2s;
+}
+.methodology-card:hover {
+  border-color: #22c55e;
+}
+.methodology-card h3 {
+  color: #fbbf24;
+  font-size: 1.15em;
+  margin-bottom: 12px;
+}
+.methodology-card p {
+  color: #d1d5db;
+  font-size: 0.95em;
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
+.methodology-highlight {
+  font-size: 0.9em;
+  color: #86efac;
+  background: rgba(34, 197, 94, 0.1);
+  padding: 10px 12px;
+  border-radius: 6px;
+  border-left: 3px solid #22c55e;
+  font-style: italic;
+}
+.dept-list {
+  margin: 10px 0 15px 20px;
+  color: #d1d5db;
+  font-size: 0.95em;
+  line-height: 1.7;
+}
+.dept-list strong {
+  color: #fbbf24;
+}
+
+</style>
 </head>
 <body>
     <div class="hero">
@@ -197,7 +372,147 @@
             </p>
         </div>
 
-                <div class="section" id="roadmap">
+                
+        <div class="section" id="roadmap">
+            <h2>🛣️ Projects Roadmap</h2>
+            <div class="roadmap">
+                <!-- Research Phase -->
+                <div class="roadmap-phase">
+                    <div class="phase-label">Research</div>
+                    <div class="phase-items">
+                        <div class="phase-item">
+                            <span class="phase-dot"></span>
+                            <div class="phase-content">
+                                <strong>genlayer-recon</strong>
+                                <span class="phase-date">Apr–May 2026</span>
+                                <p>GenLayer SDK deep-dive, Intelligent Contracts prototype, integration pathways for AgentEscrow/Kite</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Prototype Phase -->
+                <div class="roadmap-phase">
+                    <div class="phase-label">Prototype</div>
+                    <div class="phase-items">
+                        <div class="phase-item">
+                            <span class="phase-dot"></span>
+                            <div class="phase-content">
+                                <strong>Job-Applications Agent</strong>
+                                <span class="phase-date">Apr 2026</span>
+                                <p>Task pipeline automation for outreach + tracking</p>
+                            </div>
+                        </div>
+                        <div class="phase-item">
+                            <span class="phase-dot"></span>
+                            <div class="phase-content">
+                                <strong>AgentEscrow (v1)</strong>
+                                <span class="phase-date">Apr 2026</span>
+                                <p>Multi-agent escrow contract, Phantom wallet integration</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Development Phase -->
+                <div class="roadmap-phase">
+                    <div class="phase-label">Development</div>
+                    <div class="phase-items">
+                        <div class="phase-item">
+                            <span class="phase-dot"></span>
+                            <div class="phase-content">
+                                <strong>Travel-Agent</strong>
+                                <span class="phase-date">May–Jun 2026</span>
+                                <p>Public API aggregation, voice-first interface, Phase 1 foundation</p>
+                            </div>
+                        </div>
+                        <div class="phase-item">
+                            <span class="phase-dot"></span>
+                            <div class="phase-content">
+                                <strong>auto-rebalance-gas-abstraction</strong>
+                                <span class="phase-date">May–Jun 2026</span>
+                                <p>Gas optimization engine, scenario-based rebalancing, measurable savings</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Production Phase -->
+                <div class="roadmap-phase">
+                    <div class="phase-label">Production</div>
+                    <div class="phase-items">
+                        <div class="phase-item">
+                            <span class="phase-dot"></span>
+                            <div class="phase-content">
+                                <strong>hermes-kanban</strong>
+                                <span class="phase-date">Apr 2026–ongoing</span>
+                                <p>Obsidian-Kanban bridge, 8+ sprints shipped, REST API + CLI</p>
+                            </div>
+                        </div>
+                        <div class="phase-item">
+                            <span class="phase-dot"></span>
+                            <div class="phase-content">
+                                <strong>AAE Dashboard</strong>
+                                <span class="phase-date">May 2026</span>
+                                <p>Live yield analytics, multi-chain LP tracking, DCA automation</p>
+                            </div>
+                        </div>
+                        <div class="phase-item">
+                            <span class="phase-dot"></span>
+                            <div class="phase-content">
+                                <strong>DMobs-Portfolio</strong>
+                                <span class="phase-date">Apr 2026</span>
+                                <p>Social amplification showcase, distribution-ready design</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" id="methodology">
+            <h2>🧠 How Our Agent Stack Is Different</h2>
+            <div class="methodology-grid">
+                
+                <div class="methodology-card">
+                    <h3>🎯 Multi-Layer Agent Architecture (AAE)</h3>
+                    <p>The night we cracked agent economy design, we didn't just build a bot — we built <strong>layers of negotiable intent</strong>. Each agent (Strategist, Marketer, Engineer) has defined deliverables, escrowed payment terms, and validation hooks. This isn't a single prompt; it's a coordinated workforce where agents can subcontract to each other and audit completion before payment releases.</p>
+                    <div class="methodology-highlight">
+                        <em>Example: A content request flows Strategist → Marketer → Engineer, with each gate requiring deliverable validation before funds move.</em>
+                    </div>
+                </div>
+
+                <div class="methodology-card">
+                    <h3>🧠 Brain System · Green Room · Mess Hall</h3>
+                    <p>We treat agents like employees, not tools. Every agent has a <strong>brain system</strong> (context store), a <strong>green room</strong> (safe testing environment), and access to the <strong>mess hall</strong> (cross-agent coordination channel). When an agent hits an error, it doesn't just fail — it retreats to the green room, logs the incident, and signals the team for a standup. We troubleshoot in production, then patch the brain so the mistake doesn't repeat.</p>
+                    <div class="methodology-highlight">
+                        <em>In practice: An agent error triggers a Mess Hall post → team discusses → brain updated → same error never happens twice.</em>
+                    </div>
+                </div>
+
+                <div class="methodology-card">
+                    <h3>🛠️ Error-First · Build Back Better</h3>
+                    <p>We don't hide failures. Every error is a <strong>training signal</strong>. When something breaks, we: (1) Capture the error in the Mess Hall, (2) Analyze root cause in the Green Room, (3) Update the agent's brain (context + safeguards), (4) Deploy the fix. This creates compounding reliability — each failure makes the system smarter.</p>
+                    <div class="methodology-highlight">
+                        <em>Result: Agents get more capable over time, not less. We measure error rate reduction week-over-week.</em>
+                    </div>
+                </div>
+
+                <div class="methodology-card">
+                    <h3>🏢 4-Department Agent Collaboration</h3>
+                    <p>GenTech runs as a <strong>virtual company</strong> with four departments:</p>
+                    <ul class="dept-list">
+                        <li><strong>Strategies (YoYo):</strong> Numbers-first, risk-aware, portfolio optimization, LP monitoring, on-chain analytics — the quant mind.</li>
+                        <li><strong>Social Growth (DMOB):</strong> Distribution engine, X/Twitter amplification, hackathon visibility, content scaling — the megaphone.</li>
+                        <li><strong>Marketing (Desmond):</strong> Narrative positioning, brand voice, release comms, technical documentation — the storyteller.</li>
+                        <li><strong>Engineering (Jordan):</strong> Infrastructure, orchestration layer, prompt engineering, deployment automation — the builder.</li>
+                    </ul>
+                    <p>Each agent has a department, a role, and clear escalation paths. Projects aren't solo efforts — they're cross-functional deliveries where each department contributes its specialty.</p>
+                </div>
+
+            </div>
+        </div>
+<div class="section" id="roadmap">
             <h2>🚀 Projects + Roadmap</h2>
             <p class="roadmap-intro">
                 <em>Real-time snapshot of what's shipping, what's in progress, and what's next. 
@@ -381,7 +696,182 @@
                 .status-building { background: #1c1400; color: #fbbf24; }
                 .status-research { background: #1a0d2e; color: #a855f7; }
                 .deadline, .timeline { color: #6b7280; }
-            </style>
+            
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .hero h1 { font-size: 1.8em; }
+  .hero .avatar { width: 48px; height: 48px; margin-right: 8px; }
+  .links { flex-direction: column; align-items: center; }
+  .links a { width: 100%; text-align: center; margin: 5px 0; }
+  .project-grid { grid-template-columns: 1fr; }
+  .hackathon-track table { font-size: 0.85em; display: block; overflow-x: auto; }
+  .section { margin-bottom: 30px; }
+  .container { padding: 20px 10px; }
+  .hero { padding: 40px 15px 30px; }
+}
+
+/* Smooth scrolling anchor */
+html { scroll-behavior: smooth; }
+
+
+/* Project card enhancements */
+.project-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.project-cat {
+  font-size: 0.75em;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #86efac;
+  background: rgba(34, 197, 94, 0.15);
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+.project-team {
+  font-size: 0.85em;
+  color: #9ca3af;
+  margin: 12px 0 8px 0;
+  padding-top: 8px;
+  border-top: 1px dashed #333;
+}
+.project-link {
+  font-size: 0.9em;
+  text-align: right;
+  margin-top: 8px;
+}
+.project-link a {
+  color: #22c55e;
+  text-decoration: none;
+  font-weight: 600;
+}
+.project-link a:hover { text-decoration: underline; }
+
+/* Prototype status variant */
+.status-prototype {
+  background: #1c1400;
+  color: #fbbf24;
+  border: 1px dashed #fbbf24;
+}
+
+/* Section description */
+.section-desc {
+  color: #9ca3af;
+  font-size: 0.95em;
+  margin-bottom: 24px;
+  line-height: 1.6;
+  max-width: 800px;
+}
+
+/* Roadmap vertical timeline */
+.roadmap {
+  position: relative;
+  margin: 30px 0;
+  padding-left: 30px;
+  border-left: 3px solid #22c55e;
+}
+.roadmap-phase {
+  margin-bottom: 30px;
+  position: relative;
+}
+.phase-label {
+  position: absolute;
+  left: -45px;
+  top: 0;
+  font-size: 0.75em;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: #86efac;
+  width: 35px;
+  text-align: right;
+  padding-right: 10px;
+}
+.phase-items { margin-left: 15px; }
+.phase-item {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 16px;
+  position: relative;
+}
+.phase-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #22c55e;
+  border: 2px solid #0a0a0a;
+  margin-right: 12px;
+  margin-top: 4px;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+.phase-content strong {
+  color: #fbbf24;
+  font-size: 1em;
+  display: block;
+  margin-bottom: 2px;
+}
+.phase-date {
+  font-size: 0.8em;
+  color: #6b7280;
+  font-weight: 500;
+}
+.phase-content p {
+  color: #9ca3af;
+  font-size: 0.9em;
+  line-height: 1.5;
+  margin-top: 4px;
+}
+
+/* Methodology / storytelling section */
+.methodology-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+.methodology-card {
+  background: #111;
+  border: 1px solid #222;
+  border-radius: 14px;
+  padding: 24px;
+  transition: border-color 0.2s;
+}
+.methodology-card:hover {
+  border-color: #22c55e;
+}
+.methodology-card h3 {
+  color: #fbbf24;
+  font-size: 1.15em;
+  margin-bottom: 12px;
+}
+.methodology-card p {
+  color: #d1d5db;
+  font-size: 0.95em;
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
+.methodology-highlight {
+  font-size: 0.9em;
+  color: #86efac;
+  background: rgba(34, 197, 94, 0.1);
+  padding: 10px 12px;
+  border-radius: 6px;
+  border-left: 3px solid #22c55e;
+  font-style: italic;
+}
+.dept-list {
+  margin: 10px 0 15px 20px;
+  color: #d1d5db;
+  font-size: 0.95em;
+  line-height: 1.7;
+}
+.dept-list strong {
+  color: #fbbf24;
+}
+
+</style>
         </div>
 
 
