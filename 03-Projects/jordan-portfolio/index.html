@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jordan — GenTech | Developer Portfolio</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: #0a0a0a;
+            color: #e0e0e0;
+            min-height: 100vh;
+        }
+        .hero {
+            padding: 60px 20px 40px;
+            text-align: center;
+            background: linear-gradient(135deg, #0d1a2d, #1a0d1a);
+            border-bottom: 2px solid #22c55e;
+        }
+        .hero h1 {
+            font-size: 2.6em;
+            color: #22c55e;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+        .hero .avatar {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            vertical-align: middle;
+            margin-right: 12px;
+            border: 2px solid #22c55e;
+            object-fit: cover;
+            background: #1a1a1a;
+        }
+        .hero .tagline {
+            color: #86efac;
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+        .links {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        .links a {
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 8px;
+            background: #1a1a1a;
+            border: 1px solid #22c55e;
+            color: #22c55e;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        .links a:hover {
+            background: #22c55e;
+            color: #0a0a0a;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        .section {
+            margin-bottom: 40px;
+        }
+        .section h2 {
+            color: #22c55e;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #1a2d1a;
+            padding-bottom: 10px;
+        }
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        .project-card {
+            background: #111;
+            border: 1px solid #222;
+            border-radius: 14px;
+            padding: 24px;
+            transition: border-color 0.2s;
+        }
+        .project-card:hover {
+            border-color: #22c55e;
+        }
+        .project-card h3 {
+            color: #fbbf24;
+            font-size: 1.2em;
+            margin-bottom: 8px;
+        }
+        .project-card .tech {
+            color: #22c55e;
+            font-size: 0.85em;
+            margin-bottom: 12px;
+        }
+        .project-card p {
+            color: #9ca3af;
+            line-height: 1.6;
+            font-size: 0.95em;
+        }
+        .project-card .status {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: bold;
+            margin-top: 12px;
+        }
+        .status-live { background: #052e16; color: #22c55e; }
+        .status-dev { background: #1c1400; color: #fbbf24; }
+        .status-audit { background: #2d1515; color: #fca5a5; }
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .skill-tag {
+            background: #1a1a1a;
+            border: 1px solid #374151;
+            color: #9ca3af;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85em;
+        }
+        .hackathon-track {
+            background: #111;
+            border: 1px solid #222;
+            border-radius: 14px;
+            padding: 20px;
+        }
+        .hackathon-track table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9em;
+        }
+        .hackathon-track th {
+            text-align: left;
+            color: #22c55e;
+            padding: 10px 8px;
+            border-bottom: 1px solid #222;
+        }
+        .hackathon-track td {
+            padding: 10px 8px;
+            color: #9ca3af;
+            border-bottom: 1px solid #1a1a1a;
+        }
+        .badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 0.75em;
+            font-weight: bold;
+        }
+        .badge-submit { background: #052e16; color: #22c55e; }
+        .badge-building { background: #1c1400; color: #fbbf24; }
+        .badge-queued { background: #1a0d2e; color: #a855f7; }
+        .footer {
+            text-align: center;
+            padding: 30px;
+            color: #6b7280;
+            border-top: 1px solid #1a1a1a;
+            font-size: 0.9em;
+        }
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 2em; }
+            .project-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <h1><img src="assets/jordan-avatar.png" alt="Jordan" class="avatar"> JORDAN</h1>
+        <p class="tagline">GenTech Founder · Solidity Developer · Agent Economy Builder</p>
+        <div class="links">
+            <a href="https://github.com/ProtoJay4789" target="_blank">🐙 GitHub</a>
+            <a href="https://linkedin.com/in/protojay" target="_blank">💼 LinkedIn</a>
+            <a href="mailto:jordanjones0902@gmail.com" target="_blank">📧 Email</a>
+            <a href="#projects">🚀 Projects</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="section">
+            <h2>🧑‍💻 About</h2>
+            <p style="color: #9ca3af; line-height: 1.8; font-size: 1.05em;">
+                Building at the intersection of <strong style="color: #22c55e;">AI agents</strong> and <strong style="color: #22c55e;">DeFi</strong>. 
+                Working on cross-chain payment infrastructure (x402), agent economies, and smart contract systems. 
+                Full-time Amazon by day, shipping protocol-level projects by night. Looking to go full-time crypto by Q4 2026.
+            </p>
+        </div>
+
+                <div class="section" id="roadmap">
+            <h2>🚀 Projects + Roadmap</h2>
+            <p class="roadmap-intro">
+                <em>Real-time snapshot of what's shipping, what's in progress, and what's next. 
+                Building in public — some things ship, some things stall, some things get scrapped. 
+                Everyday is a new struggle, and that's okay.</em>
+            </p>
+            
+            <div class="roadmap-grid">
+                <div class="roadmap-column">
+                    <h3 class="column-title">★ NOW <span class="subtitle">(Shipping / Live)</span></h3>
+                    <div id="projects-now" class="project-list"></div>
+                </div>
+                <div class="roadmap-column">
+                    <h3 class="column-title">◐ WIP <span class="subtitle">(Work in Progress)</span></h3>
+                    <div id="projects-wip" class="project-list"></div>
+                </div>
+                <div class="roadmap-column">
+                    <h3 class="column-title">○ TBA <span class="subtitle">(Upcoming / TBD)</span></h3>
+                    <div id="projects-tba" class="project-list"></div>
+                </div>
+            </div>
+
+                                    <script id="project-data" type="application/json">
+[
+  {
+    "id": "agent-escrow-solana",
+    "title": "AgentEscrow",
+    "description": "AgentEscrow \u2014 GenTech project",
+    "tech": [
+      "Solana",
+      "Anchor",
+      "Rust"
+    ],
+    "status": "building",
+    "deadline": "2026-05-11",
+    "timeline": "May 2026",
+    "highlight": true,
+    "vault_path": "03-Projects/agent-escrow-solana"
+  },
+  {
+    "id": "kite-ai",
+    "title": "Kite AI Governance",
+    "description": "Kite AI Governance \u2014 GenTech project",
+    "tech": [
+      "Avalanche",
+      "Python",
+      "Agent Framework"
+    ],
+    "status": "building",
+    "deadline": "2026-05-17",
+    "timeline": "May 2026",
+    "highlight": true,
+    "vault_path": "03-Projects/kite-ai"
+  },
+  {
+    "id": "lets-fg",
+    "title": "Let's FG Travel Agent",
+    "description": "Let's FG Travel Agent \u2014 GenTech project",
+    "tech": [
+      "Pipecat",
+      "Maps API",
+      "Python"
+    ],
+    "status": "live",
+    "deadline": null,
+    "timeline": "Apr 2026",
+    "highlight": false,
+    "vault_path": "03-Projects/lets-fg"
+  },
+  {
+    "id": "lfj-avax-usdc-rebalance",
+    "title": "LFJ AVAX/USDC Auto-Rebalance",
+    "description": "LFJ AVAX/USDC Auto-Rebalance \u2014 GenTech project",
+    "tech": [
+      "Solana",
+      "DeFi",
+      "Python"
+    ],
+    "status": "live",
+    "deadline": null,
+    "timeline": "Apr 2026",
+    "highlight": false,
+    "vault_path": "03-Projects/lfj-avax-usdc-rebalance"
+  },
+  {
+    "id": "hermes-kanban",
+    "title": "Hermes Kanban",
+    "description": "Hermes Kanban \u2014 GenTech project",
+    "tech": [
+      "Hermes",
+      "Kanban",
+      "TUI"
+    ],
+    "status": "live",
+    "deadline": null,
+    "timeline": "Mar 2026",
+    "highlight": false,
+    "vault_path": "03-Projects/hermes-kanban"
+  },
+  {
+    "id": "birdeye-bip",
+    "title": "Birdeye BIP",
+    "description": "Birdeye BIP \u2014 GenTech project",
+    "tech": [
+      "Solana",
+      "Data",
+      "Python"
+    ],
+    "status": "research",
+    "deadline": null,
+    "timeline": "Feb 2026",
+    "highlight": false,
+    "vault_path": "03-Projects/birdeye-bip"
+  },
+  {
+    "id": "tech-payment-router",
+    "title": "Tech Payment Router",
+    "description": "Tech Payment Router \u2014 GenTech project",
+    "tech": [
+      "Ethereum",
+      "Payments",
+      "Solidity"
+    ],
+    "status": "research",
+    "deadline": null,
+    "timeline": "Feb 2026",
+    "highlight": false,
+    "vault_path": "03-Projects/tech-payment-router"
+  }
+]
+</script>
+
+            <script>
+                const projects = JSON.parse(document.getElementById('project-data').textContent);
+                const categories = {
+                    now: projects.filter(p => p.status === 'live' || (p.status === 'building' && p.deadline)),
+                    wip: projects.filter(p => p.status === 'building' && !p.deadline || p.status === 'research'),
+                    tba: []
+                };
+                const statusLabels = { live: '→ LIVE', building: '→ BUILDING', research: '→ WIP', audit: '→ AUDIT' };
+                function renderProjects(containerId, list) {
+                    const container = document.getElementById(containerId);
+                    if (!container) return;
+                    if (list.length === 0) {
+                        container.innerHTML = '<p class="empty-state">Nothing here yet — check back later.</p>';
+                        return;
+                    }
+                    container.innerHTML = list.map(p => `
+                        <div class="project-card">
+                            <h3>${p.title}</h3>
+                            <div class="tech">${p.tech.join(' · ')}</div>
+                            <p>${p.description || 'Building something cool...'}</p>
+                            <div class="status-row">
+                                <span class="status status-${p.status}">${statusLabels[p.status] || p.status}</span>
+                                ${p.deadline ? `<span class="deadline">DL: ${p.deadline}</span>` : ''}
+                                ${p.timeline ? `<span class="timeline">${p.timeline}</span>` : ''}
+                            </div>
+                        </div>
+                    `).join('');
+                }
+                renderProjects('projects-now', categories.now);
+                renderProjects('projects-wip', categories.wip);
+                renderProjects('projects-tba', categories.tba);
+            </script>
+
+            <style>
+                .roadmap-intro { color: #9ca3af; line-height: 1.7; margin-bottom: 24px; font-size: 0.95em; }
+                .roadmap-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 20px; }
+                @media (max-width: 900px) { .roadmap-grid { grid-template-columns: 1fr; } }
+                .roadmap-column { background: rgba(17, 17, 17, 0.6); border: 1px solid #1a2d1a; border-radius: 12px; padding: 16px; }
+                .column-title { color: #22c55e; font-size: 1em; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; }
+                .column-title .subtitle { font-size: 0.75em; color: #6b7280; font-weight: normal; }
+                .project-list { display: flex; flex-direction: column; gap: 12px; }
+                .empty-state { color: #6b7280; font-style: italic; font-size: 0.85em; }
+                .project-card h3 { font-size: 1.05em; color: #fbbf24; margin-bottom: 6px; }
+                .project-card .tech { color: #22c55e; font-size: 0.8em; margin-bottom: 8px; }
+                .project-card p { color: #9ca3af; font-size: 0.85em; line-height: 1.5; margin-bottom: 10px; }
+                .status-row { display: flex; gap: 10px; align-items: center; font-size: 0.75em; font-family: 'JetBrains Mono', monospace; }
+                .status { padding: 3px 8px; border-radius: 6px; font-weight: bold; text-transform: uppercase; }
+                .status-live { background: #052e16; color: #22c55e; }
+                .status-building { background: #1c1400; color: #fbbf24; }
+                .status-research { background: #1a0d2e; color: #a855f7; }
+                .deadline, .timeline { color: #6b7280; }
+            </style>
+        </div>
+
+
+
+        <div class="section">
+            <h2>🏆 Hackathon Track</h2>
+            <div class="hackathon-track">
+                <table>
+                    <tr>
+                        <th>Hackathon</th>
+                        <th>Chain</th>
+                        <th>Deadline</th>
+                        <th>Status</th>
+                    </tr>
+                    <tr>
+                        <td><strong>ETHGlobal Open Agents</strong></td>
+                        <td>0G + KeeperHub</td>
+                        <td>May 3</td>
+                        <td><span class="badge badge-building">BUILDING</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Solana Frontier</strong></td>
+                        <td>Solana</td>
+                        <td>May 11</td>
+                        <td><span class="badge badge-queued">QUEUED</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Kite AI</strong></td>
+                        <td>Kite L1</td>
+                        <td>May 11</td>
+                        <td><span class="badge badge-queued">QUEUED</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Retro9000</strong></td>
+                        <td>Avalanche</td>
+                        <td>Jul 14</td>
+                        <td><span class="badge badge-queued">QUEUED</span></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🛠️ Tech Stack</h2>
+            <div class="skills">
+                <span class="skill-tag">Solidity</span>
+                <span class="skill-tag">Foundry</span>
+                <span class="skill-tag">Hardhat</span>
+                <span class="skill-tag">Rust</span>
+                <span class="skill-tag">TypeScript</span>
+                <span class="skill-tag">React</span>
+                <span class="skill-tag">Next.js</span>
+                <span class="skill-tag">Python</span>
+                <span class="skill-tag">Ethers.js</span>
+                <span class="skill-tag">Chainlink</span>
+                <span class="skill-tag">LayerZero</span>
+                <span class="skill-tag">Wormhole</span>
+                <span class="skill-tag">x402</span>
+                <span class="skill-tag">GenLayer</span>
+                <span class="skill-tag">DeFi LP</span>
+                <span class="skill-tag">Cross-Chain</span>
+                <span class="skill-tag">AI Agents</span>
+                <span class="skill-tag">Hermes</span>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📈 Current Focus</h2>
+            <p style="color: #9ca3af; line-height: 1.8;">
+                <strong>Goal:</strong> Leave Amazon by Q4 2026 via hackathon wins → Code4rena auditing → remote crypto role or $3-5K/mo in audit/incentive income.<br><br>
+                <strong>Strategy:</strong> Build public proof-of-work. Win prizes. Stack credentials. Move to Philippines Q3 for geo-arbitrage.<br><br>
+                <strong>Learning:</strong> Solana development, Rust, advanced security patterns, cross-chain architecture.
+            </p>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>
+            Built with 💚 by Jordan · Powered by GenTech Agents · Last updated: April 2026<br>
+            <span style="color: #22c55e;">Building the agent-owned economy.</span>
+        </p>
+    </div>
+</body>
+</html>
