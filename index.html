@@ -39,6 +39,13 @@
             font-size: 1.2em;
             margin-bottom: 20px;
         }
+        .hero .philosophy {
+            color: #9ca3af;
+            font-size: 0.95em;
+            max-width: 600px;
+            margin: 0 auto sum:
+            line-height: 1.6;
+        }
         .links {
             display: flex;
             gap: 15px;
@@ -67,56 +74,143 @@
             padding: 40px 20px;
         }
         .section {
-            margin-bottom: 40px;
+            margin-bottom: 50px;
         }
         .section h2 {
             color: #22c55e;
-            font-size: 1.5em;
+            font-size: 1.4em;
             margin-bottom: 15px;
             border-bottom: 1px solid #1a2d1a;
             padding-bottom: 10px;
+        }
+        .project-card {
+            background: #111;
+            border: 1px solid #222;
+            border-radius: 16px;
+            padding: 28px;
+            transition: border-color 0.2s, transform 0.2s;
+            height: 100%;
+        }
+        .project-card:hover {
+            border-color: #22c55e;
+            transform: translateY(-2px);
+        }
+        .project-card h3 {
+            color: #fbbf24;
+            font-size: 1.25em;
+            margin-bottom: 6px;
+        }
+        .project-card .tech {
+            color: #22c55e;
+            font-size: 0.82em;
+            margin-bottom: 14px;
+            letter-spacing: 0.5px;
+        }
+        .project-card p {
+            color: #9ca3af;
+            line-height: 1.7;
+            font-size: 0.95em;
+            margin-bottom: 14px;
+        }
+        .project-card .status {
+            display: inline-block;
+            padding: 5px 14px;
+            border-radius: 20px;
+            font-size: 0.78em;
+            font-weight: bold;
+        }
+        .status-live { background: #052e16; color: #22c55e; }
+        .status-dev { background: #1c1400; color: #fbbf24; }
+        .status-audit { background: #2d1515; color: #fca5a5; }
+        .status-research { background: #1a0d2e; color: #a855f7; }
+
+        /* Roadmap inside project card */
+        .roadmap-mini {
+            margin-top: 16px;
+            padding-top: 12px;
+            border-top: 1px dashed #333;
+        }
+        .roadmap-mini-title {
+            color: #86efac;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+        .roadmap-mini ul {
+            list-style: none;
+            padding: 0;
+        }
+        .roadmap-mini li {
+            color: #d1d5db;
+            font-size: 0.82em;
+            padding: 4px 0;
+            padding-left: 14px;
+            position: relative;
+        }
+        .roadmap-mini li::before {
+            content: "▹";
+            position: absolute;
+            left: 0;
+            color: #22c55e;
+        }
+        .roadmap-mini li.done {
+            color: #6b7280;
+            text-decoration: line-through;
+        }
+        .roadmap-mini li.done::before {
+            color: #6b7280;
+        }
+
+        .about-approach {
+            background: #111;
+            border: 1px solid #1d2d1d;
+            border-radius: 16px;
+            padding: 28px;
+            margin-bottom: 30px;
+        }
+        .about-approach h3 {
+            color: #fbbf24;
+            font-size: 1.15em;
+            margin-bottom: 14px;
+        }
+        .about-approach p {
+            color: #9ca3af;
+            line-height: 1.7;
+            font-size: 0.95em;
+            margin-bottom: 12px;
+        }
+        .department-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+            margin-top: 18px;
+        }
+        .dept-card {
+            background: #1a1a1a;
+            border: 1px solid #22c55e;
+            border-radius: 12px;
+            padding: 16px;
+        }
+        .dept-card h4 {
+            color: #22c55e;
+            font-size: 1em;
+            margin-bottom: 6px;
+        }
+        .dept-card .lead {
+            color: #fbbf24;
+            font-size: 0.85em;
+            margin-bottom: 8px;
+        }
+        .dept-card p {
+            color: #9ca3af;
+            font-size: 0.82em;
+            line-height: 1.5;
         }
         .project-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 20px;
         }
-        .project-card {
-            background: #111;
-            border: 1px solid #222;
-            border-radius: 14px;
-            padding: 24px;
-            transition: border-color 0.2s;
-        }
-        .project-card:hover {
-            border-color: #22c55e;
-        }
-        .project-card h3 {
-            color: #fbbf24;
-            font-size: 1.2em;
-            margin-bottom: 8px;
-        }
-        .project-card .tech {
-            color: #22c55e;
-            font-size: 0.85em;
-            margin-bottom: 12px;
-        }
-        .project-card p {
-            color: #9ca3af;
-            line-height: 1.6;
-            font-size: 0.95em;
-        }
-        .project-card .status {
-            display: inline-block;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.8em;
-            font-weight: bold;
-            margin-top: 12px;
-        }
-        .status-live { background: #052e16; color: #22c55e; }
-        .status-dev { background: #1c1400; color: #fbbf24; }
-        .status-audit { background: #2d1515; color: #fca5a5; }
         .skills {
             display: flex;
             flex-wrap: wrap;
@@ -171,7 +265,11 @@
         }
         @media (max-width: 600px) {
             .hero h1 { font-size: 2em; }
+            .hero .avatar { width: 52px; height: 52px; }
             .project-grid { grid-template-columns: 1fr; }
+            .container { padding: 24px 16px; }
+            .links { gap: 10px; }
+            .links a { padding: 8px 16px; font-size: 0.9em; }
         }
     </style>
 </head>
@@ -179,6 +277,9 @@
     <div class="hero">
         <h1><img src="assets/jordan-avatar.png" alt="Jordan" class="avatar"> JORDAN</h1>
         <p class="tagline">GenTech Founder · Solidity Developer · Agent Economy Builder</p>
+        <p class="philosophy">
+            Building AI-augmented developer agents that ship secure, gas-optimized protocols on Ethereum, Base, and Solana — while saving partners money through efficient automation.
+        </p>
         <div class="links">
             <a href="https://github.com/ProtoJay4789" target="_blank">🐙 GitHub</a>
             <a href="https://linkedin.com/in/protojay" target="_blank">💼 LinkedIn</a>
@@ -188,8 +289,46 @@
     </div>
 
     <div class="container">
+
+        <!-- What Makes Us Different — Agent-First Approach -->
         <div class="section">
-            <h2>🧑‍💻 About</h2>
+            <h2>🎯 Why GenTech Agents Are Different</h2>
+            <div class="about-approach">
+                <p>
+                    <strong>We're safety-first builders.</strong> Every agent we ship is designed to amplify human oversight, not replace it. Our stack is built on redundancy: multiple layers of review, green-room validation, and mess-hall breathing room before any production impact.
+                </p>
+                <p>
+                    <strong>Tools that save money, not just time.</strong> Automated security scanning, gas optimization, and audit-ready patterns mean fewer external consultants, fewer hack incidents, and faster time-to-revenue for our partners.
+                </p>
+                <!-- 4-Department Collaboration -->
+                <div class="department-grid">
+                    <div class="dept-card">
+                        <h4>🔬 Labs (DMOB)</h4>
+                        <div class="lead">Smart contracts + security</div>
+                        <p>Reusable agent stacks, gas audits, Foundry/Hardhat tooling. Every line reviewed.</p>
+                    </div>
+                    <div class="dept-card">
+                        <h4>📢 Marketing (Desmond)</h4>
+                        <div class="lead">Positioning + growth</div>
+                        <p>Hackathon strategy, partner comms, social presence. Telling the story right.</p>
+                    </div>
+                    <div class="dept-card">
+                        <h4>💰 Green Room (YoYo)</h4>
+                        <div class="lead">Treasury + economics</div>
+                        <p>Funding strategy, protocol economics, risk assessment. Money moves with data.</p>
+                    </div>
+                    <div class="dept-card">
+                        <h4>🎛️ Operations</h4>
+                        <div class="lead">Ship + iterate</div>
+                        <p>CI/CD, monitoring, error recovery. We fail fast, rebuild better.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- About -->
+        <div class="section">
+            <h2>🧑‍💻 About Jordan</h2>
             <p style="color: #9ca3af; line-height: 1.8; font-size: 1.05em;">
                 Building at the intersection of <strong style="color: #22c55e;">AI agents</strong> and <strong style="color: #22c55e;">DeFi</strong>. 
                 Working on cross-chain payment infrastructure (x402), agent economies, and smart contract systems. 
@@ -197,36 +336,40 @@
             </p>
         </div>
 
-        <div class="section" id="projects">
-            <h2>🚀 Projects</h2>
+        <!-- The Team -->
+        <div class="section">
+            <h2>🤝 The GenTech Team</h2>
             <div class="project-grid">
                 <div class="project-card">
-                    <h3>🤖 AgentEscrow</h3>
-                    <div class="tech">Solidity · x402 · EVM · Solana Bridge</div>
-                    <p>Cross-chain payment infrastructure with AI agent integration. Agents escrow, validate, and release payments automatically.</p>
-                    <span class="status status-live">→ IN PRODUCTION</span>
+                    <h3>DMOB</h3>
+                    <div class="tech">Head of Labs · Security · Solidity</div>
+                    <p>Overseeing smart contract development, security audits, and gas optimization. Believes in checks-effects-interactions, OpenZeppelin base contracts, and paranoid-level security. Lives in the vault, the terminal, and the audit reports.</p>
+                    <span class="status status-live">→ ACTIVE</span>
                 </div>
                 <div class="project-card">
-                    <h3>⚡ AAE Dashboard</h3>
-                    <div class="tech">React · Web3 · Chainlink · LFJ</div>
-                    <p>Live yield farming dashboard for LP positions. Auto-tracking, DCA scheduling, and fee analytics across Avalanche, Base, and Solana.</p>
-                    <span class="status status-live">→ LIVE</span>
+                    <h3>Desmond</h3>
+                    <div class="tech">Marketing · Comms · Growth</div>
+                    <p>Strategizes hackathon positioning, partner outreach, and brand narrative. Translates deep-tech work into market-ready stories. Connects us with the right people at the right time.</p>
+                    <span class="status status-live">→ ACTIVE</span>
                 </div>
                 <div class="project-card">
-                    <h3>🔄 Cross-Chain Position Adapter</h3>
-                    <div class="tech">Solidity · LayerZero · Wormhole · CCIP</div>
-                    <p>Intent-based cross-chain position management. Deposit on any chain, earn yield on the best chain, withdraw wrapped to your preferred chain.</p>
-                    <span class="status status-dev">→ DEV (ETHGlobal)</span>
-                </div>
-                <div class="project-card">
-                    <h3>🛡️ Personal Finance Agent</h3>
-                    <div class="tech">Python · Cron · Telegram · DeFi</div>
-                    <p>Bill reminders, debt consolidation optimizer, and crypto-yield routing for idle capital. Voice-first agent assistant.</p>
-                    <span class="status status-dev">→ PROTOTYPE</span>
+                    <h3>YoYo</h3>
+                    <div class="tech">Green Room · Treasury · Strategy</div>
+                    <p>Manages protocol economics, funding strategy, and risk assessment. Ensures every partnership moves the needle financially. Governs the treasury with data-first decisions.</p>
+                    <span class="status status-live">→ ACTIVE</span>
                 </div>
             </div>
         </div>
 
+        <!-- Projects with Roadmaps -->
+        <div class="section" id="projects">
+            <h2>🚀 Projects Roadmap</h2>
+            <div class="project-grid" id="projects-container">
+                <!-- Projects will be injected by JavaScript -->
+            </div>
+        </div>
+
+        <!-- Hackathon Track -->
         <div class="section">
             <h2>🏆 Hackathon Track</h2>
             <div class="hackathon-track">
@@ -265,6 +408,7 @@
             </div>
         </div>
 
+        <!-- Tech Stack -->
         <div class="section">
             <h2>🛠️ Tech Stack</h2>
             <div class="skills">
@@ -289,14 +433,16 @@
             </div>
         </div>
 
+        <!-- Current Focus -->
         <div class="section">
             <h2>📈 Current Focus</h2>
             <p style="color: #9ca3af; line-height: 1.8;">
-                <strong>Goal:</strong> Leave Amazon by Q4 2026 via hackathon wins → Code4rena auditing → remote crypto role or $3-5K/mo in audit/incentive income.<br><br>
+                <strong>Goal:</strong> Leave Amazon by Q4 2026 via hackathon wins → Code4rena auditing → remote crypto role or $3–5K/mo in audit/incentive income.<br><br>
                 <strong>Strategy:</strong> Build public proof-of-work. Win prizes. Stack credentials. Move to Philippines Q3 for geo-arbitrage.<br><br>
                 <strong>Learning:</strong> Solana development, Rust, advanced security patterns, cross-chain architecture.
             </p>
         </div>
+
     </div>
 
     <div class="footer">
@@ -305,5 +451,138 @@
             <span style="color: #22c55e;">Building the agent-owned economy.</span>
         </p>
     </div>
+
+    <!-- Dynamic Projects Loader -->
+    <script>
+        // Projects data — pulled from data/projects.json
+        const projects = [
+            {
+                "title": "AgentEscrow",
+                "tech": "Solidity · x402 · EVM · Solana Bridge",
+                "description": "Cross-chain payment infrastructure with AI agent integration. Agents escrow, validate, and release payments automatically.",
+                "status": "live",
+                "roadmap": [
+                    "<strong>MVP:</strong> Agent escrow + x402 validation (DONE)",
+                    "<strong>Next:</strong> Solana bridge integration (In progress)",
+                    "<strong>Horizon:</strong> Multi-agent swarm settlement"
+                ]
+            },
+            {
+                "title": "Let's FG Travel Agent",
+                "tech": "Pipecat · Maps API · Python",
+                "description": "Voice-first travel planning agent that books flights, hotels, and itineraries autonomously. Integrated with real-time pricing and availability APIs.",
+                "status": "live",
+                "roadmap": [
+                    "<strong>MVP:</strong> Voice + itinerary generator (LIVE)",
+                    "<strong>Next:</strong> Stripe payments + confirmations",
+                    "<strong>Horizon:</strong> Group booking coordination"
+                ]
+            },
+            {
+                "title": "LFJ AVAX/USDC Auto-Rebalance",
+                "tech": "Solana · DeFi · Python",
+                "description": "Automated LP rebalancing for Curve positions. Monitors pool health and rebalances when price drifts outside optimal range.",
+                "status": "live",
+                "roadmap": [
+                    "<strong>MVP:</strong> Position health monitor (LIVE)",
+                    "<strong>Next:</strong> Automated rebalance triggers",
+                    "<strong>Horizon:</strong> Multi-pool orchestration"
+                ]
+            },
+            {
+                "title": "Hermes Kanban",
+                "tech": "Hermes · Kanban · TUI",
+                "description": "Terminal-based kanban board for agent task orchestration. Tracks milestones, delegates work, and surfaces blockers across the team.",
+                "status": "live",
+                "roadmap": [
+                    "<strong>MVP:</strong> TUI kanban (LIVE)",
+                    "<strong>Next:</strong> Telegram bot integration",
+                    "<strong>Horizon:</strong> Cross-agent dependency graph"
+                ]
+            },
+            {
+                "title": "Kite AI Governance",
+                "tech": "Avalanche · Python · Agent Framework",
+                "description": "Governance and monitoring layer for Kite AI ecosystem. Tracks validator performance and network health.",
+                "status": "building",
+                "roadmap": [
+                    "<strong>MVP:</strong> Kite L1 node monitor (IN PROGRESS)",
+                    "<strong>Next:</strong> Governance proposal agent",
+                    "<strong>Horizon:</strong> Cross-chain validator analytics"
+                ]
+            },
+            {
+                "title": "Birdeye BIP",
+                "tech": "Solana · Data · Python",
+                "description": "Birdeye Business Intelligence Proposal — structured data feeds and analytics for Solana DeFi protocols.",
+                "status": "research",
+                "roadmap": [
+                    "<strong>Phase 1:</strong> Data schema design (DONE)",
+                    "<strong>Phase 2:</strong> API proof-of-concept",
+                    "<strong>Phase 3:</strong> Birdeye partnership proposal"
+                ]
+            },
+            {
+                "title": "Tech Payment Router",
+                "tech": "Ethereum · Payments · Solidity",
+                "description": "Intelligent payment routing across Ethereum L2s. Optimizes for gas, speed, and success rates.",
+                "status": "research",
+                "roadmap": [
+                    "<strong>Phase 1:</strong> Architecture research (DONE)",
+                    "<strong>Phase 2:</strong> Basic router implementation",
+                    "<strong>Phase 3:</strong> LayerZero/Wormhole integration"
+                ]
+            }
+        ];
+
+        function statusLabel(status) {
+            const labels = {
+                'live': '→ LIVE',
+                'building': '→ BUILDING',
+                'dev': '→ IN DEV',
+                'audit': '→ AUDIT',
+                'research': '→ RESEARCH'
+            };
+            return labels[status] || status.toUpperCase();
+        }
+
+        function statusClass(status) {
+            const classes = {
+                'live': 'status-live',
+                'building': 'status-dev',
+                'dev': 'status-dev',
+                'audit': 'status-audit',
+                'research': 'status-research'
+            };
+            return classes[status] || 'status-dev';
+        }
+
+        function renderProjects() {
+            const container = document.getElementById('projects-container');
+            let html = '';
+
+            projects.forEach(p => {
+                html += `
+                <div class="project-card">
+                    <h3>${p.title}</h3>
+                    <div class="tech">${p.tech}</div>
+                    <p>${p.description}</p>
+                    <span class="status ${statusClass(p.status)}">${statusLabel(p.status)}</span>
+                    ${p.roadmap ? `
+                    <div class="roadmap-mini">
+                        <div class="roadmap-mini-title">Roadmap</div>
+                        <ul>
+                            ${p.roadmap.map(r => `<li>${r}</li>`).join('')}
+                        </ul>
+                    </div>` : ''}
+                </div>`;
+            });
+
+            container.innerHTML = html;
+        }
+
+        // Render on load
+        document.addEventListener('DOMContentLoaded', renderProjects);
+    </script>
 </body>
 </html>
