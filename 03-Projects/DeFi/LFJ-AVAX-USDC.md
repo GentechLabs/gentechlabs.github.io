@@ -9,6 +9,29 @@
 
 ---
 
+## 2026-05-04 Update
+**AVAX Price**: $9.20 (feed)
+**Price Range**: $8.95–$9.36 (Target: $8.95–$9.36)
+**Balances**: 11.64 AVAX (~$106.86) + 29.15 USDC (~$29.15) = **$136.01**
+**Fees (24h)**: $0.15 (est. from pool volume $8,523,107 × 5 bps × 0.00% share)
+**IL**: -41.97% (vs. HODL)
+**Efficiency**: 87.8%
+**Rewarded Bin**: ✅ Active ($9.18)
+**Action**: ⚠️ REVIEW NEEDED — IL exceeded 2% threshold; investigate root cause.
+
+**D5 Milestone Alignment**:
+- Position value ($136.01) aligns with **Scout** tier ($3/day target).
+- Price $inside strategic band $8.95–$9.36.
+- 🔴 IL 41.97% > 2% threshold → Review required. Current ΔIL = 59.62 pp vs. last entry.
+- Efficiency 87.8% ≥ 50% (healthy).
+
+**Other Pools**: No additional LFJ pools (AVAX/JOE, USDC/JOE, etc.) detected with active positions for this wallet.
+
+**Telegram Alert**: 🚨 IL CRITICAL — Sent to -1002916759037 at 16:35 UTC.
+
+---
+
+
 ## 2026-05-03 Update
 **AVAX Price**: $9.07 (-0.18% 24h)
 **Price Range**: $9.00–$9.45 (Target: $8.95–$9.36)
@@ -86,6 +109,26 @@
 - Micro‑DCA trigger: Efficiency ≥50% → no bonus DCA required.
 
 **Other Pools**: No additional LFJ pools (AVAX/JOE, USDC/JOE, etc.) detected with active positions for this wallet.
+
+*Next check: 4× daily (08:15 / 12:15 / 16:15 / 20:15 UTC). Updates are appended only when material changes occur (IL ≥0.5% or price exits range).*
+---
+## 2026-05-05 Update
+**Price Range**: $8.95–$9.36 (Target: $8.95–$9.36)
+**Balances**: 11.64 AVAX (~$107.32) + 29.15 USDC (~$29.15) = **$136.47**
+**Fees (24h)**: $0.16
+**IL**: +0.0% (vs. HODL)
+**Rewarded Bin**: ✅ $9.22
+**Action**: No rebalance needed.
+
+**D5 Milestone Alignment**:
+- Position value $136.47 aligns with **Scout** tier ($5/day target).
+- Price inside strategic band $8.95–$9.36.
+- IL +0.0% ✓ under 2% review trigger
+- Fee Efficiency: 68.3% ✓ ≥50% (healthy)
+
+**Other Pools**: No additional LFJ pools (AVAX/JOE, USDC/JOE, etc.) detected with active positions for this wallet.
+
+**Telegram Alert**: No alerts triggered — in range
 
 *Next check: 4× daily (08:15 / 12:15 / 16:15 / 20:15 UTC). Updates are appended only when material changes occur (IL ≥0.5% or price exits range).*
 ---
