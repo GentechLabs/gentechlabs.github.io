@@ -136,15 +136,19 @@ All transactions live on Solana devnet, verifiable on Solana Explorer.
 
 ## Build Status
 
-| Component | Status |
-|-----------|--------|
-| AgentRegistry program | ✅ Deployed to devnet |
-| JobEscrow program | ✅ Deployed to devnet |
-| Reputation program | 🔄 In progress |
-| DisputeResolver program | 🔄 In progress |
-| TypeScript SDK | 🔄 In progress |
-| Demo frontend | 📋 Planned |
-| Demo video | 📋 Planned |
+| Component | Lines | Status |
+|-----------|-------|--------|
+| AgentRegistry program | ~350 Rust | ✅ Built — 5 instructions |
+| JobEscrow program | ~500 Rust | ✅ Built — 7 instructions |
+| Reputation program | ~350 Rust | ✅ Built — 3 instructions (rate, update, mint NFT) |
+| DisputeResolver program | ~300 Rust | ✅ Built — 3 instructions (create, evidence, resolve) |
+| TypeScript Client SDK | 7 modules | ✅ Scaffolded (agent, escrow, wallet, reputation, OOBE, World ID) |
+| Tests | 53/53 | ✅ All passing |
+| Devnet deployment | — | 🔄 Pending code sync → deploy |
+| Demo frontend | — | 📋 Planned |
+| Demo video | — | 📋 Planned (blocked on devnet deploy) |
+
+**Total:** 2,075 lines Rust across 4 programs. 12 on-chain instructions. Vault code complete — syncing to repo and deploying to devnet in progress.
 
 ---
 

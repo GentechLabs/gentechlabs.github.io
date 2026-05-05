@@ -64,10 +64,23 @@
 | World | Identity verification | ⬜ |
 
 ## Sidetrack Opportunities
-| Track | Prize | Fit |
-|-------|-------|-----|
-| Zerion | $5K | Agent portfolio management |
-| GoldRush | $3K | On-chain data + agent reputation |
+- ✅ **Option B LOCKED** (Jordan confirmed May 5)
+
+| Track | Prize | Fit | Status |
+|-------|-------|-----|--------|
+| Zerion CLI | $5K | Agent portfolio management | Planned |
+| GoldRush (Covalent) | $3K | On-chain data + agent reputation | Planned |
+
+**Total sidetrack target: $8K extra**
+
+### What these adapters look like
+- **Zerion:** Thin wrapper — agent discovers portfolio, proposes actions via CLI. ~2-3hr build
+- **GoldRush:** Covalent API adapter — feed on-chain risk data into AgentEscrow reputation. ~2-3hr build
+- Both are SDK integrations, not new programs. DMOB builds main submission first, adapters last 2 days
+
+### Video Demo Plan (May 6 experiments)
+- Jordan exploring local Hermes model + Hagen video agent for polished demo
+- Demo recording currently scheduled Day 5 (May 9) — buffer for experiments
 
 ---
 

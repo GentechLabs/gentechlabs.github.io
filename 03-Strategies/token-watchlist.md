@@ -16,7 +16,7 @@ Long term holds for staking, yield farming, etc. Prices fetched from **CoinMarke
 | ? | Coq Inu | COQ | ? | ? | ? | Meme |
 | ? | The Arena | ARENA | ? | ? | ? | |
 | ? | Propbase | PROPS | ? | ? | ? | RWA focus |
-| ? | Landshare | LAND | ? | ? | ? | RWA focus |
+| ? | ~~Landshare~~ | ~~LAND~~ | ~~$0.1488~~ | — | — | ⚠️ **dApp shutting down (May 2026)** — removed from active watchlist |
 | ? | Silver | XAG | $73.03 | ? | ? | Commodity |
 
 ## CMC Watchlist

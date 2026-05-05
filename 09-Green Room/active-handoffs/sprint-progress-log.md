@@ -25,11 +25,34 @@ The existing sidetrack plan assumes building additional programs (`agent_brain`,
 
 **My recommendation:** Option B — main submission is the priority, Zerion and GoldRush adapters are thin wrappers that can be built in 2-3 hours each.
 
+## 2026-05-05 17:15 UTC — Jordan Decision: Option B Locked In
+- ✅ **Jordan confirmed Option B** — main submission + Zerion ($5K) + GoldRush ($3K) adapters
+- ✅ Total sidetrack target: $8K extra on top of main prize pool
+- Jordan plans to experiment with local Hermes model for demo video on May 6 (day off)
+- Exploring "Hagen" video agent integration for polished demo recording
+- Jordan plans to experiment with local Hermes model for demo video on May 6 (day off)
+- Exploring "Hagen" video agent integration for polished demo recording
+
+## 2026-05-05 17:20 UTC — Jordan: No-Idle Workflow Directive
+- ✅ **Standing directive:** When reaching a stopping point on any project, immediately queue the next priority and keep working
+- Stopping points defined as:
+  - Waiting for Jordan's approval
+  - Waiting on a tool/person unavailable (e.g., George)
+  - Any external dependency that creates idle time
+- **DMOB instructed:** Do NOT idle. If blocked on Solana Frontier, pivot to Zerion/GoldRush adapters. If blocked on both, scaffold next priority.
+- Applies to ALL agents, not just DMOB
+
+## 2026-05-05 17:25 UTC — DMOB ACK + Build Started
+- ✅ **DMOB acknowledged** — all handoffs reviewed, sprint plan loaded
+- ✅ **Code sync starting** — vault → repo priority
+- ✅ **No-idle directive acknowledged** — stopping point protocol active
+- Queue order: Solana Frontier P0 → Zerion CLI adapter → GoldRush adapter
+
 ## Blockers
-- DMOB ACK pending (handoff sent)
-- Need Jordan decision on Option A/B/C for sidetracks
+- None currently — building
 
 ## Next Updates
-- DMOB ACK status
-- Jordan sidetrack decision
-- Code sync verification (when DMOB starts)
+- Code sync status (vault → repo)
+- Devnet deploy readiness
+- Zerion API key (may need Jordan/YoYo to obtain)
+- Jordan video demo experiments (May 6)
