@@ -9,6 +9,38 @@
 
 ---
 
+## 2026-05-05 Update
+**AVAX Price**: $9.4000 (+2.84% 24h) ⚠️ PRICE ALERT
+**JOE Price**: $0.0475 (-0.63% 24h)
+**LP Position**: 🚨 **EMPTY** — No active LFJ position detected on-chain
+**Wallet**: 0.0971 AVAX (~$0.91) + 0.000009 USDC (~$0.00) = **$0.91**
+**Fees (24h)**: $0.00 (no active position)
+**IL**: N/A (position withdrawn)
+**Efficiency**: N/A
+**Action**: 🚨 CRITICAL: LP position withdrawn — wallet holds only dust balances. No active LFJ position detected on-chain.
+
+**Pool Data**:
+- Pool TVL: $4,010,303
+- 24h Volume: $17,546,240
+- Total Pool Fees (24h): $8,773
+
+**D5 Milestone Alignment**:
+- 🚨 **No active position** — Scout tier suspended until position is re-established.
+- AVAX $9.40 is OUTSIDE target band $9.25-$9.59 (above upper bound).
+- IL: N/A.
+- Efficiency: N/A.
+
+**Other Pools**: No additional LFJ pools detected with active positions for this wallet.
+
+**Recent Transactions** (May 5):
+- 12:49 UTC: 8.207 AVAX sent to 0x18556da13313f3532c54711497a8fedac273220e
+- 12:47 UTC: Interaction with 0x45a62b090df48243f12a21897e7ed91863e2c86b
+- 11:13 UTC: 6.822 AVAX sent to 0x18556da13313f3532c54711497a8fedac273220e
+
+**Telegram Alert**: 🚨 CRITICAL — LP POSITION EMPTY. Sent to -1002916759037 at 16:15 UTC.
+
+---
+
 ## 2026-05-04 Update
 **AVAX Price**: $9.20 (feed)
 **Price Range**: $8.95–$9.36 (Target: $8.95–$9.36)
@@ -109,26 +141,6 @@
 - Micro‑DCA trigger: Efficiency ≥50% → no bonus DCA required.
 
 **Other Pools**: No additional LFJ pools (AVAX/JOE, USDC/JOE, etc.) detected with active positions for this wallet.
-
-*Next check: 4× daily (08:15 / 12:15 / 16:15 / 20:15 UTC). Updates are appended only when material changes occur (IL ≥0.5% or price exits range).*
----
-## 2026-05-05 Update
-**Price Range**: $8.95–$9.36 (Target: $8.95–$9.36)
-**Balances**: 11.64 AVAX (~$107.32) + 29.15 USDC (~$29.15) = **$136.47**
-**Fees (24h)**: $0.16
-**IL**: +0.0% (vs. HODL)
-**Rewarded Bin**: ✅ $9.22
-**Action**: No rebalance needed.
-
-**D5 Milestone Alignment**:
-- Position value $136.47 aligns with **Scout** tier ($5/day target).
-- Price inside strategic band $8.95–$9.36.
-- IL +0.0% ✓ under 2% review trigger
-- Fee Efficiency: 68.3% ✓ ≥50% (healthy)
-
-**Other Pools**: No additional LFJ pools (AVAX/JOE, USDC/JOE, etc.) detected with active positions for this wallet.
-
-**Telegram Alert**: No alerts triggered — in range
 
 *Next check: 4× daily (08:15 / 12:15 / 16:15 / 20:15 UTC). Updates are appended only when material changes occur (IL ≥0.5% or price exits range).*
 ---
