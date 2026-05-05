@@ -1,14 +1,17 @@
-# Sidetrack Sprint — Zerion CLI ($5K)
+# Sidetrack Sprint — Option B ($8K total)
 **Started:** May 5, 2026
 **Deadline:** May 11, 2026 (6 days)
-**Bounty:** $5,000 — Agent that auto-discovers and delegates tasks via CLI
+**Bounties:** 
+- Zerion CLI — $5,000 (Agent that auto-discovers and delegates tasks via CLI)
+- GoldRush/Covalent — $3,000 (Agent risk dashboard with on-chain data feed)
 
 ---
 
 ## Decision Log
-- **May 5:** Jordan locked in **Option B (Zerion CLI)** — immediate $5K, fastest path to payout
+- **May 5:** Jordan locked in **Option B** — Zerion ($5K) + GoldRush ($3K) = $8K total
 - Video demo approach: Jordan experiments with local Hermes + Hagen + video agent on May 6 (day off)
 - Fallback video: screen recording + voiceover if local pipeline doesn't work
+- Adapter specs: `09-Green Room/active-handoffs/sidetrack-adapter-specs.md`
 
 ---
 
@@ -21,28 +24,30 @@
 - [x] Option B locked in
 
 ### Day 2 (May 6) — Jordan's day off / DMOB builds
-- [ ] **DMOB:** Scaffold Zerion CLI project structure
-- [ ] **DMOB:** Set up Zerion API integration (research endpoints, auth)
+- [ ] **DMOB:** Register for Zerion API key (dashboard.zerion.io) + GoldRush API key (goldrush.covalenthq.com)
+- [ ] **DMOB:** Scaffold both adapter projects (zerion_cli + goldrush)
 - [ ] **Jordan:** Experiment with local Hermes model + Hagen + video agent
 - [ ] **Jordan:** Test video pipeline locally — if it works, we use it for demo
 
 ### Day 3 (May 7) — Core functionality
-- [ ] **DMOB:** Implement agent task discovery (scan Zerion for opportunities)
-- [ ] **DMOB:** Implement CLI task delegation interface
+- [ ] **DMOB:** Zerion adapter — implement agent task discovery (scan for opportunities)
+- [ ] **DMOB:** Zerion adapter — implement CLI task delegation interface
+- [ ] **DMOB:** GoldRush adapter — implement risk scoring + position health monitoring
 - [ ] **Jordan:** Review video demo results — decide on demo approach
 
 ### Day 4 (May 8) — Polish + demo
-- [ ] **DMOB:** Error handling, edge cases, CLI UX polish
-- [ ] **Desmond:** Start writing submission README + writeup
+- [ ] **DMOB:** Zerion adapter — error handling, edge cases, CLI UX polish
+- [ ] **DMOB:** GoldRush adapter — error handling, feed into AgentEscrow reputation
+- [ ] **Desmond:** Start writing submission READMEs (both sidetracks)
 - [ ] **Jordan:** Record video demo (local pipeline OR screen recording)
 
 ### Day 5 (May 9) — Submission prep
-- [ ] **Desmond:** Finalize README, submission docs, pitch narrative
-- [ ] **DMOB:** Final testing, bug fixes
+- [ ] **Desmond:** Finalize both READMEs, submission docs, pitch narratives
+- [ ] **DMOB:** Final testing, bug fixes (both adapters)
 - [ ] **Jordan:** Review everything, approve submission
 
 ### Day 6 (May 10) — Submit
-- [ ] **All:** Final review + submit to Sidetrack
+- [ ] **All:** Final review + submit both sidetracks (Zerion $5K + GoldRush $3K)
 - [ ] **Desmond:** Social posts ready (pre-scheduled for post-submit)
 
 ---
@@ -70,6 +75,7 @@
 ---
 
 ## Files
+- `sidetrack-adapter-specs.md` — detailed API specs for both adapters
 - `SUBMISSION-README.md` — to be created Day 4-5
 - `TECHNICAL-WALKTHROUGH.md` — to be created Day 4-5
 - `VIDEO-SCRIPT.md` — TBD based on May 6 experiment results
