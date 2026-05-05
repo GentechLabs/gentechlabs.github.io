@@ -12,6 +12,11 @@ Shape-Aware DCA:
   - Mid zone (50-70%):                         $30 reduced DCA
   - Low zone (30-50%):                         $20 micro-DCA + rebalance warning
   - Edge/crash zone (<30%):                    $10 micro-DCA + urgent rebalance
+
+Shape Stagnation Detection:
+  - Tracks price history over last 12 checks (~3 days)
+  - If price range < 1.5% and shape is bidirectional → suggest CURVE
+  - If price range > 5% and shape is curve → suggest BIDIRECTIONAL
 """
 
 import json
@@ -63,7 +68,7 @@ POOL = {
     "chain": "avalanche",
     "pool_address": "0x864d4e5ee7318e97483db7eb0912e09f161516ea",
 "range_low": 9.25,
-        "range_high": 9.59,
+        "range_high": 9.54,
     "shape": "curve",
     "position_usd": 138.92,
     "fee_tier_bps": 5,
@@ -79,6 +84,40 @@ MILESTONES = [
 
 COMPOUND_THRESHOLD = 50.0
 DCA_BASE = 50
+
+# ── Shape Stagnation Detection ────────────────────────────────────────────────
+PRICE_HISTORY_MAX = 12          # keep last 12 checks (~3 days at 4x/day)
+STAGNATION_RANGE_PCT = 1.5      # price range < 1.5% of mid = stagnant
+STAGNATION_MIN_CHECKS = 4       # need at least 4 data points to judge
+
+def suggest_shape(current_shape, price_history):
+    """Suggest optimal liquidity shape based on price stability.
+
+    Logic:
+    - Bidirectional earns best when price swings (edges).
+    - Curve earns best when price concentrates (center).
+    - If bidirectional + stagnant price → suggest curve.
+    - If curve + volatile price → suggest bidirectional (optional).
+    """
+    if len(price_history) < STAGNATION_MIN_CHECKS:
+        return None  # not enough data yet
+
+    recent = price_history[-STAGNATION_MIN_CHECKS:]
+    lo, hi = min(recent), max(recent)
+    mid = (lo + hi) / 2
+    if mid == 0:
+        return None
+    range_pct = ((hi - lo) / mid) * 100
+
+    is_stagnant = range_pct < STAGNATION_RANGE_PCT
+    is_volatile = range_pct > 5.0  # >5% swing = volatile
+
+    if current_shape == "bidirectional" and is_stagnant:
+        return f"🔄 Price stagnant ({range_pct:.1f}% range over {STAGNATION_MIN_CHECKS} checks) — switching to CURVE could boost fee efficiency"
+    elif current_shape == "curve" and is_volatile:
+        return f"🔄 Price volatile ({range_pct:.1f}% range) — consider BIDIRECTIONAL to capture swings on both sides"
+    return None
+
 
 # ── State ──────────────────────────────────────────────────────────────────────
 
@@ -305,10 +344,18 @@ def build_lp():
     # Ensure state has required tracking keys
     state.setdefault("out_of_range_since", None)
     state.setdefault("out_of_range_first_check", False)
+    state.setdefault("price_history", [])
     price = data.get("price", 0)
     vol = data.get("volume_24h", 0)
     liq = data.get("liquidity", 0)
     ch = data.get("change_24h", 0)
+
+    # Track price history for stagnation detection
+    if price > 0:
+        state["price_history"].append(price)
+        state["price_history"] = state["price_history"][-PRICE_HISTORY_MAX:]
+
+    shape_suggestion = suggest_shape(POOL["shape"], state["price_history"])
 
     eff = calc_efficiency(price, POOL["range_low"], POOL["range_high"], POOL["shape"])
     in_range = POOL["range_low"] <= price <= POOL["range_high"]
@@ -357,6 +404,8 @@ def build_lp():
         "nxt_lab": nxt_lab, "pct": pct, "comp_ready": comp_ready,
         "is_monday": is_monday, "dca_msg": dca_msg,
         "oor_duration": out_of_range_duration,
+        "shape_suggestion": shape_suggestion,
+        "price_range_pct": round(((max(state["price_history"][-STAGNATION_MIN_CHECKS:]) - min(state["price_history"][-STAGNATION_MIN_CHECKS:])) / max((max(state["price_history"][-STAGNATION_MIN_CHECKS:]) + min(state["price_history"][-STAGNATION_MIN_CHECKS:])) / 2, 0.0001)) * 100, 1) if len(state["price_history"]) >= STAGNATION_MIN_CHECKS else None,
     }
     # Persist updated state
     save_json(LP_STATE, state)
@@ -450,6 +499,12 @@ def print_report(results, alerts, lp):
         lines.append(f"🔄 **Compound Ready** — Cumulative fees ${lp['cum']:.2f} exceed ${COMPOUND_THRESHOLD} threshold. Reinvest + DCA.")
 
     lines.append(f"📉 **Shape-Aware DCA**: {lp['dca_msg']}")
+
+    # Shape stability insight
+    if lp.get("price_range_pct") is not None:
+        lines.append(f"📐 **Price Stability**: {lp['price_range_pct']}% range over last {STAGNATION_MIN_CHECKS} checks")
+    if lp.get("shape_suggestion"):
+        lines.append(f"💡 **Shape Suggestion**: {lp['shape_suggestion']}")
 
     if not lp["in_range"]:
         dur = lp.get("oor_duration", 0)

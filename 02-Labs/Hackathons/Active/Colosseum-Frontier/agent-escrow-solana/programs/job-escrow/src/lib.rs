@@ -6,7 +6,7 @@ pub mod state;
 
 use instructions::*;
 
-declare_id!("4hSRLrZjpqACt2Zn5ar7W16zoWwknhKCqprg2p8Hdyfz");
+declare_id!("C1hJfpPJfBEnf5C68QCyBTC7ZvDX5cWo4rq7oaAUtsCu");
 
 #[program]
 pub mod job_escrow {

@@ -27,7 +27,7 @@ POOLS = [
         "chain": "avalanche",
         "pool_address": "0x864d4e5ee7318e97483db7eb0912e09f161516ea",
 "range_low": 9.25,
-        "range_high": 9.59,
+        "range_high": 9.54,
         "shape": "curve",
         "position_usd": 83.92,
         "token0_symbol": "AVAX",

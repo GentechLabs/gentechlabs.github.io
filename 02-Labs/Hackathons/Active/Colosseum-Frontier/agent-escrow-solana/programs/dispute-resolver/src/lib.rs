@@ -6,7 +6,7 @@ pub mod state;
 
 use instructions::*;
 
-declare_id!("Bh52utiFR5LDqKezKVigzWqX5nuY95996vEXuGCMr12X");
+declare_id!("J5tLQZx6DPuZxZFwnN8JTamBfsHn4KmHN6aBdeb1b3ea");
 
 #[program]
 pub mod dispute_resolver {

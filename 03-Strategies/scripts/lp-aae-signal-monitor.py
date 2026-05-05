@@ -39,18 +39,15 @@ DEFAULT_CONFIG = {
         "token0_amount": 3.446,
         "token1_amount": 103.38,
         "range_low": 9.25,
-        "range_high": 9.59,
+        "range_high": 9.54,
         "shape": "curve"
     },
     "milestones": [
-        {"tier": 1, "label": "Scout", "daily_fees": 3.0, "description": "Entry rank — basic strategies unlocked"},
-        {"tier": 2, "label": "Scout+", "daily_fees": 5.0, "description": "Consistent earner — SPOT shape unlocked"},
-        {"tier": 3, "label": "Raider", "daily_fees": 8.0, "description": "Intermediate — BIDIRECTIONAL shape unlocked"},
-        {"tier": 4, "label": "Raider+", "daily_fees": 10.0, "description": "Building momentum — multi-pool view unlocked"},
-        {"tier": 5, "label": "Warlord", "daily_fees": 15.0, "description": "Advanced — custom range presets unlocked"},
-        {"tier": 6, "label": "Warlord+", "daily_fees": 20.0, "description": "Veteran — squad treasury analytics unlocked"},
-        {"tier": 7, "label": "Sovereign", "daily_fees": 55.0, "description": "Elite — strategy sharing + leaderboard unlocked"},
-        {"tier": 8, "label": "Freedom", "daily_fees": 200.0, "description": "Freedom milestone — custom strategy creation + mentorship"}
+        {"tier": 1, "label": "Scout", "daily_fees": 5.0, "description": "Entry strategies (CURVE)"},
+        {"tier": 2, "label": "Raider", "daily_fees": 20.0, "description": "SPOT + BIDIRECTIONAL shapes"},
+        {"tier": 3, "label": "Warlord", "daily_fees": 50.0, "description": "Multi-pool positions"},
+        {"tier": 4, "label": "Sovereign", "daily_fees": 100.0, "description": "Custom strategy creation + mentorship"},
+        {"tier": 5, "label": "Freedom", "daily_fees": 200.0, "description": "Full autonomy + mentorship"}
     ],
     "compound_threshold_usd": 50.0,
     "dca": {"amount": 50, "day_of_week": 0, "enabled": True},
@@ -125,6 +122,10 @@ class AAESignal:
     next_tier_label: str
     progress_to_next_pct: float
     days_in_range: float
+    
+    # Shape recommendation
+    price_volatility_pct: float  # 24h price range as % of mid price
+    shape_suggestion: str        # Recommended shape: keep/curve/bidirectional/widen
     
     # Action signals
     compound_ready: bool
@@ -467,6 +468,62 @@ def calc_pool_tvl_drop(tvl_history: List[float]) -> float:
     current = tvl_history[-1]
     return round(((peak - current) / peak) * 100, 2)
 
+def calc_price_volatility(price_history: List[float]) -> float:
+    """Calculate price volatility as % range over available history.
+    Returns (max - min) / mid * 100. Uses last 24 data points (hours) if available."""
+    recent = price_history[-24:] if len(price_history) > 24 else price_history
+    if len(recent) < 2:
+        return 0.0
+    mn, mx = min(recent), max(recent)
+    mid = (mn + mx) / 2
+    if mid <= 0:
+        return 0.0
+    return round(((mx - mn) / mid) * 100, 2)
+
+def suggest_shape(volatility_pct: float, current_shape: str, efficiency: float,
+                  price: float, range_low: float, range_high: float) -> str:
+    """Recommend liquidity shape based on price stability.
+    
+    Logic:
+      - Low volatility (<2%) + low efficiency → CURVE (concentrate at center)
+      - Low volatility + price near edges → CURVE but wider range needed
+      - Moderate volatility (2-5%) → CURVE if efficiency ok, SPOT if not
+      - High volatility (>5%) → BIDIRECTIONAL (capture swings)
+      - Extreme volatility (>10%) → widen range + BIDIRECTIONAL
+    """
+    in_range = range_low <= price <= range_high
+    pos_pct = (price - range_low) / (range_high - range_low) * 100 if range_high > range_low else 50
+    pos_pct = max(0, min(100, pos_pct))
+    
+    if volatility_pct > 10:
+        return "⚠️ WIDEN + BIDIRECTIONAL — extreme volatility, current range may not hold"
+    elif volatility_pct > 5:
+        if current_shape == "bidirectional":
+            return "✅ BIDIRECTIONAL is optimal for this volatility"
+        return "🔄 Switch to BIDIRECTIONAL — high volatility favors swing capture"
+    elif volatility_pct > 2:
+        if efficiency > 50:
+            return "✅ Position healthy — moderate volatility suits current shape"
+        if current_shape == "curve":
+            return "✅ CURVE is good — efficiency within range"
+        return "🔄 Consider CURVE — moderate volatility, efficiency could improve"
+    else:
+        # Low volatility — price is stable
+        if not in_range:
+            return "⚠️ Price stable but OUT OF RANGE — rebalance to capture"
+        if current_shape == "curve":
+            if efficiency > 70:
+                return "✅ CURVE optimal — price stable, efficiency excellent"
+            elif efficiency > 40:
+                return "✅ CURVE is correct — consider narrowing range for more concentration"
+            else:
+                return "🔄 Narrow range + CURVE — price stable but efficiency low"
+        elif current_shape == "bidirectional":
+            return "🔄 Switch to CURVE — price is stable, bidirectional earns less here"
+        elif current_shape == "spot":
+            return "🔄 Switch to CURVE — price stable, spot dilutes center concentration"
+        return "✅ Monitor — low volatility environment"
+
 def build_aae_signal(cfg: Dict, state: Dict, pool: Dict, price: float, in_range: bool,
                      efficiency: float, est_fees: float, apr: float, pool_tvl_drop_pct: float,
                      out_of_range_confirmed: bool = True, oor_duration_minutes: float = 0.0,
@@ -500,6 +557,14 @@ def build_aae_signal(cfg: Dict, state: Dict, pool: Dict, price: float, in_range:
         current_tier_label = milestones[current_idx]["label"]
         current_tier_num = current_idx + 1
 
+    # Price volatility analysis
+    price_history = state.get("price_history", [])
+    volatility = calc_price_volatility(price_history)
+    shape_suggestion = suggest_shape(
+        volatility, position["shape"], efficiency,
+        price, position["range_low"], position["range_high"]
+    )
+    
     # Action triggers
     compound_ready = state["total_fees_earned_usd"] >= cfg["compound_threshold_usd"]
     dca_ready = cfg["dca"]["enabled"] and now.weekday() == cfg["dca"]["day_of_week"]
@@ -562,6 +627,8 @@ def build_aae_signal(cfg: Dict, state: Dict, pool: Dict, price: float, in_range:
         next_tier_label=milestones[next_idx]["label"],
         progress_to_next_pct=progress_pct,
         days_in_range=round(state["total_days_in_range"], 1),
+        price_volatility_pct=volatility,
+        shape_suggestion=shape_suggestion,
         compound_ready=compound_ready,
         dca_ready=dca_ready,
         micro_dca_ready=micro_dca_ready,
@@ -680,6 +747,12 @@ def format_human_report(signal: AAESignal, cfg: Dict) -> str:
         f"",
         f"**Action:** {signal.suggested_action}",
     ]
+    
+    # Shape recommendation (always show if there's something to say)
+    if signal.shape_suggestion and signal.shape_suggestion != "✅ Position healthy — maintain current range.":
+        lines.append(f"")
+        lines.append(f"🔬 **Shape Analysis:** Volatility {signal.price_volatility_pct}% (24h)")
+        lines.append(f"• {signal.shape_suggestion}")
     
     if signal.micro_dca_ready:
         lines.append(f"")

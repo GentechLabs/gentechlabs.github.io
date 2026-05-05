@@ -27,6 +27,7 @@
 |---|---|---|---|
 | 2026-04-30 | $9.11 | — | No rebalance needed, position healthy |
 | 2026-05-03 | $9.07 | 🚨 Review | IL spiked to -17.65% (>2% threshold); on-chain verification required |
+| 2026-05-05 | $9.42 | ⚠️ Watch | AVAX +2.26% to $9.42, outside target band $8.95–$9.36 |
 
 ---
 

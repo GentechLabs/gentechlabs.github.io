@@ -5,16 +5,17 @@ resolution = false
 skip-lint = false
 
 [programs.devnet]
-agent_registry = "E9vTr1CWGEUKWQSUYJJYHMPzQJQ7itqwHgKHacEvNryb"
-dispute_resolver = "Bh52utiFR5LDqKezKVigzWqX5nuY95996vEXuGCMr12X"
-job_escrow = "4hSRLrZjpqACt2Zn5ar7W16zoWwknhKCqprg2p8Hdyfz"
-reputation = "EDfNfjFZ9pSjohsjLpp8NUeXcgUiAn5FbCFqVjEhUVxA"
+agent_registry = "7t2pJY8JNvw96TtQqBg2SRUQhzmYdPNEbAHNqCU9dqvC"
+dispute_resolver = "AsQWZ61nCDKGP4BUBAAdux3hDgPNrk5BwCWDagPrNF3p"
+job_escrow = "HVYQRnL6Nm3XMAJysxRAB9VtK3Edd4rFNpJbv1QwjrUf"
+reputation = "FH5u8sfQAmkcQshHsUjEVVNwhcLnjLMV72gR6K8XDKrg"
+
+[registry]
+url = "https://api.apr.dev"
 
 [provider]
-cluster = "devnet"
+cluster = "Devnet"
 wallet = "~/.config/solana/id.json"
 
 [scripts]
 test = "yarn run ts-mocha -p ./tsconfig.json -t 1000000 tests/**/*.ts"
-
-[hooks]

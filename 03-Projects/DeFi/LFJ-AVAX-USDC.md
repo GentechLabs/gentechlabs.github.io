@@ -9,32 +9,32 @@
 
 ---
 
-## 2026-05-05 Update
-**AVAX Price**: $9.3600 (+1.58% 24h)
-**JOE Price**: $0.047290 (-0.98% 24h)
-**Price Range**: $9.25–$9.60 (Target: $8.95–$9.36)
-**Balances**: 6.80 AVAX (~$63.65) + 81.00 USDC (~$81.00) = **$144.65**
-**Wallet**: 0.0971 AVAX (~$0.91) + 0.00 USDC | **Combined Total**: **$145.56**
-**Fees (24h)**: ~$0.33 (est. from pool volume $18,248,881 × 5 bps × 0.0036% share)
-**IL**: -0.01% (vs. HODL from $9.40 entry)
+## 2026-05-05 Update (20:18 UTC)
+**AVAX Price**: $9.4236 (+2.26% 24h)
+**JOE Price**: $0.047824 (+0.57% 24h)
+**Price Range**: $9.29–$9.56 (Target: $8.95–$9.36)
+**Balances**: 6.80 AVAX (~$64.08) + 81.00 USDC (~$80.98) = **$145.06**
+**Wallet**: 0.0971 AVAX (~$0.92) + 0.00 USDC | **Combined Total**: **$145.98**
+**Fees (24h)**: $0.65 (est. from pool volume $20,374,901 × 5 bps × 0.0064% share)
+**IL**: +0.1% (vs. HODL from $9.40 entry)
 **Efficiency**: 53.3%
-**Rewarded Bin**: ✅ Active bin 8363199 within position range [8363189–8363226]
-**Action**: No rebalance needed.
+**Rewarded Bin**: ✅ Active bin 8363207 within position range [8363193–8363221]
+**Action**: ⚠️ REVIEW — AVAX $9.42 OUTSIDE strategic target band $8.95–$9.36. Price has drifted $0.06 above upper bound. Monitor for continuation above $9.36.
 
 **Pool Data**:
-- Pool TVL: $3,992,435
-- 24h Volume: $18,248,881
-- Total Pool Fees (24h): $9,124
+- Pool TVL: $4,017,777
+- 24h Volume: $20,374,901
+- Total Pool Fees (24h): $10,187
 
 **D5 Milestone Alignment**:
-- Position value ($144.65) aligns with **Scout** tier ($5/day target).
-- Price $9.36 is inside strategic band $8.95–$9.36.
-- IL -0.01% ✓ below 2% threshold.
+- Position value ($145.06) aligns with **Scout** tier ($5/day target).
+- 🔴 Price $9.42 OUTSIDE strategic band $8.95–$9.36 — $0.06 above upper bound.
+- IL +0.1% ✓ below 2% threshold.
 - Efficiency 53.3% ✓ ≥ 50% → No action needed.
 
 **Other Pools**: No additional LFJ pools (AVAX/JOE, USDC/JOE, etc.) detected with active positions for this wallet.
 
-**Note**: Previous vault entry (16:15 UTC) reported position as EMPTY. On-chain scan at 16:48 UTC confirms 38 active bins with shares. Position was re-established via USDC deposits on May 5 (11:12–12:49 UTC). The 16:15 UTC scan may have failed to detect the newly established position.
+**Note**: Updated 20:18 UTC — AVAX rallied +2.26% to $9.42, now above target band. Active bin shifted from 8363199→8363207. Fees doubled from $0.33→$0.65 due to elevated volume ($20.4M). Previous entry at 20:15 UTC (earlier today) replaced.
 
 
 ---

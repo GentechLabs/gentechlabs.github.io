@@ -39,7 +39,7 @@ POSITION = {
     "token0_amount": 3.446,
     "token1_amount": 103.38,
     "range_low": 9.25,
-    "range_high": 9.59,
+    "range_high": 9.54,
 }
 
 
