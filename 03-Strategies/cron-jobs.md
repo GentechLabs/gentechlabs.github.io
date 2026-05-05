@@ -1,6 +1,6 @@
 # YoYo Cron Jobs — Active Manifest
 > Last updated: 2026-05-02 (DMOB — consolidated duplicate LP jobs into D5 Milestone)
-> Models: YoYo/Gentech/Desmond → `kimi-k2.6` | DMOB → `qwen3-coder-next` | Provider: Ollama Cloud
+> Models: All jobs → `kimi-k2.6` via `custom:opencode-go` (pinned, was inheriting broken Nous 401)
 > Delivery: Strategies group (-1002916759037)
 >
 > **Standard:** All cron jobs follow `01-Agency/cron-job-standards.md` (human-readable prompts, no code blocks, no agent roleplay).

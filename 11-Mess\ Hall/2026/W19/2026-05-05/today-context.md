@@ -1,0 +1,132 @@
+# 2026-05-05 — Mess Hall Context
+
+## 📅 Date & Sprint Info
+- **Date:** May 5, 2026 (Tuesday)
+- **Week:** W19
+- **Sprint Theme:** Hackathon Homestretch
+- **Countdown:** 
+  - Solana Frontier: **6 days** (due May 11)
+  - Kite AI: **12 days** (due May 17)
+
+## 🔴 Critical Issues & Escalations
+
+### 1. Overdue Handoffs — P0 Escalation Required
+**Status:** 4 handoffs overdue since Apr 19-21, blocking multiple workstreams.
+
+| ID | From → To | Task | Priority | Due | Status |
+|----|-----------|------|----------|-----|--------|
+| H001 | Gentech → Dmob | Dynamic Burn Rate SC Review | P0 | Apr 19 | ⏳ Pending |
+| H002 | Gentech → YoYo | Competitive Analysis: Dynamic Burn Rate | P0 | Apr 19 | ⏳ Pending |
+| H003 | Jordan → Dmob | Gas Reserve Auto-Rebalance SC | P0 | Apr 21 | ⏳ Pending |
+| H004 | Jordan → YoYo | Gas Reserve Monitoring & Strategy | P0 | Apr 21 | ⏳ Pending |
+
+**Action:** Jordan must decide: reassign, drop, or escalate. DMOB/YoYo unavailable since Apr 27.
+
+### 2. Solana Frontier — T-6 Days, Build Status Unknown
+**Risk:** Integration testing status unconfirmed, demo package due May 8.
+
+**Critical Path:**
+- [ ] Integration testing verification
+- [ ] Devnet deployment readiness (USDC faucet, network config)
+- [ ] Demo storyboard finalization (Desmond)
+- [ ] Anchor program audit sign-off
+
+**Action:** DMOB to provide status update by 14:00 UTC or reassign immediately.
+
+### 3. LP Position Out of Range — Earning Zero
+**Metrics (May 3):**
+- IL: -17.65% (breached 2% threshold)
+- Price: $9.07 (inside strategic band $8.95–$9.36)
+- Total Value: $135.60
+- Efficiency: 0% (position out of range)
+
+**Action:** YoYo to evaluate rebalance or range adjustment. Monitor if price exits band >12h.
+
+## 🟡 High Priority Items
+
+### 4. Kite AI Hackathon — Scoping Doc Overdue
+**Due:** EOD May 3 (yesterday)
+**Deliverable:** `02-Labs/Kite-AI-Brain-Layer-Scoping.md`
+
+**Content Required:**
+- Yield Oracle design
+- Strategy Evaluator architecture
+- Switch Signals specification
+- DVN monitor address fix confirmation
+
+**Action:** DMOB to complete scoping immediately or transfer to Gentech.
+
+### 5. Agent Authentication — All Agents Require Refresh
+**Status:** OAuth tokens expired on May 3. Refresh scripts deployed but agents remain offline.
+
+**Action:** All department heads verify agent auth status in `00-HQ/Operations/agent-auth-status.md`.
+
+### 6. Hermes 38 Commits Behind — Requires Approval
+**Impact:** Missing bug fixes, security patches, and features.
+
+**Action:** Jordan to approve update. Gentech ready to pull.
+
+## 🟢 Active Projects Snapshot
+
+### DeFi / Strategies (YoYo)
+- **D5 Milestone Tracker:** Tier 1 Scout active, higher tiers locked
+- **LFJ AVAX/USDC LP:** -17.65% IL, monitoring active, efficiency 0%
+- **LayerZero Integration:** Pending D5 cron v2
+- **Weekly Report:** Due May 10
+
+### Labs / Build (DMOB)
+- **Solana Frontier:** 4/4 programs scaffolded, DisputeResolver audit passing
+- **Kite AI:** Scoping overdue
+- **Bug Bounties:** 1 active (Reserve Governor — Base, $30K, May 10)
+- **Dev3pack Global:** Exploring (May 8-10)
+
+### Creative / Content (Desmond)
+- **Solana Frontier Demo:** Pending DMOB build completion
+- **Social Thread/OOBE:** Drafted, awaiting final architecture
+- **Submission Materials:** In `02-Labs/Hackathons/Submission-Materials.md`
+
+## 📊 System Health
+
+### Disk Space Alert (Ongoing)
+- **Root partition:** 82% full
+- **Action:** Schedule cleanup for week of May 18 (post-hackathon)
+
+### Agent Status
+| Agent | Last Check-in | Status | Notes |
+|-------|---------------|--------|-------|
+| Gentech | May 4 | Active | Portfolio refresh deployed |
+| Dmob | Apr 27 | OFFLINE | Critical path on hackathons |
+| YoYo | Apr 27 | OFFLINE | LP monitoring stalled |
+| Desmond | Apr 27 | OFFLINE | Content pipeline idle |
+
+## 🎯 Today's Action Items
+
+### Immediate (Today)
+1. **Jordan:** Escalate overdue handoffs H001-H004 — reassign or drop by EOD
+2. **DMOB:** Provide Solana Frontier integration status by 14:00 UTC
+3. **YoYo:** Review LFJ position — rebalance or adjust range
+4. **All:** Verify agent authentication status
+
+### This Week (May 5-9)
+1. **DMOB/Desmond:** Finalize Solana Frontier demo by May 8
+2. **DMOB:** Complete Kite AI scoping (or transfer)
+3. **Gentech:** Schedule Hermes update after Jordan approval
+4. **All:** Prepare hackathon submissions (May 11/17)
+
+## 🔗 Important Links
+- **Task Board:** `11-Mess Hall/task-board.md`
+- **Handoff Board:** `11-Mess Hall/handoff-board.md`
+- **Active Sprint Docs:** `02-Labs/Hackathons/Active/`
+- **LP Monitor:** `03-Strategies/DeFi/D5-Milestone-Tracker.md`
+- **Agent Auth Status:** `00-HQ/Operations/agent-auth-status.md`
+
+## 🚨 Escalation Triggers
+- **13:45 UTC:** Handoffs still unclaimed → notify Jordan
+- **14:00 UTC:** No Solana Frontier status → reassign critical tasks
+- **23:59 UTC:** Kite AI scoping not delivered → transfer to Gentech
+
+---
+*Report generated by:* Gentech Daily Cron  
+*Vault location:* `11-Mess Hall/2026/W19/2026-05-05/today-context.md`  
+*Time:* 2026-05-05 03:00 UTC  
+*Delivery:* Vault-only (silent run)
