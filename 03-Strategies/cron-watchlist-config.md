@@ -23,11 +23,11 @@ The cron pulls price data for any symbol listed below.
 - TAO — Bittensor, AI/ML network
 - XAUt — Tether Gold, gold-backed stable
 - BEAM — Beam, gaming
-- PROPS — Propbase, RWA focus (CoinGecko ID: propbase)
 
 ## Removed
 
-- LAND — Landshare, RWA focus — dApp shutting down (May 2026)
+- ~~LAND~~ — Landshare, dApp shutting down May 2026. Removed from active watchlist.
+- ~~PROPS~~ — Propbase, Southeast Asia real estate RWA. Removed May 2026 — micro cap ($2.5M), 98% off ATH, on Aptos not AVAX. Revisit if bullish market returns.
 <!-- Coins you've dropped — keep for reference -->
 
 ---
