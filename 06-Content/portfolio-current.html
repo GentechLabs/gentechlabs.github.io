@@ -16,24 +16,16 @@
             padding: 60px 20px 40px;
             text-align: center;
             background: linear-gradient(135deg, #0d1a2d, #1a0d1a);
-            border-bottom: 2px solid #3b82f6;
-        }
-        .avatar {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            border: 3px solid #3b82f6;
-            margin-bottom: 20px;
-            box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+            border-bottom: 2px solid #22c55e;
         }
         .hero h1 {
             font-size: 2.6em;
-            color: #3b82f6;
+            color: #22c55e;
             margin-bottom: 10px;
             letter-spacing: 2px;
         }
         .hero .tagline {
-            color: #9ca3af;
+            color: #86efac;
             font-size: 1.2em;
             margin-bottom: 20px;
         }
@@ -49,14 +41,14 @@
             padding: 10px 20px;
             border-radius: 8px;
             background: #1a1a1a;
-            border: 1px solid #3b82f6;
-            color: #3b82f6;
+            border: 1px solid #22c55e;
+            color: #22c55e;
             text-decoration: none;
             font-weight: 600;
             transition: all 0.2s;
         }
         .links a:hover {
-            background: #3b82f6;
+            background: #22c55e;
             color: #0a0a0a;
         }
         .container {
@@ -66,9 +58,10 @@
         }
         .section {
             margin-bottom: 40px;
+            scroll-margin-top: 80px;
         }
         .section h2 {
-            color: #3b82f6;
+            color: #22c55e;
             font-size: 1.5em;
             margin-bottom: 15px;
             border-bottom: 1px solid #1a2d1a;
@@ -87,7 +80,7 @@
             transition: border-color 0.2s;
         }
         .project-card:hover {
-            border-color: #ef4444;
+            border-color: #22c55e;
         }
         .project-card h3 {
             color: #fbbf24;
@@ -95,7 +88,7 @@
             margin-bottom: 8px;
         }
         .project-card .tech {
-            color: #9ca3af;
+            color: #22c55e;
             font-size: 0.85em;
             margin-bottom: 12px;
         }
@@ -112,9 +105,10 @@
             font-weight: bold;
             margin-top: 12px;
         }
-        .status-live { background: #052e16; color: #3b82f6; }
+        .status-live { background: #052e16; color: #22c55e; }
         .status-dev { background: #1c1400; color: #fbbf24; }
         .status-audit { background: #2d1515; color: #fca5a5; }
+        .status-building { background: #1c1400; color: #fbbf24; }
         .skills {
             display: flex;
             flex-wrap: wrap;
@@ -141,7 +135,7 @@
         }
         .hackathon-track th {
             text-align: left;
-            color: #3b82f6;
+            color: #22c55e;
             padding: 10px 8px;
             border-bottom: 1px solid #222;
         }
@@ -157,9 +151,10 @@
             font-size: 0.75em;
             font-weight: bold;
         }
-        .badge-submit { background: #052e16; color: #3b82f6; }
-        .badge-building { background: #1c1400; color: #f87171; }
+        .badge-submit { background: #052e16; color: #22c55e; }
+        .badge-building { background: #1c1400; color: #fbbf24; }
         .badge-queued { background: #1a0d2e; color: #a855f7; }
+        .badge-live { background: #052e16; color: #22c55e; }
         .footer {
             text-align: center;
             padding: 30px;
@@ -171,13 +166,47 @@
             .hero h1 { font-size: 2em; }
             .project-grid { grid-template-columns: 1fr; }
         }
+    
+        html { scroll-behavior: smooth; }
+        .roadmap {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 60px 0;
+            position: relative;
+            padding: 20px 0;
+        }
+        .roadmap::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: #22c55e;
+            transform: translateY(-50%);
+            z-index: 0;
+        }
+        .roadmap-step {
+            position: relative;
+            z-index: 1;
+            background: #0a0a0a;
+            border: 2px solid #22c55e;
+            color: #22c55e;
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-weight: bold;
+            text-align: center;
+            flex: 1;
+            margin: 0 10px;
+            max-width: 160px;
+            white-space: nowrap;
+        }
     </style>
 </head>
 <body>
     <div class="hero">
-        <!-- NOTE: Replace assets/jordan-avatar.png with your JinTech photo -->
-        <img src="assets/jordan-avatar.png" alt="Jordan" class="avatar" onerror="this.style.display='none'">
-        <h1>👤 JORDAN</h1>
+        <h1>👤 Jordan the ProtoJay</h1>
         <p class="tagline">GenTech Founder · Solidity Developer · Agent Economy Builder</p>
         <div class="links">
             <a href="https://github.com/ProtoJay4789" target="_blank">🐙 GitHub</a>
@@ -191,9 +220,12 @@
         <div class="section">
             <h2>🧑‍💻 About</h2>
             <p style="color: #9ca3af; line-height: 1.8; font-size: 1.05em;">
-                Building at the intersection of <strong style="color: #3b82f6;">AI agents</strong> and <strong style="color: #3b82f6;">DeFi</strong>. 
-                Working on cross-chain payment infrastructure (x402), agent economies, and smart contract systems. 
-                Full-time Amazon by day, shipping protocol-level projects by night. Looking to transition to full-time crypto by 2027–2028.
+                Building at the intersection of <strong style="color: #22c55e;">AI agents</strong> and <strong style="color: #22c55e;">DeFi</strong>. GenTech HQ serves as our delegation layer, coordinating agent workflows and resource allocation. Currently focused on cross-chain payment infrastructure (x402), multi-agent orchestration, and automated DeFi strategies. 
+                Full-time Amazon by day, shipping protocol-level projects by night. 
+                Recent work: <strong style="color: #22c55e;">ElevenLabs multi-agent voice integration</strong> (complete), 
+                <strong style="color: #22c55e;">Solana Frontier sprint</strong> (due May 11), and 
+                <strong style="color: #22c55e;">LP monitoring automation</strong> (D5 milestone tracker). 
+                Goal: go full-time crypto by Q4 2026 via hackathon wins + audit revenue.
             </p>
         </div>
 
@@ -203,27 +235,49 @@
                 <div class="project-card">
                     <h3>🤖 AgentEscrow</h3>
                     <div class="tech">Solidity · x402 · EVM · Solana Bridge</div>
-                    <p>Cross-chain payment infrastructure with AI agent integration. Agents escrow, validate, and release payments automatically.</p>
+                    <p>Cross-chain payment infrastructure with AI agent integration. Agents escrow, validate, and release payments automatically. Live on Avalanche & Base with 6+ production positions.</p>
                     <span class="status status-live">→ IN PRODUCTION</span>
                 </div>
                 <div class="project-card">
-                    <h3>⚡ AAE Dashboard</h3>
-                    <div class="tech">React · Web3 · Chainlink · LFJ</div>
-                    <p>Live yield farming dashboard for LP positions. Auto-tracking, DCA scheduling, and fee analytics across Avalanche, Base, and Solana.</p>
+                    <h3>⚡ AAE Defi Milestones</h3>
+                    <div class="tech">React · Python · Chainlink · LFJ</div>
+                    <p>Automated DeFi milestone tracking and position rebalancing across Avalanche, Base, and Solana. Auto-tracking LP positions, DCA scheduling, fee analytics, and dynamic milestone-based adjustments. Managing ~$1K+ in active positions.</p>
                     <span class="status status-live">→ LIVE</span>
                 </div>
                 <div class="project-card">
-                    <h3>🔄 Cross-Chain Position Adapter</h3>
-                    <div class="tech">Solidity · LayerZero · Wormhole · CCIP</div>
-                    <p>Intent-based cross-chain position management. Deposit on any chain, earn yield on the best chain, withdraw wrapped to your preferred chain.</p>
-                    <span class="status status-dev">→ DEV (ETHGlobal)</span>
+                    <h3>🎤 Multi-Agent Voice Integration</h3>
+                    <div class="tech">ElevenLabs · Python · Hermes · Telegram</div>
+                    <p>Four-agent voice system (Gentech, YoYo, DMOB, Desmond) with daily automated briefings. End-to-end TTS pipeline with dialogue generation, voice selection, and audio mixing. Quota active, production-ready.</p>
+                    <span class="status status-live">→ LIVE</span>
                 </div>
                 <div class="project-card">
-                    <h3>🛡️ Personal Finance Agent</h3>
-                    <div class="tech">Python · Cron · Telegram · DeFi</div>
-                    <p>Bill reminders, debt consolidation optimizer, and crypto-yield routing for idle capital. Voice-first agent assistant.</p>
+                    <h3>🛡️ Solana Frontier</h3>
+                    <div class="tech">Rust · Anchor · Solana · Agent Registry</div>
+                    <p>4-program Anchor workspace for Solana Frontier hackathon (due May 11). AgentRegistry with World ID CPI, JobEscrow with PDA vaults + 8-state lifecycle, Reputation NFTs, and DisputeResolver. 8-day sprint, final week critical path.</p>
+                    <span class="status status-building">→ BUILDING</span>
+                </div>
+                <div class="project-card">
+                    <h3>🧠 Kite AI Brain Layer</h3>
+                    <div class="tech">Kite L1 · Yield Oracles · Strategy Engine</div>
+                    <p>Planning phase: Yield oracle integration (Ranger, Pangolin, Benqi) + strategy evaluator for LP range shapes. Depends on Solana Frontier bandwidth freeing up. Target delivery: May 17.</p>
+                    <span class="status status-queued">→ PLANNING</span>
+                </div>
+                <div class="project-card">
+                    <h3>💸 Personal Finance Agent</h3>
+                    <div class="tech">Python · Cron · Hermes · DeFi</div>
+                    <p>Bill reminders, debt consolidation optimizer, crypto-yield routing for idle capital. Voice-first assistant with Telegram notifications. Prototype stage using local LLM (llama3:8b).</p>
                     <span class="status status-dev">→ PROTOTYPE</span>
                 </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🗺️ Roadmap</h2>
+            <div class="roadmap">
+                <div class="roadmap-step">Research</div>
+                <div class="roadmap-step">Prototype</div>
+                <div class="roadmap-step">Dev</div>
+                <div class="roadmap-step">Production</div>
             </div>
         </div>
 
@@ -238,22 +292,28 @@
                         <th>Status</th>
                     </tr>
                     <tr>
+                        <td><strong>ETHGlobal Open Agents</strong></td>
+                        <td>0G + KeeperHub</td>
+                        <td>May 3</td>
+                        <td><span class="badge badge-submit">→ SUBMITTED</span></td>
+                    </tr>
+                    <tr>
                         <td><strong>Solana Frontier</strong></td>
                         <td>Solana</td>
                         <td>May 11</td>
-                        <td><span class="badge badge-building">BUILDING</span></td>
+                        <td><span class="badge badge-building">→ BUILDING</span></td>
                     </tr>
                     <tr>
                         <td><strong>Kite AI</strong></td>
                         <td>Kite L1</td>
-                        <td>May 11</td>
-                        <td><span class="badge badge-queued">QUEUED</span></td>
+                        <td>May 17</td>
+                        <td><span class="badge badge-queued">→ SCOPED</span></td>
                     </tr>
                     <tr>
                         <td><strong>Retro9000</strong></td>
                         <td>Avalanche</td>
                         <td>Jul 14</td>
-                        <td><span class="badge badge-queued">QUEUED</span></td>
+                        <td><span class="badge badge-queued">→ QUEUED</span></td>
                     </tr>
                 </table>
             </div>
@@ -280,23 +340,31 @@
                 <span class="skill-tag">Cross-Chain</span>
                 <span class="skill-tag">AI Agents</span>
                 <span class="skill-tag">Hermes</span>
+                <span class="skill-tag">ElevenLabs</span>
+                <span class="skill-tag">llama3:8b</span>
             </div>
         </div>
 
         <div class="section">
-            <h2>📈 Current Focus</h2>
+            <h2>📈 Current Focus & Recent Wins</h2>
             <p style="color: #9ca3af; line-height: 1.8;">
-                <strong>Goal:</strong> Transition to full-time crypto work by 2027–2028 via sustained hackathon results → auditing income → remote protocol role.<br><br>
-                <strong>Strategy:</strong> Build public proof-of-work. Win prizes. Accumulate credentials. Explore Philippines relocation for geo-arbitrage.<br><br>
-                <strong>Learning:</strong> Solana development, Rust, advanced security patterns, cross-chain architecture.
+                <strong>Goal:</strong> Leave Amazon by Q4 2026 via hackathon wins → Code4rena auditing → remote crypto role or $3–5K/mo in audit/incentive income.<br><br>
+                <strong>Strategy:</strong> Build public proof-of-work. Win prizes. Stack credentials. Move to Philippines Q3 for geo-arbitrage.<br><br>
+                <strong>Recent milestones (May 2026):</strong><br>
+                • <strong>Multi-agent voice system</strong> — ElevenLabs integration complete, daily standups automated<br>
+                • <strong>D5 Milestone Tracker</strong> — Script discrepancy protocol established, IL monitoring active<br>
+                • <strong>Solana Frontier</strong> — Final week sprint, 8 days to submission, DMOB executing full-time<br>
+                • <strong>Kite AI planning</strong> — Yield oracle targets identified, strategy evaluator in scoping<br>
+                • <strong>Hermes local model</strong> — llama3:8b installed, privacy-preserving agent execution live<br><br>
+                <strong>Learning:</strong> Solana (Anchor/Rust), advanced security patterns, cross-chain architecture.
             </p>
         </div>
     </div>
 
     <div class="footer">
         <p>
-            Built with 💚 by Jordan · Powered by GenTech Agents · Last updated: April 2026<br>
-            <span style="color: #3b82f6;">Building the agent-owned economy.</span>
+            Built with 💚 by Jordan · Powered by GenTech Agents · Last updated: May 4, 2026<br>
+            <span style="color: #22c55e;">Building the agent-owned economy.</span>
         </p>
     </div>
 </body>
