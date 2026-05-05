@@ -48,11 +48,37 @@ The existing sidetrack plan assumes building additional programs (`agent_brain`,
 - ✅ **No-idle directive acknowledged** — stopping point protocol active
 - Queue order: Solana Frontier P0 → Zerion CLI adapter → GoldRush adapter
 
+## 2026-05-05 17:45 UTC — Progress Update
+
+### ✅ Completed
+1. **Solana CLI installed** — v1.18.26, keypair generated
+2. **Vault → Repo code sync** — 4 programs (agent-registry, job-escrow, dispute-resolver, reputation) synced to `/root/projects/colosseum-frontier/colosseum-programs/`. Vault had 2,075 lines vs repo's 1,158 lines
+3. **Zerion CLI agent scaffold** — Full TypeScript project at `/root/projects/zerion-agent/`
+   - CLI with 5 commands: discover, execute, monitor, analyze, wallet
+   - Opportunity scanner (idle asset detection, yield discovery, risk scoring)
+   - Task delegator (policy enforcement, dry-run, batch execution)
+   - Zerion CLI wrapper (all API surfaces: analyze, trade, wallet, agent)
+   - **Compiles clean**, CLI runs and shows help correctly
+   - Saved to vault: `02-Labs/Hackathons/Active/Colosseum-Frontier/zerion-agent/`
+
+### 🚫 Blocker
+- **Anchor CLI won't compile** — Rust 1.75 too old, needs 1.85+ for anchor-cli 0.30.1
+- This blocks: `anchor build`, `anchor test`, `anchor deploy` (main track)
+- Need to install newer Rust or get pre-built anchor binary
+
+### 📋 Next (in order)
+1. Fix Anchor toolchain (install rustup + Rust 1.85+)
+2. `anchor build` all 4 programs
+3. Deploy to devnet
+4. Write integration tests
+5. Polish Zerion CLI + add yield oracle data
+
 ## Blockers
-- None currently — building
+- 🔴 **Anchor/Rust toolchain** — Rust 1.75 too old for anchor-cli 0.30.1
+- 🟡 **Zerion API key** — needed for full testing (x402 works without it)
 
 ## Next Updates
-- Code sync status (vault → repo)
-- Devnet deploy readiness
+- Anchor toolchain fix status
+- Devnet deployment readiness
 - Zerion API key (may need Jordan/YoYo to obtain)
 - Jordan video demo experiments (May 6)

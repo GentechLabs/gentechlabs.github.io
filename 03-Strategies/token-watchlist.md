@@ -15,9 +15,8 @@ Long term holds for staking, yield farming, etc. Prices fetched from **CoinMarke
 | 192 | Beam | BEAM | $0.001971 | -0.12% | ? | Gaming |
 | ? | Coq Inu | COQ | ? | ? | ? | Meme |
 | ? | The Arena | ARENA | ? | ? | ? | |
-| ? | Propbase | PROPS | ? | ? | ? | RWA focus |
-| ? | ~~Landshare~~ | ~~LAND~~ | ~~$0.1488~~ | — | — | ⚠️ **dApp shutting down (May 2026)** — removed from active watchlist |
-| ? | Silver | XAG | $73.03 | ? | ? | Commodity |
+| 18 | Propbase | PROPS | ? | ? | ? | RWA focus |
+| 19 | Silver | XAG | $73.03 | ? | ? | Commodity |
 
 ## CMC Watchlist
 - **Watchlist ID:** `67453707ad745f0bbd4ad54f`

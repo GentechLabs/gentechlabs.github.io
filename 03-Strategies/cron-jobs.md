@@ -139,10 +139,8 @@
 
 **Per Jordan (2026-04-27):**
 - LINK → **spot buy only** (too volatile for LP)
-- ~~Next pool research targets: **LAND / LSRWA** (tokenized real estate / RWA)~~ — LAND dApp shutting down (May 2026), removed
 
 **To research:**
-- [ ] ~~Identify LAND or LSRWA pool on supported DEX (LFJ, Uniswap V3)~~ — CANCELLED: LAND dApp shutting down
 - [ ] Check pool depth >$100k, volume >$10k/24h
 - [ ] Verify V2/V3 CL support (bidirectional/spot shapes available)
 - [ ] Evaluate cross-chain viability (Avalanche vs Arbitrum/Solana)

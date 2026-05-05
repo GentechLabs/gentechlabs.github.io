@@ -2,7 +2,7 @@
 type: config
 title: "Jordan's Coin Watchlist"
 created: 2026-04-20
-updated: 2026-04-28
+updated: 2026-05-05
 tags: [strategies, crypto, watchlist, cmc]
 ---
 
@@ -23,11 +23,11 @@ The cron pulls price data for any symbol listed below.
 - TAO — Bittensor, AI/ML network
 - XAUt — Tether Gold, gold-backed stable
 - BEAM — Beam, gaming
-- LAND — Landshare, RWA focus (CoinGecko ID: landshare)
 - PROPS — Propbase, RWA focus (CoinGecko ID: propbase)
 
 ## Removed
 
+- LAND — Landshare, RWA focus — dApp shutting down (May 2026)
 <!-- Coins you've dropped — keep for reference -->
 
 ---
@@ -59,4 +59,4 @@ The cron pulls price data for any symbol listed below.
 
 ---
 
-*Last updated: April 28, 2026*
+*Last updated: May 5, 2026*
