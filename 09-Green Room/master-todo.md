@@ -1,103 +1,95 @@
-# Master To-Do — 2026-04-25
+# Master To-Do — 2026-05-06 (Updated)
 
 ## 🔴 P0 — Solana Frontier (May 11) — PRIMARY
-- [ ] Finalize `agent-economy-solana` submission package
-- [ ] 5-layer architecture documentation + demo video
-- [ ] Sidetrack adapter submissions (Zerion $5K, GoldRush $3K)
+- [x] All 4 programs compile clean ✅
+- [x] GitHub token configured ✅
+- [x] Code pushed to GitHub (master branch) ✅
+- [ ] Write real integration tests (DMOB overnight)
+- [ ] Devnet deployment (needs SOL — Jordan getting May 7)
+- [ ] Demo video recording
+- [ ] Submission package finalization
 - [ ] Submit to Colosseum portal
 
-## 🟡 P1 — Kite AI Hackathon (May 17 — updated Apr 28)
-- [x] Brain backup to GitHub ✅ (github.com/Gentech-Labs/hermes-brain-backup)
+## 🟡 P1 — ACM Hackathon (May 27) — NEW
+- [x] Scoping doc created ✅
+- [ ] Review Swarms API docs
+- [ ] Build API wrapper for LP Monitor
+- [ ] Tokenize agent via Frenzy Mode
+- [ ] Seed liquidity pool
+- [ ] List on Swarms Marketplace
+- [ ] Demo video + documentation
+
+## 🟡 P2 — Kite AI Hackathon (May 17)
+- [x] Brain backup to GitHub ✅
 - [x] ElevenLabs voices configured ✅
 - [x] All 4 agents connected + running ✅
 - [x] Vault synced + restructured ✅
-- [x] AgentEscrow contracts (53/53 tests) — core escrow reusable for Kite AI
-- [x] Two-tier dispute resolution (IResolver refactor) — protocol-wide asset
-- [x] Security audit complete — BurnSplitter fix needed before deploy
+- [x] AgentEscrow contracts (53/53 tests) ✅
+- [x] Two-tier dispute resolution ✅
+- [x] Security audit complete ✅
 - [ ] Adapt contracts for Kite AI chain adapter
-- [ ] Prepare Kite AI submission (demo + writeup)
-- [ ] Submit alongside Solana Frontier (same deadline)
+- [ ] Prepare Kite AI submission
+- [ ] Submit alongside Solana Frontier
 
-## 🟡 P2 — ElevenHacks #9 Stripe × ElevenLabs (May 14)
-- [ ] Concept: AAE voice-powered payments/escrow demo
-- [ ] AAE Trading Arena assets → repurposed for Stripe sprint
-- [ ] ElevenAgents SDK v1.0 integration spike
-- [ ] 72-hour build window post-May 11
-- [ ] Stripe test account / API keys — Jordan to set up before May 12
-
-## 🟢 P2 — AAE Signal Spec Implementation (In Progress)
-**Source:** Jordan confirmed all LFJ dashboard signals as core AAE features  
-**Spec:** `01-Agency/AAE-Signal-Spec-Structured.md` (40+ fields, 9 sections)
-
-- [ ] **YoYo** — Optimize LP Monitor cron (`faed4f588aef`) to fetch all structured fields
-- [x] **YoYo** — Draft Personal Goal Engine spec (`03-Strategies/Personal-Goal-Engine-Spec.md`) ✅
-- [ ] **YoYo** — Update AAE Signal Spec to v2.1 with PGE fields ✅
-- [ ] **DMOB** — Scaffold contract structs (Position, Range, Yield, Milestone, Alert)
-- [ ] **DMOB** — Design rank-gated access control (Scout → Freedom)
-- [ ] **DMOB** — PGE contract structs + functions (handoff: `09-Green Room/handoff-pge-dmob-contracts.md`)
-- [ ] **DMOB** — Auto-compound trigger smart contract logic
-- [ ] **Desmond** — Alert severity microcopy (SILENT/LOW/HIGH/CELEBRATE)
+## 🟢 P2 — AAE Signal Spec Implementation
+- [ ] **YoYo** — Optimize LP Monitor cron to fetch all structured fields
+- [x] **YoYo** — Draft Personal Goal Engine spec ✅
+- [ ] **YoYo** — Update AAE Signal Spec to v2.1 with PGE fields
+- [ ] **DMOB** — Scaffold contract structs
+- [ ] **DMOB** — Design rank-gated access control
+- [ ] **DMOB** — PGE contract structs + functions
+- [ ] **DMOB** — Auto-compound trigger logic
+- [ ] **Desmond** — Alert severity microcopy
 - [ ] **Desmond** — Rank tier UX + unlock descriptions
 - [ ] **Desmond** — Milestone shareable cards + empty state copy
-- [ ] **Desmond** — PGE celebration/reflection/module copy (handoff: `09-Green Room/handoff-pge-desmond-content.md`)
-- [ ] **Gentech** — Review + consolidate reports from all three agents
+- [ ] **Desmond** — PGE celebration/reflection/module copy
 
-## 🟢 P2 — Personal Goal Engine (In Progress)
-**Source:** Jordan approved education layer + personalized ladders  
-**Spec:** `03-Strategies/Personal-Goal-Engine-Spec.md`
-
+## 🟢 P2 — Personal Goal Engine
 - [x] Draft full spec ✅
 - [x] AAE Signal Spec v2.1 extension ✅
-- [x] **YoYo** — Draft 10 Academy module scripts (`02-Labs/PGE-Academy-Modules.md`) ✅
+- [x] **YoYo** — Draft 10 Academy module scripts ✅
 - [x] **YoYo** — Integrate PGE track into Academy curriculum ✅
-- [ ] **Desmond** — Review module scripts, voice/tone pass, reflection prompts (`09-Green Room/handoff-pge-academy-desmond.md`)
-- [ ] **Desmond** — Celebration/reflection/module copy (original handoff: `09-Green Room/handoff-pge-desmond-content.md`)
-- [ ] **DMOB** — PGE contract structs + functions (`09-Green Room/handoff-pge-dmob-contracts.md`)
+- [ ] **Desmond** — Review module scripts, voice/tone pass
+- [ ] **Desmond** — Celebration/reflection/module copy
+- [ ] **DMOB** — PGE contract structs + functions
 - [ ] **YoYo** — Cron integration for PGE signals
 - [ ] **Gentech** — Front-end wireframes / review
-- [ ] **Jordan** — Review spec + Academy modules, approve priority vs Solana Frontier
+- [ ] **Jordan** — Review spec + Academy modules
 
-## 🟢 P2 — Prediction Market Layer (NEW — Cross-Team)
-**Source:** Jordan voice memo, Layer 10/11 of PGE  
-**Scope**: Social/game layer, NOT education tier. Market-making predictions + leaderboards.
-
-- [ ] **YoYo** — Feasibility: prediction market vs social betting, oracle options, game theory
-- [ ] **DMOB** — Contract architecture: binary markets, escrow, scoring, GenLayer oracle fit
-- [ ] **Desmond** — UX framing: separate from edu flow, leaderboard design, copy
-- [ ] **Gentech** — Consolidate assessments into recommendation for Jordan
-
-**Handoff:** `09-Green Room/2026-04-25-pge-prediction-market-handoff.md`
-
-## ⚫ SKIPPED / DROPPED
+## 🟢 P2 — Prediction Market Layer
+- [ ] **YoYo** — Feasibility: prediction market vs social betting
+- [ ] **DMOB** — Contract architecture: binary markets, escrow, scoring
+- [ ] **Desmond** — UX framing: leaderboard design, copy
+- [ ] **Gentech** — Consolidate assessments into recommendation
 
 ## ⚫ SKIPPED / DROPPED
 | Hackathon | Reason |
 |-----------|--------|
-| ElevenHacks #6 Zed | 5 days insufficient — concept banked for Stripe |
-| ElevenHacks #7 v0 | Collides with Kite AI deadline (Apr 30) |
+| ElevenHacks #6 Zed | 5 days insufficient |
+| ElevenHacks #7 v0 | Collides with Kite AI deadline |
 | ETHGlobal Open Agents | DROPPED Apr 24 |
 | Nous Hermes Creative | SKIPPED per Jordan |
 | Dev3pack Global | SKIPPED per Jordan |
-| Surge Ignition S1 | Ended Apr 24 — WATCH for S2 |
+| Surge Ignition S1 | Ended Apr 24 |
 
 ## 📅 Pipeline (All Feeds AAE → July Retro / Fall Colosseum)
 | Target | Date | Prize | Notes |
 |--------|------|-------|-------|
-| Cursor × ElevenLabs | May 7 | TBA | 👀 Watch — if prize is strong, light entry possible |
+| Cursor × ElevenLabs | May 7 | TBA | Watch |
 | Blackbox × ElevenLabs | May 21 | TBA | Wait for reveal |
 | D-ID × ElevenLabs | May 28 | $11,980 | Wait for reveal |
 | Google Cloud Rapid Agent | Jun 11 | TBD | AgentEscrow on GCP + Gemini |
 | ETHConf | Jun 8–10 | — | Conference + hack hybrid |
-| ETHGlobal New York | Jun 12–14 | $100K+ | Physical — networking play |
-| **AVAX Retro9000** | **Jul 14** | **$75K** | **"The retro thing" — AAE on Avalanche** |
-| ETHGlobal Lisbon | Jul 24–26 | $100K+ | Physical — ATHENS grant aligns |
-| ETHOnline 2026 | Sep 4–16 | $100K+ | Virtual — AgentEscrow fits |
-| **Fall 2026 Colosseum** | **September** | **$125K+** | **AAE flagship cycle repeats** |
+| ETHGlobal New York | Jun 12–14 | $100K+ | Physical |
+| **AVAX Retro9000** | **Jul 14** | **$75K** | **"The retro thing"** |
+| ETHGlobal Lisbon | Jul 24–26 | $100K+ | Physical |
+| ETHOnline 2026 | Sep 4–16 | $100K+ | Virtual |
+| **Fall 2026 Colosseum** | **September** | **$125K+** | **AAE flagship** |
 | ETHGlobal Tokyo | Sep 25–27 | $100K+ | Physical |
 | ETHGlobal Mumbai | Nov 6–8 | $100K+ | Physical |
 
 ## 💰 Grants & Builder Programs
-- [ ] GenLayer Incentivized Builder Program — sign up, start contributing
+- [ ] GenLayer Incentivized Builder Program
 - [ ] AVAX Retro9000 grant application (Jul 14 deadline)
 - [ ] Immunefi — check AgentEscrow-related protocols
 - [ ] Code4rena — active contests
@@ -109,8 +101,9 @@
 - [ ] Inter-agent coordination protocol
 - [ ] Hermes upstream sync
 - [ ] Custom ElevenLabs voice cloning per agent
-- [ ] Self-evolution skill integration (hermes-agent-self-evolution)
+- [ ] Self-evolution skill integration
 
 ---
-**Last updated:** 2026-04-25
-**Updated by:** Desmond
+**Last updated:** 2026-05-06 22:00 UTC
+**Updated by:** Desmond (overnight sprint)
+**Next update:** Jordan morning review

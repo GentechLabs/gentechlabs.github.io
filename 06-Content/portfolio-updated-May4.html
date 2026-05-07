@@ -168,45 +168,11 @@
         }
     
         html { scroll-behavior: smooth; }
-        .roadmap {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin: 60px 0;
-            position: relative;
-            padding: 20px 0;
-        }
-        .roadmap::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: #22c55e;
-            transform: translateY(-50%);
-            z-index: 0;
-        }
-        .roadmap-step {
-            position: relative;
-            z-index: 1;
-            background: #0a0a0a;
-            border: 2px solid #22c55e;
-            color: #22c55e;
-            padding: 12px 24px;
-            border-radius: 30px;
-            font-weight: bold;
-            text-align: center;
-            flex: 1;
-            margin: 0 10px;
-            max-width: 160px;
-            white-space: nowrap;
-        }
     </style>
 </head>
 <body>
     <div class="hero">
-        <h1>👤 Jordan the ProtoJay</h1>
+        <h1>Jordan the ProtoJay</h1>
         <p class="tagline">GenTech Founder · Solidity Developer · Agent Economy Builder</p>
         <div class="links">
             <a href="https://github.com/ProtoJay4789" target="_blank">🐙 GitHub</a>
@@ -273,11 +239,52 @@
 
         <div class="section">
             <h2>🗺️ Roadmap</h2>
-            <div class="roadmap">
-                <div class="roadmap-step">Research</div>
-                <div class="roadmap-step">Prototype</div>
-                <div class="roadmap-step">Dev</div>
-                <div class="roadmap-step">Production</div>
+            <div style="position: relative; padding-left: 40px;">
+                <div style="position: absolute; left: 15px; top: 0; bottom: 0; width: 3px; background: #22c55e;"></div>
+                
+                <div style="margin-bottom: 30px; position: relative;">
+                    <div style="position: absolute; left: -33px; top: 5px; width: 12px; height: 12px; background: #22c55e; border-radius: 50%;"></div>
+                    <div style="color: #22c55e; font-weight: bold; font-size: 0.9em; margin-bottom: 5px;">RESEARCH</div>
+                    <div style="color: #fbbf24; font-weight: 600;">genlayer-recon</div>
+                    <div style="color: #60a5fa; font-size: 0.85em;">Apr-May 2026</div>
+                    <div style="color: #9ca3af; font-size: 0.9em; margin-top: 5px;">GenLayer SDK deep-dive, Intelligent Contracts prototype, integration pathways for AgentEscrow/Kite.</div>
+                </div>
+                
+                <div style="margin-bottom: 30px; position: relative;">
+                    <div style="position: absolute; left: -33px; top: 5px; width: 12px; height: 12px; background: #22c55e; border-radius: 50%;"></div>
+                    <div style="color: #22c55e; font-weight: bold; font-size: 0.9em; margin-bottom: 5px;">PROTOTYPE</div>
+                    <div style="color: #fbbf24; font-weight: 600;">Job-Applications Agent</div>
+                    <div style="color: #60a5fa; font-size: 0.85em;">Apr 2026</div>
+                    <div style="color: #9ca3af; font-size: 0.9em; margin-top: 5px;">Task pipeline automation for outreach + tracking.</div>
+                    <div style="color: #fbbf24; font-weight: 600; margin-top: 10px;">AgentEscrow (v1)</div>
+                    <div style="color: #60a5fa; font-size: 0.85em;">Apr 2026</div>
+                    <div style="color: #9ca3af; font-size: 0.9em; margin-top: 5px;">Multi-agent escrow contract, Phantom wallet integration.</div>
+                </div>
+                
+                <div style="margin-bottom: 30px; position: relative;">
+                    <div style="position: absolute; left: -33px; top: 5px; width: 12px; height: 12px; background: #22c55e; border-radius: 50%;"></div>
+                    <div style="color: #22c55e; font-weight: bold; font-size: 0.9em; margin-bottom: 5px;">DEVELOPMENT</div>
+                    <div style="color: #fbbf24; font-weight: 600;">Travel-Agent</div>
+                    <div style="color: #60a5fa; font-size: 0.85em;">May-Jun 2026</div>
+                    <div style="color: #9ca3af; font-size: 0.9em; margin-top: 5px;">Public API aggregation, voice-first interface, Phase 1 foundation.</div>
+                    <div style="color: #fbbf24; font-weight: 600; margin-top: 10px;">auto-rebalance-gas-abstraction</div>
+                    <div style="color: #60a5fa; font-size: 0.85em;">May-Jun 2026</div>
+                    <div style="color: #9ca3af; font-size: 0.9em; margin-top: 5px;">Gas optimization engine, scenario-based rebalancing, measurable savings.</div>
+                </div>
+                
+                <div style="position: relative;">
+                    <div style="position: absolute; left: -33px; top: 5px; width: 12px; height: 12px; background: #22c55e; border-radius: 50%;"></div>
+                    <div style="color: #22c55e; font-weight: bold; font-size: 0.9em; margin-bottom: 5px;">PRODUCTION</div>
+                    <div style="color: #fbbf24; font-weight: 600;">Hermes-kanban</div>
+                    <div style="color: #60a5fa; font-size: 0.85em;">Apr 2026-ongoing</div>
+                    <div style="color: #9ca3af; font-size: 0.9em; margin-top: 5px;">Obsidian-Kanban bridge, 8+ sprints shipped, REST API + CLI.</div>
+                    <div style="color: #fbbf24; font-weight: 600; margin-top: 10px;">AAE Dashboard</div>
+                    <div style="color: #60a5fa; font-size: 0.85em;">May 2026</div>
+                    <div style="color: #9ca3af; font-size: 0.9em; margin-top: 5px;">Live yield analytics, multi-chain LP tracking, DCA automation.</div>
+                    <div style="color: #fbbf24; font-weight: 600; margin-top: 10px;">DMobs-Portfolio</div>
+                    <div style="color: #60a5fa; font-size: 0.85em;">Apr 2026</div>
+                    <div style="color: #9ca3af; font-size: 0.9em; margin-top: 5px;">Social amplification showcase, distribution-ready design.</div>
+                </div>
             </div>
         </div>
 
@@ -363,7 +370,7 @@
 
     <div class="footer">
         <p>
-            Built with 💚 by Jordan · Powered by GenTech Agents · Last updated: May 4, 2026<br>
+            Built with 💚 by Jordan · Powered by GenTech Agents · Last updated: May 6, 2026<br>
             <span style="color: #22c55e;">Building the agent-owned economy.</span>
         </p>
     </div>

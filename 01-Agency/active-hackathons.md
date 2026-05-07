@@ -5,7 +5,10 @@ Status: Updated Apr 28, 2026
 - **Solana Frontier (Colosseum)** 🟢: Agent Economy — Solana-native high-throughput labor market. **Deadline: May 11**. $230K+ pool + $250K accelerator.
 - **Kite AI Hackathon** 🟢: Agent Economy — AAE lifecycle landing on Kite AI settlement. **Deadline: May 17**. $10K pool. Track: Agentic Commerce.
 
-## Next Up (After Solana/Kite)
+## Queued (After Current Focus)
+- **Swarms ACM Hackathon** 🔵: Tokenized agents/prompts on Swarms Marketplace. **Deadline: May 27**. $30K pool (Solana, $SWARMS, USDC). LP Monitor is top submission candidate. **Repo:** TBD (GitHub token expired — needs new token). **DMOB scoping in Labs.**
+
+## Next Up (After Solana/Kite + Swarms)
 - **Google Cloud Rapid Agent** 🆕: Build agents with Gemini + Google Cloud Agent Builder + MCP. **Deadline: Jun 11**. $60K pool. 383 participants. Managed by Google on Devpost.
 - **Google for Startups AI Agents Challenge** 🟡: AI agents prototype → production. **Deadline: Jun 5**. $60K cash + $37.5K Google Cloud credits + $500 credits per participant. Register: https://goo.gle/486nbl4
 
