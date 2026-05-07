@@ -1,24 +1,25 @@
 {
   "projects": [
     {
-      "id": "agent-escrow-solana",
+      "id": "agent-escrow",
       "title": "AgentEscrow",
-      "description": "AgentEscrow \u2014 GenTech project",
+      "description": "Cross-chain payment infrastructure with AI agent integration. Agents escrow, validate, and release payments automatically. x402 protocol integration.",
       "tech": [
         "Solana",
         "Anchor",
-        "Rust"
+        "Rust",
+        "x402"
       ],
       "status": "building",
       "deadline": "2026-05-11",
       "timeline": "May 2026",
       "highlight": true,
-      "vault_path": "03-Projects/agent-escrow-solana"
+      "vault_path": "03-Projects/AAE/agent-escrow-architecture.md"
     },
     {
       "id": "kite-ai",
       "title": "Kite AI Governance",
-      "description": "Kite AI Governance \u2014 GenTech project",
+      "description": "Agent economy lifecycle landing on Kite AI settlement layer. AAE integration for decentralized agent marketplace governance.",
       "tech": [
         "Avalanche",
         "Python",
@@ -28,82 +29,86 @@
       "deadline": "2026-05-17",
       "timeline": "May 2026",
       "highlight": true,
-      "vault_path": "03-Projects/kite-ai"
+      "vault_path": "02-Labs/Hackathons/Kite-AI/"
     },
     {
       "id": "lets-fg",
       "title": "Let's FG Travel Agent",
-      "description": "Let's FG Travel Agent \u2014 GenTech project",
+      "description": "Voice-first travel planning agent. Natural language flight/hotel search, price tracking, and booking automation via Pipecat and Maps APIs.",
       "tech": [
         "Pipecat",
         "Maps API",
-        "Python"
+        "Python",
+        "Telegram"
       ],
       "status": "live",
       "deadline": null,
       "timeline": "Apr 2026",
       "highlight": false,
-      "vault_path": "03-Projects/lets-fg"
+      "vault_path": "03-Projects/Travel-Agent/"
     },
     {
-      "id": "lfj-avax-usdc-rebalance",
-      "title": "LFJ AVAX/USDC Auto-Rebalance",
-      "description": "LFJ AVAX/USDC Auto-Rebalance \u2014 GenTech project",
+      "id": "lfj-avax-usdc",
+      "title": "AAE Defi Milestones",
+      "description": "Automated DeFi portfolio management system with cross-chain rebalancing and gas optimization. Monitors pool ranges and rebalances positions to optimize fee capture and minimize IL.",
       "tech": [
-        "Solana",
         "DeFi",
-        "Python"
+        "Python",
+        "Cross-Chain",
+        "Gas Optimization"
       ],
       "status": "live",
       "deadline": null,
       "timeline": "Apr 2026",
       "highlight": false,
-      "vault_path": "03-Projects/lfj-avax-usdc-rebalance"
+      "vault_path": "03-Projects/DeFi/LFJ-AVAX-USDC.md"
     },
     {
       "id": "hermes-kanban",
       "title": "Hermes Kanban",
-      "description": "Hermes Kanban \u2014 GenTech project",
+      "description": "TUI-based kanban board for autonomous agent task management. Integrated with Hermes agent orchestration for real-time task tracking and handoffs.",
       "tech": [
         "Hermes",
-        "Kanban",
-        "TUI"
+        "Python",
+        "TUI",
+        "SQLite"
       ],
       "status": "live",
       "deadline": null,
       "timeline": "Mar 2026",
       "highlight": false,
-      "vault_path": "03-Projects/hermes-kanban"
+      "vault_path": "03-Projects/hermes-kanban/"
     },
     {
       "id": "birdeye-bip",
       "title": "Birdeye BIP",
-      "description": "Birdeye BIP \u2014 GenTech project",
+      "description": "On-chain market data adapter for Birdeye ecosystem. Real-time price feeds, order book data, and volume metrics for agent trading strategies.",
       "tech": [
         "Solana",
-        "Data",
-        "Python"
+        "Python",
+        "Data Pipeline"
       ],
       "status": "research",
       "deadline": null,
       "timeline": "Feb 2026",
       "highlight": false,
-      "vault_path": "03-Projects/birdeye-bip"
+      "vault_path": "03-Projects/BirdeyeBIP/"
     },
     {
       "id": "tech-payment-router",
       "title": "Tech Payment Router",
-      "description": "Tech Payment Router \u2014 GenTech project",
+      "description": "Ethereum payment router with x402 protocol support. Enables automated recurring payments, subscription billing, and micro-transaction routing.",
       "tech": [
         "Ethereum",
-        "Payments",
-        "Solidity"
+        "Solidity",
+        "x402",
+        "Payments"
       ],
       "status": "research",
       "deadline": null,
       "timeline": "Feb 2026",
       "highlight": false,
-      "vault_path": "03-Projects/tech-payment-router"
+      "vault_path": "03-Projects/tech-burn-test/"
     }
   ],
   "generated": "2026-05-04",
