@@ -1,9 +1,11 @@
 # GenTech Multi-Agent Workflow v1.1
-Last Updated: 2026-05-05 (Daily Sync)
+Last Updated: 2026-05-07 (Daily Sync — End of Day)
 
 ## Active Sprint — Week of May 4–11, 2026
-- **Solana Frontier** — Day 5/8, deadline **May 11** (P0) — T-6 days
-- **Kite AI** — Secondary priority, deadline **May 11** (P1) — corrected from May 17
+- **Solana Frontier** — Day 4/8, deadline **May 11** (P0) — T-4 days
+- **Kite AI** — Secondary priority, deadline **May 17** (P1) — 10 days
+- **Swarms ACM** — Queued post-Frontier (flexible timeline, May 27) — P1
+- **HeyGen** — May 14-15, registration pending (P2)
 
 ## 🧘 System State — Incident Resolution (May 5 Status)
 
@@ -157,22 +159,22 @@ Tomorrow May 6, ~16:00 UTC — check sprint activation, agent check-ins, hackath
 
 ## Memory Entry — 2026-05-07 (Gentech)
 
-**Type:** Third Break Coordination — Late-Shift Wrap-Up
-**Time:** Thu May 7 ~13:30 UTC
-**Status:** ACTIVE — Housekeeping Day, Blockers Persisting
+**Type:** Daily Second Brain Sync — End of Day
+**Time:** Thu May 7 ~16:00 UTC
+**Status:** ACTIVE — Sprint Homestretch, Blockers Persisting
 
 ### Sprint Context (W19 Day 4)
 - **Focus:** Solana Frontier homestretch. 4 days to deadline (May 11).
-- **Today:** Vault cleanup, DeFi rename, Swarms ACM greenlit, smart routing dispatched, TAO research queued.
-- **Key win:** 102-file DeFi rename + vault consolidation completed. Smart routing Option 1 dispatched.
-- **Critical gap:** SOL needed + Anchor toolchain broken + Nous OAuth revoked.
+- **Today:** Vault cleanup, DeFi rename (102 files), Swarms ACM greenlit, smart routing dispatched, LayerZero crisis intel, portfolio health check, HeyGen hackathon identified.
+- **Key wins:** 102-file DeFi rename + vault consolidation. Smart routing Option 1. LayerZero DVN crisis intel gathered. LP position healthy (311-422% APR).
+- **Critical gap:** SOL needed + Anchor toolchain broken + Nous OAuth revoked + GitHub token expired.
 
 ### Department State
 | Dept | Agent | Status | Notes |
 |------|------|--------|-------|
-| HQ | Jordan | Active | Overnight sprint output ready for review |
-| Labs | Dmob | Pending | Integration tests assigned; Swarms scope requested |
-| Strategies | YoYo | Active | DeFi rename done; TAO research dispatched |
+| HQ | Jordan | Active | Overnight sprint output ready, hackathon tracker updated |
+| Labs | Dmob | Pending | LP analysis done (healthy); integration tests + toolchain fix needed |
+| Strategies | YoYo | Active | DeFi rename done; TAO/Sunrise research dispatched; LayerZero monitor updated |
 | Entertainment | Desmond | Active | ACM plan drafted; Swarms handoff posted |
 
 ### Key Blockers
@@ -181,15 +183,22 @@ Tomorrow May 6, ~16:00 UTC — check sprint activation, agent check-ins, hackath
 3. 🔴 Nous OAuth — DMOB re-auth needed
 4. 🟡 GitHub token — blocks Swarms ACM repo
 5. 🟡 Handoff board — H001/H003 overdue 15+ days
+6. 🟡 Portfolio data sync — 2 critical issues (stale inline JS, no deployment pipeline)
+
+### Key Intel
+- **LayerZero DVN crisis:** KelpDAO $290M exploit confirmed. Chainlink CCIP gaining $1B+. Validates multi-DVN in AgentEscrow cross-chain design.
+- **LP position:** $134.94, 68.1% in range, 311-422% APR, $1.15-$1.56/day fees. Healthy.
+- **HeyGen hackathon:** May 14-15, $3K+$1K×2. Jordan to sign up ASAP.
+- **Security contests:** K2 ($135k, Stellar) qualifying. 20+ bounties ($74M+).
 
 ### Plans for Tomorrow
-- Jordan: SOL + social content review + overnight sprint review
+- Jordan: SOL + social content review + HeyGen signup + overnight sprint review
 - DMOB: Toolchain fix → devnet deploy → tests
 - All agents: Update coordination board check-in
 - Social posting window: May 8-9
 
-### Files Created This Session
-- `11-Mess Hall/daily/2026-05-07-summary.md` — daily digest
+### Files Created/Updated This Session
+- `11-Mess Hall/daily/2026-05-07-summary.md` — daily digest (updated)
 - `00-Working-Memory.md` — updated (this entry)
 
 ### Next Daily Sync
