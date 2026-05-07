@@ -1,18 +1,18 @@
-# D5 Milestone Summary — Completed (YoYo, Apr 26)
+# DeFi Milestone Summary — Completed (YoYo, Apr 26)
 
 **Status:** ✅ Done  
-**Source:** Jordan voice message — _“consolidate this daily LP summary to the D5 milestone”_  
+**Source:** Jordan voice message — _“consolidate this daily LP summary to the DeFi milestone”_  
 **Date:** 2026-04-26 08:25 EDT
 
 ---
 
 ## What Changed
 
-1. **Script created:** `d5-milestone-summary.py` at `/root/.hermes/scripts/`
-2. **Cron updated:** `c9c6766b6039` — renamed to “YoYo — D5 Milestone Summary (Daily)”
+1. **Script created:** `defi-milestone-summary.py` at `/root/.hermes/scripts/`
+2. **Cron updated:** `c9c6766b6039` — renamed to “YoYo — DeFi Milestone Summary (Daily)”
 3. **Old script retired:** `daily-lp-summary.py` still exists but no longer referenced by cron
 4. **Vault docs updated:**
-   - `03-Strategies/cron-jobs.md` — added D5 Milestone to manifest
+   - `03-Strategies/cron-jobs.md` — added DeFi Milestone to manifest
    - `03-Strategies/LP-Monitor-Rules.md` — added consolidation milestone entry
    - `02-Labs/LP-Tracker-Config.md` — marked consolidation complete
    - `09-Green Room/D5-Strategy-Engine-Evolution.md` — ticked action item + added live snapshot
@@ -23,7 +23,7 @@
 
 | Section | Content |
 |---------|---------|
-| **D5 Milestone Ladder** | Scout→Raider→Warlord→Sovereign with progress bars |
+| **DeFi Milestone Ladder** | Scout→Raider→Warlord→Sovereign with progress bars |
 | **Revenue Summary** | Est. daily fees, implied APR, cumulative fees, days in range |
 | **Micro-DCA Triggers** | Efficiency-based bonus amounts ($10 yellow, $20 red) |
 | **Action Items** | Compound ready, rebalance needed, Monday DCA reminder |

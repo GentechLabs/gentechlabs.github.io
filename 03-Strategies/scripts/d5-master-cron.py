@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-D5 Master Cron — Consolidated report: CMC Watchlist + D5 LP Milestone
+DeFi Milestone Cron — Consolidated report: CMC Watchlist + LP Milestone
 Runs 4x/day. Silent unless:
   - Any CMC token moves ≥3% in 24h
   - LP out of range OR efficiency <50% OR tier crosses
@@ -67,8 +67,8 @@ POOL = {
     "name": "AVAX/USDC",
     "chain": "avalanche",
     "pool_address": "0x864d4e5ee7318e97483db7eb0912e09f161516ea",
-"range_low": 9.25,
-        "range_high": 9.54,
+"range_low": 9.45,
+        "range_high": 9.74,
     "shape": "curve",
     "position_usd": 138.92,
     "fee_tier_bps": 5,
@@ -239,15 +239,29 @@ def est_daily_fees(volume, liq, pos_usd, fee_bps):
     return round((volume * fee_bps / 10000) * (pos_usd / liq), 2)
 
 def get_tier(daily_fees):
-    curr = 0
+    # Find the highest milestone that has been reached or surpassed
+    curr_idx = -1
     for i, m in enumerate(MILESTONES):
         if daily_fees >= m["daily_fees"]:
-            curr = i
-    nxt = min(curr + 1, len(MILESTONES) - 1)
-    ct = MILESTONES[curr]["daily_fees"]
-    nt = MILESTONES[nxt]["daily_fees"]
-    pct = 0.0 if nt <= ct or daily_fees <= ct else round(((daily_fees - ct) / (nt - ct)) * 100, 1)
-    return curr, MILESTONES[curr]["label"], nxt, MILESTONES[nxt]["label"], pct
+            curr_idx = i
+        else:
+            break  # Found first milestone not reached
+    
+    # If no milestone reached (curr_idx = -1), we are before the first milestone
+    if curr_idx == -1:
+        nxt_idx = 0
+        pct = round((daily_fees / MILESTONES[0]["daily_fees"]) * 100, 1)
+        return -1, "Unranked", nxt_idx, MILESTONES[nxt_idx]["label"], pct
+    
+    # If we've reached the highest milestone, pct = 100
+    if curr_idx == len(MILESTONES) - 1:
+        return curr_idx, MILESTONES[curr_idx]["label"], curr_idx, MILESTONES[curr_idx]["label"], 100.0
+    
+    nxt_idx = curr_idx + 1
+    ct = MILESTONES[curr_idx]["daily_fees"]
+    nt = MILESTONES[nxt_idx]["daily_fees"]
+    pct = round(((daily_fees - ct) / (nt - ct)) * 100, 1)
+    return curr_idx, MILESTONES[curr_idx]["label"], nxt_idx, MILESTONES[nxt_idx]["label"], pct
 
 def dca_by_efficiency(eff):
     """Shape-aware DCA sizing — lower efficiency = smaller, wait-and-see DCA."""
@@ -440,7 +454,7 @@ def print_report(results, alerts, lp):
     time_str = now.strftime("%I:%M %p EDT")
     date_str = now.strftime("%A, %B %d")
 
-    lines = [f"🏆 **D5 Master Report** — {date_str} @ {time_str}"]
+    lines = [f"🏆 **DeFi Milestone Report** — {date_str} @ {time_str}"]
 
     # CMC Watchlist — always compact
     if alerts:
@@ -472,9 +486,9 @@ def print_report(results, alerts, lp):
     lines.append(f"• Cumulative: ${lp['cum']:.2f}")
     lines.append(f"• Days in Range: {lp['days']:.1f}")
 
-    # D5 Ladder
+    # DeFi Milestone Ladder
     lines.append("")
-    lines.append("📈 **D5 Milestone Ladder:**")
+    lines.append("📈 **DeFi Milestone Ladder:**")
     for m in MILESTONES:
         t = m["tier"]
         lab = m["label"]
@@ -545,7 +559,7 @@ def print_report(results, alerts, lp):
 
     lines.append("")
     lines.append("💡 **Strategy**: Bear market accumulation — farm the bottom, compound rewards.")
-    lines.append("📊 Data: CMC + DexScreener | D5 Engine v1")
+    lines.append("📊 Data: CMC + DexScreener | DeFi Milestone Engine v1")
 
     print("\n".join(lines))
 

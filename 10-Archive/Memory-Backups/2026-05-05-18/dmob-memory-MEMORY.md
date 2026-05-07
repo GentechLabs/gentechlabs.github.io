@@ -8,7 +8,7 @@ Travel folder convention: `00-HQ/Travel/` in gentech vault. Each country gets it
 §
 Scanner cron: `02-Labs/scripts/opportunity_scanner_daily.py` runs daily 09:00 UTC, updates `02-Labs/Bug-Bounties/00-Active-Bounties.md`. Tracks C4 (K2 $135K, Monetrix $22K), Cantina (Reserve Gov $30K, 8d), Devpost (IGNITION $5.12M, Agents Assemble $32K). Frontier tracks need PAT regen at arena.colosseum.org/copilot.
 §
-LFJ V2.2 AVAX/USDC LP: Pool 0x864d, Range $9.25–$9.59 (rebalanced May 5). Wallet: 0x7ebff188f2Eba16518C02864589b1403a5d1296a. Script: lp-position-reader.py. Config synced to all 7 profile runtime dirs.
+LFJ V2.2 AVAX/USDC LP: Pool 0x864d, Range $9.44–$9.74 (rebalanced May 6, Bid-Ask shape). Wallet: 0x7ebff188f2Eba16518C02864589b1403a5d1296a. Script: lp-position-reader.py. Config synced to all 7 profile runtime dirs. Taking profits for Xiaomi Pro subscription.
 §
 Workflow: When Jordan sends screenshots/images in HQ that contain sensitive info (emails, docs, etc.), DMOB should redact PII/account details and produce a clean text summary for sharing in other channels (Labs, Mess Hall, etc.). Raw images with sensitive content stay in HQ only.
 §

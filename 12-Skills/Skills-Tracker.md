@@ -1,6 +1,6 @@
 # Skills Tracker — Gentech Agent Stack
 
-Last updated: 2026-04-26
+Last updated: 2026-05-07
 
 Master list of all skills installed across the Gentech agent ecosystem. Review pending installs here, suggest removals, track what's active.
 
@@ -22,8 +22,8 @@ Master list of all skills installed across the Gentech agent ecosystem. Review p
 ### 🔲 Pending Review
 | Skill | Why | Priority |
 |-------|-----|----------|
-| ZealynxSecurity/krait | 90% precision on 40 Code4rena blind contests | HIGH |
-| trailofbits/skills | Top-tier security firm — vulnerability detection | HIGH |
+| ~~ZealynxSecurity/krait~~ | 90% precision on 40 Code4rena blind contests | APPROVED |
+| ~~trailofbits/skills~~ | Top-tier security firm — vulnerability detection | APPROVED |
 | CDSecurity/cdsecurity-skills | Smart contract security skills | MEDIUM |
 | quillai-network/quillshield_skills | Invariant detection, flash loan + oracle attack chains | MEDIUM |
 | PlamenTSV/plamen | Autonomous Web3 security audit agent | MEDIUM |
@@ -31,7 +31,7 @@ Master list of all skills installed across the Gentech agent ecosystem. Review p
 | SunWeb3Sec/DeFiVulnLabs | Common smart contract vulnerabilities (learning) | MEDIUM |
 | rosarioborgesi/ethernaut-challenges | Ethernaut challenges (learning) | MEDIUM |
 | Frankcastleauditor/Solana-Audit-Arena | Weekly Solana security competition | LOW |
-| immunefi-team/Web3-Security-Library | Web3 security tutorials + tools | LOW |
+| ~~immunefi-team/Web3-Security-Library~~ | 13+ months stale, removed per audit | DROPPED |
 
 ---
 
@@ -45,7 +45,7 @@ Master list of all skills installed across the Gentech agent ecosystem. Review p
 ### 🔲 Pending Review
 | Skill | Why | Priority |
 |-------|-----|----------|
-| NethermindEth/defi-skills | Natural language → unsigned DeFi transactions | HIGH |
+| ~~NethermindEth/defi-skills~~ | Natural language → unsigned DeFi transactions | APPROVED |
 | HKUDS/AI-Trader | 100% automated agent-native trading | MEDIUM |
 | almanak-co/sdk | Production DeFi strategy framework for quants | MEDIUM |
 | TauricResearch/TradingAgents | Multi-agent LLM financial trading | MEDIUM |
@@ -67,11 +67,11 @@ Master list of all skills installed across the Gentech agent ecosystem. Review p
 ### 🔲 Pending Review
 | Skill | Why | Priority |
 |-------|-----|----------|
-| calesthio/OpenMontage | 12 pipelines, 52 tools, 500+ video production skills | HIGH |
+| ~~calesthio/OpenMontage~~ | 12 pipelines, 52 tools, 500+ video production skills | APPROVED |
 | zhouxiaoka/autoclip | AI video clipping + highlight generation | MEDIUM |
 | gitroomhq/postiz-agent | Social media scheduling via agent | MEDIUM |
 | siddharthvaddem/openscreen | Open-source screen recording/demos | LOW |
-| OpenBMB/VoxCPM | VoxCPM2 TTS — voice design + cloning (ElevenLabs replacement) | HIGH |
+| ~~OpenBMB/VoxCPM~~ | VoxCPM2 TTS — voice design + cloning (ElevenLabs replacement) | APPROVED |
 | microsoft/VibeVoice | Voice AI reference | LOW |
 
 ---
@@ -105,6 +105,7 @@ Master list of all skills installed across the Gentech agent ecosystem. Review p
 | Skill | Reason | Date |
 |-------|--------|------|
 | hermes-workspace (3rd party) | Backend connection issues, native GMC works better | 2026-04-16 |
+| immunefi-team/Web3-Security-Library | 13+ months stale, removed per consolidation audit | 2026-05-07 |
 
 ---
 

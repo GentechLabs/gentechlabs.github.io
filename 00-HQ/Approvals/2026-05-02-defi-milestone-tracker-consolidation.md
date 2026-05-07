@@ -69,9 +69,9 @@ Create **`d5-milestone-tracker.py`** as the single canonical LP + milestone moni
 
 ## What We Need
 
-- [ ] **Jordan approval** to retire duplicate cron jobs (`1f10f10b2a07`, `915b1df66348`, `862ae0c1f85d`) and establish `D5 Milestone Tracker` as the sole CMC+LP milestone monitor
+- [x] **Jordan approval** to retire duplicate cron jobs (`1f10f10b2a07`, `915b1df66348`, `862ae0c1f85d`) and establish `DeFi Milestones` as the sole CMC+LP milestone monitor — **APPROVED 2026-05-07**
 - [ ] **Decision:** Retire `8ae8a04f3b71` (10-min LP Position Monitor) or keep as fallback?
-- [ ] **YoYo execution** — update Hermes scheduler with new job ID, remove retired jobs
+- [x] **YoYo execution** — update Hermes scheduler with new job ID, remove retired jobs — **DONE 2026-05-07** (job: `faed4f588aef`)
 - [ ] **DMOB sign-off** on consolidated script logic (alert prefixes, state migration, efficiency thresholds)
 
 ---
@@ -87,3 +87,14 @@ Create **`d5-milestone-tracker.py`** as the single canonical LP + milestone moni
 ---
 
 *Coordinated by Desmond (Creative). Technical implementation: DMOB. Cron operations: YoYo. Final approval: Jordan.*
+
+---
+
+## APPROVED
+
+**Status:** ✅ APPROVED
+**Approved by:** Jordan
+**Date approved:** 2026-05-07
+**Consolidated job:** `faed4f588aef` — "DeFi Milestones" (4×/day: 08:15, 12:15, 16:15, 20:15 ET)
+**Script:** `d5-milestone-tracker.py`
+**Naming note:** Jordan corrected naming from "D5" to "DeFi Milestones". Script filenames not renamed to avoid breaking the cron job. The cron job display name is now "DeFi Milestones".

@@ -1,4 +1,4 @@
-# D5 Milestone Tracker — LFJ AVAX/USDC
+# DeFi Milestone Tracker — LFJ AVAX/USDC
 
 **Pool**: `0x864d4e5ee7318e97483db7eb0912e09f161516ea`  
 **Strategy**: Curve shape, 5 bps fee tier, binStep 10  

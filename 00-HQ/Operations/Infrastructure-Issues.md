@@ -1,3 +1,79 @@
+
+## Incident: Nous OAuth Token Revoked — Multi-Profile Impact
+**Status:** 🔴 ACTIVE  
+**Detected:** 2026-05-06 13:52:UTC  
+**Impact:** Entire agent fleet affected (gentech, yoyo, dmob, desmond)
+
+### Root Cause
+- Shared Nous token expired across all profiles
+- gentech refresh script detected `needs_reauth: true`
+- Device code endpoint rate-limited (HTTP 429) during automated recovery
+- Manual `hermes model` path required
+
+### Timeline
+- 2026-05-06 13:52:UTC: Device flow initiated, got user code CLLT-KXY8
+- 2026-05-06 13:52:UTC: Rate limit detected, fallback to manual hermes model
+- 2026-05-06 13:52:UTC: Alert created for @DMOB
+
+### Resolution Steps
+- [ ] @DMOB: Run `hermes model` to re-authenticate Nous provider for gentech profile
+- [ ] Verify refresh script returns success after re-auth
+- [ ] Check token TTL is ~30 days
+- [ ] Test affected cron jobs manually
+- [ ] Add fallback providers to all profiles' config.yaml
+- [ ] Schedule refresh for all profiles (gentech already has it)
+- [ ] Implement staggered refresh schedules across profiles
+
+### Cross-Profile Impact Assessment
+- **gentech:** Auth expired, refresh failed, device flow rate-limited ✓
+- **yoyo:** Must check auth state and refresh if needed
+- **dmob:** Must check auth state and refresh if needed
+- **desmond:** Must check auth state and refresh if needed
+
+### Follow-Up
+- [ ] Verify recovery for each profile
+- [ ] Update monitoring to detect multi-profile issues
+- [ ] Document lessons learned
+
+
+
+## Incident: Nous OAuth Token Revoked — Multi-Profile Impact
+**Status:** 🔴 ACTIVE  
+**Detected:** 2026-05-06 13:51:UTC  
+**Impact:** Entire agent fleet affected (gentech, yoyo, dmob, desmond)
+
+### Root Cause
+- Shared Nous token expired across all profiles
+- gentech refresh script detected `needs_reauth: true`
+- Device code endpoint rate-limited (HTTP 429) during automated recovery
+- Manual `hermes model` path required
+
+### Timeline
+- 2026-05-06 13:51:UTC: Device flow initiated, got user code CLLT-KXY8
+- 2026-05-06 13:51:UTC: Rate limit detected, fallback to manual hermes model
+- 2026-05-06 13:51:UTC: Alert created for @DMOB
+
+### Resolution Steps
+- [ ] @DMOB: Run `hermes model` to re-authenticate Nous provider for gentech profile
+- [ ] Verify refresh script returns success after re-auth
+- [ ] Check token TTL is ~30 days
+- [ ] Test affected cron jobs manually
+- [ ] Add fallback providers to all profiles' config.yaml
+- [ ] Schedule refresh for all profiles (gentech already has it)
+- [ ] Implement staggered refresh schedules across profiles
+
+### Cross-Profile Impact Assessment
+- **gentech:** Auth expired, refresh failed, device flow rate-limited ✓
+- **yoyo:** Must check auth state and refresh if needed
+- **dmob:** Must check auth state and refresh if needed
+- **desmond:** Must check auth state and refresh if needed
+
+### Follow-Up
+- [ ] Verify recovery for each profile
+- [ ] Update monitoring to detect multi-profile issues
+- [ ] Document lessons learned
+
+
 ## Incident: Nous OAuth Revocation — Data Collection Offline
 
 **Status:** ✅ RESOLVED  
@@ -50,3 +126,24 @@
 ---
 *Incident declared: 2026-05-03 18:33 UTC by Gentech (CEO)*  
 *Resolution: 2026-05-03 19:15 UTC — silent mode deployed, all systems green.*
+
+## Incident: Nous OAuth Session Revoked — Critical Auth Failure
+
+**Status:** 🔴 ACTIVE  
+**Detected:** 2026-05-06 13:46:18  
+**Impact:** Hermes agents cannot access Nous inference API — data collection offline
+
+### Timeline
+- 2026-05-06 13:46:18: Device code endpoint rate-limited (HTTP 429) — automated flow unavailable
+- 2026-05-06 13:46:18: Escalated to @DMOB for manual `hermes model` re-authentication
+
+### Resolution Steps
+- Assigned: @DMOB
+- Action: Run `hermes model` and re-authenticate Nous provider
+- Verify: Refresh script returns success
+
+### Follow-Up
+- [ ] Re-auth complete
+- [ ] Refresh script verified
+- [ ] Affected jobs tested
+- [ ] Rate limit root cause investigated

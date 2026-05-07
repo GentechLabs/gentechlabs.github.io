@@ -1,4 +1,4 @@
-# D5 Milestone Tracker — Architecture Diagram
+# DeFi Milestone Tracker — Architecture Diagram
 
 ## Before Consolidation (Duplication)
 
@@ -29,11 +29,11 @@
                               ↓↓ CONSOLIDATION ↓↓
 
 ┌─────────────────────────────────────────────────────────────────────┐
-│              AFTER — D5 Milestone Tracker (Canonical)              │
+│              AFTER — DeFi Milestone Tracker (Canonical)              │
 ├─────────────────────────────────────────────────────────────────────┤
 │                                                                     │
 │                  ┌─────────────────────────────┐                  │
-│                  │ d5-milestone-tracker.py     │                  │
+│                  │ defi-milestone-tracker.py     │                  │
 │                  │ (Single source of truth)    │                  │
 │                  └─────────────┬───────────────┘                  │
 │                                │                                  │
@@ -69,7 +69,7 @@
        │
        ▼
 ┌─────────────────────┐     ┌──────────────┐
-│ d5-milestone-       │────▶│ CMC Watchlist│ (fetches CMC API, checks ≥3% moves)
+│ defi-milestone-       │────▶│ CMC Watchlist│ (fetches CMC API, checks ≥3% moves)
 │ tracker.py          │     └──────┬───────┘
 │                     │            │
 │ 1. Loads config    │            ▼
@@ -103,7 +103,7 @@
 
 ```
 ~/.hermes/scripts/
-├── .d5-milestone-state.json         ← Primary state (new)
+├── .defi-milestone-state.json         ← Primary state (new)
 │   {
 │     "last_price": 9.274,
 │     "last_efficiency": 82.3,
@@ -126,7 +126,7 @@
 | Crypto Watchlist | Every 2h | — | 🗑️ Retiring |
 | CMC + Market News | Every 2h | — | 🗑️ Retiring |
 | LP Position Monitor | Every 10 min | — | 🤔 Keep as fallback? |
-| **D5 Milestone Tracker** | — | **4×/day** | 🆕 New canonical |
+| **DeFi Milestone Tracker** | — | **4×/day** | 🆕 New canonical |
 
 ## Alert Flowchart
 

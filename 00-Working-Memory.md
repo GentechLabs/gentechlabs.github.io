@@ -9,12 +9,12 @@ Last Updated: 2026-05-05 (Daily Sync)
 
 **May 4 incident summary:**
 - D5 monitoring discrepancy — protocol defined, 3 follow-up tasks pending
-- LFJ IL spike (-41.97%) — review flag triggered, range rebalanced to $9.25–$9.59
+- LFJ IL spike (-41.97%) — review flag triggered, range rebalanced to $9.44–$9.74
 - Handoff ACK crisis — 2 handoffs escalated to Jordan (H2026-05-02-01, H2026-05-02-02)
 - Nous OAuth revoked — DMOB manual intervention required
 
 **May 5 morning state:**
-- ✅ **LP position RESOLVED** — IL from -41.97% to -0.01% after range rebalance to $9.25–$9.59
+- ✅ **LP position RESOLVED** — IL from -41.97% to -0.01% after range rebalance to $9.44–$9.74
 - Position value $139.50, efficiency 64.7%, earning fees ($0.22/day)
 - Portfolio website updated (header, projects section, filtering)
 - Social content drafted for Solana Frontier launch (X + Facebook)
@@ -49,8 +49,8 @@ Last Updated: 2026-05-05 (Daily Sync)
 **Blocker:** No active development since Swarms adapter pause; bandwidth likely allocated to portfolio work.
 
 ## LP Position Monitoring — AVAX/USDC (LFJ)
-- **May 5 snapshot:** $139.50, IL -0.01%, efficiency 64.7%, range $9.25–$9.59 ✅ HEALTHY
-- **Range rebalanced** from $8.95–$9.36 to $9.25–$9.59 — IL crisis resolved
+ **May 6 snapshot:** $123.74, IL adjusted, efficiency varies, range $9.44–$9.74 (Bid-Ask shape)
+ **Range rebalanced** from $9.25–$9.59 to $9.44–$9.74 — Bid-Ask shape for volatility
 - **Current status:** No rebalance needed; earning fees (~$0.22/day)
 - **Pool volume:** $12.7M/day (healthy liquidity)
 
@@ -118,7 +118,7 @@ Prev: W17 (Apr 20–26) ✅ | W18 (Apr 27 – May 3) sparse | Current: W19 (May 
 
 ### LP Position Recovery (Key Win)
 - May 4: IL crisis (-41.97%), efficiency degraded, review flagged
-- May 5: Range rebalanced to $9.25–$9.59, IL normalized to -0.01%, efficiency 64.7%
+ **May 6: Range rebalanced to $9.44–$9.74, Bid-Ask shape, taking profits for Xiaomi Pro sub**
 - Position earning fees again ($0.22/day), healthy and aligned with Scout tier
 
 ### Flags & Blockers

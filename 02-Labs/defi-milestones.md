@@ -2,36 +2,37 @@
 
 ## Position Summary
 - **Pool**: AVAX/USDC on LFJ V2.2 (Avalanche)
-- **Range**: $9.25 – $9.59 (rebalanced May 5)
-- **Shape**: Curve
+ **Range**: $9.44 – $9.74 (rebalanced May 6)
+ **Shape**: Bid-Ask (bidirectional)
 - **Cron Job**: `e932437c74bb` — runs daily at 09:00 UTC
 
-## Latest Snapshot (2026-05-05 — 20:18 UTC)
+## Latest Snapshot (2026-05-07 — 00:33 UTC)
 | Metric | Value |
 |--------|-------|
-| Total Position | $145.06 |
-| AVAX | 6.80 (~$64.08) |
-| USDC | $80.98 |
-| Pool TVL | ~$4,017,777 |
-| 24H Volume | ~$20,374,901 |
-| Fee Efficiency | 53.3% |
-| Days Since Entry | 0 (re-established 2026-05-05) |
-| Est. Cumulative Fees | ~$0.98 |
-| Est. Daily Fees | ~$0.65 |
-| B/S Ratio (24h) | 1.004 (balanced) |
-| IL vs Entry | +0.1% (negligible) |
+| Total Position | $146.14 |
+| AVAX | 6.80 (~$65.14) |
+| USDC | $81.00 |
+| Pool TVL | ~$4,012,024 |
+| 24H Volume | ~$31,360,438 |
+| Fee Efficiency | 80.0% |
+| Days Since Entry | 2 (re-established 2026-05-05) |
+| Est. Cumulative Fees | ~$2.12 |
+| Est. Daily Fees | ~$0.57 |
+| B/S Ratio (24h) | 0.970 (balanced) |
+| IL vs Entry | -0.59% (vs HODL) |
 
 ## Milestones
 - [ ] 🎯 $150 — first growth milestone (97% there at $145.06)
 - [ ] 🎯 $200 — target position size (73% there)
 - [ ] 🎯 $500 — scaling target (29% there)
 
-## D5 Tier Progress
+## DeFi Tier Progress
 - Current: Scout (Tier 1 🥉 Bronze — $5/day target)
-- Daily fees: $0.65 → 13.1% to Scout
+- Daily fees: $0.57 → 11.3% to Scout
 - Next unlock: Scout → entry strategies (CURVE shape — already using!)
 
 ## Updates
+- **2026-05-07, 00:33 UTC**: AVAX +2.03% to $9.58. Pool price $9.56 within rebalanced range $9.44–$9.74. IL shifted -0.69 pp to -0.59% (triggers review). Efficiency 80%. Volume $31.4M, est. daily fees $0.57. Position value $146.14. Scout progress 11.3%.
 
 - **2026-05-05, 20:18 UTC**: AVAX rallied +2.26% to $9.42 — now OUTSIDE target band $8.95–$9.36. 29 active bins, position value $145.06. Fees doubled to $0.65/day on elevated volume ($20.4M). IL +0.1% negligible. Efficiency 53.3%. Monitor for continuation above $9.36. Cumulative est. fees: ~$0.98.
 - **2026-05-05, 16:49 UTC**: Position re-established. 38 active bins detected on-chain. AVAX $9.36 (+1.58% 24h). Efficiency 53.3%. IL negligible (-0.01%). Est. daily fees $0.33 → 6.6% to Scout. Previous scan at 16:15 UTC erroneously reported position as EMPTY.

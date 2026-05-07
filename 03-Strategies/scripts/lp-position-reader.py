@@ -266,8 +266,8 @@ def compute_position_value(config: dict, price: float, wallet: dict, lp_onchain:
     Uses config amounts as fallback, but labels them appropriately.
     """
     pos = config.get("position", {})
-    range_low = pos.get("range_low", 9.25)
-    range_high = pos.get("range_high", 9.30)
+    range_low = pos.get("range_low", 9.45)
+    range_high = pos.get("range_high", 9.74)
     shape = pos.get("shape", "bid-ask")
 
     # LP position amounts — prefer on-chain data, fallback to config
@@ -408,7 +408,7 @@ def main():
 
     # Get LP position from on-chain bins
     pos_config = config.get("position", {})
-    range_low = pos_config.get("range_low", 9.25)
+    range_low = pos_config.get("range_low", 9.45)
     range_high = pos_config.get("range_high", 9.30)
 
     lp_onchain = {"has_position": False}

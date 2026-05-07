@@ -21,8 +21,8 @@ from typing import Optional
 # ── Config ──────────────────────────────────────────────────────────────────
 POOL_ADDRESS = "0x864d4e5ee7318e97483db7eb0912e09f161516ea"
 CHAIN = "avalanche"
-RANGE_LOW = 9.36
-RANGE_HIGH = 9.53
+RANGE_LOW = 9.45
+RANGE_HIGH = 9.74
 STATE_FILE = os.path.expanduser("~/.hermes/scripts/.lfj-range-state.json")
 POSITION_FILE = os.path.expanduser("~/.hermes/scripts/.lfj-position-tracker.json")
 

@@ -26,8 +26,8 @@ POOLS = [
         "name": "AVAX/USDC",
         "chain": "avalanche",
         "pool_address": "0x864d4e5ee7318e97483db7eb0912e09f161516ea",
-"range_low": 9.25,
-        "range_high": 9.54,
+"range_low": 9.45,
+        "range_high": 9.74,
         "shape": "curve",
         "position_usd": 83.92,
         "token0_symbol": "AVAX",
@@ -97,25 +97,29 @@ def estimate_daily_fees(volume_24h: float, liquidity: float, position_usd: float
 
 def get_current_tier(est_fees: float) -> tuple:
     """Returns (current_idx, current_label, next_idx, next_label, progress_pct)."""
-    current_idx = 0
+    # Find the highest milestone that has been reached or surpassed
+    current_idx = -1
     for i, m in enumerate(MILESTONES):
         if est_fees >= m["daily_fees"]:
             current_idx = i
         else:
-            break
-    next_idx = min(current_idx + 1, len(MILESTONES) - 1)
-    
+            break  # Found first milestone not reached
+
+    # If no milestone reached (current_idx = -1), we are before the first milestone
+    if current_idx == -1:
+        next_idx = 0
+        progress_pct = round((est_fees / MILESTONES[0]["daily_fees"]) * 100, 1)
+        return -1, "Unranked", next_idx, MILESTONES[next_idx]["label"], progress_pct
+
+    # If we've reached the highest milestone, pct = 100
+    if current_idx == len(MILESTONES) - 1:
+        return current_idx, MILESTONES[current_idx]["label"], current_idx, MILESTONES[current_idx]["label"], 100.0
+
+    next_idx = current_idx + 1
     current_target = MILESTONES[current_idx]["daily_fees"]
     next_target = MILESTONES[next_idx]["daily_fees"]
-    
-    if next_target <= current_target or est_fees <= current_target:
-        progress_pct = 0.0 if next_target > current_target else 100.0
-    else:
-        progress_pct = round(((est_fees - current_target) / (next_target - current_target)) * 100, 1)
-    
-    return (current_idx, MILESTONES[current_idx]["label"],
-            next_idx, MILESTONES[next_idx]["label"],
-            progress_pct)
+    progress_pct = round(((est_fees - current_target) / (next_target - current_target)) * 100, 1)
+    return current_idx, MILESTONES[current_idx]["label"], next_idx, MILESTONES[next_idx]["label"], progress_pct
 
 def micro_dca_action(efficiency: float) -> dict:
     """Returns (trigger_level, bonus_amount, action_text)."""

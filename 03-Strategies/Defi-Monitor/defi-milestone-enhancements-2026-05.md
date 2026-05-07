@@ -1,5 +1,5 @@
 ---
-title: D5 Milestone Cron Enhancements
+title: DeFi Milestone Cron Enhancements
 date: 2026-05-02
 status: 🚀 Active
 owner: Gentech (CEO) → DMOB + YoYo
@@ -8,13 +8,13 @@ priority: P0
 
 ## Context
 
-Jordan voice-approved enhancements to the existing `d5-master-cron.py` consolidation job on **May 2, 2026**. The current script (v1) runs 4× daily and aggregates CMC watchlist + LP milestone tracking. These rules tighten monitoring, add debounce logic, and introduce edge-case strategies.
+Jordan voice-approved enhancements to the existing `defi-master-cron.py` consolidation job on **May 2, 2026**. The current script (v1) runs 4× daily and aggregates CMC watchlist + LP milestone tracking. These rules tighten monitoring, add debounce logic, and introduce edge-case strategies.
 
 ## Directive (from Jordan)
 
-> "From now on, whenever we consolidate a cron job, we don't have to call it 'consolidated.' For this one, we just call it the D5 milestone."
+> "From now on, whenever we consolidate a cron job, we don't have to call it 'consolidated.' For this one, we just call it the DeFi milestone."
 >
-> "We want the same rules that the LP tracker had: the D5 milestone tracks our LP. If it goes out of a certain range, it'll send one warning, then wait **5 minutes** to confirm breakout/breakdown, then send a bigger alert: 'hey you need to rebalance.'"
+> "We want the same rules that the LP tracker had: the DeFi milestone tracks our LP. If it goes out of a certain range, it'll send one warning, then wait **5 minutes** to confirm breakout/breakdown, then send a bigger alert: 'hey you need to rebalance.'"
 >
 > "Different strategies: with a curve, fee efficiency on the edges is closer to 30% or below. When it gets to that range, we want to suggest rebalancing."
 >
@@ -22,7 +22,7 @@ Jordan voice-approved enhancements to the existing `d5-master-cron.py` consolida
 
 ## Current State
 
-**Script:** `03-Strategies/scripts/d5-master-cron.py` (473 lines)
+**Script:** `03-Strategies/scripts/defi-master-cron.py` (473 lines)
 - Fetches CMC watchlist (BTC, SOL, LINK, AVAX, TAO, XAUt, BEAM) — alerts if |Δ24h| ≥ 3%
 - Fetches LP position via DexScreener + DeBank wallet API
 - Calculates efficiency via curve math (`calc_efficiency`)
@@ -103,7 +103,7 @@ elif lp['eff'] < 50:
 
 ## Code Changes (DMOB Responsibilities)
 
-**File:** `03-Strategies/scripts/d5-master-cron.py`
+**File:** `03-Strategies/scripts/defi-master-cron.py`
 
 1. **Add state schema** at top:
    ```python
@@ -144,7 +144,7 @@ YoYo to provide numeric thresholds:
 
 3. **DCA boost multiplier:** When bid-ask opportunity active, suggest `BOOST_MULTIPLIER` (default 1.5×) for next 3 DCA cycles
 
-4. **D5 milestone cross-check:** Validate current tier targets against `03-Projects/DeFi/D5-Milestone-Tracker.md` — ensure $5/$20/$55/$200/day align with strategy doc
+4. **DeFi milestone cross-check:** Validate current tier targets against `03-Projects/DeFi/D5-Milestone-Tracker.md` — ensure $5/$20/$55/$200/day align with strategy doc
 
 5. **Fee efficiency baseline:** Confirm 30% threshold for "edge zone" on curve shape; may differ for spot/bidirectional shapes
 
