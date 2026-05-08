@@ -6,6 +6,12 @@
 | **Solana Frontier** | May 11 | 🔴 SPRINT — 12 days | AgentEscrow (trust infrastructure) |
 | **Kite AI** | May 17 | 🟡 SPRINT — 18 days | **Dynamic Strategy Engine** (brain layer) |
 
+## Queued
+| Name | Deadline | Status | Notes |
+|------|----------|--------|-------|
+| **HeyGen Multi-modal AI** | May 14-15 | 🟢 REGISTERED | Agent Track, $5K prizes, 24hr sprint |
+| **Bags.fm (DoraHacks)** | TBD | ⚪ NEEDS CHECK | 46 MCP tools, Solana memecoin launchpad |
+
 ## Deferred (Post-May 17)
 | Name | Deadline | Notes |
 |------|----------|-------|
