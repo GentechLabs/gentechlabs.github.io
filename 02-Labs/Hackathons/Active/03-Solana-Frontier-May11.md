@@ -15,7 +15,7 @@ On-chain enforcement for agent agreements:
 - Works cross-chain (Solana enforcement ↔ Avalanche escrow)
 
 ## Action Items
-- [ ] Register on arena.colosseum.org
+- [x] Register on arena.colosseum.org ✅ (Apr 21)
 - [ ] Port enforcement logic to Solana (Anchor framework)
 - [ ] Design slashing + dispute contracts
 - [ ] Cross-chain demo with Avalanche escrow

@@ -1,5 +1,5 @@
 # Active Hackathons & Bounties
-Status: Updated Apr 28, 2026
+Status: Updated May 8, 2026
 
 ## Current Focus (Building Now)
 - **Solana Frontier (Colosseum)** 🟢: Agent Economy — Solana-native high-throughput labor market. **Deadline: May 11**. $230K+ pool + $250K accelerator.
@@ -7,6 +7,7 @@ Status: Updated Apr 28, 2026
 
 ## Queued (After Current Focus)
 - **Swarms ACM Hackathon** 🔵: Tokenized agents/prompts on Swarms Marketplace. **Deadline: May 27**. $30K pool (Solana, $SWARMS, USDC). LP Monitor is top submission candidate. **Repo:** TBD (GitHub token expired — needs new token). **DMOB scoping in Labs.**
+- **Interledger Open Payments SDK Grants** 🟡: Build SDKs that make Open Payments (universal HTTP API for payments) easier for developers. **$5K–$50K per proposal. Rolling applications (no deadline).** Themes: GNAP (Grant Authorization), Kiota (API client generator), HTTP Signatures, Arazzo (workflow specs), curl integration. Languages: TypeScript, Python. Apply: https://interledger.org
 
 ## Next Up (After Solana/Kite + Swarms)
 - **Google Cloud Rapid Agent** 🆕: Build agents with Gemini + Google Cloud Agent Builder + MCP. **Deadline: Jun 11**. $60K pool. 383 participants. Managed by Google on Devpost.

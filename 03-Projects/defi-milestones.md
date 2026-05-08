@@ -9,12 +9,12 @@
 | Metric | Value |
 |--------|-------|
 | Pool | LFJ AVAX/USDC 5bps (Avalanche) |
-| Current Price | $9.42 |
+| Current Price | $9.50 |
 | Position Range | $9.45–$9.74 |
 | Target Range | $8.95–$9.36 |
-| Status | ⚠️ OUT OF RANGE — rebalance needed |
-| LP Value | $135.15 |
-| Est. Daily Fees | ~$0.70 (reduced) |
+| Status | ✅ IN RANGE |
+| LP Value | $134.88 |
+| Est. Daily Fees | ~$1.41 |
 | Avg Share % | 0.0074% |
 | Days Since Entry | 37 |
 
@@ -22,56 +22,47 @@
 
 ## Scout Progress
 
-[==○○○○○○○○○○○○○○○○○○] 14.0% — $0.70/day (target: $5.00/day)
+[=====○○○○○○○○○○○○○○○○] 28.2% — $1.41/day (target: $5.00/day)
 
 ---
 
-## 2026-05-07 Update — Milestone Tracker
+## 2026-05-07 20:15 Update — Milestone Tracker
 
 ### Position Summary
 - **Pool**: LFJ AVAX/USDC 5bps (Avalanche)
-- **Current Price**: $9.62
+- **Current Price**: $9.50
 - **Position Range**: $9.45–$9.74
 - **Target Range**: $8.95–$9.36
 - **Status**: ✅ IN RANGE
 
 ### Portfolio Value
-- **LP Value**: $135.59
+- **LP Value**: $134.88
 - **Approx Invested**: $134.94
-- **Unrealized Return**: +0.48%
-- **Est. Cumulative Fees**: ~$6.72
+- **Unrealized Return**: -0.04%
+- **Est. Cumulative Fees**: ~$8.13
 - **Days Since Entry**: 37
 
 ### Fee Efficiency
-- **Pool 24h Volume**: $31.6M
-- **Pool 24h Fees**: $15,800
+- **Pool 24h Volume**: $38.1M
+- **Pool 24h Fees**: $19,066
 - **Our Share**: 0.0074%
-- **Est. Daily Fees**: $1.17
-- **Pool Fee APR**: ~142%
+- **Est. Daily Fees**: $1.41
+- **Pool Fee APR**: ~174%
 
 ### Milestone Ladder
 | Tier | Daily Target | Status |
 |------|-------------|--------|
-| Scout | $5.00/day | ⏳ 14.0% — $0.70/day (reduced) |
+| Scout | $5.00/day | ⏳ 28.2% — $1.41/day |
 | Raider | $20.00/day | 🔒 Locked |
 | Warlord | $50.00/day | 🔒 Locked |
 | Sovereign | $100.00/day | 🔒 Locked |
 
 ### Scout Progress
-[==○○○○○○○○○○○○○○○○○○] 14.0% — $0.70/day
+[=====○○○○○○○○○○○○○○○○] 28.2% — $1.41/day
 
 ### Action Items
-1. **Add Liquidity**: Current share 0.01% is too small for meaningful fee capture. Need to increase position to ~$500+ to approach Scout tier.
-2. **Monitor Price**: AVAX at $9.62 is above target band $8.95–$9.36. Good for now but may drift higher.
-3. **DCA Status**: Efficiency high (89.7%) — position well-calibrated. Next DCA opportunity if price drops into target band.
-
----
-## 2026-05-07 16:15 UTC — Alert: Position Out of Range
-- AVAX dropped to $9.42, below position range $9.45–$9.74
-- Position converted to ~100% AVAX (14.18 AVAX + 1.57 USDC)
-- Daily fee capture reduced from $1.17 to ~$0.70
-- Scout progress dropped from 23.4% to 14.0%
-- **Action**: Rebalance position to restore in-range status
-- Price approaching strategic target band $8.95–$9.36 — monitor for DCA opportunity
+1. **Add Liquidity**: Current share 0.0074% is too small for meaningful fee capture. Need to increase position to ~$500+ to approach Scout tier.
+2. **Monitor Price**: AVAX at $9.50 is above target band $8.95–$9.36 but within position range. Volume spike (+20%) is boosting fees.
+3. **DCA Status**: Price above target band — no DCA trigger. Watch for pullback into $8.95–$9.36 zone.
 
 ---

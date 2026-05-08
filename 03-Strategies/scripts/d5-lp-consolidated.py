@@ -1,13 +1,12 @@
 #!/usr/bin/env python3
 """
-D5 Milestone + LP Monitor — Consolidated Smart Tracker
+DeFi Milestone + LP Monitor — Consolidated Smart Tracker
 Replaces: "Crypto Watchlist + LP Monitor" + "DeFi Milestone + LP Monitor"
 Features:
+  - 2-clean-run debounce: after 2 consecutive quiet checks, silent until next hour
   - 5-minute debounce on range breakouts & low-efficiency alerts
   - Fee efficiency zones → DCA sizing strategy
   - Shape-aware rebalancing suggestions (curve/spot/bidirectional)
-  - Bid-ask spread opportunity detection
-  - Milestone tracking integration
   - Quiet hours respect
 """
 
@@ -19,41 +18,41 @@ from datetime import datetime, timezone, timedelta
 import urllib.request
 
 # ── Path Resolution ─────────────────────────────────────────────────────────
-# Hermes sets HERMES_HOME to the profile root (e.g. /root/.hermes/profiles/yoyo)
-# The runtime "home" where scripts expect to read/write is $HERMES_HOME/home/.hermes/
 HERMES_HOME = os.environ.get("HERMES_HOME", os.path.expanduser("~"))
 HOME_SCRIPTS_DIR = os.path.join(HERMES_HOME, "home", ".hermes", "scripts")
 
 def hermes_path(filename: str) -> str:
-    """Return absolute path inside the Hermes profile's script directory."""
     return os.path.join(HOME_SCRIPTS_DIR, filename)
 
 # ── Config ──────────────────────────────────────────────────────────────────
 AAE_CONFIG_PATH = hermes_path(".lfj-aae-config.json")
-STATE_FILE = hermes_path(".lfj-d5-state.json")
+STATE_FILE = hermes_path(".lfj-defi-state.json")
 POSITION_TRACKER_PATH = hermes_path(".lfj-position-tracker.json")
 
 DEXSCREENER_URL_TEMPLATE = "https://api.dexscreener.com/latest/dex/pairs/avalanche/{pool_address}"
 
-# Constants
-JORDAN_WALLET = "0x7ebff188f2Eba16518C02864589b1403a5d1296a"
+JORDAN_WAL_ADDRESS = "0x7ebff188f2Eba16518C02864589b1403a5d1296a"
 POOL_ADDRESS = "0x864d4e5ee7318e97483db7eb0912e09f161516ea"
 CHAIN = "avalanche"
 
-# Alert thresholds
+# Alert thresholds (debounce durations in seconds)
 OUT_OF_RANGE_DEBOUNCE_SEC = 300    # 5 minutes
 EFFICIENCY_LOW_DEBOUNCE_SEC = 300  # 5 minutes
 EFFICIENCY_CRITICAL_PCT = 30.0
-EFFICIENCY_WARN_PCT = 50.0
+
+# Alert suppression: once alerted on a condition, stay silent until it resolves
+# Condition resolves when: price returns to range (for OOR) or efficiency > 30% (for low eff)
 
 # Quiet hours (ET)
 QUIET_START = 23
 QUIET_END = 6
 
-# ── State ────────────────────────────────────────────────────────────────────
+# ── Time helpers ─────────────────────────────────────────────────────────────
 
 def now_et():
     return datetime.now(timezone(timedelta(hours=-4)))
+
+# ── State ────────────────────────────────────────────────────────────────────
 
 def load_state() -> dict:
     try:
@@ -65,8 +64,12 @@ def load_state() -> dict:
             "efficiency_low_start": None,
             "last_alert_times": {},
             "last_price": None,
-            "last_check": None,
-            "tracking_started": now_et().isoformat()
+            "last_efficiency": None,
+            "last_in_range": None,
+            "last_zone": None,
+            "last_report_time": None,
+            "consecutive_quiet_runs": 0,
+            "last_report_hour": None,
         }
 
 def save_state(state: dict):
@@ -94,7 +97,7 @@ def load_position_tracker() -> dict:
 
 def fetch_dexscreener() -> dict:
     url = DEXSCREENER_URL_TEMPLATE.format(pool_address=POOL_ADDRESS)
-    req = urllib.request.Request(url, headers={"User-Agent": "Gentech-D5/1.0"})
+    req = urllib.request.Request(url, headers={"User-Agent": "Gentech-DeFi/1.0"})
     with urllib.request.urlopen(req, timeout=10) as resp:
         data = json.loads(resp.read().decode())
     pair = data.get("pair", data.get("pairs", [{}])[0] if data.get("pairs") else {})
@@ -171,6 +174,23 @@ def check_alerts(price: float, range_low: float, range_high: float, efficiency: 
     alert_level = "OK"
 
     out_of_range = price < range_low or price > range_high
+    
+    # Track condition resolution for "alert once per condition" logic
+    # If we previously alerted on a condition, check if it has resolved
+    oor_alerted = state.get("oor_alerted", False)
+    eff_alerted = state.get("eff_alerted", False)
+    
+    # Out-of-range condition resolved? Reset alert flag
+    if oor_alerted and not out_of_range:
+        state["oor_alerted"] = False
+        state["oor_alert_time"] = None
+    
+    # Low efficiency condition resolved? Reset alert flag
+    if eff_alerted and efficiency >= EFFICIENCY_CRITICAL_PCT:
+        state["eff_alerted"] = False
+        state["eff_alert_time"] = None
+
+    # ── Out-of-range debounced alert ──────────────────────────────────────────
     if out_of_range:
         if state.get("out_of_range_start") is None:
             state["out_of_range_start"] = now
@@ -178,8 +198,8 @@ def check_alerts(price: float, range_low: float, range_high: float, efficiency: 
         else:
             elapsed = now - state["out_of_range_start"]
             if elapsed >= OUT_OF_RANGE_DEBOUNCE_SEC:
-                last = state.get("last_alert_times", {}).get("out_of_range", 0)
-                if now - last > 300:
+                # Only alert if we haven't already alerted for this condition
+                if not oor_alerted:
                     direction = "below" if price < range_low else "above"
                     alerts.append({
                         "severity": "HIGH",
@@ -187,11 +207,13 @@ def check_alerts(price: float, range_low: float, range_high: float, efficiency: 
                         "message": f"Price ${price:.4f} {direction} range [${range_low:.2f}–${range_high:.2f}] for {int(elapsed/60)}min — RECONFIGURE NEEDED",
                         "action": "Rebalance range immediately"
                     })
-                    state.setdefault("last_alert_times", {})["out_of_range"] = now
+                    state["oor_alerted"] = True
+                    state["oor_alert_time"] = now
                     alert_level = "HIGH"
     else:
         state["out_of_range_start"] = None
 
+    # ── Low-efficiency (<30%) debounced alert ─────────────────────────────────
     if efficiency < EFFICIENCY_CRITICAL_PCT:
         if state.get("efficiency_low_start") is None:
             state["efficiency_low_start"] = now
@@ -199,14 +221,13 @@ def check_alerts(price: float, range_low: float, range_high: float, efficiency: 
         else:
             elapsed = now - state["efficiency_low_start"]
             if elapsed >= EFFICIENCY_LOW_DEBOUNCE_SEC:
-                last = state.get("last_alert_times", {}).get("low_efficiency", 0)
-                if now - last > 300:
+                # Only alert if we haven't already alerted for this condition
+                if not eff_alerted:
                     shape_analysis = analyze_shape_balance(price, range_low, range_high, shape)
                     dca_amount, dca_reason = get_dca_amount_by_zone(efficiency)
                     suggested_range = estimate_rebalance_target(price, range_low, range_high, shape)
-                    severity = "MEDIUM" if efficiency < 30 else "LOW"
                     alerts.append({
-                        "severity": severity,
+                        "severity": "MEDIUM",
                         "type": "LOW_EFFICIENCY_REBALANCE",
                         "message": f"Fee efficiency {efficiency:.1f}% — {shape_analysis['type']}",
                         "suggested_range": suggested_range,
@@ -214,20 +235,112 @@ def check_alerts(price: float, range_low: float, range_high: float, efficiency: 
                         "dca_reason": dca_reason,
                         "action": "Consider rebalancing liquidity position"
                     })
-                    state.setdefault("last_alert_times", {})["low_efficiency"] = now
-                    alert_level = severity
+                    state["eff_alerted"] = True
+                    state["eff_alert_time"] = now
+                    alert_level = "MEDIUM"
     else:
         state["efficiency_low_start"] = None
 
     save_state(state)
     return {"alerts": alerts, "alert_level": alert_level}
 
+# ── Silencing Logic ───────────────────────────────────────────────────────────
+
+def should_send_report(state: dict, price: float, efficiency: float, in_range: bool, alerts: list) -> tuple[bool, str]:
+    """
+    Decide whether to emit a DeFi Milestone report right now.
+
+    Rules:
+    1. Always send if this is the first run (no last_report_time)
+    2. Always send if we have active alerts (handled by caller, but treat as material change)
+    3. Material change detection → send (price moved >1% or $0.20, zone flip, range status flip)
+    4. Otherwise count quiet runs; after 2 consecutive quiet runs, go silent until hour rolls over
+    """
+    now_dt = now_et()
+    now_ts = time.time()
+
+    # Hour rollover resets quiet counter
+    last_hour = state.get("last_report_hour")
+    if last_hour is not None and last_hour != now_dt.hour:
+        state["consecutive_quiet_runs"] = 0
+        state["last_report_hour"] = now_dt.hour
+
+    last_report = state.get("last_report_time")
+
+    # First run ever — conditionally send
+    if last_report is None:
+        # High-efficiency stability: skip even baseline report
+        if efficiency >= 70.0 and in_range and not alerts:
+            state["consecutive_quiet_runs"] = 2   # mark quiet for the hour
+            state["last_report_hour"] = now_dt.hour
+            return False, "high-efficiency stable — silent"
+        state["consecutive_quiet_runs"] = 0
+        state["last_report_hour"] = now_dt.hour
+        return True, "first run"
+
+    # Material change checks
+    reasons = []
+    last_price = state.get("last_price")
+    if last_price and last_price > 0:
+        price_change_pct = abs((price - last_price) / last_price * 100)
+        price_change_abs = abs(price - last_price)
+        if price_change_pct >= 1.0 or price_change_abs >= 0.20:
+            reasons.append(f"price {price_change_pct:.1f}%")
+
+    current_zone = "zone_70_plus" if efficiency >= 70 else "zone_50_70" if efficiency >= 50 else "zone_30_50" if efficiency >= 30 else "zone_below_30"
+    if current_zone != state.get("last_zone"):
+        reasons.append(f"zone → {current_zone}")
+
+    if in_range != state.get("last_in_range"):
+        reasons.append("range status flip")
+
+    if alerts:
+        reasons.append(f"{len(alerts)} alert(s)")
+
+    if reasons:
+        state["consecutive_quiet_runs"] = 0  # reset counter on any change
+        state["last_report_hour"] = now_dt.hour
+        return True, "; ".join(reasons)
+
+    # No material change — high-efficiency stability override?
+    # When efficiency ≥70%, in range, and no alerts, stay silent all hour
+    if efficiency >= 70.0 and in_range and not alerts:
+        state["consecutive_quiet_runs"] = 2   # mark as already quiet
+        state["last_report_hour"] = now_dt.hour
+        return False, "high-efficiency stable — silent"
+
+    # Normal debounce: after 2 consecutive quiet runs, silence until hour rolls over
+    consecutive = state.get("consecutive_quiet_runs", 0)
+    current_hour = now_dt.hour
+
+    if consecutive >= 2 and last_hour == current_hour:
+        return False, f"quiet — {consecutive} consecutive clean runs this hour"
+    else:
+        # First or second quiet run this hour → still send
+        return True, f"clean run #{consecutive + 1} this hour"
+
+def update_state_after_check(state: dict, price: float, efficiency: float, in_range: bool, was_sent: bool):
+    """Persist metrics for next cycle."""
+    state["last_price"] = price
+    state["last_efficiency"] = efficiency
+    state["last_in_range"] = in_range
+    state["last_zone"] = "zone_70_plus" if efficiency >= 70 else "zone_50_70" if efficiency >= 50 else "zone_30_50" if efficiency >= 30 else "zone_below_30"
+
+    if was_sent:
+        state["last_report_time"] = time.time()
+        state["consecutive_quiet_runs"] = state.get("consecutive_quiet_runs", 0) + 1
+        state["last_report_hour"] = now_et().hour
+    # If not sent, we don't increment consecutive_quiet_runs (it stays at 2+ to keep silence)
+
+    save_state(state)
+
 # ── Report ────────────────────────────────────────────────────────────────────
 
 def format_report(price: float, in_range: bool, efficiency: float, pool_data: dict,
-                  position_tracker: dict, alerts: list, alert_level: str, shape: str) -> str:
+                  position_tracker: dict, alerts: list, alert_level: str, shape: str,
+                  change_reason: str) -> str:
     emoji = "✅" if alert_level == "OK" else "⚠️" if alert_level == "LOW" else "🚨"
-    lines = [f"{emoji} **D5 Milestone + LP Report** — {now_et().strftime('%Y-%m-%d %H:%M EDT')}", ""]
+    lines = [f"{emoji} **DeFi Milestone + LP Report** — {now_et().strftime('%Y-%m-%d %H:%M EDT')}", ""]
 
     lines.append("**📊 Pool Data**")
     lines.append(f"  Pool: LFJ AVAX/USDC 5bps")
@@ -264,7 +377,7 @@ def format_report(price: float, in_range: bool, efficiency: float, pool_data: di
     lines.append(f"  {dca_reason}")
     lines.append("")
 
-    lines.append(f"`Source: DexScreener | Debounce: 5min | Check: {now_et().strftime('%H:%M EDT')}`")
+    lines.append(f"`Source: DexScreener | Debounce: 2-clean-run | Check: {now_et().strftime('%H:%M EDT')}`")
     return "\n".join(lines)
 
 # ── Main ─────────────────────────────────────────────────────────────────────
@@ -299,6 +412,16 @@ def main():
     alerts = alert_result["alerts"]
     alert_level = alert_result["alert_level"]
 
+    # Decide whether to send
+    state = load_state()
+    should_send, change_reason = should_send_report(state, price, efficiency, in_range, alerts)
+
+    if not should_send:
+        # Still update state (so quiet counter increments), but don't print
+        update_state_after_check(state, price, efficiency, in_range, was_sent=False)
+        sys.exit(0)
+
+    # Generate and emit report
     report = format_report(
         price=price,
         in_range=in_range,
@@ -307,18 +430,20 @@ def main():
         position_tracker=position_tracker,
         alerts=alerts,
         alert_level=alert_level,
-        shape=shape
+        shape=shape,
+        change_reason=change_reason
     )
-
     print(report)
 
+    update_state_after_check(state, price, efficiency, in_range, was_sent=True)
+
+    # Exit codes for cron monitoring
     if alert_level == "HIGH":
         sys.exit(2)
     elif alert_level == "MEDIUM":
         sys.exit(1)
     else:
         sys.exit(0)
-
 
 if __name__ == "__main__":
     main()
