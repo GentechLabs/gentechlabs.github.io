@@ -1,8 +1,9 @@
 # Smart Routing Rules — Gentech Orchestrator
 
-**Version**: 1.0
-**Updated**: 2026-05-07
+**Version**: 1.1
+**Updated**: 2026-05-09
 **Purpose**: Content-based intelligent routing for multi-agent system
+**Hermes**: v2026.5.7 — streaming edits + cron delivery fixes live
 
 ---
 
@@ -242,3 +243,12 @@ Track routing accuracy:
 - **False positives**: Routed when should have stayed silent
 
 Review weekly in `token-optimization-tracker.md`.
+
+---
+
+## Hermes v2026.5.7 — Routing-Relevant Fixes (May 9, 2026)
+
+- **Telegram streaming edits** — Gateway streams edits safely, no race conditions. Cron jobs that update messages won't hit "message not modified" errors.
+- **Cron delivery reliability** — Failed delivery error handling improved.
+- **Git sync false positives** — Cron "behind by N commits" may compare against a stale reference (e.g., fork parent). Trust `git status` over cron script reports. HEAD == origin/main = synced.
+- **No breaking changes** to routing rules, group IDs, or delivery targets.
