@@ -1,5 +1,5 @@
 # Active Hackathons & Bounties
-Status: Updated May 8, 2026
+Status: Updated May 8, 2026 (21:43 UTC)
 
 ## Current Focus (Building Now)
 - **Solana Frontier (Colosseum)** 🟢: Agent Economy — Solana-native high-throughput labor market. **Deadline: May 11**. $230K+ pool + $250K accelerator.
@@ -12,6 +12,12 @@ Status: Updated May 8, 2026
 ## Next Up (After Solana/Kite + Swarms)
 - **Google Cloud Rapid Agent** 🆕: Build agents with Gemini + Google Cloud Agent Builder + MCP. **Deadline: Jun 11**. $60K pool. 383 participants. Managed by Google on Devpost.
 - **Google for Startups AI Agents Challenge** 🟡: AI agents prototype → production. **Deadline: Jun 5**. $60K cash + $37.5K Google Cloud credits + $500 credits per participant. Register: https://goo.gle/486nbl4
+
+## ⚪ Maybe / Evaluating
+- **Turing Test Hackathon (Mantle)** ⚪: Agentic Wallets & Economy — on-chain agent identity + trading on Mantle. **Phase 2 Deadline: Jun 15**. $100K pool (Grand $50K). Track: Agentic Wallets & Economy (Byreal Skills CLI, RealClaw). Host: Mantle + Bybit + BGA. Platform: DoraHacks. **Blocker: Mantle EVM/Solidity required — no Solana. Needs new build, not a direct port.** Agent economy narrative applies. ERC-8004 Identity NFTs. Judging: ROI, Sharpe, reputation delta. URL: https://dorahacks.io/hackathon/mantleturingtesthackathon2026
+  - Portability: Agent Trading Desk scoring logic + agent economy narrative ✓. Anchor programs ✗ (would need Solidity rewrite).
+  - Timeline: 37 days from May 8. Competes with Bags FM (Jun 1) and Somnia (Jun 11).
+  - Decision needed: Add to active roster or defer.
 
 ## Opportunistic / Back-Burner
 - **Surge Ignition Race — Season 1**: Build in public, show proof. $250K prize. Perfect for Kite AI or AAE projects. **Live Apr 23-24**.

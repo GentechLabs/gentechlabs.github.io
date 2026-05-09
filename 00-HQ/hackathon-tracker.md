@@ -6,8 +6,9 @@ Last updated: 2026-05-07 17:00 UTC
 |-----------|-------|-------|--------|--------|-------|
 | Solana Frontier | May 11 | Solana | $250K + accelerator | 🔴 PRIMARY | 3d 13h remaining. 17,389+ builders |
 | HeyGen | May 14–15 | Multi-modal AI Business | $3K + $1K×2 | 🟡 QUEUED | Registration needs approval |
-| Kite AI | May 17 | TBD | TBD | 🟡 QUEUED | Deep dive complete |
+| Kite AI | May 17 | Agentic Commerce | $10K | 🔴 ACTIVE | Jordan registered. Passport SDK eval pending. 8 days left. |
 | Code4rena K2 | May 27 | DeFi + AI Agents | $135K USDC | 🟢 REGISTERED | Rust, Stellar, 20 days |
+| Turing Test (Mantle) | May 1 – Jun 15 | Agentic Wallets & Economy | $100K | ⚪ MAYBE | Mantle EVM required, new build not port |
 
 ## Bug Bounties (Ongoing)
 | Platform | Project | Max Bounty | Focus | Status |
@@ -30,8 +31,8 @@ Last updated: 2026-05-07 17:00 UTC
 - **Kite AI event**: May 17
 - **Code4rena K2**: May 27 (20 days)
 
-## Priority Order (per Jordan's directive, May 5)
-1. **Solana Frontier** — ALL resources focused here until submitted
-2. **HeyGen** — Secondary, if time permits after Frontier
-3. **Kite AI** — Tertiary
+## Priority Order (per Jordan's directive, May 9)
+1. **Kite AI** — ACTIVE, Jordan registered, deadline May 17
+2. **Solana Frontier** — Skipped (May 11)
+3. **HeyGen** — Skipped (May 14–15)
 4. **Code4rena K2** — Ongoing bounty, can be worked anytime

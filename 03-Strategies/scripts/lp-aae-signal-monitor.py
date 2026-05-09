@@ -893,6 +893,16 @@ def main():
     human_report = format_human_report(signal, cfg)
     if capital_injection_usd > 0:
         human_report = f"💸 Capital added: ${capital_injection_usd:.2f} — progress recalculated.\n\n" + human_report
+
+    # --text mode: output plain text only (for no_agent cronjobs)
+    if "--text" in sys.argv:
+        if signal.severity == "SILENT":
+            # Empty stdout = silent delivery
+            pass
+        else:
+            print(human_report)
+        return
+
     output = {
         "status": signal.severity,
         "signal": signal.to_dict(),

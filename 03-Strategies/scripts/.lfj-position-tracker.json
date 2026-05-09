@@ -1,9 +1,9 @@
 {
   "meta": {
     "version": "unified-v1",
-    "updated_by": "Desmond",
-    "updated_at": "2026-05-07T00:30:00Z",
-    "update_source": "screenshot_rebalance"
+    "updated_by": "Gentech",
+    "updated_at": "2026-05-09T19:10:00Z",
+    "update_source": "jordan_sync_request"
   },
   "pool": {
     "name": "AVAX/USDC 5bps",
@@ -22,14 +22,14 @@
     "entry_total_usd": 83.92,
     "shape": "Curve",
     "range": {
-      "low": 9.45,
-      "high": 9.74,
-      "updated_at": "2026-05-07T00:30:00Z",
-      "source": "onchain_bin_scan"
+      "low": 9.78,
+      "high": 10.02,
+      "updated_at": "2026-05-09T19:10:00Z",
+      "source": "manual_rebalance_sync"
     }
   },
-  "range_low": 9.45,
-  "range_high": 9.74,
+  "range_low": 9.78,
+  "range_high": 10.02,
   "snapshots": [
     {
       "date": "2026-04-24",
@@ -131,7 +131,12 @@
     {
       "date": "2026-04-27",
       "value_usd": 138.92,
-      "event": "Rebalance \u2014 Range updated 9.38\u20139.66 (wider, shifted up to catch uptrend)"
+      "event": "Rebalance — Range updated 9.38–9.66 (wider, shifted up to catch uptrend)"
+    },
+    {
+      "date": "2026-05-09",
+      "value_usd": 126.39,
+      "event": "Sync — Range updated 9.78–10.02 (Jordan requested sync, config + tracker aligned)"
     }
   ],
   "strategy_notes": {
