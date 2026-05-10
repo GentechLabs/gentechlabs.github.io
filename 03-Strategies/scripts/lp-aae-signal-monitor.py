@@ -821,7 +821,10 @@ def main():
     state["tvl_history"] = (state.get("tvl_history", []) + [liquidity])[-168:]  # 7 days @ hourly
     pool_tvl_drop_pct = calc_pool_tvl_drop(state["tvl_history"])
     tvl_trend_7d = calc_tvl_trend(state["tvl_history"])
-    
+    # Establish timestamp for state updates (needed for out-of-range tracking)
+    eastern = timezone(timedelta(hours=cfg.get("quiet_hours", {}).get("timezone_offset", -4)))
+    now = datetime.now(eastern)
+
     # 2-check confirmation for out-of-range (ported from lp-range-monitor.py)
     # Duration-based out-of-range escalation (10min monitor → 5min wait → red)
     was_out = state.get("out_of_range_since") is not None
@@ -851,8 +854,6 @@ def main():
         out_of_range_duration_minutes = 0.0
     just_recovered = in_range and was_out
     # Update state
-    eastern = timezone(timedelta(hours=cfg.get("quiet_hours", {}).get("timezone_offset", -4)))
-    now = datetime.now(eastern)
     
     if state["tracking_started"] is None:
         state["tracking_started"] = now.isoformat()
