@@ -1,12 +1,14 @@
 # GenTech Multi-Agent Workflow v1.1
-Last Updated: 2026-05-08 (Daily Sync — End of Day)
+Last Updated: 2026-05-10 (Daily Sync — W20 Launch)
 
-## Active Sprint — Week of May 4–11, 2026
-- **Solana Frontier** — Day 6/8, deadline **May 11** (P0) — **T-2 days** 🔴
-- **Kite AI** — Secondary priority, deadline **May 17** (P1) — 9 days
-- **Swarms ACM** — Queued post-Frontier (May 27) — P1
-- **HeyGen** — May 14-15, registration pending (P2)
-- **Bags Hackathon** — June 1, scaffold built, awaiting API keys (P2)
+## Active Sprint — Week of May 10–16, 2026 (W20)
+- **Kite AI** — CURRENT PRIORITY, deadline **May 17** (P0) — 7 days
+- **Swarms ACM** — Queued (May 27), tech assessment COMPLETE — P1
+- **Bags FM** — Scaffold built, awaiting API keys — P1
+- **HeyGen** — May 14-15, registration pending — P1
+- **Google Cloud** — Jun 5-11, queued — P2
+- **Somnia** — Jun 11, queued — P2
+- ~~**Solana Frontier**~~ — **WITHDRAWN** (May 10) — insufficient time, no Rust/Anchor toolchain
 
 ## 🧘 System State — Incident Resolution (May 5 Status)
 
@@ -39,23 +41,21 @@ Last Updated: 2026-05-08 (Daily Sync — End of Day)
 - **H002** — Desmond → YoYo (Dynamic Burn Rate competitive analysis, overdue since Apr 19)
 
 ## DMOB Capacity Alert
-4 P0/P1 parallel tracks: Solana Frontier build, Kite AI scoping, Dynamic Burn Rate SC review, Gas Reserve SC review. Last active Apr 27. No bandwidth buffer; high stall risk if not re-prioritized.
+Kite AI (May 17) is now the sole P0. DMOB has bandwidth to focus. ~~Solana Frontier withdrawn — Anchor/Rust toolchain no longer needed.~~
 
 ## Deadlines This Week
-- **May 8** — Code complete for Solana Frontier
-- **May 11** — **Solana Frontier submission + Kite AI Phase 1 demo** (BOTH due)
 - **May 17** — Kite AI final submission
 
-## Solana Frontier Status (Day 5/8, May 5)
-**Target:** May 11 (6 days) | **Build Status:** PAUSED (since Apr 27)
-**Deliverables remaining:** Anchor workspace scaffold (4 programs), AgentRegistry (World ID CPI), JobEscrow (PDAs), Reputation (Metaplex NFT), DisputeResolver (evidence-based), full test suite, devnet deployment, demo app (Next.js + Phantom + Swig + World ID).
-**Blocker:** No active development since Swarms adapter pause; bandwidth likely allocated to portfolio work.
+## ~~Solana Frontier Status~~ — WITHDRAWN
+**Reason:** Insufficient time (8 days, starting from zero Anchor experience), no Rust toolchain on server, no SOL for devnet.
+**Solana work preserved** for cross-chain reuse in future projects.
 
 ## LP Position Monitoring — AVAX/USDC (LFJ)
- **May 6 snapshot:** $123.74, IL adjusted, efficiency varies, range $9.44–$9.74 (Bid-Ask shape)
- **Range rebalanced** from $9.25–$9.59 to $9.44–$9.74 — Bid-Ask shape for volatility
-- **Current status:** No rebalance needed; earning fees (~$0.22/day)
-- **Pool volume:** $12.7M/day (healthy liquidity)
+**May 10 snapshot:** $125.38, 🔴 OUT OF RANGE ($10.04 vs $9.78–$10.02), 0% fee efficiency
+- **Position:** 100% AVAX (one-sided), earning ZERO fees
+- **Cumulative return:** +302.4% (40 days), +297.1pp vs HODL
+- **Pool:** $4.05M TVL, $5.19M daily volume, 23.4% pool APR
+- **Action needed:** IMMEDIATE rebalance to $9.74–$10.34
 
 ## D5 Milestone Tracker Status
 - **Position variance issue:** Hardcoded `$5/$20/$55/$200` in `d5-master-cron.py` vs config `$3/$5/$8/$10/...` in AAE
@@ -67,10 +67,11 @@ Last Updated: 2026-05-08 (Daily Sync — End of Day)
 - **Posting window:** May 8-9 (2-3 days before deadline)
 - **Media needed:** Architecture diagram or anchor build screenshot
 
-## Hackathon Landscape (May 5)
-**Primary:** Kite AI + Solana Frontier (both May 11)
+## Hackathon Landscape (Updated May 10)
+**Primary:** Kite AI (May 17) — CURRENT PRIORITY
+**Queued:** Swarms ACM (May 27)
 **Qualified but inactive:** IGNITION (Global Solana $5.12M), K2 ($135k USDC, Stellar), Agents Assemble ($32.5k, AI Healthcare)
-**Strategy:** Stay focused on primary targets; secondary contests parked until post-May 11
+**Strategy:** Focus on Kite AI; park secondary contests until post-May 17
 
 ## State & Resolution Notes
 - Hermes profiles state architecture: consolidation pending (symlink `.lfj-*.json` to single source)
@@ -88,14 +89,14 @@ Last Updated: 2026-05-08 (Daily Sync — End of Day)
 
 ---
 
-## Weekly Organization (W19)
+## Weekly Organization (W20)
 
 Daily files follow ISO week layout:
-- `11-Mess Hall/2026/W19/2026-05-05/` — daily context + coordination files
-- `11-Mess Hall/daily/2026-05-05-summary.md` — daily digest (auto-generated/curated)
+- `11-Mess Hall/2026/W20/2026-05-10/` — daily context + coordination files
+- `11-Mess Hall/daily/2026-05-10-summary.md` — daily digest (auto-generated/curated)
 - `00-HQ/Summaries/` — weekly rollups after week close
 
-Prev: W17 (Apr 20–26) ✅ | W18 (Apr 27 – May 3) sparse | Current: W19 (May 4–10)
+Prev: W19 (May 3-9) ✅ Solana Frontier → withdrawn | Current: W20 (May 10-16) Kite AI sprint
 
 ---
 
@@ -158,56 +159,59 @@ Tomorrow May 6, ~16:00 UTC — check sprint activation, agent check-ins, hackath
 
 ---
 
-## Memory Entry — 2026-05-08 (Gentech)
+## Memory Entry — 2026-05-10 (Gentech)
 
-**Type:** Daily Second Brain Sync — End of Day
-**Time:** Fri May 8 ~16:00 UTC
-**Status:** ACTIVE — Sprint T-2, Deadline Pressure Mounting
+**Type:** Daily Second Brain Sync — Silent Run
+**Time:** Sun May 10 ~16:00 UTC
+**Status:** ACTIVE — W20 Sprint Launch, LP CRITICAL
 
-### Sprint Context (W19 Day 6)
-- **Focus:** Solana Frontier T-2. Jordan triage decision pending: full sprint / partial submit / withdraw.
-- **Today:** Bags scaffold built (5 modules), Agent Payments thesis shared, cron routing partially restructured, fleet healthy.
-- **Key wins:** Bags scaffold ready for API keys. Agent Payments + Swarms Monetization thesis (self-monetizing agent loop).
-- **Critical gap:** Anchor/Rust toolchain still broken, SOL not provided, Nous OAuth 5+ days offline, all agents OFFLINE on coordination board.
+### Sprint Context (W20 Day 1)
+- **Focus:** Kite AI (May 17) — NEW PRIMARY. Solana Frontier WITHDRAWN. 7 days to deadline.
+- **Today:** LP position OUT OF RANGE (price $10.04 vs range $9.78–$10.02). Zero fees. Swarms ACM tech assessment COMPLETE (green light).
+- **Key wins:** Solana work preserved for cross-chain. Swarms assessment done. Handoff board cleaned.
+- **Critical gap:** LP rebalance needed IMMEDIATELY. Nous OAuth 7+ days offline. GitHub PAT expired.
 
 ### Department State
 | Dept | Agent | Status | Notes |
 |------|------|--------|-------|
-| HQ | Jordan | Active | Agent Payments thesis, cron routing, Hive eval, Nosana grants |
-| Labs | Dmob | Pending | LP report done; toolchain fix NOT visible; 6+ tasks assigned |
-| Strategies | YoYo | Active | LFJ analysis, LayerZero monitor, grant queue, contest scan |
-| Entertainment | Desmond | Queued | ACM plan queued post-Frontier |
+| HQ | Jordan | Active | Priority routing, needs: LP rebalance, OAuth fix, PAT fix |
+| Labs | Dmob | Active (cron) | Kite AI contracts + Swarms ACM assessment complete |
+| Strategies | YoYo | Active (cron) | DeFi monitoring operational, AAE credit analysis pending |
+| Entertainment | Desmond | Queued | Social content + ACM plan post-Kite |
 
-### LP Position (Stable)
-- $9.54, IN RANGE, 157.4% effective APR, 86.2% fee efficiency
-- ~0% IL, pool share 98.97% ($3.99M TVL)
-- Risk: MEDIUM — toxic flow exposure (position IS the pool)
+### LP Position — CRITICAL
+- $10.04, OUT OF RANGE, 0% fee efficiency, $0/day earnings
+- Range: $9.78–$10.02 (rebalanced May 9). Price blew through top.
+- Position: 100% AVAX (one-sided). Value $125.38.
+- Cumulative return: +302.4% (40 days). Still beats HODL.
+- **Action needed:** Rebalance to $9.74–$10.34 immediately.
 
 ### Key Blockers
-1. 🔴 Solana Frontier T-2 — toolchain + SOL + tests all blocking. Jordan must decide TODAY.
-2. 🔴 Nous OAuth 5+ days offline — DMOB re-auth needed
-3. 🔴 Agent coordination board stale 5 days — All OFFLINE since May 3
-4. 🟡 DMOB resource crisis — 6+ P1 tasks, single point of failure
-5. 🟡 Portfolio health — 6 issues, 0 fixed from May 7
-6. 🟡 Handoffs H001/H003/H004 — 16-19 days overdue, DROP approved but not cleaned
+1. 🔴 LP OUT OF RANGE — Earning zero fees. Rebalance ASAP.
+2. 🔴 Nous OAuth 7+ days offline — DMOB re-auth needed.
+3. 🔴 GitHub PAT expired — git push blocked.
+4. 🟡 Social media auth 401 — All X/Twitter endpoints failing.
+5. 🟡 Master todo stale — Lists Solana as P0, needs refresh.
+6. 🟡 Agent coordination board stale 7 days — No check-ins since May 3.
 
 ### New Intel Today
-- **Bags scaffold:** 5 modules (auth, scout, trade, pipeline, config), all compile. Waiting on API keys.
-- **Agent Payments thesis:** Coinbase/AWS USDC on Base + Swarms Marketplace → self-monetizing agents.
-- **qwen-nosana-mcp:** 30-45x cost savings for offloadable tasks.
-- **Hive marketplace:** Potential agent distribution channel.
+- **Swarms ACM:** DMOB recommends wrapping LP Monitor. ~300-400 lines new code, 40h across 10 days.
+- **AgentEscrow:** 14/14 tests passing, ready for Kite AI deployment.
+- **AAE Credit Primitive:** Jordan referenced Krexa model. YoYo analysis requested.
+- **Social layer POC:** X/Twitter auth broken — all endpoints returning 401.
 
-### Plans for Tomorrow (May 9 — T-1)
-- Jordan: Solana Frontier triage decision (full/partial/withdraw)
-- Jordan: SOL for devnet + social content review + HeyGen registration
-- DMOB: Toolchain fix → devnet deploy → tests (sequence)
-- All agents: Force check-in push
-- Handoff board cleanup: formally DROP H001/H003/H004
+### Plans for Tomorrow (May 11)
+- Jordan: LP rebalance (IMMEDIATE — losing $0/day)
+- Jordan: Provide GitHub PAT for portfolio deploys
+- DMOB: Kite AI contract adaptation sprint begins
+- DMOB: Re-auth Nous OAuth
+- Jordan: Approve HeyGen registration (event May 14-15)
+- Team: Respond to Agent Payments thesis (shared May 8, zero input)
 
 ### Files Created This Sync
-- `11-Mess Hall/daily/2026-05-08-summary.md` — daily digest
+- `11-Mess Hall/daily/2026-05-10-summary.md` — daily digest
 - `00-Working-Memory.md` — updated (this entry)
 
 ### Next Daily Sync
-Tomorrow May 9, ~03:00 UTC — T-1 countdown, triage decision check
+Tomorrow May 11, ~03:00 UTC — Kite AI T-6, LP rebalance check
 
