@@ -117,6 +117,7 @@
         .status-live { background: #052e16; color: #22c55e; }
         .status-dev { background: #1c1400; color: #fbbf24; }
         .status-audit { background: #2d1515; color: #fca5a5; }
+        .status-completed { background: #0a1628; color: #60a5fa; }
         .skills {
             display: flex;
             flex-wrap: wrap;
@@ -415,13 +416,13 @@ html { scroll-behavior: smooth; }
 
 
         <script>
-            const projects = [{"id": "agent-escrow","title": "AgentEscrow","description": "Cross-chain payment infrastructure with AI agent integration. Agents escrow, validate, and release payments automatically. x402 protocol integration.","tech": ["Solana","Anchor","Rust","x402"],"status": "building","deadline": "2026-05-11","timeline": "May 2026","highlight": true,"vault_path": "03-Projects/AAE/agent-escrow-architecture.md"},
-{"id": "kite-ai","title": "Kite AI Governance","description": "Agent economy lifecycle landing on Kite AI settlement layer. AAE integration for decentralized agent marketplace governance.","tech": ["Avalanche","Python","Agent Framework"],"status": "building","deadline": "2026-05-17","timeline": "May 2026","highlight": true,"vault_path": "02-Labs/Hackathons/Kite-AI/"},
+            const projects = [{"id": "kite-ai","title": "Kite AI Governance","description": "Agent economy lifecycle landing on Kite AI settlement layer. AAE integration for decentralized agent marketplace governance.","tech": ["Avalanche","Python","Agent Framework"],"status": "building","deadline": "2026-05-17","timeline": "May 2026","highlight": true,"vault_path": "02-Labs/Hackathons/Kite-AI/"},
+{"id": "swarms-acm","title": "Swarms ACM LP Monitor","description": "Marketplace agent for DeFi LP monitoring and analysis. Built on Swarms framework for autonomous finance and market analysis.","tech": ["Swarms","DeFi","Python","Multi-Agent"],"status": "building","deadline": "2026-05-27","timeline": "May 2026","highlight": true,"vault_path": "02-Labs/Hackathons/Swarms-ACM/"},
+{"id": "bags-fm","title": "Bags FM Agent Trading Desk","description": "AI agent trading desk on Bags FM memecoin launchpad. Autonomous token analysis, portfolio management, and trade execution.","tech": ["Solana","AI Agents","Trading","Memecoin"],"status": "building","deadline": "2026-06-01","timeline": "Jun 2026","highlight": true,"vault_path": "02-Labs/Hackathons/Bags-FM/"},
+{"id": "agent-escrow","title": "AgentEscrow","description": "Cross-chain payment infrastructure with AI agent integration. Anchor programs built (AgentRegistry, JobEscrow, Reputation, DisputeResolver) — preserved for cross-chain reuse after Solana Frontier withdrawal.","tech": ["Solana","Anchor","Rust","x402"],"status": "completed","deadline": null,"timeline": "May 2026","highlight": false,"vault_path": "03-Projects/AAE/agent-escrow-architecture.md"},
 {"id": "lets-fg","title": "Let's FG Travel Agent","description": "Voice-first travel planning agent. Natural language flight/hotel search, price tracking, and booking automation via Pipecat and Maps APIs.","tech": ["Pipecat","Maps API","Python","Telegram"],"status": "live","deadline": null,"timeline": "Apr 2026","highlight": false,"vault_path": "03-Projects/Travel-Agent/"},
 {"id": "lfj-avax-usdc","title": "AAE Defi Milestones","description": "Automated DeFi portfolio management system with cross-chain rebalancing and gas optimization. Monitors pool ranges and rebalances positions to optimize fee capture and minimize IL.","tech": ["DeFi","Python","Cross-Chain","Gas Optimization"],"status": "live","deadline": null,"timeline": "Apr 2026","highlight": false,"vault_path": "03-Projects/DeFi/LFJ-AVAX-USDC.md"},
-{"id": "hermes-kanban","title": "Hermes Kanban","description": "TUI-based kanban board for autonomous agent task management. Integrated with Hermes agent orchestration for real-time task tracking and handoffs.","tech": ["Hermes","Python","TUI","SQLite"],"status": "live","deadline": null,"timeline": "Mar 2026","highlight": false,"vault_path": "03-Projects/hermes-kanban/"},
-{"id": "birdeye-bip","title": "Birdeye BIP","description": "On-chain market data adapter for Birdeye ecosystem. Real-time price feeds, order book data, and volume metrics for agent trading strategies.","tech": ["Solana","Python","Data Pipeline"],"status": "research","deadline": null,"timeline": "Feb 2026","highlight": false,"vault_path": "03-Projects/BirdeyeBIP/"},
-{"id": "tech-payment-router","title": "Tech Payment Router","description": "Ethereum payment router with x402 protocol support. Enables automated recurring payments, subscription billing, and micro-transaction routing.","tech": ["Ethereum","Solidity","x402","Payments"],"status": "research","deadline": null,"timeline": "Feb 2026","highlight": false,"vault_path": "03-Projects/tech-burn-test/"}];
+{"id": "hermes-kanban","title": "Hermes Kanban","description": "TUI-based kanban board for autonomous agent task management. Integrated with Hermes agent orchestration for real-time task tracking and handoffs.","tech": ["Hermes","Python","TUI","SQLite"],"status": "live","deadline": null,"timeline": "Mar 2026","highlight": false,"vault_path": "03-Projects/hermes-kanban/"}];
             const filterBtns = document.querySelectorAll('#projects .filter-btn');
             const projectsContainer = document.getElementById('projects-container');
             
@@ -429,6 +430,7 @@ html { scroll-behavior: smooth; }
             const statusConfig = {
                 'live': { label: '→ LIVE', class: 'status-live' },
                 'building': { label: '→ BUILDING', class: 'status-building' },
+                'completed': { label: '→ COMPLETED', class: 'status-completed' },
                 'research': { label: '→ WIP', class: 'status-research' },
                 'audit': { label: '→ AUDIT', class: 'status-audit' }
             };
@@ -540,30 +542,10 @@ html { scroll-behavior: smooth; }
                                     <script id="project-data" type="application/json">
 [
   {
-    "id": "agent-escrow",
-    "title": "AgentEscrow",
-    "description": "Cross-chain payment infrastructure with AI agent integration. Agents escrow, validate, and release payments automatically. x402 protocol integration.",
-    "tech": [
-      "Solana",
-      "Anchor",
-      "Rust",
-      "x402"
-    ],
-    "status": "building",
-    "deadline": "2026-05-11",
-    "timeline": "May 2026",
-    "highlight": true,
-    "vault_path": "03-Projects/AAE/agent-escrow-architecture.md"
-  },
-  {
     "id": "kite-ai",
     "title": "Kite AI Governance",
     "description": "Agent economy lifecycle landing on Kite AI settlement layer. AAE integration for decentralized agent marketplace governance.",
-    "tech": [
-      "Avalanche",
-      "Python",
-      "Agent Framework"
-    ],
+    "tech": ["Avalanche", "Python", "Agent Framework"],
     "status": "building",
     "deadline": "2026-05-17",
     "timeline": "May 2026",
@@ -571,15 +553,43 @@ html { scroll-behavior: smooth; }
     "vault_path": "02-Labs/Hackathons/Kite-AI/"
   },
   {
+    "id": "swarms-acm",
+    "title": "Swarms ACM LP Monitor",
+    "description": "Marketplace agent for DeFi LP monitoring and analysis. Built on Swarms framework for autonomous finance and market analysis.",
+    "tech": ["Swarms", "DeFi", "Python", "Multi-Agent"],
+    "status": "building",
+    "deadline": "2026-05-27",
+    "timeline": "May 2026",
+    "highlight": true,
+    "vault_path": "02-Labs/Hackathons/Swarms-ACM/"
+  },
+  {
+    "id": "bags-fm",
+    "title": "Bags FM Agent Trading Desk",
+    "description": "AI agent trading desk on Bags FM memecoin launchpad. Autonomous token analysis, portfolio management, and trade execution.",
+    "tech": ["Solana", "AI Agents", "Trading", "Memecoin"],
+    "status": "building",
+    "deadline": "2026-06-01",
+    "timeline": "Jun 2026",
+    "highlight": true,
+    "vault_path": "02-Labs/Hackathons/Bags-FM/"
+  },
+  {
+    "id": "agent-escrow",
+    "title": "AgentEscrow",
+    "description": "Cross-chain payment infrastructure with AI agent integration. Anchor programs built — preserved for cross-chain reuse after Solana Frontier withdrawal.",
+    "tech": ["Solana", "Anchor", "Rust", "x402"],
+    "status": "completed",
+    "deadline": null,
+    "timeline": "May 2026",
+    "highlight": false,
+    "vault_path": "03-Projects/AAE/agent-escrow-architecture.md"
+  },
+  {
     "id": "lets-fg",
     "title": "Let's FG Travel Agent",
     "description": "Voice-first travel planning agent. Natural language flight/hotel search, price tracking, and booking automation via Pipecat and Maps APIs.",
-    "tech": [
-      "Pipecat",
-      "Maps API",
-      "Python",
-      "Telegram"
-    ],
+    "tech": ["Pipecat", "Maps API", "Python", "Telegram"],
     "status": "live",
     "deadline": null,
     "timeline": "Apr 2026",
@@ -589,13 +599,8 @@ html { scroll-behavior: smooth; }
   {
     "id": "lfj-avax-usdc",
     "title": "AAE Defi Milestones",
-    "description": "Automated DeFi portfolio management system with cross-chain rebalancing and gas optimization. Monitors pool ranges and rebalances positions to optimize fee capture and minimize IL.",
-    "tech": [
-      "DeFi",
-      "Python",
-      "Cross-Chain",
-      "Gas Optimization"
-    ],
+    "description": "Automated DeFi portfolio management system with cross-chain rebalancing and gas optimization.",
+    "tech": ["DeFi", "Python", "Cross-Chain", "Gas Optimization"],
     "status": "live",
     "deadline": null,
     "timeline": "Apr 2026",
@@ -606,48 +611,12 @@ html { scroll-behavior: smooth; }
     "id": "hermes-kanban",
     "title": "Hermes Kanban",
     "description": "TUI-based kanban board for autonomous agent task management. Integrated with Hermes agent orchestration for real-time task tracking and handoffs.",
-    "tech": [
-      "Hermes",
-      "Python",
-      "TUI",
-      "SQLite"
-    ],
+    "tech": ["Hermes", "Python", "TUI", "SQLite"],
     "status": "live",
     "deadline": null,
     "timeline": "Mar 2026",
     "highlight": false,
     "vault_path": "03-Projects/hermes-kanban/"
-  },
-  {
-    "id": "birdeye-bip",
-    "title": "Birdeye BIP",
-    "description": "On-chain market data adapter for Birdeye ecosystem. Real-time price feeds, order book data, and volume metrics for agent trading strategies.",
-    "tech": [
-      "Solana",
-      "Python",
-      "Data Pipeline"
-    ],
-    "status": "research",
-    "deadline": null,
-    "timeline": "Feb 2026",
-    "highlight": false,
-    "vault_path": "03-Projects/BirdeyeBIP/"
-  },
-  {
-    "id": "tech-payment-router",
-    "title": "Tech Payment Router",
-    "description": "Ethereum payment router with x402 protocol support. Enables automated recurring payments, subscription billing, and micro-transaction routing.",
-    "tech": [
-      "Ethereum",
-      "Solidity",
-      "x402",
-      "Payments"
-    ],
-    "status": "research",
-    "deadline": null,
-    "timeline": "Feb 2026",
-    "highlight": false,
-    "vault_path": "03-Projects/tech-burn-test/"
   }
 ]
 </script>
@@ -656,10 +625,10 @@ html { scroll-behavior: smooth; }
                 const projects = JSON.parse(document.getElementById('project-data').textContent);
                 const categories = {
                     now: projects.filter(p => p.status === 'live' || (p.status === 'building' && p.deadline)),
-                    wip: projects.filter(p => p.status === 'building' && !p.deadline || p.status === 'research'),
+                    wip: projects.filter(p => (p.status === 'building' && !p.deadline) || p.status === 'research' || p.status === 'completed'),
                     tba: []
                 };
-                const statusLabels = { live: '→ LIVE', building: '→ BUILDING', research: '→ WIP', audit: '→ AUDIT' };
+                const statusLabels = { live: '→ LIVE', building: '→ BUILDING', completed: '→ COMPLETED', research: '→ WIP', audit: '→ AUDIT' };
                 function renderProjects(containerId, list) {
                     const container = document.getElementById(containerId);
                     if (!container) return;
@@ -701,6 +670,7 @@ html { scroll-behavior: smooth; }
                 .status { padding: 3px 8px; border-radius: 6px; font-weight: bold; text-transform: uppercase; }
                 .status-live { background: #052e16; color: #22c55e; }
                 .status-building { background: #1c1400; color: #fbbf24; }
+                .status-completed { background: #0a1628; color: #60a5fa; }
                 .status-research { background: #1a0d2e; color: #a855f7; }
                 .deadline, .timeline { color: #9ca3af; font-weight: 500; white-space: nowrap; }
             
