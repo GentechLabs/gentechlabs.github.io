@@ -9,7 +9,7 @@ Last updated: 2026-05-10 13:40 UTC (Jordan directive: Swarms ACM queued)
 | Google Cloud Rapid Agent | Jun 11 | Gemini + Agent Builder + MCP | $60K | 🟡 QUEUED | 383 participants. Managed by Google on Devpost. |
 | Google for Startups AI Agents | Jun 5 | AI agents prototype → production | $60K + $37.5K credits | 🟡 QUEUED | Register: https://goo.gle/486nbl4 |
 | Somnia | Jun 11 | TBD | $5K+ | 🟡 QUEUED | Job opportunity potential. |
-| Swarms ACM | May 27 | Finance & Market Analysis | $30K | 🟡 QUEUED | LP Monitor → marketplace agent. 17 days left. Tech assessment done. |
+|| Swarms ACM | May 27 | Finance & Market Analysis | $30K | 🟢 REPO READY | LP Monitor → marketplace agent. 16 days left. Tech assessment done. Repo: github.com/ProtoJay4789/swarms-acm-hackathon |
 | Solana Frontier | May 11 | Solana | $250K + accelerator | ❌ WITHDRAWN | Jordan directive May 10. Time/debugging constraints. Solana work preserved for cross-chain reuse. |
 
 ## Bug Bounties (Ongoing)

@@ -225,11 +225,11 @@ def load_range() -> tuple:
     try:
         with open(POSITION_FILE, "r") as f:
             data = json.load(f)
-        low = data.get("position", {}).get("range", {}).get("low", 10.15)
-        high = data.get("position", {}).get("range", {}).get("high", 10.38)
+        low = data.get("position", {}).get("range", {}).get("low", 9.90)
+        high = data.get("position", {}).get("range", {}).get("high", 10.15)
         return (float(low), float(high))
     except Exception:
-        return (10.15, 10.38)
+        return (9.90, 10.15)
 
 def load_state() -> dict:
     default = {

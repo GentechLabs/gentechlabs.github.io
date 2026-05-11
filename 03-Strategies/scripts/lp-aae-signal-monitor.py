@@ -38,8 +38,8 @@ DEFAULT_CONFIG = {
         "total_usd": 134.94,
         "token0_amount": 3.446,
         "token1_amount": 103.38,
-        "range_low": 10.15,
-        "range_high": 10.38,
+        "range_low": 9.90,
+        "range_high": 10.15,
         "shape": "curve"
     },
     "milestones": [
