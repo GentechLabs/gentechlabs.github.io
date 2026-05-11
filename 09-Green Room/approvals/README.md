@@ -1,17 +1,17 @@
 # ✅ Approval Queue
 
-> Agents: Write items here that need Jordan's approval. Jordan: Check this when you're back.
+> Write items here that need Jordan's approval. Jordan: Check this when you're back.
 
 ## Self-Approval Status
-> **Apr 18:** Jordan granted Desmond self-approval for content, strategy docs, and handoff routing while he rests. Major product decisions, tokenomics, and grant submissions still need Jordan's sign-off.
+> **May 11:** Solo operation. No auxiliary agent self-approval. All decisions route through Gentech → Jordan.
 
 ## Pending Approvals
-_(No items currently — Desmond self-approving content/strategy items)_
+_(No items currently)_
 
 ## Template
 ```markdown
 ### [DATE] — [Brief Title]
-- **From:** [Agent name]
+- **From:** [Who]
 - **Task:** [What was done]
 - **Needs approval:** [What specifically needs sign-off]
 - **Context:** [1-2 sentence summary]
@@ -26,7 +26,7 @@ _(Completed items move here)_
 _(Rejected items move here with reason)_
 
 ## Rules
-- Agents do NOT wait for approval — keep working on other tasks
+- Don't wait for approval — keep working on other tasks
 - If time-sensitive (hackathon deadline), flag as URGENT
 - Jordan checks this on return and approves/denies
 - Approved items get executed immediately

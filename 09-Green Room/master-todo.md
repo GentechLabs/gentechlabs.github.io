@@ -1,16 +1,16 @@
-# Master To-Do — 2026-05-10 (Updated)
+# Master To-Do — 2026-05-11 (Updated)
 
 ## 🔴 P0 — Kite AI Hackathon (May 17) — PRIMARY
 - [x] Brain backup to GitHub ✅
 - [x] ElevenLabs voices configured ✅
-- [x] All 4 agents connected + running ✅
+- [x] All bots connected + running ✅
 - [x] Vault synced + restructured ✅
 - [x] AgentEscrow contracts (53/53 tests) ✅
 - [x] Two-tier dispute resolution ✅
 - [x] Security audit complete ✅
-- [ ] Adapt contracts for Kite AI chain adapter (DMOB)
-- [ ] L3 Brain integration research (YoYo)
-- [ ] Prepare Kite AI submission — README, demo (Desmond)
+- [ ] Adapt contracts for Kite AI chain adapter
+- [ ] L3 Brain integration research
+- [ ] Prepare Kite AI submission — README, demo
 - [ ] Submit to Kite AI portal
 
 ## 🟡 P1 — ACM Hackathon (May 27)
@@ -33,35 +33,35 @@
 | Surge Ignition S1 | Ended Apr 24 |
 
 ## 🟢 P2 — AAE Signal Spec Implementation
-- [ ] **YoYo** — Optimize LP Monitor cron to fetch all structured fields
-- [x] **YoYo** — Draft Personal Goal Engine spec ✅
-- [ ] **YoYo** — Update AAE Signal Spec to v2.1 with PGE fields
-- [ ] **DMOB** — Scaffold contract structs
-- [ ] **DMOB** — Design rank-gated access control
-- [ ] **DMOB** — PGE contract structs + functions
-- [ ] **DMOB** — Auto-compound trigger logic
-- [ ] **Desmond** — Alert severity microcopy
-- [ ] **Desmond** — Rank tier UX + unlock descriptions
-- [ ] **Desmond** — Milestone shareable cards + empty state copy
-- [ ] **Desmond** — PGE celebration/reflection/module copy
+- [ ] Optimize LP Monitor cron to fetch all structured fields
+- [x] Draft Personal Goal Engine spec ✅
+- [ ] Update AAE Signal Spec to v2.1 with PGE fields
+- [ ] Scaffold contract structs
+- [ ] Design rank-gated access control
+- [ ] PGE contract structs + functions
+- [ ] Auto-compound trigger logic
+- [ ] Alert severity microcopy
+- [ ] Rank tier UX + unlock descriptions
+- [ ] Milestone shareable cards + empty state copy
+- [ ] PGE celebration/reflection/module copy
 
 ## 🟢 P2 — Personal Goal Engine
 - [x] Draft full spec ✅
 - [x] AAE Signal Spec v2.1 extension ✅
-- [x] **YoYo** — Draft 10 Academy module scripts ✅
-- [x] **YoYo** — Integrate PGE track into Academy curriculum ✅
-- [ ] **Desmond** — Review module scripts, voice/tone pass
-- [ ] **Desmond** — Celebration/reflection/module copy
-- [ ] **DMOB** — PGE contract structs + functions
-- [ ] **YoYo** — Cron integration for PGE signals
-- [ ] **Gentech** — Front-end wireframes / review
-- [ ] **Jordan** — Review spec + Academy modules
+- [x] Draft 10 Academy module scripts ✅
+- [x] Integrate PGE track into Academy curriculum ✅
+- [ ] Review module scripts, voice/tone pass
+- [ ] Celebration/reflection/module copy
+- [ ] PGE contract structs + functions
+- [ ] Cron integration for PGE signals
+- [ ] Front-end wireframes / review
+- [ ] Review spec + Academy modules
 
 ## 🟢 P2 — Prediction Market Layer
-- [ ] **YoYo** — Feasibility: prediction market vs social betting
-- [ ] **DMOB** — Contract architecture: binary markets, escrow, scoring
-- [ ] **Desmond** — UX framing: leaderboard design, copy
-- [ ] **Gentech** — Consolidate assessments into recommendation
+- [ ] Feasibility: prediction market vs social betting
+- [ ] Contract architecture: binary markets, escrow, scoring
+- [ ] UX framing: leaderboard design, copy
+- [ ] Consolidate assessments into recommendation
 
 ## 📅 Pipeline (All Feeds AAE → July Retro / Fall Colosseum)
 | Target | Date | Prize | Notes |
@@ -88,13 +88,13 @@
 
 ## 📋 Backlog
 - [ ] Agent response protocol refinement
-- [ ] Content pipeline strategy (Desmond)
+- [ ] Content pipeline strategy
 - [ ] Inter-agent coordination protocol
 - [ ] Hermes upstream sync
 - [ ] Custom ElevenLabs voice cloning per agent
 - [ ] Self-evolution skill integration
 
 ---
-**Last updated:** 2026-05-06 22:00 UTC
-**Updated by:** Desmond (overnight sprint)
+**Last updated:** 2026-05-11 10:48 UTC
+**Updated by:** Gentech (solo operation cleanup)
 **Next update:** Jordan morning review

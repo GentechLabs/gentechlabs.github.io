@@ -1,5 +1,3 @@
-
-
 ## 2026-05-11 10:08 UTC Update
 
 ### Position Summary
@@ -33,7 +31,7 @@ The position has drifted heavily USDC-weighted as AVAX rose through the range. A
 ### Milestone Ladder
 | Tier | Daily Target | Status |
 |------|-------------|--------|
-| Scout | $5.00/day | ⏳ 23.8% — $0.15-0.30/day (degraded) |
+| Scout | $5.00/day | ⏳ 1.6% — $0.08/day |
 | Raider | $20.00/day | 🔒 Locked |
 | Warlord | $50.00/day | 🔒 Locked |
 | Sovereign | $100.00/day | 🔒 Locked |
