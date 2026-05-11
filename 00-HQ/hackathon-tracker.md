@@ -1,6 +1,6 @@
 # 🏆 Active Hackathon Tracker
 
-Last updated: 2026-05-10 13:40 UTC (Jordan directive: Swarms ACM queued)
+Last updated: 2026-05-11 09:30 UTC (Agora Agents added, full audit complete)
 
 | Hackathon | Dates | Theme | Prizes | Status | Notes |
 |-----------|-------|-------|--------|--------|-------|
@@ -9,7 +9,8 @@ Last updated: 2026-05-10 13:40 UTC (Jordan directive: Swarms ACM queued)
 | Google Cloud Rapid Agent | Jun 11 | Gemini + Agent Builder + MCP | $60K | 🟡 QUEUED | 383 participants. Managed by Google on Devpost. |
 | Google for Startups AI Agents | Jun 5 | AI agents prototype → production | $60K + $37.5K credits | 🟡 QUEUED | Register: https://goo.gle/486nbl4 |
 | Somnia | Jun 11 | TBD | $5K+ | 🟡 QUEUED | Job opportunity potential. |
-|| Swarms ACM | May 27 | Finance & Market Analysis | $30K | 🟢 REPO READY | LP Monitor → marketplace agent. 16 days left. Tech assessment done. Repo: github.com/ProtoJay4789/swarms-acm-hackathon |
+| Agora Agents (Canteen × Circle) | May 25 | AI Agents on Arc (EVM L1) | $50K | 🟢 REGISTERED | Jordan invited. RFB 04 (Adaptive Portfolio Manager) = strongest fit. Apply NOW. |
+| Swarms ACM | May 27 | Finance & Market Analysis | $30K | 🟡 QUEUED | LP Monitor → marketplace agent. 16 days left. Tech assessment done. |
 | Solana Frontier | May 11 | Solana | $250K + accelerator | ❌ WITHDRAWN | Jordan directive May 10. Time/debugging constraints. Solana work preserved for cross-chain reuse. |
 
 ## Bug Bounties (Ongoing)
@@ -33,10 +34,11 @@ Last updated: 2026-05-10 13:40 UTC (Jordan directive: Swarms ACM queued)
 - **Kite AI event**: May 17
 - **Code4rena K2**: May 27 (20 days)
 
-## Priority Order (per Jordan directive, May 10)
-1. **Kite AI** — PRIMARY. Deadline May 17. Jordan registered.
-2. **Swarms ACM** — QUEUED. Deadline May 27. LP Monitor marketplace agent. Tech assessment complete.
-3. **Bags FM** — ACTIVE. Deadline Jun 1. Agent Trading Desk build in progress.
-4. **Google (Cloud Rapid Agent + for Startups)** — QUEUED. Deadlines Jun 5-11. At least one submission target.
-5. **Somnia** — QUEUED. Deadline Jun 11. Job opportunity potential.
-6. **Solana Frontier** — ❌ WITHDRAWN. Not enough time, Hermes Windows support not ready. Solana work preserved for cross-chain port.
+## Priority Order (per Jordan directive, May 11)
+1. **Kite AI** — PRIMARY. Deadline May 17. Jordan registered. 52/52 tests, contracts done, needs deploy + demo.
+2. **Agora Agents** — 🟢 NEW. Deadline May 25. $50K. RFB 04 (Adaptive Portfolio Manager) = strongest fit. Apply NOW.
+3. **Swarms ACM** — QUEUED. Deadline May 27. LP Monitor marketplace agent. Tech assessment complete.
+4. **Bags FM** — ACTIVE. Deadline Jun 1. Agent Trading Desk build.
+5. **Google (Cloud Rapid Agent + for Startups)** — QUEUED. Deadlines Jun 5-11. At least one submission target.
+6. **Somnia** — QUEUED. Deadline Jun 11. $5K + job opportunity. Encode Club partnership.
+7. **Solana Frontier** — ❌ WITHDRAWN. Not enough time, Hermes Windows support not ready. Solana work preserved for cross-chain port.
