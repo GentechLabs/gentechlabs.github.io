@@ -4,79 +4,139 @@ import re
 from pathlib import Path
 from datetime import datetime
 
-VAULT_PATH = "/root/vaults/gentech/03-Projects"
-OUTPUT_PATH = "/root/.hermes/profiles/gentech/home/portfolio/data/projects.json"
+# Use relative path - runs from repo root
+VAULT_PATH = os.path.join(os.path.dirname(__file__), "..", "data", "projects-source")
+OUTPUT_PATH = os.path.join(os.path.dirname(__file__), "..", "data", "projects.json")
 
-PROJECT_STATUS = {
-    "agent-escrow-solana": {"status": "building", "deadline": "2026-05-11", "highlight": True, "timeline": "May 2026"},
-    "kite-ai": {"status": "building", "deadline": "2026-05-17", "highlight": True, "timeline": "May 2026"},
-    "lets-fg": {"status": "live", "deadline": None, "highlight": False, "timeline": "Apr 2026"},
-    "hermes-kanban": {"status": "live", "deadline": None, "highlight": False, "timeline": "Mar 2026"},
-    "tech-payment-router": {"status": "research", "deadline": None, "highlight": False, "timeline": "Feb 2026"},
-    "lfj-avax-usdc-rebalance": {"status": "live", "deadline": None, "highlight": False, "timeline": "Apr 2026"},
-    "birdeye-bip": {"status": "research", "deadline": None, "highlight": False, "timeline": "Feb 2026"},
-}
-
-def extract_readme_info(project_path):
-    readme = Path(project_path) / "README.md"
-    if not readme.exists():
-        return {"description": "", "tech": []}
-    
-    text = readme.read_text(encoding="utf-8", errors="ignore")
-    
-    # First substantial paragraph after title
-    lines = text.split('\n')
-    description = ""
-    in_desc = False
-    for line in lines:
-        if line.startswith('# '):
-            in_desc = True
-            continue
-        if in_desc and line.strip() and not line.startswith('#'):
-            description = line.strip()
-            break
-    
-    tech = []
-    tech_match = re.search(r'## Tech Stack\s*(.+?)\n\n', text, re.DOTALL)
-    if tech_match:
-        tech = re.findall(r'`([^`]+)`', tech_match.group(1))
-    
-    return {"description": description[:150], "tech": tech[:5]}
-
-def discover_projects():
-    projects = []
-    for folder in sorted(os.listdir(VAULT_PATH)):
-        folder_lower = folder.lower().replace("_", "-")
-        meta = PROJECT_STATUS.get(folder_lower, {"status": "building", "deadline": None, "highlight": False, "timeline": None})
-        
-        project_path = os.path.join(VAULT_PATH, folder)
-        if not os.path.isdir(project_path):
-            continue
-            
-        info = extract_readme_info(project_path)
-        title = folder.replace("-", " ").replace("_", " ").title()
-        
-        projects.append({
-            "id": folder_lower,
-            "title": title,
-            "description": info["description"] or f"{title} — GenTech project",
-            "tech": info["tech"],
-            "status": meta["status"],
-            "deadline": meta["deadline"],
-            "timeline": meta.get("timeline"),
-            "highlight": meta["highlight"],
-            "vault_path": f"03-Projects/{folder}"
-        })
-    
-    projects.sort(key=lambda p: (not p["highlight"], p["deadline"] or "9999"))
-    return projects
+# Project metadata - update this when projects change
+PROJECTS = [
+    {
+        "id": "agent-escrow",
+        "title": "AgentEscrow",
+        "description": "Cross-chain payment infrastructure with AI agent integration. Agents escrow, validate, and release payments automatically via x402 protocol.",
+        "tech": ["Solana", "Anchor", "Rust", "x402"],
+        "status": "completed",
+        "deadline": None,
+        "timeline": "May 2026",
+        "highlight": True,
+        "vault_path": "02-Labs/Hackathons/Active/Colosseum-Frontier/agent-escrow-solana",
+        "hackathon": "Solana Frontier (Colosseum)",
+        "learned": "Built 4 Solana programs (agent-registry, job-escrow, dispute-resolver, reputation). Withdrew due to time constraints — code preserved for cross-chain reuse."
+    },
+    {
+        "id": "kite-ai",
+        "title": "Kite AI — Agentic Commerce",
+        "description": "Autonomous AI agents that discover, decide, and settle on-chain. Dynamic Strategy Engine for yield optimization and market analysis.",
+        "tech": ["Avalanche", "Python", "Agent Framework", "DeFi"],
+        "status": "building",
+        "deadline": "2026-05-17",
+        "timeline": "May 2026",
+        "highlight": True,
+        "vault_path": "02-Labs/Hackathons/Active/Kite-AI",
+        "hackathon": "Kite AI Hackathon",
+        "learned": "AgentEscrow contracts adapted for Kite AI chain. AAE narrative complete."
+    },
+    {
+        "id": "swarms-acm",
+        "title": "Swarms ACM — LP Monitor Agent",
+        "description": "DeFi LP position monitor published to Swarms Marketplace. Real-time price tracking, IL calculation, and rebalance alerts.",
+        "tech": ["Python", "Swarms", "DeFi", "CoinGecko", "DexScreener"],
+        "status": "building",
+        "deadline": "2026-05-27",
+        "timeline": "May 2026",
+        "highlight": True,
+        "vault_path": "02-Labs/Hackathons/Active/Swarms-ACM",
+        "hackathon": "Swarms ACM Hackathon",
+        "learned": "Wrapping existing 541-line LP Monitor skill into Swarms marketplace agent. 300-400 lines new code."
+    },
+    {
+        "id": "bags-fm",
+        "title": "Bags FM — Agent Trading Desk",
+        "description": "Memecoin launchpad integration with AI agent trading capabilities. Solana-based.",
+        "tech": ["Solana", "Python", "MCP"],
+        "status": "building",
+        "deadline": "2026-06-01",
+        "timeline": "Jun 2026",
+        "highlight": False,
+        "vault_path": "02-Labs/Hackathons/Active/Bags-FM",
+        "hackathon": "Bags FM (DoraHacks)",
+        "learned": "5-module scaffold built, Bags SDK installed. Awaiting API keys."
+    },
+    {
+        "id": "lfj-avax-usdc",
+        "title": "AAE DeFi Milestones",
+        "description": "Automated DeFi portfolio management with concentrated liquidity monitoring, IL tracking, and milestone-based progression.",
+        "tech": ["DeFi", "Python", "Avalanche", "LFJ"],
+        "status": "live",
+        "deadline": None,
+        "timeline": "Apr 2026",
+        "highlight": False,
+        "vault_path": "03-Strategies/Defi-Monitor",
+        "hackathon": None,
+        "learned": "Live LP monitoring with alert-once logic. +302% cumulative return. Multi-pool support."
+    },
+    {
+        "id": "lets-fg",
+        "title": "Let's FG Travel Agent",
+        "description": "Voice-first travel planning agent. Natural language flight/hotel search, price tracking, and booking automation.",
+        "tech": ["Pipecat", "Maps API", "Python", "Telegram"],
+        "status": "live",
+        "deadline": None,
+        "timeline": "Apr 2026",
+        "highlight": False,
+        "vault_path": "07-Ideas/Travel",
+        "hackathon": None,
+        "learned": "Voice-first interface for travel planning. Pipecat integration."
+    },
+    {
+        "id": "hermes-kanban",
+        "title": "Hermes Kanban",
+        "description": "TUI-based kanban board for autonomous agent task management. Real-time task tracking and handoffs.",
+        "tech": ["Hermes", "Python", "TUI", "SQLite"],
+        "status": "live",
+        "deadline": None,
+        "timeline": "Mar 2026",
+        "highlight": False,
+        "vault_path": "02-Labs/hermes-kanban",
+        "hackathon": None,
+        "learned": "Integrated with Hermes agent orchestration."
+    },
+    {
+        "id": "birdeye-bip",
+        "title": "Birdeye BIP",
+        "description": "On-chain market data adapter for Birdeye ecosystem. Real-time price feeds, order book data, and volume metrics.",
+        "tech": ["Solana", "Python", "Data Pipeline"],
+        "status": "research",
+        "deadline": None,
+        "timeline": "Feb 2026",
+        "highlight": False,
+        "vault_path": "02-Labs/BirdeyeBIP",
+        "hackathon": None,
+        "learned": "Birdeye x402 integration research."
+    },
+    {
+        "id": "tech-payment-router",
+        "title": "Tech Payment Router",
+        "description": "Ethereum payment router with x402 protocol support. Automated recurring payments and micro-transaction routing.",
+        "tech": ["Ethereum", "Solidity", "x402", "Payments"],
+        "status": "research",
+        "deadline": None,
+        "timeline": "Feb 2026",
+        "highlight": False,
+        "vault_path": "02-Labs/tech-burn-test",
+        "hackathon": None,
+        "learned": "x402 protocol research and implementation."
+    }
+]
 
 if __name__ == "__main__":
     data = {
-        "projects": discover_projects(),
+        "projects": PROJECTS,
         "generated": datetime.now().strftime("%Y-%m-%d %H:%M"),
-        "source": "vault 03-Projects/"
+        "source": "portfolio/data/projects-source"
     }
-    Path(OUTPUT_PATH).parent.mkdir(parents=True, exist_ok=True)
-    Path(OUTPUT_PATH).write_text(json.dumps(data, indent=2))
+    
+    output = Path(OUTPUT_PATH)
+    output.parent.mkdir(parents=True, exist_ok=True)
+    output.write_text(json.dumps(data, indent=2))
     print(f"✅ Generated {len(data['projects'])} projects")

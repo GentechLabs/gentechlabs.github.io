@@ -21,14 +21,12 @@ jobs:
           python-version: '3.11'
       
       - name: Generate projects.json
-        run: |
-          git clone https://x-access-token:${{ secrets.PORTFOLIO_TOKEN }}@github.com/ProtoJay4789/gentech.git ~/vault
-          python scripts/generate_projects.py
+        run: python scripts/generate_projects.py
       
       - name: Commit and push
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add data/projects.json
-          git diff --cached --quiet || git commit -m "chore: update projects data from vault [skip ci]"
+          git diff --cached --quiet || git commit -m "chore: update projects data [skip ci]"
           git push origin main
