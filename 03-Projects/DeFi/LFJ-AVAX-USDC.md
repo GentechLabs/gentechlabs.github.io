@@ -9,32 +9,27 @@
 **Entry Date**: 2026-03-31
 
 ---
-## 2026-05-11 12:15 UTC Update
-**Price Range**: $9.90–$10.15 (Shape: bid-ask)
-**Balances**: 4.36 AVAX (~$43.91) + 133.85 USDC (~$133.85) = **$177.76**
-**Fees (24h)**: $0.08 (est. from volume $3.82M × 5 bps × 0.0043% share; on-chain oracle not configured)
-**IL**: ~-0.2% (vs. HODL since May 11 rebalance) ✓ below 2% threshold
-**Range Status**: 🟢 In Range (68.5% from bottom, 31.6% from top)
-**Last Rebalance**: 2026-05-11 ~03:20 UTC (jordan_screenshot)
-**Action**: No rebalance needed — price inside position range. Efficiency recovered to 63.0% above 50% threshold.
+## 2026-05-11 13:59 UTC Update (on-chain)
+**Price Range**: $9.90–$10.15 (Shape: Curve — on-chain decoded)
+**Balances**: 6.92 AVAX (~$69.86) + 107.90 USDC (~$107.90) = **$177.76**
+**Wallet**: 0.0975 AVAX (~$0.98)
+**Fees (24h)**: ~$0.26 (est. from $4.12M volume × 5bps × CL share; oracle not configured)
+**IL**: -0.0% ✓ negligible (freshly rebalanced May 11)
+**Range Status**: 🟡 In Range — price at 76.5% (near top), USDC-heavy 60.7%
+**Last Rebalance**: 2026-05-11 (jordan_screenshot)
+**Action**: ⚠️ Efficiency 46.9% < 50% — consider range recentering toward active price ($10.09). Price near top of range converting position to USDC-heavy.
 
-**⚠️ Position Note**: Position rebalanced from $10.28–$10.55 (Curve, 9.489 AVAX + 84.02 USDC) to $9.90–$10.15 (bid-ask, 4.36 AVAX + 133.85 USDC). Composition shifted from AVAX-heavy to USDC-heavy (75.3% USDC). Capital reduced from $182.98 to $177.76.
+**Position Note**: Position shifted since morning (08:00 AM jordan_screenshot). AVAX converted to USDC as price rose to $10.09 (top 24% of range). Efficiency dropped from 63.0% to 46.9% — capital suboptimal. Morning data (8.861 AVAX + 90 USDC) stale; on-chain reader used as source of truth.
 
-**Market Notes**: AVAX at $10.0711 (24h +1.00%), inside position range $9.90–$10.15. JOE at $0.0514 (+5.37% — strong rally). Pool volume $3.82M/day (0.93x TVL). Pool TVL $4.13M.
-
-**On-Chain Data**: Active bin 8363274, 31 bins with user shares (8363257–8363282). Avg efficiency 63.0%. Price at 68.5% from bottom of range.
+**Market Notes**: AVAX $10.09 (+0.52% 24h), JOE $0.0513 (+3.89% 24h 📈). Pool TVL $4.17M, 24h volume $4.12M (5,467 txns). Broad altcoin stability.
 
 **D5 Milestone Alignment**:
-- Position value ($177.76) → Scout tier ($5.00/day target) — 1.6% progress
-- Price inside position range ✅ (68.5% from bottom)
-- IL ✓ well below 2% threshold (~-0.2%)
-- Efficiency ✓ at 63.0% — above 50% threshold, no DCA trigger
+- Scout tier ($5.00/day target) — est. daily fees ~$0.26 → 5.2% progress
+- Price inside strategic band ($9.90–$10.15) ✅
+- IL -0.0% — well below 2% review threshold ✅
+- Efficiency 46.9% < 50% → ⚠️ DCA boost potential; range recentering recommended
 
-**Condition Update**: Both out-of-range and low-efficiency alerts RESOLVED since last check (10:12 UTC). Price returned to range, efficiency recovered above 50%.
-
-**Other Pools**: None active
-
----
+**Scout Progress**: 5.2% ($0.26/day vs $5.00 target)
 
 ## 2026-05-10 20:15 UTC Update
 **Price Range**: $10.28–$10.55 (Shape: curve)
