@@ -170,3 +170,11 @@ The position has drifted heavily USDC-weighted as AVAX rose through the range. A
    121|---
    122|
    123|## Previous Updates
+
+## 2026-05-11 Update — LP Rebalance Confirmed
+- **Range**: $9.90–$10.30 (wide curve)
+- **Position**: 8.861 AVAX ($89.56) + 90 USDC ($89.98) = $179.54
+- **24h Fees**: $2.47 (0.12337 AVAX + 1.224 USDC)
+- **Fee Efficiency**: 1.37% daily on $179.54
+- **Status**: Centered in range (~$10.01–$10.06), comfortable
+- **Source**: Jordan confirmed rebalance
