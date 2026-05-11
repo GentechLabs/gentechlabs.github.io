@@ -162,6 +162,27 @@
         .badge-submit { background: #052e16; color: #22c55e; }
         .badge-building { background: #1c1400; color: #fbbf24; }
         .badge-queued { background: #1a0d2e; color: #a855f7; }
+        .filter-btn {
+            display: inline-block;
+            padding: 6px 16px;
+            border-radius: 20px;
+            border: 1px solid #333;
+            background: #1a1a1a;
+            color: #e0e0e0;
+            font-size: 0.85em;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .filter-btn:hover {
+            border-color: #22c55e;
+            color: #22c55e;
+        }
+        .filter-btn.active {
+            background: #22c55e;
+            color: #0a0a0a;
+            border-color: #22c55e;
+        }
         .footer {
             text-align: center;
             padding: 30px;
@@ -873,16 +894,28 @@ html { scroll-behavior: smooth; }
                         <th>Status</th>
                     </tr>
                     <tr>
-                        <td><strong>Solana Frontier</strong></td>
-                        <td>Solana</td>
-                        <td>May 11</td>
-                        <td><span class="badge badge-building">BUILDING</span></td>
-                    </tr>
-                    <tr>
                         <td><strong>Kite AI</strong></td>
                         <td>Kite L1</td>
                         <td>May 17</td>
                         <td><span class="badge badge-building">BUILDING</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Swarms ACM</strong></td>
+                        <td>Multi</td>
+                        <td>May 27</td>
+                        <td><span class="badge badge-building">BUILDING</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Bags FM</strong></td>
+                        <td>Solana</td>
+                        <td>Jun 1</td>
+                        <td><span class="badge badge-queued">QUEUED</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Google ADK</strong></td>
+                        <td>AI</td>
+                        <td>Jun 5–11</td>
+                        <td><span class="badge badge-queued">QUEUED</span></td>
                     </tr>
                     <tr>
                         <td><strong>Retro9000</strong></td>
@@ -930,7 +963,7 @@ html { scroll-behavior: smooth; }
 
     <div class="footer">
         <p>
-            Built with 💚 by Jordan · Powered by GenTech Agents · Last updated: April 2026<br>
+            Built with 💚 by Jordan · Powered by GenTech Agents · Last updated: May 2026<br>
             <span style="color: #22c55e;">Building the agent-owned economy.</span>
         </p>
     </div>
