@@ -47,7 +47,7 @@
 ---
 
 ## ✅ Completed Today
-- Portfolio email updated (`jordanjones0902@gmail.com` live on ProtoJay4789.github.io)
+- Portfolio email updated (`[REDACTED_EMAIL]` live on ProtoJay4789.github.io)
 - 4 inbox files moved to `01-Agency/Approvals/`
 - Tesseract OCR installed for future image processing
 - Vision tool 401 issue identified (model migration fallout)

@@ -63,7 +63,7 @@ d5-milestone-tracker.py — 4× daily: 08:15, 12:15, 16:15, 20:15 ET
 |-----------|-------|
 | Pool | LFJ AVAX/USDC, Avalanche C-Chain |
 | Position manager | `0x18556da13313f3532c54711497a8fedac273220e` |
-| Wallet | `0x7ebff188f2Eba16518C02864589b1403a5d1296a` |
+| Wallet | `[REDACTED_WALLET]` |
 | Range | 8.95–9.36 (curve shape) |
 | Fee tier | 5 bps |
 | Current position | $138.92 |

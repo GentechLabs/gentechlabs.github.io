@@ -1,17 +1,17 @@
 # Active Hackathons & Bounties
-Status: Updated May 8, 2026 (21:43 UTC)
+Status: Updated May 10, 2026 (00:05 UTC) — Jordan directive: Solana Frontier withdrawn
 
 ## Current Focus (Building Now)
-- **Solana Frontier (Colosseum)** 🟢: Agent Economy — Solana-native high-throughput labor market. **Deadline: May 11**. $230K+ pool + $250K accelerator.
-- **Kite AI Hackathon** 🟢: Agent Economy — AAE lifecycle landing on Kite AI settlement. **Deadline: May 17**. $10K pool. Track: Agentic Commerce.
+- **Kite AI Hackathon** 🔴: Agent Economy — AAE lifecycle landing on Kite AI settlement. **Deadline: May 17**. $10K pool. Track: Agentic Commerce. Jordan registered.
+- **Bags FM Hackathon** 🔴: Agent Trading Desk — multi-agent system for autonomous token scouting, analysis, and trading on Solana via Bags MCP. **Deadline: Jun 1**. $1M prizes + $3M support. Hits Bags API + AI Agents + DeFi tracks.
 
 ## Queued (After Current Focus)
-- **Swarms ACM Hackathon** 🔵: Tokenized agents/prompts on Swarms Marketplace. **Deadline: May 27**. $30K pool (Solana, $SWARMS, USDC). LP Monitor is top submission candidate. **Repo:** TBD (GitHub token expired — needs new token). **DMOB scoping in Labs.**
-- **Interledger Open Payments SDK Grants** 🟡: Build SDKs that make Open Payments (universal HTTP API for payments) easier for developers. **$5K–$50K per proposal. Rolling applications (no deadline).** Themes: GNAP (Grant Authorization), Kiota (API client generator), HTTP Signatures, Arazzo (workflow specs), curl integration. Languages: TypeScript, Python. Apply: https://interledger.org
-
-## Next Up (After Solana/Kite + Swarms)
 - **Google Cloud Rapid Agent** 🆕: Build agents with Gemini + Google Cloud Agent Builder + MCP. **Deadline: Jun 11**. $60K pool. 383 participants. Managed by Google on Devpost.
 - **Google for Startups AI Agents Challenge** 🟡: AI agents prototype → production. **Deadline: Jun 5**. $60K cash + $37.5K Google Cloud credits + $500 credits per participant. Register: https://goo.gle/486nbl4
+- **Somnia** 🟡: $5K+ pool. Job opportunity potential. **Deadline: Jun 11**.
+
+## Withdrawn
+- **Solana Frontier (Colosseum)** ❌: **WITHDRAWN May 10 per Jordan directive.** Reason: insufficient time, Hermes Windows support not ready, video/debugging too time-consuming. Solana work (Anchor programs, Agent Escrow, agent economy patterns) **preserved for cross-chain reuse**. "Solana is always going to have hackathons."
 
 ## ⚪ Maybe / Evaluating
 - **Turing Test Hackathon (Mantle)** ⚪: Agentic Wallets & Economy — on-chain agent identity + trading on Mantle. **Phase 2 Deadline: Jun 15**. $100K pool (Grand $50K). Track: Agentic Wallets & Economy (Byreal Skills CLI, RealClaw). Host: Mantle + Bybit + BGA. Platform: DoraHacks. **Blocker: Mantle EVM/Solidity required — no Solana. Needs new build, not a direct port.** Agent economy narrative applies. ERC-8004 Identity NFTs. Judging: ROI, Sharpe, reputation delta. URL: https://dorahacks.io/hackathon/mantleturingtesthackathon2026

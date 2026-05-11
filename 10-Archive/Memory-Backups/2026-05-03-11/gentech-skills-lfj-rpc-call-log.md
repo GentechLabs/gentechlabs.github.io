@@ -33,7 +33,7 @@
 **Example** (bin 8363157):
 ```
 data: 0x00fdd58e
-      [address as 32-byte hex] → 0x7ebff188f2Eba16518C02864589b1403a5d1296a
+      [address as 32-byte hex] → [REDACTED_WALLET]
       [binId as 32-byte hex]  → 0x000000000000000000000000000000000000000000000000000000000031a405
 ```
 **Response (bin 8363157)**: `0x0000022f9720978c21a55e2b0000000` (truncated in transcript) → parsed to `149886948901471345170371` shares  
@@ -145,7 +145,7 @@ import requests
 
 RPC = 'https://api.avax.network/ext/bc/C/rpc'
 POOL = '0x864d4e5ee7318e97483db7eb0912e09f161516ea'
-WALLET = '0x7ebff188f2Eba16518C02864589b1403a5d1296a'
+WALLET = '[REDACTED_WALLET]'
 
 def rpc_call(data, block='latest'):
     payload = {"jsonrpc":"2.0","id":1,"method":"eth_call",

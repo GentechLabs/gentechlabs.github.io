@@ -1,21 +1,23 @@
 # 🟢 Jordan's Approval Queue
 
-**Checkbox = not done yet. Check it = done. That's it.**
-No approval needed for: agent riffing, research, drafts, routine tasks.
-Only stuff here that's hard to undo — deploys, spending, breaking changes.
+**Last updated:** 2026-05-10
+**Updated by:** Gentech
 
-Last updated: 2026-04-18
+> Only stuff here that's hard to undo — deploys, spending, breaking changes.
+> Everything else — agents just do it.
 
 ---
 
 ## ⏳ Needs Your Eyes
 
-- [ ] **Termux SSH key** — Dmob needs your pubkey for mobile VPS access
-- [x] **Hackathon go/no-go** — $25k Nous hackathon, 16 days. Ship AgentEscrow or skip?
+- [ ] **Termux SSH key** — Dmob needs your pubkey for mobile VPS access. Still needed? (Carried from Apr 18)
 
-## ✅ Done
+## ✅ Done (recent)
 
-- [x] Ollama + Hermes integration → deferred, current setup works (Apr 18)
+- [x] Hackathon go/no-go — Kite AI confirmed as #1 priority (May 10)
+- [x] Solana Frontier — withdrawn per your directive (May 10)
+- [x] Agent routing rules — SDKs → DMOB, DeFi → YoYo (May 9)
+- [x] Ollama + Hermes integration → deferred (Apr 18)
 - [x] Auth crisis fix + Ollama fallback → done (Apr 18)
 
 ---

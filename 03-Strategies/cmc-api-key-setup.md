@@ -11,14 +11,14 @@ tags: [strategies, crypto, cmc, api, secrets]
 
 **File:** `/root/.hermes/profiles/yoyo/secrets/cmc_api_key.txt`
 **Permissions:** 600 (owner read/write only)
-**Key:** `ff52c5f015c3490da49adf12513a6d55`
+**Key:** `[REDACTED_CMC_KEY]`
 
 ## Config File
 
 **Path:** `/root/.hermes/scripts/cmc_config.json`
 ```json
 {
-  "coinmarketcap_api_key": "ff52c5f015c3490da49adf12513a6d55",
+  "coinmarketcap_api_key": "[REDACTED_CMC_KEY]",
   "watchlist_id": "67453707ad745f0bbd4ad54f",
   "watchlist_name": "Bullish"
 }
@@ -38,7 +38,7 @@ tags: [strategies, crypto, cmc, api, secrets]
 ## Scripts Using This Key
 
 - `/root/vaults/gentech/03-Strategies/scripts/d5-master-cron.py`
-  - Line 25: `CMC_API_KEY="ff52c5f015c3490da49adf12513a6d55"`
+  - Line 25: `CMC_API_KEY="[REDACTED_CMC_KEY]"`
   - Line 87: Headers use `X-CMC_PRO_API_KEY`
 
 ## Security Notes
@@ -54,7 +54,7 @@ tags: [strategies, crypto, cmc, api, secrets]
 import urllib.request
 import json
 
-api_key = "ff52c5f015c3490da49adf12513a6d55"
+api_key = "[REDACTED_CMC_KEY]"
 url = "https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?symbol=BTC&convert=USD"
 req = urllib.request.Request(url, headers={
     "X-CMC_PRO_API_KEY": api_key,

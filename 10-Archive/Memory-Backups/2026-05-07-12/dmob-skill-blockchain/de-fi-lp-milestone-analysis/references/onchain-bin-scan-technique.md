@@ -15,7 +15,7 @@ Determine the ACTUAL on-chain LP position range by querying `balanceOf` across a
 
 ```python
 POOL_ADDRESS = "0x864d4e5Ee7318e97483DB7EB0912E09F161516EA"  # LFJ AVAX/USDC 5bps
-WALLET = "0x7ebff188f2Eba16518C02864589b1403a5d1296a"        # Jordan's wallet
+WALLET = "[REDACTED_WALLET]"        # Jordan's wallet
 RPC = "https://api.avax.network/ext/bc/C/rpc"
 SELECTOR = "0x00fdd58e"  # balanceOf(address,uint256) — NOT 0xc8f32345
 BIN_STEP = 10  # 10bps per bin
@@ -27,7 +27,7 @@ BIN_STEP = 10  # 10bps per bin
 import math, json, requests
 
 POOL_ADDRESS = "0x864d4e5Ee7318e97483DB7EB0912E09F161516EA"
-WALLET = "0x7ebff188f2Eba16518C02864589b1403a5d1296a"
+WALLET = "[REDACTED_WALLET]"
 RPC = "https://api.avax.network/ext/bc/C/rpc"
 SELECTOR = "0x00fdd58e"  # balanceOf(address,uint256)
 

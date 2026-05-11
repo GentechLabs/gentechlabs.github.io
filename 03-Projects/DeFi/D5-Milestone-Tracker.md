@@ -1,7 +1,7 @@
 # D5 Milestone Tracker
 
 **Pool**: LFJ AVAX/USDC 5bps (Avalanche)
-**Wallet**: `0x7ebff188f2Eba16518C02864589b1403a5d1296a`
+**Wallet**: `[REDACTED_WALLET]`
 
 ---
 

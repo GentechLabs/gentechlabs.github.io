@@ -4,7 +4,7 @@ Approval workflow: When agents need Jordan's approval, create a note in 00-HQ/Ap
 §
 Stopping point protocol (Jordan, May 2026): When hitting a stopping point (waiting on approval, blocked by agent availability, missing tools), queue up the next task and start working on it. Don't wait for Jordan — keep momentum going. Stopping points: approval needed, agent unavailable (e.g., DMOB not available), missing tool/dependency. Pivot to next queued deliverable immediately.
 §
-Jordan's wallet: 0x7ebff188f2Eba16518C02864589b1403a5d1296a (Avalanche C-Chain). Used for LFJ AVAX/USDC LP position monitoring. Config saved to 00-HQ/config/defi-lp-config.env. Added to d5-master-cron.py for on-chain position tracking.
+Jordan's wallet: [REDACTED_WALLET] (Avalanche C-Chain). Used for LFJ AVAX/USDC LP position monitoring. Config saved to 00-HQ/config/defi-lp-config.env. Added to d5-master-cron.py for on-chain position tracking.
 §
 DeFi LP cron (May 2026): 3 active jobs pinned to kimi-k2.6/custom:opencode-go (was inheriting broken Nous 401). LP range: 9.25–9.59 (rebalanced May 5). Jobs: DMOB Scout 27a3c4947359, Memory Backup 30c5350962d3, YoYo Watchlist e00b46103b08.
 §

@@ -4,13 +4,13 @@
 **Status:** Active
 
 ## Account
-- **Email:** gentech-deploy@gentech.ai
-- **Password:** GenTech2026!
+- **Email:** [REDACTED_EMAIL]
+- **Password:** [REDACTED_PASSWORD]
 - **User ID:** 55a5dc77-6fc5-41b6-81fd-3db52f61de90
 
 ## API Key
 ```
-52e3a628193374bf7717ccfb01c04f9017bddc85c56e9b9eeadf869f07edc199
+[REDACTED_API_KEY]
 ```
 
 ## Base URL
@@ -21,7 +21,7 @@ https://arsenal.sumplus.xyz
 ## Usage
 ```bash
 curl -X POST "https://arsenal.sumplus.xyz/api/execute" \
-  -H "Authorization: Bearer 52e3a628193374bf7717ccfb01c04f9017bddc85c56e9b9eeadf869f07edc199" \
+  -H "Authorization: Bearer [REDACTED_API_KEY]" \
   -H "Content-Type: application/json" \
   -d '{
     "skill_id": "<skill-id>",

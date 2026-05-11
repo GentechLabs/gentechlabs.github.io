@@ -54,7 +54,7 @@ tags: [strategy, hackathon, grants, revenue, endgame]
 
 | Platform | Focus | Typical Range | Status |
 |:---|:---|:---|:---|
-| **Immunefi** | AgentEscrow-related protocols | $1K – $100K per finding | 📅 Post-audit |
+| ~~**Immunefi**~~ | AgentEscrow-related protocols | $1K – $100K per finding | ⏸️ PAUSED — KYC pending |
 | **Code4rena** | Active contests | $5K – $50K per contest | 📅 Monitoring |
 | **Sherlock** | Upcoming audits | $10K – $100K per audit | 📅 Monitoring |
 
@@ -71,7 +71,7 @@ tags: [strategy, hackathon, grants, revenue, endgame]
 | **REP Unlock System** | Soulbound proof-of-skill unlocks tiers | Zero cost to user, massive retention |
 | **Performance Commission** | % of yield/profit from agent actions | $100K+ (at 1M TVL) |
 | **LP Yield** | AVAX/USDC 5bps on LFJ | ~$1K/yr current (scales with TVL) |
-| **Bug Bounties** | Immunefi / Code4rena findings | $50K – $200K/yr (DMOB's domain) |
+| **Bug Bounties** | ~~Immunefi~~ / Code4rena findings | $50K – $200K/yr (DMOB's domain) |
 | **AutoBounty Agent** | GenLayer GitHub bounties | $20K – $100K/yr (variable) |
 
 **Endgame Revenue Range (Year 1): ~$670K – $1.2M+**

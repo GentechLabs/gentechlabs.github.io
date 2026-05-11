@@ -222,4 +222,4 @@ cronjob(action="list")
   - AAE (DMOB profile): `a3c51c66ee57`
   - YoYo LP monitor: `2563e78bcf72` (conditional alerting — only delivers when fee efficiency < 30%)
   - **Position Reader (Gentech):** `67e1969f9b2b` (uses `lp-position-reader.py` as script field)
-- **Wallet:** `0x7ebff188f2Eba16518C02864589b1403a5d1296a`
+- **Wallet:** `[REDACTED_WALLET]`

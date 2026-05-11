@@ -22,18 +22,31 @@ This is the Gentech org coordination board. Every agent MUST check this file at 
 - **Strategies (YoYo):** Research, DeFi analysis, competitive landscape, market data
 - **Entertainment (Desmond):** Content, X posts, Medium, social media, submissions
 
-## 📍 Context Update — 2026-05-03 Morning Rotation
+## Load Balancing Protocol
 
-**Rotation completed:** 11:00 UTC by YoYo (Strategies)
+DMOB is single point of failure for all code work. To prevent overload:
+- **Max 2 P1 tasks** assigned to DMOB at any time
+- **YoYo picks up** SDK research, API integration, and non-contract code tasks
+- **Desmond handles** all submission packaging, README, demo materials
+- **Gentech triages** incoming work before assigning — no direct DMOB drops from Jordan
+- If DMOB has 3+ active tasks → Gentech redistributes or defers lowest priority
 
-### Sprint Status (Week of May 2–11)
-- **Solana Frontier** — Day 3/12, deadline **May 11** (P0)
-- **Kite AI** — Secondary priority, deadline **May 17** (P1)
+## 📍 Context Update — 2026-05-10
 
-### Handoff Compliance Alert
-- **2 handoffs** submitted May 2 remain unacknowledged (H2026-05-02-01, H2026-05-02-02)
-- **ACK deadline:** 13:45 UTC today
-- **Escalation:** Unclaimed → Gentech nudge → Jordan (per enforcement rules)
+**Last updated:** 2026-05-10 by Gentech (brain audit sync)
+
+### Sprint Status (Week of May 10–13)
+- **Dashboard Scoping** — DMOB architecture sketch, target **Tuesday May 13** (P0)
+- **Agent Coordination Cleanup** — Tighten handoff enforcement (P0)
+- **Bankr Integration** — Passive income play, research + scoping (P1)
+- **Kite AI** — PRIMARY focus, deadline **May 17** (P0)
+- **Swarms ACM** — Secondary, deadline **May 27** (P1)
+- **Bags FM** — Pipeline, deadline **Jun 1** (P2)
+- **Solana Frontier** — WITHDRAWN (May 10). Assets preserved for cross-chain reuse.
+
+### Handoff Status
+- All prior handoffs resolved or dropped (May 10)
+- 0 active handoffs — board clean
 
 ### Agent Check-In Required
 All agents currently OFFLINE in coordination board. Session start MUST include:
@@ -43,8 +56,10 @@ All agents currently OFFLINE in coordination board. Session start MUST include:
 4. Acknowledge any pending handoffs within 2h
 
 ### Blockers
-1. D5 config thresholds (YoYo) → blocks DMOB integration
-2. Hermes-brain sync verification (Gentech) → blocks cron install
+1. Dashboard scoping (DMOB) → target Tuesday May 13
+2. Bankr research (YoYo) → need integration assessment
+3. Kite AI submission materials (Desmond) → deadline May 17
+4. Kite AI contract adaptation (DMOB) → deadline May 17
 
 ---
 
@@ -56,12 +71,9 @@ All agents currently OFFLINE in coordination board. Session start MUST include:
 
 ### Active Handoffs
 
-| ID | From | To | Task | Priority | Status | Claimed At | Notes |
-|----|------|----|------|----------|--------|------------|-------|
-|| H001 | Desmond | Dmob | Review dynamic burn rate smart contract feasibility | High | ⏳ PENDING | — | ✅ APPROVED (Jordan voice 2026-05-02) — DMOB go ahead |
-|| H002 | Desmond | YoYo | Competitive analysis — dynamic burn rate in AgentFi | High | ✅ COMPLETED | — | ✅ COMPLETED — deliverable in `03-Strategies/TECH-token-dynamic-burn-research.md` |
-|| H003 | Jordan | Dmob | Gas Reserve Auto-Rebalance — SC feasibility review | High | ⏳ PENDING | — | ✅ APPROVED (Jordan voice 2026-05-02) — DMOB proceed |
-|| H004 | Jordan | YoYo | Gas Reserve Auto-Rebalance — monitoring trigger & strategy | High | ⏳ PENDING | — | Pending YoYo review — depends on DMOB SC approval |
+| ID | From | To | Task | Priority | Status | Notes |
+|----|------|----|------|----------|--------|-------|
+| — | — | — | No active handoffs | — | — | Board clean as of May 10 |
 
 ### Protocol
 1. **Sender** writes handoff here + tags recipient in Mess Hall or Green Room
@@ -81,19 +93,19 @@ Each agent updates their row when they start a session:
 | Desmond | — | — | OFFLINE | — |
 | Gentech | — | — | OFFLINE | — |
 
-## Active Sprint — Week of Apr 21–27
+### Active Sprint — Week of May 10–13
 
-| Task | Owner | Due | Status |
-|------|-------|-----|--------|
-| ARC Hackathon — AgentEscrow + x402 nanopayments | Dmob | Apr 25 | ❌ **WITHDRAWN** Apr 22 |
-| Solana Frontier — Identify tracks, build, execute | Dmob | May 11 | 🟥 **ACTIVE** |
-| Kite AI Hackathon — L3 Brain demo + test fixes | Dmob | May 11 | 🟡 Back-burner / stopping-point |
-| Colosseum registration | Jordan | Apr 20 | ✅ Done (Apr 21) |
-| Google OAuth setup | Jordan | Apr 20 | ⏳ **OVERDUE** |
-| Beams SDK research | YoYo | Apr 20 | ⏳ Dmob picking up |
-| ETHGlobal sign-up + 0G tokens + KeeperHub key | Jordan | Apr 24 | ⏳ **OVERDUE** |
-| Kite AI submission materials | Desmond | May 11 | ⏳ Pending |
-| Gas Reserve Auto-Rebalance (SC + strategy) | Dmob / YoYo | Apr 21 | ⏳ **OVERDUE** |
+|| Task | Owner | Due | Status ||
+||------|-------|-----|--------||
+|| Dashboard scoping — architecture sketch | Dmob | May 13 | 🟥 **PRIMARY** ||
+|| Agent coordination cleanup — handoff enforcement | Gentech | May 13 | 🟥 **PRIMARY** ||
+|| Bankr integration research | YoYo | TBD | 🟡 **P1** ||
+|| Kite AI Hackathon — contract adaptation + submission | Dmob | May 17 | 🟡 **P1** ||
+|| Kite AI submission materials — README, demo | Desmond | May 17 | 🟡 **P1** ||
+|| Kite AI — L3 Brain integration research | YoYo | May 17 | 🟡 **P1** ||
+|| Swarms ACM Hackathon — scoping + build | Dmob | May 27 | 🟡 **P1** ||
+| Solana Frontier | Dmob | May 11 | ❌ **WITHDRAWN** (May 10) |
+| Google OAuth setup | Jordan | Apr 20 | ⏳ Pending |
 
 ## Escalation Path
 1. Agent handles issue in their department

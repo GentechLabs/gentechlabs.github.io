@@ -322,7 +322,7 @@ GET https://api.snowtrace.io/api?module=account&action=tokenbalance&contractaddr
 Store wallet + pool config together in vault:
 ```bash
 # 00-HQ/config/defi-lp-config.env
-JORDAN_WALLET=0x7ebff188f2Eba16518C02864589b1403a5d1296a
+JORDAN_WALLET=[REDACTED_WALLET]
 CHAIN=avalanche
 POOL_ADDRESS=0x864d4e5ee7318e97483db7eb0912e09f161516ea
 POOL_NAME=AVAX/USDC
@@ -348,7 +348,7 @@ if balances["usdc"] < 1.0:
     alerts.append("💸 Near-zero USDC")
 ```
 
-**Jordan's wallet:** `0x7ebff188f2Eba16518C02864589b1403a5d1296a` (Avalanche C-Chain)
+**Jordan's wallet:** `[REDACTED_WALLET]` (Avalanche C-Chain)
 
 ## Cron Job Script Pattern
 

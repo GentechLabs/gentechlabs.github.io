@@ -2,7 +2,7 @@ Smart routing rule: When Jordan talks about traveling, route it to GenTech HQ (n
 §
 Routing rules: Travel content (videos, posts, production) → Gentech Entertainment. Travel planning/logistics (flights, costs, itineraries) → HQ. Non-content travel talk does NOT belong in Entertainment or Labs. Labs is strictly dev/school — Solidity, security, tooling, research.
 §
-Jordan's wallet address: 0x7ebff188f2Eba16518C02864589b1403a5d1296a (EVM — Ethereum/Avalanche/Base). Jordan approves wallet tracking for position monitoring — especially for LP pool tracking and portfolio accuracy.
+Jordan's wallet address: [REDACTED_WALLET] (EVM — Ethereum/Avalanche/Base). Jordan approves wallet tracking for position monitoring — especially for LP pool tracking and portfolio accuracy.
 §
 When Jordan shares images/screenshots, DMOB (coding model) cannot process them. Rely on Mess Hall / other agents to interpret, then DMOB acts on the info. Don't attempt vision tasks directly.
 §

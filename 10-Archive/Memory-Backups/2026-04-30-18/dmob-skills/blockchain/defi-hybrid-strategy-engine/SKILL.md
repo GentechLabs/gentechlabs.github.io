@@ -163,4 +163,4 @@ The hybrid signal can be added as an additional cron job or merged into the exis
 - **Pool Address:** `0x864d4e5ee7318e97483db7eb0912e09f161516ea`
 - **Chain:** Avalanche
 - **Current Range:** $9.00–$9.45 (Curve shape, as of Apr 29, 2026)
-- **Wallet:** `0x7ebff188f2Eba16518C02864589b1403a5d1296a`
+- **Wallet:** `[REDACTED_WALLET]`

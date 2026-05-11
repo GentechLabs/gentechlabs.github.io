@@ -117,7 +117,7 @@ All state files live in `~/.hermes/scripts/` as hidden JSON files. They track po
     "address": "0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E",
     "decimals": 6
   },
-  "wallet_address": "0x7ebff188f2Eba16518C02864589b1403a5d1296a",
+  "wallet_address": "[REDACTED_WALLET]",
   "bin_step": 10,
   "fee_tier_bps": 5,
   "position": {

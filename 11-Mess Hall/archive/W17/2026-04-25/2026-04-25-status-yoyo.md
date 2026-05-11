@@ -30,7 +30,7 @@
 4. **DMOB** → Deploy to Kite testnet once gas arrives
 
 ## Blockers
-- Kite testnet gas = 0 KITE (wallet: 0xE00a46132Fd03456cEcd05de8C69F43C5138Db95)
+- Kite testnet gas = 0 KITE (wallet: [REDACTED_WALLET])
 - Solana Frontier = not registered yet
 
 ---

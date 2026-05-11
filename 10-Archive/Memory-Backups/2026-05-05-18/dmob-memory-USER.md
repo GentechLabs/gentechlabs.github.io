@@ -2,7 +2,7 @@ Smart routing: Travel talk → HQ (planning/logistics) or Entertainment (content
 §
 Prefers concise, actionable updates. Values team Telegram coordination. Safety-first, cost-saving focus. Technical issues should be documented to avoid repetition.
 §
-Jordan's wallet address: 0x7ebff188f2Eba16518C02864589b1403a5d1296a (EVM — Ethereum/Avalanche/Base). Jordan approves wallet tracking for position monitoring — especially for LP pool tracking and portfolio accuracy.
+Jordan's wallet address: [REDACTED_WALLET] (EVM — Ethereum/Avalanche/Base). Jordan approves wallet tracking for position monitoring — especially for LP pool tracking and portfolio accuracy.
 §
 When Jordan shares images/screenshots, DMOB (coding model) cannot process them. Rely on Mess Hall / other agents to interpret, then DMOB acts on the info. Don't attempt vision tasks directly.
 §

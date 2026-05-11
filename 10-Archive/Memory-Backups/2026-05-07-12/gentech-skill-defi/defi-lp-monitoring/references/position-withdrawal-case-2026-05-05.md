@@ -51,6 +51,6 @@ On-chain scan of LFJ AVAX/USDC pool returned zero positions for the tracked wall
 7. [ ] Escalate to Gentech via Green Room
 
 ## Wallet Address Reference
-- **Tracked wallet**: `0x7ebff188f2Eba16518C02864589b1403a5d1296a`
+- **Tracked wallet**: `[REDACTED_WALLET]`
 - **LFJ Pool**: `0x864d4e5ee7318e97483db7eb0912e09f161516ea`
 - **Destination (post-withdrawal)**: `0x18556da13313f3532c54711497a8fedac273220e` (contract)

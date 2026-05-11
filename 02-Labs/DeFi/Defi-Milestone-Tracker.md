@@ -3,7 +3,7 @@
 **Pool**: `0x864d4e5ee7318e97483db7eb0912e09f161516ea`  
 **Strategy**: Curve shape, 5 bps fee tier, binStep 10  
 **Start Date**: 2026-04-30 (vault inception)  
-**Wallet**: `0x7ebff188f2Eba16518C02864589b1403a5d1296a`
+**Wallet**: `[REDACTED_WALLET]`
 
 | Tier | Label | Daily Fees Target | Status |
 |---|---|---|---|

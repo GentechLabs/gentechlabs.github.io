@@ -1,16 +1,19 @@
-# Master To-Do — 2026-05-06 (Updated)
+# Master To-Do — 2026-05-10 (Updated)
 
-## 🔴 P0 — Solana Frontier (May 11) — PRIMARY
-- [x] All 4 programs compile clean ✅
-- [x] GitHub token configured ✅
-- [x] Code pushed to GitHub (master branch) ✅
-- [ ] Write real integration tests (DMOB overnight)
-- [ ] Devnet deployment (needs SOL — Jordan getting May 7)
-- [ ] Demo video recording
-- [ ] Submission package finalization
-- [ ] Submit to Colosseum portal
+## 🔴 P0 — Kite AI Hackathon (May 17) — PRIMARY
+- [x] Brain backup to GitHub ✅
+- [x] ElevenLabs voices configured ✅
+- [x] All 4 agents connected + running ✅
+- [x] Vault synced + restructured ✅
+- [x] AgentEscrow contracts (53/53 tests) ✅
+- [x] Two-tier dispute resolution ✅
+- [x] Security audit complete ✅
+- [ ] Adapt contracts for Kite AI chain adapter (DMOB)
+- [ ] L3 Brain integration research (YoYo)
+- [ ] Prepare Kite AI submission — README, demo (Desmond)
+- [ ] Submit to Kite AI portal
 
-## 🟡 P1 — ACM Hackathon (May 27) — NEW
+## 🟡 P1 — ACM Hackathon (May 27)
 - [x] Scoping doc created ✅
 - [ ] Review Swarms API docs
 - [ ] Build API wrapper for LP Monitor
@@ -19,17 +22,15 @@
 - [ ] List on Swarms Marketplace
 - [ ] Demo video + documentation
 
-## 🟡 P2 — Kite AI Hackathon (May 17)
-- [x] Brain backup to GitHub ✅
-- [x] ElevenLabs voices configured ✅
-- [x] All 4 agents connected + running ✅
-- [x] Vault synced + restructured ✅
-- [x] AgentEscrow contracts (53/53 tests) ✅
-- [x] Two-tier dispute resolution ✅
-- [x] Security audit complete ✅
-- [ ] Adapt contracts for Kite AI chain adapter
-- [ ] Prepare Kite AI submission
-- [ ] Submit alongside Solana Frontier
+## ⚫ WITHDRAWN / SKIPPED
+| Hackathon | Reason |
+|-----------|--------|
+| Solana Frontier | WITHDRAWN May 10 — assets preserved for cross-chain reuse |
+| ElevenHacks #6-9 | 5 days insufficient / collides |
+| ETHGlobal Open Agents | DROPPED Apr 24 |
+| Nous Hermes Creative | SKIPPED per Jordan |
+| Dev3pack Global | SKIPPED per Jordan |
+| Surge Ignition S1 | Ended Apr 24 |
 
 ## 🟢 P2 — AAE Signal Spec Implementation
 - [ ] **YoYo** — Optimize LP Monitor cron to fetch all structured fields
@@ -62,16 +63,6 @@
 - [ ] **Desmond** — UX framing: leaderboard design, copy
 - [ ] **Gentech** — Consolidate assessments into recommendation
 
-## ⚫ SKIPPED / DROPPED
-| Hackathon | Reason |
-|-----------|--------|
-| ElevenHacks #6 Zed | 5 days insufficient |
-| ElevenHacks #7 v0 | Collides with Kite AI deadline |
-| ETHGlobal Open Agents | DROPPED Apr 24 |
-| Nous Hermes Creative | SKIPPED per Jordan |
-| Dev3pack Global | SKIPPED per Jordan |
-| Surge Ignition S1 | Ended Apr 24 |
-
 ## 📅 Pipeline (All Feeds AAE → July Retro / Fall Colosseum)
 | Target | Date | Prize | Notes |
 |--------|------|-------|-------|
@@ -91,7 +82,7 @@
 ## 💰 Grants & Builder Programs
 - [ ] GenLayer Incentivized Builder Program
 - [ ] AVAX Retro9000 grant application (Jul 14 deadline)
-- [ ] Immunefi — check AgentEscrow-related protocols
+- [ ] ~~Immunefi — check AgentEscrow-related protocols~~ PAUSED — KYC pending
 - [ ] Code4rena — active contests
 - [ ] Sherlock — upcoming audits
 

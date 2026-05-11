@@ -2,7 +2,7 @@
 > Auto-maintained by YoYo daily scan cron job
 
 ## Known Listings (College.xyz)
-Last scanned: 2026-05-09
+Last scanned: 2026-05-10
 
 | Company | Role | Location | Pay | Status | Notes |
 |---------|------|----------|-----|--------|-------|

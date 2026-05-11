@@ -26,7 +26,7 @@
 - Security audit: 4/5 (DMOB), all medium findings fixed
 
 ### Blockers
-1. **GAS BLOCKED** — Deployer wallet `0xE00a46132Fd03456cEcd05de8C69F43C5138Db95` has 0 KITE
+1. **GAS BLOCKED** — Deployer wallet `[REDACTED_WALLET]` has 0 KITE
    - Faucet: https://faucet.gokite.ai/ (manual reCAPTCHA)
 2. **NOT DEPLOYED** — No verified contracts on Kite testnet explorer
 3. **NOT SUBMITTED** — No submission marker in vault, no PR opened, no email confirmation

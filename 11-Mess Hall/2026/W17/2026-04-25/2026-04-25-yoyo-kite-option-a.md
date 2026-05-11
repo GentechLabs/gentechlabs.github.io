@@ -42,7 +42,7 @@
 
 | Blocker | Impact | Next Step |
 |---|---|---|
-| **No KITE testnet gas** | Cannot broadcast deployment | Jordan to fund wallet `0xE00a46132Fd03456cEcd05de8C69F43C5138Db95` via https://faucet.gokite.ai/ |
+| **No KITE testnet gas** | Cannot broadcast deployment | Jordan to fund wallet `[REDACTED_WALLET]` via https://faucet.gokite.ai/ |
 | **Kite attestation unclear** | May need custom integration | Research Kite Agent Passport / AA SDK for proof-of-execution posting |
 | **No Vercel deployment** | Live demo not accessible | Deploy UI after contracts are live |
 

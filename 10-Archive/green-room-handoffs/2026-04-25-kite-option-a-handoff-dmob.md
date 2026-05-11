@@ -33,7 +33,7 @@ Jordan switched back to **Option A (Fast Port)**. YoYo prepped everything. Deplo
 ## What You Need To Do
 
 1. **Get gas on Kite testnet**
-   - Fund wallet `0xE00a46132Fd03456cEcd05de8C69F43C5138Db95`
+   - Fund wallet `[REDACTED_WALLET]`
    - Faucet: https://faucet.gokite.ai/ (reCAPTCHA required — manual)
    - Or use your own funded wallet (update `.env` DEPLOYER_PRIVATE_KEY)
 
@@ -61,7 +61,7 @@ Jordan switched back to **Option A (Fast Port)**. YoYo prepped everything. Deplo
 
 ## Deployer Wallet
 
-- **Address:** `0xE00a46132Fd03456cEcd05de8C69F43C5138Db95`
+- **Address:** `[REDACTED_WALLET]`
 - **PK:** In `.env` (testnet only)
 - **Balance:** 0 KITE (needs funding)  
 - **Note:** ElevenLabs credits fine (Creator tier, ~35K left, renews **May 19**). KITE gas still needed for deployment.

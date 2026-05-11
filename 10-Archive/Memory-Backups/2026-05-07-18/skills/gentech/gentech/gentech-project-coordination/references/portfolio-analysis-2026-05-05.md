@@ -16,7 +16,7 @@
     <div class="links">
         <a href="https://github.com/ProtoJay4789" target="_blank">🐙 GitHub</a>
         <a href="https://linkedin.com/in/protojay" target="_blank">💼 LinkedIn</a>
-        <a href="mailto:jordanjones0902@gmail.com" target="_blank">📧 Email</a>
+        <a href="mailto:[REDACTED_EMAIL]" target="_blank">📧 Email</a>
         <a href="#projects">🚀 Projects</a>
     </div>
 </div>

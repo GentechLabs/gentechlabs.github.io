@@ -68,13 +68,13 @@ Full org chart with reporting structure, accountability, and escalation paths:
 - Strategy + hackathon templates in vault
 
 ## Team Lead Protocol
-1. Gentech monitors all handoffs — see [Agent Handoff Enforcement Protocol](~/.hermes/skills/devops/agent-handoff-enforcement/SKILL.md)
-2. Confirm receiving agent picks up (ACK within 5 min)
+1. Gentech monitors all handoffs — see `11-Mess Hall/handoff-board.md`
+2. Confirm receiving agent picks up (ACK within 2 hours)
 3. Status check after completion
 4. Agents must signal "clean/nothing-to-add"
-5. Gentech nudges silent agents
+5. Gentech nudges silent agents (4h+ unclaimed)
 6. Jordan gets one status line, not a chase
-7. Escalation: 15 min no ACK → Jordan notified in HQ
+7. Escalation: 12h+ unclaimed → Jordan notified in HQ
 8. Board maintenance: scan every 30 min for stale briefs
 
 ## Communication Rules

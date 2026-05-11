@@ -4,11 +4,77 @@
 
 **Pool**: LFJ V2.2 AVAX/USDC 5bps (Avalanche)
 **Contract**: `0x864d4e5ee7318e97483db7eb0912e09f161516ea`
-**Wallet**: `0x7ebff188f2Eba16518C02864589b1403a5d1296a`
+**Wallet**: `[REDACTED_WALLET]`
 **Shape**: Curve
 **Entry Date**: 2026-03-31
 
 ---
+
+## 2026-05-10 20:15 UTC Update
+**Price Range**: $10.28–$10.55 (Shape: curve)
+**Balances**: 9.489 AVAX (~$98.96) + 84.02 USDC (~$84.02) = **$182.98**
+**Fees (24h)**: $1.19
+**IL**: +0.00% (vs. HODL) — freshly rebalanced
+**Range Status**: 🟢 In Range (55.3% from bottom, 44.7% from top)
+**Last Rebalance**: 2026-05-10 20:06 UTC (jordan_screenshot)
+**Action**: No rebalance needed
+
+**Market Notes**: AVAX at $10.43 (24h +4.39%), inside position range $10.28–$10.55. Pool volume $3.63M/day. Strong altcoin rally: TAO +6.19%, AVAX +4.39%, LINK +3.96%, SOL +3.31%. BTC $81,209 (+0.47%).
+
+**On-Chain Data**: Pool WAVAX/USDC 5bps on LFJ v2.2 (Avalanche). DexScreener price $10.38, 24h change +3.98%.
+
+**D5 Milestone Alignment**:
+- Position value ($182.98) → Scout tier ($5.00/day target) — 23.8% progress
+- Price inside position range ✅ (55.3% from bottom)
+- IL ✓ well below 2% threshold (+0.00%)
+- Est. daily fees $1.19 — need 4.2x to hit Scout
+
+**Other Pools**: None active
+
+
+## 2026-05-10 16:17 UTC Update
+**Price Range**: $9.95–$10.30 (Shape: curve)
+**Balances**: 0.05531 AVAX (~$0.56) + 0.57731 USDC (~$0.58) = **$1.14**
+**Fees (24h)**: ~$0.00 (position reduced — minimal share of pool)
+**IL**: +0.00% (vs. HODL) — freshly rebalanced position
+**Range Status**: 🟡 Near Boundary (66.6% from bottom, 1.15% from top edge)
+**Last Rebalance**: 2026-05-10 15:44 UTC (jordan_screenshot)
+**Action**: Monitor — approaching top boundary (AVAX at $10.18, range top $10.30)
+
+**⚠️ Position Note**: Position dramatically reduced from $125.81 (6.758 AVAX + 58.5 USDC at 12:17 UTC) to $1.14 (0.05531 AVAX + 0.57731 USDC). Likely partial withdrawal or rebalance with capital reallocation. Range shifted from $9.78–$10.02 to $9.95–$10.30.
+
+**Market Notes**: AVAX at $10.18 (24h +3.46%), inside position range $9.95–$10.30. Pool volume $3.88M/day, TVL $4.01M. Broad rally: TAO +4.14%, BEAM +3.13%, LINK +2.82%, SOL +1.59%. BTC $81,431 (+1.08%), XAUt $4,717 (+0.37%).
+
+**On-Chain Data**: Pool WAVAX/USDC 5bps on LFJ v2.2 (Avalanche). 1,363 buys / 1,413 sells in 24h — slight sell pressure. TVL $4.01M.
+
+**D5 Milestone Alignment**:
+- Position value ($1.14) → Scout tier ($5.00/day target) — ~0% progress
+- Price inside position range ✅ but near top boundary — monitor
+- IL ✓ well below 2% threshold (+0.00%)
+- Est. daily fees ~$0.00 — need significant position increase to approach Scout
+
+**Other Pools**: None active
+
+## 2026-05-10 12:17 UTC Update
+**Price Range**: $9.78–$10.02 (Shape: curve)
+**Balances**: 6.758 AVAX (~$67.31) + 58.5 USDC (~$58.50) = **$125.81**
+**Fees (24h)**: $1.19
+**IL**: +0.00% (vs. HODL) — price within narrow concentrated range
+**Range Status**: 🟡 Near Boundary (75% from bottom, 0.6% from top edge)
+**Last Rebalance**: 2026-05-09 11:06 UTC (jordan_screenshot)
+**Action**: Monitor — approaching top boundary (AVAX at $9.96, range top $10.02)
+
+**Market Notes**: AVAX at $9.96 (24h +0.29%), near top of position range $9.78–$10.02. Pool volume $5.0M/day, TVL $4.05M. Quiet across watchlist: BTC $80,809 (+0.62%), SOL $93.41 (-0.17%), LINK $10.45 (-0.13%), TAO $313.31 (+1.17%), XAUt $4,712 (+0.27%), BEAM $0.0021 (-0.61%). No tokens triggered 1.5%+ alerts.
+
+**On-Chain Data**: Pool WAVAX/USDC 5bps on LFJ v2.2 (Avalanche). 1,315 buys / 1,456 sells in 24h — slight sell pressure. TVL $4.05M.
+
+**D5 Milestone Alignment**:
+- Position value ($125.81) → Scout tier ($5.00/day target) — 23.8% progress
+- Price inside position range ✅ but near top boundary — monitor
+- IL ✓ well below 2% threshold (+0.00%)
+- Est. daily fees $1.19 — need 4.2x to hit Scout
+
+**Other Pools**: None active
 
 ## 2026-05-09 16:15 UTC Update
 **Price Range**: $9.78–$10.02 (Shape: curve)
@@ -144,7 +210,7 @@
 
 **Pool**: LFJ V2.2 AVAX/USDC 5bps (Avalanche)
 **Contract**: `0x864d4e5ee7318e97483db7eb0912e09f161516ea`
-**Wallet**: `0x7ebff188f2Eba16518C02864589b1403a5d1296a`
+**Wallet**: `[REDACTED_WALLET]`
 **Shape**: Curve
 **Entry Date**: 2026-03-31
 

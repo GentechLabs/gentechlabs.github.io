@@ -6,9 +6,12 @@
 - **Home Group**: GenTech Entertainment
 
 ## Active Projects
-- **Hackathon Submissions**: Solana Frontier (May 11), Kite AI (May 17)
+- **Hackathon Submissions**: Kite AI (May 17) — CURRENT PRIORITY, Swarms ACM (May 27)
 - **Content Pipeline**: X posts, Medium articles
 - **Social Media Strategy**: Twitter/X engagement
+
+## Removed (Stale)
+- ~~Solana Frontier Hackathon~~ — Withdrawn, not enough time
 
 ## Key Files
 - Content drafts: `/root/vaults/gentech/03-Strategies/x-content-drafts.md`

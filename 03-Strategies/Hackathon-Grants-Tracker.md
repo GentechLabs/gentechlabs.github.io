@@ -2,7 +2,7 @@
 title: Hackathon & Grants Tracker
 department: Strategies  
 agent: DMOB
-updated: 2026-05-03
+updated: 2026-05-10
 status: Active
 ---
 
@@ -40,7 +40,7 @@ status: Active
 | Platform | Notable Programs | Max Bounty | Notes |
 |----------|-----------------|------------|-------|
 | Code4rena | Smart contract audits | $50K-$200K per contest | Weekly competitions |
-| Immunefi | Protocol security | Up to $2M+ | Tier-1 protocols |
+|| ~~Immunefi~~ | Protocol security | Up to $2M+ | ⏸️ PAUSED — pending KYC approval ||
 | Auditor | Smart contracts | $10K-$100K | New listings weekly |
 
 ## 📋 Action Items
@@ -49,18 +49,18 @@ status: Active
 - [ ] Register for ETHGlobal Cannes (deadline approaching)
 - [ ] Review Superteam Vietnam project themes
 - [ ] Submit EF Grants pre-proposal
-- [ ] Monitor Immunefi for new high-value programs
+- [ ] ~~Monitor Immunefi for new high-value programs~~ PAUSED — awaiting KYC
 
 **Ongoing Monitoring:**
 - [ ] Daily check: ethglobal.com/events
-- [ ] Weekly review: immunefi.com/bounties
+- [ ] ~~Weekly review: immunefi.com/bounties~~ PAUSED — awaiting KYC
 - [ ] Bi-weekly: code4rena.com/competitions
 - [ ] Monthly: gitcoin.co/grants cycles
 
 ## 🔄 Process
 
 1. **Daily Scan** (9AM UTC): Check hackathon platforms RSS feeds
-2. **Bug Bounty Watch** (Mon/Wed/Fri): New Immunefi & Code4rena listings  
+2. **Bug Bounty Watch** (Mon/Wed/Fri): New Code4rena listings (Immunefi paused — KYC pending)  
 3. **Grant Newsletter** (1st of month): EF, Solana, Arbitrum grants digests
 4. **Weekend Deep Dive** (Sat): Full review of all >$50K opportunities
 

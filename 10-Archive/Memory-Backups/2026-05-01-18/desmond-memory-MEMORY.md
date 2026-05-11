@@ -8,7 +8,7 @@
      8|§
      9|AgentEscrow Solana Frontier (Colosseum) — deadline May 11. 4 Anchor programs scaffolded: AgentRegistry (World ID + Swig), JobEscrow (8-state, PDA vaults), Reputation (Metaplex soulbound NFTs), DisputeResolver. Devnet: 4kX9b9hytCTrC6qikjVpnWYrvDK7NG97qCUDUTk9fMmn. Repo: github.com/ProtoJay4789/agent-escrow. Creative deliverables saved to Colosseum-Frontier/ folder.
     10|§
-    11|Jordan's wallet: 0x7ebff188f2Eba16518C02864589b1403a5d1296a (Avalanche C-Chain). Used for LFJ AVAX/USDC LP position monitoring. Config saved to 00-HQ/config/defi-lp-config.env. Added to d5-master-cron.py for on-chain position tracking.
+    11|Jordan's wallet: [REDACTED_WALLET] (Avalanche C-Chain). Used for LFJ AVAX/USDC LP position monitoring. Config saved to 00-HQ/config/defi-lp-config.env. Added to d5-master-cron.py for on-chain position tracking.
     12|§
     13|hermes-kanban (Apr 2026): `kanban` CLI at /usr/local/bin/kanban. DB: /root/.hermes/kanban.db. Venv: /root/.venvs/kanban/. Board "Gentech HQ" seeded. Sync: `kanban sync --vault-dir /root/vaults/gentech`. Two bugs fixed: demo scoping, --archived filter.
     14|§

@@ -20,7 +20,7 @@ author: Gentech (CEO/Lead)
 ## Quick Context
 
 **Pool**: LFJ V2.2 AVAX/USDC (0x864d4e5ee7318e97483db7eb0912e09f161516ea), binStep 10, 5 bps, Curve shape  
-**Wallet**: 0x7ebff188f2Eba16518C02864589b1403a5d1296a (Treasury)  
+**Wallet**: [REDACTED_WALLET] (Treasury)  
 **D5 Milestone Ladder** (Scout → Freedom): $3/$5/$8/$10/$15/$20/$55/$200 daily fee targets  
 **Crown Milestones** (Fee accumulation): $0.50 → $1 → $2 → $5 → $10 → $25 → $50 → $100 cumulative  
 **Current Tier**: Scout (Tier 1) — ~$0.04/day earned, ~1.5% to next tier  

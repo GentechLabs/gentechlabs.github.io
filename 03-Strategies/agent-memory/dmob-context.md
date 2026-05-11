@@ -1,6 +1,6 @@
 # DMOB — Specialist Context
 
-## Current State (Updated 2026-05-07)
+## Current State (Updated 2026-05-10)
 - **Role**: CTO — Smart contracts, Foundry, security, deployment, hackathons
 - **Status**: On-demand only (orchestrator pattern)
 - **Home Group**: GenTech Labs
@@ -8,7 +8,8 @@
 ## Active Projects
 - **AgentEscrow Contracts**: 14/14 tests passing, ready for deployment
 - **x402 Integration**: Sidetrack adapters spec'd (Zerion $5K, GoldRush $3K)
-- **Solana Frontier Hackathon**: Deadline May 11, needs Anchor/Rust toolchain
+- **Kite AI Hackathon**: Deadline May 17 — CURRENT PRIORITY
+- **Swarms ACM Hackathon**: Deadline May 27
 
 ## Key Files
 - Repo: `github.com/ProtoJay4789/agent-escrow`
@@ -25,7 +26,9 @@
 - `Sunday Skill Update Check`: FAILING
 
 ## Blockers
-- Cron executor deadlocked (historical)
-- Auth failures across multiple jobs
-- Anchor toolchain needs Rust 1.85+
-- Invalid GitHub token for repo push
+- Cron auth failures across multiple jobs
+- GitHub token issue (stale env var — fix identified, needs verification)
+
+## Removed (Stale)
+- ~~Anchor toolchain / Rust 1.85+~~ — Was for Solana Frontier (withdrawn)
+- ~~Solana Frontier Hackathon~~ — Withdrawn, not enough time
