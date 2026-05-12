@@ -45,7 +45,9 @@ DMOB is single point of failure for all code work. To prevent overload:
 - **Solana Frontier** — WITHDRAWN (May 10). Assets preserved for cross-chain reuse.
 
 ### Handoff Status
-- All prior handoffs resolved or dropped (May 10)
+- **Dashboard Scoping** → DMOB (P1, due May 13) — PENDING, not yet claimed
+- **Bankr Research** → YoYo (P2, no deadline) — PENDING, not yet claimed
+- All D5-era handoffs resolved or dropped (May 10)
 - 0 active handoffs — board clean
 
 ### Agent Check-In Required

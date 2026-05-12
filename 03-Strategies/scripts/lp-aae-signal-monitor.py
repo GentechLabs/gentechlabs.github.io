@@ -202,6 +202,11 @@ def save_state(state: Dict[str, Any]):
 # ── Data Fetchers ────────────────────────────────────────────────────────────────────────
 
 def fetch_onchain(cfg: Dict) -> Optional[Dict[str, Any]]:
+    """Fetch pool data directly from the LFJ pool contract via RPC.
+    
+    Primary data source — uses getSwapOut for price, getReserves for TVL,
+    and activeId for bin awareness. No third-party API dependency.
+    """
     pool_address = cfg["pool_address"]
     rpc_url = cfg["rpc_url"]
     token0_decimals = cfg["token0"]["decimals"]
@@ -218,7 +223,7 @@ def fetch_onchain(cfg: Dict) -> Optional[Dict[str, Any]]:
             return json.loads(resp.read().decode())["result"]
 
     try:
-        # getSwapOut(1 token0, swapForY=true)
+        # Price: getSwapOut(1e18 AVAX → USDC)
         swap_data = (
             "0xe77366f8"
             "0000000000000000000000000000000000000000000000000de0b6b3a7640000"
@@ -228,7 +233,7 @@ def fetch_onchain(cfg: Dict) -> Optional[Dict[str, Any]]:
         amount_out = int(swap_result[2 + 64 : 2 + 128], 16)
         price = amount_out / (10 ** token1_decimals)
 
-        # getReserves() → (reserveX, reserveY)
+        # TVL: getReserves() → (reserveX, reserveY)
         reserves_result = _rpc_call("0x0902f1ac")
         reserve_x = int(reserves_result[2 : 2 + 64], 16)
         reserve_y = int(reserves_result[2 + 64 : 2 + 128], 16)
@@ -236,15 +241,27 @@ def fetch_onchain(cfg: Dict) -> Optional[Dict[str, Any]]:
         reserve1 = reserve_y / (10 ** token1_decimals)
         liquidity_usd = reserve0 * price + reserve1
 
-        return {
+        # Active bin: activeId() → current bin ID
+        active_bin = None
+        try:
+            active_result = _rpc_call("0xdbe65edc")  # V2.2 selector
+            if active_result and active_result != "0x":
+                active_bin = int(active_result, 16)
+        except Exception:
+            pass
+
+        result = {
             "source": "onchain",
             "price": price,
-            "volume_24h": 0.0,
+            "volume_24h": 0.0,  # Not available on-chain; DexScreener fallback provides this
             "liquidity_usd": liquidity_usd,
             "price_change_24h": 0.0,
             "reserves_token0": reserve0,
             "reserves_token1": reserve1,
         }
+        if active_bin is not None:
+            result["active_bin"] = active_bin
+        return result
     except Exception:
         return None
 
@@ -447,7 +464,7 @@ def get_suggested_action(in_range: bool, efficiency: float, compound_ready: bool
     if compound_ready:
         return f"💰 Compound ready — {state['total_fees_earned_usd']:.2f} USD"
     if dca_ready or micro_dca_ready:
-        amount = micro_dca_amount if micro_dca_ready else cfg["dca"]["amount"]
+        amount = micro_dca_amount if micro_dca_ready else cfg["dca"].get("amount", cfg["dca"].get("base_amount", 50))
         return f"📈 DCA day — auto-buy ${amount} USDC"
     return "✅ Position healthy — maintain current range."
 def calc_tvl_trend(tvl_history: List[float]) -> float:
@@ -701,7 +718,7 @@ def format_liquidity_shape(price: float, range_low: float, range_high: float, sh
     viz = "\n".join(rows) + "\n" + axis + f"\n◆ = price (${price:.4f})\n{shape_desc}"
     return viz
 
-def format_human_report(signal: AAESignal, cfg: Dict) -> str:
+def format_human_report(signal: AAESignal, cfg: Dict, pool: Dict = None) -> str:
     """Format human-readable Telegram report from AAE signal."""
     
     now_str = datetime.fromisoformat(signal.timestamp).strftime("%I:%M %p EDT")
@@ -731,6 +748,14 @@ def format_human_report(signal: AAESignal, cfg: Dict) -> str:
         f"• Range: ${signal.range_low:.2f} – ${signal.range_high:.2f} {range_emoji}",
         f"• Efficiency: {signal.fee_efficiency}% ({signal.shape.upper()})",
         f"• APR: {signal.apr}%",
+    ]
+    
+    # Show active bin if available from on-chain data
+    active_bin = pool.get("active_bin")
+    if active_bin is not None:
+        lines.append(f"• Active Bin: {active_bin}")
+    
+    lines += [
         f"",
         f"**Liquidity Shape:**",
         f"```{liq_shape}```",
@@ -787,25 +812,35 @@ def main():
 
     
     # Fetch data with fallback chain
+    # Priority: On-chain (pool contract RPC) → DexScreener → Birdeye
     birdeye = fetch_birdeye(cfg)
     
-    try:
-        pool = fetch_dexscreener(cfg)
-    except Exception:
-        onchain = fetch_onchain(cfg)
-        if onchain:
-            pool = onchain
-        elif birdeye:
-            pool = {
-                "source": "birdeye",
-                "price": birdeye["price"],
-                "volume_24h": birdeye["volume_24h"],
-                "liquidity_usd": birdeye["liquidity_usd"],
-                "price_change_24h": birdeye["price_change_24h"]
-            }
-        else:
-            print(json.dumps({"status": "ERROR", "message": "All data sources failed"}))
-            sys.exit(1)
+    pool = fetch_onchain(cfg)
+    if pool:
+        # On-chain succeeded — try DexScreener for volume/24h data enrichment
+        try:
+            dex = fetch_dexscreener(cfg)
+            if dex:
+                pool["volume_24h"] = dex.get("volume_24h", 0.0)
+                pool["price_change_24h"] = dex.get("price_change_24h", 0.0)
+        except Exception:
+            pass  # Fine — on-chain is primary, volume/24h are nice-to-have
+    else:
+        # On-chain failed — try DexScreener as primary
+        try:
+            pool = fetch_dexscreener(cfg)
+        except Exception:
+            if birdeye:
+                pool = {
+                    "source": "birdeye",
+                    "price": birdeye["price"],
+                    "volume_24h": birdeye["volume_24h"],
+                    "liquidity_usd": birdeye["liquidity_usd"],
+                    "price_change_24h": birdeye["price_change_24h"]
+                }
+            else:
+                print(json.dumps({"status": "ERROR", "message": "All data sources failed"}))
+                sys.exit(1)
     
     # Use Birdeye price if available (more accurate), else pool price
     price = birdeye["price"] if birdeye else pool["price"]
@@ -891,7 +926,7 @@ def main():
     save_state(state)
     
     # Output structured JSON for AAE ingestion
-    human_report = format_human_report(signal, cfg)
+    human_report = format_human_report(signal, cfg, pool)
     if capital_injection_usd > 0:
         human_report = f"💸 Capital added: ${capital_injection_usd:.2f} — progress recalculated.\n\n" + human_report
 

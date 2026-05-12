@@ -1,49 +1,39 @@
-## 2026-05-11 10:08 UTC Update
+## 2026-05-11 01:16 PM Update (jordan_screenshot)
 
 ### Position Summary
 - **Pool**: LFJ AVAX/USDC 5bps (Avalanche)
-- **Current Price**: $10.14
-- **Position Range**: $9.90–$10.15 (Shape: bid-ask)
-- **Status**: ⚠️ AT RISK — 96.8% from bottom, efficiency 6.5%
+- **Current Price**: ~$10.12 (from LFJ chart)
+- **Position Range**: $10.02–$10.30 (Shape: Curve)
+- **Status**: 🟢 In Range — price centered in distribution
 
 ### Portfolio Value
-- **LP Value**: $177.76
-- **AVAX**: 0.72 (~$7.29) — 4.1% of position
-- **USDC**: $170.47 — 95.9% of position
-- **Wallet**: 0.0975 AVAX (~$0.99)
-- **Combined Total**: $178.75
-- **Est. Daily Fees**: ~$0.15-0.30 (degraded due to USDC-heavy skew)
+- **LP Value**: $180.56
+- **AVAX**: 7.982 (~$81.17) — 44.9% of position
+- **USDC**: 99.41 (~$99.39) — 55.1% of position
+- **Combined Total**: $180.56
+- **Est. Daily Fees**: $2.47 (carrying from prior period)
 
 ### Fee Efficiency
-- **Pool 24h Volume**: $3.94M
-- **Pool 24h Fees**: $1,970 (est. at 5bps)
-- **Effective Share**: 6.5% efficiency (critically low)
-- **Price Position**: 96.8% from bottom of range
-
-### ⚠️ Critical Alert: Position Drifted
-The position has drifted heavily USDC-weighted as AVAX rose through the range. At 96.8% from bottom with only 6.5% efficiency, we're earning almost nothing from swaps. Price at $10.14 is just $0.01 below the $10.15 range top.
-
-**Recommendation**: Rebalance to re-center price. Options:
-1. Move range up to $10.05–$10.30 (centered on current price)
-2. Widen to $9.75–$10.30 (more buffer, lower peak efficiency)
-3. Wait — risk going fully out of range if AVAX pushes above $10.15
+- **Pool 24h Fees (actual)**: $2.47
+- **Scout Progress**: 49.4% — $2.47/day vs $5.00 target
+- **IL**: ~0.0% ✓ below 2% threshold
 
 ### Milestone Ladder
 | Tier | Daily Target | Status |
 |------|-------------|--------|
-| Scout | $5.00/day | ⏳ 1.6% — $0.08/day |
+| Scout | $5.00/day | ⏳ 49.4% — $2.47/day |
 | Raider | $20.00/day | 🔒 Locked |
 | Warlord | $50.00/day | 🔒 Locked |
 | Sovereign | $100.00/day | 🔒 Locked |
 
 ### Scout Progress
-[====○○○○○○○○○○○○○○○○] 23.8% — $0.15-0.30/day (degraded efficiency)
+[==================○○○○] 49.4% — $2.47/day
 
 ### Action Items
-1. **Rebalance Needed**: Efficiency at 6.5% is critically low. Position is 96% USDC.
-2. **Price Risk**: Only $0.01 below range top. Any upside breaks position out of range.
-3. **Scout Milestone**: At 23.8% with degraded efficiency — actual daily fees far below $1.19 baseline.
-4. **DCA Status**: Price above target band — no DCA trigger. Consider rebalance first.
+1. **Position Stable**: Curve $10.02–$10.30, price centered at ~$10.12.
+2. **Scout Milestone**: At 49.4% — need 2.0x current fees to unlock.
+3. **Rebalance Complete**: Range shifted up from $9.96–$10.26. No further action needed.
+4. **DCA Status**: Price inside position range — no DCA trigger.
 
 ---
 

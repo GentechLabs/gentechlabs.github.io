@@ -9,27 +9,26 @@
 **Entry Date**: 2026-03-31
 
 ---
-## 2026-05-11 13:59 UTC Update (on-chain)
-**Price Range**: $9.90–$10.15 (Shape: Curve — on-chain decoded)
-**Balances**: 6.92 AVAX (~$69.86) + 107.90 USDC (~$107.90) = **$177.76**
-**Wallet**: 0.0975 AVAX (~$0.98)
-**Fees (24h)**: ~$0.26 (est. from $4.12M volume × 5bps × CL share; oracle not configured)
-**IL**: -0.0% ✓ negligible (freshly rebalanced May 11)
-**Range Status**: 🟡 In Range — price at 76.5% (near top), USDC-heavy 60.7%
-**Last Rebalance**: 2026-05-11 (jordan_screenshot)
-**Action**: ⚠️ Efficiency 46.9% < 50% — consider range recentering toward active price ($10.09). Price near top of range converting position to USDC-heavy.
+## 2026-05-11 01:16 PM Update (jordan_screenshot)
+**Price Range**: $10.02–$10.30 (Shape: Curve)
+**Balances**: 7.982 AVAX (~$81.17) + 99.41 USDC (~$99.39) = **$180.56**
+**Fees (24h)**: ~$2.47 (carrying from prior period — new range just established)
+**IL**: ~0.0% (freshly rebalanced) ✓ below 2% threshold
+**Range Status**: 🟢 In Range — price ~$10.12, centered in distribution
+**Last Rebalance**: 2026-05-11 01:16 PM (jordan_screenshot)
+**Action**: No rebalance needed — price centered in new curve range.
 
-**Position Note**: Position shifted since morning (08:00 AM jordan_screenshot). AVAX converted to USDC as price rose to $10.09 (top 24% of range). Efficiency dropped from 63.0% to 46.9% — capital suboptimal. Morning data (8.861 AVAX + 90 USDC) stale; on-chain reader used as source of truth.
+**Position Note**: Rebalanced from $9.96–$10.26 (8.861 AVAX + 90 USDC) to $10.02–$10.30 (7.982 AVAX + 99.41 USDC). Range shifted up $0.06 on both sides. Slight USDC tilt (55/45) — normal for curve placement. Position value stable at $180.56.
 
-**Market Notes**: AVAX $10.09 (+0.52% 24h), JOE $0.0513 (+3.89% 24h 📈). Pool TVL $4.17M, 24h volume $4.12M (5,467 txns). Broad altcoin stability.
+**Market Notes**: AVAX ~$10.12. Price centered in $10.02–$10.30 range. Altcoin rally continuation from May 10.
 
 **D5 Milestone Alignment**:
-- Scout tier ($5.00/day target) — est. daily fees ~$0.26 → 5.2% progress
-- Price inside strategic band ($9.90–$10.15) ✅
-- IL -0.0% — well below 2% review threshold ✅
-- Efficiency 46.9% < 50% → ⚠️ DCA boost potential; range recentering recommended
+- Scout tier ($5.00/day target) — est. daily fees ~$2.47 → 49.4% progress
+- Price inside position range ✅
+- IL ✓ well below 2% threshold
+- Efficiency expected good — price centered in range
 
-**Scout Progress**: 5.2% ($0.26/day vs $5.00 target)
+**Other Pools**: None active
 
 ## 2026-05-10 20:15 UTC Update
 **Price Range**: $10.28–$10.55 (Shape: curve)

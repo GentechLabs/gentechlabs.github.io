@@ -1,6 +1,6 @@
 # 🏆 Active Hackathon Tracker
 
-Last updated: 2026-05-11 09:30 UTC (Agora Agents added, full audit complete)
+Last updated: 2026-05-11 19:00 UTC (Arbitrum Open House added, dev prep started)
 
 | Hackathon | Dates | Theme | Prizes | Status | Notes |
 |-----------|-------|-------|--------|--------|-------|
@@ -11,6 +11,7 @@ Last updated: 2026-05-11 09:30 UTC (Agora Agents added, full audit complete)
 | Somnia | Jun 11 | TBD | $5K+ | 🟡 QUEUED | Job opportunity potential. |
 | Agora Agents (Canteen × Circle) | May 25 | AI Agents on Arc (EVM L1) | $50K | 🟢 REGISTERED | Jordan invited. RFB 04 (Adaptive Portfolio Manager) = strongest fit. Apply NOW. |
 | Swarms ACM | May 27 | Finance & Market Analysis | $30K | 🟡 QUEUED | LP Monitor → marketplace agent. 16 days left. Tech assessment done. |
+| Arbitrum Open House | Reg: May 25 / Sub: Jun 14 | AI Agents (Best Agentic) | $115K ($70K+$15K+$30K) | 🟡 QUEUED | AgentForge portable. Best Agentic track = strongest fit. 164+ registered. |
 | Solana Frontier | May 11 | Solana | $250K + accelerator | ❌ WITHDRAWN | Jordan directive May 10. Time/debugging constraints. Solana work preserved for cross-chain reuse. |
 
 ## Bug Bounties (Ongoing)
@@ -36,9 +37,10 @@ Last updated: 2026-05-11 09:30 UTC (Agora Agents added, full audit complete)
 
 ## Priority Order (per Jordan directive, May 11)
 1. **Kite AI** — PRIMARY. Deadline May 17. Jordan registered. 52/52 tests, contracts done, needs deploy + demo.
-2. **Agora Agents** — 🟢 NEW. Deadline May 25. $50K. RFB 04 (Adaptive Portfolio Manager) = strongest fit. Apply NOW.
-3. **Swarms ACM** — QUEUED. Deadline May 27. LP Monitor marketplace agent. Tech assessment complete.
-4. **Bags FM** — ACTIVE. Deadline Jun 1. Agent Trading Desk build.
-5. **Google (Cloud Rapid Agent + for Startups)** — QUEUED. Deadlines Jun 5-11. At least one submission target.
-6. **Somnia** — QUEUED. Deadline Jun 11. $5K + job opportunity. Encode Club partnership.
-7. **Solana Frontier** — ❌ WITHDRAWN. Not enough time, Hermes Windows support not ready. Solana work preserved for cross-chain port.
+2. **Agora Agents** — 🟢 REGISTERED. Deadline May 25. $50K. RFB 04 (Adaptive Portfolio Manager) = strongest fit.
+3. **Arbitrum Open House** — 🟡 QUEUED. Reg May 25 / Sub Jun 14. $115K. AgentForge → Best Agentic track. Dev prep started.
+4. **Swarms ACM** — QUEUED. Deadline May 27. LP Monitor marketplace agent. Tech assessment complete.
+5. **Bags FM** — ACTIVE. Deadline Jun 1. Agent Trading Desk build.
+6. **Google (Cloud Rapid Agent + for Startups)** — QUEUED. Deadlines Jun 5-11. At least one submission target.
+7. **Somnia** — QUEUED. Deadline Jun 11. $5K + job opportunity. Encode Club partnership.
+8. **Solana Frontier** — ❌ WITHDRAWN. Not enough time, Hermes Windows support not ready. Solana work preserved for cross-chain port.
