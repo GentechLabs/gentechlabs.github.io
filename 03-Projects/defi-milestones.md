@@ -1,3 +1,85 @@
+## 2026-05-12 DCA Rebalance (jordan_screenshot)
+
+### Position Summary
+- **Pool**: LFJ AVAX/USDC 5bps (Avalanche)
+- **Current Price**: ~$9.86
+- **Position Range**: $9.68–$10.00 (Shape: Bid-Ask)
+- **Status**: 🟢 In Range — price centered in distribution
+
+### Portfolio Value
+- **LP Value**: $201.94
+- **AVAX**: 9.345 (~$92.21) — 45.7% of position
+- **USDC**: 109.76 (~$109.74) — 54.3% of position
+- **Combined Total**: $201.94
+- **Est. Daily Fees**: $1.88 (24h actual)
+- **Claimable Rewards**: 0.008 AVAX (~$0.008)
+
+### Fee Efficiency
+- **Pool 24h Fees (actual)**: $1.88
+- **Scout Progress**: 37.6% — $1.88/day vs $5.00 target
+- **IL**: ~0.0% ✓ below 2% threshold
+
+### Milestone Ladder
+| Tier | Daily Target | Status |
+|------|-------------|--------|
+| Scout | $5.00/day | ⏳ 37.6% — $1.88/day |
+| Raider | $20.00/day | 🔒 Locked |
+| Warlord | $50.00/day | 🔒 Locked |
+| Sovereign | $100.00/day | 🔒 Locked |
+
+### Scout Progress
+[================○○○○○○] 37.6% — $1.88/day
+
+### Action Items
+1. **Position Stable**: Bid-Ask $9.68–$10.00, price centered at ~$9.86.
+2. **Scout Milestone**: At 37.6% — need 2.7x current fees to unlock.
+3. **DCA Rebalance Complete**: Shifted from Curve to Bid-Ask shape. More concentrated near current price.
+4. **DCA Status**: Price inside position range — no DCA trigger.
+5. **Position Growth**: Up 12.5% from $180.56 to $201.94 since May 11.
+
+---
+
+## 2026-05-12 08:36 AM Update (jordan_screenshot)
+
+### Position Summary
+- **Pool**: LFJ AVAX/USDC 5bps (Avalanche)
+- **Current Price**: ~$9.96
+- **Position Range**: $9.81–$10.06 (Shape: Curve)
+- **Status**: 🟢 In Range — price centered in distribution
+
+### Portfolio Value
+- **LP Value**: $203.14
+- **AVAX**: 9.433 (~$93.05) — 45.8% of position
+- **USDC**: 109.21 (~$109.19) — 54.2% of position
+- **Combined Total**: $203.14
+- **Est. Daily Fees**: $1.88 (24h actual)
+- **Claimable Rewards**: 0.08 AVAX (~$0.80)
+
+### Fee Efficiency
+- **Pool 24h Fees (actual)**: $1.88
+- **Scout Progress**: 37.6% — $1.88/day vs $5.00 target
+- **IL**: ~0.0% ✓ below 2% threshold
+
+### Milestone Ladder
+| Tier | Daily Target | Status |
+|------|-------------|--------|
+| Scout | $5.00/day | ⏳ 37.6% — $1.88/day |
+| Raider | $20.00/day | 🔒 Locked |
+| Warlord | $50.00/day | 🔒 Locked |
+| Sovereign | $100.00/day | 🔒 Locked |
+
+### Scout Progress
+[================○○○○○○] 37.6% — $1.88/day
+
+### Action Items
+1. **Position Stable**: Curve $9.81–$10.06, price centered at ~$9.96.
+2. **Scout Milestone**: At 37.6% — need 2.7x current fees to unlock.
+3. **Rebalance Complete**: Tightened from $9.25–$10.73 to $9.81–$10.06. More concentrated = higher fee capture.
+4. **DCA Status**: Price inside position range — no DCA trigger.
+5. **Position Growth**: Up 12.5% from $180.56 to $203.14 since last update.
+
+---
+
 ## 2026-05-11 01:16 PM Update (jordan_screenshot)
 
 ### Position Summary

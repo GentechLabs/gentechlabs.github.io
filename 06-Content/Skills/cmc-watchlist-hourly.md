@@ -35,8 +35,9 @@ Automated hourly price monitoring of Jordan's "Bullish" crypto portfolio. Uses C
 - **Delivery:** Telegram (-1002916759037)
 
 ## Output Format
-- JSON with price, 1h/24h/7d changes, movement since last check
-- `[SILENT]` if no token moved >= 1.5%
+- Human-readable with Daily (24h), Weekly (7d), Monthly (30d) performance
+- Emoji trends: 🟢 up, 🔴 down, ⚪ flat
+- `[SILENT]` if no token moved >= 1.5% since last check
 
 ## Fallback Chain
 1. CoinMarketCap API (primary)

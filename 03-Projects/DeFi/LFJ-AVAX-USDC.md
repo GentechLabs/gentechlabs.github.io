@@ -9,6 +9,42 @@
 **Entry Date**: 2026-03-31
 
 ---
+## 2026-05-12 DCA Rebalance (jordan_screenshot)
+**Price Range**: $9.68–$10.00 (Shape: Bid-Ask)
+**Balances**: 9.345 AVAX (~$92.21) + 109.76 USDC (~$109.74) = **$201.94**
+**Fees (24h)**: ~$1.88 (carrying from prior period)
+**Claimable Rewards**: 0.008 AVAX (~$0.008)
+**IL**: ~0.0% (freshly rebalanced) ✓ below 2% threshold
+**Range Status**: 🟢 In Range — price ~$9.86, centered in distribution
+**Last Rebalance**: 2026-05-12 DCA Rebalance (jordan_screenshot)
+**Action**: No rebalance needed — price centered in new bid-ask range.
+**Position Note**: DCA rebalance — shifted from Curve ($9.81–$10.06) to Bid-Ask ($9.68–$10.00). Bid-Ask shape concentrates more liquidity near current price for higher fee capture in ranging markets. Range widened slightly on bottom ($0.13 down) and tightened on top ($0.06 down). Position value stable at $201.94.
+
+**D5 Milestone Alignment**:
+- Scout tier ($5.00/day target) — est. daily fees ~$1.88 → 37.6% progress
+- Price inside position range ✅
+- IL ✓ well below 2% threshold
+- Bid-Ask shape = maximum fee capture when price stays near $9.86
+
+---
+## 2026-05-12 08:36 AM Update (jordan_screenshot)
+**Price Range**: $9.81–$10.06 (Shape: Curve)
+**Balances**: 9.433 AVAX (~$93.05) + 109.21 USDC (~$109.19) = **$203.14**
+**Fees (24h)**: ~$1.88 (0.093 AVAX + 0.952 USDC)
+**Claimable Rewards**: 0.08 AVAX (~$0.80)
+**IL**: ~0.0% (freshly rebalanced) ✓ below 2% threshold
+**Range Status**: 🟢 In Range — price ~$9.96, centered in distribution
+**Last Rebalance**: 2026-05-12 08:36 AM (jordan_screenshot)
+**Action**: No rebalance needed — price centered in new curve range.
+**Position Note**: Rebalanced from $9.25–$10.73 (wide curve) to $9.81–$10.06 (tighter curve). Range narrowed significantly — more concentrated = higher fee capture when in range. Position value up to $203.14 from $180.56 (+12.5%).
+
+**D5 Milestone Alignment**:
+- Scout tier ($5.00/day target) — est. daily fees ~$1.88 → 37.6% progress
+- Price inside position range ✅
+- IL ✓ well below 2% threshold
+- Efficiency expected good — price centered in range
+
+---
 ## 2026-05-11 01:16 PM Update (jordan_screenshot)
 **Price Range**: $10.02–$10.30 (Shape: Curve)
 **Balances**: 7.982 AVAX (~$81.17) + 99.41 USDC (~$99.39) = **$180.56**

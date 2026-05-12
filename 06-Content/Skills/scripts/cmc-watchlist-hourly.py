@@ -3,6 +3,8 @@
 Crypto Watchlist — Hourly Price Monitor
 Fetches prices via CMC, compares to last check, outputs only if meaningful movement.
 Designed to be run by cron agent via script= parameter.
+
+Displays: Daily (24h), Weekly (7d), Monthly (30d) performance.
 """
 
 import json
@@ -83,6 +85,14 @@ def format_price(symbol, price):
         return f"${price:.6f}"
 
 
+def trend_emoji(val):
+    if val > 0:
+        return "🟢"
+    elif val < 0:
+        return "🔴"
+    return "⚪"
+
+
 def main():
     state = load_state()
     last_prices = state.get("last_prices", {})
@@ -102,9 +112,9 @@ def main():
                 if q:
                     prices[coin["symbol"]] = {
                         "price": q.get("price", 0),
-                        "change_1h": q.get("percent_change_1h", 0),
                         "change_24h": q.get("percent_change_24h", 0),
                         "change_7d": q.get("percent_change_7d", 0),
+                        "change_30d": q.get("percent_change_30d", 0),
                         "volume_24h": q.get("volume_24h", 0),
                         "market_cap": q.get("market_cap", 0),
                     }
@@ -121,9 +131,9 @@ def main():
                     d = data[cg_id]
                     prices[coin["symbol"]] = {
                         "price": d.get("usd", 0),
-                        "change_1h": 0,
                         "change_24h": d.get("usd_24h_change", 0),
                         "change_7d": 0,
+                        "change_30d": 0,
                         "volume_24h": 0,
                         "market_cap": 0,
                     }
@@ -156,28 +166,36 @@ def main():
     # Determine if we should report
     significant = max_change >= MOVEMENT_THRESHOLD
 
-    # Build output
-    output = {
-        "time": now_str,
-        "source": source,
-        "significant_movement": significant,
-        "max_change_since_last": f"{max_change:.2f}%",
-        "threshold": f"{MOVEMENT_THRESHOLD}%",
-        "coins": {},
-    }
+    # Build human-readable output
+    lines = []
+    lines.append(f"📊 CMC Watchlist — {now_str}")
+    lines.append(f"Source: {source} | Max move since last: {max_change:.2f}%")
+    if significant:
+        lines.append("⚡ SIGNIFICANT MOVEMENT DETECTED")
+    lines.append("")
 
     for coin in COINS:
         sym = coin["symbol"]
         if sym in prices:
             d = prices[sym]
-            output["coins"][sym] = {
-                "price": format_price(sym, d["price"]),
-                "change_1h": f"{d['change_1h']:+.2f}%",
-                "change_24h": f"{d['change_24h']:+.2f}%",
-                "movement_since_last": f"{movements.get(sym, 0):.2f}%",
-            }
+            c24 = d["change_24h"]
+            c7d = d["change_7d"]
+            c30d = d["change_30d"]
+            lines.append(f"{'━' * 28}")
+            lines.append(f"  {sym} — {format_price(sym, d['price'])}")
+            lines.append(f"  Daily:  {trend_emoji(c24)} {c24:+.2f}%")
+            lines.append(f"  Weekly: {trend_emoji(c7d)} {c7d:+.2f}%")
+            lines.append(f"  Monthly: {trend_emoji(c30d)} {c30d:+.2f}%")
 
-    print(json.dumps(output, indent=2))
+    lines.append(f"{'━' * 28}")
+    result = "\n".join(lines)
+
+    # If no significant movement, stay quiet
+    if not significant:
+        print("[SILENT]")
+        return
+
+    print(result)
 
 
 if __name__ == "__main__":

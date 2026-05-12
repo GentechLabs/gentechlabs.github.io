@@ -38,7 +38,7 @@ DEFAULT_CONFIG = {
         "total_usd": 134.94,
         "token0_amount": 3.446,
         "token1_amount": 103.38,
-        "range_low": 9.90,
+        "range_low": 9.68,
         "range_high": 10.15,
         "shape": "curve"
     },
@@ -184,6 +184,16 @@ def load_state() -> Dict[str, Any]:
         "pool_dominant_pair": None,
         "last_check": None,
         "last_position_usd": None,
+        # Tier & streak tracking (approved May 12, 2026)
+        "current_tier": 0,              # 0=unranked, 1=Scout, 2=Pathfinder, etc.
+        "last_above_threshold_date": None,
+        "days_below_threshold": 0,
+        "streak_count": 0,
+        "best_streak": 0,
+        "last_streak_date": None,
+        "tier_achieved_dates": {},      # {tier_num: "YYYY-MM-DD"}
+        "decay_warnings_sent": 0,
+        "last_decay_warning_date": None,
     }
     try:
         with open(STATE_FILE, "r") as f:
