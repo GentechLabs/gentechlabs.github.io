@@ -4,7 +4,7 @@ LP Range Monitor v3 — LFJ AVAX/USDC Pool
 Milestone tracker + tiered breakout alerts.
 
 New in v3:
-  - Range updated to 9.44–9.74 (Bid-Ask shape)
+  - Range updated to 9.44–10.01 (Bid-Ask shape)
   - Fee efficiency milestone tracker (cumulative fees, milestones)
   - Tiered alerts: ⚠️ light warning → 🔴 red alert (5-min escalation)
   - Breakout direction tracking (upside/downside)
@@ -20,14 +20,14 @@ from typing import Optional
 # ── Config ──────────────────────────────────────────────────────────────────
 POOL_ADDRESS = "0x864d4e5ee7318e97483db7eb0912e09f161516ea"
 CHAIN = "avalanche"
-RANGE_LOW = 9.68
-RANGE_HIGH = 10.15
+RANGE_LOW = 9.75
+RANGE_HIGH = 10.01
 STATE_FILE = os.path.expanduser("~/.hermes/scripts/.lfj-range-state.json")
 POSITION_FILE = os.path.expanduser("~/.hermes/scripts/.lfj-position-tracker.json")
 MILESTONE_FILE = os.path.expanduser("~/.hermes/scripts/.lfj-milestone-tracker.json")
 
 # Fee milestones (USD thresholds)
-FEE_MILESTONES = [0.50, 1.00, 2.00, 5.00, 10.00, 25.00, 50.00, 100.00]
+FEE_MILESTONES = [0.50, 1.00, 2.00, 5.00, 10.01, 25.00, 50.00, 100.00]
 
 # Birdeye config
 AVAX_ADDRESS = "0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7"

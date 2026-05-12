@@ -9,6 +9,23 @@
 **Entry Date**: 2026-03-31
 
 ---
+## 2026-05-12 06:10 AM Rebalance (jordan_screenshot)
+**Price Range**: $9.75–$10.01 (Shape: Curve)
+**Balances**: 9.771 AVAX (~$96.61) + 106.59 USDC (~$106.57) = **$203.18**
+**Fees (24h)**: ~$1.344 (0.07251 AVAX + 0.62683 USDC)
+**IL**: ~0.0% (freshly rebalanced) ✓ below 2% threshold
+**Range Status**: 🟢 In Range — price ~$9.89, centered in distribution
+**Last Rebalance**: 2026-05-12 06:10 AM (jordan_screenshot)
+**Action**: No rebalance needed — price centered in new curve range.
+**Position Note**: Rebalanced from Bid-Ask ($9.68–$10.00) to Curve ($9.75–$10.01). Jordan analysis: "Bid-ask was great for the fall but most of the day was spent in the middle of bid ask. Low efficiency is a no go." Curve shape better for ranging markets — earns more when price stays centered. Position value stable at $203.18.
+
+**D5 Milestone Alignment**:
+- Scout tier ($5.00/day target) — est. daily fees ~$1.34 → 26.8% progress
+- Price inside position range ✅
+- IL ✓ well below 2% threshold
+- Curve shape = optimal for ranging market at $9.89
+
+---
 ## 2026-05-12 DCA Rebalance (jordan_screenshot)
 **Price Range**: $9.68–$10.00 (Shape: Bid-Ask)
 **Balances**: 9.345 AVAX (~$92.21) + 109.76 USDC (~$109.74) = **$201.94**

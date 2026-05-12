@@ -1,3 +1,44 @@
+## 2026-05-12 06:10 AM Rebalance (jordan_screenshot)
+
+### Position Summary
+- **Pool**: LFJ AVAX/USDC 5bps (Avalanche)
+- **Current Price**: ~$9.89
+- **Position Range**: $9.75–$10.01 (Shape: Curve)
+- **Status**: 🟢 In Range — price centered in distribution
+
+### Portfolio Value
+- **LP Value**: $203.18
+- **AVAX**: 9.771 (~$96.61) — 47.5% of position
+- **USDC**: 106.59 (~$106.57) — 52.5% of position
+- **Combined Total**: $203.18
+- **Est. Daily Fees**: $1.344 (24h actual)
+- **Claimable Rewards**: pending claim
+
+### Fee Efficiency
+- **Pool 24h Fees (actual)**: $1.344
+- **Scout Progress**: 26.8% — $1.34/day vs $5.00 target
+- **IL**: ~0.0% ✓ below 2% threshold
+
+### Milestone Ladder
+| Tier | Daily Target | Status |
+|------|-------------|--------|
+| Scout | $5.00/day | ⏳ 26.8% — $1.34/day |
+| Raider | $20.00/day | 🔒 Locked |
+| Warlord | $50.00/day | 🔒 Locked |
+| Sovereign | $100.00/day | 🔒 Locked |
+
+### Scout Progress
+[===============○○○○○○] 26.8% — $1.34/day
+
+### Action Items
+1. **Position Stable**: Curve $9.75–$10.01, price centered at ~$9.89.
+2. **Scout Milestone**: At 26.8% — need 3.7x current fees to unlock.
+3. **Rebalance Complete**: Shifted from Bid-Ask to Curve. Better for ranging market.
+4. **DCA Status**: Price inside position range — no DCA trigger.
+5. **Position Growth**: Stable at $203.18.
+
+---
+
 ## 2026-05-12 DCA Rebalance (jordan_screenshot)
 
 ### Position Summary

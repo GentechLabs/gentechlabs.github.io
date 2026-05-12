@@ -15,8 +15,10 @@
 - [ ] Crypto Freelance Agent content series (Desmond)
 
 ## Hackathons
-- [ ] Kite AI (May 17) — AgentEscrow + Dynamic Strategy Engine
+- [x] Kite AI (May 17) — AgentEscrow + Dynamic Strategy Engine ✅ submitted
+- [ ] Agora Agents (May 25, $50K prize) — invited submission
 - [ ] Swarms ACM (May 27) — LP Monitor marketplace agent
+- [ ] Arbitrum Open House ($115K) — Best Agentic track, AgentForge portable, reg May 25 / sub Jun 14
 - [ ] Bags FM (Jun 1) — Agent Trading Desk
 - [ ] Google Cloud Rapid Agent (Jun 11) — Gemini + MCP
 - [ ] Somnia (Jun 11) — job opportunity potential
