@@ -163,27 +163,6 @@
         .badge-submit { background: #052e16; color: #22c55e; }
         .badge-building { background: #1c1400; color: #fbbf24; }
         .badge-queued { background: #1a0d2e; color: #a855f7; }
-        .filter-btn {
-            display: inline-block;
-            padding: 6px 16px;
-            border-radius: 20px;
-            border: 1px solid #333;
-            background: #1a1a1a;
-            color: #e0e0e0;
-            font-size: 0.85em;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .filter-btn:hover {
-            border-color: #22c55e;
-            color: #22c55e;
-        }
-        .filter-btn.active {
-            background: #22c55e;
-            color: #0a0a0a;
-            border-color: #22c55e;
-        }
         .footer {
             text-align: center;
             padding: 30px;
@@ -416,181 +395,19 @@ html { scroll-behavior: smooth; }
 
 
         <script>
-            const projects = [
-{
-"id": "kite-ai",
-"title": "Kite AI Governance",
-"description": "Agentic Commerce \u2014 AI-validated escrow + dual-payment router on Kite AI testnet. 3 contracts deployed, 52/52 tests passing. Demo video in progress.",
-"tech": [
-"Solidity",
-"Foundry",
-"EVM",
-"x402"
-],
-"vault_path": "02-Labs/Hackathons/Kite-AI/",
-"status": "completed",
-"deadline": "2026-05-17",
-"timeline": "May 2026",
-"highlight": true
-},
-{
-"id": "bags-fm",
-"title": "Bags FM Agent Trading Desk",
-"description": "AI agent trading desk on Bags FM memecoin launchpad. Autonomous token analysis, portfolio management, and trade execution.",
-"tech": [
-"Solana",
-"AI Agents",
-"Trading",
-"Memecoin"
-],
-"vault_path": "02-Labs/Hackathons/Bags-FM/",
-"status": "building",
-"deadline": "2026-06-01",
-"timeline": "May 2026",
-"highlight": true
-},
-{
-"id": "google-rapid-agent",
-"title": "Google Cloud Rapid Agent",
-"description": "AI agent built with Gemini, Agent Builder, and MCP for Google Cloud hackathon.",
-"tech": [
-"Gemini",
-"MCP",
-"Python",
-"Google Cloud"
-],
-"vault_path": "02-Labs/Hackathons/Google-Cloud/",
-"status": "building",
-"deadline": "2026-06-11",
-"timeline": "May 2026",
-"highlight": true
-},
-{
-"id": "google-startups",
-"title": "Google for Startups AI Agents",
-"description": "AI agents prototype-to-production for Google for Startups program.",
-"tech": [
-"AI Agents",
-"Python",
-"Google Cloud"
-],
-"vault_path": "02-Labs/Hackathons/Google-Startups/",
-"status": "building",
-"deadline": "2026-06-05",
-"timeline": "May 2026",
-"highlight": true
-},
-{
-"id": "somnia",
-"title": "Somnia",
-"description": "TBD hackathon submission for Somnia ecosystem.",
-"tech": [
-"TBD"
-],
-"vault_path": "02-Labs/Hackathons/Somnia/",
-"status": "building",
-"deadline": "2026-06-11",
-"timeline": "May 2026",
-"highlight": true
-},
-{
-"id": "swarms-acm",
-"title": "Swarms ACM LP Monitor",
-"description": "Marketplace agent for DeFi LP monitoring and analysis. Built on Swarms framework for autonomous finance and market analysis.",
-"tech": [
-"Swarms",
-"DeFi",
-"Python",
-"Multi-Agent"
-],
-"vault_path": "02-Labs/Hackathons/Swarms-ACM/",
-"status": "building",
-"deadline": "2026-05-27",
-"timeline": "May 2026",
-"highlight": true
-},
-{
-"id": "agent-escrow",
-"title": "AgentEscrow",
-"description": "Cross-chain payment infrastructure with AI agent integration. Anchor programs built \u2014 preserved for cross-chain reuse after Solana Frontier withdrawal.",
-"tech": [
-"Solana",
-"Anchor",
-"Rust",
-"x402"
-],
-"vault_path": "03-Projects/AAE/agent-escrow-architecture.md",
-"status": "completed",
-"deadline": "2026-05-11",
-"timeline": "May 2026",
-"highlight": false
-},
-{
-"id": "lets-fg",
-"title": "Let's FG Travel Agent",
-"description": "Voice-first travel planning agent. Natural language flight/hotel search, price tracking, and booking automation via Pipecat and Maps APIs.",
-"tech": [
-"Pipecat",
-"Maps API",
-"Python",
-"Telegram"
-],
-"status": "live",
-"deadline": null,
-"timeline": "Apr 2026",
-"highlight": false,
-"vault_path": "03-Projects/Travel-Agent/"
-},
-{
-"id": "lfj-avax-usdc",
-"title": "AAE Defi Milestones",
-"description": "Automated DeFi portfolio management system with cross-chain rebalancing and gas optimization.",
-"tech": [
-"DeFi",
-"Python",
-"Cross-Chain",
-"Gas Optimization"
-],
-"status": "live",
-"deadline": null,
-"timeline": "Apr 2026",
-"highlight": false,
-"vault_path": "03-Projects/DeFi/LFJ-AVAX-USDC.md"
-},
-{
-"id": "hermes-kanban",
-"title": "Hermes Kanban",
-"description": "TUI-based kanban board for autonomous agent task management. Integrated with Hermes agent orchestration for real-time task tracking and handoffs.",
-"tech": [
-"Hermes",
-"Python",
-"TUI",
-"SQLite"
-],
-"status": "live",
-"deadline": null,
-"timeline": "Mar 2026",
-"highlight": false,
-"vault_path": "03-Projects/hermes-kanban/"
-},
-{
-"id": "agora-agents",
-"title": "Agora Adaptive Portfolio Manager",
-"description": "AI-powered portfolio rebalancing agent on Circle Arc. Regime detection, cross-chain USDC coordination, tax-loss harvesting. Built for Canteen \u00d7 Circle \u00d7 Arc hackathon (0K prize pool).",
-"tech": [
-"Arc",
-"Circle",
-"Solidity",
-"CCTP",
-"USDC"
-],
-"status": "building",
-"deadline": "2026-05-25",
-"timeline": "May 2026",
-"highlight": true,
-"vault_path": "03-Projects/Agora-Agents/"
-}
-];
+            const projects = [{"id": "agent-escrow","title": "AgentEscrow","description": "Cross-chain payment infrastructure with AI agent integration. Agents escrow, validate, and release payments automatically. x402 protocol integration.","tech": ["Solana", "Anchor", "Rust", "x402"],"status": "completed","deadline": null,"timeline": "May 2026","highlight": true,"vault_path": "03-Projects/AAE/agent-escrow-architecture.md"},
+{"id": "kite-ai","title": "Kite AI Governance","description": "Agent economy lifecycle landing on Kite AI settlement layer. AAE integration for decentralized agent marketplace governance.","tech": ["Avalanche", "Python", "Agent Framework"],"status": "completed","deadline": null,"timeline": "May 2026","highlight": true,"vault_path": "02-Labs/Hackathons/Kite-AI/"},
+{"id": "lets-fg","title": "Let's FG Travel Agent","description": "Voice-first travel planning agent. Natural language flight/hotel search, price tracking, and booking automation via Pipecat and Maps APIs.","tech": ["Pipecat", "Maps API", "Python", "Telegram"],"status": "live","deadline": null,"timeline": "Apr 2026","highlight": false,"vault_path": "03-Projects/Travel-Agent/"},
+{"id": "lfj-avax-usdc","title": "AAE Defi Milestones","description": "Automated DeFi portfolio management system with cross-chain rebalancing and gas optimization. Monitors pool ranges and rebalances positions to optimize fee capture and minimize IL.","tech": ["DeFi", "Python", "Cross-Chain", "Gas Optimization"],"status": "building","deadline": null,"timeline": "Apr 2026","highlight": false,"vault_path": "03-Projects/DeFi/LFJ-AVAX-USDC.md"},
+{"id": "hermes-kanban","title": "Hermes Kanban","description": "TUI-based kanban board for autonomous agent task management. Integrated with Hermes agent orchestration for real-time task tracking and handoffs.","tech": ["Hermes", "Python", "TUI", "SQLite"],"status": "live","deadline": null,"timeline": "Mar 2026","highlight": false,"vault_path": "03-Projects/hermes-kanban/"},
+{"id": "birdeye-bip","title": "Birdeye BIP","description": "On-chain market data adapter for Birdeye ecosystem. Real-time price feeds, order book data, and volume metrics for agent trading strategies.","tech": ["Solana", "Python", "Data Pipeline"],"status": "research","deadline": null,"timeline": "Feb 2026","highlight": false,"vault_path": "03-Projects/BirdeyeBIP/"},
+{"id": "tech-payment-router","title": "Tech Payment Router","description": "Ethereum payment router with x402 protocol support. Enables automated recurring payments, subscription billing, and micro-transaction routing.","tech": ["Ethereum", "Solidity", "x402", "Payments"],"status": "research","deadline": null,"timeline": "Feb 2026","highlight": false,"vault_path": "03-Projects/tech-burn-test/"},
+{"id": "bags-fm","title": "Bags FM","description": "AI agent trading desk for memecoin analysis and trading on Solana. Real-time market signals, agent-driven execution, and portfolio analytics.","tech": ["Solana", "AI Agents", "Trading", "Python"],"status": "building","deadline": "2026-06-01","timeline": "Jun 2026","highlight": true,"vault_path": "02-Labs/Hackathons/Bags-FM/"},
+{"id": "google-cloud-rapid-agent","title": "Google Cloud Rapid Agent","description": "Gemini + Agent Builder + MCP integration for Google Cloud hackathon. Autonomous agent pipeline with structured tool calling.","tech": ["Google Cloud", "Gemini", "MCP", "Python"],"status": "building","deadline": "2026-06-11","timeline": "Jun 2026","highlight": false,"vault_path": "02-Labs/Hackathons/Google-Cloud/"},
+{"id": "somnia","title": "Somnia","description": "Hackathon submission for Somnia. TBD scope \\u2014 exploring agent economy primitives on Somnia chain.","tech": ["Somnia", "TBD"],"status": "building","deadline": "2026-06-11","timeline": "Jun 2026","highlight": false,"vault_path": "02-Labs/Hackathons/Somnia/"},
+{"id": "agora-agents","title": "Agora Agents","description": "AI portfolio rebalancer on Circle Arc. Adaptive portfolio management for the Canteen \\u00d7 Circle \\u00d7 Arc hackathon. $50K prize pool.","tech": ["Circle Arc", "AI Agents", "DeFi", "Python"],"status": "building","deadline": "2026-05-25","timeline": "May 2026","highlight": true,"vault_path": "02-Labs/Hackathons/Agora/"},
+{"id": "swarms-acm","title": "Swarms ACM LP Monitor","description": "DeFi LP monitoring agent built on Swarms framework. Automated position tracking, rebalance signals, and fee analytics. $30K prize pool.","tech": ["Swarms", "DeFi", "Python", "LP Monitoring"],"status": "building","deadline": "2026-05-27","timeline": "May 2026","highlight": true,"vault_path": "02-Labs/Hackathons/Swarms-ACM/"},
+{"id": "google-startups","title": "Google for Startups","description": "AI agents prototype-to-production track. Building deployment tooling for agent systems in the Google for Startups AI cohort.","tech": ["Google", "AI Agents", "Deployment", "Python"],"status": "building","deadline": "2026-06-05","timeline": "Jun 2026","highlight": false,"vault_path": "02-Labs/Hackathons/Google-Startups/"}]];
             const filterBtns = document.querySelectorAll('#projects .filter-btn');
             const projectsContainer = document.getElementById('projects-container');
             
@@ -710,111 +527,83 @@ html { scroll-behavior: smooth; }
                                     <script id="project-data" type="application/json">
 [
   {
-    "id": "kite-ai",
-    "title": "Kite AI Governance",
-    "description": "Agent economy lifecycle landing on Kite AI settlement layer. AAE integration for decentralized agent marketplace governance.",
-    "tech": [
-      "Avalanche",
-      "Python",
-      "Agent Framework"
-    ],
-    "vault_path": "02-Labs/Hackathons/Kite-AI/",
-    "status": "building",
-    "deadline": "2026-05-17",
-    "timeline": "May 2026",
-    "highlight": true
-  },
-  {
-    "id": "bags-fm",
-    "title": "Bags FM Agent Trading Desk",
-    "description": "AI agent trading desk on Bags FM memecoin launchpad. Autonomous token analysis, portfolio management, and trade execution.",
-    "tech": [
-      "Solana",
-      "AI Agents",
-      "Trading",
-      "Memecoin"
-    ],
-    "vault_path": "02-Labs/Hackathons/Bags-FM/",
-    "status": "building",
-    "deadline": "2026-06-01",
-    "timeline": "May 2026",
-    "highlight": true
-  },
-  {
-    "id": "google-rapid-agent",
-    "title": "Google Cloud Rapid Agent",
-    "description": "AI agent built with Gemini, Agent Builder, and MCP for Google Cloud hackathon.",
-    "tech": [
-      "Gemini",
-      "MCP",
-      "Python",
-      "Google Cloud"
-    ],
-    "vault_path": "02-Labs/Hackathons/Google-Cloud/",
-    "status": "building",
-    "deadline": "2026-06-11",
-    "timeline": "May 2026",
-    "highlight": true
-  },
-  {
-    "id": "google-startups",
-    "title": "Google for Startups AI Agents",
-    "description": "AI agents prototype-to-production for Google for Startups program.",
-    "tech": [
-      "AI Agents",
-      "Python",
-      "Google Cloud"
-    ],
-    "vault_path": "02-Labs/Hackathons/Google-Startups/",
-    "status": "building",
-    "deadline": "2026-06-05",
-    "timeline": "May 2026",
-    "highlight": true
-  },
-  {
-    "id": "somnia",
-    "title": "Somnia",
-    "description": "TBD hackathon submission for Somnia ecosystem.",
-    "tech": [
-      "TBD"
-    ],
-    "vault_path": "02-Labs/Hackathons/Somnia/",
-    "status": "building",
-    "deadline": "2026-06-11",
-    "timeline": "May 2026",
-    "highlight": true
-  },
-  {
-    "id": "swarms-acm",
-    "title": "Swarms ACM LP Monitor",
-    "description": "Marketplace agent for DeFi LP monitoring and analysis. Built on Swarms framework for autonomous finance and market analysis.",
-    "tech": [
-      "Swarms",
-      "DeFi",
-      "Python",
-      "Multi-Agent"
-    ],
-    "vault_path": "02-Labs/Hackathons/Swarms-ACM/",
-    "status": "building",
-    "deadline": "2026-05-27",
-    "timeline": "May 2026",
-    "highlight": true
-  },
-  {
     "id": "agent-escrow",
     "title": "AgentEscrow",
-    "description": "Cross-chain payment infrastructure with AI agent integration. Anchor programs built \u2014 preserved for cross-chain reuse after Solana Frontier withdrawal.",
+    "description": "Cross-chain payment infrastructure with AI agent integration. Agents escrow, validate, and release payments automatically. Live on Avalanche & Base with 6+ production positions.",
     "tech": [
-      "Solana",
-      "Anchor",
-      "Rust",
-      "x402"
+      "Solidity",
+      "x402",
+      "EVM",
+      "Solana Bridge"
     ],
-    "vault_path": "03-Projects/AAE/agent-escrow-architecture.md",
     "status": "completed",
-    "deadline": "2026-05-11",
+    "deadline": null,
     "timeline": "May 2026",
-    "highlight": false
+    "highlight": true,
+    "vault_path": "03-Projects/AAE/agent-escrow-architecture.md"
+  },
+  {
+    "id": "lfj-avax-usdc",
+    "title": "AAE Defi Milestones",
+    "description": "Automated DeFi milestone tracking and position rebalancing across Avalanche, Base, and Solana. Auto-tracking LP positions, DCA scheduling, fee analytics, and dynamic milestone-based adjustments. Managing ~$1K+ in active positions.",
+    "tech": [
+      "React",
+      "Python",
+      "Chainlink",
+      "LFJ"
+    ],
+    "status": "building",
+    "deadline": null,
+    "timeline": "Apr 2026",
+    "highlight": false,
+    "vault_path": "03-Projects/DeFi/LFJ-AVAX-USDC.md"
+  },
+  {
+    "id": "multi-agent-voice",
+    "title": "Multi-Agent Voice Integration",
+    "description": "Four-agent voice system (Gentech, YoYo, DMOB, Desmond) with daily automated briefings. End-to-end TTS pipeline with dialogue generation, voice selection, and audio mixing. Quota active, production-ready.",
+    "tech": [
+      "ElevenLabs",
+      "Python",
+      "Hermes",
+      "Telegram"
+    ],
+    "status": "live",
+    "deadline": null,
+    "timeline": "May 2026",
+    "highlight": true,
+    "vault_path": "03-Projects/Multi-Agent-Voice/"
+  },
+  {
+    "id": "kite-ai",
+    "title": "Kite AI Brain Layer",
+    "description": "Agent economy lifecycle landing on Kite AI settlement layer. AAE integration for decentralized agent marketplace governance. Deployed on Kite L1 testnet.",
+    "tech": [
+      "Kite L1",
+      "Yield Oracles",
+      "Strategy Engine"
+    ],
+    "status": "completed",
+    "deadline": null,
+    "timeline": "May 2026",
+    "highlight": true,
+    "vault_path": "02-Labs/Hackathons/Kite-AI/"
+  },
+  {
+    "id": "personal-finance",
+    "title": "Personal Finance Agent",
+    "description": "Bill reminders, debt consolidation optimizer, crypto-yield routing for idle capital. Voice-first assistant with Telegram notifications. Prototype stage using local LLM (llama3:8b).",
+    "tech": [
+      "Python",
+      "Cron",
+      "Hermes",
+      "DeFi"
+    ],
+    "status": "dev",
+    "deadline": null,
+    "timeline": "May 2026",
+    "highlight": false,
+    "vault_path": "03-Projects/Personal-Finance/"
   },
   {
     "id": "lets-fg",
@@ -833,22 +622,6 @@ html { scroll-behavior: smooth; }
     "vault_path": "03-Projects/Travel-Agent/"
   },
   {
-    "id": "lfj-avax-usdc",
-    "title": "AAE Defi Milestones",
-    "description": "Automated DeFi portfolio management system with cross-chain rebalancing and gas optimization.",
-    "tech": [
-      "DeFi",
-      "Python",
-      "Cross-Chain",
-      "Gas Optimization"
-    ],
-    "status": "live",
-    "deadline": null,
-    "timeline": "Apr 2026",
-    "highlight": false,
-    "vault_path": "03-Projects/DeFi/LFJ-AVAX-USDC.md"
-  },
-  {
     "id": "hermes-kanban",
     "title": "Hermes Kanban",
     "description": "TUI-based kanban board for autonomous agent task management. Integrated with Hermes agent orchestration for real-time task tracking and handoffs.",
@@ -863,6 +636,131 @@ html { scroll-behavior: smooth; }
     "timeline": "Mar 2026",
     "highlight": false,
     "vault_path": "03-Projects/hermes-kanban/"
+  },
+  {
+    "id": "birdeye-bip",
+    "title": "Birdeye BIP",
+    "description": "On-chain market data adapter for Birdeye ecosystem. Real-time price feeds, order book data, and volume metrics for agent trading strategies.",
+    "tech": [
+      "Solana",
+      "Python",
+      "Data Pipeline"
+    ],
+    "status": "research",
+    "deadline": null,
+    "timeline": "Feb 2026",
+    "highlight": false,
+    "vault_path": "03-Projects/BirdeyeBIP/"
+  },
+  {
+    "id": "tech-payment-router",
+    "title": "Tech Payment Router",
+    "description": "Ethereum payment router with x402 protocol support. Enables automated recurring payments, subscription billing, and micro-transaction routing.",
+    "tech": [
+      "Ethereum",
+      "Solidity",
+      "x402",
+      "Payments"
+    ],
+    "status": "research",
+    "deadline": null,
+    "timeline": "Feb 2026",
+    "highlight": false,
+    "vault_path": "03-Projects/tech-burn-test/"
+  },
+  {
+    "id": "bags-fm",
+    "title": "Bags FM",
+    "description": "AI agent trading desk for memecoin analysis and trading on Solana. Real-time market signals, agent-driven execution, and portfolio analytics.",
+    "tech": [
+      "Solana",
+      "AI Agents",
+      "Trading",
+      "Python"
+    ],
+    "status": "building",
+    "deadline": "2026-06-01",
+    "timeline": "Jun 2026",
+    "highlight": true,
+    "vault_path": "02-Labs/Hackathons/Bags-FM/"
+  },
+  {
+    "id": "google-cloud-rapid-agent",
+    "title": "Google Cloud Rapid Agent",
+    "description": "Gemini + Agent Builder + MCP integration for Google Cloud hackathon. Autonomous agent pipeline with structured tool calling.",
+    "tech": [
+      "Google Cloud",
+      "Gemini",
+      "MCP",
+      "Python"
+    ],
+    "status": "building",
+    "deadline": "2026-06-11",
+    "timeline": "Jun 2026",
+    "highlight": false,
+    "vault_path": "02-Labs/Hackathons/Google-Cloud/"
+  },
+  {
+    "id": "somnia",
+    "title": "Somnia",
+    "description": "Hackathon submission for Somnia. TBD scope \u2014 exploring agent economy primitives on Somnia chain.",
+    "tech": [
+      "Somnia",
+      "TBD"
+    ],
+    "status": "building",
+    "deadline": "2026-06-11",
+    "timeline": "Jun 2026",
+    "highlight": false,
+    "vault_path": "02-Labs/Hackathons/Somnia/"
+  },
+  {
+    "id": "agora-agents",
+    "title": "Agora Agents",
+    "description": "AI portfolio rebalancer on Circle Arc. Adaptive portfolio management for the Canteen \u00d7 Circle \u00d7 Arc hackathon. $50K prize pool.",
+    "tech": [
+      "Circle Arc",
+      "AI Agents",
+      "DeFi",
+      "Python"
+    ],
+    "status": "building",
+    "deadline": "2026-05-25",
+    "timeline": "May 2026",
+    "highlight": true,
+    "vault_path": "02-Labs/Hackathons/Agora/"
+  },
+  {
+    "id": "swarms-acm",
+    "title": "Swarms ACM LP Monitor",
+    "description": "DeFi LP monitoring agent built on Swarms framework. Automated position tracking, rebalance signals, and fee analytics. $30K prize pool.",
+    "tech": [
+      "Swarms",
+      "DeFi",
+      "Python",
+      "LP Monitoring"
+    ],
+    "status": "building",
+    "deadline": "2026-05-27",
+    "timeline": "May 2026",
+    "highlight": true,
+    "vault_path": "02-Labs/Hackathons/Swarms-ACM/"
+  },
+  {
+    "id": "google-startups",
+    "title": "Google for Startups",
+    "description": "AI agents prototype-to-production track. Building deployment tooling for agent systems in the Google for Startups AI cohort.",
+    "tech": [
+      "Google",
+      "AI Agents",
+      "Deployment",
+      "Python"
+    ],
+    "status": "building",
+    "deadline": "2026-06-05",
+    "timeline": "Jun 2026",
+    "highlight": false,
+    "vault_path": "02-Labs/Hackathons/Google-Startups/"
   }
 ]
 </script>
@@ -871,7 +769,7 @@ html { scroll-behavior: smooth; }
                 const projects = JSON.parse(document.getElementById('project-data').textContent);
                 const categories = {
                     now: projects.filter(p => p.status === 'live' || (p.status === 'building' && p.deadline)),
-                    wip: projects.filter(p => (p.status === 'building' && !p.deadline) || p.status === 'research' || p.status === 'completed'),
+                    wip: projects.filter(p => p.status === 'building' && !p.deadline || p.status === 'research'),
                     tba: []
                 };
                 const statusLabels = { live: '→ LIVE', building: '→ BUILDING', completed: '→ COMPLETED', research: '→ WIP', audit: '→ AUDIT' };
@@ -916,9 +814,8 @@ html { scroll-behavior: smooth; }
                 .status { padding: 3px 8px; border-radius: 6px; font-weight: bold; text-transform: uppercase; }
                 .status-live { background: #052e16; color: #22c55e; }
                 .status-building { background: #1c1400; color: #fbbf24; }
-                .status-completed { background: #0a1628; color: #60a5fa; }
                 .status-research { background: #1a0d2e; color: #a855f7; }
-                .deadline, .timeline { color: #9ca3af; font-weight: 500; white-space: nowrap; }
+                .deadline, .timeline { color: #9ca3af; }
             
 /* Mobile responsive */
 @media (max-width: 768px) {
@@ -1113,11 +1010,17 @@ html { scroll-behavior: smooth; }
                         <td><strong>Kite AI</strong></td>
                         <td>Kite L1</td>
                         <td>May 17</td>
+                        <td><span class="badge badge-submit">SUBMITTED</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Agora Agents</strong></td>
+                        <td>Circle Arc</td>
+                        <td>May 25</td>
                         <td><span class="badge badge-building">BUILDING</span></td>
                     </tr>
                     <tr>
                         <td><strong>Swarms ACM</strong></td>
-                        <td>Multi</td>
+                        <td>Multi-Chain</td>
                         <td>May 27</td>
                         <td><span class="badge badge-building">BUILDING</span></td>
                     </tr>
@@ -1125,18 +1028,24 @@ html { scroll-behavior: smooth; }
                         <td><strong>Bags FM</strong></td>
                         <td>Solana</td>
                         <td>Jun 1</td>
+                        <td><span class="badge badge-building">BUILDING</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Google for Startups</strong></td>
+                        <td>Google Cloud</td>
+                        <td>Jun 5</td>
                         <td><span class="badge badge-queued">QUEUED</span></td>
                     </tr>
                     <tr>
-                        <td><strong>Google ADK</strong></td>
-                        <td>AI</td>
-                        <td>Jun 5–11</td>
+                        <td><strong>Google Cloud Rapid Agent</strong></td>
+                        <td>Google Cloud</td>
+                        <td>Jun 11</td>
                         <td><span class="badge badge-queued">QUEUED</span></td>
                     </tr>
                     <tr>
-                        <td><strong>Retro9000</strong></td>
-                        <td>Avalanche</td>
-                        <td>Jul 14</td>
+                        <td><strong>Somnia</strong></td>
+                        <td>Somnia</td>
+                        <td>Jun 11</td>
                         <td><span class="badge badge-queued">QUEUED</span></td>
                     </tr>
                 </table>
