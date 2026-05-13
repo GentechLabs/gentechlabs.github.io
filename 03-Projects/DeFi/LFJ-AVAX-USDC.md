@@ -9,6 +9,30 @@
 **Entry Date**: 2026-03-31
 
 ---
+
+---
+
+## 2026-05-13 Update
+**AVAX Price**: $9.9157 (+0.48% 24h)
+**USDC Price**: $0.9997 (+0.01% 24h)
+**Price Range**: $9.95–$10.30 (Shape: Curve)
+**Target**: $9.95–$10.30
+**Balances**: 20.48 AVAX (~$203.07) + 0.00 USDC (~$0.00) = **$203.07**
+**Wallet**: 0.0972 AVAX (~$0.96) + 0.00 USDC (~$0.00) = **$0.96** | **Combined Total**: **$204.04**
+**Fees (24h)**: ~$0.02 (est. from $9.52M vol × 5bps × 0.0049% pool share × 0.1x CL out-of-range; oracle not configured)
+**IL**: ~0.0% (vs. HODL of ~$204) ✓ below 2% threshold
+**Efficiency**: -10.7% (100% AVAX — fully out of range below)
+**Action**: 🚨 CRITICAL: Rebalance required — price ($9.9157) below range lower bound ($9.95). Position converted to 100% AVAX. Efficiency -10.7%. Active bin (8363260) is 2 bins below position start (8363262).
+
+**D5 Milestone Alignment**:
+- Scout tier ($5.00/day target) — est. daily fees ~$0.02 → 0.4% progress
+- Price OUTSIDE strategic target band ($9.95–$10.30) — below lower bound
+- IL ~0.0% ✓ below 2% threshold
+- Efficiency -10.7% <50% → Micro-DCA boost triggered
+
+**Other Pools**: No additional LFJ pools (AVAX/JOE, USDC/JOE, etc.) detected with active positions for this wallet.
+
+**Note**: Position range appears to have shifted to $9.95–$10.30 (on-chain bins 8363262–8363296) since last vault-logged rebalance on May 12 ($9.75–$10.01). Price at $9.9157 is below the new range lower bound. Position is 100% AVAX with zero USDC — classic out-of-range-below state. Rebalance needed to re-center range around current price.
 ## 2026-05-12 06:10 AM Rebalance (jordan_screenshot)
 **Price Range**: $9.75–$10.01 (Shape: Curve)
 **Balances**: 9.771 AVAX (~$96.61) + 106.59 USDC (~$106.57) = **$203.18**
