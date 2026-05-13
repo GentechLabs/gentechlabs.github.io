@@ -171,9 +171,12 @@ While Solana's agent payments space is crowded (MCPay, Latinum, Corbits), Avalan
 
 ## What's Next
 
-- [ ] Deploy to Kite testnet (Chain ID 2368)
-- [ ] Record demo video
+- [x] Deploy to Kite testnet (Chain ID 2368) ✅ May 12
+- [x] Faucet funded (0.5 KITE × 2 wallets) ✅ May 12
+- [x] UI updated with deployed addresses ✅ May 12
+- [ ] Record demo video (23-sec motion graphic intro/outro composed, walkthrough pending)
 - [ ] Finalize submission docs
+- [ ] Submit to Encode Club
 - [ ] Social media thread on launch
 
 ---

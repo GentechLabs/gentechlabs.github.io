@@ -31,7 +31,7 @@
 - **Kite AI is primary focus** — 7 days, $10K, clear path
 - **Scope cut from 4 hackathons × 4 layers to 2 focused submissions**
 - **Hybrid strategy engine IS the Kite AI submission** (per DMOB recommendation, Apr 29)
-- **Solana Frontier withdrawn** — not enough time, Windows dev limitations
+- **Solana Frontier completed** — built agent-driven DeFi infra on Solana, now in recycle bin
 - **Bags.fm needs research** — check if MCP tools track is live
 
 ## Deferred
@@ -51,7 +51,13 @@
 | ElevenHacks #6–9 | Skipped per Jordan |
 | GenLayer Builder | Paused — may resume post-May 11 |
 | Surge Ignition Race | S1 ended Apr 24. Monitor S2 |
-| Solana Frontier | Withdrawn — not enough time, Windows dev |
+
+## Completed (Recycle Bin)
+
+| Name | Chain | Built |
+|------|-------|-------|
+| Kite AI | Kite L1 | AgentEscrow + Governance — submitted May 17 |
+| Solana Frontier | Solana | Agent-driven DeFi infra — completed Apr 2026 |
 
 ## Kanban Board
 

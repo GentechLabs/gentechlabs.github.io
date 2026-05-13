@@ -4,8 +4,13 @@
       "id": "agent-escrow",
       "title": "AgentEscrow",
       "description": "Cross-chain payment infrastructure with AI agent integration. Agents escrow, validate, and release payments automatically. Live on Avalanche & Base with 6+ production positions.",
-      "tech": ["Solidity", "x402", "EVM", "Solana Bridge"],
-      "status": "live",
+      "tech": [
+        "Solidity",
+        "x402",
+        "EVM",
+        "Solana Bridge"
+      ],
+      "status": "completed",
       "deadline": null,
       "timeline": "May 2026",
       "highlight": true,
@@ -15,8 +20,13 @@
       "id": "lfj-avax-usdc",
       "title": "AAE Defi Milestones",
       "description": "Automated DeFi milestone tracking and position rebalancing across Avalanche, Base, and Solana. Auto-tracking LP positions, DCA scheduling, fee analytics, and dynamic milestone-based adjustments. Managing ~$1K+ in active positions.",
-      "tech": ["React", "Python", "Chainlink", "LFJ"],
-      "status": "live",
+      "tech": [
+        "React",
+        "Python",
+        "Chainlink",
+        "LFJ"
+      ],
+      "status": "building",
       "deadline": null,
       "timeline": "Apr 2026",
       "highlight": false,
@@ -26,7 +36,12 @@
       "id": "multi-agent-voice",
       "title": "Multi-Agent Voice Integration",
       "description": "Four-agent voice system (Gentech, YoYo, DMOB, Desmond) with daily automated briefings. End-to-end TTS pipeline with dialogue generation, voice selection, and audio mixing. Quota active, production-ready.",
-      "tech": ["ElevenLabs", "Python", "Hermes", "Telegram"],
+      "tech": [
+        "ElevenLabs",
+        "Python",
+        "Hermes",
+        "Telegram"
+      ],
       "status": "live",
       "deadline": null,
       "timeline": "May 2026",
@@ -34,23 +49,16 @@
       "vault_path": "03-Projects/Multi-Agent-Voice/"
     },
     {
-      "id": "solana-frontier",
-      "title": "Solana Frontier",
-      "description": "4-program Anchor workspace for Solana Frontier hackathon (due May 11). AgentRegistry with World ID CPI, JobEscrow with PDA vaults + 8-state lifecycle, Reputation NFTs, and DisputeResolver.",
-      "tech": ["Rust", "Anchor", "Solana", "Agent Registry"],
-      "status": "building",
-      "deadline": "2026-05-11",
-      "timeline": "May 2026",
-      "highlight": true,
-      "vault_path": "02-Labs/Hackathons/Solana-Frontier/"
-    },
-    {
       "id": "kite-ai",
       "title": "Kite AI Brain Layer",
-      "description": "Planning phase: Yield oracle integration (Ranger, Pangolin, Benqi) + strategy evaluator for LP range shapes. Depends on Solana Frontier bandwidth freeing up. Target delivery: May 17.",
-      "tech": ["Kite L1", "Yield Oracles", "Strategy Engine"],
-      "status": "research",
-      "deadline": "2026-05-17",
+      "description": "Agent economy lifecycle landing on Kite AI settlement layer. AAE integration for decentralized agent marketplace governance. Deployed on Kite L1 testnet.",
+      "tech": [
+        "Kite L1",
+        "Yield Oracles",
+        "Strategy Engine"
+      ],
+      "status": "completed",
+      "deadline": null,
       "timeline": "May 2026",
       "highlight": true,
       "vault_path": "02-Labs/Hackathons/Kite-AI/"
@@ -59,7 +67,12 @@
       "id": "personal-finance",
       "title": "Personal Finance Agent",
       "description": "Bill reminders, debt consolidation optimizer, crypto-yield routing for idle capital. Voice-first assistant with Telegram notifications. Prototype stage using local LLM (llama3:8b).",
-      "tech": ["Python", "Cron", "Hermes", "DeFi"],
+      "tech": [
+        "Python",
+        "Cron",
+        "Hermes",
+        "DeFi"
+      ],
       "status": "dev",
       "deadline": null,
       "timeline": "May 2026",
@@ -70,7 +83,12 @@
       "id": "lets-fg",
       "title": "Let's FG Travel Agent",
       "description": "Voice-first travel planning agent. Natural language flight/hotel search, price tracking, and booking automation via Pipecat and Maps APIs.",
-      "tech": ["Pipecat", "Maps API", "Python", "Telegram"],
+      "tech": [
+        "Pipecat",
+        "Maps API",
+        "Python",
+        "Telegram"
+      ],
       "status": "live",
       "deadline": null,
       "timeline": "Apr 2026",
@@ -81,7 +99,12 @@
       "id": "hermes-kanban",
       "title": "Hermes Kanban",
       "description": "TUI-based kanban board for autonomous agent task management. Integrated with Hermes agent orchestration for real-time task tracking and handoffs.",
-      "tech": ["Hermes", "Python", "TUI", "SQLite"],
+      "tech": [
+        "Hermes",
+        "Python",
+        "TUI",
+        "SQLite"
+      ],
       "status": "live",
       "deadline": null,
       "timeline": "Mar 2026",
@@ -92,7 +115,11 @@
       "id": "birdeye-bip",
       "title": "Birdeye BIP",
       "description": "On-chain market data adapter for Birdeye ecosystem. Real-time price feeds, order book data, and volume metrics for agent trading strategies.",
-      "tech": ["Solana", "Python", "Data Pipeline"],
+      "tech": [
+        "Solana",
+        "Python",
+        "Data Pipeline"
+      ],
       "status": "research",
       "deadline": null,
       "timeline": "Feb 2026",
@@ -103,14 +130,113 @@
       "id": "tech-payment-router",
       "title": "Tech Payment Router",
       "description": "Ethereum payment router with x402 protocol support. Enables automated recurring payments, subscription billing, and micro-transaction routing.",
-      "tech": ["Ethereum", "Solidity", "x402", "Payments"],
+      "tech": [
+        "Ethereum",
+        "Solidity",
+        "x402",
+        "Payments"
+      ],
       "status": "research",
       "deadline": null,
       "timeline": "Feb 2026",
       "highlight": false,
       "vault_path": "03-Projects/tech-burn-test/"
+    },
+    {
+      "id": "bags-fm",
+      "title": "Bags FM",
+      "description": "AI agent trading desk for memecoin analysis and trading on Solana. Real-time market signals, agent-driven execution, and portfolio analytics.",
+      "tech": [
+        "Solana",
+        "AI Agents",
+        "Trading",
+        "Python"
+      ],
+      "status": "building",
+      "deadline": "2026-06-01",
+      "timeline": "Jun 2026",
+      "highlight": true,
+      "vault_path": "02-Labs/Hackathons/Bags-FM/"
+    },
+    {
+      "id": "google-cloud-rapid-agent",
+      "title": "Google Cloud Rapid Agent",
+      "description": "Gemini + Agent Builder + MCP integration for Google Cloud hackathon. Autonomous agent pipeline with structured tool calling.",
+      "tech": [
+        "Google Cloud",
+        "Gemini",
+        "MCP",
+        "Python"
+      ],
+      "status": "building",
+      "deadline": "2026-06-11",
+      "timeline": "Jun 2026",
+      "highlight": false,
+      "vault_path": "02-Labs/Hackathons/Google-Cloud/"
+    },
+    {
+      "id": "somnia",
+      "title": "Somnia",
+      "description": "Hackathon submission for Somnia. TBD scope \u2014 exploring agent economy primitives on Somnia chain.",
+      "tech": [
+        "Somnia",
+        "TBD"
+      ],
+      "status": "building",
+      "deadline": "2026-06-11",
+      "timeline": "Jun 2026",
+      "highlight": false,
+      "vault_path": "02-Labs/Hackathons/Somnia/"
+    },
+    {
+      "id": "agora-agents",
+      "title": "Agora Agents",
+      "description": "AI portfolio rebalancer on Circle Arc. Adaptive portfolio management for the Canteen \u00d7 Circle \u00d7 Arc hackathon. $50K prize pool.",
+      "tech": [
+        "Circle Arc",
+        "AI Agents",
+        "DeFi",
+        "Python"
+      ],
+      "status": "building",
+      "deadline": "2026-05-25",
+      "timeline": "May 2026",
+      "highlight": true,
+      "vault_path": "02-Labs/Hackathons/Agora/"
+    },
+    {
+      "id": "swarms-acm",
+      "title": "Swarms ACM LP Monitor",
+      "description": "DeFi LP monitoring agent built on Swarms framework. Automated position tracking, rebalance signals, and fee analytics. $30K prize pool.",
+      "tech": [
+        "Swarms",
+        "DeFi",
+        "Python",
+        "LP Monitoring"
+      ],
+      "status": "building",
+      "deadline": "2026-05-27",
+      "timeline": "May 2026",
+      "highlight": true,
+      "vault_path": "02-Labs/Hackathons/Swarms-ACM/"
+    },
+    {
+      "id": "google-startups",
+      "title": "Google for Startups",
+      "description": "AI agents prototype-to-production track. Building deployment tooling for agent systems in the Google for Startups AI cohort.",
+      "tech": [
+        "Google",
+        "AI Agents",
+        "Deployment",
+        "Python"
+      ],
+      "status": "building",
+      "deadline": "2026-06-05",
+      "timeline": "Jun 2026",
+      "highlight": false,
+      "vault_path": "02-Labs/Hackathons/Google-Startups/"
     }
   ],
-  "generated": "2026-05-07",
-  "count": 10
+  "generated": "2026-05-13",
+  "count": 15
 }

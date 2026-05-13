@@ -38,8 +38,8 @@ DEFAULT_CONFIG = {
         "total_usd": 134.94,
         "token0_amount": 3.446,
         "token1_amount": 103.38,
-        "range_low": 9.75,
-        "range_high": 10.01,
+        "range_low": 9.45,
+        "range_high": 10.00,
         "shape": "curve"
     },
     "milestones": [
@@ -200,6 +200,10 @@ def load_state() -> Dict[str, Any]:
             state = json.load(f)
             for k, v in default.items():
                 state.setdefault(k, v)
+            # Sanitize history lists — strip any non-numeric entries (dicts from other scripts)
+            for key in ("tvl_history", "price_history"):
+                if key in state and isinstance(state[key], list):
+                    state[key] = [x for x in state[key] if isinstance(x, (int, float))]
             return state
     except Exception:
         return default
@@ -479,6 +483,7 @@ def get_suggested_action(in_range: bool, efficiency: float, compound_ready: bool
     return "✅ Position healthy — maintain current range."
 def calc_tvl_trend(tvl_history: List[float]) -> float:
     """Calculate 7-day TVL trend percentage. Returns 0.0 if insufficient data."""
+    tvl_history = [x for x in tvl_history if isinstance(x, (int, float))]
     if len(tvl_history) < 2 or tvl_history[0] <= 0:
         return 0.0
     oldest = tvl_history[0]
@@ -487,6 +492,7 @@ def calc_tvl_trend(tvl_history: List[float]) -> float:
 
 def calc_pool_tvl_drop(tvl_history: List[float]) -> float:
     """Calculate max TVL drop from peak in recent history."""
+    tvl_history = [x for x in tvl_history if isinstance(x, (int, float))]
     if not tvl_history:
         return 0.0
     peak = max(tvl_history)
@@ -498,6 +504,7 @@ def calc_pool_tvl_drop(tvl_history: List[float]) -> float:
 def calc_price_volatility(price_history: List[float]) -> float:
     """Calculate price volatility as % range over available history.
     Returns (max - min) / mid * 100. Uses last 24 data points (hours) if available."""
+    price_history = [x for x in price_history if isinstance(x, (int, float))]
     recent = price_history[-24:] if len(price_history) > 24 else price_history
     if len(recent) < 2:
         return 0.0

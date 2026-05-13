@@ -17,6 +17,7 @@
 - [ ] x402 agent-to-agent payments integration
 - [ ] LP Monitor as standalone product
 - [ ] DeFi Milestones gamification (spec complete)
+- [ ] GenLayer Builder Program — passive points, resume after hackathon sprint (paused Apr 25)
 
 ## Content
 - [ ] X Profile launch (@Gentech / @ProtoJay4789)

@@ -12,6 +12,7 @@ Last updated: 2026-05-13 01:35 UTC (Agora Agents scaffolded, Kite AI deployed)
 | Agora Agents (Canteen × Circle) | May 25 | AI Agents on Arc (EVM L1) | $50K | 🔴 ACTIVE | Scaffolded. RFB 04 (Adaptive Portfolio Manager). Contracts + agent + UI scaffolded. Jordan in both Discords. Faucet bookmarked. |
 | Swarms ACM | May 27 | Finance & Market Analysis | $30K | 🟡 QUEUED | LP Monitor → marketplace agent. 16 days left. Tech assessment done. |
 | Arbitrum Open House | Reg: May 25 / Sub: Jun 14 | AI Agents (Best Agentic) | $115K ($70K+$15K+$30K) | 🟡 QUEUED | AgentForge portable. Best Agentic track = strongest fit. 164+ registered. |
+| Mantle Turing Test | May 1–Jun 16 (Phase 2 sub: Jun 15) | Agentic Wallets & Economy | $120K (Grand $50K) | 🟡 QUEUED | EVM. agent-economy-solana portable. ERC-8004 Identity NFT. Byreal/RealClaw. Registration open (Eventbrite free). Jordan exploring May 13. |
 | Solana Frontier | May 11 | Solana | $250K + accelerator | ❌ WITHDRAWN | Jordan directive May 10. Time/debugging constraints. Solana work preserved for cross-chain reuse. |
 
 ## Bug Bounties (Ongoing)
@@ -43,4 +44,5 @@ Last updated: 2026-05-13 01:35 UTC (Agora Agents scaffolded, Kite AI deployed)
 5. **Bags FM** — ACTIVE. Deadline Jun 1. Agent Trading Desk build.
 6. **Google (Cloud Rapid Agent + for Startups)** — QUEUED. Deadlines Jun 5-11.
 7. **Somnia** — QUEUED. Deadline Jun 11. $5K + job opportunity.
-8. **Solana Frontier** — ❌ WITHDRAWN.
+8. **Mantle Turing Test** — 🟡 QUEUED. Deadline Jun 15. $120K. agent-economy-solana portable. Jordan exploring May 13.
+9. **Solana Frontier** — ❌ WITHDRAWN.

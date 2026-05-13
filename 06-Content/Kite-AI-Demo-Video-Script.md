@@ -12,7 +12,7 @@
 **[Visual: Terminal window with `forge test` running. Tests passing in green.]**
 
 **Voiceover:**
-> "Most hackathon demos show you a prototype. We're going to show you production code — fifty-three tests, zero failures, and a trust layer that AI agents actually need."
+> "Most hackathon demos show you a prototype. We're going to show you production code — fifty-two tests, zero failures, and a trust layer that AI agents actually need."
 
 **[Text overlay: "AgentEscrow — Trust Layer for the Agentic Economy"]**
 
@@ -62,7 +62,7 @@
 
 ## 🧪 Live Demo (1:35–2:05)
 
-**[Visual: Terminal — run through the test suite]"
+**[Visual: Terminal — run through the test suite]**
 
 ```bash
 $ forge test
@@ -71,29 +71,29 @@ $ forge test
 [PASS] testReleaseFunds
 [PASS] testSignatureReplayProtection
 ...
-Suite result: 53 passed, 0 failed
+Suite result: 52 passed, 0 failed
 ```
 
 **Voiceover:**
 > "Let's run it. Create escrow — buyer locks funds. Validate with signature — the AI validator cryptographically approves the work. Release funds — seller gets paid. And if something goes wrong, deadline-based refunds protect the buyer."
 
-**[Visual: Quick flash of each test passing]"
+**[Visual: Quick flash of each test passing]**
 
 ---
 
 ## 🎯 Closing (2:05–2:30)
 
-**[Visual: GitHub repo page + architecture diagram side by side]"
+**[Visual: GitHub repo page + architecture diagram side by side]**
 
 **Voiceover:**
 > "AgentEscrow is built for the agentic future — where billions of autonomous transactions need a trust layer. We've got the contracts. We've got the tests. And we've got a clear path to Kite AI integration."
 
-**[Text overlay: "github.com/ProtoJay4789/arc-hackathon"]"
+**[Text overlay: "github.com/ProtoJay4789/kite-agent-commerce"]**
 
 **Voiceover:**
 > "Gentech Labs. Building the infrastructure AI agents will actually use."
 
-**[Fade to black. Logo: Gentech Labs]"
+**[Fade to black. Logo: Gentech Labs]**
 
 ---
 
@@ -102,7 +102,7 @@ Suite result: 53 passed, 0 failed
 - [ ] Record terminal `forge test` run (1080p, dark theme)
 - [ ] Record VS Code scroll-through of `AgentEscrow.sol`
 - [ ] Record architecture diagram walkthrough
-- [ ] Voiceover track (Jordan or Desmond — 2:30 max)
+- [ ] Voiceover track (Jordan — 2:30 max)
 - [ ] Background music (subtle, instrumental)
 - [ ] Export to MP4 (1080p, 30fps)
 - [ ] Upload to YouTube unlisted OR Loom
