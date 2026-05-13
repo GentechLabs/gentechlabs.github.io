@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AAE LP Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0f1117;
+  --card: #1a1d27;
+  --card-hover: #222633;
+  --primary: #f59e0b;
+  --secondary: #f97316;
+  --green: #22c55e;
+  --red: #ef4444;
+  --blue: #3b82f6;
+  --text: #e2e8f0;
+  --text-dim: #94a3b8;
+  --border: #2a2d3a;
+  --radius: 14px;
+  --shadow: 0 2px 16px rgba(0,0,0,.4);
+  --glow-amber: 0 0 30px rgba(245,158,11,.18);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;padding:0 0 2rem}
+.dashboard{max-width:540px;margin:0 auto;padding:12px}
+
+/* ── Cards ── */
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem;transition:transform .2s,box-shadow .2s,border-color .2s}
+.card:hover{border-color:#3a3e4e}
+.fade{opacity:0;transform:translateY(18px);animation:fadeUp .55s ease forwards}
+@keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
+.fade:nth-child(2){animation-delay:.07s}
+.fade:nth-child(3){animation-delay:.14s}
+.fade:nth-child(4){animation-delay:.21s}
+.fade:nth-child(5){animation-delay:.28s}
+.fade:nth-child(6){animation-delay:.35s}
+.fade:nth-child(7){animation-delay:.42s}
+@media(prefers-reduced-motion:reduce){.fade{animation:none;opacity:1;transform:none}}
+
+/* ── 1. Header ── */
+.header{background:linear-gradient(135deg,#0f1117 0%,#1e2230 40%,#3d2e0a 100%);border:1px solid #2e2410;border-radius:var(--radius);padding:1.5rem 1.25rem;position:relative;overflow:hidden}
+.header::after{content:'';position:absolute;top:-40%;right:-20%;width:260px;height:260px;background:radial-gradient(circle,rgba(245,158,11,.12),transparent 70%);pointer-events:none}
+.header h1{font-size:1.1rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;background:linear-gradient(90deg,var(--primary),var(--secondary));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.header .sub{font-size:.78rem;color:var(--text-dim);margin-top:4px}
+.pill{display:inline-block;margin-top:10px;font-size:.68rem;font-weight:700;letter-spacing:.05em;padding:5px 12px;border-radius:20px;border:1px solid var(--primary);color:var(--primary);background:rgba(245,158,11,.08)}
+
+/* ── 2. Progress Ring ── */
+.ring-wrap{display:flex;flex-direction:column;align-items:center;padding:1.5rem 1rem}
+.ring-svg{width:190px;height:190px;filter:drop-shadow(0 0 18px rgba(245,158,11,.22))}
+.ring-svg circle{fill:none;stroke-linecap:round;transition:stroke-dashoffset 1.2s cubic-bezier(.4,0,.2,1)}
+.ring-track{stroke:#2a2d3a;stroke-width:10}
+.ring-fill{stroke:url(#amberGrad);stroke-width:10;transform:rotate(-90deg);transform-origin:center}
+.ring-center{font-size:1.4rem;font-weight:800;fill:var(--text)}
+.ring-sub{font-size:.62rem;fill:var(--text-dim)}
+.ring-label{margin-top:10px;font-size:.78rem;font-weight:600;color:var(--text-dim)}
+
+/* ── 3. Alert ── */
+.alert{border-color:var(--primary);background:rgba(245,158,11,.06);display:flex;align-items:flex-start;gap:10px}
+.alert-icon{font-size:1.3rem;line-height:1}
+.alert-body{flex:1;font-size:.82rem;line-height:1.5;color:var(--text)}
+.alert-body strong{color:var(--primary)}
+.alert-close{background:none;border:none;color:var(--text-dim);font-size:1.1rem;cursor:pointer;padding:2px 6px;border-radius:6px;transition:color .2s}
+.alert-close:hover{color:var(--text)}
+.alert.hidden{display:none}
+
+/* ── 4. Asset Split ── */
+.split-bar-wrap{padding:1rem 1.25rem}
+.split-label{font-size:.72rem;font-weight:600;color:var(--text-dim);margin-bottom:8px;text-transform:uppercase;letter-spacing:.04em}
+.split-bar{display:flex;height:32px;border-radius:8px;overflow:hidden;position:relative}
+.split-seg{display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:700;color:#fff;transition:flex .4s ease}
+.split-seg.avax{background:var(--green);flex:39.5}
+.split-seg.usdc{background:var(--blue);flex:60.5}
+.split-seg:hover{filter:brightness(1.15)}
+.split-detail{display:flex;justify-content:space-between;margin-top:8px;font-size:.72rem;color:var(--text-dim)}
+
+/* ── 5. Yield Grid ── */
+.grid{display:grid;grid-template-columns:1fr;gap:10px;margin-top:12px}
+@media(min-width:480px){.grid{grid-template-columns:1fr 1fr}}
+.stat{padding:1rem 1.1rem;cursor:default}
+.stat:hover{border-color:#3a3e4e;transform:translateY(-1px);box-shadow:var(--shadow)}
+.stat-label{font-size:.68rem;font-weight:600;text-transform:uppercase;letter-spacing:.04em;color:var(--text-dim);margin-bottom:6px}
+.stat-val{font-size:1.35rem;font-weight:800;line-height:1.1}
+.stat-sub{font-size:.7rem;color:var(--text-dim);margin-top:4px}
+.stat-sub.up{color:var(--green)}
+.stat-sub.down{color:var(--red)}
+.stat-sub.neutral{color:var(--text-dim)}
+.btn{display:inline-block;margin-top:8px;font-size:.7rem;font-weight:700;letter-spacing:.03em;padding:7px 16px;border:none;border-radius:8px;background:linear-gradient(135deg,var(--primary),var(--secondary));color:#0f1117;cursor:pointer;transition:transform .15s,box-shadow .15s}
+.btn:hover{transform:scale(1.04);box-shadow:0 0 14px rgba(245,158,11,.35)}
+
+/* ── 6. Footer ── */
+.footer{text-align:center;padding:1.5rem 0 .5rem;font-size:.7rem;color:#475569;letter-spacing:.04em}
+
+/* ── Wide layout ── */
+@media(min-width:600px){.dashboard{max-width:620px}}
+</style>
+</head>
+<body>
+<div class="dashboard">
+
+  <!-- 1. Header -->
+  <div class="card header fade">
+    <h1>S2S Wealth Path: AAE Active</h1>
+    <div class="sub">AVAX/USDC · LFJ · Trader Joe</div>
+    <div class="pill">SITUATION: STEADY BOTTOM ACCUMULATION</div>
+  </div>
+
+  <!-- 2. Progress Ring -->
+  <div class="card ring-wrap fade" style="margin-top:12px">
+    <svg class="ring-svg" viewBox="0 0 200 200">
+      <defs>
+        <linearGradient id="amberGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#f59e0b"/>
+          <stop offset="100%" stop-color="#f97316"/>
+        </linearGradient>
+      </defs>
+      <circle class="ring-track" cx="100" cy="100" r="82"/>
+      <circle class="ring-fill" cx="100" cy="100" r="82"
+        stroke-dasharray="515.22" stroke-dashoffset="515.22" id="ringFill"/>
+      <text class="ring-center" x="100" y="96" text-anchor="middle">$14.20/day</text>
+      <text class="ring-sub" x="100" y="116" text-anchor="middle">71% → M2</text>
+    </svg>
+    <div class="ring-label">M2: $20/day</div>
+  </div>
+
+  <!-- 3. Alert -->
+  <div class="card alert fade" id="alertCard" style="margin-top:12px">
+    <div class="alert-icon">⚡</div>
+    <div class="alert-body"><strong>DCA locked at $50–100/wk.</strong> Next buy window in 2d 14h.</div>
+    <button class="alert-close" onclick="document.getElementById('alertCard').classList.add('hidden')" aria-label="Dismiss">✕</button>
+  </div>
+
+  <!-- 4. Asset Split -->
+  <div class="card split-bar-wrap fade" style="margin-top:12px">
+    <div class="split-label">Asset Allocation</div>
+    <div class="split-bar">
+      <div class="split-seg avax" title="AVAX: $1,124.69">39.5%</div>
+      <div class="split-seg usdc" title="USDC: $1,722.63">60.5%</div>
+    </div>
+    <div class="split-detail"><span>AVAX · $1,124.69</span><span>USDC · $1,722.63</span></div>
+  </div>
+
+  <!-- 5. Yield Grid -->
+  <div class="grid">
+    <div class="card stat fade">
+      <div class="stat-label">Total Position</div>
+      <div class="stat-val">$2,847.32</div>
+      <div class="stat-sub up">↑ +$12.40 today</div>
+    </div>
+    <div class="card stat fade">
+      <div class="stat-label">Rewards APR</div>
+      <div class="stat-val" style="color:var(--primary)">24.7%</div>
+      <div class="stat-sub down">↓ from 26.1% yesterday</div>
+    </div>
+    <div class="card stat fade">
+      <div class="stat-label">24h Fees</div>
+      <div class="stat-val">$3.12</div>
+      <div class="stat-sub up">IN RANGE</div>
+    </div>
+    <div class="card stat fade">
+      <div class="stat-label">Claimable</div>
+      <div class="stat-val" style="color:var(--green)">$8.47</div>
+      <button class="btn">Claim &amp; Compound</button>
+    </div>
+    <div class="card stat fade">
+      <div class="stat-label">DCA Conviction</div>
+      <div class="stat-val" style="color:var(--primary)">HIGH</div>
+      <div class="stat-sub neutral">Entry $0–4 AVAX</div>
+    </div>
+    <div class="card stat fade">
+      <div class="stat-label">Next Milestone</div>
+      <div class="stat-val">29 days</div>
+      <div class="stat-sub neutral">to M2 at current rate</div>
+    </div>
+  </div>
+
+  <!-- 6. Footer -->
+  <div class="footer">Powered by AAE · GenTech Labs</div>
+</div>
+
+<script>
+// Animate ring fill on load
+requestAnimationFrame(()=>{
+  const ring=document.getElementById('ringFill');
+  const circumference=2*Math.PI*82; // ~515.22
+  const pct=0.71;
+  setTimeout(()=>{ring.style.strokeDashoffset=circumference*(1-pct)},120);
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en" data-chain="solana">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GenTech — Multi-Chain Dashboard</title>
+<style>
+  /* ═══ BASE TOKENS ═══ */
+  :root {
+    --bg-primary: #0a0a0f;
+    --bg-secondary: #12121a;
+    --bg-card: #1a1a25;
+    --bg-card-hover: #22222f;
+    --border: #2a2a3a;
+    --text-primary: #e8e8f0;
+    --text-secondary: #8888a0;
+    --text-muted: #55556a;
+    --radius: 12px;
+    --radius-sm: 8px;
+    --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* ═══ CHAIN THEMES ═══ */
+  [data-chain="solana"] {
+    --accent: #9945ff;
+    --accent-soft: rgba(153, 69, 255, 0.12);
+    --accent-hover: #b366ff;
+    --gradient: linear-gradient(135deg, #9945ff 0%, #14f195 100%);
+    --chain-name: "Solana";
+    --chain-color: #9945ff;
+  }
+
+  [data-chain="base"] {
+    --accent: #0052ff;
+    --accent-soft: rgba(0, 82, 255, 0.12);
+    --accent-hover: #3373ff;
+    --gradient: linear-gradient(135deg, #0052ff 0%, #00d4ff 100%);
+    --chain-name: "Base";
+    --chain-color: #0052ff;
+  }
+
+  [data-chain="avax"] {
+    --accent: #e84142;
+    --accent-soft: rgba(232, 65, 66, 0.12);
+    --accent-hover: #ff5555;
+    --gradient: linear-gradient(135deg, #e84142 0%, #ff8c42 100%);
+    --chain-name: "Avalanche";
+    --chain-color: #e84142;
+  }
+
+  [data-chain="arc"] {
+    --accent: #2dd4a8;
+    --accent-soft: rgba(45, 212, 168, 0.12);
+    --accent-hover: #4aedc0;
+    --gradient: linear-gradient(135deg, #2dd4a8 0%, #06b6d4 100%);
+    --chain-name: "Arc";
+    --chain-color: #2dd4a8;
+  }
+
+  /* ═══ RESET & BASE ═══ */
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    min-height: 100vh;
+    transition: background var(--transition), color var(--transition);
+  }
+
+  /* ═══ LAYOUT ═══ */
+  .app { max-width: 1200px; margin: 0 auto; padding: 24px; }
+
+  /* ═══ HEADER ═══ */
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 0 32px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 32px;
+  }
+
+  .logo-area {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .logo-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: var(--gradient);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 16px;
+    color: white;
+    transition: background var(--transition);
+  }
+
+  .logo-text {
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: -0.3px;
+  }
+
+  .logo-text span { color: var(--text-secondary); font-weight: 400; }
+
+  /* ═══ CHAIN SELECTOR ═══ */
+  .chain-selector {
+    display: flex;
+    gap: 4px;
+    background: var(--bg-secondary);
+    border-radius: 10px;
+    padding: 4px;
+    border: 1px solid var(--border);
+  }
+
+  .chain-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 8px;
+    background: transparent;
+    color: var(--text-secondary);
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all var(--transition);
+    white-space: nowrap;
+  }
+
+  .chain-btn:hover { color: var(--text-primary); background: var(--bg-card); }
+
+  .chain-btn.active {
+    background: var(--accent-soft);
+    color: var(--text-primary);
+    box-shadow: 0 0 0 1px var(--accent);
+  }
+
+  .chain-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    transition: background var(--transition);
+  }
+
+  [data-chain="solana"] .chain-dot.solana { background: #9945ff; }
+  [data-chain="base"] .chain-dot.base { background: #0052ff; }
+  [data-chain="avax"] .chain-dot.avax { background: #e84142; }
+  [data-chain="arc"] .chain-dot.arc { background: #2dd4a8; }
+
+  .chain-btn:not(.active) .chain-dot { opacity: 0.3; }
+
+  /* ═══ STATS ROW ═══ */
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+
+  .stat-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+    transition: all var(--transition);
+  }
+
+  .stat-card:hover {
+    background: var(--bg-card-hover);
+    border-color: var(--accent);
+    transform: translateY(-1px);
+  }
+
+  .stat-label {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+  }
+
+  .stat-value {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .stat-change {
+    font-size: 12px;
+    margin-top: 6px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .stat-change.up { color: #22c55e; }
+  .stat-change.down { color: #ef4444; }
+
+  /* ═══ MAIN GRID ═══ */
+  .main-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 24px;
+  }
+
+  /* ═══ CARD ═══ */
+  .card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    transition: border-color var(--transition);
+  }
+
+  .card:hover { border-color: color-mix(in srgb, var(--accent) 30%, var(--border)); }
+
+  .card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .card-title {
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: -0.2px;
+  }
+
+  .card-badge {
+    font-size: 11px;
+    padding: 3px 8px;
+    border-radius: 6px;
+    background: var(--accent-soft);
+    color: var(--accent);
+    font-weight: 500;
+    transition: all var(--transition);
+  }
+
+  .card-body { padding: 16px 20px; }
+
+  /* ═══ POSITIONS TABLE ═══ */
+  .position-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .position-row:last-child { border-bottom: none; }
+
+  .position-pair {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .pair-icons {
+    position: relative;
+    width: 36px;
+    height: 36px;
+  }
+
+  .pair-icon {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--bg-secondary);
+    border: 2px solid var(--bg-card);
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--text-secondary);
+  }
+
+  .pair-icon:first-child { left: 0; top: 0; z-index: 2; }
+  .pair-icon:last-child { left: 14px; top: 0; z-index: 1; }
+
+  .pair-name { font-size: 14px; font-weight: 500; }
+  .pair-type { font-size: 11px; color: var(--text-muted); }
+
+  .position-value { text-align: right; }
+  .position-amount { font-size: 14px; font-weight: 600; font-variant-numeric: tabular-nums; }
+  .position-usd { font-size: 12px; color: var(--text-secondary); }
+
+  /* ═══ ACTIVITY FEED ═══ */
+  .activity-item {
+    display: flex;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .activity-item:last-child { border-bottom: none; }
+
+  .activity-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: var(--accent-soft);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    flex-shrink: 0;
+    transition: background var(--transition);
+  }
+
+  .activity-text { font-size: 13px; line-height: 1.5; }
+  .activity-text strong { color: var(--text-primary); }
+  .activity-text span { color: var(--text-secondary); }
+  .activity-time { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+
+  /* ═══ CHART PLACEHOLDER ═══ */
+  .chart-area {
+    height: 200px;
+    display: flex;
+    align-items: flex-end;
+    gap: 6px;
+    padding: 20px 0;
+  }
+
+  .chart-bar {
+    flex: 1;
+    border-radius: 4px 4px 0 0;
+    background: var(--accent-soft);
+    transition: all var(--transition);
+    position: relative;
+    min-height: 8px;
+  }
+
+  .chart-bar:hover {
+    background: var(--accent);
+    opacity: 0.8;
+  }
+
+  .chart-bar::after {
+    content: attr(data-label);
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 10px;
+    color: var(--text-muted);
+    white-space: nowrap;
+  }
+
+  /* ═══ BOTTOM ROW ═══ */
+  .bottom-row {
+    margin-top: 24px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+
+  /* ═══ CHAIN INFO BAR ═══ */
+  .chain-info {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding: 16px 20px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin-bottom: 24px;
+    transition: all var(--transition);
+  }
+
+  .chain-info-logo {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: var(--gradient);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 18px;
+    color: white;
+    flex-shrink: 0;
+    transition: background var(--transition);
+  }
+
+  .chain-info-name {
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .chain-info-detail {
+    font-size: 12px;
+    color: var(--text-secondary);
+  }
+
+  .chain-info-spacer { flex: 1; }
+
+  .chain-info-stat {
+    text-align: right;
+  }
+
+  .chain-info-stat-value {
+    font-size: 15px;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .chain-info-stat-label {
+    font-size: 11px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  /* ═══ RESPONSIVE ═══ */
+  @media (max-width: 900px) {
+    .stats-row { grid-template-columns: repeat(2, 1fr); }
+    .main-grid, .bottom-row { grid-template-columns: 1fr; }
+    .chain-selector { overflow-x: auto; }
+  }
+
+  @media (max-width: 600px) {
+    .header { flex-direction: column; gap: 16px; align-items: flex-start; }
+    .stats-row { grid-template-columns: 1fr; }
+    .chain-info { flex-wrap: wrap; gap: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="app">
+  <!-- HEADER -->
+  <div class="header">
+    <div class="logo-area">
+      <div class="logo-icon">G</div>
+      <div class="logo-text">GenTech <span>/ Dashboard</span></div>
+    </div>
+
+    <div class="chain-selector" id="chainSelector">
+      <button class="chain-btn active" data-chain="solana" onclick="switchChain('solana')">
+        <span class="chain-dot solana"></span> Solana
+      </button>
+      <button class="chain-btn" data-chain="base" onclick="switchChain('base')">
+        <span class="chain-dot base"></span> Base
+      </button>
+      <button class="chain-btn" data-chain="avax" onclick="switchChain('avax')">
+        <span class="chain-dot avax"></span> Avalanche
+      </button>
+      <button class="chain-btn" data-chain="arc" onclick="switchChain('arc')">
+        <span class="chain-dot arc"></span> Arc
+      </button>
+    </div>
+  </div>
+
+  <!-- CHAIN INFO BAR -->
+  <div class="chain-info" id="chainInfo">
+    <div class="chain-info-logo" id="chainLogo">◎</div>
+    <div>
+      <div class="chain-info-name" id="chainName">Solana</div>
+      <div class="chain-info-detail" id="chainDetail">Mainnet • RPC: api.mainnet-beta.solana.com</div>
+    </div>
+    <div class="chain-info-spacer"></div>
+    <div class="chain-info-stat">
+      <div class="chain-info-stat-value" id="chainTvl">$4.2B</div>
+      <div class="chain-info-stat-label">Total TVL</div>
+    </div>
+    <div class="chain-info-stat">
+      <div class="chain-info-stat-value" id="chainGas">0.00025</div>
+      <div class="chain-info-stat-label">Gas / Tx</div>
+    </div>
+  </div>
+
+  <!-- STATS ROW -->
+  <div class="stats-row">
+    <div class="stat-card">
+      <div class="stat-label">Portfolio Value</div>
+      <div class="stat-value" id="statPortfolio">$12,847</div>
+      <div class="stat-change up">▲ 3.2% today</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Active Positions</div>
+      <div class="stat-value" id="statPositions">7</div>
+      <div class="stat-change up">▲ 2 this week</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Unclaimed Rewards</div>
+      <div class="stat-value" id="statRewards">$342</div>
+      <div class="stat-change up">▲ $28 today</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">24h Volume</div>
+      <div class="stat-value" id="statVolume">$8,291</div>
+      <div class="stat-change down">▼ 1.4% vs yesterday</div>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div class="main-grid">
+    <!-- Positions -->
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">LP Positions</span>
+        <span class="card-badge">Active</span>
+      </div>
+      <div class="card-body" id="positionsList">
+        <!-- Populated by JS -->
+      </div>
+    </div>
+
+    <!-- Activity -->
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">Recent Activity</span>
+        <span class="card-badge">Live</span>
+      </div>
+      <div class="card-body" id="activityFeed">
+        <!-- Populated by JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- BOTTOM ROW -->
+  <div class="bottom-row">
+    <!-- Chart -->
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">Yield History</span>
+        <span class="card-badge">30d</span>
+      </div>
+      <div class="card-body">
+        <div class="chart-area" id="chartBars">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">Quick Actions</span>
+      </div>
+      <div class="card-body" id="quickActions">
+        <!-- Populated by JS -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ═══ CHAIN DATA ═══
+const chainData = {
+  solana: {
+    name: 'Solana',
+    symbol: '◎',
+    detail: 'Mainnet • RPC: api.mainnet-beta.solana.com',
+    tvl: '$4.2B',
+    gas: '0.00025 SOL',
+    portfolio: '$12,847',
+    positions: 7,
+    rewards: '$342',
+    volume: '$8,291',
+    pools: [
+      { pair: 'SOL/USDC', type: 'Concentrated', icon1: '◎', icon2: '$', amount: '142.5 SOL', usd: '$4,275' },
+      { pair: 'JUP/SOL', type: 'Volatile', icon1: 'J', icon2: '◎', amount: '1,240 JUP', usd: '$3,100' },
+      { pair: 'WIF/SOL', type: 'Volatile', icon1: '🐕', icon2: '◎', amount: '850 WIF', usd: '$2,890' },
+      { pair: 'RAY/SOL', type: 'Stable', icon1: 'R', icon2: '◎', amount: '95 RAY', usd: '$1,582' },
+    ],
+    activities: [
+      { icon: '↗', text: '<strong>Swapped</strong> <span>42.3 SOL → 6,340 USDC</span>', time: '12 min ago' },
+      { icon: '💧', text: '<strong>Added liquidity</strong> <span>SOL/USDC pool</span>', time: '1 hr ago' },
+      { icon: '📥', text: '<strong>Claimed</strong> <span>$48.20 in rewards</span>', time: '3 hrs ago' },
+      { icon: '⚡', text: '<strong>Rebalanced</strong> <span>JUP/SOL position</span>', time: '6 hrs ago' },
+      { icon: '↗', text: '<strong>Swapped</strong> <span>1,240 JUP → 68.4 SOL</span>', time: '1 day ago' },
+    ],
+    chart: [35, 42, 28, 55, 48, 62, 38, 72, 58, 45, 68, 82, 75, 52, 90, 85, 70, 62, 88, 95, 78, 65, 82, 72, 92, 88, 75, 68, 85, 78],
+    actions: [
+      { icon: '🔄', label: 'Swap Tokens', desc: 'Exchange on aggregator' },
+      { icon: '💧', label: 'Add Liquidity', desc: 'Deposit to a pool' },
+      { icon: '📊', label: 'Analyze Pools', desc: 'Find yield opportunities' },
+      { icon: '⚡', label: 'Rebalance', desc: 'Adjust position ranges' },
+    ]
+  },
+  base: {
+    name: 'Base',
+    symbol: '◆',
+    detail: 'L2 • RPC: mainnet.base.org',
+    tvl: '$2.8B',
+    gas: '$0.002',
+    portfolio: '$8,432',
+    positions: 5,
+    rewards: '$189',
+    volume: '$5,120',
+    pools: [
+      { pair: 'ETH/USDC', type: 'Concentrated', icon1: 'Ξ', icon2: '$', amount: '3.2 ETH', usd: '$3,840' },
+      { pair: 'BRETT/ETH', type: 'Volatile', icon1: '🐸', icon2: 'Ξ', amount: '12,400 BRETT', usd: '$2,100' },
+      { pair: 'DEGEN/USDC', type: 'Volatile', icon1: '🎯', icon2: '$', amount: '45K DEGEN', usd: '$1,320' },
+    ],
+    activities: [
+      { icon: '↗', text: '<strong>Swapped</strong> <span>1.5 ETH → 2,840 USDC</span>', time: '28 min ago' },
+      { icon: '💧', text: '<strong>Added liquidity</strong> <span>ETH/USDC pool</span>', time: '2 hrs ago' },
+      { icon: '📥', text: '<strong>Claimed</strong> <span>$22.10 in rewards</span>', time: '5 hrs ago' },
+      { icon: '⚡', text: '<strong>Rebalanced</strong> <span>BRETT/ETH position</span>', time: '8 hrs ago' },
+    ],
+    chart: [20, 35, 42, 30, 55, 48, 62, 38, 52, 45, 68, 58, 72, 48, 85, 70, 62, 55, 78, 82, 65, 58, 72, 68, 85, 75, 62, 58, 72, 80],
+    actions: [
+      { icon: '🔄', label: 'Swap Tokens', desc: 'Trade on Base DEXs' },
+      { icon: '💧', label: 'Add Liquidity', desc: 'Deposit to a pool' },
+      { icon: '📊', label: 'Analyze Pools', desc: 'Find yield opportunities' },
+      { icon: '🌉', label: 'Bridge Assets', desc: 'Cross-chain bridge' },
+    ]
+  },
+  avax: {
+    name: 'Avalanche',
+    symbol: '▲',
+    detail: 'C-Chain • RPC: api.avax.network/ext/bc/C/rpc',
+    tvl: '$1.1B',
+    gas: '0.008 AVAX',
+    portfolio: '$5,218',
+    positions: 4,
+    rewards: '$156',
+    volume: '$3,890',
+    pools: [
+      { pair: 'AVAX/USDC', type: 'Stable', icon1: '▲', icon2: '$', amount: '68 AVAX', usd: '$2,040' },
+      { pair: 'JOE/AVAX', type: 'Volatile', icon1: '🫒', icon2: '▲', amount: '2,400 JOE', usd: '$1,820' },
+      { pair: 'QI/AVAX', type: 'Volatile', icon1: '🔮', icon2: '▲', amount: '8,500 QI', usd: '$1,358' },
+    ],
+    activities: [
+      { icon: '💧', text: '<strong>Added liquidity</strong> <span>AVAX/USDC pool</span>', time: '45 min ago' },
+      { icon: '📥', text: '<strong>Claimed</strong> <span>$32.40 in JOE rewards</span>', time: '2 hrs ago' },
+      { icon: '↗', text: '<strong>Swapped</strong> <span>25 AVAX → 4,200 USDC</span>', time: '4 hrs ago' },
+    ],
+    chart: [25, 30, 38, 42, 35, 48, 52, 45, 58, 55, 62, 48, 70, 65, 58, 72, 68, 75, 80, 72, 68, 78, 82, 75, 85, 80, 72, 78, 85, 88],
+    actions: [
+      { icon: '🔄', label: 'Swap Tokens', desc: 'Trade on Trader Joe' },
+      { icon: '💧', label: 'Add Liquidity', desc: 'Deposit to a pool' },
+      { icon: '📊', label: 'Analyze Pools', desc: 'Find yield opportunities' },
+      { icon: '🏦', label: 'Stake JOE', desc: 'Earn veJOE rewards' },
+    ]
+  },
+  arc: {
+    name: 'Arc',
+    symbol: '◈',
+    detail: 'Testnet • RPC: rpc.arc.network',
+    tvl: '$180M',
+    gas: '0.001 ARC',
+    portfolio: '$2,156',
+    positions: 3,
+    rewards: '$47',
+    volume: '$1,240',
+    pools: [
+      { pair: 'ARC/USDC', type: 'Concentrated', icon1: '◈', icon2: '$', amount: '420 ARC', usd: '$1,260' },
+      { pair: 'ARC/ETH', type: 'Volatile', icon1: '◈', icon2: 'Ξ', amount: '180 ARC', usd: '$896' },
+    ],
+    activities: [
+      { icon: '💧', text: '<strong>Added liquidity</strong> <span>ARC/USDC pool</span>', time: '1 hr ago' },
+      { icon: '↗', text: '<strong>Swapped</strong> <span>500 ARC → 340 USDC</span>', time: '3 hrs ago' },
+      { icon: '📥', text: '<strong>Claimed</strong> <span>$12.80 in rewards</span>', time: '6 hrs ago' },
+    ],
+    chart: [15, 20, 28, 22, 35, 42, 30, 48, 55, 45, 60, 52, 65, 58, 70, 62, 68, 72, 75, 68, 72, 78, 82, 75, 80, 85, 78, 82, 88, 92],
+    actions: [
+      { icon: '🔄', label: 'Swap Tokens', desc: 'Trade on Arc DEX' },
+      { icon: '💧', label: 'Add Liquidity', desc: 'Deposit to a pool' },
+      { icon: '📊', label: 'Analyze Pools', desc: 'Find yield opportunities' },
+      { icon: '🧪', label: 'Testnet Faucet', desc: 'Get test tokens' },
+    ]
+  }
+};
+
+// ═══ RENDER FUNCTIONS ═══
+function renderPositions(chain) {
+  const data = chainData[chain];
+  const html = data.pools.map(p => `
+    <div class="position-row">
+      <div class="position-pair">
+        <div class="pair-icons">
+          <div class="pair-icon">${p.icon1}</div>
+          <div class="pair-icon">${p.icon2}</div>
+        </div>
+        <div>
+          <div class="pair-name">${p.pair}</div>
+          <div class="pair-type">${p.type}</div>
+        </div>
+      </div>
+      <div class="position-value">
+        <div class="position-amount">${p.amount}</div>
+        <div class="position-usd">${p.usd}</div>
+      </div>
+    </div>
+  `).join('');
+  document.getElementById('positionsList').innerHTML = html;
+}
+
+function renderActivity(chain) {
+  const data = chainData[chain];
+  const html = data.activities.map(a => `
+    <div class="activity-item">
+      <div class="activity-icon">${a.icon}</div>
+      <div>
+        <div class="activity-text">${a.text}</div>
+        <div class="activity-time">${a.time}</div>
+      </div>
+    </div>
+  `).join('');
+  document.getElementById('activityFeed').innerHTML = html;
+}
+
+function renderChart(chain) {
+  const data = chainData[chain];
+  const max = Math.max(...data.chart);
+  const html = data.chart.map((v, i) => `
+    <div class="chart-bar" style="height: ${(v / max) * 100}%" data-label="${i + 1}"></div>
+  `).join('');
+  document.getElementById('chartBars').innerHTML = html;
+}
+
+function renderActions(chain) {
+  const data = chainData[chain];
+  const html = data.actions.map(a => `
+    <div class="position-row" style="cursor: pointer;">
+      <div class="position-pair">
+        <div class="activity-icon">${a.icon}</div>
+        <div>
+          <div class="pair-name">${a.label}</div>
+          <div class="pair-type">${a.desc}</div>
+        </div>
+      </div>
+    </div>
+  `).join('');
+  document.getElementById('quickActions').innerHTML = html;
+}
+
+function updateStats(chain) {
+  const d = chainData[chain];
+  document.getElementById('statPortfolio').textContent = d.portfolio;
+  document.getElementById('statPositions').textContent = d.positions;
+  document.getElementById('statRewards').textContent = d.rewards;
+  document.getElementById('statVolume').textContent = d.volume;
+  document.getElementById('chainName').textContent = d.name;
+  document.getElementById('chainDetail').textContent = d.detail;
+  document.getElementById('chainTvl').textContent = d.tvl;
+  document.getElementById('chainGas').textContent = d.gas;
+  document.getElementById('chainLogo').textContent = d.symbol;
+}
+
+// ═══ CHAIN SWITCHER ═══
+function switchChain(chain) {
+  // Update data attribute (triggers CSS variable swap)
+  document.documentElement.setAttribute('data-chain', chain);
+
+  // Update active button
+  document.querySelectorAll('.chain-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.chain === chain);
+  });
+
+  // Re-render all sections
+  updateStats(chain);
+  renderPositions(chain);
+  renderActivity(chain);
+  renderChart(chain);
+  renderActions(chain);
+
+  // Persist choice
+  localStorage.setItem('gentech-chain', chain);
+}
+
+// ═══ INIT ═══
+const saved = localStorage.getItem('gentech-chain') || 'solana';
+switchChain(saved);
+</script>
+
+</body>
+</html>
