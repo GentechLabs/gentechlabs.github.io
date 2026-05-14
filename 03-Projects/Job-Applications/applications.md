@@ -1,16 +1,16 @@
 # Job Applications Tracker
 
-> **Last scan:** 2026-05-13 (daily 8 AM ET cron)
+> **Last scan:** 2026-05-14 (daily 8 AM ET cron)
 > **Source:** [College.xyz Careers](https://www.college.xyz/careers)
 
 ## Matching Roles (Remote, ≥$25/hr, Crypto/Tech/Engineering)
 
 | Date Found | Company | Role | Pay | Location | Apply | Status |
 |---|---|---|---|---|---|---|
-| 2026-05-13 | No Limit Holdings | Investment Analyst Intern | $25/hr | Remote (USA TZ) | brian@nlh.xyz | 🆕 New |
-| 2026-05-13 | ether.fi | GTM Engineer Intern | $1K-$4K/mo | Remote | nathan@ether.fi | 🆕 New |
-| 2026-05-13 | ether.fi | Social Media Intern | $1K-$4K/mo | Remote | nathan@ether.fi | 🆕 New |
-| 2026-05-13 | Hibachi | Growth Intern | Unlisted | Remote | typeform.com/to/bGRsQsot | 🆕 New (unverified pay) |
+| 2026-05-14 | No Limit Holdings | Investment Analyst Intern | $25/hr | Remote (USA TZ) | brian@nlh.xyz | 🆕 New |
+| 2026-05-14 | ether.fi | GTM Engineer Intern | $1K-$4K/mo | Remote | nathan@ether.fi | 🆕 New |
+| 2026-05-14 | ether.fi | Social Media Intern | $1K-$4K/mo | Remote | nathan@ether.fi | 🆕 New |
+| 2026-05-14 | Hibachi | Growth Intern | Unlisted | Remote | typeform.com/to/bGRsQsot | 🆕 New (unverified pay) |
 
 ## Excluded (Non-Remote or Below Threshold)
 
@@ -25,4 +25,4 @@
 
 | Date | Total Jobs | New Matches | Notes |
 |---|---|---|---|
-| 2026-05-13 | 8 | 4 | First scan — baseline established |
+| 2026-05-14 | 8 | 4 | First scan — baseline established |

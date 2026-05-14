@@ -9,6 +9,29 @@
 **Entry Date**: 2026-03-31
 
 ---
+---
+
+## 2026-05-14 Update
+**AVAX Price**: $9.6856 (−2.78% 24h)
+**USDC Price**: $0.9998 (+0.01% 24h)
+**Price Range**: $9.45–$10.00 (Shape: Curve)
+**Target**: $9.45–$10.00
+**Balances**: 12.61 AVAX (~$122.18) + 74.57 USDC (~$74.57) = **$196.75**
+**Wallet**: 0.0956 AVAX (~$0.93) + 0.00 USDC (~$0.00) = **$0.93** | **Combined Total**: **$197.68**
+**Fees (24h)**: $1.16 (est. from $15.96M vol × 5bps × 0.0049% pool share × 3.0x CL boost; oracle not configured)
+**IL**: +0.3% ✓ below 2% threshold
+**Efficiency**: 85.9% ✓ ≥50% — strong fee capture
+**Action**: ✅ No rebalance needed — price centered in curve range. AVAX/USDC split shifted (62/38) as price dropped toward range mid-point. Efficiency stable.
+
+**D5 Milestone Alignment**:
+- Scout tier ($5.00/day target) — est. daily fees $1.16 → 23.3% progress
+- Price inside strategic target band ✅ ($9.69 within $9.45–$10.00)
+- IL +0.3% ✓ below 2% threshold
+- Efficiency 85.9% ≥50% ✓ — strong fee capture position
+
+**Other Pools**: No additional LFJ pools (AVAX/JOE, USDC/JOE, etc.) detected with active positions for this wallet.
+
+**Note**: Price dropped 2.78% in 24h (flagged >1.5%). Position rebalanced May 13 from $9.95–$10.30 (out-of-range) to $9.45–$10.00. Since then, price drifted from $9.75 → $9.69, shifting LP to AVAX-heavy (62/38). Efficiency held at 85.9% (was 89.4%). Pool TVL $4.07M, volume $15.96M/24h. Active bin 8363235 sits at 42.9% from range bottom — well-centered.
 
 ## 2026-05-13 Update
 **AVAX Price**: $9.7541 (-1.09% 24h)
