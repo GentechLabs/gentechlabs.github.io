@@ -50,6 +50,19 @@ PROJECTS = [
         "learned": "Wrapping existing 541-line LP Monitor skill into Swarms marketplace agent. 300-400 lines new code."
     },
     {
+        "id": "elevenhacks-9",
+        "title": "ElevenHacks #9 — Voice AI Service",
+        "description": "Voice-first AI service built for ElevenLabs x Stripe hackathon. 'Build something people will pay for' — leveraging our existing voice infrastructure.",
+        "tech": ["ElevenLabs", "Stripe", "Python", "Telegram", "Voice AI"],
+        "status": "building",
+        "deadline": "2026-05-21",
+        "timeline": "May 2026",
+        "highlight": True,
+        "vault_path": "02-Labs/Hackathons/Active/ElevenHacks-9",
+        "hackathon": "ElevenHacks #9 (Stripe x ElevenLabs)",
+        "learned": "Voice-first service aligned with our Pipecat/Telegram infrastructure."
+    },
+    {
         "id": "bags-fm",
         "title": "Bags FM — Agent Trading Desk",
         "description": "Memecoin launchpad integration with AI agent trading capabilities. Solana-based.",

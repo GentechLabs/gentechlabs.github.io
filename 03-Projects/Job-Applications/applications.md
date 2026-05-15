@@ -1,6 +1,6 @@
 # Job Applications Tracker
 
-> **Last scan:** 2026-05-14 (daily 8 AM ET cron)
+> **Last scan:** 2026-05-15 (daily 8 AM ET cron)
 > **Source:** [College.xyz Careers](https://www.college.xyz/careers)
 
 ## Matching Roles (Remote, ≥$25/hr, Crypto/Tech/Engineering)

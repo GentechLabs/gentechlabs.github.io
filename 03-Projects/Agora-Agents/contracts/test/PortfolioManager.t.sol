@@ -11,6 +11,16 @@ contract PortfolioManagerTest is Test {
     address public agent = address(0xCAFE);
     address public paymaster = address(0xFACE);
 
+    // Local aliases for events
+    event RegimeChanged(PortfolioManager.Regime oldRegime, PortfolioManager.Regime newRegime);
+    event RebalanceExecuted(
+        uint256 timestamp,
+        PortfolioManager.Regime regime,
+        uint256 totalBefore,
+        uint256 totalAfter,
+        int256 profitLoss
+    );
+
     function setUp() public {
         pm = new PortfolioManager(paymaster);
         pm.setOracle(oracle);
@@ -26,15 +36,13 @@ contract PortfolioManagerTest is Test {
 
     function test_update_regime() public {
         vm.prank(oracle);
-        vm.expectEmit(true, true, true, true);
-        emit PortfolioManager.RegimeChanged(
-            PortfolioManager.Regime.RANGE_BOUND,
-            PortfolioManager.Regime.BULL_TRENDING
-        );
+        vm.expectEmit();
+        emit RegimeChanged(
+            PortfolioManager.Regime.RANGE_BOUND, PortfolioManager.Regime.BULL_TRENDING);
         pm.updateRegime(PortfolioManager.Regime.BULL_TRENDING, 85);
 
-        (PortfolioManager.Regime regime, , ) = pm.portfolio();
-        assertEq(regime, PortfolioManager.Regime.BULL_TRENDING);
+        (PortfolioManager.Regime regime, , , , ) = pm.portfolio();
+        assertEq(uint(regime), uint(PortfolioManager.Regime.BULL_TRENDING));
     }
 
     function test_rebalance_requires_authorization() public {
@@ -60,14 +68,11 @@ contract PortfolioManagerTest is Test {
         bps[1] = 2000;
         bps[2] = 2000;
 
+        vm.warp(block.timestamp + 2 hours); // Past 1-hour cooldown
         vm.prank(agent);
-        vm.expectEmit(true, true, true, true);
-        emit PortfolioManager.RebalanceExecuted(
-            block.timestamp,
-            PortfolioManager.Regime.RANGE_BOUND,
-            0,
-            0,
-            0
+        vm.expectEmit();
+        emit RebalanceExecuted(
+            block.timestamp, PortfolioManager.Regime.RANGE_BOUND, 0, 0, 0
         );
         pm.rebalance(tokens, bps, block.timestamp + 1 hours);
 
@@ -83,6 +88,7 @@ contract PortfolioManagerTest is Test {
         bps[0] = 6000;
         bps[1] = 3000; // Only 90%, not 100%
 
+        vm.warp(block.timestamp + 2 hours); // Past 1-hour cooldown
         vm.prank(agent);
         vm.expectRevert(PortfolioManager.InvalidAllocation.selector);
         pm.rebalance(tokens, bps, block.timestamp + 1 hours);

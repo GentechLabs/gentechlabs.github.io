@@ -1,33 +1,17 @@
-# 💡 Ideas
+# 💡 Green Room — Ideas
 
-*Active ideas for GenTech Labs. Check when explored, leave blank if not yet.*
+<!-- Checkbox list of things to explore. Check when done, move to archive when stale. -->
 
----
+## Hackathons & Bounties
 
-## Hackathons (Active Pipeline)
-- [x] Kite AI (May 17) — AgentEscrow + Dynamic Strategy Engine ✅ deployed
-- [ ] Agora Agents (May 25, $50K prize) — RFB 04 scaffolded, building now
-- [ ] Arbitrum Open House ($115K) — Best Agentic track, reg May 25 / sub Jun 14
-- [ ] Swarms ACM (May 27) — LP Monitor marketplace agent
-- [ ] Bags FM (Jun 1) — Agent Trading Desk
-- [ ] Google Cloud Rapid Agent (Jun 11) — Gemini + MCP
-- [ ] Somnia (Jun 11) — job opportunity potential
+- [ ] **Superteam Solana Bounty** (Added May 14)
+  - Category: Autonomous on-chain agent workflows
+  - Stack: SAP (identity), x402 payments, OOBE + Ace
+  - Prize: $2,400 across two categories
+  - Status: Needs deadline research — add to roster if 5+ days remaining
+  - Priority: Research deadline, then decide
 
-## Revenue Streams
-- [ ] x402 agent-to-agent payments integration
-- [ ] LP Monitor as standalone product
-- [ ] DeFi Milestones gamification (spec complete)
-- [ ] GenLayer Builder Program — passive points, resume after hackathon sprint (paused Apr 25)
+## Product Ideas
 
-## Content
-- [ ] X Profile launch (@Gentech / @ProtoJay4789)
-- [ ] Hackathon build journey content
-- [ ] DeFi strategy transparent tracking
-
-## Products
-- [ ] AAE — modular agent stack (brain/credit/infra layers)
-- [ ] Portfolio site improvements
-
----
-
-*Last updated: May 13, 2026*
+- [ ] **Voice-first travel agent** — expand Let's FG into a paid service
+- [ ] **Agent payment router** — x402 protocol for recurring agent payments

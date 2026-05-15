@@ -122,7 +122,8 @@ contract PortfolioManager {
     /**
      * @notice Execute rebalance — authorized agents call this after regime change
      * @dev Swaps assets to match target allocation for current regime
-     * @param targetAllocations Array of (token, targetBps) pairs
+     * @param tokens Array of token addresses
+     * @param targetBps Array of target allocation in basis points
      * @param deadline Transaction deadline timestamp
      */
     function rebalance(
