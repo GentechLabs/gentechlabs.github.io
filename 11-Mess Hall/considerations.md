@@ -19,3 +19,8 @@
 - Our move: experiment with x402B on testnet, adopt as escrow standard for agent commerce
 - Focus energy on application layer — not reinventing escrow contracts the protocol now provides natively
 - [ ] Start testnet experiment with x402B for Kite AI agent commerce escrow
+
+## Personal Milestone Reward (May 2026)
+- Xiaomi 15 Ultra — $829 via Giztop
+- Snapdragon 8 Elite, Leica Summilux optics, 1" sensor, 6000mAh, 90W charging
+- [ ] Track as milestone reward — pull the trigger when a project goal is hit
