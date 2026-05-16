@@ -15,3 +15,13 @@
 
 - [ ] **Voice-first travel agent** — expand Let's FG into a paid service
 - [ ] **Agent payment router** — x402 protocol for recurring agent payments
+
+## AAE LP Management (May 16, 2026)
+
+- [ ] **Subscription tier differentiation — Autonomous LP Defense**
+  - Free tier: static range, manual rebalance, basic alerts (set & hope)
+  - Paid tier: active defense — knife-fall detection → auto-exit to USDC → support/resistance discovery → autonomous re-entry
+  - Core value prop: the "brain layer" that manages risk vs. just reporting it
+  - Differentiation: most LP tools are passive dashboards; AAE acts autonomously
+  - Trigger rules: "check every 10min, confirm breakdown over 5min, then execute"
+  - Status: Validated against real market event (AVAX drop below $9.30 range floor)

@@ -1,6 +1,6 @@
 # Kite AI — Agentic Commerce
 
-**Status:** ✅ Contracts deployed, UI wired, demo video in progress
+**Status:** 🎬 Demo video re-rendering (fixed scene timing bug)
 **Hackathon:** Kite AI Global — Encode AI Club
 **Deadline:** May 17, 2026
 
@@ -18,16 +18,17 @@
 - [x] 52/52 tests passing
 - [x] Deployed to Kite testnet (chain 2368)
 - [x] UI HTML updated with contract addresses
-- [x] HyperFrames demo video composition (23s motion graphic)
 - [x] GitHub repo: ProtoJay4789/kite-agent-commerce
+- [x] README updated with real addresses, correct deadline
 
 ## What's Left
-- [ ] Record screen demo with OBS (tomorrow)
-- [ ] Add TTS voiceover + music to HyperFrames render
+- [ ] Demo video render (re-rendering — fixed data-start timing bug)
 - [ ] Submit to Encode AI Club hackathon
 - [ ] Post-submission: audit Kite core contracts for $10K Code4rena bounty
 
 ## Key Files
 - Repo: `/root/.hermes/profiles/gentech/home/repos/kite-agent-commerce/`
-- Demo video comp: `/tmp/kite-final/` (needs HyperFrames install on local)
-- Deployment script: `script/Deploy.s.sol`
+- Demo video comp: `/tmp/kite-final/`
+
+## Bug Fixed (May 15)
+All scenes had `data-start="0"` — HyperFrames renderer ignores GSAP timeline and uses data attributes for clip timing. Fixed to staggered values: 0, 3, 6, 11, 16, 20.

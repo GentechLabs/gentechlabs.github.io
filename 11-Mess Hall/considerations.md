@@ -13,3 +13,9 @@
 - [ ] **Add `.status-research` CSS:** Research status badge has no background/border color defined.
 - [ ] **Wire up avatar image:** `assets/jordan-avatar.png` exists but is never referenced in HTML. CSS `.avatar` class exists but no `<img>` tag uses it.
 - [ ] **Sync vault:** 396 uncommitted files in vault. Local diverged from remote — local has new CSS additions (recycle bin, methodology) not on remote. Run `git add -A && git commit && git push`.
+
+## x402B Testnet Experiment (May 16, 2026)
+- x402B = escrow, disputes, high-value, deferred delivery (Boson protocol handles this)
+- Our move: experiment with x402B on testnet, adopt as escrow standard for agent commerce
+- Focus energy on application layer — not reinventing escrow contracts the protocol now provides natively
+- [ ] Start testnet experiment with x402B for Kite AI agent commerce escrow
