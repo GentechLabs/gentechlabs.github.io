@@ -26,5 +26,5 @@
 - **D-Mob**: Smart contract dev, Solidity engineer, builder
 - **Desmond**: Content strategist, writer, social media voice
 
-## Veneto + Dadrian
+## Vanito + Dadrian
 Included in all 3 group channels (Strategies, Labs, Entertainment).

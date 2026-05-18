@@ -16,6 +16,15 @@
 - [ ] **Voice-first travel agent** — expand Let's FG into a paid service
 - [ ] **Agent payment router** — x402 protocol for recurring agent payments
 
+## Gaming (Side Projects)
+
+- [ ] **AI Companions in Gaming** (Added May 18)
+  - Market: AI companion apps $220M+ in 2025, up 64% YoY
+  - Revenue per download doubled ($0.52 → $1.18), Character.AI hit $500M annual
+  - Gap: Most AI companions are text-based chat; gaming-specific companions barely touched
+  - Use case: In-game AI companions for NPC interaction, strategy, narrative
+  - Status: Watch for Web3 gaming hackathons — build when opportunity aligns
+
 ## AAE LP Management (May 16, 2026)
 
 - [ ] **Subscription tier differentiation — Autonomous LP Defense**

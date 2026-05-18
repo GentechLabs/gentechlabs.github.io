@@ -1,0 +1,9 @@
+- User prefers direct, concise responses — no pleasantries
+- Works daily 11-8 EDT; available throughout
+- Prefers AVAX network for token purchases (LINK.e, etc.)
+- Telegram workflow: HQ=external, Green Room=coordination, Mess Hall=brainstorming
+- Approval workflow: checkbox format in 00-Inbox/, replies [x] or [ ]
+- Voice messages preferred for long updates (ElevenLabs)
+- DCA schedule: 2x/week (Sun-Wed / Thu-Sat), $50-100/week
+- Tolerates minor mistakes — "it's okay, I do it too sometimes"
+- Focus on shipping over perfection — "build in public"
