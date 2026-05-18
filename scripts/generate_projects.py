@@ -50,6 +50,19 @@ PROJECTS = [
         "learned": "Wrapping existing 541-line LP Monitor skill into Swarms marketplace agent. 300-400 lines new code."
     },
     {
+        "id": "swarms-defi-signal-agent",
+        "title": "Swarms DeFi Signal Agent",
+        "description": "7-signal DeFi intelligence agent for Swarms ACM Hackathon. Price tracking, IL calculation, trend analysis, fee yield projections, and market sentiment — aligned with Cyfrin Upwind curriculum.",
+        "tech": ["Python", "Swarms", "DeFi", "CoinGecko", "DexScreener", "Signal Analysis"],
+        "status": "completed",
+        "deadline": "2026-05-27",
+        "timeline": "May 2026",
+        "highlight": True,
+        "vault_path": "02-Labs/Hackathons/Active/Swarms-ACM/swarms-defi-agent",
+        "hackathon": "Swarms ACM Hackathon",
+        "learned": "Built 699-LOC agent with 7 DeFi signal tools. Agent orchestration via Swarms framework. Ready for marketplace submission."
+    },
+    {
         "id": "elevenhacks-9",
         "title": "ElevenHacks #9 — Voice AI Service",
         "description": "Voice-first AI service built for ElevenLabs x Stripe hackathon. 'Build something people will pay for' — leveraging our existing voice infrastructure.",
