@@ -70,7 +70,7 @@ TOOLS = [
 
 DEFAULT_MODEL = os.getenv(
     "LP_MONITOR_MODEL",
-    "openrouter/google/gemini-2.0-flash-001",
+    "openrouter/deepseek/deepseek-v4-flash:free",
 )
 
 
@@ -78,6 +78,8 @@ def resolve_api_key(model_name: str) -> Optional[str]:
     """Resolve API key from environment based on model provider."""
     if "openrouter" in model_name.lower():
         return os.getenv("OPENROUTER_API_KEY")
+    elif "ollama" in model_name.lower():
+        return ""  # Ollama runs locally, no key needed
     return os.getenv("OPENAI_API_KEY")
 
 
@@ -86,9 +88,10 @@ def create_agent(model_name: str | None = None, api_key: str | None = None):
     from swarms import Agent
 
     model = model_name or DEFAULT_MODEL
-    key = api_key or resolve_api_key(model)
+    key = api_key if api_key is not None else resolve_api_key(model)
 
-    if not key:
+    # Ollama runs locally — no API key needed
+    if "ollama" not in model.lower() and not key:
         print("ERROR: No API key found.")
         print("  OpenRouter: export OPENROUTER_API_KEY=your_key")
         print("  OpenAI:     export OPENAI_API_KEY=your_key")
@@ -96,8 +99,10 @@ def create_agent(model_name: str | None = None, api_key: str | None = None):
 
     # Set key in environment for LiteLLM
     if "openrouter" in model.lower():
+        assert key is not None
         os.environ["OPENROUTER_API_KEY"] = key
-    else:
+    elif "ollama" not in model.lower():
+        assert key is not None
         os.environ["OPENAI_API_KEY"] = key
 
     agent = Agent(
@@ -110,7 +115,7 @@ def create_agent(model_name: str | None = None, api_key: str | None = None):
         system_prompt=SYSTEM_PROMPT,
         model_name=model,
         tools=TOOLS,
-        max_loops="auto",
+        max_loops=1,
         temperature=0.3,
         max_tokens=4096,
     )

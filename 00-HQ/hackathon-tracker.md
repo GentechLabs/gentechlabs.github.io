@@ -1,6 +1,6 @@
 # 🏆 Active Hackathon Tracker
 
-Last updated: 2026-05-13 01:35 UTC (Agora Agents scaffolded, Kite AI deployed)
+Last updated: 2026-05-18 22:20 UTC (BNB Agent SDK queued)
 
 | Hackathon | Dates | Theme | Prizes | Status | Notes |
 |-----------|-------|-------|--------|--------|-------|
@@ -16,6 +16,7 @@ Last updated: 2026-05-13 01:35 UTC (Agora Agents scaffolded, Kite AI deployed)
 | Arbitrum Open House | Reg: May 25 / Sub: Jun 14 | AI Agents (Best Agentic) | $115K ($70K+$15K+$30K) | 🟢 EVM PORT | AgentForge portable. Best Agentic track = strongest fit. 164+ registered. |
 | Dev3pack Bridge Accelerator | Jun 12 | Bridge / Startup focus | TBD | 🟡 QUEUED | Solana. Startup focus. Jordan to provide details. |
 | 11Labs Hackathon | TBD | TBD | TBD | 🟡 QUEUED | Pending API key + details from Jordan. |
+| BNB Agent SDK | TBD | AI Agent Identity + Commerce | TBD | 🟡 QUEUED | ERC-8004 identity (ERC-721), APEX escrow commerce, Python SDK (`pip install bnbagent`). BSC testnet via MegaFuel. |
 | Solana Frontier | May 11 | Solana | $250K + accelerator | ❌ WITHDRAWN | Jordan directive May 10. Time/debugging constraints. Solana work preserved for cross-chain reuse. |
 
 ## Bug Bounties (Ongoing)
@@ -49,3 +50,4 @@ Last updated: 2026-05-13 01:35 UTC (Agora Agents scaffolded, Kite AI deployed)
 7. **Somnia** — QUEUED. Deadline Jun 11. AI agent platform, on-chain LLM inference. Good fit for multi-agent setup.
 8. **Dev3pack Bridge Accelerator** — 🟡 QUEUED. Jun 12. Solana. Jordan to provide details.
 9. **Google (Cloud Rapid Agent + for Startups)** — QUEUED. Deadlines Jun 5-11.
+10. **BNB Agent SDK** — 🟡 QUEUED. ERC-8004 identity + APEX commerce. Python SDK. BSC/MegaFuel. Keep an eye out.
