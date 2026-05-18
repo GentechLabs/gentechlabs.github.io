@@ -11,6 +11,21 @@
   - Status: Needs deadline research — add to roster if 5+ days remaining
   - Priority: Research deadline, then decide
 
+- [ ] **Arbitrum Open House London** (Added May 18)
+  - Buildathon: Started May 25, online 3 weeks
+  - Founder House: July 10-12, London (in-person)
+  - Prize: $415K total ($70K buildathon + $120K founder house + $30K grants + $195K Robinhood Chain)
+  - AI Agentic Category: $15K buildathon + $20K founder house
+  - Fit: DeFi Signal Agent → AI Agentic track
+  - Priority: HIGH — deadline approaching, strong alignment
+
+- [ ] **Mantle Turing Test 2026** (Added May 18)
+  - Phase II deadline: June 15, 2026
+  - Prize: $120K+ ($100K Phase II + $20K Phase I)
+  - Tracks: AI Trading & Strategy, Agentic Economy, AI × RWA
+  - Fit: DeFi Signal Agent → AI Trading or Agentic Economy
+  - Priority: HIGH — 27 days to deadline, natural fit
+
 ## Product Ideas
 
 - [ ] **Voice-first travel agent** — expand Let's FG into a paid service
