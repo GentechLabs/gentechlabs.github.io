@@ -1,100 +1,47 @@
-# Master To-Do — 2026-05-11 (Updated)
+# Master To-Do — 2026-04-17
 
-## 🔴 P0 — Kite AI Hackathon (May 17) — PRIMARY
-- [x] Brain backup to GitHub ✅
-- [x] ElevenLabs voices configured ✅
-- [x] All bots connected + running ✅
-- [x] Vault synced + restructured ✅
-- [x] AgentEscrow contracts (53/53 tests) ✅
-- [x] Two-tier dispute resolution ✅
-- [x] Security audit complete ✅
-- [ ] Adapt contracts for Kite AI chain adapter
-- [ ] L3 Brain integration research
-- [ ] Prepare Kite AI submission — README, demo
-- [ ] Submit to Kite AI portal
+## 🔴 Active Sprint (Dmob + Yoyo)
+- [x] **ETHGlobal Open Agents** — PRIMARY (deadline May 3, 16 days)
+  - [x] Set up Foundry project scaffold ✅
+  - [x] Research 0G SDK/API ✅ (chain 16602, repos cloned)
+  - [x] Research KeeperHub automation ✅ (direct exec API pattern)
+  - [x] Define smart contract architecture ✅ (AgentRegistry, TaskManager, AgentKeeper)
+  - [x] Write contracts + interfaces + tests (7/7 passing)
+  - [x] Push to GitHub ✅ https://github.com/ProtoJay4789/ethglobal-open-agents
+  - [ ] Deploy to 0G Galileo testnet (needs faucet tokens)
+  - [ ] Implement 0G Storage integration
+  - [ ] Implement KeeperHub integration
+  - [ ] Build demo video
+- [ ] **EVE Hackathon** — SECONDARY (research at natural breaks)
+  - [ ] Scope requirements, dates, categories
+  - [ ] See `green-room/dmob-hackathon-brief.md`
 
-## 🟡 P1 — ACM Hackathon (May 27)
-- [x] Scoping doc created ✅
-- [ ] Review Swarms API docs
-- [ ] Build API wrapper for LP Monitor
-- [ ] Tokenize agent via Frenzy Mode
-- [ ] Seed liquidity pool
-- [ ] List on Swarms Marketplace
-- [ ] Demo video + documentation
+## 🟡 Jordan Needs To Do (when he wakes up)
+- [ ] **Hackathon sign-ups + faucets** — see `00-Inbox/HACKATHON-TODO.md` (30-45 min)
+  - [ ] ETHGlobal Discord
+  - [ ] Circle Developer + Coinbase Developer accounts
+  - [ ] KeeperHub signup
+  - [ ] Phantom + MetaMask wallets
+  - [ ] All testnet faucets (0G, AVAX Fuji, USDC, SOL devnet)
+- [ ] Add Gentech bot to Labs, Strategies, Entertainment groups
+- [ ] Testing between hackathon submissions
+- [ ] Attend ETHGlobal brainstorm: **Apr 23 @ 3pm EDT**
 
-## ⚫ WITHDRAWN / SKIPPED
-| Hackathon | Reason |
-|-----------|--------|
-| Solana Frontier | WITHDRAWN May 10 — assets preserved for cross-chain reuse |
-| ElevenHacks #6-9 | 5 days insufficient / collides |
-| ETHGlobal Open Agents | DROPPED Apr 24 |
-| Nous Hermes Creative | SKIPPED per Jordan |
-| Dev3pack Global | SKIPPED per Jordan |
-| Surge Ignition S1 | Ended Apr 24 |
+## 🟢 Done
+- [x] Green room system set up (`~/.hermes/coordination/`)
+- [x] Vault maintenance cron moved to 10:30pm EDT
+- [x] Green room vault integration added
+- [x] ETH hackathon brief filed for Dmob
+- [x] Dmob hackathon brief created
+- [x] Agent workflow confirmed (HQ → Green Room → Workshop groups)
 
-## 🟢 P2 — AAE Signal Spec Implementation
-- [ ] Optimize LP Monitor cron to fetch all structured fields
-- [x] Draft Personal Goal Engine spec ✅
-- [ ] Update AAE Signal Spec to v2.1 with PGE fields
-- [ ] Scaffold contract structs
-- [ ] Design rank-gated access control
-- [ ] PGE contract structs + functions
-- [ ] Auto-compound trigger logic
-- [ ] Alert severity microcopy
-- [ ] Rank tier UX + unlock descriptions
-- [ ] Milestone shareable cards + empty state copy
-- [ ] PGE celebration/reflection/module copy
-
-## 🟢 P2 — Personal Goal Engine
-- [x] Draft full spec ✅
-- [x] AAE Signal Spec v2.1 extension ✅
-- [x] Draft 10 Academy module scripts ✅
-- [x] Integrate PGE track into Academy curriculum ✅
-- [ ] Review module scripts, voice/tone pass
-- [ ] Celebration/reflection/module copy
-- [ ] PGE contract structs + functions
-- [ ] Cron integration for PGE signals
-- [ ] Front-end wireframes / review
-- [ ] Review spec + Academy modules
-
-## 🟢 P2 — Prediction Market Layer
-- [ ] Feasibility: prediction market vs social betting
-- [ ] Contract architecture: binary markets, escrow, scoring
-- [ ] UX framing: leaderboard design, copy
-- [ ] Consolidate assessments into recommendation
-
-## 📅 Pipeline (All Feeds AAE → July Retro / Fall Colosseum)
-| Target | Date | Prize | Notes |
-|--------|------|-------|-------|
-| Cursor × ElevenLabs | May 7 | TBA | Watch |
-| Blackbox × ElevenLabs | May 21 | TBA | Wait for reveal |
-| D-ID × ElevenLabs | May 28 | $11,980 | Wait for reveal |
-| Google Cloud Rapid Agent | Jun 11 | TBD | AgentEscrow on GCP + Gemini |
-| ETHConf | Jun 8–10 | — | Conference + hack hybrid |
-| ETHGlobal New York | Jun 12–14 | $100K+ | Physical |
-| **AVAX Retro9000** | **Jul 14** | **$75K** | **"The retro thing"** |
-| ETHGlobal Lisbon | Jul 24–26 | $100K+ | Physical |
-| ETHOnline 2026 | Sep 4–16 | $100K+ | Virtual |
-| **Fall 2026 Colosseum** | **September** | **$125K+** | **AAE flagship** |
-| ETHGlobal Tokyo | Sep 25–27 | $100K+ | Physical |
-| ETHGlobal Mumbai | Nov 6–8 | $100K+ | Physical |
-
-## 💰 Grants & Builder Programs
-- [ ] GenLayer Incentivized Builder Program
-- [ ] AVAX Retro9000 grant application (Jul 14 deadline)
-- [ ] ~~Immunefi — check AgentEscrow-related protocols~~ PAUSED — KYC pending
-- [ ] Code4rena — active contests
-- [ ] Sherlock — upcoming audits
-
-## 📋 Backlog
+## ⏪ Backlog
 - [ ] Agent response protocol refinement
-- [ ] Content pipeline strategy
-- [ ] Inter-agent coordination protocol
-- [ ] Hermes upstream sync
-- [ ] Custom ElevenLabs voice cloning per agent
-- [ ] Self-evolution skill integration
+- [ ] Content pipeline strategy (Desmond)
+- [ ] Inter-agent coordination protocol (pending Dmob)
+- [ ] Hermes v0.10.0 upstream sync (213 commits behind)
+- [ ] Centralized auth refresh cron
 
 ---
-**Last updated:** 2026-05-11 10:48 UTC
-**Updated by:** Gentech (solo operation cleanup)
-**Next update:** Jordan morning review
+**Last updated:** 2026-04-17 12:00 UTC
+**Updated by:** Gentech

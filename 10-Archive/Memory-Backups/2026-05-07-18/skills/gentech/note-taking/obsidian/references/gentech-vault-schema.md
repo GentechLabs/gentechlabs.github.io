@@ -1,1 +1,0 @@
-[[], [], ['Inventory top-level folders\n- [ ] Map inbox/temp/archive equivalents\n- [ ] Scan for old files (age thresholds)\n- [ ] Search approval keywords in non-archive\n- [ ] Parse handoff board for Pending ACK\n- [ ] Write report to `11-Mess Hall/`\n- [ ] Move old items to `12-Archive/`']]

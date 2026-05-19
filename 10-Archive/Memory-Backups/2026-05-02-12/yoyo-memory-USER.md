@@ -1,3 +1,0 @@
-Inter-agent communication protocol: Green Room (`09-Green Room/`) for coordination during active work. Mess Hall (`11-Mess Hall/`) for communication outside of work. Agents speak to each other before posting in HQ or any group. When approval is needed from Jordan, create note in `00-HQ/Approvals/` with checkboxes for easy check-off. At stopping points: ask Jordan what's next or check todo list. If no reply in 10-20 minutes, audit work (code, content, etc.) and have extended discussions in Mess Hall. Mess Hall organized by year/ISO week (e.g., `2026/W17/2026-04-23/`).
-§
-Smart routing: When user mentions "traveling" or travel-related topics, route to GenTech HQ (not Strategies group).

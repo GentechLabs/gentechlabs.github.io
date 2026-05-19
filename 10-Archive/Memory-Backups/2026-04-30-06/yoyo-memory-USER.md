@@ -1,1 +1,0 @@
-Hackathon prize pool evaluation and hackathon-related tasks route to Gentech Labs agent, not YoYo. YoYo handles DeFi/LP analysis and portfolio strategy only.

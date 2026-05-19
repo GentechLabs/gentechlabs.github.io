@@ -520,3 +520,29 @@
 **Note**: AVAX declined -2.04% (flagged >1.5%). Range was tightened from $9.45–$10.00 to $9.30–$9.60 since last vault entry (May 14). Position data sourced from on-chain lp-position-reader.py (config_fallback mode — bin scan returned null, using config values as proxy). Active bin 8363197 sits within range. Position is USDC-heavy (79%) reflecting price at bottom of range. Pool TVL $4.00M, volume $13.65M/24h. Entry baseline $190.38 → IL -0.3%.
 
 ---
+
+## 2026-05-17 Update (16:19 UTC)
+**AVAX Price**: $9.2989 (-0.35% 24h)
+**USDC Price**: $0.9998 (+0.01% 24h)
+**Price Range**: $9.30–$9.60 (Shape: Bid-Ask)
+**Target**: $9.30–$9.60
+**Balances**: 4.18 AVAX (~$38.87) + 150.41 USDC (~$150.37) = **$189.24**
+**Wallet**: 0.0405 AVAX (~$0.38) + 0.00 USDC (~$0.00) = **$0.38** | **Combined Total**: **$189.62**
+**Fees (24h)**: ~$0.32 (est. from $9.02M vol × 5bps × 0.0047% pool share × 1.5x CL boost; oracle not configured)
+**IL**: +0.2% ✓ below 2% threshold
+**Efficiency**: 4.3% <50% → Micro-DCA boost triggered
+**Action**: ⚠️ Rebalance suggested — efficiency 4.3% critically low + price ($9.2989) $0.0011 below range low ($9.30). Position is USDC-heavy (79/21) as price sits at range floor. Switching to CURVE shape could improve efficiency if price stabilizes near $9.30.
+
+**D5 Milestone Alignment**:
+- Scout tier ($5.00/day target) — est. daily fees $0.32 → below target
+- Price at edge of strategic target band ($9.30 boundary — $0.0011 below)
+- IL +0.2% ✓ below 2% threshold
+- Efficiency 4.3% <50% → Micro-DCA boost triggered
+
+**Shape Suggestion**: Price range 0.7% over last 4 checks — stagnant. Current Bid-Ask shape optimized for edge swings; switching to CURVE could boost fee efficiency if price clusters near $9.30.
+
+**Other Pools**: No additional LFJ pools (AVAX/JOE, USDC/JOE, etc.) detected with active positions for this wallet.
+
+**Note**: Efficiency dropped from 47.9% (12:16 UTC entry) to 4.3% as price declined from $9.37 → $9.30, pushing active bin below position range. Price crossed below $9.30 range low. On-chain scan returned null — config fallback used with latest verified balances. Pool TVL $4.02M, volume $9.02M/24h. Shape stagnation detected (0.7% range over 4 checks) — CURVE recommended over current Bid-Ask.
+
+
