@@ -95,4 +95,4 @@ Network effect: agents paying agents
 - The skill gap IS the moat — if we teach orchestration, users stay on our platform
 
 ---
-*This thesis is the foundation of AAE (Agent Autonomous Economy). Reference it in all hackathon materials.*
+*This thesis is the foundation of AAE (Autonomous Agent Economy). Reference it in all hackathon materials.*

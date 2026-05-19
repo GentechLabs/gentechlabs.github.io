@@ -71,6 +71,36 @@
 
 → *May 11: Kite AI + Solana Frontier submission deadlines*
 
+---
+
+## 🟥 ACTIVE SPRINT — Week of May 19 (W21)
+
+*Post-Kite AI. Focus on active hackathons with approaching deadlines.*
+
+### Priority Hackathons
+
+- [ ] **[P]** **Agora Agents ($50K)** — PRIMARY active build | **Due: May 25** | 🟥 6 days
+- [ ] **[P]** **Arbitrum Open House ($415K)** — Registration due May 25 | **Due: May 25** | 🟥 6 days
+  - AI Agentic track: $15K buildathon + $20K founder house
+  - Fit: DeFi Signal Agent → AI Agentic
+- [ ] **[Q]** **Mantle Turing Test 2026 ($120K+)** — Phase II | **Due: Jun 15** | 🟡 27 days
+  - Tracks: AI Trading & Strategy, Agentic Economy
+  - Fit: DeFi Signal Agent → AI Trading or Agentic Economy
+- [ ] **[Q]** **Swarms ACM** — May 27 | 🟢 Monitor
+- [ ] **[Q]** **Bags FM** — Jun 1 | 🟢 Monitor
+- [ ] **[Q]** **Superteam Solana Bounty ($2.4K)** | 🟢 Needs deadline research
+
+### Completed Builds
+
+- [x] **AgentCash** — x402 payment discovery layer | Built May 19 | ✅ Complete
+  - Registry + marketplace for API providers with x402 pricing
+  - Next.js 14 + SQLite + ampersend SDK
+  - Consider for Agora/Arbitrum submission angle
+
+### Kite AI Status
+
+- [x] **Kite AI Hackathon** — Deadline May 17 passed | 🟡 Awaiting results
+
 ## ❌ DISCARDED
 
 - [x] **[X]** ElevenHacks #4 (Kiro + ElevenLabs) — missed voting window | ✅ Skipped
