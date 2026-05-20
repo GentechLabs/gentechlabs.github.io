@@ -10,7 +10,7 @@
 *   **Tempest Frenzy:** Sustained damage and movement speed buff.
 *   **Orb of Storms:** Trapped lightning damage.
     *   *Support:* **Slow Potency** (Keeps enemies in the kill zone).
-*   **Ice Nova:** Burst damage and crowd control.
+*   **Thunderstorm:** Massive AoE lightning damage (swapped from Ice Nova).
 *   **Mana Drain:** Core sustain skill to refill mana for heavy casts.
 *   **Frozen Locus:** Secondary freeze/damage source.
 
@@ -18,8 +18,8 @@
 1.  **Mobility:** Use Quarterstaff Strike to engage.
 2.  **Clear:** Drop Falling Thunder to break groups.
 3.  **Sustain:** Cast Mana Drain to refill resources instantly.
-4.  **Burst:** Link Ice Nova into Orb of Storms for "freeze and melt" damage.
+4. **Burst:** Cast **Thunderstorm** for massive AoE lightning damage, synergizing with **Orb of Storms** for "electrocute and melt" damage.
 
 ## Goals
-*   Optimize the link between Orb of Storms and Ice Nova.
+*   Optimize the link between Orb of Storms and Thunderstorm.
 *   Maintain high mana efficiency to prevent downtime.

@@ -30,6 +30,15 @@
 
 - [ ] **Voice-first travel agent** — expand Let's FG into a paid service
 - [ ] **Agent payment router** — x402 protocol for recurring agent payments
+- [ ] **Agent Repairathy** (Added May 19)
+  - Slogan: "I've built the agents to help repair you, to help get you back on track."
+  - Therapeutic Layer (Layer 10 or 11 in multi-agent stack)
+  - Emotional wellness companion — daily check-ins, journaling, habit nudging, emotional baseline tracking
+  - Market: AI therapy apps $50B by 2028, 100M+ users
+  - Competitors: Ash (talktoash.com, launched May 11), AVA CALM (launched May 11)
+  - Risk: Illinois/Nevada banned AI psychotherapy — position as wellness/coaching, not therapy
+  - Hackathon fit: QVAC (privacy-first local AI), Google Cloud Rapid Agent, Arbitrum Open House
+  - Status: Concept phase — need to define Layers 1-9, choose target hackathon
 
 ## Gaming (Side Projects)
 
