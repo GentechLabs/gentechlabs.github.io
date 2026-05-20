@@ -134,8 +134,10 @@ This project reinforces lessons from **Cyfrin Updraft — DeFi Security Module**
 - [x] Multi-chain support (Avalanche, Ethereum, Base)
 - [x] README with documentation
 - [x] Cyfrin lesson alignment documented
-- [ ] Agent published to Swarms Marketplace
-- [ ] Tokenization via Frenzy Mode
+- [x] Token launch script (launch_token.py) — ready
+- [ ] Swarms API key needed (get from swarms.world/platform/api-keys)
+- [ ] Agent published to Swarms Marketplace (blocked on API key)
+- [ ] Tokenization via Frenzy Mode (blocked on API key)
 - [ ] Demo video recorded
 - [ ] Submission form completed
 

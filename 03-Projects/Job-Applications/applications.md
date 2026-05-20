@@ -1,6 +1,6 @@
 # Job Applications Tracker
 
-> **Last scan:** 2026-05-19 (daily 8 AM ET cron)
+> **Last scan:** 2026-05-20 (daily 8 AM ET cron)
 > **Source:** [College.xyz Careers](https://www.college.xyz/careers)
 
 ## Matching Roles (Remote, ≥$25/hr, Crypto/Tech/Engineering)
@@ -28,3 +28,4 @@
 | 2026-05-14 | 14 | 4 | First scan — baseline established |
 | 2026-05-18 | 14 | 0 | No new listings since baseline |
 | 2026-05-19 | 14 | 0 | No changes — same 14 roles |
+| 2026-05-20 | 14 | 0 | No changes — same 14 roles |

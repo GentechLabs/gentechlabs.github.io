@@ -8,7 +8,7 @@ Last updated: 2026-05-18 22:20 UTC (BNB Agent SDK queued)
 | Bags FM | Jun 1 | Memecoin Launchpad / AI Agents | $1M + $3M support | 🔴 ACTIVE | Agent Trading Desk build. Solana. 22 days left. |
 | Google Cloud Rapid Agent | Jun 11 | Gemini + Agent Builder + MCP | $60K | 🟡 QUEUED | 383 participants. Managed by Google on Devpost. |
 | Google for Startups AI Agents | Jun 5 | AI agents prototype → production | $60K + $37.5K credits | 🟡 QUEUED | Register: https://goo.gle/486nbl4 |
-| Somnia | Jun 11 | TBD | $5K+ | 🟡 QUEUED | Job opportunity potential. |
+|| Somnia | Jun 11 | $5K+ | 🔴 ACTIVE | Agent Catcher — dual-agent token risk oracle. Contract compiled, frontend wired with ethers.js, 8 unit tests passing, GitHub repo + Pages live (protojay4789.github.io/agent-catcher/). Awaiting testnet wallet for deploy + E2E test. |
 | Agora Agents (Canteen × Circle) | May 25 | AI Agents on Arc (EVM L1) | $50K | 🔴 ACTIVE | Scaffolded. RFB 04 (Adaptive Portfolio Manager). Contracts + agent + UI scaffolded. Jordan in both Discords. Faucet bookmarked. |
 | Swarms ACM | May 27 | Finance & Market Analysis | $30K | 🟡 QUEUED | LP Monitor → marketplace agent. 16 days left. Tech assessment done. |
 | Arbitrum Open House | Reg: May 25 / Sub: Jun 14 | AI Agents (Best Agentic) | $115K ($70K+$15K+$30K) | 🟡 QUEUED | AgentForge portable. Best Agentic track = strongest fit. 164+ registered. |
@@ -47,7 +47,7 @@ Last updated: 2026-05-18 22:20 UTC (BNB Agent SDK queued)
 4. **11Labs Hackathon** — 🟡 QUEUED. Pending API key + details from Jordan.
 5. **Swarms ACM** — QUEUED. Deadline May 27. LP Monitor → marketplace agent. Tokenization for Swarms.
 6. **Bags FM** — ACTIVE. Deadline Jun 1. Agent Trading Desk build.
-7. **Somnia** — QUEUED. Deadline Jun 11. AI agent platform, on-chain LLM inference. Good fit for multi-agent setup.
+7. **Somnia** — 🔴 ACTIVE. Deadline Jun 11. Agent Catcher: dual-agent token risk oracle. Contract compiled, frontend wired with ethers.js, 8 unit tests passing, GitHub repo + Pages live. Awaiting testnet wallet for deploy + E2E test.
 8. **Dev3pack Bridge Accelerator** — 🟡 QUEUED. Jun 12. Solana. Jordan to provide details.
 9. **Google (Cloud Rapid Agent + for Startups)** — QUEUED. Deadlines Jun 5-11.
 10. **BNB Agent SDK** — 🟡 QUEUED. ERC-8004 identity + APEX commerce. Python SDK. BSC/MegaFuel. Keep an eye out.
