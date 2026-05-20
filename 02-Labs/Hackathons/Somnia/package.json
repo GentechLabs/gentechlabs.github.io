@@ -1,0 +1,22 @@
+{
+  "name": "agent-catcher",
+  "version": "1.0.0",
+  "description": "Agent Catcher — On-chain token risk scoring using Somnia AI agents",
+  "main": "index.js",
+  "scripts": {
+    "compile": "hardhat compile",
+    "deploy:catcher": "hardhat run contracts/deploy.ts --network somnia",
+    "invoke:catcher": "hardhat run contracts/invoke.ts --network somnia --",
+    "test": "hardhat test"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^5.0.0",
+    "@nomicfoundation/hardhat-viem": "^2.0.0",
+    "hardhat": "^2.22.0",
+    "typescript": "^5.4.0",
+    "ts-node": "^10.9.0",
+    "viem": "^2.21.0",
+    "dotenv": "^16.4.0",
+    "@types/node": "^20.0.0"
+  }
+}
