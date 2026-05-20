@@ -1,261 +1,29 @@
-import os
+#!/usr/bin/env python3
+"""
+Portfolio Data Generator — reads canonical source and writes data/projects.json
+Source: 02-Labs/jordan-portfolio/projects.json
+"""
+
 import json
-import re
 from pathlib import Path
 from datetime import datetime
 
-# Use relative path - runs from repo root
-VAULT_PATH = os.path.join(os.path.dirname(__file__), "..", "data", "projects-source")
-OUTPUT_PATH = os.path.join(os.path.dirname(__file__), "..", "data", "projects.json")
+REPO_ROOT = Path(__file__).parent.parent
+SOURCE = REPO_ROOT / '02-Labs' / 'jordan-portfolio' / 'projects.json'
+OUTPUT = REPO_ROOT / 'data' / 'projects.json'
 
-# Project metadata - update this when projects change
-PROJECTS = [
-    {
-        "id": "agent-escrow",
-        "title": "AgentEscrow",
-        "description": "Cross-chain payment infrastructure with AI agent integration. Agents escrow, validate, and release payments automatically. Live on Avalanche & Base with 6+ production positions.",
-        "tech": [
-            "Solidity",
-            "x402",
-            "EVM",
-            "Solana Bridge"
-        ],
-        "status": "completed",
-        "deadline": null,
-        "timeline": "May 2026",
-        "highlight": true,
-        "vault_path": "03-Projects/AAE/agent-escrow-architecture.md"
-    },
-    {
-        "id": "lfj-avax-usdc",
-        "title": "AAE Defi Milestones",
-        "description": "Automated DeFi milestone tracking and position rebalancing across Avalanche, Base, and Solana. Auto-tracking LP positions, DCA scheduling, fee analytics, and dynamic milestone-based adjustments. Managing ~$1K+ in active positions.",
-        "tech": [
-            "React",
-            "Python",
-            "Chainlink",
-            "LFJ"
-        ],
-        "status": "building",
-        "deadline": null,
-        "timeline": "Apr 2026",
-        "highlight": false,
-        "vault_path": "03-Projects/DeFi/LFJ-AVAX-USDC.md"
-    },
-    {
-        "id": "multi-agent-voice",
-        "title": "Multi-Agent Voice Integration",
-        "description": "Four-agent voice system (Gentech, YoYo, DMOB, Desmond) with daily automated briefings. End-to-end TTS pipeline with dialogue generation, voice selection, and audio mixing. Quota active, production-ready.",
-        "tech": [
-            "ElevenLabs",
-            "Python",
-            "Hermes",
-            "Telegram"
-        ],
-        "status": "live",
-        "deadline": null,
-        "timeline": "May 2026",
-        "highlight": true,
-        "vault_path": "03-Projects/Multi-Agent-Voice/"
-    },
-    {
-        "id": "kite-ai",
-        "title": "Kite AI Brain Layer",
-        "description": "Agent economy lifecycle landing on Kite AI settlement layer. AAE integration for decentralized agent marketplace governance. Deployed on Kite L1 testnet.",
-        "tech": [
-            "Kite L1",
-            "Yield Oracles",
-            "Strategy Engine"
-        ],
-        "status": "completed",
-        "deadline": null,
-        "timeline": "May 2026",
-        "highlight": true,
-        "vault_path": "02-Labs/Hackathons/Kite-AI/"
-    },
-    {
-        "id": "personal-finance",
-        "title": "Personal Finance Agent",
-        "description": "Bill reminders, debt consolidation optimizer, crypto-yield routing for idle capital. Voice-first assistant with Telegram notifications. Prototype stage using local LLM (llama3:8b).",
-        "tech": [
-            "Python",
-            "Cron",
-            "Hermes",
-            "DeFi"
-        ],
-        "status": "dev",
-        "deadline": null,
-        "timeline": "May 2026",
-        "highlight": false,
-        "vault_path": "03-Projects/Personal-Finance/"
-    },
-    {
-        "id": "lets-fg",
-        "title": "Let's FG Travel Agent",
-        "description": "Voice-first travel planning agent. Natural language flight/hotel search, price tracking, and booking automation via Pipecat and Maps APIs.",
-        "tech": [
-            "Pipecat",
-            "Maps API",
-            "Python",
-            "Telegram"
-        ],
-        "status": "live",
-        "deadline": null,
-        "timeline": "Apr 2026",
-        "highlight": false,
-        "vault_path": "03-Projects/Travel-Agent/"
-    },
-    {
-        "id": "hermes-kanban",
-        "title": "Hermes Kanban",
-        "description": "TUI-based kanban board for autonomous agent task management. Integrated with Hermes agent orchestration for real-time task tracking and handoffs.",
-        "tech": [
-            "Hermes",
-            "Python",
-            "TUI",
-            "SQLite"
-        ],
-        "status": "live",
-        "deadline": null,
-        "timeline": "Mar 2026",
-        "highlight": false,
-        "vault_path": "03-Projects/hermes-kanban/"
-    },
-    {
-        "id": "birdeye-bip",
-        "title": "Birdeye BIP",
-        "description": "On-chain market data adapter for Birdeye ecosystem. Real-time price feeds, order book data, and volume metrics for agent trading strategies.",
-        "tech": [
-            "Solana",
-            "Python",
-            "Data Pipeline"
-        ],
-        "status": "research",
-        "deadline": null,
-        "timeline": "Feb 2026",
-        "highlight": false,
-        "vault_path": "03-Projects/BirdeyeBIP/"
-    },
-    {
-        "id": "tech-payment-router",
-        "title": "Tech Payment Router",
-        "description": "Ethereum payment router with x402 protocol support. Enables automated recurring payments, subscription billing, and micro-transaction routing.",
-        "tech": [
-            "Ethereum",
-            "Solidity",
-            "x402",
-            "Payments"
-        ],
-        "status": "research",
-        "deadline": null,
-        "timeline": "Feb 2026",
-        "highlight": false,
-        "vault_path": "03-Projects/tech-burn-test/"
-    },
-    {
-        "id": "bags-fm",
-        "title": "Bags FM",
-        "description": "AI agent trading desk for memecoin analysis and trading on Solana. Real-time market signals, agent-driven execution, and portfolio analytics.",
-        "tech": [
-            "Solana",
-            "AI Agents",
-            "Trading",
-            "Python"
-        ],
-        "status": "building",
-        "deadline": "2026-06-01",
-        "timeline": "Jun 2026",
-        "highlight": true,
-        "vault_path": "02-Labs/Hackathons/Bags-FM/"
-    },
-    {
-        "id": "google-cloud-rapid-agent",
-        "title": "Google Cloud Rapid Agent",
-        "description": "Gemini + Agent Builder + MCP integration for Google Cloud hackathon. Autonomous agent pipeline with structured tool calling.",
-        "tech": [
-            "Google Cloud",
-            "Gemini",
-            "MCP",
-            "Python"
-        ],
-        "status": "building",
-        "deadline": "2026-06-11",
-        "timeline": "Jun 2026",
-        "highlight": false,
-        "vault_path": "02-Labs/Hackathons/Google-Cloud/"
-    },
-    {
-        "id": "somnia",
-        "title": "Somnia",
-        "description": "Hackathon submission for Somnia. TBD scope \u2014 exploring agent economy primitives on Somnia chain.",
-        "tech": [
-            "Somnia",
-            "TBD"
-        ],
-        "status": "building",
-        "deadline": "2026-06-11",
-        "timeline": "Jun 2026",
-        "highlight": false,
-        "vault_path": "02-Labs/Hackathons/Somnia/"
-    },
-    {
-        "id": "agora-agents",
-        "title": "Agora Agents",
-        "description": "AI portfolio rebalancer on Circle Arc. Adaptive portfolio management for the Canteen \u00d7 Circle \u00d7 Arc hackathon. $50K prize pool.",
-        "tech": [
-            "Circle Arc",
-            "AI Agents",
-            "DeFi",
-            "Python"
-        ],
-        "status": "building",
-        "deadline": "2026-05-25",
-        "timeline": "May 2026",
-        "highlight": true,
-        "vault_path": "02-Labs/Hackathons/Agora/"
-    },
-    {
-        "id": "swarms-acm",
-        "title": "Swarms ACM LP Monitor",
-        "description": "DeFi LP monitoring agent built on Swarms framework. Automated position tracking, rebalance signals, and fee analytics. $30K prize pool.",
-        "tech": [
-            "Swarms",
-            "DeFi",
-            "Python",
-            "LP Monitoring"
-        ],
-        "status": "building",
-        "deadline": "2026-05-27",
-        "timeline": "May 2026",
-        "highlight": true,
-        "vault_path": "02-Labs/Hackathons/Swarms-ACM/"
-    },
-    {
-        "id": "google-startups",
-        "title": "Google for Startups",
-        "description": "AI agents prototype-to-production track. Building deployment tooling for agent systems in the Google for Startups AI cohort.",
-        "tech": [
-            "Google",
-            "AI Agents",
-            "Deployment",
-            "Python"
-        ],
-        "status": "building",
-        "deadline": "2026-06-05",
-        "timeline": "Jun 2026",
-        "highlight": false,
-        "vault_path": "02-Labs/Hackathons/Google-Startups/"
-    }
-]
+if not SOURCE.exists():
+    print(f"Source not found: {SOURCE}")
+    exit(1)
 
-if __name__ == "__main__":
-    data = {
-        "projects": PROJECTS,
-        "generated": datetime.now().strftime("%Y-%m-%d %H:%M"),
-        "source": "02-Labs/jordan-portfolio/projects.json"
-    }
-    
-    output = Path(OUTPUT_PATH)
-    output.parent.mkdir(parents=True, exist_ok=True)
-    output.write_text(json.dumps(data, indent=2))
-    print(f"✅ Generated {len(data['projects'])} projects")
+with open(SOURCE) as f:
+    data = json.load(f)
+
+# Ensure count field
+data['count'] = len(data.get('projects', []))
+data['generated'] = datetime.now().strftime("%Y-%m-%d %H:%M")
+data['source'] = "02-Labs/jordan-portfolio/projects.json"
+
+OUTPUT.parent.mkdir(parents=True, exist_ok=True)
+OUTPUT.write_text(json.dumps(data, indent=2))
+print(f"Generated {data['count']} projects → {OUTPUT}")
