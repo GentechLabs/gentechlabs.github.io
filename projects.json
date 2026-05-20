@@ -176,16 +176,19 @@
     },
     {
       "id": "somnia",
-      "title": "Somnia",
-      "description": "Hackathon submission for Somnia. TBD scope \u2014 exploring agent economy primitives on Somnia chain.",
+      "title": "Agent Catcher",
+      "description": "On-chain token risk oracle using Somnia's dual-agent pattern \u2014 JSON API agent fetches GoPlus security data, LLM agent classifies risk level. Live demo on Somnia testnet.",
       "tech": [
+        "Solidity",
         "Somnia",
-        "TBD"
+        "Hardhat",
+        "GoPlus API",
+        "Ethers.js"
       ],
       "status": "building",
       "deadline": "2026-06-11",
       "timeline": "Jun 2026",
-      "highlight": false,
+      "highlight": true,
       "vault_path": "02-Labs/Hackathons/Somnia/"
     },
     {
@@ -235,9 +238,32 @@
       "timeline": "Jun 2026",
       "highlight": false,
       "vault_path": "02-Labs/Hackathons/Google-Startups/"
+    },
+    {
+      "id": "sui-overflow",
+      "title": "Sui Overflow 2026",
+      "description": "Porting hackathon agents to Sui Move \u2014 Agent Catcher dual-agent token risk oracle with on-chain risk scoring.",
+      "tech": [
+        "Move",
+        "Sui",
+        "Python",
+        "x402"
+      ],
+      "status": "building",
+      "deadline": "August 2026",
+      "timeline": "3 months",
+      "highlight": true,
+      "vault_path": "02-Labs/Hackathons/Sui-Overflow",
+      "hackathon": "Sui Overflow 2026",
+      "learned": [
+        "Move language",
+        "Object-centric model",
+        "Ability system",
+        "Shared objects"
+      ]
     }
   ],
-  "generated": "2026-05-20 12:20",
-  "count": 15,
+  "generated": "2026-05-20 22:07",
+  "count": 16,
   "source": "02-Labs/jordan-portfolio/projects.json"
 }
