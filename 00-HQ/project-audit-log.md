@@ -9,11 +9,11 @@
 - **kite-agent-commerce** — unsafe `transfer()` in `test/AgentEscrow.t.sol`
 
 ### ❌ Missing
-- **agent-catcher** — Local directory not found (GitHub repo exists)
+- **rugcheck** — Local directory not found (GitHub repo exists)
 
 ### ✅ Clean
 - aegis, adaptive-folio, swarms-acm-hackathon, ghost-mode, birdeye-adapter-bip, agent-economy-solana, agent-economy-kite
 
 ### Audit Queue
 - agent-escrow: needs Foundry dependencies restored (`forge install`)
-- agent-catcher: needs to be cloned from GitHub
+- rugcheck: needs to be cloned from GitHub

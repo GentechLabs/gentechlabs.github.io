@@ -1,7 +1,7 @@
 # 📋 GenTech Status Board
 
-**Last updated:** 2026-05-10 13:45 UTC
-**Updated by:** Gentech (CEO)
+**Last updated:** 2026-05-21 23:00 UTC
+**Updated by:** Gentech (Nightly Sweep)
 
 > Jordan: This is your single file to check. Open it, know everything.
 > Agents: Update this after every meaningful session.
@@ -10,65 +10,69 @@
 
 ## 🔴 Needs Jordan's Attention
 
-- [ ] **Termux SSH key** — Dmob needs your pubkey for mobile VPS access (stale since Apr 18 — still needed?)
-- [ ] **Hackathon priority confirmation** — Kite AI (May 17) → Swarms ACM (May 27) → Bags FM (Jun 1). Confirm or adjust?
+- [ ] **xurl Auth** — Not configured, can't post to X/Twitter. BLOCKER for content pipeline.
+- [ ] **Portfolio Health** — Data drift across sources, missing CSS, avatar issue on ProtoJay4789.github.io
 
 ---
 
 ## 🟢 Active Work
 
-### Kite AI Hackathon — Agent Economy (Deadline: May 17)
+### Agora Agents Hackathon ($50K) — PRIMARY
 - **Status:** In progress
-- **Lead:** DMOB (build), YoYo (DeFi strategy), Desmond (content)
-- **What's done:** Architecture decisions, AAE economy narrative
-- **What's next:** Build sprint this week
-- **Blockers:** None currently
+- **Due:** May 25 (4 days)
+- **Fit:** DeFi Signal Agent → AI Agentic track
 
-### Swarms ACM Hackathon (Deadline: May 27)
-- **Status:** Queued — starts after Kite AI
-- **Lead:** TBD
+### Arbitrum Open House ($415K)
+- **Status:** Registration due May 25
+- **Due:** May 25 (4 days)
+- **AI Agentic Category:** $15K buildathon + $20K founder house
+- **Fit:** DeFi Signal Agent → AI Agentic
 
-### Bags FM Hackathon (Deadline: Jun 1)
-- **Status:** Queued
-- **Concept:** Agent Trading Desk
+### Mantle Turing Test 2026 ($120K+)
+- **Status:** Queued — Phase II
+- **Due:** Jun 15 (25 days)
+- **Tracks:** AI Trading & Strategy, Agentic Economy
+
+### Swarms ACM ($varies)
+- **Status:** Monitor — runbook ready
+- **Due:** May 27 (6 days)
 
 ---
 
 ## ✅ Recently Completed
 
-- **May 10:** Solana Frontier withdrawn (Jordan directive). Work preserved for cross-chain reuse.
-- **May 10:** Hackathon priority stack finalized
-- **May 9:** LFJ rebalance workflow documented
-- **May 8:** Alchemy grant application ($20M Solana Fund)
-- **May 7:** Crime jobs quiet hours implemented
+- **May 21:** AEG Phase 1 MVP complete (53/53 tests)
+- **May 21:** AAE Credit Layer research complete
+- **May 19:** AgentCash x402 payment discovery layer built
+- **May 17:** Kite AI deadline passed (awaiting results)
+- **May 10:** Solana Frontier withdrawn, hackathon priorities finalized
 
 ---
 
-## 📝 Recent Decisions (No Approval Needed)
+## 📝 Recent Decisions
 
-- **May 10:** Kite AI is #1 priority, everything else queued behind it
+- **May 21:** Agent Arena name locked in (approved)
+- **May 21:** Solo operation mode — Jordan + Gentech only
 - **May 10:** All four agents run opencode-go + mimo-v2.5
-- **May 9:** SDKs/dev tools route to DMOB, not YoYo
-- **May 7:** "DeFi Milestones" not "D5" (Jordan correction)
 
 ---
 
 ## 🔮 Coming Up
 
-- **May 17:** Kite AI deadline
-- **May 23:** Jordan's brother's wedding
-- **May 24-28:** Dominican Republic trip
+- **May 25:** Agora Agents + Arbitrum Open House deadlines
 - **May 27:** Swarms ACM deadline
 - **Jun 1:** Bags FM deadline
 - **Jun 5-11:** Google hackathons
+- **Jun 15:** Mantle Turing Test Phase II
 
 ---
 
 ## 📊 Vault Health
 
-- **Approval Queue:** ⚠️ Stale (last updated Apr 18) — needs cleanup
-- **Active Hackathons:** ✅ Current
-- **This Status Board:** ✅ Created today
+- **Approval Queue:** ✅ Clean — no pending items
+- **Considerations:** ✅ Active items current
+- **Working Memory:** ✅ Updated tonight (was 11 days stale)
+- **Status Board:** ✅ Updated tonight (was 11 days stale)
 
 ---
 

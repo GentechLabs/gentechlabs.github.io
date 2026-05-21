@@ -12,6 +12,7 @@ status: Active
 
 | # | Grant Program | Amount | Focus | Status | Notes |
 |---|---------------|--------|-------|--------|-------|
+| 0 | **Alliance AI** | $500K (SAFE) | Crypto & AI accelerator | 📝 Draft ready | `02-Labs/Alliance-AI-Application.md` · Rolling admissions · Interview within 3 days |
 | 1 | **Alchemy $20M Solana Fund** | Up to $25K infra credits | Solana infrastructure | ⏳ Queued — needs project description | https://www.alchemy.com/solana-20m-fund · 5 biz day response · No lock-in |
 | 2 | **Beam Foundation Grants** | TBD | AVAX ecosystem, AI agents | ⏳ Draft exists — needs review | Draft: `03-Strategies/Beam-Grant-Application-Draft.md` |
 | 3 | **Nosana Grants Program** | $5K-$50K (USDC/NOS/GPU) | AI infra, agents, dev tools | ⏳ New — needs draft | https://nosana.com/grants/ · Year-round · ~2 week review |

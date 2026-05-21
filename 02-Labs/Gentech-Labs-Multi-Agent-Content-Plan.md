@@ -1,14 +1,14 @@
 # Gentech Labs YouTube: Multi-Agent Platform Content Plan
 
-## Status: PENDING — Activate once AAE is built and has users
+## Status: PENDING — Activate once Agent Arena is built and has users
 
 ## Series: "The Multi-Agent Platform Wars"
 
-Cover the entire ecosystem, not just AAE. Position Gentech Labs as neutral authority.
+Cover the entire ecosystem, not just Agent Arena. Position Gentech Labs as neutral authority.
 
 ### Video Arc:
 
-1. **"Every AI Agent Framework Explained (And Why They All Suck)"** — AutoGPT, CrewAI, LangGraph, Letta, AAE approach. Brutally honest breakdowns.
+1. **"Every AI Agent Framework Explained (And Why They All Suck)"** — AutoGPT, CrewAI, LangGraph, Letta, Agent Arena approach. Brutally honest breakdowns.
 
 2. **"I Built the Same Agent on 5 Frameworks — Here's Which One Won"** — Actual benchmark video. Devs eat this up.
 
@@ -18,17 +18,17 @@ Cover the entire ecosystem, not just AAE. Position Gentech Labs as neutral autho
 
 5. **"Pay-Per-Launch: How Multi-Agent Platforms Will Actually Make Money"** — Monetization deep-dive.
 
-### Why Cover Everyone (Not Just AAE):
+### Why Cover Everyone (Not Just Agent Arena):
 - **Search volume** — people search for comparisons, not unknown projects
 - **Credibility** — earn trust by being fair before pitching your solution
 - **Algorithm** — comparison videos get 3-5x watch time
 - **Funnel** — viewers who watch "why they all suck" will *want* to know what doesn't suck
 
 ### Origin
-Discussed in Gentech HQ, April 19 2026. Jordan's decision: cover the whole space, not just our stack. AAE is the endgame, but the content brings the audience.
+Discussed in Gentech HQ, April 19 2026. Jordan's decision: cover the whole space, not just our stack. Agent Arena is the endgame, but the content brings the audience.
 
 ### Trigger to Activate
-AAE platform is built and has real users. Then pivot to case studies, benchmarks, and monetization stories using our own data.
+Agent Arena platform is built and has real users. Then pivot to case studies, benchmarks, and monetization stories using our own data.
 
 ---
 

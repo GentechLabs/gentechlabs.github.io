@@ -14,6 +14,12 @@ Track changes made to code, infrastructure, and project files. Every entry recor
 
 ## Log
 
+### 2026-05-21 — Project Audit: All projects clean
+- **Scope**: All active repos (9 total)
+- **Change**: Daily health check executed
+- **Why**: Scheduled audit run
+- **Impact**: All 9 projects clean, no new issues, no changes since last audit
+
 ### 2026-05-20 — Project Audit: All issues resolved
 - **Scope**: agent-escrow (workspace), project-audit.py script, audit scope
 - **Change**: 
@@ -21,7 +27,7 @@ Track changes made to code, infrastructure, and project files. Every entry recor
   - agent-escrow now builds clean: 49/49 tests pass, 0 issues
   - Fixed security scanner false positives: skip test/ files for unsafe transfer() check (mock contracts define transfer legitimately)
   - Added `--exclude-dir` flags to grep-based secret scanner (lib, node_modules, test, vendor, cache, out, artifacts, mocks)
-  - Removed agent-catcher from ACTIVE_PROJECTS (directory no longer exists locally)
+  - Removed rugcheck from ACTIVE_PROJECTS (directory no longer exists locally)
 - **Why**: First audit run caught build failures + false positive security flags
 - **Impact**: All 9 projects report clean. Audit script no longer produces false positives on mock contracts
 

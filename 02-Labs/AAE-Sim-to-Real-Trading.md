@@ -1,4 +1,4 @@
-# 🎮💰 AAE Feature: Sim-to-Real Trading Engine
+# 🎮💰 Agent Arena Feature: Sim-to-Real Trading Engine
 
 **Date:** 2026-04-18
 **Source:** Jordan (voice note — "the pot is down" but he kept cooking anyway)
@@ -109,7 +109,7 @@ GROW: User brings friends (referral rewards)
 
 ## The Big Picture
 
-This turns AAE from a TOOL into an ECOSYSTEM:
+This turns Agent Arena from a TOOL into an ECOSYSTEM:
 1. **Learn** → Simulation games
 2. **Earn** → $TECH rewards
 3. **Trade** → Real capital deployment

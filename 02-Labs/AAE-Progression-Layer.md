@@ -1,4 +1,4 @@
-# AAE Progression Layer — Gamified Onboarding
+# Agent Arena Progression Layer — Gamified Onboarding
 
 > "Make rep unlock identity, not just rewards."
 

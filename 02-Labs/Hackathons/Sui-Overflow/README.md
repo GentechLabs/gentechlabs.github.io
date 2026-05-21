@@ -90,8 +90,8 @@ Think of it as a **Chainlink-style oracle, but purpose-built for token safety**.
 ### 1. Clone the repo
 
 ```bash
-git clone https://github.com/ProtoJay4789/agent-catcher-sui.git
-cd agent-catcher-sui
+git clone https://github.com/ProtoJay4789/rugcheck.git
+cd rugcheck
 ```
 
 ### 2. Run the agent monitor (Python)
@@ -139,7 +139,7 @@ sui move test
 ## Project Structure
 
 ```
-agent-catcher-sui/
+rugcheck/
 ├── README.md                          ← you are here
 ├── agent/
 │   ├── monitor.py                     ← CLI agent: scans tokens, scores risk
@@ -193,7 +193,7 @@ Sui's **object model** is uniquely suited for agent infrastructure:
 - [ ] **DEX integration module** — plug Agent Catcher into Cetus/DeepBook as a pre-swap safety check
 - [ ] **Batch scanning** — scan all tokens in a DEX pool in a single transaction
 - [ ] **Mainnet deployment** — graduate from devnet after audit
-- [ ] **SDK release** — drop-in `agent-catcher-sdk` for Python and TypeScript
+- [ ] **SDK release** — drop-in `rugcheck-sdk` for Python and TypeScript
 
 ---
 

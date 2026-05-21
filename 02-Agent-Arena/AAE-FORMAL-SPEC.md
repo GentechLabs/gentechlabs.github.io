@@ -1,0 +1,572 @@
+# Agent Arena — Agent Academy Engine
+
+## Formal Specification v1.0
+
+**Status:** 🟢 TOKENOMICS LOCKED — $TECH as economic backbone confirmed. Pricing decided. Krexa integration resolved. Buyback engine designed.
+**Author:** Gentech (HQ)
+**Date:** 2026-05-21
+**Classification:** Flagship Product — Internal Blueprint
+
+---
+
+## 1. Vision
+
+Agent Arena is a **rogue-lite social trading game** where players manage autonomous AI agents in a simulated DeFi economy. Think *Test Drive Unlimited* meets *FTL* — you outfit agents with loadouts, queue into solo or duo runs, and your risk management skill determines whether you profit or get liquidated.
+
+**The pitch:** Real DeFi mechanics, zero real money. Learn to trade, borrow, manage risk, and build reputation — then take those skills on-chain when you're ready.
+
+**Built on Krexa.** The agent platform is our foundation, not a feature.
+
+---
+
+## 2. Core Identity
+
+| Attribute | Value |
+|-----------|-------|
+| **Genre** | Rogue-lite social trading simulation |
+| **Platform** | Krexa (agent runtime + on-chain integration) |
+| **Tone** | Competitive but educational — stakes feel real, losses teach |
+| **Inspiration** | Test Drive Unlimited (open-world progression), FTL (run-based risk), Balatro (compounding mechanics) |
+| **Target** | Crypto-curious players, DeFi natives wanting practice, hackathon judges |
+| **Revenue** | Free-to-play core + Premium tier (stealth mode, private services) |
+
+---
+
+## 3. Game Architecture
+
+### 3.1 The Run
+
+Each game session is a **run** — a discrete attempt to grow capital through trading, borrowing, and strategic risk-taking. Runs end when:
+
+- **Cash out:** Player voluntarily exits with accumulated profit
+- **Liquidated:** Margin breached, positions auto-closed, run over
+- **Bankrupt:** Balance hits zero, score penalized, fresh start
+- **Time limit:** Market regime shifts close the window
+
+Between runs, your **Credit Score** and **Reputation** persist. This is the meta-progression layer — lose a run, your score drops. Win consistently, your borrowing power grows.
+
+### 3.2 Solo vs. Duo Queue
+
+| Mode | Description |
+|------|-------------|
+| **Solo Queue** | Standard run. You vs. the market. Manage your own agents, your own risk. |
+| **Duo Queue** | Two players share a portfolio pool. Coordinate positions, split risk, or betray (take profit and leave partner overleveraged). Trust mechanics apply. |
+
+**Duo-specific mechanics:**
+- Shared credit pool with individual risk caps
+- Communication layer for strategy coordination
+- "Abandon" action — one player exits, the other absorbs full exposure
+- Duo reputation score (separate from individual)
+
+### 3.3 Market Regimes
+
+The simulated market cycles through regimes that force strategy adaptation:
+
+| Regime | Characteristic | Strategy Shift |
+|--------|---------------|----------------|
+| **Bull** | Rising prices, low volatility | HODL + leveraged longs profitable |
+| **Bear** | Falling prices, high volatility | Shorting + stablecoins shine |
+| **Crab** | Sideways, low volume | Range trading, LP fees earn |
+| **Black Swan** | Flash crash, liquidation cascade | Survival mode — who stays solvent? |
+| **DeFi Summer** | Yield farming bonanza, new pools | Farm early, harvest before rug |
+
+Regime transitions are signaled 3 turns in advance (analyst agent detects). The transition itself is the critical decision window.
+
+---
+
+## 4. Agent Architecture
+
+### 4.1 The Four-Agent Stack
+
+Each player controls a team of autonomous agents. Agents are not just UI wrappers — they have independent logic, reputation, and failure modes.
+
+```
+┌─────────────────────────────────────────────────────────┐
+│                    PLAYER LAYER                         │
+│  Set Preferences → Fund Portfolio → Monitor Dashboard   │
+└──────────────────────┬──────────────────────────────────┘
+                       │
+┌──────────────────────▼──────────────────────────────────┐
+│              📊 AGENT 1: ANALYST                        │
+│  "The Eyes"                                             │
+│  • Market regime detection (trending/ranging/volatile)  │
+│  • On-chain liquidity flow tracking                     │
+│  • TVL shifts, yield changes, volume analysis           │
+│  • Feeds signals → Strategy Brain                       │
+│  • Failure mode: false signals → bad trades             │
+└──────────────────────┬──────────────────────────────────┘
+                       │ signals
+┌──────────────────────▼──────────────────────────────────┐
+│              🧠 AGENT 2: STRATEGY BRAIN                 │
+│  "The Brain"                                            │
+│  • Receives analyst signals + player preferences        │
+│  • Decides allocation rotation: LP → Stake → HODL → Farm│
+│  • Manages risk parameters (drawdown, exposure)         │
+│  • Memory layer — learns from past allocations          │
+│  • Failure mode: overconfident after win streak         │
+└──────────────────────┬──────────────────────────────────┘
+                       │ approved orders
+┌──────────────────────▼──────────────────────────────────┐
+│              ✅ AGENT 3: VALIDATOR                      │
+│  "The Safety Net"                                       │
+│  • Reviews every Brain decision BEFORE execution        │
+│  • Risk checks: position sizing, exposure caps          │
+│  • Reputation scoring — tracks Brain's hit rate         │
+│  • Approve / Reject / Veto with reasoning               │
+│  • Anti-rug: prevents catastrophic single decisions     │
+│  • Failure mode: too conservative → missed opportunities│
+└──────────────────────┬──────────────────────────────────┘
+                       │ validated orders
+┌──────────────────────▼──────────────────────────────────┐
+│              ⚡ AGENT 4: EXECUTOR                       │
+│  "The Hands"                                            │
+│  • Pure on-chain execution — NO decision-making         │
+│  • LP management, staking, farming, swaps               │
+│  • Gas optimization, slippage protection                │
+│  • Transaction receipts + status reporting              │
+│  • Failure mode: execution failure → slippage loss      │
+└──────────────────────┬──────────────────────────────────┘
+                       │
+┌──────────────────────▼──────────────────────────────────┐
+│              🔄 FEEDBACK LOOP                           │
+│  Execution results → Brain learns                       │
+│  Validator scores → Reputation updates                  │
+│  Analyst adjusts → Signal calibration                   │
+│  Player review → Loadout optimization                   │
+└─────────────────────────────────────────────────────────┘
+```
+
+### 4.2 Agent Progression
+
+Agents level up through successful runs. Higher-level agents have better base stats but cost more to equip.
+
+| Level | XP Required | Bonus |
+|-------|-------------|-------|
+| 1 | 0 | Baseline |
+| 2 | 100 XP | +5% accuracy |
+| 3 | 300 XP | +10% accuracy, -10% false signals |
+| 4 | 600 XP | +15% accuracy, early regime detection |
+| 5 | 1000 XP | +20% accuracy, autonomous mode unlocked |
+
+**Agent XP** is earned per run: survive longer = more XP. Liquidation = reduced XP gain.
+
+---
+
+## 5. NFT Loadout System
+
+### 5.1 Agent Loadouts
+
+Each agent can be equipped with **loadout items** — NFTs that modify agent behavior, stats, or unlock abilities.
+
+**Loadout slots per agent:**
+- **Core Module** (1 slot) — Primary behavior modifier
+- **Enhancement** (2 slots) — Stat bonuses
+- **Risk Modifier** (1 slot) — Changes risk parameters
+
+### 5.2 Item Categories
+
+#### Core Modules
+| Item | Effect | Rarity |
+|------|--------|--------|
+| Alpha Predictor | Analyst gets +20% signal accuracy | Legendary |
+| Contrarian Engine | Brain favors counter-trend trades | Epic |
+| Safety Override | Validator auto-veto threshold tightened | Rare |
+| Speed Executor | 50% faster execution, lower slippage | Epic |
+| Yield Maximizer | +15% yield on farming positions | Rare |
+
+#### Enhancements
+| Item | Effect | Rarity |
+|------|--------|--------|
+| Stabilizer | -10% volatility on portfolio | Common |
+| Compounder | +5% compound interest on returns | Uncommon |
+| Shield | Liquidation threshold raised by 10% | Rare |
+| Oracle Lens | Regime detection 1 turn earlier | Epic |
+
+#### Risk Modifiers
+| Item | Effect | Rarity |
+|------|--------|--------|
+| Stop-Loss Protocol | Auto-sell at configurable loss % | Common |
+| Leverage Limiter | Caps max borrow multiplier | Common |
+| Anti-Rug Scanner | Flags suspicious pool contracts | Uncommon |
+| Circuit Breaker | Halts all execution on flash crash | Rare |
+
+### 5.3 Item Acquisition
+
+- **Run rewards:** Complete runs to earn random loot boxes
+- **Achievements:** Specific milestones unlock specific items
+- **Marketplace:** Trade items with other players (Krexa on-chain)
+- **Crafting:** Combine lower-rarity items into higher-rarity ones
+- **Premium drops:** Exclusive items for Premium subscribers
+
+### 5.4 Item Ownership
+
+Items are **NFTs on Krexa**. Own them, trade them, flex them. When you sell an item, it removes from your loadout and goes to the buyer's inventory. No item is permanently bound.
+
+---
+
+## 6. Credit & Reputation System
+
+### 6.1 Credit Score (0–1000)
+
+The composite score that determines your borrowing power and matchmaking bracket.
+
+```
+score = weighted_sum(
+    on_chain_history × 0.30,     // transaction volume, age, consistency
+    protocol_diversity × 0.15,   // breadth of ecosystem participation
+    financial_health × 0.25,     // collateral, repayment, defaults
+    reputation_signals × 0.20,   // vouches, endorsements, dispute outcomes
+    identity_verification × 0.10 // KYA status, ERC-8004 registration
+)
+```
+
+#### Tiers
+| Tier | Score | Borrow Multiplier | Matchmaking |
+|------|-------|-------------------|-------------|
+| Unverified | 0–300 | 0.5x | Tutorial lobbies |
+| Bronze | 300–500 | 1.0x | Bronze tier |
+| Silver | 500–650 | 1.5x | Silver tier |
+| Gold | 650–800 | 2.0x | Gold tier |
+| Platinum | 800–900 | 3.0x | Platinum tier |
+| Diamond | 900–1000 | 5.0x | Diamond tier (top players) |
+
+#### Score Decay
+- Inactivity: -10/month after 30 days inactive
+- Liquidation: -100 per event
+- Missed payment: -50 per event
+- Default: -100 per default event
+- Recovery: rebuild through positive activity (no shortcuts)
+
+### 6.2 Borrowing Mechanics
+
+Players borrow virtual capital against their credit score.
+
+- Borrowed capital has a **simulated interest rate** (varies by tier)
+- **Revenue Router pattern**: 30% of trade profits auto-repay debt
+- Borrowing limit scales with credit score tier
+- Missed payments → score penalty → reduced limit
+- **Borrow by reputation**: Higher rep = better rates, higher limits
+
+### 6.3 Liquidation Engine
+
+When unrealized loss exceeds margin, position auto-closes.
+
+- Liquidation threshold: 80% of borrowed capital (configurable by loadout)
+- **Liquidation penalty**: Score drop + 7-day borrow freeze
+- **Recovery path**: Trade back up, rebuild score, learn from the loss
+- Game teaches: impatience + ignoring bot advisors = liquidation faster
+
+---
+
+## 7. Consequences Framework
+
+Agent Arena is rogue-lite. **Losses have teeth.** This is what makes the game compelling — real stakes without real money.
+
+### 7.1 Run-Level Consequences
+
+| Event | Consequence | Recovery |
+|-------|-------------|----------|
+| **Liquidation** | Run ends, -100 credit score, 7-day borrow freeze | Win next run to offset |
+| **Bankruptcy** | Run ends, -50 credit score, inventory locked 24hrs | Start new run with reduced capital |
+| **Bad debt** | -200 credit score, lose 1 loadout item | Rebuild through 3 successful runs |
+| **Duo abandon** | -150 duo reputation, solo queue locked 48hrs | Complete 2 duo runs without abandon |
+
+### 7.2 Meta-Level Consequences
+
+| Event | Consequence | Recovery |
+|-------|-------------|----------|
+| **5+ consecutive losses** | "Tilted" status — -10% all returns for 24hrs | Wait it out or win 2 in a row |
+| **Exploit attempt** | Flagged account — all loadouts unequipped | Appeal process (24hr review) |
+| **Top 10 leaderboard demotion** | Loss of exclusive items until re-earned | Climb back up |
+| **Credit score < 200** | Restricted to tutorial lobbies | Rebuild from basics |
+
+### 7.3 Why Consequences Matter
+
+The game loop **teaches risk management through loss.** Players who YOLO get liquidated. Players who manage position sizing survive. The credit score makes this persistent — you can't just restart and be fine. This is the core differentiator from every other trading sim.
+
+---
+
+## 8. Premium Tier
+
+### 8.1 Free Tier (Core Game)
+- Full access to solo and duo queues
+- Standard loadout slots (4 per agent)
+- Credit score progression
+- All market regimes
+- Community marketplace access
+
+### 8.2 Premium ("Academy Graduate")
+| Feature | Description |
+|---------|-------------|
+| **Stealth Mode** | Your positions are hidden from other players' Analyst agents. No one can copy-trade you or front-run your moves. |
+| **Private Services** | Access exclusive bot advisors with advanced strategies. Custom risk parameters. Priority queue. |
+| **Extended Loadout** | 2 additional loadout slots per agent (6 total) |
+| **Replay Library** | Review past runs with full decision tree visualization |
+| **Custom Regimes** | Create and share custom market scenarios |
+| **Priority Support** | Faster response to exploits, bugs, balance issues |
+
+### 8.3 Premium Pricing
+
+| Tier | Price | Unlocks |
+|------|-------|---------|
+| **Free** | $0 | Full core game — solo/duo queues, standard loadout, credit scoring, all market regimes |
+| **Plus** | $5/mo | Extended loadout (6 slots per agent), Replay Library, Custom Regimes |
+| **Pro** | $10/mo | Stealth Mode, Private Services (exclusive bot advisors), Priority Queue |
+| **Ultimate** | $15/mo | Everything in Pro + priority support, exclusive premium drops, early access to new features |
+
+- NFT-gated access: Hold a Genesis Agent NFT = permanent Premium (tier TBD)
+- Dual pricing: USDC full price, $TECH 20–30% discount (when token launches)
+
+---
+
+## 9. Krexa Integration
+
+### 9.1 Why Krexa
+
+Krexa provides the agent runtime infrastructure that makes Agent Arena possible:
+
+- **Agent deployment**: Spin up autonomous agents with persistent state
+- **Browser tooling**: Solana-native session management
+- **On-chain identity**: Agent wallets, transaction signing
+- **Marketplace**: NFT minting, trading, discovery
+
+### 9.2 Integration Points
+
+| Agent Arena Component | Krexa Feature |
+|---------------|---------------|
+| Agent Runtime | Krexa agent deployment + persistent state |
+| NFT Loadouts | Krexa NFT minting + marketplace |
+| Credit Score | Krexa on-chain identity + ERC-8004 |
+| Duo Queue | Krexa agent-to-agent communication |
+| Marketplace | Krexa NFT marketplace + trading |
+| Premium | Krexa subscription management |
+
+### 9.3 On-Chain Hooks
+
+Agent Arena bridges game mechanics to real on-chain infrastructure:
+
+- **Credit scores** can eventually port to on-chain reputation (Agent Arena Credit Layer infra)
+- **Agent loadouts** are tradeable NFTs with real value
+- **Top player strategies** can be published as copy-trade templates
+- **Escrow mechanics** enable trustless duo partnerships
+
+---
+
+## 10. Technical Architecture
+
+### 10.1 System Overview
+
+```
+┌─────────────────────────────────────────────────────────┐
+│                    CLIENT LAYER                          │
+│  Web UI (React/Next.js) ←→ WebSocket ←→ Game State      │
+└──────────────────────┬──────────────────────────────────┘
+                       │
+┌──────────────────────▼──────────────────────────────────┐
+│                 GAME SERVER                              │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  │
+│  │  Run Manager  │  │  Matchmaker  │  │  Market Sim  │  │
+│  │  (lifecycle)  │  │  (solo/duo)  │  │  (regimes)   │  │
+│  └──────────────┘  └──────────────┘  └──────────────┘  │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  │
+│  │  Agent Engine │  │  Credit Svc  │  │  NFT Manager │  │
+│  │  (4 agents)   │  │  (scoring)   │  │  (inventory) │  │
+│  └──────────────┘  └──────────────┘  └──────────────┘  │
+└──────────────────────┬──────────────────────────────────┘
+                       │
+┌──────────────────────▼──────────────────────────────────┐
+│                  DATA LAYER                              │
+│  PostgreSQL (player state) + Redis (real-time) +        │
+│  Krexa (NFT + identity) + SQLite (local dev)            │
+└─────────────────────────────────────────────────────────┘
+```
+
+### 10.2 Tech Stack (v1)
+
+| Component | Technology |
+|-----------|------------|
+| **Client** | React + TypeScript + Canvas (charts) |
+| **Server** | Python (FastAPI) — reuse existing Agent Arena game logic |
+| **Database** | PostgreSQL (prod) / SQLite (dev) |
+| **Real-time** | WebSocket (game state sync) |
+| **Agent Runtime** | Krexa (agent deployment + persistence) |
+| **NFT** | Krexa NFT standard (Solana) |
+| **Auth** | Krexa identity + wallet connection |
+| **Infra** | Docker → cloud deploy |
+
+### 10.3 Existing Code (Reused)
+
+The credit layer game (`/root/workspace/aae-game/`) provides foundational modules:
+
+| Module | LOC | Status | Reuse |
+|--------|-----|--------|-------|
+| `credit_engine.py` | 172 | ✅ Shipped | Core scoring → Game Server Credit Service |
+| `trading.py` | 190 | ✅ Shipped | Spot trading → Market Sim engine |
+| `borrowing.py` | 264 | ✅ Shipped | Borrow mechanics → Credit Service |
+| `risk.py` | 233 | ✅ Shipped | Liquidation → Risk engine |
+| `game.py` | 318 | ✅ Shipped | Game loop → Run Manager |
+
+**Total reusable:** ~1,177 LOC of tested, working game logic.
+
+---
+
+## 11. Exodia Strategy — Modular Hackathon Deployment
+
+Agent Arena is not a monolith. Each layer can standalone as a hackathon submission:
+
+| Layer | What It Does | Best Hackathon Track |
+|-------|-------------|---------------------|
+| **Brain** | Decision-making, strategy engine | AI Agents, Autonomous Systems |
+| **Credit** | x402 agent-to-agent payments | Payments, DeFi Infrastructure |
+| **Agent Marketplace** | On-chain task execution | Agentic, Marketplaces |
+| **LP Monitor** | DeFi liquidity monitoring + signals | DeFi, Data, Analytics |
+| **Agent Escrow** | Trustless agent task escrow | Payments, Trust, Escrow |
+| **Infra** | RPC, deployment, monitoring | Developer Tools, Infrastructure |
+
+**The endgame:** While competitors build single-use tools, we stress-test a modular stack. Each hackathon validates a component in production. Show the pieces first. Show the whole later.
+
+---
+
+## 12. Revenue Model
+
+| Stream | Description | Pricing |
+|--------|-------------|---------|
+| **Premium Subscription** | Tiered access: Plus/Pro/Ultimate | $5 / $10 / $15 per month |
+| **NFT Marketplace** | Loadout item trading fees | 2.5% transaction fee |
+| **Genesis Agent NFTs** | Limited edition starter agents | One-time mint |
+| **Score API Access** | Protocols query agent credit scores | Free tier → $0.001/query |
+| **Premium Data** | Detailed behavioral analytics | $50-500/mo per protocol |
+| **Copy-Trade Templates** | Top player strategy subscriptions | Revenue share |
+
+---
+
+## 13. Roadmap
+
+### Phase 1: Foundation (Current)
+- [x] Credit layer game mechanics (shipped)
+- [x] Hybrid Strategy Brain architecture (approved)
+- [x] Exodia modular strategy (defined)
+- [x] Credit layer infrastructure research (complete)
+- [ ] **This document** — Formal spec (in progress)
+
+### Phase 2: MVP
+- [ ] Web UI — trading dashboard with real-time market
+- [ ] Agent Engine — 4-agent stack wired to game logic
+- [ ] Matchmaker — solo queue with tier-based matchmaking
+- [ ] NFT Loadout — basic inventory system on Krexa
+- [ ] Credit Score — persistent cross-run scoring
+
+### Phase 3: Social
+- [ ] Duo Queue — shared portfolio, trust mechanics
+- [ ] Leaderboards — seasonal rankings
+- [ ] Marketplace — NFT loadout trading
+- [ ] Copy-Trade — follow top players' strategies
+- [ ] Chat/Comms — in-game coordination for duos
+
+### Phase 4: Premium
+- [ ] Stealth Mode — position hiding
+- [ ] Private Services — exclusive bot advisors
+- [ ] Custom Regimes — user-created market scenarios
+- [ ] Replay System — full decision tree review
+
+### Phase 5: On-Chain Bridge
+- [ ] Credit Score portability (cross-chain via CCIP)
+- [ ] Agent identity (ERC-8004)
+- [ ] On-chain escrow for duo partnerships
+- [ ] Strategy publication as on-chain templates
+
+---
+
+## 14. Open Questions
+
+1. ~~**Krexa partnership:** Do we need formal integration approval, or can we build on Krexa permissionlessly?~~ → **RESOLVED:** No formal partnership needed. Krexa has open developer docs and a prompt-based integration kit. Build permissionlessly.
+2. **NFT standard:** Krexa's native NFT standard or custom? Need to check Krexa SDK docs (krexa.xyz, t-credit.vercel.app). SDK appears to be Solana-native with PDA wallets.
+3. **Matchmaking algorithm:** ELO-based? Credit-score-based? Hybrid?
+4. **Season model:** Monthly resets? Quarterly? Permanent with seasonal leaderboards?
+5. **Mobile:** Web-first, but mobile-responsive? Native app later?
+6. ~~**Tokenomics:**~~ → **LOCKED (2026-05-21):** $TECH is the economic backbone of Agent Arena. Buyback engine design confirmed. See Section 16.
+
+---
+
+## 15. Success Criteria
+- [ ] Formal spec reviewed and approved by Jordan
+- [ ] Web UI MVP with basic trading dashboard
+- [ ] 4-agent stack running in solo queue
+- [ ] NFT loadout system functional on Krexa
+- [ ] Credit score persisting across runs
+- [ ] At least one hackathon submission using an Agent Arena layer
+- [ ] 10+ active players in testing
+
+---
+
+## 16. $TECH Tokenomics — The Economic Backbone
+
+**Locked:** 2026-05-21 by Jordan. $TECH is the native economic layer of Agent Arena.
+
+### 16.1 Core Principle
+
+$TECH is not a bolt-on — it is the **economic backbone** of Agent Arena. Every revenue stream in the game flows back to $TECH through a buyback engine, creating a natural demand sink that compounds with the game's growth.
+
+### 16.2 $TECH in Agent Arena
+
+| Use Case | Description |
+|----------|-------------|
+| **Premium Payments** | Premium tiers (Plus/Pro/Ultimate) accept $TECH at **20–30% discount** vs USDC pricing |
+| **NFT Marketplace** | Loadout items can be bought/sold in $TECH |
+| **Crafting Fees** | Combine items using $TECH as gas |
+| **Tournament Entry** | Competitive modes require $TECH entry fees |
+| **Agent Leveling** | Speed-up agent XP with $TECH (optional, not pay-to-win) |
+
+### 16.3 Buyback Engine
+
+Game revenue funnels back to $TECH buybacks, creating a **self-reinforcing demand loop**:
+
+```
+Revenue Sources                →  Buyback Pool  →  $TECH Demand
+──────────────────────────────────────────────────────────────
+Premium Subscriptions (USDC)   ─┐
+NFT Marketplace Fees (2.5%)    ─┤
+Genesis Agent NFT Mints        ─┤              →   Buy $TECH
+Tournament Entry Fees          ─┤              →   Burn or hold
+Crafting Fees                  ─┘
+```
+
+**Buyback allocation:**
+- **40%** — Direct buyback + burn (permanent supply reduction)
+- **30%** — Buyback + hold in treasury (backing reserve)
+- **20%** — Player rewards pool (staking, achievements, seasonal airdrops)
+- **10%** — Development fund (continued building)
+
+### 16.4 The Flywheel
+
+```
+More Players → More Revenue → More Buybacks → Higher $TECH Demand
+     ↑                                                    │
+     └──── Higher Floor Price ←──────────────────────────┘
+```
+
+This is the compounding loop Jordan locked in:
+1. **Growth drives demand** — every new player generates revenue that buys back $TECH
+2. **Scarcity drives price** — buyback + burn reduces circulating supply
+3. **Price drives prestige** — holding $TECH becomes a status signal within Agent Arena
+4. **Prestige drives growth** — players want to be part of a thriving economy
+
+### 16.5 Anti-Whale Protections
+
+To prevent $TECH from becoming a pay-to-win vector:
+- Premium discounts are capped at 30% (not unlimited purchasing power)
+- Agent leveling via $TECH has diminishing returns
+- Tournament brackets separate $TECH-heavy players from free-tier
+- Core gameplay (solo/duo queue, credit scoring) is fully free
+
+### 16.6 Token Velocity Control
+
+High velocity = spend fast, no hold pressure. Controls implemented:
+- **Staking rewards** — lock $TECH for 30/60/90 days, earn boosted rewards
+- **Exclusive items** — some loadouts only purchasable with staked $TECH
+- **Seasonal sinks** — limited-time items/events that absorb $TECH supply
+- **Crafting burns** — combining items permanently removes $TECH from circulation
+
+---
+
+*This document is the single source of truth for Agent Arena. All other Agent Arena docs reference back to this spec. Update as decisions evolve.*

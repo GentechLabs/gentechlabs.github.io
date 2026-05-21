@@ -358,6 +358,30 @@ def create_agent(model_name: str = None, api_key: str = None):
     else:
         os.environ["OPENAI_API_KEY"] = api_key
     
+    # Swarms marketplace configuration
+    USE_CASES = [
+        {
+            "title": "LP Position Health Monitoring",
+            "description": "Track concentrated liquidity positions across LFJ (Avalanche), Uniswap V3 (Ethereum/Base), and other CL protocols. Get real-time price data, pool state, and position status."
+        },
+        {
+            "title": "Impermanent Loss Calculation",
+            "description": "Calculate impermanent loss with concentration-aware modeling. Compare HODL value vs LP value and understand the true cost of providing liquidity."
+        },
+        {
+            "title": "Rebalance Recommendations",
+            "description": "Get actionable rebalance suggestions based on position distance from range edges, current price movement, and fee efficiency metrics."
+        },
+        {
+            "title": "Yield Opportunity Scanning",
+            "description": "Scan multiple pools by APR, TVL, and volume to find the best yield opportunities. Compare risk-adjusted returns across chains."
+        },
+        {
+            "title": "Whale Activity Detection",
+            "description": "Monitor for large liquidity events that could signal smart money movements. Get alerted when whales enter or exit positions."
+        },
+    ]
+    
     lp_agent = Agent(
         agent_name="DeFi LP Monitor",
         agent_description="Monitors concentrated liquidity LP positions with IL tracking, efficiency scoring, and rebalance alerts. Supports LFJ (Avalanche), Uniswap V3 (Ethereum/Base), and other CL protocols.",
@@ -381,6 +405,10 @@ Be concise and actionable. Focus on numbers and decisions, not fluff.""",
         max_loops="auto",
         temperature=0.3,
         max_tokens=4096,
+        tags=["defi", "lp", "monitoring", "impermanent-loss", "yield", "avalanche", "ethereum", "base"],
+        capabilities=["price-tracking", "impermanent-loss", "position-monitoring", "rebalance-alerts", "yield-scanning"],
+        use_cases=USE_CASES,
+        publish_to_marketplace=True,
     )
     
     return lp_agent

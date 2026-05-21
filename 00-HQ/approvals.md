@@ -10,6 +10,7 @@ Items pending Jordan's review. Code and docs — just do it. Grants/spending —
 ## Approved
 
 <!-- Move here after approval -->
+- **2026-05-23**: **Project name: Agent Arena** — locked in. One product, one name, instant clarity.
 
 ## Rejected / Shelved
 

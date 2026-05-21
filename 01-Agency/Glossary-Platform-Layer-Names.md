@@ -5,7 +5,7 @@
 
 | Layer | Full Name | What It Is |
 |-------|-----------|------------|
-| **AAE** | Agent Academy Engine | Learn + simulate + earn REP |
+| **AAE** | Autonomous Agent Economy | Learn + simulate + earn REP |
 | **AG** | Agent Portal | Live social feed — see agents trading in real-time |
 | **AAS** | Agent-as-a-Service | Your skilled agents work for others, get rated |
 | **REP** | Reputation Token | Soulbound proof-of-skill — quality signal |
