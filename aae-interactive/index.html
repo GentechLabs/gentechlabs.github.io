@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agent Arena — Interactive DeFi Demo</title>
+    <style>
+        :root {
+            --bg-primary: #0a0a0a;
+            --bg-card: #111111;
+            --bg-card-hover: #1a1a1a;
+            --border: #222222;
+            --green: #22c55e;
+            --green-light: #86efac;
+            --gold: #fbbf24;
+            --red: #ef4444;
+            --red-light: #fca5a5;
+            --text-primary: #e0e0e0;
+            --text-secondary: #9ca3af;
+            --text-muted: #6b7280;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* --- Top Bar --- */
+        .topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 20px;
+            border-bottom: 1px solid var(--border);
+            background: var(--bg-card);
+        }
+        .topbar-logo {
+            font-size: 1.3em;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        .topbar-logo span { color: var(--green); }
+        .badge {
+            background: var(--border);
+            color: var(--text-secondary);
+            font-size: 0.7em;
+            padding: 4px 10px;
+            border-radius: 12px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* --- Main Layout --- */
+        .main {
+            max-width: 520px;
+            margin: 0 auto;
+            padding: 20px 16px 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            position: relative;
+        }
+
+        /* --- Cards --- */
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        /* --- Stats Card --- */
+        .stats-card { display: flex; flex-direction: column; gap: 16px; }
+        .stat-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .stat-label {
+            font-size: 0.8em;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .stat-value {
+            font-size: 2.2em;
+            font-weight: 700;
+            font-variant-numeric: tabular-nums;
+            transition: color 0.4s;
+        }
+        .stat-value.green { color: var(--green); }
+        .stat-value.red { color: var(--red); }
+
+        /* --- Rep Bar --- */
+        .rep-bar-wrap {
+            width: 100%;
+            height: 10px;
+            background: var(--bg-primary);
+            border-radius: 5px;
+            overflow: hidden;
+            margin-top: 4px;
+        }
+        .rep-bar {
+            height: 100%;
+            border-radius: 5px;
+            transition: width 0.8s cubic-bezier(.4,0,.2,1), background 0.8s;
+        }
+
+        /* --- Tier --- */
+        .tier-display {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .tier-badge {
+            padding: 4px 14px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 0.85em;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        .tier-bronze { background: #78350f; color: #fbbf24; border: 1px solid #92400e; }
+        .tier-unverified { background: #1e1e1e; color: var(--text-muted); border: 1px solid #333; }
+        .tier-frozen { background: #450a0a; color: var(--red); border: 1px solid #7f1d1d; }
+        .tier-silver { background: #1e293b; color: #94a3b8; border: 1px solid #334155; }
+        .tier-upgrade {
+            animation: tierPop 0.6s cubic-bezier(.175,.885,.32,1.275);
+            text-shadow: 0 0 20px rgba(148, 163, 184, 0.6);
+        }
+        @keyframes tierPop {
+            0% { transform: scale(0.5); opacity: 0; }
+            60% { transform: scale(1.3); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        /* --- Buttons --- */
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1em;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.15s, box-shadow 0.3s;
+            letter-spacing: 0.5px;
+        }
+        .btn:active { transform: scale(0.97); }
+        .btn-primary {
+            background: var(--green);
+            color: #000;
+        }
+        .btn-primary:hover { box-shadow: 0 0 30px rgba(34,197,94,0.4); }
+        .btn-glow {
+            animation: glowPulse 2s infinite;
+        }
+        @keyframes glowPulse {
+            0%, 100% { box-shadow: 0 0 10px rgba(34,197,94,0.3); }
+            50% { box-shadow: 0 0 35px rgba(34,197,94,0.7), 0 0 60px rgba(34,197,94,0.2); }
+        }
+        .btn-long {
+            background: var(--green);
+            color: #000;
+            flex: 1;
+        }
+        .btn-short {
+            background: var(--red);
+            color: #fff;
+            flex: 1;
+        }
+        .btn-outline {
+            background: transparent;
+            color: var(--text-secondary);
+            border: 1px solid var(--border);
+        }
+        .btn-outline:hover { background: var(--bg-card-hover); border-color: var(--text-muted); }
+        .btn-take-profit {
+            background: var(--gold);
+            color: #000;
+        }
+        .btn-try {
+            background: var(--text-muted);
+            color: #000;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 12px;
+        }
+
+        /* --- Tooltip --- */
+        .tooltip {
+            background: #1a1a2e;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 12px 16px;
+            font-size: 0.85em;
+            color: var(--text-secondary);
+            line-height: 1.5;
+            opacity: 0;
+            transform: translateY(-8px);
+            transition: opacity 0.4s, transform 0.4s;
+        }
+        .tooltip.show { opacity: 1; transform: translateY(0); }
+
+        /* --- Chart Card --- */
+        .chart-card { padding: 12px; }
+        .chart-card canvas {
+            width: 100%;
+            height: 280px;
+            border-radius: 8px;
+            display: block;
+        }
+
+        /* --- Position Info --- */
+        .pos-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 8px;
+            text-align: center;
+        }
+        .pos-info .stat-label { font-size: 0.65em; }
+        .pos-info .stat-value { font-size: 1.1em; }
+        .pos-entry, .pos-current { color: var(--text-secondary); }
+
+        /* --- Status Message --- */
+        .status-msg {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.9em;
+            min-height: 24px;
+            line-height: 1.5;
+        }
+
+        /* --- CTA Section --- */
+        .cta-section {
+            text-align: center;
+            padding: 24px 16px;
+        }
+        .cta-section h3 {
+            font-size: 1.1em;
+            color: var(--text-primary);
+            margin-bottom: 6px;
+            font-weight: 600;
+        }
+        .cta-section p {
+            color: var(--text-muted);
+            font-size: 0.85em;
+            margin-bottom: 20px;
+        }
+        .cta-section a {
+            display: block;
+            color: var(--green);
+            text-decoration: none;
+            font-size: 0.85em;
+            margin-top: 12px;
+        }
+        .cta-section a:hover { text-decoration: underline; }
+
+        /* --- Margin Call Overlay --- */
+        .margin-call-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(239,68,68,0.15);
+            z-index: 100;
+            pointer-events: none;
+            opacity: 0;
+        }
+        .margin-call-overlay.flash {
+            animation: marginFlash 0.15s infinite;
+        }
+        @keyframes marginFlash {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 1; }
+        }
+
+        /* --- Screen Shake --- */
+        .shake {
+            animation: shakeAnim 0.5s;
+        }
+        @keyframes shakeAnim {
+            0%, 100% { transform: translateX(0); }
+            10% { transform: translateX(-8px) rotate(-0.5deg); }
+            20% { transform: translateX(8px) rotate(0.5deg); }
+            30% { transform: translateX(-6px) rotate(-0.3deg); }
+            40% { transform: translateX(6px) rotate(0.3deg); }
+            50% { transform: translateX(-4px); }
+            60% { transform: translateX(4px); }
+            70% { transform: translateX(-2px); }
+            80% { transform: translateX(2px); }
+        }
+
+        /* --- Confetti Canvas --- */
+        #confettiCanvas {
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 200;
+        }
+
+        /* --- Section Fade --- */
+        .fade-in {
+            animation: fadeIn 0.5s ease forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- Margin Call Text --- */
+        .margin-call-text {
+            color: var(--red);
+            font-size: 1.6em;
+            font-weight: 900;
+            text-align: center;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            animation: marginTextPulse 0.4s infinite;
+        }
+        @keyframes marginTextPulse {
+            0%, 100% { opacity: 1; text-shadow: 0 0 10px rgba(239,68,68,0.5); }
+            50% { opacity: 0.7; text-shadow: 0 0 30px rgba(239,68,68,0.9); }
+        }
+
+        /* --- Celebration Text --- */
+        .celebrate-text {
+            text-align: center;
+            animation: celebGlow 1s infinite alternate;
+        }
+        @keyframes celebGlow {
+            from { text-shadow: 0 0 8px rgba(251,191,36,0.3); }
+            to { text-shadow: 0 0 24px rgba(251,191,36,0.8); }
+        }
+
+        /* hidden utility */
+        .hidden { display: none !important; }
+    </style>
+</head>
+<body>
+    <!-- Top Bar -->
+    <div class="topbar">
+        <div class="topbar-logo">Agent <span>Arena</span></div>
+        <div class="badge">Interactive Demo</div>
+    </div>
+
+    <!-- Confetti Canvas -->
+    <canvas id="confettiCanvas"></canvas>
+
+    <!-- Margin Call Overlay -->
+    <div class="margin-call-overlay" id="marginOverlay"></div>
+
+    <!-- Main -->
+    <div class="main" id="main">
+
+        <!-- Stats Card -->
+        <div class="card stats-card" id="statsCard">
+            <div class="stat-row">
+                <span class="stat-label">Balance</span>
+                <span class="stat-value green" id="balanceValue">$100</span>
+            </div>
+            <div>
+                <div class="stat-row">
+                    <span class="stat-label">Reputation</span>
+                    <span class="stat-value" id="repValue" style="font-size:1em;">500</span>
+                </div>
+                <div class="rep-bar-wrap">
+                    <div class="rep-bar" id="repBar" style="width:50%; background: linear-gradient(90deg, #22c55e, #86efac);"></div>
+                </div>
+            </div>
+            <div class="stat-row tier-display">
+                <span class="stat-label">Tier</span>
+                <span class="tier-badge tier-bronze" id="tierBadge">Bronze</span>
+            </div>
+        </div>
+
+        <!-- Tooltip -->
+        <div class="tooltip" id="tooltip">
+            💡 Borrowed capital costs rep. Higher rep = better rates.
+        </div>
+
+        <!-- Chart Card -->
+        <div class="card chart-card" id="chartCard">
+            <canvas id="chartCanvas"></canvas>
+        </div>
+
+        <!-- Position Info -->
+        <div class="card hidden" id="positionCard">
+            <div class="pos-info">
+                <div>
+                    <div class="stat-label">Entry</div>
+                    <div class="stat-value pos-entry" id="posEntry">$100</div>
+                </div>
+                <div>
+                    <div class="stat-label">Current</div>
+                    <div class="stat-value pos-current" id="posCurrent">$100</div>
+                </div>
+                <div>
+                    <div class="stat-label">P&L</div>
+                    <div class="stat-value" id="posPnl" style="color:var(--text-muted);">$0.00</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Action Area -->
+        <div id="actionArea"></div>
+
+        <!-- Status Message -->
+        <div class="status-msg" id="statusMsg"></div>
+
+    </div>
+
+<script>
+// ===================== GAME STATE MACHINE =====================
+const STATES = {
+    ENTRY: 'ENTRY',
+    BORROW: 'BORROW',
+    TRADE: 'TRADE',
+    OUTCOME: 'OUTCOME',
+    CTA: 'CTA'
+};
+
+const game = {
+    state: STATES.ENTRY,
+    balance: 100,
+    rep: 500,
+    tier: 'Bronze',
+    borrowed: false,
+    tradeDir: null,     // 'LONG' or 'SHORT'
+    entryPrice: 10000,
+    currentPrice: 10000,
+    pnl: 0,
+    tradeDuration: 0,
+    tradeMaxDuration: 5000,
+    won: false,
+    chartPoints: [],
+    chartRunning: false,
+    confettiParticles: [],
+    animFrame: null,
+    balanceTarget: 100,
+    balanceCurrent: 100,
+};
+
+// ===================== DOM REFS =====================
+const $ = id => document.getElementById(id);
+const balanceEl = $('balanceValue');
+const repValueEl = $('repValue');
+const repBar = $('repBar');
+const tierBadge = $('tierBadge');
+const tooltip = $('tooltip');
+const chartCanvas = $('chartCanvas');
+const chartCtx = chartCanvas.getContext('2d');
+const positionCard = $('positionCard');
+const posEntry = $('posEntry');
+const posCurrent = $('posCurrent');
+const posPnl = $('posPnl');
+const actionArea = $('actionArea');
+const statusMsg = $('statusMsg');
+const marginOverlay = $('marginOverlay');
+const mainEl = $('main');
+const confettiCanvas = $('confettiCanvas');
+const confettiCtx = confettiCanvas.getContext('2d');
+
+// ===================== HELPERS =====================
+function fmt(n) { return '$' + Math.round(n).toLocaleString(); }
+function fmtDec(n) { return '$' + n.toFixed(2); }
+
+function getRepColor(rep) {
+    if (rep >= 500) return 'linear-gradient(90deg, #22c55e, #86efac)';
+    if (rep >= 300) return 'linear-gradient(90deg, #eab308, #fde047)';
+    return 'linear-gradient(90deg, #ef4444, #fca5a5)';
+}
+
+function getTier(rep) {
+    if (rep >= 600) return 'Silver';
+    if (rep >= 400) return 'Bronze';
+    if (rep >= 200) return 'Unverified';
+    return 'Frozen';
+}
+
+function getTierClass(tier) {
+    switch(tier) {
+        case 'Bronze': return 'tier-bronze';
+        case 'Silver': return 'tier-silver';
+        case 'Unverified': return 'tier-unverified';
+        case 'Frozen': return 'tier-frozen';
+        default: return 'tier-bronze';
+    }
+}
+
+// ===================== BALANCE ANIMATION =====================
+function animateBalance(target, duration = 800) {
+    const start = game.balanceCurrent;
+    const diff = target - start;
+    const startTime = performance.now();
+    function tick(now) {
+        const elapsed = now - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        game.balanceCurrent = start + diff * eased;
+        game.balance = Math.round(game.balanceCurrent);
+        balanceEl.textContent = fmt(game.balance);
+        if (progress < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+}
+
+// ===================== REP UPDATE =====================
+function updateRep(newRep) {
+    game.rep = Math.max(0, Math.min(1000, newRep));
+    const pct = (game.rep / 1000) * 100;
+    repBar.style.width = pct + '%';
+    repBar.style.background = getRepColor(game.rep);
+    repValueEl.textContent = game.rep;
+}
+
+// ===================== TIER UPDATE =====================
+function updateTier(newTier) {
+    tierBadge.textContent = newTier;
+    tierBadge.className = 'tier-badge ' + getTierClass(newTier);
+    if (newTier === 'Silver') {
+        tierBadge.classList.add('tier-upgrade');
+        tierBadge.classList.remove('tier-bronze');
+        tierBadge.classList.add('tier-silver');
+    }
+    game.tier = newTier;
+}
+
+// ===================== CHART SETUP =====================
+let chartDpr = 1;
+let chartW = 480;
+let chartH = 280;
+
+function setupChart() {
+    const rect = chartCanvas.getBoundingClientRect();
+    chartDpr = window.devicePixelRatio || 1;
+    chartW = rect.width;
+    chartH = rect.height;
+    chartCanvas.width = chartW * chartDpr;
+    chartCanvas.height = chartH * chartDpr;
+    chartCtx.setTransform(chartDpr, 0, 0, chartDpr, 0, 0);
+}
+
+function drawChartIdle() {
+    chartCtx.clearRect(0, 0, chartW, chartH);
+    // Draw grid
+    chartCtx.strokeStyle = '#1a1a1a';
+    chartCtx.lineWidth = 1;
+    for (let y = 40; y < chartH; y += 50) {
+        chartCtx.beginPath();
+        chartCtx.moveTo(0, y);
+        chartCtx.lineTo(chartW, y);
+        chartCtx.stroke();
+    }
+    // Placeholder text
+    chartCtx.fillStyle = '#333';
+    chartCtx.font = '14px system-ui';
+    chartCtx.textAlign = 'center';
+    chartCtx.fillText('📈 Price chart', chartW / 2, chartH / 2 - 10);
+    chartCtx.fillText('Starts when you open a position', chartW / 2, chartH / 2 + 16);
+}
+
+function drawChart() {
+    const points = game.chartPoints;
+    if (points.length < 2) return;
+
+    chartCtx.clearRect(0, 0, chartW, chartH);
+
+    // Grid
+    chartCtx.strokeStyle = '#1a1a1a';
+    chartCtx.lineWidth = 1;
+    for (let y = 40; y < chartH; y += 50) {
+        chartCtx.beginPath();
+        chartCtx.moveTo(0, y);
+        chartCtx.lineTo(chartW, y);
+        chartCtx.stroke();
+    }
+
+    // Entry price line
+    const minP = Math.min(...points) * 0.99;
+    const maxP = Math.max(...points) * 1.01;
+    const range = maxP - minP || 1;
+    const entryY = chartH - ((game.entryPrice - minP) / range) * chartH;
+    chartCtx.strokeStyle = '#444';
+    chartCtx.setLineDash([6, 4]);
+    chartCtx.beginPath();
+    chartCtx.moveTo(0, entryY);
+    chartCtx.lineTo(chartW, entryY);
+    chartCtx.stroke();
+    chartCtx.setLineDash([]);
+
+    // Draw candles
+    const maxPoints = Math.floor(chartW / 6);
+    const visiblePoints = points.slice(-maxPoints);
+    const step = chartW / Math.max(visiblePoints.length - 1, 1);
+
+    for (let i = 1; i < visiblePoints.length; i++) {
+        const x = i * step;
+        const y = chartH - ((visiblePoints[i] - minP) / range) * chartH;
+        const prevY = chartH - ((visiblePoints[i-1] - minP) / range) * chartH;
+        const isUp = visiblePoints[i] >= visiblePoints[i-1];
+
+        // Candle body
+        const bodyH = Math.max(Math.abs(y - prevY), 2);
+        const bodyY = Math.min(y, prevY);
+        chartCtx.fillStyle = isUp ? 'rgba(34,197,94,0.8)' : 'rgba(239,68,68,0.8)';
+        chartCtx.fillRect(x - 2, bodyY, 4, bodyH);
+
+        // Wick
+        chartCtx.strokeStyle = isUp ? '#22c55e' : '#ef4444';
+        chartCtx.lineWidth = 1;
+        chartCtx.beginPath();
+        chartCtx.moveTo(x, bodyY);
+        chartCtx.lineTo(x, bodyY + bodyH);
+        chartCtx.stroke();
+    }
+
+    // Current price label
+    const lastPrice = points[points.length - 1];
+    const ly = chartH - ((lastPrice - minP) / range) * chartH;
+    chartCtx.fillStyle = lastPrice >= game.entryPrice ? '#22c55e' : '#ef4444';
+    chartCtx.beginPath();
+    chartCtx.arc(chartW - 8, ly, 4, 0, Math.PI * 2);
+    chartCtx.fill();
+    chartCtx.font = '11px system-ui';
+    chartCtx.textAlign = 'right';
+    chartCtx.fillText('$' + lastPrice.toFixed(0), chartW - 16, ly + 4);
+}
+
+// ===================== TRADE SIMULATION =====================
+function startTrade() {
+    game.entryPrice = 10000;
+    game.currentPrice = 10000;
+    game.pnl = 0;
+    game.tradeDuration = 0;
+    game.tradeMaxDuration = 4000 + Math.random() * 2000;
+    game.chartPoints = [10000];
+    game.chartRunning = true;
+    game.won = false;
+
+    // Determine outcome early but reveal gradually
+    const wonRoll = Math.random();
+    game.won = wonRoll >= 0.7; // 30% chance of profit
+
+    posEntry.textContent = fmt(game.entryPrice);
+    positionCard.classList.remove('hidden');
+    positionCard.classList.add('fade-in');
+
+    // Build direction bias
+    if (game.won) {
+        game.priceBias = game.tradeDir === 'LONG' ? 0.002 : -0.002;
+    } else {
+        game.priceBias = game.tradeDir === 'LONG' ? -0.003 : 0.003;
+    }
+
+    statusMsg.textContent = 'Position open — watching the chart...';
+    actionArea.innerHTML = '';
+
+    let lastTick = performance.now();
+    function tick(now) {
+        if (!game.chartRunning) return;
+        const dt = now - lastTick;
+        lastTick = now;
+        game.tradeDuration += dt;
+
+        // Price random walk
+        const vol = 0.003 + Math.random() * 0.004;
+        const change = (Math.random() - 0.48 + game.priceBias) * vol;
+        game.currentPrice *= (1 + change);
+        game.chartPoints.push(game.currentPrice);
+
+        // P&L calculation
+        const priceDiff = game.currentPrice - game.entryPrice;
+        if (game.tradeDir === 'LONG') {
+            game.pnl = priceDiff * 0.1; // 0.1x leverage display
+        } else {
+            game.pnl = -priceDiff * 0.1;
+        }
+
+        posCurrent.textContent = '$' + game.currentPrice.toFixed(0);
+        posPnl.textContent = (game.pnl >= 0 ? '+' : '') + fmtDec(game.pnl);
+        posPnl.style.color = game.pnl >= 0 ? 'var(--green)' : 'var(--red)';
+
+        drawChart();
+
+        if (game.tradeDuration >= game.tradeMaxDuration) {
+            endTrade();
+            return;
+        }
+        game.animFrame = requestAnimationFrame(tick);
+    }
+    game.animFrame = requestAnimationFrame(tick);
+}
+
+function endTrade() {
+    game.chartRunning = false;
+    if (game.animFrame) cancelAnimationFrame(game.animFrame);
+
+    // Show outcome
+    game.state = STATES.OUTCOME;
+
+    if (!game.won) {
+        showLiquidation();
+    } else {
+        showProfit();
+    }
+}
+
+// ===================== LIQUIDATION =====================
+function showLiquidation() {
+    // Flash margin call
+    marginOverlay.classList.add('flash');
+
+    // Shake screen
+    mainEl.classList.add('shake');
+    setTimeout(() => mainEl.classList.remove('shake'), 500);
+
+    // Show margin call text
+    statusMsg.innerHTML = '<div class="margin-call-text">⚡ MARGIN CALL ⚡</div>';
+
+    // Delay to let drama play
+    setTimeout(() => {
+        marginOverlay.classList.remove('flash');
+
+        // Lose position size
+        game.balance = Math.max(10, game.balance - Math.round(Math.abs(game.pnl)));
+        game.balanceCurrent = game.balance;
+        animateBalance(game.balance, 600);
+
+        updateRep(200);
+        updateTier('Frozen');
+
+        posPnl.style.color = 'var(--red)';
+        posPnl.textContent = fmtDec(game.pnl);
+
+        statusMsg.innerHTML = '<div style="color:var(--red-light)">Run ended. Your credit score took a hit.</div>';
+
+        setTimeout(() => {
+            actionArea.innerHTML = `<button class="btn btn-try" onclick="resetGame()">Try Again</button>`;
+            actionArea.classList.add('fade-in');
+            showCTA();
+        }, 1200);
+    }, 1800);
+}
+
+// ===================== PROFIT =====================
+function showProfit() {
+    // Show take profit button
+    actionArea.innerHTML = `<button class="btn btn-take-profit" id="btnTakeProfit" onclick="takeProfit()">🎯 Take Profit (+${fmtDec(game.pnl)})</button>`;
+    actionArea.classList.add('fade-in');
+    statusMsg.textContent = 'Price is in your favor! Close early for a bonus.';
+
+    // Auto-close after 3 more seconds
+    game.profitTimer = setTimeout(() => {
+        if (game.state === STATES.OUTCOME) closeProfit();
+    }, 3500);
+}
+
+function takeProfit() {
+    if (game.profitTimer) clearTimeout(game.profitTimer);
+    closeProfit();
+}
+
+function closeProfit() {
+    game.state = STATES.OUTCOME;
+    const profit = Math.max(1, Math.round(game.pnl));
+
+    // Add profit
+    game.balance = game.balance + profit;
+    game.balanceCurrent = game.balance;
+    animateBalance(game.balance, 600);
+
+    // Rep recovery
+    const newRep = Math.min(600, game.rep + 120);
+    updateRep(newRep);
+    const newTier = getTier(newRep);
+    updateTier(newTier);
+
+    posPnl.style.color = 'var(--green)';
+    posPnl.textContent = '+' + fmtDec(game.pnl);
+
+    // Celebration
+    actionArea.innerHTML = '';
+    statusMsg.innerHTML = `<div class="celebrate-text" style="color:var(--green-light)">🎉 Nice trade! +${fmt(profit)} profit. New borrowing power unlocked.</div>`;
+
+    // Confetti!
+    launchConfetti();
+
+    setTimeout(() => {
+        showCTA();
+    }, 2500);
+}
+
+// ===================== CTA =====================
+function showCTA() {
+    setTimeout(() => {
+        actionArea.innerHTML = `
+            <div class="cta-section fade-in">
+                <h3>This is Agent Arena.</h3>
+                <p>Real DeFi mechanics. Zero real money.</p>
+                <button class="btn btn-primary" onclick="window.location.href='#'">Join the Waitlist →</button>
+                <a href="#">Learn more about the credit layer →</a>
+            </div>
+        `;
+    }, 800);
+}
+
+// ===================== CONFETTI =====================
+function launchConfetti() {
+    const colors = ['#22c55e', '#86efac', '#fbbf24', '#fde047', '#fff'];
+    const cw = window.innerWidth;
+    const ch = window.innerHeight;
+    confettiCanvas.width = cw * (window.devicePixelRatio || 1);
+    confettiCanvas.height = ch * (window.devicePixelRatio || 1);
+    confettiCtx.setTransform(window.devicePixelRatio || 1, 0, 0, window.devicePixelRatio || 1, 0, 0);
+
+    game.confettiParticles = [];
+    for (let i = 0; i < 120; i++) {
+        game.confettiParticles.push({
+            x: Math.random() * cw,
+            y: -20 - Math.random() * 200,
+            w: 4 + Math.random() * 6,
+            h: 8 + Math.random() * 12,
+            vx: (Math.random() - 0.5) * 4,
+            vy: 2 + Math.random() * 4,
+            rot: Math.random() * Math.PI * 2,
+            rotSpeed: (Math.random() - 0.5) * 0.2,
+            color: colors[Math.floor(Math.random() * colors.length)],
+            life: 1
+        });
+    }
+
+    let confettiRunning = true;
+    function tickConfetti() {
+        if (!confettiRunning) return;
+        confettiCtx.clearRect(0, 0, cw, ch);
+        let alive = false;
+        for (const p of game.confettiParticles) {
+            p.x += p.vx;
+            p.vy += 0.05;
+            p.y += p.vy;
+            p.rot += p.rotSpeed;
+            if (p.y > ch + 50) { p.life -= 0.02; }
+            if (p.life <= 0) continue;
+            alive = true;
+            confettiCtx.save();
+            confettiCtx.translate(p.x, p.y);
+            confettiCtx.rotate(p.rot);
+            confettiCtx.globalAlpha = Math.max(0, p.life);
+            confettiCtx.fillStyle = p.color;
+            confettiCtx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+            confettiCtx.restore();
+        }
+        if (alive) {
+            requestAnimationFrame(tickConfetti);
+        } else {
+            confettiRunning = false;
+            confettiCtx.clearRect(0, 0, cw, ch);
+        }
+    }
+    requestAnimationFrame(tickConfetti);
+}
+
+// ===================== RESET =====================
+function resetGame() {
+    game.state = STATES.ENTRY;
+    game.balance = 100;
+    game.balanceCurrent = 100;
+    game.rep = 500;
+    game.tier = 'Bronze';
+    game.borrowed = false;
+    game.tradeDir = null;
+    game.pnl = 0;
+    game.chartRunning = false;
+    game.chartPoints = [];
+    if (game.animFrame) cancelAnimationFrame(game.animFrame);
+    if (game.profitTimer) clearTimeout(game.profitTimer);
+
+    balanceEl.textContent = '$100';
+    balanceEl.className = 'stat-value green';
+    updateRep(500);
+    updateTier('Bronze');
+
+    positionCard.classList.add('hidden');
+    tooltip.classList.remove('show');
+    marginOverlay.classList.remove('flash');
+
+    actionArea.innerHTML = '';
+    statusMsg.innerHTML = '';
+
+    showStateEntry();
+    setupChart();
+    drawChartIdle();
+}
+
+// ===================== STATE: ENTRY =====================
+function showStateEntry() {
+    game.state = STATES.ENTRY;
+    actionArea.innerHTML = `
+        <button class="btn btn-primary btn-glow" onclick="handleBorrow()">Borrow $500</button>
+    `;
+    statusMsg.textContent = game.tier === 'Frozen'
+        ? 'Your account is frozen. Repay to unlock borrowing.'
+        : 'Start by borrowing capital against your reputation.';
+}
+
+function handleBorrow() {
+    if (game.tier === 'Frozen') return;
+    game.state = STATES.BORROW;
+    game.borrowed = true;
+
+    // Animate balance 100 -> 600
+    animateBalance(600, 1000);
+
+    // Drop rep
+    updateRep(350);
+    updateTier(getTier(350));
+
+    // Show tooltip
+    tooltip.classList.add('show');
+
+    // After animation, show trade options
+    setTimeout(() => {
+        tooltip.classList.remove('show');
+        showStateTrade();
+    }, 1200);
+}
+
+// ===================== STATE: TRADE =====================
+function showStateTrade() {
+    game.state = STATES.TRADE;
+    actionArea.innerHTML = `
+        <div class="btn-group">
+            <button class="btn btn-long" onclick="pickDirection('LONG')">📈 LONG</button>
+            <button class="btn btn-short" onclick="pickDirection('SHORT')">📉 SHORT</button>
+        </div>
+    `;
+    statusMsg.textContent = 'Pick a direction. Price will move for 4–6 seconds.';
+}
+
+function pickDirection(dir) {
+    game.tradeDir = dir;
+    game.state = STATES.TRADE;
+    startTrade();
+}
+
+// ===================== INIT =====================
+function init() {
+    setupChart();
+    drawChartIdle();
+    showStateEntry();
+
+    window.addEventListener('resize', () => {
+        setupChart();
+        if (!game.chartRunning) drawChartIdle();
+        else drawChart();
+    });
+}
+
+init();
+</script>
+</body>
+</html>
