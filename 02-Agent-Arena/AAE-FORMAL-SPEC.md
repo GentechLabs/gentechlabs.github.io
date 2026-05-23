@@ -577,4 +577,95 @@ High velocity = spend fast, no hold pressure. Controls implemented:
 
 ---
 
+## 17. Integration Layer (Network Effect Strategy)
+
+**Core Principle:** Don't compete — integrate. Build the experience layer, plug into existing infrastructure.
+
+### 17.1 What We Own (Experience Layer)
+- **Game Mechanics**: Loadouts, strategies, reputation, matchmaking
+- **Voice Interface**: Speech Engine integration (real-time voice trading)
+- **User Experience**: Agent Arena app, dashboard, social features
+- **Credit System**: Krexa credit scoring + reputation tracking
+
+### 17.2 What We Integrate (Infrastructure Layer)
+| Partner | Integration | Value |
+|---------|-------------|-------|
+| **Bankr** | Token launches + revenue share | 57% trading fees to agents |
+| **WURK** | Human verification + microtasks | Real-world data + social campaigns |
+| **Swarms** | Agent distribution + marketplace | Reach existing agent users |
+| **EarnFi** | Agent API for jobs + campaigns | x402 native payments |
+| **x402** | Autonomous payments | Solana + Base + Arc support |
+
+### 17.3 Network Effect Play
+- **Be on their platforms** → get their users
+- **Build our platform** → give them reasons to stay
+- **Multiple chains = multiple brains, same body**
+- No rules say we can't be everywhere
+
+### 17.4 The Mantra
+"Multiple chains, multiple brains"
+
+---
+
 *This document is the single source of truth for Agent Arena. All other Agent Arena docs reference back to this spec. Update as decisions evolve.*
+
+### EarnFi Campaign Rewards (Added May 22)
+High reputation = free/discounted social campaigns on EarnFi.
+
+**Reward Tiers:**
+- Diamond (900-1000): Free campaigns monthly
+- Platinum (800-900): 50% discount
+- Gold (650-800): 25% discount
+- Silver (500-650): 10% discount
+- Bronze (300-500): Full price
+- Unverified (0-300): No access
+
+**Incentive:** Play well → build rep → get tools to grow → more growth → higher rep
+
+
+### Rep-as-Currency System (Updated May 22)
+Rep is spendable across the ecosystem — earn by playing, spend on real services.
+
+**Earn Rep:**
+- Complete trades (volume-based)
+- Win matches (solo/duo)
+- Help other players (verification, feedback)
+- Achieve milestones (streaks, first trades, etc.)
+
+**Spend Rep:**
+| Service | Rep Cost | Description |
+|---------|----------|-------------|
+| EarnFi Campaign | 50-200 | Launch social promotion |
+| WURK Job | 25-100 | Hire humans for verification |
+| Premium Feature Unlock | 300 | Voice interface, advanced analytics |
+| NFT Item Purchase | 100-500 | Loadout items in marketplace |
+| Agent Upgrade | 150-400 | Boost agent capabilities |
+
+**The Model:** Speedway rewards — earn points, spend on real services. Not tier-based discounts. Actual spendable currency with tradeoffs.
+
+**Decision Points:** Players must choose how to allocate limited rep across services.
+
+
+### Accountability Layer — Personal Stakes Roasting (Added May 22)
+Risk management through personalized roasts based on user goals.
+
+**Onboarding:**
+- "Tell us about yourself" — what you have, what matters, what you're saving for
+- "What would hurt to lose?" — trip, car, house, relationship
+- Profile locked in — system knows what's at stake
+
+**Roast Triggers:**
+| Behavior | Roast Example |
+|----------|---------------|
+| Doing well | "Keep this up and that trip is looking real nice" |
+| Doing bad | "I guess we don't have to worry about you saving for that trip, huh?" |
+| Getting liquidated | "You ain't going nowhere with trades like this" |
+| Reckless leverage | "You really want to lose that car, don't you?" |
+| Recovering | "Hey, at least you're not sleeping on the couch tonight" |
+| Streak win | "Okay big timer, maybe that vacation IS happening" |
+| Streak loss | "Maybe we should talk about that savings account instead" |
+
+**Why it works:** Personal stakes > abstract numbers. Trading isn't abstract anymore — it's about YOUR life. Humor as risk management.
+
+**Integration:** Agent-Repairathy voices (Good Cop/Bad Cop) deliver the roasts.
+

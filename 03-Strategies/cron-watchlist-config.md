@@ -19,7 +19,7 @@ The cron pulls price data for any symbol listed below.
 - BTC — Bitcoin, market leader
 - SOL — Solana, high-speed L1
 - LINK — Chainlink, oracle network
-- AVAX — Avalanche, AAE home chain (LP position tracked separately)
+- AVAX — Avalanche, AAE home chain (LP position tracked separately) | Buy zones: 03-Strategies/avax-buy-zones.md
 - TAO — Bittensor, AI/ML network
 - XAUt — Tether Gold, gold-backed stable
 - BEAM — Beam, gaming

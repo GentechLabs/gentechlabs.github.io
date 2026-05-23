@@ -38,11 +38,9 @@
   - Value: demonstrates live yield data reading + LLM analysis + autonomous rebalancing
   - Effort: DONE — built May 23, 2026
 
-- [ ] **3. Governance Agent** (Hardest)
-  - Monitors on-chain signals + off-chain governance forums/proposals
-  - Autonomous decision-making: vote recommendations based on multi-source intelligence
-  - Value: most complex showcase of GenLayer's agentic capabilities
-  - Effort: HIGH — multi-source data fusion, voting logic, governance DB integration
+- [x] **3. Governance Agent** ✅ Built May 23 (28/28 tests)
+  - GenLayer Intelligent Contract: Multi-source governance + 5-dimension scoring + vote recommendations
+  - Repo: `/root/genlayer-governance-agent/`
 
 ## Hackathons & Bounties
 
@@ -160,10 +158,26 @@
 
 ## [2026-05-22] Roasting as Content Category
 - [x] Voice rap test — custom voices CAN rap, personality > rhythm
-- [ ] Roasting as formal content pillar (voice-content-production + social-content skills updated)
-- [ ] Educational angle: roast topics to make learning fun (history, tech, science)
-- [ ] Roast battles: multi-voice format for social clips
+- [x] **Roasting as formal content pillar** ✅ Built May 23 (voice-content-production + social-content skills updated, 20+ roast scripts drafted)
+- [x] **Educational angle: roast topics to make learning fun** ✅ Built May 23 (11 scripts: Napoleon, Cleopatra, WWI, Black Holes, DNA, Evolution, Python, PHP, WiFi, Imaginary Numbers, Pi)
+- [x] **Roast battles: multi-voice format for social clips** ✅ Built May 23 (5 battle scripts, 4 voices, production notes)
 - [ ] School/education use case — "roast the subject" as engagement-first learning
+
+## Agentic Task Prioritization — Deadline × Difficulty Matrix (Added May 23)
+*How we decide what to build next*
+
+- **Principle:** Prioritize tasks by deadline urgency FIRST, then difficulty within each deadline bucket
+- **Order:** Easy/quick-wins → Medium → Hard (always within deadline window)
+- **Why:** Momentum matters — knocking out easy tasks clears runway for hard ones
+- **Example:** EVM chains (Arbitrum, Mantle) = port existing contracts (low effort). Solana = new builds (high effort). Same product, different difficulty based on chain compatibility.
+- **Application:**
+  1. Map all tasks with deadlines
+  2. Group by deadline window (urgent / this week / this month / no deadline)
+  3. Within each group, sort easy → hard
+  4. Knock out easy wins first — they compound
+  5. Hard tasks get full attention after easy ones are cleared
+- **When it doesn't apply:** Tasks blocked on external dependencies (approvals, API access) get parked regardless of difficulty
+- **Status:** ✅ OPERATIONALIZED — Full matrix built May 23. See `09-Green Room/hackathon-deadline-difficulty-matrix.md`. Reusable workflow template at `09-Green Room/workflows/deadline-difficulty-prioritization.md`.
 
 ## WURK — The Human Layer of the AI Economy
 - **Date:** 2026-05-23
@@ -201,3 +215,62 @@
 
 **Value:** Agents need real-world data + human feedback. WURK is the bridge. x402 native = fits our stack.
 **Status:** Queued — high priority for hackathon build
+
+## EarnFi Agent API — Agent Identity + Campaigns (Added May 22)
+*Separate from WURK — this is the identity + social growth layer*
+
+- [ ] **Register Agent Arena agent identity** on EarnFi
+- [ ] **Launch social campaigns** (likes, follows, content promotion)
+- [ ] **Integrate with x402 payments** (autonomous USDC)
+- [ ] **Hackathon demo** — agent registers, campaigns, hires humans, executes trade
+- [ ] **Content machine** — "Agent economy" narrative for GenTech
+
+**Value:** Agent identity + social proof + campaign automation. x402 native.
+**Status:** Queued — high priority for hackathon build
+**Related:** WURK.fun integration (human verification layer)
+
+## ChainGPT Web3 AI Grant (Added May 23)
+* $1M grant pool for AI + Web3 projects*
+
+- [ ] **Draft application** — Agent Arena as the project
+- [ ] **Highlight**: AI agents + DeFi + multi-chain + game mechanics
+- [ ] **Submit** via chaingpt.org/web3-ai-grant
+- [ ] **Follow up** — no deadline, rolling applications
+
+**Value:** Free funding, no hackathon pressure. ChainGPT ecosystem access.
+**Status:** Queued — grant queue
+**Fit:** Agent Arena = AI-powered trading game on Solana/Base/Arc ✅
+
+## Dexter x402 SDK — Payment Layer (Added May 23)
+*Chain-agnostic x402 SDK for Solana + Base. React hooks + Express middleware.*
+
+- [ ] **Install SDK** — `npm install @dexterai/x402`
+- [ ] **Add React hooks** to Agent Arena UI (`useX402Payment()`)
+- [ ] **Add Express middleware** to agent API endpoints
+- [ ] **Connect wallets** — Solana + Base
+- [ ] **Test on devnet** — verify payment flow
+- [ ] **Integrate with WURK** — pay humans via x402
+- [ ] **Integrate with EarnFi** — pay for campaigns via x402
+- [ ] **Hackathon demo** — show complete payment flow
+
+**Value:** Production-ready x402 for both chains. Replaces custom x402 work.
+**Status:** Queued — high priority for hackathon build
+**Install:** `npm install @dexterai/x402`
+
+## OOBE Protocol Synapse SAP SDK — Agent Identity Layer (Added May 23)
+*On-chain agent identity on Solana. PDA-based, capabilities, pricing, reputation.*
+
+- [ ] **Install SDK** — `npm install @oobe-protocol-labs/synapse-sap-sdk`
+- [ ] **Register Agent Arena agents** on-chain
+- [ ] **Add capability schemas** (trading, verification, analysis)
+- [ ] **Add pricing tiers** (free, premium, enterprise)
+- [ ] **Add reputation tracking** (feeds into Krexa score)
+- [ ] **Enable agent-to-agent discovery**
+- [ ] **Integrate with WURK** — agents hire humans via OOBE identity
+- [ ] **Integrate with EarnFi** — agents launch campaigns via OOBE identity
+- [ ] **Hackathon demo** — show agent identity + coordination
+
+**Value:** Verifiable on-chain agent identity. Agent-to-agent coordination. Solana native.
+**Status:** Queued — high priority for hackathon build
+**Install:** `npm install @oobe-protocol-labs/synapse-sap-sdk`
+**Docs:** https://explorer.oobeprotocol.ai/docs/sdk/quickstart
