@@ -1,6 +1,6 @@
 # Job Applications Tracker
 
-> **Last scan:** 2026-05-20 (daily 8 AM ET cron)
+> **Last scan:** 2026-05-23 (daily 8 AM ET cron)
 > **Source:** [College.xyz Careers](https://www.college.xyz/careers)
 
 ## Matching Roles (Remote, ≥$25/hr, Crypto/Tech/Engineering)
@@ -29,3 +29,5 @@
 | 2026-05-18 | 14 | 0 | No new listings since baseline |
 | 2026-05-19 | 14 | 0 | No changes — same 14 roles |
 | 2026-05-20 | 14 | 0 | No changes — same 14 roles |
+|| 2026-05-22 | 10 | 0 | Page now shows 10 roles (4 removed incl. Hibachi). No new matches. |
+| 2026-05-23 | 13 | 0 | Page now shows 13 roles. 6 new (all Blockchain.com/Grayscale — in-office, unlisted pay). No new remote ≥$25/hr matches. |

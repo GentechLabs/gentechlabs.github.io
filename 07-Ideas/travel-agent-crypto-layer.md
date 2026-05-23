@@ -1,69 +1,103 @@
-# 💡 Idea: Travel as a Premium Agent Layer
+# 💡 Idea: Gentech Travel — AI Concierge Layer
 
-**Date:** 2026-04-22  
-**Author:** Jordan  
+**Date:** 2026-04-22 (updated 2026-05-22)
+**Author:** Jordan
 **Category:** Premium Tier Feature
+**Status:** Green-lit — scaffold as real project
 
 ---
 
 ## The Concept
 
-Integrate LetsFG (open-source, agent-native flight search) into Gentech's premium subscription tier. Users pay $15-20/mo, get an AI agent that books travel for them — voice/text commands, smart search, crypto payment option.
+AI-powered travel concierge that handles everything — flights, hotels, navigation, itineraries — via voice or text commands. Crypto-native payments, offline maps, and an agent that knows your preferences.
 
 ## Why It's Unique
 
-**No one is doing agent + travel + crypto together.** Most travel platforms:
-- Are web-only (no agent integration)
-- Don't accept crypto
-- Have markups/hidden fees
+**No one does agent + travel + crypto + offline maps together.**
 
-We can offer:
-- Agent-native booking (voice/text commands)
-- Raw airline prices (no markup via LetsFG)
-- Crypto payments (SOL/USDC via x402)
-- Escrow protection (AgentEscrow holds funds until flight confirmed)
+| Competitor | What They Do | What They Don't |
+|-----------|-------------|----------------|
+| Expedia/Booking | Web-only search | No agent, no crypto, markups |
+| Travala | Crypto payments | No AI agent, no offline maps |
+| Google Travel | Good search | No booking agent, no crypto, tracking |
+| **Gentech Travel** | **Full agent stack** | — |
+
+**Our edges:**
+1. **Agent-native** — book via voice/text, not a website. "Find me a flight to Tokyo under $500"
+2. **Crypto payments** — SOL/USDC via x402, zero FX fees, global access
+3. **Offline maps** — Organic Maps integration. Download maps before travel, navigate without data roaming
+4. **Escrow protection** — AgentEscrow holds funds until flight confirmed. No charge-then-cancel scams
+5. **AI itinerary** — agent plans your entire trip, not just flights. Day-by-day with local tips
+6. **No markups** — raw airline prices via LetsFG (200+ connectors)
+
+---
+
+## Freemium Model
+
+### Free Tier (10 searches/month)
+- Flight search via agent (text only)
+- Basic price comparison
+- View 3 destinations/day
+- Organic Maps: download 1 map/month
+
+### Premium ($15/mo)
+- **Unlimited** flight/hotel searches
+- **Agent books for you** — voice + text
+- **Crypto payments** — SOL/USDC/x402
+- **AgentEscrow** protection on all bookings
+- **AI itinerary** — full trip planning with day-by-day schedule
+- **Offline maps** — unlimited downloads, pre-cached for your trip
+- **Destination brief** — local customs, safety, weather, emergency contacts
+- **Auto-receipts** — expense tracking + export
+
+---
 
 ## Architecture
 
 ```
-User → Agent (voice/text) → LetsFG MCP → 200+ connectors → Best price
-                                      ↓
-                              AgentEscrow (escrow)
-                                      ↓
-                              x402 (sub-cent unlock fee)
-                                      ↓
-                              Solana settlement
+User → Agent (voice/text)
+    ├── LetsFG MCP → 200+ flight/hotel connectors → Best price
+    ├── Organic Maps → Offline map download + navigation
+    ├── x402 → Crypto payment (SOL/USDC)
+    ├── AgentEscrow → Hold funds until confirmed
+    └── Gemini/Perplexity → Destination research + itinerary
 ```
 
-## Value Prop
+## The "Stand Out" Features
 
-| Feature | Free | Premium ($15-20/mo) |
-|---------|------|---------------------|
-| Flight search | CLI only | Agent handles it |
-| Booking | Manual | Agent books for you |
-| Payment | Card only | Card + crypto (SOL/USDC) |
-| Escrow | None | AgentEscrow protection |
-| Invoicing | None | Auto-receipts + expense tracking |
+### 1. Trip Intelligence
+Agent doesn't just book — it *briefs* you:
+- "Your hotel is 12 min from Shibuya Station. Here's the metro map."
+- "Weather in Barcelona: 78°F, sunny. Pack light layers."
+- "Local emergency: 112 (EU). Your hotel concierge speaks English."
+
+### 2. Offline-First Travel
+- Pre-download maps for your destination before you fly
+- Navigate without data roaming (Organic Maps)
+- Agent caches your itinerary offline too
+
+### 3. Crypto-Native = Borderless
+- No FX conversion fees
+- Pay with SOL/USDC from anywhere
+- Escrow means you're protected even with crypto
+
+### 4. Voice Concierge
+- "Book me the cheapest flight to Lisbon next Friday"
+- "Add a restaurant near my hotel for Tuesday dinner"
+- "What's the weather at my destination?"
+
+---
 
 ## Next Steps
 
-- [ ] Evaluate LetsFG MCP integration depth
-- [ ] Research crypto travel booking competitors (Travala, etc.)
-- [ ] Add to AAE premium product spec
-- [ ] Prototype: agent + LetsFG + x402 flow
-
-## Extension: Agent-as-Wallet
-
-Agents can act as spending concierges:
-1. **Read balances** — SOL, USDC, SPL tokens
-2. **Suggest payment options** — "You have 12 SOL, want to use 5?"
-3. **Escrow via AgentEscrow** — lock funds until flight confirmed
-4. **Execute booking** — release escrow on confirmation
-5. **Multi-token choice** — user picks which token to spend
-
-**Key innovation:** Delegated spending with escrow protection. User pre-authorizes, agent spends within limits, escrow holds until delivery.
+- [ ] Scaffold GitHub repo (gentech-travel)
+- [ ] Integrate LetsFG MCP connector
+- [ ] Integrate Organic Maps API
+- [ ] Build freemium tier logic
+- [ ] Prototype voice concierge flow
+- [ ] Research Travala pricing model for benchmarking
 
 ---
 
 ## Tags
-`#idea` `#premium` `#travel` `#connector` `#x402` `#solana` `#agentescrow` `#agent-wallet`
+`#idea` `#premium` `#travel` `#concierge` `#x402` `#solana` `#organic-maps` `#letsfg` `#freemium`

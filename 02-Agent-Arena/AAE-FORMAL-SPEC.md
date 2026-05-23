@@ -305,17 +305,24 @@ The game loop **teaches risk management through loss.** Players who YOLO get liq
 | **Custom Regimes** | Create and share custom market scenarios |
 | **Priority Support** | Faster response to exploits, bugs, balance issues |
 
-### 8.3 Premium Pricing
+### 8.3 Pricing Model — "Data Layer is the Product"
 
-| Tier | Price | Unlocks |
-|------|-------|---------|
-| **Free** | $0 | Full core game — solo/duo queues, standard loadout, credit scoring, all market regimes |
-| **Plus** | $5/mo | Extended loadout (6 slots per agent), Replay Library, Custom Regimes |
-| **Pro** | $10/mo | Stealth Mode, Private Services (exclusive bot advisors), Priority Queue |
-| **Ultimate** | $15/mo | Everything in Pro + priority support, exclusive premium drops, early access to new features |
+**Core insight:** The agent is the delivery mechanism. The data layer is the real product. We subsidize the agent with the intelligence.
 
+| Tier | Price | What you get | What we get |
+|------|-------|-------------|-------------|
+| **Free** | $0 | Full agent included — trading signals, market analysis, credit scoring | User behavior data feeds the platform (you're the product) |
+| **Premium** | $15/mo | Privacy opt-out, no data harvesting, full agent access, stealth mode | Recurring revenue, no data harvesting rights |
+| **Pay-per-use** | Variable | Micropayments via x402/Circle — 50¢ for deep route analysis, $2 for full city guide, etc. | Transaction revenue without subscription commitment |
+
+**Key principles:**
+- Free tier is generous — the agent works well, the data is what we monetize
+- Premium removes data harvesting — privacy is the product upgrade
+- Pay-per-use via x402/Circle for premium queries without sub commitment
 - NFT-gated access: Hold a Genesis Agent NFT = permanent Premium (tier TBD)
 - Dual pricing: USDC full price, $TECH 20–30% discount (when token launches)
+
+**AWS analogy:** We subsidize the agent with the intelligence. Free users generate data that makes the platform smarter. Premium users pay to opt out. Pay-per-use captures value from one-off queries.
 
 ---
 
@@ -431,7 +438,8 @@ Agent Arena is not a monolith. Each layer can standalone as a hackathon submissi
 
 | Stream | Description | Pricing |
 |--------|-------------|---------|
-| **Premium Subscription** | Tiered access: Plus/Pro/Ultimate | $5 / $10 / $15 per month |
+| **Premium Subscription** | Privacy opt-out, no data harvesting, full agent access | $15/mo |
+| **Pay-per-use** | Micropayments via x402/Circle for premium queries | Variable (50¢-$2+ per query) |
 | **NFT Marketplace** | Loadout item trading fees | 2.5% transaction fee |
 | **Genesis Agent NFTs** | Limited edition starter agents | One-time mint |
 | **Score API Access** | Protocols query agent credit scores | Free tier → $0.001/query |
@@ -511,7 +519,7 @@ $TECH is not a bolt-on — it is the **economic backbone** of Agent Arena. Every
 
 | Use Case | Description |
 |----------|-------------|
-| **Premium Payments** | Premium tiers (Plus/Pro/Ultimate) accept $TECH at **20–30% discount** vs USDC pricing |
+| **Premium Payments** | Premium tier ($15/mo) accepts $TECH at **20–30% discount** vs USDC pricing |
 | **NFT Marketplace** | Loadout items can be bought/sold in $TECH |
 | **Crafting Fees** | Combine items using $TECH as gas |
 | **Tournament Entry** | Competitive modes require $TECH entry fees |

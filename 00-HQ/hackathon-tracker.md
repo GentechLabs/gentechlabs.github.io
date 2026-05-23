@@ -1,6 +1,6 @@
 # 🏆 Active Hackathon Tracker
 
-Last updated: 2026-05-18 22:20 UTC (BNB Agent SDK queued)
+Last updated: 2026-05-23 (ElevenHacks #10 Speech Engine queued → Labs)
 
 | Hackathon | Dates | Theme | Prizes | Status | Notes |
 |-----------|-------|-------|--------|--------|-------|
@@ -15,7 +15,7 @@ Last updated: 2026-05-18 22:20 UTC (BNB Agent SDK queued)
 | Mantle Turing Test | May 1–Jun 16 (Phase 2 sub: Jun 15) | Agentic Wallets & Economy | $120K (Grand $50K) | 🟢 EVM PORT | Contracts portable from existing agent-economy work. ERC-8004 Identity NFT. |
 | Arbitrum Open House | Reg: May 25 / Sub: Jun 14 | AI Agents (Best Agentic) | $115K ($70K+$15K+$30K) | 🟢 EVM PORT | AgentForge portable. Best Agentic track = strongest fit. 164+ registered. |
 | Dev3pack Bridge Accelerator | Jun 12 | Bridge / Startup focus | TBD | 🟡 QUEUED | Solana. Startup focus. Jordan to provide details. |
-| 11Labs Hackathon | TBD | TBD | TBD | 🟡 QUEUED | Pending API key + details from Jordan. |
+| ElevenHacks #10 Speech Engine | TBD | Real-time voice agents | TBD | 🔴 QUEUED → Labs | Build real-time voice agent w/ ElevenLabs Speech Engine. WebSocket server + browser client. Interruption-aware. We have Steve Harvey + Vanito voices ready. Speech Engine skill loaded. Jordan greenlit May 23 — start building tonight. |
 | BNB Agent SDK | TBD | AI Agent Identity + Commerce | TBD | 🟡 QUEUED | ERC-8004 identity (ERC-721), APEX escrow commerce, Python SDK (`pip install bnbagent`). BSC testnet via MegaFuel. |
 | Solana Frontier | May 11 | Solana | $250K + accelerator | ❌ WITHDRAWN | Jordan directive May 10. Time/debugging constraints. Solana work preserved for cross-chain reuse. |
 
@@ -44,7 +44,7 @@ Last updated: 2026-05-18 22:20 UTC (BNB Agent SDK queued)
 1. **Agora Agents** — 🔴 ACTIVE. Deadline May 25. $50K. RFB 04 scaffolded. Contracts + agent + UI scaffolded. ~40% done. Circle SDK + Arc integration still needed.
 2. **Mantle Turing Test** — 🟢 EVM PORT. Deadline Jun 15. $120K. Easy port from existing contracts.
 3. **Arbitrum Open House** — 🟢 EVM PORT. Reg May 25 / Sub Jun 14. $115K. Easy port — AgentForge ready.
-4. **11Labs Hackathon** — 🟡 QUEUED. Pending API key + details from Jordan.
+4. **ElevenHacks #10 Speech Engine** — 🔴 QUEUED → Labs. Real-time voice agent. We have voices + Speech Engine skill. Jordan greenlit May 23.
 5. **Swarms ACM** — QUEUED. Deadline May 27. LP Monitor → marketplace agent. Tokenization for Swarms.
 6. **Bags FM** — ACTIVE. Deadline Jun 1. Agent Trading Desk build.
 7. **Somnia** — 🔴 ACTIVE. Deadline Jun 11. Agent Catcher: dual-agent token risk oracle. Contract compiled, frontend wired with ethers.js, 8 unit tests passing, GitHub repo + Pages live. Awaiting testnet wallet for deploy + E2E test.

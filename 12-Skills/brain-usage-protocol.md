@@ -11,6 +11,8 @@
 - Write to your domain folder (Labs, Strategies, Entertainment)
 
 ### When Ideas Happen
+- **BRAINSTORM REAL-TIME LOG** — Every brainstorm gets logged to Green Room ideas.md immediately, before the conversation moves on. Don't wait for memory to fill or a stopping point. Write it down NOW.
+- Before proposing a new idea, check the brain (Green Room ideas.md + vault search) for similar prior concepts. Reference them if found.
 - New idea that'll expand → create a dedicated folder, build on it
 - Quick thought → jot in Mess Hall or Green Room
 - Important thing Jordan should see → flag it for his attention
