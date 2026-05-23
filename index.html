@@ -118,6 +118,8 @@
         .status-dev { background: #1c1400; color: #fbbf24; }
         .status-audit { background: #2d1515; color: #fca5a5; }
         .status-completed { background: #0a1628; color: #60a5fa; }
+        .status-building { background: #1c1400; color: #fbbf24; }
+        .status-research { background: #1a0d2e; color: #a855f7; }
         .skills {
             display: flex;
             flex-wrap: wrap;
@@ -581,13 +583,49 @@ html { scroll-behavior: smooth; }
       title: 'Rugcheck — Agent Catcher'
       description: 'Multichain AI agent monitoring token launches, detecting rugs/honeypots/sketchy contracts, and alerting users before they ape in. Full E2E pipeline: token address → scan → score risk → alert.'
       tech: ['Python', 'Move', 'Sui', 'GoPlus API']
-      status: '66 tests passing — E2E pipeline complete'
+      status: 'completed'
       deadline: 'Jun 11, 2026'
       timeline: 'Somnia Hackathon — Agentic Track'
       highlight: true
       vault_path: ''
       hackathon: 'Somnia Overflow 2026'
       learned: ['Multi-channel alert dispatch', 'Weighted risk scoring', 'On-chain assessment registry']
+    },
+    {
+      id: 'genlayer-token-scanner',
+      title: 'GenLayer Token Scanner',
+      description: 'GenLayer Intelligent Contract — scans token security via GoPlus API, calculates weighted risk scores across 11 factors. 15/15 tests passing. Part of GenLayer Builder Program.',
+      tech: ['Python', 'GenLayer', 'GoPlus API', 'Intelligent Contracts'],
+      status: 'completed',
+      deadline: '',
+      timeline: 'May 2026',
+      highlight: true,
+      vault_path: '',
+      hackathon: 'GenLayer Builder Program'
+    },
+    {
+      id: 'genlayer-yield-optimizer',
+      title: 'GenLayer DeFi Yield Optimizer',
+      description: 'GenLayer Intelligent Contract — reads live DeFi Llama yield data, scores pools across 4 dimensions (TVL, stability, IL, APY), recommends optimal allocation by risk tolerance. 32/32 tests passing.',
+      tech: ['Python', 'GenLayer', 'DeFi Llama', 'Intelligent Contracts'],
+      status: 'completed',
+      deadline: '',
+      timeline: 'May 2026',
+      highlight: true,
+      vault_path: '',
+      hackathon: 'GenLayer Builder Program'
+    },
+    {
+      id: 'genlayer-governance-agent',
+      title: 'GenLayer Governance Agent',
+      description: 'GenLayer Intelligent Contract — multi-source governance intelligence (Snapshot, Tally, Boardroom) with 5-dimension scoring and autonomous vote recommendations. 28/28 tests passing.',
+      tech: ['Python', 'GenLayer', 'Governance', 'Intelligent Contracts'],
+      status: 'completed',
+      deadline: '',
+      timeline: 'May 2026',
+      highlight: true,
+      vault_path: '',
+      hackathon: 'GenLayer Builder Program'
     }
   ];
             const filterBtns = document.querySelectorAll('#projects .filter-btn');
@@ -1065,6 +1103,45 @@ html { scroll-behavior: smooth; }
   margin-bottom: 24px;
   line-height: 1.6;
   max-width: 800px;
+}
+
+/* Filter buttons */
+.filter-btn {
+  background: #1a1a1a;
+  border: 1px solid #374151;
+  color: #9ca3af;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.85em;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.filter-btn:hover {
+  border-color: #22c55e;
+  color: #22c55e;
+}
+.filter-btn.active {
+  background: #22c55e;
+  color: #0a0a0a;
+  border-color: #22c55e;
+}
+
+/* Status row */
+.status-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+.deadline {
+  font-size: 0.8em;
+  color: #fca5a5;
+  font-weight: 600;
+}
+.timeline {
+  font-size: 0.8em;
+  color: #9ca3af;
 }
 
 /* Roadmap vertical timeline */
