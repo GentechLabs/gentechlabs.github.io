@@ -31,3 +31,4 @@
 | 2026-05-20 | 14 | 0 | No changes — same 14 roles |
 || 2026-05-22 | 10 | 0 | Page now shows 10 roles (4 removed incl. Hibachi). No new matches. |
 | 2026-05-23 | 13 | 0 | Page now shows 13 roles. 6 new (all Blockchain.com/Grayscale — in-office, unlisted pay). No new remote ≥$25/hr matches. |
+| 2026-05-24 | 13 | 0 | No changes — same 13 roles. No new remote ≥$25/hr matches. |
