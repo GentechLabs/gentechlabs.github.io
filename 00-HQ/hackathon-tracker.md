@@ -1,6 +1,6 @@
 # 🏆 Active Hackathon Tracker
 
-Last updated: 2026-05-23 (ElevenHacks #10 Speech Engine queued → Labs)
+Last updated: 2026-05-24 (Speech Engine repo shipped, Swarms ACM tests added)
 
 | Hackathon | Dates | Theme | Prizes | Status | Notes |
 |-----------|-------|-------|--------|--------|-------|
@@ -10,12 +10,12 @@ Last updated: 2026-05-23 (ElevenHacks #10 Speech Engine queued → Labs)
 | Google for Startups AI Agents | Jun 5 | AI agents prototype → production | $60K + $37.5K credits | 🟡 QUEUED | Register: https://goo.gle/486nbl4 |
 || Somnia | Jun 11 | $5K+ | 🔴 ACTIVE | Rugcheck — AI agent monitoring token launches, detects rugs/honeypots. Contract compiled, frontend wired with ethers.js, 8 unit tests passing, GitHub repo + Pages live (ProtoJay4789.github.io/rugcheck/). Awaiting testnet wallet for deploy + E2E test. |
 || Agora Agents (Canteen × Circle) | May 25 | AI Agents on Arc (EVM L1) | $50K | ✅ BUILD COMPLETE | AdaptiveFolio — AI portfolio manager. 38 tests passing. Live demo: protojay4789.github.io/adaptive-folio. Needs Jordan submission. |
-| Swarms ACM | May 27 | Finance & Market Analysis | $30K | 🟡 QUEUED | LP Monitor → marketplace agent. 16 days left. Tech assessment done. |
+|| Swarms ACM | May 27 | Finance & Market Analysis | $30K | 🟢 READY | LP Monitor agent: 26 tests passing, live API verified (CoinGecko + DexScreener). Repo: ProtoJay4789/swarms-acm-hackathon. Needs SWARMS_API_KEY for marketplace publish. |
 | Arbitrum Open House | Reg: May 25 / Sub: Jun 14 | AI Agents (Best Agentic) | $115K ($70K+$15K+$30K) | 🟡 QUEUED | AgentForge portable. Best Agentic track = strongest fit. 164+ registered. |
 | Mantle Turing Test | May 1–Jun 16 (Phase 2 sub: Jun 15) | Agentic Wallets & Economy | $120K (Grand $50K) | 🟢 EVM PORT | Contracts portable from existing agent-economy work. ERC-8004 Identity NFT. |
 | Arbitrum Open House | Reg: May 25 / Sub: Jun 14 | AI Agents (Best Agentic) | $115K ($70K+$15K+$30K) | 🟢 EVM PORT | AgentForge portable. Best Agentic track = strongest fit. 164+ registered. |
 | Dev3pack Bridge Accelerator | Jun 12 | Bridge / Startup focus | TBD | 🟡 QUEUED | Solana. Startup focus. Jordan to provide details. |
-| ElevenHacks #10 Speech Engine | TBD | Real-time voice agents | TBD | 🔴 QUEUED → Labs | Build real-time voice agent w/ ElevenLabs Speech Engine. WebSocket server + browser client. Interruption-aware. We have Steve Harvey + Vanito voices ready. Speech Engine skill loaded. Jordan greenlit May 23 — start building tonight. |
+|| ElevenHacks #10 Speech Engine | TBD | Real-time voice agents | TBD | 🔴 BUILDING | Speech Engine server (FastAPI) + browser client shipped. Steve Harvey + Vanito personas. Repo: ProtoJay4789/speech-engine. LLM integration + testing next. |
 | BNB Agent SDK | TBD | AI Agent Identity + Commerce | TBD | 🟡 QUEUED | ERC-8004 identity (ERC-721), APEX escrow commerce, Python SDK (`pip install bnbagent`). BSC testnet via MegaFuel. |
 | Solana Frontier | May 11 | Solana | $250K + accelerator | ❌ WITHDRAWN | Jordan directive May 10. Time/debugging constraints. Solana work preserved for cross-chain reuse. |
 
