@@ -1,9 +1,9 @@
 # GenTech Multi-Agent Workflow v1.2
-Last Updated: 2026-05-21 (Nightly Sweep — W22)
+Last Updated: 2026-05-25 (Nightly Sweep)
 
 ## Active Sprint — Week of May 19–25, 2026 (W21/W22)
 
-### Priority Hackathons (4 days remaining)
+### Priority Hackathons (DUE TODAY)
 - **Agora Agents ($50K)** — PRIMARY active build | Due: May 25 | P0
 - **Arbitrum Open House ($415K)** — Registration due May 25 | Due: May 25 | P0
   - AI Agentic track: $15K buildathon + $20K founder house

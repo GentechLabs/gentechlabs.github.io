@@ -30,8 +30,8 @@
 
 ### Priority Hackathons
 
-- [ ] **[P]** **Agora Agents ($50K)** — PRIMARY active build | **Due: May 25** | 🟥 6 days
-- [ ] **[P]** **Arbitrum Open House ($415K)** — Registration due May 25 | **Due: May 25** | 🟥 6 days
+- [ ] **[P]** **Agora Agents ($50K)** — PRIMARY active build | **Due: May 25** | 🟥 TODAY
+- [ ] **[P]** **Arbitrum Open House ($415K)** — Registration due May 25 | **Due: May 25** | 🟥 TODAY
   - AI Agentic track: $15K buildathon + $20K founder house
   - Fit: DeFi Signal Agent → AI Agentic
 - [ ] **[Q]** **Mantle Turing Test 2026 ($120K+)** — Phase II | **Due: Jun 15** | 🟡 27 days

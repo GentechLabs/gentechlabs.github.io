@@ -13,6 +13,9 @@
 - [ ] Voice Learning Companions — awaiting Christel's kid interests
 - [ ] AAE Credit Layer Phase 2 — needs green light to plan
 - [ ] ElevenLabs API key — needs to be set in cron environment
+- [ ] GMGN.AI integration — get API key, install MCP tools, test on Solana. Filed in vault.
+- [ ] **Buy birthday trip flights (Aug/Sep 2026)** — Work approved, cat sitter secured. Book ASAP.
+- [ ] **Apply for grants today** — Hackathon funding could help with trips
 
 ## Waiting On
 - [ ] Agora Agents — Jordan handling submission

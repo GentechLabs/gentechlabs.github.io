@@ -1,6 +1,6 @@
 # 📋 GenTech Status Board
 
-**Last updated:** 2026-05-24 23:00 UTC
+**Last updated:** 2026-05-25 23:00 UTC
 **Updated by:** Gentech (Nightly Sweep)
 
 > Jordan: This is your single file to check. Open it, know everything.
@@ -18,13 +18,13 @@
 ## 🟢 Active Work
 
 ### 🔴 Agora Agents Hackathon ($50K) — PRIMARY
-- **Status:** In progress — DEADLINE TOMORROW
-- **Due:** May 25 (TOMORROW)
+- **Status:** In progress — DEADLINE TODAY
+- **Due:** May 25 (TODAY)
 - **Fit:** DeFi Signal Agent → AI Agentic track
 
 ### 🔴 Arbitrum Open House ($415K)
-- **Status:** Registration due TOMORROW
-- **Due:** May 25 (TOMORROW)
+- **Status:** Registration due TODAY
+- **Due:** May 25 (TODAY)
 - **AI Agentic Category:** $15K buildathon + $20K founder house
 - **Fit:** DeFi Signal Agent → AI Agentic
 
@@ -59,7 +59,7 @@
 
 ## 🔮 Coming Up
 
-- **May 25 (TOMORROW):** Agora Agents + Arbitrum Open House deadlines ⚠️
+- **May 25 (TODAY):** Agora Agents + Arbitrum Open House deadlines ⚠️
 - **May 27:** Swarms ACM deadline
 - **Jun 1:** Bags FM deadline
 - **Jun 5-11:** Google hackathons
