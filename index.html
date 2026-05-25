@@ -658,6 +658,11 @@ html { scroll-behavior: smooth; }
                             ${p.deadline ? `<span class="deadline">DL: ${p.deadline}</span>` : ''}
                             ${p.timeline ? `<span class="timeline">${p.timeline}</span>` : ''}
                         </div>
+                        ${(p.demo_url || p.github_url) ? `
+                        <div class="project-link">
+                            ${p.demo_url ? `<a href="${p.demo_url}" target="_blank">▶ Live Demo</a>` : ''}
+                            ${p.github_url ? `<a href="${p.github_url}" target="_blank" style="margin-left:12px">📦 GitHub</a>` : ''}
+                        </div>` : ''}
                     </div>
                 `).join('');
             }
