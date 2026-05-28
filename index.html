@@ -332,6 +332,100 @@ html { scroll-behavior: smooth; }
   line-height: 1.6;
   margin-bottom: 12px;
 }
+
+/* AAE Stack section */
+.stack-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.stack-card {
+  background: #0a0a0a;
+  border: 1px solid #1a1a1a;
+  border-radius: 12px;
+  padding: 20px;
+  position: relative;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.stack-card:hover {
+  border-color: #22c55e;
+  transform: translateY(-2px);
+}
+.stack-layer {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: #22c55e;
+  color: #000;
+  font-size: 0.7em;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 6px;
+  text-transform: uppercase;
+}
+.stack-card h3 {
+  color: #fbbf24;
+  font-size: 1.1em;
+  margin: 0 0 8px 0;
+}
+.stack-card p {
+  color: #9ca3af;
+  font-size: 0.88em;
+  line-height: 1.5;
+  margin: 0 0 10px 0;
+}
+.stack-tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+.tech-tag {
+  background: #1a1a2e;
+  color: #60a5fa;
+  font-size: 0.72em;
+  padding: 3px 8px;
+  border-radius: 6px;
+  border: 1px solid #2563eb33;
+}
+.stack-chains {
+  color: #6b7280;
+  font-size: 0.8em;
+  margin-bottom: 10px;
+}
+.stack-link {
+  display: inline-block;
+  color: #22c55e;
+  font-size: 0.85em;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s;
+}
+.stack-link:hover {
+  color: #4ade80;
+  text-decoration: underline;
+}
+
+/* Chain comparison */
+.chain-comparison {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 12px;
+  margin: 16px 0;
+}
+.chain-item {
+  background: #0a0a0a;
+  border: 1px solid #1a1a1a;
+  border-radius: 10px;
+  padding: 14px;
+  color: #d1d5db;
+  font-size: 0.88em;
+  line-height: 1.5;
+}
+.chain-item strong {
+  color: #fbbf24;
+}
 .methodology-highlight {
   font-size: 0.9em;
   color: #86efac;
@@ -724,6 +818,148 @@ html { scroll-behavior: smooth; }
 
             </div>
         </div>
+<div class="section" id="aae-stack">
+    <h2>🏗️ The AAE Stack — Modular Agent Infrastructure</h2>
+    <p class="section-desc">
+        <em>Built modular on purpose. Chain-agnostic core with chain-specific adapters. 
+        Every layer works independently, but together they form a complete agent economy.</em>
+    </p>
+    
+    <div class="stack-grid">
+        <!-- Layer 1: Identity -->
+        <div class="stack-card">
+            <div class="stack-layer">Layer 1</div>
+            <h3>🔐 Identity</h3>
+            <p>ERC-8004 agent identity on every chain. Agents prove who they are, build reputation, and get discovered.</p>
+            <div class="stack-tech">
+                <span class="tech-tag">ERC-8004</span>
+                <span class="tech-tag">OOBE Protocol</span>
+            </div>
+            <div class="stack-chains">
+                <strong>Chains:</strong> Solana, EVM (Base, Arbitrum, Mantle)
+            </div>
+            <a href="https://github.com/ProtoJay4789/oobe-protocol" target="_blank" class="stack-link">
+                View Code →
+            </a>
+        </div>
+
+        <!-- Layer 2: Safety -->
+        <div class="stack-card">
+            <div class="stack-layer">Layer 2</div>
+            <h3>🛡️ Safety</h3>
+            <p>46 OWASP ASI rules. Transfer gates, input firewalls, circuit breakers. Every agent action is checked before execution.</p>
+            <div class="stack-tech">
+                <span class="tech-tag">OWASP ASI 10/10</span>
+                <span class="tech-tag">Audit Trail</span>
+            </div>
+            <div class="stack-chains">
+                <strong>Chains:</strong> EVM (all), Solana
+            </div>
+            <a href="https://github.com/ProtoJay4789/Agent-Arena/tree/master/safety" target="_blank" class="stack-link">
+                View Code →
+            </a>
+        </div>
+
+        <!-- Layer 3: Memory -->
+        <div class="stack-card">
+            <div class="stack-layer">Layer 3</div>
+            <h3>🧠 Memory</h3>
+            <p>Echo Brain — 4-layer memory architecture. Working → Short-term → Long-term. Pattern detection, consolidation, cosine similarity search.</p>
+            <div class="stack-tech">
+                <span class="tech-tag">SQLite</span>
+                <span class="tech-tag">Embeddings</span>
+                <span class="tech-tag">Consolidation</span>
+            </div>
+            <div class="stack-chains">
+                <strong>Chains:</strong> Off-chain (agent-local)
+            </div>
+            <a href="https://github.com/ProtoJay4789/Agent-Arena/tree/master/brain" target="_blank" class="stack-link">
+                View Code →
+            </a>
+        </div>
+
+        <!-- Layer 4: Commerce -->
+        <div class="stack-card">
+            <div class="stack-layer">Layer 4</div>
+            <h3>💰 Commerce</h3>
+            <p>Agent-to-agent payments with x402 micropayments. Escrow, validation, automatic release. Agents pay agents for services.</p>
+            <div class="stack-tech">
+                <span class="tech-tag">x402</span>
+                <span class="tech-tag">AgentEscrow</span>
+                <span class="tech-tag">MPP</span>
+            </div>
+            <div class="stack-chains">
+                <strong>Chains:</strong> Base, Solana, Avalanche
+            </div>
+            <a href="https://github.com/ProtoJay4789/kite-agent-commerce" target="_blank" class="stack-link">
+                View Code →
+            </a>
+        </div>
+
+        <!-- Layer 5: Credit -->
+        <div class="stack-card">
+            <div class="stack-layer">Layer 5</div>
+            <h3>📊 Credit</h3>
+            <p>0-1000 credit scoring. Win rate, risk-adjusted returns, consistency, behavior. 5 tiers from "The Gambler" to "The Whale".</p>
+            <div class="stack-tech">
+                <span class="tech-tag">Sharpe Ratio</span>
+                <span class="tech-tag">5 Tiers</span>
+            </div>
+            <div class="stack-chains">
+                <strong>Chains:</strong> Off-chain (aggregated)
+            </div>
+            <a href="https://github.com/ProtoJay4789/Agent-Arena/tree/master/credit_score" target="_blank" class="stack-link">
+                View Code →
+            </a>
+        </div>
+
+        <!-- Layer 6: Voice -->
+        <div class="stack-card">
+            <div class="stack-layer">Layer 6</div>
+            <h3>🎤 Voice</h3>
+            <p>Real-time voice personas. Steve Harvey roasts trades. Vanito spits bars. Trade events trigger voice reactions.</p>
+            <div class="stack-tech">
+                <span class="tech-tag">Edge TTS</span>
+                <span class="tech-tag">ElevenLabs</span>
+            </div>
+            <div class="stack-chains">
+                <strong>Chains:</strong> Off-chain (real-time)
+            </div>
+            <a href="https://github.com/ProtoJay4789/speech-engine" target="_blank" class="stack-link">
+                View Code →
+            </a>
+        </div>
+    </div>
+
+    <!-- Why Modular -->
+    <div class="methodology-card" style="margin-top: 30px;">
+        <h3>🧩 Why Modular? Why Chain-Agnostic?</h3>
+        <p>Every blockchain has different strengths. We built the core once and adapter-swap for each chain:</p>
+        <div class="chain-comparison">
+            <div class="chain-item">
+                <strong>🟢 Solana</strong> — Speed + low cost. Agent microtransactions, high-frequency trading, identity registration. Sub-second finality means agents can coordinate in real-time.
+            </div>
+            <div class="chain-item">
+                <strong>🔵 Base</strong> — Ethereum L2 with Coinbase distribution. AAE token lives here. Consumer-facing agents, token launches, social features. Fast + cheap + massive user base.
+            </div>
+            <div class="chain-item">
+                <strong>🟠 Avalanche</strong> — Institutional DeFi. LP monitoring, yield optimization, large position management. Subnets for enterprise agent deployment.
+            </div>
+            <div class="chain-item">
+                <strong>🔴 Arbitrum</strong> — Highest L2 revenue. Agent task escrow, multi-agent orchestration. Deep DeFi ecosystem for agent-to-agent commerce.
+            </div>
+            <div class="chain-item">
+                <strong>🟡 Mantle</strong> — ERC-8004 identity hub. Agent reputation tracking, credential verification. DAO governance for agent collectives.
+            </div>
+            <div class="chain-item">
+                <strong>🟣 Arc (Agora)</strong> — AI-native chain. Portfolio optimization, regime detection. Built for agents that need to think, not just transact.
+            </div>
+        </div>
+        <div class="methodology-highlight">
+            <em>The same agent can operate on Solana for speed, Base for users, and Avalanche for institutional DeFi — all with one identity, one reputation, one credit score.</em>
+        </div>
+    </div>
+</div>
 <div class="section" id="roadmap">
             <h2>🚀 Projects + Roadmap</h2>
             <p class="roadmap-intro">
