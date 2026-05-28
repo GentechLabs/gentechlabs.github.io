@@ -92,3 +92,7 @@ Last updated: 2026-05-27 (Swarms published, Google for Startups + Mantle registr
 - Governance (✅ built)
 - On-chain identity (✅ built)
 - Audit trail (✅ built)
+
+| ElevenHacks #11 | TBD | D-ID Avatars + ElevenAgents | TBD | 🟡 QUEUED | FINAL hackathon. Speech Engine ready. Need D-ID integration. Link: https://hacks.elevenlabs.io/hackathons/10 |
+
+| Sui Overflow | Jun 21 | Token Risk Oracle (Move) | $500K+ | 🟡 QUEUED | Agent Catcher: dual-agent risk oracle. Move contract built. Repo: ProtoJay4789.github.io/02-Labs/Hackathons/Sui-Overflow. ⚠️ Jordan to verify registration tonight. |

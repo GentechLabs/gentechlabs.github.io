@@ -105,3 +105,14 @@
   - **Revenue model:** $10K-15K/month at scale
   - **AAE integration:** Same stack as Trade Roast (execution, identity, governance, economy, personality, memory)
   - **Action:** Build after current hackathon wave
+
+## GenTech Travels (NEW — May 28)
+- [ ] **GenTech Travels — Travel Companion Platform**
+  - **Concept:** Agentic travel companion — privacy layer ON TOP of Telegram/Discord/X, not standalone app
+  - **Target:** Passport bros community, international travelers
+  - **Key insight:** Don't build a new social network — build a moderation + privacy layer on existing platforms
+  - **Features:** Gender-specific groups, co-ed toggle, content moderation, verification, challenge system, roast layer
+  - **Revenue:** Creator economy (tips, spotlight), premium verification, community features
+  - **Connection:** Uses LetsFG for flight search, AAE stack for agents/governance
+  - **Full brief:** `09-Green Room/designs/gentech-travels-full-brief.md`
+  - **Status:** 🟡 Concept — needs scoping
