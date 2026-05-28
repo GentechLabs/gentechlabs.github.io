@@ -1,8 +1,10 @@
 # 🧳 Trip 1 Shopping & Packing Lists — Jordan + Christel
 
+**Project:** GenTech Travels (formerly LetsFG Travel Agent)
 **Trip:** Aug/Sep 2026 — 10 days, Philippines
 **Created:** May 28, 2026
 **Status:** 🟡 In Progress — gathering items
+**Repo:** `/root/LetsFG/` (flight search toolkit, 180+ airlines)
 
 ---
 
@@ -87,6 +89,10 @@
 ## 👩 Christel's List
 
 ### ✈️ Travel Essentials (MUST HAVE)
+- [ ] **Backup phone** — Jordan to give her one of his backups
+  - Needs: phone + charger + SIM card (Philippine SIM ~₱100-300)
+  - Purpose: Privacy (she currently shares a phone)
+  - Setup before trip: install Grab, Google Maps, WhatsApp
 - [ ] **Suitcase** — Jordan to buy (medium, 24-26 inch, hard-shell recommended)
   - Budget: $30-50 at Target/Walmart
   - Or: Amazon basics 24" hardside (~$40)
@@ -109,11 +115,20 @@
 - [ ] Sunglasses
 - [ ] Swimsuit
 
+**DATE NIGHT OUTFITS 😏:**
+- [ ] 1 cute dress or romper (for BGC/Makati dinners)
+- [ ] 1 nice top + jeans/pants combo
+- [ ] 1 going-out outfit (Poblacion nightlife)
+- [ ] 1 pair heels or dressy sandals
+- [ ] Accessories (jewelry, clutch bag)
+- *Buy当地: night markets have great finds for date night looks*
+
 **BUY IN PHILIPPINES:**
 - Extra clothes (night markets have great deals)
 - Beach cover-up
 - Light cardigan (for air-conditioned malls)
 - Hair accessories
+- More date night options (₱300-800 / $5-14 per piece)
 
 ### 📱 Tech
 - [ ] Phone with Grab app
@@ -170,16 +185,25 @@
 
 ---
 
-## 💡 Travel Companion Feature (Future Product Idea)
+## 💡 Travel Companion Feature — GenTech Travels
 
-**Jordan's Insight:** This could be a product — a travel companion that:
+**Jordan's Insight:** This could be a product — **GenTech Travels** — a travel companion that:
 1. Knows your destination
 2. Recommends what to pack vs buy locally
 3. Finds night markets, street vendors, local shopping
 4. Advises on packing strategy ("pack light, buy there")
 5. Follows up for future trips
+6. Books flights via LetsFG (180+ airlines, zero markup)
 
 **The insight:** Most travel apps focus on booking. This focuses on the EXPERIENCE — what to wear, what to buy, where to shop, how to blend in.
+
+**Tech Stack:**
+- Flight search: LetsFG SDK (180+ airlines, free search)
+- Local recommendations: Night markets, street vendors, shopping districts
+- Packing engine: Destination + weather → pack list + buy当地 suggestions
+- Travel memory: Previous trips inform future recommendations
+
+**This could be a hackathon project or standalone product.** The "pack light, buy当地" philosophy is the differentiator.
 
 ---
 
@@ -200,16 +224,20 @@
 ### Christel's Items (Jordan to buy in US)
 | Item | Estimated |
 |------|-----------|
+| Backup phone (Jordan's spare) | $0 (already have) |
+| SIM card (Philippine) | $2-5 (₱100-300) |
 | Suitcase (24-26") | $30-50 |
 | Headphones | $20-100 |
 | Power bank (if needed) | $15-25 |
-| **Total** | **$65-175** |
+| Date night outfits (Philippines) | $15-40 |
+| **Total** | **$82-220** |
 
 ---
 
 ## ✅ Action Items
 
 ### Jordan (Now)
+- [ ] Set up backup phone for Christel (factory reset, install apps)
 - [ ] Buy Christel's suitcase (Target/Walmart/Amazon)
 - [ ] Buy Christel's headphones
 - [ ] Buy power bank (if needed)
@@ -224,6 +252,7 @@
 - [ ] Charge all devices
 - [ ] Download offline maps
 - [ ] Print/save all confirmations
+- [ ] Give Christel her backup phone (pre-loaded with apps)
 
 ### Jordan (Day Before)
 - [ ] Final pack check
