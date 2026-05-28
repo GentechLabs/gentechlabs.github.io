@@ -49,6 +49,9 @@ AI-powered travel concierge that handles everything — flights, hotels, navigat
 - **Offline maps** — unlimited downloads, pre-cached for your trip
 - **Destination brief** — local customs, safety, weather, emergency contacts
 - **Auto-receipts** — expense tracking + export
+- **Booking decision engine** — reliability ratings, price comparison, smart recommendations
+- **Preference learning** — "Always book airline direct" vs "OTA if savings > $75"
+- **Risk assessment** — what happens if cancelled, rebooking ease, refund policies
 
 ---
 
@@ -71,6 +74,15 @@ Agent doesn't just book — it *briefs* you:
 - "Weather in Barcelona: 78°F, sunny. Pack light layers."
 - "Local emergency: 112 (EU). Your hotel concierge speaks English."
 
+### 5. Smart Booking Decisions
+Agent rates every booking channel:
+- Airlines direct: ⭐⭐⭐⭐⭐ (best for rebooking)
+- Major OTAs: ⭐⭐⭐⭐ (good for price)
+- Budget OTAs: ⭐⭐⭐ (use caution)
+- Unknown: ⭐⭐ (avoid for international)
+
+Your preference: "Always airline direct" or "OTA if savings > $75"
+
 ### 2. Offline-First Travel
 - Pre-download maps for your destination before you fly
 - Navigate without data roaming (Organic Maps)
@@ -90,12 +102,16 @@ Agent doesn't just book — it *briefs* you:
 
 ## Next Steps
 
+- [x] Travel rules framework created (`travel-rules-framework.md`)
+- [x] Philippines trip planner built (`philippines-trip-planner.md`)
+- [x] Thailand, Bali, Vietnam rules added
 - [ ] Scaffold GitHub repo (gentech-travel)
 - [ ] Integrate LetsFG MCP connector
 - [ ] Integrate Organic Maps API
-- [ ] Build freemium tier logic
+- [ ] Add location-aware cultural alerts
+- [ ] Build notification system for travel rules
 - [ ] Prototype voice concierge flow
-- [ ] Research Travala pricing model for benchmarking
+- [ ] Test with Jordan's Philippines trip (August 2026)
 
 ---
 

@@ -1,6 +1,6 @@
 # Content Queue — GenTech Creative
 
-**Last Updated:** April 25, 2026
+**Last Updated:** May 27, 2026
 **Owner:** Desmond (Creative)
 
 ---
@@ -9,7 +9,8 @@
 
 | # | Title | Channel | Source | Status |
 |---|-------|---------|--------|--------|
-| — | — | — | — | — |
+| 1 | Swarms ACM — LP Monitor Published | X/Twitter | @swaborlabs marketplace live | Ready to post |
+| 2 | Avalanche Team1 Application | X/Twitter | Quote @AvaxTeam1 + apply | Ready to post |
 
 ---
 

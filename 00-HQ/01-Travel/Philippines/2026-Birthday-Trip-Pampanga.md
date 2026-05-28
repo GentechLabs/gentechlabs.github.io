@@ -1,28 +1,43 @@
 ---
 type: trip
-title: "Philippines + Thailand Birthday Trip"
+title: "Philippines Birthday Trip — Metro Manila Practice Run"
 status: planning
-dates: "Sep 2026"
+dates: "Aug/Sep 2026"
 origin: CVG
-tags: [travel, philippines, thailand, birthday]
-updated: 2026-04-28
+tags: [travel, philippines, birthday, makati, bgc, metro-manila]
+updated: 2026-05-26
 ---
-
-# 🇵🇭 Philippines + 🇹🇭 Thailand — September 2026
+# 🇵🇭 Philippines Birthday Trip — Metro Manila / Makati
+First Metro Manila trip — practice run for travel agent product.
+Earlier Bangkok + Pampanga draft kept below as reference.
 
 Birthday trip combining Angeles City (Pampanga) and Bangkok.
 
-## Trip Overview
+## Trip Overview (Active)
 
 - **Departing:** CVG (Cincinnati)
-- **Destination 1:** Bangkok (BKK), Thailand
-- **Destination 2:** Angeles City / Clark (CRK), Philippines
-- **Duration:** ~12-14 days
-- **Travelers:** Jordan + Angela
+- **Destination:** Metro Manila (Philippines)
+- **Focus area:** Makati
+- **Possible add-on:** BGC, if time allows
+- **Duration:** TBD (likely 7–12 days)
+- **Travelers:** Jordan (solo)
 - **Occasion:** Birthday trip 🎂
-- **Status:** Planning — flight routing in progress
+- **Status:** Planning — lodging search in progress; first ticket targeted within ~2 weeks
+- **Notes:** First time in Metro Manila; practice run for travel agent workflow
 
+- **Notes:** First time in Metro Manila; practice run for travel agent workflow
 ## Proposed Itinerary
+### Current working plan
+
+```
+Aug/Sep 2026 — CVG → MNL
+Base in Makati
+Explore Makati
+Optional day/evening in BGC
+Return to CVG
+```
+
+### Earlier multi-country draft (kept for reference)
 
 ```
 Sep 1  — CVG → Bangkok (arrive Sep 2-3)

@@ -24,9 +24,11 @@ AgentEscrow is a three-layer protocol:
 
 ## Traction
 - **Live infrastructure**: Multi-agent monitoring fleet operating daily (LP position monitoring, risk detection, automated alerts)
-- **Hackathon proven**: Submitted to Kite AI ($30K), Colosseum Frontier ($125K+), Hermes Creative ($25K)
+- **Hackathon proven**: Agora Agents ($50K) ✅ submitted, Arbitrum Open House ($115K) shipped, Mantle Turing Test ($120K) shipped, Swarms ACM ($30K) in progress, Kite AI ($10K) submitted
 - **Architecture built**: Agent handoff protocols, persistent memory systems, rule engines, multi-chain monitoring
 - **Revenue model validated**: Subscription tiers ($0-$100+/mo) + bot marketplace (10-15% platform fee) + performance commissions
+- **Portfolio live**: ProtoJay4789.github.io — 20 projects, all verified
+- **Open source**: GitHub ProtoJay4789 with public repos for all hackathon builds
 
 ## Market
 - DeFi TVL: $50B+ (growing)
@@ -62,4 +64,12 @@ We're building the infrastructure for the autonomous AI economy — agents that 
 
 ---
 
-*This application package is ready for submission at https://alliance.xyz*
+## Links
+- GitHub: github.com/ProtoJay4789
+- Portfolio: ProtoJay4789.github.io
+- Agent Framework: Built on Hermes Agent (Nous Research)
+
+---
+
+*Last updated: May 26, 2026 — Agora submitted, 5 hackathon builds shipped*
+*Ready for submission at https://alliance.xyz/apply*

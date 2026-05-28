@@ -27,6 +27,41 @@
 | Strategy | Vibe-Trading | 🔍 Researching |
 | Hierarchy | Claude Code Game Studios | 🔍 Researching |
 
+## Queued (active)
+- [ ] **Injective Agents Platform** — MCP server, grid trader, agent marketplace. Test with AAE agent. Link: agents.injective.com
+- [ ] **Swarms ACM Submission** — $30K Finance track, LP Monitor agent. ⚠️ DEADLINE TODAY May 27
+
 ## Backlog
+- [ ] **Portfolio V3 Website** — Full rebuild with hackathon wins, multi-agent story, embedded demos. Single source of truth (no more inline arrays). Dynamic project loading from JSON. Demo video embeds. Live stats dashboard. Reflects "solo founder + AI agent team" narrative. After current hackathon sprint.
+  - **Brainstorm ideas:**
+    - Auto-sync: GitHub Actions pulls from repos, updates project statuses automatically
+    - Hackathon timeline: visual timeline showing submissions, wins, rankings
+    - Agent dashboard: live view of Gentech, DMOB, YoYo, Desmond status
+    - On-chain stats: real trades, LP positions, portfolio value pulled from chain
+    - Interactive demo: visitors can try a live agent (Steve Harvey roast layer?)
+    - Before/after: show what we built vs what it became (e.g., Rugcheck → TokenRiskOracle)
+    - Cost savings: "Built with $0 API costs using local inference" (when Hermes Desktop is live)
+    - Voice: add audio clips of our agent voices (Steve Harvey, Vanito, etc.)
+    - Dark mode + neon: match the AAE aesthetic, not generic portfolio template
+    - Fix sync issues: single JSON file, no duplicate arrays, GitHub Actions auto-deploy
+- [ ] **Agent Performance Index** — S&P 500 for agents. Track Sharpe ratio, drawdown, win rate, gas efficiency across strategies. Public dashboard. Builds on data we already collect from AAE.
+- [ ] **Agent Insurance Pools** — Stake against agent performance. Good agent = cheap premiums. Bad agent = expensive/uninsurable. Unlocks real capital flowing into agent-managed vaults.
+- [ ] **Agent Education Academy** — Structured learning path: "Build your first agent in 30 minutes." Uses Hermes + AGT + x402 as curriculum. Graduates deploy into AAE. Feeds the flywheel.
+- [ ] **Cross-chain Agent Handoff Protocol** — Agent on Solana detects opportunity on Base → hands off to Base-native agent seamlessly. "TCP/IP for agents." Generalize AgentEscrow handoff chains into a protocol.
 - [ ] Explore x402 protocol deeper for Agent Arena payment rails
 - [ ] Investigate xGate MCP server for agent discovery layer
+
+## Demo Video Distribution (queued)
+- [ ] Upload all demo videos to YouTube channel
+- [ ] Update ProtoJay4789.github.io portfolio with embedded demos
+- [ ] Need: YouTube channel access/API key, demo video files
+
+## Hermes Agent Update
+- [ ] Run `hermes update` — check changelog for breaking changes before updating
+- [ ] Post about our stack on X tying into the MCP Catalog announcement
+
+## Base Build MCP Demo Contest (queued)
+- [ ] $2K USDC — demo video under 3 min
+- [ ] Show Base MCP usage (agent discovers AAE, executes trade, earns fees)
+- [ ] Post on X, reply to @buildonbase
+- [ ] Post link: https://x.com/buildonbase/status/2059713951974236219

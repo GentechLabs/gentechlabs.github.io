@@ -71,3 +71,10 @@ target/
 10-Archive/Hermes-Backups/
 10-Archive/Memory-Backups/
 02-Labs/Claude-Code-Game-Studios/
+
+# Security — never commit these
+.env
+secrets.env
+.git-credentials
+00-HQ/config/github-token.env
+*.env

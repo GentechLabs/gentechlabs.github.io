@@ -24,20 +24,20 @@
 
 ---
 
-## 🟥 ACTIVE SPRINT — Week of May 19 (W21)
+## 🟥 ACTIVE SPRINT — Week of May 26 (W22)
 
-*Post-Kite AI. Focus on active hackathons with approaching deadlines.*
+*Swarms ACM deadline tomorrow. Mantle + Arbitrum follow-up. Focus on submissions.*
 
 ### Priority Hackathons
 
-- [ ] **[P]** **Agora Agents ($50K)** — PRIMARY active build | **Due: May 25** | 🟥 TODAY
-- [ ] **[P]** **Arbitrum Open House ($415K)** — Registration due May 25 | **Due: May 25** | 🟥 TODAY
+- [x] **[P]** **Agora Agents ($50K)** — PRIMARY active build | **Due: May 25** | ✅ SUBMITTED May 26
+- [x] **[P]** **Arbitrum Open House ($415K)** — Registration due May 25 | **Due: May 25** | ✅ SHIPPED
   - AI Agentic track: $15K buildathon + $20K founder house
   - Fit: DeFi Signal Agent → AI Agentic
 - [ ] **[Q]** **Mantle Turing Test 2026 ($120K+)** — Phase II | **Due: Jun 15** | 🟡 27 days
   - Tracks: AI Trading & Strategy, Agentic Economy
   - Fit: DeFi Signal Agent → AI Trading or Agentic Economy
-- [ ] **[Q]** **Swarms ACM** — May 27 | 🟢 Monitor
+- [ ] **[Q]** **Swarms ACM** — May 27 | ⚠️ DUE TOMORROW — needs Jordan's browser
 - [ ] **[Q]** **Bags FM** — Jun 1 | 🟢 Monitor
 - [ ] **[Q]** **Superteam Solana Bounty ($2.4K)** | 🟢 Needs deadline research
 
