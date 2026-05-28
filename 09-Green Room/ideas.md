@@ -116,3 +116,18 @@
   - **Connection:** Uses LetsFG for flight search, AAE stack for agents/governance
   - **Full brief:** `09-Green Room/designs/gentech-travels-full-brief.md`
   - **Status:** 🟡 Concept — needs scoping
+
+## GenTech Travels — Travel Companion Platform
+
+- [ ] **GenTech Travels — Privacy Layer + Community Platform**
+  - **Concept:** Not a new social network — a privacy and moderation layer ON TOP of Telegram/Discord/X
+  - **Target:** Passport bros community, international travelers
+  - **Pain point:** Mainstream platforms censor/shadowban travel content
+  - **Solution:** AI agents moderate content, no shadow banning, community-driven
+  - **Structure:** Gender-specific groups (men/women) + co-ed toggle
+  - **Rule:** Get along, don't fight. If fighting, report it.
+  - **Revenue:** Creator tips, spotlight feature, premium verification
+  - **Build:** Uses LetsFG for flights, AAE stack for agents/governance
+  - **Full brief:** `09-Green Room/designs/gentech-travels-full-brief.md`
+  - **Status:** 🟡 Concept — needs scoping
+  - **Priority:** 🟡 After Trade Roast build
