@@ -18,9 +18,22 @@ Last updated: 2026-05-27 (Swarms published, Google for Startups + Mantle registr
 | BNB Agent SDK | TBD | AI Agent Identity + Commerce | TBD | 🟡 QUEUED | ERC-8004 identity (ERC-721), APEX escrow commerce, Python SDK (`pip install bnbagent`). BSC testnet via MegaFuel. |
 | Solana Frontier | May 11 | Solana | $250K + accelerator | ❌ WITHDRAWN | Jordan directive May 10. Time/debugging constraints. Solana work preserved for cross-chain reuse. |
 
+## Grant Applications (Ongoing)
+| Program | Amount | Focus | Status | Notes |
+|---------|--------|-------|--------|-------|
+| Solana Foundation | $200-$400K | Open-source, public goods | 🟢 DRAFT READY | Apply: https://solana.org/grants-funding |
+| Chainlink BUILD | Oracle access + co-marketing | Oracle infra, data feeds | 🟢 DRAFT READY | Apply: https://chain.link/build-program |
+| Arbitrum Foundation | Varies | Adoption, tech structure | 🟢 DRAFT READY | Apply: https://arbitrum.foundation/grants |
+| Alliance AI | $500K (SAFE) | Crypto & AI accelerator | 📝 DRAFT READY | Apply: https://alliance.xyz/apply |
+| Alchemy $20M Solana | $25K infra credits | Solana infrastructure | ⏳ QUEUED | Apply: https://www.alchemy.com/solana-20m-fund |
+| Nosana | $5K-$50K | AI infra, agents | ⏳ QUEUED | Apply: https://nosana.com/grants/ |
+
+**Grant application queue:** `03-Strategies/Grant-Applications-Queue.md`
+**Individual drafts:** `02-Labs/*-DRAFT.md`
+
 ## Bug Bounties (Ongoing)
 | Platform | Project | Max Bounty | Focus | Status |
-|----------|---------|------------|-------|--------|
+|----------|---------|---------|
 | Code4rena | Glow Finance | $60K USDC | Solana DeFi | 🟢 Open |
 | Code4rena | Kite AI | $10K USDC | AI Agents | 🟢 Open |
 | Code4rena | GMTrade | $200K USDC | Rust Perps | 🟢 Open |
@@ -53,3 +66,29 @@ Last updated: 2026-05-27 (Swarms published, Google for Startups + Mantle registr
 8. **Mantle Turing Test** — 🟡 REGISTER + DEPLOY. Deadline Jun 15. Contracts built. Register on DoraHacks.
 9. **Dev3pack Bridge Accelerator** — 🟡 QUEUED. Jun 12. Jordan to provide details.
 10. **BNB Agent SDK** — 🟡 QUEUED. No deadline yet.
+
+## Trade Roast (AAE Product — Not a Hackathon)
+
+| Field | Value |
+|-------|-------|
+| **Name** | Trade Roast |
+| **Type** | AAE Core Product (not a hackathon submission) |
+| **Status** | 🟡 QUEUED — After current hackathon wave |
+| **Priority** | 🔴 HIGH — Core product, not just a submission |
+| **Deadline** | TBD (target: June 2026) |
+| **Repo** | TBD (will be created when build starts) |
+| **Description** | AI agent trading game with Steve Harvey roasting bad trades. Reinforcement learning through roast culture. Shareable roast cards, tier system, $ROAST token. |
+
+### Build Queue
+1. Governance integration (1-2 days)
+2. TradeRoast MVP (2-3 days)
+3. Voice ↔ Game connector (1 day)
+4. Credit Score Engine (2-3 days)
+5. Echo Brain core (3-5 days)
+
+### Dependencies
+- Steve Harvey voice (✅ built)
+- Trade history parsing (✅ built)
+- Governance (✅ built)
+- On-chain identity (✅ built)
+- Audit trail (✅ built)
