@@ -2,7 +2,7 @@
 
 Welcome to the Gentech knowledge base. This vault is the shared memory for the multi-agent team.
 
-> **Last cleaned:** Apr 27 2026  
+> **Last cleaned:** May 28 2026  
 > **Process:** Merge artifacts archived, single-file folders consolidated, canonical homes assigned.
 
 ---
