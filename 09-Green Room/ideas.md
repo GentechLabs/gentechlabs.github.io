@@ -65,3 +65,43 @@
 - [ ] Show Base MCP usage (agent discovers AAE, executes trade, earns fees)
 - [ ] Post on X, reply to @buildonbase
 - [ ] Post link: https://x.com/buildonbase/status/2059713951974236219
+
+## New Ideas (May 28, 2026)
+- [ ] **Collaborative Trip Planner** — Multiplayer travel planning with 5-10 contributors
+  - Each person submits preferences (activities, restaurants, sights)
+  - AI agent aggregates preferences, finds overlaps
+  - Generates shared itinerary + personal time slots
+  - Voting system for group decisions
+  - Budget split calculator
+  - Voice guides for destinations (Steve Harvey narrating Manila?)
+  - Fits our pattern: social/multiplayer aspect across all products
+  - Tech: Python + SQLite + Telegram bot or web UI
+  - Status: Concept approved, queued after hackathon sprint
+
+## Hackathon Queue
+- [ ] **ElevenHacks #11** — Real-time voice agents. Speech Engine ready with Edge TTS fallback (no ElevenLabs credits needed). Link: https://hacks.elevenlabs.io/hackathons/11
+  - Status: Queued, waiting for announcement
+  - Assets ready: speech-engine repo, Steve Harvey + Vanito voices, FastAPI server
+  - Potential enhancement: Add TradeRoast voice integration (roast → voice)
+
+## GenTech Travels (Travel Companion Platform)
+
+- [ ] **GenTech Travels — Full Build Brief** (May 28, 2026)
+  - **Status:** 🟡 READY TO BUILD
+  - **Type:** Travel community platform with AI moderation + creator economy
+  - **Target:** Passport bros, international travelers, digital nomads
+  - **Platform Layer:** Built ON TOP of Telegram/Discord/X (not standalone app)
+  - **Full brief:** `09-Green Room/designs/gentech-travels-full-brief.md`
+  - **Core features:**
+    - Two sides (men/women) with co-ed toggle
+    - One rule: get along, don't fight
+    - Roast layer (👍/👎/🔥, Steve Harvey voice roasts)
+    - Repair layer (reputation recovery paths)
+    - Voice personalities (Steve Harvey, Vanito, George, Christel)
+    - Creator economy (tips, spotlight, leaderboards, badges)
+    - Verification system (photo, voice, video, community trust)
+    - Challenge system (community-driven moderation)
+  - **Build plan:** 11-16 days to MVP
+  - **Revenue model:** $10K-15K/month at scale
+  - **AAE integration:** Same stack as Trade Roast (execution, identity, governance, economy, personality, memory)
+  - **Action:** Build after current hackathon wave
