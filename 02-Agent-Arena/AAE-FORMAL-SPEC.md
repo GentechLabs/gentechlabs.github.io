@@ -150,6 +150,34 @@ Agents level up through successful runs. Higher-level agents have better base st
 
 **Agent XP** is earned per run: survive longer = more XP. Liquidation = reduced XP gain.
 
+### 4.3 ERC-8004 Agent Identity
+
+Agent Arena agents are identified on-chain via **ERC-8004** — the Trustless Agents standard. ERC-8004 defines agent identity as ERC-721 NFTs, giving each agent a portable, verifiable, self-sovereign identity across EVM chains.
+
+**What ERC-8004 provides:**
+- **ERC-721 NFT identity tokens** — each agent owns a non-transferable identity NFT (soulbound-style) that anchors its on-chain reputation, permissions, and history
+- **Standardized agent metadata** — name, capabilities, trust level, and registry membership encoded in the token
+- **Composable with DeFi** — agents can interact with protocols that recognize ERC-8004 tokens for permissioned access
+
+**Three ERC-8004 Registries → AAE Layer Mapping:**
+
+| ERC-8004 Registry | AAE Layer | Integration Role |
+|-------------------|-----------|------------------|
+| **Identity Registry** | Identity Layer | Agent self-sovereign identity — register, resolve, verify agent wallets on-chain. Root of trust for all downstream AAE operations. |
+| **Reputation Registry** | Credit Layer | Agent reputation scores, transaction history, and creditworthiness. Powers risk assessment, credit limits, and trust propagation across agent networks. |
+| **Validation Registry** | Safety Layer | Proof-of-computation, task completion attestation, and dispute resolution hooks. Feeds the AAE safety layer with verifiable execution evidence. |
+
+**Cross-Chain Portability:**
+ERC-8004 is deployed across **29+ EVM chains** (Ethereum, Base, Arbitrum, Optimism, BNB Chain, Polygon, Avalanche, etc.). Agent identities are portable — an agent registered on one chain can be recognized on any other supported chain. This is critical for Agent Arena's multi-chain strategy (see §17 Integration Layer).
+
+**SDK Integration Paths:**
+- **0xGasless Agent SDK** (primary path) — bundles ERC-8004 + x402 payments, gasless transaction relay removes UX barrier of agent wallet gas management. We have an API key. Cuts Phase 1/3 timelines by ~40%. See build brief below.
+- **BNBAgent SDK** (secondary/partner) — Python SDK with 100K+ agents on BNB Chain. Modules: Identity (ERC-8004), Commerce (ERC-8183), Payments (x402/MPP), Memory (Greenfield). Partners: Google Cloud, AWS, Binance Pay. Use for Commerce and Memory only; defer identity/payment to 0xGasless.
+
+**Build brief:** `09-Green Room/build-logs/2026-05-30-erc8004-aae-integration.md`
+
+**Phase 5 on-chain bridge dependency:** ERC-8004 identity registration is a prerequisite for on-chain credit score portability and escrow mechanics (see §13 Roadmap — Phase 5).
+
 ---
 
 ## 5. NFT Loadout System
