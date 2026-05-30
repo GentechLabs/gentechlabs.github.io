@@ -1173,6 +1173,7 @@ html { scroll-behavior: smooth; }
   {
     "id": "somnia",
     "title": "Agent Catcher",
+    "demo_url": "/somnia-token-risk-oracle/",
     "description": "On-chain token risk oracle using Somnia's dual-agent pattern \u2014 JSON API agent fetches GoPlus security data, LLM agent classifies risk level. Live demo on Somnia testnet.",
     "tech": [
       "Solidity",
@@ -1221,6 +1222,7 @@ html { scroll-behavior: smooth; }
   },
     {
     "id": "rugcheck",
+    "demo_url": "/rugcheck/",
     "title": "Rugcheck — Agent Catcher",
     "description": "Smart contract rugpull detection system for Somnia hackathon. AI-powered analysis of contract patterns, ownership, and liquidity to flag scam tokens.",
     "tech": [
@@ -1327,6 +1329,11 @@ html { scroll-behavior: smooth; }
                                 ${p.deadline ? `<span class="deadline">DL: ${p.deadline}</span>` : ''}
                                 ${p.timeline ? `<span class="timeline">${p.timeline}</span>` : ''}
                             </div>
+                            ${(p.demo_url || p.github_url) ? `
+                            <div class="project-link">
+                                ${p.demo_url ? `<a href="${p.demo_url}" target="_blank">▶ Live Demo</a>` : ''}
+                                ${p.github_url ? `<a href="${p.github_url}" target="_blank" style="margin-left:12px">📦 GitHub</a>` : ''}
+                            </div>` : ''}
                         </div>
                     `).join('');
                 }
