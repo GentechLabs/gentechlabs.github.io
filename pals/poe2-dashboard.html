@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GenTech Pals — POE2 Monk Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Crimson+Text:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #c9a84c;
+            --gold-dim: #8b6914;
+            --lightning: #7eb8ff;
+            --lightning-glow: #4da6ff;
+            --dark-bg: #0a0a0f;
+            --panel-bg: #12121a;
+            --panel-border: #1e1e2e;
+            --text: #d4d4d4;
+            --text-dim: #6b6b7b;
+            --danger: #ff4444;
+            --success: #44ff88;
+            --mana-blue: #3b82f6;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: var(--dark-bg);
+            color: var(--text);
+            font-family: 'Crimson Text', serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Lightning background effect */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: 
+                radial-gradient(ellipse at 20% 20%, rgba(126, 184, 255, 0.03) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 80%, rgba(126, 184, 255, 0.02) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            padding: 30px 0;
+            border-bottom: 1px solid var(--panel-border);
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .header::after {
+            content: '⚡';
+            position: absolute;
+            bottom: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--dark-bg);
+            padding: 0 15px;
+            font-size: 20px;
+        }
+
+        .header h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 2.5em;
+            font-weight: 900;
+            color: var(--gold);
+            text-shadow: 0 0 30px rgba(201, 168, 76, 0.3);
+            letter-spacing: 3px;
+        }
+
+        .header .subtitle {
+            color: var(--text-dim);
+            font-size: 1.1em;
+            margin-top: 8px;
+            font-style: italic;
+        }
+
+        .header .patch-badge {
+            display: inline-block;
+            background: rgba(126, 184, 255, 0.1);
+            border: 1px solid rgba(126, 184, 255, 0.3);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            color: var(--lightning);
+            margin-top: 10px;
+        }
+
+        /* Character Card */
+        .character-card {
+            background: linear-gradient(135deg, var(--panel-bg) 0%, #151520 100%);
+            border: 1px solid var(--panel-border);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .character-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--lightning), transparent);
+            opacity: 0.6;
+        }
+
+        .character-name {
+            font-family: 'Cinzel', serif;
+            font-size: 1.8em;
+            color: var(--gold);
+            margin-bottom: 5px;
+        }
+
+        .character-class {
+            color: var(--lightning);
+            font-size: 1.1em;
+            margin-bottom: 15px;
+        }
+
+        .character-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+        }
+
+        .stat-box {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--panel-border);
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+        }
+
+        .stat-box .label {
+            color: var(--text-dim);
+            font-size: 0.85em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .stat-box .value {
+            font-family: 'Cinzel', serif;
+            font-size: 1.4em;
+            color: var(--gold);
+            margin-top: 4px;
+        }
+
+        .stat-box .value.lightning { color: var(--lightning); }
+        .stat-box .value.mana { color: var(--mana-blue); }
+
+        /* Progress Section */
+        .progress-section {
+            background: var(--panel-bg);
+            border: 1px solid var(--panel-border);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+
+        .progress-section h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3em;
+            color: var(--gold);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .progress-bar-container {
+            margin-bottom: 18px;
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 6px;
+            font-size: 0.95em;
+        }
+
+        .progress-label .name { color: var(--text); }
+        .progress-label .percent { color: var(--gold); font-family: 'Cinzel', serif; }
+
+        .progress-bar {
+            height: 20px;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid var(--panel-border);
+        }
+
+        .progress-fill {
+            height: 100%;
+            border-radius: 10px;
+            transition: width 1.5s ease-out;
+            position: relative;
+        }
+
+        .progress-fill.campaign {
+            background: linear-gradient(90deg, var(--gold-dim), var(--gold));
+            box-shadow: 0 0 15px rgba(201, 168, 76, 0.3);
+        }
+
+        .progress-fill.level {
+            background: linear-gradient(90deg, #2563eb, var(--lightning));
+            box-shadow: 0 0 15px rgba(126, 184, 255, 0.3);
+        }
+
+        .progress-fill.build {
+            background: linear-gradient(90deg, #7c3aed, #a855f7);
+            box-shadow: 0 0 15px rgba(168, 85, 247, 0.3);
+        }
+
+        .progress-fill.gems {
+            background: linear-gradient(90deg, #059669, #34d399);
+            box-shadow: 0 0 15px rgba(52, 211, 153, 0.3);
+        }
+
+        /* Skill Grid */
+        .skills-section {
+            background: var(--panel-bg);
+            border: 1px solid var(--panel-border);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+
+        .skills-section h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3em;
+            color: var(--gold);
+            margin-bottom: 20px;
+        }
+
+        .skill-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 15px;
+        }
+
+        .skill-card {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--panel-border);
+            border-radius: 10px;
+            padding: 18px;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-card:hover {
+            border-color: var(--lightning);
+            box-shadow: 0 0 20px rgba(126, 184, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .skill-card.primary {
+            border-color: var(--gold-dim);
+        }
+
+        .skill-card.primary::before {
+            content: '⚡ PRIMARY';
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            font-size: 0.65em;
+            color: var(--gold);
+            background: rgba(201, 168, 76, 0.1);
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-family: 'Cinzel', serif;
+            letter-spacing: 1px;
+        }
+
+        .skill-name {
+            font-family: 'Cinzel', serif;
+            font-size: 1.15em;
+            color: var(--lightning);
+            margin-bottom: 8px;
+        }
+
+        .skill-type {
+            color: var(--text-dim);
+            font-size: 0.8em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        .support-gems {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .support-tag {
+            background: rgba(126, 184, 255, 0.1);
+            border: 1px solid rgba(126, 184, 255, 0.2);
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            color: var(--lightning);
+        }
+
+        .support-tag.empty {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px dashed rgba(255, 255, 255, 0.1);
+            color: var(--text-dim);
+            font-style: italic;
+        }
+
+        /* Meta Alert */
+        .meta-alert {
+            background: linear-gradient(135deg, rgba(201, 168, 76, 0.05) 0%, rgba(126, 184, 255, 0.05) 100%);
+            border: 1px solid rgba(201, 168, 76, 0.2);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+
+        .meta-alert h3 {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .meta-alert .alert-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 8px;
+            padding: 8px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 6px;
+        }
+
+        .meta-alert .priority {
+            color: var(--lightning);
+            font-weight: bold;
+            min-width: 20px;
+        }
+
+        .meta-alert .suggestion {
+            color: var(--text);
+            line-height: 1.5;
+        }
+
+        .meta-alert .suggestion strong {
+            color: var(--gold);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 30px 0;
+            border-top: 1px solid var(--panel-border);
+            margin-top: 30px;
+        }
+
+        .footer .brand {
+            font-family: 'Cinzel', serif;
+            color: var(--gold-dim);
+            font-size: 0.9em;
+            letter-spacing: 2px;
+        }
+
+        .footer .powered {
+            color: var(--text-dim);
+            font-size: 0.8em;
+            margin-top: 5px;
+        }
+
+        /* Lightning flash animation */
+        @keyframes lightning-flash {
+            0%, 95%, 100% { opacity: 0; }
+            96% { opacity: 0.1; }
+            97% { opacity: 0; }
+            98% { opacity: 0.15; }
+        }
+
+        .lightning-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: var(--lightning);
+            pointer-events: none;
+            z-index: 100;
+            animation: lightning-flash 8s infinite;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 { font-size: 1.8em; }
+            .character-stats { grid-template-columns: repeat(2, 1fr); }
+            .skill-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="lightning-overlay"></div>
+    
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>GENTECH PALS</h1>
+            <div class="subtitle">Autonomous Agentic Economy — Gaming Companion</div>
+            <div class="patch-badge">Patch 0.5 — Return of the Ancients</div>
+        </div>
+
+        <!-- Character Card -->
+        <div class="character-card">
+            <div class="character-name">Lightning Monk</div>
+            <div class="character-class">Monk — Lightning Build — Act 2, Mission 2</div>
+            <div class="character-stats">
+                <div class="stat-box">
+                    <div class="label">Class</div>
+                    <div class="value">Monk</div>
+                </div>
+                <div class="stat-box">
+                    <div class="label">Build</div>
+                    <div class="value lightning">Lightning</div>
+                </div>
+                <div class="stat-box">
+                    <div class="label">Campaign</div>
+                    <div class="value">Act 2</div>
+                </div>
+                <div class="stat-box">
+                    <div class="label">Mana Sustain</div>
+                    <div class="value mana">Mana Drain</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Progress Section -->
+        <div class="progress-section">
+            <h2>📊 Progress</h2>
+            
+            <div class="progress-bar-container">
+                <div class="progress-label">
+                    <span class="name">Campaign</span>
+                    <span class="percent">12%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill campaign" style="width: 0%" data-target="12"></div>
+                </div>
+            </div>
+
+            <div class="progress-bar-container">
+                <div class="progress-label">
+                    <span class="name">Build Completion</span>
+                    <span class="percent">45%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill build" style="width: 0%" data-target="45"></div>
+                </div>
+            </div>
+
+            <div class="progress-bar-container">
+                <div class="progress-label">
+                    <span class="name">Gem Collection</span>
+                    <span class="percent">30%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill gems" style="width: 0%" data-target="30"></div>
+                </div>
+            </div>
+
+            <div class="progress-bar-container">
+                <div class="progress-label">
+                    <span class="name">Meta Alignment</span>
+                    <span class="percent">60%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill level" style="width: 0%" data-target="60"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Skills Section -->
+        <div class="skills-section">
+            <h2>⚡ Skill Setup</h2>
+            <div class="skill-grid">
+                <!-- Primary Skills -->
+                <div class="skill-card primary">
+                    <div class="skill-name">Tempest Flurry</div>
+                    <div class="skill-type">Primary Attack — Lightning</div>
+                    <div class="support-gems">
+                        <span class="support-tag">Elemental Armament</span>
+                        <span class="support-tag">Bounty 1</span>
+                    </div>
+                </div>
+
+                <div class="skill-card primary">
+                    <div class="skill-name">Falling Thunder</div>
+                    <div class="skill-type">Burst Damage — Lightning</div>
+                    <div class="support-gems">
+                        <span class="support-tag">Rapid Attacks 1</span>
+                    </div>
+                </div>
+
+                <div class="skill-card primary">
+                    <div class="skill-name">Thunderstorm</div>
+                    <div class="skill-type">AoE Clear — Lightning</div>
+                    <div class="support-gems">
+                        <span class="support-tag empty">No supports yet</span>
+                    </div>
+                </div>
+
+                <!-- Utility Skills -->
+                <div class="skill-card">
+                    <div class="skill-name">Orb of Storms</div>
+                    <div class="skill-type">Sustained Damage — Lightning</div>
+                    <div class="support-gems">
+                        <span class="support-tag">Slow Potency</span>
+                    </div>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-name">Tempest Bell</div>
+                    <div class="skill-type">Stun / Utility</div>
+                    <div class="support-gems">
+                        <span class="support-tag">Slow Potency</span>
+                    </div>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-name">Mana Drain</div>
+                    <div class="skill-type">Sustain — Mana Recovery</div>
+                    <div class="support-gems">
+                        <span class="support-tag">Rapid Casting</span>
+                    </div>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-name">Killing Palm</div>
+                    <div class="skill-type">Charge Generation — Power Charges</div>
+                    <div class="support-gems">
+                        <span class="support-tag empty">No supports</span>
+                    </div>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-name">Parry</div>
+                    <div class="skill-type">Defensive</div>
+                    <div class="support-gems">
+                        <span class="support-tag empty">No supports</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Meta Suggestions -->
+        <div class="meta-alert">
+            <h3>🎯 Build Optimization Suggestions</h3>
+            
+            <div class="alert-item">
+                <span class="priority">1.</span>
+                <span class="suggestion">
+                    <strong>Add Shock Conduction II to Thunderstorm</strong> — Biggest impact. Creates 100% shock chain across enemies. This is the cornerstone combo for lightning Monk.
+                </span>
+            </div>
+
+            <div class="alert-item">
+                <span class="priority">2.</span>
+                <span class="suggestion">
+                    <strong>Orb of Storms:</strong> Slow Potency → <strong>Chain + Increased AoE</strong> — Turns Orb into AoE clearing machine. Chain bounces bolts between enemies.
+                </span>
+            </div>
+
+            <div class="alert-item">
+                <span class="priority">3.</span>
+                <span class="suggestion">
+                    <strong>Tempest Flurry:</strong> Elemental Armament + Bounty 1 → <strong>Shock Conduction II + Lightning Attunement</strong> — Better shock coverage + physical→lightning conversion.
+                </span>
+            </div>
+
+            <div class="alert-item">
+                <span class="priority">4.</span>
+                <span class="suggestion">
+                    <strong>Falling Thunder:</strong> Rapid Attacks 1 → <strong>Overcharge</strong> — Boosts shock magnitude from Falling Thunder hits.
+                </span>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <div class="brand">GENTECH PALS</div>
+            <div class="powered">Autonomous Agentic Economy — Gaming Companion v0.1</div>
+        </div>
+    </div>
+
+    <script>
+        // Animate progress bars on load
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                document.querySelectorAll('.progress-fill').forEach(bar => {
+                    const target = bar.getAttribute('data-target');
+                    bar.style.width = target + '%';
+                });
+            }, 300);
+        });
+
+        // Subtle lightning flicker on skill cards
+        document.querySelectorAll('.skill-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.boxShadow = '0 0 25px rgba(126, 184, 255, 0.15)';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.boxShadow = 'none';
+            });
+        });
+    </script>
+</body>
+</html>
