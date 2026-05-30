@@ -31,7 +31,6 @@
             overflow-x: hidden;
         }
 
-        /* Lightning background effect */
         body::before {
             content: '';
             position: fixed;
@@ -51,7 +50,6 @@
             z-index: 1;
         }
 
-        /* Header */
         .header {
             text-align: center;
             padding: 30px 0;
@@ -98,7 +96,12 @@
             margin-top: 10px;
         }
 
-        /* Character Card */
+        .header .last-updated {
+            color: var(--text-dim);
+            font-size: 0.8em;
+            margin-top: 8px;
+        }
+
         .character-card {
             background: linear-gradient(135deg, var(--panel-bg) 0%, #151520 100%);
             border: 1px solid var(--panel-border);
@@ -162,7 +165,6 @@
         .stat-box .value.lightning { color: var(--lightning); }
         .stat-box .value.mana { color: var(--mana-blue); }
 
-        /* Progress Section */
         .progress-section {
             background: var(--panel-bg);
             border: 1px solid var(--panel-border);
@@ -210,27 +212,11 @@
             position: relative;
         }
 
-        .progress-fill.campaign {
-            background: linear-gradient(90deg, var(--gold-dim), var(--gold));
-            box-shadow: 0 0 15px rgba(201, 168, 76, 0.3);
-        }
+        .progress-fill.campaign { background: linear-gradient(90deg, var(--gold-dim), var(--gold)); box-shadow: 0 0 15px rgba(201, 168, 76, 0.3); }
+        .progress-fill.level { background: linear-gradient(90deg, #2563eb, var(--lightning)); box-shadow: 0 0 15px rgba(126, 184, 255, 0.3); }
+        .progress-fill.build { background: linear-gradient(90deg, #7c3aed, #a855f7); box-shadow: 0 0 15px rgba(168, 85, 247, 0.3); }
+        .progress-fill.gems { background: linear-gradient(90deg, #059669, #34d399); box-shadow: 0 0 15px rgba(52, 211, 153, 0.3); }
 
-        .progress-fill.level {
-            background: linear-gradient(90deg, #2563eb, var(--lightning));
-            box-shadow: 0 0 15px rgba(126, 184, 255, 0.3);
-        }
-
-        .progress-fill.build {
-            background: linear-gradient(90deg, #7c3aed, #a855f7);
-            box-shadow: 0 0 15px rgba(168, 85, 247, 0.3);
-        }
-
-        .progress-fill.gems {
-            background: linear-gradient(90deg, #059669, #34d399);
-            box-shadow: 0 0 15px rgba(52, 211, 153, 0.3);
-        }
-
-        /* Skill Grid */
         .skills-section {
             background: var(--panel-bg);
             border: 1px solid var(--panel-border);
@@ -268,9 +254,7 @@
             transform: translateY(-2px);
         }
 
-        .skill-card.primary {
-            border-color: var(--gold-dim);
-        }
+        .skill-card.primary { border-color: var(--gold-dim); }
 
         .skill-card.primary::before {
             content: '⚡ PRIMARY';
@@ -323,7 +307,6 @@
             font-style: italic;
         }
 
-        /* Meta Alert */
         .meta-alert {
             background: linear-gradient(135deg, rgba(201, 168, 76, 0.05) 0%, rgba(126, 184, 255, 0.05) 100%);
             border: 1px solid rgba(201, 168, 76, 0.2);
@@ -362,11 +345,8 @@
             line-height: 1.5;
         }
 
-        .meta-alert .suggestion strong {
-            color: var(--gold);
-        }
+        .meta-alert .suggestion strong { color: var(--gold); }
 
-        /* Footer */
         .footer {
             text-align: center;
             padding: 30px 0;
@@ -387,7 +367,6 @@
             margin-top: 5px;
         }
 
-        /* Lightning flash animation */
         @keyframes lightning-flash {
             0%, 95%, 100% { opacity: 0; }
             96% { opacity: 0.1; }
@@ -404,7 +383,13 @@
             animation: lightning-flash 8s infinite;
         }
 
-        /* Responsive */
+        .loading {
+            text-align: center;
+            padding: 60px;
+            color: var(--text-dim);
+            font-style: italic;
+        }
+
         @media (max-width: 768px) {
             .header h1 { font-size: 1.8em; }
             .character-stats { grid-template-columns: repeat(2, 1fr); }
@@ -415,216 +400,150 @@
 <body>
     <div class="lightning-overlay"></div>
     
-    <div class="container">
-        <!-- Header -->
-        <div class="header">
-            <h1>GENTECH PALS</h1>
-            <div class="subtitle">Autonomous Agentic Economy — Gaming Companion</div>
-            <div class="patch-badge">Patch 0.5 — Return of the Ancients</div>
-        </div>
-
-        <!-- Character Card -->
-        <div class="character-card">
-            <div class="character-name">Lightning Monk</div>
-            <div class="character-class">Monk — Lightning Build — Act 2, Mission 2</div>
-            <div class="character-stats">
-                <div class="stat-box">
-                    <div class="label">Class</div>
-                    <div class="value">Monk</div>
-                </div>
-                <div class="stat-box">
-                    <div class="label">Build</div>
-                    <div class="value lightning">Lightning</div>
-                </div>
-                <div class="stat-box">
-                    <div class="label">Campaign</div>
-                    <div class="value">Act 2</div>
-                </div>
-                <div class="stat-box">
-                    <div class="label">Mana Sustain</div>
-                    <div class="value mana">Mana Drain</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Progress Section -->
-        <div class="progress-section">
-            <h2>📊 Progress</h2>
-            
-            <div class="progress-bar-container">
-                <div class="progress-label">
-                    <span class="name">Campaign</span>
-                    <span class="percent">12%</span>
-                </div>
-                <div class="progress-bar">
-                    <div class="progress-fill campaign" style="width: 0%" data-target="12"></div>
-                </div>
-            </div>
-
-            <div class="progress-bar-container">
-                <div class="progress-label">
-                    <span class="name">Build Completion</span>
-                    <span class="percent">45%</span>
-                </div>
-                <div class="progress-bar">
-                    <div class="progress-fill build" style="width: 0%" data-target="45"></div>
-                </div>
-            </div>
-
-            <div class="progress-bar-container">
-                <div class="progress-label">
-                    <span class="name">Gem Collection</span>
-                    <span class="percent">30%</span>
-                </div>
-                <div class="progress-bar">
-                    <div class="progress-fill gems" style="width: 0%" data-target="30"></div>
-                </div>
-            </div>
-
-            <div class="progress-bar-container">
-                <div class="progress-label">
-                    <span class="name">Meta Alignment</span>
-                    <span class="percent">60%</span>
-                </div>
-                <div class="progress-bar">
-                    <div class="progress-fill level" style="width: 0%" data-target="60"></div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Skills Section -->
-        <div class="skills-section">
-            <h2>⚡ Skill Setup</h2>
-            <div class="skill-grid">
-                <!-- Primary Skills -->
-                <div class="skill-card primary">
-                    <div class="skill-name">Tempest Flurry</div>
-                    <div class="skill-type">Primary Attack — Lightning</div>
-                    <div class="support-gems">
-                        <span class="support-tag">Elemental Armament</span>
-                        <span class="support-tag">Bounty 1</span>
-                    </div>
-                </div>
-
-                <div class="skill-card primary">
-                    <div class="skill-name">Falling Thunder</div>
-                    <div class="skill-type">Burst Damage — Lightning</div>
-                    <div class="support-gems">
-                        <span class="support-tag">Rapid Attacks 1</span>
-                    </div>
-                </div>
-
-                <div class="skill-card primary">
-                    <div class="skill-name">Thunderstorm</div>
-                    <div class="skill-type">AoE Clear — Lightning</div>
-                    <div class="support-gems">
-                        <span class="support-tag empty">No supports yet</span>
-                    </div>
-                </div>
-
-                <!-- Utility Skills -->
-                <div class="skill-card">
-                    <div class="skill-name">Orb of Storms</div>
-                    <div class="skill-type">Sustained Damage — Lightning</div>
-                    <div class="support-gems">
-                        <span class="support-tag">Slow Potency</span>
-                    </div>
-                </div>
-
-                <div class="skill-card">
-                    <div class="skill-name">Tempest Bell</div>
-                    <div class="skill-type">Stun / Utility</div>
-                    <div class="support-gems">
-                        <span class="support-tag">Slow Potency</span>
-                    </div>
-                </div>
-
-                <div class="skill-card">
-                    <div class="skill-name">Mana Drain</div>
-                    <div class="skill-type">Sustain — Mana Recovery</div>
-                    <div class="support-gems">
-                        <span class="support-tag">Rapid Casting</span>
-                    </div>
-                </div>
-
-                <div class="skill-card">
-                    <div class="skill-name">Killing Palm</div>
-                    <div class="skill-type">Charge Generation — Power Charges</div>
-                    <div class="support-gems">
-                        <span class="support-tag empty">No supports</span>
-                    </div>
-                </div>
-
-                <div class="skill-card">
-                    <div class="skill-name">Parry</div>
-                    <div class="skill-type">Defensive</div>
-                    <div class="support-gems">
-                        <span class="support-tag empty">No supports</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Meta Suggestions -->
-        <div class="meta-alert">
-            <h3>🎯 Build Optimization Suggestions</h3>
-            
-            <div class="alert-item">
-                <span class="priority">1.</span>
-                <span class="suggestion">
-                    <strong>Add Shock Conduction II to Thunderstorm</strong> — Biggest impact. Creates 100% shock chain across enemies. This is the cornerstone combo for lightning Monk.
-                </span>
-            </div>
-
-            <div class="alert-item">
-                <span class="priority">2.</span>
-                <span class="suggestion">
-                    <strong>Orb of Storms:</strong> Slow Potency → <strong>Chain + Increased AoE</strong> — Turns Orb into AoE clearing machine. Chain bounces bolts between enemies.
-                </span>
-            </div>
-
-            <div class="alert-item">
-                <span class="priority">3.</span>
-                <span class="suggestion">
-                    <strong>Tempest Flurry:</strong> Elemental Armament + Bounty 1 → <strong>Shock Conduction II + Lightning Attunement</strong> — Better shock coverage + physical→lightning conversion.
-                </span>
-            </div>
-
-            <div class="alert-item">
-                <span class="priority">4.</span>
-                <span class="suggestion">
-                    <strong>Falling Thunder:</strong> Rapid Attacks 1 → <strong>Overcharge</strong> — Boosts shock magnitude from Falling Thunder hits.
-                </span>
-            </div>
-        </div>
-
-        <!-- Footer -->
-        <div class="footer">
-            <div class="brand">GENTECH PALS</div>
-            <div class="powered">Autonomous Agentic Economy — Gaming Companion v0.1</div>
-        </div>
+    <div class="container" id="app">
+        <div class="loading">⚡ Loading build data...</div>
     </div>
 
     <script>
-        // Animate progress bars on load
-        document.addEventListener('DOMContentLoaded', () => {
+        const DATA_URL = 'data/poe2-monk.json';
+
+        async function loadBuild() {
+            try {
+                const res = await fetch(DATA_URL);
+                const data = await res.json();
+                renderDashboard(data);
+            } catch (err) {
+                document.getElementById('app').innerHTML = `
+                    <div class="loading">⚠️ Could not load build data. Make sure ${DATA_URL} exists.</div>
+                `;
+            }
+        }
+
+        function renderDashboard(data) {
+            const { player, progress, skills, suggestions, lastUpdated } = data;
+
+            const skillsHTML = skills.map(skill => `
+                <div class="skill-card ${skill.primary ? 'primary' : ''}">
+                    <div class="skill-name">${skill.name}</div>
+                    <div class="skill-type">${skill.type}</div>
+                    <div class="support-gems">
+                        ${skill.supports.length > 0 
+                            ? skill.supports.map(s => `<span class="support-tag">${s}</span>`).join('')
+                            : '<span class="support-tag empty">No supports yet</span>'
+                        }
+                    </div>
+                </div>
+            `).join('');
+
+            const suggestionsHTML = suggestions.map(s => `
+                <div class="alert-item">
+                    <span class="priority">${s.priority}.</span>
+                    <span class="suggestion">
+                        <strong>${s.skill}:</strong> ${s.current} → <strong>${s.suggested}</strong> — ${s.reason}
+                    </span>
+                </div>
+            `).join('');
+
+            const manaSkill = skills.find(s => s.name === 'Mana Drain');
+
+            document.getElementById('app').innerHTML = `
+                <div class="header">
+                    <h1>GENTECH PALS</h1>
+                    <div class="subtitle">Autonomous Agentic Economy — Gaming Companion</div>
+                    <div class="patch-badge">Patch ${player.patch} — Return of the Ancients</div>
+                    <div class="last-updated">Last updated: ${lastUpdated}</div>
+                </div>
+
+                <div class="character-card">
+                    <div class="character-name">${player.name}</div>
+                    <div class="character-class">${player.class} — ${player.build} Build — ${player.act}, ${player.mission}</div>
+                    <div class="character-stats">
+                        <div class="stat-box">
+                            <div class="label">Class</div>
+                            <div class="value">${player.class}</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="label">Build</div>
+                            <div class="value lightning">${player.build}</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="label">Campaign</div>
+                            <div class="value">${player.act}</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="label">Mana Sustain</div>
+                            <div class="value mana">${manaSkill ? manaSkill.supports.join(', ') || 'Mana Drain' : 'None'}</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="progress-section">
+                    <h2>📊 Progress</h2>
+                    <div class="progress-bar-container">
+                        <div class="progress-label">
+                            <span class="name">Campaign</span>
+                            <span class="percent">${progress.campaign}%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill campaign" style="width: 0%" data-target="${progress.campaign}"></div>
+                        </div>
+                    </div>
+                    <div class="progress-bar-container">
+                        <div class="progress-label">
+                            <span class="name">Build Completion</span>
+                            <span class="percent">${progress.buildCompletion}%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill build" style="width: 0%" data-target="${progress.buildCompletion}"></div>
+                        </div>
+                    </div>
+                    <div class="progress-bar-container">
+                        <div class="progress-label">
+                            <span class="name">Gem Collection</span>
+                            <span class="percent">${progress.gemCollection}%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill gems" style="width: 0%" data-target="${progress.gemCollection}"></div>
+                        </div>
+                    </div>
+                    <div class="progress-bar-container">
+                        <div class="progress-label">
+                            <span class="name">Meta Alignment</span>
+                            <span class="percent">${progress.metaAlignment}%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill level" style="width: 0%" data-target="${progress.metaAlignment}"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="skills-section">
+                    <h2>⚡ Skill Setup</h2>
+                    <div class="skill-grid">${skillsHTML}</div>
+                </div>
+
+                <div class="meta-alert">
+                    <h3>🎯 Build Optimization Suggestions</h3>
+                    ${suggestionsHTML}
+                </div>
+
+                <div class="footer">
+                    <div class="brand">GENTECH PALS</div>
+                    <div class="powered">Autonomous Agentic Economy — Gaming Companion v0.1</div>
+                </div>
+            `;
+
+            // Animate progress bars
             setTimeout(() => {
                 document.querySelectorAll('.progress-fill').forEach(bar => {
-                    const target = bar.getAttribute('data-target');
-                    bar.style.width = target + '%';
+                    bar.style.width = bar.getAttribute('data-target') + '%';
                 });
             }, 300);
-        });
+        }
 
-        // Subtle lightning flicker on skill cards
-        document.querySelectorAll('.skill-card').forEach(card => {
-            card.addEventListener('mouseenter', () => {
-                card.style.boxShadow = '0 0 25px rgba(126, 184, 255, 0.15)';
-            });
-            card.addEventListener('mouseleave', () => {
-                card.style.boxShadow = 'none';
-            });
-        });
+        // Auto-refresh every 30 seconds
+        loadBuild();
+        setInterval(loadBuild, 30000);
     </script>
 </body>
 </html>
