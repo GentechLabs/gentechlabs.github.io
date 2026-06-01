@@ -367,22 +367,9 @@
             margin-top: 5px;
         }
 
-        @keyframes lightning-flicker {
-            0%, 92%, 100% { opacity: 0; }
-            93% { opacity: 0.03; }
-            94% { opacity: 0; }
-            95% { opacity: 0.02; }
-        }
 
-        .lightning-overlay {
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: var(--lightning);
-            pointer-events: none;
-            z-index: 100;
-            animation: lightning-flicker 12s infinite;
-            mix-blend-mode: overlay;
-        }
+
+
 
         .loading {
             text-align: center;
@@ -399,7 +386,7 @@
     </style>
 </head>
 <body>
-    <div class="lightning-overlay"></div>
+
     
     <div class="container" id="app">
         <div class="loading">⚡ Loading build data...</div>
