@@ -1,6 +1,6 @@
 # 📋 GenTech Status Board
 
-**Last updated:** 2026-05-27 (nightly sweep)
+**Last updated:** 2026-06-05 (nightly sweep)
 **Updated by:** Gentech
 
 > Jordan: This is your single file to check. Open it, know everything.
@@ -8,10 +8,17 @@
 
 ---
 
+## 🎯 The Goal
+
+**Make this Jordan's last year at Amazon.** By Nov/Dec 2026 (next PH/Thailand trip), transition to remote work running GenTech full-time.
+
+**Path:** Education (Encode bootcamps + Cyfrin) → Grants + Accelerators → Revenue from GenTech products → Freedom.
+
+---
+
 ## 🔴 Needs Jordan's Attention
 
 - [ ] **Alliance AI Application** — Draft ready. Submit at https://alliance.xyz/apply (rolling admissions)
-- [ ] **Swarms ACM** — ⚠️ DEADLINE TODAY. Marketplace publish needs your browser (deadline May 27)
 - [ ] **xurl Auth** — Not configured, can't post to X/Twitter. BLOCKER for content pipeline.
 - [ ] **Birthday Trip Flights** — Book ASAP (Aug/Sep 2026)
 
@@ -32,17 +39,20 @@
 
 ### Mantle Turing Test 2026 ($120K+)
 - **Status:** Queued — Phase II
-- **Due:** Jun 15 (22 days)
+- **Due:** Jun 15 (13 days)
 - **Tracks:** AI Trading & Strategy, Agentic Economy
 
-### 🔴 Swarms ACM ($30K)
-- **Status:** Ready to submit — needs Jordan's browser for marketplace
-- **Due:** ⚠️ TODAY May 27
+### ✅ Swarms ACM ($30K) — PUBLISHED
+- **Status:** Published to Swarms Marketplace, tokenized Solana
+- **Due:** May 27 (completed)
 - **Tests:** 26/26 passing, repo ready
 
 ---
 
 ## ✅ Recently Completed
+
+- **Jun 1:** Bags FM deadline passed — rewards traction focus
+- **May 27:** Swarms ACM — Published to Swarms Marketplace
 
 - **May 21:** AEG Phase 1 MVP complete (53/53 tests)
 - **May 21:** AAE Credit Layer research complete
@@ -62,9 +72,10 @@
 
 ## 🔮 Coming Up
 
-- **May 27 (TODAY):** Swarms ACM deadline ⚠️ + Somnia Checkpoint 2 (6:55 PM EDT)
-- **Jun 1:** Bags FM deadline
-- **Jun 5-11:** Google hackathons
+- ~~**Jun 4:** 1752vc Lightning Round VIII — $100K investment~~ ✅ PASSED
+- **Jun 5:** Google for Startups AI Agents Challenge — $90K ⚠️ DEADLINE TODAY (register)
+- **Jun 11:** Google Cloud Rapid Agent — $60K + Somnia Agentathon
+- **Jun 12:** Dev3pack Bridge Accelerator
 - **Jun 14:** Arbitrum Open House submission
 - **Jun 15:** Mantle Turing Test Phase II
 - **Rolling:** Alliance AI application — submit at https://alliance.xyz/apply
@@ -75,8 +86,8 @@
 
 - **Approval Queue:** ✅ Clean — no pending items
 - **Considerations:** ✅ Active items current
-- **Working Memory:** ✅ Updated tonight (was 11 days stale)
-- **Status Board:** ✅ Updated tonight (was 11 days stale)
+- **Working Memory:** ✅ Current
+- **Status Board:** ✅ Updated June 5
 
 ---
 
