@@ -329,27 +329,22 @@ def create_agent(model_name: str = None, api_key: str = None):
     Create the LP Monitor agent with specified model.
     
     Args:
-        model_name: LiteLLM model identifier (e.g., "openrouter/google/gemini-2.0-flash-001")
+        model_name: LiteLLM model identifier (e.g., "opencode-go/qwen3.6-plus")
         api_key: API key for the model provider
     """
     from swarms import Agent
     
     # Resolve model: env var > parameter > default
     if not model_name:
-        model_name = os.getenv("LP_MONITOR_MODEL", "openrouter/google/gemini-2.0-flash-001")
+        model_name = os.getenv("LP_MONITOR_MODEL", "opencode-go/qwen3.6-plus")
     
     # Resolve API key: env var > parameter
     if not api_key:
-        # For OpenRouter, check OPENROUTER_API_KEY
-        if "openrouter" in model_name.lower():
-            api_key = os.getenv("OPENROUTER_API_KEY")
-        else:
-            api_key = os.getenv("OPENAI_API_KEY")
+        api_key = os.getenv("OPENCODE_GO_API_KEY")
     
     if not api_key:
-        print("ERROR: No API key found. Set OPENROUTER_API_KEY or OPENAI_API_KEY.")
-        print("For OpenRouter: export OPENROUTER_API_KEY=your_key")
-        print("For OpenAI: export OPENAI_API_KEY=your_key")
+        print("ERROR: No API key found. Set OPENCODE_GO_API_KEY.")
+        print("For OpenCode Go: export OPENCODE_GO_API_KEY=your_key")
         exit(1)
     
     # Set the key in env for LiteLLM

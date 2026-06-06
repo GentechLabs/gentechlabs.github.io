@@ -18,21 +18,21 @@ LOG_DIR.mkdir(parents=True, exist_ok=True)
 # Thresholds (daily)
 THRESHOLDS = {
     "xiaomi_mimo": {"daily_tokens": 5_000_000, "daily_cost_usd": 10.0},
-    "openrouter": {"daily_tokens": 5_000_000, "daily_cost_usd": 10.0},
+    "opencode_go": {"daily_tokens": 5_000_000, "daily_cost_usd": 10.0},
     "nous": {"daily_tokens": 2_000_000, "daily_cost_usd": 5.0},
 }
 
-def check_openrouter():
-    """Check OpenRouter usage via their API."""
-    api_key = os.environ.get("OPENROUTER_API_KEY", "")
+def check_opencode_go():
+    """Check OpenCode Go usage via their API."""
+    api_key = os.environ.get("OPENCODE_GO_API_KEY", "")
     if not api_key:
-        return {"status": "no_key", "message": "OPENROUTER_API_KEY not set"}
+        return {"status": "no_key", "message": "OPENCODE_GO_API_KEY not set"}
     
     try:
         import urllib.request
         req = urllib.request.Request(
-            "https://openrouter.ai/api/v1/auth/key",
-            headers={"Authorization": f"Bearer {api_key}"}
+            "https://opencode.ai/zen/go/v1/auth/key",
+            headers={"Authorization": f"Bearer {api_key}", "User-Agent": "curl/8.0"}
         )
         with urllib.request.urlopen(req, timeout=10) as resp:
             data = json.loads(resp.read())
@@ -131,7 +131,7 @@ def generate_report(results):
 | Provider | Token Limit | Cost Limit |
 |----------|------------|------------|
 | Xiaomi MiMo | 5M tokens | $10.00 |
-| OpenRouter | 5M tokens | $10.00 |
+| OpenCode Go | 5M tokens | $10.00 |
 | Nous Research | 2M tokens | $5.00 |
 
 ---
@@ -146,7 +146,7 @@ def main():
     
     results = {
         "xiaomi_mimo": check_xiaomi_mimo(),
-        "openrouter": check_openrouter(),
+        "opencode_go": check_opencode_go(),
         "nous": check_nous(),
     }
     
