@@ -1,6 +1,6 @@
 # 📋 Jordan Queue — Items Needing Jordan's Action
 
-*Updated: June 5, 2026 — 11:00 PM EDT (nightly sweep)*
+*Updated: June 6, 2026 — 11:00 PM EDT (nightly sweep)*
 
 ## Priority Actions (Do Today)
 - [ ] **xurl Auth** — BLOCKS content pipeline. Configure auth for X/Twitter posting.

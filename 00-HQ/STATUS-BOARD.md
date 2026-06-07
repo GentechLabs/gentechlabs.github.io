@@ -1,6 +1,6 @@
 # 📋 GenTech Status Board
 
-**Last updated:** 2026-06-05 (nightly sweep)
+**Last updated:** 2026-06-06 (nightly sweep)
 **Updated by:** Gentech
 
 > Jordan: This is your single file to check. Open it, know everything.
@@ -73,7 +73,7 @@
 ## 🔮 Coming Up
 
 - ~~**Jun 4:** 1752vc Lightning Round VIII — $100K investment~~ ✅ PASSED
-- **Jun 5:** Google for Startups AI Agents Challenge — $90K ⚠️ DEADLINE TODAY (register)
+- ~~**Jun 5:** Google for Startups AI Agents Challenge — $90K~~ ✅ PASSED
 - **Jun 11:** Google Cloud Rapid Agent — $60K + Somnia Agentathon
 - **Jun 12:** Dev3pack Bridge Accelerator
 - **Jun 14:** Arbitrum Open House submission
@@ -87,7 +87,7 @@
 - **Approval Queue:** ✅ Clean — no pending items
 - **Considerations:** ✅ Active items current
 - **Working Memory:** ✅ Current
-- **Status Board:** ✅ Updated June 5
+- **Status Board:** ✅ Updated June 6
 
 ---
 

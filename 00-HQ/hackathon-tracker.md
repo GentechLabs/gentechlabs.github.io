@@ -1,14 +1,14 @@
 # 🏆 Active Hackathon Tracker
 
-Last updated: 2026-06-05 (nightly sweep)
+Last updated: 2026-06-06 (daily scan + Casper/Qwen updates)
 
 | Hackathon | Dates | Theme | Prizes | Status | Notes |
 |-----------|-------|-------|--------|--------|-------|
 | Kite AI | May 17 | Agentic Commerce | $10K | ✅ PAST | Deadline passed May 17. Awaiting results. |
 | Bags FM | Jun 1 | Memecoin Launchpad / AI Agents | $1M + $3M support | ✅ PAST | Deadline passed Jun 1. Rewards traction (ARR/GMV), not building. |
-| Google Cloud Rapid Agent | Jun 11 | Gemini + Agent Builder + MCP | $60K | 🟡 QUEUED | 383 participants. Managed by Google on Devpost. |
+| Google Cloud Rapid Agent | Jun 11 | Gemini + Agent Builder + MCP | $60K | ❌ NOT PURSUING | Enterprise lock-in, low prize-per-track, not our stack. |
 | 1752vc Lightning Round VIII | Jun 4 | AI / Frontier Tech / Deep Tech | $100K investment + $1M perks | ✅ PASSED | Deadline passed Jun 4. Pitch comp for 1752 Accelerate. Apply: https://sparkxyz.io/submissions/new?competition_id=1842 |
-| Google for Startups AI Agents Challenge | Jun 5 | AI agents prototype → production | $90K + $500 cloud credits | 🟡 REGISTER NEEDED | Sign up: https://goo.gle/486nbl4 — 6-week comp, multiple tracks, Gemini Enterprise access |
+| Google for Startups AI Agents Challenge | Jun 5 | AI agents prototype → production | $90K + $500 cloud credits | ✅ PASSED | Deadline passed Jun 5. 6-week comp, multiple tracks, Gemini Enterprise access. |
 | Somnia | Jun 11 | $5K+ | 🔴 ACTIVE | Rugcheck — AI agent monitoring token launches, detects rugs/honeypots. Contract compiled, frontend wired with ethers.js, 8 unit tests passing, GitHub repo + Pages live (ProtoJay4789.github.io/rugcheck/). Awaiting testnet wallet for deploy + E2E test. |
 | Agora Agents (Canteen × Circle) | May 25 | AI Agents on Arc (EVM L1) | $50K | ✅ SUBMITTED | AdaptiveFolio — AI portfolio manager. 38 tests passing. Live demo: protojay4789.github.io/adaptive-folio. Submitted May 26. |
 | Swarms ACM | May 27 | Finance & Market Analysis | $30K | ✅ PUBLISHED | LP Monitor agent: 26 tests passing, live API verified. Repo: ProtoJay4789/swarms-acm-hackathon. Published to Swarms Marketplace, tokenized Solana. |
@@ -49,12 +49,17 @@ Last updated: 2026-06-05 (nightly sweep)
 
 ## Key Deadlines
 - ~~**1752vc Lightning Round VIII**: Jun 4 — $100K investment.~~ ✅ PASSED Jun 4.
-- **Google for Startups AI Agents Challenge**: Jun 5 ⚠️ DEADLINE TODAY — REGISTER NEEDED (https://goo.gle/486nbl4)
+- ~~**Google for Startups AI Agents Challenge**: Jun 5 — $90K~~ ✅ PASSED Jun 5.
 - **Somnia**: Jun 11 — Needs testnet deploy
 - **Dev3pack Bridge Accelerator**: Jun 12
 - **Arbitrum Open House submission**: Jun 14
+- **FIND EVIL!**: Jun 15 — $22K, cybersecurity + AI, MCP. Link: https://findevil.devpost.com/
 - **Mantle Turing Test Phase II**: Jun 15 — REGISTER NEEDED (DoraHacks)
+- **Encode Vibe Coding Hackathon**: Jun 19 — 3-day sprint
+- **Sui Overflow**: Jun 21 — Jordan to verify registration
 - **Encode Solana + Arc Bootcamps**: Jun 22 start — SIGN UP NEEDED
+- **Casper Agentic Buildathon**: ~Jun 30 — $150K, agentic AI + x402. Link: https://dorahacks.io/hackathon/casper-agentic-buildathon
+- **Qwen Cloud Global AI Hackathon**: Jul 9 — $70K+, Agent Society track. Link: https://qwencloud-hackathon.devpost.com/
 
 ## Priority Order (per Jordan directive, Jun 4)
 1. ~~**Agora Agents**~~ — ✅ SUBMITTED May 26.
@@ -65,11 +70,12 @@ Last updated: 2026-06-05 (nightly sweep)
 6. **Arbitrum Open House** — 🟢 DEPLOY. Deadline Jun 14. AgentForge ready.
 7. **Mantle Turing Test** — 🟡 REGISTER + DEPLOY. Deadline Jun 15. Contracts built. Register on DoraHacks.
 8. ~~**1752vc Lightning Round VIII**~~ — ✅ PASSED Jun 4.
-9. **Google for Startups AI Agents Challenge** — 🟡 REGISTER. ⚠️ DEADLINE TODAY Jun 5. $90K. Sign up: https://goo.gle/486nbl4
+9. ~~**Google for Startups AI Agents Challenge**~~ — ✅ PASSED Jun 5. $90K.
 10. **Dev3pack Bridge Accelerator** — 🟡 QUEUED. Jun 12. Jordan to provide details.
 11. **BNB Agent SDK** — 🟡 QUEUED. AI Agent Identity + Commerce. No deadline yet.
 12. **Qwen Cloud AI Hackathon** — 🟡 QUEUED. Tracks: MemoryAgent, AI Showrunner, Agent Society. Link: https://qwencloud-hackathon.devpost.com/
-13. **The Pitch by Deel** — 🟡 QUEUE. $15M global startup comp. $50K regional, $1M global. Link: https://www.deel.com/the-pitch-by-deel/
+13. **Casper Agentic Buildathon** — 🟡 NEW. $150K. Agentic AI + x402 + DeFi on Casper (Rust). 24 days left. Link: https://dorahacks.io/hackathon/casper-agentic-buildathon
+14. **The Pitch by Deel** — 🟡 QUEUE. $15M global startup comp. $50K regional, $1M global. Link: https://www.deel.com/the-pitch-by-deel/
 
 ## Learning Track (Jordan directive, Jun 4 — fast-track multi-chain)
 | Programme | Platform | Start | Duration | Focus | Status |
