@@ -56,3 +56,31 @@
 - **Price Trend:** ⬇️ DOWN — Yesterday's Google Flights scan showed $1,053 RT. Today's scan shows $894 RT on Google Flights/Expedia. This is the lowest RT price found since monitoring began.
 - **Key Finding:** $894 is BELOW the $1,000 alert threshold and within the $900-1,100 "Good Deal" target range.
 - **Recommendation:** This is a strong price. If dates are confirmed, consider booking soon. The $894 price from Google Flights/Expedia is competitive with the June 4 Travelocity ($893) low.
+
+### 2026-06-07 (Web Search Scan — TinyFish timeout again)
+- **Cheapest RT Found:** $874 (Air Canada via Momondo)
+- **Range Across Top Sources:** $874 – $1,020 RT
+- **Assessment:** ✅ PRICES DOWN — NEW ALL-TIME LOW (-$20 from previous $893)
+- **Top Airline-Price Pairs (Momondo aggregated):**
+  1. Air Canada: $874 RT (hub connection via Toronto/Vancouver)
+  2. Korean Air: $899 RT (connecting via Seoul ICN)
+  3. ANA: $960 RT (connecting via Tokyo NRT)
+  4. Japan Airlines: $993 RT
+  5. Philippine Airlines: $998 RT
+  6. United Airlines: $1,020 RT (single-stop via SFO/LAX)
+  7. Qatar Airways: $1,113 RT
+- **Momondo Monthly Averages (CVG-MNL):**
+  - Aug: $1,142 | Sep: $1,058 | Cheapest month: March ($1,039)
+- **Flight Durations (2 stops typical):** 26h 22m – 35h 40m
+- **Airlines Identified:**
+  1. Air Canada (hub connection via Toronto/Vancouver)
+  2. Korean Air (connecting via Seoul ICN)
+  3. ANA (connecting via Tokyo NRT)
+  4. Japan Airlines (connecting via Tokyo NRT)
+  5. Philippine Airlines (connecting via various)
+  6. United Airlines (single-stop via SFO/LAX)
+  7. Qatar Airways (connecting via Doha)
+- **Price Trend:** ⬇️ DOWN — New all-time low at $874 (Air Canada). Previous low was $893 (Travelocity, Jun 4). Note: Momondo prices are aggregated/route-level; specific Aug 25-Sep 10 date search was JS-rendered and couldn't be scraped.
+- **Key Finding:** $874 is BELOW the $893 previous low and well within the $900-1,100 "Good Deal" target range. Air Canada and Korean Air are both below $900.
+- **Recommendation:** Air Canada at $874 is the strongest price seen since monitoring began. Recommend checking Momondo directly for Aug 25-Sep 10 to confirm this price applies to target dates.
+- **TinyFish Status:** Timed out for 2nd consecutive scan. API reliability issue — falling back to web search.
