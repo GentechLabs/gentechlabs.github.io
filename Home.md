@@ -15,7 +15,7 @@ cssclass: dashboard
 | | |
 |---|---|
 | **Active Project** | [[Green-Room/INDEX\|🚧 Green Room]] — current builds and ideas |
-| **Trip Planning** | [[HQ/01-Travel/Philippines/price-history\|✈️ Philippines + Thailand]] — Aug/Sep 2026 |
+| **Trip Planning** | [[HQ/HQ/01-Travel/Philippines/price-history\|✈️ Philippines + Thailand]] — Aug/Sep 2026 |
 | **Today's Focus** | [[Daily/\|📋 Daily Notes]] |
 | **Portfolio** | [[Projects/INDEX\|💼 Projects]] — 21 live projects |
 

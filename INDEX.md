@@ -72,7 +72,7 @@ updated: 2026-06-07
 - [[HQ/Marketing]] — Marketing materials
 
 ### Travel
-- [[HQ/01-Travel/trip-plan-2026-updated]] — Philippines trip plan
+- [[HQ/HQ/01-Travel/trip-plan-2026-updated]] — Philippines trip plan
 - [[Green-Room/philippines-trip-research]] — Trip research
 - [[Green-Room/flight-price-log]] — Flight price tracking
 

@@ -16,7 +16,7 @@ updated: 2026-06-07
 
 | Folder | Purpose |
 |--------|---------|
-| **[[01-Travel/README]]** | Trip planning — Philippines, Dominican Republic, flight tracking |
+| **[[HQ/01-Travel/README]]** | Trip planning — Philippines, Dominican Republic, flight tracking |
 | **Approvals/** | Pending approvals and approval templates |
 | **Credentials/** | API keys, tokens, sensitive access |
 | **flight-tracker/** | Flight price monitoring logs |
@@ -57,7 +57,7 @@ updated: 2026-06-07
 
 ## 🗺️ Travel Planning
 
-- [[01-Travel/trip-plan-2026-updated]] — Philippines trip plan (active)
+- [[HQ/01-Travel/trip-plan-2026-updated]] — Philippines trip plan (active)
 - [[flight-tracker/cvg-mnl-check-2026-06-01]] — CVG→MNL flight check
 
 ---
