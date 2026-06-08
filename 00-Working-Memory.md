@@ -103,10 +103,10 @@ updated: 2026-06-07
 ## Quick Navigation
 
 - [[INDEX]] — Master vault map
-- [[00-HQ/STATUS-BOARD]] — Source of truth
-- [[00-HQ/hackathon-tracker]] — Hackathon status
-- [[09-Green Room/WORKFLOW-ACTIVE]] — Workflow rules
-- [[03-Strategies/Grant-Applications-Queue]] — Grant pipeline
+- [[HQ/STATUS-BOARD]] — Source of truth
+- [[HQ/hackathon-tracker]] — Hackathon status
+- [[Green-Room/WORKFLOW-ACTIVE]] — Workflow rules
+- [[Strategies/Grant-Applications-Queue]] — Grant pipeline
 
 ---
 

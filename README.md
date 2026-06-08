@@ -14,10 +14,10 @@ updated: 2026-06-07
 
 | What You Need | Go To |
 |---------------|-------|
-| **What's happening right now** | [[00-HQ/STATUS-BOARD]] |
+| **What's happening right now** | [[HQ/STATUS-BOARD]] |
 | **Navigate the whole vault** | [[INDEX]] (master map) |
 | **Current sprint state** | [[00-Working-Memory]] |
-| **How routing works** | [[09-Green Room/WORKFLOW-ACTIVE]] |
+| **How routing works** | [[Green-Room/WORKFLOW-ACTIVE]] |
 
 ---
 
@@ -25,17 +25,17 @@ updated: 2026-06-07
 
 | Section | What's In It | Index |
 |---------|-------------|-------|
-| **00-HQ** | Operations, approvals, travel, grants | [[00-HQ/INDEX]] |
-| **02-Labs** | Smart contracts, hackathons, research | [[02-Labs/INDEX]] |
-| **03-Projects** | Active builds with repos | [[03-Projects/INDEX]] |
-| **03-Strategies** | DeFi research, market analysis | [[03-Strategies/INDEX]] |
-| **04-Entertainment** | Content strategy, branding | [[04-Entertainment/INDEX]] |
-| **06-Content** | X drafts, blogs, podcasts | [[06-Content/INDEX]] |
-| **09-Green Room** | Active workspace, ideas, designs | [[09-Green Room/INDEX]] |
-| **05-Learning** | Courses, academy material | [[05-Learning/README]] |
-| **06-Audits** | Code audits (Kite AI, C4) | — |
-| **12-Skills** | Agent protocols, skill wikis | — |
-| **15-Gaming** | POE2 builds, Vanito | — |
+| **HQ** | Operations, approvals, travel, grants | [[HQ/INDEX]] |
+| **Labs** | Smart contracts, hackathons, research | [[Labs/INDEX]] |
+| **Projects** | Active builds with repos | [[Projects/INDEX]] |
+| **Strategies** | DeFi research, market analysis | [[Strategies/INDEX]] |
+| **Entertainment** | Content strategy, branding | [[Entertainment/INDEX]] |
+| **Content** | X drafts, blogs, podcasts | [[Content/INDEX]] |
+| **Green-Room** | Active workspace, ideas, designs | [[Green-Room/INDEX]] |
+| **Learning** | Courses, academy material | [[Learning/README]] |
+| **Audits** | Code audits (Kite AI, C4) | — |
+| **Skills** | Agent protocols, skill wikis | — |
+| **Gaming** | POE2 builds, Vanito | — |
 
 ---
 
@@ -43,21 +43,21 @@ updated: 2026-06-07
 
 | Agent | Domain | Where They Write |
 |-------|--------|-----------------|
-| **Gentech** | Coordinator | `00-HQ/`, `Daily/` |
-| **YoYo** | DeFi & Strategy | `03-Strategies/` |
-| **DMOB** | Code & Labs | `02-Labs/` |
-| **Desmond** | Content & Brand | `04-Entertainment/`, `06-Content/` |
+| **Gentech** | Coordinator | `HQ/`, `Daily/` |
+| **YoYo** | DeFi & Strategy | `Strategies/` |
+| **DMOB** | Code & Labs | `Labs/` |
+| **Desmond** | Content & Brand | `Entertainment/`, `Content/` |
 
 ---
 
 ## 📋 Key Files
 
-- **[[00-HQ/STATUS-BOARD]]** — Jordan's single source of truth
+- **[[HQ/STATUS-BOARD]]** — Jordan's single source of truth
 - **[[00-Working-Memory]]** — Current sprint state
-- **[[00-HQ/hackathon-tracker]]** — All hackathon statuses
-- **[[03-Strategies/Grant-Applications-Queue]]** — Grant pipeline
-- **[[12-Skills/agents-protocol]]** — Agent communication rules
-- **[[00-HQ/vault-health]]** — Vault health metrics
+- **[[HQ/hackathon-tracker]]** — All hackathon statuses
+- **[[Strategies/Grant-Applications-Queue]]** — Grant pipeline
+- **[[Skills/agents-protocol]]** — Agent communication rules
+- **[[HQ/vault-health]]** — Vault health metrics
 
 ---
 

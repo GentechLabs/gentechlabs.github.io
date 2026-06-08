@@ -1,6 +1,6 @@
 # Execution Plan — Echo Brain (Agent Arena Integration)
 
-**From:** Build Brief (09-Green Room/build-logs/echo-brain-build-brief.md)
+**From:** Build Brief (Green-Room/build-logs/echo-brain-build-brief.md)
 **Target Repo:** github.com/ProtoJay4789/Agent-Arena
 **Date:** 2026-05-22
 
