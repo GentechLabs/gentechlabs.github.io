@@ -1,6 +1,6 @@
 # 🏆 Active Hackathon Tracker
 
-Last updated: 2026-06-06 (daily scan + Casper/Qwen updates)
+Last updated: 2026-06-07 (nightly sweep)
 
 | Hackathon | Dates | Theme | Prizes | Status | Notes |
 |-----------|-------|-------|--------|--------|-------|
@@ -9,7 +9,7 @@ Last updated: 2026-06-06 (daily scan + Casper/Qwen updates)
 | Google Cloud Rapid Agent | Jun 11 | Gemini + Agent Builder + MCP | $60K | ❌ NOT PURSUING | Enterprise lock-in, low prize-per-track, not our stack. |
 | 1752vc Lightning Round VIII | Jun 4 | AI / Frontier Tech / Deep Tech | $100K investment + $1M perks | ✅ PASSED | Deadline passed Jun 4. Pitch comp for 1752 Accelerate. Apply: https://sparkxyz.io/submissions/new?competition_id=1842 |
 | Google for Startups AI Agents Challenge | Jun 5 | AI agents prototype → production | $90K + $500 cloud credits | ✅ PASSED | Deadline passed Jun 5. 6-week comp, multiple tracks, Gemini Enterprise access. |
-| Somnia | Jun 11 | $5K+ | 🔴 ACTIVE | Rugcheck — AI agent monitoring token launches, detects rugs/honeypots. Contract compiled, frontend wired with ethers.js, 8 unit tests passing, GitHub repo + Pages live (ProtoJay4789.github.io/rugcheck/). Awaiting testnet wallet for deploy + E2E test. |
+| Somnia | Jun 11 | $5K+ | ⚠️ 🔴 ACTIVE (4 days) | Rugcheck — AI agent monitoring token launches, detects rugs/honeypots. Contract compiled, frontend wired with ethers.js, 8 unit tests passing, GitHub repo + Pages live (ProtoJay4789.github.io/rugcheck/). Awaiting testnet wallet for deploy + E2E test. |
 | Agora Agents (Canteen × Circle) | May 25 | AI Agents on Arc (EVM L1) | $50K | ✅ SUBMITTED | AdaptiveFolio — AI portfolio manager. 38 tests passing. Live demo: protojay4789.github.io/adaptive-folio. Submitted May 26. |
 | Swarms ACM | May 27 | Finance & Market Analysis | $30K | ✅ PUBLISHED | LP Monitor agent: 26 tests passing, live API verified. Repo: ProtoJay4789/swarms-acm-hackathon. Published to Swarms Marketplace, tokenized Solana. |
 | Arbitrum Open House | Reg: May 25 / Sub: Jun 14 | AI Agents (Best Agentic) | $115K ($70K+$15K+$30K) | 🟢 SHIPPED | AgentForge: 241 lines, 10 tests. Repo: ProtoJay4789/arbitrum-open-house. Best Agentic track. Deploy to Arbitrum Sepolia next. |
@@ -74,7 +74,7 @@ Last updated: 2026-06-06 (daily scan + Casper/Qwen updates)
 10. **Dev3pack Bridge Accelerator** — 🟡 QUEUED. Jun 12. Jordan to provide details.
 11. **BNB Agent SDK** — 🟡 QUEUED. AI Agent Identity + Commerce. No deadline yet.
 12. **Qwen Cloud AI Hackathon** — 🟡 QUEUED. Tracks: MemoryAgent, AI Showrunner, Agent Society. Link: https://qwencloud-hackathon.devpost.com/
-13. **Casper Agentic Buildathon** — 🟡 NEW. $150K. Agentic AI + x402 + DeFi on Casper (Rust). 24 days left. Link: https://dorahacks.io/hackathon/casper-agentic-buildathon
+13. **Casper Agentic Buildathon** — 🟡 NEW. $150K. Agentic AI + x402 + DeFi on Casper (Rust). ~23 days left. Link: https://dorahacks.io/hackathon/casper-agentic-buildathon
 14. **The Pitch by Deel** — 🟡 QUEUE. $15M global startup comp. $50K regional, $1M global. Link: https://www.deel.com/the-pitch-by-deel/
 
 ## Learning Track (Jordan directive, Jun 4 — fast-track multi-chain)

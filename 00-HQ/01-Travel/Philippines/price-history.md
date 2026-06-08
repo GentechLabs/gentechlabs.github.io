@@ -84,3 +84,25 @@
 - **Key Finding:** $874 is BELOW the $893 previous low and well within the $900-1,100 "Good Deal" target range. Air Canada and Korean Air are both below $900.
 - **Recommendation:** Air Canada at $874 is the strongest price seen since monitoring began. Recommend checking Momondo directly for Aug 25-Sep 10 to confirm this price applies to target dates.
 - **TinyFish Status:** Timed out for 2nd consecutive scan. API reliability issue — falling back to web search.
+
+### 2026-06-08 (Web Search Scan — TinyFish out of credits)
+- **Cheapest RT Found:** $860 (Google Flights)
+- **Range Across Top Sources:** $860 – $986 RT
+- **Assessment:** ⬇️ DOWN — New all-time low on Google Flights (-$14 from previous $874)
+- **Top Sources:**
+  - Google Flights: $860 RT (cheapest available)
+  - Expedia: $894 RT
+  - Skyscanner: $894 RT
+  - KAYAK (Air Canada): $986 RT
+  - KAYAK (SAUDIA): $1,123 RT
+  - Travelocity: $1,208 RT
+  - Philippine Airlines: $1,132–$1,213 RT
+- **Airlines Identified:**
+  1. Google Flights aggregated lowest (likely Air Canada or United)
+  2. Air Canada: ~$986 RT (KAYAK, past 72h)
+  3. SAUDIA: ~$1,123 RT (KAYAK, past 72h)
+  4. Philippine Airlines: $1,132–$1,213 RT (direct)
+- **Price Trend:** ⬇️ DOWN — Previous all-time low was $874 (Air Canada via Momondo, Jun 7). Google Flights now showing $860 RT. Prices remain volatile but trending favorably.
+- **Key Finding:** $860 is the NEW ALL-TIME LOW and well below the $900–$1,100 "Good Deal" target range. Multiple sources under $900.
+- **Recommendation:** Strong buy window. Multiple sub-$900 options available. Recommend booking within 1-2 days before prices rebound.
+- **TinyFish Status:** ⚠️ API out of credits (0 remaining). Need to add credits at https://agent.tinyfish.ai/credits for future automated scans.

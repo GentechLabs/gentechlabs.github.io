@@ -1,0 +1,162 @@
+{
+  "scan_date": "2026-06-07",
+  "scanner": "Opportunity Scanner (TinyFish API + Web Search fallback)",
+  "platforms_scanned": ["DoraHacks", "Devpost", "Encode Club", "Web Search"],
+  "tinyfish_status": {
+    "Devpost": "TIMEOUT (180s) — fell back to web search",
+    "DoraHacks": "SUCCESS — full scrape returned",
+    "Encode Club": "EMPTY — fell back to web search"
+  },
+  "new_opportunities": [
+    {
+      "name": "Decentralize AI Hackathon",
+      "source": "HackerNoon + Nosana + Arweave + MEXC",
+      "url": "https://decentralizeai.tech",
+      "deadline": "Rolling — two-round competition, no fixed deadline found (launched ~Jun 2, 2026)",
+      "prize": "$51,750+ (Nosana compute credits $41,750, Arweave storage $2,500, MEXC prizes)",
+      "tracks": ["Decentralized AI Infrastructure", "Open AI", "Compute", "Storage"],
+      "ecosystem": "Nosana (Solana) + Arweave",
+      "fit_score": 4,
+      "fit_reason": "Nosana is Solana-native — our Solana stack is directly applicable. AI infrastructure focus aligns with agent economy. Decentralized compute = where agents run. Can submit existing work or concept-stage proposals. Nosana GPU credits useful for training.",
+      "barrier": "None — open to all, multiple submissions allowed",
+      "status": "NEW — not in tracker"
+    },
+    {
+      "name": "BNB Hack: AI Trading Agent Edition",
+      "source": "DoraHacks — BNB Chain × CoinMarketCap × Trust Wallet",
+      "url": "https://dorahacks.io/hackathon/bnbhack-twt-cmc/",
+      "deadline": "Jun 19-21, 2026 (3 weeks from Jun 3 launch)",
+      "prize": "$36,000 USD + API credits + Claude API compute + Trust Wallet listing",
+      "tracks": ["AI Trading Agent (Autonomous)", "AI Agent Signals & Data"],
+      "ecosystem": "BNB Chain (BSC)",
+      "fit_score": 4,
+      "fit_reason": "AI trading agents = Trade Roast core concept. BNB Agent SDK already in our queue. BSC testnet via MegaFuel already configured. Claude API credits as bonus. Two clear tracks — trading agent or signal/data agent. Strong alignment with DeFi + AI agent stack.",
+      "barrier": "None — open registration, 3 weeks to build",
+      "status": "NEW — not in tracker (note: distinct from BNB Agent SDK which is already tracked)"
+    },
+    {
+      "name": "CROO Agent Hackathon",
+      "source": "DoraHacks",
+      "url": "https://dorahacks.io/hackathon/croo-hackathon",
+      "deadline": "Jul 11, 2026 (Jun 9 — Jul 11, 2026)",
+      "prize": "$10,200 USD",
+      "tracks": ["AI Agents", "A2A Composability", "Agent Commerce", "On-chain Payments"],
+      "ecosystem": "CROO Network (A2A protocol)",
+      "fit_score": 3,
+      "fit_reason": "A2A composability and agent commerce align with agent economy vision. But CROO is a new/unproven protocol — limited ecosystem value. Small prize pool. Previously filtered as 'too deadline' but actually has 5 weeks. Marginal fit.",
+      "barrier": "None — open registration",
+      "status": "NEW — not in tracker (was filtered out Jun 6 as '2 days left' — deadline actually Jul 11)"
+    },
+    {
+      "name": "QVAC Hackathon I - Unleash Edge AI",
+      "source": "DoraHacks",
+      "url": "https://dorahacks.io/hackathon/qvac",
+      "deadline": "Jun 20, 2026",
+      "prize": "$21,000 USD",
+      "tracks": ["Edge AI", "Mobile AI", "Open Source", "Privacy", "Frontier Tech"],
+      "ecosystem": "QVAC (edge computing)",
+      "fit_score": 3,
+      "fit_reason": "Privacy and edge AI are tangentially related to our agent stack. Could position agent deployment at the edge. But not core crypto/DeFi focus. Small prize. Moderate learning value for privacy-preserving agent deployment.",
+      "barrier": "None — open registration",
+      "status": "NEW — not in tracker"
+    }
+  ],
+  "already_tracked_status_updates": [
+    {
+      "name": "Somnia",
+      "deadline": "Jun 11 (4 days left)",
+      "status": "ACTIVE — needs testnet wallet + deploy URGENTLY",
+      "update": "No change. Still blocked on testnet wallet."
+    },
+    {
+      "name": "Arbitrum Open House",
+      "deadline": "Jun 14 (7 days left)",
+      "status": "SHIPPED — needs deploy to Arbitrum Sepolia + submit",
+      "update": "No change. Repo ready, deploy next."
+    },
+    {
+      "name": "Mantle Turing Test",
+      "deadline": "Jun 15 (8 days left)",
+      "status": "QUEUED — needs DoraHacks registration + deploy to Mantle Sepolia",
+      "update": "Confirmed on DoraHacks as 'The Turing Test Hackathon 2026'. $120K pool. 9 days left for submission. MUST register on DoraHacks portal."
+    },
+    {
+      "name": "FIND EVIL!",
+      "deadline": "Jun 15 (8 days left)",
+      "status": "NOT STARTED — $22K, cybersecurity + AI + MCP",
+      "update": "Still in tracker. MCP experience applicable. Consider for Agent Shield angle."
+    },
+    {
+      "name": "Sui Overflow",
+      "deadline": "Jun 21 (14 days left)",
+      "status": "QUEUED — $500K+ pool, Jordan to verify registration",
+      "update": "Confirmed: build period May 7 — Jun 21. Must deploy to Sui mainnet/testnet at shortlisting. Pre-registration open. $500K+ total across core + sponsored tracks. HIGH PRIORITY if registered."
+    },
+    {
+      "name": "BNB Agent SDK",
+      "status": "QUEUED — no deadline yet",
+      "update": "Distinct from BNB Hack: AI Trading Agent Edition (new find above). This is the broader BNB Agent Identity + Commerce track."
+    },
+    {
+      "name": "Encode Solana Bootcamp",
+      "deadline": "Jun 22 start",
+      "status": "SIGN UP NEEDED — 4 weeks, Solana dev",
+      "update": "Confirmed on Encode Club. Summer hackathon + bootcamp sponsored by Solana Foundation."
+    },
+    {
+      "name": "Encode Arc Bootcamp",
+      "deadline": "Jun 22 start",
+      "status": "SIGN UP NEEDED — 4 weeks, EVM/Arc, programmable money",
+      "update": "Confirmed on Encode Club as 'Programmable Money on Arc Bootcamp'."
+    },
+    {
+      "name": "Qwen Cloud AI Hackathon",
+      "deadline": "Jul 9 (32 days left)",
+      "status": "QUEUED — $70K+, Agent Society track",
+      "update": "Confirmed on Devpost. 5 tracks including Agent Society. Must use Qwen models."
+    },
+    {
+      "name": "Casper Agentic Buildathon",
+      "deadline": "~Jun 30 (23 days left)",
+      "status": "QUEUED — $150K, agentic AI + x402 + DeFi on Casper (Rust)",
+      "update": "Confirmed on DoraHacks. Qualification round live. Strong fit."
+    }
+  ],
+  "filtered_out": [
+    {"name": "SuperAI NEXT Hackathon", "reason": "PAST — deadline Jun 7 (today). $125K AWS credits, not cash."},
+    {"name": "AWS Prompt the Planet Challenge", "reason": "PAST — deadline Jun 8. $50K AWS credits only."},
+    {"name": "Skill-to-Agent Dual Cascade", "reason": "PAST — deadline Jun 6 (yesterday). 50K $PROS tokens."},
+    {"name": "Anna AI-Native App Hackathon", "reason": "Too small — $300 prize. Low priority."},
+    {"name": "GNSS 4 Disaster Risk Reduction", "reason": "Not our stack — space/GNSS tech."},
+    {"name": "Injective AI Agent Hackathon", "reason": "PAST — concluded early 2025 with ElizaOS. Not a current event."},
+    {"name": "ETHGlobal Unite DeFi", "reason": "Already tracked from Jun 6 scan. Needs date verification for 2026."},
+    {"name": "AlgoBharat Regional Hackathons", "reason": "Password protected prizes, regional focus."},
+    {"name": "MDBA Youth Blockchain Hackathon", "reason": "Student-focused, 99+ day deadline — low urgency."},
+    {"name": "BLI Legal Tech Hackathon 2", "reason": "Legal/compliance focus — not our stack."},
+    {"name": "MunichTech Innovation Hackathon", "reason": "In-person, Germany — not accessible from Ohio."},
+    {"name": "Hackathon 2026 Challenge", "reason": "Smart City/IoT — not our stack."},
+    {"name": "OpenAIRE AI Hackathon", "reason": "Open Science focus, submissions due Aug 20 — low urgency."},
+    {"name": "H0: Hack the Zero Stack", "reason": "Vercel + AWS web dev — not our stack."},
+    {"name": "Splunk Agentic Ops", "reason": "Enterprise SIEM — not our stack."},
+    {"name": "DeveloperWeek 2026 Hackathon", "reason": "In-person New York — not accessible from Ohio."},
+    {"name": "DevNetwork AI+ML Hackathon", "reason": "In-person — not accessible from Ohio."}
+  ],
+  "urgent_deadlines": [
+    {"name": "Somnia", "deadline": "Jun 11", "days_left": 4, "action": "DEPLOY — needs testnet wallet"},
+    {"name": "Arbitrum Open House", "deadline": "Jun 14", "days_left": 7, "action": "DEPLOY to Sepolia + submit"},
+    {"name": "Mantle Turing Test", "deadline": "Jun 15", "days_left": 8, "action": "REGISTER on DoraHacks + deploy"},
+    {"name": "FIND EVIL!", "deadline": "Jun 15", "days_left": 8, "action": "DECIDE — build or skip"},
+    {"name": "Sui Overflow", "deadline": "Jun 21", "days_left": 14, "action": "VERIFY registration"},
+    {"name": "BNB Hack: AI Trading Agent", "deadline": "Jun 19", "days_left": 12, "action": "NEW — evaluate for Trade Roast angle"},
+    {"name": "Encode Vibe Coding", "deadline": "Jun 19", "days_left": 12, "action": "Already tracked — 3-day sprint"},
+    {"name": "Encode Solana Bootcamp", "deadline": "Jun 22", "days_left": 15, "action": "SIGN UP"},
+    {"name": "Encode Arc Bootcamp", "deadline": "Jun 22", "days_left": 15, "action": "SIGN UP"}
+  ],
+  "recommendations": [
+    "1. BNB Hack: AI Trading Agent — STRONG NEW FIND. $36K, AI trading agents = Trade Roast core. BSC already configured. 3 weeks to build. Evaluate immediately.",
+    "2. Decentralize AI Hackathon — NEW FIND. $51K, Nosana (Solana-native) compute credits. Open infrastructure focus. Can submit existing work. Rolling deadline.",
+    "3. Sui Overflow — BIGGEST PRIZE POOL ($500K+). Already tracked but URGENT: verify registration NOW. 14 days left. If registered, this should be top priority.",
+    "4. CROO Agent Hackathon — RE-OPENED. Was filtered as 'too late' but deadline is Jul 11. $10K, A2A agent commerce. Lower priority but viable.",
+    "5. QVAC Edge AI — MODERATE. $21K, privacy + edge AI. Not core stack but learning opportunity. Skip unless bandwidth allows."
+  ]
+}
