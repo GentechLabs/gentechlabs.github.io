@@ -499,7 +499,7 @@ html { scroll-behavior: smooth; }
 
 
         <script>
-                            const projects = [
+                                                        const projects = [
     {
       id: 'agent-escrow',
       title: 'AgentEscrow',
@@ -547,12 +547,12 @@ html { scroll-behavior: smooth; }
     {
       id: 'personal-finance',
       title: 'Personal Finance Agent',
-      description: 'Bill reminders, debt consolidation optimizer, crypto-yield routing for idle capital. Voice-first assistant with Telegram notifications. Prototype stage using local LLM (llama3:8b).',
+      description: 'Bill reminders, debt consolidation optimizer, crypto-yield routing for idle capital. Evolving into Agent Bill Pay — consumer gateway to AAE. Screenshot → Dashboard → Calendar → Auto-Pay → Invest.',
       tech: ["Python", "Cron", "Hermes", "DeFi"],
-      status: 'dev',
+      status: 'building',
       deadline: null,
       timeline: 'May 2026',
-      highlight: false,
+      highlight: true,
       vault_path: '03-Projects/Personal-Finance/',
     },
     {
@@ -605,7 +605,7 @@ html { scroll-behavior: smooth; }
       description: 'AI agent trading desk for memecoin analysis and trading on Solana. Real-time market signals, agent-driven execution, and portfolio analytics.',
       tech: ["Solana", "AI Agents", "Trading", "Python"],
       status: 'building',
-      deadline: "2026-06-01",
+      deadline: '2026-06-01',
       timeline: 'Jun 2026',
       highlight: true,
       vault_path: '02-Labs/Hackathons/Bags-FM/',
@@ -616,7 +616,7 @@ html { scroll-behavior: smooth; }
       description: 'Gemini + Agent Builder + MCP integration for Google Cloud hackathon. Autonomous agent pipeline with structured tool calling.',
       tech: ["Google Cloud", "Gemini", "MCP", "Python"],
       status: 'building',
-      deadline: "2026-06-11",
+      deadline: '2026-06-11',
       timeline: 'Jun 2026',
       highlight: false,
       vault_path: '02-Labs/Hackathons/Google-Cloud/',
@@ -627,11 +627,11 @@ html { scroll-behavior: smooth; }
       description: 'On-chain token risk oracle using Somnia\'s dual-agent pattern — JSON API agent fetches GoPlus security data, LLM agent classifies risk level. Live demo on Somnia testnet.',
       tech: ["Solidity", "Somnia", "Hardhat", "GoPlus API", "Ethers.js"],
       status: 'building',
-      deadline: "2026-06-11",
+      deadline: '2026-06-11',
       timeline: 'Jun 2026',
       highlight: true,
-      demo_url: '/somnia-token-risk-oracle/',
       vault_path: '02-Labs/Hackathons/Somnia/',
+      demo_url: '/somnia-token-risk-oracle/',
     },
     {
       id: 'agora-agents',
@@ -639,7 +639,7 @@ html { scroll-behavior: smooth; }
       description: 'AI portfolio rebalancer on Circle Arc. Adaptive portfolio management for the Canteen × Circle × Arc hackathon. $50K prize pool.',
       tech: ["Circle Arc", "AI Agents", "DeFi", "Python"],
       status: 'submitted',
-      deadline: "2026-05-25",
+      deadline: '2026-05-25',
       timeline: 'May 2026',
       highlight: true,
       vault_path: '02-Labs/Hackathons/Agora/',
@@ -650,7 +650,7 @@ html { scroll-behavior: smooth; }
       description: 'DeFi LP monitoring agent built on Swarms framework. Published to Swarms Marketplace, tokenized Solana. Automated position tracking, rebalance signals, and fee analytics. $30K prize pool.',
       tech: ["Swarms", "DeFi", "Python", "LP Monitoring"],
       status: 'submitted',
-      deadline: "2026-05-27",
+      deadline: '2026-05-27',
       timeline: 'May 2026',
       highlight: true,
       vault_path: '02-Labs/Hackathons/Swarms-ACM/',
@@ -664,8 +664,8 @@ html { scroll-behavior: smooth; }
       deadline: null,
       timeline: 'Jun 2026',
       highlight: true,
-      demo_url: '/rugcheck/',
       vault_path: '02-Labs/Hackathons/Sui-Overflow/',
+      demo_url: '/rugcheck/',
     },
     {
       id: 'genlayer-token-scanner',
@@ -723,17 +723,49 @@ html { scroll-behavior: smooth; }
       demo_url: '/pals/poe2-dashboard.html',
     },
     {
-      id: 'trade-roast',
-      title: 'TradeRoast',
-      description: 'AI-powered crypto trading roaster. Connect your Solana wallet, get a savage AI roast of your trading performance, and share a roast card on X/Twitter. 44 tests, live demo.',
-      tech: ["Python", "FastAPI", "AI", "Solana", "Pillow"],
-      status: 'completed',
+      id: 'agent-bill-pay',
+      title: 'Agent Bill Pay',
+      description: 'Consumer gateway to AAE. Screenshot → Dashboard → Calendar → Auto-Pay → Invest. AI agent that pays your bills using stablecoins with programmatic spending guardrails. Built with Rain Agent Control Layer, TrustClaw, and x402 micropayments.',
+      tech: ["AI Agents", "Stablecoins", "Rain", "x402", "TrustClaw"],
+      status: 'building',
       deadline: null,
-      timeline: 'May 2026',
+      timeline: 'Jun 2026',
       highlight: true,
-      demo_url: '/trade-roast/',
-      vault_path: '09-Green Room/designs/trade-roast.md',
-    }
+      vault_path: 'AAE/Agent-Bill-Pay-Full.md',
+    },
+    {
+      id: 'brickken-rams',
+      title: 'Brickken RAMS Integration',
+      description: 'ERC-8226 compliance layer for AI agent authority on tokenized assets. Scoped, time-bounded, financially capped mandates. Partnership outreach to Brickken (Barcelona, $450M+ tokenized assets). Enables agent-native ETFs.',
+      tech: ["ERC-8226", "ERC-8004", "Tokenization", "Compliance", "RWA"],
+      status: 'building',
+      deadline: null,
+      timeline: 'Jun 2026',
+      highlight: true,
+      vault_path: 'AAE/Brickken-RAMS-Integration.md',
+    },
+    {
+      id: 'rain-agent-control',
+      title: 'Rain Agent Control Layer',
+      description: 'Programmatic spending guardrails for AI agents. Scoped virtual cards, merchant allowlists, amount caps. Pre-transaction enforcement. Integration with AAE for consumer bill pay and agent commerce.',
+      tech: ["Stablecoins", "Visa Cards", "Guardrails", "Rain", "Payments"],
+      status: 'building',
+      deadline: null,
+      timeline: 'Jun 2026',
+      highlight: true,
+      vault_path: 'AAE/Rain-Agent-Control-Layer.md',
+    },
+    {
+      id: 'agent-etfs',
+      title: 'Agent-Native ETFs',
+      description: 'Tokenized fund products where AI agents manage portfolios for investors. RAMS-compliant, x402 micropayment fees, ERC-8004 reputation. The intersection of DeFi, TradFi, and AI agents.',
+      tech: ["ERC-8226", "ERC-8004", "DeFi", "Tokenization", "x402"],
+      status: 'building',
+      deadline: null,
+      timeline: 'Jun 2026',
+      highlight: true,
+      vault_path: 'AAE/Agent-ETFs.md',
+    },
 ]
 
             const filterBtns = document.querySelectorAll('#projects .filter-btn');
@@ -1317,17 +1349,6 @@ html { scroll-behavior: smooth; }
     "timeline": "May 2026",
     "highlight": true,
     "demo_url": "/pals/poe2-dashboard.html"
-  },
-  {
-    "id": "trade-roast",
-    "title": "TradeRoast",
-    "description": "AI-powered crypto trading roaster. Connect your Solana wallet, get a savage AI roast of your trading performance, and share a roast card on X/Twitter. 44 tests, live demo.",
-    "tech": ["Python", "FastAPI", "AI", "Solana", "Pillow"],
-    "status": "completed",
-    "deadline": null,
-    "timeline": "May 2026",
-    "highlight": true,
-    "demo_url": "/trade-roast/"
   }
 ]
 </script>
@@ -1730,7 +1751,7 @@ html { scroll-behavior: smooth; }
 
     <div class="footer">
         <p>
-            Built with 💚 by Jordan · Powered by GenTech Agents · Last updated: June 2026<br>
+            Built with 💚 by Jordan · Powered by GenTech Agents · Last updated: May 2026<br>
             <span style="color: #3b82f6;">Building the agent-owned economy.</span>
         </p>
     </div>
