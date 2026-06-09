@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GenTech Pals — Wyvern Warrior</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Crimson+Text:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #c9a84c;
+            --gold-dim: #8b6914;
+            --fire: #ff6b35;
+            --fire-glow: #ff4500;
+            --magma: #cc4400;
+            --ember: #ff8c42;
+            --dark-bg: #0a0a0f;
+            --panel-bg: #12121a;
+            --panel-border: #1e1e2e;
+            --text: #d4d4d4;
+            --text-dim: #6b6b7b;
+            --danger: #ff4444;
+            --success: #44ff88;
+            --mana-blue: #3b82f6;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: var(--dark-bg);
+            color: var(--text);
+            font-family: 'Crimson Text', serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: 
+                radial-gradient(ellipse at 20% 20%, rgba(255, 107, 53, 0.03) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 80%, rgba(255, 69, 0, 0.02) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header {
+            text-align: center;
+            padding: 30px 0;
+            border-bottom: 1px solid var(--panel-border);
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .header::after {
+            content: '🔥';
+            position: absolute;
+            bottom: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--dark-bg);
+            padding: 0 15px;
+            font-size: 20px;
+        }
+
+        .header h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 2.5em;
+            font-weight: 900;
+            color: var(--fire);
+            text-shadow: 0 0 30px rgba(255, 107, 53, 0.3);
+            letter-spacing: 3px;
+        }
+
+        .header .subtitle {
+            color: var(--text-dim);
+            font-size: 1.1em;
+            margin-top: 8px;
+            font-style: italic;
+        }
+
+        .header .patch-badge {
+            display: inline-block;
+            background: rgba(255, 107, 53, 0.1);
+            border: 1px solid rgba(255, 107, 53, 0.3);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            color: var(--fire);
+            margin-top: 10px;
+        }
+
+        .header .last-updated {
+            color: var(--text-dim);
+            font-size: 0.8em;
+            margin-top: 8px;
+        }
+
+        .character-card {
+            background: linear-gradient(135deg, var(--panel-bg) 0%, #151520 100%);
+            border: 1px solid var(--panel-border);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .character-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--fire), transparent);
+            opacity: 0.6;
+        }
+
+        .character-name {
+            font-family: 'Cinzel', serif;
+            font-size: 1.8em;
+            color: var(--fire);
+            margin-bottom: 5px;
+        }
+
+        .character-class {
+            color: var(--ember);
+            font-size: 1.1em;
+            margin-bottom: 15px;
+        }
+
+        .character-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+        }
+
+        .stat-box {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--panel-border);
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+        }
+
+        .stat-box .label {
+            color: var(--text-dim);
+            font-size: 0.85em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .stat-box .value {
+            font-family: 'Cinzel', serif;
+            font-size: 1.4em;
+            color: var(--fire);
+            margin-top: 4px;
+        }
+
+        .stat-box .value.gold { color: var(--gold); }
+
+        .synergy-card {
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.05) 0%, rgba(204, 68, 0, 0.05) 100%);
+            border: 1px solid rgba(255, 107, 53, 0.2);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+
+        .synergy-card h3 {
+            font-family: 'Cinzel', serif;
+            color: var(--fire);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .synergy-chain {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.95em;
+        }
+
+        .synergy-step {
+            background: rgba(255, 107, 53, 0.1);
+            border: 1px solid rgba(255, 107, 53, 0.2);
+            padding: 4px 12px;
+            border-radius: 15px;
+            color: var(--ember);
+        }
+
+        .synergy-arrow {
+            color: var(--text-dim);
+            font-size: 1.2em;
+        }
+
+        .progress-section {
+            background: var(--panel-bg);
+            border: 1px solid var(--panel-border);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+
+        .progress-section h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3em;
+            color: var(--fire);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .progress-bar-container {
+            margin-bottom: 18px;
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 6px;
+            font-size: 0.95em;
+        }
+
+        .progress-label .name { color: var(--text); }
+        .progress-label .percent { color: var(--fire); font-family: 'Cinzel', serif; }
+
+        .progress-bar {
+            height: 20px;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid var(--panel-border);
+        }
+
+        .progress-fill {
+            height: 100%;
+            border-radius: 10px;
+            transition: width 1.5s ease-out;
+            position: relative;
+        }
+
+        .progress-fill.campaign { background: linear-gradient(90deg, var(--magma), var(--fire)); box-shadow: 0 0 15px rgba(255, 107, 53, 0.3); }
+        .progress-fill.level { background: linear-gradient(90deg, #b45309, var(--ember)); box-shadow: 0 0 15px rgba(255, 140, 66, 0.3); }
+        .progress-fill.build { background: linear-gradient(90deg, #7c3aed, #a855f7); box-shadow: 0 0 15px rgba(168, 85, 247, 0.3); }
+        .progress-fill.gems { background: linear-gradient(90deg, #059669, #34d399); box-shadow: 0 0 15px rgba(52, 211, 153, 0.3); }
+
+        .skills-section {
+            background: var(--panel-bg);
+            border: 1px solid var(--panel-border);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+
+        .skills-section h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3em;
+            color: var(--fire);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .skill-set-label {
+            font-family: 'Cinzel', serif;
+            font-size: 1em;
+            color: var(--ember);
+            margin: 15px 0 10px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid rgba(255, 107, 53, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .skill-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 15px;
+        }
+
+        .skill-card {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--panel-border);
+            border-radius: 10px;
+            padding: 18px;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-card:hover {
+            border-color: var(--fire);
+            box-shadow: 0 0 20px rgba(255, 107, 53, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .skill-card.primary { border-color: var(--magma); }
+
+        .skill-card.primary::before {
+            content: '⚔️ PRIMARY';
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            font-size: 0.65em;
+            color: var(--fire);
+            background: rgba(255, 107, 53, 0.1);
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-family: 'Cinzel', serif;
+            letter-spacing: 1px;
+        }
+
+        .skill-name {
+            font-family: 'Cinzel', serif;
+            font-size: 1.15em;
+            color: var(--ember);
+            margin-bottom: 8px;
+        }
+
+        .skill-type {
+            color: var(--text-dim);
+            font-size: 0.8em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        .support-gems {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .support-tag {
+            background: rgba(255, 107, 53, 0.1);
+            border: 1px solid rgba(255, 107, 53, 0.2);
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            color: var(--ember);
+        }
+
+        .support-tag.empty {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px dashed rgba(255, 255, 255, 0.1);
+            color: var(--text-dim);
+            font-style: italic;
+        }
+
+        .meta-alert {
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.05) 0%, rgba(204, 68, 0, 0.05) 100%);
+            border: 1px solid rgba(255, 107, 53, 0.2);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+
+        .meta-alert h3 {
+            font-family: 'Cinzel', serif;
+            color: var(--fire);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .meta-alert .alert-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 8px;
+            padding: 8px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 6px;
+        }
+
+        .meta-alert .priority {
+            color: var(--fire);
+            font-weight: bold;
+            min-width: 20px;
+        }
+
+        .meta-alert .suggestion {
+            color: var(--text);
+            line-height: 1.5;
+        }
+
+        .meta-alert .suggestion strong { color: var(--fire); }
+
+        .footer {
+            text-align: center;
+            padding: 30px 0;
+            border-top: 1px solid var(--panel-border);
+            margin-top: 30px;
+        }
+
+        .footer .brand {
+            font-family: 'Cinzel', serif;
+            color: var(--gold-dim);
+            font-size: 0.9em;
+            letter-spacing: 2px;
+        }
+
+        .footer .powered {
+            color: var(--text-dim);
+            font-size: 0.8em;
+            margin-top: 5px;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 60px;
+            color: var(--text-dim);
+            font-style: italic;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 { font-size: 1.8em; }
+            .character-stats { grid-template-columns: repeat(2, 1fr); }
+            .skill-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container" id="app">
+        <div class="loading">🔥 Loading Wyvern's build...</div>
+    </div>
+
+    <script>
+        const DATA_URL = 'data/poe2-warrior.json';
+
+        async function loadBuild() {
+            try {
+                const res = await fetch(DATA_URL);
+                const data = await res.json();
+                renderDashboard(data);
+            } catch (err) {
+                document.getElementById('app').innerHTML = `
+                    <div class="loading">⚠️ Could not load build data. Make sure ${DATA_URL} exists.</div>
+                `;
+            }
+        }
+
+        function renderDashboard(data) {
+            const { player, progress, skills, suggestions, synergyLoop, lastUpdated } = data;
+
+            // Warrior skills
+            const warriorHTML = skills.warrior.map(skill => `
+                <div class="skill-card ${skill.primary ? 'primary' : ''}">
+                    <div class="skill-name">${skill.name}</div>
+                    <div class="skill-type">${skill.type}</div>
+                    <div class="support-gems">
+                        ${skill.supports.length > 0 
+                            ? skill.supports.map(s => `<span class="support-tag">${s}</span>`).join('')
+                            : '<span class="support-tag empty">No supports yet</span>'
+                        }
+                    </div>
+                </div>
+            `).join('');
+
+            // Wyvern skills
+            const wyvernHTML = skills.wyvern.map(skill => `
+                <div class="skill-card">
+                    <div class="skill-name">${skill.name}</div>
+                    <div class="skill-type">${skill.type}</div>
+                    <div class="support-gems">
+                        ${skill.supports.length > 0 
+                            ? skill.supports.map(s => `<span class="support-tag">${s}</span>`).join('')
+                            : '<span class="support-tag empty">No supports yet</span>'
+                        }
+                    </div>
+                </div>
+            `).join('');
+
+            // Suggestions
+            const suggestionsHTML = suggestions.map(s => `
+                <div class="alert-item">
+                    <span class="priority">${s.priority}.</span>
+                    <span class="suggestion">
+                        <strong>${s.skill}:</strong> ${s.current} → <strong>${s.suggested}</strong> — ${s.reason}
+                    </span>
+                </div>
+            `).join('');
+
+            // Synergy chain
+            const synergySteps = synergyLoop.split(' → ');
+            const synergyHTML = synergySteps.map((step, i) => {
+                const parts = i < synergySteps.length - 1 
+                    ? `<span class="synergy-step">${step}</span><span class="synergy-arrow">→</span>`
+                    : `<span class="synergy-step">${step}</span>`;
+                return parts;
+            }).join('');
+
+            document.getElementById('app').innerHTML = `
+                <div class="header">
+                    <h1>GENTECH PALS</h1>
+                    <div class="subtitle">Agentic Gaming Hub — Vanito's Build</div>
+                    <div class="patch-badge">Patch ${player.patch} — Return of the Ancients</div>
+                    <div class="last-updated">Last updated: ${lastUpdated}</div>
+                </div>
+
+                <div class="character-card">
+                    <div class="character-name">${player.name}</div>
+                    <div class="character-class">${player.class} — ${player.build} — ${player.weapon}</div>
+                    <div class="character-stats">
+                        <div class="stat-box">
+                            <div class="label">Class</div>
+                            <div class="value">${player.class}</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="label">Build</div>
+                            <div class="value">${player.build}</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="label">Weapon</div>
+                            <div class="value gold">${player.weapon}</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="label">Talisman</div>
+                            <div class="value gold">${player.talisman}</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="synergy-card">
+                    <h3>🔄 Synergy Loop</h3>
+                    <div class="synergy-chain">${synergyHTML}</div>
+                </div>
+
+                <div class="progress-section">
+                    <h2>📊 Progress</h2>
+                    <div class="progress-bar-container">
+                        <div class="progress-label">
+                            <span class="name">Campaign</span>
+                            <span class="percent">${progress.campaign}%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill campaign" style="width: 0%" data-target="${progress.campaign}"></div>
+                        </div>
+                    </div>
+                    <div class="progress-bar-container">
+                        <div class="progress-label">
+                            <span class="name">Build Completion</span>
+                            <span class="percent">${progress.buildCompletion}%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill build" style="width: 0%" data-target="${progress.buildCompletion}"></div>
+                        </div>
+                    </div>
+                    <div class="progress-bar-container">
+                        <div class="progress-label">
+                            <span class="name">Gem Collection</span>
+                            <span class="percent">${progress.gemCollection}%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill gems" style="width: 0%" data-target="${progress.gemCollection}"></div>
+                        </div>
+                    </div>
+                    <div class="progress-bar-container">
+                        <div class="progress-label">
+                            <span class="name">Meta Alignment</span>
+                            <span class="percent">${progress.metaAlignment}%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill level" style="width: 0%" data-target="${progress.metaAlignment}"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="skills-section">
+                    <h2>⚔️ Skill Setup</h2>
+                    
+                    <div class="skill-set-label">🛡️ Warrior Set (Primary)</div>
+                    <div class="skill-grid">${warriorHTML}</div>
+                    
+                    <div class="skill-set-label">🐉 Wyvern Set (Secondary)</div>
+                    <div class="skill-grid">${wyvernHTML}</div>
+                </div>
+
+                <div class="meta-alert">
+                    <h3>🎯 Build Optimization Suggestions</h3>
+                    ${suggestionsHTML}
+                </div>
+
+                <div class="footer">
+                    <div class="brand">GENTECH PALS</div>
+                    <div class="powered">Agentic Gaming Hub v0.1 — Vanito's Warrior</div>
+                </div>
+            `;
+
+            // Animate progress bars
+            setTimeout(() => {
+                document.querySelectorAll('.progress-fill').forEach(bar => {
+                    bar.style.width = bar.getAttribute('data-target') + '%';
+                });
+            }, 300);
+        }
+
+        // Auto-refresh every 30 seconds
+        loadBuild();
+        setInterval(loadBuild, 30000);
+    </script>
+</body>
+</html>
