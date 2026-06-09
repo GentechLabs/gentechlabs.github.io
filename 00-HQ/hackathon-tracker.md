@@ -1,14 +1,14 @@
 # Hackathon Tracker — GenTech Labs
 
-> Last updated: 2026-06-08 | Mode: Learning + Selective Builds
+> Last updated: 2026-06-09 | Mode: Learning + Selective Builds
 
 ## Priority Queue (Jordan's Directive Order)
 
 ### 🔴 URGENT — Decision Needed This Week
 | # | Hackathon | Prize | Deadline | Days Left | Fit | Status |
 |---|-----------|-------|----------|-----------|-----|--------|
-| 1 | **BNB Hack: AI Trading Agent Edition** | $36K | Jun 21 | 13 | ⭐⭐⭐⭐⭐ | 🟡 Evaluate — direct fit, AI trading agents on BSC |
-| 2 | **Mantle Turing Test Hackathon** | $100K+ | Jun 15 | 7 | ⭐⭐⭐⭐ | 🟡 Tight — ERC-8004 + agentic wallets |
+| 1 | **BNB Hack: AI Trading Agent Edition** | $36K | Jun 21 | 12 | ⭐⭐⭐⭐⭐ | 🟡 Evaluate — direct fit, AI trading agents on BSC |
+| 2 | **Mantle Turing Test Hackathon** | $100K+ | Jun 15 | 6 | ⭐⭐⭐⭐ | ⚠️ 🟡 Tight — ERC-8004 + agentic wallets |
 
 ### 📚 LEARNING TRACK (Primary Focus)
 | # | Program | Type | Starts | Duration | Status |

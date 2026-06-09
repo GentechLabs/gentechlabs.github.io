@@ -1,6 +1,6 @@
 # 📋 GenTech Status Board
 
-**Last updated:** 2026-06-08 (nightly sweep)
+**Last updated:** 2026-06-09 (nightly sweep)
 **Updated by:** Gentech
 
 > Jordan: This is your single file to check. Open it, know everything.
@@ -18,7 +18,6 @@
 
 ## 🔴 Needs Jordan's Attention
 
-- [ ] **Alliance AI Application** — Draft ready. Submit at https://alliance.xyz/apply (rolling admissions)
 - [ ] **xurl Auth** — Not configured, can't post to X/Twitter. BLOCKER for content pipeline.
 - [ ] **Birthday Trip Flights** — Book ASAP (Aug/Sep 2026)
 
@@ -78,7 +77,7 @@
 - ~~**Jun 11:** Somnia Agentathon~~ ✅ PASSED (deadline missed)
 - ~~**Jun 12:** Dev3pack Bridge Accelerator~~ ❌ CANCELLED
 - **Jun 14:** Arbitrum Open House submission
-- ⚠️ **Jun 15:** Mantle Turing Test Phase II — 7 days left
+- ⚠️ **Jun 15:** Mantle Turing Test Phase II — 6 days left
 - **Jun 15:** FIND EVIL! — $22K, cybersecurity + AI, MCP
 - **Jun 19:** Encode Vibe Coding Hackathon — 3-day sprint
 - **Jun 21:** Sui Overflow — Jordan to verify registration

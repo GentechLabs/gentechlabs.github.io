@@ -1,10 +1,10 @@
 ---
-date: 2026-06-08
+date: 2026-06-09
 purpose: Working memory — current sprint state, blockers, priorities
-updated: 2026-06-08
+updated: 2026-06-09
 ---
 
-# GenTech Working Memory — Updated 2026-06-08
+# GenTech Working Memory — Updated 2026-06-09
 
 ## Active Sprint — Week of Jun 7–13, 2026
 
@@ -79,8 +79,8 @@ updated: 2026-06-08
 ## Key Dates
 
 - **Jun 8:** Nightly sweep — status sync
-- **Jun 14:** Arbitrum Open House submission
-- ⚠️ **Jun 15:** Mantle Turing Test Phase II (7 days)
+- **Jun 14:** Arbitrum Open House submission (5 days)
+- ⚠️ **Jun 15:** Mantle Turing Test Phase II (6 days)
 - **Jun 15:** FIND EVIL! — $22K, cybersecurity + AI
 - **Jun 19:** Encode Vibe Coding Hackathon
 - **Jun 21:** Sui Overflow deadline
