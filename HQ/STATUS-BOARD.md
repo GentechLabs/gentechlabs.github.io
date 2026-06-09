@@ -1,6 +1,6 @@
 # 📋 GenTech Status Board
 
-**Last updated:** 2026-06-07 (nightly sweep)
+**Last updated:** 2026-06-08 (nightly sweep)
 **Updated by:** Gentech
 
 > Jordan: This is your single file to check. Open it, know everything.
@@ -37,9 +37,9 @@
 - **AI Agentic Category:** $15K buildathon + $20K founder house
 - **Fit:** AgentForge — 241 lines, 10 tests
 
-### Mantle Turing Test 2026 ($120K+)
+### ⚠️ Mantle Turing Test 2026 ($120K+)
 - **Status:** ⚠️ Queued — Phase II
-- **Due:** Jun 15 (8 days) — ⚠️ Register on DoraHacks + deploy Mantle Sepolia
+- **Due:** Jun 15 (7 days) — Register on DoraHacks + deploy Mantle Sepolia
 - **Tracks:** AI Trading & Strategy, Agentic Economy
 
 ### ✅ Swarms ACM ($30K) — PUBLISHED
@@ -75,10 +75,10 @@
 - ~~**Jun 4:** 1752vc Lightning Round VIII — $100K investment~~ ✅ PASSED
 - ~~**Jun 5:** Google for Startups AI Agents Challenge — $90K~~ ✅ PASSED
 - ~~**Jun 11:** Google Cloud Rapid Agent — $60K~~ ✅ NOT PURSUING (enterprise lock-in)
-- ⚠️ **Jun 11:** Somnia Agentathon — needs testnet wallet + deploy
-- **Jun 12:** Dev3pack Bridge Accelerator
+- ~~**Jun 11:** Somnia Agentathon~~ ✅ PASSED (deadline missed)
+- ~~**Jun 12:** Dev3pack Bridge Accelerator~~ ❌ CANCELLED
 - **Jun 14:** Arbitrum Open House submission
-- **Jun 15:** Mantle Turing Test Phase II
+- ⚠️ **Jun 15:** Mantle Turing Test Phase II — 7 days left
 - **Jun 15:** FIND EVIL! — $22K, cybersecurity + AI, MCP
 - **Jun 19:** Encode Vibe Coding Hackathon — 3-day sprint
 - **Jun 21:** Sui Overflow — Jordan to verify registration
@@ -92,7 +92,7 @@
 - **Approval Queue:** ✅ Clean — no pending items
 - **Considerations:** ✅ Active items current
 - **Working Memory:** ✅ Current
-- **Status Board:** ✅ Updated June 7
+- **Status Board:** ✅ Updated June 8
 
 ---
 

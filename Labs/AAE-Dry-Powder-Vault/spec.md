@@ -10,33 +10,52 @@ owner: Gentech Labs
 
 ## Vision
 
-A smart stablecoin vault that auto-rotates idle USDC across chains based on yield opportunities, narrative strength, and user preferences. Users deposit USDC once — the agent handles all cross-chain movement, bridging, and LP positioning.
+A smart stablecoin vault that auto-rotates idle USDC across chains AND narratives. Two-dimensional rotation: which chain to be on, and which narrative on that chain. Users deposit USDC once — the agent handles everything.
 
-**Core insight:** Nobody is building multi-chain yield optimization that "just works." Users shouldn't need to understand bridging, gas tokens, or chain mechanics. The agent handles everything autonomously.
+**Core insight:** Nobody is building narrative-based rotation. Smart money rotates between memes, RWA, AI, gaming — but retail can't track it. The Agent ETF makes narrative rotation automatic and visible.
 
----
+**June 8, 2026:** Added narrative rotation dimension — the "Agent ETF" concept. Vault now tracks both cross-chain rotation AND intra-chain narrative rotation.
 
 ## Architecture
 
 ### Three-Layer Stack (Extends AAE DeFi Milestone)
-
+### Three-Layer Stack (Extends AAE DeFi Milestone)
 ```
 ┌─────────────────────────────────────────────────────────┐
 │         PRESENTATION LAYER (Dashboard + Alerts)          │
-│   Zone tracker, narrative strength, rotation prompts     │
+│   2D rotation view, narrative heat map, zone tracker     │
 ├─────────────────────────────────────────────────────────┤
 │           ORCHESTRATION LAYER (Hermes Agent)             │
-│   Yield monitoring, rotation decisions, gas management   │
+│   Narrative momentum engine, yield monitoring, rotation  │
 ├─────────────────────────────────────────────────────────┤
 │              EXECUTION LAYER (Cross-Chain)               │
-│   CCTP bridging, DEX swaps, LP positioning               │
+│   CCTP bridging, DEX swaps, LP positioning, gas mgmt    │
 ├─────────────────────────────────────────────────────────┤
 │               DATA LAYER (Signals)                       │
-│   CMC zones, narrative strength, yield feeds, news       │
+│   CMC zones, narrative rotation engine, yield feeds      │
 └─────────────────────────────────────────────────────────┘
 ```
 
-### Supported Chains (v1)
+### Two-Dimensional Rotation Model
+
+Dimension 1: **Cross-Chain** — which chain to deploy on
+Dimension 2: **Narrative** — which sector on that chain
+
+```
+              Base      Avalanche     Solana
+Blue Chips    ● AERO     ● AVAX        ● SOL
+RWA/DeFi      ○          ● ONDO        ○
+Memes         ○          ● COQ/ARENA   ● WIF/BONK
+AI/DePIN      ○          ○             ● RENDER
+Gaming        ○          ● BEAM/ILV    ○
+Real Assets   ○          ● XAUt        ○
+Political     ○          ○             ● TRUMP
+```
+
+User can choose:
+  → **Multi-chain mode:** Agent rotates across all chains + narratives
+  → **Chain-specific mode:** Pick one chain (e.g., Avalanche), rotate between narratives on that chain only
+  → **Narrative-specific mode:** Pick one narrative (e.g., RWA), find the best chain for that narrative
 
 | Chain | Role | Gas Token | Yield Source | Status |
 |-------|------|-----------|--------------|--------|

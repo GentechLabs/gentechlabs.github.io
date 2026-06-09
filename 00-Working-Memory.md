@@ -1,10 +1,10 @@
 ---
-date: 2026-06-07
+date: 2026-06-08
 purpose: Working memory — current sprint state, blockers, priorities
-updated: 2026-06-07
+updated: 2026-06-08
 ---
 
-# GenTech Working Memory — Updated 2026-06-07
+# GenTech Working Memory — Updated 2026-06-08
 
 ## Active Sprint — Week of Jun 7–13, 2026
 
@@ -20,11 +20,11 @@ updated: 2026-06-07
 - ✅ **README.md updated** — Quick-start guide with navigation
 
 ### Priority Hackathons (This Week)
-- **Google Cloud Rapid Agent** — 🟡 ACTIVE | Due: Jun 11 | Agent starter pack scope
-- **Somnia Agentathon** — 🟡 ACTIVE | Due: Jun 11 | Runbook ready
-- **Dev3pack Bridge Accelerator** — 🟡 QUEUED | Due: Jun 12 | Jordan to provide details
+- ~~**Google Cloud Rapid Agent**~~ — ❌ DROPPED (enterprise lock-in)
+- ~~**Somnia Agentathon**~~ — ✅ PASSED (deadline missed)
+- ~~**Dev3pack Bridge Accelerator**~~ — ❌ CANCELLED
 - **Arbitrum Open House ($415K)** — 🟢 SHIPPED | Due: Jun 14 | AgentForge ready
-- **Mantle Turing Test ($120K)** — 🟡 REGISTER + DEPLOY | Due: Jun 15 | Phase II
+- ⚠️ **Mantle Turing Test ($120K)** — 🟡 REGISTER + DEPLOY | Due: Jun 15 (7 days) | Phase II
 
 ### Queued (Deadlines Ahead)
 - **Sui Overflow** — 🟡 QUEUED | Due: Jun 21 | Move contract built
@@ -78,11 +78,11 @@ updated: 2026-06-07
 
 ## Key Dates
 
-- **Jun 7:** Vault index system deployed
-- **Jun 11:** Google Cloud Rapid Agent + Somnia deadlines
-- **Jun 12:** Dev3pack Bridge Accelerator
+- **Jun 8:** Nightly sweep — status sync
 - **Jun 14:** Arbitrum Open House submission
-- **Jun 15:** Mantle Turing Test Phase II
+- ⚠️ **Jun 15:** Mantle Turing Test Phase II (7 days)
+- **Jun 15:** FIND EVIL! — $22K, cybersecurity + AI
+- **Jun 19:** Encode Vibe Coding Hackathon
 - **Jun 21:** Sui Overflow deadline
 - **Jun 22:** Encode Solana + Arc Bootcamps start
 - **Rolling:** Alliance AI — https://alliance.xyz/apply
@@ -110,4 +110,4 @@ updated: 2026-06-07
 
 ---
 
-*Last refreshed: 2026-06-07. This file is Jordan's quick-reference for current state.*
+*Last refreshed: 2026-06-08. This file is Jordan's quick-reference for current state.*

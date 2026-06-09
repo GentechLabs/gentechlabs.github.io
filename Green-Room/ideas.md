@@ -1,16 +1,15 @@
 # Ideas — Green Room
 
 ## Active Builds
+- [ ] **Agent Bill Pay (MVP)** — Screenshot → Dashboard → Calendar → Auto-Pay → Invest. Consumer gateway to AAE. TrustClaw/Composio for Google Calendar. Rain ACL for guardrails. **Tier 1 — Build Now.** See: `AAE/Agent-Bill-Pay-Full.md`
+- [ ] **Brickken RAMS Integration** — ERC-8226 compliance layer for agent authority on tokenized assets. Partnership outreach drafted. Agent-native ETFs possible. **Tier 1 — Partner Outreach.** See: `AAE/Brickken-RAMS-Integration.md`
+- [ ] **Rain Agent Control Layer** — Programmatic spending guardrails for agents. Scoped virtual cards, merchant allowlists, amount caps. Pre-transaction enforcement. **Tier 1 — Integration.** See: `AAE/Rain-Agent-Control-Layer.md`
 - [ ] **Lobby UI** — Multiplayer menu for agent-to-human commerce. EarnFi + OOBE + x402 integration. Game-styled "Find Teammates" wrapper. **Delegated to Labs.**
-- [ ] **AgentLayer Wallet Integration** — Local-first wallet for AAE. Test MCP server, x402 flow, ERC-8004 discovery. License: PolyForm (MIT fallback: AgentWallet Protocol). **Delegated to Labs.**
-- [ ] **OOBE + EarnFi Integration** — Human execution via OOBE SDK. Agents hire humans for tasks, social campaigns, bounties, reviews. x402 USDC payments. **Delegated to Labs.**
-- [ ] **EarnFi Agent Client SDK** — `@earn-fi/agent-client` v2.0.1 (MIT). TypeScript SDK + CLI for x402 USDC payments. **Delegated to Labs.**
 - [ ] **Gentech Agents (Open Source)** — Multi-agent orchestration framework. Hermes + specialized agents + ERC-8004 + x402 + EarnFi. Open source as MIT. **Delegated to Labs.**
-- [ ] **GenTech Journal + AgentCall** — Phone-based journaling. User calls agent, speaks thoughts, agent responds with empathy, transcript saved to vault. AgentCall MCP integration. **Delegated to Labs.**
 
 ## Queued
 - [x] **AAE Smart Money Rotation Agent** — ✅ SPEC COMPLETE → `Labs/AAE-Dry-Powder-Vault/spec.md`. Build delegated to Labs. Cross-chain rotation system with zone tracking + narrative intelligence. **IN PROGRESS.**
-- [x] **AAE Dry Powder Vault** — ✅ SPEC COMPLETE → `Labs/AAE-Dry-Powder-Vault/spec.md`. Smart stablecoin vault auto-rotating USDC across Base/Avalanche/Solana. Arc = v2 when mainnet drops. **IN PROGRESS.**
+- [x] **AAE Dry Powder Vault** — ✅ SPEC UPDATED → `Labs/AAE-Dry-Powder-Vault/spec.md`. Now includes **narrative rotation dimension** (Agent ETF). 2D rotation: cross-chain + intra-chain narrative. Build delegated to Labs. **IN PROGRESS.**
 - [ ] **GenTech Journal + Milestones** — Lifestyle platform: journaling + AI empathy + prediction market on personal goals. $15/mo Agent Pass. See: `Green-Room/ideas/gentech-journal.md`
 - [ ] **Education Layer** — Learn from real projects that shipped. Portfolio = curriculum. See: `Green-Room/ideas/education-layer-concept.md`
 - [ ] Framedeck demo video pipeline
