@@ -13,7 +13,7 @@
 ### 2. DeFi Milestone Rename (DeFi → DeFi Milestone) ✅
 - **19 files renamed** across vault (docs only, scripts kept for cron compatibility)
 - **7 docs updated** with content replacements (DeFi Milestone → DeFi Milestone, etc.)
-- Script filenames (`d5-master-cron.py`, `d5-milestone-tracker.py`) kept as-is to avoid breaking cron jobs
+- Script filenames (`defi-master-cron.py`, `defi-milestone-tracker.py`) kept as-is to avoid breaking cron jobs
 - Memory saved: "DeFi Milestone" not "DeFi"
 
 ### 3. Vault Consolidation ✅

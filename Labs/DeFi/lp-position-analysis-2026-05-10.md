@@ -204,7 +204,7 @@
 
 8. **SHAPE EVALUATION** — CURVE shape is appropriate for current conditions. Bid-Ask would be better if price stabilizes in a tight range.
 
-9. **CONFIG SYNC** — Ensure all monitoring scripts (`d5-master-cron.py`, `lp-position-reader.py`) use the latest range from `.lfj-aae-config.json` ($10.28-$10.55).
+9. **CONFIG SYNC** — Ensure all monitoring scripts (`defi-master-cron.py`, `lp-position-reader.py`) use the latest range from `.lfj-aae-config.json` ($10.28-$10.55).
 
 ### LONG-TERM (Strategic)
 

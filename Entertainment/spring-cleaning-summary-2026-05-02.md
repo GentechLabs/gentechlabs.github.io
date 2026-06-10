@@ -17,7 +17,7 @@ Jordan voiced a need for operational streamlining: eliminate cron duplication ac
 - Identified 3 duplicate CMC watchlist jobs all calling similar scripts with overlapping logic
 - Mapped out the true state: DMOB's `Defi Milestone` (job `3fc1a11a88d7`) is the **authoritative source** for all LP data
 
-### 2. **New consolidated script: `d5-milestone-tracker.py`** (21 KB)
+### 2. **New consolidated script: `defi-milestone-tracker.py`** (21 KB)
 **Location:** `/root/vaults/gentech/Strategies/scripts/`
 
 **Features baked in:**
@@ -47,12 +47,12 @@ Jordan voiced a need for operational streamlining: eliminate cron duplication ac
 
 **New consolidated schedule:**
 ```
-d5-milestone-tracker.py — 4× daily: 08:15, 12:15, 16:15, 20:15 ET
+defi-milestone-tracker.py — 4× daily: 08:15, 12:15, 16:15, 20:15 ET
 ```
 
 ### 4. **Documentation delivered**
-- Handoff doc: `Green-Room/cron-consolidation-d5-milestone-tracker.md`
-- Approval request: `HQ/Approvals/2026-05-02-d5-milestone-tracker-consolidation.md`
+- Handoff doc: `Green-Room/cron-consolidation-defi-milestone-tracker.md`
+- Approval request: `HQ/Approvals/2026-05-02-defi-milestone-tracker-consolidation.md`
 - Architecture spec: `Strategies/DeFi-Milestone-Tracker-Consolidation.md`
 
 ---
@@ -80,17 +80,17 @@ d5-milestone-tracker.py — 4× daily: 08:15, 12:15, 16:15, 20:15 ET
 ```
 Strategies/
 ├── scripts/
-│   ├── d5-milestone-tracker.py          ← NEW (consolidated)
+│   ├── defi-milestone-tracker.py          ← NEW (consolidated)
 │   ├── lp-range-monitor-v3.py           ← Active 10-min silent monitor
-│   └── d5-master-cron.py                ← Authoritative milestone tracker
+│   └── defi-master-cron.py                ← Authoritative milestone tracker
 ├── DeFi-Milestone-Tracker-Consolidation.md
 └── cron-jobs.md                         ← Manifest to update post-cleanup
 
 Green-Room/
-└── cron-consolidation-d5-milestone-tracker.md
+└── cron-consolidation-defi-milestone-tracker.md
 
 HQ/Approvals/
-└── 2026-05-02-d5-milestone-tracker-consolidation.md   ← Jordan's approval needed
+└── 2026-05-02-defi-milestone-tracker-consolidation.md   ← Jordan's approval needed
 ```
 
 **State files** (runtime):

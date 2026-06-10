@@ -34,7 +34,7 @@
 **Schedule:** `*/10 6-23 * * *` (every 10 min, 6 AM–11 PM UTC)
 **Delivery:** Strategies (-1002916759037)
 **Status:** ✅ Active — consolidated 2026-05-02 (replaced duplicate LP monitoring jobs)
-**Script:** `d5-lp-consolidated.py`
+**Script:** `defi-lp-consolidated.py`
 
 **What it does:** Consolidated DeFi Milestone + LP tracker with smart debouncing. Monitors LFJ AVAX/USDC position with:
 - **5-minute confirmation window** on range breakouts and low-efficiency alerts (prevents transient spikes)

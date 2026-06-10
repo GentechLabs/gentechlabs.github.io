@@ -10,7 +10,7 @@ handoff: none
 Consolidated Yoyo's two duplicate LP-monitoring cron jobs into a single DeFi Milestone tracker with intelligent debouncing and strategy-aware advice.
 
 ## Changes merged
-**Script** (`Strategies/scripts/d5-lp-consolidated.py`)
+**Script** (`Strategies/scripts/defi-lp-consolidated.py`)
 - HERMES_HOME-aware state management (profile isolation)
 - 5-minute debounce: `out_of_range_start`, `efficiency_low_start`
 - Efficiency zones: <30% urgent (⚠️ rebalance), 30–50% watch (DCA $20), 50–70% monitor (DCA $10), >70% silent
@@ -27,7 +27,7 @@ Consolidated Yoyo's two duplicate LP-monitoring cron jobs into a single DeFi Mil
 - New DeFi Milestone section added with schedule, ID, script path
 
 ## How it works (runtime flow)
-1. Read state from `~/.hermes/scripts/.lfj-d5-state.json` (profile-resolved via HERMES_HOME)
+1. Read state from `~/.hermes/scripts/.lfj-defi-state.json` (profile-resolved via HERMES_HOME)
 2. Load: LP range, current price, efficiency, shape parameters, entry price
 3. Checks:
    - **Out-of-range**: `current_price < floor OR > ceiling` → if started < 5 min ago, wait; else → WARNING alert
@@ -39,12 +39,12 @@ Consolidated Yoyo's two duplicate LP-monitoring cron jobs into a single DeFi Mil
 6. Sends Telegram alert to `@GenTech Strategies` (instant & delayed)
 
 ## State file location
-`~/.hermes/scripts/.lfj-d5-state.json` (per-HERMES_HOME, lives under each Hermes profile's home)
+`~/.hermes/scripts/.lfj-defi-state.json` (per-HERMES_HOME, lives under each Hermes profile's home)
 
 ## Git state
 - Branch: `main`
 - New files:
-  - `Strategies/scripts/d5-lp-consolidated.py`
+  - `Strategies/scripts/defi-lp-consolidated.py`
   - `Strategies/DeFi-Milestone-Tracker-Consolidation.md`
 - Modified:
   - `System/agent-profiles/yoyo/cron/jobs.json`

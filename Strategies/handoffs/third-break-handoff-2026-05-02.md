@@ -9,7 +9,7 @@ priority: high
 # Handoff: DeFi Cron & DMOB Sprint Prep
 
 ## DeFi Milestone Tracker — Status: NOT LIVE
-- Consolidation complete in vault: `Strategies/scripts/d5-milestone-tracker.py`
+- Consolidation complete in vault: `Strategies/scripts/defi-milestone-tracker.py`
 - Hermes-brain repo: **NOT SYNCED** — scripts missing, jobs.json unchanged
 - Jordan approval: PENDING (submitted 12:45 ET)
 - Next steps: Jordan approves → sync vault→hermes → update jobs.json → replace 4 jobs

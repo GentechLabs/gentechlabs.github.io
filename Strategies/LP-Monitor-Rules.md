@@ -403,7 +403,7 @@ Jordan approved the optimized cron output format:
 Jordan's directive: Consolidate the daily LP summary into the DeFi milestone format.
 
 **What changed:**
-- daily-lp-summary.py → replaced by d5-milestone-summary.py
+- daily-lp-summary.py → replaced by defi-milestone-summary.py
 - Daily 8 AM cron now produces structured DeFi Milestone Report:
   - Full tier ladder display (Scout→Raider→Warlord→Sovereign) with progress bars
   - Micro-DCA triggers with efficiency-based bonus amounts ($10/$20)

@@ -76,7 +76,7 @@ status: complete
 - ✅ **Gas Reserve Auto-Rebalance SC Feasibility** — Approved (Jordan voice 2026-05-02)
   - Scope: keeper auth, multi-chain, gas estimation guard
 - ✅ **DeFi Milestone Cron Consolidation** — Implementation complete
-  - Merged 4 duplicate cron jobs into `d5-lp-consolidated.py`
+  - Merged 4 duplicate cron jobs into `defi-lp-consolidated.py`
   - Deployed: `3258c64b` (every 15 min, 6–23 UTC)
   - Stateful debounce + efficiency zone logic live
 
@@ -195,8 +195,8 @@ status: complete
 | File | Summary |
 |------|---------|
 | `2026-05-02-morning-handoff.md` | Sprint focus (Solana Frontier Day 2, DeFi consolidation kickoff) |
-| `2026-05-02-d5-milestone-routing.md` | Jordan voice-approved enhancements, handoffs issued |
-| `2026-05-02-d5-milestone-consolidation-complete.md` | DMOB finished cron consolidation (4→1 jobs) |
+| `2026-05-02-defi-milestone-routing.md` | Jordan voice-approved enhancements, handoffs issued |
+| `2026-05-02-defi-milestone-consolidation-complete.md` | DMOB finished cron consolidation (4→1 jobs) |
 | `2026-05-02-dmob-approvals-completed.md` | Two SC feasibilities approved (dynamic burn rate, gas reserve) |
 | `2026-05-02-lp-monitor-quick-win.md` | Capital injection detection + bug fix deployed |
 | `2026-05-02-sync-complete.md` | Daily second brain sync captured |

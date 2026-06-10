@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-D5 Milestone + LP Monitor — Consolidated Smart Tracker
+DeFi Milestone + LP Monitor — Consolidated Smart Tracker
 Replaces: "Crypto Watchlist + LP Monitor" + "DeFi Milestone + LP Monitor"
 Features:
   - 5-minute debounce on range breakouts & low-efficiency alerts
@@ -30,7 +30,7 @@ def hermes_path(filename: str) -> str:
 
 # ── Config ──────────────────────────────────────────────────────────────────
 AAE_CONFIG_PATH = hermes_path(".lfj-aae-config.json")
-STATE_FILE = hermes_path(".lfj-d5-state.json")
+STATE_FILE = hermes_path(".lfj-defi-state.json")
 POSITION_TRACKER_PATH = hermes_path(".lfj-position-tracker.json")
 
 DEXSCREENER_URL_TEMPLATE = "https://api.dexscreener.com/latest/dex/pairs/avalanche/{pool_address}"
@@ -94,7 +94,7 @@ def load_position_tracker() -> dict:
 
 def fetch_dexscreener() -> dict:
     url = DEXSCREENER_URL_TEMPLATE.format(pool_address=POOL_ADDRESS)
-    req = urllib.request.Request(url, headers={"User-Agent": "Gentech-D5/1.0"})
+    req = urllib.request.Request(url, headers={"User-Agent": "Gentech-DeFi/1.0"})
     with urllib.request.urlopen(req, timeout=10) as resp:
         data = json.loads(resp.read().decode())
     pair = data.get("pair", data.get("pairs", [{}])[0] if data.get("pairs") else {})
@@ -302,7 +302,7 @@ def check_alerts(price: float, range_low: float, range_high: float, efficiency: 
 def format_report(price: float, in_range: bool, efficiency: float, pool_data: dict,
                   position_tracker: dict, alerts: list, alert_level: str, shape: str) -> str:
     emoji = "✅" if alert_level == "OK" else "⚠️" if alert_level == "LOW" else "🚨"
-    lines = [f"{emoji} **D5 Milestone + LP Report** — {now_et().strftime('%Y-%m-%d %H:%M EDT')}", ""]
+    lines = [f"{emoji} **DeFi Milestone + LP Report** — {now_et().strftime('%Y-%m-%d %H:%M EDT')}", ""]
 
     lines.append("**📊 Pool Data**")
     lines.append(f"  Pool: LFJ AVAX/USDC 5bps")

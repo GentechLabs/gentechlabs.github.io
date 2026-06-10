@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 """
-D5 Milestone Summary — Daily consolidated report for Jordan.
-One-per-day report covering ALL LP positions against the D5 milestone ladder:
+DeFi Milestone Summary — Daily consolidated report for Jordan.
+One-per-day report covering ALL LP positions against the DeFi milestone ladder:
   Scout ($5/day) → Raider ($20/day) → Warlord ($55/day) → Sovereign ($200/day)
   → Freedom ($??)
 
 Integrates:
   - Live pool data (DexScreener)
-  - D5 tier progression
+  - DeFi tier progression
   - Micro-DCA triggers (efficiency-based)
   - Compound threshold tracking
   - Cumulative fee + P&L summary
@@ -148,7 +148,7 @@ def main():
     is_monday = now.weekday() == 0
 
     lines = [
-        f"🏆 **D5 Milestone Report** — {date_str}",
+        f"🏆 **DeFi Milestone Report** — {date_str}",
         f"",
     ]
 
@@ -193,8 +193,8 @@ def main():
         lines.append(f"• Days in Range: {days_in_range:.1f}")
         lines.append("")
 
-        # ── D5 Milestone Ladder ───────────────────────────────
-        lines.append(f"📈 **D5 Milestone Ladder**")
+        # ── DeFi Milestone Ladder ───────────────────────────────
+        lines.append(f"📈 **DeFi Milestone Ladder**")
         for m in MILESTONES:
             tier_num = m["tier"]
             label = m["label"]

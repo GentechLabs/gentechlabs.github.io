@@ -44,5 +44,5 @@ Automated hourly price monitoring of Jordan's "Bullish" crypto portfolio. Uses C
 2. CoinGecko (free, no key required)
 
 ## Related
-- `d5-master-cron.py` — Combined watchlist + LP monitor (separate state file)
+- `defi-master-cron.py` — Combined watchlist + LP monitor (separate state file)
 - `defi-lp-monitor` — LP position monitoring skill

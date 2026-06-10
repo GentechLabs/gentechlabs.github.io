@@ -60,7 +60,7 @@ Bags MCP   Hermes   Bags    Hermes
 - Agent Escrow Solana (Anchor program, compiles)
 - solana_client.py (wallet, tx, tokens)
 - AAE LP Signal Spec (supports Solana)
-- d5-lp-consolidated.py (chain-agnostic arch)
+- defi-lp-consolidated.py (chain-agnostic arch)
 - MCP server templates (multiple)
 
 ## Next Steps

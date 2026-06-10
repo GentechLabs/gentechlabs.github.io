@@ -12,8 +12,8 @@ Jordan voice-approved (12:42 PM) consolidation of DeFi milestone monitoring rule
 - Bid-ask edge accumulation strategy
 
 **Actions taken:**
-1. ✅ Created main spec: `Strategies/Defi-Monitor/d5-milestone-enhancements-2026-05.md`
-2. ✅ Handoff to DMOB (H2026-05-02-01): Implement state machine in `d5-master-cron.py`
+1. ✅ Created main spec: `Strategies/Defi-Monitor/defi-milestone-enhancements-2026-05.md`
+2. ✅ Handoff to DMOB (H2026-05-02-01): Implement state machine in `defi-master-cron.py`
 3. ✅ Handoff to YoYo (H2026-05-02-02): Define strategy params + update config
 4. ✅ Handoff board updated with new entries
 5. ✅ Telegram dispatched to GenTech Labs & GenTech Strategies

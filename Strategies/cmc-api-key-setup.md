@@ -37,7 +37,7 @@ tags: [strategies, crypto, cmc, api, secrets]
 
 ## Scripts Using This Key
 
-- `/root/vaults/gentech/Strategies/scripts/d5-master-cron.py`
+- `/root/vaults/gentech/Strategies/scripts/defi-master-cron.py`
   - Line 25: `CMC_API_KEY="[REDACTED_CMC_KEY]"`
   - Line 87: Headers use `X-CMC_PRO_API_KEY`
 

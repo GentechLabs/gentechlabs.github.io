@@ -43,7 +43,7 @@
 --- 
 
 ## ⏭ Next Steps for Full Consolidation
-- The consolidated DeFi master cron (`d5-master-cron.py`) still needs to be updated with the same capital detection and JSON output flag. That remains on deck after this quick win.
+- The consolidated DeFi master cron (`defi-master-cron.py`) still needs to be updated with the same capital detection and JSON output flag. That remains on deck after this quick win.
 - After that: retire duplicate cron jobs per handoff plan.
 
 --- 

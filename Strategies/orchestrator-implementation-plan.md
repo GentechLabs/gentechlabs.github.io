@@ -16,7 +16,7 @@
 
 ## Phase 2: Cron Consolidation (This Week)
 - [ ] Consolidate DeFi Milestone jobs (4 → 1)
-  - Keep: YoYo's `d5-lp-consolidated.py` script
+  - Keep: YoYo's `defi-lp-consolidated.py` script
   - Remove: DMOB morning/evening, Desmond LP monitor, Gentech DeFi Milestones
   - Move to: Gentech profile (single source of truth)
 - [ ] Fix auth failures
