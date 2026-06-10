@@ -824,7 +824,8 @@
         }
 
         function renderDashboard(data) {
-            const { player, progress, skills, suggestions, lastUpdated } = data;
+            const { player, progress, skills, upgrades, lastUpdated } = data;
+            const suggestions = upgrades || []; // JSON field is 'upgrades', not 'suggestions'
 
             const skillsHTML = skills.map(skill => `
                 <div class="skill-card ${skill.primary ? 'primary' : ''}">
