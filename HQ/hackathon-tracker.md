@@ -1,23 +1,37 @@
 # 🏆 Active Hackathon Tracker
 
-Last updated: 2026-06-07 (nightly sweep)
+Last updated: 2026-06-10
 
-| Hackathon | Dates | Theme | Prizes | Status | Notes |
-|-----------|-------|-------|--------|--------|-------|
-| Kite AI | May 17 | Agentic Commerce | $10K | ✅ PAST | Deadline passed May 17. Awaiting results. |
-| Bags FM | Jun 1 | Memecoin Launchpad / AI Agents | $1M + $3M support | ✅ PAST | Deadline passed Jun 1. Rewards traction (ARR/GMV), not building. |
-| Google Cloud Rapid Agent | Jun 11 | Gemini + Agent Builder + MCP | $60K | ❌ NOT PURSUING | Enterprise lock-in, low prize-per-track, not our stack. |
-| 1752vc Lightning Round VIII | Jun 4 | AI / Frontier Tech / Deep Tech | $100K investment + $1M perks | ✅ PASSED | Deadline passed Jun 4. Pitch comp for 1752 Accelerate. Apply: https://sparkxyz.io/submissions/new?competition_id=1842 |
-| Google for Startups AI Agents Challenge | Jun 5 | AI agents prototype → production | $90K + $500 cloud credits | ✅ PASSED | Deadline passed Jun 5. 6-week comp, multiple tracks, Gemini Enterprise access. |
-| Somnia | Jun 11 | $5K+ | ⚠️ 🔴 ACTIVE (4 days) | Rugcheck — AI agent monitoring token launches, detects rugs/honeypots. Contract compiled, frontend wired with ethers.js, 8 unit tests passing, GitHub repo + Pages live (ProtoJay4789.github.io/rugcheck/). Awaiting testnet wallet for deploy + E2E test. |
-| Agora Agents (Canteen × Circle) | May 25 | AI Agents on Arc (EVM L1) | $50K | ✅ SUBMITTED | AdaptiveFolio — AI portfolio manager. 38 tests passing. Live demo: protojay4789.github.io/adaptive-folio. Submitted May 26. |
-| Swarms ACM | May 27 | Finance & Market Analysis | $30K | ✅ PUBLISHED | LP Monitor agent: 26 tests passing, live API verified. Repo: ProtoJay4789/swarms-acm-hackathon. Published to Swarms Marketplace, tokenized Solana. |
-| Arbitrum Open House | Reg: May 25 / Sub: Jun 14 | AI Agents (Best Agentic) | $115K ($70K+$15K+$30K) | 🟢 SHIPPED | AgentForge: 241 lines, 10 tests. Repo: ProtoJay4789/arbitrum-open-house. Best Agentic track. Deploy to Arbitrum Sepolia next. |
-| Mantle Turing Test | May 1–Jun 15 (Phase 2 sub: Jun 15) | Agentic Wallets & Economy | $120K (Grand $50K) | 🟡 REGISTER NEEDED | 5 contracts, 14 tests. Repo: ProtoJay4789/mantle-turing-test. ERC-8004 adapter. Register on DoraHacks. Deploy to Mantle Sepolia next. |
-| Dev3pack Bridge Accelerator | Jun 12 | Bridge / Startup focus | TBD | 🟡 QUEUED | Solana. Startup focus. Jordan to provide details. |
-| ElevenHacks #10 Speech Engine | TBD | Real-time voice agents | TBD | ❌ SKIPPED | Skipped May 28 — out of ElevenLabs credits, Jordan at work. Code preserved in ProtoJay4789/speech-engine for reuse. Foundation solid: FastAPI server + browser client + Steve Harvey/Vanito personas. |
-| BNB Agent SDK | TBD | AI Agent Identity + Commerce | TBD | 🟡 QUEUED | ERC-8004 identity (ERC-721), APEX escrow commerce, Python SDK (`pip install bnbagent`). BSC testnet via MegaFuel. |
-| Solana Frontier | May 11 | Solana | $250K + accelerator | ❌ WITHDRAWN | Jordan directive May 10. Time/debugging constraints. Solana work preserved for cross-chain reuse. |
+## Priority Queue (Active)
+
+| # | Hackathon | Deadline | Prize | Status | Notes |
+|---|-----------|----------|-------|--------|-------|
+| 🥇 | Mantle Turing Test | Jun 15 (5 days) | $120K ($50K grand) | 🔧 DEPLOYING | 14/14 tests. Byreal CLI installed. Need Sepolia faucet drip. Track: Agentic Wallets & Economy. |
+| 🥈 | BNB HACK: AI Trading Agent | Jun 24 (3 weeks) | $36K | 📝 REGISTERING | ERC-8004 + ERC-8183 + Q402 gasless payments. Partners: BNB + CoinMarketCap + Trust Wallet. |
+| 🥉 | Casper Agentic Buildathon | Jun 30 (20 days) | $150K | 🟡 QUEUE | Agentic AI + x402 + DeFi on Casper (Rust/WebAssembly). First WASM chain with live x402. |
+
+## Submitted (Complete)
+
+| Hackathon | Date | Project | Status |
+|-----------|------|---------|--------|
+| Agora Agents | May 26 | AdaptiveFolio | ✅ SUBMITTED |
+| Swarms ACM | May 27 | LP Monitor | ✅ PUBLISHED |
+| Somnia Agentathon | Jun 10 | Agent Catcher | ✅ SUBMITTED |
+| Encode Club (Oracle Agent) | Jun 10 | Oracle Agent | ✅ SUBMITTED |
+| Arbitrum Open House | Jun 14 | AgentForge | 🟢 SHIPPED (submit Jun 14) |
+
+## Past / Not Pursuing
+
+| Hackathon | Reason | Status |
+|-----------|--------|--------|
+| Kite AI | Deadline passed May 17 | ✅ PAST |
+| Bags FM | Rewards traction, not building | ✅ PAST |
+| Google Cloud Rapid Agent | Enterprise lock-in | ❌ NOT PURSUING |
+| Google for Startups | Deadline passed Jun 5 | ✅ PASSED |
+| 1752vc Lightning Round VIII | Deadline passed Jun 4 | ✅ PASSED |
+| ElevenHacks #10 | Out of ElevenLabs credits | ❌ SKIPPED |
+| Solana Frontier | Time constraints | ❌ WITHDRAWN |
+| Dev3pack Bridge | Startup focus, TBD | 🟡 QUEUED |
 
 ## Grant Applications (Ongoing)
 | Program | Amount | Focus | Status | Notes |
