@@ -824,8 +824,9 @@
         }
 
         function renderDashboard(data) {
-            const { player, progress, skills, upgrades, lastUpdated } = data;
-            const suggestions = upgrades || []; // JSON field is 'upgrades', not 'suggestions'
+            const { player, progress, skills, upgrades, lastUpdated, alias, class: charClass, build, act, mission } = data;
+            const suggestions = upgrades || [];
+            const playerName = typeof player === 'string' ? player : player.name;
 
             const skillsHTML = skills.map(skill => `
                 <div class="skill-card ${skill.primary ? 'primary' : ''}">
@@ -853,20 +854,20 @@
 
             document.getElementById('build-content').innerHTML = `
                 <div class="character-card">
-                    <div class="character-name">${player.name}</div>
-                    <div class="character-class">${player.class} — ${player.build} Build — ${player.act}, ${player.mission}</div>
+                    <div class="character-name">${playerName}</div>
+                    <div class="character-class">${alias || charClass} — ${build} Build — ${act}, ${mission}</div>
                     <div class="character-stats">
                         <div class="stat-box">
                             <div class="label">Class</div>
-                            <div class="value">${player.class}</div>
+                            <div class="value">${charClass}</div>
                         </div>
                         <div class="stat-box">
                             <div class="label">Build</div>
-                            <div class="value lightning">${player.build}</div>
+                            <div class="value lightning">${build}</div>
                         </div>
                         <div class="stat-box">
                             <div class="label">Campaign</div>
-                            <div class="value">${player.act}</div>
+                            <div class="value">${act}</div>
                         </div>
                         <div class="stat-box">
                             <div class="label">Mana Sustain</div>
