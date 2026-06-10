@@ -10,21 +10,31 @@
        CSS VARIABLES & RESET
        ============================================================ */
     :root {
-      --gold: #c9a84c;
-      --gold-dim: #a88a3a;
-      --panel-bg: #12121a;
-      --panel-border: #1e1e2e;
-      --text: #d4d4d4;
-      --text-dim: #6b6b7b;
-      --bg: #0a0a12;
-      --lightning: #7eb8ff;
-      --green: #44ff88;
-      --green-dim: #2a9952;
-      --red: #ff6b6b;
-      --orange: #ff9944;
-      --yellow: #ffd700;
+      --bg: #faf7f2;
+      --bg-alt: #f5efe6;
+      --panel-bg: #ffffff;
+      --panel-border: #e8dcc8;
+      --panel-shadow: rgba(180, 140, 80, 0.12);
+      --text: #2d2013;
+      --text-dim: #8a7560;
+      --gold: #d4a017;
+      --gold-dim: #b8941a;
+      --gold-glow: rgba(212, 160, 23, 0.25);
+      --accent: #e8652a;
+      --accent-dim: #c45520;
+      --ocean: #1a6bb5;
+      --ocean-dim: #145a9a;
+      --green: #2d8a4e;
+      --green-dim: #1f6b3a;
+      --red: #d32f2f;
+      --red-dim: #b71c1c;
+      --orange: #e8652a;
+      --yellow: #f0c14b;
+      --pink: #d4748a;
+      --pink-glow: rgba(212, 116, 138, 0.2);
       --radius: 12px;
       --gap: 12px;
+      --header-gradient: linear-gradient(135deg, #d4a017 0%, #e8652a 50%, #1a6bb5 100%);
     }
 
     *, *::before, *::after {
@@ -89,6 +99,7 @@
       border: 1px solid var(--panel-border);
       border-radius: var(--radius);
       padding: 16px;
+      box-shadow: var(--panel-shadow);
     }
 
     /* ============================================================
@@ -97,20 +108,20 @@
     .header {
       text-align: center;
       padding: 32px 16px 24px;
-      background: linear-gradient(180deg, #16162a 0%, var(--bg) 100%);
+      background: var(--header-gradient);
       border-bottom: 1px solid var(--panel-border);
     }
 
     .header-trip-name {
       font-size: 2rem;
-      color: var(--gold);
-      text-shadow: 0 0 30px rgba(201, 168, 76, 0.3);
+      color: #ffffff;
+      text-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
       margin-bottom: 8px;
     }
 
     .header-traveler {
       font-size: 1rem;
-      color: var(--text);
+      color: rgba(255, 255, 255, 0.85);
       margin-bottom: 4px;
     }
 
@@ -123,20 +134,20 @@
       text-transform: uppercase;
       letter-spacing: 1px;
       margin-bottom: 12px;
-      border: 1px solid var(--gold-dim);
-      color: var(--gold);
-      background: rgba(201, 168, 76, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.2);
     }
 
     .header-dates {
       font-size: 0.95rem;
-      color: var(--text-dim);
+      color: rgba(255, 255, 255, 0.8);
       margin-bottom: 4px;
     }
 
     .header-duration {
       font-size: 0.85rem;
-      color: var(--lightning);
+      color: rgba(255, 255, 255, 0.7);
     }
 
     /* ============================================================
@@ -172,6 +183,7 @@
       border-radius: var(--radius);
       padding: 16px;
       transition: border-color 0.3s;
+      box-shadow: var(--panel-shadow);
     }
 
     .leg-card:hover {
@@ -181,7 +193,7 @@
     .leg-dest {
       font-family: 'Cinzel', serif;
       font-size: 1rem;
-      color: var(--lightning);
+      color: var(--ocean);
       margin-bottom: 10px;
     }
 
@@ -190,7 +202,7 @@
       justify-content: space-between;
       font-size: 0.85rem;
       padding: 4px 0;
-      border-bottom: 1px solid rgba(30, 30, 46, 0.6);
+      border-bottom: 1px solid color-mix(in srgb, var(--panel-border) 60%, transparent);
     }
 
     .leg-detail:last-child {
@@ -235,7 +247,7 @@
     .progress-bar-container {
       width: 100%;
       height: 10px;
-      background: rgba(30, 30, 46, 0.8);
+      background: color-mix(in srgb, var(--panel-border) 80%, transparent);
       border-radius: 5px;
       overflow: hidden;
       margin-bottom: 18px;
@@ -279,7 +291,7 @@
     .budget-cat-bar {
       width: 100%;
       height: 4px;
-      background: rgba(30, 30, 46, 0.8);
+      background: color-mix(in srgb, var(--panel-border) 80%, transparent);
       border-radius: 2px;
       overflow: hidden;
     }
@@ -291,7 +303,7 @@
       transition: width 1.2s ease-out;
     }
 
-    .cat-flights { background: var(--lightning); }
+    .cat-flights { background: var(--ocean); }
     .cat-accommodation { background: var(--gold); }
     .cat-food { background: var(--green); }
     .cat-activities { background: var(--orange); }
@@ -321,16 +333,17 @@
       border-radius: var(--radius);
       padding: 16px;
       transition: border-color 0.3s;
+      box-shadow: var(--panel-shadow);
     }
 
     .flight-card:hover {
-      border-color: var(--lightning);
+      border-color: var(--ocean);
     }
 
     .flight-route {
       font-family: 'Cinzel', serif;
       font-size: 1.3rem;
-      color: var(--lightning);
+      color: var(--ocean);
       margin-bottom: 8px;
       letter-spacing: 2px;
     }
@@ -369,14 +382,14 @@
 
     .flight-status.booked {
       color: var(--green);
-      background: rgba(68, 255, 136, 0.1);
-      border: 1px solid rgba(68, 255, 136, 0.3);
+      background: color-mix(in srgb, var(--green) 10%, transparent);
+      border: 1px solid color-mix(in srgb, var(--green) 30%, transparent);
     }
 
     .flight-status.not-booked {
       color: var(--yellow);
-      background: rgba(255, 215, 0, 0.1);
-      border: 1px solid rgba(255, 215, 0, 0.3);
+      background: color-mix(in srgb, var(--yellow) 10%, transparent);
+      border: 1px solid color-mix(in srgb, var(--yellow) 30%, transparent);
     }
 
     .flight-cost {
@@ -454,7 +467,7 @@
     .timeline-dot.today {
       background: var(--green);
       border-color: var(--green);
-      box-shadow: 0 0 10px rgba(68, 255, 136, 0.5);
+      box-shadow: 0 0 10px color-mix(in srgb, var(--green) 50%, transparent);
     }
 
     .timeline-today-marker {
@@ -477,6 +490,7 @@
       border-radius: var(--radius);
       padding: 14px 16px;
       transition: border-color 0.3s;
+      box-shadow: var(--panel-shadow);
     }
 
     .day-card:hover {
@@ -485,7 +499,7 @@
 
     .day-card.is-today {
       border-color: var(--green);
-      box-shadow: 0 0 15px rgba(68, 255, 136, 0.1);
+      box-shadow: 0 0 15px color-mix(in srgb, var(--green) 10%, transparent);
     }
 
     .day-header {
@@ -519,38 +533,38 @@
     }
 
     .type-travel {
-      color: var(--lightning);
-      background: rgba(126, 184, 255, 0.12);
-      border: 1px solid rgba(126, 184, 255, 0.3);
+      color: var(--ocean);
+      background: color-mix(in srgb, var(--ocean) 12%, transparent);
+      border: 1px solid color-mix(in srgb, var(--ocean) 30%, transparent);
     }
 
     .type-explore {
       color: var(--gold);
-      background: rgba(201, 168, 76, 0.12);
-      border: 1px solid rgba(201, 168, 76, 0.3);
+      background: color-mix(in srgb, var(--gold) 12%, transparent);
+      border: 1px solid color-mix(in srgb, var(--gold) 30%, transparent);
     }
 
     .type-work {
       color: var(--red);
-      background: rgba(255, 107, 107, 0.12);
-      border: 1px solid rgba(255, 107, 107, 0.3);
+      background: color-mix(in srgb, var(--red) 12%, transparent);
+      border: 1px solid color-mix(in srgb, var(--red) 30%, transparent);
     }
 
     .type-relax {
       color: var(--green);
-      background: rgba(68, 255, 136, 0.12);
-      border: 1px solid rgba(68, 255, 136, 0.3);
+      background: color-mix(in srgb, var(--green) 12%, transparent);
+      border: 1px solid color-mix(in srgb, var(--green) 30%, transparent);
     }
 
     .type-home {
-      color: #e8a0bf;
-      background: rgba(232, 160, 191, 0.12);
-      border: 1px solid rgba(232, 160, 191, 0.3);
+      color: var(--pink);
+      background: color-mix(in srgb, var(--pink) 12%, transparent);
+      border: 1px solid color-mix(in srgb, var(--pink) 30%, transparent);
     }
 
     .day-location {
       font-size: 0.82rem;
-      color: var(--lightning);
+      color: var(--ocean);
       margin-bottom: 4px;
       display: flex;
       align-items: center;
@@ -591,7 +605,7 @@
       font-style: italic;
       margin-top: 8px;
       padding-top: 8px;
-      border-top: 1px solid rgba(30, 30, 46, 0.5);
+      border-top: 1px solid color-mix(in srgb, var(--panel-border) 50%, transparent);
       line-height: 1.4;
     }
 
@@ -626,7 +640,7 @@
       align-items: center;
       gap: 10px;
       padding: 6px 0;
-      border-bottom: 1px solid rgba(30, 30, 46, 0.4);
+      border-bottom: 1px solid color-mix(in srgb, var(--panel-border) 40%, transparent);
       font-size: 0.88rem;
       cursor: pointer;
       transition: opacity 0.2s;
@@ -662,7 +676,7 @@
 
     .checklist-item.done .check-box::after {
       content: '✓';
-      color: #000;
+      color: #fff;
       font-size: 12px;
       font-weight: 700;
     }
@@ -687,10 +701,11 @@
       align-items: flex-start;
       gap: 10px;
       transition: border-color 0.3s;
+      box-shadow: var(--panel-shadow);
     }
 
     .tip-card:hover {
-      border-left-color: var(--lightning);
+      border-left-color: var(--ocean);
     }
 
     .tip-icon {
@@ -748,7 +763,7 @@
        ============================================================ */
     .vibe-banner {
       font-style: italic;
-      color: var(--text-dim);
+      color: rgba(255, 255, 255, 0.75);
       font-size: 0.92rem;
       margin-bottom: 8px;
       line-height: 1.5;
@@ -756,7 +771,7 @@
 
     .home-base {
       font-size: 0.9rem;
-      color: var(--lightning);
+      color: rgba(255, 255, 255, 0.85);
       margin-bottom: 4px;
       display: flex;
       align-items: center;
@@ -788,6 +803,7 @@
       padding: 14px 16px;
       margin-bottom: 10px;
       transition: border-color 0.3s;
+      box-shadow: var(--panel-shadow);
     }
 
     .restaurant-card:hover {
@@ -818,8 +834,8 @@
       text-transform: uppercase;
       letter-spacing: 1px;
       color: var(--orange);
-      background: rgba(255, 153, 68, 0.12);
-      border: 1px solid rgba(255, 153, 68, 0.3);
+      background: color-mix(in srgb, var(--orange) 12%, transparent);
+      border: 1px solid color-mix(in srgb, var(--orange) 30%, transparent);
     }
 
     .restaurant-vibe {
@@ -854,7 +870,7 @@
       font-size: 0.88rem;
       color: var(--text);
       padding: 5px 0;
-      border-bottom: 1px solid rgba(30, 30, 46, 0.4);
+      border-bottom: 1px solid color-mix(in srgb, var(--panel-border) 40%, transparent);
       display: flex;
       align-items: center;
       gap: 6px;
@@ -894,6 +910,7 @@
       border-radius: var(--radius);
       padding: 12px 14px;
       transition: border-color 0.3s;
+      box-shadow: var(--panel-shadow);
     }
 
     .place-card:hover {
@@ -921,7 +938,7 @@
       align-items: center;
       gap: 10px;
       padding: 6px 0;
-      border-bottom: 1px solid rgba(30, 30, 46, 0.4);
+      border-bottom: 1px solid color-mix(in srgb, var(--panel-border) 40%, transparent);
       font-size: 0.88rem;
       cursor: pointer;
       transition: opacity 0.2s;
@@ -957,7 +974,7 @@
 
     .packing-item.done .packing-checkbox::after {
       content: '✓';
-      color: #000;
+      color: #fff;
       font-size: 12px;
       font-weight: 700;
     }
@@ -1066,8 +1083,8 @@
 
     /* Pulse for today marker */
     @keyframes pulse {
-      0%, 100% { box-shadow: 0 0 10px rgba(68, 255, 136, 0.5); }
-      50% { box-shadow: 0 0 20px rgba(68, 255, 136, 0.8); }
+      0%, 100% { box-shadow: 0 0 10px color-mix(in srgb, var(--green) 50%, transparent); }
+      50% { box-shadow: 0 0 20px color-mix(in srgb, var(--green) 80%, transparent); }
     }
 
     .timeline-dot.today {
@@ -1258,7 +1275,7 @@
        ========================================================== */
     function renderHeader(trip) {
       const header = document.getElementById('header');
-      const themeEmoji = trip.theme === 'romantic' ? ' 💕' : '';
+      const themeEmoji = (trip.theme && trip.theme.style === 'romantic') ? ' 💕' : '';
       header.innerHTML = `
         <div class="header-trip-name">${trip.name}${themeEmoji}</div>
         <div class="header-traveler">${trip.traveler}</div>
@@ -1664,6 +1681,21 @@
     }
 
     /* ==========================================================
+       THEME APPLICATION
+       ========================================================== */
+    function applyTheme(theme) {
+      if (!theme || !theme.colors) return;
+      const root = document.documentElement;
+      Object.entries(theme.colors).forEach(([prop, value]) => {
+        root.style.setProperty(prop, value);
+      });
+      // Apply header gradient if present
+      if (theme.headerGradient) {
+        root.style.setProperty('--header-gradient', theme.headerGradient);
+      }
+    }
+
+    /* ==========================================================
        FETCH & RENDER
        ========================================================== */
     async function fetchData() {
@@ -1685,6 +1717,9 @@
 
       tripData = trip;
       window._tripData = trip;
+
+      // Apply theme from JSON (overrides CSS defaults)
+      applyTheme(trip.theme);
 
       // Render all sections
       renderHeader(trip);

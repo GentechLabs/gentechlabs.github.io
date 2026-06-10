@@ -2,7 +2,40 @@
   "trip": {
     "name": "Philippines 2026",
     "traveler": "Jordan",
-    "theme": "romantic",
+    "theme": {
+      "style": "romantic",
+      "palette": "philippines",
+      "name": "Philippine Sunset",
+      "colors": {
+        "--bg": "#faf7f2",
+        "--bg-alt": "#f5efe6",
+        "--panel-bg": "#ffffff",
+        "--panel-border": "#e8dcc8",
+        "--panel-shadow": "rgba(180, 140, 80, 0.12)",
+        "--text": "#2d2013",
+        "--text-dim": "#8a7560",
+        "--gold": "#d4a017",
+        "--gold-dim": "#b8941a",
+        "--gold-glow": "rgba(212, 160, 23, 0.25)",
+        "--accent": "#e8652a",
+        "--accent-dim": "#c45520",
+        "--ocean": "#1a6bb5",
+        "--ocean-dim": "#145a9a",
+        "--green": "#2d8a4e",
+        "--green-dim": "#1f6b3a",
+        "--red": "#d32f2f",
+        "--red-dim": "#b71c1c",
+        "--orange": "#e8652a",
+        "--yellow": "#f0c14b",
+        "--pink": "#d4748a",
+        "--pink-glow": "rgba(212, 116, 138, 0.2)"
+      },
+      "fonts": {
+        "heading": "'Cinzel', serif",
+        "body": "'Crimson Text', serif"
+      },
+      "headerGradient": "linear-gradient(135deg, #d4a017 0%, #e8652a 50%, #1a6bb5 100%)"
+    },
     "status": "Planning",
     "startDate": "2026-09-01",
     "endDate": "2026-09-14",
