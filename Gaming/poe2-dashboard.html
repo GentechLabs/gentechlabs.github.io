@@ -163,6 +163,39 @@
             overflow: hidden;
         }
 
+        /* Character selector tabs */
+        .char-selector {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 15px;
+            padding: 4px;
+            background: rgba(255,255,255,0.04);
+            border-radius: 10px;
+        }
+        .char-btn {
+            flex: 1;
+            padding: 10px 16px;
+            border: 1px solid var(--panel-border);
+            border-radius: 8px;
+            background: transparent;
+            color: var(--text-dim);
+            font-family: 'Cinzel', serif;
+            font-size: 0.85em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .char-btn:hover {
+            border-color: var(--gold-dim);
+            color: var(--gold);
+        }
+        .char-btn.active {
+            background: rgba(201, 168, 76, 0.12);
+            border-color: var(--gold);
+            color: var(--gold);
+            box-shadow: 0 0 12px rgba(201, 168, 76, 0.2);
+        }
+
         .character-card::before {
             content: '';
             position: absolute;
@@ -807,15 +840,22 @@
             warrior: 'poe2-warrior.json?v=' + Date.now()
         };
         let currentBuildData = null;
+        let allCharacters = [];
+        let currentCharIndex = 0;
 
         async function loadBuild() {
             try {
                 const res = await fetch(DATA_URLS.monk);
                 const raw = await res.json();
                 // Support both old flat format and new characters array format
-                const data = raw.characters ? raw.characters[0] : raw;
-                currentBuildData = data;
-                renderDashboard(data);
+                if (raw.characters) {
+                    allCharacters = raw.characters;
+                    currentBuildData = raw.characters[0];
+                } else {
+                    allCharacters = [raw];
+                    currentBuildData = raw;
+                }
+                renderDashboard(currentBuildData);
             } catch (err) {
                 document.getElementById('build-loading').innerHTML = `
                     ⚠️ Could not load build data. Make sure poe2-monk.json exists.
@@ -823,10 +863,27 @@
             }
         }
 
+        function switchCharacter(index) {
+            currentCharIndex = index;
+            currentBuildData = allCharacters[index];
+            renderDashboard(currentBuildData);
+        }
+
         function renderDashboard(data) {
             const { player, progress, skills, upgrades, lastUpdated, alias, class: charClass, build, act, mission } = data;
             const suggestions = upgrades || [];
             const playerName = typeof player === 'string' ? player : player.name;
+
+            // Character selector (only if multiple characters)
+            const charSelector = allCharacters.length > 1 ? `
+                <div class="char-selector">
+                    ${allCharacters.map((c, i) => {
+                        const name = typeof c.player === 'string' ? c.player : c.player.name;
+                        const isActive = i === currentCharIndex;
+                        return `<button class="char-btn ${isActive ? 'active' : ''}" onclick="switchCharacter(${i})">${c.alias || c.class || name}</button>`;
+                    }).join('')}
+                </div>
+            ` : '';
 
             const skillsHTML = skills.map(skill => `
                 <div class="skill-card ${skill.primary ? 'primary' : ''}">
@@ -853,6 +910,7 @@
             const manaSkill = skills.find(s => s.name === 'Mana Drain');
 
             document.getElementById('build-content').innerHTML = `
+                ${charSelector}
                 <div class="character-card">
                     <div class="character-name">${playerName}</div>
                     <div class="character-class">${alias || charClass} — ${build} Build — ${act}, ${mission}</div>
