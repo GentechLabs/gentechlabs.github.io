@@ -832,16 +832,23 @@
         // ═══════════════════════════════════════════════════════════
         //  BUILD TAB (from original poe2-dashboard.html)
         // ═══════════════════════════════════════════════════════════
-        const DATA_URL = 'data/poe2-monk.json';
+        const DATA_URLS = {
+            monk: 'poe2-monk.json',
+            warrior: 'poe2-warrior.json'
+        };
+        let currentBuildData = null;
 
         async function loadBuild() {
             try {
-                const res = await fetch(DATA_URL);
-                const data = await res.json();
+                const res = await fetch(DATA_URLS.monk);
+                const raw = await res.json();
+                // Support both old flat format and new characters array format
+                const data = raw.characters ? raw.characters[0] : raw;
+                currentBuildData = data;
                 renderDashboard(data);
             } catch (err) {
                 document.getElementById('build-loading').innerHTML = `
-                    ⚠️ Could not load build data. Make sure ${DATA_URL} exists.
+                    ⚠️ Could not load build data. Make sure poe2-monk.json exists.
                 `;
             }
         }
