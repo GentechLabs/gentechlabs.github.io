@@ -1,136 +1,139 @@
 {
-  "player": {
-    "name": "Wyvern",
-    "class": "Warrior",
-    "build": "Vibrant Warrior",
-    "ascendancy": "Not yet",
-    "weapon": "Mace + Shield",
-    "talisman": "Shave Shift",
-    "act": "Progressing",
-    "mission": "Transitioning",
-    "patch": "0.5"
-  },
-  "progress": {
-    "campaign": 25,
-    "buildCompletion": 40,
-    "gemCollection": 30,
-    "metaAlignment": 50
-  },
-  "skills": {
-    "warrior": [
-      {
-        "name": "Raise Shield",
-        "type": "Defensive — Block",
-        "primary": false,
-        "supports": ["Vanguard"]
-      },
-      {
-        "name": "Rend",
-        "type": "DoT — Physical Bleed",
-        "primary": false,
-        "supports": ["Rage"]
-      },
-      {
-        "name": "Mace Strike",
-        "type": "Primary Attack — Physical",
-        "primary": true,
-        "supports": ["Rage"]
-      },
-      {
-        "name": "Rolling Slam",
-        "type": "Burst — AoE Slam",
-        "primary": true,
-        "supports": ["Fist of War", "Magnified Area"]
-      },
-      {
-        "name": "Bone Shatter",
-        "type": "Burst — Stun/Physical",
-        "primary": false,
-        "supports": []
-      },
-      {
-        "name": "Infernal Cry",
-        "type": "Buff — Warcry",
-        "primary": false,
-        "supports": ["Tireless", "Armor Explosion"]
-      }
-    ],
-    "wyvern": [
-      {
-        "name": "Thunderstorm",
-        "type": "AoE — Lightning",
-        "primary": false,
-        "supports": ["Magnified Area"]
-      },
-      {
-        "name": "The Vower",
-        "type": "Sustained — Spark",
-        "primary": false,
-        "supports": ["Thrill of the Kill", "Empowered Sparks"]
-      },
-      {
-        "name": "Savage Fury",
-        "type": "Buff — Duration",
-        "primary": false,
-        "supports": ["Prolonged Duration", "Efficacy"]
-      },
-      {
-        "name": "Rolling Magma",
-        "type": "AoE — Fire",
-        "primary": false,
-        "supports": ["Magnified Area", "Multi Shot"]
-      },
-      {
-        "name": "Wing Blast",
-        "type": "Utility — Charge",
-        "primary": false,
-        "supports": ["Magnified Area", "Charge Profusion"]
-      },
-      {
-        "name": "Pounds",
-        "type": "Attack — Physical",
-        "primary": false,
-        "supports": []
-      }
-    ]
-  },
-  "suggestions": [
+  "characters": [
     {
-      "priority": 1,
-      "skill": "Bone Shatter",
-      "current": "No supports",
-      "suggested": "Stun + Brutality",
-      "reason": "Bone Shatter's stun potential is wasted without supports. Stun amplifies its core mechanic; Brutality adds pure physical damage since you're not scaling elemental on Warrior."
-    },
-    {
-      "priority": 2,
-      "skill": "Mace Strike",
-      "current": "Rage only",
-      "suggested": "Heavy Swing + Rage",
-      "reason": "Heavy Swing adds massive more damage to your primary melee hit. With Mace+Shield, you need every point of damage on your main attack."
-    },
-    {
-      "priority": 3,
-      "skill": "Rolling Magma",
-      "current": "Magnified Area + Multi Shot",
-      "suggested": "Ignite Proliferation + Magnified Area",
-      "reason": "Rolling Magma's ignite spreads to nearby enemies. Ignite Proliferation turns every hit into AoE clear. Multi Shot is fine but proliferation scales harder."
-    },
-    {
-      "priority": 4,
-      "skill": "Thunderstorm",
-      "current": "Magnified Area only",
-      "suggested": "Lightning Penetration + Magnified Area",
-      "reason": "Without penetration, your lightning damage gets resisted hard in later acts. Lightning Penetration ensures The Vower's sparks actually hurt."
-    },
-    {
-      "priority": 5,
-      "skill": "Raise Shield",
-      "current": "Vanguard",
-      "suggested": "Vanguard + Molten Shell",
-      "reason": "Molten Shell adds a damage-absorbing shield on top of your block. With Mace+Shield, you're built for defense — lean into it."
+      "id": "warrior-wyvern",
+      "player": "Wyvern",
+      "class": "Warrior",
+      "build": "Vibrant Warrior",
+      "ascendancy": "Not yet",
+      "weapon": "Mace + Shield",
+      "talisman": "Shave Shift",
+      "act": "Progressing",
+      "mission": "Transitioning",
+      "patch": "0.5",
+      "progress": {
+        "campaign": 25,
+        "buildCompletion": 40,
+        "gemCollection": 30,
+        "metaAlignment": 50
+      },
+      "skills": {
+        "warrior": [
+          {
+            "name": "Raise Shield",
+            "type": "Defensive — Block",
+            "primary": false,
+            "supports": ["Vanguard"]
+          },
+          {
+            "name": "Rend",
+            "type": "DoT — Physical Bleed",
+            "primary": false,
+            "supports": ["Rage"]
+          },
+          {
+            "name": "Mace Strike",
+            "type": "Primary Attack — Physical",
+            "primary": true,
+            "supports": ["Rage"]
+          },
+          {
+            "name": "Rolling Slam",
+            "type": "Burst — AoE Slam",
+            "primary": true,
+            "supports": ["Fist of War", "Magnified Area"]
+          },
+          {
+            "name": "Bone Shatter",
+            "type": "Burst — Stun/Physical",
+            "primary": false,
+            "supports": []
+          },
+          {
+            "name": "Infernal Cry",
+            "type": "Buff — Warcry",
+            "primary": false,
+            "supports": ["Tireless", "Armor Explosion"]
+          }
+        ],
+        "wyvern": [
+          {
+            "name": "Thunderstorm",
+            "type": "AoE — Lightning",
+            "primary": false,
+            "supports": ["Magnified Area"]
+          },
+          {
+            "name": "The Vower",
+            "type": "Sustained — Spark",
+            "primary": false,
+            "supports": ["Thrill of the Kill", "Empowered Sparks"]
+          },
+          {
+            "name": "Savage Fury",
+            "type": "Buff — Duration",
+            "primary": false,
+            "supports": ["Prolonged Duration", "Efficacy"]
+          },
+          {
+            "name": "Rolling Magma",
+            "type": "AoE — Fire",
+            "primary": false,
+            "supports": ["Magnified Area", "Multi Shot"]
+          },
+          {
+            "name": "Wing Blast",
+            "type": "Utility — Charge",
+            "primary": false,
+            "supports": ["Magnified Area", "Charge Profusion"]
+          },
+          {
+            "name": "Pounds",
+            "type": "Attack — Physical",
+            "primary": false,
+            "supports": []
+          }
+        ]
+      },
+      "suggestions": [
+        {
+          "priority": 1,
+          "skill": "Bone Shatter",
+          "current": "No supports",
+          "suggested": "Stun + Brutality",
+          "reason": "Bone Shatter's stun potential is wasted without supports. Stun amplifies its core mechanic; Brutality adds pure physical damage since you're not scaling elemental on Warrior."
+        },
+        {
+          "priority": 2,
+          "skill": "Mace Strike",
+          "current": "Rage only",
+          "suggested": "Heavy Swing + Rage",
+          "reason": "Heavy Swing adds massive more damage to your primary melee hit. With Mace+Shield, you need every point of damage on your main attack."
+        },
+        {
+          "priority": 3,
+          "skill": "Rolling Magma",
+          "current": "Magnified Area + Multi Shot",
+          "suggested": "Ignite Proliferation + Magnified Area",
+          "reason": "Rolling Magma's ignite spreads to nearby enemies. Ignite Proliferation turns every hit into AoE clear. Multi Shot is fine but proliferation scales harder."
+        },
+        {
+          "priority": 4,
+          "skill": "Thunderstorm",
+          "current": "Magnified Area only",
+          "suggested": "Lightning Penetration + Magnified Area",
+          "reason": "Without penetration, your lightning damage gets resisted hard in later acts. Lightning Penetration ensures The Vower's sparks actually hurt."
+        },
+        {
+          "priority": 5,
+          "skill": "Raise Shield",
+          "current": "Vanguard",
+          "suggested": "Vanguard + Molten Shell",
+          "reason": "Molten Shell adds a damage-absorbing shield on top of your block. With Mace+Shield, you're built for defense — lean into it."
+        }
+      ],
+      "synergyLoop": "Infernal Cry buffs → Mace Strike/Rolling Slam for big physical hits → Bone Shatter stuns → Wing Blast generates charges → Savage Fury sustains duration → Rolling Magma/Thunderstorm for AoE clear",
+      "lastUpdated": "2026-06-05"
     }
-  ],
-  "synergyLoop": "Infernal Cry buffs → Mace Strike/Rolling Slam for big physical hits → Bone Shatter stuns → Wing Blast generates charges → Savage Fury sustains duration → Rolling Magma/Thunderstorm for AoE clear",
-  "lastUpdated": "2026-06-05"
+  ]
 }
