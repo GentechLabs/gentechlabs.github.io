@@ -834,7 +834,7 @@
         // ═══════════════════════════════════════════════════════════
         //  BUILD TAB — DATA LOADING
         // ═══════════════════════════════════════════════════════════
-        const DATA_URL = 'poe2-warrior.json';
+        const DATA_URL = 'poe2-warrior.json?v=' + Date.now();
         let currentBuildData = null;
 
         async function loadBuild() {
