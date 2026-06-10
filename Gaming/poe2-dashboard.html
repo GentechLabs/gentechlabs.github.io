@@ -113,45 +113,6 @@
             margin-top: 8px;
         }
 
-        /* ── Main Tab Bar ── */
-        .main-tab-bar {
-            display: flex;
-            justify-content: center;
-            gap: 4px;
-            margin-bottom: 30px;
-            background: var(--panel-bg);
-            border: 1px solid var(--panel-border);
-            border-radius: 12px;
-            padding: 5px;
-            width: fit-content;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        .main-tab-btn {
-            font-family: 'Cinzel', serif;
-            font-size: 0.95em;
-            padding: 10px 32px;
-            border: none;
-            border-radius: 9px;
-            cursor: pointer;
-            background: transparent;
-            color: var(--text-dim);
-            transition: all 0.3s;
-            letter-spacing: 1px;
-            position: relative;
-        }
-        .main-tab-btn:hover { color: var(--text); background: rgba(255,255,255,0.04); }
-        .main-tab-btn.active {
-            background: rgba(201, 168, 76, 0.12);
-            color: var(--gold);
-            border: 1px solid rgba(201, 168, 76, 0.25);
-            text-shadow: 0 0 12px rgba(201, 168, 76, 0.2);
-        }
-
-        /* ── Main Tab Panels ── */
-        .main-panel { display: none; }
-        .main-panel.active { display: block; }
-
         /* ── Character Card ── */
         .character-card {
             background: linear-gradient(135deg, var(--panel-bg) 0%, #151520 100%);
@@ -435,10 +396,8 @@
         .meta-alert .suggestion strong { color: var(--gold); }
 
         /* ═══════════════════════════════════════════════════════════
-           SKILL TREE TAB STYLES
+           SKILL TREE / SYNERGY MAP STYLES
            ═══════════════════════════════════════════════════════════ */
-
-        /* (Player sub-tab bar removed — only Jordan remains) */
 
         /* ── Legend ── */
         .legend {
@@ -716,9 +675,77 @@
         .rec-arrow { color: var(--text-dim); margin: 0 4px; }
         .rec-suggested { color: var(--gold); font-weight: 700; }
 
-        /* ── Player view visibility ── */
-        .player-view { display: none; }
-        .player-view.active { display: block; }
+        /* ── Passive Skills Section ── */
+        .passive-section {
+            background: var(--panel-bg);
+            border: 1px solid var(--panel-border);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+
+        .passive-section h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3em;
+            color: var(--gold);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .passive-section h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.05em;
+            color: var(--gold);
+            margin-bottom: 10px;
+            margin-top: 18px;
+        }
+
+        .passive-subsection {
+            margin-bottom: 12px;
+        }
+
+        .passive-progress-bar-container {
+            margin-bottom: 20px;
+        }
+
+        .tag-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .keystone-tag {
+            background: rgba(201, 168, 76, 0.1);
+            border: 2px solid var(--gold);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-family: 'Cinzel', serif;
+            font-size: 0.95em;
+            color: var(--gold);
+            box-shadow: 0 0 12px rgba(201, 168, 76, 0.15);
+            letter-spacing: 0.5px;
+        }
+
+        .notable-tag {
+            background: rgba(201, 168, 76, 0.06);
+            border: 1px solid rgba(201, 168, 76, 0.4);
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.85em;
+            color: var(--gold);
+            letter-spacing: 0.5px;
+        }
+
+        .progress-fill.passive-path {
+            background: linear-gradient(90deg, #059669, #34d399);
+            box-shadow: 0 0 15px rgba(52, 211, 153, 0.3);
+        }
+
+        .synergy-section {
+            margin-bottom: 25px;
+        }
 
         /* ── Pulse animation ── */
         @keyframes pulse-glow {
@@ -761,7 +788,6 @@
         @media (max-width: 900px) {
             .info-grid { grid-template-columns: 1fr; }
             .header h1 { font-size: 1.8em; }
-
         }
         @media (max-width: 768px) {
             .character-stats { grid-template-columns: repeat(2, 1fr); }
@@ -770,7 +796,6 @@
         @media (max-width: 600px) {
             .container { padding: 10px; }
             .legend { gap: 12px; }
-            .main-tab-btn { padding: 8px 18px; font-size: 0.85em; }
         }
     </style>
 </head>
@@ -782,22 +807,10 @@
             <div class="subtitle">Data Dashboard</div>
         </div>
 
-        <!-- Main Tab Bar -->
-        <div class="main-tab-bar" id="main-tab-bar">
-            <button class="main-tab-btn active" onclick="switchMainTab('build')">📊 Build</button>
-            <button class="main-tab-btn" onclick="switchMainTab('skilltree')">🌳 Skill Tree</button>
-        </div>
-
-        <!-- ═══ BUILD TAB PANEL ═══ -->
-        <div class="main-panel active" id="panel-build">
-            <div class="loading" id="build-loading">⚡ Loading build data...</div>
-            <div id="build-content" style="display:none;"></div>
-        </div>
-
-        <!-- ═══ SKILL TREE TAB PANEL ═══ -->
-        <div class="main-panel" id="panel-skilltree">
-            <div class="loading" id="skilltree-loading" style="display:none;">🌳 Loading skill tree...</div>
-            <div id="skilltree-content" style="display:none;"></div>
+        <!-- Single scrollable panel (tabs removed) -->
+        <div id="main-content">
+            <div class="loading" id="main-loading">⚡ Loading data...</div>
+            <div id="dashboard-content" style="display:none;"></div>
         </div>
 
         <div class="footer">
@@ -806,34 +819,12 @@
         </div>
     </div>
 
-    <!-- Tooltip (shared by build tab and skill tree) -->
+    <!-- Tooltip (shared by skill tree nodes) -->
     <div class="tooltip" id="tooltip"></div>
 
     <script>
         // ═══════════════════════════════════════════════════════════
-        //  MAIN TAB SWITCHING
-        // ═══════════════════════════════════════════════════════════
-        let skillTreeInitialized = false;
-
-        function switchMainTab(tab) {
-            // Update buttons
-            document.querySelectorAll('.main-tab-btn').forEach(btn => btn.classList.remove('active'));
-            const buttons = document.querySelectorAll('.main-tab-btn');
-            if (tab === 'build') buttons[0].classList.add('active');
-            else buttons[1].classList.add('active');
-
-            // Update panels
-            document.querySelectorAll('.main-panel').forEach(p => p.classList.remove('active'));
-            document.getElementById('panel-' + tab).classList.add('active');
-
-            // Lazy-load skill tree on first visit
-            if (tab === 'skilltree' && !skillTreeInitialized) {
-                initSkillTree();
-            }
-        }
-
-        // ═══════════════════════════════════════════════════════════
-        //  BUILD TAB (from original poe2-dashboard.html)
+        //  BUILD DATA
         // ═══════════════════════════════════════════════════════════
         const DATA_URLS = {
             monk: 'poe2-monk.json?v=' + Date.now(),
@@ -857,7 +848,7 @@
                 }
                 renderDashboard(currentBuildData);
             } catch (err) {
-                document.getElementById('build-loading').innerHTML = `
+                document.getElementById('main-loading').innerHTML = `
                     ⚠️ Could not load build data. Make sure poe2-monk.json exists.
                 `;
             }
@@ -869,12 +860,15 @@
             renderDashboard(currentBuildData);
         }
 
+        // ═══════════════════════════════════════════════════════════
+        //  RENDER DASHBOARD (single scrollable view)
+        // ═══════════════════════════════════════════════════════════
         function renderDashboard(data) {
-            const { player, progress, skills, upgrades, lastUpdated, alias, class: charClass, build, act, mission } = data;
+            const { player, progress, skills, upgrades, lastUpdated, alias, class: charClass, build, act, mission, passiveSkills } = data;
             const suggestions = upgrades || [];
             const playerName = typeof player === 'string' ? player : player.name;
 
-            // Character selector (only if multiple characters)
+            // ── Character selector ──
             const charSelector = allCharacters.length > 1 ? `
                 <div class="char-selector">
                     ${allCharacters.map((c, i) => {
@@ -885,6 +879,7 @@
                 </div>
             ` : '';
 
+            // ── Skills grid ──
             const skillsHTML = skills.map(skill => `
                 <div class="skill-card ${skill.primary ? 'primary' : ''}">
                     <div class="skill-name">${skill.name}</div>
@@ -898,6 +893,7 @@
                 </div>
             `).join('');
 
+            // ── Suggestions ──
             const suggestionsHTML = suggestions.map(s => `
                 <div class="alert-item">
                     <span class="priority">${s.priority}.</span>
@@ -909,128 +905,102 @@
 
             const manaSkill = skills.find(s => s.name === 'Mana Drain');
 
-            document.getElementById('build-content').innerHTML = `
-                ${charSelector}
-                <div class="character-card">
-                    <div class="character-name">${playerName}</div>
-                    <div class="character-class">${alias || charClass} — ${build} Build — ${act}, ${mission}</div>
-                    <div class="character-stats">
-                        <div class="stat-box">
-                            <div class="label">Class</div>
-                            <div class="value">${charClass}</div>
+            // ── Passive Skills Section ──
+            let passiveHTML = '';
+            if (passiveSkills) {
+                const ps = passiveSkills;
+                const allocatedPercent = Math.round((ps.allocated / ps.total) * 100);
+
+                // Keystone tags (gold-bordered)
+                const keystoneTags = ps.keystones.length > 0
+                    ? ps.keystones.map(k => `<span class="keystone-tag">${k}</span>`).join('')
+                    : '<span style="color:var(--text-dim); font-style:italic; font-size:0.9em;">None allocated yet</span>';
+
+                // Notable tags (smaller gold)
+                const notableTags = ps.notableNodes.length > 0
+                    ? ps.notableNodes.map(n => `<span class="notable-tag">${n}</span>`).join('')
+                    : '<span style="color:var(--text-dim); font-style:italic; font-size:0.9em;">None allocated yet</span>';
+
+                // Core stats
+                const statLabels = {
+                    lightningDamage: 'Lightning Damage',
+                    fireDamage: 'Fire Damage',
+                    critChance: 'Crit Chance',
+                    attackSpeed: 'Attack Speed',
+                    castSpeed: 'Cast Speed',
+                    manaRegen: 'Mana Regen'
+                };
+                const coreStatsHTML = Object.entries(ps.coreStats).map(([key, val]) => `
+                    <div class="stat-box">
+                        <div class="label">${statLabels[key] || key}</div>
+                        <div class="value">${val}%</div>
+                    </div>
+                `).join('');
+
+                // Pathways
+                const pathwaysHTML = ps.pathways.map(pw => {
+                    const pct = pw.points > 0 ? Math.round((pw.allocated ? pw.points : 0) / pw.points * 100) : 0;
+                    const allocatedPts = pw.allocated ? pw.points : 0;
+                    return `
+                        <div class="progress-bar-container">
+                            <div class="progress-label">
+                                <span class="name">${pw.name} ${pw.allocated ? '' : '(planned)'}</span>
+                                <span class="percent">${allocatedPts}/${pw.points}</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill passive-path" style="width: 0%" data-target="${pct}"></div>
+                            </div>
                         </div>
-                        <div class="stat-box">
-                            <div class="label">Build</div>
-                            <div class="value lightning">${build}</div>
+                    `;
+                }).join('');
+
+                passiveHTML = `
+                    <div class="passive-section">
+                        <h2>🌳 Passive Skills <span style="font-size:0.7em; color:var(--text-dim); font-family:'Crimson Text',serif;">(${ps.allocated}/${ps.total} points)</span></h2>
+                        <div class="passive-progress-bar-container">
+                            <div class="progress-label">
+                                <span class="name">Passive Tree</span>
+                                <span class="percent">${allocatedPercent}%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill passive-path" style="width: 0%" data-target="${allocatedPercent}"></div>
+                            </div>
                         </div>
-                        <div class="stat-box">
-                            <div class="label">Campaign</div>
-                            <div class="value">${act}</div>
+                        <div class="passive-subsection">
+                            <h3>⚡ Keystones</h3>
+                            <div class="tag-row">${keystoneTags}</div>
                         </div>
-                        <div class="stat-box">
-                            <div class="label">Mana Sustain</div>
-                            <div class="value mana">${manaSkill ? manaSkill.supports.join(', ') || 'Mana Drain' : 'None'}</div>
+                        <div class="passive-subsection">
+                            <h3>✨ Notable Nodes</h3>
+                            <div class="tag-row">${notableTags}</div>
+                        </div>
+                        <div class="passive-subsection">
+                            <h3>📊 Core Stats</h3>
+                            <div class="character-stats">${coreStatsHTML}</div>
+                        </div>
+                        <div class="passive-subsection">
+                            <h3>🛤️ Pathways</h3>
+                            ${pathwaysHTML}
                         </div>
                     </div>
-                </div>
+                `;
+            }
 
-                <div class="progress-section">
-                    <h2>📊 Progress</h2>
-                    <div class="progress-bar-container">
-                        <div class="progress-label">
-                            <span class="name">Campaign</span>
-                            <span class="percent">${progress.campaign}%</span>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress-fill campaign" style="width: 0%" data-target="${progress.campaign}"></div>
-                        </div>
+            // ── Skill Synergy Map (embedded inline) ──
+            const synergyMapHTML = `
+                <div class="synergy-section">
+                    <div class="legend">
+                        <div class="legend-item"><div class="legend-dot lightning"></div> Lightning</div>
+                        <div class="legend-item"><div class="legend-dot physical"></div> Physical</div>
+                        <div class="legend-item"><div class="legend-dot utility"></div> Utility / Mana</div>
+                        <div class="legend-item"><div class="legend-line active"></div> Active Synergy</div>
+                        <div class="legend-item"><div class="legend-line passive"></div> Connection</div>
+                        <div class="legend-item"><div class="legend-dot support"></div> Support Gem</div>
                     </div>
-                    <div class="progress-bar-container">
-                        <div class="progress-label">
-                            <span class="name">Build Completion</span>
-                            <span class="percent">${progress.buildCompletion}%</span>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress-fill build" style="width: 0%" data-target="${progress.buildCompletion}"></div>
-                        </div>
-                    </div>
-                    <div class="progress-bar-container">
-                        <div class="progress-label">
-                            <span class="name">Gem Collection</span>
-                            <span class="percent">${progress.gemCollection}%</span>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress-fill gems" style="width: 0%" data-target="${progress.gemCollection}"></div>
-                        </div>
-                    </div>
-                    <div class="progress-bar-container">
-                        <div class="progress-label">
-                            <span class="name">Meta Alignment</span>
-                            <span class="percent">${progress.metaAlignment}%</span>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress-fill level" style="width: 0%" data-target="${progress.metaAlignment}"></div>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="skills-section">
-                    <h2>⚡ Skill Setup</h2>
-                    <div class="skill-grid">${skillsHTML}</div>
-                </div>
-
-                <div class="meta-alert">
-                    <h3>🎯 Build Optimization Suggestions</h3>
-                    ${suggestionsHTML}
-                </div>
-            `;
-
-            // Show content, hide loading
-            document.getElementById('build-loading').style.display = 'none';
-            document.getElementById('build-content').style.display = 'block';
-
-            // Animate progress bars
-            setTimeout(() => {
-                document.querySelectorAll('.progress-fill').forEach(bar => {
-                    bar.style.width = bar.getAttribute('data-target') + '%';
-                });
-            }, 300);
-        }
-
-        // ═══════════════════════════════════════════════════════════
-        //  SKILL TREE TAB (lazy-loaded from poe2-skill-tree.html)
-        // ═══════════════════════════════════════════════════════════
-        function initSkillTree() {
-            skillTreeInitialized = true;
-
-            const container = document.getElementById('skilltree-content');
-            container.innerHTML = buildSkillTreeHTML();
-
-            // Show content
-            document.getElementById('skilltree-loading').style.display = 'none';
-            container.style.display = 'block';
-
-            // Initialize tooltip and interactions
-            initSkillTreeTooltips();
-            initSkillTreeAnimations();
-        }
-
-        function buildSkillTreeHTML() {
-            return `
-                <div class="legend">
-                    <div class="legend-item"><div class="legend-dot lightning"></div> Lightning</div>
-                    <div class="legend-item"><div class="legend-dot physical"></div> Physical</div>
-                    <div class="legend-item"><div class="legend-dot utility"></div> Utility / Mana</div>
-                    <div class="legend-item"><div class="legend-line active"></div> Active Synergy</div>
-                    <div class="legend-item"><div class="legend-line passive"></div> Connection</div>
-                    <div class="legend-item"><div class="legend-dot support"></div> Support Gem</div>
-                </div>
-
-                <!-- ═══════════════ JORDAN'S TREE ═══════════════ -->
-                <div class="player-view active" id="view-jordan">
                     <div class="tree-panel">
-                        <h2>⚡ Jordan — Lightning Invoker · Skill Synergy Map</h2>
-                        <svg class="tree-svg" viewBox="0 0 1100 620" xmlns="http://www.w3.org/2000/svg" id="svg-jordan">
+                        <h2>⚡ ${alias || charClass} — ${build} · Skill Synergy Map</h2>
+                        <svg class="tree-svg" viewBox="0 0 1100 620" xmlns="http://www.w3.org/2000/svg" id="skill-tree-svg">
                             <defs>
                                 <filter id="glow-blue">
                                     <feGaussianBlur stdDeviation="4" result="blur"/>
@@ -1053,7 +1023,7 @@
                             </defs>
 
                             <!-- Connections / Synergy Lines -->
-                            <g id="jordan-links">
+                            <g id="synergy-links">
                                 <line x1="550" y1="140" x2="350" y2="260" class="connection-line synergy" stroke="var(--lightning)" marker-end="url(#arrow-blue)" filter="url(#glow-blue)"/>
                                 <line x1="350" y1="260" x2="550" y2="350" class="connection-line synergy" stroke="var(--lightning)" marker-end="url(#arrow-blue)" filter="url(#glow-blue)"/>
                                 <line x1="590" y1="140" x2="800" y2="260" class="connection-line synergy" stroke="var(--lightning)" marker-end="url(#arrow-blue)" filter="url(#glow-blue)"/>
@@ -1188,7 +1158,7 @@
                         </svg>
                     </div>
 
-                    <!-- Jordan Info Cards -->
+                    <!-- Info Cards -->
                     <div class="info-grid">
                         <div class="info-card">
                             <h3>🔄 Synergy Chain</h3>
@@ -1226,6 +1196,103 @@
                     </div>
                 </div>
             `;
+
+            // ════════════════════════════════════════════════════════
+            //  BUILD THE FULL DASHBOARD HTML
+            // ════════════════════════════════════════════════════════
+            document.getElementById('dashboard-content').innerHTML = `
+                ${charSelector}
+                <div class="character-card">
+                    <div class="character-name">${playerName}</div>
+                    <div class="character-class">${alias || charClass} — ${build} Build — ${act}, ${mission}</div>
+                    <div class="character-stats">
+                        <div class="stat-box">
+                            <div class="label">Class</div>
+                            <div class="value">${charClass}</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="label">Build</div>
+                            <div class="value lightning">${build}</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="label">Campaign</div>
+                            <div class="value">${act}</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="label">Mana Sustain</div>
+                            <div class="value mana">${manaSkill ? manaSkill.supports.join(', ') || 'Mana Drain' : 'None'}</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="progress-section">
+                    <h2>📊 Progress</h2>
+                    <div class="progress-bar-container">
+                        <div class="progress-label">
+                            <span class="name">Campaign</span>
+                            <span class="percent">${progress.campaign}%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill campaign" style="width: 0%" data-target="${progress.campaign}"></div>
+                        </div>
+                    </div>
+                    <div class="progress-bar-container">
+                        <div class="progress-label">
+                            <span class="name">Build Completion</span>
+                            <span class="percent">${progress.buildCompletion}%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill build" style="width: 0%" data-target="${progress.buildCompletion}"></div>
+                        </div>
+                    </div>
+                    <div class="progress-bar-container">
+                        <div class="progress-label">
+                            <span class="name">Gem Collection</span>
+                            <span class="percent">${progress.gemCollection}%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill gems" style="width: 0%" data-target="${progress.gemCollection}"></div>
+                        </div>
+                    </div>
+                    <div class="progress-bar-container">
+                        <div class="progress-label">
+                            <span class="name">Meta Alignment</span>
+                            <span class="percent">${progress.metaAlignment}%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill level" style="width: 0%" data-target="${progress.metaAlignment}"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="skills-section">
+                    <h2>⚡ Skill Setup</h2>
+                    <div class="skill-grid">${skillsHTML}</div>
+                </div>
+
+                ${synergyMapHTML}
+
+                ${passiveHTML}
+
+                <div class="meta-alert">
+                    <h3>🎯 Build Optimization Suggestions</h3>
+                    ${suggestionsHTML}
+                </div>
+            `;
+
+            // Show content, hide loading
+            document.getElementById('main-loading').style.display = 'none';
+            document.getElementById('dashboard-content').style.display = 'block';
+
+            // Animate progress bars + init tree interactions
+            setTimeout(() => {
+                document.querySelectorAll('.progress-fill').forEach(bar => {
+                    bar.style.width = bar.getAttribute('data-target') + '%';
+                });
+                // Init skill tree tooltips and node animations
+                initTreeTooltips();
+                initTreeAnimations();
+            }, 300);
         }
 
         // ═══════════════════════════════════════════════════════════
@@ -1247,11 +1314,12 @@
         const colorMap = { lightning: 'var(--lightning)', physical: 'var(--physical)', utility: 'var(--utility)', fire: 'var(--fire)' };
         const tagClass = { lightning: '', physical: 'fire', utility: 'gold', fire: 'fire' };
 
-        function initSkillTreeTooltips() {
+        function initTreeTooltips() {
             const tooltip = document.getElementById('tooltip');
+            const svg = document.getElementById('skill-tree-svg');
+            if (!svg) return;
 
-            // Jordan tooltips
-            document.querySelectorAll('#view-jordan .node-group[data-skill]').forEach(node => {
+            svg.querySelectorAll('.node-group[data-skill]').forEach(node => {
                 const idx = parseInt(node.getAttribute('data-skill'));
                 const skill = jordanSkills[idx];
                 if (!skill) return;
@@ -1277,14 +1345,10 @@
             });
         }
 
-        function hideTooltip() {
-            document.getElementById('tooltip').classList.remove('visible');
-        }
-
         // ═══════════════════════════════════════════════════════════
         //  SKILL TREE ANIMATIONS
         // ═══════════════════════════════════════════════════════════
-        function initSkillTreeAnimations() {
+        function initTreeAnimations() {
             requestAnimationFrame(() => {
                 document.querySelectorAll('.node-group').forEach((node, i) => {
                     node.style.opacity = '0';

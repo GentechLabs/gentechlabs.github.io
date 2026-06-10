@@ -88,6 +88,24 @@
           "role": "Mana sustain on kill. Pairs with Mana Drain."
         }
       ],
+      "passiveSkills": {
+        "allocated": 24,
+        "total": 123,
+        "keystones": ["Ride the Lightning"],
+        "notableNodes": ["Storm Surge", "Shock Discipline", "Elemental Focus"],
+        "coreStats": {
+          "lightningDamage": 48,
+          "critChance": 12,
+          "attackSpeed": 18,
+          "manaRegen": 22
+        },
+        "pathways": [
+          {"name": "Lightning Penetration", "points": 8, "allocated": true},
+          {"name": "Elemental Overload", "points": 5, "allocated": true},
+          {"name": "Spell Critical", "points": 6, "allocated": false},
+          {"name": "Mana Flow", "points": 5, "allocated": true}
+        ]
+      },
       "upgrades": [
         {
           "priority": 1,
@@ -178,6 +196,23 @@
           "role": "Area denial and fire synergy. Projectiles through it gain fire damage."
         }
       ],
+      "passiveSkills": {
+        "allocated": 3,
+        "total": 123,
+        "keystones": [],
+        "notableNodes": ["Burning Bright"],
+        "coreStats": {
+          "fireDamage": 12,
+          "critChance": 3,
+          "castSpeed": 6,
+          "manaRegen": 8
+        },
+        "pathways": [
+          {"name": "Fire Mastery", "points": 3, "allocated": true},
+          {"name": "Elemental Damage", "points": 0, "allocated": false},
+          {"name": "Spell Speed", "points": 0, "allocated": false}
+        ]
+      },
       "upgrades": [
         {
           "priority": 1,
