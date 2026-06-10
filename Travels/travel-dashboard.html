@@ -542,6 +542,12 @@
       border: 1px solid rgba(68, 255, 136, 0.3);
     }
 
+    .type-home {
+      color: #e8a0bf;
+      background: rgba(232, 160, 191, 0.12);
+      border: 1px solid rgba(232, 160, 191, 0.3);
+    }
+
     .day-location {
       font-size: 0.82rem;
       color: var(--lightning);
@@ -737,6 +743,238 @@
       color: var(--text-dim);
     }
 
+    /* ============================================================
+       VIBE BANNER & HOME BASE (header)
+       ============================================================ */
+    .vibe-banner {
+      font-style: italic;
+      color: var(--text-dim);
+      font-size: 0.92rem;
+      margin-bottom: 8px;
+      line-height: 1.5;
+    }
+
+    .home-base {
+      font-size: 0.9rem;
+      color: var(--lightning);
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+    }
+
+    .theme-accent {
+      font-size: 1rem;
+    }
+
+    /* ============================================================
+       RESTAURANTS
+       ============================================================ */
+    .restaurant-subtitle {
+      font-family: 'Cinzel', serif;
+      font-size: 0.82rem;
+      color: var(--gold-dim);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin: 14px 0 8px;
+    }
+
+    .restaurant-card {
+      background: var(--panel-bg);
+      border: 1px solid var(--panel-border);
+      border-left: 3px solid var(--orange);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 14px 16px;
+      margin-bottom: 10px;
+      transition: border-color 0.3s;
+    }
+
+    .restaurant-card:hover {
+      border-left-color: var(--gold);
+    }
+
+    .restaurant-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .restaurant-name {
+      font-family: 'Cinzel', serif;
+      font-size: 1rem;
+      color: var(--text);
+    }
+
+    .restaurant-type {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 0.65rem;
+      font-family: 'Cinzel', serif;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--orange);
+      background: rgba(255, 153, 68, 0.12);
+      border: 1px solid rgba(255, 153, 68, 0.3);
+    }
+
+    .restaurant-vibe {
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      font-style: italic;
+      margin-bottom: 4px;
+    }
+
+    .restaurant-order {
+      font-size: 0.85rem;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .restaurant-order strong {
+      color: var(--gold-dim);
+    }
+
+    .restaurant-cost {
+      font-family: 'Cinzel', serif;
+      color: var(--gold);
+      font-size: 0.9rem;
+    }
+
+    .nearby-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .nearby-list li {
+      font-size: 0.88rem;
+      color: var(--text);
+      padding: 5px 0;
+      border-bottom: 1px solid rgba(30, 30, 46, 0.4);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .nearby-list li:last-child {
+      border-bottom: none;
+    }
+
+    .nearby-list li::before {
+      content: '•';
+      color: var(--gold-dim);
+      font-weight: 700;
+    }
+
+    /* ============================================================
+       PLACES
+       ============================================================ */
+    .places-subsection-title {
+      font-family: 'Cinzel', serif;
+      font-size: 0.82rem;
+      color: var(--gold-dim);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin: 14px 0 8px;
+    }
+
+    .places-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--gap);
+    }
+
+    .place-card {
+      background: var(--panel-bg);
+      border: 1px solid var(--panel-border);
+      border-radius: var(--radius);
+      padding: 12px 14px;
+      transition: border-color 0.3s;
+    }
+
+    .place-card:hover {
+      border-color: var(--gold-dim);
+    }
+
+    .place-name {
+      font-family: 'Cinzel', serif;
+      font-size: 0.9rem;
+      color: var(--text);
+      margin-bottom: 3px;
+    }
+
+    .place-note {
+      font-size: 0.82rem;
+      color: var(--text-dim);
+      font-style: italic;
+    }
+
+    /* ============================================================
+       PACKING LIST
+       ============================================================ */
+    .packing-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 6px 0;
+      border-bottom: 1px solid rgba(30, 30, 46, 0.4);
+      font-size: 0.88rem;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+
+    .packing-item:last-child {
+      border-bottom: none;
+    }
+
+    .packing-item.done .packing-text {
+      text-decoration: line-through;
+      color: var(--green-dim);
+      opacity: 0.7;
+    }
+
+    .packing-checkbox {
+      width: 18px;
+      height: 18px;
+      border: 2px solid var(--gold-dim);
+      border-radius: 4px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+      background: transparent;
+    }
+
+    .packing-item.done .packing-checkbox {
+      background: var(--green);
+      border-color: var(--green);
+    }
+
+    .packing-item.done .packing-checkbox::after {
+      content: '✓';
+      color: #000;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .packing-progress {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      font-size: 0.85rem;
+      color: var(--text-dim);
+    }
+
+    .packing-progress strong {
+      color: var(--green);
+    }
+
     .loading-spinner {
       width: 32px;
       height: 32px;
@@ -801,6 +1039,10 @@
 
       .flights-grid {
         grid-template-columns: 1fr;
+      }
+
+      .places-grid {
+        grid-template-columns: 1fr 1fr;
       }
     }
 
@@ -868,6 +1110,18 @@
       <div class="flights-grid" id="flights-container"></div>
     </section>
 
+    <!-- Restaurants -->
+    <section id="restaurants-section" class="fade-in">
+      <h2 class="section-title"><span class="section-icon">🍽️</span> Where to Eat</h2>
+      <div id="restaurants-container"></div>
+    </section>
+
+    <!-- Places -->
+    <section id="places-section" class="fade-in">
+      <h2 class="section-title"><span class="section-icon">📍</span> Places to Go</h2>
+      <div id="places-container"></div>
+    </section>
+
     <!-- Day-by-Day Timeline -->
     <section id="timeline-section" class="fade-in">
       <h2 class="section-title"><span class="section-icon">📅</span> Day-by-Day Timeline</h2>
@@ -878,6 +1132,12 @@
     <section id="checklist-section" class="fade-in">
       <h2 class="section-title"><span class="section-icon">✅</span> Pre-Trip Checklist</h2>
       <div class="panel" id="checklist-container"></div>
+    </section>
+
+    <!-- Packing List -->
+    <section id="packing-section" class="fade-in">
+      <h2 class="section-title"><span class="section-icon">🧳</span> Packing List</h2>
+      <div class="panel" id="packing-container"></div>
     </section>
 
     <!-- Travel Tips -->
@@ -998,10 +1258,13 @@
        ========================================================== */
     function renderHeader(trip) {
       const header = document.getElementById('header');
+      const themeEmoji = trip.theme === 'romantic' ? ' 💕' : '';
       header.innerHTML = `
-        <div class="header-trip-name">${trip.name}</div>
+        <div class="header-trip-name">${trip.name}${themeEmoji}</div>
         <div class="header-traveler">${trip.traveler}</div>
         <div><span class="status-badge">${trip.status}</span></div>
+        ${trip.homeBase ? `<div class="home-base">📍 ${trip.homeBase}</div>` : ''}
+        ${trip.vibe ? `<div class="vibe-banner">"${trip.vibe}"</div>` : ''}
         <div class="header-dates">${formatDateRange(trip.startDate, trip.endDate)}</div>
         <div class="header-duration">${daysBetween(trip.startDate, trip.endDate)} days</div>
       `;
@@ -1135,6 +1398,73 @@
     }
 
     /* ==========================================================
+       RENDER: RESTAURANTS
+       ========================================================== */
+    function renderRestaurants(restaurants) {
+      const container = document.getElementById('restaurants-container');
+      if (!restaurants) { container.innerHTML = ''; return; }
+
+      let html = '';
+
+      // Must Try subsection
+      if (restaurants.mustTry && restaurants.mustTry.length) {
+        html += `<div class="restaurant-subtitle">Must Try</div>`;
+        html += restaurants.mustTry.map(r => `
+          <div class="restaurant-card">
+            <div class="restaurant-header">
+              <span class="restaurant-name">${r.name}</span>
+              <span class="restaurant-type">${r.type}</span>
+            </div>
+            ${r.vibe ? `<div class="restaurant-vibe">${r.vibe}</div>` : ''}
+            ${r.order ? `<div class="restaurant-order"><strong>Order:</strong> ${r.order}</div>` : ''}
+            ${r.cost ? `<div class="restaurant-cost">${r.cost}</div>` : ''}
+          </div>
+        `).join('');
+      }
+
+      // Nearby subsection
+      if (restaurants.nearby && restaurants.nearby.length) {
+        html += `<div class="restaurant-subtitle">Nearby Options</div>`;
+        html += `<ul class="nearby-list">`;
+        html += restaurants.nearby.map(n => `<li>${n}</li>`).join('');
+        html += `</ul>`;
+      }
+
+      container.innerHTML = html;
+    }
+
+    /* ==========================================================
+       RENDER: PLACES
+       ========================================================== */
+    function renderPlaces(places) {
+      const container = document.getElementById('places-container');
+      if (!places) { container.innerHTML = ''; return; }
+
+      const subsections = [
+        { key: 'parks', icon: '🌳', label: 'Parks' },
+        { key: 'malls', icon: '🏬', label: 'Malls' },
+        { key: 'bgc', icon: '🏙️', label: 'BGC' }
+      ];
+
+      let html = '';
+      subsections.forEach(sub => {
+        const items = places[sub.key];
+        if (!items || !items.length) return;
+        html += `<div class="places-subsection-title">${sub.icon} ${sub.label}</div>`;
+        html += `<div class="places-grid">`;
+        html += items.map(p => `
+          <div class="place-card">
+            <div class="place-name">${p.name}</div>
+            ${p.note ? `<div class="place-note">${p.note}</div>` : ''}
+          </div>
+        `).join('');
+        html += `</div>`;
+      });
+
+      container.innerHTML = html;
+    }
+
+    /* ==========================================================
        RENDER: DAY-BY-DAY TIMELINE
        ========================================================== */
     function renderTimeline(days, tripStart, tripEnd) {
@@ -1227,6 +1557,67 @@
     }
 
     /* ==========================================================
+       RENDER: PACKING LIST
+       ========================================================== */
+    const PACKING_STORAGE_KEY = 'travel-packing-state';
+
+    function loadPackingState() {
+      try {
+        return JSON.parse(localStorage.getItem(PACKING_STORAGE_KEY)) || {};
+      } catch {
+        return {};
+      }
+    }
+
+    function savePackingState(state) {
+      localStorage.setItem(PACKING_STORAGE_KEY, JSON.stringify(state));
+    }
+
+    function togglePackingItem(index, trip) {
+      const state = loadPackingState();
+      const key = trip.packing[index].item;
+      state[key] = !state[key];
+      savePackingState(state);
+      renderPacking(trip.packing);
+    }
+
+    function renderPacking(packing) {
+      const container = document.getElementById('packing-container');
+      if (!packing || !packing.length) { container.innerHTML = ''; return; }
+
+      const state = loadPackingState();
+      const total = packing.length;
+
+      // Merge saved state with JSON data
+      const merged = packing.map((item, idx) => {
+        const key = item.item;
+        if (key in state) {
+          return { ...item, packed: state[key] };
+        }
+        return item;
+      });
+
+      const packedCount = merged.filter(i => i.packed).length;
+      const pct = total > 0 ? (packedCount / total * 100) : 0;
+
+      container.innerHTML = `
+        <div class="packing-progress">
+          <span>${packedCount} of ${total} packed</span>
+          <span>${Math.round(pct)}%</span>
+        </div>
+        <div class="progress-bar-container" style="margin-bottom:10px;">
+          <div class="progress-bar-fill" data-width="${pct}" style="width:0%;background:linear-gradient(90deg,var(--gold-dim),var(--gold));"></div>
+        </div>
+        ${merged.map((item, idx) => `
+          <div class="packing-item ${item.packed ? 'done' : ''}" onclick="togglePackingItem(${idx}, window._tripData)">
+            <div class="packing-checkbox"></div>
+            <span class="packing-text">${item.item}</span>
+          </div>
+        `).join('')}
+      `;
+    }
+
+    /* ==========================================================
        RENDER: TRAVEL TIPS
        ========================================================== */
     function renderTips(tips) {
@@ -1300,8 +1691,11 @@
       renderLegs(trip.legs);
       renderBudget(trip.budget);
       renderFlights(trip.flights);
+      renderRestaurants(trip.restaurants);
+      renderPlaces(trip.places);
       renderTimeline(trip.days, trip.startDate, trip.endDate);
       renderChecklist(trip);
+      renderPacking(trip.packing);
       renderTips(trip.tips);
 
       // Footer

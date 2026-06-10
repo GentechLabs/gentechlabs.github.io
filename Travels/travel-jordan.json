@@ -2,27 +2,20 @@
   "trip": {
     "name": "Philippines 2026",
     "traveler": "Jordan",
+    "theme": "romantic",
     "status": "Planning",
     "startDate": "2026-09-01",
-    "endDate": "2026-09-28",
+    "endDate": "2026-09-14",
+    "homeBase": "Makati, Metro Manila",
     "legs": [
       {
-        "destination": "Mindanao, Philippines",
-        "arrive": "2026-09-01",
+        "destination": "Makati, Metro Manila",
+        "arrive": "2026-09-02",
         "depart": "2026-09-14",
-        "nights": 13,
+        "nights": 12,
         "purpose": "Meet Christel",
-        "location": "General Santos / Davao",
-        "accommodation": "TBD — AirBnB or hotel near Christel"
-      },
-      {
-        "destination": "Thailand",
-        "arrive": "2026-09-14",
-        "depart": "2026-09-21",
-        "nights": 7,
-        "purpose": "Explore",
-        "location": "TBD — Bangkok, Chiang Mai, or islands",
-        "accommodation": "TBD"
+        "location": "Makati City",
+        "accommodation": "TBD — Airbnb/condo in Makati (Christel picks)"
       }
     ],
     "flights": [
@@ -34,41 +27,33 @@
         "class": "Economy",
         "cost": 850,
         "status": "Not booked",
-        "notes": "1-2 layovers typical. Check Manila → GenSan domestic."
+        "notes": "1-2 layovers typical. Direct to NAIA."
       },
       {
-        "route": "MNL → BKK",
+        "route": "MNL → CVG",
         "airline": "TBD",
         "departDate": "2026-09-14",
         "arriveDate": "2026-09-14",
         "class": "Economy",
-        "cost": 180,
+        "cost": 850,
         "status": "Not booked",
-        "notes": "Budget AirAsia or Cebu Pacific. 3-4 hour flight."
-      },
-      {
-        "route": "BKK → CVG",
-        "airline": "TBD",
-        "departDate": "2026-09-21",
-        "arriveDate": "2026-09-21",
-        "class": "Economy",
-        "cost": 800,
-        "status": "Not booked",
-        "notes": "Check connections through Seoul or Tokyo."
+        "notes": "Return flight. Check connections through Seoul or Tokyo."
       }
     ],
     "budget": {
-      "total": 5000,
+      "total": 3500,
       "spent": 0,
       "categories": {
-        "flights": { "allocated": 1830, "spent": 0 },
-        "accommodation": { "allocated": 1200, "spent": 0 },
-        "food": { "allocated": 700, "spent": 0 },
-        "activities": { "allocated": 500, "spent": 0 },
-        "transport": { "allocated": 400, "spent": 0 },
-        "emergency": { "allocated": 370, "spent": 0 }
+        "flights": { "allocated": 1700, "spent": 0 },
+        "accommodation": { "allocated": 600, "spent": 0 },
+        "food": { "allocated": 500, "spent": 0 },
+        "activities": { "allocated": 300, "spent": 0 },
+        "transport": { "allocated": 200, "spent": 0 },
+        "groceries": { "allocated": 150, "spent": 0 },
+        "emergency": { "allocated": 50, "spent": 0 }
       }
     },
+    "vibe": "Chill romantic — mostly home, occasional outings. Cook together, explore when it feels right.",
     "days": [
       {
         "day": 1,
@@ -78,301 +63,264 @@
         "type": "travel",
         "activities": [
           "Depart CVG airport",
-          "Long layover — bring laptop for work"
+          "Long flight — bring laptop, download shows"
         ],
-        "notes": "Arrive MNL Sep 2 (timezone shift)"
+        "notes": "Arrive MNL Sep 2 (crosses date line)"
       },
       {
         "day": 2,
         "date": "2026-09-02",
-        "location": "Manila → General Santos",
-        "title": "Arrival + Domestic Transfer",
+        "location": "Manila → Makati",
+        "title": "Arrival Day",
         "type": "travel",
         "activities": [
-          "Land in Manila (NAIA)",
-          "Domestic flight to General Santos (Cebu Pacific)",
-          "Meet Christel at airport",
-          "Check into accommodation"
+          "Land at NAIA",
+          "Grab to Makati (~30-45 min depending on traffic)",
+          "Check into accommodation",
+          "Meet Christel 🥰",
+          "Light dinner nearby — let Christel pick"
         ],
-        "notes": "Domestic flight ~1.5 hours. Book separately."
+        "notes": "Don't overplan. First night = settle in."
       },
       {
         "day": 3,
         "date": "2026-09-03",
-        "location": "General Santos",
-        "title": "First Full Day",
-        "type": "explore",
+        "location": "Makati",
+        "title": "Grocery Run + Home Dinner",
+        "type": "home",
         "activities": [
-          "Explore GenSan with Christel",
-          "Try local seafood — Tuna Capital of PH",
-          "Visit Hilltop Park"
+          "Morning: sleep in, adjust to timezone",
+          "Grocery run with Christel — SM Makati or Landmark",
+          "Cook dinner at home together",
+          "Movie night at the condo"
         ],
-        "notes": ""
+        "notes": "Christel wants to cook at home. Let her lead the grocery list."
       },
       {
         "day": 4,
         "date": "2026-09-04",
-        "location": "General Santos",
-        "title": "GenSan Day 2",
+        "location": "Makati",
+        "title": "Makati Exploration Day",
         "type": "explore",
         "activities": [
-          "GenSan Boulevard",
-          "Local market shopping",
-          "Dinner with Christel's family (if possible)"
+          "Walk Ayala Center / Greenbelt — shops + restaurants",
+          "Lunch at Greenbelt (many restaurant options)",
+          "Visit Ayala Museum (small, air-conditioned, romantic)",
+          "Coffee at a Makati café",
+          "Home for dinner"
         ],
-        "notes": ""
+        "notes": "Greenbelt is the nice outdoor mall area. Good for a chill date."
       },
       {
         "day": 5,
         "date": "2026-09-05",
-        "location": "General Santos → Davao",
-        "title": "Davao Day Trip",
+        "location": "Makati",
+        "title": "Jollibee Day 🐝",
         "type": "explore",
         "activities": [
-          "Bus/van to Davao City (~3 hours)",
-          "Visit People's Park",
-          "Try Durian at Magsaysay Fruit Market",
-          "Return to GenSan or stay overnight"
+          "Jollibee — get the Chickenjoy, Jolly Spaghetti, and Burger Steak",
+          "Walk around Makati after",
+          "Visit Poblacion — artsy/nightlife area (daytime is chill)",
+          "Home for rest"
         ],
-        "notes": "Davao is Christel's home city. Worth 1-2 days."
+        "notes": "Jollibee is mandatory. Order for two. Try the Peach Mango Pie."
       },
       {
         "day": 6,
         "date": "2026-09-06",
-        "location": "Davao",
-        "title": "Davao Day 2",
-        "type": "explore",
+        "location": "Makati",
+        "title": "Chill Home Day",
+        "type": "home",
         "activities": [
-          "Eden Nature Park",
-          "Davao Crocodile Park",
-          "San Pedro Cathedral"
+          "Slow morning — coffee, breakfast together",
+          "Christel cooks lunch",
+          "Afternoon: relax, read, nap, video games",
+          "Evening: grocery run for tomorrow's cooking",
+          "Cook dinner together"
         ],
-        "notes": "Stay overnight in Davao"
+        "notes": "Not every day needs to be an outing. Home days are the best days."
       },
       {
         "day": 7,
         "date": "2026-09-07",
-        "location": "Davao → GenSan",
-        "title": "Return to GenSan",
-        "type": "travel",
+        "location": "BGC, Taguig",
+        "title": "BGC Day 1",
+        "type": "explore",
         "activities": [
-          "Morning in Davao",
-          "Bus back to GenSan",
-          "Evening with Christel"
+          "Grab to BGC (~15 min from Makati)",
+          "Lunch at a BGC restaurant (Terra 22 or Toyo Eatery)",
+          "Walk The Mind Museum area — art installations",
+          "High Street shopping + window browsing",
+          "Coffee at a BGC café",
+          "Home for dinner or eat in BGC"
         ],
-        "notes": ""
+        "notes": "BGC is the cleanest, most walkable area in Metro Manila. Good for a date day."
       },
       {
         "day": 8,
         "date": "2026-09-08",
-        "location": "GenSan",
-        "title": "Work Day",
-        "type": "work",
+        "location": "BGC, Taguig",
+        "title": "BGC Day 2",
+        "type": "explore",
         "activities": [
-          "Catch up on work/AE tasks",
-          "Gentech updates from PH timezone",
-          "Evening: local dinner"
+          "Return to BGC for anything missed",
+          "Venice Grand Canal Mall (boat ride + restaurants)",
+          "Market Market for local finds",
+          "Rooftop drink at a BGC bar (Z Hostel Roofdeck or similar)",
+          "Home"
         ],
-        "notes": "PH is UTC+8. EST work hours = late night/early morning PH."
+        "notes": "Venice Mall has gondola-style boats — touristy but fun for couples."
       },
       {
         "day": 9,
-        "date": "2026-09-09",
-        "location": "GenSan",
-        "title": "Sarangani Day",
-        "type": "explore",
+        "date": "2026-09-08",
+        "location": "Makati",
+        "title": "Home Day + Date Night",
+        "type": "home",
         "activities": [
-          "Visit Sarangani Bay",
-          "Beach day",
-          "Balot (the town, not the egg... maybe the egg too)"
+          "Morning: slow start, home breakfast",
+          "Afternoon: work/relax at condo",
+          "Evening: dress up for date night",
+          "Dinner at Blackbird Makati (romantic, art deco, fancy)",
+          "Night walk around Ayala Ave"
         ],
-        "notes": "Beautiful coastline south of GenSan"
+        "notes": "Blackbird is in the old Nielsons Tower. Elegant but not stuffy."
       },
       {
         "day": 10,
         "date": "2026-09-10",
-        "location": "GenSan",
-        "title": "Work Day 2",
-        "type": "work",
+        "location": "Makati",
+        "title": "Cooking Day",
+        "type": "home",
         "activities": [
-          "Work / AE tasks",
-          "Afternoon: relax with Christel"
+          "Big grocery run — cook something ambitious together",
+          "Try a Filipino recipe (adobo, sinigang, or kare-kare)",
+          "Afternoon: eat + nap",
+          "Evening: movie or walk around Legaspi Park"
         ],
-        "notes": ""
+        "notes": "Cooking together = best date activity. Legaspi Park has a Sunday market too."
       },
       {
         "day": 11,
         "date": "2026-09-11",
-        "location": "GenSan",
-        "title": "Enchanted Kingdom or Local Adventure",
-        "type": "explore",
+        "location": "Makati",
+        "title": "Relaxation Day",
+        "type": "home",
         "activities": [
-          "Choose adventure: local island hopping OR city exploration",
-          "Try Jollibee (mandatory PH experience)",
-          "Night market"
+          "No plans. Sleep in.",
+          "Maybe walk to a nearby café",
+          "Home cooking for lunch",
+          "Afternoon: whatever feels right",
+          "Grocery restock for remaining days"
         ],
-        "notes": ""
+        "notes": "This is the beauty of staying in Makati. You're not rushing."
       },
       {
         "day": 12,
         "date": "2026-09-12",
-        "location": "GenSan",
-        "title": "Chill Day",
-        "type": "relax",
+        "location": "Makati",
+        "title": "Legaspi Market + Chill",
+        "type": "explore",
         "activities": [
-          "Slow morning",
-          "Pack for Thailand leg",
-          "Last evening in GenSan"
+          "Legaspi Weekend Market (if Sunday) — local food, crafts, live music",
+          "Or: Salcedo Market (Saturday) — same vibe, different area",
+          "Pick up snacks/souvenirs",
+          "Home for afternoon",
+          "Dinner out — try Toyo Eatery or Manam"
         ],
-        "notes": "Start transition to Thailand mindset"
+        "notes": "Both markets are walking distance in Makati. Weekend only."
       },
       {
         "day": 13,
         "date": "2026-09-13",
-        "location": "GenSan",
-        "title": "PH Last Day",
-        "type": "travel",
+        "location": "Makati",
+        "title": "Last Full Day",
+        "type": "relax",
         "activities": [
-          "Final time with Christel",
-          "GenSan → Manila (domestic flight)",
-          "Overnight near NAIA for morning BKK flight"
+          "Pack together",
+          "Final grocery trip — grab pasalubong (gifts) to bring home",
+          "Last home-cooked meal with Christel",
+          "Evening: reflect on the trip"
         ],
-        "notes": "Or fly GenSan → Manila → BKK same day"
+        "notes": "Pasalubong ideas: dried mangoes, ube jam, polvoron, local coffee"
       },
       {
         "day": 14,
         "date": "2026-09-14",
-        "location": "Manila → Bangkok",
-        "title": "Thailand Leg Begins",
+        "location": "Makati → Manila → Cincinnati",
+        "title": "Departure Day",
         "type": "travel",
         "activities": [
-          "Fly MNL → BKK",
-          "Arrive Bangkok",
-          "Check into hostel/hotel",
-          "Explore Khao San Road or Sukhumvit"
+          "Check out of accommodation",
+          "Grab to NAIA",
+          "Fly home to CVG",
+          "Post-trip debrief + update dashboard"
         ],
-        "notes": "Budget airlines: AirAsia, Nok Air, VietJet"
-      },
-      {
-        "day": 15,
-        "date": "2026-09-15",
-        "location": "Bangkok",
-        "title": "Bangkok Day 1",
-        "type": "explore",
-        "activities": [
-          "Grand Palace & Wat Phra Kaew",
-          "Wat Arun (Temple of Dawn)",
-          "Chatuchak Weekend Market (if timing works)"
-        ],
-        "notes": ""
-      },
-      {
-        "day": 16,
-        "date": "2026-09-16",
-        "location": "Bangkok",
-        "title": "Bangkok Day 2",
-        "type": "explore",
-        "activities": [
-          "Street food tour — Chinatown (Yaowarat)",
-          "Jim Thompson House",
-          "Rooftop bar at sunset"
-        ],
-        "notes": ""
-      },
-      {
-        "day": 17,
-        "date": "2026-09-17",
-        "location": "Bangkok → Chiang Mai",
-        "title": "Chiang Mai Transfer",
-        "type": "travel",
-        "activities": [
-          "Fly or train to Chiang Mai",
-          "Check in to Old City hostel",
-          "Night Bazaar"
-        ],
-        "notes": "Flight ~1 hour, train ~12 hours (overnight train is an option)"
-      },
-      {
-        "day": 18,
-        "date": "2026-09-18",
-        "location": "Chiang Mai",
-        "title": "Chiang Mai Temples",
-        "type": "explore",
-        "activities": [
-          "Doi Suthep Temple",
-          "Old City temple walk",
-          "Khao Soi for lunch (northern Thai curry noodles)"
-        ],
-        "notes": ""
-      },
-      {
-        "day": 19,
-        "date": "2026-09-19",
-        "location": "Chiang Mai",
-        "title": "Elephant Sanctuary / Nature",
-        "type": "explore",
-        "activities": [
-          "Elephant Nature Park (ethical sanctuary)",
-          "Afternoon: cooking class",
-          "Pack for departure"
-        ],
-        "notes": "Book sanctuary in advance — fills up fast"
-      },
-      {
-        "day": 20,
-        "date": "2026-09-20",
-        "location": "Chiang Mai",
-        "title": "Last Full Day",
-        "type": "relax",
-        "activities": [
-          "Morning market",
-          "Last-minute shopping",
-          "Flight to Bangkok (if needed for connection)"
-        ],
-        "notes": "May need overnight in BKK for morning international flight"
-      },
-      {
-        "day": 21,
-        "date": "2026-09-21",
-        "location": "Chiang Mai → Bangkok → Cincinnati",
-        "title": "Return Home",
-        "type": "travel",
-        "activities": [
-          "Fly CNX → BKK",
-          "Fly BKK → CVG (long haul)",
-          "Arrive home",
-          "Post-trip debrief"
-        ],
-        "notes": "BKK → CVG will be 20+ hours with layover. Prepare accordingly."
+        "notes": "Allow 2+ hours for NAIA. Traffic can be brutal."
       }
     ],
     "checklist": [
       {"item": "Passport (valid 6+ months)", "done": false, "category": "docs"},
       {"item": "PH visa check (US passport = 30 days visa-free)", "done": true, "category": "docs"},
-      {"item": "TH visa check (US passport = 30 days visa-free)", "done": true, "category": "docs"},
       {"item": "Book CVG → MNL flight", "done": false, "category": "flights"},
-      {"item": "Book MNL → BKK flight", "done": false, "category": "flights"},
-      {"item": "Book BKK → CVG flight", "done": false, "category": "flights"},
-      {"item": "Book MNL → GenSan domestic", "done": false, "category": "flights"},
-      {"item": "Accommodation: GenSan (13 nights)", "done": false, "category": "stay"},
-      {"item": "Accommodation: Bangkok (3 nights)", "done": false, "category": "stay"},
-      {"item": "Accommodation: Chiang Mai (3 nights)", "done": false, "category": "stay"},
+      {"item": "Book MNL → CVG return flight", "done": false, "category": "flights"},
+      {"item": "Accommodation: Makati (12 nights)", "done": false, "category": "stay"},
       {"item": "Travel insurance", "done": false, "category": "docs"},
       {"item": "Philippine SIM card (Globe or Smart)", "done": false, "category": "tech"},
-      {"item": "Thai SIM card (AIS or DTAC)", "done": false, "category": "tech"},
       {"item": "Notify bank of travel dates", "done": false, "category": "finance"},
       {"item": "Exchange USD → PHP (don't do at airport)", "done": false, "category": "finance"},
-      {"item": "Pack light — 2 weeks + 1 week", "done": false, "category": "pack"},
-      {"item": "Elephant Nature Park booking", "done": false, "category": "activities"},
-      {"item": "Cooking class booking (Chiang Mai)", "done": false, "category": "activities"}
+      {"item": "Download Grab app", "done": false, "category": "tech"},
+      {"item": "Pack light — 2 weeks casual", "done": false, "category": "pack"},
+      {"item": "Bring pasalubong ideas list", "done": false, "category": "pack"}
+    ],
+    "restaurants": {
+      "mustTry": [
+        {"name": "Jollibee", "type": "Fast food", "order": "Chickenjoy, Jolly Spaghetti, Burger Steak, Peach Mango Pie", "cost": "$"},
+        {"name": "Blackbird Makati", "type": "Fine dining", "vibe": "Romantic, art deco, elegant", "cost": "$$$"},
+        {"name": "Toyo Eatery", "type": "Modern Filipino", "vibe": "Trendy, innovative", "cost": "$$"},
+        {"name": "Manam", "type": "Filipino comfort", "vibe": "Casual, shareable plates", "cost": "$$"}
+      ],
+      "nearby": [
+        "Greenbelt restaurants (many options, outdoor seating)",
+        "Legazpi Sunday Market (street food + live music)",
+        "Salcedo Saturday Market (local food + crafts)"
+      ]
+    },
+    "places": {
+      "parks": [
+        {"name": "Legaspi Park", "note": "Walking distance, Sunday market"},
+        {"name": "Salcedo Park", "note": "Saturday market, chill vibes"},
+        {"name": "Ayala Triangle Gardens", "note": "Green space in the middle of Makati"}
+      ],
+      "malls": [
+        {"name": "Greenbelt", "note": "Nice outdoor mall, restaurants + shops"},
+        {"name": "SM Makati", "note": "Big mall, grocery store inside"},
+        {"name": "Power Plant Mall", "note": "Upscale, Rockwell area"}
+      ],
+      "bgc": [
+        {"name": "BGC High Street", "note": "Walkable strip, shops + restaurants"},
+        {"name": "Venice Grand Canal Mall", "note": "Gondola boats, touristy but fun"},
+        {"name": "The Mind Museum", "note": "Interactive science museum"}
+      ]
+    },
+    "packing": [
+      {"item": "Light clothes (2 weeks, tropical)", "packed": false},
+      {"item": "Rain jacket/umbrella (Sept = rainy season)", "packed": false},
+      {"item": "Comfortable walking shoes", "packed": false},
+      {"item": "Phone charger + adapter (Type A/B, same as US)", "packed": false},
+      {"item": "Laptop + headphones", "packed": false},
+      {"item": "Toiletries (buy full-size there, cheaper)", "packed": false},
+      {"item": "Pasalubong bag (for bringing gifts home)", "packed": false}
     ],
     "tips": [
-      "PH: ATMs charge 250 PHP ($4.50) per withdrawal. Withdraw large.",
-      "TH: 7-Eleven is everywhere. Cheap meals, phone top-up, ATMs.",
-      "GenSan: Tuna capital. Try tuna sisig and tuna kinilaw (ceviche).",
-      "Bangkok: BTS/MRT is cheap and fast. Avoid tuk-tuks for long rides.",
-      "Chiang Mai: Rent a scooter if comfortable. ~250 THB/day.",
-      "Both: Grab app works in both countries (like Uber)."
+      "Sept is rainy season — bring umbrella, mornings are usually clear",
+      "Grab is the Uber of PH. Use it for everything.",
+      "Makati is very walkable for a Manila city. Greenbelt area especially.",
+      "ATMs charge 250 PHP ($4.50) per withdrawal. Withdraw large amounts.",
+      "7-Eleven everywhere. Cheap meals, phone top-up, ATMs.",
+      "Christel's home base is Mindanao but she'll be in Makati with you.",
+      "Cooking at home saves money AND is more romantic than eating out every night.",
+      "Jollibee delivery via GrabFood if you don't want to go out."
     ],
     "lastUpdated": "2026-06-11"
   }
