@@ -17,7 +17,7 @@
 - Coming Up section updated with urgency flags
 
 ### Mess-Hall/considerations.md — Cleaned resolved items
-- Removed 4 old resolved entries (Green Room Handoffs, D5 Milestone Tracker, Dynamic Burn Rate Approvals, Inbox Approval Queue)
+- Removed 4 old resolved entries (Green Room Handoffs, DeFi Milestone Tracker, Dynamic Burn Rate Approvals, Inbox Approval Queue)
 - Added Agent Arena Name approval (May 23) to Resolved section
 - 3 active items retained: Circle Gateway, Portfolio Health, xurl Auth
 

@@ -144,7 +144,7 @@ YoYo to provide numeric thresholds:
 
 3. **DCA boost multiplier:** When bid-ask opportunity active, suggest `BOOST_MULTIPLIER` (default 1.5×) for next 3 DCA cycles
 
-4. **DeFi milestone cross-check:** Validate current tier targets against `Projects/DeFi/D5-Milestone-Tracker.md` — ensure $5/$20/$55/$200/day align with strategy doc
+4. **DeFi milestone cross-check:** Validate current tier targets against `Projects/DeFi/DeFi-Milestone-Tracker.md` — ensure $5/$20/$55/$200/day align with strategy doc
 
 5. **Fee efficiency baseline:** Confirm 30% threshold for "edge zone" on curve shape; may differ for spot/bidirectional shapes
 
@@ -166,7 +166,7 @@ Deliverable: Updated config file + one-page strategy note in `Strategies/Defi-Mo
 
 ## Success Criteria
 
-- [ ] D5 master cron implements 5-minute breakout confirmation with distinct message tiers
+- [ ] DeFi master cron implements 5-minute breakout confirmation with distinct message tiers
 - [ ] Efficiency ≤30% triggers immediate rebalance alert (no debounce)
 - [ ] Bid-ask edge logic added to DCA recommendation block
 - [ ] Config updated in `HQ/config/defi-lp-config.env` with new thresholds

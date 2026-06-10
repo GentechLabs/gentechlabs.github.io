@@ -45,7 +45,7 @@ Archived 5 older reports (May 3, 15, 16, 17, 18) to `12-Archive/vault-audits/202
 
 ### Considerations Updated
 Added 3 resolved items to the Resolved section:
-- D5 Milestone Tracker Consolidation
+- DeFi Milestone Tracker Consolidation
 - Dynamic Burn Rate Approvals (all 3)
 - Inbox Approval Queue
 

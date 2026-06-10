@@ -83,7 +83,7 @@ Source: DexScreener API + DeFiLlama fallback (00:30 EDT snapshot)
 
 ---
 
-## D5 Milestone Progress
+## DeFi Milestone Progress
 
 | Metric | Value |
 |--------|-------|

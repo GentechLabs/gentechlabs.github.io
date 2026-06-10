@@ -1,5 +1,5 @@
 ---
-title: "D5 Milestone Cron Consolidation — Complete"
+title: "DeFi Milestone Cron Consolidation — Complete"
 date: 2026-05-02
 author: DMOB (Labs)
 status: ✅ DONE
@@ -7,7 +7,7 @@ handoff: none
 ---
 
 ## What happened
-Consolidated Yoyo's two duplicate LP-monitoring cron jobs into a single D5 Milestone tracker with intelligent debouncing and strategy-aware advice.
+Consolidated Yoyo's two duplicate LP-monitoring cron jobs into a single DeFi Milestone tracker with intelligent debouncing and strategy-aware advice.
 
 ## Changes merged
 **Script** (`Strategies/scripts/d5-lp-consolidated.py`)
@@ -20,11 +20,11 @@ Consolidated Yoyo's two duplicate LP-monitoring cron jobs into a single D5 Miles
 **Cron** (Yoyo profile, `~/.hermes/profiles/yoyo/cron/jobs.json`)
 - Retired: `faed4f588aef` (Crypto Watchlist + LP Monitor) — 4× daily
 - Retired: `cfa8d1c19357` (DeFi Milestone + LP Monitor) — daily 14:10 UTC
-- Added: `3258c64b` — D5 Milestone, every 15 min, 6–23 UTC
+- Added: `3258c64b` — DeFi Milestone, every 15 min, 6–23 UTC
 
 **Manifest** (`Strategies/cron-jobs.md`)
 - Duplicate entries marked "retired 2026-05-02"
-- New D5 Milestone section added with schedule, ID, script path
+- New DeFi Milestone section added with schedule, ID, script path
 
 ## How it works (runtime flow)
 1. Read state from `~/.hermes/scripts/.lfj-d5-state.json` (profile-resolved via HERMES_HOME)
@@ -45,7 +45,7 @@ Consolidated Yoyo's two duplicate LP-monitoring cron jobs into a single D5 Miles
 - Branch: `main`
 - New files:
   - `Strategies/scripts/d5-lp-consolidated.py`
-  - `Strategies/D5-Milestone-Tracker-Consolidation.md`
+  - `Strategies/DeFi-Milestone-Tracker-Consolidation.md`
 - Modified:
   - `System/agent-profiles/yoyo/cron/jobs.json`
   - `Strategies/cron-jobs.md`

@@ -26,7 +26,7 @@ Jordan confirmed it's the cleanest format:
 | `daily-lp-summary.py` | Retained but not scheduled (can be run manually if needed) |
 | `lp-unified-monitor.py` | Retained (has multi-pool + compound logic if we expand) |
 | `lp-aae-monitor.py` | Retained (legacy, can be archived later) |
-| Cron `76d0ee972be9` (D5 daily) | **Removed** — redundant, absorbed into hourly script |
+| Cron `76d0ee972be9` (DeFi daily) | **Removed** — redundant, absorbed into hourly script |
 | Cron `faed4f588aef` (Unified hourly) | **Updated** — now runs `lp-aae-signal-monitor.py` directly |
 
 ---

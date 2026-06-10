@@ -53,7 +53,7 @@ d5-milestone-tracker.py — 4× daily: 08:15, 12:15, 16:15, 20:15 ET
 ### 4. **Documentation delivered**
 - Handoff doc: `Green-Room/cron-consolidation-d5-milestone-tracker.md`
 - Approval request: `HQ/Approvals/2026-05-02-d5-milestone-tracker-consolidation.md`
-- Architecture spec: `Strategies/D5-Milestone-Tracker-Consolidation.md`
+- Architecture spec: `Strategies/DeFi-Milestone-Tracker-Consolidation.md`
 
 ---
 
@@ -83,7 +83,7 @@ Strategies/
 │   ├── d5-milestone-tracker.py          ← NEW (consolidated)
 │   ├── lp-range-monitor-v3.py           ← Active 10-min silent monitor
 │   └── d5-master-cron.py                ← Authoritative milestone tracker
-├── D5-Milestone-Tracker-Consolidation.md
+├── DeFi-Milestone-Tracker-Consolidation.md
 └── cron-jobs.md                         ← Manifest to update post-cleanup
 
 Green-Room/
@@ -102,7 +102,7 @@ HQ/Approvals/
 ## ⚠️ Outstanding Decisions & Next Steps
 
 ### Jordan's call needed:
-1. **Keep or retire** the 10-minute LP Position Monitor (`8ae8a04f3b71`)? It's the current silent monitor but may be redundant once D5 Milestone script fully replaces it.
+1. **Keep or retire** the 10-minute LP Position Monitor (`8ae8a04f3b71`)? It's the current silent monitor but may be redundant once DeFi Milestone script fully replaces it.
 
 2. **DMOB code review** — optional but recommended before consolidating. Script reuses v3's proven breakout logic; changes are minimal unless bid-ask integration is desired.
 

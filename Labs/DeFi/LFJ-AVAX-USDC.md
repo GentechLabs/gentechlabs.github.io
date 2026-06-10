@@ -17,7 +17,7 @@
 - **B/S Ratio (24h)**: 0.970 (balanced, slight sell pressure)
 - **Action**: ⚠️ REVIEW — IL delta -0.69 pp triggers review. Price $9.56 is within rebalanced range $9.44–$9.74 but above original strategic band $8.95–$9.36. Efficiency 80% is healthy. Monitor for continued drift upward.
 
-**D5 Milestone Alignment**:
+**DeFi Milestone Alignment**:
 - Position value ($146.14) — Scout tier progress
 - Price inside rebalanced range ✅ but outside original band ⚠️
 - IL -0.59% — below 2% threshold ✅

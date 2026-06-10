@@ -143,9 +143,9 @@ During range-bound or correction markets, LP earns fees via market making. Durin
 - 50-day MA slope turns negative
 - Fear & Greed drops below 40
 
-### D5 Milestone Integration
+### DeFi Milestone Integration
 
-This strategy accelerates D5 progression:
+This strategy accelerates DeFi progression:
 - **Phase 1** (LP): Slow, steady fee accumulation — Tier 1-3 territory
 - **Phase 2** (Spot + LP): Bull market = high volume = faster fees in remaining 25% LP
 - **Phase 3** (Resistance LP): Concentrated liquidity at key levels = high APR spikes

@@ -186,7 +186,7 @@ Updated in every signal output:
 
 ## Bull Market Exit Integration
 
-The D5 bull exit strategy we just built becomes **one trigger within the hybrid engine**:
+The DeFi bull exit strategy we just built becomes **one trigger within the hybrid engine**:
 
 ```
 BULL EXIT TRIGGER (existing):
@@ -217,7 +217,7 @@ The brain doesn't just sit there — it **tells you what to do**.
 | **🔄 Regime Shift** | Regime classifier changes | Confirm strategy rotation |
 | **📊 Leaderboard Change** | New strategy takes #1 spot | Review allocation |
 | **⚠️ Strategy Underperformance** | Any strategy < 50% of benchmark for 7 days | Consider reducing allocation |
-| **🐂 Bull Exit** | Existing D5 signals trigger | Rotate LP → HODL |
+| **🐂 Bull Exit** | Existing DeFi signals trigger | Rotate LP → HODL |
 | **🔻 Bear Entry** | Regime shifts to BEAR_TRENDING | Rotate HODL → Staking + Lending |
 | **💰 Compound Optimal** | Fees exceed threshold in current best strategy | Auto-compound |
 | **🎯 Rebalance** | Allocation drift > 10% from target | Rebalance to target |

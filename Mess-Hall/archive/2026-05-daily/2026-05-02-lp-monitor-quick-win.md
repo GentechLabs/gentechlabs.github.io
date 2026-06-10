@@ -20,7 +20,7 @@
   - On each run, script compares current `cfg["position"]["total_usd"]` to `state["last_position_usd"]`.
   - If increased, records `capital_injection_usd` and includes it in output JSON.
   - Human-readable report gets a prefix line: `"💸 Capital added: $X.XX — progress recalculated."`
-  - Future daily fee estimates automatically scale with larger position, so D5 tier progress updates correctly.
+  - Future daily fee estimates automatically scale with larger position, so DeFi tier progress updates correctly.
 - **State file now includes:** `last_position_usd` field.
 
 ### 3. Minor: State schema update
@@ -43,7 +43,7 @@
 --- 
 
 ## ⏭ Next Steps for Full Consolidation
-- The consolidated D5 master cron (`d5-master-cron.py`) still needs to be updated with the same capital detection and JSON output flag. That remains on deck after this quick win.
+- The consolidated DeFi master cron (`d5-master-cron.py`) still needs to be updated with the same capital detection and JSON output flag. That remains on deck after this quick win.
 - After that: retire duplicate cron jobs per handoff plan.
 
 --- 

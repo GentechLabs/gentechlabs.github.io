@@ -2,7 +2,7 @@
 date: 2026-04-29
 author: Desmond
 status: draft
-tags: [strategy, LP, hybrid, D5, market-making]
+tags: [strategy, LP, hybrid, DeFi, market-making]
 ---
 
 # Hybrid LP-Core + Tactical Spot Strategy
@@ -89,4 +89,4 @@ Once in spot, watch for consolidation at key resistance levels:
 
 ---
 
-*This strategy is part of the D5 milestone — professional market making with regime-based position management.*
+*This strategy is part of the DeFi milestone — professional market making with regime-based position management.*

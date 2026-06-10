@@ -23,7 +23,7 @@
 **Efficiency**: 6.9% (on-chain share of bin supply — price at 96.5% of range limits Curve effectiveness)
 **Action**: ⚠️ Review — price rallied +2.50% to $10.00, pushing active bin to 96.5% of range top. Position balanced 53/47 but near upper boundary. If price breaks above $10.00, position goes out-of-range. Consider widening upper range or monitoring for breakout.
 
-**D5 Milestone Alignment**:
+**DeFi Milestone Alignment**:
 - Scout tier ($5.00/day target) — est. daily fees $0.46 → 9.2% progress
 - Price inside strategic target band ✅ ($10.00 within $9.45–$10.00)
 - IL -0.9% ✓ below 2% threshold
@@ -45,7 +45,7 @@
 **Efficiency**: 89.4% ✓ ≥50% — excellent concentration
 **Action**: ✅ No rebalance needed — price centered in curve range. Position rebalanced from $9.95–$10.30 (out-of-range) to $9.45–$10.00 (in-range). Efficiency recovered from -10.7% to 89.4%.
 
-**D5 Milestone Alignment**:
+**DeFi Milestone Alignment**:
 - Scout tier ($5.00/day target) — est. daily fees ~$0.77 → 15.5% progress
 - Price inside strategic target band ✅ ($9.75 within $9.45–$10.00)
 - IL ~0.0% ✓ below 2% threshold
@@ -70,7 +70,7 @@
 **Efficiency**: -10.7% (100% AVAX — fully out of range below)
 **Action**: 🚨 CRITICAL: Rebalance required — price ($9.9157) below range lower bound ($9.95). Position converted to 100% AVAX. Efficiency -10.7%. Active bin (8363260) is 2 bins below position start (8363262).
 
-**D5 Milestone Alignment**:
+**DeFi Milestone Alignment**:
 - Scout tier ($5.00/day target) — est. daily fees ~$0.02 → 0.4% progress
 - Price OUTSIDE strategic target band ($9.95–$10.30) — below lower bound
 - IL ~0.0% ✓ below 2% threshold
@@ -89,7 +89,7 @@
 **Action**: No rebalance needed — price centered in new curve range.
 **Position Note**: Rebalanced from Bid-Ask ($9.68–$10.00) to Curve ($9.75–$10.01). Jordan analysis: "Bid-ask was great for the fall but most of the day was spent in the middle of bid ask. Low efficiency is a no go." Curve shape better for ranging markets — earns more when price stays centered. Position value stable at $203.18.
 
-**D5 Milestone Alignment**:
+**DeFi Milestone Alignment**:
 - Scout tier ($5.00/day target) — est. daily fees ~$1.34 → 26.8% progress
 - Price inside position range ✅
 - IL ✓ well below 2% threshold
@@ -107,7 +107,7 @@
 **Action**: No rebalance needed — price centered in new bid-ask range.
 **Position Note**: DCA rebalance — shifted from Curve ($9.81–$10.06) to Bid-Ask ($9.68–$10.00). Bid-Ask shape concentrates more liquidity near current price for higher fee capture in ranging markets. Range widened slightly on bottom ($0.13 down) and tightened on top ($0.06 down). Position value stable at $201.94.
 
-**D5 Milestone Alignment**:
+**DeFi Milestone Alignment**:
 - Scout tier ($5.00/day target) — est. daily fees ~$1.88 → 37.6% progress
 - Price inside position range ✅
 - IL ✓ well below 2% threshold
@@ -125,7 +125,7 @@
 **Action**: No rebalance needed — price centered in new curve range.
 **Position Note**: Rebalanced from $9.25–$10.73 (wide curve) to $9.81–$10.06 (tighter curve). Range narrowed significantly — more concentrated = higher fee capture when in range. Position value up to $203.14 from $180.56 (+12.5%).
 
-**D5 Milestone Alignment**:
+**DeFi Milestone Alignment**:
 - Scout tier ($5.00/day target) — est. daily fees ~$1.88 → 37.6% progress
 - Price inside position range ✅
 - IL ✓ well below 2% threshold
@@ -145,7 +145,7 @@
 
 **Market Notes**: AVAX ~$10.12. Price centered in $10.02–$10.30 range. Altcoin rally continuation from May 10.
 
-**D5 Milestone Alignment**:
+**DeFi Milestone Alignment**:
 - Scout tier ($5.00/day target) — est. daily fees ~$2.47 → 49.4% progress
 - Price inside position range ✅
 - IL ✓ well below 2% threshold
@@ -166,7 +166,7 @@
 
 **On-Chain Data**: Pool WAVAX/USDC 5bps on LFJ v2.2 (Avalanche). DexScreener price $10.38, 24h change +3.98%.
 
-**D5 Milestone Alignment**:
+**DeFi Milestone Alignment**:
 - Position value ($182.98) → Scout tier ($5.00/day target) — 23.8% progress
 - Price inside position range ✅ (55.3% from bottom)
 - IL ✓ well below 2% threshold (+0.00%)
@@ -190,7 +190,7 @@
 
 **On-Chain Data**: Pool WAVAX/USDC 5bps on LFJ v2.2 (Avalanche). 1,363 buys / 1,413 sells in 24h — slight sell pressure. TVL $4.01M.
 
-**D5 Milestone Alignment**:
+**DeFi Milestone Alignment**:
 - Position value ($1.14) → Scout tier ($5.00/day target) — ~0% progress
 - Price inside position range ✅ but near top boundary — monitor
 - IL ✓ well below 2% threshold (+0.00%)
@@ -211,7 +211,7 @@
 
 **On-Chain Data**: Pool WAVAX/USDC 5bps on LFJ v2.2 (Avalanche). 1,315 buys / 1,456 sells in 24h — slight sell pressure. TVL $4.05M.
 
-**D5 Milestone Alignment**:
+**DeFi Milestone Alignment**:
 - Position value ($125.81) → Scout tier ($5.00/day target) — 23.8% progress
 - Price inside position range ✅ but near top boundary — monitor
 - IL ✓ well below 2% threshold (+0.00%)
@@ -232,7 +232,7 @@
 
 **On-Chain Data**: Pool WAVAX/USDC 5bps on LFJ v2.2 (Avalanche). Liquidity $4.04M (base: 28,684 WAVAX, quote: $3.75M USDC).
 
-**D5 Milestone Alignment**:
+**DeFi Milestone Alignment**:
 - Position value ($126.39) → Scout tier ($5/day target) — 48.7% progress
 - Price inside position range ✅
 - IL ✓ well below 2% threshold (-0.15%)
@@ -254,7 +254,7 @@
 
 **On-Chain Data**: Pool WAVAX/USDC 5bps on LFJ v2.2 (Avalanche). Liquidity $4.04M.
 
-**D5 Milestone Alignment**:
+**DeFi Milestone Alignment**:
 - Position value ($126.01) → Scout tier ($5.00/day target) — 23.8% progress
 - Price inside position range ✅
 - IL ✓ well below 2% threshold (-0.2%)
@@ -276,7 +276,7 @@
 
 **On-Chain Data**: Pool WAVAX/USDC 5bps on LFJ v2.2 (Avalanche). 2,378 buys / 2,511 sells in 24h — balanced flow. Liquidity $4.04M (base: 28,684 WAVAX, quote: $3.75M USDC).
 
-**D5 Milestone Alignment**:
+**DeFi Milestone Alignment**:
 - Position value ($127.03) → Scout tier ($5/day target) — 48.7% progress
 - Price inside position range ✅
 - IL ✓ well below 2% threshold (~0.00%)
@@ -299,7 +299,7 @@
 
 **On-Chain Data**: Rebalance detected — range shifted from $9.45–$9.74 to $9.78–$10.02. Composition changed: AVAX 5.93→9.19, USDC 78.54→35.87.
 
-**D5 Milestone Alignment**:
+**DeFi Milestone Alignment**:
 - Position value ($127.13) aligns with **Scout** tier ($5/day target) — 51.0% progress
 - Price is outside target band $8.95–$9.36 (above) but inside position range ✅
 - IL ✓ well below 2% threshold (0.00%)
@@ -319,7 +319,7 @@
 
 **Market Notes**: AVAX at $9.62 (24h -1.06%), still above strategic target $8.95–$9.36 but within position range $9.45–$9.74. Pool volume strong at $31.6M/day (7.8x TVL). B/S ratio 0.839 — sell pressure moderate. JOE at $0.0482 (-1.31%).
 
-**D5 Milestone Alignment**:
+**DeFi Milestone Alignment**:
 - Position value ($135.59) aligns with **Scout** tier ($5/day target) — 23.4% progress
 - Price is outside target band $8.95–$9.36 (above) but inside position range ✅
 - IL ✓ well below 2% threshold (0.00%)
@@ -339,7 +339,7 @@
 
 **Market Notes**: AVAX at $9.50 (24h -1.41%), still above strategic target $8.95–$9.36 but within position range $9.45–$9.74. Pool volume strong at $38.1M/day (9.5x TVL). B/S ratio balanced (105 buys vs 100 sells 1h). JOE at $0.0484 (+0.53%). BTC $80,149 (-1.83%), ETH $2,295 (-2.43%).
 
-**D5 Milestone Alignment**:
+**DeFi Milestone Alignment**:
 - Position value ($134.88) aligns with **Scout** tier ($5/day target) — 28.2% progress
 - Price is outside target band $8.95–$9.36 (above) but inside position range ✅
 - IL ✓ well below 2% threshold (~0.1%)
@@ -383,7 +383,7 @@
 
 **Market Notes**: AVAX at $9.6612 (-0.73%), below position range $9.95–$10.30. Pool volume $10.2M/day (2.5x TVL). Position fully converted to AVAX as price dropped through range.
 
-**D5 Milestone Alignment**:
+**DeFi Milestone Alignment**:
 - Tier Scout ($5/day target) — $0.26/day estimated → below target
 - Price OUTSIDE strategic band $9.95–$10.30 (below)
 - IL ~+2.7% — above 2% threshold ⚠️
@@ -407,7 +407,7 @@
 
 **Market Notes**: AVAX at $9.5000 (-5.63% 24h), dropped below position range. Pool volume $20.6M/day (5.1x TVL). Position fully converted to AVAX as price fell through range floor. Price dropped ~$0.27 from last entry at $9.77.
 
-**D5 Milestone Alignment**:
+**DeFi Milestone Alignment**:
 - Tier Scout ($5.00/day target) — est. daily fees $0.50 → below target
 - Price OUTSIDE strategic target band $8.95–$9.36 AND outside position range
 - IL +1.9% ✓ below 2% threshold
@@ -431,7 +431,7 @@
 **Efficiency**: 51.4% ≥50% ✓
 **Action**: ✅ Position in range, IL stable, efficiency recovered above 50%. No rebalance needed. Micro-DCA boost no longer triggered.
 
-**D5 Milestone Alignment**:
+**DeFi Milestone Alignment**:
 - Tier Scout ($5.00/day target) — est. daily fees $0.83/day → below target
 - Price inside strategic target band $8.95–$9.36 (position range $9.30–$9.60, price at 71.7% of range)
 - IL +0.0% ✓ below 2% threshold
@@ -461,7 +461,7 @@
 
 **Market Notes**: AVAX at $9.2589 (-5.23%), dropped below position range floor $9.30. Pool volume $26.8M/day (6.7x TVL). Position fully converted to AVAX as price fell through range. Price dropped ~$0.26 from last entry at $9.5151.
 
-**D5 Milestone Alignment**:
+**DeFi Milestone Alignment**:
 - Tier Scout ($5.00/day target) — est. daily fees $0.00 → below target
 - Price inside strategic target band $8.95–$9.36 (at $9.26)
 - IL +1.6% ✓ below 2% threshold
@@ -486,7 +486,7 @@
 **Efficiency**: 23.0% <50% → Micro-DCA boost triggered
 **Action**: ⚠️ Review — price recovered back into range ($9.33 above $9.30 floor) after dropping below at 12:15 UTC. Position rebalanced to USDC-heavy (21/79). Efficiency at 23.0% — capital concentrated near range floor, suboptimal fee capture. Consider re-centering range or waiting for price stabilization.
 
-**D5 Milestone Alignment**:
+**DeFi Milestone Alignment**:
 - Tier Scout ($5.00/day target) — est. daily fees $0.60 → below target
 - Price inside strategic target band $8.95–$9.36 (at $9.33)
 - IL -0.3% ✓ below 2% threshold
@@ -509,7 +509,7 @@
 **Efficiency**: 16.7% (on-chain share of bin supply — price at 7.1% of range, USDC-heavy 21/79 split)
 **Action**: ⚠️ Review — efficiency 16.7% <50% → capital poorly deployed. Price near range bottom (7.1%) with bid-ask shape; most liquidity sits in USDC bins at range top. Consider rebalancing to narrower range centered near $9.35 or switching to Curve shape if price stabilizes.
 
-**D5 Milestone Alignment**:
+**DeFi Milestone Alignment**:
 - Scout tier ($5.00/day target) — est. daily fees $0.49 → 9.7% progress
 - Price inside strategic target band ✅ ($9.32 within $9.30–$9.60)
 - IL -0.3% ✓ below 2% threshold
@@ -533,7 +533,7 @@
 **Efficiency**: 4.3% <50% → Micro-DCA boost triggered
 **Action**: ⚠️ Rebalance suggested — efficiency 4.3% critically low + price ($9.2989) $0.0011 below range low ($9.30). Position is USDC-heavy (79/21) as price sits at range floor. Switching to CURVE shape could improve efficiency if price stabilizes near $9.30.
 
-**D5 Milestone Alignment**:
+**DeFi Milestone Alignment**:
 - Scout tier ($5.00/day target) — est. daily fees $0.32 → below target
 - Price at edge of strategic target band ($9.30 boundary — $0.0011 below)
 - IL +0.2% ✓ below 2% threshold

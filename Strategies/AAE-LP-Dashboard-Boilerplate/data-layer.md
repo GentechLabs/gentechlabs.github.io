@@ -93,14 +93,14 @@ curl https://api.dexscreener.com/latest/v1/pairs/avalanche/0x864d4e5ee7318e97483
 │                      Agent Decision Engine                   │
 │  • Detect patterns (rebalance, claim, compound)             │
 │  • Evaluate conviction thresholds                            │
-│  • Generate D5 milestone progress                           │
+│  • Generate DeFi milestone progress                           │
 └──────────────────────────────────────────────────────────────┘
                               │
                               ▼
 ┌──────────────────────────────────────────────────────────────┐
 │                        Front-End Render                      │
 │  • HTML dashboard (AAE-LP-Dashboard-Boilerplate)            │
-│  • Telegram card (D5 milestone embedded)                    │
+│  • Telegram card (DeFi milestone embedded)                    │
 │  • Voice summary (ElevenLabs)                               │
 └──────────────────────────────────────────────────────────────┘
 ```
@@ -122,7 +122,7 @@ curl https://api.dexscreener.com/latest/v1/pairs/avalanche/0x864d4e5ee7318e97483
 
 ✅ **Create data connector service** (`scripts/connector.py`)  
 ✅ **Add agent trigger conditions** (`config.example.json` → agent_actions)  
-✅ **Add D5 milestone progress** (weekly DCA % bars)  
+✅ **Add DeFi milestone progress** (weekly DCA % bars)  
 ✅ **Add Ghost Position toggle** (simulated vs live)
 
 ---

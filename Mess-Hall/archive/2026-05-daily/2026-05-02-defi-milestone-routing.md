@@ -1,12 +1,12 @@
 # Coordination Note — 2026-05-02
 
-## D5 Milestone Cron Enhancements — Work Routed
+## DeFi Milestone Cron Enhancements — Work Routed
 
 **Time:** ~12:45 PM UTC  
 **Status:** 🚀 Handoffs issued, awaiting ACKs
 
 **What happened:**
-Jordan voice-approved (12:42 PM) consolidation of D5 milestone monitoring rules:
+Jordan voice-approved (12:42 PM) consolidation of DeFi milestone monitoring rules:
 - 5-minute breakout confirmation (debounce)
 - Efficiency ≤30% immediate rebalance alert
 - Bid-ask edge accumulation strategy

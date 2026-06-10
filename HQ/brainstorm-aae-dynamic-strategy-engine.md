@@ -47,8 +47,8 @@ The A.A.E. should track and be capable of deploying capital across:
 
 | Strategy | Risk Profile | Yield Source | Current State in AAE |
 |----------|-------------|--------------|---------------------|
-| **Hodling** (AVAX/SOL/BTC) | Low–Med | Price appreciation | ✅ D5 DCA + bull exit signals |
-| **LP (Concentrated)** | Med–High | Trading fees | ✅ D5 + LP Monitor |
+| **Hodling** (AVAX/SOL/BTC) | Low–Med | Price appreciation | ✅ DeFi DCA + bull exit signals |
+| **LP (Concentrated)** | Med–High | Trading fees | ✅ DeFi + LP Monitor |
 | **LP (Passive/Wide)** | Med | Trading fees (lower) | ❌ Not implemented |
 | **Staking (Validator)** | Low | Inflation rewards | ❌ Not implemented |
 | **Lending/Borrowing** | Med | Interest | ❌ Not implemented |
@@ -230,7 +230,7 @@ This is what separates A.A.E. from every other "AI trades for you" vault.
 
 | Asset | What It Provides | Status |
 |-------|-----------------|--------|
-| D5 Strategy Engine | LP ↔ Spot switching logic | ✅ Built |
+| DeFi Strategy Engine | LP ↔ Spot switching logic | ✅ Built |
 | LP Monitor | Real-time fee/range efficiency | ✅ Running hourly |
 | Bull Market Exit Strategy | When to exit LP, go spot | ✅ Documented |
 | Hybrid LP + Spot Strategy | Regime detection, Go Spot signals | ✅ Draft |

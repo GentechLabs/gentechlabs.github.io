@@ -204,7 +204,7 @@ Each chain has its own zone assessment based on:
 
 ### Week 4: User Experience
 - [ ] Telegram bot interface
-- [ ] Dashboard screenshots (extend D5 system)
+- [ ] Dashboard screenshots (extend DeFi system)
 - [ ] Daily digest cron job
 
 ---

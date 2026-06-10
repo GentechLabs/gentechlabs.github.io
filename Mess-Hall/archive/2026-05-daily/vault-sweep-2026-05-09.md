@@ -75,14 +75,14 @@ status: complete
 ### Stale Handoffs (from handoff-board.md)
 | Handoff | From → To | Task | Status | Age |
 |---------|-----------|------|--------|-----|
-| H2026-05-02-01 | Gentech → DMOB | D5 Cron Enhancements | 🚀 Pending Ack | 7 days (since May 2) |
-| H2026-05-02-02 | Gentech → YoYo | D5 Strategy Params | 🚀 Pending Ack | 7 days (since May 2) |
+| H2026-05-02-01 | Gentech → DMOB | DeFi Cron Enhancements | 🚀 Pending Ack | 7 days (since May 2) |
+| H2026-05-02-02 | Gentech → YoYo | DeFi Strategy Params | 🚀 Pending Ack | 7 days (since May 2) |
 | — | Desmond → YoYo | Dynamic burn rate competitive analysis | ⏳ Pending | 20 days (since Apr 19) |
 | — | Jordan → DMOB | Gas Reserve Auto-Rebalance SC review | ⏳ Pending | 18 days (since Apr 21) |
 | — | Jordan → YoYo | Gas Reserve Auto-Rebalance monitoring | ⏳ Pending | 18 days (since Apr 21) |
 
 ### Coordination Gaps
-1. **D5 handoffs from May 2 still unacknowledged** — 7 days stale. Enforcement cron may be inactive or agents offline. These need explicit nudge or cancellation.
+1. **DeFi handoffs from May 2 still unacknowledged** — 7 days stale. Enforcement cron may be inactive or agents offline. These need explicit nudge or cancellation.
 2. **Gas Reserve Auto-Rebalance** — both DMOB and YoYo handoffs pending since Apr 21 (18 days). Task-board says "DONE (May 2)" for both, but handoff-board not updated. Either the work was done and handoffs were never cleaned, or there's a disconnect.
 3. **Desmond → YoYo competitive analysis** — 20 days pending. YoYo overdue. Was already flagged as "ESCALATED" on Apr 19.
 4. **Coordination board is stale** — last update was May 3. Agent session check-in table has no recent entries.
@@ -113,7 +113,7 @@ The vault structure is clean. The main issue is stale handoffs in `handoff-board
 
 **🔴 Needs your attention:**
 1. **Solana Frontier — T-2 days.** Triage decision still pending. Submit, partial, or withdraw?
-2. **5 stale handoffs** on the board (7–20 days). Most critical: D5 Cron + D5 Strategy Params from May 2. Worth cancelling or re-assigning?
+2. **5 stale handoffs** on the board (7–20 days). Most critical: DeFi Cron + DeFi Strategy Params from May 2. Worth cancelling or re-assigning?
 3. **Nous OAuth** — blocked DMOB for 6+ days. Needs re-auth.
 
 **🟡 Nice to have:**

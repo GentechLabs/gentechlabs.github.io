@@ -245,7 +245,7 @@ apr = (daily_fees × 365 / position_usd) × 100
 
 ---
 
-## 🐂 Bull Market Exit Strategy (D5 Addendum — Apr 29, 2026)
+## 🐂 Bull Market Exit Strategy (DeFi Addendum — Apr 29, 2026)
 
 > *"When there is a bull market, maybe we could pull out 75% of that to ride it up."* — Jordan
 
@@ -398,13 +398,13 @@ Jordan approved the optimized cron output format:
 - Inline pool context (Vol 24h, TVL)
 - Squad-aware tier progression (Scout → Raider → Warlord → Sovereign)
 
-## ✅ D5 Milestone Summary Consolidated — Apr 26 2026
+## ✅ DeFi Milestone Summary Consolidated — Apr 26 2026
 
-Jordan's directive: Consolidate the daily LP summary into the D5 milestone format.
+Jordan's directive: Consolidate the daily LP summary into the DeFi milestone format.
 
 **What changed:**
 - daily-lp-summary.py → replaced by d5-milestone-summary.py
-- Daily 8 AM cron now produces structured D5 Milestone Report:
+- Daily 8 AM cron now produces structured DeFi Milestone Report:
   - Full tier ladder display (Scout→Raider→Warlord→Sovereign) with progress bars
   - Micro-DCA triggers with efficiency-based bonus amounts ($10/$20)
   - Compound threshold tracking ($50 target)

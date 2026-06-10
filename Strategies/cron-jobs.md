@@ -1,5 +1,5 @@
 # YoYo Cron Jobs — Active Manifest
-> Last updated: 2026-05-02 (DMOB — consolidated duplicate LP jobs into D5 Milestone)
+> Last updated: 2026-05-02 (DMOB — consolidated duplicate LP jobs into DeFi Milestone)
 > Models: All jobs → `kimi-k2.6` via `custom:opencode-go` (pinned, was inheriting broken Nous 401)
 > Delivery: Strategies group (-1002916759037)
 >
@@ -29,14 +29,14 @@
 
 ---
 
-### 3. 📊 D5 Milestone
+### 3. 📊 DeFi Milestone
 **Job ID:** `3258c64b`
 **Schedule:** `*/10 6-23 * * *` (every 10 min, 6 AM–11 PM UTC)
 **Delivery:** Strategies (-1002916759037)
 **Status:** ✅ Active — consolidated 2026-05-02 (replaced duplicate LP monitoring jobs)
 **Script:** `d5-lp-consolidated.py`
 
-**What it does:** Consolidated D5 Milestone + LP tracker with smart debouncing. Monitors LFJ AVAX/USDC position with:
+**What it does:** Consolidated DeFi Milestone + LP tracker with smart debouncing. Monitors LFJ AVAX/USDC position with:
 - **5-minute confirmation window** on range breakouts and low-efficiency alerts (prevents transient spikes)
 - **Fee efficiency zones** → dynamic DCA sizing ($50 / $30 / $20 / $10)
 - **Shape-aware rebalance suggestions** (curve/spot/bidirectional analysis)
@@ -124,10 +124,10 @@
 | `44f7c2028766` | DMOB | DeFi Milestone + LP Monitor | Consolidated into YoYo |
 | `0b2beec3f702` | Desmond | LP Position Monitor + Alerts | Consolidated into YoYo |
 | `bce87f59b79e` | YoYo | CMC Watchlist (old) | Replaced with DexScreener-based |
-| `faed4f588aef` | YoYo | Crypto Watchlist + LP Monitor | Duplicate; consolidated into D5 Milestone (2026-05-02) |
-| `cfa8d1c19357` | YoYo | DeFi Milestone + LP Monitor | Duplicate; consolidated into D5 Milestone (2026-05-02) |
+| `faed4f588aef` | YoYo | Crypto Watchlist + LP Monitor | Duplicate; consolidated into DeFi Milestone (2026-05-02) |
+| `cfa8d1c19357` | YoYo | DeFi Milestone + LP Monitor | Duplicate; consolidated into DeFi Milestone (2026-05-02) |
 | `b2bb2bae4fc5` | DMOB | LP Range Monitor | Previously consolidated |
-| `504ac01d54ed` | YoYo | Daily LP + D5 (never ran) | Previously consolidated |
+| `504ac01d54ed` | YoYo | Daily LP + DeFi (never ran) | Previously consolidated |
 | `2563e78bcf72` | YoYo | DeFi Milestone (Fee Efficiency Tracker) | Reinstated Apr 28 — conditional alerting |
 | `1f10f10b2a07` | YoYo | CMC Crypto Watchlist (canonical) | ID no longer in scheduler |
 | `f930f56d082a` | Gentech | Crypto Watchlist Hourly | Migrated to separate Gentech profile |
@@ -148,4 +148,4 @@
 
 ---
 
-*Canonical LP monitor (10min): YoYo job `3258c64b` (D5 Milestone with 5min debounce). DeFi Milestone (twice daily, AM/PM): DMob jobs `f709d93b25ab` / `6a85a903e471`.* DeFi Dashboard (3×/day): YoYo job `33b3c40539b2`.*
+*Canonical LP monitor (10min): YoYo job `3258c64b` (DeFi Milestone with 5min debounce). DeFi Milestone (twice daily, AM/PM): DMob jobs `f709d93b25ab` / `6a85a903e471`.* DeFi Dashboard (3×/day): YoYo job `33b3c40539b2`.*

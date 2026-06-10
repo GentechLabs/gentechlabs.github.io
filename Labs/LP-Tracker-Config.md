@@ -16,7 +16,7 @@
 - ✅ **Migrated to API-based monitoring** — vision-analysis dependency removed
 - ✅ **AAE Signal Monitor v2 deployed** — structured JSON output, multi-shape support, smart severity (SILENT/OK/ALERT/CRITICAL)
 - ✅ **Human-readable Telegram formatting optimized** — clean emoji headers, compact P&L section, inline squad context
-- ✅ **Daily LP → D5 Milestone Report consolidated (Apr 26)** — `daily-lp-summary.py` replaced by `d5-milestone-summary.py`; produces tier-ladder report with Scout→Raider→Warlord→Sovereign progression, micro-DCA triggers, and compound tracking
+- ✅ **Daily LP → DeFi Milestone Report consolidated (Apr 26)** — `daily-lp-summary.py` replaced by `d5-milestone-summary.py`; produces tier-ladder report with Scout→Raider→Warlord→Sovereign progression, micro-DCA triggers, and compound tracking
 
 ---
 
@@ -32,13 +32,13 @@ Every new LP monitoring layer, cron optimization, or signal spec change must be 
 
 New layers are gated on a frontend compatibility check before deployment.
 - ✅ Cron output optimized (Apr 25) — structured Telegram alerts with emoji taxonomy, live price, range status, yield & P&L block
-- Frontend implication: Output format now feeds directly into D5 Milestone Tracker data layer; every new metric added to cron must have a corresponding UI card in `DeFi-Milestone-Tracker.html`
+- Frontend implication: Output format now feeds directly into DeFi Milestone Tracker data layer; every new metric added to cron must have a corresponding UI card in `DeFi-Milestone-Tracker.html`
 
 ## Frontend Contract
 The cron output is the **single source of truth** for live position data. When adding new layers (e.g., IL simulation, yield projections, multi-pool), the following must stay in sync:
 1. Cron JSON schema (`lp-aae-signal-monitor.py`)
 2. Telegram alert template (short-form)
-3. D5 Milestone Tracker HTML card (long-form dashboard view)
+3. DeFi Milestone Tracker HTML card (long-form dashboard view)
 4. Fee Tracker Spec (`Strategies/Fee-Tracker-Spec.md`) presets
 
 Last optimized: 2026-04-25 by YoYo/Desmond. Jordan approved format.

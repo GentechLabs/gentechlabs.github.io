@@ -8,7 +8,7 @@
 LINK is dramatically undervalued relative to oracle market share dominance. Current price (~$14.50) is historically cheap for a protocol that controls 60%+ of the oracle market.
 
 ## Jordan's Accumulation Path
-1. **AVAX/USDC LP** — current focus, D5 milestone tracking
+1. **AVAX/USDC LP** — current focus, DeFi milestone tracking
 2. **LINK accumulation** — parallel build, "in between pool stuff"
 3. **Solana** — eventual expansion
 

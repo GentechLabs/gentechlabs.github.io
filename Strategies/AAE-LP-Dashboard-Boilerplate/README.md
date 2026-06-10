@@ -48,7 +48,7 @@
 | Priority | Task | Owner |
 |----------|------|-------|
 | 🟢 High | Connect to real data (Chainlink, DexScreener) | DMOB |
-| 🟡 Medium | Add D5 milestone progress bars | AAE Team |
+| 🟡 Medium | Add DeFi milestone progress bars | AAE Team |
 | 🟡 Medium | Add "Ghost Position" toggle (simulated vs live) | AAE Team |
 | 🟢 High | Agent action triggers (auto-claim/rebalance flags) | DMOB |
 
