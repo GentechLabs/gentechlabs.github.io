@@ -58,6 +58,6 @@
 ## Agent Memory Files
 
 Specialist context lives in vault, not Hermes memory:
-- `Strategies/agent-memory/yoyo-context.md` — YoYo's working context
-- `Strategies/agent-memory/dmob-context.md` — DMOB's working context  
-- `Strategies/agent-memory/desmond-context.md` — Desmond's working context
+- `Archive/agent-memory-legacy/yoyo-context.md` — YoYo's working context
+- `Archive/agent-memory-legacy/dmob-context.md` — DMOB's working context  
+- `Archive/agent-memory-legacy/desmond-context.md` — Desmond's working context

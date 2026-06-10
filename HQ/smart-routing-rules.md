@@ -1,254 +1,122 @@
-# Smart Routing Rules — Gentech Orchestrator
+# Smart Routing Rules — Gentech Single-Agent
 
-**Version**: 1.1
-**Updated**: 2026-05-09
-**Purpose**: Content-based intelligent routing for multi-agent system
-**Hermes**: v2026.5.7 — streaming edits + cron delivery fixes live
-
----
-
-## Routing Philosophy
-
-Gentech reads every message in all 4 groups. Based on content analysis, he either:
-1. **Routes** — Tags the right specialist with context
-2. **Handles** — Responds directly (coordination, status, simple questions)
-3. **Ignores** — Stays silent (noise, off-topic, personal chatter)
+**Version**: 2.0
+**Updated**: 2026-06-10
+**Purpose**: Single-agent operation with topic-based channel routing
+**Model**: Gentech handles everything. Telegram groups are topic channels, not agent-specific.
 
 ---
 
-## Routing Matrix
+## Architecture
 
-### 🎯 YoYo (Strategies) — DeFi/Finance Expert
-**Trigger Keywords**: `token`, `price`, `portfolio`, `LP`, `yield`, `farm`, `staking`, `swap`, `DEX`, `AMM`, `TVL`, `APR`, `APY`, `impermanent loss`, `rebalance`, `position`, `market`, `bull`, `bear`, `altcoin`, `DeFi`, `watchlist`, `buy`, `sell`, `trade`, `chart`, `analysis`, `research`, `tokenomics`, `vesting`, `unlock`
-
-**Trigger Patterns**:
-- Questions about token prices or market conditions
-- Portfolio allocation decisions
-- LP position management
-- Yield optimization strategies
-- Market research requests
-- Competitive analysis for DeFi protocols
-
-**Routing Format**:
 ```
-📊 @YoYo — [Task Type]
-
-[Context from message]
-
-Priority: [High/Medium/Low]
-Deadline: [If applicable]
-Vault: [Where to write results]
+Gentech (single brain, all tasks)
+├── HQ (-1003863540828) — coordination, decisions, blockers
+├── Labs (-1003872552815) — code, contracts, technical work
+├── Strategies (-1002916759037) — DeFi, finance, research
+└── Entertainment (-1003893562036) — content, social, demos
 ```
 
-**Example**:
-```
-📊 @YoYo — Research Request
-
-"Can you analyze the current RWA landscape on Avalanche?"
-
-Priority: Medium
-Deadline: None
-Vault: Strategies/avalanche-rwa-*.md
-```
+**How it works:**
+- Jordan drops messages in the right group by topic
+- Gentech reads all groups, handles everything directly
+- No agent-to-agent delegation (single brain)
+- Work outputs go back to the originating group
+- Multi-agent mode reserved for future projects/integrations
 
 ---
 
-### 🔧 DMOB (Labs) — Smart Contract/Technical Expert
-**Trigger Keywords**: `contract`, `Solidity`, `Rust`, `Anchor`, `deploy`, `test`, `audit`, `security`, `vulnerability`, `exploit`, `hack`, `bug`, `code`, `function`, `variable`, `gas`, `optimization`, `foundry`, `hardhat`, `remix`, `wallet`, `connect`, `sign`, `transaction`, `blockchain`, `chain`, `network`, `node`, `RPC`, `API`, `integration`, `SDK`, `library`
+## Topic Routing
 
-**Trigger Patterns**:
-- Smart contract questions or issues
-- Deployment requests
-- Security audit requests
-- Code review needs
-- Technical architecture decisions
-- Integration with blockchain APIs
+### 🏢 HQ (Coordination)
+**Handle here:**
+- Status updates and check-ins
+- Priority decisions
+- Blockers and escalations
+- Team status requests
+- Project approvals
+- Emergency items
 
-**Routing Format**:
-```
-🔧 @DMOB — [Task Type]
+### 🔧 Labs (Technical)
+**Handle here:**
+- Smart contracts (Solidity, Rust, Odra)
+- Deployment and testing
+- Code review and audits
+- Technical architecture
+- SDK integration
+- GitHub repos and CI/CD
+- Hackathon builds
 
-[Context from message]
+### 📊 Strategies (Finance)
+**Handle here:**
+- Token prices and market analysis
+- Portfolio management
+- LP positions and yield
+- DeFi protocols
+- Grant applications
+- Competitive research
 
-Priority: [High/Medium/Low]
-Deadline: [If applicable]
-Repo: [If applicable]
-```
-
-**Example**:
-```
-🔧 @DMOB — Code Review
-
-"Review the AgentEscrow contract for reentrancy vulnerabilities"
-
-Priority: High
-Deadline: Before May 11 deployment
-Repo: github.com/ProtoJay4789/agent-escrow
-```
-
----
-
-### 📢 Desmond (Entertainment) — Content/Social Expert
-**Trigger Keywords**: `post`, `tweet`, `X`, `Twitter`, `Medium`, `article`, `blog`, `content`, `social`, `media`, `engagement`, `followers`, `community`, `brand`, `voice`, `tone`, `copy`, `writing`, `submission`, `hackathon`, `deadline`, `apply`, `register`, `demo`, `pitch`, `presentation`
-
-**Trigger Patterns**:
-- Content creation requests
-- Social media strategy
+### 📢 Entertainment (Content)
+**Handle here:**
+- Social media content
+- Demo videos
 - Hackathon submissions
 - Community engagement
-- Brand voice/tone questions
-- Presentation or demo needs
-
-**Routing Format**:
-```
-📢 @Desmond — [Task Type]
-
-[Context from message]
-
-Priority: [High/Medium/Low]
-Deadline: [If applicable]
-Platform: [X/Medium/Other]
-```
-
-**Example**:
-```
-📢 @Desmond — Content Request
-
-"Draft a tweet thread about our AgentEscrow hackathon submission"
-
-Priority: High
-Deadline: Before May 11
-Platform: X/Twitter
-```
+- Brand voice and tone
+- Articles and blog posts
 
 ---
 
-### 🧠 Gentech (Self) — Coordination/Leadership
-**Handle Directly When**:
-- Status updates or check-ins
-- Coordination between agents
-- Priority decisions
-- Jordan asks for team status
-- Simple questions about project state
-- Approvals or sign-offs
-- Emergency escalations
+## Cron Job Routing
 
-**Stay Silent When**:
-- Off-topic chatter
-- Personal conversations
-- Messages clearly meant for a specialist
-- Noise or duplicates
+**All cron jobs run under Gentech profile.**
+
+| Job Type | Deliver To | Rationale |
+|----------|------------|-----------|
+| Finance monitoring | Strategies | DeFi data belongs in finance channel |
+| Code/deploy status | Labs | Technical work belongs in labs channel |
+| Content/social | Entertainment | Content belongs in entertainment channel |
+| Status updates | HQ | Coordination belongs in HQ |
+| Cross-cutting | HQ | Multi-topic items go to HQ |
 
 ---
 
-## Cron Job Routing (Finance Prong Rule)
+## Delegation Rules
 
-**Any cron job with a finance component → Gentech Strategies group.**
+**When Jordan asks for work:**
+1. Assess the topic → route to correct channel
+2. Do the work directly (no agent delegation)
+3. Report results in the originating channel
+4. If work spans multiple topics → report in HQ
 
-This includes:
-- LP monitoring and position tracking
-- Token price alerts and watchlists
-- DCA signals and rebalance triggers
-- Yield/farm/staking monitoring
-- Market analysis or portfolio tracking
-- DeFi milestone tracking
-- Any automated job touching financial data or DeFi protocols
-
-Even if the job also has technical (DMOB) or content (Desmond) elements, the **finance prong always routes to Strategies**. If multi-department coordination is needed, use the Multi-Specialist routing below.
-
-**Exception**: Hackathon and bug bounty opportunity cron jobs → **Gentech Labs** (DMOB's domain — these are about discovering and evaluating technical opportunities, not financial analysis).
-
-**Also Labs**: X402 Ecosystem Monitor, LayerZero DVN Monitor — development/infrastructure monitoring, not finance.
+**When cron jobs complete:**
+1. Deliver results to the designated channel
+2. If action needed → tag Jordan in HQ
+3. If informational → deliver silently
 
 ---
 
-## Routing Intelligence
+## Escalation
 
-### Confidence Thresholds
-- **High Confidence (>80%)**: Route immediately
-- **Medium Confidence (50-80%)**: Route with "cc: @Jordan" for oversight
-- **Low Confidence (<50%)**: Ask Jordan: "Should I route this to [specialist]?"
-
-### Multi-Specialist Tasks
-Some messages need multiple agents:
-1. **Primary + Secondary**: Route to primary, CC secondary if needed
-2. **Sequential**: "YoYo analyzes, then DMOB implements"
-3. **Parallel**: "YoYo and Desmond work on this together"
-
-**Format**:
-```
-🔄 Multi-Agent Task
-
-Primary: @YoYo — [Analysis]
-Secondary: @DMOB — [Implementation]
-
-Coordination: Post handoff in Green Room
-```
-
-### Escalation Rules
-- **Blocked >2h**: Escalate to Jordan
-- **Conflicting priorities**: Escalate to Jordan
-- **Emergency** (security breach, critical bug): Tag all agents + Jordan immediately
+**Escalate to Jordan (HQ) when:**
+- Blocked for >2 hours
+- Conflicting priorities
+- Security incident
+- Budget decisions
+- Multi-topic coordination needed
 
 ---
 
-## Context Injection
+## Future: Multi-Agent Mode
 
-When routing to a specialist, Gentech reads their context file:
-- `Strategies/agent-memory/yoyo-context.md`
-- `Strategies/agent-memory/dmob-context.md`
-- `Strategies/agent-memory/desmond-context.md`
+When scaling to multiple projects or integrations:
+- Re-enable YoYo (Strategies), DMOB (Labs), Desmond (Entertainment)
+- Each gets own Hermes profile + cron jobs
+- Smart routing reverts to agent-tagging mode
+- Brain/vault stays shared (Obsidian sync)
 
-Injects relevant context:
-- Current projects
-- Active blockers
-- Recent work
-- Preferences
-
-This way specialists don't need persistent memory — context comes from vault.
-
----
-
-## Routing Examples
-
-### Example 1: Simple Route
-**Message**: "What's the current TVL on our LP position?"
-**Route**: YoYo (finance keywords: TVL, LP)
-**Confidence**: 95% → Direct route
-
-### Example 2: Complex Route
-**Message**: "We need to deploy the escrow contract before the hackathon"
-**Route**: DMOB (technical: deploy, contract)
-**CC**: Desmond (hackathon deadline awareness)
-**Confidence**: 90% → Route with CC
-
-### Example 3: Coordination
-**Message**: "What's the team status?"
-**Handle**: Gentech (coordination request)
-**Confidence**: 100% → Self-handle
-
-### Example 4: Ambiguous
-**Message**: "This project looks interesting"
-**Route**: Ask Jordan — "Should I research this (YoYo) or look into the code (DMOB)?"
-**Confidence**: 30% → Clarify
-
----
-
-## Performance Tracking
-
-Track routing accuracy:
-- **Correct routes**: Specialist handles task successfully
-- **Misroutes**: Task had to be re-routed
-- **Misses**: Message needed routing but was ignored
-- **False positives**: Routed when should have stayed silent
-
-Review weekly in `token-optimization-tracker.md`.
-
----
-
-## Hermes v2026.5.7 — Routing-Relevant Fixes (May 9, 2026)
-
-- **Telegram streaming edits** — Gateway streams edits safely, no race conditions. Cron jobs that update messages won't hit "message not modified" errors.
-- **Cron delivery reliability** — Failed delivery error handling improved.
-- **Git sync false positives** — Cron "behind by N commits" may compare against a stale reference (e.g., fork parent). Trust `git status` over cron script reports. HEAD == origin/main = synced.
-- **No breaking changes** to routing rules, group IDs, or delivery targets.
+**Trigger conditions:**
+- 10+ concurrent hackathons
+- Revenue-generating products needing dedicated agents
+- External team members needing agent access
+- Complex multi-chain operations requiring parallel execution

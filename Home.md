@@ -17,7 +17,22 @@ cssclass: dashboard
 | **Active Project** | [[Green-Room/INDEX\|🚧 Green Room]] — current builds and ideas |
 | **Trip Planning** | [[HQ/HQ/01-Travel/Philippines/price-history\|✈️ Philippines + Thailand]] — Aug/Sep 2026 |
 | **Today's Focus** | [[Daily/\|📋 Daily Notes]] |
-| **Portfolio** | [[Projects/INDEX\|💼 Projects]] — 21 live projects |
+| **Portfolio** | [[Projects/INDEX\|💼 Projects]] — 24 live projects |
+
+---
+
+## 🧠 Operating Model
+
+**Single-agent mode** — Gentech handles everything. Topic channels for organization.
+
+| Channel | Purpose |
+|---------|---------|
+| [[HQ/INDEX\|🏢 HQ]] | Coordination, decisions, blockers |
+| [[Labs/INDEX\|🔧 Labs]] | Code, contracts, technical work |
+| [[Strategies/INDEX\|📊 Strategies]] | DeFi, finance, research |
+| [[Entertainment/INDEX\|📢 Entertainment]] | Content, social, demos |
+
+*Multi-agent mode reserved for future projects/integrations.*
 
 ---
 
