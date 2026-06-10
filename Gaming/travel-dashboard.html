@@ -1,0 +1,1333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Travel Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    /* ============================================================
+       CSS VARIABLES & RESET
+       ============================================================ */
+    :root {
+      --gold: #c9a84c;
+      --gold-dim: #a88a3a;
+      --panel-bg: #12121a;
+      --panel-border: #1e1e2e;
+      --text: #d4d4d4;
+      --text-dim: #6b6b7b;
+      --bg: #0a0a12;
+      --lightning: #7eb8ff;
+      --green: #44ff88;
+      --green-dim: #2a9952;
+      --red: #ff6b6b;
+      --orange: #ff9944;
+      --yellow: #ffd700;
+      --radius: 12px;
+      --gap: 12px;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Crimson Text', Georgia, serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4, h5 {
+      font-family: 'Cinzel', serif;
+      font-weight: 600;
+      color: var(--gold);
+    }
+
+    /* ============================================================
+       LAYOUT
+       ============================================================ */
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 16px;
+    }
+
+    section {
+      margin-bottom: 28px;
+    }
+
+    .section-title {
+      font-size: 1.1rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 14px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--panel-border);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .section-icon {
+      font-size: 1.2rem;
+    }
+
+    /* ============================================================
+       PANEL CARDS (shared)
+       ============================================================ */
+    .panel {
+      background: var(--panel-bg);
+      border: 1px solid var(--panel-border);
+      border-radius: var(--radius);
+      padding: 16px;
+    }
+
+    /* ============================================================
+       HEADER
+       ============================================================ */
+    .header {
+      text-align: center;
+      padding: 32px 16px 24px;
+      background: linear-gradient(180deg, #16162a 0%, var(--bg) 100%);
+      border-bottom: 1px solid var(--panel-border);
+    }
+
+    .header-trip-name {
+      font-size: 2rem;
+      color: var(--gold);
+      text-shadow: 0 0 30px rgba(201, 168, 76, 0.3);
+      margin-bottom: 8px;
+    }
+
+    .header-traveler {
+      font-size: 1rem;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .status-badge {
+      display: inline-block;
+      padding: 3px 12px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-family: 'Cinzel', serif;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+      border: 1px solid var(--gold-dim);
+      color: var(--gold);
+      background: rgba(201, 168, 76, 0.1);
+    }
+
+    .header-dates {
+      font-size: 0.95rem;
+      color: var(--text-dim);
+      margin-bottom: 4px;
+    }
+
+    .header-duration {
+      font-size: 0.85rem;
+      color: var(--lightning);
+    }
+
+    /* ============================================================
+       TRIP OVERVIEW CARDS (horizontal scroll)
+       ============================================================ */
+    .legs-scroll {
+      display: flex;
+      gap: var(--gap);
+      overflow-x: auto;
+      padding-bottom: 8px;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .legs-scroll::-webkit-scrollbar {
+      height: 4px;
+    }
+
+    .legs-scroll::-webkit-scrollbar-track {
+      background: var(--panel-bg);
+    }
+
+    .legs-scroll::-webkit-scrollbar-thumb {
+      background: var(--gold-dim);
+      border-radius: 2px;
+    }
+
+    .leg-card {
+      flex: 0 0 260px;
+      scroll-snap-align: start;
+      background: var(--panel-bg);
+      border: 1px solid var(--panel-border);
+      border-radius: var(--radius);
+      padding: 16px;
+      transition: border-color 0.3s;
+    }
+
+    .leg-card:hover {
+      border-color: var(--gold-dim);
+    }
+
+    .leg-dest {
+      font-family: 'Cinzel', serif;
+      font-size: 1rem;
+      color: var(--lightning);
+      margin-bottom: 10px;
+    }
+
+    .leg-detail {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      padding: 4px 0;
+      border-bottom: 1px solid rgba(30, 30, 46, 0.6);
+    }
+
+    .leg-detail:last-child {
+      border-bottom: none;
+    }
+
+    .leg-label {
+      color: var(--text-dim);
+    }
+
+    .leg-value {
+      color: var(--text);
+      text-align: right;
+    }
+
+    /* ============================================================
+       BUDGET TRACKER
+       ============================================================ */
+    .budget-total {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 12px;
+    }
+
+    .budget-amount {
+      font-family: 'Cinzel', serif;
+      font-size: 1.8rem;
+      color: var(--gold);
+    }
+
+    .budget-remaining {
+      font-size: 0.9rem;
+      color: var(--text-dim);
+    }
+
+    .budget-remaining span {
+      color: var(--green);
+      font-weight: 700;
+    }
+
+    .progress-bar-container {
+      width: 100%;
+      height: 10px;
+      background: rgba(30, 30, 46, 0.8);
+      border-radius: 5px;
+      overflow: hidden;
+      margin-bottom: 18px;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      border-radius: 5px;
+      background: linear-gradient(90deg, var(--gold-dim), var(--gold));
+      width: 0%;
+      transition: width 1.2s ease-out;
+    }
+
+    .budget-categories {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .budget-cat-row {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .budget-cat-header {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.82rem;
+    }
+
+    .budget-cat-name {
+      text-transform: capitalize;
+      color: var(--text);
+    }
+
+    .budget-cat-amounts {
+      color: var(--text-dim);
+    }
+
+    .budget-cat-bar {
+      width: 100%;
+      height: 4px;
+      background: rgba(30, 30, 46, 0.8);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .budget-cat-fill {
+      height: 100%;
+      border-radius: 2px;
+      width: 0%;
+      transition: width 1.2s ease-out;
+    }
+
+    .cat-flights { background: var(--lightning); }
+    .cat-accommodation { background: var(--gold); }
+    .cat-food { background: var(--green); }
+    .cat-activities { background: var(--orange); }
+    .cat-transport { background: var(--red); }
+    .cat-emergency { background: var(--text-dim); }
+
+    .budget-cat-dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      margin-right: 6px;
+      vertical-align: middle;
+    }
+
+    /* ============================================================
+       FLIGHT CARDS
+       ============================================================ */
+    .flights-grid {
+      display: grid;
+      gap: var(--gap);
+    }
+
+    .flight-card {
+      background: var(--panel-bg);
+      border: 1px solid var(--panel-border);
+      border-radius: var(--radius);
+      padding: 16px;
+      transition: border-color 0.3s;
+    }
+
+    .flight-card:hover {
+      border-color: var(--lightning);
+    }
+
+    .flight-route {
+      font-family: 'Cinzel', serif;
+      font-size: 1.3rem;
+      color: var(--lightning);
+      margin-bottom: 8px;
+      letter-spacing: 2px;
+    }
+
+    .flight-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 0.85rem;
+      margin-bottom: 6px;
+    }
+
+    .flight-meta-item {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .flight-meta-label {
+      color: var(--text-dim);
+    }
+
+    .flight-meta-value {
+      color: var(--text);
+    }
+
+    .flight-status {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 0.72rem;
+      font-family: 'Cinzel', serif;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .flight-status.booked {
+      color: var(--green);
+      background: rgba(68, 255, 136, 0.1);
+      border: 1px solid rgba(68, 255, 136, 0.3);
+    }
+
+    .flight-status.not-booked {
+      color: var(--yellow);
+      background: rgba(255, 215, 0, 0.1);
+      border: 1px solid rgba(255, 215, 0, 0.3);
+    }
+
+    .flight-cost {
+      font-family: 'Cinzel', serif;
+      color: var(--gold);
+      font-size: 1.1rem;
+      margin-top: 8px;
+    }
+
+    .flight-notes {
+      font-size: 0.82rem;
+      color: var(--text-dim);
+      font-style: italic;
+      margin-top: 6px;
+      line-height: 1.4;
+    }
+
+    /* ============================================================
+       DAY-BY-DAY TIMELINE
+       ============================================================ */
+    .timeline {
+      position: relative;
+      padding-left: 36px;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 14px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(180deg, var(--gold-dim) 0%, var(--panel-border) 100%);
+    }
+
+    .timeline-day {
+      position: relative;
+      margin-bottom: 16px;
+      opacity: 0;
+      transform: translateY(16px);
+      animation: fadeInUp 0.4s ease forwards;
+    }
+
+    .timeline-day:nth-child(1) { animation-delay: 0.05s; }
+    .timeline-day:nth-child(2) { animation-delay: 0.1s; }
+    .timeline-day:nth-child(3) { animation-delay: 0.15s; }
+    .timeline-day:nth-child(4) { animation-delay: 0.2s; }
+    .timeline-day:nth-child(5) { animation-delay: 0.25s; }
+    .timeline-day:nth-child(6) { animation-delay: 0.3s; }
+    .timeline-day:nth-child(7) { animation-delay: 0.35s; }
+    .timeline-day:nth-child(8) { animation-delay: 0.4s; }
+    .timeline-day:nth-child(9) { animation-delay: 0.45s; }
+    .timeline-day:nth-child(10) { animation-delay: 0.5s; }
+    .timeline-day:nth-child(n+11) { animation-delay: 0.55s; }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .timeline-dot {
+      position: absolute;
+      left: -30px;
+      top: 18px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      border: 2px solid var(--gold-dim);
+      background: var(--bg);
+      z-index: 2;
+    }
+
+    .timeline-dot.today {
+      background: var(--green);
+      border-color: var(--green);
+      box-shadow: 0 0 10px rgba(68, 255, 136, 0.5);
+    }
+
+    .timeline-today-marker {
+      position: absolute;
+      left: -36px;
+      top: 14px;
+      font-size: 0.6rem;
+      font-family: 'Cinzel', serif;
+      color: var(--green);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transform: rotate(-90deg);
+      transform-origin: center;
+      white-space: nowrap;
+    }
+
+    .day-card {
+      background: var(--panel-bg);
+      border: 1px solid var(--panel-border);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      transition: border-color 0.3s;
+    }
+
+    .day-card:hover {
+      border-color: var(--gold-dim);
+    }
+
+    .day-card.is-today {
+      border-color: var(--green);
+      box-shadow: 0 0 15px rgba(68, 255, 136, 0.1);
+    }
+
+    .day-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 6px;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .day-number-date {
+      font-family: 'Cinzel', serif;
+      font-size: 0.8rem;
+      color: var(--text-dim);
+    }
+
+    .day-number-date strong {
+      color: var(--gold);
+      font-size: 0.9rem;
+    }
+
+    .day-type-badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 0.65rem;
+      font-family: 'Cinzel', serif;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .type-travel {
+      color: var(--lightning);
+      background: rgba(126, 184, 255, 0.12);
+      border: 1px solid rgba(126, 184, 255, 0.3);
+    }
+
+    .type-explore {
+      color: var(--gold);
+      background: rgba(201, 168, 76, 0.12);
+      border: 1px solid rgba(201, 168, 76, 0.3);
+    }
+
+    .type-work {
+      color: var(--red);
+      background: rgba(255, 107, 107, 0.12);
+      border: 1px solid rgba(255, 107, 107, 0.3);
+    }
+
+    .type-relax {
+      color: var(--green);
+      background: rgba(68, 255, 136, 0.12);
+      border: 1px solid rgba(68, 255, 136, 0.3);
+    }
+
+    .day-location {
+      font-size: 0.82rem;
+      color: var(--lightning);
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .day-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1rem;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    .day-activities {
+      list-style: none;
+      padding: 0;
+    }
+
+    .day-activities li {
+      position: relative;
+      padding-left: 16px;
+      font-size: 0.88rem;
+      margin-bottom: 3px;
+      color: var(--text);
+    }
+
+    .day-activities li::before {
+      content: '›';
+      position: absolute;
+      left: 0;
+      color: var(--gold-dim);
+      font-weight: 700;
+    }
+
+    .day-notes {
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      font-style: italic;
+      margin-top: 8px;
+      padding-top: 8px;
+      border-top: 1px solid rgba(30, 30, 46, 0.5);
+      line-height: 1.4;
+    }
+
+    /* ============================================================
+       CHECKLIST
+       ============================================================ */
+    .checklist-progress {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      font-size: 0.85rem;
+      color: var(--text-dim);
+    }
+
+    .checklist-progress strong {
+      color: var(--green);
+    }
+
+    .checklist-group-title {
+      font-family: 'Cinzel', serif;
+      font-size: 0.8rem;
+      color: var(--gold-dim);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-top: 14px;
+      margin-bottom: 6px;
+    }
+
+    .checklist-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 6px 0;
+      border-bottom: 1px solid rgba(30, 30, 46, 0.4);
+      font-size: 0.88rem;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+
+    .checklist-item:last-child {
+      border-bottom: none;
+    }
+
+    .checklist-item.done .checklist-text {
+      text-decoration: line-through;
+      color: var(--green-dim);
+      opacity: 0.7;
+    }
+
+    .check-box {
+      width: 18px;
+      height: 18px;
+      border: 2px solid var(--gold-dim);
+      border-radius: 4px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+      background: transparent;
+    }
+
+    .checklist-item.done .check-box {
+      background: var(--green);
+      border-color: var(--green);
+    }
+
+    .checklist-item.done .check-box::after {
+      content: '✓';
+      color: #000;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    /* ============================================================
+       TRAVEL TIPS
+       ============================================================ */
+    .tips-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .tip-card {
+      background: var(--panel-bg);
+      border: 1px solid var(--panel-border);
+      border-left: 3px solid var(--gold);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 12px 16px;
+      font-size: 0.88rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      transition: border-color 0.3s;
+    }
+
+    .tip-card:hover {
+      border-left-color: var(--lightning);
+    }
+
+    .tip-icon {
+      font-size: 1.1rem;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .tip-text {
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    /* ============================================================
+       FOOTER
+       ============================================================ */
+    .footer {
+      text-align: center;
+      padding: 28px 16px;
+      border-top: 1px solid var(--panel-border);
+      margin-top: 20px;
+    }
+
+    .footer-brand {
+      font-family: 'Cinzel', serif;
+      font-size: 0.9rem;
+      color: var(--gold-dim);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .footer-version {
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      margin-bottom: 2px;
+    }
+
+    .footer-updated {
+      font-size: 0.72rem;
+      color: var(--text-dim);
+    }
+
+    /* ============================================================
+       LOADING STATE
+       ============================================================ */
+    .loading {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--text-dim);
+    }
+
+    .loading-spinner {
+      width: 32px;
+      height: 32px;
+      border: 3px solid var(--panel-border);
+      border-top-color: var(--gold);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin: 0 auto 12px;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* ============================================================
+       RESPONSIVE
+       ============================================================ */
+    @media (max-width: 480px) {
+      .header-trip-name {
+        font-size: 1.5rem;
+      }
+
+      .budget-amount {
+        font-size: 1.4rem;
+      }
+
+      .flight-route {
+        font-size: 1.1rem;
+      }
+
+      .leg-card {
+        flex: 0 0 240px;
+      }
+
+      .timeline {
+        padding-left: 28px;
+      }
+
+      .timeline::before {
+        left: 10px;
+      }
+
+      .timeline-dot {
+        left: -24px;
+        width: 10px;
+        height: 10px;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .container {
+        padding: 24px;
+      }
+
+      .header {
+        padding: 48px 24px 36px;
+      }
+
+      .header-trip-name {
+        font-size: 2.5rem;
+      }
+
+      .flights-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ============================================================
+       ANIMATIONS
+       ============================================================ */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(12px);
+      animation: fadeInUp 0.5s ease forwards;
+    }
+
+    .fade-in:nth-child(1) { animation-delay: 0.05s; }
+    .fade-in:nth-child(2) { animation-delay: 0.12s; }
+    .fade-in:nth-child(3) { animation-delay: 0.19s; }
+    .fade-in:nth-child(4) { animation-delay: 0.26s; }
+    .fade-in:nth-child(5) { animation-delay: 0.33s; }
+    .fade-in:nth-child(6) { animation-delay: 0.40s; }
+    .fade-in:nth-child(7) { animation-delay: 0.47s; }
+    .fade-in:nth-child(8) { animation-delay: 0.54s; }
+
+    /* Pulse for today marker */
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 10px rgba(68, 255, 136, 0.5); }
+      50% { box-shadow: 0 0 20px rgba(68, 255, 136, 0.8); }
+    }
+
+    .timeline-dot.today {
+      animation: pulse 2s ease-in-out infinite;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================
+       HEADER
+       ============================================================ -->
+  <header class="header" id="header">
+    <div class="loading" id="loading">
+      <div class="loading-spinner"></div>
+      Loading travel data...
+    </div>
+  </header>
+
+  <!-- ============================================================
+       MAIN CONTENT (hidden until data loads)
+       ============================================================ -->
+  <main class="container" id="main" style="display:none;">
+
+    <!-- Trip Overview Cards -->
+    <section id="legs-section" class="fade-in">
+      <h2 class="section-title"><span class="section-icon">🗺️</span> Trip Legs</h2>
+      <div class="legs-scroll" id="legs-container"></div>
+    </section>
+
+    <!-- Budget Tracker -->
+    <section id="budget-section" class="fade-in">
+      <h2 class="section-title"><span class="section-icon">💰</span> Budget Tracker</h2>
+      <div class="panel" id="budget-container"></div>
+    </section>
+
+    <!-- Flight Cards -->
+    <section id="flights-section" class="fade-in">
+      <h2 class="section-title"><span class="section-icon">✈️</span> Flights</h2>
+      <div class="flights-grid" id="flights-container"></div>
+    </section>
+
+    <!-- Day-by-Day Timeline -->
+    <section id="timeline-section" class="fade-in">
+      <h2 class="section-title"><span class="section-icon">📅</span> Day-by-Day Timeline</h2>
+      <div class="timeline" id="timeline-container"></div>
+    </section>
+
+    <!-- Checklist -->
+    <section id="checklist-section" class="fade-in">
+      <h2 class="section-title"><span class="section-icon">✅</span> Pre-Trip Checklist</h2>
+      <div class="panel" id="checklist-container"></div>
+    </section>
+
+    <!-- Travel Tips -->
+    <section id="tips-section" class="fade-in">
+      <h2 class="section-title"><span class="section-icon">💡</span> Travel Tips</h2>
+      <div class="tips-list" id="tips-container"></div>
+    </section>
+
+  </main>
+
+  <!-- ============================================================
+       FOOTER
+       ============================================================ -->
+  <footer class="footer" id="footer" style="display:none;">
+    <div class="footer-brand">GENTECH TRAVELS</div>
+    <div class="footer-version">Dashboard v0.1</div>
+    <div class="footer-updated" id="footer-updated"></div>
+  </footer>
+
+
+  <!-- ============================================================
+       JAVASCRIPT
+       ============================================================ -->
+  <script>
+    /* ==========================================================
+       GLOBALS & STORAGE
+       ========================================================== */
+    const STORAGE_KEY = 'travel-checklist-state';
+    let tripData = null;
+
+    /* ==========================================================
+       UTILITIES
+       ========================================================== */
+
+    // Format date string: "2026-09-01" → "Sep 1, 2026"
+    function formatDate(dateStr) {
+      const d = new Date(dateStr + 'T00:00:00');
+      return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+    }
+
+    // Format short date: "2026-09-01" → "Sep 1"
+    function formatShortDate(dateStr) {
+      const d = new Date(dateStr + 'T00:00:00');
+      return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+    }
+
+    // Format date range: "Sep 1 – Sep 21, 2026"
+    function formatDateRange(start, end) {
+      const s = new Date(start + 'T00:00:00');
+      const e = new Date(end + 'T00:00:00');
+      const sMonth = s.toLocaleDateString('en-US', { month: 'short' });
+      const eMonth = e.toLocaleDateString('en-US', { month: 'short' });
+      const sDay = s.getDate();
+      const eDay = e.getDate();
+      const year = e.getFullYear();
+
+      if (sMonth === eMonth) {
+        return `${sMonth} ${sDay} – ${eDay}, ${year}`;
+      }
+      return `${sMonth} ${sDay} – ${eMonth} ${eDay}, ${year}`;
+    }
+
+    // Calculate days between two dates (inclusive)
+    function daysBetween(start, end) {
+      const s = new Date(start + 'T00:00:00');
+      const e = new Date(end + 'T00:00:00');
+      return Math.round((e - s) / (1000 * 60 * 60 * 24)) + 1;
+    }
+
+    // Currency format
+    function money(n) {
+      return '$' + Number(n).toLocaleString('en-US');
+    }
+
+    // Check if a date string is today
+    function isToday(dateStr) {
+      const d = new Date(dateStr + 'T00:00:00');
+      const now = new Date();
+      return d.getFullYear() === now.getFullYear() &&
+             d.getMonth() === now.getMonth() &&
+             d.getDate() === now.getDate();
+    }
+
+    // Check if current date is within trip range
+    function isDuringTrip(start, end) {
+      const now = new Date();
+      const s = new Date(start + 'T00:00:00');
+      const e = new Date(end + 'T23:59:59');
+      return now >= s && now <= e;
+    }
+
+    /* ==========================================================
+       CHECKLIST LOCALSTORAGE
+       ========================================================== */
+    function loadChecklistState() {
+      try {
+        return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
+      } catch {
+        return {};
+      }
+    }
+
+    function saveChecklistState(state) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    }
+
+    function toggleChecklistItem(index, trip) {
+      const state = loadChecklistState();
+      // Use item text as key (fallback to index)
+      const key = trip.checklist[index].item;
+      state[key] = !state[key];
+      saveChecklistState(state);
+      renderChecklist(trip);
+    }
+
+    /* ==========================================================
+       RENDER: HEADER
+       ========================================================== */
+    function renderHeader(trip) {
+      const header = document.getElementById('header');
+      header.innerHTML = `
+        <div class="header-trip-name">${trip.name}</div>
+        <div class="header-traveler">${trip.traveler}</div>
+        <div><span class="status-badge">${trip.status}</span></div>
+        <div class="header-dates">${formatDateRange(trip.startDate, trip.endDate)}</div>
+        <div class="header-duration">${daysBetween(trip.startDate, trip.endDate)} days</div>
+      `;
+    }
+
+    /* ==========================================================
+       RENDER: TRIP OVERVIEW LEGS
+       ========================================================== */
+    function renderLegs(legs) {
+      const container = document.getElementById('legs-container');
+      container.innerHTML = legs.map(leg => `
+        <div class="leg-card">
+          <div class="leg-dest">${leg.destination}</div>
+          <div class="leg-detail">
+            <span class="leg-label">Arrive</span>
+            <span class="leg-value">${formatShortDate(leg.arrive)}</span>
+          </div>
+          <div class="leg-detail">
+            <span class="leg-label">Depart</span>
+            <span class="leg-value">${formatShortDate(leg.depart)}</span>
+          </div>
+          <div class="leg-detail">
+            <span class="leg-label">Nights</span>
+            <span class="leg-value">${leg.nights}</span>
+          </div>
+          <div class="leg-detail">
+            <span class="leg-label">Purpose</span>
+            <span class="leg-value">${leg.purpose}</span>
+          </div>
+          <div class="leg-detail">
+            <span class="leg-label">Location</span>
+            <span class="leg-value">${leg.location}</span>
+          </div>
+          <div class="leg-detail">
+            <span class="leg-label">Stay</span>
+            <span class="leg-value">${leg.accommodation}</span>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    /* ==========================================================
+       RENDER: BUDGET TRACKER
+       ========================================================== */
+    function renderBudget(budget) {
+      const container = document.getElementById('budget-container');
+      const remaining = budget.total - budget.spent;
+      const pct = budget.total > 0 ? (budget.spent / budget.total * 100) : 0;
+
+      const catColors = {
+        flights: 'cat-flights',
+        accommodation: 'cat-accommodation',
+        food: 'cat-food',
+        activities: 'cat-activities',
+        transport: 'cat-transport',
+        emergency: 'cat-emergency'
+      };
+
+      const catEntries = Object.entries(budget.categories);
+
+      container.innerHTML = `
+        <div class="budget-total">
+          <div>
+            <div style="font-size:0.75rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:1px;margin-bottom:2px;">Total Budget</div>
+            <div class="budget-amount">${money(budget.total)}</div>
+          </div>
+          <div class="budget-remaining">
+            <span>${money(remaining)}</span> remaining
+          </div>
+        </div>
+        <div class="progress-bar-container">
+          <div class="progress-bar-fill" data-width="${pct}" style="width:0%"></div>
+        </div>
+        <div class="budget-categories">
+          ${catEntries.map(([name, cat]) => {
+            const catPct = cat.allocated > 0 ? (cat.spent / cat.allocated * 100) : 0;
+            const colorClass = catColors[name] || 'cat-emergency';
+            return `
+              <div class="budget-cat-row">
+                <div class="budget-cat-header">
+                  <span class="budget-cat-name">
+                    <span class="budget-cat-dot ${colorClass}"></span>${name}
+                  </span>
+                  <span class="budget-cat-amounts">${money(cat.spent)} / ${money(cat.allocated)}</span>
+                </div>
+                <div class="budget-cat-bar">
+                  <div class="budget-cat-fill ${colorClass}" data-width="${catPct}" style="width:0%"></div>
+                </div>
+              </div>
+            `;
+          }).join('')}
+        </div>
+      `;
+    }
+
+    /* ==========================================================
+       RENDER: FLIGHT CARDS
+       ========================================================== */
+    function renderFlights(flights) {
+      const container = document.getElementById('flights-container');
+      container.innerHTML = flights.map(f => {
+        const statusClass = f.status.toLowerCase().includes('booked') && !f.status.toLowerCase().includes('not')
+          ? 'booked' : 'not-booked';
+        const displayStatus = f.status.toLowerCase().includes('not booked') ? 'Not Booked' : 'Booked';
+
+        return `
+          <div class="flight-card">
+            <div class="flight-route">${f.route}</div>
+            <div class="flight-meta">
+              <div class="flight-meta-item">
+                <span class="flight-meta-label">Date:</span>
+                <span class="flight-meta-value">${formatShortDate(f.departDate)}${f.arriveDate !== f.departDate ? ' → ' + formatShortDate(f.arriveDate) : ''}</span>
+              </div>
+              <div class="flight-meta-item">
+                <span class="flight-meta-label">Airline:</span>
+                <span class="flight-meta-value">${f.airline}</span>
+              </div>
+              <div class="flight-meta-item">
+                <span class="flight-meta-label">Class:</span>
+                <span class="flight-meta-value">${f.class}</span>
+              </div>
+              <div class="flight-meta-item">
+                <span class="flight-status ${statusClass}">${displayStatus}</span>
+              </div>
+            </div>
+            <div class="flight-cost">${money(f.cost)}</div>
+            ${f.notes ? `<div class="flight-notes">${f.notes}</div>` : ''}
+          </div>
+        `;
+      }).join('');
+    }
+
+    /* ==========================================================
+       RENDER: DAY-BY-DAY TIMELINE
+       ========================================================== */
+    function renderTimeline(days, tripStart, tripEnd) {
+      const container = document.getElementById('timeline-container');
+      const duringTrip = isDuringTrip(tripStart, tripEnd);
+
+      container.innerHTML = days.map(day => {
+        const todayClass = isToday(day.date) ? 'is-today' : '';
+        const dotTodayClass = isToday(day.date) ? 'today' : '';
+        const todayMarker = isToday(day.date) ? '<div class="timeline-today-marker">Today</div>' : '';
+
+        return `
+          <div class="timeline-day" data-date="${day.date}" id="day-${day.day}">
+            ${todayMarker}
+            <div class="timeline-dot ${dotTodayClass}"></div>
+            <div class="day-card ${todayClass}">
+              <div class="day-header">
+                <div class="day-number-date">
+                  <strong>Day ${day.day}</strong> · ${formatDate(day.date)}
+                </div>
+                <span class="day-type-badge type-${day.type}">${day.type}</span>
+              </div>
+              <div class="day-location">📍 ${day.location}</div>
+              <div class="day-title">${day.title}</div>
+              ${day.activities && day.activities.length ? `
+                <ul class="day-activities">
+                  ${day.activities.map(a => `<li>${a}</li>`).join('')}
+                </ul>
+              ` : ''}
+              ${day.notes ? `<div class="day-notes">${day.notes}</div>` : ''}
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    /* ==========================================================
+       RENDER: CHECKLIST
+       ========================================================== */
+    function renderChecklist(trip) {
+      const container = document.getElementById('checklist-container');
+      const state = loadChecklistState();
+      const total = trip.checklist.length;
+
+      // Merge saved state with JSON data
+      const merged = trip.checklist.map((item, idx) => {
+        const key = item.item;
+        if (key in state) {
+          return { ...item, done: state[key] };
+        }
+        return item;
+      });
+
+      const doneCount = merged.filter(i => i.done).length;
+      const pct = total > 0 ? (doneCount / total * 100) : 0;
+
+      // Group by category
+      const groups = {};
+      merged.forEach((item, idx) => {
+        const cat = item.category || 'other';
+        if (!groups[cat]) groups[cat] = [];
+        groups[cat].push({ ...item, originalIndex: idx });
+      });
+
+      const categoryOrder = ['docs', 'flights', 'stay', 'tech', 'finance', 'pack', 'activities'];
+      const sortedCategories = Object.keys(groups).sort((a, b) => {
+        const ai = categoryOrder.indexOf(a);
+        const bi = categoryOrder.indexOf(b);
+        return (ai === -1 ? 99 : ai) - (bi === -1 ? 99 : bi);
+      });
+
+      container.innerHTML = `
+        <div class="checklist-progress">
+          <span>${doneCount} of ${total} completed</span>
+          <span>${Math.round(pct)}%</span>
+        </div>
+        <div class="progress-bar-container" style="margin-bottom:10px;">
+          <div class="progress-bar-fill" data-width="${pct}" style="width:0%;background:linear-gradient(90deg,var(--green-dim),var(--green));"></div>
+        </div>
+        ${sortedCategories.map(cat => `
+          <div class="checklist-group-title">${cat}</div>
+          ${groups[cat].map(item => `
+            <div class="checklist-item ${item.done ? 'done' : ''}" onclick="toggleChecklistItem(${item.originalIndex}, window._tripData)">
+              <div class="check-box"></div>
+              <span class="checklist-text">${item.item}</span>
+            </div>
+          `).join('')}
+        `).join('')}
+      `;
+    }
+
+    /* ==========================================================
+       RENDER: TRAVEL TIPS
+       ========================================================== */
+    function renderTips(tips) {
+      const container = document.getElementById('tips-container');
+      container.innerHTML = tips.map(tip => `
+        <div class="tip-card">
+          <span class="tip-icon">💡</span>
+          <span class="tip-text">${tip}</span>
+        </div>
+      `).join('');
+    }
+
+    /* ==========================================================
+       ANIMATE PROGRESS BARS
+       ========================================================== */
+    function animateProgressBars() {
+      requestAnimationFrame(() => {
+        setTimeout(() => {
+          document.querySelectorAll('[data-width]').forEach(el => {
+            el.style.width = el.dataset.width + '%';
+          });
+        }, 100);
+      });
+    }
+
+    /* ==========================================================
+       SCROLL TO TODAY / FIRST UNPLANNED DAY
+       ========================================================== */
+    function scrollToRelevantDay() {
+      const now = new Date();
+
+      // Find today's card first
+      const todayCard = document.querySelector('.timeline-day .is-today');
+      if (todayCard) {
+        todayCard.closest('.timeline-day').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        return;
+      }
+
+      // Otherwise scroll to day 1
+      const day1 = document.getElementById('day-1');
+      if (day1) {
+        day1.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+
+    /* ==========================================================
+       FETCH & RENDER
+       ========================================================== */
+    async function fetchData() {
+      try {
+        const cacheBuster = Date.now();
+        const resp = await fetch(`travel-jordan.json?v=${cacheBuster}`);
+        if (!resp.ok) throw new Error('Failed to fetch data');
+        const data = await resp.json();
+        return data.trip;
+      } catch (err) {
+        console.error('Fetch error:', err);
+        return null;
+      }
+    }
+
+    async function loadDashboard() {
+      const trip = await fetchData();
+      if (!trip) return;
+
+      tripData = trip;
+      window._tripData = trip;
+
+      // Render all sections
+      renderHeader(trip);
+      renderLegs(trip.legs);
+      renderBudget(trip.budget);
+      renderFlights(trip.flights);
+      renderTimeline(trip.days, trip.startDate, trip.endDate);
+      renderChecklist(trip);
+      renderTips(trip.tips);
+
+      // Footer
+      const footer = document.getElementById('footer');
+      footer.style.display = 'block';
+      document.getElementById('footer-updated').textContent =
+        `Last updated: ${trip.lastUpdated ? formatDate(trip.lastUpdated) : 'Unknown'}`;
+
+      // Show main content
+      document.getElementById('main').style.display = 'block';
+
+      // Animate progress bars
+      animateProgressBars();
+
+      // Scroll to relevant day
+      setTimeout(scrollToRelevantDay, 600);
+    }
+
+    /* ==========================================================
+       INIT
+       ========================================================== */
+    loadDashboard();
+
+    // Auto-refresh every 30 seconds
+    setInterval(loadDashboard, 30000);
+  </script>
+
+</body>
+</html>

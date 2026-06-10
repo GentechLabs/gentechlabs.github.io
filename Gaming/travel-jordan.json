@@ -1,0 +1,379 @@
+{
+  "trip": {
+    "name": "Philippines 2026",
+    "traveler": "Jordan",
+    "status": "Planning",
+    "startDate": "2026-09-01",
+    "endDate": "2026-09-28",
+    "legs": [
+      {
+        "destination": "Mindanao, Philippines",
+        "arrive": "2026-09-01",
+        "depart": "2026-09-14",
+        "nights": 13,
+        "purpose": "Meet Christel",
+        "location": "General Santos / Davao",
+        "accommodation": "TBD — AirBnB or hotel near Christel"
+      },
+      {
+        "destination": "Thailand",
+        "arrive": "2026-09-14",
+        "depart": "2026-09-21",
+        "nights": 7,
+        "purpose": "Explore",
+        "location": "TBD — Bangkok, Chiang Mai, or islands",
+        "accommodation": "TBD"
+      }
+    ],
+    "flights": [
+      {
+        "route": "CVG → MNL",
+        "airline": "TBD",
+        "departDate": "2026-09-01",
+        "arriveDate": "2026-09-02",
+        "class": "Economy",
+        "cost": 850,
+        "status": "Not booked",
+        "notes": "1-2 layovers typical. Check Manila → GenSan domestic."
+      },
+      {
+        "route": "MNL → BKK",
+        "airline": "TBD",
+        "departDate": "2026-09-14",
+        "arriveDate": "2026-09-14",
+        "class": "Economy",
+        "cost": 180,
+        "status": "Not booked",
+        "notes": "Budget AirAsia or Cebu Pacific. 3-4 hour flight."
+      },
+      {
+        "route": "BKK → CVG",
+        "airline": "TBD",
+        "departDate": "2026-09-21",
+        "arriveDate": "2026-09-21",
+        "class": "Economy",
+        "cost": 800,
+        "status": "Not booked",
+        "notes": "Check connections through Seoul or Tokyo."
+      }
+    ],
+    "budget": {
+      "total": 5000,
+      "spent": 0,
+      "categories": {
+        "flights": { "allocated": 1830, "spent": 0 },
+        "accommodation": { "allocated": 1200, "spent": 0 },
+        "food": { "allocated": 700, "spent": 0 },
+        "activities": { "allocated": 500, "spent": 0 },
+        "transport": { "allocated": 400, "spent": 0 },
+        "emergency": { "allocated": 370, "spent": 0 }
+      }
+    },
+    "days": [
+      {
+        "day": 1,
+        "date": "2026-09-01",
+        "location": "Cincinnati → Manila",
+        "title": "Departure Day",
+        "type": "travel",
+        "activities": [
+          "Depart CVG airport",
+          "Long layover — bring laptop for work"
+        ],
+        "notes": "Arrive MNL Sep 2 (timezone shift)"
+      },
+      {
+        "day": 2,
+        "date": "2026-09-02",
+        "location": "Manila → General Santos",
+        "title": "Arrival + Domestic Transfer",
+        "type": "travel",
+        "activities": [
+          "Land in Manila (NAIA)",
+          "Domestic flight to General Santos (Cebu Pacific)",
+          "Meet Christel at airport",
+          "Check into accommodation"
+        ],
+        "notes": "Domestic flight ~1.5 hours. Book separately."
+      },
+      {
+        "day": 3,
+        "date": "2026-09-03",
+        "location": "General Santos",
+        "title": "First Full Day",
+        "type": "explore",
+        "activities": [
+          "Explore GenSan with Christel",
+          "Try local seafood — Tuna Capital of PH",
+          "Visit Hilltop Park"
+        ],
+        "notes": ""
+      },
+      {
+        "day": 4,
+        "date": "2026-09-04",
+        "location": "General Santos",
+        "title": "GenSan Day 2",
+        "type": "explore",
+        "activities": [
+          "GenSan Boulevard",
+          "Local market shopping",
+          "Dinner with Christel's family (if possible)"
+        ],
+        "notes": ""
+      },
+      {
+        "day": 5,
+        "date": "2026-09-05",
+        "location": "General Santos → Davao",
+        "title": "Davao Day Trip",
+        "type": "explore",
+        "activities": [
+          "Bus/van to Davao City (~3 hours)",
+          "Visit People's Park",
+          "Try Durian at Magsaysay Fruit Market",
+          "Return to GenSan or stay overnight"
+        ],
+        "notes": "Davao is Christel's home city. Worth 1-2 days."
+      },
+      {
+        "day": 6,
+        "date": "2026-09-06",
+        "location": "Davao",
+        "title": "Davao Day 2",
+        "type": "explore",
+        "activities": [
+          "Eden Nature Park",
+          "Davao Crocodile Park",
+          "San Pedro Cathedral"
+        ],
+        "notes": "Stay overnight in Davao"
+      },
+      {
+        "day": 7,
+        "date": "2026-09-07",
+        "location": "Davao → GenSan",
+        "title": "Return to GenSan",
+        "type": "travel",
+        "activities": [
+          "Morning in Davao",
+          "Bus back to GenSan",
+          "Evening with Christel"
+        ],
+        "notes": ""
+      },
+      {
+        "day": 8,
+        "date": "2026-09-08",
+        "location": "GenSan",
+        "title": "Work Day",
+        "type": "work",
+        "activities": [
+          "Catch up on work/AE tasks",
+          "Gentech updates from PH timezone",
+          "Evening: local dinner"
+        ],
+        "notes": "PH is UTC+8. EST work hours = late night/early morning PH."
+      },
+      {
+        "day": 9,
+        "date": "2026-09-09",
+        "location": "GenSan",
+        "title": "Sarangani Day",
+        "type": "explore",
+        "activities": [
+          "Visit Sarangani Bay",
+          "Beach day",
+          "Balot (the town, not the egg... maybe the egg too)"
+        ],
+        "notes": "Beautiful coastline south of GenSan"
+      },
+      {
+        "day": 10,
+        "date": "2026-09-10",
+        "location": "GenSan",
+        "title": "Work Day 2",
+        "type": "work",
+        "activities": [
+          "Work / AE tasks",
+          "Afternoon: relax with Christel"
+        ],
+        "notes": ""
+      },
+      {
+        "day": 11,
+        "date": "2026-09-11",
+        "location": "GenSan",
+        "title": "Enchanted Kingdom or Local Adventure",
+        "type": "explore",
+        "activities": [
+          "Choose adventure: local island hopping OR city exploration",
+          "Try Jollibee (mandatory PH experience)",
+          "Night market"
+        ],
+        "notes": ""
+      },
+      {
+        "day": 12,
+        "date": "2026-09-12",
+        "location": "GenSan",
+        "title": "Chill Day",
+        "type": "relax",
+        "activities": [
+          "Slow morning",
+          "Pack for Thailand leg",
+          "Last evening in GenSan"
+        ],
+        "notes": "Start transition to Thailand mindset"
+      },
+      {
+        "day": 13,
+        "date": "2026-09-13",
+        "location": "GenSan",
+        "title": "PH Last Day",
+        "type": "travel",
+        "activities": [
+          "Final time with Christel",
+          "GenSan → Manila (domestic flight)",
+          "Overnight near NAIA for morning BKK flight"
+        ],
+        "notes": "Or fly GenSan → Manila → BKK same day"
+      },
+      {
+        "day": 14,
+        "date": "2026-09-14",
+        "location": "Manila → Bangkok",
+        "title": "Thailand Leg Begins",
+        "type": "travel",
+        "activities": [
+          "Fly MNL → BKK",
+          "Arrive Bangkok",
+          "Check into hostel/hotel",
+          "Explore Khao San Road or Sukhumvit"
+        ],
+        "notes": "Budget airlines: AirAsia, Nok Air, VietJet"
+      },
+      {
+        "day": 15,
+        "date": "2026-09-15",
+        "location": "Bangkok",
+        "title": "Bangkok Day 1",
+        "type": "explore",
+        "activities": [
+          "Grand Palace & Wat Phra Kaew",
+          "Wat Arun (Temple of Dawn)",
+          "Chatuchak Weekend Market (if timing works)"
+        ],
+        "notes": ""
+      },
+      {
+        "day": 16,
+        "date": "2026-09-16",
+        "location": "Bangkok",
+        "title": "Bangkok Day 2",
+        "type": "explore",
+        "activities": [
+          "Street food tour — Chinatown (Yaowarat)",
+          "Jim Thompson House",
+          "Rooftop bar at sunset"
+        ],
+        "notes": ""
+      },
+      {
+        "day": 17,
+        "date": "2026-09-17",
+        "location": "Bangkok → Chiang Mai",
+        "title": "Chiang Mai Transfer",
+        "type": "travel",
+        "activities": [
+          "Fly or train to Chiang Mai",
+          "Check in to Old City hostel",
+          "Night Bazaar"
+        ],
+        "notes": "Flight ~1 hour, train ~12 hours (overnight train is an option)"
+      },
+      {
+        "day": 18,
+        "date": "2026-09-18",
+        "location": "Chiang Mai",
+        "title": "Chiang Mai Temples",
+        "type": "explore",
+        "activities": [
+          "Doi Suthep Temple",
+          "Old City temple walk",
+          "Khao Soi for lunch (northern Thai curry noodles)"
+        ],
+        "notes": ""
+      },
+      {
+        "day": 19,
+        "date": "2026-09-19",
+        "location": "Chiang Mai",
+        "title": "Elephant Sanctuary / Nature",
+        "type": "explore",
+        "activities": [
+          "Elephant Nature Park (ethical sanctuary)",
+          "Afternoon: cooking class",
+          "Pack for departure"
+        ],
+        "notes": "Book sanctuary in advance — fills up fast"
+      },
+      {
+        "day": 20,
+        "date": "2026-09-20",
+        "location": "Chiang Mai",
+        "title": "Last Full Day",
+        "type": "relax",
+        "activities": [
+          "Morning market",
+          "Last-minute shopping",
+          "Flight to Bangkok (if needed for connection)"
+        ],
+        "notes": "May need overnight in BKK for morning international flight"
+      },
+      {
+        "day": 21,
+        "date": "2026-09-21",
+        "location": "Chiang Mai → Bangkok → Cincinnati",
+        "title": "Return Home",
+        "type": "travel",
+        "activities": [
+          "Fly CNX → BKK",
+          "Fly BKK → CVG (long haul)",
+          "Arrive home",
+          "Post-trip debrief"
+        ],
+        "notes": "BKK → CVG will be 20+ hours with layover. Prepare accordingly."
+      }
+    ],
+    "checklist": [
+      {"item": "Passport (valid 6+ months)", "done": false, "category": "docs"},
+      {"item": "PH visa check (US passport = 30 days visa-free)", "done": true, "category": "docs"},
+      {"item": "TH visa check (US passport = 30 days visa-free)", "done": true, "category": "docs"},
+      {"item": "Book CVG → MNL flight", "done": false, "category": "flights"},
+      {"item": "Book MNL → BKK flight", "done": false, "category": "flights"},
+      {"item": "Book BKK → CVG flight", "done": false, "category": "flights"},
+      {"item": "Book MNL → GenSan domestic", "done": false, "category": "flights"},
+      {"item": "Accommodation: GenSan (13 nights)", "done": false, "category": "stay"},
+      {"item": "Accommodation: Bangkok (3 nights)", "done": false, "category": "stay"},
+      {"item": "Accommodation: Chiang Mai (3 nights)", "done": false, "category": "stay"},
+      {"item": "Travel insurance", "done": false, "category": "docs"},
+      {"item": "Philippine SIM card (Globe or Smart)", "done": false, "category": "tech"},
+      {"item": "Thai SIM card (AIS or DTAC)", "done": false, "category": "tech"},
+      {"item": "Notify bank of travel dates", "done": false, "category": "finance"},
+      {"item": "Exchange USD → PHP (don't do at airport)", "done": false, "category": "finance"},
+      {"item": "Pack light — 2 weeks + 1 week", "done": false, "category": "pack"},
+      {"item": "Elephant Nature Park booking", "done": false, "category": "activities"},
+      {"item": "Cooking class booking (Chiang Mai)", "done": false, "category": "activities"}
+    ],
+    "tips": [
+      "PH: ATMs charge 250 PHP ($4.50) per withdrawal. Withdraw large.",
+      "TH: 7-Eleven is everywhere. Cheap meals, phone top-up, ATMs.",
+      "GenSan: Tuna capital. Try tuna sisig and tuna kinilaw (ceviche).",
+      "Bangkok: BTS/MRT is cheap and fast. Avoid tuk-tuks for long rides.",
+      "Chiang Mai: Rent a scooter if comfortable. ~250 THB/day.",
+      "Both: Grab app works in both countries (like Uber)."
+    ],
+    "lastUpdated": "2026-06-11"
+  }
+}
