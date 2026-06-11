@@ -97,6 +97,7 @@
             display: flex;
             gap: 12px;
             flex-wrap: wrap;
+            margin-bottom: 20px;
         }
         
         .tag {
@@ -106,6 +107,37 @@
             border-radius: 8px;
             font-size: 13px;
             color: rgba(255,255,255,0.8);
+        }
+        
+        .compatible {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-top: 10px;
+        }
+        
+        .compatible-label {
+            color: rgba(255,255,255,0.4);
+            font-size: 12px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        
+        .compatible-icons {
+            display: flex;
+            gap: 12px;
+        }
+        
+        .compat-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
         }
         
         .right {
@@ -215,6 +247,17 @@
                     <div class="tag">Solidity Contracts</div>
                     <div class="tag">22/22 Tests Passing</div>
                     <div class="tag">Mastercard · Visa · Circle</div>
+                </div>
+                <div class="compatible">
+                    <div class="compatible-label">Compatible With</div>
+                    <div class="compatible-icons">
+                        <div class="compat-icon" title="Hermes Agent">🧠</div>
+                        <div class="compat-icon" title="OpenClaw">🐾</div>
+                        <div class="compat-icon" title="Claude Code">🤖</div>
+                        <div class="compat-icon" title="OpenAI Codex">⚡</div>
+                        <div class="compat-icon" title="MetaMask Agent Wallet">🦊</div>
+                        <div class="compat-icon" title="Circle CLI">💰</div>
+                    </div>
                 </div>
             </div>
             
