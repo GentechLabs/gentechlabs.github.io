@@ -1341,12 +1341,14 @@
 
       const catEntries = Object.entries(budget.categories);
       const budgetNote = budget.note ? `<div style="font-size:0.8rem;color:var(--text-dim);margin-bottom:12px;font-style:italic;">${budget.note}</div>` : '';
+      const budgetMin = budget.minimum ? budget.minimum : 0;
+      const budgetDisplay = budgetMin > 0 ? `${money(budgetMin)} – ${money(budget.total)}` : money(budget.total);
 
       container.innerHTML = `
         <div class="budget-total">
           <div>
             <div style="font-size:0.75rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:1px;margin-bottom:2px;">Spending Budget</div>
-            <div class="budget-amount">${money(budget.total)}</div>
+            <div class="budget-amount">${budgetDisplay}</div>
           </div>
           <div class="budget-remaining">
             <span>${money(remaining)}</span> remaining
