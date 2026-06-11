@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Christel's Kitchen — GenTech Cookbook</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #0f0f14;
+            color: #e8e8e8;
+            min-height: 100vh;
+        }
+        #app { max-width: 900px; margin: 0 auto; padding: 20px; }
+        
+        /* Header */
+        .header {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #ff9f43 0%, #ff6b6b 100%);
+            border-radius: 20px;
+            margin-bottom: 24px;
+        }
+        .header h1 { font-size: 2.2em; margin-bottom: 8px; color: #fff; }
+        .header p { color: rgba(255,255,255,0.9); font-size: 1.1em; }
+        
+        /* Hero */
+        .hero {
+            background: #181820;
+            border: 1px solid #2a2a3a;
+            border-radius: 16px;
+            padding: 28px;
+            margin-bottom: 20px;
+        }
+        .hero h2 { color: #ff9f43; font-size: 1.4em; margin-bottom: 8px; }
+        .hero p { color: #8888a0; margin-bottom: 20px; }
+        .stats-row { display: flex; gap: 16px; flex-wrap: wrap; }
+        .stat-box {
+            flex: 1;
+            min-width: 120px;
+            background: #1a1a25;
+            border: 1px solid #2a2a3a;
+            border-radius: 12px;
+            padding: 16px;
+            text-align: center;
+        }
+        .stat-box .icon { font-size: 1.8em; margin-bottom: 4px; }
+        .stat-box .value { font-size: 1.6em; font-weight: 700; color: #ff9f43; }
+        .stat-box .label { color: #8888a0; font-size: 0.85em; }
+        
+        /* Sections */
+        .section {
+            background: #181820;
+            border: 1px solid #2a2a3a;
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 20px;
+        }
+        .section h3 {
+            color: #ff9f43;
+            font-size: 1.2em;
+            margin-bottom: 16px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #2a2a3a;
+        }
+        .section-desc {
+            color: #8888a0;
+            font-size: 0.9em;
+            margin-bottom: 16px;
+        }
+        
+        /* List items */
+        .list-item {
+            background: #1a1a25;
+            border: 1px solid #2a2a3a;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+            transition: border-color 0.2s;
+        }
+        .list-item:hover { border-color: #ff9f43; }
+        .list-item:last-child { margin-bottom: 0; }
+        .list-item-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 6px;
+        }
+        .list-item-title h4 { color: #e8e8e8; font-size: 1em; }
+        .badge {
+            background: #2a2a3a;
+            color: #ff9f43;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.75em;
+            font-weight: 600;
+        }
+        .badge.success { background: rgba(46, 213, 115, 0.15); color: #2ed573; }
+        .badge.warning { background: rgba(255, 159, 67, 0.15); color: #ff9f43; }
+        .badge.info { background: rgba(112, 161, 255, 0.15); color: #70a1ff; }
+        .badge.accent { background: rgba(255, 107, 107, 0.15); color: #ff6b6b; }
+        .list-item p { color: #8888a0; font-size: 0.9em; }
+        
+        /* Taste Profile */
+        .taste-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        .taste-row:last-child { margin-bottom: 0; }
+        .taste-label {
+            width: 80px;
+            color: #8888a0;
+            font-size: 0.9em;
+        }
+        .taste-bar-bg {
+            flex: 1;
+            height: 10px;
+            background: #1a1a25;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        .taste-bar {
+            height: 100%;
+            border-radius: 5px;
+            background: linear-gradient(90deg, #ff9f43, #ff6b6b);
+        }
+        .taste-pct {
+            width: 50px;
+            text-align: right;
+            color: #ff9f43;
+            font-size: 0.9em;
+            font-weight: 600;
+        }
+        
+        /* Status */
+        .status-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 12px;
+        }
+        .status-item {
+            background: #1a1a25;
+            border: 1px solid #2a2a3a;
+            border-radius: 10px;
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #2ed573;
+        }
+        .status-dot.warning { background: #ff9f43; }
+        .status-item span { color: #8888a0; font-size: 0.85em; }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #555;
+            font-size: 0.8em;
+        }
+        .footer strong { color: #ff9f43; }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div class="header">
+            <h1>🍳 Christel's Kitchen</h1>
+            <p>Your cooking companion — recipes, memories, and discoveries</p>
+        </div>
+        
+        <div class="hero">
+            <h2>Welcome back, Christel!</h2>
+            <p>You've made 12 dishes this month. Your family favorite: Garlic Butter Sweet Potatoes.</p>
+            <div class="stats-row">
+                <div class="stat-box">
+                    <div class="icon">🍽️</div>
+                    <div class="value">12</div>
+                    <div class="label">Dishes Made</div>
+                </div>
+                <div class="stat-box">
+                    <div class="icon">🔄</div>
+                    <div class="value">8</div>
+                    <div class="label">Substitutions</div>
+                </div>
+                <div class="stat-box">
+                    <div class="icon">❤️</div>
+                    <div class="value">5</div>
+                    <div class="label">Favorites</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h3>🕐 Recent Dishes</h3>
+            <p class="section-desc">Your cooking history — tap to view or remix</p>
+            <div class="list-item">
+                <div class="list-item-title">
+                    <h4>Garlic Butter Sweet Potatoes</h4>
+                    <span class="badge success">⭐ 5/5</span>
+                </div>
+                <p>Sweet potato + quickmelt cheese. Family loved it!</p>
+            </div>
+            <div class="list-item">
+                <div class="list-item-title">
+                    <h4>Adobo Chicken Wings</h4>
+                    <span class="badge info">🔄 2 remixes</span>
+                </div>
+                <p>Classic Filipino adobo with a crispy twist</p>
+            </div>
+            <div class="list-item">
+                <div class="list-item-title">
+                    <h4>Pancit Canton Stir-Fry</h4>
+                    <span class="badge info">⏱️ 20 min</span>
+                </div>
+                <p>Quick weeknight dinner with local vegetables</p>
+            </div>
+            <div class="list-item">
+                <div class="list-item-title">
+                    <h4>Banana Cue Dessert</h4>
+                    <span class="badge success">❤️ Favorite</span>
+                </div>
+                <p>Caramelized banana on sticks — Jordan's request</p>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h3>🔄 Substitution Log</h3>
+            <p class="section-desc">What worked, what didn't — your flavor experiments</p>
+            <div class="list-item">
+                <div class="list-item-title">
+                    <h4>Sweet Potato → Russet Potato</h4>
+                    <span class="badge success">✅ Worked</span>
+                </div>
+                <p>Actually better! More moisture, sweeter flavor.</p>
+            </div>
+            <div class="list-item">
+                <div class="list-item-title">
+                    <h4>Quickmelt → American Cheddar</h4>
+                    <span class="badge success">✅ Worked</span>
+                </div>
+                <p>Similar melt, slightly less tangy. Good substitute.</p>
+            </div>
+            <div class="list-item">
+                <div class="list-item-title">
+                    <h4>All-Purpose Cream → Sour Cream</h4>
+                    <span class="badge warning">⚠️ Adjust</span>
+                </div>
+                <p>Not quite the same. Add lemon juice for tang.</p>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h3>💡 Suggested For You</h3>
+            <p class="section-desc">Based on your taste profile and history</p>
+            <div class="list-item">
+                <div class="list-item-title">
+                    <h4>Kare-Kare with Oxtail</h4>
+                    <span class="badge info">🧠 92% match</span>
+                </div>
+                <p>Rich peanut sauce — matches your umami preference</p>
+            </div>
+            <div class="list-item">
+                <div class="list-item-title">
+                    <h4>Thai Green Curry</h4>
+                    <span class="badge info">🌏 Try something new</span>
+                </div>
+                <p>Similar flavor profile to dishes you've loved</p>
+            </div>
+            <div class="list-item">
+                <div class="list-item-title">
+                    <h4>Sisig Tacos</h4>
+                    <span class="badge accent">🔥 Trending</span>
+                </div>
+                <p>Filipino-Mexican fusion — adventurous pick</p>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h3>📅 This Week's Meal Plan</h3>
+            <p class="section-desc">Your planned meals — adjust anytime</p>
+            <div class="list-item">
+                <div class="list-item-title">
+                    <h4>Monday — Adobo Rice Bowl</h4>
+                    <span class="badge info">🗓️ Mon</span>
+                </div>
+                <p>Leftover adobo over fresh rice with pickled vegetables</p>
+            </div>
+            <div class="list-item">
+                <div class="list-item-title">
+                    <h4>Wednesday — Sinigang na Baboy</h4>
+                    <span class="badge info">🗓️ Wed</span>
+                </div>
+                <p>Sour tamarind soup with pork — comfort food</p>
+            </div>
+            <div class="list-item">
+                <div class="list-item-title">
+                    <h4>Friday — Baked Potato Night</h4>
+                    <span class="badge success">🗓️ Fri</span>
+                </div>
+                <p>Jordan's favorite — try the smoked paprika twist</p>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h3>📊 Your Taste Profile</h3>
+            <p class="section-desc">What flavors you gravitate toward</p>
+            <div class="taste-row">
+                <span class="taste-label">Savory</span>
+                <div class="taste-bar-bg"><div class="taste-bar" style="width: 90%"></div></div>
+                <span class="taste-pct">90%</span>
+            </div>
+            <div class="taste-row">
+                <span class="taste-label">Umami</span>
+                <div class="taste-bar-bg"><div class="taste-bar" style="width: 80%"></div></div>
+                <span class="taste-pct">80%</span>
+            </div>
+            <div class="taste-row">
+                <span class="taste-label">Spicy</span>
+                <div class="taste-bar-bg"><div class="taste-bar" style="width: 70%"></div></div>
+                <span class="taste-pct">70%</span>
+            </div>
+            <div class="taste-row">
+                <span class="taste-label">Sweet</span>
+                <div class="taste-bar-bg"><div class="taste-bar" style="width: 40%"></div></div>
+                <span class="taste-pct">40%</span>
+            </div>
+            <div class="taste-row">
+                <span class="taste-label">Sour</span>
+                <div class="taste-bar-bg"><div class="taste-bar" style="width: 40%"></div></div>
+                <span class="taste-pct">40%</span>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h3>🔗 Connected</h3>
+            <p class="section-desc">Your Kitchen is synced with GenTech Cookbook</p>
+            <div class="status-grid">
+                <div class="status-item">
+                    <div class="status-dot"></div>
+                    <span>Memory: Active</span>
+                </div>
+                <div class="status-item">
+                    <div class="status-dot"></div>
+                    <span>Substitutions: 8 logged</span>
+                </div>
+                <div class="status-item">
+                    <div class="status-dot"></div>
+                    <span>Meal Plan: 3 meals</span>
+                </div>
+                <div class="status-item">
+                    <div class="status-dot warning"></div>
+                    <span>Social: Coming soon</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <strong>GENTECH COOKBOOK</strong><br>
+            Built with ❤️ for Christel's Kitchen · v1.0
+        </div>
+    </div>
+</body>
+</html>
