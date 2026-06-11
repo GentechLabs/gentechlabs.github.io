@@ -1121,6 +1121,12 @@
       <div class="panel" id="budget-container"></div>
     </section>
 
+    <!-- Cost Comparison -->
+    <section id="cost-section" class="fade-in">
+      <h2 class="section-title"><span class="section-icon">💸</span> Cost of Living</h2>
+      <div class="panel" id="cost-container"></div>
+    </section>
+
     <!-- Flight Cards -->
     <section id="flights-section" class="fade-in">
       <h2 class="section-title"><span class="section-icon">✈️</span> Flights</h2>
@@ -1376,6 +1382,54 @@
               </div>
             `;
           }).join('')}
+        </div>
+      `;
+    }
+
+    /* ==========================================================
+       RENDER: COST COMPARISON
+       ========================================================== */
+    function renderCostComparison(comparison) {
+      const container = document.getElementById('cost-container');
+      if (!comparison) { container.innerHTML = ''; return; }
+
+      const items = comparison.items.map(item => {
+        const makatiPrice = item.makati !== null ? `$${item.makati}` : '—';
+        const cincyPrice = item.cincinnati !== null ? `$${item.cincinnati}` : '—';
+        let savings = '';
+        if (item.makati !== null && item.cincinnati !== null) {
+          const pct = Math.round((1 - item.makati / item.cincinnati) * 100);
+          savings = `<span style="color:var(--green);font-weight:600;">${pct}% less</span>`;
+        } else if (item.makati !== null && item.cincinnati === null) {
+          savings = `<span style="color:var(--gold);font-weight:600;">PH only ✨</span>`;
+        }
+        return `
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--panel-border);font-size:0.88rem;">
+            <div style="flex:1;color:var(--text);">${item.item}</div>
+            <div style="width:80px;text-align:right;color:var(--green);font-weight:600;">${makatiPrice}</div>
+            <div style="width:80px;text-align:right;color:var(--text-dim);">${cincyPrice}</div>
+            <div style="width:90px;text-align:right;font-size:0.8rem;">${savings}</div>
+          </div>`;
+      }).join('');
+
+      const s = comparison.summary;
+      container.innerHTML = `
+        <div style="margin-bottom:12px;">
+          <div style="font-size:0.9rem;color:var(--text);font-weight:600;">${comparison.title}</div>
+          <div style="font-size:0.8rem;color:var(--text-dim);font-style:italic;">${comparison.note}</div>
+        </div>
+        <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:2px solid var(--panel-border);font-size:0.75rem;text-transform:uppercase;letter-spacing:1px;color:var(--text-dim);">
+          <div style="flex:1;">Item</div>
+          <div style="width:80px;text-align:right;">Makati</div>
+          <div style="width:80px;text-align:right;">Cincy</div>
+          <div style="width:90px;text-align:right;">Savings</div>
+        </div>
+        ${items}
+        <div style="margin-top:16px;padding:14px;background:color-mix(in srgb, var(--green) 8%, transparent);border:1px solid color-mix(in srgb, var(--green) 25%, transparent);border-radius:10px;">
+          <div style="font-family:'Cinzel',serif;font-size:1rem;color:var(--green);font-weight:600;margin-bottom:6px;">💰 ${s.verdict}</div>
+          <div style="font-size:0.85rem;color:var(--text-dim);">
+            Daily budget: <strong style="color:var(--green);">$${s.dailyBudgetPH}/day</strong> in Makati vs <span style="color:var(--text-dim);">$${s.dailyBudgetCincy}/day</span> in Cincinnati
+          </div>
         </div>
       `;
     }
@@ -1728,6 +1782,7 @@
       renderHeader(trip);
       renderLegs(trip.legs);
       renderBudget(trip.budget);
+      renderCostComparison(trip.costComparison);
       renderFlights(trip.flights);
       renderRestaurants(trip.restaurants);
       renderPlaces(trip.places);
