@@ -7,7 +7,9 @@
       "class": "Monk",
       "build": "Lightning Invoker",
       "ascendancy": "Invoker",
-      "act": "Act 3+",
+      "level": 26,
+      "league": "Standard",
+      "act": "Act 2",
       "mission": "Progressing",
       "patch": "0.5",
       "progress": {
@@ -137,7 +139,82 @@
           "power_spike": "Before Invoker: You deal lightning damage. After Invoker: You deal lightning damage THAT ACTUALLY LANDS."
         }
       },
-      "lastUpdated": "2026-06-10"
+      "lastUpdated": "2026-06-11"
+    },
+    {
+      "id": "sorceress-jordan",
+      "player": "Jordan",
+      "alias": "Fire Sorceress",
+      "class": "Sorceress",
+      "build": "Fire/Lightning Hybrid",
+      "level": 5,
+      "league": "Runes of Aldur",
+      "act": "Early",
+      "mission": "Just started",
+      "patch": "0.5",
+      "progress": {
+        "campaign": 5,
+        "buildCompletion": 15,
+        "gemCollection": 10,
+        "metaAlignment": 20
+      },
+      "skills": [
+        {
+          "name": "Firebolt",
+          "type": "Primary Attack — Fire",
+          "primary": true,
+          "supports": [],
+          "role": "Main early-game damage dealer. Spammable fire projectile."
+        },
+        {
+          "name": "Spark",
+          "type": "Secondary Attack — Lightning",
+          "primary": true,
+          "supports": [],
+          "role": "Chain lightning for pack clear. Covers fire-immune enemies."
+        },
+        {
+          "name": "Flame Wall",
+          "type": "AoE / Barrier — Fire",
+          "primary": false,
+          "supports": [],
+          "role": "Area denial and fire synergy. Projectiles through it gain fire damage."
+        }
+      ],
+      "upgrades": [
+        {
+          "priority": 1,
+          "skill": "Firebolt",
+          "current": "No supports",
+          "suggested": "Added Lightning Damage / Faster Projectiles",
+          "reason": "Early gem slots — boost main skill first."
+        },
+        {
+          "priority": 2,
+          "skill": "Flame Wall",
+          "current": "No supports",
+          "suggested": "Increased Area of Effect",
+          "reason": "Wider wall = more coverage for Spark/Firebolt to pass through."
+        }
+      ],
+      "passiveSkills": {
+        "allocated": 3,
+        "total": 123,
+        "keystones": [],
+        "notableNodes": ["Burning Bright"],
+        "coreStats": {
+          "fireDamage": 12,
+          "critChance": 3,
+          "castSpeed": 6,
+          "manaRegen": 8
+        },
+        "pathways": [
+          {"name": "Fire Mastery", "points": 3, "allocated": true},
+          {"name": "Elemental Damage", "points": 0, "allocated": false},
+          {"name": "Spell Speed", "points": 0, "allocated": false}
+        ]
+      },
+      "lastUpdated": "2026-06-11"
     }
   ]
 }

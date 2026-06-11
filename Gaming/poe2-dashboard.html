@@ -864,7 +864,7 @@
         //  RENDER DASHBOARD (single scrollable view)
         // ═══════════════════════════════════════════════════════════
         function renderDashboard(data) {
-            const { player, progress, skills, upgrades, lastUpdated, alias, class: charClass, build, act, mission, passiveSkills } = data;
+            const { player, progress, skills, upgrades, lastUpdated, alias, class: charClass, build, act, mission, passiveSkills, level, league } = data;
             const suggestions = upgrades || [];
             const playerName = typeof player === 'string' ? player : player.name;
 
@@ -1207,20 +1207,20 @@
                     <div class="character-class">${alias || charClass} — ${build} Build — ${act}, ${mission}</div>
                     <div class="character-stats">
                         <div class="stat-box">
+                            <div class="label">Level</div>
+                            <div class="value">${level || '?'}</div>
+                        </div>
+                        <div class="stat-box">
                             <div class="label">Class</div>
                             <div class="value">${charClass}</div>
                         </div>
                         <div class="stat-box">
-                            <div class="label">Build</div>
-                            <div class="value lightning">${build}</div>
+                            <div class="label">League</div>
+                            <div class="value lightning">${league || 'Standard'}</div>
                         </div>
                         <div class="stat-box">
                             <div class="label">Campaign</div>
                             <div class="value">${act}</div>
-                        </div>
-                        <div class="stat-box">
-                            <div class="label">Mana Sustain</div>
-                            <div class="value mana">${manaSkill ? manaSkill.supports.join(', ') || 'Mana Drain' : 'None'}</div>
                         </div>
                     </div>
                 </div>
