@@ -563,6 +563,21 @@ class DashboardEngine {
     window._dashboardEngine = this;
   }
 
+  bindInteractives() {
+    // Modal close on overlay click
+    const overlay = document.getElementById('modal-overlay');
+    if (overlay) {
+      this.on(overlay, 'click', (e) => {
+        if (e.target === overlay) this.closeModal();
+      });
+    }
+
+    // Escape key closes modal
+    this.on(document, 'keydown', (e) => {
+      if (e.key === 'Escape') this.closeModal();
+    });
+  }
+
   toggleChecklistItem(storageKey, itemId, checked) {
     const state = this.loadState(storageKey);
     state[itemId] = checked;
