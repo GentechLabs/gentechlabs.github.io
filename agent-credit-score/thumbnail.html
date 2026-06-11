@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agent Credit Score — Thumbnail</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            width: 1200px;
+            height: 630px;
+            background: linear-gradient(135deg, #0a0a1a 0%, #1a1a3a 50%, #0a0a1a 100%);
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            color: #fff;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        /* Grid pattern overlay */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: 
+                linear-gradient(rgba(255,159,67,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,159,67,0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: 0;
+        }
+        
+        .container {
+            position: relative;
+            z-index: 1;
+            padding: 60px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .badge {
+            background: rgba(255,159,67,0.15);
+            border: 1px solid rgba(255,159,67,0.3);
+            color: #ff9f43;
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+        
+        .brand {
+            color: rgba(255,255,255,0.4);
+            font-size: 14px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        
+        .main-content {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+        }
+        
+        .left {
+            flex: 1;
+        }
+        
+        .title {
+            font-size: 56px;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+        
+        .title .highlight {
+            background: linear-gradient(135deg, #ff9f43, #ff6b6b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .subtitle {
+            font-size: 22px;
+            color: rgba(255,255,255,0.7);
+            line-height: 1.5;
+            margin-bottom: 30px;
+        }
+        
+        .tags {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        
+        .tag {
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.15);
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 13px;
+            color: rgba(255,255,255,0.8);
+        }
+        
+        .right {
+            width: 320px;
+            height: 320px;
+            position: relative;
+        }
+        
+        /* Score circle */
+        .score-ring {
+            width: 280px;
+            height: 280px;
+            border-radius: 50%;
+            background: conic-gradient(
+                #ff9f43 0deg,
+                #ff6b6b 90deg,
+                #ff9f43 180deg,
+                #ff6b6b 270deg,
+                #ff9f43 360deg
+            );
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: rotate 10s linear infinite;
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .score-ring-inner {
+            width: 240px;
+            height: 240px;
+            border-radius: 50%;
+            background: #0a0a1a;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .score-number {
+            font-size: 72px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ff9f43, #ff6b6b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+        }
+        
+        .score-label {
+            font-size: 14px;
+            color: rgba(255,255,255,0.5);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-top: 8px;
+        }
+        
+        /* Floating elements */
+        .float-icon {
+            position: absolute;
+            font-size: 28px;
+            opacity: 0.6;
+        }
+        .float-icon.i1 { top: 0; left: 0; }
+        .float-icon.i2 { top: 0; right: 0; }
+        .float-icon.i3 { bottom: 40px; left: -20px; }
+        .float-icon.i4 { bottom: 0; right: 20px; }
+        
+        .bottom-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: rgba(255,255,255,0.3);
+            font-size: 13px;
+        }
+        
+        .url {
+            color: #ff9f43;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="top-bar">
+            <div class="badge">OPEN SOURCE · MIT LICENSED</div>
+            <div class="brand">GENTECH LABS</div>
+        </div>
+        
+        <div class="main-content">
+            <div class="left">
+                <div class="title">
+                    <span class="highlight">Agent</span> Credit<br>Score
+                </div>
+                <div class="subtitle">
+                    The open-source standard for grading<br>
+                    AI agent payment behavior. 0–850 scale.
+                </div>
+                <div class="tags">
+                    <div class="tag">5 Scoring Dimensions</div>
+                    <div class="tag">Solidity Contracts</div>
+                    <div class="tag">22/22 Tests Passing</div>
+                    <div class="tag">Mastercard · Visa · Circle</div>
+                </div>
+            </div>
+            
+            <div class="right">
+                <div class="float-icon i1">🤖</div>
+                <div class="float-icon i2">💳</div>
+                <div class="float-icon i3">📊</div>
+                <div class="float-icon i4">⚡</div>
+                <div class="score-ring">
+                    <div class="score-ring-inner">
+                        <div class="score-number">742</div>
+                        <div class="score-label">Agent Score</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="bottom-bar">
+            <div>github.com/ProtoJay4789/agent-credit-score</div>
+            <div class="url">THE FUTURE OF AGENT PAYMENTS</div>
+        </div>
+    </div>
+</body>
+</html>
