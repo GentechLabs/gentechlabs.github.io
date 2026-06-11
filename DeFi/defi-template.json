@@ -1,0 +1,142 @@
+{
+  "meta": {
+    "title": "GENTECH DASHBOARD",
+    "subtitle": "DeFi Portfolio Tracker",
+    "dataUrl": "defi-data.json",
+    "refreshMs": 30000,
+    "version": "v0.1",
+    "brand": "GENTECH DASHBOARD"
+  },
+  "theme": {
+    "mode": "dark",
+    "colors": {
+      "--bg": "#0a0e17",
+      "--panel-bg": "#111827",
+      "--panel-border": "#1f2937",
+      "--panel-shadow": "rgba(0,255,136,0.05)",
+      "--text": "#e5e7eb",
+      "--text-dim": "#6b7280",
+      "--gold": "#00ff88",
+      "--gold-dim": "#059669",
+      "--accent": "#00ccff",
+      "--danger": "#ff3366",
+      "--success": "#00ff88",
+      "--mana-blue": "#3b82f6",
+      "--radius": "12px"
+    },
+    "fonts": {
+      "heading": "'Inter', 'SF Pro Display', -apple-system, sans-serif",
+      "body": "'Inter', 'SF Pro Text', -apple-system, sans-serif"
+    },
+    "container": { "maxWidth": "1100px" }
+  },
+  "tabs": [
+    { "id": "overview", "label": "Overview", "icon": "📊", "sections": ["portfolio", "positions", "gas"] },
+    { "id": "yields", "label": "Yields", "icon": "🌾", "sections": ["yield-positions", "yield-history"] },
+    { "id": "history", "label": "History", "icon": "📜", "sections": ["transactions"] }
+  ],
+  "sections": [
+    {
+      "id": "portfolio",
+      "title": "Portfolio Overview",
+      "icon": "💰",
+      "type": "stats",
+      "dataSource": "portfolio",
+      "cardTemplate": {
+        "fields": [
+          { "key": "totalValue", "label": "Total Value", "format": "money" },
+          { "key": "change24h", "label": "24h Change", "format": "percent" },
+          { "key": "tokens", "label": "Tokens", "format": "text" },
+          { "key": "chains", "label": "Chains", "format": "text" }
+        ]
+      }
+    },
+    {
+      "id": "positions",
+      "title": "Token Holdings",
+      "icon": "🪙",
+      "type": "grid",
+      "dataSource": "holdings",
+      "layout": { "gridMinWidth": "240px" },
+      "cardTemplate": {
+        "className": "token-card",
+        "fields": [
+          { "key": "symbol", "className": "token-symbol" },
+          { "key": "name", "className": "token-name" },
+          { "key": "balance", "className": "token-balance", "format": "text" },
+          { "key": "value", "className": "token-value", "format": "money" },
+          { "key": "change24h", "className": "token-change", "format": "percent" },
+          { "key": "chain", "className": "token-chain", "format": "badge" }
+        ]
+      }
+    },
+    {
+      "id": "gas",
+      "title": "Gas Tracker",
+      "icon": "⛽",
+      "type": "stats",
+      "dataSource": "gas",
+      "cardTemplate": {
+        "fields": [
+          { "key": "baseFee", "label": "Base Fee", "format": "text" },
+          { "key": "priority", "label": "Priority", "format": "text" },
+          { "key": "total", "label": "Total (Fast)", "format": "text" },
+          { "key": "costUsd", "label": "Swap Cost", "format": "money" }
+        ]
+      }
+    },
+    {
+      "id": "yield-positions",
+      "title": "Active Yield Positions",
+      "icon": "🌾",
+      "type": "table",
+      "dataSource": "yieldPositions",
+      "cardTemplate": {
+        "fields": [
+          { "key": "protocol", "label": "Protocol", "format": "text" },
+          { "key": "pair", "label": "Pair", "format": "text" },
+          { "key": "tvl", "label": "TVL", "format": "money" },
+          { "key": "apy", "label": "APY", "format": "percent" },
+          { "key": "earned", "label": "Earned", "format": "money" },
+          { "key": "status", "label": "Status", "format": "badge" }
+        ]
+      }
+    },
+    {
+      "id": "yield-history",
+      "title": "Yield Performance",
+      "icon": "📈",
+      "type": "progress",
+      "dataSource": "yieldProgress",
+      "progressConfig": {
+        "items": [
+          { "label": "Aerodrome USDC/ETH", "valueKey": "aerodrome", "color": "#00ff88" },
+          { "label": "Beefy USDC", "valueKey": "beefy", "color": "#00ccff" },
+          { "label": "Morpho WETH", "valueKey": "morpho", "color": "#c9a84c" }
+        ]
+      }
+    },
+    {
+      "id": "transactions",
+      "title": "Recent Transactions",
+      "icon": "📜",
+      "type": "table",
+      "dataSource": "transactions",
+      "cardTemplate": {
+        "fields": [
+          { "key": "date", "label": "Date", "format": "date" },
+          { "key": "type", "label": "Type", "format": "badge" },
+          { "key": "token", "label": "Token" },
+          { "key": "amount", "label": "Amount" },
+          { "key": "usd", "label": "USD", "format": "money" },
+          { "key": "status", "label": "Status", "format": "badge" }
+        ]
+      }
+    }
+  ],
+  "footer": {
+    "brand": "GENTECH DASHBOARD",
+    "version": "DeFi Tracker v0.1",
+    "showTimestamp": true
+  }
+}

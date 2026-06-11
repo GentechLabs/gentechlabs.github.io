@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GenTech Dashboard — DeFi Portfolio</title>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* DeFi-specific overrides */
+        .token-card {
+            background: var(--panel-bg);
+            border: 1px solid var(--panel-border);
+            border-radius: var(--radius);
+            padding: 18px;
+            transition: all 0.25s ease;
+        }
+        .token-card:hover {
+            border-color: var(--gold);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 255, 136, 0.08);
+        }
+        .token-symbol {
+            font-size: 1.4em;
+            font-weight: 700;
+            color: var(--gold);
+            font-family: var(--font-heading);
+        }
+        .token-name {
+            color: var(--text-dim);
+            font-size: 0.85em;
+            margin-bottom: 12px;
+        }
+        .token-balance {
+            font-size: 1.1em;
+            font-weight: 500;
+            color: var(--text);
+            margin-bottom: 4px;
+        }
+        .token-value {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: var(--gold);
+            margin-bottom: 4px;
+        }
+        .token-change {
+            font-size: 0.85em;
+            font-weight: 500;
+        }
+        .token-change[data-positive="true"] { color: var(--success); }
+        .token-change[data-positive="false"] { color: var(--danger); }
+        .token-chain {
+            margin-top: 8px;
+        }
+
+        /* Gas gauge visual */
+        .gas-visual {
+            display: flex;
+            gap: 4px;
+            margin-top: 8px;
+        }
+        .gas-bar {
+            height: 6px;
+            flex: 1;
+            border-radius: 3px;
+            background: var(--panel-border);
+        }
+        .gas-bar.filled { background: var(--gold); }
+
+        /* Portfolio sparkline placeholder */
+        .portfolio-chart {
+            height: 80px;
+            background: linear-gradient(180deg, rgba(0,255,136,0.1) 0%, transparent 100%);
+            border-radius: 8px;
+            margin-top: 10px;
+            display: flex;
+            align-items: flex-end;
+            padding: 0 10px 10px;
+            gap: 3px;
+        }
+        .chart-bar {
+            flex: 1;
+            background: var(--gold);
+            border-radius: 2px 2px 0 0;
+            opacity: 0.6;
+            transition: opacity 0.2s;
+        }
+        .chart-bar:hover { opacity: 1; }
+    </style>
+</head>
+<body>
+    <div id="app"></div>
+
+    <script src="dashboard-engine.js"></script>
+    <script>
+        // DeFi-specific field rendering
+        const originalFormatField = DashboardEngine.prototype.formatField;
+        DashboardEngine.prototype.formatField = function(value, field = {}) {
+            if (value === null || value === undefined) return '—';
+            
+            if (field.className === 'token-change') {
+                const num = parseFloat(value);
+                const positive = num >= 0;
+                const sign = positive ? '+' : '';
+                return `<span data-positive="${positive}">${sign}${value}%</span>`;
+            }
+            
+            return originalFormatField.call(this, value, field);
+        };
+
+        // Initialize with inline template + data
+        (async () => {
+            const templateRes = await fetch('defi-template.json?' + Date.now());
+            const template = await templateRes.json();
+            const dataRes = await fetch('defi-data.json?' + Date.now());
+            const data = await dataRes.json();
+
+            const dash = new DashboardEngine({ template, data });
+            await dash.init('#app');
+
+            // Expose for debugging
+            window.defiDash = dash;
+        })();
+    </script>
+</body>
+</html>
