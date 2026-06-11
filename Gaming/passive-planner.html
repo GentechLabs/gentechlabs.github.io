@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>POE2 Passive Skill Tree Planner</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap');
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{--bg:#0a0a12;--panel:#12121a;--gold:#c9a84c;--blue:#7eb8ff;--text:#e0ddd4;--dim:#555;--keystone:#ff6b6b;--ascendancy:#c084fc;--notable:#c9a84c;--basic-dim:#8a8a9a;--basic-bright:#d0d0e0}
+  html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif}
+
+  /* Header */
+  #header{height:54px;background:var(--panel);border-bottom:1px solid #1e1e2e;display:flex;align-items:center;padding:0 16px;gap:12px;z-index:10;position:relative}
+  #header h1{font-family:'Cinzel',serif;color:var(--gold);font-size:16px;white-space:nowrap;letter-spacing:1px}
+  #header h1 span{color:var(--blue)}
+  .header-sep{width:1px;height:28px;background:#2a2a3a}
+  .pts-wrap{display:flex;align-items:center;gap:8px;font-size:13px}
+  .pts-wrap .label{color:#999}
+  .pts-wrap .count{color:var(--gold);font-weight:700;font-size:14px}
+  .pts-wrap .warn{color:#ff6b6b}
+  #pts-input{width:42px;background:#1a1a2a;border:1px solid #2a2a3a;color:var(--text);text-align:center;padding:2px 4px;border-radius:3px;font-size:13px}
+  .progress-bar-wrap{width:120px;height:8px;background:#1a1a2a;border-radius:4px;overflow:hidden}
+  #progress-bar{height:100%;background:linear-gradient(90deg,var(--gold),var(--blue));border-radius:4px;transition:width .3s}
+  .btn{background:#1a1a2a;border:1px solid #2a2a3a;color:var(--text);padding:5px 12px;border-radius:4px;cursor:pointer;font-size:12px;white-space:nowrap;transition:all .15s}
+  .btn:hover{background:#24243a;border-color:var(--gold)}
+  .btn.gold{border-color:var(--gold);color:var(--gold)}
+  .btn.gold:hover{background:rgba(201,168,76,.15)}
+  .header-btns{margin-left:auto;display:flex;gap:6px}
+  .spacer{flex:1}
+
+  /* Main area */
+  #main{display:flex;height:calc(100vh - 54px);position:relative}
+  #canvas-wrap{flex:1;position:relative;overflow:hidden}
+  canvas{display:block;cursor:grab}
+  canvas.dragging{cursor:grabbing}
+
+  /* Info panel */
+  #info-panel{height:100px;background:var(--panel);border-top:1px solid #1e1e2e;display:flex;align-items:center;padding:16px 24px;gap:20px;position:relative}
+  #node-detail{flex:1;min-width:0}
+  #node-detail .nd-name{font-family:'Cinzel',serif;color:var(--gold);font-size:16px;margin-bottom:2px}
+  #node-detail .nd-type{font-size:12px;color:#888;margin-bottom:4px;text-transform:uppercase;letter-spacing:1px}
+  #node-detail .nd-desc{font-size:13px;color:var(--text)}
+  #node-detail .nd-empty{color:#555;font-style:italic;font-size:13px}
+  .info-btns{display:flex;gap:8px;flex-shrink:0}
+
+  /* Toast */
+  #toast{position:fixed;top:68px;left:50%;transform:translateX(-50%);background:rgba(201,168,76,.92);color:#0a0a12;padding:8px 20px;border-radius:6px;font-size:13px;font-weight:600;opacity:0;pointer-events:none;transition:opacity .25s;z-index:100}
+  #toast.show{opacity:1}
+
+  /* Import modal */
+  #import-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:200;display:none;align-items:center;justify-content:center}
+  #import-overlay.open{display:flex}
+  #import-modal{background:var(--panel);border:1px solid #2a2a3a;border-radius:8px;padding:20px;width:420px;max-width:90vw}
+  #import-modal h2{font-family:'Cinzel',serif;color:var(--gold);font-size:15px;margin-bottom:10px}
+  #import-modal textarea{width:100%;height:80px;background:#1a1a2a;border:1px solid #2a2a3a;color:var(--text);padding:8px;border-radius:4px;resize:vertical;font-size:13px;font-family:monospace}
+  .modal-btns{display:flex;gap:8px;margin-top:10px;justify-content:flex-end}
+
+  /* Zoom controls */
+  #zoom-controls{position:absolute;bottom:12px;right:12px;display:flex;flex-direction:column;gap:4px;z-index:5}
+  .zoom-btn{width:32px;height:32px;background:rgba(18,18,26,.85);border:1px solid #2a2a3a;color:var(--text);border-radius:4px;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center}
+  .zoom-btn:hover{border-color:var(--gold)}
+</style>
+</head>
+<body>
+
+<div id="header">
+  <h1>⚡ POE2 Passive Skill Tree <span>Planner</span></h1>
+  <div class="header-sep"></div>
+  <div class="pts-wrap">
+    <span class="label">Points:</span>
+    <span class="count" id="pts-count">0</span>
+    <span class="label">/</span>
+    <input type="number" id="pts-input" value="123" min="0" max="999">
+    <span class="label">Available</span>
+  </div>
+  <div class="progress-bar-wrap"><div id="progress-bar" style="width:0%"></div></div>
+  <div class="header-btns">
+    <button class="btn" onclick="openImport()">📥 Import</button>
+    <button class="btn gold" onclick="exportBuild()">📤 Export</button>
+    <button class="btn" onclick="resetBuild()">🔄 Reset</button>
+    <button class="btn" onclick="fitTree()">⊞ Fit View</button>
+  </div>
+</div>
+
+<div id="main">
+  <div id="canvas-wrap">
+    <canvas id="tree-canvas"></canvas>
+    <div id="zoom-controls">
+      <button class="zoom-btn" onclick="zoomBy(1.2)">+</button>
+      <button class="zoom-btn" onclick="zoomBy(1/1.2)">−</button>
+    </div>
+  </div>
+</div>
+
+<div id="info-panel">
+  <div id="node-detail"><div class="nd-empty">Hover over a node to see details</div></div>
+  <div class="info-btns">
+    <button class="btn gold" onclick="saveToStorage()">💾 Save</button>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<div id="import-overlay">
+  <div id="import-modal">
+    <h2>Import Build</h2>
+    <p style="font-size:12px;color:#888;margin-bottom:8px">Paste a comma-separated list of node IDs to allocate:</p>
+    <textarea id="import-text" placeholder="node-2, node-3, node-5, ..."></textarea>
+    <div class="modal-btns">
+      <button class="btn" onclick="closeImport()">Cancel</button>
+      <button class="btn gold" onclick="doImport()">Import</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// =============================================
+//  POE2 PASSIVE SKILL TREE PLANNER
+//  Canvas-based interactive skill tree builder
+// =============================================
+
+const canvas = document.getElementById('tree-canvas');
+const ctx = canvas.getContext('2d');
+const canvasWrap = document.getElementById('canvas-wrap');
+
+// --- Theme colors ---
+const COLORS = {
+  bg: '#0a0a12',
+  grid: 'rgba(201,168,76,0.03)',
+  line: 'rgba(100,100,130,0.3)',
+  lineAlloc: 'rgba(201,168,76,0.7)',
+  lineHover: 'rgba(126,184,255,0.6)',
+  basicFill: '#3a3a4a',
+  basicStroke: '#6a6a7a',
+  basicFillAlloc: '#c9a84c',
+  basicStrokeAlloc: '#c9a84c',
+  notableFill: '#1a1a2a',
+  notableStroke: '#c9a84c',
+  notableFillAlloc: 'rgba(201,168,76,0.25)',
+  keystoneFill: '#1a0a0a',
+  keystoneStroke: '#ff6b6b',
+  keystoneGlow: 'rgba(255,107,107,0.4)',
+  ascendFill: '#0a0a1a',
+  ascendStroke: '#c084fc',
+  ascendGlow: 'rgba(192,132,252,0.4)',
+  startFill: '#0a1a2a',
+  startStroke: '#7eb8ff',
+  startGlow: 'rgba(126,184,255,0.5)',
+  hoverGlow: 'rgba(126,184,255,0.6)',
+  candidateGlow: 'rgba(201,168,76,0.25)',
+  text: '#e0ddd4',
+  dimText: '#888'
+};
+
+// =============================================
+//  SAMPLE TREE DATA — Lightning Monk
+// =============================================
+const nodes = [
+  // ===== START NODE =====
+  {id:"start",name:"Lightning Monk",type:"start",x:600,y:400,radius:16,description:"Starting node for the Lightning Monk build.",stats:{},connections:["n1","n13","n25"],allocated:true},
+
+  // ===== OFFENSE PATH (upper right) =====
+  {id:"n1",name:"Thunder Strike",type:"basic",x:660,y:355,radius:10,description:"+8% Lightning Damage",stats:{lightningDmg:8},connections:["start","n2"],allocated:false},
+  {id:"n2",name:"Storm Fists",type:"basic",x:730,y:310,radius:10,description:"+10% Lightning Damage",stats:{lightningDmg:10},connections:["n1","n3"],allocated:false},
+  {id:"n3",name:"Lightning Infusion",type:"notable",x:810,y:265,radius:14,description:"+15% Lightning Damage, +5% Attack Speed",stats:{lightningDmg:15,atkSpd:5},connections:["n2","n4","n5"],allocated:false},
+  {id:"n4",name:"Chain Lightning",type:"basic",x:890,y:230,radius:10,description:"Lightning skills chain to 1 additional enemy",stats:{chain:1},connections:["n3","n6"],allocated:false},
+  {id:"n5",name:"Static Charge",type:"basic",x:850,y:330,radius:10,description:"10% chance to Shock on hit",stats:{shockChance:10},connections:["n3","n7"],allocated:false},
+  {id:"n6",name:"Storm Mastery",type:"notable",x:970,y:195,radius:14,description:"+20% Lightning Penetration",stats:{lightningPen:20},connections:["n4","n8"],allocated:false},
+  {id:"n7",name:"Volt Surge",type:"basic",x:930,y:370,radius:10,description:"+12% Spell Damage",stats:{spellDmg:12},connections:["n5","n9"],allocated:false},
+  {id:"n8",name:"Thunderlord's Decree",type:"keystone",x:1040,y:160,radius:20,description:"Your lightning damage chains twice as far. Non-lightning damage reduced by 30%.",stats:{chainMultiplier:2,nonLightningDmgReduction:30},connections:["n6"],allocated:false},
+  {id:"n9",name:"Arc Dancer",type:"basic",x:1000,y:405,radius:10,description:"+8% Evasion Rating",stats:{evasion:8},connections:["n7","n10"],allocated:false},
+  {id:"n10",name:"Flickering Guard",type:"notable",x:1070,y:440,radius:14,description:"+15% Evasion, +5% Dodge",stats:{evasion:15,dodge:5},connections:["n9"],allocated:false},
+
+  // Cross-connection from offense to defense
+  {id:"n11",name:"Shocked Ground",type:"basic",x:920,y:480,radius:10,description:"Enemies on shocked ground take 5% increased damage",stats:{dmgOnShocked:5},connections:["n9","n22"],allocated:false},
+  {id:"n12",name:"Tempest Shield",type:"basic",x:780,y:200,radius:10,description:"+8% Spell Suppression",stats:{spellSupp:8},connections:["n3","n43"],allocated:false},
+
+  // ===== DEFENSE PATH (lower right) =====
+  {id:"n13",name:"Iron Skin",type:"basic",x:660,y:445,radius:10,description:"+10 Armor",stats:{armor:10},connections:["start","n14"],allocated:false},
+  {id:"n14",name:"Resilience",type:"basic",x:730,y:490,radius:10,description:"+8% Maximum Life",stats:{maxLife:8},connections:["n13","n15"],allocated:false},
+  {id:"n15",name:"Tempered Body",type:"notable",x:810,y:535,radius:14,description:"+12% Armor, +60 Life",stats:{armor:12,flatLife:60},connections:["n14","n16","n17"],allocated:false},
+  {id:"n16",name:"Steel Will",type:"basic",x:890,y:570,radius:10,description:"+10% Damage Reduction",stats:{dmgReduction:10},connections:["n15","n18"],allocated:false},
+  {id:"n17",name:"Unbreakable",type:"basic",x:860,y:620,radius:10,description:"+5% Life Regen",stats:{lifeRegen:5},connections:["n15","n19"],allocated:false},
+  {id:"n18",name:"Stone Bulwark",type:"notable",x:960,y:605,radius:14,description:"+20% Armor, +3% Max Elemental Res",stats:{armor:20,maxElemRes:3},connections:["n16","n20"],allocated:false},
+  {id:"n19",name:"Endurance",type:"basic",x:930,y:680,radius:10,description:"+10% Max Life",stats:{maxLife:10},connections:["n17","n21"],allocated:false},
+  {id:"n20",name:"Titan's Resolve",type:"keystone",x:1040,y:640,radius:20,description:"You take 50% less physical damage. Cannot deal elemental damage.",stats:{physDmgReduction:50,cantDealElemDmg:true},connections:["n18"],allocated:false},
+  {id:"n21",name:"Vitality",type:"basic",x:1010,y:720,radius:10,description:"+2% Life Regen",stats:{lifeRegen:2},connections:["n19"],allocated:false},
+  {id:"n22",name:"Storm Ward",type:"basic",x:990,y:530,radius:10,description:"+10% Lightning Resist",stats:{lightningRes:10},connections:["n11","n18"],allocated:false},
+  {id:"n23",name:"Grounded",type:"basic",x:770,y:600,radius:10,description:"+8% Elemental Resist",stats:{elemRes:8},connections:["n17"],allocated:false},
+  {id:"n24",name:"Hardened",type:"basic",x:710,y:560,radius:10,description:"+10 Armor",stats:{armor:10},connections:["n15"],allocated:false},
+
+  // ===== UTILITY PATH (upper left) =====
+  {id:"n25",name:"Focused Mind",type:"basic",x:540,y:355,radius:10,description:"+8% Accuracy",stats:{accuracy:8},connections:["start","n26"],allocated:false},
+  {id:"n26",name:"Swift Hands",type:"basic",x:470,y:310,radius:10,description:"+10% Attack Speed",stats:{atkSpd:10},connections:["n25","n27"],allocated:false},
+  {id:"n27",name:"Lightning Reflexes",type:"notable",x:390,y:265,radius:14,description:"+15% Attack Speed, +8% Crit Chance",stats:{atkSpd:15,critChance:8},connections:["n26","n28","n29"],allocated:false},
+  {id:"n28",name:"Precision",type:"basic",x:310,y:230,radius:10,description:"+10% Critical Damage",stats:{critDmg:10},connections:["n27","n30"],allocated:false},
+  {id:"n29",name:"Flow State",type:"basic",x:350,y:330,radius:10,description:"+8% Movement Speed",stats:{moveSpd:8},connections:["n27","n31"],allocated:false},
+  {id:"n30",name:"Assassin's Focus",type:"notable",x:230,y:195,radius:14,description:"+20% Critical Damage, +5% Crit Multiplier",stats:{critDmg:20,critMulti:5},connections:["n28","n32"],allocated:false},
+  {id:"n31",name:"Adrenaline",type:"basic",x:270,y:370,radius:10,description:"+8% Action Speed",stats:{actionSpd:8},connections:["n29","n33"],allocated:false},
+  {id:"n32",name:"Lightning Avatar",type:"keystone",x:160,y:160,radius:20,description:"Your critical strikes release chain lightning. Non-critical strikes deal 50% less damage.",stats:{critChainLightning:true,nonCritPenalty:50},connections:["n30"],allocated:false},
+  {id:"n33",name:"Quickstep",type:"basic",x:200,y:405,radius:10,description:"+8% Dodge",stats:{dodge:8},connections:["n31","n34"],allocated:false},
+  {id:"n34",name:"Evasive",type:"notable",x:130,y:440,radius:14,description:"+15% Dodge, +10% Evasion",stats:{dodge:15,evasion:10},connections:["n33"],allocated:false},
+
+  // Cross-connections utility to defense
+  {id:"n35",name:"Flexible Stance",type:"basic",x:420,y:420,radius:10,description:"Switch between offensive and defensive stances",stats:{stance:true},connections:["start","n36"],allocated:false},
+  {id:"n36",name:"Balanced Mind",type:"basic",x:370,y:480,radius:10,description:"+6% All Attributes",stats:{allAttr:6},connections:["n35","n37"],allocated:false},
+  {id:"n37",name:"Harmony",type:"notable",x:310,y:535,radius:14,description:"+12% Damage while at full life, +10% Life Leech",stats:{dmgAtFullLife:12,lifeLeech:10},connections:["n36"],allocated:false},
+
+  // ===== ASCENDANCY CLUSTER (far right) =====
+  {id:"asc1",name:"Storm Caller",type:"ascendancy",x:1140,y:300,radius:16,description:"Lightning spells have +20% Cast Speed",stats:{castSpd:20},connections:["asc2","asc3"],allocated:false},
+  {id:"asc2",name:"Thundergod's Wrath",type:"ascendancy",x:1210,y:240,radius:14,description:"Your lightning damage cannot be reflected",stats:{noLightningReflect:true},connections:["asc1"],allocated:false},
+  {id:"asc3",name:"Tempest Soul",type:"ascendancy",x:1210,y:360,radius:14,description:"Gain +1% Lightning Damage per Level",stats:{dmgPerLevel:1},connections:["asc1"],allocated:false},
+  {id:"asc4",name:"Monk of the Storm",type:"ascendancy",x:1140,y:180,radius:16,description:"Channeling lightning spells generates mana",stats:{manaOnChannel:true},connections:["asc2"],allocated:false},
+  {id:"asc5",name:"Divine Lightning",type:"ascendancy",x:1280,y:300,radius:18,description:"Lightning skills ignore enemy Lightning Resistance",stats:{ignoreLightningRes:true},connections:["asc2","asc3"],allocated:false},
+
+  // Additional connections for depth
+  {id:"n38",name:"Elemental Touch",type:"basic",x:700,y:260,radius:10,description:"+8% Elemental Damage",stats:{elemDmg:8},connections:["n2","n12"],allocated:false},
+  {id:"n39",name:"Spell Power",type:"basic",x:500,y:260,radius:10,description:"+10% Spell Damage",stats:{spellDmg:10},connections:["n26","n43"],allocated:false},
+  {id:"n40",name:"Deep Wounds",type:"basic",x:650,y:520,radius:10,description:"+8% Physical Damage",stats:{physDmg:8},connections:["n14","n24"],allocated:false},
+  {id:"n41",name:"Mystic Edge",type:"basic",x:580,y:290,radius:10,description:"+8% Weapon Damage",stats:{weaponDmg:8},connections:["n25","n39"],allocated:false},
+  {id:"n42",name:"Endurance Charge",type:"basic",x:580,y:510,radius:10,description:"Grants 1 Endurance Charge on Kill",stats:{endCharge:1},connections:["n14","n40"],allocated:false},
+  {id:"n43",name:"Mana Flow",type:"notable",x:440,y:200,radius:14,description:"+20% Mana Regen, +30 Mana",stats:{manaRegen:20,flatMana:30},connections:["n12","n39"],allocated:false},
+  {id:"n44",name:"Arcane Surge",type:"basic",x:460,y:560,radius:10,description:"+8% Spell Damage when leeching",stats:{spellDmgOnLeech:8},connections:["n36","n42"],allocated:false},
+  {id:"n45",name:"Energized",type:"basic",x:350,y:620,radius:10,description:"+10% Energy Shield",stats:{energyShield:10},connections:["n44"],allocated:false},
+];
+
+// =============================================
+//  STATE
+// =============================================
+let totalPoints = 123;
+let zoom = 1;
+let panX = 0, panY = 0;
+let isDragging = false;
+let dragStartX = 0, dragStartY = 0;
+let panStartX = 0, panStartY = 0;
+let hoveredNode = null;
+let animTime = 0;
+let needsRedraw = true;
+let lastFrameTime = 0;
+
+// Build adjacency map from connections
+const adjMap = {};
+nodes.forEach(n => { adjMap[n.id] = new Set(n.connections); });
+
+// =============================================
+//  CANVAS SIZING
+// =============================================
+function resizeCanvas() {
+  const dpr = window.devicePixelRatio || 1;
+  const rect = canvasWrap.getBoundingClientRect();
+  canvas.width = rect.width * dpr;
+  canvas.height = rect.height * dpr;
+  canvas.style.width = rect.width + 'px';
+  canvas.style.height = rect.height + 'px';
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  needsRedraw = true;
+}
+window.addEventListener('resize', resizeCanvas);
+
+// =============================================
+//  COORDINATE TRANSFORMS
+// =============================================
+function worldToScreen(wx, wy) {
+  const cw = canvas.width / (window.devicePixelRatio || 1);
+  const ch = canvas.height / (window.devicePixelRatio || 1);
+  return {
+    x: (wx - panX) * zoom + cw / 2,
+    y: (wy - panY) * zoom + ch / 2
+  };
+}
+function screenToWorld(sx, sy) {
+  const cw = canvas.width / (window.devicePixelRatio || 1);
+  const ch = canvas.height / (window.devicePixelRatio || 1);
+  return {
+    x: (sx - cw / 2) / zoom + panX,
+    y: (sy - ch / 2) / zoom + panY
+  };
+}
+
+// =============================================
+//  TREE LOGIC
+// =============================================
+function getAllocated() {
+  return new Set(nodes.filter(n => n.allocated).map(n => n.id));
+}
+
+function canAllocate(nodeId) {
+  const allocated = getAllocated();
+  // Must be connected to an allocated neighbor
+  const adj = adjMap[nodeId];
+  if (!adj) return false;
+  for (const neighbor of adj) {
+    if (allocated.has(neighbor)) return true;
+  }
+  return false;
+}
+
+function allocateNode(nodeId) {
+  const node = nodes.find(n => n.id === nodeId);
+  if (!node || node.allocated) return false;
+  if (nodeId === 'asc1' || nodeId.startsWith('asc') || nodeId === 'asc4' || nodeId === 'asc5') {
+    // Ascendancy nodes need the entry point allocated
+    if (nodeId === 'asc1' && canAllocate('asc1')) {
+      // OK
+    } else if (nodeId !== 'asc1' && !canAllocate(nodeId)) {
+      return false;
+    }
+  }
+  if (!canAllocate(nodeId)) return false;
+
+  const allocated = getAllocated();
+  const currentPts = allocated.size - 1; // -1 for start node
+  if (currentPts >= totalPoints) {
+    showToast('⚠️ No points available!');
+    return false;
+  }
+
+  node.allocated = true;
+  needsRedraw = true;
+  updateUI();
+  return true;
+}
+
+function deallocateNode(nodeId) {
+  if (nodeId === 'start') return false;
+  const node = nodes.find(n => n.id === nodeId);
+  if (!node || !node.allocated) return false;
+
+  // BFS from start to find which nodes are still connected
+  node.allocated = false;
+  // Find nodes that lose connection to start
+  const stillConnected = new Set(['start']);
+  const queue = ['start'];
+  while (queue.length > 0) {
+    const current = queue.shift();
+    for (const neighbor of adjMap[current] || []) {
+      const n = nodes.find(nd => nd.id === neighbor);
+      if (n && n.allocated && !stillConnected.has(neighbor)) {
+        stillConnected.add(neighbor);
+        queue.push(neighbor);
+      }
+    }
+  }
+
+  // Deallocate any disconnected nodes
+  nodes.forEach(n => {
+    if (n.allocated && n.id !== 'start' && !stillConnected.has(n.id)) {
+      n.allocated = false;
+    }
+  });
+
+  needsRedraw = true;
+  updateUI();
+  return true;
+}
+
+function resetBuild() {
+  nodes.forEach(n => { n.allocated = (n.id === 'start'); });
+  needsRedraw = true;
+  updateUI();
+  showToast('Tree reset!');
+}
+
+// =============================================
+//  RENDERING
+// =============================================
+function drawNode(node) {
+  const pos = worldToScreen(node.x, node.y);
+  const r = node.radius * zoom;
+  const allocated = node.allocated;
+  const isHovered = hoveredNode && hoveredNode.id === node.id;
+  const candidate = !allocated && canAllocate(node.id);
+  const startX = worldToScreen(nodes.find(n=>n.id==='start').x, nodes.find(n=>n.id==='start').y);
+
+  // Glow effects
+  if (allocated) {
+    let glowColor;
+    if (node.type === 'keystone') glowColor = COLORS.keystoneGlow;
+    else if (node.type === 'ascendancy') glowColor = COLORS.ascendGlow;
+    else if (node.type === 'start') glowColor = COLORS.startGlow;
+    else glowColor = 'rgba(201,168,76,0.3)';
+
+    const grad = ctx.createRadialGradient(pos.x, pos.y, r, pos.x, pos.y, r * 2.5);
+    grad.addColorStop(0, glowColor);
+    grad.addColorStop(1, 'transparent');
+    ctx.fillStyle = grad;
+    ctx.beginPath();
+    ctx.arc(pos.x, pos.y, r * 2.5, 0, Math.PI * 2);
+    ctx.fill();
+  } else if (candidate) {
+    const pulse = 0.15 + 0.1 * Math.sin(animTime * 3);
+    const grad = ctx.createRadialGradient(pos.x, pos.y, r, pos.x, pos.y, r * 2.2);
+    grad.addColorStop(0, `rgba(201,168,76,${pulse})`);
+    grad.addColorStop(1, 'transparent');
+    ctx.fillStyle = grad;
+    ctx.beginPath();
+    ctx.arc(pos.x, pos.y, r * 2.2, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  if (isHovered) {
+    const grad = ctx.createRadialGradient(pos.x, pos.y, r, pos.x, pos.y, r * 2);
+    grad.addColorStop(0, COLORS.hoverGlow);
+    grad.addColorStop(1, 'transparent');
+    ctx.fillStyle = grad;
+    ctx.beginPath();
+    ctx.arc(pos.x, pos.y, r * 2, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  // Node circle
+  ctx.beginPath();
+  ctx.arc(pos.x, pos.y, r, 0, Math.PI * 2);
+
+  if (node.type === 'start') {
+    ctx.fillStyle = allocated ? COLORS.startFill : '#0a0a12';
+    ctx.fill();
+    ctx.strokeStyle = COLORS.startStroke;
+    ctx.lineWidth = allocated ? 3 : 1.5;
+    ctx.stroke();
+    // Inner glow for start
+    if (allocated) {
+      const ig = ctx.createRadialGradient(pos.x, pos.y, 0, pos.x, pos.y, r);
+      ig.addColorStop(0, 'rgba(126,184,255,0.3)');
+      ig.addColorStop(1, 'transparent');
+      ctx.fillStyle = ig;
+      ctx.fill();
+    }
+  } else if (node.type === 'keystone') {
+    ctx.fillStyle = allocated ? 'rgba(255,107,107,0.15)' : COLORS.keystoneFill;
+    ctx.fill();
+    ctx.strokeStyle = allocated ? COLORS.keystoneStroke : '#6a3a3a';
+    ctx.lineWidth = allocated ? 3 : 2;
+    ctx.stroke();
+    if (allocated) {
+      const ig = ctx.createRadialGradient(pos.x, pos.y, 0, pos.x, pos.y, r);
+      ig.addColorStop(0, 'rgba(255,107,107,0.4)');
+      ig.addColorStop(1, 'transparent');
+      ctx.fillStyle = ig;
+      ctx.fill();
+    }
+  } else if (node.type === 'notable') {
+    ctx.fillStyle = allocated ? COLORS.notableFillAlloc : COLORS.notableFill;
+    ctx.fill();
+    ctx.strokeStyle = allocated ? COLORS.notableStroke : '#6a5a3a';
+    ctx.lineWidth = allocated ? 2.5 : 1.5;
+    ctx.stroke();
+  } else if (node.type === 'ascendancy') {
+    ctx.fillStyle = allocated ? 'rgba(192,132,252,0.15)' : COLORS.ascendFill;
+    ctx.fill();
+    ctx.strokeStyle = allocated ? COLORS.ascendStroke : '#6a4a8a';
+    ctx.lineWidth = allocated ? 2.5 : 1.5;
+    ctx.stroke();
+    if (allocated) {
+      const ig = ctx.createRadialGradient(pos.x, pos.y, 0, pos.x, pos.y, r);
+      ig.addColorStop(0, 'rgba(192,132,252,0.35)');
+      ig.addColorStop(1, 'transparent');
+      ctx.fillStyle = ig;
+      ctx.fill();
+    }
+  } else {
+    // basic
+    ctx.fillStyle = allocated ? COLORS.basicFillAlloc : COLORS.basicFill;
+    ctx.fill();
+    ctx.strokeStyle = allocated ? COLORS.basicStrokeAlloc : COLORS.basicStroke;
+    ctx.lineWidth = allocated ? 2 : 1;
+    ctx.stroke();
+  }
+
+  // Checkmark for allocated
+  if (allocated && node.type !== 'start' && r > 6) {
+    ctx.strokeStyle = '#fff';
+    ctx.lineWidth = Math.max(1.5, r * 0.15);
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+    ctx.beginPath();
+    ctx.moveTo(pos.x - r * 0.35, pos.y);
+    ctx.lineTo(pos.x - r * 0.05, pos.y + r * 0.3);
+    ctx.lineTo(pos.x + r * 0.4, pos.y - r * 0.25);
+    ctx.stroke();
+  }
+}
+
+function drawConnections() {
+  const drawnPairs = new Set();
+  nodes.forEach(node => {
+    node.connections.forEach(connId => {
+      const pairKey = [node.id, connId].sort().join('-');
+      if (drawnPairs.has(pairKey)) return;
+      drawnPairs.add(pairKey);
+
+      const other = nodes.find(n => n.id === connId);
+      if (!other) return;
+
+      const p1 = worldToScreen(node.x, node.y);
+      const p2 = worldToScreen(other.x, other.y);
+
+      const bothAlloc = node.allocated && other.allocated;
+      const eitherHover = (hoveredNode && (hoveredNode.id === node.id || hoveredNode.id === connId) &&
+        (node.allocated || other.allocated));
+
+      ctx.beginPath();
+      ctx.moveTo(p1.x, p1.y);
+      ctx.lineTo(p2.x, p2.y);
+
+      if (bothAlloc) {
+        ctx.strokeStyle = COLORS.lineAlloc;
+        ctx.lineWidth = 2.5 * zoom;
+      } else if (eitherHover) {
+        ctx.strokeStyle = COLORS.lineHover;
+        ctx.lineWidth = 2 * zoom;
+      } else {
+        ctx.strokeStyle = COLORS.line;
+        ctx.lineWidth = 1 * zoom;
+      }
+      ctx.stroke();
+    });
+  });
+}
+
+function drawNodeLabel(node) {
+  if (!node.allocated && node.type !== 'start') return;
+  if (zoom < 0.5 && node.type === 'basic') return;
+  const pos = worldToScreen(node.x, node.y);
+  const r = node.radius * zoom;
+  ctx.font = `${Math.max(9, Math.min(11, 11 * zoom))}px 'Segoe UI', system-ui, sans-serif`;
+  ctx.textAlign = 'center';
+  ctx.fillStyle = node.type === 'start' ? COLORS.startStroke : COLORS.text;
+  ctx.globalAlpha = Math.min(1, (zoom - 0.3) / 0.3);
+  ctx.fillText(node.name, pos.x, pos.y + r + 12 * zoom);
+  ctx.globalAlpha = 1;
+}
+
+function drawGrid() {
+  const cw = canvas.width / (window.devicePixelRatio || 1);
+  const ch = canvas.height / (window.devicePixelRatio || 1);
+  const gridSize = 60 * zoom;
+  if (gridSize < 15) return;
+  const tl = screenToWorld(0, 0);
+  const br = screenToWorld(cw, ch);
+  const startX = Math.floor(tl.x / 60) * 60;
+  const startY = Math.floor(tl.y / 60) * 60;
+
+  ctx.strokeStyle = COLORS.grid;
+  ctx.lineWidth = 1;
+  for (let x = startX; x <= br.x; x += 60) {
+    const sx = worldToScreen(x, 0).x;
+    ctx.beginPath(); ctx.moveTo(sx, 0); ctx.lineTo(sx, ch); ctx.stroke();
+  }
+  for (let y = startY; y <= br.y; y += 60) {
+    const sy = worldToScreen(0, y).y;
+    ctx.beginPath(); ctx.moveTo(0, sy); ctx.lineTo(cw, sy); ctx.stroke();
+  }
+}
+
+function render(timestamp) {
+  animTime = timestamp / 1000;
+  const cw = canvas.width / (window.devicePixelRatio || 1);
+  const ch = canvas.height / (window.devicePixelRatio || 1);
+
+  // Clear
+  ctx.fillStyle = COLORS.bg;
+  ctx.fillRect(0, 0, cw, ch);
+
+  // Grid
+  drawGrid();
+
+  // Connections
+  drawConnections();
+
+  // Nodes
+  // Draw non-start first, then start on top
+  const startNode = nodes.find(n => n.id === 'start');
+  nodes.filter(n => n.id !== 'start').forEach(drawNode);
+  if (startNode) drawNode(startNode);
+
+  // Labels
+  nodes.forEach(drawNodeLabel);
+
+  // Ascendancy label
+  if (zoom > 0.4) {
+    const ascLabelPos = worldToScreen(1210, 145);
+    ctx.font = `bold ${Math.max(10, 12 * zoom)}px 'Cinzel', serif`;
+    ctx.textAlign = 'center';
+    ctx.fillStyle = COLORS.ascendStroke;
+    ctx.globalAlpha = 0.7;
+    ctx.fillText('⚡ ASCENDANCY ⚡', ascLabelPos.x, ascLabelPos.y);
+    ctx.globalAlpha = 1;
+  }
+
+  requestAnimationFrame(render);
+}
+
+// =============================================
+//  INTERACTION
+// =============================================
+function getNodeAt(sx, sy) {
+  const world = screenToWorld(sx, sy);
+  let closest = null;
+  let closestDist = Infinity;
+  for (const node of nodes) {
+    const dx = node.x - world.x;
+    const dy = node.y - world.y;
+    const dist = Math.sqrt(dx * dx + dy * dy);
+    const hitRadius = Math.max(node.radius + 5, node.radius * 1.5);
+    if (dist < hitRadius && dist < closestDist) {
+      closest = node;
+      closestDist = dist;
+    }
+  }
+  return closest;
+}
+
+let mouseDown = false;
+let mouseMoved = false;
+
+canvas.addEventListener('mousedown', e => {
+  mouseDown = true;
+  mouseMoved = false;
+  isDragging = false;
+  dragStartX = e.clientX;
+  dragStartY = e.clientY;
+  panStartX = panX;
+  panStartY = panY;
+});
+
+canvas.addEventListener('mousemove', e => {
+  const rect = canvas.getBoundingClientRect();
+  const sx = e.clientX - rect.left;
+  const sy = e.clientY - rect.top;
+
+  if (mouseDown) {
+    const dx = e.clientX - dragStartX;
+    const dy = e.clientY - dragStartY;
+    if (Math.abs(dx) > 3 || Math.abs(dy) > 3) {
+      mouseMoved = true;
+      isDragging = true;
+      canvas.classList.add('dragging');
+    }
+    if (isDragging) {
+      panX = panStartX - dx / zoom;
+      panY = panStartY - dy / zoom;
+      needsRedraw = true;
+    }
+  } else {
+    // Hover
+    const node = getNodeAt(sx, sy);
+    if (node !== hoveredNode) {
+      hoveredNode = node;
+      needsRedraw = true;
+      updateNodeInfo(node);
+    }
+  }
+});
+
+canvas.addEventListener('mouseup', e => {
+  const wasDown = mouseDown;
+  const wasDrag = isDragging;
+  mouseDown = false;
+  isDragging = false;
+  canvas.classList.remove('dragging');
+
+  if (wasDown && !wasDrag && !mouseMoved) {
+    const rect = canvas.getBoundingClientRect();
+    const sx = e.clientX - rect.left;
+    const sy = e.clientY - rect.top;
+    const node = getNodeAt(sx, sy);
+    if (node) {
+      if (node.allocated) {
+        deallocateNode(node.id);
+      } else {
+        allocateNode(node.id);
+      }
+    }
+  }
+});
+
+canvas.addEventListener('mouseleave', () => {
+  mouseDown = false;
+  isDragging = false;
+  canvas.classList.remove('dragging');
+});
+
+// Double click to zoom
+canvas.addEventListener('dblclick', e => {
+  const rect = canvas.getBoundingClientRect();
+  const sx = e.clientX - rect.left;
+  const sy = e.clientY - rect.top;
+  const node = getNodeAt(sx, sy);
+  if (node) {
+    panX = node.x;
+    panY = node.y;
+    zoom = Math.min(zoom * 2, 3);
+  } else {
+    const world = screenToWorld(sx, sy);
+    panX = world.x;
+    panY = world.y;
+    zoom = Math.min(zoom * 2, 3);
+  }
+  needsRedraw = true;
+});
+
+// Zoom with scroll
+canvas.addEventListener('wheel', e => {
+  e.preventDefault();
+  const rect = canvas.getBoundingClientRect();
+  const sx = e.clientX - rect.left;
+  const sy = e.clientY - rect.top;
+  const worldBefore = screenToWorld(sx, sy);
+
+  const factor = e.deltaY > 0 ? 0.9 : 1.1;
+  zoom = Math.max(0.15, Math.min(5, zoom * factor));
+
+  // Adjust pan to zoom toward mouse
+  const screenAfter = worldToScreen(worldBefore.x, worldBefore.y);
+  panX -= (screenAfter.x - sx) / zoom;
+  panY -= (screenAfter.y - sy) / zoom;
+
+  needsRedraw = true;
+}, { passive: false });
+
+// Touch support
+let lastTouchDist = 0;
+let lastTouchMid = {x:0,y:0};
+canvas.addEventListener('touchstart', e => {
+  if (e.touches.length === 1) {
+    mouseDown = true;
+    mouseMoved = false;
+    isDragging = false;
+    dragStartX = e.touches[0].clientX;
+    dragStartY = e.touches[0].clientY;
+    panStartX = panX;
+    panStartY = panY;
+  } else if (e.touches.length === 2) {
+    const dx = e.touches[0].clientX - e.touches[1].clientX;
+    const dy = e.touches[0].clientY - e.touches[1].clientY;
+    lastTouchDist = Math.sqrt(dx*dx + dy*dy);
+    lastTouchMid = {
+      x: (e.touches[0].clientX + e.touches[1].clientX) / 2,
+      y: (e.touches[0].clientY + e.touches[1].clientY) / 2
+    };
+  }
+}, {passive:false});
+
+canvas.addEventListener('touchmove', e => {
+  e.preventDefault();
+  if (e.touches.length === 1 && mouseDown) {
+    const dx = e.touches[0].clientX - dragStartX;
+    const dy = e.touches[0].clientY - dragStartY;
+    if (Math.abs(dx) > 3 || Math.abs(dy) > 3) {
+      mouseMoved = true;
+      isDragging = true;
+    }
+    if (isDragging) {
+      panX = panStartX - dx / zoom;
+      panY = panStartY - dy / zoom;
+      needsRedraw = true;
+    }
+  } else if (e.touches.length === 2) {
+    const dx = e.touches[0].clientX - e.touches[1].clientX;
+    const dy = e.touches[0].clientY - e.touches[1].clientY;
+    const dist = Math.sqrt(dx*dx + dy*dy);
+    if (lastTouchDist > 0) {
+      zoom = Math.max(0.15, Math.min(5, zoom * (dist / lastTouchDist)));
+      needsRedraw = true;
+    }
+    lastTouchDist = dist;
+  }
+}, {passive:false});
+
+canvas.addEventListener('touchend', e => {
+  if (e.touches.length === 0) {
+    if (mouseDown && !isDragging && !mouseMoved) {
+      const rect = canvas.getBoundingClientRect();
+      const sx = dragStartX - rect.left;
+      const sy = dragStartY - rect.top;
+      const node = getNodeAt(sx, sy);
+      if (node) {
+        if (node.allocated) deallocateNode(node.id);
+        else allocateNode(node.id);
+      }
+    }
+    mouseDown = false;
+    isDragging = false;
+    lastTouchDist = 0;
+  }
+});
+
+// =============================================
+//  UI UPDATES
+// =============================================
+function updateUI() {
+  const allocated = getAllocated();
+  const ptsUsed = allocated.size - 1; // -1 for start
+  const ptsAvail = totalPoints;
+
+  document.getElementById('pts-count').textContent = ptsUsed;
+  document.getElementById('pts-count').className = 'count' + (ptsUsed >= ptsAvail ? ' warn' : '');
+
+  const pct = Math.min(100, (ptsUsed / ptsAvail) * 100);
+  document.getElementById('progress-bar').style.width = pct + '%';
+}
+
+function updateNodeInfo(node) {
+  const detail = document.getElementById('node-detail');
+  if (!node) {
+    detail.innerHTML = '<div class="nd-empty">Hover over a node to see details</div>';
+    return;
+  }
+
+  const typeLabel = {start:'Start',basic:'Basic',notable:'Notable',keystone:'Keystone',ascendancy:'Ascendancy'}[node.type] || node.type;
+  const typeColor = {
+    start: COLORS.startStroke,
+    basic: '#aaa',
+    notable: COLORS.notableStroke,
+    keystone: COLORS.keystoneStroke,
+    ascendancy: COLORS.ascendStroke
+  }[node.type] || '#aaa';
+
+  let statsHTML = '';
+  if (node.stats && Object.keys(node.stats).length > 0) {
+    statsHTML = Object.entries(node.stats).map(([k, v]) => {
+      const label = k.replace(/([A-Z])/g, ' $1').replace(/^./, s => s.toUpperCase());
+      return `<span style="color:var(--blue)">${label}: ${v}${typeof v === 'number' && k !== 'flatLife' && k !== 'flatMana' ? '%' : ''}</span>`;
+    }).join(' &nbsp;|&nbsp; ');
+  }
+
+  detail.innerHTML = `
+    <div class="nd-name">${node.name} ${node.allocated ? '✅' : ''}</div>
+    <div class="nd-type" style="color:${typeColor}">${typeLabel}</div>
+    <div class="nd-desc">${node.description}</div>
+    ${statsHTML ? '<div style="margin-top:4px;font-size:12px">' + statsHTML + '</div>' : ''}
+  `;
+}
+
+// =============================================
+//  ZOOM CONTROLS
+// =============================================
+function zoomBy(factor) {
+  zoom = Math.max(0.15, Math.min(5, zoom * factor));
+  needsRedraw = true;
+}
+
+function fitTree() {
+  let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+  nodes.forEach(n => {
+    if (n.x < minX) minX = n.x;
+    if (n.y < minY) minY = n.y;
+    if (n.x > maxX) maxX = n.x;
+    if (n.y > maxY) maxY = n.y;
+  });
+
+  const cw = canvas.width / (window.devicePixelRatio || 1);
+  const ch = canvas.height / (window.devicePixelRatio || 1);
+  const treeW = maxX - minX + 100;
+  const treeH = maxY - minY + 100;
+  const scaleX = cw / treeW;
+  const scaleY = ch / treeH;
+  zoom = Math.min(scaleX, scaleY) * 0.85;
+  zoom = Math.max(0.15, Math.min(5, zoom));
+  panX = (minX + maxX) / 2;
+  panY = (minY + maxY) / 2;
+  needsRedraw = true;
+}
+
+// =============================================
+//  BUILD MANAGEMENT
+// =============================================
+function exportBuild() {
+  const allocated = nodes.filter(n => n.allocated).map(n => n.id);
+  const text = 'Lightning Monk Build\n' +
+    `Points Used: ${allocated.length - 1}\n` +
+    `Nodes: ${allocated.join(', ')}`;
+  navigator.clipboard.writeText(text).then(() => {
+    showToast('Build copied to clipboard!');
+  }).catch(() => {
+    // Fallback
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    showToast('Build copied to clipboard!');
+  });
+}
+
+function openImport() {
+  document.getElementById('import-overlay').classList.add('open');
+  document.getElementById('import-text').value = '';
+  document.getElementById('import-text').focus();
+}
+
+function closeImport() {
+  document.getElementById('import-overlay').classList.remove('open');
+}
+
+function doImport() {
+  const raw = document.getElementById('import-text').value.trim();
+  if (!raw) return;
+  const ids = raw.split(',').map(s => s.trim()).filter(Boolean);
+
+  // Reset first
+  nodes.forEach(n => { n.allocated = (n.id === 'start'); });
+
+  // Allocate in order
+  let successCount = 0;
+  for (const id of ids) {
+    if (allocateNode(id)) successCount++;
+  }
+
+  closeImport();
+  showToast(`Imported ${successCount} nodes!`);
+}
+
+function saveToStorage() {
+  const data = nodes.map(n => n.allocated);
+  localStorage.setItem('poe2_passive_build', JSON.stringify(data));
+  localStorage.setItem('poe2_passive_pts', totalPoints);
+  showToast('Build saved to localStorage!');
+}
+
+function loadFromStorage() {
+  try {
+    const data = localStorage.getItem('poe2_passive_build');
+    const pts = localStorage.getItem('poe2_passive_pts');
+    if (data) {
+      const allocs = JSON.parse(data);
+      nodes.forEach((n, i) => { n.allocated = allocs[i] || false; });
+    }
+    if (pts) {
+      totalPoints = parseInt(pts) || 123;
+      document.getElementById('pts-input').value = totalPoints;
+    }
+  } catch (e) {}
+}
+
+// =============================================
+//  TOAST
+// =============================================
+function showToast(msg) {
+  const toast = document.getElementById('toast');
+  toast.textContent = msg;
+  toast.classList.add('show');
+  clearTimeout(toast._timeout);
+  toast._timeout = setTimeout(() => toast.classList.remove('show'), 2000);
+}
+
+// =============================================
+//  POINTS INPUT
+// =============================================
+document.getElementById('pts-input').addEventListener('change', e => {
+  totalPoints = Math.max(0, parseInt(e.target.value) || 0);
+  updateUI();
+});
+
+// =============================================
+//  KEYBOARD SHORTCUTS
+// =============================================
+document.addEventListener('keydown', e => {
+  if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+  if (e.key === 'r' || e.key === 'R') resetBuild();
+  if (e.key === 'f' || e.key === 'F') fitTree();
+  if (e.key === 'Escape') closeImport();
+});
+
+// =============================================
+//  INIT
+// =============================================
+resizeCanvas();
+loadFromStorage();
+updateUI();
+fitTree();
+requestAnimationFrame(render);
+</script>
+</body>
+</html>
