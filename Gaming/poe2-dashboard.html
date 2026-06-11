@@ -1044,6 +1044,253 @@
             height: 24px;
             background: #2a2a3a;
         }
+
+        /* ── Enhanced Import/Export Modal ── */
+        #panel-passive .pp-import-modal {
+            width: 560px;
+            max-width: 94vw;
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+        #panel-passive .pp-import-modal h2 {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            font-size: 16px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        #panel-passive .pp-modal-tabs {
+            display: flex;
+            gap: 2px;
+            margin-bottom: 14px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 6px;
+            padding: 3px;
+        }
+        #panel-passive .pp-modal-tab {
+            flex: 1;
+            padding: 7px 10px;
+            border: 1px solid transparent;
+            border-radius: 4px;
+            background: transparent;
+            color: var(--text-dim);
+            font-family: 'Cinzel', serif;
+            font-size: 11px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.15s;
+            white-space: nowrap;
+        }
+        #panel-passive .pp-modal-tab:hover {
+            color: var(--gold);
+        }
+        #panel-passive .pp-modal-tab.active {
+            background: rgba(201,168,76,0.12);
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+        #panel-passive .pp-tab-content {
+            display: none;
+        }
+        #panel-passive .pp-tab-content.active {
+            display: block;
+        }
+        #panel-passive .pp-tab-content textarea {
+            width: 100%;
+            height: 90px;
+            background: #1a1a2a;
+            border: 1px solid #2a2a3a;
+            color: var(--text);
+            padding: 10px;
+            border-radius: 4px;
+            resize: vertical;
+            font-size: 13px;
+            font-family: monospace;
+        }
+        #panel-passive .pp-tab-content textarea:focus {
+            border-color: var(--gold-dim);
+            outline: none;
+        }
+        #panel-passive .pp-tab-hint {
+            font-size: 11px;
+            color: var(--text-dim);
+            margin-bottom: 8px;
+            line-height: 1.5;
+        }
+        #panel-passive .pp-match-status {
+            margin-top: 8px;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            line-height: 1.5;
+            display: none;
+        }
+        #panel-passive .pp-match-status.show { display: block; }
+        #panel-passive .pp-match-status.success {
+            background: rgba(68,255,136,0.08);
+            border: 1px solid rgba(68,255,136,0.25);
+            color: #44ff88;
+        }
+        #panel-passive .pp-match-status.warn {
+            background: rgba(255,165,0,0.08);
+            border: 1px solid rgba(255,165,0,0.25);
+            color: #ffa500;
+        }
+        #panel-passive .pp-match-status.error {
+            background: rgba(255,68,68,0.08);
+            border: 1px solid rgba(255,68,68,0.25);
+            color: #ff4444;
+        }
+        #panel-passive .pp-file-drop {
+            border: 2px dashed #2a2a3a;
+            border-radius: 6px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-bottom: 10px;
+            background: rgba(0,0,0,0.2);
+        }
+        #panel-passive .pp-file-drop:hover {
+            border-color: var(--gold-dim);
+            background: rgba(201,168,76,0.04);
+        }
+        #panel-passive .pp-file-drop.dragover {
+            border-color: var(--gold);
+            background: rgba(201,168,76,0.08);
+        }
+        #panel-passive .pp-file-drop .pp-file-icon {
+            font-size: 24px;
+            margin-bottom: 6px;
+        }
+        #panel-passive .pp-file-drop .pp-file-label {
+            font-size: 12px;
+            color: var(--text-dim);
+        }
+        #panel-passive .pp-file-drop .pp-file-or {
+            font-size: 11px;
+            color: #555;
+            margin: 8px 0;
+        }
+        #panel-passive .pp-site-guide {
+            margin-bottom: 12px;
+        }
+        #panel-passive .pp-site-card {
+            background: rgba(0,0,0,0.2);
+            border: 1px solid #2a2a3a;
+            border-radius: 6px;
+            padding: 12px;
+            margin-bottom: 8px;
+        }
+        #panel-passive .pp-site-card h4 {
+            font-family: 'Cinzel', serif;
+            font-size: 12px;
+            color: var(--lightning);
+            margin-bottom: 5px;
+        }
+        #panel-passive .pp-site-card a {
+            color: var(--gold);
+            text-decoration: none;
+            font-size: 11px;
+        }
+        #panel-passive .pp-site-card a:hover {
+            text-decoration: underline;
+        }
+        #panel-passive .pp-site-card .pp-site-steps {
+            font-size: 11px;
+            color: var(--text-dim);
+            line-height: 1.6;
+            margin-top: 4px;
+        }
+
+        /* Export modal specifics */
+        #panel-passive .pp-export-modal {
+            width: 560px;
+            max-width: 94vw;
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+        #panel-passive .pp-export-modal h2 {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            font-size: 16px;
+            margin-bottom: 12px;
+        }
+        #panel-passive .pp-export-textarea {
+            width: 100%;
+            height: 100px;
+            background: #1a1a2a;
+            border: 1px solid #2a2a3a;
+            color: var(--text);
+            padding: 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-family: monospace;
+            resize: vertical;
+            margin-top: 8px;
+        }
+        #panel-passive .pp-export-json {
+            width: 100%;
+            height: 160px;
+            background: #1a1a2a;
+            border: 1px solid #2a2a3a;
+            color: var(--lightning);
+            padding: 10px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-family: monospace;
+            resize: vertical;
+            margin-top: 8px;
+        }
+        #panel-passive .pp-export-link {
+            width: 100%;
+            background: #1a1a2a;
+            border: 1px solid #2a2a3a;
+            color: var(--gold);
+            padding: 8px 10px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-family: monospace;
+            margin-top: 8px;
+            word-break: break-all;
+        }
+        #panel-passive .pp-copy-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 6px 14px;
+            background: rgba(201,168,76,0.1);
+            border: 1px solid var(--gold-dim);
+            color: var(--gold);
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            margin-top: 8px;
+            transition: all 0.15s;
+        }
+        #panel-passive .pp-copy-btn:hover {
+            background: rgba(201,168,76,0.2);
+            border-color: var(--gold);
+        }
+        #panel-passive .pp-download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 6px 14px;
+            background: rgba(126,184,255,0.1);
+            border: 1px solid rgba(126,184,255,0.3);
+            color: var(--lightning);
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            margin-top: 8px;
+            transition: all 0.15s;
+        }
+        #panel-passive .pp-download-btn:hover {
+            background: rgba(126,184,255,0.2);
+        }
     </style>
 </head>
 <body>
@@ -1081,7 +1328,7 @@
                     <div class="pp-progress-wrap"><div class="pp-progress-bar" id="pp-progress-bar" style="width:0%"></div></div>
                     <div class="pp-spacer"></div>
                     <button class="pp-btn" onclick="ppOpenImport()">📥 Import</button>
-                    <button class="pp-btn gold" onclick="ppExportBuild()">📤 Export</button>
+                    <button class="pp-btn gold" onclick="ppOpenExport()">📤 Export</button>
                     <button class="pp-btn" onclick="ppResetBuild()">🔄 Reset</button>
                     <button class="pp-btn" onclick="ppFitTree()">⊞ Fit View</button>
                 </div>
@@ -1103,15 +1350,132 @@
                 </div>
                 <!-- Toast -->
                 <div class="pp-toast" id="pp-toast"></div>
-                <!-- Import Modal -->
+                <!-- Import Modal (Enhanced) -->
                 <div class="pp-import-overlay" id="pp-import-overlay">
                     <div class="pp-import-modal">
-                        <h2>Import Build</h2>
-                        <p style="font-size:12px;color:#888;margin-bottom:8px">Paste a comma-separated list of node IDs to allocate:</p>
-                        <textarea id="pp-import-text" placeholder="n1, n2, n5, ..."></textarea>
-                        <div class="pp-modal-btns">
-                            <button class="pp-btn" onclick="ppCloseImport()">Cancel</button>
-                            <button class="pp-btn gold" onclick="ppDoImport()">Import</button>
+                        <h2>📥 Import Build</h2>
+                        <div class="pp-modal-tabs" id="pp-import-tabs">
+                            <button class="pp-modal-tab active" data-tab="names" onclick="ppSwitchImportTab('names')">Names</button>
+                            <button class="pp-modal-tab" data-tab="build" onclick="ppSwitchImportTab('build')">&lt;.build&gt; File</button>
+                            <button class="pp-modal-tab" data-tab="guide" onclick="ppSwitchImportTab('guide')">From Website</button>
+                        </div>
+
+                        <!-- Tab 1: Node Names -->
+                        <div class="pp-tab-content active" id="pp-tab-names">
+                            <div class="pp-tab-hint">Paste node names separated by commas. Names are matched fuzzy — case-insensitive, partial match.</div>
+                            <textarea id="pp-import-text" placeholder="Lightning Damage, Storm Mastery, Cold Penetration, Herald of Ice"></textarea>
+                            <div class="pp-match-status" id="pp-names-match-status"></div>
+                            <div class="pp-modal-btns">
+                                <button class="pp-btn" onclick="ppCloseImport()">Cancel</button>
+                                <button class="pp-btn gold" onclick="ppPreviewNames()">Preview Match</button>
+                                <button class="pp-btn gold" onclick="ppDoImportNames()">Import</button>
+                            </div>
+                        </div>
+
+                        <!-- Tab 2: .build File -->
+                        <div class="pp-tab-content" id="pp-tab-build">
+                            <div class="pp-file-drop" id="pp-file-drop">
+                                <div class="pp-file-icon">📁</div>
+                                <div class="pp-file-label">Drop a .build file here, or click to browse</div>
+                                <div class="pp-file-or">— or paste JSON below —</div>
+                                <input type="file" id="pp-file-input" accept=".json,.build,.txt" style="display:none" onchange="ppHandleBuildFile(event)">
+                            </div>
+                            <textarea id="pp-import-json" placeholder='Paste .build JSON here...\n\n{\n  "name": "My Build",\n  "passiveTree": {\n    "allocated": ["Node1", "Node2"]\n  }\n}'></textarea>
+                            <div class="pp-match-status" id="pp-build-match-status"></div>
+                            <div class="pp-modal-btns">
+                                <button class="pp-btn" onclick="ppCloseImport()">Cancel</button>
+                                <button class="pp-btn gold" onclick="ppPreviewBuild()">Preview Match</button>
+                                <button class="pp-btn gold" onclick="ppDoImportBuild()">Import</button>
+                            </div>
+                        </div>
+
+                        <!-- Tab 3: From Website -->
+                        <div class="pp-tab-content" id="pp-tab-guide">
+                            <div class="pp-site-guide">
+                                <div class="pp-site-card">
+                                    <h4>📋 Maxroll.gg</h4>
+                                    <div class="pp-site-steps">
+                                        Open the build guide → click Passives tab → click Export → copy the node list → paste in the <strong style="color:var(--gold)">Names</strong> tab
+                                    </div>
+                                    <a href="https://maxroll.gg/poe2/planner" target="_blank">→ Open Maxroll POE2 Planner</a>
+                                </div>
+                                <div class="pp-site-card">
+                                    <h4>📋 poeplanner.com</h4>
+                                    <div class="pp-site-steps">
+                                        Open your build → click Export → copy the URL or text → paste in <strong style="color:var(--gold)">Names</strong> or <strong style="color:var(--gold)">&lt;.build&gt; File</strong> tab
+                                    </div>
+                                    <a href="https://poeplanner.com" target="_blank">→ Open POE Planner</a>
+                                </div>
+                                <div class="pp-site-card">
+                                    <h4>📋 poe.ninja</h4>
+                                    <div class="pp-site-steps">
+                                        Open the build → click Passive Tree → screenshot or note the node names → paste in the <strong style="color:var(--gold)">Names</strong> tab
+                                    </div>
+                                    <a href="https://poe.ninja/poe2/builds" target="_blank">→ Open poe.ninja POE2 Builds</a>
+                                </div>
+                                <div class="pp-site-card">
+                                    <h4>📋 mobalytics.gg</h4>
+                                    <div class="pp-site-steps">
+                                        Open the build → click Passive Tree → Export → paste in the <strong style="color:var(--gold)">&lt;.build&gt; File</strong> tab
+                                    </div>
+                                    <a href="https://mobalytics.gg/poe2/builds" target="_blank">→ Open Mobalytics POE2 Builds</a>
+                                </div>
+                                <div class="pp-site-card">
+                                    <h4>📋 Any .build File</h4>
+                                    <div class="pp-site-steps">
+                                        Export a .build file from any POE2 build planner (GGG format) → upload or paste in the <strong style="color:var(--gold)">&lt;.build&gt; File</strong> tab. Nodes that match by name will be allocated; others are listed as unmatched.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pp-modal-btns">
+                                <button class="pp-btn" onclick="ppCloseImport()">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Export Modal -->
+                <div class="pp-import-overlay" id="pp-export-overlay">
+                    <div class="pp-export-modal">
+                        <h2>📤 Export Build</h2>
+                        <div class="pp-modal-tabs" id="pp-export-tabs">
+                            <button class="pp-modal-tab active" data-tab="enames" onclick="ppSwitchExportTab('enames')">Names</button>
+                            <button class="pp-modal-tab" data-tab="summary" onclick="ppSwitchExportTab('summary')">Summary</button>
+                            <button class="pp-modal-tab" data-tab="ebuild" onclick="ppSwitchExportTab('ebuild')">&lt;.build&gt; JSON</button>
+                            <button class="pp-modal-tab" data-tab="link" onclick="ppSwitchExportTab('link')">Share Link</button>
+                        </div>
+
+                        <!-- Export Tab 1: Node Names -->
+                        <div class="pp-tab-content active" id="pp-tab-enames">
+                            <div class="pp-tab-hint">Comma-separated node names. Copy and paste anywhere.</div>
+                            <textarea class="pp-export-textarea" id="pp-export-names" readonly></textarea>
+                            <button class="pp-copy-btn" onclick="ppCopyExport('pp-export-names')">📋 Copy to Clipboard</button>
+                        </div>
+
+                        <!-- Export Tab 2: Build Summary -->
+                        <div class="pp-tab-content" id="pp-tab-summary">
+                            <div class="pp-tab-hint">Formatted build summary for sharing.</div>
+                            <textarea class="pp-export-textarea" id="pp-export-summary" readonly style="height:220px"></textarea>
+                            <button class="pp-copy-btn" onclick="ppCopyExport('pp-export-summary')">📋 Copy to Clipboard</button>
+                        </div>
+
+                        <!-- Export Tab 3: .build JSON -->
+                        <div class="pp-tab-content" id="pp-tab-ebuild">
+                            <div class="pp-tab-hint">Official GGG .build JSON format. Compatible with POE2 build planners.</div>
+                            <textarea class="pp-export-json" id="pp-export-json" readonly></textarea>
+                            <button class="pp-copy-btn" onclick="ppCopyExport('pp-export-json')">📋 Copy JSON</button>
+                            <button class="pp-download-btn" onclick="ppDownloadBuild()">💾 Download .build File</button>
+                        </div>
+
+                        <!-- Export Tab 4: Shareable Link -->
+                        <div class="pp-tab-content" id="pp-tab-link">
+                            <div class="pp-tab-hint">Shareable URL — anyone who opens this link will see your build.</div>
+                            <div class="pp-export-link" id="pp-export-link"></div>
+                            <button class="pp-copy-btn" onclick="ppCopyLink()">📋 Copy Link</button>
+                        </div>
+
+                        <div class="pp-modal-btns" style="margin-top:12px">
+                            <button class="pp-btn" onclick="ppCloseExport()">Close</button>
                         </div>
                     </div>
                 </div>
@@ -2321,47 +2685,411 @@
                 ppNeedsRedraw = true;
             };
 
-            // Build management
-            window.ppExportBuild = function() {
-                const allocated = ppNodes.filter(n => n.allocated).map(n => n.id);
-                const text = 'Lightning Monk Build\n' +
-                    `Points Used: ${allocated.length - 1}\n` +
-                    `Nodes: ${allocated.join(', ')}`;
-                navigator.clipboard.writeText(text).then(() => {
-                    ppShowToast('Build copied to clipboard!');
+            // ═══════════════════════════════════════════════════════
+            //  FUZZY NODE NAME MATCHING
+            // ═══════════════════════════════════════════════════════
+            function ppMatchNodeNames(inputNames, availableNodes) {
+                const matched = [];
+                const unmatched = [];
+                const usedIds = new Set();
+                inputNames.forEach(input => {
+                    const clean = input.trim().toLowerCase();
+                    if (!clean) return;
+                    const found = availableNodes.find(n =>
+                        !usedIds.has(n.id) && (
+                            n.name.toLowerCase() === clean ||
+                            n.name.toLowerCase().includes(clean) ||
+                            clean.includes(n.name.toLowerCase())
+                        )
+                    );
+                    if (found) {
+                        matched.push(found);
+                        usedIds.add(found.id);
+                    } else {
+                        unmatched.push(input.trim());
+                    }
+                });
+                return { matched, unmatched };
+            }
+
+            // ═══════════════════════════════════════════════════════
+            //  TAB SWITCHING (Import & Export modals)
+            // ═══════════════════════════════════════════════════════
+            window.ppSwitchImportTab = function(tab) {
+                document.querySelectorAll('#pp-import-tabs .pp-modal-tab').forEach(t => t.classList.remove('active'));
+                document.querySelector('#pp-import-tabs .pp-modal-tab[data-tab="' + tab + '"]').classList.add('active');
+                document.querySelectorAll('#pp-import-overlay .pp-tab-content').forEach(c => c.classList.remove('active'));
+                document.getElementById('pp-tab-' + tab).classList.add('active');
+            };
+
+            window.ppSwitchExportTab = function(tab) {
+                document.querySelectorAll('#pp-export-tabs .pp-modal-tab').forEach(t => t.classList.remove('active'));
+                document.querySelector('#pp-export-tabs .pp-modal-tab[data-tab="' + tab + '"]').classList.add('active');
+                document.querySelectorAll('#pp-export-overlay .pp-tab-content').forEach(c => c.classList.remove('active'));
+                document.getElementById('pp-tab-' + tab).classList.add('active');
+            };
+
+            // ═══════════════════════════════════════════════════════
+            //  IMPORT: Node Names
+            // ═══════════════════════════════════════════════════════
+            function ppGetInputNames() {
+                const raw = document.getElementById('pp-import-text').value.trim();
+                if (!raw) return [];
+                return raw.split(/[,;\n]+/).map(s => s.trim()).filter(Boolean);
+            }
+
+            function ppShowMatchStatus(elementId, result, isBuild) {
+                const el = document.getElementById(elementId);
+                if (!result || (result.matched.length === 0 && result.unmatched.length === 0)) {
+                    el.className = 'pp-match-status';
+                    el.innerHTML = '';
+                    return;
+                }
+                let html = '';
+                if (result.matched.length > 0) {
+                    html += `<div>✅ <strong>${result.matched.length}</strong> node(s) matched: ${result.matched.slice(0, 8).map(n => '<em>' + n.name + '</em>').join(', ')}${result.matched.length > 8 ? '…' : ''}</div>`;
+                }
+                if (result.unmatched.length > 0) {
+                    const maxShow = 6;
+                    const shown = result.unmatched.slice(0, maxShow);
+                    html += `<div style="margin-top:4px">⚠️ <strong>${result.unmatched.length}</strong> not found: ${shown.map(s => '<em>' + s + '</em>').join(', ')}${result.unmatched.length > maxShow ? '…' : ''}</div>`;
+                    if (isBuild) {
+                        html += `<div style="margin-top:4px;font-size:11px;opacity:0.7">Our planner has ${ppNodes.length} nodes. The .build file may contain nodes from the full POE2 tree not present in our simplified tree.</div>`;
+                    }
+                }
+                el.className = 'pp-match-status show ' + (result.unmatched.length === 0 ? 'success' : 'warn');
+                el.innerHTML = html;
+            }
+
+            window.ppPreviewNames = function() {
+                const names = ppGetInputNames();
+                if (names.length === 0) {
+                    ppShowMatchStatus('pp-names-match-status', { matched: [], unmatched: [] });
+                    return;
+                }
+                const result = ppMatchNodeNames(names, ppNodes);
+                ppShowMatchStatus('pp-names-match-status', result, false);
+            };
+
+            window.ppDoImportNames = function() {
+                const names = ppGetInputNames();
+                if (names.length === 0) { ppShowToast('⚠️ Please enter node names'); return; }
+                const result = ppMatchNodeNames(names, ppNodes);
+                let imported = 0;
+                for (const node of result.matched) {
+                    if (!node.allocated && ppCanAllocate(node.id)) {
+                        if (ppAllocateNode(node.id)) imported++;
+                    }
+                }
+                ppNeedsRedraw = true;
+                ppCloseImport();
+                let msg = `✅ Imported ${imported} node(s)`;
+                if (result.unmatched.length > 0) msg += ` (${result.unmatched.length} not found)`;
+                ppShowToast(msg);
+            };
+
+            // ═══════════════════════════════════════════════════════
+            //  IMPORT: .build File
+            // ═══════════════════════════════════════════════════════
+            function ppExtractNodeNamesFromBuild(json) {
+                const names = [];
+                // Try various .build format structures
+                if (json.passiveTree) {
+                    if (Array.isArray(json.passiveTree.allocated)) {
+                        json.passiveTree.allocated.forEach(item => {
+                            if (typeof item === 'string') names.push(item);
+                            else if (item && item.name) names.push(item.name);
+                        });
+                    }
+                    if (Array.isArray(json.passiveTree.nodes)) {
+                        json.passiveTree.nodes.forEach(item => {
+                            if (typeof item === 'string') names.push(item);
+                            else if (item && item.name) names.push(item.name);
+                        });
+                    }
+                }
+                if (Array.isArray(json.passives)) {
+                    json.passives.forEach(item => {
+                        if (typeof item === 'string') names.push(item);
+                        else if (item && item.name) names.push(item.name);
+                    });
+                }
+                if (Array.isArray(json.passiveNodes)) {
+                    json.passiveNodes.forEach(item => {
+                        if (typeof item === 'string') names.push(item);
+                        else if (item && item.name) names.push(item.name);
+                    });
+                }
+                // Try to extract from a flat list of node objects
+                if (Array.isArray(json.nodes)) {
+                    json.nodes.forEach(item => {
+                        if (item && item.name && item.allocated) names.push(item.name);
+                    });
+                }
+                return names;
+            }
+
+            function ppGetBuildJson() {
+                const raw = document.getElementById('pp-import-json').value.trim();
+                if (!raw) return null;
+                try {
+                    return JSON.parse(raw);
+                } catch (e) {
+                    ppShowMatchStatus('pp-build-match-status', { matched: [], unmatched: ['⚠️ Invalid JSON'] }, true);
+                    document.getElementById('pp-build-match-status').className = 'pp-match-status show error';
+                    return null;
+                }
+            }
+
+            window.ppPreviewBuild = function() {
+                const json = ppGetBuildJson();
+                if (!json) return;
+                const names = ppExtractNodeNamesFromBuild(json);
+                if (names.length === 0) {
+                    ppShowMatchStatus('pp-build-match-status', { matched: [], unmatched: [] }, true);
+                    return;
+                }
+                const result = ppMatchNodeNames(names, ppNodes);
+                ppShowMatchStatus('pp-build-match-status', result, true);
+            };
+
+            window.ppDoImportBuild = function() {
+                const json = ppGetBuildJson();
+                if (!json) return;
+                const names = ppExtractNodeNamesFromBuild(json);
+                if (names.length === 0) { ppShowToast('⚠️ No node names found in .build file'); return; }
+                const result = ppMatchNodeNames(names, ppNodes);
+                let imported = 0;
+                for (const node of result.matched) {
+                    if (!node.allocated && ppCanAllocate(node.id)) {
+                        if (ppAllocateNode(node.id)) imported++;
+                    }
+                }
+                ppNeedsRedraw = true;
+                ppCloseImport();
+                let msg = `✅ Imported ${imported} node(s) from .build file`;
+                if (result.unmatched.length > 0) msg += ` (${result.unmatched.length} not in our tree)`;
+                ppShowToast(msg);
+            };
+
+            // File drop / upload
+            window.ppHandleBuildFile = function(event) {
+                const file = event.target.files[0];
+                if (!file) return;
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('pp-import-json').value = e.target.result;
+                    ppShowToast('📁 File loaded! Click Preview or Import.');
+                };
+                reader.readAsText(file);
+                event.target.value = '';
+            };
+
+            // ═══════════════════════════════════════════════════════
+            //  EXPORT
+            // ═══════════════════════════════════════════════════════
+            window.ppOpenExport = function() {
+                document.getElementById('pp-export-overlay').classList.add('open');
+                ppPopulateExport();
+            };
+
+            window.ppCloseExport = function() {
+                document.getElementById('pp-export-overlay').classList.remove('open');
+            };
+
+            function ppPopulateExport() {
+                const allocNodes = ppNodes.filter(n => n.allocated);
+                const names = allocNodes.map(n => n.name);
+                const ids = allocNodes.map(n => n.id);
+
+                // Tab 1: Node Names
+                document.getElementById('pp-export-names').value = names.join(', ');
+
+                // Tab 2: Build Summary
+                const offense = allocNodes.filter(n => ['n1','n2','n3','n4','n5','n6','n7','n8','n9','n10','n11','n12','n25','n26','n27','n28','n29','n30','n31','n32','n33','n34','n38','n39','n41','n43'].includes(n.id) || n.id.startsWith('asc'));
+                const defense = allocNodes.filter(n => ['n13','n14','n15','n16','n17','n18','n19','n20','n21','n22','n23','n24','n40','n44','n45'].includes(n.id));
+                const utility = allocNodes.filter(n => ['n35','n36','n37'].includes(n.id));
+                const ascendancy = allocNodes.filter(n => n.type === 'ascendancy');
+
+                let totalStats = {};
+                allocNodes.forEach(n => {
+                    if (n.stats) {
+                        Object.entries(n.stats).forEach(([k, v]) => {
+                            if (typeof v === 'number') {
+                                totalStats[k] = (totalStats[k] || 0) + v;
+                            }
+                        });
+                    }
+                });
+
+                let summary = `⚡ Lightning Monk — Passive Build Summary\n`;
+                summary += `${'═'.repeat(40)}\n`;
+                summary += `Class: Lightning Monk\n`;
+                summary += `Points Allocated: ${allocNodes.length - 1}\n\n`;
+
+                if (offense.length > 0) {
+                    summary += `🗡️ Offense (${offense.length} nodes):\n`;
+                    offense.forEach(n => summary += `  • ${n.name}\n`);
+                    summary += `\n`;
+                }
+                if (defense.length > 0) {
+                    summary += `🛡️ Defense (${defense.length} nodes):\n`;
+                    defense.forEach(n => summary += `  • ${n.name}\n`);
+                    summary += `\n`;
+                }
+                if (utility.length > 0) {
+                    summary += `⚡ Utility (${utility.length} nodes):\n`;
+                    utility.forEach(n => summary += `  • ${n.name}\n`);
+                    summary += `\n`;
+                }
+                if (ascendancy.length > 0) {
+                    summary += `🌟 Ascendancy (${ascendancy.length} nodes):\n`;
+                    ascendancy.forEach(n => summary += `  • ${n.name}\n`);
+                    summary += `\n`;
+                }
+
+                if (Object.keys(totalStats).length > 0) {
+                    summary += `📊 Stat Summary:\n`;
+                    Object.entries(totalStats).sort().forEach(([k, v]) => {
+                        const label = k.replace(/([A-Z])/g, ' $1').replace(/^./, s => s.toUpperCase());
+                        summary += `  • ${label}: +${v}${k !== 'flatLife' && k !== 'flatMana' ? '%' : ''}\n`;
+                    });
+                }
+
+                document.getElementById('pp-export-summary').value = summary;
+
+                // Tab 3: .build JSON
+                const buildJson = {
+                    name: 'Lightning Monk — Gentech Planner',
+                    class: 'Monk',
+                    ascendancy: 'Storm Caller',
+                    level: 26,
+                    passiveTree: {
+                        allocated: ids,
+                        nodeNames: names,
+                        nodeCount: allocNodes.length
+                    }
+                };
+                document.getElementById('pp-export-json').value = JSON.stringify(buildJson, null, 2);
+
+                // Tab 4: Shareable Link
+                const hash = ppEncodeBuildHash();
+                document.getElementById('pp-export-link').value = window.location.origin + window.location.pathname + '#' + hash;
+            }
+
+            // ═══════════════════════════════════════════════════════
+            //  EXPORT: Copy / Download helpers
+            // ═══════════════════════════════════════════════════════
+            window.ppCopyExport = function(elementId) {
+                const el = document.getElementById(elementId);
+                navigator.clipboard.writeText(el.value).then(() => {
+                    ppShowToast('📋 Copied to clipboard!');
                 }).catch(() => {
-                    const ta = document.createElement('textarea');
-                    ta.value = text;
-                    document.body.appendChild(ta);
-                    ta.select();
+                    el.select();
                     document.execCommand('copy');
-                    document.body.removeChild(ta);
-                    ppShowToast('Build copied to clipboard!');
+                    ppShowToast('📋 Copied to clipboard!');
                 });
             };
 
+            window.ppCopyLink = function() {
+                const link = document.getElementById('pp-export-link').textContent;
+                navigator.clipboard.writeText(link).then(() => {
+                    ppShowToast('🔗 Link copied to clipboard!');
+                }).catch(() => {
+                    ppShowToast('⚠️ Copy failed — select the link manually');
+                });
+            };
+
+            window.ppDownloadBuild = function() {
+                const json = document.getElementById('pp-export-json').value;
+                const blob = new Blob([json], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'lightning-monk-build.build';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+                ppShowToast('💾 .build file downloaded!');
+            };
+
+            // ═══════════════════════════════════════════════════════
+            //  SHAREABLE LINK: Encode / Decode
+            // ═══════════════════════════════════════════════════════
+            function ppEncodeBuildHash() {
+                const allocIds = ppNodes.filter(n => n.allocated && n.id !== 'start').map(n => n.id);
+                const data = { v: 1, pts: ppTotalPoints, n: allocIds };
+                return btoa(JSON.stringify(data));
+            }
+
+            function ppDecodeBuildHash(hash) {
+                try {
+                    const data = JSON.parse(atob(hash));
+                    if (data && data.n && Array.isArray(data.n)) return data;
+                    return null;
+                } catch (e) {
+                    return null;
+                }
+            }
+
+            function ppAutoImportFromHash() {
+                if (!window.location.hash || window.location.hash.length < 2) return;
+                const hash = window.location.hash.slice(1);
+                const data = ppDecodeBuildHash(hash);
+                if (!data) return;
+                ppNodes.forEach(n => { n.allocated = (n.id === 'start'); });
+                if (data.pts) {
+                    ppTotalPoints = data.pts;
+                    document.getElementById('pp-pts-input').value = ppTotalPoints;
+                }
+                let imported = 0;
+                for (const id of data.n) {
+                    if (ppAllocateNode(id)) imported++;
+                }
+                ppNeedsRedraw = true;
+                ppUpdateUI();
+                setTimeout(() => ppShowToast(`🔗 Auto-imported ${imported} nodes from shared link!`), 500);
+            }
+
+            // ═══════════════════════════════════════════════════════
+            //  IMPORT/EXPORT: Open/Close
+            // ═══════════════════════════════════════════════════════
             window.ppOpenImport = function() {
                 document.getElementById('pp-import-overlay').classList.add('open');
                 document.getElementById('pp-import-text').value = '';
                 document.getElementById('pp-import-text').focus();
+                document.getElementById('pp-names-match-status').className = 'pp-match-status';
+                ppSwitchImportTab('names');
             };
 
             window.ppCloseImport = function() {
                 document.getElementById('pp-import-overlay').classList.remove('open');
             };
 
-            window.ppDoImport = function() {
-                const raw = document.getElementById('pp-import-text').value.trim();
-                if (!raw) return;
-                const ids = raw.split(',').map(s => s.trim()).filter(Boolean);
-                ppNodes.forEach(n => { n.allocated = (n.id === 'start'); });
-                let successCount = 0;
-                for (const id of ids) {
-                    if (ppAllocateNode(id)) successCount++;
-                }
-                ppCloseImport();
-                ppShowToast(`Imported ${successCount} nodes!`);
-            };
+            // ═══════════════════════════════════════════════════════
+            //  FILE DROP INTERACTION
+            // ═══════════════════════════════════════════════════════
+            function ppInitFileDrop() {
+                const drop = document.getElementById('pp-file-drop');
+                const input = document.getElementById('pp-file-input');
+                if (!drop || !input) return;
+                drop.addEventListener('click', () => input.click());
+                drop.addEventListener('dragover', e => { e.preventDefault(); drop.classList.add('dragover'); });
+                drop.addEventListener('dragleave', () => drop.classList.remove('dragover'));
+                drop.addEventListener('drop', e => {
+                    e.preventDefault();
+                    drop.classList.remove('dragover');
+                    const file = e.dataTransfer.files[0];
+                    if (!file) return;
+                    const reader = new FileReader();
+                    reader.onload = function(ev) {
+                        document.getElementById('pp-import-json').value = ev.target.result;
+                        ppShowToast('📁 File loaded!');
+                    };
+                    reader.readAsText(file);
+                });
+            }
 
             window.ppSaveToStorage = function() {
                 const data = ppNodes.map(n => n.allocated);
@@ -2399,7 +3127,7 @@
                 if (!passiveTab.classList.contains('active')) return;
                 if (e.key === 'r' || e.key === 'R') ppResetBuild();
                 if (e.key === 'f' || e.key === 'F') ppFitTree();
-                if (e.key === 'Escape') ppCloseImport();
+                if (e.key === 'Escape') { ppCloseImport(); ppCloseExport(); }
             });
 
             // Expose resize for tab switching
@@ -2410,7 +3138,10 @@
             ppLoadFromStorage();
             ppUpdateUI();
             ppFitTree();
+            ppInitFileDrop();
             ppRenderLoopId = requestAnimationFrame(ppRender);
+            // Auto-import from URL hash (deferred to ensure planner is ready)
+            setTimeout(ppAutoImportFromHash, 100);
 
             function ppLoadFromStorage() {
                 try {
