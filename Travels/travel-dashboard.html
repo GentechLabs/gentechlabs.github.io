@@ -1332,26 +1332,27 @@
       const pct = budget.total > 0 ? (budget.spent / budget.total * 100) : 0;
 
       const catColors = {
-        flights: 'cat-flights',
-        accommodation: 'cat-accommodation',
         food: 'cat-food',
+        groceries: 'cat-food',
         activities: 'cat-activities',
         transport: 'cat-transport',
         emergency: 'cat-emergency'
       };
 
       const catEntries = Object.entries(budget.categories);
+      const budgetNote = budget.note ? `<div style="font-size:0.8rem;color:var(--text-dim);margin-bottom:12px;font-style:italic;">${budget.note}</div>` : '';
 
       container.innerHTML = `
         <div class="budget-total">
           <div>
-            <div style="font-size:0.75rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:1px;margin-bottom:2px;">Total Budget</div>
+            <div style="font-size:0.75rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:1px;margin-bottom:2px;">Spending Budget</div>
             <div class="budget-amount">${money(budget.total)}</div>
           </div>
           <div class="budget-remaining">
             <span>${money(remaining)}</span> remaining
           </div>
         </div>
+        ${budgetNote}
         <div class="progress-bar-container">
           <div class="progress-bar-fill" data-width="${pct}" style="width:0%"></div>
         </div>
