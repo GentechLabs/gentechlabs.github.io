@@ -1,14 +1,19 @@
 # Hackathon Tracker — GenTech Labs
 
-> Last updated: 2026-06-09 | Mode: Learning + Selective Builds
+> Last updated: 2026-06-11 | Mode: Learning + Selective Builds
 
 ## Priority Queue (Jordan's Directive Order)
 
-### 🔴 URGENT — Decision Needed This Week
-| # | Hackathon | Prize | Deadline | Days Left | Fit | Status |
-|---|-----------|-------|----------|-----------|-----|--------|
-| 1 | **BNB Hack: AI Trading Agent Edition** | $36K | Jun 21 | 12 | ⭐⭐⭐⭐⭐ | 🟡 Evaluate — direct fit, AI trading agents on BSC |
-| 2 | **Mantle Turing Test Hackathon** | $100K+ | Jun 15 | 6 | ⭐⭐⭐⭐ | ⚠️ 🟡 Tight — ERC-8004 + agentic wallets |
+### 🔴 ACTIVE — Building Now
+| # | Hackathon | Prize | Deadline | Days Left | Status |
+|---|-----------|-------|----------|-----------|--------|
+| 1 | **BNB Hack: AI Trading Agent Edition** | $36K | Jun 21 | 10 | 🟢 Track 2 built — cmc-strategy-engine (21/21 tests). Demo + submit pending. |
+| 2 | **Mantle Turing Test** | $100K+ | Jun 15 | 4 | 🟡 Agent Insurance pushed. Needs faucet + deploy. |
+
+### ⏳ NEEDS ACTION — Jordan Review
+| # | Hackathon | Prize | Deadline | Days Left | Status |
+|---|-----------|-------|----------|-----------|--------|
+| 1 | **Arbitrum Open House** | — | Jun 14 | 3 | 🟡 AgentForge pushed. Confirm deploy + submit. |
 
 ### 📚 LEARNING TRACK (Primary Focus)
 | # | Program | Type | Starts | Duration | Status |
@@ -30,7 +35,7 @@
 ### ❌ DROPPED / SKIPPED
 | # | Hackathon | Reason |
 |---|-----------|--------|
-| Google Cloud Rapid Agent | Enterprise lock-in, deadline passed (Jun 11) |
+| Google Cloud Rapid Agent | Enterprise lock-in, deadline passed |
 | Bags.fm | Deferred — rewards traction, not building |
 | IstanHack 2026 | In-person Istanbul |
 | VIBE-A-THON | In-person Lisbon + token gate |
@@ -39,10 +44,12 @@
 | USAII Global AI | Students-only |
 | Microsoft Agents League | Microsoft ecosystem lock-in |
 | CertiK + YZi Labs Grant | Tied to residency program |
+| OOBE Protocol | Missed deadline — archived for reuse |
 
 ---
 
 ## Scan History
+- **2026-06-11**: BNB Hack Track 2 scaffolded + pushed (cmc-strategy-engine). Portfolio build fixed (stale submodules removed). Mantle Agent Insurance pushed.
 - **2026-06-09**: Daily scan → 12 reviewed, 3 new (low relevance), 5 confirmed active. TinyFish API exhausted (0 credits) — fell back to web_search.
 - **2026-06-08**: Full scan → 15 opportunities reviewed, 4 high-relevance, 3 medium
 - Sources: Web search, Devpost, DoraHacks, BNB Chain, Web3Voyager, Encode Club

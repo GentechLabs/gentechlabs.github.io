@@ -1,0 +1,384 @@
+{
+  "trip": {
+    "name": "Philippines 2026",
+    "traveler": "Jordan",
+    "theme": {
+      "style": "romantic",
+      "palette": "philippines",
+      "name": "Philippine Sunset",
+      "colors": {
+        "--bg": "#faf7f2",
+        "--bg-alt": "#f5efe6",
+        "--panel-bg": "#ffffff",
+        "--panel-border": "#e8dcc8",
+        "--panel-shadow": "rgba(180, 140, 80, 0.12)",
+        "--text": "#2d2013",
+        "--text-dim": "#8a7560",
+        "--gold": "#d4a017",
+        "--gold-dim": "#b8941a",
+        "--gold-glow": "rgba(212, 160, 23, 0.25)",
+        "--accent": "#e8652a",
+        "--accent-dim": "#c45520",
+        "--ocean": "#1a6bb5",
+        "--ocean-dim": "#145a9a",
+        "--green": "#2d8a4e",
+        "--green-dim": "#1f6b3a",
+        "--red": "#d32f2f",
+        "--red-dim": "#b71c1c",
+        "--orange": "#e8652a",
+        "--yellow": "#f0c14b",
+        "--pink": "#d4748a",
+        "--pink-glow": "rgba(212, 116, 138, 0.2)"
+      },
+      "fonts": {
+        "heading": "'Cinzel', serif",
+        "body": "'Crimson Text', serif"
+      },
+      "headerGradient": "linear-gradient(135deg, #d4a017 0%, #e8652a 50%, #1a6bb5 100%)"
+    },
+    "status": "Planning",
+    "startDate": "2026-09-01",
+    "endDate": "2026-09-14",
+    "homeBase": "Makati, Metro Manila",
+    "legs": [
+      {
+        "destination": "Makati, Metro Manila",
+        "arrive": "2026-09-02",
+        "depart": "2026-09-14",
+        "nights": 12,
+        "purpose": "Meet Christel",
+        "location": "Makati City",
+        "accommodation": "TBD — Airbnb/condo in Makati (Christel picks)"
+      }
+    ],
+    "flights": [
+      {
+        "route": "CVG → MNL",
+        "airline": "TBD",
+        "departDate": "2026-09-01",
+        "arriveDate": "2026-09-02",
+        "class": "Economy",
+        "cost": 850,
+        "status": "Not booked",
+        "notes": "1-2 layovers typical. Direct to NAIA."
+      },
+      {
+        "route": "MNL → CVG",
+        "airline": "TBD",
+        "departDate": "2026-09-14",
+        "arriveDate": "2026-09-14",
+        "class": "Economy",
+        "cost": 850,
+        "status": "Not booked",
+        "notes": "Return flight. Check connections through Seoul or Tokyo."
+      }
+    ],
+    "budget": {
+      "total": 1000,
+      "minimum": 500,
+      "spent": 0,
+      "note": "Spending budget only — flights and accommodation already paid before trip.",
+      "categories": {
+        "food": { "allocated": 400, "spent": 0 },
+        "groceries": { "allocated": 200, "spent": 0 },
+        "activities": { "allocated": 200, "spent": 0 },
+        "transport": { "allocated": 100, "spent": 0 },
+        "emergency": { "allocated": 100, "spent": 0 }
+      }
+    },
+    "costComparison": {
+      "title": "Cost of Living: Makati vs Cincinnati",
+      "note": "How far your money goes in the Philippines",
+      "items": [
+        { "item": "Restaurant meal (mid-range)", "makati": 4, "cincinnati": 18, "unit": "per plate" },
+        { "item": "Jollibee Chickenjoy combo", "makati": 3.50, "cincinnati": null, "unit": "only in PH" },
+        { "item": "Street food meal", "makati": 1.50, "cincinnati": null, "unit": "per plate" },
+        { "item": "Groceries (1 week, 2 people)", "makati": 30, "cincinnati": 120, "unit": "" },
+        { "item": "Coffee (café latte)", "makati": 2.50, "cincinnati": 5.50, "unit": "per cup" },
+        { "item": "Grab ride (within Makati)", "makati": 1.50, "cincinnati": null, "unit": "Uber equivalent" },
+        { "item": "Uber ride (similar distance)", "makati": null, "cincinnati": 12, "unit": "" },
+        { "item": "Movie ticket", "makati": 5, "cincinnati": 12, "unit": "" },
+        { "item": "Beer (local, bar)", "makati": 2, "cincinnati": 6, "unit": "" },
+        { "item": "Rooftop drink", "makati": 6, "cincinnati": 14, "unit": "" },
+        { "item": "Spa massage (1 hour)", "makati": 12, "cincinnati": 80, "unit": "" },
+        { "item": "SIM card (30 days, data)", "makati": 5, "cincinnati": 45, "unit": "" }
+      ],
+      "summary": {
+        "savingsPercent": 65,
+        "dailyBudgetPH": 35,
+        "dailyBudgetCincy": 100,
+        "verdict": "$1,000 in Makati = $2,850 equivalent in Cincinnati"
+      }
+    },
+    "vibe": "Chill romantic — mostly home, occasional outings. Cook together, explore when it feels right.",
+    "days": [
+      {
+        "day": 1,
+        "date": "2026-09-01",
+        "location": "Cincinnati → Manila",
+        "title": "Departure Day",
+        "type": "travel",
+        "activities": [
+          "Depart CVG airport",
+          "Long flight — bring laptop, download shows"
+        ],
+        "notes": "Arrive MNL Sep 2 (crosses date line)"
+      },
+      {
+        "day": 2,
+        "date": "2026-09-02",
+        "location": "Manila → Makati",
+        "title": "Arrival Day",
+        "type": "travel",
+        "activities": [
+          "Land at NAIA",
+          "Grab to Makati (~30-45 min depending on traffic)",
+          "Check into accommodation",
+          "Meet Christel 🥰",
+          "Light dinner nearby — let Christel pick"
+        ],
+        "notes": "Don't overplan. First night = settle in."
+      },
+      {
+        "day": 3,
+        "date": "2026-09-03",
+        "location": "Makati",
+        "title": "Grocery Run + Home Dinner",
+        "type": "home",
+        "activities": [
+          "Morning: sleep in, adjust to timezone",
+          "Grocery run with Christel — SM Makati or Landmark",
+          "Cook dinner at home together",
+          "Movie night at the condo"
+        ],
+        "notes": "Christel wants to cook at home. Let her lead the grocery list."
+      },
+      {
+        "day": 4,
+        "date": "2026-09-04",
+        "location": "Makati",
+        "title": "Makati Exploration Day",
+        "type": "explore",
+        "activities": [
+          "Walk Ayala Center / Greenbelt — shops + restaurants",
+          "Lunch at Greenbelt (many restaurant options)",
+          "Visit Ayala Museum (small, air-conditioned, romantic)",
+          "Coffee at a Makati café",
+          "Home for dinner"
+        ],
+        "notes": "Greenbelt is the nice outdoor mall area. Good for a chill date."
+      },
+      {
+        "day": 5,
+        "date": "2026-09-05",
+        "location": "Makati",
+        "title": "Jollibee Day 🐝",
+        "type": "explore",
+        "activities": [
+          "Jollibee — get the Chickenjoy, Jolly Spaghetti, and Burger Steak",
+          "Walk around Makati after",
+          "Visit Poblacion — artsy/nightlife area (daytime is chill)",
+          "Home for rest"
+        ],
+        "notes": "Jollibee is mandatory. Order for two. Try the Peach Mango Pie."
+      },
+      {
+        "day": 6,
+        "date": "2026-09-06",
+        "location": "Makati",
+        "title": "Chill Home Day",
+        "type": "home",
+        "activities": [
+          "Slow morning — coffee, breakfast together",
+          "Christel cooks lunch",
+          "Afternoon: relax, read, nap, video games",
+          "Evening: grocery run for tomorrow's cooking",
+          "Cook dinner together"
+        ],
+        "notes": "Not every day needs to be an outing. Home days are the best days."
+      },
+      {
+        "day": 7,
+        "date": "2026-09-07",
+        "location": "BGC, Taguig",
+        "title": "BGC Day 1",
+        "type": "explore",
+        "activities": [
+          "Grab to BGC (~15 min from Makati)",
+          "Lunch at a BGC restaurant (Terra 22 or Toyo Eatery)",
+          "Walk The Mind Museum area — art installations",
+          "High Street shopping + window browsing",
+          "Coffee at a BGC café",
+          "Home for dinner or eat in BGC"
+        ],
+        "notes": "BGC is the cleanest, most walkable area in Metro Manila. Good for a date day."
+      },
+      {
+        "day": 8,
+        "date": "2026-09-08",
+        "location": "BGC, Taguig",
+        "title": "BGC Day 2",
+        "type": "explore",
+        "activities": [
+          "Return to BGC for anything missed",
+          "Venice Grand Canal Mall (boat ride + restaurants)",
+          "Market Market for local finds",
+          "Rooftop drink at a BGC bar (Z Hostel Roofdeck or similar)",
+          "Home"
+        ],
+        "notes": "Venice Mall has gondola-style boats — touristy but fun for couples."
+      },
+      {
+        "day": 9,
+        "date": "2026-09-08",
+        "location": "Makati",
+        "title": "Home Day + Date Night",
+        "type": "home",
+        "activities": [
+          "Morning: slow start, home breakfast",
+          "Afternoon: work/relax at condo",
+          "Evening: dress up for date night",
+          "Dinner at Blackbird Makati (romantic, art deco, fancy)",
+          "Night walk around Ayala Ave"
+        ],
+        "notes": "Blackbird is in the old Nielsons Tower. Elegant but not stuffy."
+      },
+      {
+        "day": 10,
+        "date": "2026-09-10",
+        "location": "Makati",
+        "title": "Cooking Day",
+        "type": "home",
+        "activities": [
+          "Big grocery run — cook something ambitious together",
+          "Try a Filipino recipe (adobo, sinigang, or kare-kare)",
+          "Afternoon: eat + nap",
+          "Evening: movie or walk around Legaspi Park"
+        ],
+        "notes": "Cooking together = best date activity. Legaspi Park has a Sunday market too."
+      },
+      {
+        "day": 11,
+        "date": "2026-09-11",
+        "location": "Makati",
+        "title": "Relaxation Day",
+        "type": "home",
+        "activities": [
+          "No plans. Sleep in.",
+          "Maybe walk to a nearby café",
+          "Home cooking for lunch",
+          "Afternoon: whatever feels right",
+          "Grocery restock for remaining days"
+        ],
+        "notes": "This is the beauty of staying in Makati. You're not rushing."
+      },
+      {
+        "day": 12,
+        "date": "2026-09-12",
+        "location": "Makati",
+        "title": "Legaspi Market + Chill",
+        "type": "explore",
+        "activities": [
+          "Legaspi Weekend Market (if Sunday) — local food, crafts, live music",
+          "Or: Salcedo Market (Saturday) — same vibe, different area",
+          "Pick up snacks/souvenirs",
+          "Home for afternoon",
+          "Dinner out — try Toyo Eatery or Manam"
+        ],
+        "notes": "Both markets are walking distance in Makati. Weekend only."
+      },
+      {
+        "day": 13,
+        "date": "2026-09-13",
+        "location": "Makati",
+        "title": "Last Full Day",
+        "type": "relax",
+        "activities": [
+          "Pack together",
+          "Final grocery trip — grab pasalubong (gifts) to bring home",
+          "Last home-cooked meal with Christel",
+          "Evening: reflect on the trip"
+        ],
+        "notes": "Pasalubong ideas: dried mangoes, ube jam, polvoron, local coffee"
+      },
+      {
+        "day": 14,
+        "date": "2026-09-14",
+        "location": "Makati → Manila → Cincinnati",
+        "title": "Departure Day",
+        "type": "travel",
+        "activities": [
+          "Check out of accommodation",
+          "Grab to NAIA",
+          "Fly home to CVG",
+          "Post-trip debrief + update dashboard"
+        ],
+        "notes": "Allow 2+ hours for NAIA. Traffic can be brutal."
+      }
+    ],
+    "checklist": [
+      {"item": "Passport (valid 6+ months)", "done": false, "category": "docs"},
+      {"item": "PH visa check (US passport = 30 days visa-free)", "done": true, "category": "docs"},
+      {"item": "Book CVG → MNL flight", "done": false, "category": "flights"},
+      {"item": "Book MNL → CVG return flight", "done": false, "category": "flights"},
+      {"item": "Accommodation: Makati (12 nights)", "done": false, "category": "stay"},
+      {"item": "Travel insurance", "done": false, "category": "docs"},
+      {"item": "Philippine SIM card (Globe or Smart)", "done": false, "category": "tech"},
+      {"item": "Notify bank of travel dates", "done": false, "category": "finance"},
+      {"item": "Exchange USD → PHP (don't do at airport)", "done": false, "category": "finance"},
+      {"item": "Download Grab app", "done": false, "category": "tech"},
+      {"item": "Pack light — 2 weeks casual", "done": false, "category": "pack"},
+      {"item": "Bring pasalubong ideas list", "done": false, "category": "pack"}
+    ],
+    "restaurants": {
+      "mustTry": [
+        {"name": "Jollibee", "type": "Fast food", "order": "Chickenjoy, Jolly Spaghetti, Burger Steak, Peach Mango Pie", "cost": "$"},
+        {"name": "Blackbird Makati", "type": "Fine dining", "vibe": "Romantic, art deco, elegant", "cost": "$$$"},
+        {"name": "Toyo Eatery", "type": "Modern Filipino", "vibe": "Trendy, innovative", "cost": "$$"},
+        {"name": "Manam", "type": "Filipino comfort", "vibe": "Casual, shareable plates", "cost": "$$"}
+      ],
+      "nearby": [
+        "Greenbelt restaurants (many options, outdoor seating)",
+        "Legazpi Sunday Market (street food + live music)",
+        "Salcedo Saturday Market (local food + crafts)"
+      ]
+    },
+    "places": {
+      "parks": [
+        {"name": "Legaspi Park", "note": "Walking distance, Sunday market"},
+        {"name": "Salcedo Park", "note": "Saturday market, chill vibes"},
+        {"name": "Ayala Triangle Gardens", "note": "Green space in the middle of Makati"}
+      ],
+      "malls": [
+        {"name": "Greenbelt", "note": "Nice outdoor mall, restaurants + shops"},
+        {"name": "SM Makati", "note": "Big mall, grocery store inside"},
+        {"name": "Power Plant Mall", "note": "Upscale, Rockwell area"}
+      ],
+      "bgc": [
+        {"name": "BGC High Street", "note": "Walkable strip, shops + restaurants"},
+        {"name": "Venice Grand Canal Mall", "note": "Gondola boats, touristy but fun"},
+        {"name": "The Mind Museum", "note": "Interactive science museum"}
+      ]
+    },
+    "packing": [
+      {"item": "Light clothes (2 weeks, tropical)", "packed": false},
+      {"item": "Rain jacket/umbrella (Sept = rainy season)", "packed": false},
+      {"item": "Comfortable walking shoes", "packed": false},
+      {"item": "Phone charger + adapter (Type A/B, same as US)", "packed": false},
+      {"item": "Laptop + headphones", "packed": false},
+      {"item": "Toiletries (buy full-size there, cheaper)", "packed": false},
+      {"item": "Pasalubong bag (for bringing gifts home)", "packed": false}
+    ],
+    "tips": [
+      "Sept is rainy season — bring umbrella, mornings are usually clear",
+      "Grab is the Uber of PH. Use it for everything.",
+      "Makati is very walkable for a Manila city. Greenbelt area especially.",
+      "ATMs charge 250 PHP ($4.50) per withdrawal. Withdraw large amounts.",
+      "7-Eleven everywhere. Cheap meals, phone top-up, ATMs.",
+      "Christel's home base is Mindanao but she'll be in Makati with you.",
+      "Cooking at home saves money AND is more romantic than eating out every night.",
+      "Jollibee delivery via GrabFood if you don't want to go out."
+    ],
+    "lastUpdated": "2026-06-11"
+  }
+}

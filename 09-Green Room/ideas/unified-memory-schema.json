@@ -1,0 +1,138 @@
+{
+  "version": "1.0",
+  "description": "Unified Memory Schema for GenTech Suite — shared memory layer that enables cross-layer data flow",
+  "schema": {
+    "entry": {
+      "id": "uuid",
+      "timestamp": "ISO 8601",
+      "source": "string — which layer originated this (journal, cookbook, gaming, travel, tutors, social)",
+      "user": "string — user ID or name",
+      "content": "string — the raw content/memory",
+      "category": "string — primary category (cooking, finance, gaming, travel, learning, social, personal)",
+      "tags": ["string[] — topic tags for cross-layer matching"],
+      "confidence": "number 0-1 — how confident the agent is in the categorization",
+      "crossLayer": {
+        "suggested": ["string[] — other layers this could belong to"],
+        "autoAdded": ["string[] — layers this was autonomously added to"],
+        "pending": ["string[] — layers waiting for user confirmation"]
+      },
+      "metadata": {
+        "dish": "object (optional) — Cookbook-specific: {name, ingredients, substitutions, rating}",
+        "journal": "object (optional) — Journal-specific: {mood, reflection, lesson}",
+        "travel": "object (optional) — Travel-specific: {destination, dates, budget}",
+        "gaming": "object (optional) — Gaming-specific: {game, build, achievement}",
+        "finance": "object (optional) — Finance-specific: {transaction, category, amount}"
+      }
+    },
+    "user": {
+      "id": "uuid",
+      "name": "string",
+      "layers": ["string[] — which layers the user has active"],
+      "preferences": {
+        "crossLayerMode": "suggest | autonomous | off",
+        "tags": ["string[] — user's preferred tags"]
+      },
+      "tasteProfile": {
+        "savory": "number 0-1",
+        "umami": "number 0-1",
+        "spicy": "number 0-1",
+        "sweet": "number 0-1",
+        "sour": "number 0-1"
+      },
+      "memoryStats": {
+        "totalEntries": "number",
+        "entriesByLayer": "object",
+        "crossLayerMatches": "number"
+      }
+    },
+    "layer": {
+      "id": "string — cookbook, journal, travel, gaming, tutors, social",
+      "name": "string",
+      "subscribedTags": ["string[] — tags this layer wants to receive"],
+      "autoAddTags": ["string[] — tags that trigger autonomous adding"],
+      "suggestTags": ["string[] — tags that trigger user prompts"]
+    }
+  },
+  "layers": [
+    {
+      "id": "cookbook",
+      "name": "GenTech Cookbook",
+      "subscribedTags": ["cooking", "recipe", "food", "ingredients", "meal", "dinner", "lunch", "breakfast", "snack", "dessert", "baking", "grilling", "filipino food", "asian cuisine"],
+      "autoAddTags": ["cooking", "recipe", "food"],
+      "suggestTags": ["ingredients", "meal", "dinner", "lunch"]
+    },
+    {
+      "id": "journal",
+      "name": "GenTech Journal",
+      "subscribedTags": ["reflection", "mood", "gratitude", "lesson", "goal", "habit", "daily", "personal"],
+      "autoAddTags": ["reflection", "mood", "gratitude"],
+      "suggestTags": ["goal", "habit", "lesson"]
+    },
+    {
+      "id": "travel",
+      "name": "GenTech Travels",
+      "subscribedTags": ["travel", "destination", "flight", "hotel", "trip", "vacation", "manila", "philippines", "food destination"],
+      "autoAddTags": ["travel", "destination", "trip"],
+      "suggestTags": ["flight", "hotel", "food destination"]
+    },
+    {
+      "id": "gaming",
+      "name": "GenTech Gaming Hub",
+      "subscribedTags": ["gaming", "poe2", "build", "character", "item", "strategy", "achievement"],
+      "autoAddTags": ["gaming", "poe2", "build"],
+      "suggestTags": ["character", "item", "strategy"]
+    },
+    {
+      "id": "tutors",
+      "name": "GenTech Tutors",
+      "subscribedTags": ["learning", "study", "certification", "course", "skill", "practice", "exam"],
+      "autoAddTags": ["learning", "study", "certification"],
+      "suggestTags": ["skill", "practice", "exam"]
+    },
+    {
+      "id": "social",
+      "name": "GenTech Social",
+      "subscribedTags": ["social", "friend", "community", "share", "post", "comment"],
+      "autoAddTags": ["social", "friend", "community"],
+      "suggestTags": ["share", "post"]
+    }
+  ],
+  "crossLayerRules": [
+    {
+      "trigger": "Journal mentions cooking/food",
+      "action": "suggest",
+      "target": "cookbook",
+      "message": "You mentioned food in your journal. Want me to add this to your Cookbook?"
+    },
+    {
+      "trigger": "Journal mentions travel/destination",
+      "action": "suggest",
+      "target": "travel",
+      "message": "You mentioned travel in your journal. Want me to add this to your Travels?"
+    },
+    {
+      "trigger": "Cookbook mentions a dish from a specific region",
+      "action": "suggest",
+      "target": "travel",
+      "message": "This dish is from a specific region. Want me to add it to your travel food guide?"
+    },
+    {
+      "trigger": "Travel mentions a food destination",
+      "action": "autonomous",
+      "target": "cookbook",
+      "message": "Added regional food info to your Cookbook from your travel plans."
+    },
+    {
+      "trigger": "Gaming mentions a strategy or build",
+      "action": "suggest",
+      "target": "tutors",
+      "message": "You're learning new strategies. Want me to track this as a learning goal?"
+    },
+    {
+      "trigger": "Any layer mentions a goal or habit",
+      "action": "suggest",
+      "target": "journal",
+      "message": "You mentioned a goal. Want me to add this to your Journal for tracking?"
+    }
+  ]
+}

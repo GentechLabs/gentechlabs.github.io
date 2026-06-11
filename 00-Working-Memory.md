@@ -1,10 +1,10 @@
 ---
-date: 2026-06-10
+date: 2026-06-11
 purpose: Working memory — current sprint state, blockers, priorities
-updated: 2026-06-10
+updated: 2026-06-11
 ---
 
-# GenTech Working Memory — Updated 2026-06-10
+# GenTech Working Memory — Updated 2026-06-11
 
 ## Active Sprint — Week of Jun 7–13, 2026
 
@@ -21,14 +21,14 @@ updated: 2026-06-10
 
 ### Priority Hackathons (This Week)
 - ~~**Google Cloud Rapid Agent**~~ — ❌ DROPPED (enterprise lock-in)
-- ~~**Somnia Agentathon**~~ — ✅ PASSED (deadline missed)
+- **Somnia Agentathon** — ✅ SUBMITTED Jun 10 (deadline Jun 11, per tracker)
 - ~~**Dev3pack Bridge Accelerator**~~ — ❌ CANCELLED
-- ⚠️ **Arbitrum Open House ($415K)** — 🟢 SHIPPED | Due: Jun 14 (4 days) | AgentForge ready
-- ⚠️ **Mantle Turing Test ($120K)** — 🟡 REGISTER + DEPLOY | Due: Jun 15 (5 days) | Phase II
+- ⚠️ **Arbitrum Open House ($415K)** — 🟢 SHIPPED | Due: Jun 14 (3 days) | AgentForge ready
+- ⚠️ **Mantle Turing Test ($120K)** — 🟡 REGISTER + DEPLOY | Due: Jun 15 (4 days) | Phase II
 
 ### Queued (Deadlines Ahead)
-- **Sui Overflow** — 🟡 QUEUED | Due: Jun 21 (11 days) | Move contract built
-- **Encode Solana + Arc Bootcamps** — 🟡 SIGN UP NEEDED | Start: Jun 22 (12 days)
+- **Sui Overflow** — 🟡 QUEUED | Due: Jun 21 (10 days) | Move contract built
+- **Encode Solana + Arc Bootcamps** — 🟡 SIGN UP NEEDED | Start: Jun 22 (11 days)
 
 ### Grant Applications (Rolling)
 - Solana Foundation — $200-400K
@@ -78,13 +78,13 @@ updated: 2026-06-10
 
 ## Key Dates
 
-- **Jun 11:** Somnia Agentathon — ⚠️ DEADLINE TOMORROW (needs testnet deploy)
-- ⚠️ **Jun 14:** Arbitrum Open House submission (4 days)
-- ⚠️ **Jun 15:** Mantle Turing Test Phase II (5 days)
+- **Jun 11:** Somnia Agentathon — ⚠️ DEADLINE TODAY (submitted Jun 10 per tracker)
+- ⚠️ **Jun 14:** Arbitrum Open House submission (3 days)
+- ⚠️ **Jun 15:** Mantle Turing Test Phase II (4 days)
 - **Jun 15:** FIND EVIL! — $22K, cybersecurity + AI
 - **Jun 19:** Encode Vibe Coding Hackathon
-- **Jun 21:** Sui Overflow deadline (11 days)
-- **Jun 22:** Encode Solana + Arc Bootcamps start (12 days)
+- **Jun 21:** Sui Overflow deadline (10 days)
+- **Jun 22:** Encode Solana + Arc Bootcamps start (11 days)
 - **Rolling:** Alliance AI — https://alliance.xyz/apply
 - **Aug/Sep 2026:** Philippines birthday trip (book flights ASAP)
 
@@ -110,4 +110,4 @@ updated: 2026-06-10
 
 ---
 
-*Last refreshed: 2026-06-10. This file is Jordan's quick-reference for current state.*
+*Last refreshed: 2026-06-11. This file is Jordan's quick-reference for current state.*

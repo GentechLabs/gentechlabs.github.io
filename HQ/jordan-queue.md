@@ -1,6 +1,6 @@
 # 📋 Jordan Queue — Items Needing Jordan's Action
 
-*Updated: June 9, 2026*
+*Updated: June 11, 2026*
 
 ## 🔥 Active
 - [ ] **Buy PH trip flights (Aug/Sep 2026)** — Air Canada $600 CVG→Manila one-way. Book when ready.
@@ -30,6 +30,6 @@
 - [x] **Peter Cullen Voice Rating** — Stale, not applicable.
 - [x] **Alliance AI Application** — BLOCKED. Requires founders video. Not feasible solo.
 - [x] **Bags Hackathon** — PASSED. Rewards traction, not building.
-- [x] **Google Cloud Qwen Hackathon (Jul 9)** — PASSED.
+- [ ] **Google Cloud Qwen Hackathon (Jul 9)** — 🟡 QUEUED. Deadline Jul 9 (28 days). Tracks: MemoryAgent, AI Showrunner, Agent Society.
 - [x] **Google Startups** — PASSED.
 - [x] **ElevenLabs subscription** — CANCELLED May 30.
