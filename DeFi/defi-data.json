@@ -2,22 +2,21 @@
   "portfolio": {
     "totalValue": 12847,
     "change24h": 3.2,
-    "tokens": 8,
-    "chains": 3
+    "activePositions": 4,
+    "activeChains": 2
   },
-  "holdings": [
-    { "symbol": "ETH", "name": "Ethereum", "balance": "4.215", "value": 8430, "change24h": 2.8, "chain": "Base" },
-    { "symbol": "USDC", "name": "USD Coin", "balance": "2,150", "value": 2150, "change24h": 0.01, "chain": "Base" },
-    { "symbol": "AERO", "name": "Aerodrome", "balance": "850", "value": 1275, "change24h": 5.4, "chain": "Base" },
-    { "symbol": "wstETH", "name": "Wrapped Staked ETH", "balance": "0.5", "value": 992, "change24h": 1.9, "chain": "Ethereum" }
+  "allocation": {
+    "eth": 71,
+    "usdc": 17,
+    "defi": 12
+  },
+  "positions": [
+    { "protocol": "Aerodrome", "chain": "Base", "asset": "USDC/ETH LP", "deposited": 8500, "currentValue": 9120, "pnl": 620 },
+    { "protocol": "Beefy", "chain": "Base", "asset": "USDC Vault", "deposited": 2150, "currentValue": 2248, "pnl": 98 },
+    { "protocol": "Morpho", "chain": "Ethereum", "asset": "WETH Lending", "deposited": 2000, "currentValue": 2064, "pnl": 64 },
+    { "protocol": "Moonwell", "chain": "Base", "asset": "USDC Supply", "deposited": 1000, "currentValue": 1018, "pnl": 18 }
   ],
-  "gas": {
-    "baseFee": "12 gwei",
-    "priority": "2 gwei",
-    "total": "14 gwei",
-    "costUsd": 0.42
-  },
-  "yieldPositions": [
+  "yieldFarms": [
     { "protocol": "Aerodrome", "pair": "USDC/ETH", "tvl": 85000, "apy": 18.5, "earned": 127, "status": "Active" },
     { "protocol": "Beefy", "pair": "USDC", "tvl": 15000, "apy": 8.2, "earned": 45, "status": "Active" },
     { "protocol": "Morpho", "pair": "WETH", "tvl": 20000, "apy": 5.1, "earned": 32, "status": "Active" },
@@ -29,10 +28,22 @@
     "morpho": 28
   },
   "transactions": [
-    { "date": "2026-06-10", "type": "Swap", "token": "ETH → USDC", "amount": "0.5 ETH", "usd": 1000, "status": "Confirmed" },
-    { "date": "2026-06-09", "type": "Stake", "token": "USDC", "amount": "500 USDC", "usd": 500, "status": "Confirmed" },
-    { "date": "2026-06-08", "type": "Swap", "token": "USDC → AERO", "amount": "200 USDC", "usd": 200, "status": "Confirmed" },
-    { "date": "2026-06-07", "type": "Bridge", "token": "USDC", "amount": "1000 USDC", "usd": 1000, "status": "Confirmed" },
-    { "date": "2026-06-05", "type": "Stake", "token": "wstETH", "amount": "0.5 wstETH", "usd": 992, "status": "Confirmed" }
+    { "date": "2026-06-10", "type": "Agent Swap", "token": "ETH → USDC", "amount": "0.5 ETH", "usd": 1000, "status": "Executed" },
+    { "date": "2026-06-09", "type": "Agent Stake", "token": "USDC", "amount": "500 USDC", "usd": 500, "status": "Executed" },
+    { "date": "2026-06-08", "type": "Agent Rebalance", "token": "USDC → AERO", "amount": "200 USDC", "usd": 200, "status": "Executed" },
+    { "date": "2026-06-07", "type": "Agent Bridge", "token": "USDC", "amount": "1000 USDC", "usd": 1000, "status": "Executed" },
+    { "date": "2026-06-05", "type": "Agent Stake", "token": "wstETH", "amount": "0.5 wstETH", "usd": 992, "status": "Executed" },
+    { "date": "2026-06-04", "type": "Agent Harvest", "token": "AERO", "amount": "12 AERO", "usd": 18, "status": "Executed" },
+    { "date": "2026-06-03", "type": "Agent Compound", "token": "USDC", "amount": "45 USDC", "usd": 45, "status": "Executed" }
+  ],
+  "milestones": [
+    { "text": "Agent deployed to Base chain", "checked": true, "category": "Infrastructure" },
+    { "text": "First yield position opened (Aerodrome)", "checked": true, "category": "Infrastructure" },
+    { "text": "Automated rebalancing enabled", "checked": true, "category": "Automation" },
+    { "text": "Cross-chain bridge capability", "checked": true, "category": "Infrastructure" },
+    { "text": "Gas optimization (batch transactions)", "checked": false, "category": "Optimization" },
+    { "text": "Multi-strategy yield farming", "checked": false, "category": "Strategy" },
+    { "text": "Risk management limits set", "checked": false, "category": "Risk" },
+    { "text": "Profit harvesting schedule", "checked": false, "category": "Automation" }
   ]
 }
