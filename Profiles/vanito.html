@@ -210,9 +210,12 @@
 
         .layers-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 14px;
             margin-bottom: 28px;
+        }
+        .layers-grid .layer-card.active {
+            grid-column: 1 / -1;
         }
 
         .layer-card {
@@ -246,19 +249,40 @@
             vertical-align: middle;
         }
 
-        .layer-card.coming-soon { opacity: 0.5; pointer-events: none; }
+        .layer-card.coming-soon {
+            opacity: 0.55;
+            cursor: default;
+            padding: 10px 14px;
+            grid-column: span 1;
+            border-color: var(--panel-border);
+        }
+        .layer-card.coming-soon:hover {
+            border-color: var(--panel-border);
+            transform: none;
+        }
         .layer-card.coming-soon::after {
             content: 'Coming Soon';
             display: inline-block;
             background: rgba(255,255,255,0.06);
             color: var(--text-dim);
-            font-size: 0.7em;
+            font-size: 0.65em;
             text-transform: uppercase;
             letter-spacing: 1px;
-            padding: 2px 8px;
+            padding: 1px 6px;
             border-radius: 4px;
-            margin-left: 8px;
+            margin-left: 6px;
             vertical-align: middle;
+        }
+        .layer-card.coming-soon .layer-icon {
+            font-size: 1.1em;
+            margin-bottom: 4px;
+        }
+        .layer-card.coming-soon .layer-title {
+            font-size: 0.9em;
+        }
+        .layer-card.coming-soon .layer-sub {
+            font-size: 0.78em;
+            margin-top: 2px;
         }
 
         .layer-card .layer-icon {
