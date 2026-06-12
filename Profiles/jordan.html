@@ -116,7 +116,7 @@
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
             gap: 16px;
-            margin-bottom: 40px;
+            margin-bottom: 24px;
         }
         .layer-card {
             background: #12121a;
@@ -201,9 +201,37 @@
             box-shadow: none;
         }
         .layer-card.coming-soon .card-icon { font-size: 1.2em; }
-        .layer-card.coming-soon .card-top { margin-bottom: 8px; }
-        .layer-card.coming-soon .card-name { font-size: 0.9em; margin-bottom: 2px; }
-        .layer-card.coming-soon .card-desc { font-size: 0.8em; line-height: 1.35; }
+        .layer-card.coming-soon .card-name { font-size: 0.9em; }
+        .layer-card.coming-soon .card-desc { font-size: 0.8em; }
+        .layer-card.coming-soon .card-top { margin-bottom: 6px; }
+
+        /* Coming-soon row — compact horizontal pills */
+        .soon-label {
+            font-family: 'Cinzel', serif;
+            font-size: 0.85em;
+            color: #4a4a5a;
+            margin-bottom: 8px;
+            padding-left: 4px;
+        }
+        .soon-row {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 40px;
+        }
+        .soon-pill {
+            background: #0e0e16;
+            border: 1px solid #1a1a28;
+            border-radius: 10px;
+            padding: 8px 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            opacity: 0.5;
+            font-size: 0.82em;
+            color: #5a5a6a;
+        }
+        .soon-pill .pill-icon { font-size: 1.1em; }
+        .soon-pill .pill-name { font-family: 'Cinzel', serif; font-weight: 600; }
 
         /* ── Footer ── */
         footer {
@@ -289,26 +317,19 @@
                 <div class="card-desc">DeFi yield positions, portfolio snapshots, and milestone tracking.</div>
             </a>
 
-            <!-- Journal (Coming Soon) -->
-            <div class="layer-card coming-soon">
-                <div class="card-top">
-                    <span class="card-icon">📓</span>
-                    <span class="badge soon">Coming Soon</span>
-                </div>
-                <div class="card-name">Journal</div>
-                <div class="card-desc">Daily logs, reflections, and knowledge base entries.</div>
+        </div>
+
+        <!-- Coming Soon — compact pills -->
+        <div class="soon-label">Coming Soon</div>
+        <div class="soon-row">
+            <div class="soon-pill">
+                <span class="pill-icon">📓</span>
+                <span class="pill-name">Journal</span>
             </div>
-
-            <!-- Cookbook (Coming Soon — link to Christel's) -->
-            <a href="../Cookbook/christel-kitchen.html" class="layer-card coming-soon">
-                <div class="card-top">
-                    <span class="card-icon">🍳</span>
-                    <span class="badge soon">Coming Soon</span>
-                </div>
-                <div class="card-name">Cookbook</div>
-                <div class="card-desc">Recipes and meal plans — preview Christel's kitchen while we build Jordan's.</div>
+            <a href="../Cookbook/christel-kitchen.html" class="soon-pill" style="text-decoration:none; color:inherit;">
+                <span class="pill-icon">🍳</span>
+                <span class="pill-name">Cookbook</span>
             </a>
-
         </div>
 
     </div>

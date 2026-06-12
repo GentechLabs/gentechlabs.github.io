@@ -285,6 +285,35 @@
             margin-top: 2px;
         }
 
+        /* Coming-soon row — compact pills */
+        .soon-label {
+            font-family: 'Cinzel', serif;
+            font-size: 0.85em;
+            color: #4a4a5a;
+            margin-bottom: 8px;
+            padding-left: 4px;
+        }
+        .soon-row {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 28px;
+        }
+        .soon-pill {
+            background: var(--panel-bg);
+            border: 1px solid var(--panel-border);
+            border-radius: 10px;
+            padding: 8px 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            opacity: 0.5;
+            font-size: 0.82em;
+            color: var(--text-dim);
+            text-decoration: none;
+        }
+        .soon-pill .pill-icon { font-size: 1.1em; }
+        .soon-pill .pill-name { font-family: 'Cinzel', serif; font-weight: 600; }
+
         .layer-card .layer-icon {
             font-size: 1.6em;
             margin-bottom: 8px;
@@ -514,15 +543,17 @@
                     <div class="layer-title">POE2 Dashboard</div>
                     <div class="layer-sub">Vibrant Warrior · Mace & Shield</div>
                 </a>
-                <div class="layer-card coming-soon">
-                    <div class="layer-icon">📓</div>
-                    <div class="layer-title">Journal</div>
-                    <div class="layer-sub">Personal thoughts &amp; notes</div>
+            </div>
+            <!-- Coming Soon — compact pills -->
+            <div class="soon-label">Coming Soon</div>
+            <div class="soon-row">
+                <div class="soon-pill">
+                    <span class="pill-icon">📓</span>
+                    <span class="pill-name">Journal</span>
                 </div>
-                <div class="layer-card coming-soon">
-                    <div class="layer-icon">✈️</div>
-                    <div class="layer-title">Travel</div>
-                    <div class="layer-sub">Adventures &amp; destinations</div>
+                <div class="soon-pill">
+                    <span class="pill-icon">✈️</span>
+                    <span class="pill-name">Travel</span>
                 </div>
             </div>
         </div>
