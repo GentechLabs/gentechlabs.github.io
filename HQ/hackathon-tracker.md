@@ -1,14 +1,14 @@
 # 🏆 Active Hackathon Tracker
 
-Last updated: 2026-06-11
+Last updated: 2026-06-12
 
 ## Priority Queue (Active)
 
 | # | Hackathon | Deadline | Prize | Status | Notes |
 |---|-----------|----------|-------|--------|-------|
-| 🥇 | Mantle Turing Test | Jun 15 (4 days) | $120K ($50K grand) | ⚠️ 🔧 DEPLOYING | 14/14 tests. Byreal CLI installed. Need Sepolia faucet drip. Track: Agentic Wallets & Economy. |
-| 🥈 | BNB HACK: AI Trading Agent | Jun 24 (13 days) | $36K | 📝 REGISTERING | ERC-8004 + ERC-8183 + Q402 gasless payments. Partners: BNB + CoinMarketCap + Trust Wallet. |
-| 🥉 | Casper Agentic Buildathon | Jun 30 (19 days) | $150K | 🟡 QUEUE | Agentic AI + x402 + DeFi on Casper (Rust/WebAssembly). First WASM chain with live x402. |
+| 🥇 | Mantle Turing Test | Jun 15 (3 days) | $120K ($50K grand) | ⚠️ 🔧 DEPLOYING | 14/14 tests. Byreal CLI installed. Need Sepolia faucet drip. Track: Agentic Wallets & Economy. |
+| 🥈 | BNB HACK: AI Trading Agent | Jun 24 (12 days) | $36K | 📝 REGISTERING | ERC-8004 + ERC-8183 + Q402 gasless payments. Partners: BNB + CoinMarketCap + Trust Wallet. |
+| 🥉 | Casper Agentic Buildathon | Jun 30 (18 days) | $150K | 🟡 QUEUE | Agentic AI + x402 + DeFi on Casper (Rust/WebAssembly). First WASM chain with live x402. |
 
 ## Submitted (Complete)
 
@@ -31,7 +31,7 @@ Last updated: 2026-06-11
 | 1752vc Lightning Round VIII | Deadline passed Jun 4 | ✅ PASSED |
 | ElevenHacks #10 | Out of ElevenLabs credits | ❌ SKIPPED |
 | Solana Frontier | Time constraints | ❌ WITHDRAWN |
-| Dev3pack Bridge | Startup focus, TBD | 🟡 QUEUED |
+| Dev3pack Bridge | Cancelled, not pursuing | ❌ CANCELLED |
 
 ## Grant Applications (Ongoing)
 | Program | Amount | Focus | Status | Notes |
@@ -66,9 +66,9 @@ Last updated: 2026-06-11
 - ~~**Google for Startups AI Agents Challenge**: Jun 5 — $90K~~ ✅ PASSED Jun 5.
 - ~~**Somnia**: Jun 11 — Needs testnet deploy~~ ✅ PASSED (deadline missed)
 - ~~**Dev3pack Bridge Accelerator**: Jun 12~~ ❌ CANCELLED
-- ⚠️ **Arbitrum Open House submission**: Jun 14 (3 days)
+- ⚠️ **Arbitrum Open House submission**: Jun 14 (2 days)
 - **FIND EVIL!**: Jun 15 — $22K, cybersecurity + AI, MCP. Link: https://findevil.devpost.com/
-- ⚠️ **Mantle Turing Test Phase II**: Jun 15 (4 days) — REGISTER NEEDED (DoraHacks)
+- ⚠️ **Mantle Turing Test Phase II**: Jun 15 (3 days) — REGISTER NEEDED (DoraHacks)
 - **Encode Vibe Coding Hackathon**: Jun 19 — 3-day sprint
 - **Sui Overflow**: Jun 21 — Jordan to verify registration
 - **Encode Solana + Arc Bootcamps**: Jun 22 start — SIGN UP NEEDED
@@ -81,14 +81,14 @@ Last updated: 2026-06-11
 3. ~~**Bags FM**~~ — ✅ PASSED Jun 1. Rewards traction focus.
 4. ~~**Google Cloud Rapid Agent**~~ — ❌ NOT PURSUING. Enterprise lock-in, low prize-per-track, not our stack.
 5. **Somnia** — ✅ SUBMITTED Jun 10. Deadline Jun 11. Agent Catcher deployed.
-6. **Arbitrum Open House** — ⚠️ 🟢 DEPLOY. Deadline Jun 14 (3 days). AgentForge ready.
-7. **Mantle Turing Test** — ⚠️ 🟡 REGISTER + DEPLOY. Deadline Jun 15 (4 days). Contracts built. Register on DoraHacks.
+6. **Arbitrum Open House** — ⚠️ 🟢 DEPLOY. Deadline Jun 14 (2 days). AgentForge ready.
+7. **Mantle Turing Test** — ⚠️ 🟡 REGISTER + DEPLOY. Deadline Jun 15 (3 days). Contracts built. Register on DoraHacks.
 8. ~~**1752vc Lightning Round VIII**~~ — ✅ PASSED Jun 4.
 9. ~~**Google for Startups AI Agents Challenge**~~ — ✅ PASSED Jun 5. $90K.
-10. **Dev3pack Bridge Accelerator** — 🟡 QUEUED. Jun 12. Jordan to provide details.
-11. **BNB Agent SDK** — 🟡 QUEUED. AI Agent Identity + Commerce. Deadline Jun 24 (13 days).
+10. ~~**Dev3pack Bridge Accelerator**~~ — ❌ CANCELLED. Jun 12.
+11. **BNB Agent SDK** — 🟡 QUEUED. AI Agent Identity + Commerce. Deadline Jun 24 (12 days).
 12. **Qwen Cloud AI Hackathon** — 🟡 QUEUED. Tracks: MemoryAgent, AI Showrunner, Agent Society. Link: https://qwencloud-hackathon.devpost.com/
-13. **Casper Agentic Buildathon** — 🟡 NEW. $150K. Agentic AI + x402 + DeFi on Casper (Rust). 19 days left. Link: https://dorahacks.io/hackathon/casper-agentic-buildathon
+13. **Casper Agentic Buildathon** — 🟡 NEW. $150K. Agentic AI + x402 + DeFi on Casper (Rust). 18 days left. Link: https://dorahacks.io/hackathon/casper-agentic-buildathon
 14. **The Pitch by Deel** — 🟡 QUEUE. $15M global startup comp. $50K regional, $1M global. Link: https://www.deel.com/the-pitch-by-deel/
 
 ## Learning Track (Jordan directive, Jun 4 — fast-track multi-chain)

@@ -11,6 +11,13 @@
 
 ## Scan Log
 
+### 2026-06-12
+- **12 total roles** on College.xyz (unchanged from 06-11)
+- **3 remote roles** found (ether.fi x2, Wintermute VC)
+- **0 new matches** — ether.fi roles already tracked (IDs 31/32)
+- Wintermute VC Intern still partial (pay not listed)
+- Notable onsite roles unchanged: Gemini SWE Intern ($50/hr NYC hybrid), Injective PM Intern ($7.5K–$8K/mo NYC)
+
 ### 2026-06-11
 - **12 total roles** on College.xyz (unchanged from 06-10)
 - **3 remote roles** found (ether.fi x2, Wintermute VC)

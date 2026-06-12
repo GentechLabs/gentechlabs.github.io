@@ -1,44 +1,104 @@
 {
   "profile": {
     "name": "Jordan",
-    "alias": "Builder",
+    "location": "Cincinnati, OH",
     "avatar": "🏗️",
     "joined": "2026-04-19",
     "bio": "Building the Agent Economy. Amazon by day, GenTech by night."
   },
   "layers": {
-    "gaming": {
+    "cookbook": {
+      "enabled": false,
+      "icon": "🍳",
+      "title": "Cookbook",
+      "stats": {
+        "totalDishes": 0,
+        "favoritesSaved": 0,
+        "substitutionsLogged": 0
+      },
+      "recentDishes": [],
+      "flavorProfile": {
+        "savory": 70,
+        "umami": 60,
+        "spicy": 40,
+        "sweet": 50,
+        "sour": 30
+      }
+    },
+    "journal": {
       "enabled": true,
-      "icon": "🎮",
-      "title": "Gaming",
-      "mainBuild": "Lightning Invoker (Monk)",
-      "dashboard": "../Gaming/poe2-dashboard.html"
+      "icon": "📓",
+      "title": "Journal",
+      "stats": {
+        "totalEntries": 0,
+        "moodTrend": "building",
+        "commonTopics": ["AAE", "hackathons", "agent economy"]
+      },
+      "entries": []
     },
     "travel": {
       "enabled": true,
       "icon": "✈️",
       "title": "Travel",
-      "activeTrip": "Philippines 2026",
-      "dashboard": "../Travels/travel-dashboard.html"
+      "trips": [
+        {
+          "name": "Philippines 2026",
+          "status": "Planning",
+          "startDate": "2026-09-01",
+          "endDate": "2026-09-14",
+          "location": "Makati, Metro Manila",
+          "vibe": "Chill romantic — mostly home, cooking, Christel"
+        },
+        {
+          "name": "Philippines 2026 — Boracay Birthday Trip",
+          "status": "Concept",
+          "startDate": "2026-11-29",
+          "endDate": "2026-12-14",
+          "location": "Makati + Boracay Island",
+          "vibe": "Birthday celebration — Vanito (Nov 29) + Christel (Dec 4). Island vacation in dry season."
+        }
+      ]
+    },
+    "gaming": {
+      "enabled": true,
+      "icon": "🎮",
+      "title": "Gaming",
+      "characters": [
+        {
+          "game": "POE2",
+          "class": "Monk",
+          "build": "Lightning Invoker",
+          "act": "Act 2",
+          "status": "In Progress"
+        },
+        {
+          "game": "POE2",
+          "class": "Sorceress",
+          "build": "Ruins of Aldur",
+          "act": "Early",
+          "status": "Alt"
+        }
+      ]
     },
     "finance": {
       "enabled": true,
       "icon": "💰",
       "title": "Finance",
-      "focus": "AVAX DCA + DeFi",
-      "dashboard": "../DeFi/defi-dashboard.html"
-    },
-    "journal": {
-      "enabled": false,
-      "icon": "📓",
-      "title": "Journal",
-      "note": "Coming soon"
-    },
-    "cookbook": {
-      "enabled": false,
-      "icon": "🍳",
-      "title": "Cookbook",
-      "note": "Coming soon — preview Christel's kitchen"
+      "positions": [
+        {
+          "token": "AVAX",
+          "type": "DCA",
+          "entries": [
+            { "price": 6.00, "status": "filled" },
+            { "price": 5.50, "status": "filled" },
+            { "price": 5.00, "status": "pending" }
+          ]
+        }
+      ],
+      "defi": {
+        "activePositions": 0,
+        "totalValue": 0
+      }
     }
   }
 }

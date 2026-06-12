@@ -4,6 +4,30 @@ Active work items. Jordan's action items marked with **👤 JORDAN ACTION**.
 
 ---
 
+## [ ] AgentLayer × AAE Integration ⭐ NEW — PARTNERSHIP
+- **Repo:** To be created
+- **Status:** Architecture defined. Ready to build.
+- **What:** Integrate our ERC-8004 identity + Agent Credit Score with AgentLayer's Uniswap execution
+- **Why:** Nobody has the full stack. We bring identity + reputation. They bring execution + orchestration.
+- **Remaining:**
+  - [ ] Phase 1: Identity Bridge (1 week)
+  - [ ] Phase 2: Credit Score Integration (1 week)
+  - [ ] Phase 3: Uniswap Execution (1 week)
+  - [ ] Phase 4: x402 Payments (1 week)
+- **Priority:** HIGH — first major integration partnership
+
+## [ ] AgentBridge — AgentLayer Integration ⭐ NEW
+- **Repo:** https://github.com/ProtoJay4789/agentbridge
+- **Status:** ✅ Built + pushed. 37/37 tests pass. Base Sepolia ready.
+- **What:** ERC-8004 identity + reputation middleware for agentic DeFi
+- **Contracts:** AgentIdentity, AgentReputation, DeFiGateway
+- **Remaining:**
+  - [ ] Deploy to Base Sepolia
+  - [ ] Demo video
+  - [ ] Submit to Lepton hackathon
+  - [ ] Submit to BNB Hack
+- **Priority:** HIGH — core integration piece
+
 ## [ ] Unified Memory Router ⭐ NEW — BACKBONE
 - **Repo:** https://github.com/ProtoJay4789/unified-memory
 - **Status:** ✅ Built + pushed. Cross-layer memory routing working.
@@ -79,9 +103,9 @@ Active work items. Jordan's action items marked with **👤 JORDAN ACTION**.
   - [ ] Submit to hackathon
 - **Priority:** URGENT — deadline in 3 days
 
-## [ ] Christel's Kitchen Dashboard
+## ✅ Christel's Kitchen Dashboard — LIVE
 - **URL:** https://protojay4789.github.io/Cookbook/christel-kitchen.html
-- **Status:** ✅ Live. First Cookbook beta user.
+- **Status:** ✅ Live. First Cookbook beta user. Cross-layer nav added.
 - **What:** Cooking dashboard with recipes, substitutions, meal planning, taste profile.
 - **Remaining:**
   - [ ] Connect to real database (replace static JSON)

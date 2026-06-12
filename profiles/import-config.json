@@ -1,0 +1,115 @@
+{
+  "importSources": [
+    {
+      "id": "chatgpt",
+      "name": "ChatGPT",
+      "description": "Import from ChatGPT conversation history",
+      "format": "markdown",
+      "parser": "parseChatGPT",
+      "example": "## Food\nI made chicken adobo tonight with soy sauce and vinegar..."
+    },
+    {
+      "id": "anthropic",
+      "name": "Claude",
+      "description": "Import from Claude conversations",
+      "format": "json",
+      "parser": "parseClaude",
+      "example": "{\"type\": \"conversation\", \"messages\": [...]}"
+    },
+    {
+      "id": "obsidian",
+      "name": "Obsidian",
+      "description": "Import from Obsidian vault notes",
+      "format": "markdown",
+      "parser": "parseObsidian",
+      "example": "---\ntags: [cooking, recipe]\n---\n# Chicken Adobo\nTonight I made..."
+    },
+    {
+      "id": "notion",
+      "name": "Notion",
+      "description": "Import from Notion pages/database",
+      "format": "json",
+      "parser": "parseNotion",
+      "example": "{\"pages\": [{\"title\": \"Recipes\", \"content\": \"...\"}]}"
+    },
+    {
+      "id": "csv",
+      "name": "CSV/Spreadsheet",
+      "description": "Import from CSV or spreadsheet export",
+      "format": "csv",
+      "parser": "parseCSV",
+      "example": "date,dish,rating\n2026-06-10,Chicken Adobo,5"
+    },
+    {
+      "id": "text",
+      "name": "Plain Text",
+      "description": "Import from any plain text file",
+      "format": "text",
+      "parser": "parseText",
+      "example": "June 10: Made chicken adobo. Used thighs instead of breast."
+    }
+  ],
+  "autoDetection": {
+    "enabled": true,
+    "rules": [
+      {
+        "layer": "cookbook",
+        "keywords": ["recipe", "cooked", "made", "ingredients", "dish", "meal", "food", "restaurant"],
+        "patterns": [
+          "made (.+?) tonight",
+          "cooked (.+?) with",
+          "recipe for (.+?)",
+          "(.+?) recipe"
+        ]
+      },
+      {
+        "layer": "journal",
+        "keywords": ["feeling", "today was", "stressed", "happy", "sad", "grateful", "reflection"],
+        "patterns": [
+          "today I (felt|was|am) (.+?)",
+          "feeling (.+?) today",
+          "need to (vent|talk|share)"
+        ]
+      },
+      {
+        "layer": "travel",
+        "keywords": ["trip", "flight", "hotel", "vacation", "travel", "booking", "packing"],
+        "patterns": [
+          "flying to (.+?) on",
+          "booking (.+?) for",
+          "trip to (.+?)",
+          "packing for (.+?)"
+        ]
+      },
+      {
+        "layer": "gaming",
+        "keywords": ["build", "character", "class", "skills", "level", "quest", "poe2", "monk", "sorceress"],
+        "patterns": [
+          "new (.+?) build",
+          "playing (.+?) in",
+          "level (.+?) (.+?)",
+          "(.+) class build"
+        ]
+      },
+      {
+        "layer": "finance",
+        "keywords": ["portfolio", "yield", "staking", "lp position", "defi", "token", "price"],
+        "patterns": [
+          "bought (.+?) at",
+          "sold (.+?) for",
+          "staking (.+?) on",
+          "yield from (.+?)"
+        ]
+      }
+    ]
+  },
+  "defaultProfile": {
+    "layers": {
+      "cookbook": { "enabled": false, "icon": "🍳", "title": "Cookbook" },
+      "journal": { "enabled": false, "icon": "📓", "title": "Journal" },
+      "travel": { "enabled": false, "icon": "✈️", "title": "Travel" },
+      "gaming": { "enabled": false, "icon": "🎮", "title": "Gaming" },
+      "finance": { "enabled": false, "icon": "💰", "title": "Finance" }
+    }
+  }
+}
