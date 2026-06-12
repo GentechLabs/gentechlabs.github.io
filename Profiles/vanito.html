@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GenTech · Vanito (Wyvern)</title>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <meta name="cache-bust" content="2026-06-12T00:00:00Z">
+    <meta name="robots" content="noindex">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Crimson+Text:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #c9a84c;
+            --gold-dim: #8b6914;
+            --gold-glow: rgba(201, 168, 76, 0.4);
+            --fire: #ff6b35;
+            --fire-glow: rgba(255, 107, 53, 0.35);
+            --magma: #cc4400;
+            --physical: #e05555;
+            --physical-glow: rgba(224, 85, 85, 0.35);
+            --dark-bg: #0a0a0f;
+            --panel-bg: #12121a;
+            --panel-border: #1e1e2e;
+            --text: #d4d4d4;
+            --text-dim: #6b6b7b;
+            --success: #44ff88;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: var(--dark-bg);
+            color: var(--text);
+            font-family: 'Crimson Text', serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background:
+                radial-gradient(ellipse at 20% 20%, rgba(255, 107, 53, 0.03) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 80%, rgba(201, 168, 76, 0.02) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ── Header ── */
+        .header {
+            text-align: center;
+            padding: 30px 0 20px;
+            border-bottom: 1px solid var(--panel-border);
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 2.4em;
+            font-weight: 900;
+            color: var(--gold);
+            text-shadow: 0 0 30px var(--gold-glow);
+            letter-spacing: 3px;
+        }
+
+        .header .bio {
+            color: var(--text-dim);
+            font-size: 1.05em;
+            margin-top: 8px;
+            font-style: italic;
+        }
+
+        /* ── Hero Card ── */
+        .hero-card {
+            background: var(--panel-bg);
+            border: 1px solid var(--panel-border);
+            border-radius: 12px;
+            padding: 28px;
+            margin-bottom: 28px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--fire), var(--gold), var(--fire));
+        }
+
+        .hero-card .char-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 18px;
+        }
+
+        .char-avatar {
+            font-size: 2.8em;
+            line-height: 1;
+        }
+
+        .char-info h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.4em;
+            color: var(--gold);
+            font-weight: 700;
+        }
+
+        .char-info .alias {
+            color: var(--text-dim);
+            font-size: 0.95em;
+        }
+
+        .char-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 14px;
+            margin-bottom: 20px;
+        }
+
+        .detail-item {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--panel-border);
+            border-radius: 8px;
+            padding: 12px 14px;
+        }
+
+        .detail-item .label {
+            color: var(--text-dim);
+            font-size: 0.8em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .detail-item .value {
+            color: var(--text);
+            font-size: 1.05em;
+            margin-top: 4px;
+            font-weight: 700;
+        }
+
+        .detail-item .value.gold { color: var(--gold); }
+        .detail-item .value.fire { color: var(--fire); }
+
+        /* ── Progress Bars ── */
+        .progress-section {
+            margin-bottom: 28px;
+        }
+
+        .progress-section h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.1em;
+            color: var(--gold);
+            margin-bottom: 14px;
+            letter-spacing: 1px;
+        }
+
+        .progress-bar {
+            margin-bottom: 14px;
+        }
+
+        .progress-bar .bar-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+            font-size: 0.95em;
+        }
+
+        .progress-bar .bar-label { color: var(--text); }
+        .progress-bar .bar-pct { color: var(--gold); font-weight: 700; }
+
+        .progress-bar .bar-track {
+            background: rgba(255,255,255,0.06);
+            border-radius: 6px;
+            height: 10px;
+            overflow: hidden;
+        }
+
+        .progress-bar .bar-fill {
+            height: 100%;
+            border-radius: 6px;
+            transition: width 1s ease;
+        }
+
+        .bar-fill.campaign { background: linear-gradient(90deg, var(--gold-dim), var(--gold)); width: 25%; }
+        .bar-fill.build { background: linear-gradient(90deg, var(--fire), var(--magma)); width: 40%; }
+        .bar-fill.gems { background: linear-gradient(90deg, #3b82f6, #60a5fa); width: 30%; }
+
+        /* ── Layer Cards ── */
+        .layers-section h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.1em;
+            color: var(--gold);
+            margin-bottom: 14px;
+            letter-spacing: 1px;
+        }
+
+        .layers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 14px;
+            margin-bottom: 28px;
+        }
+
+        .layer-card {
+            background: var(--panel-bg);
+            border: 1px solid var(--panel-border);
+            border-radius: 10px;
+            padding: 20px;
+            text-decoration: none;
+            color: var(--text);
+            transition: border-color 0.2s, transform 0.2s;
+            display: block;
+        }
+
+        .layer-card:hover {
+            border-color: var(--gold);
+            transform: translateY(-2px);
+        }
+
+        .layer-card.active { border-color: var(--fire); }
+        .layer-card.active::after {
+            content: 'Active';
+            display: inline-block;
+            background: rgba(255, 107, 53, 0.15);
+            color: var(--fire);
+            font-size: 0.7em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 2px 8px;
+            border-radius: 4px;
+            margin-left: 8px;
+            vertical-align: middle;
+        }
+
+        .layer-card.coming-soon { opacity: 0.5; pointer-events: none; }
+        .layer-card.coming-soon::after {
+            content: 'Coming Soon';
+            display: inline-block;
+            background: rgba(255,255,255,0.06);
+            color: var(--text-dim);
+            font-size: 0.7em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 2px 8px;
+            border-radius: 4px;
+            margin-left: 8px;
+            vertical-align: middle;
+        }
+
+        .layer-card .layer-icon {
+            font-size: 1.6em;
+            margin-bottom: 8px;
+        }
+
+        .layer-card .layer-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.05em;
+            font-weight: 700;
+            color: var(--gold);
+        }
+
+        .layer-card .layer-sub {
+            color: var(--text-dim);
+            font-size: 0.9em;
+            margin-top: 4px;
+        }
+
+        /* ── Quick Stats ── */
+        .quick-stats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 28px;
+        }
+
+        .stat-pill {
+            background: var(--panel-bg);
+            border: 1px solid var(--panel-border);
+            border-radius: 20px;
+            padding: 6px 14px;
+            font-size: 0.85em;
+            color: var(--text-dim);
+        }
+
+        .stat-pill .stat-val {
+            color: var(--gold);
+            font-weight: 700;
+        }
+
+        /* ── Synergy Quote ── */
+        .synergy-box {
+            background: var(--panel-bg);
+            border: 1px solid var(--panel-border);
+            border-left: 3px solid var(--fire);
+            border-radius: 0 10px 10px 0;
+            padding: 18px 22px;
+            margin-bottom: 28px;
+        }
+
+        .synergy-box .synergy-label {
+            font-family: 'Cinzel', serif;
+            font-size: 0.85em;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .synergy-box .synergy-text {
+            color: var(--text);
+            font-size: 0.95em;
+            line-height: 1.6;
+            font-style: italic;
+        }
+
+        /* ── Build Suggestions ── */
+        .suggestions-section h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.1em;
+            color: var(--gold);
+            margin-bottom: 14px;
+            letter-spacing: 1px;
+        }
+
+        .suggestion-card {
+            background: var(--panel-bg);
+            border: 1px solid var(--panel-border);
+            border-radius: 10px;
+            padding: 16px 18px;
+            margin-bottom: 12px;
+        }
+
+        .suggestion-card .sug-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 6px;
+        }
+
+        .sug-priority {
+            background: rgba(255, 107, 53, 0.15);
+            color: var(--fire);
+            font-size: 0.75em;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .sug-skill {
+            font-family: 'Cinzel', serif;
+            font-size: 1em;
+            color: var(--gold);
+            font-weight: 700;
+        }
+
+        .sug-arrow {
+            color: var(--text-dim);
+            font-size: 0.9em;
+        }
+
+        .sug-new {
+            color: var(--success);
+            font-weight: 700;
+        }
+
+        .sug-reason {
+            color: var(--text-dim);
+            font-size: 0.88em;
+            line-height: 1.5;
+        }
+
+        /* ── Footer ── */
+        .footer {
+            text-align: center;
+            padding: 24px 0;
+            border-top: 1px solid var(--panel-border);
+            margin-top: 10px;
+            color: var(--text-dim);
+            font-size: 0.85em;
+        }
+
+        .footer .brand {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+
+        /* ── Mobile ── */
+        @media (max-width: 600px) {
+            .header h1 { font-size: 1.7em; }
+            .char-details { grid-template-columns: 1fr 1fr; }
+            .layers-grid { grid-template-columns: 1fr; }
+            .quick-stats { justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>🎮 Vanito (Wyvern)</h1>
+            <div class="bio">Vibrant Warrior · Mace &amp; Shield · POE2</div>
+        </div>
+
+        <!-- Hero Character Card -->
+        <div class="hero-card">
+            <div class="char-header">
+                <div class="char-avatar">⚔️</div>
+                <div class="char-info">
+                    <h2>Wyvern</h2>
+                    <div class="alias">Warrior · Vibrant Warrior Build</div>
+                </div>
+            </div>
+            <div class="char-details">
+                <div class="detail-item">
+                    <div class="label">Class</div>
+                    <div class="value gold">Warrior</div>
+                </div>
+                <div class="detail-item">
+                    <div class="label">Build</div>
+                    <div class="value fire">Vibrant Warrior</div>
+                </div>
+                <div class="detail-item">
+                    <div class="label">Weapon</div>
+                    <div class="value">Mace + Shield</div>
+                </div>
+                <div class="detail-item">
+                    <div class="label">Act</div>
+                    <div class="value">Progressing</div>
+                </div>
+                <div class="detail-item">
+                    <div class="label">Status</div>
+                    <div class="value fire">Transitioning</div>
+                </div>
+                <div class="detail-item">
+                    <div class="label">Talisman</div>
+                    <div class="value">Shave Shift</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Progress Bars -->
+        <div class="progress-section">
+            <h3>📈 Progress</h3>
+            <div class="progress-bar">
+                <div class="bar-header">
+                    <span class="bar-label">Campaign</span>
+                    <span class="bar-pct">25%</span>
+                </div>
+                <div class="bar-track"><div class="bar-fill campaign"></div></div>
+            </div>
+            <div class="progress-bar">
+                <div class="bar-header">
+                    <span class="bar-label">Build Completion</span>
+                    <span class="bar-pct">40%</span>
+                </div>
+                <div class="bar-track"><div class="bar-fill build"></div></div>
+            </div>
+            <div class="progress-bar">
+                <div class="bar-header">
+                    <span class="bar-label">Gem Collection</span>
+                    <span class="bar-pct">30%</span>
+                </div>
+                <div class="bar-track"><div class="bar-fill gems"></div></div>
+            </div>
+        </div>
+
+        <!-- Layer Cards -->
+        <div class="layers-section">
+            <h3>🔗 Layers</h3>
+            <div class="layers-grid">
+                <a href="../Gaming/poe2-warrior-dashboard.html" class="layer-card active">
+                    <div class="layer-icon">🎮</div>
+                    <div class="layer-title">POE2 Dashboard</div>
+                    <div class="layer-sub">Vibrant Warrior · Mace & Shield</div>
+                </a>
+                <div class="layer-card coming-soon">
+                    <div class="layer-icon">📓</div>
+                    <div class="layer-title">Journal</div>
+                    <div class="layer-sub">Personal thoughts &amp; notes</div>
+                </div>
+                <div class="layer-card coming-soon">
+                    <div class="layer-icon">✈️</div>
+                    <div class="layer-title">Travel</div>
+                    <div class="layer-sub">Adventures &amp; destinations</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Stats -->
+        <div class="quick-stats">
+            <div class="stat-pill">Active Build: <span class="stat-val">Vibrant Warrior</span></div>
+            <div class="stat-pill">Patch: <span class="stat-val">0.5</span></div>
+            <div class="stat-pill">Member Since: <span class="stat-val">Jun 2026</span></div>
+            <div class="stat-pill">Ascendancy: <span class="stat-val">Not yet</span></div>
+        </div>
+
+        <!-- Synergy Loop -->
+        <div class="synergy-box">
+            <div class="synergy-label">🔄 Synergy Loop</div>
+            <div class="synergy-text">
+                Infernal Cry buffs → Mace Strike/Rolling Slam → Bone Shatter stuns → Wing Blast charges → Savage Fury sustains → Rolling Magma/Thunderstorm clear
+            </div>
+        </div>
+
+        <!-- Build Suggestions -->
+        <div class="suggestions-section">
+            <h3>🛠️ Build Suggestions</h3>
+
+            <div class="suggestion-card">
+                <div class="sug-header">
+                    <span class="sug-priority">P1</span>
+                    <span class="sug-skill">Bone Shatter</span>
+                    <span class="sug-arrow">→</span>
+                    <span class="sug-new">Stun + Brutality</span>
+                </div>
+                <div class="sug-reason">Stun amplifies its core mechanic; Brutality adds pure physical damage since you're not scaling elemental on Warrior.</div>
+            </div>
+
+            <div class="suggestion-card">
+                <div class="sug-header">
+                    <span class="sug-priority">P2</span>
+                    <span class="sug-skill">Mace Strike</span>
+                    <span class="sug-arrow">→</span>
+                    <span class="sug-new">Heavy Swing + Rage</span>
+                </div>
+                <div class="sug-reason">Heavy Swing adds massive more damage to your primary melee hit. With Mace+Shield, you need every point of damage on your main attack.</div>
+            </div>
+
+            <div class="suggestion-card">
+                <div class="sug-header">
+                    <span class="sug-priority">P3</span>
+                    <span class="sug-skill">Rolling Magma</span>
+                    <span class="sug-arrow">→</span>
+                    <span class="sug-new">Ignite Proliferation + Magnified Area</span>
+                </div>
+                <div class="sug-reason">Rolling Magma's ignite spreads to nearby enemies. Ignite Proliferation turns every hit into AoE clear.</div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <span class="brand">GENTECH</span> · Built with ❤️
+        </div>
+    </div>
+</body>
+</html>
