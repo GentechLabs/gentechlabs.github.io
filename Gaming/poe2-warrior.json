@@ -2,7 +2,8 @@
   "characters": [
     {
       "id": "warrior-wyvern",
-      "player": "Wyvern",
+      "player": "Vanito",
+      "alias": "Wyvern",
       "class": "Warrior",
       "build": "Vibrant Warrior",
       "ascendancy": "Not yet",
@@ -134,6 +135,155 @@
       ],
       "synergyLoop": "Infernal Cry buffs → Mace Strike/Rolling Slam for big physical hits → Bone Shatter stuns → Wing Blast generates charges → Savage Fury sustains duration → Rolling Magma/Thunderstorm for AoE clear",
       "lastUpdated": "2026-06-05"
+    },
+    {
+      "id": "mercenary-witchhunter",
+      "player": "Vanito",
+      "alias": "Witch Hunter",
+      "class": "Mercenary",
+      "build": "Gemini Surge Crossbow",
+      "ascendancy": "Witch Hunter (planned: Tactician)",
+      "weapon": "Double Vision Dyad Crossbow",
+      "talisman": null,
+      "act": "Progressing",
+      "mission": "Leveling",
+      "patch": "0.5",
+      "progress": {
+        "campaign": 20,
+        "buildCompletion": 35,
+        "gemCollection": 40,
+        "metaAlignment": 55
+      },
+      "skills": {
+        "mercenary": [
+          {
+            "name": "Gemini Surge",
+            "type": "Trigger — Elemental Surge (from Double Vision)",
+            "primary": true,
+            "supports": [],
+            "note": "Granted by Double Vision. Triggers on reload — alternately gains Cold Surges or Fire Surges."
+          },
+          {
+            "name": "Crossbow Shot",
+            "type": "Basic Attack — Physical",
+            "primary": false,
+            "supports": []
+          },
+          {
+            "name": "Load: Shock Burst Rounds",
+            "type": "Ammo — Lightning/Physical",
+            "primary": true,
+            "supports": []
+          },
+          {
+            "name": "Load: Armor Piercing Rounds",
+            "type": "Ammo — Physical/Armor Break",
+            "primary": false,
+            "supports": []
+          },
+          {
+            "name": "Load: High Velocity Rounds",
+            "type": "Ammo — Physical/Pierce",
+            "primary": false,
+            "supports": []
+          },
+          {
+            "name": "Load: Galvanic Shards",
+            "type": "Ammo — Lightning/Chain",
+            "primary": false,
+            "supports": []
+          },
+          {
+            "name": "Tornado",
+            "type": "AoE — Crowd Control",
+            "primary": false,
+            "supports": []
+          },
+          {
+            "name": "Emergency Reload",
+            "type": "Utility — Reload Speed",
+            "primary": false,
+            "supports": [],
+            "note": "Key synergy with Gemini Surge — faster reloads = more surge triggers."
+          },
+          {
+            "name": "Hail of Thunder",
+            "type": "AoE — Lightning",
+            "primary": false,
+            "supports": []
+          },
+          {
+            "name": "Siege Ballista",
+            "type": "Totem — Ranged/Pin",
+            "primary": false,
+            "supports": [],
+            "note": "Strong Tactician synergy — will benefit from totem ascendancy nodes."
+          },
+          {
+            "name": "Mirage Archer",
+            "type": "Companion — Auxiliary Attacks",
+            "primary": false,
+            "supports": []
+          },
+          {
+            "name": "Wind Dancer",
+            "type": "Defensive — Evasion",
+            "primary": false,
+            "supports": []
+          }
+        ]
+      },
+      "suggestions": [
+        {
+          "priority": 1,
+          "skill": "Gemini Surge",
+          "current": "No supports",
+          "suggested": "Research — Surge-boosting supports",
+          "reason": "Gemini Surge is your core mechanic. Check if any supports can amplify Surge stacks or add effects to Cold/Fire Surges."
+        },
+        {
+          "priority": 2,
+          "skill": "Load: Shock Burst Rounds",
+          "current": "No supports",
+          "suggested": "Lightning Penetration + Added Lightning Damage",
+          "reason": "Your primary ammo type should hit hard. Lightning Penetration ensures damage isn't resisted, Added Lightning scales with Gemini Surge's Cold/Fire alternation."
+        },
+        {
+          "priority": 3,
+          "skill": "Siege Ballista",
+          "current": "No supports",
+          "suggested": "Magnified Area + Totem Damage",
+          "reason": "This becomes your bread and butter after Tactician switch. Invest now for the transition."
+        },
+        {
+          "priority": 4,
+          "skill": "Emergency Reload",
+          "current": "No supports",
+          "suggested": "Reduced Cooldown + Increased Duration",
+          "reason": "Emergency Reload triggers Gemini Surge on demand. Lower cooldown = more surge uptime."
+        },
+        {
+          "priority": 5,
+          "skill": "Wind Dancer",
+          "current": "No supports",
+          "suggested": "Evasion + Blind",
+          "reason": "Your only defensive layer. Wind Dancer + Blind = enemies miss more often. Critical for survival."
+        }
+      ],
+      "synergyLoop": "Emergency Reload → triggers Gemini Surge (Cold/Fire Surges) → Load ammo types for situational damage → Crossbow Shot/Hail of Thunder for AoE clear → Siege Ballista for pin/totem pressure → Mirage Archer for auxiliary DPS → Wind Dancer for survival",
+      "transitionPlan": {
+        "from": "Witch Hunter",
+        "to": "Tactician",
+        "keyChanges": [
+          "Siege Ballista becomes primary damage source with Tactician totem nodes",
+          "Can place multiple banners (Whoever Pays Best node)",
+          "Artillery Ballista grants 40% increased Immobilisation Buildup",
+          "Allies in Presence gain Added Attack Damage",
+          "Lose Witch Hunter's offensive explosion/culling — gain totem/banner utility"
+        ],
+        "readinessLevel": "Transition-ready when ascendancy trial is complete"
+      },
+      "lastUpdated": "2026-06-12"
     }
   ]
 }

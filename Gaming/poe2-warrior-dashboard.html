@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GenTech Dashboard — Wyvern Warrior</title>
+    <title>GenTech Dashboard — POE2</title>
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
@@ -135,6 +135,32 @@
             background: rgba(126, 184, 255, 0.12);
             border-color: rgba(126, 184, 255, 0.45);
             box-shadow: 0 0 12px rgba(126, 184, 255, 0.15);
+        }
+        .char-switcher button {
+            display: inline-block;
+            font-family: 'Cinzel', serif;
+            font-size: 0.85em;
+            padding: 6px 18px;
+            border: 1px solid rgba(126, 184, 255, 0.25);
+            border-radius: 20px;
+            background: rgba(126, 184, 255, 0.06);
+            color: #7eb8ff;
+            text-decoration: none;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+            cursor: pointer;
+            margin: 0 4px;
+        }
+        .char-switcher button:hover {
+            background: rgba(126, 184, 255, 0.12);
+            border-color: rgba(126, 184, 255, 0.45);
+            box-shadow: 0 0 12px rgba(126, 184, 255, 0.15);
+        }
+        .char-switcher button.active {
+            background: rgba(126, 184, 255, 0.2);
+            border-color: rgba(126, 184, 255, 0.6);
+            box-shadow: 0 0 14px rgba(126, 184, 255, 0.3);
+            color: #fff;
         }
 
         /* ── Main Tab Bar ── */
@@ -776,12 +802,13 @@
     <div class="container" id="app">
         <div class="header">
             <h1>GENTECH DASHBOARD</h1>
-            <div class="subtitle">GenTech Dashboard — Wyvern Warrior</div>
+            <div class="subtitle" id="header-subtitle">GenTech Dashboard — Wyvern Warrior</div>
         </div>
 
         <!-- Character Switcher -->
-        <div class="char-switcher">
-            <a href="poe2-dashboard.html">⚡ Jordan's Monk</a>
+        <div class="char-switcher" id="char-switcher">
+            <button class="active" onclick="switchCharacter(0)">⚔️ Vanito — Wyvern Warrior</button>
+            <button onclick="switchCharacter(1)">🏹 Vanito — Witch Hunter Mercenary</button>
         </div>
 
         <!-- Main Tab Bar -->
@@ -792,7 +819,7 @@
 
         <!-- ═══ BUILD TAB PANEL ═══ -->
         <div class="main-panel active" id="panel-build">
-            <div class="loading" id="build-loading">🔥 Loading Wyvern's build...</div>
+            <div class="loading" id="build-loading">🔥 Loading build data...</div>
             <div id="build-content" style="display:none;"></div>
         </div>
 
@@ -836,14 +863,23 @@
         // ═══════════════════════════════════════════════════════════
         const DATA_URL = 'poe2-warrior.json?v=' + Date.now();
         let currentBuildData = null;
+        let currentCharIndex = 0;
+        let allCharsData = null;
 
-        async function loadBuild() {
+        async function loadBuild(charIndex) {
+            if (charIndex !== undefined) currentCharIndex = charIndex;
             try {
                 const res = await fetch(DATA_URL);
                 const raw = await res.json();
-                const data = raw.characters ? raw.characters[0] : raw;
+                allCharsData = raw.characters || [raw];
+                const data = allCharsData[currentCharIndex];
                 currentBuildData = data;
+                document.getElementById('header-subtitle').textContent =
+                    'GenTech Dashboard — ' + data.class + ' ' + data.alias;
+                document.getElementById('build-loading').textContent =
+                    '🔥 Loading ' + (data.alias || data.class) + '\'s build...';
                 renderDashboard(data);
+                updateCharSwitcher();
             } catch (err) {
                 document.getElementById('build-loading').innerHTML =
                     '⚠️ Could not load build data. Make sure ' + DATA_URL + ' exists.';
@@ -851,33 +887,46 @@
         }
 
         function renderDashboard(data) {
-            const { player, progress, skills, suggestions, synergyLoop, lastUpdated } = data;
+            const { id, player, alias, class: charClass, build, ascendancy, weapon,
+                    talisman, act, mission, patch, progress, skills, suggestions,
+                    synergyLoop, lastUpdated } = data;
 
-            const warriorHTML = skills.warrior.map(skill =>
-                `<div class="skill-card ${skill.primary ? 'primary' : ''}">
-                    <div class="skill-name">${skill.name}</div>
-                    <div class="skill-type">${skill.type}</div>
-                    <div class="support-gems">
-                        ${skill.supports.length > 0
-                            ? skill.supports.map(s => `<span class="support-tag">${s}</span>`).join('')
-                            : '<span class="support-tag empty">No supports yet</span>'
-                        }
-                    </div>
-                </div>`
-            ).join('');
-
-            const wyvernHTML = skills.wyvern.map(skill =>
-                `<div class="skill-card ${skill.primary ? 'primary' : ''}">
-                    <div class="skill-name">${skill.name}</div>
-                    <div class="skill-type">${skill.type}</div>
-                    <div class="support-gems">
-                        ${skill.supports.length > 0
-                            ? skill.supports.map(s => `<span class="support-tag">${s}</span>`).join('')
-                            : '<span class="support-tag empty">No supports yet</span>'
-                        }
-                    </div>
-                </div>`
-            ).join('');
+            // ── Generic skill-set rendering ──
+            let allSkillSetsHTML = '';
+            const skillSetKeys = Object.keys(skills);
+            const skillSetLabels = {
+                warrior: '🛡️ Warrior Set (Primary)',
+                wyvern: '🐉 Wyvern Set (Secondary)',
+                mercenary: '🏹 Mercenary Set'
+            };
+            const skillSetIcons = {
+                warrior: '🛡️',
+                wyvern: '🐉',
+                mercenary: '🏹'
+            };
+            for (const [setName, skillList] of Object.entries(skills)) {
+                const label = skillSetLabels[setName]
+                    || (skillSetIcons[setName] + ' ' + setName.charAt(0).toUpperCase() + setName.slice(1) + ' Set');
+                const skillHTML = skillList.map(skill => {
+                    const noteHTML = skill.note
+                        ? `<div class="skill-note" style="font-size:0.8em;color:#aaa;margin-top:4px;font-style:italic;">${skill.note}</div>`
+                        : '';
+                    return `<div class="skill-card ${skill.primary ? 'primary' : ''}">
+                        <div class="skill-name">${skill.name}</div>
+                        <div class="skill-type">${skill.type}</div>
+                        ${noteHTML}
+                        <div class="support-gems">
+                            ${skill.supports.length > 0
+                                ? skill.supports.map(s => `<span class="support-tag">${s}</span>`).join('')
+                                : '<span class="support-tag empty">No supports yet</span>'
+                            }
+                        </div>
+                    </div>`;
+                }).join('');
+                allSkillSetsHTML += `
+                    <div class="skill-set-label">${label}</div>
+                    <div class="skill-grid">${skillHTML}</div>`;
+            }
 
             const suggestionsHTML = suggestions.map(s =>
                 `<div class="alert-item">
@@ -890,39 +939,57 @@
 
             const synergySteps = synergyLoop.split(' → ');
             const synergyHTML = synergySteps.map((step, i) => {
-                const cls = step.match(/Mace|Rolling Slam|Bone Shatter|Infernal|Warrior|Rend|Shield/i) ? 'physical'
-                          : step.match(/Wing|Savage|Thunder|Vower|Magma|Pounds|Wyvern/i) ? ''
+                const cls = step.match(/Mace|Rolling Slam|Bone Shatter|Infernal|Warrior|Rend|Shield|Gemini|Witch|Crossbow|Load|Surge|Reload|Siege|Ballista|Mirage|Wind|Hail|Tornado/i) ? ''
                           : 'gold';
                 return i < synergySteps.length - 1
                     ? `<span class="synergy-step ${cls}">${step}</span><span class="synergy-arrow">→</span>`
                     : `<span class="synergy-step ${cls}">${step}</span>`;
             }).join('');
 
+            // Character card stats — build dynamically from available fields
+            const displayName = alias || player;
+            const displayClass = charClass || 'Unknown';
+            const displayBuild = build || 'Unknown';
+            const displayWeapon = weapon || 'Unknown';
+
+            let statBoxesHTML = `
+                <div class="stat-box">
+                    <div class="label">Class</div>
+                    <div class="value">${displayClass}</div>
+                </div>
+                <div class="stat-box">
+                    <div class="label">Build</div>
+                    <div class="value">${displayBuild}</div>
+                </div>
+                <div class="stat-box">
+                    <div class="label">Weapon</div>
+                    <div class="value gold">${displayWeapon}</div>
+                </div>`;
+            if (talisman) {
+                statBoxesHTML += `
+                <div class="stat-box">
+                    <div class="label">Talisman</div>
+                    <div class="value gold">${talisman}</div>
+                </div>`;
+            }
+            if (ascendancy) {
+                statBoxesHTML += `
+                <div class="stat-box">
+                    <div class="label">Ascendancy</div>
+                    <div class="value">${ascendancy}</div>
+                </div>`;
+            }
+
             document.getElementById('build-content').innerHTML = `
                 <div class="patch-badge" style="display:inline-block;margin-bottom:20px;">
-                    Patch ${player.patch} — Return of the Ancients
+                    Patch ${patch} — Return of the Ancients
                 </div>
 
                 <div class="character-card">
-                    <div class="character-name">${player.name}</div>
-                    <div class="character-class">${player.class} — ${player.build} — ${player.weapon}</div>
+                    <div class="character-name">${displayName}</div>
+                    <div class="character-class">${displayClass} — ${displayBuild} — ${displayWeapon}</div>
                     <div class="character-stats">
-                        <div class="stat-box">
-                            <div class="label">Class</div>
-                            <div class="value">${player.class}</div>
-                        </div>
-                        <div class="stat-box">
-                            <div class="label">Build</div>
-                            <div class="value">${player.build}</div>
-                        </div>
-                        <div class="stat-box">
-                            <div class="label">Weapon</div>
-                            <div class="value gold">${player.weapon}</div>
-                        </div>
-                        <div class="stat-box">
-                            <div class="label">Talisman</div>
-                            <div class="value gold">${player.talisman}</div>
-                        </div>
+                        ${statBoxesHTML}
                     </div>
                 </div>
 
@@ -973,12 +1040,7 @@
 
                 <div class="skills-section">
                     <h2>⚔️ Skill Setup</h2>
-
-                    <div class="skill-set-label">🛡️ Warrior Set (Primary)</div>
-                    <div class="skill-grid">${warriorHTML}</div>
-
-                    <div class="skill-set-label">🐉 Wyvern Set (Secondary)</div>
-                    <div class="skill-grid">${wyvernHTML}</div>
+                    ${allSkillSetsHTML}
                 </div>
 
                 <div class="meta-alert">
@@ -996,6 +1058,34 @@
                     bar.style.width = bar.getAttribute('data-target') + '%';
                 });
             }, 300);
+        }
+
+        // ═══════════════════════════════════════════════════════════
+        //  CHARACTER SWITCHING
+        // ═══════════════════════════════════════════════════════════
+        function switchCharacter(index) {
+            if (!allCharsData || index === currentCharIndex) return;
+            currentCharIndex = index;
+            const data = allCharsData[index];
+            currentBuildData = data;
+
+            // Update header
+            document.getElementById('header-subtitle').textContent =
+                'GenTech Dashboard — ' + data.class + ' ' + data.alias;
+            document.getElementById('build-loading').textContent =
+                '🔥 Loading ' + (data.alias || data.class) + '\'s build...';
+            document.getElementById('build-loading').style.display = '';
+            document.getElementById('build-content').style.display = 'none';
+
+            // Render new dashboard
+            renderDashboard(data);
+            updateCharSwitcher();
+        }
+
+        function updateCharSwitcher() {
+            document.querySelectorAll('#char-switcher button').forEach((btn, i) => {
+                btn.classList.toggle('active', i === currentCharIndex);
+            });
         }
 
         // ═══════════════════════════════════════════════════════════

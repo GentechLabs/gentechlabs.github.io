@@ -1,15 +1,12 @@
-# Vanito's Build — Wyvern Warrior
+# Vanito's Builds — POE2
 
-## Character Info
-- **Name:** Wyvern
+## Character 1: Wyvern (Warrior)
 - **Class:** Warrior
 - **Build Type:** Vibrant Warrior (transitioning)
 - **Weapon:** Mace + Shield
 - **Talisman:** Shave Shift
 - **Ascendancy:** Not yet
 - **Patch:** 0.5 (Return of the Ancients)
-
-## Active Skills
 
 ### Warrior Set (Primary)
 | Skill | Supports | Role |
@@ -31,61 +28,75 @@
 | Wing Blast | Magnified Area, Charge Profusion | Utility — charge |
 | Pounds | *(none)* | Attack — physical |
 
-## Synergy Loop
+### Synergy Loop
 Infernal Cry buffs → Mace Strike/Rolling Slam for big physical hits → Bone Shatter stuns → Wing Blast generates charges → Savage Fury sustains duration → Rolling Magma/Thunderstorm for AoE clear
 
-## Build Analysis
+---
 
-### Strengths
-- **Dual skill set** — covers physical burst (Warrior) and elemental AoE (Wyvern)
-- **Mace + Shield** — strong defensive base, block + armor
-- **Infernal Cry** with Tireless + Armor Explosion — great warcry setup for physical builds
-- **Rolling Slam** with Fist of War + Magnified Area — solid AoE clear
-- **The Vower** with Empowered Sparks — sustained damage while other skills are on cooldown
-- **Wing Blast** with Charge Profusion — generates charges for burst windows
+## Character 2: Witch Hunter (Mercenary)
+- **Class:** Mercenary
+- **Build Type:** Gemini Surge Crossbow
+- **Weapon:** Double Vision Dyad Crossbow (unique)
+- **Ascendancy:** Witch Hunter → **planned switch to Tactician**
+- **Patch:** 0.5 (Return of the Ancients)
 
-### Gaps Identified
-- **Bone Shatter has no supports** — biggest gap. Stun potential wasted without investment
-- **Mace Strike** only has Rage — needs a damage multiplier (Heavy Swing)
-- **All supports are Tier 1** — significant upgrade potential as gear improves
-- **No sustain skills visible** — no life/mana leech, no life gain on hit
-- **Thunderstorm** lacks penetration — lightning damage will get resisted hard in later acts
+### About the Double Vision
+Unique Dyad Crossbow that grants **Gemini Surge** — triggers on reload, alternately gains Cold Surges or Fire Surges. Loads an additional bolt, adds Physical Damage, boosts Crit Chance. The core of this build revolves around reload cycling.
 
-### Recommended Swaps (Priority Order)
-1. **Bone Shatter:** Add Stun + Brutality — amplifies its core stun mechanic, Brutality for pure physical
-2. **Mace Strike:** Add Heavy Swing — massive more damage on primary melee hit
-3. **Rolling Magma:** Swap Multi Shot → Ignite Proliferation — turns every hit into AoE clear
-4. **Thunderstorm:** Add Lightning Penetration — ensures Wyvern's lightning actually hurts
-5. **Raise Shield:** Add Molten Shell — extra damage-absorbing shield on top of block
+### Active Skills (12 total)
+| Skill | Type | Role |
+|-------|------|------|
+| Gemini Surge | Trigger — Elemental Surge | Core mechanic (from Double Vision) |
+| Crossbow Shot | Basic Attack — Physical | Default attack |
+| Load: Shock Burst Rounds | Ammo — Lightning/Physical | Primary ammo |
+| Load: Armor Piercing Rounds | Ammo — Physical/Armor Break | Situational |
+| Load: High Velocity Rounds | Ammo — Physical/Pierce | Situational |
+| Load: Galvanic Shards | Ammo — Lightning/Chain | Situational |
+| Tornado | AoE — Crowd Control | Utility |
+| Emergency Reload | Utility — Reload Speed | Surge trigger enabler |
+| Hail of Thunder | AoE — Lightning | AoE clear |
+| Siege Ballista | Totem — Ranged/Pin | Totem pressure (key Tactician synergy) |
+| Mirage Archer | Companion — Auxiliary Attacks | Extra DPS |
+| Wind Dancer | Defensive — Evasion | Survival layer |
 
-### Timing
-- Current setup works for early/mid progression
-- Bone Shatter supports should be prioritized NOW — they're free power
-- Tier 1 → Tier 2+ gem upgrades should happen as soon as Uncut Gems are available
-- Build should be solid by end of campaign if gaps are addressed
+### Synergy Loop
+Emergency Reload → triggers Gemini Surge (Cold/Fire Surges) → Load ammo types for situational damage → Crossbow Shot/Hail of Thunder for AoE clear → Siege Ballista for pin/totem pressure → Mirage Archer for auxiliary DPS → Wind Dancer for survival
 
-## Progress Log
-| Date | Notes |
-|------|-------|
-| 2026-05-19 | Warrior build started. Talisman acquired, Mace+Shield equipped. All skill links documented — all T1 supports. |
-| 2026-06-05 | GenTech Pal dashboard created. Full build analysis with 5 optimization suggestions. Dual skill set documented. |
+### Tactician Transition Plan
+**Current:** Witch Hunter (offensive explosions, culling, weapon master)
+**Target:** Tactician (totem/banner utility, ally empowerment)
 
-## Gear Wishlist
+Key changes after transition:
+- Siege Ballista becomes primary damage source with totem ascendancy nodes
+- "Whoever Pays Best" — can place multiple banners simultaneously
+- Artillery Ballista grants 40% increased Immobilisation Buildup
+- Allies in Presence gain Added Attack Damage (25% of main hand)
+- Lose Witch Hunter's offensive explosion/culling — gain totem/banner utility
+- Lower reservation costs = more auras
+
+**Transition-ready when ascendancy trial is complete.**
+
+## Gear Wishlist (Both Characters)
+### Wyvern (Warrior)
 - Higher tier support gems (T2+)
-- Life/mana leech gear (no sustain currently)
+- Life/mana leech gear
 - Physical damage mace upgrade
 - Shield with block chance + armor
 
-## Notes
-- Vanito is transitioning to Vibrant Warrior playstyle
-- Dual skill set: Warrior (primary) + Wyvern (secondary)
-- Mace/Shield setup — defensive-leaning
-- All supports are currently Tier 1 — upgrading as gear allows
-- Dashboard live at: https://protojay4789.github.io/pals/poe2-warrior-dashboard.html
+### Witch Hunter (Mercenary)
+- Higher tier support gems (T2+)
+- Crit chance/multiplier gear (Double Vision has 10% base crit)
+- Reload speed gear (synergy with Gemini Surge triggers)
+- Evasion/armor hybrid gear (Mercenary armor type)
 
-## Build Sync Protocol
-When Vanito gives a build update:
-1. Update this vault file (skills, analysis, progress log)
-2. Update `/root/ProtoJay4789.github.io/pals/data/poe2-warrior.json`
-3. Push to GitHub
-4. Verify deployment (HTTP 200)
+## Progress Log
+| Date | Character | Notes |
+|------|-----------|-------|
+| 2026-05-19 | Wyvern | Warrior build started. Talisman acquired, Mace+Shield equipped. |
+| 2026-06-05 | Wyvern | GenTech Pal dashboard created. Full build analysis. |
+| 2026-06-12 | Witch Hunter | Second character created. 12 skills documented. Double Vision crossbow with Gemini Surge. Planning Tactician transition. |
+
+## Dashboard
+🔥 **Live at:** https://protojay4789.github.io/pals/poe2-warrior-dashboard.html
+- Dual character support (Warrior + Mercenary)
+- Auto-refreshes every 30 seconds
