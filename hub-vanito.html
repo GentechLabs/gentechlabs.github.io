@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>⚔️ Vanito's Hub — GenTech</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --panel-bg: #12121a;
+    --panel-border: #1e1e2e;
+    --gold: #c9a84c;
+    --fire: #ff6b35;
+    --magma: #cc4400;
+    --text: #e0e0e0;
+    --text-muted: #888;
+    --card-bg: #16161f;
+    --card-hover: #1c1c28;
+    --success: #4caf50;
+    --warning: #ff9800;
+    --info: #2196f3;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .container {
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 0 16px;
+    padding-bottom: 80px;
+    width: 100%;
+  }
+
+  /* Header */
+  .header {
+    background: linear-gradient(135deg, #c9a84c 0%, #ff6b35 50%, #cc4400 100%);
+    padding: 28px 20px 22px;
+    text-align: center;
+    position: relative;
+    border-bottom: 2px solid var(--magma);
+  }
+
+  .header h1 {
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    font-size: 1.6rem;
+    color: #fff;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+    margin-bottom: 4px;
+  }
+
+  .header .subtitle {
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.85);
+    font-weight: 500;
+  }
+
+  /* Tab Content */
+  .tab-content {
+    display: none;
+    padding: 16px 0;
+  }
+
+  .tab-content.active {
+    display: block;
+  }
+
+  /* Cards */
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--panel-border);
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 12px;
+    transition: background 0.2s;
+  }
+
+  .card:hover { background: var(--card-hover); }
+
+  .card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+
+  .card-title {
+    font-family: 'Cinzel', serif;
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--gold);
+  }
+
+  .card-desc {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+    margin-bottom: 8px;
+  }
+
+  .card-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 8px;
+  }
+
+  /* Tags */
+  .tag {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .tag-gold { background: rgba(201,168,76,0.15); color: var(--gold); border: 1px solid rgba(201,168,76,0.3); }
+  .tag-fire { background: rgba(255,107,53,0.15); color: var(--fire); border: 1px solid rgba(255,107,53,0.3); }
+  .tag-info { background: rgba(33,150,243,0.15); color: var(--info); border: 1px solid rgba(33,150,243,0.3); }
+  .tag-success { background: rgba(76,175,80,0.15); color: var(--success); border: 1px solid rgba(76,175,80,0.3); }
+  .tag-muted { background: rgba(136,136,136,0.1); color: var(--text-muted); border: 1px solid rgba(136,136,136,0.2); }
+
+  /* Status Badge */
+  .status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+
+  .status-active {
+    background: rgba(76,175,80,0.15);
+    color: var(--success);
+    border: 1px solid rgba(76,175,80,0.3);
+  }
+
+  .status-active::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--success);
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.85); }
+  }
+
+  /* Stats Row */
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+
+  .stat-card {
+    background: var(--panel-bg);
+    border: 1px solid var(--panel-border);
+    border-radius: 10px;
+    padding: 12px 8px;
+    text-align: center;
+  }
+
+  .stat-value {
+    font-family: 'Cinzel', serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--gold);
+    margin-bottom: 2px;
+  }
+
+  .stat-label {
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  /* Avatar Accent */
+  .avatar-accent {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--panel-bg);
+    border: 1px solid var(--panel-border);
+    border-radius: 12px;
+    padding: 14px 16px;
+    margin-bottom: 16px;
+  }
+
+  .avatar-circle {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--gold), var(--fire));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    flex-shrink: 0;
+  }
+
+  .avatar-info .name {
+    font-family: 'Cinzel', serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--text);
+  }
+
+  .avatar-info .role {
+    font-size: 0.75rem;
+    color: var(--gold);
+  }
+
+  /* Name Card */
+  .name-card {
+    text-align: center;
+    padding: 20px;
+  }
+
+  .name-card .full-name {
+    font-family: 'Cinzel', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--gold);
+    margin-bottom: 4px;
+  }
+
+  .name-card .role {
+    font-size: 0.85rem;
+    color: var(--fire);
+    margin-bottom: 12px;
+  }
+
+  .info-row {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+  }
+
+  /* Link Button */
+  .link-btn {
+    display: inline-block;
+    padding: 8px 16px;
+    background: rgba(201,168,76,0.1);
+    border: 1px solid rgba(201,168,76,0.3);
+    border-radius: 8px;
+    color: var(--gold);
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 600;
+    transition: background 0.2s;
+    margin-top: 8px;
+  }
+
+  .link-btn:hover { background: rgba(201,168,76,0.2); }
+
+  .section-link {
+    display: block;
+    text-align: center;
+    padding: 12px;
+    margin-top: 12px;
+    background: var(--panel-bg);
+    border: 1px solid var(--panel-border);
+    border-radius: 10px;
+    color: var(--gold);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.85rem;
+    transition: background 0.2s;
+  }
+
+  .section-link:hover { background: var(--card-hover); }
+
+  /* Status Pill */
+  .status-pill {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: 600;
+  }
+
+  .pill-confirmed {
+    background: rgba(76,175,80,0.15);
+    color: var(--success);
+    border: 1px solid rgba(76,175,80,0.3);
+  }
+
+  .pill-planning {
+    background: rgba(33,150,243,0.15);
+    color: var(--info);
+    border: 1px solid rgba(33,150,243,0.3);
+  }
+
+  /* Travel card */
+  .travel-card {
+    border-left: 3px solid var(--gold);
+  }
+
+  .travel-card .dates {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+  }
+
+  .travel-card .trip-name {
+    font-family: 'Cinzel', serif;
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+
+  .travel-card .companion {
+    font-size: 0.75rem;
+    color: var(--fire);
+    margin-bottom: 6px;
+  }
+
+  /* Chat Placeholder */
+  .chat-placeholder {
+    text-align: center;
+    padding: 32px 20px;
+    background: var(--panel-bg);
+    border: 1px dashed var(--panel-border);
+    border-radius: 12px;
+  }
+
+  .chat-placeholder .icon {
+    font-size: 2.5rem;
+    margin-bottom: 12px;
+  }
+
+  .chat-placeholder h3 {
+    font-family: 'Cinzel', serif;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+
+  .chat-placeholder p {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+    line-height: 1.5;
+  }
+
+  .chat-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    background: rgba(255,152,0,0.1);
+    color: var(--warning);
+    border: 1px solid rgba(255,152,0,0.25);
+    animation: pulse 2s infinite;
+  }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    padding: 16px;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    border-top: 1px solid var(--panel-border);
+    margin-top: auto;
+  }
+
+  /* Bottom Nav */
+  .bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 480px;
+    background: #0e0e16;
+    border-top: 1px solid var(--panel-border);
+    display: flex;
+    justify-content: space-around;
+    padding: 8px 0 12px;
+    z-index: 100;
+  }
+
+  .nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    padding: 4px 8px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: none;
+    background: none;
+    color: var(--text-muted);
+    font-family: inherit;
+    font-size: 0.65rem;
+    font-weight: 500;
+  }
+
+  .nav-item .icon { font-size: 1.3rem; }
+
+  .nav-item.active {
+    color: var(--gold);
+    background: rgba(201,168,76,0.1);
+  }
+
+  .nav-item:hover { color: var(--gold); }
+
+  /* Section Title */
+  .section-title {
+    font-family: 'Cinzel', serif;
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--panel-border);
+  }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="header">
+  <h1>⚔️ Vanito's Hub</h1>
+  <div class="subtitle">Wyvern · Warrior of GenTech</div>
+</div>
+
+<div class="container">
+
+  <!-- ═══════ GAMING TAB ═══════ -->
+  <div id="tab-gaming" class="tab-content active">
+
+    <div style="margin-bottom: 12px;">
+      <span class="status-badge status-active">Online</span>
+    </div>
+
+    <div class="avatar-accent">
+      <div class="avatar-circle">⚔️</div>
+      <div class="avatar-info">
+        <div class="name">Vanito the Wyvern</div>
+        <div class="role">POE2 Warrior</div>
+      </div>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-value">48h</div>
+        <div class="stat-label">Playtime</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">3</div>
+        <div class="stat-label">Characters</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">2</div>
+        <div class="stat-label">Builds</div>
+      </div>
+    </div>
+
+    <div class="section-title">Builds</div>
+
+    <!-- Warrior Build -->
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">🛡️ Warrior — Juggernaut</span>
+        <span class="tag tag-gold">Active Build</span>
+      </div>
+      <div class="card-desc">Melee powerhouse. Warcry synergies, tanky through thick and thin.</div>
+    </div>
+
+    <!-- Monk Build -->
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">⚡ Monk — Storm Weaver</span>
+        <span class="tag tag-info">Jordan's Build</span>
+      </div>
+      <div class="card-desc">Lightning-fast strikes. Elemental combos and evasion mastery.</div>
+    </div>
+
+    <!-- Passive Planner -->
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">🧠 Passive Planner</span>
+        <span class="tag tag-muted">Tool</span>
+      </div>
+      <div class="card-desc">Plan and share passive skill trees. Optimize your build path.</div>
+    </div>
+
+    <a href="Gaming/poe2-warrior-dashboard.html" class="section-link">Open Full Dashboard →</a>
+  </div>
+
+  <!-- ═══════ PROFILE TAB ═══════ -->
+  <div id="tab-profile" class="tab-content">
+
+    <div class="card name-card">
+      <div class="full-name">Vanito Jones</div>
+      <div class="role">GenTech Warrior · POE2 Player</div>
+      <div class="info-row">
+        <span>🎂 Dec 29</span>
+        <span>🛡️ Warrior Main</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">About</span>
+      </div>
+      <div class="card-desc">Vanito is Jordan's son and a fierce POE2 Warrior. Known as "the Wyvern" for his relentless playstyle and love for Juggernaut builds.</div>
+    </div>
+
+    <a href="Profiles/vanito.html" class="section-link">View Full Profile →</a>
+  </div>
+
+  <!-- ═══════ TRAVEL TAB ═══════ -->
+  <div id="tab-travel" class="tab-content">
+
+    <div class="section-title">Upcoming Trips</div>
+
+    <!-- Orlando -->
+    <div class="card travel-card">
+      <div class="card-header">
+        <span class="card-title">🎢 Orlando Trip</span>
+        <span class="status-pill pill-confirmed">Confirmed</span>
+      </div>
+      <div class="dates">Summer 2026 · Walt Disney World</div>
+      <div class="card-desc">Theme parks, roller coasters, and family adventures in Orlando, Florida.</div>
+    </div>
+
+    <!-- Philippines -->
+    <div class="card travel-card" style="border-left-color: var(--fire);">
+      <div class="card-header">
+        <span class="card-title">🌴 Philippines — Boracay</span>
+        <span class="status-pill pill-planning">Planning</span>
+      </div>
+      <div class="dates">Nov/Dec 2026</div>
+      <div class="companion">With Jordan & Christel</div>
+      <div class="card-desc">Island paradise. White sand beaches, crystal waters, and tropical exploration.</div>
+    </div>
+
+    <a href="Travels/travel-dashboard-vanito.html" class="section-link">Open Travel Dashboard →</a>
+  </div>
+
+  <!-- ═══════ CHAT TAB ═══════ -->
+  <div id="tab-chat" class="tab-content">
+
+    <div class="chat-placeholder">
+      <div class="icon">🤖</div>
+      <h3>Vanito's Agent — Coming Soon</h3>
+      <p>Ask about builds, track progress, get recommendations. Your personal GenTech AI companion.</p>
+      <div class="chat-status">Agent training...</div>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- Footer -->
+<div class="footer">GenTech Hub · Vanito</div>
+
+<!-- Bottom Nav -->
+<nav class="bottom-nav">
+  <button class="nav-item active" onclick="switchTab('gaming', this)">
+    <span class="icon">🎮</span>
+    <span>Gaming</span>
+  </button>
+  <button class="nav-item" onclick="switchTab('profile', this)">
+    <span class="icon">🛡️</span>
+    <span>Profile</span>
+  </button>
+  <button class="nav-item" onclick="switchTab('travel', this)">
+    <span class="icon">✈️</span>
+    <span>Travel</span>
+  </button>
+  <button class="nav-item" onclick="switchTab('chat', this)">
+    <span class="icon">💬</span>
+    <span>Chat</span>
+  </button>
+</nav>
+
+<script>
+  function switchTab(tabName, btnEl) {
+    // Hide all tabs
+    var tabs = document.querySelectorAll('.tab-content');
+    for (var i = 0; i < tabs.length; i++) {
+      tabs[i].classList.remove('active');
+    }
+
+    // Deactivate all nav items
+    var navItems = document.querySelectorAll('.nav-item');
+    for (var i = 0; i < navItems.length; i++) {
+      navItems[i].classList.remove('active');
+    }
+
+    // Show selected tab
+    var target = document.getElementById('tab-' + tabName);
+    if (target) {
+      target.classList.add('active');
+    }
+
+    // Activate clicked nav item
+    if (btnEl) {
+      btnEl.classList.add('active');
+    }
+  }
+</script>
+
+</body>
+</html>

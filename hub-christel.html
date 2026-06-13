@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GenTech Hub — Christel</title>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #1a1210;
+            --bg-alt: #231a15;
+            --panel-bg: #2a1f18;
+            --panel-border: #3d2e22;
+            --text: #f0e6dc;
+            --text-dim: #9a8a7a;
+            --gold: #d4a017;
+            --gold-dim: rgba(212,160,23,0.15);
+            --accent: #e8652a;
+            --accent-dim: rgba(232,101,42,0.15);
+            --peach: #ff9a6c;
+            --rose: #d4748a;
+            --success: #00ff88;
+            --danger: #ff4466;
+            --blue: #3b82f6;
+            --radius: 12px;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            padding-bottom: 72px;
+        }
+
+        /* Header */
+        .hub-header {
+            background: linear-gradient(135deg, #d4748a 0%, #e8652a 50%, #d4a017 100%);
+            padding: 20px 16px 16px;
+            text-align: center;
+        }
+        .hub-header h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3em;
+            font-weight: 700;
+            color: #fff;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+        .hub-header .subtitle {
+            font-size: 0.75em;
+            color: rgba(255,255,255,0.85);
+            margin-top: 2px;
+        }
+
+        /* Tab Sections */
+        .tab-section {
+            display: none;
+            padding: 16px;
+            max-width: 480px;
+            margin: 0 auto;
+            animation: fadeIn 0.25s ease;
+        }
+        .tab-section.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Bottom Nav */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #231a15;
+            border-top: 1px solid #3d2e22;
+            display: flex;
+            justify-content: space-around;
+            padding: 8px 0;
+            z-index: 100;
+        }
+        .nav-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3px;
+            background: none;
+            border: none;
+            color: #9a8a7a;
+            font-size: 0.65em;
+            font-family: 'Inter', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 6px 16px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border-radius: 8px;
+        }
+        .nav-btn .nav-icon { font-size: 1.8em; }
+        .nav-btn.active {
+            color: var(--gold);
+            background: rgba(212,160,23,0.12);
+        }
+
+        /* Stat row */
+        .stat-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+        .stat-card {
+            background: var(--panel-bg);
+            border: 1px solid var(--panel-border);
+            border-radius: var(--radius);
+            padding: 14px;
+            text-align: center;
+        }
+        .stat-card.full { grid-column: 1 / -1; }
+        .stat-label {
+            font-size: 0.6em;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--text-dim);
+            margin-bottom: 4px;
+        }
+        .stat-value {
+            font-size: 1.4em;
+            font-weight: 700;
+            color: var(--gold);
+        }
+        .stat-value.accent { color: var(--accent); }
+        .stat-value.rose { color: var(--rose); }
+        .stat-value.peach { color: var(--peach); }
+        .stat-sub {
+            font-size: 0.72em;
+            color: var(--text-dim);
+            margin-top: 2px;
+        }
+
+        /* Card */
+        .card {
+            background: var(--panel-bg);
+            border: 1px solid var(--panel-border);
+            border-radius: var(--radius);
+            padding: 14px;
+            margin-bottom: 10px;
+        }
+        .card-title {
+            font-size: 0.7em;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--text-dim);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .card-title .dot {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: var(--gold);
+        }
+
+        /* Dish cards */
+        .dish-card {
+            background: var(--bg-alt);
+            border: 1px solid var(--panel-border);
+            border-radius: var(--radius);
+            padding: 12px;
+            margin-bottom: 8px;
+            transition: all 0.2s;
+        }
+        .dish-card:hover {
+            border-color: var(--peach);
+        }
+        .dish-card h3 {
+            color: var(--peach);
+            font-size: 0.95em;
+            margin-bottom: 4px;
+        }
+        .dish-card p {
+            font-size: 0.78em;
+            color: var(--text-dim);
+            line-height: 1.5;
+        }
+        .dish-card .tag {
+            display: inline-block;
+            font-size: 0.62em;
+            padding: 3px 8px;
+            border-radius: 10px;
+            background: rgba(232,101,42,0.12);
+            color: var(--accent);
+            margin-top: 6px;
+        }
+
+        /* AI suggestions */
+        .ai-card {
+            background: linear-gradient(135deg, rgba(212,160,23,0.06), rgba(232,101,42,0.06));
+            border: 1px solid rgba(212,160,23,0.2);
+            border-radius: var(--radius);
+            padding: 12px;
+            margin-bottom: 10px;
+        }
+        .ai-card h4 {
+            font-size: 0.78em;
+            color: var(--gold);
+            margin-bottom: 8px;
+        }
+        .ai-suggestion {
+            font-size: 0.78em;
+            color: var(--text-dim);
+            line-height: 1.5;
+            padding: 6px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+        }
+        .ai-suggestion:last-child { border-bottom: none; }
+        .ai-suggestion strong { color: var(--peach); }
+
+        /* Trip cards */
+        .trip-card {
+            background: var(--panel-bg);
+            border: 1px solid var(--panel-border);
+            border-radius: var(--radius);
+            padding: 16px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .trip-card:hover {
+            border-color: var(--gold);
+            transform: translateY(-1px);
+        }
+        .trip-card h3 {
+            color: var(--gold);
+            font-size: 1em;
+            margin-bottom: 4px;
+        }
+        .trip-card .dates {
+            font-size: 0.78em;
+            color: var(--text-dim);
+        }
+        .trip-card .status-pill {
+            display: inline-block;
+            font-size: 0.65em;
+            padding: 3px 8px;
+            border-radius: 10px;
+            margin-top: 6px;
+        }
+        .status-pill.planning { background: rgba(59,130,246,0.12); color: var(--blue); }
+        .status-pill.confirmed { background: rgba(0,255,136,0.1); color: var(--success); }
+
+        /* Status badge */
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.75em;
+            font-weight: 500;
+        }
+        .status-badge.active {
+            background: rgba(0,255,136,0.1);
+            border: 1px solid rgba(0,255,136,0.25);
+            color: var(--success);
+        }
+        .status-badge.ready {
+            background: rgba(212,160,23,0.1);
+            border: 1px solid rgba(212,160,23,0.25);
+            color: var(--gold);
+        }
+        .status-badge.training {
+            background: rgba(232,101,42,0.1);
+            border: 1px solid rgba(232,101,42,0.25);
+            color: var(--accent);
+        }
+        .pulse {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--success);
+            animation: pulse 2s ease-in-out infinite;
+        }
+        @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+        /* Portfolio link */
+        .portfolio-link {
+            display: block;
+            text-align: center;
+            padding: 12px;
+            background: var(--panel-bg);
+            border: 1px solid var(--panel-border);
+            border-radius: var(--radius);
+            color: var(--gold);
+            text-decoration: none;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin-top: 12px;
+            transition: all 0.2s;
+        }
+        .portfolio-link:hover {
+            background: rgba(212,160,23,0.1);
+            border-color: var(--gold);
+        }
+
+        /* Placeholder card */
+        .placeholder-card {
+            background: var(--panel-bg);
+            border: 1px solid var(--panel-border);
+            border-radius: var(--radius);
+            padding: 24px 16px;
+            text-align: center;
+            margin-bottom: 12px;
+        }
+        .placeholder-card h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.1em;
+            color: var(--gold);
+            margin-bottom: 6px;
+        }
+        .placeholder-card p {
+            font-size: 0.82em;
+            color: var(--text-dim);
+            line-height: 1.5;
+        }
+        .placeholder-card .agent-note {
+            font-size: 0.75em;
+            color: var(--text-dim);
+            margin-top: 12px;
+            padding: 10px;
+            background: var(--bg-alt);
+            border-radius: 8px;
+            border: 1px dashed var(--panel-border);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 14px;
+            font-size: 0.65em;
+            color: var(--text-dim);
+            opacity: 0.5;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <div class="hub-header">
+        <h1>👩‍🍳 Christel's Hub</h1>
+        <div class="subtitle">Chef · Traveler · GenTech Family</div>
+    </div>
+
+    <!-- ===== KITCHEN TAB ===== -->
+    <div class="tab-section active" id="tab-kitchen">
+
+        <!-- Status -->
+        <div style="text-align:center; margin: 10px 0 14px;">
+            <span class="status-badge active">
+                <span class="pulse"></span> Kitchen Active
+            </span>
+        </div>
+
+        <div style="margin-bottom:14px;">
+            <h2 style="font-family:'Cinzel',serif; font-size:1em; color:var(--peach);">Christel's Kitchen · GenTech Cookbook</h2>
+            <p style="font-size:0.78em; color:var(--text-dim); margin-top:2px;">Recipes, meal plans & cooking notes</p>
+        </div>
+
+        <!-- Stats Row -->
+        <div class="stat-row">
+            <div class="stat-card">
+                <div class="stat-label">Dishes</div>
+                <div class="stat-value accent">24</div>
+                <div class="stat-sub">Cooked</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Recipes</div>
+                <div class="stat-value peach">18</div>
+                <div class="stat-sub">Saved</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Plans</div>
+                <div class="stat-value rose">6</div>
+                <div class="stat-sub">Meal Plans</div>
+            </div>
+        </div>
+
+        <!-- Recent Dishes -->
+        <div class="card">
+            <div class="card-title"><span class="dot"></span> Recent Dishes</div>
+
+            <div class="dish-card">
+                <h3>🍗 Adobo Chicken</h3>
+                <p>Classic Filipino comfort food</p>
+                <span class="tag">Filipino</span>
+            </div>
+
+            <div class="dish-card">
+                <h3>🍜 Pancit Canton</h3>
+                <p>Stir-fried noodles with vegetables</p>
+                <span class="tag">Noodle</span>
+            </div>
+
+            <div class="dish-card">
+                <h3>🍲 Sinigang na Baboy</h3>
+                <p>Sour pork soup</p>
+                <span class="tag">Soup</span>
+            </div>
+        </div>
+
+        <!-- AI Suggestions -->
+        <div class="ai-card">
+            <h4>🤖 Agent Recommendations</h4>
+            <div class="ai-suggestion">
+                <strong>Try:</strong> Chicken Tinola — ginger-based soup, perfect for rainy days
+            </div>
+            <div class="ai-suggestion">
+                <strong>Tip:</strong> Marinate meat overnight for deeper flavor
+            </div>
+        </div>
+
+        <a class="portfolio-link" href="Cookbook/christel-kitchen.html" target="_blank">Open Full Kitchen →</a>
+
+        <div class="footer">GenTech Kitchen</div>
+    </div>
+
+    <!-- ===== TRAVEL TAB ===== -->
+    <div class="tab-section" id="tab-travel">
+        <div style="margin-bottom:14px;">
+            <h2 style="font-size:1.1em; color:var(--gold);">✈️ Travel Planner</h2>
+            <p style="font-size:0.78em; color:var(--text-dim); margin-top:2px;">Trips, flights & adventure tracking</p>
+        </div>
+
+        <div class="trip-card" onclick="window.open('Travels/travel-dashboard.html','_blank')">
+            <h3>🇵🇭 Philippines — Makati</h3>
+            <div class="dates">Sep 2026 · Makati / Christel</div>
+            <span class="status-pill planning">Planning</span>
+        </div>
+
+        <div class="trip-card" onclick="window.open('Travels/travel-dashboard.html','_blank')">
+            <h3>🏖️ Philippines — Boracay</h3>
+            <div class="dates">Nov/Dec 2026 · Boracay island hopping</div>
+            <span class="status-pill planning">Planning</span>
+        </div>
+
+        <div class="trip-card" onclick="window.open('Travels/travel-dashboard.html','_blank')">
+            <h3>🎢 Orlando — Wizarding World</h3>
+            <div class="dates">Wizarding World trip</div>
+            <span class="status-pill confirmed">Confirmed</span>
+        </div>
+
+        <a class="portfolio-link" href="Travels/travel-dashboard.html" target="_blank">Open Full Travel Dashboard →</a>
+
+        <div class="footer">GenTech Travel</div>
+    </div>
+
+    <!-- ===== JOURNAL TAB ===== -->
+    <div class="tab-section" id="tab-journal">
+        <div style="margin-bottom:14px;">
+            <h2 style="font-size:1.1em; color:var(--gold);">📖 Journal</h2>
+            <p style="font-size:0.78em; color:var(--text-dim); margin-top:2px;">Thoughts, memories, and travel notes</p>
+        </div>
+
+        <div class="placeholder-card">
+            <h3>📖 Christel's Journal</h3>
+            <p>Thoughts, memories, and travel notes</p>
+            <div class="agent-note">
+                Entries will appear as you share them with Gentech
+            </div>
+        </div>
+
+        <div style="text-align:center; margin-top:16px;">
+            <span class="status-badge ready">Ready to capture</span>
+        </div>
+
+        <div class="footer">GenTech Journal</div>
+    </div>
+
+    <!-- ===== CHAT TAB ===== -->
+    <div class="tab-section" id="tab-chat">
+        <div style="margin-bottom:14px;">
+            <h2 style="font-size:1.1em; color:var(--gold);">💬 Chat</h2>
+            <p style="font-size:0.78em; color:var(--text-dim); margin-top:2px;">Your personal GenTech agent</p>
+        </div>
+
+        <div class="placeholder-card">
+            <h3>🤖 Christel's Agent — Coming Soon</h3>
+            <p>Ask about recipes, plan meals, organize trips</p>
+            <div class="agent-note">
+                Agent training...
+            </div>
+        </div>
+
+        <div style="text-align:center; margin-top:16px;">
+            <span class="status-badge training">Agent training...</span>
+        </div>
+
+        <div class="footer">GenTech Agent</div>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+        <button class="nav-btn active" onclick="switchTab('kitchen')" id="nav-kitchen">
+            <span class="nav-icon">🍳</span>
+            Kitchen
+        </button>
+        <button class="nav-btn" onclick="switchTab('travel')" id="nav-travel">
+            <span class="nav-icon">✈️</span>
+            Travel
+        </button>
+        <button class="nav-btn" onclick="switchTab('journal')" id="nav-journal">
+            <span class="nav-icon">📖</span>
+            Journal
+        </button>
+        <button class="nav-btn" onclick="switchTab('chat')" id="nav-chat">
+            <span class="nav-icon">💬</span>
+            Chat
+        </button>
+    </nav>
+
+    <script>
+        function switchTab(tab) {
+            // Hide all sections
+            document.querySelectorAll('.tab-section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+
+            // Show selected
+            document.getElementById('tab-' + tab).classList.add('active');
+            document.getElementById('nav-' + tab).classList.add('active');
+
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+    </script>
+
+    <div class="footer">GenTech Hub · Christel</div>
+
+</body>
+</html>
