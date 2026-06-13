@@ -161,76 +161,88 @@
             "type": "Trigger — Elemental Surge (from Double Vision)",
             "primary": true,
             "supports": ["Elemental Focus", "Living Lightning"],
+            "damage": 313.5,
             "note": "Granted by Double Vision. Triggers on reload — alternately gains Cold Surges or Fire Surges."
           },
           {
             "name": "Crossbow Shot",
             "type": "Basic Attack — Physical",
             "primary": false,
-            "supports": ["Maim", "Potent Exposure", "Magnified Area T1"]
+            "supports": ["Maim", "Potent Exposure", "Magnified Area T1"],
+            "damage": 1447.2
           },
           {
             "name": "Load: Shock Burst Rounds",
             "type": "Ammo — Lightning/Physical",
             "primary": true,
-            "supports": ["Elemental Focus", "Elemental Armament T1", "Lightning Attunement", "Lightning Penetration"]
+            "supports": ["Elemental Focus", "Elemental Armament T1", "Lightning Attunement", "Lightning Penetration"],
+            "damage": 1057.2
           },
           {
             "name": "Load: Armor Piercing Rounds",
             "type": "Ammo — Physical/Armor Break",
             "primary": false,
-            "supports": ["Auto Reload", "Armor Demolisher T1", "Ricochet T1"]
+            "supports": ["Auto Reload", "Armor Demolisher T1", "Ricochet T1"],
+            "damage": 1433.2
           },
           {
             "name": "Load: High Velocity Rounds",
             "type": "Ammo — Physical/Pierce",
             "primary": false,
-            "supports": ["Rapid Attack T1", "Execute T1", "Double Barrel T1"]
+            "supports": ["Rapid Attack T1", "Execute T1", "Double Barrel T1"],
+            "damage": 1230.8
           },
           {
             "name": "Mortar Cannon",
             "type": "Totem — Grenade Launcher",
             "primary": false,
             "supports": ["Voltaic Grenade"],
+            "damage": 0,
             "note": "Replaced Galvanic Shards. Raises a cannon ballista totem that uses socketed Grenade Skills."
           },
           {
             "name": "Tornado",
             "type": "AoE — Crowd Control",
             "primary": false,
-            "supports": ["Magnified Area T1", "Armor Demolisher T1"]
+            "supports": ["Magnified Area T1", "Armor Demolisher T1"],
+            "damage": 0
           },
           {
             "name": "Emergency Reload",
             "type": "Utility — Reload Speed",
             "primary": false,
             "supports": ["Reduced Cooldown T1", "Prolonged Duration T1"],
+            "damage": 0,
             "note": "Key synergy with Gemini Surge — faster reloads = more surge triggers."
           },
           {
             "name": "Hail of Thunder",
             "type": "AoE — Lightning",
             "primary": false,
-            "supports": ["Elemental Armament T2", "Lightning Attunement", "Lightning Penetration"]
+            "supports": ["Elemental Armament T2", "Lightning Attunement", "Lightning Penetration"],
+            "damage": 260.8
           },
           {
             "name": "Siege Ballista",
             "type": "Totem — Ranged/Pin",
             "primary": false,
             "supports": ["Concentrated Area", "Prolonged Duration T1", "Elemental Armament T2"],
+            "damage": 0,
             "note": "Strong Tactician synergy — will benefit from totem ascendancy nodes."
           },
           {
             "name": "Mirage Archer",
             "type": "Companion — Auxiliary Attacks",
             "primary": false,
-            "supports": ["Shock Burst Rounds", "Elemental Armament T2", "Lightning Exposure"]
+            "supports": ["Shock Burst Rounds", "Elemental Armament T2", "Lightning Exposure"],
+            "damage": 0
           },
           {
             "name": "Wind Dancer",
             "type": "Defensive — Evasion",
             "primary": false,
-            "supports": ["Blind T1", "Magnified Area T1", "Shock"]
+            "supports": ["Blind T1", "Magnified Area T1", "Shock"],
+            "damage": 0
           }
         ]
       },
