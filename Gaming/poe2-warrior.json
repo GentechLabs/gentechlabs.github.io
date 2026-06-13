@@ -142,12 +142,12 @@
       "alias": "Witch Hunter",
       "class": "Mercenary",
       "build": "Gemini Surge Crossbow",
-      "ascendancy": "Witch Hunter (4/6 points — Trial of Sekhemas + Trial of Chaos complete)",
+      "ascendancy": "Tactician (4/6 points — switching now)",
       "weapon": "Double Vision Dyad Crossbow",
       "talisman": null,
       "level": 56,
       "act": "Act 4 — Shrike Island",
-      "mission": "Exploring Shrike Island — next: Djinn Barya (Level 60+) for final 2 points, then Tactician switch",
+      "mission": "Exploring Shrike Island — Tactician switch in progress, next: Djinn Barya for final 2 points",
       "patch": "0.5",
       "progress": {
         "campaign": 45,
@@ -288,14 +288,22 @@
       "transitionPlan": {
         "from": "Witch Hunter",
         "to": "Tactician",
-        "keyChanges": [
-          "Siege Ballista becomes primary damage source with Tactician totem nodes",
-          "Can place multiple banners (Whoever Pays Best node)",
-          "Artillery Ballista grants 40% increased Immobilisation Buildup",
-          "Allies in Presence gain Added Attack Damage",
-          "Lose Witch Hunter's offensive explosion/culling — gain totem/banner utility"
+        "status": "IN PROGRESS — switching now with 4 points",
+        "allocatedNodes": [
+          "Whoever Pays Best — Multiple banners simultaneously",
+          "Totem damage node — Siege Ballista + Mortar Cannon scaling"
         ],
-        "readinessLevel": "Transition-ready when ascendancy trial is complete"
+        "pendingNodes": [
+          "Djinn Barya (Level 60+) — final 2 points for additional totem/banner nodes"
+        ],
+        "keyChanges": [
+          "Siege Ballista scales with totem ascendancy nodes",
+          "Mortar Cannon scales with totem nodes (double totem setup)",
+          "Whoever Pays Best — place War Banner + Defiance Banner + Dread Banner simultaneously",
+          "Artillery Ballista grants 40% increased Immobilisation Buildup",
+          "Allies in Presence gain Added Attack Damage (25% of main hand)",
+          "Lose Witch Hunter explosions/culling — gain battlefield commander vibes"
+        ]
       },
       "lastUpdated": "2026-06-12T2"
     }
