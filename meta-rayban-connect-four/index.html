@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Connect Four — Meta Ray-Ban Display</title>
+  <style>
+    /* ============================================================
+       CONNECT FOUR — Meta Ray-Ban Display Edition
+       Optimized for small HUD display + Neural Band gestures
+       ============================================================ */
+    :root {
+      --bg: #0a0a1a;
+      --board-bg: #1a1a3a;
+      --cell-empty: #2a2a4a;
+      --cell-p1: #e63946;
+      --cell-p2: #f4a261;
+      --cell-p1-glow: rgba(230, 57, 70, 0.6);
+      --cell-p2-glow: rgba(244, 162, 97, 0.6);
+      --text: #e8e8f0;
+      --text-dim: #7a7a9a;
+      --gold: #d4a017;
+      --board-border: #3a3a5a;
+      --win-glow: #00ff88;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      overflow: hidden;
+      user-select: none;
+    }
+
+    /* ============================================================
+       HUD CONTAINER — fits in the glasses display
+       ============================================================ */
+    .hud-container {
+      width: 100%;
+      max-width: 420px;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* ============================================================
+       HEADER
+       ============================================================ */
+    .header {
+      text-align: center;
+      width: 100%;
+    }
+
+    .title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .subtitle {
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      margin-top: 2px;
+    }
+
+    /* ============================================================
+       SCORE BAR
+       ============================================================ */
+    .score-bar {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      max-width: 340px;
+      padding: 6px 12px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 8px;
+      font-size: 0.8rem;
+    }
+
+    .score-player {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .score-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .score-dot.p1 { background: var(--cell-p1); box-shadow: 0 0 6px var(--cell-p1-glow); }
+    .score-dot.p2 { background: var(--cell-p2); box-shadow: 0 0 6px var(--cell-p2-glow); }
+
+    .score-num { font-weight: 700; font-size: 1rem; }
+
+    .turn-indicator {
+      text-align: center;
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      padding: 4px 0;
+    }
+
+    .turn-indicator .current-turn {
+      font-weight: 700;
+    }
+
+    .turn-indicator .current-turn.p1 { color: var(--cell-p1); }
+    .turn-indicator .current-turn.p2 { color: var(--cell-p2); }
+
+    /* ============================================================
+       GAME BOARD — 7 columns x 6 rows
+       ============================================================ */
+    .board-wrapper {
+      position: relative;
+    }
+
+    .board {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      grid-template-rows: repeat(6, 1fr);
+      gap: 5px;
+      padding: 10px;
+      background: var(--board-bg);
+      border: 2px solid var(--board-border);
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.05);
+    }
+
+    .cell {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: var(--cell-empty);
+      border: 2px solid rgba(255,255,255,0.05);
+      cursor: pointer;
+      transition: all 0.15s ease;
+      position: relative;
+    }
+
+    .cell:hover {
+      transform: scale(1.05);
+      border-color: rgba(255,255,255,0.15);
+    }
+
+    .cell.p1 {
+      background: var(--cell-p1);
+      box-shadow: 0 0 10px var(--cell-p1-glow), inset 0 -2px 4px rgba(0,0,0,0.3);
+      border-color: rgba(230, 57, 70, 0.4);
+    }
+
+    .cell.p2 {
+      background: var(--cell-p2);
+      box-shadow: 0 0 10px var(--cell-p2-glow), inset 0 -2px 4px rgba(0,0,0,0.3);
+      border-color: rgba(244, 162, 97, 0.4);
+    }
+
+    .cell.winning {
+      animation: winPulse 0.6s ease-in-out infinite alternate;
+      border-color: var(--win-glow);
+    }
+
+    .cell.p1.winning { box-shadow: 0 0 16px var(--cell-p1-glow), 0 0 24px var(--win-glow); }
+    .cell.p2.winning { box-shadow: 0 0 16px var(--cell-p2-glow), 0 0 24px var(--win-glow); }
+
+    @keyframes winPulse {
+      from { transform: scale(1); }
+      to { transform: scale(1.08); }
+    }
+
+    /* Column highlight on hover */
+    .col-highlight {
+      position: absolute;
+      top: 0;
+      width: 42px;
+      height: 100%;
+      background: rgba(255,255,255,0.03);
+      border-radius: 8px;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.15s;
+    }
+
+    .col-highlight.active { opacity: 1; }
+
+    /* ============================================================
+       CONTROLS — Gesture + Touch friendly
+       ============================================================ */
+    .controls {
+      display: flex;
+      gap: 10px;
+      width: 100%;
+      max-width: 340px;
+      justify-content: center;
+      margin-top: 4px;
+    }
+
+    .ctrl-btn {
+      flex: 1;
+      max-width: 100px;
+      padding: 10px 0;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 8px;
+      color: var(--text);
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s;
+      text-align: center;
+    }
+
+    .ctrl-btn:hover {
+      background: rgba(255,255,255,0.15);
+      border-color: var(--gold);
+    }
+
+    .ctrl-btn:active {
+      transform: scale(0.95);
+    }
+
+    .ctrl-btn.drop {
+      background: rgba(212, 160, 23, 0.2);
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    .ctrl-btn.drop:hover {
+      background: rgba(212, 160, 23, 0.35);
+    }
+
+    /* ============================================================
+       STATUS / WIN SCREEN
+       ============================================================ */
+    .status-bar {
+      text-align: center;
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      min-height: 20px;
+    }
+
+    .status-bar.win {
+      color: var(--win-glow);
+      font-weight: 700;
+      font-size: 0.9rem;
+      animation: winText 0.5s ease-in-out infinite alternate;
+    }
+
+    @keyframes winText {
+      from { opacity: 0.7; }
+      to { opacity: 1; }
+    }
+
+    .status-bar.draw {
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    .new-game-btn {
+      display: none;
+      padding: 8px 24px;
+      background: var(--gold);
+      color: var(--bg);
+      border: none;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .new-game-btn:hover {
+      background: #e8b020;
+      transform: scale(1.05);
+    }
+
+    .new-game-btn.visible {
+      display: inline-block;
+    }
+
+    /* ============================================================
+       GESTURE HINTS
+       ============================================================ */
+    .gesture-hints {
+      display: flex;
+      gap: 16px;
+      font-size: 0.65rem;
+      color: var(--text-dim);
+      margin-top: 4px;
+      justify-content: center;
+    }
+
+    .gesture-hint {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .gesture-icon {
+      font-size: 0.9rem;
+    }
+
+    /* ============================================================
+       CONFETTI (win effect)
+       ============================================================ */
+    .confetti-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 100;
+      overflow: hidden;
+    }
+
+    .confetti {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border-radius: 2px;
+      animation: confettiFall 2s ease-in forwards;
+    }
+
+    @keyframes confettiFall {
+      0% { transform: translateY(-20px) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+    }
+
+    /* ============================================================
+       RESPONSIVE — scale for different HUD sizes
+       ============================================================ */
+    @media (max-width: 380px) {
+      .cell { width: 36px; height: 36px; }
+      .board { gap: 4px; padding: 8px; }
+      .title { font-size: 1.1rem; }
+    }
+
+    @media (max-width: 320px) {
+      .cell { width: 30px; height: 30px; }
+      .board { gap: 3px; padding: 6px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="hud-container">
+  <!-- Header -->
+  <div class="header">
+    <div class="title">⚡ Connect Four</div>
+    <div class="subtitle">Meta Ray-Ban Display Edition</div>
+  </div>
+
+  <!-- Score Bar -->
+  <div class="score-bar">
+    <div class="score-player">
+      <div class="score-dot p1"></div>
+      <span>Red</span>
+      <span class="score-num" id="score-p1">0</span>
+    </div>
+    <div class="score-player">
+      <span class="score-num" id="score-p2">0</span>
+      <span>Gold</span>
+      <div class="score-dot p2"></div>
+    </div>
+  </div>
+
+  <!-- Turn Indicator -->
+  <div class="turn-indicator" id="turn-indicator">
+    <span class="current-turn p1">Red's</span> turn
+  </div>
+
+  <!-- Game Board -->
+  <div class="board-wrapper">
+    <div class="board" id="board"></div>
+  </div>
+
+  <!-- Status -->
+  <div class="status-bar" id="status"></div>
+
+  <!-- New Game Button -->
+  <button class="new-game-btn" id="new-game-btn" onclick="resetGame()">New Game</button>
+
+  <!-- Controls -->
+  <div class="controls">
+    <button class="ctrl-btn" onclick="moveLeft()">◀ Left</button>
+    <button class="ctrl-btn drop" onclick="dropPiece()">▼ Drop</button>
+    <button class="ctrl-btn" onclick="moveRight()">Right ▶</button>
+  </div>
+
+  <!-- Gesture Hints -->
+  <div class="gesture-hints">
+    <div class="gesture-hint">
+      <span class="gesture-icon">👈</span>
+      <span>Swipe: Move</span>
+    </div>
+    <div class="gesture-hint">
+      <span class="gesture-icon">✊</span>
+      <span>Pinch: Drop</span>
+    </div>
+    <div class="gesture-hint">
+      <span class="gesture-icon">🎤</span>
+      <span>Say: "Drop"</span>
+    </div>
+  </div>
+</div>
+
+<!-- Confetti Container -->
+<div class="confetti-container" id="confetti-container"></div>
+
+<script>
+  /* ============================================================
+     GAME STATE
+     ============================================================ */
+  const ROWS = 6;
+  const COLS = 7;
+  const EMPTY = 0;
+  const P1 = 1; // Red
+  const P2 = 2; // Gold
+
+  let board = [];
+  let currentPlayer = P1;
+  let selectedCol = 3; // Start in middle
+  let gameOver = false;
+  let scores = { [P1]: 0, [P2]: 0 };
+
+  /* ============================================================
+     INIT
+     ============================================================ */
+  function initBoard() {
+    board = Array.from({ length: ROWS }, () => Array(COLS).fill(EMPTY));
+    currentPlayer = P1;
+    selectedCol = 3;
+    gameOver = false;
+    renderBoard();
+    updateStatus();
+    updateTurnIndicator();
+    document.getElementById('new-game-btn').classList.remove('visible');
+    document.getElementById('confetti-container').innerHTML = '';
+  }
+
+  /* ============================================================
+     RENDER
+     ============================================================ */
+  function renderBoard() {
+    const boardEl = document.getElementById('board');
+    boardEl.innerHTML = '';
+
+    for (let r = 0; r < ROWS; r++) {
+      for (let c = 0; c < COLS; c++) {
+        const cell = document.createElement('div');
+        cell.className = 'cell';
+        cell.dataset.row = r;
+        cell.dataset.col = c;
+
+        if (board[r][c] === P1) cell.classList.add('p1');
+        if (board[r][c] === P2) cell.classList.add('p2');
+
+        cell.addEventListener('click', () => {
+          if (!gameOver) {
+            selectedCol = c;
+            dropPiece();
+          }
+        });
+
+        boardEl.appendChild(cell);
+      }
+    }
+  }
+
+  function highlightColumn() {
+    // Visual feedback for selected column
+    const cells = document.querySelectorAll('.cell');
+    cells.forEach(cell => {
+      const col = parseInt(cell.dataset.col);
+      if (col === selectedCol && !gameOver) {
+        cell.style.borderColor = 'rgba(212, 160, 23, 0.5)';
+      } else if (board[parseInt(cell.dataset.row)][col] === EMPTY) {
+        cell.style.borderColor = 'rgba(255,255,255,0.05)';
+      }
+    });
+  }
+
+  /* ============================================================
+     GAME LOGIC
+     ============================================================ */
+  function dropPiece() {
+    if (gameOver) return;
+
+    const row = getAvailableRow(selectedCol);
+    if (row === -1) return; // Column full
+
+    board[row][selectedCol] = currentPlayer;
+    renderBoard();
+    highlightColumn();
+
+    // Check for win
+    const winCells = checkWin(row, selectedCol);
+    if (winCells) {
+      handleWin(winCells);
+      return;
+    }
+
+    // Check for draw
+    if (checkDraw()) {
+      handleDraw();
+      return;
+    }
+
+    // Switch turns
+    currentPlayer = currentPlayer === P1 ? P2 : P1;
+    updateTurnIndicator();
+  }
+
+  function getAvailableRow(col) {
+    for (let r = ROWS - 1; r >= 0; r--) {
+      if (board[r][col] === EMPTY) return r;
+    }
+    return -1;
+  }
+
+  function moveLeft() {
+    if (gameOver) return;
+    selectedCol = (selectedCol - 1 + COLS) % COLS;
+    highlightColumn();
+  }
+
+  function moveRight() {
+    if (gameOver) return;
+    selectedCol = (selectedCol + 1) % COLS;
+    highlightColumn();
+  }
+
+  /* ============================================================
+     WIN DETECTION
+     ============================================================ */
+  function checkWin(row, col) {
+    const player = board[row][col];
+    const directions = [
+      [0, 1],   // Horizontal
+      [1, 0],   // Vertical
+      [1, 1],   // Diagonal down-right
+      [1, -1]   // Diagonal down-left
+    ];
+
+    for (const [dr, dc] of directions) {
+      let cells = [[row, col]];
+
+      // Check forward
+      for (let i = 1; i < 4; i++) {
+        const r = row + dr * i;
+        const c = col + dc * i;
+        if (r >= 0 && r < ROWS && c >= 0 && c < COLS && board[r][c] === player) {
+          cells.push([r, c]);
+        } else break;
+      }
+
+      // Check backward
+      for (let i = 1; i < 4; i++) {
+        const r = row - dr * i;
+        const c = col - dc * i;
+        if (r >= 0 && r < ROWS && c >= 0 && c < COLS && board[r][c] === player) {
+          cells.push([r, c]);
+        } else break;
+      }
+
+      if (cells.length >= 4) return cells;
+    }
+
+    return null;
+  }
+
+  function checkDraw() {
+    return board[0].every(cell => cell !== EMPTY);
+  }
+
+  /* ============================================================
+     WIN / DRAW HANDLERS
+     ============================================================ */
+  function handleWin(winCells) {
+    gameOver = true;
+    scores[currentPlayer]++;
+    updateScores();
+
+    // Highlight winning cells
+    const cells = document.querySelectorAll('.cell');
+    winCells.forEach(([r, c]) => {
+      const idx = r * COLS + c;
+      cells[idx].classList.add('winning');
+    });
+
+    const playerName = currentPlayer === P1 ? 'Red' : 'Gold';
+    const statusEl = document.getElementById('status');
+    statusEl.textContent = `🎉 ${playerName} wins!`;
+    statusEl.className = 'status-bar win';
+
+    document.getElementById('new-game-btn').classList.add('visible');
+    spawnConfetti();
+  }
+
+  function handleDraw() {
+    gameOver = true;
+    const statusEl = document.getElementById('status');
+    statusEl.textContent = "🤝 It's a draw!";
+    statusEl.className = 'status-bar draw';
+    document.getElementById('new-game-btn').classList.add('visible');
+  }
+
+  /* ============================================================
+     UI UPDATES
+     ============================================================ */
+  function updateTurnIndicator() {
+    const el = document.getElementById('turn-indicator');
+    const name = currentPlayer === P1 ? 'Red' : 'Gold';
+    const cls = currentPlayer === P1 ? 'p1' : 'p2';
+    el.innerHTML = `<span class="current-turn ${cls}">'s</span> turn`;
+  }
+
+  function updateScores() {
+    document.getElementById('score-p1').textContent = scores[P1];
+    document.getElementById('score-p2').textContent = scores[P2];
+  }
+
+  function updateStatus() {
+    const statusEl = document.getElementById('status');
+    statusEl.textContent = '';
+    statusEl.className = 'status-bar';
+  }
+
+  function resetGame() {
+    initBoard();
+  }
+
+  /* ============================================================
+     CONFETTI EFFECT
+     ============================================================ */
+  function spawnConfetti() {
+    const container = document.getElementById('confetti-container');
+    const colors = ['#e63946', '#f4a261', '#d4a017', '#00ff88', '#4ecdc4', '#ff6b6b'];
+
+    for (let i = 0; i < 40; i++) {
+      const confetti = document.createElement('div');
+      confetti.className = 'confetti';
+      confetti.style.left = Math.random() * 100 + '%';
+      confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+      confetti.style.animationDelay = Math.random() * 0.5 + 's';
+      confetti.style.animationDuration = (1.5 + Math.random()) + 's';
+      container.appendChild(confetti);
+    }
+
+    setTimeout(() => container.innerHTML = '', 3000);
+  }
+
+  /* ============================================================
+     KEYBOARD CONTROLS (for browser testing)
+     ============================================================ */
+  document.addEventListener('keydown', (e) => {
+    switch (e.key) {
+      case 'ArrowLeft':
+        e.preventDefault();
+        moveLeft();
+        break;
+      case 'ArrowRight':
+        e.preventDefault();
+        moveRight();
+        break;
+      case ' ':
+      case 'Enter':
+        e.preventDefault();
+        dropPiece();
+        break;
+    }
+  });
+
+  /* ============================================================
+     NEURAL BAND GESTURE SIMULATION
+     (Real integration would use Meta Wearables API)
+     ============================================================ */
+  let touchStartX = null;
+
+  document.addEventListener('touchstart', (e) => {
+    touchStartX = e.touches[0].clientX;
+  });
+
+  document.addEventListener('touchend', (e) => {
+    if (touchStartX === null) return;
+    const touchEndX = e.changedTouches[0].clientX;
+    const diff = touchEndX - touchStartX;
+
+    if (Math.abs(diff) > 30) {
+      // Swipe detected
+      if (diff > 0) moveRight();
+      else moveLeft();
+    } else {
+      // Tap = drop
+      dropPiece();
+    }
+
+    touchStartX = null;
+  });
+
+  /* ============================================================
+     VOICE COMMAND SIMULATION
+     (Real integration would use Meta Voice API)
+     ============================================================ */
+  if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    const recognition = new SpeechRecognition();
+    recognition.continuous = true;
+    recognition.interimResults = false;
+
+    recognition.onresult = (event) => {
+      const last = event.results[event.results.length - 1];
+      const text = last[0].transcript.toLowerCase().trim();
+
+      if (text.includes('drop') || text.includes('go') || text.includes('place')) {
+        dropPiece();
+      } else if (text.includes('left')) {
+        moveLeft();
+      } else if (text.includes('right')) {
+        moveRight();
+      } else if (text.includes('reset') || text.includes('new game')) {
+        resetGame();
+      }
+    };
+
+    recognition.onerror = () => {}; // Silently handle errors
+    // Uncomment to enable voice: recognition.start();
+  }
+
+  /* ============================================================
+     BOOT
+     ============================================================ */
+  initBoard();
+</script>
+
+</body>
+</html>
