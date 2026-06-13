@@ -66,17 +66,17 @@
     {
       "id": "personal-finance",
       "title": "Personal Finance Agent",
-      "description": "Bill reminders, debt consolidation optimizer, crypto-yield routing for idle capital. Voice-first assistant with Telegram notifications. Prototype stage using local LLM (llama3:8b).",
+      "description": "Bill reminders, debt consolidation optimizer, crypto-yield routing for idle capital. Evolving into Agent Bill Pay \u2014 consumer gateway to AAE. Screenshot \u2192 Dashboard \u2192 Calendar \u2192 Auto-Pay \u2192 Invest.",
       "tech": [
         "Python",
         "Cron",
         "Hermes",
         "DeFi"
       ],
-      "status": "dev",
+      "status": "building",
       "deadline": null,
       "timeline": "May 2026",
-      "highlight": false,
+      "highlight": true,
       "vault_path": "03-Projects/Personal-Finance/"
     },
     {
@@ -145,14 +145,14 @@
     {
       "id": "bags-fm",
       "title": "Bags FM",
-      "description": "AI agent trading desk for memecoin analysis and trading on Solana. Real-time market signals, agent-driven execution, and portfolio analytics.",
+      "description": "AI agent trading desk for memecoin analysis on Solana. Hackathon ended. Passed \u2014 needs traction to win.",
       "tech": [
         "Solana",
         "AI Agents",
         "Trading",
         "Python"
       ],
-      "status": "building",
+      "status": "completed",
       "deadline": "2026-06-01",
       "timeline": "Jun 2026",
       "highlight": true,
@@ -161,14 +161,14 @@
     {
       "id": "google-cloud-rapid-agent",
       "title": "Google Cloud Rapid Agent",
-      "description": "Gemini + Agent Builder + MCP integration for Google Cloud hackathon. Autonomous agent pipeline with structured tool calling.",
+      "description": "Gemini + Agent Builder + MCP integration. Dropped \u2014 doesn't align with our stack.",
       "tech": [
         "Google Cloud",
         "Gemini",
         "MCP",
         "Python"
       ],
-      "status": "building",
+      "status": "shelved",
       "deadline": "2026-06-11",
       "timeline": "Jun 2026",
       "highlight": false,
@@ -178,7 +178,7 @@
       "id": "somnia",
       "title": "Agent Catcher",
       "demo_url": "/somnia-token-risk-oracle/",
-      "description": "On-chain token risk oracle using Somnia's dual-agent pattern \u2014 JSON API agent fetches GoPlus security data, LLM agent classifies risk level. Live demo on Somnia testnet.",
+      "description": "On-chain token risk oracle using Somnia dual-agent pattern. CHECKPOINT 2 SUBMITTED. Final submission due Jun 11 (1 day left). Focus project tonight.",
       "tech": [
         "Solidity",
         "Somnia",
@@ -244,14 +244,14 @@
     {
       "id": "genlayer-token-scanner",
       "title": "GenLayer Token Scanner",
-      "description": "On-chain token analysis engine for GenLayer platform. Real-time scanning of new token launches, contract verification, and risk scoring.",
+      "description": "On-chain token analysis engine for GenLayer platform. NEEDS PORTAL SUBMISSION.",
       "tech": [
         "GenLayer",
         "Python",
         "Blockchain",
         "Token Analysis"
       ],
-      "status": "completed",
+      "status": "building",
       "deadline": null,
       "timeline": "May 2026",
       "highlight": true,
@@ -260,14 +260,14 @@
     {
       "id": "genlayer-yield-optimizer",
       "title": "GenLayer DeFi Yield Optimizer",
-      "description": "Automated yield optimization agent for GenLayer. Monitors DeFi protocols, rebalances positions, and maximizes returns across lending and LP strategies.",
+      "description": "Automated yield optimization agent for GenLayer. NEEDS PORTAL SUBMISSION.",
       "tech": [
         "GenLayer",
         "DeFi",
         "Python",
         "Yield Farming"
       ],
-      "status": "completed",
+      "status": "building",
       "deadline": null,
       "timeline": "May 2026",
       "highlight": true,
@@ -276,14 +276,14 @@
     {
       "id": "genlayer-governance-agent",
       "title": "GenLayer Governance Agent",
-      "description": "DAO governance automation for GenLayer. Automated proposal analysis, voting recommendations, and delegation management for protocol governance.",
+      "description": "DAO governance automation for GenLayer. NEEDS PORTAL SUBMISSION.",
       "tech": [
         "GenLayer",
         "DAO",
         "Governance",
         "Python"
       ],
-      "status": "completed",
+      "status": "building",
       "deadline": null,
       "timeline": "May 2026",
       "highlight": true,
@@ -322,24 +322,74 @@
       "demo_url": "/pals/poe2-dashboard.html"
     },
     {
-      "id": "trade-roast",
-      "title": "TradeRoast",
-      "description": "AI-powered crypto trading roaster. Connect your Solana wallet, get a savage AI roast of your trading performance, and share a roast card on X/Twitter. 44 tests, live demo.",
+      "id": "agent-bill-pay",
+      "title": "Agent Bill Pay",
+      "description": "Consumer gateway to AAE. Screenshot \u2192 Dashboard \u2192 Calendar \u2192 Auto-Pay \u2192 Invest. AI agent that pays your bills using stablecoins with programmatic spending guardrails. Built with Rain Agent Control Layer, TrustClaw, and x402 micropayments.",
       "tech": [
-        "Python",
-        "FastAPI",
-        "AI",
-        "Solana",
-        "Pillow"
+        "AI Agents",
+        "Stablecoins",
+        "Rain",
+        "x402",
+        "TrustClaw"
       ],
-      "status": "completed",
+      "status": "building",
       "deadline": null,
-      "timeline": "May 2026",
+      "timeline": "Jun 2026",
       "highlight": true,
-      "demo_url": "/trade-roast/",
-      "vault_path": "09-Green Room/designs/trade-roast.md"
+      "vault_path": "AAE/Agent-Bill-Pay-Full.md"
+    },
+    {
+      "id": "brickken-rams",
+      "title": "Brickken RAMS Integration",
+      "description": "ERC-8226 compliance layer for AI agent authority on tokenized assets. Scoped, time-bounded, financially capped mandates. Partnership outreach to Brickken (Barcelona, $450M+ tokenized assets). Enables agent-native ETFs.",
+      "tech": [
+        "ERC-8226",
+        "ERC-8004",
+        "Tokenization",
+        "Compliance",
+        "RWA"
+      ],
+      "status": "building",
+      "deadline": null,
+      "timeline": "Jun 2026",
+      "highlight": true,
+      "vault_path": "AAE/Brickken-RAMS-Integration.md"
+    },
+    {
+      "id": "rain-agent-control",
+      "title": "Rain Agent Control Layer",
+      "description": "Programmatic spending guardrails for AI agents. Scoped virtual cards, merchant allowlists, amount caps. Pre-transaction enforcement. Integration with AAE for consumer bill pay and agent commerce.",
+      "tech": [
+        "Stablecoins",
+        "Visa Cards",
+        "Guardrails",
+        "Rain",
+        "Payments"
+      ],
+      "status": "building",
+      "deadline": null,
+      "timeline": "Jun 2026",
+      "highlight": true,
+      "vault_path": "AAE/Rain-Agent-Control-Layer.md"
+    },
+    {
+      "id": "agent-etfs",
+      "title": "Agent-Native ETFs",
+      "description": "Tokenized fund products where AI agents manage portfolios for investors. RAMS-compliant, x402 micropayment fees, ERC-8004 reputation. The intersection of DeFi, TradFi, and AI agents.",
+      "tech": [
+        "ERC-8226",
+        "ERC-8004",
+        "DeFi",
+        "Tokenization",
+        "x402"
+      ],
+      "status": "building",
+      "deadline": null,
+      "timeline": "Jun 2026",
+      "highlight": true,
+      "vault_path": "AAE/Agent-ETFs.md"
     }
   ],
-  "generated": "2026-06-05T00:00:00Z",
-  "count": 21
+  "generated": "2026-06-09T12:00:00Z",
+  "count": 24
 }
