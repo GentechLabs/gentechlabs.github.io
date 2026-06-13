@@ -341,14 +341,60 @@
             color: var(--text-dim);
             opacity: 0.5;
         }
+    /* Settings modal */
+    .settings-option.selected {
+        border-color: var(--gold) !important;
+        background: rgba(212,160,23,0.1) !important;
+    }
+    .settings-option.selected::after {
+        content: '✓';
+        margin-left: auto;
+        color: var(--gold);
+        font-weight: 700;
+    }
+    @keyframes slideUp {
+        from { transform: translateY(100%); }
+        to { transform: translateY(0); }
+    }
     </style>
 </head>
 <body>
 
     <!-- Header -->
-    <div class="hub-header">
+    <div class="hub-header" style="position:relative;">
         <h1>👩‍🍳 Christel's Hub</h1>
         <div class="subtitle">Chef · Traveler · GenTech Family</div>
+        <button onclick="openSettings()" style="position:absolute; top:14px; right:14px; background:rgba(255,255,255,0.15); border:none; border-radius:50%; width:32px; height:32px; font-size:1em; cursor:pointer; color:#fff; backdrop-filter:blur(4px);" title="Settings">⚙️</button>
+    </div>
+
+    <!-- Settings Modal -->
+    <div id="settings-modal" style="display:none; position:fixed; inset:0; z-index:200; background:rgba(0,0,0,0.6); backdrop-filter:blur(4px); align-items:flex-end; justify-content:center;" onclick="if(event.target===this)closeSettings()">
+        <div style="background:var(--panel-bg); border:1px solid var(--panel-border); border-radius:16px 16px 0 0; padding:20px; width:100%; max-width:480px; animation:slideUp 0.25s ease;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+                <h3 style="font-size:1em; color:var(--text);">⚙️ Settings</h3>
+                <button onclick="closeSettings()" style="background:none; border:none; color:var(--text-dim); font-size:1.2em; cursor:pointer;">✕</button>
+            </div>
+            <p style="font-size:0.78em; color:var(--text-dim); margin-bottom:12px;">Choose which dashboard opens when you visit the hub.</p>
+            <div style="display:flex; flex-direction:column; gap:8px; margin-bottom:16px;">
+                <button class="settings-option" data-tab="kitchen" onclick="setDefaultTab('kitchen')" style="display:flex; align-items:center; gap:10px; padding:12px; background:var(--bg-alt); border:1px solid var(--panel-border); border-radius:10px; cursor:pointer; text-align:left; color:var(--text); font-family:inherit; font-size:0.88em; transition:all 0.2s;">
+                    <span style="font-size:1.3em;">🍳</span>
+                    <div><strong>Kitchen</strong><br><span style="font-size:0.8em; color:var(--text-dim);">Recipes & meal plans</span></div>
+                </button>
+                <button class="settings-option" data-tab="travel" onclick="setDefaultTab('travel')" style="display:flex; align-items:center; gap:10px; padding:12px; background:var(--bg-alt); border:1px solid var(--panel-border); border-radius:10px; cursor:pointer; text-align:left; color:var(--text); font-family:inherit; font-size:0.88em; transition:all 0.2s;">
+                    <span style="font-size:1.3em;">✈️</span>
+                    <div><strong>Travel</strong><br><span style="font-size:0.8em; color:var(--text-dim);">Trips & adventures</span></div>
+                </button>
+                <button class="settings-option" data-tab="journal" onclick="setDefaultTab('journal')" style="display:flex; align-items:center; gap:10px; padding:12px; background:var(--bg-alt); border:1px solid var(--panel-border); border-radius:10px; cursor:pointer; text-align:left; color:var(--text); font-family:inherit; font-size:0.88em; transition:all 0.2s;">
+                    <span style="font-size:1.3em;">📖</span>
+                    <div><strong>Journal</strong><br><span style="font-size:0.8em; color:var(--text-dim);">Thoughts & memories</span></div>
+                </button>
+                <button class="settings-option" data-tab="chat" onclick="setDefaultTab('chat')" style="display:flex; align-items:center; gap:10px; padding:12px; background:var(--bg-alt); border:1px solid var(--panel-border); border-radius:10px; cursor:pointer; text-align:left; color:var(--text); font-family:inherit; font-size:0.88em; transition:all 0.2s;">
+                    <span style="font-size:1.3em;">💬</span>
+                    <div><strong>Chat</strong><br><span style="font-size:0.8em; color:var(--text-dim);">Talk to Gentech</span></div>
+                </button>
+            </div>
+            <button class="settings-save" onclick="closeSettings()" style="width:100%; padding:12px; background:var(--gold); border:none; border-radius:10px; color:#fff; font-weight:600; font-size:0.9em; cursor:pointer; font-family:inherit;">Done</button>
+        </div>
     </div>
 
     <!-- ===== KITCHEN TAB ===== -->
@@ -520,17 +566,40 @@
 
     <script>
         function switchTab(tab) {
-            // Hide all sections
             document.querySelectorAll('.tab-section').forEach(s => s.classList.remove('active'));
             document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-
-            // Show selected
             document.getElementById('tab-' + tab).classList.add('active');
             document.getElementById('nav-' + tab).classList.add('active');
-
-            // Scroll to top
             window.scrollTo(0, 0);
         }
+
+        function openSettings() {
+            document.getElementById('settings-modal').style.display = 'flex';
+        }
+        function closeSettings() {
+            document.getElementById('settings-modal').style.display = 'none';
+        }
+        function setDefaultTab(tab) {
+            localStorage.setItem('gentech-default-tab', tab);
+            document.querySelectorAll('.settings-option').forEach(o => {
+                o.classList.toggle('selected', o.dataset.tab === tab);
+            });
+            const btn = document.querySelector('.settings-save');
+            btn.textContent = '✓ Saved';
+            btn.style.color = 'var(--success)';
+            setTimeout(() => { btn.textContent = 'Set as Default'; btn.style.color = ''; }, 1500);
+        }
+        function getSavedTab() {
+            return localStorage.getItem('gentech-default-tab') || 'kitchen';
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const saved = getSavedTab();
+            switchTab(saved);
+            document.querySelectorAll('.settings-option').forEach(o => {
+                o.classList.toggle('selected', o.dataset.tab === saved);
+            });
+        });
     </script>
 
     <div class="footer">GenTech Hub · Christel</div>
