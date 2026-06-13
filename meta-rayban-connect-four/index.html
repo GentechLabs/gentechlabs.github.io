@@ -7,7 +7,7 @@
   <style>
     /* ============================================================
        CONNECT FOUR — Meta Ray-Ban Display Edition
-       Optimized for small HUD display + Neural Band gestures
+       With AI Opponent + Single/Multiplayer Modes
        ============================================================ */
     :root {
       --bg: #0a0a1a;
@@ -22,6 +22,7 @@
       --gold: #d4a017;
       --board-border: #3a3a5a;
       --win-glow: #00ff88;
+      --ai-glow: #8b5cf6;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -35,12 +36,12 @@
       align-items: center;
       justify-content: center;
       min-height: 100vh;
-      overflow: hidden;
+      overflow-x: hidden;
       user-select: none;
     }
 
     /* ============================================================
-       HUD CONTAINER — fits in the glasses display
+       HUD CONTAINER
        ============================================================ */
     .hud-container {
       width: 100%;
@@ -55,10 +56,7 @@
     /* ============================================================
        HEADER
        ============================================================ */
-    .header {
-      text-align: center;
-      width: 100%;
-    }
+    .header { text-align: center; width: 100%; }
 
     .title {
       font-size: 1.3rem;
@@ -72,6 +70,80 @@
       font-size: 0.7rem;
       color: var(--text-dim);
       margin-top: 2px;
+    }
+
+    /* ============================================================
+       MODE SELECTOR
+       ============================================================ */
+    .mode-selector {
+      display: flex;
+      gap: 6px;
+      width: 100%;
+      max-width: 340px;
+      margin-bottom: 4px;
+    }
+
+    .mode-btn {
+      flex: 1;
+      padding: 8px 0;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px;
+      color: var(--text-dim);
+      font-size: 0.75rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-align: center;
+    }
+
+    .mode-btn:hover {
+      background: rgba(255,255,255,0.1);
+      color: var(--text);
+    }
+
+    .mode-btn.active {
+      background: rgba(212, 160, 23, 0.2);
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    .mode-btn .mode-icon { font-size: 1rem; display: block; margin-bottom: 2px; }
+
+    /* ============================================================
+       DIFFICULTY SELECTOR (AI mode only)
+       ============================================================ */
+    .difficulty-selector {
+      display: none;
+      gap: 4px;
+      width: 100%;
+      max-width: 340px;
+      justify-content: center;
+    }
+
+    .difficulty-selector.visible { display: flex; }
+
+    .diff-btn {
+      padding: 5px 14px;
+      background: rgba(139, 92, 246, 0.1);
+      border: 1px solid rgba(139, 92, 246, 0.2);
+      border-radius: 6px;
+      color: var(--text-dim);
+      font-size: 0.65rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .diff-btn:hover {
+      background: rgba(139, 92, 246, 0.2);
+      color: var(--text);
+    }
+
+    .diff-btn.active {
+      background: rgba(139, 92, 246, 0.3);
+      border-color: var(--ai-glow);
+      color: var(--ai-glow);
     }
 
     /* ============================================================
@@ -102,6 +174,7 @@
 
     .score-dot.p1 { background: var(--cell-p1); box-shadow: 0 0 6px var(--cell-p1-glow); }
     .score-dot.p2 { background: var(--cell-p2); box-shadow: 0 0 6px var(--cell-p2-glow); }
+    .score-dot.p2.ai { background: var(--ai-glow); box-shadow: 0 0 6px rgba(139, 92, 246, 0.5); }
 
     .score-num { font-weight: 700; font-size: 1rem; }
 
@@ -110,21 +183,18 @@
       font-size: 0.75rem;
       color: var(--text-dim);
       padding: 4px 0;
+      min-height: 22px;
     }
 
-    .turn-indicator .current-turn {
-      font-weight: 700;
-    }
-
+    .turn-indicator .current-turn { font-weight: 700; }
     .turn-indicator .current-turn.p1 { color: var(--cell-p1); }
     .turn-indicator .current-turn.p2 { color: var(--cell-p2); }
+    .turn-indicator .current-turn.ai { color: var(--ai-glow); }
 
     /* ============================================================
-       GAME BOARD — 7 columns x 6 rows
+       GAME BOARD
        ============================================================ */
-    .board-wrapper {
-      position: relative;
-    }
+    .board-wrapper { position: relative; }
 
     .board {
       display: grid;
@@ -149,21 +219,26 @@
       position: relative;
     }
 
-    .cell:hover {
-      transform: scale(1.05);
-      border-color: rgba(255,255,255,0.15);
-    }
+    .cell:hover { transform: scale(1.05); border-color: rgba(255,255,255,0.15); }
 
     .cell.p1 {
       background: var(--cell-p1);
       box-shadow: 0 0 10px var(--cell-p1-glow), inset 0 -2px 4px rgba(0,0,0,0.3);
       border-color: rgba(230, 57, 70, 0.4);
+      animation: dropIn 0.3s ease-out;
     }
 
     .cell.p2 {
       background: var(--cell-p2);
       box-shadow: 0 0 10px var(--cell-p2-glow), inset 0 -2px 4px rgba(0,0,0,0.3);
       border-color: rgba(244, 162, 97, 0.4);
+      animation: dropIn 0.3s ease-out;
+    }
+
+    .cell.p2.ai-piece {
+      background: var(--ai-glow);
+      box-shadow: 0 0 10px rgba(139, 92, 246, 0.6), inset 0 -2px 4px rgba(0,0,0,0.3);
+      border-color: rgba(139, 92, 246, 0.4);
     }
 
     .cell.winning {
@@ -174,28 +249,19 @@
     .cell.p1.winning { box-shadow: 0 0 16px var(--cell-p1-glow), 0 0 24px var(--win-glow); }
     .cell.p2.winning { box-shadow: 0 0 16px var(--cell-p2-glow), 0 0 24px var(--win-glow); }
 
+    @keyframes dropIn {
+      0% { transform: translateY(-30px) scale(0.8); opacity: 0; }
+      60% { transform: translateY(3px) scale(1.05); }
+      100% { transform: translateY(0) scale(1); opacity: 1; }
+    }
+
     @keyframes winPulse {
       from { transform: scale(1); }
       to { transform: scale(1.08); }
     }
 
-    /* Column highlight on hover */
-    .col-highlight {
-      position: absolute;
-      top: 0;
-      width: 42px;
-      height: 100%;
-      background: rgba(255,255,255,0.03);
-      border-radius: 8px;
-      pointer-events: none;
-      opacity: 0;
-      transition: opacity 0.15s;
-    }
-
-    .col-highlight.active { opacity: 1; }
-
     /* ============================================================
-       CONTROLS — Gesture + Touch friendly
+       CONTROLS
        ============================================================ */
     .controls {
       display: flex;
@@ -221,14 +287,8 @@
       text-align: center;
     }
 
-    .ctrl-btn:hover {
-      background: rgba(255,255,255,0.15);
-      border-color: var(--gold);
-    }
-
-    .ctrl-btn:active {
-      transform: scale(0.95);
-    }
+    .ctrl-btn:hover { background: rgba(255,255,255,0.15); border-color: var(--gold); }
+    .ctrl-btn:active { transform: scale(0.95); }
 
     .ctrl-btn.drop {
       background: rgba(212, 160, 23, 0.2);
@@ -236,12 +296,16 @@
       color: var(--gold);
     }
 
-    .ctrl-btn.drop:hover {
-      background: rgba(212, 160, 23, 0.35);
+    .ctrl-btn.drop:hover { background: rgba(212, 160, 23, 0.35); }
+
+    .ctrl-btn:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+      transform: none;
     }
 
     /* ============================================================
-       STATUS / WIN SCREEN
+       STATUS / WIN
        ============================================================ */
     .status-bar {
       text-align: center;
@@ -257,15 +321,18 @@
       animation: winText 0.5s ease-in-out infinite alternate;
     }
 
+    .status-bar.lose {
+      color: var(--ai-glow);
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+
     @keyframes winText {
       from { opacity: 0.7; }
       to { opacity: 1; }
     }
 
-    .status-bar.draw {
-      color: var(--gold);
-      font-weight: 700;
-    }
+    .status-bar.draw { color: var(--gold); font-weight: 700; }
 
     .new-game-btn {
       display: none;
@@ -280,13 +347,41 @@
       transition: all 0.15s;
     }
 
-    .new-game-btn:hover {
-      background: #e8b020;
-      transform: scale(1.05);
+    .new-game-btn:hover { background: #e8b020; transform: scale(1.05); }
+    .new-game-btn.visible { display: inline-block; }
+
+    /* ============================================================
+       AI THINKING INDICATOR
+       ============================================================ */
+    .ai-thinking {
+      display: none;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.75rem;
+      color: var(--ai-glow);
     }
 
-    .new-game-btn.visible {
-      display: inline-block;
+    .ai-thinking.visible { display: flex; }
+
+    .ai-dots {
+      display: flex;
+      gap: 4px;
+    }
+
+    .ai-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--ai-glow);
+      animation: aiPulse 1.2s ease-in-out infinite;
+    }
+
+    .ai-dot:nth-child(2) { animation-delay: 0.2s; }
+    .ai-dot:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes aiPulse {
+      0%, 80%, 100% { opacity: 0.3; transform: scale(0.8); }
+      40% { opacity: 1; transform: scale(1.2); }
     }
 
     /* ============================================================
@@ -301,18 +396,11 @@
       justify-content: center;
     }
 
-    .gesture-hint {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-
-    .gesture-icon {
-      font-size: 0.9rem;
-    }
+    .gesture-hint { display: flex; align-items: center; gap: 4px; }
+    .gesture-icon { font-size: 0.9rem; }
 
     /* ============================================================
-       CONFETTI (win effect)
+       CONFETTI
        ============================================================ */
     .confetti-container {
       position: fixed;
@@ -339,7 +427,7 @@
     }
 
     /* ============================================================
-       RESPONSIVE — scale for different HUD sizes
+       RESPONSIVE
        ============================================================ */
     @media (max-width: 380px) {
       .cell { width: 36px; height: 36px; }
@@ -362,23 +450,53 @@
     <div class="subtitle">Meta Ray-Ban Display Edition</div>
   </div>
 
+  <!-- Mode Selector -->
+  <div class="mode-selector">
+    <button class="mode-btn active" id="mode-ai" onclick="setMode('ai')">
+      <span class="mode-icon">🤖</span>
+      vs AI
+    </button>
+    <button class="mode-btn" id="mode-2p" onclick="setMode('2p')">
+      <span class="mode-icon">👥</span>
+      2 Players
+    </button>
+  </div>
+
+  <!-- Difficulty Selector -->
+  <div class="difficulty-selector visible" id="difficulty-selector">
+    <button class="diff-btn active" data-level="easy" onclick="setDifficulty('easy')">Easy</button>
+    <button class="diff-btn" data-level="medium" onclick="setDifficulty('medium')">Medium</button>
+    <button class="diff-btn" data-level="hard" onclick="setDifficulty('hard')">Hard</button>
+    <button class="diff-btn" data-level="unbeatable" onclick="setDifficulty('unbeatable')">🔥 Unbeatable</button>
+  </div>
+
   <!-- Score Bar -->
   <div class="score-bar">
     <div class="score-player">
       <div class="score-dot p1"></div>
-      <span>Red</span>
+      <span id="p1-label">You</span>
       <span class="score-num" id="score-p1">0</span>
     </div>
     <div class="score-player">
       <span class="score-num" id="score-p2">0</span>
-      <span>Gold</span>
-      <div class="score-dot p2"></div>
+      <span id="p2-label">AI</span>
+      <div class="score-dot p2 ai" id="p2-dot"></div>
     </div>
   </div>
 
   <!-- Turn Indicator -->
   <div class="turn-indicator" id="turn-indicator">
-    <span class="current-turn p1">Red's</span> turn
+    <span class="current-turn p1">Your</span> turn
+  </div>
+
+  <!-- AI Thinking -->
+  <div class="ai-thinking" id="ai-thinking">
+    <div class="ai-dots">
+      <div class="ai-dot"></div>
+      <div class="ai-dot"></div>
+      <div class="ai-dot"></div>
+    </div>
+    <span>AI is thinking...</span>
   </div>
 
   <!-- Game Board -->
@@ -393,7 +511,7 @@
   <button class="new-game-btn" id="new-game-btn" onclick="resetGame()">New Game</button>
 
   <!-- Controls -->
-  <div class="controls">
+  <div class="controls" id="controls">
     <button class="ctrl-btn" onclick="moveLeft()">◀ Left</button>
     <button class="ctrl-btn drop" onclick="dropPiece()">▼ Drop</button>
     <button class="ctrl-btn" onclick="moveRight()">Right ▶</button>
@@ -426,14 +544,47 @@
   const ROWS = 6;
   const COLS = 7;
   const EMPTY = 0;
-  const P1 = 1; // Red
-  const P2 = 2; // Gold
+  const P1 = 1; // Red (Human)
+  const P2 = 2; // Gold (Human or AI)
 
   let board = [];
   let currentPlayer = P1;
-  let selectedCol = 3; // Start in middle
+  let selectedCol = 3;
   let gameOver = false;
   let scores = { [P1]: 0, [P2]: 0 };
+  let gameMode = 'ai'; // 'ai' or '2p'
+  let difficulty = 'medium'; // easy, medium, hard, unbeatable
+  let aiThinking = false;
+
+  /* ============================================================
+     MODE & DIFFICULTY
+     ============================================================ */
+  function setMode(mode) {
+    gameMode = mode;
+    document.getElementById('mode-ai').classList.toggle('active', mode === 'ai');
+    document.getElementById('mode-2p').classList.toggle('active', mode === '2p');
+    document.getElementById('difficulty-selector').classList.toggle('visible', mode === 'ai');
+
+    // Update labels
+    if (mode === 'ai') {
+      document.getElementById('p1-label').textContent = 'You';
+      document.getElementById('p2-label').textContent = 'AI';
+      document.getElementById('p2-dot').classList.add('ai');
+    } else {
+      document.getElementById('p1-label').textContent = 'Red';
+      document.getElementById('p2-label').textContent = 'Gold';
+      document.getElementById('p2-dot').classList.remove('ai');
+    }
+
+    resetGame();
+  }
+
+  function setDifficulty(level) {
+    difficulty = level;
+    document.querySelectorAll('.diff-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.level === level);
+    });
+  }
 
   /* ============================================================
      INIT
@@ -443,11 +594,14 @@
     currentPlayer = P1;
     selectedCol = 3;
     gameOver = false;
+    aiThinking = false;
     renderBoard();
     updateStatus();
     updateTurnIndicator();
     document.getElementById('new-game-btn').classList.remove('visible');
+    document.getElementById('ai-thinking').classList.remove('visible');
     document.getElementById('confetti-container').innerHTML = '';
+    setControlsEnabled(true);
   }
 
   /* ============================================================
@@ -465,10 +619,13 @@
         cell.dataset.col = c;
 
         if (board[r][c] === P1) cell.classList.add('p1');
-        if (board[r][c] === P2) cell.classList.add('p2');
+        if (board[r][c] === P2) {
+          cell.classList.add('p2');
+          if (gameMode === 'ai') cell.classList.add('ai-piece');
+        }
 
         cell.addEventListener('click', () => {
-          if (!gameOver) {
+          if (!gameOver && !aiThinking) {
             selectedCol = c;
             dropPiece();
           }
@@ -480,13 +637,13 @@
   }
 
   function highlightColumn() {
-    // Visual feedback for selected column
     const cells = document.querySelectorAll('.cell');
     cells.forEach(cell => {
       const col = parseInt(cell.dataset.col);
-      if (col === selectedCol && !gameOver) {
+      const row = parseInt(cell.dataset.row);
+      if (col === selectedCol && !gameOver && board[row][col] === EMPTY) {
         cell.style.borderColor = 'rgba(212, 160, 23, 0.5)';
-      } else if (board[parseInt(cell.dataset.row)][col] === EMPTY) {
+      } else if (board[row][col] === EMPTY) {
         cell.style.borderColor = 'rgba(255,255,255,0.05)';
       }
     });
@@ -496,31 +653,36 @@
      GAME LOGIC
      ============================================================ */
   function dropPiece() {
-    if (gameOver) return;
+    if (gameOver || aiThinking) return;
+
+    // In AI mode, only allow human to drop on their turn
+    if (gameMode === 'ai' && currentPlayer === P2) return;
 
     const row = getAvailableRow(selectedCol);
-    if (row === -1) return; // Column full
+    if (row === -1) return;
 
     board[row][selectedCol] = currentPlayer;
     renderBoard();
     highlightColumn();
 
-    // Check for win
     const winCells = checkWin(row, selectedCol);
     if (winCells) {
       handleWin(winCells);
       return;
     }
 
-    // Check for draw
     if (checkDraw()) {
       handleDraw();
       return;
     }
 
-    // Switch turns
     currentPlayer = currentPlayer === P1 ? P2 : P1;
     updateTurnIndicator();
+
+    // Trigger AI move
+    if (gameMode === 'ai' && currentPlayer === P2 && !gameOver) {
+      triggerAIMove();
+    }
   }
 
   function getAvailableRow(col) {
@@ -531,15 +693,21 @@
   }
 
   function moveLeft() {
-    if (gameOver) return;
+    if (gameOver || aiThinking) return;
     selectedCol = (selectedCol - 1 + COLS) % COLS;
     highlightColumn();
   }
 
   function moveRight() {
-    if (gameOver) return;
+    if (gameOver || aiThinking) return;
     selectedCol = (selectedCol + 1) % COLS;
     highlightColumn();
+  }
+
+  function setControlsEnabled(enabled) {
+    document.querySelectorAll('.ctrl-btn').forEach(btn => {
+      btn.disabled = !enabled;
+    });
   }
 
   /* ============================================================
@@ -557,7 +725,6 @@
     for (const [dr, dc] of directions) {
       let cells = [[row, col]];
 
-      // Check forward
       for (let i = 1; i < 4; i++) {
         const r = row + dr * i;
         const c = col + dc * i;
@@ -566,7 +733,6 @@
         } else break;
       }
 
-      // Check backward
       for (let i = 1; i < 4; i++) {
         const r = row - dr * i;
         const c = col - dc * i;
@@ -592,21 +758,33 @@
     gameOver = true;
     scores[currentPlayer]++;
     updateScores();
+    setControlsEnabled(false);
 
-    // Highlight winning cells
     const cells = document.querySelectorAll('.cell');
     winCells.forEach(([r, c]) => {
       const idx = r * COLS + c;
       cells[idx].classList.add('winning');
     });
 
-    const playerName = currentPlayer === P1 ? 'Red' : 'Gold';
     const statusEl = document.getElementById('status');
-    statusEl.textContent = `🎉 ${playerName} wins!`;
-    statusEl.className = 'status-bar win';
+
+    if (gameMode === 'ai') {
+      if (currentPlayer === P1) {
+        statusEl.textContent = '🎉 You win!';
+        statusEl.className = 'status-bar win';
+        spawnConfetti();
+      } else {
+        statusEl.textContent = '🤖 AI wins!';
+        statusEl.className = 'status-bar lose';
+      }
+    } else {
+      const playerName = currentPlayer === P1 ? 'Red' : 'Gold';
+      statusEl.textContent = `🎉 ${playerName} wins!`;
+      statusEl.className = 'status-bar win';
+      spawnConfetti();
+    }
 
     document.getElementById('new-game-btn').classList.add('visible');
-    spawnConfetti();
   }
 
   function handleDraw() {
@@ -615,6 +793,7 @@
     statusEl.textContent = "🤝 It's a draw!";
     statusEl.className = 'status-bar draw';
     document.getElementById('new-game-btn').classList.add('visible');
+    setControlsEnabled(false);
   }
 
   /* ============================================================
@@ -622,9 +801,18 @@
      ============================================================ */
   function updateTurnIndicator() {
     const el = document.getElementById('turn-indicator');
-    const name = currentPlayer === P1 ? 'Red' : 'Gold';
-    const cls = currentPlayer === P1 ? 'p1' : 'p2';
-    el.innerHTML = `<span class="current-turn ${cls}">'s</span> turn`;
+
+    if (gameMode === 'ai') {
+      if (currentPlayer === P1) {
+        el.innerHTML = '<span class="current-turn p1">Your</span> turn';
+      } else {
+        el.innerHTML = '<span class="current-turn ai">AI's</span> turn';
+      }
+    } else {
+      const name = currentPlayer === P1 ? 'Red' : 'Gold';
+      const cls = currentPlayer === P1 ? 'p1' : 'p2';
+      el.innerHTML = `<span class="current-turn ${cls}">${name}'s</span> turn`;
+    }
   }
 
   function updateScores() {
@@ -640,6 +828,258 @@
 
   function resetGame() {
     initBoard();
+  }
+
+  /* ============================================================
+     AI OPPONENT
+     ============================================================ */
+  function triggerAIMove() {
+    aiThinking = true;
+    setControlsEnabled(false);
+    document.getElementById('ai-thinking').classList.add('visible');
+
+    // Small delay to feel natural
+    const delay = difficulty === 'easy' ? 300 : difficulty === 'medium' ? 500 : 700;
+
+    setTimeout(() => {
+      const col = getAIMove();
+      const row = getAvailableRow(col);
+
+      if (row !== -1) {
+        board[row][col] = P2;
+        renderBoard();
+
+        const winCells = checkWin(row, col);
+        if (winCells) {
+          handleWin(winCells);
+        } else if (checkDraw()) {
+          handleDraw();
+        } else {
+          currentPlayer = P1;
+          updateTurnIndicator();
+        }
+      }
+
+      aiThinking = false;
+      setControlsEnabled(true);
+      document.getElementById('ai-thinking').classList.remove('visible');
+    }, delay);
+  }
+
+  function getAIMove() {
+    switch (difficulty) {
+      case 'easy': return getEasyMove();
+      case 'medium': return getMediumMove();
+      case 'hard': return getHardMove();
+      case 'unbeatable': return getUnbeatableMove();
+      default: return getMediumMove();
+    }
+  }
+
+  /* --- EASY AI: Random with basic blocking --- */
+  function getEasyMove() {
+    // 30% chance to block, 70% random
+    if (Math.random() < 0.3) {
+      const block = findWinningMove(P1);
+      if (block !== -1) return block;
+    }
+
+    const validCols = getValidColumns();
+    return validCols[Math.floor(Math.random() * validCols.length)];
+  }
+
+  /* --- MEDIUM AI: Blocks wins, takes wins, prefers center --- */
+  function getMediumMove() {
+    // 1. Win if possible
+    const winMove = findWinningMove(P2);
+    if (winMove !== -1) return winMove;
+
+    // 2. Block opponent win
+    const blockMove = findWinningMove(P1);
+    if (blockMove !== -1) return blockMove;
+
+    // 3. Prefer center columns
+    const centerPreferred = [3, 2, 4, 1, 5, 0, 6];
+    for (const col of centerPreferred) {
+      if (getAvailableRow(col) !== -1) return col;
+    }
+
+    return 3;
+  }
+
+  /* --- HARD AI: Minimax depth 4 --- */
+  function getHardMove() {
+    return minimaxMove(4);
+  }
+
+  /* --- UNBEATABLE AI: Minimax depth 6 with alpha-beta --- */
+  function getUnbeatableMove() {
+    return minimaxMove(6);
+  }
+
+  /* ============================================================
+     AI HELPERS
+     ============================================================ */
+  function getValidColumns() {
+    const cols = [];
+    for (let c = 0; c < COLS; c++) {
+      if (board[0][c] === EMPTY) cols.push(c);
+    }
+    return cols;
+  }
+
+  function findWinningMove(player) {
+    for (let c = 0; c < COLS; c++) {
+      const r = getAvailableRow(c);
+      if (r === -1) continue;
+
+      board[r][c] = player;
+      const wins = checkWin(r, c);
+      board[r][c] = EMPTY;
+
+      if (wins) return c;
+    }
+    return -1;
+  }
+
+  /* ============================================================
+     MINIMAX WITH ALPHA-BETA PRUNING
+     ============================================================ */
+  function minimaxMove(depth) {
+    let bestScore = -Infinity;
+    let bestCol = 3;
+    const validCols = getValidColumns();
+
+    // Shuffle for variety
+    validCols.sort(() => Math.random() - 0.5);
+
+    for (const col of validCols) {
+      const row = getAvailableRow(col);
+      if (row === -1) continue;
+
+      board[row][col] = P2;
+      const score = minimax(board, depth - 1, -Infinity, Infinity, false);
+      board[row][col] = EMPTY;
+
+      if (score > bestScore) {
+        bestScore = score;
+        bestCol = col;
+      }
+    }
+
+    return bestCol;
+  }
+
+  function minimax(boardState, depth, alpha, beta, isMaximizing) {
+    // Terminal checks
+    if (depth === 0) return evaluateBoard();
+
+    const validCols = getValidColumns();
+    if (validCols.length === 0) return evaluateBoard();
+
+    if (isMaximizing) {
+      let maxScore = -Infinity;
+      for (const col of validCols) {
+        const row = getAvailableRow(col);
+        if (row === -1) continue;
+
+        board[row][col] = P2;
+
+        // Check if this move wins
+        if (checkWin(row, col)) {
+          board[row][col] = EMPTY;
+          return 100000 + depth; // Prefer faster wins
+        }
+
+        const score = minimax(board, depth - 1, alpha, beta, false);
+        board[row][col] = EMPTY;
+
+        maxScore = Math.max(maxScore, score);
+        alpha = Math.max(alpha, score);
+        if (beta <= alpha) break;
+      }
+      return maxScore;
+    } else {
+      let minScore = Infinity;
+      for (const col of validCols) {
+        const row = getAvailableRow(col);
+        if (row === -1) continue;
+
+        board[row][col] = P1;
+
+        // Check if this move wins for opponent
+        if (checkWin(row, col)) {
+          board[row][col] = EMPTY;
+          return -100000 - depth; // Prefer faster wins
+        }
+
+        const score = minimax(board, depth - 1, alpha, beta, true);
+        board[row][col] = EMPTY;
+
+        minScore = Math.min(minScore, score);
+        beta = Math.min(beta, score);
+        if (beta <= alpha) break;
+      }
+      return minScore;
+    }
+  }
+
+  /* ============================================================
+     BOARD EVALUATION FUNCTION
+     ============================================================ */
+  function evaluateBoard() {
+    let score = 0;
+
+    // Center column preference
+    for (let r = 0; r < ROWS; r++) {
+      if (board[r][3] === P2) score += 3;
+      if (board[r][3] === P1) score -= 3;
+    }
+
+    // Evaluate all windows of 4
+    // Horizontal
+    for (let r = 0; r < ROWS; r++) {
+      for (let c = 0; c <= COLS - 4; c++) {
+        score += evaluateWindow([board[r][c], board[r][c+1], board[r][c+2], board[r][c+3]]);
+      }
+    }
+
+    // Vertical
+    for (let c = 0; c < COLS; c++) {
+      for (let r = 0; r <= ROWS - 4; r++) {
+        score += evaluateWindow([board[r][c], board[r+1][c], board[r+2][c], board[r+3][c]]);
+      }
+    }
+
+    // Diagonal (down-right)
+    for (let r = 0; r <= ROWS - 4; r++) {
+      for (let c = 0; c <= COLS - 4; c++) {
+        score += evaluateWindow([board[r][c], board[r+1][c+1], board[r+2][c+2], board[r+3][c+3]]);
+      }
+    }
+
+    // Diagonal (down-left)
+    for (let r = 0; r <= ROWS - 4; r++) {
+      for (let c = 3; c < COLS; c++) {
+        score += evaluateWindow([board[r][c], board[r+1][c-1], board[r+2][c-2], board[r+3][c-3]]);
+      }
+    }
+
+    return score;
+  }
+
+  function evaluateWindow(window) {
+    const ai = window.filter(x => x === P2).length;
+    const human = window.filter(x => x === P1).length;
+    const empty = window.filter(x => x === EMPTY).length;
+
+    if (ai === 4) return 100;
+    if (ai === 3 && empty === 1) return 5;
+    if (ai === 2 && empty === 2) return 2;
+
+    if (human === 3 && empty === 1) return -4;
+
+    return 0;
   }
 
   /* ============================================================
@@ -663,7 +1103,7 @@
   }
 
   /* ============================================================
-     KEYBOARD CONTROLS (for browser testing)
+     KEYBOARD CONTROLS
      ============================================================ */
   document.addEventListener('keydown', (e) => {
     switch (e.key) {
@@ -680,12 +1120,13 @@
         e.preventDefault();
         dropPiece();
         break;
+      case '1': setMode('ai'); break;
+      case '2': setMode('2p'); break;
     }
   });
 
   /* ============================================================
-     NEURAL BAND GESTURE SIMULATION
-     (Real integration would use Meta Wearables API)
+     TOUCH / SWIPE CONTROLS
      ============================================================ */
   let touchStartX = null;
 
@@ -699,11 +1140,9 @@
     const diff = touchEndX - touchStartX;
 
     if (Math.abs(diff) > 30) {
-      // Swipe detected
       if (diff > 0) moveRight();
       else moveLeft();
     } else {
-      // Tap = drop
       dropPiece();
     }
 
@@ -711,8 +1150,7 @@
   });
 
   /* ============================================================
-     VOICE COMMAND SIMULATION
-     (Real integration would use Meta Voice API)
+     VOICE COMMANDS
      ============================================================ */
   if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -732,11 +1170,15 @@
         moveRight();
       } else if (text.includes('reset') || text.includes('new game')) {
         resetGame();
+      } else if (text.includes('single') || text.includes('one player')) {
+        setMode('ai');
+      } else if (text.includes('two player') || text.includes('multiplayer')) {
+        setMode('2p');
       }
     };
 
-    recognition.onerror = () => {}; // Silently handle errors
-    // Uncomment to enable voice: recognition.start();
+    recognition.onerror = () => {};
+    // Uncomment to enable: recognition.start();
   }
 
   /* ============================================================
