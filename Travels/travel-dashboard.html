@@ -352,6 +352,60 @@
       display: flex;
       flex-wrap: wrap;
       gap: 12px;
+    }
+
+    /* ============================================================
+       BOOKING
+       ============================================================ */
+    .booking-option {
+      padding: 20px;
+      text-align: center;
+    }
+
+    .booking-option h3 {
+      font-family: 'Cinzel', serif;
+      font-size: 1.2rem;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+
+    .booking-option p {
+      color: var(--text-dim);
+      margin-bottom: 12px;
+    }
+
+    .booking-features {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .booking-features span {
+      background: var(--bg-alt);
+      padding: 4px 10px;
+      border-radius: 16px;
+      font-size: 0.8rem;
+      color: var(--text-dim);
+    }
+
+    .booking-btn {
+      background: linear-gradient(135deg, var(--gold), var(--accent));
+      color: white;
+      border: none;
+      padding: 10px 24px;
+      border-radius: 8px;
+      font-family: 'Cinzel', serif;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .booking-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px var(--gold-glow);
+    }
       font-size: 0.85rem;
       margin-bottom: 6px;
     }
@@ -1131,6 +1185,25 @@
     <section id="flights-section" class="fade-in">
       <h2 class="section-title"><span class="section-icon">✈️</span> Flights</h2>
       <div class="flights-grid" id="flights-container"></div>
+    </section>
+
+    <!-- Book with AI -->
+    <section id="booking-section" class="fade-in">
+      <h2 class="section-title"><span class="section-icon">🤖</span> Book with AI</h2>
+      <div class="panel">
+        <div class="booking-option">
+          <h3>Travala Travel MCP</h3>
+          <p>AI-powered hotel booking — 2.2M+ hotels, gasless x402 payments</p>
+          <div class="booking-features">
+            <span>💬 Chat-based booking</span>
+            <span>⚡ Zero gas fees (USDC on Base)</span>
+            <span>🔒 Secure ERC-7715 payments</span>
+          </div>
+          <button onclick="window.open('https://travala.com/agentic', '_blank')" class="booking-btn">
+            Open Travala Agent →
+          </button>
+        </div>
+      </div>
     </section>
 
     <!-- Restaurants -->

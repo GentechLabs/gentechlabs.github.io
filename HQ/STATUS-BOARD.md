@@ -1,6 +1,6 @@
 # 📋 GenTech Status Board
 
-**Last updated:** 2026-06-12 (nightly sweep)
+**Last updated:** 2026-06-13 (nightly sweep)
 **Updated by:** Gentech
 
 > Jordan: This is your single file to check. Open it, know everything.
@@ -76,8 +76,8 @@
 - ~~**Jun 11:** Google Cloud Rapid Agent — $60K~~ ✅ NOT PURSUING (enterprise lock-in)
 - ~~**Jun 11:** Somnia Agentathon~~ ✅ PASSED (deadline missed)
 - ~~**Jun 12:** Dev3pack Bridge Accelerator~~ ❌ CANCELLED
-- ⚠️ **Jun 14:** Arbitrum Open House submission (2 days)
-- ⚠️ **Jun 15:** Mantle Turing Test Phase II — 3 days left
+- ⚠️ **Jun 14:** Arbitrum Open House submission (1 day)
+- ⚠️ **Jun 15:** Mantle Turing Test Phase II — 2 days left
 - **Jun 15:** FIND EVIL! — $22K, cybersecurity + AI, MCP
 - **Jun 19:** Encode Vibe Coding Hackathon — 3-day sprint
 - **Jun 21:** Sui Overflow — Jordan to verify registration
@@ -90,8 +90,8 @@
 
 - **Approval Queue:** ✅ Clean — no pending items
 - **Considerations:** ✅ Active items current
-- **Working Memory:** ✅ Updated June 11
-- **Status Board:** ✅ Updated June 11
+- **Working Memory:** ✅ Updated June 13
+- **Status Board:** ✅ Updated June 13
 
 ---
 
