@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GenTech Hub — Jordan</title>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* AVAX / GenTech Theme */
+            --bg: #0a0e17;
+            --bg-alt: #111827;
+            --panel-bg: #1a2235;
+            --panel-border: #2a3a52;
+            --text: #e2e8f0;
+            --text-dim: #8899aa;
+            --avax-red: #e84142;
+            --avax-red-dim: rgba(232,65,66,0.15);
+            --gold: #e8652a;
+            --gold-dim: rgba(232,101,42,0.15);
+            --success: #00ff88;
+            --danger: #ff4466;
+            --cyan: #00d4ff;
+            --purple: #a855f7;
+            --blue: #3b82f6;
+            --radius: 12px;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            padding-bottom: 72px; /* space for bottom nav */
+        }
+
+        /* Header */
+        .hub-header {
+            background: linear-gradient(135deg, #e84142 0%, #e8652a 40%, #d4a017 100%);
+            padding: 20px 16px 16px;
+            text-align: center;
+        }
+        .hub-header h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3em;
+            font-weight: 700;
+            color: #fff;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+        .hub-header .subtitle {
+            font-size: 0.75em;
+            color: rgba(255,255,255,0.8);
+            margin-top: 2px;
+        }
+
+        /* Tab Sections */
+        .tab-section {
+            display: none;
+            padding: 16px;
+            max-width: 480px;
+            margin: 0 auto;
+            animation: fadeIn 0.25s ease;
+        }
+        .tab-section.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Bottom Nav */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #111827;
+            border-top: 1px solid #2a3a52;
+            display: flex;
+            justify-content: space-around;
+            padding: 8px 0;
+            z-index: 100;
+        }
+        .nav-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3px;
+            background: none;
+            border: none;
+            color: #8899aa;
+            font-size: 0.65em;
+            font-family: 'Inter', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 6px 16px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border-radius: 8px;
+        }
+        .nav-btn .nav-icon { font-size: 1.8em; }
+        .nav-btn.active {
+            color: var(--gold);
+            background: rgba(232,101,42,0.1);
+        }
+
+        /* ===== DEFI TAB ===== */
+        .stat-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+        .stat-card {
+            background: var(--panel-bg);
+            border: 1px solid var(--panel-border);
+            border-radius: var(--radius);
+            padding: 14px;
+            text-align: center;
+        }
+        .stat-card.full { grid-column: 1 / -1; }
+        .stat-label {
+            font-size: 0.65em;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--text-dim);
+            margin-bottom: 4px;
+        }
+        .stat-value {
+            font-size: 1.4em;
+            font-weight: 700;
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--gold);
+        }
+        .stat-value.green { color: var(--success); }
+        .stat-value.red { color: var(--danger); }
+        .stat-value.cyan { color: var(--cyan); }
+        .stat-sub {
+            font-size: 0.72em;
+            color: var(--text-dim);
+            margin-top: 2px;
+        }
+
+        /* Rewards */
+        .rewards-box {
+            background: rgba(0,255,136,0.06);
+            border: 1px solid rgba(0,255,136,0.15);
+            border-radius: var(--radius);
+            padding: 14px;
+            text-align: center;
+            margin-bottom: 12px;
+        }
+        .rewards-label {
+            font-size: 0.65em;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--success);
+            opacity: 0.8;
+        }
+        .rewards-value {
+            font-size: 1.3em;
+            font-weight: 700;
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--success);
+            margin-top: 3px;
+        }
+        .rewards-usd {
+            font-size: 0.82em;
+            color: var(--text-dim);
+            margin-top: 2px;
+        }
+
+        /* Section card */
+        .card {
+            background: var(--panel-bg);
+            border: 1px solid var(--panel-border);
+            border-radius: var(--radius);
+            padding: 14px;
+            margin-bottom: 10px;
+        }
+        .card-title {
+            font-size: 0.7em;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--text-dim);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .card-title .dot {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: var(--gold);
+        }
+
+        /* Position rows */
+        .pos-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+        }
+        .pos-row:last-child { border-bottom: none; }
+        .pos-token { font-weight: 600; font-size: 0.9em; }
+        .pos-amount {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.82em;
+            color: var(--text-dim);
+        }
+        .pos-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 600;
+            color: var(--gold);
+        }
+
+        /* Range bar */
+        .range-bar {
+            position: relative;
+            height: 28px;
+            background: var(--bg-alt);
+            border-radius: 6px;
+            overflow: hidden;
+            margin: 8px 0;
+        }
+        .range-fill {
+            position: absolute;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(232,65,66,0.3), rgba(232,101,42,0.5), rgba(0,255,136,0.3));
+            border-radius: 6px;
+        }
+        .range-marker {
+            position: absolute;
+            top: -2px;
+            width: 3px;
+            height: 32px;
+            background: #fff;
+            border-radius: 2px;
+            box-shadow: 0 0 8px rgba(255,255,255,0.5);
+        }
+        .range-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.72em;
+            color: var(--text-dim);
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .range-current {
+            text-align: center;
+            font-size: 0.78em;
+            color: var(--cyan);
+            margin-top: 4px;
+        }
+
+        /* Config grid */
+        .config-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px;
+        }
+        .config-item {
+            padding: 8px;
+            background: var(--bg-alt);
+            border-radius: 6px;
+        }
+        .config-key {
+            font-size: 0.6em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-dim);
+            margin-bottom: 2px;
+        }
+        .config-val {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.82em;
+            font-weight: 500;
+        }
+
+        /* Strategy note */
+        .strategy-note {
+            background: rgba(232,101,42,0.06);
+            border: 1px solid rgba(232,101,42,0.15);
+            border-radius: var(--radius);
+            padding: 10px 12px;
+            font-size: 0.78em;
+            color: var(--text-dim);
+            line-height: 1.5;
+            margin-bottom: 10px;
+        }
+        .strategy-note strong { color: var(--gold); }
+
+        /* Status badge */
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.75em;
+            font-weight: 500;
+        }
+        .status-badge.active {
+            background: rgba(0,255,136,0.1);
+            border: 1px solid rgba(0,255,136,0.25);
+            color: var(--success);
+        }
+        .pulse {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--success);
+            animation: pulse 2s ease-in-out infinite;
+        }
+        @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+        /* ===== GAMING TAB ===== */
+        .game-card {
+            background: var(--panel-bg);
+            border: 1px solid var(--panel-border);
+            border-radius: var(--radius);
+            padding: 16px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .game-card:hover {
+            border-color: #c9a84c;
+            transform: translateY(-1px);
+        }
+        .game-card h3 {
+            font-family: 'Cinzel', serif;
+            color: #c9a84c;
+            font-size: 1em;
+            margin-bottom: 6px;
+        }
+        .game-card p {
+            font-size: 0.82em;
+            color: var(--text-dim);
+            line-height: 1.5;
+        }
+        .game-card .tag {
+            display: inline-block;
+            font-size: 0.65em;
+            padding: 3px 8px;
+            border-radius: 10px;
+            background: rgba(201,168,76,0.12);
+            color: #c9a84c;
+            margin-top: 8px;
+        }
+
+        /* ===== TRAVEL TAB ===== */
+        .trip-card {
+            background: var(--panel-bg);
+            border: 1px solid var(--panel-border);
+            border-radius: var(--radius);
+            padding: 16px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .trip-card:hover {
+            border-color: var(--gold);
+            transform: translateY(-1px);
+        }
+        .trip-card h3 {
+            color: var(--gold);
+            font-size: 1em;
+            margin-bottom: 4px;
+        }
+        .trip-card .dates {
+            font-size: 0.78em;
+            color: var(--text-dim);
+        }
+        .trip-card .status-pill {
+            display: inline-block;
+            font-size: 0.65em;
+            padding: 3px 8px;
+            border-radius: 10px;
+            margin-top: 6px;
+        }
+        .status-pill.planning { background: rgba(59,130,246,0.12); color: var(--blue); }
+        .status-pill.confirmed { background: rgba(0,255,136,0.1); color: var(--success); }
+
+        /* Portfolio link */
+        .portfolio-link {
+            display: block;
+            text-align: center;
+            padding: 12px;
+            background: var(--panel-bg);
+            border: 1px solid var(--panel-border);
+            border-radius: var(--radius);
+            color: var(--gold);
+            text-decoration: none;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin-top: 12px;
+            transition: all 0.2s;
+        }
+        .portfolio-link:hover {
+            background: rgba(232,101,42,0.1);
+            border-color: var(--gold);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 14px;
+            font-size: 0.65em;
+            color: var(--text-dim);
+            opacity: 0.5;
+        }
+
+        /* AVAX theme accent */
+        .avax-accent {
+            background: linear-gradient(135deg, rgba(232,65,66,0.08), rgba(232,101,42,0.08));
+            border: 1px solid rgba(232,65,66,0.2);
+            border-radius: var(--radius);
+            padding: 12px;
+            margin-bottom: 12px;
+        }
+        .avax-accent .avax-label {
+            font-size: 0.65em;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--avax-red);
+            margin-bottom: 4px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <div class="hub-header">
+        <h1>⚡ GenTech Hub</h1>
+        <div class="subtitle">Jordan's Command Center</div>
+    </div>
+
+    <!-- ===== DEFI TAB ===== -->
+    <div class="tab-section active" id="tab-defi">
+
+        <!-- Status -->
+        <div style="text-align:center; margin: 10px 0 14px;">
+            <span class="status-badge active">
+                <span class="pulse"></span> LFJ Position Active
+            </span>
+        </div>
+
+        <!-- AVAX Brand Banner -->
+        <div class="avax-accent">
+            <div class="avax-label">🔺 Avalanche C-Chain · LFJ Concentrated Liquidity</div>
+            <div style="font-size:0.85em; color:var(--text-dim);">AVAX/USDC · 0.05% Fee Tier · Curve Shape</div>
+        </div>
+
+        <!-- Hero Stats -->
+        <div class="stat-row">
+            <div class="stat-card full">
+                <div class="stat-label">Total Position</div>
+                <div class="stat-value" id="total-value">$45.59</div>
+                <div class="stat-sub">2.19 AVAX + 30.88 USDC</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">AVAX Price</div>
+                <div class="stat-value cyan" id="avax-price">$6.71</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">24h</div>
+                <div class="stat-value green" id="change-24h">+0.72%</div>
+            </div>
+        </div>
+
+        <!-- Rewards -->
+        <div class="rewards-box">
+            <div class="rewards-label">⚡ Claimable Rewards</div>
+            <div class="rewards-value" id="rewards-avax">0.00799 AVAX</div>
+            <div class="rewards-usd" id="rewards-usd">≈ $0.054</div>
+        </div>
+
+        <!-- Position Breakdown -->
+        <div class="card">
+            <div class="card-title"><span class="dot"></span> Position</div>
+            <div class="pos-row">
+                <div>
+                    <div class="pos-token">AVAX</div>
+                    <div class="pos-amount">2.1900</div>
+                </div>
+                <div class="pos-value" id="avax-val">$14.71</div>
+            </div>
+            <div class="pos-row">
+                <div>
+                    <div class="pos-token">USDC</div>
+                    <div class="pos-amount">30.8800</div>
+                </div>
+                <div class="pos-value">$30.88</div>
+            </div>
+        </div>
+
+        <!-- Price Range -->
+        <div class="card">
+            <div class="card-title"><span class="dot"></span> Liquidity Range</div>
+            <div class="range-bar">
+                <div class="range-fill" style="left:0; width:100%;"></div>
+                <div class="range-marker" id="range-marker" style="left:55%;"></div>
+            </div>
+            <div class="range-labels">
+                <span>$6.65</span>
+                <span>$6.76</span>
+            </div>
+            <div class="range-current">Current: <strong>$6.71</strong></div>
+        </div>
+
+        <!-- Pool Config -->
+        <div class="card">
+            <div class="card-title"><span class="dot"></span> Config</div>
+            <div class="config-grid">
+                <div class="config-item">
+                    <div class="config-key">Fee</div>
+                    <div class="config-val">0.05%</div>
+                </div>
+                <div class="config-item">
+                    <div class="config-key">Shape</div>
+                    <div class="config-val">Curve</div>
+                </div>
+                <div class="config-item">
+                    <div class="config-key">Chain</div>
+                    <div class="config-val">Avalanche</div>
+                </div>
+                <div class="config-item">
+                    <div class="config-key">Protocol</div>
+                    <div class="config-val">LFJ</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Strategy -->
+        <div class="strategy-note">
+            <strong>Strategy:</strong> Testing the waters — waiting on a pullback. Curve shape for wider coverage. Tight concentration around current price for max fee capture.
+        </div>
+
+        <div class="footer">Updated: Jun 13, 2026 · GenTech DeFi Monitor</div>
+    </div>
+
+    <!-- ===== GAMING TAB ===== -->
+    <div class="tab-section" id="tab-gaming">
+        <div style="margin-bottom:14px;">
+            <h2 style="font-family:'Cinzel',serif; color:#c9a84c; font-size:1.1em;">🎮 Gaming Hub</h2>
+            <p style="font-size:0.78em; color:var(--text-dim); margin-top:2px;">POE2 builds & character tracking</p>
+        </div>
+
+        <div class="game-card" onclick="window.open('Gaming/poe2-dashboard.html','_blank')">
+            <h3>⚡ Monk — Storm Weaver</h3>
+            <p>Crit-based lightning build. Mapping focused with high mobility.</p>
+            <span class="tag">Active Build</span>
+        </div>
+
+        <div class="game-card" onclick="window.open('Gaming/poe2-warrior-dashboard.html','_blank')">
+            <h3>🛡️ Warrior — Vanito's Build</h3>
+            <p>Melee juggernaut. Tanky with warcry synergies.</p>
+            <span class="tag">Active Build</span>
+        </div>
+
+        <div class="game-card" onclick="window.open('Gaming/passive-planner.html','_blank')">
+            <h3>🌳 Passive Tree Planner</h3>
+            <p>Interactive skill tree builder for planning passive allocations.</p>
+            <span class="tag">Tool</span>
+        </div>
+
+        <a class="portfolio-link" href="https://protojay4789.github.io/Gaming/poe2-dashboard.html" target="_blank">Open Full Dashboard →</a>
+
+        <div class="footer">GenTech Gaming</div>
+    </div>
+
+    <!-- ===== TRAVEL TAB ===== -->
+    <div class="tab-section" id="tab-travel">
+        <div style="margin-bottom:14px;">
+            <h2 style="font-size:1.1em; color:var(--gold);">✈️ Travel Planner</h2>
+            <p style="font-size:0.78em; color:var(--text-dim); margin-top:2px;">Trips, flights & budget tracking</p>
+        </div>
+
+        <div class="trip-card" onclick="window.open('Travels/travel-dashboard.html','_blank')">
+            <h3>🇵🇭 Philippines — Trip 1</h3>
+            <div class="dates">September 2026 · Makati / Christel</div>
+            <span class="status-pill planning">Planning</span>
+        </div>
+
+        <div class="trip-card" onclick="window.open('Travels/travel-dashboard.html','_blank')">
+            <h3>🏖️ Philippines — Trip 2 + Boracay</h3>
+            <div class="dates">Nov/Dec 2026 · Boracay island hopping</div>
+            <span class="status-pill planning">Planning</span>
+        </div>
+
+        <div class="trip-card" onclick="window.open('Travels/travel-dashboard-vanito.html','_blank')">
+            <h3>🎢 Orlando — Vanito</h3>
+            <div class="dates">Wizarding World trip</div>
+            <span class="status-pill confirmed">Confirmed</span>
+        </div>
+
+        <a class="portfolio-link" href="https://protojay4789.github.io/Travels/travel-dashboard.html" target="_blank">Open Full Dashboard →</a>
+
+        <div class="footer">GenTech Travel</div>
+    </div>
+
+    <!-- ===== PORTFOLIO TAB ===== -->
+    <div class="tab-section" id="tab-portfolio">
+        <div style="margin-bottom:14px;">
+            <h2 style="font-size:1.1em; color:var(--blue);">👨‍💻 Portfolio</h2>
+            <p style="font-size:0.78em; color:var(--text-dim); margin-top:2px;">Projects, skills & hackathon tracker</p>
+        </div>
+
+        <a class="portfolio-link" href="https://protojay4789.github.io/" target="_blank" style="border-color:var(--blue); color:var(--blue);">
+            Open Full Portfolio →
+        </a>
+
+        <div class="footer">GenTech Portfolio</div>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+        <button class="nav-btn active" onclick="switchTab('defi')" id="nav-defi">
+            <span class="nav-icon">💰</span>
+            DeFi
+        </button>
+        <button class="nav-btn" onclick="switchTab('gaming')" id="nav-gaming">
+            <span class="nav-icon">🎮</span>
+            Gaming
+        </button>
+        <button class="nav-btn" onclick="switchTab('travel')" id="nav-travel">
+            <span class="nav-icon">✈️</span>
+            Travel
+        </button>
+        <button class="nav-btn" onclick="switchTab('portfolio')" id="nav-portfolio">
+            <span class="nav-icon">👨‍💻</span>
+            Portfolio
+        </button>
+    </nav>
+
+    <script>
+        function switchTab(tab) {
+            // Hide all sections
+            document.querySelectorAll('.tab-section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+
+            // Show selected
+            document.getElementById('tab-' + tab).classList.add('active');
+            document.getElementById('nav-' + tab).classList.add('active');
+
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        // Price range marker
+        const range = 6.76 - 6.65;
+        const current = 6.71;
+        const markerPos = ((current - 6.65) / range) * 100;
+        document.getElementById('range-marker').style.left = markerPos + '%';
+
+        // 24h change color
+        const changeEl = document.getElementById('change-24h');
+        changeEl.className = 'stat-value green';
+    </script>
+
+</body>
+</html>
