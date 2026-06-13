@@ -53,34 +53,35 @@
 The Double Vision crossbow is the core. On reload, it triggers **Gemini Surge** — alternately gains Cold Surges or Fire Surges. This is a reload-cycling build that uses multiple ammo types situationally.
 
 ### Mercenary Skills (12 total)
-| Skill | Type | Role |
-|-------|------|------|
-| Gemini Surge | Trigger — Elemental Surge | Core (from Double Vision) |
-| Crossbow Shot | Basic Attack | Default attack |
-| Load: Shock Burst Rounds | Ammo — Lightning | Primary ammo |
-| Load: Armor Piercing Rounds | Ammo — Physical | Armor break |
-| Load: High Velocity Rounds | Ammo — Physical | Pierce |
-| Load: Galvanic Shards | Ammo — Lightning | Chain |
-| Tornado | AoE — CC | Crowd control |
-| Emergency Reload | Utility | Surge trigger enabler |
-| Hail of Thunder | AoE — Lightning | AoE clear |
-| Siege Ballista | Totem — Ranged | Pin/totem pressure |
-| Mirage Archer | Companion | Auxiliary DPS |
-| Wind Dancer | Defensive — Evasion | Survival |
+| Skill | Supports | Type | Role |
+|-------|----------|------|------|
+| Gemini Surge | Elemental Focus, Living Lightning | Trigger — Elemental Surge | Core mechanic |
+| Crossbow Shot | Maim, Potent Exposure, Magnified Area T1 | Basic Attack | Default attack |
+| Load: Shock Burst Rounds | Elemental Focus, Elemental Armament T1, Lightning Attunement, Lightning Penetration | Ammo — Lightning | Primary ammo |
+| Load: Armor Piercing Rounds | Auto Reload, Armor Demolisher T1, Ricochet T1 | Ammo — Physical | Armor break |
+| Load: High Velocity Rounds | Rapid Attack T1, Execute T1, Double Barrel T1 | Ammo — Physical | Pierce |
+| Mortar Cannon | Voltaic Grenade | Totem — Grenade | Replaced Galvanic Shards |
+| Tornado | Magnified Area T1, Armor Demolisher T1 | AoE — CC | Crowd control |
+| Emergency Reload | Reduced Cooldown T1, Prolonged Duration T1 | Utility | Surge trigger enabler |
+| Hail of Thunder | Elemental Armament T2, Lightning Attunement, Lightning Penetration | AoE — Lightning | AoE clear |
+| Siege Ballista | Concentrated Area, Prolonged Duration T1, Elemental Armament T2 | Totem — Ranged | Pin/totem pressure |
+| Mirage Archer | Shock Burst Rounds, Elemental Armament T2, Lightning Exposure | Companion | Auxiliary DPS |
+| Wind Dancer | Blind T1, Magnified Area T1, Shock | Defensive — Evasion | Survival |
 
 ### Witch Hunter Build Notes
-- 12 skills is a lot — versatile but spread thin
-- No support gems documented yet (all Tier 0/empty)
-- Emergency Reload is the key — it triggers Gemini Surge on demand
-- Siege Ballista becomes much stronger after Tactician switch
-- Wind Dancer is the only defensive layer — needs investment
+- 12 skills total — very versatile loadout
+- Shock Burst Rounds is the best-supported skill (4 gems)
+- Mortar Cannon is new — replaces Galvanic Shards, scales with totem nodes
+- Emergency Reload + Reduced Cooldown = faster Gemini Surge triggers
+- Wind Dancer with Blind + Shock = solid defensive layer
+- All supports mostly T1-T2 — upgrade path clear
 
 ### Witch Hunter Optimization Suggestions
-1. **Gemini Surge:** Research supports that boost Surge stacks or add effects
-2. **Shock Burst Rounds:** Add Lightning Penetration + Added Lightning Damage
-3. **Siege Ballista:** Add Magnified Area + Totem Damage (bread and butter post-Tactician)
-4. **Emergency Reload:** Add Reduced Cooldown + Increased Duration (more surge uptime)
-5. **Wind Dancer:** Add Evasion + Blind (survival layer)
+1. **Siege Ballista:** Add Totem Damage or Magnified Area (primary after Tactician switch)
+2. **Mortar Cannon:** Add Area Damage + Totem Damage (new skill, needs investment)
+3. **Wind Dancer:** Upgrade Blind to T2, add Evasion support (only defensive layer)
+4. **Crossbow Shot:** Upgrade supports to T2+ (solid 3-gem setup)
+5. **Shock Burst Rounds:** Upgrade Elemental Armament to T2 (best ammo skill)
 
 ### Tactician Transition Plan
 **From:** Witch Hunter (explosions, culling, weapon master)
@@ -88,6 +89,7 @@ The Double Vision crossbow is the core. On reload, it triggers **Gemini Surge** 
 
 Key changes:
 - Siege Ballista → primary damage source (totem ascendancy nodes)
+- Mortar Cannon → scales with totem nodes (another totem in arsenal)
 - "Whoever Pays Best" — multiple banners simultaneously
 - Artillery Ballista → 40% increased Immobilisation Buildup
 - Allies in Presence → Added Attack Damage (25% of main hand)
@@ -104,10 +106,11 @@ Key changes:
 - Shield with block chance + armor
 
 ### Witch Hunter
-- Higher tier support gems (T2+)
+- Higher tier support gems (T2+) — especially Siege Ballista and Mortar Cannon
 - Crit chance/multiplier gear (Double Vision = 10% base crit)
 - Reload speed gear (Gemini Surge trigger synergy)
 - Evasion/armor hybrid gear
+- Totem damage gear (for Tactician transition)
 
 ## Progress Log
 | Date | Character | Notes |
@@ -115,6 +118,7 @@ Key changes:
 | 2026-05-19 | Wyvern | Warrior build started. Talisman acquired, Mace+Shield equipped. |
 | 2026-06-05 | Wyvern | GenTech Pal dashboard created. Full build analysis. |
 | 2026-06-12 | Witch Hunter | Second character created. 12 skills documented. Double Vision crossbow. Planning Tactician transition. |
+| 2026-06-12 | Witch Hunter | All support gems documented. Mortar Cannon replaced Galvanic Shards. |
 
 ## Dashboard
 🔥 **Live at:** https://protojay4789.github.io/pals/poe2-warrior-dashboard.html

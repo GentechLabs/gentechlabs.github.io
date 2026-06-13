@@ -160,114 +160,115 @@
             "name": "Gemini Surge",
             "type": "Trigger — Elemental Surge (from Double Vision)",
             "primary": true,
-            "supports": [],
+            "supports": ["Elemental Focus", "Living Lightning"],
             "note": "Granted by Double Vision. Triggers on reload — alternately gains Cold Surges or Fire Surges."
           },
           {
             "name": "Crossbow Shot",
             "type": "Basic Attack — Physical",
             "primary": false,
-            "supports": []
+            "supports": ["Maim", "Potent Exposure", "Magnified Area T1"]
           },
           {
             "name": "Load: Shock Burst Rounds",
             "type": "Ammo — Lightning/Physical",
             "primary": true,
-            "supports": []
+            "supports": ["Elemental Focus", "Elemental Armament T1", "Lightning Attunement", "Lightning Penetration"]
           },
           {
             "name": "Load: Armor Piercing Rounds",
             "type": "Ammo — Physical/Armor Break",
             "primary": false,
-            "supports": []
+            "supports": ["Auto Reload", "Armor Demolisher T1", "Ricochet T1"]
           },
           {
             "name": "Load: High Velocity Rounds",
             "type": "Ammo — Physical/Pierce",
             "primary": false,
-            "supports": []
+            "supports": ["Rapid Attack T1", "Execute T1", "Double Barrel T1"]
           },
           {
-            "name": "Load: Galvanic Shards",
-            "type": "Ammo — Lightning/Chain",
+            "name": "Mortar Cannon",
+            "type": "Totem — Grenade Launcher",
             "primary": false,
-            "supports": []
+            "supports": ["Voltaic Grenade"],
+            "note": "Replaced Galvanic Shards. Raises a cannon ballista totem that uses socketed Grenade Skills."
           },
           {
             "name": "Tornado",
             "type": "AoE — Crowd Control",
             "primary": false,
-            "supports": []
+            "supports": ["Magnified Area T1", "Armor Demolisher T1"]
           },
           {
             "name": "Emergency Reload",
             "type": "Utility — Reload Speed",
             "primary": false,
-            "supports": [],
+            "supports": ["Reduced Cooldown T1", "Prolonged Duration T1"],
             "note": "Key synergy with Gemini Surge — faster reloads = more surge triggers."
           },
           {
             "name": "Hail of Thunder",
             "type": "AoE — Lightning",
             "primary": false,
-            "supports": []
+            "supports": ["Elemental Armament T2", "Lightning Attunement", "Lightning Penetration"]
           },
           {
             "name": "Siege Ballista",
             "type": "Totem — Ranged/Pin",
             "primary": false,
-            "supports": [],
+            "supports": ["Concentrated Area", "Prolonged Duration T1", "Elemental Armament T2"],
             "note": "Strong Tactician synergy — will benefit from totem ascendancy nodes."
           },
           {
             "name": "Mirage Archer",
             "type": "Companion — Auxiliary Attacks",
             "primary": false,
-            "supports": []
+            "supports": ["Shock Burst Rounds", "Elemental Armament T2", "Lightning Exposure"]
           },
           {
             "name": "Wind Dancer",
             "type": "Defensive — Evasion",
             "primary": false,
-            "supports": []
+            "supports": ["Blind T1", "Magnified Area T1", "Shock"]
           }
         ]
       },
       "suggestions": [
         {
           "priority": 1,
-          "skill": "Gemini Surge",
-          "current": "No supports",
-          "suggested": "Research — Surge-boosting supports",
-          "reason": "Gemini Surge is your core mechanic. Check if any supports can amplify Surge stacks or add effects to Cold/Fire Surges."
+          "skill": "Siege Ballista",
+          "current": "Concentrated Area + Prolonged Duration T1 + Elemental Armament T2",
+          "suggested": "Add Totem Damage or Magnified Area",
+          "reason": "This becomes your primary damage source after Tactician switch. Totem damage support scales directly with Tactician ascendancy nodes."
         },
         {
           "priority": 2,
-          "skill": "Load: Shock Burst Rounds",
-          "current": "No supports",
-          "suggested": "Lightning Penetration + Added Lightning Damage",
-          "reason": "Your primary ammo type should hit hard. Lightning Penetration ensures damage isn't resisted, Added Lightning scales with Gemini Surge's Cold/Fire alternation."
+          "skill": "Mortar Cannon",
+          "current": "Voltaic Grenade only",
+          "suggested": "Add Area Damage + Totem Damage supports",
+          "reason": "New skill — needs investment. Mortar Cannon is a totem that scales with totem nodes, perfect for Tactician transition."
         },
         {
           "priority": 3,
-          "skill": "Siege Ballista",
-          "current": "No supports",
-          "suggested": "Magnified Area + Totem Damage",
-          "reason": "This becomes your bread and butter after Tactician switch. Invest now for the transition."
+          "skill": "Wind Dancer",
+          "current": "Blind T1 + Magnified Area T1 + Shock",
+          "suggested": "Upgrade Blind to T2, add Evasion support",
+          "reason": "Your only defensive layer. Blind is great but needs higher tier for accuracy reduction. Add raw evasion for survivability."
         },
         {
           "priority": 4,
-          "skill": "Emergency Reload",
-          "current": "No supports",
-          "suggested": "Reduced Cooldown + Increased Duration",
-          "reason": "Emergency Reload triggers Gemini Surge on demand. Lower cooldown = more surge uptime."
+          "skill": "Crossbow Shot",
+          "current": "Maim + Potent Exposure + Magnified Area T1",
+          "suggested": "Upgrade supports to T2+",
+          "reason": "Your basic attack with 3 supports — solid setup. Focus on upgrading tiers rather than adding more supports."
         },
         {
           "priority": 5,
-          "skill": "Wind Dancer",
-          "current": "No supports",
-          "suggested": "Evasion + Blind",
-          "reason": "Your only defensive layer. Wind Dancer + Blind = enemies miss more often. Critical for survival."
+          "skill": "Load: Shock Burst Rounds",
+          "current": "Elemental Focus + Elemental Armament T1 + Lightning Attunement + Lightning Penetration",
+          "suggested": "Upgrade Elemental Armament to T2",
+          "reason": "Best supported ammo skill (4 gems). Elemental Armament T2 will significantly boost damage output."
         }
       ],
       "synergyLoop": "Emergency Reload → triggers Gemini Surge (Cold/Fire Surges) → Load ammo types for situational damage → Crossbow Shot/Hail of Thunder for AoE clear → Siege Ballista for pin/totem pressure → Mirage Archer for auxiliary DPS → Wind Dancer for survival",
@@ -283,7 +284,7 @@
         ],
         "readinessLevel": "Transition-ready when ascendancy trial is complete"
       },
-      "lastUpdated": "2026-06-12"
+      "lastUpdated": "2026-06-12T2"
     }
   ]
 }

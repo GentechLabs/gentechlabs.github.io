@@ -44,20 +44,20 @@ Infernal Cry buffs → Mace Strike/Rolling Slam for big physical hits → Bone S
 Unique Dyad Crossbow that grants **Gemini Surge** — triggers on reload, alternately gains Cold Surges or Fire Surges. Loads an additional bolt, adds Physical Damage, boosts Crit Chance. The core of this build revolves around reload cycling.
 
 ### Active Skills (12 total)
-| Skill | Type | Role |
-|-------|------|------|
-| Gemini Surge | Trigger — Elemental Surge | Core mechanic (from Double Vision) |
-| Crossbow Shot | Basic Attack — Physical | Default attack |
-| Load: Shock Burst Rounds | Ammo — Lightning/Physical | Primary ammo |
-| Load: Armor Piercing Rounds | Ammo — Physical/Armor Break | Situational |
-| Load: High Velocity Rounds | Ammo — Physical/Pierce | Situational |
-| Load: Galvanic Shards | Ammo — Lightning/Chain | Situational |
-| Tornado | AoE — Crowd Control | Utility |
-| Emergency Reload | Utility — Reload Speed | Surge trigger enabler |
-| Hail of Thunder | AoE — Lightning | AoE clear |
-| Siege Ballista | Totem — Ranged/Pin | Totem pressure (key Tactician synergy) |
-| Mirage Archer | Companion — Auxiliary Attacks | Extra DPS |
-| Wind Dancer | Defensive — Evasion | Survival layer |
+| Skill | Supports | Type | Role |
+|-------|----------|------|------|
+| Gemini Surge | Elemental Focus, Living Lightning | Trigger — Elemental Surge | Core mechanic (from Double Vision) |
+| Crossbow Shot | Maim, Potent Exposure, Magnified Area T1 | Basic Attack — Physical | Default attack |
+| Load: Shock Burst Rounds | Elemental Focus, Elemental Armament T1, Lightning Attunement, Lightning Penetration | Ammo — Lightning/Physical | Primary ammo |
+| Load: Armor Piercing Rounds | Auto Reload, Armor Demolisher T1, Ricochet T1 | Ammo — Physical/Armor Break | Situational |
+| Load: High Velocity Rounds | Rapid Attack T1, Execute T1, Double Barrel T1 | Ammo — Physical/Pierce | Situational |
+| Mortar Cannon | Voltaic Grenade | Totem — Grenade Launcher | Replaced Galvanic Shards |
+| Tornado | Magnified Area T1, Armor Demolisher T1 | AoE — Crowd Control | Utility |
+| Emergency Reload | Reduced Cooldown T1, Prolonged Duration T1 | Utility — Reload Speed | Surge trigger enabler |
+| Hail of Thunder | Elemental Armament T2, Lightning Attunement, Lightning Penetration | AoE — Lightning | AoE clear |
+| Siege Ballista | Concentrated Area, Prolonged Duration T1, Elemental Armament T2 | Totem — Ranged/Pin | Totem pressure (key Tactician synergy) |
+| Mirage Archer | Shock Burst Rounds, Elemental Armament T2, Lightning Exposure | Companion — Auxiliary Attacks | Extra DPS |
+| Wind Dancer | Blind T1, Magnified Area T1, Shock | Defensive — Evasion | Survival layer |
 
 ### Synergy Loop
 Emergency Reload → triggers Gemini Surge (Cold/Fire Surges) → Load ammo types for situational damage → Crossbow Shot/Hail of Thunder for AoE clear → Siege Ballista for pin/totem pressure → Mirage Archer for auxiliary DPS → Wind Dancer for survival
@@ -68,6 +68,7 @@ Emergency Reload → triggers Gemini Surge (Cold/Fire Surges) → Load ammo type
 
 Key changes after transition:
 - Siege Ballista becomes primary damage source with totem ascendancy nodes
+- Mortar Cannon scales with totem nodes — another totem in the arsenal
 - "Whoever Pays Best" — can place multiple banners simultaneously
 - Artillery Ballista grants 40% increased Immobilisation Buildup
 - Allies in Presence gain Added Attack Damage (25% of main hand)
@@ -84,10 +85,11 @@ Key changes after transition:
 - Shield with block chance + armor
 
 ### Witch Hunter (Mercenary)
-- Higher tier support gems (T2+)
+- Higher tier support gems (T2+) — especially for Siege Ballista and Mortar Cannon
 - Crit chance/multiplier gear (Double Vision has 10% base crit)
 - Reload speed gear (synergy with Gemini Surge triggers)
 - Evasion/armor hybrid gear (Mercenary armor type)
+- Totem damage gear (for Tactician transition)
 
 ## Progress Log
 | Date | Character | Notes |
@@ -95,6 +97,7 @@ Key changes after transition:
 | 2026-05-19 | Wyvern | Warrior build started. Talisman acquired, Mace+Shield equipped. |
 | 2026-06-05 | Wyvern | GenTech Pal dashboard created. Full build analysis. |
 | 2026-06-12 | Witch Hunter | Second character created. 12 skills documented. Double Vision crossbow with Gemini Surge. Planning Tactician transition. |
+| 2026-06-12 | Witch Hunter | All support gems documented. Mortar Cannon replaced Galvanic Shards. 4-5 supports on main skills. |
 
 ## Dashboard
 🔥 **Live at:** https://protojay4789.github.io/pals/poe2-warrior-dashboard.html
