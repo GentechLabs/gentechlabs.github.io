@@ -1,0 +1,353 @@
+{
+  "trip": {
+    "name": "Orlando: The Wizarding World",
+    "traveler": "Vanito",
+    "theme": {
+      "style": "magical",
+      "palette": "harrypotter",
+      "name": "Wizarding World",
+      "colors": {
+        "--bg": "#1a1025",
+        "--bg-alt": "#221533",
+        "--panel-bg": "#2a1d3d",
+        "--panel-border": "#4a3566",
+        "--panel-shadow": "rgba(120, 60, 180, 0.15)",
+        "--text": "#e8e0f0",
+        "--text-dim": "#9a85b0",
+        "--gold": "#d4a017",
+        "--gold-dim": "#b8941a",
+        "--gold-glow": "rgba(212, 160, 23, 0.3)",
+        "--accent": "#7b2d8e",
+        "--accent-dim": "#5e1f6e",
+        "--ocean": "#1a6bb5",
+        "--ocean-dim": "#145a9a",
+        "--green": "#2d8a4e",
+        "--green-dim": "#1f6b3a",
+        "--red": "#ae1c1c",
+        "--red-dim": "#8b1515",
+        "--orange": "#e8652a",
+        "--yellow": "#f0c14b",
+        "--pink": "#d4748a",
+        "--pink-glow": "rgba(212, 116, 138, 0.2)"
+      },
+      "fonts": {
+        "heading": "'Cinzel', serif",
+        "body": "'Crimson Text', serif"
+      },
+      "headerGradient": "linear-gradient(135deg, #1a1025 0%, #7b2d8e 40%, #d4a017 100%)"
+    },
+    "status": "Research",
+    "startDate": "2026-08-01",
+    "endDate": "2026-08-12",
+    "homeBase": "Orlando, Florida",
+    "legs": [
+      {
+        "destination": "Orlando, Florida",
+        "arrive": "2026-08-01",
+        "depart": "2026-08-12",
+        "nights": 11,
+        "purpose": "Universal Studios & Wizarding World",
+        "location": "Orlando, FL",
+        "accommodation": "TBD — Hotel/Airbnb near Universal Orlando Resort"
+      }
+    ],
+    "flights": [
+      {
+        "route": "CVG → MCO",
+        "airline": "TBD",
+        "departDate": "2026-08-01",
+        "arriveDate": "2026-08-01",
+        "class": "Economy",
+        "cost": 0,
+        "status": "Not booked",
+        "notes": "Check Southwest, Frontier, Spirit for budget options. ~2.5hr direct possible."
+      }
+    ],
+    "budget": {
+      "total": 0,
+      "minimum": 0,
+      "spent": 0,
+      "note": "Budget TBD — tickets, hotel, flights, food, and spending all need pricing.",
+      "categories": {
+        "flights": { "allocated": 0, "spent": 0 },
+        "accommodation": { "allocated": 0, "spent": 0 },
+        "tickets": { "allocated": 257, "spent": 0 },
+        "food": { "allocated": 0, "spent": 0 },
+        "transport": { "allocated": 0, "spent": 0 },
+        "emergency": { "allocated": 0, "spent": 0 }
+      }
+    },
+    "costComparison": {
+      "title": "Ticket Deal Breakdown",
+      "note": "Why the Buy 3, Get 2 Free deal wins",
+      "items": [
+        { "item": "Buy 3 Get 2 Free (Groupon)", "priceA": 257, "priceB": null, "unit": "per person" },
+        { "item": "Buy 3 Get 2 Free (Universal Direct)", "priceA": 367, "priceB": null, "unit": "per person" },
+        { "item": "5-Day Park-to-Park (standard)", "priceA": 525, "priceB": null, "unit": "per person" },
+        { "item": "Single-Day Epic Universe", "priceA": 139, "priceB": null, "unit": "per day" },
+        { "item": "Single-Day Studios/Islands", "priceA": 124, "priceB": null, "unit": "per day" }
+      ],
+      "summary": {
+        "savingsPercent": 51,
+        "bestDeal": "Groupon Buy 3, Get 2 Free at ~$257",
+        "dailyRate": "~$51/day for 5 days across all parks",
+        "verdict": "Groupon saves $110+ vs Universal direct, $268 vs standard 5-day ticket"
+      }
+    },
+    "vibe": "Theme park adventure — Epic Universe, Wizarding World of Harry Potter, Islands of Adventure. Group trip with personal solo ticket.",
+    "days": [
+      {
+        "day": 1,
+        "date": "2026-08-01",
+        "location": "Orlando, FL",
+        "title": "Arrival Day",
+        "type": "travel",
+        "activities": [
+          "Arrive in Orlando",
+          "Check into hotel/accommodation",
+          "Pick up rental car or arrange transport",
+          "Grocery run — snacks, water, sunscreen",
+          "Rest up for park days ahead"
+        ],
+        "notes": "Universal is about 15 min from MCO airport. Stay near International Drive for convenience."
+      },
+      {
+        "day": 2,
+        "date": "2026-08-02",
+        "location": "Universal Epic Universe",
+        "title": "🎢 Epic Universe Day 1",
+        "type": "park",
+        "activities": [
+          "Epic Universe — full day exploration",
+          "The Wizarding World — Ministry of Magic (Paris-themed!)",
+          "How to Train Your Dragon — Isle of Berk",
+          "Super Nintendo World",
+          "Dark Universe (Universal Monsters)"
+        ],
+        "notes": "Epic Universe is the NEW park. Arrive early — rope drop recommended. This is what you came for."
+      },
+      {
+        "day": 3,
+        "date": "2026-08-03",
+        "location": "Universal Studios Florida",
+        "title": "🎬 Universal Studios Florida",
+        "type": "park",
+        "activities": [
+          "Universal Studios Florida — full day",
+          "The Wizarding World — Diagon Alley",
+          "Ride Hogwarts Express to Islands of Adventure",
+          "Hollywood Rip Ride Rockit",
+          "Revenge of the Mummy",
+          "Men in Black Alien Attack"
+        ],
+        "notes": "Park-to-Park access lets you ride the Hogwarts Express between parks!"
+      },
+      {
+        "day": 4,
+        "date": "2026-08-04",
+        "location": "Islands of Adventure",
+        "title": "⚡ Islands of Adventure",
+        "type": "park",
+        "activities": [
+          "Islands of Adventure — full day",
+          "The Wizarding World — Hogsmeade",
+          "Harry Potter and the Forbidden Journey",
+          "Hagrid's Magical Creatures Motorbike Adventure",
+          "VelociCoaster",
+          "The Incredible Hulk Coaster"
+        ],
+        "notes": "Hagrid's has the longest waits — ride it first thing or use Single Rider line."
+      },
+      {
+        "day": 5,
+        "date": "2026-08-05",
+        "location": "Universal Epic Universe",
+        "title": "🎢 Epic Universe Day 2",
+        "type": "park",
+        "activities": [
+          "Return to Epic Universe for anything missed",
+          "Re-ride favorites",
+          "Explore shops and immersive areas",
+          "Catch any shows or experiences skipped Day 1",
+          "Evening: CityWalk for dinner"
+        ],
+        "notes": "Second day lets you go deeper without rushing. Take your time."
+      },
+      {
+        "day": 6,
+        "date": "2026-08-06",
+        "location": "Orlando, FL",
+        "title": "🏖️ Rest Day",
+        "type": "relax",
+        "activities": [
+          "Sleep in — you've earned it",
+          "Pool day at the hotel",
+          "Explore International Drive",
+          "VisitICON Park (The Wheel, Madame Tussauds)",
+          "Dinner at a local restaurant"
+        ],
+        "notes": "Theme parks are exhausting. Rest days prevent burnout."
+      },
+      {
+        "day": 7,
+        "date": "2026-08-07",
+        "location": "Orlando, FL",
+        "title": "🌊 Water Park Day",
+        "type": "park",
+        "activities": [
+          "Volcano Bay water park (if upgrade purchased)",
+          "Or: Wet 'n Wild / Blizzard Beach",
+          "Wave pool, lazy river, water slides",
+          "Relax and cool off from the theme parks"
+        ],
+        "notes": "August in Florida = HOT. Water park is perfect mid-trip."
+      },
+      {
+        "day": 8,
+        "date": "2026-08-08",
+        "location": "Orlando, FL",
+        "title": "🛍️ Shopping & Explore",
+        "type": "explore",
+        "activities": [
+          "Universal CityWalk — shops, food, nightlife",
+          "Orlando International Premium Outlets",
+          "Find Harry Potter merch & souvenirs",
+          "Visit a local brewery or restaurant",
+          "Pack any purchases to ship home if needed"
+        ],
+        "notes": "CityWalk is free to enter — just pay for parking. Good for evening vibes."
+      },
+      {
+        "day": 9,
+        "date": "2026-08-09",
+        "location": "Orlando, FL",
+        "title": "🎢 Park Day — Your Pick",
+        "type": "park",
+        "activities": [
+          "Return to any park you want to revisit",
+          "Or try something new in Orlando",
+          "Kennedy Space Center (1hr drive)",
+          "Gatorland — classic Florida attraction",
+          "Or: just relax by the pool"
+        ],
+        "notes": "Your trip, your rules. Do what feels right."
+      },
+      {
+        "day": 10,
+        "date": "2026-08-10",
+        "location": "Orlando, FL",
+        "title": "🏖️ Chill Day",
+        "type": "relax",
+        "activities": [
+          "No park tickets left — enjoy Orlando",
+          "Brunch at a local spot",
+          "Visit Lake Eola Park downtown",
+          "Explore Winter Park (charming area, shops + restaurants)",
+          "Final evening: nice dinner out"
+        ],
+        "notes": "Winter Park has Park Avenue — walkable shops and restaurants."
+      },
+      {
+        "day": 11,
+        "date": "2026-08-11",
+        "location": "Orlando, FL",
+        "title": "Last Full Day",
+        "type": "relax",
+        "activities": [
+          "Pack souvenirs and gear",
+          "Final grocery/Target run for travel snacks",
+          "Relax at hotel",
+          "Last dinner — try somewhere new",
+          "Early night — travel day tomorrow"
+        ],
+        "notes": "Don't forget to check for anything left behind."
+      },
+      {
+        "day": 12,
+        "date": "2026-08-12",
+        "location": "Orlando → Home",
+        "title": "Departure Day",
+        "type": "travel",
+        "activities": [
+          "Check out of accommodation",
+          "Return rental car or arrange transport to MCO",
+          "Fly home",
+          "Post-trip: update dashboard, share photos"
+        ],
+        "notes": "MCO is easy to navigate. Allow 2 hours before flight."
+      }
+    ],
+    "checklist": [
+      {"item": "Passport / Valid ID", "done": false, "category": "docs"},
+      {"item": "Book flight CVG → MCO", "done": false, "category": "flights"},
+      {"item": "Book return flight MCO → CVG", "done": false, "category": "flights"},
+      {"item": "Book hotel/accommodation (11 nights)", "done": false, "category": "stay"},
+      {"item": "Buy Universal tickets via Groupon", "done": false, "category": "activities"},
+      {"item": "Notify bank of Florida travel", "done": false, "category": "finance"},
+      {"item": "Download Universal Orlando app", "done": false, "category": "tech"},
+      {"item": "Check Volcano Bay upgrade pricing", "done": false, "category": "activities"},
+      {"item": "Pack sunscreen, hat, comfortable shoes", "done": false, "category": "pack"},
+      {"item": "Portable phone charger (long park days)", "done": false, "category": "tech"},
+      {"item": "Rain poncho (Florida = afternoon storms)", "done": false, "category": "pack"},
+      {"item": "Pack light clothes — August is HOT (90°F+)", "done": false, "category": "pack"}
+    ],
+    "restaurants": {
+      "mustTry": [
+        {"name": "Toothsome Chocolate Emporium", "type": "Steampunk restaurant", "vibe": "CityWalk, over-the-top milkshakes", "cost": "$$"},
+        {"name": "Three Broomsticks", "type": "Wizarding World pub", "vibe": "Hogsmeade, fish & chips, Shepherd's Pie", "cost": "$$"},
+        {"name": "Leaky Cauldron", "type": "Wizarding World pub", "vibe": "Diagon Alley, British fare, Butterbeer", "cost": "$$"},
+        {"name": "Mythos Restaurant", "type": "Mediterranean", "vibe": "Islands of Adventure, cave-like, award-winning", "cost": "$$$"}
+      ],
+      "nearby": [
+        "Universal CityWalk (free entry, restaurants + nightlife)",
+        "International Drive (tons of chain restaurants)",
+        "Winter Park (charming, upscale dining)"
+      ]
+    },
+    "places": {
+      "parks": [
+        {"name": "Universal Epic Universe", "note": "The NEW park — 5 themed worlds including Wizarding World Paris"},
+        {"name": "Universal Studios Florida", "note": "Diagon Alley, Transformers, Mummy, Men in Black"},
+        {"name": "Islands of Adventure", "note": "Hogsmeade, VelociCoaster, Hulk, Hagrid's"},
+        {"name": "Volcano Bay", "note": "Water park with TapuTapu virtual queue"}
+      ],
+      "shops": [
+        {"name": "Ollivanders Wand Shop", "note": "Hogsmeade — wand choosing ceremony"},
+        {"name": "Weasleys' Wizard Wheezes", "note": "Diagon Alley — joke shop, Fred & George vibes"},
+        {"name": "Honeydukes", "note": "Hogsmeade — chocolate frog cards, Bertie Bott's"},
+        {"name": "Universal's Superstar Store", "note": "CityWalk — all the merch in one place"}
+      ],
+      "explore": [
+        {"name": "Universal CityWalk", "note": "Free entry — restaurants, bars, shops, entertainment"},
+        {"name": "ICON Park", "note": "The Wheel, Madame Tussauds, Sea Life Aquarium"},
+        {"name": "International Drive", "note": "Main tourist strip — restaurants, attractions"}
+      ]
+    },
+    "packing": [
+      {"item": "Light, breathable clothes (90°F+ in August)", "packed": false},
+      {"item": "Comfortable walking shoes (you'll walk 20,000+ steps/day)", "packed": false},
+      {"item": "Rain poncho or small umbrella (afternoon storms daily)", "packed": false},
+      {"item": "Sunscreen SPF 50+ (reapply every 2 hours)", "packed": false},
+      {"item": "Sunglasses and hat", "packed": false},
+      {"item": "Portable phone charger (long park days)", "packed": false},
+      {"item": "Universal Orlando app downloaded", "packed": false},
+      {"item": "Refillable water bottle (free ice water at quick-service restaurants)", "packed": false},
+      {"item": "Small backpack or sling bag for park days", "packed": false},
+      {"item": "Gryffindor/Harry Potter merch to wear (optional but fun!)", "packed": false}
+    ],
+    "tips": [
+      "⚡ Buy tickets via Groupon NOW — the Buy 3 Get 2 Free deal ends Aug 26, 2026",
+      "🏰 Hogwarts Express requires Park-to-Park access — Base tickets can't ride it",
+      "🎢 Hagrid's Motorbike Adventure has the longest waits — ride it at rope drop or use Single Rider",
+      "🧊 Free ice water at any quick-service restaurant — just ask. Don't buy bottled water.",
+      "📱 Download the Universal Orlando app — real-time wait times, mobile food ordering, park map",
+      "☔ August = daily afternoon thunderstorms. They pass quickly. Wear a poncho, keep riding.",
+      "🏃 Single Rider lines can cut wait times by 50%+ — great if you don't need to sit together",
+      "🎢 Volcano Bay uses TapuTapu wristbands — virtual queue system, no rushing needed",
+      "🍽️ Three Broomsticks and Leaky Cauldron are the best themed restaurants — worth the wait",
+      "🧳 Your 5-day ticket must be used within 7 consecutive days — plan your park days carefully",
+      "💡 The Groupon deal gives you 5 days of park access for ~$51/day — best value available"
+    ],
+    "lastUpdated": "2026-06-13"
+  }
+}
