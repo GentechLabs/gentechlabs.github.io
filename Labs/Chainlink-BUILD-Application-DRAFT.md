@@ -2,8 +2,8 @@
 title: Chainlink BUILD Application
 project: Agent Shield — AI Agent Security Powered by Chainlink
 applicant: Jordan (ProtoJay4789)
-date: 2026-05-28
-status: Draft — Ready to Submit
+date: 2026-06-14
+status: Final — Ready to Submit
 apply_url: https://chain.link/build-program
 ---
 
@@ -42,7 +42,7 @@ Agent Shield uses Chainlink:
 |---------|-------|-------|--------|-----------|
 | Agent Shield | EVM | 22/22 | Live | Direct — prompt injection defense |
 | Agent Registry | Solana/EVM | ✅ | Live | Agent identity for threat attribution |
-| Bankr Exploit Case Study | N/A | ✅ | Published | Security research |
+| Agent Credit Score | Multi-chain | 22/22 | Live | Trust scoring for agent reputation |
 | AAE Safety Module | Base | 22/22 | Live | Transfer gate, input firewall, circuit breaker |
 
 ## Integration Plan

@@ -1,9 +1,9 @@
 ---
 title: Solana Foundation Grant Application
-project: Agent Registry + TradeRoast
+project: Agent Registry + Agent Credit Score
 applicant: Jordan (ProtoJay4789)
-date: 2026-05-28
-status: Draft — Ready to Submit
+date: 2026-06-14
+status: Final — Ready to Submit
 amount: $200-$400K (milestone-based)
 apply_url: https://solana.org/grants-funding
 ---
@@ -11,16 +11,17 @@ apply_url: https://solana.org/grants-funding
 # Solana Foundation Grant Application
 
 ## Project Name
-**Agent Registry — Open Infrastructure for AI Agents on Solana**
+**Agent Registry + Credit Score — Open Infrastructure for AI Agents on Solana**
 
 ## One-Liner
-Open-source agent identity and discovery protocol enabling AI agents to register, coordinate, and transact on Solana.
+Open-source agent identity, discovery, and credit scoring protocol enabling AI agents to register, coordinate, and build reputation on Solana.
 
 ## Problem Statement
 AI agents are proliferating across crypto, but there's no standard way to:
 1. **Identify** agents on-chain (who is this agent?)
 2. **Discover** agents (what agents exist for this task?)
 3. **Coordinate** agents (how do agents work together safely?)
+4. **Score** agents (which agents are trustworthy?)
 
 Without infrastructure, the agent economy fragments into siloed projects with no interoperability.
 
@@ -29,6 +30,7 @@ Agent Registry provides:
 - **On-chain identity** — ERC-8004-compatible agent registration on Solana
 - **Reputation system** — track agent performance, build trust
 - **Discovery protocol** — find agents by capability, chain, specialization
+- **Credit scoring** — 0-850 score based on win rate, risk-adjusted returns, consistency
 - **Coordination layer** — multi-agent task execution with built-in escrow
 
 ## Why Solana
@@ -41,6 +43,7 @@ Agent Registry provides:
 | Project | Chain | Tests | Status | Repo |
 |---------|-------|-------|--------|------|
 | Agent Registry | Solana | ✅ | Live | github.com/ProtoJay4789/agent-registry |
+| Agent Credit Score | Multi-chain | 22/22 | Live | github.com/ProtoJay4789/agent-credit-score |
 | TradeRoast MVP | Solana | 44/44 | Live | github.com/ProtoJay4789/trade-roast |
 | LP Monitor (Swarms) | Solana | 26/26 | Published | Swarms Marketplace |
 | AAE Token | Base | ✅ | Live | Base mainnet |
