@@ -182,9 +182,9 @@
 
         // Initialize
         (async () => {
-            const templateRes = await fetch('defi-template.json?' + Date.now());
+            const templateRes = await fetch('defi-template.json?v=' + Date.now());
             const template = await templateRes.json();
-            const dataRes = await fetch('defi-data.json?' + Date.now());
+            const dataRes = await fetch('defi-data.json?v=' + Date.now());
             let data = await dataRes.json();
 
             // Fetch live price and calculate values
@@ -195,7 +195,7 @@
 
             // Refresh every 60s
             setInterval(async () => {
-                let freshData = await (await fetch('defi-data.json?' + Date.now())).json();
+                let freshData = await (await fetch('defi-data.json?v=' + Date.now())).json();
                 freshData = await fetchLiveData(freshData);
                 // Re-render with fresh data
                 const dash2 = new DashboardEngine({ template, data: freshData });
