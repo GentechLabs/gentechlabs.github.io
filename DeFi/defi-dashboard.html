@@ -1134,14 +1134,15 @@
 
         // Initialize
         let lpCurve = null;
+        let defiDash = null;
         (async () => {
             const templateRes = await fetch('defi-template.json?' + Date.now());
             const template = await templateRes.json();
             const dataRes = await fetch('defi-data.json?' + Date.now());
             const data = await dataRes.json();
 
-            const dash = new DashboardEngine({ template, data });
-            await dash.init('#app');
+            defiDash = new DashboardEngine({ template, data });
+            await defiDash.init('#app');
 
             // Initialize LP curve renderer
             const curveContainer = document.getElementById('lp-curve-canvas');
@@ -1150,9 +1151,24 @@
             }
 
             // Expose for debugging
-            window.defiDash = dash;
+            window.defiDash = defiDash;
             window.lpCurve = lpCurve;
         })();
+
+        // Auto-refresh every 60 seconds
+        setInterval(async () => {
+            try {
+                const dataRes = await fetch('defi-data.json?' + Date.now());
+                const data = await dataRes.json();
+                if (defiDash) {
+                    defiDash.data = data;
+                    defiDash.render();
+                }
+                console.log('[DeFi] Auto-refreshed at', new Date().toLocaleTimeString());
+            } catch (e) {
+                console.warn('[DeFi] Auto-refresh failed:', e.message);
+            }
+        }, 60000);
     </script>
 </body>
 </html>
