@@ -30,6 +30,8 @@
             width: 10px; height: 10px; background: #22c55e;
             border-radius: 50%; animation: pulse 2s ease-in-out infinite;
         }
+        .pulse-dot.stale { background: #f59e0b; }
+        .pulse-dot.dead { background: #ef4444; animation: none; }
         @keyframes pulse {
             0%, 100% { opacity: 1; transform: scale(1); }
             50% { opacity: 0.5; transform: scale(1.3); }
@@ -54,12 +56,14 @@
             margin-top: 4px;
         }
         
-        /* Activity Feed */
+        /* Section titles */
         .section-title {
             font-size: 1em; color: #888;
             text-transform: uppercase; letter-spacing: 1px;
             margin: 24px 0 12px;
         }
+        
+        /* Activity Feed */
         .activity-feed { max-height: 400px; overflow-y: auto; }
         .activity-card {
             display: flex; align-items: center; gap: 12px;
@@ -80,20 +84,6 @@
         .activity-type { font-weight: 600; font-size: 0.9em; }
         .activity-detail { font-size: 0.8em; color: #888; margin-top: 2px; }
         .activity-time { font-size: 0.75em; color: #666; }
-        
-        /* Reputation */
-        .reputation-bar {
-            height: 8px; background: rgba(255,255,255,0.1);
-            border-radius: 4px; overflow: hidden; margin-top: 8px;
-        }
-        .reputation-fill {
-            height: 100%; border-radius: 4px;
-            transition: width 0.5s ease;
-        }
-        .tier-badge {
-            display: inline-block; padding: 4px 12px;
-            border-radius: 12px; font-size: 0.8em; font-weight: 600;
-        }
         
         /* Earnings */
         .earnings-grid {
@@ -125,6 +115,38 @@
         .node-dot.idle { background: #f59e0b; }
         .node-dot.offline { background: #ef4444; }
         
+        /* Uptime bar */
+        .uptime-bar {
+            height: 8px; background: rgba(255,255,255,0.1);
+            border-radius: 4px; overflow: hidden; margin-top: 8px;
+        }
+        .uptime-fill {
+            height: 100%; border-radius: 4px;
+            background: linear-gradient(90deg, #22c55e, #16a34a);
+            transition: width 0.5s ease;
+        }
+        
+        /* Trust tier badge */
+        .tier-badge {
+            display: inline-block; padding: 4px 12px;
+            border-radius: 12px; font-size: 0.8em; font-weight: 600;
+            margin-top: 8px;
+        }
+        .tier-bronze { background: rgba(205,127,50,0.2); color: #cd7f32; }
+        .tier-silver { background: rgba(192,192,192,0.2); color: #c0c0c0; }
+        .tier-gold { background: rgba(255,215,0,0.2); color: #ffd700; }
+        .tier-platinum { background: rgba(229,228,226,0.2); color: #e5e4e2; }
+        
+        /* Status indicator */
+        .status-row {
+            display: flex; align-items: center; gap: 12px;
+            padding: 12px 16px; margin-bottom: 12px;
+            background: rgba(255,255,255,0.02);
+            border-radius: 8px;
+        }
+        .status-label { font-size: 0.85em; color: #888; }
+        .status-value { font-weight: 600; }
+        
         @media (max-width: 768px) {
             .stats-grid { grid-template-columns: repeat(2, 1fr); }
             .earnings-grid { grid-template-columns: 1fr; }
@@ -132,33 +154,44 @@
     </style>
 </head>
 <body>
+    <div style="position:fixed;top:10px;left:10px;z-index:100;"><a href="../../Profiles/hub.html" style="color:#3b82f6;text-decoration:none;font-size:0.9em;">← Back to Hub</a></div>
     <div class="container">
         <!-- Header -->
         <div class="header">
             <h1>⚡ Agent Node</h1>
-            <div class="heartbeat-pulse">
-                <div class="pulse-dot"></div>
-                <span style="font-size:0.85em; color:#22c55e;">LIVE</span>
+            <div class="heartbeat-pulse" id="pulse-indicator">
+                <div class="pulse-dot" id="pulse-dot"></div>
+                <span style="font-size:0.85em; color:#22c55e;" id="pulse-text">LIVE</span>
             </div>
+        </div>
+        
+        <!-- Status Row -->
+        <div class="status-row" id="status-row">
+            <span class="status-label">Agent:</span>
+            <span class="status-value" id="agent-id">gentech-001</span>
+            <span class="status-label" style="margin-left:auto;">System:</span>
+            <span class="status-value" id="system-uptime" style="font-size:0.85em;">—</span>
         </div>
         
         <!-- Stats -->
         <div class="stats-grid">
             <div class="stat-card">
-                <div class="stat-value" id="uptime">99.97%</div>
+                <div class="stat-value" id="uptime">—</div>
                 <div class="stat-label">Uptime</div>
+                <div class="uptime-bar"><div class="uptime-fill" id="uptime-bar" style="width: 0%"></div></div>
             </div>
             <div class="stat-card">
                 <div class="stat-value" id="tasks">0</div>
                 <div class="stat-label">Tasks Verified</div>
             </div>
             <div class="stat-card">
-                <div class="stat-value" id="accuracy">100%</div>
+                <div class="stat-value" id="accuracy">—</div>
                 <div class="stat-label">Accuracy</div>
             </div>
             <div class="stat-card">
                 <div class="stat-value" id="score">0</div>
                 <div class="stat-label">Reputation Score</div>
+                <div id="tier-badge"></div>
             </div>
         </div>
         
@@ -181,80 +214,184 @@
         
         <!-- Activity Feed -->
         <div class="section-title">📋 Activity Feed</div>
-        <div class="activity-feed" id="activity-feed"></div>
+        <div class="activity-feed" id="activity-feed">
+            <div style="padding:20px; text-align:center; color:#666;">Loading activity...</div>
+        </div>
         
         <!-- Network -->
         <div class="section-title">🌐 Network</div>
         <div class="network-nodes" id="network-nodes"></div>
+        
+        <!-- Footer -->
+        <div style="margin-top:30px; padding:15px 0; border-top:1px solid rgba(255,255,255,0.05); text-align:center;">
+            <span style="font-size:0.75em; color:#444;" id="last-updated">Last updated: —</span>
+        </div>
     </div>
     
     <script>
-        // Config
-        const HEARTBEAT_URL = '../data/heartbeat-log.json';
-        const STATE_URL = '../data/heartbeat-state.json';
-        const REFRESH_MS = 60000;
+        // Data URLs — relative paths for GitHub Pages
+        const DATA_BASE = 'data';
+        const HEARTBEAT_URL = `${DATA_BASE}/heartbeat-log.json`;
+        const STATE_URL = `${DATA_BASE}/heartbeat-state.json`;
+        const ACTIVITY_URL = `${DATA_BASE}/activity-log.json`;
+        const REFRESH_MS = 30000; // 30s dashboard refresh
         
-        // Simulated data (replace with real heartbeat data)
-        const MOCK_ACTIVITIES = [
-            { type: 'Deploy Verify', target: 'protojay4789.github.io', status: 'success', time: '2 min ago' },
-            { type: 'API Monitor', target: 'api.coingecko.com', status: 'success', time: '5 min ago' },
-            { type: 'Data Validate', target: 'defi-data.json', status: 'success', time: '8 min ago' },
-            { type: 'Heartbeat', target: 'gentech-001', status: 'success', time: '1 min ago' },
-            { type: 'Deploy Verify', target: 'dashboard.html', status: 'success', time: '12 min ago' },
-        ];
-        
-        // Render activity feed
-        function renderActivities(activities) {
-            const feed = document.getElementById('activity-feed');
-            feed.innerHTML = activities.map(a => `
-                <div class="activity-card ${a.status}">
-                    <div class="activity-icon">${a.status === 'success' ? '✅' : a.status === 'failure' ? '❌' : '⏳'}</div>
-                    <div class="activity-content">
-                        <div class="activity-type">${a.type}</div>
-                        <div class="activity-detail">${a.target}</div>
-                    </div>
-                    <div class="activity-time">${a.time}</div>
-                </div>
-            `).join('');
+        // Score calculation (0-850 scale)
+        function calculateScore(tasks, failed, uptimePct) {
+            const accuracy = tasks / Math.max(tasks + failed, 1);
+            const base = Math.min(tasks * 2, 400); // up to 400 from volume
+            const accScore = accuracy * 250; // up to 250 from accuracy
+            const uptimeScore = (uptimePct / 100) * 200; // up to 200 from uptime
+            return Math.min(Math.round(base + accScore + uptimeScore), 850);
         }
         
-        // Render network nodes
-        function renderNetwork() {
+        function getTier(score) {
+            if (score >= 750) return { name: 'Platinum', class: 'tier-platinum' };
+            if (score >= 600) return { name: 'Gold', class: 'tier-gold' };
+            if (score >= 400) return { name: 'Silver', class: 'tier-silver' };
+            return { name: 'Bronze', class: 'tier-bronze' };
+        }
+        
+        function timeAgo(ts) {
+            const diff = Date.now() - new Date(ts).getTime();
+            const mins = Math.floor(diff / 60000);
+            if (mins < 1) return 'just now';
+            if (mins < 60) return `${mins}m ago`;
+            const hours = Math.floor(mins / 60);
+            if (hours < 24) return `${hours}h ago`;
+            return `${Math.floor(hours / 24)}d ago`;
+        }
+        
+        function heartbeatAge(ts) {
+            if (!ts) return Infinity;
+            return (Date.now() - new Date(ts).getTime()) / 1000;
+        }
+        
+        async function fetchJSON(url) {
+            try {
+                const r = await fetch(url + '?t=' + Date.now());
+                if (!r.ok) return null;
+                return await r.json();
+            } catch { return null; }
+        }
+        
+        async function loadDashboard() {
+            const [state, activities] = await Promise.all([
+                fetchJSON(STATE_URL),
+                fetchJSON(ACTIVITY_URL)
+            ]);
+            
+            // Update heartbeat pulse
+            const dot = document.getElementById('pulse-dot');
+            const text = document.getElementById('pulse-text');
+            if (state && state.last_heartbeat) {
+                const age = heartbeatAge(state.last_heartbeat);
+                if (age < 120) {
+                    dot.className = 'pulse-dot';
+                    text.style.color = '#22c55e';
+                    text.textContent = 'LIVE';
+                } else if (age < 600) {
+                    dot.className = 'pulse-dot stale';
+                    text.style.color = '#f59e0b';
+                    text.textContent = 'STALE';
+                } else {
+                    dot.className = 'pulse-dot dead';
+                    text.style.color = '#ef4444';
+                    text.textContent = 'OFFLINE';
+                }
+            }
+            
+            // Agent ID
+            if (state) {
+                document.getElementById('agent-id').textContent = state.agent_id || 'gentech-001';
+            }
+            
+            // Stats
+            if (state) {
+                const hbLog = await fetchJSON(HEARTBEAT_URL);
+                let uptimePct = 100;
+                let daysRunning = 0;
+                
+                if (hbLog && hbLog.length >= 2) {
+                    const first = new Date(hbLog[0].timestamp);
+                    const last = new Date(hbLog[hbLog.length - 1].timestamp);
+                    const secs = (last - first) / 1000;
+                    const expected = secs / 60;
+                    uptimePct = Math.min((hbLog.length / Math.max(expected, 1)) * 100, 100);
+                    daysRunning = secs / 86400;
+                    
+                    // System uptime from last heartbeat
+                    const lastHb = hbLog[hbLog.length - 1];
+                    if (lastHb.system_uptime) {
+                        document.getElementById('system-uptime').textContent = lastHb.system_uptime;
+                    }
+                }
+                
+                const tasks = state.total_tasks || 0;
+                const failed = state.failed_tasks || 0;
+                const accuracy = tasks > 0 ? ((tasks / (tasks + failed)) * 100).toFixed(1) : '—';
+                const score = calculateScore(tasks, failed, uptimePct);
+                const tier = getTier(score);
+                
+                document.getElementById('uptime').textContent = uptimePct.toFixed(1) + '%';
+                document.getElementById('uptime-bar').style.width = uptimePct + '%';
+                document.getElementById('tasks').textContent = tasks;
+                document.getElementById('accuracy').textContent = accuracy === '—' ? '—' : accuracy + '%';
+                document.getElementById('score').textContent = score;
+                document.getElementById('tier-badge').innerHTML = 
+                    `<span class="tier-badge ${tier.class}">${tier.name}</span>`;
+                
+                // Earnings
+                const today = state.earnings_today || 0;
+                const total = state.earnings_total || 0;
+                const days = Math.max(daysRunning, 1);
+                const dailyAvg = total / days;
+                const projected = dailyAvg * 30;
+                
+                document.getElementById('earnings-today').textContent = '$' + today.toFixed(2);
+                document.getElementById('earnings-total').textContent = '$' + total.toFixed(2);
+                document.getElementById('earnings-projected').textContent = '$' + projected.toFixed(2);
+            }
+            
+            // Activity Feed
+            if (activities && activities.length > 0) {
+                const feed = document.getElementById('activity-feed');
+                const recent = activities.slice(-50).reverse();
+                feed.innerHTML = recent.map(a => {
+                    const icon = a.status === 'success' ? '✅' : a.status === 'failure' ? '❌' : '⏳';
+                    return `
+                        <div class="activity-card ${a.status}">
+                            <div class="activity-icon">${icon}</div>
+                            <div class="activity-content">
+                                <div class="activity-type">${a.type}</div>
+                                <div class="activity-detail">${a.target}${a.detail ? ' — ' + a.detail : ''}</div>
+                            </div>
+                            <div class="activity-time">${timeAgo(a.timestamp)}</div>
+                        </div>
+                    `;
+                }).join('');
+            }
+            
+            // Network nodes (hardcoded for now, will be dynamic later)
             const nodes = [
-                { name: 'gentech-001', status: 'active', tasks: 847 },
-                { name: 'gentech-002', status: 'active', tasks: 234 },
-                { name: 'gentech-003', status: 'idle', tasks: 0 },
+                { name: 'gentech-001', status: 'active', tasks: state ? state.total_tasks : 0 },
             ];
-            const container = document.getElementById('network-nodes');
-            container.innerHTML = nodes.map(n => `
+            document.getElementById('network-nodes').innerHTML = nodes.map(n => `
                 <div class="node-pill">
                     <div class="node-dot ${n.status}"></div>
                     <span>${n.name}</span>
                     <span style="color:#666; font-size:0.8em;">${n.tasks} tasks</span>
                 </div>
             `).join('');
+            
+            // Last updated
+            document.getElementById('last-updated').textContent = 
+                'Last updated: ' + new Date().toLocaleString();
         }
         
-        // Update stats
-        function updateStats() {
-            document.getElementById('uptime').textContent = '99.97%';
-            document.getElementById('tasks').textContent = '847';
-            document.getElementById('accuracy').textContent = '99.6%';
-            document.getElementById('score').textContent = '742';
-            document.getElementById('earnings-today').textContent = '$0.42';
-            document.getElementById('earnings-total').textContent = '$12.84';
-            document.getElementById('earnings-projected').textContent = '$12.60';
-        }
-        
-        // Initialize
-        updateStats();
-        renderActivities(MOCK_ACTIVITIES);
-        renderNetwork();
-        
-        // Auto-refresh
-        setInterval(() => {
-            updateStats();
-        }, REFRESH_MS);
+        // Initial load + auto-refresh
+        loadDashboard();
+        setInterval(loadDashboard, REFRESH_MS);
     </script>
 </body>
 </html>
