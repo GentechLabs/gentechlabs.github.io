@@ -1,49 +1,94 @@
 {
   "portfolio": {
-    "totalValue": 12847,
-    "change24h": 3.2,
-    "activePositions": 4,
-    "activeChains": 2
+    "totalValue": 46.45,
+    "change24h": 1.8,
+    "activePositions": 1,
+    "activeChains": 1
   },
-  "allocation": {
-    "eth": 71,
-    "usdc": 17,
-    "defi": 12
+  "lpPosition": {
+    "protocol": "LFJ (Trader Joe)",
+    "chain": "Avalanche",
+    "pair": "AVAX / USDC",
+    "feeTier": "5 bps",
+    "shape": "Curve",
+    "currentPrice": 6.64515,
+    "rangeMin": 6.55,
+    "rangeMax": 6.71,
+    "numBins": 149,
+    "deposit": {
+      "avax": 3.286,
+      "avaxValue": 21.183,
+      "usdc": 23.62,
+      "usdcValue": 23.61
+    },
+    "rewards": {
+      "avax": 0.07999,
+      "value": 0.00531
+    },
+    "fees24h": {
+      "total": 0.20505,
+      "avax": 0.01633,
+      "avaxValue": 0.10849,
+      "usdc": 0.09659,
+      "usdcValue": 0.09659
+    }
   },
-  "positions": [
-    { "protocol": "Aerodrome", "chain": "Base", "asset": "USDC/ETH LP", "deposited": 8500, "currentValue": 9120, "pnl": 620 },
-    { "protocol": "Beefy", "chain": "Base", "asset": "USDC Vault", "deposited": 2150, "currentValue": 2248, "pnl": 98 },
-    { "protocol": "Morpho", "chain": "Ethereum", "asset": "WETH Lending", "deposited": 2000, "currentValue": 2064, "pnl": 64 },
-    { "protocol": "Moonwell", "chain": "Base", "asset": "USDC Supply", "deposited": 1000, "currentValue": 1018, "pnl": 18 }
-  ],
-  "yieldFarms": [
-    { "protocol": "Aerodrome", "pair": "USDC/ETH", "tvl": 85000, "apy": 18.5, "earned": 127, "status": "Active" },
-    { "protocol": "Beefy", "pair": "USDC", "tvl": 15000, "apy": 8.2, "earned": 45, "status": "Active" },
-    { "protocol": "Morpho", "pair": "WETH", "tvl": 20000, "apy": 5.1, "earned": 32, "status": "Active" },
-    { "protocol": "Moonwell", "pair": "USDC", "tvl": 10000, "apy": 6.8, "earned": 18, "status": "Paused" }
-  ],
-  "yieldProgress": {
-    "aerodrome": 72,
-    "beefy": 45,
-    "morpho": 28
+  "curveData": {
+    "rangeMin": 6.55,
+    "rangeMax": 6.71,
+    "currentPrice": 6.64515,
+    "peakCenter": 6.63,
+    "peakHeight": 1.0,
+    "bins": [
+      {"price": 6.550, "depth": 0.05},
+      {"price": 6.555, "depth": 0.08},
+      {"price": 6.560, "depth": 0.12},
+      {"price": 6.565, "depth": 0.18},
+      {"price": 6.570, "depth": 0.25},
+      {"price": 6.575, "depth": 0.33},
+      {"price": 6.580, "depth": 0.42},
+      {"price": 6.585, "depth": 0.52},
+      {"price": 6.590, "depth": 0.62},
+      {"price": 6.595, "depth": 0.71},
+      {"price": 6.600, "depth": 0.80},
+      {"price": 6.605, "depth": 0.87},
+      {"price": 6.610, "depth": 0.93},
+      {"price": 6.615, "depth": 0.97},
+      {"price": 6.620, "depth": 1.00},
+      {"price": 6.625, "depth": 0.99},
+      {"price": 6.630, "depth": 0.97},
+      {"price": 6.635, "depth": 0.93},
+      {"price": 6.640, "depth": 0.88},
+      {"price": 6.645, "depth": 0.82},
+      {"price": 6.650, "depth": 0.75},
+      {"price": 6.655, "depth": 0.67},
+      {"price": 6.660, "depth": 0.58},
+      {"price": 6.665, "depth": 0.50},
+      {"price": 6.670, "depth": 0.42},
+      {"price": 6.675, "depth": 0.35},
+      {"price": 6.680, "depth": 0.28},
+      {"price": 6.685, "depth": 0.22},
+      {"price": 6.690, "depth": 0.17},
+      {"price": 6.695, "depth": 0.13},
+      {"price": 6.700, "depth": 0.10},
+      {"price": 6.705, "depth": 0.07},
+      {"price": 6.710, "depth": 0.05}
+    ]
   },
   "transactions": [
+    { "date": "2026-06-14", "type": "Agent Rebalance", "token": "AVAX/USDC", "amount": "Curve shape", "usd": 46.45, "status": "Active" },
     { "date": "2026-06-10", "type": "Agent Swap", "token": "ETH → USDC", "amount": "0.5 ETH", "usd": 1000, "status": "Executed" },
     { "date": "2026-06-09", "type": "Agent Stake", "token": "USDC", "amount": "500 USDC", "usd": 500, "status": "Executed" },
-    { "date": "2026-06-08", "type": "Agent Rebalance", "token": "USDC → AERO", "amount": "200 USDC", "usd": 200, "status": "Executed" },
-    { "date": "2026-06-07", "type": "Agent Bridge", "token": "USDC", "amount": "1000 USDC", "usd": 1000, "status": "Executed" },
-    { "date": "2026-06-05", "type": "Agent Stake", "token": "wstETH", "amount": "0.5 wstETH", "usd": 992, "status": "Executed" },
-    { "date": "2026-06-04", "type": "Agent Harvest", "token": "AERO", "amount": "12 AERO", "usd": 18, "status": "Executed" },
-    { "date": "2026-06-03", "type": "Agent Compound", "token": "USDC", "amount": "45 USDC", "usd": 45, "status": "Executed" }
+    { "date": "2026-06-08", "type": "Agent Rebalance", "token": "USDC → AERO", "amount": "200 USDC", "usd": 200, "status": "Executed" }
   ],
   "milestones": [
-    { "text": "Agent deployed to Base chain", "checked": true, "category": "Infrastructure" },
-    { "text": "First yield position opened (Aerodrome)", "checked": true, "category": "Infrastructure" },
+    { "text": "LFJ AVAX/USDC LP opened", "checked": true, "category": "DeFi" },
+    { "text": "Curve shape strategy deployed", "checked": true, "category": "Strategy" },
+    { "text": "Range set: 6.55 – 6.71", "checked": true, "category": "Strategy" },
     { "text": "Automated rebalancing enabled", "checked": true, "category": "Automation" },
-    { "text": "Cross-chain bridge capability", "checked": true, "category": "Infrastructure" },
-    { "text": "Gas optimization (batch transactions)", "checked": false, "category": "Optimization" },
+    { "text": "First fees collected ($0.20)", "checked": true, "category": "Earnings" },
+    { "text": "Rewards accumulating (0.08 AVAX)", "checked": true, "category": "Earnings" },
     { "text": "Multi-strategy yield farming", "checked": false, "category": "Strategy" },
-    { "text": "Risk management limits set", "checked": false, "category": "Risk" },
-    { "text": "Profit harvesting schedule", "checked": false, "category": "Automation" }
+    { "text": "Risk management limits set", "checked": false, "category": "Risk" }
   ]
 }

@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GenTech Dashboard — AAE DeFi Agent</title>
+    <title>GenTech Dashboard — AAE DeFi LP Curve</title>
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* AAE DeFi Agent specific overrides */
+        /* AAE DeFi LP Curve specific overrides */
 
         /* Agent status pulse */
         .agent-status {
@@ -28,6 +28,98 @@
             background: var(--gold);
             border-radius: 50%;
             animation: pulse 2s ease-in-out infinite;
+        }
+
+        /* LP Curve container */
+        .lp-curve-container {
+            background: var(--panel-bg);
+            border: 1px solid var(--panel-border);
+            border-radius: var(--radius);
+            padding: 24px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Curve canvas */
+        .lp-curve-canvas {
+            width: 100%;
+            height: 280px;
+            position: relative;
+        }
+
+        .lp-curve-canvas canvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        /* Price marker */
+        .price-marker {
+            position: absolute;
+            top: 0;
+            width: 2px;
+            height: 100%;
+            background: var(--gold);
+            box-shadow: 0 0 8px rgba(0, 255, 136, 0.5);
+            transition: left 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 10;
+        }
+        .price-marker::after {
+            content: attr(data-price);
+            position: absolute;
+            top: -24px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--gold);
+            color: #0a0e17;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.75em;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        /* Range labels */
+        .range-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 12px;
+            padding: 0 4px;
+        }
+        .range-label {
+            font-size: 0.8em;
+            color: var(--text-dim);
+        }
+        .range-label .value {
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        /* Curve info bar */
+        .curve-info {
+            display: flex;
+            gap: 20px;
+            margin-top: 16px;
+            padding: 12px 16px;
+            background: rgba(0, 255, 136, 0.05);
+            border-radius: var(--radius);
+            border: 1px solid rgba(0, 255, 136, 0.1);
+        }
+        .curve-info-item {
+            text-align: center;
+            flex: 1;
+        }
+        .curve-info-label {
+            font-size: 0.7em;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .curve-info-value {
+            font-size: 1.1em;
+            font-weight: 700;
+            color: var(--gold);
+            margin-top: 4px;
         }
 
         /* Token cards */
@@ -68,7 +160,6 @@
         .token-change { font-size: 0.85em; font-weight: 500; }
         .token-change[data-positive="true"] { color: var(--success); }
         .token-change[data-positive="false"] { color: var(--danger); }
-        .token-chain { margin-top: 8px; }
 
         /* Agent action highlight in tables */
         .dashboard-table tr:hover td {
@@ -106,6 +197,15 @@
             0%, 100% { opacity: 1; transform: scale(1); }
             50% { opacity: 0.5; transform: scale(1.3); }
         }
+
+        /* Glow animation for price line */
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 8px rgba(0, 255, 136, 0.5); }
+            50% { box-shadow: 0 0 16px rgba(0, 255, 136, 0.8); }
+        }
+        .price-marker {
+            animation: glow 2s ease-in-out infinite;
+        }
     </style>
 </head>
 <body>
@@ -113,6 +213,197 @@
 
     <script src="../assets/dashboard-engine.js?v=1.1"></script>
     <script>
+        // ══════════════════════════════════════════════
+        // LP CURVE RENDERER
+        // Draws a bell curve shape that shifts left/right with price
+        // ══════════════════════════════════════════════
+
+        class LPCurveRenderer {
+            constructor(container, data, options = {}) {
+                this.container = container;
+                this.data = data;
+                this.options = {
+                    height: 280,
+                    padding: { top: 30, right: 20, bottom: 40, left: 20 },
+                    curveColor: '#00ff88',
+                    curveGlow: 'rgba(0, 255, 136, 0.3)',
+                    priceColor: '#00ff88',
+                    gridColor: 'rgba(255,255,255,0.05)',
+                    animDuration: 800,
+                    ...options
+                };
+                this.canvas = null;
+                this.ctx = null;
+                this.priceMarker = null;
+                this.animFrame = null;
+                this.currentPrice = data.currentPrice;
+                this.targetPrice = data.currentPrice;
+                this.init();
+            }
+
+            init() {
+                // Create canvas
+                this.canvas = document.createElement('canvas');
+                this.canvas.style.width = '100%';
+                this.canvas.style.height = this.options.height + 'px';
+                this.container.appendChild(this.canvas);
+
+                // Create price marker
+                this.priceMarker = document.createElement('div');
+                this.priceMarker.className = 'price-marker';
+                this.priceMarker.setAttribute('data-price', this.currentPrice.toFixed(5));
+                this.container.appendChild(this.priceMarker);
+
+                // Setup canvas
+                this.resize();
+                window.addEventListener('resize', () => this.resize());
+
+                // Start animation loop
+                this.animate();
+            }
+
+            resize() {
+                const rect = this.container.getBoundingClientRect();
+                const dpr = window.devicePixelRatio || 1;
+                this.canvas.width = rect.width * dpr;
+                this.canvas.height = this.options.height * dpr;
+                this.ctx = this.canvas.getContext('2d');
+                this.ctx.scale(dpr, dpr);
+                this.width = rect.width;
+                this.height = this.options.height;
+                this.draw();
+            }
+
+            priceToX(price) {
+                const { rangeMin, rangeMax } = this.data;
+                const { padding } = this.options;
+                const plotWidth = this.width - padding.left - padding.right;
+                return padding.left + ((price - rangeMin) / (rangeMax - rangeMin)) * plotWidth;
+            }
+
+            depthToY(depth) {
+                const { padding } = this.options;
+                const plotHeight = this.height - padding.top - padding.bottom;
+                return padding.top + plotHeight * (1 - depth);
+            }
+
+            draw() {
+                const { ctx, width, height } = this;
+                const { padding, curveColor, curveGlow, gridColor } = this.options;
+                const { bins, rangeMin, rangeMax } = this.data;
+
+                // Clear
+                ctx.clearRect(0, 0, width, height);
+
+                // Draw grid lines
+                ctx.strokeStyle = gridColor;
+                ctx.lineWidth = 1;
+                for (let i = 0; i <= 4; i++) {
+                    const y = padding.top + (height - padding.top - padding.bottom) * (i / 4);
+                    ctx.beginPath();
+                    ctx.moveTo(padding.left, y);
+                    ctx.lineTo(width - padding.right, y);
+                    ctx.stroke();
+                }
+
+                // Draw price axis labels
+                ctx.fillStyle = '#6b7280';
+                ctx.font = '11px Inter, sans-serif';
+                ctx.textAlign = 'center';
+                const priceSteps = 5;
+                for (let i = 0; i <= priceSteps; i++) {
+                    const price = rangeMin + (rangeMax - rangeMin) * (i / priceSteps);
+                    const x = this.priceToX(price);
+                    ctx.fillText(price.toFixed(2), x, height - 10);
+                }
+
+                // Draw curve
+                if (bins.length < 2) return;
+
+                // Glow layer
+                ctx.save();
+                ctx.shadowColor = curveGlow;
+                ctx.shadowBlur = 20;
+                ctx.beginPath();
+                ctx.moveTo(this.priceToX(bins[0].price), this.depthToY(0));
+                for (let i = 0; i < bins.length; i++) {
+                    const x = this.priceToX(bins[i].price);
+                    const y = this.depthToY(bins[i].depth);
+                    if (i === 0) {
+                        ctx.lineTo(x, y);
+                    } else {
+                        // Smooth curve using quadratic bezier
+                        const prevX = this.priceToX(bins[i-1].price);
+                        const prevY = this.depthToY(bins[i-1].depth);
+                        const cpX = (prevX + x) / 2;
+                        ctx.quadraticCurveTo(prevX, prevY, cpX, (prevY + y) / 2);
+                    }
+                }
+                const lastBin = bins[bins.length - 1];
+                ctx.lineTo(this.priceToX(lastBin.price), this.depthToY(0));
+                ctx.closePath();
+
+                // Fill with gradient
+                const gradient = ctx.createLinearGradient(0, padding.top, 0, height - padding.bottom);
+                gradient.addColorStop(0, 'rgba(0, 255, 136, 0.4)');
+                gradient.addColorStop(0.5, 'rgba(0, 255, 136, 0.15)');
+                gradient.addColorStop(1, 'rgba(0, 255, 136, 0.02)');
+                ctx.fillStyle = gradient;
+                ctx.fill();
+
+                // Stroke
+                ctx.strokeStyle = curveColor;
+                ctx.lineWidth = 2.5;
+                ctx.stroke();
+                ctx.restore();
+
+                // Draw current price indicator on curve
+                const priceX = this.priceToX(this.currentPrice);
+                const closestBin = bins.reduce((prev, curr) => 
+                    Math.abs(curr.price - this.currentPrice) < Math.abs(prev.price - this.currentPrice) ? curr : prev
+                );
+                const priceY = this.depthToY(closestBin.depth);
+
+                // Price dot
+                ctx.beginPath();
+                ctx.arc(priceX, priceY, 5, 0, Math.PI * 2);
+                ctx.fillStyle = curveColor;
+                ctx.fill();
+                ctx.strokeStyle = '#0a0e17';
+                ctx.lineWidth = 2;
+                ctx.stroke();
+
+                // Update price marker position
+                if (this.priceMarker) {
+                    const markerLeft = (priceX / this.width) * 100;
+                    this.priceMarker.style.left = `calc(${markerLeft}% - 1px)`;
+                    this.priceMarker.setAttribute('data-price', this.currentPrice.toFixed(5));
+                }
+            }
+
+            animate() {
+                // Smooth price movement
+                const diff = this.targetPrice - this.currentPrice;
+                if (Math.abs(diff) > 0.0001) {
+                    this.currentPrice += diff * 0.08;
+                    this.draw();
+                }
+                this.animFrame = requestAnimationFrame(() => this.animate());
+            }
+
+            updatePrice(newPrice) {
+                this.targetPrice = newPrice;
+            }
+
+            destroy() {
+                if (this.animFrame) cancelAnimationFrame(this.animFrame);
+            }
+        }
+
+        // ══════════════════════════════════════════════
+        // DASHBOARD CUSTOMIZATIONS
+        // ══════════════════════════════════════════════
+
         // AAE DeFi-specific field rendering
         const originalFormatField = DashboardEngine.prototype.formatField;
         DashboardEngine.prototype.formatField = function(value, field = {}) {
@@ -135,6 +426,15 @@
             return originalFormatField.call(this, value, field);
         };
 
+        // Custom section renderer for LP curve
+        const originalRenderCustom = DashboardEngine.prototype.renderCustom;
+        DashboardEngine.prototype.renderCustom = function(section) {
+            if (section.customRender === 'lpCurve') {
+                return `<div class="lp-curve-container" id="lp-curve-canvas"></div>`;
+            }
+            return originalRenderCustom.call(this, section);
+        };
+
         // Inject agent status after header
         const originalRenderShell = DashboardEngine.prototype.renderShell;
         DashboardEngine.prototype.renderShell = function() {
@@ -143,12 +443,13 @@
             if (header) {
                 const status = document.createElement('div');
                 status.className = 'agent-status';
-                status.innerHTML = '<div class="pulse"></div> Agent Active — Monitoring yields, executing rebalances';
+                status.innerHTML = '<div class="pulse"></div> Agent Active — LFJ LP Curve Position';
                 header.appendChild(status);
             }
         };
 
         // Initialize
+        let lpCurve = null;
         (async () => {
             const templateRes = await fetch('defi-template.json?' + Date.now());
             const template = await templateRes.json();
@@ -158,8 +459,15 @@
             const dash = new DashboardEngine({ template, data });
             await dash.init('#app');
 
+            // Initialize LP curve renderer
+            const curveContainer = document.getElementById('lp-curve-canvas');
+            if (curveContainer && data.curveData) {
+                lpCurve = new LPCurveRenderer(curveContainer, data.curveData);
+            }
+
             // Expose for debugging
             window.defiDash = dash;
+            window.lpCurve = lpCurve;
         })();
     </script>
 </body>
