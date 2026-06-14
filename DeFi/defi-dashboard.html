@@ -772,6 +772,9 @@
             if (section.customRender === 'trajectory') {
                 return this.renderTrajectory(section);
             }
+            if (section.customRender === 'rebalanceSuggestions') {
+                return this.renderRebalanceSuggestions(section);
+            }
             return originalRenderCustom.call(this, section);
         };
 
@@ -1286,64 +1289,42 @@
                         rangeMin: rangeMin,
                         rangeMax: rangeMax,
                         volatility: 'medium',
-                        trend: change24h > 2 ? 'uptrend' : change24h < -2 ? 'downtrend' : 'sideways',
+                        trend: change24h > 2 ? 'uptrend' : change24h < -2 ? 'downtrend' : 'consolidation',
                         suggestions: [
                             ...(efficiency < 50 ? [{
                                 icon: '🔴',
-                                title: 'Rebalance Now',
-                                description: `Efficiency at ${efficiency.toFixed(1)}% — you're earning less than half of potential fees. Price is near range boundary.`,
+                                title: 'Rebalance Now — Efficiency Critical',
+                                description: `Your efficiency is at ${efficiency.toFixed(1)}%. Price is near the edge of your range. Moving to a tighter range around $${price.toFixed(2)} could increase daily fees by ${Math.round((70 - efficiency) / 10)}%.`,
                                 priority: 'high',
-                                impact: 'Restore 50-100% fee efficiency',
+                                impact: `+${Math.round((70 - efficiency) / 10)}% daily fees`,
                                 action: 'Rebalance on Trader Joe'
                             }] : []),
                             ...(efficiency >= 50 && efficiency < 70 ? [{
                                 icon: '🟡',
-                                title: 'Monitor Closely',
-                                description: `Efficiency at ${efficiency.toFixed(1)}% — price is drifting from center. Consider widening range if volatility increases.`,
+                                title: 'Monitor — Approaching Threshold',
+                                description: `Efficiency at ${efficiency.toFixed(1)}%. Consider rebalancing if it drops below 50%. Current range ($${rangeMin.toFixed(2)}-$${rangeMax.toFixed(2)}) is still capturing decent fees.`,
                                 priority: 'medium',
-                                impact: 'Maintain current fee rate',
+                                impact: 'Maintain current fees',
                                 action: null
                             }] : []),
                             ...(efficiency >= 70 ? [{
                                 icon: '🟢',
-                                title: 'Position Healthy',
-                                description: `Efficiency at ${efficiency.toFixed(1)}% — price is well-centered in range. Earning optimal fees.`,
+                                title: 'Hold Position — Earning Well',
+                                description: `Efficiency at ${efficiency.toFixed(1)}%. Price is centered in your range. No action needed — you're capturing maximum fees.`,
                                 priority: 'low',
-                                impact: 'No action needed',
+                                impact: 'Max fees earned',
                                 action: null
-                            }] : []),
-                            ...(price < rangeMin * 1.02 || price > rangeMax * 0.98 ? [{
-                                icon: '⚠️',
-                                title: 'Price Near Boundary',
-                                description: `AVAX at $${price.toFixed(2)} is within 2% of range ${price < rangeMin ? 'minimum' : 'maximum'}. Breakout risk increasing.`,
-                                priority: 'high',
-                                impact: 'Prevent out-of-range position',
-                                action: 'Adjust Range'
                             }] : []),
                             {
                                 icon: '💡',
-                                title: 'Curve Strategy Available',
-                                description: 'Switch from stable to curve-shaped liquidity to concentrate fees around current price and boost efficiency.',
-                                priority: 'medium',
-                                impact: 'Increase fee capture by 20-40%',
-                                action: 'Learn More'
-                            },
-                            ...(change24h < -3 ? [{
-                                icon: '📉',
-                                title: 'Volatility Alert',
-                                description: `AVAX down ${change24h.toFixed(1)}% in 24h. Consider widening range to stay in-traffic during volatile periods.`,
-                                priority: 'medium',
-                                impact: 'Reduce out-of-range risk',
-                                action: 'Widen Range'
-                            }] : []),
-                            ...(change24h > 5 ? [{
-                                icon: '📈',
-                                title: 'Bullish Momentum',
-                                description: `AVAX up ${change24h.toFixed(1)}% in 24h. Consider narrowing range upward to capture higher fees on momentum.`,
-                                priority: 'medium',
-                                impact: 'Capitalize on trend',
-                                action: 'Shift Range Up'
-                            }] : [])
+                                title: efficiency < 60 ? 'Consider Wider Range' : 'Consider Tighter Range',
+                                description: efficiency < 60
+                                    ? `Current range is $${rangeMin.toFixed(2)}-$${rangeMax.toFixed(2)}. A wider range ($${(price * 0.95).toFixed(2)}-$${(price * 1.05).toFixed(2)}) would keep you in range longer during volatility.`
+                                    : `Current range is $${rangeMin.toFixed(2)}-$${rangeMax.toFixed(2)}. A tighter range ($${(price * 0.98).toFixed(2)}-$${(price * 1.02).toFixed(2)}) would earn more fees if price stays stable.`,
+                                priority: 'low',
+                                impact: efficiency < 60 ? 'More uptime' : 'Higher fees',
+                                action: null
+                            }
                         ]
                     },
                     timestamp: new Date().toISOString()
@@ -1352,6 +1333,7 @@
                 console.warn('[DeFi] DexScreener fetch failed, using cached data:', e.message);
                 return null;
             }
+        }
         }
 
         (async () => {
