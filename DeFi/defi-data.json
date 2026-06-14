@@ -1,103 +1,195 @@
 {
   "hero": {
     "positionUsd": 44.74,
-    "dailyFees": 0.205,
-    "efficiency": 81.1,
-    "efficiencyZone": "Center",
+    "dailyFees": 0.325,
+    "efficiency": 72.0,
+    "efficiencyZone": "Edge Zone",
+    "shape": "Bid-Ask",
     "rangeStatus": "In Range",
-    "currentPrice": 6.52,
-    "rangeMin": 6.43,
-    "rangeMax": 6.59,
+    "currentPrice": 6.45,
+    "rangeMin": 6.30,
+    "rangeMax": 6.55,
     "milestoneCurrent": "Unranked",
     "milestoneNext": "Scout",
     "milestoneTarget": 5,
-    "milestoneProgress": 4.1
+    "milestoneProgress": 6.5
   },
   "marketIntel": {
-    "avaxPrice": 6.52,
-    "change24h": -0.3,
+    "avaxPrice": 6.45,
+    "change24h": -3.82,
     "volume24h": 435300,
     "tvl": 366900,
     "trend": "consolidation",
     "news": [
-      { "headline": "AVAX used for Denali share settlements", "impact": "bullish", "relevance": "high" },
-      { "headline": "Avalanche subnet activity increasing", "impact": "bullish", "relevance": "medium" },
-      { "headline": "DeFi TVL on Avalanche steady at $1.2B", "impact": "neutral", "relevance": "medium" }
+      {
+        "headline": "AVAX used for Denali share settlements",
+        "impact": "bullish",
+        "relevance": "high"
+      },
+      {
+        "headline": "Avalanche subnet activity increasing",
+        "impact": "bullish",
+        "relevance": "medium"
+      },
+      {
+        "headline": "DeFi TVL on Avalanche steady at $1.2B",
+        "impact": "neutral",
+        "relevance": "medium"
+      }
     ]
   },
   "strategyAdvisor": {
-    "efficiencyZone": "Center",
-    "efficiency": 81.1,
-    "recommendedAction": "Hold & Earn",
-    "dcaType": "Standard $50 Weekly",
-    "dcaDetails": "Center zone — full DCA deploy on Monday. Position is healthy, no rebalance needed.",
-    "rebalanceTrigger": "Below 50% efficiency",
+    "efficiencyZone": "Edge Zone",
+    "efficiency": 72.0,
+    "shape": "Bid-Ask",
+    "recommendedAction": "HOLD & EARN",
+    "dcaType": "Edge-Weighted DCA",
+    "dcaDetails": "Price near center of bid-ask range. Liquidity concentrated at edges — fees increase as price moves toward $6.30 or $6.55.",
+    "rebalanceTrigger": "Price exits 6.30-6.55 range",
     "compoundThreshold": 50,
-    "cumulativeFees": 0.205,
-    "nextCompound": "$49.80 away",
+    "cumulativeFees": 0.325,
+    "nextCompound": "$49.68 away",
     "riskLevel": "Low",
-    "riskNote": "Tight range in center zone. Monitor for volatility spikes."
+    "riskNote": "In range, earning fees. Bid-ask shape benefits from volatility — price swings toward edges generate higher fee income."
   },
   "lpPosition": {
     "protocol": "LFJ (Trader Joe)",
     "chain": "Avalanche",
     "pair": "AVAX / USDC",
     "feeTier": "5 bps",
-    "shape": "Curve",
-    "currentPrice": 6.52,
-    "rangeMin": 6.43,
-    "rangeMax": 6.59,
-    "numBins": 149,
+    "shape": "Bid-Ask",
+    "currentPrice": 6.45,
+    "rangeMin": 6.30,
+    "rangeMax": 6.55,
+    "numBins": 250,
     "deposit": {
       "avax": 2.937,
       "avaxValue": 19.15,
       "usdc": 25.6,
       "usdcValue": 25.59
     },
-    "rewards": { "avax": 0, "value": 0 },
-    "fees24h": { "total": 0, "avax": 0, "avaxValue": 0, "usdc": 0, "usdcValue": 0 }
+    "rewards": {
+      "avax": 0,
+      "value": 0
+    },
+    "fees24h": {
+      "total": 0.325,
+      "avax": 0.0276,
+      "avaxValue": 0.1774,
+      "usdc": 0.14747,
+      "usdcValue": 0.14743
+    }
   },
   "curveData": {
-    "rangeMin": 6.43,
-    "rangeMax": 6.59,
-    "currentPrice": 6.52,
-    "peakCenter": 6.51,
-    "peakHeight": 1.0,
+    "rangeMin": 6.30,
+    "rangeMax": 6.55,
+    "currentPrice": 6.45,
+    "shape": "bidirectional",
     "bins": [
-      {"price": 6.430, "depth": 0.05}, {"price": 6.435, "depth": 0.08},
-      {"price": 6.440, "depth": 0.12}, {"price": 6.445, "depth": 0.18},
-      {"price": 6.450, "depth": 0.25}, {"price": 6.455, "depth": 0.33},
-      {"price": 6.460, "depth": 0.42}, {"price": 6.465, "depth": 0.52},
-      {"price": 6.470, "depth": 0.62}, {"price": 6.475, "depth": 0.71},
-      {"price": 6.480, "depth": 0.80}, {"price": 6.485, "depth": 0.87},
-      {"price": 6.490, "depth": 0.93}, {"price": 6.495, "depth": 0.97},
-      {"price": 6.500, "depth": 1.00}, {"price": 6.505, "depth": 0.99},
-      {"price": 6.510, "depth": 0.97}, {"price": 6.515, "depth": 0.93},
-      {"price": 6.520, "depth": 0.88}, {"price": 6.525, "depth": 0.82},
-      {"price": 6.530, "depth": 0.75}, {"price": 6.535, "depth": 0.67},
-      {"price": 6.540, "depth": 0.58}, {"price": 6.545, "depth": 0.50},
-      {"price": 6.550, "depth": 0.42}, {"price": 6.555, "depth": 0.35},
-      {"price": 6.560, "depth": 0.28}, {"price": 6.565, "depth": 0.22},
-      {"price": 6.570, "depth": 0.17}, {"price": 6.575, "depth": 0.13},
-      {"price": 6.580, "depth": 0.10}, {"price": 6.585, "depth": 0.07},
-      {"price": 6.590, "depth": 0.05}
+      {"price": 6.300, "depth": 0.95},
+      {"price": 6.305, "depth": 0.90},
+      {"price": 6.310, "depth": 0.85},
+      {"price": 6.315, "depth": 0.80},
+      {"price": 6.320, "depth": 0.74},
+      {"price": 6.325, "depth": 0.68},
+      {"price": 6.330, "depth": 0.62},
+      {"price": 6.335, "depth": 0.56},
+      {"price": 6.340, "depth": 0.50},
+      {"price": 6.345, "depth": 0.44},
+      {"price": 6.350, "depth": 0.39},
+      {"price": 6.355, "depth": 0.34},
+      {"price": 6.360, "depth": 0.30},
+      {"price": 6.365, "depth": 0.26},
+      {"price": 6.370, "depth": 0.22},
+      {"price": 6.375, "depth": 0.19},
+      {"price": 6.380, "depth": 0.16},
+      {"price": 6.385, "depth": 0.14},
+      {"price": 6.390, "depth": 0.12},
+      {"price": 6.395, "depth": 0.10},
+      {"price": 6.400, "depth": 0.09},
+      {"price": 6.405, "depth": 0.08},
+      {"price": 6.410, "depth": 0.07},
+      {"price": 6.415, "depth": 0.06},
+      {"price": 6.420, "depth": 0.06},
+      {"price": 6.425, "depth": 0.05},
+      {"price": 6.430, "depth": 0.05},
+      {"price": 6.435, "depth": 0.05},
+      {"price": 6.440, "depth": 0.05},
+      {"price": 6.445, "depth": 0.05},
+      {"price": 6.450, "depth": 0.05},
+      {"price": 6.455, "depth": 0.05},
+      {"price": 6.460, "depth": 0.05},
+      {"price": 6.465, "depth": 0.06},
+      {"price": 6.470, "depth": 0.06},
+      {"price": 6.475, "depth": 0.07},
+      {"price": 6.480, "depth": 0.08},
+      {"price": 6.485, "depth": 0.09},
+      {"price": 6.490, "depth": 0.10},
+      {"price": 6.495, "depth": 0.12},
+      {"price": 6.500, "depth": 0.14},
+      {"price": 6.505, "depth": 0.16},
+      {"price": 6.510, "depth": 0.19},
+      {"price": 6.515, "depth": 0.22},
+      {"price": 6.520, "depth": 0.26},
+      {"price": 6.525, "depth": 0.30},
+      {"price": 6.530, "depth": 0.34},
+      {"price": 6.535, "depth": 0.39},
+      {"price": 6.540, "depth": 0.44},
+      {"price": 6.545, "depth": 0.50},
+      {"price": 6.550, "depth": 0.55}
     ]
   },
   "feeMilestones": {
-    "currentDailyFees": 0.205,
+    "currentDailyFees": 0.325,
     "positionUsd": 44.74,
-    "cumulativeFees": 0.205,
+    "cumulativeFees": 0.325,
     "daysActive": 1,
     "tiers": [
-      { "tier": 1, "label": "Scout", "target": 5, "icon": "🎖️", "unlocks": "Entry strategies (CURVE)" },
-      { "tier": 2, "label": "Raider", "target": 20, "icon": "⚔️", "unlocks": "SPOT + BIDIRECTIONAL shapes" },
-      { "tier": 3, "label": "Warlord", "target": 55, "icon": "🛡️", "unlocks": "Multi-pool positions" },
-      { "tier": 4, "label": "Fisher", "target": 100, "icon": "🎣", "unlocks": "Multi-asset farming (LINK, TAO, SOL)" },
-      { "tier": 5, "label": "Sovereign", "target": 200, "icon": "👑", "unlocks": "Custom strategy creation" }
+      {
+        "tier": 1,
+        "label": "Scout",
+        "target": 5,
+        "icon": "🏴",
+        "unlocks": "Entry strategies (CURVE)"
+      },
+      {
+        "tier": 2,
+        "label": "Raider",
+        "target": 20,
+        "icon": "⚔️",
+        "unlocks": "SPOT + BIDIRECTIONAL shapes"
+      },
+      {
+        "tier": 3,
+        "label": "Warlord",
+        "target": 55,
+        "icon": "🛡️",
+        "unlocks": "Multi-pool positions"
+      },
+      {
+        "tier": 4,
+        "label": "Fisher",
+        "target": 100,
+        "icon": "🎣",
+        "unlocks": "Multi-asset farming (LINK, TAO, SOL)"
+      },
+      {
+        "tier": 5,
+        "label": "Sovereign",
+        "target": 200,
+        "icon": "👑",
+        "unlocks": "Custom strategy creation"
+      }
     ]
   },
   "transactions": [
-    { "date": "2026-06-14", "type": "Agent Rebalance", "token": "AVAX/USDC", "amount": "Range 6.43-6.59", "usd": 44.74, "status": "Active" },
-    { "date": "2026-06-14", "type": "Agent Rebalance", "token": "AVAX/USDC", "amount": "Range 6.55-6.71", "usd": 46.45, "status": "Completed" }
+    {
+      "date": "2026-06-14",
+      "type": "LP Deposit",
+      "token": "AVAX/USDC",
+      "amount": "Range 6.30-6.55 (Bid-Ask)",
+      "usd": 44.74,
+      "status": "Active"
+    }
   ]
 }

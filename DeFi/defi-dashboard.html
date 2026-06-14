@@ -775,15 +775,32 @@
             return originalRenderCustom.call(this, section);
         };
 
-        // Hero Efficiency Renderer — the main visual
+        // Hero Efficiency Renderer — the main visual (shape-aware)
         DashboardEngine.prototype.renderHeroEfficiency = function(section) {
             const data = this.resolveDataSource(section.dataSource);
             if (!data) return '<p class="empty-state">No data</p>';
 
-            const { positionUsd, dailyFees, efficiency, efficiencyZone, rangeStatus, currentPrice, rangeMin, rangeMax, milestoneNext, milestoneTarget, milestoneProgress } = data;
-            const effColor = efficiency >= 70 ? '#e84142' : efficiency >= 50 ? '#00ccff' : efficiency >= 30 ? '#fbbf24' : '#ff3366';
-            const effLabel = efficiency >= 70 ? 'Center Zone' : efficiency >= 50 ? 'Mid Zone' : efficiency >= 30 ? 'Low Zone' : 'Edge Zone';
+            const { positionUsd, dailyFees, efficiency, efficiencyZone, shape, rangeStatus, currentPrice, rangeMin, rangeMax, milestoneNext, milestoneTarget, milestoneProgress } = data;
+
+            // Shape-aware efficiency calculation
             const rangePct = Math.max(0, Math.min(100, ((currentPrice - rangeMin) / (rangeMax - rangeMin)) * 100));
+            let effColor, effLabel, shapeNote, edgeEfficiency;
+
+            if (shape === 'Bid-Ask' || shape === 'Bidirectional') {
+                // Bid-Ask: edges = high efficiency (liquidity concentrated there)
+                // Center = low efficiency (thin liquidity)
+                const distFromEdge = Math.min(rangePct, 100 - rangePct); // 0 at edges, 50 at center
+                edgeEfficiency = Math.max(0, 100 - (distFromEdge * 2)); // 100 at edges, 0 at center
+                effColor = edgeEfficiency >= 70 ? '#e84142' : edgeEfficiency >= 50 ? '#00ccff' : edgeEfficiency >= 30 ? '#fbbf24' : '#ff3366';
+                effLabel = edgeEfficiency >= 70 ? 'Edge Zone (High Fees)' : edgeEfficiency >= 50 ? 'Mid Zone' : edgeEfficiency >= 30 ? 'Approaching Center' : 'Center Zone (Low Fees)';
+                shapeNote = 'Bid-Ask: Liquidity at edges, fees spike on price swings';
+            } else {
+                // Convergent/Bell: center = high efficiency
+                edgeEfficiency = efficiency;
+                effColor = efficiency >= 70 ? '#e84142' : efficiency >= 50 ? '#00ccff' : efficiency >= 30 ? '#fbbf24' : '#ff3366';
+                effLabel = efficiency >= 70 ? 'Center Zone' : efficiency >= 50 ? 'Mid Zone' : efficiency >= 30 ? 'Low Zone' : 'Edge Zone';
+                shapeNote = 'Convergent: Liquidity at center, steady fee accrual';
+            }
 
             return `
                 <div style="background:var(--panel-bg); border:1px solid var(--panel-border); border-radius:var(--radius); padding:28px; margin-bottom:16px;">
@@ -794,17 +811,18 @@
                                 <svg viewBox="0 0 160 160" style="transform:rotate(-90deg);">
                                     <circle cx="80" cy="80" r="70" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="12"/>
                                     <circle cx="80" cy="80" r="70" fill="none" stroke="${effColor}" stroke-width="12"
-                                        stroke-dasharray="${(efficiency / 100) * 440} 440"
+                                        stroke-dasharray="${(edgeEfficiency / 100) * 440} 440"
                                         stroke-linecap="round" style="filter:drop-shadow(0 0 8px ${effColor}40); transition: stroke-dasharray 1s ease;"/>
                                 </svg>
                                 <div style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); text-align:center;">
-                                    <div style="font-size:2.2em; font-weight:700; color:${effColor};">${efficiency.toFixed(1)}%</div>
+                                    <div style="font-size:2.2em; font-weight:700; color:${effColor};">${edgeEfficiency.toFixed(1)}%</div>
                                     <div style="font-size:0.75em; color:var(--text-dim); text-transform:uppercase; letter-spacing:1px;">Efficiency</div>
                                 </div>
                             </div>
                             <div style="margin-top:8px; padding:4px 12px; background:${effColor}15; border:1px solid ${effColor}40; border-radius:20px; display:inline-block;">
                                 <span style="font-size:0.8em; font-weight:600; color:${effColor};">${effLabel}</span>
                             </div>
+                            <div style="margin-top:6px; font-size:0.7em; color:var(--text-dim); font-style:italic;">${shapeNote}</div>
                         </div>
 
                         <!-- Center: Key Stats -->
