@@ -1119,6 +1119,70 @@
             `;
         };
 
+        // Rebalance Suggestions Renderer
+        DashboardEngine.prototype.renderRebalanceSuggestions = function(section) {
+            const data = this.resolveDataSource(section.dataSource);
+            if (!data) return '<p class="empty-state">No rebalance data</p>';
+
+            const { efficiency, price, rangeMin, rangeMax, volatility, trend, suggestions } = data;
+
+            return `
+                <div style="padding: 16px;">
+                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 16px;">
+                        <span style="font-size: 1.5em;">🔄</span>
+                        <div>
+                            <div style="font-size: 1.1em; font-weight: 600; color: var(--gold);">Rebalance Intelligence</div>
+                            <div style="font-size: 0.8em; color: var(--text-dim);">Smart suggestions based on current market conditions</div>
+                        </div>
+                    </div>
+
+                    <!-- Current Status -->
+                    <div style="background: var(--bg-alt); border: 1px solid var(--panel-border); border-radius: 8px; padding: 12px; margin-bottom: 16px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <div style="font-size: 0.75em; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px;">Current Efficiency</div>
+                                <div style="font-size: 1.8em; font-weight: 700; color: ${efficiency > 70 ? '#22c55e' : efficiency > 50 ? '#f59e0b' : '#ef4444'};">${efficiency}%</div>
+                            </div>
+                            <div style="text-align: right;">
+                                <div style="font-size: 0.75em; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px;">Range</div>
+                                <div style="font-size: 1em; color: var(--text);">$${rangeMin.toFixed(2)} — $${rangeMax.toFixed(2)}</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Suggestions -->
+                    <div style="display: flex; flex-direction: column; gap: 12px;">
+                        ${suggestions.map(s => `
+                            <div style="background: var(--bg-alt); border: 1px solid ${s.priority === 'high' ? '#ef4444' : s.priority === 'medium' ? '#f59e0b' : '#22c55e'}; border-radius: 8px; padding: 12px;">
+                                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                                    <span style="font-size: 1.2em;">${s.icon}</span>
+                                    <div style="font-weight: 600; color: var(--text);">${s.title}</div>
+                                    <div style="margin-left: auto; font-size: 0.7em; padding: 2px 8px; border-radius: 4px; background: ${s.priority === 'high' ? 'rgba(239,68,68,0.2)' : s.priority === 'medium' ? 'rgba(245,158,11,0.2)' : 'rgba(34,197,94,0.2)'}; color: ${s.priority === 'high' ? '#ef4444' : s.priority === 'medium' ? '#f59e0b' : '#22c55e'};">
+                                        ${s.priority.toUpperCase()}
+                                    </div>
+                                </div>
+                                <div style="font-size: 0.85em; color: var(--text-dim); margin-bottom: 8px;">${s.description}</div>
+                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                    <div style="font-size: 0.75em; color: var(--text-dim);">Impact: <span style="color: var(--gold);">${s.impact}</span></div>
+                                    ${s.action ? `<div style="font-size: 0.75em; color: var(--blue); cursor: pointer;">${s.action} →</div>` : ''}
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+
+                    <!-- Quick Actions -->
+                    <div style="margin-top: 16px; display: flex; gap: 8px; flex-wrap: wrap;">
+                        <a href="https://traderjoexyz.com/avalanche/pool?tokenA=0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7&tokenB=0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E" target="_blank" style="flex: 1; min-width: 120px; padding: 10px; background: var(--bg-alt); border: 1px solid var(--panel-border); border-radius: 6px; text-align: center; text-decoration: none; color: var(--gold); font-size: 0.85em;">
+                            🔄 Rebalance on Trader Joe
+                        </a>
+                        <div style="flex: 1; min-width: 120px; padding: 10px; background: var(--bg-alt); border: 1px solid var(--panel-border); border-radius: 6px; text-align: center; color: var(--text-dim); font-size: 0.85em;">
+                            📊 View Full Analysis
+                        </div>
+                    </div>
+                </div>
+            `;
+        };
+
         // Inject agent status after header
         const originalRenderShell = DashboardEngine.prototype.renderShell;
         DashboardEngine.prototype.renderShell = function() {
@@ -1197,6 +1261,72 @@
                         rangeMax: rangeMax,
                         currentPrice: price,
                         efficiency: efficiency
+                    },
+                    rebalanceSuggestions: {
+                        efficiency: efficiency.toFixed(1),
+                        price: price,
+                        rangeMin: rangeMin,
+                        rangeMax: rangeMax,
+                        volatility: 'medium',
+                        trend: change24h > 2 ? 'uptrend' : change24h < -2 ? 'downtrend' : 'sideways',
+                        suggestions: [
+                            ...(efficiency < 50 ? [{
+                                icon: '🔴',
+                                title: 'Rebalance Now',
+                                description: `Efficiency at ${efficiency.toFixed(1)}% — you're earning less than half of potential fees. Price is near range boundary.`,
+                                priority: 'high',
+                                impact: 'Restore 50-100% fee efficiency',
+                                action: 'Rebalance on Trader Joe'
+                            }] : []),
+                            ...(efficiency >= 50 && efficiency < 70 ? [{
+                                icon: '🟡',
+                                title: 'Monitor Closely',
+                                description: `Efficiency at ${efficiency.toFixed(1)}% — price is drifting from center. Consider widening range if volatility increases.`,
+                                priority: 'medium',
+                                impact: 'Maintain current fee rate',
+                                action: null
+                            }] : []),
+                            ...(efficiency >= 70 ? [{
+                                icon: '🟢',
+                                title: 'Position Healthy',
+                                description: `Efficiency at ${efficiency.toFixed(1)}% — price is well-centered in range. Earning optimal fees.`,
+                                priority: 'low',
+                                impact: 'No action needed',
+                                action: null
+                            }] : []),
+                            ...(price < rangeMin * 1.02 || price > rangeMax * 0.98 ? [{
+                                icon: '⚠️',
+                                title: 'Price Near Boundary',
+                                description: `AVAX at $${price.toFixed(2)} is within 2% of range ${price < rangeMin ? 'minimum' : 'maximum'}. Breakout risk increasing.`,
+                                priority: 'high',
+                                impact: 'Prevent out-of-range position',
+                                action: 'Adjust Range'
+                            }] : []),
+                            {
+                                icon: '💡',
+                                title: 'Curve Strategy Available',
+                                description: 'Switch from stable to curve-shaped liquidity to concentrate fees around current price and boost efficiency.',
+                                priority: 'medium',
+                                impact: 'Increase fee capture by 20-40%',
+                                action: 'Learn More'
+                            },
+                            ...(change24h < -3 ? [{
+                                icon: '📉',
+                                title: 'Volatility Alert',
+                                description: `AVAX down ${change24h.toFixed(1)}% in 24h. Consider widening range to stay in-traffic during volatile periods.`,
+                                priority: 'medium',
+                                impact: 'Reduce out-of-range risk',
+                                action: 'Widen Range'
+                            }] : []),
+                            ...(change24h > 5 ? [{
+                                icon: '📈',
+                                title: 'Bullish Momentum',
+                                description: `AVAX up ${change24h.toFixed(1)}% in 24h. Consider narrowing range upward to capture higher fees on momentum.`,
+                                priority: 'medium',
+                                impact: 'Capitalize on trend',
+                                action: 'Shift Range Up'
+                            }] : [])
+                        ]
                     },
                     timestamp: new Date().toISOString()
                 };
