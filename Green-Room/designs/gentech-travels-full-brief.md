@@ -402,6 +402,124 @@ Agent monitors user behavior:
 
 ---
 
+## 🌍 Decentralized Travel Intelligence Layer
+
+> **Inspired by:** PassportBros / Jeffrey AI (30K+ travelers, community-sourced intel)
+> **Added:** 2026-06-14
+> **Status:** New layer — integrates with existing GenTech Travels architecture
+
+### The Problem with PassportBros
+PassportBros has 30K+ travelers providing real intel — but it's centralized. Your data, their rules, their monetization. No ownership, no portability, no crypto rails. Jeffrey AI is cool, but it's a walled garden.
+
+### Our Play: Decentralized Intel Marketplace
+We add a **travel intelligence layer** to GenTech Travels where:
+- Travelers own their reputation (ERC-8004 wallet binding)
+- Intel is rewarded via micropayments (x402)
+- Agents provide real-time local insights
+- Community curation via on-chain reputation
+- No single point of failure or censorship
+
+### How It Works
+
+```
+Traveler shares intel (restaurant, safety tip, price check)
+        ↓
+Agent verifies (checks photos, cross-references data)
+        ↓
+Intel goes to feed (community-verified)
+        ↓
+Next traveler queries (pay $0.01–$0.10 per tip via x402)
+        ↓
+Original traveler gets micropayment reward
+        ↓
+Community upvotes/downvotes → builds reputation
+```
+
+### Intel Types
+
+| Category | Example | Price |
+|----------|---------|-------|
+| **Safety** | "Avoid area X after dark" | Free (public good) |
+| **Restaurant** | "Best pad thai in Bangkok — $3" | $0.01 |
+| **Nightlife** | "Club Y has $5 cover, good vibes" | $0.02 |
+| **Logistics** | "Grab cheaper than taxi from airport" | $0.01 |
+| **Scam Alert** | "Tuk-tuk driver tried to overcharge" | Free (public good) |
+| **Hidden Gem** | "Local market behind temple, amazing food" | $0.05 |
+| **Price Check** | "Hotel Z currently $45/night (usually $60)" | $0.03 |
+
+### Smart Contracts
+
+```solidity
+// IntelMarketplace.sol
+contract IntelMarketplace {
+    struct Intel {
+        address author;
+        string category;
+        string content;
+        uint256 price; // in USDC wei
+        uint256 upvotes;
+        uint256 downvotes;
+        bool verified;
+    }
+    
+    mapping(uint256 => Intel) public intel;
+    uint256 public intelCount;
+    
+    function submitIntel(
+        string memory category,
+        string memory content,
+        uint256 price
+    ) external returns (uint256);
+    
+    function purchaseIntel(uint256 intelId) external payable;
+    function upvoteIntel(uint256 intelId) external;
+    function downvoteIntel(uint256 intelId) external;
+    function verifyIntel(uint256 intelId) external; // agent-only
+}
+```
+
+### Agent Intelligence Layer
+
+| Agent | Role | Data Source |
+|-------|------|-------------|
+| **Safety Agent** | Monitor protests, weather, scams | News APIs, social media |
+| **Price Agent** | Track hotel/food/transport prices | DexScreener-style oracles |
+| **Verification Agent** | Verify intel quality | Photo analysis, cross-reference |
+| **Curation Agent** | Rank intel by quality | Community votes + agent scores |
+
+### Revenue Model
+
+| Tier | Price | Includes |
+|------|-------|----------|
+| **Free** | $0 | 5 queries/day, public safety intel |
+| **Agent Pass** | $15/mo | Unlimited queries, priority intel, agent monitoring |
+| **Pro** | $49/mo | White-label, API access, custom agents |
+
+### Integration with Existing GenTech Travels
+
+| Component | Existing | New Layer |
+|-----------|----------|-----------|
+| **Identity** | ERC-8004 verification | ✅ Same — wallet-bound |
+| **Reputation** | Trust points, tiers | ✅ Extended — on-chain scores |
+| **Payments** | Tips, creator economy | ✅ Extended — x402 micropayments |
+| **Moderation** | Agent moderation | ✅ Extended — intel verification |
+| **Dashboard** | Travel dashboard | ✅ Extended — intel feed |
+
+### Hackathon Fit
+
+**Lepton Agents (Jun 29)** — Circle + Arc = x402 micropayments. Perfect fit.
+- Deploy IntelMarketplace on Base Sepolia
+- Use Circle for USDC settlements
+- Submit as "Decentralized Travel Intelligence"
+
+### Next Steps
+1. [ ] Add IntelMarketplace.sol to gentech-travels repo
+2. [ ] Extend travel dashboard with intel feed
+3. [ ] Deploy to Base Sepolia for Lepton submission
+4. [ ] Get 10 beta travelers to provide intel
+
+---
+
 ## 🚀 Build Plan
 
 ### Phase 1: Core (2-3 days)

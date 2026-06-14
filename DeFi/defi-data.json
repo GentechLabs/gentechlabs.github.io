@@ -2,12 +2,12 @@
   "hero": {
     "positionUsd": 44.74,
     "dailyFees": 0.325,
-    "efficiency": 72.0,
-    "efficiencyZone": "Edge Zone",
+    "efficiency": 0.0,
+    "efficiencyZone": "Out of Range",
     "shape": "Bid-Ask",
-    "rangeStatus": "In Range",
-    "currentPrice": 6.45,
-    "rangeMin": 6.30,
+    "rangeStatus": "Above Range",
+    "currentPrice": 6.71,
+    "rangeMin": 6.3,
     "rangeMax": 6.55,
     "milestoneCurrent": "Unranked",
     "milestoneNext": "Scout",
@@ -15,8 +15,8 @@
     "milestoneProgress": 6.5
   },
   "marketIntel": {
-    "avaxPrice": 6.45,
-    "change24h": -3.82,
+    "avaxPrice": 6.71,
+    "change24h": -0.3,
     "volume24h": 435300,
     "tvl": 366900,
     "trend": "consolidation",
@@ -39,18 +39,18 @@
     ]
   },
   "strategyAdvisor": {
-    "efficiencyZone": "Edge Zone",
-    "efficiency": 72.0,
+    "efficiencyZone": "Out of Range",
+    "efficiency": 0.0,
     "shape": "Bid-Ask",
-    "recommendedAction": "HOLD & EARN",
+    "recommendedAction": "REBALANCE NOW",
     "dcaType": "Edge-Weighted DCA",
-    "dcaDetails": "Price near center of bid-ask range. Liquidity concentrated at edges — fees increase as price moves toward $6.30 or $6.55.",
+    "dcaDetails": "Price near center of bid-ask range. Liquidity concentrated at edges \u2014 fees increase as price moves toward $6.30 or $6.55.",
     "rebalanceTrigger": "Price exits 6.30-6.55 range",
     "compoundThreshold": 50,
     "cumulativeFees": 0.325,
     "nextCompound": "$49.68 away",
-    "riskLevel": "Low",
-    "riskNote": "In range, earning fees. Bid-ask shape benefits from volatility — price swings toward edges generate higher fee income."
+    "riskLevel": "High",
+    "riskNote": "Price broke above range at ~22:41 UTC. Position is 100% USDC, earning zero fees. Rebalance urgently."
   },
   "lpPosition": {
     "protocol": "LFJ (Trader Joe)",
@@ -58,8 +58,8 @@
     "pair": "AVAX / USDC",
     "feeTier": "5 bps",
     "shape": "Bid-Ask",
-    "currentPrice": 6.45,
-    "rangeMin": 6.30,
+    "currentPrice": 6.71,
+    "rangeMin": 6.3,
     "rangeMax": 6.55,
     "numBins": 250,
     "deposit": {
@@ -81,62 +81,215 @@
     }
   },
   "curveData": {
-    "rangeMin": 6.30,
+    "rangeMin": 6.3,
     "rangeMax": 6.55,
-    "currentPrice": 6.45,
+    "currentPrice": 6.71,
     "shape": "bidirectional",
     "bins": [
-      {"price": 6.300, "depth": 0.95},
-      {"price": 6.305, "depth": 0.90},
-      {"price": 6.310, "depth": 0.85},
-      {"price": 6.315, "depth": 0.80},
-      {"price": 6.320, "depth": 0.74},
-      {"price": 6.325, "depth": 0.68},
-      {"price": 6.330, "depth": 0.62},
-      {"price": 6.335, "depth": 0.56},
-      {"price": 6.340, "depth": 0.50},
-      {"price": 6.345, "depth": 0.44},
-      {"price": 6.350, "depth": 0.39},
-      {"price": 6.355, "depth": 0.34},
-      {"price": 6.360, "depth": 0.30},
-      {"price": 6.365, "depth": 0.26},
-      {"price": 6.370, "depth": 0.22},
-      {"price": 6.375, "depth": 0.19},
-      {"price": 6.380, "depth": 0.16},
-      {"price": 6.385, "depth": 0.14},
-      {"price": 6.390, "depth": 0.12},
-      {"price": 6.395, "depth": 0.10},
-      {"price": 6.400, "depth": 0.09},
-      {"price": 6.405, "depth": 0.08},
-      {"price": 6.410, "depth": 0.07},
-      {"price": 6.415, "depth": 0.06},
-      {"price": 6.420, "depth": 0.06},
-      {"price": 6.425, "depth": 0.05},
-      {"price": 6.430, "depth": 0.05},
-      {"price": 6.435, "depth": 0.05},
-      {"price": 6.440, "depth": 0.05},
-      {"price": 6.445, "depth": 0.05},
-      {"price": 6.450, "depth": 0.05},
-      {"price": 6.455, "depth": 0.05},
-      {"price": 6.460, "depth": 0.05},
-      {"price": 6.465, "depth": 0.06},
-      {"price": 6.470, "depth": 0.06},
-      {"price": 6.475, "depth": 0.07},
-      {"price": 6.480, "depth": 0.08},
-      {"price": 6.485, "depth": 0.09},
-      {"price": 6.490, "depth": 0.10},
-      {"price": 6.495, "depth": 0.12},
-      {"price": 6.500, "depth": 0.14},
-      {"price": 6.505, "depth": 0.16},
-      {"price": 6.510, "depth": 0.19},
-      {"price": 6.515, "depth": 0.22},
-      {"price": 6.520, "depth": 0.26},
-      {"price": 6.525, "depth": 0.30},
-      {"price": 6.530, "depth": 0.34},
-      {"price": 6.535, "depth": 0.39},
-      {"price": 6.540, "depth": 0.44},
-      {"price": 6.545, "depth": 0.50},
-      {"price": 6.550, "depth": 0.55}
+      {
+        "price": 6.3,
+        "depth": 0.95
+      },
+      {
+        "price": 6.305,
+        "depth": 0.9
+      },
+      {
+        "price": 6.31,
+        "depth": 0.85
+      },
+      {
+        "price": 6.315,
+        "depth": 0.8
+      },
+      {
+        "price": 6.32,
+        "depth": 0.74
+      },
+      {
+        "price": 6.325,
+        "depth": 0.68
+      },
+      {
+        "price": 6.33,
+        "depth": 0.62
+      },
+      {
+        "price": 6.335,
+        "depth": 0.56
+      },
+      {
+        "price": 6.34,
+        "depth": 0.5
+      },
+      {
+        "price": 6.345,
+        "depth": 0.44
+      },
+      {
+        "price": 6.35,
+        "depth": 0.39
+      },
+      {
+        "price": 6.355,
+        "depth": 0.34
+      },
+      {
+        "price": 6.36,
+        "depth": 0.3
+      },
+      {
+        "price": 6.365,
+        "depth": 0.26
+      },
+      {
+        "price": 6.37,
+        "depth": 0.22
+      },
+      {
+        "price": 6.375,
+        "depth": 0.19
+      },
+      {
+        "price": 6.38,
+        "depth": 0.16
+      },
+      {
+        "price": 6.385,
+        "depth": 0.14
+      },
+      {
+        "price": 6.39,
+        "depth": 0.12
+      },
+      {
+        "price": 6.395,
+        "depth": 0.1
+      },
+      {
+        "price": 6.4,
+        "depth": 0.09
+      },
+      {
+        "price": 6.405,
+        "depth": 0.08
+      },
+      {
+        "price": 6.41,
+        "depth": 0.07
+      },
+      {
+        "price": 6.415,
+        "depth": 0.06
+      },
+      {
+        "price": 6.42,
+        "depth": 0.06
+      },
+      {
+        "price": 6.425,
+        "depth": 0.05
+      },
+      {
+        "price": 6.43,
+        "depth": 0.05
+      },
+      {
+        "price": 6.435,
+        "depth": 0.05
+      },
+      {
+        "price": 6.44,
+        "depth": 0.05
+      },
+      {
+        "price": 6.445,
+        "depth": 0.05
+      },
+      {
+        "price": 6.45,
+        "depth": 0.05
+      },
+      {
+        "price": 6.455,
+        "depth": 0.05
+      },
+      {
+        "price": 6.46,
+        "depth": 0.05
+      },
+      {
+        "price": 6.465,
+        "depth": 0.06
+      },
+      {
+        "price": 6.47,
+        "depth": 0.06
+      },
+      {
+        "price": 6.475,
+        "depth": 0.07
+      },
+      {
+        "price": 6.48,
+        "depth": 0.08
+      },
+      {
+        "price": 6.485,
+        "depth": 0.09
+      },
+      {
+        "price": 6.49,
+        "depth": 0.1
+      },
+      {
+        "price": 6.495,
+        "depth": 0.12
+      },
+      {
+        "price": 6.5,
+        "depth": 0.14
+      },
+      {
+        "price": 6.505,
+        "depth": 0.16
+      },
+      {
+        "price": 6.51,
+        "depth": 0.19
+      },
+      {
+        "price": 6.515,
+        "depth": 0.22
+      },
+      {
+        "price": 6.52,
+        "depth": 0.26
+      },
+      {
+        "price": 6.525,
+        "depth": 0.3
+      },
+      {
+        "price": 6.53,
+        "depth": 0.34
+      },
+      {
+        "price": 6.535,
+        "depth": 0.39
+      },
+      {
+        "price": 6.54,
+        "depth": 0.44
+      },
+      {
+        "price": 6.545,
+        "depth": 0.5
+      },
+      {
+        "price": 6.55,
+        "depth": 0.55
+      }
     ]
   },
   "feeMilestones": {
@@ -149,35 +302,35 @@
         "tier": 1,
         "label": "Scout",
         "target": 5,
-        "icon": "🏴",
+        "icon": "\ud83c\udff4",
         "unlocks": "Entry strategies (CURVE)"
       },
       {
         "tier": 2,
         "label": "Raider",
         "target": 20,
-        "icon": "⚔️",
+        "icon": "\u2694\ufe0f",
         "unlocks": "SPOT + BIDIRECTIONAL shapes"
       },
       {
         "tier": 3,
         "label": "Warlord",
         "target": 55,
-        "icon": "🛡️",
+        "icon": "\ud83d\udee1\ufe0f",
         "unlocks": "Multi-pool positions"
       },
       {
         "tier": 4,
         "label": "Fisher",
         "target": 100,
-        "icon": "🎣",
+        "icon": "\ud83c\udfa3",
         "unlocks": "Multi-asset farming (LINK, TAO, SOL)"
       },
       {
         "tier": 5,
         "label": "Sovereign",
         "target": 200,
-        "icon": "👑",
+        "icon": "\ud83d\udc51",
         "unlocks": "Custom strategy creation"
       }
     ]

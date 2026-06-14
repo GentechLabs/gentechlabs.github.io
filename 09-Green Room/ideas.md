@@ -46,3 +46,25 @@ Ideas from real conversations with real people.
 - **Status:** Monitoring. Validates our stack.
 
 ---
+
+## [ ] Decentralized Travel Community — Agent Economy
+- **Added:** 2026-06-14
+- **Source:** Jordan inspired by PassportBros / Jeffrey AI
+- **Problem:** PassportBros has 30K+ travelers but it's centralized — no ownership, no portability, no crypto rails
+- **Solution:** Decentralized travel intelligence network with ERC-8004 identity, x402 micropayments, agent-augmented intel, on-chain reputation
+- **Status:** Idea. Full spec: ideas/decentralized-travel-community.md
+- **Hackathon fit:** Lepton (Jun 29) — Circle + Arc for x402 micropayments
+- **Connection:** GenTech Suite: Travel layer + AAE positioning
+
+---
+
+## [ ] GenTech Suite — Unified Architecture
+- **Added:** 2026-06-14
+- **Source:** Jordan — "Travel is awesome, ties with Cookbook, agent economy"
+- **Vision:** Everything connects through dashboard engine. Travel intel → Cookbook recipes → Agent economy
+- **Key insight:** Food + Travel are natural partners. "Best pad thai in Bangkok" = Intel + Recipe + Price + Booking
+- **Status:** Spec written. ideas/gentech-suite-unified-architecture.md
+- **Hackathon fit:** Lepton (Jun 29) — unified travel + food intelligence
+- **Connection:** GenTech Suite: Travel + Cookbook + Dashboard + AAE
+
+---
