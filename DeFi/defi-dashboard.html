@@ -753,6 +753,15 @@
         // Custom section renderer for LP curve
         const originalRenderCustom = DashboardEngine.prototype.renderCustom;
         DashboardEngine.prototype.renderCustom = function(section) {
+            if (section.customRender === 'heroEfficiency') {
+                return this.renderHeroEfficiency(section);
+            }
+            if (section.customRender === 'marketIntel') {
+                return this.renderMarketIntel(section);
+            }
+            if (section.customRender === 'strategyAdvisor') {
+                return this.renderStrategyAdvisor(section);
+            }
             if (section.customRender === 'lpCurve') {
                 return `<div class="lp-curve-container" id="lp-curve-canvas"></div>`;
             }
@@ -762,10 +771,173 @@
             if (section.customRender === 'trajectory') {
                 return this.renderTrajectory(section);
             }
-            if (section.customRender === 'scoutFleet') {
-                return this.renderScoutFleet(section);
-            }
             return originalRenderCustom.call(this, section);
+        };
+
+        // Hero Efficiency Renderer — the main visual
+        DashboardEngine.prototype.renderHeroEfficiency = function(section) {
+            const data = this.resolveDataSource(section.dataSource);
+            if (!data) return '<p class="empty-state">No data</p>';
+
+            const { positionUsd, dailyFees, efficiency, efficiencyZone, rangeStatus, currentPrice, rangeMin, rangeMax, milestoneNext, milestoneTarget, milestoneProgress } = data;
+            const effColor = efficiency >= 70 ? '#00ff88' : efficiency >= 50 ? '#00ccff' : efficiency >= 30 ? '#fbbf24' : '#ff3366';
+            const effLabel = efficiency >= 70 ? 'Center Zone' : efficiency >= 50 ? 'Mid Zone' : efficiency >= 30 ? 'Low Zone' : 'Edge Zone';
+            const rangePct = Math.max(0, Math.min(100, ((currentPrice - rangeMin) / (rangeMax - rangeMin)) * 100));
+
+            return `
+                <div style="background:var(--panel-bg); border:1px solid var(--panel-border); border-radius:var(--radius); padding:28px; margin-bottom:16px;">
+                    <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:20px;">
+                        <!-- Left: Efficiency Gauge -->
+                        <div style="text-align:center; min-width:180px;">
+                            <div style="position:relative; width:160px; height:160px; margin:0 auto;">
+                                <svg viewBox="0 0 160 160" style="transform:rotate(-90deg);">
+                                    <circle cx="80" cy="80" r="70" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="12"/>
+                                    <circle cx="80" cy="80" r="70" fill="none" stroke="${effColor}" stroke-width="12"
+                                        stroke-dasharray="${(efficiency / 100) * 440} 440"
+                                        stroke-linecap="round" style="filter:drop-shadow(0 0 8px ${effColor}40); transition: stroke-dasharray 1s ease;"/>
+                                </svg>
+                                <div style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); text-align:center;">
+                                    <div style="font-size:2.2em; font-weight:700; color:${effColor};">${efficiency.toFixed(1)}%</div>
+                                    <div style="font-size:0.75em; color:var(--text-dim); text-transform:uppercase; letter-spacing:1px;">Efficiency</div>
+                                </div>
+                            </div>
+                            <div style="margin-top:8px; padding:4px 12px; background:${effColor}15; border:1px solid ${effColor}40; border-radius:20px; display:inline-block;">
+                                <span style="font-size:0.8em; font-weight:600; color:${effColor};">${effLabel}</span>
+                            </div>
+                        </div>
+
+                        <!-- Center: Key Stats -->
+                        <div style="flex:1; min-width:200px;">
+                            <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+                                <div>
+                                    <div style="font-size:0.7em; color:var(--text-dim); text-transform:uppercase; letter-spacing:1px;">Position Value</div>
+                                    <div style="font-size:1.8em; font-weight:700; color:var(--gold);">$${positionUsd.toFixed(2)}</div>
+                                </div>
+                                <div>
+                                    <div style="font-size:0.7em; color:var(--text-dim); text-transform:uppercase; letter-spacing:1px;">Daily Fees</div>
+                                    <div style="font-size:1.8em; font-weight:700; color:var(--gold);">$${dailyFees.toFixed(3)}</div>
+                                </div>
+                                <div>
+                                    <div style="font-size:0.7em; color:var(--text-dim); text-transform:uppercase; letter-spacing:1px;">AVAX Price</div>
+                                    <div style="font-size:1.3em; font-weight:600; color:var(--text);">$${currentPrice.toFixed(4)}</div>
+                                </div>
+                                <div>
+                                    <div style="font-size:0.7em; color:var(--text-dim); text-transform:uppercase; letter-spacing:1px;">Range Status</div>
+                                    <div style="font-size:1.3em; font-weight:600; color:${rangeStatus === 'In Range' ? 'var(--gold)' : 'var(--danger)'};">${rangeStatus === 'In Range' ? '🟢' : '🔴'} ${rangeStatus}</div>
+                                </div>
+                            </div>
+                            <!-- Mini range bar -->
+                            <div style="margin-top:16px;">
+                                <div style="height:6px; background:rgba(255,255,255,0.06); border-radius:3px; position:relative; overflow:visible;">
+                                    <div style="position:absolute; left:0; right:0; top:0; height:100%; background:linear-gradient(90deg, var(--danger), var(--gold), var(--danger)); border-radius:3px; opacity:0.3;"></div>
+                                    <div style="position:absolute; left:${rangePct}%; top:-3px; width:12px; height:12px; background:var(--gold); border-radius:50%; transform:translateX(-50%); box-shadow:0 0 8px rgba(0,255,136,0.5);"></div>
+                                </div>
+                                <div style="display:flex; justify-content:space-between; margin-top:6px;">
+                                    <span style="font-size:0.7em; color:var(--text-dim);">$${rangeMin}</span>
+                                    <span style="font-size:0.7em; color:var(--text-dim);">$${rangeMax}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right: Milestone Progress -->
+                        <div style="min-width:160px; text-align:right;">
+                            <div style="font-size:0.7em; color:var(--text-dim); text-transform:uppercase; letter-spacing:1px;">Next Milestone</div>
+                            <div style="font-size:1.4em; font-weight:700; color:var(--gold); margin:4px 0;">🎖️ ${milestoneNext}</div>
+                            <div style="font-size:0.85em; color:var(--text-dim);">Target: $${milestoneTarget}/day</div>
+                            <div style="margin-top:8px; height:6px; background:rgba(255,255,255,0.06); border-radius:3px; overflow:hidden;">
+                                <div style="height:100%; width:${milestoneProgress}%; background:var(--gold); border-radius:3px;"></div>
+                            </div>
+                            <div style="font-size:0.75em; color:var(--text-dim); margin-top:4px;">${milestoneProgress.toFixed(1)}% there</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        };
+
+        // Market Intelligence Renderer
+        DashboardEngine.prototype.renderMarketIntel = function(section) {
+            const data = this.resolveDataSource(section.dataSource);
+            if (!data) return '<p class="empty-state">No market data</p>';
+
+            const { avaxPrice, change24h, volume24h, tvl, trend, news } = data;
+            const changeColor = change24h >= 0 ? 'var(--gold)' : 'var(--danger)';
+            const trendEmoji = trend === 'bullish' ? '🟢' : trend === 'bearish' ? '🔴' : '🟡';
+            const impactColor = { bullish: 'var(--gold)', bearish: 'var(--danger)', neutral: 'var(--text-dim)' };
+
+            const newsHtml = (news || []).map(n => `
+                <div style="padding:10px 14px; margin-bottom:8px; background:rgba(255,255,255,0.02); border-radius:8px; border-left:3px solid ${impactColor[n.impact] || 'var(--text-dim)'};">
+                    <div style="font-size:0.85em; color:var(--text);">${n.headline}</div>
+                    <div style="font-size:0.7em; color:var(--text-dim); margin-top:4px; text-transform:uppercase;">${n.impact} · ${n.relevance} relevance</div>
+                </div>
+            `).join('');
+
+            return `
+                <div style="background:var(--panel-bg); border:1px solid var(--panel-border); border-radius:var(--radius); padding:20px;">
+                    <div style="display:grid; grid-template-columns:repeat(4, 1fr); gap:16px; margin-bottom:16px;">
+                        <div style="text-align:center;">
+                            <div style="font-size:0.65em; color:var(--text-dim); text-transform:uppercase; letter-spacing:1px;">AVAX Price</div>
+                            <div style="font-size:1.3em; font-weight:700; color:var(--text);">$${avaxPrice.toFixed(2)}</div>
+                        </div>
+                        <div style="text-align:center;">
+                            <div style="font-size:0.65em; color:var(--text-dim); text-transform:uppercase; letter-spacing:1px;">24h Change</div>
+                            <div style="font-size:1.3em; font-weight:700; color:${changeColor};">${change24h >= 0 ? '+' : ''}${change24h.toFixed(2)}%</div>
+                        </div>
+                        <div style="text-align:center;">
+                            <div style="font-size:0.65em; color:var(--text-dim); text-transform:uppercase; letter-spacing:1px;">24h Volume</div>
+                            <div style="font-size:1.3em; font-weight:700; color:var(--text);">$${(volume24h / 1000).toFixed(1)}K</div>
+                        </div>
+                        <div style="text-align:center;">
+                            <div style="font-size:0.65em; color:var(--text-dim); text-transform:uppercase; letter-spacing:1px;">Pool TVL</div>
+                            <div style="font-size:1.3em; font-weight:700; color:var(--text);">$${(tvl / 1000).toFixed(1)}K</div>
+                        </div>
+                    </div>
+                    <div style="display:flex; align-items:center; gap:8px; margin-bottom:12px; padding:8px 12px; background:rgba(255,255,255,0.02); border-radius:8px;">
+                        <span>${trendEmoji}</span>
+                        <span style="font-size:0.85em; color:var(--text); font-weight:500;">Market Trend: <span style="color:var(--gold); text-transform:capitalize;">${trend}</span></span>
+                    </div>
+                    ${newsHtml ? `<div style="font-size:0.75em; color:var(--text-dim); text-transform:uppercase; letter-spacing:1px; margin-bottom:8px;">Pool-Relevant News</div>${newsHtml}` : ''}
+                </div>
+            `;
+        };
+
+        // Strategy Advisor Renderer
+        DashboardEngine.prototype.renderStrategyAdvisor = function(section) {
+            const data = this.resolveDataSource(section.dataSource);
+            if (!data) return '<p class="empty-state">No strategy data</p>';
+
+            const { efficiencyZone, efficiency, recommendedAction, dcaType, dcaDetails, rebalanceTrigger, compoundThreshold, cumulativeFees, nextCompound, riskLevel, riskNote } = data;
+            const zoneColor = efficiency >= 70 ? 'var(--gold)' : efficiency >= 50 ? 'var(--accent)' : efficiency >= 30 ? '#fbbf24' : 'var(--danger)';
+
+            return `
+                <div style="background:var(--panel-bg); border:1px solid var(--panel-border); border-radius:var(--radius); padding:20px;">
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+                        <!-- Action Card -->
+                        <div style="padding:16px; background:${zoneColor}08; border:1px solid ${zoneColor}30; border-radius:10px;">
+                            <div style="font-size:0.7em; color:var(--text-dim); text-transform:uppercase; letter-spacing:1px;">Recommended Action</div>
+                            <div style="font-size:1.5em; font-weight:700; color:${zoneColor}; margin:6px 0;">${recommendedAction}</div>
+                            <div style="font-size:0.8em; color:var(--text-dim);">${dcaDetails}</div>
+                        </div>
+                        <!-- DCA Card -->
+                        <div style="padding:16px; background:rgba(0,204,255,0.05); border:1px solid rgba(0,204,255,0.2); border-radius:10px;">
+                            <div style="font-size:0.7em; color:var(--text-dim); text-transform:uppercase; letter-spacing:1px;">DCA Strategy</div>
+                            <div style="font-size:1.3em; font-weight:700; color:var(--accent); margin:6px 0;">${dcaType}</div>
+                            <div style="font-size:0.8em; color:var(--text-dim);">Rebalance trigger: ${rebalanceTrigger}</div>
+                        </div>
+                        <!-- Compound Card -->
+                        <div style="padding:16px; background:rgba(255,255,255,0.02); border:1px solid var(--panel-border); border-radius:10px;">
+                            <div style="font-size:0.7em; color:var(--text-dim); text-transform:uppercase; letter-spacing:1px;">Compound Status</div>
+                            <div style="font-size:1.1em; font-weight:600; color:var(--text); margin:6px 0;">$${cumulativeFees.toFixed(2)} / $${compoundThreshold}</div>
+                            <div style="font-size:0.8em; color:var(--text-dim);">${nextCompound}</div>
+                        </div>
+                        <!-- Risk Card -->
+                        <div style="padding:16px; background:rgba(255,255,255,0.02); border:1px solid var(--panel-border); border-radius:10px;">
+                            <div style="font-size:0.7em; color:var(--text-dim); text-transform:uppercase; letter-spacing:1px;">Risk Level</div>
+                            <div style="font-size:1.3em; font-weight:700; color:${riskLevel === 'Low' ? 'var(--gold)' : riskLevel === 'Medium' ? '#fbbf24' : 'var(--danger)'}; margin:6px 0;">${riskLevel}</div>
+                            <div style="font-size:0.8em; color:var(--text-dim);">${riskNote}</div>
+                        </div>
+                    </div>
+                </div>
+            `;
         };
 
         // Scout Fleet Renderer
