@@ -1,118 +1,130 @@
 {
+  "systems": {
+    "passive_tree": {
+      "name": "Passive Skill Tree",
+      "description": "Permanent stat bonuses allocated with passive points",
+      "points_per_level": 1,
+      "max_points": 123,
+      "node_types": ["start", "basic", "notable", "keystone", "ascendancy"]
+    },
+    "skill_gems": {
+      "name": "Skill Gems",
+      "description": "Active skills socketed in gear",
+      "socket_types": ["weapon", "helmet", "gloves", "boots", "chest", "offhand"],
+      "max_links": 6,
+      "gem_colors": ["red", "green", "blue"]
+    },
+    "support_gems": {
+      "name": "Support Gems",
+      "description": "Modify active skill gems",
+      "support_types": ["damage", "utility", "aoe", "conversion", "multiplier"]
+    },
+    "ascendancy": {
+      "name": "Ascendancy",
+      "description": "Class specialization tree",
+      "points": 8,
+      "unlock_acts": ["Act 3", "Act 6", "Act 9", "Endgame"]
+    },
+    "gear": {
+      "name": "Equipment",
+      "description": "Items with stats and gem sockets",
+      "slots": ["weapon", "helmet", "gloves", "boots", "chest", "offhand", "ring1", "ring2", "amulet", "belt"]
+    }
+  },
+  "gem_categories": {
+    "attack": {
+      "skill_gems": ["Tempest Flurry", "Sunder", "Cleave", "Ice Crash", "Frost Blades", "Shield Charge", "Leap Slam"],
+      "support_gems": ["Melee Physical Damage", "Elemental Damage with Attacks", "Increased Area of Effect", "Concentrated Effect"]
+    },
+    "spell": {
+      "skill_gems": ["Falling Thunder", "Thunderstorm", "Orb of Storms", "Storm Call", "Ice Nova", "Consecrated Ground"],
+      "support_gems": ["Spell Echo", "Concentrated Effect", "Increased Critical Strikes", "Added Lightning Damage"]
+    },
+    "buff": {
+      "skill_gems": ["War Cry", "Blood Rage", "Herald of Thunder", "Herald of Ice", "Conductivity", "Vulnerability", "Determination"],
+      "support_gems": ["Generosity", "Increased Duration", "Enhance", "Empower"]
+    },
+    "movement": {
+      "skill_gems": ["Leap Slam", "Flame Dash", "Frostblink", "Lightning Warp"],
+      "support_gems": ["Faster Attacks", "Second Wind", "Endurance Charge on Melee Stun"]
+    }
+  },
   "builds": {
     "monk": {
       "class": "Monk",
-      "ascendancy": "Invoker",
+      "ascendancy_options": ["Invoker", "Chieftain", "Guardian"],
       "meta_builds": [
         {
           "name": "Lightning Invoker",
           "tier": "S",
           "playstyle": "Melee Caster",
           "difficulty": "Medium",
-          "key_skills": ["Tempest Flurry", "Falling Thunder", "Thunderstorm", "Orb of Storms"],
+          "skill_gems": {
+            "primary": {"name": "Tempest Flurry", "links": ["Elemental Damage with Attacks", "Melee Physical Damage", "Increased Area of Effect", "Concentrated Effect", "Lightning Penetration"]},
+            "secondary": {"name": "Falling Thunder", "links": ["Added Lightning Damage", "Increased Critical Strikes", "Spell Echo"]},
+            "clear": {"name": "Thunderstorm", "links": ["Increased Area of Effect", "Concentrated Effect", "Lightning Penetration"]},
+            "sustained": {"name": "Orb of Storms", "links": ["Increased Duration", "Slow Potency", "Lightning Penetration"]}
+          },
+          "auras": ["Herald of Thunder", "Conductivity"],
+          "movement": {"name": "Lightning Warp", "links": ["Faster Casting", "Reduced Duration"]},
           "passive_priority": ["Lightning Damage", "Cast Speed", "Crit Chance", "Elemental Penetration"],
-          "gear_priority": ["+Lightning Gem Levels", "Cast Speed", "Critical Strike Chance", "Lightning Damage"],
-          "endgame_viable": true,
-          "map_clear": "A",
-          "bossing": "S",
-          "league_start": "B"
+          "ascendancy_order": ["Storm Caller", "Thundergod's Wrath", "Tempest Soul", "Monk of the Storm", "Divine Lightning"]
         },
         {
           "name": "Ice Invoker",
           "tier": "A",
           "playstyle": "Melee Caster",
           "difficulty": "Medium",
-          "key_skills": ["Ice Crash", "Frost Blades", "Ice Nova", "Arctic Armour"],
+          "skill_gems": {
+            "primary": {"name": "Ice Crash", "links": ["Elemental Damage with Attacks", "Melee Physical Damage", "Increased Area of Effect", "Concentrated Effect", "Cold Penetration"]},
+            "secondary": {"name": "Frost Blades", "links": ["Added Cold Damage", "Increased Critical Strikes", "Chain"]},
+            "clear": {"name": "Ice Nova", "links": ["Increased Area of Effect", "Concentrated Effect", "Cold Penetration"]},
+            "sustained": {"name": "Orb of Storms", "links": ["Increased Duration", "Slow Potency", "Cold Penetration"]}
+          },
+          "auras": ["Herald of Ice", "Conductivity"],
+          "movement": {"name": "Frostblink", "links": ["Increased Duration", "Second Wind"]},
           "passive_priority": ["Cold Damage", "Cast Speed", "Crit Multi", "Life"],
-          "gear_priority": ["+Cold Gem Levels", "Cast Speed", "Critical Strike Multiplier", "Cold Damage"],
-          "endgame_viable": true,
-          "map_clear": "A",
-          "bossing": "A",
-          "league_start": "B"
-        },
-        {
-          "name": "Tempest Hybrid",
-          "tier": "A",
-          "playstyle": "Melee Caster",
-          "difficulty": "Hard",
-          "key_skills": ["Tempest Flurry", "Storm Call", "Conductivity", "Heralds"],
-          "passive_priority": ["Elemental Damage", "Cast Speed", "Mana Regen", "Life"],
-          "gear_priority": ["+Elemental Gem Levels", "Cast Speed", "Mana Regen", "Elemental Damage"],
-          "endgame_viable": true,
-          "map_clear": "A",
-          "bossing": "A",
-          "league_start": "C"
+          "ascendancy_order": ["Storm Caller", "Thundergod's Wrath", "Tempest Soul", "Monk of the Storm", "Divine Lightning"]
         }
-      ],
-      "passive_tree_suggestions": {
-        "level_1_30": ["Thunder Strike", "Storm Fists", "Lightning Infusion", "Chain Lightning", "Static Charge"],
-        "level_31_60": ["Storm Mastery", "Volt Surge", "Arc Dancer", "Flickering Guard", "Shocked Ground"],
-        "level_61_90": ["Thunderlord's Decree", "Storm Ward", "Stone Bulwark", "Titan's Resolve"],
-        "ascendancy_order": ["Storm Caller", "Thundergod's Wrath", "Tempest Soul", "Monk of the Storm", "Divine Lightning"]
-      }
+      ]
     },
     "warrior": {
       "class": "Warrior",
-      "ascendancy": "Titan",
+      "ascendancy_options": ["Titan", "Juggernaut", "Berserker"],
       "meta_builds": [
         {
           "name": "Vibrant Warrior",
           "tier": "S",
           "playstyle": "Melee物理",
           "difficulty": "Easy",
-          "key_skills": ["Sunder", "Leap Slam", "War Cry", "Blood Rage"],
+          "skill_gems": {
+            "primary": {"name": "Sunder", "links": ["Melee Physical Damage", "Increased Area of Effect", "Concentrated Effect", "Faster Attacks", "Added Physical Damage"]},
+            "secondary": {"name": "Leap Slam", "links": ["Faster Attacks", "Endurance Charge on Melee Stun"]},
+            "clear": {"name": "Sunder", "links": ["Increased Area of Effect", "Concentrated Effect", "Melee Physical Damage"]},
+            "sustained": {"name": "Blood Rage", "links": ["Increased Duration", "Enhance"]}
+          },
+          "auras": ["Determination", "War Cry"],
+          "movement": {"name": "Leap Slam", "links": ["Faster Attacks", "Second Wind"]},
           "passive_priority": ["Physical Damage", "Life", "Armor", "Leech"],
-          "gear_priority": ["+Physical Gem Levels", "Flat Physical", "Critical Strike", "Life"],
-          "endgame_viable": true,
-          "map_clear": "S",
-          "bossing": "A",
-          "league_start": "S"
+          "ascendancy_order": ["Juggernaut", "Undeniable", "Unstoppable", "Unbreakable"]
         },
         {
           "name": "Bleed Gladiator",
           "tier": "A",
           "playstyle": "Melee DoT",
           "difficulty": "Medium",
-          "key_skills": ["Cleave", "Vulnerability", "War Cry", "Blood Rage"],
+          "skill_gems": {
+            "primary": {"name": "Cleave", "links": ["Melee Physical Damage", "Added Physical Damage", "Increased Duration", "Brutality", "Maim"]},
+            "secondary": {"name": "Vulnerability", "links": ["Increased Duration", "Enhance"]},
+            "clear": {"name": "Cleave", "links": ["Increased Area of Effect", "Melee Physical Damage", "Brutality"]},
+            "sustained": {"name": "Blood Rage", "links": ["Increased Duration", "Enhance"]}
+          },
+          "auras": ["Determination", "Vulnerability"],
+          "movement": {"name": "Leap Slam", "links": ["Faster Attacks", "Second Wind"]},
           "passive_priority": ["Physical Damage", "Bleed Damage", "Life", "Armor"],
-          "gear_priority": ["+Physical Gem Levels", "Bleed Damage", "Critical Strike", "Life"],
-          "endgame_viable": true,
-          "map_clear": "A",
-          "bossing": "A",
-          "league_start": "A"
-        },
-        {
-          "name": "Shield Cracker",
-          "tier": "B",
-          "playstyle": "Melee Tank",
-          "difficulty": "Easy",
-          "key_skills": ["Shield Charge", "Consecrated Ground", "War Cry", "Determination"],
-          "passive_priority": ["Armor", "Life", "Block", "Life Regen"],
-          "gear_priority": ["+Physical Gem Levels", "Block Chance", "Life", "Armor"],
-          "endgame_viable": true,
-          "map_clear": "B",
-          "bossing": "A",
-          "league_start": "A"
+          "ascendancy_order": ["Juggernaut", "Undeniable", "Unstoppable", "Unbreakable"]
         }
-      ],
-      "passive_tree_suggestions": {
-        "level_1_30": ["Iron Skin", "Resilience", "Tempered Body", "Steel Will", "Unbreakable"],
-        "level_31_60": ["Stone Bulwark", "Endurance", "Vitality", "Hardened", "Deep Wounds"],
-        "level_61_90": ["Titan's Resolve", "Endurance Charge", "Grounded", "Storm Ward"],
-        "ascendancy_order": ["Juggernaut", "Undeniable", "Unstoppable", "Unbreakable"]
-      }
-    }
-  },
-  "passive_tree_reference": {
-    "monk_lightning": {
-      "url": "https://maxroll.gg/poe2/passive-tree/monk-lightning",
-      "keynodes": ["Thunderlord's Decree", "Divine Lightning", "Lightning Avatar"],
-      "stat_priorities": ["Lightning Damage %", "Cast Speed %", "Critical Strike Chance %", "Lightning Penetration %"]
-    },
-    "warrior_vibrant": {
-      "url": "https://maxroll.gg/poe2/passive-tree/warrior-vibrant",
-      "keynodes": ["Titan's Resolve", "Stone Bulwark", "Unbreakable"],
-      "stat_priorities": ["Physical Damage %", "Maximum Life %", "Armor %", "Life Regen %"]
+      ]
     }
   }
 }
