@@ -180,30 +180,33 @@
             return data;
         }
 
-        // Initialize
+        // Initialize — fetch live data FIRST, then render
         (async () => {
-            const templateRes = await fetch('defi-template.json?v=' + Date.now());
+            const [templateRes, dataRes] = await Promise.all([
+                fetch('defi-template.json?v=' + Date.now()),
+                fetch('defi-data.json?v=' + Date.now())
+            ]);
             const template = await templateRes.json();
-            const dataRes = await fetch('defi-data.json?v=' + Date.now());
             let data = await dataRes.json();
 
-            // Fetch live price and calculate values
+            // Fetch live price and calculate values BEFORE rendering
             data = await fetchLiveData(data);
 
             const dash = new DashboardEngine({ template, data });
             await dash.init('#app');
+            window.defiDash = dash;
 
             // Refresh every 60s
             setInterval(async () => {
-                let freshData = await (await fetch('defi-data.json?v=' + Date.now())).json();
-                freshData = await fetchLiveData(freshData);
-                // Re-render with fresh data
-                const dash2 = new DashboardEngine({ template, data: freshData });
-                await dash2.init('#app');
-                window.defiDash = dash2;
+                try {
+                    const freshRes = await fetch('defi-data.json?v=' + Date.now());
+                    let freshData = await freshRes.json();
+                    freshData = await fetchLiveData(freshData);
+                    const dash2 = new DashboardEngine({ template, data: freshData });
+                    await dash2.init('#app');
+                    window.defiDash = dash2;
+                } catch(e) { console.error('Refresh failed:', e); }
             }, 60000);
-
-            window.defiDash = dash;
         })();
     </script>
 </body>
