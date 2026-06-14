@@ -1,0 +1,92 @@
+{
+  "meta": {
+    "version": "1.0",
+    "created": "2026-06-14",
+    "max_free_tier": 5,
+    "note": "Free tier: 5 active dashboards. Premium: unlimited. Archive unused to keep active list clean."
+  },
+  "dashboards": [
+    {
+      "id": "gentech-hq",
+      "name": "GenTech HQ Dashboard",
+      "owner": "jordan",
+      "type": "agent-stats",
+      "status": "active",
+      "path": "Profiles/index.html",
+      "data_path": null,
+      "created": "2026-05-01",
+      "description": "Main agent performance dashboard — cron jobs, skills, memory, health"
+    },
+    {
+      "id": "jordan-travel",
+      "name": "Jordan Travel Dashboard",
+      "owner": "jordan",
+      "type": "travel",
+      "status": "active",
+      "path": "Travels/travel-dashboard.html",
+      "data_path": "Travels/travel-jordan.json",
+      "created": "2026-06-01",
+      "description": "Personal travel planner — trips, hotels, flights, booking via Travala MCP"
+    },
+    {
+      "id": "vanito-travel",
+      "name": "Vanito Travel Dashboard",
+      "owner": "vanito",
+      "type": "travel",
+      "status": "active",
+      "path": "Travels/travel-dashboard-vanito.html",
+      "data_path": "Travels/travel-vanito.json",
+      "created": "2026-06-01",
+      "description": "Vanito's trip planner — Songkran 2027, shared with Jordan"
+    },
+    {
+      "id": "christel-cookbook",
+      "name": "Christel Cookbook Dashboard",
+      "owner": "christel",
+      "type": "cookbook",
+      "status": "active",
+      "path": "Cookbook/christel-kitchen.html",
+      "data_path": "Cookbook/cookbook-dashboard-data.json",
+      "created": "2026-06-13",
+      "description": "Recipe collection, meal plans, grocery lists — auto-logged from messages"
+    },
+    {
+      "id": "poe2-gaming",
+      "name": "POE2 Gaming Dashboard",
+      "owner": "jordan",
+      "type": "gaming",
+      "status": "archived",
+      "path": "Gaming/poe2-dashboard.html",
+      "data_path": null,
+      "created": "2026-05-15",
+      "description": "POE2 build tracking — Monk, Sorceress, Warrior builds"
+    }
+  ],
+  "archived": [
+    {
+      "id": "poe2-warrior",
+      "name": "POE2 Warrior Dashboard",
+      "owner": "vanito",
+      "type": "gaming",
+      "status": "archived",
+      "path": "Gaming/poe2-warrior-dashboard.html",
+      "archived_date": "2026-06-14",
+      "reason": "Merged into main POE2 dashboard"
+    },
+    {
+      "id": "defi-dashboard",
+      "name": "DeFi Dashboard",
+      "owner": "jordan",
+      "type": "defi",
+      "status": "archived",
+      "path": "DeFi/defi-dashboard.html",
+      "archived_date": "2026-06-14",
+      "reason": "Replaced by Portfolio Health Check cron"
+    }
+  ],
+  "templates": {
+    "engine_path": "assets/dashboard-engine.js",
+    "available_types": ["travel", "cookbook", "gaming", "agent-stats", "defi", "custom"],
+    "css_snippet": ".obsidian/snippets/dashboard.css"
+  }
+}
