@@ -131,58 +131,26 @@ Updated to: submitted
       "vault_path": "03-Projects/BirdeyeBIP/"
     },
     {
-      "id": "tech-payment-router",
-      "title": "Tech Payment Router",
-      "description": "Ethereum payment router with x402 protocol support. Enables automated recurring payments, subscription billing, and micro-transaction routing.",
-      "tech": [
-        "Ethereum",
-        "Solidity",
-        "x402",
-        "Payments"
-      ],
-      "status": "research",
-      "deadline": null,
-      "timeline": "Feb 2026",
-      "highlight": false,
-      "vault_path": "03-Projects/tech-burn-test/"
-    },
-    {
       "id": "bags-fm",
       "title": "Bags FM",
-      "description": "AI agent trading desk for memecoin analysis on Solana. Hackathon ended. Passed \u2014 needs traction to win.",
+      "description": "AI agent trading desk for memecoin analysis on Solana. On hold \u2014 may revisit if traction picks up.",
       "tech": [
         "Solana",
         "AI Agents",
         "Trading",
         "Python"
       ],
-      "status": "completed",
-      "deadline": "2026-06-01",
-      "timeline": "Jun 2026",
-      "highlight": true,
-      "vault_path": "02-Labs/Hackathons/Bags-FM/"
-    },
-    {
-      "id": "google-cloud-rapid-agent",
-      "title": "Google Cloud Rapid Agent",
-      "description": "Gemini + Agent Builder + MCP integration. Dropped \u2014 doesn't align with our stack.",
-      "tech": [
-        "Google Cloud",
-        "Gemini",
-        "MCP",
-        "Python"
-      ],
-      "status": "shelved",
-      "deadline": "2026-06-11",
+      "status": "research",
+      "deadline": null,
       "timeline": "Jun 2026",
       "highlight": false,
-      "vault_path": "02-Labs/Hackathons/Google-Cloud/"
+      "vault_path": "02-Labs/Hackathons/Bags-FM/"
     },
     {
       "id": "somnia",
       "title": "Agent Catcher",
       "demo_url": "/somnia-token-risk-oracle/",
-      "description": "On-chain token risk oracle using Somnia dual-agent pattern. CHECKPOINT 2 SUBMITTED. Final submission due Jun 11 (1 day left). Focus project tonight.",
+      "description": "On-chain token risk oracle \u2014 rugpull detection via AI contract analysis. Completed but blocked by Somnia chain limitations. Code ready, chain not production-ready.",
       "tech": [
         "Solidity",
         "Somnia",
@@ -190,10 +158,10 @@ Updated to: submitted
         "GoPlus API",
         "Ethers.js"
       ],
-      "status": "submitted",
-      "deadline": "2026-06-11",
+      "status": "completed",
+      "deadline": null,
       "timeline": "Jun 2026",
-      "highlight": true,
+      "highlight": false,
       "vault_path": "02-Labs/Hackathons/Somnia/"
     },
     {
@@ -311,17 +279,18 @@ Updated to: submitted
     },
     {
       "id": "gentech-dashboard",
-      "title": "GenTech Dashboard \u2014 Gaming Companion",
-      "description": "Uncensored, always-on gaming companion that monitors game ecosystems, tracks your build, and gives real-time optimization advice.",
+      "title": "GenTech Dashboard Engine",
+      "description": "Universal JSON-driven dashboard engine \u2014 38KB zero-dep JS. DeFi-native (LP positions, DCA tracking, portfolio analytics) but general-purpose for any data visualization. Open-sourceable. Powers Jordan, Christel, and Vanito personal dashboards.",
       "tech": [
-        "AI Agents",
-        "Gaming",
-        "Dashboard",
-        "Meta Tracking"
+        "JavaScript",
+        "DeFi",
+        "JSON-Driven",
+        "Zero-Dep",
+        "Dashboard"
       ],
       "status": "building",
       "deadline": null,
-      "timeline": "May 2026",
+      "timeline": "Jun 2026",
       "highlight": true,
       "demo_url": "/pals/poe2-dashboard.html"
     },
@@ -396,7 +365,7 @@ Updated to: submitted
     {
       "id": "cookbook-nanopay",
       "title": "GenTech Cookbook Nanopay",
-      "description": "Pay-per-recipe platform using Circle Gateway nanopayments on Arc. $0.005/recipe, $0.001/review. Gas-free x402 payments settling in <500ms. Built for Lepton Agents Hackathon (Canteen × Circle × Arc).",
+      "description": "Pay-per-recipe platform using Circle Gateway nanopayments on Arc. $0.005/recipe, $0.001/review. Gas-free x402 payments settling in <500ms. Built for Lepton Agents Hackathon (Canteen \u00d7 Circle \u00d7 Arc).",
       "tech": [
         "Circle Gateway",
         "Arc",
@@ -413,5 +382,5 @@ Updated to: submitted
     }
   ],
   "generated": "2026-06-14T00:00:00Z",
-  "count": 25
+  "count": 23
 }

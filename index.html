@@ -598,50 +598,26 @@ html { scroll-behavior: smooth; }
       hackathon: '',
     },
     {
-      id: 'tech-payment-router',
-      title: 'Tech Payment Router',
-      description: 'Ethereum payment router with x402 protocol support. Enables automated recurring payments, subscription billing, and micro-transaction routing.',
-      tech: ['Ethereum', 'Solidity', 'x402', 'Payments'],
-      status: 'research',
-      deadline: 'None',
-      timeline: 'Feb 2026',
-      highlight: false,
-      vault_path: '03-Projects/tech-burn-test/',
-      hackathon: '',
-    },
-    {
       id: 'bags-fm',
       title: 'Bags FM',
-      description: 'AI agent trading desk for memecoin analysis on Solana. Hackathon ended. Passed — needs traction to win.',
+      description: 'AI agent trading desk for memecoin analysis on Solana. On hold — may revisit if traction picks up.',
       tech: ['Solana', 'AI Agents', 'Trading', 'Python'],
-      status: 'completed',
-      deadline: '2026-06-01',
-      timeline: 'Jun 2026',
-      highlight: true,
-      vault_path: '02-Labs/Hackathons/Bags-FM/',
-      hackathon: '',
-    },
-    {
-      id: 'google-cloud-rapid-agent',
-      title: 'Google Cloud Rapid Agent',
-      description: 'Gemini + Agent Builder + MCP integration. Dropped — doesn't align with our stack.',
-      tech: ['Google Cloud', 'Gemini', 'MCP', 'Python'],
-      status: 'shelved',
-      deadline: '2026-06-11',
+      status: 'research',
+      deadline: null,
       timeline: 'Jun 2026',
       highlight: false,
-      vault_path: '02-Labs/Hackathons/Google-Cloud/',
+      vault_path: '02-Labs/Hackathons/Bags-FM/',
       hackathon: '',
     },
     {
       id: 'somnia',
       title: 'Agent Catcher',
-      description: 'On-chain token risk oracle using Somnia dual-agent pattern. CHECKPOINT 2 SUBMITTED. Final submission due Jun 11 (1 day left). Focus project tonight.',
+      description: 'On-chain token risk oracle — rugpull detection via AI contract analysis. Completed but blocked by Somnia chain limitations. Code ready, chain not production-ready.',
       tech: ['Solidity', 'Somnia', 'Hardhat', 'GoPlus API', 'Ethers.js'],
-      status: 'building',
-      deadline: '2026-06-11',
+      status: 'completed',
+      deadline: null,
       timeline: 'Jun 2026',
-      highlight: true,
+      highlight: false,
       vault_path: '02-Labs/Hackathons/Somnia/',
       hackathon: '',
     },
@@ -731,14 +707,14 @@ html { scroll-behavior: smooth; }
     },
     {
       id: 'gentech-dashboard',
-      title: 'GenTech Dashboard — Gaming Companion',
-      description: 'Uncensored, always-on gaming companion that monitors game ecosystems, tracks your build, and gives real-time optimization advice.',
-      tech: ['AI Agents', 'Gaming', 'Dashboard', 'Meta Tracking'],
+      title: 'GenTech Dashboard Engine',
+      description: 'Universal JSON-driven dashboard engine — 38KB zero-dep JS. DeFi-native (LP positions, DCA tracking, portfolio analytics) but general-purpose for any data visualization. Open-sourceable. Powers Jordan, Christel, and Vanito personal dashboards.',
+      tech: ['JavaScript', 'DeFi', 'JSON-Driven', 'Zero-Dep', 'Dashboard'],
       status: 'building',
-      deadline: 'None',
-      timeline: 'May 2026',
+      deadline: null,
+      timeline: 'Jun 2026',
       highlight: true,
-      vault_path: '',
+      vault_path: '09-Green Room/designs/genTech-dashboard-engine.md',
       hackathon: '',
     },
     {
@@ -1695,64 +1671,10 @@ html { scroll-behavior: smooth; }
                         <th>Status</th>
                     </tr>
                     <tr>
-                        <td><strong>Agora Agents</strong></td>
-                        <td>Circle Arc</td>
-                        <td>May 25</td>
-                        <td><span class="badge" style="background: rgba(34,197,94,0.15); color: #3b82f6; padding: 3px 10px; border-radius: 9999px; font-size: 0.8em; font-weight: 600;">SUBMITTED</span></td>
-                    </tr>
-                    <tr>
-                        <td><strong>Swarms ACM</strong></td>
-                        <td>Multi-Chain</td>
-                        <td>May 27</td>
-                        <td><span class="badge" style="background: rgba(34,197,94,0.15); color: #3b82f6; padding: 3px 10px; border-radius: 9999px; font-size: 0.8em; font-weight: 600;">PUBLISHED</span></td>
-                    </tr>
-                    <tr>
-                        <td><strong>Bags FM</strong></td>
-                        <td>Solana</td>
-                        <td>Jun 1</td>
-                        <td><span class="badge badge-building">ACTIVE</span></td>
-                    </tr>
-                    <tr>
-                        <td><strong>Google for Startups</strong></td>
-                        <td>Google Cloud</td>
-                        <td>Jun 5</td>
-                        <td><span class="badge" style="background: rgba(251,191,36,0.15); color: #60a5fa; padding: 3px 10px; border-radius: 9999px; font-size: 0.8em; font-weight: 600;">REGISTER NEEDED</span></td>
-                    </tr>
-                    <tr>
-                        <td><strong>Google Cloud Rapid Agent</strong></td>
-                        <td>Google Cloud</td>
-                        <td>Jun 11</td>
-                        <td><span class="badge badge-queued">QUEUED</span></td>
-                    </tr>
-                    <tr>
-                        <td><strong>Somnia</strong></td>
-                        <td>Somnia</td>
-                        <td>Jun 11</td>
-                        <td><span class="badge badge-building">ACTIVE</span></td>
-                    </tr>
-                    <tr>
-                        <td><strong>Arbitrum Open House</strong></td>
-                        <td>Arbitrum</td>
-                        <td>—</td>
-                        <td><span class="badge" style="background: rgba(34,197,94,0.15); color: #3b82f6; padding: 3px 10px; border-radius: 9999px; font-size: 0.8em; font-weight: 600;">SHIPPED</span></td>
-                    </tr>
-                    <tr>
-                        <td><strong>Mantle Turing Test</strong></td>
-                        <td>Mantle</td>
-                        <td>—</td>
-                        <td><span class="badge" style="background: rgba(251,191,36,0.15); color: #60a5fa; padding: 3px 10px; border-radius: 9999px; font-size: 0.8em; font-weight: 600;">REGISTER NEEDED</span></td>
-                    </tr>
-                    <tr>
                         <td><strong>Lepton Agents</strong></td>
                         <td>Circle Arc</td>
                         <td>Jun 29</td>
                         <td><span class="badge badge-building">BUILDING</span></td>
-                    </tr>
-                    <tr>
-                        <td><strong>Kite AI</strong></td>
-                        <td>Kite L1</td>
-                        <td>May 17</td>
-                        <td><span class="badge" style="background: rgba(107,114,128,0.15); color: #94a3b8; padding: 3px 10px; border-radius: 9999px; font-size: 0.8em; font-weight: 600;">PAST</span></td>
                     </tr>
                 </table>
             </div>
