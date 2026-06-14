@@ -183,75 +183,104 @@ const COLORS = {
 };
 
 // =============================================
-//  SAMPLE TREE DATA — Lightning Monk
+//  JORDAN'S MONK BUILD — Level 26 Invoker
+//  Nodes: Alternating Current, Overlord, Branching Bolts, Drenched, Lightning Quick
 // =============================================
 const nodes = [
-  // ===== START NODE =====
-  {id:"start",name:"Lightning Monk",type:"start",x:600,y:400,radius:16,description:"Starting node for the Lightning Monk build.",stats:{},connections:["n1","n13","n25"],allocated:true},
+  // ===== START NODE (bottom center) =====
+  {id:"start",name:"Lightning Monk",type:"start",x:600,y:820,radius:18,description:"Level 26 Invoker — Lightning melee caster. Alternating Current, Overlord, Branching Bolts, Drenched allocated.",stats:{},connections:["s1","s2","s3"],allocated:true},
 
-  // ===== OFFENSE PATH (upper right) =====
-  {id:"n1",name:"Thunder Strike",type:"basic",x:660,y:355,radius:10,description:"+8% Lightning Damage",stats:{lightningDmg:8},connections:["start","n2"],allocated:false},
-  {id:"n2",name:"Storm Fists",type:"basic",x:730,y:310,radius:10,description:"+10% Lightning Damage",stats:{lightningDmg:10},connections:["n1","n3"],allocated:false},
-  {id:"n3",name:"Lightning Infusion",type:"notable",x:810,y:265,radius:14,description:"+15% Lightning Damage, +5% Attack Speed",stats:{lightningDmg:15,atkSpd:5},connections:["n2","n4","n5"],allocated:false},
-  {id:"n4",name:"Chain Lightning",type:"basic",x:890,y:230,radius:10,description:"Lightning skills chain to 1 additional enemy",stats:{chain:1},connections:["n3","n6"],allocated:false},
-  {id:"n5",name:"Static Charge",type:"basic",x:850,y:330,radius:10,description:"10% chance to Shock on hit",stats:{shockChance:10},connections:["n3","n7"],allocated:false},
-  {id:"n6",name:"Storm Mastery",type:"notable",x:970,y:195,radius:14,description:"+20% Lightning Penetration",stats:{lightningPen:20},connections:["n4","n8"],allocated:false},
-  {id:"n7",name:"Volt Surge",type:"basic",x:930,y:370,radius:10,description:"+12% Spell Damage",stats:{spellDmg:12},connections:["n5","n9"],allocated:false},
-  {id:"n8",name:"Thunderlord's Decree",type:"keystone",x:1040,y:160,radius:20,description:"Your lightning damage chains twice as far. Non-lightning damage reduced by 30%.",stats:{chainMultiplier:2,nonLightningDmgReduction:30},connections:["n6"],allocated:false},
-  {id:"n9",name:"Arc Dancer",type:"basic",x:1000,y:405,radius:10,description:"+8% Evasion Rating",stats:{evasion:8},connections:["n7","n10"],allocated:false},
-  {id:"n10",name:"Flickering Guard",type:"notable",x:1070,y:440,radius:14,description:"+15% Evasion, +5% Dodge",stats:{evasion:15,dodge:5},connections:["n9"],allocated:false},
+  // ===== MAIN VERTICAL SPINE (center, going up) =====
+  {id:"s1",name:"Lightning Attunement",type:"basic",x:600,y:760,radius:9,description:"+6% Lightning Damage",stats:{lightningDmg:6},connections:["start","s4"],allocated:true},
+  {id:"s4",name:"Storm Core",type:"basic",x:600,y:710,radius:9,description:"+8% Lightning Damage, +3% Cast Speed",stats:{lightningDmg:8,castSpd:3},connections:["s1","s5"],allocated:true},
+  {id:"s5",name:"Elemental Conduit",type:"basic",x:600,y:660,radius:9,description:"+10% Elemental Damage",stats:{elemDmg:10},connections:["s4","n1"],allocated:true},
 
-  // Cross-connection from offense to defense
-  {id:"n11",name:"Shocked Ground",type:"basic",x:920,y:480,radius:10,description:"Enemies on shocked ground take 5% increased damage",stats:{dmgOnShocked:5},connections:["n9","n22"],allocated:false},
-  {id:"n12",name:"Tempest Shield",type:"basic",x:780,y:200,radius:10,description:"+8% Spell Suppression",stats:{spellSupp:8},connections:["n3","n43"],allocated:false},
+  // ===== BRANCHING BOLTS (notable — allocated) =====
+  {id:"n1",name:"Branching Bolts",type:"notable",x:600,y:600,radius:15,description:"Lightning skills fork into 2 additional branches. +12% Lightning Damage.",stats:{lightningFork:2,lightningDmg:12},connections:["s5","n2","n3","n4"],allocated:true},
 
-  // ===== DEFENSE PATH (lower right) =====
-  {id:"n13",name:"Iron Skin",type:"basic",x:660,y:445,radius:10,description:"+10 Armor",stats:{armor:10},connections:["start","n14"],allocated:false},
-  {id:"n14",name:"Resilience",type:"basic",x:730,y:490,radius:10,description:"+8% Maximum Life",stats:{maxLife:8},connections:["n13","n15"],allocated:false},
-  {id:"n15",name:"Tempered Body",type:"notable",x:810,y:535,radius:14,description:"+12% Armor, +60 Life",stats:{armor:12,flatLife:60},connections:["n14","n16","n17"],allocated:false},
-  {id:"n16",name:"Steel Will",type:"basic",x:890,y:570,radius:10,description:"+10% Damage Reduction",stats:{dmgReduction:10},connections:["n15","n18"],allocated:false},
-  {id:"n17",name:"Unbreakable",type:"basic",x:860,y:620,radius:10,description:"+5% Life Regen",stats:{lifeRegen:5},connections:["n15","n19"],allocated:false},
-  {id:"n18",name:"Stone Bulwark",type:"notable",x:960,y:605,radius:14,description:"+20% Armor, +3% Max Elemental Res",stats:{armor:20,maxElemRes:3},connections:["n16","n20"],allocated:false},
-  {id:"n19",name:"Endurance",type:"basic",x:930,y:680,radius:10,description:"+10% Max Life",stats:{maxLife:10},connections:["n17","n21"],allocated:false},
-  {id:"n20",name:"Titan's Resolve",type:"keystone",x:1040,y:640,radius:20,description:"You take 50% less physical damage. Cannot deal elemental damage.",stats:{physDmgReduction:50,cantDealElemDmg:true},connections:["n18"],allocated:false},
-  {id:"n21",name:"Vitality",type:"basic",x:1010,y:720,radius:10,description:"+2% Life Regen",stats:{lifeRegen:2},connections:["n19"],allocated:false},
-  {id:"n22",name:"Storm Ward",type:"basic",x:990,y:530,radius:10,description:"+10% Lightning Resist",stats:{lightningRes:10},connections:["n11","n18"],allocated:false},
-  {id:"n23",name:"Grounded",type:"basic",x:770,y:600,radius:10,description:"+8% Elemental Resist",stats:{elemRes:8},connections:["n17"],allocated:false},
-  {id:"n24",name:"Hardened",type:"basic",x:710,y:560,radius:10,description:"+10 Armor",stats:{armor:10},connections:["n15"],allocated:false},
+  // Left fork from Branching Bolts
+  {id:"n2",name:"Arc Splitter",type:"basic",x:510,y:555,radius:9,description:"+8% Lightning Penetration",stats:{lightningPen:8},connections:["n1","n5"],allocated:true},
+  {id:"n5",name:"Thunderclap",type:"basic",x:430,y:510,radius:9,description:"15% chance to Shock on hit",stats:{shockChance:15},connections:["n2","n6"],allocated:true},
 
-  // ===== UTILITY PATH (upper left) =====
-  {id:"n25",name:"Focused Mind",type:"basic",x:540,y:355,radius:10,description:"+8% Accuracy",stats:{accuracy:8},connections:["start","n26"],allocated:false},
-  {id:"n26",name:"Swift Hands",type:"basic",x:470,y:310,radius:10,description:"+10% Attack Speed",stats:{atkSpd:10},connections:["n25","n27"],allocated:false},
-  {id:"n27",name:"Lightning Reflexes",type:"notable",x:390,y:265,radius:14,description:"+15% Attack Speed, +8% Crit Chance",stats:{atkSpd:15,critChance:8},connections:["n26","n28","n29"],allocated:false},
-  {id:"n28",name:"Precision",type:"basic",x:310,y:230,radius:10,description:"+10% Critical Damage",stats:{critDmg:10},connections:["n27","n30"],allocated:false},
-  {id:"n29",name:"Flow State",type:"basic",x:350,y:330,radius:10,description:"+8% Movement Speed",stats:{moveSpd:8},connections:["n27","n31"],allocated:false},
-  {id:"n30",name:"Assassin's Focus",type:"notable",x:230,y:195,radius:14,description:"+20% Critical Damage, +5% Crit Multiplier",stats:{critDmg:20,critMulti:5},connections:["n28","n32"],allocated:false},
-  {id:"n31",name:"Adrenaline",type:"basic",x:270,y:370,radius:10,description:"+8% Action Speed",stats:{actionSpd:8},connections:["n29","n33"],allocated:false},
-  {id:"n32",name:"Lightning Avatar",type:"keystone",x:160,y:160,radius:20,description:"Your critical strikes release chain lightning. Non-critical strikes deal 50% less damage.",stats:{critChainLightning:true,nonCritPenalty:50},connections:["n30"],allocated:false},
-  {id:"n33",name:"Quickstep",type:"basic",x:200,y:405,radius:10,description:"+8% Dodge",stats:{dodge:8},connections:["n31","n34"],allocated:false},
-  {id:"n34",name:"Evasive",type:"notable",x:130,y:440,radius:14,description:"+15% Dodge, +10% Evasion",stats:{dodge:15,evasion:10},connections:["n33"],allocated:false},
+  // Right fork from Branching Bolts
+  {id:"n3",name:"Static Web",type:"basic",x:690,y:555,radius:9,description:"Lightning skills chain to +1 enemy",stats:{chain:1},connections:["n1","n7"],allocated:true},
+  {id:"n7",name:"Conductive Path",type:"basic",x:770,y:510,radius:9,description:"Enemies take 5% increased Lightning Damage",stats:{lightningDmgTaken:5},connections:["n3","n8"],allocated:true},
 
-  // Cross-connections utility to defense
-  {id:"n35",name:"Flexible Stance",type:"basic",x:420,y:420,radius:10,description:"Switch between offensive and defensive stances",stats:{stance:true},connections:["start","n36"],allocated:false},
-  {id:"n36",name:"Balanced Mind",type:"basic",x:370,y:480,radius:10,description:"+6% All Attributes",stats:{allAttr:6},connections:["n35","n37"],allocated:false},
-  {id:"n37",name:"Harmony",type:"notable",x:310,y:535,radius:14,description:"+12% Damage while at full life, +10% Life Leech",stats:{dmgAtFullLife:12,lifeLeech:10},connections:["n36"],allocated:false},
+  // Center continues up
+  {id:"n4",name:"Storm Surge",type:"basic",x:600,y:540,radius:9,description:"+10% Spell Damage",stats:{spellDmg:10},connections:["n1","n9"],allocated:true},
+
+  // ===== ALTERNATING CURRENT (keystone — allocated) =====
+  {id:"n9",name:"Alternating Current",type:"keystone",x:600,y:470,radius:20,description:"Lightning damage alternates between hitting nearby and distant enemies. +25% Lightning Damage.",stats:{lightningDmg:25,alternatingStrike:true},connections:["n4","n10","n11","n12"],allocated:true},
+
+  // Left cluster from Alternating Current
+  {id:"n10",name:"Polarity Shift",type:"basic",x:500,y:425,radius:9,description:"+8% Shock Effect",stats:{shockEffect:8},connections:["n9","n13"],allocated:true},
+  {id:"n13",name:"Discharge",type:"notable",x:400,y:380,radius:14,description:"Shocked enemies take 15% increased Damage. +10% Shock Duration.",stats:{dmgOnShocked:15,shockDur:10},connections:["n10","n14"],allocated:true},
+
+  // Right cluster from Alternating Current
+  {id:"n11",name:"Surge Protector",type:"basic",x:700,y:425,radius:9,description:"+8% Lightning Resist",stats:{lightningRes:8},connections:["n9","n15"],allocated:true},
+  {id:"n15",name:"Galvanic Shield",type:"notable",x:800,y:380,radius:14,description:"+15% Spell Suppression, +10% Lightning Resist",stats:{spellSupp:15,lightningRes:10},connections:["n11","n16"],allocated:true},
+
+  // Center continues up
+  {id:"n12",name:"Voltage",type:"basic",x:600,y:410,radius:9,description:"+10% Attack Speed",stats:{atkSpd:10},connections:["n9","n17"],allocated:true},
+
+  // ===== OVERLORD (notable — allocated) =====
+  {id:"n17",name:"Overlord",type:"notable",x:600,y:340,radius:16,description:"Lightning skills deal 20% more Damage to Shocked enemies. +15% Lightning Damage.",stats:{lightningDmg:15,moreDmgOnShocked:20},connections:["n12","n18","n19","n20"],allocated:true},
+
+  // Left cluster from Overlord
+  {id:"n18",name:"Dominion",type:"basic",x:500,y:295,radius:9,description:"+10% Damage while at Full Life",stats:{dmgAtFullLife:10},connections:["n17","n21"],allocated:true},
+  {id:"n21",name:"Sovereign",type:"notable",x:400,y:250,radius:14,description:"+20% Elemental Damage, +5% Max Mana",stats:{elemDmg:20,maxMana:5},connections:["n18","n22"],allocated:false},
+
+  // Right cluster from Overlord
+  {id:"n19",name:"Command",type:"basic",x:700,y:295,radius:9,description:"+8% Action Speed",stats:{actionSpd:8},connections:["n17","n23"],allocated:true},
+  {id:"n23",name:"Authority",type:"notable",x:800,y:250,radius:14,description:"+15% Critical Damage, +8% Crit Chance",stats:{critDmg:15,critChance:8},connections:["n19","n24"],allocated:false},
+
+  // Center continues up
+  {id:"n20",name:"Power Conduit",type:"basic",x:600,y:280,radius:9,description:"+10% Mana Regen",stats:{manaRegen:10},connections:["n17","n25"],allocated:true},
+
+  // ===== DRENCHED (notable — allocated) =====
+  {id:"n25",name:"Drenched",type:"notable",x:600,y:210,radius:16,description:"Enemies near you are Drenched. +20% Lightning Damage. Drenched enemies take 10% increased Damage.",stats:{lightningDmg:20,drenchedAura:true,dmgOnDrenched:10},connections:["n20","n26","n27","n28"],allocated:true},
+
+  // Left from Drenched
+  {id:"n26",name:"Torrent",type:"basic",x:510,y:165,radius:9,description:"+8% Movement Speed",stats:{moveSpd:8},connections:["n25","n29"],allocated:true},
+  {id:"n29",name:"Downpour",type:"notable",x:420,y:120,radius:14,description:"Enemies in Drenched area move 15% slower. +10% Dodge.",stats:{enemySlow:15,dodge:10},connections:["n26"],allocated:false},
+
+  // Right from Drenched
+  {id:"n27",name:"Flood",type:"basic",x:690,y:165,radius:9,description:"+8% Evasion Rating",stats:{evasion:8},connections:["n25","n30"],allocated:true},
+  {id:"n30",name:"Tidal Force",type:"notable",x:780,y:120,radius:14,description:"+15% Evasion, +5% Dodge. Drenched enemies have -10% Accuracy.",stats:{evasion:15,dodge:5,enemyAccuracyReduce:10},connections:["n27"],allocated:false},
+
+  // ===== LIGHTNING QUICK (keystone — NOT allocated, goal) =====
+  {id:"n28",name:"Lightning Quick",type:"keystone",x:600,y:130,radius:22,description:"Lightning skills grant +30% Movement Speed for 3 seconds on hit. +20% Attack Speed. Cannot use slow skills.",stats:{lightningMoveSpd:30,atkSpd:20,noSlowSkills:true},connections:["n25","n31","n32"],allocated:false},
+
+  // ===== UPPER EXTENSIONS (future paths) =====
+  {id:"n31",name:"Tempest Rush",type:"basic",x:500,y:75,radius:9,description:"+10% Lightning Damage while Moving",stats:{lightningDmgWhileMoving:10},connections:["n28"],allocated:false},
+  {id:"n32",name:"Storm Dancer",type:"basic",x:700,y:75,radius:9,description:"+10% Dodge while Moving",stats:{dodgeWhileMoving:10},connections:["n28"],allocated:false},
+
+  // ===== SIDE BRANCHES (left defense) =====
+  {id:"s2",name:"Iron Skin",type:"basic",x:520,y:780,radius:9,description:"+10 Armor",stats:{armor:10},connections:["start","d1"],allocated:false},
+  {id:"d1",name:"Resilience",type:"basic",x:440,y:740,radius:9,description:"+8% Maximum Life",stats:{maxLife:8},connections:["s2","d2"],allocated:false},
+  {id:"d2",name:"Tempered Body",type:"notable",x:360,y:700,radius:14,description:"+12% Armor, +60 Life",stats:{armor:12,flatLife:60},connections:["d1","d3"],allocated:false},
+  {id:"d3",name:"Stone Bulwark",type:"notable",x:280,y:660,radius:14,description:"+20% Armor, +3% Max Elemental Res",stats:{armor:20,maxElemRes:3},connections:["d2"],allocated:false},
+
+  // ===== SIDE BRANCHES (right utility) =====
+  {id:"s3",name:"Focused Mind",type:"basic",x:680,y:780,radius:9,description:"+8% Accuracy",stats:{accuracy:8},connections:["start","u1"],allocated:false},
+  {id:"u1",name:"Swift Hands",type:"basic",x:760,y:740,radius:9,description:"+10% Attack Speed",stats:{atkSpd:10},connections:["s3","u2"],allocated:false},
+  {id:"u2",name:"Lightning Reflexes",type:"notable",x:840,y:700,radius:14,description:"+15% Attack Speed, +8% Crit Chance",stats:{atkSpd:15,critChance:8},connections:["u1","u3"],allocated:false},
+  {id:"u3",name:"Assassin's Focus",type:"notable",x:920,y:660,radius:14,description:"+20% Critical Damage, +5% Crit Multiplier",stats:{critDmg:20,critMulti:5},connections:["u2"],allocated:false},
+
+  // ===== LEFT DEEP BRANCH (from Alternating Current area) =====
+  {id:"n6",name:"Shockwave",type:"basic",x:320,y:440,radius:9,description:"+8% AoE Damage",stats:{aoeDmg:8},connections:["n5","n33"],allocated:true},
+  {id:"n33",name:"Tremor",type:"notable",x:240,y:400,radius:14,description:"Lightning skills create Shockwaves. +12% Lightning Damage.",stats:{lightningDmg:12,shockwave:true},connections:["n6"],allocated:false},
+
+  // ===== RIGHT DEEP BRANCH (from Alternating Current area) =====
+  {id:"n16",name:"Overcharge",type:"basic",x:880,y:440,radius:9,description:"+8% Spell Damage",stats:{spellDmg:8},connections:["n15","n34"],allocated:false},
+  {id:"n34",name:"Arc Mastery",type:"notable",x:960,y:400,radius:14,description:"Lightning skills chain +2 times. +10% Lightning Penetration.",stats:{chain:2,lightningPen:10},connections:["n16"],allocated:false},
 
   // ===== ASCENDANCY CLUSTER (far right) =====
-  {id:"asc1",name:"Storm Caller",type:"ascendancy",x:1140,y:300,radius:16,description:"Lightning spells have +20% Cast Speed",stats:{castSpd:20},connections:["asc2","asc3"],allocated:false},
-  {id:"asc2",name:"Thundergod's Wrath",type:"ascendancy",x:1210,y:240,radius:14,description:"Your lightning damage cannot be reflected",stats:{noLightningReflect:true},connections:["asc1"],allocated:false},
-  {id:"asc3",name:"Tempest Soul",type:"ascendancy",x:1210,y:360,radius:14,description:"Gain +1% Lightning Damage per Level",stats:{dmgPerLevel:1},connections:["asc1"],allocated:false},
-  {id:"asc4",name:"Monk of the Storm",type:"ascendancy",x:1140,y:180,radius:16,description:"Channeling lightning spells generates mana",stats:{manaOnChannel:true},connections:["asc2"],allocated:false},
-  {id:"asc5",name:"Divine Lightning",type:"ascendancy",x:1280,y:300,radius:18,description:"Lightning skills ignore enemy Lightning Resistance",stats:{ignoreLightningRes:true},connections:["asc2","asc3"],allocated:false},
-
-  // Additional connections for depth
-  {id:"n38",name:"Elemental Touch",type:"basic",x:700,y:260,radius:10,description:"+8% Elemental Damage",stats:{elemDmg:8},connections:["n2","n12"],allocated:false},
-  {id:"n39",name:"Spell Power",type:"basic",x:500,y:260,radius:10,description:"+10% Spell Damage",stats:{spellDmg:10},connections:["n26","n43"],allocated:false},
-  {id:"n40",name:"Deep Wounds",type:"basic",x:650,y:520,radius:10,description:"+8% Physical Damage",stats:{physDmg:8},connections:["n14","n24"],allocated:false},
-  {id:"n41",name:"Mystic Edge",type:"basic",x:580,y:290,radius:10,description:"+8% Weapon Damage",stats:{weaponDmg:8},connections:["n25","n39"],allocated:false},
-  {id:"n42",name:"Endurance Charge",type:"basic",x:580,y:510,radius:10,description:"Grants 1 Endurance Charge on Kill",stats:{endCharge:1},connections:["n14","n40"],allocated:false},
-  {id:"n43",name:"Mana Flow",type:"notable",x:440,y:200,radius:14,description:"+20% Mana Regen, +30 Mana",stats:{manaRegen:20,flatMana:30},connections:["n12","n39"],allocated:false},
-  {id:"n44",name:"Arcane Surge",type:"basic",x:460,y:560,radius:10,description:"+8% Spell Damage when leeching",stats:{spellDmgOnLeech:8},connections:["n36","n42"],allocated:false},
-  {id:"n45",name:"Energized",type:"basic",x:350,y:620,radius:10,description:"+10% Energy Shield",stats:{energyShield:10},connections:["n44"],allocated:false},
+  {id:"asc1",name:"Storm Caller",type:"ascendancy",x:1100,y:400,radius:16,description:"Lightning spells have +20% Cast Speed",stats:{castSpd:20},connections:["asc2","asc3"],allocated:false},
+  {id:"asc2",name:"Thundergod's Wrath",type:"ascendancy",x:1170,y:340,radius:14,description:"Your lightning damage cannot be reflected",stats:{noLightningReflect:true},connections:["asc1"],allocated:false},
+  {id:"asc3",name:"Tempest Soul",type:"ascendancy",x:1170,y:460,radius:14,description:"Gain +1% Lightning Damage per Level",stats:{dmgPerLevel:1},connections:["asc1"],allocated:false},
+  {id:"asc4",name:"Monk of the Storm",type:"ascendancy",x:1100,y:280,radius:16,description:"Channeling lightning spells generates mana",stats:{manaOnChannel:true},connections:["asc2"],allocated:false},
+  {id:"asc5",name:"Divine Lightning",type:"ascendancy",x:1240,y:400,radius:18,description:"Lightning skills ignore enemy Lightning Resistance",stats:{ignoreLightningRes:true},connections:["asc2","asc3"],allocated:false},
 ];
 
 // =============================================
@@ -1015,20 +1044,20 @@ function parseShareUrl(url) {
 
 function autoPlanFrom(character) {
   // Auto-allocate nodes based on character build data
-  // This is a simple heuristic based on class
   nodes.forEach(n => { n.allocated = (n.id === 'start'); });
 
   let allocCount = 0;
   if (character === 'monk') {
-    // Allocate intelligence/lightning nodes near start
-    const recommended = nodes.filter(n =>
-      n.id.includes('int') || n.id.includes('lightning') || n.id.includes('crit') || n.id.includes('spell')
-    ).slice(0, 30);
-    recommended.forEach(n => { if (allocateNode(n.id)) allocCount++; });
+    // Jordan's Lightning Monk — main path only
+    const mainPath = ['s1','s4','s5','n1','n2','n3','n4','n5','n6','n7',
+                      'n8','n9','n10','n11','n12','n13','n15',
+                      'n17','n18','n19','n20','n25','n26','n27'];
+    mainPath.forEach(id => { if (allocateNode(id)) allocCount++; });
   } else if (character === 'sorceress') {
-    // Allocate elemental/fire/cold nodes
+    // Sorceress — elemental/fire/cold nodes
     const recommended = nodes.filter(n =>
-      n.id.includes('elemental') || n.id.includes('fire') || n.id.includes('cold') || n.id.includes('spell')
+      n.name.toLowerCase().includes('elemental') || n.name.toLowerCase().includes('fire') ||
+      n.name.toLowerCase().includes('cold') || n.name.toLowerCase().includes('spell')
     ).slice(0, 30);
     recommended.forEach(n => { if (allocateNode(n.id)) allocCount++; });
   }
