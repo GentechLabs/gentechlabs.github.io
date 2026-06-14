@@ -1158,13 +1158,10 @@
         // Auto-refresh every 60 seconds
         setInterval(async () => {
             try {
-                const dataRes = await fetch('defi-data.json?' + Date.now());
-                const data = await dataRes.json();
-                if (defiDash) {
-                    defiDash.data = data;
-                    defiDash.render();
+                if (defiDash && defiDash.refreshData) {
+                    await defiDash.refreshData();
+                    console.log('[DeFi] Auto-refreshed at', new Date().toLocaleTimeString());
                 }
-                console.log('[DeFi] Auto-refreshed at', new Date().toLocaleTimeString());
             } catch (e) {
                 console.warn('[DeFi] Auto-refresh failed:', e.message);
             }
