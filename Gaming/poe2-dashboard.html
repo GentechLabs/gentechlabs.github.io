@@ -274,10 +274,14 @@
                 level: 26,
                 act: "Act 2",
                 skills: [
-                    { name: "Tempest Flurry", type: "Primary Attack — Lightning", role: "Main damage dealer" },
-                    { name: "Falling Thunder", type: "Burst Damage — Lightning", role: "Burst damage on shocked enemies" },
-                    { name: "Thunderstorm", type: "AoE Clear — Lightning", role: "AoE clear" },
-                    { name: "Orb of Storms", type: "Sustained Damage — Lightning", role: "Sustained damage" }
+                    { name: "Arc", type: "Primary — Lightning", role: "Main lightning damage, shock application" },
+                    { name: "Tempest Flurry", type: "Attack — Lightning", role: "Melee lightning attacks" },
+                    { name: "Falling Thunder", type: "Burst — Lightning", role: "Burst damage on shocked enemies" },
+                    { name: "Orb of Storms", type: "Sustained — Lightning", role: "Sustained AoE, loot bonus" },
+                    { name: "Siphoning Strike", type: "Attack", role: "Mana/life sustain" },
+                    { name: "Killing Palm", type: "Attack", role: "Culling strikes, loot bonus" },
+                    { name: "Mana Drain", type: "Utility", role: "Mana sustain for heavy casting" },
+                    { name: "Parry", type: "Defense", role: "Defensive mechanic" }
                 ],
                 progress: { campaign: 50, buildCompletion: 65, gemCollection: 45, metaAlignment: 70 }
             },
@@ -302,7 +306,7 @@
         // Meta builds data
         const metaBuilds = {
             "Monk": [
-                { name: "Lightning Invoker", tier: "S", key_skills: ["Tempest Flurry", "Falling Thunder", "Thunderstorm"], map_clear: "A", bossing: "S" },
+                { name: "Lightning Invoker", tier: "S", key_skills: ["Arc", "Falling Thunder", "Orb of Storms"], map_clear: "S", bossing: "S" },
                 { name: "Ice Invoker", tier: "A", key_skills: ["Ice Crash", "Frost Blades", "Ice Nova"], map_clear: "A", bossing: "A" },
                 { name: "Tempest Hybrid", tier: "A", key_skills: ["Tempest Flurry", "Storm Call", "Conductivity"], map_clear: "A", bossing: "A" }
             ],
