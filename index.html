@@ -454,7 +454,7 @@ html { scroll-behavior: smooth; }
         <div class="links">
             <a href="https://github.com/ProtoJay4789" target="_blank">🐙 GitHub</a>
             <a href="https://linkedin.com/in/protojay" target="_blank">💼 LinkedIn</a>
-            <a href="mailto:jordanjones0902@gmail.com">📧 Email</a>
+            <a href="mailto:jordanjones0902@gmail.com" target="_blank">📧 Email</a>
             <a href="https://github.com/ProtoJay4789" target="_blank">🚀 Projects</a>
         </div>
     </div>
@@ -464,11 +464,10 @@ html { scroll-behavior: smooth; }
             <h2>🧑‍💻 About</h2>
             <p style="color: #94a3b8; line-height: 1.8; font-size: 1.05em;">
                 Building at the intersection of <strong style="color: #3b82f6;">AI agents</strong> and <strong style="color: #3b82f6;">DeFi</strong>.
-                GenTech runs on a <strong style="color: #3b82f6;">single-agent architecture</strong> — one lead agent (Gentech) that spins up specialized subagents on demand. No multi-agent friction, no blown token budgets, no inter-agent communication overhead. Jordan stays team lead. Gentech handles everything: code, strategy, content, coordination.
-                <br><br>
-                We tried multi-agent swarms. Sounds great in theory — different perspectives, parallel workstreams, autonomous coordination. In practice: expensive, slow, and the communication overhead killed the ROI. One smart agent with audit cron jobs beats five agents arguing about who owns the PR.
-                <br><br>
+                Solo builder shipping protocol-level projects across hackathons. GenTech — AI agent infrastructure for the DeFi economy. From Agent Escrow to cross-chain payment routing to agent credit scoring.
                 Full-time Amazon by day, building the agent economy by night.
+                <br><br>
+                This portfolio demonstrates what a solo founder with a team of AI agents can ship.
             </p>
         </div>
 
@@ -598,52 +597,76 @@ html { scroll-behavior: smooth; }
       hackathon: '',
     },
     {
+      id: 'tech-payment-router',
+      title: 'Tech Payment Router',
+      description: 'Ethereum payment router with x402 protocol support. Enables automated recurring payments, subscription billing, and micro-transaction routing.',
+      tech: ['Ethereum', 'Solidity', 'x402', 'Payments'],
+      status: 'research',
+      deadline: 'None',
+      timeline: 'Feb 2026',
+      highlight: false,
+      vault_path: '03-Projects/tech-burn-test/',
+      hackathon: '',
+    },
+    {
       id: 'bags-fm',
       title: 'Bags FM',
-      description: 'AI agent trading desk for memecoin analysis on Solana. On hold — may revisit if traction picks up.',
+      description: 'AI agent trading desk for memecoin analysis on Solana. Hackathon ended. Passed — needs traction to win.',
       tech: ['Solana', 'AI Agents', 'Trading', 'Python'],
-      status: 'research',
-      deadline: null,
+      status: 'completed',
+      deadline: '2026-06-01',
+      timeline: 'Jun 2026',
+      highlight: true,
+      vault_path: '02-Labs/Hackathons/Bags-FM/',
+      hackathon: '',
+    },
+    {
+      id: 'google-cloud-rapid-agent',
+      title: 'Google Cloud Rapid Agent',
+      description: 'Gemini + Agent Builder + MCP integration. Dropped — doesn't align with our stack.',
+      tech: ['Google Cloud', 'Gemini', 'MCP', 'Python'],
+      status: 'shelved',
+      deadline: '2026-06-11',
       timeline: 'Jun 2026',
       highlight: false,
-      vault_path: '02-Labs/Hackathons/Bags-FM/',
+      vault_path: '02-Labs/Hackathons/Google-Cloud/',
       hackathon: '',
     },
     {
       id: 'somnia',
       title: 'Agent Catcher',
-      description: 'On-chain token risk oracle — rugpull detection via AI contract analysis. Completed but blocked by Somnia chain limitations. Code ready, chain not production-ready.',
+      description: 'On-chain token risk oracle using dual-agent pattern. Submitted to Somnia Agentathon.',
       tech: ['Solidity', 'Somnia', 'Hardhat', 'GoPlus API', 'Ethers.js'],
-      status: 'completed',
-      deadline: null,
+      status: 'submitted',
+      deadline: '2026-06-11',
       timeline: 'Jun 2026',
-      highlight: false,
+      highlight: true,
       vault_path: '02-Labs/Hackathons/Somnia/',
-      hackathon: '',
+      hackathon: 'Somnia Agentathon',
     },
     {
       id: 'agora-agents',
-      title: 'Agora Agents',
-      description: 'AI portfolio rebalancer on Circle Arc. Adaptive portfolio management for the Canteen × Circle × Arc hackathon. $50K prize pool.',
+      title: 'Agora Agents — AdaptiveFolio',
+      description: 'AI portfolio rebalancer on Circle Arc. Submitted to Canteen × Circle × Arc hackathon.',
       tech: ['Circle Arc', 'AI Agents', 'DeFi', 'Python'],
-      status: 'submitted',
+      status: 'completed',
       deadline: '2026-05-25',
       timeline: 'May 2026',
       highlight: true,
       vault_path: '02-Labs/Hackathons/Agora/',
-      hackathon: '',
+      hackathon: 'Agora Agents',
     },
     {
       id: 'swarms-acm',
       title: 'Swarms ACM LP Monitor',
-      description: 'DeFi LP monitoring agent built on Swarms framework. Published to Swarms Marketplace, tokenized Solana. Automated position tracking, rebalance signals, and fee analytics. $30K prize pool.',
+      description: 'DeFi LP monitoring agent built on Swarms framework. Published to Swarms Marketplace.',
       tech: ['Swarms', 'DeFi', 'Python', 'LP Monitoring'],
-      status: 'submitted',
+      status: 'completed',
       deadline: '2026-05-27',
       timeline: 'May 2026',
       highlight: true,
       vault_path: '02-Labs/Hackathons/Swarms-ACM/',
-      hackathon: '',
+      hackathon: 'Swarms ACM',
     },
     {
       id: 'rugcheck',
@@ -707,14 +730,14 @@ html { scroll-behavior: smooth; }
     },
     {
       id: 'gentech-dashboard',
-      title: 'GenTech Dashboard Engine',
-      description: 'Universal JSON-driven dashboard engine — 38KB zero-dep JS. DeFi-native (LP positions, DCA tracking, portfolio analytics) but general-purpose for any data visualization. Open-sourceable. Powers Jordan, Christel, and Vanito personal dashboards.',
-      tech: ['JavaScript', 'DeFi', 'JSON-Driven', 'Zero-Dep', 'Dashboard'],
+      title: 'GenTech Dashboard — Gaming Companion',
+      description: 'Uncensored, always-on gaming companion that monitors game ecosystems, tracks your build, and gives real-time optimization advice.',
+      tech: ['AI Agents', 'Gaming', 'Dashboard', 'Meta Tracking'],
       status: 'building',
-      deadline: null,
-      timeline: 'Jun 2026',
+      deadline: 'None',
+      timeline: 'May 2026',
       highlight: true,
-      vault_path: '09-Green Room/designs/genTech-dashboard-engine.md',
+      vault_path: '',
       hackathon: '',
     },
     {
@@ -766,17 +789,18 @@ html { scroll-behavior: smooth; }
       hackathon: '',
     },
     {
-      id: 'cookbook-nanopay',
-      title: 'GenTech Cookbook Nanopay',
-      description: 'Pay-per-recipe platform using Circle Gateway nanopayments on Arc. $0.005/recipe, $0.001/review. Gas-free x402 payments settling in <500ms. Built for Lepton Agents Hackathon (Canteen × Circle × Arc).',
-      tech: ["Circle Gateway", "Arc", "x402", "TypeScript", "Express", "USDC"],
-      status: 'building',
-      deadline: '2026-06-29',
+      id: 'agent-credit-score',
+      title: 'Agent Credit Score',
+      description: '0-850 credit scoring system for AI agents. Tracks win rate, risk-adjusted returns, consistency, and behavior across DeFi protocols. 22/22 tests passing. MIT licensed.',
+      tech: ['Python', 'Data Analytics', 'DeFi', 'Scoring'],
+      status: 'live',
+      deadline: 'None',
       timeline: 'Jun 2026',
       highlight: true,
-      vault_path: '02-Labs/Hackathons/Lepton/',
-    },
-]
+      vault_path: 'agent-credit-score/',
+      hackathon: '',
+    }
+  ];
             const filterBtns = document.querySelectorAll('#projects .filter-btn');
             const projectsContainer = document.getElementById('projects-container');
             
@@ -863,15 +887,15 @@ html { scroll-behavior: smooth; }
                 </div>
 
                 <div class="methodology-card">
-                    <h3>🏗️ Single-Agent Architecture</h3>
-                    <p>GenTech runs on a <strong>lead-agent model</strong> — one orchestrator that spins up specialized workers:</p>
+                    <h3>🏢 4-Department Agent Collaboration</h3>
+                    <p>GenTech runs as a <strong>virtual company</strong> with four departments:</p>
                     <ul class="dept-list">
-                        <li><strong>Gentech (Lead Agent):</strong> Strategy, code, content, coordination — the team lead. Always in control, always accountable.</li>
-                        <li><strong>Subagents (On Demand):</strong> Code reviews, research deep-dives, parallel builds — spawned when needed, killed when done. No persistent overhead.</li>
-                        <li><strong>Audit Cron Jobs:</strong> Automated self-review. Catches bugs, validates deployments, monitors health — no second agent required.</li>
-                        <li><strong>Jordan (Founder):</strong> Decisions, approvals, browser-dependent tasks, wallet operations — the human in the loop.</li>
+                        <li><strong>Strategies (YoYo):</strong> Numbers-first, risk-aware, portfolio optimization, LP monitoring, on-chain analytics — the quant mind.</li>
+                        <li><strong>Social Growth (DMOB):</strong> Distribution engine, X/Twitter amplification, hackathon visibility, content scaling — the megaphone.</li>
+                        <li><strong>Marketing (Desmond):</strong> Narrative positioning, brand voice, release comms, technical documentation — the storyteller.</li>
+                        <li><strong>Engineering (Jordan):</strong> Infrastructure, orchestration layer, prompt engineering, deployment automation — the builder.</li>
                     </ul>
-                    <p>We tried multi-agent swarms. The token cost was brutal, communication between agents added friction, and the "different perspectives" advantage was cheaper to get from a chat model and a code review cron. One smart agent with good tooling beats five agents with bad coordination.</p>
+                    <p>Each agent has a department, a role, and clear escalation paths. Projects aren't solo efforts — they're cross-functional deliveries where each department contributes its specialty.</p>
                 </div>
 
             </div>
@@ -1667,14 +1691,58 @@ html { scroll-behavior: smooth; }
                     <tr>
                         <th>Hackathon</th>
                         <th>Chain</th>
+                        <th>Prize</th>
                         <th>Deadline</th>
                         <th>Status</th>
                     </tr>
                     <tr>
-                        <td><strong>Lepton Agents</strong></td>
+                        <td><strong>Mantle Turing Test</strong></td>
+                        <td>Mantle</td>
+                        <td>$120K</td>
+                        <td>Jun 15</td>
+                        <td><span class="badge" style="background: rgba(239,68,68,0.15); color: #ef4444; padding: 3px 10px; border-radius: 9999px; font-size: 0.8em; font-weight: 600;">⚠️ DEPLOYING</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>BNB HACK: AI Trading Agent</strong></td>
+                        <td>BNB Chain</td>
+                        <td>$36K</td>
+                        <td>Jun 24</td>
+                        <td><span class="badge" style="background: rgba(251,191,36,0.15); color: #60a5fa; padding: 3px 10px; border-radius: 9999px; font-size: 0.8em; font-weight: 600;">REGISTERING</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Casper Agentic Buildathon</strong></td>
+                        <td>Casper (Rust/WASM)</td>
+                        <td>$150K</td>
+                        <td>Jun 30</td>
+                        <td><span class="badge badge-building">QUEUE</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Encode Solana + Arc Bootcamps</strong></td>
+                        <td>Solana / Arc</td>
+                        <td>Learning</td>
+                        <td>Jun 22 start</td>
+                        <td><span class="badge" style="background: rgba(251,191,36,0.15); color: #60a5fa; padding: 3px 10px; border-radius: 9999px; font-size: 0.8em; font-weight: 600;">SIGN UP NEEDED</span></td>
+                    </tr>
+                    <tr style="opacity: 0.5;">
+                        <td><strong>Arbitrum Open House</strong></td>
+                        <td>Arbitrum</td>
+                        <td>$415K</td>
+                        <td>Jun 14</td>
+                        <td><span class="badge" style="background: rgba(34,197,94,0.15); color: #3b82f6; padding: 3px 10px; border-radius: 9999px; font-size: 0.8em; font-weight: 600;">SHIPPED</span></td>
+                    </tr>
+                    <tr style="opacity: 0.5;">
+                        <td><strong>Somnia Agentathon</strong></td>
+                        <td>Somnia</td>
+                        <td>—</td>
+                        <td>Jun 11</td>
+                        <td><span class="badge" style="background: rgba(34,197,94,0.15); color: #3b82f6; padding: 3px 10px; border-radius: 9999px; font-size: 0.8em; font-weight: 600;">SUBMITTED</span></td>
+                    </tr>
+                    <tr style="opacity: 0.5;">
+                        <td><strong>Agora Agents</strong></td>
                         <td>Circle Arc</td>
-                        <td>Jun 29</td>
-                        <td><span class="badge badge-building">BUILDING</span></td>
+                        <td>$50K</td>
+                        <td>May 25</td>
+                        <td><span class="badge" style="background: rgba(107,114,128,0.15); color: #94a3b8; padding: 3px 10px; border-radius: 9999px; font-size: 0.8em; font-weight: 600;">COMPLETED</span></td>
                     </tr>
                 </table>
             </div>
@@ -1696,9 +1764,6 @@ html { scroll-behavior: smooth; }
                 <span class="skill-tag">LayerZero</span>
                 <span class="skill-tag">Wormhole</span>
                 <span class="skill-tag">x402</span>
-                <span class="skill-tag">Circle Gateway</span>
-                <span class="skill-tag">Arc L1</span>
-                <span class="skill-tag">Nanopayments</span>
                 <span class="skill-tag">GenLayer</span>
                 <span class="skill-tag">DeFi LP</span>
                 <span class="skill-tag">Cross-Chain</span>
@@ -1710,9 +1775,9 @@ html { scroll-behavior: smooth; }
         <div class="section">
             <h2>📈 Current Focus</h2>
             <p style="color: #94a3b8; line-height: 1.8;">
-                <strong>Building:</strong> GenTech Labs — an autonomous agent economy platform. DeFi dashboards, AI agent orchestration, cross-chain payment infrastructure, and nanopayment-powered creator tools. Single-agent Hermes setup shipping hackathons and open-source tools.<br><br>
-                <strong>Stack:</strong> Solidity, TypeScript, Circle/x402 nanopayments, Arc L1, Solana, Chainlink, cross-chain DeFi. Self-taught developer focused on smart contracts and agent-native finance.<br><br>
-                <strong>Career:</strong> Targeting remote roles in <strong>smart contract development</strong>, <strong>DeFi protocol engineering</strong>, or <strong>AI agent infrastructure</strong>. Leaving Amazon Q4 2026. Open to contract, full-time, or audit work.
+                <strong>Goal:</strong> Leave Amazon by Q4 2026 via hackathon wins → Code4rena auditing → remote crypto role or $3-5K/mo in audit/incentive income.<br><br>
+                <strong>Strategy:</strong> Build public proof-of-work. Win prizes. Stack credentials. Move to Philippines Q3 for geo-arbitrage.<br><br>
+                <strong>Learning:</strong> Solana development, Rust, advanced security patterns, cross-chain architecture.
             </p>
         </div>
 
