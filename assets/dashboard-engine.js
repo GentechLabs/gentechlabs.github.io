@@ -109,7 +109,7 @@ class DashboardEngine {
     // Colors
     if (theme.colors) {
       Object.entries(theme.colors).forEach(([key, val]) => {
-        root.style.setProperty(key, val);
+        root.style.setProperty(key, val + ' !important');
       });
     }
 
