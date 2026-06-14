@@ -787,8 +787,19 @@ html { scroll-behavior: smooth; }
       highlight: true,
       vault_path: 'AAE/Agent-ETFs.md',
       hackathon: '',
-    }
-  ];
+    },
+    {
+      id: 'cookbook-nanopay',
+      title: 'GenTech Cookbook Nanopay',
+      description: 'Pay-per-recipe platform using Circle Gateway nanopayments on Arc. $0.005/recipe, $0.001/review. Gas-free x402 payments settling in <500ms. Built for Lepton Agents Hackathon (Canteen × Circle × Arc).',
+      tech: ["Circle Gateway", "Arc", "x402", "TypeScript", "Express", "USDC"],
+      status: 'building',
+      deadline: '2026-06-29',
+      timeline: 'Jun 2026',
+      highlight: true,
+      vault_path: '02-Labs/Hackathons/Lepton/',
+    },
+]
             const filterBtns = document.querySelectorAll('#projects .filter-btn');
             const projectsContainer = document.getElementById('projects-container');
             
@@ -1731,6 +1742,12 @@ html { scroll-behavior: smooth; }
                         <td><span class="badge" style="background: rgba(251,191,36,0.15); color: #60a5fa; padding: 3px 10px; border-radius: 9999px; font-size: 0.8em; font-weight: 600;">REGISTER NEEDED</span></td>
                     </tr>
                     <tr>
+                        <td><strong>Lepton Agents</strong></td>
+                        <td>Circle Arc</td>
+                        <td>Jun 29</td>
+                        <td><span class="badge badge-building">BUILDING</span></td>
+                    </tr>
+                    <tr>
                         <td><strong>Kite AI</strong></td>
                         <td>Kite L1</td>
                         <td>May 17</td>
@@ -1756,6 +1773,9 @@ html { scroll-behavior: smooth; }
                 <span class="skill-tag">LayerZero</span>
                 <span class="skill-tag">Wormhole</span>
                 <span class="skill-tag">x402</span>
+                <span class="skill-tag">Circle Gateway</span>
+                <span class="skill-tag">Arc L1</span>
+                <span class="skill-tag">Nanopayments</span>
                 <span class="skill-tag">GenLayer</span>
                 <span class="skill-tag">DeFi LP</span>
                 <span class="skill-tag">Cross-Chain</span>
