@@ -1,20 +1,20 @@
 {
   "hero": {
     "positionUsd": 44.74,
-    "dailyFees": 0.205,
+    "dailyFees": 0.325,
     "efficiency": 81.1,
     "efficiencyZone": "Center",
     "rangeStatus": "In Range",
-    "currentPrice": 6.52,
-    "rangeMin": 6.43,
-    "rangeMax": 6.59,
+    "currentPrice": 6.42,
+    "rangeMin": 6.30,
+    "rangeMax": 6.55,
     "milestoneCurrent": "Unranked",
     "milestoneNext": "Scout",
     "milestoneTarget": 5,
-    "milestoneProgress": 4.1
+    "milestoneProgress": 6.5
   },
   "marketIntel": {
-    "avaxPrice": 6.52,
+    "avaxPrice": 6.42,
     "change24h": -0.3,
     "volume24h": 435300,
     "tvl": 366900,
@@ -33,20 +33,20 @@
     "dcaDetails": "Center zone — full DCA deploy on Monday. Position is healthy, no rebalance needed.",
     "rebalanceTrigger": "Below 50% efficiency",
     "compoundThreshold": 50,
-    "cumulativeFees": 0.205,
-    "nextCompound": "$49.80 away",
+    "cumulativeFees": 0.325,
+    "nextCompound": "$49.68 away",
     "riskLevel": "Low",
-    "riskNote": "Tight range in center zone. Monitor for volatility spikes."
+    "riskNote": "Bid-Ask shape earns at edges. Monitor for volatility spikes."
   },
   "lpPosition": {
     "protocol": "LFJ (Trader Joe)",
     "chain": "Avalanche",
     "pair": "AVAX / USDC",
     "feeTier": "5 bps",
-    "shape": "Curve",
-    "currentPrice": 6.52,
-    "rangeMin": 6.43,
-    "rangeMax": 6.59,
+    "shape": "Bidirectional",
+    "currentPrice": 6.42,
+    "rangeMin": 6.30,
+    "rangeMax": 6.55,
     "numBins": 149,
     "deposit": {
       "avax": 2.937,
@@ -55,38 +55,41 @@
       "usdcValue": 25.59
     },
     "rewards": { "avax": 0, "value": 0 },
-    "fees24h": { "total": 0, "avax": 0, "avaxValue": 0, "usdc": 0, "usdcValue": 0 }
+    "fees24h": {
+      "total": 0.325,
+      "avax": 0.0276,
+      "avaxValue": 0.1774,
+      "usdc": 0.14747,
+      "usdcValue": 0.14743
+    }
   },
   "curveData": {
-    "rangeMin": 6.43,
-    "rangeMax": 6.59,
-    "currentPrice": 6.52,
-    "peakCenter": 6.51,
+    "rangeMin": 6.30,
+    "rangeMax": 6.55,
+    "currentPrice": 6.42,
+    "peakCenter": 6.425,
     "peakHeight": 1.0,
+    "shape": "bidirectional",
     "bins": [
-      {"price": 6.430, "depth": 0.05}, {"price": 6.435, "depth": 0.08},
-      {"price": 6.440, "depth": 0.12}, {"price": 6.445, "depth": 0.18},
-      {"price": 6.450, "depth": 0.25}, {"price": 6.455, "depth": 0.33},
-      {"price": 6.460, "depth": 0.42}, {"price": 6.465, "depth": 0.52},
-      {"price": 6.470, "depth": 0.62}, {"price": 6.475, "depth": 0.71},
-      {"price": 6.480, "depth": 0.80}, {"price": 6.485, "depth": 0.87},
-      {"price": 6.490, "depth": 0.93}, {"price": 6.495, "depth": 0.97},
-      {"price": 6.500, "depth": 1.00}, {"price": 6.505, "depth": 0.99},
-      {"price": 6.510, "depth": 0.97}, {"price": 6.515, "depth": 0.93},
-      {"price": 6.520, "depth": 0.88}, {"price": 6.525, "depth": 0.82},
-      {"price": 6.530, "depth": 0.75}, {"price": 6.535, "depth": 0.67},
-      {"price": 6.540, "depth": 0.58}, {"price": 6.545, "depth": 0.50},
-      {"price": 6.550, "depth": 0.42}, {"price": 6.555, "depth": 0.35},
-      {"price": 6.560, "depth": 0.28}, {"price": 6.565, "depth": 0.22},
-      {"price": 6.570, "depth": 0.17}, {"price": 6.575, "depth": 0.13},
-      {"price": 6.580, "depth": 0.10}, {"price": 6.585, "depth": 0.07},
-      {"price": 6.590, "depth": 0.05}
+      {"price": 6.300, "depth": 0.95}, {"price": 6.310, "depth": 0.80},
+      {"price": 6.320, "depth": 0.60}, {"price": 6.330, "depth": 0.40},
+      {"price": 6.340, "depth": 0.25}, {"price": 6.350, "depth": 0.15},
+      {"price": 6.360, "depth": 0.08}, {"price": 6.370, "depth": 0.04},
+      {"price": 6.380, "depth": 0.02}, {"price": 6.390, "depth": 0.01},
+      {"price": 6.400, "depth": 0.01}, {"price": 6.410, "depth": 0.02},
+      {"price": 6.420, "depth": 0.04}, {"price": 6.430, "depth": 0.08},
+      {"price": 6.440, "depth": 0.15}, {"price": 6.450, "depth": 0.25},
+      {"price": 6.460, "depth": 0.40}, {"price": 6.470, "depth": 0.60},
+      {"price": 6.480, "depth": 0.80}, {"price": 6.490, "depth": 0.95},
+      {"price": 6.500, "depth": 0.80}, {"price": 6.510, "depth": 0.60},
+      {"price": 6.520, "depth": 0.40}, {"price": 6.530, "depth": 0.25},
+      {"price": 6.540, "depth": 0.15}, {"price": 6.550, "depth": 0.08}
     ]
   },
   "feeMilestones": {
-    "currentDailyFees": 0.205,
+    "currentDailyFees": 0.325,
     "positionUsd": 44.74,
-    "cumulativeFees": 0.205,
+    "cumulativeFees": 0.325,
     "daysActive": 1,
     "tiers": [
       { "tier": 1, "label": "Scout", "target": 5, "icon": "🎖️", "unlocks": "Entry strategies (CURVE)" },
@@ -97,7 +100,7 @@
     ]
   },
   "transactions": [
-    { "date": "2026-06-14", "type": "Agent Rebalance", "token": "AVAX/USDC", "amount": "Range 6.43-6.59", "usd": 44.74, "status": "Active" },
-    { "date": "2026-06-14", "type": "Agent Rebalance", "token": "AVAX/USDC", "amount": "Range 6.55-6.71", "usd": 46.45, "status": "Completed" }
+    { "date": "2026-06-14", "type": "Agent Rebalance", "token": "AVAX/USDC", "amount": "Bid-Ask 6.30-6.55", "usd": 44.74, "status": "Active" },
+    { "date": "2026-06-14", "type": "Agent Rebalance", "token": "AVAX/USDC", "amount": "Curve 6.43-6.59", "usd": 44.74, "status": "Completed" }
   ]
 }
