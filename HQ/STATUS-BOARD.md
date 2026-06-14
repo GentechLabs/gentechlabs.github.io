@@ -1,6 +1,6 @@
 # 📋 GenTech Status Board
 
-**Last updated:** 2026-06-13 (nightly sweep)
+**Last updated:** 2026-06-14 (nightly sweep)
 **Updated by:** Gentech
 
 > Jordan: This is your single file to check. Open it, know everything.
@@ -76,12 +76,12 @@
 - ~~**Jun 11:** Google Cloud Rapid Agent — $60K~~ ✅ NOT PURSUING (enterprise lock-in)
 - ~~**Jun 11:** Somnia Agentathon~~ ✅ PASSED (deadline missed)
 - ~~**Jun 12:** Dev3pack Bridge Accelerator~~ ❌ CANCELLED
-- ⚠️ **Jun 14:** Arbitrum Open House submission (1 day)
-- ⚠️ **Jun 15:** Mantle Turing Test Phase II — 2 days left
-- **Jun 15:** FIND EVIL! — $22K, cybersecurity + AI, MCP
-- **Jun 19:** Encode Vibe Coding Hackathon — 3-day sprint
-- **Jun 21:** Sui Overflow — Jordan to verify registration
-- **Jun 22:** Encode Solana + Arc Bootcamps — sign up needed
+- ⚠️ **Jun 14:** Arbitrum Open House submission — **TODAY**
+- ⚠️ **Jun 15:** Mantle Turing Test Phase II — **TOMORROW** (1 day)
+- ⚠️ **Jun 15:** FIND EVIL! — $22K, cybersecurity + AI, MCP — **TOMORROW**
+- **Jun 19:** Encode Vibe Coding Hackathon — 3-day sprint (5 days)
+- **Jun 21:** Sui Overflow — Jordan to verify registration (7 days)
+- **Jun 22:** Encode Solana + Arc Bootcamps — sign up needed (8 days)
 - **Rolling:** Alliance AI application — submit at https://alliance.xyz/apply
 
 ---
@@ -90,8 +90,8 @@
 
 - **Approval Queue:** ✅ Clean — no pending items
 - **Considerations:** ✅ Active items current
-- **Working Memory:** ✅ Updated June 13
-- **Status Board:** ✅ Updated June 13
+- **Working Memory:** ✅ Updated June 14
+- **Status Board:** ✅ Updated June 14
 
 ---
 

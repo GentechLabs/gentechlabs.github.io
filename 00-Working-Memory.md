@@ -1,12 +1,12 @@
 ---
-date: 2026-06-13
+date: 2026-06-14
 purpose: Working memory — current sprint state, blockers, priorities
-updated: 2026-06-13
+updated: 2026-06-14
 ---
 
-# GenTech Working Memory — Updated 2026-06-13
+# GenTech Working Memory — Updated 2026-06-14
 
-## Active Sprint — Week of Jun 7–13, 2026
+## Active Sprint — Week of Jun 14–21, 2026
 
 ### 🔥 Current Focus
 - **Vault index system deployed** — 7 INDEX.md files created, wikilink network established
@@ -14,21 +14,19 @@ updated: 2026-06-13
 - **Hackathon wave active** — multiple deadlines this week
 - **Trip planning active** — Philippines birthday trip Aug/Sep 2026
 
-### Completed Today (Jun 7)
-- ✅ **Vault index system built** — Root INDEX.md + 7 section indexes with cross-links
-- ✅ **00-Working-Memory refreshed** — Current state documented
-- ✅ **README.md updated** — Quick-start guide with navigation
+### Completed Today (Jun 14)
+- ✅ **Nightly sweep** — Archived stale files, synced deadlines, backed up vault
 
 ### Priority Hackathons (This Week)
 - ~~**Google Cloud Rapid Agent**~~ — ❌ DROPPED (enterprise lock-in)
 - ~~**Somnia Agentathon**~~ — ✅ SUBMITTED Jun 10, deadline Jun 11 passed
 - ~~**Dev3pack Bridge Accelerator**~~ — ❌ CANCELLED
-- ⚠️ **Arbitrum Open House ($415K)** — 🟢 SHIPPED | Due: Jun 14 (1 day) | AgentForge ready
-- ⚠️ **Mantle Turing Test ($120K)** — 🟡 REGISTER + DEPLOY | Due: Jun 15 (2 days) | Phase II
+- ⚠️ **Arbitrum Open House ($415K)** — 🟢 SHIPPED | Due: Jun 14 (TODAY) | AgentForge ready
+- ⚠️ **Mantle Turing Test ($120K)** — 🟡 REGISTER + DEPLOY | Due: Jun 15 (TOMORROW) | Phase II
 
 ### Queued (Deadlines Ahead)
-- **Sui Overflow** — 🟡 QUEUED | Due: Jun 21 (8 days) | Move contract built
-- **Encode Solana + Arc Bootcamps** — 🟡 SIGN UP NEEDED | Start: Jun 22 (9 days)
+- **Sui Overflow** — 🟡 QUEUED | Due: Jun 21 (7 days) | Move contract built
+- **Encode Solana + Arc Bootcamps** — 🟡 SIGN UP NEEDED | Start: Jun 22 (8 days)
 
 ### Grant Applications (Rolling)
 - Solana Foundation — $200-400K
@@ -78,19 +76,19 @@ updated: 2026-06-13
 
 ## Key Dates
 
-- ⚠️ **Jun 14:** Arbitrum Open House submission (1 day)
-- ⚠️ **Jun 15:** Mantle Turing Test Phase II (2 days)
-- **Jun 15:** FIND EVIL! — $22K, cybersecurity + AI
-- **Jun 19:** Encode Vibe Coding Hackathon
-- **Jun 21:** Sui Overflow deadline (8 days)
-- **Jun 22:** Encode Solana + Arc Bootcamps start (9 days)
-- **Jul 9:** Qwen Cloud AI Hackathon (26 days)
+- ⚠️ **Jun 14:** Arbitrum Open House submission — **TODAY**
+- ⚠️ **Jun 15:** Mantle Turing Test Phase II — **TOMORROW** (1 day)
+- ⚠️ **Jun 15:** FIND EVIL! — $22K, cybersecurity + AI — **TOMORROW**
+- **Jun 19:** Encode Vibe Coding Hackathon (5 days)
+- **Jun 21:** Sui Overflow deadline (7 days)
+- **Jun 22:** Encode Solana + Arc Bootcamps start (8 days)
+- **Jul 9:** Qwen Cloud AI Hackathon (25 days)
 - **Rolling:** Alliance AI — https://alliance.xyz/apply
 - **Aug/Sep 2026:** Philippines birthday trip (book flights ASAP)
 
 ---
 
-## Key Lessons
+*Last refreshed: 2026-06-14. This file is Jordan's quick-reference for current state.*
 
 1. **Nightly sweeps keep coordination clean** — stale files archived, timestamps synced
 2. **Vault index system solves orphan rate** — wikilinks connect every section
