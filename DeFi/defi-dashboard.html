@@ -3,266 +3,983 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GenTech Dashboard — DeFi</title>
+    <title>GenTech Dashboard — AAE DeFi</title>
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --bg: #0a0e17;
-            --panel-bg: #111827;
-            --panel-border: #1f2937;
-            --text: #e5e7eb;
-            --text-dim: #6b7280;
-            --gold: #e8652a;
-            --accent: #e84142;
-            --danger: #ff3366;
-            --success: #00ff88;
-            --cyan: #00d4ff;
-            --radius: 12px;
+        /* AAE DeFi LP Curve specific overrides */
+
+        /* Agent status pulse */
+        .agent-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 14px;
+            border-radius: 20px;
+            background: rgba(0, 255, 136, 0.08);
+            border: 1px solid rgba(0, 255, 136, 0.2);
+            font-size: 0.8em;
+            color: var(--gold);
+            margin-bottom: 20px;
         }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
-        .hub-link { position: fixed; top: 12px; left: 12px; text-decoration: none; color: var(--text-dim); font-size: 0.85em; padding: 6px 12px; border: 1px solid var(--panel-border); border-radius: 6px; transition: all 0.2s; z-index: 1000; background: var(--panel-bg); }
-        .hub-link:hover { border-color: var(--gold); color: var(--gold); }
-        .container { max-width: 480px; margin: 0 auto; padding: 16px; padding-top: 50px; }
-        .header { text-align: center; padding: 20px 0; }
-        .header h1 { font-family: 'Cinzel', serif; color: var(--gold); font-size: 1.5em; }
-        .header .subtitle { color: var(--text-dim); font-size: 0.85em; margin-top: 4px; }
-        .badge { display: inline-block; font-size: 0.7em; padding: 3px 10px; border-radius: 20px; background: rgba(232,101,42,0.12); color: var(--gold); border: 1px solid rgba(232,101,42,0.3); }
-        .badge.green { background: rgba(0,255,136,0.1); color: var(--success); border-color: rgba(0,255,136,0.3); }
-        .badge.red { background: rgba(255,51,102,0.1); color: var(--danger); border-color: rgba(255,51,102,0.3); }
-        .stat-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; }
-        .stat-card { background: var(--panel-bg); border: 1px solid var(--panel-border); border-radius: var(--radius); padding: 14px; text-align: center; }
-        .stat-card.full { grid-column: 1 / -1; }
-        .stat-label { font-size: 0.65em; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-dim); margin-bottom: 4px; }
-        .stat-value { font-size: 1.4em; font-weight: 700; font-family: 'JetBrains Mono', monospace; color: var(--gold); }
-        .stat-value.green { color: var(--success); }
-        .stat-value.red { color: var(--danger); }
-        .stat-value.cyan { color: var(--cyan); }
-        .stat-sub { font-size: 0.72em; color: var(--text-dim); margin-top: 2px; }
-        .card { background: var(--panel-bg); border: 1px solid var(--panel-border); border-radius: var(--radius); padding: 14px; margin-bottom: 10px; }
-        .card-title { font-size: 0.7em; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-dim); margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
-        .card-title .dot { width: 5px; height: 5px; border-radius: 50%; background: var(--gold); }
-        .range-bar { position: relative; height: 28px; background: var(--bg); border-radius: 6px; overflow: hidden; margin: 8px 0; }
-        .range-fill { position: absolute; height: 100%; background: linear-gradient(90deg, rgba(232,65,66,0.3), rgba(232,101,42,0.5), rgba(0,255,136,0.3)); border-radius: 6px; }
-        .range-marker { position: absolute; top: -2px; width: 3px; height: 32px; background: #fff; border-radius: 2px; box-shadow: 0 0 8px rgba(255,255,255,0.5); transition: left 0.3s; }
-        .range-labels { display: flex; justify-content: space-between; font-size: 0.72em; color: var(--text-dim); font-family: 'JetBrains Mono', monospace; }
-        .range-current { text-align: center; font-size: 0.78em; color: var(--cyan); margin-top: 4px; }
-        .pos-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
-        .pos-row:last-child { border-bottom: none; }
-        .pos-token { font-weight: 600; font-size: 0.9em; }
-        .pos-amount { font-family: 'JetBrains Mono', monospace; font-size: 0.82em; color: var(--text-dim); }
-        .pos-value { font-family: 'JetBrains Mono', monospace; font-weight: 600; color: var(--gold); }
-        .config-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
-        .config-item { padding: 8px; background: var(--bg); border-radius: 6px; }
-        .config-key { font-size: 0.6em; text-transform: uppercase; letter-spacing: 1px; color: var(--text-dim); margin-bottom: 2px; }
-        .config-val { font-family: 'JetBrains Mono', monospace; font-size: 0.82em; font-weight: 500; }
-        .portfolio-link { display: block; text-align: center; padding: 12px; background: var(--panel-bg); border: 1px solid var(--panel-border); border-radius: var(--radius); color: var(--gold); text-decoration: none; font-size: 0.85em; font-weight: 600; margin-top: 12px; transition: all 0.2s; }
-        .portfolio-link:hover { background: rgba(232,101,42,0.1); border-color: var(--gold); }
-        .footer { text-align: center; padding: 14px; font-size: 0.65em; color: var(--text-dim); opacity: 0.5; }
-        .avax-accent { background: linear-gradient(135deg, rgba(232,65,66,0.08), rgba(232,101,42,0.08)); border: 1px solid rgba(232,65,66,0.2); border-radius: var(--radius); padding: 12px; margin-bottom: 12px; }
-        .avax-accent .avax-label { font-size: 0.65em; text-transform: uppercase; letter-spacing: 1.5px; color: var(--accent); margin-bottom: 4px; }
-        .pulse { width: 6px; height: 6px; border-radius: 50%; background: var(--success); animation: pulse 2s ease-in-out infinite; display: inline-block; }
-        @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
-        .status-badge { display: inline-flex; align-items: center; gap: 6px; padding: 5px 12px; border-radius: 20px; font-size: 0.75em; font-weight: 500; }
-        .status-badge.active { background: rgba(0,255,136,0.1); border: 1px solid rgba(0,255,136,0.25); color: var(--success); }
-        .loading { text-align: center; padding: 40px; color: var(--text-dim); }
+        .agent-status .pulse {
+            width: 8px;
+            height: 8px;
+            background: var(--gold);
+            border-radius: 50%;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        /* Scout Fleet Cards */
+        .scout-card {
+            background: var(--panel-bg);
+            border: 1px solid var(--panel-border);
+            border-radius: var(--radius);
+            padding: 18px;
+            transition: all 0.25s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .scout-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gold);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .scout-card:hover::before {
+            opacity: 1;
+        }
+        .scout-card:hover {
+            border-color: var(--gold);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 255, 136, 0.08);
+        }
+        .scout-card.active {
+            border-color: rgba(0, 255, 136, 0.3);
+        }
+        .scout-card.active::before {
+            opacity: 1;
+            background: var(--success);
+        }
+        .scout-name {
+            font-size: 1.1em;
+            font-weight: 700;
+            color: var(--gold);
+            margin-bottom: 8px;
+        }
+        .scout-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.75em;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        .scout-status.active {
+            background: rgba(0, 255, 136, 0.12);
+            color: var(--success);
+        }
+        .scout-status.scanning {
+            background: rgba(0, 204, 255, 0.12);
+            color: var(--accent);
+        }
+        .scout-status.monitoring {
+            background: rgba(245, 158, 11, 0.12);
+            color: var(--warning);
+        }
+        .scout-status.idle {
+            background: rgba(107, 114, 128, 0.12);
+            color: var(--text-dim);
+        }
+        .scout-status .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: currentColor;
+        }
+        .scout-status.active .dot {
+            animation: pulse 2s ease-in-out infinite;
+        }
+        .scout-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85em;
+            color: var(--text-dim);
+            margin-top: 8px;
+        }
+        .scout-findings {
+            font-weight: 600;
+            color: var(--gold);
+        }
+
+        /* Opportunity Feed */
+        .opportunity-row {
+            transition: background 0.2s ease;
+        }
+        .opportunity-row:hover {
+            background: rgba(0, 255, 136, 0.03) !important;
+        }
+        .risk-badge {
+            padding: 3px 8px;
+            border-radius: 8px;
+            font-size: 0.8em;
+            font-weight: 600;
+        }
+        .risk-badge.low {
+            background: rgba(0, 255, 136, 0.12);
+            color: var(--success);
+        }
+        .risk-badge.medium {
+            background: rgba(245, 158, 11, 0.12);
+            color: var(--warning);
+        }
+        .risk-badge.high {
+            background: rgba(255, 51, 102, 0.12);
+            color: var(--danger);
+        }
+
+        /* Agent Action Log */
+        .agent-action-row {
+            border-left: 3px solid transparent;
+            transition: all 0.2s ease;
+        }
+        .agent-action-row:hover {
+            border-left-color: var(--gold);
+            background: rgba(0, 255, 136, 0.02);
+        }
+
+        /* LP Curve container */
+        .lp-curve-container {
+            background: var(--panel-bg);
+            border: 1px solid var(--panel-border);
+            border-radius: var(--radius);
+            padding: 24px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Curve canvas */
+        .lp-curve-canvas {
+            width: 100%;
+            height: 280px;
+            position: relative;
+        }
+
+        .lp-curve-canvas canvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        /* Price marker */
+        .price-marker {
+            position: absolute;
+            top: 0;
+            width: 2px;
+            height: 100%;
+            background: var(--gold);
+            box-shadow: 0 0 8px rgba(0, 255, 136, 0.5);
+            transition: left 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 10;
+        }
+        .price-marker::after {
+            content: attr(data-price);
+            position: absolute;
+            top: -24px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--gold);
+            color: #0a0e17;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.75em;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        /* Range labels */
+        .range-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 12px;
+            padding: 0 4px;
+        }
+        .range-label {
+            font-size: 0.8em;
+            color: var(--text-dim);
+        }
+        .range-label .value {
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        /* Curve info bar */
+        .curve-info {
+            display: flex;
+            gap: 20px;
+            margin-top: 16px;
+            padding: 12px 16px;
+            background: rgba(0, 255, 136, 0.05);
+            border-radius: var(--radius);
+            border: 1px solid rgba(0, 255, 136, 0.1);
+        }
+        .curve-info-item {
+            text-align: center;
+            flex: 1;
+        }
+        .curve-info-label {
+            font-size: 0.7em;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .curve-info-value {
+            font-size: 1.1em;
+            font-weight: 700;
+            color: var(--gold);
+            margin-top: 4px;
+        }
+
+        /* Token cards */
+        .token-card {
+            background: var(--panel-bg);
+            border: 1px solid var(--panel-border);
+            border-radius: var(--radius);
+            padding: 18px;
+            transition: all 0.25s ease;
+        }
+        .token-card:hover {
+            border-color: var(--gold);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 255, 136, 0.08);
+        }
+        .token-symbol {
+            font-size: 1.4em;
+            font-weight: 700;
+            color: var(--gold);
+        }
+        .token-name {
+            color: var(--text-dim);
+            font-size: 0.85em;
+            margin-bottom: 12px;
+        }
+        .token-balance {
+            font-size: 1.1em;
+            font-weight: 500;
+            color: var(--text);
+            margin-bottom: 4px;
+        }
+        .token-value {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: var(--gold);
+            margin-bottom: 4px;
+        }
+        .token-change { font-size: 0.85em; font-weight: 500; }
+        .token-change[data-positive="true"] { color: var(--success); }
+        .token-change[data-positive="false"] { color: var(--danger); }
+
+        /* Agent action highlight in tables */
+        .dashboard-table tr:hover td {
+            background: rgba(0, 255, 136, 0.03) !important;
+        }
+
+        /* Milestone category headers */
+        .milestone-earnings {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+            padding: 12px 16px;
+            background: rgba(0, 255, 136, 0.05);
+            border-radius: var(--radius);
+            border: 1px solid rgba(0, 255, 136, 0.1);
+        }
+        .earnings-item {
+            text-align: center;
+            flex: 1;
+        }
+        .earnings-label {
+            font-size: 0.75em;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .earnings-value {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: var(--gold);
+            margin-top: 4px;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.3); }
+        }
+
+        /* Glow animation for price line */
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 8px rgba(0, 255, 136, 0.5); }
+            50% { box-shadow: 0 0 16px rgba(0, 255, 136, 0.8); }
+        }
+        .price-marker {
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        /* Fee Milestones */
+        .milestone-ladder {
+            background: var(--panel-bg);
+            border: 1px solid var(--panel-border);
+            border-radius: var(--radius);
+            padding: 24px;
+        }
+        .milestone-tier {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px;
+            margin-bottom: 12px;
+            background: rgba(255,255,255,0.02);
+            border-radius: 10px;
+            border: 1px solid var(--panel-border);
+            transition: all 0.3s ease;
+        }
+        .milestone-tier.current {
+            border-color: var(--gold);
+            background: rgba(0, 255, 136, 0.05);
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.1);
+        }
+        .milestone-tier.achieved {
+            border-color: rgba(0, 255, 136, 0.3);
+            opacity: 0.7;
+        }
+        .tier-icon {
+            font-size: 2em;
+            width: 50px;
+            text-align: center;
+        }
+        .tier-info {
+            flex: 1;
+        }
+        .tier-label {
+            font-size: 1.1em;
+            font-weight: 700;
+            color: var(--text);
+        }
+        .tier-target {
+            color: var(--gold);
+            font-weight: 600;
+        }
+        .tier-unlocks {
+            font-size: 0.8em;
+            color: var(--text-dim);
+            margin-top: 4px;
+        }
+        .tier-progress {
+            width: 120px;
+        }
+        .tier-progress-bar {
+            height: 6px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 3px;
+            overflow: hidden;
+            margin-bottom: 4px;
+        }
+        .tier-progress-fill {
+            height: 100%;
+            background: var(--gold);
+            border-radius: 3px;
+            transition: width 0.8s ease;
+        }
+        .tier-progress-text {
+            font-size: 0.75em;
+            color: var(--text-dim);
+            text-align: right;
+        }
+
+        /* Trajectory */
+        .trajectory-container {
+            background: var(--panel-bg);
+            border: 1px solid var(--panel-border);
+            border-radius: var(--radius);
+            padding: 24px;
+        }
+        .trajectory-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .trajectory-current {
+            text-align: center;
+        }
+        .trajectory-current-value {
+            font-size: 2.5em;
+            font-weight: 700;
+            color: var(--gold);
+        }
+        .trajectory-current-label {
+            font-size: 0.8em;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .trajectory-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-top: 20px;
+        }
+        .trajectory-stat {
+            text-align: center;
+            padding: 16px;
+            background: rgba(255,255,255,0.02);
+            border-radius: 10px;
+            border: 1px solid var(--panel-border);
+        }
+        .trajectory-stat-value {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: var(--gold);
+        }
+        .trajectory-stat-label {
+            font-size: 0.75em;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 4px;
+        }
+        .trajectory-next {
+            margin-top: 20px;
+            padding: 16px;
+            background: rgba(0, 255, 136, 0.05);
+            border-radius: 10px;
+            border: 1px solid rgba(0, 255, 136, 0.2);
+            text-align: center;
+        }
+        .trajectory-next-label {
+            font-size: 0.8em;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .trajectory-next-value {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: var(--gold);
+            margin-top: 8px;
+        }
+        .trajectory-next-detail {
+            font-size: 0.85em;
+            color: var(--text-dim);
+            margin-top: 8px;
+        }
     </style>
 </head>
 <body>
-    <a href="../hub.html" class="hub-link">🏠 Hub</a>
+    <div id="app"></div>
 
-    <div class="container">
-        <div class="header">
-            <h1>GENTECH DASHBOARD</h1>
-            <div class="subtitle">AVAX/USDC LFJ Position</div>
-        </div>
-
-        <div style="text-align:center; margin-bottom: 12px;">
-            <span class="status-badge active" id="lp-status">
-                <span class="pulse"></span> <span id="lp-status-text">Connecting...</span>
-            </span>
-        </div>
-
-        <div class="avax-accent">
-            <div class="avax-label">🔺 Avalanche C-Chain · LFJ Concentrated Liquidity</div>
-            <div style="font-size:0.85em; color:var(--text-dim);">AVAX/USDC · 0.05% Fee Tier · Curve Shape</div>
-        </div>
-
-        <div class="stat-row">
-            <div class="stat-card full">
-                <div class="stat-label">Total Position</div>
-                <div class="stat-value" id="total-value">—</div>
-                <div class="stat-sub" id="position-split">Loading...</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-label">AVAX Price</div>
-                <div class="stat-value cyan" id="avax-price">—</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-label">24h</div>
-                <div class="stat-value" id="change-24h">—</div>
-            </div>
-        </div>
-
-        <div class="stat-row">
-            <div class="stat-card">
-                <div class="stat-label">Fee Efficiency</div>
-                <div class="stat-value" id="efficiency" style="font-size:1.2em;">—</div>
-                <div class="stat-sub" id="efficiency-zone"></div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-label">Range Status</div>
-                <div class="stat-value" id="range-status" style="font-size:1.1em;">—</div>
-                <div class="stat-sub" id="range-detail"></div>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-title"><span class="dot"></span> Liquidity Range</div>
-            <div class="range-bar">
-                <div class="range-fill" style="left:0; width:100%;"></div>
-                <div class="range-marker" id="range-marker" style="left:50%;"></div>
-            </div>
-            <div class="range-labels">
-                <span id="range-low">$6.55</span>
-                <span id="range-high">$6.71</span>
-            </div>
-            <div class="range-current">Current: <strong id="range-current-price">—</strong></div>
-        </div>
-
-        <div class="card">
-            <div class="card-title"><span class="dot"></span> Position Breakdown</div>
-            <div class="pos-row">
-                <span class="pos-token">AVAX</span>
-                <span class="pos-amount" id="avax-amount">2.19</span>
-                <span class="pos-value" id="avax-val">—</span>
-            </div>
-            <div class="pos-row">
-                <span class="pos-token">USDC</span>
-                <span class="pos-amount" id="usdc-amount">30.88</span>
-                <span class="pos-value" id="usdc-val">$30.88</span>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-title"><span class="dot"></span> Config</div>
-            <div class="config-grid">
-                <div class="config-item">
-                    <div class="config-key">Fee</div>
-                    <div class="config-val">0.05%</div>
-                </div>
-                <div class="config-item">
-                    <div class="config-key">Shape</div>
-                    <div class="config-val">Curve</div>
-                </div>
-                <div class="config-item">
-                    <div class="config-key">Chain</div>
-                    <div class="config-val">Avalanche</div>
-                </div>
-                <div class="config-item">
-                    <div class="config-key">Protocol</div>
-                    <div class="config-val">LFJ</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="footer" id="defi-footer">Loading live data from DexScreener...</div>
-    </div>
-
+    <script src="../assets/dashboard-engine.js?v=2.0"></script>
     <script>
-        var POOL_ADDRESS = '0x864d4e5ee7318e97483db7eb0912e09f161516ea';
-        var RANGE_LOW = 6.55;
-        var RANGE_HIGH = 6.71;
-        var SHAPE = 'curve';
-        var AVAX_HELD = 2.19;
-        var USDC_HELD = 30.88;
-        var REFRESH_MS = 60000;
+        // ══════════════════════════════════════════════
+        // LP CURVE RENDERER
+        // Draws a bell curve shape that shifts left/right with price
+        // ══════════════════════════════════════════════
 
-        function calcEfficiency(price, low, high, shape) {
-            if (price < low || price > high) return 0;
-            var pos = (price - low) / (high - low);
-            if (shape === 'spot') return 100;
-            if (shape === 'bidirectional') return Math.max(0, Math.min(100, Math.abs(pos - 0.5) * 2 * 100));
-            return Math.max(0, Math.min(100, (1 - Math.abs(pos - 0.5) * 2) * 100));
+        class LPCurveRenderer {
+            constructor(container, data, options = {}) {
+                this.container = container;
+                this.data = data;
+                this.options = {
+                    height: 280,
+                    padding: { top: 30, right: 20, bottom: 40, left: 20 },
+                    curveColor: '#00ff88',
+                    curveGlow: 'rgba(0, 255, 136, 0.3)',
+                    priceColor: '#00ff88',
+                    gridColor: 'rgba(255,255,255,0.05)',
+                    animDuration: 800,
+                    ...options
+                };
+                this.canvas = null;
+                this.ctx = null;
+                this.priceMarker = null;
+                this.animFrame = null;
+                this.currentPrice = data.currentPrice;
+                this.targetPrice = data.currentPrice;
+                this.init();
+            }
+
+            init() {
+                // Create canvas
+                this.canvas = document.createElement('canvas');
+                this.canvas.style.width = '100%';
+                this.canvas.style.height = this.options.height + 'px';
+                this.container.appendChild(this.canvas);
+
+                // Create price marker
+                this.priceMarker = document.createElement('div');
+                this.priceMarker.className = 'price-marker';
+                this.priceMarker.setAttribute('data-price', this.currentPrice.toFixed(5));
+                this.container.appendChild(this.priceMarker);
+
+                // Setup canvas
+                this.resize();
+                window.addEventListener('resize', () => this.resize());
+
+                // Start animation loop
+                this.animate();
+            }
+
+            resize() {
+                const rect = this.container.getBoundingClientRect();
+                const dpr = window.devicePixelRatio || 1;
+                this.canvas.width = rect.width * dpr;
+                this.canvas.height = this.options.height * dpr;
+                this.ctx = this.canvas.getContext('2d');
+                this.ctx.scale(dpr, dpr);
+                this.width = rect.width;
+                this.height = this.options.height;
+                this.draw();
+            }
+
+            priceToX(price) {
+                const { rangeMin, rangeMax } = this.data;
+                const { padding } = this.options;
+                const plotWidth = this.width - padding.left - padding.right;
+                return padding.left + ((price - rangeMin) / (rangeMax - rangeMin)) * plotWidth;
+            }
+
+            depthToY(depth) {
+                const { padding } = this.options;
+                const plotHeight = this.height - padding.top - padding.bottom;
+                return padding.top + plotHeight * (1 - depth);
+            }
+
+            draw() {
+                const { ctx, width, height } = this;
+                const { padding, curveColor, curveGlow, gridColor } = this.options;
+                const { bins, rangeMin, rangeMax } = this.data;
+
+                // Clear
+                ctx.clearRect(0, 0, width, height);
+
+                // Draw grid lines
+                ctx.strokeStyle = gridColor;
+                ctx.lineWidth = 1;
+                for (let i = 0; i <= 4; i++) {
+                    const y = padding.top + (height - padding.top - padding.bottom) * (i / 4);
+                    ctx.beginPath();
+                    ctx.moveTo(padding.left, y);
+                    ctx.lineTo(width - padding.right, y);
+                    ctx.stroke();
+                }
+
+                // Draw price axis labels
+                ctx.fillStyle = '#6b7280';
+                ctx.font = '11px Inter, sans-serif';
+                ctx.textAlign = 'center';
+                const priceSteps = 5;
+                for (let i = 0; i <= priceSteps; i++) {
+                    const price = rangeMin + (rangeMax - rangeMin) * (i / priceSteps);
+                    const x = this.priceToX(price);
+                    ctx.fillText(price.toFixed(2), x, height - 10);
+                }
+
+                // Draw curve
+                if (bins.length < 2) return;
+
+                // Glow layer
+                ctx.save();
+                ctx.shadowColor = curveGlow;
+                ctx.shadowBlur = 20;
+                ctx.beginPath();
+                ctx.moveTo(this.priceToX(bins[0].price), this.depthToY(0));
+                for (let i = 0; i < bins.length; i++) {
+                    const x = this.priceToX(bins[i].price);
+                    const y = this.depthToY(bins[i].depth);
+                    if (i === 0) {
+                        ctx.lineTo(x, y);
+                    } else {
+                        // Smooth curve using quadratic bezier
+                        const prevX = this.priceToX(bins[i-1].price);
+                        const prevY = this.depthToY(bins[i-1].depth);
+                        const cpX = (prevX + x) / 2;
+                        ctx.quadraticCurveTo(prevX, prevY, cpX, (prevY + y) / 2);
+                    }
+                }
+                const lastBin = bins[bins.length - 1];
+                ctx.lineTo(this.priceToX(lastBin.price), this.depthToY(0));
+                ctx.closePath();
+
+                // Fill with gradient
+                const gradient = ctx.createLinearGradient(0, padding.top, 0, height - padding.bottom);
+                gradient.addColorStop(0, 'rgba(0, 255, 136, 0.4)');
+                gradient.addColorStop(0.5, 'rgba(0, 255, 136, 0.15)');
+                gradient.addColorStop(1, 'rgba(0, 255, 136, 0.02)');
+                ctx.fillStyle = gradient;
+                ctx.fill();
+
+                // Stroke
+                ctx.strokeStyle = curveColor;
+                ctx.lineWidth = 2.5;
+                ctx.stroke();
+                ctx.restore();
+
+                // Draw current price indicator on curve
+                const priceX = this.priceToX(this.currentPrice);
+                const closestBin = bins.reduce((prev, curr) => 
+                    Math.abs(curr.price - this.currentPrice) < Math.abs(prev.price - this.currentPrice) ? curr : prev
+                );
+                const priceY = this.depthToY(closestBin.depth);
+
+                // Price dot
+                ctx.beginPath();
+                ctx.arc(priceX, priceY, 5, 0, Math.PI * 2);
+                ctx.fillStyle = curveColor;
+                ctx.fill();
+                ctx.strokeStyle = '#0a0e17';
+                ctx.lineWidth = 2;
+                ctx.stroke();
+
+                // Update price marker position
+                if (this.priceMarker) {
+                    const markerLeft = (priceX / this.width) * 100;
+                    this.priceMarker.style.left = `calc(${markerLeft}% - 1px)`;
+                    this.priceMarker.setAttribute('data-price', this.currentPrice.toFixed(5));
+                }
+            }
+
+            animate() {
+                // Smooth price movement
+                const diff = this.targetPrice - this.currentPrice;
+                if (Math.abs(diff) > 0.0001) {
+                    this.currentPrice += diff * 0.08;
+                    this.draw();
+                }
+                this.animFrame = requestAnimationFrame(() => this.animate());
+            }
+
+            updatePrice(newPrice) {
+                this.targetPrice = newPrice;
+            }
+
+            destroy() {
+                if (this.animFrame) cancelAnimationFrame(this.animFrame);
+            }
         }
 
-        function getDCA(eff) {
-            if (eff >= 70) return '🟢 Center zone (70%+) — full $50 DCA';
-            if (eff >= 50) return '🟡 Mid zone (50–70%) — reduced $30 DCA';
-            if (eff >= 30) return '🟠 Low zone (30–50%) — micro-DCA $20 + watch';
-            return '🔴 Edge zone (<30%) — micro-DCA $10 + REBALANCE';
-        }
+        // ══════════════════════════════════════════════
+        // DASHBOARD CUSTOMIZATIONS
+        // ══════════════════════════════════════════════
 
-        function getEffColor(eff) {
-            if (eff >= 70) return 'green';
-            if (eff >= 50) return 'cyan';
-            return 'red';
-        }
+        // AAE DeFi-specific field rendering
+        const originalFormatField = DashboardEngine.prototype.formatField;
+        DashboardEngine.prototype.formatField = function(value, field = {}) {
+            if (value === null || value === undefined) return '—';
+            
+            // Green/red for P&L and token changes
+            if (field.className === 'token-change' || field.key === 'pnl') {
+                const num = parseFloat(value);
+                const positive = num >= 0;
+                const sign = positive ? '+' : '';
+                const prefix = field.key === 'pnl' ? '$' : '';
+                return `<span data-positive="${positive}">${prefix}${sign}${value}${field.key === 'pnl' ? '' : '%'}</span>`;
+            }
+            
+            // Agent action badge
+            if (field.key === 'type' && value && value.startsWith('Agent')) {
+                return `<span class="badge" style="background:rgba(0,255,136,0.12);border-color:rgba(0,255,136,0.3);color:var(--gold);">${value}</span>`;
+            }
+            
+            // Scout status badge with color coding
+            if (field.key === 'status') {
+                const statusLower = (value || '').toLowerCase();
+                let bgColor = 'rgba(0,255,136,0.12)';
+                let borderColor = 'rgba(0,255,136,0.3)';
+                let textColor = 'var(--success)';
+                
+                if (statusLower === 'active' || statusLower === 'executed') {
+                    bgColor = 'rgba(0,255,136,0.12)';
+                    borderColor = 'rgba(0,255,136,0.3)';
+                    textColor = 'var(--success)';
+                } else if (statusLower === 'scanning' || statusLower === 'evaluating') {
+                    bgColor = 'rgba(0,204,255,0.12)';
+                    borderColor = 'rgba(0,204,255,0.3)';
+                    textColor = 'var(--accent)';
+                } else if (statusLower === 'monitoring' || statusLower === 'queued') {
+                    bgColor = 'rgba(245,158,11,0.12)';
+                    borderColor = 'rgba(245,158,11,0.3)';
+                    textColor = 'var(--warning)';
+                } else if (statusLower === 'idle') {
+                    bgColor = 'rgba(107,114,128,0.12)';
+                    borderColor = 'rgba(107,114,128,0.3)';
+                    textColor = 'var(--text-dim)';
+                }
+                
+                return `<span class="badge" style="background:${bgColor};border-color:${borderColor};color:${textColor};">${value}</span>`;
+            }
+            
+            // Risk badge
+            if (field.key === 'risk') {
+                const riskLower = (value || '').toLowerCase();
+                let bgColor = 'rgba(0,255,136,0.12)';
+                let textColor = 'var(--success)';
+                
+                if (riskLower === 'medium') {
+                    bgColor = 'rgba(245,158,11,0.12)';
+                    textColor = 'var(--warning)';
+                } else if (riskLower === 'high') {
+                    bgColor = 'rgba(255,51,102,0.12)';
+                    textColor = 'var(--danger)';
+                }
+                
+                return `<span class="badge" style="background:${bgColor};color:${textColor};">${value}</span>`;
+            }
+            
+            // Scout name badge
+            if (field.key === 'scout') {
+                return `<span class="badge" style="background:rgba(0,204,255,0.12);border-color:rgba(0,204,255,0.3);color:var(--accent);">${value}</span>`;
+            }
+            
+            return originalFormatField.call(this, value, field);
+        };
 
-        function fmt(n) {
-            if (n >= 1e6) return '$' + (n / 1e6).toFixed(1) + 'M';
-            if (n >= 1e3) return '$' + (n / 1e3).toFixed(1) + 'K';
-            return '$' + n.toFixed(2);
-        }
+        // Custom section renderer for LP curve
+        const originalRenderCustom = DashboardEngine.prototype.renderCustom;
+        DashboardEngine.prototype.renderCustom = function(section) {
+            if (section.customRender === 'lpCurve') {
+                return `<div class="lp-curve-container" id="lp-curve-canvas"></div>`;
+            }
+            if (section.customRender === 'feeMilestones') {
+                return this.renderFeeMilestones(section);
+            }
+            if (section.customRender === 'trajectory') {
+                return this.renderTrajectory(section);
+            }
+            if (section.customRender === 'scoutFleet') {
+                return this.renderScoutFleet(section);
+            }
+            return originalRenderCustom.call(this, section);
+        };
 
-        function fetchLiveData() {
-            fetch('https://api.dexscreener.com/latest/dex/pairs/avalanche/' + POOL_ADDRESS)
-                .then(function(resp) { return resp.json(); })
-                .then(function(data) {
-                    var pair = data.pairs && data.pairs[0] ? data.pairs[0] : null;
-                    if (!pair) throw new Error('No pair data');
+        // Scout Fleet Renderer
+        DashboardEngine.prototype.renderScoutFleet = function(section) {
+            const data = this.resolveDataSource(section.dataSource);
+            if (!data || !data.length) return '<p class="empty-state">No scouts deployed</p>';
 
-                    var price = parseFloat(pair.priceNative);
-                    var change24 = parseFloat(pair.priceChange && pair.priceChange.h24 ? pair.priceChange.h24 : 0);
-                    var vol24 = parseFloat(pair.volume && pair.volume.h24 ? pair.volume.h24 : 0);
-                    var liqUsd = parseFloat(pair.liquidity && pair.liquidity.usd ? pair.liquidity.usd : 0);
+            return `
+                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px;">
+                    ${data.map(scout => {
+                        const statusClass = scout.status.toLowerCase().replace(' ', '');
+                        return `
+                            <div class="scout-card ${statusClass === 'active' ? 'active' : ''}">
+                                <div class="scout-name">${scout.name}</div>
+                                <div class="scout-status ${statusClass}">
+                                    <span class="dot"></span>
+                                    ${scout.status}
+                                </div>
+                                <div style="font-size: 0.9em; color: var(--text); margin-bottom: 4px;">
+                                    ${scout.protocol} · ${scout.chain}
+                                </div>
+                                <div class="scout-meta">
+                                    <span>Findings: <span class="scout-findings">${scout.findings}</span></span>
+                                    <span>${scout.lastScan}</span>
+                                </div>
+                            </div>
+                        `;
+                    }).join('')}
+                </div>
+            `;
+        };
 
-                    var eff = calcEfficiency(price, RANGE_LOW, RANGE_HIGH, SHAPE);
-                    var avaxVal = AVAX_HELD * price;
-                    var totalVal = avaxVal + USDC_HELD;
-                    var inRange = price >= RANGE_LOW && price <= RANGE_HIGH;
-                    var rangeWidth = RANGE_HIGH - RANGE_LOW;
-                    var markerPct = Math.max(0, Math.min(100, ((price - RANGE_LOW) / rangeWidth) * 100));
+        // Fee Milestones Renderer
+        DashboardEngine.prototype.renderFeeMilestones = function(section) {
+            const data = this.resolveDataSource(section.dataSource);
+            if (!data) return '<p class="empty-state">No milestone data</p>';
 
-                    document.getElementById('avax-price').textContent = '$' + price.toFixed(2);
-                    document.getElementById('total-value').textContent = '$' + totalVal.toFixed(2);
-                    document.getElementById('position-split').textContent = AVAX_HELD + ' AVAX + $' + USDC_HELD + ' USDC';
+            const { currentDailyFees, positionUsd, cumulativeFees, daysActive, tiers } = data;
+            let currentTierIdx = -1;
+            let nextTierIdx = 0;
+            let progressPct = 0;
 
-                    var changeEl = document.getElementById('change-24h');
-                    changeEl.textContent = (change24 >= 0 ? '+' : '') + change24.toFixed(2) + '%';
-                    changeEl.className = 'stat-value ' + (change24 >= 0 ? 'green' : 'red');
+            // Find current tier
+            for (let i = 0; i < tiers.length; i++) {
+                if (currentDailyFees >= tiers[i].target) {
+                    currentTierIdx = i;
+                    nextTierIdx = Math.min(i + 1, tiers.length - 1);
+                }
+            }
 
-                    var effEl = document.getElementById('efficiency');
-                    effEl.textContent = eff.toFixed(1) + '%';
-                    effEl.className = 'stat-value ' + getEffColor(eff);
-                    document.getElementById('efficiency-zone').textContent = eff >= 70 ? 'Center zone' : eff >= 50 ? 'Mid zone' : eff >= 30 ? 'Low zone' : 'Edge zone';
+            // Calculate progress to next tier
+            if (currentTierIdx >= 0) {
+                const currentTarget = tiers[currentTierIdx].target;
+                const nextTarget = tiers[nextTierIdx].target;
+                progressPct = Math.min(100, ((currentDailyFees - currentTarget) / (nextTarget - currentTarget)) * 100);
+            } else {
+                nextTierIdx = 0;
+                progressPct = Math.min(100, (currentDailyFees / tiers[0].target) * 100);
+            }
 
-                    var rangeEl = document.getElementById('range-status');
-                    rangeEl.textContent = inRange ? '🟢 In Range' : '🔴 OUT';
-                    rangeEl.className = 'stat-value ' + (inRange ? 'green' : 'red');
-                    document.getElementById('range-detail').textContent = inRange ? '±' + Math.abs(((price - RANGE_LOW) / rangeWidth - 0.5) * 100).toFixed(0) + '% from center' : price < RANGE_LOW ? 'Below range' : 'Above range';
+            const tiersHtml = tiers.map((tier, i) => {
+                let statusClass = '';
+                if (i < currentTierIdx + 1) statusClass = 'achieved';
+                else if (i === nextTierIdx && currentTierIdx + 1 === i) statusClass = 'current';
+                else if (i === 0 && currentTierIdx === -1) statusClass = 'current';
 
-                    document.getElementById('range-marker').style.left = markerPct + '%';
-                    document.getElementById('range-current-price').textContent = '$' + price.toFixed(4);
+                const tierProgress = i <= currentTierIdx ? 100 :
+                    (i === nextTierIdx ? progressPct :
+                    (currentDailyFees / tier.target) * 100);
 
-                    document.getElementById('avax-val').textContent = '$' + avaxVal.toFixed(2);
-                    document.getElementById('usdc-val').textContent = '$' + USDC_HELD.toFixed(2);
+                return `
+                    <div class="milestone-tier ${statusClass}">
+                        <div class="tier-icon">${tier.icon}</div>
+                        <div class="tier-info">
+                            <div class="tier-label">Tier ${tier.tier}: ${tier.label} — <span class="tier-target">$${tier.target}/day</span></div>
+                            <div class="tier-unlocks">Unlocks: ${tier.unlocks}</div>
+                        </div>
+                        <div class="tier-progress">
+                            <div class="tier-progress-bar">
+                                <div class="tier-progress-fill" style="width: ${tierProgress}%"></div>
+                            </div>
+                            <div class="tier-progress-text">${tierProgress.toFixed(1)}%</div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
 
-                    document.getElementById('lp-status-text').textContent = inRange ? 'Position Active' : '⚠️ Out of Range';
+            return `
+                <div class="milestone-ladder">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+                        <div>
+                            <div style="font-size:0.8em; color:var(--text-dim); text-transform:uppercase; letter-spacing:1px;">Current Daily Fees</div>
+                            <div style="font-size:2em; font-weight:700; color:var(--gold);">$${currentDailyFees.toFixed(3)}</div>
+                        </div>
+                        <div style="text-align:right;">
+                            <div style="font-size:0.8em; color:var(--text-dim); text-transform:uppercase; letter-spacing:1px;">Position Size</div>
+                            <div style="font-size:1.5em; font-weight:700; color:var(--text);">$${positionUsd.toFixed(2)}</div>
+                        </div>
+                    </div>
+                    ${tiersHtml}
+                </div>
+            `;
+        };
 
-                    var now = new Date().toLocaleString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
-                    document.getElementById('defi-footer').textContent = 'Live · DexScreener · ' + now + ' · Refreshes every 60s';
-                })
-                .catch(function(err) {
-                    console.error('DexScreener fetch failed:', err);
-                    document.getElementById('lp-status-text').textContent = '⚠️ Data Error';
-                    document.getElementById('defi-footer').textContent = 'Retry in 60s...';
-                });
-        }
+        // Trajectory Renderer
+        DashboardEngine.prototype.renderTrajectory = function(section) {
+            const data = this.resolveDataSource(section.dataSource);
+            if (!data) return '<p class="empty-state">No trajectory data</p>';
 
-        fetchLiveData();
-        setInterval(fetchLiveData, REFRESH_MS);
+            const { currentDailyFees, positionUsd, cumulativeFees, daysActive, tiers } = data;
+
+            // Find current and next tier
+            let currentTierIdx = -1;
+            for (let i = 0; i < tiers.length; i++) {
+                if (currentDailyFees >= tiers[i].target) currentTierIdx = i;
+            }
+            const nextTier = tiers[Math.min(currentTierIdx + 1, tiers.length - 1)];
+            const gapToNext = Math.max(0, nextTier.target - currentDailyFees);
+
+            // Calculate APR and projections
+            const dailyApr = positionUsd > 0 ? (currentDailyFees / positionUsd) * 100 : 0;
+            const annualizedReturn = dailyApr * 365;
+
+            // Days to next milestone (assuming current fee rate stays constant)
+            const daysToNext = currentDailyFees > 0 ? Math.ceil(gapToNext / currentDailyFees) : Infinity;
+
+            // Required multiplier to hit next tier
+            const multiplier = currentDailyFees > 0 ? (nextTier.target / currentDailyFees) : Infinity;
+
+            // Capital needed at current rate to hit next tier
+            const capitalNeeded = currentDailyFees > 0 ?
+                Math.ceil((nextTier.target / currentDailyFees) * positionUsd) : Infinity;
+
+            const formatDays = (d) => {
+                if (d === Infinity) return '∞';
+                if (d > 365) return `${(d / 365).toFixed(1)} years`;
+                if (d > 30) return `${(d / 30).toFixed(1)} months`;
+                return `${d} days`;
+            };
+
+            return `
+                <div class="trajectory-container">
+                    <div class="trajectory-header">
+                        <div class="trajectory-current">
+                            <div class="trajectory-current-label">Daily Fees</div>
+                            <div class="trajectory-current-value">$${currentDailyFees.toFixed(3)}</div>
+                        </div>
+                        <div style="text-align:center;">
+                            <div style="font-size:0.8em; color:var(--text-dim);">NEXT TARGET</div>
+                            <div style="font-size:1.5em; font-weight:700; color:var(--gold);">${nextTier.icon} $${nextTier.target}/day</div>
+                            <div style="font-size:0.8em; color:var(--text-dim);">${nextTier.label}</div>
+                        </div>
+                    </div>
+
+                    <div class="trajectory-stats">
+                        <div class="trajectory-stat">
+                            <div class="trajectory-stat-value">${dailyApr.toFixed(2)}%</div>
+                            <div class="trajectory-stat-label">Daily APR</div>
+                        </div>
+                        <div class="trajectory-stat">
+                            <div class="trajectory-stat-value">${annualizedReturn.toFixed(0)}%</div>
+                            <div class="trajectory-stat-label">Annualized</div>
+                        </div>
+                        <div class="trajectory-stat">
+                            <div class="trajectory-stat-value">$${cumulativeFees.toFixed(2)}</div>
+                            <div class="trajectory-stat-label">Cumulative Fees</div>
+                        </div>
+                    </div>
+
+                    <div class="trajectory-next">
+                        <div class="trajectory-next-label">Time to ${nextTier.label} ($${nextTier.target}/day)</div>
+                        <div class="trajectory-next-value">${formatDays(daysToNext)}</div>
+                        <div class="trajectory-next-detail">
+                            At current rate: ${multiplier.toFixed(1)}x fees needed · $${capitalNeeded.toLocaleString()} capital at same efficiency
+                        </div>
+                    </div>
+                </div>
+            `;
+        };
+
+        // Inject agent status after header
+        const originalRenderShell = DashboardEngine.prototype.renderShell;
+        DashboardEngine.prototype.renderShell = function() {
+            originalRenderShell.call(this);
+            const header = this.rootEl.querySelector('.dashboard-header');
+            if (header) {
+                const status = document.createElement('div');
+                status.className = 'agent-status';
+                status.innerHTML = '<div class="pulse"></div> 4 Scouts Active — Yield · Opportunity · Risk · Cross-Chain';
+                header.appendChild(status);
+            }
+        };
+
+        // Initialize
+        let lpCurve = null;
+        (async () => {
+            const templateRes = await fetch('defi-template.json?' + Date.now());
+            const template = await templateRes.json();
+            const dataRes = await fetch('defi-data.json?' + Date.now());
+            const data = await dataRes.json();
+
+            const dash = new DashboardEngine({ template, data });
+            await dash.init('#app');
+
+            // Initialize LP curve renderer
+            const curveContainer = document.getElementById('lp-curve-canvas');
+            if (curveContainer && data.curveData) {
+                lpCurve = new LPCurveRenderer(curveContainer, data.curveData);
+            }
+
+            // Expose for debugging
+            window.defiDash = dash;
+            window.lpCurve = lpCurve;
+        })();
     </script>
 </body>
 </html>

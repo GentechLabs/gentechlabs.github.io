@@ -1,15 +1,12 @@
 {
   "meta": {
     "title": "GENTECH DASHBOARD",
-    "subtitle": "AVAX/USDC LFJ Position",
-    "refreshMs": 60000,
+    "subtitle": "AAE DeFi — Agent Scouts & Portfolio Intelligence",
+    "dataUrl": "defi-data.json",
+    "refreshMs": 30000,
     "version": "v2.0",
     "brand": "GENTECH DASHBOARD",
-    "badge": "Avalanche · LFJ Concentrated Liquidity",
-    "chain": "Avalanche C-Chain",
-    "dex": "LFJ (Trader Joe)",
-    "poolAddress": "0x864d4e5ee7318e97483db7eb0912e09f161516ea",
-    "priceSource": "DexScreener"
+    "badge": "AAE DeFi"
   },
   "theme": {
     "mode": "dark",
@@ -17,116 +14,177 @@
       "--bg": "#0a0e17",
       "--panel-bg": "#111827",
       "--panel-border": "#1f2937",
-      "--panel-shadow": "rgba(232,65,66,0.05)",
+      "--panel-shadow": "rgba(0,255,136,0.05)",
       "--text": "#e5e7eb",
       "--text-dim": "#6b7280",
-      "--gold": "#e8652a",
-      "--gold-dim": "rgba(232,101,42,0.15)",
-      "--accent": "#e84142",
+      "--gold": "#00ff88",
+      "--gold-dim": "#059669",
+      "--accent": "#00ccff",
       "--danger": "#ff3366",
       "--success": "#00ff88",
-      "--cyan": "#00d4ff",
-      "--avax-red": "#e84142",
+      "--warning": "#f59e0b",
       "--radius": "12px"
     },
     "fonts": {
-      "heading": "'Cinzel', serif",
-      "body": "'Inter', sans-serif",
-      "mono": "'JetBrains Mono', monospace"
+      "heading": "'Inter', -apple-system, sans-serif",
+      "body": "'Inter', -apple-system, sans-serif"
     },
-    "container": { "maxWidth": "480px" }
+    "container": { "maxWidth": "1200px" }
   },
   "tabs": [
-    { "id": "overview", "label": "Overview", "icon": "📊", "sections": ["portfolio", "allocation", "position", "range"] },
-    { "id": "yields", "label": "Yields", "icon": "🌾", "sections": ["yield-info"] },
-    { "id": "activity", "label": "Activity", "icon": "📜", "sections": ["milestones"] }
+    { "id": "overview", "label": "Portfolio", "icon": "📊", "sections": ["portfolio-stats", "scout-fleet"] },
+    { "id": "curve", "label": "LP Curve", "icon": "🔔", "sections": ["lp-curve", "lp-stats"] },
+    { "id": "scouts", "label": "Scout Feed", "icon": "🔍", "sections": ["scout-status", "opportunities"] },
+    { "id": "milestones", "label": "Milestones", "icon": "🏆", "sections": ["fee-milestones", "trajectory"] },
+    { "id": "activity", "label": "Activity", "icon": "📜", "sections": ["transactions", "agent-actions", "milestones"] }
   ],
   "sections": [
     {
-      "id": "portfolio",
-      "title": "Position Snapshot",
+      "id": "portfolio-stats",
+      "title": "Portfolio Overview",
       "icon": "💰",
       "type": "stats",
       "dataSource": "portfolio",
       "cardTemplate": {
         "fields": [
           { "key": "totalValue", "label": "Total Value", "format": "money" },
-          { "key": "avaxPrice", "label": "AVAX Price", "format": "money" },
           { "key": "change24h", "label": "24h Change", "format": "percent" },
+          { "key": "activePositions", "label": "Active Positions", "format": "number" },
+          { "key": "activeChains", "label": "Chains", "format": "number" },
+          { "key": "dailyFees", "label": "Daily Fees", "format": "money" },
+          { "key": "monthlyProjection", "label": "Monthly Proj.", "format": "money" }
+        ]
+      }
+    },
+    {
+      "id": "scout-fleet",
+      "title": "Agent Scout Fleet",
+      "icon": "🤖",
+      "type": "custom",
+      "dataSource": "scoutFleet",
+      "customRender": "scoutFleet"
+    },
+    {
+      "id": "lp-curve",
+      "title": "Liquidity Distribution — Curve Shape",
+      "icon": "📊",
+      "type": "custom",
+      "dataSource": "curveData",
+      "customRender": "lpCurve"
+    },
+    {
+      "id": "lp-stats",
+      "title": "Position Details",
+      "icon": "💰",
+      "type": "stats",
+      "dataSource": "lpPosition",
+      "cardTemplate": {
+        "fields": [
+          { "key": "pair", "label": "Pair", "format": "text" },
+          { "key": "feeTier", "label": "Fee Tier", "format": "text" },
+          { "key": "shape", "label": "Shape", "format": "text" },
+          { "key": "currentPrice", "label": "Current Price", "format": "text" },
+          { "key": "rangeMin", "label": "Range Min", "format": "text" },
+          { "key": "rangeMax", "label": "Range Max", "format": "text" },
+          { "key": "inRange", "label": "Range Status", "format": "badge" },
+          { "key": "feeEfficiency", "label": "Fee Efficiency", "format": "percent" }
+        ]
+      }
+    },
+    {
+      "id": "scout-status",
+      "title": "Scout Activity Feed",
+      "icon": "🔍",
+      "type": "table",
+      "dataSource": "scoutActivity",
+      "cardTemplate": {
+        "fields": [
+          { "key": "timestamp", "label": "Time", "format": "text" },
+          { "key": "scout", "label": "Scout", "format": "badge" },
+          { "key": "action", "label": "Action", "format": "text" },
+          { "key": "protocol", "label": "Protocol", "format": "text" },
+          { "key": "chain", "label": "Chain", "format": "text" },
+          { "key": "result", "label": "Result", "format": "badge" },
+          { "key": "apr", "label": "APR", "format": "percent" }
+        ]
+      }
+    },
+    {
+      "id": "opportunities",
+      "title": "Live Opportunity Feed",
+      "icon": "🎯",
+      "type": "table",
+      "dataSource": "opportunities",
+      "cardTemplate": {
+        "fields": [
+          { "key": "pair", "label": "Pair", "format": "text" },
+          { "key": "protocol", "label": "Protocol", "format": "text" },
+          { "key": "chain", "label": "Chain", "format": "text" },
+          { "key": "apr", "label": "APR", "format": "percent" },
+          { "key": "tvl", "label": "TVL", "format": "money" },
+          { "key": "risk", "label": "Risk", "format": "badge" },
+          { "key": "scout", "label": "Found By", "format": "badge" },
           { "key": "status", "label": "Status", "format": "badge" }
         ]
       }
     },
     {
-      "id": "allocation",
-      "title": "Position Breakdown",
-      "icon": "📊",
+      "id": "fee-milestones",
+      "title": "Fee Income Milestones",
+      "icon": "🏆",
+      "type": "custom",
+      "dataSource": "feeMilestones",
+      "customRender": "feeMilestones"
+    },
+    {
+      "id": "trajectory",
+      "title": "Trajectory to Next Milestone",
+      "icon": "📈",
+      "type": "custom",
+      "dataSource": "feeMilestones",
+      "customRender": "trajectory"
+    },
+    {
+      "id": "transactions",
+      "title": "Recent Transactions",
+      "icon": "📜",
       "type": "table",
-      "dataSource": "allocation",
+      "dataSource": "transactions",
       "cardTemplate": {
         "fields": [
+          { "key": "date", "label": "Date", "format": "date" },
+          { "key": "type", "label": "Type", "format": "badge" },
           { "key": "token", "label": "Token" },
-          { "key": "amount", "label": "Amount", "format": "number" },
-          { "key": "value", "label": "Value", "format": "money" },
-          { "key": "pct", "label": "Share", "format": "percent" }
+          { "key": "amount", "label": "Amount" },
+          { "key": "usd", "label": "USD", "format": "money" },
+          { "key": "status", "label": "Status", "format": "badge" }
         ]
       }
     },
     {
-      "id": "position",
-      "title": "LFJ Position",
-      "icon": "🏦",
-      "type": "stats",
-      "dataSource": "position",
+      "id": "agent-actions",
+      "title": "Agent Actions Log",
+      "icon": "🤖",
+      "type": "table",
+      "dataSource": "agentActions",
       "cardTemplate": {
         "fields": [
-          { "key": "protocol", "label": "Protocol", "format": "text" },
-          { "key": "chain", "label": "Chain", "format": "badge" },
-          { "key": "pair", "label": "Pair", "format": "text" },
-          { "key": "feeTier", "label": "Fee Tier", "format": "text" },
-          { "key": "shape", "label": "Shape", "format": "text" },
-          { "key": "type", "label": "Type", "format": "text" }
-        ]
-      }
-    },
-    {
-      "id": "range",
-      "title": "Liquidity Range",
-      "icon": "📐",
-      "type": "stats",
-      "dataSource": "range",
-      "cardTemplate": {
-        "fields": [
-          { "key": "low", "label": "Range Low", "format": "money" },
-          { "key": "high", "label": "Range High", "format": "money" },
-          { "key": "width", "label": "Width", "format": "percent" },
-          { "key": "efficiency", "label": "Fee Efficiency", "format": "percent" },
-          { "key": "zone", "label": "Zone", "format": "badge" }
-        ]
-      }
-    },
-    {
-      "id": "yield-info",
-      "title": "Fee Earnings",
-      "icon": "🌾",
-      "type": "stats",
-      "dataSource": "yieldInfo",
-      "cardTemplate": {
-        "fields": [
-          { "key": "earned", "label": "Fees Earned", "format": "money" },
-          { "key": "apy", "label": "Est. APY", "format": "percent" },
-          { "key": "poolAddress", "label": "Pool", "format": "text" }
+          { "key": "timestamp", "label": "Time", "format": "text" },
+          { "key": "agent", "label": "Agent", "format": "badge" },
+          { "key": "action", "label": "Action", "format": "text" },
+          { "key": "details", "label": "Details" },
+          { "key": "status", "label": "Status", "format": "badge" }
         ]
       }
     },
     {
       "id": "milestones",
-      "title": "Position Milestones",
+      "title": "AAE Milestones",
       "icon": "🎯",
       "type": "checklist",
       "dataSource": "milestones",
       "checklistConfig": {
-        "storageKey": "avax-lfj-milestones",
+        "storageKey": "aae-defi-milestones",
         "groupBy": "category",
         "showProgress": true
       }
@@ -134,7 +192,7 @@
   ],
   "footer": {
     "brand": "GENTECH DASHBOARD",
-    "version": "AVAX/USDC LFJ Tracker v2.0",
+    "version": "AAE DeFi v2.0 — Full Scout Fleet",
     "showTimestamp": true
   }
 }
