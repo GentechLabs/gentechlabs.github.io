@@ -2,32 +2,32 @@
   "hero": {
     "positionUsd": 44.74,
     "dailyFees": 0.325,
-    "efficiency": 0.0,
-    "efficiencyZone": "Out of Range",
-    "shape": "Bid-Ask",
-    "rangeStatus": "Above Range",
-    "currentPrice": 6.71,
-    "rangeMin": 6.3,
-    "rangeMax": 6.55,
+    "efficiency": 85.0,
+    "efficiencyZone": "Center Zone",
+    "shape": "Curve",
+    "rangeStatus": "In Range",
+    "currentPrice": 6.72,
+    "rangeMin": 6.63,
+    "rangeMax": 6.80,
     "milestoneCurrent": "Unranked",
     "milestoneNext": "Scout",
     "milestoneTarget": 5,
     "milestoneProgress": 6.5
   },
   "marketIntel": {
-    "avaxPrice": 6.71,
-    "change24h": -0.3,
+    "avaxPrice": 6.72,
+    "change24h": -0.01,
     "volume24h": 435300,
     "tvl": 366900,
     "trend": "consolidation",
     "news": [
       {
-        "headline": "AVAX used for Denali share settlements",
+        "headline": "US-Iran peace deal announced — signing June 19th in Switzerland",
         "impact": "bullish",
         "relevance": "high"
       },
       {
-        "headline": "Avalanche subnet activity increasing",
+        "headline": "AVAX used for Denali share settlements",
         "impact": "bullish",
         "relevance": "medium"
       },
@@ -39,29 +39,29 @@
     ]
   },
   "strategyAdvisor": {
-    "efficiencyZone": "Out of Range",
-    "efficiency": 0.0,
-    "shape": "Bid-Ask",
-    "recommendedAction": "REBALANCE NOW",
-    "dcaType": "Edge-Weighted DCA",
-    "dcaDetails": "Price near center of bid-ask range. Liquidity concentrated at edges \u2014 fees increase as price moves toward $6.30 or $6.55.",
-    "rebalanceTrigger": "Price exits 6.30-6.55 range",
+    "efficiencyZone": "Center Zone",
+    "efficiency": 85.0,
+    "shape": "Curve",
+    "recommendedAction": "HOLD & EARN",
+    "dcaType": "Standard $50 Weekly",
+    "dcaDetails": "Center zone — price at $6.72 is dead center of 6.63–6.80 range. Maximum fee accrual in convergent shape.",
+    "rebalanceTrigger": "Below 30% efficiency",
     "compoundThreshold": 50,
     "cumulativeFees": 0.325,
     "nextCompound": "$49.68 away",
-    "riskLevel": "High",
-    "riskNote": "Price broke above range at ~22:41 UTC. Position is 100% USDC, earning zero fees. Rebalance urgently."
+    "riskLevel": "Low",
+    "riskNote": "In range, centered. US-Iran peace deal could provide bullish tailwind. Watch June 19th signing for potential volatility."
   },
   "lpPosition": {
     "protocol": "LFJ (Trader Joe)",
     "chain": "Avalanche",
     "pair": "AVAX / USDC",
     "feeTier": "5 bps",
-    "shape": "Bid-Ask",
-    "currentPrice": 6.71,
-    "rangeMin": 6.3,
-    "rangeMax": 6.55,
-    "numBins": 250,
+    "shape": "Curve",
+    "currentPrice": 6.72,
+    "rangeMin": 6.63,
+    "rangeMax": 6.80,
+    "numBins": 170,
     "deposit": {
       "avax": 2.937,
       "avaxValue": 19.15,
@@ -81,215 +81,46 @@
     }
   },
   "curveData": {
-    "rangeMin": 6.3,
-    "rangeMax": 6.55,
-    "currentPrice": 6.71,
-    "shape": "bidirectional",
+    "rangeMin": 6.63,
+    "rangeMax": 6.80,
+    "currentPrice": 6.72,
+    "shape": "convergent",
     "bins": [
-      {
-        "price": 6.3,
-        "depth": 0.95
-      },
-      {
-        "price": 6.305,
-        "depth": 0.9
-      },
-      {
-        "price": 6.31,
-        "depth": 0.85
-      },
-      {
-        "price": 6.315,
-        "depth": 0.8
-      },
-      {
-        "price": 6.32,
-        "depth": 0.74
-      },
-      {
-        "price": 6.325,
-        "depth": 0.68
-      },
-      {
-        "price": 6.33,
-        "depth": 0.62
-      },
-      {
-        "price": 6.335,
-        "depth": 0.56
-      },
-      {
-        "price": 6.34,
-        "depth": 0.5
-      },
-      {
-        "price": 6.345,
-        "depth": 0.44
-      },
-      {
-        "price": 6.35,
-        "depth": 0.39
-      },
-      {
-        "price": 6.355,
-        "depth": 0.34
-      },
-      {
-        "price": 6.36,
-        "depth": 0.3
-      },
-      {
-        "price": 6.365,
-        "depth": 0.26
-      },
-      {
-        "price": 6.37,
-        "depth": 0.22
-      },
-      {
-        "price": 6.375,
-        "depth": 0.19
-      },
-      {
-        "price": 6.38,
-        "depth": 0.16
-      },
-      {
-        "price": 6.385,
-        "depth": 0.14
-      },
-      {
-        "price": 6.39,
-        "depth": 0.12
-      },
-      {
-        "price": 6.395,
-        "depth": 0.1
-      },
-      {
-        "price": 6.4,
-        "depth": 0.09
-      },
-      {
-        "price": 6.405,
-        "depth": 0.08
-      },
-      {
-        "price": 6.41,
-        "depth": 0.07
-      },
-      {
-        "price": 6.415,
-        "depth": 0.06
-      },
-      {
-        "price": 6.42,
-        "depth": 0.06
-      },
-      {
-        "price": 6.425,
-        "depth": 0.05
-      },
-      {
-        "price": 6.43,
-        "depth": 0.05
-      },
-      {
-        "price": 6.435,
-        "depth": 0.05
-      },
-      {
-        "price": 6.44,
-        "depth": 0.05
-      },
-      {
-        "price": 6.445,
-        "depth": 0.05
-      },
-      {
-        "price": 6.45,
-        "depth": 0.05
-      },
-      {
-        "price": 6.455,
-        "depth": 0.05
-      },
-      {
-        "price": 6.46,
-        "depth": 0.05
-      },
-      {
-        "price": 6.465,
-        "depth": 0.06
-      },
-      {
-        "price": 6.47,
-        "depth": 0.06
-      },
-      {
-        "price": 6.475,
-        "depth": 0.07
-      },
-      {
-        "price": 6.48,
-        "depth": 0.08
-      },
-      {
-        "price": 6.485,
-        "depth": 0.09
-      },
-      {
-        "price": 6.49,
-        "depth": 0.1
-      },
-      {
-        "price": 6.495,
-        "depth": 0.12
-      },
-      {
-        "price": 6.5,
-        "depth": 0.14
-      },
-      {
-        "price": 6.505,
-        "depth": 0.16
-      },
-      {
-        "price": 6.51,
-        "depth": 0.19
-      },
-      {
-        "price": 6.515,
-        "depth": 0.22
-      },
-      {
-        "price": 6.52,
-        "depth": 0.26
-      },
-      {
-        "price": 6.525,
-        "depth": 0.3
-      },
-      {
-        "price": 6.53,
-        "depth": 0.34
-      },
-      {
-        "price": 6.535,
-        "depth": 0.39
-      },
-      {
-        "price": 6.54,
-        "depth": 0.44
-      },
-      {
-        "price": 6.545,
-        "depth": 0.5
-      },
-      {
-        "price": 6.55,
-        "depth": 0.55
-      }
+      {"price": 6.630, "depth": 0.05},
+      {"price": 6.635, "depth": 0.06},
+      {"price": 6.640, "depth": 0.08},
+      {"price": 6.645, "depth": 0.10},
+      {"price": 6.650, "depth": 0.13},
+      {"price": 6.655, "depth": 0.17},
+      {"price": 6.660, "depth": 0.22},
+      {"price": 6.665, "depth": 0.28},
+      {"price": 6.670, "depth": 0.35},
+      {"price": 6.675, "depth": 0.43},
+      {"price": 6.680, "depth": 0.52},
+      {"price": 6.685, "depth": 0.61},
+      {"price": 6.690, "depth": 0.70},
+      {"price": 6.695, "depth": 0.78},
+      {"price": 6.700, "depth": 0.85},
+      {"price": 6.705, "depth": 0.91},
+      {"price": 6.710, "depth": 0.96},
+      {"price": 6.715, "depth": 0.99},
+      {"price": 6.720, "depth": 1.0},
+      {"price": 6.725, "depth": 0.99},
+      {"price": 6.730, "depth": 0.96},
+      {"price": 6.735, "depth": 0.91},
+      {"price": 6.740, "depth": 0.85},
+      {"price": 6.745, "depth": 0.78},
+      {"price": 6.750, "depth": 0.70},
+      {"price": 6.755, "depth": 0.61},
+      {"price": 6.760, "depth": 0.52},
+      {"price": 6.765, "depth": 0.43},
+      {"price": 6.770, "depth": 0.35},
+      {"price": 6.775, "depth": 0.28},
+      {"price": 6.780, "depth": 0.22},
+      {"price": 6.785, "depth": 0.17},
+      {"price": 6.790, "depth": 0.13},
+      {"price": 6.795, "depth": 0.10},
+      {"price": 6.800, "depth": 0.05}
     ]
   },
   "feeMilestones": {
@@ -302,35 +133,35 @@
         "tier": 1,
         "label": "Scout",
         "target": 5,
-        "icon": "\ud83c\udff4",
+        "icon": "🏴",
         "unlocks": "Entry strategies (CURVE)"
       },
       {
         "tier": 2,
         "label": "Raider",
         "target": 20,
-        "icon": "\u2694\ufe0f",
+        "icon": "⚔️",
         "unlocks": "SPOT + BIDIRECTIONAL shapes"
       },
       {
         "tier": 3,
         "label": "Warlord",
         "target": 55,
-        "icon": "\ud83d\udee1\ufe0f",
+        "icon": "🛡️",
         "unlocks": "Multi-pool positions"
       },
       {
         "tier": 4,
         "label": "Fisher",
         "target": 100,
-        "icon": "\ud83c\udfa3",
+        "icon": "🎣",
         "unlocks": "Multi-asset farming (LINK, TAO, SOL)"
       },
       {
         "tier": 5,
         "label": "Sovereign",
         "target": 200,
-        "icon": "\ud83d\udc51",
+        "icon": "👑",
         "unlocks": "Custom strategy creation"
       }
     ]
@@ -338,11 +169,19 @@
   "transactions": [
     {
       "date": "2026-06-14",
+      "type": "Rebalance",
+      "token": "AVAX/USDC",
+      "amount": "Range 6.63-6.80 (Curve)",
+      "usd": 44.74,
+      "status": "Active"
+    },
+    {
+      "date": "2026-06-14",
       "type": "LP Deposit",
       "token": "AVAX/USDC",
       "amount": "Range 6.30-6.55 (Bid-Ask)",
       "usd": 44.74,
-      "status": "Active"
+      "status": "Completed"
     }
   ]
 }

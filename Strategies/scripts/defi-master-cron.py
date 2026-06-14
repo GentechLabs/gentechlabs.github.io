@@ -67,10 +67,10 @@ POOL = {
     "name": "AVAX/USDC",
     "chain": "avalanche",
     "pool_address": "0x864d4e5ee7318e97483db7eb0912e09f161516ea",
-"range_low": 9.75,
-        "range_high": 10.01,
+    "range_low": 6.63,
+    "range_high": 6.80,
     "shape": "curve",
-    "position_usd": 138.92,
+    "position_usd": 44.74,
     "fee_tier_bps": 5,
     "wallet": JORDAN_WALLET,
 }
