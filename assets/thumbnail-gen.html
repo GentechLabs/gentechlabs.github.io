@@ -1,565 +1,239 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=1200, initial-scale=1.0">
-    <title>GenTech Dashboard — Hero Image</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        body {
-            width: 1200px;
-            height: 630px;
-            background: #0a0e17;
-            font-family: 'Inter', -apple-system, sans-serif;
-            overflow: hidden;
-            position: relative;
-        }
-
-        /* Animated gradient background */
-        .bg-gradient {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                radial-gradient(ellipse at 20% 50%, rgba(0, 255, 136, 0.08) 0%, transparent 50%),
-                radial-gradient(ellipse at 80% 20%, rgba(0, 204, 255, 0.06) 0%, transparent 50%),
-                radial-gradient(ellipse at 60% 80%, rgba(232, 101, 42, 0.05) 0%, transparent 50%);
-            z-index: 0;
-        }
-
-        /* Grid pattern overlay */
-        .grid-pattern {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-image: 
-                linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
-            background-size: 40px 40px;
-            z-index: 1;
-        }
-
-        .container {
-            position: relative;
-            z-index: 2;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            padding: 40px 50px;
-        }
-
-        /* Left side — Copy */
-        .copy-section {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding-right: 40px;
-        }
-
-        .brand-tag {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 6px 14px;
-            background: rgba(0, 255, 136, 0.1);
-            border: 1px solid rgba(0, 255, 136, 0.25);
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
-            color: #00ff88;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            margin-bottom: 20px;
-            width: fit-content;
-        }
-
-        .brand-tag .dot {
-            width: 6px;
-            height: 6px;
-            background: #00ff88;
-            border-radius: 50%;
-            animation: pulse 2s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.4; }
-        }
-
-        h1 {
-            font-size: 42px;
-            font-weight: 800;
-            color: #fff;
-            line-height: 1.1;
-            margin-bottom: 16px;
-        }
-
-        h1 .accent {
-            color: #00ff88;
-        }
-
-        .subtitle {
-            font-size: 18px;
-            color: #6b7280;
-            line-height: 1.5;
-            margin-bottom: 28px;
-            max-width: 440px;
-        }
-
-        .features {
-            display: flex;
-            gap: 24px;
-            margin-bottom: 32px;
-        }
-
-        .feature {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 13px;
-            color: #9ca3af;
-        }
-
-        .feature .icon {
-            width: 28px;
-            height: 28px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(0, 255, 136, 0.1);
-            border-radius: 6px;
-            font-size: 14px;
-        }
-
-        .cta-row {
-            display: flex;
-            gap: 12px;
-            align-items: center;
-        }
-
-        .cta-btn {
-            padding: 12px 24px;
-            background: #00ff88;
-            color: #0a0e17;
-            font-weight: 700;
-            font-size: 14px;
-            border-radius: 8px;
-            border: none;
-            cursor: pointer;
-        }
-
-        .cta-secondary {
-            padding: 12px 24px;
-            background: transparent;
-            color: #00ff88;
-            font-weight: 600;
-            font-size: 14px;
-            border-radius: 8px;
-            border: 1px solid rgba(0, 255, 136, 0.3);
-        }
-
-        .stats-row {
-            display: flex;
-            gap: 32px;
-            margin-top: 32px;
-            padding-top: 24px;
-            border-top: 1px solid rgba(255,255,255,0.06);
-        }
-
-        .stat {
-            text-align: left;
-        }
-
-        .stat-value {
-            font-size: 24px;
-            font-weight: 700;
-            color: #00ff88;
-            font-family: 'JetBrains Mono', monospace;
-        }
-
-        .stat-label {
-            font-size: 11px;
-            color: #6b7280;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-top: 2px;
-        }
-
-        /* Right side — Dashboard Preview */
-        .preview-section {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-        }
-
-        .dashboard-mock {
-            width: 520px;
-            background: #111827;
-            border: 1px solid #1f2937;
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 
-                0 25px 50px rgba(0, 0, 0, 0.5),
-                0 0 100px rgba(0, 255, 136, 0.1);
-            transform: perspective(1000px) rotateY(-5deg) rotateX(2deg);
-        }
-
-        .mock-header {
-            padding: 16px 20px;
-            border-bottom: 1px solid #1f2937;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .mock-title {
-            font-size: 14px;
-            font-weight: 700;
-            color: #00ff88;
-            font-family: 'JetBrains Mono', monospace;
-        }
-
-        .mock-badge {
-            font-size: 10px;
-            padding: 3px 8px;
-            background: rgba(0, 255, 136, 0.1);
-            border: 1px solid rgba(0, 255, 136, 0.25);
-            border-radius: 10px;
-            color: #00ff88;
-        }
-
-        .mock-tabs {
-            display: flex;
-            padding: 0 16px;
-            border-bottom: 1px solid #1f2937;
-        }
-
-        .mock-tab {
-            padding: 10px 14px;
-            font-size: 11px;
-            color: #6b7280;
-            border-bottom: 2px solid transparent;
-        }
-
-        .mock-tab.active {
-            color: #00ff88;
-            border-bottom-color: #00ff88;
-        }
-
-        .mock-content {
-            padding: 16px;
-        }
-
-        /* Stats grid */
-        .mock-stats {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin-bottom: 16px;
-        }
-
-        .mock-stat {
-            background: #0a0e17;
-            border: 1px solid #1f2937;
-            border-radius: 8px;
-            padding: 12px;
-            text-align: center;
-        }
-
-        .mock-stat-label {
-            font-size: 9px;
-            color: #6b7280;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 4px;
-        }
-
-        .mock-stat-value {
-            font-size: 16px;
-            font-weight: 700;
-            color: #00ff88;
-            font-family: 'JetBrains Mono', monospace;
-        }
-
-        .mock-stat-value.blue { color: #00ccff; }
-        .mock-stat-value.orange { color: #e8652a; }
-
-        /* Scout cards */
-        .mock-scouts {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
-            margin-bottom: 16px;
-        }
-
-        .mock-scout {
-            background: #0a0e17;
-            border: 1px solid #1f2937;
-            border-radius: 8px;
-            padding: 10px;
-        }
-
-        .mock-scout-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 6px;
-        }
-
-        .mock-scout-name {
-            font-size: 10px;
-            font-weight: 600;
-            color: #e5e7eb;
-        }
-
-        .mock-scout-status {
-            font-size: 8px;
-            padding: 2px 6px;
-            border-radius: 8px;
-            font-weight: 600;
-        }
-
-        .mock-scout-status.active {
-            background: rgba(0, 255, 136, 0.15);
-            color: #00ff88;
-        }
-
-        .mock-scout-status.scanning {
-            background: rgba(0, 204, 255, 0.15);
-            color: #00ccff;
-        }
-
-        .mock-scout-meta {
-            font-size: 9px;
-            color: #6b7280;
-        }
-
-        /* Table */
-        .mock-table {
-            background: #0a0e17;
-            border: 1px solid #1f2937;
-            border-radius: 8px;
-            overflow: hidden;
-        }
-
-        .mock-table-header {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr;
-            padding: 8px 12px;
-            border-bottom: 1px solid #1f2937;
-            font-size: 9px;
-            color: #6b7280;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .mock-table-row {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr;
-            padding: 8px 12px;
-            border-bottom: 1px solid rgba(255,255,255,0.03);
-            font-size: 10px;
-            color: #e5e7eb;
-        }
-
-        .mock-table-row:last-child {
-            border-bottom: none;
-        }
-
-        .mock-table-row .green { color: #00ff88; }
-        .mock-table-row .blue { color: #00ccff; }
-
-        /* Floating elements */
-        .float-badge {
-            position: absolute;
-            padding: 8px 14px;
-            background: #111827;
-            border: 1px solid #1f2937;
-            border-radius: 10px;
-            font-size: 11px;
-            color: #e5e7eb;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
-            z-index: 10;
-        }
-
-        .float-badge.top-right {
-            top: 80px;
-            right: 30px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .float-badge.bottom-left {
-            bottom: 100px;
-            left: 30px;
-        }
-
-        .float-badge .green { color: #00ff88; font-weight: 600; }
-    </style>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { 
+    width: 1280px; 
+    height: 633px; 
+    background: linear-gradient(135deg, #0a0a12 0%, #1a1a2e 50%, #0d1117 100%);
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  /* Grid pattern overlay */
+  .grid-overlay {
+    position: absolute;
+    inset: 0;
+    background-image: 
+      linear-gradient(rgba(99, 102, 241, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(99, 102, 241, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+  
+  /* Glow effects */
+  .glow-1 {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, transparent 70%);
+    top: -100px;
+    right: -100px;
+    border-radius: 50%;
+  }
+  .glow-2 {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(168, 85, 247, 0.12) 0%, transparent 70%);
+    bottom: -50px;
+    left: -50px;
+    border-radius: 50%;
+  }
+  .glow-3 {
+    position: absolute;
+    width: 250px;
+    height: 250px;
+    background: radial-gradient(circle, rgba(34, 197, 94, 0.1) 0%, transparent 70%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+  }
+  
+  .container {
+    position: relative;
+    z-index: 1;
+    padding: 60px 80px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(99, 102, 241, 0.15);
+    border: 1px solid rgba(99, 102, 241, 0.3);
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    color: #818cf8;
+    width: fit-content;
+    margin-bottom: 24px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  
+  .badge-dot {
+    width: 8px;
+    height: 8px;
+    background: #22c55e;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+  
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+  }
+  
+  h1 {
+    font-size: 56px;
+    font-weight: 700;
+    color: #f8fafc;
+    line-height: 1.1;
+    margin-bottom: 16px;
+    letter-spacing: -1px;
+  }
+  
+  h1 span {
+    background: linear-gradient(135deg, #818cf8, #a855f7, #22c55e);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .subtitle {
+    font-size: 22px;
+    color: #94a3b8;
+    margin-bottom: 40px;
+    max-width: 600px;
+    line-height: 1.4;
+  }
+  
+  .pillars {
+    display: flex;
+    gap: 24px;
+  }
+  
+  .pillar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 16px 24px;
+    border-radius: 12px;
+    min-width: 200px;
+  }
+  
+  .pillar-icon {
+    font-size: 28px;
+  }
+  
+  .pillar-text {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .pillar-label {
+    font-size: 11px;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  
+  .pillar-value {
+    font-size: 16px;
+    color: #e2e8f0;
+    font-weight: 600;
+  }
+  
+  .bottom-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #818cf8, #a855f7, #22c55e, #f59e0b);
+  }
+  
+  .corner-logo {
+    position: absolute;
+    top: 40px;
+    right: 60px;
+    font-size: 48px;
+    opacity: 0.8;
+  }
+  
+  .version {
+    position: absolute;
+    bottom: 24px;
+    right: 60px;
+    font-size: 12px;
+    color: #475569;
+    letter-spacing: 1px;
+  }
+</style>
 </head>
 <body>
-    <div class="bg-gradient"></div>
-    <div class="grid-pattern"></div>
-
-    <!-- Floating badges -->
-    <div class="float-badge top-right">
-        <span>🤖</span>
-        <span><span class="green">4</span> Scouts Active</span>
+  <div class="grid-overlay"></div>
+  <div class="glow-1"></div>
+  <div class="glow-2"></div>
+  <div class="glow-3"></div>
+  
+  <div class="corner-logo">⚡</div>
+  
+  <div class="container">
+    <div class="badge">
+      <div class="badge-dot"></div>
+      Agent Economy Infrastructure
     </div>
-
-    <div class="float-badge bottom-left">
-        <span>⚡</span>
-        <span>Zero Dependencies · <span class="green">38KB</span></span>
+    
+    <h1>GenTech <span>Agent Kit</span></h1>
+    
+    <div class="subtitle">
+      Identity. Execution. Audit. The modular stack for AI agents in the decentralized economy.
     </div>
-
-    <div class="container">
-        <!-- Left: Copy -->
-        <div class="copy-section">
-            <div class="brand-tag">
-                <span class="dot"></span>
-                GenTech Labs
-            </div>
-            
-            <h1>
-                DeFi Dashboards<br>
-                <span class="accent">That Move.</span>
-            </h1>
-            
-            <p class="subtitle">
-                AI-powered portfolio intelligence. Live data, agent scouts, and milestone tracking — all in zero-dependency HTML.
-            </p>
-
-            <div class="features">
-                <div class="feature">
-                    <div class="icon">🔍</div>
-                    <span>Agent Scouts</span>
-                </div>
-                <div class="feature">
-                    <div class="icon">📊</div>
-                    <span>Live Data</span>
-                </div>
-                <div class="feature">
-                    <div class="icon">🏆</div>
-                    <span>Milestones</span>
-                </div>
-            </div>
-
-            <div class="cta-row">
-                <div class="cta-btn">Get Started →</div>
-                <div class="cta-secondary">View Demo</div>
-            </div>
-
-            <div class="stats-row">
-                <div class="stat">
-                    <div class="stat-value">8</div>
-                    <div class="stat-label">Section Types</div>
-                </div>
-                <div class="stat">
-                    <div class="stat-value">5</div>
-                    <div class="stat-label">Themes</div>
-                </div>
-                <div class="stat">
-                    <div class="stat-value">0</div>
-                    <div class="stat-label">Dependencies</div>
-                </div>
-            </div>
+    
+    <div class="pillars">
+      <div class="pillar">
+        <div class="pillar-icon">🔐</div>
+        <div class="pillar-text">
+          <div class="pillar-label">Identity</div>
+          <div class="pillar-value">ERC-8004</div>
         </div>
-
-        <!-- Right: Dashboard Preview -->
-        <div class="preview-section">
-            <div class="dashboard-mock">
-                <div class="mock-header">
-                    <div class="mock-title">GENTECH DASHBOARD</div>
-                    <div class="mock-badge">AAE DeFi</div>
-                </div>
-                
-                <div class="mock-tabs">
-                    <div class="mock-tab active">📊 Portfolio</div>
-                    <div class="mock-tab">🔔 LP Curve</div>
-                    <div class="mock-tab">🔍 Scouts</div>
-                    <div class="mock-tab">🏆 Milestones</div>
-                </div>
-
-                <div class="mock-content">
-                    <div class="mock-stats">
-                        <div class="mock-stat">
-                            <div class="mock-stat-label">Total Value</div>
-                            <div class="mock-stat-value">$46.45</div>
-                        </div>
-                        <div class="mock-stat">
-                            <div class="mock-stat-label">24h Change</div>
-                            <div class="mock-stat-value blue">+1.8%</div>
-                        </div>
-                        <div class="mock-stat">
-                            <div class="mock-stat-label">Daily Fees</div>
-                            <div class="mock-stat-value orange">$0.205</div>
-                        </div>
-                    </div>
-
-                    <div class="mock-scouts">
-                        <div class="mock-scout">
-                            <div class="mock-scout-header">
-                                <div class="mock-scout-name">Yield Scout Alpha</div>
-                                <div class="mock-scout-status active">● Active</div>
-                            </div>
-                            <div class="mock-scout-meta">LFJ · Avalanche · 3 findings</div>
-                        </div>
-                        <div class="mock-scout">
-                            <div class="mock-scout-header">
-                                <div class="mock-scout-name">Opportunity Beta</div>
-                                <div class="mock-scout-status scanning">● Scanning</div>
-                            </div>
-                            <div class="mock-scout-meta">Pangolin · Avalanche · 1 finding</div>
-                        </div>
-                        <div class="mock-scout">
-                            <div class="mock-scout-header">
-                                <div class="mock-scout-name">Risk Scout Gamma</div>
-                                <div class="mock-scout-status active">● Monitoring</div>
-                            </div>
-                            <div class="mock-scout-meta">Aave · Ethereum · 2 findings</div>
-                        </div>
-                        <div class="mock-scout">
-                            <div class="mock-scout-header">
-                                <div class="mock-scout-name">Cross-Chain Delta</div>
-                                <div class="mock-scout-status scanning">● Idle</div>
-                            </div>
-                            <div class="mock-scout-meta">Uniswap · Base · Scanning</div>
-                        </div>
-                    </div>
-
-                    <div class="mock-table">
-                        <div class="mock-table-header">
-                            <span>Pair</span>
-                            <span>APR</span>
-                            <span>TVL</span>
-                            <span>Risk</span>
-                        </div>
-                        <div class="mock-table-row">
-                            <span>AVAX/USDC</span>
-                            <span class="green">12.4%</span>
-                            <span>$850K</span>
-                            <span class="green">Low</span>
-                        </div>
-                        <div class="mock-table-row">
-                            <span>PNG/AVAX</span>
-                            <span class="blue">18.7%</span>
-                            <span>$320K</span>
-                            <span style="color: #f59e0b;">Medium</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon">⚡</div>
+        <div class="pillar-text">
+          <div class="pillar-label">Payments</div>
+          <div class="pillar-value">x402 + Circle</div>
         </div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon">📊</div>
+        <div class="pillar-text">
+          <div class="pillar-label">Audit</div>
+          <div class="pillar-value">On-Chain Logs</div>
+        </div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon">🤖</div>
+        <div class="pillar-text">
+          <div class="pillar-label">Agents</div>
+          <div class="pillar-value">Autonomous</div>
+        </div>
+      </div>
     </div>
+  </div>
+  
+  <div class="bottom-bar"></div>
+  <div class="version">v1.0 — GEN TECH LABS</div>
 </body>
 </html>
