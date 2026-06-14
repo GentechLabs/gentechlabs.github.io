@@ -486,8 +486,8 @@
 
         <!-- Status -->
         <div style="text-align:center; margin: 10px 0 14px;">
-            <span class="status-badge active">
-                <span class="pulse"></span> LFJ Position Active
+            <span class="status-badge active" id="lp-status">
+                <span class="pulse"></span> <span id="lp-status-text">Connecting...</span>
             </span>
         </div>
 
@@ -501,24 +501,50 @@
         <div class="stat-row">
             <div class="stat-card full">
                 <div class="stat-label">Total Position</div>
-                <div class="stat-value" id="total-value">$45.59</div>
-                <div class="stat-sub">2.19 AVAX + 30.88 USDC</div>
+                <div class="stat-value" id="total-value">—</div>
+                <div class="stat-sub" id="position-split">Loading...</div>
             </div>
             <div class="stat-card">
                 <div class="stat-label">AVAX Price</div>
-                <div class="stat-value cyan" id="avax-price">$6.71</div>
+                <div class="stat-value cyan" id="avax-price">—</div>
             </div>
             <div class="stat-card">
                 <div class="stat-label">24h</div>
-                <div class="stat-value green" id="change-24h">+0.72%</div>
+                <div class="stat-value" id="change-24h">—</div>
             </div>
         </div>
 
-        <!-- Rewards -->
-        <div class="rewards-box">
-            <div class="rewards-label">⚡ Claimable Rewards</div>
-            <div class="rewards-value" id="rewards-avax">0.00799 AVAX</div>
-            <div class="rewards-usd" id="rewards-usd">≈ $0.054</div>
+        <!-- Fee Efficiency -->
+        <div class="stat-row">
+            <div class="stat-card">
+                <div class="stat-label">Fee Efficiency</div>
+                <div class="stat-value" id="efficiency" style="font-size:1.2em;">—</div>
+                <div class="stat-sub" id="efficiency-zone"></div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Range Status</div>
+                <div class="stat-value" id="range-status" style="font-size:1.1em;">—</div>
+                <div class="stat-sub" id="range-detail"></div>
+            </div>
+        </div>
+
+        <!-- DCA Strategy -->
+        <div class="strategy-note" id="dca-note">
+            <strong>DCA:</strong> <span id="dca-text">Loading...</span>
+        </div>
+
+        <!-- Price Range -->
+        <div class="card">
+            <div class="card-title"><span class="dot"></span> Liquidity Range</div>
+            <div class="range-bar">
+                <div class="range-fill" style="left:0; width:100%;"></div>
+                <div class="range-marker" id="range-marker" style="left:50%;"></div>
+            </div>
+            <div class="range-labels">
+                <span id="range-low">$6.65</span>
+                <span id="range-high">$6.76</span>
+            </div>
+            <div class="range-current">Current: <strong id="range-current-price">—</strong></div>
         </div>
 
         <!-- Position Breakdown -->
@@ -527,31 +553,17 @@
             <div class="pos-row">
                 <div>
                     <div class="pos-token">AVAX</div>
-                    <div class="pos-amount">2.1900</div>
+                    <div class="pos-amount" id="avax-amount">—</div>
                 </div>
-                <div class="pos-value" id="avax-val">$14.71</div>
+                <div class="pos-value" id="avax-val">—</div>
             </div>
             <div class="pos-row">
                 <div>
                     <div class="pos-token">USDC</div>
-                    <div class="pos-amount">30.8800</div>
+                    <div class="pos-amount" id="usdc-amount">—</div>
                 </div>
-                <div class="pos-value">$30.88</div>
+                <div class="pos-value" id="usdc-val">—</div>
             </div>
-        </div>
-
-        <!-- Price Range -->
-        <div class="card">
-            <div class="card-title"><span class="dot"></span> Liquidity Range</div>
-            <div class="range-bar">
-                <div class="range-fill" style="left:0; width:100%;"></div>
-                <div class="range-marker" id="range-marker" style="left:55%;"></div>
-            </div>
-            <div class="range-labels">
-                <span>$6.65</span>
-                <span>$6.76</span>
-            </div>
-            <div class="range-current">Current: <strong>$6.71</strong></div>
         </div>
 
         <!-- Pool Config -->
@@ -577,12 +589,22 @@
             </div>
         </div>
 
-        <!-- Strategy -->
-        <div class="strategy-note">
-            <strong>Strategy:</strong> Testing the waters — waiting on a pullback. Curve shape for wider coverage. Tight concentration around current price for max fee capture.
+        <!-- Volume & Liquidity -->
+        <div class="card">
+            <div class="card-title"><span class="dot"></span> Pool Stats</div>
+            <div class="config-grid">
+                <div class="config-item">
+                    <div class="config-key">24h Volume</div>
+                    <div class="config-val" id="vol-24h">—</div>
+                </div>
+                <div class="config-item">
+                    <div class="config-key">Liquidity</div>
+                    <div class="config-val" id="tvl">—</div>
+                </div>
+            </div>
         </div>
 
-        <div class="footer">Updated: Jun 13, 2026 · GenTech DeFi Monitor</div>
+        <div class="footer" id="defi-footer">Loading live data from DexScreener...</div>
     </div>
 
     <!-- ===== GAMING TAB ===== -->
@@ -680,58 +702,152 @@
     </nav>
 
     <script>
+        // --- Config ---
+        const POOL_ADDRESS = '0x864d4e5ee7318e97483db7eb0912e09f161516ea';
+        const RANGE_LOW = 6.65;
+        const RANGE_HIGH = 6.76;
+        const SHAPE = 'curve';
+        const AVAX_HELD = 2.19;
+        const USDC_HELD = 30.88;
+        const REFRESH_MS = 60000; // 1 minute
+
+        // --- Tab switching ---
         function switchTab(tab) {
-            // Hide all sections
             document.querySelectorAll('.tab-section').forEach(s => s.classList.remove('active'));
             document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-
-            // Show selected
             document.getElementById('tab-' + tab).classList.add('active');
             document.getElementById('nav-' + tab).classList.add('active');
-
-            // Scroll to top
             window.scrollTo(0, 0);
         }
 
         // --- Settings: Default Tab ---
-        function openSettings() {
-            document.getElementById('settings-modal').style.display = 'flex';
-        }
-        function closeSettings() {
-            document.getElementById('settings-modal').style.display = 'none';
-        }
+        function openSettings() { document.getElementById('settings-modal').style.display = 'flex'; }
+        function closeSettings() { document.getElementById('settings-modal').style.display = 'none'; }
         function setDefaultTab(tab) {
             localStorage.setItem('gentech-default-tab', tab);
-            document.querySelectorAll('.settings-option').forEach(o => {
-                o.classList.toggle('selected', o.dataset.tab === tab);
-            });
+            document.querySelectorAll('.settings-option').forEach(o => o.classList.toggle('selected', o.dataset.tab === tab));
             const btn = document.querySelector('.settings-save');
-            btn.textContent = '✓ Saved';
-            btn.style.color = 'var(--success)';
+            btn.textContent = '✓ Saved'; btn.style.color = 'var(--success)';
             setTimeout(() => { btn.textContent = 'Set as Default'; btn.style.color = ''; }, 1500);
         }
-        function getSavedTab() {
-            return localStorage.getItem('gentech-default-tab') || 'defi';
+        function getSavedTab() { return localStorage.getItem('gentech-default-tab') || 'defi'; }
+
+        // --- DeFi: Live Data Engine ---
+        function calcEfficiency(price, low, high, shape) {
+            if (price < low || price > high) return 0;
+            const pos = (price - low) / (high - low);
+            if (shape === 'spot') return 100;
+            if (shape === 'bidirectional') return Math.max(0, Math.min(100, Math.abs(pos - 0.5) * 2 * 100));
+            return Math.max(0, Math.min(100, (1 - Math.abs(pos - 0.5) * 2) * 100)); // curve
         }
 
-        // Load saved default on page load
+        function getDCA(eff) {
+            if (eff >= 70) return '🟢 Center zone (70%+) — full $50 DCA';
+            if (eff >= 50) return '🟡 Mid zone (50–70%) — reduced $30 DCA';
+            if (eff >= 30) return '🟠 Low zone (30–50%) — micro-DCA $20 + watch';
+            return '🔴 Edge zone (<30%) — micro-DCA $10 + REBALANCE';
+        }
+
+        function getEffColor(eff) {
+            if (eff >= 70) return 'green';
+            if (eff >= 50) return 'cyan';
+            if (eff >= 30) return 'red';
+            return 'red';
+        }
+
+        function fmt(n) {
+            if (n >= 1e6) return '$' + (n / 1e6).toFixed(1) + 'M';
+            if (n >= 1e3) return '$' + (n / 1e3).toFixed(1) + 'K';
+            return '$' + n.toFixed(2);
+        }
+
+        async function fetchLiveData() {
+            try {
+                const resp = await fetch(`https://api.dexscreener.com/latest/dex/pairs/avalanche/${POOL_ADDRESS}`);
+                const data = await resp.json();
+                const pair = data.pairs && data.pairs[0] ? data.pairs[0] : null;
+                if (!pair) throw new Error('No pair data');
+
+                const price = parseFloat(pair.priceNative);
+                const change24 = parseFloat(pair.priceChange?.h24 || 0);
+                const vol24 = parseFloat(pair.volume?.h24 || 0);
+                const liqUsd = parseFloat(pair.liquidity?.usd || 0);
+
+                // Fee efficiency
+                const eff = calcEfficiency(price, RANGE_LOW, RANGE_HIGH, SHAPE);
+
+                // Position values
+                const avaxVal = AVAX_HELD * price;
+                const totalVal = avaxVal + USDC_HELD;
+
+                // Range marker position
+                const rangeWidth = RANGE_HIGH - RANGE_LOW;
+                const markerPct = Math.max(0, Math.min(100, ((price - RANGE_LOW) / rangeWidth) * 100));
+                const inRange = price >= RANGE_LOW && price <= RANGE_HIGH;
+
+                // Update DOM
+                document.getElementById('avax-price').textContent = '$' + price.toFixed(2);
+                document.getElementById('total-value').textContent = '$' + totalVal.toFixed(2);
+                document.getElementById('position-split').textContent = `${AVAX_HELD} AVAX + ${USDC_HELD} USDC`;
+
+                // 24h change
+                const changeEl = document.getElementById('change-24h');
+                changeEl.textContent = (change24 >= 0 ? '+' : '') + change24.toFixed(2) + '%';
+                changeEl.className = 'stat-value ' + (change24 >= 0 ? 'green' : 'red');
+
+                // Efficiency
+                const effEl = document.getElementById('efficiency');
+                effEl.textContent = eff.toFixed(1) + '%';
+                effEl.className = 'stat-value ' + getEffColor(eff);
+                document.getElementById('efficiency-zone').textContent = eff >= 70 ? 'Center zone' : eff >= 50 ? 'Mid zone' : eff >= 30 ? 'Low zone' : 'Edge zone';
+
+                // Range status
+                const rangeEl = document.getElementById('range-status');
+                rangeEl.textContent = inRange ? '🟢 In Range' : '🔴 OUT';
+                rangeEl.className = 'stat-value ' + (inRange ? 'green' : 'red');
+                document.getElementById('range-detail').textContent = inRange ? `±${Math.abs(((price - RANGE_LOW) / rangeWidth - 0.5) * 100).toFixed(0)}% from center` : price < RANGE_LOW ? 'Below range' : 'Above range';
+
+                // DCA
+                document.getElementById('dca-text').textContent = getDCA(eff);
+
+                // Range bar
+                document.getElementById('range-marker').style.left = markerPct + '%';
+                document.getElementById('range-low').textContent = '$' + RANGE_LOW.toFixed(2);
+                document.getElementById('range-high').textContent = '$' + RANGE_HIGH.toFixed(2);
+                document.getElementById('range-current-price').textContent = '$' + price.toFixed(4);
+
+                // Position breakdown
+                document.getElementById('avax-amount').textContent = AVAX_HELD.toFixed(4);
+                document.getElementById('avax-val').textContent = '$' + avaxVal.toFixed(2);
+                document.getElementById('usdc-amount').textContent = USDC_HELD.toFixed(4);
+                document.getElementById('usdc-val').textContent = '$' + USDC_HELD.toFixed(2);
+
+                // Pool stats
+                document.getElementById('vol-24h').textContent = fmt(vol24);
+                document.getElementById('tvl').textContent = fmt(liqUsd);
+
+                // Status badge
+                document.getElementById('lp-status-text').textContent = inRange ? 'Position Active' : '⚠️ Out of Range';
+
+                // Footer
+                const now = new Date().toLocaleString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
+                document.getElementById('defi-footer').textContent = `Live · DexScreener · ${now} · Refreshes every 60s`;
+
+            } catch (err) {
+                console.error('DexScreener fetch failed:', err);
+                document.getElementById('lp-status-text').textContent = '⚠️ Data Error';
+                document.getElementById('defi-footer').textContent = 'Retry in 60s...';
+            }
+        }
+
+        // --- Init ---
         document.addEventListener('DOMContentLoaded', () => {
             const saved = getSavedTab();
             switchTab(saved);
-            document.querySelectorAll('.settings-option').forEach(o => {
-                o.classList.toggle('selected', o.dataset.tab === saved);
-            });
+            document.querySelectorAll('.settings-option').forEach(o => o.classList.toggle('selected', o.dataset.tab === saved));
+            fetchLiveData();
+            setInterval(fetchLiveData, REFRESH_MS);
         });
-
-        // Price range marker
-        const range = 6.76 - 6.65;
-        const current = 6.71;
-        const markerPos = ((current - 6.65) / range) * 100;
-        document.getElementById('range-marker').style.left = markerPos + '%';
-
-        // 24h change color
-        const changeEl = document.getElementById('change-24h');
-        changeEl.className = 'stat-value green';
     </script>
 
 </body>
