@@ -1,12 +1,12 @@
 {
   "meta": {
     "title": "GENTECH DASHBOARD",
-    "subtitle": "AAE DeFi — LFJ LP Position",
+    "subtitle": "AAE DeFi Milestone Template",
     "dataUrl": "defi-data.json",
     "refreshMs": 30000,
-    "version": "v1.2",
+    "version": "v1.0",
     "brand": "GENTECH DASHBOARD",
-    "badge": "AAE DeFi"
+    "badge": "AAE Template #001"
   },
   "theme": {
     "mode": "dark",
@@ -31,51 +31,87 @@
     "container": { "maxWidth": "1100px" }
   },
   "tabs": [
-    { "id": "curve", "label": "LP Curve", "icon": "🔔", "sections": ["lp-curve", "lp-stats"] },
-    { "id": "milestones", "label": "Milestones", "icon": "🏆", "sections": ["fee-milestones", "trajectory"] },
-    { "id": "activity", "label": "Activity", "icon": "📜", "sections": ["transactions", "milestones"] }
+    { "id": "overview", "label": "Overview", "icon": "📊", "sections": ["portfolio", "alloc", "positions"] },
+    { "id": "yields", "label": "Yields", "icon": "🌾", "sections": ["yield-positions", "yield-progress"] },
+    { "id": "history", "label": "Activity", "icon": "📜", "sections": ["transactions", "milestones"] }
   ],
   "sections": [
     {
-      "id": "lp-curve",
-      "title": "Liquidity Distribution — Curve Shape",
-      "icon": "📊",
-      "type": "custom",
-      "dataSource": "curveData",
-      "customRender": "lpCurve"
-    },
-    {
-      "id": "lp-stats",
-      "title": "Position Details",
+      "id": "portfolio",
+      "title": "Portfolio Snapshot",
       "icon": "💰",
       "type": "stats",
-      "dataSource": "lpPosition",
+      "dataSource": "portfolio",
       "cardTemplate": {
         "fields": [
-          { "key": "pair", "label": "Pair", "format": "text" },
-          { "key": "feeTier", "label": "Fee Tier", "format": "text" },
-          { "key": "shape", "label": "Shape", "format": "text" },
-          { "key": "currentPrice", "label": "Current Price", "format": "text" },
-          { "key": "rangeMin", "label": "Range Min", "format": "text" },
-          { "key": "rangeMax", "label": "Range Max", "format": "text" }
+          { "key": "totalValue", "label": "Total Value", "format": "money" },
+          { "key": "change24h", "label": "24h Change", "format": "percent" },
+          { "key": "activePositions", "label": "Positions", "format": "text" },
+          { "key": "activeChains", "label": "Chains", "format": "text" }
         ]
       }
     },
     {
-      "id": "fee-milestones",
-      "title": "Fee Income Milestones",
-      "icon": "🏆",
-      "type": "custom",
-      "dataSource": "feeMilestones",
-      "customRender": "feeMilestones"
+      "id": "alloc",
+      "title": "Asset Allocation",
+      "icon": " pie chart",
+      "type": "progress",
+      "dataSource": "allocation",
+      "progressConfig": {
+        "items": [
+          { "label": "Ethereum (ETH + stETH)", "valueKey": "eth", "color": "#627eea" },
+          { "label": "Stablecoins (USDC)", "valueKey": "usdc", "color": "#2775ca" },
+          { "label": "DeFi Tokens (AERO)", "valueKey": "defi", "color": "#00ff88" }
+        ]
+      }
     },
     {
-      "id": "trajectory",
-      "title": "Trajectory to Next Milestone",
+      "id": "positions",
+      "title": "Active Positions",
+      "icon": "🏦",
+      "type": "table",
+      "dataSource": "positions",
+      "cardTemplate": {
+        "fields": [
+          { "key": "protocol", "label": "Protocol", "format": "text" },
+          { "key": "chain", "label": "Chain", "format": "badge" },
+          { "key": "asset", "label": "Asset" },
+          { "key": "deposited", "label": "Deposited", "format": "money" },
+          { "key": "currentValue", "label": "Value", "format": "money" },
+          { "key": "pnl", "label": "P&L", "format": "money" }
+        ]
+      }
+    },
+    {
+      "id": "yield-positions",
+      "title": "Yield Farming",
+      "icon": "🌾",
+      "type": "table",
+      "dataSource": "yieldFarms",
+      "cardTemplate": {
+        "fields": [
+          { "key": "protocol", "label": "Protocol" },
+          { "key": "pair", "label": "Pair" },
+          { "key": "tvl", "label": "Pool TVL", "format": "money" },
+          { "key": "apy", "label": "APY", "format": "percent" },
+          { "key": "earned", "label": "Earned", "format": "money" },
+          { "key": "status", "label": "Status", "format": "badge" }
+        ]
+      }
+    },
+    {
+      "id": "yield-progress",
+      "title": "Yield Progress",
       "icon": "📈",
-      "type": "custom",
-      "dataSource": "feeMilestones",
-      "customRender": "trajectory"
+      "type": "progress",
+      "dataSource": "yieldProgress",
+      "progressConfig": {
+        "items": [
+          { "label": "Aerodrome USDC/ETH", "valueKey": "aerodrome", "color": "#00ff88" },
+          { "label": "Beefy USDC Vault", "valueKey": "beefy", "color": "#00ccff" },
+          { "label": "Morpho WETH Lending", "valueKey": "morpho", "color": "#c9a84c" }
+        ]
+      }
     },
     {
       "id": "transactions",
@@ -109,7 +145,7 @@
   ],
   "footer": {
     "brand": "GENTECH DASHBOARD",
-    "version": "AAE DeFi v1.2 — Milestones",
+    "version": "AAE DeFi Template v1.0",
     "showTimestamp": true
   }
 }

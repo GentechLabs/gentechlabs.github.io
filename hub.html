@@ -462,7 +462,7 @@
             <div style="display:flex; flex-direction:column; gap:8px; margin-bottom:16px;">
                 <button class="settings-option" data-tab="defi" onclick="setDefaultTab('defi')" style="display:flex; align-items:center; gap:10px; padding:12px; background:var(--bg-alt); border:1px solid var(--panel-border); border-radius:10px; cursor:pointer; text-align:left; color:var(--text); font-family:inherit; font-size:0.88em; transition:all 0.2s;">
                     <span style="font-size:1.3em;">💰</span>
-                    <div><strong>DeFi</strong><br><span style="font-size:0.8em; color:var(--text-dim);">LP curve, live price</span></div>
+                    <div><strong>DeFi</strong><br><span style="font-size:0.8em; color:var(--text-dim);">LP tracker, portfolio</span></div>
                 </button>
                 <button class="settings-option" data-tab="gaming" onclick="setDefaultTab('gaming')" style="display:flex; align-items:center; gap:10px; padding:12px; background:var(--bg-alt); border:1px solid var(--panel-border); border-radius:10px; cursor:pointer; text-align:left; color:var(--text); font-family:inherit; font-size:0.88em; transition:all 0.2s;">
                     <span style="font-size:1.3em;">🎮</span>
@@ -629,9 +629,9 @@
         </div>
 
         <div class="game-card" onclick="window.open('Gaming/poe2-warrior-dashboard.html','_blank')">
-            <h3>🛡️ Warrior — Vanito's Build</h3>
-            <p>Melee juggernaut. Tanky with warcry synergies.</p>
-            <span class="tag">Active Build</span>
+            <h3>🔥 Sorceress — New League</h3>
+            <p>Caster build for the new league. Exploring elemental damage.</p>
+            <span class="tag">League Start</span>
         </div>
 
         <div class="game-card" onclick="window.open('Gaming/passive-planner.html','_blank')">
@@ -712,11 +712,11 @@
     <script>
         // --- Config ---
         const POOL_ADDRESS = '0x864d4e5ee7318e97483db7eb0912e09f161516ea';
-        const RANGE_LOW = 6.55;
-        const RANGE_HIGH = 6.71;
+        const RANGE_LOW = 6.65;
+        const RANGE_HIGH = 6.76;
         const SHAPE = 'curve';
-        const AVAX_HELD = 3.286;
-        const USDC_HELD = 23.62;
+        const AVAX_HELD = 2.19;
+        const USDC_HELD = 30.88;
         const REFRESH_MS = 60000; // 1 minute
 
         // --- Tab switching ---

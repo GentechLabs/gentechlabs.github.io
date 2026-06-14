@@ -76,8 +76,10 @@
   </div>
   <div class="progress-bar-wrap"><div id="progress-bar" style="width:0%"></div></div>
   <div class="header-btns">
+    <a href="../hub.html" class="btn" style="text-decoration:none">🏠 Hub</a>
     <button class="btn" onclick="openImport()">📥 Import</button>
     <button class="btn gold" onclick="exportBuild()">📤 Export</button>
+    <button class="btn" onclick="exportAsBuild()">💾 .build</button>
     <button class="btn" onclick="resetBuild()">🔄 Reset</button>
     <button class="btn" onclick="fitTree()">⊞ Fit View</button>
   </div>
@@ -105,8 +107,34 @@
 <div id="import-overlay">
   <div id="import-modal">
     <h2>Import Build</h2>
-    <p style="font-size:12px;color:#888;margin-bottom:8px">Paste a comma-separated list of node IDs to allocate:</p>
-    <textarea id="import-text" placeholder="node-2, node-3, node-5, ..."></textarea>
+    <div style="display:flex;gap:4px;margin-bottom:10px;">
+      <button class="btn active" onclick="switchImportTab('ids')" id="tab-ids">Node IDs</button>
+      <button class="btn" onclick="switchImportTab('url')" id="tab-url">From URL</button>
+      <button class="btn" onclick="switchImportTab('build')" id="tab-build">.build File</button>
+      <button class="btn gold" onclick="autoPlanFromBuild()" id="tab-auto">⚡ Auto-Plan</button>
+    </div>
+    <div id="import-pane-ids">
+      <p style="font-size:12px;color:#888;margin-bottom:8px">Paste a comma-separated list of node IDs:</p>
+      <textarea id="import-text" placeholder="node-2, node-3, node-5, ..."></textarea>
+    </div>
+    <div id="import-pane-url" style="display:none">
+      <p style="font-size:12px;color:#888;margin-bottom:8px">Paste a MaxRoll, poe2.dev, or poe.ninja share URL:</p>
+      <textarea id="import-url" placeholder="https://www.maxroll.gg/poe2/passive-skill-tree/..." style="height:48px"></textarea>
+    </div>
+    <div id="import-pane-build" style="display:none">
+      <p style="font-size:12px;color:#888;margin-bottom:8px">Paste a .build file contents or drop a .build file:</p>
+      <textarea id="import-build" placeholder='{"class":"Monk","nodes":[...}' style="height:80px"></textarea>
+      <input type="file" id="build-file-input" accept=".build,.json" style="display:none" onchange="handleBuildFile(event)">
+      <button class="btn" onclick="document.getElementById('build-file-input').click()" style="margin-top:6px">📂 Choose .build File</button>
+    </div>
+    <div id="import-pane-auto" style="display:none">
+      <p style="font-size:12px;color:#888;margin-bottom:8px">Auto-generate a passive plan from your tracked character builds:</p>
+      <div style="display:flex;gap:6px;margin-bottom:8px">
+        <button class="btn" onclick="autoPlanFrom('monk')">⚡ Lightning Monk</button>
+        <button class="btn" onclick="autoPlanFrom('sorceress')">🔥 Sorceress</button>
+      </div>
+      <p style="font-size:11px;color:#555">Allocates recommended nodes based on your build skills and progression.</p>
+    </div>
     <div class="modal-btns">
       <button class="btn" onclick="closeImport()">Cancel</button>
       <button class="btn gold" onclick="doImport()">Import</button>
@@ -886,10 +914,136 @@ function exportBuild() {
   });
 }
 
+function exportAsBuild() {
+  const allocated = nodes.filter(n => n.allocated).map(n => n.id);
+  const buildData = {
+    format: 'poe2-planner',
+    version: '1.0',
+    class: 'Monk',
+    nodes: allocated,
+    pointsUsed: allocated.length - 1,
+    exported: new Date().toISOString()
+  };
+  const blob = new Blob([JSON.stringify(buildData, null, 2)], {type: 'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'poe2-build.build';
+  a.click();
+  URL.revokeObjectURL(url);
+  showToast('Build exported as .build file!');
+}
+
+function switchImportTab(tab) {
+  ['ids','url','build','auto'].forEach(t => {
+    const pane = document.getElementById('import-pane-' + t);
+    const btn = document.getElementById('tab-' + t);
+    if (pane) pane.style.display = t === tab ? 'block' : 'none';
+    if (btn) btn.classList.toggle('active', t === tab);
+  });
+}
+
+function handleBuildFile(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    document.getElementById('import-build').value = e.target.result;
+  };
+  reader.readAsText(file);
+}
+
+function parseBuildContent(raw) {
+  try {
+    const data = JSON.parse(raw);
+    // Our format: { nodes: ['node-1', 'node-2'] }
+    if (data.nodes && Array.isArray(data.nodes)) return data.nodes;
+    // POE2 .build format: may have different structure
+    if (data.passive_nodes && Array.isArray(data.passive_nodes)) return data.passive_nodes;
+    // Try to find any array of node-like strings
+    for (const key of Object.keys(data)) {
+      if (Array.isArray(data[key]) && data[key].length > 0 && typeof data[key][0] === 'string' && data[key][0].startsWith('node-')) {
+        return data[key];
+      }
+    }
+  } catch(e) {
+    // Maybe it's just comma-separated IDs
+    return raw.split(',').map(s => s.trim()).filter(s => s.startsWith('node-'));
+  }
+  return null;
+}
+
+function parseShareUrl(url) {
+  // MaxRoll URLs: https://www.maxroll.gg/poe2/passive-skill-tree/...
+  // poe2.dev URLs: https://poe2.dev/build-planner?tree=...
+  // poe.ninja URLs: https://poe.ninja/poe2/builds?...
+  // These typically encode node data in the URL hash or query params
+  try {
+    const u = new URL(url);
+    // Check for encoded tree data in hash
+    if (u.hash) {
+      const hashData = u.hash.substring(1);
+      // Try base64 decode
+      try {
+        const decoded = atob(hashData);
+        const parsed = JSON.parse(decoded);
+        if (parsed.nodes) return parsed.nodes;
+      } catch(e) {}
+      // Try as comma-separated
+      if (hashData.includes(',')) {
+        return hashData.split(',').map(s => 'node-' + s.trim()).filter(Boolean);
+      }
+    }
+    // Check query params
+    const tree = u.searchParams.get('tree') || u.searchParams.get('nodes') || u.searchParams.get('build');
+    if (tree) {
+      try {
+        const decoded = atob(tree);
+        const parsed = JSON.parse(decoded);
+        if (parsed.nodes) return parsed.nodes;
+      } catch(e) {}
+      return tree.split(',').map(s => 'node-' + s.trim()).filter(Boolean);
+    }
+    showToast('Could not parse URL — try pasting node IDs instead');
+    return null;
+  } catch(e) {
+    showToast('Invalid URL');
+    return null;
+  }
+}
+
+function autoPlanFrom(character) {
+  // Auto-allocate nodes based on character build data
+  // This is a simple heuristic based on class
+  nodes.forEach(n => { n.allocated = (n.id === 'start'); });
+
+  let allocCount = 0;
+  if (character === 'monk') {
+    // Allocate intelligence/lightning nodes near start
+    const recommended = nodes.filter(n =>
+      n.id.includes('int') || n.id.includes('lightning') || n.id.includes('crit') || n.id.includes('spell')
+    ).slice(0, 30);
+    recommended.forEach(n => { if (allocateNode(n.id)) allocCount++; });
+  } else if (character === 'sorceress') {
+    // Allocate elemental/fire/cold nodes
+    const recommended = nodes.filter(n =>
+      n.id.includes('elemental') || n.id.includes('fire') || n.id.includes('cold') || n.id.includes('spell')
+    ).slice(0, 30);
+    recommended.forEach(n => { if (allocateNode(n.id)) allocCount++; });
+  }
+  closeImport();
+  showToast(`Auto-planned ${allocCount} nodes for ${character}!`);
+}
+
+function autoPlanFromBuild() {
+  switchImportTab('auto');
+}
+
 function openImport() {
   document.getElementById('import-overlay').classList.add('open');
   document.getElementById('import-text').value = '';
   document.getElementById('import-text').focus();
+  switchImportTab('ids');
 }
 
 function closeImport() {
