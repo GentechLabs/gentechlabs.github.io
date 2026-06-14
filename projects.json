@@ -1,386 +1,65 @@
-Found: Agent Catcher — current status: building
-Updated to: submitted
-Found: Rugcheck — Agent Catcher — current status: completed
-Updated to: submitted
 {
   "projects": [
+    {
+      "id": "aae-platform",
+      "title": "AAE Platform",
+      "description": "The full agent economy stack. Six modular layers — ERC-8004 identity, OWASP safety, Echo Brain memory, x402 commerce, credit scoring, voice personas. Chain-agnostic core with chain-specific adapters.",
+      "tech": ["Identity", "Safety", "Memory", "Commerce", "Credit", "Voice"],
+      "status": "building",
+      "timeline": "Apr 2026",
+      "highlight": true,
+      "github_url": "https://github.com/ProtoJay4789/genTech-agent-kit"
+    },
     {
       "id": "agent-escrow",
       "title": "AgentEscrow",
       "description": "Cross-chain payment infrastructure with AI agent integration. Agents escrow, validate, and release payments automatically. Live on Avalanche & Base with 6+ production positions.",
-      "tech": [
-        "Solidity",
-        "x402",
-        "EVM",
-        "Solana Bridge"
-      ],
-      "status": "completed",
-      "deadline": null,
+      "tech": ["Solidity", "x402", "EVM", "Avalanche", "Base"],
+      "status": "live",
       "timeline": "May 2026",
       "highlight": true,
-      "vault_path": "03-Projects/AAE/agent-escrow-architecture.md"
+      "github_url": "https://github.com/ProtoJay4789/Agent-Arena"
     },
     {
-      "id": "lfj-avax-usdc",
-      "title": "AAE Defi Milestones",
-      "description": "Automated DeFi milestone tracking and position rebalancing across Avalanche, Base, and Solana. Auto-tracking LP positions, DCA scheduling, fee analytics, and dynamic milestone-based adjustments. Managing ~$1K+ in active positions.",
-      "tech": [
-        "React",
-        "Python",
-        "Chainlink",
-        "LFJ"
-      ],
-      "status": "building",
-      "deadline": null,
-      "timeline": "Apr 2026",
-      "highlight": false,
-      "vault_path": "03-Projects/DeFi/LFJ-AVAX-USDC.md"
+      "id": "agent-credit-score",
+      "title": "Agent Credit Score",
+      "description": "0-850 credit scoring system for AI agents. Tracks win rate, risk-adjusted returns, consistency, and behavior across DeFi protocols. 22/22 tests passing. MIT licensed.",
+      "tech": ["Python", "Sharpe Ratio", "5 Tiers", "MIT"],
+      "status": "live",
+      "timeline": "Jun 2026",
+      "highlight": true,
+      "github_url": "https://github.com/ProtoJay4789/Agent-Arena/tree/master/credit_score"
     },
     {
       "id": "multi-agent-voice",
       "title": "Multi-Agent Voice Integration",
-      "description": "Four-agent voice system (Gentech, YoYo, DMOB, Desmond) with daily automated briefings. End-to-end TTS pipeline with dialogue generation, voice selection, and audio mixing. Quota active, production-ready.",
-      "tech": [
-        "ElevenLabs",
-        "Python",
-        "Hermes",
-        "Telegram"
-      ],
+      "description": "Four-agent voice system (Gentech, YoYo, DMOB, Desmond) with daily automated briefings. End-to-end TTS pipeline with dialogue generation, voice selection, and audio mixing.",
+      "tech": ["ElevenLabs", "Hermes", "TTS", "Telegram"],
       "status": "live",
-      "deadline": null,
       "timeline": "May 2026",
-      "highlight": true,
-      "vault_path": "03-Projects/Multi-Agent-Voice/"
+      "highlight": true
     },
     {
-      "id": "kite-ai",
-      "title": "Kite AI Brain Layer",
-      "description": "Agent economy lifecycle landing on Kite AI settlement layer. AAE integration for decentralized agent marketplace governance. Deployed on Kite L1 testnet.",
-      "tech": [
-        "Kite L1",
-        "Yield Oracles",
-        "Strategy Engine"
-      ],
-      "status": "completed",
-      "deadline": null,
-      "timeline": "May 2026",
-      "highlight": true,
-      "vault_path": "02-Labs/Hackathons/Kite-AI/"
-    },
-    {
-      "id": "personal-finance",
-      "title": "Personal Finance Agent",
-      "description": "Bill reminders, debt consolidation optimizer, crypto-yield routing for idle capital. Evolving into Agent Bill Pay \u2014 consumer gateway to AAE. Screenshot \u2192 Dashboard \u2192 Calendar \u2192 Auto-Pay \u2192 Invest.",
-      "tech": [
-        "Python",
-        "Cron",
-        "Hermes",
-        "DeFi"
-      ],
-      "status": "building",
-      "deadline": null,
-      "timeline": "May 2026",
-      "highlight": true,
-      "vault_path": "03-Projects/Personal-Finance/"
-    },
-    {
-      "id": "gentech-travels",
-      "title": "GenTech Travels",
-      "description": "Travel community platform with AI moderation, voice personalities, and creator economy. Built on Telegram/Discord/X for passport bros and international travelers. Two-sided community with roast/repair layers and agentic content moderation.",
-      "tech": [
-        "Python",
-        "Telegram",
-        "AI Moderation",
-        "Voice"
-      ],
-      "status": "building",
-      "deadline": null,
-      "timeline": "May 2026",
-      "highlight": true,
-      "vault_path": "09-Green Room/designs/gentech-travels-full-brief.md"
-    },
-    {
-      "id": "hermes-kanban",
-      "title": "Hermes Kanban",
-      "description": "TUI-based kanban board for autonomous agent task management. Integrated with Hermes agent orchestration for real-time task tracking and handoffs.",
-      "tech": [
-        "Hermes",
-        "Python",
-        "TUI",
-        "SQLite"
-      ],
+      "id": "defi-milestones",
+      "title": "DeFi Milestones",
+      "description": "Automated LP tracking and rebalancing on Avalanche. Live DexScreener data, fee efficiency scoring, milestone-based adjustments. Managing real positions with real money.",
+      "tech": ["LFJ", "Chainlink", "LP Tracking", "Live Data"],
       "status": "live",
-      "deadline": null,
-      "timeline": "Mar 2026",
-      "highlight": false,
-      "vault_path": "03-Projects/hermes-kanban/"
-    },
-    {
-      "id": "birdeye-bip",
-      "title": "Birdeye BIP",
-      "description": "On-chain market data adapter for Birdeye ecosystem. Real-time price feeds, order book data, and volume metrics for agent trading strategies.",
-      "tech": [
-        "Solana",
-        "Python",
-        "Data Pipeline"
-      ],
-      "status": "research",
-      "deadline": null,
-      "timeline": "Feb 2026",
-      "highlight": false,
-      "vault_path": "03-Projects/BirdeyeBIP/"
-    },
-    {
-      "id": "bags-fm",
-      "title": "Bags FM",
-      "description": "AI agent trading desk for memecoin analysis on Solana. On hold \u2014 may revisit if traction picks up.",
-      "tech": [
-        "Solana",
-        "AI Agents",
-        "Trading",
-        "Python"
-      ],
-      "status": "research",
-      "deadline": null,
-      "timeline": "Jun 2026",
-      "highlight": false,
-      "vault_path": "02-Labs/Hackathons/Bags-FM/"
-    },
-    {
-      "id": "somnia",
-      "title": "Agent Catcher",
-      "demo_url": "/somnia-token-risk-oracle/",
-      "description": "On-chain token risk oracle \u2014 rugpull detection via AI contract analysis. Completed but blocked by Somnia chain limitations. Code ready, chain not production-ready.",
-      "tech": [
-        "Solidity",
-        "Somnia",
-        "Hardhat",
-        "GoPlus API",
-        "Ethers.js"
-      ],
-      "status": "completed",
-      "deadline": null,
-      "timeline": "Jun 2026",
-      "highlight": false,
-      "vault_path": "02-Labs/Hackathons/Somnia/"
-    },
-    {
-      "id": "agora-agents",
-      "title": "Agora Agents",
-      "description": "AI portfolio rebalancer on Circle Arc. Adaptive portfolio management for the Canteen \u00d7 Circle \u00d7 Arc hackathon. $50K prize pool.",
-      "tech": [
-        "Circle Arc",
-        "AI Agents",
-        "DeFi",
-        "Python"
-      ],
-      "status": "submitted",
-      "deadline": "2026-05-25",
-      "timeline": "May 2026",
+      "timeline": "Apr 2026",
       "highlight": true,
-      "vault_path": "02-Labs/Hackathons/Agora/"
-    },
-    {
-      "id": "swarms-acm",
-      "title": "Swarms ACM LP Monitor",
-      "description": "DeFi LP monitoring agent built on Swarms framework. Published to Swarms Marketplace, tokenized Solana. Automated position tracking, rebalance signals, and fee analytics. $30K prize pool.",
-      "tech": [
-        "Swarms",
-        "DeFi",
-        "Python",
-        "LP Monitoring"
-      ],
-      "status": "submitted",
-      "deadline": "2026-05-27",
-      "timeline": "May 2026",
-      "highlight": true,
-      "vault_path": "02-Labs/Hackathons/Swarms-ACM/"
-    },
-    {
-      "id": "rugcheck",
-      "demo_url": "/rugcheck/",
-      "title": "Rugcheck \u2014 Agent Catcher",
-      "description": "Smart contract rugpull detection system for Somnia hackathon. AI-powered analysis of contract patterns, ownership, and liquidity to flag scam tokens.",
-      "tech": [
-        "Somnia",
-        "Smart Contracts",
-        "AI Analysis",
-        "Security"
-      ],
-      "status": "submitted",
-      "deadline": null,
-      "timeline": "Jun 2026",
-      "highlight": true,
-      "vault_path": "02-Labs/Hackathons/Sui-Overflow/"
-    },
-    {
-      "id": "genlayer-token-scanner",
-      "title": "GenLayer Token Scanner",
-      "description": "On-chain token analysis engine for GenLayer platform. NEEDS PORTAL SUBMISSION.",
-      "tech": [
-        "GenLayer",
-        "Python",
-        "Blockchain",
-        "Token Analysis"
-      ],
-      "status": "building",
-      "deadline": null,
-      "timeline": "May 2026",
-      "highlight": true,
-      "vault_path": "02-Labs/Hackathons/GenLayer/"
-    },
-    {
-      "id": "genlayer-yield-optimizer",
-      "title": "GenLayer DeFi Yield Optimizer",
-      "description": "Automated yield optimization agent for GenLayer. NEEDS PORTAL SUBMISSION.",
-      "tech": [
-        "GenLayer",
-        "DeFi",
-        "Python",
-        "Yield Farming"
-      ],
-      "status": "building",
-      "deadline": null,
-      "timeline": "May 2026",
-      "highlight": true,
-      "vault_path": "02-Labs/Hackathons/GenLayer/"
-    },
-    {
-      "id": "genlayer-governance-agent",
-      "title": "GenLayer Governance Agent",
-      "description": "DAO governance automation for GenLayer. NEEDS PORTAL SUBMISSION.",
-      "tech": [
-        "GenLayer",
-        "DAO",
-        "Governance",
-        "Python"
-      ],
-      "status": "building",
-      "deadline": null,
-      "timeline": "May 2026",
-      "highlight": true,
-      "vault_path": "02-Labs/Hackathons/GenLayer/"
-    },
-    {
-      "id": "peter-cullen-rater",
-      "title": "Peter Cullen Voice Rating System",
-      "description": "AI voice personality system using Peter Cullen's voice profile. Rating and feedback system with voice synthesis for personalized agent interactions.",
-      "tech": [
-        "ElevenLabs",
-        "Voice AI",
-        "Python",
-        "TTS"
-      ],
-      "status": "completed",
-      "deadline": null,
-      "timeline": "May 2026",
-      "highlight": false,
-      "vault_path": "03-Projects/Multi-Agent-Voice/"
-    },
-    {
-      "id": "gentech-dashboard",
-      "title": "GenTech Dashboard Engine",
-      "description": "Universal JSON-driven dashboard engine \u2014 38KB zero-dep JS. DeFi-native (LP positions, DCA tracking, portfolio analytics) but general-purpose for any data visualization. Open-sourceable. Powers Jordan, Christel, and Vanito personal dashboards.",
-      "tech": [
-        "JavaScript",
-        "DeFi",
-        "JSON-Driven",
-        "Zero-Dep",
-        "Dashboard"
-      ],
-      "status": "building",
-      "deadline": null,
-      "timeline": "Jun 2026",
-      "highlight": true,
-      "demo_url": "/pals/poe2-dashboard.html"
-    },
-    {
-      "id": "agent-bill-pay",
-      "title": "Agent Bill Pay",
-      "description": "Consumer gateway to AAE. Screenshot \u2192 Dashboard \u2192 Calendar \u2192 Auto-Pay \u2192 Invest. AI agent that pays your bills using stablecoins with programmatic spending guardrails. Built with Rain Agent Control Layer, TrustClaw, and x402 micropayments.",
-      "tech": [
-        "AI Agents",
-        "Stablecoins",
-        "Rain",
-        "x402",
-        "TrustClaw"
-      ],
-      "status": "building",
-      "deadline": null,
-      "timeline": "Jun 2026",
-      "highlight": true,
-      "vault_path": "AAE/Agent-Bill-Pay-Full.md"
-    },
-    {
-      "id": "brickken-rams",
-      "title": "Brickken RAMS Integration",
-      "description": "ERC-8226 compliance layer for AI agent authority on tokenized assets. Scoped, time-bounded, financially capped mandates. Partnership outreach to Brickken (Barcelona, $450M+ tokenized assets). Enables agent-native ETFs.",
-      "tech": [
-        "ERC-8226",
-        "ERC-8004",
-        "Tokenization",
-        "Compliance",
-        "RWA"
-      ],
-      "status": "building",
-      "deadline": null,
-      "timeline": "Jun 2026",
-      "highlight": true,
-      "vault_path": "AAE/Brickken-RAMS-Integration.md"
-    },
-    {
-      "id": "rain-agent-control",
-      "title": "Rain Agent Control Layer",
-      "description": "Programmatic spending guardrails for AI agents. Scoped virtual cards, merchant allowlists, amount caps. Pre-transaction enforcement. Integration with AAE for consumer bill pay and agent commerce.",
-      "tech": [
-        "Stablecoins",
-        "Visa Cards",
-        "Guardrails",
-        "Rain",
-        "Payments"
-      ],
-      "status": "building",
-      "deadline": null,
-      "timeline": "Jun 2026",
-      "highlight": true,
-      "vault_path": "AAE/Rain-Agent-Control-Layer.md"
-    },
-    {
-      "id": "agent-etfs",
-      "title": "Agent-Native ETFs",
-      "description": "Tokenized fund products where AI agents manage portfolios for investors. RAMS-compliant, x402 micropayment fees, ERC-8004 reputation. The intersection of DeFi, TradFi, and AI agents.",
-      "tech": [
-        "ERC-8226",
-        "ERC-8004",
-        "DeFi",
-        "Tokenization",
-        "x402"
-      ],
-      "status": "building",
-      "deadline": null,
-      "timeline": "Jun 2026",
-      "highlight": true,
-      "vault_path": "AAE/Agent-ETFs.md"
+      "demo_url": "/DeFi/defi-dashboard.html"
     },
     {
       "id": "cookbook-nanopay",
-      "title": "GenTech Cookbook Nanopay",
-      "description": "Pay-per-recipe platform using Circle Gateway nanopayments on Arc. $0.005/recipe, $0.001/review. Gas-free x402 payments settling in <500ms. Built for Lepton Agents Hackathon (Canteen \u00d7 Circle \u00d7 Arc).",
-      "tech": [
-        "Circle Gateway",
-        "Arc",
-        "x402",
-        "TypeScript",
-        "Express",
-        "USDC"
-      ],
+      "title": "Cookbook Nanopay",
+      "description": "Pay-per-recipe platform using Circle Gateway nanopayments. $0.005/recipe, $0.001/review. Gas-free x402 payments settling in <500ms. Built for Lepton Agents Hackathon.",
+      "tech": ["Circle Gateway", "x402", "Arc", "USDC"],
       "status": "building",
-      "deadline": "2026-06-29",
       "timeline": "Jun 2026",
       "highlight": true,
-      "vault_path": "02-Labs/Hackathons/Lepton/"
+      "deadline": "2026-06-29"
     }
   ],
   "generated": "2026-06-14T00:00:00Z",
-  "count": 23
+  "count": 6
 }
