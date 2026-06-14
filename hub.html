@@ -604,6 +604,14 @@
             </div>
         </div>
 
+        <!-- Fee Milestones -->
+        <div class="card" style="margin-top:12px;">
+            <div class="card-title"><span class="dot"></span> 🏆 Fee Milestones</div>
+            <div id="milestone-ladder" style="margin-top:8px;">Loading...</div>
+        </div>
+
+        <a class="portfolio-link" href="DeFi/defi-dashboard.html" target="_blank" style="margin-top:12px; display:block;">Open Full Dashboard (Curve + Milestones) →</a>
+
         <div class="footer" id="defi-footer">Loading live data from DexScreener...</div>
     </div>
 
@@ -832,6 +840,55 @@
                 // Footer
                 const now = new Date().toLocaleString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
                 document.getElementById('defi-footer').textContent = `Live · DexScreener · ${now} · Refreshes every 60s`;
+                // Fee Milestones
+                const estDailyFees = (vol24 * 0.0005) * (46.45 / liqUsd);
+                const tiers = [
+                    { tier: 1, label: 'Scout', target: 5, icon: '🎖️' },
+                    { tier: 2, label: 'Raider', target: 20, icon: '⚔️' },
+                    { tier: 3, label: 'Warlord', target: 55, icon: '🛡️' },
+                    { tier: 4, label: 'Sovereign', target: 200, icon: '👑' }
+                ];
+                let currentIdx = -1;
+                for (let i = 0; i < tiers.length; i++) {
+                    if (estDailyFees >= tiers[i].target) currentIdx = i;
+                }
+                const nextIdx = Math.min(currentIdx + 1, tiers.length - 1);
+                const nextTier = tiers[nextIdx];
+                const progressPct = currentIdx >= 0
+                    ? Math.min(100, ((estDailyFees - tiers[currentIdx].target) / (nextTier.target - tiers[currentIdx].target)) * 100)
+                    : Math.min(100, (estDailyFees / tiers[0].target) * 100);
+                const daysToNext = estDailyFees > 0 ? Math.ceil((nextTier.target - estDailyFees) / estDailyFees) : '∞';
+
+                const ladderHtml = tiers.map((t, i) => {
+                    const done = i <= currentIdx;
+                    const isNext = i === nextIdx && !done;
+                    const pct = done ? 100 : (isNext ? progressPct : Math.min(100, (estDailyFees / t.target) * 100));
+                    const color = done ? 'var(--gold)' : isNext ? 'var(--accent)' : 'var(--text-dim)';
+                    return `<div style="display:flex; align-items:center; gap:10px; padding:8px 10px; margin-bottom:6px; border-radius:8px; border:1px solid ${done || isNext ? color : 'var(--panel-border)'}; background:${done ? 'rgba(0,255,136,0.06)' : 'transparent'};">
+                        <span style="font-size:1.3em;">${t.icon}</span>
+                        <div style="flex:1;">
+                            <span style="font-weight:600; color:var(--text);">Tier ${t.tier}: ${t.label}</span>
+                            <span style="color:${color}; font-weight:700;"> — $${t.target}/day</span>
+                        </div>
+                        <div style="width:80px;">
+                            <div style="height:5px; background:rgba(255,255,255,0.1); border-radius:3px; overflow:hidden;">
+                                <div style="height:100%; width:${pct}%; background:${color}; border-radius:3px;"></div>
+                            </div>
+                            <div style="font-size:0.7em; color:var(--text-dim); text-align:right; margin-top:2px;">${pct.toFixed(1)}%</div>
+                        </div>
+                    </div>`;
+                }).join('');
+
+                const ladderEl = document.getElementById('milestone-ladder');
+                if (ladderEl) {
+                    ladderEl.innerHTML = `
+                        <div style="display:flex; justify-content:space-between; margin-bottom:12px;">
+                            <div><span style="font-size:0.75em; color:var(--text-dim); text-transform:uppercase;">Est. Daily Fees</span><br><span style="font-size:1.4em; font-weight:700; color:var(--gold);">$${estDailyFees.toFixed(3)}</span></div>
+                            <div style="text-align:right;"><span style="font-size:0.75em; color:var(--text-dim); text-transform:uppercase;">Next: ${nextTier.icon} ${nextTier.label}</span><br><span style="font-size:1.1em; font-weight:600; color:var(--accent);">${typeof daysToNext === 'number' ? daysToNext + ' days' : daysToNext}</span></div>
+                        </div>
+                        ${ladderHtml}
+                    `;
+                }
 
             } catch (err) {
                 console.error('DexScreener fetch failed:', err);
