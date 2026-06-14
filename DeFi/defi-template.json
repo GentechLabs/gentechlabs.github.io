@@ -1,12 +1,16 @@
 {
   "meta": {
     "title": "GENTECH DASHBOARD",
-    "subtitle": "AAE DeFi Milestone Template",
+    "subtitle": "AVAX/USDC LFJ Position",
     "dataUrl": "defi-data.json",
-    "refreshMs": 30000,
-    "version": "v1.0",
+    "refreshMs": 60000,
+    "version": "v2.0",
     "brand": "GENTECH DASHBOARD",
-    "badge": "AAE Template #001"
+    "badge": "Avalanche · LFJ Concentrated Liquidity",
+    "chain": "Avalanche C-Chain",
+    "dex": "LFJ (Trader Joe)",
+    "poolAddress": "0x864d4e5ee7318e97483db7eb0912e09f161516ea",
+    "priceSource": "DexScreener"
   },
   "theme": {
     "mode": "dark",
@@ -14,130 +18,116 @@
       "--bg": "#0a0e17",
       "--panel-bg": "#111827",
       "--panel-border": "#1f2937",
-      "--panel-shadow": "rgba(0,255,136,0.05)",
+      "--panel-shadow": "rgba(232,65,66,0.05)",
       "--text": "#e5e7eb",
       "--text-dim": "#6b7280",
-      "--gold": "#00ff88",
-      "--gold-dim": "#059669",
-      "--accent": "#00ccff",
+      "--gold": "#e8652a",
+      "--gold-dim": "rgba(232,101,42,0.15)",
+      "--accent": "#e84142",
       "--danger": "#ff3366",
       "--success": "#00ff88",
+      "--cyan": "#00d4ff",
+      "--avax-red": "#e84142",
       "--radius": "12px"
     },
     "fonts": {
-      "heading": "'Inter', -apple-system, sans-serif",
-      "body": "'Inter', -apple-system, sans-serif"
+      "heading": "'Cinzel', serif",
+      "body": "'Inter', sans-serif",
+      "mono": "'JetBrains Mono', monospace"
     },
-    "container": { "maxWidth": "1100px" }
+    "container": { "maxWidth": "480px" }
   },
   "tabs": [
-    { "id": "overview", "label": "Overview", "icon": "📊", "sections": ["portfolio", "alloc", "positions"] },
-    { "id": "yields", "label": "Yields", "icon": "🌾", "sections": ["yield-positions", "yield-progress"] },
-    { "id": "history", "label": "Activity", "icon": "📜", "sections": ["transactions", "milestones"] }
+    { "id": "overview", "label": "Overview", "icon": "📊", "sections": ["portfolio", "allocation", "position", "range"] },
+    { "id": "yields", "label": "Yields", "icon": "🌾", "sections": ["yield-info"] },
+    { "id": "activity", "label": "Activity", "icon": "📜", "sections": ["milestones"] }
   ],
   "sections": [
     {
       "id": "portfolio",
-      "title": "Portfolio Snapshot",
+      "title": "Position Snapshot",
       "icon": "💰",
       "type": "stats",
       "dataSource": "portfolio",
       "cardTemplate": {
         "fields": [
           { "key": "totalValue", "label": "Total Value", "format": "money" },
+          { "key": "avaxPrice", "label": "AVAX Price", "format": "money" },
           { "key": "change24h", "label": "24h Change", "format": "percent" },
-          { "key": "activePositions", "label": "Positions", "format": "text" },
-          { "key": "activeChains", "label": "Chains", "format": "text" }
+          { "key": "status", "label": "Status", "format": "badge" }
         ]
       }
     },
     {
-      "id": "alloc",
-      "title": "Asset Allocation",
-      "icon": " pie chart",
-      "type": "progress",
-      "dataSource": "allocation",
-      "progressConfig": {
-        "items": [
-          { "label": "Ethereum (ETH + stETH)", "valueKey": "eth", "color": "#627eea" },
-          { "label": "Stablecoins (USDC)", "valueKey": "usdc", "color": "#2775ca" },
-          { "label": "DeFi Tokens (AERO)", "valueKey": "defi", "color": "#00ff88" }
-        ]
-      }
-    },
-    {
-      "id": "positions",
-      "title": "Active Positions",
-      "icon": "🏦",
+      "id": "allocation",
+      "title": "Position Breakdown",
+      "icon": "📊",
       "type": "table",
-      "dataSource": "positions",
+      "dataSource": "allocation",
+      "cardTemplate": {
+        "fields": [
+          { "key": "token", "label": "Token" },
+          { "key": "amount", "label": "Amount", "format": "number" },
+          { "key": "value", "label": "Value", "format": "money" },
+          { "key": "pct", "label": "Share", "format": "percent" }
+        ]
+      }
+    },
+    {
+      "id": "position",
+      "title": "LFJ Position",
+      "icon": "🏦",
+      "type": "stats",
+      "dataSource": "position",
       "cardTemplate": {
         "fields": [
           { "key": "protocol", "label": "Protocol", "format": "text" },
           { "key": "chain", "label": "Chain", "format": "badge" },
-          { "key": "asset", "label": "Asset" },
-          { "key": "deposited", "label": "Deposited", "format": "money" },
-          { "key": "currentValue", "label": "Value", "format": "money" },
-          { "key": "pnl", "label": "P&L", "format": "money" }
+          { "key": "pair", "label": "Pair", "format": "text" },
+          { "key": "feeTier", "label": "Fee Tier", "format": "text" },
+          { "key": "shape", "label": "Shape", "format": "text" },
+          { "key": "type", "label": "Type", "format": "text" }
         ]
       }
     },
     {
-      "id": "yield-positions",
-      "title": "Yield Farming",
+      "id": "range",
+      "title": "Liquidity Range",
+      "icon": "📐",
+      "type": "stats",
+      "dataSource": "range",
+      "cardTemplate": {
+        "fields": [
+          { "key": "low", "label": "Range Low", "format": "money" },
+          { "key": "high", "label": "Range High", "format": "money" },
+          { "key": "width", "label": "Width", "format": "percent" },
+          { "key": "efficiency", "label": "Fee Efficiency", "format": "percent" },
+          { "key": "zone", "label": "Zone", "format": "badge" }
+        ]
+      }
+    },
+    {
+      "id": "yield-info",
+      "title": "Fee Earnings",
       "icon": "🌾",
-      "type": "table",
-      "dataSource": "yieldFarms",
+      "type": "stats",
+      "dataSource": "yieldInfo",
       "cardTemplate": {
         "fields": [
-          { "key": "protocol", "label": "Protocol" },
-          { "key": "pair", "label": "Pair" },
-          { "key": "tvl", "label": "Pool TVL", "format": "money" },
-          { "key": "apy", "label": "APY", "format": "percent" },
-          { "key": "earned", "label": "Earned", "format": "money" },
-          { "key": "status", "label": "Status", "format": "badge" }
-        ]
-      }
-    },
-    {
-      "id": "yield-progress",
-      "title": "Yield Progress",
-      "icon": "📈",
-      "type": "progress",
-      "dataSource": "yieldProgress",
-      "progressConfig": {
-        "items": [
-          { "label": "Aerodrome USDC/ETH", "valueKey": "aerodrome", "color": "#00ff88" },
-          { "label": "Beefy USDC Vault", "valueKey": "beefy", "color": "#00ccff" },
-          { "label": "Morpho WETH Lending", "valueKey": "morpho", "color": "#c9a84c" }
-        ]
-      }
-    },
-    {
-      "id": "transactions",
-      "title": "Recent Activity",
-      "icon": "📜",
-      "type": "table",
-      "dataSource": "transactions",
-      "cardTemplate": {
-        "fields": [
-          { "key": "date", "label": "Date", "format": "date" },
-          { "key": "type", "label": "Type", "format": "badge" },
-          { "key": "token", "label": "Token" },
-          { "key": "amount", "label": "Amount" },
-          { "key": "usd", "label": "USD", "format": "money" },
-          { "key": "status", "label": "Status", "format": "badge" }
+          { "key": "earned", "label": "Fees Earned", "format": "money" },
+          { "key": "apy", "label": "Est. APY", "format": "percent" },
+          { "key": "poolAddress", "label": "Pool", "format": "text" }
         ]
       }
     },
     {
       "id": "milestones",
-      "title": "AAE Milestones",
+      "title": "Position Milestones",
       "icon": "🎯",
       "type": "checklist",
       "dataSource": "milestones",
       "checklistConfig": {
-        "storageKey": "aae-defi-milestones",
+        "storageKey": "avax-lfj-milestones",
         "groupBy": "category",
         "showProgress": true
       }
@@ -145,7 +135,7 @@
   ],
   "footer": {
     "brand": "GENTECH DASHBOARD",
-    "version": "AAE DeFi Template v1.0",
+    "version": "AVAX/USDC LFJ Tracker v2.0",
     "showTimestamp": true
   }
 }

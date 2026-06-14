@@ -1,67 +1,40 @@
 {
   "portfolio": {
     "totalValue": 0,
+    "avaxPrice": 0,
     "change24h": 0,
-    "activePositions": 1,
-    "activeChains": 1,
-    "chain": "Avalanche C-Chain",
-    "protocol": "LFJ (Trader Joe)",
+    "status": "Fetching live..."
+  },
+  "allocation": [
+    { "token": "AVAX", "amount": 2.19, "value": 0, "pct": 88 },
+    { "token": "USDC", "amount": 30.88, "value": 30.88, "pct": 12 }
+  ],
+  "position": {
+    "protocol": "LFJ",
+    "chain": "Avalanche",
+    "pair": "AVAX/USDC",
+    "feeTier": "0.05%",
+    "shape": "Curve",
+    "type": "Concentrated Liquidity"
+  },
+  "range": {
+    "low": 6.55,
+    "high": 6.71,
+    "width": 2.44,
+    "efficiency": 0,
+    "zone": "Loading..."
+  },
+  "yieldInfo": {
+    "earned": 0,
+    "apy": 0,
     "poolAddress": "0x864d4e5ee7318e97483db7eb0912e09f161516ea"
   },
-  "allocation": {
-    "avax": 88,
-    "usdc": 12
-  },
-  "positions": [
-    {
-      "protocol": "LFJ",
-      "chain": "Avalanche",
-      "asset": "AVAX/USDC CL",
-      "type": "Concentrated Liquidity",
-      "feeTier": "0.05%",
-      "shape": "Curve",
-      "deposited": 0,
-      "currentValue": 0,
-      "pnl": 0,
-      "avaxAmount": 2.19,
-      "usdcAmount": 30.88,
-      "rangeLow": 6.55,
-      "rangeHigh": 6.71,
-      "poolAddress": "0x864d4e5ee7318e97483db7eb0912e09f161516ea"
-    }
-  ],
-  "yieldFarms": [
-    {
-      "protocol": "LFJ",
-      "pair": "AVAX/USDC",
-      "tvl": 0,
-      "apy": 0,
-      "earned": 0,
-      "status": "Active",
-      "feeTier": "0.05%",
-      "shape": "Curve"
-    }
-  ],
-  "yieldProgress": {
-    "lfj": 0
-  },
-  "dcaStrategy": {
-    "zones": [
-      { "min": 70, "max": 100, "label": "Center zone", "action": "Full $50 DCA", "color": "green" },
-      { "min": 50, "max": 70, "label": "Mid zone", "action": "Reduced $30 DCA", "color": "cyan" },
-      { "min": 30, "max": 50, "label": "Low zone", "action": "Micro-DCA $20 + watch", "color": "orange" },
-      { "min": 0, "max": 30, "label": "Edge zone", "action": "Micro-DCA $10 + REBALANCE", "color": "red" }
-    ]
-  },
-  "transactions": [],
   "milestones": [
     { "text": "LFJ concentrated liquidity position opened", "checked": true, "category": "DeFi" },
     { "text": "AVAX/USDC 0.05% curve shape deployed", "checked": true, "category": "DeFi" },
     { "text": "Range set: $6.55 – $6.71", "checked": true, "category": "DeFi" },
-    { "text": "DCA strategy configured (zone-based)", "checked": true, "category": "Strategy" },
     { "text": "Live price feed via DexScreener", "checked": true, "category": "Infrastructure" },
     { "text": "Fee tracking & accumulation", "checked": false, "category": "DeFi" },
-    { "text": "Range rebalance automation", "checked": false, "category": "Automation" },
-    { "text": "Multi-pool diversification", "checked": false, "category": "Strategy" }
+    { "text": "Range rebalance automation", "checked": false, "category": "Automation" }
   ]
 }

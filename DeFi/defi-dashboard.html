@@ -114,52 +114,95 @@
 
     <script src="../assets/dashboard-engine.js?v=1.1"></script>
     <script>
-        // AAE DeFi-specific field rendering
-        const originalFormatField = DashboardEngine.prototype.formatField;
-        DashboardEngine.prototype.formatField = function(value, field = {}) {
-            if (value === null || value === undefined) return '—';
-            
-            // Green/red for P&L and token changes
-            if (field.className === 'token-change' || field.key === 'pnl') {
-                const num = parseFloat(value);
-                const positive = num >= 0;
-                const sign = positive ? '+' : '';
-                const prefix = field.key === 'pnl' ? '$' : '';
-                return `<span data-positive="${positive}">${prefix}${sign}${value}${field.key === 'pnl' ? '' : '%'}</span>`;
-            }
-            
-            // Agent action badge
-            if (field.key === 'type' && value && value.startsWith('Agent')) {
-                return `<span class="badge" style="background:rgba(0,255,136,0.12);border-color:rgba(0,255,136,0.3);color:var(--gold);">${value}</span>`;
-            }
-            
-            return originalFormatField.call(this, value, field);
-        };
+        // --- Config ---
+        const POOL_ADDRESS = '0x864d4e5ee7318e97483db7eb0912e09f161516ea';
+        const RANGE_LOW = 6.55;
+        const RANGE_HIGH = 6.71;
+        const SHAPE = 'curve';
+        const AVAX_HELD = 2.19;
+        const USDC_HELD = 30.88;
 
-        // Inject agent status after header
-        const originalRenderShell = DashboardEngine.prototype.renderShell;
-        DashboardEngine.prototype.renderShell = function() {
-            originalRenderShell.call(this);
-            const header = this.rootEl.querySelector('.dashboard-header');
-            if (header) {
-                const status = document.createElement('div');
-                status.className = 'agent-status';
-                status.innerHTML = '<div class="pulse"></div> Agent Active — Monitoring yields, executing rebalances';
-                header.appendChild(status);
+        function calcEfficiency(price, low, high, shape) {
+            if (price < low || price > high) return 0;
+            const pos = (price - low) / (high - low);
+            if (shape === 'spot') return 100;
+            if (shape === 'bidirectional') return Math.max(0, Math.min(100, Math.abs(pos - 0.5) * 2 * 100));
+            return Math.max(0, Math.min(100, (1 - Math.abs(pos - 0.5) * 2) * 100));
+        }
+
+        function getZone(eff) {
+            if (eff >= 70) return { label: 'Center', color: 'green' };
+            if (eff >= 50) return { label: 'Mid', color: 'cyan' };
+            if (eff >= 30) return { label: 'Low', color: 'orange' };
+            return { label: 'Edge', color: 'red' };
+        }
+
+        async function fetchLiveData(data) {
+            try {
+                const resp = await fetch(`https://api.dexscreener.com/latest/dex/pairs/avalanche/${POOL_ADDRESS}`);
+                const json = await resp.json();
+                const pair = json.pairs && json.pairs[0] ? json.pairs[0] : null;
+                if (!pair) return data;
+
+                const price = parseFloat(pair.priceNative);
+                const change24 = parseFloat(pair.priceChange?.h24 || 0);
+
+                const avaxVal = AVAX_HELD * price;
+                const totalVal = avaxVal + USDC_HELD;
+                const eff = calcEfficiency(price, RANGE_LOW, RANGE_HIGH, SHAPE);
+                const zone = getZone(eff);
+                const rangeWidth = RANGE_HIGH - RANGE_LOW;
+
+                // Update portfolio
+                data.portfolio.totalValue = totalVal;
+                data.portfolio.avaxPrice = price;
+                data.portfolio.change24h = change24;
+                data.portfolio.status = (price >= RANGE_LOW && price <= RANGE_HIGH) ? 'In Range' : 'Out of Range';
+
+                // Update allocation
+                data.allocation[0].value = avaxVal;
+                data.allocation[0].pct = Math.round((avaxVal / totalVal) * 100);
+                data.allocation[1].value = USDC_HELD;
+                data.allocation[1].pct = Math.round((USDC_HELD / totalVal) * 100);
+
+                // Update range
+                data.range.efficiency = eff;
+                data.range.zone = zone.label;
+                data.range.width = rangeWidth;
+
+                // Update yield
+                data.yieldInfo.earned = 0; // Will accumulate over time
+
+            } catch (err) {
+                console.error('DexScreener fetch failed:', err);
+                data.portfolio.status = 'Error fetching price';
             }
-        };
+            return data;
+        }
 
         // Initialize
         (async () => {
             const templateRes = await fetch('defi-template.json?' + Date.now());
             const template = await templateRes.json();
             const dataRes = await fetch('defi-data.json?' + Date.now());
-            const data = await dataRes.json();
+            let data = await dataRes.json();
+
+            // Fetch live price and calculate values
+            data = await fetchLiveData(data);
 
             const dash = new DashboardEngine({ template, data });
             await dash.init('#app');
 
-            // Expose for debugging
+            // Refresh every 60s
+            setInterval(async () => {
+                let freshData = await (await fetch('defi-data.json?' + Date.now())).json();
+                freshData = await fetchLiveData(freshData);
+                // Re-render with fresh data
+                const dash2 = new DashboardEngine({ template, data: freshData });
+                await dash2.init('#app');
+                window.defiDash = dash2;
+            }, 60000);
+
             window.defiDash = dash;
         })();
     </script>
