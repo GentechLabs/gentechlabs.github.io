@@ -81,6 +81,18 @@
     { "date": "2026-06-09", "type": "Agent Stake", "token": "USDC", "amount": "500 USDC", "usd": 500, "status": "Executed" },
     { "date": "2026-06-08", "type": "Agent Rebalance", "token": "USDC → AERO", "amount": "200 USDC", "usd": 200, "status": "Executed" }
   ],
+  "feeMilestones": {
+    "currentDailyFees": 0.205,
+    "positionUsd": 46.45,
+    "cumulativeFees": 0.205,
+    "daysActive": 1,
+    "tiers": [
+      { "tier": 1, "label": "Scout", "target": 5, "icon": "🎖️", "unlocks": "Entry strategies (CURVE)" },
+      { "tier": 2, "label": "Raider", "target": 20, "icon": "⚔️", "unlocks": "SPOT + BIDIRECTIONAL shapes" },
+      { "tier": 3, "label": "Warlord", "target": 55, "icon": "🛡️", "unlocks": "Multi-pool positions" },
+      { "tier": 4, "label": "Sovereign", "target": 200, "icon": "👑", "unlocks": "Custom strategy creation" }
+    ]
+  },
   "milestones": [
     { "text": "LFJ AVAX/USDC LP opened", "checked": true, "category": "DeFi" },
     { "text": "Curve shape strategy deployed", "checked": true, "category": "Strategy" },

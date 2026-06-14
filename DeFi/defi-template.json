@@ -4,7 +4,7 @@
     "subtitle": "AAE DeFi — LFJ LP Position",
     "dataUrl": "defi-data.json",
     "refreshMs": 30000,
-    "version": "v1.1",
+    "version": "v1.2",
     "brand": "GENTECH DASHBOARD",
     "badge": "AAE DeFi"
   },
@@ -32,6 +32,7 @@
   },
   "tabs": [
     { "id": "curve", "label": "LP Curve", "icon": "🔔", "sections": ["lp-curve", "lp-stats"] },
+    { "id": "milestones", "label": "Milestones", "icon": "🏆", "sections": ["fee-milestones", "trajectory"] },
     { "id": "activity", "label": "Activity", "icon": "📜", "sections": ["transactions", "milestones"] }
   ],
   "sections": [
@@ -59,6 +60,22 @@
           { "key": "rangeMax", "label": "Range Max", "format": "text" }
         ]
       }
+    },
+    {
+      "id": "fee-milestones",
+      "title": "Fee Income Milestones",
+      "icon": "🏆",
+      "type": "custom",
+      "dataSource": "feeMilestones",
+      "customRender": "feeMilestones"
+    },
+    {
+      "id": "trajectory",
+      "title": "Trajectory to Next Milestone",
+      "icon": "📈",
+      "type": "custom",
+      "dataSource": "feeMilestones",
+      "customRender": "trajectory"
     },
     {
       "id": "transactions",
@@ -92,7 +109,7 @@
   ],
   "footer": {
     "brand": "GENTECH DASHBOARD",
-    "version": "AAE DeFi v1.1 — LFJ Curve",
+    "version": "AAE DeFi v1.2 — Milestones",
     "showTimestamp": true
   }
 }

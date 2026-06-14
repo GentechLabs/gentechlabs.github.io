@@ -206,6 +206,155 @@
         .price-marker {
             animation: glow 2s ease-in-out infinite;
         }
+
+        /* Fee Milestones */
+        .milestone-ladder {
+            background: var(--panel-bg);
+            border: 1px solid var(--panel-border);
+            border-radius: var(--radius);
+            padding: 24px;
+        }
+        .milestone-tier {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px;
+            margin-bottom: 12px;
+            background: rgba(255,255,255,0.02);
+            border-radius: 10px;
+            border: 1px solid var(--panel-border);
+            transition: all 0.3s ease;
+        }
+        .milestone-tier.current {
+            border-color: var(--gold);
+            background: rgba(0, 255, 136, 0.05);
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.1);
+        }
+        .milestone-tier.achieved {
+            border-color: rgba(0, 255, 136, 0.3);
+            opacity: 0.7;
+        }
+        .tier-icon {
+            font-size: 2em;
+            width: 50px;
+            text-align: center;
+        }
+        .tier-info {
+            flex: 1;
+        }
+        .tier-label {
+            font-size: 1.1em;
+            font-weight: 700;
+            color: var(--text);
+        }
+        .tier-target {
+            color: var(--gold);
+            font-weight: 600;
+        }
+        .tier-unlocks {
+            font-size: 0.8em;
+            color: var(--text-dim);
+            margin-top: 4px;
+        }
+        .tier-progress {
+            width: 120px;
+        }
+        .tier-progress-bar {
+            height: 6px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 3px;
+            overflow: hidden;
+            margin-bottom: 4px;
+        }
+        .tier-progress-fill {
+            height: 100%;
+            background: var(--gold);
+            border-radius: 3px;
+            transition: width 0.8s ease;
+        }
+        .tier-progress-text {
+            font-size: 0.75em;
+            color: var(--text-dim);
+            text-align: right;
+        }
+
+        /* Trajectory */
+        .trajectory-container {
+            background: var(--panel-bg);
+            border: 1px solid var(--panel-border);
+            border-radius: var(--radius);
+            padding: 24px;
+        }
+        .trajectory-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .trajectory-current {
+            text-align: center;
+        }
+        .trajectory-current-value {
+            font-size: 2.5em;
+            font-weight: 700;
+            color: var(--gold);
+        }
+        .trajectory-current-label {
+            font-size: 0.8em;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .trajectory-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-top: 20px;
+        }
+        .trajectory-stat {
+            text-align: center;
+            padding: 16px;
+            background: rgba(255,255,255,0.02);
+            border-radius: 10px;
+            border: 1px solid var(--panel-border);
+        }
+        .trajectory-stat-value {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: var(--gold);
+        }
+        .trajectory-stat-label {
+            font-size: 0.75em;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 4px;
+        }
+        .trajectory-next {
+            margin-top: 20px;
+            padding: 16px;
+            background: rgba(0, 255, 136, 0.05);
+            border-radius: 10px;
+            border: 1px solid rgba(0, 255, 136, 0.2);
+            text-align: center;
+        }
+        .trajectory-next-label {
+            font-size: 0.8em;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .trajectory-next-value {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: var(--gold);
+            margin-top: 8px;
+        }
+        .trajectory-next-detail {
+            font-size: 0.85em;
+            color: var(--text-dim);
+            margin-top: 8px;
+        }
     </style>
 </head>
 <body>
@@ -432,7 +581,161 @@
             if (section.customRender === 'lpCurve') {
                 return `<div class="lp-curve-container" id="lp-curve-canvas"></div>`;
             }
+            if (section.customRender === 'feeMilestones') {
+                return this.renderFeeMilestones(section);
+            }
+            if (section.customRender === 'trajectory') {
+                return this.renderTrajectory(section);
+            }
             return originalRenderCustom.call(this, section);
+        };
+
+        // Fee Milestones Renderer
+        DashboardEngine.prototype.renderFeeMilestones = function(section) {
+            const data = this.resolveDataSource(section.dataSource);
+            if (!data) return '<p class="empty-state">No milestone data</p>';
+
+            const { currentDailyFees, positionUsd, cumulativeFees, daysActive, tiers } = data;
+            let currentTierIdx = -1;
+            let nextTierIdx = 0;
+            let progressPct = 0;
+
+            // Find current tier
+            for (let i = 0; i < tiers.length; i++) {
+                if (currentDailyFees >= tiers[i].target) {
+                    currentTierIdx = i;
+                    nextTierIdx = Math.min(i + 1, tiers.length - 1);
+                }
+            }
+
+            // Calculate progress to next tier
+            if (currentTierIdx >= 0) {
+                const currentTarget = tiers[currentTierIdx].target;
+                const nextTarget = tiers[nextTierIdx].target;
+                progressPct = Math.min(100, ((currentDailyFees - currentTarget) / (nextTarget - currentTarget)) * 100);
+            } else {
+                nextTierIdx = 0;
+                progressPct = Math.min(100, (currentDailyFees / tiers[0].target) * 100);
+            }
+
+            const tiersHtml = tiers.map((tier, i) => {
+                let statusClass = '';
+                if (i < currentTierIdx + 1) statusClass = 'achieved';
+                else if (i === nextTierIdx && currentTierIdx + 1 === i) statusClass = 'current';
+                else if (i === 0 && currentTierIdx === -1) statusClass = 'current';
+
+                const tierProgress = i <= currentTierIdx ? 100 :
+                    (i === nextTierIdx ? progressPct :
+                    (currentDailyFees / tier.target) * 100);
+
+                return `
+                    <div class="milestone-tier ${statusClass}">
+                        <div class="tier-icon">${tier.icon}</div>
+                        <div class="tier-info">
+                            <div class="tier-label">Tier ${tier.tier}: ${tier.label} — <span class="tier-target">$${tier.target}/day</span></div>
+                            <div class="tier-unlocks">Unlocks: ${tier.unlocks}</div>
+                        </div>
+                        <div class="tier-progress">
+                            <div class="tier-progress-bar">
+                                <div class="tier-progress-fill" style="width: ${tierProgress}%"></div>
+                            </div>
+                            <div class="tier-progress-text">${tierProgress.toFixed(1)}%</div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            return `
+                <div class="milestone-ladder">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+                        <div>
+                            <div style="font-size:0.8em; color:var(--text-dim); text-transform:uppercase; letter-spacing:1px;">Current Daily Fees</div>
+                            <div style="font-size:2em; font-weight:700; color:var(--gold);">$${currentDailyFees.toFixed(3)}</div>
+                        </div>
+                        <div style="text-align:right;">
+                            <div style="font-size:0.8em; color:var(--text-dim); text-transform:uppercase; letter-spacing:1px;">Position Size</div>
+                            <div style="font-size:1.5em; font-weight:700; color:var(--text);">$${positionUsd.toFixed(2)}</div>
+                        </div>
+                    </div>
+                    ${tiersHtml}
+                </div>
+            `;
+        };
+
+        // Trajectory Renderer
+        DashboardEngine.prototype.renderTrajectory = function(section) {
+            const data = this.resolveDataSource(section.dataSource);
+            if (!data) return '<p class="empty-state">No trajectory data</p>';
+
+            const { currentDailyFees, positionUsd, cumulativeFees, daysActive, tiers } = data;
+
+            // Find current and next tier
+            let currentTierIdx = -1;
+            for (let i = 0; i < tiers.length; i++) {
+                if (currentDailyFees >= tiers[i].target) currentTierIdx = i;
+            }
+            const nextTier = tiers[Math.min(currentTierIdx + 1, tiers.length - 1)];
+            const gapToNext = Math.max(0, nextTier.target - currentDailyFees);
+
+            // Calculate APR and projections
+            const dailyApr = positionUsd > 0 ? (currentDailyFees / positionUsd) * 100 : 0;
+            const annualizedReturn = dailyApr * 365;
+
+            // Days to next milestone (assuming current fee rate stays constant)
+            const daysToNext = currentDailyFees > 0 ? Math.ceil(gapToNext / currentDailyFees) : Infinity;
+
+            // Required multiplier to hit next tier
+            const multiplier = currentDailyFees > 0 ? (nextTier.target / currentDailyFees) : Infinity;
+
+            // Capital needed at current rate to hit next tier
+            const capitalNeeded = currentDailyFees > 0 ?
+                Math.ceil((nextTier.target / currentDailyFees) * positionUsd) : Infinity;
+
+            const formatDays = (d) => {
+                if (d === Infinity) return '∞';
+                if (d > 365) return `${(d / 365).toFixed(1)} years`;
+                if (d > 30) return `${(d / 30).toFixed(1)} months`;
+                return `${d} days`;
+            };
+
+            return `
+                <div class="trajectory-container">
+                    <div class="trajectory-header">
+                        <div class="trajectory-current">
+                            <div class="trajectory-current-label">Daily Fees</div>
+                            <div class="trajectory-current-value">$${currentDailyFees.toFixed(3)}</div>
+                        </div>
+                        <div style="text-align:center;">
+                            <div style="font-size:0.8em; color:var(--text-dim);">NEXT TARGET</div>
+                            <div style="font-size:1.5em; font-weight:700; color:var(--gold);">${nextTier.icon} $${nextTier.target}/day</div>
+                            <div style="font-size:0.8em; color:var(--text-dim);">${nextTier.label}</div>
+                        </div>
+                    </div>
+
+                    <div class="trajectory-stats">
+                        <div class="trajectory-stat">
+                            <div class="trajectory-stat-value">${dailyApr.toFixed(2)}%</div>
+                            <div class="trajectory-stat-label">Daily APR</div>
+                        </div>
+                        <div class="trajectory-stat">
+                            <div class="trajectory-stat-value">${annualizedReturn.toFixed(0)}%</div>
+                            <div class="trajectory-stat-label">Annualized</div>
+                        </div>
+                        <div class="trajectory-stat">
+                            <div class="trajectory-stat-value">$${cumulativeFees.toFixed(2)}</div>
+                            <div class="trajectory-stat-label">Cumulative Fees</div>
+                        </div>
+                    </div>
+
+                    <div class="trajectory-next">
+                        <div class="trajectory-next-label">Time to ${nextTier.label} ($${nextTier.target}/day)</div>
+                        <div class="trajectory-next-value">${formatDays(daysToNext)}</div>
+                        <div class="trajectory-next-detail">
+                            At current rate: ${multiplier.toFixed(1)}x fees needed · $${capitalNeeded.toLocaleString()} capital at same efficiency
+                        </div>
+                    </div>
+                </div>
+            `;
         };
 
         // Inject agent status after header
