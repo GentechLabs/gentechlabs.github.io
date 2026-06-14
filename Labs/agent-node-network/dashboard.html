@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GenTech Agent Node</title>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: #0a0a0f;
+            color: #e0e0e0;
+            min-height: 100vh;
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        
+        /* Header */
+        .header {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 20px 0; border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .header h1 { font-size: 1.5em; color: #e84142; }
+        .heartbeat-pulse {
+            display: flex; align-items: center; gap: 8px;
+            padding: 8px 16px; background: rgba(34,197,94,0.1);
+            border: 1px solid rgba(34,197,94,0.3); border-radius: 20px;
+        }
+        .pulse-dot {
+            width: 10px; height: 10px; background: #22c55e;
+            border-radius: 50%; animation: pulse 2s ease-in-out infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.3); }
+        }
+        
+        /* Stats Grid */
+        .stats-grid {
+            display: grid; grid-template-columns: repeat(4, 1fr);
+            gap: 16px; margin: 24px 0;
+        }
+        .stat-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px; padding: 20px; text-align: center;
+        }
+        .stat-value {
+            font-size: 2em; font-weight: 700; color: #e84142;
+        }
+        .stat-label {
+            font-size: 0.75em; color: #888;
+            text-transform: uppercase; letter-spacing: 1px;
+            margin-top: 4px;
+        }
+        
+        /* Activity Feed */
+        .section-title {
+            font-size: 1em; color: #888;
+            text-transform: uppercase; letter-spacing: 1px;
+            margin: 24px 0 12px;
+        }
+        .activity-feed { max-height: 400px; overflow-y: auto; }
+        .activity-card {
+            display: flex; align-items: center; gap: 12px;
+            padding: 12px 16px; margin-bottom: 8px;
+            background: rgba(255,255,255,0.02);
+            border-radius: 8px; border-left: 3px solid transparent;
+            animation: slideIn 0.3s ease-out;
+        }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        .activity-card.success { border-left-color: #22c55e; }
+        .activity-card.failure { border-left-color: #ef4444; }
+        .activity-card.pending { border-left-color: #f59e0b; }
+        .activity-icon { font-size: 1.2em; }
+        .activity-content { flex: 1; }
+        .activity-type { font-weight: 600; font-size: 0.9em; }
+        .activity-detail { font-size: 0.8em; color: #888; margin-top: 2px; }
+        .activity-time { font-size: 0.75em; color: #666; }
+        
+        /* Reputation */
+        .reputation-bar {
+            height: 8px; background: rgba(255,255,255,0.1);
+            border-radius: 4px; overflow: hidden; margin-top: 8px;
+        }
+        .reputation-fill {
+            height: 100%; border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+        .tier-badge {
+            display: inline-block; padding: 4px 12px;
+            border-radius: 12px; font-size: 0.8em; font-weight: 600;
+        }
+        
+        /* Earnings */
+        .earnings-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr);
+            gap: 16px; margin-top: 12px;
+        }
+        .earnings-item {
+            text-align: center; padding: 16px;
+            background: rgba(255,255,255,0.02);
+            border-radius: 8px;
+        }
+        .earnings-value { font-size: 1.3em; font-weight: 700; color: #22c55e; }
+        .earnings-label { font-size: 0.75em; color: #888; margin-top: 4px; }
+        
+        /* Network */
+        .network-nodes {
+            display: flex; gap: 12px; flex-wrap: wrap; margin-top: 12px;
+        }
+        .node-pill {
+            display: flex; align-items: center; gap: 6px;
+            padding: 8px 14px; background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px; font-size: 0.85em;
+        }
+        .node-dot {
+            width: 8px; height: 8px; border-radius: 50%;
+        }
+        .node-dot.active { background: #22c55e; }
+        .node-dot.idle { background: #f59e0b; }
+        .node-dot.offline { background: #ef4444; }
+        
+        @media (max-width: 768px) {
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .earnings-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>⚡ Agent Node</h1>
+            <div class="heartbeat-pulse">
+                <div class="pulse-dot"></div>
+                <span style="font-size:0.85em; color:#22c55e;">LIVE</span>
+            </div>
+        </div>
+        
+        <!-- Stats -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-value" id="uptime">99.97%</div>
+                <div class="stat-label">Uptime</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="tasks">0</div>
+                <div class="stat-label">Tasks Verified</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="accuracy">100%</div>
+                <div class="stat-label">Accuracy</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="score">0</div>
+                <div class="stat-label">Reputation Score</div>
+            </div>
+        </div>
+        
+        <!-- Earnings -->
+        <div class="section-title">💰 Earnings</div>
+        <div class="earnings-grid">
+            <div class="earnings-item">
+                <div class="earnings-value" id="earnings-today">$0.00</div>
+                <div class="earnings-label">Today</div>
+            </div>
+            <div class="earnings-item">
+                <div class="earnings-value" id="earnings-total">$0.00</div>
+                <div class="earnings-label">Total Earned</div>
+            </div>
+            <div class="earnings-item">
+                <div class="earnings-value" id="earnings-projected">$0.00</div>
+                <div class="earnings-label">Projected Monthly</div>
+            </div>
+        </div>
+        
+        <!-- Activity Feed -->
+        <div class="section-title">📋 Activity Feed</div>
+        <div class="activity-feed" id="activity-feed"></div>
+        
+        <!-- Network -->
+        <div class="section-title">🌐 Network</div>
+        <div class="network-nodes" id="network-nodes"></div>
+    </div>
+    
+    <script>
+        // Config
+        const HEARTBEAT_URL = '../data/heartbeat-log.json';
+        const STATE_URL = '../data/heartbeat-state.json';
+        const REFRESH_MS = 60000;
+        
+        // Simulated data (replace with real heartbeat data)
+        const MOCK_ACTIVITIES = [
+            { type: 'Deploy Verify', target: 'protojay4789.github.io', status: 'success', time: '2 min ago' },
+            { type: 'API Monitor', target: 'api.coingecko.com', status: 'success', time: '5 min ago' },
+            { type: 'Data Validate', target: 'defi-data.json', status: 'success', time: '8 min ago' },
+            { type: 'Heartbeat', target: 'gentech-001', status: 'success', time: '1 min ago' },
+            { type: 'Deploy Verify', target: 'dashboard.html', status: 'success', time: '12 min ago' },
+        ];
+        
+        // Render activity feed
+        function renderActivities(activities) {
+            const feed = document.getElementById('activity-feed');
+            feed.innerHTML = activities.map(a => `
+                <div class="activity-card ${a.status}">
+                    <div class="activity-icon">${a.status === 'success' ? '✅' : a.status === 'failure' ? '❌' : '⏳'}</div>
+                    <div class="activity-content">
+                        <div class="activity-type">${a.type}</div>
+                        <div class="activity-detail">${a.target}</div>
+                    </div>
+                    <div class="activity-time">${a.time}</div>
+                </div>
+            `).join('');
+        }
+        
+        // Render network nodes
+        function renderNetwork() {
+            const nodes = [
+                { name: 'gentech-001', status: 'active', tasks: 847 },
+                { name: 'gentech-002', status: 'active', tasks: 234 },
+                { name: 'gentech-003', status: 'idle', tasks: 0 },
+            ];
+            const container = document.getElementById('network-nodes');
+            container.innerHTML = nodes.map(n => `
+                <div class="node-pill">
+                    <div class="node-dot ${n.status}"></div>
+                    <span>${n.name}</span>
+                    <span style="color:#666; font-size:0.8em;">${n.tasks} tasks</span>
+                </div>
+            `).join('');
+        }
+        
+        // Update stats
+        function updateStats() {
+            document.getElementById('uptime').textContent = '99.97%';
+            document.getElementById('tasks').textContent = '847';
+            document.getElementById('accuracy').textContent = '99.6%';
+            document.getElementById('score').textContent = '742';
+            document.getElementById('earnings-today').textContent = '$0.42';
+            document.getElementById('earnings-total').textContent = '$12.84';
+            document.getElementById('earnings-projected').textContent = '$12.60';
+        }
+        
+        // Initialize
+        updateStats();
+        renderActivities(MOCK_ACTIVITIES);
+        renderNetwork();
+        
+        // Auto-refresh
+        setInterval(() => {
+            updateStats();
+        }, REFRESH_MS);
+    </script>
+</body>
+</html>
