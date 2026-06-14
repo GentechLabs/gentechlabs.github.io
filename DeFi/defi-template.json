@@ -32,6 +32,7 @@
   },
   "tabs": [
     { "id": "farming", "label": "Farming", "icon": "🌾", "sections": ["hero-efficiency", "market-intel", "strategy-advisor", "lp-curve"] },
+    { "id": "rebalance", "label": "Rebalance", "icon": "🔄", "sections": ["rebalance-suggestions"] },
     { "id": "milestones", "label": "Milestones", "icon": "🏆", "sections": ["fee-milestones", "trajectory"] },
     { "id": "position", "label": "Position", "icon": "📊", "sections": ["lp-stats", "transactions"] }
   ],
@@ -99,6 +100,14 @@
           { "key": "rangeMax", "label": "Range Max", "format": "text" }
         ]
       }
+    },
+    {
+      "id": "rebalance-suggestions",
+      "title": "Rebalance Suggestions",
+      "icon": "🔄",
+      "type": "custom",
+      "dataSource": "rebalanceSuggestions",
+      "customRender": "rebalanceSuggestions"
     },
     {
       "id": "transactions",
