@@ -15,7 +15,7 @@
       "path": "Profiles/index.html",
       "data_path": null,
       "created": "2026-05-01",
-      "description": "Main agent performance dashboard — cron jobs, skills, memory, health"
+      "description": "Main agent performance dashboard \u2014 cron jobs, skills, memory, health"
     },
     {
       "id": "jordan-travel",
@@ -26,7 +26,7 @@
       "path": "Travels/travel-dashboard.html",
       "data_path": "Travels/travel-jordan.json",
       "created": "2026-06-01",
-      "description": "Personal travel planner — trips, hotels, flights, booking via Travala MCP"
+      "description": "Personal travel planner \u2014 trips, hotels, flights, booking via Travala MCP"
     },
     {
       "id": "vanito-travel",
@@ -37,7 +37,7 @@
       "path": "Travels/travel-dashboard-vanito.html",
       "data_path": "Travels/travel-vanito.json",
       "created": "2026-06-01",
-      "description": "Vanito's trip planner — Songkran 2027, shared with Jordan"
+      "description": "Vanito's trip planner \u2014 Songkran 2027, shared with Jordan"
     },
     {
       "id": "christel-cookbook",
@@ -48,7 +48,7 @@
       "path": "Cookbook/christel-kitchen.html",
       "data_path": "Cookbook/cookbook-dashboard-data.json",
       "created": "2026-06-13",
-      "description": "Recipe collection, meal plans, grocery lists — auto-logged from messages"
+      "description": "Recipe collection, meal plans, grocery lists \u2014 auto-logged from messages"
     },
     {
       "id": "poe2-gaming",
@@ -59,7 +59,18 @@
       "path": "Gaming/poe2-dashboard.html",
       "data_path": null,
       "created": "2026-05-15",
-      "description": "POE2 build tracking — Monk, Sorceress, Warrior builds"
+      "description": "POE2 build tracking \u2014 Monk, Sorceress, Warrior builds"
+    },
+    {
+      "id": "poe2-gaming",
+      "name": "POE2 Gaming Dashboard",
+      "owner": "jordan",
+      "type": "gaming",
+      "status": "active",
+      "path": "Gaming/poe2-dashboard.html",
+      "data_path": "Gaming/poe2-meta-builds.json",
+      "created": "2026-06-14",
+      "description": "POE2 build tracking, meta builds, passive tree suggestions, Maxroll integration"
     }
   ],
   "archived": [
@@ -86,7 +97,14 @@
   ],
   "templates": {
     "engine_path": "assets/dashboard-engine.js",
-    "available_types": ["travel", "cookbook", "gaming", "agent-stats", "defi", "custom"],
+    "available_types": [
+      "travel",
+      "cookbook",
+      "gaming",
+      "agent-stats",
+      "defi",
+      "custom"
+    ],
     "css_snippet": ".obsidian/snippets/dashboard.css"
   }
 }

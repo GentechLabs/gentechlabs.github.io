@@ -1,0 +1,118 @@
+{
+  "builds": {
+    "monk": {
+      "class": "Monk",
+      "ascendancy": "Invoker",
+      "meta_builds": [
+        {
+          "name": "Lightning Invoker",
+          "tier": "S",
+          "playstyle": "Melee Caster",
+          "difficulty": "Medium",
+          "key_skills": ["Tempest Flurry", "Falling Thunder", "Thunderstorm", "Orb of Storms"],
+          "passive_priority": ["Lightning Damage", "Cast Speed", "Crit Chance", "Elemental Penetration"],
+          "gear_priority": ["+Lightning Gem Levels", "Cast Speed", "Critical Strike Chance", "Lightning Damage"],
+          "endgame_viable": true,
+          "map_clear": "A",
+          "bossing": "S",
+          "league_start": "B"
+        },
+        {
+          "name": "Ice Invoker",
+          "tier": "A",
+          "playstyle": "Melee Caster",
+          "difficulty": "Medium",
+          "key_skills": ["Ice Crash", "Frost Blades", "Ice Nova", "Arctic Armour"],
+          "passive_priority": ["Cold Damage", "Cast Speed", "Crit Multi", "Life"],
+          "gear_priority": ["+Cold Gem Levels", "Cast Speed", "Critical Strike Multiplier", "Cold Damage"],
+          "endgame_viable": true,
+          "map_clear": "A",
+          "bossing": "A",
+          "league_start": "B"
+        },
+        {
+          "name": "Tempest Hybrid",
+          "tier": "A",
+          "playstyle": "Melee Caster",
+          "difficulty": "Hard",
+          "key_skills": ["Tempest Flurry", "Storm Call", "Conductivity", "Heralds"],
+          "passive_priority": ["Elemental Damage", "Cast Speed", "Mana Regen", "Life"],
+          "gear_priority": ["+Elemental Gem Levels", "Cast Speed", "Mana Regen", "Elemental Damage"],
+          "endgame_viable": true,
+          "map_clear": "A",
+          "bossing": "A",
+          "league_start": "C"
+        }
+      ],
+      "passive_tree_suggestions": {
+        "level_1_30": ["Thunder Strike", "Storm Fists", "Lightning Infusion", "Chain Lightning", "Static Charge"],
+        "level_31_60": ["Storm Mastery", "Volt Surge", "Arc Dancer", "Flickering Guard", "Shocked Ground"],
+        "level_61_90": ["Thunderlord's Decree", "Storm Ward", "Stone Bulwark", "Titan's Resolve"],
+        "ascendancy_order": ["Storm Caller", "Thundergod's Wrath", "Tempest Soul", "Monk of the Storm", "Divine Lightning"]
+      }
+    },
+    "warrior": {
+      "class": "Warrior",
+      "ascendancy": "Titan",
+      "meta_builds": [
+        {
+          "name": "Vibrant Warrior",
+          "tier": "S",
+          "playstyle": "Melee物理",
+          "difficulty": "Easy",
+          "key_skills": ["Sunder", "Leap Slam", "War Cry", "Blood Rage"],
+          "passive_priority": ["Physical Damage", "Life", "Armor", "Leech"],
+          "gear_priority": ["+Physical Gem Levels", "Flat Physical", "Critical Strike", "Life"],
+          "endgame_viable": true,
+          "map_clear": "S",
+          "bossing": "A",
+          "league_start": "S"
+        },
+        {
+          "name": "Bleed Gladiator",
+          "tier": "A",
+          "playstyle": "Melee DoT",
+          "difficulty": "Medium",
+          "key_skills": ["Cleave", "Vulnerability", "War Cry", "Blood Rage"],
+          "passive_priority": ["Physical Damage", "Bleed Damage", "Life", "Armor"],
+          "gear_priority": ["+Physical Gem Levels", "Bleed Damage", "Critical Strike", "Life"],
+          "endgame_viable": true,
+          "map_clear": "A",
+          "bossing": "A",
+          "league_start": "A"
+        },
+        {
+          "name": "Shield Cracker",
+          "tier": "B",
+          "playstyle": "Melee Tank",
+          "difficulty": "Easy",
+          "key_skills": ["Shield Charge", "Consecrated Ground", "War Cry", "Determination"],
+          "passive_priority": ["Armor", "Life", "Block", "Life Regen"],
+          "gear_priority": ["+Physical Gem Levels", "Block Chance", "Life", "Armor"],
+          "endgame_viable": true,
+          "map_clear": "B",
+          "bossing": "A",
+          "league_start": "A"
+        }
+      ],
+      "passive_tree_suggestions": {
+        "level_1_30": ["Iron Skin", "Resilience", "Tempered Body", "Steel Will", "Unbreakable"],
+        "level_31_60": ["Stone Bulwark", "Endurance", "Vitality", "Hardened", "Deep Wounds"],
+        "level_61_90": ["Titan's Resolve", "Endurance Charge", "Grounded", "Storm Ward"],
+        "ascendancy_order": ["Juggernaut", "Undeniable", "Unstoppable", "Unbreakable"]
+      }
+    }
+  },
+  "passive_tree_reference": {
+    "monk_lightning": {
+      "url": "https://maxroll.gg/poe2/passive-tree/monk-lightning",
+      "keynodes": ["Thunderlord's Decree", "Divine Lightning", "Lightning Avatar"],
+      "stat_priorities": ["Lightning Damage %", "Cast Speed %", "Critical Strike Chance %", "Lightning Penetration %"]
+    },
+    "warrior_vibrant": {
+      "url": "https://maxroll.gg/poe2/passive-tree/warrior-vibrant",
+      "keynodes": ["Titan's Resolve", "Stone Bulwark", "Unbreakable"],
+      "stat_priorities": ["Physical Damage %", "Maximum Life %", "Armor %", "Life Regen %"]
+    }
+  }
+}
