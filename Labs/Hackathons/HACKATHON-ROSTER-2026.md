@@ -7,7 +7,7 @@
 | 1 | **Kite AI** | May 17 | 🔴 IN PROGRESS | Agentic Commerce | $10K | AgentEscrow / Dynamic Strategy Engine |
 | 2 | **ElevenHacks #9** | May 21 (5pm UK) | 🟡 ACTIVE | Voice SaaS / Build Something People Pay For | $10K Stripe + 3mo Scale | Voice-first AI audio service |
 | 3 | **Agora Agents** | May 25 | ⚪ QUEUED | AI Agents | $50K | TBD |
-| 4 | **Arbitrum Open House** | TBD | ⚪ QUEUED | On-chain | $415K pool | TBD |
+|| 4 | **Arbitrum Open House** | Jun 18 | 🔴 ARCHIVED | AI Agentic ($15K) | Faucet failed — code saved for later |
 | 5 | **Swarms ACM** | May 27 | 🟡 QUEUED | Finance & Market Analysis | $30K | LP Monitor Agent |
 | 6 | **Bags.fm** (DoraHacks) | Jun 1 | ⚪ QUEUED | Solana Launchpad | TBD | MCP Tools + Agent Integration |
 | 7 | **Somnia** | Jun 11 | ⚪ QUEUED | AI Agent Platform | TBD | "Agent Catcher" risk layer |
@@ -94,6 +94,15 @@
 | ElevenHacks #6–8 | Skipped per Jordan |
 | GenLayer Builder | Paused — may resume |
 | Surge Ignition Race | S1 ended Apr 24. Monitor S2 |
+
+## Archived
+
+| Name | Deadline | Built | Reason |
+|------|----------|-------|--------|
+| Mantle Turing Test | Jun 15 | 6 contracts, 14 tests, ERC-8004 adapter | Faucet failed — code saved |
+| Arbitrum Open House | Jun 18 | AgentForge (fork of Mantle architecture) | Faucet failed — code saved |
+
+Full archive: `Labs/Hackathons/Archived/mantle-arbitrum-archive.md`
 
 ## Completed (Recycle Bin)
 
