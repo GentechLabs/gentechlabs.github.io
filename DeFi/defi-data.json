@@ -8,18 +8,15 @@
   "volume24h": 910078.65,
   "liquidity": 370888.93,
   "lpPosition": {
-    "shape": "Bid-Ask",
-    "rangeLow": 6.7,
-    "rangeHigh": 6.88,
-    "totalBalance": 44.39,
-    "avaxAmount": 3.812,
-    "avaxValue": 25.66,
-    "usdcAmount": 18.73,
-    "usdcValue": 18.73,
-    "totalValue": 44.39,
-    "range": "6.7-6.88",
+    "pair": "AVAX/USDC",
     "feeTier": "5bps",
-    "pool": "AVAX/USDC"
+    "shape": "Bid-Ask",
+    "currentPrice": 6.732,
+    "rangeMin": 6.7,
+    "rangeMax": 6.88,
+    "avaxAmount": 3.812,
+    "usdcAmount": 18.73,
+    "totalValue": 44.39
   },
   "fees": {
     "dailyFees": 0.364,
@@ -97,7 +94,11 @@
   },
   "feeMilestones": {
     "currentDailyFees": 0.364,
-    "milestones": [
+    "cumulativeFees": 0.364,
+    "nextMilestone": "Scout",
+    "nextTarget": 5,
+    "progress": 7.3,
+    "tiers": [
       {
         "name": "Scout",
         "target": 5,
@@ -124,10 +125,8 @@
         "achieved": false
       }
     ],
-    "cumulativeFees": 0.364,
-    "nextMilestone": "Scout",
-    "nextTarget": 5,
-    "progress": 7.3
+    "positionUsd": 44.39,
+    "daysActive": 1
   },
   "transactions": []
 }
