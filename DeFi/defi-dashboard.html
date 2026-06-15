@@ -1418,18 +1418,33 @@
         })();
 
         // Auto-refresh every 60 seconds with LIVE data
-        setInterval(async () => {
+        async function applyLiveData() {
             try {
                 const liveData = await fetchLiveData();
                 if (liveData && defiDash) {
-                    defiDash.data = liveData;
+                    // Deep merge: live data overlays on top of existing static data
+                    // This preserves static fields (tiers, milestones) from JSON
+                    function deepMerge(target, source) {
+                        for (const key of Object.keys(source)) {
+                            if (source[key] && typeof source[key] === 'object' && !Array.isArray(source[key]) && target[key]) {
+                                deepMerge(target[key], source[key]);
+                            } else {
+                                target[key] = source[key];
+                            }
+                        }
+                        return target;
+                    }
+                    deepMerge(defiDash.data, liveData);
                     defiDash.render();
-                    console.log('[DeFi] Live refresh at', new Date().toLocaleTimeString(), '- Price:', liveData.hero.currentPrice);
+                    console.log('[DeFi] Live refresh at', new Date().toLocaleTimeString(), '- Price:', liveData.hero?.currentPrice);
                 }
             } catch (e) {
                 console.warn('[DeFi] Auto-refresh failed:', e.message);
             }
-        }, 60000);
+        }
+        // First refresh after 5 seconds, then every 60 seconds
+        setTimeout(applyLiveData, 5000);
+        setInterval(applyLiveData, 60000);
     </script>
 </body>
 </html>
