@@ -1,12 +1,12 @@
 {
   "hero": {
-    "positionUsd": 44.39,
+    "positionUsd": 45.4,
     "dailyFees": 0.54,
-    "efficiency": 100.0,
+    "efficiency": 94.4,
     "efficiencyZone": "Center",
     "shape": "Curve",
     "rangeStatus": "In Range",
-    "currentPrice": 6.96,
+    "currentPrice": 6.93,
     "rangeMin": 6.85,
     "rangeMax": 7.03,
     "milestoneCurrent": "Unranked",
@@ -15,7 +15,7 @@
     "milestoneProgress": 7.3
   },
   "marketIntel": {
-    "avaxPrice": 6.96,
+    "avaxPrice": 6.93,
     "change24h": 0.6,
     "volume24h": 910078.65,
     "tvl": 370888.93,
@@ -40,12 +40,12 @@
   },
   "strategyAdvisor": {
     "efficiencyZone": "Center",
-    "efficiency": 100.0,
-    "shape": "Bid-Ask",
+    "efficiency": 94.4,
+    "shape": "Curve",
     "recommendedAction": "Hold",
-    "dcaType": "Edge-Weighted DCA",
-    "dcaDetails": "Bid-ask shape active. Price near center of 6.70-6.88 range. Fees increase as price moves toward edges.",
-    "rebalanceTrigger": "Price exits 6.85-7.03 range",
+    "dcaType": "Curve Strategy",
+    "dcaDetails": "Curve shape at 94.4% efficiency. Price centered in $6.85-$7.03 range. Earning max fees.",
+    "rebalanceTrigger": "Price exits $6.85-7.03 range",
     "compoundThreshold": 50,
     "cumulativeFees": 0.364,
     "nextCompound": "$49.64 away",
@@ -58,14 +58,14 @@
     "pair": "AVAX / USDC",
     "feeTier": "5 bps",
     "shape": "curve",
-    "currentPrice": 6.96,
+    "currentPrice": 6.93,
     "rangeMin": 6.85,
     "rangeMax": 7.03,
     "numBins": 180,
     "deposit": {
-      "avax": 3.812,
+      "avax": 0.428,
       "avaxValue": 25.7,
-      "usdc": 18.73,
+      "usdc": 42.42,
       "usdcValue": 18.69
     },
     "rewards": {
@@ -78,7 +78,11 @@
       "avaxValue": 0.1952,
       "usdc": 0.1686,
       "usdcValue": 0.1686
-    }
+    },
+    "avaxAmount": 0.428,
+    "usdcAmount": 42.42,
+    "totalValueUSD": 45.4,
+    "totalValue": 45.4
   },
   "curveData": {
     "rangeMin": 6.7,
@@ -213,8 +217,8 @@
     ]
   },
   "feeMilestones": {
-    "currentDailyFees": 0.364,
-    "positionUsd": 44.39,
+    "currentDailyFees": 0.54,
+    "positionUsd": 45.4,
     "cumulativeFees": 0.364,
     "daysActive": 1,
     "tiers": [
@@ -256,27 +260,19 @@
     ]
   },
   "rebalanceSuggestions": {
-    "efficiency": 64.4,
+    "efficiency": 94.4,
     "price": 6.732,
-    "rangeMin": 6.7,
-    "rangeMax": 6.88,
+    "rangeMin": 6.85,
+    "rangeMax": 7.03,
     "volatility": "medium",
     "trend": "consolidation",
     "suggestions": [
       {
-        "icon": "\ud83d\udfe1",
-        "title": "Monitor \u2014 Approaching Threshold",
-        "description": "Efficiency at 64.4%. Consider rebalancing if it drops below 50%. Current range ($6.70-$6.88) is still capturing decent fees.",
-        "priority": "medium",
-        "impact": "Maintain current fees",
-        "action": null
-      },
-      {
-        "icon": "\ud83d\udca1",
-        "title": "Consider Tighter Range",
-        "description": "Current range is $6.70-$6.88. A tighter range ($6.60-$6.87) would earn more fees if price stays stable.",
+        "icon": "\ud83d\udfe2",
+        "title": "Optimal Position",
+        "description": "Curve at 94.4% efficiency. Price centered. Earning max fees.",
         "priority": "low",
-        "impact": "Higher fees",
+        "impact": "Max fees",
         "action": null
       }
     ]
@@ -291,9 +287,9 @@
       "status": "Active"
     }
   ],
-  "currentPrice": 6.96,
+  "currentPrice": 6.93,
   "supportResistance": {
-    "currentPrice": 6.96,
+    "currentPrice": 6.93,
     "levels": [
       {
         "price": 7.5,
