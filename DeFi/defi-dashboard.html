@@ -1244,12 +1244,17 @@
 
                 const inRange = price >= rangeMin && price <= rangeMax;
 
+                const dailyFees = parseFloat((efficiency / 100 * 0.25).toFixed(3));
+                const cumulativeFees = parseFloat((efficiency / 100 * 0.25));
+                const milestoneProgress = parseFloat((efficiency / 100 * 5).toFixed(1));
+
                 return {
                     hero: {
-                        positionUsd: 44.54,
-                        dailyFees: (efficiency / 100 * 0.25).toFixed(3),
+                        positionUsd: 44.39,
+                        dailyFees: dailyFees,
                         efficiency: parseFloat(efficiency.toFixed(1)),
                         efficiencyZone: efficiency > 80 ? 'Center' : efficiency > 60 ? 'Inner' : efficiency > 50 ? 'Outer' : 'Edge',
+                        shape: 'Bid-Ask',
                         rangeStatus: inRange ? 'In Range' : 'Out of Range',
                         currentPrice: price,
                         rangeMin: rangeMin,
@@ -1257,7 +1262,7 @@
                         milestoneCurrent: 'Unranked',
                         milestoneNext: 'Scout',
                         milestoneTarget: 5,
-                        milestoneProgress: (efficiency / 100 * 5).toFixed(1)
+                        milestoneProgress: milestoneProgress
                     },
                     marketIntel: {
                         avaxPrice: price,
@@ -1273,25 +1278,60 @@
                     },
                     strategyAdvisor: {
                         efficiencyZone: efficiency > 80 ? 'Center' : efficiency > 60 ? 'Inner' : 'Outer',
-                        efficiency: efficiency.toFixed(1),
+                        efficiency: parseFloat(efficiency.toFixed(1)),
+                        shape: 'Bid-Ask',
                         recommendedAction: efficiency < 50 ? 'Rebalance Now' : efficiency < 70 ? 'Monitor Closely' : 'Hold Position',
                         dcaType: efficiency < 50 ? 'Edge-Weighted DCA' : efficiency < 70 ? 'Moderate DCA' : 'Full DCA',
                         dcaDetails: `In range with bid-ask shape. Price near ${efficiency > 70 ? 'center' : 'edge'} of 6.70–6.88 range.`,
                         rebalanceTrigger: 'Price exits 6.70-6.88 range',
                         compoundThreshold: 50,
-                        cumulativeFees: (efficiency / 100 * 0.25),
-                        nextCompound: `$${(50 - efficiency / 100 * 0.25).toFixed(2)} away from first compound`,
+                        cumulativeFees: cumulativeFees,
+                        nextCompound: `$${(50 - cumulativeFees).toFixed(2)} away`,
                         riskLevel: efficiency > 70 ? 'Low' : efficiency > 50 ? 'Medium' : 'High',
                         riskNote: efficiency > 70 ? 'In range, capturing max fees.' : efficiency > 50 ? 'In range, monitoring.' : 'Near edge, consider rebalance.'
+                    },
+                    lpPosition: {
+                        protocol: 'LFJ (Trader Joe)',
+                        chain: 'Avalanche',
+                        pair: 'AVAX / USDC',
+                        feeTier: '5 bps',
+                        shape: 'Bid-Ask',
+                        currentPrice: price,
+                        rangeMin: rangeMin,
+                        rangeMax: rangeMax,
+                        numBins: 180,
+                        deposit: { avax: 3.812, avaxValue: price * 3.812, usdc: 18.73, usdcValue: 18.73 },
+                        rewards: { avax: 0.00799, value: 0.00799 * price },
+                        fees24h: { total: dailyFees, avax: dailyFees / price, avaxValue: dailyFees * 0.54, usdc: dailyFees * 0.46, usdcValue: dailyFees * 0.46 }
                     },
                     curveData: {
                         rangeMin: rangeMin,
                         rangeMax: rangeMax,
                         currentPrice: price,
-                        efficiency: efficiency
+                        shape: 'bidirectional',
+                        bins: Array.from({length: 31}, (_, i) => {
+                            const p = rangeMin + (rangeMax - rangeMin) * (i / 30);
+                            const distFromPrice = Math.abs(p - price);
+                            const halfRange = (rangeMax - rangeMin) / 2;
+                            const depth = p === price ? 0.05 : 0.26 + 0.74 * (distFromPrice / halfRange);
+                            return { price: parseFloat(p.toFixed(3)), depth: parseFloat(Math.min(1, depth).toFixed(2)) };
+                        })
+                    },
+                    feeMilestones: {
+                        currentDailyFees: dailyFees,
+                        positionUsd: 44.39,
+                        cumulativeFees: cumulativeFees,
+                        daysActive: 1,
+                        tiers: [
+                            { tier: 1, label: 'Scout', target: 5, icon: '🏴', unlocks: 'Entry strategies (CURVE)' },
+                            { tier: 2, label: 'Raider', target: 20, icon: '⚔️', unlocks: 'SPOT + BIDIRECTIONAL shapes' },
+                            { tier: 3, label: 'Warlord', target: 55, icon: '🛡️', unlocks: 'Multi-pool positions' },
+                            { tier: 4, label: 'Fisher', target: 100, icon: '🎣', unlocks: 'Multi-asset farming (LINK, TAO, SOL)' },
+                            { tier: 5, label: 'Sovereign', target: 200, icon: '👑', unlocks: 'Custom strategy creation' }
+                        ]
                     },
                     rebalanceSuggestions: {
-                        efficiency: efficiency.toFixed(1),
+                        efficiency: parseFloat(efficiency.toFixed(1)),
                         price: price,
                         rangeMin: rangeMin,
                         rangeMax: rangeMax,
@@ -1334,6 +1374,16 @@
                             }
                         ]
                     },
+                    transactions: [
+                        {
+                            date: new Date().toISOString().split('T')[0],
+                            type: 'Auto-Refresh',
+                            token: 'AVAX/USDC',
+                            amount: `Price: $${price.toFixed(3)}`,
+                            usd: 44.39,
+                            status: inRange ? 'Active' : '⚠️ Out of Range'
+                        }
+                    ],
                     timestamp: new Date().toISOString()
                 };
             } catch (e) {
