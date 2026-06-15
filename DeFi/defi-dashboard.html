@@ -1235,8 +1235,8 @@
                 const change24h = pair.priceChange?.h24 || 0;
 
                 // Calculate efficiency based on price position in range
-                const rangeMin = 6.246;
-                const rangeMax = 7.242;
+                const rangeMin = 6.70;
+                const rangeMax = 6.88;
                 const rangeCenter = (rangeMin + rangeMax) / 2;
                 const rangeHalf = (rangeMax - rangeMin) / 2;
                 const distFromCenter = Math.abs(price - rangeCenter);
@@ -1246,7 +1246,7 @@
 
                 return {
                     hero: {
-                        positionUsd: 43.77,
+                        positionUsd: 44.54,
                         dailyFees: (efficiency / 100 * 0.25).toFixed(3),
                         efficiency: efficiency.toFixed(1),
                         efficiencyZone: efficiency > 80 ? 'Center' : efficiency > 60 ? 'Inner' : efficiency > 50 ? 'Outer' : 'Edge',
