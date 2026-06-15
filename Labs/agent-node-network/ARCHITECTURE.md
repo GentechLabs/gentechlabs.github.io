@@ -1,7 +1,9 @@
 # Agent Node Network — Architecture
 
 > GenTech Labs · June 2026
-> Status: ARCHITECTURE SESSION
+> Status: PROTOTYPE BUILT
+> Repo: https://github.com/Gentech-Labs/agent-node-network
+> Dashboard: https://gentech-labs.github.io/agent-node-network/dashboard.html
 
 ---
 
