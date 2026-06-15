@@ -1235,8 +1235,8 @@
                 const change24h = pair.priceChange?.h24 || 0;
 
                 // Calculate efficiency based on price position in range
-                const rangeMin = 6.70;
-                const rangeMax = 6.88;
+                const rangeMin = 6.85;
+                const rangeMax = 7.03;
                 const rangeCenter = (rangeMin + rangeMax) / 2;
                 const rangeHalf = (rangeMax - rangeMin) / 2;
                 const distFromCenter = Math.abs(price - rangeCenter);
@@ -1250,11 +1250,11 @@
 
                 return {
                     hero: {
-                        positionUsd: 44.39,
+                        positionUsd: 45.40,
                         dailyFees: dailyFees,
                         efficiency: parseFloat(efficiency.toFixed(1)),
                         efficiencyZone: efficiency > 80 ? 'Center' : efficiency > 60 ? 'Inner' : efficiency > 50 ? 'Outer' : 'Edge',
-                        shape: 'Bid-Ask',
+                        shape: 'Curve',
                         rangeStatus: inRange ? 'In Range' : 'Out of Range',
                         currentPrice: price,
                         rangeMin: rangeMin,
@@ -1279,11 +1279,11 @@
                     strategyAdvisor: {
                         efficiencyZone: efficiency > 80 ? 'Center' : efficiency > 60 ? 'Inner' : 'Outer',
                         efficiency: parseFloat(efficiency.toFixed(1)),
-                        shape: 'Bid-Ask',
+                        shape: 'Curve',
                         recommendedAction: efficiency < 50 ? 'Rebalance Now' : efficiency < 70 ? 'Monitor Closely' : 'Hold Position',
                         dcaType: efficiency < 50 ? 'Edge-Weighted DCA' : efficiency < 70 ? 'Moderate DCA' : 'Full DCA',
-                        dcaDetails: `In range with bid-ask shape. Price near ${efficiency > 70 ? 'center' : 'edge'} of 6.70–6.88 range.`,
-                        rebalanceTrigger: 'Price exits 6.70-6.88 range',
+                        dcaDetails: `In range with curve shape. Price near ${efficiency > 70 ? 'center' : 'edge'} of $6.85–$7.03 range.`,
+                        rebalanceTrigger: 'Price exits $6.85-7.03 range',
                         compoundThreshold: 50,
                         cumulativeFees: cumulativeFees,
                         nextCompound: `$${(50 - cumulativeFees).toFixed(2)} away`,
@@ -1295,12 +1295,12 @@
                         chain: 'Avalanche',
                         pair: 'AVAX / USDC',
                         feeTier: '5 bps',
-                        shape: 'Bid-Ask',
+                        shape: 'Curve',
                         currentPrice: price,
                         rangeMin: rangeMin,
                         rangeMax: rangeMax,
-                        numBins: 180,
-                        deposit: { avax: 3.812, avaxValue: price * 3.812, usdc: 18.73, usdcValue: 18.73 },
+                        numBins: 18,
+                        deposit: { avax: 0.428, avaxValue: price * 0.428, usdc: 42.42, usdcValue: 42.42 },
                         rewards: { avax: 0.00799, value: 0.00799 * price },
                         fees24h: { total: dailyFees, avax: dailyFees / price, avaxValue: dailyFees * 0.54, usdc: dailyFees * 0.46, usdcValue: dailyFees * 0.46 }
                     },
@@ -1308,7 +1308,7 @@
                         rangeMin: rangeMin,
                         rangeMax: rangeMax,
                         currentPrice: price,
-                        shape: 'bidirectional',
+                        shape: 'curve',
                         bins: Array.from({length: 31}, (_, i) => {
                             const p = rangeMin + (rangeMax - rangeMin) * (i / 30);
                             const distFromPrice = Math.abs(p - price);
