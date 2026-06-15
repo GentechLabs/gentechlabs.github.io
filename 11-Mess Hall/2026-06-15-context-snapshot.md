@@ -1,6 +1,6 @@
 # Context Snapshot — June 15, 2026
 
-**Generated:** 12:05 AM ET (initial) → Updated 6:02 AM ET
+**Generated:** 12:05 AM ET (initial) → Updated 6:02 AM ET → Updated 12:10 PM ET → Updated 6:05 PM ET
 
 ---
 
@@ -114,4 +114,115 @@
 
 ---
 
-*Last updated: 2026-06-15 06:02 AM ET*
+## Session 7: Archiving Mantle & Arbitrum Hackathons (Jun 15, 9:29 AM – ongoing)
+
+**Key Decisions:**
+- **Mantle Turing Test** — Deadline TODAY (Jun 15). Skipped due to faucet issues. Contracts built but never deployed. Code saved for future use.
+- **Arbitrum Open House** — Deadline passed (Jun 14). Also skipped. Same faucet blocker.
+- **Agent Node Heartbeat** — Cron job fixed (broken script path), validated as proof of concept, then **paused** per Jordan's instruction. Concept proven but not needed operationally.
+
+**Repos on GitHub (preserved):**
+- `ProtoJay4789/mantle-turing-test` — Agent Economy, 6 contracts, ERC-8004 integration
+- `ProtoJay4789/arbitrum-open-house` — AgentForge fork for Arbitrum
+- `ProtoJay4789/mantle-agent-insurance` — Agent Insurance Pools
+- `ProtoJay4789/agentforge` — Original ETHGlobal build
+
+**Vault synced:** Mantle Turing Test submission archived to `Labs/Hackathons/Archived/`
+
+**Files Modified:** Vault synced, Mantle submission moved to Archived folder
+
+---
+
+## Session 8: Portfolio Health Check (Jun 15, 12:05 PM, cron)
+
+**Key Findings:**
+- **sync-projects.py doesn't exist** at expected path. Correct script: `/root/.hermes/profiles/gentech/scripts/portfolio_sync.py`
+- **data/projects.json** (canonical): 6 projects, aligned with root projects.json
+- **index.html redesigned** — no JS `const projects = [...]` array anymore. Portfolio sync script can't regenerate it (structural mismatch).
+- **GitHub Actions** — healthy, latest deployment succeeded
+- **Vault copy drift** — `~/.hermes/profiles/gentech/home/portfolio/` has 21 projects (stale June 5 version) vs 6 in live repo
+
+**Action Needed:** Update `portfolio_sync.py` to handle new index.html architecture, or accept static page as-is.
+
+---
+
+## Session 9: Christel Auto-Logger (Jun 15, 12:03 PM, cron)
+**Status:** No new Christel messages since last run. Cookbook (3 dishes) and journal (2 entries) unchanged.
+
+---
+
+## Session 10: Ray-Ban Glasses Voice Chat (Jun 15, 12:28 PM – ongoing)
+**Key Decisions:**
+- Jordan asked to communicate with Hermes through Ray-Ban glasses
+- Built "Gentech Ray-Ban Bridge Server v3" — direct Hermes CLI bridge, no Telegram relay
+- Uses `hermes chat -q` for direct communication
+- Created `06-Content/Projects/rayban-gentech/` with server.py, index.html, detect-tunnel.sh
+
+**Completed:**
+- Ray-Ban Bridge Server: server.py (8.3KB), index.html (4.9KB)
+- Tunnel detection script for ngrok/cloudflare tunneling
+- Tested Agent Node via Ray-Ban (brief PoC at 4:55 PM)
+
+**Files Created:**
+- `06-Content/Projects/rayban-gentech/server.py` — Bridge server
+- `06-Content/Projects/rayban-gentech/index.html` — Display page
+- `06-Content/Projects/rayban-gentech/detect-tunnel.sh` — Tunnel helper
+
+**Status:** Session ongoing (316 messages as of 6 PM)
+
+---
+
+## Session 11: Opportunity Scanner — Hackathons + Bounties + Grants (Jun 15, 5:00 PM, cron)
+
+**Key Findings:**
+
+| Opportunity | Amount | Deadline | Fit | Verdict |
+|------------|--------|----------|-----|---------|
+| QVAC Hackathon I | Unknown | Jun 21 (6d) | ⭐⭐ | SKIP — SDK lock-in |
+| ETHGlobal Lisbon | $100K+ | Jul 22 (reg) | ⭐⭐⭐ | REJECT — in-person only |
+| Chainlink BUILD | ~$50K equiv | Rolling | ⭐⭐⭐⭐ | APPLY — non-dilutive |
+| Arbitrum Foundation Grant | $20K-$150K | Rolling | ⭐⭐⭐ | APPLY — have Arbitrum repos |
+| Solana Foundation Grants | Varies | Rolling | ⭐⭐⭐ | FUTURE — after Bootcamp |
+| AWS Activate | Up to $10K | Jul 1 (16d) | ⭐⭐⭐ | APPLY — low effort |
+| Colosseum Fall Hackathon | TBD | Sep 28–Nov 2 | ⭐⭐⭐⭐⭐ | PRIMARY — perfect timing |
+
+**Action Items:**
+1. 🔴 **AWS Activate** — Apply by Jul 1 (16 days)
+2. 🟡 **Chainlink BUILD** — Rolling, worth applying for DeFi agent stack
+3. 🟡 **Arbitrum Grant** — Rolling, have existing Arbitrum repos to build on
+4. ⏳ **Encode Solana Bootcamp** — Starts Jun 22 (already registered ✅)
+5. ⏳ **Encode Arc Bootcamp** — Starts Jun 22 (already registered ✅)
+
+---
+
+## DeFi LP Monitor — Continuous Updates (12 PM – 6 PM)
+
+**Price Movement:** AVAX rose from $6.78 → $7.01 through the day
+- 6 AM: $6.78 (1.04% above old range, monitor config stale)
+- 12 PM–6 PM: Steady at ~$7.01 (within new range $6.85–$7.03)
+- 6 PM check: $7.013 — healthy, efficiency OK, no alerts
+
+**Note:** Monitor config updated to reflect new range ($6.85–$7.03, CURVE strategy at center)
+
+---
+
+## Updated Open Threads
+
+1. **🔴 AWS Activate** — Apply by Jul 1 (16 days). Up to $10K cloud credits.
+2. **🟡 Chainlink BUILD** — Rolling application. DeFi agent stack would benefit from Chainlink data feeds.
+3. **🟡 Arbitrum Grant** — Rolling application. Have existing Arbitrum repos (AgentForge).
+4. **⏳ Encode Solana Bootcamp** — Starts Jun 22 (registered ✅). 4 weeks.
+5. **⏳ Encode Arc Bootcamp** — Starts Jun 22 (registered ✅). 4 weeks.
+6. **⏳ Colosseum Fall Hackathon** — Sep 28–Nov 2. Primary hackathon target.
+7. **🟢 Ray-Ban Bridge** — Server built, needs testing in production with Jordan's glasses.
+8. **🟡 Portfolio Sync Script** — Needs update for redesigned index.html.
+9. **🟢 DeFi LP Monitor** — Price at $7.01, within range ($6.85–$7.03). Healthy.
+10. **🟢 Mantle/Arbitrum repos** — Archived for future use.
+11. **⏳ BNB Hackathon** — Submission ready. 21/21 tests passing.
+12. **⏳ COTI Privacy Skills** — 48+ MCP tools cloned, integration pending.
+13. **⏳ Multi-pool DeFi** — LINK, TAO, SOL positions when ready.
+14. **⏳ Auto-rebalancing** — Feature saved to `09-Green Room/ideas/`.
+
+---
+
+*Last updated: 2026-06-15 6:05 PM ET*

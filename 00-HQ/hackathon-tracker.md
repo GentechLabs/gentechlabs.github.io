@@ -1,26 +1,26 @@
 # Hackathon Tracker — GenTech Labs
 
-> Last updated: 2026-06-11 | Mode: Learning + Selective Builds
+> Last updated: 2026-06-15 | Mode: Learning + Selective Builds
 
 ## Priority Queue (Jordan's Directive Order)
 
 ### 🔴 ACTIVE — Building Now
 | # | Hackathon | Prize | Deadline | Days Left | Status |
 |---|-----------|-------|----------|-----------|--------|
-| 1 | **BNB Hack: AI Trading Agent Edition** | $36K | Jun 21 | 10 | 🟢 Track 2 built — cmc-strategy-engine (21/21 tests). Demo + submit pending. |
-| 2 | **Mantle Turing Test** | $100K+ | Jun 15 | 4 | 🟡 Agent Insurance pushed. Needs faucet + deploy. |
+| 1 | **BNB Hack: AI Trading Agent Edition** | $36K | Jun 21 | 6 | 🟢 Track 2 built — cmc-strategy-engine (21/21 tests). Demo + submit pending. |
+| 2 | **Mantle Turing Test** | $100K+ | Jun 15 | 0 | ⚠️ DEADLINE TODAY — Agent Insurance pushed. Needs faucet + deploy. |
 
 ### ⏳ NEEDS ACTION — Jordan Review
 | # | Hackathon | Prize | Deadline | Days Left | Status |
 |---|-----------|-------|----------|-----------|--------|
-| 1 | **Arbitrum Open House** | — | Jun 14 | 3 | 🟡 AgentForge pushed. Confirm deploy + submit. |
+| 1 | **Arbitrum Open House** | — | Jun 14 | -1 | ✅ PASSED — AgentForge pushed. Confirm deploy + submit. |
 
 ### 📚 LEARNING TRACK (Primary Focus)
 | # | Program | Type | Starts | Duration | Status |
 |---|---------|------|--------|----------|--------|
 | 1 | Cyfrin Updraft | Security cert | Self-paced | ~6 months | 🟢 Active |
-| 2 | **Encode Solana Bootcamp** | Bootcamp | Jun 22 | 4 weeks | ⚠️ Confirm registration |
-| 3 | **Encode Arc Bootcamp** | Bootcamp | Jun 22 | 4 weeks | ⚠️ Confirm registration |
+| 2 | **Encode Solana Bootcamp** | Bootcamp | Jun 22 | 4 weeks | ⚠️ Confirm registration (7 days) |
+| 3 | **Encode Arc Bootcamp** | Bootcamp | Jun 22 | 4 weeks | ⚠️ Confirm registration (7 days) |
 
 ### 📋 LONG-RUNNER
 | # | Hackathon | Prize | Deadline | Fit | Status |
@@ -49,6 +49,7 @@
 ---
 
 ## Scan History
+- **2026-06-15**: Nightly sweep — recalc all deadlines. Mantle TODAY (0d), Arbitrum PASSED (-1d), BNB 6d. Encode bootcamps 7d. STATUS-BOARD + Working Memory updated.
 - **2026-06-11**: BNB Hack Track 2 scaffolded + pushed (cmc-strategy-engine). Portfolio build fixed (stale submodules removed). Mantle Agent Insurance pushed.
 - **2026-06-09**: Daily scan → 12 reviewed, 3 new (low relevance), 5 confirmed active. TinyFish API exhausted (0 credits) — fell back to web_search.
 - **2026-06-08**: Full scan → 15 opportunities reviewed, 4 high-relevance, 3 medium

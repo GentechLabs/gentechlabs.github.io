@@ -403,12 +403,18 @@
         "category": "docs"
       },
       {
-        "item": "Book CVG \u2192 MNL flight",
+        "item": "Complete eTravel registration online (mandatory)",
+        "done": false,
+        "category": "docs",
+        "note": "https://etravel.gov.ph — do before departure"
+      },
+      {
+        "item": "Book CVG → MNL flight",
         "done": false,
         "category": "flights"
       },
       {
-        "item": "Book MNL \u2192 CVG return flight",
+        "item": "Book MNL → CVG return flight",
         "done": false,
         "category": "flights"
       },
@@ -418,9 +424,16 @@
         "category": "stay"
       },
       {
-        "item": "Travel insurance",
+        "item": "Travel insurance (Tin Leg Gold or World Nomads)",
         "done": false,
-        "category": "docs"
+        "category": "docs",
+        "note": "Min $50K medical, $100K evacuation. ~$200-250. Buy before booking flights."
+      },
+      {
+        "item": "Bring proof of funds (PHP cash preferred)",
+        "done": false,
+        "category": "finance",
+        "note": "Not strictly enforced in PH unlike Thailand, but good to have."
       },
       {
         "item": "Philippine SIM card (Globe or Smart)",
@@ -433,7 +446,7 @@
         "category": "finance"
       },
       {
-        "item": "Exchange USD \u2192 PHP (don't do at airport)",
+        "item": "Exchange USD → PHP (don't do at airport)",
         "done": false,
         "category": "finance"
       },
@@ -443,7 +456,13 @@
         "category": "tech"
       },
       {
-        "item": "Pack light \u2014 2 weeks casual",
+        "item": "Download eTravel app",
+        "done": false,
+        "category": "tech",
+        "note": "Philippines mandatory arrival/departure form"
+      },
+      {
+        "item": "Pack light — 2 weeks casual",
         "done": false,
         "category": "pack"
       },
@@ -561,15 +580,34 @@
       }
     ],
     "tips": [
-      "Sept is rainy season \u2014 bring umbrella, mornings are usually clear",
+      "Sept is rainy season — bring umbrella, mornings are usually clear",
       "Grab is the Uber of PH. Use it for everything.",
       "Makati is very walkable for a Manila city. Greenbelt area especially.",
       "ATMs charge 250 PHP ($4.50) per withdrawal. Withdraw large amounts.",
       "7-Eleven everywhere. Cheap meals, phone top-up, ATMs.",
       "Christel's home base is Mindanao but she'll be in Makati with you.",
       "Cooking at home saves money AND is more romantic than eating out every night.",
-      "Jollibee delivery via GrabFood if you don't want to go out."
+      "Jollibee delivery via GrabFood if you don't want to go out.",
+      "eTravel registration is MANDATORY — complete online before departure at https://etravel.gov.ph"
     ],
-    "lastUpdated": "2026-06-11"
+    "travelRules": {
+      "lastUpdated": "2026-06-15",
+      "philippines": {
+        "visaFreeStay": "30 days (US passport)",
+        "extendable": "Yes, up to 36 months via Bureau of Immigration (~Php 3,030 for 29-day extension)",
+        "proofOfFunds": "Required but rarely enforced",
+        "healthInsurance": "Not required",
+        "eTravel": "Mandatory — online registration before arrival",
+        "crackdown": "None — Philippines is not tightening rules like Thailand"
+      },
+      "thailand": {
+        "visaFreeStay": "30 days (was 60, reduced May 2026)",
+        "proofOfFunds": "20,000 Baht cash per person (~$550) — enforced randomly at immigration",
+        "healthInsurance": "May become mandatory (under review)",
+        "crackdown": "Zero tolerance — deportation for violations, driving without license = court",
+        "note": "If transiting through Thailand, same rules apply"
+      }
+    },
+    "lastUpdated": "2026-06-15"
   }
 }

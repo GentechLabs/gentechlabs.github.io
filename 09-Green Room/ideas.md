@@ -68,3 +68,43 @@ Ideas from real conversations with real people.
 - **Connection:** GenTech Suite: Travel + Cookbook + Dashboard + AAE
 
 ---
+
+## Agent Rug 2.0 — Agent Security Platform
+**Added:** Jun 15, 2026
+**Status:** Brainstorm
+
+### Vision
+Expand Agent Rug from malicious token scanner to full agent security platform.
+
+### Core Layers
+1. **Agent Verification** — Scan code for malware, drain patterns, suspicious permissions
+2. **Contract Verification** — Match deployed contract to claimed source code
+3. **Variant Detection** — Find hidden backdoors in "legitimate" agents
+
+### Features
+- Platform-based risk scoring (which launchpads are dangerous?)
+- Contract age + behavior analysis
+- Drain pattern detection (approvals, transfers, swaps)
+- Community reputation tracking
+- Real-time threat intelligence dashboard
+- Draining event tracking
+- Liquidation alerts
+- Quantum readiness scores
+- Attack pattern database
+
+### Use Cases
+- BYOS users verifying untrusted agents
+- DeFi traders checking token safety
+- Protocol teams auditing integrated agents
+- Security researchers tracking attack patterns
+
+### Revenue Angle
+- Freemium: Basic scans free, deep scans paid
+- Enterprise: Protocol integration API
+- Data: Threat intelligence feeds
+
+### Next Steps
+- [ ] Research existing agent security tools
+- [ ] Map attack vectors (wallet drainers, approval abusers, etc.)
+- [ ] Design verification pipeline
+- [ ] Build prototype for Agent Kit integration
