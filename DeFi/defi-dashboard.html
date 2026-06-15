@@ -1224,7 +1224,7 @@
         // Fetch live data from DexScreener
         async function fetchLiveData() {
             try {
-                const res = await fetch('https://api.dexscreener.com/latest/dex/pairs/avalanche/0x6459475a1a0b5718437bc5b814bcacb41b203728');
+                const res = await fetch('https://api.dexscreener.com/latest/dex/pairs/avalanche/0x864d4e5Ee7318e97483DB7EB0912E09F161516EA');
                 const json = await res.json();
                 const pair = json.pairs?.[0];
                 if (!pair) return null;
