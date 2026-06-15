@@ -1361,8 +1361,8 @@
                 const change24h = pair.priceChange?.h24 || 0;
 
                 // Calculate efficiency based on price position in range
-                const rangeMin = 6.85;
-                const rangeMax = 7.03;
+                const rangeMin = 6.82;
+                const rangeMax = 7.02;
                 const rangeCenter = (rangeMin + rangeMax) / 2;
                 const rangeHalf = (rangeMax - rangeMin) / 2;
                 const distFromCenter = Math.abs(price - rangeCenter);
@@ -1416,8 +1416,8 @@
                         shape: 'Curve',
                         recommendedAction: efficiency < 50 ? 'Rebalance Now' : efficiency < 70 ? 'Monitor Closely' : 'Hold Position',
                         dcaType: efficiency < 50 ? 'Edge-Weighted DCA' : efficiency < 70 ? 'Moderate DCA' : 'Full DCA',
-                        dcaDetails: `In range with curve shape. Price near ${efficiency > 70 ? 'center' : 'edge'} of $6.85–$7.03 range.`,
-                        rebalanceTrigger: 'Price exits $6.85-7.03 range',
+                        dcaDetails: `In range with curve shape. Price near ${efficiency > 70 ? 'center' : 'edge'} of $6.82–$7.02 range.`,
+                        rebalanceTrigger: 'Price exits $6.82-7.02 range',
                         compoundThreshold: 50,
                         cumulativeFees: cumulativeFees,
                         nextCompound: `$${(50 - cumulativeFees).toFixed(2)} away`,

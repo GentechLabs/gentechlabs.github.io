@@ -1,14 +1,14 @@
 {
   "hero": {
-    "positionUsd": 45.4,
-    "dailyFees": 0.54,
-    "efficiency": 94.4,
+    "positionUsd": 45.8,
+    "dailyFees": 0.87,
+    "efficiency": 100.0,
     "efficiencyZone": "Center",
     "shape": "Curve",
     "rangeStatus": "In Range",
     "currentPrice": 6.93,
-    "rangeMin": 6.85,
-    "rangeMax": 7.03,
+    "rangeMin": 6.82,
+    "rangeMax": 7.02,
     "milestoneCurrent": "Unranked",
     "milestoneNext": "Scout",
     "milestoneTarget": 5,
@@ -40,12 +40,12 @@
   },
   "strategyAdvisor": {
     "efficiencyZone": "Center",
-    "efficiency": 94.4,
+    "efficiency": 100.0,
     "shape": "Curve",
     "recommendedAction": "Hold",
     "dcaType": "Curve Strategy",
-    "dcaDetails": "Curve shape at 94.4% efficiency. Price centered in $6.85-$7.03 range. Earning max fees.",
-    "rebalanceTrigger": "Price exits $6.85-7.03 range",
+    "dcaDetails": "Curve at 100% efficiency. Price centered in $6.82-$7.02. Earning max fees ($0.87/day).",
+    "rebalanceTrigger": "Price exits $6.82-7.02 range",
     "compoundThreshold": 50,
     "cumulativeFees": 0.364,
     "nextCompound": "$49.64 away",
@@ -59,13 +59,13 @@
     "feeTier": "5 bps",
     "shape": "curve",
     "currentPrice": 6.93,
-    "rangeMin": 6.85,
-    "rangeMax": 7.03,
+    "rangeMin": 6.82,
+    "rangeMax": 7.02,
     "numBins": 180,
     "deposit": {
-      "avax": 0.428,
+      "avax": 3.142,
       "avaxValue": 25.7,
-      "usdc": 42.42,
+      "usdc": 24.03,
       "usdcValue": 18.69
     },
     "rewards": {
@@ -79,10 +79,10 @@
       "usdc": 0.1686,
       "usdcValue": 0.1686
     },
-    "avaxAmount": 0.428,
-    "usdcAmount": 42.42,
-    "totalValueUSD": 45.4,
-    "totalValue": 45.4
+    "avaxAmount": 3.142,
+    "usdcAmount": 24.03,
+    "totalValueUSD": 45.8,
+    "totalValue": 45.8
   },
   "curveData": {
     "rangeMin": 6.7,
@@ -217,8 +217,8 @@
     ]
   },
   "feeMilestones": {
-    "currentDailyFees": 0.54,
-    "positionUsd": 45.4,
+    "currentDailyFees": 0.87,
+    "positionUsd": 45.8,
     "cumulativeFees": 0.364,
     "daysActive": 1,
     "tiers": [
@@ -260,10 +260,10 @@
     ]
   },
   "rebalanceSuggestions": {
-    "efficiency": 94.4,
+    "efficiency": 100.0,
     "price": 6.732,
-    "rangeMin": 6.85,
-    "rangeMax": 7.03,
+    "rangeMin": 6.82,
+    "rangeMax": 7.02,
     "volatility": "medium",
     "trend": "consolidation",
     "suggestions": [
@@ -306,14 +306,14 @@
         "note": "Previous high"
       },
       {
-        "price": 7.03,
+        "price": 7.02,
         "type": "resistance",
         "strength": "strong",
         "label": "Range High",
         "note": "Current position top"
       },
       {
-        "price": 6.85,
+        "price": 6.82,
         "type": "support",
         "strength": "strong",
         "label": "Range Low",
