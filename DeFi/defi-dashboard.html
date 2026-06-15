@@ -1274,8 +1274,15 @@
                     strategyAdvisor: {
                         efficiencyZone: efficiency > 80 ? 'Center' : efficiency > 60 ? 'Inner' : 'Outer',
                         efficiency: efficiency.toFixed(1),
-                        recommendation: efficiency < 50 ? 'Rebalance Now' : efficiency < 70 ? 'Monitor Closely' : 'Hold Position',
-                        riskLevel: efficiency > 70 ? 'Low' : efficiency > 50 ? 'Medium' : 'High'
+                        recommendedAction: efficiency < 50 ? 'Rebalance Now' : efficiency < 70 ? 'Monitor Closely' : 'Hold Position',
+                        dcaType: efficiency < 50 ? 'Edge-Weighted DCA' : efficiency < 70 ? 'Moderate DCA' : 'Full DCA',
+                        dcaDetails: `In range with bid-ask shape. Price near ${efficiency > 70 ? 'center' : 'edge'} of 6.70–6.88 range.`,
+                        rebalanceTrigger: 'Price exits 6.70-6.88 range',
+                        compoundThreshold: 50,
+                        cumulativeFees: (efficiency / 100 * 0.25),
+                        nextCompound: `$${(50 - efficiency / 100 * 0.25).toFixed(2)} away from first compound`,
+                        riskLevel: efficiency > 70 ? 'Low' : efficiency > 50 ? 'Medium' : 'High',
+                        riskNote: efficiency > 70 ? 'In range, capturing max fees.' : efficiency > 50 ? 'In range, monitoring.' : 'Near edge, consider rebalance.'
                     },
                     curveData: {
                         rangeMin: rangeMin,

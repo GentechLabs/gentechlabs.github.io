@@ -31,7 +31,7 @@
     "shape": "Bid-Ask",
     "rangeStatus": "In Range",
     "currentPrice": 6.732,
-    "rangeMin": 6.70,
+    "rangeMin": 6.7,
     "rangeMax": 6.88,
     "milestoneNext": "Scout",
     "milestoneTarget": 5,
@@ -48,27 +48,34 @@
   "strategyAdvisor": {
     "efficiencyZone": "Inner",
     "efficiency": "64.4",
-    "recommendation": "Monitor Closely",
-    "riskLevel": "Medium"
+    "recommendedAction": "Monitor Closely",
+    "dcaType": "Edge-Weighted DCA",
+    "dcaDetails": "In range with bid-ask shape. BTC pump could drag AVAX toward upper edge ($6.88). Volatility = higher fees.",
+    "rebalanceTrigger": "Price exits 6.70-6.88 range",
+    "compoundThreshold": 50,
+    "cumulativeFees": 0.364,
+    "nextCompound": "$49.64 away from first compound",
+    "riskLevel": "Low",
+    "riskNote": "In range, capturing fees. Monitor for breakout."
   },
   "rebalanceSuggestions": {
     "efficiency": "64.4",
     "price": 6.732,
-    "rangeMin": 6.70,
+    "rangeMin": 6.7,
     "rangeMax": 6.88,
     "volatility": "medium",
     "trend": "consolidation",
     "suggestions": [
       {
-        "icon": "🟡",
-        "title": "Monitor — Approaching Threshold",
+        "icon": "\ud83d\udfe1",
+        "title": "Monitor \u2014 Approaching Threshold",
         "description": "Efficiency at 64.4%. Consider rebalancing if it drops below 50%. Current range ($6.70-$6.88) is still capturing decent fees.",
         "priority": "medium",
         "impact": "Maintain current fees",
         "action": null
       },
       {
-        "icon": "💡",
+        "icon": "\ud83d\udca1",
         "title": "Consider Tighter Range",
         "description": "Current range is $6.70-$6.88. A tighter range ($6.60-$6.87) would earn more fees if price stays stable.",
         "priority": "low",

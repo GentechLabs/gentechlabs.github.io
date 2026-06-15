@@ -246,7 +246,13 @@ class DashboardEngine {
 
   renderSection(section) {
     const type = section.type || 'custom';
-    const sectionHtml = this.renderSectionType(section, type);
+    let sectionHtml;
+    try {
+      sectionHtml = this.renderSectionType(section, type);
+    } catch (err) {
+      console.warn(`[Dashboard] Section "${section.id}" render failed:`, err.message);
+      sectionHtml = `<div style="padding:16px;color:#ff4466;">⚠️ Section "${section.id || 'unknown'}" failed to render: ${err.message}</div>`;
+    }
     const anim = section.animation;
 
     let animClass = '';
