@@ -31,7 +31,7 @@
     "container": { "maxWidth": "1100px" }
   },
   "tabs": [
-    { "id": "farming", "label": "Farming", "icon": "🌾", "sections": ["hero-efficiency", "market-intel", "strategy-advisor", "lp-curve"] },
+    { "id": "farming", "label": "Farming", "icon": "🌾", "sections": ["hero-efficiency", "market-intel", "support-resistance", "strategy-advisor", "lp-curve"] },
     { "id": "rebalance", "label": "Rebalance", "icon": "🔄", "sections": ["rebalance-suggestions"] },
     { "id": "milestones", "label": "Milestones", "icon": "🏆", "sections": ["fee-milestones", "trajectory"] },
     { "id": "position", "label": "Position", "icon": "📊", "sections": ["lp-stats", "transactions"] }
@@ -51,6 +51,14 @@
       "type": "custom",
       "dataSource": "marketIntel",
       "customRender": "marketIntel"
+    },
+    {
+      "id": "support-resistance",
+      "title": "Support & Resistance",
+      "icon": "📊",
+      "type": "custom",
+      "dataSource": "supportResistance",
+      "customRender": "supportResistance"
     },
     {
       "id": "strategy-advisor",

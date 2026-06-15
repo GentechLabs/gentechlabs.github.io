@@ -775,6 +775,9 @@
             if (section.customRender === 'rebalanceSuggestions') {
                 return this.renderRebalanceSuggestions(section);
             }
+            if (section.customRender === 'supportResistance') {
+                return this.renderSupportResistance(section);
+            }
             return originalRenderCustom.call(this, section);
         };
 
@@ -956,6 +959,129 @@
                             <div style="font-size:0.7em; color:var(--text-dim); text-transform:uppercase; letter-spacing:1px;">Risk Level</div>
                             <div style="font-size:1.3em; font-weight:700; color:${riskLevel === 'Low' ? 'var(--gold)' : riskLevel === 'Medium' ? '#fbbf24' : 'var(--danger)'}; margin:6px 0;">${riskLevel}</div>
                             <div style="font-size:0.8em; color:var(--text-dim);">${riskNote}</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        };
+
+        // Support/Resistance Levels Renderer
+        DashboardEngine.prototype.renderSupportResistance = function(section) {
+            const data = this.resolveDataSource(section.dataSource);
+            if (!data) return '<p class="empty-state">No S/R data</p>';
+
+            const { currentPrice, levels, shapeRecommendation, proximityAlert } = data;
+            
+            // Calculate distance to nearest support/resistance
+            const resistanceLevels = levels.filter(l => l.type === 'resistance').sort((a, b) => a.price - b.price);
+            const supportLevels = levels.filter(l => l.type === 'support').sort((a, b) => b.price - a.price);
+            
+            const nearestResistance = resistanceLevels.find(r => r.price > currentPrice);
+            const nearestSupport = supportLevels.find(s => s.price < currentPrice);
+            
+            const distToResistance = nearestResistance ? ((nearestResistance.price - currentPrice) / currentPrice * 100).toFixed(1) : '∞';
+            const distToSupport = nearestSupport ? ((currentPrice - nearestSupport.price) / currentPrice * 100).toFixed(1) : '∞';
+
+            // Build price ladder
+            const allLevels = [...supportLevels, ...resistanceLevels].sort((a, b) => b.price - a.price);
+            
+            let ladderHtml = allLevels.map(level => {
+                const isAbove = level.price > currentPrice;
+                const distance = Math.abs(level.price - currentPrice);
+                const distPct = (distance / currentPrice * 100).toFixed(1);
+                const barWidth = Math.min(100, Math.max(10, 100 - (distance / currentPrice * 500)));
+                
+                const color = level.type === 'resistance' 
+                    ? (level.strength === 'strong' ? '#ef4444' : level.strength === 'medium' ? '#f59e0b' : '#6b7280')
+                    : (level.strength === 'strong' ? '#22c55e' : level.strength === 'medium' ? '#10b981' : '#6b7280');
+                
+                const emoji = level.type === 'resistance' ? '🔴' : '🟢';
+                const strengthBadge = level.strength === 'strong' ? '⚔️' : level.strength === 'medium' ? '🛡️' : '📍';
+                
+                return `
+                    <div style="display:flex; align-items:center; gap:12px; padding:10px 14px; background:${color}08; border:1px solid ${color}30; border-radius:8px; margin-bottom:8px;">
+                        <div style="min-width:24px; text-align:center;">${emoji}</div>
+                        <div style="flex:1;">
+                            <div style="display:flex; justify-content:space-between; align-items:center;">
+                                <span style="font-weight:700; color:${color};">$${level.price.toFixed(2)}</span>
+                                <span style="font-size:0.75em; color:var(--text-dim);">${distPct}% ${isAbove ? 'above' : 'below'}</span>
+                            </div>
+                            <div style="font-size:0.8em; color:var(--text-dim); margin-top:2px;">
+                                ${strengthBadge} ${level.label} ${level.note ? `· ${level.note}` : ''}
+                            </div>
+                        </div>
+                        <div style="width:60px; height:6px; background:rgba(255,255,255,0.06); border-radius:3px; overflow:hidden;">
+                            <div style="width:${barWidth}%; height:100%; background:${color}; border-radius:3px;"></div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            // Shape recommendation card
+            const shapeColor = shapeRecommendation.shape === 'Curve' ? '#22c55e' : shapeRecommendation.shape === 'Bid-Ask' ? '#f59e0b' : '#3b82f6';
+            const shapeEmoji = shapeRecommendation.shape === 'Curve' ? '📈' : shapeRecommendation.shape === 'Bid-Ask' ? '📊' : '🎯';
+
+            return `
+                <div style="background:var(--panel-bg); border:1px solid var(--panel-border); border-radius:var(--radius); padding:20px;">
+                    <!-- Header with current price context -->
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; padding-bottom:12px; border-bottom:1px solid var(--panel-border);">
+                        <div>
+                            <div style="font-size:0.7em; color:var(--text-dim); text-transform:uppercase; letter-spacing:1px;">Support & Resistance</div>
+                            <div style="font-size:1.4em; font-weight:700; color:var(--text);">Price Map</div>
+                        </div>
+                        <div style="text-align:right;">
+                            <div style="font-size:0.7em; color:var(--text-dim);">Current Price</div>
+                            <div style="font-size:1.3em; font-weight:700; color:var(--gold);">$${currentPrice.toFixed(3)}</div>
+                        </div>
+                    </div>
+
+                    <!-- Proximity Alerts -->
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:20px;">
+                        <div style="padding:14px; background:rgba(239,68,68,0.06); border:1px solid rgba(239,68,68,0.2); border-radius:10px;">
+                            <div style="font-size:0.65em; color:var(--text-dim); text-transform:uppercase; letter-spacing:1px;">Nearest Resistance</div>
+                            <div style="font-size:1.2em; font-weight:700; color:#ef4444; margin:4px 0;">
+                                ${nearestResistance ? `$${nearestResistance.price.toFixed(2)}` : 'None'}
+                            </div>
+                            <div style="font-size:0.8em; color:var(--text-dim);">
+                                ${distToResistance === '∞' ? 'No resistance above' : `${distToResistance}% away`}
+                            </div>
+                        </div>
+                        <div style="padding:14px; background:rgba(34,197,94,0.06); border:1px solid rgba(34,197,94,0.2); border-radius:10px;">
+                            <div style="font-size:0.65em; color:var(--text-dim); text-transform:uppercase; letter-spacing:1px;">Nearest Support</div>
+                            <div style="font-size:1.2em; font-weight:700; color:#22c55e; margin:4px 0;">
+                                ${nearestSupport ? `$${nearestSupport.price.toFixed(2)}` : 'None'}
+                            </div>
+                            <div style="font-size:0.8em; color:var(--text-dim);">
+                                ${distToSupport === '∞' ? 'No support below' : `${distToSupport}% away`}
+                            </div>
+                        </div>
+                    </div>
+
+                    ${proximityAlert ? `
+                        <div style="padding:12px 16px; background:rgba(245,158,11,0.08); border:1px solid rgba(245,158,11,0.3); border-radius:8px; margin-bottom:16px; display:flex; align-items:center; gap:10px;">
+                            <span style="font-size:1.2em;">⚠️</span>
+                            <span style="font-size:0.9em; color:#f59e0b; font-weight:500;">${proximityAlert}</span>
+                        </div>
+                    ` : ''}
+
+                    <!-- Price Ladder -->
+                    <div style="margin-bottom:20px;">
+                        <div style="font-size:0.7em; color:var(--text-dim); text-transform:uppercase; letter-spacing:1px; margin-bottom:12px;">Price Ladder</div>
+                        ${ladderHtml}
+                    </div>
+
+                    <!-- Shape Recommendation -->
+                    <div style="padding:16px; background:${shapeColor}08; border:1px solid ${shapeColor}30; border-radius:10px;">
+                        <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px;">
+                            <span style="font-size:1.3em;">${shapeEmoji}</span>
+                            <div>
+                                <div style="font-size:0.7em; color:var(--text-dim); text-transform:uppercase; letter-spacing:1px;">Recommended Shape</div>
+                                <div style="font-size:1.2em; font-weight:700; color:${shapeColor};">${shapeRecommendation.shape}</div>
+                            </div>
+                        </div>
+                        <div style="font-size:0.85em; color:var(--text-dim);">${shapeRecommendation.reason}</div>
+                        <div style="margin-top:8px; font-size:0.8em; color:var(--text-dim);">
+                            <strong>Optimal Range:</strong> $${shapeRecommendation.optimalRange[0].toFixed(2)} – $${shapeRecommendation.optimalRange[1].toFixed(2)}
                         </div>
                     </div>
                 </div>
@@ -1248,6 +1374,14 @@
                 const cumulativeFees = parseFloat((efficiency / 100 * 0.25));
                 const milestoneProgress = parseFloat((efficiency / 100 * 5).toFixed(1));
 
+                // Calculate distance to S/R for proximity alerts
+                const resistanceLevels = [7.50, 7.20, rangeMax].filter(r => r > price).sort((a, b) => a - b);
+                const supportLevels = [6.70, 6.50, rangeMin].filter(s => s < price).sort((a, b) => b - a);
+                const nearestResistance = resistanceLevels[0];
+                const nearestSupport = supportLevels[0];
+                const distToResistance = nearestResistance ? ((nearestResistance - price) / price * 100) : 999;
+                const distToSupport = nearestSupport ? ((price - nearestSupport) / price * 100) : 999;
+
                 return {
                     hero: {
                         positionUsd: 45.40,
@@ -1374,13 +1508,38 @@
                             }
                         ]
                     },
+                    supportResistance: {
+                        currentPrice: price,
+                        levels: [
+                            { price: 7.50, type: 'resistance', strength: 'strong', label: 'Major Resistance', note: 'Psychological level' },
+                            { price: 7.20, type: 'resistance', strength: 'medium', label: 'Resistance', note: 'Previous high' },
+                            { price: rangeMax, type: 'resistance', strength: 'strong', label: 'Range High', note: 'Current position top' },
+                            { price: rangeMin, type: 'support', strength: 'strong', label: 'Range Low', note: 'Current position bottom' },
+                            { price: 6.70, type: 'support', strength: 'medium', label: 'Support', note: 'Previous low' },
+                            { price: 6.50, type: 'support', strength: 'strong', label: 'Major Support', note: 'Breakdown level' }
+                        ],
+                        shapeRecommendation: {
+                            shape: efficiency > 80 ? 'Curve' : efficiency > 50 ? 'Bid-Ask' : 'Spot',
+                            reason: efficiency > 80 
+                                ? 'Price centered in range. Curve earns max fees here.' 
+                                : efficiency > 50 
+                                    ? 'Price near edge. Bid-Ask captures swings better.' 
+                                    : 'Price at edge. Spot for safety.',
+                            optimalRange: [parseFloat((price * 0.97).toFixed(2)), parseFloat((price * 1.03).toFixed(2))]
+                        },
+                        proximityAlert: (distToResistance < 2) 
+                            ? `⚠️ Price within ${distToResistance}% of resistance at $${nearestResistance?.price.toFixed(2)}` 
+                            : (distToSupport < 2) 
+                                ? `⚠️ Price within ${distToSupport}% of support at $${nearestSupport?.price.toFixed(2)}` 
+                                : null
+                    },
                     transactions: [
                         {
                             date: new Date().toISOString().split('T')[0],
                             type: 'Auto-Refresh',
                             token: 'AVAX/USDC',
                             amount: `Price: $${price.toFixed(3)}`,
-                            usd: 44.39,
+                            usd: 45.40,
                             status: inRange ? 'Active' : '⚠️ Out of Range'
                         }
                     ],

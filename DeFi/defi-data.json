@@ -128,5 +128,61 @@
     "positionUsd": 44.39,
     "daysActive": 1
   },
-  "transactions": []
+  "transactions": [],
+  "supportResistance": {
+    "currentPrice": 6.96,
+    "levels": [
+      {
+        "price": 7.5,
+        "type": "resistance",
+        "strength": "strong",
+        "label": "Major Resistance",
+        "note": "Psychological level"
+      },
+      {
+        "price": 7.2,
+        "type": "resistance",
+        "strength": "medium",
+        "label": "Resistance",
+        "note": "Previous high"
+      },
+      {
+        "price": 7.03,
+        "type": "resistance",
+        "strength": "strong",
+        "label": "Range High",
+        "note": "Current position top"
+      },
+      {
+        "price": 6.85,
+        "type": "support",
+        "strength": "strong",
+        "label": "Range Low",
+        "note": "Current position bottom"
+      },
+      {
+        "price": 6.7,
+        "type": "support",
+        "strength": "medium",
+        "label": "Support",
+        "note": "Previous low"
+      },
+      {
+        "price": 6.5,
+        "type": "support",
+        "strength": "strong",
+        "label": "Major Support",
+        "note": "Breakdown level"
+      }
+    ],
+    "shapeRecommendation": {
+      "shape": "Curve",
+      "reason": "Price near resistance at $7.03. Curve earns max fees if price consolidates here. Bid-Ask if you expect volatility.",
+      "optimalRange": [
+        6.85,
+        7.03
+      ]
+    },
+    "proximityAlert": "\u26a0\ufe0f Price within 1% of resistance at $7.03"
+  }
 }
