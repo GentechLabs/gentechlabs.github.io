@@ -3,7 +3,7 @@
   "pool": "AVAX/USDC",
   "chain": "Avalanche",
   "dex": "LFJ",
-  "currentPrice": 6.93,
+  "currentPrice": 6.9,
   "priceChange24h": 0.6,
   "volume24h": 910078.65,
   "liquidity": 370888.93,
@@ -11,7 +11,7 @@
     "pair": "AVAX/USDC",
     "feeTier": "5bps",
     "shape": "curve",
-    "currentPrice": 6.93,
+    "currentPrice": 6.9,
     "rangeMin": 6.82,
     "rangeMax": 7.02,
     "avaxAmount": 3.142,
@@ -27,12 +27,12 @@
   "efficiency": 64.4,
   "hero": {
     "positionUsd": 45.8,
-    "dailyFees": 0.87,
-    "efficiency": 100.0,
+    "dailyFees": 0.82,
+    "efficiency": 90.00000000000017,
     "efficiencyZone": "Center",
     "shape": "Curve",
     "rangeStatus": "In Range",
-    "currentPrice": 6.93,
+    "currentPrice": 6.9,
     "rangeMin": 6.82,
     "rangeMax": 7.02,
     "milestoneNext": "Scout",
@@ -40,7 +40,7 @@
     "milestoneProgress": 7.3
   },
   "marketIntel": {
-    "avaxPrice": 6.93,
+    "avaxPrice": 6.9,
     "change24h": 0.6,
     "volume24h": 910078.65,
     "tvl": 370888.93,
@@ -49,10 +49,10 @@
   },
   "strategyAdvisor": {
     "efficiencyZone": "Center",
-    "efficiency": 100.0,
+    "efficiency": 90.00000000000017,
     "recommendedAction": "Hold",
     "dcaType": "Curve Strategy",
-    "dcaDetails": "Curve at 100% efficiency. Price centered in $6.82-$7.02. Earning max fees ($0.87/day).",
+    "dcaDetails": "Curve at 90.0% efficiency. Price centered in $6.82-$7.02.",
     "rebalanceTrigger": "Price exits $6.82-7.02 range",
     "compoundThreshold": 50,
     "cumulativeFees": 0.364,
@@ -62,7 +62,7 @@
     "shape": "Curve"
   },
   "rebalanceSuggestions": {
-    "efficiency": 100.0,
+    "efficiency": 90.00000000000017,
     "price": 6.774,
     "rangeMin": 6.82,
     "rangeMax": 7.02,
@@ -72,7 +72,7 @@
       {
         "icon": "\ud83d\udfe2",
         "title": "Optimal Position",
-        "description": "Curve at 94.4% efficiency. Price centered. Earning max fees.",
+        "description": "Curve at 90.0% efficiency. Earning max fees.",
         "priority": "low",
         "impact": "Max fees",
         "action": null
@@ -87,7 +87,7 @@
     "Sovereign": 200
   },
   "feeMilestones": {
-    "currentDailyFees": 0.87,
+    "currentDailyFees": 0.82,
     "cumulativeFees": 0.364,
     "nextMilestone": "Scout",
     "nextTarget": 5,
@@ -124,28 +124,35 @@
   },
   "transactions": [],
   "supportResistance": {
-    "currentPrice": 6.93,
+    "currentPrice": 6.9,
     "levels": [
-      {
-        "price": 7.5,
-        "type": "resistance",
-        "strength": "strong",
-        "label": "Major Resistance",
-        "note": "Psychological level"
-      },
-      {
-        "price": 7.2,
-        "type": "resistance",
-        "strength": "medium",
-        "label": "Resistance",
-        "note": "Previous high"
-      },
       {
         "price": 7.02,
         "type": "resistance",
         "strength": "strong",
         "label": "Range High",
         "note": "Current position top"
+      },
+      {
+        "price": 7.2,
+        "type": "resistance",
+        "strength": "weak",
+        "label": "Minor Resistance",
+        "note": "Local high"
+      },
+      {
+        "price": 7.5,
+        "type": "resistance",
+        "strength": "medium",
+        "label": "Resistance",
+        "note": "Previous high"
+      },
+      {
+        "price": 8.0,
+        "type": "resistance",
+        "strength": "strong",
+        "label": "Major Resistance",
+        "note": "Psychological level"
       },
       {
         "price": 6.82,
@@ -157,12 +164,19 @@
       {
         "price": 6.7,
         "type": "support",
+        "strength": "weak",
+        "label": "Minor Support",
+        "note": "Local low"
+      },
+      {
+        "price": 6.5,
+        "type": "support",
         "strength": "medium",
         "label": "Support",
         "note": "Previous low"
       },
       {
-        "price": 6.5,
+        "price": 6.0,
         "type": "support",
         "strength": "strong",
         "label": "Major Support",
@@ -173,10 +187,10 @@
       "shape": "Curve",
       "reason": "Price near resistance at $7.03. Curve earns max fees if price consolidates here. Bid-Ask if you expect volatility.",
       "optimalRange": [
-        6.85,
-        7.03
+        6.82,
+        7.02
       ]
     },
-    "proximityAlert": "\u26a0\ufe0f Price within 1% of resistance at $7.03"
+    "proximityAlert": "\u26a0\ufe0f Price within 1.7% of Range High at $7.02"
   }
 }
