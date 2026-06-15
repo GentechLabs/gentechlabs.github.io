@@ -8,14 +8,18 @@
   "volume24h": 910078.65,
   "liquidity": 370888.93,
   "lpPosition": {
-    "shape": "bid-ask",
+    "shape": "Bid-Ask",
     "rangeLow": 6.7,
     "rangeHigh": 6.88,
     "totalBalance": 44.39,
     "avaxAmount": 3.812,
     "avaxValue": 25.66,
     "usdcAmount": 18.73,
-    "usdcValue": 18.73
+    "usdcValue": 18.73,
+    "totalValue": 44.39,
+    "range": "6.7-6.88",
+    "feeTier": "5bps",
+    "pool": "AVAX/USDC"
   },
   "fees": {
     "dailyFees": 0.364,
@@ -90,5 +94,40 @@
     "Warlord": 55,
     "Fisher": 100,
     "Sovereign": 200
-  }
+  },
+  "feeMilestones": {
+    "currentDailyFees": 0.364,
+    "milestones": [
+      {
+        "name": "Scout",
+        "target": 5,
+        "achieved": false
+      },
+      {
+        "name": "Raider",
+        "target": 20,
+        "achieved": false
+      },
+      {
+        "name": "Warlord",
+        "target": 55,
+        "achieved": false
+      },
+      {
+        "name": "Fisher",
+        "target": 100,
+        "achieved": false
+      },
+      {
+        "name": "Sovereign",
+        "target": 200,
+        "achieved": false
+      }
+    ],
+    "cumulativeFees": 0.364,
+    "nextMilestone": "Scout",
+    "nextTarget": 5,
+    "progress": 7.3
+  },
+  "transactions": []
 }
