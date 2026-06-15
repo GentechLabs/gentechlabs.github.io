@@ -11,9 +11,9 @@
     "shape": "bid-ask",
     "rangeLow": 6.7,
     "rangeHigh": 6.88,
-    "totalBalance": 44.392384,
+    "totalBalance": 44.39,
     "avaxAmount": 3.812,
-    "avaxValue": 25.662384,
+    "avaxValue": 25.66,
     "usdcAmount": 18.73,
     "usdcValue": 18.73
   },
@@ -23,11 +23,59 @@
     "feeCurrency": "USD"
   },
   "efficiency": 64.4,
-  "rebalance": {
-    "action": "\ud83d\udfe0 Micro-DCA + Watch",
-    "detail": "Price $6.73 near lower edge. DCA $10 AVAX to widen range down.",
-    "risk": "Medium",
-    "dca": "$10 AVAX \u2014 edge zone"
+  "hero": {
+    "positionUsd": 44.39,
+    "dailyFees": 0.364,
+    "efficiency": "64.4",
+    "efficiencyZone": "Inner",
+    "shape": "Bid-Ask",
+    "rangeStatus": "In Range",
+    "currentPrice": 6.732,
+    "rangeMin": 6.70,
+    "rangeMax": 6.88,
+    "milestoneNext": "Scout",
+    "milestoneTarget": 5,
+    "milestoneProgress": 7.3
+  },
+  "marketIntel": {
+    "avaxPrice": 6.732,
+    "change24h": 0.6,
+    "volume24h": 910078.65,
+    "tvl": 370888.93,
+    "trend": "consolidation",
+    "news": []
+  },
+  "strategyAdvisor": {
+    "efficiencyZone": "Inner",
+    "efficiency": "64.4",
+    "recommendation": "Monitor Closely",
+    "riskLevel": "Medium"
+  },
+  "rebalanceSuggestions": {
+    "efficiency": "64.4",
+    "price": 6.732,
+    "rangeMin": 6.70,
+    "rangeMax": 6.88,
+    "volatility": "medium",
+    "trend": "consolidation",
+    "suggestions": [
+      {
+        "icon": "🟡",
+        "title": "Monitor — Approaching Threshold",
+        "description": "Efficiency at 64.4%. Consider rebalancing if it drops below 50%. Current range ($6.70-$6.88) is still capturing decent fees.",
+        "priority": "medium",
+        "impact": "Maintain current fees",
+        "action": null
+      },
+      {
+        "icon": "💡",
+        "title": "Consider Tighter Range",
+        "description": "Current range is $6.70-$6.88. A tighter range ($6.60-$6.87) would earn more fees if price stays stable.",
+        "priority": "low",
+        "impact": "Higher fees",
+        "action": null
+      }
+    ]
   },
   "milestones": {
     "Scout": 5,
