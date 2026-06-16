@@ -1575,12 +1575,16 @@
         }
 
         (async () => {
-            const templateRes = await fetch('defi-template.json?' + Date.now());
+            const templateRes = await fetch('defi-template.json?' + Date.now(), { cache: 'no-store' });
             const template = await templateRes.json();
 
             // Always load full data from defi-data.json first
-            const dataRes = await fetch('defi-data.json?' + Date.now());
-            let data = await dataRes.json();
+            const owner = 'ProtoJay4789';
+            const repo = 'ProtoJay4789.github.io';
+            const branch = 'main';
+            const dataUrl = `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/DeFi/defi-data.json`;
+            const dataRes = await fetch(dataUrl + '?' + Date.now(), { cache: 'no-store' });
+            const data = await dataRes.json();
 
             // Overlay live price from DexScreener
             try {
