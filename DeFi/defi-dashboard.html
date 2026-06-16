@@ -1578,11 +1578,23 @@
             const templateRes = await fetch('defi-template.json?' + Date.now());
             const template = await templateRes.json();
 
-            // Try live data first, fall back to cached
-            let data = await fetchLiveData();
-            if (!data) {
-                const dataRes = await fetch('defi-data.json?' + Date.now());
-                data = await dataRes.json();
+            // Always load full data from defi-data.json first
+            const dataRes = await fetch('defi-data.json?' + Date.now());
+            let data = await dataRes.json();
+
+            // Overlay live price from DexScreener
+            try {
+                const liveData = await fetchLiveData();
+                if (liveData) {
+                    if (liveData.hero) Object.assign(data.hero || {}, liveData.hero);
+                    if (liveData.marketIntel) Object.assign(data.marketIntel || {}, liveData.marketIntel);
+                    if (liveData.currentPrice) data.currentPrice = liveData.currentPrice;
+                    if (liveData.priceChange24h !== undefined) data.priceChange24h = liveData.priceChange24h;
+                    if (liveData.volume24h) data.volume24h = liveData.volume24h;
+                    if (liveData.liquidity) data.liquidity = liveData.liquidity;
+                }
+            } catch (e) {
+                console.warn('[DeFi] DexScreener overlay failed:', e.message);
             }
 
             defiDash = new DashboardEngine({ template, data });
