@@ -1615,13 +1615,22 @@
             window.lpCurve = lpCurve;
         })();
 
-        // Auto-refresh every 60 seconds with LIVE data
+        // Auto-refresh every 60 seconds with LIVE data + fresh defi-data.json
         async function applyLiveData() {
             try {
+                // 1. Re-fetch fresh position data from GitHub
+                const owner = 'ProtoJay4789';
+                const repo = 'ProtoJay4789.github.io';
+                const branch = 'main';
+                const dataUrl = `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/DeFi/defi-data.json`;
+                const dataRes = await fetch(dataUrl + '?' + Date.now(), { cache: 'no-store' });
+                const freshData = await dataRes.json();
+
+                // 2. Overlay live DexScreener data
                 const liveData = await fetchLiveData();
-                if (liveData && defiDash) {
-                    // Deep merge: live data overlays on top of existing static data
-                    // This preserves static fields (tiers, milestones) from JSON
+
+                if (defiDash) {
+                    // Deep merge: fresh data first, then live overlay
                     function deepMerge(target, source) {
                         for (const key of Object.keys(source)) {
                             if (source[key] && typeof source[key] === 'object' && !Array.isArray(source[key]) && target[key]) {
@@ -1632,13 +1641,14 @@
                         }
                         return target;
                     }
-                    deepMerge(defiDash.data, liveData);
+                    deepMerge(defiDash.data, freshData);
+                    if (liveData) deepMerge(defiDash.data, liveData);
                     defiDash.render();
                     // Update curve with new data
-                    if (lpCurve && liveData.curveData) {
-                        lpCurve.updateData(liveData.curveData);
+                    if (lpCurve && freshData.curveData) {
+                        lpCurve.updateData(freshData.curveData);
                     }
-                    console.log('[DeFi] Live refresh at', new Date().toLocaleTimeString(), '- Price:', liveData.hero?.currentPrice);
+                    console.log('[DeFi] Live refresh at', new Date().toLocaleTimeString(), '- Price:', defiDash.data?.currentPrice);
                 }
             } catch (e) {
                 console.warn('[DeFi] Auto-refresh failed:', e.message);
