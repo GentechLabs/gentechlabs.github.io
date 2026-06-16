@@ -23,7 +23,7 @@ from typing import Optional, List, Dict
 
 # ─── Config ───────────────────────────────────────────────────────────
 POOL_ADDRESS = "0x864d4e5ee7318e97483db7eb0912e09f161516ea"
-WALLET = "0x7ebff188f2Eba16518C02864589b1403a5d1296a"
+WALLET = os.environ.get("WALLET_ADDRESS", "")
 RPC_URL = "https://api.avax.network/ext/bc/C/rpc"
 DEXSCREENER_URL = "https://api.dexscreener.com/latest/dex/pairs/avalanche/" + POOL_ADDRESS
 ROUTESCAN_API = "https://api.routescan.io/v2/network/mainnet/evm/43114/etherscan/api"

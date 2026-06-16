@@ -24,7 +24,7 @@ from dataclasses import dataclass, asdict
 STATE_DIR = os.path.expanduser("~/.hermes/scripts")
 RETURNS_STATE_FILE = os.path.join(STATE_DIR, ".aae-strategy-returns.json")
 
-WALLET = "0x7ebff188f2Eba16518C02864589b1403a5d1296a"
+WALLET = os.environ.get("WALLET_ADDRESS", "")
 POOL_ADDRESS = "0x864d4e5ee7318e97483db7eb0912e09f161516ea"
 
 # Avalanche contract addresses

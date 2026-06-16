@@ -59,7 +59,7 @@ COINS = [
 
 # ── LP Config ─────────────────────────────────────────────────────────────────
 # ── LP Config ─────────────────────────────────────────────────────────────────
-JORDAN_WALLET = "0x7ebff188f2Eba16518C02864589b1403a5d1296a"
+JORDAN_WALLET = os.environ.get("WALLET_ADDRESS", "")
 USDC_ADDRESS = "0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E"
 AVAX_GAS_LOW_THRESHOLD = 0.05  # Alert if AVAX below this (for gas)
 

@@ -36,7 +36,7 @@ POSITION_TRACKER_PATH = hermes_path(".lfj-position-tracker.json")
 DEXSCREENER_URL_TEMPLATE = "https://api.dexscreener.com/latest/dex/pairs/avalanche/{pool_address}"
 
 # Constants
-JORDAN_WALLET = "0x7ebff188f2Eba16518C02864589b1403a5d1296a"
+JORDAN_WALLET = os.environ.get("WALLET_ADDRESS", "")
 POOL_ADDRESS = "0x864d4e5ee7318e97483db7eb0912e09f161516ea"
 CHAIN = "avalanche"
 
