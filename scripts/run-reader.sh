@@ -15,6 +15,14 @@ node reader.mjs --wallet "$WALLET" --shape "$SHAPE" 2>&1
 REPO="/root/ProtoJay4789.github.io"
 cd "$REPO"
 git add DeFi/defi-data.json
-git diff --cached --quiet || git commit -m "auto: on-chain position update $(date +%H:%M)" && git push 2>&1
+if ! git diff --cached --quiet; then
+    git commit -m "auto: on-chain position update $(date +%H:%M)" 2>&1
+    # Retry push once if remote moved (another cron tick or manual update)
+    if ! git push 2>&1; then
+        echo "⚠️ Push rejected, rebasing and retrying..."
+        git pull --rebase 2>&1
+        git push 2>&1
+    fi
+fi
 
 echo "✅ Done at $(date '+%Y-%m-%d %H:%M:%S')"
