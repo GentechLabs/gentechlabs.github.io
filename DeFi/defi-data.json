@@ -1,17 +1,17 @@
 {
-  "lastUpdated": "2026-06-15T09:15:10.226245+00:00",
+  "lastUpdated": "2026-06-16T00:30:00.000000+00:00",
   "pool": "AVAX/USDC",
   "chain": "Avalanche",
   "dex": "LFJ",
-  "currentPrice": 6.9,
-  "priceChange24h": 0.6,
-  "volume24h": 910078.65,
-  "liquidity": 370888.93,
+  "currentPrice": 6.85,
+  "priceChange24h": 1.92,
+  "volume24h": 1441159,
+  "liquidity": 376153,
   "lpPosition": {
     "pair": "AVAX/USDC",
     "feeTier": "5bps",
     "shape": "curve",
-    "currentPrice": 6.9,
+    "currentPrice": 6.85,
     "rangeMin": 6.82,
     "rangeMax": 7.02,
     "avaxAmount": 3.142,
@@ -20,62 +20,62 @@
     "totalValueUSD": 45.8
   },
   "fees": {
-    "dailyFees": 0.364,
+    "dailyFees": 0.16,
     "cumulativeFees": 0.364,
     "feeCurrency": "USD"
   },
-  "efficiency": 64.4,
+  "efficiency": 65.0,
   "hero": {
     "positionUsd": 45.8,
-    "dailyFees": 0.82,
-    "efficiency": 90.00000000000017,
-    "efficiencyZone": "Center",
+    "dailyFees": 0.16,
+    "efficiency": 65.0,
+    "efficiencyZone": "Inner",
     "shape": "Curve",
     "rangeStatus": "In Range",
-    "currentPrice": 6.9,
+    "currentPrice": 6.85,
     "rangeMin": 6.82,
     "rangeMax": 7.02,
     "milestoneNext": "Scout",
     "milestoneTarget": 5,
-    "milestoneProgress": 7.3
+    "milestoneProgress": 3.2
   },
   "marketIntel": {
-    "avaxPrice": 6.9,
-    "change24h": 0.6,
-    "volume24h": 910078.65,
-    "tvl": 370888.93,
+    "avaxPrice": 6.85,
+    "change24h": 1.92,
+    "volume24h": 1441159,
+    "tvl": 376153,
     "trend": "consolidation",
     "news": []
   },
   "strategyAdvisor": {
-    "efficiencyZone": "Center",
-    "efficiency": 90.00000000000017,
+    "efficiencyZone": "Inner",
+    "efficiency": 65.0,
     "recommendedAction": "Hold",
-    "dcaType": "Curve Strategy",
-    "dcaDetails": "Curve at 90.0% efficiency. Price centered in $6.82-$7.02.",
+    "dcaType": "Moderate DCA",
+    "dcaDetails": "Curve at 65.0% efficiency. Price near low end of $6.82-$7.02 range.",
     "rebalanceTrigger": "Price exits $6.82-7.02 range",
     "compoundThreshold": 50,
     "cumulativeFees": 0.364,
     "nextCompound": "$49.64 away from first compound",
-    "riskLevel": "Low",
-    "riskNote": "In range, capturing fees. Monitor for breakout.",
+    "riskLevel": "Medium",
+    "riskNote": "In range but near low edge. Monitor for breakout.",
     "shape": "Curve"
   },
   "rebalanceSuggestions": {
-    "efficiency": 90.00000000000017,
-    "price": 6.774,
+    "efficiency": 65.0,
+    "price": 6.85,
     "rangeMin": 6.82,
     "rangeMax": 7.02,
     "volatility": "medium",
     "trend": "consolidation",
     "suggestions": [
       {
-        "icon": "\ud83d\udfe2",
-        "title": "Optimal Position",
-        "description": "Curve at 90.0% efficiency. Earning max fees.",
-        "priority": "low",
-        "impact": "Max fees",
-        "action": null
+        "icon": "🟡",
+        "title": "Near Range Low",
+        "description": "Price at $6.85, near bottom of $6.82-$7.02. If it drops below $6.82, out of range.",
+        "priority": "medium",
+        "impact": "Monitor closely",
+        "action": "Watch for breakout below $6.82"
       }
     ]
   },
@@ -87,11 +87,11 @@
     "Sovereign": 200
   },
   "feeMilestones": {
-    "currentDailyFees": 0.82,
+    "currentDailyFees": 0.16,
     "cumulativeFees": 0.364,
     "nextMilestone": "Scout",
     "nextTarget": 5,
-    "progress": 7.3,
+    "progress": 3.2,
     "tiers": [
       {
         "name": "Scout",
@@ -124,7 +124,7 @@
   },
   "transactions": [],
   "supportResistance": {
-    "currentPrice": 6.9,
+    "currentPrice": 6.85,
     "levels": [
       {
         "price": 7.02,
@@ -185,12 +185,12 @@
     ],
     "shapeRecommendation": {
       "shape": "Curve",
-      "reason": "Price near resistance at $7.03. Curve earns max fees if price consolidates here. Bid-Ask if you expect volatility.",
+      "reason": "Price near range low at $6.85. Curve earns max fees if price consolidates here. Bid-Ask if you expect volatility.",
       "optimalRange": [
         6.82,
         7.02
       ]
     },
-    "proximityAlert": "\u26a0\ufe0f Price within 1.7% of Range High at $7.02"
+    "proximityAlert": "⚠️ Price within 0.4% of Range Low at $6.82"
   }
 }
