@@ -11,6 +11,13 @@
 
 ## Scan Log
 
+### 2026-06-16
+- **15 total roles** on College.xyz (up from 12 on 06-15)
+- **3 remote roles** found (ether.fi x2, Wintermute VC) — unchanged
+- **0 new matches** — ether.fi roles already tracked (IDs 31/32)
+- Wintermute VC Intern still partial (pay not listed)
+- New roles added: Gemini full-time (3 NYC roles, $75K-$120K/yr), MoonPay TikTok Creator (NYC), Blockchain.com HR/Data interns (London/Paris) — all onsite
+
 ### 2026-06-15
 - **12 total roles** on College.xyz (unchanged from 06-14)
 - **3 remote roles** found (ether.fi x2, Wintermute VC)

@@ -1,362 +1,41 @@
 {
-  "hero": {
-    "positionUsd": 45.8,
-    "dailyFees": 0.82,
-    "efficiency": 90.00000000000017,
-    "efficiencyZone": "Center",
-    "shape": "Curve",
-    "rangeStatus": "In Range",
-    "currentPrice": 6.9,
-    "rangeMin": 6.82,
-    "rangeMax": 7.02,
-    "milestoneCurrent": "Unranked",
-    "milestoneNext": "Scout",
-    "milestoneTarget": 5,
-    "milestoneProgress": 7.3
-  },
-  "marketIntel": {
-    "avaxPrice": 6.9,
-    "change24h": 0.6,
-    "volume24h": 910078.65,
-    "tvl": 370888.93,
-    "trend": "consolidation",
-    "news": [
-      {
-        "headline": "Bitcoin pumping to $66K \u2014 risk-on across markets",
-        "impact": "bullish",
-        "relevance": "high"
-      },
-      {
-        "headline": "US-Iran peace deal announced \u2014 signing June 19th",
-        "impact": "bullish",
-        "relevance": "high"
-      },
-      {
-        "headline": "AVAX used for Denali share settlements",
-        "impact": "bullish",
-        "relevance": "medium"
-      }
-    ]
-  },
-  "strategyAdvisor": {
-    "efficiencyZone": "Center",
-    "efficiency": 90.00000000000017,
-    "shape": "Curve",
-    "recommendedAction": "Hold",
-    "dcaType": "Curve Strategy",
-    "dcaDetails": "Curve at 90.0% efficiency. Price centered in $6.82-$7.02.",
-    "rebalanceTrigger": "Price exits $6.82-7.02 range",
-    "compoundThreshold": 50,
-    "cumulativeFees": 0.364,
-    "nextCompound": "$49.64 away",
-    "riskLevel": "Low",
-    "riskNote": "In range with bid-ask shape. BTC pump could drag AVAX toward upper edge ($6.88). Volatility = higher fees."
+  "lastUpdated": "2026-06-16T13:09:16.502Z",
+  "dataSource": "onchain-live",
+  "pool": "AVAX/USDC",
+  "chain": "Avalanche",
+  "dex": "LFJ V2.1",
+  "wallet": "0x7ebff188f2Eba16518C02864589b1403a5d1296a",
+  "currentPrice": 6.93,
+  "priceChange24h": 0,
+  "volume24h": 1412785.36,
+  "liquidity": 379167.7,
+  "walletBalances": {
+    "avax": 0.0976285420647475,
+    "wavax": 6.06671055027e-7,
+    "usdc": 0.000009,
+    "liquidUsd": 0.68
   },
   "lpPosition": {
-    "protocol": "LFJ (Trader Joe)",
-    "chain": "Avalanche",
-    "pair": "AVAX / USDC",
-    "feeTier": "5 bps",
-    "shape": "curve",
-    "currentPrice": 6.9,
-    "rangeMin": 6.82,
-    "rangeMax": 7.02,
-    "numBins": 180,
-    "deposit": {
-      "avax": 3.142,
-      "avaxValue": 25.7,
-      "usdc": 24.03,
-      "usdcValue": 18.69
-    },
-    "rewards": {
-      "avax": 0.00799,
-      "value": 0.00538
-    },
-    "fees24h": {
-      "total": 0.364,
-      "avax": 0.029,
-      "avaxValue": 0.1952,
-      "usdc": 0.1686,
-      "usdcValue": 0.1686
-    },
-    "avaxAmount": 3.142,
-    "usdcAmount": 24.03,
-    "totalValueUSD": 45.8,
-    "updatedAt": "2026-06-15T13:23:00Z",
-    "totalValue": 45.8
-  },
-  "curveData": {
-    "rangeMin": 6.7,
-    "rangeMax": 6.88,
-    "currentPrice": 6.732,
-    "shape": "bidirectional",
-    "bins": [
-      {
-        "price": 6.7,
-        "depth": 0.95
-      },
-      {
-        "price": 6.706,
-        "depth": 0.9
-      },
-      {
-        "price": 6.712,
-        "depth": 0.85
-      },
-      {
-        "price": 6.718,
-        "depth": 0.8
-      },
-      {
-        "price": 6.724,
-        "depth": 0.74
-      },
-      {
-        "price": 6.73,
-        "depth": 0.68
-      },
-      {
-        "price": 6.732,
-        "depth": 0.05
-      },
-      {
-        "price": 6.736,
-        "depth": 0.62
-      },
-      {
-        "price": 6.742,
-        "depth": 0.56
-      },
-      {
-        "price": 6.748,
-        "depth": 0.5
-      },
-      {
-        "price": 6.754,
-        "depth": 0.44
-      },
-      {
-        "price": 6.76,
-        "depth": 0.39
-      },
-      {
-        "price": 6.766,
-        "depth": 0.34
-      },
-      {
-        "price": 6.772,
-        "depth": 0.3
-      },
-      {
-        "price": 6.778,
-        "depth": 0.26
-      },
-      {
-        "price": 6.784,
-        "depth": 0.3
-      },
-      {
-        "price": 6.79,
-        "depth": 0.34
-      },
-      {
-        "price": 6.796,
-        "depth": 0.39
-      },
-      {
-        "price": 6.802,
-        "depth": 0.44
-      },
-      {
-        "price": 6.808,
-        "depth": 0.5
-      },
-      {
-        "price": 6.814,
-        "depth": 0.56
-      },
-      {
-        "price": 6.82,
-        "depth": 0.62
-      },
-      {
-        "price": 6.826,
-        "depth": 0.68
-      },
-      {
-        "price": 6.832,
-        "depth": 0.74
-      },
-      {
-        "price": 6.838,
-        "depth": 0.8
-      },
-      {
-        "price": 6.844,
-        "depth": 0.85
-      },
-      {
-        "price": 6.85,
-        "depth": 0.9
-      },
-      {
-        "price": 6.856,
-        "depth": 0.93
-      },
-      {
-        "price": 6.862,
-        "depth": 0.95
-      },
-      {
-        "price": 6.87,
-        "depth": 0.97
-      },
-      {
-        "price": 6.88,
-        "depth": 1.0
-      }
-    ]
-  },
-  "feeMilestones": {
-    "currentDailyFees": 0.82,
-    "positionUsd": 45.8,
-    "cumulativeFees": 0.364,
-    "daysActive": 1,
-    "tiers": [
-      {
-        "tier": 1,
-        "label": "Scout",
-        "target": 5,
-        "icon": "\ud83c\udff4",
-        "unlocks": "Entry strategies (CURVE)"
-      },
-      {
-        "tier": 2,
-        "label": "Raider",
-        "target": 20,
-        "icon": "\u2694\ufe0f",
-        "unlocks": "SPOT + BIDIRECTIONAL shapes"
-      },
-      {
-        "tier": 3,
-        "label": "Warlord",
-        "target": 55,
-        "icon": "\ud83d\udee1\ufe0f",
-        "unlocks": "Multi-pool positions"
-      },
-      {
-        "tier": 4,
-        "label": "Fisher",
-        "target": 100,
-        "icon": "\ud83c\udfa3",
-        "unlocks": "Multi-asset farming (LINK, TAO, SOL)"
-      },
-      {
-        "tier": 5,
-        "label": "Sovereign",
-        "target": 200,
-        "icon": "\ud83d\udc51",
-        "unlocks": "Custom strategy creation"
-      }
-    ]
-  },
-  "rebalanceSuggestions": {
-    "efficiency": 90.00000000000017,
-    "price": 6.732,
-    "rangeMin": 6.82,
-    "rangeMax": 7.02,
-    "volatility": "medium",
-    "trend": "consolidation",
-    "suggestions": [
-      {
-        "icon": "\ud83d\udfe2",
-        "title": "Optimal Position",
-        "description": "Curve at 90.0% efficiency. Earning max fees.",
-        "priority": "low",
-        "impact": "Max fees",
-        "action": null
-      }
-    ]
-  },
-  "transactions": [
-    {
-      "date": "2026-06-14",
-      "type": "Rebalance",
-      "token": "AVAX/USDC",
-      "amount": "Range 6.70-6.88 (Bid-Ask)",
-      "usd": 44.39,
-      "status": "Active"
-    }
-  ],
-  "currentPrice": 6.9,
-  "supportResistance": {
-    "currentPrice": 6.9,
-    "levels": [
-      {
-        "price": 7.02,
-        "type": "resistance",
-        "strength": "strong",
-        "label": "Range High",
-        "note": "Current position top"
-      },
-      {
-        "price": 7.2,
-        "type": "resistance",
-        "strength": "weak",
-        "label": "Minor Resistance",
-        "note": "Local high"
-      },
-      {
-        "price": 7.5,
-        "type": "resistance",
-        "strength": "medium",
-        "label": "Resistance",
-        "note": "Previous high"
-      },
-      {
-        "price": 8.0,
-        "type": "resistance",
-        "strength": "strong",
-        "label": "Major Resistance",
-        "note": "Psychological level"
-      },
-      {
-        "price": 6.82,
-        "type": "support",
-        "strength": "strong",
-        "label": "Range Low",
-        "note": "Current position bottom"
-      },
-      {
-        "price": 6.7,
-        "type": "support",
-        "strength": "weak",
-        "label": "Minor Support",
-        "note": "Local low"
-      },
-      {
-        "price": 6.5,
-        "type": "support",
-        "strength": "medium",
-        "label": "Support",
-        "note": "Previous low"
-      },
-      {
-        "price": 6.0,
-        "type": "support",
-        "strength": "strong",
-        "label": "Major Support",
-        "note": "Breakdown level"
-      }
+    "activeBin": 8362898,
+    "binStep": 10,
+    "binRange": [
+      8362885,
+      8362914
     ],
-    "shapeRecommendation": {
-      "shape": "Curve",
-      "reason": "Price near resistance at $7.03. Curve earns max fees if price consolidates here. Bid-Ask if you expect volatility.",
-      "optimalRange": [
-        6.82,
-        7.02
-      ]
-    },
-    "proximityAlert": "\u26a0\ufe0f Price within 1.7% of Range High at $7.02"
+    "totalBins": 30,
+    "wavax": 4.443862,
+    "usdc": 15.499646,
+    "totalValueUsd": 46.3,
+    "poolReserveX": 35902.92,
+    "poolReserveY": 130371.87
+  },
+  "totalValueUsd": 46.97,
+  "milestone": "Raider",
+  "milestones": {
+    "Scout": 5,
+    "Raider": 20,
+    "Warlord": 55,
+    "Fisher": 100,
+    "Sovereign": 200
   }
 }

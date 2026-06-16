@@ -1,6 +1,7 @@
 # Hackathon Tracker — GenTech Labs
 
 > Last updated: 2026-06-15 | Mode: Learning + Selective Builds
+> Jordan: "I make a better Agent Orchestrator than coder." Platform → app pipeline. Space out hackathons — enjoy the process, don't burn out. AWS Activate dropped (too much friction).
 
 ## Priority Queue (Jordan's Directive Order)
 
@@ -26,6 +27,7 @@
 | # | Hackathon | Prize | Deadline | Fit | Status |
 |---|-----------|-------|----------|-----|--------|
 | 1 | **Build with Gemini XPRIZE** | $2M | Aug 17 | ⭐⭐⭐⭐ | 🔵 Research phase — 3-month runway |
+| 2 | **Colosseum Fall** | TBA | Sep 28 – Nov 2 | ⭐⭐⭐⭐⭐ | 🟡 Dates locked — platform→app entry. Our home turf (Solana). Space build around it. |
 
 ### ✅ SUBMITTED / COMPLETED
 | # | Hackathon | Submitted | Result |
@@ -45,6 +47,7 @@
 | Microsoft Agents League | Microsoft ecosystem lock-in |
 | CertiK + YZi Labs Grant | Tied to residency program |
 | OOBE Protocol | Missed deadline — archived for reuse |
+| AWS Activate | Too much friction / asks for too much |
 
 ---
 

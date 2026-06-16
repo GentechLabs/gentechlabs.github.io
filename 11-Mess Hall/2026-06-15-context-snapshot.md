@@ -1,6 +1,6 @@
 # Context Snapshot — June 15, 2026
 
-**Generated:** 12:05 AM ET (initial) → Updated 6:02 AM ET → Updated 12:10 PM ET → Updated 6:05 PM ET
+**Generated:** 12:05 AM ET (initial) → Updated 6:02 AM ET → Updated 12:10 PM ET → Updated 6:05 PM ET → Updated 8:28 PM ET
 
 ---
 
@@ -206,6 +206,20 @@
 
 ---
 
+## Session 12: Hermes Agent Update — Stripe + Async Subagents (Jun 15, 8:00 PM)
+
+**Key Discoveries:**
+- **Stripe payments skills** — Confirmed in codebase (Stripe Link, MPP, Projects). Located in `payments-integration` references. Ready for integration when needed.
+- **Async background subagents** — `delegate_task(background=true)` confirmed working. Can kick off research/builds without blocking conversation. 144 commits merged from v0.16.0 to latest.
+- **Travala Travel MCP** — Researched at Jordan's request. Architecture: 5 MCP tools (search_hotel, search_package, book, cancel, manage). Payment via USDC on Base via Coinbase Agentic Wallet + x402 protocol. ERC-8004 agent reputation layer. Hotel booking only (v1.0). Endpoint: `https://travel-mcp.travala.com/mcp`
+
+**What this means:**
+- Parallel work possible: Binance research + BNB Hack prep + grant apps can run simultaneously
+- Stripe integration ready for agent payments when needed
+- Travala integration potential for future travel agent pal
+
+---
+
 ## Updated Open Threads
 
 1. **🔴 AWS Activate** — Apply by Jul 1 (16 days). Up to $10K cloud credits.
@@ -222,7 +236,9 @@
 12. **⏳ COTI Privacy Skills** — 48+ MCP tools cloned, integration pending.
 13. **⏳ Multi-pool DeFi** — LINK, TAO, SOL positions when ready.
 14. **⏳ Auto-rebalancing** — Feature saved to `09-Green Room/ideas/`.
+15. **🟢 Stripe Payments** — Skills confirmed in codebase, ready for agent payment integration.
+16. **🟢 Async Subagents** — Background delegation confirmed. Parallel work enabled.
 
 ---
 
-*Last updated: 2026-06-15 6:05 PM ET*
+*Last updated: 2026-06-15 8:28 PM ET*

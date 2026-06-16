@@ -13,6 +13,9 @@
 | 7 | **Somnia** | Jun 11 | ⚪ QUEUED | AI Agent Platform | TBD | "Agent Catcher" risk layer |
 | 8 | **Google Cloud Rapid Agent** | Jun 11 | ⚪ DEFERRED | Agent Starter Pack | $60K pool | Hermes showcase |
 | 9 | **Retro9000** | Jul 14 | ⚪ BACKLOG | Capstone | TBD | All layers converge |
+| 10 | **Stellar ZK Hackathon** | Jun 30 | ⚪ QUEUED | ZK + Stellar | $10K XLM | ZK privacy app on Stellar |
+| 11 | **GrantFox Campaign** | Ongoing | ⚪ QUEUED | OSS Bounties | $60K USDC pool | Contribute to Stellar OSS projects |
+| 12 | **GOAT Network Builder Grants** | Rolling | ⚪ QUEUED | Agent-Native Apps | $500+ base grant | Agent Kit / dashboard monetization |
 
 ---
 
@@ -66,6 +69,34 @@
 - **Build**: Google Cloud Agent Builder + Gemini + MCP
 - **Our angle**: Hermes Agent orchestration showcase
 - **Timeline**: Build window May 12–25, polish May 25–Jun 8
+
+## Stellar ZK Hackathon — Deep Dive (Jun 30)
+
+- **Platform**: DoraHacks
+- **Prize**: $10K XLM (1st: $5K, 2nd: $2K, 3rd: $1.25K, 4th: $1K, 5th: $750)
+- **Requirements**: Open-source repo + 2-3 min demo video + ZK + Stellar integration
+- **Tech**: Stellar native ZK support — BN254 elliptic-curve, Poseidon/Poseidon2 hashing, NoirLang proofs
+- **Support**: Stellar Dev Discord + Stellar Hacks Telegram
+- **Our angle**: ZK privacy for agent transactions, confidential DeFi signals
+- **Deadline**: June 30, 2026
+
+## GrantFox Campaign — Deep Dive (Ongoing)
+
+- **Platform**: contribute.grantfox.xyz
+- **Sign up**: GitHub auth + agree to ToS (dead simple)
+- **What**: OSS bounty platform on Stellar. Complete tasks, earn USDC.
+- **Top repos**: Vero-protocol (34 activity), StepFi-app (18), XStreamRollz (14)
+- **Our angle**: Quick wins while building. Contribute to Stellar ecosystem, earn while learning.
+- **Status**: First campaign just launched Jun 16
+
+## GOAT Network Builder Grants — Deep Dive (Rolling)
+
+- **Platform**: goat.network/builder-program
+- **Application**: Tally form (basic info, project description)
+- **Base grant**: $500 to move from idea → working product
+- **Focus areas**: Agentic payments, transactional apps, productivity apps
+- **Our angle**: AAE = agent-native applications with real economic activity. Perfect fit.
+- **Status**: Apply when ready
 
 ---
 
