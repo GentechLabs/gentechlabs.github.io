@@ -18,8 +18,8 @@ from datetime import datetime, timezone, timedelta
 import urllib.request
 
 # ── Path Resolution ─────────────────────────────────────────────────────────
-HERMES_HOME = os.environ.get("HERMES_HOME", os.path.expanduser("~"))
-HOME_SCRIPTS_DIR = os.path.join(HERMES_HOME, "home", ".hermes", "scripts")
+HERMES_HOME = os.environ.get("HERMES_HOME", os.path.expanduser("~/.hermes"))
+HOME_SCRIPTS_DIR = os.path.join(HERMES_HOME, "scripts")
 
 def hermes_path(filename: str) -> str:
     return os.path.join(HOME_SCRIPTS_DIR, filename)
@@ -28,6 +28,7 @@ def hermes_path(filename: str) -> str:
 AAE_CONFIG_PATH = hermes_path(".lfj-aae-config.json")
 STATE_FILE = hermes_path(".lfj-defi-state.json")
 POSITION_TRACKER_PATH = hermes_path(".lfj-position-tracker.json")
+DASHBOARD_DATA_PATH = "/root/ProtoJay4789.github.io/DeFi/defi-data.json"
 
 DEXSCREENER_URL_TEMPLATE = "https://api.dexscreener.com/latest/dex/pairs/avalanche/{pool_address}"
 
@@ -93,7 +94,27 @@ def load_position_tracker() -> dict:
     except Exception:
         return {}
 
-# ── Data Fetchers ────────────────────────────────────────────────────────────
+def load_dashboard_data() -> dict:
+    """Read actual on-chain position from dashboard data (reader output)."""
+    try:
+        with open(DASHBOARD_DATA_PATH, "r") as f:
+            return json.load(f)
+    except Exception:
+        return {}
+
+def normalize_shape(shape: str) -> str:
+    """Map LFJ/dashboard shape names to monitor shape names."""
+    s = (shape or "").lower().replace("-", "").replace(" ", "")
+    aliases = {
+        "bidask": "bidirectional",
+        "bidirectional": "bidirectional",
+        "curve": "curve",
+        "spot": "spot",
+        "uniform": "curve",  # treat uniform like curve for efficiency calc
+    }
+    return aliases.get(s, "curve")
+
+# ── Data Fetchers ─────────────────────────────────────────────────────────────────
 
 def fetch_dexscreener() -> dict:
     url = DEXSCREENER_URL_TEMPLATE.format(pool_address=POOL_ADDRESS)
@@ -338,17 +359,22 @@ def update_state_after_check(state: dict, price: float, efficiency: float, in_ra
 
 def format_report(price: float, in_range: bool, efficiency: float, pool_data: dict,
                   position_tracker: dict, alerts: list, alert_level: str, shape: str,
-                  change_reason: str) -> str:
+                  change_reason: str, dash: dict, lp: dict, fees: dict, hero: dict) -> str:
     emoji = "✅" if alert_level == "OK" else "⚠️" if alert_level == "LOW" else "🚨"
     lines = [f"{emoji} **DeFi Milestone + LP Report** — {now_et().strftime('%Y-%m-%d %H:%M EDT')}", ""]
 
     lines.append("**📊 Pool Data**")
     lines.append(f"  Pool: LFJ AVAX/USDC 5bps")
     lines.append(f"  Price: ${price:.4f}")
-    lines.append(f"  Range: ${pool_data.get('range_low', '?'):.2f} – ${pool_data.get('range_high', '?'):.2f}")
+    lines.append(f"  Range: ${pool_data.get('range_low', '?'):.4f} – ${pool_data.get('range_high', '?'):.4f}")
     lines.append(f"  Status: {'🟢 In Range' if in_range else '🔴 OUT OF RANGE'}")
     lines.append(f"  Efficiency: {efficiency:.1f}%")
     lines.append(f"  Shape: {shape.upper()}")
+    if lp:
+        lp_val = lp.get('totalValueUSD') or lp.get('totalValue') or lp.get('lpValue') or lp.get('lpValueUsd') or 0
+        lines.append(f"  Position: {lp.get('avaxAmount', 0):.4f} AVAX + {lp.get('usdcAmount', 0):.2f} USDC = ${lp_val:.2f}")
+    if fees:
+        lines.append(f"  Daily Fees (est): ${fees.get('dailyFees', 0):.3f} | Cumulative: ${fees.get('cumulativeFees', 0):.3f}")
     lines.append("")
 
     entry_price = position_tracker.get("entry_avax_price", "?")
@@ -377,7 +403,7 @@ def format_report(price: float, in_range: bool, efficiency: float, pool_data: di
     lines.append(f"  {dca_reason}")
     lines.append("")
 
-    lines.append(f"`Source: DexScreener | Debounce: 2-clean-run | Check: {now_et().strftime('%H:%M EDT')}`")
+    lines.append(f"`Source: DexScreener + On-Chain Reader | Debounce: 2-clean-run | Check: {now_et().strftime('%H:%M EDT')}`")
     return "\n".join(lines)
 
 # ── Main ─────────────────────────────────────────────────────────────────────
@@ -389,12 +415,19 @@ def main():
 
     cfg = load_config()
     pos_cfg = cfg.get("position", {})
-    range_low = pos_cfg.get("range_low")
-    range_high = pos_cfg.get("range_high")
-    shape = pos_cfg.get("shape", "curve").lower()
+
+    # Prefer actual on-chain data from dashboard reader
+    dash = load_dashboard_data()
+    lp = dash.get("lpPosition", {})
+    hero = dash.get("hero", {})
+    fees = dash.get("fees", {})
+
+    range_low = lp.get("rangeMin") or pos_cfg.get("range_low") or cfg.get("range_low")
+    range_high = lp.get("rangeMax") or pos_cfg.get("range_high") or cfg.get("range_high")
+    shape = normalize_shape(lp.get("shape") or pos_cfg.get("shape") or cfg.get("shape", "curve"))
 
     if not all([range_low, range_high]):
-        print("ERROR: Invalid AAE config — missing range", file=sys.stderr)
+        print("ERROR: Invalid config — missing range", file=sys.stderr)
         sys.exit(1)
 
     try:
@@ -431,7 +464,11 @@ def main():
         alerts=alerts,
         alert_level=alert_level,
         shape=shape,
-        change_reason=change_reason
+        change_reason=change_reason,
+        dash=dash,
+        lp=lp,
+        fees=fees,
+        hero=hero,
     )
     print(report)
 

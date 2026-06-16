@@ -142,9 +142,32 @@
 
 **To research:**
 - [ ] Check pool depth >$100k, volume >$10k/24h
-- [ ] Verify V2/V3 CL support (bidirectional/spot shapes available)
-- [ ] Evaluate cross-chain viability (Avalanche vs Arbitrum/Solana)
-- [ ] Port `lp-default-tracker.py` logic to new pool slot
+
+---
+
+## 🚀 GenTech Current — DeFi Cron Jobs (Active)
+
+| Job ID | Name | Schedule | Status | Delivers To |
+|---|---|---|---|---|
+| `4cb4f1e92116` | On-Chain LP Position Reader — Live Data | `0 */3 * * *` | ✅ Active | local |
+| `2600f8fc0f0e` | AAE DeFi Milestone + LP Monitor (10min) | `*/10 6-23 * * *` | ✅ Active | Strategies (-1002916759037) |
+
+### Reader (`4cb4f1e92116`)
+- **Wrapper:** `~/.hermes/scripts/run-reader.py`
+- **Canonical script:** `/root/vaults/gentech/scripts/run-reader.sh`
+- **Output:** `/root/ProtoJay4789.github.io/DeFi/defi-data.json`
+- **Wallet:** `0x7ebff188f2Eba16518C02864589b1403a5d1296a`
+- **Shape:** `bid-ask` (default, overridable via `SHAPE` env)
+
+### AAE DeFi Milestone + LP Monitor (`2600f8fc0f0e`)
+- **Script:** `/root/vaults/gentech/Strategies/scripts/defi-lp-consolidated.py`
+- **Config:** `/root/.hermes/scripts/.lfj-aae-config.json`
+- **State:** `/root/.hermes/scripts/.lfj-defi-state.json`
+- **Current range:** $6.6518 – $6.9162 (bid-ask)
+- **Behavior:** Reads actual on-chain range/shape from `defi-data.json`; fetches live price; debounced alerts (5-min confirmation); silent during quiet hours (11 PM – 6:30 AM ET).
+- **Triggers:** Out-of-range confirmed, efficiency <50% confirmed, milestone hit.
+
+*Updated: 2026-06-16*
 
 ---
 
