@@ -741,13 +741,13 @@
                 const pos = data.lpPosition || {};
                 const fees = data.fees || {};
 
-                const price = parseFloat(data.currentPrice || pos.currentPrice || 0);
-                const rangeLow = parseFloat(pos.lowerPrice || 0);
-                const rangeHigh = parseFloat(pos.upperPrice || 0);
+                const price = parseFloat(pos.currentPrice || data.currentPrice || 0);
+                const rangeLow = parseFloat(pos.rangeMin || 0);
+                const rangeHigh = parseFloat(pos.rangeMax || 0);
                 const shape = (pos.shape || 'curve').toLowerCase();
-                const avaxHeld = parseFloat(pos.totalWavax || 0);
-                const usdcHeld = parseFloat(pos.totalUsdc || 0);
-                const totalVal = parseFloat(pos.totalValueUSD || 0);
+                const avaxHeld = parseFloat(pos.avaxAmount || 0);
+                const usdcHeld = parseFloat(pos.usdcAmount || 0);
+                const totalVal = parseFloat(pos.totalValueUSD || pos.totalValue || 0);
                 const binStep = parseInt(pos.binStep || 10, 10);
                 const feeTier = (binStep / 100).toFixed(2) + '%';
 
