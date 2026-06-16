@@ -3,64 +3,149 @@
     "name": "Jordan's Monk",
     "class": "Monk",
     "level": 26,
-    "ascendancy": "Invoker"
+    "ascendancy": "Invoker",
+    "act": "Act 2",
+    "stats": {
+      "life": 639,
+      "energyShield": 68,
+      "mana": 224,
+      "spirit": 30
+    },
+    "ascendancyPoints": {
+      "earned": 2,
+      "total": 8,
+      "source": "Trial of the Sekhemas",
+      "note": "Completed with Vanito — left with 1 honor"
+    }
   },
   "skills": [
     {
-      "name": "Arc",
-      "type": "Primary — Lightning",
-      "supports": ["Slow Potency", "Conduction", "Mana Remnants"],
-      "role": "Main lightning damage, shock application"
-    },
-    {
       "name": "Tempest Flurry",
-      "type": "Attack — Lightning",
-      "supports": ["Rapid Attacks 1", "Elemental Armament"],
-      "role": "Melee lightning attacks"
+      "type": "Primary Attack — Lightning",
+      "supports": ["Life Leech 1", "Rapid Attacks 1"],
+      "role": "Main damage dealer — generates shock, fast attacks for Power Charge generation",
+      "priority": "Core"
     },
     {
       "name": "Falling Thunder",
       "type": "Burst — Lightning",
-      "supports": ["Life Leech 1"],
-      "role": "Burst damage on shocked enemies"
+      "supports": ["Elemental Armament 1"],
+      "role": "Big nuke — consumes Power Charges for massive lightning damage",
+      "priority": "Core"
+    },
+    {
+      "name": "Power Siphon",
+      "type": "Spell — Lightning",
+      "supports": ["Rapid Casting 1"],
+      "role": "Power Charge generator — kills grant charges for Falling Thunder",
+      "priority": "Core"
+    },
+    {
+      "name": "Siphoning Strike",
+      "type": "Attack — Lightning",
+      "supports": ["Life Leech", "Bounty 1"],
+      "role": "Dash strike — consumes shock for shockwave + Power Charges",
+      "priority": "Core"
+    },
+    {
+      "name": "Arc",
+      "type": "Spell — Lightning",
+      "supports": ["Shock Conduction", "Lightning Penetration"],
+      "role": "Chain clear — shocks enemies, ignores lightning resist",
+      "priority": "High"
     },
     {
       "name": "Orb of Storms",
       "type": "Sustained — Lightning",
-      "supports": ["Slow Potency", "Bounty 1"],
-      "role": "Sustained AoE, loot bonus"
+      "supports": ["Slow Potency", "Rapid Casting 1"],
+      "role": "AoE storm zone — enemies take more ticks inside",
+      "priority": "High"
     },
     {
-      "name": "Siphoning Strike",
-      "type": "Attack",
-      "supports": [],
-      "role": "Mana/life sustain"
+      "name": "Thunder Storm",
+      "type": "AoE — Lightning",
+      "supports": ["Rapid Casting 1", "Slow Potency"],
+      "role": "AoE clear — rapid casts + slow enemies",
+      "priority": "Medium"
     },
     {
       "name": "Killing Palm",
       "type": "Attack",
-      "supports": ["Bounty 1"],
-      "role": "Culling strikes, loot bonus"
-    },
-    {
-      "name": "Mana Drain",
-      "type": "Utility",
-      "supports": ["Rapid Casting 1"],
-      "role": "Mana sustain for heavy casting"
+      "supports": [],
+      "role": "Execution — finishes low HP enemies",
+      "priority": "Utility"
     },
     {
       "name": "Parry",
       "type": "Defense",
       "supports": [],
-      "role": "Defensive mechanic"
+      "role": "Defensive mechanic — block attacks",
+      "priority": "Defense"
     }
   ],
+  "damageLoop": {
+    "description": "Tempest Flurry shocks enemies → Siphoning Strike consumes shock for Power Charges → Power Siphon kills generate more charges → Falling Thunder consumes charges for massive nuke",
+    "steps": [
+      "1. Tempest Flurry (fast + leeching) → shock enemies",
+      "2. Siphoning Strike → consume shock → Power Charges",
+      "3. Power Siphon → kill → more Power Charges",
+      "4. Falling Thunder → consume charges → massive lightning nuke"
+    ]
+  },
+  "expansionPaths": {
+    "immediate": [
+      {
+        "upgrade": "Conductivity curse",
+        "why": "Lowers enemy lightning resist — everything hits harder",
+        "when": "When you get an Uncut Skill Gem or find it at vendor"
+      },
+      {
+        "upgrade": "Herald of Thunder",
+        "why": "Auto-procs lightning on shocked enemies — free passive DPS",
+        "when": "When you have enough Spirit to reserve it"
+      },
+      {
+        "upgrade": "2nd Ascendancy points (Trial of Chaos)",
+        "why": "Unlock more Invoker nodes — Culling Strike or Behead",
+        "when": "Act 3 — Trial of Chaos"
+      }
+    ],
+    "midgame": [
+      {
+        "upgrade": "Tempest Bell",
+        "why": "Monk专属 — creates a death zone that scales with Tempest Flurry",
+        "when": "When you unlock the gem"
+      },
+      {
+        "upgrade": "+Level to Lightning Skill Gems on quarterstaff",
+        "why": "Biggest single DPS upgrade for lightning build",
+        "when": "When you find/buy a better weapon"
+      },
+      {
+        "upgrade": "Wrath aura",
+        "why": "Flat lightning damage boost to everything",
+        "when": "When you have spare Spirit"
+      }
+    ],
+    "endgame": [
+      {
+        "upgrade": "Power Charge stacking gear",
+        "why": "More charges = bigger Falling Thunder nukes",
+        "when": "Maps / endgame"
+      },
+      {
+        "upgrade": "Critical strike nodes",
+        "why": "Falling Thunder can crit — massive damage multiplier",
+        "when": "Level 60+"
+      }
+    ]
+  },
   "passiveTree": {
     "allocated": ["Alternating Current", "Overlord", "Branching Bolts", "Drenched"],
     "workingOn": "Lightning Quick",
     "notes": "Lightning-based Invoker Monk. Central path through key lightning nodes."
   },
   "buildFocus": "Lightning Damage",
-  "playstyle": "Melee Caster",
-  "lastUpdated": "2026-06-14"
+  "playstyle": "Melee Caster — generate charges, spend them on nukes",
+  "lastUpdated": "2026-06-16"
 }
