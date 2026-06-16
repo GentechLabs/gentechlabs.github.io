@@ -4,6 +4,25 @@ Ideas from real conversations with real people.
 
 ---
 
+## [ ] GenTech Agent Kit Installer
+- **Added:** 2026-06-16
+- **Source:** Jordan voice message
+- **What:** One-click desktop installer for Windows/Mac/Linux that packages Hermes + GenTech profile + skills + cron jobs + dashboard
+- **Why:** Makes the Agent Kit distributable. Hard to copy because it's tied to local Hermes setup.
+- **Layers to include:**
+  - Hermes Agent CLI auto-install
+  - Pre-loaded GenTech skills and cron jobs
+  - Wallet setup wizard
+  - DeFi dashboard + LP monitor
+  - GitHub backup/sync config
+  - Skill marketplace / installer
+  - Agent health dashboard
+- **Target user:** Power users and hackathon builders who want their own agent running locally
+- **Status:** Concept — needs spec
+- **Priority:** High (builds on current work)
+
+---
+
 ## [ ] Education Layer — Tutors
 - **Added:** 2026-06-12
 - **Source:** Jordan's conversation with Cara at work
