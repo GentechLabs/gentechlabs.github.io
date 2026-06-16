@@ -605,18 +605,19 @@
                     const barH = normalizedDepth * plotHeight * 0.92;
                     const y = padding.top + plotHeight - barH;
 
-                    // Color: left of active = USDC (green), right = AVAX (purple)
+                    // Color: left of active (below price) = AVAX (purple)
+                    // Right of active (above price) = USDC (green)
                     // Active bin = pink
                     let fillColor, glowColor;
                     if (i === activeIdx) {
                         fillColor = colors.active;
                         glowColor = colors.activeGlow;
                     } else if (bin.price <= currentPrice) {
-                        fillColor = colors.usdc;
-                        glowColor = colors.usdcGlow;
-                    } else {
                         fillColor = colors.avax;
                         glowColor = colors.avaxGlow;
+                    } else {
+                        fillColor = colors.usdc;
+                        glowColor = colors.usdcGlow;
                     }
 
                     // Glow under bar
@@ -1415,7 +1416,7 @@
             const rangeCenter = (rangeMin + rangeMax) / 2;
             const rangeHalf = (rangeMax - rangeMin) / 2;
             const distFromCenter = Math.abs(price - rangeCenter);
-            const efficiency = Math.max(0, Math.min(100, 100 - (distFromCenter / rangeHalf) * 50));
+            const efficiency = Math.max(0, Math.min(100, 100 * (1 - distFromCenter / rangeHalf)));
             const inRange = price >= rangeMin && price <= rangeMax;
             const rangePct = Math.max(0, Math.min(100, ((price - rangeMin) / (rangeMax - rangeMin)) * 100));
 
