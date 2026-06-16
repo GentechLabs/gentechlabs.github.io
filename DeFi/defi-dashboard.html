@@ -816,7 +816,12 @@
             const rangePct = Math.max(0, Math.min(100, ((currentPrice - rangeMin) / (rangeMax - rangeMin)) * 100));
             let effColor, effLabel, shapeNote, edgeEfficiency;
 
-            if (shape === 'Bid-Ask' || shape === 'Bidirectional') {
+            if (rangeStatus === 'Out of Range') {
+                edgeEfficiency = 0;
+                effColor = '#ff3366';
+                effLabel = 'Out of Range';
+                shapeNote = `⚠️ Price $${currentPrice.toFixed(2)} is outside $${rangeMin.toFixed(2)}–$${rangeMax.toFixed(2)}. Not earning fees.`;
+            } else if (shape === 'Bid-Ask' || shape === 'Bidirectional') {
                 // Bid-Ask: edges = high efficiency (liquidity concentrated there)
                 // Center = low efficiency (thin liquidity)
                 const distFromEdge = Math.min(rangePct, 100 - rangePct); // 0 at edges, 50 at center
