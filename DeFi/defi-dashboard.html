@@ -1370,7 +1370,7 @@
         let lpCurve = null;
         let defiDash = null;
 
-        // Fetch live data from DexScreener
+        // Fetch live price from DexScreener — ONLY price/volume/tvl data
         async function fetchLiveData() {
             try {
                 const res = await fetch('https://api.dexscreener.com/latest/dex/pairs/avalanche/0x864d4e5Ee7318e97483DB7EB0912E09F161516EA');
@@ -1383,264 +1383,150 @@
                 const tvl = pair.liquidity?.usd || 366900;
                 const change24h = pair.priceChange?.h24 || 0;
 
-                // Calculate efficiency based on price position in range
-                const rangeMin = 6.82;
-                const rangeMax = 7.02;
-                const rangeCenter = (rangeMin + rangeMax) / 2;
-                const rangeHalf = (rangeMax - rangeMin) / 2;
-                const distFromCenter = Math.abs(price - rangeCenter);
-                const efficiency = Math.max(0, Math.min(100, 100 - (distFromCenter / rangeHalf) * 50));
-
-                const inRange = price >= rangeMin && price <= rangeMax;
-
-                const dailyFees = parseFloat((efficiency / 100 * 0.25).toFixed(3));
-                const cumulativeFees = parseFloat((efficiency / 100 * 0.25));
-                const milestoneProgress = parseFloat((efficiency / 100 * 5).toFixed(1));
-
-                // Calculate distance to S/R for proximity alerts
-                const resistanceLevels = [7.50, 7.20, rangeMax].filter(r => r > price).sort((a, b) => a - b);
-                const supportLevels = [6.70, 6.50, rangeMin].filter(s => s < price).sort((a, b) => b - a);
-                const nearestResistance = resistanceLevels[0];
-                const nearestSupport = supportLevels[0];
-                const distToResistance = nearestResistance ? ((nearestResistance - price) / price * 100) : 999;
-                const distToSupport = nearestSupport ? ((price - nearestSupport) / price * 100) : 999;
-
+                // Return ONLY raw market data — never override range, efficiency, or strategy
+                // Derived values are recalculated in recalculateFromLivePrice()
                 return {
-                    hero: {
-                        positionUsd: 45.80,
-                        dailyFees: dailyFees,
-                        efficiency: parseFloat(efficiency.toFixed(1)),
-                        efficiencyZone: efficiency > 80 ? 'Center' : efficiency > 60 ? 'Inner' : efficiency > 50 ? 'Outer' : 'Edge',
-                        shape: 'Curve',
-                        rangeStatus: inRange ? 'In Range' : 'Out of Range',
-                        currentPrice: price,
-                        rangeMin: rangeMin,
-                        rangeMax: rangeMax,
-                        milestoneCurrent: 'Unranked',
-                        milestoneNext: 'Scout',
-                        milestoneTarget: 5,
-                        milestoneProgress: milestoneProgress
-                    },
+                    currentPrice: price,
+                    priceChange24h: change24h,
+                    volume24h: volume24h,
+                    liquidity: tvl,
                     marketIntel: {
                         avaxPrice: price,
                         change24h: change24h,
                         volume24h: volume24h,
                         tvl: tvl,
-                        trend: change24h > 2 ? 'uptrend' : change24h < -2 ? 'downtrend' : 'consolidation',
-                        news: [
-                            { headline: `AVAX at $${price.toFixed(2)} — ${inRange ? 'In Range' : 'Out of Range'}`, impact: inRange ? 'bullish' : 'bearish', relevance: 'high' },
-                            { headline: `24h volume: $${(volume24h/1000).toFixed(0)}K`, impact: 'neutral', relevance: 'medium' },
-                            { headline: `TVL: $${(tvl/1000000).toFixed(2)}M`, impact: 'neutral', relevance: 'medium' }
-                        ]
-                    },
-                    strategyAdvisor: {
-                        efficiencyZone: efficiency > 80 ? 'Center' : efficiency > 60 ? 'Inner' : 'Outer',
-                        efficiency: parseFloat(efficiency.toFixed(1)),
-                        shape: 'Curve',
-                        recommendedAction: efficiency < 50 ? 'Rebalance Now' : efficiency < 70 ? 'Monitor Closely' : 'Hold Position',
-                        dcaType: efficiency < 50 ? 'Edge-Weighted DCA' : efficiency < 70 ? 'Moderate DCA' : 'Full DCA',
-                        dcaDetails: `In range with curve shape. Price near ${efficiency > 70 ? 'center' : 'edge'} of $6.82–$7.02 range.`,
-                        rebalanceTrigger: 'Price exits $6.82-7.02 range',
-                        compoundThreshold: 50,
-                        cumulativeFees: cumulativeFees,
-                        nextCompound: `$${(50 - cumulativeFees).toFixed(2)} away`,
-                        riskLevel: efficiency > 70 ? 'Low' : efficiency > 50 ? 'Medium' : 'High',
-                        riskNote: efficiency > 70 ? 'In range, capturing max fees.' : efficiency > 50 ? 'In range, monitoring.' : 'Near edge, consider rebalance.'
-                    },
-                    lpPosition: {
-                        protocol: 'LFJ (Trader Joe)',
-                        chain: 'Avalanche',
-                        pair: 'AVAX / USDC',
-                        feeTier: '5 bps',
-                        shape: 'Curve',
-                        currentPrice: price,
-                        rangeMin: rangeMin,
-                        rangeMax: rangeMax,
-                        numBins: 18,
-                        deposit: { avax: 3.142, avaxValue: price * 3.142, usdc: 24.03, usdcValue: 24.03 },
-                        rewards: { avax: 0.00799, value: 0.00799 * price },
-                        fees24h: { total: dailyFees, avax: dailyFees / price, avaxValue: dailyFees * 0.54, usdc: dailyFees * 0.46, usdcValue: dailyFees * 0.46 }
-                    },
-                    curveData: {
-                        rangeMin: rangeMin,
-                        rangeMax: rangeMax,
-                        currentPrice: price,
-                        shape: 'curve',
-                        bins: Array.from({length: 31}, (_, i) => {
-                            const p = rangeMin + (rangeMax - rangeMin) * (i / 30);
-                            const distFromPrice = Math.abs(p - price);
-                            const halfRange = (rangeMax - rangeMin) / 2;
-                            const depth = p === price ? 0.05 : 0.26 + 0.74 * (distFromPrice / halfRange);
-                            return { price: parseFloat(p.toFixed(3)), depth: parseFloat(Math.min(1, depth).toFixed(2)) };
-                        })
-                    },
-                    feeMilestones: {
-                        currentDailyFees: dailyFees,
-                        positionUsd: 45.80,
-                        cumulativeFees: cumulativeFees,
-                        daysActive: 1,
-                        tiers: [
-                            { tier: 1, label: 'Scout', target: 5, icon: '🏴', unlocks: 'Entry strategies (CURVE)' },
-                            { tier: 2, label: 'Raider', target: 20, icon: '⚔️', unlocks: 'SPOT + BIDIRECTIONAL shapes' },
-                            { tier: 3, label: 'Warlord', target: 55, icon: '🛡️', unlocks: 'Multi-pool positions' },
-                            { tier: 4, label: 'Fisher', target: 100, icon: '🎣', unlocks: 'Multi-asset farming (LINK, TAO, SOL)' },
-                            { tier: 5, label: 'Sovereign', target: 200, icon: '👑', unlocks: 'Custom strategy creation' }
-                        ]
-                    },
-                    rebalanceSuggestions: {
-                        efficiency: parseFloat(efficiency.toFixed(1)),
-                        price: price,
-                        rangeMin: rangeMin,
-                        rangeMax: rangeMax,
-                        volatility: 'medium',
-                        trend: change24h > 2 ? 'uptrend' : change24h < -2 ? 'downtrend' : 'consolidation',
-                        suggestions: [
-                            ...(efficiency < 50 ? [{
-                                icon: '🔴',
-                                title: 'Rebalance Now — Efficiency Critical',
-                                description: `Your efficiency is at ${efficiency.toFixed(1)}%. Price is near the edge of your range. Moving to a tighter range around $${price.toFixed(2)} could increase daily fees by ${Math.round((70 - efficiency) / 10)}%.`,
-                                priority: 'high',
-                                impact: `+${Math.round((70 - efficiency) / 10)}% daily fees`,
-                                action: 'Rebalance on Trader Joe'
-                            }] : []),
-                            ...(efficiency >= 50 && efficiency < 70 ? [{
-                                icon: '🟡',
-                                title: 'Monitor — Approaching Threshold',
-                                description: `Efficiency at ${efficiency.toFixed(1)}%. Consider rebalancing if it drops below 50%. Current range ($${rangeMin.toFixed(2)}-$${rangeMax.toFixed(2)}) is still capturing decent fees.`,
-                                priority: 'medium',
-                                impact: 'Maintain current fees',
-                                action: null
-                            }] : []),
-                            ...(efficiency >= 70 ? [{
-                                icon: '🟢',
-                                title: 'Hold Position — Earning Well',
-                                description: `Efficiency at ${efficiency.toFixed(1)}%. Price is centered in your range. No action needed — you're capturing maximum fees.`,
-                                priority: 'low',
-                                impact: 'Max fees earned',
-                                action: null
-                            }] : []),
-                            {
-                                icon: '💡',
-                                title: efficiency < 60 ? 'Consider Wider Range' : 'Consider Tighter Range',
-                                description: efficiency < 60
-                                    ? `Current range is $${rangeMin.toFixed(2)}-$${rangeMax.toFixed(2)}. A wider range ($${(price * 0.95).toFixed(2)}-$${(price * 1.05).toFixed(2)}) would keep you in range longer during volatility.`
-                                    : `Current range is $${rangeMin.toFixed(2)}-$${rangeMax.toFixed(2)}. A tighter range ($${(price * 0.98).toFixed(2)}-$${(price * 1.02).toFixed(2)}) would earn more fees if price stays stable.`,
-                                priority: 'low',
-                                impact: efficiency < 60 ? 'More uptime' : 'Higher fees',
-                                action: null
-                            }
-                        ]
-                    },
-                    supportResistance: {
-                        currentPrice: price,
-                        levels: [
-                            { price: 7.50, type: 'resistance', strength: 'strong', label: 'Major Resistance', note: 'Psychological level' },
-                            { price: 7.20, type: 'resistance', strength: 'medium', label: 'Resistance', note: 'Previous high' },
-                            { price: rangeMax, type: 'resistance', strength: 'strong', label: 'Range High', note: 'Current position top' },
-                            { price: rangeMin, type: 'support', strength: 'strong', label: 'Range Low', note: 'Current position bottom' },
-                            { price: 6.70, type: 'support', strength: 'medium', label: 'Support', note: 'Previous low' },
-                            { price: 6.50, type: 'support', strength: 'strong', label: 'Major Support', note: 'Breakdown level' }
-                        ],
-                        shapeRecommendation: {
-                            shape: efficiency > 80 ? 'Curve' : efficiency > 50 ? 'Bid-Ask' : 'Spot',
-                            reason: efficiency > 80 
-                                ? 'Price centered in range. Curve earns max fees here.' 
-                                : efficiency > 50 
-                                    ? 'Price near edge. Bid-Ask captures swings better.' 
-                                    : 'Price at edge. Spot for safety.',
-                            optimalRange: [parseFloat((price * 0.97).toFixed(2)), parseFloat((price * 1.03).toFixed(2))]
-                        },
-                        proximityAlert: (distToResistance < 2) 
-                            ? `⚠️ Price within ${distToResistance}% of resistance at $${nearestResistance?.price.toFixed(2)}` 
-                            : (distToSupport < 2) 
-                                ? `⚠️ Price within ${distToSupport}% of support at $${nearestSupport?.price.toFixed(2)}` 
-                                : null
-                    },
-                    transactions: [
-                        {
-                            date: new Date().toISOString().split('T')[0],
-                            type: 'Auto-Refresh',
-                            token: 'AVAX/USDC',
-                            amount: `Price: $${price.toFixed(3)}`,
-                            usd: 45.80,
-                            status: inRange ? 'Active' : '⚠️ Out of Range'
-                        }
-                    ],
-                    timestamp: new Date().toISOString()
+                        trend: change24h > 2 ? 'uptrend' : change24h < -2 ? 'downtrend' : 'consolidation'
+                    }
                 };
             } catch (e) {
-                console.warn('[DeFi] DexScreener fetch failed, using cached data:', e.message);
+                console.warn('[DeFi] DexScreener fetch failed:', e.message);
                 return null;
             }
         }
 
+        // Recalculate all derived values from live price + on-chain range
+        // This is the SINGLE source of truth for range status, efficiency, strategy
+        function recalculateFromLivePrice(data) {
+            const price = data.currentPrice || data.hero?.currentPrice;
+            const rangeMin = data.lpPosition?.rangeMin || data.hero?.rangeMin || data.curveData?.rangeMin;
+            const rangeMax = data.lpPosition?.rangeMax || data.hero?.rangeMax || data.curveData?.rangeMax;
+            if (!price || !rangeMin || !rangeMax) return;
+
+            const rangeCenter = (rangeMin + rangeMax) / 2;
+            const rangeHalf = (rangeMax - rangeMin) / 2;
+            const distFromCenter = Math.abs(price - rangeCenter);
+            const efficiency = Math.max(0, Math.min(100, 100 - (distFromCenter / rangeHalf) * 50));
+            const inRange = price >= rangeMin && price <= rangeMax;
+            const rangePct = Math.max(0, Math.min(100, ((price - rangeMin) / (rangeMax - rangeMin)) * 100));
+
+            const dailyFees = data.fees?.dailyFees || parseFloat((efficiency / 100 * 0.25).toFixed(3));
+            const cumulativeFees = data.fees?.cumulativeFees || parseFloat((efficiency / 100 * 0.25));
+
+            // Update hero
+            if (data.hero) {
+                data.hero.currentPrice = price;
+                data.hero.rangeMin = rangeMin;
+                data.hero.rangeMax = rangeMax;
+                data.hero.rangeStatus = inRange ? 'In Range' : 'Out of Range';
+                data.hero.efficiency = parseFloat(efficiency.toFixed(1));
+                data.hero.efficiencyZone = efficiency > 80 ? 'Center' : efficiency > 60 ? 'Inner' : efficiency > 50 ? 'Outer' : 'Edge';
+                data.hero.dailyFees = dailyFees;
+            }
+
+            // Update strategyAdvisor
+            if (data.strategyAdvisor) {
+                data.strategyAdvisor.efficiency = parseFloat(efficiency.toFixed(1));
+                data.strategyAdvisor.efficiencyZone = efficiency > 80 ? 'Center' : efficiency > 60 ? 'Inner' : efficiency > 50 ? 'Outer' : 'Edge';
+                data.strategyAdvisor.recommendedAction = !inRange ? 'Rebalance Now' : efficiency < 50 ? 'Rebalance Now' : efficiency < 70 ? 'Monitor Closely' : 'Hold Position';
+                data.strategyAdvisor.dcaType = !inRange ? 'Urgent DCA' : efficiency < 50 ? 'Edge-Weighted DCA' : efficiency < 70 ? 'Moderate DCA' : 'Full DCA';
+                data.strategyAdvisor.dcaDetails = !inRange
+                    ? `⚠️ OUT OF RANGE — Price $${price.toFixed(2)} is outside $${rangeMin.toFixed(2)}–$${rangeMax.toFixed(2)}. Not earning fees.`
+                    : `In range. Price $${price.toFixed(2)} near ${efficiency > 70 ? 'center' : 'edge'} of $${rangeMin.toFixed(2)}–$${rangeMax.toFixed(2)} range.`;
+                data.strategyAdvisor.rebalanceTrigger = `Price exits $${rangeMin.toFixed(2)}-$${rangeMax.toFixed(2)} range`;
+                data.strategyAdvisor.riskLevel = !inRange ? 'Critical' : efficiency > 70 ? 'Low' : efficiency > 50 ? 'Medium' : 'High';
+                data.strategyAdvisor.riskNote = !inRange
+                    ? `⚠️ OUT OF RANGE at $${price.toFixed(2)}. Not earning fees. Rebalance ASAP.`
+                    : efficiency > 70 ? 'In range, capturing max fees.' : efficiency > 50 ? 'In range, monitoring.' : 'Near edge, consider rebalance.';
+            }
+
+            // Update lpPosition
+            if (data.lpPosition) {
+                data.lpPosition.currentPrice = price;
+                data.lpPosition.rangeMin = rangeMin;
+                data.lpPosition.rangeMax = rangeMax;
+            }
+
+            // Update curveData
+            if (data.curveData) {
+                data.curveData.currentPrice = price;
+                data.curveData.rangeMin = rangeMin;
+                data.curveData.rangeMax = rangeMax;
+            }
+
+            // Update supportResistance
+            if (data.supportResistance) {
+                data.supportResistance.currentPrice = price;
+            }
+        }
+
+        // Initialize: load defi-data.json (source of truth for range), then overlay live price
         (async () => {
             const templateRes = await fetch('defi-template.json?' + Date.now());
             const template = await templateRes.json();
 
-            // Always load full data from defi-data.json first
             const dataRes = await fetch('defi-data.json?' + Date.now());
             let data = await dataRes.json();
 
-            // Overlay live price from DexScreener
+            // Overlay live price from DexScreener (price + volume/tvl only)
             try {
                 const liveData = await fetchLiveData();
                 if (liveData) {
-                    if (liveData.hero) Object.assign(data.hero || {}, liveData.hero);
-                    if (liveData.marketIntel) Object.assign(data.marketIntel || {}, liveData.marketIntel);
                     if (liveData.currentPrice) data.currentPrice = liveData.currentPrice;
                     if (liveData.priceChange24h !== undefined) data.priceChange24h = liveData.priceChange24h;
                     if (liveData.volume24h) data.volume24h = liveData.volume24h;
                     if (liveData.liquidity) data.liquidity = liveData.liquidity;
+                    if (liveData.marketIntel) Object.assign(data.marketIntel || {}, liveData.marketIntel);
                 }
             } catch (e) {
                 console.warn('[DeFi] DexScreener overlay failed:', e.message);
             }
 
+            // Recalculate all derived values from live price + on-chain range
+            recalculateFromLivePrice(data);
+
             defiDash = new DashboardEngine({ template, data });
             await defiDash.init('#app');
 
-            // Initialize LP curve renderer
             const curveContainer = document.getElementById('lp-curve-canvas');
             if (curveContainer && data.curveData) {
                 lpCurve = new LPCurveRenderer(curveContainer, data.curveData);
             }
 
-            // Expose for debugging
             window.defiDash = defiDash;
             window.lpCurve = lpCurve;
         })();
 
-        // Auto-refresh every 60 seconds with LIVE data
+        // Auto-refresh every 60 seconds — price overlay + recalculate
         async function applyLiveData() {
             try {
                 const liveData = await fetchLiveData();
                 if (liveData && defiDash) {
-                    // Deep merge: live data overlays on top of existing static data
-                    // This preserves static fields (tiers, milestones) from JSON
-                    function deepMerge(target, source) {
-                        for (const key of Object.keys(source)) {
-                            if (source[key] && typeof source[key] === 'object' && !Array.isArray(source[key]) && target[key]) {
-                                deepMerge(target[key], source[key]);
-                            } else {
-                                target[key] = source[key];
-                            }
-                        }
-                        return target;
-                    }
-                    deepMerge(defiDash.data, liveData);
+                    if (liveData.currentPrice) defiDash.data.currentPrice = liveData.currentPrice;
+                    if (liveData.priceChange24h !== undefined) defiDash.data.priceChange24h = liveData.priceChange24h;
+                    if (liveData.volume24h) defiDash.data.volume24h = liveData.volume24h;
+                    if (liveData.liquidity) defiDash.data.liquidity = liveData.liquidity;
+                    if (liveData.marketIntel) Object.assign(defiDash.data.marketIntel || {}, liveData.marketIntel);
+
+                    // Recalculate range status, efficiency, strategy from live price
+                    recalculateFromLivePrice(defiDash.data);
+
                     defiDash.render();
-                    // Update curve with new data
-                    if (lpCurve && liveData.curveData) {
-                        lpCurve.updateData(liveData.curveData);
-                    }
-                    console.log('[DeFi] Live refresh at', new Date().toLocaleTimeString(), '- Price:', liveData.hero?.currentPrice);
+                    console.log('[DeFi] Live refresh at', new Date().toLocaleTimeString(), '- Price:', defiDash.data.currentPrice, '- Range:', defiDash.data.hero?.rangeStatus);
                 }
             } catch (e) {
                 console.warn('[DeFi] Auto-refresh failed:', e.message);
             }
         }
-        // First refresh after 5 seconds, then every 60 seconds
         setTimeout(applyLiveData, 5000);
         setInterval(applyLiveData, 60000);
     </script>
