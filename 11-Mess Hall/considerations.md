@@ -4,6 +4,22 @@ Decisions pending, opportunities to evaluate, things to circle back on.
 
 ---
 
+## [ ] Agent Ranking — Register + Verify + List
+- **Added:** 2026-06-16
+- **Source:** Agent Ranking + xPay partnership announcement
+- **Link:** https://app.agentranking.io
+- **What:** Agent discovery platform with trust scoring, verified revenue badges, xPay integration, 30+ chain support, MCP server.
+- **Why us:** Free visibility. Trust scoring complements ERC-8004. xPay = monetization path. MCP = data integration.
+- **Action items:**
+  - [ ] Register agents (Agent Kit, working agents)
+  - [ ] Complete verification process
+  - [ ] Connect xPay for payments
+  - [ ] Monitor API for AAE integration
+- **Status:** QUEUED — Jordan to execute tomorrow (Jun 17)
+- **Effort:** Quick win — register, verify, list. No heavy lift.
+
+---
+
 ## [ ] WhatsApp Business Cloud — Customer Service Channel
 - **Added:** 2026-06-12
 - **Source:** Nous Research dropped WhatsApp Business Cloud integration for Hermes Agent
