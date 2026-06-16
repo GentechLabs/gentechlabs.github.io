@@ -168,7 +168,7 @@
         /* Curve canvas */
         .lp-curve-canvas {
             width: 100%;
-            height: 280px;
+            height: 220px;
             position: relative;
         }
 
@@ -489,8 +489,8 @@
     <script src="../assets/dashboard-engine.js?v=2.0"></script>
     <script>
         // ══════════════════════════════════════════════
-        // LP CURVE RENDERER
-        // Draws a bell curve shape that shifts left/right with price
+        // LP CURVE RENDERER — Bar Chart Style
+        // Colored bins like LFJ: green=USDC, purple=AVAX
         // ══════════════════════════════════════════════
 
         class LPCurveRenderer {
@@ -498,43 +498,39 @@
                 this.container = container;
                 this.data = data;
                 this.options = {
-                    height: 280,
-                    padding: { top: 30, right: 20, bottom: 40, left: 20 },
-                    curveColor: '#e84142',
-                    curveGlow: 'rgba(232, 65, 66, 0.3)',
-                    priceColor: '#e84142',
-                    gridColor: 'rgba(255,255,255,0.05)',
-                    animDuration: 800,
+                    height: 220,
+                    padding: { top: 20, right: 12, bottom: 36, left: 12 },
+                    barRadius: 3,
+                    colors: {
+                        usdc: '#22c55e',       // green — USDC side
+                        usdcGlow: 'rgba(34,197,94,0.25)',
+                        avax: '#a855f7',       // purple — AVAX side
+                        avaxGlow: 'rgba(168,85,247,0.25)',
+                        active: '#f472b6',     // pink — active/rewarded bin
+                        activeGlow: 'rgba(244,114,182,0.4)',
+                        priceLine: '#ef4444',  // red — current price marker
+                        grid: 'rgba(255,255,255,0.06)',
+                        label: '#9ca3af',
+                    },
+                    animDuration: 600,
                     ...options
                 };
                 this.canvas = null;
                 this.ctx = null;
-                this.priceMarker = null;
+                this.animProgress = 0;
                 this.animFrame = null;
-                this.currentPrice = data.currentPrice;
-                this.targetPrice = data.currentPrice;
                 this.init();
             }
 
             init() {
-                // Create canvas
                 this.canvas = document.createElement('canvas');
                 this.canvas.style.width = '100%';
                 this.canvas.style.height = this.options.height + 'px';
+                this.canvas.style.borderRadius = '8px';
                 this.container.appendChild(this.canvas);
-
-                // Create price marker
-                this.priceMarker = document.createElement('div');
-                this.priceMarker.className = 'price-marker';
-                this.priceMarker.setAttribute('data-price', this.currentPrice.toFixed(5));
-                this.container.appendChild(this.priceMarker);
-
-                // Setup canvas
                 this.resize();
                 window.addEventListener('resize', () => this.resize());
-
-                // Start animation loop
-                this.animate();
+                this.animateIn();
             }
 
             resize() {
@@ -546,7 +542,7 @@
                 this.ctx.scale(dpr, dpr);
                 this.width = rect.width;
                 this.height = this.options.height;
-                this.draw();
+                this.draw(1);
             }
 
             priceToX(price) {
@@ -556,118 +552,145 @@
                 return padding.left + ((price - rangeMin) / (rangeMax - rangeMin)) * plotWidth;
             }
 
-            depthToY(depth) {
-                const { padding } = this.options;
-                const plotHeight = this.height - padding.top - padding.bottom;
-                return padding.top + plotHeight * (1 - depth);
-            }
-
-            draw() {
+            draw(progress = 1) {
                 const { ctx, width, height } = this;
-                const { padding, curveColor, curveGlow, gridColor } = this.options;
-                const { bins, rangeMin, rangeMax } = this.data;
+                const { padding, colors, barRadius } = this.options;
+                const { bins, rangeMin, rangeMax, currentPrice } = this.data;
+                const plotHeight = height - padding.top - padding.bottom;
 
-                // Clear
                 ctx.clearRect(0, 0, width, height);
 
-                // Draw grid lines
-                ctx.strokeStyle = gridColor;
+                if (!bins || bins.length === 0) return;
+
+                // Grid lines
+                ctx.strokeStyle = colors.grid;
                 ctx.lineWidth = 1;
-                for (let i = 0; i <= 4; i++) {
-                    const y = padding.top + (height - padding.top - padding.bottom) * (i / 4);
+                for (let i = 0; i <= 3; i++) {
+                    const y = padding.top + plotHeight * (i / 3);
                     ctx.beginPath();
                     ctx.moveTo(padding.left, y);
                     ctx.lineTo(width - padding.right, y);
                     ctx.stroke();
                 }
 
-                // Draw price axis labels
-                ctx.fillStyle = '#6b7280';
-                ctx.font = '11px Inter, sans-serif';
+                // Price axis labels (6 evenly spaced)
+                ctx.fillStyle = colors.label;
+                ctx.font = '10px Inter, system-ui, sans-serif';
                 ctx.textAlign = 'center';
-                const priceSteps = 5;
-                for (let i = 0; i <= priceSteps; i++) {
-                    const price = rangeMin + (rangeMax - rangeMin) * (i / priceSteps);
-                    const x = this.priceToX(price);
-                    ctx.fillText(price.toFixed(2), x, height - 10);
+                const labelCount = Math.min(6, bins.length);
+                for (let i = 0; i < labelCount; i++) {
+                    const bin = bins[Math.floor(i * (bins.length - 1) / (labelCount - 1))];
+                    const x = this.priceToX(bin.price);
+                    ctx.fillText('$' + bin.price.toFixed(2), x, height - 8);
                 }
 
-                // Draw curve
-                if (bins.length < 2) return;
+                // Find closest bin to current price for active marker
+                let activeIdx = 0;
+                let minDist = Infinity;
+                bins.forEach((b, i) => {
+                    const d = Math.abs(b.price - currentPrice);
+                    if (d < minDist) { minDist = d; activeIdx = i; }
+                });
 
-                // Glow layer
-                ctx.save();
-                ctx.shadowColor = curveGlow;
-                ctx.shadowBlur = 20;
-                ctx.beginPath();
-                ctx.moveTo(this.priceToX(bins[0].price), this.depthToY(0));
+                // Draw bars
+                const maxDepth = Math.max(...bins.map(b => b.depth), 0.01);
+                const binWidth = (width - padding.left - padding.right) / bins.length;
+                const gap = Math.max(1, binWidth * 0.15);
+                const barW = binWidth - gap;
+
                 for (let i = 0; i < bins.length; i++) {
-                    const x = this.priceToX(bins[i].price);
-                    const y = this.depthToY(bins[i].depth);
-                    if (i === 0) {
-                        ctx.lineTo(x, y);
+                    const bin = bins[i];
+                    const x = padding.left + i * binWidth + gap / 2;
+                    const normalizedDepth = (bin.depth / maxDepth) * progress;
+                    const barH = normalizedDepth * plotHeight * 0.92;
+                    const y = padding.top + plotHeight - barH;
+
+                    // Color: left of active = USDC (green), right = AVAX (purple)
+                    // Active bin = pink
+                    let fillColor, glowColor;
+                    if (i === activeIdx) {
+                        fillColor = colors.active;
+                        glowColor = colors.activeGlow;
+                    } else if (bin.price <= currentPrice) {
+                        fillColor = colors.usdc;
+                        glowColor = colors.usdcGlow;
                     } else {
-                        // Smooth curve using quadratic bezier
-                        const prevX = this.priceToX(bins[i-1].price);
-                        const prevY = this.depthToY(bins[i-1].depth);
-                        const cpX = (prevX + x) / 2;
-                        ctx.quadraticCurveTo(prevX, prevY, cpX, (prevY + y) / 2);
+                        fillColor = colors.avax;
+                        glowColor = colors.avaxGlow;
                     }
+
+                    // Glow under bar
+                    ctx.save();
+                    ctx.shadowColor = glowColor;
+                    ctx.shadowBlur = 8;
+
+                    // Rounded rect
+                    ctx.beginPath();
+                    ctx.roundRect(x, y, barW, barH, [barRadius, barRadius, 0, 0]);
+                    ctx.fillStyle = fillColor;
+                    ctx.fill();
+                    ctx.restore();
                 }
-                const lastBin = bins[bins.length - 1];
-                ctx.lineTo(this.priceToX(lastBin.price), this.depthToY(0));
-                ctx.closePath();
 
-                // Fill with gradient
-                const gradient = ctx.createLinearGradient(0, padding.top, 0, height - padding.bottom);
-                gradient.addColorStop(0, 'rgba(232, 65, 66, 0.4)');
-                gradient.addColorStop(0.5, 'rgba(232, 65, 66, 0.15)');
-                gradient.addColorStop(1, 'rgba(232, 65, 66, 0.02)');
-                ctx.fillStyle = gradient;
-                ctx.fill();
-
-                // Stroke
-                ctx.strokeStyle = curveColor;
-                ctx.lineWidth = 2.5;
+                // Current price line
+                const priceX = this.priceToX(currentPrice);
+                ctx.save();
+                ctx.setLineDash([4, 3]);
+                ctx.strokeStyle = colors.priceLine;
+                ctx.lineWidth = 1.5;
+                ctx.beginPath();
+                ctx.moveTo(priceX, padding.top);
+                ctx.lineTo(priceX, padding.top + plotHeight);
                 ctx.stroke();
                 ctx.restore();
 
-                // Draw current price indicator on curve
-                const priceX = this.priceToX(this.currentPrice);
-                const closestBin = bins.reduce((prev, curr) => 
-                    Math.abs(curr.price - this.currentPrice) < Math.abs(prev.price - this.currentPrice) ? curr : prev
-                );
-                const priceY = this.depthToY(closestBin.depth);
+                // Price label at top
+                ctx.fillStyle = colors.priceLine;
+                ctx.font = 'bold 10px Inter, system-ui, sans-serif';
+                ctx.textAlign = 'center';
+                ctx.fillText('$' + currentPrice.toFixed(2), priceX, padding.top - 4);
 
-                // Price dot
-                ctx.beginPath();
-                ctx.arc(priceX, priceY, 5, 0, Math.PI * 2);
-                ctx.fillStyle = curveColor;
-                ctx.fill();
-                ctx.strokeStyle = '#0a0e17';
-                ctx.lineWidth = 2;
-                ctx.stroke();
-
-                // Update price marker position
-                if (this.priceMarker) {
-                    const markerLeft = (priceX / this.width) * 100;
-                    this.priceMarker.style.left = `calc(${markerLeft}% - 1px)`;
-                    this.priceMarker.setAttribute('data-price', this.currentPrice.toFixed(5));
-                }
+                // Legend
+                const legendY = height - 2;
+                ctx.font = '9px Inter, system-ui, sans-serif';
+                ctx.textAlign = 'left';
+                // USDC dot + label
+                ctx.fillStyle = colors.usdc;
+                ctx.beginPath(); ctx.arc(padding.left + 4, legendY - 3, 3, 0, Math.PI * 2); ctx.fill();
+                ctx.fillStyle = colors.label;
+                ctx.fillText('USDC', padding.left + 12, legendY);
+                // AVAX dot + label
+                ctx.fillStyle = colors.avax;
+                ctx.beginPath(); ctx.arc(padding.left + 54, legendY - 3, 3, 0, Math.PI * 2); ctx.fill();
+                ctx.fillStyle = colors.label;
+                ctx.fillText('AVAX', padding.left + 62, legendY);
+                // Active dot + label
+                ctx.fillStyle = colors.active;
+                ctx.beginPath(); ctx.arc(padding.left + 104, legendY - 3, 3, 0, Math.PI * 2); ctx.fill();
+                ctx.fillStyle = colors.label;
+                ctx.fillText('Active', padding.left + 112, legendY);
             }
 
-            animate() {
-                // Smooth price movement
-                const diff = this.targetPrice - this.currentPrice;
-                if (Math.abs(diff) > 0.0001) {
-                    this.currentPrice += diff * 0.08;
-                    this.draw();
-                }
-                this.animFrame = requestAnimationFrame(() => this.animate());
+            animateIn() {
+                const start = performance.now();
+                const dur = this.options.animDuration;
+                const tick = (now) => {
+                    const elapsed = now - start;
+                    this.animProgress = Math.min(1, elapsed / dur);
+                    // Ease out cubic
+                    const t = 1 - Math.pow(1 - this.animProgress, 3);
+                    this.draw(t);
+                    if (this.animProgress < 1) {
+                        this.animFrame = requestAnimationFrame(tick);
+                    }
+                };
+                this.animFrame = requestAnimationFrame(tick);
             }
 
-            updatePrice(newPrice) {
-                this.targetPrice = newPrice;
+            updateData(newData) {
+                this.data = newData;
+                this.animProgress = 0;
+                this.animateIn();
             }
 
             destroy() {
@@ -1595,6 +1618,10 @@
                     }
                     deepMerge(defiDash.data, liveData);
                     defiDash.render();
+                    // Update curve with new data
+                    if (lpCurve && liveData.curveData) {
+                        lpCurve.updateData(liveData.curveData);
+                    }
                     console.log('[DeFi] Live refresh at', new Date().toLocaleTimeString(), '- Price:', liveData.hero?.currentPrice);
                 }
             } catch (e) {
