@@ -1472,10 +1472,10 @@
 
         // Initialize: load defi-data.json (source of truth for range), then overlay live price
         (async () => {
-            const templateRes = await fetch('defi-template.json?' + Date.now());
+            const templateRes = await fetch('defi-template.json?' + Date.now(), { cache: 'no-store' });
             const template = await templateRes.json();
 
-            const dataRes = await fetch('defi-data.json?' + Date.now());
+            const dataRes = await fetch('defi-data.json?' + Date.now(), { cache: 'no-store' });
             let data = await dataRes.json();
 
             // Overlay live price from DexScreener (price + volume/tvl only)
