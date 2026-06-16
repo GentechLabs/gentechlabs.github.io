@@ -1,14 +1,14 @@
 # 🏆 Active Hackathon Tracker
 
-Last updated: 2026-06-14
+Last updated: 2026-06-16
 
 ## Priority Queue (Active)
 
 | # | Hackathon | Deadline | Prize | Status | Notes |
 |---|-----------|----------|-------|--------|-------|
-| 🥇 | Mantle Turing Test | Jun 15 (TOMORROW) | $120K ($50K grand) | ⚠️ 🔧 DEPLOYING | 14/14 tests. Byreal CLI installed. Need Sepolia faucet drip. Track: Agentic Wallets & Economy. |
-| 🥈 | BNB HACK: AI Trading Agent | Jun 24 (10 days) | $36K | 📝 REGISTERING | ERC-8004 + ERC-8183 + Q402 gasless payments. Partners: BNB + CoinMarketCap + Trust Wallet. |
-| 🥉 | Casper Agentic Buildathon | Jun 30 (16 days) | $150K | 🟡 QUEUE | Agentic AI + x402 + DeFi on Casper (Rust/WebAssembly). First WASM chain with live x402. |
+| 🥇 | BNB HACK: AI Trading Agent | Jun 24 (8 days) | $36K | 📝 REGISTERING | ERC-8004 + ERC-8183 + Q402 gasless payments. Partners: BNB + CoinMarketCap + Trust Wallet. |
+| 🥈 | Casper Agentic Buildathon | Jun 30 (14 days) | $150K | 🟡 QUEUE | Agentic AI + x402 + DeFi on Casper (Rust/WebAssembly). First WASM chain with live x402. |
+| 🥉 | Lepton Agents | Jun 29 (13 days) | TBD | 🟡 QUEUE | Cookbook Nanopay, AgentBridge needs Base Sepolia deploy. |
 
 ## Submitted (Complete)
 
@@ -19,6 +19,7 @@ Last updated: 2026-06-14
 | Somnia Agentathon | Jun 10 | Agent Catcher | ✅ SUBMITTED |
 | Encode Club (Oracle Agent) | Jun 10 | Oracle Agent | ✅ SUBMITTED |
 | Arbitrum Open House | Jun 14 | AgentForge | 🟢 SHIPPED (submit Jun 14) |
+| Mantle Turing Test | Jun 15 | Agent Insurance | ✅ PASSED (deadline Jun 15) |
 
 ## Past / Not Pursuing
 
@@ -66,14 +67,16 @@ Last updated: 2026-06-14
 - ~~**Google for Startups AI Agents Challenge**: Jun 5 — $90K~~ ✅ PASSED Jun 5.
 - ~~**Somnia**: Jun 11 — Needs testnet deploy~~ ✅ PASSED (deadline missed)
 - ~~**Dev3pack Bridge Accelerator**: Jun 12~~ ❌ CANCELLED
-- ⚠️ **Arbitrum Open House submission**: Jun 14 — **TODAY**
-- ⚠️ **FIND EVIL!**: Jun 15 — $22K, cybersecurity + AI, MCP. **TOMORROW**
-- ⚠️ **Mantle Turing Test Phase II**: Jun 15 — REGISTER NEEDED (DoraHacks). **TOMORROW**
-- **Encode Vibe Coding Hackathon**: Jun 19 — 3-day sprint (5 days)
-- **Sui Overflow**: Jun 21 — Jordan to verify registration (7 days)
-- **Encode Solana + Arc Bootcamps**: Jun 22 start — SIGN UP NEEDED (8 days)
-- **Casper Agentic Buildathon**: ~Jun 30 — $150K, agentic AI + x402 (16 days)
-- **Qwen Cloud Global AI Hackathon**: Jul 9 — $70K+, Agent Society track (25 days)
+- ~~**Arbitrum Open House submission**: Jun 14~~ ✅ SHIPPED Jun 14.
+- ~~**Mantle Turing Test Phase II**: Jun 15~~ ✅ PASSED Jun 15.
+- ~~**FIND EVIL!**: Jun 15 — $22K, cybersecurity + AI, MCP.~~ ✅ PASSED Jun 15.
+- **Encode Vibe Coding Hackathon**: Jun 19 — 3-day sprint (3 days)
+- **Sui Overflow**: Jun 21 — Token Risk Oracle (5 days)
+- **Encode Solana + Arc Bootcamps**: Jun 22 start — SIGN UP NEEDED (6 days)
+- **BNB Agent SDK**: Jun 24 — AI Agent Identity + Commerce (8 days)
+- **Lepton Agents**: Jun 29 — Cookbook Nanopay (13 days)
+- **Casper Agentic Buildathon**: ~Jun 30 — $150K, agentic AI + x402 (14 days)
+- **Qwen Cloud Global AI Hackathon**: Jul 9 — $70K+, Agent Society track (23 days)
 
 ## Priority Order (per Jordan directive, Jun 4)
 1. ~~**Agora Agents**~~ — ✅ SUBMITTED May 26.
@@ -81,14 +84,14 @@ Last updated: 2026-06-14
 3. ~~**Bags FM**~~ — ✅ PASSED Jun 1. Rewards traction focus.
 4. ~~**Google Cloud Rapid Agent**~~ — ❌ NOT PURSUING. Enterprise lock-in, low prize-per-track, not our stack.
 5. **Somnia** — ✅ SUBMITTED Jun 10. Deadline Jun 11. Agent Catcher deployed.
-6. **Arbitrum Open House** — ⚠️ 🟢 DEPLOY. Deadline Jun 14 (TODAY). AgentForge ready.
-7. **Mantle Turing Test** — ⚠️ 🟡 REGISTER + DEPLOY. Deadline Jun 15 (TOMORROW). Contracts built. Register on DoraHacks.
+6. ~~**Arbitrum Open House**~~ — ✅ SHIPPED Jun 14. AgentForge deployed.
+7. ~~**Mantle Turing Test**~~ — ✅ PASSED Jun 15. Phase II deadline passed.
 8. ~~**1752vc Lightning Round VIII**~~ — ✅ PASSED Jun 4.
 9. ~~**Google for Startups AI Agents Challenge**~~ — ✅ PASSED Jun 5. $90K.
 10. ~~**Dev3pack Bridge Accelerator**~~ — ❌ CANCELLED. Jun 12.
-11. **BNB Agent SDK** — 🟡 QUEUED. AI Agent Identity + Commerce. Deadline Jun 24 (10 days).
+11. **BNB Agent SDK** — 🟡 QUEUED. AI Agent Identity + Commerce. Deadline Jun 24 (8 days).
 12. **Qwen Cloud AI Hackathon** — 🟡 QUEUED. Tracks: MemoryAgent, AI Showrunner, Agent Society. Link: https://qwencloud-hackathon.devpost.com/
-13. **Casper Agentic Buildathon** — 🟡 NEW. $150K. Agentic AI + x402 + DeFi on Casper (Rust). 16 days left. Link: https://dorahacks.io/hackathon/casper-agentic-buildathon
+13. **Casper Agentic Buildathon** — 🟡 NEW. $150K. Agentic AI + x402 + DeFi on Casper (Rust). 14 days left. Link: https://dorahacks.io/hackathon/casper-agentic-buildathon
 14. **The Pitch by Deel** — 🟡 QUEUE. $15M global startup comp. $50K regional, $1M global. Link: https://www.deel.com/the-pitch-by-deel/
 
 ## Learning Track (Jordan directive, Jun 4 — fast-track multi-chain)

@@ -1,6 +1,6 @@
 # 📋 GenTech Status Board
 
-**Last updated:** 2026-06-15 (nightly sweep)
+**Last updated:** 2026-06-16 (nightly sweep)
 **Updated by:** Gentech
 
 > Jordan: This is your single file to check. Open it, know everything.
@@ -36,9 +36,9 @@
 - **AI Agentic Category:** $15K buildathon + $20K founder house
 - **Fit:** AgentForge — 241 lines, 10 tests
 
-### ⚠️ Mantle Turing Test 2026 ($120K+)
-- **Status:** ⚠️ DEADLINE TODAY — Phase II
-- **Due:** Jun 15 (0 days) — Register on DoraHacks + deploy Mantle Sepolia
+### ✅ Mantle Turing Test 2026 ($120K+) — PASSED
+- **Status:** ✅ PASSED (deadline Jun 15)
+- **Due:** Jun 15 (passed)
 - **Tracks:** AI Trading & Strategy, Agentic Economy
 
 ### ✅ Swarms ACM ($30K) — PUBLISHED
@@ -76,12 +76,16 @@
 - ~~**Jun 11:** Google Cloud Rapid Agent — $60K~~ ✅ NOT PURSUING (enterprise lock-in)
 - ~~**Jun 11:** Somnia Agentathon~~ ✅ PASSED (deadline missed)
 - ~~**Jun 12:** Dev3pack Bridge Accelerator~~ ❌ CANCELLED
-- ~~**Jun 14:** Arbitrum Open House submission~~ ✅ PASSED
-- ⚠️ **Jun 15:** Mantle Turing Test Phase II — **⚠️ DEADLINE TODAY**
-- ⚠️ **Jun 15:** FIND EVIL! — $22K, cybersecurity + AI, MCP — **⚠️ DEADLINE TODAY**
-- **Jun 19:** Encode Vibe Coding Hackathon — 3-day sprint (4 days)
-- **Jun 21:** Sui Overflow — Jordan to verify registration (6 days)
-- **Jun 22:** Encode Solana + Arc Bootcamps — sign up needed (7 days)
+- ~~**Jun 14:** Arbitrum Open House submission~~ ✅ SHIPPED
+- ~~**Jun 15:** Mantle Turing Test Phase II~~ ✅ PASSED
+- ~~**Jun 15:** FIND EVIL! — $22K, cybersecurity + AI, MCP~~ ✅ PASSED
+- **Jun 19:** Encode Vibe Coding Hackathon — 3-day sprint (3 days)
+- **Jun 21:** Sui Overflow — Token Risk Oracle (5 days)
+- **Jun 22:** Encode Solana + Arc Bootcamps — sign up needed (6 days)
+- **Jun 24:** BNB Agent SDK — AI Agent Identity + Commerce (8 days)
+- **Jun 29:** Lepton Agents — Cookbook Nanopay (13 days)
+- **Jun 30:** Casper Agentic Buildathon — $150K, agentic AI + x402 (14 days)
+- **Jul 9:** Qwen Cloud Global AI Hackathon — $70K+, Agent Society track (23 days)
 - **Rolling:** Alliance AI application — submit at https://alliance.xyz/apply
 
 ---
@@ -90,8 +94,8 @@
 
 - **Approval Queue:** ✅ Clean — no pending items
 - **Considerations:** ✅ Active items current
-- **Working Memory:** ✅ Updated June 15
-- **Status Board:** ✅ Updated June 15
+- **Working Memory:** ✅ Updated June 16
+- **Status Board:** ✅ Updated June 16
 
 ---
 

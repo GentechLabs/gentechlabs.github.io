@@ -1,6 +1,6 @@
 # 📋 Jordan Queue — Items Needing Jordan's Action
 
-*Updated: June 15, 2026*
+*Updated: June 16, 2026*
 
 ## 🔥 Active
 - [ ] **Buy PH trip flights (Aug/Sep 2026)** — Air Canada $600 CVG→Manila one-way. Book when ready.

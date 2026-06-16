@@ -1,10 +1,10 @@
 ---
-date: 2026-06-15
+date: 2026-06-16
 purpose: Working memory — current sprint state, blockers, priorities
-updated: 2026-06-15
+updated: 2026-06-16
 ---
 
-# GenTech Working Memory — Updated 2026-06-15 (Nightly Sweep)
+# GenTech Working Memory — Updated 2026-06-16 (Nightly Sweep)
 
 ## Active Sprint — Week of Jun 14–21, 2026
 
@@ -14,9 +14,9 @@ updated: 2026-06-15
 - **GenTech Journal** — Jordan wants the real story of building GenTech. IN PROGRESS.
 
 ### Priority Hackathons
-- ⚠️ **Mantle Turing Test** — ⚠️ DEADLINE TODAY (Jun 15). Agent Insurance pushed. Needs faucet + deploy.
-- ⚠️ **BNB Hack** — Due Jun 21 (6 days). CMC Strategy Engine 21/21 tests, ready to submit.
-- 🔵 **Lepton Agents** — Due Jun 29 (14 days). Cookbook Nanopay, AgentBridge needs Base Sepolia deploy.
+- ✅ **Mantle Turing Test** — PASSED (Jun 15). Phase II deadline passed.
+- ⚠️ **BNB Hack** — Due Jun 24 (8 days). CMC Strategy Engine 21/21 tests, ready to submit.
+- 🔵 **Lepton Agents** — Due Jun 29 (13 days). Cookbook Nanopay, AgentBridge needs Base Sepolia deploy.
 
 ### System State
 - **Portfolio** — ✅ Rebuilt with 6 AAE-focused projects. Live at protojay4789.github.io.
@@ -41,10 +41,10 @@ updated: 2026-06-15
 
 ## Key Dates
 
-- ⚠️ **Jun 15:** Mantle Turing Test Phase II — ⚠️ DEADLINE TODAY
-- ⚠️ **Jun 21:** BNB Hack deadline (6 days)
-- 🔵 **Jun 29:** Lepton Agents deadline (14 days)
-- **Jul 9:** Qwen Cloud AI Hackathon (24 days)
+- ✅ **Jun 15:** Mantle Turing Test Phase II — PASSED
+- ⚠️ **Jun 24:** BNB Hack deadline (8 days)
+- 🔵 **Jun 29:** Lepton Agents deadline (13 days)
+- **Jul 9:** Qwen Cloud AI Hackathon (23 days)
 - **Aug/Sep 2026:** Philippines birthday trip
 
 ---
@@ -59,4 +59,4 @@ updated: 2026-06-15
 
 ---
 
-*Last refreshed: 2026-06-15 nightly sweep. This file is Jordan's quick-reference for current state.*
+*Last refreshed: 2026-06-16 nightly sweep. This file is Jordan's quick-reference for current state.*
