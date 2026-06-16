@@ -216,10 +216,18 @@ async function main() {
   const rangeWidth = rangeHigh - rangeLow;
 
   // Estimate daily fees from 24h volume * fee tier * user's share of pool
+  // Shape multiplier calibrates for concentrated vs. broad liquidity:
+  // LFJ V2.1 fees go only to active bins; concentrated shapes earn a higher share.
   const feeBps = pos.binStep || 10; // V2.1: fee = binStep in bps
   const poolTvl = px?.liquidity || (pos.totalWavax * avaxPrice + pos.totalUsdc) / 0.0001;
+  const shapeMultiplier = {
+    curve: 1.0,
+    bidask: 3.2,
+    'bid-ask': 3.2,
+    spot: 1.5,
+  }[(pos.shape || 'bid-ask').toLowerCase()] || 1.0;
   const estimatedDailyFees = poolTvl > 0 && px?.volume24h
-    ? px.volume24h * (feeBps / 10000) * (lpValue / poolTvl)
+    ? px.volume24h * (feeBps / 10000) * (lpValue / poolTvl) * shapeMultiplier
     : 0.16;
   const dailyFees = +estimatedDailyFees.toFixed(3);
 
