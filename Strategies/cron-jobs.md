@@ -149,7 +149,7 @@
 
 | Job ID | Name | Schedule | Status | Delivers To |
 |---|---|---|---|---|
-| `4cb4f1e92116` | On-Chain LP Position Reader — Live Data | `0 */3 * * *` | ✅ Active | local |
+| `4cb4f1e92116` | On-Chain LP Position Reader — Live Data | `*/10 6-23 * * *` | ✅ Active | local |
 | `2600f8fc0f0e` | AAE DeFi Milestone + LP Monitor (10min) | `*/10 6-23 * * *` | ✅ Active | Strategies (-1002916759037) |
 
 ### Reader (`4cb4f1e92116`)
