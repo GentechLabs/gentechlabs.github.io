@@ -66,8 +66,6 @@
     "efficiency": 50,
     "efficiencyZone": "Inner",
     "recommendedAction": "Hold",
-    "dcaType": "Moderate DCA",
-    "dcaDetails": "Moderate DCA — price in range",
     "rebalanceTrigger": "Price exits $6.65-$6.92 range",
     "compoundThreshold": 50,
     "cumulativeFees": 0.6073,
@@ -93,7 +91,7 @@
     "tiers": [
       {
         "tier": 1,
-        "icon": "🔭",
+        "icon": "\ud83d\udd2d",
         "label": "Scout",
         "target": 5,
         "unlocks": "Entry strategies (CURVE)",
@@ -101,7 +99,7 @@
       },
       {
         "tier": 2,
-        "icon": "⚔️",
+        "icon": "\u2694\ufe0f",
         "label": "Raider",
         "target": 20,
         "unlocks": "SPOT + BIDIRECTIONAL shapes",
@@ -109,7 +107,7 @@
       },
       {
         "tier": 3,
-        "icon": "👑",
+        "icon": "\ud83d\udc51",
         "label": "Warlord",
         "target": 50,
         "unlocks": "Multi-pool positions",
@@ -117,7 +115,7 @@
       },
       {
         "tier": 4,
-        "icon": "🏰",
+        "icon": "\ud83c\udff0",
         "label": "Sovereign",
         "target": 100,
         "unlocks": "Custom strategy creation + mentorship",
@@ -334,8 +332,8 @@
   },
   "walletBalances": {
     "avax": 0.0965898362653247,
-    "wavax": 6.06671055059e-7,
-    "usdc": 0.000012,
+    "wavax": 6.06671055059e-07,
+    "usdc": 1.2e-05,
     "liquidUsd": 0.66
   },
   "supportResistance": {
@@ -388,14 +386,7 @@
     "volatility": 0.1,
     "trend": "neutral",
     "suggestions": [
-      {
-        "icon": "✅",
-        "title": "Position Healthy",
-        "description": "Price is in range and efficiency is good. No action needed.",
-        "priority": "low",
-        "impact": "None",
-        "action": null
-      }
+      {}
     ]
   },
   "transactions": [
@@ -415,5 +406,195 @@
       "usd": "45.90",
       "status": "In Range"
     }
-  ]
+  ],
+  "marketScenarios": {
+    "currentConditions": {
+      "price": 6.88,
+      "trend": "neutral",
+      "change24h": 0.7,
+      "rangePosition": "86% into range",
+      "volatility": "low",
+      "dailyFees": 0.575,
+      "positionUsd": 45.9
+    },
+    "scenarios": [
+      {
+        "id": "knife-down",
+        "name": "\ud83d\udd2a Knife Down",
+        "subtitle": "Sharp selloff incoming",
+        "trigger": "BTC drops >5%, AVAX correlation 0.8+",
+        "probability": "medium",
+        "ilRisk": "critical",
+        "action": "EXIT",
+        "actionDetail": "Withdraw before price crashes through $6.65. A 15% drop = ~0.3% IL.",
+        "timeframe": "Act within 1-2 hours",
+        "reentry": "Re-enter at $5.50-$5.85",
+        "color": "#ef4444",
+        "icon": "\ud83d\udd34"
+      },
+      {
+        "id": "slow-bleed",
+        "name": "\ud83d\udcc9 Slow Bleed",
+        "subtitle": "Gradual decline",
+        "trigger": "Macro headwinds, risk-off",
+        "probability": "medium",
+        "ilRisk": "high",
+        "action": "TIGHTEN RANGE",
+        "actionDetail": "Narrow to $6.54-$7.02. Higher fees in tighter band.",
+        "timeframe": "Rebalance in 24-48h",
+        "reentry": "Widen once stable",
+        "color": "#f59e0b",
+        "icon": "\ud83d\udfe1"
+      },
+      {
+        "id": "range-bound",
+        "name": "\u2194\ufe0f Range Bound",
+        "subtitle": "Price oscillating in range",
+        "trigger": "Low volatility, no catalysts",
+        "probability": "high",
+        "ilRisk": "low",
+        "action": "HOLD & FARM",
+        "actionDetail": "Optimal setup. $0.575/day on $46 = 457.2% APR. Let it ride.",
+        "timeframe": "No action needed",
+        "reentry": "N/A",
+        "color": "#22c55e",
+        "icon": "\ud83d\udfe2"
+      },
+      {
+        "id": "breakout-up",
+        "name": "\ud83d\ude80 Breakout Up",
+        "subtitle": "AVAX pumps hard",
+        "trigger": "BTC rally, AVAX catalyst",
+        "probability": "low",
+        "ilRisk": "medium",
+        "action": "WIDEN RANGE",
+        "actionDetail": "If price breaks $6.92, widen to $6.88-$7.91.",
+        "timeframe": "Rebalance near ${range_max:.2f}",
+        "reentry": "Follow price up",
+        "color": "#3b82f6",
+        "icon": "\ud83d\udd35"
+      },
+      {
+        "id": "flash-crash",
+        "name": "\ud83d\udca5 Flash Crash",
+        "subtitle": "Sudden 10%+ drop",
+        "trigger": "Liquidation cascade, black swan",
+        "probability": "rare",
+        "ilRisk": "critical",
+        "action": "EMERGENCY EXIT",
+        "actionDetail": "Remove liquidity IMMEDIATELY. $46 at max IL risk.",
+        "timeframe": "ACT NOW",
+        "reentry": "Wait 24-48h",
+        "color": "#ff3366",
+        "icon": "\ud83d\udea8"
+      }
+    ],
+    "recommendation": {
+      "currentScenario": "range-bound",
+      "confidence": "high",
+      "summary": "Price at $6.88, stable. Farm fees, set alerts.",
+      "alerts": [
+        {
+          "price": 6.6518,
+          "message": "\u26a0\ufe0f Range low \u2014 consider exit",
+          "type": "danger"
+        },
+        {
+          "price": 6.9162,
+          "message": "\ud83d\udcca Range high \u2014 consider widening",
+          "type": "info"
+        },
+        {
+          "price": 6.19,
+          "message": "\ud83d\udd2a 10% drop \u2014 knife-down",
+          "type": "critical"
+        }
+      ]
+    }
+  },
+  "ilCalculator": {
+    "currentPrice": 6.88,
+    "entryPrice": 6.784,
+    "positionUsd": 45.9,
+    "dailyFees": 0.575,
+    "scenarios": [
+      {
+        "priceChange": -30,
+        "newPrice": 4.816,
+        "impermanentLoss": -1.45,
+        "feeOffset": 8.77,
+        "netImpact": 7.32
+      },
+      {
+        "priceChange": -20,
+        "newPrice": 5.504,
+        "impermanentLoss": -0.54,
+        "feeOffset": 8.77,
+        "netImpact": 8.23
+      },
+      {
+        "priceChange": -15,
+        "newPrice": 5.848,
+        "impermanentLoss": -0.27,
+        "feeOffset": 8.77,
+        "netImpact": 8.49
+      },
+      {
+        "priceChange": -10,
+        "newPrice": 6.192,
+        "impermanentLoss": -0.1,
+        "feeOffset": 8.77,
+        "netImpact": 8.66
+      },
+      {
+        "priceChange": -5,
+        "newPrice": 6.536,
+        "impermanentLoss": -0.02,
+        "feeOffset": 8.77,
+        "netImpact": 8.75
+      },
+      {
+        "priceChange": 0,
+        "newPrice": 6.88,
+        "impermanentLoss": -0.0,
+        "feeOffset": 8.77,
+        "netImpact": 8.77
+      },
+      {
+        "priceChange": 5,
+        "newPrice": 7.224,
+        "impermanentLoss": -0.05,
+        "feeOffset": 8.77,
+        "netImpact": 8.72
+      },
+      {
+        "priceChange": 10,
+        "newPrice": 7.568,
+        "impermanentLoss": -0.15,
+        "feeOffset": 8.77,
+        "netImpact": 8.62
+      },
+      {
+        "priceChange": 15,
+        "newPrice": 7.912,
+        "impermanentLoss": -0.3,
+        "feeOffset": 8.77,
+        "netImpact": 8.47
+      },
+      {
+        "priceChange": 20,
+        "newPrice": 8.256,
+        "impermanentLoss": -0.48,
+        "feeOffset": 8.77,
+        "netImpact": 8.29
+      },
+      {
+        "priceChange": 30,
+        "newPrice": 8.944,
+        "impermanentLoss": -0.95,
+        "feeOffset": 8.77,
+        "netImpact": 7.82
+      }
+    ]
+  }
 }

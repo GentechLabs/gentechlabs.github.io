@@ -801,6 +801,12 @@
             if (section.customRender === 'supportResistance') {
                 return this.renderSupportResistance(section);
             }
+            if (section.customRender === 'marketScenarios') {
+                return this.renderMarketScenarios(section);
+            }
+            if (section.customRender === 'ilCalculator') {
+                return this.renderIlCalculator(section);
+            }
             return originalRenderCustom.call(this, section);
         };
 
@@ -1105,6 +1111,186 @@
                         <div style="font-size:0.85em; color:var(--text-dim);">${shapeRecommendation.reason}</div>
                         <div style="margin-top:8px; font-size:0.8em; color:var(--text-dim);">
                             <strong>Optimal Range:</strong> $${shapeRecommendation.optimalRange[0].toFixed(2)} – $${shapeRecommendation.optimalRange[1].toFixed(2)}
+                        </div>
+                    </div>
+                </div>
+            `;
+        };
+
+        // Market Scenarios Renderer
+        DashboardEngine.prototype.renderMarketScenarios = function(section) {
+            const data = this.resolveDataSource(section.dataSource);
+            if (!data) return '<p class="empty-state">No scenario data</p>';
+
+            const { currentConditions, scenarios, recommendation } = data;
+
+            const scenarioCards = scenarios.map(s => {
+                const isActive = s.id === recommendation.currentScenario;
+                const probBadge = {high:'🟢 Likely',medium:'🟡 Possible',low:'🔵 Unlikely',rare:'⚪ Rare'}[s.probability] || '';
+                const ilBadge = {low:'🟢 Low',medium:'🟡 Medium',high:'🔴 High',critical:'🚨 Critical'}[s.ilRisk] || '';
+
+                return `
+                    <div style="background:var(--panel-bg); border:1px solid ${isActive ? s.color : 'var(--panel-border)'}; border-radius:var(--radius); padding:18px; ${isActive ? 'box-shadow:0 0 20px '+s.color+'20;' : ''}">
+                        <div style="display:flex; align-items:center; gap:10px; margin-bottom:12px;">
+                            <span style="font-size:1.5em;">${s.icon}</span>
+                            <div style="flex:1;">
+                                <div style="font-weight:700; color:${s.color}; font-size:1.1em;">${s.name}</div>
+                                <div style="font-size:0.8em; color:var(--text-dim);">${s.subtitle}</div>
+                            </div>
+                            ${isActive ? '<div style="padding:4px 10px; background:'+s.color+'20; border:1px solid '+s.color+'40; border-radius:12px; font-size:0.75em; font-weight:700; color:'+s.color+';">ACTIVE</div>' : ''}
+                        </div>
+                        <div style="font-size:0.8em; color:var(--text-dim); margin-bottom:10px;">
+                            <strong>Trigger:</strong> ${s.trigger}
+                        </div>
+                        <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:12px;">
+                            <div style="padding:6px 10px; background:rgba(255,255,255,0.03); border-radius:6px; text-align:center;">
+                                <div style="font-size:0.65em; color:var(--text-dim); text-transform:uppercase;">Probability</div>
+                                <div style="font-size:0.85em; margin-top:2px;">${probBadge}</div>
+                            </div>
+                            <div style="padding:6px 10px; background:rgba(255,255,255,0.03); border-radius:6px; text-align:center;">
+                                <div style="font-size:0.65em; color:var(--text-dim); text-transform:uppercase;">IL Risk</div>
+                                <div style="font-size:0.85em; margin-top:2px;">${ilBadge}</div>
+                            </div>
+                        </div>
+                        <div style="padding:12px; background:${s.color}10; border:1px solid ${s.color}30; border-radius:8px; margin-bottom:10px;">
+                            <div style="font-size:0.65em; color:var(--text-dim); text-transform:uppercase; letter-spacing:1px; margin-bottom:4px;">Action: ${s.action}</div>
+                            <div style="font-size:0.85em; color:var(--text); line-height:1.5;">${s.actionDetail}</div>
+                        </div>
+                        <div style="font-size:0.75em; color:var(--text-dim);">
+                            <div>⏱️ ${s.timeframe}</div>
+                            <div style="margin-top:4px;">🔄 Re-entry: ${s.reentry}</div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            const alertHtml = (recommendation.alerts || []).map(a => `
+                <div style="display:flex; align-items:center; gap:10px; padding:10px 14px; background:${a.type==='critical'?'rgba(255,51,102,0.08)':a.type==='danger'?'rgba(239,68,68,0.08)':'rgba(59,130,246,0.08)'}; border:1px solid ${a.type==='critical'?'rgba(255,51,102,0.3)':a.type==='danger'?'rgba(239,68,68,0.3)':'rgba(59,130,246,0.3)'}; border-radius:8px; margin-bottom:8px;">
+                    <span style="font-weight:700; color:var(--gold); min-width:60px;">$${a.price.toFixed(2)}</span>
+                    <span style="font-size:0.85em; color:var(--text);">${a.message}</span>
+                </div>
+            `).join('');
+
+            return `
+                <div style="background:var(--panel-bg); border:1px solid var(--panel-border); border-radius:var(--radius); padding:20px;">
+                    <!-- Current Status Banner -->
+                    <div style="padding:16px; background:rgba(232,65,66,0.05); border:1px solid rgba(232,65,66,0.2); border-radius:10px; margin-bottom:20px;">
+                        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+                            <div>
+                                <div style="font-size:0.7em; color:var(--text-dim); text-transform:uppercase; letter-spacing:1px;">Current Scenario</div>
+                                <div style="font-size:1.4em; font-weight:700; color:var(--gold);">${recommendation.currentScenario.replace(/-/g,' ').replace(/\b\w/g,l=>l.toUpperCase())}</div>
+                            </div>
+                            <div style="text-align:center;">
+                                <div style="font-size:0.7em; color:var(--text-dim);">Price</div>
+                                <div style="font-size:1.2em; font-weight:700; color:var(--text);">$${currentConditions.price.toFixed(2)}</div>
+                            </div>
+                            <div style="text-align:center;">
+                                <div style="font-size:0.7em; color:var(--text-dim);">Range</div>
+                                <div style="font-size:0.9em; color:var(--text);">${currentConditions.rangePosition}</div>
+                            </div>
+                            <div style="text-align:center;">
+                                <div style="font-size:0.7em; color:var(--text-dim);">Daily Fees</div>
+                                <div style="font-size:0.9em; color:var(--gold);">$${currentConditions.dailyFees.toFixed(3)}</div>
+                            </div>
+                        </div>
+                        <div style="margin-top:10px; font-size:0.85em; color:var(--text-dim);">${recommendation.summary}</div>
+                    </div>
+
+                    <!-- Price Alerts -->
+                    <div style="margin-bottom:20px;">
+                        <div style="font-size:0.7em; color:var(--text-dim); text-transform:uppercase; letter-spacing:1px; margin-bottom:10px;">📍 Price Alerts</div>
+                        ${alertHtml}
+                    </div>
+
+                    <!-- Scenario Cards -->
+                    <div style="font-size:0.7em; color:var(--text-dim); text-transform:uppercase; letter-spacing:1px; margin-bottom:12px;">What To Do In Each Scenario</div>
+                    <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(280px, 1fr)); gap:14px;">
+                        ${scenarioCards}
+                    </div>
+                </div>
+            `;
+        };
+
+        // IL Calculator Renderer
+        DashboardEngine.prototype.renderIlCalculator = function(section) {
+            const data = this.resolveDataSource(section.dataSource);
+            if (!data) return '<p class="empty-state">No IL data</p>';
+
+            const { currentPrice, entryPrice, positionUsd, dailyFees, scenarios } = data;
+
+            const rows = scenarios.map(s => {
+                const ilColor = Math.abs(s.impermanentLoss) < 1 ? 'var(--gold)' :
+                               Math.abs(s.impermanentLoss) < 3 ? '#f59e0b' : 'var(--danger)';
+                const netColor = s.netImpact < 0 ? 'var(--danger)' : 'var(--gold)';
+                const isCurrent = s.priceChange === 0;
+
+                return `
+                    <tr style="background:${isCurrent ? 'rgba(232,65,66,0.08)' : 'transparent'};">
+                        <td style="padding:10px 12px; font-weight:600; color:${s.priceChange >= 0 ? 'var(--gold)' : 'var(--danger)'};">
+                            ${s.priceChange >= 0 ? '+' : ''}${s.priceChange}%
+                        </td>
+                        <td style="padding:10px 12px; color:var(--text);">$${s.newPrice.toFixed(4)}</td>
+                        <td style="padding:10px 12px; color:${ilColor}; font-weight:600;">
+                            ${s.impermanentLoss.toFixed(2)}%
+                        </td>
+                        <td style="padding:10px 12px; color:var(--gold);">
+                            +${s.feeOffset.toFixed(2)}%
+                        </td>
+                        <td style="padding:10px 12px; font-weight:700; color:${netColor};">
+                            ${s.netImpact >= 0 ? '+' : ''}${s.netImpact.toFixed(2)}%
+                            ${isCurrent ? ' 📍' : ''}
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+
+            const weeklyFees = dailyFees * 7;
+            const weeklyFeePct = positionUsd > 0 ? (weeklyFees / positionUsd * 100) : 0;
+
+            return `
+                <div style="background:var(--panel-bg); border:1px solid var(--panel-border); border-radius:var(--radius); padding:20px;">
+                    <!-- Header -->
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; flex-wrap:wrap; gap:12px;">
+                        <div>
+                            <div style="font-size:0.7em; color:var(--text-dim); text-transform:uppercase; letter-spacing:1px;">IL vs Fees</div>
+                            <div style="font-size:1.2em; font-weight:700; color:var(--text);">What Happens If Price Moves?</div>
+                        </div>
+                        <div style="text-align:right;">
+                            <div style="font-size:0.7em; color:var(--text-dim);">Weekly Fee Offset</div>
+                            <div style="font-size:1.1em; font-weight:700; color:var(--gold);">+${weeklyFeePct.toFixed(2)}%</div>
+                        </div>
+                    </div>
+
+                    <!-- Info Box -->
+                    <div style="padding:12px 16px; background:rgba(0,204,255,0.05); border:1px solid rgba(0,204,255,0.2); border-radius:8px; margin-bottom:16px; font-size:0.85em; color:var(--text-dim);">
+                        <strong style="color:var(--accent);">How to read:</strong> If AVAX drops 15%, you lose ~X% to impermanent loss but earn ~Y% in fees over the week. The <strong style="color:var(--gold);">Net Impact</strong> column shows if fees compensate for IL.
+                    </div>
+
+                    <!-- Table -->
+                    <div style="overflow-x:auto;">
+                        <table style="width:100%; border-collapse:collapse; font-size:0.9em;">
+                            <thead>
+                                <tr style="border-bottom:2px solid var(--panel-border);">
+                                    <th style="padding:10px 12px; text-align:left; font-size:0.7em; color:var(--text-dim); text-transform:uppercase; letter-spacing:1px;">Price Move</th>
+                                    <th style="padding:10px 12px; text-align:left; font-size:0.7em; color:var(--text-dim); text-transform:uppercase; letter-spacing:1px;">New Price</th>
+                                    <th style="padding:10px 12px; text-align:left; font-size:0.7em; color:var(--text-dim); text-transform:uppercase; letter-spacing:1px;">IL</th>
+                                    <th style="padding:10px 12px; text-align:left; font-size:0.7em; color:var(--text-dim); text-transform:uppercase; letter-spacing:1px;">Fee Offset (7d)</th>
+                                    <th style="padding:10px 12px; text-align:left; font-size:0.7em; color:var(--text-dim); text-transform:uppercase; letter-spacing:1px;">Net Impact</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${rows}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Breakeven Analysis -->
+                    <div style="margin-top:16px; padding:14px; background:rgba(232,65,66,0.05); border:1px solid rgba(232,65,66,0.2); border-radius:8px;">
+                        <div style="font-size:0.7em; color:var(--text-dim); text-transform:uppercase; letter-spacing:1px; margin-bottom:6px;">💡 Breakeven Rule</div>
+                        <div style="font-size:0.9em; color:var(--text);">
+                            Fees compensate for IL when daily fees > IL per day. At current rate ($${dailyFees.toFixed(3)}/day), you need
+                            <strong style="color:var(--gold);">${positionUsd > 0 ? Math.ceil(dailyFees / (positionUsd * 0.0001) * 100) / 100 : 'N/A'} days</strong>
+                            to offset a 1% IL. Price swings >15% in a day likely won't be compensated by fees alone.
                         </div>
                     </div>
                 </div>
