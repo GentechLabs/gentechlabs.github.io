@@ -650,25 +650,23 @@
                 ctx.textAlign = 'center';
                 ctx.fillText('$' + currentPrice.toFixed(2), priceX, padding.top - 4);
 
-                // Legend
+                // Legend — responsive positioning
                 const legendY = height - 2;
                 ctx.font = '9px Inter, system-ui, sans-serif';
                 ctx.textAlign = 'left';
-                // USDC dot + label
-                ctx.fillStyle = colors.usdc;
-                ctx.beginPath(); ctx.arc(padding.left + 4, legendY - 3, 3, 0, Math.PI * 2); ctx.fill();
-                ctx.fillStyle = colors.label;
-                ctx.fillText('USDC', padding.left + 12, legendY);
-                // AVAX dot + label
-                ctx.fillStyle = colors.avax;
-                ctx.beginPath(); ctx.arc(padding.left + 54, legendY - 3, 3, 0, Math.PI * 2); ctx.fill();
-                ctx.fillStyle = colors.label;
-                ctx.fillText('AVAX', padding.left + 62, legendY);
-                // Active dot + label
-                ctx.fillStyle = colors.active;
-                ctx.beginPath(); ctx.arc(padding.left + 104, legendY - 3, 3, 0, Math.PI * 2); ctx.fill();
-                ctx.fillStyle = colors.label;
-                ctx.fillText('Active', padding.left + 112, legendY);
+                const legendItems = [
+                    { color: colors.usdc, label: 'USDC' },
+                    { color: colors.avax, label: 'AVAX' },
+                    { color: colors.active, label: 'Active' }
+                ];
+                const legendSpacing = Math.max(50, (width - padding.left - padding.right) / legendItems.length);
+                legendItems.forEach((item, i) => {
+                    const lx = padding.left + i * legendSpacing;
+                    ctx.fillStyle = item.color;
+                    ctx.beginPath(); ctx.arc(lx + 4, legendY - 3, 3, 0, Math.PI * 2); ctx.fill();
+                    ctx.fillStyle = colors.label;
+                    ctx.fillText(item.label, lx + 12, legendY);
+                });
             }
 
             animateIn() {
