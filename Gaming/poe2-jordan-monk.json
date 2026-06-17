@@ -34,10 +34,10 @@
       "priority": "Core"
     },
     {
-      "name": "Power Siphon",
-      "type": "Spell — Lightning",
-      "supports": ["Rapid Casting 1"],
-      "role": "Power Charge generator — kills grant charges for Falling Thunder",
+      "name": "Mana Drain",
+      "type": "Utility",
+      "supports": ["Level 7 Wand"],
+      "role": "Mana sustain — keeps skills running during heavy combat",
       "priority": "Core"
     },
     {
@@ -84,11 +84,11 @@
     }
   ],
   "damageLoop": {
-    "description": "Tempest Flurry shocks enemies → Siphoning Strike consumes shock for Power Charges → Power Siphon kills generate more charges → Falling Thunder consumes charges for massive nuke",
+    "description": "Tempest Flurry shocks enemies → Siphoning Strike consumes shock for Power Charges → Mana Drain sustains mana → Falling Thunder consumes charges for massive nuke",
     "steps": [
       "1. Tempest Flurry (fast + leeching) → shock enemies",
       "2. Siphoning Strike → consume shock → Power Charges",
-      "3. Power Siphon → kill → more Power Charges",
+      "3. Mana Drain → sustain mana for heavy casting",
       "4. Falling Thunder → consume charges → massive lightning nuke"
     ]
   },
