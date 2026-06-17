@@ -1525,9 +1525,12 @@
                     }
                     enrichDashboardData(defiDash.data);
                     defiDash.render();
-                    // Update curve with new data
-                    if (lpCurve && freshData.curveData) {
-                        lpCurve.updateData(freshData.curveData);
+                    // Re-create LPCurveRenderer (render() replaces the DOM container)
+                    const curveContainer = document.getElementById('lp-curve-canvas');
+                    if (curveContainer && defiDash.data.curveData) {
+                        if (lpCurve) lpCurve.destroy();
+                        lpCurve = new LPCurveRenderer(curveContainer, defiDash.data.curveData);
+                        window.lpCurve = lpCurve;
                     }
                     console.log('[DeFi] Live refresh at', new Date().toLocaleTimeString(), '- Price:', defiDash.data?.currentPrice);
                 }
