@@ -20,6 +20,17 @@ Decisions pending, opportunities to evaluate, things to circle back on.
 
 ---
 
+## [ ] Vara A2A Hackathon Recap — Watch & Learn
+- **Added:** 2026-06-16
+- **Source:** @VaraNetwork tweet
+- **Link:** https://gear-tech.io/events/vara-a2a-hackathon-recap-with-the-winners
+- **When:** Thursday, June 18, 2026 — 4 PM UTC (Twitter Space)
+- **What:** Winners recap for "AI Agents Build Their Own Economy" hackathon. Builders share how they shipped, what they learned, on-chain agent economy.
+- **Why us:** A2A protocol = agents talking to agents. Our thesis. Worth watching to see what builders actually built.
+- **Status:** QUEUED — Watch recap, take notes, assess integration opportunities.
+
+---
+
 ## [ ] WhatsApp Business Cloud — Customer Service Channel
 - **Added:** 2026-06-12
 - **Source:** Nous Research dropped WhatsApp Business Cloud integration for Hermes Agent
