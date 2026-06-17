@@ -34,7 +34,7 @@
     { "id": "farming", "label": "Farming", "icon": "🌾", "sections": ["hero-efficiency", "market-intel", "support-resistance", "strategy-advisor", "lp-curve"] },
     { "id": "rebalance", "label": "Rebalance", "icon": "🔄", "sections": ["rebalance-suggestions"] },
     { "id": "milestones", "label": "Milestones", "icon": "🏆", "sections": ["fee-milestones", "trajectory"] },
-    { "id": "position", "label": "Position", "icon": "📊", "sections": ["lp-stats", "transactions"] },
+    { "id": "activity", "label": "Activity", "icon": "📋", "sections": ["activity-log", "lp-stats", "transactions"] },
     { "id": "scenarios", "label": "Scenarios", "icon": "🎯", "sections": ["market-scenarios", "il-calculator"] }
   ],
   "sections": [
@@ -92,6 +92,14 @@
       "type": "custom",
       "dataSource": "feeMilestones",
       "customRender": "trajectory"
+    },
+    {
+      "id": "activity-log",
+      "title": "Activity Log",
+      "icon": "📋",
+      "type": "custom",
+      "dataSource": "activityLog",
+      "customRender": "activityLog"
     },
     {
       "id": "lp-stats",

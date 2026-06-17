@@ -807,6 +807,9 @@
             if (section.customRender === 'ilCalculator') {
                 return this.renderIlCalculator(section);
             }
+            if (section.customRender === 'activityLog') {
+                return this.renderActivityLog(section);
+            }
             return originalRenderCustom.call(this, section);
         };
 
@@ -1293,6 +1296,51 @@
                             to offset a 1% IL. Price swings >15% in a day likely won't be compensated by fees alone.
                         </div>
                     </div>
+                </div>
+            `;
+        };
+
+        // Activity Log Renderer
+        DashboardEngine.prototype.renderActivityLog = function(section) {
+            const data = this.resolveDataSource(section.dataSource);
+            if (!data) return '<p class="empty-state">No activity data</p>';
+
+            const { verifications, totalVerifications, lastVerified, dataFreshness } = data;
+
+            const rows = (verifications || []).map(v => `
+                <div style="display:flex; align-items:center; gap:12px; padding:10px 14px; background:rgba(255,255,255,0.02); border-radius:8px; margin-bottom:8px; border-left:3px solid var(--gold);">
+                    <div style="min-width:80px;">
+                        <div style="font-size:0.7em; color:var(--text-dim); text-transform:uppercase;">${v.date}</div>
+                    </div>
+                    <div style="flex:1;">
+                        <div style="font-size:0.85em; color:var(--text); font-weight:500;">${v.type}</div>
+                        <div style="font-size:0.75em; color:var(--text-dim); margin-top:2px;">${v.note}</div>
+                    </div>
+                    <div style="font-size:0.75em; color:var(--gold);">✓ ${v.verifiedBy}</div>
+                </div>
+            `).join('');
+
+            return `
+                <div style="background:var(--panel-bg); border:1px solid var(--panel-border); border-radius:var(--radius); padding:20px;">
+                    <!-- Stats Row -->
+                    <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:12px; margin-bottom:20px;">
+                        <div style="text-align:center; padding:14px; background:rgba(232,65,66,0.05); border:1px solid rgba(232,65,66,0.2); border-radius:10px;">
+                            <div style="font-size:0.65em; color:var(--text-dim); text-transform:uppercase; letter-spacing:1px;">Verifications</div>
+                            <div style="font-size:1.8em; font-weight:700; color:var(--gold); margin-top:4px;">${totalVerifications || 0}</div>
+                        </div>
+                        <div style="text-align:center; padding:14px; background:rgba(255,255,255,0.02); border:1px solid var(--panel-border); border-radius:10px;">
+                            <div style="font-size:0.65em; color:var(--text-dim); text-transform:uppercase; letter-spacing:1px;">Last Verified</div>
+                            <div style="font-size:1.1em; font-weight:600; color:var(--text); margin-top:4px;">${lastVerified || 'Never'}</div>
+                        </div>
+                        <div style="text-align:center; padding:14px; background:rgba(255,255,255,0.02); border:1px solid var(--panel-border); border-radius:10px;">
+                            <div style="font-size:0.65em; color:var(--text-dim); text-transform:uppercase; letter-spacing:1px;">Data Freshness</div>
+                            <div style="font-size:0.85em; color:var(--text-dim); margin-top:4px;">${dataFreshness || 'Unknown'}</div>
+                        </div>
+                    </div>
+
+                    <!-- Verification Log -->
+                    <div style="font-size:0.7em; color:var(--text-dim); text-transform:uppercase; letter-spacing:1px; margin-bottom:10px;">📸 Verification History</div>
+                    ${rows || '<div style="color:var(--text-dim); font-size:0.85em; padding:10px;">No verifications yet</div>'}
                 </div>
             `;
         };
