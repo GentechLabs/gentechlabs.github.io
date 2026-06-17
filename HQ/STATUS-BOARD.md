@@ -1,6 +1,6 @@
 # 📋 GenTech Status Board
 
-**Last updated:** 2026-06-16 (nightly sweep)
+**Last updated:** 2026-06-17 (nightly sweep)
 **Updated by:** Gentech
 
 > Jordan: This is your single file to check. Open it, know everything.
@@ -70,6 +70,13 @@
 ---
 
 ## 🔮 Coming Up
+- ⚠️ **Jun 19:** Encode Vibe Coding Hackathon — 3-day sprint (2 days)
+- ⚠️ **Jun 21:** Sui Overflow — Token Risk Oracle (4 days)
+- **Jun 22:** Encode Solana + Arc Bootcamps — sign up needed (5 days)
+- **Jun 24:** BNB Agent SDK — AI Agent Identity + Commerce (7 days)
+- **Jun 29:** Lepton Agents — Cookbook Nanopay (12 days)
+- **Jun 30:** Casper Agentic Buildathon — $150K, agentic AI + x402 (13 days)
+- **Jul 9:** Qwen Cloud Global AI Hackathon — $70K+, Agent Society track (22 days)
 
 - ~~**Jun 4:** 1752vc Lightning Round VIII — $100K investment~~ ✅ PASSED
 - ~~**Jun 5:** Google for Startups AI Agents Challenge — $90K~~ ✅ PASSED
@@ -79,13 +86,6 @@
 - ~~**Jun 14:** Arbitrum Open House submission~~ ✅ SHIPPED
 - ~~**Jun 15:** Mantle Turing Test Phase II~~ ✅ PASSED
 - ~~**Jun 15:** FIND EVIL! — $22K, cybersecurity + AI, MCP~~ ✅ PASSED
-- **Jun 19:** Encode Vibe Coding Hackathon — 3-day sprint (3 days)
-- **Jun 21:** Sui Overflow — Token Risk Oracle (5 days)
-- **Jun 22:** Encode Solana + Arc Bootcamps — sign up needed (6 days)
-- **Jun 24:** BNB Agent SDK — AI Agent Identity + Commerce (8 days)
-- **Jun 29:** Lepton Agents — Cookbook Nanopay (13 days)
-- **Jun 30:** Casper Agentic Buildathon — $150K, agentic AI + x402 (14 days)
-- **Jul 9:** Qwen Cloud Global AI Hackathon — $70K+, Agent Society track (23 days)
 - **Rolling:** Alliance AI application — submit at https://alliance.xyz/apply
 
 ---
@@ -94,8 +94,8 @@
 
 - **Approval Queue:** ✅ Clean — no pending items
 - **Considerations:** ✅ Active items current
-- **Working Memory:** ✅ Updated June 16
-- **Status Board:** ✅ Updated June 16
+**Working Memory:** ✅ Updated June 17
+**Status Board:** ✅ Updated June 17
 
 ---
 

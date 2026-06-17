@@ -11,6 +11,13 @@
 
 ## Scan Log
 
+### 2026-06-17
+- **15 total roles** on College.xyz (unchanged from 06-16)
+- **3 remote roles** found (ether.fi x2, Wintermute VC) — unchanged
+- **0 new matches** — ether.fi roles already tracked (IDs 31/32)
+- Wintermute VC Intern still partial (pay not listed)
+- No changes to any listings since yesterday
+
 ### 2026-06-16
 - **15 total roles** on College.xyz (up from 12 on 06-15)
 - **3 remote roles** found (ether.fi x2, Wintermute VC) — unchanged

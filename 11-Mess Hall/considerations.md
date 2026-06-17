@@ -85,3 +85,19 @@ Decisions pending, opportunities to evaluate, things to circle back on.
 - **Next:** Reach out to OOBE about integrating AgentBridge (ERC-8004) into their SAP stack.
 
 ---
+
+## [ ] BlockRun DeFi Tools — Test & Verify
+- **Added:** 2026-06-17
+- **Source:** Jordan voice message
+- **What:** Test BlockRun DeFi tools (blockrun_defi, blockrun_dex) now that model routing is live. Wallet needs ~$5 USDC on Base.
+- **Why:** Completes the free/cheap data layer. DeFi tools give protocol TVL, yield pools, token prices — all for $0.001–0.005/call.
+- **Test plan:**
+  - [ ] Fund Base wallet with ~$5 USDC
+  - [ ] Test blockrun_defi (protocols, yields, prices)
+  - [ ] Test blockrun_dex (pair data, volume)
+  - [ ] Verify vs DexScreener/DefiLlama accuracy
+  - [ ] Update model-routing skill with results
+- **Status:** QUEUED — Jordan to fund over the weekend (Jun 20-22)
+- **Blocked on:** Wallet funding
+
+---
