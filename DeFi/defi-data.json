@@ -10,8 +10,8 @@
   "lpPosition": {
     "pair": "AVAX/USDC",
     "feeTier": "10bps",
-    "shape": "bid-ask",
-    "displayShape": "Bid-Ask",
+    "shape": "curve",
+    "displayShape": "Curve",
     "currentPrice": 6.65,
     "rangeMin": 6.5594,
     "rangeMax": 6.759,
@@ -67,7 +67,7 @@
     "efficiencyZone": "Outer",
     "recommendedAction": "Hold",
     "dcaType": "Micro-DCA",
-    "dcaDetails": "Micro DCA — price in range",
+    "dcaDetails": "Micro DCA \u2014 price in range",
     "rebalanceTrigger": "Price exits $6.56-$6.76 range",
     "compoundThreshold": 50,
     "cumulativeFees": 0.0071,
@@ -93,7 +93,7 @@
     "tiers": [
       {
         "tier": 1,
-        "icon": "🔭",
+        "icon": "\ud83d\udd2d",
         "label": "Scout",
         "target": 5,
         "unlocks": "Entry strategies (CURVE)",
@@ -101,7 +101,7 @@
       },
       {
         "tier": 2,
-        "icon": "⚔️",
+        "icon": "\u2694\ufe0f",
         "label": "Raider",
         "target": 20,
         "unlocks": "SPOT + BIDIRECTIONAL shapes",
@@ -109,7 +109,7 @@
       },
       {
         "tier": 3,
-        "icon": "👑",
+        "icon": "\ud83d\udc51",
         "label": "Warlord",
         "target": 50,
         "unlocks": "Multi-pool positions",
@@ -117,7 +117,7 @@
       },
       {
         "tier": 4,
-        "icon": "🏰",
+        "icon": "\ud83c\udff0",
         "label": "Sovereign",
         "target": 100,
         "unlocks": "Custom strategy creation + mentorship",
@@ -289,8 +289,8 @@
   },
   "walletBalances": {
     "avax": 0.09788719244850835,
-    "wavax": 6.06671055092e-7,
-    "usdc": 0.000008,
+    "wavax": 6.06671055092e-07,
+    "usdc": 8e-06,
     "liquidUsd": 0.65
   },
   "supportResistance": {
@@ -344,7 +344,7 @@
     "trend": "bearish",
     "suggestions": [
       {
-        "icon": "⚠️",
+        "icon": "\u26a0\ufe0f",
         "title": "Price Near Edge",
         "description": "Price is near the edge of your range (9% efficiency). Consider narrowing or recentering.",
         "priority": "medium",
@@ -352,7 +352,7 @@
         "action": "Review Range"
       },
       {
-        "icon": "📉",
+        "icon": "\ud83d\udcc9",
         "title": "Bearish Pressure",
         "description": "AVAX is down 24h. Widen range or shift lower to avoid going out of range.",
         "priority": "low",
