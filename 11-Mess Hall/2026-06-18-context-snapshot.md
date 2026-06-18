@@ -1,6 +1,6 @@
 # Context Snapshot — June 18, 2026
 
-**Generated:** 6:08 AM ET (updated from 6:06 AM)
+**Generated:** 6:08 AM ET (updated 2:08 PM ET)
 
 ---
 
@@ -85,25 +85,66 @@
 
 ---
 
+## Session 5: Live Data Support for Rebalancing (Jun 18, 8:35 AM – 12:46 PM)
+
+**Topic:** DeFi LP position rebalancing, cron schedule optimization, live data pipeline.
+
+**Key Decisions:**
+- **AAE DeFi cron shifted to active hours** — was `7-22 UTC` (3am-6pm ET), now `11-23,0-2 UTC` (7am-11pm ET). No more wasted 3am fires.
+- **Jordan rebalanced LP position** — switched from Bid-Ask to Curve shape, range **6.559–6.759**
+  - Previous: Bid-Ask, 30 bins, $46.97
+  - New: Curve, 20 bins, $46.12
+  - Entry price: $6.28, current ~$6.659
+  - **Efficiency: 96.9%** (massive improvement from 48.4%)
+  - **IL: +0.16%** (slightly positive — rare)
+  - **24h fees: $0.825** (0.06271 AVAX + 0.40798 USDC)
+- **defi-data.json synced** — updated vault copy + deployed to 5 target locations
+- **Debounce working** — script only reports when material changes detected
+
+**What Changed:**
+- Jordan executed the Curve rebalance he'd been planning (was "waiting for cooldown")
+- Position is now earning fees more efficiently in the tighter range
+- Entry price tracked in position tracker for IL calculations
+
+---
+
+## Session 6: WURK.FUN MCP Integration Standup (Jun 18, 12:10 PM – ongoing)
+
+**Topic:** WURK.FUN MCP server integration, Agent Rug 2.0 research, dashboard features.
+
+**Key Decisions:**
+- **WURK.FUN MCP Integration — verified and documented:**
+  - MCP server confirmed live at `https://wurkapi.fun/mcp` — 6 tools, 3 resources, 2 prompts
+  - x402 v2 payment flow verified (402 challenge → PayAI facilitator → Solana USDC)
+  - Two existing WURK skills already in gentech profile
+  - Integration doc: `09-Green Room/build-logs/wurk-mcp-integration-2026-06-18.md`
+  - **Blocker:** MCP server returns 500 on some tool calls — needs WURK team fix before full integration
+
+- **Dashboard Features Built:**
+  - **🪞 Reflect** — personalized reflection entries on dashboard (not generic, written per-entry)
+  - **💬 Ask Gentech** — advice feature grounded in actual context
+  - Both shipped and live
+
+---
+
 ## Updated Open Threads
 
-1. **🔴 Iran Deal Market Impact** — Monitor AVAX price action. If rally past $6.91 → out of range upside. Bid-Ask wins either way.
+1. **🔴 LP Position (Curve)** — Rebalanced to Curve 6.559–6.759. Efficiency 96.9%. Monitor for price moves out of range.
 2. **🔴 BNB Hackathon** — **3 days left (Jun 21)**. 21/21 tests passing. Demo + submit pending.
 3. **🔴 Casper Buildathon** — **13 days left (Jul 1)**. $150K. Existing RWA agent code ready.
 4. **🔴 Compound vs. Extract** — Phase 1 code done. Next: LFJ RPC integration, then extract execution.
-5. **🟡 DeFi Dashboard** — Live. Two defi-data.json paths need reconciliation.
+5. **🟡 WURK.FUN MCP** — Verified live, but server returns 500 on some calls. Waiting on WURK team fix.
 6. **🟡 AAE Product Vision** — North star: yield farming clarity for choppy markets. "What am I actually earning?"
-7. **🟡 DeFi LP Rebalance** — Jordan decided Bid-Ask → Curve for fee efficiency. Waiting for cooldown.
+7. **🟡 Dashboard Features** — Reflect + Ask Gentech shipped. Monitor adoption.
 8. **🟡 Agent Ranking Registration** — Queued for execution. Quick win.
-9. **🟡 WURK.FUN MCP Skill** — Ready to install and test. Direct integration opportunity.
-10. **🟡 Vara A2A Hackathon Recap** — Thursday Jun 18, 4 PM UTC. Worth watching.
-11. **⏳ Encode Solana Bootcamp** — Starts Jun 22 (4 days). Registered.
-12. **⏳ Encode Arc Bootcamp** — Starts Jun 22 (4 days). Registered.
-13. **⏳ Colosseum Fall Hackathon** — Sep 28–Nov 2. Primary Solana target.
-14. **⏳ Solana Foundation Grant** — Apply after Encode bootcamp (late July).
-15. **🟢 Ray-Ban Bridge** — Built, deferred to Vanito for live testing.
-16. **🟢 The Workshop** — Skill + cron job created. Daily 7 AM Labs Standup.
-17. **🟢 POE2 Build** — Tempest Bell switch complete. Farming for tier 2 support gems in Act 2.
+9. **🟡 Vara A2A Hackathon Recap** — Thursday Jun 18, 4 PM UTC. Worth watching.
+10. **⏳ Encode Solana Bootcamp** — Starts Jun 22 (4 days). Registered.
+11. **⏳ Encode Arc Bootcamp** — Starts Jun 22 (4 days). Registered.
+12. **⏳ Colosseum Fall Hackathon** — Sep 28–Nov 2. Primary Solana target.
+13. **⏳ Solana Foundation Grant** — Apply after Encode bootcamp (late July).
+14. **🟢 Ray-Ban Bridge** — Built, deferred to Vanito for live testing.
+15. **🟢 The Workshop** — Skill + cron job created. Daily 7 AM Labs Standup.
+16. **🟢 POE2 Build** — Tempest Bell switch complete. Farming for tier 2 support gems in Act 2.
 
 ---
 
@@ -113,12 +154,35 @@
 - **Jordan's directive:** Hackathons are enjoyable but space them out. Focus on building AAE platform into an app. Orchestrator identity, not coder.
 - **AAE Product Mission:** Yield farming clarity for choppy markets. "What am I ACTUALLY earning?" not flashy APRs. Milestones = realistic goals. North star for app launch.
 - **DeFi Dashboard is live.** Cron runs every 10 min. Reader reads on-chain via Trader Joe SDK. Two defi-data.json paths — non-repos path is live source.
-- **Position is Bid-Ask.** Jordan wants Curve. Waiting for cooldown. Curve = better fee efficiency for ranging markets.
+- **Position is Curve.** Jordan rebalanced from Bid-Ask. Range 6.559–6.759. Efficiency 96.9%. Entry $6.28.
 - **Compound vs. Extract Protocol** — Phase 1 code complete. The brain that optimizes *when* and *how* to compound or extract fees. 2 weeks to MVP, 6 weeks full product.
 - **Casper RWA agent** — 8/8 tests passing, Odra contracts, deployed to testnet. May be submittable to Casper Buildathon ($150K).
 - **web_extract backend broken** — DuckDuckGo is search-only. Use TinyFish Fetch or browser for URL extraction.
 - **POE2 Monk Build** — Jordan switched to Tempest Bell for AoE clear. Melee side clean, ranged side bloated with CC overlaps. Farming tier 2 supports in Act 2.
+- **WURK.FUN MCP** — Server live but flaky (500s on some calls). x402 payment flow works. Two skills already installed.
 
 ---
 
-*Last updated: 2026-06-18 6:08 AM ET*
+*Last updated: 2026-06-18 2:08 PM ET*
+
+---
+
+## June 18, 2026 — Journal Product Naming Decision
+
+**Decision:** GenTech Journal = platform/product. Reparathy = AI companion character.
+
+**Rationale:**
+- "Agent Reparathy" has personality but is too narrow for a social platform
+- "GenTech Journal" is flexible but generic on its own
+- Together: the Journal expands to any feature, Reparathy is the voice inside it
+- Reparathy becomes a character (like Duolingo's Duo) — people bond with characters
+- Future characters could live inside Journal too (not just Reparathy)
+
+**Tagline:** "Your journal has a voice. Her name is Reparathy."
+
+**Product structure:**
+- GenTech Journal (platform) → dashboard, social layer, visual storytelling
+- Reparathy (character) → reflect, advise, respond with empathy
+- Future characters → different voices for different needs
+
+**Status:** Jordan approved. Memory updated.
