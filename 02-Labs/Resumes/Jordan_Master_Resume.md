@@ -1,6 +1,6 @@
 # Jordan Jones — Resume (Master)
 
-**Location:** Remote (Philippines target Q3 2026)
+**Email:** jordanjones0902@gmail.com
 **GitHub:** https://github.com/ProtoJay4789
 **Portfolio:** https://protojay4789.github.io
 **Telegram:** @ProtoJay4789
