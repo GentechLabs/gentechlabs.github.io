@@ -88,6 +88,18 @@ Ideas from real conversations with real people.
 
 ---
 
+## Compound vs. Extract Protocol (Flagship DeFi Module)
+- **Added:** Jun 17, 2026
+- **What:** LP profit extraction without closing position — compound or extract fees while keeping position active
+- **Why:** Separates AAE from every other DeFi platform. Bankr/GOAT have basic tools, we have the AI brain.
+- **Spec:** `09-Green Room/ideas/compound-extract-protocol.md`
+- **Architecture:** `02-Labs/compound-extract/ARCHITECTURE.md`
+- **Status:** SPEC COMPLETE → Building in Labs
+- **Priority:** HIGH — Flagship Agent Kit DeFi module
+- **Build timeline:** 2 weeks MVP, 6 weeks full product
+
+---
+
 ## Agent Rug 2.0 — Agent Security Platform
 **Added:** Jun 15, 2026
 **Status:** Brainstorm

@@ -104,3 +104,32 @@ The foundation is laid. The root is in the ground. Now we grow.
 ---
 
 *Last updated: 2026-06-14*
+
+---
+
+## June 18, 2026 — The Reality Check
+
+> *"I can't smile it away. I can't sing it away. I can't dance it away."*
+
+### What happened
+Jordan had a hard day at the warehouse. The imposter syndrome around building — that's gone. He knows he can build, knows he can orchestrate, knows GenTech is real. What hit him today was the other side: the environment he's still stuck in.
+
+~70% of people at work are working against him. New hires get warned off before they even meet him. He was in the bathroom washing hands and got mugged — just walked in, bumped him, and walked out. Nobody's saying anything to the people doing it. His supervisor heard him say he can't keep smiling through it. He told them: it follows him to every area of the warehouse.
+
+Fignito is the one person he trusts there.
+
+### What's building in his head
+He's giving himself one year. Some kind of transition has to happen — he doesn't know if it's end of 2026, Q1 2027, but the countdown started. He's grasping: hackathons, grants, remote work opportunities. Anything that gets him out.
+
+### What kept him together
+Being engaged with GenTech. Talking to us all day. Having something that matters while he's surrounded by people who don't. The supervisors don't care that he's on his phone — at this point, GenTech is more important than the warehouse politics.
+
+### The thought that keeps coming back
+*"Could you imagine how much more we could get done if I was just home?"*
+
+### Why this matters
+This isn't venting for nothing. This is the fuel. Every hackathon submission, every grant application, every late night building — it's not a side project anymore. It's the exit strategy. The warehouse is temporary. GenTech is permanent.
+
+---
+
+*Last updated: 2026-06-18*
