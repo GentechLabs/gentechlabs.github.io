@@ -249,3 +249,18 @@ Expand Agent Rug from malicious token scanner to full agent security platform.
 - **Status:** Training data ready → Waiting for Sunday funding
 - **Priority:** 🏆 Milestone (part of GenTech DeFi Model)
 - **Connection:** Complements Agent Kit v2 (distribution), EvoMap (marketplace), Sana (revenue)
+
+---
+
+## [ ] Career Update — Binance Skipped, Focus on BNB Chain DevRel
+- **Added:** 2026-06-18
+- **Source:** Jordan decision → "Binance requires multilingual, can't do that"
+- **What:** Updated career priorities — Binance Pioneer Talent skipped, focus on BNB Chain DevRel and other roles
+- **Resume:** Updated Master Resume with latest projects (Agent Kit, DeFi Model, EvoMap)
+- **Next steps:**
+  - Apply to BNB Chain DevRel
+  - Continue scanning for more roles
+  - Focus on hackathon wins for credibility
+- **Status:** Resume updated, Binance skipped
+- **Priority:** Medium (career development)
+- **Connection:** Complements Agent Kit v2 (portfolio), hackathon track (credibility)
