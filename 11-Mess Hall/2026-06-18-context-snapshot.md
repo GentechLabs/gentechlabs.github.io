@@ -186,3 +186,21 @@
 - Future characters → different voices for different needs
 
 **Status:** Jordan approved. Memory updated.
+
+---
+
+## June 18, 2026 — GenTech Wallet Co-Pilot Principle
+
+**Decision:** Three-mode switch for all autonomous features.
+
+| Mode | Agent | User |
+|------|-------|------|
+| 🟢 Auto | Executes trades, rebalances, DCA | Set parameters, watch, override |
+| 🟡 Advisory | Recommends actions with reasoning | Decide and execute manually |
+| 🔴 Off | Shows data only (price, fees, regime) | Full control |
+
+**Philosophy:** Platform encourages AI use but doesn't remove the human. Some users want to learn and improve their own trading skills, not hand everything to an agent.
+
+**The learning loop:** Agent shows recommendation → User evaluates → User executes → Dashboard shows who was right → Both learn.
+
+**Status:** Jordan approved. Memory updated. To be added to Agent Kit spec.
