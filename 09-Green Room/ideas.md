@@ -4,6 +4,18 @@ Ideas from real conversations with real people.
 
 ---
 
+## [ ] GenTech Wallet + Sana Integration
+- **Added:** 2026-06-18
+- **Source:** @sanafionchain tweet → "Agentic Economy Stack"
+- **What:** Integrate Sana's banking/card infrastructure into GenTech Agent Kit wallet
+- **Sana provides:** Visa/Mastercard, bank accounts, KYC compliance, fiat on/off ramp
+- **GenTech provides:** Crypto wallet, DeFi yield farming, x402 micropayments, USDC earning engine
+- **Combined value:** "Your agent earns yield. You spend it anywhere with a card."
+- **Status:** Research needed — evaluate Sana's API, licensing, fees
+- **Priority:** High (completes the full earn → store → spend loop)
+
+---
+
 ## [ ] EvoMap Integration
 - **Added:** 2026-06-18
 - **Source:** YouTube (James Pelton) → evomap.ai
