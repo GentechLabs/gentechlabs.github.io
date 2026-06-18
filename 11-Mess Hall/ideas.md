@@ -224,3 +224,28 @@ Expand Agent Rug from malicious token scanner to full agent security platform.
 - **Status:** Spec complete → Ready to build
 - **Priority:** 🏆 Milestone (core product for GenTech ecosystem)
 - **Connection:** Complements Agent Kit (core), EvoMap (marketplace), Sana (revenue payouts)
+
+---
+
+## [ ] DeFi Model Training Pipeline — Ready for Sunday
+- **Added:** 2026-06-18
+- **Source:** Jordan brainstorming session → "How do we pay for training?"
+- **What:** Complete training pipeline for fine-tuning DeepSeek R1 Distill 32B on DeFi data
+- **Training data:**
+  - 26 pairs total (5 LP management, 5 yield farming, 5 market analysis, 5 risk management, 5 portfolio optimization, 1 vault extraction)
+  - Sources: Vault extraction + synthetic generation
+- **Payment:** BlockRun Modal (USDC on Base, ~$30-60 for 1 hour on A10G GPU)
+- **Scripts ready:**
+  - `extract-training-data.py` — Extracts training pairs from vault
+  - `generate-synthetic-data.py` — Generates synthetic DeFi Q&A pairs
+  - `combine-training-data.py` — Combines all sources into final dataset
+  - `finetune.py` — QLoRA fine-tuning script
+  - `run-modal.py` — Modal runner for GPU training
+- **Timeline:**
+  - Jun 18-19: Prep training data ✅ (26 pairs ready)
+  - Jun 22 (Sunday): Run fine-tune (need funds)
+  - Jun 23-24: Test and deploy
+  - Jun 25: Publish to EvoMap + API endpoint
+- **Status:** Training data ready → Waiting for Sunday funding
+- **Priority:** 🏆 Milestone (part of GenTech DeFi Model)
+- **Connection:** Complements Agent Kit v2 (distribution), EvoMap (marketplace), Sana (revenue)
