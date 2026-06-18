@@ -1,5 +1,27 @@
 {
   "lastUpdated": "2026-06-18T19:30:50.572Z",
+  "regime": {
+    "current": "bear_trend",
+    "previous": "sideways",
+    "changedAt": "2026-06-18T18:15:00.000Z",
+    "signals": {
+      "price": 6.32,
+      "ma20": 6.50,
+      "momentum": -6.48,
+      "volatilityPct": 6.48
+    },
+    "strategy": {
+      "shape": "curve",
+      "range": "medium",
+      "dcaAggressiveness": "conservative",
+      "description": "Bear trend detected — price below MA20 ($6.50). Conservative DCA recommended; maintain curve shape to capture fees in current range while limiting downside exposure."
+    },
+    "recommended": {
+      "rangeLow": 6.1961,
+      "rangeHigh": 6.3783,
+      "dcaAmount": 2.50
+    }
+  },
   "pool": "AVAX/USDC",
   "chain": "Avalanche",
   "dex": "LFJ",
@@ -359,14 +381,46 @@
     }
   ],
   "strategyComparison": {
-    "lpApr": 493.0,
-    "lpDailyFees": 0.589,
-    "stakingApr": 7.0,
-    "stakingDaily": 0.008,
-    "hodlReturn": -0.33,
-    "entryPrice": 6.28,
-    "currentPrice": 6.32,
+    "activeStrategy": "LP Curve (AVAX/USDC 10bps)",
+    "activeApr": 493.0,
+    "activeDailyYield": 0.589,
+    "alternatives": [
+      {
+        "name": "LP Curve (Current)",
+        "apr": 493.0,
+        "dailyYield": 0.589,
+        "risk": "Medium",
+        "verdict": "Outperforming",
+        "icon": "📈"
+      },
+      {
+        "name": "AVAX Staking",
+        "apr": 7.0,
+        "dailyYield": 0.008,
+        "risk": "Low",
+        "verdict": "Underperforming",
+        "icon": "🏦"
+      },
+      {
+        "name": "Hold AVAX",
+        "apr": -6.48,
+        "dailyYield": -0.283,
+        "risk": "High",
+        "verdict": "Down 6.48%",
+        "icon": "💰"
+      },
+      {
+        "name": "Stablecoin LP",
+        "apr": 12.0,
+        "dailyYield": 0.015,
+        "risk": "Low",
+        "verdict": "Lower yield",
+        "icon": "🔒"
+      }
+    ],
     "outperforming": true,
-    "verdict": "LP farming outperforming staking by 70x"
+    "outperformingSince": "2026-06-18",
+    "verdict": "LP farming outperforming staking by 70x and hold by 76x",
+    "summary": "Curve strategy earning $0.59/day on $43.61 position. 493% APR vastly exceeds staking (7%) and beat hold (-6.48% today)."
   }
 }
