@@ -808,7 +808,112 @@
             if (section.customRender === 'activityLog') {
                 return this.renderActivityLog(section);
             }
+            if (section.customRender === 'regimeDetector') {
+                return this.renderRegimeDetector(section);
+            }
             return originalRenderCustom.call(this, section);
+        };
+
+        // Regime Detector Renderer — Autonomous Strategy Layer
+        DashboardEngine.prototype.renderRegimeDetector = function(section) {
+            const data = this.resolveDataSource(section.dataSource);
+            if (!data) return '<p class="empty-state">No regime data</p>';
+
+            const { current, previous, changedAt, signals, strategy, recommended } = data;
+            
+            // Regime colors and icons
+            const regimeConfig = {
+                'bull_trend': { color: '#22c55e', icon: '📈', label: 'Bull Trend', bg: 'rgba(34,197,94,0.12)' },
+                'bear_trend': { color: '#ef4444', icon: '📉', label: 'Bear Trend', bg: 'rgba(239,68,68,0.12)' },
+                'sideways': { color: '#f59e0b', icon: '➡️', label: 'Sideways', bg: 'rgba(245,158,11,0.12)' },
+                'volatile': { color: '#8b5cf6', icon: '⚡', label: 'Volatile', bg: 'rgba(139,92,246,0.12)' }
+            };
+            
+            const regime = regimeConfig[current] || regimeConfig['sideways'];
+            const prevRegime = regimeConfig[previous] || regimeConfig['sideways'];
+            const changedDate = changedAt ? new Date(changedAt) : null;
+            const timeAgo = changedDate ? this._timeAgo(changedDate) : 'Unknown';
+            
+            // MA position
+            const maPosition = signals.price > signals.ma20 ? 'Above MA20' : 'Below MA20';
+            const maColor = signals.price > signals.ma20 ? '#22c55e' : '#ef4444';
+            
+            return `
+                <div style="background:var(--panel-bg); border:1px solid var(--panel-border); border-radius:var(--radius); padding:24px; margin-bottom:16px;">
+                    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; margin-bottom:20px;">
+                        <!-- Current Regime -->
+                        <div style="display:flex; align-items:center; gap:12px;">
+                            <div style="width:48px; height:48px; background:${regime.bg}; border:2px solid ${regime.color}; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:1.5em;">
+                                ${regime.icon}
+                            </div>
+                            <div>
+                                <div style="font-size:0.7em; color:var(--text-dim); text-transform:uppercase; letter-spacing:1px;">Market Regime</div>
+                                <div style="font-size:1.4em; font-weight:700; color:${regime.color};">${regime.label}</div>
+                                <div style="font-size:0.75em; color:var(--text-dim);">Changed ${timeAgo}</div>
+                            </div>
+                        </div>
+                        
+                        <!-- Strategy Badge -->
+                        <div style="text-align:right;">
+                            <div style="font-size:0.7em; color:var(--text-dim); text-transform:uppercase; letter-spacing:1px;">Recommended Strategy</div>
+                            <div style="display:inline-flex; align-items:center; gap:8px; padding:8px 16px; background:rgba(232,65,66,0.08); border:1px solid rgba(232,65,66,0.2); border-radius:20px; margin-top:4px;">
+                                <span style="font-size:0.9em; font-weight:600; color:var(--gold);">${strategy.shape.toUpperCase()}</span>
+                                <span style="font-size:0.75em; color:var(--text-dim);">|</span>
+                                <span style="font-size:0.8em; color:var(--text);">${strategy.dcaAggressiveness} DCA</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Signals Grid -->
+                    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(140px, 1fr)); gap:12px; margin-bottom:20px;">
+                        <div style="background:rgba(255,255,255,0.03); border-radius:8px; padding:12px;">
+                            <div style="font-size:0.65em; color:var(--text-dim); text-transform:uppercase;">Price</div>
+                            <div style="font-size:1.1em; font-weight:600; color:var(--text);">$${signals.price.toFixed(4)}</div>
+                        </div>
+                        <div style="background:rgba(255,255,255,0.03); border-radius:8px; padding:12px;">
+                            <div style="font-size:0.65em; color:var(--text-dim); text-transform:uppercase;">MA20</div>
+                            <div style="font-size:1.1em; font-weight:600; color:${maColor};">$${signals.ma20.toFixed(4)}</div>
+                            <div style="font-size:0.65em; color:${maColor};">${maPosition}</div>
+                        </div>
+                        <div style="background:rgba(255,255,255,0.03); border-radius:8px; padding:12px;">
+                            <div style="font-size:0.65em; color:var(--text-dim); text-transform:uppercase;">Momentum</div>
+                            <div style="font-size:1.1em; font-weight:600; color:${signals.momentum >= 0 ? '#22c55e' : '#ef4444'};">${signals.momentum >= 0 ? '+' : ''}${signals.momentum.toFixed(2)}%</div>
+                        </div>
+                        <div style="background:rgba(255,255,255,0.03); border-radius:8px; padding:12px;">
+                            <div style="font-size:0.65em; color:var(--text-dim); text-transform:uppercase;">Volatility</div>
+                            <div style="font-size:1.1em; font-weight:600; color:var(--text);">${signals.volatilityPct.toFixed(2)}%</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Recommended Range -->
+                    <div style="background:rgba(232,65,66,0.06); border:1px solid rgba(232,65,66,0.15); border-radius:8px; padding:16px;">
+                        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+                            <div>
+                                <div style="font-size:0.7em; color:var(--text-dim); text-transform:uppercase; letter-spacing:1px;">🎯 Optimal Range</div>
+                                <div style="font-size:1.2em; font-weight:600; color:var(--gold); margin-top:4px;">
+                                    $${recommended.rangeLow.toFixed(4)} — $${recommended.rangeHigh.toFixed(4)}
+                                </div>
+                            </div>
+                            <div style="text-align:right;">
+                                <div style="font-size:0.7em; color:var(--text-dim); text-transform:uppercase;">DCA Amount</div>
+                                <div style="font-size:1.2em; font-weight:600; color:var(--gold); margin-top:4px;">$${recommended.dcaAmount}</div>
+                            </div>
+                        </div>
+                        <div style="margin-top:12px; font-size:0.8em; color:var(--text-dim); font-style:italic;">
+                            ${strategy.description}
+                        </div>
+                    </div>
+                </div>
+            `;
+        };
+
+        // Time ago helper
+        DashboardEngine.prototype._timeAgo = function(date) {
+            const seconds = Math.floor((new Date() - date) / 1000);
+            if (seconds < 60) return 'just now';
+            if (seconds < 3600) return `${Math.floor(seconds / 60)}m ago`;
+            if (seconds < 86400) return `${Math.floor(seconds / 3600)}h ago`;
+            return `${Math.floor(seconds / 86400)}d ago`;
         };
 
         // Hero Efficiency Renderer — the main visual (shape-aware)

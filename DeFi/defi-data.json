@@ -353,6 +353,30 @@
       }
     ]
   },
+  "regime": {
+    "current": "bear_trend",
+    "previous": "sideways",
+    "changedAt": "2026-06-18T12:00:00Z",
+    "signals": {
+      "price": 6.65,
+      "ma20": 6.82,
+      "atr14": 0.08,
+      "volatilityPct": 2.27,
+      "momentum": -2.27
+    },
+    "strategy": {
+      "shape": "bid-ask",
+      "rangeWidthPct": 6.0,
+      "dcaAggressiveness": "conservative",
+      "description": "Wide bid-ask — catch volatility, preserve capital"
+    },
+    "recommended": {
+      "shape": "bid-ask",
+      "rangeLow": 6.45,
+      "rangeHigh": 6.85,
+      "dcaAmount": 10
+    }
+  },
   "transactions": [
     {
       "date": "2026-06-18",
