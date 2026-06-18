@@ -12,33 +12,33 @@
     "feeTier": "10bps",
     "shape": "curve",
     "displayShape": "Curve",
-    "currentPrice": 6.28,
-    "rangeMin": 6.5594,
-    "rangeMax": 6.759,
-    "avaxAmount": 6.974262,
-    "usdcAmount": 0,
-    "totalValue": 43.8,
-    "totalValueUSD": 43.8,
+    "currentPrice": 6.32,
+    "rangeMin": 6.19,
+    "rangeMax": 6.4,
+    "avaxAmount": 3.523,
+    "usdcAmount": 21.13,
+    "totalValue": 43.28,
+    "totalValueUSD": 43.28,
     "activeBin": 8362805,
     "binStep": 10,
     "totalBins": 31
   },
   "fees": {
-    "dailyFees": 0.759,
+    "dailyFees": 0.889,
     "cumulativeFees": 0.1007,
     "feeCurrency": "USD"
   },
-  "efficiency": 0,
+  "efficiency": 76.2,
   "hero": {
-    "positionUsd": 43.8,
+    "positionUsd": 43.28,
     "dailyFees": 0.759,
-    "efficiency": 0,
+    "efficiency": 76.2,
     "efficiencyZone": "Outer",
     "shape": "Curve",
-    "rangeStatus": "Out of Range",
-    "currentPrice": 6.28,
-    "rangeMin": 6.5594,
-    "rangeMax": 6.759,
+    "rangeStatus": "In Range",
+    "currentPrice": 6.32,
+    "rangeMin": 6.19,
+    "rangeMax": 6.4,
     "milestoneNext": "Scout",
     "milestoneTarget": 5,
     "milestoneProgress": 15
@@ -67,13 +67,13 @@
     "efficiencyZone": "Outer",
     "recommendedAction": "Rebalance",
     "dcaType": "Micro-DCA",
-    "dcaDetails": "Micro DCA — rebalance needed",
+    "dcaDetails": "Micro DCA \u2014 rebalance needed",
     "rebalanceTrigger": "Price exits $6.56-$6.76 range",
     "compoundThreshold": 50,
     "cumulativeFees": 0.1007,
     "nextCompound": "$49.90 away from first compound",
     "riskLevel": "Critical",
-    "riskNote": "Out of range — rebalance needed",
+    "riskNote": "Out of range \u2014 rebalance needed",
     "shape": "Curve"
   },
   "milestones": {
@@ -93,7 +93,7 @@
     "tiers": [
       {
         "tier": 1,
-        "icon": "🔭",
+        "icon": "\ud83d\udd2d",
         "label": "Scout",
         "target": 5,
         "unlocks": "Entry strategies (CURVE)",
@@ -101,7 +101,7 @@
       },
       {
         "tier": 2,
-        "icon": "⚔️",
+        "icon": "\u2694\ufe0f",
         "label": "Raider",
         "target": 20,
         "unlocks": "SPOT + BIDIRECTIONAL shapes",
@@ -109,7 +109,7 @@
       },
       {
         "tier": 3,
-        "icon": "👑",
+        "icon": "\ud83d\udc51",
         "label": "Warlord",
         "target": 50,
         "unlocks": "Multi-pool positions",
@@ -117,7 +117,7 @@
       },
       {
         "tier": 4,
-        "icon": "🏰",
+        "icon": "\ud83c\udff0",
         "label": "Sovereign",
         "target": 100,
         "unlocks": "Custom strategy creation + mentorship",
@@ -289,8 +289,8 @@
   },
   "walletBalances": {
     "avax": 0.09788719244850835,
-    "wavax": 6.06671055092e-7,
-    "usdc": 0.000008,
+    "wavax": 6.06671055092e-07,
+    "usdc": 8e-06,
     "liquidUsd": 0.61
   },
   "supportResistance": {
@@ -333,25 +333,16 @@
         6.76
       ]
     },
-    "proximityAlert": "⚠️ Price out of range"
+    "proximityAlert": "\u26a0\ufe0f Price out of range"
   },
   "rebalanceSuggestions": {
     "efficiency": 0,
-    "price": 6.28,
-    "rangeMin": 6.5594,
-    "rangeMax": 6.759,
+    "price": 6.32,
+    "rangeMin": 6.19,
+    "rangeMax": 6.4,
     "volatility": 9.51,
     "trend": "bearish",
-    "suggestions": [
-      {
-        "icon": "🚨",
-        "title": "Price Out of Range",
-        "description": "AVAX at $6.2800 is outside your $6.5594-$6.7590 range. You are not earning fees.",
-        "priority": "high",
-        "impact": "Immediate",
-        "action": "Rebalance on LFJ"
-      }
-    ]
+    "suggestions": []
   },
   "transactions": [
     {
