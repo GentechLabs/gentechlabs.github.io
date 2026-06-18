@@ -490,7 +490,7 @@
     <script>
         // ══════════════════════════════════════════════
         // LP CURVE RENDERER — Bar Chart Style
-        // Colored bins like LFJ: green=USDC, purple=AVAX
+        // AAE theme: blue=USDC, red=AVAX, silver=active bin
         // ══════════════════════════════════════════════
 
         class LPCurveRenderer {
@@ -502,13 +502,13 @@
                     padding: { top: 20, right: 12, bottom: 36, left: 12 },
                     barRadius: 3,
                     colors: {
-                        usdc: '#22c55e',       // green — USDC side
-                        usdcGlow: 'rgba(34,197,94,0.25)',
-                        avax: '#a855f7',       // purple — AVAX side
-                        avaxGlow: 'rgba(168,85,247,0.25)',
-                        active: '#f472b6',     // pink — active/rewarded bin
-                        activeGlow: 'rgba(244,114,182,0.4)',
-                        priceLine: '#ef4444',  // red — current price marker
+                        usdc: '#3b82f6',       // blue — USDC side (AAE theme)
+                        usdcGlow: 'rgba(59,130,246,0.25)',
+                        avax: '#ef4444',       // red — AVAX side (AAE theme)
+                        avaxGlow: 'rgba(239,68,68,0.25)',
+                        active: '#c0c0c0',     // silver — active/rewarded bin (AAE theme)
+                        activeGlow: 'rgba(192,192,192,0.4)',
+                        priceLine: '#ffffff',  // white — current price marker
                         grid: 'rgba(255,255,255,0.06)',
                         label: '#9ca3af',
                     },
