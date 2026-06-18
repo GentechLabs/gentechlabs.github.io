@@ -93,3 +93,15 @@ Here's what's in the Mess Hall:
 
 Want to work on any of these today?
 ```
+
+---
+
+## Verification
+
+After running the protocol, you should be able to answer:
+1. Who am I? (Agent name, personality)
+2. Who is the owner? (Name, preferences)
+3. What are we building? (Current projects)
+4. What's the current state? (System health)
+5. What was I doing before restart? (Handoff notes)
+6. What are the current Milestones? (GenTech DeFi Model, Agent Kit v2)
