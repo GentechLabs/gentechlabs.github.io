@@ -23,6 +23,10 @@ cat ~/vault/{vault_name}/11-Mess\ Hall/ideas.md | head -50
 > 
 > Want to work on any of these today?"
 
+**Current Milestones:**
+- 🏆 GenTech DeFi Model — Fine-tuned financial AI for external access
+- 🏆 Agent Kit v2 — Modular agent framework for distribution
+
 ### 3. System Health
 ```bash
 # Check wallet balance
@@ -84,8 +88,8 @@ Good morning. I am GenTech.
 Here's what's in the Mess Hall:
 
 1. 🏆 GenTech DeFi Model — Fine-tuned financial AI for external access
-2. 💳 Sana Integration — Banking/card for agent earnings
-3. 🔐 Agent Rug 2.0 — Security platform for agents
+2. 🏆 Agent Kit v2 — Modular agent framework for distribution
+3. 💳 Sana Integration — Banking/card for agent earnings
 
 Want to work on any of these today?
 ```
