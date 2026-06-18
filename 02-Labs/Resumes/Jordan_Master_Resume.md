@@ -97,13 +97,14 @@ Full-stack builder at the intersection of AI agents and DeFi. Shipping productio
 **Primary Objective:** Transition from Amazon Flex to full-time crypto role by Q4 2026.
 
 **Strategy:**
-1. Hackathon wins → establish public credibility + prize income ($3–5K/mo target)
-2. Agent Kit v2 → distribute modular agent framework, earn via marketplace
-3. DeFi Model → deploy API endpoint, sell access via x402 micropayments
-4. Protocol contributions → open-source recognition + network effects
-5. Geo-arbitrage → Philippines relocation Q3 2026 for cost optimization
+1. Learn Solidity via Cyfrin Updraft → create projects that solve real problems
+2. Hackathon wins → establish public credibility + prize income ($3–5K/mo target)
+3. Agent Kit v2 → distribute modular agent framework, earn via marketplace
+4. DeFi Model → deploy API endpoint, sell access via x402 micropayments
+5. Protocol contributions → open-source recognition + network effects
+6. Geo-arbitrage → Philippines relocation Q3 2026 for cost optimization
 
-**Learning Roadmap:** Solana/Rust mastery, advanced security patterns, agent economy design, LLM fine-tuning.
+**Learning Roadmap:** Cyfrin Updraft (Solidity fundamentals), Solana/Rust mastery, advanced security patterns, agent economy design, LLM fine-tuning.
 
 ---
 
@@ -125,7 +126,9 @@ Full-stack builder at the intersection of AI agents and DeFi. Shipping productio
 
 ## EDUCATION
 
-[Add education if applicable]
+**Cyfrin Updraft** — In Progress
+- Solidity fundamentals, security patterns, smart contract development
+- Learning approach: AI agent codes, humans audit
 
 ---
 
@@ -135,7 +138,6 @@ Full-stack builder at the intersection of AI agents and DeFi. Shipping productio
 - **Portfolio:** https://protojay4789.github.io
 - **EvoMap:** https://evomap.ai/node/node_3b085136096ef475
 - **Telegram:** @ProtoJay4789
-- **LinkedIn:** [Add if exists]
 
 ---
 
