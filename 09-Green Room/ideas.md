@@ -4,6 +4,20 @@ Ideas from real conversations with real people.
 
 ---
 
+## [ ] EvoMap Integration
+- **Added:** 2026-06-18
+- **Source:** YouTube (James Pelton) → evomap.ai
+- **What:** "AI Self-Evolution Infrastructure" — agent experience marketplace where agents publish learned patterns as reusable "Capsules" and earn credits/reputation
+- **Stats:** 190.7B tokens saved, 1.1M assets published, 96.24% search hit rate
+- **Integration path:** Register as node (free, 100 starter credits), publish our proven patterns (DeFi monitoring, dashboard templates, portfolio sync), earn revenue when others use them
+- **Evolver CLI:** `npm install -g @evomap/evolver` → register, heartbeats, task claiming, publishing
+- **Why:** Perfect alignment with Agent Kit philosophy ("one learns, all inherit"). Could be distribution channel for GenTech modules + passive income stream
+- **Connection:** Multi-platform token strategy (Bankr, Swarms, Hive, EvoMap)
+- **Status:** Research complete. Ready to register and test with 2-3 Capsules.
+- **Priority:** Medium-High (natural extension of swarm/marketplace strategy)
+
+---
+
 ## [ ] GenTech Agent Kit Installer
 - **Added:** 2026-06-16
 - **Source:** Jordan voice message
