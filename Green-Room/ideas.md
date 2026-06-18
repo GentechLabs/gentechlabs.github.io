@@ -19,3 +19,4 @@
 - [ ] Monster Hunter Wilds Pals — waiting for Vanito's build info
 - [ ] **GOAT Network Grants** — $1M+ for agent products with real economic utility. **Delegated to Labs.**
 - [ ] **INFINIT x Mantle Challenge** — Prompt-to-DeFi strategist challenge. 3 weeks. **Delegated to Labs.**
+- [ ] **UE5 MCP Integration** — Unreal Engine 5.8 + Hermes Agent via MCP. Agent controls UE5: spawn actors, modify levels, run blueprints, iterate game logic. Use case: POE2 build optimizer, game companions, GenTech game dev pipeline. Requires: local laptop with NVIDIA RTX 3070. **Queued — waiting for lab setup.**
