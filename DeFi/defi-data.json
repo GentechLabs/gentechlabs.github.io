@@ -67,7 +67,7 @@
     "efficiencyZone": "Inner",
     "recommendedAction": "Hold",
     "dcaType": "Moderate DCA",
-    "dcaDetails": "Moderate DCA — price in range",
+    "dcaDetails": "Moderate DCA \u2014 price in range",
     "rebalanceTrigger": "Price exits $6.20-$6.38 range",
     "compoundThreshold": 50,
     "cumulativeFees": 0.2006,
@@ -93,7 +93,7 @@
     "tiers": [
       {
         "tier": 1,
-        "icon": "🔭",
+        "icon": "\ud83d\udd2d",
         "label": "Scout",
         "target": 5,
         "unlocks": "Entry strategies (CURVE)",
@@ -101,7 +101,7 @@
       },
       {
         "tier": 2,
-        "icon": "⚔️",
+        "icon": "\u2694\ufe0f",
         "label": "Raider",
         "target": 20,
         "unlocks": "SPOT + BIDIRECTIONAL shapes",
@@ -109,7 +109,7 @@
       },
       {
         "tier": 3,
-        "icon": "👑",
+        "icon": "\ud83d\udc51",
         "label": "Warlord",
         "target": 50,
         "unlocks": "Multi-pool positions",
@@ -117,7 +117,7 @@
       },
       {
         "tier": 4,
-        "icon": "🏰",
+        "icon": "\ud83c\udff0",
         "label": "Sovereign",
         "target": 100,
         "unlocks": "Custom strategy creation + mentorship",
@@ -284,8 +284,8 @@
   },
   "walletBalances": {
     "avax": 0.19743927694790936,
-    "wavax": 6.06671055117e-7,
-    "usdc": 0.000009,
+    "wavax": 6.06671055117e-07,
+    "usdc": 9e-06,
     "liquidUsd": 1.25
   },
   "supportResistance": {
@@ -339,7 +339,7 @@
     "trend": "bearish",
     "suggestions": [
       {
-        "icon": "📉",
+        "icon": "\ud83d\udcc9",
         "title": "Bearish Pressure",
         "description": "AVAX is down 24h. Widen range or shift lower to avoid going out of range.",
         "priority": "low",
@@ -357,5 +357,16 @@
       "usd": "43.61",
       "status": "In Range"
     }
-  ]
+  ],
+  "strategyComparison": {
+    "lpApr": 493.0,
+    "lpDailyFees": 0.589,
+    "stakingApr": 7.0,
+    "stakingDaily": 0.008,
+    "hodlReturn": -0.33,
+    "entryPrice": 6.28,
+    "currentPrice": 6.32,
+    "outperforming": true,
+    "verdict": "LP farming outperforming staking by 70x"
+  }
 }

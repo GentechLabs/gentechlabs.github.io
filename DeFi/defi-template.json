@@ -31,7 +31,7 @@
     "container": { "maxWidth": "1100px" }
   },
   "tabs": [
-    { "id": "farming", "label": "Farming", "icon": "🌾", "sections": ["hero-efficiency", "regime-detector", "market-intel", "support-resistance", "strategy-advisor", "lp-curve"] },
+    { "id": "farming", "label": "Farming", "icon": "🌾", "sections": ["hero-efficiency", "regime-detector", "strategy-comparison", "market-intel", "support-resistance", "strategy-advisor", "lp-curve"] },
     { "id": "spot", "label": "Spot", "icon": "💎", "sections": ["spot-positions"] },
     { "id": "rebalance", "label": "Rebalance", "icon": "🔄", "sections": ["rebalance-suggestions"] },
     { "id": "milestones", "label": "Milestones", "icon": "🏆", "sections": ["fee-milestones", "trajectory"] },
@@ -53,6 +53,14 @@
       "type": "custom",
       "dataSource": "regime",
       "customRender": "regimeDetector"
+    },
+    {
+      "id": "strategy-comparison",
+      "title": "Performance vs Alternatives",
+      "icon": "📊",
+      "type": "custom",
+      "dataSource": "strategyComparison",
+      "customRender": "strategyComparison"
     },
     {
       "id": "market-intel",
