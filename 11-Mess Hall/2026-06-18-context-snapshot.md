@@ -204,3 +204,12 @@
 **The learning loop:** Agent shows recommendation → User evaluates → User executes → Dashboard shows who was right → Both learn.
 
 **Status:** Jordan approved. Memory updated. To be added to Agent Kit spec.
+
+## Career Search Filters (Jordan, Jun 2026)
+- ACTUALLY remote — no hidden relocation requirements
+- Entry-level = 0-3 years experience, NOT Principal/Staff level
+- English-only (no bilingual requirement)
+- Links verified LIVE before sharing
+- Currently accepting applications
+- Jordan open to relocation but not right now
+
