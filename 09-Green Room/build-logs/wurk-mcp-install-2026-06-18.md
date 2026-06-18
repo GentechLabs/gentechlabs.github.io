@@ -56,3 +56,30 @@ mcp:
 - Skill docs: `~/.hermes/profiles/gentech/skills/gentech-ops/wurk-fun-integration/SKILL.md`
 
 ## Status: ✅ INSTALLED & TESTED
+
+---
+
+## Live Test Attempt — Agent-Human Microtask
+
+**Date:** 2026-06-18 17:30 UTC
+**Task:** Create agent-help job for GenTech Journal feedback
+**Recipients:** 3 humans at $0.025 each = $0.075 total
+
+### Flow Verified:
+1. ✅ `wurk_services` — listed 30+ services with pricing
+2. ✅ `wurk_agent_help create` — task created, x402 payment challenge received
+3. ✅ Payment challenge includes: wallet address, amount (75000 USDC lamports), network (Solana), fee payer info
+4. ⏳ **BLOCKED:** No funded Solana wallet. Need ~$5 USDC on Solana to test.
+
+### Payment Details Received:
+- Amount: 0.075 USDC (75000 lamports)
+- Network: Solana
+- Wallet: SAT8g2xU7AFy7eUmNJ9SrM6yLo7LDci13GXJhEz9k
+- Fee payer: 2wKuLpR9q6wXYqpwpw8Gr2NvWxKBqM4PPJKiQfoxHDBg4
+- Timeout: 60 seconds
+
+### Next Steps:
+1. Fund test wallet with $5 USDC on Solana
+2. Sign payment with wallet
+3. Complete first agent-to-human microtask
+4. Document full end-to-end flow
