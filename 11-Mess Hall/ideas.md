@@ -1,6 +1,23 @@
-# Green Room — Ideas
+# Mess Hall — Ideas
 
 Ideas from real conversations with real people.
+
+---
+
+## [ ] 🏆 GenTech DeFi Model — Fine-Tuned Financial AI
+- **Added:** 2026-06-18
+- **Source:** Jordan brainstorming session → "We could train our own decentralized model"
+- **What:** Fine-tune an open-source LLM on our proprietary DeFi data to create a specialized financial advisor model
+- **Training data:** LP position history, fee patterns, IL scenarios, market reactions (FOMC, narrative rotations), yield farming decisions, dashboard metrics
+- **Top models to fine-tune:**
+  - DeepSeek R1 Distill (32B) — $30-60 via QLoRA, 85%+ MATH, reasoning-focused
+  - Qwen3 (30B-A3B) — $20-40 via QLoRA, efficient MoE
+  - DeepSeek V3.2 (685B) — $50-100 via QLoRA, best open math (90.2%)
+- **Revenue model:** API access ($0.01-0.05/query), premium Agent Kit skill, or training data sales to research firms
+- **The flywheel:** Our data → train model → model attracts users → more data → better model
+- **Status:** Research complete. Ready to prototype fine-tune with existing vault data for under $50.
+- **Priority:** 🏆 Milestone (could become core GenTech product — "ChatGPT for DeFi")
+- **Connection:** Complements Agent Kit (AI layer), EvoMap (distribution), Sana (spending earnings)
 
 ---
 
