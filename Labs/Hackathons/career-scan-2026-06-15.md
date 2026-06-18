@@ -110,7 +110,7 @@
 
 ## NEXT STEPS
 
-- [ ] Update crypto resume with latest projects (AgentKit, AgentNodeNetwork, Dashboard Engine)
+- [x] Update crypto resume with latest projects (AgentKit, AgentNodeNetwork, Dashboard Engine) ✅ (Jun 18)
 - [ ] Prepare Binance application: cover letter + portfolio link
 - [ ] Submit Binance application before June 22
 - [ ] Apply to BNB Chain DevRel
