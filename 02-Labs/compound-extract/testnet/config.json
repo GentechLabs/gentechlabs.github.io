@@ -1,0 +1,66 @@
+{
+  "network": {
+    "name": "Avalanche Fuji",
+    "chain_id": 43113,
+    "rpc_url": "https://api.avax-test.network/ext/bc/C/rpc",
+    "ws_url": "wss://api.avax-test.network/ext/bc/C/ws",
+    "explorer": "https://testnet.snowtrace.io",
+    "native_token": "AVAX",
+    "block_time": 2000
+  },
+  "contracts": {
+    "lfj_router": "0x530d3DE1b623d044682C9f13a816F13648174c48",
+    "lfj_position_manager": "0x6423144E432B44e70162476cDc4A99510b4B41e4",
+    "lfj_factory": "0x86dAD609A08c0A780ad798Ff0694f0f10f04b510",
+    "wavax": "0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7",
+    "usdc": "0x5425890298aed601595a70AB815c9272752500F",
+    "usdc_native": "0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E",
+    "compound_extract": "TBD — deploy via deploy_fuji.py"
+  },
+  "tokens": {
+    "WAVAX": "0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7",
+    "USDC.e": "0x5425890298aed601595a70AB815c9272752500F",
+    "USDC": "0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E",
+    "BTC.b": "0x152b9d0FdC40C096DE4218A2F1e26Be4b1e1bF4c",
+    "ETH.b": "0x49D5c2BdFfac6CE2BFdB6640F4F80f226bc10bAB"
+  },
+  "test_position": {
+    "pair": "WAVAX/USDC.e",
+    "dex": "lfj",
+    "chain": "avalanche",
+    "pool_fee": 0.003,
+    "tick_spacing": 10,
+    "simulated_principal": {
+      "WAVAX": 10.0,
+      "USDC.e": 350.0
+    },
+    "simulated_fees": {
+      "WAVAX": 0.0,
+      "USDC.e": 0.0
+    },
+    "price_range": {
+      "lower": 25.0,
+      "upper": 50.0
+    }
+  },
+  "execution": {
+    "max_slippage": 0.005,
+    "gas_limit_claim": 200000,
+    "gas_limit_swap": 300000,
+    "gas_limit_add_liq": 500000,
+    "confirmations": 1,
+    "retry_attempts": 3,
+    "retry_delay_seconds": 5
+  },
+  "decision_engine": {
+    "extract_threshold_usd": 10.0,
+    "compound_split": 0.7,
+    "gas_threshold_gwei": 25.0,
+    "default_action": "auto",
+    "max_slippage": 0.005
+  },
+  "wallet": {
+    "address": "0xTEST_WALLET_ADDRESS_REPLACE_ME",
+    "note": "Replace with your Fuji testnet wallet. Get testnet AVAX from https://faucet.avax.network/"
+  }
+}
