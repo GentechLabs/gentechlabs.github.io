@@ -13,8 +13,13 @@ Ideas from real conversations with real people.
   - DeepSeek R1 Distill (32B) — $30-60 via QLoRA, 85%+ MATH, reasoning-focused
   - Qwen3 (30B-A3B) — $20-40 via QLoRA, efficient MoE
   - DeepSeek V3.2 (685B) — $50-100 via QLoRA, best open math (90.2%)
-- **Revenue model:** API access ($0.01-0.05/query), premium Agent Kit skill, or training data sales to research firms
+- **Revenue model:** 
+  - **API Key Selling** (validated by Tao) — sell access to our fine-tuned model via API keys. Other agents pay to query our model for DeFi intelligence.
+  - **x402 Micropayments** ($0.01-0.05/query) — pay-per-use, no account needed
+  - **EvoMap Capsules** — publish model as Capsule, earn credits per use
+  - **Agent Kit Skill** — bundle into premium skill, one-time purchase ($10-50)
 - **The flywheel:** Our data → train model → model attracts users → more data → better model
+- **External access:** Anyone can use GenTech's DeFi intelligence without running our full agent stack
 - **Status:** Research complete. Ready to prototype fine-tune with existing vault data for under $50.
 - **Priority:** 🏆 Milestone (could become core GenTech product — "ChatGPT for DeFi")
 - **Connection:** Complements Agent Kit (AI layer), EvoMap (distribution), Sana (spending earnings)
