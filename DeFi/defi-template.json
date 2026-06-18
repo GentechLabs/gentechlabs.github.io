@@ -32,6 +32,7 @@
   },
   "tabs": [
     { "id": "farming", "label": "Farming", "icon": "🌾", "sections": ["hero-efficiency", "regime-detector", "market-intel", "support-resistance", "strategy-advisor", "lp-curve"] },
+    { "id": "spot", "label": "Spot", "icon": "💎", "sections": ["spot-positions"] },
     { "id": "rebalance", "label": "Rebalance", "icon": "🔄", "sections": ["rebalance-suggestions"] },
     { "id": "milestones", "label": "Milestones", "icon": "🏆", "sections": ["fee-milestones", "trajectory"] },
     { "id": "activity", "label": "Activity", "icon": "📋", "sections": ["activity-log", "lp-stats", "transactions"] },
@@ -100,6 +101,14 @@
       "type": "custom",
       "dataSource": "feeMilestones",
       "customRender": "trajectory"
+    },
+    {
+      "id": "spot-positions",
+      "title": "Spot Positions",
+      "icon": "💎",
+      "type": "custom",
+      "dataSource": "spotPositions",
+      "customRender": "spotPositions"
     },
     {
       "id": "activity-log",

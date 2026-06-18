@@ -67,7 +67,7 @@
     "efficiencyZone": "Center",
     "recommendedAction": "Hold",
     "dcaType": "Full DCA",
-    "dcaDetails": "Full DCA — price in range",
+    "dcaDetails": "Full DCA \u2014 price in range",
     "rebalanceTrigger": "Price exits $6.20-$6.38 range",
     "compoundThreshold": 50,
     "cumulativeFees": 0.1113,
@@ -93,7 +93,7 @@
     "tiers": [
       {
         "tier": 1,
-        "icon": "🔭",
+        "icon": "\ud83d\udd2d",
         "label": "Scout",
         "target": 5,
         "unlocks": "Entry strategies (CURVE)",
@@ -101,7 +101,7 @@
       },
       {
         "tier": 2,
-        "icon": "⚔️",
+        "icon": "\u2694\ufe0f",
         "label": "Raider",
         "target": 20,
         "unlocks": "SPOT + BIDIRECTIONAL shapes",
@@ -109,7 +109,7 @@
       },
       {
         "tier": 3,
-        "icon": "👑",
+        "icon": "\ud83d\udc51",
         "label": "Warlord",
         "target": 50,
         "unlocks": "Multi-pool positions",
@@ -117,7 +117,7 @@
       },
       {
         "tier": 4,
-        "icon": "🏰",
+        "icon": "\ud83c\udff0",
         "label": "Sovereign",
         "target": 100,
         "unlocks": "Custom strategy creation + mentorship",
@@ -284,8 +284,8 @@
   },
   "walletBalances": {
     "avax": 0.19743927694790936,
-    "wavax": 6.06671055117e-7,
-    "usdc": 0.000009,
+    "wavax": 6.06671055117e-07,
+    "usdc": 9e-06,
     "liquidUsd": 1.24
   },
   "supportResistance": {
@@ -339,7 +339,7 @@
     "trend": "bearish",
     "suggestions": [
       {
-        "icon": "📉",
+        "icon": "\ud83d\udcc9",
         "title": "Bearish Pressure",
         "description": "AVAX is down 24h. Widen range or shift lower to avoid going out of range.",
         "priority": "low",
@@ -357,5 +357,172 @@
       "usd": "43.32",
       "status": "In Range"
     }
-  ]
+  ],
+  "spotPositions": {
+    "watchlist": [
+      {
+        "symbol": "AVAX",
+        "name": "Avalanche",
+        "type": "L1",
+        "holdings": "3.523 AVAX",
+        "valueUsd": 22.15,
+        "buyZone": "$5.00 - $6.50",
+        "strategy": "DCA + LP",
+        "autoCompound": true,
+        "platforms": [
+          "Yield Yak (sAVAX, AVAX-rsAVAX)",
+          "BENQI (lending)"
+        ],
+        "notes": "Core holding. LP position + spot accumulation."
+      },
+      {
+        "symbol": "COQ",
+        "name": "Coq Inu",
+        "type": "Meme",
+        "holdings": "0",
+        "valueUsd": 0,
+        "buyZone": "TBD",
+        "strategy": "Spot accumulation",
+        "autoCompound": true,
+        "platforms": [
+          "Yield Yak (COQ-AVAX on LFJ)",
+          "Black Hole"
+        ],
+        "notes": "Meme play. High risk/reward. AVAX ecosystem native."
+      },
+      {
+        "symbol": "SOL",
+        "name": "Solana",
+        "type": "L1",
+        "holdings": "0",
+        "valueUsd": 0,
+        "buyZone": "TBD",
+        "strategy": "Spot holding",
+        "autoCompound": false,
+        "platforms": [],
+        "notes": "Cross-chain. No Yield Yak on Avalanche. Stake on Solana directly."
+      },
+      {
+        "symbol": "LINK",
+        "name": "Chainlink",
+        "type": "Oracle",
+        "holdings": "0",
+        "valueUsd": 0,
+        "buyZone": "TBD",
+        "strategy": "Spot holding",
+        "autoCompound": false,
+        "platforms": [],
+        "notes": "Oracle play. No auto-compound on Avalanche."
+      },
+      {
+        "symbol": "TAO",
+        "name": "Bittensor",
+        "type": "AI/ML",
+        "holdings": "0",
+        "valueUsd": 0,
+        "buyZone": "TBD",
+        "strategy": "Spot holding",
+        "autoCompound": false,
+        "platforms": [],
+        "notes": "AI narrative. Native chain only."
+      },
+      {
+        "symbol": "BEAM",
+        "name": "Beam",
+        "type": "Gaming",
+        "holdings": "0",
+        "valueUsd": 0,
+        "buyZone": "TBD",
+        "strategy": "Spot holding",
+        "autoCompound": false,
+        "platforms": [],
+        "notes": "Gaming narrative. No auto-compound on Avalanche."
+      },
+      {
+        "symbol": "XAUt",
+        "name": "Tether Gold",
+        "type": "Stable",
+        "holdings": "0",
+        "valueUsd": 0,
+        "buyZone": "TBD",
+        "strategy": "Hedge",
+        "autoCompound": false,
+        "platforms": [],
+        "notes": "Gold-backed stable. Hedge against crypto volatility."
+      }
+    ],
+    "autoCompoundOpportunities": [
+      {
+        "platform": "Yield Yak",
+        "pool": "sAVAX",
+        "type": "LST",
+        "tvl": 606167,
+        "apy": null,
+        "tokens": [
+          "sAVAX"
+        ],
+        "notes": "Staked AVAX. Auto-compounds BENQI rewards."
+      },
+      {
+        "platform": "Yield Yak",
+        "pool": "AVAX-rsAVAX",
+        "type": "Basic Stable",
+        "tvl": 19162,
+        "apy": 0.9,
+        "tokens": [
+          "AVAX",
+          "rsAVAX"
+        ],
+        "notes": "Low yield but stable. Restaked AVAX pair."
+      },
+      {
+        "platform": "Yield Yak",
+        "pool": "BLACK-AVAX",
+        "type": "Basic Volatile",
+        "tvl": 15793,
+        "apy": 7,
+        "tokens": [
+          "BLACK",
+          "AVAX"
+        ],
+        "notes": "Black Hole DEX token pair. Higher risk."
+      },
+      {
+        "platform": "Yield Yak",
+        "pool": "AVAX-KET",
+        "type": "Basic Volatile",
+        "tvl": 10144,
+        "apy": 10.5,
+        "tokens": [
+          "AVAX",
+          "KET"
+        ],
+        "notes": "Decent APY. Volatile pair."
+      },
+      {
+        "platform": "Yield Yak",
+        "pool": "WETH.e-AVAX",
+        "type": "Basic Volatile",
+        "tvl": 726,
+        "apy": 12.4,
+        "tokens": [
+          "WETH.e",
+          "AVAX"
+        ],
+        "notes": "ETH-AVAX pair. Good APY but low TVL."
+      },
+      {
+        "platform": "Yield Yak",
+        "pool": "COQ-AVAX",
+        "type": "LFJ",
+        "tvl": 868,
+        "apy": null,
+        "tokens": [
+          "COQ",
+          "AVAX"
+        ],
+        "notes": "COQ meme coin pair. Very low TVL. High risk."
+      }
+    ]
+  }
 }
