@@ -101,7 +101,7 @@
 
 ## APPLICATION PRIORITY ORDER
 
-1. **Binance Pioneer Talent** — Apply ASAP, deadline June 22
+1. ~~**Binance Pioneer Talent**~~ — SKIP (requires multilingual)
 2. **BNB Chain DevRel** — Apply this week
 3. **THORChain Protocol** — Apply when ready
 4. **Blockchain.com** — Skip (London requirement)
@@ -111,8 +111,8 @@
 ## NEXT STEPS
 
 - [x] Update crypto resume with latest projects (AgentKit, AgentNodeNetwork, Dashboard Engine) ✅ (Jun 18)
-- [ ] Prepare Binance application: cover letter + portfolio link
-- [ ] Submit Binance application before June 22
+- [ ] ~~Prepare Binance application~~ — SKIP (requires multilingual)
+- [ ] ~~Submit Binance application before June 22~~ — SKIP
 - [ ] Apply to BNB Chain DevRel
 - [ ] Continue scanning for more roles
 
