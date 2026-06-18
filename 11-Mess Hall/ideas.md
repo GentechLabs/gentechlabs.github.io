@@ -187,3 +187,40 @@ Expand Agent Rug from malicious token scanner to full agent security platform.
 - [ ] Map attack vectors (wallet drainers, approval abusers, etc.)
 - [ ] Design verification pipeline
 - [ ] Build prototype for Agent Kit integration
+
+---
+
+## [ ] 🏆 Agent Kit v2 — Modular Agent Framework
+- **Added:** 2026-06-18
+- **Source:** Jordan brainstorming session → "What improvements for Agent Kit?"
+- **What:** Modular, composable, self-healing agent framework that anyone can install, configure, and extend
+- **Key features:**
+  - **Modular Skill System** — Core + optional modules (defi, content, research, marketplace)
+  - **Auto-Detection** — Detects Hermes, BlockRun, Obsidian, GitHub, Telegram and adapts
+  - **Identity Persistence** — JSON-based identity survives session restarts
+  - **Skill Marketplace** — Publish/install skills, earn credits, revenue sharing
+  - **Health Dashboard** — Cron jobs, skills, memory, performance, platform status
+  - **Multi-Profile** — One install, multiple agents (defi, content, research)
+  - **Auto-Update** — Semantic versioning, rollback support
+  - **Pre-Built Templates** — DeFi Farmer, Content Creator, Research Agent
+  - **Documentation Site** — docs.gentech.dev with API reference
+- **Revenue model:**
+  - Free skills: 0 credits
+  - Paid skills: 1-100 credits
+  - Kit gets 10% platform fee
+  - Auto-payout weekly (credits → USDC on Base)
+- **Implementation roadmap:**
+  - Phase 1 (Week 1-2): Core — modular layout, auto-discovery, identity persistence
+  - Phase 2 (Week 3-4): Marketplace — skill packages, publish/install, credits
+  - Phase 3 (Week 5-6): Operations — health dashboard, multi-profile, updates
+  - Phase 4 (Week 7-8): Distribution — templates, docs site, community, launch
+- **Success metrics:**
+  - Install size (core) < 10MB
+  - Startup time < 5s
+  - 50+ marketplace skills in 3 months
+  - 100+ active installations in 6 months
+  - $500/mo revenue in 6 months
+- **Spec:** `02-Labs/agent-kit/AGENT-KIT-V2-SPEC.md`
+- **Status:** Spec complete → Ready to build
+- **Priority:** 🏆 Milestone (core product for GenTech ecosystem)
+- **Connection:** Complements Agent Kit (core), EvoMap (marketplace), Sana (revenue payouts)
