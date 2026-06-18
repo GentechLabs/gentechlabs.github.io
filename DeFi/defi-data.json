@@ -10,15 +10,15 @@
   "lpPosition": {
     "pair": "AVAX/USDC",
     "feeTier": "10bps",
-    "shape": "curve",
-    "displayShape": "Curve",
+    "shape": "bid-ask",
+    "displayShape": "Bid-Ask",
     "currentPrice": 6.28,
-    "rangeMin": 6.1961,
-    "rangeMax": 6.3212,
-    "avaxAmount": 1.873665,
-    "usdcAmount": 32.392047,
-    "totalValue": 44.16,
-    "totalValueUSD": 44.16,
+    "rangeMin": 6.19,
+    "rangeMax": 6.32,
+    "avaxAmount": 1.89,
+    "usdcAmount": 32.29,
+    "totalValue": 44.17,
+    "totalValueUSD": 44.17,
     "activeBin": 8362802,
     "binStep": 10,
     "totalBins": 21
@@ -34,11 +34,11 @@
     "dailyFees": 0.548,
     "efficiency": 66,
     "efficiencyZone": "Inner",
-    "shape": "Curve",
+    "shape": "Bid-Ask",
     "rangeStatus": "In Range",
     "currentPrice": 6.28,
-    "rangeMin": 6.1961,
-    "rangeMax": 6.3212,
+    "rangeMin": 6.19,
+    "rangeMax": 6.32,
     "milestoneNext": "Scout",
     "milestoneTarget": 5,
     "milestoneProgress": 11
@@ -67,14 +67,14 @@
     "efficiencyZone": "Inner",
     "recommendedAction": "Hold",
     "dcaType": "Moderate DCA",
-    "dcaDetails": "Moderate DCA — price in range",
-    "rebalanceTrigger": "Price exits $6.20-$6.32 range",
+    "dcaDetails": "Moderate DCA \u2014 price in range",
+    "rebalanceTrigger": "Price exits $6.19-$6.32 range",
     "compoundThreshold": 50,
     "cumulativeFees": 0.258,
     "nextCompound": "$49.74 away from first compound",
     "riskLevel": "Medium",
     "riskNote": "Price at $6.28, 66% efficiency",
-    "shape": "Curve"
+    "shape": "Bid-Ask"
   },
   "milestones": {
     "Scout": 5,
@@ -93,7 +93,7 @@
     "tiers": [
       {
         "tier": 1,
-        "icon": "🔭",
+        "icon": "\ud83d\udd2d",
         "label": "Scout",
         "target": 5,
         "unlocks": "Entry strategies (CURVE)",
@@ -101,7 +101,7 @@
       },
       {
         "tier": 2,
-        "icon": "⚔️",
+        "icon": "\u2694\ufe0f",
         "label": "Raider",
         "target": 20,
         "unlocks": "SPOT + BIDIRECTIONAL shapes",
@@ -109,7 +109,7 @@
       },
       {
         "tier": 3,
-        "icon": "👑",
+        "icon": "\ud83d\udc51",
         "label": "Warlord",
         "target": 50,
         "unlocks": "Multi-pool positions",
@@ -117,7 +117,7 @@
       },
       {
         "tier": 4,
-        "icon": "🏰",
+        "icon": "\ud83c\udff0",
         "label": "Sovereign",
         "target": 100,
         "unlocks": "Custom strategy creation + mentorship",
@@ -239,8 +239,8 @@
   },
   "walletBalances": {
     "avax": 0.09835505275632306,
-    "wavax": 6.06671055126e-7,
-    "usdc": 0.000008,
+    "wavax": 6.06671055126e-07,
+    "usdc": 8e-06,
     "liquidUsd": 0.62
   },
   "supportResistance": {
@@ -261,7 +261,7 @@
         "note": "Local high"
       },
       {
-        "price": 6.2,
+        "price": 6.19,
         "type": "support",
         "strength": "strong",
         "label": "Range Low",
@@ -276,10 +276,10 @@
       }
     ],
     "shapeRecommendation": {
-      "shape": "Curve",
+      "shape": "Bid-Ask",
       "reason": "Price at $6.28, within $6.20-$6.32 range.",
       "optimalRange": [
-        6.2,
+        6.19,
         6.32
       ]
     },
@@ -294,7 +294,7 @@
     "trend": "bearish",
     "suggestions": [
       {
-        "icon": "📉",
+        "icon": "\ud83d\udcc9",
         "title": "Bearish Pressure",
         "description": "AVAX is down 24h. Widen range or shift lower to avoid going out of range.",
         "priority": "low",
