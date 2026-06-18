@@ -1,35 +1,35 @@
 {
-  "lastUpdated": "2026-06-16T13:09:16.502Z",
-  "dataSource": "onchain-live",
+  "lastUpdated": "2026-06-18T12:46:00.000Z",
+  "dataSource": "manual-rebalance",
   "pool": "AVAX/USDC",
   "chain": "Avalanche",
   "dex": "LFJ V2.1",
   "wallet": "0x7ebff188f2Eba16518C02864589b1403a5d1296a",
-  "currentPrice": 6.93,
+  "currentPrice": 6.659,
   "priceChange24h": 0,
   "volume24h": 1412785.36,
   "liquidity": 379167.7,
   "walletBalances": {
-    "avax": 0.0976285420647475,
-    "wavax": 6.06671055027e-7,
-    "usdc": 0.000009,
-    "liquidUsd": 0.68
+    "avax": 3.598,
+    "wavax": 0,
+    "usdc": 22.19,
+    "liquidUsd": 0
   },
   "lpPosition": {
-    "activeBin": 8362898,
+    "shape": "curve",
+    "priceRange": [6.559, 6.759],
     "binStep": 10,
-    "binRange": [
-      8362885,
-      8362914
-    ],
-    "totalBins": 30,
-    "wavax": 4.443862,
-    "usdc": 15.499646,
-    "totalValueUsd": 46.3,
-    "poolReserveX": 35902.92,
-    "poolReserveY": 130371.87
+    "totalBins": 20,
+    "wavax": 3.598,
+    "usdc": 22.19,
+    "totalValueUsd": 46.12,
+    "fees24h": {
+      "totalUsd": 0.825,
+      "avax": 0.06271,
+      "usdc": 0.40798
+    }
   },
-  "totalValueUsd": 46.97,
+  "totalValueUsd": 46.12,
   "milestone": "Raider",
   "milestones": {
     "Scout": 5,
