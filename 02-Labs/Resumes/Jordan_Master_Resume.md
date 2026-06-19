@@ -94,7 +94,7 @@ Full-stack builder at the intersection of AI agents and DeFi. Shipping productio
 
 ## CURRENT FOCUS & GOALS
 
-**Primary Objective:** Transition from Amazon Flex to full-time crypto role by Q4 2026.
+**Primary Objective:** Transition from Amazon Flex to full-time remote crypto role.
 
 **Strategy:**
 1. Learn Solidity via Cyfrin Updraft → create projects that solve real problems
@@ -102,7 +102,6 @@ Full-stack builder at the intersection of AI agents and DeFi. Shipping productio
 3. Agent Kit v2 → distribute modular agent framework, earn via marketplace
 4. DeFi Model → deploy API endpoint, sell access via x402 micropayments
 5. Protocol contributions → open-source recognition + network effects
-6. Geo-arbitrage → Philippines relocation Q3 2026 for cost optimization
 
 **Learning Roadmap:** Cyfrin Updraft (speed-run for certification), Arc Boot Camp, Solana Boot Camp, advanced security patterns, agent economy design, LLM fine-tuning.
 
