@@ -11,6 +11,14 @@
 
 ## Scan Log
 
+### 2026-06-19
+- **15 total roles** on College.xyz (unchanged from 06-17)
+- **3 remote roles** found (ether.fi x2, Wintermute VC) — unchanged
+- **0 new matches** — ether.fi roles already tracked (IDs 31/32)
+- Wintermute VC Intern still partial (pay not listed)
+- Gemini Growth Marketing Associate (previously listed) appears removed or reclassified as full-time
+- Injective PM Intern (ID=38, NYC, $7.5K–$8K/mo) still present but onsite
+
 ### 2026-06-17
 - **15 total roles** on College.xyz (unchanged from 06-16)
 - **3 remote roles** found (ether.fi x2, Wintermute VC) — unchanged

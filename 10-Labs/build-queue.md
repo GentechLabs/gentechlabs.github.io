@@ -114,6 +114,23 @@ Active work items. Jordan's action items marked with **👤 JORDAN ACTION**.
 - **Priority:** MEDIUM — proof of concept working
 
 ## [ ] OOBE Protocol — Archive
+## [ ] Dry Powder Mode — AAE Stop-Loss Agent ⭐ NEW — DEFIAgent Kit
+- **Status:** 💡 Concept approved
+- **What:** Auto-withdraw liquidity during crashes, convert to stables, wait for recovery
+- **Why:** Jordan works 12hr Amazon shifts — can't watch markets. Agent auto-protects capital.
+- **Remaining:**
+  - [ ] Crash detection logic (price action thresholds, funding rates, news sentiment)
+  - [ ] Auto-withdraw from LFJ pools
+  - [ ] Swap to USDC/stables (dry powder mode)
+  - [ ] Recovery signal detection (RSI, volume, news cooldown)
+  - [ ] Auto-redeploy when conditions improve
+  - [ ] Config toggle: `"dry_powder_mode": true/false`
+  - [ ] Advisory mode: suggest pull → Jordan approves via Telegram
+  - [ ] Auto mode: execute on crash threshold
+  - [ ] Notification on all actions
+- **Priority:** HIGH — protects capital during 12hr shifts
+- **Source:** Jordan voice message, 2026-06-19
+- **Context:** Iran peace talks collapsed → AVAX dumped from $6.11 to $5.72 while Jordan was at work
 - **Repo:** https://github.com/ProtoJay4789/oobe-protocol
 - **Status:** Missed deadline. Code is complete and pushed.
 - **Action:** Archive for future reuse. No active deadline.
