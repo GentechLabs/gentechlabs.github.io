@@ -103,6 +103,20 @@ Active work items. Jordan's action items marked with **👤 JORDAN ACTION**.
   - [ ] Submit to hackathon
 - **Priority:** URGENT — deadline in 3 days
 
+## [ ] CMC Labs — CoinMarketCap Accelerator Application ⭐ NEW — DISTRIBUTION
+- **Status:** Research complete, ready to apply
+- **What:** CoinMarketCap's 1-year Web3 startup accelerator (340M+ monthly visitors)
+- **Why:** Massive visibility for AgentEscrow + GEN token + Agent Credit Score
+- **URL:** https://coinmarketcap.com/events/cmc-labs/
+- **Benefits:** Learn & Earn campaigns, airdrops, deep dive articles, YouTube videos, Twitter Spaces, mentorship (Wintermute, NGC Ventures, TON Foundation, SEI)
+- **Remaining:**
+  - [ ] Draft application narrative (AAE Protocol, Agent Credit Score, AgentEscrow)
+  - [ ] Prepare demo materials (working contracts, test results, repo links)
+  - [ ] Submit application
+  - [ ] Follow up with CMC Labs team
+- **Priority:** HIGH — distribution layer for GEN token launch
+- **Source:** Jordan voice message, 2026-06-19
+
 ## [ ] GenLayer — Builder Points + Intelligent Contract ⭐ NEW — PASSIVE INCOME
 - **Status:** Research complete, ready to deploy
 - **What:** Deploy on Bradbury testnet, farm Builder Points, climb leaderboard
