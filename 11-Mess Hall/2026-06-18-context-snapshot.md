@@ -213,3 +213,11 @@
 - Currently accepting applications
 - Jordan open to relocation but not right now
 
+
+## Career Scan Lessons (Jun 18, 2026)
+- HTTP 200 ≠ job is available. Must extract full page content, not just check if it loads.
+- Search snippets are unreliable — they show titles that don't match actual requirements.
+- "Entry level" in title ≠ entry level in requirements (Binance Accelerator requires Bachelor's).
+- Need to actually read the full job description before sharing, not just the headline.
+- JunBrain was the only true match — minimal requirements, "start ASAP", remote, English only.
+- Jordan's filter: no degree requirements, no bilingual, no hidden relocation, no "senior" disguised as entry-level.
