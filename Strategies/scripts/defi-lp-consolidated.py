@@ -503,13 +503,9 @@ def main():
 
     update_state_after_check(state, price, efficiency, in_range, was_sent=True)
 
-    # Exit codes for cron monitoring
-    if alert_level == "HIGH":
-        sys.exit(2)
-    elif alert_level == "MEDIUM":
-        sys.exit(1)
-    else:
-        sys.exit(0)
+    # Always exit 0 — alerts are in stdout, not exit codes
+    # Exit codes cause cron to log "error" status even when script works correctly
+    sys.exit(0)
 
 if __name__ == "__main__":
     main()

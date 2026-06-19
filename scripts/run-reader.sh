@@ -4,7 +4,7 @@
 set -e
 
 WALLET="${1:-0x7ebff188f2Eba16518C02864589b1403a5d1296a}"
-SHAPE="${SHAPE:-bid-ask}"
+SHAPE="${SHAPE:-curve}"
 
 cd /root/projects/lp-reader
 
