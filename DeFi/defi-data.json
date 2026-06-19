@@ -1,79 +1,79 @@
 {
-  "lastUpdated": "2026-06-19T12:30:35.051Z",
+  "lastUpdated": "2026-06-19T12:40:35.079Z",
   "pool": "AVAX/USDC",
   "chain": "Avalanche",
   "dex": "LFJ",
-  "currentPrice": 6.055,
-  "priceChange24h": -8.97,
-  "volume24h": 1640187.26,
-  "liquidity": 342561.03,
+  "currentPrice": 6.067,
+  "priceChange24h": -8.79,
+  "volume24h": 1655062.11,
+  "liquidity": 343213.31,
   "lpPosition": {
     "pair": "AVAX/USDC",
     "feeTier": "10bps",
     "shape": "bid-ask",
     "displayShape": "Bid-Ask",
-    "currentPrice": 6.055,
-    "rangeMin": 6.1837,
-    "rangeMax": 6.3275,
-    "avaxAmount": 7.102658,
-    "usdcAmount": 0,
-    "totalValue": 43.01,
-    "totalValueUSD": 43.01,
-    "activeBin": 8362765,
+    "currentPrice": 6.067,
+    "rangeMin": 5.9951,
+    "rangeMax": 6.1468,
+    "avaxAmount": 3.02487,
+    "usdcAmount": 24.670026,
+    "totalValue": 43.02,
+    "totalValueUSD": 43.02,
+    "activeBin": 8362768,
     "binStep": 10,
-    "totalBins": 24
+    "totalBins": 26
   },
   "fees": {
-    "dailyFees": 0.659,
-    "cumulativeFees": 0.6073,
+    "dailyFees": 0.664,
+    "cumulativeFees": 0.6119,
     "feeCurrency": "USD"
   },
-  "efficiency": 100,
+  "efficiency": 5,
   "hero": {
-    "positionUsd": 43.01,
-    "dailyFees": 0.659,
-    "efficiency": 100,
-    "efficiencyZone": "Center",
+    "positionUsd": 43.02,
+    "dailyFees": 0.664,
+    "efficiency": 5,
+    "efficiencyZone": "Outer",
     "shape": "Bid-Ask",
-    "rangeStatus": "Out of Range",
-    "currentPrice": 6.055,
-    "rangeMin": 6.1837,
-    "rangeMax": 6.3275,
+    "rangeStatus": "In Range",
+    "currentPrice": 6.067,
+    "rangeMin": 5.9951,
+    "rangeMax": 6.1468,
     "milestoneNext": "Scout",
     "milestoneTarget": 5,
     "milestoneProgress": 13
   },
   "marketIntel": {
-    "avaxPrice": 6.055,
-    "change24h": -8.97,
-    "volume24h": 1640187.26,
-    "tvl": 342561.03,
+    "avaxPrice": 6.067,
+    "change24h": -8.79,
+    "volume24h": 1655062.11,
+    "tvl": 343213.31,
     "trend": "bearish",
     "news": [
       {
-        "headline": "AVAX down 8.97% in 24h",
+        "headline": "AVAX down 8.79% in 24h",
         "impact": "bearish",
         "relevance": "high"
       },
       {
-        "headline": "LFJ AVAX/USDC pool volume: $1640.2K",
+        "headline": "LFJ AVAX/USDC pool volume: $1655.1K",
         "impact": "neutral",
         "relevance": "medium"
       }
     ]
   },
   "strategyAdvisor": {
-    "efficiency": 100,
-    "efficiencyZone": "Center",
-    "recommendedAction": "Rebalance",
-    "dcaType": "Full DCA",
-    "dcaDetails": "Full DCA — rebalance needed",
-    "rebalanceTrigger": "Price exits $6.18-$6.33 range",
+    "efficiency": 5,
+    "efficiencyZone": "Outer",
+    "recommendedAction": "Hold",
+    "dcaType": "Micro-DCA",
+    "dcaDetails": "Micro DCA — price in range",
+    "rebalanceTrigger": "Price exits $6.00-$6.15 range",
     "compoundThreshold": 50,
-    "cumulativeFees": 0.6073,
+    "cumulativeFees": 0.6119,
     "nextCompound": "$49.39 away from first compound",
-    "riskLevel": "Critical",
-    "riskNote": "Out of range — rebalance needed",
+    "riskLevel": "High",
+    "riskNote": "Price at $6.07, 5% efficiency",
     "shape": "Bid-Ask"
   },
   "milestones": {
@@ -83,9 +83,9 @@
     "Sovereign": 100
   },
   "feeMilestones": {
-    "currentDailyFees": 0.659,
-    "cumulativeFees": 0.6073,
-    "positionUsd": 43.01,
+    "currentDailyFees": 0.664,
+    "cumulativeFees": 0.6119,
+    "positionUsd": 43.02,
     "daysActive": 1,
     "nextMilestone": "Scout",
     "nextTarget": 5,
@@ -126,164 +126,174 @@
     ]
   },
   "curveData": {
-    "currentPrice": 6.055,
-    "rangeMin": 6.1837,
-    "rangeMax": 6.3275,
+    "currentPrice": 6.067,
+    "rangeMin": 5.9951,
+    "rangeMax": 6.1468,
     "bins": [
       {
-        "price": 6.1837,
+        "price": 5.9951,
         "depth": 1,
-        "id": 8362786
+        "id": 8362755
       },
       {
-        "price": 6.1899,
-        "depth": 0.9361862457213381,
-        "id": 8362787
+        "price": 6.0011,
+        "depth": 0.9230769894112504,
+        "id": 8362756
       },
       {
-        "price": 6.1961,
-        "depth": 0.8708901243401109,
-        "id": 8362788
+        "price": 6.0071,
+        "depth": 0.8461536913737494,
+        "id": 8362757
       },
       {
-        "price": 6.2023,
-        "depth": 0.8077062681035024,
-        "id": 8362789
+        "price": 6.0131,
+        "depth": 0.7692306807849996,
+        "id": 8362758
       },
       {
-        "price": 6.2085,
-        "depth": 0.7446919783385529,
-        "id": 8362790
+        "price": 6.0191,
+        "depth": 0.69230767019625,
+        "id": 8362759
       },
       {
-        "price": 6.2147,
-        "depth": 0.6818408161836003,
-        "id": 8362791
+        "price": 6.0251,
+        "depth": 0.6153846596075001,
+        "id": 8362760
       },
       {
-        "price": 6.2209,
-        "depth": 0.6186075997893945,
-        "id": 8362792
+        "price": 6.0311,
+        "depth": 0.5384613615699991,
+        "id": 8362761
       },
       {
-        "price": 6.2272,
-        "depth": 0.5560053965948274,
-        "id": 8362793
+        "price": 6.0372,
+        "depth": 0.46153835098124946,
+        "id": 8362762
       },
       {
-        "price": 6.2334,
-        "depth": 0.49371688937360736,
-        "id": 8362794
+        "price": 6.0432,
+        "depth": 0.3846153403924998,
+        "id": 8362763
       },
       {
-        "price": 6.2396,
-        "depth": 0.4315594658431583,
-        "id": 8362795
+        "price": 6.0493,
+        "depth": 0.3076923298037501,
+        "id": 8362764
       },
       {
-        "price": 6.2459,
-        "depth": 0.3704396276662521,
-        "id": 8362796
+        "price": 6.0553,
+        "depth": 0.2309714345166675,
+        "id": 8362765
       },
       {
-        "price": 6.2521,
-        "depth": 0.3084907301314797,
-        "id": 8362797
+        "price": 6.0614,
+        "depth": 0.1539861138157322,
+        "id": 8362766
       },
       {
-        "price": 6.2584,
-        "depth": 0.24614885106528378,
-        "id": 8362798
+        "price": 6.0674,
+        "depth": 0.06436836978565966,
+        "id": 8362767
       },
       {
-        "price": 6.2646,
-        "depth": 0.18455862784455687,
-        "id": 8362799
+        "price": 6.0735,
+        "depth": 0.1035972961978694,
+        "id": 8362768
       },
       {
-        "price": 6.2709,
-        "depth": 0.12302566721656223,
-        "id": 8362800
+        "price": 6.0796,
+        "depth": 0.15515328033441275,
+        "id": 8362769
       },
       {
-        "price": 6.2771,
-        "depth": 0.0687814788593155,
-        "id": 8362801
+        "price": 6.0856,
+        "depth": 0.20687104044588372,
+        "id": 8362770
       },
       {
-        "price": 6.2834,
-        "depth": 0.15240094627102954,
-        "id": 8362802
+        "price": 6.0917,
+        "depth": 0.25858880055735456,
+        "id": 8362771
       },
       {
-        "price": 6.2897,
-        "depth": 0.22873363748761463,
-        "id": 8362803
+        "price": 6.0978,
+        "depth": 0.31030656066882556,
+        "id": 8362772
       },
       {
-        "price": 6.296,
-        "depth": 0.30595087081938765,
-        "id": 8362804
+        "price": 6.1039,
+        "depth": 0.36202432078029645,
+        "id": 8362773
       },
       {
-        "price": 6.3023,
-        "depth": 0.38405005834281103,
-        "id": 8362805
+        "price": 6.11,
+        "depth": 0.4137420808917674,
+        "id": 8362774
       },
       {
-        "price": 6.3086,
-        "depth": 0.45949387890816046,
-        "id": 8362806
+        "price": 6.1161,
+        "depth": 0.4654598410032384,
+        "id": 8362775
       },
       {
-        "price": 6.3149,
-        "depth": 0.5325604854754343,
-        "id": 8362807
+        "price": 6.1222,
+        "depth": 0.5171776011147093,
+        "id": 8362776
       },
       {
-        "price": 6.3212,
-        "depth": 0.607977569901812,
-        "id": 8362808
+        "price": 6.1284,
+        "depth": 0.5688953612261801,
+        "id": 8362777
       },
       {
-        "price": 6.3275,
-        "depth": 0.6839747661395382,
-        "id": 8362809
+        "price": 6.1345,
+        "depth": 0.620613121337651,
+        "id": 8362778
+      },
+      {
+        "price": 6.1406,
+        "depth": 0.6723308814491221,
+        "id": 8362779
+      },
+      {
+        "price": 6.1468,
+        "depth": 0.724048641560593,
+        "id": 8362780
       }
     ]
   },
   "walletBalances": {
-    "avax": 0.09803452815033474,
-    "wavax": 6.06671055139e-7,
-    "usdc": 0.000008,
+    "avax": 0.09774532097263909,
+    "wavax": 6.06671055149e-7,
+    "usdc": 0.000006,
     "liquidUsd": 0.59
   },
   "supportResistance": {
-    "currentPrice": 6.055,
+    "currentPrice": 6.067,
     "levels": [
       {
-        "price": 6.33,
+        "price": 6.15,
         "type": "resistance",
         "strength": "strong",
         "label": "Range High",
         "note": "Current position top"
       },
       {
-        "price": 6.36,
+        "price": 6.18,
         "type": "resistance",
         "strength": "weak",
         "label": "Minor Resistance",
         "note": "Local high"
       },
       {
-        "price": 6.18,
+        "price": 6,
         "type": "support",
         "strength": "strong",
         "label": "Range Low",
         "note": "Current position bottom"
       },
       {
-        "price": 6.15,
+        "price": 5.96,
         "type": "support",
         "strength": "weak",
         "label": "Minor Support",
@@ -292,29 +302,37 @@
     ],
     "shapeRecommendation": {
       "shape": "Bid-Ask",
-      "reason": "Price at $6.05, outside $6.18-$6.33 range.",
+      "reason": "Price at $6.07, within $6.00-$6.15 range.",
       "optimalRange": [
-        6.18,
-        6.33
+        6,
+        6.15
       ]
     },
-    "proximityAlert": "⚠️ Price out of range"
+    "proximityAlert": "Price 47% into range"
   },
   "rebalanceSuggestions": {
-    "efficiency": 100,
-    "price": 6.055,
-    "rangeMin": 6.1837,
-    "rangeMax": 6.3275,
-    "volatility": 8.97,
+    "efficiency": 5,
+    "price": 6.067,
+    "rangeMin": 5.9951,
+    "rangeMax": 6.1468,
+    "volatility": 8.79,
     "trend": "bearish",
     "suggestions": [
       {
-        "icon": "🚨",
-        "title": "Price Out of Range",
-        "description": "AVAX at $6.0550 is outside your $6.1837-$6.3275 range. You are not earning fees.",
-        "priority": "high",
-        "impact": "Immediate",
-        "action": "Rebalance on LFJ"
+        "icon": "⚠️",
+        "title": "Price Near Edge",
+        "description": "Price is near the edge of your range (5% efficiency). Consider narrowing or recentering.",
+        "priority": "medium",
+        "impact": "Moderate",
+        "action": "Review Range"
+      },
+      {
+        "icon": "📉",
+        "title": "Bearish Pressure",
+        "description": "AVAX is down 24h. Widen range or shift lower to avoid going out of range.",
+        "priority": "low",
+        "impact": "Risk",
+        "action": "Adjust Down"
       }
     ]
   },
@@ -323,9 +341,9 @@
       "date": "2026-06-19",
       "type": "Snapshot",
       "token": "AVAX/USDC",
-      "amount": "7.1027 WAVAX + 0.00 USDC",
-      "usd": "43.01",
-      "status": "Out of Range"
+      "amount": "3.0249 WAVAX + 24.67 USDC",
+      "usd": "43.02",
+      "status": "In Range"
     },
     {
       "date": "2026-06-18",
