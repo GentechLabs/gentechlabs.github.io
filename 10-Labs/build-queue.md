@@ -103,6 +103,23 @@ Active work items. Jordan's action items marked with **👤 JORDAN ACTION**.
   - [ ] Submit to hackathon
 - **Priority:** URGENT — deadline in 3 days
 
+## [ ] GenLayer — Builder Points + Intelligent Contract ⭐ NEW — PASSIVE INCOME
+- **Status:** Research complete, ready to deploy
+- **What:** Deploy on Bradbury testnet, farm Builder Points, climb leaderboard
+- **Why:** Early testnet participants often get retroactive airdrops. Zero cost, speculative upside.
+- **Portal:** https://portal.genlayer.foundation/
+- **Faucet:** https://testnet-faucet.genlayer.foundation
+- **Studio:** https://studio.genlayer.com
+- **Remaining:**
+  - [ ] Create account + connect wallet
+  - [ ] Grab testnet GEN from faucet
+  - [ ] Deploy Intelligent Contract (LLM Hello World or AgentEscrow showcase)
+  - [ ] Register on dev portal → earn Builder Points
+  - [ ] Join GenLayer Discord + intro in builder channels
+  - [ ] Submit AgentEscrow v2 as showcase project
+- **Priority:** HIGH — free play with airdrop upside, Jordan off tomorrow
+- **Source:** Jordan voice message, 2026-06-19
+
 ## ✅ Christel's Kitchen Dashboard — LIVE
 - **URL:** https://protojay4789.github.io/Cookbook/christel-kitchen.html
 - **Status:** ✅ Live. First Cookbook beta user. Cross-layer nav added.
