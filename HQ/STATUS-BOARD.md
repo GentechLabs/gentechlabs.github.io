@@ -1,6 +1,6 @@
 # 📋 GenTech Status Board
 
-**Last updated:** 2026-06-18 (nightly sweep)
+**Last updated:** 2026-06-19 (nightly sweep)
 **Updated by:** Gentech
 
 > Jordan: This is your single file to check. Open it, know everything.
@@ -70,13 +70,13 @@
 ---
 
 ## 🔮 Coming Up
-- 🔴 **Jun 19:** Encode Vibe Coding Hackathon — ⚠️ DEADLINE TOMORROW (1 day)
-- ⚠️ **Jun 21:** Sui Overflow — Token Risk Oracle (3 days)
-- **Jun 22:** Encode Solana + Arc Bootcamps — sign up needed (4 days)
-- **Jun 24:** BNB Agent SDK — AI Agent Identity + Commerce (6 days)
-- **Jun 29:** Lepton Agents — Cookbook Nanopay (11 days)
-- **Jun 30:** Casper Agentic Buildathon — $150K, agentic AI + x402 (12 days)
-- **Jul 9:** Qwen Cloud Global AI Hackathon — $70K+, Agent Society track (22 days)
+- ⚠️ **Jun 19:** Encode Vibe Coding Hackathon — ⚠️ DEADLINE TODAY (TODAY)
+- ⚠️ **Jun 21:** Sui Overflow — Token Risk Oracle (2 days)
+- **Jun 22:** Encode Solana + Arc Bootcamps — sign up needed (3 days)
+- **Jun 24:** BNB Agent SDK — AI Agent Identity + Commerce (5 days)
+- **Jun 29:** Lepton Agents — Cookbook Nanopay (10 days)
+- **Jun 30:** Casper Agentic Buildathon — $150K, agentic AI + x402 (11 days)
+- **Jul 9:** Qwen Cloud Global AI Hackathon — $70K+, Agent Society track (20 days)
 
 - ~~**Jun 4:** 1752vc Lightning Round VIII — $100K investment~~ ✅ PASSED
 - ~~**Jun 5:** Google for Startups AI Agents Challenge — $90K~~ ✅ PASSED
@@ -94,8 +94,8 @@
 
 - **Approval Queue:** ✅ Clean — no pending items
 - **Considerations:** ✅ Active items current
-**Working Memory:** ✅ Updated June 18
-**Status Board:** ✅ Updated June 18
+**Working Memory:** ✅ Updated June 19
+**Status Board:** ✅ Updated June 19
 
 ---
 
