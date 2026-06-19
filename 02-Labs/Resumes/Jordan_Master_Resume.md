@@ -104,7 +104,7 @@ Full-stack builder at the intersection of AI agents and DeFi. Shipping productio
 5. Protocol contributions → open-source recognition + network effects
 6. Geo-arbitrage → Philippines relocation Q3 2026 for cost optimization
 
-**Learning Roadmap:** Cyfrin Updraft (Solidity fundamentals), Solana/Rust mastery, advanced security patterns, agent economy design, LLM fine-tuning.
+**Learning Roadmap:** Cyfrin Updraft (speed-run for certification), Arc Boot Camp, Solana Boot Camp, advanced security patterns, agent economy design, LLM fine-tuning.
 
 ---
 
@@ -126,9 +126,13 @@ Full-stack builder at the intersection of AI agents and DeFi. Shipping productio
 
 ## EDUCATION
 
-**Cyfrin Updraft** — In Progress
+**Cyfrin Updraft** — In Progress (speed-running for certification)
 - Solidity fundamentals, security patterns, smart contract development
 - Learning approach: AI agent codes, humans audit
+
+**Arc Boot Camp** — Enrolled
+**Arc Hackathon** — Enrolled
+**Solana Boot Camp** — Enrolled
 
 ---
 

@@ -1,16 +1,16 @@
 # 🏆 Active Hackathon Tracker
 
-Last updated: 2026-06-18
+Last updated: 2026-06-17
 
 ## Priority Queue (Active)
 
 | # | Hackathon | Deadline | Prize | Status | Notes |
 |---|-----------|----------|-------|--------|-------|
-| 🔴 | Encode Vibe Coding Hackathon | Jun 19 (1 day) | TBD | 🟡 QUEUE | ⚠️ DEADLINE TOMORROW. 3-day sprint. |
-| ⚠️ | Sui Overflow | Jun 21 (3 days) | $500K+ | 🟡 QUEUE | Token Risk Oracle (Move). ⚠️ Jordan to verify registration. |
-| 🥇 | BNB HACK: AI Trading Agent | Jun 24 (6 days) | $36K | 📝 REGISTERING | ERC-8004 + ERC-8183 + Q402 gasless payments. Partners: BNB + CoinMarketCap + Trust Wallet. |
-| 🥈 | Casper Agentic Buildathon | Jun 30 (12 days) | $150K | 🟡 QUEUE | Agentic AI + x402 + DeFi on Casper (Rust/WebAssembly). First WASM chain with live x402. |
-| 🥉 | Lepton Agents | Jun 29 (11 days) | TBD | 🟡 QUEUE | Cookbook Nanopay, AgentBridge needs Base Sepolia deploy. |
+| ⚠️ | Encode Vibe Coding Hackathon | Jun 19 (2 days) | TBD | 🟡 QUEUE | 3-day sprint. |
+| ⚠️ | Sui Overflow | Jun 21 (4 days) | $500K+ | 🟡 QUEUE | Token Risk Oracle (Move). ⚠️ Jordan to verify registration. |
+| 🥇 | BNB HACK: AI Trading Agent | Jun 24 (7 days) | $36K | 📝 REGISTERING | ERC-8004 + ERC-8183 + Q402 gasless payments. Partners: BNB + CoinMarketCap + Trust Wallet. |
+| 🥈 | Casper Agentic Buildathon | Jun 30 (13 days) | $150K | 🟡 QUEUE | Agentic AI + x402 + DeFi on Casper (Rust/WebAssembly). First WASM chain with live x402. |
+| 🥉 | Lepton Agents | Jun 29 (12 days) | TBD | 🟡 QUEUE | Cookbook Nanopay, AgentBridge needs Base Sepolia deploy. |
 
 ## Submitted (Complete)
 
@@ -72,12 +72,12 @@ Last updated: 2026-06-18
 - ~~**Arbitrum Open House submission**: Jun 14~~ ✅ SHIPPED Jun 14.
 - ~~**Mantle Turing Test Phase II**: Jun 15~~ ✅ PASSED Jun 15.
 - ~~**FIND EVIL!**: Jun 15 — $22K, cybersecurity + AI, MCP.~~ ✅ PASSED Jun 15.
-🔴 **Encode Vibe Coding Hackathon**: Jun 19 — ⚠️ DEADLINE TOMORROW (1 day)
-⚠️ **Sui Overflow**: Jun 21 — Token Risk Oracle (3 days)
-**Encode Solana + Arc Bootcamps**: Jun 22 start — SIGN UP NEEDED (4 days)
-**BNB Agent SDK**: Jun 24 — AI Agent Identity + Commerce (6 days)
-**Lepton Agents**: Jun 29 — Cookbook Nanopay (11 days)
-**Casper Agentic Buildathon**: ~Jun 30 — $150K, agentic AI + x402 (12 days)
+⚠️ **Encode Vibe Coding Hackathon**: Jun 19 — 3-day sprint (2 days)
+⚠️ **Sui Overflow**: Jun 21 — Token Risk Oracle (4 days)
+**Encode Solana + Arc Bootcamps**: Jun 22 start — SIGN UP NEEDED (5 days)
+**BNB Agent SDK**: Jun 24 — AI Agent Identity + Commerce (7 days)
+**Lepton Agents**: Jun 29 — Cookbook Nanopay (12 days)
+**Casper Agentic Buildathon**: ~Jun 30 — $150K, agentic AI + x402 (13 days)
 **Qwen Cloud Global AI Hackathon**: Jul 9 — $70K+, Agent Society track (22 days)
 
 ## Priority Order (per Jordan directive, Jun 4)
