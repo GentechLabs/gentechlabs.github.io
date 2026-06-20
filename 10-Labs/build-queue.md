@@ -4,6 +4,65 @@ Active work items. Jordan's action items marked with **👤 JORDAN ACTION**.
 
 ---
 
+## [ ] Voicebox — Open Source ElevenLabs Replacement ⭐ NEW — TTS
+- **Repo:** TBD (open source, from Better Stack video)
+- **Status:** Research needed. Video just released.
+- **What:** Open-source TTS that replaces ElevenLabs. Free, self-hosted, unlimited usage.
+- **Why:** ElevenLabs creator sub burned through credits in days. Cron jobs can't use TTS without blowing the budget. Voicebox = unlimited TTS for $0.
+- **Remaining:**
+  - [ ] Watch video, pull transcript, identify the project
+  - [ ] Compare quality to ElevenLabs (voice naturalness, latency)
+  - [ ] Check self-hosting requirements (VPS? laptop?)
+  - [ ] Test with Reparathy voice persona
+  - [ ] Benchmark: 1000 char test, measure quality + speed
+  - [ ] If good enough → replace ElevenLabs for all cron jobs
+  - [ ] Wire into Hermes TTS config
+- **Priority:** HIGH — saves money, enables unlimited voice delivery
+- **Source:** Jordan shared video, 2026-06-20
+- **Context:** ElevenLabs creator sub consumed in days. Cron jobs (30+) need TTS daily. Voicebox = free, open source, no rate limits.
+
+## [ ] Sell Our APIs to AI Agents ⭐ NEW — REVENUE LAYER
+- **Repo:** To be created
+- **Status:** Pattern exists in vault (productize-as-paid-api.md). Rugcheck v2 is proof of concept.
+- **What:** Productize our existing tools as paid APIs that other agents pay for via x402 micropayments. Agents consume, we earn.
+- **Why:** We've been building the consumer side (agents that pay). Now we flip it — sell our tools to other agents. Revenue layer for Agent Kit.
+- **Existing APIs to Productize:**
+  - [ ] **Token Risk Scoring** (Rugcheck v2) — already built, FastAPI + x402 middleware, 9/9 tests passing
+  - [ ] **Agent Credit Score** — 22/22 tests, MIT licensed, open standard
+  - [ ] **ERC-8004 Identity Lookup** — cross-chain agent identity verification
+  - [ ] **DeFi Yield Optimizer** — yield routing recommendations
+  - [ ] **Portfolio Analytics** — position analysis, risk assessment
+- **Revenue Model:**
+  - Each API: $0.01-0.10 per query via x402 micropayments
+  - Listed in pay-skills catalog (already have the pattern)
+  - Agents discover via MCP server or HTTP API
+- **Remaining:**
+  - [ ] Deploy Rugcheck v2 API to VPS (port 8088, already built)
+  - [ ] Add Q402 payment middleware (real settlement, not stub)
+  - [ ] List in pay-skills catalog for agent discovery
+  - [ ] Build Agent Credit Score API wrapper
+  - [ ] Create API documentation (agent-readable)
+  - [ ] Set up usage tracking + billing dashboard
+  - [ ] Content series: "How to Sell Your API to AI Agents" (4 posts)
+- **Priority:** HIGH — revenue layer, proof of concept exists
+- **Source:** Jordan voice message, 2026-06-20 (Sell Your API to AI Agents video)
+- **Context:** We already have the Rugcheck v2 API built (FastAPI + x402 + simulation mode). This is deployment + real payments + discovery. Pattern: productize-as-paid-api.md in build workflow.
+
+## [ ] PixelRAG × Agent Kit Integration ⭐ NEW — VISUAL SEARCH
+- **Repo:** github.com/StarTrail-org/PixelRAG (Apache-2.0)
+- **Status:** Installed in /root/pixelrag-env (Python 3.12 venv). CLI working. Integration pending.
+- **What:** Visual search for agents — screenshot web pages, search over images, read charts/tables/diagrams directly. "Give Claude eyes."
+- **Why:** Current agents parse HTML text and lose layout context. PixelRAG renders pages to visual embeddings — agents see what humans see.
+- **Remaining:**
+  - [ ] Test pixelshot on various page types (docs, dashboards, charts)
+  - [ ] Build custom index of our vault docs for visual search
+  - [ ] Add pixelshot as Agent Kit tool (screenshot → embed → search)
+  - [ ] Wire into agent web research workflow
+  - [ ] Test: agent screenshots a dashboard, reads the data visually
+- **Priority:** HIGH — makes agents see, not just read
+- **Source:** Jordan voice message, 2026-06-20
+- **Context:** Berkeley SkyLab, 694 stars in 3 weeks. pip install pixelrag. Uses Qwen3-VL-Embedding for visual search.
+
 ## [ ] Q402 × Agent Kit Integration ⭐ NEW — PAYMENT RAIL
 - **Repo:** To be created
 - **Status:** MCP server added to config. SDK integration pending.
@@ -61,6 +120,31 @@ Active work items. Jordan's action items marked with **👤 JORDAN ACTION**.
   - [ ] Phase 3: Uniswap Execution (1 week)
   - [ ] Phase 4: x402 Payments (1 week)
 - **Priority:** HIGH — first major integration partnership
+
+## [ ] DCA Strategy Dashboard — AAE DeFi Milestone Feature ⭐ NEW — PRODUCT
+- **Status:** 💡 Concept approved
+- **What:** Visualize DCA efficiency zones, IL erosion over time, and strategy comparison (your metrics vs average LP)
+- **Why:** Gamification keeps LPs engaged. Strategy comparison = motivation. Efficiency zones = actionable insight.
+- **Features:**
+  - [ ] Efficiency zone heatmap (earning vs idle)
+  - [ ] IL erosion tracker (strategic DCA reducing IL)
+  - [ ] Strategy comparison panel (you vs average LP)
+  - [ ] DCA sizing recommendations based on zone
+  - [ ] **Liquidity shape recommendation** — suggest optimal shape (spot/curve/bid-ask) based on market conditions
+  - [ ] "Top X% of LPs" gamification
+- **Shape Logic:**
+  - High volatility + trending → Bid-ask (wider edges capture swings)
+  - Low volatility + ranging → Curve (concentrated at center)
+  - Stablecoin pairs → Spot (always 100% efficient)
+  - Crash incoming → Extract (pull to stables)
+  - Recovery phase → Compound (re-enter with bid-ask at better prices)
+  - **Low efficiency (<30%)** → Shape change triggered:
+    - Price near lower edge → Expand range down OR switch to curve
+    - Price near upper edge → Expand range up OR switch to bid-ask
+    - Approaching out-of-range → Rebalance + new shape recommendation
+    - Volatile chop → Bid-ask with wider edges
+- **Priority:** MEDIUM — feature module for existing DeFi dashboard
+- **Source:** Jordan voice message, 2026-06-20
 
 ## [ ] GenTech Journal — Consumer Visual Journal ⭐ NEW — PRODUCT
 - **Repo:** To be created
