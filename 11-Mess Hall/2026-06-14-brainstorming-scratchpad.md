@@ -26,7 +26,7 @@ There's no visible indicator for Jordan when I'm running low on context. He can'
 
 - Dashboard Engine: `assets/dashboard-engine.js` (38KB, zero deps)
 - AAE DeFi Dashboard: `DeFi/defi-dashboard.html` (v2.0 with scout fleet)
-- gentech-dashboard repo: DeFi-first, grant-ready positioning
+- gentech-hub repo: DeFi-first, grant-ready positioning
 - Christel's Kitchen: `Cookbook/christel-kitchen.html`
 
 ---

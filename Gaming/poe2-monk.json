@@ -1,220 +1,158 @@
 {
-  "characters": [
+  "character": {
+    "name": "Jordan's Monk",
+    "class": "Monk",
+    "level": 26,
+    "ascendancy": "Invoker",
+    "act": "Act 2",
+    "stats": {
+      "life": 639,
+      "energyShield": 68,
+      "mana": 224,
+      "spirit": 30
+    },
+    "ascendancyPoints": {
+      "earned": 2,
+      "total": 8,
+      "source": "Trial of the Sekhemas",
+      "note": "Completed with Vanito — left with 1 honor"
+    }
+  },
+  "skills": [
     {
-      "id": "monk-jordan",
-      "player": "Jordan",
-      "alias": "Lightning Monk",
-      "class": "Monk",
-      "build": "Lightning Invoker",
-      "ascendancy": "Invoker",
-      "level": 26,
-      "league": "Standard",
-      "act": "Act 2",
-      "mission": "Progressing",
-      "patch": "0.5",
-      "progress": {
-        "campaign": 50,
-        "buildCompletion": 65,
-        "gemCollection": 45,
-        "metaAlignment": 70
-      },
-      "skills": [
-        {
-          "name": "Tempest Flurry",
-          "type": "Primary Attack — Lightning",
-          "primary": true,
-          "supports": ["Elemental Armament", "Bounty 1"],
-          "role": "Main damage dealer. Scales with Invoker elemental penetration."
-        },
-        {
-          "name": "Falling Thunder",
-          "type": "Burst Damage — Lightning",
-          "primary": true,
-          "supports": ["Rapid Attacks 1"],
-          "role": "Burst damage on shocked enemies. Invoker penetration makes it hit harder."
-        },
-        {
-          "name": "Thunderstorm",
-          "type": "AoE Clear — Lightning",
-          "primary": true,
-          "supports": [],
-          "role": "AoE clear. Needs Shock Conduction II + Overcharge."
-        },
-        {
-          "name": "Orb of Storms",
-          "type": "Sustained Damage — Lightning",
-          "primary": false,
-          "supports": ["Slow Potency"],
-          "role": "Sustained damage. Invoker spell scaling boosts this significantly."
-        },
-        {
-          "name": "Tempest Bell",
-          "type": "Stun / Utility",
-          "primary": false,
-          "supports": ["Slow Potency"],
-          "role": "Crowd control and stun. Utility skill."
-        },
-        {
-          "name": "Mana Drain",
-          "type": "Sustain — Mana Recovery",
-          "primary": false,
-          "supports": ["Rapid Casting"],
-          "role": "Mana sustain. Essential for sustained combat."
-        },
-        {
-          "name": "Killing Palm",
-          "type": "Sustain — Power Charges on Cull",
-          "primary": false,
-          "supports": [],
-          "role": "Power Charges on cull. Great for campaign with adds."
-        },
-        {
-          "name": "Parry",
-          "type": "Defensive",
-          "primary": false,
-          "supports": [],
-          "role": "Defensive skill. Parry → counterattack."
-        },
-        {
-          "name": "Herald of Thunder",
-          "type": "Buff — Lightning Procs on Shock",
-          "primary": false,
-          "supports": [],
-          "role": "Herald. Invoker scales heralds hard. Key endgame skill."
-        },
-        {
-          "name": "Mana Remnants",
-          "type": "Sustain — Mana Globes on Kill",
-          "primary": false,
-          "supports": [],
-          "role": "Mana sustain on kill. Pairs with Mana Drain."
-        }
-      ],
-      "upgrades": [
-        {
-          "priority": 1,
-          "skill": "Thunderstorm",
-          "current": "No supports",
-          "suggested": "Shock Conduction II + Overcharge",
-          "reason": "100% shock chain across enemies. Cornerstone combo for lightning Monk."
-        },
-        {
-          "priority": 2,
-          "skill": "Orb of Storms",
-          "current": "Slow Potency",
-          "suggested": "Chain + Increased AoE",
-          "reason": "Chain bounces bolts between enemies. AoE expands orb radius."
-        },
-        {
-          "priority": 3,
-          "skill": "Tempest Flurry",
-          "current": "Elemental Armament + Bounty 1",
-          "suggested": "Shock Conduction II + Lightning Attunement",
-          "reason": "Better shock coverage + physical→lightning conversion."
-        },
-        {
-          "priority": 4,
-          "skill": "Falling Thunder",
-          "current": "Rapid Attacks 1",
-          "suggested": "Overcharge",
-          "reason": "Boosts shock magnitude from Falling Thunder hits."
-        },
-        {
-          "priority": 5,
-          "skill": "Parry → Siphoning Strike",
-          "current": "Parry (Defensive)",
-          "suggested": "Siphoning Strike (Life/Mana Leech)",
-          "reason": "Swap when damage is high enough that leech sustains you faster than Parry blocks. Timing: Cruel Act 3+ or Maps. Keep Parry through campaign — it's your 'oh shit' button for boss telegraphs and pack swarms."
-        }
-      ],
-      "ascendancy_notes": {
-        "Invoker": {
-          "identity": "Elemental damage amplifier + spell-elemental synergy",
-          "key_benefits": [
-            "Elemental penetration — lightning damage actually lands",
-            "Spell scaling — Orb of Storms, Thunderstorm hit harder",
-            "Herald scaling — Herald of Thunder becomes endgame powerhouse",
-            "Shock magnitude — more shock = more damage across entire kit"
-          ],
-          "power_spike": "Before Invoker: You deal lightning damage. After Invoker: You deal lightning damage THAT ACTUALLY LANDS."
-        }
-      },
-      "lastUpdated": "2026-06-11"
+      "name": "Tempest Flurry",
+      "type": "Primary Attack — Lightning",
+      "supports": ["Life Leech 1", "Rapid Attacks 1"],
+      "role": "Main damage dealer — generates shock, fast attacks for Power Charge generation",
+      "priority": "Core"
     },
     {
-      "id": "sorceress-jordan",
-      "player": "Jordan",
-      "alias": "Fire Sorceress",
-      "class": "Sorceress",
-      "build": "Fire/Lightning Hybrid",
-      "level": 5,
-      "league": "Runes of Aldur",
-      "act": "Early",
-      "mission": "Just started",
-      "patch": "0.5",
-      "progress": {
-        "campaign": 5,
-        "buildCompletion": 15,
-        "gemCollection": 10,
-        "metaAlignment": 20
-      },
-      "skills": [
-        {
-          "name": "Firebolt",
-          "type": "Primary Attack — Fire",
-          "primary": true,
-          "supports": [],
-          "role": "Main early-game damage dealer. Spammable fire projectile."
-        },
-        {
-          "name": "Spark",
-          "type": "Secondary Attack — Lightning",
-          "primary": true,
-          "supports": [],
-          "role": "Chain lightning for pack clear. Covers fire-immune enemies."
-        },
-        {
-          "name": "Flame Wall",
-          "type": "AoE / Barrier — Fire",
-          "primary": false,
-          "supports": [],
-          "role": "Area denial and fire synergy. Projectiles through it gain fire damage."
-        }
-      ],
-      "upgrades": [
-        {
-          "priority": 1,
-          "skill": "Firebolt",
-          "current": "No supports",
-          "suggested": "Added Lightning Damage / Faster Projectiles",
-          "reason": "Early gem slots — boost main skill first."
-        },
-        {
-          "priority": 2,
-          "skill": "Flame Wall",
-          "current": "No supports",
-          "suggested": "Increased Area of Effect",
-          "reason": "Wider wall = more coverage for Spark/Firebolt to pass through."
-        }
-      ],
-      "passiveSkills": {
-        "allocated": 3,
-        "total": 123,
-        "keystones": [],
-        "notableNodes": ["Burning Bright"],
-        "coreStats": {
-          "fireDamage": 12,
-          "critChance": 3,
-          "castSpeed": 6,
-          "manaRegen": 8
-        },
-        "pathways": [
-          {"name": "Fire Mastery", "points": 3, "allocated": true},
-          {"name": "Elemental Damage", "points": 0, "allocated": false},
-          {"name": "Spell Speed", "points": 0, "allocated": false}
-        ]
-      },
-      "lastUpdated": "2026-06-11"
+      "name": "Falling Thunder",
+      "type": "Burst — Lightning",
+      "supports": ["Elemental Armament 1"],
+      "role": "Big nuke — consumes Power Charges for massive lightning damage",
+      "priority": "Core"
+    },
+    {
+      "name": "Mana Drain",
+      "type": "Utility",
+      "supports": ["Level 7 Wand"],
+      "role": "Mana sustain — keeps skills running during heavy combat",
+      "priority": "Core"
+    },
+    {
+      "name": "Siphoning Strike",
+      "type": "Attack — Lightning",
+      "supports": ["Life Leech", "Bounty 1"],
+      "role": "Dash strike — consumes shock for shockwave + Power Charges",
+      "priority": "Core"
+    },
+    {
+      "name": "Arc",
+      "type": "Spell — Lightning",
+      "supports": ["Shock Conduction", "Rapid Casting 1"],
+      "role": "Chain clear — fast casts, shocks enemies",
+      "priority": "High"
+    },
+    {
+      "name": "Storm Wave",
+      "type": "Attack — Lightning (Quarterstaff)",
+      "supports": [],
+      "role": "AoE fissure — sends lightning wave forward, good pack opener",
+      "priority": "High"
+    },
+    {
+      "name": "Orb of Storms",
+      "type": "Sustained — Lightning",
+      "supports": ["Slow Potency", "Rapid Casting 1"],
+      "role": "AoE storm zone — enemies take more ticks inside",
+      "priority": "High"
+    },
+    {
+      "name": "Thunder Storm",
+      "type": "AoE — Lightning",
+      "supports": ["Rapid Casting 1", "Slow Potency"],
+      "role": "AoE clear — rapid casts + slow enemies",
+      "priority": "Medium"
+    },
+    {
+      "name": "Killing Palm",
+      "type": "Attack",
+      "supports": [],
+      "role": "Execution — finishes low HP enemies",
+      "priority": "Utility"
+    },
+    {
+      "name": "Parry",
+      "type": "Defense",
+      "supports": [],
+      "role": "Defensive mechanic — block attacks",
+      "priority": "Defense"
     }
-  ]
+  ],
+  "damageLoop": {
+    "description": "Tempest Flurry shocks enemies → Siphoning Strike consumes shock for Power Charges → Mana Drain sustains mana → Falling Thunder consumes charges for massive nuke",
+    "steps": [
+      "1. Tempest Flurry (fast + leeching) → shock enemies",
+      "2. Siphoning Strike → consume shock → Power Charges",
+      "3. Mana Drain → sustain mana for heavy casting",
+      "4. Falling Thunder → consume charges → massive lightning nuke"
+    ]
+  },
+  "expansionPaths": {
+    "immediate": [
+      {
+        "upgrade": "Conductivity curse",
+        "why": "Lowers enemy lightning resist — everything hits harder",
+        "when": "When you get an Uncut Skill Gem or find it at vendor"
+      },
+      {
+        "upgrade": "Herald of Thunder",
+        "why": "Auto-procs lightning on shocked enemies — free passive DPS",
+        "when": "When you have enough Spirit to reserve it"
+      },
+      {
+        "upgrade": "2nd Ascendancy points (Trial of Chaos)",
+        "why": "Unlock more Invoker nodes — Culling Strike or Behead",
+        "when": "Act 3 — Trial of Chaos"
+      }
+    ],
+    "midgame": [
+      {
+        "upgrade": "Tempest Bell",
+        "why": "Monk专属 — creates a death zone that scales with Tempest Flurry",
+        "when": "When you unlock the gem"
+      },
+      {
+        "upgrade": "+Level to Lightning Skill Gems on quarterstaff",
+        "why": "Biggest single DPS upgrade for lightning build",
+        "when": "When you find/buy a better weapon"
+      },
+      {
+        "upgrade": "Wrath aura",
+        "why": "Flat lightning damage boost to everything",
+        "when": "When you have spare Spirit"
+      }
+    ],
+    "endgame": [
+      {
+        "upgrade": "Power Charge stacking gear",
+        "why": "More charges = bigger Falling Thunder nukes",
+        "when": "Maps / endgame"
+      },
+      {
+        "upgrade": "Critical strike nodes",
+        "why": "Falling Thunder can crit — massive damage multiplier",
+        "when": "Level 60+"
+      }
+    ]
+  },
+  "passiveTree": {
+    "allocated": ["Alternating Current", "Overlord", "Branching Bolts", "Drenched"],
+    "workingOn": "Lightning Quick",
+    "notes": "Lightning-based Invoker Monk. Central path through key lightning nodes."
+  },
+  "buildFocus": "Lightning Damage",
+  "playstyle": "Melee Caster — generate charges, spend them on nukes",
+  "lastUpdated": "2026-06-20"
 }

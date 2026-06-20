@@ -1,11 +1,11 @@
-# Gentech Dashboard — Universal Engine (Rebrand from Pals)
+# Gentech Hub — Universal Engine (Rebrand from Pals)
 
 **Date:** Jun 10, 2026
 **Status:** Active brainstorm
 **Owner:** Jordan
 
 ## The Insight
-Gentech Pals was originally gaming companions (POE2 builds, character dashboards). But the real product is the **universal dashboard engine** — same pattern works for gaming, travel, DeFi, education, health, social, business.
+GenTech Hub was originally gaming companions (POE2 builds, character dashboards). But the real product is the **universal dashboard engine** — same pattern works for gaming, travel, DeFi, education, health, social, business.
 
 **Pals = feature. Dashboard = product.**
 
