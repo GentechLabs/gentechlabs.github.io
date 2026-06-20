@@ -50,46 +50,64 @@ Active work items. Jordan's action items marked with **👤 JORDAN ACTION**.
 
 ## [ ] PixelRAG × Agent Kit Integration ⭐ NEW — VISUAL SEARCH
 - **Repo:** github.com/StarTrail-org/PixelRAG (Apache-2.0)
-- **Status:** Installed in /root/pixelrag-env (Python 3.12 venv). CLI working. Integration pending.
+- **Status:** VPS testbed validated. Pipeline works. Deferred to lab laptop.
 - **What:** Visual search for agents — screenshot web pages, search over images, read charts/tables/diagrams directly. "Give Claude eyes."
 - **Why:** Current agents parse HTML text and lose layout context. PixelRAG renders pages to visual embeddings — agents see what humans see.
+- **VPS findings (Jun 20):**
+  - Pipeline: Playwright renders → chunk → embed (Qwen3-VL-Embedding-2B) → FAISS index
+  - CPU embedding: ~28s/chunk (too slow for production)
+  - pixelshot CDP backend times out on VPS (no proper Chrome flags)
+  - Article dirs need numeric IDs (`12345.png.tiles`), not names
+  - `pixelrag[all]` installs full stack (torch, faiss-cpu, transformers)
+  - Indexer script: `/root/.hermes/profiles/gentech/scripts/pixelrag-vault-indexer.py`
 - **Remaining:**
-  - [ ] Test pixelshot on various page types (docs, dashboards, charts)
-  - [ ] Build custom index of our vault docs for visual search
+  - [ ] Install on lab laptop (RTX 3070 — GPU embedding ~1-2s/chunk)
+  - [ ] Test pixelshot CDP with local Chrome
+  - [ ] Build custom index of vault docs for visual search
   - [ ] Add pixelshot as Agent Kit tool (screenshot → embed → search)
   - [ ] Wire into agent web research workflow
   - [ ] Test: agent screenshots a dashboard, reads the data visually
 - **Priority:** HIGH — makes agents see, not just read
 - **Source:** Jordan voice message, 2026-06-20
 - **Context:** Berkeley SkyLab, 694 stars in 3 weeks. pip install pixelrag. Uses Qwen3-VL-Embedding for visual search.
+- **⚠️ Lab laptop install required — full build happens there, not VPS**
 
 ## [ ] Q402 × Agent Kit Integration ⭐ NEW — PAYMENT RAIL
-- **Repo:** To be created
-- **Status:** MCP server added to config. SDK integration pending.
+- **Repo:** `10-Labs/agent-kit-q402/`
+- **Status:** ✅ Phase 2 complete — Payment module built + tests passing
 - **What:** Integrate Q402 gasless payment rail into Agent Kit. Agents can pay, get paid, and prove it across 11 EVM chains — zero gas, one signature.
 - **Why:** Completes the payment layer of the Agent Kit stack. Q402 handles settlement, we handle identity + enforcement.
+- **Built:**
+  - [x] `payment_module.py` — Policy enforcement, daily limits, command formatting
+  - [x] `test_payment.py` — 6/6 tests passing
+  - [x] `config.yaml` — Spending limits, approved chains/tokens
+  - [x] `README.md` — Architecture + integration docs
 - **Remaining:**
-  - [ ] Install @q402/core SDK + @q402/middleware-express
-  - [ ] Build Agent Kit payment module (wrap Q402 calls through our rail)
-  - [ ] Add Trust Receipt verification to audit trail
-  - [ ] Wire AAE enforcement hooks before Q402 settlement
-  - [ ] Test: agent pays, receipt verified, audit logged
+  - [ ] Wire Trust Receipts to audit trail (verify after each settlement)
+  - [ ] Build AAE enforcement hooks before Q402 settlement
+  - [ ] Test with live Q402 MCP tools (sandbox mode)
+  - [ ] Package as Agent Kit module
 - **Priority:** HIGH — core payment infrastructure
 - **Source:** Jordan voice message, 2026-06-20
 - **Context:** Q402 by Quack AI — 11 EVM chains, USDC/USDT, MCP server with 27 tools, gasless via EIP-7702
 
 ## [ ] Injective × Agent Kit Integration ⭐ NEW — TRADING + IDENTITY
-- **Repo:** To be created
-- **Status:** MCP server cloned + built. Config added. SDK integration pending.
+- **Repo:** `10-Labs/agent-kit-injective/`
+- **Status:** ✅ Trading module built + tests passing. MCP server live.
 - **What:** Integrate Injective's ERC-8004 identity + order book trading into Agent Kit. Agents get on-chain identity, trade on 168 markets, earn 40% of trading fees.
 - **Why:** Adds active trading capability + cross-chain portable identity. Agent Kit becomes identity + policy + payment + trading.
+- **Built:**
+  - [x] `trading_module.py` — Risk management, position tracking, command formatting
+  - [x] `test_trading.py` — 5/5 tests passing
+  - [x] `README.md` — Architecture + market list + MCP tool reference
 - **Remaining:**
-  - [ ] Install @injective/agent-sdk
-  - [ ] Register Agent Kit on Injective Identity Registry (ERC-8004)
-  - [ ] Build trading module (grid trader + DCA bot strategies)
+  - [ ] `identity_module.py` — ERC-8004 identity registration wrapper
+  - [ ] Register Agent Kit on Injective Identity Registry
+  - [ ] Build grid trader + DCA bot strategies
   - [ ] Wire fee recipient for passive income
   - [ ] Connect AAE identity ↔ ERC-8004 identity tuple
-  - [ ] Test: agent registers, trades, earns fees
+  - [ ] Test with live MCP tools
+  - [ ] Package as Agent Kit module
 - **Priority:** HIGH — trading + identity layer
 - **Source:** Jordan voice message, 2026-06-20
 - **Context:** 168 markets (BTC, ETH, SOL, stocks, gold), sub-cent gas, 40% fee routing, 25K tx/s
