@@ -30,10 +30,19 @@ Ideas from real conversations with real people.
 - **Added:** 2026-06-18
 - **Source:** @sanafionchain tweet → "Agentic Economy Stack"
 - **What:** Integrate Sana's banking/card infrastructure into GenTech Agent Kit wallet
-- **Sana provides:** Visa/Mastercard, bank accounts, KYC compliance, fiat on/off ramp
-- **GenTech provides:** Crypto wallet, DeFi yield farming, x402 micropayments, USDC earning engine
+- **Sana provides:** Visa Signature card (via Rain), self-custody wallet, USDC on/off-ramp, x402+MPP payments, trading, yield strategies
+- **GenTech provides:** DeFi yield farming, x402 micropayments, USDC earning engine
 - **Combined value:** "Your agent earns yield. You spend it anywhere with a card."
-- **Status:** Research needed — evaluate Sana's API, licensing, fees
+- **Status:** ✅ Research complete. Full doc: `10-Labs/research/sana-api-research.md`
+- **Key finding:** Sana already lists Hermes as supported interface. Integration via their SKILL.md may be plug-and-play.
+- **Pricing:** ~$100/yr per agent ARPA. 10x cheaper than self-managed agent wallets.
+- **Partners:** Solana, Circle, Rain (Visa Principal Member), Privy, Jupiter, Meteora, Sanctum
+- **Next steps:**
+  - [ ] Jordan creates Sana account (sana.bot/gateway — email signup)
+  - [ ] Get API credentials (client_id + client_secret)
+  - [ ] Install Hermes skill or build API client
+  - [ ] Test: Earn USDC via DeFi → Store in Sana wallet → Spend via Visa card
+- **Blockers:** Account creation (needs Jordan's email), API key provisioning, card geo-availability check
 - **Priority:** High (completes the full earn → store → spend loop)
 
 ---

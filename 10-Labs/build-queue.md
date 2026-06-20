@@ -4,6 +4,52 @@ Active work items. Jordan's action items marked with **👤 JORDAN ACTION**.
 
 ---
 
+## [ ] Q402 × Agent Kit Integration ⭐ NEW — PAYMENT RAIL
+- **Repo:** To be created
+- **Status:** MCP server added to config. SDK integration pending.
+- **What:** Integrate Q402 gasless payment rail into Agent Kit. Agents can pay, get paid, and prove it across 11 EVM chains — zero gas, one signature.
+- **Why:** Completes the payment layer of the Agent Kit stack. Q402 handles settlement, we handle identity + enforcement.
+- **Remaining:**
+  - [ ] Install @q402/core SDK + @q402/middleware-express
+  - [ ] Build Agent Kit payment module (wrap Q402 calls through our rail)
+  - [ ] Add Trust Receipt verification to audit trail
+  - [ ] Wire AAE enforcement hooks before Q402 settlement
+  - [ ] Test: agent pays, receipt verified, audit logged
+- **Priority:** HIGH — core payment infrastructure
+- **Source:** Jordan voice message, 2026-06-20
+- **Context:** Q402 by Quack AI — 11 EVM chains, USDC/USDT, MCP server with 27 tools, gasless via EIP-7702
+
+## [ ] Injective × Agent Kit Integration ⭐ NEW — TRADING + IDENTITY
+- **Repo:** To be created
+- **Status:** MCP server cloned + built. Config added. SDK integration pending.
+- **What:** Integrate Injective's ERC-8004 identity + order book trading into Agent Kit. Agents get on-chain identity, trade on 168 markets, earn 40% of trading fees.
+- **Why:** Adds active trading capability + cross-chain portable identity. Agent Kit becomes identity + policy + payment + trading.
+- **Remaining:**
+  - [ ] Install @injective/agent-sdk
+  - [ ] Register Agent Kit on Injective Identity Registry (ERC-8004)
+  - [ ] Build trading module (grid trader + DCA bot strategies)
+  - [ ] Wire fee recipient for passive income
+  - [ ] Connect AAE identity ↔ ERC-8004 identity tuple
+  - [ ] Test: agent registers, trades, earns fees
+- **Priority:** HIGH — trading + identity layer
+- **Source:** Jordan voice message, 2026-06-20
+- **Context:** 168 markets (BTC, ETH, SOL, stocks, gold), sub-cent gas, 40% fee routing, 25K tx/s
+
+## [ ] Agent Kit — Multi-Group/Multi-Agent Toolkit ⭐ NEW — FRAMEWORK
+- **Repo:** github.com/ProtoJay4789/genTech-agent-kit
+- **Status:** Architecture defined. Old approach (send work to groups) didn't scale. New approach (single agent, multiple channels, smart routing) proven.
+- **What:** Update Agent Kit with the operational patterns we've actually built: single-agent multi-channel routing, build queue workflow, topic-based group routing, and MCP server integration.
+- **Why:** The old model of "dispatch work to groups" didn't work. The new model — one agent, multiple channels, smart routing — is what actually works. Codify this into Agent Kit so others can replicate it.
+- **Remaining:**
+  - [ ] Document single-agent multi-channel pattern
+  - [ ] Add smart routing module (topic detection + group assignment)
+  - [ ] Add build queue workflow (detect → queue → approve → build)
+  - [ ] Add MCP server integration pattern (Q402 + Injective as examples)
+  - [ ] Package as Agent Kit v2 module
+- **Priority:** HIGH — framework evolution, reflects real-world usage
+- **Source:** Jordan voice message, 2026-06-20
+- **Context:** "Before we tried to send work to the group and the work be worked on, but sometimes that just doesn't work. This is better."
+
 ## [ ] AgentLayer × AAE Integration ⭐ NEW — PARTNERSHIP
 - **Repo:** To be created
 - **Status:** Architecture defined. Ready to build.
@@ -15,6 +61,27 @@ Active work items. Jordan's action items marked with **👤 JORDAN ACTION**.
   - [ ] Phase 3: Uniswap Execution (1 week)
   - [ ] Phase 4: x402 Payments (1 week)
 - **Priority:** HIGH — first major integration partnership
+
+## [ ] GenTech Journal — Consumer Visual Journal ⭐ NEW — PRODUCT
+- **Repo:** To be created
+- **Status:** 💡 Concept approved
+- **What:** A journal where you think out loud. Write notes, discuss ideas, vent, brainstorm — and it visualizes your thoughts like a living map.
+- **Tagline:** "A journal where you can think out loud."
+- **Why:** Consumer-facing version of what we do with Obsidian vaults. Most people don't think to organize their thoughts this way. The visual layer makes it feel alive.
+- **Features:**
+  - [ ] Data view: thoughts as a giant tangled web (looks like planet Earth from outside)
+  - [ ] Click regions → see categories (ideas, work, venting, learning)
+  - [ ] Reparathy (AI companion) — reflects, advises, gives the journal a voice
+  - [ ] Not a streak tracker. Not a to-do list. A place to *think out loud*
+  - [ ] Social layer next (Reddit stories × visual dashboard)
+- **Remaining:**
+  - [ ] Wireframes + UI design
+  - [ ] Name/branding
+  - [ ] Build visual data layer (Obsidian Dataview → web)
+  - [ ] Reparathy integration
+  - [ ] Consumer-facing frontend
+- **Priority:** HIGH — real product, not a hackathon project
+- **Source:** Jordan voice message, 2026-06-20
 
 ## [ ] AgentBridge — AgentLayer Integration ⭐ NEW
 - **Repo:** https://github.com/ProtoJay4789/agentbridge
@@ -165,6 +232,27 @@ Active work items. Jordan's action items marked with **👤 JORDAN ACTION**.
 - **Repo:** https://github.com/ProtoJay4789/oobe-protocol
 - **Status:** Missed deadline. Code is complete and pushed.
 - **Action:** Archive for future reuse. No active deadline.
+
+---
+
+## [ ] GenTech Bank — Agent Neobank on Sana Infrastructure ⭐ NEW — PRODUCT
+- **Status:** 💡 Concept approved, research complete
+- **What:** Build "GenTech Bank" — a banking interface for the agent economy using Sana's infrastructure
+- **Sana provides:** Visa Signature card, self-custody wallet, USDC on/off-ramp, x402+MPP, compliance
+- **GenTech provides:** DeFi yield routing, agent wallets, spending controls, branded card experience
+- **The loop:** DeFi yield → Sana wallet (USDC storage) → Visa card (real-world spend)
+- **Why:** We're not becoming a bank — we're becoming the banking interface for the agent economy
+- **Remaining:**
+  - [ ] Jordan creates Sana account (sana.bot/gateway — email signup)
+  - [ ] Get API credentials (client_id + client_secret)
+  - [ ] Install Hermes skill or build API client
+  - [ ] Build GenTech Bank wrapper (wallet creation, yield routing, spend controls)
+  - [ ] Test full loop: Earn → Store → Spend
+  - [ ] Brand card experience (GenTech-branded if possible)
+  - [ ] Package as Agent Kit module
+- **Priority:** HIGH — completes the full agent economy loop
+- **Timeline:** Week of — no rush, Jordan's task to get done
+- **Research doc:** `10-Labs/research/sana-api-research.md`
 
 ---
 

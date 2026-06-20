@@ -1,6 +1,6 @@
 # Context Snapshot — June 19, 2026
 
-**Generated:** 12:09 AM UTC (8:09 PM ET, Jun 18) | Updated 06:06 AM UTC (2:06 AM ET, Jun 19) | Latest update: 12:07 PM UTC (8:07 AM ET, Jun 19) | **Latest update: 6:07 PM UTC (2:07 PM ET, Jun 19)**
+**Generated:** 12:09 AM UTC (8:09 PM ET, Jun 18) | Updated 06:06 AM UTC (2:06 AM ET, Jun 19) | Latest update: 12:07 PM UTC (8:07 AM ET, Jun 19) | 6:07 PM UTC (2:07 PM ET, Jun 19) | 8:10 PM UTC (4:10 PM ET, Jun 19) | **Latest update: 12:08 AM UTC (8:08 PM ET, Jun 20)**
 
 ---
 
@@ -120,47 +120,96 @@
 
 ---
 
+## Session 11: Opportunity Scanner Rework (Jun 19, 5:33 PM – 6:13 PM)
+**Topic:** Career scanner refactored to Opportunity Scanner, new Binance roles found.
+
+**Key Decisions:**
+- **Career Scanner renamed to Opportunity Scanner** — broader scope: DeFi roles, AI agent infrastructure, hackathons, grants, startup roles
+- **New skill created:** `opportunity-scanner-template` — reusable template in Agent Kit
+- **5 opportunities found, 3 are 4-5 star matches:**
+  1. **Binance Pioneer Talent Program: AI Agent Engineer** ⭐⭐⭐⭐⭐ — Full-time, remote, up to 5 years experience. AI agent engineering at world's largest exchange.
+  2. **Binance Accelerator: Applied AI Agent Developer** ⭐⭐⭐⭐⭐ — Tech Seeds 2026 internship. 6-month, fully remote. "You will own deliverables and ship code."
+  3. **Binance Accelerator: Blockchain/Smart Contract Security** ⭐⭐⭐⭐ — Entry-level security internship. Jordan's Cyfrin Updraft training directly applies.
+  4. Solana Foundation Grants (rolling) ⭐⭐⭐⭐
+  5. Coreum Development Grants Wave 4 ⭐⭐⭐⭐
+- **Jordan's job search filters saved to memory:** Remote-only, English-only, no Asia relocation, reject senior-level (5+ years). Focus on junior/mid, AI/blockchain roles.
+- **Market insight:** AI agent hiring real but heavily skewed senior. Binance Tech Seeds/Pioneer are rare entry-level exceptions.
+
+**Files modified:**
+- `skills/opportunity-scanner-template/SKILL.md` — new skill
+- Cron job `389075336cef` — reworked prompt and name
+
+---
+
+## Session 12: Nightly Sweep (Jun 19, 7:00 PM)
+**Topic:** 11 PM ET vault sweep completed.
+
+**Key Changes:**
+- **Encode Vibe Coding** → ✅ PASSED (was ⚠️ DEADLINE TODAY)
+- **Sui Overflow** → 1 day left (was 2)
+- **BNB Hackathon** → 4 days left (was 5)
+- All day counts recalculated across 4 coordination files
+- ideas.md deduplicated (AWS WAF entries: 3 → 1)
+- Vault synced, git pushed (commit `26cb2f0`)
+
+---
+
+## Session 13: Hermes Update Assessment Refactor (Jun 19, 8:06 PM)
+**Topic:** `hermes-update-assessment` skill rewritten from v1.0 to v2.0.
+
+**Key Decision:**
+- **Before:** Technical changelog reporter (lists features, affects agent kit)
+- **After:** User-first translator (filters by Jordan's stack, translates jargon to plain language)
+- **Core insight:** Nous ships 1,475 commits. Jordan needs to know about 3. Filter noise, surface only what matters.
+- Cron job `5717c26b9a6e` updated to match new v2.0 approach
+
+---
+
 ## Updated Open Threads
 
-1. **⚠️ DEADLINE TODAY — Encode Vibe Coding** — TODAY (Jun 19). 3-day sprint. Must submit or pass today.
-2. **⚠️ Sui Overflow** — 2 days left (Jun 21). Token Risk Oracle (Move). Jordan to verify registration.
-3. **⚠️ BNB Hackathon** — 5 days left (Jun 24). CMC Strategy Engine 21/21 tests, ready to submit.
-4. **⚠️ Encode Solana Bootcamp** — Starts Jun 22 (3 days). Registered.
-5. **⚠️ Encode Arc Bootcamp** — Starts Jun 22 (3 days). Registered.
+1. **✅ PASSED — Encode Vibe Coding** — Deadline was Jun 19. Passed.
+2. **🔴 Sui Overflow** — 1 day left (Jun 21). Token Risk Oracle (Move). Jordan to verify registration.
+3. **⚠️ BNB Hackathon** — 4 days left (Jun 24). CMC Strategy Engine 21/21 tests, ready to submit.
+4. **⚠️ Encode Solana Bootcamp** — Starts Jun 22 (2 days). Registered.
+5. **⚠️ Encode Arc Bootcamp** — Starts Jun 22 (2 days). Registered.
 6. **🔴 Compound vs. Extract** — Testnet scaffold done (11 tests). Next: LFJ RPC integration, then extract execution.
 7. **🔴 Iran Geopolitics** — Peace talks suspended. Bearish for all risk assets. Strengthens bearish macro thesis.
-8. **🟡 AAE Product Vision** — North star: yield farming clarity for choppy markets. "What am I actually earning?"
-9. **🟡 Agent Kit Distribution** — Refactored to additive model. Committed and pushed (0758bff). Ready for testing.
-10. **🟡 Portfolio Sync Fixed** — Regex updated for new index.html format. Consistency check now works.
-11. **🟡 Vals AI Fellowship** — $1K-$2.5K/week, deadline Jun 30. Worth applying.
-12. **🟡 DeFi Preflight Cleaned** — defi-data drift noise removed. Cron runs silently now.
-13. **🟡 Bear Market Thesis** — Four-year cycle dead. Rate hikes, forced selling, no V-shaped recovery expected. LP strategy is correct play.
-14. **⏳ Lepton Agents** — Due Jun 29 (10 days). Cookbook Nanopay.
-15. **⏳ Casper Buildathon** — Due Jun 30 (11 days). $150K. Existing RWA agent code ready.
-16. **⏳ Qwen Cloud AI Hackathon** — Due Jul 9 (20 days). $70K+, Agent Society track.
-17. **⏳ Colosseum Fall Hackathon** — Sep 28–Nov 2. Primary Solana target.
-18. **🟢 Ray-Ban Bridge** — Built, deferred to Vanito for live testing.
-19. **🟢 POE2 Build** — Tempest Bell switch complete.
-20. **🟢 GitHub Auth** — Classic PAT working. ProtoJay4789 account.
-21. **🟢 Cookbook** — 5 dishes logged. Christel auto-logger working.
-22. **🟢 WURK.FUN MCP** — Verified live, flaky (500s). Waiting on team fix.
+8. **🟡 Binance Job Applications** — 3 strong roles found (Pioneer Talent, Accelerator AI Agent, Accelerator Security). Apply immediately.
+9. **🟡 AAE Product Vision** — North star: yield farming clarity for choppy markets. "What am I actually earning?"
+10. **🟡 Agent Kit Distribution** — Refactored to additive model. Committed and pushed (0758bff). Ready for testing.
+11. **🟡 Portfolio Sync Fixed** — Regex updated for new index.html format. Consistency check now works.
+12. **🟡 Vals AI Fellowship** — $1K-$2.5K/week, deadline Jun 30. Worth applying.
+13. **🟡 DeFi Preflight Cleaned** — defi-data drift noise removed. Cron runs silently now.
+14. **🟡 Bear Market Thesis** — Four-year cycle dead. Rate hikes, forced selling, no V-shaped recovery expected. LP strategy is correct play.
+15. **🟡 Hermes Update Assessment v2.0** — Refactored to user-first approach. Cron updated.
+16. **⏳ Lepton Agents** — Due Jun 29 (9 days). Cookbook Nanopay.
+17. **⏳ Casper Buildathon** — Due Jun 30 (10 days). $150K. Existing RWA agent code ready.
+18. **⏳ Qwen Cloud AI Hackathon** — Due Jul 9 (19 days). $70K+, Agent Society track.
+19. **⏳ Colosseum Fall Hackathon** — Sep 28–Nov 2. Primary Solana target.
+20. **🟢 Ray-Ban Bridge** — Built, deferred to Vanito for live testing.
+21. **🟢 POE2 Build** — Tempest Bell switch complete.
+22. **🟢 GitHub Auth** — Classic PAT working. ProtoJay4789 account.
+23. **🟢 Cookbook** — 5 dishes logged. Christel auto-logger working.
+24. **🟢 WURK.FUN MCP** — Verified live, flaky (500s). Waiting on team fix.
 
 ---
 
 ## Key Context Carried Forward
 
-- **Encode Vibe Coding deadline is TODAY.** Most urgent item.
-- **BNB Hackathon due Jun 24** — 21/21 tests, ready to submit. 5 days left.
-- **Sui Overflow due Jun 21** — Token Risk Oracle. 2 days left.
-- **Agent Kit distribution is additive, not preservative.** Users keep their model setup. We add agent layer on top. This is the core philosophy.
+- **Encode Vibe Coding PASSED.** No longer urgent.
+- **Sui Overflow due Jun 21 — 1 day left.** Most urgent active item. Token Risk Oracle (Move).
+- **BNB Hackathon due Jun 24** — 21/21 tests, ready to submit. 4 days left.
+- **Binance job applications are the top priority.** 3 roles found: Pioneer Talent (AI Agent Engineer), Accelerator (Applied AI Agent), Accelerator (Blockchain Security). All fully remote, entry-level friendly.
+- **Jordan's job search filters:** Remote-only, English-only, no Asia relocation, reject senior-level (5+ years). Focus: junior/mid, AI/blockchain.
+- **Agent Kit distribution is additive, not preservative.** Users keep their model setup. We add agent layer on top.
 - **Portfolio sync script fixed** — supports both old JS and new JSON format in index.html.
-- **DeFi preflight cleaned** — defi-data drift noise removed, cron runs silently.
 - **Bear market thesis:** Four-year cycle dead. Rate hikes, forced selling, Iran escalation. Patience is the trade. LP strategy (bid-ask, earn fees) is correct.
 - **LP range rebalanced to $5.90–$6.14** before Jordan's shift.
 - **Iran peace talks suspended** — geopolitical escalation, bearish for risk assets.
 - **Jordan's directive:** Hackathons are enjoyable but space them out. Focus on building AAE platform into an app. Orchestrator identity, not coder.
 - **Telegram delivery broken** — All cron jobs can't deliver to Telegram groups. Hermes Telegram platform not enabled.
+- **Hermes Update Assessment v2.0** — User-first approach. Filter changelogs by Jordan's stack, translate jargon, skip noise.
 
 ---
 
-*Last updated: 2026-06-19 18:07 UTC (2:07 PM ET)*
+*Last updated: 2026-06-20 00:08 UTC (8:08 PM ET, Jun 19)*
