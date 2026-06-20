@@ -15,7 +15,7 @@ Decisions pending, opportunities to evaluate, things to circle back on.
   - [ ] Complete verification process
   - [ ] Connect xPay for payments
   - [ ] Monitor API for AAE integration
-- **Status:** QUEUED — Jordan to execute tomorrow (Jun 17)
+- **Status:** READY — Jordan to register when convenient
 - **Effort:** Quick win — register, verify, list. No heavy lift.
 
 ---
@@ -27,7 +27,7 @@ Decisions pending, opportunities to evaluate, things to circle back on.
 - **When:** Thursday, June 18, 2026 — 4 PM UTC (Twitter Space)
 - **What:** Winners recap for "AI Agents Build Their Own Economy" hackathon. Builders share how they shipped, what they learned, on-chain agent economy.
 - **Why us:** A2A protocol = agents talking to agents. Our thesis. Worth watching to see what builders actually built.
-- **Status:** QUEUED — Watch recap, take notes, assess integration opportunities.
+- **Status:** ✅ EVENT PASSED — Check if recording available. Archive if not relevant.
 
 ---
 
@@ -50,7 +50,7 @@ Decisions pending, opportunities to evaluate, things to circle back on.
 - **More:** https://t.me/tryquantai_bot
 - **What:** $100K in $QUANT + USDT for creators/contributors. Earn points, referral rewards, ambassador rewards.
 - **Why us:** Adjacent to AAE — AI + finance narrative. Low-effort visibility play. Positions us as picks-and-shovels layer for AI trading platforms.
-- **Status:** Decided YES. Jordan working 12hr shifts Jun 12-14. Apply after that window.
+- **Status:** CHECK IF STILL ACCEPTING — Application window may have closed. Verify before applying.
 
 ---
 
