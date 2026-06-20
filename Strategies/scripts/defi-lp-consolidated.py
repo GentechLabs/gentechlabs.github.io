@@ -403,6 +403,35 @@ def format_report(price: float, in_range: bool, efficiency: float, pool_data: di
     lines.append(f"  {dca_reason}")
     lines.append("")
 
+    # Performance Comparison
+    if entry_price != "?" and float(entry_price) > 0:
+        entry = float(entry_price)
+        total_value = lp.get('totalValueUSD', 0) or dash.get('totalValueUsd', 0) or 0
+        daily_fees = fees.get('dailyFees', 0) if fees else 0
+        
+        # HODL comparison: what if we just held the original deposit as AVAX
+        # Original: 50% AVAX at entry price, 50% USDC
+        original_usd = total_value  # approximate starting value
+        hodl_avax = (original_usd / 2) / entry
+        hodl_value = (hodl_avax * price) + (original_usd / 2)
+        hodl_return = ((total_value - hodl_value) / hodl_value) * 100 if hodl_value > 0 else 0
+        
+        # Staking comparison: sAVAX ~7% APR
+        staking_apr = 0.07
+        days_active = 1  # approximate
+        staking_value = original_usd * (1 + (staking_apr * days_active / 365))
+        staking_return = ((total_value - staking_value) / staking_value) * 100 if staking_value > 0 else 0
+        
+        # LP return (fees earned)
+        lp_return = (daily_fees / total_value * 365 * 100) if total_value > 0 else 0
+        
+        lines.append("**📊 Strategy Comparison**")
+        lines.append(f"  LP Farming: {lp_return:.1f}% APR (${daily_fees:.3f}/day)")
+        lines.append(f"  sAVAX Staking: ~7% APR (${'%.3f' % (total_value * 0.07 / 365)}/day)")
+        lines.append(f"  HODL (50/50): {hodl_return:+.2f}% since entry")
+        lines.append(f"  vs Staking: {'🟢 Outperforming' if lp_return > 7 else '🔴 Underperforming'}")
+        lines.append("")
+
     lines.append(f"`Source: DexScreener + On-Chain Reader | Debounce: 2-clean-run | Check: {now_et().strftime('%H:%M EDT')}`")
     return "\n".join(lines)
 
@@ -474,13 +503,9 @@ def main():
 
     update_state_after_check(state, price, efficiency, in_range, was_sent=True)
 
-    # Exit codes for cron monitoring
-    if alert_level == "HIGH":
-        sys.exit(2)
-    elif alert_level == "MEDIUM":
-        sys.exit(1)
-    else:
-        sys.exit(0)
+    # Always exit 0 — alerts are in stdout, not exit codes
+    # Exit codes cause cron to log "error" status even when script works correctly
+    sys.exit(0)
 
 if __name__ == "__main__":
     main()

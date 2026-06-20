@@ -1,0 +1,57 @@
+# Agent Kit × Q402 Payment Configuration
+# Agent Kit Payment Module Config
+
+policy:
+  # Daily spending limit in USD
+  daily_limit_usd: 100.0
+  
+  # Maximum per-transaction amount in USD
+  per_tx_limit_usd: 50.0
+  
+  # Chains where payments are allowed
+  approved_chains:
+    - base
+    - bnb
+    - ethereum
+    - arbitrum
+    - avalanche
+  
+  # Tokens that can be used for payments
+  approved_tokens:
+    - USDC
+    - USDT
+  
+  # Recipients allowed to receive payments
+  # Empty list = all recipients allowed (use blocked_recipients to blacklist)
+  approved_recipients: []
+  
+  # Recipients that are always blocked
+  blocked_recipients: []
+  
+  # Require a memo for every payment (audit trail)
+  require_memo: true
+  
+  # Auto-verify Trust Receipts after settlement
+  auto_verify_receipts: true
+
+# Q402 MCP server configuration
+q402:
+  # Sandbox mode (no real money, max $200 cap)
+  mode: sandbox
+  
+  # Default chain for payments
+  default_chain: base
+  
+  # Default token for payments
+  default_token: USDC
+
+# Audit trail configuration
+audit:
+  # Where to store payment records
+  log_dir: ~/.hermes/profiles/gentech/audit/payments
+  
+  # Retention days (older logs are archived)
+  retention_days: 90
+  
+  # Receipt verification
+  verify_on_settle: true

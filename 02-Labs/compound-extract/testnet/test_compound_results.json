@@ -1,0 +1,355 @@
+{
+  "test_run": "2026-06-18T22:17:32.456147",
+  "network": "avalanche_fuji",
+  "results": {
+    "basic_compound": {
+      "status": "simulated",
+      "position_id": "fuji_compound_001",
+      "amount_compounded": {
+        "AVAX": 0.5,
+        "USDC.e": 12.5
+      },
+      "new_position_value": {
+        "AVAX": 0.55,
+        "USDC.e": 13.750000000000002
+      },
+      "gas_fees": 0.026999999999999996,
+      "transactions": [
+        {
+          "tx_hash": "0x60d39d5b04cf36c624eb75f0e0eb17e3b0c234364ef5c3fe8852fa36a6de6cd8",
+          "status": "simulated",
+          "gas_used": 180000,
+          "block_number": 99999999,
+          "timestamp": "2026-06-18T22:17:32.449503",
+          "method": "collect",
+          "details": {
+            "nft_id": "001"
+          }
+        },
+        {
+          "tx_hash": "0x8cc42eeed237a2a1fd8232f4d5c2f1e9277dc0f94b88cede96ed5c4e43ab5eda",
+          "status": "simulated",
+          "gas_used": 250000,
+          "block_number": 99999999,
+          "timestamp": "2026-06-18T22:17:32.449575",
+          "method": "swap",
+          "details": {
+            "token_in": "AVAX",
+            "token_out": "USDC.e",
+            "amount_in": 0.25,
+            "amount_out": 8.75,
+            "slippage": 0.005,
+            "pool_fee": 0.003
+          }
+        },
+        {
+          "tx_hash": "0x283447f38560cd6430bd0bacd76abd4b34aedff8622ba0eb4f48f074181fd489",
+          "status": "simulated",
+          "gas_used": 250000,
+          "block_number": 99999999,
+          "timestamp": "2026-06-18T22:17:32.449666",
+          "method": "swap",
+          "details": {
+            "token_in": "USDC.e",
+            "token_out": "AVAX",
+            "amount_in": 6.25,
+            "amount_out": 0.17857142857142858,
+            "slippage": 0.005,
+            "pool_fee": 0.003
+          }
+        },
+        {
+          "tx_hash": "0xa06fb06783b15236dd2c2ac3bd50ccff2ecde4232e49f515ae072d2816bce586",
+          "status": "simulated",
+          "gas_used": 400000,
+          "block_number": 99999999,
+          "timestamp": "2026-06-18T22:17:32.449694",
+          "method": "increaseLiquidity",
+          "details": {
+            "position_id": "fuji_compound_001",
+            "amount0": 0.25,
+            "amount1": 6.25
+          }
+        }
+      ],
+      "timestamp": "2026-06-18T22:17:32.449712",
+      "error": null
+    },
+    "compound_with_monitor": {
+      "status": "simulated",
+      "position_id": "fuji_compound_001",
+      "amount_compounded": {
+        "AVAX": 0.3,
+        "USDC.e": 10.5
+      },
+      "new_position_value": {
+        "AVAX": 0.33,
+        "USDC.e": 11.55
+      },
+      "gas_fees": 0.026999999999999996,
+      "transactions": [
+        {
+          "tx_hash": "0x64f2ffb277fd3d44631acd88f31dd96a35e4af48e9327b5e39d43e95214ae5bb",
+          "status": "simulated",
+          "gas_used": 180000,
+          "block_number": 99999999,
+          "timestamp": "2026-06-18T22:17:32.452227",
+          "method": "collect",
+          "details": {
+            "nft_id": "001"
+          }
+        },
+        {
+          "tx_hash": "0xbe18eb7d7ab2d1c9eec2c16f8ea61907c0182fad8e6d67552142fe0b1a85cf02",
+          "status": "simulated",
+          "gas_used": 250000,
+          "block_number": 99999999,
+          "timestamp": "2026-06-18T22:17:32.452302",
+          "method": "swap",
+          "details": {
+            "token_in": "AVAX",
+            "token_out": "USDC.e",
+            "amount_in": 0.15,
+            "amount_out": 5.25,
+            "slippage": 0.005,
+            "pool_fee": 0.003
+          }
+        },
+        {
+          "tx_hash": "0x1085f07676562b8bc752055e4e9d0061e9058f4f50db0eae1b862019181823a3",
+          "status": "simulated",
+          "gas_used": 250000,
+          "block_number": 99999999,
+          "timestamp": "2026-06-18T22:17:32.452372",
+          "method": "swap",
+          "details": {
+            "token_in": "USDC.e",
+            "token_out": "AVAX",
+            "amount_in": 5.25,
+            "amount_out": 0.15,
+            "slippage": 0.005,
+            "pool_fee": 0.003
+          }
+        },
+        {
+          "tx_hash": "0x4c54327da6d27ebd21f507931663af3e2f691a6be842775da84aede89342d78c",
+          "status": "simulated",
+          "gas_used": 400000,
+          "block_number": 99999999,
+          "timestamp": "2026-06-18T22:17:32.452433",
+          "method": "increaseLiquidity",
+          "details": {
+            "position_id": "fuji_compound_001",
+            "amount0": 0.15,
+            "amount1": 5.25
+          }
+        }
+      ],
+      "timestamp": "2026-06-18T22:17:32.452456",
+      "error": null
+    },
+    "compound_with_decision": {
+      "action": "compound",
+      "confidence": 0.7
+    },
+    "compound_with_ratio": {
+      "status": "simulated",
+      "position_id": "fuji_compound_ratio_001",
+      "amount_compounded": {
+        "AVAX": 0.48999999999999994,
+        "USDC.e": 17.15
+      },
+      "new_position_value": {
+        "AVAX": 0.5389999999999999,
+        "USDC.e": 18.865
+      },
+      "gas_fees": 0.026999999999999996,
+      "transactions": [
+        {
+          "tx_hash": "0xcc7157bfff39baf4d43e567638ea64dadf63251320ee1cecd826099f1fa09884",
+          "status": "simulated",
+          "gas_used": 180000,
+          "block_number": 99999999,
+          "timestamp": "2026-06-18T22:17:32.454955",
+          "method": "collect",
+          "details": {
+            "nft_id": "001"
+          }
+        },
+        {
+          "tx_hash": "0x4fc6531bb3f7599ceb9ce2838ac0ec0dec12b63f1fbd6897250c5669bc5b97b1",
+          "status": "simulated",
+          "gas_used": 250000,
+          "block_number": 99999999,
+          "timestamp": "2026-06-18T22:17:32.455016",
+          "method": "swap",
+          "details": {
+            "token_in": "AVAX",
+            "token_out": "USDC.e",
+            "amount_in": 0.24499999999999997,
+            "amount_out": 8.575,
+            "slippage": 0.005,
+            "pool_fee": 0.003
+          }
+        },
+        {
+          "tx_hash": "0x404ec6fa8aca56033e14030fda6a061ed87467c91a7df407877da34dfd6515f3",
+          "status": "simulated",
+          "gas_used": 250000,
+          "block_number": 99999999,
+          "timestamp": "2026-06-18T22:17:32.455084",
+          "method": "swap",
+          "details": {
+            "token_in": "USDC.e",
+            "token_out": "AVAX",
+            "amount_in": 8.575,
+            "amount_out": 0.24499999999999997,
+            "slippage": 0.005,
+            "pool_fee": 0.003
+          }
+        },
+        {
+          "tx_hash": "0xbb2d4328916eb29ef2b32196f055dc0fff5d05504b0bc19376f48896ab9d3a35",
+          "status": "simulated",
+          "gas_used": 400000,
+          "block_number": 99999999,
+          "timestamp": "2026-06-18T22:17:32.455121",
+          "method": "increaseLiquidity",
+          "details": {
+            "position_id": "fuji_compound_ratio_001",
+            "amount0": 0.24499999999999997,
+            "amount1": 8.575
+          }
+        }
+      ],
+      "timestamp": "2026-06-18T22:17:32.455141",
+      "error": null
+    },
+    "error_handling": {
+      "status": "simulated",
+      "position_id": "fuji_compound_single_001",
+      "amount_compounded": {
+        "USDC.e": 5.0
+      },
+      "new_position_value": {
+        "USDC.e": 5.5
+      },
+      "gas_fees": 0.020749999999999998,
+      "transactions": [
+        {
+          "tx_hash": "0xa3a3c6943cb32bc88b291394a9e848ef22cfba29af4ef054370f350909910abf",
+          "status": "simulated",
+          "gas_used": 180000,
+          "block_number": 99999999,
+          "timestamp": "2026-06-18T22:17:32.455291",
+          "method": "collect",
+          "details": {
+            "nft_id": "001"
+          }
+        },
+        {
+          "tx_hash": "0x17d7c40bc0fbe237dfba7bcc10bb2d8e46a3f7b5324b427bdb5d6524d7ec5462",
+          "status": "simulated",
+          "gas_used": 250000,
+          "block_number": 99999999,
+          "timestamp": "2026-06-18T22:17:32.455344",
+          "method": "swap",
+          "details": {
+            "token_in": "USDC.e",
+            "token_out": "AVAX",
+            "amount_in": 2.5,
+            "amount_out": 0.07142857142857142,
+            "slippage": 0.005,
+            "pool_fee": 0.003
+          }
+        },
+        {
+          "tx_hash": "0xe44d466c28b768d04e89005f1e051ade69fc3d78e5eecc732af3d6d2092bcd1b",
+          "status": "simulated",
+          "gas_used": 400000,
+          "block_number": 99999999,
+          "timestamp": "2026-06-18T22:17:32.455383",
+          "method": "increaseLiquidity",
+          "details": {
+            "position_id": "fuji_compound_single_001",
+            "amount0": 0.0,
+            "amount1": 2.5
+          }
+        }
+      ],
+      "timestamp": "2026-06-18T22:17:32.455417",
+      "error": null
+    },
+    "compound_via_0x": {
+      "status": "simulated",
+      "position_id": "fuji_compound_0x_001",
+      "amount_compounded": {
+        "WAVAX": 0.4,
+        "USDC.e": 14.0
+      },
+      "new_position_value": {
+        "WAVAX": 0.44000000000000006,
+        "USDC.e": 15.400000000000002
+      },
+      "gas_fees": 0.022,
+      "transactions": [
+        {
+          "tx_hash": "0xc9250fdb54cc8b2108fe2e922c2c1158819446696281fa7f2f7c3b2411e6fc18",
+          "status": "simulated",
+          "gas_used": 180000,
+          "block_number": 99999999,
+          "timestamp": "2026-06-18T22:17:32.455497",
+          "method": "collect",
+          "details": {
+            "nft_id": "001"
+          }
+        },
+        {
+          "tx_hash": "0x546f25360cb20dac800f33e1b89574686e871e3992cf6c8d9c11ef3ee80f2555",
+          "status": "simulated",
+          "gas_used": 150000,
+          "block_number": 99999999,
+          "timestamp": "2026-06-18T22:17:32.455540",
+          "method": "swap",
+          "details": {
+            "token_in": "WAVAX",
+            "token_out": "USDC.e",
+            "amount_in": 0.2,
+            "amount_out": 0.1998,
+            "source": "0x"
+          }
+        },
+        {
+          "tx_hash": "0x65fe934a6401868cd39aa07c634e9025f21e7ef732cf16afd242b8f22cb67aca",
+          "status": "simulated",
+          "gas_used": 150000,
+          "block_number": 99999999,
+          "timestamp": "2026-06-18T22:17:32.455574",
+          "method": "swap",
+          "details": {
+            "token_in": "USDC.e",
+            "token_out": "WAVAX",
+            "amount_in": 7.0,
+            "amount_out": 6.993,
+            "source": "0x"
+          }
+        },
+        {
+          "tx_hash": "0x67595dc3862fb0140f141a1f011f0a6089251d43525baca5cd327c8d65d6e7e9",
+          "status": "simulated",
+          "gas_used": 400000,
+          "block_number": 99999999,
+          "timestamp": "2026-06-18T22:17:32.455595",
+          "method": "increaseLiquidity",
+          "details": {
+            "position_id": "fuji_compound_0x_001",
+            "amount0": 0.2,
+            "amount1": 7.0
+          }
+        }
+      ],
+      "timestamp": "2026-06-18T22:17:32.455618",
+      "error": null
+    }
+  }
+}

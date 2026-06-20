@@ -186,3 +186,38 @@
 - Future characters → different voices for different needs
 
 **Status:** Jordan approved. Memory updated.
+
+---
+
+## June 18, 2026 — GenTech Wallet Co-Pilot Principle
+
+**Decision:** Three-mode switch for all autonomous features.
+
+| Mode | Agent | User |
+|------|-------|------|
+| 🟢 Auto | Executes trades, rebalances, DCA | Set parameters, watch, override |
+| 🟡 Advisory | Recommends actions with reasoning | Decide and execute manually |
+| 🔴 Off | Shows data only (price, fees, regime) | Full control |
+
+**Philosophy:** Platform encourages AI use but doesn't remove the human. Some users want to learn and improve their own trading skills, not hand everything to an agent.
+
+**The learning loop:** Agent shows recommendation → User evaluates → User executes → Dashboard shows who was right → Both learn.
+
+**Status:** Jordan approved. Memory updated. To be added to Agent Kit spec.
+
+## Career Search Filters (Jordan, Jun 2026)
+- ACTUALLY remote — no hidden relocation requirements
+- Entry-level = 0-3 years experience, NOT Principal/Staff level
+- English-only (no bilingual requirement)
+- Links verified LIVE before sharing
+- Currently accepting applications
+- Jordan open to relocation but not right now
+
+
+## Career Scan Lessons (Jun 18, 2026)
+- HTTP 200 ≠ job is available. Must extract full page content, not just check if it loads.
+- Search snippets are unreliable — they show titles that don't match actual requirements.
+- "Entry level" in title ≠ entry level in requirements (Binance Accelerator requires Bachelor's).
+- Need to actually read the full job description before sharing, not just the headline.
+- JunBrain was the only true match — minimal requirements, "start ASAP", remote, English only.
+- Jordan's filter: no degree requirements, no bilingual, no hidden relocation, no "senior" disguised as entry-level.

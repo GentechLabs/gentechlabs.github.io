@@ -1,0 +1,149 @@
+{
+  "test_run": "2026-06-18T22:17:27.467868",
+  "network": "avalanche_fuji",
+  "results": {
+    "basic_extract": {
+      "status": "simulated",
+      "position_id": "fuji_extract_001",
+      "amount_claimed": {
+        "AVAX": 0.5,
+        "USDC.e": 12.5
+      },
+      "amount_received": {
+        "USDC.e": 30.0
+      },
+      "swap_rate": 2.3076923076923075,
+      "gas_fees": 0.01075,
+      "transactions": [
+        {
+          "tx_hash": "0x61f750464b5f256f50e479ba8948074513551a1f27ac024f083b66dae5dfc8bc",
+          "status": "simulated",
+          "gas_used": 180000,
+          "block_number": 99999999,
+          "timestamp": "2026-06-18T22:17:27.461205",
+          "method": "collect",
+          "details": {
+            "nft_id": "001"
+          }
+        },
+        {
+          "tx_hash": "0x9fe50240ea038add84710016d072f2b4f8aa45d9ef572f6cea2b5b7508e8448e",
+          "status": "simulated",
+          "gas_used": 250000,
+          "block_number": 99999999,
+          "timestamp": "2026-06-18T22:17:27.461276",
+          "method": "swap",
+          "details": {
+            "token_in": "AVAX",
+            "token_out": "USDC.e",
+            "amount_in": 0.5,
+            "amount_out": 17.5,
+            "slippage": 0.005,
+            "pool_fee": 0.003
+          }
+        }
+      ],
+      "timestamp": "2026-06-18T22:17:27.461347",
+      "error": null
+    },
+    "extract_with_monitor": {
+      "status": "simulated",
+      "position_id": "fuji_extract_001",
+      "amount_claimed": {
+        "USDC.e": 12.5
+      },
+      "amount_received": {
+        "USDC.e": 12.5
+      },
+      "swap_rate": 1.0,
+      "gas_fees": 0.0045,
+      "transactions": [
+        {
+          "tx_hash": "0xd67c82ec24ecdf1cdf6014c31612499ff0342fe6874962e8ed9e9100dc825b96",
+          "status": "simulated",
+          "gas_used": 180000,
+          "block_number": 99999999,
+          "timestamp": "2026-06-18T22:17:27.464569",
+          "method": "collect",
+          "details": {
+            "nft_id": "001"
+          }
+        }
+      ],
+      "timestamp": "2026-06-18T22:17:27.464609",
+      "error": null
+    },
+    "extract_with_decision": {
+      "action": "extract",
+      "confidence": 1.0
+    },
+    "extract_via_0x": {
+      "status": "simulated",
+      "position_id": "fuji_extract_0x_001",
+      "amount_claimed": {
+        "WAVAX": 0.3,
+        "USDC.e": 8.0
+      },
+      "amount_received": {
+        "USDC.e": 8.2997
+      },
+      "swap_rate": 0.9999638554216866,
+      "gas_fees": 0.00825,
+      "transactions": [
+        {
+          "tx_hash": "0x913d74adbc9e6b121d4d70aa945ec3cf0cc62b7964df4918d37417c9dcdc9592",
+          "status": "simulated",
+          "gas_used": 180000,
+          "block_number": 99999999,
+          "timestamp": "2026-06-18T22:17:27.467460",
+          "method": "collect",
+          "details": {
+            "nft_id": "001"
+          }
+        },
+        {
+          "tx_hash": "0x8b75b9cf12c75b5eb69a5a2edc34ce95e06b651ebd43916105d36dce28986e91",
+          "status": "simulated",
+          "gas_used": 150000,
+          "block_number": 99999999,
+          "timestamp": "2026-06-18T22:17:27.467495",
+          "method": "swap",
+          "details": {
+            "token_in": "WAVAX",
+            "token_out": "USDC.e",
+            "amount_in": 0.3,
+            "amount_out": 0.29969999999999997,
+            "source": "0x"
+          }
+        }
+      ],
+      "timestamp": "2026-06-18T22:17:27.467523",
+      "error": null
+    },
+    "error_handling": {
+      "status": "simulated",
+      "position_id": "fuji_extract_empty_001",
+      "amount_claimed": {},
+      "amount_received": {
+        "USDC.e": 0.0
+      },
+      "swap_rate": 0.0,
+      "gas_fees": 0.0045,
+      "transactions": [
+        {
+          "tx_hash": "0x7eadebe42df449f10d258e315a335fda6792a8155b670fedb9df17578fb2e2f7",
+          "status": "simulated",
+          "gas_used": 180000,
+          "block_number": 99999999,
+          "timestamp": "2026-06-18T22:17:27.467578",
+          "method": "collect",
+          "details": {
+            "nft_id": "001"
+          }
+        }
+      ],
+      "timestamp": "2026-06-18T22:17:27.467600",
+      "error": null
+    }
+  }
+}
