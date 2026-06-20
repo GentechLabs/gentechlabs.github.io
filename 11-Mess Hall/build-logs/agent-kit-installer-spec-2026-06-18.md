@@ -10,7 +10,7 @@
 
 ### 1. Repository Check
 - `/root/repos/genTech-agent-kit/` does **not exist** locally
-- Similar repos found: gentech-agents, gentech-hub, gentech-labs, gentech-music, gentech-pals
+- Similar repos found: gentech-agents, gentech-hub, gentech-labs, gentech-music, gentech-hub
 - Spec references `github.com/ProtoJay4789/genTech-agent-kit` as the canonical source
 
 ### 2. Ideas.md Review
