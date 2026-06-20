@@ -1,62 +1,62 @@
 {
-  "lastUpdated": "2026-06-20T08:20:15.096Z",
+  "lastUpdated": "2026-06-20T08:30:17.169Z",
   "pool": "AVAX/USDC",
   "chain": "Avalanche",
   "dex": "LFJ",
-  "currentPrice": 6.14,
-  "priceChange24h": 2.12,
-  "volume24h": 1332662.84,
-  "liquidity": 350274.65,
+  "currentPrice": 6.12,
+  "priceChange24h": 2.02,
+  "volume24h": 1346195.81,
+  "liquidity": 349670.4,
   "lpPosition": {
     "pair": "AVAX/USDC",
     "feeTier": "10bps",
     "shape": "curve",
     "displayShape": "Curve",
-    "currentPrice": 6.14,
+    "currentPrice": 6.12,
     "rangeMin": 5.818,
     "rangeMax": 5.9771,
     "avaxAmount": 0,
     "usdcAmount": 42.911054,
     "totalValue": 42.91,
     "totalValueUSD": 42.91,
-    "activeBin": 8362778,
+    "activeBin": 8362777,
     "binStep": 10,
     "totalBins": 28
   },
   "fees": {
-    "dailyFees": 0.522,
-    "cumulativeFees": 1.0553,
+    "dailyFees": 0.529,
+    "cumulativeFees": 1.059,
     "feeCurrency": "USD"
   },
   "efficiency": 0,
   "hero": {
     "positionUsd": 42.91,
-    "dailyFees": 0.522,
+    "dailyFees": 0.529,
     "efficiency": 0,
     "efficiencyZone": "Outer",
     "shape": "Curve",
     "rangeStatus": "Out of Range",
-    "currentPrice": 6.14,
+    "currentPrice": 6.12,
     "rangeMin": 5.818,
     "rangeMax": 5.9771,
     "milestoneNext": "Scout",
     "milestoneTarget": 5,
-    "milestoneProgress": 10
+    "milestoneProgress": 11
   },
   "marketIntel": {
-    "avaxPrice": 6.14,
-    "change24h": 2.12,
-    "volume24h": 1332662.84,
-    "tvl": 350274.65,
+    "avaxPrice": 6.12,
+    "change24h": 2.02,
+    "volume24h": 1346195.81,
+    "tvl": 349670.4,
     "trend": "bullish",
     "news": [
       {
-        "headline": "AVAX up 2.12% in 24h",
+        "headline": "AVAX up 2.02% in 24h",
         "impact": "bullish",
         "relevance": "high"
       },
       {
-        "headline": "LFJ AVAX/USDC pool volume: $1332.7K",
+        "headline": "LFJ AVAX/USDC pool volume: $1346.2K",
         "impact": "neutral",
         "relevance": "medium"
       }
@@ -70,7 +70,7 @@
     "dcaDetails": "Micro DCA — rebalance needed",
     "rebalanceTrigger": "Price exits $5.82-$5.98 range",
     "compoundThreshold": 50,
-    "cumulativeFees": 1.0553,
+    "cumulativeFees": 1.059,
     "nextCompound": "$48.94 away from first compound",
     "riskLevel": "Critical",
     "riskNote": "Out of range — rebalance needed",
@@ -83,13 +83,13 @@
     "Sovereign": 100
   },
   "feeMilestones": {
-    "currentDailyFees": 0.522,
-    "cumulativeFees": 1.0553,
+    "currentDailyFees": 0.529,
+    "cumulativeFees": 1.059,
     "positionUsd": 42.91,
     "daysActive": 1,
     "nextMilestone": "Scout",
     "nextTarget": 5,
-    "progress": 10,
+    "progress": 11,
     "tiers": [
       {
         "tier": 1,
@@ -126,7 +126,7 @@
     ]
   },
   "curveData": {
-    "currentPrice": 6.14,
+    "currentPrice": 6.12,
     "rangeMin": 5.818,
     "rangeMax": 5.9771,
     "bins": [
@@ -276,10 +276,10 @@
     "avax": 0.09714992894456698,
     "wavax": 6.06671055178e-7,
     "usdc": 0.000009,
-    "liquidUsd": 0.6
+    "liquidUsd": 0.59
   },
   "supportResistance": {
-    "currentPrice": 6.14,
+    "currentPrice": 6.12,
     "levels": [
       {
         "price": 5.98,
@@ -312,7 +312,7 @@
     ],
     "shapeRecommendation": {
       "shape": "Curve",
-      "reason": "Price at $6.14, outside $5.82-$5.98 range.",
+      "reason": "Price at $6.12, outside $5.82-$5.98 range.",
       "optimalRange": [
         5.82,
         5.98
@@ -322,16 +322,16 @@
   },
   "rebalanceSuggestions": {
     "efficiency": 0,
-    "price": 6.14,
+    "price": 6.12,
     "rangeMin": 5.818,
     "rangeMax": 5.9771,
-    "volatility": 2.12,
+    "volatility": 2.02,
     "trend": "bullish",
     "suggestions": [
       {
         "icon": "🚨",
         "title": "Price Out of Range",
-        "description": "AVAX at $6.1400 is outside your $5.8180-$5.9771 range. You are not earning fees.",
+        "description": "AVAX at $6.1200 is outside your $5.8180-$5.9771 range. You are not earning fees.",
         "priority": "high",
         "impact": "Immediate",
         "action": "Rebalance on LFJ"
