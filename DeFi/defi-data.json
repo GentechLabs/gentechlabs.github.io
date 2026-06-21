@@ -397,5 +397,258 @@
     "currentPrice": 6.228,
     "outperforming": true,
     "verdict": "LP earning $0.53/day (443.7% APR) vs sAVAX $0.0065/day (5.2% APR). Out of range \u2014 rebalance to resume fee capture."
+  },
+  "spotPositions": {
+    "watchlist": [
+      {
+        "symbol": "AVAX",
+        "name": "Avalanche",
+        "type": "L1",
+        "holdings": "3.142 AVAX (in LP)",
+        "valueUsd": 19.57,
+        "buyZone": "$5.50 - $6.00",
+        "autoCompound": true,
+        "platforms": [
+          "LFJ LP",
+          "Binance (spot)"
+        ]
+      },
+      {
+        "symbol": "USDC",
+        "name": "USD Coin",
+        "type": "Stable",
+        "holdings": "24.03 USDC (in LP)",
+        "valueUsd": 24.03,
+        "buyZone": "N/A (stablecoin)",
+        "autoCompound": false,
+        "platforms": [
+          "LFJ LP"
+        ]
+      },
+      {
+        "symbol": "COQ",
+        "name": "Coq Inu",
+        "type": "Meme",
+        "holdings": "Watchlist only",
+        "valueUsd": 0,
+        "buyZone": "$0.000002 - $0.000005",
+        "autoCompound": false,
+        "platforms": [
+          "Trader Joe"
+        ]
+      }
+    ],
+    "autoCompoundOpportunities": [
+      {
+        "pair": "AVAX/USDC",
+        "currentApr": 443.7,
+        "compoundFrequency": "Daily",
+        "estimatedBoost": "12-18% APY",
+        "platform": "LFJ"
+      }
+    ]
+  },
+  "marketScenarios": {
+    "currentConditions": {
+      "price": 6.228,
+      "trend": "bearish",
+      "volatility24h": 7.31,
+      "regime": "bear_trend",
+      "positionStatus": "out_of_range"
+    },
+    "scenarios": [
+      {
+        "id": "bear_continued",
+        "name": "Bear Continuation",
+        "subtitle": "AVAX drops to $4-5 range",
+        "icon": "\ud83d\udc3b",
+        "color": "#ef4444",
+        "trigger": "BTC breaks below $60K, macro risk-off",
+        "probability": "medium",
+        "ilRisk": "high",
+        "action": "Widen range downward",
+        "actionDetail": "Shift to Curve $4.50-$6.00, add DCA at $5.00 and $4.50. IL erosion strategy: buy the dip with LP.",
+        "timeframe": "1-4 weeks",
+        "reentry": "DCA at each $0.50 drop"
+      },
+      {
+        "id": "sideways_accumulation",
+        "name": "Sideways Accumulation",
+        "subtitle": "AVAX trades $5.80-$6.50",
+        "icon": "\u27a1\ufe0f",
+        "color": "#f59e0b",
+        "trigger": "BTC holds $62-68K, no major catalyst",
+        "probability": "high",
+        "ilRisk": "low",
+        "action": "Maintain Curve, harvest fees",
+        "actionDetail": "Current Curve shape ($6.01-$6.18) is ideal. Rebalance when price exits range. Compound fees weekly.",
+        "timeframe": "2-6 weeks",
+        "reentry": "Rebalance at range edges"
+      },
+      {
+        "id": "bull_recovery",
+        "name": "Bull Recovery",
+        "subtitle": "AVAX pushes to $7-9",
+        "icon": "\ud83d\udc02",
+        "color": "#22c55e",
+        "trigger": "BTC breaks $70K, altcoin season, AVAX ecosystem growth",
+        "probability": "low",
+        "ilRisk": "medium",
+        "action": "Shift to Bid-Ask, take profit at edges",
+        "actionDetail": "Move to Bid-Ask shape at $6.50-$8.50. Extract 30% of position at $8.00. Let fees compound the rest.",
+        "timeframe": "4-12 weeks",
+        "reentry": "DCA on any 10%+ pullback"
+      },
+      {
+        "id": "flash_crash",
+        "name": "Flash Crash",
+        "subtitle": "AVAX drops to $3-4 overnight",
+        "icon": "\u26a1",
+        "color": "#8b5cf6",
+        "trigger": "Black swan event, exchange hack, or regulatory shock",
+        "probability": "rare",
+        "ilRisk": "critical",
+        "action": "Emergency: pull LP, wait for dust to settle",
+        "actionDetail": "Exit LP immediately. Hold stables. Re-enter at $3.50-4.00 with tight Curve. This is where dry powder mode activates.",
+        "timeframe": "1-3 days",
+        "reentry": "24-48 hours after crash, DCA in 3 tranches"
+      }
+    ],
+    "recommendation": {
+      "currentScenario": "sideways_accumulation",
+      "alerts": [
+        {
+          "price": 5.8,
+          "type": "danger",
+          "message": "Below range \u2014 will go out of range"
+        },
+        {
+          "price": 5.5,
+          "type": "critical",
+          "message": "Flash crash zone \u2014 consider emergency exit"
+        },
+        {
+          "price": 6.5,
+          "type": "info",
+          "message": "Above range \u2014 rebalance up or take profit"
+        }
+      ]
+    }
+  },
+  "ilCalculator": {
+    "currentPrice": 6.228,
+    "entryPrice": 6.23,
+    "positionUsd": 43.6,
+    "dailyFees": 0.53,
+    "scenarios": [
+      {
+        "priceChange": -30,
+        "newPrice": 4.361,
+        "impermanentLoss": -1.57,
+        "feeOffset": 8.51,
+        "netImpact": 6.94
+      },
+      {
+        "priceChange": -20,
+        "newPrice": 4.984,
+        "impermanentLoss": -0.62,
+        "feeOffset": 8.51,
+        "netImpact": 7.89
+      },
+      {
+        "priceChange": -15,
+        "newPrice": 5.2955,
+        "impermanentLoss": -0.33,
+        "feeOffset": 8.51,
+        "netImpact": 8.18
+      },
+      {
+        "priceChange": -10,
+        "newPrice": 5.607,
+        "impermanentLoss": -0.14,
+        "feeOffset": 8.51,
+        "netImpact": 8.37
+      },
+      {
+        "priceChange": -5,
+        "newPrice": 5.9185,
+        "impermanentLoss": -0.03,
+        "feeOffset": 8.51,
+        "netImpact": 8.48
+      },
+      {
+        "priceChange": 0,
+        "newPrice": 6.23,
+        "impermanentLoss": 0.0,
+        "feeOffset": 8.51,
+        "netImpact": 8.51
+      },
+      {
+        "priceChange": 5,
+        "newPrice": 6.5415,
+        "impermanentLoss": -0.03,
+        "feeOffset": 8.51,
+        "netImpact": 8.48
+      },
+      {
+        "priceChange": 10,
+        "newPrice": 6.853,
+        "impermanentLoss": -0.11,
+        "feeOffset": 8.51,
+        "netImpact": 8.4
+      },
+      {
+        "priceChange": 15,
+        "newPrice": 7.1645,
+        "impermanentLoss": -0.24,
+        "feeOffset": 8.51,
+        "netImpact": 8.27
+      },
+      {
+        "priceChange": 20,
+        "newPrice": 7.476,
+        "impermanentLoss": -0.41,
+        "feeOffset": 8.51,
+        "netImpact": 8.1
+      },
+      {
+        "priceChange": 30,
+        "newPrice": 8.099,
+        "impermanentLoss": -0.85,
+        "feeOffset": 8.51,
+        "netImpact": 7.65
+      }
+    ]
+  },
+  "activityLog": {
+    "totalVerifications": 4,
+    "lastVerified": "Jun 21, 2026 02:12 UTC",
+    "dataFreshness": "Live \u2014 on-chain verified",
+    "verifications": [
+      {
+        "date": "Jun 21",
+        "type": "On-chain verification",
+        "note": "lfj-position.py confirmed: $6.23, OUT OF RANGE (above $6.18), Curve shape, $43.60",
+        "verifiedBy": "lfj-position.py"
+      },
+      {
+        "date": "Jun 20",
+        "type": "Rebalance executed",
+        "note": "Bid-Ask \u2192 Curve, entry $6.23, range $6.01-$6.18, 149 bins",
+        "verifiedBy": "LFJ frontend"
+      },
+      {
+        "date": "Jun 19",
+        "type": "Position snapshot",
+        "note": "Bid-Ask shape, entry $6.08, range $5.997-$6.161, $42.40",
+        "verifiedBy": "lfj-position.py"
+      },
+      {
+        "date": "Jun 18",
+        "type": "Initial position",
+        "note": "First LP entry: AVAX/USDC 5bps, 1.6 WAVAX + 34.10 USDC",
+        "verifiedBy": "LFJ frontend"
+      }
+    ]
   }
 }
