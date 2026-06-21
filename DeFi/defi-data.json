@@ -1,9 +1,9 @@
 {
-  "lastUpdated": "2026-06-21T02:12:00.000Z",
+  "lastUpdated": "2026-06-21T02:29:10.925983+00:00",
   "pool": "AVAX/USDC",
   "chain": "Avalanche",
   "dex": "LFJ",
-  "currentPrice": 6.228,
+  "currentPrice": 6.22,
   "priceChange24h": -7.31,
   "volume24h": 1239800,
   "liquidity": 354000,
@@ -12,33 +12,29 @@
     "feeTier": "5bps",
     "shape": "curve",
     "displayShape": "Curve",
-    "currentPrice": 6.228,
+    "currentPrice": 6.22,
     "rangeMin": 6.0109,
     "rangeMax": 6.1753,
     "avaxAmount": 3.142,
     "usdcAmount": 24.03,
-    "totalValue": 43.6,
-    "totalValueUSD": 43.6,
-    "activeBin": 8362793,
-    "binStep": 10,
-    "totalBins": 28,
-    "inRange": false,
-    "entryTotal": 45.8
+    "totalValue": 43.58,
+    "totalValueUSD": 43.58,
+    "inRange": false
   },
   "fees": {
-    "dailyFees": 0.53,
+    "dailyFees": 0,
     "cumulativeFees": 0.82,
     "feeCurrency": "USD"
   },
   "efficiency": 0.0,
   "hero": {
-    "positionUsd": 43.6,
-    "dailyFees": 0.53,
+    "positionUsd": 43.58,
+    "dailyFees": 0,
     "efficiency": 0.0,
     "efficiencyZone": "Out of Range",
     "shape": "Curve",
-    "rangeStatus": "Out of Range (Above)",
-    "currentPrice": 6.228,
+    "rangeStatus": "Out of Range",
+    "currentPrice": 6.22,
     "rangeMin": 6.0109,
     "rangeMax": 6.1753,
     "milestoneNext": "Scout",
@@ -46,11 +42,11 @@
     "milestoneProgress": 16.4
   },
   "marketIntel": {
-    "avaxPrice": 6.228,
+    "avaxPrice": 6.22,
     "change24h": -7.31,
     "volume24h": 1239800,
     "tvl": 354000,
-    "trend": "bearish",
+    "trend": "bear",
     "news": [
       {
         "headline": "AVAX down 7.31% in 24h \u2014 price above LP range",
@@ -67,65 +63,110 @@
   "strategyAdvisor": {
     "efficiency": 0.0,
     "efficiencyZone": "Out of Range",
-    "recommendedAction": "REBALANCE \u2014 price above range",
+    "recommendedAction": "REBALANCE \u2014 price outside range",
     "dcaType": "None (Out of Range)",
-    "dcaDetails": "Price $6.23 above range $6.01-$6.18. Rebalance or widen range.",
-    "rebalanceTrigger": "Price already outside range \u2014 rebalance NOW",
+    "dcaDetails": "Price $6.22, out of range $6.0109-$6.1753",
+    "rebalanceTrigger": "Price exits $6.0109-$6.1753",
     "compoundThreshold": 50,
     "cumulativeFees": 0.82,
-    "nextCompound": "$49.18 away from first compound",
     "riskLevel": "High",
-    "riskNote": "Price $6.228 above range \u2014 earning zero fees",
+    "riskNote": "Price $6.22, 0.0% efficiency",
     "shape": "Curve"
   },
-  "milestones": {
-    "Scout": 5,
-    "Raider": 20,
-    "Warlord": 50,
-    "Sovereign": 100
+  "regimeData": {
+    "current": "bear_trend",
+    "previous": "sideways",
+    "changedAt": "2026-06-20T18:00:00Z",
+    "signals": {
+      "price": 6.228,
+      "ma20": 6.15,
+      "momentum": -7.31,
+      "volatilityPct": 7.31
+    },
+    "strategy": {
+      "shape": "curve",
+      "dcaAggressiveness": "None"
+    },
+    "recommended": {
+      "rangeLow": 6.05,
+      "rangeHigh": 6.4,
+      "shape": "Curve",
+      "reason": "Bear trend \u2014 widen range upward to capture recovery, or shift to Bid-Ask if expecting continued selling"
+    }
   },
-  "feeMilestones": {
-    "currentDailyFees": 0.595,
-    "cumulativeFees": 0.8228,
-    "positionUsd": 42.4,
-    "daysActive": 1,
-    "nextMilestone": "Scout",
-    "nextTarget": 5,
-    "progress": 12,
-    "tiers": [
+  "regime": {
+    "current": "bear_trend",
+    "previous": "sideways",
+    "changedAt": "2026-06-20T18:00:00Z",
+    "signals": {
+      "price": 6.228,
+      "ma20": 6.15,
+      "momentum": -7.31,
+      "volatilityPct": 7.31
+    },
+    "strategy": {
+      "shape": "curve",
+      "dcaAggressiveness": "None"
+    },
+    "recommended": {
+      "rangeLow": 6.05,
+      "rangeHigh": 6.4,
+      "shape": "Curve",
+      "reason": "Bear trend \u2014 widen range upward to capture recovery, or shift to Bid-Ask if expecting continued selling"
+    }
+  },
+  "strategyComparison": {
+    "lpApr": 0.0,
+    "lpDailyFees": 0,
+    "stakingApr": 5.2,
+    "stakingDaily": 0.0062,
+    "hodlReturn": -0.16,
+    "entryPrice": 6.23,
+    "currentPrice": 6.22,
+    "outperforming": false,
+    "verdict": "LP losing vs staking"
+  },
+  "supportResistance": {
+    "currentPrice": 6.228,
+    "levels": [
       {
-        "tier": 1,
-        "icon": "\ud83d\udd2d",
-        "label": "Scout",
-        "target": 5,
-        "unlocks": "Entry strategies (CURVE)",
-        "achieved": false
+        "price": 6.1753,
+        "type": "resistance",
+        "strength": "strong",
+        "label": "Range High",
+        "note": "Current position top"
       },
       {
-        "tier": 2,
-        "icon": "\u2694\ufe0f",
-        "label": "Raider",
-        "target": 20,
-        "unlocks": "SPOT + BIDIRECTIONAL shapes",
-        "achieved": false
+        "price": 6.35,
+        "type": "resistance",
+        "strength": "weak",
+        "label": "Minor Resistance",
+        "note": "Above range"
       },
       {
-        "tier": 3,
-        "icon": "\ud83d\udc51",
-        "label": "Warlord",
-        "target": 50,
-        "unlocks": "Multi-pool positions",
-        "achieved": false
+        "price": 6.0109,
+        "type": "support",
+        "strength": "strong",
+        "label": "Range Low",
+        "note": "Current position bottom"
       },
       {
-        "tier": 4,
-        "icon": "\ud83c\udff0",
-        "label": "Sovereign",
-        "target": 100,
-        "unlocks": "Custom strategy creation + mentorship",
-        "achieved": false
+        "price": 5.9,
+        "type": "support",
+        "strength": "weak",
+        "label": "Minor Support",
+        "note": "Below range"
       }
-    ]
+    ],
+    "shapeRecommendation": {
+      "shape": "Curve",
+      "reason": "Price above range \u2014 shift range up or widen",
+      "optimalRange": [
+        6.05,
+        6.4
+      ]
+    },
+    "proximityAlert": "Price ABOVE range \u2014 not earning fees"
   },
   "curveData": {
     "currentPrice": 5.87,
@@ -274,129 +315,48 @@
       }
     ]
   },
-  "walletBalances": {
-    "avax": 0.09714992894456698,
-    "wavax": 6.06671055178e-07,
-    "usdc": 9e-06,
-    "liquidUsd": 0.58
-  },
-  "supportResistance": {
-    "currentPrice": 6.228,
-    "levels": [
+  "feeMilestones": {
+    "currentDailyFees": 0.595,
+    "cumulativeFees": 0.8228,
+    "positionUsd": 42.4,
+    "daysActive": 1,
+    "nextMilestone": "Scout",
+    "nextTarget": 5,
+    "progress": 12,
+    "tiers": [
       {
-        "price": 6.1753,
-        "type": "resistance",
-        "strength": "strong",
-        "label": "Range High",
-        "note": "Current position top"
+        "tier": 1,
+        "icon": "\ud83d\udd2d",
+        "label": "Scout",
+        "target": 5,
+        "unlocks": "Entry strategies (CURVE)",
+        "achieved": false
       },
       {
-        "price": 6.35,
-        "type": "resistance",
-        "strength": "weak",
-        "label": "Minor Resistance",
-        "note": "Above range"
+        "tier": 2,
+        "icon": "\u2694\ufe0f",
+        "label": "Raider",
+        "target": 20,
+        "unlocks": "SPOT + BIDIRECTIONAL shapes",
+        "achieved": false
       },
       {
-        "price": 6.0109,
-        "type": "support",
-        "strength": "strong",
-        "label": "Range Low",
-        "note": "Current position bottom"
+        "tier": 3,
+        "icon": "\ud83d\udc51",
+        "label": "Warlord",
+        "target": 50,
+        "unlocks": "Multi-pool positions",
+        "achieved": false
       },
       {
-        "price": 5.9,
-        "type": "support",
-        "strength": "weak",
-        "label": "Minor Support",
-        "note": "Below range"
-      }
-    ],
-    "shapeRecommendation": {
-      "shape": "Curve",
-      "reason": "Price above range \u2014 shift range up or widen",
-      "optimalRange": [
-        6.05,
-        6.4
-      ]
-    },
-    "proximityAlert": "Price ABOVE range \u2014 not earning fees"
-  },
-  "rebalanceSuggestions": {
-    "efficiency": 64.3,
-    "price": 5.87,
-    "rangeMin": 5.82,
-    "rangeMax": 6.1,
-    "volatility": 6.57,
-    "trend": "bearish",
-    "suggestions": [
-      {
-        "icon": "\u26a0\ufe0f",
-        "title": "Price Near Edge",
-        "description": "Price is near the edge of your range (28% efficiency). Consider narrowing or recentering.",
-        "priority": "medium",
-        "impact": "Moderate",
-        "action": "Review Range"
-      },
-      {
-        "icon": "\ud83d\udcc9",
-        "title": "Bearish Pressure",
-        "description": "AVAX is down 24h. Widen range or shift lower to avoid going out of range.",
-        "priority": "low",
-        "impact": "Risk",
-        "action": "Adjust Down"
+        "tier": 4,
+        "icon": "\ud83c\udff0",
+        "label": "Sovereign",
+        "target": 100,
+        "unlocks": "Custom strategy creation + mentorship",
+        "achieved": false
       }
     ]
-  },
-  "transactions": [
-    {
-      "date": "2026-06-21",
-      "type": "Status",
-      "token": "AVAX/USDC",
-      "amount": "3.142 WAVAX + 24.03 USDC",
-      "usd": "43.60",
-      "status": "Out of Range (Above)"
-    },
-    {
-      "date": "2026-06-20",
-      "type": "Rebalance",
-      "token": "AVAX/USDC",
-      "amount": "Curve shape, entry $6.23",
-      "usd": "45.80",
-      "status": "In Range"
-    }
-  ],
-  "regimeData": {
-    "current": "bear_trend",
-    "previous": "sideways",
-    "changedAt": "2026-06-20T18:00:00Z",
-    "signals": {
-      "price": 6.228,
-      "ma20": 6.15,
-      "momentum": -7.31,
-      "volatilityPct": 7.31
-    },
-    "strategy": {
-      "shape": "curve",
-      "dcaAggressiveness": "None"
-    },
-    "recommended": {
-      "rangeLow": 6.05,
-      "rangeHigh": 6.4,
-      "shape": "Curve",
-      "reason": "Bear trend \u2014 widen range upward to capture recovery, or shift to Bid-Ask if expecting continued selling"
-    }
-  },
-  "strategyComparison": {
-    "lpApr": 443.7,
-    "lpDailyFees": 0.53,
-    "stakingApr": 5.2,
-    "stakingDaily": 0.0065,
-    "hodlReturn": -0.03,
-    "entryPrice": 6.23,
-    "currentPrice": 6.228,
-    "outperforming": true,
-    "verdict": "LP earning $0.53/day (443.7% APR) vs sAVAX $0.0065/day (5.2% APR). Out of range \u2014 rebalance to resume fee capture."
   },
   "spotPositions": {
     "watchlist": [
@@ -448,178 +408,6 @@
       }
     ]
   },
-  "marketScenarios": {
-    "currentConditions": {
-      "price": 6.228,
-      "trend": "bearish",
-      "volatility24h": 7.31,
-      "regime": "bear_trend",
-      "positionStatus": "out_of_range"
-    },
-    "scenarios": [
-      {
-        "id": "bear_continued",
-        "name": "Bear Continuation",
-        "subtitle": "AVAX drops to $4-5 range",
-        "icon": "\ud83d\udc3b",
-        "color": "#ef4444",
-        "trigger": "BTC breaks below $60K, macro risk-off",
-        "probability": "medium",
-        "ilRisk": "high",
-        "action": "Widen range downward",
-        "actionDetail": "Shift to Curve $4.50-$6.00, add DCA at $5.00 and $4.50. IL erosion strategy: buy the dip with LP.",
-        "timeframe": "1-4 weeks",
-        "reentry": "DCA at each $0.50 drop"
-      },
-      {
-        "id": "sideways_accumulation",
-        "name": "Sideways Accumulation",
-        "subtitle": "AVAX trades $5.80-$6.50",
-        "icon": "\u27a1\ufe0f",
-        "color": "#f59e0b",
-        "trigger": "BTC holds $62-68K, no major catalyst",
-        "probability": "high",
-        "ilRisk": "low",
-        "action": "Maintain Curve, harvest fees",
-        "actionDetail": "Current Curve shape ($6.01-$6.18) is ideal. Rebalance when price exits range. Compound fees weekly.",
-        "timeframe": "2-6 weeks",
-        "reentry": "Rebalance at range edges"
-      },
-      {
-        "id": "bull_recovery",
-        "name": "Bull Recovery",
-        "subtitle": "AVAX pushes to $7-9",
-        "icon": "\ud83d\udc02",
-        "color": "#22c55e",
-        "trigger": "BTC breaks $70K, altcoin season, AVAX ecosystem growth",
-        "probability": "low",
-        "ilRisk": "medium",
-        "action": "Shift to Bid-Ask, take profit at edges",
-        "actionDetail": "Move to Bid-Ask shape at $6.50-$8.50. Extract 30% of position at $8.00. Let fees compound the rest.",
-        "timeframe": "4-12 weeks",
-        "reentry": "DCA on any 10%+ pullback"
-      },
-      {
-        "id": "flash_crash",
-        "name": "Flash Crash",
-        "subtitle": "AVAX drops to $3-4 overnight",
-        "icon": "\u26a1",
-        "color": "#8b5cf6",
-        "trigger": "Black swan event, exchange hack, or regulatory shock",
-        "probability": "rare",
-        "ilRisk": "critical",
-        "action": "Emergency: pull LP, wait for dust to settle",
-        "actionDetail": "Exit LP immediately. Hold stables. Re-enter at $3.50-4.00 with tight Curve. This is where dry powder mode activates.",
-        "timeframe": "1-3 days",
-        "reentry": "24-48 hours after crash, DCA in 3 tranches"
-      }
-    ],
-    "recommendation": {
-      "currentScenario": "sideways_accumulation",
-      "alerts": [
-        {
-          "price": 5.8,
-          "type": "danger",
-          "message": "Below range \u2014 will go out of range"
-        },
-        {
-          "price": 5.5,
-          "type": "critical",
-          "message": "Flash crash zone \u2014 consider emergency exit"
-        },
-        {
-          "price": 6.5,
-          "type": "info",
-          "message": "Above range \u2014 rebalance up or take profit"
-        }
-      ]
-    }
-  },
-  "ilCalculator": {
-    "currentPrice": 6.228,
-    "entryPrice": 6.23,
-    "positionUsd": 43.6,
-    "dailyFees": 0.53,
-    "scenarios": [
-      {
-        "priceChange": -30,
-        "newPrice": 4.361,
-        "impermanentLoss": -1.57,
-        "feeOffset": 8.51,
-        "netImpact": 6.94
-      },
-      {
-        "priceChange": -20,
-        "newPrice": 4.984,
-        "impermanentLoss": -0.62,
-        "feeOffset": 8.51,
-        "netImpact": 7.89
-      },
-      {
-        "priceChange": -15,
-        "newPrice": 5.2955,
-        "impermanentLoss": -0.33,
-        "feeOffset": 8.51,
-        "netImpact": 8.18
-      },
-      {
-        "priceChange": -10,
-        "newPrice": 5.607,
-        "impermanentLoss": -0.14,
-        "feeOffset": 8.51,
-        "netImpact": 8.37
-      },
-      {
-        "priceChange": -5,
-        "newPrice": 5.9185,
-        "impermanentLoss": -0.03,
-        "feeOffset": 8.51,
-        "netImpact": 8.48
-      },
-      {
-        "priceChange": 0,
-        "newPrice": 6.23,
-        "impermanentLoss": 0.0,
-        "feeOffset": 8.51,
-        "netImpact": 8.51
-      },
-      {
-        "priceChange": 5,
-        "newPrice": 6.5415,
-        "impermanentLoss": -0.03,
-        "feeOffset": 8.51,
-        "netImpact": 8.48
-      },
-      {
-        "priceChange": 10,
-        "newPrice": 6.853,
-        "impermanentLoss": -0.11,
-        "feeOffset": 8.51,
-        "netImpact": 8.4
-      },
-      {
-        "priceChange": 15,
-        "newPrice": 7.1645,
-        "impermanentLoss": -0.24,
-        "feeOffset": 8.51,
-        "netImpact": 8.27
-      },
-      {
-        "priceChange": 20,
-        "newPrice": 7.476,
-        "impermanentLoss": -0.41,
-        "feeOffset": 8.51,
-        "netImpact": 8.1
-      },
-      {
-        "priceChange": 30,
-        "newPrice": 8.099,
-        "impermanentLoss": -0.85,
-        "feeOffset": 8.51,
-        "netImpact": 7.65
-      }
-    ]
-  },
   "activityLog": {
     "totalVerifications": 4,
     "lastVerified": "Jun 21, 2026 02:12 UTC",
@@ -651,25 +439,232 @@
       }
     ]
   },
-  "regime": {
-    "current": "bear_trend",
-    "previous": "sideways",
-    "changedAt": "2026-06-20T18:00:00Z",
-    "signals": {
-      "price": 6.228,
-      "ma20": 6.15,
-      "momentum": -7.31,
-      "volatilityPct": 7.31
+  "rebalanceSuggestions": {
+    "efficiency": 64.3,
+    "price": 5.87,
+    "rangeMin": 5.82,
+    "rangeMax": 6.1,
+    "volatility": 6.57,
+    "trend": "bearish",
+    "suggestions": [
+      {
+        "icon": "\u26a0\ufe0f",
+        "title": "Price Near Edge",
+        "description": "Price is near the edge of your range (28% efficiency). Consider narrowing or recentering.",
+        "priority": "medium",
+        "impact": "Moderate",
+        "action": "Review Range"
+      },
+      {
+        "icon": "\ud83d\udcc9",
+        "title": "Bearish Pressure",
+        "description": "AVAX is down 24h. Widen range or shift lower to avoid going out of range.",
+        "priority": "low",
+        "impact": "Risk",
+        "action": "Adjust Down"
+      }
+    ]
+  },
+  "transactions": [
+    {
+      "date": "2026-06-21",
+      "type": "Status",
+      "token": "AVAX/USDC",
+      "amount": "3.142 WAVAX + 24.03 USDC",
+      "usd": "43.60",
+      "status": "Out of Range (Above)"
     },
-    "strategy": {
-      "shape": "curve",
-      "dcaAggressiveness": "None"
-    },
-    "recommended": {
-      "rangeLow": 6.05,
-      "rangeHigh": 6.4,
-      "shape": "Curve",
-      "reason": "Bear trend \u2014 widen range upward to capture recovery, or shift to Bid-Ask if expecting continued selling"
+    {
+      "date": "2026-06-20",
+      "type": "Rebalance",
+      "token": "AVAX/USDC",
+      "amount": "Curve shape, entry $6.23",
+      "usd": "45.80",
+      "status": "In Range"
     }
+  ],
+  "marketScenarios": {
+    "currentConditions": {
+      "price": 6.22,
+      "trend": "bear",
+      "volatility24h": 0,
+      "regime": "sideways",
+      "positionStatus": "unknown"
+    },
+    "scenarios": [
+      {
+        "id": "bear_continued",
+        "name": "Bear Continuation",
+        "subtitle": "AVAX drops to $4.35-$5.29",
+        "icon": "\ud83d\udc3b",
+        "color": "#ef4444",
+        "trigger": "BTC breaks below $60K",
+        "probability": "medium",
+        "ilRisk": "high",
+        "action": "Widen range downward",
+        "actionDetail": "Shift to wider Curve, DCA at each $0.50 drop",
+        "timeframe": "1-4 weeks",
+        "reentry": "DCA at each $0.50 drop"
+      },
+      {
+        "id": "sideways",
+        "name": "Sideways Accumulation",
+        "subtitle": "AVAX trades $5.91-$6.53",
+        "icon": "\u27a1\ufe0f",
+        "color": "#f59e0b",
+        "trigger": "BTC holds $62-68K",
+        "probability": "high",
+        "ilRisk": "low",
+        "action": "Maintain current shape",
+        "actionDetail": "Harvest fees, compound weekly",
+        "timeframe": "2-6 weeks",
+        "reentry": "Rebalance at range edges"
+      },
+      {
+        "id": "bull",
+        "name": "Bull Recovery",
+        "subtitle": "AVAX pushes to $7.46-$9.33",
+        "icon": "\ud83d\udc02",
+        "color": "#22c55e",
+        "trigger": "BTC breaks $70K",
+        "probability": "low",
+        "ilRisk": "medium",
+        "action": "Shift to Bid-Ask, take profit",
+        "actionDetail": "Move to Bid-Ask, extract 30% at target",
+        "timeframe": "4-12 weeks",
+        "reentry": "DCA on pullbacks"
+      },
+      {
+        "id": "flash_crash",
+        "name": "Flash Crash",
+        "subtitle": "AVAX drops to $3.11-$3.73",
+        "icon": "\u26a1",
+        "color": "#8b5cf6",
+        "trigger": "Black swan event",
+        "probability": "rare",
+        "ilRisk": "critical",
+        "action": "Emergency exit, wait for dust",
+        "actionDetail": "Pull LP, hold stables, re-enter at bottom",
+        "timeframe": "1-3 days",
+        "reentry": "24-48 hours after"
+      }
+    ],
+    "recommendation": {
+      "currentScenario": "sideways",
+      "alerts": [
+        {
+          "price": 5.91,
+          "type": "danger",
+          "message": "Below range \u2014 rebalance down"
+        },
+        {
+          "price": 5.29,
+          "type": "critical",
+          "message": "Flash crash zone"
+        },
+        {
+          "price": 6.53,
+          "type": "info",
+          "message": "Above range \u2014 rebalance up"
+        }
+      ]
+    }
+  },
+  "ilCalculator": {
+    "currentPrice": 6.22,
+    "entryPrice": 6.23,
+    "positionUsd": 43.58,
+    "dailyFees": 0,
+    "scenarios": [
+      {
+        "priceChange": -30,
+        "newPrice": 4.361,
+        "impermanentLoss": -1.57,
+        "feeOffset": 0.0,
+        "netImpact": -1.57
+      },
+      {
+        "priceChange": -20,
+        "newPrice": 4.984,
+        "impermanentLoss": -0.62,
+        "feeOffset": 0.0,
+        "netImpact": -0.62
+      },
+      {
+        "priceChange": -15,
+        "newPrice": 5.2955,
+        "impermanentLoss": -0.33,
+        "feeOffset": 0.0,
+        "netImpact": -0.33
+      },
+      {
+        "priceChange": -10,
+        "newPrice": 5.607,
+        "impermanentLoss": -0.14,
+        "feeOffset": 0.0,
+        "netImpact": -0.14
+      },
+      {
+        "priceChange": -5,
+        "newPrice": 5.9185,
+        "impermanentLoss": -0.03,
+        "feeOffset": 0.0,
+        "netImpact": -0.03
+      },
+      {
+        "priceChange": 0,
+        "newPrice": 6.23,
+        "impermanentLoss": 0.0,
+        "feeOffset": 0.0,
+        "netImpact": 0.0
+      },
+      {
+        "priceChange": 5,
+        "newPrice": 6.5415,
+        "impermanentLoss": -0.03,
+        "feeOffset": 0.0,
+        "netImpact": -0.03
+      },
+      {
+        "priceChange": 10,
+        "newPrice": 6.853,
+        "impermanentLoss": -0.11,
+        "feeOffset": 0.0,
+        "netImpact": -0.11
+      },
+      {
+        "priceChange": 15,
+        "newPrice": 7.1645,
+        "impermanentLoss": -0.24,
+        "feeOffset": 0.0,
+        "netImpact": -0.24
+      },
+      {
+        "priceChange": 20,
+        "newPrice": 7.476,
+        "impermanentLoss": -0.41,
+        "feeOffset": 0.0,
+        "netImpact": -0.41
+      },
+      {
+        "priceChange": 30,
+        "newPrice": 8.099,
+        "impermanentLoss": -0.85,
+        "feeOffset": 0.0,
+        "netImpact": -0.85
+      }
+    ]
+  },
+  "walletBalances": {
+    "avax": 0.09714992894456698,
+    "wavax": 6.06671055178e-07,
+    "usdc": 9e-06,
+    "liquidUsd": 0.58
+  },
+  "milestones": {
+    "Scout": 5,
+    "Raider": 20,
+    "Warlord": 50,
+    "Sovereign": 100
   }
 }
