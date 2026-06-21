@@ -650,5 +650,26 @@
         "verifiedBy": "LFJ frontend"
       }
     ]
+  },
+  "regime": {
+    "current": "bear_trend",
+    "previous": "sideways",
+    "changedAt": "2026-06-20T18:00:00Z",
+    "signals": {
+      "price": 6.228,
+      "ma20": 6.15,
+      "momentum": -7.31,
+      "volatilityPct": 7.31
+    },
+    "strategy": {
+      "shape": "curve",
+      "dcaAggressiveness": "None"
+    },
+    "recommended": {
+      "rangeLow": 6.05,
+      "rangeHigh": 6.4,
+      "shape": "Curve",
+      "reason": "Bear trend \u2014 widen range upward to capture recovery, or shift to Bid-Ask if expecting continued selling"
+    }
   }
 }
