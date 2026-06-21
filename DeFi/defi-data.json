@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-21T02:29:10.925983+00:00",
+  "lastUpdated": "2026-06-21T02:52:42.338025+00:00",
   "pool": "AVAX/USDC",
   "chain": "Avalanche",
   "dex": "LFJ",
@@ -13,13 +13,13 @@
     "shape": "curve",
     "displayShape": "Curve",
     "currentPrice": 6.22,
-    "rangeMin": 6.0109,
-    "rangeMax": 6.1753,
-    "avaxAmount": 3.142,
-    "usdcAmount": 24.03,
-    "totalValue": 43.58,
-    "totalValueUSD": 43.58,
-    "inRange": false
+    "rangeMin": 6.16,
+    "rangeMax": 6.31,
+    "avaxAmount": 4.326,
+    "usdcAmount": 15.94,
+    "totalValue": 42.88,
+    "totalValueUSD": 42.88,
+    "inRange": true
   },
   "fees": {
     "dailyFees": 0,
@@ -28,15 +28,15 @@
   },
   "efficiency": 0.0,
   "hero": {
-    "positionUsd": 43.58,
+    "positionUsd": 42.88,
     "dailyFees": 0,
     "efficiency": 0.0,
-    "efficiencyZone": "Out of Range",
+    "efficiencyZone": "In Range",
     "shape": "Curve",
-    "rangeStatus": "Out of Range",
+    "rangeStatus": "In Range",
     "currentPrice": 6.22,
-    "rangeMin": 6.0109,
-    "rangeMax": 6.1753,
+    "rangeMin": 6.16,
+    "rangeMax": 6.31,
     "milestoneNext": "Scout",
     "milestoneTarget": 5,
     "milestoneProgress": 16.4
@@ -62,14 +62,14 @@
   },
   "strategyAdvisor": {
     "efficiency": 0.0,
-    "efficiencyZone": "Out of Range",
-    "recommendedAction": "REBALANCE \u2014 price outside range",
-    "dcaType": "None (Out of Range)",
-    "dcaDetails": "Price $6.22, out of range $6.0109-$6.1753",
-    "rebalanceTrigger": "Price exits $6.0109-$6.1753",
+    "efficiencyZone": "In Range",
+    "recommendedAction": "Hold",
+    "dcaType": "Auto",
+    "dcaDetails": "Price $6.22, in range $6.16-$6.31",
+    "rebalanceTrigger": "Price exits $6.16-$6.31",
     "compoundThreshold": 50,
     "cumulativeFees": 0.82,
-    "riskLevel": "High",
+    "riskLevel": "Medium",
     "riskNote": "Price $6.22, 0.0% efficiency",
     "shape": "Curve"
   },
@@ -119,7 +119,7 @@
     "lpApr": 0.0,
     "lpDailyFees": 0,
     "stakingApr": 5.2,
-    "stakingDaily": 0.0062,
+    "stakingDaily": 0.0061,
     "hodlReturn": -0.16,
     "entryPrice": 6.23,
     "currentPrice": 6.22,
@@ -573,7 +573,7 @@
   "ilCalculator": {
     "currentPrice": 6.22,
     "entryPrice": 6.23,
-    "positionUsd": 43.58,
+    "positionUsd": 42.88,
     "dailyFees": 0,
     "scenarios": [
       {
