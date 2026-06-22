@@ -311,6 +311,7 @@
             animation: pulse 2s ease-in-out infinite;
         }
         @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+        @keyframes rbPulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.04); } }
 
         /* ===== GAMING TAB ===== */
         .game-card {
@@ -463,6 +464,14 @@
                 <button class="settings-option" data-tab="defi" onclick="setDefaultTab('defi')" style="display:flex; align-items:center; gap:10px; padding:12px; background:var(--bg-alt); border:1px solid var(--panel-border); border-radius:10px; cursor:pointer; text-align:left; color:var(--text); font-family:inherit; font-size:0.88em; transition:all 0.2s;">
                     <span style="font-size:1.3em;">💰</span>
                     <div><strong>DeFi</strong><br><span style="font-size:0.8em; color:var(--text-dim);">LP tracker, portfolio</span></div>
+                </button>
+                <button class="settings-option" data-tab="rainbow" onclick="setDefaultTab('rainbow')" style="display:flex; align-items:center; gap:10px; padding:12px; background:var(--bg-alt); border:1px solid var(--panel-border); border-radius:10px; cursor:pointer; text-align:left; color:var(--text); font-family:inherit; font-size:0.88em; transition:all 0.2s;">
+                    <span style="font-size:1.3em;">🌈</span>
+                    <div><strong>Yield Rainbow</strong><br><span style="font-size:0.8em; color:var(--text-dim);">LP farming cycle indicator</span></div>
+                </button>
+                <button class="settings-option" data-tab="rotation" onclick="setDefaultTab('rotation')" style="display:flex; align-items:center; gap:10px; padding:12px; background:var(--bg-alt); border:1px solid var(--panel-border); border-radius:10px; cursor:pointer; text-align:left; color:var(--text); font-family:inherit; font-size:0.88em; transition:all 0.2s;">
+                    <span style="font-size:1.3em;">🔄</span>
+                    <div><strong>Rotation</strong><br><span style="font-size:0.8em; color:var(--text-dim);">Narrative sector heatmap</span></div>
                 </button>
                 <button class="settings-option" data-tab="gaming" onclick="setDefaultTab('gaming')" style="display:flex; align-items:center; gap:10px; padding:12px; background:var(--bg-alt); border:1px solid var(--panel-border); border-radius:10px; cursor:pointer; text-align:left; color:var(--text); font-family:inherit; font-size:0.88em; transition:all 0.2s;">
                     <span style="font-size:1.3em;">🎮</span>
@@ -664,11 +673,98 @@
         <div class="footer">GenTech Portfolio</div>
     </div>
 
+    <!-- ===== YIELD RAINBOW TAB ===== -->
+    <div class="tab-section" id="tab-rainbow">
+        <div style="margin-bottom:14px;">
+            <h2 style="font-size:1.1em; background:linear-gradient(135deg,#e84142,#f59e0b,#22c55e,#3b82f6,#a855f7); -webkit-background-clip:text; -webkit-text-fill-color:transparent;">🌈 Yield Rainbow</h2>
+            <p style="font-size:0.78em; color:var(--text-dim); margin-top:2px;">LP farming cycle indicator — where are we?</p>
+        </div>
+
+        <!-- Rainbow Chart -->
+        <div id="rainbow-chart" style="border-radius:12px; overflow:hidden; border:1px solid var(--panel-border); margin-bottom:14px;">
+            <div style="height:320px; position:relative;" id="rainbow-bars">
+                <div style="text-align:center; padding:60px 0; color:var(--text-dim);">Loading rainbow...</div>
+            </div>
+        </div>
+
+        <!-- Current Zone -->
+        <div id="rainbow-zone" class="card" style="border-left:4px solid; margin-bottom:14px;">
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px;">
+                <span id="zone-emoji" style="font-size:1.6em;"></span>
+                <div>
+                    <div id="zone-name" style="font-weight:700; font-size:1.1em;"></div>
+                    <div id="zone-desc" style="font-size:0.82em; color:var(--text-dim);"></div>
+                </div>
+            </div>
+            <div id="zone-advice" style="background:rgba(255,255,255,0.04); border-radius:8px; padding:10px; font-size:0.82em; border-left:3px solid;"></div>
+        </div>
+
+        <!-- Quick Stats -->
+        <div class="stat-row" id="rainbow-stats">
+            <div class="stat-card">
+                <div class="stat-label">Efficiency</div>
+                <div class="stat-value" id="rb-efficiency" style="font-size:1.2em;">—</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">APR</div>
+                <div class="stat-value" id="rb-apr" style="font-size:1.2em; color:var(--gold);">—</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Daily Fees</div>
+                <div class="stat-value" id="rb-fees" style="font-size:1.1em; color:#22c55e;">—</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">24h Change</div>
+                <div class="stat-value" id="rb-change" style="font-size:1.1em;">—</div>
+            </div>
+        </div>
+
+        <!-- 30-Day History -->
+        <div class="card" style="margin-bottom:14px;">
+            <div class="card-title"><span class="dot"></span> 30-Day Efficiency</div>
+            <canvas id="rb-history" style="width:100%; height:100px;"></canvas>
+        </div>
+
+        <!-- Legend -->
+        <div class="card" style="margin-bottom:14px;">
+            <div class="card-title"><span class="dot"></span> Rainbow Bands</div>
+            <div id="rb-legend" style="display:flex; flex-direction:column; gap:8px;"></div>
+        </div>
+
+        <div class="footer" style="font-size:0.65em; color:var(--text-dim);">
+            ⚠️ Not financial advice · Data: DexScreener + LFJ
+        </div>
+    </div>
+
+    <!-- ===== NARRATIVE ROTATION TAB ===== -->
+    <div class="tab-section" id="tab-rotation">
+        <div style="margin-bottom:14px;">
+            <h2 style="font-size:1.1em; color:var(--gold);">🔄 Narrative Rotation</h2>
+            <p style="font-size:0.78em; color:var(--text-dim); margin-top:2px;">Which sector is hot? Where's money flowing?</p>
+        </div>
+
+        <div id="rotation-content">
+            <div style="text-align:center; padding:40px 0; color:var(--text-dim);">Loading rotation data...</div>
+        </div>
+
+        <div class="footer" style="font-size:0.65em; color:var(--text-dim);">
+            Data: CoinMarketCap · Updated weekly (Sundays)
+        </div>
+    </div>
+
     <!-- Bottom Navigation -->
     <nav class="bottom-nav">
         <button class="nav-btn active" onclick="switchTab('defi')" id="nav-defi">
             <span class="nav-icon">💰</span>
             DeFi
+        </button>
+        <button class="nav-btn" onclick="switchTab('rainbow')" id="nav-rainbow">
+            <span class="nav-icon">🌈</span>
+            Rainbow
+        </button>
+        <button class="nav-btn" onclick="switchTab('rotation')" id="nav-rotation">
+            <span class="nav-icon">🔄</span>
+            Rotation
         </button>
         <button class="nav-btn" onclick="switchTab('gaming')" id="nav-gaming">
             <span class="nav-icon">🎮</span>
@@ -679,8 +775,8 @@
             Travel
         </button>
         <button class="nav-btn" onclick="switchTab('portfolio')" id="nav-portfolio">
-            <span class="nav-icon">👨‍💻</span>
-            Portfolio
+            <span class="nav-icon">📊</span>
+            More
         </button>
     </nav>
 
@@ -843,13 +939,221 @@
             }
         }
 
+        // --- Yield Rainbow ---
+        const RAINBOW_DATA_URL = 'https://raw.githubusercontent.com/ProtoJay4789/ProtoJay4789.github.io/main/DeFi/rainbow/yield-rainbow-data.json';
+        const RAINBOW_BANDS = [
+            { id: 'euphoria', name: 'Euphoria', emoji: '🔴', color: '#e84142', gradient: 'linear-gradient(135deg, #e84142, #ff3366)', effMin: 90, effMax: 100, desc: 'Maximum concentration. APR unsustainable.', advice: '⚠️ Time to take profits. Diversify.' },
+            { id: 'peak', name: 'Peak Yield', emoji: '🟠', color: '#f59e0b', gradient: 'linear-gradient(135deg, #f59e0b, #f97316)', effMin: 75, effMax: 90, desc: 'Sweet spot. Fees significantly outpace IL.', advice: '✅ Hold strong. Compound weekly.' },
+            { id: 'harvest', name: 'Harvest Mode', emoji: '🟡', color: '#eab308', gradient: 'linear-gradient(135deg, #eab308, #facc15)', effMin: 60, effMax: 75, desc: 'Healthy farming. Fees outpacing IL.', advice: '🌾 Keep farming. Consider increasing size.' },
+            { id: 'accum', name: 'Accumulation', emoji: '🟢', color: '#22c55e', gradient: 'linear-gradient(135deg, #22c55e, #16a34a)', effMin: 40, effMax: 60, desc: 'Smart money positioning. Fees starting to offset IL.', advice: '🧠 DCA into position. Patience pays.' },
+            { id: 'bleed', name: 'Bleeding Edge', emoji: '🔵', color: '#3b82f6', gradient: 'linear-gradient(135deg, #3b82f6, #6366f1)', effMin: 20, effMax: 40, desc: 'Near range boundary. IL outpaces fees.', advice: '🩸 Micro-DCA only. Prepare to rebalance.' },
+            { id: 'panic', name: 'Panic Farm', emoji: '🟣', color: '#a855f7', gradient: 'linear-gradient(135deg, #a855f7, #7c3aed)', effMin: 0, effMax: 20, desc: 'Maximum fear. Historically: generational entry.', advice: '🔥 Be greedy when others are fearful.' }
+        ];
+
+        function getRainbowBand(efficiency) {
+            for (const b of RAINBOW_BANDS) {
+                if (efficiency >= b.effMin && efficiency < b.effMax) return b;
+            }
+            return RAINBOW_BANDS[0];
+        }
+
+        function drawRainbowBars(data) {
+            const container = document.getElementById('rainbow-bars');
+            if (!container) return;
+            const efficiency = data.metrics ? data.metrics.efficiency : 0;
+            const currentBand = getRainbowBand(efficiency);
+            const bandH = 320 / RAINBOW_BANDS.length;
+
+            let html = '';
+            RAINBOW_BANDS.forEach((band, i) => {
+                const isCurrent = band.id === currentBand.id;
+                const opacity = isCurrent ? 1 : 0.55;
+                const top = i * bandH;
+                html += `<div style="position:absolute; left:0; right:0; top:${top}px; height:${bandH}px; background:${band.gradient}; opacity:${opacity}; display:flex; align-items:center; padding:0 16px; ${isCurrent ? 'box-shadow:inset 0 0 30px rgba(255,255,255,0.12); border-top:2px solid rgba(255,255,255,0.3); border-bottom:2px solid rgba(255,255,255,0.3);' : ''}">
+                    <span style="font-size:0.72em; font-weight:600; text-transform:uppercase; letter-spacing:1px; color:white; text-shadow:0 1px 3px rgba(0,0,0,0.5);">${band.emoji} ${band.name}</span>
+                    <span style="margin-left:auto; font-family:'JetBrains Mono',monospace; font-size:0.62em; color:rgba(255,255,255,0.7); text-shadow:0 1px 3px rgba(0,0,0,0.5);">Eff: ${band.effMin}–${band.effMax}%</span>
+                </div>`;
+                if (isCurrent) {
+                    const price = data.position ? data.position.currentPrice : 0;
+                    html += `<div style="position:absolute; right:14px; top:${top + bandH/2 - 14}px; background:rgba(0,0,0,0.85); border:2px solid white; border-radius:8px; padding:4px 10px; font-size:0.68em; font-weight:700; font-family:'JetBrains Mono',monospace; color:white; white-space:nowrap; z-index:10; animation:rbPulse 2s ease-in-out infinite; box-shadow:0 0 20px rgba(255,255,255,0.2);">$${price.toFixed(4)} ← YOU</div>`;
+                }
+            });
+            container.innerHTML = html;
+        }
+
+        function renderRainbowZone(data) {
+            const efficiency = data.metrics ? data.metrics.efficiency : 0;
+            const band = getRainbowBand(efficiency);
+            const card = document.getElementById('rainbow-zone');
+            if (!card) return;
+            card.style.borderLeftColor = band.color;
+            document.getElementById('zone-emoji').textContent = band.emoji;
+            document.getElementById('zone-name').textContent = band.name;
+            document.getElementById('zone-name').style.color = band.color;
+            document.getElementById('zone-desc').textContent = band.desc;
+            const advice = document.getElementById('zone-advice');
+            advice.textContent = band.advice;
+            advice.style.borderLeftColor = band.color;
+        }
+
+        function renderRainbowStats(data) {
+            if (!data.metrics) return;
+            const m = data.metrics;
+            document.getElementById('rb-efficiency').textContent = m.efficiency.toFixed(1) + '%';
+            document.getElementById('rb-efficiency').style.color = m.efficiency >= 70 ? '#22c55e' : m.efficiency >= 50 ? '#eab308' : '#e84142';
+            document.getElementById('rb-apr').textContent = m.annualizedApr.toFixed(0) + '%';
+            document.getElementById('rb-fees').textContent = '$' + m.dailyFees.toFixed(4);
+            const changeEl = document.getElementById('rb-change');
+            changeEl.textContent = (m.priceChange24h >= 0 ? '+' : '') + m.priceChange24h.toFixed(2) + '%';
+            changeEl.style.color = m.priceChange24h >= 0 ? '#22c55e' : '#e84142';
+        }
+
+        function renderRainbowLegend() {
+            const container = document.getElementById('rb-legend');
+            if (!container) return;
+            container.innerHTML = RAINBOW_BANDS.map(b =>
+                `<div style="display:flex; align-items:center; gap:8px;">
+                    <div style="width:14px; height:14px; border-radius:3px; background:${b.gradient}; flex-shrink:0;"></div>
+                    <span style="font-size:0.78em; font-weight:600; color:${b.color};">${b.emoji} ${b.name}</span>
+                    <span style="font-size:0.7em; color:var(--text-dim); margin-left:auto;">Eff ${b.effMin}–${b.effMax}%</span>
+                </div>`
+            ).join('');
+        }
+
+        function drawRainbowHistory(canvasId, history, bandColor) {
+            const canvas = document.getElementById(canvasId);
+            if (!canvas || !history || history.length < 2) return;
+            const ctx = canvas.getContext('2d');
+            const dpr = window.devicePixelRatio || 1;
+            const rect = canvas.getBoundingClientRect();
+            canvas.width = rect.width * dpr;
+            canvas.height = rect.height * dpr;
+            ctx.scale(dpr, dpr);
+            const w = rect.width, h = rect.height;
+            const pad = 8, chartH = h - pad * 2, chartW = w;
+
+            // Band backgrounds
+            [{min:90,c:'rgba(232,65,66,0.12)'},{min:75,c:'rgba(245,158,11,0.1)'},{min:60,c:'rgba(234,179,8,0.08)'},{min:40,c:'rgba(34,197,94,0.06)'},{min:20,c:'rgba(59,130,246,0.06)'},{min:0,c:'rgba(168,85,247,0.06)'}].forEach(b => {
+                const y = pad + chartH * (1 - b.min / 100);
+                ctx.fillStyle = b.c;
+                ctx.fillRect(0, y - chartH * 0.1, chartW, chartH * 0.1);
+            });
+
+            // Line
+            ctx.beginPath();
+            ctx.strokeStyle = bandColor;
+            ctx.lineWidth = 2;
+            ctx.lineJoin = 'round';
+            const step = chartW / (history.length - 1);
+            history.forEach((v, i) => {
+                const x = i * step, y = pad + chartH * (1 - v / 100);
+                i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+            });
+            ctx.stroke();
+
+            // Fill
+            const last = history[history.length - 1];
+            ctx.lineTo((history.length - 1) * step, h - pad);
+            ctx.lineTo(0, h - pad);
+            ctx.closePath();
+            const grad = ctx.createLinearGradient(0, pad, 0, h - pad);
+            grad.addColorStop(0, bandColor + '25');
+            grad.addColorStop(1, bandColor + '05');
+            ctx.fillStyle = grad;
+            ctx.fill();
+
+            // Dot
+            const dotX = (history.length - 1) * step, dotY = pad + chartH * (1 - last / 100);
+            ctx.beginPath(); ctx.arc(dotX, dotY, 4, 0, Math.PI * 2);
+            ctx.fillStyle = bandColor; ctx.fill();
+            ctx.strokeStyle = 'white'; ctx.lineWidth = 1.5; ctx.stroke();
+        }
+
+        async function fetchRainbowData() {
+            try {
+                const res = await fetch(RAINBOW_DATA_URL + '?t=' + Date.now());
+                if (!res.ok) throw new Error('No rainbow data');
+                const data = await res.json();
+                drawRainbowBars(data);
+                renderRainbowZone(data);
+                renderRainbowStats(data);
+                renderRainbowLegend();
+                const efficiency = data.metrics ? data.metrics.efficiency : 0;
+                const band = getRainbowBand(efficiency);
+                drawRainbowHistory('rb-history', data.history, band.color);
+            } catch (e) {
+                console.warn('Rainbow fetch failed:', e);
+            }
+        }
+
+        // --- Narrative Rotation ---
+        const ROTATION_NARRATIVES = {
+            'AI & Data': { emoji: '🤖', coins: 'FET, RENDER, TAO, AKT', thesis: 'AI compute, data markets, inference' },
+            'RWA': { emoji: '🏠', coins: 'ONDO, PLU, CPOOL', thesis: 'Tokenized treasuries, real estate' },
+            'DeFi Blue Chips': { emoji: '🏦', coins: 'UNI, AAVE, LINK, MKR', thesis: 'DEX, lending, oracles' },
+            'L1 / L2': { emoji: '⛓️', coins: 'SOL, AVAX, NEAR, ARB', thesis: 'Base layers and scaling' },
+            'Meme': { emoji: '🐸', coins: 'DOGE, PEPE, WIF, BONK', thesis: 'Community-driven momentum' },
+            'Gaming': { emoji: '🎮', coins: 'IMX, GALA, PYTH', thesis: 'On-chain gaming, virtual worlds' }
+        };
+
+        async function fetchRotationData() {
+            const container = document.getElementById('rotation-content');
+            if (!container) return;
+            try {
+                // Try to load from the weekly scanner output
+                const res = await fetch('https://raw.githubusercontent.com/ProtoJay4789/ProtoJay4789.github.io/main/DeFi/rainbow/rotation-data.json?t=' + Date.now());
+                if (res.ok) {
+                    const data = await res.json();
+                    renderRotation(container, data);
+                    return;
+                }
+            } catch (e) {}
+            // Fallback: show static narrative cards
+            renderRotationFallback(container);
+        }
+
+        function renderRotation(container, data) {
+            const narratives = data.narratives || [];
+            if (narratives.length === 0) { renderRotationFallback(container); return; }
+            container.innerHTML = narratives.map((n, i) => {
+                const zone = n.zone || '';
+                const zoneColor = zone.includes('Hot') ? '#22c55e' : zone.includes('Warm') ? '#3b82f6' : zone.includes('Cool') ? '#eab308' : '#e84142';
+                return `<div class="card" style="margin-bottom:10px; border-left:4px solid ${zoneColor};">
+                    <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
+                        <span style="font-size:1.3em;">${n.emoji || '📊'}</span>
+                        <span style="font-weight:700; font-size:0.95em;">${n.name}</span>
+                        <span style="margin-left:auto; font-size:0.7em; color:${zoneColor}; font-weight:600;">${zone}</span>
+                    </div>
+                    <div style="font-size:0.78em; color:var(--text-dim); margin-bottom:4px;">${n.thesis || ''}</div>
+                    <div style="font-size:0.72em; color:var(--text-dim);">Coins: ${n.coins || ''}</div>
+                    ${n.score !== undefined ? `<div style="font-size:0.72em; margin-top:4px; color:var(--gold);">Score: ${n.score > 0 ? '+' : ''}${n.score.toFixed(1)}</div>` : ''}
+                </div>`;
+            }).join('');
+        }
+
+        function renderRotationFallback(container) {
+            container.innerHTML = Object.entries(ROTATION_NARRATIVES).map(([name, n]) =>
+                `<div class="card" style="margin-bottom:10px; border-left:4px solid var(--panel-border);">
+                    <div style="display:flex; align-items:center; gap:8px; margin-bottom:4px;">
+                        <span style="font-size:1.3em;">${n.emoji}</span>
+                        <span style="font-weight:700; font-size:0.95em;">${name}</span>
+                    </div>
+                    <div style="font-size:0.78em; color:var(--text-dim);">${n.thesis}</div>
+                    <div style="font-size:0.72em; color:var(--text-dim); margin-top:2px;">Coins: ${n.coins}</div>
+                </div>`
+            ).join('') + '<div style="text-align:center; font-size:0.72em; color:var(--text-dim); margin-top:12px;">📊 Full rotation data updates Sundays at 3:30 PM ET</div>';
+        }
+
         // --- Init ---
         document.addEventListener('DOMContentLoaded', () => {
             const saved = getSavedTab();
             switchTab(saved);
             document.querySelectorAll('.settings-option').forEach(o => o.classList.toggle('selected', o.dataset.tab === saved));
             fetchPositionData();
+            fetchRainbowData();
+            fetchRotationData();
             setInterval(fetchPositionData, REFRESH_MS);
+            setInterval(fetchRainbowData, REFRESH_MS);
         });
     </script>
 
