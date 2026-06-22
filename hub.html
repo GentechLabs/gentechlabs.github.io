@@ -32,7 +32,7 @@
             background: var(--bg);
             color: var(--text);
             min-height: 100vh;
-            padding-bottom: 72px; /* space for bottom nav */
+            padding-bottom: 80px; /* space for bottom nav */
         }
 
         /* Header */
@@ -74,28 +74,28 @@
             background: #111827;
             border-top: 1px solid #2a3a52;
             display: flex;
-            justify-content: space-around;
-            padding: 8px 0;
+            justify-content: space-evenly;
+            padding: 10px 4px 12px;
             z-index: 100;
         }
         .nav-btn {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 3px;
+            gap: 4px;
             background: none;
             border: none;
             color: #8899aa;
-            font-size: 0.65em;
-            font-family: 'Inter', sans-serif;
+            font-size: 0.58em;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            padding: 6px 16px;
+            letter-spacing: 0.5px;
+            padding: 6px 8px;
             cursor: pointer;
             transition: all 0.2s;
             border-radius: 8px;
+            min-width: 0;
         }
-        .nav-btn .nav-icon { font-size: 1.8em; }
+        .nav-btn .nav-icon { font-size: 1.5em; line-height: 1; }
         .nav-btn.active {
             color: var(--gold);
             background: rgba(232,101,42,0.1);
