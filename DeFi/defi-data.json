@@ -1,42 +1,42 @@
 {
-  "lastUpdated": "2026-06-23T14:01:09.103Z",
+  "lastUpdated": "2026-06-23T14:11:09.047Z",
   "pool": "AVAX/USDC",
   "chain": "Avalanche",
   "dex": "LFJ",
-  "currentPrice": 6.27,
-  "priceChange24h": -2.57,
-  "volume24h": 829750.28,
-  "liquidity": 374984.71,
+  "currentPrice": 6.3,
+  "priceChange24h": -1.68,
+  "volume24h": 833937.49,
+  "liquidity": 376177.08,
   "lpPosition": {
     "pair": "AVAX/USDC",
     "feeTier": "10bps",
     "shape": "bid-ask",
     "displayShape": "Bid-Ask",
-    "currentPrice": 6.27,
+    "currentPrice": 6.3,
     "rangeMin": 6.0553,
     "rangeMax": 6.296,
-    "avaxAmount": 1.269872,
-    "usdcAmount": 55.999554,
-    "totalValue": 63.96,
-    "totalValueUSD": 63.96,
-    "activeBin": 8362800,
+    "avaxAmount": 0,
+    "usdcAmount": 64.008406,
+    "totalValue": 64.01,
+    "totalValueUSD": 64.01,
+    "activeBin": 8362805,
     "binStep": 10,
     "totalBins": 40
   },
   "fees": {
-    "dailyFees": 0.453,
-    "cumulativeFees": 1.0348,
+    "dailyFees": 0.454,
+    "cumulativeFees": 1.038,
     "feeCurrency": "USD"
   },
-  "efficiency": 78,
+  "efficiency": 100,
   "hero": {
-    "positionUsd": 63.96,
-    "dailyFees": 0.453,
-    "efficiency": 78,
+    "positionUsd": 64.01,
+    "dailyFees": 0.454,
+    "efficiency": 100,
     "efficiencyZone": "Center",
     "shape": "Bid-Ask",
-    "rangeStatus": "In Range",
-    "currentPrice": 6.27,
+    "rangeStatus": "Out of Range",
+    "currentPrice": 6.3,
     "rangeMin": 6.0553,
     "rangeMax": 6.296,
     "milestoneNext": "Scout",
@@ -44,36 +44,36 @@
     "milestoneProgress": 9
   },
   "marketIntel": {
-    "avaxPrice": 6.27,
-    "change24h": -2.57,
-    "volume24h": 829750.28,
-    "tvl": 374984.71,
-    "trend": "bearish",
+    "avaxPrice": 6.3,
+    "change24h": -1.68,
+    "volume24h": 833937.49,
+    "tvl": 376177.08,
+    "trend": "neutral",
     "news": [
       {
-        "headline": "AVAX down 2.57% in 24h",
+        "headline": "AVAX down 1.68% in 24h",
         "impact": "bearish",
         "relevance": "high"
       },
       {
-        "headline": "LFJ AVAX/USDC pool volume: $829.8K",
+        "headline": "LFJ AVAX/USDC pool volume: $833.9K",
         "impact": "neutral",
         "relevance": "medium"
       }
     ]
   },
   "strategyAdvisor": {
-    "efficiency": 78,
+    "efficiency": 100,
     "efficiencyZone": "Center",
-    "recommendedAction": "Hold",
+    "recommendedAction": "Rebalance",
     "dcaType": "Full DCA",
-    "dcaDetails": "Full DCA — price in range",
+    "dcaDetails": "Full DCA — rebalance needed",
     "rebalanceTrigger": "Price exits $6.06-$6.30 range",
     "compoundThreshold": 50,
-    "cumulativeFees": 1.0348,
-    "nextCompound": "$48.97 away from first compound",
-    "riskLevel": "Low",
-    "riskNote": "Price at $6.27, 78% efficiency",
+    "cumulativeFees": 1.038,
+    "nextCompound": "$48.96 away from first compound",
+    "riskLevel": "Critical",
+    "riskNote": "Out of range — rebalance needed",
     "shape": "Bid-Ask"
   },
   "milestones": {
@@ -83,9 +83,9 @@
     "Sovereign": 100
   },
   "feeMilestones": {
-    "currentDailyFees": 0.453,
-    "cumulativeFees": 1.0348,
-    "positionUsd": 63.96,
+    "currentDailyFees": 0.454,
+    "cumulativeFees": 1.038,
+    "positionUsd": 64.01,
     "daysActive": 1,
     "nextMilestone": "Scout",
     "nextTarget": 5,
@@ -126,7 +126,7 @@
     ]
   },
   "curveData": {
-    "currentPrice": 6.27,
+    "currentPrice": 6.3,
     "rangeMin": 6.0553,
     "rangeMax": 6.296,
     "bins": [
@@ -307,27 +307,27 @@
       },
       {
         "price": 6.2709,
-        "depth": 0.7101865067391134,
+        "depth": 0.7109332820665945,
         "id": 8362800
       },
       {
         "price": 6.2771,
-        "depth": 0.7592542900880627,
+        "depth": 0.7600247253069573,
         "id": 8362801
       },
       {
         "price": 6.2834,
-        "depth": 0.8061631400697397,
+        "depth": 0.8106353734794437,
         "id": 8362802
       },
       {
         "price": 6.2897,
-        "depth": 0.8434371082392935,
+        "depth": 0.8482310042563732,
         "id": 8362803
       },
       {
         "price": 6.296,
-        "depth": 0.8881158605039292,
+        "depth": 0.8922539479545832,
         "id": 8362804
       }
     ]
@@ -336,10 +336,10 @@
     "avax": 0.09646825598172057,
     "wavax": 6.0667105543e-7,
     "usdc": 0.000011,
-    "liquidUsd": 0.6
+    "liquidUsd": 0.61
   },
   "supportResistance": {
-    "currentPrice": 6.27,
+    "currentPrice": 6.3,
     "levels": [
       {
         "price": 6.3,
@@ -372,29 +372,29 @@
     ],
     "shapeRecommendation": {
       "shape": "Bid-Ask",
-      "reason": "Price at $6.27, within $6.06-$6.30 range.",
+      "reason": "Price at $6.30, outside $6.06-$6.30 range.",
       "optimalRange": [
         6.06,
         6.3
       ]
     },
-    "proximityAlert": "Price 89% into range"
+    "proximityAlert": "⚠️ Price out of range"
   },
   "rebalanceSuggestions": {
-    "efficiency": 78,
-    "price": 6.27,
+    "efficiency": 100,
+    "price": 6.3,
     "rangeMin": 6.0553,
     "rangeMax": 6.296,
-    "volatility": 2.57,
-    "trend": "bearish",
+    "volatility": 1.68,
+    "trend": "neutral",
     "suggestions": [
       {
-        "icon": "📉",
-        "title": "Bearish Pressure",
-        "description": "AVAX is down 24h. Widen range or shift lower to avoid going out of range.",
-        "priority": "low",
-        "impact": "Risk",
-        "action": "Adjust Down"
+        "icon": "🚨",
+        "title": "Price Out of Range",
+        "description": "AVAX at $6.3000 is outside your $6.0553-$6.2960 range. You are not earning fees.",
+        "priority": "high",
+        "impact": "Immediate",
+        "action": "Rebalance on LFJ"
       }
     ]
   },
@@ -403,9 +403,9 @@
       "date": "2026-06-23",
       "type": "Snapshot",
       "token": "AVAX/USDC",
-      "amount": "1.2699 WAVAX + 56.00 USDC",
-      "usd": "63.96",
-      "status": "In Range"
+      "amount": "0.0000 WAVAX + 64.01 USDC",
+      "usd": "64.01",
+      "status": "Out of Range"
     },
     {
       "date": "2026-06-21",
