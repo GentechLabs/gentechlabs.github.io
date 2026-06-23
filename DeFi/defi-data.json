@@ -10,8 +10,8 @@
   "lpPosition": {
     "pair": "AVAX/USDC",
     "feeTier": "10bps",
-    "shape": "curve",
-    "displayShape": "Curve",
+    "shape": "bid-ask",
+    "displayShape": "Bid-Ask",
     "currentPrice": 6.27,
     "rangeMin": 6.0553,
     "rangeMax": 6.296,
@@ -28,13 +28,13 @@
     "cumulativeFees": 0.8201,
     "feeCurrency": "USD"
   },
-  "efficiency": 22,
+  "efficiency": 78.4,
   "hero": {
     "positionUsd": 63.28,
     "dailyFees": 0.401,
-    "efficiency": 22,
+    "efficiency": 78.4,
     "efficiencyZone": "Outer",
-    "shape": "Curve",
+    "shape": "Bid-Ask",
     "rangeStatus": "In Range",
     "currentPrice": 6.27,
     "rangeMin": 6.0553,
@@ -63,18 +63,18 @@
     ]
   },
   "strategyAdvisor": {
-    "efficiency": 22,
+    "efficiency": 78.4,
     "efficiencyZone": "Outer",
     "recommendedAction": "Hold",
     "dcaType": "Micro-DCA",
-    "dcaDetails": "Micro DCA — price in range",
+    "dcaDetails": "Micro DCA \u2014 price in range",
     "rebalanceTrigger": "Price exits $6.06-$6.30 range",
     "compoundThreshold": 50,
     "cumulativeFees": 0.8201,
     "nextCompound": "$49.18 away from first compound",
     "riskLevel": "High",
     "riskNote": "Price at $6.27, 22% efficiency",
-    "shape": "Curve"
+    "shape": "Bid-Ask"
   },
   "milestones": {
     "Scout": 5,
@@ -93,7 +93,7 @@
     "tiers": [
       {
         "tier": 1,
-        "icon": "🔭",
+        "icon": "\ud83d\udd2d",
         "label": "Scout",
         "target": 5,
         "unlocks": "Entry strategies (CURVE)",
@@ -101,7 +101,7 @@
       },
       {
         "tier": 2,
-        "icon": "⚔️",
+        "icon": "\u2694\ufe0f",
         "label": "Raider",
         "target": 20,
         "unlocks": "SPOT + BIDIRECTIONAL shapes",
@@ -109,7 +109,7 @@
       },
       {
         "tier": 3,
-        "icon": "👑",
+        "icon": "\ud83d\udc51",
         "label": "Warlord",
         "target": 50,
         "unlocks": "Multi-pool positions",
@@ -117,7 +117,7 @@
       },
       {
         "tier": 4,
-        "icon": "🏰",
+        "icon": "\ud83c\udff0",
         "label": "Sovereign",
         "target": 100,
         "unlocks": "Custom strategy creation + mentorship",
@@ -334,8 +334,8 @@
   },
   "walletBalances": {
     "avax": 0.09646825598172057,
-    "wavax": 6.0667105543e-7,
-    "usdc": 0.000011,
+    "wavax": 6.0667105543e-07,
+    "usdc": 1.1e-05,
     "liquidUsd": 0.6
   },
   "supportResistance": {
@@ -389,7 +389,7 @@
     "trend": "neutral",
     "suggestions": [
       {
-        "icon": "⚠️",
+        "icon": "\u26a0\ufe0f",
         "title": "Price Near Edge",
         "description": "Price is near the edge of your range (22% efficiency). Consider narrowing or recentering.",
         "priority": "medium",
