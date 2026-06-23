@@ -1,42 +1,42 @@
 {
-  "lastUpdated": "2026-06-23T16:01:10.216Z",
+  "lastUpdated": "2026-06-23T16:11:13.200Z",
   "pool": "AVAX/USDC",
   "chain": "Avalanche",
   "dex": "LFJ",
-  "currentPrice": 6.35,
-  "priceChange24h": 1,
-  "volume24h": 908686.42,
-  "liquidity": 378904.37,
+  "currentPrice": 6.39,
+  "priceChange24h": 1.21,
+  "volume24h": 908502.81,
+  "liquidity": 380365.81,
   "lpPosition": {
     "pair": "AVAX/USDC",
     "feeTier": "10bps",
     "shape": "bid-ask",
     "displayShape": "Bid-Ask",
-    "currentPrice": 6.35,
+    "currentPrice": 6.39,
     "rangeMin": 6.0553,
     "rangeMax": 6.296,
     "avaxAmount": 0,
     "usdcAmount": 64.022351,
     "totalValue": 64.02,
     "totalValueUSD": 64.02,
-    "activeBin": 8362814,
+    "activeBin": 8362819,
     "binStep": 10,
     "totalBins": 40
   },
   "fees": {
-    "dailyFees": 0.491,
-    "cumulativeFees": 1.0748,
+    "dailyFees": 0.489,
+    "cumulativeFees": 1.0782,
     "feeCurrency": "USD"
   },
   "efficiency": 100,
   "hero": {
     "positionUsd": 64.02,
-    "dailyFees": 0.491,
+    "dailyFees": 0.489,
     "efficiency": 100,
     "efficiencyZone": "Center",
     "shape": "Bid-Ask",
     "rangeStatus": "Out of Range",
-    "currentPrice": 6.35,
+    "currentPrice": 6.39,
     "rangeMin": 6.0553,
     "rangeMax": 6.296,
     "milestoneNext": "Scout",
@@ -44,19 +44,19 @@
     "milestoneProgress": 10
   },
   "marketIntel": {
-    "avaxPrice": 6.35,
-    "change24h": 1,
-    "volume24h": 908686.42,
-    "tvl": 378904.37,
+    "avaxPrice": 6.39,
+    "change24h": 1.21,
+    "volume24h": 908502.81,
+    "tvl": 380365.81,
     "trend": "neutral",
     "news": [
       {
-        "headline": "AVAX up 1.00% in 24h",
+        "headline": "AVAX up 1.21% in 24h",
         "impact": "bullish",
         "relevance": "high"
       },
       {
-        "headline": "LFJ AVAX/USDC pool volume: $908.7K",
+        "headline": "LFJ AVAX/USDC pool volume: $908.5K",
         "impact": "neutral",
         "relevance": "medium"
       }
@@ -70,8 +70,8 @@
     "dcaDetails": "Full DCA — rebalance needed",
     "rebalanceTrigger": "Price exits $6.06-$6.30 range",
     "compoundThreshold": 50,
-    "cumulativeFees": 1.0748,
-    "nextCompound": "$48.93 away from first compound",
+    "cumulativeFees": 1.0782,
+    "nextCompound": "$48.92 away from first compound",
     "riskLevel": "Critical",
     "riskNote": "Out of range — rebalance needed",
     "shape": "Bid-Ask"
@@ -83,8 +83,8 @@
     "Sovereign": 100
   },
   "feeMilestones": {
-    "currentDailyFees": 0.491,
-    "cumulativeFees": 1.0748,
+    "currentDailyFees": 0.489,
+    "cumulativeFees": 1.0782,
     "positionUsd": 64.02,
     "daysActive": 1,
     "nextMilestone": "Scout",
@@ -126,7 +126,7 @@
     ]
   },
   "curveData": {
-    "currentPrice": 6.35,
+    "currentPrice": 6.39,
     "rangeMin": 6.0553,
     "rangeMax": 6.296,
     "bins": [
@@ -336,10 +336,10 @@
     "avax": 0.09646825598172057,
     "wavax": 6.0667105543e-7,
     "usdc": 0.000011,
-    "liquidUsd": 0.61
+    "liquidUsd": 0.62
   },
   "supportResistance": {
-    "currentPrice": 6.35,
+    "currentPrice": 6.39,
     "levels": [
       {
         "price": 6.3,
@@ -372,7 +372,7 @@
     ],
     "shapeRecommendation": {
       "shape": "Bid-Ask",
-      "reason": "Price at $6.35, outside $6.06-$6.30 range.",
+      "reason": "Price at $6.39, outside $6.06-$6.30 range.",
       "optimalRange": [
         6.06,
         6.3
@@ -382,16 +382,16 @@
   },
   "rebalanceSuggestions": {
     "efficiency": 100,
-    "price": 6.35,
+    "price": 6.39,
     "rangeMin": 6.0553,
     "rangeMax": 6.296,
-    "volatility": 1,
+    "volatility": 1.21,
     "trend": "neutral",
     "suggestions": [
       {
         "icon": "🚨",
         "title": "Price Out of Range",
-        "description": "AVAX at $6.3500 is outside your $6.0553-$6.2960 range. You are not earning fees.",
+        "description": "AVAX at $6.3900 is outside your $6.0553-$6.2960 range. You are not earning fees.",
         "priority": "high",
         "impact": "Immediate",
         "action": "Rebalance on LFJ"
