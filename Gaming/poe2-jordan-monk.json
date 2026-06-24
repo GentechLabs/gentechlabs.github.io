@@ -2,7 +2,7 @@
   "character": {
     "name": "Jordan's Monk",
     "class": "Monk",
-    "level": 26,
+    "level": 28,
     "ascendancy": "Invoker",
     "act": "Act 2",
     "stats": {
@@ -20,102 +20,117 @@
   },
   "skills": [
     {
-      "name": "Tempest Flurry",
-      "type": "Primary Attack — Lightning",
-      "supports": ["Life Leech 1", "Rapid Attacks 1"],
-      "role": "Main damage dealer — generates shock, fast attacks for Power Charge generation",
-      "priority": "Core"
-    },
-    {
       "name": "Falling Thunder",
       "type": "Burst — Lightning",
-      "supports": ["Elemental Armament 1"],
+      "level": 6,
+      "supports": ["Elemental Armament 2", "Bounty 1"],
+      "dps": 178,
       "role": "Big nuke — consumes Power Charges for massive lightning damage",
-      "priority": "Core"
+      "priority": "Core",
+      "tier": "deep_cut"
     },
     {
-      "name": "Mana Drain",
-      "type": "Utility",
-      "supports": ["Level 7 Wand"],
-      "role": "Mana sustain — keeps skills running during heavy combat",
-      "priority": "Core"
+      "name": "Storm Weave",
+      "type": "Attack — Lightning",
+      "level": 7,
+      "supports": ["Shock Conduction", "Lightning Penetration"],
+      "dps": 163,
+      "role": "AoE storm — replaces Tempest Bell, scales with lightning",
+      "priority": "Core",
+      "tier": "deep_cut",
+      "note": "Replaced Tempest Bell (was 36 DPS) — massive upgrade"
+    },
+    {
+      "name": "Tempest Flurry",
+      "type": "Primary Attack — Lightning",
+      "level": 8,
+      "supports": ["Elemental Armament 2", "Rapid Attacks 1"],
+      "dps": 146,
+      "role": "Main spammable — generates shock, fast attacks for Power Charge generation",
+      "priority": "Core",
+      "tier": "solid_sale"
     },
     {
       "name": "Siphoning Strike",
       "type": "Attack — Lightning",
-      "supports": ["Life Leech", "Bounty 1"],
-      "role": "Dash strike — consumes shock for shockwave + Power Charges",
-      "priority": "Core"
-    },
-    {
-      "name": "Arc",
-      "type": "Spell — Lightning",
-      "supports": ["Shock Conduction", "Lightning Penetration"],
-      "role": "Chain clear — shocks enemies, ignores lightning resist",
-      "priority": "High"
+      "level": 7,
+      "supports": ["Elemental Armament 1", "Life Leech 1"],
+      "dps": 145,
+      "role": "Dash strike — consumes shock for shockwave + Power Charges + sustain",
+      "priority": "Core",
+      "tier": "solid_sale"
     },
     {
       "name": "Orb of Storms",
       "type": "Sustained — Lightning",
+      "level": 7,
       "supports": ["Slow Potency", "Rapid Casting 1"],
-      "role": "AoE storm zone — enemies take more ticks inside",
-      "priority": "High"
+      "dps": 47,
+      "role": "AoE storm zone — debuff bot with slow",
+      "priority": "High",
+      "tier": "light_mark"
     },
     {
-      "name": "Thunder Storm",
-      "type": "AoE — Lightning",
-      "supports": ["Rapid Casting 1", "Slow Potency"],
-      "role": "AoE clear — rapid casts + slow enemies",
-      "priority": "Medium"
+      "name": "Arc",
+      "type": "Spell — Lightning",
+      "level": 6,
+      "supports": ["Shock Conduction", "Rapid Casting 1"],
+      "dps": 43,
+      "role": "Chain clear — shocks enemies, ignores lightning resist",
+      "priority": "High",
+      "tier": "light_mark"
     },
     {
       "name": "Killing Palm",
       "type": "Attack",
+      "level": 7,
       "supports": [],
+      "dps": 80,
       "role": "Execution — finishes low HP enemies",
-      "priority": "Utility"
-    },
-    {
-      "name": "Parry",
-      "type": "Defense",
-      "supports": [],
-      "role": "Defensive mechanic — block attacks",
-      "priority": "Defense"
+      "priority": "Utility",
+      "tier": "barely"
     }
   ],
   "damageLoop": {
-    "description": "Tempest Flurry shocks enemies → Siphoning Strike consumes shock for Power Charges → Mana Drain sustains mana → Falling Thunder consumes charges for massive nuke",
+    "description": "Tempest Flurry shocks enemies → Siphoning Strike consumes shock for Power Charges → Storm Weave + Falling Thunder nuke",
     "steps": [
-      "1. Tempest Flurry (fast + leeching) → shock enemies",
-      "2. Siphoning Strike → consume shock → Power Charges",
-      "3. Mana Drain → sustain mana for heavy casting",
-      "4. Falling Thunder → consume charges → massive lightning nuke"
+      "1. Tempest Flurry (Elemental Arrimant 2 + Rapid Attacks) → shock enemies",
+      "2. Siphoning Strike → consume shock → Power Charges + Life Leech",
+      "3. Storm Weave (Shock Conduction + Lightning Pen) → AoE damage + slow",
+      "4. Falling Thunder (Elemental Arrimant 2 + Bounty 1) → consume charges → massive lightning nuke"
     ]
+  },
+  "damageHierarchy": [
+    {"rank": 1, "skill": "Falling Thunder", "dps": 178},
+    {"rank": 2, "skill": "Storm Weave", "dps": 163},
+    {"rank": 3, "skill": "Tempest Flurry", "dps": 146},
+    {"rank": 4, "skill": "Siphoning Strike", "dps": 145}
+  ],
+  "buildNotes": {
+    "lightningFocus": true,
+    "totalLightningSkills": 6,
+    "sustainSource": "Life Leech on Tempest Flurry + Siphoning Strike",
+    "recentChange": "Replaced Tempest Bell (36 DPS) with Storm Weave (163 DPS) — 358% damage increase"
   },
   "expansionPaths": {
     "immediate": [
       {
-        "upgrade": "Conductivity curse",
-        "why": "Lowers enemy lightning resist — everything hits harder",
-        "when": "When you get an Uncut Skill Gem or find it at vendor"
+        "upgrade": "Lightning Infusion",
+        "why": "Flat lightning damage to attacks, scales whole kit",
+        "when": "Grind for gem drop"
+      },
+      {
+        "upgrade": "Concentrated Effect",
+        "why": "More damage on Storm Weave single target",
+        "when": "Grind for gem drop"
       },
       {
         "upgrade": "Herald of Thunder",
         "why": "Auto-procs lightning on shocked enemies — free passive DPS",
         "when": "When you have enough Spirit to reserve it"
-      },
-      {
-        "upgrade": "2nd Ascendancy points (Trial of Chaos)",
-        "why": "Unlock more Invoker nodes — Culling Strike or Behead",
-        "when": "Act 3 — Trial of Chaos"
       }
     ],
     "midgame": [
-      {
-        "upgrade": "Tempest Bell",
-        "why": "Monk专属 — creates a death zone that scales with Tempest Flurry",
-        "when": "When you unlock the gem"
-      },
       {
         "upgrade": "+Level to Lightning Skill Gems on quarterstaff",
         "why": "Biggest single DPS upgrade for lightning build",
@@ -147,5 +162,5 @@
   },
   "buildFocus": "Lightning Damage",
   "playstyle": "Melee Caster — generate charges, spend them on nukes",
-  "lastUpdated": "2026-06-16"
+  "lastUpdated": "2026-06-23"
 }
