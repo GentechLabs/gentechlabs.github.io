@@ -101,7 +101,7 @@
             background: rgba(232,101,42,0.1);
         }
 
-        /* ===== DEFI TAB ===== */
+        /* ===== YIELD FARM TAB (merged DeFi + Rainbow + Rotation) ===== */
         .stat-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -441,6 +441,28 @@
             color: var(--avax-red);
             margin-bottom: 4px;
         }
+
+        /* Section divider */
+        .section-divider {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 18px 0 14px;
+        }
+        .section-divider::before,
+        .section-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--panel-border);
+        }
+        .section-divider span {
+            font-size: 0.72em;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--text-dim);
+            white-space: nowrap;
+        }
     </style>
 </head>
 <body>
@@ -461,14 +483,9 @@
             </div>
             <p style="font-size:0.78em; color:var(--text-dim); margin-bottom:12px;">Choose which dashboard opens when you visit the hub.</p>
             <div style="display:flex; flex-direction:column; gap:8px; margin-bottom:16px;">
-                <button class="settings-option" data-tab="defi" onclick="setDefaultTab('defi')" style="display:flex; align-items:center; gap:10px; padding:12px; background:var(--bg-alt); border:1px solid var(--panel-border); border-radius:10px; cursor:pointer; text-align:left; color:var(--text); font-family:inherit; font-size:0.88em; transition:all 0.2s;">
-                    <span style="font-size:1.3em;">💰</span>
-                    <div><strong>DeFi</strong><br><span style="font-size:0.8em; color:var(--text-dim);">LP tracker, portfolio</span></div>
-                </button>
-
-                <button class="settings-option" data-tab="rotation" onclick="setDefaultTab('rotation')" style="display:flex; align-items:center; gap:10px; padding:12px; background:var(--bg-alt); border:1px solid var(--panel-border); border-radius:10px; cursor:pointer; text-align:left; color:var(--text); font-family:inherit; font-size:0.88em; transition:all 0.2s;">
-                    <span style="font-size:1.3em;">🔄</span>
-                    <div><strong>Rotation</strong><br><span style="font-size:0.8em; color:var(--text-dim);">Narrative sector heatmap</span></div>
+                <button class="settings-option" data-tab="yieldfarm" onclick="setDefaultTab('yieldfarm')" style="display:flex; align-items:center; gap:10px; padding:12px; background:var(--bg-alt); border:1px solid var(--panel-border); border-radius:10px; cursor:pointer; text-align:left; color:var(--text); font-family:inherit; font-size:0.88em; transition:all 0.2s;">
+                    <span style="font-size:1.3em;">🌾</span>
+                    <div><strong>Yield Farm</strong><br><span style="font-size:0.8em; color:var(--text-dim);">LP tracker, rainbow, rotation</span></div>
                 </button>
                 <button class="settings-option" data-tab="gaming" onclick="setDefaultTab('gaming')" style="display:flex; align-items:center; gap:10px; padding:12px; background:var(--bg-alt); border:1px solid var(--panel-border); border-radius:10px; cursor:pointer; text-align:left; color:var(--text); font-family:inherit; font-size:0.88em; transition:all 0.2s;">
                     <span style="font-size:1.3em;">🎮</span>
@@ -487,16 +504,17 @@
         </div>
     </div>
 
-    <!-- ===== DEFI TAB ===== -->
-    <div class="tab-section active" id="tab-defi">
+    <!-- ===== YIELD FARM TAB (merged) ===== -->
+    <div class="tab-section active" id="tab-yieldfarm">
 
-        <!-- Status -->
+        <!-- Status badge -->
         <div style="text-align:center; margin: 10px 0 14px;">
             <span class="status-badge active" id="lp-status">
                 <span class="pulse"></span> <span id="lp-status-text">Connecting...</span>
             </span>
         </div>
 
+        <!-- AVAX banner -->
         <div class="avax-accent">
             <div class="avax-label">🗺️ Avalanche C-Chain · LFJ Concentrated Liquidity</div>
             <div style="font-size:0.85em; color:var(--text-dim);">AVAX/USDC · Loading...</div>
@@ -519,7 +537,7 @@
             </div>
         </div>
 
-        <!-- Fee Efficiency -->
+        <!-- Fee Efficiency + Range Status -->
         <div class="stat-row">
             <div class="stat-card">
                 <div class="stat-label">Fee Efficiency</div>
@@ -538,7 +556,7 @@
             <strong>DCA:</strong> <span id="dca-text">Loading...</span>
         </div>
 
-        <!-- Price Range -->
+        <!-- Liquidity Range -->
         <div class="card">
             <div class="card-title"><span class="dot"></span> Liquidity Range</div>
             <div class="range-bar">
@@ -574,7 +592,7 @@
         <!-- Pool Config -->
         <div class="card">
             <div class="card-title"><span class="dot"></span> Config</div>
-            <div class="config-grid">
+            <div class="config-grid" id="config-grid-yieldfarm">
                 <div class="config-item"><div class="config-key">Fee</div><div class="config-val">—</div></div>
                 <div class="config-item"><div class="config-key">Shape</div><div class="config-val">—</div></div>
                 <div class="config-item"><div class="config-key">Chain</div><div class="config-val">Avalanche</div></div>
@@ -582,7 +600,7 @@
             </div>
         </div>
 
-        <!-- Volume & Liquidity -->
+        <!-- Pool Stats -->
         <div class="card">
             <div class="card-title"><span class="dot"></span> Pool Stats</div>
             <div class="config-grid">
@@ -599,15 +617,10 @@
 
         <a class="portfolio-link" href="https://protojay4789.github.io/DeFi/defi-dashboard.html" target="_blank">Open Full Dashboard →</a>
 
-        <div class="footer" id="defi-footer">Loading live data from DexScreener...</div>
+        <!-- ===== RAINBOW ZONE ===== -->
+        <div class="section-divider"><span>🌈 Rainbow Zone</span></div>
 
-        <!-- ===== YIELD RAINBOW ===== -->
-        <div style="margin-bottom:14px;">
-            <h2 style="font-size:1.1em; background:linear-gradient(135deg,#e84142,#f59e0b,#22c55e,#3b82f6,#a855f7); -webkit-background-clip:text; -webkit-text-fill-color:transparent;">🌈 Yield Rainbow</h2>
-            <p style="font-size:0.78em; color:var(--text-dim); margin-top:2px;">LP farming cycle indicator — where are we?</p>
-        </div>
-
-        <!-- Rainbow Chart -->
+        <!-- Rainbow Chart (bands visualization) -->
         <div id="rainbow-chart" style="border-radius:12px; overflow:hidden; border:1px solid var(--panel-border); margin-bottom:14px;">
             <div style="height:320px; position:relative;" id="rainbow-bars">
                 <div style="text-align:center; padding:60px 0; color:var(--text-dim);">Loading rainbow...</div>
@@ -626,7 +639,7 @@
             <div id="zone-advice" style="background:rgba(255,255,255,0.04); border-radius:8px; padding:10px; font-size:0.82em; border-left:3px solid;"></div>
         </div>
 
-        <!-- Quick Stats -->
+        <!-- Rainbow Quick Stats -->
         <div class="stat-row" id="rainbow-stats">
             <div class="stat-card">
                 <div class="stat-label">Efficiency</div>
@@ -652,16 +665,24 @@
             <canvas id="rb-history" style="width:100%; height:100px;"></canvas>
         </div>
 
-        <!-- Legend -->
+        <!-- Rainbow Legend -->
         <div class="card" style="margin-bottom:14px;">
             <div class="card-title"><span class="dot"></span> Rainbow Bands</div>
             <div id="rb-legend" style="display:flex; flex-direction:column; gap:8px;"></div>
         </div>
 
-        <div class="footer" style="font-size:0.65em; color:var(--text-dim);">
-            ⚠️ Not financial advice · Data: DexScreener + LFJ
+        <!-- ===== NARRATIVE ROTATION ===== -->
+        <div class="section-divider"><span>🔄 Narrative Rotation</span></div>
+
+        <div id="rotation-content">
+            <div style="text-align:center; padding:40px 0; color:var(--text-dim);">Loading rotation data...</div>
+        </div>
+
+        <div class="footer" id="yieldfarm-footer" style="font-size:0.65em; color:var(--text-dim); opacity:0.5;">
+            ⚠️ Not financial advice · Data: DexScreener + LFJ · Rotation updated Sundays
         </div>
     </div>
+
     <!-- ===== GAMING TAB ===== -->
     <div class="tab-section" id="tab-gaming">
         <div style="margin-bottom:14px;">
@@ -729,31 +750,12 @@
 
         <div class="footer">GenTech Portfolio</div>
     </div>
-    <!-- ===== NARRATIVE ROTATION TAB ===== -->
-    <div class="tab-section" id="tab-rotation">
-        <div style="margin-bottom:14px;">
-            <h2 style="font-size:1.1em; color:var(--gold);">🔄 Narrative Rotation</h2>
-            <p style="font-size:0.78em; color:var(--text-dim); margin-top:2px;">Which sector is hot? Where's money flowing?</p>
-        </div>
 
-        <div id="rotation-content">
-            <div style="text-align:center; padding:40px 0; color:var(--text-dim);">Loading rotation data...</div>
-        </div>
-
-        <div class="footer" style="font-size:0.65em; color:var(--text-dim);">
-            Data: CoinMarketCap · Updated weekly (Sundays)
-        </div>
-    </div>
-
-    <!-- Bottom Navigation -->
+    <!-- Bottom Navigation (4 tabs: Yield Farm, Gaming, Travel, More) -->
     <nav class="bottom-nav">
-        <button class="nav-btn active" onclick="switchTab('defi')" id="nav-defi">
-            <span class="nav-icon">💰</span>
-            DeFi
-        </button>
-        <button class="nav-btn" onclick="switchTab('rotation')" id="nav-rotation">
-            <span class="nav-icon">🔄</span>
-            Rotation
+        <button class="nav-btn active" onclick="switchTab('yieldfarm')" id="nav-yieldfarm">
+            <span class="nav-icon">🌾</span>
+            Yield Farm
         </button>
         <button class="nav-btn" onclick="switchTab('gaming')" id="nav-gaming">
             <span class="nav-icon">🎮</span>
@@ -798,9 +800,17 @@
             btn.textContent = '✓ Saved'; btn.style.color = 'var(--success)';
             setTimeout(() => { btn.textContent = originalText; btn.style.color = ''; }, 1500);
         }
-        function getSavedTab() { return localStorage.getItem(HUB_LS_KEY) || 'defi'; }
+        function getSavedTab() {
+            const saved = localStorage.getItem(HUB_LS_KEY);
+            // Migrate old tab names to new merged tab
+            if (saved === 'defi' || saved === 'rainbow' || saved === 'rotation') {
+                localStorage.setItem(HUB_LS_KEY, 'yieldfarm');
+                return 'yieldfarm';
+            }
+            return saved || 'yieldfarm';
+        }
 
-        // --- DeFi: Live Data Engine ---
+        // --- Yield Farm: Live Data Engine ---
         function fmt(n) {
             if (n >= 1e6) return '$' + (n / 1e6).toFixed(1) + 'M';
             if (n >= 1e3) return '$' + (n / 1e3).toFixed(1) + 'K';
@@ -899,7 +909,7 @@
                 document.getElementById('tvl').textContent = fmt(liqUsd);
 
                 // Config grid
-                const configGrid = document.querySelector('#tab-defi .config-grid');
+                const configGrid = document.getElementById('config-grid-yieldfarm');
                 if (configGrid) {
                     configGrid.innerHTML = `
                         <div class="config-item"><div class="config-key">Fee</div><div class="config-val">${feeTier}</div></div>
@@ -910,7 +920,7 @@
                 }
 
                 // AVAX banner
-                const bannerSub = document.querySelector('.avax-accent div:last-child');
+                const bannerSub = document.querySelector('#tab-yieldfarm .avax-accent div:last-child');
                 if (bannerSub) {
                     bannerSub.textContent = `AVAX/USDC · ${feeTier} Fee Tier · ${formatShape(shape)} Shape`;
                 }
@@ -919,12 +929,12 @@
 
                 const now = new Date().toLocaleString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
                 const lastUpdated = data.lastUpdated ? new Date(data.lastUpdated).toLocaleString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' }) : now;
-                document.getElementById('defi-footer').textContent = `Live · ${lastUpdated} · Refreshes every 60s`;
+                document.getElementById('yieldfarm-footer').textContent = `Live · ${lastUpdated} · Refreshes every 60s`;
 
             } catch (err) {
                 console.error('Data fetch failed:', err);
                 document.getElementById('lp-status-text').textContent = '⚠️ Data Error';
-                document.getElementById('defi-footer').textContent = 'Retry in 60s...';
+                document.getElementById('yieldfarm-footer').textContent = 'Retry in 60s...';
             }
         }
 
