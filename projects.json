@@ -1,98 +1,94 @@
 {
   "projects": [
     {
-      "id": "aae-platform",
-      "title": "AAE Platform",
-      "description": "The full agent economy stack. Six modular layers \u2014 ERC-8004 identity, OWASP safety, Echo Brain memory, x402 commerce, credit scoring, voice personas. Chain-agnostic core with chain-specific adapters.",
-      "tech": [
-        "Identity",
-        "Safety",
-        "Memory",
-        "Commerce",
-        "Credit",
-        "Voice"
-      ],
-      "status": "building",
-      "timeline": "Apr 2026",
-      "highlight": true,
-      "github_url": "https://github.com/ProtoJay4789/genTech-agent-kit"
-    },
-    {
-      "id": "agent-escrow",
-      "title": "AgentEscrow",
-      "description": "Cross-chain payment infrastructure with AI agent integration. Agents escrow, validate, and release payments automatically. Live on Avalanche & Base with 6+ production positions.",
-      "tech": [
-        "Solidity",
-        "x402",
-        "EVM",
-        "Avalanche",
-        "Base"
-      ],
+      "title": "Agent Arena",
+      "category": "Platform",
       "status": "live",
-      "timeline": "May 2026",
-      "highlight": true,
-      "github_url": "https://github.com/ProtoJay4789/Agent-Arena"
+      "description": "Rogue-lite DeFi trading game. Borrow, trade, survive. AI agents compete in a DeFi arena with credit scores and NFT loadouts.",
+      "url": "https://github.com/ProtoJay4789/Agent-Arena",
+      "tech": ["Solidity", "x402", "ERC-8004", "Solana", "Base"],
+      "featured": true
     },
     {
-      "id": "agent-credit-score",
+      "title": "Agent Kit",
+      "category": "Infrastructure",
+      "status": "live",
+      "description": "The AAE-compatible agent standard. Identity, execution, audit. Baked in. Multi-chain ERC-8004 with x402 payments.",
+      "url": "https://github.com/ProtoJay4789/genTech-agent-kit",
+      "tech": ["ERC-8004", "x402", "Multi-chain"],
+      "featured": true
+    },
+    {
+      "title": "Rugcheck",
+      "category": "Security",
+      "status": "live",
+      "description": "AI agent monitoring token launches. Detects rugs, honeypots, sketchy contracts before users ape. 11-factor risk scoring.",
+      "url": "https://github.com/ProtoJay4789/rugcheck",
+      "tech": ["Solana", "Risk Scoring", "x402"],
+      "featured": true
+    },
+    {
       "title": "Agent Credit Score",
-      "description": "0-850 credit scoring system for AI agents. Tracks win rate, risk-adjusted returns, consistency, and behavior across DeFi protocols. 22/22 tests passing. MIT licensed.",
-      "tech": [
-        "Python",
-        "Sharpe Ratio",
-        "5 Tiers",
-        "MIT"
-      ],
+      "category": "Reputation",
       "status": "live",
-      "timeline": "Jun 2026",
-      "highlight": true,
-      "github_url": "https://github.com/ProtoJay4789/Agent-Arena/tree/master/credit_score"
+      "description": "The standard for grading AI agent payment behavior. 0-850 score. MIT licensed. Sharpe ratio-based.",
+      "url": "https://github.com/ProtoJay4789/agent-credit-score",
+      "tech": ["Python", "Credit Scoring", "MIT"],
+      "featured": true
     },
     {
-      "id": "multi-agent-voice",
-      "title": "Multi-Agent Voice Integration",
-      "description": "Four-agent voice system (Gentech, YoYo, DMOB, Desmond) with daily automated briefings. End-to-end TTS pipeline with dialogue generation, voice selection, and audio mixing.",
-      "tech": [
-        "ElevenLabs",
-        "Hermes",
-        "TTS",
-        "Telegram"
-      ],
+      "title": "AgentEscrow",
+      "category": "Payments",
       "status": "live",
-      "timeline": "May 2026",
-      "highlight": true
+      "description": "AI-validated escrow with x402 payments for the agentic economy. Cross-chain payment infrastructure.",
+      "url": "https://github.com/ProtoJay4789/agent-escrow",
+      "tech": ["Solidity", "x402", "Escrow"],
+      "featured": true
     },
     {
-      "id": "defi-milestones",
-      "title": "DeFi Milestones",
-      "description": "Automated LP tracking and rebalancing on Avalanche. Live DexScreener data, fee efficiency scoring, milestone-based adjustments. Managing real positions with real money.",
-      "tech": [
-        "LFJ",
-        "Chainlink",
-        "LP Tracking",
-        "Live Data"
-      ],
+      "title": "Speech Engine",
+      "category": "Voice",
       "status": "live",
-      "timeline": "Apr 2026",
-      "highlight": true,
-      "demo_url": "/DeFi/defi-dashboard.html"
+      "description": "Real-time voice agents with Steve Harvey + Vanito personas. ElevenLabs Speech Engine integration.",
+      "url": "https://github.com/ProtoJay4789/speech-engine",
+      "tech": ["ElevenLabs", "Voice", "Real-time"],
+      "featured": true
     },
     {
-      "id": "cookbook-nanopay",
-      "title": "Cookbook Nanopay",
-      "description": "Pay-per-recipe platform using Circle Gateway nanopayments. $0.005/recipe, $0.001/review. Gas-free x402 payments settling in <500ms. Built for Lepton Agents Hackathon.",
-      "tech": [
-        "Circle Gateway",
-        "x402",
-        "Arc",
-        "USDC"
-      ],
-      "status": "building",
-      "timeline": "Jun 2026",
-      "highlight": true,
-      "deadline": "2026-06-29"
+      "title": "GenTech Hub",
+      "category": "Dashboard",
+      "status": "live",
+      "description": "JSON-driven dashboard engine for AI agents — zero dependencies, 8 section types, themeable.",
+      "url": "https://github.com/ProtoJay4789/gentech-hub",
+      "tech": ["JSON", "Dashboard", "Themeable"],
+      "featured": false
+    },
+    {
+      "title": "CMC Strategy Engine",
+      "category": "Trading",
+      "status": "live",
+      "description": "Turn market data into backtestable trading strategies. BNB Hack Track 2 submission.",
+      "url": "https://github.com/ProtoJay4789/cmc-strategy-engine",
+      "tech": ["Python", "Trading", "Backtesting"],
+      "featured": false
+    },
+    {
+      "title": "Solana Agent Security",
+      "category": "Security",
+      "status": "live",
+      "description": "Agent security skill for Solana — drain detection, token safety, approval monitoring, program verification.",
+      "url": "https://github.com/ProtoJay4789/solana-agent-security",
+      "tech": ["Solana", "Security", "Monitoring"],
+      "featured": false
+    },
+    {
+      "title": "Adaptive Folio",
+      "category": "DeFi",
+      "status": "live",
+      "description": "AI-powered adaptive portfolio manager on Arc — Agora Agents Hackathon submission.",
+      "url": "https://github.com/ProtoJay4789/adaptive-folio",
+      "tech": ["Arc", "Portfolio", "AI"],
+      "featured": false
     }
-  ],
-  "generated": "2026-06-14T00:00:00Z",
-  "count": 6
+  ]
 }
