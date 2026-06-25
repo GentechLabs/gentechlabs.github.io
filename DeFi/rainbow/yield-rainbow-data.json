@@ -1,38 +1,38 @@
 {
-  "lastUpdated": "2026-06-23T01:07:53.304808+00:00",
+  "lastUpdated": "2026-06-25T04:34:37.842506+00:00",
   "pool": {
     "name": "AVAX/USDC",
     "chain": "Avalanche",
     "dex": "LFJ",
-    "feeTier": "5bps",
+    "feeTier": "10bps",
     "poolAddress": "0x864d4e5ee7318e97483db7eb0912e09f161516ea"
   },
   "position": {
-    "currentPrice": 6.25,
-    "rangeLow": 6.05,
-    "rangeHigh": 6.296,
-    "rangeCenter": 6.173,
-    "positionUsd": 63.26,
-    "entryPrice": 6.18
+    "currentPrice": 6.3847,
+    "rangeLow": 6.3086,
+    "rangeHigh": 6.5006,
+    "rangeCenter": 6.4046,
+    "positionUsd": 48.16,
+    "entryPrice": 6.23
   },
   "metrics": {
-    "efficiency": 62.6,
-    "dailyFees": 0.0627,
-    "weeklyFees": 0.4389,
-    "monthlyFees": 1.881,
-    "annualizedApr": 36.2,
-    "volume24h": 741174.33,
-    "tvl": 373652.28,
-    "priceChange24h": 0.9
+    "efficiency": 20.7,
+    "dailyFees": 0.397,
+    "weeklyFees": 2.779,
+    "monthlyFees": 11.91,
+    "annualizedApr": 300.9,
+    "volume24h": 974565.99,
+    "tvl": 378479.76,
+    "priceChange24h": -0.1
   },
   "currentBand": {
-    "id": "harvest",
-    "name": "Harvest Mode",
-    "emoji": "\ud83d\udfe1",
-    "color": "#eab308",
-    "description": "Healthy farming. Fees are outpacing IL consistently.",
-    "advice": "\ud83c\udf3e Keep farming. Consider increasing position size if conviction is high.",
-    "position": 3
+    "id": "bleeding",
+    "name": "Bleeding Edge",
+    "emoji": "\ud83d\udd35",
+    "color": "#3b82f6",
+    "description": "Near range boundary. IL still outpaces fees.",
+    "advice": "\ud83e\ude78 Micro-DCA only. Prepare to rebalance if price moves further.",
+    "position": 5
   },
   "bands": [
     {
@@ -115,9 +115,6 @@
     }
   ],
   "history": [
-    58.8,
-    52.6,
-    48.5,
     50.5,
     51.7,
     68.6,
@@ -144,14 +141,18 @@
     69.2,
     76.3,
     70.3,
-    62.6
+    62.6,
+    14.1,
+    14.1,
+    20.7
   ],
   "meta": {
-    "generatedAt": "2026-06-23T01:07:53.304827+00:00",
+    "generatedAt": "2026-06-25T04:34:37.842516+00:00",
     "bandsCount": 6,
     "dataSources": [
       "DexScreener",
-      "LFJ Config"
+      "On-Chain Reader",
+      "Consolidated Monitor"
     ],
     "disclaimer": "Not financial advice. Rainbow charts are for visualization only."
   }
