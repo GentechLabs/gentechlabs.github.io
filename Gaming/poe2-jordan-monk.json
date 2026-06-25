@@ -9,7 +9,10 @@
       "life": 639,
       "energyShield": 68,
       "mana": 224,
-      "spirit": 30
+      "spirit": 30,
+      "strength": 100,
+      "dexterity": 41,
+      "intelligence": 45
     },
     "ascendancyPoints": {
       "earned": 2,
@@ -20,117 +23,107 @@
   },
   "skills": [
     {
-      "name": "Falling Thunder",
-      "type": "Burst — Lightning",
-      "level": 6,
-      "supports": ["Elemental Armament 2", "Bounty 1"],
-      "dps": 178,
-      "role": "Big nuke — consumes Power Charges for massive lightning damage",
-      "priority": "Core",
-      "tier": "deep_cut"
-    },
-    {
-      "name": "Storm Weave",
-      "type": "Attack — Lightning",
-      "level": 7,
-      "supports": ["Shock Conduction", "Lightning Penetration"],
-      "dps": 163,
-      "role": "AoE storm — replaces Tempest Bell, scales with lightning",
-      "priority": "Core",
-      "tier": "deep_cut",
-      "note": "Replaced Tempest Bell (was 36 DPS) — massive upgrade"
-    },
-    {
       "name": "Tempest Flurry",
       "type": "Primary Attack — Lightning",
-      "level": 8,
-      "supports": ["Elemental Armament 2", "Rapid Attacks 1"],
-      "dps": 146,
-      "role": "Main spammable — generates shock, fast attacks for Power Charge generation",
-      "priority": "Core",
-      "tier": "solid_sale"
+      "supports": ["Shock Conduction"],
+      "role": "Main damage dealer — shock chains to nearby enemies, Power Charge generation",
+      "priority": "Core"
     },
     {
-      "name": "Siphoning Strike",
-      "type": "Attack — Lightning",
-      "level": 7,
-      "supports": ["Elemental Armament 1", "Life Leech 1"],
-      "dps": 145,
-      "role": "Dash strike — consumes shock for shockwave + Power Charges + sustain",
-      "priority": "Core",
-      "tier": "solid_sale"
+      "name": "Falling Thunder",
+      "type": "Burst — Lightning",
+      "supports": ["Elemental Armament 1"],
+      "role": "Big nuke — consumes Power Charges for massive lightning damage",
+      "priority": "Core"
     },
     {
-      "name": "Orb of Storms",
-      "type": "Sustained — Lightning",
-      "level": 7,
-      "supports": ["Slow Potency", "Rapid Casting 1"],
-      "dps": 47,
-      "role": "AoE storm zone — debuff bot with slow",
-      "priority": "High",
-      "tier": "light_mark"
+      "name": "Storm Wave",
+      "type": "Attack — Lightning (Quarterstaff)",
+      "supports": [],
+      "role": "AoE fissure — sends lightning wave forward, pack opener",
+      "priority": "Core"
     },
     {
       "name": "Arc",
       "type": "Spell — Lightning",
-      "level": 6,
       "supports": ["Shock Conduction", "Rapid Casting 1"],
-      "dps": 43,
-      "role": "Chain clear — shocks enemies, ignores lightning resist",
-      "priority": "High",
-      "tier": "light_mark"
+      "role": "Chain clear — fast casts, shocks enemies",
+      "priority": "Core"
+    },
+    {
+      "name": "Orb of Storms",
+      "type": "Sustained — Lightning",
+      "supports": ["Lightning Penetration", "Considered Casting"],
+      "role": "AoE storm zone — shreds lightning resist, auto-casts",
+      "priority": "High"
+    },
+    {
+      "name": "Mana Drain",
+      "type": "Utility",
+      "supports": ["Level 7 Wand"],
+      "role": "Mana sustain — keeps skills running during heavy combat",
+      "priority": "Core"
     },
     {
       "name": "Killing Palm",
       "type": "Attack",
-      "level": 7,
-      "supports": [],
-      "dps": 80,
-      "role": "Execution — finishes low HP enemies",
-      "priority": "Utility",
-      "tier": "barely"
+      "supports": ["Life Leech 1", "Bounty 1"],
+      "role": "Execution — finishes low HP enemies, leeches life, generates currency",
+      "priority": "Core"
+    },
+    {
+      "name": "Parry",
+      "type": "Counter Attack",
+      "supports": ["Retaliate 1", "Life Leech 1", "Bounty 1"],
+      "role": "Counter-attack — retaliates on block, leeches life, generates currency",
+      "priority": "High"
     }
   ],
-  "damageLoop": {
-    "description": "Tempest Flurry shocks enemies → Siphoning Strike consumes shock for Power Charges → Storm Weave + Falling Thunder nuke",
-    "steps": [
-      "1. Tempest Flurry (Elemental Arrimant 2 + Rapid Attacks) → shock enemies",
-      "2. Siphoning Strike → consume shock → Power Charges + Life Leech",
-      "3. Storm Weave (Shock Conduction + Lightning Pen) → AoE damage + slow",
-      "4. Falling Thunder (Elemental Arrimant 2 + Bounty 1) → consume charges → massive lightning nuke"
-    ]
+  "weapons": {
+    "current": "Mana Drain Wand (Level 7)",
+    "grants": "Mana Drain",
+    "bonus": "Mana sustain",
+    "equipped": true,
+    "stash": "Deadly Galvanic Wand (Level 8 Galvanic Field)",
+    "stash_requires": "Level 26, 48 Int",
+    "stash_status": "Needs 3 more Int — one +Int ring or passive node",
+    "note": "Using Mana Drain wand for sustain until Int hits 48"
   },
-  "damageHierarchy": [
-    {"rank": 1, "skill": "Falling Thunder", "dps": 178},
-    {"rank": 2, "skill": "Storm Weave", "dps": 163},
-    {"rank": 3, "skill": "Tempest Flurry", "dps": 146},
-    {"rank": 4, "skill": "Siphoning Strike", "dps": 145}
-  ],
-  "buildNotes": {
-    "lightningFocus": true,
-    "totalLightningSkills": 6,
-    "sustainSource": "Life Leech on Tempest Flurry + Siphoning Strike",
-    "recentChange": "Replaced Tempest Bell (36 DPS) with Storm Weave (163 DPS) — 358% damage increase"
+  "damageLoop": {
+    "description": "Storm Wave opens packs → Arc chains and shocks → Tempest Flurry generates Power Charges → Falling Thunder consumes charges for nuke → Killing Palm finishes stragglers",
+    "steps": [
+      "1. Storm Wave → AoE fissure opens packs",
+      "2. Arc → chain clear, shock survivors",
+      "3. Tempest Flurry → fast attacks, generate Power Charges",
+      "4. Falling Thunder → consume charges → massive lightning nuke",
+      "5. Killing Palm → finish low HP enemies",
+      "6. Mana Drain → sustain mana throughout"
+    ]
   },
   "expansionPaths": {
     "immediate": [
       {
-        "upgrade": "Lightning Infusion",
-        "why": "Flat lightning damage to attacks, scales whole kit",
-        "when": "Grind for gem drop"
-      },
-      {
-        "upgrade": "Concentrated Effect",
-        "why": "More damage on Storm Weave single target",
-        "when": "Grind for gem drop"
+        "upgrade": "Conductivity curse",
+        "why": "Lowers enemy lightning resist — everything hits harder",
+        "when": "When you get an Uncut Skill Gem or find it at vendor"
       },
       {
         "upgrade": "Herald of Thunder",
         "why": "Auto-procs lightning on shocked enemies — free passive DPS",
         "when": "When you have enough Spirit to reserve it"
+      },
+      {
+        "upgrade": "2nd Ascendancy points (Trial of Chaos)",
+        "why": "Unlock more Invoker nodes — Culling Strike or Behead",
+        "when": "Act 3 — Trial of Chaos"
       }
     ],
     "midgame": [
+      {
+        "upgrade": "Tempest Bell",
+        "why": "Monk专属 — creates a death zone that scales with Tempest Flurry",
+        "when": "When you unlock the gem"
+      },
       {
         "upgrade": "+Level to Lightning Skill Gems on quarterstaff",
         "why": "Biggest single DPS upgrade for lightning build",
@@ -162,5 +155,5 @@
   },
   "buildFocus": "Lightning Damage",
   "playstyle": "Melee Caster — generate charges, spend them on nukes",
-  "lastUpdated": "2026-06-23"
+  "lastUpdated": "2026-06-24"
 }
