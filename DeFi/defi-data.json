@@ -67,7 +67,7 @@
     "efficiencyZone": "Inner",
     "recommendedAction": "Hold",
     "dcaType": "Moderate DCA",
-    "dcaDetails": "Moderate DCA — price in range",
+    "dcaDetails": "Moderate DCA \u2014 price in range",
     "rebalanceTrigger": "Price exits $6.01-$6.25 range",
     "compoundThreshold": 50,
     "cumulativeFees": 1.1906,
@@ -93,7 +93,7 @@
     "tiers": [
       {
         "tier": 1,
-        "icon": "🔭",
+        "icon": "\ud83d\udd2d",
         "label": "Scout",
         "target": 5,
         "unlocks": "Entry strategies (CURVE)",
@@ -101,7 +101,7 @@
       },
       {
         "tier": 2,
-        "icon": "⚔️",
+        "icon": "\u2694\ufe0f",
         "label": "Raider",
         "target": 20,
         "unlocks": "SPOT + BIDIRECTIONAL shapes",
@@ -109,7 +109,7 @@
       },
       {
         "tier": 3,
-        "icon": "👑",
+        "icon": "\ud83d\udc51",
         "label": "Warlord",
         "target": 50,
         "unlocks": "Multi-pool positions",
@@ -117,7 +117,7 @@
       },
       {
         "tier": 4,
-        "icon": "🏰",
+        "icon": "\ud83c\udff0",
         "label": "Sovereign",
         "target": 100,
         "unlocks": "Custom strategy creation + mentorship",
@@ -334,8 +334,8 @@
   },
   "walletBalances": {
     "avax": 0.09362538329075042,
-    "wavax": 6.06671055606e-7,
-    "usdc": 0.000011,
+    "wavax": 6.06671055606e-07,
+    "usdc": 1.1e-05,
     "liquidUsd": 0.58
   },
   "supportResistance": {
@@ -389,7 +389,7 @@
     "trend": "bullish",
     "suggestions": [
       {
-        "icon": "📈",
+        "icon": "\ud83d\udcc8",
         "title": "Bullish Momentum",
         "description": "AVAX is up 24h. Consider shifting range slightly higher to capture upside.",
         "priority": "low",
@@ -439,5 +439,58 @@
       "usd": "45.80",
       "status": "In Range"
     }
-  ]
+  ],
+  "regimeDetector": {
+    "current": "volatile",
+    "previous": "sideways",
+    "changedAt": "2026-06-25T17:27:06.146652+00:00",
+    "signals": {
+      "price": 6.2,
+      "ma20": 6.076,
+      "volume24h": 1210135.56,
+      "volatility": "high"
+    },
+    "strategy": {
+      "shape": "bid-ask",
+      "dcaAggressiveness": "moderate",
+      "rationale": "Price at 78% of range \u2014 volatile conditions"
+    },
+    "recommended": "Stay BID-ASK \u2014 volatile regime active"
+  },
+  "shapeComparison": {
+    "current": {
+      "bidAsk": 56.0,
+      "curve": 44.0,
+      "spot": 100.0,
+      "recommended": "bid-ask"
+    },
+    "scenarios": {
+      "$6.15": {
+        "bidAsk": 15.0,
+        "curve": 85.0,
+        "spot": 100
+      },
+      "$6.18": {
+        "bidAsk": 40.0,
+        "curve": 60.0,
+        "spot": 100
+      },
+      "$6.20": {
+        "bidAsk": 56.0,
+        "curve": 44.0,
+        "spot": 100
+      },
+      "$6.22": {
+        "bidAsk": 73.0,
+        "curve": 27.0,
+        "spot": 100
+      },
+      "$6.25": {
+        "bidAsk": 98.0,
+        "curve": 2.0,
+        "spot": 100
+      }
+    },
+    "analysis": "Bid-Ask earns at edges. At 78% from low, curve outperforms now but bid-ask captures volatility."
+  }
 }
