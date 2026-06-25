@@ -820,6 +820,9 @@
             if (section.customRender === 'yieldSpectrum') {
                 return this.renderYieldSpectrum(section);
             }
+            if (section.customRender === 'narrativeRotation') {
+                return this.renderNarrativeRotation(section);
+            }
             return originalRenderCustom.call(this, section);
         };
 
@@ -1152,6 +1155,65 @@
 
                     <div style="font-size:0.7em; color:var(--text-dim); margin-top:12px; text-align:center;">
                         ${currentBand?currentBand.advice:''}
+                    </div>
+                </div>
+            `;
+        };
+
+        // Narrative Rotation Renderer — market intelligence
+        DashboardEngine.prototype.renderNarrativeRotation = function(section) {
+            const data = this.resolveDataSource(section.dataSource);
+            if (!data || !data.narratives) return '<p class="empty-state">No rotation data</p>';
+
+            const { btc, narratives } = data;
+            const btcPrice = btc ? btc.price : 0;
+            const btcChange = btc ? btc.change_7d : 0;
+            const btcColor = btcChange >= 0 ? '#22c55e' : '#ef4444';
+
+            const narrativeHtml = narratives.slice(0, 6).map(n => {
+                const scoreColor = n.score >= 0 ? '#22c55e' : n.score > -10 ? '#f59e0b' : '#ef4444';
+                const zoneColor = n.zone.includes('Warm') ? '#f59e0b' : n.zone.includes('Hot') ? '#ef4444' : '#3b82f6';
+                return `
+                    <div style="display:flex; align-items:center; gap:12px; padding:10px 0; border-bottom:1px solid rgba(255,255,255,0.05);">
+                        <div style="font-size:1.3em; width:32px; text-align:center;">${n.emoji}</div>
+                        <div style="flex:1;">
+                            <div style="display:flex; justify-content:space-between; align-items:center;">
+                                <span style="font-size:0.9em; font-weight:600; color:var(--text);">${n.name}</span>
+                                <span style="font-size:0.75em; font-weight:600; color:${scoreColor};">${n.score > 0 ? '+' : ''}${n.score.toFixed(1)}%</span>
+                            </div>
+                            <div style="display:flex; justify-content:space-between; margin-top:4px;">
+                                <span style="font-size:0.7em; color:var(--text-dim);">${n.coins.split(',').slice(0,2).join(', ')}</span>
+                                <span style="font-size:0.7em; color:${zoneColor};">${n.zone}</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            return `
+                <div style="background:var(--panel-bg); border:1px solid var(--panel-border); border-radius:var(--radius); padding:24px; margin-bottom:16px;">
+                    <div style="display:flex; align-items:center; gap:8px; margin-bottom:16px;">
+                        <span style="font-size:1.3em;">🔄</span>
+                        <span style="font-size:1.1em; font-weight:700; color:var(--gold);">Narrative Rotation</span>
+                    </div>
+
+                    <!-- BTC Header -->
+                    <div style="display:flex; justify-content:space-between; align-items:center; padding:12px 16px; background:rgba(255,255,255,0.03); border-radius:8px; margin-bottom:16px;">
+                        <div>
+                            <div style="font-size:0.7em; color:var(--text-dim); text-transform:uppercase;">Bitcoin</div>
+                            <div style="font-size:1.2em; font-weight:700; color:var(--text);">$${btcPrice.toLocaleString()}</div>
+                        </div>
+                        <div style="text-align:right;">
+                            <div style="font-size:0.7em; color:var(--text-dim);">7D Change</div>
+                            <div style="font-size:1.1em; font-weight:700; color:${btcColor};">${btcChange >= 0 ? '+' : ''}${btcChange.toFixed(1)}%</div>
+                        </div>
+                    </div>
+
+                    <!-- Narrative List -->
+                    ${narrativeHtml}
+
+                    <div style="font-size:0.7em; color:var(--text-dim); margin-top:12px; text-align:center;">
+                        Data: DeFiLlama + DexScreener | Updated ${data.lastUpdated ? new Date(data.lastUpdated).toLocaleDateString() : 'Unknown'}
                     </div>
                 </div>
             `;
