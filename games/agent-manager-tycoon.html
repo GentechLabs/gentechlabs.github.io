@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🤖 Agent Manager Tycoon</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{--bg:#0a0a0a;--card:#1a1a2e;--primary:#00ff88;--text:#e0e0e0;--danger:#ff4444;--warning:#ffd700;--card-hover:#252545;--muted:#888;--card-border:#333}
+  body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh;padding:0 0 80px 0}
+  .container{max-width:800px;margin:0 auto;padding:12px}
+  header{text-align:center;padding:16px 0 8px;border-bottom:2px solid var(--primary);margin-bottom:16px}
+  header h1{font-size:1.6em;color:var(--primary);text-shadow:0 0 20px rgba(0,255,136,.3)}
+  .stats{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:10px;font-size:.95em}
+  .stats span{background:var(--card);padding:6px 14px;border-radius:8px;border:1px solid var(--card-border)}
+  .stats .cash{color:var(--primary);font-weight:700}
+  .stats .day{color:var(--warning)}
+  .stats .level{color:#ff88ff}
+  .stats .total-earned{color:#88ccff}
+  section{margin-top:16px}
+  section h2{color:var(--primary);font-size:1.1em;margin-bottom:8px;padding-bottom:4px;border-bottom:1px solid var(--card-border)}
+  .agent-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px}
+  .agent-card{background:var(--card);border-radius:10px;padding:12px;border:1px solid var(--card-border);position:relative;transition:all .2s}
+  .agent-card:hover{border-color:var(--primary)}
+  .agent-card.on-cooldown{opacity:.6}
+  .agent-card.resting{opacity:.5}
+  .agent-name{font-size:1.05em;font-weight:700;margin-bottom:2px}
+  .agent-type{font-size:.78em;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
+  .agent-status{display:inline-block;padding:2px 8px;border-radius:4px;font-size:.75em;font-weight:700;text-transform:uppercase;margin-bottom:6px}
+  .agent-status.active{background:#00ff8822;color:var(--primary)}
+  .agent-status.cooldown{background:#ff444422;color:var(--danger)}
+  .agent-status.resting{background:#ffd70022;color:var(--warning)}
+  .agent-stats{font-size:.82em;color:var(--muted);margin-bottom:6px;line-height:1.6}
+  .agent-stats strong{color:var(--text)}
+  .agent-btns{display:flex;gap:5px;flex-wrap:wrap}
+  .agent-btns button{padding:4px 10px;border:none;border-radius:5px;font-size:.78em;cursor:pointer;font-weight:600;transition:all .15s}
+  .btn-rest{background:#ffd70033;color:var(--warning)}
+  .btn-rest:hover{background:#ffd70055}
+  .btn-upgrade{background:#88ccff33;color:#88ccff}
+  .btn-upgrade:hover{background:#88ccff55}
+  .btn-sell{background:#ff444433;color:var(--danger)}
+  .btn-sell:hover{background:#ff444455}
+  .btn-wake{background:#00ff8833;color:var(--primary)}
+  .btn-wake:hover{background:#00ff8855}
+  .actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+  .main-btn{padding:10px 20px;border:2px solid var(--primary);background:transparent;color:var(--primary);border-radius:8px;font-size:.95em;font-weight:700;cursor:pointer;transition:all .2s;text-transform:uppercase;letter-spacing:.5px}
+  .main-btn:hover:not(:disabled){background:var(--primary);color:#0a0a0a}
+  .main-btn:disabled{opacity:.35;cursor:not-allowed}
+  .main-btn.danger{border-color:var(--danger);color:var(--danger)}
+  .main-btn.danger:hover:not(:disabled){background:var(--danger);color:#fff}
+  .borrow-btn{border-color:var(--warning);color:var(--warning)}
+  .borrow-btn:hover:not(:disabled){background:var(--warning);color:#0a0a0a}
+  .hire-btn{border-color:#ff88ff;color:#ff88ff}
+  .hire-btn:hover:not(:disabled){background:#ff88ff;color:#0a0a0a}
+  .loans{margin-top:10px;font-size:.82em}
+  .loan-item{background:var(--card);padding:6px 10px;border-radius:6px;margin-bottom:4px;display:flex;justify-content:space-between;align-items:center;border:1px solid var(--card-border)}
+  .loan-item .repay-btn{padding:3px 10px;border:1px solid var(--danger);background:transparent;color:var(--danger);border-radius:4px;font-size:.8em;cursor:pointer;font-weight:600}
+  .loan-item .repay-btn:hover{background:var(--danger);color:#fff}
+  .event-log{background:var(--card);border-radius:10px;padding:10px;max-height:220px;overflow-y:auto;border:1px solid var(--card-border);margin-top:8px;font-size:.82em;line-height:1.7}
+  .event-log::-webkit-scrollbar{width:6px}
+  .event-log::-webkit-scrollbar-thumb{background:#444;border-radius:3px}
+  .log-entry{padding:2px 0;border-bottom:1px solid #ffffff08}
+  .log-entry.positive{color:var(--primary)}
+  .log-entry.negative{color:var(--danger)}
+  .log-entry.neutral{color:var(--warning)}
+  .log-entry.info{color:#88ccff}
+  .market-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.8);z-index:100;justify-content:center;align-items:center;padding:12px}
+  .market-overlay.show{display:flex}
+  .market-box{background:var(--card);border:2px solid var(--primary);border-radius:12px;padding:16px;max-width:500px;width:100%;max-height:80vh;overflow-y:auto}
+  .market-box h3{color:var(--primary);margin-bottom:10px}
+  .market-item{background:var(--bg);padding:10px;border-radius:8px;margin-bottom:8px;border:1px solid var(--card-border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px}
+  .market-item .info{flex:1;min-width:150px}
+  .market-item .info .name{font-weight:700}
+  .market-item .info .desc{font-size:.78em;color:var(--muted)}
+  .market-item button{padding:6px 14px;border:1px solid var(--primary);background:transparent;color:var(--primary);border-radius:6px;cursor:pointer;font-weight:700;font-size:.85em;white-space:nowrap}
+  .market-item button:hover{background:var(--primary);color:#0a0a0a}
+  .market-item button:disabled{opacity:.35;cursor:not-allowed}
+  .close-btn{padding:6px 16px;border:1px solid var(--danger);background:transparent;color:var(--danger);border-radius:6px;cursor:pointer;margin-top:8px;font-weight:600}
+  .close-btn:hover{background:var(--danger);color:#fff}
+  .event-banner{position:fixed;top:0;left:0;right:0;padding:14px;text-align:center;font-weight:700;z-index:200;animation:bannerIn .4s;border-bottom:2px solid}
+  .event-banner.crash{background:#ff444433;color:var(--danger);border-color:var(--danger)}
+  .event-banner.bull{background:#00ff8833;color:var(--primary);border-color:var(--primary)}
+  .event-banner.lucky{background:#ffd70033;color:var(--warning);border-color:var(--warning)}
+  .event-banner.partnership{background:#ff88ff33;color:#ff88ff;border-color:#ff88ff}
+  @keyframes bannerIn{from{transform:translateY(-100%)}to{transform:translateY(0)}}
+  .victory-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.9);z-index:300;justify-content:center;align-items:center;flex-direction:column;text-align:center;padding:20px}
+  .victory-overlay.show{display:flex}
+  .victory-overlay h1{color:var(--primary);font-size:2em;margin-bottom:10px;text-shadow:0 0 40px rgba(0,255,136,.5)}
+  .victory-overlay p{color:var(--text);margin-bottom:16px;font-size:1.1em}
+  .victory-overlay button{padding:12px 30px;border:2px solid var(--primary);background:transparent;color:var(--primary);border-radius:8px;font-size:1.1em;font-weight:700;cursor:pointer;margin:6px}
+  .victory-overlay button:hover{background:var(--primary);color:#0a0a0a}
+  .upgrade-modal{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.8);z-index:150;justify-content:center;align-items:center;padding:12px}
+  .upgrade-modal.show{display:flex}
+  .upgrade-box{background:var(--card);border:2px solid #88ccff;border-radius:12px;padding:16px;max-width:400px;width:100%}
+  .upgrade-box h3{color:#88ccff;margin-bottom:10px}
+  .upgrade-option{background:var(--bg);padding:10px;border-radius:8px;margin-bottom:8px;border:1px solid var(--card-border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px}
+  .upgrade-option .desc{font-size:.85em}
+  .upgrade-option button{padding:5px 12px;border:1px solid #88ccff;background:transparent;color:#88ccff;border-radius:5px;cursor:pointer;font-weight:600;font-size:.82em;white-space:nowrap}
+  .upgrade-option button:hover{background:#88ccff;color:#0a0a0a}
+  .upgrade-option button:disabled{opacity:.35;cursor:not-allowed}
+  .no-agents{color:var(--muted);text-align:center;padding:20px;font-style:italic}
+  .footer-note{text-align:center;color:var(--muted);font-size:.75em;margin-top:24px;padding:8px}
+  .sell-warning{color:var(--danger);text-align:center;padding:8px;background:#ff444411;border-radius:8px;margin-bottom:8px;font-size:.9em;border:1px solid #ff444433}
+  .sell-timer{color:var(--warning);font-weight:700}
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>🤖 AGENT MANAGER TYCOON</h1>
+    <div class="stats">
+      <span class="cash">💰 $<span id="cash">10</span></span>
+      <span class="day">📅 Day <span id="day">1</span></span>
+      <span class="level" style="color:#ff88ff">⭐ Level <span id="level">1</span></span>
+      <span class="total-earned">📈 Total: $<span id="totalEarned">0</span></span>
+    </div>
+  </header>
+
+  <div id="sellWarning" class="sell-warning" style="display:none">
+    ⚠️ Cash below -$50! Sell an agent or repay loans within <span class="sell-timer" id="sellTimer">3</span> turns!
+  </div>
+
+  <section>
+    <h2>🤖 Your Agents</h2>
+    <div id="agentGrid" class="agent-grid"></div>
+  </section>
+
+  <section>
+    <h2>⚡ Actions</h2>
+    <div class="actions" id="mainActions">
+      <button class="main-btn" id="nextDayBtn" onclick="nextDay()">⏭ Next Day</button>
+      <button class="main-btn borrow-btn" id="borrow20" onclick="borrow(20)" style="display:none">💰 Borrow $20</button>
+      <button class="main-btn borrow-btn" id="borrow50" onclick="borrow(50)" style="display:none">💰 Borrow $50</button>
+      <button class="main-btn borrow-btn" id="borrow100" onclick="borrow(100)" style="display:none">💰 Borrow $100</button>
+      <button class="main-btn hire-btn" id="hireBtn" onclick="openMarket()" style="display:none">🏪 Hire Agent</button>
+      <button class="main-btn danger" id="repayAllBtn" onclick="repayAllLoans()" style="display:none">💳 Repay All Loans</button>
+    </div>
+  </section>
+
+  <section>
+    <h2>📋 Event Log</h2>
+    <div class="event-log" id="eventLog"></div>
+  </section>
+
+  <div class="footer-note">Agent Manager Tycoon — EasyA Gaming Hackathon<br>Manage cooldowns. Borrow wisely. Grow your empire.</div>
+</div>
+
+<!-- Market Overlay -->
+<div class="market-overlay" id="marketOverlay">
+  <div class="market-box">
+    <h3>🏪 Agent Marketplace</h3>
+    <div id="marketList"></div>
+    <button class="close-btn" onclick="closeMarket()">✕ Close</button>
+  </div>
+</div>
+
+<!-- Upgrade Modal -->
+<div class="upgrade-modal" id="upgradeModal">
+  <div class="upgrade-box">
+    <h3>⬆️ Upgrade Agent</h3>
+    <div id="upgradeInfo"></div>
+    <div id="upgradeOptions"></div>
+    <button class="close-btn" onclick="closeUpgrade()">✕ Close</button>
+  </div>
+</div>
+
+<!-- Victory Overlay -->
+<div class="victory-overlay" id="victoryOverlay">
+  <h1>🏆 VICTORY!</h1>
+  <p id="victoryText"></p>
+  <button onclick="continueGame()">▶️ Continue (2x Difficulty)</button>
+  <button onclick="location.reload()">🔄 New Game</button>
+</div>
+
+<!-- Event Banner -->
+<div id="eventBanner" class="event-banner" style="display:none"></div>
+
+<script>
+// ===================== GAME STATE =====================
+const SAVE_KEY = 'agentManagerTycoon_save';
+const AGENT_DEFS = {
+  junior:   { name:'Junior Bot',  emoji:'🤖', hireCost:0,    earn:10, cost:5,  cooldown:1, desc:'Basic trading bot' },
+  miner:    { name:'Data Miner',  emoji:'⛏️', hireCost:50,   earn:15, cost:6,  cooldown:1, desc:'Finds better deals' },
+  trader:   { name:'Trader',      emoji:'📈', hireCost:100,  earn:25, cost:10, cooldown:2, desc:'Higher risk/reward' },
+  analyst:  { name:'Analyst',     emoji:'🧠', hireCost:150,  earn:20, cost:8,  cooldown:1, desc:'Reduces others\' cooldowns' },
+  executive:{ name:'Executive',   emoji:'👔', hireCost:300,  earn:40, cost:15, cooldown:3, desc:'Buffs all agents +20%' },
+};
+const LEVEL_THRESHOLDS = [0,50,100,200,500,1000];
+const EVENTS = [
+  { name:'Market Crash',   weight:10, type:'negative' },
+  { name:'Bull Run',       weight:10, type:'positive' },
+  { name:'Agent Burnout',  weight:10, type:'negative' },
+  { name:'Lucky Break',    weight:5,  type:'positive' },
+  { name:'Regulation',     weight:10, type:'negative' },
+  { name:'Partnership',    weight:5,  type:'positive' },
+];
+let G = null; // game state
+
+function defaultState() {
+  return {
+    cash: 10,
+    day: 1,
+    totalEarned: 0,
+    agents: [createAgent('junior', 'Bot #1')],
+    loans: [],
+    activeEffects: [],
+    sellTimer: -1,
+    difficulty: 1,
+    gameOver: false,
+    won: false,
+    market: [],
+    marketRefreshDay: 1,
+  };
+}
+
+function createAgent(type, customName) {
+  const d = AGENT_DEFS[type];
+  return {
+    id: Date.now() + Math.random(),
+    type,
+    name: customName || d.name,
+    earnBonus: 1,   // multiplier from upgrades/events
+    costBonus: 0,   // added cost from regulation
+    cooldownMax: d.cooldown,
+    daysWorked: 0,
+    status: 'active', // active | cooldown | resting
+    cooldownDaysLeft: 0,
+    level: 1,       // upgrade level
+  };
+}
+
+// ===================== PERSISTENCE =====================
+function saveGame() { try { localStorage.setItem(SAVE_KEY, JSON.stringify(G)); } catch(e){} }
+function loadGame() {
+  try {
+    const s = localStorage.getItem(SAVE_KEY);
+    if (s) { G = JSON.parse(s); return true; }
+  } catch(e){}
+  return false;
+}
+
+// ===================== HELPERS =====================
+function getLevel() {
+  for (let i = LEVEL_THRESHOLDS.length - 1; i >= 0; i--) {
+    if (G.totalEarned >= LEVEL_THRESHOLDS[i]) return i + 1;
+  }
+  return 1;
+}
+
+function agentEarnings(agent) {
+  if (agent.status !== 'active') return 0;
+  const def = AGENT_DEFS[agent.type];
+  const execBuff = G.agents.some(a => a.type === 'executive' && a.status === 'active') ? 1.2 : 1;
+  const effCrash = G.activeEffects.some(e => e.type === 'crash') ? 0.5 : 1;
+  const effBull = G.activeEffects.some(e => e.type === 'bull') ? 2 : 1;
+  const effPartner = G.activeEffects.some(e => e.type === 'partnership' && e.partnerId === agent.id) ? 1.5 : 1;
+  return Math.round(def.earn * agent.earnBonus * agent.level * execBuff * effCrash * effBull * effPartner * G.difficulty);
+}
+
+function agentCost(agent) {
+  if (agent.status !== 'active') return 0;
+  const def = AGENT_DEFS[agent.type];
+  const effReg = G.activeEffects.some(e => e.type === 'regulation') ? 2 : 0;
+  return (def.cost + agent.costBonus + effReg) * G.difficulty;
+}
+
+function fmtMoney(n) {
+  return (n < 0 ? '-' : '') + '$' + Math.abs(n).toLocaleString();
+}
+
+function addLog(msg, type) {
+  const log = document.getElementById('eventLog');
+  const entry = document.createElement('div');
+  entry.className = 'log-entry ' + (type || 'info');
+  entry.textContent = '> Day ' + G.day + ': ' + msg;
+  log.insertBefore(entry, log.firstChild);
+  if (log.children.length > 100) log.removeChild(log.lastChild);
+}
+
+function showBanner(text, cls, duration) {
+  const b = document.getElementById('eventBanner');
+  b.textContent = text;
+  b.className = 'event-banner ' + cls;
+  b.style.display = 'block';
+  setTimeout(() => { b.style.display = 'none'; }, duration || 3000);
+}
+
+// ===================== MARKET =====================
+function refreshMarket() {
+  if (G.day < G.marketRefreshDay) return;
+  const pool = [];
+  const lvl = getLevel();
+  const types = ['junior','miner','trader','analyst','executive'];
+  // Add 2-4 random agents based on level
+  const count = 2 + Math.min(lvl, 3);
+  const available = types.filter(t => {
+    const d = AGENT_DEFS[t];
+    if (t === 'junior') return lvl >= 2; // junior only if past start
+    if (t === 'miner') return lvl >= 3;
+    if (t === 'trader') return lvl >= 3;
+    if (t === 'analyst') return lvl >= 4;
+    if (t === 'executive') return lvl >= 5;
+    return false;
+  });
+  if (available.length === 0 && lvl >= 2) available.push('junior');
+  for (let i = 0; i < Math.min(count, available.length); i++) {
+    const t = available[Math.floor(Math.random() * available.length)];
+    if (!pool.some(p => p.type === t)) pool.push({ type: t, name: AGENT_DEFS[t].name + ' #' + (G.agents.length + pool.length + 1) });
+  }
+  G.market = pool;
+  G.marketRefreshDay = G.day + 5;
+}
+
+function openMarket() {
+  refreshMarket();
+  const list = document.getElementById('marketList');
+  const lvl = getLevel();
+  if (G.market.length === 0) {
+    list.innerHTML = '<div class="no-agents">No agents available right now. Market refreshes in ' + Math.max(0, G.marketRefreshDay - G.day) + ' days.</div>';
+  } else {
+    list.innerHTML = '';
+    G.market.forEach((item, idx) => {
+      const def = AGENT_DEFS[item.type];
+      const cost = def.hireCost * G.difficulty;
+      const canAfford = G.cash >= cost;
+      const div = document.createElement('div');
+      div.className = 'market-item';
+      div.innerHTML = `
+        <div class="info">
+          <div class="name">${def.emoji} ${def.name}</div>
+          <div class="desc">${def.desc}<br>Earns: ${fmtMoney(def.earn * G.difficulty)}/day | Upkeep: ${fmtMoney(def.cost * G.difficulty)}/day | Cooldown: ${def.cooldown}d</div>
+        </div>
+        <button ${canAfford ? '' : 'disabled'} onclick="hireAgent(${idx})">${cost === 0 ? 'FREE' : 'Hire ' + fmtMoney(cost)}</button>
+      `;
+      list.appendChild(div);
+    });
+  }
+  document.getElementById('marketOverlay').classList.add('show');
+}
+
+function closeMarket() {
+  document.getElementById('marketOverlay').classList.remove('show');
+}
+
+function hireAgent(idx) {
+  const item = G.market[idx];
+  if (!item) return;
+  const def = AGENT_DEFS[item.type];
+  const cost = def.hireCost * G.difficulty;
+  if (G.cash < cost) return;
+  G.cash -= cost;
+  const agent = createAgent(item.type, item.name);
+  G.agents.push(agent);
+  G.market.splice(idx, 1);
+  addLog('Hired ' + def.emoji + ' ' + item.name + ' for ' + fmtMoney(cost) + '!', 'info');
+  render();
+  saveGame();
+}
+
+// ===================== UPGRADES =====================
+let upgradeAgentIdx = -1;
+
+function openUpgrade(idx) {
+  upgradeAgentIdx = idx;
+  const agent = G.agents[idx];
+  const def = AGENT_DEFS[agent.type];
+  const lvl = getLevel();
+  document.getElementById('upgradeInfo').innerHTML = `
+    <p style="margin-bottom:10px;font-size:.9em">${def.emoji} <strong>${agent.name}</strong> (Level ${agent.level})</p>
+    <p style="font-size:.82em;color:var(--muted)">Current earnings: ${fmtMoney(agentEarnings(agent))}/day</p>
+  `;
+  const opts = document.getElementById('upgradeOptions');
+  opts.innerHTML = '';
+  if (lvl >= 4) {
+    const earnCost = 30 * agent.level * G.difficulty;
+    const earnBtn = document.createElement('div');
+    earnBtn.className = 'upgrade-option';
+    earnBtn.innerHTML = `
+      <div class="desc">📈 +25% Earnings (currently ${Math.round(agent.earnBonus*100)}%)</div>
+      <button ${G.cash >= earnCost ? '' : 'disabled'} onclick="upgradeEarnings()">${fmtMoney(earnCost)}</button>
+    `;
+    opts.appendChild(earnBtn);
+
+    if (agent.cooldownMax > 1) {
+      const cdCost = 50 * G.difficulty;
+      const cdBtn = document.createElement('div');
+      cdBtn.className = 'upgrade-option';
+      cdBtn.innerHTML = `
+        <div class="desc">⏱️ Reduce Cooldown (-1d, currently ${agent.cooldownMax}d)</div>
+        <button ${G.cash >= cdCost && agent.cooldownMax > 1 ? '' : 'disabled'} onclick="upgradeCooldown()">${fmtMoney(cdCost)}</button>
+      `;
+      opts.appendChild(cdBtn);
+    }
+
+    if (agent.level < 3) {
+      const lvlCost = 75 * agent.level * G.difficulty;
+      const lvlBtn = document.createElement('div');
+      lvlBtn.className = 'upgrade-option';
+      lvlBtn.innerHTML = `
+        <div class="desc">⬆️ Agent Level ${agent.level} → ${agent.level+1} (stats +10%)</div>
+        <button ${G.cash >= lvlCost ? '' : 'disabled'} onclick="upgradeLevel()">${fmtMoney(lvlCost)}</button>
+      `;
+      opts.appendChild(lvlBtn);
+    }
+  } else {
+    opts.innerHTML = '<p style="color:var(--muted);font-size:.85em">Upgrades unlock at Level 4 (earn $200+)</p>';
+  }
+  document.getElementById('upgradeModal').classList.add('show');
+}
+
+function closeUpgrade() {
+  document.getElementById('upgradeModal').classList.remove('show');
+  upgradeAgentIdx = -1;
+}
+
+function upgradeEarnings() {
+  const agent = G.agents[upgradeAgentIdx];
+  if (!agent) return;
+  const cost = 30 * agent.level * G.difficulty;
+  if (G.cash < cost) return;
+  G.cash -= cost;
+  agent.earnBonus = Math.round(agent.earnBonus * 125) / 100;
+  addLog('Upgraded ' + AGENT_DEFS[agent.type].emoji + ' ' + agent.name + ' earnings to ' + Math.round(agent.earnBonus*100) + '%', 'info');
+  openUpgrade(upgradeAgentIdx);
+  render();
+  saveGame();
+}
+
+function upgradeCooldown() {
+  const agent = G.agents[upgradeAgentIdx];
+  if (!agent || agent.cooldownMax <= 1) return;
+  const cost = 50 * G.difficulty;
+  if (G.cash < cost) return;
+  G.cash -= cost;
+  agent.cooldownMax--;
+  addLog('Reduced ' + AGENT_DEFS[agent.type].emoji + ' ' + agent.name + ' cooldown to ' + agent.cooldownMax + 'd', 'info');
+  openUpgrade(upgradeAgentIdx);
+  render();
+  saveGame();
+}
+
+function upgradeLevel() {
+  const agent = G.agents[upgradeAgentIdx];
+  if (!agent || agent.level >= 3) return;
+  const cost = 75 * agent.level * G.difficulty;
+  if (G.cash < cost) return;
+  G.cash -= cost;
+  agent.level++;
+  addLog(AGENT_DEFS[agent.type].emoji + ' ' + agent.name + ' promoted to Level ' + agent.level + '!', 'info');
+  openUpgrade(upgradeAgentIdx);
+  render();
+  saveGame();
+}
+
+// ===================== BORROW & LOANS =====================
+function borrow(amount) {
+  const lvl = getLevel();
+  if (lvl < 2) return;
+  const amt = amount * G.difficulty;
+  const repay = Math.round(amt * 1.2);
+  G.cash += amt;
+  G.loans.push({ amount: amt, repay, daysLeft: 10, originDay: G.day });
+  addLog('Borrowed ' + fmtMoney(amt) + ' (repay ' + fmtMoney(repay) + ' in 10 days)', 'neutral');
+  triggerRogueliteEvent();
+  render();
+  saveGame();
+}
+
+function repayAllLoans() {
+  let total = 0;
+  G.loans.forEach(l => total += l.repay);
+  if (G.cash < total) return;
+  G.cash -= total;
+  addLog('Repaid all loans: ' + fmtMoney(total), 'info');
+  G.loans = [];
+  G.sellTimer = -1;
+  render();
+  saveGame();
+}
+
+function repayLoan(idx) {
+  const loan = G.loans[idx];
+  if (!loan || G.cash < loan.repay) return;
+  G.cash -= loan.repay;
+  G.loans.splice(idx, 1);
+  addLog('Repaid loan: ' + fmtMoney(loan.repay), 'info');
+  render();
+  saveGame();
+}
+
+// ===================== ROGUELITE EVENTS =====================
+function triggerRogueliteEvent() {
+  // 60% chance nothing happens
+  if (Math.random() < 0.60) {
+    addLog('Borrowed money — nothing unusual happened.', 'info');
+    return;
+  }
+  const totalWeight = EVENTS.reduce((s, e) => s + e.weight, 0);
+  let r = Math.random() * totalWeight;
+  let chosen = EVENTS[0];
+  for (const ev of EVENTS) {
+    r -= ev.weight;
+    if (r <= 0) { chosen = ev; break; }
+  }
+  switch (chosen.name) {
+    case 'Market Crash':
+      G.activeEffects.push({ type: 'crash', daysLeft: 3 });
+      showBanner('💥 MARKET CRASH — All agents earn 50% less for 3 days!', 'crash');
+      addLog('💥 Market Crash! Agents earn 50% less for 3 days.', 'negative');
+      break;
+    case 'Bull Run':
+      G.activeEffects.push({ type: 'bull', daysLeft: 2 });
+      showBanner('🚀 BULL RUN — All agents earn 200% for 2 days!', 'bull');
+      addLog('🚀 Bull Run! Agents earn double for 2 days!', 'positive');
+      break;
+    case 'Agent Burnout': {
+      const activeAgents = G.agents.filter(a => a.status === 'active');
+      if (activeAgents.length > 0) {
+        const victim = activeAgents[Math.floor(Math.random() * activeAgents.length)];
+        victim.status = 'cooldown';
+        victim.cooldownDaysLeft = 2;
+        victim.daysWorked = 0;
+        showBanner('🔥 ' + victim.name + ' burned out! Forced 2-day cooldown.', 'crash');
+        addLog('🔥 Agent Burnout! ' + victim.name + ' forced into 2-day cooldown.', 'negative');
+      } else {
+        addLog('🔥 Agent Burnout attempted but no active agents!', 'neutral');
+      }
+      break;
+    }
+    case 'Lucky Break': {
+      const luckyAgent = G.agents[Math.floor(Math.random() * G.agents.length)];
+      luckyAgent.earnBonus = Math.round(luckyAgent.earnBonus * 125) / 100;
+      showBanner('🍀 LUCKY BREAK — ' + luckyAgent.name + ' earnings +25%!', 'bull');
+      addLog('🍀 Lucky Break! ' + luckyAgent.name + ' earnings permanently +25%!', 'positive');
+      break;
+    }
+    case 'Regulation':
+      G.activeEffects.push({ type: 'regulation', daysLeft: 3 });
+      showBanner('📜 REGULATION — All agent costs +$2/day for 3 days!', 'crash');
+      addLog('📜 Regulation! All agent costs increased by $2/day for 3 days.', 'negative');
+      break;
+    case 'Partnership': {
+      const activeAgents = G.agents.filter(a => a.status === 'active');
+      if (activeAgents.length >= 2) {
+        const a1 = activeAgents[0], a2 = activeAgents[1];
+        G.activeEffects.push({ type: 'partnership', daysLeft: 2, partnerId: a1.id, partnerId2: a2.id });
+        showBanner('🤝 PARTNERSHIP — ' + a1.name + ' & ' + a2.name + ' +50% for 2 days!', 'partnership');
+        addLog('🤝 Partnership! ' + a1.name + ' & ' + a2.name + ' combined +50% earnings for 2 days!', 'positive');
+      } else {
+        addLog('🤝 Partnership attempted but not enough active agents.', 'neutral');
+      }
+      break;
+    }
+  }
+}
+
+// ===================== DAY LOGIC =====================
+function nextDay() {
+  if (G.gameOver) return;
+
+  let totalEarn = 0;
+  let totalCost = 0;
+
+  // Process each agent
+  G.agents.forEach(agent => {
+    if (agent.status === 'active') {
+      const earn = agentEarnings(agent);
+      const cost = agentCost(agent);
+      totalEarn += earn;
+      totalCost += cost;
+      agent.daysWorked++;
+
+      // Check cooldown trigger
+      if (agent.daysWorked >= agent.cooldownMax) {
+        agent.status = 'cooldown';
+        agent.cooldownDaysLeft = agent.cooldownMax;
+        agent.daysWorked = 0;
+        addLog(AGENT_DEFS[agent.type].emoji + ' ' + agent.name + ' enters cooldown (' + agent.cooldownDaysLeft + 'd)', 'neutral');
+      }
+    } else if (agent.status === 'cooldown') {
+      agent.cooldownDaysLeft--;
+      if (agent.cooldownDaysLeft <= 0) {
+        agent.status = 'active';
+        agent.daysWorked = 0;
+        addLog(AGENT_DEFS[agent.type].emoji + ' ' + agent.name + ' is back online!', 'positive');
+      }
+    }
+    // resting agents: nothing happens
+  });
+
+  // Analyst special: reduce other cooldowns by 1
+  const analysts = G.agents.filter(a => a.type === 'analyst' && a.status === 'active');
+  if (analysts.length > 0) {
+    G.agents.forEach(a => {
+      if (a.type !== 'analyst' && a.status === 'cooldown' && a.cooldownDaysLeft > 0) {
+        a.cooldownDaysLeft--;
+        if (a.cooldownDaysLeft <= 0) {
+          a.status = 'active';
+          a.daysWorked = 0;
+          addLog(AGENT_DEFS[a.type].emoji + ' ' + a.name + ' accelerated out of cooldown by Analyst!', 'positive');
+        }
+      }
+    });
+  }
+
+  // Apply earnings
+  G.cash += totalEarn - totalCost;
+  G.totalEarned += totalEarn;
+  if (totalEarn > 0) addLog('Agents earned ' + fmtMoney(totalEarn) + ', upkeep ' + fmtMoney(totalCost) + ' (net ' + fmtMoney(totalEarn - totalCost) + ')', totalEarn - totalCost >= 0 ? 'positive' : 'negative');
+
+  // Process effects
+  G.activeEffects = G.activeEffects.filter(e => {
+    e.daysLeft--;
+    return e.daysLeft > 0;
+  });
+
+  // Process loans
+  G.loans.forEach(loan => {
+    loan.daysLeft--;
+    if (loan.daysLeft <= 0) {
+      // Auto-repay or penalty
+      if (G.cash >= loan.repay) {
+        G.cash -= loan.repay;
+        addLog('⏰ Loan auto-repaid: ' + fmtMoney(loan.repay), 'neutral');
+      } else {
+        // Penalty: sell best agent or game over risk
+        addLog('⏰ Loan defaulted! Penalty applied.', 'negative');
+        G.sellTimer = 3;
+      }
+    }
+  });
+  G.loans = G.loans.filter(l => l.daysLeft > 0);
+
+  // Sell timer
+  if (G.sellTimer > 0) {
+    G.sellTimer--;
+    if (G.sellTimer <= 0 && G.agents.length > 0) {
+      // Force sell cheapest agent
+      const cheapest = G.agents.reduce((min, a) => agentEarnings(a) < agentEarnings(min) ? a : min, G.agents[0]);
+      G.agents = G.agents.filter(a => a.id !== cheapest.id);
+      addLog('💀 Forced to sell ' + cheapest.name + ' due to debt!', 'negative');
+      G.sellTimer = -1;
+    }
+  }
+
+  G.day++;
+
+  // Check win
+  if (G.agents.length >= 5 && G.cash >= 1000 * G.difficulty && !G.won) {
+    G.won = true;
+    showVictory();
+  }
+
+  // Check lose
+  if (G.agents.length === 0 && G.cash < 0) {
+    G.gameOver = true;
+    addLog('💀 GAME OVER — No agents and negative cash!', 'negative');
+  }
+
+  // Level up notification
+  const newLvl = getLevel();
+  const prevLevel = getLevel();
+  if (newLvl > prevLevel) {
+    addLog('⭐ Level up! Now Level ' + newLvl, 'positive');
+  }
+
+  render();
+  saveGame();
+}
+
+function showVictory() {
+  const v = document.getElementById('victoryOverlay');
+  document.getElementById('victoryText').innerHTML =
+    `You've built an empire!<br>Day ${G.day} | Agents: ${G.agents.length} | Cash: ${fmtMoney(G.cash)}<br>Difficulty: ${G.difficulty}x`;
+  v.classList.add('show');
+}
+
+function continueGame() {
+  document.getElementById('victoryOverlay').classList.remove('show');
+  G.won = false;
+  G.difficulty *= 2;
+  G.totalEarned = 0; // reset for new level thresholds
+  addLog('🎯 Continued! Difficulty now ' + G.difficulty + 'x — all costs and earnings doubled!', 'positive');
+  render();
+  saveGame();
+}
+
+// ===================== RENDER =====================
+function render() {
+  const lvl = getLevel();
+  G.sellTimer = G.sellTimer; // keep
+
+  document.getElementById('cash').textContent = Math.round(G.cash);
+  document.getElementById('day').textContent = G.day;
+  document.getElementById('level').textContent = lvl;
+  document.getElementById('totalEarned').textContent = Math.round(G.totalEarned);
+
+  // Cash color
+  const cashEl = document.querySelector('.stats .cash');
+  if (G.cash < 0) cashEl.style.color = 'var(--danger)';
+  else if (G.cash < 50) cashEl.style.color = 'var(--warning)';
+  else cashEl.style.color = 'var(--primary)';
+
+  // Sell warning
+  const sw = document.getElementById('sellWarning');
+  if (G.sellTimer > 0) {
+    sw.style.display = 'block';
+    document.getElementById('sellTimer').textContent = G.sellTimer;
+  } else {
+    sw.style.display = 'none';
+  }
+
+  // Action buttons
+  document.getElementById('borrow20').style.display = lvl >= 2 ? '' : 'none';
+  document.getElementById('borrow50').style.display = lvl >= 2 ? '' : 'none';
+  document.getElementById('borrow100').style.display = lvl >= 2 ? '' : 'none';
+  document.getElementById('hireBtn').style.display = lvl >= 3 ? '' : 'none';
+  document.getElementById('repayAllBtn').style.display = G.loans.length > 0 ? '' : 'none';
+
+  // Agent cards
+  const grid = document.getElementById('agentGrid');
+  grid.innerHTML = '';
+  if (G.agents.length === 0) {
+    grid.innerHTML = '<div class="no-agents">No agents. Game over or start fresh.</div>';
+  }
+  G.agents.forEach((agent, idx) => {
+    const def = AGENT_DEFS[agent.type];
+    const earn = agentEarnings(agent);
+    const cost = agentCost(agent);
+    const card = document.createElement('div');
+    card.className = 'agent-card' + (agent.status === 'cooldown' ? ' on-cooldown' : '') + (agent.status === 'resting' ? ' resting' : '');
+
+    const statusClass = agent.status;
+    const statusLabel = agent.status === 'cooldown' ? 'Cooldown (' + agent.cooldownDaysLeft + 'd)' :
+                        agent.status === 'resting' ? 'Resting' : 'Active';
+    const workInfo = agent.status === 'active' ? `${agent.daysWorked}/${agent.cooldownMax} days worked` :
+                     agent.status === 'cooldown' ? `${agent.cooldownDaysLeft}d remaining` : 'Paused';
+
+    let btns = '';
+    if (agent.status === 'active') {
+      btns += `<button class="btn-rest" onclick="restAgent(${idx})">⏸ Rest</button>`;
+    } else if (agent.status === 'resting') {
+      btns += `<button class="btn-wake" onclick="wakeAgent(${idx})">▶ Wake</button>`;
+    } else if (agent.status === 'cooldown') {
+      btns += `<button disabled style="opacity:.3;cursor:not-allowed">⏳ Cooldown</button>`;
+    }
+    if (lvl >= 4) {
+      btns += `<button class="btn-upgrade" onclick="openUpgrade(${idx})">⬆ Upgrade</button>`;
+    }
+    if (agent.type !== 'junior' || G.agents.length > 1) {
+      btns += `<button class="btn-sell" onclick="sellAgent(${idx})">🏷 Sell</button>`;
+    }
+
+    card.innerHTML = `
+      <div class="agent-name">${def.emoji} ${agent.name} ${agent.level > 1 ? '(Lv.' + agent.level + ')' : ''}</div>
+      <div class="agent-type">${def.name} — ${def.desc}</div>
+      <div class="agent-status ${statusClass}">${statusLabel}</div>
+      <div class="agent-stats">
+        💰 Earns: <strong>${fmtMoney(earn)}</strong>/day &nbsp;|&nbsp; 🔧 Cost: <strong>${fmtMoney(cost)}</strong>/day<br>
+        ⏱️ ${workInfo}
+      </div>
+      <div class="agent-btns">${btns}</div>
+    `;
+    grid.appendChild(card);
+  });
+
+  // Active effects display
+  if (G.activeEffects.length > 0) {
+    const effDiv = document.createElement('div');
+    effDiv.style.cssText = 'margin-top:8px;font-size:.8em;color:var(--warning)';
+    effDiv.innerHTML = '⚡ Active Effects: ' + G.activeEffects.map(e => {
+      const labels = { crash:'Market Crash (-50%)', bull:'Bull Run (+100%)', regulation:'Regulation (+$2/day)', partnership:'Partnership (+50%)' };
+      return (labels[e.type] || e.type) + ' (' + e.daysLeft + 'd)';
+    }).join(' | ');
+    grid.appendChild(effDiv);
+  }
+
+  // Cash animation
+  const cashCard = document.querySelector('.stats .cash');
+  cashCard.style.transform = 'scale(1.15)';
+  setTimeout(() => { cashCard.style.transform = 'scale(1)'; }, 150);
+
+  // Save
+  saveGame();
+}
+
+// ===================== AGENT ACTIONS =====================
+function restAgent(idx) {
+  const agent = G.agents[idx];
+  if (!agent || agent.status !== 'active') return;
+  agent.status = 'resting';
+  agent.daysWorked = 0;
+  addLog(AGENT_DEFS[agent.type].emoji + ' ' + agent.name + ' put on rest.', 'neutral');
+  render();
+  saveGame();
+}
+
+function wakeAgent(idx) {
+  const agent = G.agents[idx];
+  if (!agent || agent.status !== 'resting') return;
+  agent.status = 'active';
+  agent.daysWorked = 0;
+  addLog(AGENT_DEFS[agent.type].emoji + ' ' + agent.name + ' is back to work!', 'positive');
+  render();
+  saveGame();
+}
+
+function sellAgent(idx) {
+  const agent = G.agents[idx];
+  if (!agent) return;
+  const def = AGENT_DEFS[agent.type];
+  const sellPrice = Math.round(def.hireCost * 0.5 * G.difficulty) || 5;
+  G.cash += sellPrice;
+  G.agents.splice(idx, 1);
+  G.sellTimer = -1;
+  addLog('🏷 Sold ' + def.emoji + ' ' + agent.name + ' for ' + fmtMoney(sellPrice), 'neutral');
+  if (G.agents.length === 0 && G.cash < 0) {
+    G.gameOver = true;
+    addLog('💀 GAME OVER — No agents left!', 'negative');
+  }
+  render();
+  saveGame();
+}
+
+// ===================== INIT =====================
+function init() {
+  if (!loadGame()) {
+    G = defaultState();
+    addLog('Welcome to Agent Manager Tycoon! Start by advancing days.', 'positive');
+    addLog('You have 1 Junior Bot earning $10/day (cost: $5/day).', 'info');
+  }
+  render();
+}
+
+init();
+</script>
+</body>
+</html>
