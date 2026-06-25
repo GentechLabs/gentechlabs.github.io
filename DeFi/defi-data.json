@@ -67,7 +67,7 @@
     "efficiencyZone": "Outer",
     "recommendedAction": "Hold",
     "dcaType": "Micro-DCA",
-    "dcaDetails": "Micro DCA — price in range",
+    "dcaDetails": "Micro DCA \u2014 price in range",
     "rebalanceTrigger": "Price exits $6.01-$6.25 range",
     "compoundThreshold": 50,
     "cumulativeFees": 1.2338,
@@ -93,7 +93,7 @@
     "tiers": [
       {
         "tier": 1,
-        "icon": "🔭",
+        "icon": "\ud83d\udd2d",
         "label": "Scout",
         "target": 5,
         "unlocks": "Entry strategies (CURVE)",
@@ -101,7 +101,7 @@
       },
       {
         "tier": 2,
-        "icon": "⚔️",
+        "icon": "\u2694\ufe0f",
         "label": "Raider",
         "target": 20,
         "unlocks": "SPOT + BIDIRECTIONAL shapes",
@@ -109,7 +109,7 @@
       },
       {
         "tier": 3,
-        "icon": "👑",
+        "icon": "\ud83d\udc51",
         "label": "Warlord",
         "target": 50,
         "unlocks": "Multi-pool positions",
@@ -117,7 +117,7 @@
       },
       {
         "tier": 4,
-        "icon": "🏰",
+        "icon": "\ud83c\udff0",
         "label": "Sovereign",
         "target": 100,
         "unlocks": "Custom strategy creation + mentorship",
@@ -334,8 +334,8 @@
   },
   "walletBalances": {
     "avax": 0.09362538329075042,
-    "wavax": 6.06671055606e-7,
-    "usdc": 0.000011,
+    "wavax": 6.06671055606e-07,
+    "usdc": 1.1e-05,
     "liquidUsd": 0.57
   },
   "supportResistance": {
@@ -389,7 +389,7 @@
     "trend": "neutral",
     "suggestions": [
       {
-        "icon": "⚠️",
+        "icon": "\u26a0\ufe0f",
         "title": "Price Near Edge",
         "description": "Price is near the edge of your range (40% efficiency). Consider narrowing or recentering.",
         "priority": "medium",
@@ -439,5 +439,248 @@
       "usd": "45.80",
       "status": "In Range"
     }
-  ]
+  ],
+  "regime": {
+    "current": "sideways",
+    "previous": "sideways",
+    "changedAt": "2026-06-25T19:36:03.654553+00:00",
+    "signals": {
+      "price": 6.09172,
+      "ma20": 5.9698856,
+      "volume24h": 1180483.95,
+      "volatility": "low"
+    },
+    "strategy": {
+      "shape": "bid-ask",
+      "dcaAggressiveness": "moderate",
+      "rationale": "Price at 33% of range"
+    },
+    "recommended": "Stay BID-ASK \u2014 sideways regime"
+  },
+  "strategyComparison": {
+    "lpApr": 377.1,
+    "lpDailyFees": 0.483,
+    "stakingApr": 6.7,
+    "stakingDaily": 0.009,
+    "hodlReturn": -0.62,
+    "entryPrice": 6.13,
+    "currentPrice": 6.09172,
+    "outperforming": true,
+    "verdict": "LP 377.1% APR vs Staking 6.7% \u2014 outperforming"
+  },
+  "yieldSpectrum": {
+    "currentBand": {
+      "id": "bleeding",
+      "name": "Bleeding Edge",
+      "emoji": "\ud83d\udd35",
+      "color": "#3b82f6",
+      "description": "Near range boundary. IL still outpaces fees.",
+      "advice": "\ud83e\ude78 Micro-DCA only. Prepare to rebalance if price moves further.",
+      "position": 5
+    },
+    "bands": [
+      {
+        "id": "euphoria",
+        "name": "Euphoria",
+        "emoji": "\ud83d\udd34",
+        "color": "#e84142",
+        "gradient": "linear-gradient(135deg, #e84142, #ff3366)",
+        "efficiency_min": 90,
+        "efficiency_max": 100,
+        "apr_min": 1000,
+        "description": "Maximum concentration. APR is unsustainable.",
+        "advice": "\u26a0\ufe0f Time to take profits. Diversify into other pools or stablecoins.",
+        "rainbow_position": 1
+      },
+      {
+        "id": "peak_yield",
+        "name": "Peak Yield",
+        "emoji": "\ud83d\udfe0",
+        "color": "#f59e0b",
+        "gradient": "linear-gradient(135deg, #f59e0b, #f97316)",
+        "efficiency_min": 75,
+        "efficiency_max": 90,
+        "apr_min": 500,
+        "description": "Sweet spot. Fees significantly outpace impermanent loss.",
+        "advice": "\u2705 Hold strong. Compound rewards weekly. This is what we farm for.",
+        "rainbow_position": 2
+      },
+      {
+        "id": "harvest",
+        "name": "Harvest Mode",
+        "emoji": "\ud83d\udfe1",
+        "color": "#eab308",
+        "gradient": "linear-gradient(135deg, #eab308, #facc15)",
+        "efficiency_min": 60,
+        "efficiency_max": 75,
+        "apr_min": 200,
+        "description": "Healthy farming. Fees are outpacing IL consistently.",
+        "advice": "\ud83c\udf3e Keep farming. Consider increasing position size if conviction is high.",
+        "rainbow_position": 3
+      },
+      {
+        "id": "accumulation",
+        "name": "Accumulation",
+        "emoji": "\ud83d\udfe2",
+        "color": "#22c55e",
+        "gradient": "linear-gradient(135deg, #22c55e, #16a34a)",
+        "efficiency_min": 40,
+        "efficiency_max": 60,
+        "apr_min": 50,
+        "description": "Smart money is quietly positioning. Fees starting to offset IL.",
+        "advice": "\ud83e\udde0 DCA into position. Accumulate at these levels. Patience pays.",
+        "rainbow_position": 4
+      },
+      {
+        "id": "bleeding",
+        "name": "Bleeding Edge",
+        "emoji": "\ud83d\udd35",
+        "color": "#3b82f6",
+        "gradient": "linear-gradient(135deg, #3b82f6, #6366f1)",
+        "efficiency_min": 20,
+        "efficiency_max": 40,
+        "apr_min": 10,
+        "description": "Near range boundary. IL still outpaces fees.",
+        "advice": "\ud83e\ude78 Micro-DCA only. Prepare to rebalance if price moves further.",
+        "rainbow_position": 5
+      },
+      {
+        "id": "panic",
+        "name": "Panic Farm",
+        "emoji": "\ud83d\udfe3",
+        "color": "#a855f7",
+        "gradient": "linear-gradient(135deg, #a855f7, #7c3aed)",
+        "efficiency_min": 0,
+        "efficiency_max": 20,
+        "apr_min": 0,
+        "description": "Maximum fear. Everything is on fire. Historically: generational entry.",
+        "advice": "\ud83d\udd25 Contrarian zone. Open new positions or widen ranges. Be greedy when others are fearful.",
+        "rainbow_position": 6
+      }
+    ],
+    "position": {
+      "currentPrice": 6.09172,
+      "rangeLow": 6.0131,
+      "rangeHigh": 6.2521,
+      "rangeCenter": 6.1326,
+      "positionUsd": 46.75,
+      "entryPrice": 6.13
+    },
+    "metrics": {
+      "efficiency": 34.2,
+      "dailyFees": 0.483,
+      "weeklyFees": 3.381,
+      "monthlyFees": 14.49,
+      "annualizedApr": 377.1,
+      "volume24h": 1180483.95,
+      "tvl": 365924.79,
+      "priceChange24h": -0.5
+    },
+    "history": [
+      47.9,
+      17.0,
+      8.7,
+      13.8,
+      24.0,
+      39.3,
+      44.4,
+      44.4,
+      44.4,
+      34.2
+    ]
+  },
+  "narrativeRotation": {
+    "lastUpdated": "2026-06-23T19:42:53Z",
+    "btc": {
+      "price": 62258.93906502035,
+      "change_7d": -5.00825225
+    },
+    "narratives": [
+      {
+        "rank": 1,
+        "name": "DeFi Blue Chips",
+        "emoji": "\ud83c\udfe6",
+        "thesis": "Dex, lending, oracles, stablecoins",
+        "score": -10.4,
+        "zone": "\ud83d\udd34 Cold",
+        "coins": "UNI \u21939%, AAVE \u21935%, LINK \u21939%, MKR \u21933%",
+        "sentiment": "\ud83d\udfe1 Mild Bearish",
+        "rainbow_hint": "Accumulation zone \u2014 DCA opportunity",
+        "sentiment_score": -4.7,
+        "vol_cap_ratio": 7.2
+      },
+      {
+        "rank": 2,
+        "name": "Gaming / Metaverse",
+        "emoji": "\ud83c\udfae",
+        "thesis": "On-chain gaming, virtual worlds",
+        "score": -12.7,
+        "zone": "\ud83d\udd34 Cold",
+        "coins": "IMX \u21936%, GALA \u219311%, PYTH \u219310%",
+        "sentiment": "\ud83d\udd34 Bearish",
+        "rainbow_hint": "Bleeding Edge / Panic Farm \u2014 generational entry",
+        "sentiment_score": -5.7,
+        "vol_cap_ratio": 6.6
+      },
+      {
+        "rank": 3,
+        "name": "Meme / Community",
+        "emoji": "\ud83d\udc38",
+        "thesis": "Community-driven, narrative plays",
+        "score": -14.7,
+        "zone": "\ud83d\udd34 Cold",
+        "coins": "DOGE \u219310%, PEPE \u21939%, WIF \u21937%, BONK \u219310%",
+        "sentiment": "\ud83d\udd34 Bearish",
+        "rainbow_hint": "Bleeding Edge / Panic Farm \u2014 generational entry",
+        "sentiment_score": -6.2,
+        "vol_cap_ratio": 6.5
+      },
+      {
+        "rank": 4,
+        "name": "L1 / L2",
+        "emoji": "\u26d3\ufe0f",
+        "thesis": "Base layers and scaling",
+        "score": -15.0,
+        "zone": "\ud83d\udd34 Cold",
+        "coins": "SOL \u21937%, AVAX \u21938%, NEAR \u219314%, ARB \u21938%",
+        "sentiment": "\ud83d\udd34 Bearish",
+        "rainbow_hint": "Bleeding Edge / Panic Farm \u2014 generational entry",
+        "sentiment_score": -5.9,
+        "vol_cap_ratio": 6.1
+      },
+      {
+        "rank": 5,
+        "name": "AI & Data",
+        "emoji": "\ud83e\udd16",
+        "thesis": "AI compute, data markets, decentralized inference",
+        "score": -15.0,
+        "zone": "\ud83d\udd34 Cold",
+        "coins": "FET \u219317%, RENDER \u219310%, TAO \u219314%, AKT \u219310%",
+        "sentiment": "\ud83d\udd34 Bearish",
+        "rainbow_hint": "Bleeding Edge / Panic Farm \u2014 generational entry",
+        "sentiment_score": -10.3,
+        "vol_cap_ratio": 34.5
+      },
+      {
+        "rank": 6,
+        "name": "RWA (Real World Assets)",
+        "emoji": "\ud83c\udfe0",
+        "thesis": "Tokenized treasuries, real estate, credit",
+        "score": -18.1,
+        "zone": "\ud83d\udd34 Cold",
+        "coins": "ONDO \u219316%, PLU \u21932%, CPOOL \u219318%",
+        "sentiment": "\ud83d\udd34 Bearish",
+        "rainbow_hint": "Bleeding Edge / Panic Farm \u2014 generational entry",
+        "sentiment_score": -7.1,
+        "vol_cap_ratio": 5.2
+      }
+    ],
+    "topNarratives": [
+      "DeFi Blue Chips",
+      "Gaming / Metaverse",
+      "Meme / Community",
+      "L1 / L2",
+      "AI & Data"
+    ]
+  }
 }
