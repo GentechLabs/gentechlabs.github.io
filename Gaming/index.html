@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GenTech Gaming Hub</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0a0a0a; color: #e0e0e0; min-height: 100vh; display: flex; align-items: center; justify-content: center; }
+        .container { max-width: 600px; width: 100%; padding: 40px 20px; }
+        h1 { font-size: 2rem; margin-bottom: 8px; }
+        .subtitle { color: #888; margin-bottom: 40px; }
+        .links { display: flex; flex-direction: column; gap: 16px; }
+        a { display: block; padding: 20px; background: #1a1a1a; border: 1px solid #333; border-radius: 12px; color: #fff; text-decoration: none; transition: all 0.2s; }
+        a:hover { background: #222; border-color: #00d4ff; }
+        .emoji { font-size: 1.5rem; margin-right: 12px; }
+        .desc { color: #888; font-size: 0.9rem; margin-top: 4px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎮 GenTech Gaming Hub</h1>
+        <p class="subtitle">Build tracking, dashboards, and meta analysis</p>
+        <div class="links">
+            <a href="poe2-dashboard.html">
+                <span class="emoji">📊</span> POE2 Dashboard
+                <div class="desc">Live build stats and comparison</div>
+            </a>
+            <a href="poe2-jordan.html">
+                <span class="emoji">⚡</span> Jordan's Monk Build
+                <div class="desc">Lightning Invoker — Tempest Flurry</div>
+            </a>
+            <a href="passive-planner.html">
+                <span class="emoji">🌳</span> Passive Tree Planner
+                <div class="desc">Visual passive tree optimizer</div>
+            </a>
+            <a href="poe2-jordan-monk.json">
+                <span class="emoji">📄</span> Build Data (JSON)
+                <div class="desc">Raw build data for API access</div>
+            </a>
+        </div>
+    </div>
+</body>
+</html>
