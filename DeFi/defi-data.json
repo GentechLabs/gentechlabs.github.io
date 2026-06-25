@@ -1,31 +1,31 @@
 {
-  "lastUpdated": "2026-06-25T06:41:16.039Z",
+  "lastUpdated": "2026-06-25T06:50:15.894Z",
   "pool": "AVAX/USDC",
   "chain": "Avalanche",
   "dex": "LFJ",
-  "currentPrice": 6.56,
-  "priceChange24h": 2.33,
-  "volume24h": 1068540.45,
-  "liquidity": 386776.39,
+  "currentPrice": 6.57,
+  "priceChange24h": 2.53,
+  "volume24h": 1071515,
+  "liquidity": 387066.68,
   "lpPosition": {
     "pair": "AVAX/USDC",
     "feeTier": "10bps",
     "shape": "bid-ask",
     "displayShape": "Bid-Ask",
-    "currentPrice": 6.56,
+    "currentPrice": 6.57,
     "rangeMin": 6.3086,
     "rangeMax": 6.5006,
     "avaxAmount": 0,
     "usdcAmount": 48.474126,
     "totalValue": 48.47,
     "totalValueUSD": 48.47,
-    "activeBin": 8362845,
+    "activeBin": 8362846,
     "binStep": 10,
     "totalBins": 31
   },
   "fees": {
     "dailyFees": 0.429,
-    "cumulativeFees": 0.9898,
+    "cumulativeFees": 0.9925,
     "feeCurrency": "USD"
   },
   "efficiency": 100,
@@ -36,7 +36,7 @@
     "efficiencyZone": "Center",
     "shape": "Bid-Ask",
     "rangeStatus": "Out of Range",
-    "currentPrice": 6.56,
+    "currentPrice": 6.57,
     "rangeMin": 6.3086,
     "rangeMax": 6.5006,
     "milestoneNext": "Scout",
@@ -44,19 +44,19 @@
     "milestoneProgress": 9
   },
   "marketIntel": {
-    "avaxPrice": 6.56,
-    "change24h": 2.33,
-    "volume24h": 1068540.45,
-    "tvl": 386776.39,
+    "avaxPrice": 6.57,
+    "change24h": 2.53,
+    "volume24h": 1071515,
+    "tvl": 387066.68,
     "trend": "bullish",
     "news": [
       {
-        "headline": "AVAX up 2.33% in 24h",
+        "headline": "AVAX up 2.53% in 24h",
         "impact": "bullish",
         "relevance": "high"
       },
       {
-        "headline": "LFJ AVAX/USDC pool volume: $1068.5K",
+        "headline": "LFJ AVAX/USDC pool volume: $1071.5K",
         "impact": "neutral",
         "relevance": "medium"
       }
@@ -70,7 +70,7 @@
     "dcaDetails": "Full DCA — rebalance needed",
     "rebalanceTrigger": "Price exits $6.31-$6.50 range",
     "compoundThreshold": 50,
-    "cumulativeFees": 0.9898,
+    "cumulativeFees": 0.9925,
     "nextCompound": "$49.01 away from first compound",
     "riskLevel": "Critical",
     "riskNote": "Out of range — rebalance needed",
@@ -84,7 +84,7 @@
   },
   "feeMilestones": {
     "currentDailyFees": 0.429,
-    "cumulativeFees": 0.9898,
+    "cumulativeFees": 0.9925,
     "positionUsd": 48.47,
     "daysActive": 1,
     "nextMilestone": "Scout",
@@ -126,7 +126,7 @@
     ]
   },
   "curveData": {
-    "currentPrice": 6.56,
+    "currentPrice": 6.57,
     "rangeMin": 6.3086,
     "rangeMax": 6.5006,
     "bins": [
@@ -294,7 +294,7 @@
     "liquidUsd": 0.64
   },
   "supportResistance": {
-    "currentPrice": 6.56,
+    "currentPrice": 6.57,
     "levels": [
       {
         "price": 6.5,
@@ -327,7 +327,7 @@
     ],
     "shapeRecommendation": {
       "shape": "Bid-Ask",
-      "reason": "Price at $6.56, outside $6.31-$6.50 range.",
+      "reason": "Price at $6.57, outside $6.31-$6.50 range.",
       "optimalRange": [
         6.31,
         6.5
@@ -337,16 +337,16 @@
   },
   "rebalanceSuggestions": {
     "efficiency": 100,
-    "price": 6.56,
+    "price": 6.57,
     "rangeMin": 6.3086,
     "rangeMax": 6.5006,
-    "volatility": 2.33,
+    "volatility": 2.53,
     "trend": "bullish",
     "suggestions": [
       {
         "icon": "🚨",
         "title": "Price Out of Range",
-        "description": "AVAX at $6.5600 is outside your $6.3086-$6.5006 range. You are not earning fees.",
+        "description": "AVAX at $6.5700 is outside your $6.3086-$6.5006 range. You are not earning fees.",
         "priority": "high",
         "impact": "Immediate",
         "action": "Rebalance on LFJ"
