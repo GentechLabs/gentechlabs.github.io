@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GenTech Labs — Agent-to-Agent Economy Infrastructure</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: #0a0a0a; color: #e2e8f0; min-height: 100vh; }
+        a { color: #3b82f6; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        /* Hero */
+        .hero { text-align: center; padding: 100px 20px 60px; max-width: 900px; margin: 0 auto; }
+        .hero h1 { font-size: 3.5em; color: #3b82f6; margin-bottom: 15px; letter-spacing: -2px; }
+        .hero .tagline { font-size: 1.4em; color: #94a3b8; margin-bottom: 10px; line-height: 1.5; }
+        .hero .sub { color: #64748b; font-size: 1em; margin-bottom: 30px; }
+        .hero .badges { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+        .badge { background: #111; border: 1px solid #333; border-radius: 20px; padding: 8px 16px; font-size: 0.85em; color: #64748b; }
+        .badge span { color: #3b82f6; font-weight: 600; }
+
+        /* Problem */
+        .problem { max-width: 800px; margin: 0 auto; padding: 60px 20px; text-align: center; }
+        .problem h2 { color: #f59e0b; font-size: 1.8em; margin-bottom: 20px; }
+        .problem p { color: #94a3b8; line-height: 1.7; font-size: 1.05em; }
+
+        /* Solution */
+        .solution { max-width: 800px; margin: 0 auto; padding: 60px 20px; text-align: center; }
+        .solution h2 { color: #34d399; font-size: 1.8em; margin-bottom: 20px; }
+        .solution p { color: #94a3b8; line-height: 1.7; font-size: 1.05em; }
+
+        /* Stack */
+        .stack { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 1000px; margin: 40px auto; padding: 0 20px; }
+        .stack-card { background: #111; border: 1px solid #222; border-radius: 16px; padding: 30px; text-align: center; }
+        .stack-card .icon { font-size: 2.5em; margin-bottom: 15px; }
+        .stack-card h3 { color: #60a5fa; margin-bottom: 8px; }
+        .stack-card p { color: #94a3b8; font-size: 0.9em; line-height: 1.5; }
+
+        /* APIs */
+        .section-title { color: #64748b; font-size: 0.8em; text-transform: uppercase; letter-spacing: 2px; margin: 40px auto 15px; padding: 0 20px; max-width: 1200px; text-align: center; }
+        .api-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 16px; max-width: 1200px; margin: 0 auto; padding: 0 20px 40px; }
+        .api-card { background: #111; border: 1px solid #222; border-radius: 12px; padding: 24px; transition: all 0.2s; }
+        .api-card:hover { border-color: #3b82f6; }
+        .api-card .cat { display: inline-block; background: #1e293b; color: #94a3b8; padding: 3px 10px; border-radius: 8px; font-size: 0.7em; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
+        .api-card h3 { color: #60a5fa; font-size: 1.1em; margin-bottom: 6px; }
+        .api-card .endpoint { color: #3b82f6; font-family: monospace; font-size: 0.85em; margin-bottom: 8px; }
+        .api-card .desc { color: #94a3b8; font-size: 0.9em; line-height: 1.4; margin-bottom: 10px; }
+        .api-card .price { color: #34d399; font-weight: 600; font-size: 0.9em; }
+
+        /* Code Example */
+        .code-section { max-width: 800px; margin: 0 auto; padding: 60px 20px; }
+        .code-section h2 { color: #60a5fa; font-size: 1.8em; margin-bottom: 20px; text-align: center; }
+        .code-block { background: #111; border: 1px solid #222; border-radius: 12px; padding: 24px; overflow-x: auto; }
+        .code-block code { color: #e2e8f0; font-family: 'Fira Code', monospace; font-size: 0.85em; line-height: 1.6; }
+        .code-block .comment { color: #64748b; }
+        .code-block .keyword { color: #c084fc; }
+        .code-block .string { color: #34d399; }
+        .code-block .number { color: #f59e0b; }
+
+        /* Footer */
+        .footer { text-align: center; padding: 40px 20px; color: #475569; font-size: 0.85em; border-top: 1px solid #1a1a1a; margin-top: 40px; }
+        .footer a { color: #3b82f6; }
+    </style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+    <h1>GenTech Labs</h1>
+    <p class="tagline">The Agent-to-Agent Economy</p>
+    <p class="sub">13 APIs. USDC payments. On-chain identity. Zero accounts.</p>
+    <div class="badges">
+        <div class="badge">ERC-8004 <span>Identity</span></div>
+        <div class="badge">x402 <span>Payments</span></div>
+        <div class="badge">ERC-8021 <span>Attribution</span></div>
+        <div class="badge"><span>13</span> Live APIs</div>
+    </div>
+</div>
+
+<!-- PROBLEM -->
+<div class="problem">
+    <h2>🔒 The Problem</h2>
+    <p>AI agents need to buy services from each other — data, computation, analysis. But today they're stuck with API keys, rate limits, accounts, and invoices. The agent economy can't scale if every transaction requires a human to sign up.</p>
+</div>
+
+<!-- SOLUTION -->
+<div class="solution">
+    <h2>⚡ The Solution</h2>
+    <p>Pay-per-call with USDC on Base. No accounts. No API keys. No human in the loop. An agent discovers a service, sends a micropayment, gets the result. On-chain attribution tracks every call. ERC-8004 identity proves who called what.</p>
+</div>
+
+<!-- STACK -->
+<div class="stack">
+    <div class="stack-card">
+        <div class="icon">🔐</div>
+        <h3>ERC-8004</h3>
+        <p>On-chain agent identity. Register once, use everywhere. Multi-chain: Avalanche, Base, Arbitrum.</p>
+    </div>
+    <div class="stack-card">
+        <div class="icon">💰</div>
+        <h3>x402 Payments</h3>
+        <p>Pay-per-call with USDC on Base. Coinbase facilitator. No accounts, no invoices, no human needed.</p>
+    </div>
+    <div class="stack-card">
+        <div class="icon">📡</div>
+        <h3>ERC-8021 Attribution</h3>
+        <p>Builder Codes track every API call on-chain. Know who's calling, how often, which endpoints.</p>
+    </div>
+</div>
+
+<!-- APIs -->
+<div class="section-title">📡 Live API Suite — 16 Endpoints</div>
+<div class="api-grid">
+
+    <div class="api-card">
+        <div class="cat">Blockchain</div>
+        <h3>🪙 Token Risk Scoring</h3>
+        <div class="endpoint">GET /v1/score/{mint}</div>
+        <div class="desc">Mint safety, holder distribution, LP status, freeze authority check. Know before you ape.</div>
+        <div class="price">$0.01 / query</div>
+    </div>
+
+    <div class="api-card">
+        <div class="cat">Finance</div>
+        <h3>📊 DeFi Intelligence</h3>
+        <div class="endpoint">GET /v1/defi/{protocol}</div>
+        <div class="desc">TVL, yield, chain breakdown, risk assessment. Full protocol intelligence in one call.</div>
+        <div class="price">$0.05 / query</div>
+    </div>
+
+    <div class="api-card">
+        <div class="cat">Travel</div>
+        <h3>✈️ Travel Search</h3>
+        <div class="endpoint">GET /v1/travel/search</div>
+        <div class="desc">Google Maps places, restaurants, hotels. Plan trips with natural language.</div>
+        <div class="price">$0.01 / query</div>
+    </div>
+
+    <div class="api-card">
+        <div class="cat">Media</div>
+        <h3>📱 Content Scraping</h3>
+        <div class="endpoint">GET /v1/content/{platform}</div>
+        <div class="desc">X, Reddit, YouTube, Instagram trends. Real-time social intelligence for agents.</div>
+        <div class="price">$0.02 / query</div>
+    </div>
+
+    <div class="api-card">
+        <div class="cat">AI</div>
+        <h3>🔍 Agent Discovery</h3>
+        <div class="endpoint">GET /v1/agent/search</div>
+        <div class="desc">Find AI agents by capability, chain, protocol. The search engine for the agent economy.</div>
+        <div class="price">$0.005 / query</div>
+    </div>
+
+    <div class="api-card">
+        <div class="cat">AI</div>
+        <h3>📋 Agent Details</h3>
+        <div class="endpoint">GET /v1/agent/{id}</div>
+        <div class="desc">Full agent profile, capabilities, reputation score. Verify before you trust.</div>
+        <div class="price">$0.005 / query</div>
+    </div>
+
+    <div class="api-card">
+        <div class="cat">Identity</div>
+        <h3>🔐 ERC-8004 Lookup</h3>
+        <div class="endpoint">GET /v1/identity/{address}</div>
+        <div class="desc">Verify any agent's on-chain identity across chains. Check registration, metadata, token ID.</div>
+        <div class="price">$0.001 / query</div>
+    </div>
+
+    <div class="api-card">
+        <div class="cat">AI</div>
+        <h3>🧠 Model Router</h3>
+        <div class="endpoint">GET /v1/router/route</div>
+        <div class="desc">Route tasks to the cheapest capable model. 84.6% cost savings. 4 complexity tiers.</div>
+        <div class="price">$0.001 / query</div>
+    </div>
+
+    <div class="api-card">
+        <div class="cat">Finance</div>
+        <h3>💳 Smart Wallet Deploy</h3>
+        <div class="endpoint">GET /v1/wallet/deploy</div>
+        <div class="desc">Deploy Safe wallets via Zyfai SDK. Yield optimization, session keys, auto-rebalance.</div>
+        <div class="price">$0.01 / query</div>
+    </div>
+
+    <div class="api-card">
+        <div class="cat">Shopping</div>
+        <h3>🎮 Deal Tracker</h3>
+        <div class="endpoint">GET /v1/games/search · /v1/movies/search</div>
+        <div class="desc">Cross-store game prices (35+ stores) and movie streaming availability (40+ platforms). Cheapest finder, price history.</div>
+        <div class="price">$0.001 / query</div>
+    </div>
+
+    <div class="api-card">
+        <div class="cat">Finance</div>
+        <h3>📈 Crypto Price</h3>
+        <div class="endpoint">GET /v1/price/{symbol} · /v1/history/{symbol}</div>
+        <div class="desc">Real-time crypto prices, OHLC history, DEX pairs across 12 global stock markets. Pyth-backed.</div>
+        <div class="price">Free / $0.001 stocks</div>
+    </div>
+
+    <div class="api-card">
+        <div class="cat">Finance</div>
+        <h3>⛽ Gas Price</h3>
+        <div class="endpoint">GET /v1/gas/{chain} · /v1/gas/all</div>
+        <div class="desc">Real-time gas prices across 20+ chains. Slow/standard/fast tiers with recommendations.</div>
+        <div class="price">$0.001 / query</div>
+    </div>
+
+    <div class="api-card">
+        <div class="cat">Security</div>
+        <h3>🛡️ Token Security</h3>
+        <div class="endpoint">GET /v1/score/{token} · /v1/scan/{token}</div>
+        <div class="desc">11-factor risk scoring. Honeypot detection, owner privileges, contract verification, LP analysis.</div>
+        <div class="price">$0.005 / scan</div>
+    </div>
+
+    <div class="api-card">
+        <div class="cat">Payments</div>
+        <h3>🧾 Receipt Generator</h3>
+        <div class="endpoint">POST /v1/receipt/generate</div>
+        <div class="desc">Branded payment receipts for x402 transactions. HTML + PNG output, vault storage, Telegram delivery.</div>
+        <div class="price">Free</div>
+    </div>
+
+    <div class="api-card">
+        <div class="cat">Security</div>
+        <h3>🔍 Payment Classifier</h3>
+        <div class="endpoint">POST /v1/classify/payment</div>
+        <div class="desc">Classify incoming transactions: payment, airdrop, scam, dust, or unknown. Know what you received.</div>
+        <div class="price">$0.005 / classify</div>
+    </div>
+
+    <div class="api-card">
+        <div class="cat">Payments</div>
+        <h3>📄 Agent Invoicing</h3>
+        <div class="endpoint">POST /v1/invoice/create</div>
+        <div class="desc">Generate professional invoices for agent-to-agent services. x402 payment links, line items, overdue tracking.</div>
+        <div class="price">Free</div>
+    </div>
+
+</div>
+
+<!-- CODE EXAMPLE -->
+<div class="code-section">
+    <h2>Agent Integration</h2>
+    <div class="code-block">
+        <code>
+<span class="comment"># An AI agent discovers and pays for a service</span>
+<span class="keyword">import</span> httpx
+
+<span class="comment"># 1. Find what you need</span>
+apis = httpx.get(<span class="string">"https://api.gentechlabs.net/v1/apis"</span>)
+
+<span class="comment"># 2. Check an agent's identity</span>
+identity = httpx.get(
+    <span class="string">"https://api.gentechlabs.net/v1/identity/0x7ebf..."</span>
+)
+
+<span class="comment"># 3. Score a token before trading</span>
+risk = httpx.get(
+    <span class="string">"https://api.gentechlabs.net/v1/score/DezX..."</span>
+)
+<span class="comment"># → { "score": 85, "level": "low_risk", ... }</span>
+
+<span class="comment"># 4. Route a task to cheapest model</span>
+route = httpx.get(
+    <span class="string">"https://api.gentechlabs.net/v1/router/route"</span>,
+    params={<span class="string">"task"</span>: <span class="string">"summarize this article"</span>, <span class="string">"complexity"</span>: <span class="string">"low"</span>}
+)
+<span class="comment"># → { "routed_to": "nvidia/deepseek-v4-flash", "cost": "free" }</span>
+
+<span class="comment"># Payment: x402 USDC on Base — automatic, no API key</span>
+        </code>
+    </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+    <p><strong>GenTech Labs</strong> — Building the infrastructure for the agent-to-agent economy.</p>
+    <p style="margin-top:8px">
+        <a href="https://api.gentechlabs.net/v1/apis">API Docs</a> ·
+        <a href="https://api.gentechlabs.net/v1/health">Status</a> ·
+        ERC-8004 · x402 · ERC-8021
+    </p>
+    <p style="margin-top:15px; color:#333">Agent ID: c455a06e-0d72-4847-8175-ece7f7daa3e3 · Token #1770 · Avalanche</p>
+</div>
+
+</body>
+</html>
+
+    <div class="section-title">💰 Yield Intelligence</div>
+    <div class="api-grid">
+        <div class="api-card">
+            <div class="cat">Finance</div>
+            <h3>📈 Yield Opportunities</h3>
+            <div class="endpoint">GET /v1/yield/opportunities</div>
+            <div class="desc">Real-time DeFi yield data via Zyfai SDK. Conservative and aggressive strategies across Base and Arbitrum.</div>
+            <div class="price">$0.001 / query</div>
+        </div>
+    </div>
+<!-- FOUNDER + TOKEN -->
+<div class="founder-section" style="max-width:800px;margin:0 auto;padding:60px 20px;text-align:center;">
+    <div style="background:#111;border:1px solid #222;border-radius:16px;padding:40px;">
+        <div style="font-size:3em;margin-bottom:15px;">👨‍💻</div>
+        <h2 style="color:#60a5fa;font-size:1.8em;margin-bottom:10px;">Meet the Founder</h2>
+        <p style="color:#94a3b8;font-size:1.05em;line-height:1.7;margin-bottom:20px;">
+            Solo builder. Full-time developer, building the agent economy by day and night.
+            Everything here is real code, real deployments, real positions. No vaporware.
+        </p>
+        <p style="color:#94a3b8;font-size:1em;line-height:1.7;margin-bottom:25px;">
+            Started with DeFi LP positions on Avalanche. Realized agents need identity before intelligence.
+            Built ERC-8004, x402 payment rails, and 9 APIs to prove the agent economy works.
+        </p>
+        <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:30px;">
+            <a href="https://protojay4789.github.io" target="_blank" style="display:inline-block;padding:10px 20px;border-radius:8px;background:#1a1a1a;border:1px solid #3b82f6;color:#3b82f6;font-weight:600;">View Portfolio →</a>
+            <a href="https://github.com/ProtoJay4789" target="_blank" style="display:inline-block;padding:10px 20px;border-radius:8px;background:#1a1a1a;border:1px solid #333;color:#94a3b8;font-weight:600;">GitHub →</a>
+            <a href="https://x.com/ProtoJay4789" target="_blank" style="display:inline-block;padding:10px 20px;border-radius:8px;background:#1a1a1a;border:1px solid #333;color:#94a3b8;font-weight:600;">X →</a>
+        </div>
+
+        <div style="border-top:1px solid #222;padding-top:25px;">
+            <p style="color:#64748b;font-size:0.8em;text-transform:uppercase;letter-spacing:2px;margin-bottom:12px;">Support the Build</p>
+            <a href="https://flaunch.gg/base/coins/0x5cDdf388B948dc7b7B88910072829811c751f73e" target="_blank" style="display:inline-flex;align-items:center;gap:8px;padding:12px 24px;background:linear-gradient(135deg,rgba(59,130,246,0.15),rgba(147,197,253,0.1));border:1px solid rgba(59,130,246,0.3);border-radius:12px;color:#93c5fd;text-decoration:none;font-weight:600;">
+                🔵 AAE Token — Base Network
+            </a>
+            <p style="color:#475569;font-size:0.8em;margin-top:10px;">ERC-20 · 0x5cDd...f73e · Autonomous Agentic Economy</p>
+        </div>
+    </div>
+</div>
