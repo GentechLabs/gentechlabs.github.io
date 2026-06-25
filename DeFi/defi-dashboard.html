@@ -817,6 +817,9 @@
             if (section.customRender === 'strategyComparison') {
                 return this.renderStrategyComparison(section);
             }
+            if (section.customRender === 'yieldSpectrum') {
+                return this.renderYieldSpectrum(section);
+            }
             return originalRenderCustom.call(this, section);
         };
 
@@ -1050,6 +1053,105 @@
                     <!-- Verdict -->
                     <div style="background:rgba(232,65,66,0.06); border:1px solid rgba(232,65,66,0.15); border-radius:8px; padding:12px; text-align:center;">
                         <div style="font-size:0.85em; color:var(--gold); font-weight:600;">${verdict}</div>
+                    </div>
+                </div>
+            `;
+        };
+
+        // Yield Spectrum Renderer — Rainbow Zone for DeFi Dashboard
+        DashboardEngine.prototype.renderYieldSpectrum = function(section) {
+            const data = this.resolveDataSource(section.dataSource);
+            if (!data) return '<p class=\"empty-state\">No yield spectrum data</p>';
+
+            const { currentBand, bands, position, metrics, history } = data;
+            if (!bands || !bands.length) return '<p class=\"empty-state\">No band data</p>';
+
+            // Build spectrum bars
+            const bandHtml = bands.map(b => {
+                const isCurrent = currentBand && b.id === currentBand.id;
+                const effRange = `${b.efficiency_min}-${b.efficiency_max}%`;
+                const barStyle = isCurrent
+                    ? `background:${b.color}; opacity:1; border:2px solid #fff;`
+                    : `background:${b.color}; opacity:0.35;`;
+                return `
+                    <div style="display:flex; align-items:center; gap:12px; margin-bottom:8px;">
+                        <div style="width:36px; text-align:center; font-size:1.2em;">${b.emoji}</div>
+                        <div style="flex:1;">
+                            <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
+                                <span style="font-size:0.85em; font-weight:${isCurrent?700:400}; color:${isCurrent?b.color:'var(--text-dim)'};">${b.name}</span>
+                                <span style="font-size:0.75em; color:var(--text-dim);">${effRange}</span>
+                            </div>
+                            <div style="height:8px; background:rgba(255,255,255,0.08); border-radius:4px; overflow:hidden;">
+                                <div style="${barStyle} height:100%; width:100%; border-radius:4px;"></div>
+                            </div>
+                        </div>
+                        ${isCurrent ? '<div style=\"font-size:0.7em; color:#fff; background:rgba(255,255,255,0.15); padding:2px 8px; border-radius:10px;\">YOU</div>' : ''}
+                    </div>
+                `;
+            }).join('');
+
+            // History sparkline (simple bars)
+            const maxH = history ? Math.max(...history, 1) : 100;
+            const sparkHtml = history ? history.map(v => {
+                const h = Math.max(2, (v / maxH) * 40);
+                const c = v >= 75 ? '#f59e0b' : v >= 50 ? '#eab308' : v >= 25 ? '#3b82f6' : '#a855f7';
+                return `<div style="width:4px; height:${h}px; background:${c}; border-radius:2px; align-self:flex-end;"></div>`;
+            }).join('') : '';
+
+            const apr = metrics ? metrics.annualizedApr : 0;
+            const dailyFees = metrics ? metrics.dailyFees : 0;
+            const eff = metrics ? metrics.efficiency : 0;
+
+            return `
+                <div style="background:var(--panel-bg); border:1px solid var(--panel-border); border-radius:var(--radius); padding:24px; margin-bottom:16px;">
+                    <div style="display:flex; align-items:center; gap:8px; margin-bottom:16px;">
+                        <span style="font-size:1.3em;">🌈</span>
+                        <span style="font-size:1.1em; font-weight:700; color:var(--gold);">Yield Rainbow Spectrum</span>
+                    </div>
+
+                    <!-- Current Band -->
+                    <div style="display:flex; align-items:center; gap:16px; padding:16px; background:${currentBand?currentBand.color+'15':'rgba(255,255,255,0.03)'}; border:1px solid ${currentBand?currentBand.color+'40':'var(--panel-border)'}; border-radius:12px; margin-bottom:20px;">
+                        <div style="font-size:2em;">${currentBand?currentBand.emoji:'❓'}</div>
+                        <div style="flex:1;">
+                            <div style="font-size:0.7em; color:var(--text-dim); text-transform:uppercase; letter-spacing:1px;">Current Zone</div>
+                            <div style="font-size:1.3em; font-weight:700; color:${currentBand?currentBand.color:'var(--text)'};">${currentBand?currentBand.name:'Unknown'}</div>
+                            <div style="font-size:0.8em; color:var(--text-dim); margin-top:4px;">${currentBand?currentBand.description:''}</div>
+                        </div>
+                        <div style="text-align:right;">
+                            <div style="font-size:1.6em; font-weight:700; color:${currentBand?currentBand.color:'var(--text)'};">${eff.toFixed(0)}%</div>
+                            <div style="font-size:0.7em; color:var(--text-dim);">Efficiency</div>
+                        </div>
+                    </div>
+
+                    <!-- Band List -->
+                    ${bandHtml}
+
+                    <!-- Metrics -->
+                    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:16px;">
+                        <div style="text-align:center; padding:12px; background:rgba(255,255,255,0.03); border-radius:8px;">
+                            <div style="font-size:1.2em; font-weight:700; color:var(--gold);">${apr.toFixed(0)}%</div>
+                            <div style="font-size:0.7em; color:var(--text-dim);">APR</div>
+                        </div>
+                        <div style="text-align:center; padding:12px; background:rgba(255,255,255,0.03); border-radius:8px;">
+                            <div style="font-size:1.2em; font-weight:700; color:#22c55e;">$${dailyFees.toFixed(3)}</div>
+                            <div style="font-size:0.7em; color:var(--text-dim);">Daily Fees</div>
+                        </div>
+                        <div style="text-align:center; padding:12px; background:rgba(255,255,255,0.03); border-radius:8px;">
+                            <div style="font-size:1.2em; font-weight:700; color:#00ccff;">$${position?position.currentPrice.toFixed(2):'--'}</div>
+                            <div style="font-size:0.7em; color:var(--text-dim);">AVAX Price</div>
+                        </div>
+                    </div>
+
+                    <!-- History Sparkline -->
+                    ${sparkHtml ? `
+                    <div style="margin-top:16px;">
+                        <div style="font-size:0.75em; color:var(--text-dim); margin-bottom:8px;">30-Day Efficiency History</div>
+                        <div style="display:flex; gap:2px; align-items:flex-end; height:40px;">${sparkHtml}</div>
+                    </div>
+                    ` : ''}
+
+                    <div style="font-size:0.7em; color:var(--text-dim); margin-top:12px; text-align:center;">
+                        ${currentBand?currentBand.advice:''}
                     </div>
                 </div>
             `;

@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "GENTECH DASHBOARD",
-    "subtitle": "AAE DeFi — Yield Farming Command Center",
+    "subtitle": "AAE DeFi \u2014 Yield Farming Command Center",
     "dataUrl": "defi-data.json",
     "refreshMs": 0,
     "version": "v2.0",
@@ -28,15 +28,69 @@
       "heading": "'Inter', -apple-system, sans-serif",
       "body": "'Inter', -apple-system, sans-serif"
     },
-    "container": { "maxWidth": "1100px" }
+    "container": {
+      "maxWidth": "1100px"
+    }
   },
   "tabs": [
-    { "id": "farming", "label": "Farming", "icon": "🌾", "sections": ["hero-efficiency", "regime-detector", "strategy-comparison", "market-intel", "support-resistance", "strategy-advisor", "lp-curve"] },
-    { "id": "spot", "label": "Spot", "icon": "💎", "sections": ["spot-positions"] },
-    { "id": "rebalance", "label": "Rebalance", "icon": "🔄", "sections": ["rebalance-suggestions"] },
-    { "id": "milestones", "label": "Milestones", "icon": "🏆", "sections": ["fee-milestones", "trajectory"] },
-    { "id": "activity", "label": "Activity", "icon": "📋", "sections": ["activity-log", "lp-stats", "transactions"] },
-    { "id": "scenarios", "label": "Scenarios", "icon": "🎯", "sections": ["market-scenarios", "il-calculator"] }
+    {
+      "id": "farming",
+      "label": "Farming",
+      "icon": "\ud83c\udf3e",
+      "sections": [
+        "hero-efficiency",
+        "regime-detector",
+        "strategy-comparison",
+        "market-intel",
+        "support-resistance",
+        "strategy-advisor",
+        "lp-curve"
+      ]
+    },
+    {
+      "id": "spot",
+      "label": "Spot",
+      "icon": "\ud83d\udc8e",
+      "sections": [
+        "spot-positions"
+      ]
+    },
+    {
+      "id": "rebalance",
+      "label": "Rebalance",
+      "icon": "\ud83d\udd04",
+      "sections": [
+        "rebalance-suggestions"
+      ]
+    },
+    {
+      "id": "milestones",
+      "label": "Milestones",
+      "icon": "\ud83c\udfc6",
+      "sections": [
+        "fee-milestones",
+        "trajectory"
+      ]
+    },
+    {
+      "id": "activity",
+      "label": "Activity",
+      "icon": "\ud83d\udccb",
+      "sections": [
+        "activity-log",
+        "lp-stats",
+        "transactions"
+      ]
+    },
+    {
+      "id": "scenarios",
+      "label": "Scenarios",
+      "icon": "\ud83c\udfaf",
+      "sections": [
+        "market-scenarios",
+        "il-calculator"
+      ]
+    }
   ],
   "sections": [
     {
@@ -49,7 +103,7 @@
     {
       "id": "regime-detector",
       "title": "Autonomous Regime",
-      "icon": "🤖",
+      "icon": "\ud83e\udd16",
       "type": "custom",
       "dataSource": "regime",
       "customRender": "regimeDetector"
@@ -57,15 +111,20 @@
     {
       "id": "strategy-comparison",
       "title": "Performance vs Alternatives",
-      "icon": "📊",
+      "icon": "\ud83d\udcca",
       "type": "custom",
       "dataSource": "strategyComparison",
       "customRender": "strategyComparison"
     },
     {
+      "title": "\ud83c\udf08 Yield Rainbow Spectrum",
+      "customRender": "yieldSpectrum",
+      "dataSource": "yieldSpectrum"
+    },
+    {
       "id": "market-intel",
       "title": "AVAX Market Intelligence",
-      "icon": "📡",
+      "icon": "\ud83d\udce1",
       "type": "custom",
       "dataSource": "marketIntel",
       "customRender": "marketIntel"
@@ -73,7 +132,7 @@
     {
       "id": "support-resistance",
       "title": "Support & Resistance",
-      "icon": "📊",
+      "icon": "\ud83d\udcca",
       "type": "custom",
       "dataSource": "supportResistance",
       "customRender": "supportResistance"
@@ -81,7 +140,7 @@
     {
       "id": "strategy-advisor",
       "title": "Strategy Advisor",
-      "icon": "🎯",
+      "icon": "\ud83c\udfaf",
       "type": "custom",
       "dataSource": "strategyAdvisor",
       "customRender": "strategyAdvisor"
@@ -89,7 +148,7 @@
     {
       "id": "lp-curve",
       "title": "Liquidity Distribution",
-      "icon": "🔔",
+      "icon": "\ud83d\udd14",
       "type": "custom",
       "dataSource": "curveData",
       "customRender": "lpCurve"
@@ -97,7 +156,7 @@
     {
       "id": "fee-milestones",
       "title": "Fee Income Milestones",
-      "icon": "🏆",
+      "icon": "\ud83c\udfc6",
       "type": "custom",
       "dataSource": "feeMilestones",
       "customRender": "feeMilestones"
@@ -105,7 +164,7 @@
     {
       "id": "trajectory",
       "title": "Trajectory to Next Milestone",
-      "icon": "📈",
+      "icon": "\ud83d\udcc8",
       "type": "custom",
       "dataSource": "feeMilestones",
       "customRender": "trajectory"
@@ -113,7 +172,7 @@
     {
       "id": "spot-positions",
       "title": "Spot Positions",
-      "icon": "💎",
+      "icon": "\ud83d\udc8e",
       "type": "custom",
       "dataSource": "spotPositions",
       "customRender": "spotPositions"
@@ -121,7 +180,7 @@
     {
       "id": "activity-log",
       "title": "Activity Log",
-      "icon": "📋",
+      "icon": "\ud83d\udccb",
       "type": "custom",
       "dataSource": "activityLog",
       "customRender": "activityLog"
@@ -129,24 +188,48 @@
     {
       "id": "lp-stats",
       "title": "Position Details",
-      "icon": "💰",
+      "icon": "\ud83d\udcb0",
       "type": "stats",
       "dataSource": "lpPosition",
       "cardTemplate": {
         "fields": [
-          { "key": "pair", "label": "Pair", "format": "text" },
-          { "key": "feeTier", "label": "Fee Tier", "format": "text" },
-          { "key": "shape", "label": "Shape", "format": "text" },
-          { "key": "currentPrice", "label": "Current Price", "format": "text" },
-          { "key": "rangeMin", "label": "Range Min", "format": "text" },
-          { "key": "rangeMax", "label": "Range Max", "format": "text" }
+          {
+            "key": "pair",
+            "label": "Pair",
+            "format": "text"
+          },
+          {
+            "key": "feeTier",
+            "label": "Fee Tier",
+            "format": "text"
+          },
+          {
+            "key": "shape",
+            "label": "Shape",
+            "format": "text"
+          },
+          {
+            "key": "currentPrice",
+            "label": "Current Price",
+            "format": "text"
+          },
+          {
+            "key": "rangeMin",
+            "label": "Range Min",
+            "format": "text"
+          },
+          {
+            "key": "rangeMax",
+            "label": "Range Max",
+            "format": "text"
+          }
         ]
       }
     },
     {
       "id": "rebalance-suggestions",
       "title": "Rebalance Suggestions",
-      "icon": "🔄",
+      "icon": "\ud83d\udd04",
       "type": "custom",
       "dataSource": "rebalanceSuggestions",
       "customRender": "rebalanceSuggestions"
@@ -154,24 +237,46 @@
     {
       "id": "transactions",
       "title": "Recent Activity",
-      "icon": "📜",
+      "icon": "\ud83d\udcdc",
       "type": "table",
       "dataSource": "transactions",
       "cardTemplate": {
         "fields": [
-          { "key": "date", "label": "Date", "format": "date" },
-          { "key": "type", "label": "Type", "format": "badge" },
-          { "key": "token", "label": "Token" },
-          { "key": "amount", "label": "Amount" },
-          { "key": "usd", "label": "USD", "format": "money" },
-          { "key": "status", "label": "Status", "format": "badge" }
+          {
+            "key": "date",
+            "label": "Date",
+            "format": "date"
+          },
+          {
+            "key": "type",
+            "label": "Type",
+            "format": "badge"
+          },
+          {
+            "key": "token",
+            "label": "Token"
+          },
+          {
+            "key": "amount",
+            "label": "Amount"
+          },
+          {
+            "key": "usd",
+            "label": "USD",
+            "format": "money"
+          },
+          {
+            "key": "status",
+            "label": "Status",
+            "format": "badge"
+          }
         ]
       }
     },
     {
       "id": "market-scenarios",
       "title": "Market Scenarios",
-      "icon": "🎯",
+      "icon": "\ud83c\udfaf",
       "type": "custom",
       "dataSource": "marketScenarios",
       "customRender": "marketScenarios"
@@ -179,7 +284,7 @@
     {
       "id": "il-calculator",
       "title": "Impermanent Loss Calculator",
-      "icon": "📉",
+      "icon": "\ud83d\udcc9",
       "type": "custom",
       "dataSource": "ilCalculator",
       "customRender": "ilCalculator"
@@ -187,7 +292,7 @@
   ],
   "footer": {
     "brand": "GENTECH DASHBOARD",
-    "version": "AAE DeFi v2.0 — Farming Command Center",
+    "version": "AAE DeFi v2.0 \u2014 Farming Command Center",
     "showTimestamp": true
   }
 }
