@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GenTech Labs — Agent-to-Agent Economy Infrastructure</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#0a0a0a;color:#e2e8f0;min-height:100vh}
+.hero{padding:40px 20px 20px;text-align:center;background:linear-gradient(135deg,#0f172a,#1e293b)}
+.hero h1{font-size:2.2em;color:#60a5fa;margin-bottom:8px}
+.hero .tagline{color:#94a3b8;font-size:1.1em;margin-bottom:6px}
+.hero .sub{color:#64748b;font-size:0.9em}
+.tabs{display:flex;justify-content:center;gap:4px;padding:16px 20px;background:#111;position:sticky;top:0;z-index:100;border-bottom:1px solid #222}
+.tab{padding:10px 20px;border-radius:8px;cursor:pointer;color:#94a3b8;font-size:0.95em;font-weight:500;transition:all 0.2s;border:1px solid transparent}
+.tab:hover{color:#60a5fa;background:#1a1a2e}
+.tab.active{color:#60a5fa;background:#1e293b;border-color:#3b82f6}
+.tab-content{display:none;padding:30px 20px;max-width:1100px;margin:0 auto}
+.tab-content.active{display:block}
+.card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;margin:20px 0}
+.card{background:#111;border:1px solid #222;border-radius:12px;padding:20px;transition:border-color 0.2s}
+.card:hover{border-color:#3b82f6}
+.card .cat{display:inline-block;background:#1e293b;color:#94a3b8;padding:3px 10px;border-radius:8px;font-size:0.7em;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
+.card h3{color:#60a5fa;font-size:1em;margin-bottom:6px}
+.card .endpoint{color:#3b82f6;font-family:monospace;font-size:0.85em;margin-bottom:6px}
+.card .desc{color:#94a3b8;font-size:0.88em;line-height:1.4;margin-bottom:8px}
+.card .price{color:#34d399;font-weight:600;font-size:0.9em}
+.section-title{color:#64748b;font-size:0.8em;text-transform:uppercase;letter-spacing:2px;margin:30px auto 12px;text-align:center}
+.badge{display:inline-block;background:#1e293b;color:#94a3b8;padding:6px 14px;border-radius:20px;font-size:0.85em;margin:4px}
+.badge span{color:#60a5fa;font-weight:600}
+.stack{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:16px 0}
+.founder{text-align:center;padding:30px 20px;color:#64748b;font-size:0.85em}
+.founder a{color:#60a5fa;text-decoration:none}
+.code-block{background:#111;border:1px solid #222;border-radius:8px;padding:16px;font-family:monospace;font-size:0.85em;color:#94a3b8;margin:12px 0;overflow-x:auto}
+.code-block .kw{color:#c084fc}
+.code-block .str{color:#34d399}
+.code-block .cmt{color:#475569}
+h2{color:#60a5fa;font-size:1.3em;margin:20px 0 10px}
+p{color:#94a3b8;line-height:1.6;margin:8px 0}
+.cta{display:inline-block;background:#3b82f6;color:#fff;padding:12px 28px;border-radius:8px;text-decoration:none;font-weight:600;margin:16px 0;transition:background 0.2s}
+.cta:hover{background:#2563eb}
+</style>
+</head>
+<body>
+<div class="hero">
+<h1>GenTech Labs</h1>
+<p class="tagline">The Agent-to-Agent Economy</p>
+<p class="sub">16 APIs. USDC payments. On-chain identity. Zero accounts.</p>
+</div>
+<div class="tabs">
+<div class="tab active" onclick="showTab('aae')">🧠 AAE</div>
+<div class="tab" onclick="showTab('apis')">📡 APIs</div>
+<div class="tab" onclick="showTab('farming')">🌾 Farming</div>
+<div class="tab" onclick="showTab('gaming')">🎮 Gaming</div>
+<div class="tab" onclick="showTab('identity')">🔐 Identity</div>
+</div>
+
+<!-- AAE TAB -->
+<div id="tab-aae" class="tab-content active">
+<h2>Agent-to-Agent Economy</h2>
+<p>AI agents need to buy services from each other — data, computation, analysis. But today they're stuck with API keys, rate limits, accounts, and invoices. The agent economy can't scale if every transaction requires a human to sign up.</p>
+<div class="stack">
+<div class="badge">ERC-8004 <span>Identity</span></div>
+<div class="badge">x402 <span>Payments</span></div>
+<div class="badge">ERC-8021 <span>Attribution</span></div>
+<div class="badge">16 <span>Live APIs</span></div>
+</div>
+<h2>How It Works</h2>
+<p>Pay-per-call with USDC on Base. No accounts. No API keys. No human in the loop. An agent discovers a service, sends a micropayment, gets the result.</p>
+<div class="code-block">
+<span class="cmt">// Agent discovers GenTech Intel API</span><br>
+<span class="kw">GET</span> /v1/intel/search?q=cyberpunk<br>
+<span class="kw">→</span> 402 Payment Required<br><br>
+<span class="cmt">// Agent pays 0.005 USDC via x402</span><br>
+<span class="kw">GET</span> /v1/intel/search?q=cyberpunk<br>
+<span class="kw">Header:</span> X-PAYMENT: &lt;payment-proof&gt;<br>
+<span class="kw">→</span> 200 OK + results
+</div>
+<a href="https://github.com/ProtoJay4789" class="cta">View on GitHub →</a>
+</div>
+
+<!-- APIs TAB -->
+<div id="tab-apis" class="tab-content">
+<h2>Live API Suite — 16 Endpoints</h2>
+<p>Pay-per-call via x402 USDC on Base. No accounts, no API keys.</p>
+<div class="section-title">🎮 Gaming Intel</div>
+<div class="card-grid">
+<div class="card"><div class="cat">Games</div><h3>Game Search</h3><div class="endpoint">GET /v1/games/search?q=</div><div class="desc">Search game deals across 35+ stores</div><div class="price">$0.005/query</div></div>
+<div class="card"><div class="cat">Games</div><h3>Cheapest Price</h3><div class="endpoint">GET /v1/games/cheapest?q=</div><div class="desc">Find cheapest price right now</div><div class="price">$0.005/query</div></div>
+<div class="card"><div class="cat">Games</div><h3>Game News</h3><div class="endpoint">GET /v1/games/{id}/news</div><div class="desc">Latest patch notes and devlogs</div><div class="price">$0.001/query</div></div>
+<div class="card"><div class="cat">Games</div><h3>Release Info</h3><div class="endpoint">GET /v1/games/{id}/release</div><div class="desc">Release date and status</div><div class="price">$0.001/query</div></div>
+</div>
+<div class="section-title">🎬 Movie Intel</div>
+<div class="card-grid">
+<div class="card"><div class="cat">Movies</div><h3>Movie Search</h3><div class="endpoint">GET /v1/movies/search?q=</div><div class="desc">Search movies with streaming availability</div><div class="price">$0.005/query</div></div>
+<div class="card"><div class="cat">Movies</div><h3>Cheapest Watch</h3><div class="endpoint">GET /v1/movies/cheapest?q=</div><div class="desc">Cheapest buy/rent across 40+ platforms</div><div class="price">$0.005/query</div></div>
+<div class="card"><div class="cat">Movies</div><h3>Movie Details</h3><div class="endpoint">GET /v1/movies/{id}/details</div><div class="desc">Cast, studio, genres, runtime</div><div class="price">$0.001/query</div></div>
+<div class="card"><div class="cat">Movies</div><h3>Trailers</h3><div class="endpoint">GET /v1/movies/{id}/trailers</div><div class="desc">YouTube trailers for any movie</div><div class="price">$0.001/query</div></div>
+</div>
+<div class="section-title">🔗 Unified Intel</div>
+<div class="card-grid">
+<div class="card"><div class="cat">Intel</div><h3>Unified Search</h3><div class="endpoint">GET /v1/intel/search?q=</div><div class="desc">Search games + movies in one call</div><div class="price">$0.005/query</div></div>
+<div class="card"><div class="cat">Intel</div><h3>Cheapest Overall</h3><div class="endpoint">GET /v1/intel/cheapest?q=</div><div class="desc">Cheapest option across all platforms</div><div class="price">$0.005/query</div></div>
+</div>
+<div class="section-title">💰 DeFi & Wallet</div>
+<div class="card-grid">
+<div class="card"><div class="cat">DeFi</div><h3>Airdrop Checker</h3><div class="endpoint">GET /v1/airdrops/check?wallet=</div><div class="desc">Check wallet eligibility for airdrops</div><div class="price">$0.01/query</div></div>
+<div class="card"><div class="cat">DeFi</div><h3>Wallet Analytics</h3><div class="endpoint">GET /v1/wallet/analyze?address=</div><div class="desc">Analyze holdings, DeFi positions, activity</div><div class="price">$0.025/query</div></div>
+<div class="card"><div class="cat">NFT</div><h3>NFT Search</h3><div class="endpoint">GET /v1/nft/search?q=</div><div class="desc">Search NFTs by name and collection</div><div class="price">$0.005/query</div></div>
+<div class="card"><div class="cat">Security</div><h3>Token Risk</h3><div class="endpoint">GET /v1/score/{mint}</div><div class="desc">11-factor Solana token risk scoring</div><div class="price">$0.01/query</div></div>
+</div>
+</div>
+
+<!-- FARMING TAB -->
+<div id="tab-farming" class="tab-content">
+<h2>DeFi Yield Intelligence</h2>
+<p>Agent Arena — autonomous yield farming agents that adapt to market conditions.</p>
+<div class="card-grid">
+<div class="card"><div class="cat">Mode</div><h3>Harvest Mode</h3><div class="desc">Fee farming with compound loop. Automatically collects fees and reinvests.</div></div>
+<div class="card"><div class="cat">Mode</div><h3>Dry Powder Mode</h3><div class="desc">Crash detection → pull to USDC. Protects capital during downturns.</div></div>
+<div class="card"><div class="cat">Mode</div><h3>Accumulation Mode</h3><div class="desc">Fear maxed → deploy dry powder. Buys the dip automatically.</div></div>
+<div class="card"><div class="cat">Mode</div><h3>Payday Mode</h3><div class="desc">Earn/protect/grow/get paid lifecycle. Full agent automation.</div></div>
+</div>
+<h2>Strategy Tools</h2>
+<div class="card-grid">
+<div class="card"><div class="cat">Tool</div><h3>LP Shape Detector</h3><div class="desc">Detect strategy shapes from bin data. Identifies Curve, Bid-Ask, and custom patterns.</div></div>
+<div class="card"><div class="cat">Tool</div><h3>Strategy Scanner</h3><div class="desc">Read any wallet's LP strategy automatically.</div></div>
+<div class="card"><div class="cat">Tool</div><h3>Performance Tracker</h3><div class="desc">ROI, Sharpe ratio, drawdown analysis for any strategy.</div></div>
+<div class="card"><div class="cat">Tool</div><h3>Strategy Templates</h3><div class="desc">One-click deploy proven playbooks.</div></div>
+</div>
+<h2>Live Data</h2>
+<p>Real-time Avalanche stablecoin data: $1.5B+ tracked across 14 stablecoins. USDC leads at $452M, followed by BUIDL ($428M) and USDT ($411M).</p>
+</div>
+
+<!-- GAMING TAB -->
+<div id="tab-gaming" class="tab-content">
+<h2>Gaming Intelligence</h2>
+<p>Price tracking, deal alerts, and game release intelligence across 35+ stores.</p>
+<div class="card-grid">
+<div class="card"><div class="cat">Product</div><h3>Deal Tracker</h3><div class="desc">Cross-store game price comparison. Steam, Epic, GOG, Humble, and 30+ more. Price history, alerts, and deal scores.</div></div>
+<div class="card"><div class="cat">Product</div><h3>Patch Notes</h3><div class="desc">Game release intelligence. Track updates, devlogs, and release dates for any Steam game.</div></div>
+<div class="card"><div class="cat">Hackathon</div><h3>Agent Manager Tycoon</h3><div class="desc">Roguelite management sim. Hire agents, deploy strategies, earn revenue. EasyA Hackathon entry.</div></div>
+<div class="card"><div class="cat">Game</div><h3>POE2 Build Health</h3><div class="desc">Path of Exile 2 build tracking and patch impact analysis.</div></div>
+</div>
+<h2>How It Works</h2>
+<p>Agents can query game prices, track deals, and monitor releases via x402. One API call replaces checking 35+ stores individually.</p>
+<div class="code-block">
+<span class="cmt">// Find cheapest Cyberpunk 2077</span><br>
+<span class="kw">GET</span> /v1/intel/cheapest?q=cyberpunk+2077<br><br>
+<span class="cmt">// Response includes all stores</span><br>
+{<br>
+&nbsp;&nbsp;<span class="str">"games"</span>: { <span class="str">"steam"</span>: 29.99, <span class="str">"gog"</span>: 24.99, <span class="str">"epic"</span>: 19.99 },<br>
+&nbsp;&nbsp;<span class="str">"movies"</span>: { <span class="str">"streaming"</span>: [<span class="str">"Netflix"</span>, <span class="str">"Amazon"</span>] }<br>
+}
+</div>
+</div>
+
+<!-- IDENTITY TAB -->
+<div id="tab-identity" class="tab-content">
+<h2>On-Chain Agent Identity</h2>
+<p>ERC-8004 + Metaplex DAS = cross-chain agent identity. Register once, discover everywhere.</p>
+<div class="card-grid">
+<div class="card"><div class="cat">EVM</div><h3>ERC-8004 Registration</h3><div class="desc">Register agent identity on Avalanche, Base, and Arbitrum. Full OASF metadata with capabilities, services, and reputation.</div><div class="endpoint">Avalanche: Token #1770 ✅</div></div>
+<div class="card"><div class="cat">Solana</div><h3>Metaplex DAS</h3><div class="desc">PDA-based agent identity on Solana. Discoverable via Helius, QuickNode, Triton, Alchemy. Coming soon.</div></div>
+<div class="card"><div class="cat">Payment</div><h3>x402 Payments</h3><div class="desc">Gasless USDC payments on 11 EVM chains via Q402 MCP. 30 tools for agents to move money.</div></div>
+<div class="card"><div class="cat">Payment</div><h3>PayAI Facilitator</h3><div class="desc">Solana-native x402 payments. Sub-second settlement, no API key needed.</div></div>
+</div>
+<h2>The Stack</h2>
+<div class="stack">
+<div class="badge">ERC-8004 <span>Identity</span></div>
+<div class="badge">ERC-8021 <span>Attribution</span></div>
+<div class="badge">x402 <span>Payments</span></div>
+<div class="badge">Q402 <span>MCP (30 tools)</span></div>
+<div class="badge">Brickken <span>MCP (11 tools)</span></div>
+<div class="badge">PayAI <span>Solana</span></div>
+<div class="badge">NEAR AI <span>Marketplace</span></div>
+</div>
+<h2>What Gets Tracked</h2>
+<p>Every API call is attributed on-chain via ERC-8021 Builder Codes. Know who's calling, how often, which endpoints. Full transparency for the agent economy.</p>
+<a href="https://gentechlabs.net" class="cta">Explore the Platform →</a>
+</div>
+
+<div class="founder">
+<p>Built by <a href="https://x.com/ProtoJay4789">@ProtoJay4789</a></p>
+<p style="margin-top:4px">GenTech Labs — "Tough love for the agent economy."</p>
+</div>
+
+<script>
+function showTab(id){
+document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+document.querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active'));
+document.getElementById('tab-'+id).classList.add('active');
+event.target.classList.add('active');
+}
+</script>
+</body>
+</html>
