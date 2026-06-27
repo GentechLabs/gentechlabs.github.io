@@ -14,36 +14,38 @@
       <div id="turn-indicator" class="turn-indicator player-turn">Your turn</div>
     </div>
 
-    <!-- Enemy Status -->
-    <div class="enemy-panel">
-      <div class="character-display">
-        <div id="enemy-sprite" class="character-sprite skeleton-sprite">💀</div>
-        <div id="damage-overlay"></div>
-      </div>
-      <div class="enemy-name" id="enemy-name">Skeleton</div>
-      <div class="hp-bar">
-        <div class="hp-fill enemy-hp" id="enemy-hp" style="width: 100%">30/30</div>
-      </div>
-    </div>
-
-    <!-- Player Status -->
-    <div class="player-panel">
-      <div class="character-display" style="min-height: 50px;">
-        <div class="character-sprite knight-sprite">⚔️</div>
-      </div>
-      <div class="stats-row">
-        <div class="hp-label">HP:</div>
+    <!-- Combat Area -->
+    <div class="combat-area">
+      <!-- Enemy Status -->
+      <div class="enemy-panel">
+        <div class="character-display">
+          <div id="enemy-sprite-container" class="character-sprite"></div>
+        </div>
+        <div class="enemy-name" id="enemy-name">Skeleton</div>
         <div class="hp-bar">
-          <div class="hp-fill player-hp" id="player-hp" style="width: 100%">100/100</div>
+          <div class="hp-fill enemy-hp" id="enemy-hp" style="width: 100%">30/30</div>
         </div>
       </div>
-      <div class="stats-row">
-        <div class="ap-label">AP:</div>
-        <div class="ap-value" id="player-ap">2/3</div>
-      </div>
-      <div class="stats-row">
-        <div class="potion-label">Potions:</div>
-        <div class="potion-value" id="potions">3</div>
+
+      <!-- Player Status -->
+      <div class="player-panel">
+        <div class="character-display">
+          <div id="player-sprite-container" class="character-sprite"></div>
+        </div>
+        <div class="stats-row">
+          <div class="hp-label">HP:</div>
+          <div class="hp-bar">
+            <div class="hp-fill player-hp" id="player-hp" style="width: 100%">100/100</div>
+          </div>
+        </div>
+        <div class="stats-row">
+          <div class="ap-label">AP:</div>
+          <div class="ap-value" id="player-ap">2/3</div>
+        </div>
+        <div class="stats-row">
+          <div class="potion-label">Potions:</div>
+          <div class="potion-value" id="potions">3</div>
+        </div>
       </div>
     </div>
 

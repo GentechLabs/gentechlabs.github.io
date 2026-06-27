@@ -348,31 +348,146 @@ body {
 /* Character Display */
 .character-display {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 80px;
+  align-items: flex-end;
+  justify-content: space-between;
+  min-height: 150px;
   position: relative;
+  padding: 10px;
+  gap: 20px;
 }
 
 .character-sprite {
-  font-size: 48px;
-  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
+  width: 80px;
+  height: 120px;
+  transition: transform 0.3s ease;
 }
 
+/* Player (Knight) */
 .knight-sprite {
-  animation: floatAnimation 3s ease-in-out infinite;
+  animation: knightIdle 1.5s ease-in-out infinite;
 }
 
+@keyframes knightIdle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+
+.knight-attack-walk {
+  animation: knightAttackSequence 0.8s ease-in-out;
+}
+
+@keyframes knightAttackSequence {
+  0% { transform: translateX(0); }
+  20% { transform: translateX(30px); }
+  40% { transform: translateX(40px) rotate(-10deg); }
+  50% { transform: translateX(45px) rotate(5deg); }
+  70% { transform: translateX(40px) rotate(0deg); }
+  100% { transform: translateX(0); }
+}
+
+.knight-damage {
+  animation: knightDamage 0.4s ease;
+}
+
+@keyframes knightDamage {
+  0%, 100% { transform: translateX(0) rotate(0deg); }
+  25% { transform: translateX(-10px) rotate(-10deg); }
+  75% { transform: translateX(10px) rotate(10deg); }
+}
+
+/* Enemy (Skeleton) */
 .skeleton-sprite {
-  animation: skeletonBoneRattle 0.5s ease-in-out infinite;
+  animation: skeletonIdle 1s ease-in-out infinite;
 }
 
-.ghost-sprite {
-  animation: ghostFade 1.5s ease-in-out infinite;
+@keyframes skeletonIdle {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  25% { transform: translateY(-2px) rotate(-1deg); }
+  75% { transform: translateY(-2px) rotate(1deg); }
 }
 
+.skeleton-attack-walk {
+  animation: skeletonAttackSequence 0.8s ease-in-out;
+}
+
+@keyframes skeletonAttackSequence {
+  0% { transform: translateX(0); }
+  20% { transform: translateX(-30px); }
+  40% { transform: translateX(-40px) rotate(10deg); }
+  50% { transform: translateX(-45px) rotate(-5deg); }
+  70% { transform: translateX(-40px) rotate(0deg); }
+  100% { transform: translateX(0); }
+}
+
+.skeleton-damage {
+  animation: skeletonDamage 0.4s ease;
+}
+
+@keyframes skeletonDamage {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(10px) rotate(5deg); }
+  75% { transform: translateX(-10px) rotate(-5deg); }
+}
+
+/* Enemy (Zombie) */
 .zombie-sprite {
-  animation: floatAnimation 2s ease-in-out infinite reverse;
+  animation: zombieIdle 2s ease-in-out infinite;
+}
+
+@keyframes zombieIdle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+
+.zombie-attack-walk {
+  animation: zombieAttackSequence 1s ease-in-out;
+}
+
+@keyframes zombieAttackSequence {
+  0% { transform: translateX(0); }
+  30% { transform: translateX(-25px); }
+  50% { transform: translateX(-35px); }
+  100% { transform: translateX(0); }
+}
+
+.zombie-damage {
+  animation: zombieDamage 0.4s ease;
+}
+
+@keyframes zombieDamage {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(8px); }
+  75% { transform: translateX(-8px); }
+}
+
+/* Enemy (Ghost) */
+.ghost-sprite {
+  animation: ghostIdle 2s ease-in-out infinite;
+}
+
+@keyframes ghostIdle {
+  0%, 100% { opacity: 0.7; transform: translateY(0); }
+  50% { opacity: 1; transform: translateY(-5px); }
+}
+
+.ghost-attack-walk {
+  animation: ghostAttackSequence 1s ease-in-out;
+}
+
+@keyframes ghostAttackSequence {
+  0% { transform: translateX(0); opacity: 0.7; }
+  30% { transform: translateX(-30px); opacity: 1; }
+  50% { transform: translateX(-40px) scale(1.1); opacity: 1; }
+  100% { transform: translateX(0); opacity: 0.7; }
+}
+
+.ghost-damage {
+  animation: ghostDamage 0.3s ease;
+}
+
+@keyframes ghostDamage {
+  0%, 100% { opacity: 0.7; transform: translateX(0); }
+  50% { opacity: 1; transform: translateX(5px); }
 }
 
 .damage-number {
