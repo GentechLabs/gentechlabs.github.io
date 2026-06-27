@@ -576,6 +576,402 @@ body::after {
   transition: filter 0.5s ease;
 }
 
+/* Ability Visual Effects */
+@keyframes fireballEffect {
+  0% {
+    transform: translateX(0) scale(0.5);
+    opacity: 1;
+  }
+  50% {
+    transform: translateX(50px) scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(100px) scale(0.3);
+    opacity: 0;
+  }
+}
+
+@keyframes lightningEffect {
+  0%, 100% {
+    opacity: 0;
+    transform: translateX(0) scaleX(1);
+  }
+  10%, 30%, 50%, 70%, 90% {
+    opacity: 1;
+    transform: translateX(20px) scaleX(1.5);
+  }
+  20%, 40%, 60%, 80% {
+    opacity: 0;
+    transform: translateX(40px) scaleX(0.8);
+  }
+}
+
+@keyframes healEffect {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.5);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0;
+  }
+}
+
+@keyframes shieldEffect {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  20% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+  80% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0;
+  }
+}
+
+@keyframes boneShardEffect {
+  0% {
+    transform: translateX(0) translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  50% {
+    transform: translateX(-60px) translateY(-20px) rotate(180deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-120px) translateY(-10px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+@keyframes poisonEffect {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  25% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.5);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+@keyframes aoeEffect {
+  0% {
+    transform: scale(0.5);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(2);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(3);
+    opacity: 0;
+  }
+}
+
+@keyframes drainEffect {
+  0% {
+    transform: translateX(0);
+    opacity: 0;
+  }
+  30% {
+    transform: translateX(-50px);
+    opacity: 1;
+  }
+  70% {
+    transform: translateX(50px);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 0;
+  }
+}
+
+@keyframes summonEffect {
+  0% {
+    transform: translateY(50px) scale(0);
+    opacity: 0;
+  }
+  50% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-20px) scale(1.2);
+    opacity: 0;
+  }
+}
+
+@keyframes slashEffect {
+  0% {
+    transform: translateX(0) rotate(0deg);
+    opacity: 0;
+  }
+  20% {
+    transform: translateX(30px) rotate(-30deg);
+    opacity: 1;
+  }
+  40% {
+    transform: translateX(60px) rotate(30deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(90px) rotate(0deg);
+    opacity: 0;
+  }
+}
+
+@keyframes frostNovaEffect {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  25% {
+    transform: scale(1.5);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(2.5);
+    opacity: 0;
+  }
+}
+
+@keyframes tauntEffect {
+  0% {
+    transform: scale(1);
+    opacity: 0;
+  }
+  30% {
+    transform: scale(1.3);
+    opacity: 1;
+  }
+  70% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0;
+  }
+}
+
+/* Effect Container */
+.effect-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 100;
+  overflow: hidden;
+}
+
+.ability-effect {
+  position: absolute;
+  pointer-events: none;
+}
+
+/* Fireball */
+.fireball-effect {
+  width: 40px;
+  height: 40px;
+  background: radial-gradient(circle, #ff6b00, #ff0000);
+  border-radius: 50%;
+  box-shadow: 0 0 20px #ff6b00, 0 0 40px #ff0000;
+  animation: fireballEffect 0.6s ease-out forwards;
+  left: 50%;
+  top: 50%;
+}
+
+/* Lightning */
+.lightning-effect {
+  width: 80px;
+  height: 10px;
+  background: linear-gradient(90deg, transparent, #87ceeb, #ffffff, #87ceeb, transparent);
+  box-shadow: 0 0 10px #87ceeb, 0 0 20px #ffffff;
+  animation: lightningEffect 0.5s ease-out forwards;
+  left: 50%;
+  top: 50%;
+}
+
+/* Heal */
+.heal-effect {
+  width: 50px;
+  height: 50px;
+  background: radial-gradient(circle, #90ee90, #228b22);
+  border-radius: 50%;
+  box-shadow: 0 0 15px #90ee90, 0 0 30px #228b22;
+  animation: healEffect 0.8s ease-out forwards;
+  left: 50%;
+  top: 50%;
+}
+
+/* Shield */
+.shield-effect {
+  width: 70px;
+  height: 70px;
+  border: 4px solid #ffd700;
+  border-radius: 50%;
+  box-shadow: 0 0 20px #ffd700, inset 0 0 20px rgba(255, 215, 0, 0.3);
+  animation: shieldEffect 1s ease-out forwards;
+  left: 50%;
+  top: 50%;
+}
+
+/* Bone Shard */
+.bone-shard-effect {
+  width: 30px;
+  height: 8px;
+  background: linear-gradient(90deg, #f5f5dc, #d3d3d3);
+  border-radius: 4px;
+  box-shadow: 0 0 10px #f5f5dc;
+  animation: boneShardEffect 0.5s ease-out forwards;
+  right: 50%;
+  top: 50%;
+}
+
+/* Poison Cloud */
+.poison-effect {
+  width: 50px;
+  height: 50px;
+  background: radial-gradient(circle, #8b008b, #4a0080);
+  border-radius: 50%;
+  opacity: 0.8;
+  box-shadow: 0 0 20px #8b008b;
+  animation: poisonEffect 0.8s ease-out forwards;
+  left: 50%;
+  top: 50%;
+}
+
+/* AOE Explosion */
+.aoe-effect {
+  width: 20px;
+  height: 20px;
+  border: 3px solid #ff6b6b;
+  border-radius: 50%;
+  box-shadow: 0 0 30px #ff6b6b;
+  animation: aoeEffect 0.6s ease-out forwards;
+  left: 50%;
+  top: 50%;
+}
+
+/* Soul Drain */
+.drain-effect {
+  width: 30px;
+  height: 30px;
+  background: radial-gradient(circle, #8b0000, #ff0000);
+  border-radius: 50%;
+  box-shadow: 0 0 15px #8b0000;
+  animation: drainEffect 1s ease-out forwards;
+  left: 50%;
+  top: 50%;
+}
+
+/* Summon Effect */
+.summon-effect {
+  width: 40px;
+  height: 40px;
+  background: #8b4513;
+  border: 2px solid #d4af37;
+  border-radius: 50%;
+  box-shadow: 0 0 20px #d4af37;
+  animation: summonEffect 0.8s ease-out forwards;
+  left: 50%;
+  top: 50%;
+}
+
+/* Slash Effect */
+.slash-effect {
+  width: 60px;
+  height: 6px;
+  background: linear-gradient(90deg, transparent, #c0c0c0, #ffffff, #c0c0c0, transparent);
+  box-shadow: 0 0 10px #c0c0c0;
+  animation: slashEffect 0.4s ease-out forwards;
+  left: 50%;
+  top: 50%;
+}
+
+/* Frost Nova */
+.frost-nova-effect {
+  width: 30px;
+  height: 30px;
+  border: 3px solid #87ceeb;
+  border-radius: 50%;
+  box-shadow: 0 0 20px #87ceeb, inset 0 0 20px rgba(135, 206, 235, 0.3);
+  animation: frostNovaEffect 0.8s ease-out forwards;
+  left: 50%;
+  top: 50%;
+}
+
+/* Taunt Effect */
+.taunt-effect {
+  width: 60px;
+  height: 60px;
+  border: 3px solid #ffd700;
+  border-radius: 50%;
+  box-shadow: 0 0 20px #ffd700;
+  animation: tauntEffect 1s ease-out forwards;
+  left: 50%;
+  top: 50%;
+}
+
+/* Combat Text */
+.damage-text {
+  position: absolute;
+  font-size: 24px;
+  font-weight: bold;
+  color: #ff6b6b;
+  text-shadow: 2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000;
+  animation: floatUp 1s ease-out forwards;
+  pointer-events: none;
+  z-index: 200;
+}
+
+.heal-text {
+  position: absolute;
+  font-size: 24px;
+  font-weight: bold;
+  color: #90ee90;
+  text-shadow: 2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000;
+  animation: floatUp 1s ease-out forwards;
+  pointer-events: none;
+  z-index: 200;
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-50px) scale(0.8);
+    opacity: 0;
+  }
+}
+
 .overlay-content {
   text-align: center;
   color: #e0e0e0;

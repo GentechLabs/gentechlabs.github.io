@@ -17,12 +17,14 @@ class MetaFighterApp {
       combatLog: document.getElementById('combat-log'),
       enemyName: document.getElementById('enemy-name'),
       enemySpriteContainer: document.getElementById('enemy-sprite-container'),
+      heroSpriteContainer: document.getElementById('hero-sprite-container'),
       partyContainer: document.getElementById('party-container'),
       abilitiesContainer: document.getElementById('abilities-container'),
       gameOver: document.getElementById('game-over'),
       gameWon: document.getElementById('game-won'),
       restartBtn: document.getElementById('restart-btn'),
-      potionBtn: document.getElementById('potion-btn')
+      potionBtn: document.getElementById('potion-btn'),
+      effectContainer: document.getElementById('effect-container')
     };
 
     this.init();
@@ -325,12 +327,108 @@ class MetaFighterApp {
     }
   }
 
-  showEnemyAttack(damage) {
+  showEnemyAttack(damageData) {
+    const { totalDamage, effectType, ability } = damageData;
+    
+    // Trigger visual effect based on enemy ability
+    if (effectType) {
+      this.playVisualEffect(effectType, 'enemy');
+    }
+    
     const enemySprite = this.ui.enemySpriteContainer.querySelector('svg');
     if (enemySprite) {
       enemySprite.classList.add('enemy-attacking');
       setTimeout(() => enemySprite.classList.remove('enemy-attacking'), 500);
     }
+    
+    // Show damage text
+    if (totalDamage > 0) {
+      this.showDamageText(totalDamage, 'enemy');
+    }
+  }
+  
+  showAbilityAnimation(member, abilityKey, result) {
+    const ability = member.abilities[abilityKey];
+    if (!ability) return;
+    
+    // Map ability types to visual effects
+    const effectMap = {
+      'magical': 'fireballEffect',
+      'lightning': 'lightningEffect',
+      'heal': 'healEffect',
+      'defense': 'shieldEffect',
+      'cc': 'frostNovaEffect',
+      'debuff': 'tauntEffect',
+      'physical': 'slashEffect'
+    };
+    
+    const effectType = effectMap[ability.type] || 'slashEffect';
+    this.playVisualEffect(effectType, 'player');
+    
+    // Show damage or heal text
+    if (result.damage > 0) {
+      this.showDamageText(result.damage, 'player');
+    } else if (result.healAmount > 0) {
+      this.showHealText(result.healAmount, 'player');
+    }
+  }
+  
+  playVisualEffect(effectType, source) {
+    const effectClass = `${effectType}-effect` || 'slash-effect';
+    const effectEl = document.createElement('div');
+    effectEl.className = `ability-effect ${effectClass}`;
+    
+    // Position effect based on source
+    if (source === 'player') {
+      effectEl.style.left = '30%';
+    } else {
+      effectEl.style.left = '70%';
+    }
+    
+    this.ui.effectContainer.appendChild(effectEl);
+    
+    // Remove effect after animation
+    setTimeout(() => {
+      effectEl.remove();
+    }, 1000);
+  }
+  
+  showDamageText(damage, source) {
+    const textEl = document.createElement('div');
+    textEl.className = 'damage-text';
+    textEl.textContent = `-${damage}`;
+    
+    if (source === 'player') {
+      textEl.style.left = '70%';
+    } else {
+      textEl.style.left = '30%';
+    }
+    textEl.style.top = '40%';
+    
+    this.ui.effectContainer.appendChild(textEl);
+    
+    setTimeout(() => {
+      textEl.remove();
+    }, 1000);
+  }
+  
+  showHealText(healAmount, source) {
+    const textEl = document.createElement('div');
+    textEl.className = 'heal-text';
+    textEl.textContent = `+${healAmount}`;
+    
+    if (source === 'player') {
+      textEl.style.left = '30%';
+    } else {
+      textEl.style.left = '70%';
+    }
+    textEl.style.top = '40%';
+    
+    this.ui.effectContainer.appendChild(textEl);
+    
+    setTimeout(() => {
+      textEl.remove();
+    }, 1000);
   }
 
   showHealAnimation(member, healAmount) {
