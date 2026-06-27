@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jordan — GenTech | AAE Builder</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: #0a0a0a;
+            color: #e2e8f0;
+            min-height: 100vh;
+        }
+
+        /* Hero */
+        .hero {
+            padding: 60px 20px 40px;
+            text-align: center;
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            border-bottom: 2px solid #3b82f6;
+        }
+        .hero h1 {
+            font-size: 2.6em;
+            color: #3b82f6;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+        .hero .tagline {
+            color: #93c5fd;
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+        .links {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        .links a {
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 8px;
+            background: #1a1a1a;
+            border: 1px solid #3b82f6;
+            color: #3b82f6;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        .links a:hover {
+            background: #3b82f6;
+            color: #0a0a0a;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        .section {
+            margin-bottom: 50px;
+        }
+        .section h2 {
+            color: #3b82f6;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #1e293b;
+            padding-bottom: 10px;
+        }
+        .section-desc {
+            color: #94a3b8;
+            font-size: 0.95em;
+            margin-bottom: 24px;
+            line-height: 1.6;
+            max-width: 800px;
+        }
+
+        /* Journey Timeline */
+        .journey {
+            position: relative;
+            margin: 30px 0;
+            padding-left: 40px;
+            border-left: 3px solid #3b82f6;
+        }
+        .journey-step {
+            margin-bottom: 35px;
+            position: relative;
+        }
+        .journey-step:last-child { margin-bottom: 0; }
+        .journey-dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: #3b82f6;
+            border: 3px solid #0a0a0a;
+            position: absolute;
+            left: -48px;
+            top: 4px;
+            z-index: 1;
+        }
+        .journey-dot.active {
+            background: #22c55e;
+            box-shadow: 0 0 12px rgba(34, 197, 94, 0.4);
+        }
+        .journey-date {
+            font-size: 0.75em;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #93c5fd;
+            margin-bottom: 4px;
+        }
+        .journey-step h3 {
+            color: #60a5fa;
+            font-size: 1.1em;
+            margin-bottom: 6px;
+        }
+        .journey-step p {
+            color: #94a3b8;
+            font-size: 0.9em;
+            line-height: 1.6;
+        }
+        .journey-step .insight {
+            color: #93c5fd;
+            font-style: italic;
+            font-size: 0.85em;
+            margin-top: 6px;
+            padding-left: 12px;
+            border-left: 2px solid #3b82f6;
+        }
+
+        /* Project Cards */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .project-card {
+            background: #111;
+            border: 1px solid #222;
+            border-radius: 14px;
+            padding: 24px;
+            transition: border-color 0.2s, transform 0.2s;
+        }
+        .project-card:hover {
+            border-color: #3b82f6;
+            transform: translateY(-2px);
+        }
+        .project-card h3 {
+            color: #60a5fa;
+            font-size: 1.15em;
+            margin-bottom: 6px;
+        }
+        .project-card .tech {
+            color: #93c5fd;
+            font-size: 0.85em;
+            margin-bottom: 10px;
+        }
+        .project-card p {
+            color: #d1d5db;
+            font-size: 0.9em;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+        .status-row {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            margin-top: 12px;
+            flex-wrap: wrap;
+        }
+        .status {
+            padding: 3px 10px;
+            border-radius: 6px;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 0.75em;
+        }
+        .status-live { background: #1e3a5f; color: #3b82f6; }
+        .status-building { background: #172554; color: #60a5fa; }
+        .status-completed { background: #0a1628; color: #60a5fa; }
+        .project-link {
+            font-size: 0.85em;
+            text-align: right;
+            margin-top: 10px;
+        }
+        .project-link a {
+            color: #3b82f6;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .project-link a:hover { text-decoration: underline; }
+
+        /* AAE Stack */
+        .stack-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+        .stack-card {
+            background: #0a0a0a;
+            border: 1px solid #1a1a1a;
+            border-radius: 12px;
+            padding: 20px;
+            position: relative;
+            transition: border-color 0.2s, transform 0.2s;
+        }
+        .stack-card:hover {
+            border-color: #3b82f6;
+            transform: translateY(-2px);
+        }
+        .stack-layer {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: #3b82f6;
+            color: #000;
+            font-size: 0.7em;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 6px;
+            text-transform: uppercase;
+        }
+        .stack-card h3 { color: #60a5fa; font-size: 1.1em; margin: 0 0 8px 0; }
+        .stack-card p { color: #94a3b8; font-size: 0.88em; line-height: 1.5; margin: 0 0 10px 0; }
+        .stack-tech { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
+        .tech-tag {
+            background: #1a1a2e;
+            color: #60a5fa;
+            font-size: 0.72em;
+            padding: 3px 8px;
+            border-radius: 6px;
+            border: 1px solid #2563eb33;
+        }
+        .stack-chains { color: #6b7280; font-size: 0.8em; margin-bottom: 10px; }
+        .stack-link {
+            display: inline-block;
+            color: #3b82f6;
+            font-size: 0.85em;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .stack-link:hover { color: #4ade80; text-decoration: underline; }
+
+        /* Chain comparison */
+        .chain-comparison {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 12px;
+            margin: 16px 0;
+        }
+        .chain-item {
+            background: #0a0a0a;
+            border: 1px solid #1a1a1a;
+            border-radius: 10px;
+            padding: 14px;
+            color: #d1d5db;
+            font-size: 0.88em;
+            line-height: 1.5;
+        }
+        .chain-item strong { color: #60a5fa; }
+
+        .methodology-highlight {
+            font-size: 0.9em;
+            color: #93c5fd;
+            background: rgba(34, 197, 94, 0.1);
+            padding: 10px 12px;
+            border-radius: 6px;
+            border-left: 3px solid #3b82f6;
+            font-style: italic;
+        }
+
+        /* Hackathon badges */
+        .hack-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 12px;
+        }
+        .hack-badge {
+            background: #111;
+            border: 1px solid #222;
+            border-radius: 10px;
+            padding: 10px 16px;
+            font-size: 0.85em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .hack-badge .label { color: #94a3b8; }
+        .hack-badge .value { color: #60a5fa; font-weight: 600; }
+        .hack-badge .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+        .dot-live { background: #22c55e; }
+        .dot-building { background: #3b82f6; }
+        .dot-submitted { background: #94a3b8; }
+
+        /* Skills */
+        .skills { display: flex; flex-wrap: wrap; gap: 8px; }
+        .skill-tag {
+            background: #1a1a1a;
+            border: 1px solid #1e293b;
+            color: #94a3b8;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85em;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 30px;
+            color: #6b7280;
+            border-top: 1px solid #1a1a1a;
+            font-size: 0.9em;
+        }
+
+        /* Responsive */
+        html { scroll-behavior: smooth; }
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 1.8em; }
+            .links { flex-direction: column; align-items: center; }
+            .links a { width: 100%; text-align: center; margin: 5px 0; }
+            .project-grid { grid-template-columns: 1fr; }
+            .stack-grid { grid-template-columns: 1fr; }
+            .section { margin-bottom: 30px; }
+            .container { padding: 20px 10px; }
+            .hero { padding: 40px 15px 30px; }
+            .journey { padding-left: 30px; }
+            .journey-dot { left: -38px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <h1>Jordan the ProtoJay</h1>
+        <p class="tagline">Building the Autonomous Agentic Economy (AAE)</p>
+        <div class="links">
+            <a href="https://github.com/ProtoJay4789" target="_blank">🐙 GitHub</a>
+            <a href="https://linkedin.com/in/protojay" target="_blank">💼 LinkedIn</a>
+            <a href="mailto:jordanjones0902@gmail.com" target="_blank">📧 Email</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- About -->
+        <div class="section">
+            <h2>🧑‍💻 About</h2>
+            <p style="color: #94a3b8; line-height: 1.8; font-size: 1.05em;">
+                I'm building <strong style="color: #3b82f6;">AAE — the Autonomous Agentic Economy</strong>, a modular infrastructure stack for AI agents to transact, communicate, and build reputation on-chain.
+                <br><br>
+                Solo founder. Full-time Amazon by day, building agent economy infrastructure by night.
+                Everything here is real code, real deployments, real positions. No vaporware.
+            </p>
+        </div>
+
+        <!-- The Journey -->
+        <div class="section">
+            <h2>🛤️ The GenTech Journey</h2>
+            <p class="section-desc">
+                How a DeFi rabbit hole turned into an agent economy platform.
+            </p>
+
+            <div class="journey">
+                <div class="journey-step">
+                    <div class="journey-dot"></div>
+                    <div class="journey-date">February 2026</div>
+                    <h3>Started with DeFi</h3>
+                    <p>LP positions on Trader Joe. Learning how liquidity works, getting rekt by impermanent loss, figuring out fee efficiency. The hard way.</p>
+                    <div class="insight">"If I'm going to lose money, I'm going to understand why."</div>
+                </div>
+
+                <div class="journey-step">
+                    <div class="journey-dot"></div>
+                    <div class="journey-date">April 2026</div>
+                    <h3>The Agent Question</h3>
+                    <p>Started asking: what if an agent could manage my LP positions? Track fees, suggest rebalances, optimize ranges. Built the first DeFi monitoring dashboards and scout fleet.</p>
+                    <div class="insight">"Agents need identity before they need intelligence."</div>
+                </div>
+
+                <div class="journey-step">
+                    <div class="journey-dot"></div>
+                    <div class="journey-date">May 2026</div>
+                    <h3>Identity + Payments</h3>
+                    <p>Built ERC-8004 agent identity. AgentEscrow for cross-chain payments. Agents can now prove who they are and pay each other for services. Deployed on Avalanche and Base.</p>
+                    <div class="insight">"An agent without identity is just a script. An agent without payments is just a bot."</div>
+                </div>
+
+                <div class="journey-step">
+                    <div class="journey-dot"></div>
+                    <div class="journey-date">May–June 2026</div>
+                    <h3>Intelligence + Voice</h3>
+                    <p>Agent Credit Score (0–850). Multi-agent voice personas. Safety rules from OWASP ASI. Agents that can speak, score, and protect themselves.</p>
+                    <div class="insight">"Credit scoring for agents is trust at scale."</div>
+                </div>
+
+                <div class="journey-step">
+                    <div class="journey-dot"></div>
+                    <div class="journey-date">June 2026</div>
+                    <h3>The Kit</h3>
+                    <p>Consolidated everything into <strong style="color: #3b82f6;">genTech-agent-kit</strong>. Modular, chain-agnostic, open-source. One installer, pick your layers. From identity to payments to credit — plug and play.</p>
+                    <div class="insight">"The kit is the product. The hackathons are the distribution."</div>
+                </div>
+
+                <div class="journey-step">
+                    <div class="journey-dot active"></div>
+                    <div class="journey-date">Now</div>
+                    <h3>The Economy</h3>
+                    <p>Real applications on the stack. Agent Bill Pay (consumer gateway). Cookbook Nanopay (x402 microtransactions). Agent ETFs (tokenized fund products). The agent economy is live.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Core Projects -->
+        <div class="section">
+            <h2>🚀 Core Projects</h2>
+            <p class="section-desc">
+                The builds that power the agent economy. Each one solves a real problem.
+            </p>
+            <div class="project-grid">
+
+                <div class="project-card">
+                    <h3>🏗️ Agent Arena</h3>
+                    <div class="tech">Solidity · x402 · ERC-8004 · Solana · Base</div>
+                    <p>Rogue-lite DeFi trading game. Borrow, trade, survive. AI agents compete with credit scores, NFT loadouts, and real money. The flagship product.</p>
+                    <div class="status-row">
+                        <span class="status status-live">LIVE</span>
+                    </div>
+                    <div class="project-link"><a href="https://github.com/ProtoJay4789/Agent-Arena" target="_blank">📦 GitHub →</a></div>
+                </div>
+
+                <div class="project-card">
+                    <h3>🔧 Agent Kit</h3>
+                    <div class="tech">ERC-8004 · x402 · Multi-chain</div>
+                    <p>The AAE-compatible agent standard. Identity, execution, audit. Baked in. Multi-chain ERC-8004 with x402 payments. Forkable, open source.</p>
+                    <div class="status-row">
+                        <span class="status status-live">LIVE</span>
+                    </div>
+                    <div class="project-link"><a href="https://github.com/ProtoJay4789/genTech-agent-kit" target="_blank">📦 GitHub →</a></div>
+                </div>
+
+                <div class="project-card">
+                    <h3>🛡️ Rugcheck</h3>
+                    <div class="tech">Solana · Risk Scoring · x402</div>
+                    <p>AI agent monitoring token launches. Detects rugs, honeypots, sketchy contracts before users ape. 11-factor risk scoring. Live on port 8088.</p>
+                    <div class="status-row">
+                        <span class="status status-live">LIVE</span>
+                    </div>
+                    <div class="project-link"><a href="https://github.com/ProtoJay4789/rugcheck" target="_blank">📦 GitHub →</a></div>
+                </div>
+
+                <div class="project-card">
+                    <h3>📊 Agent Credit Score</h3>
+                    <div class="tech">Python · Credit Scoring · MIT</div>
+                    <p>The standard for grading AI agent payment behavior. 0-850 score. Sharpe ratio-based. 5 tiers from "The Gambler" to "The Whale." MIT licensed.</p>
+                    <div class="status-row">
+                        <span class="status status-live">LIVE</span>
+                    </div>
+                    <div class="project-link"><a href="https://github.com/ProtoJay4789/agent-credit-score" target="_blank">📦 GitHub →</a></div>
+                </div>
+
+                <div class="project-card">
+                    <h3>💰 AgentEscrow</h3>
+                    <div class="tech">Solidity · x402 · Escrow</div>
+                    <p>AI-validated escrow with x402 payments for the agentic economy. Cross-chain payment infrastructure. Production-ready on Avalanche & Base.</p>
+                    <div class="status-row">
+                        <span class="status status-live">LIVE</span>
+                    </div>
+                    <div class="project-link"><a href="https://github.com/ProtoJay4789/agent-escrow" target="_blank">📦 GitHub →</a></div>
+                </div>
+
+                <div class="project-card">
+                    <h3>🎤 Speech Engine</h3>
+                    <div class="tech">ElevenLabs · Voice · Real-time</div>
+                    <p>Real-time voice agents with Steve Harvey + Vanito personas. ElevenLabs Speech Engine integration. Interruption-aware, multi-voice.</p>
+                    <div class="status-row">
+                        <span class="status status-live">LIVE</span>
+                    </div>
+                    <div class="project-link"><a href="https://github.com/ProtoJay4789/speech-engine" target="_blank">📦 GitHub →</a></div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- API Services -->
+        <div class="section">
+            <h2>⚡ API Services</h2>
+            <p class="section-desc">
+                Production APIs accepting x402 micropayments. Pay-per-use, no subscriptions. Built for AI agents, available to everyone.
+            </p>
+            <div class="project-grid">
+
+                <div class="project-card">
+                    <h3>🎮 Deal Tracker API</h3>
+                    <div class="tech">CheapShark · TMDB · x402 · FastAPI</div>
+                    <p>Cross-store game prices (35+ stores) and movie streaming availability (40+ platforms). Search, cheapest finder, price history. $0.001/query.</p>
+                    <div class="status-row">
+                        <span class="status status-live">LIVE</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <h3>📊 Crypto Price API</h3>
+                    <div class="tech">Pyth · DexScreener · x402 · FastAPI</div>
+                    <p>Real-time crypto prices, OHLC history, DEX pairs. 12 global stock markets. Free for crypto/FX, $0.001/stock quote.</p>
+                    <div class="status-row">
+                        <span class="status status-live">LIVE</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <h3>⛽ Gas Price API</h3>
+                    <div class="tech">Multi-chain · Real-time · x402 · FastAPI</div>
+                    <p>Current gas prices across 20+ chains. Slow/standard/fast tiers. $0.001/query.</p>
+                    <div class="status-row">
+                        <span class="status status-live">LIVE</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <h3>🔍 Token Security API</h3>
+                    <div class="tech">GoPlus · Rugcheck · x402 · FastAPI</div>
+                    <p>Token risk scoring with 11 weighted factors. Honeypot detection, owner privileges, contract verification. $0.005/scan.</p>
+                    <div class="status-row">
+                        <span class="status status-live">LIVE</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <h3>🛡️ Rugcheck v2 API</h3>
+                    <div class="tech">Solana · Risk Scoring · x402 · FastAPI</div>
+                    <p>Solana token risk analysis. Simulates token data, calculates composite risk scores, flags scams. Port 8088. $0.005/scan.</p>
+                    <div class="status-row">
+                        <span class="status status-live">LIVE</span>
+                    </div>
+                </div>
+
+            </div>
+            <div style="text-align: center; margin-top: 20px;">
+                <a href="https://gentechlabs.net" target="_blank" style="display:inline-block;padding:12px 24px;border-radius:8px;background:linear-gradient(135deg,#3b82f6,#8b5cf6);color:white;font-weight:600;text-decoration:none;">Browse All APIs →</a>
+            </div>
+        </div>
+
+        <!-- AAE Stack -->
+        <div class="section">
+            <h2>🏗️ The AAE Stack</h2>
+            <p class="section-desc">
+                <em>Built modular on purpose. Chain-agnostic core with chain-specific adapters.
+                Every layer works independently, but together they form a complete agent economy.</em>
+            </p>
+
+            <div class="stack-grid">
+                <div class="stack-card">
+                    <div class="stack-layer">Layer 1</div>
+                    <h3>🔐 Identity</h3>
+                    <p>ERC-8004 agent identity on every chain. Agents prove who they are, build reputation, and get discovered.</p>
+                    <div class="stack-tech">
+                        <span class="tech-tag">ERC-8004</span>
+                        <span class="tech-tag">OOBE Protocol</span>
+                    </div>
+                    <div class="stack-chains"><strong>Chains:</strong> Solana, EVM (Base, Arbitrum, Mantle)</div>
+                    <a href="https://github.com/ProtoJay4789/oobe-protocol" target="_blank" class="stack-link">View Code →</a>
+                </div>
+
+                <div class="stack-card">
+                    <div class="stack-layer">Layer 2</div>
+                    <h3>🛡️ Safety</h3>
+                    <p>46 OWASP ASI rules. Transfer gates, input firewalls, circuit breakers. Every agent action is checked before execution.</p>
+                    <div class="stack-tech">
+                        <span class="tech-tag">OWASP ASI 10/10</span>
+                        <span class="tech-tag">Audit Trail</span>
+                    </div>
+                    <div class="stack-chains"><strong>Chains:</strong> EVM (all), Solana</div>
+                    <a href="https://github.com/ProtoJay4789/Agent-Arena/tree/master/safety" target="_blank" class="stack-link">View Code →</a>
+                </div>
+
+                <div class="stack-card">
+                    <div class="stack-layer">Layer 3</div>
+                    <h3>🧠 Memory</h3>
+                    <p>Echo Brain — 4-layer memory architecture. Working → Short-term → Long-term. Pattern detection, consolidation, cosine similarity search.</p>
+                    <div class="stack-tech">
+                        <span class="tech-tag">SQLite</span>
+                        <span class="tech-tag">Embeddings</span>
+                        <span class="tech-tag">Consolidation</span>
+                    </div>
+                    <div class="stack-chains"><strong>Chains:</strong> Off-chain (agent-local)</div>
+                    <a href="https://github.com/ProtoJay4789/Agent-Arena/tree/master/brain" target="_blank" class="stack-link">View Code →</a>
+                </div>
+
+                <div class="stack-card">
+                    <div class="stack-layer">Layer 4</div>
+                    <h3>💰 Commerce</h3>
+                    <p>Agent-to-agent payments with x402 micropayments. Escrow, validation, automatic release. Agents pay agents for services.</p>
+                    <div class="stack-tech">
+                        <span class="tech-tag">x402</span>
+                        <span class="tech-tag">AgentEscrow</span>
+                        <span class="tech-tag">MPP</span>
+                    </div>
+                    <div class="stack-chains"><strong>Chains:</strong> Base, Solana, Avalanche</div>
+                    <a href="https://github.com/ProtoJay4789/kite-agent-commerce" target="_blank" class="stack-link">View Code →</a>
+                </div>
+
+                <div class="stack-card">
+                    <div class="stack-layer">Layer 5</div>
+                    <h3>📊 Credit</h3>
+                    <p>0–850 credit scoring. Win rate, risk-adjusted returns, consistency, behavior. 5 tiers from "The Gambler" to "The Whale."</p>
+                    <div class="stack-tech">
+                        <span class="tech-tag">Sharpe Ratio</span>
+                        <span class="tech-tag">5 Tiers</span>
+                    </div>
+                    <div class="stack-chains"><strong>Chains:</strong> Off-chain (aggregated)</div>
+                    <a href="https://github.com/ProtoJay4789/Agent-Arena/tree/master/credit_score" target="_blank" class="stack-link">View Code →</a>
+                </div>
+
+                <div class="stack-card">
+                    <div class="stack-layer">Layer 6</div>
+                    <h3>🎤 Voice</h3>
+                    <p>Real-time voice personas. Steve Harvey roasts trades. Each agent has a distinct voice and personality.</p>
+                    <div class="stack-tech">
+                        <span class="tech-tag">Edge TTS</span>
+                        <span class="tech-tag">ElevenLabs</span>
+                    </div>
+                    <div class="stack-chains"><strong>Chains:</strong> Off-chain (real-time)</div>
+                    <a href="https://github.com/ProtoJay4789/speech-engine" target="_blank" class="stack-link">View Code →</a>
+                </div>
+            </div>
+
+            <!-- Chain Support -->
+            <div class="stack-card" style="margin-top: 20px;">
+                <h3>🧩 Chain-Agnostic by Design</h3>
+                <p style="color: #94a3b8; font-size: 0.9em; margin-bottom: 12px;">Every blockchain has different strengths. Core built once, adapter-swapped per chain.</p>
+                <div class="chain-comparison">
+                    <div class="chain-item"><strong>🟢 Solana</strong> — Speed + low cost. Agent microtransactions, identity registration.</div>
+                    <div class="chain-item"><strong>🔵 Base</strong> — Coinbase distribution. Consumer-facing agents, token launches.</div>
+                    <div class="chain-item"><strong>🟠 Avalanche</strong> — Institutional DeFi. LP monitoring, yield optimization.</div>
+                    <div class="chain-item"><strong>🔴 Arbitrum</strong> — Deep DeFi ecosystem. Agent task escrow, multi-agent orchestration.</div>
+                    <div class="chain-item"><strong>🟡 Mantle</strong> — Agent reputation hub. DAO governance for agent collectives.</div>
+                    <div class="chain-item"><strong>🟣 Arc</strong> — AI-native chain. Portfolio optimization, regime detection.</div>
+                </div>
+                <div class="methodology-highlight">
+                    <em>One identity. One reputation. One credit score. Every chain.</em>
+                </div>
+            </div>
+        </div>
+
+        <!-- Hackathon Track -->
+        <div class="section">
+            <h2>🏆 Hackathon Track</h2>
+            <p class="section-desc">Building in public. Some things ship, some stall, some get scrapped. That's the game.</p>
+            <div class="hack-badges">
+                <div class="hack-badge"><div class="dot dot-submitted"></div><span class="label">Agora Agents</span><span class="value">Submitted</span></div>
+                <div class="hack-badge"><div class="dot dot-submitted"></div><span class="label">Swarms ACM</span><span class="value">Submitted</span></div>
+                <div class="hack-badge"><div class="dot dot-submitted"></div><span class="label">Somnia Agentathon</span><span class="value">Submitted</span></div>
+                <div class="hack-badge"><div class="dot dot-building"></div><span class="label">Lepton Agents</span><span class="value">Jun 29</span></div>
+                <div class="hack-badge"><div class="dot dot-submitted"></div><span class="label">BNB Hack</span><span class="value">Submitted</span></div>
+            </div>
+        </div>
+
+        <!-- Tech Stack -->
+        <div class="section">
+            <h2>🛠️ Tech Stack</h2>
+            <div class="skills">
+                <span class="skill-tag">Solidity</span>
+                <span class="skill-tag">Foundry</span>
+                <span class="skill-tag">Hardhat</span>
+                <span class="skill-tag">Rust</span>
+                <span class="skill-tag">Python</span>
+                <span class="skill-tag">TypeScript</span>
+                <span class="skill-tag">x402</span>
+                <span class="skill-tag">ERC-8004</span>
+                <span class="skill-tag">Chainlink</span>
+                <span class="skill-tag">DeFi LP</span>
+                <span class="skill-tag">AI Agents</span>
+                <span class="skill-tag">Hermes</span>
+                <span class="skill-tag">Cross-Chain</span>
+            </div>
+        </div>
+
+        <!-- Support -->
+        <div class="section" style="text-align: center; border-top: 1px solid rgba(59,130,246,0.2); padding-top: 30px; margin-top: 40px;">
+            <h2>💚 Support</h2>
+            <p style="color: #94a3b8; line-height: 1.8; max-width: 600px; margin: 0 auto 20px;">
+                If you believe in the agent economy, consider supporting the ecosystem.
+            </p>
+            <div style="display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;">
+                <a href="https://flaunch.gg/base/coins/0x5cDdf388B948dc7b7B88910072829811c751f73e" target="_blank" rel="noopener noreferrer"
+                   style="display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; background: linear-gradient(135deg, rgba(59,130,246,0.15), rgba(147,197,253,0.1)); border: 1px solid rgba(59,130,246,0.3); border-radius: 12px; color: #93c5fd; text-decoration: none; font-weight: 600; transition: all 0.3s;">
+                    <span style="font-size: 18px;">🔵</span>
+                    AAE Token — Base
+                </a>
+            </div>
+            <p style="color: #64748b; font-size: 0.85em; margin-top: 16px;">
+                AAE · ERC-20 · Base Network · <span style="color: #94a3b8;">Autonomous Agentic Economy</span>
+            </p>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>
+            Built with 💚 by Jordan · Powered by GenTech Agents · Last updated: June 2026<br>
+            <span style="color: #3b82f6;">Building the agent-owned economy.</span>
+        </p>
+    </div>
+
+    <!-- Project data (synced from projects.json by generate.py) -->
+    <script id="project-data" type="application/json">
+[
+  {
+    "id": "aae-platform",
+    "title": "AAE Platform",
+    "description": "The full agent economy stack. Six modular layers — ERC-8004 identity, OWASP safety, Echo Brain memory, x402 commerce, credit scoring, voice personas. Chain-agnostic core with chain-specific adapters.",
+    "tech": [
+      "Identity",
+      "Safety",
+      "Memory",
+      "Commerce",
+      "Credit",
+      "Voice"
+    ],
+    "status": "building",
+    "timeline": "Apr 2026",
+    "highlight": true,
+    "github_url": "https://github.com/ProtoJay4789/genTech-agent-kit"
+  },
+  {
+    "id": "agent-escrow",
+    "title": "AgentEscrow",
+    "description": "Cross-chain payment infrastructure with AI agent integration. Agents escrow, validate, and release payments automatically. Live on Avalanche & Base with 6+ production positions.",
+    "tech": [
+      "Solidity",
+      "x402",
+      "EVM",
+      "Avalanche",
+      "Base"
+    ],
+    "status": "live",
+    "timeline": "May 2026",
+    "highlight": true,
+    "github_url": "https://github.com/ProtoJay4789/Agent-Arena"
+  },
+  {
+    "id": "agent-credit-score",
+    "title": "Agent Credit Score",
+    "description": "0-850 credit scoring system for AI agents. Tracks win rate, risk-adjusted returns, consistency, and behavior across DeFi protocols. 22/22 tests passing. MIT licensed.",
+    "tech": [
+      "Python",
+      "Sharpe Ratio",
+      "5 Tiers",
+      "MIT"
+    ],
+    "status": "live",
+    "timeline": "Jun 2026",
+    "highlight": true,
+    "github_url": "https://github.com/ProtoJay4789/Agent-Arena/tree/master/credit_score"
+  },
+  {
+    "id": "multi-agent-voice",
+    "title": "Multi-Agent Voice Integration",
+    "description": "Four-agent voice system (Gentech, YoYo, DMOB, Desmond) with daily automated briefings. End-to-end TTS pipeline with dialogue generation, voice selection, and audio mixing.",
+    "tech": [
+      "ElevenLabs",
+      "Hermes",
+      "TTS",
+      "Telegram"
+    ],
+    "status": "live",
+    "timeline": "May 2026",
+    "highlight": true
+  },
+  {
+    "id": "defi-milestones",
+    "title": "DeFi Milestones",
+    "description": "Automated LP tracking and rebalancing on Avalanche. Live DexScreener data, fee efficiency scoring, milestone-based adjustments. Managing real positions with real money.",
+    "tech": [
+      "LFJ",
+      "Chainlink",
+      "LP Tracking",
+      "Live Data"
+    ],
+    "status": "live",
+    "timeline": "Apr 2026",
+    "highlight": true,
+    "demo_url": "/DeFi/defi-dashboard.html"
+  },
+  {
+    "id": "cookbook-nanopay",
+    "title": "Cookbook Nanopay",
+    "description": "Pay-per-recipe platform using Circle Gateway nanopayments. $0.005/recipe, $0.001/review. Gas-free x402 payments settling in <500ms. Built for Lepton Agents Hackathon.",
+    "tech": [
+      "Circle Gateway",
+      "x402",
+      "Arc",
+      "USDC"
+    ],
+    "status": "building",
+    "timeline": "Jun 2026",
+    "highlight": true
+  }
+]
+</script>
+</body>
+</html>
