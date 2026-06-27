@@ -1,30 +1,28 @@
-import { ENEMIES, ACTIONS, KEYBOARD_MAP } from './game-constants.js';
+import { CLASSES, CLASS_ICONS, CLASS_COLORS } from './classes.js';
 import { GameState } from './game-state.js';
 import { GestureController } from './gesture-controller.js';
 import { TouchController } from './touch-controller.js';
-import { getCharacterSVG } from './characters.js';
+import { CHARACTERS } from './characters.js';
 
 class MetaFighterApp {
   constructor() {
     this.gameState = new GameState();
-    this.gestureController = new GestureController(this.handleGesture.bind(this));
-    this.touchController = new TouchController(this.handleAction.bind(this));
-    this.isGameActive = false;
+    this.gestureController = new GestureController((action) => this.handleAction(action));
+    this.touchController = new TouchController((action) => this.handleAction(action));
+    this.selectedMemberIndex = 0;
 
     this.ui = {
-      playerHp: document.getElementById('player-hp'),
-      enemyHp: document.getElementById('enemy-hp'),
-      playerAp: document.getElementById('player-ap'),
-      potions: document.getElementById('potions'),
+      level: document.getElementById('level'),
       turnIndicator: document.getElementById('turn-indicator'),
       combatLog: document.getElementById('combat-log'),
-      level: document.getElementById('level'),
       enemyName: document.getElementById('enemy-name'),
-      playerSpriteContainer: document.getElementById('player-sprite-container'),
       enemySpriteContainer: document.getElementById('enemy-sprite-container'),
+      partyContainer: document.getElementById('party-container'),
+      abilitiesContainer: document.getElementById('abilities-container'),
       gameOver: document.getElementById('game-over'),
       gameWon: document.getElementById('game-won'),
-      restartBtn: document.getElementById('restart-btn')
+      restartBtn: document.getElementById('restart-btn'),
+      potionBtn: document.getElementById('potion-btn')
     };
 
     this.init();
@@ -32,16 +30,21 @@ class MetaFighterApp {
 
   init() {
     this.ui.restartBtn.addEventListener('click', () => this.restartGame());
+    this.ui.potionBtn.addEventListener('click', () => this.usePotion());
     this.startGame();
   }
 
   startGame() {
     this.gameState.reset();
+    this.gameState.initParty(['warrior', 'hunter', 'mage']);
     this.gameState.startLevel(1);
     this.isGameActive = true;
     this.gestureController.start();
     this.touchController.start();
+    this.selectedMemberIndex = 0;
+    this.renderParty();
     this.renderCharacters();
+    this.renderAbilities();
     this.updateUI();
     this.processTurn();
   }
@@ -53,253 +56,278 @@ class MetaFighterApp {
     this.startGame();
   }
 
-  renderCharacters() {
-    // Render player knight SVG
-    this.ui.playerSpriteContainer.innerHTML = getCharacterSVG('player');
+  renderParty() {
+    this.ui.partyContainer.innerHTML = '';
     
-    // Render enemy based on current enemy
-    if (this.gameState.currentEnemy) {
-      const enemyKey = this.gameState.currentEnemy.name.toLowerCase();
-      this.ui.enemySpriteContainer.innerHTML = getCharacterSVG(enemyKey);
-    }
+    this.gameState.party.forEach((member, index) => {
+      const memberEl = document.createElement('div');
+      memberEl.className = `party-member ${!member.isAlive ? 'dead' : ''} ${index === this.selectedMemberIndex ? 'selected' : ''}`;
+      memberEl.style.borderLeft = `3px solid ${member.color}`;
+      memberEl.innerHTML = `
+        <div class="member-header">
+          <span class="member-icon">${CLASS_ICONS[member.classKey]}</span>
+          <span class="member-name">${member.name}</span>
+          <span class="member-role">${member.role}</span>
+        </div>
+        <div class="hp-bar-mini">
+          <div class="hp-fill-mini" style="width: ${(member.hp / member.maxHp) * 100}%; background: ${member.color}"></div>
+          <span class="hp-text-mini">${member.hp}/${member.maxHp}</span>
+        </div>
+        <div class="stats-mini">
+          <span class="ap-stat">AP: ${member.ap}/${member.maxAp}</span>
+          <span class="protection-stat">DEF: ${member.protection}</span>
+        </div>
+      `;
+      
+      memberEl.addEventListener('click', () => {
+        this.selectedMemberIndex = index;
+        this.renderParty();
+        this.renderAbilities();
+      });
+      
+      this.ui.partyContainer.appendChild(memberEl);
+    });
   }
 
-  handleAction(actionKey) {
-    if (!this.isGameActive) return;
-
-    const currentTurn = this.gameState.getCurrentTurn();
-    if (currentTurn.type !== 'player') {
-      console.log('Not your turn!');
+  renderAbilities() {
+    const member = this.gameState.party[this.selectedMemberIndex];
+    if (!member || !member.isAlive) {
+      this.ui.abilitiesContainer.innerHTML = '<div class="no-selection">Select a living party member</div>';
       return;
     }
 
-    const result = this.gameState.playerAction(actionKey);
-    if (result.success) {
-      this.playActionAnimation(actionKey, result.data);
-      this.updateUI();
-
-      // Check if enemy was killed
-      if (result.data?.killed) {
-        this.showKillMessage(result.data.enemyName);
-        
-        // Check for boss victory
-        const victoryCheck = this.gameState.checkVictory();
-        if (victoryCheck?.won) {
-          setTimeout(() => {
-            this.isGameActive = false;
-            this.ui.gameWon.classList.remove('hidden');
-          }, 3000);
-          return;
-        }
-
-        // Proceed to next level
-        setTimeout(() => {
-          const nextLevel = this.gameState.level + 1;
-          this.showLevelTransitionMessage(nextLevel);
-          setTimeout(() => {
-            this.gameState.startLevel(nextLevel);
-            this.renderCharacters();
-            this.updateUI();
-            this.processTurn();
-          }, 2000);
-        }, 3000);
-        return;
-      }
-
-      this.processTurn();
-    } else {
-      console.log(result.message);
-    }
-  }
-
-  handleGesture(gestureName) {
-    this.handleAction(gestureName);
-  }
-
-  playActionAnimation(actionKey, data) {
-    const playerSprite = this.ui.playerSpriteContainer.querySelector('svg');
-    const enemySprite = this.ui.enemySpriteContainer.querySelector('svg');
-
-    if (!playerSprite || !enemySprite) return;
-
-    // Clear previous animations
-    playerSprite.classList.remove('knight-attack-walk', 'knight-damage');
-    enemySprite.classList.remove('skeleton-attack-walk', 'skeleton-damage', 
-                              'zombie-attack-walk', 'zombie-damage',
-                              'ghost-attack-walk', 'ghost-damage');
-
-    if (actionKey === 'attack') {
-      playerSprite.classList.add('knight-attack-walk');
-      if (data?.damage) {
-        this.showDamageNumber(data.damage, this.ui.enemySpriteContainer);
-      }
-    } else if (actionKey === 'holyStrike' || actionKey === 'smite') {
-      playerSprite.classList.add('knight-attack-walk');
-      if (data?.damage) {
-        this.showDamageNumber(data.damage, this.ui.enemySpriteContainer, true);
-      }
-    } else if (actionKey === 'potion') {
-      this.showHealNumber(data?.healed || 0, this.ui.playerSpriteContainer);
-    }
-
-    if (data?.damage && data.damage > 0) {
-      const enemyClass = this.getEnemyAnimationClass();
-      enemySprite.classList.add(`${enemyClass}-damage`);
-      setTimeout(() => enemySprite.classList.remove(`${enemyClass}-damage`), 400);
-    }
-
-    setTimeout(() => {
-      playerSprite.classList.remove('knight-attack-walk');
-    }, 800);
-  }
-
-  playEnemyAttackAnimation(damage) {
-    const playerSprite = this.ui.playerSpriteContainer.querySelector('svg');
-    const enemySprite = this.ui.enemySpriteContainer.querySelector('svg');
-
-    if (!playerSprite || !enemySprite) return;
-
-    // Clear previous animations
-    enemySprite.classList.remove('skeleton-attack-walk', 'skeleton-damage', 
-                              'zombie-attack-walk', 'zombie-damage',
-                              'ghost-attack-walk', 'ghost-damage');
-    playerSprite.classList.remove('knight-attack-walk', 'knight-damage');
-
-    // Enemy walks forward to attack
-    const enemyClass = this.getEnemyAnimationClass();
-    enemySprite.classList.add(`${enemyClass}-attack-walk`);
-
-    setTimeout(() => {
-      // Player takes damage
-      playerSprite.classList.add('knight-damage');
-      this.showDamageNumber(damage, this.ui.playerSpriteContainer);
+    this.ui.abilitiesContainer.innerHTML = '';
+    
+    Object.entries(member.abilities).forEach(([key, ability]) => {
+      const abilityEl = document.createElement('div');
+      abilityEl.className = `ability-card ${member.ap < ability.cost ? 'disabled' : ''}`;
+      abilityEl.setAttribute('data-ability', key);
+      abilityEl.style.borderColor = member.color;
+      abilityEl.innerHTML = `
+        <div class="ability-name">${ability.name}</div>
+        <div class="ability-desc">${ability.description}</div>
+        <div class="ability-cost">Cost: ${ability.cost} AP</div>
+        <div class="ability-type">${ability.type}</div>
+      `;
       
-      setTimeout(() => {
-        playerSprite.classList.remove('knight-damage');
-      }, 400);
-    }, 400);
-
-    setTimeout(() => {
-      enemySprite.classList.remove(`${enemyClass}-attack-walk`);
-    }, 1000);
+      abilityEl.addEventListener('click', () => {
+        this.handleAbility(key);
+      });
+      
+      this.ui.abilitiesContainer.appendChild(abilityEl);
+    });
   }
 
-  getEnemyAnimationClass() {
-    const enemyName = this.gameState.currentEnemy?.name?.toLowerCase() || '';
-    if (enemyName.includes('skeleton') || enemyName.includes('death knight')) return 'skeleton';
-    if (enemyName.includes('zombie')) return 'zombie';
-    if (enemyName.includes('ghost')) return 'ghost';
-    return 'skeleton'; // default
+  renderCharacters() {
+    if (!this.gameState.currentEnemy) return;
+
+    const enemy = this.gameState.currentEnemy;
+    const enemyClass = enemy.name.toLowerCase().replace(' ', '');
+    const enemySvg = CHARACTERS[enemyClass]?.svg || CHARACTERS.skeleton?.svg;
+    
+    this.ui.enemySpriteContainer.innerHTML = enemySvg;
+    const enemySvgElement = this.ui.enemySpriteContainer.querySelector('svg');
+    if (enemySvgElement) {
+      enemySvgElement.classList.add(`${enemyClass}-sprite`);
+    }
   }
 
-  showDamageNumber(damage, target, isCrit = false) {
-    const damageNumber = document.createElement('div');
-    damageNumber.className = `damage-number ${isCrit ? 'damage-crit' : ''}`;
-    damageNumber.textContent = `-${damage}`;
-    damageNumber.style.left = '50%';
-    damageNumber.style.top = '20px';
-    damageNumber.style.transform = 'translateX(-50%)';
-    target.appendChild(damageNumber);
+  updateUI() {
+    const { party, currentEnemy, level, combatLog, potions } = this.gameState;
 
-    setTimeout(() => damageNumber.remove(), 800);
-  }
+    this.ui.level.textContent = level;
+    this.ui.enemyName.textContent = currentEnemy?.name || '';
+    
+    if (currentEnemy) {
+      const enemyHpFill = document.getElementById('enemy-hp');
+      if (enemyHpFill) {
+        enemyHpFill.style.width = `${(currentEnemy.hp / currentEnemy.maxHp) * 100}%`;
+        enemyHpFill.textContent = `${currentEnemy.hp}/${currentEnemy.maxHp}`;
+      }
+    }
 
-  showHealNumber(healed, target) {
-    const healNumber = document.createElement('div');
-    healNumber.className = 'damage-number heal-number';
-    healNumber.textContent = `+${healed}`;
-    healNumber.style.left = '50%';
-    healNumber.style.top = '20px';
-    healNumber.style.transform = 'translateX(-50%)';
-    target.appendChild(healNumber);
+    this.renderParty();
+    this.renderAbilities();
 
-    setTimeout(() => healNumber.remove(), 800);
+    this.ui.combatLog.innerHTML = combatLog.slice(-10).map(entry => 
+      `<div class="log-entry">${entry}</div>`
+    ).join('');
+
+    this.ui.combatLog.scrollTop = this.ui.combatLog.scrollHeight;
   }
 
   processTurn() {
     if (!this.isGameActive) return;
 
     const currentTurn = this.gameState.getCurrentTurn();
+    
+    if (!currentTurn) {
+      this.gameState.turnOrder = this.gameState.buildTurnOrder();
+      this.currentTurnIndex = 0;
+      this.updateUI();
+      return;
+    }
 
-    if (currentTurn.type === 'enemy') {
-      this.ui.turnIndicator.textContent = `${this.gameState.currentEnemy.name}'s turn...`;
-      this.ui.turnIndicator.className = 'turn-indicator enemy-turn';
-
-      setTimeout(() => {
-        const enemyDamage = this.gameState.enemyTurn();
-        this.playEnemyAttackAnimation(enemyDamage);
-        this.updateUI();
-
-        const victoryCheck = this.gameState.checkVictory();
-        if (victoryCheck?.won) {
-          this.isGameActive = false;
-          this.ui.gameWon.classList.remove('hidden');
-          return;
-        }
-
-        if (this.gameState.gameOver) {
-          this.isGameActive = false;
-          this.triggerDeathAnimation();
-          return;
-        }
-
-        this.ui.turnIndicator.textContent = 'Your turn';
-        this.ui.turnIndicator.className = 'turn-indicator player-turn';
-        this.processTurn();
-      }, 1500);
-    } else {
-      this.ui.turnIndicator.textContent = 'Your turn';
+    if (currentTurn.type === 'player') {
+      this.ui.turnIndicator.textContent = `${currentTurn.name}'s turn`;
       this.ui.turnIndicator.className = 'turn-indicator player-turn';
+      this.ui.turnIndicator.style.background = currentTurn.member.color;
+      
+      const memberIndex = this.gameState.party.findIndex(m => m.name === currentTurn.name);
+      if (memberIndex !== -1) {
+        this.selectedMemberIndex = memberIndex;
+        this.renderParty();
+        this.renderAbilities();
+      }
+    } else if (currentTurn.type === 'enemy') {
+      this.ui.turnIndicator.textContent = `Enemy turn`;
+      this.ui.turnIndicator.className = 'turn-indicator enemy-turn';
+      this.ui.turnIndicator.style.background = '#8b0000';
+      
+      setTimeout(() => {
+        const damage = this.gameState.enemyTurn();
+        this.showEnemyAttack(damage);
+        this.updateUI();
+        
+        setTimeout(() => {
+          const gameOverCheck = this.gameState.checkGameOver();
+          if (gameOverCheck?.gameOver) {
+            this.isGameActive = false;
+            this.triggerDeathAnimation();
+            return;
+          }
+
+          this.gameState.advanceTurn();
+          this.gameState.turnOrder = this.gameState.buildTurnOrder();
+          this.currentTurnIndex = 0;
+          this.updateUI();
+          this.processTurn();
+        }, 1000);
+      }, 1000);
     }
   }
 
-  showKillMessage(enemyName) {
-    this.ui.turnIndicator.textContent = `You slayed ${enemyName}!`;
-    this.ui.turnIndicator.className = 'turn-indicator player-turn';
-    
-    // Flash enemy red then fade out
+  handleAbility(abilityKey) {
+    if (!this.isGameActive) return;
+
+    const currentTurn = this.gameState.getCurrentTurn();
+    if (!currentTurn || currentTurn.type !== 'player') {
+      console.log('Not your turn!');
+      return;
+    }
+
+    const member = this.gameState.party[this.selectedMemberIndex];
+    if (!member || !member.isAlive || member.name !== currentTurn.name) {
+      console.log('Select the current turn member');
+      return;
+    }
+
+    const result = this.gameState.playerAction(member, abilityKey);
+    if (!result.success) {
+      console.log(result.message);
+      return;
+    }
+
+    this.updateUI();
+    this.showAbilityAnimation(member, abilityKey, result);
+
+    setTimeout(() => {
+      const victoryCheck = this.gameState.checkVictory();
+      if (victoryCheck?.won) {
+        this.isGameActive = false;
+        this.ui.gameWon.classList.remove('hidden');
+        return;
+      }
+
+      if (victoryCheck?.nextLevel) {
+        this.showLevelTransition(victoryCheck.nextLevel);
+        return;
+      }
+
+      this.gameState.advanceTurn();
+      this.gameState.turnOrder = this.gameState.buildTurnOrder();
+      this.currentTurnIndex = 0;
+      this.updateUI();
+      this.processTurn();
+    }, 1000);
+  }
+
+  handleAction(action) {
+    const currentTurn = this.gameState.getCurrentTurn();
+    if (!currentTurn || currentTurn.type !== 'player') return;
+
+    if (action === 'potion') {
+      this.usePotion();
+      return;
+    }
+
+    const member = this.gameState.party[this.selectedMemberIndex];
+    if (member && member.abilities[action]) {
+      this.handleAbility(action);
+    }
+  }
+
+  usePotion() {
+    const lowestHpMember = this.gameState.party
+      .filter(m => m.isAlive)
+      .sort((a, b) => (a.hp / a.maxHp) - (b.hp / b.maxHp))[0];
+
+    if (!lowestHpMember) {
+      console.log('No living party members');
+      return;
+    }
+
+    const result = this.gameState.usePotion(lowestHpMember);
+    if (result.success) {
+      this.updateUI();
+      this.showHealAnimation(lowestHpMember, result.heal);
+    }
+  }
+
+  showAbilityAnimation(member, abilityKey, result) {
+    const memberElement = document.querySelector(`.party-member:nth-child(${this.gameState.party.indexOf(member) + 1})`);
+    if (memberElement) {
+      memberElement.classList.add('ability-active');
+      setTimeout(() => memberElement.classList.remove('ability-active'), 500);
+    }
+
+    if (result.damage > 0) {
+      const enemySprite = this.ui.enemySpriteContainer.querySelector('svg');
+      if (enemySprite) {
+        enemySprite.classList.add('taking-damage');
+        setTimeout(() => enemySprite.classList.remove('taking-damage'), 500);
+      }
+    }
+  }
+
+  showEnemyAttack(damage) {
     const enemySprite = this.ui.enemySpriteContainer.querySelector('svg');
     if (enemySprite) {
-      enemySprite.style.transition = 'opacity 0.5s, filter 0.5s';
-      enemySprite.style.filter = 'brightness(2) hue-rotate(340deg)';
-      setTimeout(() => {
-        enemySprite.style.opacity = '0.3';
-        enemySprite.style.filter = 'brightness(0.5) grayscale(1)';
-      }, 300);
+      enemySprite.classList.add('enemy-attacking');
+      setTimeout(() => enemySprite.classList.remove('enemy-attacking'), 500);
     }
   }
 
-  showLevelTransitionMessage(nextLevel) {
-    const nextEnemy = nextLevel === 2 ? 'Zombie' : (nextLevel === 3 ? 'Ghost' : 'Death Knight (Boss)');
-    this.ui.turnIndicator.textContent = `Continue to Level ${nextLevel}: ${nextEnemy} awaits...`;
+  showHealAnimation(member, healAmount) {
+    const memberElement = document.querySelector(`.party-member:nth-child(${this.gameState.party.indexOf(member) + 1})`);
+    if (memberElement) {
+      memberElement.classList.add('healing');
+      setTimeout(() => memberElement.classList.remove('healing'), 500);
+    }
+  }
+
+  showLevelTransition(nextLevel) {
+    this.ui.turnIndicator.textContent = `Level ${nextLevel} approaching...`;
     this.ui.turnIndicator.className = 'turn-indicator player-turn';
-  }
-
-  updateUI() {
-    const { player, currentEnemy, level, combatLog } = this.gameState;
-
-    this.ui.playerHp.textContent = `${player.hp}/${player.maxHp}`;
-    this.ui.playerHp.style.width = `${(player.hp / player.maxHp) * 100}%`;
-
-    if (currentEnemy) {
-      this.ui.enemyHp.textContent = `${currentEnemy.hp}/${currentEnemy.maxHp}`;
-      this.ui.enemyHp.style.width = `${(currentEnemy.hp / currentEnemy.maxHp) * 100}%`;
-      this.ui.enemyName.textContent = currentEnemy.name;
-    }
-
-    this.ui.playerAp.textContent = `${player.ap}/${player.maxAp}`;
-    this.ui.potions.textContent = player.potions;
-    this.ui.level.textContent = level;
-
-    this.ui.combatLog.innerHTML = combatLog.map(log =>
-      `<div class="log-entry">${log.message}</div>`
-    ).join('');
-
-    this.ui.combatLog.scrollTop = this.ui.combatLog.scrollHeight;
-
-    if (player.ap < player.maxAp && this.gameState.getCurrentTurn().type === 'player') {
-      player.ap = Math.min(player.maxAp, player.ap + 1);
-    }
+    
+    setTimeout(() => {
+      this.gameState.startLevel(nextLevel);
+      this.gameState.turnOrder = this.gameState.buildTurnOrder();
+      this.currentTurnIndex = 0;
+      this.renderCharacters();
+      this.updateUI();
+      this.processTurn();
+    }, 2000);
   }
 
   triggerDeathAnimation() {

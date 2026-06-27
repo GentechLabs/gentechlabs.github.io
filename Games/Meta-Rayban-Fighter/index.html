@@ -17,36 +17,27 @@
 
       <!-- Combat Area -->
       <div class="combat-area">
-        <!-- Enemy Status -->
+        <!-- Enemy Panel -->
         <div class="enemy-panel">
           <div class="character-display">
             <div id="enemy-sprite-container" class="character-sprite"></div>
           </div>
           <div class="enemy-name" id="enemy-name">Skeleton</div>
           <div class="hp-bar">
-            <div class="hp-fill enemy-hp" id="enemy-hp" style="width: 100%">30/30</div>
+            <div class="hp-fill enemy-hp" id="enemy-hp" style="width: 100%">40/40</div>
           </div>
         </div>
+      </div>
 
-        <!-- Player Status -->
-        <div class="player-panel">
-          <div class="character-display">
-            <div id="player-sprite-container" class="character-sprite"></div>
-          </div>
-          <div class="stats-row">
-            <div class="hp-label">HP:</div>
-            <div class="hp-bar">
-              <div class="hp-fill player-hp" id="player-hp" style="width: 100%">100/100</div>
-            </div>
-          </div>
-          <div class="stats-row">
-            <div class="ap-label">AP:</div>
-            <div class="ap-value" id="player-ap">2/3</div>
-          </div>
-          <div class="stats-row">
-            <div class="potion-label">Potions:</div>
-            <div class="potion-value" id="potions">3</div>
-          </div>
+      <!-- Party Panel -->
+      <div class="party-panel">
+        <div class="panel-title">⚔️ Your Party</div>
+        <div id="party-container" class="party-container">
+          <!-- Party members rendered here -->
+        </div>
+        <div class="potions-row">
+          <div class="potions-label">🧪 Potions: <span id="potions">3</span></div>
+          <button id="potion-btn" class="potion-btn">Use Potion</button>
         </div>
       </div>
 
@@ -56,54 +47,11 @@
       </div>
     </div>
 
-    <!-- Touch/Swipe Controls on Right Sidebar -->
+    <!-- Right Sidebar -->
     <div class="game-sidebar">
-      <div class="touch-controls">
-        <div class="touch-zone action-btn" data-action="attack">
-          <div class="touch-zone-label">⚔️</div>
-          <div class="touch-zone-action">Attack</div>
-          <div class="touch-zone-cost">0 AP</div>
-        </div>
-        <div class="touch-zone action-btn" data-action="quickStrike">
-          <div class="touch-zone-label">⚡</div>
-          <div class="touch-zone-action">Quick</div>
-          <div class="touch-zone-cost">1 AP</div>
-        </div>
-        <div class="touch-zone action-btn" data-action="heavyStrike">
-          <div class="touch-zone-label">🔨</div>
-          <div class="touch-zone-action">Heavy</div>
-          <div class="touch-zone-cost">2 AP</div>
-        </div>
-        <div class="touch-zone action-btn" data-action="guard">
-          <div class="touch-zone-label">🛡️</div>
-          <div class="touch-zone-action">Guard</div>
-          <div class="touch-zone-cost">0 AP</div>
-        </div>
-        <div class="touch-zone action-btn" data-action="counter">
-          <div class="touch-zone-label">⚡</div>
-          <div class="touch-zone-action">Counter</div>
-          <div class="touch-zone-cost">1 AP</div>
-        </div>
-        <div class="touch-zone action-btn" data-action="taunt">
-          <div class="touch-zone-label">👄</div>
-          <div class="touch-zone-action">Taunt</div>
-          <div class="touch-zone-cost">1 AP</div>
-        </div>
-        <div class="touch-zone action-btn" data-action="holyStrike">
-          <div class="touch-zone-label">✨</div>
-          <div class="touch-zone-action">Holy</div>
-          <div class="touch-zone-cost">2 AP</div>
-        </div>
-        <div class="touch-zone action-btn" data-action="smite">
-          <div class="touch-zone-label">💥</div>
-          <div class="touch-zone-action">Smite</div>
-          <div class="touch-zone-cost">2 AP</div>
-        </div>
-        <div class="touch-zone action-btn" data-action="potion">
-          <div class="touch-zone-label">🧪</div>
-          <div class="touch-zone-action">Potion</div>
-          <div class="touch-zone-cost">Heal</div>
-        </div>
+      <div class="panel-title">📜 Abilities</div>
+      <div id="abilities-container" class="abilities-container">
+        <!-- Abilities rendered here -->
       </div>
     </div>
   </div>
@@ -111,7 +59,7 @@
   <!-- Game Over Screen -->
   <div id="game-over" class="overlay hidden">
     <div class="overlay-content">
-      <h1>💀 YOU DIED</h1>
+      <h1>💀 YOUR PARTY FELL</h1>
       <p>The dungeon claims another soul.</p>
       <button id="restart-btn" class="restart-btn">Start Over</button>
     </div>
@@ -120,8 +68,8 @@
   <!-- Victory Screen -->
   <div id="game-won" class="overlay hidden">
     <div class="overlay-content">
-      <h1>🏆 DEMO COMPLETE!</h1>
-      <p>You conquered the dungeon!</p>
+      <h1>🏆 VICTORY!</h1>
+      <p>Your party conquered the dungeon!</p>
       <button id="restart-btn" class="restart-btn">New Run</button>
     </div>
   </div>

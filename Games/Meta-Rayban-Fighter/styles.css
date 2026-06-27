@@ -65,8 +65,8 @@ body::after {
 }
 
 .hud-container {
-  width: 530px;
-  height: 600px;
+  width: 800px;
+  height: 650px;
   background: linear-gradient(180deg, #1a1a1a 0%, #0d0d0d 100%);
   border: 2px solid #3a3a3a;
   border-radius: 20px;
@@ -81,11 +81,11 @@ body::after {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 12px;
 }
 
 .game-sidebar {
-  width: 140px;
+  width: 220px;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -116,23 +116,19 @@ body::after {
 }
 
 .level-indicator {
-  font-size: 14px;
+  font-size: 16px;
   color: #8b4513;
   font-weight: bold;
 }
 
 .turn-indicator {
-  font-size: 12px;
-  padding: 4px 12px;
-  border-radius: 10px;
-  background: #2a2a2a;
-  transition: all 0.3s ease;
-}
-
-.turn-indicator.player-turn {
+  font-size: 13px;
+  padding: 5px 15px;
+  border-radius: 12px;
   background: #2d5a27;
   color: #90ee90;
-  box-shadow: 0 0 10px rgba(144, 238, 144, 0.3);
+  font-weight: bold;
+  transition: all 0.3s ease;
 }
 
 .turn-indicator.enemy-turn {
@@ -147,20 +143,54 @@ body::after {
   50% { opacity: 0.7; }
 }
 
-/* Enemy Panel */
-.enemy-panel {
-  background: #1a1a1a;
-  border: 1px solid #3a3a3a;
+.panel-title {
+  font-size: 14px;
+  color: #ffd700;
+  font-weight: bold;
+  margin-bottom: 8px;
+  text-align: center;
+  padding: 4px;
+  background: #2a2a2a;
+  border-radius: 5px;
+}
+
+/* Combat Area */
+.combat-area {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+  background: #0d0d0d;
   border-radius: 10px;
-  padding: 12px;
+  border: 1px solid #3a3a3a;
+}
+
+.enemy-panel {
+  text-align: center;
 }
 
 .enemy-name {
   font-size: 18px;
   color: #ff6b6b;
-  margin-bottom: 8px;
-  text-align: center;
+  margin: 10px 0;
   font-weight: bold;
+}
+
+.character-display {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 120px;
+}
+
+.character-sprite {
+  width: 100px;
+  height: 120px;
+}
+
+.character-sprite svg {
+  width: 100%;
+  height: 100%;
 }
 
 /* HP Bars */
@@ -170,7 +200,6 @@ body::after {
   border-radius: 5px;
   height: 20px;
   overflow: hidden;
-  margin-bottom: 5px;
 }
 
 .hp-fill {
@@ -187,248 +216,235 @@ body::after {
 
 .player-hp {
   background: linear-gradient(90deg, #228b22, #90ee90);
-  box-shadow: 0 0 5px rgba(144, 238, 144, 0.3);
 }
 
 .enemy-hp {
   background: linear-gradient(90deg, #8b0000, #ff6b6b);
-  box-shadow: 0 0 5px rgba(255, 107, 107, 0.3);
 }
 
-/* Player Panel */
-.player-panel {
+/* Party Panel */
+.party-panel {
   background: #1a1a1a;
   border: 1px solid #3a3a3a;
   border-radius: 10px;
   padding: 12px;
+}
+
+.party-container {
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
 
-.stats-row {
+.party-member {
+  background: #0d0d0d;
+  border: 2px solid #2a2a2a;
+  border-radius: 8px;
+  padding: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-left-width: 4px;
+}
+
+.party-member:hover {
+  background: #1a1a1a;
+  transform: translateX(2px);
+}
+
+.party-member.selected {
+  background: #1a1a1a;
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+  border-width: 3px;
+}
+
+.party-member.dead {
+  opacity: 0.4;
+  filter: grayscale(1);
+}
+
+.member-header {
   display: flex;
   align-items: center;
   gap: 8px;
+  margin-bottom: 6px;
 }
 
-.hp-label {
-  font-size: 11px;
-  color: #8b4513;
-  min-width: 25px;
+.member-icon {
+  font-size: 18px;
 }
 
-.ap-label, .potion-label {
-  font-size: 11px;
-  color: #8b4513;
-  min-width: 45px;
-}
-
-.ap-value {
-  font-size: 11px;
-  color: #ffd700;
+.member-name {
+  font-size: 13px;
   font-weight: bold;
-}
-
-.potion-value {
-  font-size: 11px;
-  color: #ff6b6b;
-  font-weight: bold;
-}
-
-/* Combat Area Layout */
-.combat-area {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  gap: 15px;
-  padding: 10px;
-  background: #0d0d0d;
-  border-radius: 8px;
-  margin-bottom: 15px;
-}
-
-.combat-area .enemy-panel,
-.combat-area .player-panel {
+  color: #e0e0e0;
   flex: 1;
 }
 
-/* Character Display */
-.character-display {
+.member-role {
+  font-size: 10px;
+  color: #8b4513;
+  text-transform: uppercase;
+  padding: 2px 6px;
+  border-radius: 3px;
+  background: #2a2a2a;
+}
+
+.hp-bar-mini {
   display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  min-height: 150px;
-  position: relative;
-  padding: 10px;
-  gap: 20px;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 4px;
 }
 
-.character-sprite {
-  width: 80px;
-  height: 120px;
-  transition: transform 0.3s ease;
+.hp-fill-mini {
+  flex: 1;
+  height: 12px;
+  border-radius: 3px;
+  background: #228b22;
+  transition: width 0.3s ease;
 }
 
-/* Player (Knight) */
-.knight-sprite {
-  animation: knightIdle 1.5s ease-in-out infinite;
+.hp-text-mini {
+  font-size: 10px;
+  color: #a0a0a0;
+  min-width: 50px;
+  text-align: right;
 }
 
-@keyframes knightIdle {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-3px); }
+.stats-mini {
+  display: flex;
+  gap: 10px;
+  font-size: 10px;
 }
 
-.knight-attack-walk {
-  animation: knightAttackSequence 0.8s ease-in-out;
-}
-
-@keyframes knightAttackSequence {
-  0% { transform: translateX(0); }
-  20% { transform: translateX(30px); }
-  40% { transform: translateX(40px) rotate(-10deg); }
-  50% { transform: translateX(45px) rotate(5deg); }
-  70% { transform: translateX(40px) rotate(0deg); }
-  100% { transform: translateX(0); }
-}
-
-.knight-damage {
-  animation: knightDamage 0.4s ease;
-}
-
-@keyframes knightDamage {
-  0%, 100% { transform: translateX(0) rotate(0deg); }
-  25% { transform: translateX(-10px) rotate(-10deg); }
-  75% { transform: translateX(10px) rotate(10deg); }
-}
-
-/* Enemy (Skeleton) */
-.skeleton-sprite {
-  animation: skeletonIdle 1s ease-in-out infinite;
-}
-
-@keyframes skeletonIdle {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  25% { transform: translateY(-2px) rotate(-1deg); }
-  75% { transform: translateY(-2px) rotate(1deg); }
-}
-
-.skeleton-attack-walk {
-  animation: skeletonAttackSequence 0.8s ease-in-out;
-}
-
-@keyframes skeletonAttackSequence {
-  0% { transform: translateX(0); }
-  20% { transform: translateX(-30px); }
-  40% { transform: translateX(-40px) rotate(10deg); }
-  50% { transform: translateX(-45px) rotate(-5deg); }
-  70% { transform: translateX(-40px) rotate(0deg); }
-  100% { transform: translateX(0); }
-}
-
-.skeleton-damage {
-  animation: skeletonDamage 0.4s ease;
-}
-
-@keyframes skeletonDamage {
-  0%, 100% { transform: translateX(0); }
-  25% { transform: translateX(10px) rotate(5deg); }
-  75% { transform: translateX(-10px) rotate(-5deg); }
-}
-
-/* Enemy (Zombie) */
-.zombie-sprite {
-  animation: zombieIdle 2s ease-in-out infinite;
-}
-
-@keyframes zombieIdle {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-3px); }
-}
-
-.zombie-attack-walk {
-  animation: zombieAttackSequence 1s ease-in-out;
-}
-
-@keyframes zombieAttackSequence {
-  0% { transform: translateX(0); }
-  30% { transform: translateX(-25px); }
-  50% { transform: translateX(-35px); }
-  100% { transform: translateX(0); }
-}
-
-.zombie-damage {
-  animation: zombieDamage 0.4s ease;
-}
-
-@keyframes zombieDamage {
-  0%, 100% { transform: translateX(0); }
-  25% { transform: translateX(8px); }
-  75% { transform: translateX(-8px); }
-}
-
-/* Enemy (Ghost) */
-.ghost-sprite {
-  animation: ghostIdle 2s ease-in-out infinite;
-}
-
-@keyframes ghostIdle {
-  0%, 100% { opacity: 0.7; transform: translateY(0); }
-  50% { opacity: 1; transform: translateY(-5px); }
-}
-
-.ghost-attack-walk {
-  animation: ghostAttackSequence 1s ease-in-out;
-}
-
-@keyframes ghostAttackSequence {
-  0% { transform: translateX(0); opacity: 0.7; }
-  30% { transform: translateX(-30px); opacity: 1; }
-  50% { transform: translateX(-40px) scale(1.1); opacity: 1; }
-  100% { transform: translateX(0); opacity: 0.7; }
-}
-
-.ghost-damage {
-  animation: ghostDamage 0.3s ease;
-}
-
-@keyframes ghostDamage {
-  0%, 100% { opacity: 0.7; transform: translateX(0); }
-  50% { opacity: 1; transform: translateX(5px); }
-}
-
-.damage-number {
-  position: absolute;
-  font-size: 20px;
-  font-weight: bold;
-  color: #ff6b6b;
-  text-shadow: 0 0 5px rgba(255, 107, 107, 0.8);
-  animation: floatUp 0.8s ease-out forwards;
-  pointer-events: none;
-  z-index: 100;
-}
-
-.damage-crit {
+.ap-stat {
   color: #ffd700;
-  font-size: 28px;
-  text-shadow: 0 0 10px rgba(255, 215, 0, 0.9);
 }
 
-.heal-number {
-  color: #90ee90;
-  text-shadow: 0 0 5px rgba(144, 238, 144, 0.8);
+.protection-stat {
+  color: #4169e1;
 }
 
-@keyframes floatUp {
-  0% {
-    opacity: 1;
-    transform: translateY(0) translateX(-50%);
-  }
-  100% {
-    opacity: 0;
-    transform: translateY(-30px) translateX(-50%);
-  }
+.ability-active {
+  animation: abilityPulse 0.5s ease;
+}
+
+@keyframes abilityPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); box-shadow: 0 0 15px rgba(255, 215, 0, 0.4); }
+}
+
+.healing {
+  animation: healPulse 0.5s ease;
+}
+
+@keyframes healPulse {
+  0%, 100% { background: #0d0d0d; }
+  50% { background: rgba(34, 139, 34, 0.3); }
+}
+
+.potions-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid #3a3a3a;
+}
+
+.potions-label {
+  font-size: 13px;
+  color: #ff6b6b;
+  font-weight: bold;
+}
+
+.potion-btn {
+  padding: 6px 12px;
+  font-size: 12px;
+  background: linear-gradient(180deg, #8b0000 0%, #5a0000 100%);
+  color: #ff6b6b;
+  border: 1px solid #ff6b6b;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+  transition: all 0.2s ease;
+}
+
+.potion-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(255, 107, 107, 0.4);
+}
+
+.potion-btn:active {
+  transform: scale(0.98);
+}
+
+/* Abilities Container */
+.abilities-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ability-card {
+  background: #1a1a1a;
+  border: 2px solid #2a2a2a;
+  border-radius: 8px;
+  padding: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-left-width: 4px;
+}
+
+.ability-card:hover {
+  background: #2a2a2a;
+  transform: translateX(2px);
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+}
+
+.ability-card.disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  filter: grayscale(0.5);
+}
+
+.ability-card.disabled:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+.ability-name {
+  font-size: 12px;
+  font-weight: bold;
+  color: #ffd700;
+  margin-bottom: 4px;
+}
+
+.ability-desc {
+  font-size: 10px;
+  color: #a0a0a0;
+  margin-bottom: 4px;
+  line-height: 1.3;
+}
+
+.ability-cost {
+  font-size: 9px;
+  color: #ffd700;
+  margin-bottom: 2px;
+}
+
+.ability-type {
+  font-size: 9px;
+  color: #8b4513;
+  text-transform: uppercase;
+}
+
+.no-selection {
+  text-align: center;
+  padding: 20px;
+  color: #666;
+  font-size: 12px;
 }
 
 /* Combat Log */
@@ -440,7 +456,8 @@ body::after {
   padding: 10px;
   overflow-y: auto;
   font-size: 11px;
-  line-height: 1.6;
+  line-height: 1.5;
+  min-height: 120px;
 }
 
 .log-entry {
@@ -453,7 +470,6 @@ body::after {
   background: rgba(42, 42, 42, 0.3);
 }
 
-/* Scrollbar styling */
 .combat-log::-webkit-scrollbar {
   width: 6px;
 }
@@ -465,71 +481,6 @@ body::after {
 .combat-log::-webkit-scrollbar-thumb {
   background: #3a3a3a;
   border-radius: 3px;
-}
-
-/* Touch/Swipe Controls */
-.touch-controls {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.touch-zone {
-  background: #1a1a1a;
-  border: 2px solid #2a2a2a;
-  border-radius: 8px;
-  padding: 10px 8px;
-  text-align: center;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: none;
-}
-
-.touch-zone:active {
-  transform: scale(0.95);
-  background: #2a2a2a;
-  border-color: #8b4513;
-}
-
-.touch-zone-label {
-  font-size: 12px;
-  color: #e0e0e0;
-  font-weight: bold;
-  margin-bottom: 2px;
-}
-
-.touch-zone-action {
-  font-size: 9px;
-  color: #a0a0a0;
-  margin-bottom: 2px;
-}
-
-.touch-zone-cost {
-  font-size: 8px;
-  color: #ffd700;
-}
-
-.swipe-indicator {
-  font-size: 8px;
-  color: #8b4513;
-  text-align: center;
-  padding: 5px;
-  border-top: 1px solid #3a3a3a;
-}
-
-.action-row {
-  display: flex;
-  gap: 4px;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.action-btn {
-  flex: 1;
-  min-width: 55px;
-  max-width: 60px;
 }
 
 /* Overlays */

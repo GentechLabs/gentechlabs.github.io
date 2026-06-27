@@ -1,227 +1,363 @@
-import { ENEMIES, ACTIONS, GESTURE_MAP, KEYBOARD_MAP } from './game-constants.js';
+import { CLASSES, CLASS_COLORS } from './classes.js';
+import { ENEMIES } from './game-constants.js';
+
+export class PartyMember {
+  constructor(classKey, name) {
+    const classData = CLASSES[classKey];
+    this.classKey = classKey;
+    this.name = name || classData.name;
+    this.role = classData.role;
+    this.position = classData.position;
+    this.abilities = classData.abilities;
+    this.color = CLASS_COLORS[classKey];
+    
+    this.maxHp = classData.baseStats.maxHp;
+    this.hp = classData.baseStats.maxHp;
+    this.maxAp = 2;
+    this.ap = 2;
+    this.damage = classData.baseStats.damage;
+    this.speed = classData.baseStats.speed;
+    this.dodge = classData.baseStats.dodge;
+    this.protection = classData.baseStats.protection;
+    
+    this.isAlive = true;
+    this.buffs = [];
+  }
+
+  takeDamage(damage, isPhysical = true) {
+    if (!this.isAlive) return 0;
+
+    let actualDamage = damage;
+    
+    if (isPhysical && this.protection > 0) {
+      actualDamage = Math.max(0, damage - this.protection);
+      console.log(`${this.name} blocked ${damage - actualDamage} damage`);
+    }
+
+    this.hp = Math.max(0, this.hp - actualDamage);
+    
+    if (this.hp <= 0) {
+      this.isAlive = false;
+      this.hp = 0;
+    }
+
+    return actualDamage;
+  }
+
+  heal(amount) {
+    if (!this.isAlive) return 0;
+    this.hp = Math.min(this.maxHp, this.hp + amount);
+    return amount;
+  }
+
+  useAbility(abilityKey) {
+    const ability = this.abilities[abilityKey];
+    if (!ability) {
+      console.error(`Ability ${abilityKey} not found for ${this.name}`);
+      return null;
+    }
+
+    if (this.ap < ability.cost) {
+      console.error(`Not enough AP for ${ability.name}`);
+      return null;
+    }
+
+    this.ap -= ability.cost;
+    return { ...ability, classKey: this.classKey, userName: this.name };
+  }
+
+  resetAp() {
+    this.ap = this.maxAp;
+  }
+}
 
 export class GameState {
   constructor() {
-    this.reset();
+    this.party = [];
+    this.currentEnemy = null;
+    this.level = 1;
+    this.maxLevel = 3;
+    this.gameOver = false;
+    this.combatLog = [];
+    this.potions = 3;
+    this.turnOrder = [];
+    this.currentTurnIndex = 0;
+    this.enemyBuffs = [];
+  }
+
+  initParty(members = ['warrior', 'hunter', 'mage']) {
+    this.party = members.map((classKey, index) => {
+      const names = ['Sir Galahad', 'Aria Swiftarrow', 'Elara Moonweaver'];
+      return new PartyMember(classKey, names[index]);
+    });
+    this.log(`Party formed: ${this.party.map(m => m.name).join(', ')}`);
   }
 
   reset() {
-    this.level = 1;
-    this.player = {
-      hp: 100,
-      maxHp: 100,
-      ap: 2,
-      maxAp: 3,
-      potions: 3,
-      isGuarding: false,
-      isCountering: false,
-      speed: 55
-    };
+    this.party = [];
     this.currentEnemy = null;
+    this.level = 1;
+    this.gameOver = false;
+    this.combatLog = [];
+    this.potions = 3;
     this.turnOrder = [];
     this.currentTurnIndex = 0;
-    this.combatLog = [];
-    this.gameOver = false;
-    this.won = false;
-    this.actionQueue = [];
-  }
-
-  // Character sprites
-  getEnemySprite(enemyName) {
-    const sprites = {
-      'Skeleton': { emoji: '💀', class: 'skeleton-sprite' },
-      'Zombie': { emoji: '🧟', class: 'zombie-sprite' },
-      'Ghost': { emoji: '👻', class: 'ghost-sprite' },
-      'Death Knight': { emoji: '💀', class: 'skeleton-sprite' }
-    };
-    return sprites[enemyName] || { emoji: '👾', class: '' };
-  }
-
-  getPlayerSprite() {
-    return { emoji: '⚔️', class: 'knight-sprite' };
+    this.enemyBuffs = [];
   }
 
   log(message) {
-    this.combatLog.push({ message, time: Date.now() });
-    if (this.combatLog.length > 20) {
-      this.combatLog.shift();
-    }
+    this.combatLog.push(message);
+    console.log(message);
   }
 
   startLevel(levelNum) {
     this.level = levelNum;
-    this.actionQueue = [];
+    this.enemyBuffs = [];
 
-    if (levelNum === 1) {
-      this.currentEnemy = { ...ENEMIES.skeleton };
-    } else if (levelNum === 2) {
-      this.currentEnemy = { ...ENEMIES.zombie };
-    } else if (levelNum === 3) {
-      this.currentEnemy = { ...ENEMIES.ghost };
-    } else if (levelNum === 4) {
-      this.currentEnemy = { ...ENEMIES.deathKnight };
-      this.log('Death Knight (Boss) appears!');
-    }
+    const enemyKeys = ['skeleton', 'zombie', 'ghost', 'deathKnight'];
+    const enemyKey = levelNum <= 3 ? enemyKeys[levelNum - 1] : 'deathKnight';
+    const baseEnemy = ENEMIES[enemyKey] || ENEMIES.skeleton;
 
-    // Partial heal between levels (20%)
-    if (levelNum > 1 && levelNum <= 3) {
-      const healAmount = Math.floor(this.player.maxHp * 0.2);
-      this.player.hp = Math.min(this.player.maxHp, this.player.hp + healAmount);
-      this.log(`Recovered ${healAmount} HP between levels.`);
-    }
+    this.currentEnemy = {
+      ...baseEnemy,
+      hp: baseEnemy.hp + (levelNum - 1) * 10,
+      maxHp: baseEnemy.maxHp + (levelNum - 1) * 10,
+      damage: baseEnemy.damage + (levelNum - 1) * 3,
+      stunned: 0,
+      forcedTarget: null,
+      damageTakenBonus: 0
+    };
 
-    this.calculateTurnOrder();
-    if (levelNum !== 4) {
-      this.log(`Level ${levelNum}: ${this.currentEnemy.name} appears!`);
-    }
+    this.turnOrder = this.buildTurnOrder();
+    this.currentTurnIndex = 0;
+    this.log(`Level ${levelNum}: ${this.currentEnemy.name} appears!`);
+    this.log(`HP: ${this.currentEnemy.hp} | Damage: ${this.currentEnemy.damage}`);
   }
 
-  calculateTurnOrder() {
-    this.turnOrder = [
-      { type: 'player', speed: this.player.speed },
-      { type: 'enemy', speed: this.currentEnemy.speed }
-    ].sort((a, b) => b.speed - a.speed);
-    this.currentTurnIndex = 0;
+  buildTurnOrder() {
+    const livingParty = this.party.filter(m => m.isAlive);
+    const turns = [];
+
+    livingParty.forEach(member => {
+      turns.push({
+        type: 'player',
+        member: member,
+        speed: member.speed,
+        name: member.name
+      });
+    });
+
+    if (this.currentEnemy && this.currentEnemy.hp > 0 && this.currentEnemy.stunned <= 0) {
+      turns.push({
+        type: 'enemy',
+        speed: this.currentEnemy.speed,
+        name: this.currentEnemy.name
+      });
+    }
+
+    return turns.sort((a, b) => b.speed - a.speed);
   }
 
   getCurrentTurn() {
     return this.turnOrder[this.currentTurnIndex];
   }
 
-  advanceTurn() {
-    this.currentTurnIndex = (this.currentTurnIndex + 1) % this.turnOrder.length;
-
-    // Reset player guard at start of their next turn
-    if (this.getCurrentTurn().type === 'player') {
-      if (this.player.isCountering && !this.player.isGuarding) {
-        this.player.isCountering = false;
-      }
-      this.player.isGuarding = false;
-    }
+  isPartyAlive() {
+    return this.party.some(m => m.isAlive);
   }
 
-  playerAction(actionKey) {
-    const action = ACTIONS[actionKey];
-    if (!action) return { success: false, message: 'Invalid action' };
+  playerAction(member, abilityKey) {
+    const ability = member.useAbility(abilityKey);
+    if (!ability) {
+      return { success: false, message: 'Cannot use ability' };
+    }
 
-    if (actionKey === 'potion') {
-      if (this.player.potions <= 0) {
-        return { success: false, message: 'No potions left!' };
+    const enemy = this.currentEnemy;
+    let result = { damage: 0, heal: 0, message: '', effects: [] };
+
+    if (ability.type === 'heal' && ability.target === 'ally') {
+      const lowestHpMember = this.party
+        .filter(m => m.isAlive)
+        .sort((a, b) => (a.hp / a.maxHp) - (b.hp / b.maxHp))[0];
+      
+      if (lowestHpMember) {
+        const healAmount = lowestHpMember.heal(ability.heal);
+        result.heal = healAmount;
+        result.message = `${member.name} healed ${lowestHpMember.name} for ${healAmount} HP`;
+        this.log(result.message);
       }
-      this.player.potions--;
-      const healAmount = Math.floor(this.player.maxHp * 0.5);
-      this.player.hp = Math.min(this.player.maxHp, this.player.hp + healAmount);
-      this.log(`Used Potion. Recovered ${healAmount} HP.`);
-      this.advanceTurn();
-      return { success: true, message: 'Healed!', data: { healAmount } };
+    } else if (ability.type === 'buff' && ability.target === 'ally') {
+      const lowestHpMember = this.party
+        .filter(m => m.isAlive)
+        .sort((a, b) => (a.hp / a.maxHp) - (b.hp / b.maxHp))[0];
+      
+      if (lowestHpMember && ability.effect) {
+        lowestHpMember.protection += ability.effect.protection;
+        lowestHpMember.buffs.push({
+          name: ability.name,
+          effect: ability.effect,
+          duration: ability.effect.duration
+        });
+        result.message = `${member.name} shielded ${lowestHpMember.name}`;
+        this.log(result.message);
+      }
+    } else if (ability.type === 'cc' && ability.effect?.stun) {
+      this.currentEnemy.stunned = ability.effect.stun;
+      result.message = `${member.name} stunned the enemy!`;
+      this.log(result.message);
+      result.effects.push({ type: 'stun', duration: ability.effect.stun });
+    } else if (ability.type === 'debuff') {
+      if (ability.effect?.forcedTarget) {
+        this.currentEnemy.forcedTarget = member;
+        result.message = `${member.name} taunted the enemy!`;
+        this.log(result.message);
+      }
+      if (ability.effect?.damageTaken) {
+        this.currentEnemy.damageTakenBonus = ability.effect.damageTaken;
+        result.message = `${member.name} marked the enemy!`;
+        this.log(result.message);
+      }
+      if (ability.effect?.stun) {
+        this.currentEnemy.stunned = ability.effect.stun;
+        result.message = `${member.name} trapped the enemy!`;
+        this.log(result.message);
+      }
+    } else {
+      let damage = ability.damage || member.damage;
+      if (ability.hits) {
+        damage *= ability.hits;
+      }
+      
+      if (ability.type === 'magical' || member.classKey === 'mage') {
+        damage *= 2;
+      }
+
+      if (ability.critBonus) {
+        const critRoll = Math.random() * 100;
+        if (critRoll < ability.critBonus + member.dodge) {
+          damage *= 2;
+          result.message = `CRITICAL HIT! ${member.name}'s ${ability.name} dealt ${damage} damage!`;
+        } else {
+          result.message = `${member.name} used ${ability.name}: ${damage} damage`;
+        }
+      } else {
+        result.message = `${member.name} used ${ability.name}: ${damage} damage`;
+      }
+
+      if (this.currentEnemy.damageTakenBonus > 0) {
+        damage = Math.floor(damage * (1 + this.currentEnemy.damageTakenBonus / 100));
+        result.message += ` (marked: +${this.currentEnemy.damageTakenBonus}%)`;
+      }
+
+      this.currentEnemy.hp -= damage;
+      result.damage = damage;
+      this.log(result.message);
+
+      if (this.currentEnemy.hp <= 0) {
+        this.log(`${this.currentEnemy.name} has been defeated!`);
+      }
     }
 
-    if (this.player.ap < action.cost) {
-      return { success: false, message: `Need ${action.cost} AP!` };
+    return { success: true, ...result };
+  }
+
+  usePotion(targetMember) {
+    if (this.potions <= 0) {
+      return { success: false, message: 'No potions left' };
     }
 
-    if (actionKey === 'guard') {
-      this.player.isGuarding = true;
-      this.player.isCountering = false;
-      this.log('You raise your guard.');
-      this.advanceTurn();
-      return { success: true, message: 'Guard up' };
+    if (!targetMember || !targetMember.isAlive) {
+      return { success: false, message: 'Invalid target' };
     }
 
-    if (actionKey === 'counter') {
-      this.player.isCountering = true;
-      this.player.ap -= action.cost;
-      this.log('You prepare to counter.');
-      this.advanceTurn();
-      return { success: true, message: 'Counter ready' };
-    }
+    const healAmount = Math.floor(targetMember.maxHp * 0.5);
+    targetMember.heal(healAmount);
+    this.potions--;
+    this.log(`${targetMember.name} used potion: +${healAmount} HP`);
+    this.log(`Potions remaining: ${this.potions}`);
 
-    // Attack actions
-    this.player.ap -= action.cost;
-    let damage = action.damage;
-
-    // Holy Strike bonus vs undead
-    if (action.type === 'holy') {
-      damage *= 2;
-      this.log('Holy energy blasts through!');
-    }
-
-    // Taunt special effect: reduce enemy damage next turn
-    if (action.type === 'mental') {
-      this.currentEnemy.damage = Math.max(5, Math.floor(this.currentEnemy.damage * 0.7));
-      this.log(`${this.currentEnemy.name} is enraged! Next attack will be weaker.`);
-    }
-
-    this.currentEnemy.hp -= damage;
-    this.log(`You ${actionKey.replace(/([A-Z])/g, ' $1').toLowerCase().trim()} for ${damage} damage!`);
-
-    // Check for kill
-    if (this.currentEnemy.hp <= 0) {
-      this.currentEnemy.hp = 0;
-      const enemyName = this.currentEnemy.name;
-      this.log(`You slayed ${enemyName}!`);
-      return { success: true, message: `Slayed ${enemyName}!`, data: { damage, enemyHp: 0, killed: true, enemyName } };
-    }
-
-    this.advanceTurn();
-    return { success: true, message: `Dealt ${damage} damage`, data: { damage, enemyHp: this.currentEnemy.hp } };
+    return { success: true, heal: healAmount, target: targetMember.name };
   }
 
   enemyTurn() {
-    if (this.currentEnemy.hp <= 0) return 0;
+    if (!this.currentEnemy || this.currentEnemy.hp <= 0) return 0;
 
     const enemy = this.currentEnemy;
     let damage = enemy.damage;
 
-    // Check if player is countering
-    if (this.player.isCountering) {
-      damage *= 0.5;
-      this.log(`Counter! Reduced incoming damage to ${damage}.`);
-      this.player.isCountering = false;
+    const livingParty = this.party.filter(m => m.isAlive);
+    if (livingParty.length === 0) return 0;
+
+    let target = enemy.forcedTarget;
+    if (!target || !target.isAlive) {
+      target = livingParty[Math.floor(Math.random() * livingParty.length)];
     }
 
-    // Guard reduction
-    if (this.player.isGuarding) {
-      damage *= 0.4;
-      this.log(`Guard absorbs attack. Reduced to ${damage}.`);
-    }
+    const actualDamage = target.takeDamage(damage);
+    this.log(`${enemy.name} attacked ${target.name}: ${actualDamage} damage`);
 
-    // Ghost phase through guard
-    if (enemy.special === 'phase' && this.player.isGuarding && Math.random() < 0.5) {
-      damage = enemy.damage;
-      this.log('Ghost phases through your guard!');
-    }
-
-    // Zombie poison
-    if (enemy.special === 'poison' && Math.random() < 0.4) {
-      this.player.hp -= 7;
-      this.log('Poison! -7 HP over time.');
-    }
-
-    // Death Knight special: 30% chance for critical hit
-    if (enemy.special === 'undead' && Math.random() < 0.3) {
-      damage *= 1.5;
-      this.log('Death Knight lands a critical blow!');
-    }
-
-    this.player.hp -= damage;
-    this.log(`${enemy.name} attacks for ${damage} damage!`);
-
-    if (this.player.hp <= 0) {
-      this.player.hp = 0;
+    if (!this.isPartyAlive()) {
       this.gameOver = true;
-      this.log('You died... Permadeath.');
+      this.log('💀 GAME OVER - Your party has fallen!');
     }
 
-    this.advanceTurn();
-    return Math.floor(damage);
+    return actualDamage;
+  }
+
+  advanceTurn() {
+    this.currentTurnIndex = (this.currentTurnIndex + 1) % this.turnOrder.length;
+
+    const currentTurn = this.getCurrentTurn();
+    if (currentTurn.type === 'player') {
+      currentTurn.member.resetAp();
+    }
+
+    if (this.currentEnemy) {
+      if (this.currentEnemy.stunned > 0) {
+        this.currentEnemy.stunned--;
+        this.log(`${this.currentEnemy.name} is stunned!`);
+      }
+      if (this.currentEnemy.forcedTarget) {
+        this.currentEnemy.forcedTarget = null;
+      }
+      if (this.currentEnemy.damageTakenBonus > 0) {
+        this.currentEnemy.damageTakenBonus = 0;
+      }
+    }
+
+    this.party.forEach(member => {
+      member.buffs = member.buffs.filter(buff => {
+        buff.duration--;
+        if (buff.duration <= 0) {
+          if (buff.effect.protection) {
+            member.protection -= buff.effect.protection;
+          }
+          return false;
+        }
+        return true;
+      });
+    });
   }
 
   checkVictory() {
-    if (this.currentEnemy && this.currentEnemy.name === 'Death Knight' && this.currentEnemy.hp <= 0) {
-      this.won = true;
-      this.gameOver = true;
-      return { won: true, message: 'DEMO COMPLETE! You conquered the dungeon!' };
+    if (this.currentEnemy.hp <= 0) {
+      if (this.level < this.maxLevel) {
+        const nextLevel = this.level + 1;
+        return {
+          won: false,
+          nextLevel,
+          message: `Victory! Continue to Level ${nextLevel}`
+        };
+      } else {
+        return { won: true, message: '🏆 Victory! You conquered the dungeon!' };
+      }
+    }
+    return null;
+  }
+
+  checkGameOver() {
+    if (!this.isPartyAlive()) {
+      return { gameOver: true, message: '💀 Your party has fallen!' };
     }
     return null;
   }
