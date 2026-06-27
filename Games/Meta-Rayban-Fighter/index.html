@@ -16,6 +16,10 @@
 
     <!-- Enemy Status -->
     <div class="enemy-panel">
+      <div class="character-display">
+        <div id="enemy-sprite" class="character-sprite skeleton-sprite">💀</div>
+        <div id="damage-overlay"></div>
+      </div>
       <div class="enemy-name" id="enemy-name">Skeleton</div>
       <div class="hp-bar">
         <div class="hp-fill enemy-hp" id="enemy-hp" style="width: 100%">30/30</div>
@@ -24,6 +28,9 @@
 
     <!-- Player Status -->
     <div class="player-panel">
+      <div class="character-display" style="min-height: 50px;">
+        <div class="character-sprite knight-sprite">⚔️</div>
+      </div>
       <div class="stats-row">
         <div class="hp-label">HP:</div>
         <div class="hp-bar">
@@ -45,18 +52,40 @@
       <div class="log-entry">Combat log initialized...</div>
     </div>
 
-    <!-- Action Reference -->
-    <div class="action-reference">
-      <div class="ref-title">Actions (Simulate with keyboard):</div>
-      <div class="ref-grid">
-        <div class="ref-item">A - Attack</div>
-        <div class="ref-item">G - Guard</div>
-        <div class="ref-item">C - Counter</div>
-        <div class="ref-item">H - Holy Strike</div>
-        <div class="ref-item">S - Smite</div>
-        <div class="ref-item">P - Potion</div>
+    <!-- Touch/Swipe Controls -->
+    <div class="touch-controls">
+      <div class="touch-zone action-btn" data-action="attack">
+        <div class="touch-zone-label">⚔️ Attack</div>
+        <div class="touch-zone-action">Basic attack</div>
+        <div class="touch-zone-cost">0 AP</div>
+      </div>
+      <div class="touch-zone action-btn" data-action="guard">
+        <div class="touch-zone-label">🛡️ Guard</div>
+        <div class="touch-zone-action">Reduce 60% damage</div>
+        <div class="touch-zone-cost">0 AP</div>
+      </div>
+      <div class="touch-zone action-btn" data-action="counter">
+        <div class="touch-zone-label">⚡ Counter</div>
+        <div class="touch-zone-action">Counter attack</div>
+        <div class="touch-zone-cost">1 AP</div>
+      </div>
+      <div class="action-row">
+        <div class="touch-zone action-btn" data-action="holyStrike">
+          <div class="touch-zone-label">✨ Holy Strike</div>
+          <div class="touch-zone-cost">2 AP</div>
+        </div>
+        <div class="touch-zone action-btn" data-action="smite">
+          <div class="touch-zone-label">💥 Smite</div>
+          <div class="touch-zone-cost">2 AP</div>
+        </div>
+        <div class="touch-zone action-btn" data-action="potion">
+          <div class="touch-zone-label">🧪 Potion</div>
+          <div class="touch-zone-cost">Heal 50%</div>
+        </div>
       </div>
     </div>
+
+    <div class="swipe-indicator">Tap actions or swipe to cycle</div>
   </div>
 
   <!-- Game Over Screen -->

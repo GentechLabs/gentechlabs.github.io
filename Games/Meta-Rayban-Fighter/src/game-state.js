@@ -26,6 +26,21 @@ export class GameState {
     this.actionQueue = [];
   }
 
+  // Character sprites
+  getEnemySprite(enemyName) {
+    const sprites = {
+      'Skeleton': { emoji: '💀', class: 'skeleton-sprite' },
+      'Zombie': { emoji: '🧟', class: 'zombie-sprite' },
+      'Ghost': { emoji: '👻', class: 'ghost-sprite' },
+      'Death Knight': { emoji: '💀', class: 'skeleton-sprite' }
+    };
+    return sprites[enemyName] || { emoji: '👾', class: '' };
+  }
+
+  getPlayerSprite() {
+    return { emoji: '⚔️', class: 'knight-sprite' };
+  }
+
   log(message) {
     this.combatLog.push({ message, time: Date.now() });
     if (this.combatLog.length > 20) {
