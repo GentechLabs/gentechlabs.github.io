@@ -8,111 +8,112 @@
 </head>
 <body>
   <div id="hud" class="hud-container">
-    <!-- Header -->
-    <div class="header">
-      <div class="level-indicator">Level: <span id="level">1</span></div>
-      <div id="turn-indicator" class="turn-indicator player-turn">Your turn</div>
-    </div>
-
-    <!-- Combat Area -->
-    <div class="combat-area">
-      <!-- Enemy Status -->
-      <div class="enemy-panel">
-        <div class="character-display">
-          <div id="enemy-sprite-container" class="character-sprite"></div>
-        </div>
-        <div class="enemy-name" id="enemy-name">Skeleton</div>
-        <div class="hp-bar">
-          <div class="hp-fill enemy-hp" id="enemy-hp" style="width: 100%">30/30</div>
-        </div>
+    <div class="game-main">
+      <!-- Header -->
+      <div class="header">
+        <div class="level-indicator">Level: <span id="level">1</span></div>
+        <div id="turn-indicator" class="turn-indicator player-turn">Your turn</div>
       </div>
 
-      <!-- Player Status -->
-      <div class="player-panel">
-        <div class="character-display">
-          <div id="player-sprite-container" class="character-sprite"></div>
-        </div>
-        <div class="stats-row">
-          <div class="hp-label">HP:</div>
+      <!-- Combat Area -->
+      <div class="combat-area">
+        <!-- Enemy Status -->
+        <div class="enemy-panel">
+          <div class="character-display">
+            <div id="enemy-sprite-container" class="character-sprite"></div>
+          </div>
+          <div class="enemy-name" id="enemy-name">Skeleton</div>
           <div class="hp-bar">
-            <div class="hp-fill player-hp" id="player-hp" style="width: 100%">100/100</div>
+            <div class="hp-fill enemy-hp" id="enemy-hp" style="width: 100%">30/30</div>
           </div>
         </div>
-        <div class="stats-row">
-          <div class="ap-label">AP:</div>
-          <div class="ap-value" id="player-ap">2/3</div>
+
+        <!-- Player Status -->
+        <div class="player-panel">
+          <div class="character-display">
+            <div id="player-sprite-container" class="character-sprite"></div>
+          </div>
+          <div class="stats-row">
+            <div class="hp-label">HP:</div>
+            <div class="hp-bar">
+              <div class="hp-fill player-hp" id="player-hp" style="width: 100%">100/100</div>
+            </div>
+          </div>
+          <div class="stats-row">
+            <div class="ap-label">AP:</div>
+            <div class="ap-value" id="player-ap">2/3</div>
+          </div>
+          <div class="stats-row">
+            <div class="potion-label">Potions:</div>
+            <div class="potion-value" id="potions">3</div>
+          </div>
         </div>
-        <div class="stats-row">
-          <div class="potion-label">Potions:</div>
-          <div class="potion-value" id="potions">3</div>
-        </div>
+      </div>
+
+      <!-- Combat Log -->
+      <div class="combat-log" id="combat-log">
+        <div class="log-entry">Combat log initialized...</div>
       </div>
     </div>
 
-    <!-- Combat Log -->
-    <div class="combat-log" id="combat-log">
-      <div class="log-entry">Combat log initialized...</div>
-    </div>
-
-    <!-- Touch/Swipe Controls -->
-    <div class="touch-controls">
-      <div class="touch-zone action-btn" data-action="attack">
-        <div class="touch-zone-label">⚔️ Attack</div>
-        <div class="touch-zone-action">Basic attack</div>
-        <div class="touch-zone-cost">0 AP</div>
-      </div>
-      <div class="touch-zone action-btn" data-action="quickStrike">
-        <div class="touch-zone-label">⚡ Quick Strike</div>
-        <div class="touch-zone-action">Fast but weaker</div>
-        <div class="touch-zone-cost">1 AP</div>
-      </div>
-      <div class="touch-zone action-btn" data-action="heavyStrike">
-        <div class="touch-zone-label">🔨 Heavy Strike</div>
-        <div class="touch-zone-action">Slow but powerful</div>
-        <div class="touch-zone-cost">2 AP</div>
-      </div>
-      <div class="action-row">
+    <!-- Touch/Swipe Controls on Right Sidebar -->
+    <div class="game-sidebar">
+      <div class="touch-controls">
+        <div class="touch-zone action-btn" data-action="attack">
+          <div class="touch-zone-label">⚔️</div>
+          <div class="touch-zone-action">Attack</div>
+          <div class="touch-zone-cost">0 AP</div>
+        </div>
+        <div class="touch-zone action-btn" data-action="quickStrike">
+          <div class="touch-zone-label">⚡</div>
+          <div class="touch-zone-action">Quick</div>
+          <div class="touch-zone-cost">1 AP</div>
+        </div>
+        <div class="touch-zone action-btn" data-action="heavyStrike">
+          <div class="touch-zone-label">🔨</div>
+          <div class="touch-zone-action">Heavy</div>
+          <div class="touch-zone-cost">2 AP</div>
+        </div>
         <div class="touch-zone action-btn" data-action="guard">
-          <div class="touch-zone-label">🛡️ Guard</div>
-          <div class="touch-zone-action">Reduce 60% damage</div>
+          <div class="touch-zone-label">🛡️</div>
+          <div class="touch-zone-action">Guard</div>
           <div class="touch-zone-cost">0 AP</div>
         </div>
         <div class="touch-zone action-btn" data-action="counter">
-          <div class="touch-zone-label">⚡ Counter</div>
-          <div class="touch-zone-action">Counter attack</div>
+          <div class="touch-zone-label">⚡</div>
+          <div class="touch-zone-action">Counter</div>
           <div class="touch-zone-cost">1 AP</div>
         </div>
         <div class="touch-zone action-btn" data-action="taunt">
-          <div class="touch-zone-label">👄 Taunt</div>
-          <div class="touch-zone-action">Weaken enemy</div>
+          <div class="touch-zone-label">👄</div>
+          <div class="touch-zone-action">Taunt</div>
           <div class="touch-zone-cost">1 AP</div>
         </div>
-      </div>
-      <div class="action-row">
         <div class="touch-zone action-btn" data-action="holyStrike">
-          <div class="touch-zone-label">✨ Holy Strike</div>
+          <div class="touch-zone-label">✨</div>
+          <div class="touch-zone-action">Holy</div>
           <div class="touch-zone-cost">2 AP</div>
         </div>
         <div class="touch-zone action-btn" data-action="smite">
-          <div class="touch-zone-label">💥 Smite</div>
+          <div class="touch-zone-label">💥</div>
+          <div class="touch-zone-action">Smite</div>
           <div class="touch-zone-cost">2 AP</div>
         </div>
         <div class="touch-zone action-btn" data-action="potion">
-          <div class="touch-zone-label">🧪 Potion</div>
-          <div class="touch-zone-cost">Heal 50%</div>
+          <div class="touch-zone-label">🧪</div>
+          <div class="touch-zone-action">Potion</div>
+          <div class="touch-zone-cost">Heal</div>
         </div>
       </div>
     </div>
-
-    <div class="swipe-indicator">Tap actions or swipe to cycle</div>
   </div>
 
   <!-- Game Over Screen -->
   <div id="game-over" class="overlay hidden">
     <div class="overlay-content">
-      <h1>💀 GAME OVER</h1>
-      <p>Permadeath. The dungeon claims another soul.</p>
-      <button id="restart-btn" class="restart-btn">Restart Run</button>
+      <h1>💀 YOU DIED</h1>
+      <p>The dungeon claims another soul.</p>
+      <button id="restart-btn" class="restart-btn">Start Over</button>
     </div>
   </div>
 

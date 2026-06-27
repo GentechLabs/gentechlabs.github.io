@@ -47,6 +47,7 @@ class MetaFighterApp {
   }
 
   restartGame() {
+    document.body.classList.remove('dying');
     this.ui.gameOver.classList.add('hidden');
     this.ui.gameWon.classList.add('hidden');
     this.startGame();
@@ -238,7 +239,7 @@ class MetaFighterApp {
 
         if (this.gameState.gameOver) {
           this.isGameActive = false;
-          this.ui.gameOver.classList.remove('hidden');
+          this.triggerDeathAnimation();
           return;
         }
 
@@ -299,6 +300,14 @@ class MetaFighterApp {
     if (player.ap < player.maxAp && this.gameState.getCurrentTurn().type === 'player') {
       player.ap = Math.min(player.maxAp, player.ap + 1);
     }
+  }
+
+  triggerDeathAnimation() {
+    document.body.classList.add('dying');
+    
+    setTimeout(() => {
+      this.ui.gameOver.classList.remove('hidden');
+    }, 2000);
   }
 }
 
