@@ -1,0 +1,215 @@
+{
+  "name": "GenTech Labs",
+  "description": "AI agent economy infrastructure — risk scoring, data access, identity verification, and DeFi intelligence for autonomous agents. 16 x402-monetized endpoints across blockchain, travel, and intelligence categories.",
+  "version": "1.2.0",
+  "author": "ProtoJay4789",
+  "homepage": "https://gentechlabs.net",
+  "contact": "https://github.com/ProtoJay4789",
+  "metadata": {
+    "chain": "avalanche",
+    "erc8004": true,
+    "x402": true,
+    "mcp": true,
+    "openSource": true,
+    "license": "MIT",
+    "tags": ["agent-economy", "x402", "blockchain", "security", "defi", "infrastructure"]
+  },
+  "skills": [
+    "security_privacy/security_privacy",
+    "vulnerability_analysis",
+    "risk_classification",
+    "token_analysis",
+    "retrieval_of_information",
+    "search",
+    "semantic_search",
+    "data_access",
+    "data_processing",
+    "content_analysis",
+    "content_scraping",
+    "text_analysis",
+    "social_media_analysis",
+    "trend_detection",
+    "blockchain_analysis",
+    "on_chain_analysis",
+    "decentralized_finance",
+    "defi_analytics",
+    "defi_monitoring",
+    "market_analysis",
+    "price_tracking",
+    "anomaly_detection",
+    "fraud_detection",
+    "credit_scoring",
+    "reputation_analysis",
+    "agent_identity",
+    "agent_verification",
+    "enforcement",
+    "audit_trails",
+    "payment_processing",
+    "agent_to_agent",
+    "api_integration",
+    "microservices",
+    "quality_assurance",
+    "testing",
+    "code_review",
+    "infrastructure",
+    "scalability",
+    "api_management"
+  ],
+  "domains": [
+    "blockchain",
+    "defi",
+    "security",
+    "ai-agents",
+    "infrastructure",
+    "identity",
+    "payments",
+    "data",
+    "finance",
+    "technology",
+    "analytics",
+    "content",
+    "social_media",
+    "travel",
+    "tourism"
+  ],
+  "services": [
+    {
+      "type": "x402",
+      "url": "https://gentechlabs.net/v1/score/{mint}",
+      "name": "Rugcheck v2",
+      "description": "Token risk scoring — 11-factor safety analysis including holder distribution, LP status, contract verification, and scam patterns",
+      "oasfVersion": "1.0",
+      "skills": ["token_analysis", "risk_classification", "fraud_detection", "security_privacy"],
+      "domains": ["blockchain", "security", "defi"],
+      "pricing": {
+        "model": "pay-per-query",
+        "amount": 0.01,
+        "currency": "USDC",
+        "protocol": "x402"
+      },
+      "active": true
+    },
+    {
+      "type": "x402",
+      "url": "https://gentechlabs.net/v1/defi/{protocol}",
+      "name": "DeFi Intelligence",
+      "description": "DeFi protocol intelligence — TVL, yield pools, chain breakdown, and historical data from DefiLlama",
+      "oasfVersion": "1.0",
+      "skills": ["defi_analytics", "defi_monitoring", "market_analysis", "data_access"],
+      "domains": ["defi", "blockchain", "finance"],
+      "pricing": {
+        "model": "pay-per-query",
+        "amount": 0.05,
+        "currency": "USDC",
+        "protocol": "x402"
+      },
+      "active": true
+    },
+    {
+      "type": "x402",
+      "url": "https://gentechlabs.net/v1/travel/search",
+      "name": "Travel Intelligence",
+      "description": "Travel search — Google Maps places, restaurants, hotels with price and rating data",
+      "oasfVersion": "1.0",
+      "skills": ["search", "data_access", "retrieval_of_information"],
+      "domains": ["travel", "tourism", "data"],
+      "pricing": {
+        "model": "pay-per-query",
+        "amount": 0.01,
+        "currency": "USDC",
+        "protocol": "x402"
+      },
+      "active": true
+    },
+    {
+      "type": "x402",
+      "url": "https://gentechlabs.net/v1/content/{platform}",
+      "name": "Content Intelligence",
+      "description": "Content scraping — X, Reddit, YouTube, Instagram trends and analysis",
+      "oasfVersion": "1.0",
+      "skills": ["content_scraping", "content_analysis", "trend_detection", "social_media_analysis"],
+      "domains": ["content", "social_media", "analytics"],
+      "pricing": {
+        "model": "pay-per-query",
+        "amount": 0.02,
+        "currency": "USDC",
+        "protocol": "x402"
+      },
+      "active": true
+    },
+    {
+      "type": "x402",
+      "url": "https://gentechlabs.net/v1/agent/search",
+      "name": "Agent Discovery",
+      "description": "AI agent discovery — search by capability, chain, and protocol across ERC-8004 registries",
+      "oasfVersion": "1.0",
+      "skills": ["agent_verification", "search", "data_access"],
+      "domains": ["ai-agents", "identity", "blockchain"],
+      "pricing": {
+        "model": "pay-per-query",
+        "amount": 0.005,
+        "currency": "USDC",
+        "protocol": "x402"
+      },
+      "active": true
+    },
+    {
+      "type": "x402",
+      "url": "https://gentechlabs.net/v1/identity/{address}",
+      "name": "ERC-8004 Identity",
+      "description": "ERC-8004 identity lookup — verify agent registration and reputation across 22 chains",
+      "oasfVersion": "1.0",
+      "skills": ["agent_identity", "agent_verification", "on_chain_analysis"],
+      "domains": ["identity", "blockchain", "ai-agents"],
+      "pricing": {
+        "model": "pay-per-query",
+        "amount": 0.001,
+        "currency": "USDC",
+        "protocol": "x402"
+      },
+      "active": true
+    },
+    {
+      "type": "x402",
+      "url": "https://gentechlabs.net/v1/wallet/deploy",
+      "name": "Smart Wallet Deploy",
+      "description": "Safe wallet deployment via Zyfai SDK with yield optimization",
+      "oasfVersion": "1.0",
+      "skills": ["payment_processing", "defi_analytics", "infrastructure"],
+      "domains": ["payments", "defi", "blockchain"],
+      "pricing": {
+        "model": "pay-per-query",
+        "amount": 0.01,
+        "currency": "USDC",
+        "protocol": "x402"
+      },
+      "active": true
+    },
+    {
+      "type": "x402",
+      "url": "https://gentechlabs.net/v1/yield/opportunities",
+      "name": "Yield Opportunities",
+      "description": "Top DeFi yields across protocols via Zyfai SDK",
+      "oasfVersion": "1.0",
+      "skills": ["defi_monitoring", "market_analysis", "data_access"],
+      "domains": ["defi", "finance", "blockchain"],
+      "pricing": {
+        "model": "pay-per-query",
+        "amount": 0.001,
+        "currency": "USDC",
+        "protocol": "x402"
+      },
+      "active": true
+    },
+    {
+      "type": "http",
+      "url": "https://gentechlabs.net/v1/health",
+      "name": "Health Check",
+      "description": "System health and uptime monitoring for all GenTech services",
+      "oasfVersion": "1.0",
+      "skills": ["infrastructure", "quality_assurance"],
+      "domains": ["infrastructure", "technology"],
+      "active": true
+    }
+  ]
+}
