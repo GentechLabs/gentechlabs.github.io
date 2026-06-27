@@ -13,47 +13,38 @@ export const CLASSES = {
       protection: 15
     },
     abilities: {
-      attack: {
+      slash: {
         name: 'Slash',
-        description: 'Basic sword attack',
+        desc: 'Basic sword attack',
         damage: 15,
-        cost: 0,
-        range: 'melee',
+        apCost: 0,
         type: 'physical'
       },
       defend: {
         name: 'Defend',
-        description: 'Increase protection for turn',
-        cost: 0,
-        range: 'self',
-        type: 'buff',
-        effect: { protection: 20, duration: 1 }
+        desc: 'Increase protection for turn',
+        apCost: 0,
+        type: 'defense'
       },
       taunt: {
         name: 'Taunt',
-        description: 'Force enemy to target you',
-        cost: 1,
-        range: 'melee',
-        type: 'debuff',
-        effect: { forcedTarget: true, duration: 1 }
+        desc: 'Force enemy to target you',
+        apCost: 1,
+        type: 'debuff'
       },
       cleave: {
         name: 'Cleave',
-        description: 'Hit all enemies',
+        desc: 'Hit all enemies',
         damage: 10,
-        cost: 2,
-        range: 'melee',
-        type: 'physical',
-        aoe: true
+        apCost: 2,
+        type: 'physical'
       },
       ironWill: {
         name: 'Iron Will',
-        description: 'Heal self + increase protection',
-        heal: 30,
-        cost: 2,
-        range: 'self',
-        type: 'heal',
-        effect: { protection: 10, duration: 1 }
+        desc: 'Heal self + increase protection',
+        healAmount: 30,
+        apCost: 2,
+        type: 'heal'
       }
     }
   },
@@ -71,45 +62,36 @@ export const CLASSES = {
     abilities: {
       shoot: {
         name: 'Shoot',
-        description: 'Quick crossbow shot',
+        desc: 'Quick crossbow shot',
         damage: 20,
-        cost: 0,
-        range: 'ranged',
+        apCost: 0,
         type: 'physical'
       },
       aimedShot: {
         name: 'Aimed Shot',
-        description: 'High damage, high accuracy',
+        desc: 'High damage, high accuracy',
         damage: 35,
-        cost: 1,
-        range: 'ranged',
-        type: 'physical',
-        critBonus: 20
+        apCost: 1,
+        type: 'physical'
       },
       trap: {
         name: 'Trap',
-        description: 'Setup trap (stun next enemy attack)',
-        cost: 1,
-        range: 'self',
-        type: 'debuff',
-        effect: { stun: 1 }
+        desc: 'Setup trap (stun next enemy attack)',
+        apCost: 1,
+        type: 'debuff'
       },
       huntersMark: {
         name: 'Hunter\'s Mark',
-        description: 'Increase damage taken by enemy',
-        cost: 1,
-        range: 'ranged',
-        type: 'debuff',
-        effect: { damageTaken: 25, duration: 2 }
+        desc: 'Increase damage taken by enemy',
+        apCost: 1,
+        type: 'debuff'
       },
       rapidFire: {
         name: 'Rapid Fire',
-        description: '3 shots, moderate damage each',
+        desc: '3 shots, moderate damage each',
         damage: 12,
-        cost: 2,
-        range: 'ranged',
-        type: 'physical',
-        hits: 3
+        apCost: 2,
+        type: 'physical'
       }
     }
   },
@@ -127,46 +109,36 @@ export const CLASSES = {
     abilities: {
       fireball: {
         name: 'Fireball',
-        description: 'Magical fire damage',
+        desc: 'Magical fire damage',
         damage: 25,
-        cost: 0,
-        range: 'ranged',
+        apCost: 0,
         type: 'magical'
       },
       frostNova: {
         name: 'Frost Nova',
-        description: 'Freeze enemy (skip turn)',
-        cost: 1,
-        range: 'ranged',
-        type: 'cc',
-        effect: { stun: 1 }
+        desc: 'Freeze enemy (skip turn)',
+        apCost: 1,
+        type: 'cc'
       },
       chainLightning: {
         name: 'Chain Lightning',
-        description: 'Bounce lightning to all enemies',
+        desc: 'Bounce lightning to all enemies',
         damage: 18,
-        cost: 2,
-        range: 'ranged',
-        type: 'magical',
-        aoe: true
+        apCost: 2,
+        type: 'magical'
       },
       heal: {
         name: 'Heal',
-        description: 'Restore ally HP',
-        heal: 40,
-        cost: 1,
-        range: 'ranged',
-        type: 'heal',
-        target: 'ally'
+        desc: 'Restore ally HP',
+        healAmount: 40,
+        apCost: 1,
+        type: 'heal'
       },
       shield: {
         name: 'Shield',
-        description: 'Protect ally from damage',
-        cost: 1,
-        range: 'ranged',
-        type: 'buff',
-        target: 'ally',
-        effect: { protection: 25, duration: 1 }
+        desc: 'Protect ally from damage',
+        apCost: 1,
+        type: 'defense'
       }
     }
   }
