@@ -585,3 +585,20 @@ body {
   min-width: 80px;
   max-width: 120px;
 }
+
+/* Combat Area Layout */
+.combat-area {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 15px;
+  padding: 10px;
+  background: #0d0d0d;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+.combat-area .enemy-panel,
+.combat-area .player-panel {
+  flex: 1;
+}
