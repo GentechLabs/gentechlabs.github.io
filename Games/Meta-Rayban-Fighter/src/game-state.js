@@ -154,7 +154,7 @@ export class GameState {
   }
 
   enemyTurn() {
-    if (this.currentEnemy.hp <= 0) return;
+    if (this.currentEnemy.hp <= 0) return 0;
 
     const enemy = this.currentEnemy;
     let damage = enemy.damage;
@@ -191,11 +191,11 @@ export class GameState {
       this.player.hp = 0;
       this.gameOver = true;
       this.log('You died... Permadeath.');
-      return { gameOver: true, message: 'GAME OVER' };
     }
 
     this.player.isGuarding = false;
     this.advanceTurn();
+    return Math.floor(damage);
   }
 
   checkLevelComplete() {
