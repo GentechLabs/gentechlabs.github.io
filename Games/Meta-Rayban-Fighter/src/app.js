@@ -77,13 +77,11 @@ class MetaFighterApp {
           <span class="ap-stat">AP: ${member.ap}/${member.maxAp}</span>
           <span class="protection-stat">DEF: ${member.protection}</span>
         </div>
+        ${index === this.selectedMemberIndex ? '<div class="current-turn-indicator">⬆️ CURRENT TURN</div>' : ''}
       `;
       
-      memberEl.addEventListener('click', () => {
-        this.selectedMemberIndex = index;
-        this.renderParty();
-        this.renderAbilities();
-      });
+      // Remove click listener - party panel is display-only
+      // Abilities auto-update based on turn order
       
       this.ui.partyContainer.appendChild(memberEl);
     });
@@ -92,11 +90,18 @@ class MetaFighterApp {
   renderAbilities() {
     const member = this.gameState.party[this.selectedMemberIndex];
     if (!member || !member.isAlive) {
-      this.ui.abilitiesContainer.innerHTML = '<div class="no-selection">Select a living party member</div>';
+      this.ui.abilitiesContainer.innerHTML = '<div class="no-selection">No abilities available</div>';
       return;
     }
 
-    this.ui.abilitiesContainer.innerHTML = '';
+    const abilitiesHTML = `
+      <div class="current-character-title">
+        <span class="character-icon">${CLASS_ICONS[member.classKey]}</span>
+        <span class="character-name-display">${member.name}'s Abilities</span>
+      </div>
+    `;
+    
+    this.ui.abilitiesContainer.innerHTML = abilitiesHTML;
     
     Object.entries(member.abilities).forEach(([key, ability]) => {
       const abilityEl = document.createElement('div');

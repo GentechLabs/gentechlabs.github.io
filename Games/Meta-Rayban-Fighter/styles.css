@@ -85,7 +85,7 @@ body::after {
 }
 
 .game-sidebar {
-  width: 220px;
+  width: 280px;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -253,20 +253,32 @@ body::after {
   border: 2px solid #2a2a2a;
   border-radius: 8px;
   padding: 10px;
-  cursor: pointer;
   transition: all 0.2s ease;
   border-left-width: 4px;
 }
 
 .party-member:hover {
   background: #1a1a1a;
-  transform: translateX(2px);
 }
 
 .party-member.selected {
   background: #1a1a1a;
   box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
   border-width: 3px;
+}
+
+.current-turn-indicator {
+  margin-top: 6px;
+  font-size: 10px;
+  color: #ffd700;
+  text-align: center;
+  font-weight: bold;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
 }
 
 .party-member.dead {
@@ -399,20 +411,46 @@ body::after {
   gap: 8px;
 }
 
+.current-character-title {
+  background: #2a2a2a;
+  border: 2px solid #ffd700;
+  border-radius: 8px;
+  padding: 10px;
+  text-align: center;
+  margin-bottom: 5px;
+  animation: pulse 2s infinite;
+}
+
+.character-icon {
+  font-size: 18px;
+  margin-right: 8px;
+}
+
+.character-name-display {
+  font-size: 14px;
+  font-weight: bold;
+  color: #ffd700;
+}
+
 .ability-card {
   background: #1a1a1a;
   border: 2px solid #2a2a2a;
   border-radius: 8px;
-  padding: 10px;
+  padding: 12px;
   cursor: pointer;
   transition: all 0.2s ease;
   border-left-width: 4px;
+  min-height: 70px;
 }
 
 .ability-card:hover {
   background: #2a2a2a;
-  transform: translateX(2px);
+  transform: translateX(-2px);
   box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+}
+
+.ability-card:active {
+  transform: translateX(-4px);
 }
 
 .ability-card.disabled {
