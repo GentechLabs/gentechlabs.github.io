@@ -157,15 +157,27 @@ body::after {
 /* Combat Area */
 .combat-area {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   padding: 15px;
   background: #0d0d0d;
   border-radius: 10px;
   border: 1px solid #3a3a3a;
+  gap: 20px;
+}
+
+.heroes-panel {
+  flex: 1;
+  text-align: center;
+}
+
+.hero-sprite {
+  width: 100px;
+  height: 120px;
 }
 
 .enemy-panel {
+  flex: 1;
   text-align: center;
 }
 

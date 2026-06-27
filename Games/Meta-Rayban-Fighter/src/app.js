@@ -130,6 +130,19 @@ class MetaFighterApp {
     if (enemySvgElement) {
       enemySvgElement.classList.add(`${enemyClass}-sprite`);
     }
+
+    // Render current hero
+    const heroSpriteContainer = document.getElementById('hero-sprite-container');
+    if (heroSpriteContainer) {
+      const currentTurn = this.gameState.getCurrentTurn();
+      if (currentTurn && currentTurn.type === 'player' && currentTurn.member) {
+        const heroClass = currentTurn.member.classKey;
+        const heroSvg = CHARACTERS[heroClass]?.svg;
+        if (heroSvg) {
+          heroSpriteContainer.innerHTML = heroSvg;
+        }
+      }
+    }
   }
 
   updateUI() {
@@ -137,6 +150,12 @@ class MetaFighterApp {
 
     this.ui.level.textContent = level;
     this.ui.enemyName.textContent = currentEnemy?.name || '';
+    
+    // Update potions display
+    const potionsSpan = document.getElementById('potions');
+    if (potionsSpan) {
+      potionsSpan.textContent = potions;
+    }
     
     if (currentEnemy) {
       const enemyHpFill = document.getElementById('enemy-hp');
@@ -148,6 +167,7 @@ class MetaFighterApp {
 
     this.renderParty();
     this.renderAbilities();
+    this.renderCharacters();
 
     this.ui.combatLog.innerHTML = combatLog.slice(-10).map(entry => 
       `<div class="log-entry">${entry}</div>`

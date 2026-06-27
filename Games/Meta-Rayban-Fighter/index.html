@@ -15,9 +15,17 @@
         <div id="turn-indicator" class="turn-indicator player-turn">Your turn</div>
       </div>
 
-      <!-- Combat Area -->
+      <!-- Combat Area with Heroes (Left) and Enemy (Right) -->
       <div class="combat-area">
-        <!-- Enemy Panel -->
+        <!-- Heroes Panel (Left) -->
+        <div class="heroes-panel">
+          <div class="panel-title">🦸 Heroes</div>
+          <div class="characters-display">
+            <div id="hero-sprite-container" class="character-sprite hero-sprite"></div>
+          </div>
+        </div>
+
+        <!-- Enemy Panel (Right) -->
         <div class="enemy-panel">
           <div class="character-display">
             <div id="enemy-sprite-container" class="character-sprite"></div>
@@ -29,9 +37,9 @@
         </div>
       </div>
 
-      <!-- Party Panel -->
+      <!-- Party Status Panel -->
       <div class="party-panel">
-        <div class="panel-title">⚔️ Your Party</div>
+        <div class="panel-title">⚔️ Party Status</div>
         <div id="party-container" class="party-container">
           <!-- Party members rendered here -->
         </div>
