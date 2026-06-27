@@ -283,8 +283,37 @@ export class GameState {
     if (!this.currentEnemy || this.currentEnemy.hp <= 0) return 0;
 
     const enemy = this.currentEnemy;
-    let damage = enemy.damage;
 
+    // Check if enemy is stunned
+    if (enemy.stunned && enemy.stunned > 0) {
+      this.log(`${enemy.name} is stunned and cannot act!`);
+      return 0;
+    }
+
+    // Pick a random ability from enemy's abilities
+    const abilities = Object.values(enemy.abilities || {});
+    const availableAbilities = abilities.filter(ab => ab.cooldown === 0);
+    
+    if (availableAbilities.length === 0) {
+      // If all abilities on cooldown, wait
+      abilities.forEach(ab => ab.cooldown = Math.max(0, ab.cooldown - 1));
+      return 0;
+    }
+
+    const ability = availableAbilities[Math.floor(Math.random() * availableAbilities.length)];
+    let damage = ability.damage || enemy.damage;
+    let totalDamage = 0;
+    let effectType = ability.effect || 'attackEffect';
+
+    // Cooldown management
+    abilities.forEach(ab => ab.cooldown = Math.max(0, ab.cooldown - 1));
+    const abilityIndex = Object.keys(enemy.abilities).findIndex(k => enemy.abilities[k].name === ability.name);
+    if (abilityIndex !== -1) {
+      const abilityKey = Object.keys(enemy.abilities)[abilityIndex];
+      enemy.abilities[abilityKey].cooldown = enemy.abilities[abilityKey].cooldown + 2;
+    }
+
+    // Find target
     const livingParty = this.party.filter(m => m.isAlive);
     if (livingParty.length === 0) return 0;
 
@@ -293,15 +322,67 @@ export class GameState {
       target = livingParty[Math.floor(Math.random() * livingParty.length)];
     }
 
-    const actualDamage = target.takeDamage(damage);
-    this.log(`${enemy.name} attacked ${target.name}: ${actualDamage} damage`);
+    // Handle AOE attacks
+    if (ability.isAOE) {
+      this.log(`${enemy.name} used ${ability.name}!`);
+      livingParty.forEach(member => {
+        const actualDamage = member.takeDamage(damage);
+        totalDamage += actualDamage;
+        this.log(`  → ${member.name}: ${actualDamage} damage`);
+      });
+      effectType = 'aoeEffect';
+    } else {
+      // Handle special ability effects
+      if (ability.bypassesArmor) {
+        const actualDamage = target.takeDamage(damage, 0); // No armor
+        totalDamage = actualDamage;
+        this.log(`${enemy.name} used ${ability.name}: ${actualDamage} damage (bypassed armor!)`);
+        effectType = 'bypassEffect';
+      } else if (ability.poisonChance && Math.random() < ability.poisonChance) {
+        const actualDamage = target.takeDamage(damage);
+        totalDamage = actualDamage;
+        target.poisoned = (target.poisoned || 0) + 2;
+        this.log(`${enemy.name} used ${ability.name}: ${actualDamage} damage + poisoned!`);
+        effectType = 'poisonEffect';
+      } else if (ability.healPercent) {
+        const actualDamage = target.takeDamage(damage);
+        totalDamage = actualDamage;
+        const healAmount = Math.floor(damage * ability.healPercent);
+        enemy.hp = Math.min(enemy.maxHp, enemy.hp + healAmount);
+        this.log(`${enemy.name} used ${ability.name}: ${actualDamage} damage, healed ${healAmount} HP`);
+        effectType = 'drainEffect';
+      } else if (ability.summonDamage) {
+        this.log(`${enemy.name} used ${ability.name}! Skeleton attacks too!`);
+        const actualDamage = target.takeDamage(damage);
+        const summonDamage = target.takeDamage(ability.summonDamage);
+        totalDamage = actualDamage + summonDamage;
+        this.log(`  → Main: ${actualDamage} damage`);
+        this.log(`  → Summon: ${summonDamage} damage`);
+        effectType = 'summonEffect';
+      } else {
+        // Regular attack
+        const actualDamage = target.takeDamage(damage);
+        totalDamage = actualDamage;
+        this.log(`${enemy.name} used ${ability.name}: ${actualDamage} damage`);
+      }
+    }
+
+    // Check for poison damage
+    this.party.forEach(member => {
+      if (member.poisoned > 0) {
+        const poisonDmg = Math.floor(ability.poisonDamage || 7);
+        const actualDamage = member.takeDamage(poisonDmg);
+        this.log(`${member.name} took ${actualDamage} poison damage`);
+        member.poisoned--;
+      }
+    });
 
     if (!this.isPartyAlive()) {
       this.gameOver = true;
       this.log('💀 GAME OVER - Your party has fallen!');
     }
 
-    return actualDamage;
+    return { totalDamage, effectType, ability };
   }
 
   advanceTurn() {
