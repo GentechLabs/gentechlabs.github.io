@@ -91,6 +91,7 @@ export class GameState {
       if (this.player.isCountering && !this.player.isGuarding) {
         this.player.isCountering = false;
       }
+      this.player.isGuarding = false;
     }
   }
 
@@ -193,7 +194,6 @@ export class GameState {
       this.log('You died... Permadeath.');
     }
 
-    this.player.isGuarding = false;
     this.advanceTurn();
     return Math.floor(damage);
   }
