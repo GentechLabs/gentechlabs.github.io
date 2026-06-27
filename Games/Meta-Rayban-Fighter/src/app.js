@@ -269,7 +269,7 @@ class MetaFighterApp {
   }
 
   showLevelTransitionMessage(nextLevel) {
-    const nextEnemy = nextLevel === 2 ? 'Zombie' : (nextLevel === 3 ? 'Ghost' : 'Death Knight');
+    const nextEnemy = nextLevel === 2 ? 'Zombie' : (nextLevel === 3 ? 'Ghost' : 'Death Knight (Boss)');
     this.ui.turnIndicator.textContent = `Continue to Level ${nextLevel}: ${nextEnemy} awaits...`;
     this.ui.turnIndicator.className = 'turn-indicator player-turn';
   }

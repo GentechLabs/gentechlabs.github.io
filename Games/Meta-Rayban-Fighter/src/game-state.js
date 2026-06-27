@@ -58,17 +58,22 @@ export class GameState {
       this.currentEnemy = { ...ENEMIES.zombie };
     } else if (levelNum === 3) {
       this.currentEnemy = { ...ENEMIES.ghost };
+    } else if (levelNum === 4) {
+      this.currentEnemy = { ...ENEMIES.deathKnight };
+      this.log('Death Knight (Boss) appears!');
     }
 
     // Partial heal between levels (20%)
-    if (levelNum > 1) {
+    if (levelNum > 1 && levelNum <= 3) {
       const healAmount = Math.floor(this.player.maxHp * 0.2);
       this.player.hp = Math.min(this.player.maxHp, this.player.hp + healAmount);
       this.log(`Recovered ${healAmount} HP between levels.`);
     }
 
     this.calculateTurnOrder();
-    this.log(`Level ${levelNum}: ${this.currentEnemy.name} appears!`);
+    if (levelNum !== 4) {
+      this.log(`Level ${levelNum}: ${this.currentEnemy.name} appears!`);
+    }
   }
 
   calculateTurnOrder() {
@@ -141,6 +146,12 @@ export class GameState {
       this.log('Holy energy blasts through!');
     }
 
+    // Taunt special effect: reduce enemy damage next turn
+    if (action.type === 'mental') {
+      this.currentEnemy.damage = Math.max(5, Math.floor(this.currentEnemy.damage * 0.7));
+      this.log(`${this.currentEnemy.name} is enraged! Next attack will be weaker.`);
+    }
+
     this.currentEnemy.hp -= damage;
     this.log(`You ${actionKey.replace(/([A-Z])/g, ' $1').toLowerCase().trim()} for ${damage} damage!`);
 
@@ -182,9 +193,15 @@ export class GameState {
     }
 
     // Zombie poison
-    if (enemy.special === 'poison' && Math.random() < 0.3) {
-      this.player.hp -= 5;
-      this.log('Poison! -5 HP over time.');
+    if (enemy.special === 'poison' && Math.random() < 0.4) {
+      this.player.hp -= 7;
+      this.log('Poison! -7 HP over time.');
+    }
+
+    // Death Knight special: 30% chance for critical hit
+    if (enemy.special === 'undead' && Math.random() < 0.3) {
+      damage *= 1.5;
+      this.log('Death Knight lands a critical blow!');
     }
 
     this.player.hp -= damage;
