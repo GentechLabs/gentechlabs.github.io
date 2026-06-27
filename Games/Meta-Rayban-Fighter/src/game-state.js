@@ -144,10 +144,12 @@ export class GameState {
     this.currentEnemy.hp -= damage;
     this.log(`You ${actionKey.replace(/([A-Z])/g, ' $1').toLowerCase().trim()} for ${damage} damage!`);
 
+    // Check for kill
     if (this.currentEnemy.hp <= 0) {
       this.currentEnemy.hp = 0;
-      this.log(`${this.currentEnemy.name} defeated!`);
-      return this.checkLevelComplete();
+      const enemyName = this.currentEnemy.name;
+      this.log(`You slayed ${enemyName}!`);
+      return { success: true, message: `Slayed ${enemyName}!`, data: { damage, enemyHp: 0, killed: true, enemyName } };
     }
 
     this.advanceTurn();
@@ -196,22 +198,6 @@ export class GameState {
 
     this.advanceTurn();
     return Math.floor(damage);
-  }
-
-  checkLevelComplete() {
-    if (this.currentEnemy.hp <= 0) {
-      if (this.level < 3) {
-        const nextLevel = this.level + 1;
-        return { levelComplete: true, nextLevel, message: `Level ${this.level} clear!` };
-      } else {
-        // Spawn Death Knight boss
-        this.currentEnemy = { ...ENEMIES.deathKnight };
-        this.calculateTurnOrder();
-        this.log('Death Knight appears! (Boss)');
-        return { message: 'Death Knight boss fight!' };
-      }
-    }
-    return { message: 'Continue fighting' };
   }
 
   checkVictory() {

@@ -77,20 +77,31 @@ class MetaFighterApp {
       this.playActionAnimation(actionKey, result.data);
       this.updateUI();
 
-      const victoryCheck = this.gameState.checkVictory();
-      if (victoryCheck?.won) {
-        this.isGameActive = false;
-        this.ui.gameWon.classList.remove('hidden');
-        return;
-      }
+      // Check if enemy was killed
+      if (result.data?.killed) {
+        this.showKillMessage(result.data.enemyName);
+        
+        // Check for boss victory
+        const victoryCheck = this.gameState.checkVictory();
+        if (victoryCheck?.won) {
+          setTimeout(() => {
+            this.isGameActive = false;
+            this.ui.gameWon.classList.remove('hidden');
+          }, 3000);
+          return;
+        }
 
-      if (result.levelComplete) {
+        // Proceed to next level
         setTimeout(() => {
-          this.gameState.startLevel(result.nextLevel);
-          this.renderCharacters();
-          this.updateUI();
-          this.processTurn();
-        }, 2000);
+          const nextLevel = this.gameState.level + 1;
+          this.showLevelTransitionMessage(nextLevel);
+          setTimeout(() => {
+            this.gameState.startLevel(nextLevel);
+            this.renderCharacters();
+            this.updateUI();
+            this.processTurn();
+          }, 2000);
+        }, 3000);
         return;
       }
 
@@ -239,6 +250,28 @@ class MetaFighterApp {
       this.ui.turnIndicator.textContent = 'Your turn';
       this.ui.turnIndicator.className = 'turn-indicator player-turn';
     }
+  }
+
+  showKillMessage(enemyName) {
+    this.ui.turnIndicator.textContent = `You slayed ${enemyName}!`;
+    this.ui.turnIndicator.className = 'turn-indicator player-turn';
+    
+    // Flash enemy red then fade out
+    const enemySprite = this.ui.enemySpriteContainer.querySelector('svg');
+    if (enemySprite) {
+      enemySprite.style.transition = 'opacity 0.5s, filter 0.5s';
+      enemySprite.style.filter = 'brightness(2) hue-rotate(340deg)';
+      setTimeout(() => {
+        enemySprite.style.opacity = '0.3';
+        enemySprite.style.filter = 'brightness(0.5) grayscale(1)';
+      }, 300);
+    }
+  }
+
+  showLevelTransitionMessage(nextLevel) {
+    const nextEnemy = nextLevel === 2 ? 'Zombie' : (nextLevel === 3 ? 'Ghost' : 'Death Knight');
+    this.ui.turnIndicator.textContent = `Continue to Level ${nextLevel}: ${nextEnemy} awaits...`;
+    this.ui.turnIndicator.className = 'turn-indicator player-turn';
   }
 
   updateUI() {
