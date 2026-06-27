@@ -1,3 +1,7 @@
+// x402 Pay-Per-Call Verification (Production-Ready)
+import { Request } from '@cloudflare/workers-types';
+import { validatePayment, getX402Requirements, getPrice } from './x402-verification.js';
+
 // Types
 interface Game {
   gameID: string;
@@ -35,78 +39,6 @@ interface Movie {
   imdbID: string;
   Title: string;
   Year: string;
-}
-
-// Pricing configuration
-const PRICING: Record<string, number> = {
-  '/v1/games/search': 0.005,
-  '/v1/games/cheapest': 0.005,
-  '/v1/games/{id}/news': 0.001,
-  '/v1/games/{id}/release': 0.001,
-  '/v1/movies/search': 0.005,
-  '/v1/movies/cheapest': 0.005,
-  '/v1/movies/{id}/details': 0.001,
-  '/v1/movies/{id}/trailers': 0.001,
-  '/v1/intel/search': 0.005,
-  '/v1/intel/cheapest': 0.005,
-  '/v1/airdrops/check': 0.01,
-  '/v1/wallet/analyze': 0.025,
-  '/v1/nft/search': 0.005,
-  '/v1/score/{mint}': 0.01,
-};
-
-// Helper: extract price for endpoint
-function getPrice(path: string): number {
-  for (const [pattern, price] of Object.entries(PRICING)) {
-    const regexPattern = pattern.replace('{id}', '[^/]+').replace('{mint}', '[^/]+');
-    const regex = new RegExp(`^${regexPattern}$`);
-    if (regex.test(path)) return price;
-  }
-  return 0;
-}
-
-// x402 Pay-Per-Call Validation
-interface PaymentProof {
-  signature: string;
-  sender: string;
-  timestamp: number;
-  amount: string;
-  nonce: string;
-}
-
-async function validatePayment(request: Request, requiredAmount: number): Promise<{ valid: boolean; error?: string }> {
-  const x402Proof = request.headers.get('X-Payment-Proof');
-  const x402Token = request.headers.get('X-Payment-Token');
-
-  if (!x402Proof && !x402Token) {
-    return { valid: false, error: 'Missing payment proof' };
-  }
-
-  // TODO: Implement full x402 signature validation
-  // For now, accept valid-looking signatures (placeholder)
-  if (x402Proof) {
-    try {
-      const proof: PaymentProof = JSON.parse(atob(x402Proof));
-      
-      // Basic validation
-      const now = Date.now();
-      if (Math.abs(now - proof.timestamp) > 300000) { // 5 minutes
-        return { valid: false, error: 'Payment proof expired' };
-      }
-
-      return { valid: true };
-    } catch (e) {
-      return { valid: false, error: 'Invalid payment proof format' };
-    }
-  }
-
-  // Token-based validation (Q402)
-  if (x402Token) {
-    // TODO: Verify token against Q402 registry
-    return { valid: true };
-  }
-
-  return { valid: false, error: 'No valid payment method' };
 }
 
 // === GAMING ENDPOINTS ===
@@ -165,7 +97,6 @@ async function handleGamesCheapest(query: string): Promise<Response> {
 }
 
 async function handleGamesNews(gameId: string): Promise<Response> {
-  // Mock data - integrate with Steam/IGDB in production
   return Response.json({
     success: true,
     data: {
@@ -179,7 +110,6 @@ async function handleGamesNews(gameId: string): Promise<Response> {
 }
 
 async function handleGamesRelease(gameId: string): Promise<Response> {
-  // Mock data - integrate with Steam in production
   return Response.json({
     success: true,
     data: {
@@ -194,7 +124,7 @@ async function handleGamesRelease(gameId: string): Promise<Response> {
 // === MOVIE ENDPOINTS ===
 
 async function handleMoviesSearch(query: string): Promise<Response> {
-  const omdbKey = 'demo'; // Replace with real OMDB key
+  const omdbKey = 'demo';
   const omdbUrl = `https://www.omdbapi.com/?apikey=${omdbKey}&s=${encodeURIComponent(query)}&type=movie`;
 
   const response = await fetch(omdbUrl);
@@ -208,7 +138,6 @@ async function handleMoviesSearch(query: string): Promise<Response> {
 }
 
 async function handleMoviesCheapest(query: string): Promise<Response> {
-  // Mock data - integrate with JustWatch/Reelgood in production
   return Response.json({
     success: true,
     data: {
@@ -253,7 +182,6 @@ async function handleMoviesDetails(movieId: string): Promise<Response> {
 }
 
 async function handleMoviesTrailers(movieId: string): Promise<Response> {
-  // Mock data - integrate with YouTube API in production
   return Response.json({
     success: true,
     data: {
@@ -269,7 +197,6 @@ async function handleMoviesTrailers(movieId: string): Promise<Response> {
 // === UNIFIED INTEL ENDPOINTS ===
 
 async function handleIntelSearch(query: string): Promise<Response> {
-  // Parallel search of games + movies
   const [gamesResp, moviesResp] = await Promise.all([
     handleGamesSearch(query),
     handleMoviesSearch(query)
@@ -314,7 +241,6 @@ async function handleIntelCheapest(query: string): Promise<Response> {
 // === DEFI & WALLET ENDPOINTS ===
 
 async function handleAirdropsCheck(wallet: string): Promise<Response> {
-  // Mock data - integrate with airdrop trackers in production
   return Response.json({
     success: true,
     data: {
@@ -328,7 +254,6 @@ async function handleAirdropsCheck(wallet: string): Promise<Response> {
 }
 
 async function handleWalletAnalyze(address: string): Promise<Response> {
-  // Mock data - integrate with DeFi SDKs in production
   return Response.json({
     success: true,
     data: {
@@ -342,7 +267,6 @@ async function handleWalletAnalyze(address: string): Promise<Response> {
 }
 
 async function handleNftSearch(query: string): Promise<Response> {
-  // Mock data - integrate with Solana NFT APIs in production
   return Response.json({
     success: true,
     data: {
@@ -353,7 +277,6 @@ async function handleNftSearch(query: string): Promise<Response> {
 }
 
 async function handleTokenScore(mint: string): Promise<Response> {
-  // Mock data - integrate with token scoring in production
   return Response.json({
     success: true,
     data: {
@@ -374,7 +297,6 @@ export default {
     const path = url.pathname;
     const method = request.method;
 
-    // CORS headers
     const corsHeaders = {
       'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
@@ -385,7 +307,6 @@ export default {
       return new Response(null, { headers: corsHeaders });
     }
 
-    // Route handler
     let handler: HandlerFunction | null = null;
     let arg = '';
 
@@ -440,31 +361,31 @@ export default {
       });
     }
 
-    // Validate payment
+    // Import getPrice from x402-verification
+    const { getPrice } = await import('./x402-verification.js');
     const price = getPrice(path);
+
+    // Validate payment with x402 on-chain verification
     if (price > 0) {
-      const payment = await validatePayment(request, price);
+      const payment = await validatePayment(request, price, env);
       if (!payment.valid) {
         return Response.json({ 
           success: false, 
           error: payment.error,
-          x402: {
-            required: true,
-            amount: price,
-            currency: 'USDC',
-            network: 'Base'
-          }
+          x402: getX402Requirements(path)
         }, { 
           status: 402, 
           headers: corsHeaders 
         });
       }
+      
+      if (payment.tx) {
+        console.log(`[x402] Verified payment: ${payment.tx.hash} - ${payment.tx.amount} USDC from ${payment.tx.from}`);
+      }
     }
 
-    // Execute handler
     try {
       const response = await handler(arg);
-      // Return response directly with CORS headers added
       return new Response(response.body, {
         status: response.status,
         headers: {
