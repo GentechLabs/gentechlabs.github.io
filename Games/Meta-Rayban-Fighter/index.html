@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meta Ray-Ban Neural Fighter</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="hud" class="hud-container">
+    <!-- Header -->
+    <div class="header">
+      <div class="level-indicator">Level: <span id="level">1</span></div>
+      <div id="turn-indicator" class="turn-indicator player-turn">Your turn</div>
+    </div>
+
+    <!-- Enemy Status -->
+    <div class="enemy-panel">
+      <div class="enemy-name" id="enemy-name">Skeleton</div>
+      <div class="hp-bar">
+        <div class="hp-fill enemy-hp" id="enemy-hp" style="width: 100%">30/30</div>
+      </div>
+    </div>
+
+    <!-- Player Status -->
+    <div class="player-panel">
+      <div class="stats-row">
+        <div class="hp-label">HP:</div>
+        <div class="hp-bar">
+          <div class="hp-fill player-hp" id="player-hp" style="width: 100%">100/100</div>
+        </div>
+      </div>
+      <div class="stats-row">
+        <div class="ap-label">AP:</div>
+        <div class="ap-value" id="player-ap">2/3</div>
+      </div>
+      <div class="stats-row">
+        <div class="potion-label">Potions:</div>
+        <div class="potion-value" id="potions">3</div>
+      </div>
+    </div>
+
+    <!-- Combat Log -->
+    <div class="combat-log" id="combat-log">
+      <div class="log-entry">Combat log initialized...</div>
+    </div>
+
+    <!-- Action Reference -->
+    <div class="action-reference">
+      <div class="ref-title">Actions (Simulate with keyboard):</div>
+      <div class="ref-grid">
+        <div class="ref-item">A - Attack</div>
+        <div class="ref-item">G - Guard</div>
+        <div class="ref-item">C - Counter</div>
+        <div class="ref-item">H - Holy Strike</div>
+        <div class="ref-item">S - Smite</div>
+        <div class="ref-item">P - Potion</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Game Over Screen -->
+  <div id="game-over" class="overlay hidden">
+    <div class="overlay-content">
+      <h1>💀 GAME OVER</h1>
+      <p>Permadeath. The dungeon claims another soul.</p>
+      <button id="restart-btn" class="restart-btn">Restart Run</button>
+    </div>
+  </div>
+
+  <!-- Victory Screen -->
+  <div id="game-won" class="overlay hidden">
+    <div class="overlay-content">
+      <h1>🏆 DEMO COMPLETE!</h1>
+      <p>You conquered the dungeon!</p>
+      <button id="restart-btn" class="restart-btn">New Run</button>
+    </div>
+  </div>
+
+  <script type="module" src="src/app.js"></script>
+</body>
+</html>

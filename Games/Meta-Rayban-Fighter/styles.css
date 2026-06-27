@@ -1,0 +1,290 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Courier New', monospace;
+  background: #0a0a0a;
+  color: #e0e0e0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+.hud-container {
+  width: 380px;
+  height: 600px;
+  background: linear-gradient(180deg, #1a1a1a 0%, #0d0d0d 100%);
+  border: 2px solid #3a3a3a;
+  border-radius: 20px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  box-shadow: 0 0 40px rgba(139, 69, 19, 0.3);
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #3a3a3a;
+}
+
+.level-indicator {
+  font-size: 14px;
+  color: #8b4513;
+  font-weight: bold;
+}
+
+.turn-indicator {
+  font-size: 12px;
+  padding: 4px 12px;
+  border-radius: 10px;
+  background: #2a2a2a;
+  transition: all 0.3s ease;
+}
+
+.turn-indicator.player-turn {
+  background: #2d5a27;
+  color: #90ee90;
+  box-shadow: 0 0 10px rgba(144, 238, 144, 0.3);
+}
+
+.turn-indicator.enemy-turn {
+  background: #8b0000;
+  color: #ff6b6b;
+  box-shadow: 0 0 10px rgba(255, 107, 107, 0.3);
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+/* Enemy Panel */
+.enemy-panel {
+  background: #1a1a1a;
+  border: 1px solid #3a3a3a;
+  border-radius: 10px;
+  padding: 12px;
+}
+
+.enemy-name {
+  font-size: 18px;
+  color: #ff6b6b;
+  margin-bottom: 8px;
+  text-align: center;
+  font-weight: bold;
+}
+
+/* HP Bars */
+.hp-bar {
+  background: #2a2a2a;
+  border: 1px solid #4a4a4a;
+  border-radius: 5px;
+  height: 20px;
+  overflow: hidden;
+  position: relative;
+}
+
+.hp-fill {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: bold;
+  color: #000;
+  transition: width 0.3s ease;
+}
+
+.player-hp {
+  background: linear-gradient(90deg, #2d5a27, #90ee90);
+  box-shadow: 0 0 5px rgba(144, 238, 144, 0.3);
+}
+
+.enemy-hp {
+  background: linear-gradient(90deg, #8b0000, #ff6b6b);
+  box-shadow: 0 0 5px rgba(255, 107, 107, 0.3);
+}
+
+/* Player Panel */
+.player-panel {
+  background: #1a1a1a;
+  border: 1px solid #3a3a3a;
+  border-radius: 10px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.stats-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.hp-label, .ap-label, .potion-label {
+  font-size: 12px;
+  color: #8b4513;
+  font-weight: bold;
+  min-width: 60px;
+}
+
+.ap-value, .potion-value {
+  font-size: 14px;
+  color: #ffd700;
+  font-weight: bold;
+}
+
+/* Combat Log */
+.combat-log {
+  flex: 1;
+  background: #0a0a0a;
+  border: 1px solid #2a2a2a;
+  border-radius: 10px;
+  padding: 10px;
+  overflow-y: auto;
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+.log-entry {
+  margin-bottom: 6px;
+  padding-left: 10px;
+  border-left: 2px solid #3a3a3a;
+}
+
+.log-entry:nth-child(odd) {
+  background: rgba(42, 42, 42, 0.3);
+}
+
+/* Scrollbar styling */
+.combat-log::-webkit-scrollbar {
+  width: 6px;
+}
+
+.combat-log::-webkit-scrollbar-track {
+  background: #0a0a0a;
+}
+
+.combat-log::-webkit-scrollbar-thumb {
+  background: #3a3a3a;
+  border-radius: 3px;
+}
+
+/* Action Reference */
+.action-reference {
+  background: #1a1a1a;
+  border: 1px solid #3a3a3a;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.ref-title {
+  font-size: 11px;
+  color: #8b4513;
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+.ref-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+}
+
+.ref-item {
+  font-size: 10px;
+  color: #a0a0a0;
+  text-align: center;
+  padding: 4px;
+  background: #0d0d0d;
+  border-radius: 5px;
+  border: 1px solid #2a2a2a;
+}
+
+/* Overlays */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
+
+.overlay.hidden {
+  display: none;
+}
+
+.overlay-content {
+  text-align: center;
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.overlay-content h1 {
+  font-size: 32px;
+  margin-bottom: 16px;
+}
+
+.overlay-content p {
+  font-size: 14px;
+  color: #a0a0a0;
+  margin-bottom: 24px;
+}
+
+.restart-btn {
+  padding: 12px 32px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #fff;
+  background: linear-gradient(90deg, #8b4513, #d2691e);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: inherit;
+}
+
+.restart-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(210, 105, 30, 0.5);
+}
+
+/* Animations */
+@keyframes damageFlash {
+  0%, 100% { filter: brightness(1); }
+  50% { filter: brightness(2) hue-rotate(340deg); }
+}
+
+.damage-flash {
+  animation: damageFlash 0.3s ease;
+}
+
+@keyframes healFlash {
+  0%, 100% { filter: brightness(1); }
+  50% { filter: brightness(1.5) hue-rotate(90deg); }
+}
+
+.heal-flash {
+  animation: healFlash 0.5s ease;
+}
