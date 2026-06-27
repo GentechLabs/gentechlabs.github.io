@@ -10,22 +10,44 @@ class MetaFighterApp {
     this.gestureController = new GestureController((action) => this.handleAction(action));
     this.touchController = new TouchController((action) => this.handleAction(action));
     this.selectedMemberIndex = 0;
+    this.currentTab = 'abilities';
 
     this.ui = {
       level: document.getElementById('level'),
       turnIndicator: document.getElementById('turn-indicator'),
       combatLog: document.getElementById('combat-log'),
       enemyName: document.getElementById('enemy-name'),
-      enemySpriteContainer: document.getElementById('enemy-sprite-container'),
-      heroSpriteContainer: document.getElementById('hero-sprite-container'),
-      partyContainer: document.getElementById('party-container'),
+      attackingCharacter: document.getElementById('attacking-character'),
+      effectContainer: document.getElementById('effect-container'),
       abilitiesContainer: document.getElementById('abilities-container'),
+      itemsContainer: document.getElementById('items-container'),
+      abilitiesPanel: document.getElementById('abilities-panel'),
+      itemsPanel: document.getElementById('items-panel'),
+      abilitiesTab: document.getElementById('abilities-tab'),
+      itemsTab: document.getElementById('items-tab'),
+      partyContainer: document.getElementById('party-container'),
       gameOver: document.getElementById('game-over'),
       gameWon: document.getElementById('game-won'),
       restartBtnOver: document.getElementById('restart-btn-over'),
       restartBtnWon: document.getElementById('restart-btn-won'),
-      potionBtn: document.getElementById('potion-btn'),
-      effectContainer: document.getElementById('effect-container')
+      heroSlots: [
+        document.getElementById('hero-slot-1'),
+        document.getElementById('hero-slot-2'),
+        document.getElementById('hero-slot-3')
+      ],
+      heroSlotChars: [
+        document.getElementById('hero-1'),
+        document.getElementById('hero-2'),
+        document.getElementById('hero-3')
+      ],
+      heroSlotHPs: [
+        document.getElementById('hero-1-hp'),
+        document.getElementById('hero-2-hp'),
+        document.getElementById('hero-3-hp')
+      ],
+      enemySlot: document.getElementById('enemy-slot'),
+      enemySlotChar: document.getElementById('enemy-1'),
+      enemySlotHP: document.getElementById('enemy-1-hp')
     };
 
     this.init();
@@ -34,8 +56,31 @@ class MetaFighterApp {
   init() {
     this.ui.restartBtnOver.addEventListener('click', () => this.restartGame());
     this.ui.restartBtnWon.addEventListener('click', () => this.restartGame());
-    this.ui.potionBtn.addEventListener('click', () => this.usePotion());
+    
+    // Tab switching
+    this.ui.abilitiesTab.addEventListener('click', () => this.switchTab('abilities'));
+    this.ui.itemsTab.addEventListener('click', () => this.switchTab('items'));
+    
     this.startGame();
+  }
+
+  switchTab(tab) {
+    this.currentTab = tab;
+    if (tab === 'abilities') {
+      this.ui.abilitiesPanel.classList.add('active');
+      this.ui.abilitiesPanel.style.display = 'flex';
+      this.ui.itemsPanel.classList.remove('active');
+      this.ui.itemsPanel.style.display = 'none';
+      this.ui.abilitiesTab.classList.add('active');
+      this.ui.itemsTab.classList.remove('active');
+    } else {
+      this.ui.itemsPanel.classList.add('active');
+      this.ui.itemsPanel.style.display = 'flex';
+      this.ui.abilitiesPanel.classList.remove('active');
+      this.ui.abilitiesPanel.style.display = 'none';
+      this.ui.itemsTab.classList.add('active');
+      this.ui.abilitiesTab.classList.remove('active');
+    }
   }
 
   startGame() {
@@ -46,9 +91,9 @@ class MetaFighterApp {
     this.gestureController.start();
     this.touchController.start();
     this.selectedMemberIndex = 0;
-    this.renderParty();
-    this.renderCharacters();
+    this.renderCombatSlots();
     this.renderAbilities();
+    this.renderItems();
     this.updateUI();
     this.processTurn();
   }
@@ -62,62 +107,44 @@ class MetaFighterApp {
     this.startGame();
   }
 
-  renderParty() {
-    this.ui.partyContainer.innerHTML = '';
-    
+  renderCombatSlots() {
+    // Render heroes
     this.gameState.party.forEach((member, index) => {
-      const currentTurn = this.gameState.getCurrentTurn();
-      const isCurrentTurn = currentTurn && currentTurn.type === 'player' && currentTurn.name === member.name;
+      const slot = this.ui.heroSlots[index];
+      const charEl = this.ui.heroSlotChars[index];
+      const hpEl = this.ui.heroSlotHPs[index];
       
-      const memberEl = document.createElement('div');
-      memberEl.className = `party-member ${!member.isAlive ? 'dead' : ''}`;
-      memberEl.style.borderLeft = `3px solid ${member.color}`;
-      memberEl.innerHTML = `
-        <div class="member-header">
-          <span class="member-icon">${CLASS_ICONS[member.classKey]}</span>
-          <span class="member-name">${member.name}</span>
-          <span class="member-role">${member.role}</span>
-        </div>
-        <div class="hp-bar-mini">
-          <div class="hp-fill-mini" style="width: ${(member.hp / member.maxHp) * 100}%; background: ${member.color}"></div>
-          <span class="hp-text-mini">${member.hp}/${member.maxHp}</span>
-        </div>
-        <div class="stats-mini">
-          <span class="ap-stat">AP: ${member.ap}/${member.maxAp}</span>
-          <span class="def-stat">DEF: ${member.def}</span>
-        </div>
-        ${isCurrentTurn ? '<div class="current-turn-indicator">⬆️ CURRENT TURN</div>' : ''}
-      `;
-      
-      this.ui.partyContainer.appendChild(memberEl);
-    });
-  }
-
-  renderCharacters() {
-    // Render current hero
-    const currentTurn = this.gameState.getCurrentTurn();
-    let heroName = 'warrior';
-    if (currentTurn && currentTurn.type === 'player') {
-      const currentMember = this.gameState.party.find(m => m.name === currentTurn.name);
-      if (currentMember) {
-        heroName = currentMember.classKey;
+      if (!member.isAlive) {
+        slot.classList.add('dead');
+      } else {
+        slot.classList.remove('dead');
       }
-    }
-    
-    const heroCharacter = CHARACTERS[heroName];
-    if (heroCharacter && this.ui.heroSpriteContainer) {
-      this.ui.heroSpriteContainer.innerHTML = heroCharacter.svg;
-    }
-    
+      
+      // Get character SVG
+      const character = CHARACTERS[member.classKey];
+      if (character) {
+        charEl.innerHTML = character.svg;
+      }
+      
+      // Update HP bar
+      const hpPercent = (member.hp / member.maxHp) * 100;
+      hpEl.style.width = `${hpPercent}%`;
+    });
+
     // Render enemy
     const enemy = this.gameState.currentEnemy;
-    if (enemy && this.ui.enemySpriteContainer) {
+    if (enemy) {
       let enemyName = enemy.name.toLowerCase();
       if (enemyName === 'death knight') enemyName = 'deathKnight';
       const enemyCharacter = CHARACTERS[enemyName];
       if (enemyCharacter) {
-        this.ui.enemySpriteContainer.innerHTML = enemyCharacter.svg;
+        this.ui.enemySlotChar.innerHTML = enemyCharacter.svg;
       }
+      
+      this.ui.enemyName.textContent = enemy.name;
+      
+      const hpPercent = (enemy.hp / enemy.maxHp) * 100;
+      this.ui.enemySlotHP.style.width = `${hpPercent}%`;
     }
   }
 
@@ -135,14 +162,7 @@ class MetaFighterApp {
     }
 
     this.ui.abilitiesContainer.innerHTML = '';
-    
-    // Character title
-    const titleEl = document.createElement('div');
-    titleEl.className = 'current-character-title';
-    titleEl.innerHTML = `<span class="character-title-icon">${CLASS_ICONS[member.classKey]}</span> ${member.name}'s Abilities`;
-    this.ui.abilitiesContainer.appendChild(titleEl);
 
-    // Render abilities
     Object.entries(member.abilities).forEach(([key, ability]) => {
       const abilityEl = document.createElement('div');
       abilityEl.className = `ability-card ${ability.apCost > member.ap ? 'disabled' : ''}`;
@@ -152,12 +172,10 @@ class MetaFighterApp {
         <div class="ability-name">${ability.name}</div>
         <div class="ability-desc">${ability.desc}</div>
         <div class="ability-cost">Cost: ${ability.apCost} AP</div>
-        <div class="ability-type">${ability.type}</div>
       `;
       
       if (ability.apCost <= member.ap && member.isAlive) {
         abilityEl.addEventListener('click', () => {
-          this.selectedMemberIndex = this.gameState.party.indexOf(member);
           this.handleAbility(key);
         });
       }
@@ -166,11 +184,31 @@ class MetaFighterApp {
     });
   }
 
+  renderItems() {
+    const potionCount = this.gameState.potions;
+    
+    this.ui.itemsContainer.innerHTML = `
+      <div class="item-card ${potionCount <= 0 ? 'disabled' : ''}" id="potion-item">
+        <div class="item-icon">🧪</div>
+        <div class="item-info">
+          <div class="item-name">Health Potion</div>
+          <div class="item-desc">Restore 30 HP to lowest ally</div>
+        </div>
+        <div class="item-count">x${potionCount}</div>
+      </div>
+    `;
+    
+    if (potionCount > 0) {
+      document.getElementById('potion-item').addEventListener('click', () => {
+        this.usePotion();
+      });
+    }
+  }
+
   updateUI() {
-    const { party, currentEnemy, level, combatLog, potions } = this.gameState;
+    const { level, combatLog } = this.gameState;
 
     this.ui.level.textContent = level;
-    this.ui.enemyName.textContent = currentEnemy?.name || '';
     
     // Update turn indicator
     const currentTurn = this.gameState.getCurrentTurn();
@@ -184,9 +222,23 @@ class MetaFighterApp {
       }
     }
 
+    // Highlight current character slot
+    this.ui.heroSlots.forEach((slot, i) => {
+      if (currentTurn && currentTurn.type === 'player') {
+        const member = this.gameState.party[i];
+        if (member && member.name === currentTurn.name) {
+          slot.classList.add('current-turn');
+        } else {
+          slot.classList.remove('current-turn');
+        }
+      } else {
+        slot.classList.remove('current-turn');
+      }
+    });
+
     // Update combat log
     this.ui.combatLog.innerHTML = '';
-    combatLog.slice(-15).forEach(log => {
+    combatLog.slice(-8).forEach(log => {
       const logEl = document.createElement('div');
       logEl.className = 'log-entry';
       logEl.textContent = log;
@@ -200,82 +252,148 @@ class MetaFighterApp {
     if (!currentTurn) return;
 
     if (currentTurn.type === 'player') {
-      this.selectedMemberIndex = this.gameState.party.findIndex(m => m.name === currentTurn.name);
-      this.renderParty();
-      this.renderCharacters();
       this.renderAbilities();
+      this.renderItems();
     } else if (currentTurn.type === 'enemy') {
-      this.ui.turnIndicator.textContent = `Enemy turn`;
+      this.ui.turnIndicator.textContent = 'Enemy turn';
       this.ui.turnIndicator.className = 'turn-indicator enemy-turn';
-      this.ui.turnIndicator.style.background = '#8b0000';
       
       setTimeout(() => {
-        const damage = this.gameState.enemyTurn();
-        this.showEnemyAttack(damage);
+        this.performEnemyAttack();
+      }, 500);
+    }
+  }
+
+  performEnemyAttack() {
+    const enemy = this.gameState.currentEnemy;
+    if (!enemy) return;
+
+    // Get a living hero to attack
+    const livingHeroes = this.gameState.party.filter(m => m.isAlive);
+    if (livingHeroes.length === 0) return;
+    
+    const target = livingHeroes[Math.floor(Math.random() * livingHeroes.length)];
+    const targetIndex = this.gameState.party.indexOf(target);
+
+    // Animate enemy attacking
+    this.ui.enemySlotChar.classList.add('enemy-attacking');
+    
+    // Show effect on target hero
+    setTimeout(() => {
+      const slotEl = this.ui.heroSlots[targetIndex];
+      const rect = slotEl.getBoundingClientRect();
+      const hudRect = this.ui.effectContainer.getBoundingClientRect();
+      
+      this.showEffectAt(
+        rect.left - hudRect.left + rect.width/2,
+        rect.top - hudRect.top + rect.height/2,
+        'slash-effect'
+      );
+      
+      // Deal damage
+      const damage = Math.max(1, enemy.damage - target.def);
+      target.hp = Math.max(0, target.hp - damage);
+      
+      this.showDamageAt(
+        rect.left - hudRect.left + rect.width/2,
+        rect.top - hudRect.top,
+        damage
+      );
+      
+      this.gameState.log(`${enemy.name} attacks ${target.name} for ${damage} damage!`);
+      
+      setTimeout(() => {
+        this.ui.enemySlotChar.classList.remove('enemy-attacking');
+        this.renderCombatSlots();
         this.updateUI();
         
-        setTimeout(() => {
-          const gameOverCheck = this.gameState.checkGameOver();
-          if (gameOverCheck?.gameOver) {
-            this.isGameActive = false;
-            this.triggerDeathAnimation();
-            return;
-          }
+        // Check game over
+        const gameOverCheck = this.gameState.checkGameOver();
+        if (gameOverCheck?.gameOver) {
+          this.isGameActive = false;
+          this.triggerDeathAnimation();
+          return;
+        }
 
-          this.gameState.advanceTurn();
-          this.gameState.turnOrder = this.gameState.buildTurnOrder();
-          this.currentTurnIndex = 0;
-          this.updateUI();
-          this.processTurn();
-        }, 1000);
-      }, 1000);
-    }
+        this.gameState.advanceTurn();
+        this.renderCombatSlots();
+        this.updateUI();
+        this.processTurn();
+      }, 500);
+    }, 400);
   }
 
   handleAbility(abilityKey) {
     if (!this.isGameActive) return;
 
     const currentTurn = this.gameState.getCurrentTurn();
-    if (!currentTurn || currentTurn.type !== 'player') {
-      console.log('Not your turn!');
-      return;
-    }
+    if (!currentTurn || currentTurn.type !== 'player') return;
 
     const member = this.gameState.party.find(m => m.name === currentTurn.name);
-    if (!member || !member.isAlive) {
-      console.log('Character is dead!');
-      return;
-    }
+    if (!member || !member.isAlive) return;
 
     const result = this.gameState.playerAction(member, abilityKey);
-    if (!result.success) {
-      console.log(result.message);
-      return;
-    }
+    if (!result.success) return;
 
-    this.updateUI();
-    this.showAbilityAnimation(member, abilityKey, result);
-
+    // Animate hero attacking
+    const memberIndex = this.gameState.party.indexOf(member);
+    const slotChar = this.ui.heroSlotChars[memberIndex];
+    
+    slotChar.classList.add('hero-attacking');
+    
+    // Show effect on enemy
     setTimeout(() => {
-      const victoryCheck = this.gameState.checkVictory();
-      if (victoryCheck?.won) {
-        this.isGameActive = false;
-        this.ui.gameWon.classList.remove('hidden');
-        this.ui.gameWon.style.display = 'flex';
-        return;
+      const enemyRect = this.ui.enemySlot.getBoundingClientRect();
+      const hudRect = this.ui.effectContainer.getBoundingClientRect();
+      
+      const ability = member.abilities[abilityKey];
+      let effectType = 'slash-effect';
+      if (ability.type === 'magical') effectType = 'fire-effect';
+      else if (ability.type === 'heal') effectType = 'heal-effect';
+      else if (ability.type === 'cc') effectType = 'frost-effect';
+      
+      this.showEffectAt(
+        enemyRect.left - hudRect.left + enemyRect.width/2,
+        enemyRect.top - hudRect.top + enemyRect.height/2,
+        effectType
+      );
+      
+      if (result.damage > 0) {
+        this.showDamageAt(
+          enemyRect.left - hudRect.left + enemyRect.width/2,
+          enemyRect.top - hudRect.top,
+          result.damage
+        );
       }
-
-      if (victoryCheck?.nextLevel) {
-        this.showLevelTransition(victoryCheck.nextLevel);
-        return;
-      }
-
-      this.gameState.advanceTurn();
-      this.gameState.turnOrder = this.gameState.buildTurnOrder();
-      this.currentTurnIndex = 0;
+      
+      this.renderCombatSlots();
       this.updateUI();
-      this.processTurn();
-    }, 1000);
+      
+      setTimeout(() => {
+        slotChar.classList.remove('hero-attacking');
+        
+        // Check victory
+        const victoryCheck = this.gameState.checkVictory();
+        if (victoryCheck?.won) {
+          this.isGameActive = false;
+          this.ui.gameWon.classList.remove('hidden');
+          this.ui.gameWon.style.display = 'flex';
+          return;
+        }
+
+        if (victoryCheck?.nextLevel) {
+          this.showLevelTransition(victoryCheck.nextLevel);
+          return;
+        }
+
+        this.gameState.advanceTurn();
+        this.renderCombatSlots();
+        this.renderAbilities();
+        this.renderItems();
+        this.updateUI();
+        this.processTurn();
+      }, 500);
+    }, 400);
   }
 
   handleAction(action) {
@@ -285,9 +403,8 @@ class MetaFighterApp {
     const member = this.gameState.party.find(m => m.name === currentTurn.name);
     if (!member || !member.isAlive) return;
 
-    const abilityKey = action;
-    if (member.abilities[abilityKey]) {
-      this.handleAbility(abilityKey);
+    if (member.abilities[action]) {
+      this.handleAbility(action);
     }
   }
 
@@ -301,7 +418,6 @@ class MetaFighterApp {
     const livingParty = this.gameState.party.filter(m => m.isAlive);
     if (livingParty.length === 0) return;
 
-    // Heal lowest HP party member
     const lowestMember = livingParty.reduce((lowest, current) => 
       current.hp < lowest.hp ? current : lowest
     );
@@ -311,137 +427,73 @@ class MetaFighterApp {
     this.gameState.potions--;
     
     this.gameState.log(`${lowestMember.name} used potion: +${healAmount} HP`);
-    this.updateUI();
-    this.renderParty();
     
-    this.showHealAnimation(lowestMember, healAmount);
+    // Show heal effect
+    const memberIndex = this.gameState.party.indexOf(lowestMember);
+    const slotEl = this.ui.heroSlots[memberIndex];
+    const rect = slotEl.getBoundingClientRect();
+    const hudRect = this.ui.effectContainer.getBoundingClientRect();
+    
+    this.showEffectAt(
+      rect.left - hudRect.left + rect.width/2,
+      rect.top - hudRect.top + rect.height/2,
+      'heal-effect'
+    );
+    
+    this.showHealAt(
+      rect.left - hudRect.left + rect.width/2,
+      rect.top - hudRect.top,
+      healAmount
+    );
+    
+    this.renderCombatSlots();
+    this.renderItems();
+    this.updateUI();
   }
 
-  showEnemyAttack(damageData) {
-    const { totalDamage, effectType } = damageData;
-    
-    // Trigger visual effect based on enemy ability
-    if (effectType) {
-      this.playVisualEffect(effectType, 'enemy');
-    }
-    
-    const enemySprite = this.ui.enemySpriteContainer.querySelector('svg');
-    if (enemySprite) {
-      enemySprite.classList.add('enemy-attacking');
-      setTimeout(() => enemySprite.classList.remove('enemy-attacking'), 500);
-    }
-    
-    // Show damage text
-    if (totalDamage > 0) {
-      this.showDamageText(totalDamage, 'enemy');
-    }
-  }
-  
-  showAbilityAnimation(member, abilityKey, result) {
-    const ability = member.abilities[abilityKey];
-    if (!ability) return;
-    
-    // Map ability types to visual effects
-    const effectMap = {
-      'magical': 'fireballEffect',
-      'lightning': 'lightningEffect',
-      'heal': 'healEffect',
-      'defense': 'shieldEffect',
-      'cc': 'frostNovaEffect',
-      'debuff': 'tauntEffect',
-      'physical': 'slashEffect'
-    };
-    
-    const effectType = effectMap[ability.type] || 'slashEffect';
-    this.playVisualEffect(effectType, 'player');
-    
-    // Show damage or heal text
-    if (result.damage > 0) {
-      this.showDamageText(result.damage, 'player');
-    } else if (result.healAmount > 0) {
-      this.showHealText(result.healAmount, 'player');
-    }
-  }
-  
-  playVisualEffect(effectType, source) {
-    const effectClass = `${effectType}-effect` || 'slash-effect';
+  showEffectAt(x, y, effectType) {
     const effectEl = document.createElement('div');
-    effectEl.className = `ability-effect ${effectClass}`;
-    
-    // Position effect based on source
-    if (source === 'player') {
-      effectEl.style.left = '30%';
-    } else {
-      effectEl.style.left = '70%';
-    }
+    effectEl.className = `ability-effect ${effectType}`;
+    effectEl.style.left = `${x - 40}px`;
+    effectEl.style.top = `${y - 40}px`;
     
     this.ui.effectContainer.appendChild(effectEl);
-    
-    // Remove effect after animation
-    setTimeout(() => {
-      effectEl.remove();
-    }, 1000);
+    setTimeout(() => effectEl.remove(), 600);
   }
-  
-  showDamageText(damage, source) {
+
+  showDamageAt(x, y, damage) {
     const textEl = document.createElement('div');
     textEl.className = 'damage-text';
     textEl.textContent = `-${damage}`;
-    
-    if (source === 'player') {
-      textEl.style.left = '70%';
-    } else {
-      textEl.style.left = '30%';
-    }
-    textEl.style.top = '40%';
+    textEl.style.left = `${x - 15}px`;
+    textEl.style.top = `${y}px`;
     
     this.ui.effectContainer.appendChild(textEl);
-    
-    setTimeout(() => {
-      textEl.remove();
-    }, 1000);
-  }
-  
-  showHealText(healAmount, source) {
-    const textEl = document.createElement('div');
-    textEl.className = 'heal-text';
-    textEl.textContent = `+${healAmount}`;
-    
-    if (source === 'player') {
-      textEl.style.left = '30%';
-    } else {
-      textEl.style.left = '70%';
-    }
-    textEl.style.top = '40%';
-    
-    this.ui.effectContainer.appendChild(textEl);
-    
-    setTimeout(() => {
-      textEl.remove();
-    }, 1000);
+    setTimeout(() => textEl.remove(), 1000);
   }
 
-  showHealAnimation(member, healAmount) {
-    const memberElements = this.ui.partyContainer.querySelectorAll('.party-member');
-    const memberIndex = this.gameState.party.indexOf(member);
-    if (memberElements[memberIndex]) {
-      memberElements[memberIndex].classList.add('healing');
-      setTimeout(() => memberElements[memberIndex].classList.remove('healing'), 500);
-    }
+  showHealAt(x, y, amount) {
+    const textEl = document.createElement('div');
+    textEl.className = 'heal-text';
+    textEl.textContent = `+${amount}`;
+    textEl.style.left = `${x - 15}px`;
+    textEl.style.top = `${y}px`;
+    
+    this.ui.effectContainer.appendChild(textEl);
+    setTimeout(() => textEl.remove(), 1000);
   }
 
   showLevelTransition(nextLevel) {
     this.ui.turnIndicator.textContent = `Level ${nextLevel} approaching...`;
-    this.ui.turnIndicator.className = 'turn-indicator player-turn';
     
     setTimeout(() => {
       this.gameState.startLevel(nextLevel);
-      this.gameState.turnOrder = this.gameState.buildTurnOrder();
-      this.currentTurnIndex = 0;
-      this.renderCharacters();
+      this.renderCombatSlots();
+      this.renderAbilities();
+      this.renderItems();
       this.updateUI();
       this.processTurn();
-    }, 2000);
+    }, 1500);
   }
 
   triggerDeathAnimation() {
@@ -450,11 +502,10 @@ class MetaFighterApp {
     setTimeout(() => {
       this.ui.gameOver.classList.remove('hidden');
       this.ui.gameOver.style.display = 'flex';
-    }, 2000);
+    }, 1500);
   }
 }
 
-// Start the game when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
   const app = new MetaFighterApp();
 });
