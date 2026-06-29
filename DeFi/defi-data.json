@@ -1,62 +1,62 @@
 {
-  "lastUpdated": "2026-06-29T17:30:56.114Z",
+  "lastUpdated": "2026-06-29T17:40:56.337Z",
   "pool": "AVAX/USDC",
   "chain": "Avalanche",
   "dex": "LFJ",
-  "currentPrice": 6.75,
-  "priceChange24h": 7.46,
-  "volume24h": 1823558.67,
-  "liquidity": 387156.93,
+  "currentPrice": 6.73,
+  "priceChange24h": 6.93,
+  "volume24h": 1836592.6,
+  "liquidity": 386348.49,
   "lpPosition": {
     "pair": "AVAX/USDC",
     "feeTier": "10bps",
     "shape": "curve",
     "displayShape": "Curve",
-    "currentPrice": 6.75,
+    "currentPrice": 6.73,
     "rangeMin": 6.4295,
     "rangeMax": 6.5922,
     "avaxAmount": 0,
     "usdcAmount": 47.759386,
     "totalValue": 47.76,
     "totalValueUSD": 47.76,
-    "activeBin": 8362876,
+    "activeBin": 8362872,
     "binStep": 10,
     "totalBins": 26
   },
   "fees": {
-    "dailyFees": 0.72,
-    "cumulativeFees": 1.1835,
+    "dailyFees": 0.727,
+    "cumulativeFees": 1.1886,
     "feeCurrency": "USD"
   },
   "efficiency": 0,
   "hero": {
     "positionUsd": 47.76,
-    "dailyFees": 0.72,
+    "dailyFees": 0.727,
     "efficiency": 0,
     "efficiencyZone": "Outer",
     "shape": "Curve",
     "rangeStatus": "Out of Range",
-    "currentPrice": 6.75,
+    "currentPrice": 6.73,
     "rangeMin": 6.4295,
     "rangeMax": 6.5922,
     "milestoneNext": "Scout",
     "milestoneTarget": 5,
-    "milestoneProgress": 14
+    "milestoneProgress": 15
   },
   "marketIntel": {
-    "avaxPrice": 6.75,
-    "change24h": 7.46,
-    "volume24h": 1823558.67,
-    "tvl": 387156.93,
+    "avaxPrice": 6.73,
+    "change24h": 6.93,
+    "volume24h": 1836592.6,
+    "tvl": 386348.49,
     "trend": "bullish",
     "news": [
       {
-        "headline": "AVAX up 7.46% in 24h",
+        "headline": "AVAX up 6.93% in 24h",
         "impact": "bullish",
         "relevance": "high"
       },
       {
-        "headline": "LFJ AVAX/USDC pool volume: $1823.6K",
+        "headline": "LFJ AVAX/USDC pool volume: $1836.6K",
         "impact": "neutral",
         "relevance": "medium"
       }
@@ -70,8 +70,8 @@
     "dcaDetails": "Micro DCA — rebalance needed",
     "rebalanceTrigger": "Price exits $6.43-$6.59 range",
     "compoundThreshold": 50,
-    "cumulativeFees": 1.1835,
-    "nextCompound": "$48.82 away from first compound",
+    "cumulativeFees": 1.1886,
+    "nextCompound": "$48.81 away from first compound",
     "riskLevel": "Critical",
     "riskNote": "Out of range — rebalance needed",
     "shape": "Curve"
@@ -83,13 +83,13 @@
     "Sovereign": 100
   },
   "feeMilestones": {
-    "currentDailyFees": 0.72,
-    "cumulativeFees": 1.1835,
+    "currentDailyFees": 0.727,
+    "cumulativeFees": 1.1886,
     "positionUsd": 47.76,
     "daysActive": 1,
     "nextMilestone": "Scout",
     "nextTarget": 5,
-    "progress": 14,
+    "progress": 15,
     "tiers": [
       {
         "tier": 1,
@@ -126,7 +126,7 @@
     ]
   },
   "curveData": {
-    "currentPrice": 6.75,
+    "currentPrice": 6.73,
     "rangeMin": 6.4295,
     "rangeMax": 6.5922,
     "bins": [
@@ -269,7 +269,7 @@
     "liquidUsd": 0.63
   },
   "supportResistance": {
-    "currentPrice": 6.75,
+    "currentPrice": 6.73,
     "levels": [
       {
         "price": 6.59,
@@ -302,7 +302,7 @@
     ],
     "shapeRecommendation": {
       "shape": "Curve",
-      "reason": "Price at $6.75, outside $6.43-$6.59 range.",
+      "reason": "Price at $6.73, outside $6.43-$6.59 range.",
       "optimalRange": [
         6.43,
         6.59
@@ -312,16 +312,16 @@
   },
   "rebalanceSuggestions": {
     "efficiency": 0,
-    "price": 6.75,
+    "price": 6.73,
     "rangeMin": 6.4295,
     "rangeMax": 6.5922,
-    "volatility": 7.46,
+    "volatility": 6.93,
     "trend": "bullish",
     "suggestions": [
       {
         "icon": "🚨",
         "title": "Price Out of Range",
-        "description": "AVAX at $6.7500 is outside your $6.4295-$6.5922 range. You are not earning fees.",
+        "description": "AVAX at $6.7300 is outside your $6.4295-$6.5922 range. You are not earning fees.",
         "priority": "high",
         "impact": "Immediate",
         "action": "Rebalance on LFJ"
