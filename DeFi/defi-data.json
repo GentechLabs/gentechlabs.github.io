@@ -1,42 +1,42 @@
 {
-  "lastUpdated": "2026-06-29T10:20:53.747Z",
+  "lastUpdated": "2026-06-29T10:30:51.901Z",
   "pool": "AVAX/USDC",
   "chain": "Avalanche",
   "dex": "LFJ",
-  "currentPrice": 6.61,
-  "priceChange24h": 4.29,
-  "volume24h": 1171180.92,
-  "liquidity": 391244.43,
+  "currentPrice": 6.58,
+  "priceChange24h": 4.18,
+  "volume24h": 1174974.22,
+  "liquidity": 390094.49,
   "lpPosition": {
     "pair": "AVAX/USDC",
     "feeTier": "10bps",
     "shape": "curve",
     "displayShape": "Curve",
-    "currentPrice": 6.61,
+    "currentPrice": 6.58,
     "rangeMin": 6.2897,
     "rangeMax": 6.4747,
     "avaxAmount": 0,
     "usdcAmount": 47.528554,
     "totalValue": 47.53,
     "totalValueUSD": 47.53,
-    "activeBin": 8362853,
+    "activeBin": 8362847,
     "binStep": 10,
     "totalBins": 30
   },
   "fees": {
-    "dailyFees": 0.455,
-    "cumulativeFees": 1.0224,
+    "dailyFees": 0.458,
+    "cumulativeFees": 1.0256,
     "feeCurrency": "USD"
   },
   "efficiency": 0,
   "hero": {
     "positionUsd": 47.53,
-    "dailyFees": 0.455,
+    "dailyFees": 0.458,
     "efficiency": 0,
     "efficiencyZone": "Outer",
     "shape": "Curve",
     "rangeStatus": "Out of Range",
-    "currentPrice": 6.61,
+    "currentPrice": 6.58,
     "rangeMin": 6.2897,
     "rangeMax": 6.4747,
     "milestoneNext": "Scout",
@@ -44,19 +44,19 @@
     "milestoneProgress": 9
   },
   "marketIntel": {
-    "avaxPrice": 6.61,
-    "change24h": 4.29,
-    "volume24h": 1171180.92,
-    "tvl": 391244.43,
+    "avaxPrice": 6.58,
+    "change24h": 4.18,
+    "volume24h": 1174974.22,
+    "tvl": 390094.49,
     "trend": "bullish",
     "news": [
       {
-        "headline": "AVAX up 4.29% in 24h",
+        "headline": "AVAX up 4.18% in 24h",
         "impact": "bullish",
         "relevance": "high"
       },
       {
-        "headline": "LFJ AVAX/USDC pool volume: $1171.2K",
+        "headline": "LFJ AVAX/USDC pool volume: $1175.0K",
         "impact": "neutral",
         "relevance": "medium"
       }
@@ -70,8 +70,8 @@
     "dcaDetails": "Micro DCA — rebalance needed",
     "rebalanceTrigger": "Price exits $6.29-$6.47 range",
     "compoundThreshold": 50,
-    "cumulativeFees": 1.0224,
-    "nextCompound": "$48.98 away from first compound",
+    "cumulativeFees": 1.0256,
+    "nextCompound": "$48.97 away from first compound",
     "riskLevel": "Critical",
     "riskNote": "Out of range — rebalance needed",
     "shape": "Curve"
@@ -83,8 +83,8 @@
     "Sovereign": 100
   },
   "feeMilestones": {
-    "currentDailyFees": 0.455,
-    "cumulativeFees": 1.0224,
+    "currentDailyFees": 0.458,
+    "cumulativeFees": 1.0256,
     "positionUsd": 47.53,
     "daysActive": 1,
     "nextMilestone": "Scout",
@@ -126,7 +126,7 @@
     ]
   },
   "curveData": {
-    "currentPrice": 6.61,
+    "currentPrice": 6.58,
     "rangeMin": 6.2897,
     "rangeMax": 6.4747,
     "bins": [
@@ -286,10 +286,10 @@
     "avax": 0.09758640069077218,
     "wavax": 6.06671055788e-7,
     "usdc": 0.000012,
-    "liquidUsd": 0.65
+    "liquidUsd": 0.64
   },
   "supportResistance": {
-    "currentPrice": 6.61,
+    "currentPrice": 6.58,
     "levels": [
       {
         "price": 6.47,
@@ -322,7 +322,7 @@
     ],
     "shapeRecommendation": {
       "shape": "Curve",
-      "reason": "Price at $6.61, outside $6.29-$6.47 range.",
+      "reason": "Price at $6.58, outside $6.29-$6.47 range.",
       "optimalRange": [
         6.29,
         6.47
@@ -332,16 +332,16 @@
   },
   "rebalanceSuggestions": {
     "efficiency": 0,
-    "price": 6.61,
+    "price": 6.58,
     "rangeMin": 6.2897,
     "rangeMax": 6.4747,
-    "volatility": 4.29,
+    "volatility": 4.18,
     "trend": "bullish",
     "suggestions": [
       {
         "icon": "🚨",
         "title": "Price Out of Range",
-        "description": "AVAX at $6.6100 is outside your $6.2897-$6.4747 range. You are not earning fees.",
+        "description": "AVAX at $6.5800 is outside your $6.2897-$6.4747 range. You are not earning fees.",
         "priority": "high",
         "impact": "Immediate",
         "action": "Rebalance on LFJ"
