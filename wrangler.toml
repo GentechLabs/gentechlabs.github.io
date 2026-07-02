@@ -5,13 +5,18 @@ main = "src/worker.ts"
 
 [vars]
 ENVIRONMENT = "production"
+VPS_IP = "2.24.195.196"
+VPS_PORT = "80"
 
-# KV namespace temporarily disabled
-# Create via: wrangler kv:namespace create "NONCE_STORE"
-# Then uncomment and add the ID below
-# [[kv_namespaces]]
-# binding = "NONCE_STORE"
-# id = "your-kv-namespace-id"
+# Routes for API domains
+# Custom domains for API routing
+[[routes]]
+pattern = "https://deals.gentechlabs.net/*"
+zone_name = "gentechlabs.net"
+
+[[routes]]
+pattern = "https://api.gentechlabs.net/*"
+zone_name = "gentechlabs.net"
 
 [[routes]]
 pattern = "https://gentechlabs.net/api/*"
