@@ -24,14 +24,14 @@
     "totalBins": 33
   },
   "fees": {
-    "dailyFees": 0.204,
+    "dailyFees": 0.24,
     "cumulativeFees": 0.0194,
     "feeCurrency": "USD"
   },
   "efficiency": 69,
   "hero": {
     "positionUsd": 46.31,
-    "dailyFees": 0.204,
+    "dailyFees": 0.24,
     "efficiency": 69,
     "efficiencyZone": "Inner",
     "shape": "Bid-Ask",
@@ -41,7 +41,7 @@
     "rangeMax": 7.0067,
     "milestoneNext": "Scout",
     "milestoneTarget": 5,
-    "milestoneProgress": 4
+    "milestoneProgress": 5
   },
   "marketIntel": {
     "avaxPrice": 6.82,
@@ -67,7 +67,7 @@
     "efficiencyZone": "Inner",
     "recommendedAction": "Hold",
     "dcaType": "Moderate DCA",
-    "dcaDetails": "Moderate DCA — price in range",
+    "dcaDetails": "Moderate DCA \u2014 price in range",
     "rebalanceTrigger": "Price exits $6.79-$7.01 range",
     "compoundThreshold": 50,
     "cumulativeFees": 0.0194,
@@ -77,31 +77,40 @@
     "shape": "Bid-Ask"
   },
   "milestones": {
-    "Scout": 5,
+    "Grunt": 5,
+    "Scout": 10,
     "Raider": 20,
     "Warlord": 50,
     "Sovereign": 100
   },
   "feeMilestones": {
-    "currentDailyFees": 0.204,
+    "currentDailyFees": 0.24,
     "cumulativeFees": 0.0194,
     "positionUsd": 46.31,
     "daysActive": 1,
-    "nextMilestone": "Scout",
+    "nextMilestone": "Grunt",
     "nextTarget": 5,
-    "progress": 4,
+    "progress": 5,
     "tiers": [
       {
-        "tier": 1,
-        "icon": "🔭",
-        "label": "Scout",
+        "tier": 0,
+        "icon": "\ud83e\ude96",
+        "label": "Grunt",
         "target": 5,
+        "unlocks": "Activation \u2014 basic fee generation",
+        "achieved": false
+      },
+      {
+        "tier": 1,
+        "icon": "\ud83d\udd2d",
+        "label": "Scout",
+        "target": 10,
         "unlocks": "Entry strategies (CURVE)",
         "achieved": false
       },
       {
         "tier": 2,
-        "icon": "⚔️",
+        "icon": "\u2694\ufe0f",
         "label": "Raider",
         "target": 20,
         "unlocks": "SPOT + BIDIRECTIONAL shapes",
@@ -109,7 +118,7 @@
       },
       {
         "tier": 3,
-        "icon": "👑",
+        "icon": "\ud83d\udc51",
         "label": "Warlord",
         "target": 50,
         "unlocks": "Multi-pool positions",
@@ -117,7 +126,7 @@
       },
       {
         "tier": 4,
-        "icon": "🏰",
+        "icon": "\ud83c\udff0",
         "label": "Sovereign",
         "target": 100,
         "unlocks": "Custom strategy creation + mentorship",
@@ -299,8 +308,8 @@
   },
   "walletBalances": {
     "avax": 0.09727079521928152,
-    "wavax": 6.06671056178e-7,
-    "usdc": 0.00001,
+    "wavax": 6.06671056178e-07,
+    "usdc": 1e-05,
     "liquidUsd": 0.66
   },
   "supportResistance": {
@@ -354,7 +363,7 @@
     "trend": "neutral",
     "suggestions": [
       {
-        "icon": "✅",
+        "icon": "\u2705",
         "title": "Position Healthy",
         "description": "Price is in range and efficiency is good. No action needed.",
         "priority": "low",
