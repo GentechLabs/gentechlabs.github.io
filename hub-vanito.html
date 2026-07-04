@@ -347,6 +347,72 @@
 
   .travel-name {
     font-family: 'Cinzel', serif;
+    font-size: 0.95rem;
+    margin-bottom: 4px;
+  }
+
+  .travel-companion {
+    font-size: 0.8rem;
+    color: var(--fire);
+    margin-bottom: 8px;
+  }
+
+  .status-pill {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+
+  .pill-confirmed { background: var(--green); color: #fff; }
+  .pill-planning { background: var(--fire); color: #fff; }
+
+  /* ═══ MUSIC CARD ═══ */
+  .music-card {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 16px;
+  }
+
+  .music-icon {
+    font-size: 1.8rem;
+    flex-shrink: 0;
+  }
+
+  .music-info { flex: 1; }
+
+  .music-title {
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin-bottom: 2px;
+    color: var(--text);
+  }
+
+  .music-meta {
+    font-size: 0.8rem;
+    color: var(--dim);
+  }
+
+  .music-link {
+    display: inline-block;
+    padding: 6px 14px;
+    background: linear-gradient(135deg, rgba(201,168,76,0.15), rgba(255,107,53,0.15));
+    border: 1px solid rgba(201,168,76,0.3);
+    border-radius: 8px;
+    color: var(--gold);
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 600;
+    transition: all 0.2s;
+  }
+
+  .music-link:hover {
+    background: linear-gradient(135deg, rgba(201,168,76,0.25), rgba(255,107,53,0.25));
+    transform: translateY(-1px);
+  }
     font-weight: 600;
     font-size: 1rem;
     margin-bottom: 6px;
@@ -623,6 +689,10 @@
       <span style="font-size:1.4em;">✈️</span>
       <div><strong>Travel</strong><br><span style="font-size:0.8em; color:var(--dim);">Trips & adventures</span></div>
     </button>
+    <button class="settings-option" data-tab="music" onclick="setDefaultTab('music')">
+      <span style="font-size:1.4em;">🎵</span>
+      <div><strong>Music</strong><br><span style="font-size:0.8em; color:var(--dim);">Song collection</span></div>
+    </button>
     <button class="settings-option" data-tab="chat" onclick="setDefaultTab('chat')">
       <span style="font-size:1.4em;">💬</span>
       <div><strong>Chat</strong><br><span style="font-size:0.8em; color:var(--dim);">Talk to Gentech</span></div>
@@ -777,6 +847,22 @@
 
   </div>
 
+  <!-- ═══════ MUSIC TAB ═══════ -->
+  <div id="tab-music" class="tab-content">
+
+    <div class="section-title">🎵 My Music</div>
+
+    <div id="music-list">
+      <!-- Songs will be added here by Gentech -->
+      <div class="card" style="text-align:center; padding:24px;">
+        <div style="font-size:2rem; margin-bottom:12px;">🎧</div>
+        <div style="color:var(--dim);">No songs yet!</div>
+        <div style="font-size:0.8rem; color:var(--dim); margin-top:8px;">Share songs with Gentech to add them here.</div>
+      </div>
+    </div>
+
+  </div>
+
 </div>
 
 <!-- Footer -->
@@ -795,6 +881,10 @@
   <button class="nav-item" data-tab="travel" onclick="switchTab('travel')">
     <span class="icon">✈️</span>
     <span>Travel</span>
+  </button>
+  <button class="nav-item" data-tab="music" onclick="switchTab('music')">
+    <span class="icon">🎵</span>
+    <span>Music</span>
   </button>
   <button class="nav-item" data-tab="chat" onclick="switchTab('chat')">
     <span class="icon">💬</span>
