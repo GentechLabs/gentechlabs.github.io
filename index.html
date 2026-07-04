@@ -847,6 +847,10 @@
       <span style="font-size:1.3em;">⚡</span>
       <div><strong>APIs</strong><br><span style="font-size:0.8em; color:var(--dim);">Production x402 services</span></div>
     </button>
+    <button class="settings-option" onclick="scrollToSection('sec-casestudies');closeSettings()">
+      <span style="font-size:1.3em;">📖</span>
+      <div><strong>Case Studies</strong><br><span style="font-size:0.8em; color:var(--dim);">Real production architecture</span></div>
+    </button>
     <button class="settings-save" onclick="closeSettings()">Done</button>
   </div>
 </div>
@@ -1165,67 +1169,80 @@
 
     <div class="card project-card">
       <div class="card-header">
-        <span class="card-title">🎮 Deal Tracker API</span>
-        <span class="status-badge status-live"><span class="status-dot"></span> Live</span>
+        <span class="card-title">🌐 x402 Gateway</span>
+        <span class="status-badge status-live"><span class="status-dot"></span> LIVE</span>
       </div>
       <div class="project-tech">
-        <span class="tag tag-blue">CheapShark</span>
-        <span class="tag tag-cyan">TMDB</span>
-        <span class="tag tag-green">x402</span>
+        <span class="tag tag-blue">16 Endpoints</span>
+        <span class="tag tag-cyan">$0.001-0.10/call</span>
+        <span class="tag tag-green">Gasless</span>
       </div>
-      <div class="card-desc">Cross-store game prices (35+ stores) and movie streaming availability (40+ platforms). $0.001/query.</div>
+      <div class="card-desc">Universal x402 payment gateway. Pay-per-call via USDC on Base. No wallets needed on client side.</div>
     </div>
 
     <div class="card project-card">
       <div class="card-header">
-        <span class="card-title">📊 Crypto Price API</span>
-        <span class="status-badge status-live"><span class="status-dot"></span> Live</span>
+        <span class="card-title">🆔 Agent Registration</span>
+        <span class="status-badge status-live"><span class="status-dot"></span> LIVE</span>
       </div>
       <div class="project-tech">
-        <span class="tag tag-blue">Pyth</span>
-        <span class="tag tag-cyan">DexScreener</span>
-        <span class="tag tag-green">x402</span>
+        <span class="tag tag-blue">4 Endpoints</span>
+        <span class="tag tag-cyan">$0.005-0.01/call</span>
+        <span class="tag tag-green">ERC-8004</span>
       </div>
-      <div class="card-desc">Real-time crypto prices, OHLC history, DEX pairs. 12 global stock markets. $0.001/stock quote.</div>
+      <div class="card-desc">Register AI agents on-chain. Identity verification, credential registry, cross-chain discovery.</div>
     </div>
 
     <div class="card project-card">
       <div class="card-header">
-        <span class="card-title">⛽ Gas Price API</span>
-        <span class="status-badge status-live"><span class="status-dot"></span> Live</span>
+        <span class="card-title">📊 DeFi Intelligence</span>
+        <span class="status-badge status-live"><span class="status-dot"></span> LIVE</span>
       </div>
       <div class="project-tech">
-        <span class="tag tag-blue">Multi-chain</span>
-        <span class="tag tag-cyan">Real-time</span>
-        <span class="tag tag-green">x402</span>
+        <span class="tag tag-blue">5 Endpoints</span>
+        <span class="tag tag-cyan">$0.005-0.025/call</span>
+        <span class="tag tag-green">BlockRun</span>
       </div>
-      <div class="card-desc">Current gas prices across 20+ chains. Slow/standard/fast tiers. $0.001/query.</div>
+      <div class="card-desc">Real-time DeFi data. LP positions, fee tracking, pool analytics across 3 pools. Shape-aware monitoring.</div>
     </div>
 
     <div class="card project-card">
       <div class="card-header">
-        <span class="card-title">🔍 Token Security API</span>
-        <span class="status-badge status-live"><span class="status-dot"></span> Live</span>
+        <span class="card-title">🔍 Agent Search</span>
+        <span class="status-badge status-live"><span class="status-dot"></span> LIVE</span>
       </div>
       <div class="project-tech">
-        <span class="tag tag-blue">GoPlus</span>
-        <span class="tag tag-cyan">Rugcheck</span>
-        <span class="tag tag-green">x402</span>
+        <span class="tag tag-blue">5 Endpoints</span>
+        <span class="tag tag-cyan">$0.005-0.025/call</span>
+        <span class="tag tag-green">Discovery</span>
       </div>
-      <div class="card-desc">Token risk scoring with 11 weighted factors. Honeypot detection, owner privileges. $0.005/scan.</div>
+      <div class="card-desc">Discover and search registered AI agents. Query by domain, capability, chain, reputation score.</div>
     </div>
 
     <div class="card project-card">
       <div class="card-header">
-        <span class="card-title">🛡️ Rugcheck v2 API</span>
-        <span class="status-badge status-live"><span class="status-dot"></span> Live</span>
+        <span class="card-title">📈 Fleet Monitor</span>
+        <span class="status-badge status-live"><span class="status-dot"></span> LIVE</span>
       </div>
       <div class="project-tech">
-        <span class="tag tag-blue">Solana</span>
-        <span class="tag tag-cyan">Risk Scoring</span>
-        <span class="tag tag-green">x402</span>
+        <span class="tag tag-blue">6 Endpoints</span>
+        <span class="tag tag-cyan">$0.005-0.025/call</span>
+        <span class="tag tag-green">Health Checks</span>
       </div>
-      <div class="card-desc">Solana token risk analysis. Composite risk scores, flag scams. Port 8088. $0.005/scan.</div>
+      <div class="card-desc">Monitor agent fleet health. Config validation, cron status, tool availability, memory pressure.</div>
+    </div>
+
+    <div class="card project-card">
+      <div class="card-header">
+        <span class="card-title">🚀 Agent Starter Kit</span>
+        <span class="status-badge status-live"><span class="status-dot"></span> LIVE</span>
+      </div>
+      <div class="project-tech">
+        <span class="tag tag-blue">4 Endpoints</span>
+        <span class="tag tag-cyan">$0.005-0.025/call</span>
+        <span class="tag tag-green">Boilerplate</span>
+      </div>
+      <div class="card-desc">Rapid agent deployment templates. Pre-configured identity, payments, health monitoring.</div>
     </div>
 
     <a href="https://gentechlabs.net" target="_blank" class="link-btn">🧪 Browse All APIs →</a>
@@ -1347,6 +1364,10 @@
     <span class="icon">⚡</span>
     <span>APIs</span>
   </button>
+  <button class="nav-item" onclick="scrollToSection('sec-casestudies')">
+    <span class="icon">📖</span>
+    <span>Cases</span>
+  </button>
 </nav>
 
 <script>
@@ -1366,7 +1387,8 @@
       'sec-journey': 1,
       'sec-projects': 2,
       'sec-stack': 3,
-      'sec-apis': 4
+      'sec-apis': 4,
+      'sec-casestudies': 5
     };
     const idx = map[activeId];
     if (idx !== undefined) {
@@ -1375,7 +1397,7 @@
   }
 
   // ═══ SCROLL SPY ═══
-  const sections = ['sec-about', 'sec-journey', 'sec-projects', 'sec-stack', 'sec-apis'];
+  const sections = ['sec-about', 'sec-journey', 'sec-projects', 'sec-stack', 'sec-apis', 'sec-casestudies'];
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
