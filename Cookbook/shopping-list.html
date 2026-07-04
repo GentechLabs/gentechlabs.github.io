@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping List — Jordan Arrival Prep</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            padding-bottom: 80px;
+        }
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        .header {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .back-link {
+            display: inline-block;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+            margin-bottom: 12px;
+        }
+        h1 {
+            font-size: 1.4em;
+            color: #333;
+            margin-bottom: 4px;
+        }
+        .subtitle {
+            color: #666;
+            font-size: 0.85em;
+        }
+        .section {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .section-title {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .item:last-child {
+            border-bottom: none;
+        }
+        .item-icon {
+            font-size: 1.3em;
+        }
+        .item-content {
+            flex: 1;
+        }
+        .item-name {
+            font-weight: 500;
+            color: #333;
+        }
+        .item-status {
+            font-size: 0.75em;
+            margin-top: 4px;
+        }
+        .status-bought { color: #10b981; }
+        .status-needed { color: #ef4444; font-weight: 600; }
+        .checkbox {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            flex-shrink: 0;
+            cursor: pointer;
+        }
+        .checkbox.checked {
+            background: #10b981;
+            border-color: #10b981;
+        }
+        .high-priority {
+            border: 2px solid #ef4444;
+        }
+        .priority-badge {
+            background: #ef4444;
+            color: white;
+            font-size: 0.65em;
+            padding: 2px 8px;
+            border-radius: 4px;
+            margin-left: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <a href="christel-hub.html" class="back-link">← Back to Hub</a>
+            <h1>🛍️ Shopping List</h1>
+            <p class="subtitle">Jordan Arrival Prep • Shopee</p>
+        </div>
+
+        <div class="section">
+            <div class="section-title">✅ Already Purchased</div>
+            
+            <div class="item">
+                <div class="checkbox checked"></div>
+                <div class="item-icon">🎧</div>
+                <div class="item-content">
+                    <div class="item-name">Headset</div>
+                    <div class="item-status status-bought">Bought</div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="checkbox checked"></div>
+                <div class="item-icon">🔌</div>
+                <div class="item-content">
+                    <div class="item-name">Charger</div>
+                    <div class="item-status status-bought">Bought</div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="checkbox checked"></div>
+                <div class="item-icon">👗</div>
+                <div class="item-content">
+                    <div class="item-name">Sleepwear</div>
+                    <div class="item-status status-bought">Bought</div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="checkbox checked"></div>
+                <div class="item-icon">👗</div>
+                <div class="item-content">
+                    <div class="item-name">Dress #1</div>
+                    <div class="item-status status-bought">Bought</div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="checkbox checked"></div>
+                <div class="item-icon">👗</div>
+                <div class="item-content">
+                    <div class="item-name">Dress #2</div>
+                    <div class="item-status status-bought">Bought</div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="checkbox checked"></div>
+                <div class="item-icon">👙</div>
+                <div class="item-content">
+                    <div class="item-name">Underwear</div>
+                    <div class="item-status status-bought">Bought</div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="checkbox checked"></div>
+                <div class="item-icon">👙</div>
+                <div class="item-content">
+                    <div class="item-name">Bra</div>
+                    <div class="item-status status-bought">Bought</div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="checkbox checked"></div>
+                <div class="item-icon">🩱</div>
+                <div class="item-content">
+                    <div class="item-name">Swimsuit</div>
+                    <div class="item-status status-bought">Bought</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section high-priority">
+            <div class="section-title">
+                ❌ Still Needed
+                <span class="priority-badge">HIGH PRIORITY</span>
+            </div>
+            
+            <div class="item">
+                <div class="checkbox"></div>
+                <div class="item-icon">🧳</div>
+                <div class="item-content">
+                    <div class="item-name">Suitcase</div>
+                    <div class="item-status status-needed">Needed — to pack everything</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">💝 Message from Christel</div>
+            <p style="color: #666; line-height: 1.6; font-size: 0.9em;">
+                "I'll take good care of you when you get here. Just as you're taking care of me. I'm so happy and excited to be with you. I miss you always!"
+            </p>
+        </div>
+    </div>
+</body>
+</html>
