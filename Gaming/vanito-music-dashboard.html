@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vanito's Music Hub</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            padding: 20px;
+            background: #f8f9fa;
+            border-bottom: 2px solid #e0e0e0;
+        }
+        .stat {
+            text-align: center;
+        }
+        .stat-value {
+            font-size: 2em;
+            font-weight: bold;
+            color: #667eea;
+        }
+        .stat-label {
+            font-size: 0.9em;
+            color: #666;
+            margin-top: 5px;
+        }
+        .songs-list {
+            padding: 20px;
+        }
+        .song-card {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .song-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .song-cover {
+            width: 80px;
+            height: 80px;
+            border-radius: 8px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2em;
+            font-weight: bold;
+        }
+        .song-info {
+            flex: 1;
+        }
+        .song-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #333;
+        }
+        .song-meta {
+            color: #666;
+            font-size: 0.9em;
+        }
+        .song-genre {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            margin-top: 8px;
+        }
+        .play-button {
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            font-size: 1.2em;
+            transition: background 0.2s, transform 0.2s;
+        }
+        .play-button:hover {
+            background: #764ba2;
+            transform: scale(1.05);
+        }
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #666;
+        }
+        .empty-state .icon {
+            font-size: 4em;
+            margin-bottom: 20px;
+            opacity: 0.3;
+        }
+        .empty-state h3 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        .sync-status {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            color: #856404;
+            padding: 10px 20px;
+            margin: 20px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 0.9em;
+        }
+        .sync-status.success {
+            background: #d4edda;
+            border-color: #c3e6cb;
+            color: #155724;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎵 Vanito's Music Hub</h1>
+            <div class="subtitle">All your music, backed up and organized</div>
+        </header>
+
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-value" id="totalSongs">0</div>
+                <div class="stat-label">Total Songs</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value" id="totalDuration">0:00</div>
+                <div class="stat-label">Total Duration</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value" id="totalGenres">0</div>
+                <div class="stat-label">Genres</div>
+            </div>
+        </div>
+
+        <div id="syncStatus"></div>
+
+        <div id="songsList" class="songs-list"></div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:5000/api';
+
+        async function loadMusic() {
+            try {
+                const response = await fetch('/Gaming/vanito-music.json');
+                const data = await response.json();
+
+                document.getElementById('totalSongs').textContent = data.music.totalSongs;
+                document.getElementById('totalDuration').textContent = data.music.totalDuration;
+                document.getElementById('totalGenres').textContent = data.music.genres.length;
+
+                const songsList = document.getElementById('songsList');
+
+                if (data.songs.length === 0) {
+                    songsList.innerHTML = `
+                        <div class="empty-state">
+                            <div class="icon">🎸</div>
+                            <h3>No songs yet</h3>
+                            <p>Start creating music in the GenTech Hub and it'll appear here automatically!</p>
+                        </div>
+                    `;
+                } else {
+                    songsList.innerHTML = data.songs.map((song, index) => `
+                        <div class="song-card">
+                            <div class="song-cover">${index + 1}</div>
+                            <div class="song-info">
+                                <div class="song-title">${song.title}</div>
+                                <div class="song-meta">Duration: ${song.duration} • ${song.dateCreated}</div>
+                                <span class="song-genre">${song.genre}</span>
+                            </div>
+                            <button class="play-button" onclick="playSong('${song.title}')">▶</button>
+                        </div>
+                    `).join('');
+                }
+
+                // Check sync status
+                checkSyncStatus();
+            } catch (error) {
+                console.error('Error loading music:', error);
+                document.getElementById('syncStatus').innerHTML =
+                    '<div class="sync-status">Error loading music data</div>';
+            }
+        }
+
+        async function checkSyncStatus() {
+            try {
+                const response = await fetch(`${API_BASE}/pals/vanito`);
+                const data = await response.json();
+
+                if (data && data.music && data.music.songs) {
+                    const hubSongCount = data.music.songs.length;
+                    const localData = await (await fetch('/Gaming/vanito-music.json')).json();
+                    const localSongCount = localData.music.totalSongs;
+
+                    if (hubSongCount > localSongCount) {
+                        document.getElementById('syncStatus').innerHTML =
+                            `<div class="sync-status">🔄 ${hubSongCount - localSongCount} new songs ready to sync</div>`;
+                    } else if (hubSongCount === localSongCount) {
+                        document.getElementById('syncStatus').innerHTML =
+                            '<div class="sync-status success">✅ All synced with GenTech Hub</div>';
+                    }
+                }
+            } catch (error) {
+                // Hub might be offline
+                document.getElementById('syncStatus').innerHTML =
+                    '<div class="sync-status">ℹ️ Syncing with hub when available</div>';
+            }
+        }
+
+        function playSong(title) {
+            alert(`Would play: ${title}\n\nThis will integrate with your audio player!`);
+        }
+
+        // Load music on page load
+        loadMusic();
+
+        // Auto-refresh every 30 seconds
+        setInterval(loadMusic, 30000);
+    </script>
+</body>
+</html>
