@@ -26,6 +26,22 @@
             color: white;
             padding: 30px;
             text-align: center;
+            position: relative;
+        }
+        .back-link {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            font-size: 0.9em;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+        .back-link:hover {
+            color: white;
         }
         h1 {
             font-size: 2.5em;
@@ -156,6 +172,7 @@
 <body>
     <div class="container">
         <header>
+            <a href="/hub-vanito.html" class="back-link">← Back to Main Hub</a>
             <h1>🎵 Vanito's Music Hub</h1>
             <div class="subtitle">All your music, backed up and organized</div>
         </header>
