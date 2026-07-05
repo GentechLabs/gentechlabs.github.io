@@ -925,12 +925,58 @@
     setTimeout(() => { btn.textContent = originalText; btn.style.color = ''; }, 1500);
   }
 
+  async function loadMusic() {
+    try {
+      const response = await fetch('hub-vanito-data.json');
+      const data = await response.json();
+
+      const musicList = document.getElementById('music-list');
+      if (!musicList) return;
+
+      if (!data.music || !data.music.songs || data.music.songs.length === 0) {
+        musicList.innerHTML = `
+          <div class="card" style="text-align:center; padding:24px;">
+            <div style="font-size:2rem; margin-bottom:12px;">🎧</div>
+            <div style="color:var(--dim);">No songs yet!</div>
+            <div style="font-size:0.8rem; color:var(--dim); margin-top:8px;">Share songs with Gentech to add them here.</div>
+          </div>
+        `;
+        return;
+      }
+
+      const songsHtml = data.music.songs.map((song, index) => `
+        <div class="card" style="display:flex; align-items:center; gap:16px; padding:16px; margin-bottom:12px;">
+          <div style="width:48px; height:48px; background:linear-gradient(135deg, var(--gold) 0%, var(--fire) 100%); border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:1.5rem; font-weight:bold; color:white;">${index + 1}</div>
+          <div style="flex:1;">
+            <div style="font-weight:600; margin-bottom:4px; color:var(--text);">${song.title}</div>
+            <div style="font-size:0.85rem; color:var(--dim);">${song.style}</div>
+          </div>
+          <div style="font-size:0.75rem; color:var(--dim);">${song.added}</div>
+        </div>
+      `).join('');
+
+      musicList.innerHTML = songsHtml;
+    } catch (error) {
+      console.error('Error loading music:', error);
+      const musicList = document.getElementById('music-list');
+      if (musicList) {
+        musicList.innerHTML = `
+          <div class="card" style="text-align:center; padding:24px;">
+            <div style="font-size:2rem; margin-bottom:12px;">⚠️</div>
+            <div style="color:var(--red);">Error loading music</div>
+          </div>
+        `;
+      }
+    }
+  }
+
   document.addEventListener('DOMContentLoaded', () => {
     const saved = localStorage.getItem(HUB_LS_KEY) || 'gaming';
     switchTab(saved);
     document.querySelectorAll('.settings-option').forEach(o => {
       o.classList.toggle('selected', o.dataset.tab === saved);
     });
+    loadMusic();
   });
 </script>
 
