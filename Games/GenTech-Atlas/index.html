@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=600, height=600, initial-scale=1.0, user-scalable=no">
+  <meta name="description" content="GenTech Atlas — AR travel companion for Meta Ray-Ban Display. Explore Tokyo through crowdsourced intelligence.">
+  <meta name="mrbd-web-app-capable" content="yes">
+  <title>GenTech Atlas — Tokyo</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="app">
+    <!-- Home Screen -->
+    <div id="home" class="screen">
+      <header class="header">
+        <h1>🗼 Atlas</h1>
+        <span class="header-meta" id="status-indicator">Tokyo</span>
+      </header>
+      <div class="content">
+        <div class="card focusable" data-action="explore" tabindex="0">
+          <div class="card-title">🗺️ Explore Tokyo</div>
+          <div class="card-subtitle">7 districts to discover</div>
+        </div>
+        <div class="card focusable" data-action="food" tabindex="0">
+          <div class="card-title">🍜 Food Finder</div>
+          <div class="card-subtitle">6 must-try dishes</div>
+        </div>
+        <div class="card focusable" data-action="phrases" tabindex="0">
+          <div class="card-title">💬 Phrase Helper</div>
+          <div class="card-subtitle">8 essential phrases</div>
+        </div>
+        <div class="card focusable" data-action="packing" tabindex="0">
+          <div class="card-title">🎒 Packing List</div>
+          <div class="card-subtitle">12 items to pack</div>
+        </div>
+      </div>
+      <nav class="nav-bar">
+        <span class="nav-item meta-text">Swipe or D-pad to navigate</span>
+      </nav>
+    </div>
+
+    <!-- Explorer Screen -->
+    <div id="explore" class="screen hidden">
+      <header class="header">
+        <button class="back-btn focusable" data-action="back" tabindex="0">←</button>
+        <h1>🗺️ Explore Tokyo</h1>
+        <span class="header-meta" id="stamps-count">0/7</span>
+      </header>
+      <div class="content" id="explore-content">
+        <div class="list-container" id="district-list"></div>
+        <div class="card" id="district-detail">
+          <div class="card-subtitle">Select a district to explore</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Food Screen -->
+    <div id="food" class="screen hidden">
+      <header class="header">
+        <button class="back-btn focusable" data-action="back" tabindex="0">←</button>
+        <h1>🍜 Food Finder</h1>
+        <span class="header-meta" id="food-count">0/6</span>
+      </header>
+      <div class="content">
+        <div class="list-container" id="food-list"></div>
+        <div class="card" id="food-detail">
+          <div class="card-subtitle">Select a dish to learn more</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Phrases Screen -->
+    <div id="phrases" class="screen hidden">
+      <header class="header">
+        <button class="back-btn focusable" data-action="back" tabindex="0">←</button>
+        <h1>💬 Phrase Helper</h1>
+        <span class="header-meta">🇯🇵</span>
+      </header>
+      <div class="content">
+        <div class="list-container" id="phrase-list"></div>
+        <div class="card" id="phrase-detail">
+          <div class="card-subtitle">Select a situation</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Packing Screen -->
+    <div id="packing" class="screen hidden">
+      <header class="header">
+        <button class="back-btn focusable" data-action="back" tabindex="0">←</button>
+        <h1>🎒 Packing List</h1>
+        <span class="header-meta" id="packed-count">0/12</span>
+      </header>
+      <div class="content">
+        <div class="data-grid" id="packing-grid"></div>
+        <div class="progress-bar" style="margin-top:8px">
+          <div class="progress-fill" id="packing-progress" style="width:0%"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>

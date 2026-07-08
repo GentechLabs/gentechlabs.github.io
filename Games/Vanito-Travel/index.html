@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=600, height=600, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Vanito's Travel Companion — Tokyo</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="app">
+    <!-- Title Screen -->
+    <div id="screen-title" class="screen active">
+      <div class="title-content">
+        <div class="logo">🗼</div>
+        <h1>Vanito's Travel Companion</h1>
+        <p class="subtitle">Explore Tokyo through your Meta Ray-Ban</p>
+        <div class="city-badge">🇯🇵 Tokyo</div>
+        <div class="menu-buttons">
+          <button class="btn btn-primary" data-mode="explorer">🗺️ Explore Tokyo</button>
+          <button class="btn btn-secondary" data-mode="food">🍜 Food Finder</button>
+          <button class="btn btn-secondary" data-mode="phrases">💬 Phrase Helper</button>
+          <button class="btn btn-secondary" data-mode="packing">🎒 Packing List</button>
+        </div>
+        <p class="hint">Swipe left/right to switch modes</p>
+        <p class="credit">Made for Vanito 🚀</p>
+      </div>
+    </div>
+
+    <!-- Explorer -->
+    <div id="screen-explorer" class="screen">
+      <div class="game-header">
+        <button class="btn-back" data-screen="title">←</button>
+        <span class="game-title">🗺️ Explore Tokyo</span>
+        <span class="score-display">Stamps: <span id="stamps-count">0</span>/7</span>
+      </div>
+      <div class="game-area" id="explorer-area">
+        <div class="map-grid" id="map-grid"></div>
+        <div class="location-info" id="location-info">
+          <div class="info-placeholder">Tap a district to explore!</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Food Finder -->
+    <div id="screen-food" class="screen">
+      <div class="game-header">
+        <button class="btn-back" data-screen="title">←</button>
+        <span class="game-title">🍜 Food Finder</span>
+        <span class="score-display">Tried: <span id="food-count">0</span>/6</span>
+      </div>
+      <div class="game-area" id="food-area">
+        <div class="food-list" id="food-list"></div>
+        <div class="food-detail" id="food-detail">
+          <div class="info-placeholder">Tap a food to learn more!</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Phrase Helper -->
+    <div id="screen-phrases" class="screen">
+      <div class="game-header">
+        <button class="btn-back" data-screen="title">←</button>
+        <span class="game-title">💬 Phrase Helper</span>
+        <span class="score-display">🇯🇵</span>
+      </div>
+      <div class="game-area" id="phrases-area">
+        <div class="phrase-grid" id="phrase-grid"></div>
+        <div class="phrase-display" id="phrase-display">
+          <div class="info-placeholder">Tap a situation to see the phrase!</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Packing List -->
+    <div id="screen-packing" class="screen">
+      <div class="game-header">
+        <button class="btn-back" data-screen="title">←</button>
+        <span class="game-title">🎒 Packing List</span>
+        <span class="score-display">Packed: <span id="packed-count">0</span>/12</span>
+      </div>
+      <div class="game-area" id="packing-area">
+        <div class="suitcase" id="suitcase">
+          <div class="suitcase-grid" id="suitcase-grid"></div>
+        </div>
+        <div class="items-pool" id="items-pool"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
