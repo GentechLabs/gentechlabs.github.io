@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AVAX/USDC LP Tracker — LFJ</title>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0a0e17;
+            --bg-alt: #111827;
+            --panel-bg: #1a2235;
+            --panel-border: #2a3a52;
+            --text: #e2e8f0;
+            --text-dim: #8899aa;
+            --gold: #e8652a;
+            --accent: #e8652a;
+            --avax-red: #e84142;
+            --success: #00ff88;
+            --danger: #ff4466;
+            --cyan: #00d4ff;
+            --purple: #a855f7;
+            --radius: 12px;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            padding: 0;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #e84142 0%, #e8652a 50%, #d4a017 100%);
+            padding: 28px 20px 22px;
+            text-align: center;
+        }
+        .header-chain {
+            font-size: 0.75em;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            opacity: 0.85;
+            margin-bottom: 6px;
+        }
+        .header-title {
+            font-size: 1.6em;
+            font-weight: 700;
+            color: #fff;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+        .header-pair {
+            font-size: 0.9em;
+            color: rgba(255,255,255,0.85);
+            margin-top: 4px;
+        }
+
+        /* Container */
+        .container {
+            max-width: 480px;
+            margin: 0 auto;
+            padding: 16px;
+        }
+
+        /* Stats Row */
+        .stats-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+        .stat-card {
+            background: var(--panel-bg);
+            border: 1px solid var(--panel-border);
+            border-radius: var(--radius);
+            padding: 14px;
+            text-align: center;
+        }
+        .stat-label {
+            font-size: 0.7em;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--text-dim);
+            margin-bottom: 6px;
+        }
+        .stat-value {
+            font-size: 1.5em;
+            font-weight: 700;
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--gold);
+        }
+        .stat-sub {
+            font-size: 0.75em;
+            color: var(--text-dim);
+            margin-top: 3px;
+        }
+        .stat-value.green { color: var(--success); }
+        .stat-value.red { color: var(--danger); }
+        .stat-value.cyan { color: var(--cyan); }
+
+        /* Full-width stat */
+        .stat-full {
+            grid-column: 1 / -1;
+        }
+
+        /* Section */
+        .section {
+            background: var(--panel-bg);
+            border: 1px solid var(--panel-border);
+            border-radius: var(--radius);
+            padding: 16px;
+            margin-bottom: 12px;
+        }
+        .section-title {
+            font-size: 0.75em;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--text-dim);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .section-title .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--gold);
+        }
+
+        /* Position breakdown */
+        .position-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .position-row:last-child { border-bottom: none; }
+        .position-token {
+            font-weight: 600;
+            font-size: 0.95em;
+        }
+        .position-amount {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9em;
+            color: var(--text-dim);
+        }
+        .position-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 600;
+            color: var(--gold);
+        }
+
+        /* Price range bar */
+        .range-container {
+            margin-top: 8px;
+        }
+        .range-bar {
+            position: relative;
+            height: 32px;
+            background: var(--bg-alt);
+            border-radius: 8px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+        .range-fill {
+            position: absolute;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(232,65,66,0.3), rgba(232,101,42,0.5), rgba(0,255,136,0.3));
+            border-radius: 8px;
+        }
+        .range-marker {
+            position: absolute;
+            top: -2px;
+            width: 3px;
+            height: 36px;
+            background: #fff;
+            border-radius: 2px;
+            box-shadow: 0 0 8px rgba(255,255,255,0.5);
+        }
+        .range-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.75em;
+            color: var(--text-dim);
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .range-current {
+            text-align: center;
+            font-size: 0.8em;
+            color: var(--cyan);
+            margin-top: 6px;
+        }
+
+        /* Rewards */
+        .rewards-box {
+            background: rgba(0,255,136,0.06);
+            border: 1px solid rgba(0,255,136,0.15);
+            border-radius: var(--radius);
+            padding: 14px;
+            text-align: center;
+            margin-bottom: 12px;
+        }
+        .rewards-label {
+            font-size: 0.7em;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--success);
+            opacity: 0.8;
+        }
+        .rewards-value {
+            font-size: 1.4em;
+            font-weight: 700;
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--success);
+            margin-top: 4px;
+        }
+        .rewards-usd {
+            font-size: 0.85em;
+            color: var(--text-dim);
+            margin-top: 2px;
+        }
+
+        /* Config table */
+        .config-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+        .config-item {
+            padding: 10px;
+            background: var(--bg-alt);
+            border-radius: 8px;
+        }
+        .config-key {
+            font-size: 0.65em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-dim);
+            margin-bottom: 4px;
+        }
+        .config-val {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9em;
+            font-weight: 500;
+        }
+
+        /* Status badge */
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: 500;
+        }
+        .status-badge.active {
+            background: rgba(0,255,136,0.1);
+            border: 1px solid rgba(0,255,136,0.25);
+            color: var(--success);
+        }
+        .status-badge .pulse {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--success);
+            animation: pulse 2s ease-in-out infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 16px;
+            font-size: 0.7em;
+            color: var(--text-dim);
+            opacity: 0.6;
+        }
+
+        /* Strategy note */
+        .strategy-note {
+            background: rgba(232,101,42,0.08);
+            border: 1px solid rgba(232,101,42,0.2);
+            border-radius: var(--radius);
+            padding: 12px 14px;
+            font-size: 0.82em;
+            color: var(--text-dim);
+            line-height: 1.5;
+            margin-bottom: 12px;
+        }
+        .strategy-note strong {
+            color: var(--gold);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <div class="header-chain">Avalanche C-Chain</div>
+        <div class="header-title">LP Position Tracker</div>
+        <div class="header-pair">AVAX / USDC · LFJ Concentrated Liquidity</div>
+    </div>
+
+    <div class="container">
+
+        <!-- Status -->
+        <div style="text-align:center; margin: 14px 0;">
+            <span class="status-badge active">
+                <span class="pulse"></span> Position Active
+            </span>
+        </div>
+
+        <!-- Hero Stats -->
+        <div class="stats-row">
+            <div class="stat-card stat-full">
+                <div class="stat-label">Total Position Value</div>
+                <div class="stat-value" id="total-value">$45.59</div>
+                <div class="stat-sub">2.19 AVAX + 30.88 USDC</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">AVAX Price</div>
+                <div class="stat-value cyan" id="avax-price">$6.71</div>
+                <div class="stat-sub">CoinMarketCap</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">24h Change</div>
+                <div class="stat-value green" id="change-24h">+0.72%</div>
+                <div class="stat-sub">Market hours</div>
+            </div>
+        </div>
+
+        <!-- Rewards -->
+        <div class="rewards-box">
+            <div class="rewards-label">⚡ Claimable Rewards</div>
+            <div class="rewards-value" id="rewards-avax">0.00799 AVAX</div>
+            <div class="rewards-usd" id="rewards-usd">≈ $0.054</div>
+        </div>
+
+        <!-- Position Breakdown -->
+        <div class="section">
+            <div class="section-title"><span class="dot"></span> Position Breakdown</div>
+            <div class="position-row">
+                <div>
+                    <div class="position-token">AVAX</div>
+                    <div class="position-amount">2.1900</div>
+                </div>
+                <div class="position-value">$14.71</div>
+            </div>
+            <div class="position-row">
+                <div>
+                    <div class="position-token">USDC</div>
+                    <div class="position-amount">30.8800</div>
+                </div>
+                <div class="position-value">$30.88</div>
+            </div>
+        </div>
+
+        <!-- Price Range -->
+        <div class="section">
+            <div class="section-title"><span class="dot"></span> Liquidity Range (Curve)</div>
+            <div class="range-container">
+                <div class="range-bar">
+                    <div class="range-fill" id="range-fill"></div>
+                    <div class="range-marker" id="range-marker"></div>
+                </div>
+                <div class="range-labels">
+                    <span id="range-min">$6.65</span>
+                    <span id="range-max">$6.76</span>
+                </div>
+                <div class="range-current">Current: <strong id="range-current-price">$6.71</strong></div>
+            </div>
+        </div>
+
+        <!-- Config -->
+        <div class="section">
+            <div class="section-title"><span class="dot"></span> Pool Configuration</div>
+            <div class="config-grid">
+                <div class="config-item">
+                    <div class="config-key">Fee Tier</div>
+                    <div class="config-val">0.05%</div>
+                </div>
+                <div class="config-item">
+                    <div class="config-key">Shape</div>
+                    <div class="config-val">Curve</div>
+                </div>
+                <div class="config-item">
+                    <div class="config-key">Chain</div>
+                    <div class="config-val">Avalanche</div>
+                </div>
+                <div class="config-item">
+                    <div class="config-key">Protocol</div>
+                    <div class="config-val">LFJ</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Strategy -->
+        <div class="strategy-note">
+            <strong>Strategy:</strong> Testing the waters — waiting on a pullback to the $6.65-$6.76 range. Curve shape for wider coverage. Tight concentration around current price for maximum fee capture.
+        </div>
+
+        <div class="footer">
+            Updated: <span id="updated-time"></span> · GenTech DeFi Monitor
+        </div>
+
+    </div>
+
+    <script>
+        // Position data (update this when position changes)
+        const position = {
+            avaxAmount: 2.19,
+            usdcAmount: 30.88,
+            rewardsAvax: 0.00799,
+            rangeMin: 6.65,
+            rangeMax: 6.76,
+            currentPrice: 6.71,
+            change24h: 0.72,
+            avaxPrice: 6.71
+        };
+
+        // Update timestamp
+        document.getElementById('updated-time').textContent = new Date().toLocaleString('en-US', {
+            month: 'short', day: 'numeric', year: 'numeric',
+            hour: '2-digit', minute: '2-digit', timeZoneName: 'short'
+        });
+
+        // Calculate values
+        const avaxValue = position.avaxAmount * position.avaxPrice;
+        const totalValue = avaxValue + position.usdcAmount;
+        const rewardsUsd = position.rewardsAvax * position.avaxPrice;
+
+        document.getElementById('total-value').textContent = '$' + totalValue.toFixed(2);
+        document.getElementById('avax-price').textContent = '$' + position.currentPrice.toFixed(2);
+        document.getElementById('rewards-avax').textContent = position.rewardsAvax.toFixed(5) + ' AVAX';
+        document.getElementById('rewards-usd').textContent = '≈ $' + rewardsUsd.toFixed(3);
+
+        // Position breakdown
+        const rows = document.querySelectorAll('.position-row');
+        rows[0].querySelector('.position-value').textContent = '$' + avaxValue.toFixed(2);
+        rows[1].querySelector('.position-value').textContent = '$' + position.usdcAmount.toFixed(2);
+
+        // Price range visualization
+        const range = position.rangeMax - position.rangeMin;
+        const fillLeft = 0;
+        const fillWidth = 100;
+        const markerPos = ((position.currentPrice - position.rangeMin) / range) * 100;
+
+        document.getElementById('range-fill').style.left = fillLeft + '%';
+        document.getElementById('range-fill').style.width = fillWidth + '%';
+        document.getElementById('range-marker').style.left = `calc(${markerPos}% - 1.5px)`;
+
+        // 24h change color
+        const changeEl = document.getElementById('change-24h');
+        changeEl.className = 'stat-value ' + (position.change24h >= 0 ? 'green' : 'red');
+        changeEl.textContent = (position.change24h >= 0 ? '+' : '') + position.change24h.toFixed(2) + '%';
+    </script>
+
+</body>
+</html>

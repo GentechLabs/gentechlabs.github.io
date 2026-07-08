@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.11.1/ethers.umd.min.js" type="application/javascript"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agent Catcher — On-Chain Token Risk Scanner</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0a0f;
+      --surface: #12121a;
+      --surface2: #1a1a26;
+      --border: #2a2a3a;
+      --text: #e4e4ed;
+      --text-dim: #8888a0;
+      --accent: #7c5cfc;
+      --accent-glow: rgba(124, 92, 252, 0.3);
+      --safe: #22c55e;
+      --low-risk: #84cc16;
+      --moderate: #f59e0b;
+      --high-risk: #f97316;
+      --scam: #ef4444;
+      --unknown: #6b7280;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    /* Ambient glow */
+    body::before {
+      content: '';
+      position: fixed;
+      top: -50%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 800px;
+      height: 800px;
+      background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Header */
+    header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .logo-icon {
+      width: 48px;
+      height: 48px;
+      background: var(--accent);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      box-shadow: 0 0 24px var(--accent-glow);
+    }
+
+    h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    h1 span { color: var(--accent); }
+
+    .subtitle {
+      color: var(--text-dim);
+      font-size: 1rem;
+      max-width: 500px;
+      margin: 0.5rem auto 0;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 0.4rem 1rem;
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      margin-top: 1rem;
+    }
+
+    .badge .dot {
+      width: 8px;
+      height: 8px;
+      background: var(--safe);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    /* Scan Form */
+    .scan-form {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .scan-form h2 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .form-row {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .form-group {
+      flex: 1;
+      min-width: 200px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      margin-bottom: 0.4rem;
+      font-weight: 500;
+    }
+
+    .form-group input,
+    .form-group select {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: var(--text);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9rem;
+      transition: border-color 0.2s;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-glow);
+    }
+
+    .btn {
+      padding: 0.75rem 2rem;
+      background: var(--accent);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      align-self: flex-end;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 20px var(--accent-glow);
+    }
+
+    .btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* Status */
+    .status {
+      margin-top: 1.5rem;
+      padding: 1rem;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      display: none;
+    }
+
+    .status.active { display: block; }
+    .status.pending {
+      background: rgba(124, 92, 252, 0.1);
+      border: 1px solid rgba(124, 92, 252, 0.3);
+      color: var(--accent);
+    }
+    .status.success {
+      background: rgba(34, 197, 94, 0.1);
+      border: 1px solid rgba(34, 197, 94, 0.3);
+      color: var(--safe);
+    }
+    .status.error {
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      color: var(--scam);
+    }
+
+    .spinner {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      border: 2px solid currentColor;
+      border-top-color: transparent;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin-right: 0.5rem;
+      vertical-align: middle;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* Results */
+    .results {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      display: none;
+    }
+
+    .results.active { display: block; }
+
+    .results h2 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+    }
+
+    .risk-meter {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .risk-score {
+      font-size: 3.5rem;
+      font-weight: 700;
+      font-family: 'JetBrains Mono', monospace;
+      line-height: 1;
+    }
+
+    .risk-label {
+      font-size: 1.5rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .risk-bar {
+      width: 100%;
+      height: 8px;
+      background: var(--surface2);
+      border-radius: 4px;
+      overflow: hidden;
+      margin-top: 0.5rem;
+    }
+
+    .risk-fill {
+      height: 100%;
+      border-radius: 4px;
+      transition: width 0.5s ease;
+    }
+
+    .details-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .detail-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1rem;
+    }
+
+    .detail-card .label {
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.25rem;
+    }
+
+    .detail-card .value {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9rem;
+      word-break: break-all;
+    }
+
+    /* Quick Scan Presets */
+    .presets {
+      margin-top: 1rem;
+    }
+
+    .presets label {
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      margin-bottom: 0.4rem;
+      display: block;
+    }
+
+    .preset-btns {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .preset-btn {
+      padding: 0.4rem 0.8rem;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text-dim);
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .preset-btn:hover {
+      border-color: var(--accent);
+      color: var(--text);
+    }
+
+    /* How it works */
+    .how-it-works {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .how-it-works h2 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+    }
+
+    .steps {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .step {
+      flex: 1;
+      min-width: 180px;
+      text-align: center;
+    }
+
+    .step-num {
+      width: 32px;
+      height: 32px;
+      background: var(--accent);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 0.85rem;
+      margin: 0 auto 0.75rem;
+    }
+
+    .step h3 {
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+    }
+
+    .step p {
+      font-size: 0.8rem;
+      color: var(--text-dim);
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 2rem 0;
+      color: var(--text-dim);
+      font-size: 0.8rem;
+    }
+
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    footer a:hover { text-decoration: underline; }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .container { padding: 1rem; }
+      h1 { font-size: 1.5rem; }
+      .risk-score { font-size: 2.5rem; }
+      .risk-label { font-size: 1.2rem; }
+      .form-row { flex-direction: column; }
+      .steps { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">
+        <div class="logo-icon">&#x1F6E1;&#xFE0F;</div>
+        <h1>Agent <span>Catcher</span></h1>
+      </div>
+      <p class="subtitle">On-chain token risk analysis powered by Somnia AI agents. Dual-agent pattern: API data fetch + LLM classification.</p>
+      <div class="badge">
+        <span class="dot"></span>
+        Somnia Testnet &bull; Agentathon 2026
+      </div>
+    </header>
+
+    <!-- Scan Form -->
+    <div class="scan-form">
+      <h2>&#x1F50D; Scan Token</h2>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="tokenAddr">Token Contract Address</label>
+          <input type="text" id="tokenAddr" placeholder="0x..." autocomplete="off">
+        </div>
+        <div class="form-group" style="max-width: 180px;">
+          <label for="chainId">Chain ID</label>
+          <select id="chainId">
+            <option value="1">Ethereum (1)</option>
+            <option value="56">BSC (56)</option>
+            <option value="137">Polygon (137)</option>
+            <option value="42161">Arbitrum (42161)</option>
+            <option value="10">Optimism (10)</option>
+            <option value="8453">Base (8453)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="presets">
+        <label>Quick scan examples:</label>
+        <div class="preset-btns">
+          <button class="preset-btn" onclick="setPreset('0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984', 1)">UNI (ETH)</button>
+          <button class="preset-btn" onclick="setPreset('0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599', 1)">WBTC (ETH)</button>
+          <button class="preset-btn" onclick="setPreset('0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82', 56)">CAKE (BSC)</button>
+          <button class="preset-btn" onclick="setPreset('0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270', 137)">WMATIC</button>
+        </div>
+      </div>
+
+      <div class="form-row" style="margin-top: 1rem;">
+        <button class="btn" id="scanBtn" onclick="startScan()">
+          Analyze Risk
+        </button>
+      </div>
+
+      <div class="status pending" id="statusPending">
+        <span class="spinner"></span>
+        <span id="statusText">Submitting request to Somnia network...</span>
+      </div>
+    </div>
+
+    <!-- Results -->
+    <div class="results" id="results">
+      <h2>&#x1F4CA; Risk Analysis Result</h2>
+      <div class="risk-meter">
+        <div>
+          <div class="risk-score" id="riskScore">--</div>
+          <div class="risk-bar"><div class="risk-fill" id="riskFill"></div></div>
+        </div>
+        <div class="risk-label" id="riskLabel">--</div>
+      </div>
+      <div class="details-grid" id="detailsGrid"></div>
+    </div>
+
+    <!-- How it works -->
+    <div class="how-it-works">
+      <h2>&#x2699;&#xFE0F; How It Works</h2>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <h3>Submit Token</h3>
+          <p>Enter any ERC-20 token address and its chain ID</p>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <h3>API Fetch</h3>
+          <p>JSON API agent pulls security data from GoPlus on-chain</p>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <h3>LLM Analysis</h3>
+          <p>LLM agent classifies risk: safe, low, moderate, high, or scam</p>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <h3>On-Chain Result</h3>
+          <p>Risk score stored permanently on Somnia blockchain</p>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      Built for the <a href="https://www.encodeclub.com/programmes/agentathon" target="_blank">Somnia Agentathon 2026</a> &bull;
+      <a href="https://github.com/ProtoJay4789" target="_blank">ProtoJay4789</a>
+    </footer>
+  </div>
+
+<script>
+    // Config - update after deployment
+    const CONFIG = {
+      contractAddress: 'DEPLOYED_CONTRACT_ADDRESS',
+      rpcUrl: 'https://api.infra.testnet.somnia.network',
+      chainId: 50312,
+    };
+
+    const RISK_COLORS = {
+      safe: '#22c55e',
+      low_risk: '#84cc16',
+      moderate_risk: '#f59e0b',
+      high_risk: '#f97316',
+      scam: '#ef4444',
+      unknown: '#6b7280',
+    };
+
+    // Contract ABI (minimal — only what frontend needs)
+    const CONTRACT_ABI = [
+      "function requestAnalysis(string calldata _tokenAddress, uint256 _chainId) external payable",
+      "function getRequiredDeposit() external view returns (uint256)",
+      "function requests(uint256) external view returns (address requester, string tokenAddress, uint256 chainId, uint256 timestamp, bool completed, string riskLevel, int256 riskScore)",
+      "function requestCount() external view returns (uint256)",
+      "event AnalysisRequested(uint256 requestId, address requester, string tokenAddress, uint256 chainId)",
+      "event RiskScored(uint256 requestId, string tokenAddress, string riskLevel, int256 riskScore)",
+      "event RequestFailed(uint256 requestId, string reason)"
+    ];
+
+    let provider, signer, catcher;
+
+    async function connectWallet() {
+      if (!window.ethereum) {
+        throw new Error('No Web3 wallet found. Please install MetaMask or a compatible wallet.');
+      }
+      provider = new ethers.BrowserProvider(window.ethereum);
+      signer = await provider.getSigner();
+      
+      // Switch to Somnia testnet if needed
+      const network = await provider.getNetwork();
+      if (Number(network.chainId) !== CONFIG.chainId) {
+        try {
+          await window.ethereum.request({
+            method: 'wallet_switchEthereumChain',
+            params: [{ chainId: ethers.toBeHex(CONFIG.chainId) }],
+          });
+        } catch (switchError) {
+          // Chain not added to wallet
+          if (switchError.code === 4902) {
+            await window.ethereum.request({
+              method: 'wallet_addEthereumChain',
+              params: [{
+                chainId: ethers.toBeHex(CONFIG.chainId),
+                chainName: 'Somnia Testnet',
+                rpcUrls: [CONFIG.rpcUrl],
+                nativeCurrency: { name: 'Somnia Testnet Token', symbol: 'STT', decimals: 18 },
+              }],
+            });
+          } else {
+            throw switchError;
+          }
+        }
+      }
+      
+      catcher = new ethers.Contract(CONFIG.contractAddress, CONTRACT_ABI, signer);
+    }
+
+    function setPreset(addr, chain) {
+      document.getElementById('tokenAddr').value = addr;
+      document.getElementById('chainId').value = chain;
+    }
+
+    async function startScan() {
+      const tokenAddr = document.getElementById('tokenAddr').value.trim();
+      const chainId = parseInt(document.getElementById('chainId').value);
+      const btn = document.getElementById('scanBtn');
+      const statusEl = document.getElementById('statusPending');
+      const statusText = document.getElementById('statusText');
+
+      if (!tokenAddr || !tokenAddr.startsWith('0x')) {
+        alert('Please enter a valid token address (0x...)');
+        return;
+      }
+
+      if (CONFIG.contractAddress === 'DEPLOYED_CONTRACT_ADDRESS') {
+        // Demo mode — contract not yet deployed
+        await simulateScan(tokenAddr, chainId);
+        return;
+      }
+
+      btn.disabled = true;
+      statusEl.className = 'status active pending';
+      statusText.textContent = 'Connecting to wallet...';
+
+      try {
+        if (!catcher) {
+          await connectWallet();
+        }
+
+        statusText.textContent = 'Reading required deposit...';
+        const deposit = await catcher.getRequiredDeposit();
+        // Dual-agent needs 2x deposit + buffer
+        const totalDeposit = deposit * BigInt(3);
+        const depositEth = ethers.formatEther(totalDeposit);
+
+        statusText.textContent = `Requesting analysis (deposit: ${depositEth} STT)... Confirm in wallet.`;
+        
+        const tx = await catcher.requestAnalysis(tokenAddr, BigInt(chainId), { value: totalDeposit });
+        statusText.textContent = `Tx submitted: ${tx.hash.slice(0, 12)}... Waiting for agents.`;
+
+        const receipt = await tx.wait();
+        const fromBlock = receipt.blockNumber;
+        
+        statusText.textContent = 'Phase 1: JSON API agent fetching security data...';
+
+        // Poll for callback events
+        const POLL_INTERVAL = 5000;
+        const TIMEOUT = 300_000; // 5 min for dual-agent chain
+        const startTime = Date.now();
+        
+        while (Date.now() - startTime < TIMEOUT) {
+          const scored = await catcher.queryFilter('RiskScored', fromBlock);
+          if (scored.length > 0) {
+            const e = scored[0].args;
+            statusText.textContent = 'Analysis complete!';
+            statusEl.className = 'status active success';
+            displayResult({ score: Number(e.riskScore), level: e.riskLevel }, tokenAddr, chainId);
+            return;
+          }
+
+          const failed = await catcher.queryFilter('RequestFailed', fromBlock);
+          if (failed.length > 0) {
+            throw new Error(`Analysis failed: ${failed[0].args.reason}`);
+          }
+
+          statusText.textContent += ' ⏳';
+          await sleep(POLL_INTERVAL);
+        }
+
+        throw new Error('Timeout waiting for agent response. Agents may be processing — check explorer.');
+      } catch (err) {
+        statusEl.className = 'status active error';
+        statusText.textContent = `Error: ${err.message}`;
+        console.error(err);
+      } finally {
+        btn.disabled = false;
+      }
+    }
+
+    async function simulateScan(tokenAddr, chainId) {
+      const statusEl = document.getElementById('statusPending');
+      const statusText = document.getElementById('statusText');
+
+      statusText.textContent = 'Demo mode — contract not yet deployed on testnet';
+      await sleep(1000);
+      statusText.textContent = 'Phase 1: Fetching security data via JSON API agent...';
+      await sleep(2000);
+
+      statusText.textContent = 'Phase 2: LLM agent classifying risk level...';
+      await sleep(2500);
+
+      const results = {
+        safe: { score: 95, level: 'Safe' },
+        low_risk: { score: 78, level: 'Low Risk' },
+        moderate_risk: { score: 52, level: 'Moderate Risk' },
+        high_risk: { score: 28, level: 'High Risk' },
+        scam: { score: 5, level: 'Scam' },
+      };
+
+      const hash = tokenAddr.toLowerCase().split('').reduce((a, c) => a + c.charCodeAt(0), 0);
+      const keys = Object.keys(results);
+      const result = results[keys[hash % keys.length]];
+
+      statusEl.className = 'status active success';
+      statusText.textContent = 'Analysis complete! (Demo)';
+
+      displayResult(result, tokenAddr, chainId);
+    }
+
+    function displayResult(result, tokenAddr, chainId) {
+      const resultsEl = document.getElementById('results');
+      const scoreEl = document.getElementById('riskScore');
+      const labelEl = document.getElementById('riskLabel');
+      const fillEl = document.getElementById('riskFill');
+      const detailsEl = document.getElementById('detailsGrid');
+
+      const color = RISK_COLORS[result.level.toLowerCase().replace(' ', '_')] || RISK_COLORS.unknown;
+
+      scoreEl.textContent = result.score;
+      scoreEl.style.color = color;
+      labelEl.textContent = result.level.replace('_', ' ');
+      labelEl.style.color = color;
+      fillEl.style.width = `${result.score}%`;
+      fillEl.style.background = color;
+
+      const chainNames = {1: 'Ethereum', 56: 'BSC', 137: 'Polygon', 42161: 'Arbitrum', 10: 'Optimism', 8453: 'Base'};
+
+      detailsEl.innerHTML = `
+        <div class="detail-card">
+          <div class="label">Token Address</div>
+          <div class="value">${tokenAddr}</div>
+        </div>
+        <div class="detail-card">
+          <div class="label">Chain</div>
+          <div class="value">${chainNames[chainId] || chainId}</div>
+        </div>
+        <div class="detail-card">
+          <div class="label">Analysis Method</div>
+          <div class="value">Dual-Agent (API + LLM)</div>
+        </div>
+        <div class="detail-card">
+          <div class="label">Platform</div>
+          <div class="value">Somnia Testnet</div>
+        </div>
+      `;
+
+      resultsEl.classList.add('active');
+      resultsEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function sleep(ms) {
+      return new Promise(r => setTimeout(r, ms));
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multica Board — Agent Arena</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: #0a0a0f; color: #e0e0e0; font-family: 'SF Mono', 'Fira Code', monospace; min-height: 100vh; }
+        
+        .header { padding: 20px 30px; border-bottom: 1px solid #1a1a2e; display: flex; justify-content: space-between; align-items: center; }
+        .header h1 { font-size: 24px; color: #00ff88; }
+        .header .status { color: #666; font-size: 12px; }
+        
+        .board { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; padding: 20px 30px; max-width: 1400px; margin: 0 auto; }
+        
+        .agent-card {
+            background: #111118;
+            border: 1px solid #1a1a2e;
+            border-radius: 12px;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        .agent-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+        }
+        .agent-card.analyst::before { background: linear-gradient(90deg, #00ff88, #00cc6a); }
+        .agent-card.brain::before { background: linear-gradient(90deg, #8b5cf6, #6d28d9); }
+        .agent-card.validator::before { background: linear-gradient(90deg, #f59e0b, #d97706); }
+        .agent-card.executor::before { background: linear-gradient(90deg, #3b82f6, #2563eb); }
+        
+        .agent-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+        .agent-name { font-size: 16px; font-weight: 600; }
+        .agent-name .icon { margin-right: 8px; }
+        .agent-status { font-size: 11px; padding: 3px 8px; border-radius: 10px; }
+        .status-idle { background: #1a2e1a; color: #00ff88; }
+        .status-thinking { background: #2e1a2e; color: #8b5cf6; }
+        .status-executing { background: #1a1a2e; color: #3b82f6; }
+        .status-warning { background: #2e2a1a; color: #f59e0b; }
+        
+        .agent-metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px; }
+        .metric { background: #0a0a0f; padding: 10px; border-radius: 8px; }
+        .metric-label { font-size: 10px; color: #666; text-transform: uppercase; letter-spacing: 1px; }
+        .metric-value { font-size: 18px; font-weight: 600; margin-top: 4px; }
+        .metric-value.green { color: #00ff88; }
+        .metric-value.purple { color: #8b5cf6; }
+        .metric-value.amber { color: #f59e0b; }
+        .metric-value.blue { color: #3b82f6; }
+        
+        .flow-section { grid-column: 1 / -1; background: #111118; border: 1px solid #1a1a2e; border-radius: 12px; padding: 20px; }
+        .flow-title { font-size: 14px; color: #666; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 2px; }
+        .flow-diagram { display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap; }
+        .flow-node { background: #0a0a0f; border: 1px solid #1a1a2e; border-radius: 8px; padding: 12px 16px; text-align: center; min-width: 120px; }
+        .flow-node .icon { font-size: 24px; display: block; margin-bottom: 5px; }
+        .flow-node .label { font-size: 11px; color: #999; }
+        .flow-arrow { color: #333; font-size: 20px; }
+        .flow-arrow.active { color: #00ff88; animation: pulse 1.5s infinite; }
+        
+        @keyframes pulse { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
+        
+        .portfolio-section { grid-column: 1 / -1; background: #111118; border: 1px solid #1a1a2e; border-radius: 12px; padding: 20px; }
+        .portfolio-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-top: 15px; }
+        .token-card { background: #0a0a0f; border-radius: 8px; padding: 15px; }
+        .token-symbol { font-size: 14px; font-weight: 600; color: #00ff88; }
+        .token-chain { font-size: 10px; color: #666; margin-top: 2px; }
+        .token-balance { font-size: 20px; font-weight: 600; margin-top: 8px; }
+        .token-value { font-size: 12px; color: #666; margin-top: 2px; }
+        
+        .governance-section { grid-column: 1 / -1; background: #111118; border: 1px solid #1a1a2e; border-radius: 12px; padding: 20px; }
+        .audit-log { font-family: 'SF Mono', monospace; font-size: 11px; max-height: 200px; overflow-y: auto; }
+        .log-entry { padding: 6px 0; border-bottom: 1px solid #1a1a2e; display: flex; gap: 15px; }
+        .log-time { color: #666; min-width: 140px; }
+        .log-agent { min-width: 100px; }
+        .log-action { min-width: 150px; }
+        .log-decision { min-width: 80px; }
+        .log-decision.allowed { color: #00ff88; }
+        .log-decision.denied { color: #ef4444; }
+        .log-decision.audit { color: #f59e0b; }
+        
+        .token-acq { grid-column: 1 / -1; background: #111118; border: 1px solid #1a1a2e; border-radius: 12px; padding: 20px; }
+        .acq-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-top: 15px; }
+        .acq-card { background: #0a0a0f; border-radius: 8px; padding: 15px; }
+        .acq-token { font-size: 14px; font-weight: 600; }
+        .acq-target { font-size: 12px; color: #666; margin-top: 4px; }
+        .acq-progress { height: 4px; background: #1a1a2e; border-radius: 2px; margin-top: 10px; overflow: hidden; }
+        .acq-fill { height: 100%; background: linear-gradient(90deg, #00ff88, #3b82f6); border-radius: 2px; transition: width 0.3s; }
+        
+        .owasp-badge { display: inline-flex; align-items: center; gap: 6px; background: #0a2e0a; border: 1px solid #00ff88; border-radius: 6px; padding: 4px 10px; font-size: 11px; color: #00ff88; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>⚡ Multica Board</h1>
+        <div>
+            <span class="owasp-badge">🛡️ OWASP ASI 2026: 10/10</span>
+            <span class="status" style="margin-left: 15px;">Agent Arena Prototype v0.1</span>
+        </div>
+    </div>
+    
+    <div class="board">
+        <!-- Agent Cards -->
+        <div class="agent-card analyst">
+            <div class="agent-header">
+                <span class="agent-name"><span class="icon">📊</span>Analyst</span>
+                <span class="agent-status status-thinking">THINKING</span>
+            </div>
+            <div style="font-size: 12px; color: #666;">"The Eyes" — Market regime detection, on-chain flow tracking</div>
+            <div class="agent-metrics">
+                <div class="metric"><div class="metric-label">Signals Today</div><div class="metric-value green">47</div></div>
+                <div class="metric"><div class="metric-label">Accuracy</div><div class="metric-value green">89%</div></div>
+                <div class="metric"><div class="metric-label">Regime</div><div class="metric-value green">BULL</div></div>
+                <div class="metric"><div class="metric-label">Confidence</div><div class="metric-value green">0.91</div></div>
+            </div>
+        </div>
+        
+        <div class="agent-card brain">
+            <div class="agent-header">
+                <span class="agent-name"><span class="icon">🧠</span>Strategy Brain</span>
+                <span class="agent-status status-executing">EXECUTING</span>
+            </div>
+            <div style="font-size: 12px; color: #666;">"The Brain" — Allocation decisions, risk management</div>
+            <div class="agent-metrics">
+                <div class="metric"><div class="metric-label">Decisions</div><div class="metric-value purple">12</div></div>
+                <div class="metric"><div class="metric-label">Win Rate</div><div class="metric-value purple">73%</div></div>
+                <div class="metric"><div class="metric-label">Allocation</div><div class="metric-value purple">60/40</div></div>
+                <div class="metric"><div class="metric-label">Risk Score</div><div class="metric-value purple">0.42</div></div>
+            </div>
+        </div>
+        
+        <div class="agent-card validator">
+            <div class="agent-header">
+                <span class="agent-name"><span class="icon">✅</span>Validator</span>
+                <span class="agent-status status-idle">IDLE</span>
+            </div>
+            <div style="font-size: 12px; color: #666;">"The Safety Net" — Reviews every decision BEFORE execution</div>
+            <div class="agent-metrics">
+                <div class="metric"><div class="metric-label">Approved</div><div class="metric-value amber">8</div></div>
+                <div class="metric"><div class="metric-label">Rejected</div><div class="metric-value amber">4</div></div>
+                <div class="metric"><div class="metric-label">Veto Rate</div><div class="metric-value amber">33%</div></div>
+                <div class="metric"><div class="metric-label">Last Check</div><div class="metric-value amber">2m ago</div></div>
+            </div>
+        </div>
+        
+        <div class="agent-card executor">
+            <div class="agent-header">
+                <span class="agent-name"><span class="icon">⚡</span>Executor</span>
+                <span class="agent-status status-idle">IDLE</span>
+            </div>
+            <div style="font-size: 12px; color: #666;">"The Hands" — Pure on-chain execution, NO decision-making</div>
+            <div class="agent-metrics">
+                <div class="metric"><div class="metric-label">Executed</div><div class="metric-value blue">6</div></div>
+                <div class="metric"><div class="metric-label">Gas Spent</div><div class="metric-value blue">$12.40</div></div>
+                <div class="metric"><div class="metric-label">Slippage</div><div class="metric-value blue">0.3%</div></div>
+                <div class="metric"><div class="metric-label">Chains</div><div class="metric-value blue">3</div></div>
+            </div>
+        </div>
+        
+        <!-- Flow Diagram -->
+        <div class="flow-section">
+            <div class="flow-title">Agent Communication Flow</div>
+            <div class="flow-diagram">
+                <div class="flow-node">
+                    <span class="icon">📊</span>
+                    <span class="label">Analyst</span>
+                    <span class="label" style="color: #00ff88;">signals →</span>
+                </div>
+                <div class="flow-arrow active">→</div>
+                <div class="flow-node">
+                    <span class="icon">🧠</span>
+                    <span class="label">Brain</span>
+                    <span class="label" style="color: #8b5cf6;">orders →</span>
+                </div>
+                <div class="flow-arrow active">→</div>
+                <div class="flow-node">
+                    <span class="icon">✅</span>
+                    <span class="label">Validator</span>
+                    <span class="label" style="color: #f59e0b;">validates →</span>
+                </div>
+                <div class="flow-arrow active">→</div>
+                <div class="flow-node">
+                    <span class="icon">⚡</span>
+                    <span class="label">Executor</span>
+                    <span class="label" style="color: #3b82f6;">on-chain</span>
+                </div>
+                <div class="flow-arrow">↺</div>
+                <div class="flow-node">
+                    <span class="icon">🔄</span>
+                    <span class="label">Feedback</span>
+                    <span class="label" style="color: #666;">learns</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Token Acquisition -->
+        <div class="token-acq">
+            <div class="flow-title">🎯 Token Acquisition Agent</div>
+            <div class="acq-grid">
+                <div class="acq-card">
+                    <div class="acq-token" style="color: #e84142;">AVAX</div>
+                    <div class="acq-target">Target: $25.00 | Current: $27.80</div>
+                    <div class="acq-target">DCA: $50/day | Limit: 100 AVAX</div>
+                    <div class="acq-progress"><div class="acq-fill" style="width: 35%;"></div></div>
+                    <div style="font-size: 10px; color: #666; margin-top: 5px;">35/100 AVAX accumulated</div>
+                </div>
+                <div class="acq-card">
+                    <div class="acq-token" style="color: #9945ff;">SOL</div>
+                    <div class="acq-target">Target: $140.00 | Current: $158.20</div>
+                    <div class="acq-target">Limit Order | Max: 50 SOL</div>
+                    <div class="acq-progress"><div class="acq-fill" style="width: 12%;"></div></div>
+                    <div style="font-size: 10px; color: #666; margin-top: 5px;">6/50 SOL accumulated</div>
+                </div>
+                <div class="acq-card">
+                    <div class="acq-token" style="color: #2775ca;">USDC</div>
+                    <div class="acq-target">Yield: 8.2% APY (Aave)</div>
+                    <div class="acq-target">Idle: $2,400 | Earning: $0.55/day</div>
+                    <div class="acq-progress"><div class="acq-fill" style="width: 100%;"></div></div>
+                    <div style="font-size: 10px; color: #666; margin-top: 5px;">Fully deployed</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Governance Audit Log -->
+        <div class="governance-section">
+            <div class="flow-title">🛡️ Governance Audit Log (AGT)</div>
+            <div class="audit-log">
+                <div class="log-entry">
+                    <span class="log-time">2026-05-26 13:44:53</span>
+                    <span class="log-agent" style="color: #00ff88;">analyst</span>
+                    <span class="log-action">fetch_token_prices</span>
+                    <span class="log-decision allowed">ALLOWED</span>
+                    <span style="color: #666;">Read operation — policy: defi-allow-read</span>
+                </div>
+                <div class="log-entry">
+                    <span class="log-time">2026-05-26 13:44:52</span>
+                    <span class="log-agent" style="color: #8b5cf6;">brain</span>
+                    <span class="log-action">swap AVAX → USDC</span>
+                    <span class="log-decision audit">AUDITED</span>
+                    <span style="color: #666;">Trade action — policy: defi-audit-trade</span>
+                </div>
+                <div class="log-entry">
+                    <span class="log-time">2026-05-26 13:44:51</span>
+                    <span class="log-agent" style="color: #f59e0b;">validator</span>
+                    <span class="log-action">approve_position</span>
+                    <span class="log-decision allowed">ALLOWED</span>
+                    <span style="color: #666;">Risk check passed — exposure: 42%</span>
+                </div>
+                <div class="log-entry">
+                    <span class="log-time">2026-05-26 13:44:50</span>
+                    <span class="log-agent" style="color: #3b82f6;">executor</span>
+                    <span class="log-action">execute_swap</span>
+                    <span class="log-decision allowed">ALLOWED</span>
+                    <span style="color: #666;">Validated order — slippage: 0.3%</span>
+                </div>
+                <div class="log-entry">
+                    <span class="log-time">2026-05-26 13:44:49</span>
+                    <span class="log-agent" style="color: #ef4444;">unknown</span>
+                    <span class="log-action">run_shell</span>
+                    <span class="log-decision denied">DENIED</span>
+                    <span style="color: #666;">ASI-02: Shell execution prohibited</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Portfolio -->
+        <div class="portfolio-section">
+            <div class="flow-title">💼 Portfolio Overview</div>
+            <div class="portfolio-grid">
+                <div class="token-card">
+                    <div class="token-symbol">AVAX</div>
+                    <div class="token-chain">Avalanche</div>
+                    <div class="token-balance" style="color: #e84142;">35.2</div>
+                    <div class="token-value">~$978.56</div>
+                </div>
+                <div class="token-card">
+                    <div class="token-symbol">SOL</div>
+                    <div class="token-chain">Solana</div>
+                    <div class="token-balance" style="color: #9945ff;">6.8</div>
+                    <div class="token-value">~$1,075.76</div>
+                </div>
+                <div class="token-card">
+                    <div class="token-symbol">USDC</div>
+                    <div class="token-chain">Multi-chain</div>
+                    <div class="token-balance" style="color: #2775ca;">2,400.00</div>
+                    <div class="token-value">~$2,400.00</div>
+                </div>
+                <div class="token-card">
+                    <div class="token-symbol" style="color: #00ff88;">TOTAL</div>
+                    <div class="token-chain">All chains</div>
+                    <div class="token-balance" style="color: #00ff88;">$4,454</div>
+                    <div class="token-value">+12.3% all-time</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Simulate agent status changes
+        const statuses = ['IDLE', 'THINKING', 'EXECUTING'];
+        const colors = ['status-idle', 'status-thinking', 'status-executing'];
+        
+        setInterval(() => {
+            document.querySelectorAll('.agent-status').forEach(el => {
+                if (Math.random() > 0.7) {
+                    const idx = Math.floor(Math.random() * 3);
+                    el.textContent = statuses[idx];
+                    el.className = 'agent-status ' + colors[idx];
+                }
+            });
+        }, 3000);
+        
+        // Simulate new audit log entries
+        const agents = ['analyst', 'brain', 'validator', 'executor'];
+        const actions = ['fetch_prices', 'calculate_il', 'check_position', 'swap', 'stake', 'read_pool'];
+        const decisions = ['ALLOWED', 'AUDITED', 'DENIED'];
+        const decColors = ['allowed', 'audit', 'denied'];
+        
+        setInterval(() => {
+            const log = document.querySelector('.audit-log');
+            if (!log) return;
+            
+            const agent = agents[Math.floor(Math.random() * agents.length)];
+            const action = actions[Math.floor(Math.random() * actions.length)];
+            const decIdx = Math.random() > 0.9 ? 2 : Math.random() > 0.3 ? 0 : 1;
+            
+            const now = new Date().toISOString().slice(0, 19).replace('T', ' ');
+            const entry = document.createElement('div');
+            entry.className = 'log-entry';
+            entry.innerHTML = `
+                <span class="log-time">${now}</span>
+                <span class="log-agent" style="color: ${decIdx === 2 ? '#ef4444' : '#00ff88'};">${agent}</span>
+                <span class="log-action">${action}</span>
+                <span class="log-decision ${decColors[decIdx]}">${decisions[decIdx]}</span>
+                <span style="color: #666;">Governance check</span>
+            `;
+            
+            log.insertBefore(entry, log.firstChild);
+            if (log.children.length > 10) log.removeChild(log.lastChild);
+        }, 5000);
+    </script>
+</body>
+</html>
