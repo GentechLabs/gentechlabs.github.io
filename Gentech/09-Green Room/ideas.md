@@ -145,3 +145,17 @@ Vision-based AI Player 2 for emulated games (Xenia, RPCS3, Dolphin). Agent plays
 - [ ] **Standalone x402 3D Generation API** — Wrap Mixar CLI behind x402 paywall ($0.01-0.05/gen), list on Atelier + x402.org
 
 **Reference:** Mixar-AI/mixar-app, v2.0.0 (Jul 7), 61 stars, GPL-3.0
+
+## 🟢 DONUT AI — RESEARCH ENGINEER INTERN (Jul 8, 2026)
+
+**Status:** Draft ready — Forge sends
+**Email:** hiring@donutbrowser.ai
+**Cover letter:** `10-Labs/Resumes/DonutAI-ResearchEngineerIntern-CoverLetter.md`
+
+**Why it fits:**
+- Agentic safety + self-evolution in financial markets is exactly what we build
+- Live production agents with real money flowing (x402, AgentEscrow, CMC Gateway)
+- "Founding researcher" slot values ownership over credentials
+- Remote, well-funded ($20-22M)
+
+**Goal:** Replace Amazon Flex with remote crypto role

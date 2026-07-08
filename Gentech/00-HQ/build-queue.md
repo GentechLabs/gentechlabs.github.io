@@ -797,3 +797,27 @@ GenTech Labs
 - Focus on APIs that agents will actually use (not just what we think they need)
 - Build for the agent economy, not humans
 - **Jul 8, 2026 thesis update:** AI geopolitical fragmentation creates demand for decentralized, sanction-proof compute. GenTech = economic layer. SCN = compute layer. Nobody is selling agents as RWAs (compute-backed tokens) yet.
+
+### 27. Donut AI — Research Engineer Intern Application
+**Status**: Draft ready — FORGE TO SEND
+**Impact**: Replace Amazon Flex with paid remote crypto role
+**Difficulty**: ✅ EASY (just email)
+**Priority**: HIGH
+
+**Steps:**
+- [ ] Read cover letter: `10-Labs/Resumes/DonutAI-ResearchEngineerIntern-CoverLetter.md`
+- [ ] Attach resume: `10-Labs/Resumes/Jordan_Master_Resume.pdf`
+- [ ] Send to: `hiring@donutbrowser.ai`
+  - Subject: `Research Engineer Intern — Jordan Jones — Agentic Systems + DeFi Infrastructure Builder`
+  - Body: paste cover letter
+  - Attach: resume PDF
+- [ ] Optional: DM @Chrizhuu on X with brief intro + link
+  - Template: "Hey Chris, just applied for the Research Engineer Intern role. Build agentic DeFi infrastructure at GenTech Labs — x402 payment rails, live agent systems. Would love to chat about how constrained autonomy applies to agent payment safety."
+- [ ] Track reply: [ ]
+
+**Context:**
+- Donut AI (Donut Labs) — $20-22M seed, building D0 agentic crypto browser
+- Role: Research Engineer Intern — agentic safety, self-evolution in financial markets
+- Remote ✅
+- Contact: hiring@donutbrowser.ai
+- Founder X: @Chrizhuu | Donut X: @DonutAI
