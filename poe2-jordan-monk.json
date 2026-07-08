@@ -2,23 +2,30 @@
   "character": {
     "name": "Jordan's Monk",
     "class": "Monk",
-    "level": 28,
+    "level": 31,
     "ascendancy": "Invoker",
-    "act": "Act 2",
+    "act": "Act 3",
     "stats": {
       "life": 639,
       "energyShield": 68,
       "mana": 224,
       "spirit": 30,
-      "strength": 100,
-      "dexterity": 41,
-      "intelligence": 45
+      "strength": 48,
+      "dexterity": 46,
+      "intelligence": 50
     },
     "ascendancyPoints": {
       "earned": 2,
       "total": 8,
       "source": "Trial of the Sekhemas",
-      "note": "Completed with Vanito — left with 1 honor"
+      "note": "Completed with Vanito — left with 1 honor. Respec'd passive skills."
+    },
+    "choices": {
+      "faith": {
+        "skill": "Meditate",
+        "description": "Heal and restore Spirit over time",
+        "unlockedAt": "Level 31"
+      }
     }
   },
   "skills": [
@@ -86,8 +93,8 @@
     "equipped": true,
     "stash": "Deadly Galvanic Wand (Level 8 Galvanic Field)",
     "stash_requires": "Level 26, 48 Int",
-    "stash_status": "Needs 3 more Int — one +Int ring or passive node",
-    "note": "Using Mana Drain wand for sustain until Int hits 48"
+    "stash_status": "✅ Ready to equip — Int 50 meets requirement",
+    "note": "Can now use Deadly Galvanic Wand with Galvanic Field. Consider switching from Mana Drain wand."
   },
   "damageLoop": {
     "description": "Storm Wave opens packs → Arc chains and shocks → Tempest Flurry generates Power Charges → Falling Thunder consumes charges for nuke → Killing Palm finishes stragglers",
@@ -149,11 +156,11 @@
     ]
   },
   "passiveTree": {
-    "allocated": ["Alternating Current", "Overlord", "Branching Bolts", "Drenched"],
-    "workingOn": "Lightning Quick",
-    "notes": "Lightning-based Invoker Monk. Central path through key lightning nodes."
+    "allocated": [],
+    "workingOn": "Respec'd — rebuilding from scratch",
+    "notes": "Lightning-based Invoker Monk. Passive tree reset — reallocate points for new build direction."
   },
   "buildFocus": "Lightning Damage",
   "playstyle": "Melee Caster — generate charges, spend them on nukes",
-  "lastUpdated": "2026-06-24"
+  "lastUpdated": "2026-07-05"
 }
