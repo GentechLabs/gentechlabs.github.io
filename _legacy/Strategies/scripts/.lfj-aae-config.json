@@ -1,0 +1,95 @@
+{
+  "pool_address": "0x864d4e5ee7318e97483db7eb0912e09f161516ea",
+  "chain": "avalanche",
+  "rpc_url": "https://api.avax.network/ext/bc/C/rpc",
+  "token0": {
+    "symbol": "AVAX",
+    "address": "0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7",
+    "decimals": 18
+  },
+  "token1": {
+    "symbol": "USDC",
+    "address": "0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E",
+    "decimals": 6
+  },
+  "bin_step": 10,
+  "fee_tier_bps": 5,
+  "position": {
+    "total_usd": 44.54,
+    "token0_amount": 3.812,
+    "token1_amount": 18.73,
+    "range_low": 6.70,
+    "range_high": 6.88,
+    "shape": "bidirectional",
+    "range": {
+      "low": 6.70,
+      "high": 6.88,
+      "updated_at": "2026-06-15T00:00:00Z",
+      "source": "jordan_rebalance_btc_pump"
+    }
+  },
+  "milestones": [
+    {
+      "tier": 1,
+      "label": "Scout",
+      "daily_fees": 5.0,
+      "description": "Entry strategies (CURVE)"
+    },
+    {
+      "tier": 2,
+      "label": "Raider",
+      "daily_fees": 20.0,
+      "description": "SPOT + BIDIRECTIONAL shapes"
+    },
+    {
+      "tier": 3,
+      "label": "Warlord",
+      "daily_fees": 50.0,
+      "description": "Multi-pool positions"
+    },
+    {
+      "tier": 4,
+      "label": "Sovereign",
+      "daily_fees": 100.0,
+      "description": "Custom strategy creation + mentorship"
+    }
+  ],
+  "compound_threshold_usd": 50.0,
+  "dca": {
+    "base_amount": 50,
+    "boost_amount": 15,
+    "boost_trigger_efficiency": 50,
+    "day_of_week": 0,
+    "enabled": true,
+    "mode": "hybrid"
+  },
+  "quiet_hours": {
+    "start": 23,
+    "end": 6,
+    "timezone_offset": -4
+  },
+  "squad": {
+    "squad_id": null,
+    "contribution_pct": 100.0
+  },
+  "alert_rules": {
+    "silent_if": [
+      "in_range",
+      "efficiency_ok",
+      "no_action_needed"
+    ],
+    "alert_if": [
+      "out_of_range",
+      "efficiency_low",
+      "milestone_hit",
+      "compound_ready",
+      "dca_day"
+    ],
+    "critical_if": [
+      "price_crash",
+      "il_severe"
+    ]
+  },
+  "range_low": 6.70,
+  "range_high": 6.88
+}

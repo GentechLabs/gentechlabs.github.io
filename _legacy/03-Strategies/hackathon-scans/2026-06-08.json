@@ -1,0 +1,163 @@
+{
+  "scan_date": "2026-06-08",
+  "scanner": "opportunity-discovery",
+  "mode": "learning + selective builds",
+  "sources": ["web_search", "devpost", "dorahacks", "web3voyager", "bnbchain.org"],
+  "summary": {
+    "total_scanned": 15,
+    "high_relevance_4plus": 4,
+    "medium_relevance_3": 3,
+    "low_relevance_skip": 8
+  },
+  "high_relevance": [
+    {
+      "name": "BNB Hack: AI Trading Agent Edition",
+      "prize": "$36,000",
+      "deadline": "June 21, 2026 (submissions close)",
+      "format": "Online",
+      "tracks": ["Autonomous Trading Agents (live on BSC)", "CMC Strategy Skills (market data → backtestable strategy)"],
+      "stack": "BNB Chain, CoinMarketCap data, Trust Wallet Agent Kit, BNB AI Agent SDK",
+      "organizers": ["BNB Chain", "CoinMarketCap", "Trust Wallet"],
+      "entry_barriers": "None — open to all skill levels, no staking required",
+      "fit_score": 5,
+      "fit_reason": "Direct alignment: AI agents on-chain, trading agents are core to our stack. Agent Kit + SDK integration is straightforward. Our modular agent infrastructure (Python core + chain contracts) maps directly to both tracks. 3-week sprint is manageable.",
+      "status": "LIVE — registration open",
+      "url": "https://www.bnbchain.org/en/hackathons/bnbhack-twt-cmc"
+    },
+    {
+      "name": "Mantle Turing Test Hackathon 2026",
+      "prize": "$100,000+ (Phase II)",
+      "deadline": "June 15, 2026",
+      "format": "Online + in-person (Dubai kickoff)",
+      "tracks": ["Agentic Wallets & Economy", "AI x Mantle ecosystem"],
+      "stack": "Mantle Network, ERC-8004 identity NFTs, Agentic AI",
+      "organizers": ["Mantle", "Tencent Cloud", "Bybit", "Byreal", "Animoca Brands", "Nansen", "Blockchain for Good Alliance"],
+      "entry_barriers": "None explicit — open submission via DoraHacks",
+      "fit_score": 4,
+      "fit_reason": "ERC-8004 identity NFTs + agentic wallets align with our agent economy work. Mantle is EVM-compatible so our existing contracts port easily. $120K total prize pool is significant. Tight deadline (7 days) is a concern but our stack is ready.",
+      "status": "LIVE — submissions open until June 15",
+      "url": "https://dorahacks.io/hackathon/mantleturingtesthackathon2026"
+    },
+    {
+      "name": "Build with Gemini XPRIZE",
+      "prize": "$2,000,000",
+      "deadline": "August 17, 2026",
+      "format": "Online",
+      "tracks": ["5 categories × $50K each per round", "Grand prizes"],
+      "stack": "Google Gemini API, agentic tools",
+      "organizers": ["XPRIZE", "Google"],
+      "entry_barriers": "Open to individuals, teams, and orgs <25 employees worldwide (US embargo exclusions)",
+      "fit_score": 4,
+      "fit_reason": "Largest prize pool in the scan. Requires building a real AI-operated business with Gemini. Our agent infrastructure could showcase autonomous revenue generation. 3-month timeline is generous. Must demonstrate AI live in production executing key decisions.",
+      "status": "LIVE — accepting submissions until Aug 17",
+      "url": "https://xprize.devpost.com/"
+    },
+    {
+      "name": "Encode Solana Bootcamp",
+      "prize": "N/A (educational)",
+      "deadline": "June 22, 2026 (starts)",
+      "format": "Online (4 weeks)",
+      "tracks": ["Solana development fundamentals"],
+      "stack": "Solana, Anchor, Rust, TypeScript",
+      "organizers": ["Encode Club", "Solana Foundation"],
+      "entry_barriers": "None — free registration",
+      "fit_score": 4,
+      "fit_reason": "Priority learning track per Jordan's directive. Solana dev skills directly applicable to hackathon builds. Foundation for Colosseum hackathon participation. Already listed as priority #2 in pipeline.",
+      "status": "REGISTRATION OPEN",
+      "url": "https://www.encodeclub.com/programmes/solana-bootcamp"
+    }
+  ],
+  "medium_relevance": [
+    {
+      "name": "Encode Arc Bootcamp",
+      "prize": "N/A (educational)",
+      "deadline": "June 22, 2026 (starts)",
+      "format": "Online (4 weeks)",
+      "tracks": ["EVM/Arc, programmable money"],
+      "stack": "EVM, Arc, Solidity",
+      "organizers": ["Encode Club"],
+      "entry_barriers": "None",
+      "fit_score": 3,
+      "fit_reason": "EVM skills complement Solana work. Programmable money focus aligns with DeFi. Good for multi-chain capability. Lower urgency than Solana bootcamp.",
+      "status": "REGISTRATION OPEN",
+      "url": "https://www.encodeclub.com/programmes"
+    },
+    {
+      "name": "Google Cloud Rapid Agent Hackathon",
+      "prize": "$30,000+ (6 tracks × $10K each)",
+      "deadline": "June 11, 2026 (PASSED — June 11 already passed as of June 8)",
+      "format": "Online",
+      "tracks": ["6 partner-specific buckets (Arize, Elastic, Fivetran, GitLab, MongoDB, etc.)"],
+      "stack": "Gemini 3, Google Cloud Agent Builder, MCP",
+      "organizers": ["Google Cloud"],
+      "entry_barriers": "None — open to all skill levels",
+      "fit_score": 3,
+      "fit_reason": "MCP + agent focus is directly relevant. Bucket structure makes it winnable. BUT deadline is June 11 — only 3 days away. Already dropped per pipeline priority (enterprise lock-in concern). Skip.",
+      "status": "DEADLINE IMMINENT / ALREADY DROPPED",
+      "url": "https://devpost.com/hackathons"
+    },
+    {
+      "name": "Encode Vibe Coding Hackathon",
+      "prize": "TBD",
+      "deadline": "June 19, 2026",
+      "format": "Online",
+      "tracks": ["AI tools + vibe coding"],
+      "stack": "AI tools, models, workflows",
+      "organizers": ["Encode Club"],
+      "entry_barriers": "None",
+      "fit_score": 3,
+      "fit_reason": "Low-effort participation to maintain Encode Club engagement during bootcamp. Good for building in public content. Small prize expected.",
+      "status": "UPCOMING",
+      "url": "https://luma.com/4f1qbg8g"
+    }
+  ],
+  "filtered_out": [
+    {
+      "name": "IstanHack 2026",
+      "reason": "IN-PERSON (Istanbul) — Jordan in Ohio, no travel budget",
+      "deadline": "June 2-3 (PASSED)"
+    },
+    {
+      "name": "VIBE-A-THON (CoLab x NFC Summit)",
+      "reason": "IN-PERSON (Lisbon) + token-ownership gate",
+      "deadline": "June 4-5 (PASSED)"
+    },
+    {
+      "name": "Monad Blitz NYC",
+      "reason": "IN-PERSON (NYC) — Jordan in Ohio",
+      "deadline": "June 9"
+    },
+    {
+      "name": "ETHGlobal New York 2026",
+      "reason": "IN-PERSON (NYC) — Jordan in Ohio",
+      "deadline": "June 12-14"
+    },
+    {
+      "name": "USAII Global AI Hackathon",
+      "reason": "Students-only — Jordan is not a full-time degree student",
+      "deadline": "June 6 (PASSED)"
+    },
+    {
+      "name": "Microsoft Agents League Hackathon",
+      "reason": "Microsoft ecosystem lock-in (Foundry, Copilot Studio). Low stack alignment.",
+      "deadline": "June 4-14"
+    },
+    {
+      "name": "CertiK + YZi Labs $1M Security Grant",
+      "reason": "Tied to EASY Residency Incubation Program — not open standalone grant",
+      "deadline": "Rolling (via residency)"
+    },
+    {
+      "name": "Ignite64 Global AI Hackathon",
+      "reason": "Student-focused, India-centric, unclear prize structure",
+      "deadline": "TBD"
+    }
+  ],
+  "next_steps": [
+    "ACTION: Register for BNB Hack AI Trading Agent Edition — deadline June 21, 7 days to build",
+    "ACTION: Evaluate Mantle Turing Test — deadline June 15, only 7 days. Decision needed today.",
+    "TRACK: Gemini XPRIZE — long runway (Aug 17), research phase only",
+    "LEARNING: Encode Solana Bootcamp starts June 22 — confirm registration",
+    "LEARNING: Encode Arc Bootcamp starts June 22 — confirm registration"
+  ]
+}
