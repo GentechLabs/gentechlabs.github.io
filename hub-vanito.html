@@ -13,9 +13,9 @@
     --bg: #0a0a0f;
     --panel: #12121a;
     --border: #1e1e2e;
-    --gold: #c9a84c;
-    --fire: #ff6b35;
-    --magma: #cc4400;
+    --gold: #8a1a1a;
+    --fire: #cc2222;
+    --magma: #4a0a0a;
     --text: #e0e0e0;
     --dim: #666;
     --card: #16161f;
@@ -46,7 +46,7 @@
 
   /* ═══ HEADER ═══ */
   .header {
-    background: linear-gradient(135deg, var(--gold) 0%, var(--fire) 50%, var(--magma) 100%);
+    background: linear-gradient(135deg, #0a0a0f 0%, #1a0505 50%, #2a0a0a 100%);
     padding: 32px 20px 28px;
     text-align: center;
     position: relative;
@@ -738,7 +738,7 @@
 
   /* ═══ DYNAMIC HEADER ═══ */
   #page-header.normal-header {
-    background: linear-gradient(135deg, var(--gold) 0%, var(--fire) 50%, var(--magma) 100%);
+    background: linear-gradient(135deg, #0a0a0f 0%, #1a0505 50%, #2a0a0a 100%);
     padding: 32px 20px 28px;
     text-align: center;
     position: relative;
@@ -747,14 +747,7 @@
   }
 
   #page-header.normal-header::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
-    animation: shimmer 8s ease-in-out infinite;
+    display: none;
   }
 
   #page-header.characters-header {
