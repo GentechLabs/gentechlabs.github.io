@@ -2,11 +2,23 @@
 
 > **⚠️ SOURCE OF TRUTH: `/root/vaults/gentech/scripts/build_queue.json` v3.0 (2026-07-09) — NOW LIVE ✅**
 > Forge reads `build_queue.json` — items with `assigned_to: forge` and `status: pending` are active queue.
-> Built items: Agent Kit v0.3.0 shipped, plugin system active, 2 websites updated.
+> Built items: Agent Kit v0.3.0 shipped, plugin system active, 2 websites updated, Algorand x402 plugin built.
 
 ---
 
 ## 🔥 URGENT (Deadlines This Month)
+
+### 29. Algorand Global x402 Challenge — Mainnet Deployment
+**Status**: Plugin built — Jordan deploys on Mainnet tonight
+**Prize**: $27K 1st, 500K ALGO top 20
+**Deadline**: Submit late Sept, leaderboard starts mid-July
+**Assigned to**: Jordan
+**Steps**:
+1. [ ] Join Algorand challenge Discord — authenticate with GoPlausible
+2. [ ] Switch Agent Kit plugin from localnet to Mainnet
+3. [ ] Drive volume — announce on X, Discord, Telegram
+4. [ ] Submit project by late September
+5. [ ] Top 50 by usage → reviewed → top 5 finalists at Devcon 8 India
 
 ### 17. Renaiss Tech Hackathon S1 — $4K USDT Prize Pool
 **Status**: Just added — DEADLINE JUL 11 (6 days)
