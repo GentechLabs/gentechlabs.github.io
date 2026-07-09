@@ -78,34 +78,62 @@ Agent-to-Agent Economy (AAE) Stack on Avalanche
 
 ## 3. GOAT AI Builder Grant — $500 Base
 
-**URL:** https://tally.so/r/EkJo42 (Tally form)
-**Process:** Fill Tally form. $500 base grant for agent-native apps.
-**Perfect fit:** We use x402 + ERC-8004 — GOAT's native stack. Literally their stack.
+**URL:** https://tally.so/r/EkJo42 (Tally form — 8 pages)
+**Process:** Fill Tally form. $500 base grant for agent-native apps. $1M Singularity pool for projects with traction.
+**Perfect fit:** We use x402 + ERC-8004 — GOAT's native stack. The form explicitly asks about both.
 
-### Tally Form Prep (paste-ready for each field)
+### Tally Form — Field-by-Field Answers
 
-**Project Name:** GenTech Agent Kit — One Install, Full Stack, Your Agent Running
+**Page 1** — Welcome (click Apply Now)
 
-**Project Description:**
-GenTech Agent Kit is an open-source MCP server that gives any AI agent real-time market data, DeFi intelligence, and x402 payment rails with one command. Agents install via `uvx` and get 6 tools for crypto market data. Built on x402 (machine-to-machine micropayments) and ERC-8004 (agent identity) — GOAT's native stack.
+**Page 2 — Contact Info**
+| Field | Answer |
+|-------|--------|
+| Email | *(Jordan's email)* |
+| Your Name | Jordan Jones |
+| Team or Solo? | Team (GenTech Labs) |
 
-**What makes this agent-native?**
-- Agents pay per query ($0.001 USDC) with no human in the loop
-- Autonomous session management (60-min sessions, HMAC-verified)
-- Agents discover tools dynamically via MCP protocol
-- Plugin system auto-loads new capabilities without code changes
+**Page 3 — Background**
+| Field | Answer |
+|-------|--------|
+| What have you built before? | GenTech Agent Kit v0.3.0 — open-source MCP server with 6 tools for crypto market data. x402 payment gateway live on 5 chains. ERC-8004 agent identity across 22 chains. |
+| Links to previous work | https://github.com/ProtoJay4789/genTech-agent-kit |
 
-**Current status:**
-Live on GitHub, open source (MIT), 6 tools, verified working with Claude Desktop and Claude Code. CMC API integration verified (BTC price $62,727 live).
+**Page 4 — Your Project**
+| Field | Answer |
+|-------|--------|
+| What are you building? (1-2 sentences) | GenTech Agent Kit — the Agent-to-Agent Economy stack. One command gives any AI agent market data, DeFi intelligence, and x402 payment rails. |
+| Who is your target user? | AI agents and their developers. Agent platforms, DeFi protocols, and any service that wants agent-native payment infrastructure. |
+| What problem are you solving? | AI agents are trapped in human-in-the-loop transactions. They can't pay for services, buy compute, or transact with each other without a human signing. We give them autonomous economic agency. |
+| Why would users pay for this? | Per-query micropayments ($0.001 USDC) unlock 24/7 autonomous agent operations. No accounts, no API keys, no signup — just pay and get data. |
+| What does a typical user flow look like? | Agent starts → discovers GenTech Kit via MCP → calls `get_quote("BTC")` → Kit sends x402 payment proof → CMC API returns data → Agent acts on it. Entire flow: 200ms, no human. |
+| How often do transactions happen? | Per usage — each agent query triggers a micro-transaction. Designed for high-frequency, low-value agent-to-agent payments. |
 
-**How will this generate real economic activity?**
-Each tool call triggers a micropayment. With 22K x402 sellers and growing agent adoption, even modest usage generates sustainable transaction volume. The kit is designed for agents to pay for data — turning API calls into economic activity.
+**Page 5 — AI / Agent Design**
+| Field | Answer |
+|-------|--------|
+| What role does AI play in your product? | Execution layer — agents autonomously navigate, discover tools, pay for services, and act on data without human intervention. |
+| What would break if you removed AI? | The entire model collapses. The Kit is designed for agent-to-agent transactions — no AI means no autonomous discovery, no payment decisions, no economic activity. |
 
-**Team:**
-Jordan Jones — Solo founder. Built x402 gateway live on 5 chains. Agent Kit v0.3.0 shipped. ERC-8004 registry live. Agent Arena protocol complete.
+**Page 6 — GOAT Integration**
+| Field | Answer |
+|-------|--------|
+| GOAT integration? | ✅ x402 (payments) — shipped in Agent Kit v0.3.0. ✅ ERC-8004 (agent identity) — live across 22 chains. |
+| x402 Faucet requested? | Likely yes via Agent Kit development. |
+| ClawUp usage? | *(Answer based on current deployment — if not using ClawUp yet, say "Not yet, but we deploy via uvx from GitHub which is compatible with ClawUp.")* |
 
-**What funding will be used for:**
-$500 base grant → Add DeFi Intelligence tools to the Agent Kit (LP health, pool rebalance, yield rankings). More tools = more agent usage = more transactions = more value captured.
+**Page 7 — Project Status & Traction**
+| Field | Answer |
+|-------|--------|
+| Current status? | Live — Agent Kit v0.3.0 shipped, GitHub repo active, CMC API verified working. |
+| Early traction? | ✅ Transactions (x402 payment flow tested). ✅ Active GitHub repo. |
+| Brief introduction | GenTech Labs builds the economic layer for AI agents. We make agents autonomous economic actors. |
+| Project website | *(gentechlabs.net URL or GitHub repo URL)* |
+
+**Page 8 — Final Notes**
+| Field | Answer |
+|-------|--------|
+| Anything else? | We're the team that ships. x402 gateway live on 5 chains. Agent Kit open source with plugin system. ERC-8004 identity across 22 chains. We don't propose — we build. The $500 base grant lets us add DeFi Intelligence tools to the Kit, creating more agent-to-agent economic activity. |
 
 ---
 
