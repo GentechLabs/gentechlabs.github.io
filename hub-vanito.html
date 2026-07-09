@@ -1008,7 +1008,10 @@
     <!-- KAGE -->
     <div class="card card-kage" style="padding:16px; margin-bottom:16px;">
       <div style="display:flex; gap:12px;">
-        <img src="music/vanito/kage-yami-no-naka-de.png" style="width:120px; height:120px; object-fit:cover; border-radius:8px; border:2px solid #cc2222; box-shadow: 0 0 12px rgba(200,30,30,0.2);">
+        <div style="position:relative; cursor:pointer;" onclick="playSong('kage')">
+          <img src="music/vanito/kage-yami-no-naka-de.png" style="width:120px; height:120px; object-fit:cover; border-radius:8px; border:2px solid #cc2222; box-shadow: 0 0 12px rgba(200,30,30,0.2); display:block;">
+          <div style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); background:rgba(0,0,0,0.6); border-radius:50%; width:40px; height:40px; display:flex; align-items:center; justify-content:center; font-size:1.2rem; opacity:0.8;">▶️</div>
+        </div>
         <div style="flex:1;">
           <div class="char-name-kage">KAGE</div>
           <div class="char-subtitle">影 — Shadow</div>
@@ -1031,7 +1034,10 @@
     <!-- HIKARI -->
     <div class="card card-hikari" style="padding:16px; margin-bottom:16px;">
       <div style="display:flex; gap:12px;">
-        <img src="music/vanito/hikari-kizuna-no-chikara.png" style="width:120px; height:120px; object-fit:cover; border-radius:8px; border:2px solid #cc3333; box-shadow: 0 0 12px rgba(200,50,50,0.2);">
+        <div style="position:relative; cursor:pointer;" onclick="playSong('hikari')">
+          <img src="music/vanito/hikari-kizuna-no-chikara.png" style="width:120px; height:120px; object-fit:cover; border-radius:8px; border:2px solid #cc3333; box-shadow: 0 0 12px rgba(200,50,50,0.2); display:block;">
+          <div style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); background:rgba(0,0,0,0.6); border-radius:50%; width:40px; height:40px; display:flex; align-items:center; justify-content:center; font-size:1.2rem; opacity:0.8;">▶️</div>
+        </div>
         <div style="flex:1;">
           <div class="char-name-hikari">HIKARI</div>
           <div class="char-subtitle">光 — Light</div>
@@ -1052,8 +1058,8 @@
     </div>
 
     <!-- TOGETHER -->
-    <div class="card card-together" style="padding:16px; text-align:center;">
-      <div style="font-size:1rem; font-weight:700; color:#cc3333; letter-spacing:1px;">KAGE × HIKARI</div>
+    <div class="card card-together" style="padding:16px; text-align:center; cursor:pointer;" onclick="playSong('together')">
+      <div style="font-size:1rem; font-weight:700; color:#cc3333; letter-spacing:1px;">KAGE × HIKARI <span style="font-size:0.8rem; color:#888;">▶️</span></div>
       <div style="font-size:0.8rem; color:#777; margin-top:4px; font-style:italic;">Shadow & Light — Together Under the Rising Sun</div>
       <div class="char-bio" style="margin-top:12px; text-align:left;">
         <strong>How They Met:</strong> A dimly lit live house in Shimokitazawa. KAGE was screaming his heart out to a crowd of maybe 12 people. Half walked out. HIKARI was in the back, arms crossed. After the set, she walked up: <em>"You're angry. I like it. But you need someone to carry the melody so the screams hit harder."</em> He handed her a crumpled piece of paper. She read it. <em>"Meet me tomorrow."</em>
@@ -1150,6 +1156,21 @@
     btn.textContent = '✓ Saved';
     btn.style.color = 'var(--green)';
     setTimeout(() => { btn.textContent = originalText; btn.style.color = ''; }, 1500);
+  }
+
+  // Play song on character tap
+  let currentAudio = null;
+  function playSong(character) {
+    if (currentAudio) { currentAudio.pause(); currentAudio = null; }
+    const songs = {
+      kage: 'music/vanito/fight-forever-never-quit.mp3',
+      hikari: 'music/vanito/mirai-e-hashire.mp3',
+      together: 'music/vanito/in-the-darkness-we-rise.mp3'
+    };
+    if (!songs[character]) return;
+    currentAudio = new Audio(songs[character]);
+    currentAudio.play().catch(() => {});
+    currentAudio.onended = () => { currentAudio = null; };
   }
 
   async function loadMusic() {
