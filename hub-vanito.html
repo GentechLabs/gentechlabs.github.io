@@ -643,6 +643,98 @@
 
   .settings-save:hover { background: #d4b85c; }
 
+  /* ═══ CHARACTERS THEME ═══ */
+  #tab-characters {
+    background: #0d0d0d;
+    border-radius: 12px;
+    padding: 16px;
+    margin-top: -8px;
+  }
+
+  #tab-characters .card {
+    background: linear-gradient(145deg, #1a0a0a 0%, #0d0d0d 100%);
+    border: 1px solid #3d1a1a;
+    border-radius: 12px;
+  }
+
+  #tab-characters .card-kage {
+    border-left: 3px solid #cc2222;
+    box-shadow: 0 0 15px rgba(200, 30, 30, 0.1);
+  }
+
+  #tab-characters .card-hikari {
+    border-left: 3px solid #d4a530;
+    box-shadow: 0 0 15px rgba(212, 165, 48, 0.1);
+  }
+
+  #tab-characters .card-together {
+    border: 1px solid #5d2a0a;
+    background: linear-gradient(180deg, #1a0a0a 0%, #0d0805 100%);
+    box-shadow: 0 0 20px rgba(200, 80, 20, 0.08);
+  }
+
+  .char-tag {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+
+  .char-tag.red { background: #cc2222; color: #fff; }
+  .char-tag.gold { background: #d4a530; color: #000; }
+  .char-tag.dark { background: #1a1a1a; color: #aaa; border: 1px solid #333; }
+  .char-tag.fire { background: #cc4400; color: #fff; }
+
+  .char-name-kage {
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: #e83030;
+    text-shadow: 0 0 10px rgba(232, 48, 48, 0.3);
+    letter-spacing: 2px;
+  }
+
+  .char-name-hikari {
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: #e8c840;
+    text-shadow: 0 0 10px rgba(232, 200, 64, 0.3);
+    letter-spacing: 2px;
+  }
+
+  .char-subtitle {
+    font-size: 0.8rem;
+    color: #666;
+    font-style: italic;
+  }
+
+  .char-bio {
+    margin-top: 8px;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: #ccc;
+  }
+
+  .char-bio strong {
+    color: #e0e0e0;
+  }
+
+  #tab-characters .section-title {
+    color: #e8c840;
+    text-shadow: 0 0 20px rgba(232, 200, 64, 0.2);
+  }
+
+  .char-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
   /* ═══ UNRELEASED ═══ */
   .unreleased-list {
     display: flex;
@@ -867,19 +959,19 @@
   <div id="tab-characters" class="tab-content">
 
     <!-- Hero Banner -->
-    <img src="music/vanito/kage-hikari-album-cover.png" style="width:100%; border-radius:12px; margin-bottom:16px; border:2px solid var(--fire);">
+    <img src="music/vanito/kage-hikari-album-cover.png" style="width:100%; border-radius:12px; margin-bottom:16px; border:2px solid #5d2a0a; box-shadow: 0 0 25px rgba(200,80,20,0.15);">
 
     <div class="section-title" style="margin-top:0;">🎭 KAGE × HIKARI</div>
-    <div style="font-size:0.85rem; color:var(--dim); margin-bottom:16px; text-align:center;">Collab duo — screaming male + melodic female · Album: <strong style="color:var(--fire);">KAGEKŌ</strong></div>
+    <div style="font-size:0.85rem; color:#888; margin-bottom:16px; text-align:center;">Collab duo — screaming male + melodic female · <span style="color:#d4a530; font-weight:600;">Album: KAGEKŌ</span></div>
 
     <!-- KAGE -->
-    <div class="card" style="padding:16px; margin-bottom:16px;">
+    <div class="card card-kage" style="padding:16px; margin-bottom:16px;">
       <div style="display:flex; gap:12px;">
-        <img src="music/vanito/kage-yami-no-naka-de.jpg" style="width:120px; height:120px; object-fit:cover; border-radius:8px; border:2px solid var(--red);">
+        <img src="music/vanito/kage-yami-no-naka-de.jpg" style="width:120px; height:120px; object-fit:cover; border-radius:8px; border:2px solid #cc2222; box-shadow: 0 0 12px rgba(200,30,30,0.2);">
         <div style="flex:1;">
-          <div style="font-size:1.2rem; font-weight:700; color:var(--red);">KAGE</div>
-          <div style="font-size:0.8rem; color:var(--dim);">影 — Shadow</div>
-          <div style="margin-top:8px; font-size:0.85rem; line-height:1.5;">
+          <div class="char-name-kage">KAGE</div>
+          <div class="char-subtitle">影 — Shadow</div>
+          <div class="char-bio">
             <strong>Origin:</strong> Tokyo's underground streets. No family, no name — just a kid learning to survive in the alleys beneath the train lines. Found an old guitar at 16 and taught himself to scream because nobody was listening anyway.
             <br><br>
             <strong>Blood Moon Night:</strong> Jumped by a crew in Shinjuku, outnumbered and bleeding. Looked up, saw the moon turn red, and fought them all off with nothing but fury. Walked away with blood on his coat and a song in his head — <em>Yami no Naka De</em> was born.
@@ -887,22 +979,22 @@
             <strong>Personality:</strong> Silent outside, storm inside. Writes alone in a tiny apartment with a single red bulb. Screaming is easier than talking.
           </div>
           <div style="margin-top:8px; display:flex; gap:4px; flex-wrap:wrap;">
-            <span style="background:var(--red); color:#fff; padding:2px 8px; border-radius:4px; font-size:0.7rem;">Screaming</span>
-            <span style="background:var(--border); color:var(--text); padding:2px 8px; border-radius:4px; font-size:0.7rem;">Post-Hardcore</span>
-            <span style="background:var(--border); color:var(--text); padding:2px 8px; border-radius:4px; font-size:0.7rem;">Lone Wolf</span>
+            <span class="char-tag red">Screaming</span>
+            <span class="char-tag dark">Post-Hardcore</span>
+            <span class="char-tag dark">Lone Wolf</span>
           </div>
         </div>
       </div>
     </div>
 
     <!-- HIKARI -->
-    <div class="card" style="padding:16px; margin-bottom:16px;">
+    <div class="card card-hikari" style="padding:16px; margin-bottom:16px;">
       <div style="display:flex; gap:12px;">
-        <img src="music/vanito/hikari-kizuna-no-chikara.jpg" style="width:120px; height:120px; object-fit:cover; border-radius:8px; border:2px solid var(--gold);">
+        <img src="music/vanito/hikari-kizuna-no-chikara.jpg" style="width:120px; height:120px; object-fit:cover; border-radius:8px; border:2px solid #d4a530; box-shadow: 0 0 12px rgba(212,165,48,0.2);">
         <div style="flex:1;">
-          <div style="font-size:1.2rem; font-weight:700; color:var(--gold);">HIKARI</div>
-          <div style="font-size:0.8rem; color:var(--dim);">光 — Light</div>
-          <div style="margin-top:8px; font-size:0.85rem; line-height:1.5;">
+          <div class="char-name-hikari">HIKARI</div>
+          <div class="char-subtitle">光 — Light</div>
+          <div class="char-bio">
             <strong>Origin:</strong> Born in a small coastal town south of Tokyo. Her family ran a ramen shop. When her father got sick, music became her escape — she'd climb to the roof and sing to the stars, promising to be strong enough to protect the people she loves.
             <br><br>
             <strong>The Breaking Point:</strong> Her father passed when she was 16. She moved to Tokyo with nothing but a bag and a dream. Started singing at live houses in Shimokitazawa — her voice so raw that people stopped mid-conversation to listen.
@@ -910,28 +1002,27 @@
             <strong>Personality:</strong> Fierce outside, soft at the core. Fights for everyone she loves. Her motto: <em>"Kizuna wa tsuyoi — bonds are stronger than any darkness."</em>
           </div>
           <div style="margin-top:8px; display:flex; gap:4px; flex-wrap:wrap;">
-            <span style="background:var(--gold); color:#000; padding:2px 8px; border-radius:4px; font-size:0.7rem;">Melodic</span>
-            <span style="background:var(--border); color:var(--text); padding:2px 8px; border-radius:4px; font-size:0.7rem;">J-Rock</span>
-            <span style="background:var(--border); color:var(--text); padding:2px 8px; border-radius:4px; font-size:0.7rem;">Battle Anthem</span>
+            <span class="char-tag gold">Melodic</span>
+            <span class="char-tag dark">J-Rock</span>
+            <span class="char-tag dark">Battle Anthem</span>
           </div>
         </div>
       </div>
     </div>
 
     <!-- TOGETHER -->
-    <div class="card" style="padding:16px; text-align:center;">
-      <img src="music/vanito/kage-hikari-album-cover.png" style="width:100%; max-height:250px; object-fit:cover; border-radius:8px; border:2px solid var(--fire); margin-bottom:12px;">
-      <div style="font-size:1rem; font-weight:700; color:var(--fire);">KAGE × HIKARI</div>
-      <div style="font-size:0.8rem; color:var(--dim); margin-top:4px;">Shadow & Light — Together Under the Rising Sun</div>
-      <div style="margin-top:8px; font-size:0.85rem; line-height:1.5; text-align:left;">
+    <div class="card card-together" style="padding:16px; text-align:center;">
+      <div style="font-size:1rem; font-weight:700; color:#e8a830; text-shadow: 0 0 10px rgba(232,168,48,0.2); letter-spacing:1px;">KAGE × HIKARI</div>
+      <div style="font-size:0.8rem; color:#777; margin-top:4px; font-style:italic;">Shadow & Light — Together Under the Rising Sun</div>
+      <div class="char-bio" style="margin-top:12px; text-align:left;">
         <strong>How They Met:</strong> A dimly lit live house in Shimokitazawa. KAGE was screaming his heart out to a crowd of maybe 12 people. Half walked out. HIKARI was in the back, arms crossed. After the set, she walked up: <em>"You're angry. I like it. But you need someone to carry the melody so the screams hit harder."</em> He handed her a crumpled piece of paper. She read it. <em>"Meet me tomorrow."</em>
         <br><br>
-        Their first song together was <strong>RISING SUN.</strong> Now they're working on their debut album <strong>KAGEKŌ</strong> — Shadow & Light, two opposites that complete each other.
+        Their first song together was <strong style="color:#e8a830;">RISING SUN.</strong> Now they're working on their debut album <span style="color:#d4a530; font-weight:600;">KAGEKŌ</span> — Shadow & Light, two opposites that complete each other.
       </div>
-      <div style="margin-top:8px; display:flex; gap:4px; justify-content:center; flex-wrap:wrap;">
-        <span style="background:var(--fire); color:#fff; padding:2px 8px; border-radius:4px; font-size:0.7rem;">Duet</span>
-        <span style="background:var(--purple); color:#fff; padding:2px 8px; border-radius:4px; font-size:0.7rem;">Album: KAGEKŌ</span>
-        <span style="background:var(--border); color:var(--text); padding:2px 8px; border-radius:4px; font-size:0.7rem;">Collab</span>
+      <div style="margin-top:12px; display:flex; gap:4px; justify-content:center; flex-wrap:wrap;">
+        <span class="char-badge" style="background:#5d1a0a; color:#ff8844; border:1px solid #8d2a0a;">DUET</span>
+        <span class="char-badge" style="background:#1a0a2d; color:#bb88ff; border:1px solid #3d1a5d;">ALBUM: KAGEKŌ</span>
+        <span class="char-badge" style="background:#1a1a1a; color:#aaa; border:1px solid #333;">COLLAB</span>
       </div>
     </div>
 
