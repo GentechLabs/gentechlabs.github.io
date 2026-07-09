@@ -2,36 +2,51 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>⚔️ Vanito's Hub — GenTech</title>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0a0a0f;
-    --panel: #12121a;
-    --border: #1e1e2e;
-    --gold: #c9a84c;
-    --fire: #ff6b35;
-    --magma: #cc4400;
-    --text: #e0e0e0;
-    --dim: #666;
-    --card: #16161f;
-    --card-hover: #1c1c28;
-    --green: #4caf50;
-    --blue: #2196f3;
-    --red: #ef5350;
-    --purple: #ab47bc;
+    --crimson: #8b0000;
+    --crimson-light: #cc1111;
+    --crimson-glow: rgba(139,0,0,0.4);
+    --bone: #f5f0e8;
+    --bone-dim: #c8bfb0;
+    --charcoal: #0d0d0d;
+    --charcoal-light: #1a1a1a;
+    --charcoal-panel: #141414;
+    --ember: #d4a017;
+    --ember-glow: rgba(212,160,23,0.3);
+    --shadow-dark: rgba(0,0,0,0.8);
+    --text: var(--bone);
+    --text-dim: #8a7a6a;
+    --border: #2a1a1a;
+    --card-bg: rgba(20,5,5,0.85);
+    --card-hover: rgba(30,10,10,0.9);
+    --nav-bg: rgba(10,0,0,0.95);
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
-    background: var(--bg);
+    background: var(--charcoal);
     color: var(--text);
     font-family: 'Inter', -apple-system, sans-serif;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  /* ═══ RAIN LAYER ═══ */
+  #rain-canvas {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 9999;
   }
 
   .container {
@@ -39,15 +54,18 @@
     margin: 0 auto;
     padding: 0 16px 80px;
     width: 100%;
+    position: relative;
+    z-index: 1;
   }
 
   /* ═══ HEADER ═══ */
   .header {
-    background: linear-gradient(135deg, var(--gold) 0%, var(--fire) 50%, var(--magma) 100%);
+    background: linear-gradient(180deg, #1a0000 0%, var(--charcoal) 100%);
     padding: 32px 20px 28px;
     text-align: center;
     position: relative;
     overflow: hidden;
+    border-bottom: 1px solid var(--crimson);
   }
 
   .header::before {
@@ -57,21 +75,21 @@
     left: -50%;
     width: 200%;
     height: 200%;
-    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
-    animation: shimmer 8s ease-in-out infinite;
+    background: radial-gradient(ellipse at center, var(--crimson-glow) 0%, transparent 60%);
+    animation: crimsonPulse 6s ease-in-out infinite;
   }
 
-  @keyframes shimmer {
-    0%, 100% { transform: translateX(-30%) translateY(-30%); }
-    50% { transform: translateX(30%) translateY(30%); }
+  @keyframes crimsonPulse {
+    0%, 100% { opacity: 0.3; transform: scale(1); }
+    50% { opacity: 0.6; transform: scale(1.1); }
   }
 
   .header h1 {
     font-family: 'Cinzel', serif;
     font-weight: 700;
     font-size: 1.8rem;
-    color: #fff;
-    text-shadow: 0 2px 12px rgba(0,0,0,0.4);
+    color: var(--bone);
+    text-shadow: 0 0 20px var(--crimson-glow), 0 2px 12px var(--shadow-dark);
     margin-bottom: 6px;
     position: relative;
     z-index: 1;
@@ -79,30 +97,31 @@
 
   .header .subtitle {
     font-size: 0.9rem;
-    color: rgba(255,255,255,0.85);
+    color: var(--bone-dim);
     font-weight: 500;
     position: relative;
     z-index: 1;
+    text-shadow: 0 0 10px var(--crimson-glow);
   }
 
   .settings-btn {
     position: absolute;
     top: 16px;
     right: 16px;
-    background: rgba(255,255,255,0.15);
-    border: none;
+    background: rgba(139,0,0,0.3);
+    border: 1px solid var(--crimson);
     border-radius: 50%;
     width: 36px;
     height: 36px;
     font-size: 1.1em;
     cursor: pointer;
-    color: #fff;
+    color: var(--bone);
     backdrop-filter: blur(8px);
     z-index: 2;
-    transition: background 0.2s;
+    transition: all 0.2s;
   }
 
-  .settings-btn:hover { background: rgba(255,255,255,0.25); }
+  .settings-btn:hover { background: rgba(139,0,0,0.5); box-shadow: 0 0 12px var(--crimson-glow); }
 
   /* ═══ TABS ═══ */
   .tab-content {
@@ -120,7 +139,7 @@
 
   /* ═══ CARDS ═══ */
   .card {
-    background: var(--card);
+    background: var(--card-bg);
     border: 1px solid var(--border);
     border-radius: 14px;
     padding: 18px;
@@ -128,13 +147,14 @@
     transition: all 0.2s ease;
     position: relative;
     overflow: hidden;
+    backdrop-filter: blur(4px);
   }
 
   .card:hover {
     background: var(--card-hover);
-    border-color: rgba(201,168,76,0.3);
+    border-color: var(--crimson);
     transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+    box-shadow: 0 8px 24px var(--shadow-dark), 0 0 12px var(--crimson-glow);
   }
 
   .card-header {
@@ -148,12 +168,12 @@
     font-family: 'Cinzel', serif;
     font-weight: 600;
     font-size: 1rem;
-    color: var(--gold);
+    color: var(--ember);
   }
 
   .card-desc {
     font-size: 0.85rem;
-    color: var(--dim);
+    color: var(--text-dim);
     line-height: 1.5;
   }
 
@@ -168,11 +188,9 @@
     letter-spacing: 0.5px;
   }
 
-  .tag-gold { background: rgba(201,168,76,0.15); color: var(--gold); border: 1px solid rgba(201,168,76,0.3); }
-  .tag-fire { background: rgba(255,107,53,0.15); color: var(--fire); border: 1px solid rgba(255,107,53,0.3); }
-  .tag-blue { background: rgba(33,150,243,0.15); color: var(--blue); border: 1px solid rgba(33,150,243,0.3); }
-  .tag-green { background: rgba(76,175,80,0.15); color: var(--green); border: 1px solid rgba(76,175,80,0.3); }
-  .tag-purple { background: rgba(171,71,188,0.15); color: var(--purple); border: 1px solid rgba(171,71,188,0.3); }
+  .tag-crimson { background: rgba(139,0,0,0.2); color: var(--crimson-light); border: 1px solid rgba(139,0,0,0.3); }
+  .tag-ember { background: rgba(212,160,23,0.15); color: var(--ember); border: 1px solid rgba(212,160,23,0.3); }
+  .tag-bone { background: rgba(245,240,232,0.1); color: var(--bone-dim); border: 1px solid rgba(245,240,232,0.2); }
 
   /* ═══ STATS ═══ */
   .stats-row {
@@ -183,7 +201,7 @@
   }
 
   .stat-card {
-    background: var(--panel);
+    background: var(--card-bg);
     border: 1px solid var(--border);
     border-radius: 12px;
     padding: 16px 10px;
@@ -192,21 +210,22 @@
   }
 
   .stat-card:hover {
-    border-color: var(--gold);
+    border-color: var(--crimson);
     transform: scale(1.02);
+    box-shadow: 0 0 8px var(--crimson-glow);
   }
 
   .stat-value {
     font-family: 'Cinzel', serif;
     font-size: 1.5rem;
     font-weight: 700;
-    color: var(--gold);
+    color: var(--ember);
     margin-bottom: 4px;
   }
 
   .stat-label {
     font-size: 0.7rem;
-    color: var(--dim);
+    color: var(--text-dim);
     text-transform: uppercase;
     letter-spacing: 0.5px;
   }
@@ -216,7 +235,7 @@
     display: flex;
     align-items: center;
     gap: 16px;
-    background: var(--panel);
+    background: var(--card-bg);
     border: 1px solid var(--border);
     border-radius: 14px;
     padding: 18px;
@@ -227,25 +246,26 @@
     width: 56px;
     height: 56px;
     border-radius: 50%;
-    background: linear-gradient(135deg, var(--gold), var(--fire));
+    background: linear-gradient(135deg, var(--crimson), #330000);
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 1.5rem;
     flex-shrink: 0;
-    box-shadow: 0 4px 16px rgba(201,168,76,0.3);
+    box-shadow: 0 4px 16px var(--crimson-glow);
+    border: 1px solid var(--crimson);
   }
 
   .avatar-info .name {
     font-family: 'Cinzel', serif;
     font-weight: 600;
     font-size: 1rem;
-    color: var(--text);
+    color: var(--bone);
   }
 
   .avatar-info .role {
     font-size: 0.8rem;
-    color: var(--gold);
+    color: var(--ember);
   }
 
   /* ═══ SECTION TITLE ═══ */
@@ -253,7 +273,7 @@
     font-family: 'Cinzel', serif;
     font-weight: 600;
     font-size: 0.85rem;
-    color: var(--dim);
+    color: var(--text-dim);
     text-transform: uppercase;
     letter-spacing: 1.5px;
     margin-bottom: 14px;
@@ -267,10 +287,10 @@
     text-align: center;
     padding: 14px;
     margin-top: 14px;
-    background: linear-gradient(135deg, rgba(201,168,76,0.1), rgba(255,107,53,0.1));
-    border: 1px solid rgba(201,168,76,0.3);
+    background: linear-gradient(135deg, rgba(139,0,0,0.2), rgba(20,0,0,0.3));
+    border: 1px solid var(--crimson);
     border-radius: 12px;
-    color: var(--gold);
+    color: var(--bone);
     text-decoration: none;
     font-weight: 600;
     font-size: 0.9rem;
@@ -278,9 +298,9 @@
   }
 
   .link-btn:hover {
-    background: linear-gradient(135deg, rgba(201,168,76,0.2), rgba(255,107,53,0.2));
+    background: linear-gradient(135deg, rgba(139,0,0,0.4), rgba(30,0,0,0.5));
     transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(201,168,76,0.2);
+    box-shadow: 0 4px 12px var(--crimson-glow);
   }
 
   /* ═══ DEAL CARD ═══ */
@@ -292,82 +312,23 @@
   }
 
   .deal-info { flex: 1; }
-
-  .deal-title {
-    font-weight: 600;
-    font-size: 0.95rem;
-    margin-bottom: 4px;
-  }
-
-  .deal-meta {
-    font-size: 0.8rem;
-    color: var(--dim);
-  }
-
-  .deal-price {
-    text-align: right;
-  }
-
-  .price-now {
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: var(--green);
-  }
-
-  .price-was {
-    font-size: 0.85rem;
-    color: var(--dim);
-    text-decoration: line-through;
-  }
-
-  .discount-badge {
-    display: inline-block;
-    padding: 3px 10px;
-    border-radius: 6px;
-    font-size: 0.75rem;
-    font-weight: 700;
-    margin-left: 8px;
-  }
-
-  .discount-hot { background: var(--red); color: #fff; }
-  .discount-warm { background: var(--fire); color: #fff; }
-  .discount-cool { background: var(--blue); color: #fff; }
+  .deal-title { font-weight: 600; font-size: 0.95rem; margin-bottom: 4px; color: var(--bone); }
+  .deal-meta { font-size: 0.8rem; color: var(--text-dim); }
+  .deal-price { text-align: right; }
+  .price-now { font-size: 1.2rem; font-weight: 700; color: var(--crimson-light); }
+  .price-was { font-size: 0.85rem; color: var(--text-dim); text-decoration: line-through; }
+  .discount-badge { display: inline-block; padding: 3px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 700; margin-left: 8px; }
+  .discount-hot { background: var(--crimson); color: var(--bone); }
+  .discount-warm { background: #660000; color: var(--bone); }
 
   /* ═══ TRAVEL CARD ═══ */
-  .travel-card {
-    border-left: 3px solid var(--gold);
-    padding-left: 18px;
-  }
-
-  .travel-dates {
-    font-size: 0.8rem;
-    color: var(--dim);
-    margin-bottom: 6px;
-  }
-
-  .travel-name {
-    font-family: 'Cinzel', serif;
-    font-size: 0.95rem;
-    margin-bottom: 4px;
-  }
-
-  .travel-companion {
-    font-size: 0.8rem;
-    color: var(--fire);
-    margin-bottom: 8px;
-  }
-
-  .status-pill {
-    display: inline-block;
-    padding: 3px 10px;
-    border-radius: 12px;
-    font-size: 0.7rem;
-    font-weight: 600;
-    text-transform: uppercase;
-  }
-
-  .pill-confirmed { background: var(--green); color: #fff; }
-  .pill-planning { background: var(--fire); color: #fff; }
+  .travel-card { border-left: 3px solid var(--crimson); padding-left: 18px; }
+  .travel-dates { font-size: 0.8rem; color: var(--text-dim); margin-bottom: 6px; }
+  .travel-name { font-family: 'Cinzel', serif; font-size: 0.95rem; margin-bottom: 4px; }
+  .travel-companion { font-size: 0.8rem; color: var(--crimson-light); margin-bottom: 8px; }
+  .status-pill { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 0.7rem; font-weight: 600; text-transform: uppercase; }
+  .pill-confirmed { background: rgba(139,0,0,0.3); color: var(--crimson-light); border: 1px solid var(--crimson); }
+  .pill-planning { background: rgba(212,160,23,0.2); color: var(--ember); border: 1px solid rgba(212,160,23,0.3); }
 
   /* ═══ MUSIC CARD ═══ */
   .music-card {
@@ -377,32 +338,18 @@
     padding: 14px 16px;
   }
 
-  .music-icon {
-    font-size: 1.8rem;
-    flex-shrink: 0;
-  }
-
+  .music-icon { font-size: 1.8rem; flex-shrink: 0; }
   .music-info { flex: 1; }
-
-  .music-title {
-    font-weight: 600;
-    font-size: 0.95rem;
-    margin-bottom: 2px;
-    color: var(--text);
-  }
-
-  .music-meta {
-    font-size: 0.8rem;
-    color: var(--dim);
-  }
+  .music-title { font-weight: 600; font-size: 0.95rem; margin-bottom: 2px; color: var(--bone); }
+  .music-meta { font-size: 0.8rem; color: var(--text-dim); }
 
   .music-link {
     display: inline-block;
     padding: 6px 14px;
-    background: linear-gradient(135deg, rgba(201,168,76,0.15), rgba(255,107,53,0.15));
-    border: 1px solid rgba(201,168,76,0.3);
+    background: linear-gradient(135deg, rgba(139,0,0,0.2), rgba(20,0,0,0.3));
+    border: 1px solid var(--crimson);
     border-radius: 8px;
-    color: var(--gold);
+    color: var(--bone);
     text-decoration: none;
     font-size: 0.8rem;
     font-weight: 600;
@@ -410,66 +357,28 @@
   }
 
   .music-link:hover {
-    background: linear-gradient(135deg, rgba(201,168,76,0.25), rgba(255,107,53,0.25));
+    background: linear-gradient(135deg, rgba(139,0,0,0.4), rgba(30,0,0,0.5));
     transform: translateY(-1px);
-  }
-    font-weight: 600;
-    font-size: 1rem;
-    margin-bottom: 6px;
-  }
-
-  .travel-companion {
-    font-size: 0.8rem;
-    color: var(--fire);
-  }
-
-  .status-pill {
-    display: inline-block;
-    padding: 4px 12px;
-    border-radius: 20px;
-    font-size: 0.7rem;
-    font-weight: 600;
-  }
-
-  .pill-confirmed {
-    background: rgba(76,175,80,0.15);
-    color: var(--green);
-    border: 1px solid rgba(76,175,80,0.3);
-  }
-
-  .pill-planning {
-    background: rgba(33,150,243,0.15);
-    color: var(--blue);
-    border: 1px solid rgba(33,150,243,0.3);
+    box-shadow: 0 0 8px var(--crimson-glow);
   }
 
   /* ═══ CHAT PLACEHOLDER ═══ */
   .chat-placeholder {
     text-align: center;
     padding: 40px 24px;
-    background: var(--panel);
+    background: var(--card-bg);
     border: 2px dashed var(--border);
     border-radius: 16px;
   }
 
-  .chat-icon {
-    font-size: 3rem;
-    margin-bottom: 16px;
-  }
-
+  .chat-icon { font-size: 3rem; margin-bottom: 16px; }
   .chat-placeholder h3 {
     font-family: 'Cinzel', serif;
-    color: var(--gold);
+    color: var(--ember);
     margin-bottom: 10px;
     font-size: 1.1rem;
   }
-
-  .chat-placeholder p {
-    font-size: 0.85rem;
-    color: var(--dim);
-    line-height: 1.6;
-    margin-bottom: 16px;
-  }
+  .chat-placeholder p { font-size: 0.85rem; color: var(--text-dim); line-height: 1.6; margin-bottom: 16px; }
 
   .chat-status {
     display: inline-flex;
@@ -479,9 +388,9 @@
     border-radius: 20px;
     font-size: 0.75rem;
     font-weight: 600;
-    background: rgba(255,152,0,0.1);
-    color: #ff9800;
-    border: 1px solid rgba(255,152,0,0.25);
+    background: rgba(139,0,0,0.2);
+    color: var(--crimson-light);
+    border: 1px solid var(--crimson);
     animation: pulse 2s infinite;
   }
 
@@ -498,8 +407,8 @@
     transform: translateX(-50%);
     width: 100%;
     max-width: 480px;
-    background: rgba(10,10,15,0.95);
-    border-top: 1px solid var(--border);
+    background: var(--nav-bg);
+    border-top: 1px solid var(--crimson);
     display: flex;
     justify-content: space-around;
     padding: 10px 0 14px;
@@ -518,7 +427,7 @@
     transition: all 0.2s;
     border: none;
     background: none;
-    color: var(--dim);
+    color: var(--text-dim);
     font-family: inherit;
     font-size: 0.7rem;
     font-weight: 500;
@@ -527,18 +436,19 @@
   .nav-item .icon { font-size: 1.4rem; }
 
   .nav-item.active {
-    color: var(--gold);
-    background: rgba(201,168,76,0.1);
+    color: var(--crimson-light);
+    background: rgba(139,0,0,0.15);
+    text-shadow: 0 0 8px var(--crimson-glow);
   }
 
-  .nav-item:hover { color: var(--gold); }
+  .nav-item:hover { color: var(--crimson-light); }
 
   /* ═══ FOOTER ═══ */
   .footer {
     text-align: center;
     padding: 20px;
     font-size: 0.75rem;
-    color: var(--dim);
+    color: var(--text-dim);
     border-top: 1px solid var(--border);
     margin-top: auto;
   }
@@ -549,7 +459,7 @@
     position: fixed;
     inset: 0;
     z-index: 200;
-    background: rgba(0,0,0,0.7);
+    background: rgba(0,0,0,0.8);
     backdrop-filter: blur(6px);
     align-items: flex-end;
     justify-content: center;
@@ -558,8 +468,8 @@
   .modal-overlay.show { display: flex; }
 
   .modal-content {
-    background: var(--panel);
-    border: 1px solid var(--border);
+    background: var(--charcoal-panel);
+    border: 1px solid var(--crimson);
     border-radius: 20px 20px 0 0;
     padding: 24px;
     width: 100%;
@@ -579,30 +489,20 @@
     margin-bottom: 20px;
   }
 
-  .modal-header h3 {
-    font-size: 1.1rem;
-    color: var(--text);
-  }
-
-  .modal-close {
-    background: none;
-    border: none;
-    color: var(--dim);
-    font-size: 1.3em;
-    cursor: pointer;
-  }
+  .modal-header h3 { font-size: 1.1rem; color: var(--bone); }
+  .modal-close { background: none; border: none; color: var(--text-dim); font-size: 1.3em; cursor: pointer; }
 
   .settings-option {
     display: flex;
     align-items: center;
     gap: 14px;
     padding: 14px;
-    background: var(--card);
+    background: var(--card-bg);
     border: 1px solid var(--border);
     border-radius: 12px;
     cursor: pointer;
     text-align: left;
-    color: var(--text);
+    color: var(--bone);
     font-family: inherit;
     font-size: 0.9em;
     transition: all 0.2s;
@@ -610,57 +510,154 @@
     width: 100%;
   }
 
-  .settings-option:hover {
-    border-color: var(--gold);
-  }
-
-  .settings-option.selected {
-    border-color: var(--gold);
-    background: rgba(201,168,76,0.1);
-  }
-
-  .settings-option.selected::after {
-    content: '✓';
-    margin-left: auto;
-    color: var(--gold);
-    font-weight: 700;
-  }
+  .settings-option:hover { border-color: var(--crimson); }
+  .settings-option.selected { border-color: var(--crimson); background: rgba(139,0,0,0.15); }
+  .settings-option.selected::after { content: '✓'; margin-left: auto; color: var(--crimson-light); font-weight: 700; }
 
   .settings-save {
     width: 100%;
     padding: 14px;
-    background: var(--gold);
+    background: linear-gradient(135deg, var(--crimson), #660000);
     border: none;
     border-radius: 12px;
-    color: #fff;
+    color: var(--bone);
     font-weight: 600;
     font-size: 0.95em;
     cursor: pointer;
     font-family: inherit;
     margin-top: 8px;
-    transition: background 0.2s;
+    transition: all 0.2s;
   }
 
-  .settings-save:hover { background: #d4b85c; }
+  .settings-save:hover { background: linear-gradient(135deg, var(--crimson-light), var(--crimson)); box-shadow: 0 0 12px var(--crimson-glow); }
 
   /* ═══ UNRELEASED ═══ */
-  .unreleased-list {
+  .unreleased-list { display: flex; flex-wrap: wrap; gap: 8px; }
+  .unreleased-chip { background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px; padding: 6px 12px; font-size: 0.8rem; color: var(--text-dim); }
+
+  /* ═══ ARTISTS TAB ═══ */
+  .artist-card {
     display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
+    align-items: center;
+    gap: 16px;
+    padding: 18px;
+    margin-bottom: 12px;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    transition: all 0.2s;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
   }
 
-  .unreleased-chip {
-    background: var(--panel);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 6px 12px;
-    font-size: 0.8rem;
-    color: var(--dim);
+  .artist-card:hover {
+    border-color: var(--crimson);
+    box-shadow: 0 0 16px var(--crimson-glow);
+    transform: translateY(-2px);
+  }
+
+  .artist-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(139,0,0,0.1), transparent);
+    transition: left 0.5s;
+  }
+
+  .artist-card:hover::after { left: 100%; }
+
+  .artist-avatar {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    flex-shrink: 0;
+    border: 2px solid var(--crimson);
+    box-shadow: 0 0 12px var(--crimson-glow);
+  }
+
+  .artist-avatar.kage { background: linear-gradient(135deg, #1a0000, #330000); }
+  .artist-avatar.hikari { background: linear-gradient(135deg, #1a1a00, #332200); }
+  .artist-avatar.together { background: linear-gradient(135deg, #1a0000, #1a1a00); }
+
+  .artist-info { flex: 1; }
+  .artist-name { font-family: 'Cinzel', serif; font-weight: 600; font-size: 1rem; color: var(--bone); margin-bottom: 2px; }
+  .artist-role { font-size: 0.8rem; color: var(--ember); }
+  .artist-desc { font-size: 0.8rem; color: var(--text-dim); margin-top: 4px; line-height: 1.4; }
+
+  .artist-play-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--crimson), #660000);
+    border: 1px solid var(--crimson);
+    color: var(--bone);
+    font-size: 1.2rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    flex-shrink: 0;
+  }
+
+  .artist-play-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 16px var(--crimson-glow);
+  }
+
+  .artist-play-btn.playing {
+    box-shadow: 0 0 20px var(--crimson-glow);
+    animation: btnPulse 1s infinite;
+  }
+
+  @keyframes btnPulse {
+    0%, 100% { box-shadow: 0 0 12px var(--crimson-glow); }
+    50% { box-shadow: 0 0 24px var(--crimson-light); }
+  }
+
+  /* ═══ EMBER PARTICLES ═══ */
+  .ember-container {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 9998;
+  }
+
+  .ember-particle {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: var(--ember);
+    border-radius: 50%;
+    opacity: 0;
+    animation: emberFloat 4s ease-out infinite;
+  }
+
+  @keyframes emberFloat {
+    0% { opacity: 0; transform: translateY(0) scale(1); }
+    20% { opacity: 0.6; }
+    80% { opacity: 0.3; }
+    100% { opacity: 0; transform: translateY(-200px) scale(0); }
   }
 </style>
 </head>
 <body>
+
+<!-- Rain Canvas -->
+<canvas id="rain-canvas"></canvas>
+
+<!-- Ember Particles -->
+<div class="ember-container" id="ember-container"></div>
 
 <!-- Header -->
 <div class="header">
@@ -676,26 +673,30 @@
       <h3>⚙️ Settings</h3>
       <button class="modal-close" onclick="closeSettings()">✕</button>
     </div>
-    <p style="font-size:0.85em; color:var(--dim); margin-bottom:16px;">Choose your default tab.</p>
+    <p style="font-size:0.85em; color:var(--text-dim); margin-bottom:16px;">Choose your default tab.</p>
     <button class="settings-option" data-tab="gaming" onclick="setDefaultTab('gaming')">
       <span style="font-size:1.4em;">🎮</span>
-      <div><strong>Gaming</strong><br><span style="font-size:0.8em; color:var(--dim);">POE2 builds, wishlist</span></div>
+      <div><strong>Gaming</strong><br><span style="font-size:0.8em; color:var(--text-dim);">POE2 builds, wishlist</span></div>
     </button>
     <button class="settings-option" data-tab="profile" onclick="setDefaultTab('profile')">
       <span style="font-size:1.4em;">🛡️</span>
-      <div><strong>Profile</strong><br><span style="font-size:0.8em; color:var(--dim);">Your identity</span></div>
+      <div><strong>Profile</strong><br><span style="font-size:0.8em; color:var(--text-dim);">Your identity</span></div>
     </button>
     <button class="settings-option" data-tab="travel" onclick="setDefaultTab('travel')">
       <span style="font-size:1.4em;">✈️</span>
-      <div><strong>Travel</strong><br><span style="font-size:0.8em; color:var(--dim);">Trips & adventures</span></div>
+      <div><strong>Travel</strong><br><span style="font-size:0.8em; color:var(--text-dim);">Trips & adventures</span></div>
     </button>
     <button class="settings-option" data-tab="music" onclick="setDefaultTab('music')">
       <span style="font-size:1.4em;">🎵</span>
-      <div><strong>Music</strong><br><span style="font-size:0.8em; color:var(--dim);">Song collection</span></div>
+      <div><strong>Music</strong><br><span style="font-size:0.8em; color:var(--text-dim);">Song collection</span></div>
+    </button>
+    <button class="settings-option" data-tab="artists" onclick="setDefaultTab('artists')">
+      <span style="font-size:1.4em;">🎭</span>
+      <div><strong>Artists</strong><br><span style="font-size:0.8em; color:var(--text-dim);">KAGE × HIKARI</span></div>
     </button>
     <button class="settings-option" data-tab="chat" onclick="setDefaultTab('chat')">
       <span style="font-size:1.4em;">💬</span>
-      <div><strong>Chat</strong><br><span style="font-size:0.8em; color:var(--dim);">Talk to Gentech</span></div>
+      <div><strong>Chat</strong><br><span style="font-size:0.8em; color:var(--text-dim);">Talk to Gentech</span></div>
     </button>
     <button class="settings-save" onclick="closeSettings()">Done</button>
   </div>
@@ -776,9 +777,9 @@
 
     <div class="card" style="text-align:center; padding:28px;">
       <div style="font-size:3rem; margin-bottom:12px;">🛡️</div>
-      <div style="font-family:'Cinzel',serif; font-size:1.4rem; font-weight:700; color:var(--gold); margin-bottom:4px;">Vanito Jones</div>
-      <div style="font-size:0.9rem; color:var(--fire); margin-bottom:16px;">GenTech Warrior · POE2 Player</div>
-      <div style="display:flex; justify-content:center; gap:20px; font-size:0.85rem; color:var(--dim);">
+      <div style="font-family:'Cinzel',serif; font-size:1.4rem; font-weight:700; color:var(--ember); margin-bottom:4px;">Vanito Jones</div>
+      <div style="font-size:0.9rem; color:var(--crimson-light); margin-bottom:16px;">GenTech Warrior · POE2 Player</div>
+      <div style="display:flex; justify-content:center; gap:20px; font-size:0.85rem; color:var(--text-dim);">
         <span>🎂 Dec 29</span>
         <span>⚔️ Warrior Main</span>
       </div>
@@ -794,15 +795,15 @@
 
     <div class="stats-row">
       <div class="stat-card">
-        <div class="stat-value" style="color:var(--fire);">Lv.68</div>
+        <div class="stat-value" style="color:var(--crimson-light);">Lv.68</div>
         <div class="stat-label">Max Level</div>
       </div>
       <div class="stat-card">
-        <div class="stat-value" style="color:var(--blue);">Tactician</div>
+        <div class="stat-value" style="color:var(--ember);">Tactician</div>
         <div class="stat-label">Ascendancy</div>
       </div>
       <div class="stat-card">
-        <div class="stat-value" style="color:var(--green);">79</div>
+        <div class="stat-value" style="color:var(--bone-dim);">79</div>
         <div class="stat-label">Games Owned</div>
       </div>
     </div>
@@ -822,7 +823,7 @@
       <div class="card-desc">Theme parks, roller coasters, and family adventures in Orlando, Florida.</div>
     </div>
 
-    <div class="card travel-card" style="border-left-color: var(--fire);">
+    <div class="card travel-card" style="border-left-color: var(--crimson-light);">
       <div class="card-header">
         <span class="card-title">🌴 Philippines — Boracay</span>
         <span class="status-pill pill-planning">Planning</span>
@@ -853,12 +854,48 @@
     <div class="section-title">🎵 My Music</div>
 
     <div id="music-list">
-      <!-- Songs will be added here by Gentech -->
       <div class="card" style="text-align:center; padding:24px;">
         <div style="font-size:2rem; margin-bottom:12px;">🎧</div>
-        <div style="color:var(--dim);">No songs yet!</div>
-        <div style="font-size:0.8rem; color:var(--dim); margin-top:8px;">Share songs with Gentech to add them here.</div>
+        <div style="color:var(--text-dim);">No songs yet!</div>
+        <div style="font-size:0.8rem; color:var(--text-dim); margin-top:8px;">Share songs with Gentech to add them here.</div>
       </div>
+    </div>
+
+  </div>
+
+  <!-- ═══════ ARTISTS TAB ═══════ -->
+  <div id="tab-artists" class="tab-content">
+
+    <div class="section-title">🎭 KAGE × HIKARI</div>
+
+    <div class="artist-card" onclick="playArtist('kage')">
+      <div class="artist-avatar kage">🌑</div>
+      <div class="artist-info">
+        <div class="artist-name">KAGE</div>
+        <div class="artist-role">Shadow · The Dark Half</div>
+        <div class="artist-desc">Fight Forever Never Quit — raw, aggressive, relentless.</div>
+      </div>
+      <button class="artist-play-btn" id="kage-btn" onclick="event.stopPropagation();playArtist('kage')">▶</button>
+    </div>
+
+    <div class="artist-card" onclick="playArtist('hikari')">
+      <div class="artist-avatar hikari">☀️</div>
+      <div class="artist-info">
+        <div class="artist-name">HIKARI</div>
+        <div class="artist-role">Light · The Bright Half</div>
+        <div class="artist-desc">Mirai e Hashire — hopeful, soaring, melodic.</div>
+      </div>
+      <button class="artist-play-btn" id="hikari-btn" onclick="event.stopPropagation();playArtist('hikari')">▶</button>
+    </div>
+
+    <div class="artist-card" onclick="playArtist('together')">
+      <div class="artist-avatar together">⚡</div>
+      <div class="artist-info">
+        <div class="artist-name">KAGE × HIKARI</div>
+        <div class="artist-role">Together · The Union</div>
+        <div class="artist-desc">In the Darkness We Rise — both forces combined.</div>
+      </div>
+      <button class="artist-play-btn" id="together-btn" onclick="event.stopPropagation();playArtist('together')">▶</button>
     </div>
 
   </div>
@@ -886,6 +923,10 @@
     <span class="icon">🎵</span>
     <span>Music</span>
   </button>
+  <button class="nav-item" data-tab="artists" onclick="switchTab('artists')">
+    <span class="icon">🎭</span>
+    <span>Artists</span>
+  </button>
   <button class="nav-item" data-tab="chat" onclick="switchTab('chat')">
     <span class="icon">💬</span>
     <span>Chat</span>
@@ -905,13 +946,8 @@
     window.scrollTo(0, 0);
   }
 
-  function openSettings() {
-    document.getElementById('settings-modal').classList.add('show');
-  }
-
-  function closeSettings() {
-    document.getElementById('settings-modal').classList.remove('show');
-  }
+  function openSettings() { document.getElementById('settings-modal').classList.add('show'); }
+  function closeSettings() { document.getElementById('settings-modal').classList.remove('show'); }
 
   function setDefaultTab(tab) {
     localStorage.setItem(HUB_LS_KEY, tab);
@@ -921,52 +957,175 @@
     const btn = document.querySelector('.settings-save');
     const originalText = btn.textContent;
     btn.textContent = '✓ Saved';
-    btn.style.color = 'var(--green)';
+    btn.style.color = 'var(--crimson-light)';
     setTimeout(() => { btn.textContent = originalText; btn.style.color = ''; }, 1500);
   }
 
+  // ── Audio ──
+  let currentAudio = null;
+  let currentBtn = null;
+
+  function playArtist(name) {
+    const songs = {
+      kage: { file: 'music/vanito/fight-forever-never-quit.mp3', btn: 'kage-btn' },
+      hikari: { file: 'music/vanito/mirai-e-hashire.mp3', btn: 'hikari-btn' },
+      together: { file: 'music/vanito/in-the-darkness-we-rise.mp3', btn: 'together-btn' },
+    };
+    const song = songs[name];
+    if (!song) return;
+
+    const btn = document.getElementById(song.btn);
+    if (!btn) return;
+
+    // Toggle if same song
+    if (currentAudio && !currentAudio.paused && currentBtn === btn) {
+      currentAudio.pause();
+      btn.textContent = '▶';
+      btn.classList.remove('playing');
+      return;
+    }
+
+    // Stop previous
+    if (currentAudio) {
+      currentAudio.pause();
+      if (currentBtn) {
+        currentBtn.textContent = '▶';
+        currentBtn.classList.remove('playing');
+      }
+    }
+
+    // Play new
+    const audio = new Audio(song.file);
+    audio.preload = 'auto';
+    audio.play().then(() => {
+      currentAudio = audio;
+      currentBtn = btn;
+      btn.textContent = '⏸';
+      btn.classList.add('playing');
+      audio.onended = () => {
+        btn.textContent = '▶';
+        btn.classList.remove('playing');
+        currentAudio = null;
+        currentBtn = null;
+      };
+    }).catch(e => {
+      console.log('Audio play blocked:', e.message);
+      // Fallback: try AudioContext
+      try {
+        const ctx = new (window.AudioContext || window.webkitAudioContext)();
+        ctx.resume().then(() => {
+          const audio2 = new Audio(song.file);
+          audio2.play().then(() => {
+            currentAudio = audio2;
+            currentBtn = btn;
+            btn.textContent = '⏸';
+            btn.classList.add('playing');
+            audio2.onended = () => {
+              btn.textContent = '▶';
+              btn.classList.remove('playing');
+              currentAudio = null;
+              currentBtn = null;
+            };
+          });
+        });
+      } catch(e2) {
+        console.log('AudioContext fallback also failed:', e2.message);
+      }
+    });
+  }
+
+  // ── Rain Effect ──
+  const canvas = document.getElementById('rain-canvas');
+  const ctx = canvas.getContext('2d');
+  let drops = [];
+  let animId = null;
+
+  function resizeRain() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  resizeRain();
+  window.addEventListener('resize', resizeRain);
+
+  function initRain() {
+    const count = Math.floor((canvas.width * canvas.height) / 8000);
+    drops = [];
+    for (let i = 0; i < count; i++) {
+      drops.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        len: 10 + Math.random() * 20,
+        speed: 3 + Math.random() * 5,
+        opacity: 0.1 + Math.random() * 0.3,
+        width: 0.5 + Math.random() * 1.5,
+      });
+    }
+  }
+  initRain();
+  window.addEventListener('resize', initRain);
+
+  function drawRain() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    for (const d of drops) {
+      ctx.beginPath();
+      ctx.moveTo(d.x, d.y);
+      ctx.lineTo(d.x - 1, d.y + d.len);
+      ctx.strokeStyle = `rgba(180, 180, 200, ${d.opacity})`;
+      ctx.lineWidth = d.width;
+      ctx.stroke();
+      d.y += d.speed;
+      if (d.y > canvas.height) {
+        d.y = -d.len;
+        d.x = Math.random() * canvas.width;
+      }
+    }
+    animId = requestAnimationFrame(drawRain);
+  }
+  drawRain();
+
+  // ── Ember Particles ──
+  function spawnEmber() {
+    const container = document.getElementById('ember-container');
+    const el = document.createElement('div');
+    el.className = 'ember-particle';
+    el.style.left = Math.random() * 100 + '%';
+    el.style.bottom = '0';
+    el.style.animationDuration = (3 + Math.random() * 3) + 's';
+    el.style.animationDelay = Math.random() * 2 + 's';
+    el.style.width = (2 + Math.random() * 3) + 'px';
+    el.style.height = el.style.width;
+    container.appendChild(el);
+    setTimeout(() => el.remove(), 6000);
+  }
+  setInterval(spawnEmber, 300);
+
+  // ── Music Load ──
   async function loadMusic() {
     try {
       const response = await fetch('hub-vanito-data.json');
       const data = await response.json();
-
       const musicList = document.getElementById('music-list');
       if (!musicList) return;
-
       if (!data.music || !data.music.songs || data.music.songs.length === 0) {
-        musicList.innerHTML = `
-          <div class="card" style="text-align:center; padding:24px;">
-            <div style="font-size:2rem; margin-bottom:12px;">🎧</div>
-            <div style="color:var(--dim);">No songs yet!</div>
-            <div style="font-size:0.8rem; color:var(--dim); margin-top:8px;">Share songs with Gentech to add them here.</div>
-          </div>
-        `;
+        musicList.innerHTML = `<div class="card" style="text-align:center; padding:24px;">
+          <div style="font-size:2rem; margin-bottom:12px;">🎧</div>
+          <div style="color:var(--text-dim);">No songs yet!</div>
+          <div style="font-size:0.8rem; color:var(--text-dim); margin-top:8px;">Share songs with Gentech to add them here.</div>
+        </div>`;
         return;
       }
-
-      const songsHtml = data.music.songs.map((song, index) => `
-        <div class="card" style="display:flex; align-items:center; gap:16px; padding:16px; margin-bottom:12px;">
-          <div style="width:48px; height:48px; background:linear-gradient(135deg, var(--gold) 0%, var(--fire) 100%); border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:1.5rem; font-weight:bold; color:white;">${index + 1}</div>
+      musicList.innerHTML = data.music.songs.map((song, i) =>
+        `<div class="card" style="display:flex; align-items:center; gap:16px; padding:16px; margin-bottom:12px;">
+          <div style="width:48px; height:48px; background:linear-gradient(135deg, var(--crimson) 0%, #330000 100%); border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:1.5rem; font-weight:bold; color:var(--bone);">${i + 1}</div>
           <div style="flex:1;">
-            <div style="font-weight:600; margin-bottom:4px; color:var(--text);">${song.title}</div>
-            <div style="font-size:0.85rem; color:var(--dim);">${song.style}</div>
+            <div style="font-weight:600; margin-bottom:4px; color:var(--bone);">${song.title}</div>
+            <div style="font-size:0.85rem; color:var(--text-dim);">${song.style}</div>
           </div>
-          <div style="font-size:0.75rem; color:var(--dim);">${song.added}</div>
-        </div>
-      `).join('');
-
-      musicList.innerHTML = songsHtml;
+          <div style="font-size:0.75rem; color:var(--text-dim);">${song.added}</div>
+        </div>`
+      ).join('');
     } catch (error) {
       console.error('Error loading music:', error);
-      const musicList = document.getElementById('music-list');
-      if (musicList) {
-        musicList.innerHTML = `
-          <div class="card" style="text-align:center; padding:24px;">
-            <div style="font-size:2rem; margin-bottom:12px;">⚠️</div>
-            <div style="color:var(--red);">Error loading music</div>
-          </div>
-        `;
-      }
     }
   }
 
