@@ -112,8 +112,12 @@ $500 base grant → Add DeFi Intelligence tools to the Agent Kit (LP health, poo
 ## 4. Chainlink Community Grant
 
 **URL:** https://go.chain.link/archives/community/grants
-**Type:** Rolling, general purpose. Funds dev teams and researchers.
-**Our angle:** Chainlink oracle integration for DeFi Intelligence API feeds.
+**Type:** Rolling — 4 sub-programs (Community, Integration, Research, Social Impact)
+**Best fit:** **Integration Grant** — cross-chain integration work
+**Amounts:** Typical $20K-$50K (range $5K-$200K)
+**Application:** https://chainlinkgrants.typeform.com/to/hXk0hruN (Integration Grants)
+
+**Our angle:** DeFi Intelligence API with Chainlink Price Feeds as canonical data source for LP analytics, pool health scores, and cross-chain yield comparisons.
 
 **Project Name:** DeFi Intelligence API with Chainlink Price Feeds
 
@@ -125,7 +129,7 @@ GenTech Labs is building the DeFi Intelligence API — real-time liquidity analy
 - Chainlink's decentralization prevents manipulation
 - Cross-chain price feeds enable our core feature (Avalanche vs Arbitrum vs Base comparison)
 
-**Status:** Draft concept — needs Chainlink integration work before submission
+**Status:** Draft concept — needs Chainlink integration work before submission. Apply after DeFi Intelligence API is live with Chainlink feeds.
 
 **Recommendation:** Defer until we have actual Chainlink integration code. Focus on Avalanche + GOAT first.
 
@@ -133,8 +137,10 @@ GenTech Labs is building the DeFi Intelligence API — real-time liquidity analy
 
 ## 5. Monad Foundation
 
-**Status:** ⚠️ No direct grant program found. Monad Momentum (incentives matching) is closest.
-**Recommendation:** Monitor. Apply to PortalHQ Monad Agent Hub instead (already in build queue #28).
+**Status:** ❌ No direct grant program found.
+**Closest option:** **Monad Madness** — pitch competition, $1M in prizes
+**Alternative:** PortalHQ Monad Agent Hub listing (already in build queue #28)
+**Recommendation:** Skip direct grant pursuit. PortalHQ + Agent Summer ($50K Poker Arena) are better paths to Monad ecosystem funding.
 
 ---
 
