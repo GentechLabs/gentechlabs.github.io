@@ -735,6 +735,79 @@
     letter-spacing: 1px;
   }
 
+  /* ═══ DYNAMIC HEADER ═══ */
+  #page-header.normal-header {
+    background: linear-gradient(135deg, var(--gold) 0%, var(--fire) 50%, var(--magma) 100%);
+    padding: 32px 20px 28px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+
+  #page-header.normal-header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+    animation: shimmer 8s ease-in-out infinite;
+  }
+
+  #page-header.characters-header {
+    padding: 0;
+    background: none;
+    overflow: hidden;
+    position: relative;
+    border-radius: 0 0 12px 12px;
+  }
+
+  #page-header.characters-header::before {
+    display: none;
+  }
+
+  #page-header.characters-header img {
+    width: 100%;
+    display: block;
+    border-radius: 0 0 12px 12px;
+  }
+
+  #page-header.characters-header .header-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 20px;
+    background: linear-gradient(transparent, rgba(0,0,0,0.85));
+    text-align: center;
+    z-index: 1;
+  }
+
+  #page-header.characters-header .header-overlay h1 {
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    font-size: 1.8rem;
+    color: #fff;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.8);
+    margin-bottom: 6px;
+    position: relative;
+    z-index: 1;
+  }
+
+  #page-header.characters-header .header-overlay .subtitle {
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.85);
+    font-weight: 500;
+    position: relative;
+    z-index: 1;
+  }
+
+  #page-header.characters-header .settings-btn {
+    z-index: 3;
+  }
+
   /* ═══ UNRELEASED ═══ */
   .unreleased-list {
     display: flex;
@@ -755,7 +828,7 @@
 <body>
 
 <!-- Header -->
-<div class="header">
+<div id="page-header" class="normal-header">
   <h1>⚔️ Vanito's Hub</h1>
   <div class="subtitle">Wyvern · Warrior of GenTech</div>
   <button class="settings-btn" onclick="openSettings()" title="Settings">⚙️</button>
@@ -958,9 +1031,6 @@
   <!-- ═══════ CHARACTERS TAB ═══════ -->
   <div id="tab-characters" class="tab-content">
 
-    <!-- Hero Banner -->
-    <img src="music/vanito/kage-hikari-album-cover.png" style="width:100%; border-radius:12px; margin-bottom:16px; border:2px solid #5d2a0a; box-shadow: 0 0 25px rgba(200,80,20,0.15);">
-
     <div class="section-title" style="margin-top:0;">🎭 KAGE × HIKARI</div>
     <div style="font-size:0.85rem; color:#888; margin-bottom:16px; text-align:center;">Collab duo — screaming male + melodic female · <span style="color:#d4a530; font-weight:600;">Album: KAGEKŌ</span></div>
 
@@ -1072,6 +1142,27 @@
     if (section) section.classList.add('active');
     if (btn) btn.classList.add('active');
     window.scrollTo(0, 0);
+
+    // Dynamic header — swap to album cover on Artists tab
+    const header = document.getElementById('page-header');
+    if (tab === 'characters') {
+      header.className = 'characters-header';
+      header.innerHTML = `
+        <img src="music/vanito/kage-hikari-album-cover.png" alt="KAGEKŌ">
+        <div class="header-overlay">
+          <h1>⚔️ Vanito's Hub</h1>
+          <div class="subtitle">Wyvern · Warrior of GenTech</div>
+        </div>
+        <button class="settings-btn" onclick="openSettings()" title="Settings">⚙️</button>
+      `;
+    } else {
+      header.className = 'normal-header';
+      header.innerHTML = `
+        <h1>⚔️ Vanito's Hub</h1>
+        <div class="subtitle">Wyvern · Warrior of GenTech</div>
+        <button class="settings-btn" onclick="openSettings()" title="Settings">⚙️</button>
+      `;
+    }
   }
 
   function openSettings() {
