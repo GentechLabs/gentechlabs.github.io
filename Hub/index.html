@@ -25,14 +25,23 @@
       -webkit-text-fill-color: transparent;
       margin-bottom: 4px;
     }
-    .subtitle { color: #64748b; font-size: 0.9rem; margin-bottom: 32px; }
+    .subtitle { color: #64748b; font-size: 0.9rem; margin-bottom: 8px; }
+    .nav-links { display: flex; gap: 16px; margin-bottom: 32px; font-size: 0.85rem; }
+    .nav-links a { color: #64748b; text-decoration: none; }
+    .nav-links a:hover { color: #06b6d4; }
+
+    .section { width: 100%; max-width: 620px; margin-bottom: 32px; }
+    .section-title {
+      font-weight: 700; font-size: 1.1rem; margin-bottom: 12px;
+      color: #94a3b8; text-transform: uppercase; letter-spacing: 0.05em;
+    }
+
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 14px;
-      max-width: 800px;
-      width: 100%;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
     }
+
     a.card {
       display: flex;
       flex-direction: column;
@@ -49,37 +58,68 @@
       border-color: #06b6d4;
       transform: translateY(-2px);
     }
-    .card .stat { font-size: 1.6rem; font-weight: 800; color: #06b6d4; margin-bottom: 4px; }
-    .card .label { font-weight: 600; font-size: 0.95rem; margin-bottom: 2px; }
-    .card .desc { color: #64748b; font-size: 0.8rem; }
-    .footer { margin-top: 40px; color: #374151; font-size: 0.8rem; }
+    .card .icon { font-size: 1.8rem; margin-bottom: 8px; }
+    .card .name { font-weight: 700; font-size: 1rem; margin-bottom: 2px; }
+    .card .desc { color: #64748b; font-size: 0.8rem; line-height: 1.4; }
+
+    .footer { margin-top: 20px; color: #374151; font-size: 0.8rem; }
   </style>
 </head>
 <body>
   <h1>GenTech Hub</h1>
-  <div class="subtitle">Live data dashboards</div>
-  <div class="grid">
-    <a class="card" href="../DeFi/defi-dashboard.html">
-      <div class="stat">💰</div>
-      <div class="label">DeFi Portfolio</div>
-      <div class="desc">LP positions, yields, wallet balances</div>
-    </a>
-    <a class="card" href="../Gaming/index.html">
-      <div class="stat">🎮</div>
-      <div class="label">Gaming Stats</div>
-      <div class="desc">POE2 builds, playtime, game library</div>
-    </a>
-    <a class="card" href="../Vanito/">
-      <div class="stat">🕶️</div>
-      <div class="label">Vanito's Hub</div>
-      <div class="desc">Vanito's apps and projects</div>
-    </a>
-    <a class="card" href="../Games/">
-      <div class="stat">🎯</div>
-      <div class="label">Game Projects</div>
-      <div class="desc">All game dev projects</div>
-    </a>
+  <div class="subtitle">Jordan's Intelligence Layer</div>
+  <div class="nav-links">
+    <a href="../">Portfolio</a>
+    <a href="../Vanito/">Vanito's Hub</a>
+    <a href="../Games/">Game Projects</a>
   </div>
+
+  <!-- 🧠 Flagship -->
+  <div class="section">
+    <div class="section-title">🧠 Flagship</div>
+    <div class="grid">
+      <a class="card" href="../Games/GenTech-Atlas/">
+        <div class="icon">🌏</div>
+        <div class="name">GenTech Atlas</div>
+        <div class="desc">AR travel intelligence platform — inspired by Vanito's Travel Companion. Commercial product.</div>
+      </a>
+    </div>
+  </div>
+
+  <!-- 📊 Live Dashboards -->
+  <div class="section">
+    <div class="section-title">📊 Live Dashboards</div>
+    <div class="grid">
+      <a class="card" href="../DeFi/defi-dashboard.html">
+        <div class="icon">💰</div>
+        <div class="name">DeFi Portfolio</div>
+        <div class="desc">LP positions, yields, wallet balances</div>
+      </a>
+      <a class="card" href="../Gaming/index.html">
+        <div class="icon">🎮</div>
+        <div class="name">Gaming Stats</div>
+        <div class="desc">POE2 builds, playtime, game library</div>
+      </a>
+    </div>
+  </div>
+
+  <!-- 🔗 Quick Links -->
+  <div class="section">
+    <div class="section-title">🔗 Access</div>
+    <div class="grid">
+      <a class="card" href="../Vanito/">
+        <div class="icon">🕶️</div>
+        <div class="name">Vanito's Hub</div>
+        <div class="desc">Vanito's projects, music, and games</div>
+      </a>
+      <a class="card" href="../Games/">
+        <div class="icon">🎯</div>
+        <div class="name">Game Projects</div>
+        <div class="desc">All game dev projects</div>
+      </a>
+    </div>
+  </div>
+
   <div class="footer">GenTech Labs</div>
 </body>
 </html>
