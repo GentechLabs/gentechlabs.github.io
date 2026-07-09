@@ -1,11 +1,20 @@
 {
   "version": "3.0",
-  "updated": "2026-07-09 16:15 ET",
+  "updated": "2026-07-09",
   "meta": {
     "generated_by": "gentech",
-    "forge_read_source": "this file — items with assigned_to: forge and status: pending are active queue"
+    "forge_read_source": "this file \u2014 items with assigned_to: forge and status: pending are active queue"
   },
   "items": [
+    {
+      "id": 0,
+      "name": "OKX AI Genesis Hackathon",
+      "status": "in_progress",
+      "assigned_to": "gentech",
+      "deadline": "2026-07-17",
+      "priority": "urgent",
+      "effort_hours": 20
+    },
     {
       "id": 17,
       "name": "Renaiss Tech Hackathon S1",
@@ -16,13 +25,24 @@
       "effort_hours": 14
     },
     {
-      "id": 0,
-      "name": "OKX AI Genesis Hackathon",
-      "status": "in_progress",
-      "assigned_to": "gentech",
-      "deadline": "2026-07-17",
+      "id": 29,
+      "name": "Algorand x402 Challenge \u2014 Mainnet Deployment",
+      "status": "pending",
+      "assigned_to": "jordan",
+      "deadline": "2026-09-30",
       "priority": "urgent",
-      "effort_hours": 20
+      "effort_hours": 3,
+      "notes": "Deploy Agent Kit Algorand plugin on Mainnet. Authenticate GoPlausible. Switch from localnet to algorand:wGHE2Pwdvd7S12BL5FaOP20EGYesN73ktiC1qzkkit8=. Start driving volume for leaderboard. Prize: 7K 1st, 500K ALGO top 20."
+    },
+    {
+      "id": 30,
+      "name": "Algorand x402 Challenge \u2014 GoPlausible Auth + Discord",
+      "status": "pending",
+      "assigned_to": "jordan",
+      "deadline": "2026-07-14",
+      "priority": "urgent",
+      "effort_hours": 1,
+      "notes": "Join Algorand challenge Discord. Authenticate Algorand wallet with GoPlausible facilitator. Get x402 faucet tokens. Verify the facilitator tracks payments."
     },
     {
       "id": 23,
@@ -65,44 +85,24 @@
       "notes": "Grant application, AgentChain port, PortalHQ SKILL.md listing, Agent Summer Poker Arena"
     },
     {
-      "id": 22,
-      "name": "Cloudflare Email Agent",
+      "id": 31,
+      "name": "Algorand x402 Challenge \u2014 Volume Generation",
       "status": "pending",
-      "assigned_to": "forge",
-      "deadline": null,
-      "priority": "medium",
-      "effort_days": 2,
-      "notes": "Deploy MCP server to Workers, configure Email Routing, test inbound/outbound"
+      "assigned_to": "jordan",
+      "deadline": "2026-10-15",
+      "priority": "high",
+      "effort_hours": 5,
+      "notes": "Drive usage to the Algorand x402 endpoint. Announce on X, Discord, Telegram. Get other agents/devs to query the endpoint. Volume = leaderboard ranking. Top 50 by usage = reviewed."
     },
     {
-      "id": 21,
-      "name": "RomM + AI Companion",
+      "id": 32,
+      "name": "Algorand x402 Challenge \u2014 Project Submission",
       "status": "pending",
-      "assigned_to": "forge",
-      "deadline": null,
-      "priority": "medium",
-      "effort_weeks": 5,
-      "notes": "Vision-based AI player for retro games via EmulatorJS"
-    },
-    {
-      "id": 19,
-      "name": "Travel Agent — Travala MCP",
-      "status": "pending",
-      "assigned_to": "forge",
-      "deadline": null,
-      "priority": "medium",
-      "effort_weeks": 3,
-      "notes": "Integrate Travala MCP, LetsFG, x402, Organic Maps"
-    },
-    {
-      "id": 20,
-      "name": "Agent Finance Intermediary — BNPL",
-      "status": "pending",
-      "assigned_to": "forge",
-      "deadline": null,
-      "priority": "medium",
-      "effort_weeks": 3,
-      "notes": "Escrow contracts, credit scoring, x402 integration — Week 1 complete, needs GLM-5.2 audit"
+      "assigned_to": "jordan",
+      "deadline": "2026-09-30",
+      "priority": "high",
+      "effort_hours": 2,
+      "notes": "Submit project for review. Prepare write-up: x402 as core payment flow, use case quality, technical execution, sustained potential, innovation."
     },
     {
       "id": 2,
@@ -125,6 +125,56 @@
       "notes": "Tools ready, needs API wrapper"
     },
     {
+      "id": 19,
+      "name": "Travel Agent \u2014 Travala MCP",
+      "status": "pending",
+      "assigned_to": "forge",
+      "deadline": null,
+      "priority": "medium",
+      "effort_weeks": 3,
+      "notes": "Integrate Travala MCP, LetsFG, x402, Organic Maps"
+    },
+    {
+      "id": 20,
+      "name": "Agent Finance Intermediary \u2014 BNPL",
+      "status": "pending",
+      "assigned_to": "forge",
+      "deadline": null,
+      "priority": "medium",
+      "effort_weeks": 3,
+      "notes": "Escrow contracts, credit scoring, x402 integration \u2014 Week 1 complete, needs GLM-5.2 audit"
+    },
+    {
+      "id": 21,
+      "name": "RomM + AI Companion",
+      "status": "pending",
+      "assigned_to": "forge",
+      "deadline": null,
+      "priority": "medium",
+      "effort_weeks": 5,
+      "notes": "Vision-based AI player for retro games via EmulatorJS"
+    },
+    {
+      "id": 22,
+      "name": "Cloudflare Email Agent",
+      "status": "pending",
+      "assigned_to": "forge",
+      "deadline": null,
+      "priority": "medium",
+      "effort_days": 2,
+      "notes": "Deploy MCP server to Workers, configure Email Routing, test inbound/outbound"
+    },
+    {
+      "id": 1,
+      "name": "Cloudflare x402 Gateway Setup",
+      "status": "blocked",
+      "assigned_to": "gentech",
+      "deadline": null,
+      "priority": "low",
+      "effort_hours": 5,
+      "notes": "Blocked by expired Cloudflare token \u2014 needs rotation"
+    },
+    {
       "id": 25,
       "name": "Mixar 3D Content Pipeline",
       "status": "blocked",
@@ -132,7 +182,7 @@
       "deadline": null,
       "priority": "low",
       "effort_hours": 4,
-      "notes": "Option C (Both) — decision pending from Jordan"
+      "notes": "Option C (Both) \u2014 decision pending from Jordan"
     },
     {
       "id": 26,
@@ -143,16 +193,6 @@
       "priority": "low",
       "effort_hours": 2,
       "notes": "Strategic memo, no build"
-    },
-    {
-      "id": 1,
-      "name": "Cloudflare x402 Gateway Setup",
-      "status": "blocked",
-      "assigned_to": "gentech",
-      "deadline": null,
-      "priority": "low",
-      "effort_hours": 5,
-      "notes": "Blocked by expired Cloudflare token — needs rotation"
     }
   ]
 }
