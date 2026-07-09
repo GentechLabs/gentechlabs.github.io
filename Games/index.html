@@ -3,22 +3,31 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GenTech Games</title>
+  <title>GenTech — Game Projects</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
   <style>
-    body { font-family: -apple-system, sans-serif; background: #0a0a0f; color: #fff; max-width: 600px; margin: 40px auto; padding: 20px; }
-    h1 { color: #d4a017; }
-    a { display: block; background: #1a1a2e; color: #00d4ff; padding: 16px; margin: 12px 0; border-radius: 12px; text-decoration: none; font-size: 18px; }
-    a:hover { background: #2a2a4a; }
-    .desc { color: #a0a0b0; font-size: 14px; margin-top: 4px; }
+    body { font-family: 'Inter', -apple-system, sans-serif; background: #0a0a0f; color: #fff; max-width: 600px; margin: 40px auto; padding: 20px; }
+    h1 { color: #d4a017; font-weight: 800; font-size: 1.6rem; }
+    .nav { display: flex; gap: 16px; margin: 16px 0 24px; font-size: 0.85rem; }
+    .nav a { color: #64748b; text-decoration: none; }
+    .nav a:hover { color: #06b6d4; }
+    a.card { display: block; background: #111119; border: 1px solid #1a1a2e; color: #e0e0e0; padding: 16px; margin: 12px 0; border-radius: 12px; text-decoration: none; font-size: 18px; font-weight: 600; transition: all 0.2s; }
+    a.card:hover { border-color: #00d4ff; background: #16161f; }
+    .desc { color: #64748b; font-size: 13px; font-weight: 400; margin-top: 4px; }
   </style>
 </head>
 <body>
-  <h1>🎮 GenTech Games</h1>
-  <a href="Vanito-Travel/">
+  <h1>🎮 Game Projects</h1>
+  <div class="nav">
+    <a href="../">Portfolio</a>
+    <a href="../Hub/">GenTech Hub</a>
+    <a href="../Vanito/">Vanito's Hub</a>
+  </div>
+  <a class="card" href="Vanito-Travel/">
     🗼 Vanito's Travel Companion — Tokyo
-    <div class="desc">Explore Tokyo through your Meta Ray-Ban</div>
+    <div class="desc">Explore Tokyo through your Meta Ray-Ban glasses</div>
   </a>
-  <a href="GenTech-Atlas/">
+  <a class="card" href="GenTech-Atlas/">
     🧠 GenTech Atlas — Tokyo
     <div class="desc">AR travel intelligence platform</div>
   </a>

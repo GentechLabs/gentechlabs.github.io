@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GenTech Hub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: #0a0a0f;
+      color: #e0e0e0;
+      min-height: 100vh;
+      padding: 40px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #06b6d4, #8b5cf6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 4px;
+    }
+    .subtitle { color: #64748b; font-size: 0.9rem; margin-bottom: 32px; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 14px;
+      max-width: 800px;
+      width: 100%;
+    }
+    a.card {
+      display: flex;
+      flex-direction: column;
+      background: #111119;
+      border: 1px solid #1a1a2e;
+      border-radius: 14px;
+      padding: 20px;
+      text-decoration: none;
+      color: #e0e0e0;
+      transition: all 0.2s;
+    }
+    a.card:hover {
+      background: #16161f;
+      border-color: #06b6d4;
+      transform: translateY(-2px);
+    }
+    .card .stat { font-size: 1.6rem; font-weight: 800; color: #06b6d4; margin-bottom: 4px; }
+    .card .label { font-weight: 600; font-size: 0.95rem; margin-bottom: 2px; }
+    .card .desc { color: #64748b; font-size: 0.8rem; }
+    .footer { margin-top: 40px; color: #374151; font-size: 0.8rem; }
+  </style>
+</head>
+<body>
+  <h1>GenTech Hub</h1>
+  <div class="subtitle">Live data dashboards</div>
+  <div class="grid">
+    <a class="card" href="../DeFi/defi-dashboard.html">
+      <div class="stat">💰</div>
+      <div class="label">DeFi Portfolio</div>
+      <div class="desc">LP positions, yields, wallet balances</div>
+    </a>
+    <a class="card" href="../Gaming/index.html">
+      <div class="stat">🎮</div>
+      <div class="label">Gaming Stats</div>
+      <div class="desc">POE2 builds, playtime, game library</div>
+    </a>
+    <a class="card" href="../Vanito/">
+      <div class="stat">🕶️</div>
+      <div class="label">Vanito's Hub</div>
+      <div class="desc">Vanito's apps and projects</div>
+    </a>
+    <a class="card" href="../Games/">
+      <div class="stat">🎯</div>
+      <div class="label">Game Projects</div>
+      <div class="desc">All game dev projects</div>
+    </a>
+  </div>
+  <div class="footer">GenTech Labs</div>
+</body>
+</html>

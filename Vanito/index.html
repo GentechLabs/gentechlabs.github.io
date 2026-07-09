@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vanito's Hub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: #0a0a0f;
+      color: #e0e0e0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #00d4ff, #8b5cf6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 8px;
+    }
+    .subtitle {
+      color: #64748b;
+      font-size: 1rem;
+      margin-bottom: 40px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+      max-width: 600px;
+      width: 100%;
+    }
+    a.card {
+      display: flex;
+      flex-direction: column;
+      background: #111119;
+      border: 1px solid #1a1a2e;
+      border-radius: 16px;
+      padding: 24px;
+      text-decoration: none;
+      color: #e0e0e0;
+      transition: all 0.2s;
+    }
+    a.card:hover {
+      background: #16161f;
+      border-color: #00d4ff;
+      transform: translateY(-2px);
+    }
+    .card .icon { font-size: 2rem; margin-bottom: 12px; }
+    .card .name { font-weight: 700; font-size: 1.1rem; margin-bottom: 4px; }
+    .card .desc { color: #64748b; font-size: 0.85rem; line-height: 1.4; }
+    .footer {
+      margin-top: 40px;
+      color: #374151;
+      font-size: 0.8rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>Vanito's Hub</h1>
+  <div class="subtitle">Choose your adventure</div>
+  <div class="grid">
+    <a class="card" href="../Games/Vanito-Travel/">
+      <div class="icon">🗼</div>
+      <div class="name">Travel Companion</div>
+      <div class="desc">Explore Tokyo through your Meta Ray-Ban — POIs, AR mode, currency converter</div>
+    </a>
+    <a class="card" href="../Games/GenTech-Atlas/">
+      <div class="icon">🧠</div>
+      <div class="name">GenTech Atlas</div>
+      <div class="desc">AR travel intelligence platform for Tokyo</div>
+    </a>
+    <a class="card" href="../Games/Meta-Rayban-Fighter/">
+      <div class="icon">⚔️</div>
+      <div class="name">Ray-Ban Fighter</div>
+      <div class="desc">Party-based combat game for Meta Ray-Ban</div>
+    </a>
+    <a class="card" href="../music/vanito.html">
+      <div class="icon">🎵</div>
+      <div class="name">My Music</div>
+      <div class="desc">Vanito's tracks and recordings</div>
+    </a>
+  </div>
+  <div class="footer">GenTech Labs</div>
+</body>
+</html>
