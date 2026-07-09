@@ -1,8 +1,8 @@
 1|# Build Queue — Priority Execution (Easy → Hard, Deadline-Sorted)
 
-> **⚠️ SOURCE OF TRUTH: `/root/vaults/gentech/scripts/build_queue.json` v3.0 (2026-07-08)**
-> This file is a human-readable view. All status changes go in the JSON first, then regenerate this view.
-> For handoff to Forge: Forge reads `build_queue.json` — items with `assigned_to: forge` and `status: pending` are his active queue.
+> **⚠️ SOURCE OF TRUTH: `/root/vaults/gentech/scripts/build_queue.json` v3.0 (2026-07-09) — NOW LIVE ✅**
+> Forge reads `build_queue.json` — items with `assigned_to: forge` and `status: pending` are active queue.
+> Built items: Agent Kit v0.3.0 shipped, plugin system active, 2 websites updated.
 
 ---
 
@@ -819,5 +819,23 @@ GenTech Labs
 - Donut AI (Donut Labs) — $20-22M seed, building D0 agentic crypto browser
 - Role: Research Engineer Intern — agentic safety, self-evolution in financial markets
 - Remote ✅
-- Contact: hiring@donutbrowser.ai
-- Founder X: @Chrizhuu | Donut X: @DonutAI
+| **Contact:** hiring@donutbrowser.ai
+|- Founder X: @Chrizhuu | Donut X: @DonutAI
+
+---
+
+### 28. PixelRAG — Visual Search Demo for Jordan 📸
+**Status**: ✅ Installed on Forge's laptop (RTX 3070, CUDA verified). Agent Kit tool built.
+**Forge**: Run the demo, show Jordan what visual search looks like.
+**Location**: `10-Labs/pixelrag-tool/pixelrag-demo.py`
+
+**Steps:**
+- [ ] Run `pixelrag-demo.py` on GPU laptop — captures Vanito's Hub + Jordan's Hub + GenTech Atlas
+- [ ] Share output JSON + screenshot results with Jordan
+- [ ] Discuss integration — agent chat, marketplace HUD, city pack discovery
+
+**Context:**
+- PixelRAG is a Berkeley SkyLab project, Apache 2.0, 694 stars
+- Uses Qwen3-VL-Embedding to visually search web pages
+- Needs CUDA GPU (RTX 3070+) — Forge's desktop is the only machine with one
+- Demo captures live GenTech pages and runs 4 test queries over the visual index
