@@ -40,7 +40,7 @@
         .token-name { font-size: 0.85em; color: #9ca3af; text-transform: uppercase; margin-bottom: 8px; }
         .token-amount { font-size: 1.7em; font-weight: bold; color: #e0e0e0; }
         .token-usd { font-size: 1em; color: #6b7280; margin-top: 4px; }
-        .token-pct { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 0.85em; font-weight: bold; margin-top: 6px; }
+.token-pct { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 0.85em; font-weight: bold; margin-top: 6px; }
         .avax-pct { background: #052e16; color: #22c55e; }
         .usdc-pct { background: #0c1445; color: #60a5fa; }
         .comp-bar-wrap { margin: 18px 0; }
@@ -75,7 +75,7 @@
         .dca-label { font-size: 0.8em; color: #93c5fd; text-transform: uppercase; margin-bottom: 6px; }
         .dca-value { font-size: 1.5em; font-weight: bold; color: #60a5fa; }
         .dca-sub { font-size: 0.85em; color: #9ca3af; margin-top: 4px; }
-        .strategy-badge { display: inline-block; padding: 6px 18px; border-radius: 20px; font-weight: bold; font-size: 0.9em; }
+.strategy-badge { display: inline-block; padding: 6px 18px; border-radius: 20px; font-weight: bold; font-size: 0.9em; }
         .curve-badge { background: #2d1460; color: #c084fc; border: 1px solid #7c3aed; }
         .pool-info-card { background: #111; border: 2px solid #374151; border-radius: 14px; padding: 25px; margin-bottom: 25px; }
         .pool-info-card h2 { color: #9ca3af; font-size: 1.4em; margin-bottom: 18px; }
@@ -95,81 +95,79 @@
 </head>
 <body>
 <div class="container">
-    <!-- TEMPLATE: Update all {{PLACEHOLDER}} values with live data -->
 
     <div class="header">
         <h1>⚡ YIELD FARM TRACKER</h1>
         <p class="sub">AVAX / USDC Pool · LFJ (Trader Joe) · Avalanche C-Chain<br>
-        <strong style="color:#22c55e;">5 bps · CURVE Strategy · 10 Bins · {{FEES_STATUS}}</strong></p>
-        <p class="timestamp">Last Updated: Tuesday, April 21, 2026 — 12:50 PM CT</p>
+        <strong style="color:#22c55e;">5 bps · CURVE Strategy · 149 Bins · ✅ FEES ACTIVE</strong></p>
+        <p class="timestamp">Last Updated: Tuesday, March 31, 2026 — 1:00 PM CT</p>
     </div>
 
     <div class="context-banner">
-        <h2>🌍 SITUATION UPDATE — APRIL 21, 2026</h2>
+        <h2>🌍 SITUATION UPDATE — MARCH 31, 2026</h2>
         <p>
-            <span class="tag">{{CONTEXT_TAG}}</span> {{CONTEXT_BODY}}<br><br>
-            <strong style="color:#fca5a5;">Market Read:</strong> {{MARKET_READ}}
+            <span class="tag">WAR</span> Thailand trip delayed. DCA locked in at <strong>$50–100/week</strong> — steady bottom accumulation.<br><br>
+            <strong style="color:#fca5a5;">Market Read:</strong> AVAX at $8.85. Fees are ACTIVE — $0.33 earned today. Rewards APR surged to 5,137%. Claimable $1.13 AVAX sitting ready. Compound everything.
         </p>
     </div>
 
     <div class="stats-grid">
         <div class="stat-box green">
             <div class="stat-label">Total Position</div>
-            <div class="stat-value">$28.66</div>
-            <div class="stat-sub">Stable — curve shape maintained</div>
+            <div class="stat-value">$31.16</div>
+            <div class="stat-sub">↑ $0.17 from yesterday</div>
         </div>
         <div class="stat-box blue">
             <div class="stat-label">AVAX Price</div>
-            <div class="stat-value">$9.10</div>
-            <div class="stat-sub">1 AVAX = 9.10 USDC</div>
+            <div class="stat-value">$8.853</div>
+            <div class="stat-sub">1 AVAX = 8.85289 USDC</div>
         </div>
         <div class="stat-box gold">
             <div class="stat-label">Rewards APR</div>
-            <div class="stat-value">147%</div>
-            <div class="stat-sub">Pool 7D APR</div>
+            <div class="stat-value">5,138%</div>
+            <div class="stat-sub">🔥 Up from 5,001% yesterday</div>
         </div>
         <div class="stat-box purple">
             <div class="stat-label">Claimable</div>
-            <div class="stat-value">—</div>
-            <div class="stat-sub">— AVAX — CLAIM NOW</div>
+            <div class="stat-value">$1.132</div>
+            <div class="stat-sub">0.12782 AVAX — CLAIM NOW</div>
         </div>
         <div class="stat-box teal">
             <div class="stat-label">24H Fees</div>
-            <div class="stat-value">—</div>
-            <div class="stat-sub">Monitoring via cron</div>
+            <div class="stat-value">$0.333</div>
+            <div class="stat-sub">✅ IN RANGE — EARNING!</div>
         </div>
         <div class="stat-box gray">
             <div class="stat-label">Range TVL</div>
-            <div class="stat-value">~$28.66</div>
+            <div class="stat-value">$629.18</div>
             <div class="stat-sub">Pool range liquidity</div>
         </div>
     </div>
-
-    <div class="fees-active-box">
-        <p>📊 Position IN RANGE. Curve $9.10–$9.65 active. Monitoring via consolidated cron (every 2h). LP silent during consolidated hours unless URGENT.</p>
+<div class="fees-active-box">
+        <p>✅ <strong>FEES BACK ONLINE!</strong> Position is IN RANGE as of Mar 31, 1:00 PM. Earning $0.333 in 24H — 0.01828 AVAX + 0.17123 USDC. The CURVE is centered correctly around $8.85. Keep compounding and keep DCA'ing.</p>
     </div>
 
     <div class="position-card">
         <h2>💼 CURRENT POSITION &nbsp;<span class="strategy-badge curve-badge">CURVE</span></h2>
         <div class="token-row">
             <div class="token-box">
-                <div class="token-name">🔺 AVAX</div>
-                <div class="token-amount">1.538 AVAX</div>
-                <div class="token-usd">≈ $13.99</div>
-                <span class="token-pct avax-pct">53.7%</span>
+                <div class="token-name">🗺️ AVAX</div>
+                <div class="token-amount">1.39 AVAX</div>
+                <div class="token-usd">≈ $12.31</div>
+                <span class="token-pct avax-pct">39.5%</span>
             </div>
             <div class="token-box">
                 <div class="token-name">💵 USDC</div>
-                <div class="token-amount">14.2 USDC</div>
-                <div class="token-usd">≈ $14.20</div>
-                <span class="token-pct usdc-pct">46.3%</span>
+                <div class="token-amount">18.85 USDC</div>
+                <div class="token-usd">≈ $18.85</div>
+                <span class="token-pct usdc-pct">60.5%</span>
             </div>
         </div>
         <div class="comp-bar-wrap">
-            <div class="comp-label"><span>AVAX 53.7%</span><span>USDC 46.3%</span></div>
+            <div class="comp-label"><span>AVAX 39.5%</span><span>USDC 60.5%</span></div>
             <div class="comp-bar">
-                <div class="comp-avax" style="width:53.7%">{{AVAX_PCT_INT}}%</div>
-                <div class="comp-usdc" style="width:46.3%">{{USDC_PCT_INT}}%</div>
+                <div class="comp-avax" style="width:39.5%">39%</div>
+                <div class="comp-usdc" style="width:60.5%">61%</div>
             </div>
         </div>
     </div>
@@ -179,23 +177,23 @@
         <div class="fees-grid">
             <div class="fee-item">
                 <div class="fee-label">24H Total Fees</div>
-                <div class="fee-value">—</div>
-                <div class="fee-sub">Refreshed via cron</div>
+                <div class="fee-value">$0.3331</div>
+                <div class="fee-sub">Refreshed Mar 31, 1:00 PM</div>
             </div>
             <div class="fee-item">
                 <div class="fee-label">24H AVAX Fees</div>
-                <div class="fee-value">— AVAX</div>
-                <div class="fee-sub">≈ $—</div>
+                <div class="fee-value">0.01828 AVAX</div>
+                <div class="fee-sub">≈ $0.1619</div>
             </div>
             <div class="fee-item">
                 <div class="fee-label">24H USDC Fees</div>
-                <div class="fee-value">— USDC</div>
-                <div class="fee-sub">≈ $—</div>
+                <div class="fee-value">0.17123 USDC</div>
+                <div class="fee-sub">≈ $0.1712</div>
             </div>
             <div class="fee-item">
                 <div class="fee-label">Fees Since Deposit</div>
-                <div class="fee-value">—</div>
-                <div class="fee-sub">— AVAX + — USDC</div>
+                <div class="fee-value">$0.1063</div>
+                <div class="fee-sub">0.00544 AVAX + 0.05817 USDC</div>
             </div>
         </div>
     </div>
@@ -205,27 +203,27 @@
         <div class="range-grid">
             <div class="range-item">
                 <div class="range-item-label">Strategy</div>
-                <div class="range-item-value">CURVE — 10 Bins</div>
+                <div class="range-item-value">CURVE — 149 Bins</div>
             </div>
             <div class="range-item">
                 <div class="range-item-label">Min Price</div>
-                <div class="range-item-value">9.10 USDC/AVAX</div>
+                <div class="range-item-value">8.2217 USDC/AVAX</div>
             </div>
             <div class="range-item">
                 <div class="range-item-label">Max Price</div>
-                <div class="range-item-value">9.65 USDC/AVAX</div>
+                <div class="range-item-value">9.5325 USDC/AVAX</div>
             </div>
             <div class="range-item">
                 <div class="range-item-label">Active Bin</div>
-                <div class="range-item-value">9.10 USDC/AVAX</div>
+                <div class="range-item-value">8.85289 USDC/AVAX</div>
             </div>
             <div class="range-item">
                 <div class="range-item-label">Current Range</div>
-                <div class="range-item-value">9.10 – 9.65</div>
+                <div class="range-item-value">8.862 – 8.862</div>
             </div>
             <div class="range-item">
                 <div class="range-item-label">Range Width</div>
-                <div class="range-item-value">~6% spread</div>
+                <div class="range-item-value">~16% spread</div>
             </div>
         </div>
     </div>
@@ -234,19 +232,19 @@
         <h2>🏆 REWARDS BREAKDOWN</h2>
         <div class="rewards-grid">
             <div class="reward-item">
-                <div class="reward-label">Rewards Per Day</div>
-                <div class="reward-value">— AVAX</div>
+<div class="reward-label">Rewards Per Day</div>
+                <div class="reward-value">10 AVAX</div>
                 <div class="reward-sub">Pool emission rate</div>
             </div>
             <div class="reward-item">
                 <div class="reward-label">Rewards APR</div>
-                <div class="reward-value">147%</div>
-                <div class="reward-sub">Pool 7D APR</div>
+                <div class="reward-value">5,137.78%</div>
+                <div class="reward-sub">↑ Up from 5,001% yesterday</div>
             </div>
             <div class="reward-item">
                 <div class="reward-label">Claimable Now</div>
-                <div class="reward-value">— AVAX</div>
-                <div class="reward-sub">≈ $— — CLAIM &amp; COMPOUND</div>
+                <div class="reward-value">0.12782 AVAX</div>
+                <div class="reward-sub">≈ $1.132 — CLAIM &amp; COMPOUND</div>
             </div>
             <div class="reward-item">
                 <div class="reward-label">Reward Token</div>
@@ -267,7 +265,7 @@
             <div class="dca-item">
                 <div class="dca-label">Monthly DCA</div>
                 <div class="dca-value">$200–400</div>
-                <div class="dca-sub">Flexible schedule</div>
+                <div class="dca-sub">Fueled by Amazon Flex income</div>
             </div>
             <div class="dca-item">
                 <div class="dca-label">DCA Mode</div>
@@ -277,7 +275,7 @@
             <div class="dca-item">
                 <div class="dca-label">Conviction</div>
                 <div class="dca-value">HIGH</div>
-                <div class="dca-sub">Every $50 = ~5.5 AVAX at $9.10</div>
+                <div class="dca-sub">Every $50 = ~5.6 AVAX at $8.85</div>
             </div>
         </div>
     </div>
@@ -287,7 +285,7 @@
         <div class="pool-grid">
             <div class="pool-item">
                 <div class="pool-label">Pool Address</div>
-                <div class="pool-value" style="font-size:0.8em; color:#6b7280;">0x864d4e5Ee7318e97483DB7EB0912E09F161516EA</div>
+                <div class="pool-value" style="font-size:0.8em; color:#6b7280;">0x864d4e5ee7318e97483db7eb0912e09f161516ea</div>
             </div>
             <div class="pool-item">
                 <div class="pool-label">Pair</div>
@@ -295,7 +293,7 @@
             </div>
             <div class="pool-item">
                 <div class="pool-label">Platform</div>
-                <div class="pool-value">LFJ (Trader Joe) V2.2</div>
+                <div class="pool-value">LFJ (Trader Joe)</div>
             </div>
             <div class="pool-item">
                 <div class="pool-label">Network</div>
@@ -303,31 +301,32 @@
             </div>
             <div class="pool-item">
                 <div class="pool-label">Fee Tier</div>
-                <div class="pool-value">5 bps (0.05%) · binStep 10</div>
+                <div class="pool-value">5 bps (0.05%)</div>
             </div>
             <div class="pool-item">
                 <div class="pool-label">Range TVL</div>
-                <div class="pool-value">~$28.66</div>
+                <div class="pool-value">$629.18</div>
             </div>
         </div>
     </div>
 
     <div class="insight-box">
-        <h3>🧠 STRATEGY NOTES — APRIL 21, 2026</h3>
-        <p><strong>Curve shape preserved:</strong> Range $9.10–$9.65 maintained from last update. Curve shape kept intact for optimal fee capture.<br><br>
-<strong>Cron monitoring:</strong> LP data feeds into consolidated crypto watchlist (every 2h). Silent during consolidated hours unless URGENT threshold hit.<br><br>
-<strong>Position composition:</strong> 1.538 AVAX (53.7%) + 14.2 USDC (46.3%). Slightly AVAX-heavy — positioned for upside.<br><br>
-<strong>Pool APR:</strong> 147% over 7 days. Fees compounding passively.</p>
-    </div>
-
-    <div class="footer">
+        <h3>🧠 STRATEGY NOTES — MARCH 31, 2026</h3>
         <p>
-            <strong>File:</strong> yield-farm-tracker-CURRENT.html &nbsp;|&nbsp;
-            <strong>Version:</strong> Tuesday, April 21, 2026 — 12:50 PM CT<br>
-            <strong>Pool:</strong> AVAX / USDC · LFJ (Trader Joe) V2.2 · 5bps · CURVE · 10 Bins<br>
-            <strong>Address:</strong> 0x864d4e5Ee7318e97483DB7EB0912E09F161516EA<br>
-            <strong>Position:</strong> $28.66 | 1.538 AVAX + 14.2 USDC | APR: 147% | 24H Fees: —<br><br>
-            <span style="color:#22c55e; font-weight:bold;">⚡ IN RANGE · CURVE ACTIVE · DCA $50–100/WEEK · FARM THE BOTTOM 🏔️</span>
+            <strong>Fees back online:</strong> $0.33 earned in 24H confirms the CURVE is centered correctly. Both rewards + fee income are running simultaneously now.<br><br>
+            <strong>Compound immediately:</strong> 0.12782 AVAX ($1.13) claimable. At $8.85/AVAX that's real stack accumulation — claim it, redeploy it.<br><br>
+            <strong>DCA conviction:</strong> $50–100/week is clean. Every $50 buys ~5.6 AVAX here. If AVAX returns to $50, that's $280 from one week of DCA. Buy the bottom. Compound the rewards. Let time do the rest.<br><br>
+            <strong>Wallet ready:</strong> 0.10031 AVAX + 0.05 USDC available. Combine with claimed rewards for next deposit.
+        </p>
+    </div>
+<div class="footer">
+        <p>
+            <strong>File:</strong> multi-pool-tracker-CURRENT.html &nbsp;|&nbsp;
+            <strong>Version:</strong> Mar 31, 2026 — 1:00 PM<br>
+            <strong>Pool:</strong> AVAX/USDC · LFJ · 5bps · CURVE · 149 Bins<br>
+            <strong>Address:</strong> 0x864d4e5ee7318e97483db7eb0912e09f161516ea<br>
+            <strong>Position:</strong> $31.16 | 1.39 AVAX + 18.85 USDC | APR: 5,137.78% | 24H Fees: $0.3331<br><br>
+            <span style="color:#22c55e; font-weight:bold;">⚡ IN RANGE · FEES ACTIVE · DCA $50–100/WEEK · FARM THE BOTTOM 🏟️</span>
         </p>
     </div>
 
