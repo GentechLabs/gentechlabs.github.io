@@ -20,6 +20,21 @@
 4. [ ] Submit project by late September
 5. [ ] Top 50 by usage → reviewed → top 5 finalists at Devcon 8 India
 
+### 33. Sourcegraph — Agent Engineer [IC4] Application
+**Status**: Draft ready — needs Jordan to submit
+**Prize**: $176K base + equity (replaces Amazon Flex)
+**Deadline**: Jul 20 (apply early)
+**Assigned to**: Jordan
+**Steps**:
+1. [ ] Copy answers from `00-HQ/sourcegraph-application-2026-07-09.md`
+2. [ ] Upload resume (attached to vault)
+3. [ ] Submit at greenhouse.io
+4. [ ] Prepare for 4.75hr interview process
+
+### 34. Sourcegraph — Application Essay Drafting
+**Status**: ✅ Drafted by Gentech — see `00-HQ/sourcegraph-application-2026-07-09.md`
+**Assigned to**: Gentech (done)
+
 ### 17. Renaiss Tech Hackathon S1 — $4K USDT Prize Pool
 **Status**: Just added — DEADLINE JUL 11 (6 days)
 **Impact**: Quick win, parallel track to OKX
