@@ -890,18 +890,48 @@
     100% { transform: translateY(100vh); }
   }
 
-  @keyframes rain-fall-2 {
-    0% { transform: translateY(-100%) translateX(-20px); }
-    100% { transform: translateY(100vh) translateX(20px); }
-  }
-
   #tab-characters {
     position: relative;
     overflow: hidden;
   }
 
-  #tab-characters::before {
+  /* Cards get a wet glass overlay */
+  #tab-characters .card {
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Water sheen on cards */
+  #tab-characters .card::after {
     content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    background: linear-gradient(
+      180deg,
+      rgba(200,210,230,0.04) 0%,
+      transparent 10%,
+      rgba(200,210,230,0.02) 40%,
+      transparent 60%,
+      rgba(200,210,230,0.03) 80%,
+      transparent 100%
+    );
+    z-index: 1;
+  }
+
+  /* Drip animation on cards */
+  @keyframes drip {
+    0% { transform: translateY(-100%); opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 0.5; }
+    100% { transform: translateY(100%); opacity: 0; }
+  }
+
+  /* Rain canvas setup */
+  #rain-canvas {
     position: fixed;
     top: 0;
     left: 0;
@@ -909,31 +939,12 @@
     height: 100%;
     pointer-events: none;
     z-index: 9999;
-    background:
-      /* Rain streaks - layer 1 */
-      linear-gradient(transparent 0%, rgba(200,200,220,0.03) 50%, transparent 51%, transparent 100%),
-      linear-gradient(90deg, transparent 0%, transparent 20%, rgba(200,200,220,0.02) 20%, rgba(200,200,220,0.02) 21%, transparent 21%, transparent 100%),
-      /* Rain streaks - layer 2 */
-      linear-gradient(transparent 0%, rgba(200,200,220,0.02) 50%, transparent 51%, transparent 100%);
-    background-size: 100% 80px, 100% 80px, 100% 60px;
-    animation: rain-fall 0.6s linear infinite;
-    opacity: 0.7;
+    display: none;
   }
 
-  #tab-characters::after {
-    content: '';
-    position: fixed;
-    top: -20%;
-    left: 10%;
-    width: 120%;
-    height: 120%;
-    pointer-events: none;
-    z-index: 9998;
-    background:
-      linear-gradient(transparent 0%, rgba(180,180,200,0.02) 50%, transparent 51%, transparent 100%);
-    background-size: 100% 100px;
-    animation: rain-fall-2 0.8s linear infinite;
-    opacity: 0.5;
+  #tab-characters.active ~ #rain-canvas,
+  #tab-characters:not(.hidden) ~ #rain-canvas {
+    display: block;
   }
 
   /* UNRELEASED ═══ */
@@ -1297,6 +1308,9 @@
 <!-- Footer -->
 <div class="footer">GenTech Hub · Vanito · ⚔️ The Wyvern</div>
 
+<!-- Rain Canvas -->
+<canvas id="rain-canvas"></canvas>
+
 <!-- Bottom Nav -->
 <nav class="bottom-nav">
   <button class="nav-item active" data-tab="gaming" onclick="switchTab('gaming')">
@@ -1410,7 +1424,103 @@
       o.classList.toggle('selected', o.dataset.tab === saved);
     });
     loadMusic();
+    startRain();
   });
+
+  /* ═══ RAIN EFFECT ═══ */
+  let rainDrops = [];
+  let rainSplashes = [];
+  let rainCanvas, ctx, rainW, rainH;
+  let rainRunning = false;
+
+  function startRain() {
+    rainCanvas = document.getElementById('rain-canvas');
+    if (!rainCanvas) return;
+    ctx = rainCanvas.getContext('2d');
+    resizeRain();
+    window.addEventListener('resize', resizeRain);
+
+    // Create 150 raindrops
+    rainDrops = [];
+    for (let i = 0; i < 150; i++) {
+      rainDrops.push({
+        x: Math.random() * rainW,
+        y: Math.random() * rainH - rainH,
+        len: 12 + Math.random() * 18,
+        speed: 6 + Math.random() * 10,
+        opacity: 0.3 + Math.random() * 0.4,
+        thickness: 1 + Math.random() * 1.5,
+        wind: -0.5 + Math.random(),
+      });
+    }
+
+    rainRunning = true;
+    animateRain();
+  }
+
+  function resizeRain() {
+    rainW = window.innerWidth;
+    rainH = window.innerHeight;
+    rainCanvas.width = rainW;
+    rainCanvas.height = rainH;
+  }
+
+  function animateRain() {
+    if (!rainRunning) return;
+    ctx.clearRect(0, 0, rainW, rainH);
+
+    // Draw rain streaks
+    for (const d of rainDrops) {
+      const grad = ctx.createLinearGradient(d.x, d.y, d.x + d.wind * 3, d.y + d.len);
+      const alpha = d.opacity * 0.6;
+      grad.addColorStop(0, `rgba(200,210,235,${alpha})`);
+      grad.addColorStop(1, `rgba(200,210,235,${alpha * 0.2})`);
+      ctx.strokeStyle = grad;
+      ctx.lineWidth = d.thickness;
+      ctx.beginPath();
+      ctx.moveTo(d.x, d.y);
+      ctx.lineTo(d.x + d.wind * 3, d.y + d.len);
+      ctx.stroke();
+
+      d.y += d.speed;
+      d.x += d.wind;
+
+      // If drop hits bottom or goes off screen, reset and maybe splash
+      if (d.y > rainH) {
+        // Create splash
+        rainSplashes.push({
+          x: d.x,
+          y: rainH - 5,
+          life: 1,
+          size: 2 + Math.random() * 3,
+          count: 3 + Math.floor(Math.random() * 3),
+        });
+        d.y = -d.len - Math.random() * 50;
+        d.x = Math.random() * rainW;
+      }
+      if (d.x > rainW + 10) d.x = -10;
+      if (d.x < -10) d.x = rainW + 10;
+    }
+
+    // Draw splashes
+    for (let i = rainSplashes.length - 1; i >= 0; i--) {
+      const s = rainSplashes[i];
+      ctx.strokeStyle = `rgba(200,210,235,${s.life * 0.3})`;
+      ctx.lineWidth = 1;
+      for (let j = 0; j < s.count; j++) {
+        const angle = (j / s.count) * Math.PI * 2;
+        const len = s.size * (1 - s.life) * 8;
+        ctx.beginPath();
+        ctx.moveTo(s.x, s.y);
+        ctx.lineTo(s.x + Math.cos(angle) * len, s.y - Math.abs(Math.sin(angle)) * len * 0.5);
+        ctx.stroke();
+      }
+      s.life -= 0.03;
+      if (s.life <= 0) rainSplashes.splice(i, 1);
+    }
+
+    requestAnimationFrame(animateRain);
+  }
 </script>
 
 </body>
