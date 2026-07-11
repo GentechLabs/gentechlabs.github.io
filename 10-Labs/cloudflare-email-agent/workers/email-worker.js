@@ -36,25 +36,6 @@ export default {
       read: false,
     };
 
-    // Store attachments in R2
-    if (message.attachments && message.attachments.length > 0) {
-      for (const att of message.attachments) {
-        const attKey = `attachments/${now}-${att.filename}`;
-        await env.EMAIL_R2.put(attKey, att.content, {
-          customMetadata: {
-            emailId,
-            filename: att.filename,
-            contentType: att.contentType,
-          },
-        });
-        record.attachments.push({
-          key: attKey,
-          filename: att.filename,
-          contentType: att.contentType,
-        });
-      }
-    }
-
     // Store in KV (7 day TTL)
     await env.EMAIL_KV.put(emailId, JSON.stringify(record), {
       expirationTtl: 86400 * 7,
