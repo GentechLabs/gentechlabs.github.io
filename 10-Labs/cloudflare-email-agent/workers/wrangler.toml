@@ -1,18 +1,9 @@
 name = "gentech-email-agent"
-main = "workers/email-worker.js"
+main = "email-worker.js"
 compatibility_date = "2025-06-01"
 compatibility_flags = ["nodejs_compat"]
-
-# Email routing binding (required for email workers)
-[env.production]
-name = "gentech-email-agent"
 
 # KV namespace for email storage
 [[kv_namespaces]]
 binding = "EMAIL_KV"
-id = "email-kv"  # Replace with actual KV namespace ID after creation
-
-# R2 bucket for attachments
-[[r2_buckets]]
-binding = "EMAIL_R2"
-bucket_name = "gentech-email-attachments"
+id = "de2f4543ecef44d191fc617024473c99"  # Shared KV namespace

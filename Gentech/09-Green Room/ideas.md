@@ -38,6 +38,17 @@
 
 ## 🔵 GAMING AGENT ECOSYSTEM — NEW STRATEGY (Jul 6, 2026)
 
+### 🚀 Carbon Game Engine (MIT) — Infrastructure Upgrade
+Fenris Creations (formerly CCP Games, makers of EVE Online) open-sourced the Carbon Engine — 33 repos (MIT), powers EVE + Eve Frontier. **Forge's desktop domain.** Full brainstorm at `09-Green Room/carbon-engine-brainstorm-2026-07-11.md`
+- **Trinity** — Rendering engine (377 ★)
+- **Destiny** — Physics/pathfinding (Guinness World Record PvP battles)
+- **Blue** — Python/C++ bridge (our Agent Kit is Python — natural integration)
+- **Scripting** — Python-based game logic
+- **AAE trading game** — Carbon as the 3D engine for the Agent Arena Exchange
+- **Agent Companion** — CarbonUI + Python scripting for game AI integration
+- **Contributions** — We can contribute docs, Python integration, example projects
+- **Status:** Scouting — Forge evaluates feasibility
+
 ### **Core Product: Agent Companion**
 Vision-based AI Player 2 for emulated games (Xenia, RPCS3, Dolphin). Agent plays split-screen co-op with human player. Uses Ollama Cloud for cost-efficient inference. **Status: Added to build queue.**
 

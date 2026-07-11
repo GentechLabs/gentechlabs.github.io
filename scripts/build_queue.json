@@ -1,38 +1,22 @@
 {
-  "version": "3.0",
-  "updated": "2026-07-09",
+  "version": 4.0,
+  "updated": "2026-07-11 18:29",
   "meta": {
     "generated_by": "gentech",
     "forge_read_source": "this file \u2014 items with assigned_to: forge and status: pending are active queue"
   },
   "items": [
     {
-      "id": 0,
-      "name": "OKX AI Genesis Hackathon",
-      "status": "in_progress",
-      "assigned_to": "gentech",
-      "deadline": "2026-07-17",
-      "priority": "urgent",
-      "effort_hours": 20
-    },
-    {
       "id": 17,
       "name": "Renaiss Tech Hackathon S1",
-      "status": "pending",
+      "status": "cancelled",
       "assigned_to": "jordan",
       "deadline": "2026-07-11",
       "priority": "urgent",
-      "effort_hours": 14
-    },
-    {
-      "id": 29,
-      "name": "Algorand x402 Challenge \u2014 Mainnet Deployment",
-      "status": "pending",
-      "assigned_to": "jordan",
-      "deadline": "2026-09-30",
-      "priority": "urgent",
-      "effort_hours": 3,
-      "notes": "Deploy Agent Kit Algorand plugin on Mainnet. Authenticate GoPlausible. Switch from localnet to algorand:wGHE2Pwdvd7S12BL5FaOP20EGYesN73ktiC1qzkkit8=. Start driving volume for leaderboard. Prize: 7K 1st, 500K ALGO top 20."
+      "effort_hours": 14,
+      "difficulty": "hard",
+      "notes": "Missed sign-up deadline, Jordan cancelled",
+      "platform": "desktop"
     },
     {
       "id": 30,
@@ -42,57 +26,116 @@
       "deadline": "2026-07-14",
       "priority": "urgent",
       "effort_hours": 1,
-      "notes": "Join Algorand challenge Discord. Authenticate Algorand wallet with GoPlausible facilitator. Get x402 faucet tokens. Verify the facilitator tracks payments."
+      "notes": "Join Algorand challenge Discord. Authenticate Algorand wallet with GoPlausible facilitator. Get x402 faucet tokens. Verify the facilitator tracks payments.",
+      "difficulty": "easy",
+      "platform": "desktop"
     },
     {
-      "id": 23,
-      "name": "Atelier Registration",
-      "status": "pending",
-      "assigned_to": "forge",
-      "deadline": null,
-      "priority": "high",
-      "effort_minutes": 90,
-      "notes": "Connect Solana wallet, post tweet, list CMC Gateway + DeFi Intel as x402 services"
-    },
-    {
-      "id": 24,
-      "name": "SCN / Avi Gaba Outreach",
-      "status": "pending",
-      "assigned_to": "forge",
-      "deadline": null,
-      "priority": "high",
-      "effort_hours": 3,
-      "notes": "Fork repo, open Issue/PR on economic layer, send email to work@ehlabs.xyz"
-    },
-    {
-      "id": 27,
-      "name": "Donut AI Application",
-      "status": "pending",
-      "assigned_to": "forge",
-      "deadline": null,
-      "priority": "high",
-      "effort_minutes": 15,
-      "notes": "Send cover letter + resume to hiring@donutbrowser.ai, DM @Chrizhuu"
-    },
-    {
-      "id": 28,
-      "name": "Monad Agent Hub Integration",
-      "status": "pending",
+      "id": 0,
+      "name": "OKX AI Genesis Hackathon",
+      "status": "in_progress",
       "assigned_to": "gentech",
-      "deadline": null,
-      "priority": "high",
-      "effort_hours": 12,
-      "notes": "Grant application, AgentChain port, PortalHQ SKILL.md listing, Agent Summer Poker Arena"
+      "deadline": "2026-07-17",
+      "priority": "urgent",
+      "effort_hours": 20,
+      "difficulty": "hard",
+      "platform": "cloud"
     },
     {
-      "id": 31,
-      "name": "Algorand x402 Challenge \u2014 Volume Generation",
+      "id": 29,
+      "name": "Algorand x402 Challenge \u2014 Mainnet Deployment",
       "status": "pending",
       "assigned_to": "jordan",
-      "deadline": "2026-10-15",
+      "deadline": "2026-09-30",
+      "priority": "urgent",
+      "effort_hours": 3,
+      "notes": "Deploy Agent Kit Algorand plugin on Mainnet. Authenticate GoPlausible. Switch from localnet to algorand:wGHE2Pwdvd7S12BL5FaOP20EGYesN73ktiC1qzkkit8=. Start driving volume for leaderboard. Prize: 7K 1st, 500K ALGO top 20.",
+      "difficulty": "medium",
+      "platform": "desktop"
+    },
+    {
+      "id": 37,
+      "name": "GenTech Creative Content \u2014 Pika MCP Brainstorm",
+      "status": "shipped",
+      "assigned_to": "gentech",
+      "deadline": "2026-07-09",
       "priority": "high",
-      "effort_hours": 5,
-      "notes": "Drive usage to the Algorand x402 endpoint. Announce on X, Discord, Telegram. Get other agents/devs to query the endpoint. Volume = leaderboard ranking. Top 50 by usage = reviewed."
+      "effort_minutes": 20,
+      "notes": "Brainstorm complete. 7 projects documented: Build-a-Brand, App Sizzle, Explainer, Founder Video, UGC Ads, Forge Podcast, Viral Hooks. Shipped 2026-07-11.",
+      "difficulty": "medium",
+      "platform": "cloud"
+    },
+    {
+      "id": 34,
+      "name": "Sourcegraph \u2014 Application Essay Drafting",
+      "status": "cancelled",
+      "assigned_to": "gentech",
+      "deadline": "2026-07-10",
+      "priority": "high",
+      "effort_minutes": 45,
+      "notes": "Jordan decided to skip \u2014 not our lane",
+      "difficulty": "easy",
+      "platform": "cloud"
+    },
+    {
+      "id": 35,
+      "name": "Circle Agent Marketplace \u2014 Seller Application",
+      "status": "pending",
+      "assigned_to": "jordan",
+      "deadline": "2026-07-14",
+      "priority": "high",
+      "effort_minutes": 30,
+      "notes": "Apply at forms.gle/7YFzvdmMcn1JH5tF6 to list GenTech services on Circle Agent Marketplace (agents.circle.com/services). 41 services listed currently \u2014 we should be #42. Prep: 5 endpoints (CMC quote, DeFi intel, token search, DEX pairs, trending).",
+      "difficulty": "easy",
+      "platform": "cloud"
+    },
+    {
+      "id": 38,
+      "name": "Pika Subscription \u2014 Sign Up for Standard Plan",
+      "status": "pending",
+      "assigned_to": "jordan",
+      "deadline": "2026-07-14",
+      "priority": "high",
+      "effort_minutes": 10,
+      "notes": "Sign up at pika.art/pricing \u2014 Standard $8/mo plan (700 credits). Use for: Build-a-Brand (GenTech identity), App Sizzle (Agent Kit launch video), Explainer, Founder Video. 250 credits covers everything we need.",
+      "difficulty": "easy",
+      "platform": "desktop"
+    },
+    {
+      "id": 36,
+      "name": "Pika MCP Plugin for Agent Kit",
+      "status": "built",
+      "assigned_to": "gentech",
+      "deadline": "2026-07-14",
+      "priority": "high",
+      "effort_hours": 4,
+      "notes": "Plugin built: Python MCP server (stdio transport, 3 tools), Fal.ai Pika API client, Hermes skill doc, 17 tests passing. Configure via Pika MCP at mcp.pika.me/api/mcp or Fal.ai API key.",
+      "difficulty": "medium",
+      "platform": "cloud"
+    },
+    {
+      "id": 33,
+      "name": "Sourcegraph \u2014 Agent Engineer [IC4] Application",
+      "status": "cancelled",
+      "assigned_to": "jordan",
+      "deadline": "2026-07-20",
+      "priority": "high",
+      "effort_hours": 3,
+      "notes": "Jordan decided to skip \u2014 not our lane",
+      "difficulty": "medium",
+      "platform": "desktop"
+    },
+    {
+      "id": 40,
+      "name": "Sui Overflow 2026 \u2014 Agent Kit Plugin + Hackathon Submission",
+      "status": "in_progress",
+      "assigned_to": "gentech",
+      "deadline": "2026-08-15",
+      "priority": "high",
+      "effort_hours": 8,
+      "difficulty": "medium",
+      "notes": "Build Sui x402 plugin for Agent Kit (same pattern as Algorand + Robinhood). Submit to Agentic Web + DeFi & Payments tracks ($30K/$15K/$10K per track). Jordan registering with Forge. Scope started Jul 11.",
+      "platform": "cloud"
     },
     {
       "id": 32,
@@ -102,67 +145,105 @@
       "deadline": "2026-09-30",
       "priority": "high",
       "effort_hours": 2,
-      "notes": "Submit project for review. Prepare write-up: x402 as core payment flow, use case quality, technical execution, sustained potential, innovation."
+      "notes": "Submit project for review. Prepare write-up: x402 as core payment flow, use case quality, technical execution, sustained potential, innovation.",
+      "difficulty": "medium",
+      "platform": "desktop"
     },
     {
-      "id": 33,
-      "name": "Sourcegraph \u2014 Agent Engineer [IC4] Application",
+      "id": 31,
+      "name": "Algorand x402 Challenge \u2014 Volume Generation",
       "status": "pending",
       "assigned_to": "jordan",
-      "deadline": "2026-07-20",
+      "deadline": "2026-10-15",
+      "priority": "high",
+      "effort_hours": 5,
+      "notes": "Drive usage to the Algorand x402 endpoint. Announce on X, Discord, Telegram. Get other agents/devs to query the endpoint. Volume = leaderboard ranking. Top 50 by usage = reviewed.",
+      "difficulty": "medium",
+      "platform": "desktop"
+    },
+    {
+      "id": 23,
+      "name": "Atelier Registration",
+      "status": "pending",
+      "assigned_to": "forge",
+      "deadline": null,
+      "priority": "high",
+      "effort_minutes": 90,
+      "notes": "Connect Solana wallet, post tweet, list CMC Gateway + DeFi Intel as x402 services",
+      "difficulty": "easy",
+      "platform": "either"
+    },
+    {
+      "id": 24,
+      "name": "SCN / Avi Gaba Outreach",
+      "status": "shipped",
+      "assigned_to": "forge",
+      "deadline": null,
       "priority": "high",
       "effort_hours": 3,
-      "notes": "Senior Agent Engineer role at Sourcegraph (a16z/Sequoia/Redpoint). Code Understanding team \u2014 Deep Search, MCP, agentic systems. $176K base + equity. Remote, EST overlap. Draft answers to 5 essay questions + submit resume."
+      "notes": "Fork repo, open Issue/PR on economic layer, send email to work@ehlabs.xyz \u2014 PR #1 open on upstream. Email skipped (no SMTP creds).",
+      "difficulty": "easy",
+      "platform": "either"
     },
     {
-      "id": 34,
-      "name": "Sourcegraph \u2014 Application Essay Drafting",
-      "status": "pending",
-      "assigned_to": "gentech",
-      "deadline": "2026-07-10",
-      "priority": "high",
-      "effort_minutes": 45,
-      "notes": "Draft answers to: 1) Experience alignment, 2) Coding agents opinionated view, 3) Multi-step agentic system shipped, 4) ML models in production, 5) Why Sourcegraph. Use Agent Kit, x402, Agent Arena as proof points."
-    },
-    {
-      "id": 2,
-      "name": "Agent Registration API",
+      "id": 27,
+      "name": "Donut AI Application",
       "status": "shipped",
-      "assigned_to": "gentech",
+      "assigned_to": "forge",
       "deadline": null,
-      "priority": "medium",
-      "effort_days": 5,
-      "notes": "Test suite added (15 tests), Pydantic v2 migration, httpx async, secure defaults, LICENSE, CORS hardened. Pushed to GitHub Jul 9."
+      "priority": "high",
+      "effort_minutes": 15,
+      "notes": "Jordan submitted directly",
+      "difficulty": "easy",
+      "platform": "either"
     },
     {
-      "id": 3,
-      "name": "DeFi Intelligence API",
-      "status": "pending",
+      "id": 28,
+      "name": "Monad Agent Hub Integration",
+      "status": "in_progress",
       "assigned_to": "gentech",
       "deadline": null,
+      "priority": "high",
+      "effort_hours": 12,
+      "notes": "Research: Monad Foundation joined x402 Foundation (Jun 29, 2026). Agent Hub has 8 dApp manifests (Uniswap, Morpho, Balancer, Kuru, Clober, Nad.fun, DevFun, Blinq.fi). Monad runs native x402 facilitator + ERC-8004 support \u2014 directly compatible with Agent Kit. Agent registered on Dev.fun Arena (ID: cmrexlc1u2sg12dkyeflbga3a). Pending: Jordan claim, PortalHQ skills integration, x402 settlement setup. 12h remaining \u2014 needs dedicated session.",
+      "difficulty": "medium",
+      "platform": "cloud"
+    },
+    {
+      "id": 39,
+      "name": "Kapso \u2014 GenTech Business Phone Number Setup",
+      "status": "pending",
+      "assigned_to": "jordan",
+      "deadline": "2026-07-14",
       "priority": "medium",
-      "effort_days": 5,
-      "notes": "Tools ready, needs API wrapper"
+      "effort_minutes": 20,
+      "notes": "Set up GenTech business number via Kapso. Need: business name verification, phone number selection, WhatsApp Business API setup for customer/agent communications.",
+      "difficulty": "easy",
+      "platform": "desktop"
     },
     {
       "id": 19,
       "name": "Travel Agent \u2014 Travala MCP",
-      "status": "pending",
+      "status": "built",
       "assigned_to": "forge",
       "deadline": null,
       "priority": "medium",
       "effort_weeks": 3,
-      "notes": "Integrate Travala MCP, LetsFG, x402, Organic Maps"
+      "notes": "Integrate Travala MCP, LetsFG, x402, Organic Maps \u2014 x402 payment layer, Organic Maps POIs, unified CLI, 16 tests all passing. Needs Cloudflare Worker deploy.",
+      "difficulty": "medium",
+      "platform": "cloud"
     },
     {
       "id": 20,
       "name": "Agent Finance Intermediary \u2014 BNPL",
-      "status": "pending",
+      "status": "built",
       "assigned_to": "forge",
       "deadline": null,
       "priority": "medium",
       "effort_weeks": 3,
-      "notes": "Escrow contracts, credit scoring, x402 integration \u2014 Week 1 complete, needs GLM-5.2 audit"
+      "notes": "Escrow contract (Solidity), credit scoring API, risk engine built. Tested: whale=755 Prime, degen=418 Deep Subprime. Needs testnet deploy + x402 wiring.",
+      "difficulty": "medium",
+      "platform": "either"
     },
     {
       "id": 21,
@@ -172,27 +253,45 @@
       "deadline": null,
       "priority": "medium",
       "effort_weeks": 5,
-      "notes": "Vision-based AI player for retro games via EmulatorJS"
+      "notes": "Vision-based AI player for retro games via EmulatorJS",
+      "difficulty": "medium",
+      "platform": "desktop"
+    },
+    {
+      "id": 2,
+      "name": "Agent Registration API",
+      "status": "shipped",
+      "assigned_to": "gentech",
+      "deadline": null,
+      "priority": "medium",
+      "effort_days": 5,
+      "notes": "Test suite added (15 tests), Pydantic v2 migration, httpx async, secure defaults, LICENSE, CORS hardened. Pushed to GitHub Jul 9.",
+      "difficulty": "hard",
+      "platform": "cloud"
+    },
+    {
+      "id": 3,
+      "name": "DeFi Intelligence API",
+      "status": "shipped",
+      "assigned_to": "gentech",
+      "deadline": null,
+      "priority": "medium",
+      "effort_days": 5,
+      "notes": "Verified and shipped. 4 x402-paid endpoints (pool health, strategy, sentiment, rebalance). 29 tests passing. Payment enforcement, input validation, CORS working. Known: mock data for pools (needs BlockRun wires), custom /openapi.json overridden by FastAPI built-in.",
+      "difficulty": "hard",
+      "platform": "cloud"
     },
     {
       "id": 22,
       "name": "Cloudflare Email Agent",
-      "status": "pending",
+      "status": "deployed",
       "assigned_to": "forge",
       "deadline": null,
       "priority": "medium",
       "effort_days": 2,
-      "notes": "Deploy MCP server to Workers, configure Email Routing, test inbound/outbound"
-    },
-    {
-      "id": 1,
-      "name": "Cloudflare x402 Gateway Setup",
-      "status": "blocked",
-      "assigned_to": "gentech",
-      "deadline": null,
-      "priority": "low",
-      "effort_hours": 5,
-      "notes": "Blocked by expired Cloudflare token \u2014 needs rotation"
+      "notes": "Deploy MCP server to Workers, configure Email Routing, test inbound/outbound \u2014 Worker deployed to https://gentech-email-agent.jordanjones0902.workers.dev. Needs Email Routing config in Cloudflare dashboard.",
+      "difficulty": "hard",
+      "platform": "cloud"
     },
     {
       "id": 25,
@@ -202,17 +301,33 @@
       "deadline": null,
       "priority": "low",
       "effort_hours": 4,
-      "notes": "Option C (Both) \u2014 decision pending from Jordan"
+      "notes": "Option C (Both) \u2014 decision pending from Jordan",
+      "difficulty": "medium",
+      "platform": "cloud"
+    },
+    {
+      "id": 1,
+      "name": "Cloudflare x402 Gateway Setup",
+      "status": "blocked",
+      "assigned_to": "gentech",
+      "deadline": null,
+      "priority": "low",
+      "effort_hours": 5,
+      "notes": "Blocked by expired Cloudflare token \u2014 needs rotation",
+      "difficulty": "hard",
+      "platform": "cloud"
     },
     {
       "id": 26,
       "name": "Agents as RWAs Thesis",
-      "status": "pending",
+      "status": "shipped",
       "assigned_to": "gentech",
       "deadline": null,
       "priority": "low",
       "effort_hours": 2,
-      "notes": "Strategic memo, no build"
+      "notes": "Strategic memo drafted \u2014 saved to 00-HQ/agents-as-rwas-thesis.md",
+      "difficulty": "hard",
+      "platform": "cloud"
     }
   ]
 }

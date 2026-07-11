@@ -1,8 +1,8 @@
 1|# Build Queue — Priority Execution (Easy → Hard, Deadline-Sorted)
 
-> **⚠️ SOURCE OF TRUTH: `/root/vaults/gentech/scripts/build_queue.json` v3.0 (2026-07-09) — NOW LIVE ✅**
-> Forge reads `build_queue.json` — items with `assigned_to: forge` and `status: pending` are active queue.
-> Built items: Agent Kit v0.3.0 shipped, plugin system active, 2 websites updated, Algorand x402 plugin built.
+> **⚠️ SOURCE OF TRUTH: `/root/vaults/gentech/scripts/build_queue.json` v4.0 (2026-07-10) — AUTONOMOUS ✅**
+> Autonomous tick runs every 30 min. Gentech 24/7, Forge desktop heavy lifting, Jordan decisions.
+> Built items: Agent Kit v0.3.0 shipped, plugin system active, 2 plugins (Algorand + Pika), 14 tools, V4 workflow live.
 
 ---
 
@@ -34,6 +34,56 @@
 ### 34. Sourcegraph — Application Essay Drafting
 **Status**: ✅ Drafted by Gentech — see `00-HQ/sourcegraph-application-2026-07-09.md`
 **Assigned to**: Gentech (done)
+
+### 35. Circle Agent Marketplace — Seller Application
+**Status**: Needs Jordan to apply
+**Prize**: Distribution on agents.circle.com (41 services, 640 endpoints)
+**Deadline**: Jul 14 (do this week)
+**Assigned to**: Jordan
+**Steps**:
+1. [ ] Open `forms.gle/7YFzvdmMcn1JH5tF6` — sign in with Google
+2. [ ] Fill seller form with our 5 endpoints
+3. [ ] Wire up `@circle-fin/x402-batching` SDK on our endpoints
+4. [ ] Get listed alongside BlockRun, CoinGecko, Exa
+
+### 36. Pika MCP Plugin for Agent Kit
+**Status**: ✅ Built by Gentech — 5 tools, 14 total
+**Assigned to**: Gentech (done)
+
+### 37. GenTech Creative Content — Pika Brainstorm
+**Status**: Brainstorm complete — see `09-Green Room/pika-creative-brainstorm-2026-07-09.md`
+**Assigned to**: Gentech (done)
+
+### 38. Pika Subscription — Sign Up (Standard $8/mo)
+**Status**: Pending — Jordan signs up
+**Credits**: 700/mo, covers brand identity + launch video + explainer + founder video
+**Assigned to**: Jordan
+**Steps**:
+1. [ ] Sign up at pika.art/pricing — Standard plan
+2. [ ] Run Build-a-Brand for full GenTech identity
+3. [ ] Generate App Sizzle for Agent Kit launch
+4. [ ] Create Explainer video for website + grants
+
+### 39. Kapso — GenTech Business Phone Number
+**Status**: Pending — finish setup
+**Assigned to**: Jordan
+**Steps**:
+1. [ ] Complete business name verification with Kapso
+2. [ ] Select GenTech phone number
+3. [ ] Set up WhatsApp Business API
+4. [ ] Wire into GenTech communication flow
+
+---
+
+## V4 Autonomous Pipeline
+
+| Time (ET) | Job | What It Does | Delivers To |
+|-----------|-----|-------------|-------------|
+| **12:00 AM** | Nightly Maintenance | Sync vault, push GitHub, save overnight report | Agent-brain |
+| **Every 30m** | Build Queue Tick | Pick next Easy task, work, brain note on block | Agent-brain |
+| **8:30 AM** | Morning Digest | Overnight activity + awaiting-Jordan tasks | **Telegram Home** |
+| **4:00 PM** | Hub Nightly Sync | On-chain data → JSON → GitHub Pages | Telegram Home |
+| **6:00 PM** | Brain Backup | Hermes brain + vault backup | Local |
 
 ### 17. Renaiss Tech Hackathon S1 — $4K USDT Prize Pool
 **Status**: Just added — DEADLINE JUL 11 (6 days)
@@ -866,3 +916,64 @@ GenTech Labs
 - Uses Qwen3-VL-Embedding to visually search web pages
 - Needs CUDA GPU (RTX 3070+) — Forge's desktop is the only machine with one
 - Demo captures live GenTech pages and runs 4 test queries over the visual index
+
+---
+
+### 29. Local TTS & Voice Cloning Pipeline 🎤
+**Status**: 🔵 Researched — ready for Forge when laptop is operational.
+**Goal**: Replace paid ElevenLabs API with local GPU-powered TTS/voice cloning. Zero per-character costs.
+
+**Stack to install on laptop (RTX 3070):**
+
+| Tool | Use Case | Why |
+|------|----------|-----|
+| **Gepard 1.0** | Real-time streaming TTS | Apache 2.0, 555M params, 25× real-time. Voice cloning from short clips. |
+| **OpenVoice** | Instant clone on-the-fly | Clone Steve Harvey, Vanito from 10s audio. Super lightweight. |
+| **StyleTTS 2** | Batch production | Fastest option, near real-time, high quality on consumer GPUs. |
+| **Coqui XTTS v2** | Long-form narration | 17 languages, full voice cloning, natural prosody. |
+
+**Location**: `10-Labs/voice-pipeline/` (create when started)
+
+**Steps:**
+- [ ] Research current state of each tool (pip install viability, CUDA compat)
+- [ ] Install & validate Gepard 1.0 first (already in green room notes)
+- [ ] Install OpenVoice for instant cloning
+- [ ] Install StyleTTS 2 for batch production
+- [ ] Wire each as a local API endpoint (FastAPI + x402 gateway?)
+- [ ] Document usage: VPS → call Forge's API → get audio back
+- [ ] Test: clone Steve Harvey voice locally, compare quality to ElevenLabs
+
+**Context:**
+- ElevenLabs Creator plan: $22/mo, 121K chars, 7% used so far
+- Local pipeline = $0/mo after setup
+- Gepard 1.0: https://huggingface.co/nineninesix/gepard-1.0 (Apache 2.0)
+- OpenVoice: https://github.com/myshell-ai/OpenVoice (MIT)
+- StyleTTS 2: https://github.com/yl4579/StyleTTS2 (MIT)
+
+---
+
+### 30. Deploy Subscription Hub to gentechlabs.net 🚀
+**Status**: 🔵 Ready — HTML built, handoff doc written. Awaiting Forge deploy.
+**Goal**: Turn `gentechlabs.net` into a commercial storefront with Q402 subscription tiers.
+
+**Tiers:**
+| Plan | Price | What |
+|------|-------|------|
+| Basic | $3/mo | LP alerts, Atlas packs, journal |
+| Pro | $10/mo | API access, signals, registrations |
+| Max | $25/mo | Build requests, early access |
+| Vanito Music | $3/mo | Tracks + early releases |
+| Vanito Vault | $10/mo | Music + anime + exclusives |
+
+**Steps (Forge):**
+- [ ] Read handoff: `Gentech/handoffs/gentech-to-forge/2026-07-11-gentechlabs-subscription-deploy.md`
+- [ ] Read HTML: `gentech-ops/gentechlabs-subscription-hub.html`
+- [ ] Choose route: `/subscribe`, subdomain, or replace main page
+- [ ] Update `wrangler.toml` + `src/worker.ts`
+- [ ] `npx wrangler deploy`
+- [ ] Verify all routes still work
+
+**Context:**
+- Cloudflare Workers site. 8 existing subdomains (api, defi, search, fleet, etc.)
+- x402 already live on all endpoints
+- Subscriptions add Q402 recurring layer on top

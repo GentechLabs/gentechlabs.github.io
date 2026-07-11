@@ -1,96 +1,67 @@
-# 🎭 Vanito's Hub — Full Theme Overhaul + Effects
+# 🎭 Vanito's Hub — Full Theme Overhaul + Rain + Lighting
 
-## Task 1: Full Site Audit
+## Task 1: Rain Effect — Canvas-Based
 
-- Check **everything** on the hub (`hub-vanito.html`):
-  - **Lighting effects** on Artists tab (pulsing glow, border animations, light sweep, ember particles)
-  - **Audio players** — do all 3 work? (KAGE, HIKARI, Together)
-  - **Animations** — smooth on mobile, Telegram in-app browser, and desktop?
-  - **Banner video** — does the animated loop play correctly?
-  - **Album video** — does the animated KAGEKŌ cover loop work?
-  - **Dynamic header** — does it toggle correctly between tabs?
-  - **Settings modal** — does it save default tab?
-  - **All tabs** — Gaming, Profile, Travel, Music, Chat, Artists — do they all load and function?
-- Fix anything broken
-- Ensure no console errors on mobile
+The current rain effect uses JavaScript canvas with 150 raindrops, wind, splash particles, and a wet glass overlay on cards. **Vanito wants it improved:**
 
-## Task 2: Rain Effect (All Pages, Not Just Artists)
+**Current implementation in `hub-vanito.html`:**
+- `<canvas id="rain-canvas">` right before `<body>` end
+- CSS for the canvas and water sheen overlay in `<style>` under `/* ═══ RAIN EFFECT ═══ */`
+- JavaScript rain engine under `/* ═══ RAIN EFFECT ═══ */` in the script section
+- Rain starts on `DOMContentLoaded` via `startRain()`
 
-Vanito wants the **entire hub** to have a dripping water/rain effect. Think:
+**Vanito's feedback:**
+- Still not looking right — needs to look more **watery**
+- Rain should **drip down onto the content** like it's actually getting wet
+- Water droplets forming and dripping off the edges of cards
+- Needs to feel like you're looking through a rain-streaked window
 
-- Cinematic rain streaks falling down the whole page (not just Artists tab)
-- Water droplets running down the screen like glass
-- Subtle water ripple when drops hit cards or surfaces
-- Theme should look **wet** — like you're looking through a rain-streaked window
+**Things to try:**
+- Make rain streaks thicker/whiter
+- Add actual water droplets that form on top edges of cards and drip down
+- Add a subtle fog/mist layer behind the rain
+- Water ripple animation when drops "hit" card surfaces
+- Maybe use a shader-like gradient animation for water on glass look
 
-**Make sure:**
-- Rain works on ALL tabs (Gaming, Profile, Travel, Music, Chat, Artists)
-- Doesn't block any buttons or audio players (pointer-events: none on rain layer)
-- Lightweight enough for mobile
-- Stops/restarts cleanly when switching tabs
-- Dark atmospheric vibe matching the crimson/black/bone-white theme
+## Task 2: Lighting Effects Check
 
-## Task 3: Theme Redesign — Match the Picture
+Vanito has lighting effects CSS but they need a full audit:
+- Pulse glow on banner (currently targets `#tab-characters > video:first-child` and `img:first-child`)
+- Border glow on KAGE card (`.card-kage`) and HIKARI card (`.card-hikari`)
+- Text pulse on KAGEKŌ title
+- Light sweep across album card
+- Floating ember particles (`.card-together::before`)
+- Fade-slide-up on entering the tab
 
-Vanito wants the **entire hub theme** redesigned to match the KAGEKŌ album cover aesthetic.
+**Fix checklist:**
+- Check if all animations fire when switching to Artists tab
+- Banner uses `<video>` now, not `<img>` — ensure animations target `video`
+- Album section uses `<video>` too
+- Ensure animations don't conflict with rain canvas
 
-The picture (reference: `music/vanito/kage-hikari-album-cover.png` or the animated `kage-hikari-album-loop.mp4`) features:
-- **Deep crimson red** (primary)
-- **Bone white** (text, highlights)
-- **Charcoal black** (backgrounds, panels)
-- **Ember gold/amber** (accents, HIKARI side)
-- **Dark shadow gradients**
-- **Gritty, apocalyptic, cinematic feel**
+## Task 3: Full Site Audit
 
-### Requirements for the theme change:
+- Check everything on the hub:
+  - Audio players (KAGE, HIKARI, Together) — do all play?
+  - Animated banner video loop
+  - Animated album cover video
+  - Epilogue video in story section
+  - Settings modal saves default tab
+  - Bottom nav switches correctly
+  - All tabs load (Gaming, Profile, Travel, Music, Chat, Artists)
+- Fix any console errors
+- Test on mobile (Telegram in-app browser)
 
-**Header:**
-- Dark gradient background (charcoal → deep crimson)
-- White/bone-white text
-- Maybe a subtle red glow behind the title
-- The header subtitle "Wyvern · Warrior of GenTech" should pop
+## Task 4: Theme Redesign
 
-**Background:**
-- Dark charcoal/almost black (`#0d0d0d` or darker)
-- Maybe a subtle dark gradient instead of solid
-
-**Cards:**
-- Dark panels with crimson/reddish borders
-- Red glow on hover
+Vanito wants the hub theme redesigned to match the KAGEKŌ album cover aesthetic:
+- Deep crimson red (primary)
 - Bone white text
-- Semi-transparent background (`rgba(20,5,5,0.8)` or similar)
+- Charcoal black backgrounds
+- Dark red/black header (already done — no more orange)
+- No "Wyvern" subtitle in header
+- Dark premium feel
 
-**Text colors:**
-- Primary: white/bone-white
-- Secondary: crimson red accents
-- Subtitle/dim text: gray with reddish tint
-
-**Bottom nav:**
-- Dark with red active indicator
-- Active tab should glow red
-- Non-active: dim white/gray
-
-**Settings modal:**
-- Dark red/black theme
-- White text
-
-**Overall vibe:**
-- Dark, atmospheric, wet, cinematic
-- Looks like it belongs to the KAGEKŌ world
-- Premium feel, not just a generic dark theme
-
-## Files involved:
-- `hub-vanito.html` — the main file (CSS vars, all tabs, header, nav, modals)
-- `music/vanito/` — reference images and video for the theme
-- No external CSS files — everything is inline in `<style>`
-
-## Design reference:
-The KAGEKŌ album cover has a dark, gritty, apocalyptic feel with:
-- Red sun glow
-- Dark stormy sky
-- Japanese street aesthetic
-- Blood/crimson accents
-- Charcoal and ash tones
-- Cinematic lighting
-
-The rain effect should feel like standing in a dark alley during a storm, looking at neon reflections on wet pavement.
+## Files
+- `hub-vanito.html` — everything's in this single file
+- Reference: `music/vanito/kage-hikari-album-cover.png` or the animated `kage-hikari-album-loop.mp4`
