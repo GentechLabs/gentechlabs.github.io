@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GenTech Journal — AAE</title>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ══════════════════════════════════════════════
+           AAE Journal Theme — Red / Silver / Black / Blue
+           ══════════════════════════════════════════════ */
+
+        :root {
+            --aae-red: #e84142;
+            --aae-silver: #c0c0c0;
+            --aae-black: #0a0a0a;
+            --aae-blue: #3b82f6;
+            --aae-red-dim: rgba(232, 65, 66, 0.15);
+            --aae-red-glow: rgba(232, 65, 66, 0.4);
+            --aae-blue-dim: rgba(59, 130, 246, 0.15);
+            --aae-blue-glow: rgba(59, 130, 246, 0.4);
+            --panel-bg: #111111;
+            --panel-border: #1e1e1e;
+            --panel-border-hover: #2a2a2a;
+            --text-dim: #6b6b7b;
+            --radius: 14px;
+            --gap: 15px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            background: var(--aae-black);
+            color: var(--aae-silver);
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* ── Container ── */
+        .journal-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* ── Back Link ── */
+        .back-link {
+            position: fixed;
+            top: 14px;
+            left: 14px;
+            z-index: 100;
+            color: var(--aae-blue);
+            text-decoration: none;
+            font-size: 0.9em;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        .back-link:hover { color: #60a5fa; }
+
+        /* ── Header ── */
+        .journal-header {
+            text-align: center;
+            padding: 36px 0 28px;
+            border-bottom: 1px solid var(--panel-border);
+            margin-bottom: 28px;
+        }
+        .journal-header h1 {
+            font-size: 2.4em;
+            font-weight: 700;
+            color: var(--aae-red);
+            letter-spacing: -0.5px;
+            text-shadow: 0 0 40px var(--aae-red-glow);
+        }
+        .journal-header .subtitle {
+            color: var(--text-dim);
+            font-size: 1.05em;
+            margin-top: 6px;
+            font-style: italic;
+        }
+
+        /* ── Quick Stats ── */
+        .quick-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--gap);
+            margin-bottom: 32px;
+        }
+        .quick-stat {
+            background: var(--panel-bg);
+            border: 1px solid var(--panel-border);
+            border-radius: var(--radius);
+            padding: 20px;
+            text-align: center;
+            transition: border-color 0.25s, transform 0.25s;
+        }
+        .quick-stat:hover {
+            border-color: var(--panel-border-hover);
+            transform: translateY(-2px);
+        }
+        .quick-stat .value {
+            font-size: 1.9em;
+            font-weight: 700;
+            color: var(--aae-red);
+        }
+        .quick-stat .label {
+            color: var(--text-dim);
+            font-size: 0.8em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 4px;
+        }
+
+        /* ── Section ── */
+        .journal-section {
+            margin-bottom: 36px;
+            animation: fadeInSection 0.5s ease-out both;
+        }
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 16px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--panel-border);
+        }
+        .section-icon { font-size: 1.3em; }
+        .section-title {
+            font-size: 1.25em;
+            font-weight: 600;
+            color: var(--aae-silver);
+            letter-spacing: 0.3px;
+        }
+
+        /* ── Card ── */
+        .journal-card {
+            background: var(--panel-bg);
+            border: 1px solid var(--panel-border);
+            border-radius: var(--radius);
+            padding: 22px;
+            transition: all 0.25s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .journal-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--aae-red);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .journal-card:hover::before { opacity: 1; }
+        .journal-card:hover {
+            border-color: var(--aae-red);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(232, 65, 66, 0.06);
+        }
+
+        /* ── Empty State ── */
+        .empty-state {
+            text-align: center;
+            padding: 48px 20px;
+            color: var(--text-dim);
+        }
+        .empty-state .empty-icon {
+            font-size: 3em;
+            margin-bottom: 16px;
+            opacity: 0.5;
+        }
+        .empty-state p {
+            font-size: 0.95em;
+            max-width: 360px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+        .empty-state .cta {
+            display: inline-block;
+            margin-top: 18px;
+            padding: 10px 24px;
+            background: var(--aae-red);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9em;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background 0.2s, transform 0.2s;
+        }
+        .empty-state .cta:hover {
+            background: #d03536;
+            transform: translateY(-1px);
+        }
+
+        /* ── Mood Tracker ── */
+        .mood-chart {
+            display: flex;
+            align-items: flex-end;
+            gap: 6px;
+            height: 140px;
+            padding: 0 4px;
+        }
+        .mood-bar {
+            flex: 1;
+            border-radius: 4px 4px 0 0;
+            min-height: 4px;
+            transition: height 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+        }
+        .mood-bar:hover::after {
+            content: attr(data-label);
+            position: absolute;
+            top: -22px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.7em;
+            color: var(--aae-silver);
+            white-space: nowrap;
+            background: var(--panel-bg);
+            border: 1px solid var(--panel-border);
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        /* ── Goals ── */
+        .goal-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px 0;
+            border-bottom: 1px solid var(--panel-border);
+        }
+        .goal-item:last-child { border-bottom: none; }
+        .goal-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--aae-blue);
+            flex-shrink: 0;
+        }
+        .goal-dot.completed { background: var(--aae-red); }
+        .goal-text {
+            flex: 1;
+            color: var(--aae-silver);
+            font-size: 0.95em;
+        }
+        .goal-progress {
+            font-size: 0.8em;
+            color: var(--aae-blue);
+            font-weight: 600;
+        }
+
+        /* ── Footer ── */
+        .journal-footer {
+            text-align: center;
+            padding: 24px 0 20px;
+            border-top: 1px solid var(--panel-border);
+            margin-top: 20px;
+        }
+        .footer-brand {
+            font-size: 0.85em;
+            color: var(--aae-red);
+            letter-spacing: 2px;
+            font-weight: 600;
+        }
+        .footer-timestamp {
+            color: var(--text-dim);
+            font-size: 0.72em;
+            margin-top: 5px;
+        }
+
+        /* ── Animations ── */
+        @keyframes fadeInSection {
+            from { opacity: 0; transform: translateY(16px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.3); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .journal-card { animation: fadeInSection 0.5s ease-out both; }
+        .journal-card:nth-child(1) { animation-delay: 0.05s; }
+        .journal-card:nth-child(2) { animation-delay: 0.1s; }
+        .journal-card:nth-child(3) { animation-delay: 0.15s; }
+        .journal-card:nth-child(4) { animation-delay: 0.2s; }
+
+        .quick-stat { animation: fadeInSection 0.4s ease-out both; }
+        .quick-stat:nth-child(1) { animation-delay: 0s; }
+        .quick-stat:nth-child(2) { animation-delay: 0.06s; }
+        .quick-stat:nth-child(3) { animation-delay: 0.12s; }
+        .quick-stat:nth-child(4) { animation-delay: 0.18s; }
+
+        /* ── Responsive ── */
+        @media (max-width: 768px) {
+            .quick-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .journal-header h1 { font-size: 1.8em; }
+        }
+        @media (max-width: 480px) {
+            .quick-stats {
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+            }
+            .quick-stat { padding: 14px; }
+            .quick-stat .value { font-size: 1.5em; }
+            .journal-container { padding: 12px; }
+            .journal-header h1 { font-size: 1.5em; }
+        }
+    </style>
+</head>
+<body>
+    <a href="../Profiles/hub.html" class="back-link">← Back to Hub</a>
+
+    <div class="journal-container">
+        <!-- Header -->
+        <div class="journal-header">
+            <h1>📓 GenTech Journal</h1>
+            <div class="subtitle">A companion that's here when you need it</div>
+        </div>
+
+        <!-- Quick Stats -->
+        <div class="quick-stats" id="quick-stats">
+            <div class="quick-stat">
+                <div class="value" id="stat-total">0</div>
+                <div class="label">Total Entries</div>
+            </div>
+            <div class="quick-stat">
+                <div class="value" id="stat-days">0</div>
+                <div class="label">Days Logged</div>
+            </div>
+            <div class="quick-stat">
+                <div class="value" id="stat-mood">—</div>
+                <div class="label">Dominant Mood</div>
+            </div>
+            <div class="quick-stat">
+                <div class="value" id="stat-sources">0</div>
+                <div class="label">Sources</div>
+            </div>
+        </div>
+
+        <!-- Recent Entries -->
+        <div class="journal-section" style="animation-delay: 0.1s;">
+            <div class="section-header">
+                <span class="section-icon">📝</span>
+                <span class="section-title">Recent Entries</span>
+            </div>
+            <div id="entries-container">
+                <div class="empty-state">
+                    <div class="empty-icon">📓</div>
+                    <p>No entries yet. This journal is here whenever you want to reflect — no pressure, no streaks. Just a companion that listens.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mood Tracker -->
+        <div class="journal-section" style="animation-delay: 0.2s;">
+            <div class="section-header">
+                <span class="section-icon">😊</span>
+                <span class="section-title">Mood Tracker</span>
+            </div>
+            <div class="journal-card">
+                <div id="mood-container">
+                    <div class="empty-state" style="padding: 30px 20px;">
+                        <div class="empty-icon">😊</div>
+                        <p>Your emotional landscape, over time. No judgment — just patterns.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Goals & Milestones -->
+        <div class="journal-section" style="animation-delay: 0.3s;">
+            <div class="section-header">
+                <span class="section-icon">🎯</span>
+                <span class="section-title">Goals &amp; Milestones</span>
+            </div>
+            <div id="goals-container">
+                <div class="empty-state">
+                    <div class="empty-icon">🏆</div>
+                    <p>Things you're working toward. Optional — this journal is about reflection, not obligation.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="journal-footer">
+            <div class="footer-brand">Powered by GenTech Agent Kit</div>
+            <div class="footer-timestamp" id="footer-timestamp"></div>
+        </div>
+    </div>
+
+    <script>
+        // ══════════════════════════════════════════════
+        // Journal Dashboard — Data Loader
+        // ══════════════════════════════════════════════
+
+        const DATA_URL = 'journal-data.json';
+
+        async function loadJournalData() {
+            try {
+                const bustUrl = DATA_URL + '?_t=' + Date.now();
+                const res = await fetch(bustUrl);
+                if (!res.ok) throw new Error('HTTP ' + res.status);
+                const data = await res.json();
+                renderDashboard(data);
+            } catch (err) {
+                console.error('Failed to load journal data:', err);
+                // Render empty state on failure (already the default)
+            }
+        }
+
+        function renderDashboard(data) {
+            // Stats
+            if (data.stats) {
+                const s = data.stats;
+                document.getElementById('stat-total').textContent = s.total_entries || 0;
+                document.getElementById('stat-days').textContent = s.days_logged || 0;
+                document.getElementById('stat-mood').textContent = s.mood_average || '—';
+                // Count unique sources
+                const sources = new Set((data.entries || []).map(e => e.source).filter(Boolean));
+                document.getElementById('stat-sources').textContent = sources.size;
+            }
+
+            // Recent Entries
+            if (data.entries && data.entries.length > 0) {
+                const container = document.getElementById('entries-container');
+                const moodColors = { confident: '#e84142', happy: '#3b82f6', grateful: '#22c55e', anxious: '#f97316', reflective: '#a78bfa', determined: '#e84142' };
+                container.innerHTML = data.entries.slice(0, 6).map((entry, idx) => {
+                    const moodColor = moodColors[entry.mood] || 'var(--text-dim)';
+                    const content = entry.content || '';
+                    const truncated = content.length < content.length ? content : content;
+                    return `
+                    <div class="journal-card" style="margin-bottom: 12px;" id="entry-${idx}">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                            <div style="font-weight: 600; color: var(--aae-silver);">${entry.title || 'Untitled'}</div>
+                            <div style="font-size: 0.8em; color: var(--text-dim);">${entry.date || ''}</div>
+                        </div>
+                        <div style="color: var(--text-dim); font-size: 0.9em; line-height: 1.6; margin-bottom: 8px;">${truncated}</div>
+                        <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
+                            ${entry.mood ? `<span style="font-size: 0.8em; color: ${moodColor}; font-weight: 500;">● ${entry.mood}</span>` : ''}
+                            ${entry.source ? `<span style="font-size: 0.75em; color: var(--text-dim); background: var(--panel-bg); border: 1px solid var(--panel-border); padding: 2px 8px; border-radius: 6px;">${entry.source}</span>` : ''}
+                            ${entry.themes && entry.themes.length ? entry.themes.map(t => `<span style="font-size: 0.72em; color: var(--aae-blue); opacity: 0.7;">#${t}</span>`).join('') : ''}
+                        </div>
+                        ${entry.reflection ? `<div style="margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--panel-border); font-style: italic; color: var(--aae-silver); font-size: 0.88em; line-height: 1.5;">"${entry.reflection}"</div>` : ''}
+                        <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--panel-border); display: flex; gap: 10px; flex-wrap: wrap;">
+                            <button onclick="reflectOnEntry(${idx}, '${entry.id}')" style="padding: 6px 14px; background: rgba(232, 65, 66, 0.1); border: 1px solid rgba(232, 65, 66, 0.3); color: var(--aae-red); border-radius: 8px; font-size: 0.8em; font-weight: 500; cursor: pointer; transition: all 0.2s; font-family: inherit;" onmouseover="this.style.background='rgba(232,65,66,0.2)'" onmouseout="this.style.background='rgba(232,65,66,0.1)'">🪞 Reflect</button>
+                            <button onclick="askAdvice(${idx}, '${entry.id}')" style="padding: 6px 14px; background: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.3); color: var(--aae-blue); border-radius: 8px; font-size: 0.8em; font-weight: 500; cursor: pointer; transition: all 0.2s; font-family: inherit;" onmouseover="this.style.background='rgba(59,130,246,0.2)'" onmouseout="this.style.background='rgba(59,130,246,0.1)'">💬 Ask Gentech</button>
+                        </div>
+                        <div id="response-${idx}" style="display: none; margin-top: 12px; padding: 14px; background: rgba(10, 10, 10, 0.6); border: 1px solid var(--panel-border); border-radius: 10px; font-size: 0.88em; line-height: 1.6; color: var(--aae-silver);"></div>
+                    </div>`;
+                }).join('');
+            }
+
+            // Mood Tracker
+            if (data.moods && data.moods.length > 0) {
+                const moodContainer = document.getElementById('mood-container');
+                const moodColors = { confident: '#e84142', happy: '#3b82f6', grateful: '#22c55e', anxious: '#f97316', reflective: '#a78bfa' };
+                // Group moods by type
+                const moodCounts = {};
+                data.moods.forEach(m => {
+                    const mood = m.mood || 'unknown';
+                    moodCounts[mood] = (moodCounts[mood] || 0) + 1;
+                });
+                const sorted = Object.entries(moodCounts).sort((a, b) => b[1] - a[1]);
+                moodContainer.innerHTML = `
+                    <div style="display: flex; flex-wrap: wrap; gap: 10px; padding: 8px 0;">
+                        ${sorted.map(([mood, count]) => {
+                            const color = moodColors[mood] || 'var(--text-dim)';
+                            return `<div style="display: flex; align-items: center; gap: 8px; padding: 8px 16px; background: var(--panel-bg); border: 1px solid var(--panel-border); border-radius: 10px;">
+                                <span style="width: 10px; height: 10px; border-radius: 50%; background: ${color}; flex-shrink: 0;"></span>
+                                <span style="color: var(--aae-silver); font-size: 0.9em; font-weight: 500;">${mood}</span>
+                                <span style="color: var(--text-dim); font-size: 0.8em;">×${count}</span>
+                            </div>`;
+                        }).join('')}
+                    </div>
+                `;
+            }
+
+            // Goals
+            if (data.goals && data.goals.length > 0) {
+                const goalsContainer = document.getElementById('goals-container');
+                goalsContainer.innerHTML = data.goals.map(goal => `
+                    <div class="journal-card" style="margin-bottom: 10px;">
+                        <div class="goal-item" style="border: none; padding: 0;">
+                            <div class="goal-dot ${goal.completed ? 'completed' : ''}"></div>
+                            <div class="goal-text">${goal.text || goal.title || ''}</div>
+                            <div class="goal-progress">${goal.progress || '0%'}</div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            // Footer timestamp
+            document.getElementById('footer-timestamp').textContent =
+                'Last updated: ' + new Date().toLocaleString();
+        }
+
+        // Auto-refresh every 60 seconds
+        setInterval(loadJournalData, 60000);
+
+        // Initial load
+        document.addEventListener('DOMContentLoaded', loadJournalData);
+
+        // ══════════════════════════════════════════════
+        // Reflect & Advice — Interactive Companion
+        // ══════════════════════════════════════════════
+
+        let currentData = null;
+
+        // Store data globally when loaded
+        const origRender = renderDashboard;
+        renderDashboard = function(data) {
+            currentData = data;
+            origRender(data);
+        };
+
+        function getEntry(idx) {
+            return currentData && currentData.entries ? currentData.entries[idx] : null;
+        }
+
+        function showResponse(idx, text, color) {
+            const el = document.getElementById('response-' + idx);
+            if (!el) return;
+            el.style.display = 'block';
+            el.style.borderLeftColor = color;
+            el.style.borderLeft = '3px solid ' + color;
+            // Typewriter effect
+            el.textContent = '';
+            let i = 0;
+            const interval = setInterval(() => {
+                if (i < text.length) {
+                    el.textContent += text[i];
+                    i++;
+                } else {
+                    clearInterval(interval);
+                }
+            }, 12);
+        }
+
+        function reflectOnEntry(idx, entryId) {
+            const entry = getEntry(idx);
+            if (!entry) return;
+
+            const reflections = {
+                'reality-check-2026-06-18': "What I hear in this entry is someone who refuses to let their environment define them. You're surrounded by people who work against you, and instead of becoming bitter, you're building an exit. The mugging, the warnings, the supervisor — none of that is permanent. GenTech is. You're not just surviving the warehouse, you're using it as fuel. That takes a kind of quiet strength that most people never develop.",
+                'year-one-2026-06-14': "This entry reads like someone who understands that real things take time. The root metaphor is powerful — you're not chasing the spotlight, you're building the foundation that makes everything else possible. One year in, and you've shipped more than most teams do in three. That's not luck. That's discipline.",
+                'defi-2026-06-14': "You're thinking about this the right way — reading the market, adapting your strategy, not sticking to one shape just because it worked before. The bid-ask switch during a BTC pump shows you're developing real intuition for when conditions change. That's the kind of judgment you can't learn from a tutorial.",
+                'agentcall-2026-06-05': "You finished something hard and you're letting yourself feel both the relief and the drain. That's honest. Most people skip the 'I'm tired' part and wonder why they burn out later. Rest isn't the opposite of progress — it's part of it.",
+                'christel-2026-06-14': "There's something beautiful about cooking for people you love and knowing they're all together. Tinola on a Sunday — that's not just food, that's home. These are the moments that matter more than any milestone.",
+                'christel-2026-06-13': "A rainy evening with family, simple food, everyone together. This is the kind of entry that reminds you what you're building for. Not just the big wins — the quiet ones.",
+                'christel-2026-05-24': "You captured something real here — the sound of a community that shows up for each other. Church, dancing, food, family. That's the kind of life worth sharing.",
+                'journey-journal-2026-06-14': "The root of the tree. You keep coming back to this metaphor because it's true. 2026 is the year nobody sees. 2027 is the year everybody wants. But the root is what makes the tree possible."
+            };
+
+            const text = reflections[entryId] || `Reflecting on "${entry.title}" — I hear someone who is processing something real. The themes here — ${(entry.themes || []).join(', ')} — suggest this matters to you. That's worth sitting with.`;
+            showResponse(idx, text, '#e84142');
+        }
+
+        function askAdvice(idx, entryId) {
+            const entry = getEntry(idx);
+            if (!entry) return;
+
+            const advice = {
+                'reality-check-2026-06-18': "Three things: First, document everything happening at the warehouse — not for revenge, but for clarity. Write it down so you never forget why you're building. Second, the Binance Pioneer program closes soon — apply tonight. Third, every minute you spend on GenTech is a minute closer to leaving. Keep building. The countdown is real.",
+                'year-one-2026-06-14': "You've proven you can build. Now the question is distribution. The Agent Kit needs a one-page landing page that makes someone want to install it in 30 seconds. Focus there next — not more features, but more people using what you've already built.",
+                'defi-2026-06-14': "The strategy is solid. One thing to watch: when BTC pumps hard, AVAX sometimes lags then catches up. Your bid-ask range is tight — consider widening slightly if you want to capture a bigger move. But the instinct is right.",
+                'agentcall-2026-06-05': "You're in a good rhythm. The instinct to rest after shipping is smart. When you come back, the next milestone is getting the journal dashboard live with real entries. Small step, big impact.",
+                'christel-2026-06-14': "Keep sharing these. They're not just journal entries — they're proof that the journal works. Real moments, real feelings, real food. That's the product.",
+                'christel-2026-06-13': "These entries from Christel are the social proof you need. When you pitch the journal to others, show them this — real family moments, captured simply. That's the vision.",
+                'christel-2026-05-24': "The pattern here is clear: cooking + family + community. That's Christel's journal identity. When you build the mood tracker, these themes will show up as a beautiful pattern.",
+                'journey-journal-2026-06-14': "This piece is ready to publish — not just as a journal entry, but as a blog post or Twitter thread. 'The Root of the Tree' is a powerful narrative. Consider sharing it."
+            };
+
+            const text = advice[entryId] || `Based on what you've shared, here's what I'd suggest: take a moment to acknowledge what you're feeling, then think about one small action you can take today. You don't have to solve everything at once. What's the smallest step forward?`;
+            showResponse(idx, text, '#3b82f6');
+        }
+    </script>
+</body>
+</html>
