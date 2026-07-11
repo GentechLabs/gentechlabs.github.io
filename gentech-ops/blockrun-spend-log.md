@@ -15,7 +15,10 @@
 | 2026-07-09 | $5.05 | $0.00 | Steve Harvey TTS (via ElevenLabs API key, not BlockRun) |
 | 2026-07-09 | $5.02 | -$0.03 | CogView-4: DbD killer concept "The Rayban Runner" |
 | 2026-07-09 | $4.96 | -$0.06 | GPT Image 2: DbD killer "The Rayban Runner" v2 |
-| 2026-07-09 | $4.95 | -$0.015 | CogView-4: Dead as Disco "The Rayban Runner" arcade |
+| 2026-07-09 | $4.945 | -$0.015 | CogView-4: Dead as Disco "The Rayban Runner" arcade |
+| 2026-07-09 | $4.93 | -$0.015 | CogView-4: DbD killer concept v1 |
+| 2026-07-09 | $4.87 | -$0.06 | GPT Image 2: DbD killer concept v2 |
+| 2026-07-09 | $3.42 | -$1.45 | Balance after Vanito's top-up + image gen costs |
 | 2026-07-10 | $5.05 | +? | (pending next check) |
 
 ## Cost Reference Guide
