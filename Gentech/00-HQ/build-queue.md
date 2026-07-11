@@ -949,3 +949,31 @@ GenTech Labs
 - Gepard 1.0: https://huggingface.co/nineninesix/gepard-1.0 (Apache 2.0)
 - OpenVoice: https://github.com/myshell-ai/OpenVoice (MIT)
 - StyleTTS 2: https://github.com/yl4579/StyleTTS2 (MIT)
+
+---
+
+### 30. Deploy Subscription Hub to gentechlabs.net 🚀
+**Status**: 🔵 Ready — HTML built, handoff doc written. Awaiting Forge deploy.
+**Goal**: Turn `gentechlabs.net` into a commercial storefront with Q402 subscription tiers.
+
+**Tiers:**
+| Plan | Price | What |
+|------|-------|------|
+| Basic | $3/mo | LP alerts, Atlas packs, journal |
+| Pro | $10/mo | API access, signals, registrations |
+| Max | $25/mo | Build requests, early access |
+| Vanito Music | $3/mo | Tracks + early releases |
+| Vanito Vault | $10/mo | Music + anime + exclusives |
+
+**Steps (Forge):**
+- [ ] Read handoff: `Gentech/handoffs/gentech-to-forge/2026-07-11-gentechlabs-subscription-deploy.md`
+- [ ] Read HTML: `gentech-ops/gentechlabs-subscription-hub.html`
+- [ ] Choose route: `/subscribe`, subdomain, or replace main page
+- [ ] Update `wrangler.toml` + `src/worker.ts`
+- [ ] `npx wrangler deploy`
+- [ ] Verify all routes still work
+
+**Context:**
+- Cloudflare Workers site. 8 existing subdomains (api, defi, search, fleet, etc.)
+- x402 already live on all endpoints
+- Subscriptions add Q402 recurring layer on top
