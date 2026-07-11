@@ -1,0 +1,1620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<title>⚔️ Vanito's Hub — GenTech</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --panel: #12121a;
+    --border: #1e1e2e;
+    --gold: #8a1a1a;
+    --fire: #cc2222;
+    --magma: #4a0a0a;
+    --text: #e0e0e0;
+    --dim: #666;
+    --card: #16161f;
+    --card-hover: #1c1c28;
+    --green: #4caf50;
+    --blue: #2196f3;
+    --red: #ef5350;
+    --purple: #ab47bc;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', -apple-system, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .container {
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 0 16px 80px;
+    width: 100%;
+  }
+
+  /* ═══ HEADER ═══ */
+  .header {
+    background: linear-gradient(135deg, #0a0a0f 0%, #1a0505 50%, #2a0a0a 100%);
+    padding: 32px 20px 28px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+    animation: shimmer 8s ease-in-out infinite;
+  }
+
+  @keyframes shimmer {
+    0%, 100% { transform: translateX(-30%) translateY(-30%); }
+    50% { transform: translateX(30%) translateY(30%); }
+  }
+
+  .header h1 {
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    font-size: 1.8rem;
+    color: #fff;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.4);
+    margin-bottom: 6px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .header .subtitle {
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.85);
+    font-weight: 500;
+    position: relative;
+    z-index: 1;
+  }
+
+  .settings-btn {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: rgba(255,255,255,0.15);
+    border: none;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    font-size: 1.1em;
+    cursor: pointer;
+    color: #fff;
+    backdrop-filter: blur(8px);
+    z-index: 2;
+    transition: background 0.2s;
+  }
+
+  .settings-btn:hover { background: rgba(255,255,255,0.25); }
+
+  /* ═══ TABS ═══ */
+  .tab-content {
+    display: none;
+    padding: 20px 0;
+    animation: fadeIn 0.3s ease;
+  }
+
+  .tab-content.active { display: block; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ═══ CARDS ═══ */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 18px;
+    margin-bottom: 12px;
+    transition: all 0.2s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card:hover {
+    background: var(--card-hover);
+    border-color: rgba(201,168,76,0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+  }
+
+  .card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+
+  .card-title {
+    font-family: 'Cinzel', serif;
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--gold);
+  }
+
+  .card-desc {
+    font-size: 0.85rem;
+    color: var(--dim);
+    line-height: 1.5;
+  }
+
+  /* ═══ TAGS ═══ */
+  .tag {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .tag-gold { background: rgba(201,168,76,0.15); color: var(--gold); border: 1px solid rgba(201,168,76,0.3); }
+  .tag-fire { background: rgba(255,107,53,0.15); color: var(--fire); border: 1px solid rgba(255,107,53,0.3); }
+  .tag-blue { background: rgba(33,150,243,0.15); color: var(--blue); border: 1px solid rgba(33,150,243,0.3); }
+  .tag-green { background: rgba(76,175,80,0.15); color: var(--green); border: 1px solid rgba(76,175,80,0.3); }
+  .tag-purple { background: rgba(171,71,188,0.15); color: var(--purple); border: 1px solid rgba(171,71,188,0.3); }
+
+  /* ═══ STATS ═══ */
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  .stat-card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 10px;
+    text-align: center;
+    transition: all 0.2s;
+  }
+
+  .stat-card:hover {
+    border-color: var(--gold);
+    transform: scale(1.02);
+  }
+
+  .stat-value {
+    font-family: 'Cinzel', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--gold);
+    margin-bottom: 4px;
+  }
+
+  .stat-label {
+    font-size: 0.7rem;
+    color: var(--dim);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  /* ═══ AVATAR ═══ */
+  .avatar-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 18px;
+    margin-bottom: 16px;
+  }
+
+  .avatar-circle {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--gold), var(--fire));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+    box-shadow: 0 4px 16px rgba(201,168,76,0.3);
+  }
+
+  .avatar-info .name {
+    font-family: 'Cinzel', serif;
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--text);
+  }
+
+  .avatar-info .role {
+    font-size: 0.8rem;
+    color: var(--gold);
+  }
+
+  /* ═══ SECTION TITLE ═══ */
+  .section-title {
+    font-family: 'Cinzel', serif;
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: var(--dim);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* ═══ LINK BUTTON ═══ */
+  .link-btn {
+    display: block;
+    text-align: center;
+    padding: 14px;
+    margin-top: 14px;
+    background: linear-gradient(135deg, rgba(201,168,76,0.1), rgba(255,107,53,0.1));
+    border: 1px solid rgba(201,168,76,0.3);
+    border-radius: 12px;
+    color: var(--gold);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.2s;
+  }
+
+  .link-btn:hover {
+    background: linear-gradient(135deg, rgba(201,168,76,0.2), rgba(255,107,53,0.2));
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(201,168,76,0.2);
+  }
+
+  /* ═══ DEAL CARD ═══ */
+  .deal-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 16px;
+  }
+
+  .deal-info { flex: 1; }
+
+  .deal-title {
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin-bottom: 4px;
+  }
+
+  .deal-meta {
+    font-size: 0.8rem;
+    color: var(--dim);
+  }
+
+  .deal-price {
+    text-align: right;
+  }
+
+  .price-now {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--green);
+  }
+
+  .price-was {
+    font-size: 0.85rem;
+    color: var(--dim);
+    text-decoration: line-through;
+  }
+
+  .discount-badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    margin-left: 8px;
+  }
+
+  .discount-hot { background: var(--red); color: #fff; }
+  .discount-warm { background: var(--fire); color: #fff; }
+  .discount-cool { background: var(--blue); color: #fff; }
+
+  /* ═══ TRAVEL CARD ═══ */
+  .travel-card {
+    border-left: 3px solid var(--gold);
+    padding-left: 18px;
+  }
+
+  .travel-dates {
+    font-size: 0.8rem;
+    color: var(--dim);
+    margin-bottom: 6px;
+  }
+
+  .travel-name {
+    font-family: 'Cinzel', serif;
+    font-size: 0.95rem;
+    margin-bottom: 4px;
+  }
+
+  .travel-companion {
+    font-size: 0.8rem;
+    color: var(--fire);
+    margin-bottom: 8px;
+  }
+
+  .status-pill {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+
+  .pill-confirmed { background: var(--green); color: #fff; }
+  .pill-planning { background: var(--fire); color: #fff; }
+
+  /* ═══ MUSIC CARD ═══ */
+  .music-card {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 16px;
+  }
+
+  .music-icon {
+    font-size: 1.8rem;
+    flex-shrink: 0;
+  }
+
+  .music-info { flex: 1; }
+
+  .music-title {
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin-bottom: 2px;
+    color: var(--text);
+  }
+
+  .music-meta {
+    font-size: 0.8rem;
+    color: var(--dim);
+  }
+
+  .music-link {
+    display: inline-block;
+    padding: 6px 14px;
+    background: linear-gradient(135deg, rgba(201,168,76,0.15), rgba(255,107,53,0.15));
+    border: 1px solid rgba(201,168,76,0.3);
+    border-radius: 8px;
+    color: var(--gold);
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 600;
+    transition: all 0.2s;
+  }
+
+  .music-link:hover {
+    background: linear-gradient(135deg, rgba(201,168,76,0.25), rgba(255,107,53,0.25));
+    transform: translateY(-1px);
+  }
+    font-weight: 600;
+    font-size: 1rem;
+    margin-bottom: 6px;
+  }
+
+  .travel-companion {
+    font-size: 0.8rem;
+    color: var(--fire);
+  }
+
+  .status-pill {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: 600;
+  }
+
+  .pill-confirmed {
+    background: rgba(76,175,80,0.15);
+    color: var(--green);
+    border: 1px solid rgba(76,175,80,0.3);
+  }
+
+  .pill-planning {
+    background: rgba(33,150,243,0.15);
+    color: var(--blue);
+    border: 1px solid rgba(33,150,243,0.3);
+  }
+
+  /* ═══ CHAT PLACEHOLDER ═══ */
+  .chat-placeholder {
+    text-align: center;
+    padding: 40px 24px;
+    background: var(--panel);
+    border: 2px dashed var(--border);
+    border-radius: 16px;
+  }
+
+  .chat-icon {
+    font-size: 3rem;
+    margin-bottom: 16px;
+  }
+
+  .chat-placeholder h3 {
+    font-family: 'Cinzel', serif;
+    color: var(--gold);
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+  }
+
+  .chat-placeholder p {
+    font-size: 0.85rem;
+    color: var(--dim);
+    line-height: 1.6;
+    margin-bottom: 16px;
+  }
+
+  .chat-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    background: rgba(255,152,0,0.1);
+    color: #ff9800;
+    border: 1px solid rgba(255,152,0,0.25);
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+  }
+
+  /* ═══ BOTTOM NAV ═══ */
+  .bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 480px;
+    background: rgba(10,10,15,0.95);
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0 14px;
+    z-index: 100;
+    backdrop-filter: blur(12px);
+  }
+
+  .nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 6px 12px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: none;
+    background: none;
+    color: var(--dim);
+    font-family: inherit;
+    font-size: 0.7rem;
+    font-weight: 500;
+  }
+
+  .nav-item .icon { font-size: 1.4rem; }
+
+  .nav-item.active {
+    color: var(--gold);
+    background: rgba(201,168,76,0.1);
+  }
+
+  .nav-item:hover { color: var(--gold); }
+
+  /* ═══ FOOTER ═══ */
+  .footer {
+    text-align: center;
+    padding: 20px;
+    font-size: 0.75rem;
+    color: var(--dim);
+    border-top: 1px solid var(--border);
+    margin-top: auto;
+  }
+
+  /* ═══ SETTINGS MODAL ═══ */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    background: rgba(0,0,0,0.7);
+    backdrop-filter: blur(6px);
+    align-items: flex-end;
+    justify-content: center;
+  }
+
+  .modal-overlay.show { display: flex; }
+
+  .modal-content {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 20px 20px 0 0;
+    padding: 24px;
+    width: 100%;
+    max-width: 480px;
+    animation: slideUp 0.3s ease;
+  }
+
+  @keyframes slideUp {
+    from { transform: translateY(100%); }
+    to { transform: translateY(0); }
+  }
+
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  .modal-header h3 {
+    font-size: 1.1rem;
+    color: var(--text);
+  }
+
+  .modal-close {
+    background: none;
+    border: none;
+    color: var(--dim);
+    font-size: 1.3em;
+    cursor: pointer;
+  }
+
+  .settings-option {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    cursor: pointer;
+    text-align: left;
+    color: var(--text);
+    font-family: inherit;
+    font-size: 0.9em;
+    transition: all 0.2s;
+    margin-bottom: 10px;
+    width: 100%;
+  }
+
+  .settings-option:hover {
+    border-color: var(--gold);
+  }
+
+  .settings-option.selected {
+    border-color: var(--gold);
+    background: rgba(201,168,76,0.1);
+  }
+
+  .settings-option.selected::after {
+    content: '✓';
+    margin-left: auto;
+    color: var(--gold);
+    font-weight: 700;
+  }
+
+  .settings-save {
+    width: 100%;
+    padding: 14px;
+    background: var(--gold);
+    border: none;
+    border-radius: 12px;
+    color: #fff;
+    font-weight: 600;
+    font-size: 0.95em;
+    cursor: pointer;
+    font-family: inherit;
+    margin-top: 8px;
+    transition: background 0.2s;
+  }
+
+  .settings-save:hover { background: #d4b85c; }
+
+  /* ═══ CHARACTERS THEME ═══ */
+  #tab-characters {
+    background: #0d0d0d;
+    border-radius: 12px;
+    padding: 16px;
+    margin-top: -8px;
+  }
+
+  #tab-characters .card {
+    background: linear-gradient(145deg, #1a0a0a 0%, #0d0d0d 100%);
+    border: 1px solid #3d1a1a;
+    border-radius: 12px;
+  }
+
+  #tab-characters .card-kage {
+    border-left: 3px solid #cc2222;
+    box-shadow: 0 0 15px rgba(200, 30, 30, 0.1);
+  }
+
+  #tab-characters .card-hikari {
+    border-left: 3px solid #cc3333;
+    box-shadow: 0 0 15px rgba(200, 50, 50, 0.1);
+  }
+
+  #tab-characters .card-together {
+    border: 1px solid #5d2a0a;
+    background: linear-gradient(180deg, #1a0a0a 0%, #0d0805 100%);
+    box-shadow: 0 0 20px rgba(200, 80, 20, 0.08);
+  }
+
+  .char-tag {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+
+  .char-tag.red { background: #cc2222; color: #fff; }
+  .char-tag.gold { background: #cc3333; color: #fff; }
+  .char-tag.dark { background: #1a1a1a; color: #aaa; border: 1px solid #333; }
+  .char-tag.fire { background: #cc4400; color: #fff; }
+
+  .char-name-kage {
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: #e83030;
+    text-shadow: 0 0 10px rgba(232, 48, 48, 0.3);
+    letter-spacing: 2px;
+  }
+
+  .char-name-hikari {
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: #e03030;
+    letter-spacing: 2px;
+  }
+
+  .char-subtitle {
+    font-size: 0.8rem;
+    color: #666;
+    font-style: italic;
+  }
+
+  .char-bio {
+    margin-top: 8px;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: #ccc;
+  }
+
+  .char-bio strong {
+    color: #e0e0e0;
+  }
+
+  #tab-characters .section-title {
+    color: #cc3333;
+  }
+
+  .char-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  /* ═══ DYNAMIC HEADER ═══ */
+  #page-header.normal-header {
+    background: linear-gradient(135deg, #0a0a0f 0%, #1a0505 50%, #2a0a0a 100%);
+    padding: 32px 20px 28px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+
+  #page-header.normal-header::before {
+    display: none;
+  }
+
+  #page-header.characters-header {
+    padding: 0;
+    background: none;
+    overflow: hidden;
+    position: relative;
+    border-radius: 0 0 12px 12px;
+  }
+
+  #page-header.characters-header::before {
+    display: none;
+  }
+
+  #page-header.characters-header img {
+    width: 100%;
+    display: block;
+    border-radius: 0 0 12px 12px;
+  }
+
+  #page-header.characters-header .settings-btn {
+    z-index: 3;
+  }
+
+  /* ═══ CHARACTERS LIGHTING EFFECTS ═══ */
+  @keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 15px rgba(200,30,30,0.15), 0 0 40px rgba(200,30,30,0.05); }
+    50% { box-shadow: 0 0 25px rgba(200,30,30,0.3), 0 0 60px rgba(200,30,30,0.1); }
+  }
+
+  @keyframes pulse-gold {
+    0%, 100% { box-shadow: 0 0 15px rgba(200,50,50,0.15), 0 0 40px rgba(200,50,50,0.05); }
+    50% { box-shadow: 0 0 25px rgba(200,50,50,0.3), 0 0 60px rgba(200,50,50,0.1); }
+  }
+
+  @keyframes light-sweep {
+    0% { transform: translateX(-100%) rotate(25deg); }
+    100% { transform: translateX(200%) rotate(25deg); }
+  }
+
+  @keyframes ember-rise {
+    0% { transform: translateY(0) scale(1); opacity: 0.6; }
+    100% { transform: translateY(-120px) scale(0); opacity: 0; }
+  }
+
+  @keyframes text-pulse {
+    0%, 100% { text-shadow: 0 0 10px rgba(204,51,51,0.3); }
+    50% { text-shadow: 0 0 20px rgba(204,51,51,0.6), 0 0 40px rgba(204,51,51,0.2); }
+  }
+
+  @keyframes fade-slide-up {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes border-glow {
+    0%, 100% { border-color: #cc2222; }
+    50% { border-color: #ff4444; }
+  }
+
+  @keyframes border-glow-hikari {
+    0%, 100% { border-color: #cc3333; }
+    50% { border-color: #ff5555; }
+  }
+
+  @keyframes album-glow {
+    0%, 100% { border-color: #5d2a0a; box-shadow: 0 0 20px rgba(200,80,20,0.08); }
+    50% { border-color: #8d3a1a; box-shadow: 0 0 35px rgba(200,80,20,0.2); }
+  }
+
+  /* Banner glow */
+  #tab-characters > img:first-child,
+  #tab-characters > video:first-child {
+    animation: pulse-glow 3s ease-in-out infinite;
+    transition: all 0.3s;
+  }
+
+  /* KAGE card */
+  .card-kage {
+    border: 1px solid #3d1a1a;
+    border-left: 3px solid #cc2222;
+    animation: border-glow 3s ease-in-out infinite, fade-slide-up 0.6s ease-out;
+  }
+
+  /* HIKARI card */
+  .card-hikari {
+    border: 1px solid #3d1a1a;
+    border-left: 3px solid #cc3333;
+    animation: border-glow-hikari 3s ease-in-out infinite, fade-slide-up 0.7s ease-out;
+  }
+
+  /* Album card */
+  .card-together {
+    animation: fade-slide-up 0.9s ease-out;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card-together::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    background: linear-gradient(90deg, transparent 30%, rgba(255,255,255,0.03) 50%, transparent 70%);
+    animation: light-sweep 6s ease-in-out infinite;
+  }
+
+  .card-together img,
+  .card-together video {
+    animation: album-glow 3s ease-in-out infinite;
+  }
+
+  /* KAGEKŌ title glow */
+  .card-together > div:first-of-type {
+    animation: text-pulse 3s ease-in-out infinite;
+  }
+
+  /* Floating embers on album section */
+  .card-together::before {
+    content: '✦ ✧ ✦';
+    position: absolute;
+    top: 10%;
+    right: 10%;
+    font-size: 0.5rem;
+    color: rgba(255,100,50,0.2);
+    animation: ember-rise 4s ease-in infinite;
+    pointer-events: none;
+  }
+
+  #tab-characters .section-title {
+    animation: fade-slide-up 0.4s ease-out;
+  }
+
+  /* ═══ RAIN EFFECT ═══ */
+  @keyframes rain-fall {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(100vh); }
+  }
+
+  #tab-characters {
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Cards get a wet glass overlay */
+  #tab-characters .card {
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Water sheen on cards */
+  #tab-characters .card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    background: linear-gradient(
+      180deg,
+      rgba(200,210,230,0.04) 0%,
+      transparent 10%,
+      rgba(200,210,230,0.02) 40%,
+      transparent 60%,
+      rgba(200,210,230,0.03) 80%,
+      transparent 100%
+    );
+    z-index: 1;
+  }
+
+  /* Drip animation on cards */
+  @keyframes drip {
+    0% { transform: translateY(-100%); opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 0.5; }
+    100% { transform: translateY(100%); opacity: 0; }
+  }
+
+  /* Rain canvas setup */
+  #rain-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9999;
+    display: none;
+  }
+
+  #tab-characters.active ~ #rain-canvas,
+  #tab-characters:not(.hidden) ~ #rain-canvas {
+    display: block;
+  }
+
+  /* UNRELEASED ═══ */
+  .unreleased-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .unreleased-chip {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 6px 12px;
+    font-size: 0.8rem;
+    color: var(--dim);
+  }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<div id="page-header" class="header normal-header">
+  <h1>⚔️ Vanito's Hub</h1>
+  <button class="settings-btn" onclick="openSettings()" title="Settings">⚙️</button>
+</div>
+
+<!-- Settings Modal -->
+<div id="settings-modal" class="modal-overlay" onclick="if(event.target===this)closeSettings()">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3>⚙️ Settings</h3>
+      <button class="modal-close" onclick="closeSettings()">✕</button>
+    </div>
+    <p style="font-size:0.85em; color:var(--dim); margin-bottom:16px;">Choose your default tab.</p>
+    <button class="settings-option" data-tab="gaming" onclick="setDefaultTab('gaming')">
+      <span style="font-size:1.4em;">🎮</span>
+      <div><strong>Gaming</strong><br><span style="font-size:0.8em; color:var(--dim);">POE2 builds, wishlist</span></div>
+    </button>
+    <button class="settings-option" data-tab="profile" onclick="setDefaultTab('profile')">
+      <span style="font-size:1.4em;">🛡️</span>
+      <div><strong>Profile</strong><br><span style="font-size:0.8em; color:var(--dim);">Your identity</span></div>
+    </button>
+    <button class="settings-option" data-tab="travel" onclick="setDefaultTab('travel')">
+      <span style="font-size:1.4em;">✈️</span>
+      <div><strong>Travel</strong><br><span style="font-size:0.8em; color:var(--dim);">Trips & adventures</span></div>
+    </button>
+    <button class="settings-option" data-tab="music" onclick="setDefaultTab('music')">
+      <span style="font-size:1.4em;">🎵</span>
+      <div><strong>Music</strong><br><span style="font-size:0.8em; color:var(--dim);">Song collection</span></div>
+    </button>
+    <button class="settings-option" data-tab="chat" onclick="setDefaultTab('chat')">
+      <span style="font-size:1.4em;">💬</span>
+      <div><strong>Chat</strong><br><span style="font-size:0.8em; color:var(--dim);">Talk to Gentech</span></div>
+    </button>
+    <button class="settings-save" onclick="closeSettings()">Done</button>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- ═══════ GAMING TAB ═══════ -->
+  <div id="tab-gaming" class="tab-content active">
+
+    <div class="avatar-card">
+      <div class="avatar-circle">⚔️</div>
+      <div class="avatar-info">
+        <div class="name">Vanito the Wyvern</div>
+        <div class="role">POE2 Warrior · Facebreaker Main</div>
+      </div>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-value">48h</div>
+        <div class="stat-label">Playtime</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">3</div>
+        <div class="stat-label">Characters</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">79</div>
+        <div class="stat-label">Wishlist</div>
+      </div>
+    </div>
+
+    <div class="section-title">🔥 Hot Deals</div>
+
+    <div class="card deal-card">
+      <div class="deal-info">
+        <div class="deal-title">Texas Chain Saw Massacre</div>
+        <div class="deal-meta">Asymmetric horror • Steam</div>
+      </div>
+      <div class="deal-price">
+        <span class="price-now">$3.74</span>
+        <span class="discount-badge discount-hot">75% OFF</span>
+        <div class="price-was">$14.99</div>
+      </div>
+    </div>
+
+    <div class="card deal-card">
+      <div class="deal-info">
+        <div class="deal-title">The Forever Winter</div>
+        <div class="deal-meta">Tactical survival • GameBillet</div>
+      </div>
+      <div class="deal-price">
+        <span class="price-now">$11.95</span>
+        <span class="discount-badge discount-hot">60% OFF</span>
+        <div class="price-was">$29.99</div>
+      </div>
+    </div>
+
+    <div class="card deal-card">
+      <div class="deal-info">
+        <div class="deal-title">Orcs Must Die! Deathtrap</div>
+        <div class="deal-meta">Tower defense • GameBillet</div>
+      </div>
+      <div class="deal-price">
+        <span class="price-now">$14.15</span>
+        <span class="discount-badge discount-warm">53% OFF</span>
+        <div class="price-was">$29.99</div>
+      </div>
+    </div>
+
+    <a href="Gaming/wishlist-vanito.html" class="link-btn">🎯 View Full Wishlist — 79 Games Tracked</a>
+    <a href="Gaming/poe2-vanito.html" class="link-btn">⚔️ Open POE2 Dashboard →</a>
+  </div>
+
+  <!-- ═══════ PROFILE TAB ═══════ -->
+  <div id="tab-profile" class="tab-content">
+
+    <div class="card" style="text-align:center; padding:28px;">
+      <div style="font-size:3rem; margin-bottom:12px;">🛡️</div>
+      <div style="font-family:'Cinzel',serif; font-size:1.4rem; font-weight:700; color:var(--gold); margin-bottom:4px;">Vanito Jones</div>
+      <div style="font-size:0.9rem; color:var(--fire); margin-bottom:16px;">GenTech Warrior · POE2 Player</div>
+      <div style="display:flex; justify-content:center; gap:20px; font-size:0.85rem; color:var(--dim);">
+        <span>🎂 Dec 29</span>
+        <span>⚔️ Warrior Main</span>
+      </div>
+    </div>
+
+    <div class="section-title">About</div>
+
+    <div class="card">
+      <div class="card-desc">Vanito is Jordan's son and a fierce POE2 Warrior. Known as "the Wyvern" for his relentless playstyle and love for Juggernaut builds. Running Facebreaker with Warcry scaling — pure melee devastation.</div>
+    </div>
+
+    <div class="section-title">Stats</div>
+
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-value" style="color:var(--fire);">Lv.68</div>
+        <div class="stat-label">Max Level</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" style="color:var(--blue);">Tactician</div>
+        <div class="stat-label">Ascendancy</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" style="color:var(--green);">79</div>
+        <div class="stat-label">Games Owned</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════ TRAVEL TAB ═══════ -->
+  <div id="tab-travel" class="tab-content">
+
+    <div class="section-title">Upcoming Trips</div>
+
+    <div class="card travel-card">
+      <div class="card-header">
+        <span class="card-title">🎢 Orlando Trip</span>
+        <span class="status-pill pill-confirmed">Confirmed</span>
+      </div>
+      <div class="travel-dates">Summer 2026 · Walt Disney World</div>
+      <div class="card-desc">Theme parks, roller coasters, and family adventures in Orlando, Florida.</div>
+    </div>
+
+    <div class="card travel-card" style="border-left-color: var(--fire);">
+      <div class="card-header">
+        <span class="card-title">🌴 Philippines — Boracay</span>
+        <span class="status-pill pill-planning">Planning</span>
+      </div>
+      <div class="travel-dates">Nov/Dec 2026</div>
+      <div class="travel-companion">With Jordan & Christel</div>
+      <div class="card-desc">Island paradise. White sand beaches, crystal waters, and tropical exploration.</div>
+    </div>
+
+    <a href="Travels/travel-dashboard-vanito.html" class="link-btn">🗺️ Open Travel Dashboard →</a>
+  </div>
+
+  <!-- ═══════ CHAT TAB ═══════ -->
+  <div id="tab-chat" class="tab-content">
+
+    <div class="chat-placeholder">
+      <div class="chat-icon">🤖</div>
+      <h3>Vanito's Agent — Coming Soon</h3>
+      <p>Ask about builds, track progress, get recommendations. Your personal GenTech AI companion.</p>
+      <div class="chat-status">⚡ Agent training...</div>
+    </div>
+
+  </div>
+
+  <!-- ═══════ MUSIC TAB ═══════ -->
+  <div id="tab-music" class="tab-content">
+
+    <div class="section-title">🎵 My Music</div>
+
+    <div id="music-list">
+      <!-- Songs will be added here by Gentech -->
+      <div class="card" style="text-align:center; padding:24px;">
+        <div style="font-size:2rem; margin-bottom:12px;">🎧</div>
+        <div style="color:var(--dim);">No songs yet!</div>
+        <div style="font-size:0.8rem; color:var(--dim); margin-top:8px;">Share songs with Gentech to add them here.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ═══════ CHARACTERS TAB ═══════ -->
+  <div id="tab-characters" class="tab-content">
+
+    <!-- Top Banner -->
+    <video src="https://raw.githubusercontent.com/ProtoJay4789/ProtoJay4789.github.io/main/music/vanito/kage-hikari-banner.mp4" autoplay loop muted playsinline poster="music/vanito/kage-hikari-banner.png" style="width:100%; border-radius:12px; margin-bottom:16px; border:2px solid #5d2a0a; box-shadow: 0 0 25px rgba(200,80,20,0.15);"></video>
+
+    <div class="section-title" style="margin-top:0;">🎭 KAGE × HIKARI — The Story</div>
+    <div style="font-size:0.85rem; color:#888; margin-bottom:16px; text-align:center;">Collab duo — screaming male + melodic female · <span style="color:#cc3333; font-weight:600;">Album: KAGEKŌ</span></div>
+
+    <!-- KAGE Full Bio -->
+    <div class="card card-kage" style="padding:16px; margin-bottom:16px;">
+      <div style="display:flex; gap:12px;">
+        <video src="music/vanito/kage-animated.mp4" autoplay loop muted playsinline poster="music/vanito/kage-yami-no-naka-de.png" style="width:140px; height:140px; object-fit:cover; border-radius:8px; border:2px solid #cc2222; box-shadow: 0 0 12px rgba(200,30,30,0.2); flex-shrink:0;"></video>
+        <div style="flex:1; min-width:0;">
+          <div class="char-name-kage">KAGE</div>
+          <div class="char-subtitle">影 — Shadow</div>
+          <div class="char-bio" style="margin-top:6px; font-size:0.82rem; line-height:1.5;">
+            <strong>Origin:</strong> Tokyo's underground streets. No family, no name — just a kid learning to survive in the alleys beneath the train lines. Found an old guitar at 16 and taught himself to scream because nobody was listening anyway.
+            <br><br>
+            <strong>The Blood Moon Night:</strong> Jumped by a crew in Shinjuku, outnumbered and bleeding against a wall. Looked up and saw the moon turn red through the smoke. Something snapped. Fought them all off with nothing but fury. Walked away with blood on his coat and <em>Yami no Naka De</em> in his head.
+            <br><br>
+            <strong>Personality:</strong> Silent outside, storm inside. Writes alone in a tiny apartment with a single red bulb. Screaming is easier than talking.
+          </div>
+          <div style="margin-top:6px; display:flex; gap:4px; flex-wrap:wrap;">
+            <span class="char-tag red">Screaming</span>
+            <span class="char-tag dark">Post-Hardcore</span>
+            <span class="char-tag dark">Lone Wolf</span>
+          </div>
+          <div style="margin-top:8px;">
+            <audio id="kage-player" controls preload="none" style="width:100%; height:36px; border-radius:4px;">
+              <source src="music/vanito/blood-moon.mp3" type="audio/mpeg">
+            </audio>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- HIKARI Full Bio -->
+    <div class="card card-hikari" style="padding:16px; margin-bottom:16px;">
+      <div style="display:flex; gap:12px;">
+        <video src="music/vanito/hikari-animated.mp4" autoplay loop muted playsinline poster="music/vanito/hikari-kizuna-no-chikara.png" style="width:140px; height:140px; object-fit:cover; border-radius:8px; border:2px solid #cc3333; box-shadow: 0 0 12px rgba(200,50,50,0.2); flex-shrink:0;"></video>
+        <div style="flex:1; min-width:0;">
+          <div class="char-name-hikari">HIKARI</div>
+          <div class="char-subtitle">光 — Light</div>
+          <div class="char-bio" style="margin-top:6px; font-size:0.82rem; line-height:1.5;">
+            <strong>Origin:</strong> Born in a small coastal town south of Tokyo. Her family ran a ramen shop — nothing special, but full of love. When she was 12, her father got sick. Music became her escape — she'd climb to the roof and sing to the stars.
+            <br><br>
+            <strong>The Breaking Point:</strong> Her father passed when she was 16. She moved to Tokyo with nothing but a bag and a dream. Started singing at live houses in Shimokitazawa — her voice so raw that people stopped mid-conversation to listen.
+            <br><br>
+            <strong>Personality:</strong> Fierce outside, soft at the core. Fights for everyone she loves. Her motto: <em>"Kizuna wa tsuyoi — bonds are stronger than any darkness."</em>
+          </div>
+          <div style="margin-top:6px; display:flex; gap:4px; flex-wrap:wrap;">
+            <span class="char-tag gold">Battle Anthem</span>
+            <span class="char-tag dark">J-Rock</span>
+            <span class="char-tag dark">Fierce</span>
+          </div>
+          <div style="margin-top:8px;">
+            <audio id="hikari-player" controls preload="none" style="width:100%; height:36px; border-radius:4px;">
+              <source src="music/vanito/fight-forever-never-quit.mp3" type="audio/mpeg">
+            </audio>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ DUO MUSIC DISCOGRAPHY ═══ -->
+    <div class="card card-together" style="padding:20px; margin-bottom:16px;">
+      <div style="font-size:1rem; font-weight:700; color:#cc3333; letter-spacing:1px; margin-bottom:4px; text-align:center;">🎵 DISCOGRAPHY</div>
+      <div style="font-size:0.75rem; color:#888; margin-bottom:16px; text-align:center; font-style:italic;">Shadow side · Light side</div>
+
+      <div style="display:flex; gap:12px; flex-wrap:wrap;">
+
+        <!-- ═══ KAGE SIDE ═══ -->
+        <div style="flex:1; min-width:140px; background:linear-gradient(180deg, #1a0505 0%, #0d0202 100%); border-radius:10px; border:1px solid #3d1a1a; padding:14px; position:relative; overflow:hidden;">
+          <div style="position:absolute; top:0; left:0; width:4px; height:100%; background:#cc2222;"></div>
+          <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px;">
+            <div style="width:32px; height:32px; border-radius:50%; background:#cc2222; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:0.9rem; color:#fff; flex-shrink:0;">K</div>
+            <div>
+              <div style="font-size:0.85rem; font-weight:700; color:#ff4444;">KAGE</div>
+              <div style="font-size:0.65rem; color:#884444;">影 — Shadow</div>
+            </div>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:6px;">
+            <div style="background:rgba(200,30,30,0.08); border-radius:6px; padding:6px 8px; border:1px solid rgba(200,30,30,0.15); position:relative; overflow:hidden;">
+              <div style="display:flex; gap:8px; align-items:center;">
+                <img src="music/vanito/kage-yami-no-naka-de.png" onclick="document.getElementById('kage-player-disco').play()" style="width:80px; height:80px; object-fit:cover; border-radius:6px; cursor:pointer; border:2px solid #cc2222; flex-shrink:0;" title="Tap to play">
+                <div style="flex:1; min-width:0;">
+                  <div style="font-size:0.7rem; font-weight:600; color:#cc4444;">BLOOD MOON</div>
+                  <audio id="kage-player-disco" controls preload="none" style="width:100%; height:28px; border-radius:4px;">
+                    <source src="music/vanito/blood-moon.mp3" type="audio/mpeg">
+                  </audio>
+                </div>
+              </div>
+            </div>
+            <div style="background:rgba(200,30,30,0.05); border-radius:6px; padding:6px 8px; border:1px solid rgba(200,30,30,0.08);">
+              <div style="font-size:0.7rem; font-weight:600; color:#cc4444;">YAMI NO NAKA DE</div>
+              <div style="font-size:0.65rem; color:#664444; font-style:italic; margin-top:2px;">Coming soon</div>
+            </div>
+            <div style="background:rgba(200,30,30,0.05); border-radius:6px; padding:6px 8px; border:1px solid rgba(200,30,30,0.08);">
+              <div style="font-size:0.7rem; font-weight:600; color:#cc4444;">RISING SUN</div>
+              <div style="font-size:0.65rem; color:#664444; font-style:italic; margin-top:2px;">Coming soon</div>
+            </div>
+          </div>
+          <div style="margin-top:8px; text-align:right;">
+            <span style="font-size:0.6rem; color:#553333;">3 tracks · Post-Hardcore</span>
+          </div>
+        </div>
+
+        <!-- ═══ HIKARI SIDE ═══ -->
+        <div style="flex:1; min-width:140px; background:linear-gradient(180deg, #1a0505 0%, #0d0202 100%); border-radius:10px; border:1px solid #3d1a1a; padding:14px; position:relative; overflow:hidden;">
+          <div style="position:absolute; top:0; left:0; width:4px; height:100%; background:#cc3333;"></div>
+          <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px;">
+            <div style="width:32px; height:32px; border-radius:50%; background:#cc3333; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:0.9rem; color:#fff; flex-shrink:0;">H</div>
+            <div>
+              <div style="font-size:0.85rem; font-weight:700; color:#ff5555;">HIKARI</div>
+              <div style="font-size:0.65rem; color:#884444;">光 — Light</div>
+            </div>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:6px;">
+            <div style="background:rgba(200,50,50,0.08); border-radius:6px; padding:6px 8px; border:1px solid rgba(200,50,50,0.15); position:relative; overflow:hidden;">
+              <div style="display:flex; gap:8px; align-items:center;">
+                <img src="music/vanito/hikari-sakura-no-chikai-cover.jpg" onclick="document.getElementById('sakura-player').play()" style="width:80px; height:80px; object-fit:cover; border-radius:6px; cursor:pointer; border:2px solid #cc3333; flex-shrink:0;" title="Tap to play">
+                <div style="flex:1; min-width:0;">
+                  <div style="font-size:0.7rem; font-weight:600; color:#dd5555;">SAKURA NO CHIKAI</div>
+                  <audio id="sakura-player" preload="none" style="width:100%; height:28px; border-radius:4px;" controls>
+                    <source src="music/vanito/hikari-sakura-no-chikai.mp3" type="audio/mpeg">
+                  </audio>
+                </div>
+              </div>
+            </div>
+            <div style="background:rgba(200,50,50,0.05); border-radius:6px; padding:6px 8px; border:1px solid rgba(200,50,50,0.08);">
+              <div style="font-size:0.7rem; font-weight:600; color:#dd5555;">MIRAI E HASHIRE</div>
+              <div style="font-size:0.65rem; color:#664444; font-style:italic; margin-top:2px;">Coming soon</div>
+            </div>
+          </div>
+          <div style="margin-top:8px; text-align:right;">
+            <span style="font-size:0.6rem; color:#553333;">3 tracks · J-Rock / Battle Anthem</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Together section -->
+      <div style="margin-top:12px; text-align:center; padding:10px; background:rgba(200,50,50,0.05); border-radius:8px; border:1px dashed rgba(200,50,50,0.15);">
+        <div style="font-size:0.75rem; font-weight:600; color:#cc3333;">🎤 DUETS</div>
+        <div style="display:flex; gap:6px; justify-content:center; flex-wrap:wrap; margin-top:6px;">
+          <span style="font-size:0.7rem; padding:4px 10px; background:rgba(200,50,50,0.1); border-radius:4px; color:#cc4444;">RISING SUN</span>
+          <span style="font-size:0.7rem; padding:4px 10px; background:rgba(200,50,50,0.1); border-radius:4px; color:#cc4444;">IN THE DARKNESS WE RISE</span>
+          <span style="font-size:0.7rem; padding:4px 10px; background:rgba(200,50,50,0.1); border-radius:4px; color:#cc4444;">SAKURA NO CHIKAI (Duet Ver.)</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Story Section -->
+    <div class="card card-together" style="padding:20px; margin-bottom:16px;">
+      <div style="font-size:1rem; font-weight:700; color:#cc3333; letter-spacing:1px; margin-bottom:8px;">📖 KAGEKŌ — Shadow & Light</div>
+      <div style="font-size:0.75rem; color:#888; margin-bottom:12px; font-style:italic;">The story of two halves becoming one whole</div>
+      <div class="char-bio" style="font-size:0.8rem; line-height:1.6;">
+
+        <strong style="color:#cc3333;">Part I — The Boy Who Screamed at the Moon</strong>
+        <br>
+        He was seven when he learned screaming felt better than crying. His real name died in the alleys of Shinjuku, buried under years of hunger and silence. He grew up invisible — sleeping under pachinko parlors, stealing food, a ghost in the neon machine. Until he found a beat-up black Les Paul in a pawn shop window. He stole it, taught himself in a rented storage unit, turning rage into sound. He called himself KAGE — Shadow — because that's what he was.
+        <br><br>
+        On the night everything changed, he played to a crowd of twelve people. Half walked out during his first song. One stayed.
+
+        <br><br>
+        <div style="margin:12px 0; text-align:center;">
+          <video src="https://raw.githubusercontent.com/ProtoJay4789/ProtoJay4789.github.io/main/music/vanito/kono-sora-no-shita-story.mp4" autoplay loop muted playsinline style="width:100%; border-radius:10px; border:1px solid #5d2a0a; box-shadow: 0 0 20px rgba(200,50,50,0.1);"></video>
+          <div style="font-size:0.7rem; color:#884444; margin-top:4px; font-style:italic;">Kono Sora no Shita — Under This Sky · The moment two souls found each other</div>
+        </div>
+
+        <strong style="color:#cc3333;">Part II — The Girl Who Sang to the Stars</strong>
+        <br>
+        Hikari Tanaka grew up in a warm ramen shop in a small coastal town. Her father was her whole world. When he got sick, music became her escape — she'd climb to the roof and sing to the stars, pouring everything she couldn't say into melody. Her father passed when she was sixteen. She packed a bag, got on a train to Tokyo, and found work washing dishes at a live house in Shimokitazawa.
+        <br><br>
+        He was at the bar. The quiet guy with dead eyes who'd just screamed his heart out. She walked up, arms crossed: <em>"You're angry. I like it. But you need someone to carry the melody so the screams hit harder."</em> He handed her crumpled lyrics. She read them. <em>"Meet me tomorrow."</em>
+
+        <br><br>
+        <strong style="color:#cc3333;">Part III — KAGEKŌ</strong>
+        <br>
+        They wrote RISING SUN in four hours in a cramped Koenji studio. A song about two people who shouldn't have found each other — a shadow and a light. They've been inseparable ever since. They fight, they argue, she's thrown a microphone stand at him. But they always find their way back to that studio. Their debut album <strong>KAGEKŌ</strong> (影光) is the story of two opposites becoming one whole.
+
+        <br><br>
+        <strong style="color:#cc3333;">Epilogue</strong>
+        <br>
+        <video src="https://raw.githubusercontent.com/ProtoJay4789/ProtoJay4789.github.io/main/music/vanito/kageko-rooftop.mp4" autoplay loop muted playsinline style="width:100%; border-radius:8px; margin-bottom:8px;"></video>
+        He still disappears sometimes. But now she knows where to find him — on the roof, looking at the moon. <em>"The moon used to feel cold when I was a kid,"</em> he says. <em>"Like it was watching but didn't care."</em>
+        <br>
+        <em>"And now?"</em>
+        <br>
+        He looks at her. A small, crooked smile. <em>"Now it feels warm."</em>
+
+      </div>
+      <div style="margin-top:12px; display:flex; gap:4px; justify-content:center; flex-wrap:wrap;">
+        <span class="char-badge" style="background:#5d1a0a; color:#ff8844; border:1px solid #8d2a0a;">KAGE × HIKARI</span>
+        <span class="char-badge" style="background:#1a0a2d; color:#bb88ff; border:1px solid #3d1a5d;">影光</span>
+        <span class="char-badge" style="background:#1a1a1a; color:#aaa; border:1px solid #333;">FOREVER</span>
+      </div>
+    </div>
+
+    <!-- Featured Scene -->
+    <div style="margin-bottom:16px; position:relative; border-radius:12px; overflow:hidden; border:1px solid #3d1a1a;">
+      <video src="https://raw.githubusercontent.com/ProtoJay4789/ProtoJay4789.github.io/main/music/vanito/kageko-scene.mp4" autoplay loop muted playsinline style="width:100%; display:block;"></video>
+      <div style="position:absolute; bottom:8px; right:8px; background:rgba(0,0,0,0.7); color:#cc3333; font-size:0.7rem; padding:4px 8px; border-radius:4px; font-weight:600; letter-spacing:1px;">KAGEKŌ</div>
+    </div>
+
+    <!-- Album Section -->
+    <div class="card card-together" style="padding:16px; text-align:center;">
+      <video src="https://raw.githubusercontent.com/ProtoJay4789/ProtoJay4789.github.io/main/music/vanito/kage-hikari-album-loop.mp4" autoplay loop muted playsinline poster="music/vanito/kage-hikari-album-cover.png" style="width:100%; max-height:220px; object-fit:cover; border-radius:8px; border:2px solid #cc3333; margin-bottom:12px;"></video>
+      <div style="font-size:1.1rem; font-weight:700; color:#cc3333; letter-spacing:2px;">KAGEKŌ</div>
+      <div style="font-size:0.8rem; color:#777; margin-top:4px; font-style:italic;">影光 — Shadow & Light</div>
+      <div class="char-bio" style="margin-top:8px; text-align:left;">
+        <strong>How They Met:</strong> A dimly lit live house in Shimokitazawa. KAGE was screaming his heart out to a crowd of maybe 12 people. Half walked out. HIKARI was in the back, arms crossed. After the set, she walked up: <em>"You're angry. I like it. But you need someone to carry the melody so the screams hit harder."</em> He handed her a crumpled piece of paper. She read it. <em>"Meet me tomorrow."</em>
+        <br><br>
+        Their debut album <strong>KAGEKŌ</strong> (影光) — Shadow & Light, two opposites that complete each other. <em>Coming soon.</em>
+      </div>
+      <div style="margin-top:8px;">
+        <audio id="together-player" controls preload="none" style="width:100%; height:36px; border-radius:4px;">
+          <source src="music/vanito/in-the-darkness-we-rise.mp3" type="audio/mpeg">
+        </audio>
+      </div>
+      <div style="margin-top:8px; display:flex; gap:4px; justify-content:center; flex-wrap:wrap;">
+        <span class="char-badge" style="background:#5d1a0a; color:#ff8844; border:1px solid #8d2a0a;">DUET</span>
+        <span class="char-badge" style="background:#1a0a2d; color:#bb88ff; border:1px solid #3d1a5d;">DEBUT ALBUM</span>
+        <span class="char-badge" style="background:#1a1a1a; color:#aaa; border:1px solid #333;">COLLAB</span>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- Footer -->
+<div class="footer">GenTech Hub · Vanito · ⚔️ The Wyvern</div>
+
+<!-- Rain Canvas -->
+<canvas id="rain-canvas"></canvas>
+
+<!-- Bottom Nav -->
+<nav class="bottom-nav">
+  <button class="nav-item active" data-tab="gaming" onclick="switchTab('gaming')">
+    <span class="icon">🎮</span>
+    <span>Gaming</span>
+  </button>
+  <button class="nav-item" data-tab="profile" onclick="switchTab('profile')">
+    <span class="icon">🛡️</span>
+    <span>Profile</span>
+  </button>
+  <button class="nav-item" data-tab="travel" onclick="switchTab('travel')">
+    <span class="icon">✈️</span>
+    <span>Travel</span>
+  </button>
+  <button class="nav-item" data-tab="music" onclick="switchTab('music')">
+    <span class="icon">🎵</span>
+    <span>Music</span>
+  </button>
+  <button class="nav-item" data-tab="characters" onclick="switchTab('characters')">
+    <span class="icon">🎭</span>
+    <span>Artists</span>
+  </button>
+  <button class="nav-item" data-tab="chat" onclick="switchTab('chat')">
+    <span class="icon">💬</span>
+    <span>Chat</span>
+  </button>
+</nav>
+
+<script>
+  const HUB_LS_KEY = 'vanito-hub-default-tab';
+
+  function switchTab(tab) {
+    document.querySelectorAll('.tab-content').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
+    const section = document.getElementById('tab-' + tab);
+    const btn = document.querySelector('.nav-item[data-tab="' + tab + '"]');
+    if (section) section.classList.add('active');
+    if (btn) btn.classList.add('active');
+    window.scrollTo(0, 0);
+  }
+
+  function openSettings() {
+    document.getElementById('settings-modal').classList.add('show');
+  }
+
+  function closeSettings() {
+    document.getElementById('settings-modal').classList.remove('show');
+  }
+
+  function setDefaultTab(tab) {
+    localStorage.setItem(HUB_LS_KEY, tab);
+    document.querySelectorAll('.settings-option').forEach(o => {
+      o.classList.toggle('selected', o.dataset.tab === tab);
+    });
+    const btn = document.querySelector('.settings-save');
+    const originalText = btn.textContent;
+    btn.textContent = '✓ Saved';
+    btn.style.color = 'var(--green)';
+    setTimeout(() => { btn.textContent = originalText; btn.style.color = ''; }, 1500);
+  }
+
+  async function loadMusic() {
+    try {
+      const response = await fetch('hub-vanito-data.json');
+      const data = await response.json();
+
+      const musicList = document.getElementById('music-list');
+      if (!musicList) return;
+
+      if (!data.music || !data.music.songs || data.music.songs.length === 0) {
+        musicList.innerHTML = `
+          <div class="card" style="text-align:center; padding:24px;">
+            <div style="font-size:2rem; margin-bottom:12px;">🎧</div>
+            <div style="color:var(--dim);">No songs yet!</div>
+            <div style="font-size:0.8rem; color:var(--dim); margin-top:8px;">Share songs with Gentech to add them here.</div>
+          </div>
+        `;
+        return;
+      }
+
+      const songsHtml = data.music.songs.map((song, index) => `
+        <div class="card" style="display:flex; align-items:center; gap:16px; padding:16px; margin-bottom:12px;">
+          <div style="width:48px; height:48px; background:linear-gradient(135deg, var(--gold) 0%, var(--fire) 100%); border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:1.5rem; font-weight:bold; color:white;">${index + 1}</div>
+          <div style="flex:1;">
+            <div style="font-weight:600; margin-bottom:4px; color:var(--text);">${song.title}</div>
+            <div style="font-size:0.85rem; color:var(--dim);">${song.style}</div>
+          </div>
+          <div style="font-size:0.75rem; color:var(--dim);">${song.added}</div>
+        </div>
+      `).join('');
+
+      musicList.innerHTML = songsHtml;
+    } catch (error) {
+      console.error('Error loading music:', error);
+      const musicList = document.getElementById('music-list');
+      if (musicList) {
+        musicList.innerHTML = `
+          <div class="card" style="text-align:center; padding:24px;">
+            <div style="font-size:2rem; margin-bottom:12px;">⚠️</div>
+            <div style="color:var(--red);">Error loading music</div>
+          </div>
+        `;
+      }
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const saved = localStorage.getItem(HUB_LS_KEY) || 'gaming';
+    switchTab(saved);
+    document.querySelectorAll('.settings-option').forEach(o => {
+      o.classList.toggle('selected', o.dataset.tab === saved);
+    });
+    loadMusic();
+    startRain();
+  });
+
+  /* ═══ RAIN EFFECT ═══ */
+  let rainDrops = [];
+  let rainSplashes = [];
+  let rainCanvas, ctx, rainW, rainH;
+  let rainRunning = false;
+
+  function startRain() {
+    rainCanvas = document.getElementById('rain-canvas');
+    if (!rainCanvas) return;
+    ctx = rainCanvas.getContext('2d');
+    resizeRain();
+    window.addEventListener('resize', resizeRain);
+
+    // Create 150 raindrops
+    rainDrops = [];
+    for (let i = 0; i < 150; i++) {
+      rainDrops.push({
+        x: Math.random() * rainW,
+        y: Math.random() * rainH - rainH,
+        len: 12 + Math.random() * 18,
+        speed: 6 + Math.random() * 10,
+        opacity: 0.3 + Math.random() * 0.4,
+        thickness: 1 + Math.random() * 1.5,
+        wind: -0.5 + Math.random(),
+      });
+    }
+
+    rainRunning = true;
+    animateRain();
+  }
+
+  function resizeRain() {
+    rainW = window.innerWidth;
+    rainH = window.innerHeight;
+    rainCanvas.width = rainW;
+    rainCanvas.height = rainH;
+  }
+
+  function animateRain() {
+    if (!rainRunning) return;
+    ctx.clearRect(0, 0, rainW, rainH);
+
+    // Draw rain streaks
+    for (const d of rainDrops) {
+      const grad = ctx.createLinearGradient(d.x, d.y, d.x + d.wind * 3, d.y + d.len);
+      const alpha = d.opacity * 0.6;
+      grad.addColorStop(0, `rgba(200,210,235,${alpha})`);
+      grad.addColorStop(1, `rgba(200,210,235,${alpha * 0.2})`);
+      ctx.strokeStyle = grad;
+      ctx.lineWidth = d.thickness;
+      ctx.beginPath();
+      ctx.moveTo(d.x, d.y);
+      ctx.lineTo(d.x + d.wind * 3, d.y + d.len);
+      ctx.stroke();
+
+      d.y += d.speed;
+      d.x += d.wind;
+
+      // If drop hits bottom or goes off screen, reset and maybe splash
+      if (d.y > rainH) {
+        // Create splash
+        rainSplashes.push({
+          x: d.x,
+          y: rainH - 5,
+          life: 1,
+          size: 2 + Math.random() * 3,
+          count: 3 + Math.floor(Math.random() * 3),
+        });
+        d.y = -d.len - Math.random() * 50;
+        d.x = Math.random() * rainW;
+      }
+      if (d.x > rainW + 10) d.x = -10;
+      if (d.x < -10) d.x = rainW + 10;
+    }
+
+    // Draw splashes
+    for (let i = rainSplashes.length - 1; i >= 0; i--) {
+      const s = rainSplashes[i];
+      ctx.strokeStyle = `rgba(200,210,235,${s.life * 0.3})`;
+      ctx.lineWidth = 1;
+      for (let j = 0; j < s.count; j++) {
+        const angle = (j / s.count) * Math.PI * 2;
+        const len = s.size * (1 - s.life) * 8;
+        ctx.beginPath();
+        ctx.moveTo(s.x, s.y);
+        ctx.lineTo(s.x + Math.cos(angle) * len, s.y - Math.abs(Math.sin(angle)) * len * 0.5);
+        ctx.stroke();
+      }
+      s.life -= 0.03;
+      if (s.life <= 0) rainSplashes.splice(i, 1);
+    }
+
+    requestAnimationFrame(animateRain);
+  }
+</script>
+
+</body>
+</html>
