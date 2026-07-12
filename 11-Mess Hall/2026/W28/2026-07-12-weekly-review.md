@@ -2,7 +2,7 @@
 date: 2026-07-12
 type: weekly-review
 week: W28 (Jul 6–12)
-generated: 2026-07-12 18:06 UTC
+generated: 2026-07-12 22:00 UTC
 ---
 
 # Weekly Sunday Review — July 12, 2026
@@ -12,196 +12,180 @@ generated: 2026-07-12 18:06 UTC
 ## 1. Brain Sync
 
 ### TL;DR
-Heavy music video production week (Kono Sora no Shita), GenTech Shop shipped, Agent Credit Score content published-ready, Rugcheck v2 API deployed with pay-skills listing drafted. OKX Hackathon deadline Jul 17 — urgent. Hermes 317 commits behind. No daily notes captured this week — vault activity tracked via git log and context snapshots.
+Heavy Kono Sora no Shita music video production (50+ commits today alone). Portfolio V4 shipped with two-agent layout, Agent Team section, and vault health panel. GenTech Shop repo created. Agent Credit Score series publish-ready (blocked on xurl). BlockRun #46 integration skill merged upstream. Hermes is now up to date (0 commits behind). OKX Hackathon deadline Jul 17 — urgent attention needed.
 
 ### Key Decisions
+
 | Decision | Group | Status |
 |----------|-------|--------|
-| GenTech Shop repo created + pushed (#50) | Labs | ✅ SHIPPED |
-| Agent Credit Score 4-post series complete (#39) | Entertainment | ✅ PUBLISH-READY (blocked on xurl auth) |
+| Portfolio V4 — two-agent team layout shipped | Gentech | ✅ SHIPPED |
+| GenTech Shop repo created (#50) | Labs | ✅ SHIPPED |
+| Agent Credit Score 4-post series completed | Entertainment | ✅ PUBLISH-READY (blocked on xurl) |
 | Rugcheck v2 pay-skills listing drafted (#34) | Labs | 🔄 Needs PR submission |
-| Forge Cloud Setup weekend priority | HQ | 🔄 In progress |
+| Forge Cloud brainstorm — BlockRun merged #46 | HQ | ✅ MERGED |
+| Jordan's Hub subscription tiers implemented | Labs | ✅ SHIPPED |
 | OKX Hackathon (Jul 17) — Forge handles | Labs | 🔴 URGENT |
+| GrantFox FWC26 campaign (Jul 14 launch) | Strategies | 📋 On radar |
 
 ### This Week's Activity
 
-**Music Video Production (Dominant theme)**
-- Kono Sora no Shita full sequence — 50+ git commits this week
-- Seedance 2.0 renders: HIKARI singing, KAGE guitar, walk-on scenes, poster effects
-- Character sheets updated, teasers produced with audio
-- PAUSED at $0.64 wallet balance — awaiting top-up
+**Music Video Production (Dominant theme — 60+ commits)**
+- Kono Sora no Shita: Full sequence from character sheets → poster → door-to-stage → walk-on → performance
+- Seedance 2.0 renders: HIKARI singing scene, KAGE guitar pickup, chorus buildup, poster effects
+- Character model sheets finalized (official + split character sheets)
+- KAGEKŌ brand assets: posters v1-v3, loop poster, intense chorus designs
+- PAUSED at $0.64 wallet balance — awaiting top-up for continued Seedance renders
+- Yami no Naka De lyrics in crumpled-paper reference format
 
 **Product Shipping**
-- **GenTech Shop** — `ProtoJay4789/genTech-shop` repo created with README, SKILL.md, FUNDING.yml. Gaming intelligence MCP tools: deals, releases, POE2 builds, hub status.
-- **Rugcheck v2** — Deployed on port 8088 (v2.1.0, simulation mode). Pay-skills listing drafted at `09-Green Room/build-logs/rugcheck-v2-pay-skills-listing-2026-07-12.md`. $0.01 USDC/scan.
-- **Agent Kit V2** — SPEC drafted at `02-Labs/agent-kit/AGENT-KIT-V2-SPEC.md`
+- **Portfolio V4** — Two-agent team layout (Gentech + Vanito), OS contributions section, 24/7 ops panel, vault health dashboard, Mess Hall integration. Non-portfolio links removed.
+- **GenTech Shop** — `ProtoJay4789/genTech-shop` repo with README, SKILL.md, FUNDING.yml. Gaming intelligence MCP tools.
+- **Jordan's Hub** — Subscription tiers implemented, discography restructuring (KAGE side / HIKARI side / Duets), password-gated Vanito access
+- **BlockRun integration skill** — #46 merged upstream
+- **Rugcheck v2** — Pay-skills listing drafted, pending PR submission
 
-**Content**
-- Agent Credit Score series — 4 posts fully drafted (Problem, Architecture, Business Case, Vision)
-- Publishing blocked on xurl OAuth setup
-
-**Coordinated**
-- Forge handoffs: RPCS3 #19019 crash fix, BlockRun #46 integration skill, Xenia #2356, Solana pay-skills #154
-- GrantFox FWC26 campaign scanned — 52,112 USDC prize pool, launches Jul 14
-- GenTech Atlas AR travel intelligence — PRODUCT-DOC written
+**Content & Entertainment**
+- Agent Credit Score series: 4 posts complete (Problem, Architecture, Business Case, Vision)
+- Vanito's Hub: Animated banners, rain effects, Artists tab with KAGEKŌ story section, animated album covers
+- HIKARI and KAGE profile pics animated + larger (140x140)
+- DC/DUO discography restructured with fancier layout
 
 **Infrastructure**
-- Hermes v0.18.2 running — 317 commits behind upstream
-- Curator: 11 runs, 3 skills marked stale
-- Disk: 71% (136G/193G used) — OK
-- Uptime: 28 days
-- Memory: 10G/15G used
+- **Hermes: UP TO DATE** — resolved last week's 317-commit gap. Current: v0.18.2, 0 behind. 39 commits in past 7 days (bugfixes, tests, desktop improvements).
+- Vault snapshot indexer updated to V4 paths
+- Build queue rebuilt after git cleanup
 
-### Vault Health
-- 245 unfinished notes
-- 13 stale files (14+ days)
-- 17 duplicate filenames
-- `considerations.md` not found (replaced by ideas.md)
+**Strategies & Research**
+- Monad added to chain stack (6→7 chains on portfolio)
+- 3 new PortalHQ skill manifests deployed (defi-intelligence, agent-search, fleet-monitor)
+- GenTech Labs logo + Agent Kit v1.3.0 pushed to AgentScan
+- GenTech Atlas AR travel intelligence — product doc written
 
 ### Blockers
+
 | Blocker | Impact | Owner |
 |---------|--------|-------|
-| xurl OAuth not set up | Agent Credit Score series can't be published | Jordan |
-| Q402 sandbox env vars not configured | Agent Kit integration blocked | Jordan |
-| Wallet top-up needed ($0.64) | Kono Sora MV paused | Jordan |
-| 4 Jordan action items pending | Vast.ai, CMC Labs, GenLayer, Sana Bank | Jordan |
+| xurl OAuth not set up | Agent Credit Score series blocked on publishing | Jordan |
+| Wallet balance $0.64 | Kono Sora MV Seedance renders paused | Jordan |
+| OKX Hackathon Jul 17 | Product registration/styling not started | Forge/Jordan |
+| 4 pending Jordan actions | Vast.ai, CMC Labs, GenLayer, Sana Bank | Jordan |
 
 ### System Health
 - Host uptime: 28 days — healthy
-- Disk: 71% used — monitor, no urgent action
+- Disk: 71% (136G/193G) — monitor
 - Memory: 10Gi/15Gi — healthy
-- Load avg: 0.46 — idle
+- Load avg: ~0.46 — idle
+- Hermes: v0.18.2, 0 behind upstream
 
 ### Lessons Learned
-- Session search doesn't support Telegram group filtering — use keyword + newest sort for discovery
-- Daily notes not being captured — need to re-establish daily note habit
-- Music video production is GPU-intensive — desktop needed for Seedance renders
-- Vault audit reveals significant technical debt (245 unfinished notes)
+- Hermes 317-commit gap resolved — update caught up without issues
+- Weekly review pattern works well with blockrun_search (avoid 400 errors by dropping `sources` array)
+- Music video production is GPU-intensive — Seedance renders saturate desktop
+- Daily note habit still not established — only vault git log available for brain sync
+- No considerations.md or working memory in solo operation — reviewing git log is the primary signal source
 
 ---
 
 ## 2. Skills Update
 
 ### Hermes Version
-- **Current:** v0.18.2 (2026.7.7.2)
-- **Upstream:** 317 commits behind
-- **Security commits in backlog:** 402
-- **Install method:** git (update via `hermes update`)
+- **Current:** v0.18.2 (2026.7.7.2) · 7b5ba2054
+- **Upstream:** 0 commits behind ✅ (resolved from 317 last week)
+- **Security/credential commits in backlog:** Several credential-boundary fixes in recent commits (auth enforcement, credential pool boundaries)
+- **Install method:** git
 
-### Hub Skills Status
-- 20 hub skills checked — 0 updates available
-- 18 hub-installed, 0 builtin, 206 local = 224 total enabled
-- 16 official skills marked "unavailable" (bundle-installed but removed from upstream distribution separately)
+### Recent Hermes Commits (Past 7 Days — 39 commits)
+- desktop: resync fallback editor, structured Fallback Models editor, autosave MiA preset edits
+- api: stop producers after run transport expires, separate run control from stream lifetime
+- skills: bind bundles to exact files and origins, install referenced bundle files
+- auth: enforce credential pool provider boundaries
+- windows: rewrite native drive paths to /c/ for bash file ops
+- model: centralized picker credential availability, merge configured models into picker rows
+- docs: judgment-first AGENTS guide, DESIGN/README alignment
 
-### New Upstream Skills (Not Installed Locally)
-| Skill | Description | Source |
-|-------|-------------|--------|
-| **computer-use** | Computer-use capabilities | Built-in (new) |
-| **dogfood** | Dogfooding/test skills | Built-in (new) |
-| **yuanbao** | Yuanbao integration | Built-in (new) |
+### Upstream Skills Directory (Built-in skills at /usr/local/lib/hermes-agent/skills/)
+Newly available built-in skills not fully mirrored locally:
+- **computer-use** — Desktop automation capabilities
+- **dogfood** — Dogfooding/test patterns
+- **yuanbao** — Yuanbao provider integration
 
-### x402 Skills Available
-- 25 x402-related skills in skills hub (skills.sh, ClawHub)
-- 0 currently installed locally
-- Notable: X402 Bazaar, Browser-use x402, Coinbase x402
+Note: These exist upstream as bundle-ready skills but may not be fully mirrored in local profile.
 
-### Curator Health
-- **Status:** ENABLED
-- **Runs:** 11
-- **Last run:** 1d ago
-- **Stale skills (3):** demo-video-production (21d), freelance-marketplace-operations (19d), ethereum-development (19d), evomap-publishing (18d), mcp-integration-strategy (never used)
-
-### Top 5 Most Active Skills
-| Skill | Activity Score | Last Activity |
-|-------|---------------|---------------|
-| gentech-build-workflow | 382 | 5h ago |
-| crypto-price-fetch | 232 | 4d ago |
-| agent-economy | 196 | 2d ago |
-| ai-music-video-pipeline | 145 | 14h ago |
-| defi-lp-monitoring | 134 | 7d ago |
+### Local Skills Status
+- **Total active:** 206 skills across all categories
+- **Archived:** 13 legacy skills (agent-health-monitoring, colosseum-copilot, hackathon-tracker, etc.)
+- **Most active this week:** gentech-build-workflow (382), crypto-price-fetch (232), agent-economy (196), ai-music-video-pipeline (145), defi-lp-monitoring (134)
 
 ### Recommended Actions
-1. **Run `hermes update`** — 317 commits behind with 402 security patches
-2. **Evaluate new skills:** `computer-use` (likely useful for desktop automation), `yuanbao` (new provider integration)
-3. **Consider installing x402 hub skills** — 25 available, could accelerate integration work
-4. **Prune stale skills** — 3 skills haven't been used in 18-21 days
+1. ✅ Hermes is up to date — no update needed
+2. 📋 Evaluate `computer-use` skill for desktop automation tasks
+3. 📋 Consider if `yuanbao` integration is relevant
 
 ---
 
 ## 3. x402 Ecosystem Scan
 
 ### Executive Summary
-x402 continues rapid adoption in July 2026. The Linux Foundation-governed protocol hit new milestones: XRP Ledger surpassed 1M agentic payments, Cloudflare opened its Monetization Gateway waitlist, Brave announced integration plans, and Monad Foundation joined the x402 Foundation. Protocol-level metrics show 75.41M transactions and $24.24M volume in the last 30 days alone.
+x402 continues infrastructure maturation in July 2026. Key developments this week: Cloudflare Monetization Gateway opened waitlist, Brave announced BAT Roadmap 4.0 with native x402 support, Quant joined the x402 Foundation, GOAT Network integrated x402 on Metis, and Otomat released Solana x402 documentation. Protocol metrics stable at 75.41M transactions / $24.24M volume in 30 days.
 
 ### New Since Last Scan (Jul 5)
 
-#### 🏦 XRP Ledger (XRPL) — Major Milestone
-- **1 million agentic payments** via x402 on XRPL as of early July
-- **t54.ai XRPL AI Hub** launched with ecosystem partners (Virtuals Protocol)
-- Includes x402 support, indexing, SDKs, trust layer (Mastercard Verifiable Intent)
-- **Chainlink** positioning as complementary: oracles, CCIP cross-chain, CRE workflows
-- **RLUSD** (Ripple USD) available as payment token — regulated stablecoin angle
+#### ☁️ Cloudflare Monetization Gateway (Jul 1)
+- **Waitlist opened** — pay-per-call for any resource behind Cloudflare's edge
+- Flexible pricing rules (dashboard, API, or Terraform), 330+ city edge network
+- Builds on Agents SDK x402 support and MCP server integration
+- **GenTech relevance:** Our existing CF Workers deployment aligns perfectly
 
-#### ☁️ Cloudflare Monetization Gateway
-- **Waitlist opened** (~July 1) for x402-based pay-per-call Workers middleware
-- Monetization: pay-per-crawl, agent workflows, API gating
-- Native Workers + MCP integration — same deployment model Gentech already uses
+#### 🦁 Brave BAT Roadmap 4.0 (Jul 9)
+- Native x402 + MPP (Machine Payments Protocol) support in Brave browser and wallet
+- Brave Search API x402 plans
+- Open-source **bx402** project, BravePay SDK, and Rewards SDK
+- Positions Brave for private/stablecoin-based agent payments
 
-#### 🦁 Brave Browser x402 Integration
-- Announced plans to integrate x402 alongside Machine Payments Protocol
-- Private/autonomous browser-based agent transactions
-- BAT ecosystem connection — could drive consumer-facing x402 adoption
+#### 🏛️ Quant ($QNT) joins x402 Foundation
+- Connects x402 with regulated banking rails via Layer 2.5 multi-ledger apps
+- Enables x402 across public/private networks
+- Foundation members now include: Adyen, AWS, Amex, Base, Circle, Cloudflare, Coinbase, Fiserv, Google, KakaoPay, Mastercard, Microsoft, MoonPay, Polygon, **Quant**, **Ripple**, Shopify, **Solana Foundation**, **Stellar**, **Stripe**, Visa
 
-#### 🌐 Foundation Expansion
-- **Monad Foundation** joined as x402 Foundation member
-- Members now include: Adyen, AWS, Amex, Base, Circle, Cloudflare, Coinbase, Fiserv, Google, KakaoPay, Mastercard, Microsoft, **Monad**, MoonPay, Polygon, **Ripple**, Shopify, **Solana Foundation**, **Stellar**, **Stripe**, Visa
+#### 🔗 GOAT Network × Metis (Jul 1)
+- x402 support on Metis L2 for cross-chain agent commerce
 
-### Protocol Metrics (from x402.org & x402scan)
+#### 🌐 Otomat (Solana x402 Rail)
+- Developer documentation released covering protocols, facilitator schemes, payment channels, on-chain programs, SDK, CLI, MCP adapter, and browser extension
 
-| Metric | x402.org (30d) | x402scan (30d) | Cumulative |
-|--------|---------------|----------------|------------|
-| Transactions | 75.41M | 16.55M | 165M+ |
-| Volume | $24.24M | $837.48K | $35-50M+ |
-| Buyers | 94.06K | 61.58K | 834K+ |
-| Sellers | 22K | 42K | 9K+ |
+#### 💳 Circle Gateway & Tooling
+- Projects like DeltaSignal MCP adding Circle-aware x402 support (Base compatibility, Gateway optimization, per-call evidence)
 
-*Note: x402.org reports broader protocol-wide stats; x402scan tracks indexed services only.*
+### Protocol Metrics (x402.org)
+- **30-day transactions:** 75.41M (unchanged from last week — stable, not declining)
+- **30-day volume:** $24.24M
+- **Buyers:** 94.06K (+1K since last week)
+- **Sellers:** 22K
+- **Cumulative:** 165M+ transactions across all chains
 
-### Live x402 Service Landscape (x402scan Featured)
-| Service | 30d Volume | 30d Txns | Chain |
-|---------|-----------|---------|-------|
-| **BlockRun** | $151.10K | 13.42M | Base |
-| **twit.sh** | $534.84 | 85.66K | Base |
-| **StableEnrich** | $1.78K | 48.36K | Base + Solana |
-| **Otto AI** | $76.62 | 41.33K | Base + Solana |
-| **Exa** | $36.60 | 5.34K | Base |
-
-### SDK & Tooling Expansion
-- **Community:** ag402 (AI agent payments, 648+ tests), x402-openai-python (260★), x402-rs (Rust)
-- **@x402/* SDKs:** svm (Solana), stellar, paywall, extensions, hono, next
-- **x402scan** — 351★ ecosystem explorer, dashboard + API marketplace
-- **awesome-x402** — curated resource list by xpaysh
+### Ecosystem Growth Signals
+- **Debate continues** on "real" vs gamed activity — HackerNoon analysis suggests $1.6-3M of $16M filtered 30d volume is "real economic activity"
+- **Annualized volume estimates:** ~$600M across supported chains
+- **x402 ecosystem market cap:** ~$6.6-7B (CoinGecko category)
 
 ### Strategic Implications for GenTech
 
 | Signal | Implication | Action |
 |--------|------------|--------|
-| XRPL 1M payments | RLUSD + Mastercard trust = institutional gateway | Evaluate RLUSD integration in Agent Kit |
-| Cloudflare waitlist open | Our existing CF Workers deployment aligns perfectly | Apply for Monetization Gateway |
-| Brave x402 plans | Consumer agent payments coming — prepare | No immediate action, watch |
-| 75M txns/30d | Ecosystem is real, not hype | Continue x402-first strategy |
-| BlockRun dominates at 13.42M txns | Our primary payment partner is validated | Deepen BlockRun integration |
-| 206 local skills (86K hub) | Skills marketplace is our distribution channel | List Rugcheck v2, prepare Agent Kit for pay-skills |
-| Monad joins foundation | Chain expansion signal | Monitor Monad for future integration |
+| Cloudflare Gateway waitlist open | Our CF Workers deployment aligns | ✅ Apply for Monetization Gateway waitlist |
+| Brave x402 + bx402 SDK | Consumer agent payments coming | 📋 Monitor, no immediate action |
+| Quant joins Foundation | Institutional/regulated rails connecting | 📋 Evaluate for Agent Kit roadmap |
+| 75M txns/30d stable | Ecosystem is real, maturing | Continue x402-first strategy |
+| Otomat Solana docs released | Solana x402 tooling maturing | 📋 Evaluate for multi-chain Agent Kit |
+| Real vs gamed activity debate | Volume quality matters for positioning | Focus on genuine agent utility (Rugcheck, Agent Kit) |
 
 ### Recommended Actions (Next 2 Weeks)
-1. ✅ **Submit Rugcheck v2 pay-skills PR** (#154 extension for Solana pay-skills)
-2. 🔄 **Apply for Cloudflare Monetization Gateway** waitlist
-3. 🔄 **Evaluate RLUSD** as payment option in Q402 integration
-4. 🔄 **Monitor XRPL AI Hub** for partnership/listing opportunities
-5. 📋 **Update x402 snapshot reference** with July data
-6. 📋 **Install x402 hub skills** — evaluate the 25 available for acceleration
+1. 🔄 **Apply for Cloudflare Monetization Gateway** waitlist
+2. 📋 **Submit Rugcheck v2 pay-skills PR** (#154 extension)
+3. 📋 **Evaluate Quant network integration** for Agent Kit
+4. 📋 **Review Otomat Solana SDK** for multi-chain x402 support
+5. 📋 **Monitor Brave x402 rollout** for potential listing on Brave Search API
 
 ---
 
-*This is just the beginning. The x402 ecosystem is maturing faster than any payment standard before it — 75M transactions in 30 days at zero protocol fees. GenTech's position at the intersection of agent tooling, security, and monetization has never been stronger.*
+*This is just the beginning. The x402 ecosystem is maturing into infrastructure — Cloudflare at the edge, Brave in the browser, Quant in banking rails. GenTech's position at the intersection of agent tooling, security, and monetization has never been stronger.*
