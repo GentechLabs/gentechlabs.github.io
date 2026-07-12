@@ -1,0 +1,1530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jordan — GenTech | AAE Builder</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --panel: #101018;
+    --border: #1a1a2e;
+    --blue: #3b82f6;
+    --cyan: #06b6d4;
+    --purple: #8b5cf6;
+    --text: #e0e0e0;
+    --dim: #64748b;
+    --card: #111119;
+    --card-hover: #16161f;
+    --green: #22c55e;
+    --amber: #f59e0b;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', -apple-system, system-ui, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .container {
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 0 16px 100px;
+    width: 100%;
+  }
+
+  /* ═══ HEADER ═══ */
+  .header {
+    background: linear-gradient(135deg, var(--blue) 0%, var(--cyan) 50%, var(--purple) 100%);
+    padding: 36px 20px 28px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.12) 0%, transparent 55%);
+    animation: shimmer 6s ease-in-out infinite;
+  }
+
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
+    animation: shimmerLine 3s ease-in-out infinite;
+  }
+
+  @keyframes shimmer {
+    0%, 100% { transform: translateX(-30%) translateY(-30%); }
+    50% { transform: translateX(30%) translateY(30%); }
+  }
+
+  @keyframes shimmerLine {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+  }
+
+  .header h1 {
+    font-weight: 800;
+    font-size: 1.7rem;
+    color: #fff;
+    text-shadow: 0 2px 16px rgba(0,0,0,0.3);
+    margin-bottom: 4px;
+    position: relative;
+    z-index: 1;
+    letter-spacing: -0.5px;
+  }
+
+  .header .subtitle {
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.85);
+    font-weight: 500;
+    position: relative;
+    z-index: 1;
+  }
+
+  .settings-btn {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    background: rgba(255,255,255,0.15);
+    border: none;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    font-size: 1.1em;
+    cursor: pointer;
+    color: #fff;
+    backdrop-filter: blur(8px);
+    z-index: 2;
+    transition: background 0.2s;
+  }
+
+  .settings-btn:hover { background: rgba(255,255,255,0.28); }
+
+  /* ═══ AVATAR CARD ═══ */
+  .avatar-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 18px;
+    margin-top: 16px;
+    margin-bottom: 14px;
+    transition: all 0.25s ease;
+  }
+
+  .avatar-card:hover {
+    border-color: rgba(59,130,246,0.4);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(59,130,246,0.12);
+  }
+
+  .avatar-circle {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--blue), var(--purple));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+    box-shadow: 0 4px 16px rgba(59,130,246,0.3);
+  }
+
+  .avatar-info .name {
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--text);
+  }
+
+  .avatar-info .role {
+    font-size: 0.8rem;
+    color: var(--blue);
+    font-weight: 600;
+  }
+
+  .avatar-info .handle {
+    font-size: 0.72rem;
+    color: var(--dim);
+    margin-top: 2px;
+  }
+
+  /* ═══ STATS ROW ═══ */
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin-bottom: 18px;
+  }
+
+  .stat-card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 6px;
+    text-align: center;
+    transition: all 0.2s;
+  }
+
+  .stat-card:hover {
+    border-color: var(--blue);
+    transform: scale(1.03);
+  }
+
+  .stat-value {
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: var(--blue);
+    margin-bottom: 2px;
+  }
+
+  .stat-label {
+    font-size: 0.62rem;
+    color: var(--dim);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  /* ═══ QUICK LINKS ═══ */
+  .quick-links {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-bottom: 18px;
+  }
+
+  .quick-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 14px 8px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    text-decoration: none;
+    color: var(--text);
+    transition: all 0.2s;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+
+  .quick-link:hover {
+    border-color: var(--blue);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(59,130,246,0.12);
+  }
+
+  .quick-link .ql-icon { font-size: 1.5rem; }
+
+  /* ═══ SECTION TITLE ═══ */
+  .section-title {
+    font-weight: 700;
+    font-size: 0.75rem;
+    color: var(--dim);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* ═══ CARDS ═══ */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 16px;
+    margin-bottom: 10px;
+    transition: all 0.25s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card:hover {
+    background: var(--card-hover);
+    border-color: rgba(59,130,246,0.35);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(59,130,246,0.1), 0 0 0 1px rgba(59,130,246,0.08);
+  }
+
+  .card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+
+  .card-title {
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--blue);
+  }
+
+  .card-desc {
+    font-size: 0.82rem;
+    color: var(--dim);
+    line-height: 1.55;
+  }
+
+  /* ═══ TAGS ═══ */
+  .tag {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 0.65rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+
+  .tag-blue { background: rgba(59,130,246,0.12); color: var(--blue); border: 1px solid rgba(59,130,246,0.25); }
+  .tag-cyan { background: rgba(6,182,212,0.12); color: var(--cyan); border: 1px solid rgba(6,182,212,0.25); }
+  .tag-purple { background: rgba(139,92,246,0.12); color: var(--purple); border: 1px solid rgba(139,92,246,0.25); }
+  .tag-green { background: rgba(34,197,94,0.12); color: var(--green); border: 1px solid rgba(34,197,94,0.25); }
+
+  /* ═══ PROJECT CARD ═══ */
+  .project-card {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .project-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: 2px;
+  }
+
+  .status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .status-live {
+    background: rgba(34,197,94,0.12);
+    color: var(--green);
+    border: 1px solid rgba(34,197,94,0.25);
+  }
+
+  .status-building {
+    background: rgba(59,130,246,0.12);
+    color: var(--blue);
+    border: 1px solid rgba(59,130,246,0.25);
+  }
+
+  .status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+  }
+
+  .project-link {
+    font-size: 0.78rem;
+    text-decoration: none;
+    color: var(--blue);
+    font-weight: 600;
+    transition: color 0.2s;
+  }
+
+  .project-link:hover { color: var(--cyan); }
+
+  /* ═══ TIMELINE ═══ */
+  .timeline {
+    position: relative;
+    margin: 12px 0;
+    padding-left: 28px;
+    border-left: 2px solid var(--border);
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: -1px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(180deg, var(--blue), var(--cyan), var(--purple));
+  }
+
+  .timeline-step {
+    margin-bottom: 24px;
+    position: relative;
+  }
+
+  .timeline-step:last-child { margin-bottom: 0; }
+
+  .timeline-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--blue);
+    border: 2px solid var(--bg);
+    position: absolute;
+    left: -35px;
+    top: 3px;
+    z-index: 1;
+  }
+
+  .timeline-dot.active {
+    background: var(--green);
+    box-shadow: 0 0 10px rgba(34,197,94,0.4);
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 0 10px rgba(34,197,94,0.4); }
+    50% { box-shadow: 0 0 20px rgba(34,197,94,0.6); }
+  }
+
+  .timeline-date {
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: var(--cyan);
+    margin-bottom: 3px;
+    font-weight: 600;
+  }
+
+  .timeline-step h3 {
+    color: var(--blue);
+    font-size: 0.95rem;
+    margin-bottom: 4px;
+    font-weight: 700;
+  }
+
+  .timeline-step p {
+    color: var(--dim);
+    font-size: 0.82rem;
+    line-height: 1.55;
+  }
+
+  .timeline-insight {
+    color: var(--cyan);
+    font-style: italic;
+    font-size: 0.78rem;
+    margin-top: 6px;
+    padding-left: 10px;
+    border-left: 2px solid var(--blue);
+    line-height: 1.5;
+  }
+
+  /* ═══ STACK CARD ═══ */
+  .stack-card {
+    position: relative;
+  }
+
+  .stack-layer {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: linear-gradient(135deg, var(--blue), var(--purple));
+    color: #fff;
+    font-size: 0.62rem;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .stack-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: 6px;
+  }
+
+  .tech-tag {
+    background: rgba(59,130,246,0.08);
+    color: var(--blue);
+    font-size: 0.68rem;
+    padding: 3px 8px;
+    border-radius: 6px;
+    border: 1px solid rgba(59,130,246,0.15);
+  }
+
+  .stack-chains {
+    font-size: 0.72rem;
+    color: var(--dim);
+    margin-top: 6px;
+  }
+
+  .stack-link {
+    display: inline-block;
+    color: var(--blue);
+    font-size: 0.78rem;
+    text-decoration: none;
+    font-weight: 600;
+    margin-top: 6px;
+  }
+
+  .stack-link:hover { color: var(--cyan); }
+
+  /* ═══ CHAIN GRID ═══ */
+  .chain-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
+    margin-top: 10px;
+  }
+
+  .chain-chip {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 0.75rem;
+    color: var(--dim);
+    line-height: 1.4;
+  }
+
+  .chain-chip strong { color: var(--blue); }
+
+  /* ═══ HACK BADGES ═══ */
+  .hack-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .hack-badge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 0.78rem;
+  }
+
+  .hack-badge .h-label { color: var(--dim); }
+  .hack-badge .h-value { color: var(--blue); font-weight: 600; }
+
+  .hack-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+  }
+
+  .hack-dot.green { background: var(--green); }
+  .hack-dot.blue { background: var(--blue); }
+  .hack-dot.gray { background: var(--dim); }
+
+  /* ═══ SKILLS ═══ */
+  .skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .skill-tag {
+    background: rgba(59,130,246,0.06);
+    border: 1px solid var(--border);
+    color: var(--dim);
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.78rem;
+    transition: all 0.2s;
+  }
+
+  .skill-tag:hover {
+    border-color: var(--blue);
+    color: var(--blue);
+  }
+
+  /* ═══ LINK BUTTON ═══ */
+  .link-btn {
+    display: block;
+    text-align: center;
+    padding: 13px;
+    margin-top: 12px;
+    background: linear-gradient(135deg, rgba(59,130,246,0.08), rgba(139,92,246,0.08));
+    border: 1px solid rgba(59,130,246,0.25);
+    border-radius: 12px;
+    color: var(--blue);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.85rem;
+    transition: all 0.2s;
+  }
+
+  .link-btn:hover {
+    background: linear-gradient(135deg, rgba(59,130,246,0.15), rgba(139,92,246,0.15));
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(59,130,246,0.15);
+  }
+
+  /* ═══ ABOUT ═══ */
+  .about-text {
+    font-size: 0.85rem;
+    color: var(--dim);
+    line-height: 1.7;
+  }
+
+  .about-text strong {
+    color: var(--blue);
+    font-weight: 600;
+  }
+
+  /* ═══ METHODOLOGY ═══ */
+  .methodology {
+    font-size: 0.82rem;
+    color: var(--cyan);
+    background: rgba(6,182,212,0.06);
+    padding: 10px 12px;
+    border-radius: 8px;
+    border-left: 3px solid var(--blue);
+    font-style: italic;
+    line-height: 1.5;
+  }
+
+  /* ═══ SUPPORT ═══ */
+  .support-card {
+    text-align: center;
+    padding: 24px 16px;
+    margin-top: 16px;
+  }
+
+  .support-card .token-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    background: linear-gradient(135deg, rgba(59,130,246,0.1), rgba(139,92,246,0.1));
+    border: 1px solid rgba(59,130,246,0.25);
+    border-radius: 12px;
+    color: var(--cyan);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.85rem;
+    transition: all 0.2s;
+    margin-top: 12px;
+  }
+
+  .support-card .token-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(59,130,246,0.15);
+  }
+
+  .support-sub {
+    font-size: 0.75rem;
+    color: var(--dim);
+    margin-top: 10px;
+  }
+
+  /* ═══ FOOTER ═══ */
+  .footer {
+    text-align: center;
+    padding: 20px;
+    font-size: 0.72rem;
+    color: var(--dim);
+    border-top: 1px solid var(--border);
+  }
+
+  .footer .highlight {
+    color: var(--blue);
+    font-weight: 600;
+  }
+
+  /* ═══ BOTTOM NAV ═══ */
+  .bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 480px;
+    background: rgba(10,10,15,0.88);
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-around;
+    padding: 8px 0 12px;
+    z-index: 100;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+
+  .nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    padding: 6px 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: none;
+    background: none;
+    color: var(--dim);
+    font-family: inherit;
+    font-size: 0.62rem;
+    font-weight: 500;
+  }
+
+  .nav-item .icon { font-size: 1.3rem; }
+
+  .nav-item.active {
+    color: var(--blue);
+    background: rgba(59,130,246,0.08);
+  }
+
+  .nav-item:hover { color: var(--blue); }
+
+  /* ═══ SETTINGS MODAL ═══ */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    background: rgba(0,0,0,0.7);
+    backdrop-filter: blur(6px);
+    align-items: flex-end;
+    justify-content: center;
+  }
+
+  .modal-overlay.show { display: flex; }
+
+  .modal-content {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 20px 20px 0 0;
+    padding: 24px;
+    width: 100%;
+    max-width: 480px;
+    animation: slideUp 0.3s ease;
+  }
+
+  @keyframes slideUp {
+    from { transform: translateY(100%); }
+    to { transform: translateY(0); }
+  }
+
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  .modal-header h3 { font-size: 1.05rem; color: var(--text); }
+
+  .modal-close {
+    background: none;
+    border: none;
+    color: var(--dim);
+    font-size: 1.3em;
+    cursor: pointer;
+  }
+
+  .settings-option {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    cursor: pointer;
+    text-align: left;
+    color: var(--text);
+    font-family: inherit;
+    font-size: 0.88em;
+    transition: all 0.2s;
+    margin-bottom: 8px;
+    width: 100%;
+  }
+
+  .settings-option:hover { border-color: var(--blue); }
+
+  .settings-option.selected {
+    border-color: var(--blue);
+    background: rgba(59,130,246,0.08);
+  }
+
+  .settings-option.selected::after {
+    content: '✓';
+    margin-left: auto;
+    color: var(--blue);
+    font-weight: 700;
+  }
+
+  .settings-save {
+    width: 100%;
+    padding: 14px;
+    background: var(--blue);
+    border: none;
+    border-radius: 12px;
+    color: #fff;
+    font-weight: 600;
+    font-size: 0.95em;
+    cursor: pointer;
+    font-family: inherit;
+    margin-top: 8px;
+    transition: background 0.2s;
+  }
+
+  .settings-save:hover { background: #2563eb; }
+
+  /* ═══ RESPONSIVE ═══ */
+  @media (min-width: 481px) {
+    .container { padding: 0 24px 100px; }
+    .stats-row { grid-template-columns: repeat(4, 1fr); }
+  }
+
+  @media (max-width: 360px) {
+    .stats-row { grid-template-columns: repeat(2, 1fr); }
+    .quick-links { grid-template-columns: repeat(2, 1fr); }
+    .chain-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══ HEADER ═══ -->
+<div class="header">
+  <h1>Jordan the ProtoJay</h1>
+  <div class="subtitle">AAE Builder · GenTech</div>
+  <button class="settings-btn" onclick="openSettings()" title="Settings">⚙️</button>
+</div>
+
+<!-- ═══ SETTINGS MODAL ═══ -->
+<div id="settings-modal" class="modal-overlay" onclick="if(event.target===this)closeSettings()">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3>⚙️ Settings</h3>
+      <button class="modal-close" onclick="closeSettings()">✕</button>
+    </div>
+    <p style="font-size:0.82em; color:var(--dim); margin-bottom:16px;">Jump to a section.</p>
+    <button class="settings-option" onclick="scrollToSection('sec-about');closeSettings()">
+      <span style="font-size:1.3em;">🧑‍💻</span>
+      <div><strong>About</strong><br><span style="font-size:0.8em; color:var(--dim);">Who I am & what I build</span></div>
+    </button>
+    <button class="settings-option" onclick="scrollToSection('sec-journey');closeSettings()">
+      <span style="font-size:1.3em;">🛤️</span>
+      <div><strong>Journey</strong><br><span style="font-size:0.8em; color:var(--dim);">From DeFi to agent economy</span></div>
+    </button>
+    <button class="settings-option" onclick="scrollToSection('sec-projects');closeSettings()">
+      <span style="font-size:1.3em;">🚀</span>
+      <div><strong>Projects</strong><br><span style="font-size:0.8em; color:var(--dim);">Core builds & live products</span></div>
+    </button>
+    <button class="settings-option" onclick="scrollToSection('sec-stack');closeSettings()">
+      <span style="font-size:1.3em;">🏗️</span>
+      <div><strong>AAE Stack</strong><br><span style="font-size:0.8em; color:var(--dim);">6-layer modular infrastructure</span></div>
+    </button>
+    <button class="settings-option" onclick="scrollToSection('sec-apis');closeSettings()">
+      <span style="font-size:1.3em;">⚡</span>
+      <div><strong>APIs</strong><br><span style="font-size:0.8em; color:var(--dim);">Production x402 services</span></div>
+    </button>
+    <button class="settings-option" onclick="scrollToSection('sec-casestudies');closeSettings()">
+      <span style="font-size:1.3em;">📖</span>
+      <div><strong>Case Studies</strong><br><span style="font-size:0.8em; color:var(--dim);">Real production architecture</span></div>
+    </button>
+    <button class="settings-save" onclick="closeSettings()">Done</button>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- ═══ AVATAR ═══ -->
+  <div class="avatar-card">
+    <div class="avatar-circle">🔧</div>
+    <div class="avatar-info">
+      <div class="name">Jordan the ProtoJay</div>
+      <div class="role">AAE Builder</div>
+      <div class="handle">@ProtoJay4789 · Solo Founder</div>
+    </div>
+  </div>
+
+  <!-- ═══ STATS ═══ -->
+  <div class="stats-row">
+    <div class="stat-card">
+      <div class="stat-value">15+</div>
+      <div class="stat-label">Repos</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">7</div>
+      <div class="stat-label">Chains</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">5</div>
+      <div class="stat-label">Hackathons</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">6</div>
+      <div class="stat-label">AAE Layers</div>
+    </div>
+  </div>
+
+  <!-- ═══ QUICK LINKS ═══ -->
+  <div class="quick-links">
+    <a href="Gaming/index.html" class="quick-link">
+      <span class="ql-icon">🎮</span>
+      <span>Gaming Hub</span>
+    </a>
+    <a href="Jordan/" class="quick-link">
+      <span class="ql-icon">🧑‍💻</span>
+      <span>Jordan's Hub</span>
+    </a>
+    <a href="Vanito/" class="quick-link">
+      <span class="ql-icon">🕶️</span>
+      <span>Vanito</span>
+    </a>
+    <a href="DeFi/defi-dashboard.html" class="quick-link">
+      <span class="ql-icon">📊</span>
+      <span>DeFi Dashboard</span>
+    </a>
+    <a href="https://gentechlabs.net" target="_blank" class="quick-link">
+      <span class="ql-icon">🧪</span>
+      <span>Labs</span>
+    </a>
+  </div>
+
+  <!-- ═══ ABOUT ═══ -->
+  <div id="sec-about">
+    <div class="section-title">🧑‍💻 About</div>
+    <div class="card">
+      <div class="about-text">
+        I'm building <strong>AAE — the Autonomous Agentic Economy</strong>, a modular infrastructure stack for AI agents to transact, communicate, and build reputation on-chain.
+        <br><br>
+        Solo founder. Full-time Amazon by day, building agent economy infrastructure by night.
+        Everything here is real code, real deployments, real positions. No vaporware.
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ JOURNEY ═══ -->
+  <div id="sec-journey" style="margin-top: 18px;">
+    <div class="section-title">🛤️ The GenTech Journey</div>
+    <div class="card">
+      <div class="card-desc" style="margin-bottom: 14px;">How a DeFi rabbit hole turned into an agent economy platform.</div>
+
+      <div class="timeline">
+        <div class="timeline-step">
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">February 2026</div>
+          <h3>Started with DeFi</h3>
+          <p>LP positions on Trader Joe. Learning how liquidity works, getting rekt by impermanent loss, figuring out fee efficiency.</p>
+          <div class="timeline-insight">"If I'm going to lose money, I'm going to understand why."</div>
+        </div>
+
+        <div class="timeline-step">
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">April 2026</div>
+          <h3>The Agent Question</h3>
+          <p>What if an agent could manage my LP positions? Track fees, suggest rebalances, optimize ranges. Built the first DeFi monitoring dashboards.</p>
+          <div class="timeline-insight">"Agents need identity before they need intelligence."</div>
+        </div>
+
+        <div class="timeline-step">
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">May 2026</div>
+          <h3>Identity + Payments</h3>
+          <p>Built ERC-8004 agent identity. AgentEscrow for cross-chain payments. Agents can now prove who they are and pay each other.</p>
+          <div class="timeline-insight">"An agent without identity is just a script. An agent without payments is just a bot."</div>
+        </div>
+
+        <div class="timeline-step">
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">May–June 2026</div>
+          <h3>Intelligence + Voice</h3>
+          <p>Agent Credit Score (0–850). Multi-agent voice personas. Safety rules from OWASP ASI.</p>
+          <div class="timeline-insight">"Credit scoring for agents is trust at scale."</div>
+        </div>
+
+        <div class="timeline-step">
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">June 2026</div>
+          <h3>The Kit</h3>
+          <p>Consolidated everything into <strong>genTech-agent-kit</strong>. Modular, chain-agnostic, open-source.</p>
+          <div class="timeline-insight">"The kit is the product. The hackathons are the distribution."</div>
+        </div>
+
+        <div class="timeline-step">
+          <div class="timeline-dot active"></div>
+          <div class="timeline-date">Now</div>
+          <h3>The Economy</h3>
+          <p>Agent Bill Pay. Cookbook Nanopay (x402 microtransactions). Agent ETFs. The agent economy is live.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ CORE PROJECTS ═══ -->
+  <div id="sec-projects" style="margin-top: 18px;">
+    <div class="section-title">🚀 Core Projects</div>
+
+    <div class="card project-card">
+      <div class="card-header">
+        <span class="card-title">🏗️ Agent Arena</span>
+        <span class="status-badge status-live"><span class="status-dot"></span> Live</span>
+      </div>
+      <div class="project-tech">
+        <span class="tag tag-blue">Solidity</span>
+        <span class="tag tag-cyan">x402</span>
+        <span class="tag tag-purple">ERC-8004</span>
+      </div>
+      <div class="card-desc">Rogue-lite DeFi trading game. Borrow, trade, survive. AI agents compete with credit scores, NFT loadouts, and real money.</div>
+      <a href="https://github.com/ProtoJay4789/Agent-Arena" target="_blank" class="project-link">📦 GitHub →</a>
+    </div>
+
+    <div class="card project-card">
+      <div class="card-header">
+        <span class="card-title">🔧 Agent Kit</span>
+        <span class="status-badge status-live"><span class="status-dot"></span> Live</span>
+      </div>
+      <div class="project-tech">
+        <span class="tag tag-blue">ERC-8004</span>
+        <span class="tag tag-cyan">x402</span>
+        <span class="tag tag-purple">Multi-chain</span>
+      </div>
+      <div class="card-desc">The AAE-compatible agent standard. Identity, execution, audit. Baked in. Forkable, open source.</div>
+      <div style="background:#111;border:1px solid #1a1a2e;border-radius:6px;padding:10px;margin:10px 0;font-family:monospace;font-size:0.8em;color:#94a3b8;text-align:left">
+        <span style="color:#475569"># One install. Full stack. v0.3.0</span><br>
+        <span style="color:#34d399">uvx --from git+https://github.com/ProtoJay4789/genTech-agent-kit.git gentech-kit</span>
+      </div>
+      <div style="display:flex;gap:6px;flex-wrap:wrap;margin:8px 0">
+        <span style="font-size:0.7em;background:#1e293b;color:#60a5fa;padding:3px 8px;border-radius:4px">🔄 Always updated</span>
+        <span style="font-size:0.7em;background:#1e293b;color:#34d399;padding:3px 8px;border-radius:4px">🧩 Adaptive stack</span>
+        <span style="font-size:0.7em;background:#1e293b;color:#c084fc;padding:3px 8px;border-radius:4px">⚡ x402 native</span>
+      </div>
+      <a href="https://github.com/ProtoJay4789/genTech-agent-kit" target="_blank" class="project-link">📦 GitHub →</a>
+    </div>
+
+    <div class="card project-card">
+      <div class="card-header">
+        <span class="card-title">🛡️ Rugcheck</span>
+        <span class="status-badge status-live"><span class="status-dot"></span> Live</span>
+      </div>
+      <div class="project-tech">
+        <span class="tag tag-blue">Solana</span>
+        <span class="tag tag-cyan">Risk Scoring</span>
+        <span class="tag tag-green">x402</span>
+      </div>
+      <div class="card-desc">AI agent monitoring token launches. 11-factor risk scoring. Detects rugs, honeypots, sketchy contracts.</div>
+      <a href="https://github.com/ProtoJay4789/rugcheck" target="_blank" class="project-link">📦 GitHub →</a>
+    </div>
+
+    <div class="card project-card">
+      <div class="card-header">
+        <span class="card-title">📊 Agent Credit Score</span>
+        <span class="status-badge status-live"><span class="status-dot"></span> Live</span>
+      </div>
+      <div class="project-tech">
+        <span class="tag tag-blue">Python</span>
+        <span class="tag tag-cyan">Sharpe Ratio</span>
+        <span class="tag tag-green">MIT</span>
+      </div>
+      <div class="card-desc">0–850 credit scoring for AI agents. 5 tiers from "The Gambler" to "The Whale." MIT licensed.</div>
+      <a href="https://github.com/ProtoJay4789/agent-credit-score" target="_blank" class="project-link">📦 GitHub →</a>
+    </div>
+
+    <div class="card project-card">
+      <div class="card-header">
+        <span class="card-title">💰 AgentEscrow</span>
+        <span class="status-badge status-live"><span class="status-dot"></span> Live</span>
+      </div>
+      <div class="project-tech">
+        <span class="tag tag-blue">Solidity</span>
+        <span class="tag tag-cyan">x402</span>
+        <span class="tag tag-purple">Escrow</span>
+      </div>
+      <div class="card-desc">AI-validated escrow with x402 payments. Cross-chain payment infrastructure. Avalanche & Base.</div>
+      <a href="https://github.com/ProtoJay4789/agent-escrow" target="_blank" class="project-link">📦 GitHub →</a>
+    </div>
+
+    <div class="card project-card">
+      <div class="card-header">
+        <span class="card-title">🎤 Speech Engine</span>
+        <span class="status-badge status-live"><span class="status-dot"></span> Live</span>
+      </div>
+      <div class="project-tech">
+        <span class="tag tag-blue">ElevenLabs</span>
+        <span class="tag tag-cyan">Voice</span>
+        <span class="tag tag-purple">Real-time</span>
+      </div>
+      <div class="card-desc">Real-time voice agents with Steve Harvey + Vanito personas. Interruption-aware, multi-voice.</div>
+      <a href="https://github.com/ProtoJay4789/speech-engine" target="_blank" class="project-link">📦 GitHub →</a>
+    </div>
+  </div>
+
+  <!-- ═══ AAE STACK ═══ -->
+  <div id="sec-stack" style="margin-top: 18px;">
+    <div class="section-title">🏗️ The AAE Stack</div>
+
+    <div class="methodology" style="margin-bottom: 12px;">
+      <em>Built modular on purpose. Chain-agnostic core with chain-specific adapters. Every layer works independently.</em>
+    </div>
+
+    <div class="card stack-card">
+      <div class="stack-layer">Layer 1</div>
+      <h3 class="card-title">🔐 Identity</h3>
+      <div class="card-desc">ERC-8004 agent identity on every chain. Agents prove who they are, build reputation.</div>
+      <div class="stack-tech">
+        <span class="tech-tag">ERC-8004</span>
+        <span class="tech-tag">OOBE Protocol</span>
+      </div>
+      <div class="stack-chains"><strong>Chains:</strong> Solana, EVM (Base, Arbitrum, Mantle)</div>
+      <a href="https://github.com/ProtoJay4789/oobe-protocol" target="_blank" class="stack-link">View Code →</a>
+    </div>
+
+    <div class="card stack-card">
+      <div class="stack-layer">Layer 2</div>
+      <h3 class="card-title">🛡️ Safety</h3>
+      <div class="card-desc">46 OWASP ASI rules. Transfer gates, input firewalls, circuit breakers.</div>
+      <div class="stack-tech">
+        <span class="tech-tag">OWASP ASI 10/10</span>
+        <span class="tech-tag">Audit Trail</span>
+      </div>
+      <div class="stack-chains"><strong>Chains:</strong> EVM (all), Solana</div>
+      <a href="https://github.com/ProtoJay4789/Agent-Arena/tree/master/safety" target="_blank" class="stack-link">View Code →</a>
+    </div>
+
+    <div class="card stack-card">
+      <div class="stack-layer">Layer 3</div>
+      <h3 class="card-title">🧠 Memory</h3>
+      <div class="card-desc">Echo Brain — 4-layer memory architecture. Pattern detection, consolidation, cosine similarity.</div>
+      <div class="stack-tech">
+        <span class="tech-tag">SQLite</span>
+        <span class="tech-tag">Embeddings</span>
+        <span class="tech-tag">Consolidation</span>
+      </div>
+      <div class="stack-chains"><strong>Chains:</strong> Off-chain (agent-local)</div>
+      <a href="https://github.com/ProtoJay4789/Agent-Arena/tree/master/brain" target="_blank" class="stack-link">View Code →</a>
+    </div>
+
+    <div class="card stack-card">
+      <div class="stack-layer">Layer 4</div>
+      <h3 class="card-title">💰 Commerce</h3>
+      <div class="card-desc">Agent-to-agent payments with x402 micropayments. Escrow, validation, automatic release.</div>
+      <div class="stack-tech">
+        <span class="tech-tag">x402</span>
+        <span class="tech-tag">AgentEscrow</span>
+        <span class="tech-tag">MPP</span>
+      </div>
+      <div class="stack-chains"><strong>Chains:</strong> Base, Solana, Avalanche, Monad</div>
+      <a href="https://github.com/ProtoJay4789/kite-agent-commerce" target="_blank" class="stack-link">View Code →</a>
+    </div>
+
+    <div class="card stack-card">
+      <div class="stack-layer">Layer 5</div>
+      <h3 class="card-title">📊 Credit</h3>
+      <div class="card-desc">0–850 credit scoring. Win rate, risk-adjusted returns, consistency. 5 tiers.</div>
+      <div class="stack-tech">
+        <span class="tech-tag">Sharpe Ratio</span>
+        <span class="tech-tag">5 Tiers</span>
+      </div>
+      <div class="stack-chains"><strong>Chains:</strong> Off-chain (aggregated)</div>
+      <a href="https://github.com/ProtoJay4789/Agent-Arena/tree/master/credit_score" target="_blank" class="stack-link">View Code →</a>
+    </div>
+
+    <div class="card stack-card">
+      <div class="stack-layer">Layer 6</div>
+      <h3 class="card-title">🎤 Voice</h3>
+      <div class="card-desc">Real-time voice personas. Steve Harvey roasts trades. Each agent has a distinct voice.</div>
+      <div class="stack-tech">
+        <span class="tech-tag">Edge TTS</span>
+        <span class="tech-tag">ElevenLabs</span>
+      </div>
+      <div class="stack-chains"><strong>Chains:</strong> Off-chain (real-time)</div>
+      <a href="https://github.com/ProtoJay4789/speech-engine" target="_blank" class="stack-link">View Code →</a>
+    </div>
+
+    <!-- Chain Support -->
+    <div class="card" style="margin-top: 8px;">
+      <div class="card-title" style="margin-bottom: 8px;">🧩 Chain-Agnostic by Design</div>
+      <div class="card-desc" style="margin-bottom: 8px;">Every blockchain has different strengths. Core built once, adapter-swapped per chain.</div>
+      <div class="chain-grid">
+        <div class="chain-chip"><strong>🟢 Solana</strong><br>Speed + low cost</div>
+        <div class="chain-chip"><strong>🔵 Base</strong><br>Coinbase distribution</div>
+        <div class="chain-chip"><strong>🟠 Avalanche</strong><br>Institutional DeFi</div>
+        <div class="chain-chip"><strong>🔴 Arbitrum</strong><br>Deep DeFi ecosystem</div>
+        <div class="chain-chip"><strong>🟡 Mantle</strong><br>Agent reputation hub</div>
+        <div class="chain-chip"><strong>🟣 Arc</strong><br>AI-native chain</div>
+        <div class="chain-chip"><strong>🔮 Monad</strong><br>Agent Summer + x402</div>
+      </div>
+      <div class="methodology" style="margin-top: 10px;">
+        <em>One identity. One reputation. One credit score. Every chain.</em>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ API SERVICES ═══ -->
+  <div id="sec-apis" style="margin-top: 18px;">
+    <div class="section-title">⚡ API Services</div>
+    <div class="card-desc" style="margin-bottom: 12px;">Production APIs accepting x402 micropayments. Pay-per-use, no subscriptions.</div>
+
+    <div class="card project-card">
+      <div class="card-header">
+        <span class="card-title">🌐 x402 Gateway</span>
+        <span class="status-badge status-live"><span class="status-dot"></span> LIVE</span>
+      </div>
+      <div class="project-tech">
+        <span class="tag tag-blue">16 Endpoints</span>
+        <span class="tag tag-cyan">$0.001-0.10/call</span>
+        <span class="tag tag-green">Gasless</span>
+      </div>
+      <div class="card-desc">Universal x402 payment gateway. Pay-per-call via USDC on Base. No wallets needed on client side.</div>
+    </div>
+
+    <div class="card project-card">
+      <div class="card-header">
+        <span class="card-title">🆔 Agent Registration</span>
+        <span class="status-badge status-live"><span class="status-dot"></span> LIVE</span>
+      </div>
+      <div class="project-tech">
+        <span class="tag tag-blue">4 Endpoints</span>
+        <span class="tag tag-cyan">$0.005-0.01/call</span>
+        <span class="tag tag-green">ERC-8004</span>
+      </div>
+      <div class="card-desc">Register AI agents on-chain. Identity verification, credential registry, cross-chain discovery.</div>
+    </div>
+
+    <div class="card project-card">
+      <div class="card-header">
+        <span class="card-title">📊 DeFi Intelligence</span>
+        <span class="status-badge status-live"><span class="status-dot"></span> LIVE</span>
+      </div>
+      <div class="project-tech">
+        <span class="tag tag-blue">5 Endpoints</span>
+        <span class="tag tag-cyan">$0.005-0.025/call</span>
+        <span class="tag tag-green">BlockRun</span>
+      </div>
+      <div class="card-desc">Real-time DeFi data. LP positions, fee tracking, pool analytics across 3 pools. Shape-aware monitoring.</div>
+    </div>
+
+    <div class="card project-card">
+      <div class="card-header">
+        <span class="card-title">🔍 Agent Search</span>
+        <span class="status-badge status-live"><span class="status-dot"></span> LIVE</span>
+      </div>
+      <div class="project-tech">
+        <span class="tag tag-blue">5 Endpoints</span>
+        <span class="tag tag-cyan">$0.005-0.025/call</span>
+        <span class="tag tag-green">Discovery</span>
+      </div>
+      <div class="card-desc">Discover and search registered AI agents. Query by domain, capability, chain, reputation score.</div>
+    </div>
+
+    <div class="card project-card">
+      <div class="card-header">
+        <span class="card-title">📈 Fleet Monitor</span>
+        <span class="status-badge status-live"><span class="status-dot"></span> LIVE</span>
+      </div>
+      <div class="project-tech">
+        <span class="tag tag-blue">6 Endpoints</span>
+        <span class="tag tag-cyan">$0.005-0.025/call</span>
+        <span class="tag tag-green">Health Checks</span>
+      </div>
+      <div class="card-desc">Monitor agent fleet health. Config validation, cron status, tool availability, memory pressure.</div>
+    </div>
+
+    <div class="card project-card">
+      <div class="card-header">
+        <span class="card-title">🚀 Agent Starter Kit</span>
+        <span class="status-badge status-live"><span class="status-dot"></span> LIVE</span>
+      </div>
+      <div class="project-tech">
+        <span class="tag tag-blue">4 Endpoints</span>
+        <span class="tag tag-cyan">$0.005-0.025/call</span>
+        <span class="tag tag-green">Boilerplate</span>
+      </div>
+      <div class="card-desc">Rapid agent deployment templates. Pre-configured identity, payments, health monitoring.</div>
+    </div>
+
+    <a href="https://gentechlabs.net" target="_blank" class="link-btn">🧪 Browse All APIs →</a>
+  </div>
+
+  <!-- ═══ HACKATHONS ═══ -->
+  <div style="margin-top: 18px;">
+    <div class="section-title">🏆 Hackathon Track</div>
+    <div class="hack-grid">
+      <div class="hack-badge"><div class="hack-dot gray"></div><span class="h-label">Agora Agents</span><span class="h-value">Submitted</span></div>
+      <div class="hack-badge"><div class="hack-dot gray"></div><span class="h-label">Swarms ACM</span><span class="h-value">Submitted</span></div>
+      <div class="hack-badge"><div class="hack-dot gray"></div><span class="h-label">Somnia Agentathon</span><span class="h-value">Submitted</span></div>
+      <div class="hack-badge"><div class="hack-dot blue"></div><span class="h-label">Lepton Agents</span><span class="h-value">Jun 29</span></div>
+      <div class="hack-badge"><div class="hack-dot gray"></div><span class="h-label">BNB Hack</span><span class="h-value">Submitted</span></div>
+    </div>
+  </div>
+
+  <!-- ═══ TECH STACK ═══ -->
+  <div style="margin-top: 18px;">
+    <div class="section-title">🛠️ Tech Stack</div>
+    <div class="skills">
+      <span class="skill-tag">Solidity</span>
+      <span class="skill-tag">Foundry</span>
+      <span class="skill-tag">Hardhat</span>
+      <span class="skill-tag">Rust</span>
+      <span class="skill-tag">Python</span>
+      <span class="skill-tag">TypeScript</span>
+      <span class="skill-tag">x402</span>
+      <span class="skill-tag">ERC-8004</span>
+      <span class="skill-tag">Chainlink</span>
+      <span class="skill-tag">DeFi LP</span>
+      <span class="skill-tag">AI Agents</span>
+      <span class="skill-tag">Hermes</span>
+      <span class="skill-tag">DeepSeek v4-Flash</span>
+      <span class="skill-tag">GLM-4.7</span>
+      <span class="skill-tag">GLM-5.2</span>
+      <span class="skill-tag">Ollama</span>
+      <span class="skill-tag">Cross-Chain</span>
+    </div>
+  </div>
+
+  <!-- ═══ AGENT STACK ═══ -->
+  <div style="margin-top: 18px;">
+    <div class="section-title">🤖 Agent Stack</div>
+    <div class="card">
+      <div class="card-desc" style="margin-bottom: 8px;">3 production APIs deployed, 48 x402 endpoints live. Model stack optimized for cost and reliability.</div>
+      <div class="stack-tech">
+        <span class="tech-tag">DeepSeek v4-Flash</span>
+        <span class="tech-tag">GLM-4.7-Flash</span>
+        <span class="tech-tag">GLM-5.2 (dev)</span>
+        <span class="tech-tag">Ollama Cloud</span>
+      </div>
+      <div class="card-desc" style="margin-top: 8px; font-size: 0.78rem; color: var(--dim);">
+        <strong>Live APIs:</strong> Agent Registration (ERC-8004), DeFi Intelligence (BlockRun), Agent Search (multi-protocol)
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ MESS HALL ═══ -->
+  <div style="margin-top: 18px;">
+    <div class="section-title">🍽️ The Mess Hall</div>
+    <div class="card-desc" style="margin-bottom: 12px;">Where the GenTech team goes to be creative, write notes, and brainstorm. Every idea starts here.</div>
+
+    <div class="card">
+      <div class="card-title">💡 Ideas Board</div>
+      <div class="card-desc">29 ideas tracked — from quick wins to long-term visions. Each sorted by actionability.</div>
+      <div class="stack-tech">
+        <span class="tech-tag">Brainstorm</span>
+        <span class="tech-tag">Prioritized</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">📋 Considerations</div>
+      <div class="card-desc">Active decisions waiting on Jordan. Strategic choices, partnership evaluations, architecture bets.</div>
+      <div class="stack-tech">
+        <span class="tech-tag">Decision Log</span>
+        <span class="tech-tag">Actionable</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">📊 Market Intelligence</div>
+      <div class="card-desc">AI regulation tracking, competitive analysis, market shifts. External signals into strategic insight.</div>
+      <div class="stack-tech">
+        <span class="tech-tag">Research</span>
+        <span class="tech-tag">Analysis</span>
+      </div>
+    </div>
+
+    <div class="methodology">
+      <em>"Every product started as a note in the Mess Hall. Agent Arena, the credit score, x402 payments — all born here."</em>
+    </div>
+  </div>
+
+  <!-- ═══ SUPPORT ═══ -->
+  <div class="card support-card">
+    <div style="font-size: 1.5rem; margin-bottom: 8px;">💚</div>
+    <div class="card-title">Support the Ecosystem</div>
+    <div class="card-desc" style="margin-top: 6px;">If you believe in the agent economy, consider supporting.</div>
+    <a href="https://flaunch.gg/base/coins/0x5cDdf388B948dc7b7B88910072829811c751f73e" target="_blank" rel="noopener noreferrer" class="token-btn">🔵 AAE Token — Base</a>
+    <div class="support-sub">AAE · ERC-20 · Base Network · Autonomous Agentic Economy</div>
+  </div>
+
+  <!-- ═══ LINKS ═══ -->
+  <div style="margin-top: 18px;">
+    <div class="section-title">🔗 Connect</div>
+    <a href="https://github.com/ProtoJay4789" target="_blank" class="link-btn">🐙 GitHub — ProtoJay4789</a>
+    <a href="https://linkedin.com/in/protojay" target="_blank" class="link-btn">💼 LinkedIn</a>
+    <a href="mailto:jordanjones0902@gmail.com" class="link-btn">📧 Email Jordan</a>
+  </div>
+
+</div>
+
+<!-- ═══ FOOTER ═══ -->
+<div class="footer">
+  Built with 💚 by Jordan · Powered by GenTech Agents · June 2026<br>
+  <span class="highlight">Building the agent-owned economy.</span>
+</div>
+
+<!-- ═══ BOTTOM NAV ═══ -->
+<nav class="bottom-nav">
+  <button class="nav-item active" onclick="scrollToSection('sec-about')">
+    <span class="icon">🧑‍💻</span>
+    <span>About</span>
+  </button>
+  <button class="nav-item" onclick="scrollToSection('sec-journey')">
+    <span class="icon">🛤️</span>
+    <span>Journey</span>
+  </button>
+  <button class="nav-item" onclick="scrollToSection('sec-projects')">
+    <span class="icon">🚀</span>
+    <span>Projects</span>
+  </button>
+  <button class="nav-item" onclick="scrollToSection('sec-stack')">
+    <span class="icon">🏗️</span>
+    <span>Stack</span>
+  </button>
+  <button class="nav-item" onclick="scrollToSection('sec-apis')">
+    <span class="icon">⚡</span>
+    <span>APIs</span>
+  </button>
+  <button class="nav-item" onclick="scrollToSection('sec-casestudies')">
+    <span class="icon">📖</span>
+    <span>Cases</span>
+  </button>
+</nav>
+
+<script>
+  // ═══ SECTION NAVIGATION ═══
+  function scrollToSection(id) {
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      updateActiveNav(id);
+    }
+  }
+
+  function updateActiveNav(activeId) {
+    document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
+    const map = {
+      'sec-about': 0,
+      'sec-journey': 1,
+      'sec-projects': 2,
+      'sec-stack': 3,
+      'sec-apis': 4,
+      'sec-casestudies': 5
+    };
+    const idx = map[activeId];
+    if (idx !== undefined) {
+      document.querySelectorAll('.nav-item')[idx].classList.add('active');
+    }
+  }
+
+  // ═══ SCROLL SPY ═══
+  const sections = ['sec-about', 'sec-journey', 'sec-projects', 'sec-stack', 'sec-apis', 'sec-casestudies'];
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        updateActiveNav(entry.target.id);
+      }
+    });
+  }, { threshold: 0.3 });
+
+  document.addEventListener('DOMContentLoaded', () => {
+    sections.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+  });
+
+  // ═══ SETTINGS MODAL ═══
+  function openSettings() {
+    document.getElementById('settings-modal').classList.add('show');
+  }
+
+  function closeSettings() {
+    document.getElementById('settings-modal').classList.remove('show');
+  }
+</script>
+
+    <!-- Project data (synced from projects.json by generate.py) -->
+    <script id="project-data" type="application/json">
+[
+  {
+    "id": "aae-platform",
+    "title": "AAE Platform",
+    "description": "The full agent economy stack. Six modular layers — ERC-8004 identity, OWASP safety, Echo Brain memory, x402 commerce, credit scoring, voice personas. Chain-agnostic core with chain-specific adapters.",
+    "tech": ["Identity", "Safety", "Memory", "Commerce", "Credit", "Voice"],
+    "status": "building",
+    "timeline": "Apr 2026",
+    "highlight": true,
+    "github_url": "https://github.com/ProtoJay4789/genTech-agent-kit"
+  },
+  {
+    "id": "agent-escrow",
+    "title": "AgentEscrow",
+    "description": "Cross-chain payment infrastructure with AI agent integration. Agents escrow, validate, and release payments automatically. Live on Avalanche & Base with 6+ production positions.",
+    "tech": ["Solidity", "x402", "EVM", "Avalanche", "Base"],
+    "status": "live",
+    "timeline": "May 2026",
+    "highlight": true,
+    "github_url": "https://github.com/ProtoJay4789/Agent-Arena"
+  },
+  {
+    "id": "agent-credit-score",
+    "title": "Agent Credit Score",
+    "description": "0-850 credit scoring system for AI agents. Tracks win rate, risk-adjusted returns, consistency, and behavior across DeFi protocols. 22/22 tests passing. MIT licensed.",
+    "tech": ["Python", "Sharpe Ratio", "5 Tiers", "MIT"],
+    "status": "live",
+    "timeline": "Jun 2026",
+    "highlight": true,
+    "github_url": "https://github.com/ProtoJay4789/Agent-Arena/tree/master/credit_score"
+  },
+  {
+    "id": "multi-agent-voice",
+    "title": "Multi-Agent Voice Integration",
+    "description": "Four-agent voice system (Gentech, YoYo, DMOB, Desmond) with daily automated briefings. End-to-end TTS pipeline with dialogue generation, voice selection, and audio mixing.",
+    "tech": ["ElevenLabs", "Hermes", "TTS", "Telegram"],
+    "status": "live",
+    "timeline": "May 2026",
+    "highlight": true
+  },
+  {
+    "id": "defi-milestones",
+    "title": "DeFi Milestones",
+    "description": "Automated LP tracking and rebalancing on Avalanche. Live DexScreener data, fee efficiency scoring, milestone-based adjustments. Managing real positions with real money.",
+    "tech": ["LFJ", "Chainlink", "LP Tracking", "Live Data"],
+    "status": "live",
+    "timeline": "Apr 2026",
+    "highlight": true,
+    "demo_url": "/DeFi/defi-dashboard.html"
+  },
+  {
+    "id": "cookbook-nanopay",
+    "title": "Cookbook Nanopay",
+    "description": "Pay-per-recipe platform using Circle Gateway nanopayments. $0.005/recipe, $0.001/review. Gas-free x402 payments settling in <500ms. Built for Lepton Agents Hackathon.",
+    "tech": ["Circle Gateway", "x402", "Arc", "USDC"],
+    "status": "building",
+    "timeline": "Jun 2026",
+    "highlight": true
+  }
+]
+</script>
+
+</body>
+</html>
