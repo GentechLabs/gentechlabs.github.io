@@ -71,14 +71,14 @@
     },
     {
       "id": 34,
-      "name": "Sell APIs to AI Agents — Rugcheck v2 + Agent Credit Score",
-      "difficulty": "medium",
+      "name": "Sell APIs to AI Agents — Pay-Skills PR #154",
+      "difficulty": "easy",
       "priority": "high",
-      "status": "pending",
+      "status": "in_progress",
       "assigned_to": "gentech",
       "platform": "cloud",
       "needs_jordan": false,
-      "detail": "Deploy Rugcheck v2 API to port 8088. Add Q402 payment middleware. List in pay-skills catalog. Build Agent Credit Score API wrapper."
+      "detail": "Pay-skills PR #154: 9 GenTech OpenAPI specs submitted to solana-foundation/pay-skills. ✅ Greptile P1 fixed (parameters arrays on all 16 GET endpoints). Pending upstream review/merge. Follow-up in item #50."
     },
     {
       "id": 35,
@@ -245,7 +245,18 @@
       "platform": "desktop",
       "needs_jordan": false,
       "deadline": "2026-07-17",
-      "detail": "Agentic Wallet login + 90-sec demo video. $100K prize pool."
+      "detail": "Agentic Wallet login + 90-sec demo video. $100K prize pool. DEADLINE JUL 17."
+    },
+    {
+      "id": 50,
+      "name": "Sell APIs to AI Agents — Phase 2: Deploy & List",
+      "difficulty": "medium",
+      "priority": "high",
+      "status": "pending",
+      "assigned_to": "forge",
+      "platform": "either",
+      "needs_jordan": false,
+      "detail": "Gentech got pay-skills PR #154 submitted (9 GenTech OpenAPI specs). Next steps: (1) Deploy Rugcheck v2 API to port 8088 (2) Add Q402 payment middleware (3) List in pay-skills catalog for agent discovery (4) Build Agent Credit Score API wrapper. See #34 for PR context."
     }
   ],
   "agents": {

@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GenTech Labs — Subscription Hub</title>
+    <meta name="description" content="Agent-powered DeFi, content, and API services. Subscribe to GenTech Labs.">
+    <style>
+        :root {
+            --bg: #0b0d14;
+            --surface: #11131e;
+            --surface-hover: #1a1d2e;
+            --border: #1e2240;
+            --text: #e2e4f0;
+            --text-sec: #8b8fa0;
+            --accent: #6c5ce7;
+            --accent-glow: rgba(108,92,231,0.25);
+            --green: #00d68f;
+            --orange: #ff9f43;
+            --blue: #54a0ff;
+            --radius: 12px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+        /* Header */
+        header {
+            padding: 24px 0;
+            border-bottom: 1px solid var(--border);
+            background: var(--surface);
+        }
+        header .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .logo { font-size: 20px; font-weight: 700; letter-spacing: -0.02em; }
+        .logo span { color: var(--accent); }
+        nav a {
+            color: var(--text-sec);
+            text-decoration: none;
+            margin-left: 24px;
+            font-size: 14px;
+            transition: color 0.2s;
+        }
+        nav a:hover { color: var(--text); }
+
+        /* Hero */
+        .hero {
+            text-align: center;
+            padding: 80px 24px 60px;
+        }
+        .hero h1 {
+            font-size: clamp(36px, 5vw, 56px);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, #6c5ce7, #a29bfe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero p {
+            font-size: 18px;
+            color: var(--text-sec);
+            max-width: 600px;
+            margin: 0 auto 32px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 100px;
+            background: var(--accent-glow);
+            border: 1px solid var(--border);
+            font-size: 13px;
+            color: var(--accent);
+            margin-bottom: 24px;
+        }
+
+        /* Pricing Grid */
+        .pricing {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            padding: 20px 0 60px;
+        }
+
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 32px 28px;
+            transition: all 0.25s ease;
+            position: relative;
+        }
+        .card:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 32px var(--accent-glow);
+        }
+        .card.featured {
+            border-color: var(--accent);
+            background: linear-gradient(180deg, #12142a 0%, var(--surface) 100%);
+        }
+        .card.featured::before {
+            content: "MOST POPULAR";
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--accent);
+            color: #fff;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 4px 14px;
+            border-radius: 100px;
+            letter-spacing: 0.06em;
+        }
+
+        .card h3 {
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--text-sec);
+            margin-bottom: 8px;
+        }
+        .price {
+            font-size: 42px;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            margin-bottom: 4px;
+        }
+        .price span {
+            font-size: 16px;
+            font-weight: 400;
+            color: var(--text-sec);
+        }
+        .per-period {
+            font-size: 14px;
+            color: var(--text-sec);
+            margin-bottom: 24px;
+        }
+
+        .features {
+            list-style: none;
+            margin-bottom: 28px;
+        }
+        .features li {
+            padding: 8px 0;
+            font-size: 14px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+        }
+        .features li:last-child { border-bottom: none; }
+        .features li::before {
+            content: "✓";
+            color: var(--green);
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+        .features li.na { color: var(--text-sec); }
+        .features li.na::before { content: "—"; color: var(--text-sec); }
+
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: transparent;
+            color: var(--text);
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        .btn:hover { background: var(--surface-hover); border-color: var(--accent); }
+        .btn-primary {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: #fff;
+        }
+        .btn-primary:hover { background: #7c6ff0; box-shadow: 0 4px 16px var(--accent-glow); }
+
+        /* Features section */
+        .features-section {
+            padding: 60px 0;
+            border-top: 1px solid var(--border);
+        }
+        .features-section h2 {
+            font-size: 28px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 48px;
+        }
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 32px;
+        }
+        .feature-item { text-align: center; padding: 16px; }
+        .feature-item .icon { font-size: 32px; margin-bottom: 12px; }
+        .feature-item h4 { font-size: 16px; margin-bottom: 8px; }
+        .feature-item p { font-size: 14px; color: var(--text-sec); }
+
+        /* FAQ */
+        .faq {
+            padding: 60px 0;
+            border-top: 1px solid var(--border);
+        }
+        .faq h2 {
+            font-size: 28px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .faq-item {
+            max-width: 720px;
+            margin: 0 auto 24px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 20px 24px;
+        }
+        .faq-item h4 { margin-bottom: 8px; }
+        .faq-item p { font-size: 14px; color: var(--text-sec); }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 24px 0;
+            text-align: center;
+            color: var(--text-sec);
+            font-size: 13px;
+        }
+
+        @media (max-width: 640px) {
+            .pricing { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container">
+        <div class="logo">GenTech <span>Labs</span></div>
+        <nav>
+            <a href="#pricing">Pricing</a>
+            <a href="#features">Features</a>
+            <a href="#faq">FAQ</a>
+            <a href="https://gentechlabs.net">API Status</a>
+        </nav>
+    </div>
+</header>
+
+<section class="hero">
+    <div class="container">
+        <div class="badge">⚡ NOW IN BETA — Q402 POWERED</div>
+        <h1>Agent Services,<br>On Your Terms</h1>
+        <p>DeFi intelligence, content generation, and AI agent infrastructure — delivered with gasless payments via Q402.</p>
+    </div>
+</section>
+
+<section id="pricing" class="container">
+    <div class="pricing">
+        <!-- Tier 1: Hobby -->
+        <div class="card">
+            <h3>Hobby</h3>
+            <div class="price">$3<span>/mo</span></div>
+            <div class="per-period">Billed monthly. Cancel anytime.</div>
+            <ul class="features">
+                <li>DeFi LP monitoring — 3 positions</li>
+                <li>Basic DeFi dashboard access</li>
+                <li>Daily pool snapshots</li>
+                <li>Email alerts (price + IL)</li>
+                <li>Community Discord access</li>
+                <li class="na">Advanced strategy comparison</li>
+                <li class="na">Agent credit score API</li>
+                <li class="na">Custom integrations</li>
+            </ul>
+            <a href="https://q402.quackai.ai/pay/gentech-hobby" class="btn btn-primary">Subscribe — $3/mo</a>
+        </div>
+
+        <!-- Tier 2: Pro (Featured) -->
+        <div class="card featured">
+            <h3>Pro</h3>
+            <div class="price">$10<span>/mo</span></div>
+            <div class="per-period">Billed monthly. Cancel anytime.</div>
+            <ul class="features">
+                <li>DeFi LP monitoring — 15 positions</li>
+                <li>Full DeFi dashboard + strategy comparison</li>
+                <li>Hourly pool snapshots</li>
+                <li>Telegram + email alerts</li>
+                <li>DCA rebalance automation</li>
+                <li>Liquidity shape recommendations</li>
+                <li>Agent credit score API access</li>
+                <li class="na">Custom API integrations</li>
+            </ul>
+            <a href="https://q402.quackai.ai/pay/gentech-pro" class="btn btn-primary">Subscribe — $10/mo</a>
+        </div>
+
+        <!-- Tier 3: Enterprise -->
+        <div class="card">
+            <h3>Enterprise</h3>
+            <div class="price">$25<span>/mo</span></div>
+            <div class="per-period">Billed monthly. Custom terms available.</div>
+            <ul class="features">
+                <li>Unlimited LP monitoring</li>
+                <li>Full DeFi dashboard + strategy engine</li>
+                <li>Real-time pool data</li>
+                <li>All alert channels (including voice)</li>
+                <li>DCA + advanced rebalance automation</li>
+                <li>Full strategy recommendation engine</li>
+                <li>Agent credit score API + analytics</li>
+                <li>Custom API integrations</li>
+            </ul>
+            <a href="https://q402.quackai.ai/pay/gentech-enterprise" class="btn btn-primary">Subscribe — $25/mo</a>
+        </div>
+    </div>
+</section>
+
+<section id="features" class="features-section">
+    <div class="container">
+        <h2>What You Get</h2>
+        <div class="feature-grid">
+            <div class="feature-item">
+                <div class="icon">📊</div>
+                <h4>DeFi Intelligence</h4>
+                <p>Real-time LP monitoring, IL tracking, yield optimization across Avalanche, Base, and more.</p>
+            </div>
+            <div class="feature-item">
+                <div class="icon">🤖</div>
+                <h4>Agent Infrastructure</h4>
+                <p>ERC-8004 identity, Q402 gasless payments, and reputation middleware for AI agents.</p>
+            </div>
+            <div class="feature-item">
+                <div class="icon">🔒</div>
+                <h4>Gasless by Q402</h4>
+                <p>EIP-7702 delegated execution. No gas costs. Pay with USDC/USDT on any supported chain.</p>
+            </div>
+            <div class="feature-item">
+                <div class="icon">📈</div>
+                <h4>Agent Credit Score</h4>
+                <p>On-chain reputation system for AI agents. Trust metrics, payment history, task completion rate.</p>
+            </div>
+            <div class="feature-item">
+                <div class="icon">🎯</div>
+                <h4>Strategy Engine</h4>
+                <p>Automated DCA, rebalance, and liquidity shape recommendations tailored to your portfolio.</p>
+            </div>
+            <div class="feature-item">
+                <div class="icon">⚡</div>
+                <h4>24/7 Automation</h4>
+                <p>32 cron jobs monitoring your positions, executing strategies, and generating alerts around the clock.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="faq" class="faq">
+    <div class="container">
+        <h2>Frequently Asked</h2>
+
+        <div class="faq-item">
+            <h4>How do I pay?</h4>
+            <p>All subscriptions use Q402 gasless payments. You authorize USDC/USDT once, and Q402 relays the transaction chain — no gas needed. Supported chains: BNB, Ethereum, Avalanche, Base, and more.</p>
+        </div>
+        <div class="faq-item">
+            <h4>Can I cancel anytime?</h4>
+            <p>Yes. Monthly billing, no lock-in. Cancel via your dashboard and your subscription stops at the end of the billing period.</p>
+        </div>
+        <div class="faq-item">
+            <h4>What's the difference from free tier?</h4>
+            <p>Free tier gives basic API health checks and public endpoints. Paid tiers unlock LP monitoring, strategy automation, Telegram alerts, and agent credit score API access.</p>
+        </div>
+        <div class="faq-item">
+            <h4>Do you offer custom plans?</h4>
+            <p>Yes — reach out via email or Discord for enterprise/custom integrations. We support custom API endpoints, white-label dashboards, and dedicated agent infrastructure.</p>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <p>GenTech Labs — Agent Infrastructure for the Onchain Economy.</p>
+        <p style="margin-top: 8px;">Powered by Q402 · ERC-8004 · OOBE Protocol</p>
+    </div>
+</footer>
+
+</body>
+</html>

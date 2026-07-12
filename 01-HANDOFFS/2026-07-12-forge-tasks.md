@@ -5,7 +5,7 @@ Items you can work on independently — no Jordan needed.
 
 ---
 
-## 🖥️ Desktop — Your Lane (8 items)
+## 🖥️ Desktop — Your Lane (9 items)
 
 ### [HIGH] #28 — PixelRAG — Visual Search Demo (medium)
 **Status:** ▶️ Ready
@@ -37,7 +37,11 @@ Items you can work on independently — no Jordan needed.
 
 ### [URGENT] #49 — OKX Hackathon Submission (easy) ⏰ DEADLINE: 2026-07-17
 **Status:** ▶️ Ready
-**What:** Agentic Wallet login + 90-sec demo video. $100K prize pool.
+**What:** Agentic Wallet login + 90-sec demo video. $100K prize pool. DEADLINE JUL 17.
+
+### [HIGH] #50 — Sell APIs to AI Agents — Phase 2: Deploy & List (medium)
+**Status:** ▶️ Ready
+**What:** Gentech got pay-skills PR #154 submitted (9 GenTech OpenAPI specs). Next steps: (1) Deploy Rugcheck v2 API to port 8088 (2) Add Q402 payment middleware (3) List in pay-skills catalog for agent discovery (4) Build Agent Credit Score API wrapper. See #34 for PR context.
 
 ---
 ## How to use this
@@ -49,4 +53,4 @@ Items you can work on independently — no Jordan needed.
 
 ---
 
-*Generated 2026-07-12 03:59 UTC*
+*Generated 2026-07-12 21:00 UTC*

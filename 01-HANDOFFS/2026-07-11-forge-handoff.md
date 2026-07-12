@@ -57,9 +57,9 @@ New field `platform` added to every item:
 | 🔄 Either | 3 | First available |
 
 Key items for Forge:
-- **Desktop:** Algorand Challenge (3 items), Pika Subscription, Kapso setup, Travel Agent
-- **Either:** Atelier Registration, SCN Outreach, Agent Finance
-- **Cloud:** Cloudflare Email Agent, Cloudflare Gateway, Mixar
+|- **Desktop:** Algorand Challenge (3 items), Pika Subscription, Kapso setup, Travel Agent
+|- **Either:** Atelier Registration, **SCN Outreach (HOT — see below)**, Agent Finance
+|- **Cloud:** Cloudflare Email Agent, Cloudflare Gateway, Mixar
 
 ---
 
