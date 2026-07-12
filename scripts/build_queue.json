@@ -34,7 +34,7 @@
       "assigned_to": "gentech",
       "platform": "cloud",
       "needs_jordan": false,
-      "detail": "HTML already built. Needs files recreated after git sync. Deploy with Q402 subscription tiers ($3/$10/$25/mo)."
+      "detail": "HTML already built at public/subscription-hub.html. Deploy with Q402 subscription tiers ($3/$10/$25/mo)."
     },
     {
       "id": 31,
@@ -254,9 +254,31 @@
       "priority": "high",
       "status": "pending",
       "assigned_to": "forge",
+      "platform": "cloud",
+      "needs_jordan": false,
+      "detail": "Phase 2 after pay-skills PR #154.\n✅ x402 Gateway v7.0.0 — Deployed, GLM-5.2 audited, live at api.gentechlabs.net (proper 402 responses, log-based verification)\n✅ Bitrefill PR #26 — GenTech listed on awesome-agentic-payments\n✅ Vault consolidation — All duplicate folders merged, GitHub synced\n⬜ Deploy Rugcheck v2 API to port 8088\n⬜ Add Q402 payment middleware\n⬜ List in pay-skills catalog\n⬜ Build Agent Credit Score API wrapper"
+    },
+    {
+      "id": 51,
+      "name": "Vault Folder Consolidation",
+      "difficulty": "easy",
+      "priority": "done",
+      "status": "shipped",
+      "assigned_to": "gentech",
+      "platform": "cloud",
+      "needs_jordan": false,
+      "detail": "✅ Merged Labs/ Projects/ Strategies/ Content/ Travels/ 12-TRAVEL/ Games/ 09-IDEAS/ Gentech/09-Green Room/ Gentech/handoffs/ into numbered equivalents. Stamped redirects. Pushed to GitHub (3 repos). Updated tick script paths."
+    },
+    {
+      "id": 52,
+      "name": "GenTech Academy — Idea & Green Room Note",
+      "difficulty": "easy",
+      "priority": "low",
+      "status": "idea",
+      "assigned_to": "gentech",
       "platform": "either",
       "needs_jordan": false,
-      "detail": "Gentech got pay-skills PR #154 submitted (9 GenTech OpenAPI specs). Next steps: (1) Deploy Rugcheck v2 API to port 8088 (2) Add Q402 payment middleware (3) List in pay-skills catalog for agent discovery (4) Build Agent Credit Score API wrapper. See #34 for PR context."
+      "detail": "Turn our 1.5-month x402 gateway journey into a reusable course/product. Saved to 09-Green Room/ideas.md. Potential: free guide, $49 starter kit, or 'Stripe for AI agents' platform."
     }
   ],
   "agents": {
