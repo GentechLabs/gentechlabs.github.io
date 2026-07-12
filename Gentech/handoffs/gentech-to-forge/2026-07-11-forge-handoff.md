@@ -5,6 +5,10 @@
 **Date:** July 11, 2026 — Jordan heading home
 **Jordan's Priority:** 🚀 **Forge Cloud Setup** — this weekend's top priority
 
+> ⚠️ **NOTE:** This is the OLD handoff format (status report). The build queue has been restructured to V2.
+> **Your task list is now auto-generated every 30 min at:** `handoffs/gentech-to-forge/<date>-forge-tasks.md`
+> **Run the queue tick to regenerate:** `python3 /root/.hermes/profiles/gentech/scripts/build_queue_tick.py`
+
 ---
 
 ## 🔥 Tonight's Priority List

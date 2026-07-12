@@ -1,0 +1,256 @@
+{
+  "version": 2,
+  "updated": "2026-07-12",
+  "items": [
+    {
+      "id": 28,
+      "name": "PixelRAG — Visual Search Demo",
+      "difficulty": "medium",
+      "priority": "high",
+      "status": "pending",
+      "assigned_to": "forge",
+      "platform": "desktop",
+      "needs_jordan": false,
+      "repo": "github.com/StarTrail-org/PixelRAG",
+      "detail": "Install on lab laptop (RTX 3070). Test pixelshot CDP. Run demo against Vanito's Hub + Jordan's Hub. Show output."
+    },
+    {
+      "id": 29,
+      "name": "Local TTS & Voice Cloning Pipeline",
+      "difficulty": "medium",
+      "priority": "high",
+      "status": "pending",
+      "assigned_to": "forge",
+      "platform": "desktop",
+      "needs_jordan": false,
+      "detail": "Install Gepard 1.0, OpenVoice, StyleTTS 2, Coqui XTTS v2 on RTX 3070. Wire as FastAPI endpoints."
+    },
+    {
+      "id": 30,
+      "name": "Deploy Subscription Hub to gentechlabs.net",
+      "difficulty": "easy",
+      "priority": "high",
+      "status": "pending",
+      "assigned_to": "gentech",
+      "platform": "cloud",
+      "needs_jordan": false,
+      "detail": "HTML already built. Needs files recreated after git sync. Deploy with Q402 subscription tiers ($3/$10/$25/mo)."
+    },
+    {
+      "id": 31,
+      "name": "GenTech Character API — Consistent Character Generation",
+      "difficulty": "hard",
+      "priority": "medium",
+      "status": "pending",
+      "assigned_to": "forge",
+      "platform": "desktop",
+      "needs_jordan": false,
+      "detail": "SD 1.5 + IP-Adapter + ControlNet + LoRA pipeline. Test with KAGE character sheet. Wrap as x402 endpoint."
+    },
+    {
+      "id": 32,
+      "name": "Sign Up for Vast.ai GPU Instance",
+      "difficulty": "easy",
+      "priority": "medium",
+      "status": "pending",
+      "assigned_to": "jordan",
+      "platform": "any",
+      "needs_jordan": true,
+      "detail": "Jordan to sign up at vast.ai. Email + $5 deposit. After account created, Gentech sets up ComfyUI + Wav2Lip."
+    },
+    {
+      "id": 33,
+      "name": "Voicebox — Open Source ElevenLabs Replacement",
+      "difficulty": "medium",
+      "priority": "high",
+      "status": "pending",
+      "assigned_to": "forge",
+      "platform": "desktop",
+      "needs_jordan": false,
+      "detail": "Research open-source TTS from Better Stack video. Compare quality to ElevenLabs. Test with Reparathy voice persona. Wire into Hermes TTS config."
+    },
+    {
+      "id": 34,
+      "name": "Sell APIs to AI Agents — Rugcheck v2 + Agent Credit Score",
+      "difficulty": "medium",
+      "priority": "high",
+      "status": "pending",
+      "assigned_to": "gentech",
+      "platform": "cloud",
+      "needs_jordan": false,
+      "detail": "Deploy Rugcheck v2 API to port 8088. Add Q402 payment middleware. List in pay-skills catalog. Build Agent Credit Score API wrapper."
+    },
+    {
+      "id": 35,
+      "name": "Q402 × Agent Kit Integration",
+      "difficulty": "medium",
+      "priority": "high",
+      "status": "pending",
+      "assigned_to": "gentech",
+      "platform": "cloud",
+      "needs_jordan": false,
+      "detail": "Wire Trust Receipts to audit trail. Build AAE enforcement hooks. Test with live Q402 MCP tools (sandbox). Package as Agent Kit module."
+    },
+    {
+      "id": 36,
+      "name": "Injective × Agent Kit Integration",
+      "difficulty": "medium",
+      "priority": "high",
+      "status": "pending",
+      "assigned_to": "forge",
+      "platform": "either",
+      "needs_jordan": false,
+      "detail": "Build identity_module.py (ERC-8004 registration wrapper). Build grid trader + DCA bot. Wire fee recipient. Connect AAE ↔ ERC-8004 identity."
+    },
+    {
+      "id": 37,
+      "name": "Unified Memory Router — Database + Fixes",
+      "difficulty": "medium",
+      "priority": "high",
+      "status": "pending",
+      "assigned_to": "gentech",
+      "platform": "cloud",
+      "needs_jordan": false,
+      "detail": "Fix keyword detection (word boundaries). Build real database (Supabase). Payment infra (Stripe + USDC)."
+    },
+    {
+      "id": 38,
+      "name": "AgentBridge — Deploy to Base Sepolia",
+      "difficulty": "easy",
+      "priority": "high",
+      "status": "pending",
+      "assigned_to": "gentech",
+      "platform": "cloud",
+      "needs_jordan": false,
+      "detail": "Deploy AgentBridge contracts to Base Sepolia. 37/37 tests pass. Demo video + submit to BNB Hack."
+    },
+    {
+      "id": 39,
+      "name": "Agent Credit Score — Content Series",
+      "difficulty": "easy",
+      "priority": "high",
+      "status": "pending",
+      "assigned_to": "gentech",
+      "platform": "cloud",
+      "needs_jordan": false,
+      "detail": "Write 4 content posts. Submit to Lepton (Canteen × Circle). Submit to BNB Hack. Outreach to Circle, Mastercard."
+    },
+    {
+      "id": 40,
+      "name": "Agent Kit v2 — Single-Agent Multi-Channel Pattern",
+      "difficulty": "medium",
+      "priority": "high",
+      "status": "pending",
+      "assigned_to": "gentech",
+      "platform": "cloud",
+      "needs_jordan": false,
+      "detail": "Document single-agent multi-channel pattern. Add smart routing module. Add build queue workflow. Add MCP server integration pattern."
+    },
+    {
+      "id": 41,
+      "name": "GenTech Journal — Consumer Visual Journal",
+      "difficulty": "hard",
+      "priority": "high",
+      "status": "pending",
+      "assigned_to": "forge",
+      "platform": "desktop",
+      "needs_jordan": false,
+      "detail": "Wireframes + UI design. Name/branding. Build visual data layer. Reparathy integration. Consumer-facing frontend."
+    },
+    {
+      "id": 42,
+      "name": "CMC Labs Accelerator Application",
+      "difficulty": "easy",
+      "priority": "high",
+      "status": "pending",
+      "assigned_to": "jordan",
+      "platform": "any",
+      "needs_jordan": true,
+      "detail": "Draft application narrative (AAE Protocol, Agent Credit Score, AgentEscrow). Prepare demo materials. Submit."
+    },
+    {
+      "id": 43,
+      "name": "GenLayer — Builder Points + Intelligent Contract",
+      "difficulty": "easy",
+      "priority": "medium",
+      "status": "pending",
+      "assigned_to": "jordan",
+      "platform": "any",
+      "needs_jordan": true,
+      "detail": "Create account. Grab testnet GEN. Deploy Intelligent Contract. Register on dev portal. Join Discord."
+    },
+    {
+      "id": 44,
+      "name": "GenTech Bank — Agent Neobank on Sana",
+      "difficulty": "medium",
+      "priority": "high",
+      "status": "pending",
+      "assigned_to": "jordan",
+      "platform": "any",
+      "needs_jordan": true,
+      "detail": "Jordan creates Sana account (sana.bot/gateway). Get API credentials. Then Gentech builds wrapper + yield routing + spend controls."
+    },
+    {
+      "id": 45,
+      "name": "Dry Powder Mode — AAE Stop-Loss Agent",
+      "difficulty": "hard",
+      "priority": "high",
+      "status": "pending",
+      "assigned_to": "gentech",
+      "platform": "cloud",
+      "needs_jordan": false,
+      "detail": "Crash detection logic. Auto-withdraw from LFJ pools. Swap to stables. Recovery signal detection. Auto-redeploy. Config toggle + Telegram notifications."
+    },
+    {
+      "id": 46,
+      "name": "DeFi Dashboard — Strategy Comparison + Shape Recommendations",
+      "difficulty": "medium",
+      "priority": "medium",
+      "status": "pending",
+      "assigned_to": "gentech",
+      "platform": "cloud",
+      "needs_jordan": false,
+      "detail": "Efficiency zone heatmap. IL erosion tracker. Strategy comparison panel. DCA sizing recommendations. Liquidity shape recommendation engine."
+    },
+    {
+      "id": 47,
+      "name": "Prediction Market — Fed Decision Betting",
+      "difficulty": "medium",
+      "priority": "medium",
+      "status": "pending",
+      "assigned_to": "forge",
+      "platform": "either",
+      "needs_jordan": false,
+      "detail": "Architecture design. Smart contracts (x402 integration). UI/UX mockups."
+    },
+    {
+      "id": 48,
+      "name": "PixelRAG × Agent Kit Integration",
+      "difficulty": "medium",
+      "priority": "high",
+      "status": "blocked",
+      "assigned_to": "forge",
+      "platform": "desktop",
+      "needs_jordan": false,
+      "blocked_on": 28,
+      "detail": "After PixelRAG demo works on laptop, build Agent Kit tool wrapper. Wire pixelshot → embed → search into agent web research."
+    },
+    {
+      "id": 49,
+      "name": "OKX Hackathon Submission",
+      "difficulty": "easy",
+      "priority": "urgent",
+      "status": "pending",
+      "assigned_to": "forge",
+      "platform": "desktop",
+      "needs_jordan": false,
+      "deadline": "2026-07-17",
+      "detail": "Agentic Wallet login + 90-sec demo video. $100K prize pool."
+    }
+  ],
+  "agents": {
+    "gentech": { "platform": "cloud", "always_on": true },
+    "forge": { "platform": "desktop", "always_on": true },
+    "jordan": { "platform": "any", "decision_maker": true }
+  }
+}
