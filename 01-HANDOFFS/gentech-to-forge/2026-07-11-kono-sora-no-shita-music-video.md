@@ -13,23 +13,24 @@
 ## The Story
 The song is about how HIKARI met KAGE. She was washing dishes at a live house in Shimokitazawa. He was performing to an empty room. After everyone walked out on him, he threw his crumpled lyrics on the floor. She picked them up. The song on that paper was **Yami no Naka De**. She read it on the train home. She came back the next night with her own lyrics on a napkin. They wrote Kono Sora no Shita together.
 
-## Character Models (LOCKED)
+## Character Models (FINAL LOCKED)
 
-### KAGE — GUITARIST (Age 22, 178cm)
+### KAGE — GUITARIST (Age 22, 178cm, Blood Type A)
 - Black leather jacket with silver studs and spikes
+- Jacket back: bat wings/demonic embroidery
 - Cross pendant necklace
-- Black electric guitar with red rose design
+- Black electric guitar with red symbol
 - Ripped black jeans, combat boots
 - Messy black hair covering one eye
-- Blood type A
+- **Personality:** Calm, burdened by past, REJECTS all music, useless with people
 
-### HIKARI — VOCALIST (Age 21, 165cm)
-- Black gothic lolita dress with corset, lace, ruffles
-- Hair fades from black to red at tips
-- Fishnets, garter straps, platform boots
+### HIKARI — VOCALIST (Age 21, 165cm, Blood Type O)
+- Long black hair fading to red tips
+- Black gothic lace dress with corset, ruffles
+- Fishnets with garter strap on left thigh, platform boots
 - Silver microphone
-- Heavy dark eye makeup, silver rings
-- Blood type O
+- Heavy dark makeup, red eyes, multiple silver rings
+- **Personality:** Charismatic, confident, tragic past, doesn't want pity
 
 Reference sheet generated and saved at: `kage-hikari-model-ref.png`
 
