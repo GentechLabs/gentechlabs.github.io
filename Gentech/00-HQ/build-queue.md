@@ -86,6 +86,15 @@
 
 ---
 
+### 32. Sign Up for Vast.ai GPU Instance 🎥
+**Status**: 🔵 Pending — Jordan to sign up Friday.
+**Goal**: Rent RTX 4090 on-demand ($0.13-0.34/hr) for local video pipeline — Wav2Lip, ComfyUI, Wan 2.2, voice cloning.
+**Why**: Replaces HeyGen ($0.33/clip), BlockRun video ($0.40/clip), ElevenLabs API costs with $0 local rendering.
+**Sign up:** https://vast.ai — email + $5 deposit
+**Next:** After account created, Gentech sets up ComfyUI template + Wav2Lip + voice cloning stack.
+
+---
+
 ### Quick Reference — Vault Handoffs (may need recreation)
 | Handoff | Purpose |
 |---------|---------|
