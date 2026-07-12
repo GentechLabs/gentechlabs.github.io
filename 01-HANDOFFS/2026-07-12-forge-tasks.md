@@ -41,6 +41,7 @@ Items you can work on independently — no Jordan needed.
 
 ### [HIGH] #50 — Sell APIs to AI Agents — Phase 2: Deploy & List (medium)
 **Status:** ▶️ Ready
+<<<<<<< HEAD
 **What:** Phase 2 after pay-skills PR #154.
 ✅ x402 Gateway v7.0.0 — Deployed, GLM-5.2 audited, live at api.gentechlabs.net (proper 402 responses, log-based verification)
 ✅ Bitrefill PR #26 — GenTech listed on awesome-agentic-payments
@@ -49,6 +50,9 @@ Items you can work on independently — no Jordan needed.
 ⬜ Add Q402 payment middleware
 ⬜ List in pay-skills catalog
 ⬜ Build Agent Credit Score API wrapper
+=======
+**What:** Gentech got pay-skills PR #154 submitted (9 GenTech OpenAPI specs). Next steps: (1) Deploy Rugcheck v2 API to port 8088 (2) Add Q402 payment middleware (3) List in pay-skills catalog for agent discovery (4) Build Agent Credit Score API wrapper. See #34 for PR context.
+>>>>>>> b57b1643 (Consolidate vault: merge duplicate folders, stamp redirects, update folder structure)
 
 ---
 ## How to use this
@@ -60,4 +64,8 @@ Items you can work on independently — no Jordan needed.
 
 ---
 
+<<<<<<< HEAD
 *Generated 2026-07-12 23:30 UTC*
+=======
+*Generated 2026-07-12 21:00 UTC*
+>>>>>>> b57b1643 (Consolidate vault: merge duplicate folders, stamp redirects, update folder structure)
