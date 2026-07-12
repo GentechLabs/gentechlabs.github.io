@@ -11,6 +11,8 @@ from vision_analysis import VisionAnalyzer, StateTracker, GameState, GameGenre
 from decision_engine import DecisionEngine, PlayStyle, Decision
 from input_emulation import InputController, SimulatedEmitter, GameButton, InputSequence, Macros
 from ai_companion import AICompanion, AgentConfig
+from windows_capture import WindowFinder, WindowsScreenCapturer
+from windows_input import WindowsInputEmitter, WindowsInputController, RETROARCH_KEY_MAP
 
 
 class TestScreenCapture(unittest.TestCase):
@@ -173,6 +175,50 @@ class TestAICompanion(unittest.TestCase):
         self.assertEqual(s["status"], "stopped")
         self.assertIn("loops", s)
         self.assertIn("frames", s)
+
+
+class TestWindowsCapture(unittest.TestCase):
+    def test_window_finder_creation(self):
+        finder = WindowFinder()
+        self.assertIsNotNone(finder)
+
+    def test_windows_capturer_creation(self):
+        capturer = WindowsScreenCapturer("RetroArch")
+        self.assertIsNotNone(capturer)
+        self.assertEqual(capturer.window_title, "RetroArch")
+
+    def test_window_info_dataclass(self):
+        from windows_capture import WindowInfo
+        info = WindowInfo(hwnd=12345, title="Test", class_name="RetroArch",
+                          pid=9999, rect=(0, 0, 640, 480), is_visible=True)
+        self.assertEqual(info.title, "Test")
+        self.assertEqual(info.rect, (0, 0, 640, 480))
+        self.assertTrue(info.is_visible)
+
+
+class TestWindowsInput(unittest.TestCase):
+    def test_key_map_completeness(self):
+        """All GameButton values should have a RetroArch mapping."""
+        for button in GameButton:
+            self.assertIn(button, RETROARCH_KEY_MAP,
+                          f"Missing mapping for {button.value}")
+
+    def test_windows_emitter_creation(self):
+        emitter = WindowsInputEmitter()
+        self.assertIsNotNone(emitter)
+        self.assertEqual(len(emitter._pressed_keys), 0)
+
+    def test_windows_controller_creation(self):
+        controller = WindowsInputController()
+        self.assertIsNotNone(controller)
+        self.assertIsNotNone(controller.emitter)
+
+    def test_release_all_clears_keys(self):
+        emitter = WindowsInputEmitter()
+        emitter._pressed_keys.add(0x5A)  # Z
+        emitter._pressed_keys.add(0x58)  # X
+        emitter.release_all()
+        self.assertEqual(len(emitter._pressed_keys), 0)
 
 
 if __name__ == "__main__":
