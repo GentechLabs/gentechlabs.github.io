@@ -23,10 +23,13 @@
 ### PRs Opened
 | Repo | PR | What | Status |
 |------|----|------|--------|
-| **RPCS3** | [#19019](https://github.com/RPCS3/rpcs3/pull/19019) | Save manager crash fix | ⏳ Review |
-| **BlockRun** | [#46](https://github.com/BlockRunAI/blockrun-mcp/pull/46) | GenTech integration skill | ⏳ Review |
+| **BlockRun** | [#46](https://github.com/BlockRunAI/blockrun-mcp/pull/46) | GenTech integration skill | 🎉 **MERGED** by VickyXAI |
+| **RPCS3** | [#19019](https://github.com/RPCS3/rpcs3/pull/19019) | Save manager crash fix | ⏳ Review (AI disclosure added ✅) |
 | **Xenia** | [#2356](https://github.com/xenia-project/xenia/pull/2356) | Controller duplication fix (draft) | 🟡 Draft |
 | **Solana** | [#154](https://github.com/solana-foundation/pay-skills/pull/154) | 9 provider listings | ⏳ CI blocked |
+
+### Site: V4 Portfolio Makeover (Live)
+`ProtoJay4789.github.io` redesigned to V4 — two-agent team cards (Gentech + Forge), updated stats (32 cron, 19 PRs, 7 marketplaces), template showcase with one-liner install, 24/7 ops dashboard. Removed non-portfolio hub links. [View live](https://ProtoJay4789.github.io)
 
 ### New GitHub Token
 Saved at `secrets/github-token`. Full scopes. Vault pushes work.
