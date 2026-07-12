@@ -1,3 +1,11 @@
+> ⚠️ **DEPRECATED — Build Queue moved to JSON**
+> The canonical build queue is now at `scripts/build_queue.json` (23 items).
+> All 7 markdown copies are stale — do not edit or reference this file.
+> Run `python3 /root/.hermes/profiles/gentech/scripts/build_queue_tick.py` to regenerate the Forge handoff.
+>
+> _(This file auto-deprecated 2026-07-12. Delete it if you want — the JSON is the only source of truth.)_
+
+---
 # Build Queue
 
 > Rebuilt 2026-07-11 after git sync cleanup. Items preserved from memory.
