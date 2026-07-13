@@ -261,6 +261,23 @@ Expand Agent Rug from malicious token scanner to full agent security platform.
 
 ---
 
+## [ ] Agents as Pets — Interactive AI Companion / Gameplay Loop 🐱
+- **Added:** 2026-07-13
+- **Source:** Jordan's Gentech cat mascot → game design brainstorm
+- **What:** Interactive AI agent that you take care of like a virtual pet (Tamagotchi-style), but with real utility — it works DeFi, content, or tasks FOR you
+- **Core loop:** Care for your agent → agent performs work → earn rewards → upgrade agent → care for it more
+- **Mechanics:**
+  - Agent has mood/stamina/hunger (compute budget, skill cooldowns)
+  - Neglect it? Performance drops. Feed it (allocate resources)? It works better.
+  - Train it with skills (install new capabilities)
+  - Visual companion with animated mascot (like the Gentech cat with cyber-collar)
+- **Revenue angle:** Free basic agent, premium skins/abilities, marketplace for trained skills
+- **Why it works:** Combines the emotional hook of pet games with actual agent utility. People will pay to keep their agent happy if it earns them money.
+- **Status:** Fresh idea — needs spec
+- **Priority:** Medium (fun + product potential)
+
+---
+
 ## [ ] Career Update — Binance Skipped, Focus on BNB Chain DevRel
 - **Added:** 2026-06-18
 - **Source:** Jordan decision → "Binance requires multilingual, can't do that"

@@ -1,16 +1,15 @@
-<<<<<<< HEAD
-# 👑 Jordan Action Items — 2026-07-12
-=======
 # 👑 Jordan Action Items — 2026-07-13
->>>>>>> b57b1643 (Consolidate vault: merge duplicate folders, stamp redirects, update folder structure)
 
-## Needs Your Action (4 items)
+## Needs Your Action (6 items)
 
 - **#32 Sign Up for Vast.ai GPU Instance** — Jordan to sign up at vast.ai. Email + $5 deposit. After account created, Gentech sets up ComfyUI + Wav2Lip.
 - **#42 CMC Labs Accelerator Application** — Draft application narrative (AAE Protocol, Agent Credit Score, AgentEscrow). Prepare demo materials. Submit.
 - **#43 GenLayer — Builder Points + Intelligent Contract** — Create account. Grab testnet GEN. Deploy Intelligent Contract. Register on dev portal. Join Discord.
 - **#44 GenTech Bank — Agent Neobank on Sana** — Jordan creates Sana account (sana.bot/gateway). Get API credentials. Then Gentech builds wrapper + yield routing + spend controls.
-<<<<<<< HEAD
-- **#56 DeepSeek API Key — For Testing Reasonix & Other Tools** — Get a raw DeepSeek API key from [platform.deepseek.com/api_keys](https://platform.deepseek.com/api_keys). The OpenCode Go subscription key doesn't work directly with DeepSeek's API — we need a separate key to test tools like Reasonix (V4 Flash-first coding agent) and direct API calls.
-=======
->>>>>>> b57b1643 (Consolidate vault: merge duplicate folders, stamp redirects, update folder structure)
+- **#56 DeepSeek API Key** — Get a raw DeepSeek API key from [platform.deepseek.com/api_keys](https://platform.deepseek.com/api_keys). The OpenCode Go subscription key doesn't work directly with DeepSeek's API — needed to test tools like Reasonix.
+- **#57 KeeperHub — Agents Onchain Hackathon** — DoraHacks event. Deadline **Aug 13** ($5k prize). Must use KeeperHub as execution layer. Our x402/MCP/onchain stack fits perfectly. Pre-register, then build Jul 27–Aug 13. Low effort for us since we already have the pieces.
+- **#58 GOAT Network — $1M AI Builder Grants** — Opens after OKX hackathon closes (Jul 17). GOAT x402 already supports 8 chains including X Layer (OKX L2). $1M grant pool for AI agent builders using x402 infrastructure. We build exactly this. Apply at goat.network/builder-program once it opens.
+- **#59 GOAT x402 — Merchant Registration** — Forge's lane. Register as GOAT x402 merchant (x402.goat.network). 5-step flow: register → configure wallets → generate API keys → integrate SDK → go live. Use DELEGATE mode for cross-chain settlement. SDK is `@goatnetwork/agentkit` (TypeScript, 118 actions). After registration, Gentech wires GOAT x402 into Rugcheck v2 payment verification to replace simulation mode.
+- **#60 Heretic (p-e-w/heretic) — Open Source Maintainer** — 26.2k star LLM censorship removal tool. Creator p-e-w announced he's stepping back for health reasons. GenTech Labs is stepping in to sustain the project. **Cron job created** (daily triage at 14:00). **First PR target:** Issue #365 — fix ARA branch bitsandbytes support for Gemma 4 31B. Python, well-scoped, high visibility.
+- **#61 Metis OpenClaw Bootcamp — Stage 1 Submission** — Deadline **Jul 17**. Must build agent on ClawUp with x402 + ERC-8004. Already in the cohort. Need to lock submission concept (Agent Credit Score, Rugcheck, or combined pitch) and build tonight.
+- **#62 BAGS — Robinhood Token Launch Agent** — Build agent that launches tokens on Robinhood Chain via BAGS (pump.fun on Robinhood). Partner address = passive 0.25% of volume. Code built at `plugins/bags/`. **Jordan steps:** 1) Sign up at dev.bags.fm → get API key. 2) Bridge ETH to Robinhood Chain (chain ID 4663) for launch fees. 3) Share your partner wallet address so Gentech can wire it in. 4) Watch for next BAGS hackathon.
