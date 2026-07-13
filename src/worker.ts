@@ -1,4 +1,5 @@
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 /**
  * GenTech x402 Gateway — v7.0.0
  * 
@@ -443,6 +444,11 @@ export default {
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
+=======
+export default {
+  async fetch(request, env) {
+    const url = new URL(request.url);
+>>>>>>> Stashed changes
     
     // Get VPS configuration from environment variables
     const vpsIP = env.VPS_IP || '2.24.195.196';
@@ -483,5 +489,8 @@ export default {
     // Default: pass through to existing backend
     return fetch(request);
   }
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 };
