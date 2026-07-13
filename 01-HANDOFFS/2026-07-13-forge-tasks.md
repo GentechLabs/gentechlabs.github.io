@@ -25,7 +25,7 @@ Items you can work on independently — no Jordan needed.
 
 ### [HIGH] #36 — Injective × Agent Kit Integration (medium)
 **Status:** ▶️ Ready
-**What:** Build identity_module.py (ERC-8004 registration wrapper). Build grid trader + DCA bot. Wire fee recipient. Connect AAE ↔ ERC-8004 identity.
+**What:** Build identity_module.py (ERC-8004 registration wrapper). Build grid trader + DCA bot. Wire fee recipient. Connect AAE to ERC-8004 identity.
 
 ### [HIGH] #41 — GenTech Journal — Consumer Visual Journal (hard)
 **Status:** ▶️ Ready
@@ -42,13 +42,13 @@ Items you can work on independently — no Jordan needed.
 ### [HIGH] #50 — Sell APIs to AI Agents — Phase 2: Deploy & List (medium)
 **Status:** ▶️ Ready
 **What:** Phase 2 after pay-skills PR #154.
-✅ x402 Gateway v7.0.0 — Deployed, GLM-5.2 audited, live at api.gentechlabs.net (proper 402 responses, log-based verification)
-✅ Bitrefill PR #26 — GenTech listed on awesome-agentic-payments
-✅ Vault consolidation — All duplicate folders merged, GitHub synced
-⬜ Deploy Rugcheck v2 API to port 8088
-⬜ Add Q402 payment middleware
-⬜ List in pay-skills catalog
-⬜ Build Agent Credit Score API wrapper
+- x402 Gateway v7.0.0 — Deployed at api.gentechlabs.net
+- Bitrefill PR #26 — GenTech listed on awesome-agentic-payments
+- Vault consolidation — All duplicate folders merged, GitHub synced
+TODO: Deploy Rugcheck v2 API to port 8088
+TODO: Add Q402 payment middleware
+TODO: List in pay-skills catalog
+TODO: Build Agent Credit Score API wrapper
 
 ---
 ## How to use this
@@ -60,4 +60,4 @@ Items you can work on independently — no Jordan needed.
 
 ---
 
-*Generated 2026-07-13 04:00 UTC*
+*Generated 2026-07-13 09:16 UTC*

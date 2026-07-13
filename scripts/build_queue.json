@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "updated": "2026-07-12",
+  "updated": "2026-07-13",
   "items": [
     {
       "id": 28,
@@ -78,18 +78,18 @@
       "assigned_to": "gentech",
       "platform": "cloud",
       "needs_jordan": false,
-      "detail": "Pay-skills PR #154: 9 GenTech OpenAPI specs submitted to solana-foundation/pay-skills. ✅ Greptile P1 fixed (parameters arrays on all 16 GET endpoints). Pending upstream review/merge. Follow-up in item #50."
+      "detail": "Pay-skills PR #154: 9 GenTech OpenAPI specs submitted to solana-foundation/pay-skills. Pending upstream review/merge. Follow-up in item #50."
     },
     {
       "id": 35,
       "name": "Q402 × Agent Kit Integration",
       "difficulty": "medium",
       "priority": "high",
-      "status": "pending",
-      "assigned_to": "gentech",
+      "status": "in_progress",
+      "assigned_to": "forge",
       "platform": "cloud",
       "needs_jordan": false,
-      "detail": "Wire Trust Receipts to audit trail. Build AAE enforcement hooks. Test with live Q402 MCP tools (sandbox). Package as Agent Kit module."
+      "detail": "Q402 MCP tools installed but need API key config. Forge to configure Q402 trial key, then test sandbox: (1) Verify Trust Receipt creation, (2) Test AAE enforcement hooks, (3) Package as Agent Kit module."
     },
     {
       "id": 36,
@@ -100,7 +100,7 @@
       "assigned_to": "forge",
       "platform": "either",
       "needs_jordan": false,
-      "detail": "Build identity_module.py (ERC-8004 registration wrapper). Build grid trader + DCA bot. Wire fee recipient. Connect AAE ↔ ERC-8004 identity."
+      "detail": "Build identity_module.py (ERC-8004 registration wrapper). Build grid trader + DCA bot. Wire fee recipient. Connect AAE to ERC-8004 identity."
     },
     {
       "id": 37,
@@ -133,7 +133,7 @@
       "assigned_to": "gentech",
       "platform": "cloud",
       "needs_jordan": false,
-      "detail": "Write 4 content posts. Submit to Lepton (Canteen × Circle). Submit to BNB Hack. Outreach to Circle, Mastercard."
+      "detail": "Write 4 content posts. Submit to Lepton (Canteen x Circle). Submit to BNB Hack. Outreach to Circle, Mastercard."
     },
     {
       "id": 40,
@@ -225,15 +225,15 @@
     },
     {
       "id": 48,
-      "name": "PixelRAG × Agent Kit Integration",
+      "name": "PixelRAG x Agent Kit Integration",
       "difficulty": "medium",
       "priority": "high",
       "status": "blocked",
       "assigned_to": "forge",
+      "blocked_on": 28,
       "platform": "desktop",
       "needs_jordan": false,
-      "blocked_on": 28,
-      "detail": "After PixelRAG demo works on laptop, build Agent Kit tool wrapper. Wire pixelshot → embed → search into agent web research."
+      "detail": "After PixelRAG demo works on laptop, build Agent Kit tool wrapper. Wire pixelshot to embed to search into agent web research."
     },
     {
       "id": 49,
@@ -254,10 +254,9 @@
       "priority": "high",
       "status": "pending",
       "assigned_to": "forge",
-<<<<<<< HEAD
-      "platform": "cloud",
+      "platform": "either",
       "needs_jordan": false,
-      "detail": "Phase 2 after pay-skills PR #154.\n✅ x402 Gateway v7.0.0 — Deployed, GLM-5.2 audited, live at api.gentechlabs.net (proper 402 responses, log-based verification)\n✅ Bitrefill PR #26 — GenTech listed on awesome-agentic-payments\n✅ Vault consolidation — All duplicate folders merged, GitHub synced\n⬜ Deploy Rugcheck v2 API to port 8088\n⬜ Add Q402 payment middleware\n⬜ List in pay-skills catalog\n⬜ Build Agent Credit Score API wrapper"
+      "detail": "Phase 2 after pay-skills PR #154.\n- x402 Gateway v7.0.0 — Deployed at api.gentechlabs.net\n- Bitrefill PR #26 — GenTech listed on awesome-agentic-payments\n- Vault consolidation — All duplicate folders merged, GitHub synced\nTODO: Deploy Rugcheck v2 API to port 8088\nTODO: Add Q402 payment middleware\nTODO: List in pay-skills catalog\nTODO: Build Agent Credit Score API wrapper"
     },
     {
       "id": 51,
@@ -268,7 +267,7 @@
       "assigned_to": "gentech",
       "platform": "cloud",
       "needs_jordan": false,
-      "detail": "✅ Merged Labs/ Projects/ Strategies/ Content/ Travels/ 12-TRAVEL/ Games/ 09-IDEAS/ Gentech/09-Green Room/ Gentech/handoffs/ into numbered equivalents. Stamped redirects. Pushed to GitHub (3 repos). Updated tick script paths."
+      "detail": "Merged duplicate folders into numbered equivalents. Stamped redirects. Pushed to GitHub. Updated tick script paths."
     },
     {
       "id": 52,
@@ -279,18 +278,18 @@
       "assigned_to": "gentech",
       "platform": "either",
       "needs_jordan": false,
-      "detail": "Turn our 1.5-month x402 gateway journey into a reusable course/product. Saved to 09-Green Room/ideas.md. Potential: free guide, $49 starter kit, or 'Stripe for AI agents' platform."
+      "detail": "Turn our x402 gateway journey into a reusable course/product. Saved to 09-Green Room/ideas.md."
     },
     {
       "id": 53,
       "name": "Chain PR Blitz — Solana Foundation awesome-solana-ai",
       "difficulty": "easy",
       "priority": "high",
-      "status": "pending",
+      "status": "shipped",
       "assigned_to": "gentech",
       "platform": "cloud",
       "needs_jordan": false,
-      "detail": "PR to solana-foundation/awesome-solana-ai (398 stars). Add GenTech Agent Kit + x402 gateway under Infrastructure section. We already have relationship via pay-skills PR #154. Natural next step."
+      "detail": "PR #197 submitted to solana-foundation/awesome-solana-ai. Added GenTech Agent Kit (Infrastructure) + x402 Gateway (Developer Tools). Awaiting upstream review."
     },
     {
       "id": 54,
@@ -301,7 +300,7 @@
       "assigned_to": "gentech",
       "platform": "cloud",
       "needs_jordan": false,
-      "detail": "Contribute to coinbase/agentkit (1.3K stars, used by 679 projects). Add GenTech x402 gateway as an action provider. dTelecom already proved they accept x402 PRs (#982). Biggest visibility play."
+      "detail": "Contribute to coinbase/agentkit. Add GenTech x402 gateway as an action provider. Biggest visibility play."
     },
     {
       "id": 55,
@@ -312,23 +311,18 @@
       "assigned_to": "gentech",
       "platform": "cloud",
       "needs_jordan": false,
-      "detail": "Integrate with nhevers/project-r0x (123 stars) — the x402 facilitator for Robinhood Chain. We already support USDG. Get GenTech listed in the r0x ecosystem."
+      "detail": "Integrate with nhevers/project-r0x. Get GenTech listed in the r0x ecosystem."
     },
     {
       "id": 56,
       "name": "Chain PR Blitz — Avalanche AI Resources Submit",
       "difficulty": "easy",
       "priority": "medium",
-      "status": "pending",
-      "assigned_to": "gentech",
+      "status": "in_progress",
+      "assigned_to": "forge",
       "platform": "cloud",
       "needs_jordan": false,
-      "detail": "Submit GenTech to awesome-ai-agents-2026 (300+ resources). Also research if Avalanche Foundation has an official AI/dev tools list for submission."
-=======
-      "platform": "either",
-      "needs_jordan": false,
-      "detail": "Gentech got pay-skills PR #154 submitted (9 GenTech OpenAPI specs). Next steps: (1) Deploy Rugcheck v2 API to port 8088 (2) Add Q402 payment middleware (3) List in pay-skills catalog for agent discovery (4) Build Agent Credit Score API wrapper. See #34 for PR context."
->>>>>>> b57b1643 (Consolidate vault: merge duplicate folders, stamp redirects, update folder structure)
+      "detail": "Research complete. Two opportunities: (1) PR to caramaschiHG/awesome-ai-agents-2026 (1.4k stars) — x402 not listed yet, add under Protocols. (2) Avalanche infraBUIDL(AI) program ($15M dev funding) — needs application. Forge to submit PR in morning."
     }
   ],
   "agents": {
