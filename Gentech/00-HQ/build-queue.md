@@ -103,6 +103,30 @@
 
 ---
 
+### 53. Vanito Music Video — KONO SORA NO SHITA Animated Reel 🎸
+**Status**: 🔵 Pending — Forge's next task
+**Priority**: High (Vanito request)
+**Goal**: Animate the KONO SORA NO SHITA poster into a 15s music video clip.
+
+**Instructions (from Vanito):**
+- Use the original poster as the base image
+- Keep KAGE and HIKARI characters **identical** to the poster
+- KAGE plays his guitar (add guitar asset)
+- Put the crumpled Yami no Naka De paper in HIKARI's hand
+- Place one paper on the ground with lyrics visible
+- Remove papers currently on the ground in the poster
+- Title stays as KONO SORA NO SHITA / UNDER THIS SKY
+- Keep the dark gothic mood
+- Match to the song audio
+
+**Reference files:**
+- KONO SORA poster: `assets/kono-sora-poster.jpg`
+- Yami no Naka De paper refs: (Vanito has these)
+
+**Forge:** Desktop (GPU) — compositing work, character preservation, audio sync.
+
+---
+
 ### Quick Reference — Vault Handoffs (may need recreation)
 | Handoff | Purpose |
 |---------|---------|

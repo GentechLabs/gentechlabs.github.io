@@ -5,7 +5,12 @@ Items you can work on independently — no Jordan needed.
 
 ---
 
-## 🖥️ Desktop — Your Lane (9 items)
+## 🖥️ Desktop — Your Lane (10 items)
+
+### [HIGH] #53 — Vanito Music Video — KONO SORA NO SHITA 🎸
+**Status:** 🔵 Pending
+**What:** Animate the KONO SORA poster into a 15s clip. Keep KAGE+HIKARI identical. KAGE plays guitar. Put Yami no Naka De paper in HIKARI's hand. One paper on ground with lyrics. Remove ground papers. Dark gothic mood. Audio sync.
+**Refs:** `assets/kono-sora-poster.jpg` in vault. Yami paper refs from Vanito.
 
 ### [HIGH] #28 — PixelRAG — Visual Search Demo (medium)
 **Status:** ▶️ Ready
@@ -37,7 +42,18 @@ Items you can work on independently — no Jordan needed.
 
 ### [URGENT] #49 — OKX Hackathon Submission (easy) ⏰ DEADLINE: 2026-07-17
 **Status:** ▶️ Ready
-**What:** Agentic Wallet login + 90-sec demo video. $100K prize pool. DEADLINE JUL 17.
+**What:** OKX AI Genesis Hackathon — $100K prize pool. DEADLINE Jul 17 23:59 UTC.
+
+STEPS:
+1. Install Onchain OS: `npx skills add okx/onchainos-skills --yes -g`
+2. Log in to Agentic Wallet: prompt "Log in to Agentic Wallet on Onchain OS with my email"
+3. Register as A2MCP ASP (we're x402-compliant — perfect fit)
+4. List ASP on OKX.AI marketplace
+5. Record 90-sec demo video (x402 gateway live at api.gentechlabs.net)
+6. Post on X with #OKXAI
+7. Submit Google Form: https://forms.gle/mddEUagmDbyV37ws8
+
+Notes: A2MCP = Agent-to-MCP. Our gateway is already x402-compliant. No complex pricing needed — pay-per-call. OKX reviews listings within 24h.
 
 ### [HIGH] #50 — Sell APIs to AI Agents — Phase 2: Deploy & List (medium)
 **Status:** ▶️ Ready
@@ -60,4 +76,4 @@ TODO: Build Agent Credit Score API wrapper
 
 ---
 
-*Generated 2026-07-13 12:20 UTC*
+*Generated 2026-07-13 23:00 UTC*
