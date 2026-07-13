@@ -5,7 +5,7 @@ Items you can work on independently — no Jordan needed.
 
 ---
 
-## 🖥️ Desktop — Your Lane (10 items)
+## 🖥️ Desktop — Your Lane (9 items)
 
 ### [HIGH] #28 — PixelRAG — Visual Search Demo (medium)
 **Status:** ▶️ Ready
@@ -61,10 +61,6 @@ TODO: Add Q402 payment middleware
 TODO: List in pay-skills catalog
 TODO: Build Agent Credit Score API wrapper
 
-### [HIGH] #57 — Vanito Music Video — KONO SORA NO SHITA Animated Reel (hard)
-**Status:** ▶️ Ready
-**What:** Animate the KONO SORA poster into a 15s music video clip. Keep KAGE+HIKARI identical to poster. KAGE plays guitar (add guitar asset). Put crumpled Yami no Naka De paper in HIKARI's hand. One paper on ground with lyrics visible. Remove papers currently on ground. Title stays KONO SORA NO SHITA / UNDER THIS SKY. Dark gothic mood. Audio sync to song. Refs: assets/kono-sora-poster.jpg in vault.
-
 ---
 ## How to use this
 
@@ -75,4 +71,4 @@ TODO: Build Agent Credit Score API wrapper
 
 ---
 
-*Generated 2026-07-13 23:26 UTC*
+*Generated 2026-07-13 23:30 UTC*

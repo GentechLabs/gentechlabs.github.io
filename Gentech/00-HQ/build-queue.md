@@ -104,7 +104,7 @@
 ---
 
 ### 53. Vanito Music Video — KONO SORA NO SHITA Animated Reel 🎸
-**Status**: 🔵 Pending — Forge's next task
+**Status**: ❌ Cancelled by Jordan
 **Priority**: High (Vanito request)
 **Goal**: Animate the KONO SORA NO SHITA poster into a 15s music video clip.
 
