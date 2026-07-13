@@ -1,0 +1,111 @@
+{
+  "city": "Tokyo",
+  "emoji": "🗼",
+  "currency": { "code": "JPY", "symbol": "¥", "rate": 150 },
+  "language": {
+    "hello": "Konnichiwa (こんにちは)",
+    "thanks": "Arigato (ありがとう)",
+    "excuse_me": "Sumimasen (すみません)",
+    "where": "Doko desu ka? (どこですか？)",
+    "how_much": "Ikura desu ka? (いくらですか？)",
+    "delicious": "Oishii (おいしい)",
+    "check_please": "Okaikei onegaishimasu (お会計お願いします)"
+  },
+  "districts": [
+    {
+      "id": "shibuya",
+      "name": "Shibuya",
+      "emoji": "🚦",
+      "fact": "Shibuya Crossing is the busiest pedestrian crossing in the world — up to 3,000 people cross at once! The Hachiko statue nearby is a famous meeting spot.",
+      "budget": "Free to walk, ¥1000-3000 for food",
+      "tips": "Visit at night when the neon is brightest. The Starbucks overlooking the crossing is worth the wait.",
+      "visited": false
+    },
+    {
+      "id": "akihabara",
+      "name": "Akihabara",
+      "emoji": "🎮",
+      "fact": "Akihabara is Tokyo's electric town — anime, manga, retro games, and electronics. The Radio Kaikan building has 10 floors of otaku culture.",
+      "budget": "¥500-5000 depending on what you buy",
+      "tips": "Check out the retro game shops in the back streets. Super Potato on the main street has classic games.",
+      "visited": false
+    },
+    {
+      "id": "asakusa",
+      "name": "Asakusa",
+      "emoji": "🏮",
+      "fact": "Senso-ji is Tokyo's oldest temple (founded 645 AD). The Thunder Gate (Kaminarimon) with the giant red lantern is the iconic entrance.",
+      "budget": "Free entry, ¥500-1500 for street food",
+      "tips": "Go early morning to avoid crowds. Try freshly made ningyo-yaki (little doll cakes) from the street stalls.",
+      "visited": false
+    },
+    {
+      "id": "shinjuku",
+      "name": "Shinjuku",
+      "emoji": "🏙️",
+      "fact": "Shinjuku has the busiest train station in the world — 3.6 million passengers daily! The Tokyo Metropolitan Government Building has a free observation deck.",
+      "budget": "Free observation deck, ¥1000-4000 for dinner",
+      "tips": "The free observatory on the 45th floor of the government building is open until 11pm. Best sunset view in Tokyo.",
+      "visited": false
+    },
+    {
+      "id": "harajuku",
+      "name": "Harajuku",
+      "emoji": "🌸",
+      "fact": "Harajuku is the center of Japanese youth culture and fashion. Takeshita Street is packed with quirky shops, crepe stands, and cosplay.",
+      "budget": "¥500-2000 for food and shopping",
+      "tips": "Try a rainbow crepe from Takeshita Street. Visit on Sunday to see the best street fashion.",
+      "visited": false
+    },
+    {
+      "id": "ueno",
+      "name": "Ueno Park",
+      "emoji": "🌳",
+      "fact": "Ueno Park has 9 museums, a zoo, and a temple — all in one massive park. The pandas at Ueno Zoo are a national treasure.",
+      "budget": "Park is free, museums ¥600-1000 each",
+      "tips": "The Tokyo National Museum has the largest collection of Japanese art in the world. Allow 2-3 hours.",
+      "visited": false
+    },
+    {
+      "id": "tsukiji",
+      "name": "Tsukiji Outer Market",
+      "emoji": "🐟",
+      "fact": "Tsukiji was the world's largest fish market (now moved to Toyosu). The outer market still has 400+ shops selling fresh seafood, knives, and street food.",
+      "budget": "¥1000-3000 for a food crawl",
+      "tips": "Go hungry. Try the fresh uni (sea urchin), tamago (egg omelet), and grilled scallops. Cash only at most stalls.",
+      "visited": false
+    }
+  ],
+  "food": [
+    { "name": "Ramen", "emoji": "🍜", "price": "¥800-1200", "description": "Rich broth, fresh noodles, sliced pork. Try tonkotsu (pork bone) or shoyu (soy sauce) base." },
+    { "name": "Sushi", "emoji": "🍣", "price": "¥100-600 per piece", "description": "Fresh fish over vinegared rice. Conveyor belt sushi is cheap and fun — grab what looks good!" },
+    { "name": "Takoyaki", "emoji": "🐙", "price": "¥500-800 for 8", "description": "Octopus-filled batter balls topped with sauce, mayo, and bonito flakes. Hot and addictive." },
+    { "name": "Okonomiyaki", "emoji": "🥞", "price": "¥800-1500", "description": "Savory Japanese pancake with cabbage, meat/seafood, and toppings. Cooked on a hot plate at your table." },
+    { "name": "Matcha Desserts", "emoji": "🍵", "price": "¥400-800", "description": "Green tea flavored everything — soft serve, parfaits, lattes, and traditional wagashi sweets." },
+    { "name": "Gyoza", "emoji": "🥟", "price": "¥300-600 for 6", "description": "Pan-fried dumplings filled with pork and garlic. Best with soy sauce, vinegar, and chili oil." }
+  ],
+  "phrases": [
+    { "situation": "Ordering food", "phrase": "Kore o kudasai (これをください)", "meaning": "I'll have this, please" },
+    { "situation": "Asking for price", "phrase": "Ikura desu ka? (いくらですか？)", "meaning": "How much is it?" },
+    { "situation": "Finding a place", "phrase": "___ wa doko desu ka?", "meaning": "Where is ___?" },
+    { "situation": "Thanking someone", "phrase": "Arigato gozaimasu (ありがとうございます)", "meaning": "Thank you (polite)" },
+    { "situation": "Apologizing", "phrase": "Sumimasen (すみません)", "meaning": "Excuse me / Sorry" },
+    { "situation": "Saying delicious", "phrase": "Oishii (おいしい)", "meaning": "It's delicious!" },
+    { "situation": "Getting the bill", "phrase": "Okaikei onegaishimasu (お会計お願いします)", "meaning": "Check, please" },
+    { "situation": "Asking if open", "phrase": "Eigo wa hanasemasu ka? (英語は話せますか？)", "meaning": "Do you speak English?" }
+  ],
+  "packing": [
+    { "id": "passport", "name": "Passport", "emoji": "🛂", "category": "docs" },
+    { "id": "visa", "name": "Visa / Travel Docs", "emoji": "📄", "category": "docs" },
+    { "id": "yen", "name": "Cash (Yen)", "emoji": "💴", "category": "finance" },
+    { "id": "suica", "name": "Suica / IC Card", "emoji": "💳", "category": "finance" },
+    { "id": "wifi", "name": "Pocket WiFi", "emoji": "📶", "category": "tech" },
+    { "id": "charger", "name": "USB Charger", "emoji": "🔌", "category": "tech" },
+    { "id": "adapter", "name": "Travel Adapter", "emoji": "🔋", "category": "tech" },
+    { "id": "shoes", "name": "Walking Shoes", "emoji": "👟", "category": "clothes" },
+    { "id": "raincoat", "name": "Rain Jacket", "emoji": "🧥", "category": "clothes" },
+    { "id": "mask", "name": "Face Masks", "emoji": "😷", "category": "health" },
+    { "id": "meds", "name": "Medicine Kit", "emoji": "💊", "category": "health" },
+    { "id": "phrasebook", "name": "Phrasebook / App", "emoji": "📖", "category": "tech" }
+  ]
+}
