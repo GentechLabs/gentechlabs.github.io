@@ -17,6 +17,7 @@ contract BNPLEscrowTest is Test {
     uint256 constant TOTAL = 400 * 10**6; // 400 USDC (6 decimals)
     uint256 constant INSTALLMENT = 100 * 10**6; // 100 USDC
     uint256 constant GRACE = 3 days;
+    uint256 constant SPACING = 7 days;
 
     function setUp() public {
         escrow = new BNPLEscrow();
@@ -34,7 +35,7 @@ contract BNPLEscrowTest is Test {
 
     function test_CreateAgreement() public {
         vm.prank(merchant);
-        uint256 id = escrow.createAgreement(merchant, user, token, TOTAL, 4, GRACE);
+        uint256 id = escrow.createAgreement(merchant, user, token, TOTAL, 4, GRACE, SPACING);
         assertEq(id, 0);
 
         (address m, address u, address t, uint256 total, uint256 inst, bool active,,) = escrow.getAgreement(id);
@@ -48,55 +49,108 @@ contract BNPLEscrowTest is Test {
 
     function test_PayAllInstallments() public {
         vm.prank(merchant);
-        uint256 id = escrow.createAgreement(merchant, user, token, TOTAL, 4, GRACE);
+        uint256 id = escrow.createAgreement(merchant, user, token, TOTAL, 4, GRACE, SPACING);
 
-        // Installments due at 7, 14, 21, 28 days. Grace = 3 days after each.
-        // Warp 7 days + 1 hour each time — just past due, well within grace
         for (uint8 i = 0; i < 4; i++) {
             vm.warp(block.timestamp + 7 days + 1 hours);
             vm.prank(user);
             escrow.payInstallment(id, i);
         }
 
-        // Agreement should be settled
         (,,,,, bool active,,) = escrow.getAgreement(id);
         assertFalse(active);
-
-        // Merchant should have received full amount (deposit back + user payments)
         assertEq(MockUSDC(token).balanceOf(merchant), TOTAL * 2);
     }
 
     function test_DefaultOnMissedPayment() public {
         vm.prank(merchant);
-        uint256 id = escrow.createAgreement(merchant, user, token, TOTAL, 4, GRACE);
+        uint256 id = escrow.createAgreement(merchant, user, token, TOTAL, 4, GRACE, SPACING);
 
-        // Pay first installment — 1 hour past due
         vm.warp(block.timestamp + 7 days + 1 hours);
         vm.prank(user);
         escrow.payInstallment(id, 0);
 
-        // Skip second — warp past its grace period
-        // Installment 1 due at 14 days, grace ends at 17 days
-        // We're at 7 days + 1 hour, so warp 10 more days = 17 days + 1 hour
         vm.warp(block.timestamp + 10 days);
-
         escrow.markDefault(id, 1);
 
         (,,,,, bool active,,) = escrow.getAgreement(id);
         assertFalse(active);
-
-        // Merchant keeps deposit + paid installment
         assertEq(MockUSDC(token).balanceOf(merchant), TOTAL + INSTALLMENT);
     }
 
     function test_RevertIfNot4Installments() public {
         vm.expectRevert("BNPL: must be 4 installments");
-        escrow.createAgreement(merchant, user, token, TOTAL, 3, GRACE);
+        vm.prank(merchant);
+        escrow.createAgreement(merchant, user, token, TOTAL, 3, GRACE, SPACING);
     }
 
     function test_RevertIfZeroAmount() public {
-        vm.expectRevert("BNPL: zero amount");
-        escrow.createAgreement(merchant, user, token, 0, 4, GRACE);
+        vm.expectRevert("BNPL: total too small");
+        vm.prank(merchant);
+        escrow.createAgreement(merchant, user, token, 0, 4, GRACE, SPACING);
+    }
+
+    function test_RevertIfPaused() public {
+        escrow.emergencyPause();
+        vm.expectRevert("BNPL: paused");
+        vm.prank(merchant);
+        escrow.createAgreement(merchant, user, token, TOTAL, 4, GRACE, SPACING);
+    }
+
+    function test_EmergencyPause() public {
+        escrow.emergencyPause();
+        assertTrue(escrow.paused());
+        escrow.unpause();
+        assertFalse(escrow.paused());
+    }
+
+    function test_Sweep() public {
+        // Send tokens directly to contract
+        MockUSDC(token).mint(address(escrow), 1000);
+        escrow.sweep(token, merchant);
+        assertEq(MockUSDC(token).balanceOf(merchant), TOTAL + 1000);
+    }
+
+    function test_CancelAgreement() public {
+        vm.prank(merchant);
+        uint256 id = escrow.createAgreement(merchant, user, token, TOTAL, 4, GRACE, SPACING);
+
+        vm.prank(merchant);
+        escrow.cancelAgreement(id);
+
+        (,,,,, bool active,,) = escrow.getAgreement(id);
+        assertFalse(active);
+        assertEq(MockUSDC(token).balanceOf(merchant), TOTAL);
+    }
+
+    function test_RoundingLoss() public {
+        uint256 oddTotal = 401 * 10**6; // 401 USDC — not divisible by 4
+        MockUSDC(token).mint(merchant, oddTotal);
+        vm.prank(merchant);
+        MockUSDC(token).approve(address(escrow), oddTotal);
+
+        vm.prank(merchant);
+        uint256 id = escrow.createAgreement(merchant, user, token, oddTotal, 4, GRACE, SPACING);
+
+        // Pay all 4
+        for (uint8 i = 0; i < 4; i++) {
+            vm.warp(block.timestamp + 7 days + 1 hours);
+            vm.prank(user);
+            escrow.payInstallment(id, i);
+        }
+
+        // All funds should be recoverable — no stuck dust
+        // Merchant started with 400 (setUp) + 401 (minted) = 801
+        // 401 pulled into escrow → merchant has 400
+        // 401 paid by user → contract has 802
+        // 802 settled to merchant → merchant has 400 + 802 = 1202
+        assertEq(MockUSDC(token).balanceOf(merchant), 1202000000);
+    }
+
+    function test_OwnerOnly() public {
+        vm.prank(user);
+        vm.expectRevert("BNPL: not owner");
+        escrow.emergencyPause();
     }
 }
 
