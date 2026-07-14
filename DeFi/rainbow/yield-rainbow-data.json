@@ -1,159 +1,24 @@
 {
-  "lastUpdated": "2026-06-27T22:53:14.697244+00:00",
-  "pool": {
-    "name": "AVAX/USDC",
-    "chain": "Avalanche",
-    "dex": "LFJ",
-    "feeTier": "10bps",
-    "poolAddress": "0x864d4e5ee7318e97483db7eb0912e09f161516ea"
-  },
+  "lastUpdated": "2026-07-13T20:00:00.000Z",
   "position": {
-    "currentPrice": 6.4231,
-    "rangeLow": 6.3023,
-    "rangeHigh": 6.5071,
-    "rangeCenter": 6.4047,
-    "positionUsd": 47.6,
-    "entryPrice": 6.13
+    "pair": "AVAX/USDC",
+    "currentPrice": 6.47,
+    "chain": "Avalanche"
   },
   "metrics": {
-    "efficiency": 5,
-    "dailyFees": 0.35,
-    "weeklyFees": 2.45,
-    "monthlyFees": 10.5,
-    "annualizedApr": 268.4,
-    "volume24h": 872623.89,
-    "tvl": 382012.55,
-    "priceChange24h": -1.59
+    "efficiency": 64.3,
+    "annualizedApr": 12.4,
+    "dailyFees": 0.0042,
+    "priceChange24h": -1.2,
+    "efficiencyZone": "Harvest Mode"
   },
-  "currentBand": {
-    "id": "panic",
-    "name": "Panic Farm",
-    "emoji": "\ud83d\udfe3",
-    "color": "#a855f7",
-    "description": "Maximum fear. Everything is on fire. Historically: generational entry.",
-    "advice": "\ud83d\udd25 Contrarian zone. Open new positions or widen ranges. Be greedy when others are fearful.",
-    "position": 6
-  },
+  "history": [58, 61, 63, 60, 57, 55, 58, 62, 65, 63, 60, 58, 56, 59, 61, 64, 66, 64, 62, 60, 58, 61, 63, 64, 62, 60, 59, 61, 63, 64],
   "bands": [
-    {
-      "id": "euphoria",
-      "name": "Euphoria",
-      "emoji": "\ud83d\udd34",
-      "color": "#e84142",
-      "gradient": "linear-gradient(135deg, #e84142, #ff3366)",
-      "efficiency_min": 90,
-      "efficiency_max": 100,
-      "apr_min": 1000,
-      "description": "Maximum concentration. APR is unsustainable.",
-      "advice": "\u26a0\ufe0f Time to take profits. Diversify into other pools or stablecoins.",
-      "rainbow_position": 1
-    },
-    {
-      "id": "peak_yield",
-      "name": "Peak Yield",
-      "emoji": "\ud83d\udfe0",
-      "color": "#f59e0b",
-      "gradient": "linear-gradient(135deg, #f59e0b, #f97316)",
-      "efficiency_min": 75,
-      "efficiency_max": 90,
-      "apr_min": 500,
-      "description": "Sweet spot. Fees significantly outpace impermanent loss.",
-      "advice": "\u2705 Hold strong. Compound rewards weekly. This is what we farm for.",
-      "rainbow_position": 2
-    },
-    {
-      "id": "harvest",
-      "name": "Harvest Mode",
-      "emoji": "\ud83d\udfe1",
-      "color": "#eab308",
-      "gradient": "linear-gradient(135deg, #eab308, #facc15)",
-      "efficiency_min": 60,
-      "efficiency_max": 75,
-      "apr_min": 200,
-      "description": "Healthy farming. Fees are outpacing IL consistently.",
-      "advice": "\ud83c\udf3e Keep farming. Consider increasing position size if conviction is high.",
-      "rainbow_position": 3
-    },
-    {
-      "id": "accumulation",
-      "name": "Accumulation",
-      "emoji": "\ud83d\udfe2",
-      "color": "#22c55e",
-      "gradient": "linear-gradient(135deg, #22c55e, #16a34a)",
-      "efficiency_min": 40,
-      "efficiency_max": 60,
-      "apr_min": 50,
-      "description": "Smart money is quietly positioning. Fees starting to offset IL.",
-      "advice": "\ud83e\udde0 DCA into position. Accumulate at these levels. Patience pays.",
-      "rainbow_position": 4
-    },
-    {
-      "id": "bleeding",
-      "name": "Bleeding Edge",
-      "emoji": "\ud83d\udd35",
-      "color": "#3b82f6",
-      "gradient": "linear-gradient(135deg, #3b82f6, #6366f1)",
-      "efficiency_min": 20,
-      "efficiency_max": 40,
-      "apr_min": 10,
-      "description": "Near range boundary. IL still outpaces fees.",
-      "advice": "\ud83e\ude78 Micro-DCA only. Prepare to rebalance if price moves further.",
-      "rainbow_position": 5
-    },
-    {
-      "id": "panic",
-      "name": "Panic Farm",
-      "emoji": "\ud83d\udfe3",
-      "color": "#a855f7",
-      "gradient": "linear-gradient(135deg, #a855f7, #7c3aed)",
-      "efficiency_min": 0,
-      "efficiency_max": 20,
-      "apr_min": 0,
-      "description": "Maximum fear. Everything is on fire. Historically: generational entry.",
-      "advice": "\ud83d\udd25 Contrarian zone. Open new positions or widen ranges. Be greedy when others are fearful.",
-      "rainbow_position": 6
-    }
-  ],
-  "history": [
-    41,
-    29,
-    41,
-    29,
-    66,
-    53,
-    66,
-    90,
-    0.0,
-    0.0,
-    0.0,
-    0.0,
-    0.0,
-    0.0,
-    0.0,
-    0.0,
-    0.0,
-    0.0,
-    0.0,
-    0.0,
-    0.0,
-    0.0,
-    0.0,
-    0.0,
-    0.0,
-    0.0,
-    0.0,
-    0.0,
-    0.0,
-    5
-  ],
-  "meta": {
-    "generatedAt": "2026-06-27T22:53:14.697253+00:00",
-    "bandsCount": 6,
-    "dataSources": [
-      "DexScreener",
-      "On-Chain Reader",
-      "Consolidated Monitor"
-    ],
-    "disclaimer": "Not financial advice. Rainbow charts are for visualization only."
-  }
+    { "id": "euphoria", "name": "Euphoria", "effMin": 90, "effMax": 100 },
+    { "id": "peak", "name": "Peak Yield", "effMin": 75, "effMax": 90 },
+    { "id": "harvest", "name": "Harvest Mode", "effMin": 60, "effMax": 75 },
+    { "id": "accum", "name": "Accumulation", "effMin": 40, "effMax": 60 },
+    { "id": "bleed", "name": "Bleeding Edge", "effMin": 20, "effMax": 40 },
+    { "id": "panic", "name": "Panic Farm", "effMin": 0, "effMax": 20 }
+  ]
 }
