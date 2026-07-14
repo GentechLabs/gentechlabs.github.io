@@ -72,11 +72,12 @@ class RiskEngine:
 
     def _tvl_health(self, portfolio: AgentPortfolio) -> int:
         """Score TVL health (0-100)."""
-        if portfolio.total_tvl >= 50_000:
+        tvl = max(0, portfolio.total_tvl)
+        if tvl >= 50_000:
             base = 80
-        elif portfolio.total_tvl >= 10_000:
+        elif tvl >= 10_000:
             base = 60
-        elif portfolio.total_tvl >= 1_000:
+        elif tvl >= 1_000:
             base = 40
         else:
             base = 20
@@ -95,7 +96,9 @@ class RiskEngine:
         if not portfolio.positions:
             return 0
 
-        avg_volatility = sum(p.yield_volatility for p in portfolio.positions) / len(portfolio.positions)
+        avg_volatility = sum(
+            max(0, min(1, p.yield_volatility)) for p in portfolio.positions
+        ) / len(portfolio.positions)
 
         if avg_volatility <= 0.2:
             return 80
