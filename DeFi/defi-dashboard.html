@@ -395,12 +395,73 @@
 
             <!-- LP Tracker Subsection -->
             <div class="sub-section" id="sub-position">
-                <h2 class="section-title">🎯 LP Position Tracker</h2>
+                <h2 class="section-title">🎯 Last Known Pool Activity</h2>
                 <div id="position-content">
-                    <div class="empty-state">
-                        <div class="big">🌾</div>
-                        <p>No active LP position. Pool was closed ahead of the Sep trip.</p>
-                        <p style="margin-top:8px; font-size:0.78em; color:var(--gold);">Position data available here when you re-enter.</p>
+                    <div class="card" style="border-left:4px solid var(--gold); background:rgba(232,101,42,0.04); margin-bottom:10px;">
+                        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:8px;">
+                            <div>
+                                <div style="font-weight:700; font-size:1em;">AVAX/USDC</div>
+                                <div style="font-size:0.72em; color:var(--text-dim);">Avalanche · LFJ · 5bps</div>
+                            </div>
+                            <span class="status-badge inactive">Closed Sep 2026</span>
+                        </div>
+                    </div>
+
+                    <div class="grid-2" style="margin-bottom:10px;">
+                        <div class="stat-card">
+                            <div class="stat-label">Total Deployed</div>
+                            <div class="stat-value gold" style="font-size:1.2em;">$42.40</div>
+                            <div class="stat-sub">2.62 AVAX + $26.89 USDC</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">Cumulative Fees</div>
+                            <div class="stat-value green" style="font-size:1.2em;">$0.82</div>
+                            <div class="stat-sub">Earned while active</div>
+                        </div>
+                    </div>
+
+                    <div class="card" style="margin-bottom:10px;">
+                        <div class="card-title">Pool Config</div>
+                        <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px;">
+                            <div style="padding:8px;background:var(--bg-alt);border-radius:6px;">
+                                <div style="font-size:0.6em;text-transform:uppercase;letter-spacing:1px;color:var(--text-dim);">Shape</div>
+                                <div style="font-family:JetBrains Mono,monospace;font-size:0.82em;font-weight:500;">Bid-Ask</div>
+                            </div>
+                            <div style="padding:8px;background:var(--bg-alt);border-radius:6px;">
+                                <div style="font-size:0.6em;text-transform:uppercase;letter-spacing:1px;color:var(--text-dim);">Range</div>
+                                <div style="font-family:JetBrains Mono,monospace;font-size:0.82em;font-weight:500;">$5.82 – $6.10</div>
+                            </div>
+                            <div style="padding:8px;background:var(--bg-alt);border-radius:6px;">
+                                <div style="font-size:0.6em;text-transform:uppercase;letter-spacing:1px;color:var(--text-dim);">Peak Efficiency</div>
+                                <div style="font-family:JetBrains Mono,monospace;font-size:0.82em;font-weight:500;color:var(--success);">64.3%</div>
+                            </div>
+                            <div style="padding:8px;background:var(--bg-alt);border-radius:6px;">
+                                <div style="font-size:0.6em;text-transform:uppercase;letter-spacing:1px;color:var(--text-dim);">Entry Price</div>
+                                <div style="font-family:JetBrains Mono,monospace;font-size:0.82em;font-weight:500;">$6.23/AVAX</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card" style="margin-bottom:10px;">
+                        <div class="card-title">Milestone Progress</div>
+                        <div style="display:flex; align-items:center; gap:12px;">
+                            <span style="font-size:1.3em;">🪖</span>
+                            <div style="flex:1;">
+                                <div style="display:flex; justify-content:space-between; font-size:0.72em; margin-bottom:4px;">
+                                    <span>Scout → Raider</span>
+                                    <span style="color:var(--gold);">$5 target</span>
+                                </div>
+                                <div style="background:var(--bg-alt); border-radius:10px; height:8px; overflow:hidden;">
+                                    <div style="height:100%; width:16.5%; background:linear-gradient(90deg,var(--gold),var(--success)); border-radius:10px;"></div>
+                                </div>
+                                <div style="font-size:0.65em; color:var(--text-dim); margin-top:2px;">16.5% to next milestone · $0.82 of $5.00</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="text-align:center; font-size:0.75em; color:var(--text-dim); padding:10px;">
+                        Pool closed ahead of Sep 2026 trip. Data reflects final state.
+                        <span id="position-last-update" style="display:block; margin-top:4px; opacity:0.6;">Last active: Jul 2026</span>
                     </div>
                 </div>
             </div>
