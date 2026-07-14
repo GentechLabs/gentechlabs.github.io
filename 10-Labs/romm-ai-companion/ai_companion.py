@@ -13,6 +13,14 @@ from vision_analysis import VisionAnalyzer, VisionConfig, StateTracker, GameStat
 from decision_engine import DecisionEngine, Decision, PlayStyle
 from input_emulation import InputController, SimulatedEmitter, InputSequence, GameButton
 
+# Try to import Windows modules (will fail on non-Windows)
+try:
+    from windows_capture import WindowsScreenCapturer
+    from windows_input import WindowsInputController
+    HAS_WINDOWS = True
+except ImportError:
+    HAS_WINDOWS = False
+
 
 # ──────────────────────────────────────────────
 #  Agent
