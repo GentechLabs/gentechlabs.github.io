@@ -28,7 +28,7 @@ GenTech Atlas is a two-sided AR travel platform built for Meta Ray-Ban Display g
 | **Trip Planning** | AI-generated itineraries based on real traveler data | $0.025 per plan |
 
 ### Side B: Field Agent (Data Source)
-*For people who can travel*
+*For people who can travel — linked via Earn App / Work Fund*
 
 | Feature | Description | Reward |
 |---------|-------------|--------|
@@ -36,6 +36,7 @@ GenTech Atlas is a two-sided AR travel platform built for Meta Ray-Ban Display g
 | **POI Verification** | Confirm hours, prices, menus at locations | Data credits |
 | **Route Recording** | Share walking routes with notes | Name on the map |
 | **Local Tips** | Add insider knowledge (cash only, best time, etc.) | Revenue share |
+| **📢 Request Bounties** | Someone posts "map this street in Kyoto" → agent accepts → captures → gets paid via Work Fund | Earn App payout |
 
 ---
 

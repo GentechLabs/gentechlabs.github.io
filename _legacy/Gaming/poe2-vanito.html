@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>POE2 — Vanito's Builds</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: #0a0a12;
+            color: #e0ddd4;
+            min-height: 100vh;
+        }
+        .header {
+            background: linear-gradient(135deg, #12121a, #1a1a2a);
+            border-bottom: 2px solid #c9a84c;
+            padding: 20px;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 2em;
+            color: #c9a84c;
+            margin-bottom: 10px;
+        }
+        .header .subtitle {
+            color: #7eb8ff;
+            font-size: 1.1em;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .section {
+            margin-bottom: 30px;
+        }
+        .section h2 {
+            color: #c9a84c;
+            font-size: 1.4em;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #2a2a3a;
+            padding-bottom: 10px;
+        }
+        .character-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .character-card {
+            background: #12121a;
+            border: 1px solid #2a2a3a;
+            border-radius: 12px;
+            padding: 20px;
+            transition: border-color 0.2s;
+        }
+        .character-card:hover {
+            border-color: #c9a84c;
+        }
+        .character-card h3 {
+            color: #7eb8ff;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+        .character-card .class {
+            color: #c9a84c;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        .character-card .level {
+            color: #888;
+            font-size: 0.9em;
+            margin-bottom: 15px;
+        }
+        .progress-bar {
+            height: 8px;
+            background: #1a1a2a;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #c9a84c, #7eb8ff);
+            border-radius: 4px;
+        }
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8em;
+            color: #888;
+            margin-bottom: 5px;
+        }
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        .skill-card {
+            background: #1a1a2a;
+            border: 1px solid #2a2a3a;
+            border-radius: 8px;
+            padding: 15px;
+        }
+        .skill-card .name {
+            color: #c9a84c;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        .skill-card .type {
+            color: #888;
+            font-size: 0.8em;
+            margin-bottom: 8px;
+        }
+        .skill-card .role {
+            color: #e0ddd4;
+            font-size: 0.9em;
+        }
+        .meta-tier {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 0.8em;
+            margin-right: 8px;
+        }
+        .tier-s { background: rgba(201,168,76,0.2); color: #c9a84c; }
+        .tier-a { background: rgba(126,184,255,0.2); color: #7eb8ff; }
+        .tier-b { background: rgba(136,136,136,0.2); color: #888; }
+        .build-card {
+            background: #1a1a2a;
+            border: 1px solid #2a2a3a;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        .build-card h4 {
+            color: #c9a84c;
+            margin-bottom: 8px;
+        }
+        .build-card .stats {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+        .build-card .stat {
+            font-size: 0.85em;
+        }
+        .build-card .stat-label {
+            color: #888;
+        }
+        .build-card .stat-value {
+            color: #7eb8ff;
+            font-weight: 600;
+        }
+        .planner-link {
+            display: inline-block;
+            background: #c9a84c;
+            color: #0a0a12;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 15px;
+            transition: background 0.2s;
+        }
+        .planner-link:hover {
+            background: #d4b85c;
+        }
+        .passive-tree-preview {
+            background: #12121a;
+            border: 1px solid #2a2a3a;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+        }
+        .passive-tree-preview canvas {
+            border: 1px solid #2a2a3a;
+            border-radius: 8px;
+        }
+        .suggestion-list {
+            list-style: none;
+            padding: 0;
+        }
+        .suggestion-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #2a2a3a;
+            display: flex;
+            justify-content: space-between;
+        }
+        .suggestion-list li:last-child {
+            border-bottom: none;
+        }
+        .suggestion-list .node-name {
+            color: #c9a84c;
+        }
+        .suggestion-list .node-type {
+            color: #888;
+            font-size: 0.8em;
+        }
+        @media (max-width: 768px) {
+            .character-grid {
+                grid-template-columns: 1fr;
+            }
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div style="position:fixed;top:10px;left:10px;z-index:100;"><a href="../Profiles/hub.html" style="color:#3b82f6;text-decoration:none;font-size:0.9em;">← Back to Hub</a></div>
+        <div class="header">
+        <h1>⚔️ Vanito's POE2 Builds</h1>
+        <div class="subtitle">Path of Exile 2 — Character Tracking & Build Suggestions</div>
+    </div>
+
+    <div class="container">
+        <!-- Character Overview -->
+        <div class="section">
+            <h2>🎭 Characters</h2>
+            <div class="character-grid" id="character-grid">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+
+        <!-- Meta Builds -->
+        <div class="section">
+            <h2>📊 Meta Builds</h2>
+            <div id="meta-builds">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+
+        <!-- Passive Skill Tree -->
+        <div class="section">
+            <h2>🌳 Passive Skill Tree</h2>
+            <div class="passive-tree-preview">
+                <p style="color: #888; margin-bottom: 15px;">Interactive skill tree planner with Maxroll integration</p>
+                <a href="passive-planner.html" class="planner-link">Open Passive Planner →</a>
+            </div>
+        </div>
+
+        <!-- Build Suggestions -->
+        <div class="section">
+            <h2>💡 Build Suggestions</h2>
+            <div id="build-suggestions">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="section">
+            <h2>🔗 Quick Links</h2>
+            <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                <a href="https://maxroll.gg/poe2/planner/" target="_blank" class="planner-link">Maxroll Planner</a>
+                <a href="https://maxroll.gg/poe2/build-guides" target="_blank" class="planner-link">Build Guides</a>
+                <a href="https://maxroll.gg/poe2/tier-lists" target="_blank" class="planner-link">Tier Lists</a>
+                <a href="https://maxroll.gg/poe2/currency" target="_blank" class="planner-link">Currency</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Load character data
+        const characters = {
+            "monk-jordan": null, // Jordan - not shown on Vanito's dashboard
+                "monk-jordan_skip": {
+                id: "monk-jordan",
+                player: "Jordan",
+                alias: "Lightning Monk",
+                class: "Monk",
+                ascendancy: "Invoker",
+                level: 26,
+                act: "Act 2",
+                skills: [
+                    { name: "Tempest Flurry", type: "Primary Attack — Lightning", role: "Main damage dealer" },
+                    { name: "Falling Thunder", type: "Burst Damage — Lightning", role: "Burst damage on shocked enemies" },
+                    { name: "Thunderstorm", type: "AoE Clear — Lightning", role: "AoE clear" },
+                    { name: "Orb of Storms", type: "Sustained Damage — Lightning", role: "Sustained damage" }
+                ],
+                progress: { campaign: 50, buildCompletion: 65, gemCollection: 45, metaAlignment: 70 }
+            },
+            "warrior-wyvern": {
+                id: "warrior-wyvern",
+                player: "Vanito",
+                alias: "Vibrant Warrior",
+                class: "Warrior",
+                ascendancy: "Titan",
+                level: 1,
+                act: "Act 1",
+                skills: [
+                    { name: "Sunder", type: "Primary Attack — Physical", role: "Main damage dealer" },
+                    { name: "Leap Slam", type: "Movement", role: "Gap closer" },
+                    { name: "War Cry", type: "Buff", role: "Damage boost" },
+                    { name: "Blood Rage", type: "Buff", role: "Attack speed + leech" }
+                ],
+                progress: { campaign: 25, buildCompletion: 40, gemCollection: 30, metaAlignment: 50 }
+            }
+        };
+
+        // Meta builds data
+        const metaBuilds = {
+            "Monk": [
+                { name: "Lightning Invoker", tier: "S", key_skills: ["Tempest Flurry", "Falling Thunder", "Thunderstorm"], map_clear: "A", bossing: "S" },
+                { name: "Ice Invoker", tier: "A", key_skills: ["Ice Crash", "Frost Blades", "Ice Nova"], map_clear: "A", bossing: "A" },
+                { name: "Tempest Hybrid", tier: "A", key_skills: ["Tempest Flurry", "Storm Call", "Conductivity"], map_clear: "A", bossing: "A" }
+            ],
+            "Warrior": [
+                { name: "Vibrant Warrior", tier: "S", key_skills: ["Sunder", "Leap Slam", "War Cry"], map_clear: "S", bossing: "A" },
+                { name: "Bleed Gladiator", tier: "A", key_skills: ["Cleave", "Vulnerability", "War Cry"], map_clear: "A", bossing: "A" },
+                { name: "Shield Cracker", tier: "B", key_skills: ["Shield Charge", "Consecrated Ground", "War Cry"], map_clear: "B", bossing: "A" }
+            ]
+        };
+
+        // Passive tree suggestions
+        const passiveSuggestions = {
+            "Monk": {
+                level_1_30: ["Thunder Strike", "Storm Fists", "Lightning Infusion", "Chain Lightning", "Static Charge"],
+                level_31_60: ["Storm Mastery", "Volt Surge", "Arc Dancer", "Flickering Guard", "Shocked Ground"],
+                level_61_90: ["Thunderlord's Decree", "Storm Ward", "Stone Bulwark", "Titan's Resolve"]
+            },
+            "Warrior": {
+                level_1_30: ["Iron Skin", "Resilience", "Tempered Body", "Steel Will", "Unbreakable"],
+                level_31_60: ["Stone Bulwark", "Endurance", "Vitality", "Hardened", "Deep Wounds"],
+                level_61_90: ["Titan's Resolve", "Endurance Charge", "Grounded", "Storm Ward"]
+            }
+        };
+
+        // Render characters
+        function renderCharacters() {
+            const grid = document.getElementById('character-grid');
+            grid.innerHTML = '';
+
+            Object.values(characters).forEach(char => {
+                const card = document.createElement('div');
+                card.className = 'character-card';
+                card.innerHTML = `
+                    <h3>${char.alias}</h3>
+                    <div class="class">${char.class} — ${char.ascendancy}</div>
+                    <div class="level">Level ${char.level} • ${char.act}</div>
+                    <div class="progress-label">
+                        <span>Campaign</span>
+                        <span>${char.progress.campaign}%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: ${char.progress.campaign}%"></div>
+                    </div>
+                    <div class="progress-label">
+                        <span>Build Completion</span>
+                        <span>${char.progress.buildCompletion}%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: ${char.progress.buildCompletion}%"></div>
+                    </div>
+                    <div class="progress-label">
+                        <span>Meta Alignment</span>
+                        <span>${char.progress.metaAlignment}%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: ${char.progress.metaAlignment}%"></div>
+                    </div>
+                    <div class="skills-grid" style="margin-top: 15px;">
+                        ${char.skills.map(skill => `
+                            <div class="skill-card">
+                                <div class="name">${skill.name}</div>
+                                <div class="type">${skill.type}</div>
+                                <div class="role">${skill.role}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // Render meta builds
+        function renderMetaBuilds() {
+            const container = document.getElementById('meta-builds');
+            container.innerHTML = '';
+
+            Object.entries(metaBuilds).forEach(([className, builds]) => {
+                const section = document.createElement('div');
+                section.innerHTML = `
+                    <h3 style="color: #7eb8ff; margin: 20px 0 10px;">${className}</h3>
+                    ${builds.map(build => `
+                        <div class="build-card">
+                            <h4>
+                                <span class="meta-tier tier-${build.tier.toLowerCase()}">${build.tier}</span>
+                                ${build.name}
+                            </h4>
+                            <div class="stats">
+                                <div class="stat">
+                                    <span class="stat-label">Skills:</span>
+                                    <span class="stat-value">${build.key_skills.join(', ')}</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-label">Map Clear:</span>
+                                    <span class="stat-value">${build.map_clear}</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-label">Bossing:</span>
+                                    <span class="stat-value">${build.bossing}</span>
+                                </div>
+                            </div>
+                        </div>
+                    `).join('')}
+                `;
+                container.appendChild(section);
+            });
+        }
+
+        // Render build suggestions
+        function renderSuggestions() {
+            const container = document.getElementById('build-suggestions');
+            container.innerHTML = '';
+
+            Object.values(characters).forEach(char => {
+                const suggestions = passiveSuggestions[char.class];
+                if (!suggestions) return;
+
+                const section = document.createElement('div');
+                section.innerHTML = `
+                    <h3 style="color: #7eb8ff; margin: 20px 0 10px;">${char.alias} — Passive Tree Path</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px;">
+                        <div class="build-card">
+                            <h4>Level 1-30</h4>
+                            <ul class="suggestion-list">
+                                ${suggestions.level_1_30.map(node => `
+                                    <li>
+                                        <span class="node-name">${node}</span>
+                                        <span class="node-type">Early Game</span>
+                                    </li>
+                                `).join('')}
+                            </ul>
+                        </div>
+                        <div class="build-card">
+                            <h4>Level 31-60</h4>
+                            <ul class="suggestion-list">
+                                ${suggestions.level_31_60.map(node => `
+                                    <li>
+                                        <span class="node-name">${node}</span>
+                                        <span class="node-type">Mid Game</span>
+                                    </li>
+                                `).join('')}
+                            </ul>
+                        </div>
+                        <div class="build-card">
+                            <h4>Level 61-90</h4>
+                            <ul class="suggestion-list">
+                                ${suggestions.level_61_90.map(node => `
+                                    <li>
+                                        <span class="node-name">${node}</span>
+                                        <span class="node-type">End Game</span>
+                                    </li>
+                                `).join('')}
+                            </ul>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(section);
+            });
+        }
+
+        // Initialize
+        renderCharacters();
+        renderMetaBuilds();
+        renderSuggestions();
+    </script>
+</body>
+</html>

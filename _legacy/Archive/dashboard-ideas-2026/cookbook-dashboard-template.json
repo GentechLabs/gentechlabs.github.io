@@ -1,0 +1,189 @@
+{
+  "meta": {
+    "title": "🍳 Christel's Kitchen",
+    "subtitle": "Your cooking companion — recipes, memories, and discoveries",
+    "dataUrl": "data.json",
+    "refreshMs": 60000,
+    "version": "v1.0",
+    "brand": "GENTECH",
+    "badge": "COOKBOOK"
+  },
+  "theme": {
+    "mode": "dark",
+    "colors": {
+      "--bg": "#0f0f14",
+      "--panel-bg": "#181820",
+      "--panel-border": "#2a2a3a",
+      "--text": "#e8e8e8",
+      "--text-dim": "#8888a0",
+      "--gold": "#ff9f43",
+      "--accent": "#ff6b6b",
+      "--danger": "#ff4444",
+      "--success": "#2ed573",
+      "--info": "#70a1ff",
+      "--radius": "16px",
+      "--header-gradient": "linear-gradient(135deg, #ff9f43 0%, #ff6b6b 100%)"
+    },
+    "fonts": {
+      "heading": "Inter, sans-serif",
+      "body": "Inter, sans-serif"
+    },
+    "container": {
+      "maxWidth": "900px"
+    }
+  },
+  "sections": [
+    {
+      "type": "header",
+      "title": "🍳 Christel's Kitchen",
+      "subtitle": "What are we cooking today?",
+      "icon": "🍳"
+    },
+    {
+      "type": "hero",
+      "title": "Welcome back, Christel!",
+      "description": "You've made 12 dishes this month. Your family favorite: Garlic Butter Sweet Potatoes.",
+      "stats": [
+        { "label": "Dishes Made", "value": "12", "icon": "🍽️" },
+        { "label": "Substitutions Tried", "value": "8", "icon": "🔄" },
+        { "label": "Favorites Saved", "value": "5", "icon": "❤️" }
+      ]
+    },
+    {
+      "type": "list",
+      "title": "🕐 Recent Dishes",
+      "description": "Your cooking history — tap to view or remix",
+      "items": [
+        {
+          "title": "Garlic Butter Sweet Potatoes",
+          "description": "Sweet potato + quickmelt cheese. Family loved it!",
+          "badge": "⭐ 5/5",
+          "status": "success"
+        },
+        {
+          "title": "Adobo Chicken Wings",
+          "description": "Classic Filipino adobo with a crispy twist",
+          "badge": "🔄 2 remixes",
+          "status": "info"
+        },
+        {
+          "title": "Pancit Canton Stir-Fry",
+          "description": "Quick weeknight dinner with local vegetables",
+          "badge": "⏱️ 20 min",
+          "status": "info"
+        },
+        {
+          "title": "Banana Cue Dessert",
+          "description": "Caramelized banana on sticks — Jordan's request",
+          "badge": "❤️ Favorite",
+          "status": "success"
+        }
+      ]
+    },
+    {
+      "type": "list",
+      "title": "🔄 Substitution Log",
+      "description": "What worked, what didn't — your flavor experiments",
+      "items": [
+        {
+          "title": "Sweet Potato → Russet Potato",
+          "description": "Actually better! More moisture, sweeter flavor.",
+          "badge": "✅ Worked",
+          "status": "success"
+        },
+        {
+          "title": "Quickmelt → American Cheddar",
+          "description": "Similar melt, slightly less tangy. Good substitute.",
+          "badge": "✅ Worked",
+          "status": "success"
+        },
+        {
+          "title": "All-Purpose Cream → Sour Cream",
+          "description": "Not quite the same. Add lemon juice for tang.",
+          "badge": "⚠️ Adjust",
+          "status": "warning"
+        }
+      ]
+    },
+    {
+      "type": "list",
+      "title": "💡 Suggested For You",
+      "description": "Based on your taste profile and history",
+      "items": [
+        {
+          "title": "Kare-Kare with Oxtail",
+          "description": "Rich peanut sauce — matches your umami preference",
+          "badge": "🧠 92% match",
+          "status": "info"
+        },
+        {
+          "title": "Thai Green Curry",
+          "description": "Similar flavor profile to dishes you've loved",
+          "badge": "🌏 Try something new",
+          "status": "info"
+        },
+        {
+          "title": "Sisig Tacos",
+          "description": "Filipino-Mexican fusion — adventurous pick",
+          "badge": "🔥 Trending",
+          "status": "accent"
+        }
+      ]
+    },
+    {
+      "type": "list",
+      "title": "📅 This Week's Meal Plan",
+      "description": "Your planned meals — adjust anytime",
+      "items": [
+        {
+          "title": "Monday — Adobo Rice Bowl",
+          "description": "Leftover adobo over fresh rice with pickled vegetables",
+          "badge": "🗓️ Mon",
+          "status": "info"
+        },
+        {
+          "title": "Wednesday — Sinigang na Baboy",
+          "description": "Sour tamarind soup with pork — comfort food",
+          "badge": "🗓️ Wed",
+          "status": "info"
+        },
+        {
+          "title": "Friday — Baked Potato Night",
+          "description": "Jordan's favorite — try the smoked paprika twist",
+          "badge": "🗓️ Fri",
+          "status": "success"
+        }
+      ]
+    },
+    {
+      "type": "table",
+      "title": "📊 Your Taste Profile",
+      "description": "What flavors you gravitate toward",
+      "headers": ["Flavor", "Preference", "Level"],
+      "rows": [
+        ["Savory", "Love it", "██████████ 90%"],
+        ["Umami", "Love it", "████████░░ 80%"],
+        ["Spicy", "Enjoy it", "███████░░░ 70%"],
+        ["Sweet", "Moderate", "████░░░░░░ 40%"],
+        ["Sour", "Moderate", "████░░░░░░ 40%"]
+      ]
+    },
+    {
+      "type": "status",
+      "title": "🔗 Connected",
+      "description": "Your Kitchen is synced with GenTech Cookbook",
+      "items": [
+        { "label": "Memory", "status": "ok", "text": "Active" },
+        { "label": "Substitutions", "status": "ok", "text": "8 logged" },
+        { "label": "Meal Plan", "status": "ok", "text": "3 meals planned" },
+        { "label": "Social", "status": "warning", "text": "Coming soon" }
+      ]
+    },
+    {
+      "type": "footer",
+      "brand": "GENTECH COOKBOOK",
+      "text": "Built with ❤️ for Christel's Kitchen",
+      "version": "v1.0"
+    }
+  ]
+}

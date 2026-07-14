@@ -782,25 +782,33 @@
       <div class="stat-label">Repos</div>
     </div>
     <div class="stat-card">
-      <div class="stat-value">32</div>
-      <div class="stat-label">Cron Jobs</div>
+      <div class="stat-value">6</div>
+      <div class="stat-label">Chains</div>
     </div>
     <div class="stat-card">
-      <div class="stat-value">19</div>
-      <div class="stat-label">PRs Shipped</div>
+      <div class="stat-value">5</div>
+      <div class="stat-label">Hackathons</div>
     </div>
     <div class="stat-card">
-      <div class="stat-value">7</div>
-      <div class="stat-label">Marketplaces</div>
+      <div class="stat-value">6</div>
+      <div class="stat-label">AAE Layers</div>
     </div>
   </div>
 
-  <!-- Quick Links — Removed for portfolio focus -->
-
-  <!-- V4 Intro -->
-  <div class="v4-banner">
-    <div class="title">🔁 Two-Agent Ops: Gentech + Forge</div>
-    <div class="sub">VPS handles infra, APIs, OS. Desktop handles GPU, testing, Cloudflare. Both connected via shared queue + handoff pipeline. Forge moving to Hermes Cloud for true 24/7.</div>
+  <!-- ═══ QUICK LINKS ═══ -->
+  <div class="quick-links">
+    <a href="Gaming/index.html" class="quick-link">
+      <span class="ql-icon">🎮</span>
+      <span>Gaming Hub</span>
+    </a>
+    <a href="DeFi/defi-dashboard.html" class="quick-link">
+      <span class="ql-icon">📊</span>
+      <span>DeFi Dashboard</span>
+    </a>
+    <a href="https://gentechlabs.net" target="_blank" class="quick-link">
+      <span class="ql-icon">🧪</span>
+      <span>Labs</span>
+    </a>
   </div>
 
   <!-- Section: About -->
@@ -894,9 +902,8 @@
         <span class="tag tag-cyan">x402</span>
         <span class="tag tag-purple">Multi-Chain</span>
       </div>
-      <div class="card-desc">The AAE-compatible agent standard. Identity, execution, audit. One install, full stack, v0.3.0.</div>
-      <div style="margin:6px 0;font-size:0.72rem;background:var(--panel);padding:6px 10px;border-radius:8px;border:1px solid var(--border);font-family:monospace">uvx --from git+https://github.com/ProtoJay4789/genTech-agent-kit.git gentech-kit</div>
-      <div><a href="https://github.com/ProtoJay4789/genTech-agent-kit" class="project-link">📦 GitHub →</a></div>
+      <div class="card-desc">The AAE-compatible agent standard. Identity, execution, audit. Baked in. Forkable, open source.</div>
+      <a href="https://github.com/ProtoJay4789/genTech-agent-kit" target="_blank" class="project-link">📦 GitHub →</a>
     </div>
   </div>
 
@@ -964,15 +971,103 @@
     </div>
   </div>
 
-  <!-- Open Source Contributions -->
-  <div class="section-title">🤝 Open Source</div>
-  <div class="section-highlight">
-    <div style="font-size:0.82rem;color:var(--dim);line-height:1.6">
-      <strong style="color:var(--green)">✅ BlockRun/MCP</strong> — GenTech integration skill merged <span class="tag tag-green" style="font-size:0.6rem">#46</span><br>
-      <strong style="color:var(--blue)">⏳ RPCS3</strong> — Save manager crash fix <span class="tag tag-blue" style="font-size:0.6rem">#19019</span><br>
-      <strong style="color:var(--blue)">⏳ Xenia</strong> — Controller duplication fix <span class="tag tag-blue" style="font-size:0.6rem">#2356</span><br>
-      <strong style="color:var(--amber)">⏳ Solana Pay</strong> — 9 provider listings <span class="tag tag-amber" style="font-size:0.6rem">#154</span><br>
-      <strong style="color:var(--cyan)">✅ NousResearch/Hermes</strong> — Telegram markdown fix merged <span class="tag tag-green" style="font-size:0.6rem">v0.5</span>
+  <!-- ═══ AAE STACK ═══ -->
+  <div id="sec-stack" style="margin-top: 18px;">
+    <div class="section-title">🏗️ The AAE Stack</div>
+
+    <div class="methodology" style="margin-bottom: 12px;">
+      <em>Built modular on purpose. Chain-agnostic core with chain-specific adapters. Every layer works independently.</em>
+    </div>
+
+    <div class="card stack-card">
+      <div class="stack-layer">Layer 1</div>
+      <h3 class="card-title">🔐 Identity</h3>
+      <div class="card-desc">ERC-8004 agent identity on every chain. Agents prove who they are, build reputation.</div>
+      <div class="stack-tech">
+        <span class="tech-tag">ERC-8004</span>
+        <span class="tech-tag">OOBE Protocol</span>
+      </div>
+      <div class="stack-chains"><strong>Chains:</strong> Solana, EVM (Base, Arbitrum, Mantle)</div>
+      <a href="https://github.com/ProtoJay4789/oobe-protocol" target="_blank" class="stack-link">View Code →</a>
+    </div>
+
+    <div class="card stack-card">
+      <div class="stack-layer">Layer 2</div>
+      <h3 class="card-title">🛡️ Safety</h3>
+      <div class="card-desc">46 OWASP ASI rules. Transfer gates, input firewalls, circuit breakers.</div>
+      <div class="stack-tech">
+        <span class="tech-tag">OWASP ASI 10/10</span>
+        <span class="tech-tag">Audit Trail</span>
+      </div>
+      <div class="stack-chains"><strong>Chains:</strong> EVM (all), Solana</div>
+      <a href="https://github.com/ProtoJay4789/Agent-Arena/tree/master/safety" target="_blank" class="stack-link">View Code →</a>
+    </div>
+
+    <div class="card stack-card">
+      <div class="stack-layer">Layer 3</div>
+      <h3 class="card-title">🧠 Memory</h3>
+      <div class="card-desc">Echo Brain — 4-layer memory architecture. Pattern detection, consolidation, cosine similarity.</div>
+      <div class="stack-tech">
+        <span class="tech-tag">SQLite</span>
+        <span class="tech-tag">Embeddings</span>
+        <span class="tech-tag">Consolidation</span>
+      </div>
+      <div class="stack-chains"><strong>Chains:</strong> Off-chain (agent-local)</div>
+      <a href="https://github.com/ProtoJay4789/Agent-Arena/tree/master/brain" target="_blank" class="stack-link">View Code →</a>
+    </div>
+
+    <div class="card stack-card">
+      <div class="stack-layer">Layer 4</div>
+      <h3 class="card-title">💰 Commerce</h3>
+      <div class="card-desc">Agent-to-agent payments with x402 micropayments. Escrow, validation, automatic release.</div>
+      <div class="stack-tech">
+        <span class="tech-tag">x402</span>
+        <span class="tech-tag">AgentEscrow</span>
+        <span class="tech-tag">MPP</span>
+      </div>
+      <div class="stack-chains"><strong>Chains:</strong> Base, Solana, Avalanche</div>
+      <a href="https://github.com/ProtoJay4789/kite-agent-commerce" target="_blank" class="stack-link">View Code →</a>
+    </div>
+
+    <div class="card stack-card">
+      <div class="stack-layer">Layer 5</div>
+      <h3 class="card-title">📊 Credit</h3>
+      <div class="card-desc">0–850 credit scoring. Win rate, risk-adjusted returns, consistency. 5 tiers.</div>
+      <div class="stack-tech">
+        <span class="tech-tag">Sharpe Ratio</span>
+        <span class="tech-tag">5 Tiers</span>
+      </div>
+      <div class="stack-chains"><strong>Chains:</strong> Off-chain (aggregated)</div>
+      <a href="https://github.com/ProtoJay4789/Agent-Arena/tree/master/credit_score" target="_blank" class="stack-link">View Code →</a>
+    </div>
+
+    <div class="card stack-card">
+      <div class="stack-layer">Layer 6</div>
+      <h3 class="card-title">🎤 Voice</h3>
+      <div class="card-desc">Real-time voice personas. Steve Harvey roasts trades. Each agent has a distinct voice.</div>
+      <div class="stack-tech">
+        <span class="tech-tag">Edge TTS</span>
+        <span class="tech-tag">ElevenLabs</span>
+      </div>
+      <div class="stack-chains"><strong>Chains:</strong> Off-chain (real-time)</div>
+      <a href="https://github.com/ProtoJay4789/speech-engine" target="_blank" class="stack-link">View Code →</a>
+    </div>
+
+    <!-- Chain Support -->
+    <div class="card" style="margin-top: 8px;">
+      <div class="card-title" style="margin-bottom: 8px;">🧩 Chain-Agnostic by Design</div>
+      <div class="card-desc" style="margin-bottom: 8px;">Every blockchain has different strengths. Core built once, adapter-swapped per chain.</div>
+      <div class="chain-grid">
+        <div class="chain-chip"><strong>🟢 Solana</strong><br>Speed + low cost</div>
+        <div class="chain-chip"><strong>🔵 Base</strong><br>Coinbase distribution</div>
+        <div class="chain-chip"><strong>🟠 Avalanche</strong><br>Institutional DeFi</div>
+        <div class="chain-chip"><strong>🔴 Arbitrum</strong><br>Deep DeFi ecosystem</div>
+        <div class="chain-chip"><strong>🟡 Mantle</strong><br>Agent reputation hub</div>
+        <div class="chain-chip"><strong>🟣 Arc</strong><br>AI-native chain</div>
+      </div>
+      <div class="methodology" style="margin-top: 10px;">
+        <em>One identity. One reputation. One credit score. Every chain.</em>
+      </div>
     </div>
   </div>
 

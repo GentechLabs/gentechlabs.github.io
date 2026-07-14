@@ -1,0 +1,9 @@
+name = "gentech-email-agent"
+main = "email-worker.js"
+compatibility_date = "2025-06-01"
+compatibility_flags = ["nodejs_compat"]
+
+# KV namespace for email storage
+[[kv_namespaces]]
+binding = "EMAIL_KV"
+id = "de2f4543ecef44d191fc617024473c99"  # Shared KV namespace

@@ -1,0 +1,175 @@
+{
+  "meta": {
+    "version": "unified-v1",
+    "updated_by": "Gentech",
+    "updated_at": "2026-05-09T19:10:00Z",
+    "update_source": "jordan_sync_request"
+  },
+  "pool": {
+    "name": "AVAX/USDC 5bps",
+    "version": "v2.2",
+    "address": "0x864d4e5Ee7318e97483DB7EB0912E09F161516EA",
+    "chain": "avalanche",
+    "bin_step": "10bps",
+    "base_fee": "0.05%",
+    "max_fee": "0.54%"
+  },
+  "position": {
+    "entry_date": "2026-03-31",
+    "entry_avax": 3.762,
+    "entry_usdc": 48.37,
+    "entry_avax_price": 9.4498,
+    "entry_total_usd": 83.92,
+    "shape": "Curve",
+    "range": {
+      "low": 9.78,
+      "high": 10.02,
+      "updated_at": "2026-05-09T19:10:00Z",
+      "source": "manual_rebalance_sync"
+    }
+  },
+  "range_low": 9.78,
+  "range_high": 10.02,
+  "snapshots": [
+    {
+      "date": "2026-04-24",
+      "avax_price": 9.418,
+      "deposit_balance_usd": 83.37,
+      "avax_holdings": 3.88,
+      "usdc_holdings": 46.82,
+      "fees_24h_usd": 0.58,
+      "claimable_rewards_usd": 0.0075,
+      "pool_tvl_usd": 3980000,
+      "pool_vol_24h_usd": 21500000,
+      "pool_fees_24h_usd": 10967,
+      "apr_7d": 88.77,
+      "status": "IN_RANGE",
+      "source": "screenshot"
+    },
+    {
+      "date": "2026-04-24",
+      "avax_price": 9.38127,
+      "deposit_balance_usd": 83.14,
+      "avax_holdings": 3.311,
+      "usdc_holdings": 52.08,
+      "fees_24h_usd": null,
+      "claimable_rewards_usd": 0.0075,
+      "pool_tvl_usd": null,
+      "pool_vol_24h_usd": null,
+      "pool_fees_24h_usd": null,
+      "apr_7d": null,
+      "status": "IN_RANGE",
+      "source": "screenshot_rebalance"
+    },
+    {
+      "date": "2026-04-24",
+      "avax_price": 9.43769,
+      "deposit_balance_usd": 83.37,
+      "avax_holdings": 3.333,
+      "usdc_holdings": 51.91,
+      "fees_24h_usd": null,
+      "claimable_rewards_usd": 0.00755,
+      "pool_tvl_usd": null,
+      "pool_vol_24h_usd": null,
+      "pool_fees_24h_usd": null,
+      "apr_7d": null,
+      "status": "IN_RANGE",
+      "source": "screenshot_rebalance"
+    }
+  ],
+  "history": [
+    {
+      "date": "2026-03-31",
+      "value_usd": 31.16,
+      "event": "Entry"
+    },
+    {
+      "date": "2026-04-21",
+      "value_usd": 28.66,
+      "event": "Snapshot"
+    },
+    {
+      "date": "2026-04-22",
+      "value_usd": 83.92,
+      "event": "Manual Sync / Photo Update"
+    },
+    {
+      "date": "2026-04-24",
+      "value_usd": 83.37,
+      "event": "Screenshot Update"
+    },
+    {
+      "date": "2026-04-24",
+      "value_usd": 83.14,
+      "event": "Rebalance \u2014 Range updated 9.26\u20139.46"
+    },
+    {
+      "date": "2026-04-24",
+      "value_usd": 83.37,
+      "event": "Rebalance \u2014 Range updated 9.33\u20139.52"
+    },
+    {
+      "date": "2026-04-26",
+      "value_usd": 83.92,
+      "event": "Screenshot \u2014 Range updated 9.36\u20139.58"
+    },
+    {
+      "date": "2026-04-26",
+      "value_usd": 138.92,
+      "event": "DCA +$55"
+    },
+    {
+      "date": "2026-04-26",
+      "value_usd": 138.92,
+      "event": "Rebalance \u2014 Range updated 9.32\u20139.53"
+    },
+    {
+      "date": "2026-04-26",
+      "value_usd": 138.92,
+      "event": "Fees earned: $0.78 cumulative | Price broke above range \u2014 earnings paused"
+    },
+    {
+      "date": "2026-04-27",
+      "value_usd": 138.92,
+      "event": "Rebalance \u2014 Range updated 9.38\u20139.66 (wider, shifted up to catch uptrend)"
+    },
+    {
+      "date": "2026-05-09",
+      "value_usd": 126.39,
+      "event": "Sync \u2014 Range updated 9.78\u201310.02 (Jordan requested sync, config + tracker aligned)"
+    }
+  ],
+  "strategy_notes": {
+    "worst_case_range": "8.30\u20139.00",
+    "dca_plan": "If AVAX drops to 8.30\u20139.00, DCA strategy absorbs impermanent loss via accumulated fees + dollar-cost averaging into lower prices.",
+    "shape_strategy": {
+      "current": "Curve",
+      "current_reason": "Market is slow/ranging \u2014 Curve (bell curve) maximizes fee capture near current price",
+      "crash_protocol": {
+        "trigger": "Price breaks below ~9.10 and trending down",
+        "new_shape": "Bid-Ask",
+        "new_shape_reason": "Bid-Ask concentrates liquidity at edges \u2014 as price trends down, you accumulate AVAX at lower prices (DCA via IL)",
+        "allocation": "70 USDC / 30 AVAX \u2014 more USDC = more buying power as price drops",
+        "range_adjustment": "Widen toward 8.30\u20139.00 support zone"
+      }
+    },
+    "accumulation_plan": {
+      "asset": "LINK.e",
+      "action": "Direct purchase (not LP)",
+      "amount": "2 tokens",
+      "scheduled": "2026-04-28 (Saturday)",
+      "rationale": "Accumulate asset first. V1 AMM LINK.e/USDC on Blackhole has shallow liquidity ($6.9K) \u2014 LP would be 2% of pool, high IL risk. Better to hold/stake LINK directly, then deploy into CL when $2K+ and bridged to Arbitrum Uniswap V3.",
+      "status": "Planned"
+    },
+    "added_by": "Jordan",
+    "added_at": "2026-04-24T19:00:00Z"
+  },
+  "range": {
+    "low": 9.3,
+    "high": 9.6
+  },
+  "current_balance_usd": 190.38,
+  "shape": "bid-ask",
+  "last_rebalance": "2026-05-15T17:24:58Z",
+  "last_rebalance_source": "jordan_rebalance_screenshot"
+}

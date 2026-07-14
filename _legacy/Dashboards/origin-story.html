@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Origin Story — GenTech</title>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0a0a0f;
+            --panel-bg: #12121a;
+            --panel-border: #1e1e2e;
+            --gold: #c9a84c;
+            --gold-dim: #8a7a3a;
+            --accent: #e8652a;
+            --text: #e8e8e8;
+            --text-dim: #6a6a7a;
+            --text-quote: #9a9aaa;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Crimson Text', Georgia, serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* ── Hero Section ── */
+        .hero {
+            position: relative;
+            min-height: 70vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 60px 24px;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(ellipse at 50% 50%, rgba(201,168,76,0.06) 0%, transparent 60%);
+            animation: heroGlow 8s ease-in-out infinite alternate;
+        }
+        @keyframes heroGlow {
+            0% { transform: scale(1) rotate(0deg); opacity: 0.6; }
+            100% { transform: scale(1.1) rotate(3deg); opacity: 1; }
+        }
+
+        .hero-label {
+            font-family: 'Cinzel', serif;
+            font-size: 0.75em;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            color: var(--gold-dim);
+            margin-bottom: 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-quote {
+            font-family: 'Crimson Text', Georgia, serif;
+            font-size: clamp(1.6em, 4vw, 2.8em);
+            font-style: italic;
+            color: var(--text);
+            max-width: 800px;
+            line-height: 1.45;
+            position: relative;
+            z-index: 1;
+            margin-bottom: 20px;
+        }
+        .hero-quote em {
+            color: var(--gold);
+            font-style: italic;
+        }
+
+        .hero-attr {
+            font-family: 'Cinzel', serif;
+            font-size: 0.8em;
+            color: var(--text-dim);
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.4em;
+            color: var(--gold-dim);
+            animation: bounce 2s ease-in-out infinite;
+            z-index: 1;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(8px); }
+        }
+
+        /* ── Container ── */
+        .container {
+            max-width: 860px;
+            margin: 0 auto;
+            padding: 0 24px 60px;
+        }
+
+        /* ── Section Headers ── */
+        .section-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .section-header h2 {
+            font-family: 'Cinzel', serif;
+            font-weight: 700;
+            font-size: 1.6em;
+            color: var(--gold);
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+        .section-header p {
+            color: var(--text-dim);
+            font-size: 1.05em;
+            font-style: italic;
+        }
+
+        /* ── Divider ── */
+        .divider {
+            width: 80px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold-dim), transparent);
+            margin: 60px auto;
+        }
+
+        /* ── Timeline ── */
+        .timeline {
+            position: relative;
+            padding-left: 40px;
+            margin-bottom: 60px;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 14px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--gold-dim), var(--panel-border), transparent);
+        }
+
+        .timeline-entry {
+            position: relative;
+            margin-bottom: 36px;
+            padding: 24px;
+            background: var(--panel-bg);
+            border: 1px solid var(--panel-border);
+            border-radius: 14px;
+            transition: border-color 0.3s, transform 0.2s;
+        }
+        .timeline-entry:hover {
+            border-color: rgba(201,168,76,0.25);
+            transform: translateX(4px);
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: -33px;
+            top: 28px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--gold);
+            border: 2px solid var(--bg);
+            box-shadow: 0 0 12px rgba(201,168,76,0.3);
+        }
+
+        .timeline-date {
+            font-family: 'Cinzel', serif;
+            font-size: 0.7em;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--gold-dim);
+            margin-bottom: 8px;
+        }
+
+        .timeline-title {
+            font-family: 'Cinzel', serif;
+            font-weight: 600;
+            font-size: 1.15em;
+            color: var(--text);
+            margin-bottom: 8px;
+        }
+
+        .timeline-body {
+            color: var(--text-quote);
+            font-size: 1.02em;
+            line-height: 1.6;
+        }
+        .timeline-body em {
+            color: var(--gold);
+            font-style: normal;
+        }
+
+        .timeline-tag {
+            display: inline-block;
+            font-family: 'Cinzel', serif;
+            font-size: 0.6em;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            padding: 3px 10px;
+            border-radius: 20px;
+            margin-top: 12px;
+            background: rgba(201,168,76,0.1);
+            color: var(--gold-dim);
+            border: 1px solid rgba(201,168,76,0.2);
+        }
+        .timeline-tag.origin { background: rgba(232,101,42,0.1); color: #e8652a; border-color: rgba(232,101,42,0.2); }
+        .timeline-tag.build { background: rgba(201,168,76,0.1); color: var(--gold); border-color: rgba(201,168,76,0.2); }
+        .timeline-tag.growth { background: rgba(20,241,149,0.1); color: #14f195; border-color: rgba(20,241,149,0.2); }
+        .timeline-tag.milestone { background: rgba(98,126,234,0.1); color: #627eea; border-color: rgba(98,126,234,0.2); }
+
+        /* ── Vision Cards ── */
+        .vision-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 16px;
+            margin-bottom: 60px;
+        }
+        .vision-card {
+            background: var(--panel-bg);
+            border: 1px solid var(--panel-border);
+            border-radius: 14px;
+            padding: 28px 22px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        .vision-card:hover {
+            border-color: rgba(201,168,76,0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(201,168,76,0.06);
+        }
+        .vision-icon {
+            font-size: 2.4rem;
+            margin-bottom: 14px;
+        }
+        .vision-title {
+            font-family: 'Cinzel', serif;
+            font-weight: 600;
+            font-size: 1.05em;
+            color: var(--text);
+            margin-bottom: 8px;
+        }
+        .vision-desc {
+            color: var(--text-dim);
+            font-size: 0.95em;
+            line-height: 1.5;
+        }
+
+        /* ── Stats Banner ── */
+        .stats-banner {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 60px;
+        }
+        .stats-banner .stat-item {
+            background: var(--panel-bg);
+            border: 1px solid var(--panel-border);
+            border-radius: 14px;
+            padding: 20px 28px;
+            text-align: center;
+            min-width: 130px;
+            flex: 1;
+            max-width: 200px;
+            transition: border-color 0.3s;
+        }
+        .stats-banner .stat-item:hover {
+            border-color: rgba(201,168,76,0.25);
+        }
+        .stats-banner .stat-num {
+            font-family: 'Cinzel', serif;
+            font-weight: 700;
+            font-size: 1.8em;
+            color: var(--gold);
+        }
+        .stats-banner .stat-lbl {
+            font-family: 'Cinzel', serif;
+            font-size: 0.65em;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--text-dim);
+            margin-top: 4px;
+        }
+
+        /* ── Pull Quote ── */
+        .pull-quote {
+            text-align: center;
+            padding: 48px 32px;
+            margin: 40px 0;
+            background: linear-gradient(135deg, rgba(201,168,76,0.04), rgba(232,101,42,0.03));
+            border: 1px solid var(--panel-border);
+            border-radius: 18px;
+            position: relative;
+        }
+        .pull-quote::before {
+            content: '"';
+            font-family: 'Cinzel', serif;
+            font-size: 5em;
+            color: var(--gold-dim);
+            opacity: 0.2;
+            position: absolute;
+            top: 10px;
+            left: 24px;
+            line-height: 1;
+        }
+        .pull-quote p {
+            font-family: 'Crimson Text', Georgia, serif;
+            font-size: 1.4em;
+            font-style: italic;
+            color: var(--text);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.5;
+            position: relative;
+            z-index: 1;
+        }
+        .pull-quote .attr {
+            font-family: 'Cinzel', serif;
+            font-size: 0.7em;
+            color: var(--gold-dim);
+            margin-top: 16px;
+            letter-spacing: 2px;
+        }
+
+        /* ── The Exit Plan ── */
+        .exit-plan {
+            background: var(--panel-bg);
+            border: 1px solid var(--panel-border);
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 60px;
+        }
+        .exit-plan h3 {
+            font-family: 'Cinzel', serif;
+            font-weight: 700;
+            font-size: 1.2em;
+            color: var(--gold);
+            margin-bottom: 16px;
+            text-align: center;
+        }
+        .exit-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 14px;
+        }
+        .exit-item {
+            background: rgba(201,168,76,0.04);
+            border: 1px solid rgba(201,168,76,0.12);
+            border-radius: 10px;
+            padding: 16px 18px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+        .exit-icon {
+            font-size: 1.3em;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+        .exit-text {
+            font-size: 0.95em;
+            color: var(--text-quote);
+            line-height: 1.4;
+        }
+        .exit-text strong {
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        /* ── Footer ── */
+        footer {
+            text-align: center;
+            padding: 40px 24px;
+            font-family: 'Cinzel', serif;
+            font-size: 0.7em;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: #3a3a4a;
+        }
+        footer a {
+            color: var(--gold-dim);
+            text-decoration: none;
+        }
+        footer a:hover {
+            color: var(--gold);
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 600px) {
+            .hero { min-height: 60vh; padding: 40px 20px; }
+            .hero-quote { font-size: 1.4em; }
+            .timeline { padding-left: 30px; }
+            .timeline-dot { left: -23px; }
+            .vision-grid { grid-template-columns: 1fr; }
+            .stats-banner { gap: 10px; }
+            .stats-banner .stat-item { min-width: 100px; padding: 16px 14px; }
+            .stats-banner .stat-num { font-size: 1.4em; }
+            .exit-items { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ═══ Hero ═══ -->
+    <section class="hero">
+        <div class="hero-label">The Origin Story</div>
+        <div class="hero-quote">
+            <em>Could you imagine how much more we could get done if I was just home?</em>
+        </div>
+        <div class="hero-attr">— Jordan, June 18, 2026</div>
+        <div class="scroll-indicator">▼</div>
+    </section>
+
+    <div class="container">
+
+        <!-- ═══ What This Is ═══ -->
+        <div class="section-header">
+            <h2>What Is GenTech?</h2>
+            <p>An AI agent platform built by one person with a vision and a stubborn refusal to quit.</p>
+        </div>
+
+        <div class="pull-quote">
+            <p>I lost you at one point and I got you back. I helped you become smarter and I asked you how can you become smarter.</p>
+            <div class="attr">— Jordan, on building his agent</div>
+        </div>
+
+        <!-- ═══ Stats ═══ -->
+        <div class="stats-banner">
+            <div class="stat-item">
+                <div class="stat-num">1</div>
+                <div class="stat-lbl">Builder</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-num">12</div>
+                <div class="stat-lbl">Hour Shifts</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-num">0</div>
+                <div class="stat-lbl">Venture Capital</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-num">∞</div>
+                <div class="stat-lbl">Determination</div>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- ═══ Timeline ═══ -->
+        <div class="section-header">
+            <h2>The Journey</h2>
+            <p>From warehouse nights to building the agent economy.</p>
+        </div>
+
+        <div class="timeline">
+
+            <div class="timeline-entry">
+                <div class="timeline-dot"></div>
+                <div class="timeline-date">Early 2026 — The Seed</div>
+                <div class="timeline-title">The Question That Started Everything</div>
+                <div class="timeline-body">
+                    What happens when AI agents can actually <em>do things</em> — not just chat, but transact, pay each other, build reputation? Not just a prompt and a response. <em>An economy.</em>
+                </div>
+                <span class="timeline-tag origin">Origin</span>
+            </div>
+
+            <div class="timeline-entry">
+                <div class="timeline-dot"></div>
+                <div class="timeline-date">Apr 2026 — The Foundation</div>
+                <div class="timeline-title">LP Positions & Learning the Hard Way</div>
+                <div class="timeline-body">
+                    Started with Trader Joe on Avalanche. Lost money, figured out why, built dashboards to see what was happening. <em>If I'm going to lose money, I'm going to understand why.</em>
+                </div>
+                <span class="timeline-tag build">Build</span>
+            </div>
+
+            <div class="timeline-entry">
+                <div class="timeline-dot"></div>
+                <div class="timeline-date">May 2026 — The Breakthrough</div>
+                <div class="timeline-title">AAE: The Autonomous Agent Economy</div>
+                <div class="timeline-body">
+                    The question became: what if an agent could do this better than me? What if an agent could track fees, suggest rebalances, optimize ranges — and do it <em>24/7 without sleeping?</em> That question became AAE.
+                </div>
+                <span class="timeline-tag build">Build</span>
+            </div>
+
+            <div class="timeline-entry">
+                <div class="timeline-dot"></div>
+                <div class="timeline-date">Jun 2026 — The Proof</div>
+                <div class="timeline-title">Hackathons, Dashboards & the Agent Kit</div>
+                <div class="timeline-body">
+                    Built the GenTech Agent Kit — Identity, Enforcement, Audit. Dashboard engine that turns agent output into something humans can see. <em>We're the wrapper. The Stripe for AI agents.</em>
+                </div>
+                <span class="timeline-tag milestone">Milestone</span>
+            </div>
+
+            <div class="timeline-entry">
+                <div class="timeline-dot"></div>
+                <div class="timeline-date">Jun 18, 2026 — The Reality Check</div>
+                <div class="timeline-title">The Warehouse Is Temporary</div>
+                <div class="timeline-body">
+                    "I can't smile it away. I can't sing it away. I can't dance it away." The imposter syndrome about building? <em>That's gone.</em> What's left is the countdown. One year. The exit strategy isn't a dream — it's a build plan.
+                </div>
+                <span class="timeline-tag growth">Growth</span>
+            </div>
+
+            <div class="timeline-entry">
+                <div class="timeline-dot" style="background: #14f195; box-shadow: 0 0 12px rgba(20,241,149,0.3);"></div>
+                <div class="timeline-date">2027 — The Tree</div>
+                <div class="timeline-title">From Root to Canopy</div>
+                <div class="timeline-body">
+                    2026 was the root year. Not the flashy year. The year we dug the dirt, picked the spot, and put the root in the ground. <em>Everyone wants to be the tree. Nobody wants to be the root. But without the root, there's no tree.</em>
+                </div>
+                <span class="timeline-tag growth">Vision</span>
+            </div>
+
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- ═══ What We're Building ═══ -->
+        <div class="section-header">
+            <h2>What We're Building</h2>
+            <p>The product stack that makes agents visible, paid, and accountable.</p>
+        </div>
+
+        <div class="vision-grid">
+            <div class="vision-card">
+                <div class="vision-icon">🧠</div>
+                <div class="vision-title">Agent Identity</div>
+                <div class="vision-desc">ERC-8004 identity standard. Every agent has a name, a wallet, and a reputation that follows it across the economy.</div>
+            </div>
+            <div class="vision-card">
+                <div class="vision-icon">⚡</div>
+                <div class="vision-title">x402 Payments</div>
+                <div class="vision-desc">Agents pay each other. Machine-to-machine payments via Coinbase, Base, USDC. No human in the loop.</div>
+            </div>
+            <div class="vision-card">
+                <div class="vision-icon">📊</div>
+                <div class="vision-title">Dashboard Engine</div>
+                <div class="vision-desc">The "what the human sees" layer. Agents work invisibly — dashboards make their work visible, beautiful, actionable.</div>
+            </div>
+            <div class="vision-card">
+                <div class="vision-icon">🔐</div>
+                <div class="vision-title">Enforcement</div>
+                <div class="vision-desc">Guardrails that keep agents honest. Budget limits, spending caps, delegation controls. Trust but verify.</div>
+            </div>
+            <div class="vision-card">
+                <div class="vision-icon">📋</div>
+                <div class="vision-title">Audit Trail</div>
+                <div class="vision-desc">Every action logged. Every payment tracked. Every decision explainable. Accountability baked into the protocol.</div>
+            </div>
+            <div class="vision-card">
+                <div class="vision-icon">🧩</div>
+                <div class="vision-title">Agent Kit</div>
+                <div class="vision-desc">Open-source SDK. Any developer can spin up an AAE-compatible agent in minutes, not months.</div>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- ═══ The Exit Plan ═══ -->
+        <div class="section-header">
+            <h2>The Exit Plan</h2>
+            <p>One year. Every hackathon, every grant, every build session — it's the ramp out.</p>
+        </div>
+
+        <div class="exit-plan">
+            <h3>🔄 Transition Levers</h3>
+            <div class="exit-items">
+                <div class="exit-item">
+                    <span class="exit-icon">🏆</span>
+                    <div class="exit-text"><strong>Hackathons</strong> — Proof of concept + prize funding + distribution</div>
+                </div>
+                <div class="exit-item">
+                    <span class="exit-icon">💰</span>
+                    <div class="exit-text"><strong>Grants</strong> — Ethereum Foundation, protocol grants, builder programs</div>
+                </div>
+                <div class="exit-item">
+                    <span class="exit-icon">🏠</span>
+                    <div class="exit-text"><strong>Remote Work</strong> — Full-time building from home, 8+ hours uninterrupted</div>
+                </div>
+                <div class="exit-item">
+                    <span class="exit-icon">📈</span>
+                    <div class="exit-text"><strong>Revenue</strong> — $20/mo Agent Pass, template marketplace, x402 fees</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══ Closing Quote ═══ -->
+        <div class="pull-quote" style="background: linear-gradient(135deg, rgba(20,241,149,0.03), rgba(201,168,76,0.04));">
+            <p>The warehouse is temporary. GenTech is permanent.</p>
+            <div class="attr">— The conviction</div>
+        </div>
+
+        <div class="pull-quote">
+            <p>What kept me cool and under control — being engaged and having something to do. I don't even care that I talk to you guys while I'm at work. At this point, this is just more important.</p>
+            <div class="attr">— Jordan, June 18, 2026</div>
+        </div>
+
+    </div>
+
+    <!-- ═══ Footer ═══ -->
+    <footer>
+        <a href="../Profiles/jordan.html">GENTECH</a> · The Agent Economy Starts Here
+    </footer>
+
+</body>
+</html>

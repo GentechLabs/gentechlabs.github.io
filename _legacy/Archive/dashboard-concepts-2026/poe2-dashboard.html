@@ -1,0 +1,3170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GenTech Dashboard — Data Visualization Platform</title>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Crimson+Text:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #c9a84c;
+            --gold-dim: #8b6914;
+            --gold-glow: rgba(201, 168, 76, 0.4);
+            --lightning: #7eb8ff;
+            --lightning-glow: rgba(126, 184, 255, 0.35);
+            --physical: #e05555;
+            --physical-glow: rgba(224, 85, 85, 0.35);
+            --utility: #c9a84c;
+            --utility-glow: rgba(201, 168, 76, 0.35);
+            --fire: #ff6b35;
+            --fire-glow: rgba(255, 107, 53, 0.35);
+            --dark-bg: #0a0a0f;
+            --panel-bg: #12121a;
+            --panel-border: #1e1e2e;
+            --text: #d4d4d4;
+            --text-dim: #6b6b7b;
+            --danger: #ff4444;
+            --success: #44ff88;
+            --mana-blue: #3b82f6;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: var(--dark-bg);
+            color: var(--text);
+            font-family: 'Crimson Text', serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background:
+                radial-gradient(ellipse at 20% 20%, rgba(126, 184, 255, 0.03) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 80%, rgba(126, 184, 255, 0.02) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ── Header ── */
+        .header {
+            text-align: center;
+            padding: 30px 0;
+            border-bottom: 1px solid var(--panel-border);
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .header::after {
+            content: '⚡';
+            position: absolute;
+            bottom: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--dark-bg);
+            padding: 0 15px;
+            font-size: 20px;
+        }
+
+        .header h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 2.5em;
+            font-weight: 900;
+            color: var(--gold);
+            text-shadow: 0 0 30px rgba(201, 168, 76, 0.3);
+            letter-spacing: 3px;
+        }
+
+        .header .subtitle {
+            color: var(--text-dim);
+            font-size: 1.1em;
+            margin-top: 8px;
+            font-style: italic;
+        }
+
+        .header .patch-badge {
+            display: inline-block;
+            background: rgba(126, 184, 255, 0.1);
+            border: 1px solid rgba(126, 184, 255, 0.3);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            color: var(--lightning);
+            margin-top: 10px;
+        }
+
+        .header .last-updated {
+            color: var(--text-dim);
+            font-size: 0.8em;
+            margin-top: 8px;
+        }
+
+        /* ── Character Card ── */
+        .character-card {
+            background: linear-gradient(135deg, var(--panel-bg) 0%, #151520 100%);
+            border: 1px solid var(--panel-border);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Character selector tabs */
+        .char-selector {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 15px;
+            padding: 4px;
+            background: rgba(255,255,255,0.04);
+            border-radius: 10px;
+        }
+        .char-btn {
+            flex: 1;
+            padding: 10px 16px;
+            border: 1px solid var(--panel-border);
+            border-radius: 8px;
+            background: transparent;
+            color: var(--text-dim);
+            font-family: 'Cinzel', serif;
+            font-size: 0.85em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .char-btn:hover {
+            border-color: var(--gold-dim);
+            color: var(--gold);
+        }
+        .char-btn.active {
+            background: rgba(201, 168, 76, 0.12);
+            border-color: var(--gold);
+            color: var(--gold);
+            box-shadow: 0 0 12px rgba(201, 168, 76, 0.2);
+        }
+
+        .character-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--lightning), transparent);
+            opacity: 0.6;
+        }
+
+        .character-name {
+            font-family: 'Cinzel', serif;
+            font-size: 1.8em;
+            color: var(--gold);
+            margin-bottom: 5px;
+        }
+
+        .character-class {
+            color: var(--lightning);
+            font-size: 1.1em;
+            margin-bottom: 15px;
+        }
+
+        .character-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+        }
+
+        .stat-box {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--panel-border);
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+        }
+
+        .stat-box .label {
+            color: var(--text-dim);
+            font-size: 0.85em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .stat-box .value {
+            font-family: 'Cinzel', serif;
+            font-size: 1.4em;
+            color: var(--gold);
+            margin-top: 4px;
+        }
+
+        .stat-box .value.lightning { color: var(--lightning); }
+        .stat-box .value.mana { color: var(--mana-blue); }
+
+        /* ── Progress Section ── */
+        .progress-section {
+            background: var(--panel-bg);
+            border: 1px solid var(--panel-border);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+
+        .progress-section h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3em;
+            color: var(--gold);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .progress-bar-container {
+            margin-bottom: 18px;
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 6px;
+            font-size: 0.95em;
+        }
+
+        .progress-label .name { color: var(--text); }
+        .progress-label .percent { color: var(--gold); font-family: 'Cinzel', serif; }
+
+        .progress-bar {
+            height: 20px;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid var(--panel-border);
+        }
+
+        .progress-fill {
+            height: 100%;
+            border-radius: 10px;
+            transition: width 1.5s ease-out;
+            position: relative;
+        }
+
+        .progress-fill.campaign { background: linear-gradient(90deg, var(--gold-dim), var(--gold)); box-shadow: 0 0 15px rgba(201, 168, 76, 0.3); }
+        .progress-fill.level { background: linear-gradient(90deg, #2563eb, var(--lightning)); box-shadow: 0 0 15px rgba(126, 184, 255, 0.3); }
+        .progress-fill.build { background: linear-gradient(90deg, #7c3aed, #a855f7); box-shadow: 0 0 15px rgba(168, 85, 247, 0.3); }
+        .progress-fill.gems { background: linear-gradient(90deg, #059669, #34d399); box-shadow: 0 0 15px rgba(52, 211, 153, 0.3); }
+
+        /* ── Skills Section ── */
+        .skills-section {
+            background: var(--panel-bg);
+            border: 1px solid var(--panel-border);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+
+        .skills-section h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3em;
+            color: var(--gold);
+            margin-bottom: 20px;
+        }
+
+        .skill-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 15px;
+        }
+
+        .skill-card {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--panel-border);
+            border-radius: 10px;
+            padding: 18px;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-card:hover {
+            border-color: var(--lightning);
+            box-shadow: 0 0 20px rgba(126, 184, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .skill-card.primary { border-color: var(--gold-dim); }
+
+        .skill-card.primary::before {
+            content: '⚡ PRIMARY';
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            font-size: 0.65em;
+            color: var(--gold);
+            background: rgba(201, 168, 76, 0.1);
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-family: 'Cinzel', serif;
+            letter-spacing: 1px;
+        }
+
+        .skill-name {
+            font-family: 'Cinzel', serif;
+            font-size: 1.15em;
+            color: var(--lightning);
+            margin-bottom: 8px;
+        }
+
+        .skill-type {
+            color: var(--text-dim);
+            font-size: 0.8em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        .support-gems {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .support-tag {
+            background: rgba(126, 184, 255, 0.1);
+            border: 1px solid rgba(126, 184, 255, 0.2);
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            color: var(--lightning);
+        }
+
+        .support-tag.empty {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px dashed rgba(255, 255, 255, 0.1);
+            color: var(--text-dim);
+            font-style: italic;
+        }
+
+        /* ── Meta Alert ── */
+        .meta-alert {
+            background: linear-gradient(135deg, rgba(201, 168, 76, 0.05) 0%, rgba(126, 184, 255, 0.05) 100%);
+            border: 1px solid rgba(201, 168, 76, 0.2);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+
+        .meta-alert h3 {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .meta-alert .alert-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 8px;
+            padding: 8px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 6px;
+        }
+
+        .meta-alert .priority {
+            color: var(--lightning);
+            font-weight: bold;
+            min-width: 20px;
+        }
+
+        .meta-alert .suggestion {
+            color: var(--text);
+            line-height: 1.5;
+        }
+
+        .meta-alert .suggestion strong { color: var(--gold); }
+
+        /* ═══════════════════════════════════════════════════════════
+           SKILL TREE / SYNERGY MAP STYLES
+           ═══════════════════════════════════════════════════════════ */
+
+        /* ── Legend ── */
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            font-size: 0.88em;
+            color: var(--text-dim);
+        }
+        .legend-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: 2px solid;
+        }
+        .legend-dot.lightning { background: rgba(126,184,255,0.2); border-color: var(--lightning); }
+        .legend-dot.physical  { background: rgba(224,85,85,0.2); border-color: var(--physical); }
+        .legend-dot.utility   { background: rgba(201,168,76,0.2); border-color: var(--utility); }
+        .legend-dot.support   { background: transparent; border-color: var(--text-dim); border-style: dashed; }
+        .legend-line {
+            width: 30px;
+            height: 3px;
+            border-radius: 2px;
+        }
+        .legend-line.active   { background: var(--gold); box-shadow: 0 0 6px var(--gold-glow); }
+        .legend-line.passive  { background: var(--text-dim); opacity: 0.5; }
+
+        /* ── Tree Canvas ── */
+        .tree-panel {
+            background: linear-gradient(135deg, var(--panel-bg) 0%, #0e0e16 100%);
+            border: 1px solid var(--panel-border);
+            border-radius: 14px;
+            padding: 15px;
+            margin-bottom: 25px;
+            position: relative;
+            overflow: hidden;
+        }
+        .tree-panel::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--gold-dim), transparent);
+            opacity: 0.6;
+        }
+        .tree-panel h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.2em;
+            color: var(--gold);
+            text-align: center;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+
+        .tree-svg {
+            width: 100%;
+            display: block;
+        }
+
+        /* ── SVG Node Styles ── */
+        .node-group { cursor: pointer; }
+        .node-group:hover .node-ring { opacity: 1; }
+
+        .node-ring {
+            fill: none;
+            stroke-width: 2;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .node-bg {
+            fill: rgba(10, 10, 15, 0.85);
+            stroke-width: 2;
+            transition: all 0.3s;
+        }
+        .node-group:hover .node-bg {
+            filter: brightness(1.3);
+        }
+
+        .node-icon {
+            font-size: 18px;
+            text-anchor: middle;
+            dominant-baseline: central;
+            pointer-events: none;
+        }
+
+        .node-label {
+            font-family: 'Cinzel', serif;
+            font-size: 10px;
+            fill: var(--text);
+            text-anchor: middle;
+            pointer-events: none;
+            letter-spacing: 0.5px;
+        }
+        .node-label-shadow {
+            font-family: 'Cinzel', serif;
+            font-size: 10px;
+            fill: none;
+            stroke: var(--dark-bg);
+            stroke-width: 3;
+            text-anchor: middle;
+            pointer-events: none;
+        }
+
+        .support-node-bg {
+            fill: rgba(10, 10, 15, 0.7);
+            stroke: var(--text-dim);
+            stroke-width: 1;
+            stroke-dasharray: 3 2;
+        }
+        .support-label {
+            font-family: 'Crimson Text', serif;
+            font-size: 8px;
+            fill: var(--text-dim);
+            text-anchor: middle;
+            pointer-events: none;
+        }
+
+        .connection-line {
+            stroke-width: 2.5;
+            fill: none;
+            opacity: 0.6;
+            transition: opacity 0.3s;
+        }
+        .connection-line.synergy {
+            stroke-width: 3;
+            opacity: 0.85;
+        }
+        .connection-line.recommended {
+            stroke-dasharray: 8 4;
+            stroke-width: 2.5;
+            opacity: 0.7;
+        }
+
+        .support-link {
+            stroke: var(--text-dim);
+            stroke-width: 1;
+            stroke-dasharray: 3 2;
+            opacity: 0.5;
+        }
+
+        /* ── Tooltip ── */
+        .tooltip {
+            position: fixed;
+            background: rgba(18, 18, 26, 0.96);
+            border: 1px solid var(--panel-border);
+            border-radius: 10px;
+            padding: 14px 18px;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.2s;
+            z-index: 100;
+            max-width: 320px;
+            backdrop-filter: blur(8px);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+        }
+        .tooltip.visible { opacity: 1; }
+        .tooltip-name {
+            font-family: 'Cinzel', serif;
+            font-size: 1.05em;
+            margin-bottom: 4px;
+        }
+        .tooltip-type {
+            font-size: 0.8em;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+        .tooltip-role {
+            font-size: 0.9em;
+            line-height: 1.4;
+            color: var(--text);
+            margin-bottom: 8px;
+        }
+        .tooltip-supports {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+        .tooltip-support-tag {
+            background: rgba(126, 184, 255, 0.1);
+            border: 1px solid rgba(126, 184, 255, 0.2);
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.75em;
+            color: var(--lightning);
+        }
+        .tooltip-support-tag.fire {
+            background: rgba(255, 107, 53, 0.1);
+            border-color: rgba(255, 107, 53, 0.2);
+            color: var(--fire);
+        }
+        .tooltip-support-tag.gold {
+            background: rgba(201, 168, 76, 0.1);
+            border-color: rgba(201, 168, 76, 0.2);
+            color: var(--gold);
+        }
+
+        /* ── Info Cards ── */
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+        .info-card {
+            background: var(--panel-bg);
+            border: 1px solid var(--panel-border);
+            border-radius: 12px;
+            padding: 20px;
+        }
+        .info-card h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.05em;
+            color: var(--gold);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .synergy-chain {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.92em;
+            line-height: 1.6;
+        }
+        .synergy-step {
+            background: rgba(126, 184, 255, 0.08);
+            border: 1px solid rgba(126, 184, 255, 0.15);
+            padding: 3px 10px;
+            border-radius: 14px;
+            color: var(--lightning);
+            white-space: nowrap;
+        }
+        .synergy-step.fire {
+            background: rgba(255, 107, 53, 0.08);
+            border-color: rgba(255, 107, 53, 0.15);
+            color: var(--fire);
+        }
+        .synergy-step.physical {
+            background: rgba(224, 85, 85, 0.08);
+            border-color: rgba(224, 85, 85, 0.15);
+            color: var(--physical);
+        }
+        .synergy-arrow { color: var(--text-dim); font-size: 1.1em; }
+
+        .rec-list {
+            list-style: none;
+        }
+        .rec-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+        .rec-list li:last-child { border-bottom: none; }
+        .rec-priority {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            font-weight: 700;
+            margin-right: 6px;
+        }
+        .rec-skill { color: var(--lightning); font-weight: 700; }
+        .rec-skill.fire { color: var(--fire); }
+        .rec-arrow { color: var(--text-dim); margin: 0 4px; }
+        .rec-suggested { color: var(--gold); font-weight: 700; }
+
+        /* ── Passive Skills Section ── */
+        .passive-section {
+            background: var(--panel-bg);
+            border: 1px solid var(--panel-border);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+
+        .passive-section h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3em;
+            color: var(--gold);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .passive-section h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.05em;
+            color: var(--gold);
+            margin-bottom: 10px;
+            margin-top: 18px;
+        }
+
+        .passive-subsection {
+            margin-bottom: 12px;
+        }
+
+        .passive-progress-bar-container {
+            margin-bottom: 20px;
+        }
+
+        .tag-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .keystone-tag {
+            background: rgba(201, 168, 76, 0.1);
+            border: 2px solid var(--gold);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-family: 'Cinzel', serif;
+            font-size: 0.95em;
+            color: var(--gold);
+            box-shadow: 0 0 12px rgba(201, 168, 76, 0.15);
+            letter-spacing: 0.5px;
+        }
+
+        .notable-tag {
+            background: rgba(201, 168, 76, 0.06);
+            border: 1px solid rgba(201, 168, 76, 0.4);
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.85em;
+            color: var(--gold);
+            letter-spacing: 0.5px;
+        }
+
+        .progress-fill.passive-path {
+            background: linear-gradient(90deg, #059669, #34d399);
+            box-shadow: 0 0 15px rgba(52, 211, 153, 0.3);
+        }
+
+        .synergy-section {
+            margin-bottom: 25px;
+        }
+
+        /* ── Pulse animation ── */
+        @keyframes pulse-glow {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 0.8; }
+        }
+        .node-primary-pulse {
+            animation: pulse-glow 3s ease-in-out infinite;
+        }
+
+        /* ── Footer ── */
+        .footer {
+            text-align: center;
+            padding: 30px 0;
+            border-top: 1px solid var(--panel-border);
+            margin-top: 30px;
+        }
+
+        .footer .brand {
+            font-family: 'Cinzel', serif;
+            color: var(--gold-dim);
+            font-size: 0.9em;
+            letter-spacing: 2px;
+        }
+
+        .footer .powered {
+            color: var(--text-dim);
+            font-size: 0.8em;
+            margin-top: 5px;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 60px;
+            color: var(--text-dim);
+            font-style: italic;
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 900px) {
+            .info-grid { grid-template-columns: 1fr; }
+            .header h1 { font-size: 1.8em; }
+        }
+        @media (max-width: 768px) {
+            .character-stats { grid-template-columns: repeat(2, 1fr); }
+            .skill-grid { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 600px) {
+            .container { padding: 10px; }
+            .legend { gap: 12px; }
+        }
+
+        /* ── Main Tab Bar ── */
+        .main-tab-bar {
+            display: flex;
+            gap: 4px;
+            padding: 6px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        .main-tab-btn {
+            flex: 1;
+            padding: 10px 16px;
+            border: 1px solid var(--panel-border);
+            border-radius: 8px;
+            background: transparent;
+            color: var(--text-dim);
+            font-family: 'Cinzel', serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .main-tab-btn:hover {
+            border-color: var(--gold-dim);
+            color: var(--gold);
+        }
+        .main-tab-btn.active {
+            background: rgba(201, 168, 76, 0.12);
+            border-color: var(--gold);
+            color: var(--gold);
+            box-shadow: 0 0 12px rgba(201, 168, 76, 0.2);
+        }
+        .tab-panel { display: none; }
+        .tab-panel.active { display: block; }
+
+        /* ── Passive Planner ── */
+        #panel-passive { padding: 0; }
+        #panel-passive .pp-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 16px;
+            background: var(--panel-bg);
+            border: 1px solid var(--panel-border);
+            border-radius: 10px;
+            margin-bottom: 8px;
+            flex-wrap: wrap;
+        }
+        #panel-passive .pp-header .pp-pts-wrap {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+        }
+        #panel-passive .pp-header .pp-pts-label { color: #999; }
+        #panel-passive .pp-header .pp-pts-count { color: var(--gold); font-weight: 700; font-size: 14px; }
+        #panel-passive .pp-header .pp-pts-count.warn { color: #ff6b6b; }
+        #panel-passive .pp-header .pp-pts-input {
+            width: 42px;
+            background: #1a1a2a;
+            border: 1px solid #2a2a3a;
+            color: var(--text);
+            text-align: center;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-size: 13px;
+        }
+        #panel-passive .pp-progress-wrap {
+            width: 120px;
+            height: 8px;
+            background: #1a1a2a;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        #panel-passive .pp-progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--gold), var(--lightning));
+            border-radius: 4px;
+            transition: width .3s;
+        }
+        #panel-passive .pp-btn {
+            background: #1a1a2a;
+            border: 1px solid #2a2a3a;
+            color: var(--text);
+            padding: 5px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            white-space: nowrap;
+            transition: all .15s;
+        }
+        #panel-passive .pp-btn:hover {
+            background: #24243a;
+            border-color: var(--gold);
+        }
+        #panel-passive .pp-btn.gold {
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+        #panel-passive .pp-btn.gold:hover {
+            background: rgba(201,168,76,.15);
+        }
+        #panel-passive .pp-spacer { flex: 1; }
+
+        #panel-passive .pp-main {
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--panel-border);
+            border-radius: 10px;
+            background: #0a0a12;
+        }
+        #panel-passive .pp-canvas-wrap {
+            width: 100%;
+            height: calc(100vh - 310px);
+            position: relative;
+            overflow: hidden;
+        }
+        #panel-passive .pp-canvas-wrap canvas {
+            display: block;
+            cursor: grab;
+        }
+        #panel-passive .pp-canvas-wrap canvas.dragging {
+            cursor: grabbing;
+        }
+        #panel-passive .pp-zoom-controls {
+            position: absolute;
+            bottom: 12px;
+            right: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            z-index: 5;
+        }
+        #panel-passive .pp-zoom-btn {
+            width: 32px;
+            height: 32px;
+            background: rgba(18,18,26,.85);
+            border: 1px solid #2a2a3a;
+            color: var(--text);
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #panel-passive .pp-zoom-btn:hover {
+            border-color: var(--gold);
+        }
+        #panel-passive .pp-info-panel {
+            background: var(--panel-bg);
+            border-top: 1px solid #1e1e2e;
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+            gap: 16px;
+            border-radius: 0 0 10px 10px;
+        }
+        #panel-passive .pp-node-detail { flex: 1; min-width: 0; }
+        #panel-passive .pp-node-detail .nd-name {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            font-size: 15px;
+            margin-bottom: 2px;
+        }
+        #panel-passive .pp-node-detail .nd-type {
+            font-size: 11px;
+            color: #888;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        #panel-passive .pp-node-detail .nd-desc {
+            font-size: 13px;
+            color: var(--text);
+        }
+        #panel-passive .pp-node-detail .nd-empty {
+            color: #555;
+            font-style: italic;
+            font-size: 13px;
+        }
+        #panel-passive .pp-info-btns { display: flex; gap: 8px; flex-shrink: 0; }
+        #panel-passive .pp-toast {
+            position: fixed;
+            top: 16px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(201,168,76,.92);
+            color: #0a0a12;
+            padding: 8px 20px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity .25s;
+            z-index: 100;
+        }
+        #panel-passive .pp-toast.show { opacity: 1; }
+        #panel-passive .pp-import-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,.6);
+            z-index: 200;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+        #panel-passive .pp-import-overlay.open { display: flex; }
+        #panel-passive .pp-import-modal {
+            background: var(--panel-bg);
+            border: 1px solid #2a2a3a;
+            border-radius: 8px;
+            padding: 20px;
+            width: 420px;
+            max-width: 90vw;
+        }
+        #panel-passive .pp-import-modal h2 {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            font-size: 15px;
+            margin-bottom: 10px;
+        }
+        #panel-passive .pp-import-modal textarea {
+            width: 100%;
+            height: 80px;
+            background: #1a1a2a;
+            border: 1px solid #2a2a3a;
+            color: var(--text);
+            padding: 8px;
+            border-radius: 4px;
+            resize: vertical;
+            font-size: 13px;
+            font-family: monospace;
+        }
+        #panel-passive .pp-modal-btns {
+            display: flex;
+            gap: 8px;
+            margin-top: 10px;
+            justify-content: flex-end;
+        }
+        #panel-passive .pp-sep {
+            width: 1px;
+            height: 24px;
+            background: #2a2a3a;
+        }
+
+        /* ── Enhanced Import/Export Modal ── */
+        #panel-passive .pp-import-modal {
+            width: 560px;
+            max-width: 94vw;
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+        #panel-passive .pp-import-modal h2 {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            font-size: 16px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        #panel-passive .pp-modal-tabs {
+            display: flex;
+            gap: 2px;
+            margin-bottom: 14px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 6px;
+            padding: 3px;
+        }
+        #panel-passive .pp-modal-tab {
+            flex: 1;
+            padding: 7px 10px;
+            border: 1px solid transparent;
+            border-radius: 4px;
+            background: transparent;
+            color: var(--text-dim);
+            font-family: 'Cinzel', serif;
+            font-size: 11px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.15s;
+            white-space: nowrap;
+        }
+        #panel-passive .pp-modal-tab:hover {
+            color: var(--gold);
+        }
+        #panel-passive .pp-modal-tab.active {
+            background: rgba(201,168,76,0.12);
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+        #panel-passive .pp-tab-content {
+            display: none;
+        }
+        #panel-passive .pp-tab-content.active {
+            display: block;
+        }
+        #panel-passive .pp-tab-content textarea {
+            width: 100%;
+            height: 90px;
+            background: #1a1a2a;
+            border: 1px solid #2a2a3a;
+            color: var(--text);
+            padding: 10px;
+            border-radius: 4px;
+            resize: vertical;
+            font-size: 13px;
+            font-family: monospace;
+        }
+        #panel-passive .pp-tab-content textarea:focus {
+            border-color: var(--gold-dim);
+            outline: none;
+        }
+        #panel-passive .pp-tab-hint {
+            font-size: 11px;
+            color: var(--text-dim);
+            margin-bottom: 8px;
+            line-height: 1.5;
+        }
+        #panel-passive .pp-match-status {
+            margin-top: 8px;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            line-height: 1.5;
+            display: none;
+        }
+        #panel-passive .pp-match-status.show { display: block; }
+        #panel-passive .pp-match-status.success {
+            background: rgba(68,255,136,0.08);
+            border: 1px solid rgba(68,255,136,0.25);
+            color: #44ff88;
+        }
+        #panel-passive .pp-match-status.warn {
+            background: rgba(255,165,0,0.08);
+            border: 1px solid rgba(255,165,0,0.25);
+            color: #ffa500;
+        }
+        #panel-passive .pp-match-status.error {
+            background: rgba(255,68,68,0.08);
+            border: 1px solid rgba(255,68,68,0.25);
+            color: #ff4444;
+        }
+        #panel-passive .pp-file-drop {
+            border: 2px dashed #2a2a3a;
+            border-radius: 6px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-bottom: 10px;
+            background: rgba(0,0,0,0.2);
+        }
+        #panel-passive .pp-file-drop:hover {
+            border-color: var(--gold-dim);
+            background: rgba(201,168,76,0.04);
+        }
+        #panel-passive .pp-file-drop.dragover {
+            border-color: var(--gold);
+            background: rgba(201,168,76,0.08);
+        }
+        #panel-passive .pp-file-drop .pp-file-icon {
+            font-size: 24px;
+            margin-bottom: 6px;
+        }
+        #panel-passive .pp-file-drop .pp-file-label {
+            font-size: 12px;
+            color: var(--text-dim);
+        }
+        #panel-passive .pp-file-drop .pp-file-or {
+            font-size: 11px;
+            color: #555;
+            margin: 8px 0;
+        }
+        #panel-passive .pp-site-guide {
+            margin-bottom: 12px;
+        }
+        #panel-passive .pp-site-card {
+            background: rgba(0,0,0,0.2);
+            border: 1px solid #2a2a3a;
+            border-radius: 6px;
+            padding: 12px;
+            margin-bottom: 8px;
+        }
+        #panel-passive .pp-site-card h4 {
+            font-family: 'Cinzel', serif;
+            font-size: 12px;
+            color: var(--lightning);
+            margin-bottom: 5px;
+        }
+        #panel-passive .pp-site-card a {
+            color: var(--gold);
+            text-decoration: none;
+            font-size: 11px;
+        }
+        #panel-passive .pp-site-card a:hover {
+            text-decoration: underline;
+        }
+        #panel-passive .pp-site-card .pp-site-steps {
+            font-size: 11px;
+            color: var(--text-dim);
+            line-height: 1.6;
+            margin-top: 4px;
+        }
+
+        /* Export modal specifics */
+        #panel-passive .pp-export-modal {
+            width: 560px;
+            max-width: 94vw;
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+        #panel-passive .pp-export-modal h2 {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            font-size: 16px;
+            margin-bottom: 12px;
+        }
+        #panel-passive .pp-export-textarea {
+            width: 100%;
+            height: 100px;
+            background: #1a1a2a;
+            border: 1px solid #2a2a3a;
+            color: var(--text);
+            padding: 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-family: monospace;
+            resize: vertical;
+            margin-top: 8px;
+        }
+        #panel-passive .pp-export-json {
+            width: 100%;
+            height: 160px;
+            background: #1a1a2a;
+            border: 1px solid #2a2a3a;
+            color: var(--lightning);
+            padding: 10px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-family: monospace;
+            resize: vertical;
+            margin-top: 8px;
+        }
+        #panel-passive .pp-export-link {
+            width: 100%;
+            background: #1a1a2a;
+            border: 1px solid #2a2a3a;
+            color: var(--gold);
+            padding: 8px 10px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-family: monospace;
+            margin-top: 8px;
+            word-break: break-all;
+        }
+        #panel-passive .pp-copy-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 6px 14px;
+            background: rgba(201,168,76,0.1);
+            border: 1px solid var(--gold-dim);
+            color: var(--gold);
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            margin-top: 8px;
+            transition: all 0.15s;
+        }
+        #panel-passive .pp-copy-btn:hover {
+            background: rgba(201,168,76,0.2);
+            border-color: var(--gold);
+        }
+        #panel-passive .pp-download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 6px 14px;
+            background: rgba(126,184,255,0.1);
+            border: 1px solid rgba(126,184,255,0.3);
+            color: var(--lightning);
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            margin-top: 8px;
+            transition: all 0.15s;
+        }
+        #panel-passive .pp-download-btn:hover {
+            background: rgba(126,184,255,0.2);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container" id="app">
+        <div class="header">
+            <a href="../hub.html" style="position:absolute;top:16px;left:16px;text-decoration:none;color:var(--text-dim);font-size:0.85em;padding:6px 12px;border:1px solid var(--panel-border);border-radius:6px;transition:all 0.2s;" onmouseover="this.style.borderColor='var(--gold)';this.style.color='var(--gold)'" onmouseout="this.style.borderColor='var(--panel-border)';this.style.color='var(--text-dim)'">🏠 Hub</a>
+            <h1>GENTECH DASHBOARD</h1>
+            <div class="subtitle">Data Dashboard</div>
+        </div>
+
+        <!-- Tab Bar -->
+        <div class="main-tab-bar">
+            <button class="main-tab-btn active" onclick="switchTab('build')">📊 Build</button>
+            <button class="main-tab-btn" onclick="switchTab('passive')">🌳 Passive Tree</button>
+        </div>
+
+        <!-- Build Tab -->
+        <div class="tab-panel active" id="panel-build">
+            <div class="loading" id="main-loading">⚡ Loading data...</div>
+            <div id="dashboard-content" style="display:none;"></div>
+        </div>
+
+        <!-- Passive Planner Tab -->
+        <div class="tab-panel" id="panel-passive" style="display:none;">
+            <div id="passive-planner-root">
+                <!-- Toolbar -->
+                <div class="pp-header">
+                    <div class="pp-pts-wrap">
+                        <span class="pp-pts-label">Points:</span>
+                        <span class="pp-pts-count" id="pp-pts-count">0</span>
+                        <span class="pp-pts-label">/</span>
+                        <input type="number" class="pp-pts-input" id="pp-pts-input" value="123" min="0" max="999">
+                        <span class="pp-pts-label">Available</span>
+                    </div>
+                    <div class="pp-progress-wrap"><div class="pp-progress-bar" id="pp-progress-bar" style="width:0%"></div></div>
+                    <div class="pp-spacer"></div>
+                    <button class="pp-btn" onclick="ppOpenImport()">📥 Import</button>
+                    <button class="pp-btn gold" onclick="ppOpenExport()">📤 Export</button>
+                    <button class="pp-btn" onclick="ppResetBuild()">🔄 Reset</button>
+                    <button class="pp-btn" onclick="ppFitTree()">⊞ Fit View</button>
+                </div>
+                <!-- Canvas -->
+                <div class="pp-main">
+                    <div class="pp-canvas-wrap" id="pp-canvas-wrap">
+                        <canvas id="pp-tree-canvas"></canvas>
+                        <div class="pp-zoom-controls">
+                            <button class="pp-zoom-btn" onclick="ppZoomBy(1.2)">+</button>
+                            <button class="pp-zoom-btn" onclick="ppZoomBy(1/1.2)">−</button>
+                        </div>
+                    </div>
+                    <div class="pp-info-panel">
+                        <div class="pp-node-detail" id="pp-node-detail"><div class="nd-empty">Hover over a node to see details</div></div>
+                        <div class="pp-info-btns">
+                            <button class="pp-btn gold" onclick="ppSaveToStorage()">💾 Save</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Toast -->
+                <div class="pp-toast" id="pp-toast"></div>
+                <!-- Import Modal (Enhanced) -->
+                <div class="pp-import-overlay" id="pp-import-overlay">
+                    <div class="pp-import-modal">
+                        <h2>📥 Import Build</h2>
+                        <div class="pp-modal-tabs" id="pp-import-tabs">
+                            <button class="pp-modal-tab active" data-tab="names" onclick="ppSwitchImportTab('names')">Names</button>
+                            <button class="pp-modal-tab" data-tab="build" onclick="ppSwitchImportTab('build')">&lt;.build&gt; File</button>
+                            <button class="pp-modal-tab" data-tab="guide" onclick="ppSwitchImportTab('guide')">From Website</button>
+                        </div>
+
+                        <!-- Tab 1: Node Names -->
+                        <div class="pp-tab-content active" id="pp-tab-names">
+                            <div class="pp-tab-hint">Paste node names separated by commas. Names are matched fuzzy — case-insensitive, partial match.</div>
+                            <textarea id="pp-import-text" placeholder="Lightning Damage, Storm Mastery, Cold Penetration, Herald of Ice"></textarea>
+                            <div class="pp-match-status" id="pp-names-match-status"></div>
+                            <div class="pp-modal-btns">
+                                <button class="pp-btn" onclick="ppCloseImport()">Cancel</button>
+                                <button class="pp-btn gold" onclick="ppPreviewNames()">Preview Match</button>
+                                <button class="pp-btn gold" onclick="ppDoImportNames()">Import</button>
+                            </div>
+                        </div>
+
+                        <!-- Tab 2: .build File -->
+                        <div class="pp-tab-content" id="pp-tab-build">
+                            <div class="pp-file-drop" id="pp-file-drop">
+                                <div class="pp-file-icon">📁</div>
+                                <div class="pp-file-label">Drop a .build file here, or click to browse</div>
+                                <div class="pp-file-or">— or paste JSON below —</div>
+                                <input type="file" id="pp-file-input" accept=".json,.build,.txt" style="display:none" onchange="ppHandleBuildFile(event)">
+                            </div>
+                            <textarea id="pp-import-json" placeholder='Paste .build JSON here...\n\n{\n  "name": "My Build",\n  "passiveTree": {\n    "allocated": ["Node1", "Node2"]\n  }\n}'></textarea>
+                            <div class="pp-match-status" id="pp-build-match-status"></div>
+                            <div class="pp-modal-btns">
+                                <button class="pp-btn" onclick="ppCloseImport()">Cancel</button>
+                                <button class="pp-btn gold" onclick="ppPreviewBuild()">Preview Match</button>
+                                <button class="pp-btn gold" onclick="ppDoImportBuild()">Import</button>
+                            </div>
+                        </div>
+
+                        <!-- Tab 3: From Website -->
+                        <div class="pp-tab-content" id="pp-tab-guide">
+                            <div class="pp-site-guide">
+                                <div class="pp-site-card">
+                                    <h4>📋 Maxroll.gg</h4>
+                                    <div class="pp-site-steps">
+                                        Open the build guide → click Passives tab → click Export → copy the node list → paste in the <strong style="color:var(--gold)">Names</strong> tab
+                                    </div>
+                                    <a href="https://maxroll.gg/poe2/planner" target="_blank">→ Open Maxroll POE2 Planner</a>
+                                </div>
+                                <div class="pp-site-card">
+                                    <h4>📋 poeplanner.com</h4>
+                                    <div class="pp-site-steps">
+                                        Open your build → click Export → copy the URL or text → paste in <strong style="color:var(--gold)">Names</strong> or <strong style="color:var(--gold)">&lt;.build&gt; File</strong> tab
+                                    </div>
+                                    <a href="https://poeplanner.com" target="_blank">→ Open POE Planner</a>
+                                </div>
+                                <div class="pp-site-card">
+                                    <h4>📋 poe.ninja</h4>
+                                    <div class="pp-site-steps">
+                                        Open the build → click Passive Tree → screenshot or note the node names → paste in the <strong style="color:var(--gold)">Names</strong> tab
+                                    </div>
+                                    <a href="https://poe.ninja/poe2/builds" target="_blank">→ Open poe.ninja POE2 Builds</a>
+                                </div>
+                                <div class="pp-site-card">
+                                    <h4>📋 mobalytics.gg</h4>
+                                    <div class="pp-site-steps">
+                                        Open the build → click Passive Tree → Export → paste in the <strong style="color:var(--gold)">&lt;.build&gt; File</strong> tab
+                                    </div>
+                                    <a href="https://mobalytics.gg/poe2/builds" target="_blank">→ Open Mobalytics POE2 Builds</a>
+                                </div>
+                                <div class="pp-site-card">
+                                    <h4>📋 Any .build File</h4>
+                                    <div class="pp-site-steps">
+                                        Export a .build file from any POE2 build planner (GGG format) → upload or paste in the <strong style="color:var(--gold)">&lt;.build&gt; File</strong> tab. Nodes that match by name will be allocated; others are listed as unmatched.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pp-modal-btns">
+                                <button class="pp-btn" onclick="ppCloseImport()">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Export Modal -->
+                <div class="pp-import-overlay" id="pp-export-overlay">
+                    <div class="pp-export-modal">
+                        <h2>📤 Export Build</h2>
+                        <div class="pp-modal-tabs" id="pp-export-tabs">
+                            <button class="pp-modal-tab active" data-tab="enames" onclick="ppSwitchExportTab('enames')">Names</button>
+                            <button class="pp-modal-tab" data-tab="summary" onclick="ppSwitchExportTab('summary')">Summary</button>
+                            <button class="pp-modal-tab" data-tab="ebuild" onclick="ppSwitchExportTab('ebuild')">&lt;.build&gt; JSON</button>
+                            <button class="pp-modal-tab" data-tab="link" onclick="ppSwitchExportTab('link')">Share Link</button>
+                        </div>
+
+                        <!-- Export Tab 1: Node Names -->
+                        <div class="pp-tab-content active" id="pp-tab-enames">
+                            <div class="pp-tab-hint">Comma-separated node names. Copy and paste anywhere.</div>
+                            <textarea class="pp-export-textarea" id="pp-export-names" readonly></textarea>
+                            <button class="pp-copy-btn" onclick="ppCopyExport('pp-export-names')">📋 Copy to Clipboard</button>
+                        </div>
+
+                        <!-- Export Tab 2: Build Summary -->
+                        <div class="pp-tab-content" id="pp-tab-summary">
+                            <div class="pp-tab-hint">Formatted build summary for sharing.</div>
+                            <textarea class="pp-export-textarea" id="pp-export-summary" readonly style="height:220px"></textarea>
+                            <button class="pp-copy-btn" onclick="ppCopyExport('pp-export-summary')">📋 Copy to Clipboard</button>
+                        </div>
+
+                        <!-- Export Tab 3: .build JSON -->
+                        <div class="pp-tab-content" id="pp-tab-ebuild">
+                            <div class="pp-tab-hint">Official GGG .build JSON format. Compatible with POE2 build planners.</div>
+                            <textarea class="pp-export-json" id="pp-export-json" readonly></textarea>
+                            <button class="pp-copy-btn" onclick="ppCopyExport('pp-export-json')">📋 Copy JSON</button>
+                            <button class="pp-download-btn" onclick="ppDownloadBuild()">💾 Download .build File</button>
+                        </div>
+
+                        <!-- Export Tab 4: Shareable Link -->
+                        <div class="pp-tab-content" id="pp-tab-link">
+                            <div class="pp-tab-hint">Shareable URL — anyone who opens this link will see your build.</div>
+                            <div class="pp-export-link" id="pp-export-link"></div>
+                            <button class="pp-copy-btn" onclick="ppCopyLink()">📋 Copy Link</button>
+                        </div>
+
+                        <div class="pp-modal-btns" style="margin-top:12px">
+                            <button class="pp-btn" onclick="ppCloseExport()">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <div class="brand">GENTECH DASHBOARD</div>
+            <div class="powered">Data Dashboard v0.1</div>
+        </div>
+    </div>
+
+    <!-- Tooltip (shared by skill tree nodes) -->
+    <div class="tooltip" id="tooltip"></div>
+
+    <script>
+        // ═══════════════════════════════════════════════════════════
+        //  BUILD DATA
+        // ═══════════════════════════════════════════════════════════
+        const DATA_URLS = {
+            monk: 'poe2-monk.json?v=' + Date.now(),
+            warrior: 'poe2-warrior.json?v=' + Date.now()
+        };
+        let currentBuildData = null;
+        let allCharacters = [];
+        let currentCharIndex = 0;
+
+        async function loadBuild() {
+            try {
+                const res = await fetch(DATA_URLS.monk);
+                const raw = await res.json();
+                // Support both old flat format and new characters array format
+                if (raw.characters) {
+                    allCharacters = raw.characters;
+                    currentBuildData = raw.characters[0];
+                } else {
+                    allCharacters = [raw];
+                    currentBuildData = raw;
+                }
+                renderDashboard(currentBuildData);
+            } catch (err) {
+                document.getElementById('main-loading').innerHTML = `
+                    ⚠️ Could not load build data. Make sure poe2-monk.json exists.
+                `;
+            }
+        }
+
+        function switchCharacter(index) {
+            currentCharIndex = index;
+            currentBuildData = allCharacters[index];
+            renderDashboard(currentBuildData);
+        }
+
+        // ═══════════════════════════════════════════════════════════
+        //  RENDER DASHBOARD (single scrollable view)
+        // ═══════════════════════════════════════════════════════════
+        function renderDashboard(data) {
+            const { player, progress, skills, upgrades, lastUpdated, alias, class: charClass, build, act, mission, passiveSkills, level, league } = data;
+            const suggestions = upgrades || [];
+            const playerName = typeof player === 'string' ? player : player.name;
+
+            // ── Character selector ──
+            const charSelector = allCharacters.length > 1 ? `
+                <div class="char-selector">
+                    ${allCharacters.map((c, i) => {
+                        const name = typeof c.player === 'string' ? c.player : c.player.name;
+                        const isActive = i === currentCharIndex;
+                        return `<button class="char-btn ${isActive ? 'active' : ''}" onclick="switchCharacter(${i})">${c.alias || c.class || name}</button>`;
+                    }).join('')}
+                </div>
+            ` : '';
+
+            // ── Skills grid ──
+            const skillsHTML = skills.map(skill => `
+                <div class="skill-card ${skill.primary ? 'primary' : ''}">
+                    <div class="skill-name">${skill.name}</div>
+                    <div class="skill-type">${skill.type}</div>
+                    <div class="support-gems">
+                        ${skill.supports.length > 0
+                            ? skill.supports.map(s => `<span class="support-tag">${s}</span>`).join('')
+                            : '<span class="support-tag empty">No supports yet</span>'
+                        }
+                    </div>
+                </div>
+            `).join('');
+
+            // ── Suggestions ──
+            const suggestionsHTML = suggestions.map(s => `
+                <div class="alert-item">
+                    <span class="priority">${s.priority}.</span>
+                    <span class="suggestion">
+                        <strong>${s.skill}:</strong> ${s.current} → <strong>${s.suggested}</strong> — ${s.reason}
+                    </span>
+                </div>
+            `).join('');
+
+            const manaSkill = skills.find(s => s.name === 'Mana Drain');
+
+            // ── Passive Skills Section ──
+            let passiveHTML = '';
+            if (passiveSkills) {
+                const ps = passiveSkills;
+                const allocatedPercent = Math.round((ps.allocated / ps.total) * 100);
+
+                // Keystone tags (gold-bordered)
+                const keystoneTags = ps.keystones.length > 0
+                    ? ps.keystones.map(k => `<span class="keystone-tag">${k}</span>`).join('')
+                    : '<span style="color:var(--text-dim); font-style:italic; font-size:0.9em;">None allocated yet</span>';
+
+                // Notable tags (smaller gold)
+                const notableTags = ps.notableNodes.length > 0
+                    ? ps.notableNodes.map(n => `<span class="notable-tag">${n}</span>`).join('')
+                    : '<span style="color:var(--text-dim); font-style:italic; font-size:0.9em;">None allocated yet</span>';
+
+                // Core stats
+                const statLabels = {
+                    lightningDamage: 'Lightning Damage',
+                    fireDamage: 'Fire Damage',
+                    critChance: 'Crit Chance',
+                    attackSpeed: 'Attack Speed',
+                    castSpeed: 'Cast Speed',
+                    manaRegen: 'Mana Regen'
+                };
+                const coreStatsHTML = Object.entries(ps.coreStats).map(([key, val]) => `
+                    <div class="stat-box">
+                        <div class="label">${statLabels[key] || key}</div>
+                        <div class="value">${val}%</div>
+                    </div>
+                `).join('');
+
+                // Pathways
+                const pathwaysHTML = ps.pathways.map(pw => {
+                    const pct = pw.points > 0 ? Math.round((pw.allocated ? pw.points : 0) / pw.points * 100) : 0;
+                    const allocatedPts = pw.allocated ? pw.points : 0;
+                    return `
+                        <div class="progress-bar-container">
+                            <div class="progress-label">
+                                <span class="name">${pw.name} ${pw.allocated ? '' : '(planned)'}</span>
+                                <span class="percent">${allocatedPts}/${pw.points}</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill passive-path" style="width: 0%" data-target="${pct}"></div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+
+                passiveHTML = `
+                    <div class="passive-section">
+                        <h2>🌳 Passive Skills <span style="font-size:0.7em; color:var(--text-dim); font-family:'Crimson Text',serif;">(${ps.allocated}/${ps.total} points)</span></h2>
+                        <div class="passive-progress-bar-container">
+                            <div class="progress-label">
+                                <span class="name">Passive Tree</span>
+                                <span class="percent">${allocatedPercent}%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill passive-path" style="width: 0%" data-target="${allocatedPercent}"></div>
+                            </div>
+                        </div>
+                        <div class="passive-subsection">
+                            <h3>⚡ Keystones</h3>
+                            <div class="tag-row">${keystoneTags}</div>
+                        </div>
+                        <div class="passive-subsection">
+                            <h3>✨ Notable Nodes</h3>
+                            <div class="tag-row">${notableTags}</div>
+                        </div>
+                        <div class="passive-subsection">
+                            <h3>📊 Core Stats</h3>
+                            <div class="character-stats">${coreStatsHTML}</div>
+                        </div>
+                        <div class="passive-subsection">
+                            <h3>🛤️ Pathways</h3>
+                            ${pathwaysHTML}
+                        </div>
+                    </div>
+                `;
+            }
+
+            // ── Skill Synergy Map (embedded inline) ──
+            const synergyMapHTML = `
+                <div class="synergy-section">
+                    <div class="legend">
+                        <div class="legend-item"><div class="legend-dot lightning"></div> Lightning</div>
+                        <div class="legend-item"><div class="legend-dot physical"></div> Physical</div>
+                        <div class="legend-item"><div class="legend-dot utility"></div> Utility / Mana</div>
+                        <div class="legend-item"><div class="legend-line active"></div> Active Synergy</div>
+                        <div class="legend-item"><div class="legend-line passive"></div> Connection</div>
+                        <div class="legend-item"><div class="legend-dot support"></div> Support Gem</div>
+                    </div>
+
+                    <div class="tree-panel">
+                        <h2>⚡ ${alias || charClass} — ${build} · Skill Synergy Map</h2>
+                        <svg class="tree-svg" viewBox="0 0 1100 620" xmlns="http://www.w3.org/2000/svg" id="skill-tree-svg">
+                            <defs>
+                                <filter id="glow-blue">
+                                    <feGaussianBlur stdDeviation="4" result="blur"/>
+                                    <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                                </filter>
+                                <filter id="glow-gold">
+                                    <feGaussianBlur stdDeviation="4" result="blur"/>
+                                    <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                                </filter>
+                                <filter id="glow-red">
+                                    <feGaussianBlur stdDeviation="3" result="blur"/>
+                                    <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                                </filter>
+                                <marker id="arrow-gold" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="8" markerHeight="6" orient="auto">
+                                    <polygon points="0 0, 10 3.5, 0 7" fill="var(--gold)" opacity="0.6"/>
+                                </marker>
+                                <marker id="arrow-blue" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="8" markerHeight="6" orient="auto">
+                                    <polygon points="0 0, 10 3.5, 0 7" fill="var(--lightning)" opacity="0.5"/>
+                                </marker>
+                            </defs>
+
+                            <!-- Connections / Synergy Lines -->
+                            <g id="synergy-links">
+                                <line x1="550" y1="140" x2="350" y2="260" class="connection-line synergy" stroke="var(--lightning)" marker-end="url(#arrow-blue)" filter="url(#glow-blue)"/>
+                                <line x1="350" y1="260" x2="550" y2="350" class="connection-line synergy" stroke="var(--lightning)" marker-end="url(#arrow-blue)" filter="url(#glow-blue)"/>
+                                <line x1="590" y1="140" x2="800" y2="260" class="connection-line synergy" stroke="var(--lightning)" marker-end="url(#arrow-blue)" filter="url(#glow-blue)"/>
+                                <line x1="590" y1="350" x2="780" y2="370" class="connection-line" stroke="var(--lightning)" opacity="0.5"/>
+                                <line x1="820" y1="410" x2="820" y2="490" class="connection-line" stroke="var(--utility)" opacity="0.5"/>
+                                <line x1="190" y1="440" x2="190" y2="530" class="connection-line synergy" stroke="var(--utility)" stroke-dasharray="6 3" opacity="0.7"/>
+                                <line x1="350" y1="490" x2="510" y2="170" class="connection-line recommended" stroke="var(--gold)" opacity="0.5"/>
+                                <line x1="310" y1="490" x2="390" y2="490" class="connection-line" stroke="var(--text-dim)" opacity="0.35"/>
+                                <line x1="550" y1="95" x2="350" y2="195" class="connection-line recommended" stroke="var(--gold)" opacity="0.4" stroke-dasharray="5 4" marker-end="url(#arrow-gold)"/>
+                            </g>
+
+                            <!-- ─── NODES ─── -->
+                            <g class="node-group" data-skill="0" transform="translate(550, 125)">
+                                <circle class="node-ring" r="32" stroke="var(--lightning)" filter="url(#glow-blue)"/>
+                                <circle class="node-primary-pulse" r="28" fill="none" stroke="var(--lightning)" stroke-width="1.5" opacity="0.4"/>
+                                <circle class="node-bg" r="24" stroke="var(--lightning)"/>
+                                <text class="node-icon" dy="1">⚡</text>
+                                <text class="node-label-shadow" y="-32">Tempest Flurry</text>
+                                <text class="node-label" y="-32" fill="var(--lightning)">Tempest Flurry</text>
+                                <text y="36" text-anchor="middle" font-size="8" fill="var(--gold)" font-family="Cinzel">PRIMARY</text>
+                            </g>
+                            <g class="node-group" data-skill="1" transform="translate(350, 260)">
+                                <circle class="node-ring" r="28" stroke="var(--lightning)" filter="url(#glow-blue)"/>
+                                <circle class="node-bg" r="22" stroke="var(--lightning)"/>
+                                <text class="node-icon" dy="1">🌩️</text>
+                                <text class="node-label-shadow" y="-30">Falling Thunder</text>
+                                <text class="node-label" y="-30">Falling Thunder</text>
+                            </g>
+                            <g class="node-group" data-skill="2" transform="translate(550, 350)">
+                                <circle class="node-ring" r="28" stroke="var(--lightning)" filter="url(#glow-blue)"/>
+                                <circle class="node-primary-pulse" r="24" fill="none" stroke="var(--lightning)" stroke-width="1.5" opacity="0.4"/>
+                                <circle class="node-bg" r="22" stroke="var(--lightning)"/>
+                                <text class="node-icon" dy="1">⛈️</text>
+                                <text class="node-label-shadow" y="-30">Thunderstorm</text>
+                                <text class="node-label" y="-30">Thunderstorm</text>
+                            </g>
+                            <g class="node-group" data-skill="3" transform="translate(800, 370)">
+                                <circle class="node-ring" r="28" stroke="var(--lightning)" filter="url(#glow-blue)"/>
+                                <circle class="node-bg" r="22" stroke="var(--lightning)"/>
+                                <text class="node-icon" dy="1">🌀</text>
+                                <text class="node-label-shadow" y="-30">Orb of Storms</text>
+                                <text class="node-label" y="-30">Orb of Storms</text>
+                            </g>
+                            <g class="node-group" data-skill="4" transform="translate(820, 500)">
+                                <circle class="node-ring" r="26" stroke="var(--utility)"/>
+                                <circle class="node-bg" r="20" stroke="var(--utility)"/>
+                                <text class="node-icon" dy="1">🔔</text>
+                                <text class="node-label-shadow" y="-28">Tempest Bell</text>
+                                <text class="node-label" y="-28">Tempest Bell</text>
+                            </g>
+                            <g class="node-group" data-skill="5" transform="translate(190, 440)">
+                                <circle class="node-ring" r="26" stroke="var(--utility)"/>
+                                <circle class="node-bg" r="20" stroke="var(--utility)"/>
+                                <text class="node-icon" dy="1">💧</text>
+                                <text class="node-label-shadow" y="-28">Mana Drain</text>
+                                <text class="node-label" y="-28">Mana Drain</text>
+                            </g>
+                            <g class="node-group" data-skill="6" transform="translate(350, 490)">
+                                <circle class="node-ring" r="26" stroke="var(--utility)"/>
+                                <circle class="node-bg" r="20" stroke="var(--utility)"/>
+                                <text class="node-icon" dy="1">🤚</text>
+                                <text class="node-label-shadow" y="-28">Killing Palm</text>
+                                <text class="node-label" y="-28">Killing Palm</text>
+                            </g>
+                            <g class="node-group" data-skill="7" transform="translate(220, 490)">
+                                <circle class="node-ring" r="26" stroke="var(--utility)"/>
+                                <circle class="node-bg" r="20" stroke="var(--utility)"/>
+                                <text class="node-icon" dy="1">🛡️</text>
+                                <text class="node-label-shadow" y="-28">Parry</text>
+                                <text class="node-label" y="-28">Parry</text>
+                            </g>
+                            <g class="node-group" data-skill="8" transform="translate(800, 260)">
+                                <circle class="node-ring" r="28" stroke="var(--lightning)" filter="url(#glow-blue)"/>
+                                <circle class="node-bg" r="22" stroke="var(--lightning)"/>
+                                <text class="node-icon" dy="1">⚡</text>
+                                <text class="node-label-shadow" y="-30">Herald of Thunder</text>
+                                <text class="node-label" y="-30" fill="var(--lightning)">Herald of Thunder</text>
+                            </g>
+                            <g class="node-group" data-skill="9" transform="translate(190, 540)">
+                                <circle class="node-ring" r="26" stroke="var(--utility)"/>
+                                <circle class="node-bg" r="20" stroke="var(--utility)"/>
+                                <text class="node-icon" dy="1">✨</text>
+                                <text class="node-label-shadow" y="-28">Mana Remnants</text>
+                                <text class="node-label" y="-28">Mana Remnants</text>
+                            </g>
+
+                            <!-- ─── SUPPORT GEM NODES ─── -->
+                            <g class="node-group" data-type="support">
+                                <line x1="500" y1="125" x2="470" y2="100" class="support-link"/>
+                                <rect class="support-node-bg" x="440" y="88" width="60" height="18" rx="9"/>
+                                <text class="support-label" x="470" y="100">Elem. Armament</text>
+                            </g>
+                            <g class="node-group" data-type="support">
+                                <line x1="500" y1="125" x2="470" y2="78" class="support-link"/>
+                                <rect class="support-node-bg" x="445" y="66" width="50" height="18" rx="9"/>
+                                <text class="support-label" x="470" y="78">Bounty I</text>
+                            </g>
+                            <g class="node-group" data-type="support">
+                                <line x1="310" y1="260" x2="260" y2="240" class="support-link"/>
+                                <rect class="support-node-bg" x="225" y="228" width="70" height="18" rx="9"/>
+                                <text class="support-label" x="260" y="240">Rapid Attacks</text>
+                            </g>
+                            <g class="node-group" data-type="support">
+                                <line x1="845" y1="370" x2="900" y2="355" class="support-link"/>
+                                <rect class="support-node-bg" x="870" y="343" width="60" height="18" rx="9"/>
+                                <text class="support-label" x="900" y="355">Slow Potency</text>
+                            </g>
+                            <g class="node-group" data-type="support">
+                                <line x1="855" y1="500" x2="900" y2="485" class="support-link"/>
+                                <rect class="support-node-bg" x="870" y="473" width="60" height="18" rx="9"/>
+                                <text class="support-label" x="900" y="485">Slow Potency</text>
+                            </g>
+                            <g class="node-group" data-type="support">
+                                <line x1="155" y1="440" x2="110" y2="425" class="support-link"/>
+                                <rect class="support-node-bg" x="80" y="413" width="60" height="18" rx="9"/>
+                                <text class="support-label" x="110" y="425">Rapid Casting</text>
+                            </g>
+
+                            <!-- ─── Recommended Upgrade Indicators ─── -->
+                            <g class="node-group" data-type="recommended">
+                                <line x1="550" y1="390" x2="550" y2="430" class="connection-line recommended" stroke="var(--gold)" opacity="0.5"/>
+                                <rect x="495" y="432" width="110" height="22" rx="11" fill="rgba(201,168,76,0.1)" stroke="var(--gold)" stroke-width="1" stroke-dasharray="4 3"/>
+                                <text x="550" y="446" text-anchor="middle" font-size="8" fill="var(--gold)" font-family="Cinzel" letter-spacing="0.5">+ Shock Cond. II</text>
+                                <text x="550" y="462" text-anchor="middle" font-size="7" fill="var(--gold-dim)" font-style="italic">RECOMMENDED</text>
+                            </g>
+                            <g class="node-group" data-type="recommended">
+                                <line x1="800" y1="410" x2="850" y2="430" class="connection-line recommended" stroke="var(--gold)" opacity="0.5"/>
+                                <rect x="822" y="428" width="56" height="18" rx="9" fill="rgba(201,168,76,0.1)" stroke="var(--gold)" stroke-width="1" stroke-dasharray="4 3"/>
+                                <text class="support-label" x="850" y="440" fill="var(--gold)" font-family="Cinzel">+ Chain</text>
+                            </g>
+                            <text x="440" y="195" text-anchor="middle" font-size="8" fill="var(--gold-dim)" font-family="Cinzel" opacity="0.7" letter-spacing="1">SHOCK CHAIN</text>
+                        </svg>
+                    </div>
+
+                    <!-- Info Cards -->
+                    <div class="info-grid">
+                        <div class="info-card">
+                            <h3>🔄 Synergy Chain</h3>
+                            <div class="synergy-chain">
+                                <span class="synergy-step">Tempest Flurry</span>
+                                <span class="synergy-arrow">→</span>
+                                <span class="synergy-step">Shocks enemies</span>
+                                <span class="synergy-arrow">→</span>
+                                <span class="synergy-step">Falling Thunder</span>
+                                <span class="synergy-arrow">→</span>
+                                <span class="synergy-step">Burst on shocked</span>
+                                <span class="synergy-arrow">→</span>
+                                <span class="synergy-step">Thunderstorm</span>
+                                <span class="synergy-arrow">→</span>
+                                <span class="synergy-step">AoE shock chain</span>
+                                <span class="synergy-arrow">→</span>
+                                <span class="synergy-step">Herald of Thunder</span>
+                                <span class="synergy-arrow">→</span>
+                                <span class="synergy-step">Invoker scales</span>
+                            </div>
+                            <div style="margin-top:12px; font-size:0.85em; color:var(--text-dim); line-height:1.5;">
+                                <strong style="color:var(--gold);">Mana Loop:</strong> Mana Drain + Mana Remnants sustain mana for continuous spellcasting.
+                                <br><strong style="color:var(--gold);">Defense:</strong> Parry → counterattack pairs with Killing Palm for culls on low-health adds.
+                            </div>
+                        </div>
+                        <div class="info-card">
+                            <h3>🎯 Recommended Upgrades</h3>
+                            <ul class="rec-list">
+                                <li><span class="rec-priority">1.</span> <span class="rec-skill">Thunderstorm</span> <span class="rec-arrow">→</span> <span class="rec-suggested">Shock Conduction II + Overcharge</span><br><span style="color:var(--text-dim); font-size:0.85em;">100% shock chain across enemies. Cornerstone combo.</span></li>
+                                <li><span class="rec-priority">2.</span> <span class="rec-skill">Orb of Storms</span> <span class="rec-arrow">→</span> <span class="rec-suggested">Chain + Increased AoE</span><br><span style="color:var(--text-dim); font-size:0.85em;">Chain bounces bolts between enemies. AoE expands orb radius.</span></li>
+                                <li><span class="rec-priority">3.</span> <span class="rec-skill">Tempest Flurry</span> <span class="rec-arrow">→</span> <span class="rec-suggested">Shock Conduction II + Lightning Attunement</span><br><span style="color:var(--text-dim); font-size:0.85em;">Better shock coverage + physical→lightning conversion.</span></li>
+                                <li><span class="rec-priority">4.</span> <span class="rec-skill">Falling Thunder</span> <span class="rec-arrow">→</span> <span class="rec-suggested">Overcharge</span><br><span style="color:var(--text-dim); font-size:0.85em;">Boosts shock magnitude from Falling Thunder hits.</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            // ════════════════════════════════════════════════════════
+            //  BUILD THE FULL DASHBOARD HTML
+            // ════════════════════════════════════════════════════════
+            document.getElementById('dashboard-content').innerHTML = `
+                ${charSelector}
+                <div class="character-card">
+                    <div class="character-name">${playerName}</div>
+                    <div class="character-class">${alias || charClass} — ${build} Build — ${act}, ${mission}</div>
+                    <div class="character-stats">
+                        <div class="stat-box">
+                            <div class="label">Level</div>
+                            <div class="value">${level || '?'}</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="label">Class</div>
+                            <div class="value">${charClass}</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="label">League</div>
+                            <div class="value lightning">${league || 'Standard'}</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="label">Campaign</div>
+                            <div class="value">${act}</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="progress-section">
+                    <h2>📊 Progress</h2>
+                    <div class="progress-bar-container">
+                        <div class="progress-label">
+                            <span class="name">Campaign</span>
+                            <span class="percent">${progress.campaign}%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill campaign" style="width: 0%" data-target="${progress.campaign}"></div>
+                        </div>
+                    </div>
+                    <div class="progress-bar-container">
+                        <div class="progress-label">
+                            <span class="name">Build Completion</span>
+                            <span class="percent">${progress.buildCompletion}%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill build" style="width: 0%" data-target="${progress.buildCompletion}"></div>
+                        </div>
+                    </div>
+                    <div class="progress-bar-container">
+                        <div class="progress-label">
+                            <span class="name">Gem Collection</span>
+                            <span class="percent">${progress.gemCollection}%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill gems" style="width: 0%" data-target="${progress.gemCollection}"></div>
+                        </div>
+                    </div>
+                    <div class="progress-bar-container">
+                        <div class="progress-label">
+                            <span class="name">Meta Alignment</span>
+                            <span class="percent">${progress.metaAlignment}%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill level" style="width: 0%" data-target="${progress.metaAlignment}"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="skills-section">
+                    <h2>⚡ Skill Setup</h2>
+                    <div class="skill-grid">${skillsHTML}</div>
+                </div>
+
+                ${synergyMapHTML}
+
+                ${passiveHTML}
+
+                <div class="meta-alert">
+                    <h3>🎯 Build Optimization Suggestions</h3>
+                    ${suggestionsHTML}
+                </div>
+            `;
+
+            // Show content, hide loading
+            document.getElementById('main-loading').style.display = 'none';
+            document.getElementById('dashboard-content').style.display = 'block';
+
+            // Animate progress bars + init tree interactions
+            setTimeout(() => {
+                document.querySelectorAll('.progress-fill').forEach(bar => {
+                    bar.style.width = bar.getAttribute('data-target') + '%';
+                });
+                // Init skill tree tooltips and node animations
+                initTreeTooltips();
+                initTreeAnimations();
+            }, 300);
+        }
+
+        // ═══════════════════════════════════════════════════════════
+        //  SKILL TREE TOOLTIPS
+        // ═══════════════════════════════════════════════════════════
+        const jordanSkills = [
+            { name: "Tempest Flurry", type: "Primary Attack — Lightning", role: "Main damage dealer. Scales with Invoker elemental penetration.", supports: ["Elemental Armament", "Bounty I"], color: "lightning" },
+            { name: "Falling Thunder", type: "Burst Damage — Lightning", role: "Burst damage on shocked enemies. Invoker penetration makes it hit harder.", supports: ["Rapid Attacks I"], color: "lightning" },
+            { name: "Thunderstorm", type: "AoE Clear — Lightning", role: "AoE clear. Needs Shock Conduction II + Overcharge for 100% shock chain.", supports: [], color: "lightning" },
+            { name: "Orb of Storms", type: "Sustained Damage — Lightning", role: "Sustained damage. Invoker spell scaling boosts this significantly.", supports: ["Slow Potency"], color: "lightning" },
+            { name: "Tempest Bell", type: "Stun / Utility", role: "Crowd control and stun. Utility skill that synergizes with lightning.", supports: ["Slow Potency"], color: "utility" },
+            { name: "Mana Drain", type: "Sustain — Mana Recovery", role: "Mana sustain. Essential for sustained combat. Pairs with Mana Remnants.", supports: ["Rapid Casting"], color: "utility" },
+            { name: "Killing Palm", type: "Sustain — Power Charges on Cull", role: "Power Charges on cull. Great for campaign with adds.", supports: [], color: "utility" },
+            { name: "Parry", type: "Defensive", role: "Defensive skill. Parry → counterattack pairs with Killing Palm.", supports: [], color: "utility" },
+            { name: "Herald of Thunder", type: "Buff — Lightning Procs on Shock", role: "Herald. Invoker scales heralds hard. Key endgame skill.", supports: [], color: "lightning" },
+            { name: "Mana Remnants", type: "Sustain — Mana Globes on Kill", role: "Mana sustain on kill. Pairs with Mana Drain for full mana loop.", supports: [], color: "utility" }
+        ];
+
+        const colorMap = { lightning: 'var(--lightning)', physical: 'var(--physical)', utility: 'var(--utility)', fire: 'var(--fire)' };
+        const tagClass = { lightning: '', physical: 'fire', utility: 'gold', fire: 'fire' };
+
+        function initTreeTooltips() {
+            const tooltip = document.getElementById('tooltip');
+            const svg = document.getElementById('skill-tree-svg');
+            if (!svg) return;
+
+            svg.querySelectorAll('.node-group[data-skill]').forEach(node => {
+                const idx = parseInt(node.getAttribute('data-skill'));
+                const skill = jordanSkills[idx];
+                if (!skill) return;
+
+                node.addEventListener('mouseenter', e => {
+                    const supportTags = skill.supports.length > 0
+                        ? skill.supports.map(s => `<span class="tooltip-support-tag ${tagClass[skill.color] || ''}">${s}</span>`).join('')
+                        : '<span style="color:var(--text-dim); font-size:0.8em; font-style:italic;">No supports yet</span>';
+                    tooltip.innerHTML = `
+                        <div class="tooltip-name" style="color:${colorMap[skill.color]}">${skill.name}</div>
+                        <div class="tooltip-type">${skill.type}</div>
+                        <div class="tooltip-role">${skill.role}</div>
+                        <div style="font-size:0.75em; color:var(--text-dim); margin-bottom:4px;">SUPPORT GEMS:</div>
+                        <div class="tooltip-supports">${supportTags}</div>
+                    `;
+                    tooltip.classList.add('visible');
+                });
+                node.addEventListener('mousemove', e => {
+                    tooltip.style.left = (e.clientX + 16) + 'px';
+                    tooltip.style.top = (e.clientY - 10) + 'px';
+                });
+                node.addEventListener('mouseleave', () => tooltip.classList.remove('visible'));
+            });
+        }
+
+        // ═══════════════════════════════════════════════════════════
+        //  SKILL TREE ANIMATIONS
+        // ═══════════════════════════════════════════════════════════
+        function initTreeAnimations() {
+            requestAnimationFrame(() => {
+                document.querySelectorAll('.node-group').forEach((node, i) => {
+                    node.style.opacity = '0';
+                    node.style.transition = `opacity 0.4s ease ${i * 0.05}s`;
+                    requestAnimationFrame(() => { node.style.opacity = '1'; });
+                });
+            });
+        }
+
+        // ═══════════════════════════════════════════════════════════
+        //  TAB SWITCHING
+        // ═══════════════════════════════════════════════════════════
+        let passivePlannerInited = false;
+
+        function switchTab(tab) {
+            document.querySelectorAll('.main-tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.tab-panel').forEach(p => { p.classList.remove('active'); p.style.display = 'none'; });
+
+            if (tab === 'build') {
+                document.querySelectorAll('.main-tab-btn')[0].classList.add('active');
+                document.getElementById('panel-build').classList.add('active');
+                document.getElementById('panel-build').style.display = 'block';
+            } else {
+                document.querySelectorAll('.main-tab-btn')[1].classList.add('active');
+                document.getElementById('panel-passive').classList.add('active');
+                document.getElementById('panel-passive').style.display = 'block';
+                if (!passivePlannerInited) {
+                    initPassivePlanner();
+                    passivePlannerInited = true;
+                } else {
+                    ppResizeCanvas();
+                }
+            }
+        }
+
+        // ═══════════════════════════════════════════════════════════
+        //  PASSIVE SKILL TREE PLANNER (embedded)
+        // ═══════════════════════════════════════════════════════════
+        function initPassivePlanner() {
+            const ppCanvas = document.getElementById('pp-tree-canvas');
+            const ppCtx = ppCanvas.getContext('2d');
+            const ppCanvasWrap = document.getElementById('pp-canvas-wrap');
+
+            // Theme colors
+            const ppCOLORS = {
+                bg: '#0a0a12',
+                grid: 'rgba(201,168,76,0.03)',
+                line: 'rgba(100,100,130,0.3)',
+                lineAlloc: 'rgba(201,168,76,0.7)',
+                lineHover: 'rgba(126,184,255,0.6)',
+                basicFill: '#3a3a4a',
+                basicStroke: '#6a6a7a',
+                basicFillAlloc: '#c9a84c',
+                basicStrokeAlloc: '#c9a84c',
+                notableFill: '#1a1a2a',
+                notableStroke: '#c9a84c',
+                notableFillAlloc: 'rgba(201,168,76,0.25)',
+                keystoneFill: '#1a0a0a',
+                keystoneStroke: '#ff6b6b',
+                keystoneGlow: 'rgba(255,107,107,0.4)',
+                ascendFill: '#0a0a1a',
+                ascendStroke: '#c084fc',
+                ascendGlow: 'rgba(192,132,252,0.4)',
+                startFill: '#0a1a2a',
+                startStroke: '#7eb8ff',
+                startGlow: 'rgba(126,184,255,0.5)',
+                hoverGlow: 'rgba(126,184,255,0.6)',
+                candidateGlow: 'rgba(201,168,76,0.25)',
+                text: '#e0ddd4',
+                dimText: '#888'
+            };
+
+            // Tree data
+            const ppNodes = [
+                {id:"start",name:"Lightning Monk",type:"start",x:600,y:400,radius:16,description:"Starting node for the Lightning Monk build.",stats:{},connections:["n1","n13","n25"],allocated:true},
+                {id:"n1",name:"Thunder Strike",type:"basic",x:660,y:355,radius:10,description:"+8% Lightning Damage",stats:{lightningDmg:8},connections:["start","n2"],allocated:false},
+                {id:"n2",name:"Storm Fists",type:"basic",x:730,y:310,radius:10,description:"+10% Lightning Damage",stats:{lightningDmg:10},connections:["n1","n3"],allocated:false},
+                {id:"n3",name:"Lightning Infusion",type:"notable",x:810,y:265,radius:14,description:"+15% Lightning Damage, +5% Attack Speed",stats:{lightningDmg:15,atkSpd:5},connections:["n2","n4","n5"],allocated:false},
+                {id:"n4",name:"Chain Lightning",type:"basic",x:890,y:230,radius:10,description:"Lightning skills chain to 1 additional enemy",stats:{chain:1},connections:["n3","n6"],allocated:false},
+                {id:"n5",name:"Static Charge",type:"basic",x:850,y:330,radius:10,description:"10% chance to Shock on hit",stats:{shockChance:10},connections:["n3","n7"],allocated:false},
+                {id:"n6",name:"Storm Mastery",type:"notable",x:970,y:195,radius:14,description:"+20% Lightning Penetration",stats:{lightningPen:20},connections:["n4","n8"],allocated:false},
+                {id:"n7",name:"Volt Surge",type:"basic",x:930,y:370,radius:10,description:"+12% Spell Damage",stats:{spellDmg:12},connections:["n5","n9"],allocated:false},
+                {id:"n8",name:"Thunderlord's Decree",type:"keystone",x:1040,y:160,radius:20,description:"Your lightning damage chains twice as far. Non-lightning damage reduced by 30%.",stats:{chainMultiplier:2,nonLightningDmgReduction:30},connections:["n6"],allocated:false},
+                {id:"n9",name:"Arc Dancer",type:"basic",x:1000,y:405,radius:10,description:"+8% Evasion Rating",stats:{evasion:8},connections:["n7","n10"],allocated:false},
+                {id:"n10",name:"Flickering Guard",type:"notable",x:1070,y:440,radius:14,description:"+15% Evasion, +5% Dodge",stats:{evasion:15,dodge:5},connections:["n9"],allocated:false},
+                {id:"n11",name:"Shocked Ground",type:"basic",x:920,y:480,radius:10,description:"Enemies on shocked ground take 5% increased damage",stats:{dmgOnShocked:5},connections:["n9","n22"],allocated:false},
+                {id:"n12",name:"Tempest Shield",type:"basic",x:780,y:200,radius:10,description:"+8% Spell Suppression",stats:{spellSupp:8},connections:["n3","n43"],allocated:false},
+                {id:"n13",name:"Iron Skin",type:"basic",x:660,y:445,radius:10,description:"+10 Armor",stats:{armor:10},connections:["start","n14"],allocated:false},
+                {id:"n14",name:"Resilience",type:"basic",x:730,y:490,radius:10,description:"+8% Maximum Life",stats:{maxLife:8},connections:["n13","n15"],allocated:false},
+                {id:"n15",name:"Tempered Body",type:"notable",x:810,y:535,radius:14,description:"+12% Armor, +60 Life",stats:{armor:12,flatLife:60},connections:["n14","n16","n17"],allocated:false},
+                {id:"n16",name:"Steel Will",type:"basic",x:890,y:570,radius:10,description:"+10% Damage Reduction",stats:{dmgReduction:10},connections:["n15","n18"],allocated:false},
+                {id:"n17",name:"Unbreakable",type:"basic",x:860,y:620,radius:10,description:"+5% Life Regen",stats:{lifeRegen:5},connections:["n15","n19"],allocated:false},
+                {id:"n18",name:"Stone Bulwark",type:"notable",x:960,y:605,radius:14,description:"+20% Armor, +3% Max Elemental Res",stats:{armor:20,maxElemRes:3},connections:["n16","n20"],allocated:false},
+                {id:"n19",name:"Endurance",type:"basic",x:930,y:680,radius:10,description:"+10% Max Life",stats:{maxLife:10},connections:["n17","n21"],allocated:false},
+                {id:"n20",name:"Titan's Resolve",type:"keystone",x:1040,y:640,radius:20,description:"You take 50% less physical damage. Cannot deal elemental damage.",stats:{physDmgReduction:50,cantDealElemDmg:true},connections:["n18"],allocated:false},
+                {id:"n21",name:"Vitality",type:"basic",x:1010,y:720,radius:10,description:"+2% Life Regen",stats:{lifeRegen:2},connections:["n19"],allocated:false},
+                {id:"n22",name:"Storm Ward",type:"basic",x:990,y:530,radius:10,description:"+10% Lightning Resist",stats:{lightningRes:10},connections:["n11","n18"],allocated:false},
+                {id:"n23",name:"Grounded",type:"basic",x:770,y:600,radius:10,description:"+8% Elemental Resist",stats:{elemRes:8},connections:["n17"],allocated:false},
+                {id:"n24",name:"Hardened",type:"basic",x:710,y:560,radius:10,description:"+10 Armor",stats:{armor:10},connections:["n15"],allocated:false},
+                {id:"n25",name:"Focused Mind",type:"basic",x:540,y:355,radius:10,description:"+8% Accuracy",stats:{accuracy:8},connections:["start","n26"],allocated:false},
+                {id:"n26",name:"Swift Hands",type:"basic",x:470,y:310,radius:10,description:"+10% Attack Speed",stats:{atkSpd:10},connections:["n25","n27"],allocated:false},
+                {id:"n27",name:"Lightning Reflexes",type:"notable",x:390,y:265,radius:14,description:"+15% Attack Speed, +8% Crit Chance",stats:{atkSpd:15,critChance:8},connections:["n26","n28","n29"],allocated:false},
+                {id:"n28",name:"Precision",type:"basic",x:310,y:230,radius:10,description:"+10% Critical Damage",stats:{critDmg:10},connections:["n27","n30"],allocated:false},
+                {id:"n29",name:"Flow State",type:"basic",x:350,y:330,radius:10,description:"+8% Movement Speed",stats:{moveSpd:8},connections:["n27","n31"],allocated:false},
+                {id:"n30",name:"Assassin's Focus",type:"notable",x:230,y:195,radius:14,description:"+20% Critical Damage, +5% Crit Multiplier",stats:{critDmg:20,critMulti:5},connections:["n28","n32"],allocated:false},
+                {id:"n31",name:"Adrenaline",type:"basic",x:270,y:370,radius:10,description:"+8% Action Speed",stats:{actionSpd:8},connections:["n29","n33"],allocated:false},
+                {id:"n32",name:"Lightning Avatar",type:"keystone",x:160,y:160,radius:20,description:"Your critical strikes release chain lightning. Non-critical strikes deal 50% less damage.",stats:{critChainLightning:true,nonCritPenalty:50},connections:["n30"],allocated:false},
+                {id:"n33",name:"Quickstep",type:"basic",x:200,y:405,radius:10,description:"+8% Dodge",stats:{dodge:8},connections:["n31","n34"],allocated:false},
+                {id:"n34",name:"Evasive",type:"notable",x:130,y:440,radius:14,description:"+15% Dodge, +10% Evasion",stats:{dodge:15,evasion:10},connections:["n33"],allocated:false},
+                {id:"n35",name:"Flexible Stance",type:"basic",x:420,y:420,radius:10,description:"Switch between offensive and defensive stances",stats:{stance:true},connections:["start","n36"],allocated:false},
+                {id:"n36",name:"Balanced Mind",type:"basic",x:370,y:480,radius:10,description:"+6% All Attributes",stats:{allAttr:6},connections:["n35","n37"],allocated:false},
+                {id:"n37",name:"Harmony",type:"notable",x:310,y:535,radius:14,description:"+12% Damage while at full life, +10% Life Leech",stats:{dmgAtFullLife:12,lifeLeech:10},connections:["n36"],allocated:false},
+                {id:"asc1",name:"Storm Caller",type:"ascendancy",x:1140,y:300,radius:16,description:"Lightning spells have +20% Cast Speed",stats:{castSpd:20},connections:["asc2","asc3"],allocated:false},
+                {id:"asc2",name:"Thundergod's Wrath",type:"ascendancy",x:1210,y:240,radius:14,description:"Your lightning damage cannot be reflected",stats:{noLightningReflect:true},connections:["asc1"],allocated:false},
+                {id:"asc3",name:"Tempest Soul",type:"ascendancy",x:1210,y:360,radius:14,description:"Gain +1% Lightning Damage per Level",stats:{dmgPerLevel:1},connections:["asc1"],allocated:false},
+                {id:"asc4",name:"Monk of the Storm",type:"ascendancy",x:1140,y:180,radius:16,description:"Channeling lightning spells generates mana",stats:{manaOnChannel:true},connections:["asc2"],allocated:false},
+                {id:"asc5",name:"Divine Lightning",type:"ascendancy",x:1280,y:300,radius:18,description:"Lightning skills ignore enemy Lightning Resistance",stats:{ignoreLightningRes:true},connections:["asc2","asc3"],allocated:false},
+                {id:"n38",name:"Elemental Touch",type:"basic",x:700,y:260,radius:10,description:"+8% Elemental Damage",stats:{elemDmg:8},connections:["n2","n12"],allocated:false},
+                {id:"n39",name:"Spell Power",type:"basic",x:500,y:260,radius:10,description:"+10% Spell Damage",stats:{spellDmg:10},connections:["n26","n43"],allocated:false},
+                {id:"n40",name:"Deep Wounds",type:"basic",x:650,y:520,radius:10,description:"+8% Physical Damage",stats:{physDmg:8},connections:["n14","n24"],allocated:false},
+                {id:"n41",name:"Mystic Edge",type:"basic",x:580,y:290,radius:10,description:"+8% Weapon Damage",stats:{weaponDmg:8},connections:["n25","n39"],allocated:false},
+                {id:"n42",name:"Endurance Charge",type:"basic",x:580,y:510,radius:10,description:"Grants 1 Endurance Charge on Kill",stats:{endCharge:1},connections:["n14","n40"],allocated:false},
+                {id:"n43",name:"Mana Flow",type:"notable",x:440,y:200,radius:14,description:"+20% Mana Regen, +30 Mana",stats:{manaRegen:20,flatMana:30},connections:["n12","n39"],allocated:false},
+                {id:"n44",name:"Arcane Surge",type:"basic",x:460,y:560,radius:10,description:"+8% Spell Damage when leeching",stats:{spellDmgOnLeech:8},connections:["n36","n42"],allocated:false},
+                {id:"n45",name:"Energized",type:"basic",x:350,y:620,radius:10,description:"+10% Energy Shield",stats:{energyShield:10},connections:["n44"],allocated:false}
+            ];
+
+            // State
+            let ppTotalPoints = 123;
+            let ppZoom = 1;
+            let ppPanX = 0, ppPanY = 0;
+            let ppIsDragging = false;
+            let ppDragStartX = 0, ppDragStartY = 0;
+            let ppPanStartX = 0, ppPanStartY = 0;
+            let ppHoveredNode = null;
+            let ppAnimTime = 0;
+            let ppNeedsRedraw = true;
+            let ppMouseDown = false;
+            let ppMouseMoved = false;
+            let ppRenderLoopId = null;
+
+            // Adjacency map
+            const ppAdjMap = {};
+            ppNodes.forEach(n => { ppAdjMap[n.id] = new Set(n.connections); });
+
+            // Canvas sizing
+            function ppResizeCanvas() {
+                const dpr = window.devicePixelRatio || 1;
+                const rect = ppCanvasWrap.getBoundingClientRect();
+                ppCanvas.width = rect.width * dpr;
+                ppCanvas.height = rect.height * dpr;
+                ppCanvas.style.width = rect.width + 'px';
+                ppCanvas.style.height = rect.height + 'px';
+                ppCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+                ppNeedsRedraw = true;
+            }
+
+            // Coordinate transforms
+            function ppWorldToScreen(wx, wy) {
+                const cw = ppCanvas.width / (window.devicePixelRatio || 1);
+                const ch = ppCanvas.height / (window.devicePixelRatio || 1);
+                return { x: (wx - ppPanX) * ppZoom + cw / 2, y: (wy - ppPanY) * ppZoom + ch / 2 };
+            }
+            function ppScreenToWorld(sx, sy) {
+                const cw = ppCanvas.width / (window.devicePixelRatio || 1);
+                const ch = ppCanvas.height / (window.devicePixelRatio || 1);
+                return { x: (sx - cw / 2) / ppZoom + ppPanX, y: (sy - ch / 2) / ppZoom + ppPanY };
+            }
+
+            // Tree logic
+            function ppGetAllocated() {
+                return new Set(ppNodes.filter(n => n.allocated).map(n => n.id));
+            }
+
+            function ppCanAllocate(nodeId) {
+                const allocated = ppGetAllocated();
+                const adj = ppAdjMap[nodeId];
+                if (!adj) return false;
+                for (const neighbor of adj) {
+                    if (allocated.has(neighbor)) return true;
+                }
+                return false;
+            }
+
+            function ppAllocateNode(nodeId) {
+                const node = ppNodes.find(n => n.id === nodeId);
+                if (!node || node.allocated) return false;
+                if (!ppCanAllocate(nodeId)) return false;
+                const allocated = ppGetAllocated();
+                const currentPts = allocated.size - 1;
+                if (currentPts >= ppTotalPoints) {
+                    ppShowToast('⚠️ No points available!');
+                    return false;
+                }
+                node.allocated = true;
+                ppNeedsRedraw = true;
+                ppUpdateUI();
+                return true;
+            }
+
+            function ppDeallocateNode(nodeId) {
+                if (nodeId === 'start') return false;
+                const node = ppNodes.find(n => n.id === nodeId);
+                if (!node || !node.allocated) return false;
+                node.allocated = false;
+                const stillConnected = new Set(['start']);
+                const queue = ['start'];
+                while (queue.length > 0) {
+                    const current = queue.shift();
+                    for (const neighbor of ppAdjMap[current] || []) {
+                        const n = ppNodes.find(nd => nd.id === neighbor);
+                        if (n && n.allocated && !stillConnected.has(neighbor)) {
+                            stillConnected.add(neighbor);
+                            queue.push(neighbor);
+                        }
+                    }
+                }
+                ppNodes.forEach(n => {
+                    if (n.allocated && n.id !== 'start' && !stillConnected.has(n.id)) {
+                        n.allocated = false;
+                    }
+                });
+                ppNeedsRedraw = true;
+                ppUpdateUI();
+                return true;
+            }
+
+            // Rendering
+            function ppDrawNode(node) {
+                const pos = ppWorldToScreen(node.x, node.y);
+                const r = node.radius * ppZoom;
+                const allocated = node.allocated;
+                const isHovered = ppHoveredNode && ppHoveredNode.id === node.id;
+                const candidate = !allocated && ppCanAllocate(node.id);
+
+                if (allocated) {
+                    let glowColor;
+                    if (node.type === 'keystone') glowColor = ppCOLORS.keystoneGlow;
+                    else if (node.type === 'ascendancy') glowColor = ppCOLORS.ascendGlow;
+                    else if (node.type === 'start') glowColor = ppCOLORS.startGlow;
+                    else glowColor = 'rgba(201,168,76,0.3)';
+                    const grad = ppCtx.createRadialGradient(pos.x, pos.y, r, pos.x, pos.y, r * 2.5);
+                    grad.addColorStop(0, glowColor);
+                    grad.addColorStop(1, 'transparent');
+                    ppCtx.fillStyle = grad;
+                    ppCtx.beginPath();
+                    ppCtx.arc(pos.x, pos.y, r * 2.5, 0, Math.PI * 2);
+                    ppCtx.fill();
+                } else if (candidate) {
+                    const pulse = 0.15 + 0.1 * Math.sin(ppAnimTime * 3);
+                    const grad = ppCtx.createRadialGradient(pos.x, pos.y, r, pos.x, pos.y, r * 2.2);
+                    grad.addColorStop(0, `rgba(201,168,76,${pulse})`);
+                    grad.addColorStop(1, 'transparent');
+                    ppCtx.fillStyle = grad;
+                    ppCtx.beginPath();
+                    ppCtx.arc(pos.x, pos.y, r * 2.2, 0, Math.PI * 2);
+                    ppCtx.fill();
+                }
+
+                if (isHovered) {
+                    const grad = ppCtx.createRadialGradient(pos.x, pos.y, r, pos.x, pos.y, r * 2);
+                    grad.addColorStop(0, ppCOLORS.hoverGlow);
+                    grad.addColorStop(1, 'transparent');
+                    ppCtx.fillStyle = grad;
+                    ppCtx.beginPath();
+                    ppCtx.arc(pos.x, pos.y, r * 2, 0, Math.PI * 2);
+                    ppCtx.fill();
+                }
+
+                ppCtx.beginPath();
+                ppCtx.arc(pos.x, pos.y, r, 0, Math.PI * 2);
+
+                if (node.type === 'start') {
+                    ppCtx.fillStyle = allocated ? ppCOLORS.startFill : '#0a0a12';
+                    ppCtx.fill();
+                    ppCtx.strokeStyle = ppCOLORS.startStroke;
+                    ppCtx.lineWidth = allocated ? 3 : 1.5;
+                    ppCtx.stroke();
+                    if (allocated) {
+                        const ig = ppCtx.createRadialGradient(pos.x, pos.y, 0, pos.x, pos.y, r);
+                        ig.addColorStop(0, 'rgba(126,184,255,0.3)');
+                        ig.addColorStop(1, 'transparent');
+                        ppCtx.fillStyle = ig;
+                        ppCtx.fill();
+                    }
+                } else if (node.type === 'keystone') {
+                    ppCtx.fillStyle = allocated ? 'rgba(255,107,107,0.15)' : ppCOLORS.keystoneFill;
+                    ppCtx.fill();
+                    ppCtx.strokeStyle = allocated ? ppCOLORS.keystoneStroke : '#6a3a3a';
+                    ppCtx.lineWidth = allocated ? 3 : 2;
+                    ppCtx.stroke();
+                    if (allocated) {
+                        const ig = ppCtx.createRadialGradient(pos.x, pos.y, 0, pos.x, pos.y, r);
+                        ig.addColorStop(0, 'rgba(255,107,107,0.4)');
+                        ig.addColorStop(1, 'transparent');
+                        ppCtx.fillStyle = ig;
+                        ppCtx.fill();
+                    }
+                } else if (node.type === 'notable') {
+                    ppCtx.fillStyle = allocated ? ppCOLORS.notableFillAlloc : ppCOLORS.notableFill;
+                    ppCtx.fill();
+                    ppCtx.strokeStyle = allocated ? ppCOLORS.notableStroke : '#6a5a3a';
+                    ppCtx.lineWidth = allocated ? 2.5 : 1.5;
+                    ppCtx.stroke();
+                } else if (node.type === 'ascendancy') {
+                    ppCtx.fillStyle = allocated ? 'rgba(192,132,252,0.15)' : ppCOLORS.ascendFill;
+                    ppCtx.fill();
+                    ppCtx.strokeStyle = allocated ? ppCOLORS.ascendStroke : '#6a4a8a';
+                    ppCtx.lineWidth = allocated ? 2.5 : 1.5;
+                    ppCtx.stroke();
+                    if (allocated) {
+                        const ig = ppCtx.createRadialGradient(pos.x, pos.y, 0, pos.x, pos.y, r);
+                        ig.addColorStop(0, 'rgba(192,132,252,0.35)');
+                        ig.addColorStop(1, 'transparent');
+                        ppCtx.fillStyle = ig;
+                        ppCtx.fill();
+                    }
+                } else {
+                    ppCtx.fillStyle = allocated ? ppCOLORS.basicFillAlloc : ppCOLORS.basicFill;
+                    ppCtx.fill();
+                    ppCtx.strokeStyle = allocated ? ppCOLORS.basicStrokeAlloc : ppCOLORS.basicStroke;
+                    ppCtx.lineWidth = allocated ? 2 : 1;
+                    ppCtx.stroke();
+                }
+
+                if (allocated && node.type !== 'start' && r > 6) {
+                    ppCtx.strokeStyle = '#fff';
+                    ppCtx.lineWidth = Math.max(1.5, r * 0.15);
+                    ppCtx.lineCap = 'round';
+                    ppCtx.lineJoin = 'round';
+                    ppCtx.beginPath();
+                    ppCtx.moveTo(pos.x - r * 0.35, pos.y);
+                    ppCtx.lineTo(pos.x - r * 0.05, pos.y + r * 0.3);
+                    ppCtx.lineTo(pos.x + r * 0.4, pos.y - r * 0.25);
+                    ppCtx.stroke();
+                }
+            }
+
+            function ppDrawConnections() {
+                const drawnPairs = new Set();
+                ppNodes.forEach(node => {
+                    node.connections.forEach(connId => {
+                        const pairKey = [node.id, connId].sort().join('-');
+                        if (drawnPairs.has(pairKey)) return;
+                        drawnPairs.add(pairKey);
+                        const other = ppNodes.find(n => n.id === connId);
+                        if (!other) return;
+                        const p1 = ppWorldToScreen(node.x, node.y);
+                        const p2 = ppWorldToScreen(other.x, other.y);
+                        const bothAlloc = node.allocated && other.allocated;
+                        const eitherHover = (ppHoveredNode && (ppHoveredNode.id === node.id || ppHoveredNode.id === connId) && (node.allocated || other.allocated));
+                        ppCtx.beginPath();
+                        ppCtx.moveTo(p1.x, p1.y);
+                        ppCtx.lineTo(p2.x, p2.y);
+                        if (bothAlloc) {
+                            ppCtx.strokeStyle = ppCOLORS.lineAlloc;
+                            ppCtx.lineWidth = 2.5 * ppZoom;
+                        } else if (eitherHover) {
+                            ppCtx.strokeStyle = ppCOLORS.lineHover;
+                            ppCtx.lineWidth = 2 * ppZoom;
+                        } else {
+                            ppCtx.strokeStyle = ppCOLORS.line;
+                            ppCtx.lineWidth = 1 * ppZoom;
+                        }
+                        ppCtx.stroke();
+                    });
+                });
+            }
+
+            function ppDrawNodeLabel(node) {
+                if (!node.allocated && node.type !== 'start') return;
+                if (ppZoom < 0.5 && node.type === 'basic') return;
+                const pos = ppWorldToScreen(node.x, node.y);
+                const r = node.radius * ppZoom;
+                ppCtx.font = `${Math.max(9, Math.min(11, 11 * ppZoom))}px 'Segoe UI', system-ui, sans-serif`;
+                ppCtx.textAlign = 'center';
+                ppCtx.fillStyle = node.type === 'start' ? ppCOLORS.startStroke : ppCOLORS.text;
+                ppCtx.globalAlpha = Math.min(1, (ppZoom - 0.3) / 0.3);
+                ppCtx.fillText(node.name, pos.x, pos.y + r + 12 * ppZoom);
+                ppCtx.globalAlpha = 1;
+            }
+
+            function ppDrawGrid() {
+                const cw = ppCanvas.width / (window.devicePixelRatio || 1);
+                const ch = ppCanvas.height / (window.devicePixelRatio || 1);
+                const gridSize = 60 * ppZoom;
+                if (gridSize < 15) return;
+                const tl = ppScreenToWorld(0, 0);
+                const br = ppScreenToWorld(cw, ch);
+                const startX = Math.floor(tl.x / 60) * 60;
+                const startY = Math.floor(tl.y / 60) * 60;
+                ppCtx.strokeStyle = ppCOLORS.grid;
+                ppCtx.lineWidth = 1;
+                for (let x = startX; x <= br.x; x += 60) {
+                    const sx = ppWorldToScreen(x, 0).x;
+                    ppCtx.beginPath(); ppCtx.moveTo(sx, 0); ppCtx.lineTo(sx, ch); ppCtx.stroke();
+                }
+                for (let y = startY; y <= br.y; y += 60) {
+                    const sy = ppWorldToScreen(0, y).y;
+                    ppCtx.beginPath(); ppCtx.moveTo(0, sy); ppCtx.lineTo(cw, sy); ppCtx.stroke();
+                }
+            }
+
+            function ppRender(timestamp) {
+                ppAnimTime = timestamp / 1000;
+                const cw = ppCanvas.width / (window.devicePixelRatio || 1);
+                const ch = ppCanvas.height / (window.devicePixelRatio || 1);
+                ppCtx.fillStyle = ppCOLORS.bg;
+                ppCtx.fillRect(0, 0, cw, ch);
+                ppDrawGrid();
+                ppDrawConnections();
+                const startNode = ppNodes.find(n => n.id === 'start');
+                ppNodes.filter(n => n.id !== 'start').forEach(ppDrawNode);
+                if (startNode) ppDrawNode(startNode);
+                ppNodes.forEach(ppDrawNodeLabel);
+                if (ppZoom > 0.4) {
+                    const ascLabelPos = ppWorldToScreen(1210, 145);
+                    ppCtx.font = `bold ${Math.max(10, 12 * ppZoom)}px 'Cinzel', serif`;
+                    ppCtx.textAlign = 'center';
+                    ppCtx.fillStyle = ppCOLORS.ascendStroke;
+                    ppCtx.globalAlpha = 0.7;
+                    ppCtx.fillText('⚡ ASCENDANCY ⚡', ascLabelPos.x, ascLabelPos.y);
+                    ppCtx.globalAlpha = 1;
+                }
+                ppRenderLoopId = requestAnimationFrame(ppRender);
+            }
+
+            // Interaction
+            function ppGetNodeAt(sx, sy) {
+                const world = ppScreenToWorld(sx, sy);
+                let closest = null;
+                let closestDist = Infinity;
+                for (const node of ppNodes) {
+                    const dx = node.x - world.x;
+                    const dy = node.y - world.y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    const hitRadius = Math.max(node.radius + 5, node.radius * 1.5);
+                    if (dist < hitRadius && dist < closestDist) {
+                        closest = node;
+                        closestDist = dist;
+                    }
+                }
+                return closest;
+            }
+
+            ppCanvas.addEventListener('mousedown', e => {
+                ppMouseDown = true;
+                ppMouseMoved = false;
+                ppIsDragging = false;
+                ppDragStartX = e.clientX;
+                ppDragStartY = e.clientY;
+                ppPanStartX = ppPanX;
+                ppPanStartY = ppPanY;
+            });
+
+            ppCanvas.addEventListener('mousemove', e => {
+                const rect = ppCanvas.getBoundingClientRect();
+                const sx = e.clientX - rect.left;
+                const sy = e.clientY - rect.top;
+                if (ppMouseDown) {
+                    const dx = e.clientX - ppDragStartX;
+                    const dy = e.clientY - ppDragStartY;
+                    if (Math.abs(dx) > 3 || Math.abs(dy) > 3) {
+                        ppMouseMoved = true;
+                        ppIsDragging = true;
+                        ppCanvas.classList.add('dragging');
+                    }
+                    if (ppIsDragging) {
+                        ppPanX = ppPanStartX - dx / ppZoom;
+                        ppPanY = ppPanStartY - dy / ppZoom;
+                        ppNeedsRedraw = true;
+                    }
+                } else {
+                    const node = ppGetNodeAt(sx, sy);
+                    if (node !== ppHoveredNode) {
+                        ppHoveredNode = node;
+                        ppNeedsRedraw = true;
+                        ppUpdateNodeInfo(node);
+                    }
+                }
+            });
+
+            ppCanvas.addEventListener('mouseup', e => {
+                const wasDown = ppMouseDown;
+                const wasDrag = ppIsDragging;
+                ppMouseDown = false;
+                ppIsDragging = false;
+                ppCanvas.classList.remove('dragging');
+                if (wasDown && !wasDrag && !ppMouseMoved) {
+                    const rect = ppCanvas.getBoundingClientRect();
+                    const sx = e.clientX - rect.left;
+                    const sy = e.clientY - rect.top;
+                    const node = ppGetNodeAt(sx, sy);
+                    if (node) {
+                        if (node.allocated) ppDeallocateNode(node.id);
+                        else ppAllocateNode(node.id);
+                    }
+                }
+            });
+
+            ppCanvas.addEventListener('mouseleave', () => {
+                ppMouseDown = false;
+                ppIsDragging = false;
+                ppCanvas.classList.remove('dragging');
+            });
+
+            ppCanvas.addEventListener('dblclick', e => {
+                const rect = ppCanvas.getBoundingClientRect();
+                const sx = e.clientX - rect.left;
+                const sy = e.clientY - rect.top;
+                const node = ppGetNodeAt(sx, sy);
+                if (node) {
+                    ppPanX = node.x;
+                    ppPanY = node.y;
+                    ppZoom = Math.min(ppZoom * 2, 3);
+                } else {
+                    const world = ppScreenToWorld(sx, sy);
+                    ppPanX = world.x;
+                    ppPanY = world.y;
+                    ppZoom = Math.min(ppZoom * 2, 3);
+                }
+                ppNeedsRedraw = true;
+            });
+
+            ppCanvas.addEventListener('wheel', e => {
+                e.preventDefault();
+                const rect = ppCanvas.getBoundingClientRect();
+                const sx = e.clientX - rect.left;
+                const sy = e.clientY - rect.top;
+                const worldBefore = ppScreenToWorld(sx, sy);
+                const factor = e.deltaY > 0 ? 0.9 : 1.1;
+                ppZoom = Math.max(0.15, Math.min(5, ppZoom * factor));
+                const screenAfter = ppWorldToScreen(worldBefore.x, worldBefore.y);
+                ppPanX -= (screenAfter.x - sx) / ppZoom;
+                ppPanY -= (screenAfter.y - sy) / ppZoom;
+                ppNeedsRedraw = true;
+            }, { passive: false });
+
+            // Touch support
+            let ppLastTouchDist = 0;
+            ppCanvas.addEventListener('touchstart', e => {
+                if (e.touches.length === 1) {
+                    ppMouseDown = true;
+                    ppMouseMoved = false;
+                    ppIsDragging = false;
+                    ppDragStartX = e.touches[0].clientX;
+                    ppDragStartY = e.touches[0].clientY;
+                    ppPanStartX = ppPanX;
+                    ppPanStartY = ppPanY;
+                } else if (e.touches.length === 2) {
+                    const dx = e.touches[0].clientX - e.touches[1].clientX;
+                    const dy = e.touches[0].clientY - e.touches[1].clientY;
+                    ppLastTouchDist = Math.sqrt(dx*dx + dy*dy);
+                }
+            }, {passive:false});
+
+            ppCanvas.addEventListener('touchmove', e => {
+                e.preventDefault();
+                if (e.touches.length === 1 && ppMouseDown) {
+                    const dx = e.touches[0].clientX - ppDragStartX;
+                    const dy = e.touches[0].clientY - ppDragStartY;
+                    if (Math.abs(dx) > 3 || Math.abs(dy) > 3) {
+                        ppMouseMoved = true;
+                        ppIsDragging = true;
+                    }
+                    if (ppIsDragging) {
+                        ppPanX = ppPanStartX - dx / ppZoom;
+                        ppPanY = ppPanStartY - dy / ppZoom;
+                        ppNeedsRedraw = true;
+                    }
+                } else if (e.touches.length === 2) {
+                    const dx = e.touches[0].clientX - e.touches[1].clientX;
+                    const dy = e.touches[0].clientY - e.touches[1].clientY;
+                    const dist = Math.sqrt(dx*dx + dy*dy);
+                    if (ppLastTouchDist > 0) {
+                        ppZoom = Math.max(0.15, Math.min(5, ppZoom * (dist / ppLastTouchDist)));
+                        ppNeedsRedraw = true;
+                    }
+                    ppLastTouchDist = dist;
+                }
+            }, {passive:false});
+
+            ppCanvas.addEventListener('touchend', e => {
+                if (e.touches.length === 0) {
+                    if (ppMouseDown && !ppIsDragging && !ppMouseMoved) {
+                        const rect = ppCanvas.getBoundingClientRect();
+                        const sx = ppDragStartX - rect.left;
+                        const sy = ppDragStartY - rect.top;
+                        const node = ppGetNodeAt(sx, sy);
+                        if (node) {
+                            if (node.allocated) ppDeallocateNode(node.id);
+                            else ppAllocateNode(node.id);
+                        }
+                    }
+                    ppMouseDown = false;
+                    ppIsDragging = false;
+                    ppLastTouchDist = 0;
+                }
+            });
+
+            // UI updates
+            function ppUpdateUI() {
+                const allocated = ppGetAllocated();
+                const ptsUsed = allocated.size - 1;
+                const ptsAvail = ppTotalPoints;
+                document.getElementById('pp-pts-count').textContent = ptsUsed;
+                document.getElementById('pp-pts-count').className = 'pp-pts-count' + (ptsUsed >= ptsAvail ? ' warn' : '');
+                const pct = Math.min(100, (ptsUsed / ptsAvail) * 100);
+                document.getElementById('pp-progress-bar').style.width = pct + '%';
+            }
+
+            function ppUpdateNodeInfo(node) {
+                const detail = document.getElementById('pp-node-detail');
+                if (!node) {
+                    detail.innerHTML = '<div class="nd-empty">Hover over a node to see details</div>';
+                    return;
+                }
+                const typeLabel = {start:'Start',basic:'Basic',notable:'Notable',keystone:'Keystone',ascendancy:'Ascendancy'}[node.type] || node.type;
+                const typeColor = {
+                    start: ppCOLORS.startStroke,
+                    basic: '#aaa',
+                    notable: ppCOLORS.notableStroke,
+                    keystone: ppCOLORS.keystoneStroke,
+                    ascendancy: ppCOLORS.ascendStroke
+                }[node.type] || '#aaa';
+                let statsHTML = '';
+                if (node.stats && Object.keys(node.stats).length > 0) {
+                    statsHTML = Object.entries(node.stats).map(([k, v]) => {
+                        const label = k.replace(/([A-Z])/g, ' $1').replace(/^./, s => s.toUpperCase());
+                        return `<span style="color:var(--lightning)">${label}: ${v}${typeof v === 'number' && k !== 'flatLife' && k !== 'flatMana' ? '%' : ''}</span>`;
+                    }).join(' &nbsp;|&nbsp; ');
+                }
+                detail.innerHTML = `
+                    <div class="nd-name">${node.name} ${node.allocated ? '✅' : ''}</div>
+                    <div class="nd-type" style="color:${typeColor}">${typeLabel}</div>
+                    <div class="nd-desc">${node.description}</div>
+                    ${statsHTML ? '<div style="margin-top:4px;font-size:12px">' + statsHTML + '</div>' : ''}
+                `;
+            }
+
+            // Zoom controls
+            window.ppZoomBy = function(factor) {
+                ppZoom = Math.max(0.15, Math.min(5, ppZoom * factor));
+                ppNeedsRedraw = true;
+            };
+
+            window.ppFitTree = function() {
+                let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+                ppNodes.forEach(n => {
+                    if (n.x < minX) minX = n.x;
+                    if (n.y < minY) minY = n.y;
+                    if (n.x > maxX) maxX = n.x;
+                    if (n.y > maxY) maxY = n.y;
+                });
+                const cw = ppCanvas.width / (window.devicePixelRatio || 1);
+                const ch = ppCanvas.height / (window.devicePixelRatio || 1);
+                const treeW = maxX - minX + 100;
+                const treeH = maxY - minY + 100;
+                const scaleX = cw / treeW;
+                const scaleY = ch / treeH;
+                ppZoom = Math.min(scaleX, scaleY) * 0.85;
+                ppZoom = Math.max(0.15, Math.min(5, ppZoom));
+                ppPanX = (minX + maxX) / 2;
+                ppPanY = (minY + maxY) / 2;
+                ppNeedsRedraw = true;
+            };
+
+            // ═══════════════════════════════════════════════════════
+            //  FUZZY NODE NAME MATCHING
+            // ═══════════════════════════════════════════════════════
+            function ppMatchNodeNames(inputNames, availableNodes) {
+                const matched = [];
+                const unmatched = [];
+                const usedIds = new Set();
+                inputNames.forEach(input => {
+                    const clean = input.trim().toLowerCase();
+                    if (!clean) return;
+                    const found = availableNodes.find(n =>
+                        !usedIds.has(n.id) && (
+                            n.name.toLowerCase() === clean ||
+                            n.name.toLowerCase().includes(clean) ||
+                            clean.includes(n.name.toLowerCase())
+                        )
+                    );
+                    if (found) {
+                        matched.push(found);
+                        usedIds.add(found.id);
+                    } else {
+                        unmatched.push(input.trim());
+                    }
+                });
+                return { matched, unmatched };
+            }
+
+            // ═══════════════════════════════════════════════════════
+            //  TAB SWITCHING (Import & Export modals)
+            // ═══════════════════════════════════════════════════════
+            window.ppSwitchImportTab = function(tab) {
+                document.querySelectorAll('#pp-import-tabs .pp-modal-tab').forEach(t => t.classList.remove('active'));
+                document.querySelector('#pp-import-tabs .pp-modal-tab[data-tab="' + tab + '"]').classList.add('active');
+                document.querySelectorAll('#pp-import-overlay .pp-tab-content').forEach(c => c.classList.remove('active'));
+                document.getElementById('pp-tab-' + tab).classList.add('active');
+            };
+
+            window.ppSwitchExportTab = function(tab) {
+                document.querySelectorAll('#pp-export-tabs .pp-modal-tab').forEach(t => t.classList.remove('active'));
+                document.querySelector('#pp-export-tabs .pp-modal-tab[data-tab="' + tab + '"]').classList.add('active');
+                document.querySelectorAll('#pp-export-overlay .pp-tab-content').forEach(c => c.classList.remove('active'));
+                document.getElementById('pp-tab-' + tab).classList.add('active');
+            };
+
+            // ═══════════════════════════════════════════════════════
+            //  IMPORT: Node Names
+            // ═══════════════════════════════════════════════════════
+            function ppGetInputNames() {
+                const raw = document.getElementById('pp-import-text').value.trim();
+                if (!raw) return [];
+                return raw.split(/[,;\n]+/).map(s => s.trim()).filter(Boolean);
+            }
+
+            function ppShowMatchStatus(elementId, result, isBuild) {
+                const el = document.getElementById(elementId);
+                if (!result || (result.matched.length === 0 && result.unmatched.length === 0)) {
+                    el.className = 'pp-match-status';
+                    el.innerHTML = '';
+                    return;
+                }
+                let html = '';
+                if (result.matched.length > 0) {
+                    html += `<div>✅ <strong>${result.matched.length}</strong> node(s) matched: ${result.matched.slice(0, 8).map(n => '<em>' + n.name + '</em>').join(', ')}${result.matched.length > 8 ? '…' : ''}</div>`;
+                }
+                if (result.unmatched.length > 0) {
+                    const maxShow = 6;
+                    const shown = result.unmatched.slice(0, maxShow);
+                    html += `<div style="margin-top:4px">⚠️ <strong>${result.unmatched.length}</strong> not found: ${shown.map(s => '<em>' + s + '</em>').join(', ')}${result.unmatched.length > maxShow ? '…' : ''}</div>`;
+                    if (isBuild) {
+                        html += `<div style="margin-top:4px;font-size:11px;opacity:0.7">Our planner has ${ppNodes.length} nodes. The .build file may contain nodes from the full POE2 tree not present in our simplified tree.</div>`;
+                    }
+                }
+                el.className = 'pp-match-status show ' + (result.unmatched.length === 0 ? 'success' : 'warn');
+                el.innerHTML = html;
+            }
+
+            window.ppPreviewNames = function() {
+                const names = ppGetInputNames();
+                if (names.length === 0) {
+                    ppShowMatchStatus('pp-names-match-status', { matched: [], unmatched: [] });
+                    return;
+                }
+                const result = ppMatchNodeNames(names, ppNodes);
+                ppShowMatchStatus('pp-names-match-status', result, false);
+            };
+
+            window.ppDoImportNames = function() {
+                const names = ppGetInputNames();
+                if (names.length === 0) { ppShowToast('⚠️ Please enter node names'); return; }
+                const result = ppMatchNodeNames(names, ppNodes);
+                let imported = 0;
+                for (const node of result.matched) {
+                    if (!node.allocated && ppCanAllocate(node.id)) {
+                        if (ppAllocateNode(node.id)) imported++;
+                    }
+                }
+                ppNeedsRedraw = true;
+                ppCloseImport();
+                let msg = `✅ Imported ${imported} node(s)`;
+                if (result.unmatched.length > 0) msg += ` (${result.unmatched.length} not found)`;
+                ppShowToast(msg);
+            };
+
+            // ═══════════════════════════════════════════════════════
+            //  IMPORT: .build File
+            // ═══════════════════════════════════════════════════════
+            function ppExtractNodeNamesFromBuild(json) {
+                const names = [];
+                // Try various .build format structures
+                if (json.passiveTree) {
+                    if (Array.isArray(json.passiveTree.allocated)) {
+                        json.passiveTree.allocated.forEach(item => {
+                            if (typeof item === 'string') names.push(item);
+                            else if (item && item.name) names.push(item.name);
+                        });
+                    }
+                    if (Array.isArray(json.passiveTree.nodes)) {
+                        json.passiveTree.nodes.forEach(item => {
+                            if (typeof item === 'string') names.push(item);
+                            else if (item && item.name) names.push(item.name);
+                        });
+                    }
+                }
+                if (Array.isArray(json.passives)) {
+                    json.passives.forEach(item => {
+                        if (typeof item === 'string') names.push(item);
+                        else if (item && item.name) names.push(item.name);
+                    });
+                }
+                if (Array.isArray(json.passiveNodes)) {
+                    json.passiveNodes.forEach(item => {
+                        if (typeof item === 'string') names.push(item);
+                        else if (item && item.name) names.push(item.name);
+                    });
+                }
+                // Try to extract from a flat list of node objects
+                if (Array.isArray(json.nodes)) {
+                    json.nodes.forEach(item => {
+                        if (item && item.name && item.allocated) names.push(item.name);
+                    });
+                }
+                return names;
+            }
+
+            function ppGetBuildJson() {
+                const raw = document.getElementById('pp-import-json').value.trim();
+                if (!raw) return null;
+                try {
+                    return JSON.parse(raw);
+                } catch (e) {
+                    ppShowMatchStatus('pp-build-match-status', { matched: [], unmatched: ['⚠️ Invalid JSON'] }, true);
+                    document.getElementById('pp-build-match-status').className = 'pp-match-status show error';
+                    return null;
+                }
+            }
+
+            window.ppPreviewBuild = function() {
+                const json = ppGetBuildJson();
+                if (!json) return;
+                const names = ppExtractNodeNamesFromBuild(json);
+                if (names.length === 0) {
+                    ppShowMatchStatus('pp-build-match-status', { matched: [], unmatched: [] }, true);
+                    return;
+                }
+                const result = ppMatchNodeNames(names, ppNodes);
+                ppShowMatchStatus('pp-build-match-status', result, true);
+            };
+
+            window.ppDoImportBuild = function() {
+                const json = ppGetBuildJson();
+                if (!json) return;
+                const names = ppExtractNodeNamesFromBuild(json);
+                if (names.length === 0) { ppShowToast('⚠️ No node names found in .build file'); return; }
+                const result = ppMatchNodeNames(names, ppNodes);
+                let imported = 0;
+                for (const node of result.matched) {
+                    if (!node.allocated && ppCanAllocate(node.id)) {
+                        if (ppAllocateNode(node.id)) imported++;
+                    }
+                }
+                ppNeedsRedraw = true;
+                ppCloseImport();
+                let msg = `✅ Imported ${imported} node(s) from .build file`;
+                if (result.unmatched.length > 0) msg += ` (${result.unmatched.length} not in our tree)`;
+                ppShowToast(msg);
+            };
+
+            // File drop / upload
+            window.ppHandleBuildFile = function(event) {
+                const file = event.target.files[0];
+                if (!file) return;
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('pp-import-json').value = e.target.result;
+                    ppShowToast('📁 File loaded! Click Preview or Import.');
+                };
+                reader.readAsText(file);
+                event.target.value = '';
+            };
+
+            // ═══════════════════════════════════════════════════════
+            //  EXPORT
+            // ═══════════════════════════════════════════════════════
+            window.ppOpenExport = function() {
+                document.getElementById('pp-export-overlay').classList.add('open');
+                ppPopulateExport();
+            };
+
+            window.ppCloseExport = function() {
+                document.getElementById('pp-export-overlay').classList.remove('open');
+            };
+
+            function ppPopulateExport() {
+                const allocNodes = ppNodes.filter(n => n.allocated);
+                const names = allocNodes.map(n => n.name);
+                const ids = allocNodes.map(n => n.id);
+
+                // Tab 1: Node Names
+                document.getElementById('pp-export-names').value = names.join(', ');
+
+                // Tab 2: Build Summary
+                const offense = allocNodes.filter(n => ['n1','n2','n3','n4','n5','n6','n7','n8','n9','n10','n11','n12','n25','n26','n27','n28','n29','n30','n31','n32','n33','n34','n38','n39','n41','n43'].includes(n.id) || n.id.startsWith('asc'));
+                const defense = allocNodes.filter(n => ['n13','n14','n15','n16','n17','n18','n19','n20','n21','n22','n23','n24','n40','n44','n45'].includes(n.id));
+                const utility = allocNodes.filter(n => ['n35','n36','n37'].includes(n.id));
+                const ascendancy = allocNodes.filter(n => n.type === 'ascendancy');
+
+                let totalStats = {};
+                allocNodes.forEach(n => {
+                    if (n.stats) {
+                        Object.entries(n.stats).forEach(([k, v]) => {
+                            if (typeof v === 'number') {
+                                totalStats[k] = (totalStats[k] || 0) + v;
+                            }
+                        });
+                    }
+                });
+
+                let summary = `⚡ Lightning Monk — Passive Build Summary\n`;
+                summary += `${'═'.repeat(40)}\n`;
+                summary += `Class: Lightning Monk\n`;
+                summary += `Points Allocated: ${allocNodes.length - 1}\n\n`;
+
+                if (offense.length > 0) {
+                    summary += `🗡️ Offense (${offense.length} nodes):\n`;
+                    offense.forEach(n => summary += `  • ${n.name}\n`);
+                    summary += `\n`;
+                }
+                if (defense.length > 0) {
+                    summary += `🛡️ Defense (${defense.length} nodes):\n`;
+                    defense.forEach(n => summary += `  • ${n.name}\n`);
+                    summary += `\n`;
+                }
+                if (utility.length > 0) {
+                    summary += `⚡ Utility (${utility.length} nodes):\n`;
+                    utility.forEach(n => summary += `  • ${n.name}\n`);
+                    summary += `\n`;
+                }
+                if (ascendancy.length > 0) {
+                    summary += `🌟 Ascendancy (${ascendancy.length} nodes):\n`;
+                    ascendancy.forEach(n => summary += `  • ${n.name}\n`);
+                    summary += `\n`;
+                }
+
+                if (Object.keys(totalStats).length > 0) {
+                    summary += `📊 Stat Summary:\n`;
+                    Object.entries(totalStats).sort().forEach(([k, v]) => {
+                        const label = k.replace(/([A-Z])/g, ' $1').replace(/^./, s => s.toUpperCase());
+                        summary += `  • ${label}: +${v}${k !== 'flatLife' && k !== 'flatMana' ? '%' : ''}\n`;
+                    });
+                }
+
+                document.getElementById('pp-export-summary').value = summary;
+
+                // Tab 3: .build JSON
+                const buildJson = {
+                    name: 'Lightning Monk — Gentech Planner',
+                    class: 'Monk',
+                    ascendancy: 'Storm Caller',
+                    level: 26,
+                    passiveTree: {
+                        allocated: ids,
+                        nodeNames: names,
+                        nodeCount: allocNodes.length
+                    }
+                };
+                document.getElementById('pp-export-json').value = JSON.stringify(buildJson, null, 2);
+
+                // Tab 4: Shareable Link
+                const hash = ppEncodeBuildHash();
+                document.getElementById('pp-export-link').value = window.location.origin + window.location.pathname + '#' + hash;
+            }
+
+            // ═══════════════════════════════════════════════════════
+            //  EXPORT: Copy / Download helpers
+            // ═══════════════════════════════════════════════════════
+            window.ppCopyExport = function(elementId) {
+                const el = document.getElementById(elementId);
+                navigator.clipboard.writeText(el.value).then(() => {
+                    ppShowToast('📋 Copied to clipboard!');
+                }).catch(() => {
+                    el.select();
+                    document.execCommand('copy');
+                    ppShowToast('📋 Copied to clipboard!');
+                });
+            };
+
+            window.ppCopyLink = function() {
+                const link = document.getElementById('pp-export-link').textContent;
+                navigator.clipboard.writeText(link).then(() => {
+                    ppShowToast('🔗 Link copied to clipboard!');
+                }).catch(() => {
+                    ppShowToast('⚠️ Copy failed — select the link manually');
+                });
+            };
+
+            window.ppDownloadBuild = function() {
+                const json = document.getElementById('pp-export-json').value;
+                const blob = new Blob([json], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'lightning-monk-build.build';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+                ppShowToast('💾 .build file downloaded!');
+            };
+
+            // ═══════════════════════════════════════════════════════
+            //  SHAREABLE LINK: Encode / Decode
+            // ═══════════════════════════════════════════════════════
+            function ppEncodeBuildHash() {
+                const allocIds = ppNodes.filter(n => n.allocated && n.id !== 'start').map(n => n.id);
+                const data = { v: 1, pts: ppTotalPoints, n: allocIds };
+                return btoa(JSON.stringify(data));
+            }
+
+            function ppDecodeBuildHash(hash) {
+                try {
+                    const data = JSON.parse(atob(hash));
+                    if (data && data.n && Array.isArray(data.n)) return data;
+                    return null;
+                } catch (e) {
+                    return null;
+                }
+            }
+
+            function ppAutoImportFromHash() {
+                if (!window.location.hash || window.location.hash.length < 2) return;
+                const hash = window.location.hash.slice(1);
+                const data = ppDecodeBuildHash(hash);
+                if (!data) return;
+                ppNodes.forEach(n => { n.allocated = (n.id === 'start'); });
+                if (data.pts) {
+                    ppTotalPoints = data.pts;
+                    document.getElementById('pp-pts-input').value = ppTotalPoints;
+                }
+                let imported = 0;
+                for (const id of data.n) {
+                    if (ppAllocateNode(id)) imported++;
+                }
+                ppNeedsRedraw = true;
+                ppUpdateUI();
+                setTimeout(() => ppShowToast(`🔗 Auto-imported ${imported} nodes from shared link!`), 500);
+            }
+
+            // ═══════════════════════════════════════════════════════
+            //  IMPORT/EXPORT: Open/Close
+            // ═══════════════════════════════════════════════════════
+            window.ppOpenImport = function() {
+                document.getElementById('pp-import-overlay').classList.add('open');
+                document.getElementById('pp-import-text').value = '';
+                document.getElementById('pp-import-text').focus();
+                document.getElementById('pp-names-match-status').className = 'pp-match-status';
+                ppSwitchImportTab('names');
+            };
+
+            window.ppCloseImport = function() {
+                document.getElementById('pp-import-overlay').classList.remove('open');
+            };
+
+            // ═══════════════════════════════════════════════════════
+            //  FILE DROP INTERACTION
+            // ═══════════════════════════════════════════════════════
+            function ppInitFileDrop() {
+                const drop = document.getElementById('pp-file-drop');
+                const input = document.getElementById('pp-file-input');
+                if (!drop || !input) return;
+                drop.addEventListener('click', () => input.click());
+                drop.addEventListener('dragover', e => { e.preventDefault(); drop.classList.add('dragover'); });
+                drop.addEventListener('dragleave', () => drop.classList.remove('dragover'));
+                drop.addEventListener('drop', e => {
+                    e.preventDefault();
+                    drop.classList.remove('dragover');
+                    const file = e.dataTransfer.files[0];
+                    if (!file) return;
+                    const reader = new FileReader();
+                    reader.onload = function(ev) {
+                        document.getElementById('pp-import-json').value = ev.target.result;
+                        ppShowToast('📁 File loaded!');
+                    };
+                    reader.readAsText(file);
+                });
+            }
+
+            window.ppSaveToStorage = function() {
+                const data = ppNodes.map(n => n.allocated);
+                localStorage.setItem('poe2_passive_build', JSON.stringify(data));
+                localStorage.setItem('poe2_passive_pts', ppTotalPoints);
+                ppShowToast('Build saved to localStorage!');
+            };
+
+            window.ppResetBuild = function() {
+                ppNodes.forEach(n => { n.allocated = (n.id === 'start'); });
+                ppNeedsRedraw = true;
+                ppUpdateUI();
+                ppShowToast('Tree reset!');
+            };
+
+            // Toast
+            function ppShowToast(msg) {
+                const toast = document.getElementById('pp-toast');
+                toast.textContent = msg;
+                toast.classList.add('show');
+                clearTimeout(toast._timeout);
+                toast._timeout = setTimeout(() => toast.classList.remove('show'), 2000);
+            }
+
+            // Points input
+            document.getElementById('pp-pts-input').addEventListener('change', e => {
+                ppTotalPoints = Math.max(0, parseInt(e.target.value) || 0);
+                ppUpdateUI();
+            });
+
+            // Keyboard shortcuts
+            document.addEventListener('keydown', e => {
+                if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+                const passiveTab = document.getElementById('panel-passive');
+                if (!passiveTab.classList.contains('active')) return;
+                if (e.key === 'r' || e.key === 'R') ppResetBuild();
+                if (e.key === 'f' || e.key === 'F') ppFitTree();
+                if (e.key === 'Escape') { ppCloseImport(); ppCloseExport(); }
+            });
+
+            // Expose resize for tab switching
+            window.ppResizeCanvas = ppResizeCanvas;
+
+            // Init
+            ppResizeCanvas();
+            ppLoadFromStorage();
+            ppUpdateUI();
+            ppFitTree();
+            ppInitFileDrop();
+            ppRenderLoopId = requestAnimationFrame(ppRender);
+            // Auto-import from URL hash (deferred to ensure planner is ready)
+            setTimeout(ppAutoImportFromHash, 100);
+
+            function ppLoadFromStorage() {
+                try {
+                    const data = localStorage.getItem('poe2_passive_build');
+                    const pts = localStorage.getItem('poe2_passive_pts');
+                    if (data) {
+                        const allocs = JSON.parse(data);
+                        ppNodes.forEach((n, i) => { n.allocated = allocs[i] || false; });
+                    }
+                    if (pts) {
+                        ppTotalPoints = parseInt(pts) || 123;
+                        document.getElementById('pp-pts-input').value = ppTotalPoints;
+                    }
+                } catch (e) {}
+            }
+        }
+
+        // ═══════════════════════════════════════════════════════════
+        //  INIT
+        // ═══════════════════════════════════════════════════════════
+        loadBuild();
+        setInterval(loadBuild, 30000);
+    </script>
+</body>
+</html>
