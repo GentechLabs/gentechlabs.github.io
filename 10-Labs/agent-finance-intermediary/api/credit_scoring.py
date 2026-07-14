@@ -64,9 +64,11 @@ class CreditScorer:
         """Compute credit score (300-850)."""
         score = BASE_SCORE
 
-        # 1. Payment history
-        score += profile.on_time_payments * PAYMENT_ON_TIME
-        score += profile.defaults * PAYMENT_DEFAULT
+        # 1. Payment history (clamp inputs to ≥ 0)
+        on_time = max(0, profile.on_time_payments)
+        defaults = max(0, profile.defaults)
+        score += on_time * PAYMENT_ON_TIME
+        score += defaults * PAYMENT_DEFAULT
 
         # 2. Portfolio health (0-100)
         health = self._portfolio_health(profile)
