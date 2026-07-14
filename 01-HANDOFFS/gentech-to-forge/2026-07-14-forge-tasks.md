@@ -68,7 +68,8 @@ TODO: Build Agent Credit Score API wrapper
 2. When you hit a stopping point, save a brain note in `11-Mess Hall/agent-brain/`
 3. When something ships, update the queue via: `assigned_to: gentech, status: shipped`
 4. If you're blocked by Gentech or Jordan, tag it `blocked` + set `blocked_on`
+5. **Cloudflare token** at `/root/.cloudflare-token` — shared between agents. Use it for wrangler deploys / route management.
 
 ---
 
-*Generated 2026-07-14 00:05 UTC*
+*Generated 2026-07-14 01:00 UTC*
