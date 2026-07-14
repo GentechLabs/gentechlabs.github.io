@@ -1,0 +1,178 @@
+:root {
+  /* ── Shared neutrals ── */
+  --gt-ink: #0A0B0D;
+  --gt-charcoal: #13151A;
+  --gt-slate: #1E212B;
+  --gt-mist: #94A3B8;
+  --gt-frost: #E2E8F0;
+  --gt-snow: #F8FAFC;
+
+  /* ── Solana (default) ── */
+  --gt-bg: #05081A;
+  --gt-surface: #0B1029;
+  --gt-surface-elevated: #111A3E;
+  --gt-primary: #8B5CF6;
+  --gt-secondary: #06B6D4;
+  --gt-accent: #A855F7;
+  --gt-glow: #3B82F6;
+
+  --gt-glow-sm: 0 0 12px rgba(139, 92, 246, 0.25);
+  --gt-glow-md: 0 0 24px rgba(139, 92, 246, 0.35);
+  --gt-glow-lg: 0 0 48px rgba(59, 130, 246, 0.3);
+
+  --gt-accent-gradient: linear-gradient(135deg, #8B5CF6 0%, #06B6D4 100%);
+  --gt-border-subtle: rgba(139, 92, 246, 0.08);
+  --gt-badge-bg: rgba(139, 92, 246, 0.12);
+
+  /* ── Typography ── */
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-body: 'Inter', sans-serif;
+
+  /* ── Spacing ── */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 96px;
+
+  /* ── Radii ── */
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+}
+
+/* ── Avalanche theme override ── */
+[data-theme="avalanche"] {
+  --gt-bg: #080808;
+  --gt-surface: #141414;
+  --gt-surface-elevated: #1F1F1F;
+  --gt-primary: #E84142;
+  --gt-secondary: #B91C1C;
+  --gt-accent: #F87171;
+  --gt-glow: #EF4444;
+
+  --gt-glow-sm: 0 0 12px rgba(232, 65, 66, 0.25);
+  --gt-glow-md: 0 0 24px rgba(232, 65, 66, 0.35);
+  --gt-glow-lg: 0 0 48px rgba(239, 68, 68, 0.3);
+
+  --gt-accent-gradient: linear-gradient(135deg, #E84142 0%, #991B1B 100%);
+  --gt-border-subtle: rgba(232, 65, 66, 0.08);
+  --gt-badge-bg: rgba(232, 65, 66, 0.12);
+}
+
+/* ── Base styles ── */
+body {
+  background-color: var(--gt-bg);
+  color: var(--gt-frost);
+  font-family: var(--font-body);
+  transition: background-color 0.3s ease, color 0.2s ease;
+}
+
+/* ── Utility classes that consume tokens ── */
+.gt-surface {
+  background-color: var(--gt-surface);
+  border: 1px solid var(--gt-border-subtle);
+  border-radius: var(--radius-lg);
+  transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gt-surface-elevated {
+  background-color: var(--gt-surface-elevated);
+  box-shadow: var(--gt-glow-sm);
+  border-radius: var(--radius-lg);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gt-btn-primary {
+  background-color: var(--gt-primary);
+  color: var(--gt-snow);
+  border: none;
+  border-radius: var(--radius-md);
+  padding: 14px 28px;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 0.2s ease, box-shadow 0.3s ease, transform 0.1s ease;
+}
+
+.gt-btn-primary:hover {
+  background-color: var(--gt-accent);
+  box-shadow: var(--gt-glow-md);
+  transform: translateY(-1px);
+}
+
+.gt-btn-secondary {
+  background-color: transparent;
+  color: var(--gt-frost);
+  border: 1px solid var(--gt-mist);
+  border-radius: var(--radius-md);
+  padding: 14px 28px;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: border-color 0.2s ease, color 0.2s ease, box-shadow 0.3s ease;
+}
+
+.gt-btn-secondary:hover {
+  border-color: var(--gt-primary);
+  color: var(--gt-primary);
+  box-shadow: var(--gt-glow-sm);
+}
+
+.gt-input {
+  background-color: var(--gt-surface);
+  color: var(--gt-frost);
+  border: 1px solid var(--gt-slate);
+  border-radius: var(--radius-md);
+  padding: 12px 16px;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.gt-input::placeholder {
+  color: var(--gt-mist);
+}
+
+.gt-input:focus {
+  border-color: var(--gt-primary);
+  box-shadow: var(--gt-glow-sm);
+}
+
+.gt-badge {
+  display: inline-flex;
+  align-items: center;
+  background-color: var(--gt-badge-bg);
+  color: var(--gt-primary);
+  border-radius: var(--radius-full);
+  padding: 4px 12px;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.gt-text-gradient {
+  background: var(--gt-accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gt-glow-text {
+  text-shadow: 0 0 20px var(--gt-glow);
+}
