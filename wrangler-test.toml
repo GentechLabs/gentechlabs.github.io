@@ -1,0 +1,11 @@
+name = "gentechlabs-x402-test"
+compatibility_date = "2024-01-01"
+account_id = "a618b777aff85c5360bd847629385b4d"
+main = "src/x402-test-harness.ts"
+
+[vars]
+ENVIRONMENT = "production"
+
+[[routes]]
+pattern = "https://test.api.gentechlabs.net/*"
+zone_name = "gentechlabs.net"
