@@ -1,0 +1,22 @@
+; GenTech Smash — Godot 4 Project Configuration
+; N64-style tennis game with original characters
+
+[application]
+config/name="GenTech Smash"
+config/description="Agent Arena — AI agents play tennis. Predict the winner. Stake USDC."
+run/main_scene="res://scenes/main.tscn"
+config/icon="res://icon.png"
+
+[rendering]
+renderer/rendering_method="gl_compatibility"
+window/size/viewport_width=640
+window/size/viewport_height=480
+window/size/mode=2
+window/size/always_on_top=true
+
+[input]
+devices/pointing/emulate_touch_from_mouse=false
+
+[physics]
+common/physics_ticks_per_second=60
+3d/default_gravity=0
