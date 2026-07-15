@@ -1,14 +1,3 @@
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
 /**
  * GenTech x402 Gateway — v7.0.0
  * 
@@ -110,6 +99,7 @@ const FREE_ROUTES = [
   '/openapi.json',
   '/.well-known/agent.json',
   '/.well-known/agent-card.json',
+  '/.well-known/x402',
 ];
 
 // ── Helpers ─────────────────────────────────────────────────────────────────
@@ -214,30 +204,25 @@ async function verifyPayment(proof: any, requiredAmount: number, env: any): Prom
     if (receiptData.result.status !== '0x1') return { valid: false, error: 'Transaction failed on-chain (receipt status != success)' };
 
     // 9. Parse Transfer event logs from receipt for amount + recipient
-    // This is more secure than decoding tx.input — logs are emitted by the canonical USDC contract
     const transferLog = receiptData.result.logs?.find((log: any) => {
-      // Transfer event: Transfer(address indexed from, address indexed to, uint256 value)
-      // topic0 = keccak256("Transfer(address,address,uint256)")
       return log.topics?.[0]?.toLowerCase() === '0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef'
         && log.address?.toLowerCase() === CONFIG.USDC_BASE.toLowerCase();
     });
 
     if (!transferLog) return { valid: false, error: 'No USDC Transfer event found in transaction logs' };
 
-    // Extract `to` from topics[2] (indexed parameter, 32 bytes, right-padded address)
     const logTo = '0x' + transferLog.topics[2].slice(-40);
     if (logTo.toLowerCase() !== CONFIG.PAYMENT_ADDRESS.toLowerCase()) {
       return { valid: false, error: `Transfer recipient mismatch (got ${logTo})` };
     }
 
-    // Extract value from log data (uint256, 32 bytes)
     const logAmount = Number(BigInt('0x' + transferLog.data.slice(0, 66))) / 1_000_000;
 
     if (logAmount < requiredAmount) {
       return { valid: false, error: `Insufficient payment: ${logAmount.toFixed(6)} USDC transferred, ${requiredAmount.toFixed(6)} required` };
     }
 
-    // 10. Mark as used for idempotency + replay protection (if KV available)
+    // 10. Mark as used for idempotency
     if (env?.NONCE_STORE) {
       const result = { tx: proof.signature, from: tx.from, amount: logAmount, verified: now };
       await env.NONCE_STORE.put('tx:' + proof.signature, JSON.stringify(result), { expirationTtl: 86400 });
@@ -285,27 +270,313 @@ function handlePricing(): Response {
     usdc_base: CONFIG.USDC_BASE,
     facilitator: 'x402.org',
     payment_protocol: 'x402',
-    docs_url: 'https://gentech-x402-gateway.jordanjones0902.workers.dev/openapi.json',
+    docs_url: 'https://api.gentechlabs.net/openapi.json',
   });
 }
 
+/**
+ * Endpoint metadata for OpenAPI spec generation.
+ * Defines HTTP method, query parameters, and request body schemas with examples.
+ */
+interface EndpointMeta {
+  method: 'get' | 'post';
+  summary: string;
+  description: string;
+  queryParams?: { name: string; type: string; description: string; example?: string | number; required?: boolean }[];
+  pathParams?: { name: string; type: string; description: string; example?: string }[];
+  requestBody?: {
+    required?: boolean;
+    properties: { name: string; type: string; description: string; example: any; required?: boolean }[];
+  };
+}
+
+const ENDPOINT_META: Record<string, EndpointMeta> = {
+  '/v1/games/search': {
+    method: 'get',
+    summary: 'Search for game deals across stores',
+    description: 'Search for the cheapest game deals across multiple stores. Returns title, sale price, normal price, store, and deal rating.',
+    queryParams: [{ name: 'title', type: 'string', description: 'Game title to search for', example: 'Cyberpunk 2077', required: true }],
+  },
+  '/v1/games/cheapest': {
+    method: 'get',
+    summary: 'Get cheapest games on sale',
+    description: 'List the cheapest game deals currently available. Filter by store, price range, or metacritic rating.',
+    queryParams: [
+      { name: 'store', type: 'string', description: 'Store filter (e.g. Steam, Epic, GOG)', example: 'Steam', required: false },
+      { name: 'maxPrice', type: 'number', description: 'Maximum price in USD', example: 9.99, required: false },
+    ],
+  },
+  '/v1/games/{id}/news': {
+    method: 'get',
+    summary: 'Get latest news for a game',
+    description: 'Get the latest news articles, updates, and announcements for a specific game by its deal ID.',
+    pathParams: [{ name: 'id', type: 'string', description: 'Game deal ID', example: 'MjE1NTE5' }],
+  },
+  '/v1/games/{id}/release': {
+    method: 'get',
+    summary: 'Get game release date info',
+    description: 'Get release date, platforms, and availability information for a specific game.',
+    pathParams: [{ name: 'id', type: 'string', description: 'Game deal ID', example: 'MjE1NTE5' }],
+  },
+  '/v1/movies/search': {
+    method: 'get',
+    summary: 'Search for movies and deals',
+    description: 'Search for movies with available deals, including digital and physical copy pricing.',
+    queryParams: [{ name: 'title', type: 'string', description: 'Movie title to search for', example: 'Dune: Part Two', required: true }],
+  },
+  '/v1/movies/cheapest': {
+    method: 'get',
+    summary: 'Get cheapest movies on sale',
+    description: 'List the cheapest movie deals currently available across digital and physical retailers.',
+    queryParams: [
+      { name: 'genre', type: 'string', description: 'Movie genre filter', example: 'Sci-Fi', required: false },
+      { name: 'maxPrice', type: 'number', description: 'Maximum price in USD', example: 14.99, required: false },
+    ],
+  },
+  '/v1/movies/{id}/details': {
+    method: 'get',
+    summary: 'Get movie details',
+    description: 'Get detailed information about a specific movie including synopsis, cast, runtime, and rating.',
+    pathParams: [{ name: 'id', type: 'string', description: 'Movie deal ID', example: 'NzIwNjk=' }],
+  },
+  '/v1/movies/{id}/trailers': {
+    method: 'get',
+    summary: 'Get movie trailers',
+    description: 'Get available trailers and video previews for a specific movie.',
+    pathParams: [{ name: 'id', type: 'string', description: 'Movie deal ID', example: 'NzIwNjk=' }],
+  },
+  '/v1/intel/search': {
+    method: 'get',
+    summary: 'Market intelligence search',
+    description: 'Search market intelligence data for trends, sentiment, and analysis across crypto and AI agent markets.',
+    queryParams: [{ name: 'q', type: 'string', description: 'Search query for market intelligence', example: 'AI agent tokens', required: true }],
+  },
+  '/v1/intel/cheapest': {
+    method: 'get',
+    summary: 'Cheapest intelligence data',
+    description: 'Get the cheapest available market intelligence data points and analysis snippets.',
+    queryParams: [
+      { name: 'category', type: 'string', description: 'Data category filter', example: 'defi', required: false },
+      { name: 'limit', type: 'integer', description: 'Number of results to return', example: 10, required: false },
+    ],
+  },
+  '/v1/airdrops/check': {
+    method: 'post',
+    summary: 'Check wallet for airdrop eligibility',
+    description: 'Check if a wallet address is eligible for any tracked airdrops. Returns eligibility status, claimable amounts, and deadlines.',
+    requestBody: {
+      required: true,
+      properties: [
+        { name: 'address', type: 'string', description: 'Wallet address to check (EVM or Solana)', example: '0x7EBff1DbD34172C5b55697654006C9642b5236a3' },
+        { name: 'chain', type: 'string', description: 'Blockchain to check (ethereum, solana, base)', example: 'base' },
+      ],
+    },
+  },
+  '/v1/wallet/analyze': {
+    method: 'post',
+    summary: 'Analyze a wallet portfolio',
+    description: 'Analyze a wallet address for token holdings, portfolio value, risk score, and trading activity. Returns comprehensive analytics.',
+    requestBody: {
+      required: true,
+      properties: [
+        { name: 'address', type: 'string', description: 'Wallet address to analyze', example: '0x7EBff1DbD34172C5b55697654006C9642b5236a3' },
+        { name: 'chain', type: 'string', description: 'Chain to analyze (ethereum, base, solana)', example: 'base' },
+      ],
+    },
+  },
+  '/v1/nft/search': {
+    method: 'get',
+    summary: 'Search NFTs by collection or trait',
+    description: 'Search for NFTs across collections by name, collection address, or trait attributes. Returns floor prices and marketplace links.',
+    queryParams: [
+      { name: 'collection', type: 'string', description: 'Collection name or address', example: 'Bored Ape Yacht Club', required: true },
+      { name: 'limit', type: 'integer', description: 'Max results to return', example: 20, required: false },
+    ],
+  },
+  '/v1/score/{mint}': {
+    method: 'get',
+    summary: 'Get token security score',
+    description: 'Get a detailed security risk score for a Solana token by its mint address. Analyzes liquidity, holders, mint authority, and known risk factors.',
+    pathParams: [{ name: 'mint', type: 'string', description: 'Solana token mint address (base58)', example: 'So11111111111111111111111111111111111111112' }],
+  },
+  '/v1/agent/scan': {
+    method: 'post',
+    summary: 'Scan and evaluate AI agent',
+    description: 'Scan and evaluate an AI agent by its wallet address or platform URL. Returns reputation score, transaction history, and risk assessment.',
+    requestBody: {
+      required: true,
+      properties: [
+        { name: 'address', type: 'string', description: 'Agent wallet address to scan', example: '0x742d35Cc6634C0532925a3b844Bc454e4438f44f' },
+        { name: 'chain', type: 'string', description: 'Blockchain network', example: 'base' },
+      ],
+    },
+  },
+};
+
+/**
+ * Look up endpoint metadata by route pattern, with fuzzy fallback for path-variant routes.
+ */
+function getEndpointMeta(route: string): EndpointMeta {
+  if (ENDPOINT_META[route]) return ENDPOINT_META[route];
+  // Fallback: try to find a template-based match
+  const base = route.split('/').slice(0, -1).join('/');
+  for (const [pattern, meta] of Object.entries(ENDPOINT_META)) {
+    const patternBase = pattern.split('/').slice(0, -1).join('/');
+    if (base === patternBase && meta.pathParams) return meta;
+  }
+  // Ultimate fallback
+  return {
+    method: 'get',
+    summary: `GenTech API - ${route.split('/').pop()}`,
+    description: `x402 paid endpoint. Cost varies. Payment via X-Payment-Proof header.`,
+  };
+}
+
 function handleOpenAPI(): Response {
-  // Simplified OpenAPI spec for discovery
   const paths: any = {};
+
   for (const [route, price] of Object.entries(PRICING)) {
-    paths[route] = {
-      get: {
-        summary: `GenTech API - ${route.split('/').pop()}`,
-        description: `x402 paid endpoint. Cost: $${price.toFixed(3)} USDC. Payment via X-Payment-Proof header.`,
-        parameters: [
-          { name: 'X-Payment-Proof', in: 'header', required: true, schema: { type: 'string' }, description: 'Base64-encoded x402 payment proof' },
-        ],
-        responses: {
-          '200': { description: 'Successful response' },
-          '402': { description: 'Payment required' },
+    const meta = getEndpointMeta(route);
+    const method = meta.method || 'get';
+
+    // Build parameters array
+    const parameters: any[] = [];
+
+    // Add path parameters
+    if (meta.pathParams) {
+      for (const p of meta.pathParams) {
+        parameters.push({
+          name: p.name,
+          in: 'path',
+          required: true,
+          schema: { type: p.type },
+          description: p.description,
+          example: p.example,
+        });
+      }
+    }
+
+    // Add query parameters
+    if (meta.queryParams) {
+      for (const p of meta.queryParams) {
+        parameters.push({
+          name: p.name,
+          in: 'query',
+          required: p.required || false,
+          schema: { type: p.type },
+          description: p.description,
+          example: p.example,
+        });
+      }
+    }
+
+    // Build requestBody if applicable
+    let requestBody: any = undefined;
+    if (method === 'post' && meta.requestBody) {
+      const properties: Record<string, any> = {};
+      const required: string[] = [];
+      for (const prop of meta.requestBody.properties) {
+        properties[prop.name] = {
+          type: prop.type,
+          description: prop.description,
+        };
+        if (prop.required !== false) required.push(prop.name);
+      }
+      requestBody = {
+        required: meta.requestBody.required ?? true,
+        content: {
+          'application/json': {
+            schema: {
+              type: 'object',
+              ...(required.length > 0 ? { required } : {}),
+              properties,
+            },
+            example: Object.fromEntries(
+              meta.requestBody.properties.map(p => [p.name, p.example])
+            ),
+          },
+        },
+      };
+    }
+
+    // 402 response schema
+    const paymentRequiredSchema = {
+      type: 'object',
+      properties: {
+        status: { type: 'integer', example: 402 },
+        title: { type: 'string', example: 'Payment Required' },
+        detail: { type: 'string', example: `This endpoint costs $${price.toFixed(3)} USDC. Include a signed x402 payment in the X-Payment-Proof header.` },
+        x402version: { type: 'string', example: 'x402-v2' },
+        accepts: {
+          type: 'array',
+          items: {
+            type: 'object',
+            properties: {
+              type: { type: 'string', example: 'x402' },
+              scheme: { type: 'string', example: 'exact' },
+              network: { type: 'string', example: 'eip155:8453' },
+              amount: { type: 'string', example: String(price * 1_000_000) },
+              asset: { type: 'string', example: '0x833589fcd6edb6e08f4c7c32d4f71b54bda02913' },
+              payTo: { type: 'string', example: '0x7EBff1DbD34172C5b55697654006C9642b5236a3' },
+              maxTimeoutSeconds: { type: 'integer', example: 60 },
+            },
+          },
+        },
+        instructions: {
+          type: 'object',
+          properties: {
+            protocol: { type: 'string', example: 'x402' },
+            header: { type: 'string', example: 'X-Payment-Proof' },
+            encoding: { type: 'string', example: 'base64' },
+            networks: { type: 'array', items: { type: 'string' }, example: ['base', 'solana', 'avalanche', 'bnb', 'okx'] },
+            proofStructure: {
+              type: 'object',
+              properties: {
+                signature: { type: 'string', example: '0xabc...' },
+                sender: { type: 'string', example: '0xabc...' },
+                timestamp: { type: 'integer', example: 1700000000 },
+                amount: { type: 'string', example: '10000' },
+                nonce: { type: 'string', example: 'uuid-or-random-string' },
+              },
+            },
+          },
         },
       },
     };
+
+    // Build operation entry
+    const operation: any = {
+      summary: meta.summary,
+      description: `**x402 paid endpoint** — Cost: **$${price.toFixed(3)} USDC**. Send without X-Payment-Proof to receive 402 with payment instructions.`,
+      parameters,
+      responses: {
+        '200': {
+          description: 'Successful response — data returned after payment verification',
+          content: {
+            'application/json': {
+              schema: { type: 'object' },
+            },
+          },
+        },
+        '402': {
+          description: 'Payment required — includes x402 payment instructions and accepts[] array',
+          content: {
+            'application/json': {
+              schema: paymentRequiredSchema,
+            },
+          },
+        },
+      },
+    };
+
+    if (requestBody) {
+      operation.requestBody = requestBody;
+    }
+
+    // Security reference
+    operation.security = [{ x402: [] }];
+
+    paths[route] = { [method]: operation };
   }
 
   return jsonResponse({
@@ -313,9 +584,29 @@ function handleOpenAPI(): Response {
     info: {
       title: 'GenTech x402 Gateway',
       version: CONFIG.VERSION,
-      description: '16 AI-powered API endpoints. Pay per call via x402 USDC on Base, Solana, Avalanche, BNB, or OKX.',
+      description: '16 AI-powered API endpoints. Pay per call via x402 USDC on Base, Solana, Avalanche, BNB, or OKX. All paid endpoints require X-Payment-Proof header. Send without it to receive 402 + payment instructions.',
+      'x-api-name': 'GenTech Labs x402 API',
+      'x-payment-protocol': 'x402',
+      'x-payment-token': 'USDC',
     },
-    servers: [{ url: 'https://api.gentechlabs.net' }],
+    servers: [
+      { url: 'https://api.gentechlabs.net', description: 'Production' },
+    ],
+    security: [{ x402: [] }],
+    components: {
+      securitySchemes: {
+        x402: {
+          type: 'apiKey',
+          in: 'header',
+          name: 'X-Payment-Proof',
+          description: 'x402 payment proof (base64-encoded JSON with signature, sender, timestamp, amount, nonce). Obtain by sending USDC to 0x7EBff1DbD34172C5b55697654006C9642b5236a3 on Base.',
+        },
+      },
+    },
+    externalDocs: {
+      description: 'x402 Protocol Specification',
+      url: 'https://x402.org',
+    },
     paths,
   });
 }
@@ -336,6 +627,47 @@ function handleAgentCard(): Response {
       facilitator: 'x402.org',
       paymentAddress: CONFIG.PAYMENT_ADDRESS,
     },
+  });
+}
+
+// x402 v2 Discovery — /.well-known/x402
+function handleX402Discovery(): Response {
+  const resources: string[] = [];
+  const resourceDetails: any[] = [];
+
+  for (const [route, price] of Object.entries(PRICING)) {
+    const name = `GenTech - ${route.split('/').pop() || 'endpoint'}`;
+    resources.push(`https://api.gentechlabs.net${route}`);
+    resourceDetails.push({
+      url: `https://api.gentechlabs.net${route}`,
+      name,
+      description: `x402 paid endpoint. Cost: $${price.toFixed(3)} USDC. Payment via X-Payment-Proof header.`,
+      price,
+    });
+  }
+
+  return jsonResponse({
+    version: 1,
+    resources,
+    resourceDetails,
+    freeTier: {
+      health: 'https://api.gentechlabs.net/health',
+      pricing: 'https://api.gentechlabs.net/pricing',
+      openapi: 'https://api.gentechlabs.net/openapi.json',
+    },
+    baseGateway: {
+      enabled: true,
+      network: 'eip155:8453',
+      networkLabel: 'Base Mainnet',
+      asset: CONFIG.USDC_BASE,
+      assetLabel: 'USDC',
+      payTo: CONFIG.PAYMENT_ADDRESS,
+      gatewayUrl: 'https://api.gentechlabs.net',
+      discoveryUrl: 'https://api.gentechlabs.net/.well-known/x402',
+      openapiUrl: 'https://api.gentechlabs.net/openapi.json',
+      facilitators: ['x402.org'],
+    },
+    instructions: `# GenTech Labs x402 Gateway\n\nPay-per-call API access via x402 protocol. USDC on Base, Solana, Avalanche, BNB, OKX.\n\n## Payment Flow\n1. Send request without payment → HTTP 402 with accepts[] and Payment-Required header.\n2. Sign USDC locally; retry with X-Payment-Proof header (base64 JSON).\n3. On success, backend response is returned.\n\n## Networks\n- Base (eip155:8453) — USDC\n- Solana (solana:mainnet) — USDC\n\n## Pricing\nTiers from $0.001 (micro) to $0.10 (ultra). See /pricing for full breakdown.`,
   });
 }
 
@@ -388,6 +720,7 @@ export default {
     if (path === '/pricing') return handlePricing();
     if (path === '/openapi.json') return handleOpenAPI();
     if (path === '/.well-known/agent.json' || path === '/.well-known/agent-card.json') return handleAgentCard();
+    if (path === '/.well-known/x402') return handleX402Discovery();
 
     // ── Paid Endpoints ──
     const price = getPrice(path);
@@ -397,22 +730,47 @@ export default {
       const tokenHeader = request.headers.get('X-Payment-Token');
 
       if (!proofHeader && !tokenHeader) {
-        // Return 402 with payment requirements
+        // Return 402 with x402 v2 payment requirements
+        const feeWei = Math.floor(price * 1_000_000).toString();
+        
+        const accepts = [{
+          scheme: 'exact',
+          network: 'eip155:8453',
+          amount: feeWei,
+          asset: CONFIG.USDC_BASE.toLowerCase(),
+          payTo: CONFIG.PAYMENT_ADDRESS,
+          maxTimeoutSeconds: 60,
+        }];
+
+        const paymentRequired = btoa(JSON.stringify({
+          x402Version: 2,
+          error: 'Payment required',
+          resource: {
+            url: `https://api.gentechlabs.net${path}`,
+            description: `x402 paid endpoint. Cost: $${price.toFixed(3)} USDC. Payment via X-Payment-Proof header.`,
+            mimeType: 'application/json',
+            serviceName: 'GenTech Labs',
+            tags: ['x402', 'api'],
+          },
+          accepts,
+        }));
+
         return jsonResponse({
           status: 402,
           title: 'Payment Required',
-          detail: `This endpoint costs $${price.toFixed(3)} USDC. Include an x402 payment proof in the X-Payment-Proof header.`,
-          payment: {
+          detail: `This endpoint costs $${price.toFixed(3)} USDC. Include a signed x402 payment in the X-Payment-Proof header.`,
+          x402version: 'x402-v2',
+          accepts: accepts.map(a => ({ type: 'x402', ...a })),
+          network: 'eip155:8453',
+          asset: CONFIG.USDC_BASE,
+          amount: feeWei,
+          payment_address: CONFIG.PAYMENT_ADDRESS,
+          instructions: {
             protocol: 'x402',
-            amount: price,
-            currency: 'USDC',
-            networks: CONFIG.NETWORKS,
-            paymentAddress: CONFIG.PAYMENT_ADDRESS,
-            usdcContract: CONFIG.USDC_BASE,
-            rpcUrl: CONFIG.RPC_URLS.base,
-            timestampWindow: CONFIG.TIMESTAMP_WINDOW,
             header: 'X-Payment-Proof',
             encoding: 'base64',
+            networks: CONFIG.NETWORKS,
+            timestampWindow: CONFIG.TIMESTAMP_WINDOW,
             proofStructure: {
               signature: 'Transaction hash (0x...)',
               sender: 'Payer address (0x...)',
@@ -421,7 +779,7 @@ export default {
               nonce: 'Unique nonce for replay protection',
             },
           },
-        }, 402);
+        }, 402, { 'Payment-Required': paymentRequired });
       }
 
       // Verify payment
@@ -449,129 +807,4 @@ export default {
     // ── No matching route ──
     return jsonResponse({ error: 'not_found', message: `Endpoint not found: ${path}. Visit GET /health for available endpoints.` }, 404);
   },
-=======
-export default {
-  async fetch(request, env) {
-    const url = new URL(request.url);
-=======
-export default {
-  async fetch(request, env) {
-    const url = new URL(request.url);
->>>>>>> Stashed changes
-=======
-export default {
-  async fetch(request, env) {
-    const url = new URL(request.url);
->>>>>>> Stashed changes
-=======
-export default {
-  async fetch(request, env) {
-    const url = new URL(request.url);
->>>>>>> Stashed changes
-=======
-export default {
-  async fetch(request, env) {
-    const url = new URL(request.url);
->>>>>>> Stashed changes
-=======
-export default {
-  async fetch(request, env) {
-    const url = new URL(request.url);
->>>>>>> Stashed changes
-=======
-export default {
-  async fetch(request, env) {
-    const url = new URL(request.url);
->>>>>>> Stashed changes
-=======
-export default {
-  async fetch(request, env) {
-    const url = new URL(request.url);
->>>>>>> Stashed changes
-=======
-export default {
-  async fetch(request, env) {
-    const url = new URL(request.url);
->>>>>>> Stashed changes
-=======
-export default {
-  async fetch(request, env) {
-    const url = new URL(request.url);
->>>>>>> Stashed changes
-=======
-export default {
-  async fetch(request, env) {
-    const url = new URL(request.url);
->>>>>>> Stashed changes
-    
-    // Get VPS configuration from environment variables
-    const vpsIP = env.VPS_IP || '2.24.195.196';
-    const vpsPort = env.VPS_PORT || '80';
-    
-    // Route deals.gentechlabs.net and api.gentechlabs.net to VPS API server
-    if (url.hostname === 'deals.gentechlabs.net' || 
-        url.hostname === 'api.gentechlabs.net' ||
-        url.hostname === 'gentechlabs.net' && (url.pathname.startsWith('/api') || url.pathname.startsWith('/v1'))) {
-      
-      const originUrl = new URL(request.url);
-      originUrl.hostname = vpsIP;
-      originUrl.port = vpsPort;
-      
-      // Forward request to VPS
-      const originRequest = new Request(originUrl, request);
-      
-      try {
-        const response = await fetch(originRequest);
-        // Add CORS headers
-        const corsHeaders = {
-          'Access-Control-Allow-Origin': '*',
-          'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-          'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-        };
-        
-        const newResponse = new Response(response.body, response);
-        Object.entries(corsHeaders).forEach(([key, value]) => {
-          newResponse.headers.set(key, value);
-        });
-        
-        return newResponse;
-      } catch (error) {
-        return new Response('Origin unreachable', { status: 502 });
-      }
-    }
-    
-    // Default: pass through to existing backend
-    return fetch(request);
-  }
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
 };

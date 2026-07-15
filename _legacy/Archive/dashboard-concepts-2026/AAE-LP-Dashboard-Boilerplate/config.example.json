@@ -1,0 +1,103 @@
+{
+  "template_version": "v1.0.0",
+  "chain": {
+    "id": "avax",
+    "name": "Avalanche C-Chain",
+    "native_token": "AVAX",
+    "native_symbol": "AVAX"
+  },
+  "pool": {
+    "address": "0x864d4e5ee7318e97483db7eb0912e09f161516ea",
+    "pair": "AVAX / USDC",
+    "platform": "LFJ (Trader Joe)",
+    "fee_tier": "5 bps",
+    "strategy": "CURVE",
+    "bins": 149,
+    "range_min": "8.2217",
+    "range_max": "9.5325",
+    "range_width_pct": 16
+  },
+  "position": {
+    "total_usd": "31.16",
+    "tokens": {
+      "AVAX": {
+        "amount": "1.39",
+        "usd_value": "12.31",
+        "percentage": 39.5
+      },
+      "USDC": {
+        "amount": "18.85",
+        "usd_value": "18.85",
+        "percentage": 60.5
+      }
+    }
+  },
+  "rewards": {
+    "claimable": {
+      "amount": "0.12782",
+      "token": "AVAX",
+      "usd_value": "1.132",
+      " apr": 5137.78,
+      "last_update": "2026-03-31T13:00:00-06:00"
+    },
+    "claim_threshold_usd": 1.00,
+    "compound_action": "true"
+  },
+  "fees": {
+    "last_24h_usd": "0.3331",
+    "last_24h_avax": "0.01828",
+    "last_24h_usdc": "0.17123",
+    "total_fees_since_deposit_usd": "0.1063",
+    "status": "active",
+    "is_in_range": true
+  },
+  "dca": {
+    "schedule": {
+      "weekly": "50-100",
+      "monthly": "200-400",
+      "mode": "flexible",
+      "conviction": "high"
+    },
+    "progress": {
+      "weekly_used_usd": "65.00",
+      "weekly_remaining_usd": "85.00",
+      "month_to_date_used_usd": "150.00",
+      "month_to_date_remaining_usd": "250.00"
+    }
+  },
+  "data_source": {
+    "price_oracle": "chainlink",
+    "pool_stats": "dexscreener",
+    "fee_data": "trader_joe_subgraph",
+    "last_sync": "2026-03-31T13:00:00-06:00",
+    "refresh_interval_seconds": 300
+  },
+  "agent_actions": {
+    "trigger_conditions": [
+      {
+        "type": "claimable_rewards",
+        "condition": ">= 1.00",
+        "action": "claim",
+        "auto_compound": true
+      },
+      {
+        "type": "in_range_streak",
+        "condition": ">= 24h",
+        "action": "compound_all"
+      },
+      {
+        "type": "price偏离",
+        "condition": "price > range_max * 1.05 or price < range_min * 0.95",
+        "action": "rebalance_alert"
+      }
+    ],
+    "notification_channel": "telegram"
+  },
+  "visual_options": {
+    "show_rewards_card": true,
+    "show_dca_progress": true,
+    "show_fees_card": true,
+    "theme": "dark",
+    "mobile_friendly": true
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "name": "genlayer-token-scanner",
+  "version": "1.0.0",
+  "description": "On-chain token risk scanner using GenLayer Intelligent Contracts + GoPlus API + LLM analysis",
+  "scripts": {
+    "deploy": "genlayer deploy",
+    "dev": "cd frontend && npm run dev",
+    "build": "cd frontend && npm run build",
+    "test": "gltest",
+    "network": "genlayer network"
+  },
+  "dependencies": {
+    "genlayer": "latest"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ProtoJay4789/genlayer-token-scanner"
+  }
+}

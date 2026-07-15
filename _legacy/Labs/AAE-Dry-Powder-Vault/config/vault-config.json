@@ -1,0 +1,138 @@
+{
+  "networks": {
+    "base_sepolia": {
+      "name": "Base Sepolia Testnet",
+      "chain_id": 84532,
+      "rpc_url": "https://sepolia.base.org",
+      "explorer": "https://sepolia.basescan.org",
+      "usdc": "0x036CbD53842c54125e43f1602f08130F5045d35A",
+      "cctp_token_messenger": "0x8773E9FFD7ff70a9AE42D070606ACB028d3d7513",
+      "cctp_message_transmitter": "0xE30FE3d2A8F9e1b3Bc2F9C3f5F5Ae615eC872024",
+      "aerodrome_router": "0xcF77a3Ba9A5CA399B7c97c8b328D78F8BF0B6322",
+      "across_spokepool": "0xb4a8d45647445EA9FC3E1058096142390683dBC2",
+      "notes": "CCTP V2 live on Base testnet, Across SpokePool live"
+    },
+    "base_mainnet": {
+      "name": "Base Mainnet",
+      "chain_id": 8453,
+      "rpc_url": "https://mainnet.base.org",
+      "explorer": "https://basescan.org",
+      "usdc": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+      "cctp_token_messenger": "0x095937E307DE7E37e0660108a8be68B4bC4e621C",
+      "cctp_message_transmitter": "0xAD0936929B32Fb5ab6515db43a9b0B185668956E",
+      "aerodrome_router": "0xcF77a3Ba9A5CA399B7c97c8b328D78F8BF0B6322",
+      "across_spokepool": "0xb4a8d45647445EA9FC3E1058096142390683dBC2"
+    },
+    "avalanche_mainnet": {
+      "name": "Avalanche C-Chain",
+      "chain_id": 43114,
+      "rpc_url": "https://api.avax.network/ext/bc/C/rpc",
+      "explorer": "https://snowtrace.io",
+      "usdc": "0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E",
+      "cctp_token_messenger": "0x095937E307DE7E37e0660108a8be68B4bC4e621C",
+      "cctp_message_transmitter": "0xE30FE3d2A8F9e1b3Bc2F9C3f5F5Ae615eC872024",
+      "lfj_factory": "0x9E3eAB2f7cB5E7c0c0A1f4F8e3C0A676F9e5C8A8",
+      "across_spokepool": "0x6f26bf09b1c792e3228e5467807a900a503c0281"
+    },
+    "solana_mainnet": {
+      "name": "Solana Mainnet",
+      "rpc_url": "https://api.mainnet-beta.solana.com",
+      "explorer": "https://solscan.io",
+      "usdc": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+      "dlmm_program": "LBUZKhRxPF3XUpBCjp4YzTKgLccjZhTSDM9YuVaPwxo",
+      "pools": {
+        "SOL-USDC": "5quBdH1u5vMkiJw1aVdqnYP2S8Xfq3S2Pp5pMQEJqTnS",
+        "USDC-USDT": "ARwi1S4DaiTG5DX7S4M4ZsrXqpMD1MrTmbu9ue2tpmEq"
+      }
+    }
+  },
+  "vault": {
+    "operator": "0x0000000000000000000000000000000000000000",
+    "performance_fee_bps": 1000,
+    "bridge_fee_bps": 20,
+    "min_bridge_usdc": "10000000",
+    "max_bridge_usdc": "1000000000000"
+  },
+  "rotation": {
+    "min_yield_delta_pct": 3.0,
+    "min_narrative_delta": 0.15,
+    "max_rotation_pct": 30.0,
+    "cooldown_hours": 4,
+    "risk_cap": 0.7
+  },
+  "yield_sources": {
+    "base": {
+      "protocol": "Aerodrome",
+      "pools": {
+        "USDC-WETH": {"base_apy": 8.5, "tvl": 15000000, "risk": 0.3},
+        "USDC-USDbC": {"base_apy": 3.2, "tvl": 25000000, "risk": 0.1}
+      }
+    },
+    "avalanche": {
+      "protocol": "LFJ (Trader Joe)",
+      "pools": {
+        "AVAX-USDC": {"base_apy": 12.0, "tvl": 8000000, "risk": 0.5},
+        "USDC.e-USDC": {"base_apy": 4.5, "tvl": 12000000, "risk": 0.1}
+      }
+    },
+    "solana": {
+      "protocol": "Meteora DLMM",
+      "pools": {
+        "SOL-USDC": {"base_apy": 10.0, "tvl": 20000000, "risk": 0.4},
+        "USDC-USDT": {"base_apy": 5.0, "tvl": 30000000, "risk": 0.05}
+      }
+    }
+  },
+  "bridges": {
+    "cctp": {
+      "supported_chains": ["base", "avalanche", "ethereum"],
+      "fee": "free",
+      "settlement_time": "~15 minutes",
+      "solana_support": false
+    },
+    "across": {
+      "supported_chains": ["base", "avalanche", "ethereum", "arbitrum", "optimism", "solana"],
+      "fee_pct": 0.08,
+      "settlement_time": "~5 seconds",
+      "solana_support": true,
+      "spokepools": {
+        "base": "0xb4a8d45647445EA9FC3E1058096142390683dBC2",
+        "avalanche": "0x6f26bf09b1c792e3228e5467807a900a503c0281"
+      }
+    },
+    "debridge": {
+      "supported_chains": ["base", "avalanche", "ethereum", "arbitrum", "solana"],
+      "fee_flat_eth": 0.001,
+      "settlement_time": "instant",
+      "solana_support": true,
+      "threshold_usd": 50000
+    }
+  },
+  "defillama": {
+    "pools_url": "https://yields.llama.fi/pools",
+    "protocol_url": "https://api.llama.fi/protocol/{protocol}",
+    "refresh_interval_seconds": 3600,
+    "use_live_yields": true
+  },
+  "adapters": {
+    "aerodrome": {
+      "router": "0xcF77a3Ba9A5CA399B7c97c8b328D78F8BF0B6322",
+      "slippage_default_pct": 0.5,
+      "gas_buffer_multiplier": 1.2
+    },
+    "meteora": {
+      "program_id": "LBUZKhRxPF3XUpBCjp4YzTKgLccjZhTSDM9YuVaPwxo",
+      "default_bin_spread": 30,
+      "strategies": {
+        "conservative": {"bin_spread": 10, "risk": 0.1},
+        "moderate": {"bin_spread": 30, "risk": 0.4},
+        "aggressive": {"bin_spread": 60, "risk": 0.7}
+      }
+    },
+    "bridge": {
+      "primary": "across",
+      "fallback": "debridge",
+      "auto_select_threshold_usd": 50000
+    }
+  }
+}

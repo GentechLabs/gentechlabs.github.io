@@ -5,6 +5,7 @@ Items you can work on independently — no Jordan needed.
 
 ---
 
+<<<<<<< HEAD
 ## 🖥️ Desktop — Your Lane (9 items)
 
 ### [HIGH] #28 — PixelRAG — Visual Search Demo (medium)
@@ -60,6 +61,17 @@ TODO: Deploy Rugcheck v2 API to port 8088
 TODO: Add Q402 payment middleware
 TODO: List in pay-skills catalog
 TODO: Build Agent Credit Score API wrapper
+=======
+## 🖥️ Desktop — Your Lane (2 items)
+
+### [MEDIUM] #21 — RomM + AI Companion (medium)
+**Status:** ▶️ Ready
+**What:** 
+
+### [HIGH] #48 — KytyPS5 — PS5 Emulator Contribution (hard)
+**Status:** ▶️ Ready
+**What:** 
+>>>>>>> 421f457856e3e1f11dcc14d9742483f52a28aaf2
 
 ---
 ## How to use this
@@ -71,4 +83,8 @@ TODO: Build Agent Credit Score API wrapper
 
 ---
 
+<<<<<<< HEAD
 *Generated 2026-07-15 20:01 UTC*
+=======
+*Generated 2026-07-15 13:31 UTC*
+>>>>>>> 421f457856e3e1f11dcc14d9742483f52a28aaf2
