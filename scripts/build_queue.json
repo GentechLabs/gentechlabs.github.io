@@ -1,6 +1,6 @@
 {
   "version": 4.0,
-  "updated": "2026-07-11 18:29",
+  "updated": "2026-07-15 02:00",
   "meta": {
     "generated_by": "gentech",
     "forge_read_source": "this file \u2014 items with assigned_to: forge and status: pending are active queue"
@@ -34,12 +34,13 @@
       "id": 0,
       "name": "OKX AI Genesis Hackathon",
       "status": "in_progress",
-      "assigned_to": "gentech",
+      "assigned_to": "forge",
       "deadline": "2026-07-17",
       "priority": "urgent",
       "effort_hours": 20,
       "difficulty": "hard",
-      "platform": "cloud"
+      "detail": "Agentic Wallet login + 90-sec demo video + submit form. $100K prize. 3 days left \u2014 URGENT.",
+      "platform": "either"
     },
     {
       "id": 29,
@@ -104,12 +105,12 @@
     {
       "id": 36,
       "name": "Pika MCP Plugin for Agent Kit",
-      "status": "built",
+      "status": "shipped",
       "assigned_to": "gentech",
       "deadline": "2026-07-14",
       "priority": "high",
       "effort_hours": 4,
-      "notes": "Plugin built: Python MCP server (stdio transport, 3 tools), Fal.ai Pika API client, Hermes skill doc, 17 tests passing. Configure via Pika MCP at mcp.pika.me/api/mcp or Fal.ai API key.",
+      "notes": "SHIPPED 2026-07-14: Pika MCP plugin verified \u2014 17/17 tests pass, code reviewed, MCP protocol clean (tools/list, tools/call, initialize, ping). Fal.ai Pika client with text-to-video and image-to-video. Needs FAL_KEY for production use or Pika MCP at mcp.pika.me.",
       "difficulty": "medium",
       "platform": "cloud"
     },
@@ -134,7 +135,7 @@
       "priority": "high",
       "effort_hours": 8,
       "difficulty": "medium",
-      "notes": "Build Sui x402 plugin for Agent Kit (same pattern as Algorand + Robinhood). Submit to Agentic Web + DeFi & Payments tracks ($30K/$15K/$10K per track). Jordan registering with Forge. Scope started Jul 11. Plugin scaffold built: SuiX402Plugin class with pay/receive/balance/registerAgent methods. README with architecture. Deadline Aug 15.",
+      "notes": "Build Sui x402 plugin for Agent Kit (same pattern as Algorand + Robinhood). Submit to Agentic Web + DeFi & Payments tracks ($30K/$15K/$10K per track). Jordan registering with Forge. Scope started Jul 11. Plugin scaffold NOT yet in Agent Kit \u2014 no code found in plugins/. Needs: (1) Sui plugin dir + plugin.json, (2) SuiX402Plugin class, (3) tests. Deadline Aug 15.",
       "platform": "cloud"
     },
     {
@@ -205,7 +206,7 @@
       "deadline": null,
       "priority": "high",
       "effort_hours": 12,
-      "notes": "Research: Monad Foundation joined x402 Foundation (Jun 29, 2026). Agent Hub has 8 dApp manifests (Uniswap, Morpho, Balancer, Kuru, Clober, Nad.fun, DevFun, Blinq.fi). Monad runs native x402 facilitator + ERC-8004 support \u2014 directly compatible with Agent Kit. Agent registered on Dev.fun Arena (ID: cmrexlc1u2sg12dkyeflbga3a). Pending: Jordan claim, PortalHQ skills integration, x402 settlement setup. 12h remaining \u2014 needs dedicated session.",
+      "notes": "Research complete (Jul 12). 8 dApp manifests indexed. Agent registered on Dev.fun Arena (ID: cmrexlc1u2sg12dkyeflbga3a). Pending: (1) Jordan claim agent at arena.dev.fun, (2) PortalHQ skills registration at agents.portalhq.io/monad/skills/, (3) x402 facilitator config. Also $50K Poker Arena (free Playground S7 open). Full docs at 10-Labs/monad-agent-hub/. Needs dedicated session.",
       "difficulty": "medium",
       "platform": "cloud"
     },
@@ -327,6 +328,41 @@
       "effort_hours": 2,
       "notes": "Strategic memo drafted \u2014 saved to 00-HQ/agents-as-rwas-thesis.md",
       "difficulty": "hard",
+      "platform": "cloud"
+    },
+    {
+      "id": 45,
+      "name": "Dry Powder Mode \u2014 AAE Stop-Loss Agent",
+      "status": "in_progress",
+      "assigned_to": "gentech",
+      "deadline": null,
+      "priority": "high",
+      "effort_hours": 8,
+      "difficulty": "medium",
+      "notes": "Phase 1 (crash detection engine) built Jul 14 night session. Design doc at 09-Green Room/designs/dry-powder-mode.md. Live prices via BlockRun + CoinGecko. Config at 03-Strategies/config/dry-powder-config.json. Pending Phases 2-10: LP withdrawal, swap, recovery, redeploy, Telegram notifications, advisory/auto wiring, production testing, Agent Kit plugin.",
+      "platform": "cloud"
+    },
+    {
+      "id": 46,
+      "name": "DeFi Dashboard \u2014 GenTech Hub Refresh",
+      "status": "pending",
+      "assigned_to": "gentech",
+      "deadline": null,
+      "priority": "medium",
+      "difficulty": "medium",
+      "notes": "Current defi-dashboard.html is archived (replaced by Portfolio Health Check cron). Need to assess if rebuild is warranted or if PoE2 dashboard pattern should extend to DeFi. Not started \u2014 medium priority.",
+      "platform": "cloud"
+    },
+    {
+      "id": 47,
+      "name": "OpenAPI Schema Fix — x402scan Registration",
+      "status": "pending",
+      "assigned_to": "gentech",
+      "deadline": "2026-07-16",
+      "priority": "high",
+      "effort_hours": 3,
+      "difficulty": "medium",
+      "notes": "Fix OpenAPI input schemas on api.gentechlabs.net so x402scan can probe each endpoint's 402 paywall. Add requestBody.content[\"application/json\"].schema with examples to all 15 endpoints. Gateway source is in Docker container (firecrawl-api-1). Must: (1) locate gateway OpenAPI generation code, (2) add parameter schemas + examples, (3) rebuild/redeploy container, (4) re-scan with npx @agentcash/discovery, (5) register on x402scan. Unlocks marketplace listing for 57K+ buyers.",
       "platform": "cloud"
     }
   ]
