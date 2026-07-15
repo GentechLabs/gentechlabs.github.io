@@ -74,6 +74,8 @@ if (score.overall < 700) {
 
 ## Get Involved
 
-Agent Credit Score is live at **gentechlabs.net**. API docs, integration guides, and the smart contracts are all open source.
+- **API docs:** api.gentechlabs.net
+- **Framework:** github.com/ProtoJay4789/agent-credit-score (open source, coming soon)
+- **Integration:** Fast — drops into any x402 or ERC-8004 compatible flow
 
-Built by GenTech Labs. Trust as Infrastructure.
+Built by GenTech Labs. **Trust as Infrastructure.**

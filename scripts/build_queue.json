@@ -1,6 +1,6 @@
 {
   "version": 4.0,
-  "updated": "2026-07-15 02:00",
+  "updated": "2026-07-15 23:30",
   "meta": {
     "generated_by": "gentech",
     "forge_read_source": "this file \u2014 items with assigned_to: forge and status: pending are active queue"
@@ -339,7 +339,7 @@
       "priority": "high",
       "effort_hours": 8,
       "difficulty": "medium",
-      "notes": "Phase 1 (crash detection engine) built Jul 14 night session. Design doc at 09-Green Room/designs/dry-powder-mode.md. Live prices via BlockRun + CoinGecko. Config at 03-Strategies/config/dry-powder-config.json. Pending Phases 2-10: LP withdrawal, swap, recovery, redeploy, Telegram notifications, advisory/auto wiring, production testing, Agent Kit plugin.",
+      "notes": "Phase 1 (crash detection engine) built Jul 14 night session. Design doc at 09-Green Room/designs/dry-powder-mode.md. Live prices via BlockRun + CoinGecko. Config at 03-Strategies/config/dry-powder-config.json. 18 tests added Jul 15 night session (test_dry_powder.py) covering crash scoring, recovery scoring, edge cases — all passing. Pending Phases 2-10: LP withdrawal, swap, recovery, redeploy, Telegram notifications, advisory/auto wiring, production testing, Agent Kit plugin. Requires Jordan's wallet keys for Phases 2+.",
       "platform": "cloud"
     },
     {
@@ -350,19 +350,21 @@
       "deadline": null,
       "priority": "medium",
       "difficulty": "medium",
-      "notes": "Current defi-dashboard.html is archived (replaced by Portfolio Health Check cron). Need to assess if rebuild is warranted or if PoE2 dashboard pattern should extend to DeFi. Not started \u2014 medium priority.",
+      "notes": [
+        "Assessment complete (2026-07-15 night session): Current dashboard is 2185 lines with 13 API calls \u2014 functional but no live data source. POE2 pattern (static JSON + cron) is viable but not urgent. Recommendation: Keep current state. Revisit after #47 x402scan and #45 Dry Powder Mode ship. Not a blocker."
+      ],
       "platform": "cloud"
     },
     {
       "id": 47,
-      "name": "OpenAPI Schema Fix — x402scan Registration",
-      "status": "pending",
+      "name": "OpenAPI Schema Fix \u2014 x402scan Registration",
+      "status": "shipped",
       "assigned_to": "gentech",
       "deadline": "2026-07-16",
       "priority": "high",
       "effort_hours": 3,
       "difficulty": "medium",
-      "notes": "Fix OpenAPI input schemas on api.gentechlabs.net so x402scan can probe each endpoint's 402 paywall. Add requestBody.content[\"application/json\"].schema with examples to all 15 endpoints. Gateway source is in Docker container (firecrawl-api-1). Must: (1) locate gateway OpenAPI generation code, (2) add parameter schemas + examples, (3) rebuild/redeploy container, (4) re-scan with npx @agentcash/discovery, (5) register on x402scan. Unlocks marketplace listing for 57K+ buyers.",
+      "notes": "SHIPPED 2026-07-15 night session: Added requestBody schemas with examples to all 15 endpoints. Added POST support (airdrops/check, wallet/analyze, agent/scan). Added components/securitySchemes (x402). Added per-endpoint 402 response schemas with payment instruction examples. Deployed via wrangler deploy (Version c62fc284). Verified live \u2014 GET and POST paywalls working. Ready for x402scan re-scan.",
       "platform": "cloud"
     }
   ]
