@@ -38,6 +38,13 @@
 - 5.1s audio generated in 3.3s
 - **Ad-hoc verification: 4/4 checks passed**
 
+### OmniVoice-Studio — Installed ✅
+- Cloned from Jordan's GitHub stars (8.5k⭐)
+- v0.3.22 MSI installer downloaded and installed
+- Located at `C:\Program Files\OmniVoice Studio\`
+- Voice cloning, voice design, video dubbing — 646 languages, fully local
+- **Needs:** First launch to test voice cloning
+
 ### RomM AI Companion — Live Tested ✅
 - 20 ticks of real capture + real keypresses to Mario Tennis
 - Vision model: gemma4:31b (cloud) — too slow for real-time (11-16s/frame)
