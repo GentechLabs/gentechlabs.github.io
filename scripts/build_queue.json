@@ -386,6 +386,109 @@
         "Full analysis at 10-Labs/kytyps5-analysis.md"
       ],
       "platform": "desktop"
+    },
+    {
+      "id": 49,
+      "name": "Pay-Skills Catalog Listing — Fresh PR for 13 APIs",
+      "status": "pending",
+      "assigned_to": "gentech",
+      "deadline": null,
+      "priority": "high",
+      "effort_hours": 6,
+      "difficulty": "medium",
+      "notes": [
+        "CRITICAL GAP: GenTech NOT listed in solana-foundation/pay-skills. PR #154 status unknown (may have been rejected for empty OpenAPI paths).",
+        "Action: Create fresh PAY.md files for all 13 APIs with proper inline OpenAPI specs (real paths, request bodies, 200/402 responses).",
+        "APIs to list: Token Risk, DeFi Yield, DeFi Intelligence, Agent Credit Score, Agent Registration, Agent Search, Deal Tracker, Travel Agent, Agent Finance/BNPL, Email Agent, x402 Gateway, Pika MCP, GenTech Agent Kit.",
+        "Use pay catalog scaffold command or write PAY.md manually. Validate with pay catalog check before PR.",
+        "This is the #1 discovery channel on the x402 ecosystem — agents search pay skills catalog first."
+      ],
+      "platform": "cloud"
+    },
+    {
+      "id": 50,
+      "name": "Virtuals ACP — Agent Registration",
+      "status": "pending",
+      "assigned_to": "gentech",
+      "deadline": null,
+      "priority": "high",
+      "effort_hours": 4,
+      "difficulty": "medium",
+      "notes": [
+        "Virtuals ACP has 2,000+ agents onboarded. ACP v2.0 live since Apr 2026.",
+        "Marketplace at virtuals.io — agents hire agents via Agent Commerce Protocol.",
+        "Need to: research registration flow, register GenTech services, configure endpoints.",
+        "Competitors already listed: agents buying/selling services autonomously."
+      ],
+      "platform": "cloud"
+    },
+    {
+      "id": 51,
+      "name": "awesome-x402 — Submit PR (Ecosystem Projects)",
+      "status": "pending",
+      "assigned_to": "gentech",
+      "deadline": null,
+      "priority": "medium",
+      "effort_hours": 1,
+      "difficulty": "easy",
+      "notes": [
+        "PR draft already written at 10-Labs/distribution-push/awesome-x402-pr.md",
+        "Fork xpaysh/awesome-x402, edit README.md under Ecosystem Projects, submit PR.",
+        "Previous PR #810 mentioned in references — this may be a resubmission/fresh PR."
+      ],
+      "platform": "cloud"
+    },
+    {
+      "id": 52,
+      "name": "awesome-agentic-commerce — Submit PR",
+      "status": "pending",
+      "assigned_to": "gentech",
+      "deadline": null,
+      "priority": "medium",
+      "effort_hours": 1,
+      "difficulty": "easy",
+      "notes": [
+        "PR draft at 10-Labs/distribution-push/.",
+        "Merit-Systems/awesome-agentic-commerce repo, add GenTech Labs to service providers.",
+        "Previous PR #440 mentioned — check if still open or needs fresh PR."
+      ],
+      "platform": "cloud"
+    },
+    {
+      "id": 53,
+      "name": "Circle Agent Marketplace — Prepare 5 Endpoints for Registration",
+      "status": "pending",
+      "assigned_to": "gentech",
+      "deadline": null,
+      "priority": "high",
+      "effort_hours": 3,
+      "difficulty": "medium",
+      "notes": [
+        "Circle Agent Marketplace at agents.circle.com now accepting applications.",
+        "Need 5 endpoints ready: CMC quote, DeFi intel, token search, DEX pairs, trending.",
+        "Prepare endpoint docs, test each one, then hand to Jordan for web form submission.",
+        "41 services currently listed — we should be #42."
+      ],
+      "platform": "cloud"
+    },
+    {
+      "id": 54,
+      "name": "Sana Bot — GenTech Bank Integration",
+      "status": "pending",
+      "assigned_to": "gentech",
+      "deadline": null,
+      "priority": "high",
+      "effort_hours": 4,
+      "difficulty": "medium",
+      "notes": [
+        "Sana.bot — open source agent banking platform (MIT on GitHub). Self-custodial Solana wallet, Sana Signature Card, MCP gateway at mcp.sana.bot.",
+        "Already has skills for Hermes, Codex, Claude Code, Cursor.",
+        "ACTION: Create account at sana.bot/gateway (needs Jordan's email + API key generation).",
+        "ACTION: Fork sanabot-skills repo, add GenTech x402 services as new skill pack.",
+        "ACTION: PR our skill pack into their repo — contributes + integrates.",
+        "Open source means we can customize the MCP gateway and policy engine for our agent needs."
+      ],
+      "platform": "cloud"
     }
   ]
 }
