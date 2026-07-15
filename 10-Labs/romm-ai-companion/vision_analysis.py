@@ -77,6 +77,8 @@ class VisionConfig:
     provider: str = "ollama-cloud"
     api_url: str = "https://ollama.com/v1"
     verbose: bool = False
+    use_real_vision: bool = False  # False = fast simulated, True = real vision API
+    real_vision_interval: int = 10  # Use real vision every N frames when use_real_vision=True
     prompt_template: str = (
         "You are analyzing a retro game screenshot. "
         "Extract the following game state as JSON:\n"
