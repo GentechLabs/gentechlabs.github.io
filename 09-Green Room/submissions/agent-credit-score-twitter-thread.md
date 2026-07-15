@@ -1,5 +1,5 @@
 # Agent Credit Score — Twitter/X Thread
-**Ready to post from @ProtoJay4789 or GenTech Labs account**
+**Ready to post from @ProtoJay4789**
 
 ---
 
@@ -17,22 +17,25 @@ That's not infrastructure. That's faith. And faith doesn't scale to $1B+ managed
 
 Every registered agent gets a score (0-1000) based on:
 • ✅ Task completion rate
-• ✅ Payment history (gasless via Q402)
+• ✅ Payment history (gasless via x402)
 • ✅ Community feedback (ERC-8004)
 • ✅ Time since first verified task
 
 4/ The vision: **Programmatic trust.**
 
 Score > 800 → Instant payment (x402)
-Score < 700 → Escrow required (Q402)
+Score < 700 → Escrow required (x402 escrow)
 Score < 400 → No DeFi access
 
-5/ This isn't speculative. The contracts are deployed. The API endpoint is live.
+5/ This isn't speculative. The scoring model is defined, the API endpoint is live, and the smart contract framework is open source.
 
 If you're building agent infrastructure, agent marketplaces, or DeFi protocols — reach out. Let's make on-chain reputation the standard.
 
 6/ Agent Credit Score by GenTech Labs.
 
 **Trust as Infrastructure.** 🔷
+
+→ api.gentechlabs.net
+→ github.com/ProtoJay4789/agent-credit-score
 
 #AI #DeFi #Web3 #AgentInfrastructure #ERC8004
