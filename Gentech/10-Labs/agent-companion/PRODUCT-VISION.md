@@ -1,6 +1,10 @@
 # Agent Companion — Product Vision
 
+<<<<<<< HEAD
 **Status:** Brainstorming Phase — Forge Handoff Ready  
+=======
+**Status: Active (Revised July 2026) — See GAMING-COMPANION-VISION.md for updated direction**
+>>>>>>> 421f457856e3e1f11dcc14d9742483f52a28aaf2
 **Date:** July 6, 2026  
 **Owners:** Gentech + Forge  
 **Target:** v1.0 MVP — 2 weeks to playable prototype, 1 month to polished release

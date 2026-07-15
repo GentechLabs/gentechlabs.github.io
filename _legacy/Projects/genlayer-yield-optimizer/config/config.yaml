@@ -1,0 +1,38 @@
+# Yield Optimizer — Default Configuration
+
+# DeFi Llama API
+api:
+  base_url: "https://yields.llama.fi/pools"
+  timeout: 30
+  user_agent: "GenLayer-YieldOptimizer/1.0"
+
+# Yield filtering
+filters:
+  min_tvl_usd: 100000
+  min_apy: 0.1
+  max_apy: 1000
+  stablecoin_only: false
+
+# Risk scoring
+risk:
+  aave: 85
+  compound: 85
+  curve: 80
+  uniswap: 80
+  convex: 75
+  yearn: 70
+  beefy: 70
+  pendle: 65
+  gmx: 60
+  default: 50
+
+# Gas escrow defaults (in wei)
+gas:
+  default_threshold: 1000000000000000       # 0.001 ETH
+  default_cost_per_rebalance: 500000000000000  # 0.0005 ETH
+
+# Monitoring
+monitoring:
+  interval_seconds: 3600
+  alert_threshold_improvement: 1.0  # percentage points
+  max_pools_displayed: 10

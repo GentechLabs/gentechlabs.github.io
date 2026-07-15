@@ -1,0 +1,103 @@
+{
+  "scan_date": "2026-06-06",
+  "scanner": "Opportunity Scanner (TinyFish API)",
+  "platforms_scanned": ["Devpost", "DoraHacks", "Encode Club", "Web Search"],
+  "new_opportunities": [
+    {
+      "name": "Casper Agentic Buildathon 2026",
+      "source": "DoraHacks",
+      "url": "https://dorahacks.io/hackathon/casper-agentic-buildathon",
+      "deadline": "~Jun 30, 2026 (24 days left from Jun 6)",
+      "prize": "$150,000 USD",
+      "tracks": ["Agentic AI", "DeFi", "Real-World Assets", "x402 Payments"],
+      "ecosystem": "Casper Network (Rust/WebAssembly)",
+      "fit_score": 4,
+      "fit_reason": "x402 payments + agentic AI = core focus. Rust from Solana transferable. Open to all skill levels. Qualification round now live.",
+      "barrier": "None — open registration",
+      "status": "NEW — not in tracker"
+    },
+    {
+      "name": "Qwen Cloud Global AI Hackathon",
+      "source": "Devpost",
+      "url": "https://qwencloud-hackathon.devpost.com/",
+      "deadline": "Jul 9, 2026",
+      "prize": "$70,000+ (cash + cloud credits)",
+      "tracks": ["MemoryAgent", "AI Showrunner", "Agent Society", "Complex Workflows", "Production Apps"],
+      "ecosystem": "Alibaba Cloud / Qwen",
+      "fit_score": 4,
+      "fit_reason": "Agent Society track matches our agent economy work. Already tracked as QUEUED — should be prioritized. 5 weeks to build.",
+      "barrier": "Must use Qwen models + Alibaba Cloud deployment",
+      "status": "ALREADY TRACKED — needs priority boost"
+    },
+    {
+      "name": "FIND EVIL!",
+      "source": "Devpost",
+      "url": "https://findevil.devpost.com/",
+      "deadline": "Jun 15, 2026",
+      "prize": "$22,000+ (cash + SANS training)",
+      "tracks": ["Cybersecurity", "AI/ML", "Incident Response"],
+      "ecosystem": "SANS Institute",
+      "fit_score": 3,
+      "fit_reason": "MCP server experience applicable. Agent Shield security monitoring angle. Beginner friendly. But cybersecurity is tangential to core stack.",
+      "barrier": "None — open to all skill levels",
+      "status": "NEW — not in tracker"
+    },
+    {
+      "name": "Encode Vibe Coding Hackathon",
+      "source": "Encode Club",
+      "url": "https://www.encodeclub.com/programmes",
+      "deadline": "Jun 19, 2026 (3-day sprint)",
+      "prize": "Unknown (Encode events typically have prizes + sponsor perks)",
+      "tracks": ["AI", "Coding"],
+      "ecosystem": "Encode Club",
+      "fit_score": 3,
+      "fit_reason": "Quick 3-day sprint. Good for rapid prototyping. Aligns with learning track focus.",
+      "barrier": "None — free, open",
+      "status": "NEW — not in tracker"
+    },
+    {
+      "name": "ETHGlobal Unite DeFi",
+      "source": "ETHGlobal",
+      "url": "https://ethglobal.com/events/unite",
+      "deadline": "Jul 25 - Aug 6, 2026 (estimated)",
+      "prize": "$525,000+ (1inch sponsor track)",
+      "tracks": ["DeFi", "1inch Fusion+", "Etherlink"],
+      "ecosystem": "Ethereum / Etherlink (Tezos L2)",
+      "fit_score": 3,
+      "fit_reason": "Massive prize pool. DeFi focus matches our stack. But Etherlink-specific deployment requirement limits our reach. Need to verify 2026 dates.",
+      "barrier": "Must deploy on Etherlink using Solidity",
+      "status": "NEW — needs date verification"
+    }
+  ],
+  "filtered_out": [
+    {"name": "Solana x402 Hackathon", "reason": "PAST — concluded Nov 2025"},
+    {"name": "Build with Gemini XPRIZE", "reason": "$2M but requires Gemini specifically — vendor lock-in"},
+    {"name": "Slack Agent Builder Challenge", "reason": "Enterprise/low-code focus — not our stack"},
+    {"name": "UiPath AgentHack", "reason": "Enterprise RPA focus — not our stack"},
+    {"name": "Ogon.ai MCP Hackathon", "reason": "Small prize pool ($3K), Russian community focused"},
+    {"name": "AWS Prompt the Planet", "reason": "3 days left — too late, AWS credits not cash"},
+    {"name": "Splunk Agentic Ops", "reason": "Enterprise SIEM focus — not our stack"},
+    {"name": "H0: Hack the Zero Stack", "reason": "Vercel + AWS web dev — not our stack"},
+    {"name": "CROO Agent Hackathon", "reason": "2 days left — too late to build"},
+    {"name": "Mind the Product World Product Day", "reason": "Product management focus — not technical enough"}
+  ],
+  "existing_tracker_status": {
+    "Somnia": "ACTIVE — needs testnet deploy, deadline Jun 11",
+    "Arbitrum Open House": "SHIPPED — deadline Jun 14",
+    "Mantle Turing Test": "QUEUED — needs DoraHacks registration, deadline Jun 15",
+    "Google for Startups AI Agents": "QUEUED — deadline Jun 5 (TODAY)",
+    "Dev3pack Bridge Accelerator": "QUEUED — Jun 12",
+    "BNB Agent SDK": "QUEUED — no deadline yet",
+    "Sui Overflow": "QUEUED — Jun 21, Jordan to verify registration",
+    "Encode Solana Bootcamp": "SIGN UP NEEDED — Jun 22 start",
+    "Encode Arc Bootcamp": "SIGN UP NEEDED — Jun 22 start",
+    "Cyfrin Updraft": "SIGN UP NEEDED — self-paced"
+  },
+  "recommendations": [
+    "1. Casper Agentic Buildathon — STRONG NEW FIND. x402 + agentic AI + $150K. Register immediately.",
+    "2. Qwen Cloud — Already tracked, boost priority. Agent Society track = perfect fit. Build window: 5 weeks.",
+    "3. FIND EVIL! — Consider for Agent Shield angle. MCP experience applicable. Deadline Jun 15.",
+    "4. Encode Vibe Coding — Quick 3-day sprint Jun 19. Good for rapid prototyping.",
+    "5. ETHGlobal Unite DeFi — Verify 2026 dates. $525K pool if Etherlink requirement is flexible."
+  ]
+}

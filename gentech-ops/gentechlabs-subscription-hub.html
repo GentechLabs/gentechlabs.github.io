@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GenTech Labs — Subscriptions</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: #0a0a0f;
+      color: #e2e8f0;
+      min-height: 100vh;
+    }
+    .hero {
+      padding: 60px 20px 30px;
+      text-align: center;
+      background: linear-gradient(135deg, #0f172a, #1e293b);
+    }
+    .hero h1 {
+      font-size: 2.5em; font-weight: 800;
+      background: linear-gradient(135deg, #60a5fa, #8b5cf6);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .hero .tagline { color: #94a3b8; font-size: 1.1em; margin-top: 8px; }
+    .hero .sub { color: #64748b; font-size: 0.9em; margin-top: 4px; }
+
+    .nav {
+      display: flex; justify-content: center; gap: 8px;
+      padding: 16px 20px; background: #111;
+      border-bottom: 1px solid #222;
+      flex-wrap: wrap;
+    }
+    .nav a {
+      padding: 8px 18px; border-radius: 8px;
+      color: #94a3b8; text-decoration: none; font-size: 0.9em; font-weight: 500;
+      transition: all 0.2s; border: 1px solid transparent;
+    }
+    .nav a:hover { color: #60a5fa; background: #1a1a2e; }
+    .nav a.active { color: #60a5fa; background: #1e293b; border-color: #3b82f6; }
+
+    .container { max-width: 1100px; margin: 0 auto; padding: 30px 20px; }
+
+    .section-title {
+      font-size: 0.8em; text-transform: uppercase; letter-spacing: 2px;
+      color: #64748b; text-align: center; margin-bottom: 20px;
+    }
+
+    .plans { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 40px; }
+    .plan {
+      flex: 1; min-width: 260px; max-width: 320px;
+      background: #111119; border: 1px solid #1a1a2e; border-radius: 16px;
+      padding: 24px; text-align: center; transition: all 0.2s;
+    }
+    .plan:hover { border-color: #3b82f6; background: #16161f; }
+    .plan.featured { border-color: #60a5fa; background: #1a1a2e; }
+    .plan .price { font-size: 2.2em; font-weight: 800; color: #60a5fa; }
+    .plan .period { color: #64748b; font-size: 0.9em; }
+    .plan .name { font-weight: 700; font-size: 1.1em; margin: 8px 0 4px; }
+    .plan .desc { color: #94a3b8; font-size: 0.85em; line-height: 1.4; }
+    .plan ul { list-style: none; margin: 16px 0; text-align: left; }
+    .plan ul li { color: #94a3b8; font-size: 0.85em; padding: 6px 0; border-bottom: 1px solid #1a1a2e; }
+    .plan ul li::before { content: "✓ "; color: #34d399; }
+    .plan .btn {
+      display: inline-block; margin-top: 12px; padding: 10px 28px;
+      border-radius: 10px; background: #3b82f6; color: white; font-weight: 600;
+      text-decoration: none; font-size: 0.95em; transition: all 0.2s;
+      border: none; cursor: pointer;
+    }
+    .plan .btn:hover { background: #2563eb; }
+    .plan.featured .btn { background: #60a5fa; }
+
+    .products { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; }
+    .product {
+      background: #111119; border: 1px solid #1a1a2e; border-radius: 12px;
+      padding: 16px; text-decoration: none; color: #e2e8f0; transition: all 0.2s;
+    }
+    .product:hover { border-color: #3b82f6; background: #16161f; }
+    .product .icon { font-size: 1.5em; margin-bottom: 4px; }
+    .product .name { font-weight: 700; font-size: 1em; margin-bottom: 4px; }
+    .product .name .badge { display: inline-block; font-size: 0.65em; font-weight: 700;
+      padding: 2px 8px; border-radius: 999px; margin-left: 6px; vertical-align: middle; }
+    .badge.live { background: rgba(34,197,94,0.15); color: #22c55e; }
+    .badge.api { background: rgba(59,130,246,0.15); color: #60a5fa; }
+    .product .desc { color: #94a3b8; font-size: 0.82em; line-height: 1.4; }
+    .product .meta { color: #64748b; font-size: 0.75em; margin-top: 6px; }
+
+    .tagline-section { text-align: center; padding: 20px 0; }
+    .tagline-section p { color: #64748b; font-size: 0.9em; margin-top: 8px; }
+
+    .footer { text-align: center; padding: 30px; color: #374151; font-size: 0.8em; border-top: 1px solid #1a1a2e; margin-top: 40px; }
+  </style>
+</head>
+<body>
+  <div class="hero">
+    <h1>GenTech Labs</h1>
+    <div class="tagline">Infrastructure for the Agent Economy</div>
+    <div class="sub">x402 · ERC-8004 · Q402 · Subscriptions</div>
+  </div>
+
+  <div class="nav">
+    <a href="../">Home</a>
+    <a href="../api/">API</a>
+    <a href="#" class="active">Subscribe</a>
+    <a href="../docs/">Docs</a>
+  </div>
+
+  <!-- Jordan's Hub Subscription -->
+  <div class="container">
+    <div class="section-title">📋 Jordan's Hub — Subscription Tiers</div>
+    <div class="plans">
+      <div class="plan">
+        <div class="price">$3</div>
+        <div class="period">/month</div>
+        <div class="name">Basic</div>
+        <div class="desc">For the casual builder</div>
+        <ul>
+          <li>DeFi LP alerts & signals</li>
+          <li>Atlas city pack access</li>
+          <li>GenTech Journal read access</li>
+          <li>Discord role</li>
+        </ul>
+        <a class="btn" href="https://q402.quackai.ai/pay/gentech-basic">Subscribe →</a>
+      </div>
+      <div class="plan featured">
+        <div class="price">$10</div>
+        <div class="period">/month</div>
+        <div class="name">Pro</div>
+        <div class="desc">For the active developer</div>
+        <ul>
+          <li>Everything in Basic</li>
+          <li>API access — all 16 endpoints</li>
+          <li>DeFi portfolio copy-trading signals</li>
+          <li>Agent Registration priority</li>
+          <li>Monthly build notes & strategy</li>
+        </ul>
+        <a class="btn" href="https://q402.quackai.ai/pay/gentech-pro">Subscribe →</a>
+      </div>
+      <div class="plan">
+        <div class="price">$25</div>
+        <div class="period">/month</div>
+        <div class="name">Max</div>
+        <div class="desc">For the power user</div>
+        <ul>
+          <li>Everything in Pro</li>
+          <li>Custom build requests</li>
+          <li>Early access to all new products</li>
+          <li>Direct line to Jordan</li>
+          <li>Name in credits & changelog</li>
+        </ul>
+        <a class="btn" href="https://q402.quackai.ai/pay/gentech-max">Subscribe →</a>
+      </div>
+    </div>
+
+    <!-- Vanito's Content Vault -->
+    <div class="section-title" style="margin-top:20px;">🎵 Vanito's Content Vault</div>
+    <div class="plans">
+      <div class="plan">
+        <div class="price">$3</div>
+        <div class="period">/month</div>
+        <div class="name">Music Access</div>
+        <div class="desc">Tracks + early releases</div>
+        <ul>
+          <li>All music tracks</li>
+          <li>Early access to new releases</li>
+          <li>High-quality MP3 downloads</li>
+          <li>Behind-the-scenes content</li>
+        </ul>
+        <a class="btn" href="https://q402.quackai.ai/pay/vanito-music">Subscribe →</a>
+      </div>
+      <div class="plan">
+        <div class="price">$10</div>
+        <div class="period">/month</div>
+        <div class="name">Full Vault</div>
+        <div class="desc">Music + anime + exclusives</div>
+        <ul>
+          <li>Everything in Music Access</li>
+          <li>Monthly anime short</li>
+          <li>Download rights (tracks & art)</li>
+          <li>Name in credits</li>
+          <li>Vote on next release</li>
+        </ul>
+        <a class="btn" href="https://q402.quackai.ai/pay/vanito-vault">Subscribe →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Live Products -->
+  <div class="container">
+    <div class="section-title">🧠 Live Products</div>
+    <div class="products">
+      <div class="product">
+        <div class="icon">🌏</div>
+        <div class="name">GenTech Atlas <span class="badge live">LIVE</span></div>
+        <div class="desc">AR travel intelligence for Meta Ray-Ban glasses. City packs: Tokyo, Osaka.</div>
+        <div class="meta">Basic tier · City packs $0.01</div>
+      </div>
+      <div class="product">
+        <div class="icon">💰</div>
+        <div class="name">DeFi Intelligence <span class="badge live">LIVE</span></div>
+        <div class="desc">LP monitoring, yield tracking, pool analytics. 5 x402 endpoints.</div>
+        <div class="meta">Pro tier · $0.005–0.025/call</div>
+      </div>
+      <div class="product">
+        <div class="icon">🎙️</div>
+        <div class="name">Speech Engine <span class="badge live">LIVE</span></div>
+        <div class="desc">Real-time voice agents. Steve Harvey + Vanito. ElevenLabs-powered.</div>
+        <div class="meta">ElevenHacks #10 winner</div>
+      </div>
+      <div class="product">
+        <div class="icon">🤖</div>
+        <div class="name">Agent Registry <span class="badge api">API</span></div>
+        <div class="desc">ERC-8004 agent identity on-chain. Register, lookup, search, verify.</div>
+        <div class="meta">All tiers · $0.001–0.01/call</div>
+      </div>
+      <div class="product">
+        <div class="icon">🔒</div>
+        <div class="name">AgentEscrow</div>
+        <div class="desc">AI-validated escrow with x402 payments. Trustless agent deals.</div>
+        <div class="meta">Arc Hackathon · Testnet</div>
+      </div>
+      <div class="product">
+        <div class="icon">🛡️</div>
+        <div class="name">Rugcheck</div>
+        <div class="desc">AI agent monitoring token launches. Detects rugs and scams.</div>
+        <div class="meta">Swarms Marketplace</div>
+      </div>
+      <div class="product">
+        <div class="icon">🧰</div>
+        <div class="name">GenTech Agent Kit</div>
+        <div class="desc">One-install full-stack agent framework. Python + x402 + tools.</div>
+        <div class="meta">Open source</div>
+      </div>
+      <div class="product">
+        <div class="icon">📊</div>
+        <div class="name">Fleet Monitor</div>
+        <div class="desc">Multi-agent fleet health, spending analytics, uptime tracking.</div>
+        <div class="meta">6 x402 endpoints · $0.005–0.025</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    GenTech Labs · x402 v2 · Q402 Recurring · ERC-8004<br>
+    <span style="font-size:0.85em; color:#4a5568;">USDC on Base, Polygon, Arbitrum, Solana, BNB</span>
+  </div>
+</body>
+</html>

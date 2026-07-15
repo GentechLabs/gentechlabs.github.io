@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>⚡ Yield Farm Tracker — AVAX/USDC</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, monospace; background: #0a0a0a; color: #e0e0e0; min-height: 100vh; padding: 20px; }
+        .container { max-width: 1400px; margin: 0 auto; }
+        .header { background: linear-gradient(135deg, #0d1a2d 0%, #1a2d1a 50%, #0d1a0d 100%); border: 3px solid #22c55e; border-radius: 20px; padding: 40px; margin-bottom: 25px; text-align: center; box-shadow: 0 15px 50px rgba(34,197,94,0.25); }
+        .header h1 { color: #22c55e; font-size: 2.6em; margin-bottom: 10px; letter-spacing: 2px; }
+        .header .sub { color: #86efac; font-size: 1.1em; line-height: 1.7; }
+        .timestamp { color: #6b7280; font-size: 0.9em; margin-top: 10px; }
+        .context-banner { background: linear-gradient(135deg, #1a0d0d, #2d1515); border: 2px solid #ef4444; border-radius: 15px; padding: 25px 30px; margin-bottom: 25px; box-shadow: 0 8px 30px rgba(239,68,68,0.25); }
+        .context-banner h2 { color: #ef4444; font-size: 1.4em; margin-bottom: 12px; }
+        .context-banner p { color: #fca5a5; line-height: 1.8; }
+        .tag { display: inline-block; background: #dc2626; color: white; padding: 3px 12px; border-radius: 20px; font-size: 0.8em; font-weight: bold; margin-right: 8px; }
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 18px; margin-bottom: 25px; }
+        .stat-box { border-radius: 14px; padding: 22px; text-align: center; }
+        .stat-box.green  { background: linear-gradient(135deg,#052e16,#166534); border: 2px solid #22c55e; }
+        .stat-box.blue   { background: linear-gradient(135deg,#0c1445,#1e3a8a); border: 2px solid #3b82f6; }
+        .stat-box.gold   { background: linear-gradient(135deg,#1c1400,#2d2200); border: 2px solid #fbbf24; }
+        .stat-box.purple { background: linear-gradient(135deg,#1a0d2e,#2d1460); border: 2px solid #a855f7; }
+        .stat-box.teal   { background: linear-gradient(135deg,#0d2626,#134040); border: 2px solid #2dd4bf; }
+        .stat-box.gray   { background: linear-gradient(135deg,#111,#1f1f1f); border: 2px solid #404040; }
+        .stat-label { font-size: 0.8em; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; margin-bottom: 8px; }
+        .stat-value { font-size: 2em; font-weight: bold; margin: 6px 0; }
+        .stat-box.green  .stat-value { color: #22c55e; }
+        .stat-box.blue   .stat-value { color: #60a5fa; }
+        .stat-box.gold   .stat-value { color: #fbbf24; }
+        .stat-box.purple .stat-value { color: #c084fc; }
+        .stat-box.teal   .stat-value { color: #2dd4bf; }
+        .stat-box.gray   .stat-value { color: #9ca3af; }
+        .stat-sub { font-size: 0.85em; opacity: 0.75; margin-top: 5px; }
+        .position-card { background: #111; border: 2px solid #22c55e; border-radius: 16px; padding: 30px; margin-bottom: 25px; box-shadow: 0 8px 30px rgba(34,197,94,0.15); }
+        .position-card h2 { color: #22c55e; font-size: 1.6em; margin-bottom: 22px; padding-bottom: 15px; border-bottom: 1px solid #1f2f1f; }
+        .token-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
+        .token-box { background: #1a1a1a; border-radius: 12px; padding: 20px; border: 1px solid #333; }
+        .token-name { font-size: 0.85em; color: #9ca3af; text-transform: uppercase; margin-bottom: 8px; }
+        .token-amount { font-size: 1.7em; font-weight: bold; color: #e0e0e0; }
+        .token-usd { font-size: 1em; color: #6b7280; margin-top: 4px; }
+        .token-pct { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 0.85em; font-weight: bold; margin-top: 6px; }
+        .avax-pct { background: #052e16; color: #22c55e; }
+        .usdc-pct { background: #0c1445; color: #60a5fa; }
+        .comp-bar-wrap { margin: 18px 0; }
+        .comp-label { display: flex; justify-content: space-between; margin-bottom: 6px; font-size: 0.9em; color: #9ca3af; }
+        .comp-bar { height: 20px; border-radius: 10px; overflow: hidden; display: flex; background: #1f2f1f; }
+        .comp-avax { background: #22c55e; display: flex; align-items: center; justify-content: center; font-size: 0.75em; font-weight: bold; color: #052e16; }
+        .comp-usdc { background: #3b82f6; display: flex; align-items: center; justify-content: center; font-size: 0.75em; font-weight: bold; color: #0c1445; }
+        .fees-card { background: linear-gradient(135deg,#0d2626,#134040); border: 2px solid #2dd4bf; border-radius: 14px; padding: 25px; margin-bottom: 25px; box-shadow: 0 8px 30px rgba(45,212,191,0.2); }
+        .fees-card h2 { color: #2dd4bf; font-size: 1.4em; margin-bottom: 18px; }
+        .fees-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
+        .fee-item { background: rgba(45,212,191,0.07); border: 1px solid #0f766e; border-radius: 10px; padding: 15px; }
+        .fee-label { font-size: 0.8em; color: #5eead4; text-transform: uppercase; margin-bottom: 6px; }
+        .fee-value { font-size: 1.5em; font-weight: bold; color: #2dd4bf; }
+        .fee-sub { font-size: 0.85em; color: #9ca3af; margin-top: 4px; }
+        .range-card { background: #111; border: 2px solid #404040; border-radius: 14px; padding: 25px; margin-bottom: 25px; }
+        .range-card h2 { color: #a78bfa; font-size: 1.4em; margin-bottom: 18px; }
+        .range-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
+        .range-item { background: #1a1a1a; border-radius: 10px; padding: 15px; border-left: 3px solid #a78bfa; }
+        .range-item-label { font-size: 0.8em; color: #9ca3af; text-transform: uppercase; margin-bottom: 6px; }
+        .range-item-value { font-size: 1.2em; font-weight: bold; color: #c4b5fd; }
+        .rewards-card { background: linear-gradient(135deg,#1c1400,#2d2200); border: 2px solid #fbbf24; border-radius: 14px; padding: 25px; margin-bottom: 25px; box-shadow: 0 8px 30px rgba(251,191,36,0.2); }
+        .rewards-card h2 { color: #fbbf24; font-size: 1.4em; margin-bottom: 18px; }
+        .rewards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
+        .reward-item { background: rgba(251,191,36,0.07); border: 1px solid #b8860b; border-radius: 10px; padding: 15px; }
+        .reward-label { font-size: 0.8em; color: #d4a012; text-transform: uppercase; margin-bottom: 6px; }
+        .reward-value { font-size: 1.5em; font-weight: bold; color: #fbbf24; }
+        .reward-sub { font-size: 0.85em; color: #9ca3af; margin-top: 4px; }
+        .dca-card { background: linear-gradient(135deg,#0d1a2d,#1a2d45); border: 2px solid #3b82f6; border-radius: 14px; padding: 25px; margin-bottom: 25px; box-shadow: 0 8px 30px rgba(59,130,246,0.2); }
+        .dca-card h2 { color: #60a5fa; font-size: 1.4em; margin-bottom: 18px; }
+        .dca-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
+        .dca-item { background: rgba(59,130,246,0.07); border: 1px solid #1d4ed8; border-radius: 10px; padding: 15px; }
+        .dca-label { font-size: 0.8em; color: #93c5fd; text-transform: uppercase; margin-bottom: 6px; }
+        .dca-value { font-size: 1.5em; font-weight: bold; color: #60a5fa; }
+        .dca-sub { font-size: 0.85em; color: #9ca3af; margin-top: 4px; }
+        .strategy-badge { display: inline-block; padding: 6px 18px; border-radius: 20px; font-weight: bold; font-size: 0.9em; }
+        .curve-badge { background: #2d1460; color: #c084fc; border: 1px solid #7c3aed; }
+        .pool-info-card { background: #111; border: 2px solid #374151; border-radius: 14px; padding: 25px; margin-bottom: 25px; }
+        .pool-info-card h2 { color: #9ca3af; font-size: 1.4em; margin-bottom: 18px; }
+        .pool-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; }
+        .pool-item { background: #1a1a1a; border-radius: 10px; padding: 15px; }
+        .pool-label { font-size: 0.8em; color: #6b7280; text-transform: uppercase; margin-bottom: 6px; }
+        .pool-value { font-size: 1.1em; font-weight: bold; color: #e0e0e0; word-break: break-all; }
+        .insight-box { background: linear-gradient(135deg,#0d1a2d,#0d2b1a); border-left: 4px solid #22c55e; border-radius: 8px; padding: 20px; margin-bottom: 25px; }
+        .insight-box h3 { color: #22c55e; margin-bottom: 12px; font-size: 1.1em; }
+        .insight-box p { color: #d1d5db; line-height: 1.8; font-size: 0.95em; }
+        .fees-active-box { background: #0d2010; border: 2px solid #22c55e; border-radius: 10px; padding: 18px 22px; margin-bottom: 25px; }
+        .fees-active-box p { color: #86efac; font-size: 0.95em; line-height: 1.7; }
+        .footer { background: #111; border: 1px solid #222; border-radius: 12px; padding: 20px; text-align: center; }
+        .footer p { color: #6b7280; font-size: 0.85em; line-height: 1.8; }
+        .footer strong { color: #9ca3af; }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <div class="header">
+        <h1>⚡ YIELD FARM TRACKER</h1>
+        <p class="sub">AVAX / USDC Pool · LFJ (Trader Joe) · Avalanche C-Chain<br>
+        <strong style="color:#22c55e;">5 bps · CURVE Strategy · 149 Bins · ✅ FEES ACTIVE</strong></p>
+        <p class="timestamp">Last Updated: Tuesday, March 31, 2026 — 1:00 PM CT</p>
+    </div>
+
+    <div class="context-banner">
+        <h2>🌍 SITUATION UPDATE — MARCH 31, 2026</h2>
+        <p>
+            <span class="tag">WAR</span> Thailand trip delayed. DCA locked in at <strong>$50–100/week</strong> — steady bottom accumulation.<br><br>
+            <strong style="color:#fca5a5;">Market Read:</strong> AVAX at $8.85. Fees are ACTIVE — $0.33 earned today. Rewards APR surged to 5,137%. Claimable $1.13 AVAX sitting ready. Compound everything.
+        </p>
+    </div>
+
+    <div class="stats-grid">
+        <div class="stat-box green">
+            <div class="stat-label">Total Position</div>
+            <div class="stat-value">$31.16</div>
+            <div class="stat-sub">↑ $0.17 from yesterday</div>
+        </div>
+        <div class="stat-box blue">
+            <div class="stat-label">AVAX Price</div>
+            <div class="stat-value">$8.853</div>
+            <div class="stat-sub">1 AVAX = 8.85289 USDC</div>
+        </div>
+        <div class="stat-box gold">
+            <div class="stat-label">Rewards APR</div>
+            <div class="stat-value">5,138%</div>
+            <div class="stat-sub">🔥 Up from 5,001% yesterday</div>
+        </div>
+        <div class="stat-box purple">
+            <div class="stat-label">Claimable</div>
+            <div class="stat-value">$1.132</div>
+            <div class="stat-sub">0.12782 AVAX — CLAIM NOW</div>
+        </div>
+        <div class="stat-box teal">
+            <div class="stat-label">24H Fees</div>
+            <div class="stat-value">$0.333</div>
+            <div class="stat-sub">✅ IN RANGE — EARNING!</div>
+        </div>
+        <div class="stat-box gray">
+            <div class="stat-label">Range TVL</div>
+            <div class="stat-value">$629.18</div>
+            <div class="stat-sub">Pool range liquidity</div>
+        </div>
+    </div>
+
+    <div class="fees-active-box">
+        <p>✅ <strong>FEES BACK ONLINE!</strong> Position is IN RANGE as of Mar 31, 1:00 PM. Earning $0.333 in 24H — 0.01828 AVAX + 0.17123 USDC. The CURVE is centered correctly around $8.85. Keep compounding and keep DCA'ing.</p>
+    </div>
+
+    <div class="position-card">
+        <h2>💼 CURRENT POSITION &nbsp;<span class="strategy-badge curve-badge">CURVE</span></h2>
+        <div class="token-row">
+            <div class="token-box">
+                <div class="token-name">🔺 AVAX</div>
+                <div class="token-amount">1.39 AVAX</div>
+                <div class="token-usd">≈ $12.31</div>
+                <span class="token-pct avax-pct">39.5%</span>
+            </div>
+            <div class="token-box">
+                <div class="token-name">💵 USDC</div>
+                <div class="token-amount">18.85 USDC</div>
+                <div class="token-usd">≈ $18.85</div>
+                <span class="token-pct usdc-pct">60.5%</span>
+            </div>
+        </div>
+        <div class="comp-bar-wrap">
+            <div class="comp-label"><span>AVAX 39.5%</span><span>USDC 60.5%</span></div>
+            <div class="comp-bar">
+                <div class="comp-avax" style="width:39.5%">39%</div>
+                <div class="comp-usdc" style="width:60.5%">61%</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="fees-card">
+        <h2>💸 FEES EARNED</h2>
+        <div class="fees-grid">
+            <div class="fee-item">
+                <div class="fee-label">24H Total Fees</div>
+                <div class="fee-value">$0.3331</div>
+                <div class="fee-sub">Refreshed Mar 31, 1:00 PM</div>
+            </div>
+            <div class="fee-item">
+                <div class="fee-label">24H AVAX Fees</div>
+                <div class="fee-value">0.01828 AVAX</div>
+                <div class="fee-sub">≈ $0.1619</div>
+            </div>
+            <div class="fee-item">
+                <div class="fee-label">24H USDC Fees</div>
+                <div class="fee-value">0.17123 USDC</div>
+                <div class="fee-sub">≈ $0.1712</div>
+            </div>
+            <div class="fee-item">
+                <div class="fee-label">Fees Since Deposit</div>
+                <div class="fee-value">$0.1063</div>
+                <div class="fee-sub">0.00544 AVAX + 0.05817 USDC</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="range-card">
+        <h2>📐 RANGE CONFIGURATION</h2>
+        <div class="range-grid">
+            <div class="range-item">
+                <div class="range-item-label">Strategy</div>
+                <div class="range-item-value">CURVE — 149 Bins</div>
+            </div>
+            <div class="range-item">
+                <div class="range-item-label">Min Price</div>
+                <div class="range-item-value">8.2217 USDC/AVAX</div>
+            </div>
+            <div class="range-item">
+                <div class="range-item-label">Max Price</div>
+                <div class="range-item-value">9.5325 USDC/AVAX</div>
+            </div>
+            <div class="range-item">
+                <div class="range-item-label">Active Bin</div>
+                <div class="range-item-value">8.85289 USDC/AVAX</div>
+            </div>
+            <div class="range-item">
+                <div class="range-item-label">Current Range</div>
+                <div class="range-item-value">8.862 – 8.862</div>
+            </div>
+            <div class="range-item">
+                <div class="range-item-label">Range Width</div>
+                <div class="range-item-value">~16% spread</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="rewards-card">
+        <h2>🏆 REWARDS BREAKDOWN</h2>
+        <div class="rewards-grid">
+            <div class="reward-item">
+                <div class="reward-label">Rewards Per Day</div>
+                <div class="reward-value">10 AVAX</div>
+                <div class="reward-sub">Pool emission rate</div>
+            </div>
+            <div class="reward-item">
+                <div class="reward-label">Rewards APR</div>
+                <div class="reward-value">5,137.78%</div>
+                <div class="reward-sub">↑ Up from 5,001% yesterday</div>
+            </div>
+            <div class="reward-item">
+                <div class="reward-label">Claimable Now</div>
+                <div class="reward-value">0.12782 AVAX</div>
+                <div class="reward-sub">≈ $1.132 — CLAIM &amp; COMPOUND</div>
+            </div>
+            <div class="reward-item">
+                <div class="reward-label">Reward Token</div>
+                <div class="reward-value">AVAX</div>
+                <div class="reward-sub">Native — no bridge risk</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="dca-card">
+        <h2>📥 DCA SCHEDULE — ACTIVE</h2>
+        <div class="dca-grid">
+            <div class="dca-item">
+                <div class="dca-label">Weekly DCA</div>
+                <div class="dca-value">$50–100</div>
+                <div class="dca-sub">Steady bottom accumulation</div>
+            </div>
+            <div class="dca-item">
+                <div class="dca-label">Monthly DCA</div>
+                <div class="dca-value">$200–400</div>
+                <div class="dca-sub">Fueled by Amazon Flex income</div>
+            </div>
+            <div class="dca-item">
+                <div class="dca-label">DCA Mode</div>
+                <div class="dca-value">FLEXIBLE</div>
+                <div class="dca-sub">Invest when available</div>
+            </div>
+            <div class="dca-item">
+                <div class="dca-label">Conviction</div>
+                <div class="dca-value">HIGH</div>
+                <div class="dca-sub">Every $50 = ~5.6 AVAX at $8.85</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="pool-info-card">
+        <h2>📊 POOL INFO</h2>
+        <div class="pool-grid">
+            <div class="pool-item">
+                <div class="pool-label">Pool Address</div>
+                <div class="pool-value" style="font-size:0.8em; color:#6b7280;">0x864d4e5ee7318e97483db7eb0912e09f161516ea</div>
+            </div>
+            <div class="pool-item">
+                <div class="pool-label">Pair</div>
+                <div class="pool-value">AVAX / USDC</div>
+            </div>
+            <div class="pool-item">
+                <div class="pool-label">Platform</div>
+                <div class="pool-value">LFJ (Trader Joe)</div>
+            </div>
+            <div class="pool-item">
+                <div class="pool-label">Network</div>
+                <div class="pool-value">Avalanche C-Chain</div>
+            </div>
+            <div class="pool-item">
+                <div class="pool-label">Fee Tier</div>
+                <div class="pool-value">5 bps (0.05%)</div>
+            </div>
+            <div class="pool-item">
+                <div class="pool-label">Range TVL</div>
+                <div class="pool-value">$629.18</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="insight-box">
+        <h3>🧠 STRATEGY NOTES — MARCH 31, 2026</h3>
+        <p>
+            <strong>Fees back online:</strong> $0.33 earned in 24H confirms the CURVE is centered correctly. Both rewards + fee income are running simultaneously now.<br><br>
+            <strong>Compound immediately:</strong> 0.12782 AVAX ($1.13) claimable. At $8.85/AVAX that's real stack accumulation — claim it, redeploy it.<br><br>
+            <strong>DCA conviction:</strong> $50–100/week is clean. Every $50 buys ~5.6 AVAX here. If AVAX returns to $50, that's $280 from one week of DCA. Buy the bottom. Compound the rewards. Let time do the rest.<br><br>
+            <strong>Wallet ready:</strong> 0.10031 AVAX + 0.05 USDC available. Combine with claimed rewards for next deposit.
+        </p>
+    </div>
+
+    <div class="footer">
+        <p>
+            <strong>File:</strong> multi-pool-tracker-CURRENT.html &nbsp;|&nbsp;
+            <strong>Version:</strong> Mar 31, 2026 — 1:00 PM<br>
+            <strong>Pool:</strong> AVAX/USDC · LFJ · 5bps · CURVE · 149 Bins<br>
+            <strong>Address:</strong> 0x864d4e5ee7318e97483db7eb0912e09f161516ea<br>
+            <strong>Position:</strong> $31.16 | 1.39 AVAX + 18.85 USDC | APR: 5,137.78% | 24H Fees: $0.3331<br><br>
+            <span style="color:#22c55e; font-weight:bold;">⚡ IN RANGE · FEES ACTIVE · DCA $50–100/WEEK · FARM THE BOTTOM 🏔️</span>
+        </p>
+    </div>
+
+</div>
+</body>
+</html>

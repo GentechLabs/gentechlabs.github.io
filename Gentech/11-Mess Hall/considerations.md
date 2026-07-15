@@ -37,7 +37,22 @@
   - Added: Jul 1, 2026
   - Note: Strong contender for best gaming AR glasses — reviewers say it "outclasses everything else"
 
+<<<<<<< HEAD
 - [ ] **Condor (Hummingbot) — Architecture/Integration Evaluation**
+=======
+- [ ] **GrantFox FWC26 Campaign — $60K USDC Open-Source Rewards**
+  - Goal: Register Agent Kit as a project + contribute to earn USDC
+  - Platform: https://contribute.grantfox.xyz/campaigns
+  - Backed by: Stellar, $60K USDC reward pool
+  - Starts: 4 days from now (Jul 15)
+  - Action Items:
+    1. Sign up on GrantFox
+    2. Register genTech-agent-kit repo as a campaign project
+    3. Set up bounties on issues (Output Enforcer, Robinhood plugin, docs)
+    4. Contribute to other projects for USDC
+  - Impact: Free dev labor on our repo + earn USDC from other projects
+  - Added: Jul 10, 2026
+>>>>>>> 421f457856e3e1f11dcc14d9742483f52a28aaf2
   - Goal: Decide whether to integrate Condor or borrow its patterns for Agent Arena and execution layer
   - Why: Open-source agent harness with 50+ CEX/DEX connectors, two-server architecture, multi-agent P&L isolation, full observability. No token, not a competitor.
   - Evaluate:
