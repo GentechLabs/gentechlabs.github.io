@@ -4,17 +4,15 @@
 
 ---
 
-## GenTech Academy — "Ship Paid APIs in a Weekend" Course 🎓
+## 🎓 GenTech Academy — Module 1: "Ship a Compliant x402 API"
 
-- [ ] **Concept**: Turn our 1.5-month x402 gateway journey into a reusable course/guide
-- [ ] **What it teaches**: How to set up paid APIs with x402, Cloudflare Workers, on-chain payment verification, VPS proxying
-- [ ] **Why it's a business**: This took us 6 weeks of painful trial and error. Most devs won't do it. There's a market for "one-click paid API" setup.
-- [ ] **Possible product**: 
-  - Free GenTech Academy guide (content marketing)
-  - Premium: "x402 Starter Kit" — pre-built worker + config + deploy script ($49)
-  - Enterprise: "Deploy your APIs as x402 services" — we do it for them ($499+)
-- [ ] **Assets needed**: Tutorial video, worker template, wrangler config template, deployment guide
-- [ ] **Vault reference**: `09-Green Room/x402-gateway-architecture.md`
+- [x] **Syllabus drafted**: `09-Green Room/academy-module-1-shipping-x402.md` — 5 parts, 4 pricing tiers
+- [x] **Test harness deployed**: `test.api.gentechlabs.net` — free reference endpoint for students
+- [ ] **Compliance Checker packaged**: Turn 42-check script into `pip install x402-compliance-checker`
+- [ ] **Checklist web UI**: Public page where devs paste their endpoint URL → instant scan results
+- [ ] **Academy landing page**: One-pager at academy.gentechlabs.net
+- [ ] **Discord server**: Community for alumni + support
+- [ ] **First paying student**: Validate $49 Standard tier pricing
 
 ## x402 Gateway — Paid API Platform as a Product 💰
 
