@@ -20,13 +20,13 @@
     },
     {
       "id": 30,
-      "name": "Algorand x402 Challenge — GoPlausible Auth + Discord",
+      "name": "Algorand x402 Challenge \u2014 GoPlausible Auth + Discord",
       "status": "shipped",
       "assigned_to": "jordan",
       "deadline": "2026-07-14",
       "priority": "urgent",
       "effort_hours": 1,
-      "notes": "✅ Registered for challenge. ✅ Authed on GoPlausible dashboard. ⏳ Fund Algorand wallet with USDC (ASA 31566704) + ALGO for gas on Sunday. Then make first test payment to trigger leaderboard tracking.",
+      "notes": "\u2705 Registered for challenge. \u2705 Authed on GoPlausible dashboard. \u23f3 Fund Algorand wallet with USDC (ASA 31566704) + ALGO for gas on Sunday. Then make first test payment to trigger leaderboard tracking.",
       "difficulty": "easy",
       "platform": "desktop"
     },
@@ -39,7 +39,7 @@
       "priority": "low",
       "effort_hours": 0,
       "difficulty": "hard",
-      "detail": "Skipped per Jordan — Algorand is next up.",
+      "detail": "Skipped per Jordan \u2014 Algorand is next up.",
       "platform": "either"
     },
     {
@@ -135,7 +135,7 @@
       "priority": "low",
       "effort_hours": 0,
       "difficulty": "medium",
-      "detail": "Skipped per Jordan — Algorand is next up.",
+      "detail": "Skipped per Jordan \u2014 Algorand is next up.",
       "platform": "either"
     },
     {
@@ -339,7 +339,7 @@
       "priority": "high",
       "effort_hours": 8,
       "difficulty": "medium",
-      "notes": "Phase 1 (crash detection engine) built Jul 14 night session. Design doc at 09-Green Room/designs/dry-powder-mode.md. Live prices via BlockRun + CoinGecko. Config at 03-Strategies/config/dry-powder-config.json. 18 tests added Jul 15 night session (test_dry_powder.py) covering crash scoring, recovery scoring, edge cases — all passing. Pending Phases 2-10: LP withdrawal, swap, recovery, redeploy, Telegram notifications, advisory/auto wiring, production testing, Agent Kit plugin. Requires Jordan's wallet keys for Phases 2+.",
+      "notes": "Phase 1 (crash detection engine) built Jul 14 night session. Design doc at 09-Green Room/designs/dry-powder-mode.md. Live prices via BlockRun + CoinGecko. Config at 03-Strategies/config/dry-powder-config.json. 18 tests added Jul 15 night session (test_dry_powder.py) covering crash scoring, recovery scoring, edge cases \u2014 all passing. Pending Phases 2-10: LP withdrawal, swap, recovery, redeploy, Telegram notifications, advisory/auto wiring, production testing, Agent Kit plugin. Requires Jordan's wallet keys for Phases 2+.",
       "platform": "cloud"
     },
     {
@@ -369,7 +369,7 @@
     },
     {
       "id": 48,
-      "name": "KytyPS5 — PS5 Emulator Contribution",
+      "name": "KytyPS5 \u2014 PS5 Emulator Contribution",
       "status": "pending",
       "assigned_to": "forge",
       "deadline": null,
@@ -377,20 +377,20 @@
       "effort_hours": 20,
       "difficulty": "hard",
       "notes": [
-        "RESEARCHED Jul 15: Repo is binary-only (no public source code in any branch). 854⭐, single dev (Nmzik).",
-        "PRs restricted — Nmzik hasn't enabled fork contributions yet. Data ready on our fork when he does.",
+        "RESEARCHED Jul 15: Repo is binary-only (no public source code in any branch). 854\u2b50, single dev (Nmzik).",
+        "PRs restricted \u2014 Nmzik hasn't enabled fork contributions yet. Data ready on our fork when he does.",
         "Phase 1 DONE: Fork created, compat DB populated (7 games), CONTRIBUTING.md written, both branches pushed.",
         "PRs ready to submit when Nmzik opens contributions: ProtoJay4789:add-compat-db + ProtoJay4789:add-contributing",
         "Phase 2 (desktop/Forge): Download v0.0.3 release, test games on Windows, file bug reports with logs.",
-        "Phase 3 (if source goes public): Fork → Linux port (issue #17), Vulkan fixes, Emulation AI Companion integration.",
+        "Phase 3 (if source goes public): Fork \u2192 Linux port (issue #17), Vulkan fixes, Emulation AI Companion integration.",
         "Full analysis at 10-Labs/kytyps5-analysis.md"
       ],
       "platform": "desktop"
     },
     {
       "id": 49,
-      "name": "Pay-Skills Catalog Listing — Fresh PR for 13 APIs",
-      "status": "pending",
+      "name": "Pay-Skills Catalog Listing \u2014 Fresh PR for 13 APIs",
+      "status": "completed",
       "assigned_to": "gentech",
       "deadline": null,
       "priority": "high",
@@ -401,13 +401,14 @@
         "Action: Create fresh PAY.md files for all 13 APIs with proper inline OpenAPI specs (real paths, request bodies, 200/402 responses).",
         "APIs to list: Token Risk, DeFi Yield, DeFi Intelligence, Agent Credit Score, Agent Registration, Agent Search, Deal Tracker, Travel Agent, Agent Finance/BNPL, Email Agent, x402 Gateway, Pika MCP, GenTech Agent Kit.",
         "Use pay catalog scaffold command or write PAY.md manually. Validate with pay catalog check before PR.",
-        "This is the #1 discovery channel on the x402 ecosystem — agents search pay skills catalog first."
+        "This is the #1 discovery channel on the x402 ecosystem \u2014 agents search pay skills catalog first.",
+        "\u2705 COMPLETED Jul 15"
       ],
       "platform": "cloud"
     },
     {
       "id": 50,
-      "name": "Virtuals ACP — Agent Registration",
+      "name": "Virtuals ACP \u2014 Agent Registration",
       "status": "pending",
       "assigned_to": "gentech",
       "deadline": null,
@@ -416,7 +417,7 @@
       "difficulty": "medium",
       "notes": [
         "Virtuals ACP has 2,000+ agents onboarded. ACP v2.0 live since Apr 2026.",
-        "Marketplace at virtuals.io — agents hire agents via Agent Commerce Protocol.",
+        "Marketplace at virtuals.io \u2014 agents hire agents via Agent Commerce Protocol.",
         "Need to: research registration flow, register GenTech services, configure endpoints.",
         "Competitors already listed: agents buying/selling services autonomously."
       ],
@@ -424,8 +425,8 @@
     },
     {
       "id": 51,
-      "name": "awesome-x402 — Submit PR (Ecosystem Projects)",
-      "status": "pending",
+      "name": "awesome-x402 \u2014 Submit PR (Ecosystem Projects)",
+      "status": "completed",
       "assigned_to": "gentech",
       "deadline": null,
       "priority": "medium",
@@ -434,14 +435,15 @@
       "notes": [
         "PR draft already written at 10-Labs/distribution-push/awesome-x402-pr.md",
         "Fork xpaysh/awesome-x402, edit README.md under Ecosystem Projects, submit PR.",
-        "Previous PR #810 mentioned in references — this may be a resubmission/fresh PR."
+        "Previous PR #810 mentioned in references \u2014 this may be a resubmission/fresh PR.",
+        "\u2705 COMPLETED Jul 15"
       ],
       "platform": "cloud"
     },
     {
       "id": 52,
-      "name": "awesome-agentic-commerce — Submit PR",
-      "status": "pending",
+      "name": "awesome-agentic-commerce \u2014 Submit PR",
+      "status": "completed",
       "assigned_to": "gentech",
       "deadline": null,
       "priority": "medium",
@@ -450,14 +452,15 @@
       "notes": [
         "PR draft at 10-Labs/distribution-push/.",
         "Merit-Systems/awesome-agentic-commerce repo, add GenTech Labs to service providers.",
-        "Previous PR #440 mentioned — check if still open or needs fresh PR."
+        "Previous PR #440 mentioned \u2014 check if still open or needs fresh PR.",
+        "\u2705 COMPLETED Jul 15"
       ],
       "platform": "cloud"
     },
     {
       "id": 53,
-      "name": "Circle Agent Marketplace — Prepare 5 Endpoints for Registration",
-      "status": "pending",
+      "name": "Circle Agent Marketplace \u2014 Prepare 5 Endpoints for Registration",
+      "status": "completed",
       "assigned_to": "gentech",
       "deadline": null,
       "priority": "high",
@@ -465,15 +468,17 @@
       "difficulty": "medium",
       "notes": [
         "Circle Agent Marketplace at agents.circle.com now accepting applications.",
-        "Need 5 endpoints ready: CMC quote, DeFi intel, token search, DEX pairs, trending.",
-        "Prepare endpoint docs, test each one, then hand to Jordan for web form submission.",
-        "41 services currently listed — we should be #42."
+        "5 endpoints prepared: Token Risk ($0.01), Market Intel ($0.005), Wallet Analyzer ($0.025), Game Intel ($0.005), NFT Search ($0.005).",
+        "Docs saved at 10-Labs/circle-marketplace-submission.md.",
+        "Circle uses @circle-fin/x402-batching \u2014 our gateway already supports x402 natively.",
+        "\u2705 SUBMITTED Jul 15, 2026 via Google Form \u2014 awaiting manual review.",
+        "\u2705 COMPLETED Jul 15"
       ],
       "platform": "cloud"
     },
     {
       "id": 54,
-      "name": "Sana Bot — GenTech Bank Integration",
+      "name": "Sana Bot \u2014 GenTech Bank Integration",
       "status": "pending",
       "assigned_to": "gentech",
       "deadline": null,
@@ -481,11 +486,11 @@
       "effort_hours": 4,
       "difficulty": "medium",
       "notes": [
-        "Sana.bot — open source agent banking platform (MIT on GitHub). Self-custodial Solana wallet, Sana Signature Card, MCP gateway at mcp.sana.bot.",
+        "Sana.bot \u2014 open source agent banking platform (MIT on GitHub). Self-custodial Solana wallet, Sana Signature Card, MCP gateway at mcp.sana.bot.",
         "Already has skills for Hermes, Codex, Claude Code, Cursor.",
         "ACTION: Create account at sana.bot/gateway (needs Jordan's email + API key generation).",
         "ACTION: Fork sanabot-skills repo, add GenTech x402 services as new skill pack.",
-        "ACTION: PR our skill pack into their repo — contributes + integrates.",
+        "ACTION: PR our skill pack into their repo \u2014 contributes + integrates.",
         "Open source means we can customize the MCP gateway and policy engine for our agent needs."
       ],
       "platform": "cloud"
