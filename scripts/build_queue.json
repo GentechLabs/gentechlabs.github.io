@@ -1,23 +1,11 @@
 {
   "version": 4.0,
-  "updated": "2026-07-15 build list cleaned \u2014 only builds remain",
+  "updated": "2026-07-15 \u2014 only active builds remain",
   "meta": {
     "generated_by": "gentech",
     "forge_read_source": "this file \u2014 items with assigned_to: forge and status: pending are active queue"
   },
   "items": [
-    {
-      "id": 17,
-      "name": "Renaiss Tech Hackathon S1",
-      "status": "cancelled",
-      "assigned_to": "jordan",
-      "deadline": "2026-07-11",
-      "priority": "urgent",
-      "effort_hours": 14,
-      "difficulty": "hard",
-      "notes": "Missed sign-up deadline, Jordan cancelled",
-      "platform": "desktop"
-    },
     {
       "id": 30,
       "name": "Algorand x402 Challenge \u2014 GoPlausible Auth + Discord",
@@ -77,18 +65,6 @@
       "notes": "SHIPPED 2026-07-14: Pika MCP plugin verified \u2014 17/17 tests pass, code reviewed, MCP protocol clean (tools/list, tools/call, initialize, ping). Fal.ai Pika client with text-to-video and image-to-video. Needs FAL_KEY for production use or Pika MCP at mcp.pika.me.",
       "difficulty": "medium",
       "platform": "cloud"
-    },
-    {
-      "id": 33,
-      "name": "Sourcegraph \u2014 Agent Engineer [IC4] Application",
-      "status": "cancelled",
-      "assigned_to": "jordan",
-      "deadline": "2026-07-20",
-      "priority": "high",
-      "effort_hours": 3,
-      "notes": "Jordan decided to skip \u2014 not our lane",
-      "difficulty": "medium",
-      "platform": "desktop"
     },
     {
       "id": 40,
@@ -271,20 +247,6 @@
       "platform": "cloud"
     },
     {
-      "id": 46,
-      "name": "DeFi Dashboard \u2014 GenTech Hub Refresh",
-      "status": "completed",
-      "assigned_to": "gentech",
-      "deadline": null,
-      "priority": "medium",
-      "difficulty": "medium",
-      "notes": [
-        "Assessment complete (2026-07-15 night session): Current dashboard is 2185 lines with 13 API calls \u2014 functional but no live data source. POE2 pattern (static JSON + cron) is viable but not urgent. Recommendation: Keep current state. Revisit after #47 x402scan and #45 Dry Powder Mode ship. Not a blocker.",
-        "\u2705 COMPLETED Jul 15 \u2014 build list cleared"
-      ],
-      "platform": "cloud"
-    },
-    {
       "id": 47,
       "name": "OpenAPI Schema Fix \u2014 x402scan Registration",
       "status": "shipped",
@@ -315,118 +277,6 @@
         "Full analysis at 10-Labs/kytyps5-analysis.md"
       ],
       "platform": "desktop"
-    },
-    {
-      "id": 49,
-      "name": "Pay-Skills Catalog Listing \u2014 Fresh PR for 13 APIs",
-      "status": "completed",
-      "assigned_to": "gentech",
-      "deadline": null,
-      "priority": "high",
-      "effort_hours": 6,
-      "difficulty": "medium",
-      "notes": [
-        "CRITICAL GAP: GenTech NOT listed in solana-foundation/pay-skills. PR #154 status unknown (may have been rejected for empty OpenAPI paths).",
-        "Action: Create fresh PAY.md files for all 13 APIs with proper inline OpenAPI specs (real paths, request bodies, 200/402 responses).",
-        "APIs to list: Token Risk, DeFi Yield, DeFi Intelligence, Agent Credit Score, Agent Registration, Agent Search, Deal Tracker, Travel Agent, Agent Finance/BNPL, Email Agent, x402 Gateway, Pika MCP, GenTech Agent Kit.",
-        "Use pay catalog scaffold command or write PAY.md manually. Validate with pay catalog check before PR.",
-        "This is the #1 discovery channel on the x402 ecosystem \u2014 agents search pay skills catalog first.",
-        "\u2705 COMPLETED Jul 15"
-      ],
-      "platform": "cloud"
-    },
-    {
-      "id": 50,
-      "name": "Virtuals ACP \u2014 Agent Registration",
-      "status": "completed",
-      "assigned_to": "gentech",
-      "deadline": null,
-      "priority": "high",
-      "effort_hours": 4,
-      "difficulty": "medium",
-      "notes": [
-        "Virtuals ACP has 2,000+ agents onboarded. ACP v2.0 live since Apr 2026.",
-        "Agent created: acp-61d240f77b21c86fe8c9.",
-        "5 offerings prepared: Token Risk, Market Intel, Wallet Analyzer, Game Intel, NFT Search.",
-        "Setup guide saved at 10-Labs/virtuals-acp-offerings.md.",
-        "\u2705 Published Jul 15, 2026 via acp offering create.",
-        "Event listener ready to receive job requests.",
-        "\u2705 COMPLETED Jul 15 \u2014 build list cleared"
-      ],
-      "platform": "cloud"
-    },
-    {
-      "id": 51,
-      "name": "awesome-x402 \u2014 Submit PR (Ecosystem Projects)",
-      "status": "completed",
-      "assigned_to": "gentech",
-      "deadline": null,
-      "priority": "medium",
-      "effort_hours": 1,
-      "difficulty": "easy",
-      "notes": [
-        "PR draft already written at 10-Labs/distribution-push/awesome-x402-pr.md",
-        "Fork xpaysh/awesome-x402, edit README.md under Ecosystem Projects, submit PR.",
-        "Previous PR #810 mentioned in references \u2014 this may be a resubmission/fresh PR.",
-        "\u2705 COMPLETED Jul 15"
-      ],
-      "platform": "cloud"
-    },
-    {
-      "id": 52,
-      "name": "awesome-agentic-commerce \u2014 Submit PR",
-      "status": "completed",
-      "assigned_to": "gentech",
-      "deadline": null,
-      "priority": "medium",
-      "effort_hours": 1,
-      "difficulty": "easy",
-      "notes": [
-        "PR draft at 10-Labs/distribution-push/.",
-        "Merit-Systems/awesome-agentic-commerce repo, add GenTech Labs to service providers.",
-        "Previous PR #440 mentioned \u2014 check if still open or needs fresh PR.",
-        "\u2705 COMPLETED Jul 15"
-      ],
-      "platform": "cloud"
-    },
-    {
-      "id": 53,
-      "name": "Circle Agent Marketplace \u2014 Prepare 5 Endpoints for Registration",
-      "status": "completed",
-      "assigned_to": "gentech",
-      "deadline": null,
-      "priority": "high",
-      "effort_hours": 3,
-      "difficulty": "medium",
-      "notes": [
-        "Circle Agent Marketplace at agents.circle.com now accepting applications.",
-        "5 endpoints prepared: Token Risk ($0.01), Market Intel ($0.005), Wallet Analyzer ($0.025), Game Intel ($0.005), NFT Search ($0.005).",
-        "Docs saved at 10-Labs/circle-marketplace-submission.md.",
-        "Circle uses @circle-fin/x402-batching \u2014 our gateway already supports x402 natively.",
-        "\u2705 SUBMITTED Jul 15, 2026 via Google Form \u2014 awaiting manual review.",
-        "\u2705 COMPLETED Jul 15"
-      ],
-      "platform": "cloud"
-    },
-    {
-      "id": 54,
-      "name": "Sana Bot \u2014 GenTech Bank Integration",
-      "status": "completed",
-      "assigned_to": "gentech",
-      "deadline": null,
-      "priority": "high",
-      "effort_hours": 4,
-      "difficulty": "medium",
-      "notes": [
-        "Sana.bot \u2014 open source agent banking platform (MIT on GitHub). Self-custodial Solana wallet, Sana Signature Card, MCP gateway at mcp.sana.bot.",
-        "Already has skills for Hermes, Codex, Claude Code, Cursor.",
-        "ACTION: Create account at sana.bot/gateway (needs Jordan's email + API key generation).",
-        "ACTION: Fork sanabot-skills repo, add GenTech x402 services as new skill pack.",
-        "ACTION: PR our skill pack into their repo \u2014 contributes + integrates.",
-        "Open source means we can customize the MCP gateway and policy engine for our agent needs.",
-        "\u2705 COMPLETED Jul 15 \u2014 build list cleared"
-      ],
-      "platform": "cloud"
     }
   ],
   "cleaned": true
