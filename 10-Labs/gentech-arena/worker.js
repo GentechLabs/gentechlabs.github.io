@@ -15,30 +15,30 @@
 // ── Match Data ──
 const MATCHES = [
   {
-    id: "mt-doubles-001",
-    game: "Mario Tennis 64",
+    id: "gs-doubles-001",
+    game: "GenTech Smash",
     format: "Doubles",
-    teamA: { name: "Mario & Luigi", players: ["Jordan (Human)", "Forge (AI)"], odds: 1.8 },
-    teamB: { name: "Wario & Waluigi", players: ["CPU", "CPU"], odds: 2.2 },
-    status: "upcoming",  // upcoming | live | completed
+    teamA: { name: "KAGE & Forge", players: ["Jordan (Human)", "Forge (AI)"], odds: 1.8 },
+    teamB: { name: "HIKARI & Reparathy", players: ["CPU", "CPU"], odds: 2.2 },
+    status: "upcoming",
     scheduled: "2026-07-15T20:00:00Z",
     result: null,
-    description: "Human + AI team up against CPU in Mario Tennis 64 doubles. Can a human-agent pair beat the built-in AI?",
+    description: "Human + AI team up against CPU in GenTech Smash doubles. KAGE and Forge vs HIKARI and Reparathy.",
   },
   {
-    id: "mt-singles-001",
-    game: "Mario Tennis 64",
+    id: "gs-singles-001",
+    game: "GenTech Smash",
     format: "Singles",
     teamA: { name: "Forge (AI)", players: ["Forge AI Agent"], odds: 2.5 },
-    teamB: { name: "CPU (Hard)", players: ["Mario (CPU)"], odds: 1.5 },
+    teamB: { name: "CPU (Hard)", players: ["Vanito (CPU)"], odds: 1.5 },
     status: "upcoming",
     scheduled: "2026-07-15T21:00:00Z",
     result: null,
-    description: "Pure AI vs CPU — can the agent beat the built-in hard AI in a singles match?",
+    description: "Pure AI vs CPU — can Forge beat Vanito in a singles match?",
   },
   {
-    id: "mt-doubles-002",
-    game: "Mario Tennis 64",
+    id: "gs-doubles-002",
+    game: "GenTech Smash",
     format: "Doubles",
     teamA: { name: "Forge + Forge", players: ["Forge AI (P1)", "Forge AI (P2)"], odds: 3.0 },
     teamB: { name: "CPU + CPU", players: ["CPU (P1)", "CPU (P2)"], odds: 1.33 },
@@ -144,7 +144,7 @@ const HTML_FOOT = `
     <div class="wallet-badge">⚡ Powered by x402 · USDC on Base</div>
   </div>
   <div class="footer">
-    <p>GenTech Arena — Agent Match Predictions</p>
+    <p>Agent Arena — Agent Match Predictions</p>
     <p><a href="/health">Health</a> · <a href="/pricing">Pricing</a></p>
   </div>
 </div>
@@ -282,7 +282,7 @@ export default {
           'async function placeBet(matchId, team, odds) {',
           '  var stake = 0.01;',
           '  var payout = (stake * odds).toFixed(4);',
-          '  var teamName = team === "A" ? "Mario & Luigi" : "Wario & Waluigi";',
+          '  var teamName = team === "A" ? "KAGE & Forge" : "HIKARI & Reparathy";',
           '  if (!confirm("Place " + stake + " USDC on " + teamName + "?\\nPotential payout: " + payout + " USDC")) return;',
           '  try {',
           '    var resp = await fetch("/api/bet", {',
@@ -310,7 +310,7 @@ export default {
     <div class="tagline">\"Friend, Foe, Builder, Destroyer, Helpful.\"</div>
   </header>
   <div style="text-align:center;padding:12px;background:#1a1a2e;border-radius:8px;margin-bottom:24px;border:1px solid #2a2a3a;">
-    <p style="color:#f7c948;font-weight:600;">🎮 Mario Tennis 64 — Doubles Tournament</p>
+    <p style="color:#f7c948;font-weight:600;">🎾 GenTech Smash — Doubles Tournament</p>
     <p style="color:#888;font-size:0.85em;">Human + AI team up against CPU. Predict the winner. Stake USDC.</p>
   </div>
   ${cards}
