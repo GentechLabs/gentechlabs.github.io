@@ -73,8 +73,10 @@ class GameState:
 @dataclass
 class VisionConfig:
     """Configuration for vision analysis."""
-    model: str = "qwen3-vl:235b-instruct"
+    model: str = "gemma4:31b"
     provider: str = "ollama-cloud"
+    api_url: str = "https://ollama.com/v1"
+    verbose: bool = False
     prompt_template: str = (
         "You are analyzing a retro game screenshot. "
         "Extract the following game state as JSON:\n"
@@ -105,15 +107,55 @@ class VisionAnalyzer:
         self.config = config or VisionConfig()
 
     def analyze(self, image_base64: str, frame_id: str = "unknown") -> GameState:
-        """Analyze a screenshot and return parsed game state."""
-        # For now, return simulated analysis
-        # In production, this calls the vision model
-        return self._simulate_analysis(frame_id)
+        """Analyze a screenshot using the vision model, fall back to simulated."""
+        if not os.environ.get("OLLAMA_API_KEY"):
+            return self._simulate_analysis(frame_id)
+        try:
+            return self._call_vision_api(image_base64, frame_id)
+        except Exception as e:
+            if self.config.verbose:
+                print(f"  ⚠️ Vision API failed ({e}), using simulated analysis")
+            return self._simulate_analysis(frame_id)
 
     def analyze_from_bytes(self, image_data: bytes, frame_id: str = "unknown") -> GameState:
         """Analyze from raw PNG bytes."""
         b64 = base64.b64encode(image_data).decode()
         return self.analyze(b64, frame_id)
+
+    def _call_vision_api(self, image_base64: str, frame_id: str) -> GameState:
+        """Call the Ollama Cloud vision API with the screenshot."""
+        import urllib.request, urllib.error
+
+        api_key = os.environ.get("OLLAMA_API_KEY", "")
+        if not api_key:
+            raise ValueError("OLLAMA_API_KEY not set")
+
+        data_url = f"data:image/png;base64,{image_base64}"
+        payload = {
+            "model": self.config.model,
+            "messages": [{
+                "role": "user",
+                "content": [
+                    {"type": "text", "text": self.config.prompt_template},
+                    {"type": "image_url", "image_url": {"url": data_url}},
+                ],
+            }],
+            "stream": False,
+        }
+
+        req = urllib.request.Request(
+            f"{self.config.api_url}/chat/completions",
+            data=json.dumps(payload).encode(),
+            headers={
+                "Content-Type": "application/json",
+                "Authorization": f"Bearer {api_key}",
+            },
+        )
+        with urllib.request.urlopen(req, timeout=30) as resp:
+            result = json.loads(resp.read().decode())
+
+        text = result["choices"][0]["message"]["content"]
+        return self._parse_llm_response(text, frame_id)
 
     def _simulate_analysis(self, frame_id: str) -> GameState:
         """Simulated analysis for testing without a vision model."""
