@@ -1,6 +1,6 @@
 {
-  "version": 4.0,
-  "updated": "2026-07-15 \u2014 only active builds remain",
+  "version": 4.1,
+  "updated": "2026-07-16 \u2014 night session: shipped #49, #51, #52 (PRs to pay-skills, awesome-x402, awesome-agentic-commerce)",
   "meta": {
     "generated_by": "gentech",
     "forge_read_source": "this file \u2014 items with assigned_to: forge and status: pending are active queue"
@@ -243,7 +243,7 @@
       "priority": "high",
       "effort_hours": 8,
       "difficulty": "medium",
-      "notes": "Phase 1 (crash detection engine) built Jul 14 night session. Design doc at 09-Green Room/designs/dry-powder-mode.md. Live prices via BlockRun + CoinGecko. Config at 03-Strategies/config/dry-powder-config.json. 18 tests added Jul 15 night session (test_dry_powder.py) covering crash scoring, recovery scoring, edge cases \u2014 all passing. Pending Phases 2-10: LP withdrawal, swap, recovery, redeploy, Telegram notifications, advisory/auto wiring, production testing, Agent Kit plugin. Requires Jordan's wallet keys for Phases 2+.",
+      "notes": "Phase 1 (crash detection engine) built Jul 14 night session. 18 tests passing. Phase 2 LP module (dry_powder_lp.py) built Jul 16 night session \u2014 preview/mock mode, needs wallet key for real execution. Phase 6 Telegram notification module (dry_powder_notify.py) built Jul 16 \u2014 template-based alerts, needs TELEGRAM_BOT_TOKEN env var. Design doc at designs/dry-powder-mode.md. Live engine verified working (AVAX $6.70 SAFE at Jul 16 04:13 UTC). Pending Phases 3-5 and 7-10. Requires Jordan's wallet keys for Phases 2-3, and Telegram bot token for Phase 6 live.",
       "platform": "cloud"
     },
     {
@@ -277,6 +277,174 @@
         "Full analysis at 10-Labs/kytyps5-analysis.md"
       ],
       "platform": "desktop"
+    },
+    {
+      "id": 29,
+      "name": "Algorand Mainnet Deploy \u2014 x402 Gateway",
+      "status": "pending",
+      "assigned_to": "jordan",
+      "deadline": "2026-07-19",
+      "priority": "high",
+      "effort_hours": 2,
+      "difficulty": "medium",
+      "platform": "desktop",
+      "notes": "Fund Algorand wallet with USDC (ASA 31566704) + ALGO for gas on Sunday. Then deploy x402 gateway to Algorand mainnet."
+    },
+    {
+      "id": 31,
+      "name": "Algorand Volume \u2014 First Test Payment",
+      "status": "pending",
+      "assigned_to": "jordan",
+      "deadline": "2026-07-19",
+      "priority": "high",
+      "effort_hours": 1,
+      "difficulty": "easy",
+      "platform": "desktop",
+      "notes": "After wallet funding, make first x402 test payment to trigger leaderboard tracking on GoPlausible."
+    },
+    {
+      "id": 32,
+      "name": "Algorand Global x402 Challenge Submission",
+      "status": "pending",
+      "assigned_to": "jordan",
+      "deadline": "2026-07-20",
+      "priority": "high",
+      "effort_hours": 2,
+      "difficulty": "medium",
+      "platform": "desktop",
+      "notes": "Final submission for Global x402 Challenge. Needs at least one completed payment on Algorand."
+    },
+    {
+      "id": 33,
+      "name": "Voicebox TTS \u2014 Local Installation",
+      "status": "shipped",
+      "assigned_to": "forge",
+      "deadline": null,
+      "priority": "medium",
+      "effort_hours": 3,
+      "difficulty": "medium",
+      "platform": "desktop",
+      "notes": "Installed + server working on desktop. Shipped \u2014 Forge can verify."
+    },
+    {
+      "id": 35,
+      "name": "Circle Agent Marketplace Registration",
+      "status": "pending",
+      "assigned_to": "jordan",
+      "deadline": null,
+      "priority": "medium",
+      "effort_hours": 1,
+      "difficulty": "easy",
+      "platform": "cloud",
+      "notes": "Needs Jordan to fill out Circle Agent Marketplace form."
+    },
+    {
+      "id": 38,
+      "name": "Pika Subscription Signup",
+      "status": "pending",
+      "assigned_to": "jordan",
+      "deadline": null,
+      "priority": "medium",
+      "effort_hours": 1,
+      "difficulty": "easy",
+      "platform": "cloud",
+      "notes": "$8/mo Pika subscription \u2014 needs Jordan to decide and sign up."
+    },
+    {
+      "id": 39,
+      "name": "Kapso Business Phone \u2014 Decision",
+      "status": "pending",
+      "assigned_to": "jordan",
+      "deadline": null,
+      "priority": "low",
+      "effort_hours": 1,
+      "difficulty": "easy",
+      "platform": "cloud",
+      "notes": "Needs Jordan's decision on Kapso business phone service."
+    },
+    {
+      "id": 46,
+      "name": "DeFi Dashboard Refresh",
+      "status": "in_progress",
+      "assigned_to": "gentech",
+      "deadline": null,
+      "priority": "medium",
+      "effort_hours": 4,
+      "difficulty": "medium",
+      "platform": "cloud",
+      "notes": "Refresh GenTech Hub DeFi dashboard with current data and new visualizations."
+    },
+    {
+      "id": 49,
+      "name": "Pay-Skills Catalog PR",
+      "status": "shipped",
+      "assigned_to": "gentech",
+      "deadline": null,
+      "priority": "high",
+      "effort_hours": 2,
+      "difficulty": "medium",
+      "platform": "cloud",
+      "notes": "SHIPPED 2026-07-16 night session: PR #192 submitted to solana-foundation/pay-skills \u2014 GenTech Labs x402 Gateway provider listing (16 endpoints, 6 chains, Algorand support). PAY.md + openapi.json committed."
+    },
+    {
+      "id": 50,
+      "name": "Virtuals ACP Registration",
+      "status": "pending",
+      "assigned_to": "gentech",
+      "deadline": null,
+      "priority": "medium",
+      "effort_hours": 2,
+      "difficulty": "medium",
+      "platform": "cloud",
+      "notes": "Register GenTech agents on Virtuals Agent Compute Protocol."
+    },
+    {
+      "id": 51,
+      "name": "awesome-x402 PR \u2014 Add GenTech Tools",
+      "status": "shipped",
+      "assigned_to": "gentech",
+      "deadline": null,
+      "priority": "medium",
+      "effort_hours": 1,
+      "difficulty": "easy",
+      "platform": "cloud",
+      "notes": "SHIPPED 2026-07-16 night session: PR #761 on xpaysh/awesome-x402 updated \u2014 GenTech x402 Gateway added to Data & Social APIs section. Also includes existing Agent Kit (MCP) and GenTech Labs (Ecosystem) listings. 3 sections total."
+    },
+    {
+      "id": 52,
+      "name": "awesome-agentic-commerce PR",
+      "status": "shipped",
+      "assigned_to": "gentech",
+      "deadline": null,
+      "priority": "medium",
+      "effort_hours": 1,
+      "difficulty": "easy",
+      "platform": "cloud",
+      "notes": "SHIPPED 2026-07-16 night session: PR #425 on Merit-Systems/awesome-agentic-commerce updated \u2014 GenTech Labs / GenTech Agent Kit listing in Ecosystem section. PR description refreshed."
+    },
+    {
+      "id": 53,
+      "name": "Circle Marketplace Prep",
+      "status": "pending",
+      "assigned_to": "gentech",
+      "deadline": null,
+      "priority": "medium",
+      "effort_hours": 3,
+      "difficulty": "medium",
+      "platform": "cloud",
+      "notes": "Prepare GenTech API listing for Circle Agent Marketplace \u2014 docs, pricing, OpenAPI spec."
+    },
+    {
+      "id": 54,
+      "name": "Sana Bot Integration",
+      "status": "pending",
+      "assigned_to": "gentech",
+      "deadline": null,
+      "priority": "medium",
+      "effort_hours": 3,
+      "difficulty": "medium",
+      "platform": "cloud",
+      "notes": "Integrate GenTech APIs with Sana Bot platform."
     }
   ],
   "cleaned": true

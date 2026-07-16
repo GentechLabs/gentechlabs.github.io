@@ -6,15 +6,23 @@
 
 ## 🎓 GenTech Academy — Module 1: "Ship a Compliant x402 API"
 
-- [x] **Syllabus drafted**: `09-Green Room/academy-module-1-shipping-x402.md` — 5 parts, 4 pricing tiers
-- [x] **Test harness deployed**: `test.api.gentechlabs.net` — free reference endpoint for students
+- [x] **Syllabus drafted**: `09-Green Room/academy-module-1-shipping-x402.md`
+- [x] **Test harness deployed**: `test.api.gentechlabs.net`
 - [ ] **Compliance Checker packaged**: Turn 42-check script into `pip install x402-compliance-checker`
-- [ ] **Checklist web UI**: Public page where devs paste their endpoint URL → instant scan results
+- [ ] **Checklist web UI**: Public page where devs paste endpoint URL → instant scan
 - [ ] **Academy landing page**: One-pager at academy.gentechlabs.net
-- [ ] **Discord server**: Community for alumni + support
-- [ ] **First paying student**: Validate $49 Standard tier pricing
+- [ ] **First paying student**: Validate $19/$50 pricing
 
-## x402 Gateway — Paid API Platform as a Product 💰
+## 🍽️ GenTech Food — Agentic Food Concierge (BUILDING)
+
+- [x] **Food memory**: Dishes saved in vault with recipe + substitutions
+- [x] **Kroger API wired**: Product search, promo pricing, local store awareness
+- [x] **dd-cli ordering layer**: DoorDash delivery integration mapped
+- [x] **WURK.fun offset**: Work microtasks to cover delivery fees
+- [x] **API scaffolded**: AgentCash Router, 6 endpoints
+- [ ] **Live ordering test**: Get dd-cli beta access + test order flow
+- [ ] **Kroger API key**: Sign up for developer account
+- [ ] **Kapso WhatsApp**: Support channel for ordering concierge
 
 - [ ] **Concept**: "Stripe for AI agents" — any dev can deploy their API behind an x402 paywall in 10 minutes
 - [ ] **What it replaces**: Custom Cloudflare Worker, custom verification logic, VPS setup, pricing config
