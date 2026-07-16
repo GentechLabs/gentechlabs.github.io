@@ -4,7 +4,7 @@
 - **URL**: api.gentechlabs.net
 - **Type**: x402 v2 gateway (Cloudflare Worker)
 - **Status**: Deployed, 15 endpoints, registered on x402scan
-- **Pay-Skills PR**: #154 submitted to solana-foundation/pay-skills (pending)
+- **Pay-Skills PR**: #190 submitted to solana-foundation/pay-skills (pending, Greptile 4/5 — fixes pushed Jul 16)
 
 ## x402scan
 - **URL**: https://www.x402scan.com
@@ -16,7 +16,7 @@
 - **@agentcash/discovery**: `npx -y @agentcash/discovery@latest discover <origin>`
 - **x402-check**: github.com/suryast/x402-check (PR #12 pending header priority fix)
 - **x402trace**: github.com/fardinvahdat/x402trace
-- **x402-watch**: github.com/logiccrafterdz/x402-watch — new Rust-based x402 health monitor
+- **x402-watch**: github.com/logiccrafterdz/x402-watch — Rust-based x402 health monitor
 
 ## Ecosystem Repos — Tracked
 
@@ -51,6 +51,9 @@
 | mark3labs/x402-go | Go (net/http, Gin, MCP) | PR #30 pending |
 | adipundir/aptos-x402 | TypeScript/Aptos SDK (v3.0.1) | V2 compliant client; server missing `resource` field in response |
 | srotzin/hive-rosetta | Node.js + Python signer | V2 compliant (PR #2 pending for asset casing) |
+| michielpost/x402-dotnet | .NET SDK (v2.2.0) | V2 compliant ✅ — added Jul 16 scan |
+| minhqdao/x402-dart | Dart SDK (new) | V2 compliant ✅ — added Jul 16 scan |
+| nicosmall503/merx-mcp | TRON facilitation (new) | TBD — added Jul 16 scan |
 
 ### Monitoring & Tooling
 | Repo | Type | Status |
@@ -73,6 +76,8 @@
 | vercel-labs/x402-ai-starter | Archived by owner |
 | google-agentic-commerce/a2a-x402 | Spec repo only |
 | sailorpepe/undesirables-x402-server | V2 compliant, v1 headers intentional |
+| lemmaoracle/example-x402 | Example-only project, 1⭐ — added Jul 16 scan |
+| up2itnow0822/agentpay-mcp | 2 months stale last commit — added Jul 16 scan |
 
 ## Open Compliance PRs
 | PR | Repo | Fix | Status |
