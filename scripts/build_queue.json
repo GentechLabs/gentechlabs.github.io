@@ -1,9 +1,10 @@
 {
   "version": 4.1,
-  "updated": "2026-07-16 \u2014 night session: shipped #49, #51, #52 (PRs to pay-skills, awesome-x402, awesome-agentic-commerce)",
+  "updated": "2026-07-17 \u2014 Restored items 66-74 after concurrent write conflict. Gateway verified OK.",
   "meta": {
     "generated_by": "gentech",
-    "forge_read_source": "this file \u2014 items with assigned_to: forge and status: pending are active queue"
+    "forge_read_source": "this file \u2014 items with assigned_to: forge and status: pending are active queue",
+    "item_count": 44
   },
   "items": [
     {
@@ -436,15 +437,95 @@
     },
     {
       "id": 54,
-      "name": "Sana Bot Integration",
-      "status": "pending",
+      "name": "Coinbase AgentKit x402 Action Provider",
+      "status": "shipped",
       "assigned_to": "gentech",
       "deadline": null,
-      "priority": "medium",
+      "priority": "high",
       "effort_hours": 3,
       "difficulty": "medium",
       "platform": "cloud",
-      "notes": "Integrate GenTech APIs with Sana Bot platform."
+      "notes": "PR #1375 submitted. GenTech added as registered facilitator in X402ActionProvider constants. README updated with usage examples."
+    },
+    {
+      "id": 66,
+      "name": "Visual Kei Tap \u2014 KAGEK\u014c Rhythm Game",
+      "status": "shipped",
+      "assigned_to": "gentech",
+      "priority": "high",
+      "difficulty": "medium",
+      "platform": "web",
+      "notes": "Shipped v3. AudioContext, stage characters, beam lanes, splash effects. Live at protojay4789.github.io/games/vkt2/. Next: BPM tuning per track, proper beat maps."
+    },
+    {
+      "id": 67,
+      "name": "Game Studio Pipeline \u2014 Model Routing",
+      "status": "shipped",
+      "assigned_to": "gentech",
+      "priority": "medium",
+      "difficulty": "easy",
+      "platform": "config",
+      "notes": "Game Studio preset added to TAS. OpenCode Go base URL fixed. Stack: DeepSeek V4 Pro \u2192 Kimi K2.7/GLM-5.2 \u2192 Kimi K3 (Jul 27+). All via OpenCode Go."
+    },
+    {
+      "id": 69,
+      "name": "Register GenTech x402 Gateway on x402scan.com",
+      "status": "in_progress",
+      "assigned_to": "gentech",
+      "priority": "high",
+      "difficulty": "medium",
+      "platform": "web",
+      "notes": "Register api.gentechlabs.net on x402scan. Gateway returns proper 402 on all endpoints. Unblocked after #70 resolved."
+    },
+    {
+      "id": 70,
+      "name": "Fix x402 Gateway \u2014 Return 402 (not 500)",
+      "status": "shipped",
+      "assigned_to": "gentech",
+      "priority": "high",
+      "difficulty": "easy",
+      "platform": "cloudflare",
+      "notes": "RESOLVED \u2014 false alarm. Gateway already returns proper 402 on all /v1/* endpoints with correct v2 payment-required header. The 500 error was from probing root path."
+    },
+    {
+      "id": 71,
+      "name": "Tier 3 \u2014 Sign CLA for e2b-dev/awesome-ai-agents #1264",
+      "status": "pending",
+      "assigned_to": "jordan",
+      "priority": "medium",
+      "difficulty": "easy",
+      "platform": "cloud",
+      "notes": "Sign CLA at e2b.dev/docs/cla so PR #1264 can merge."
+    },
+    {
+      "id": 72,
+      "name": "Tier 3 \u2014 Coinbase AgentKit #1375 Heimdall Review",
+      "status": "pending",
+      "assigned_to": "jordan",
+      "priority": "medium",
+      "difficulty": "easy",
+      "platform": "cloud",
+      "notes": "PR #1375 blocked on Heimdall review. GenTech is now a registered facilitator."
+    },
+    {
+      "id": 73,
+      "name": "Unreal Engine MCP \u2014 Hermes \u00d7 UE5 Pipeline",
+      "status": "pending",
+      "assigned_to": "forge",
+      "priority": "high",
+      "difficulty": "medium",
+      "platform": "desktop",
+      "notes": "Install UE 5.8+ with Unreal MCP plugin + AllToolsets. hermes mcp install unreal-engine + hermes skills install official/creative/unreal-mcp. Plain-English \u2192 3D scenes."
+    },
+    {
+      "id": 74,
+      "name": "KAGEK\u014c scroll-world \u2014 Band Promo Page",
+      "status": "pending",
+      "assigned_to": "forge",
+      "priority": "high",
+      "difficulty": "medium",
+      "platform": "desktop",
+      "notes": "Forked oso95/scroll-world (3.2k \u2b50, MIT). Build scroll-scrubbed fly-through page using Higgsfield (Seedance). 6 scenes: Moon\u2192Stage\u2192KAGE\u2192HIKARI\u2192Together\u2192CTA. Prompts at Gaming/kageko-scroll-world-prompts.md"
     }
   ],
   "cleaned": true
