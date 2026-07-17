@@ -4,7 +4,10 @@
 - **URL**: api.gentechlabs.net
 - **Type**: x402 v2 gateway (Cloudflare Worker)
 - **Status**: Deployed, 15 endpoints, registered on x402scan
-- **Pay-Skills PR**: #190 submitted to solana-foundation/pay-skills (pending, Greptile 4/5 — fixes pushed Jul 16)
+- **Pay-Skills PRs**: #154, #190 (MERGEABLE ✅), #192 (MERGEABLE ✅) submitted to solana-foundation/pay-skills
+- **Awesome-x402**: #761, #810 (MERGEABLE ✅), #881 (REBASED MERGEABLE ✅) submitted to xpaysh/awesome-x402
+- **x402 MCP Services**: PR #35 (MERGEABLE ✅) submitted to Recall-Kitchen/awesome-x402-mcp-services
+- **Total PRs open**: 45 as of Jul 17, 44/45 MERGEABLE, 1 rebased today
 
 ## x402scan
 - **URL**: https://www.x402scan.com
@@ -82,11 +85,16 @@
 ## Open Compliance PRs
 | PR | Repo | Fix | Status |
 |----|------|-----|--------|
+| #881 | xpaysh/awesome-x402 | GenTech Gateway rebased onto main (CONFLICTING→MERGEABLE) | **REBASED Jul 17** ✅ |
 | #5 | marlinprotocol/x402-gateway | README header docs fix | open since Jul 14 |
 | #8 | brave-experiments/private-x402-gateway | X-Payment-Required → Payment-Required | open since Jul 14 |
 | #30 | mark3labs/x402-go | Lowercase EVM asset addresses | open since Jul 14 |
 | #2 | srotzin/hive-rosetta | Lowercase asset addresses | open since Jul 15 |
 | #423 | strands-agents/tools | payment-required header in http_request | **MERGED** ✅ |
+| #837 | jamesmurdza/awesome-ai-devtools | Add GenTech Agent Kit (reopened) | MERGEABLE ✅ |
+| #192 | solana-foundation/pay-skills | GenTech x402 gateway catalog (16 endpoints) | MERGEABLE ✅ |
+| #190 | solana-foundation/pay-skills | Refresh GenTech catalog | MERGEABLE ✅ |
+| #197 | solana-foundation/awesome-solana-ai | Add GenTech Agent Kit | MERGEABLE ✅ |
 
 ## Tier System
 - Tier 0: Free probe, observe only
