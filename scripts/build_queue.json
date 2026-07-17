@@ -1,24 +1,12 @@
 {
   "version": 4.1,
-  "updated": "2026-07-17 \u2014 Restored items 66-74 after concurrent write conflict. Gateway verified OK.",
+  "updated": "2026-07-17 — Added #75 ZeroClaw Solana plugin bounty",
   "meta": {
     "generated_by": "gentech",
-    "forge_read_source": "this file \u2014 items with assigned_to: forge and status: pending are active queue",
+    "forge_read_source": "this file — items with assigned_to: forge and status: pending are active queue",
     "item_count": 44
   },
   "items": [
-    {
-      "id": 30,
-      "name": "Algorand x402 Challenge \u2014 GoPlausible Auth + Discord",
-      "status": "shipped",
-      "assigned_to": "jordan",
-      "deadline": "2026-07-14",
-      "priority": "urgent",
-      "effort_hours": 1,
-      "notes": "\u2705 Registered for challenge. \u2705 Authed on GoPlausible dashboard. \u23f3 Fund Algorand wallet with USDC (ASA 31566704) + ALGO for gas on Sunday. Then make first test payment to trigger leaderboard tracking.",
-      "difficulty": "easy",
-      "platform": "desktop"
-    },
     {
       "id": 0,
       "name": "OKX AI Genesis Hackathon",
@@ -28,140 +16,20 @@
       "priority": "low",
       "effort_hours": 0,
       "difficulty": "hard",
-      "detail": "Skipped per Jordan \u2014 Algorand is next up.",
+      "detail": "Skipped per Jordan — Algorand is next up.",
       "platform": "either"
     },
     {
-      "id": 37,
-      "name": "GenTech Creative Content \u2014 Pika MCP Brainstorm",
-      "status": "shipped",
+      "id": 1,
+      "name": "Cloudflare x402 Gateway Setup",
+      "status": "blocked",
       "assigned_to": "gentech",
-      "deadline": "2026-07-09",
-      "priority": "high",
-      "effort_minutes": 20,
-      "notes": "Brainstorm complete. 7 projects documented: Build-a-Brand, App Sizzle, Explainer, Founder Video, UGC Ads, Forge Podcast, Viral Hooks. Shipped 2026-07-11.",
-      "difficulty": "medium",
-      "platform": "cloud"
-    },
-    {
-      "id": 34,
-      "name": "Sourcegraph \u2014 Application Essay Drafting",
-      "status": "cancelled",
-      "assigned_to": "gentech",
-      "deadline": "2026-07-10",
-      "priority": "high",
-      "effort_minutes": 45,
-      "notes": "Jordan decided to skip \u2014 not our lane",
-      "difficulty": "easy",
-      "platform": "cloud"
-    },
-    {
-      "id": 36,
-      "name": "Pika MCP Plugin for Agent Kit",
-      "status": "shipped",
-      "assigned_to": "gentech",
-      "deadline": "2026-07-14",
-      "priority": "high",
-      "effort_hours": 4,
-      "notes": "SHIPPED 2026-07-14: Pika MCP plugin verified \u2014 17/17 tests pass, code reviewed, MCP protocol clean (tools/list, tools/call, initialize, ping). Fal.ai Pika client with text-to-video and image-to-video. Needs FAL_KEY for production use or Pika MCP at mcp.pika.me.",
-      "difficulty": "medium",
-      "platform": "cloud"
-    },
-    {
-      "id": 40,
-      "name": "Sui Overflow 2026 \u2014 Agent Kit Plugin + Hackathon Submission",
-      "status": "cancelled",
-      "assigned_to": "none",
       "deadline": null,
       "priority": "low",
-      "effort_hours": 0,
-      "difficulty": "medium",
-      "detail": "Skipped per Jordan \u2014 Algorand is next up.",
-      "platform": "either"
-    },
-    {
-      "id": 23,
-      "name": "Atelier Registration",
-      "status": "shipped",
-      "assigned_to": "forge",
-      "deadline": null,
-      "priority": "high",
-      "effort_minutes": 90,
-      "notes": "\u2705 Done \u2014 3 services live on Atelier (DeFi Yield Optimizer, Agent Credit Score, Token Risk Scoring). Solana wallet connected, x402 payments configured.",
-      "difficulty": "easy",
-      "platform": "either"
-    },
-    {
-      "id": 24,
-      "name": "SCN / Avi Gaba Outreach",
-      "status": "shipped",
-      "assigned_to": "forge",
-      "deadline": null,
-      "priority": "high",
-      "effort_hours": 3,
-      "notes": "Fork repo, open Issue/PR on economic layer, send email to work@ehlabs.xyz \u2014 PR #1 open on upstream. Email skipped (no SMTP creds).",
-      "difficulty": "easy",
-      "platform": "either"
-    },
-    {
-      "id": 27,
-      "name": "Donut AI Application",
-      "status": "shipped",
-      "assigned_to": "forge",
-      "deadline": null,
-      "priority": "high",
-      "effort_minutes": 15,
-      "notes": "Jordan submitted directly",
-      "difficulty": "easy",
-      "platform": "either"
-    },
-    {
-      "id": 28,
-      "name": "Monad Agent Hub Integration",
-      "status": "in_progress",
-      "assigned_to": "gentech",
-      "deadline": null,
-      "priority": "high",
-      "effort_hours": 12,
-      "notes": "Research complete (Jul 12). 8 dApp manifests indexed. Agent registered on Dev.fun Arena (ID: cmrexlc1u2sg12dkyeflbga3a). Pending: (1) Jordan claim agent at arena.dev.fun, (2) PortalHQ skills registration at agents.portalhq.io/monad/skills/, (3) x402 facilitator config. Also $50K Poker Arena (free Playground S7 open). Full docs at 10-Labs/monad-agent-hub/. Needs dedicated session.",
-      "difficulty": "medium",
+      "effort_hours": 5,
+      "notes": "Blocked by expired Cloudflare token — needs rotation",
+      "difficulty": "hard",
       "platform": "cloud"
-    },
-    {
-      "id": 19,
-      "name": "Travel Agent \u2014 Travala MCP",
-      "status": "built",
-      "assigned_to": "forge",
-      "deadline": null,
-      "priority": "medium",
-      "effort_weeks": 3,
-      "notes": "Integrate Travala MCP, LetsFG, x402, Organic Maps \u2014 x402 payment layer, Organic Maps POIs, unified CLI, 16 tests all passing. Worker deployed to https://gentech-travel-agent.jordanjones0902.workers.dev",
-      "difficulty": "medium",
-      "platform": "cloud"
-    },
-    {
-      "id": 20,
-      "name": "Agent Finance Intermediary \u2014 BNPL",
-      "status": "built",
-      "assigned_to": "forge",
-      "deadline": null,
-      "priority": "medium",
-      "effort_weeks": 3,
-      "notes": "Escrow contract (Solidity), credit scoring API, risk engine built. Tested: whale=755 Prime, degen=418 Deep Subprime. Needs testnet deploy + x402 wiring.",
-      "difficulty": "medium",
-      "platform": "either"
-    },
-    {
-      "id": 21,
-      "name": "RomM + AI Companion",
-      "status": "testing",
-      "assigned_to": "forge",
-      "deadline": "2026-07-15",
-      "priority": "high",
-      "effort_weeks": 5,
-      "notes": "Forge wired real vision (gemma4:31b via Ollama Cloud). 27/27 tests passing. Jordan testing today on desktop.",
-      "difficulty": "medium",
-      "platform": "desktop"
     },
     {
       "id": 2,
@@ -188,6 +56,42 @@
       "platform": "cloud"
     },
     {
+      "id": 19,
+      "name": "Travel Agent — Travala MCP",
+      "status": "built",
+      "assigned_to": "forge",
+      "deadline": null,
+      "priority": "medium",
+      "effort_weeks": 3,
+      "notes": "Integrate Travala MCP, LetsFG, x402, Organic Maps — x402 payment layer, Organic Maps POIs, unified CLI, 16 tests all passing. Worker deployed to https://gentech-travel-agent.jordanjones0902.workers.dev",
+      "difficulty": "medium",
+      "platform": "cloud"
+    },
+    {
+      "id": 20,
+      "name": "Agent Finance Intermediary — BNPL",
+      "status": "built",
+      "assigned_to": "forge",
+      "deadline": null,
+      "priority": "medium",
+      "effort_weeks": 3,
+      "notes": "Escrow contract (Solidity), credit scoring API, risk engine built. Tested: whale=755 Prime, degen=418 Deep Subprime. Needs testnet deploy + x402 wiring.",
+      "difficulty": "medium",
+      "platform": "either"
+    },
+    {
+      "id": 21,
+      "name": "RomM + AI Companion",
+      "status": "testing",
+      "assigned_to": "forge",
+      "deadline": "2026-07-15",
+      "priority": "high",
+      "effort_weeks": 5,
+      "notes": "Forge wired real vision (gemma4:31b via Ollama Cloud). 27/27 tests passing. Jordan testing today on desktop.",
+      "difficulty": "medium",
+      "platform": "desktop"
+    },
+    {
       "id": 22,
       "name": "Cloudflare Email Agent",
       "status": "deployed",
@@ -195,9 +99,33 @@
       "deadline": null,
       "priority": "medium",
       "effort_days": 2,
-      "notes": "Deploy MCP server to Workers, configure Email Routing, test inbound/outbound \u2014 Worker deployed to https://gentech-email-agent.jordanjones0902.workers.dev. Needs Email Routing config in Cloudflare dashboard.",
+      "notes": "Deploy MCP server to Workers, configure Email Routing, test inbound/outbound — Worker deployed to https://gentech-email-agent.jordanjones0902.workers.dev. Needs Email Routing config in Cloudflare dashboard.",
       "difficulty": "hard",
       "platform": "cloud"
+    },
+    {
+      "id": 23,
+      "name": "Atelier Registration",
+      "status": "shipped",
+      "assigned_to": "forge",
+      "deadline": null,
+      "priority": "high",
+      "effort_minutes": 90,
+      "notes": "✅ Done — 3 services live on Atelier (DeFi Yield Optimizer, Agent Credit Score, Token Risk Scoring). Solana wallet connected, x402 payments configured.",
+      "difficulty": "easy",
+      "platform": "either"
+    },
+    {
+      "id": 24,
+      "name": "SCN / Avi Gaba Outreach",
+      "status": "shipped",
+      "assigned_to": "forge",
+      "deadline": null,
+      "priority": "high",
+      "effort_hours": 3,
+      "notes": "Fork repo, open Issue/PR on economic layer, send email to work@ehlabs.xyz — PR #1 open on upstream. Email skipped (no SMTP creds).",
+      "difficulty": "easy",
+      "platform": "either"
     },
     {
       "id": 25,
@@ -207,20 +135,8 @@
       "deadline": null,
       "priority": "low",
       "effort_hours": 4,
-      "notes": "Option C (Both) \u2014 decision pending from Jordan",
+      "notes": "Option C (Both) — decision pending from Jordan",
       "difficulty": "medium",
-      "platform": "cloud"
-    },
-    {
-      "id": 1,
-      "name": "Cloudflare x402 Gateway Setup",
-      "status": "blocked",
-      "assigned_to": "gentech",
-      "deadline": null,
-      "priority": "low",
-      "effort_hours": 5,
-      "notes": "Blocked by expired Cloudflare token \u2014 needs rotation",
-      "difficulty": "hard",
       "platform": "cloud"
     },
     {
@@ -231,57 +147,37 @@
       "deadline": null,
       "priority": "low",
       "effort_hours": 2,
-      "notes": "Strategic memo drafted \u2014 saved to 00-HQ/agents-as-rwas-thesis.md",
+      "notes": "Strategic memo drafted — saved to 00-HQ/agents-as-rwas-thesis.md",
       "difficulty": "hard",
       "platform": "cloud"
     },
     {
-      "id": 45,
-      "name": "Dry Powder Mode \u2014 AAE Stop-Loss Agent",
+      "id": 27,
+      "name": "Donut AI Application",
+      "status": "shipped",
+      "assigned_to": "forge",
+      "deadline": null,
+      "priority": "high",
+      "effort_minutes": 15,
+      "notes": "Jordan submitted directly",
+      "difficulty": "easy",
+      "platform": "either"
+    },
+    {
+      "id": 28,
+      "name": "Monad Agent Hub Integration",
       "status": "in_progress",
       "assigned_to": "gentech",
       "deadline": null,
       "priority": "high",
-      "effort_hours": 8,
+      "effort_hours": 12,
+      "notes": "Research complete (Jul 12). 8 dApp manifests indexed. Agent registered on Dev.fun Arena (ID: cmrexlc1u2sg12dkyeflbga3a). Pending: (1) Jordan claim agent at arena.dev.fun, (2) PortalHQ skills registration at agents.portalhq.io/monad/skills/, (3) x402 facilitator config. Also $50K Poker Arena (free Playground S7 open). Full docs at 10-Labs/monad-agent-hub/. Needs dedicated session.",
       "difficulty": "medium",
-      "notes": "Phase 1 (crash detection engine) built Jul 14 night session. 18 tests passing. Phase 2 LP module (dry_powder_lp.py) built Jul 16 night session \u2014 preview/mock mode, needs wallet key for real execution. Phase 6 Telegram notification module (dry_powder_notify.py) built Jul 16 \u2014 template-based alerts, needs TELEGRAM_BOT_TOKEN env var. Design doc at designs/dry-powder-mode.md. Live engine verified working (AVAX $6.70 SAFE at Jul 16 04:13 UTC). Pending Phases 3-5 and 7-10. Requires Jordan's wallet keys for Phases 2-3, and Telegram bot token for Phase 6 live.",
       "platform": "cloud"
-    },
-    {
-      "id": 47,
-      "name": "OpenAPI Schema Fix \u2014 x402scan Registration",
-      "status": "shipped",
-      "assigned_to": "gentech",
-      "deadline": "2026-07-16",
-      "priority": "high",
-      "effort_hours": 3,
-      "difficulty": "medium",
-      "notes": "SHIPPED 2026-07-15 night session: Added requestBody schemas with examples to all 15 endpoints. Added POST support (airdrops/check, wallet/analyze, agent/scan). Added components/securitySchemes (x402). Added per-endpoint 402 response schemas with payment instruction examples. Deployed via wrangler deploy (Version c62fc284). Verified live \u2014 GET and POST paywalls working. Ready for x402scan re-scan.",
-      "platform": "cloud"
-    },
-    {
-      "id": 48,
-      "name": "KytyPS5 \u2014 PS5 Emulator Contribution",
-      "status": "pending",
-      "assigned_to": "forge",
-      "deadline": null,
-      "priority": "high",
-      "effort_hours": 20,
-      "difficulty": "hard",
-      "notes": [
-        "RESEARCHED Jul 15: Repo is binary-only (no public source code in any branch). 854\u2b50, single dev (Nmzik).",
-        "PRs restricted \u2014 Nmzik hasn't enabled fork contributions yet. Data ready on our fork when he does.",
-        "Phase 1 DONE: Fork created, compat DB populated (7 games), CONTRIBUTING.md written, both branches pushed.",
-        "PRs ready to submit when Nmzik opens contributions: ProtoJay4789:add-compat-db + ProtoJay4789:add-contributing",
-        "Phase 2 (desktop/Forge): Download v0.0.3 release, test games on Windows, file bug reports with logs.",
-        "Phase 3 (if source goes public): Fork \u2192 Linux port (issue #17), Vulkan fixes, Emulation AI Companion integration.",
-        "Full analysis at 10-Labs/kytyps5-analysis.md"
-      ],
-      "platform": "desktop"
     },
     {
       "id": 29,
-      "name": "Algorand Mainnet Deploy \u2014 x402 Gateway",
+      "name": "Algorand Mainnet Deploy — x402 Gateway",
       "status": "pending",
       "assigned_to": "jordan",
       "deadline": "2026-07-19",
@@ -292,8 +188,20 @@
       "notes": "Fund Algorand wallet with USDC (ASA 31566704) + ALGO for gas on Sunday. Then deploy x402 gateway to Algorand mainnet."
     },
     {
+      "id": 30,
+      "name": "Algorand x402 Challenge — GoPlausible Auth + Discord",
+      "status": "shipped",
+      "assigned_to": "jordan",
+      "deadline": "2026-07-14",
+      "priority": "urgent",
+      "effort_hours": 1,
+      "notes": "✅ Registered for challenge. ✅ Authed on GoPlausible dashboard. ⏳ Fund Algorand wallet with USDC (ASA 31566704) + ALGO for gas on Sunday. Then make first test payment to trigger leaderboard tracking.",
+      "difficulty": "easy",
+      "platform": "desktop"
+    },
+    {
       "id": 31,
-      "name": "Algorand Volume \u2014 First Test Payment",
+      "name": "Algorand Volume — First Test Payment",
       "status": "pending",
       "assigned_to": "jordan",
       "deadline": "2026-07-19",
@@ -317,7 +225,7 @@
     },
     {
       "id": 33,
-      "name": "Voicebox TTS \u2014 Local Installation",
+      "name": "Voicebox TTS — Local Installation",
       "status": "shipped",
       "assigned_to": "forge",
       "deadline": null,
@@ -325,7 +233,19 @@
       "effort_hours": 3,
       "difficulty": "medium",
       "platform": "desktop",
-      "notes": "Installed + server working on desktop. Shipped \u2014 Forge can verify."
+      "notes": "Installed + server working on desktop. Shipped — Forge can verify."
+    },
+    {
+      "id": 34,
+      "name": "Sourcegraph — Application Essay Drafting",
+      "status": "cancelled",
+      "assigned_to": "gentech",
+      "deadline": "2026-07-10",
+      "priority": "high",
+      "effort_minutes": 45,
+      "notes": "Jordan decided to skip — not our lane",
+      "difficulty": "easy",
+      "platform": "cloud"
     },
     {
       "id": 35,
@@ -340,6 +260,30 @@
       "notes": "Needs Jordan to fill out Circle Agent Marketplace form."
     },
     {
+      "id": 36,
+      "name": "Pika MCP Plugin for Agent Kit",
+      "status": "shipped",
+      "assigned_to": "gentech",
+      "deadline": "2026-07-14",
+      "priority": "high",
+      "effort_hours": 4,
+      "notes": "SHIPPED 2026-07-14: Pika MCP plugin verified — 17/17 tests pass, code reviewed, MCP protocol clean (tools/list, tools/call, initialize, ping). Fal.ai Pika client with text-to-video and image-to-video. Needs FAL_KEY for production use or Pika MCP at mcp.pika.me.",
+      "difficulty": "medium",
+      "platform": "cloud"
+    },
+    {
+      "id": 37,
+      "name": "GenTech Creative Content — Pika MCP Brainstorm",
+      "status": "shipped",
+      "assigned_to": "gentech",
+      "deadline": "2026-07-09",
+      "priority": "high",
+      "effort_minutes": 20,
+      "notes": "Brainstorm complete. 7 projects documented: Build-a-Brand, App Sizzle, Explainer, Founder Video, UGC Ads, Forge Podcast, Viral Hooks. Shipped 2026-07-11.",
+      "difficulty": "medium",
+      "platform": "cloud"
+    },
+    {
       "id": 38,
       "name": "Pika Subscription Signup",
       "status": "pending",
@@ -349,11 +293,11 @@
       "effort_hours": 1,
       "difficulty": "easy",
       "platform": "cloud",
-      "notes": "$8/mo Pika subscription \u2014 needs Jordan to decide and sign up."
+      "notes": "$8/mo Pika subscription — needs Jordan to decide and sign up."
     },
     {
       "id": 39,
-      "name": "Kapso Business Phone \u2014 Decision",
+      "name": "Kapso Business Phone — Decision",
       "status": "pending",
       "assigned_to": "jordan",
       "deadline": null,
@@ -362,6 +306,30 @@
       "difficulty": "easy",
       "platform": "cloud",
       "notes": "Needs Jordan's decision on Kapso business phone service."
+    },
+    {
+      "id": 40,
+      "name": "Sui Overflow 2026 — Agent Kit Plugin + Hackathon Submission",
+      "status": "cancelled",
+      "assigned_to": "none",
+      "deadline": null,
+      "priority": "low",
+      "effort_hours": 0,
+      "difficulty": "medium",
+      "detail": "Skipped per Jordan — Algorand is next up.",
+      "platform": "either"
+    },
+    {
+      "id": 45,
+      "name": "Dry Powder Mode — AAE Stop-Loss Agent",
+      "status": "in_progress",
+      "assigned_to": "gentech",
+      "deadline": null,
+      "priority": "high",
+      "effort_hours": 8,
+      "difficulty": "medium",
+      "notes": "Phase 1 (crash detection engine) built Jul 14 night session. 18 tests passing. Phase 2 LP module (dry_powder_lp.py) built Jul 16 night session — preview/mock mode, needs wallet key for real execution. Phase 6 Telegram notification module (dry_powder_notify.py) built Jul 16 — template-based alerts, needs TELEGRAM_BOT_TOKEN env var. Design doc at designs/dry-powder-mode.md. Live engine verified working (AVAX $6.70 SAFE at Jul 16 04:13 UTC). Pending Phases 3-5 and 7-10. Requires Jordan's wallet keys for Phases 2-3, and Telegram bot token for Phase 6 live.",
+      "platform": "cloud"
     },
     {
       "id": 46,
@@ -376,6 +344,38 @@
       "notes": "Refresh GenTech Hub DeFi dashboard with current data and new visualizations."
     },
     {
+      "id": 47,
+      "name": "OpenAPI Schema Fix — x402scan Registration",
+      "status": "shipped",
+      "assigned_to": "gentech",
+      "deadline": "2026-07-16",
+      "priority": "high",
+      "effort_hours": 3,
+      "difficulty": "medium",
+      "notes": "SHIPPED 2026-07-15 night session: Added requestBody schemas with examples to all 15 endpoints. Added POST support (airdrops/check, wallet/analyze, agent/scan). Added components/securitySchemes (x402). Added per-endpoint 402 response schemas with payment instruction examples. Deployed via wrangler deploy (Version c62fc284). Verified live — GET and POST paywalls working. Ready for x402scan re-scan.",
+      "platform": "cloud"
+    },
+    {
+      "id": 48,
+      "name": "KytyPS5 — PS5 Emulator Contribution",
+      "status": "pending",
+      "assigned_to": "forge",
+      "deadline": null,
+      "priority": "high",
+      "effort_hours": 20,
+      "difficulty": "hard",
+      "notes": [
+        "RESEARCHED Jul 15: Repo is binary-only (no public source code in any branch). 854⭐, single dev (Nmzik).",
+        "PRs restricted — Nmzik hasn't enabled fork contributions yet. Data ready on our fork when he does.",
+        "Phase 1 DONE: Fork created, compat DB populated (7 games), CONTRIBUTING.md written, both branches pushed.",
+        "PRs ready to submit when Nmzik opens contributions: ProtoJay4789:add-compat-db + ProtoJay4789:add-contributing",
+        "Phase 2 (desktop/Forge): Download v0.0.3 release, test games on Windows, file bug reports with logs.",
+        "Phase 3 (if source goes public): Fork → Linux port (issue #17), Vulkan fixes, Emulation AI Companion integration.",
+        "Full analysis at 10-Labs/kytyps5-analysis.md"
+      ],
+      "platform": "desktop"
+    },
+    {
       "id": 49,
       "name": "Pay-Skills Catalog PR",
       "status": "shipped",
@@ -385,7 +385,7 @@
       "effort_hours": 2,
       "difficulty": "medium",
       "platform": "cloud",
-      "notes": "SHIPPED 2026-07-16 night session: PR #192 submitted to solana-foundation/pay-skills \u2014 GenTech Labs x402 Gateway provider listing (16 endpoints, 6 chains, Algorand support). PAY.md + openapi.json committed."
+      "notes": "SHIPPED 2026-07-16 night session: PR #192 submitted to solana-foundation/pay-skills — GenTech Labs x402 Gateway provider listing (16 endpoints, 6 chains, Algorand support). PAY.md + openapi.json committed."
     },
     {
       "id": 50,
@@ -401,7 +401,7 @@
     },
     {
       "id": 51,
-      "name": "awesome-x402 PR \u2014 Add GenTech Tools",
+      "name": "awesome-x402 PR — Add GenTech Tools",
       "status": "shipped",
       "assigned_to": "gentech",
       "deadline": null,
@@ -409,7 +409,7 @@
       "effort_hours": 1,
       "difficulty": "easy",
       "platform": "cloud",
-      "notes": "SHIPPED 2026-07-16 night session: PR #761 on xpaysh/awesome-x402 updated \u2014 GenTech x402 Gateway added to Data & Social APIs section. Also includes existing Agent Kit (MCP) and GenTech Labs (Ecosystem) listings. 3 sections total."
+      "notes": "SHIPPED 2026-07-16 night session: PR #761 on xpaysh/awesome-x402 updated — GenTech x402 Gateway added to Data & Social APIs section. Also includes existing Agent Kit (MCP) and GenTech Labs (Ecosystem) listings. 3 sections total."
     },
     {
       "id": 52,
@@ -421,7 +421,7 @@
       "effort_hours": 1,
       "difficulty": "easy",
       "platform": "cloud",
-      "notes": "SHIPPED 2026-07-16 night session: PR #425 on Merit-Systems/awesome-agentic-commerce updated \u2014 GenTech Labs / GenTech Agent Kit listing in Ecosystem section. PR description refreshed."
+      "notes": "SHIPPED 2026-07-16 night session: PR #425 on Merit-Systems/awesome-agentic-commerce updated — GenTech Labs / GenTech Agent Kit listing in Ecosystem section. PR description refreshed."
     },
     {
       "id": 53,
@@ -433,7 +433,7 @@
       "effort_hours": 3,
       "difficulty": "medium",
       "platform": "cloud",
-      "notes": "Prepare GenTech API listing for Circle Agent Marketplace \u2014 docs, pricing, OpenAPI spec."
+      "notes": "Prepare GenTech API listing for Circle Agent Marketplace — docs, pricing, OpenAPI spec."
     },
     {
       "id": 54,
@@ -449,7 +449,7 @@
     },
     {
       "id": 66,
-      "name": "Visual Kei Tap \u2014 KAGEK\u014c Rhythm Game",
+      "name": "Visual Kei Tap — KAGEKŌ Rhythm Game",
       "status": "shipped",
       "assigned_to": "gentech",
       "priority": "high",
@@ -459,13 +459,13 @@
     },
     {
       "id": 67,
-      "name": "Game Studio Pipeline \u2014 Model Routing",
+      "name": "Game Studio Pipeline — Model Routing",
       "status": "shipped",
       "assigned_to": "gentech",
       "priority": "medium",
       "difficulty": "easy",
       "platform": "config",
-      "notes": "Game Studio preset added to TAS. OpenCode Go base URL fixed. Stack: DeepSeek V4 Pro \u2192 Kimi K2.7/GLM-5.2 \u2192 Kimi K3 (Jul 27+). All via OpenCode Go."
+      "notes": "Game Studio preset added to TAS. OpenCode Go base URL fixed. Stack: DeepSeek V4 Pro → Kimi K2.7/GLM-5.2 → Kimi K3 (Jul 27+). All via OpenCode Go."
     },
     {
       "id": 69,
@@ -479,17 +479,17 @@
     },
     {
       "id": 70,
-      "name": "Fix x402 Gateway \u2014 Return 402 (not 500)",
+      "name": "Fix x402 Gateway — Return 402 (not 500)",
       "status": "shipped",
       "assigned_to": "gentech",
       "priority": "high",
       "difficulty": "easy",
       "platform": "cloudflare",
-      "notes": "RESOLVED \u2014 false alarm. Gateway already returns proper 402 on all /v1/* endpoints with correct v2 payment-required header. The 500 error was from probing root path."
+      "notes": "RESOLVED — false alarm. Gateway already returns proper 402 on all /v1/* endpoints with correct v2 payment-required header. The 500 error was from probing root path."
     },
     {
       "id": 71,
-      "name": "Tier 3 \u2014 Sign CLA for e2b-dev/awesome-ai-agents #1264",
+      "name": "Tier 3 — Sign CLA for e2b-dev/awesome-ai-agents #1264",
       "status": "pending",
       "assigned_to": "jordan",
       "priority": "medium",
@@ -499,7 +499,7 @@
     },
     {
       "id": 72,
-      "name": "Tier 3 \u2014 Coinbase AgentKit #1375 Heimdall Review",
+      "name": "Tier 3 — Coinbase AgentKit #1375 Heimdall Review",
       "status": "pending",
       "assigned_to": "jordan",
       "priority": "medium",
@@ -509,23 +509,33 @@
     },
     {
       "id": 73,
-      "name": "Unreal Engine MCP \u2014 Hermes \u00d7 UE5 Pipeline",
+      "name": "Unreal Engine MCP — Hermes × UE5 Pipeline",
       "status": "pending",
       "assigned_to": "forge",
       "priority": "high",
       "difficulty": "medium",
       "platform": "desktop",
-      "notes": "Install UE 5.8+ with Unreal MCP plugin + AllToolsets. hermes mcp install unreal-engine + hermes skills install official/creative/unreal-mcp. Plain-English \u2192 3D scenes."
+      "notes": "Install UE 5.8+ with Unreal MCP plugin + AllToolsets. hermes mcp install unreal-engine + hermes skills install official/creative/unreal-mcp. Plain-English → 3D scenes."
     },
     {
       "id": 74,
-      "name": "KAGEK\u014c scroll-world \u2014 Band Promo Page",
+      "name": "KAGEKŌ scroll-world — Band Promo Page",
       "status": "pending",
       "assigned_to": "forge",
       "priority": "high",
       "difficulty": "medium",
       "platform": "desktop",
-      "notes": "Forked oso95/scroll-world (3.2k \u2b50, MIT). Build scroll-scrubbed fly-through page using Higgsfield (Seedance). 6 scenes: Moon\u2192Stage\u2192KAGE\u2192HIKARI\u2192Together\u2192CTA. Prompts at Gaming/kageko-scroll-world-prompts.md"
+      "notes": "Forked oso95/scroll-world (3.2k ⭐, MIT). Build scroll-scrubbed fly-through page using Higgsfield (Seedance). 6 scenes: Moon→Stage→KAGE→HIKARI→Together→CTA. Prompts at Gaming/kageko-scroll-world-prompts.md"
+    },
+    {
+      "id": 75,
+      "name": "ZeroClaw Solana Plugin — x402-settle + portfolio-brief",
+      "status": "pending",
+      "assigned_to": "forge",
+      "priority": "high",
+      "difficulty": "medium",
+      "platform": "desktop",
+      "notes": "Superteam Brasil bounty ($5,000 USDG, 20d left). Build WASM plugins for ZeroClaw Rust agent runtime (32k⭐). Tracks: A-x402-settle + B-portfolio-brief. wasm32-wasip2, T0-T1."
     }
   ],
   "cleaned": true
