@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0">
+<title>VISUAL KEi TAP — KAGEKŌ</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { 
+  width: 100%; height: 100%; overflow: hidden;
+  background: #0a0a0a;
+  font-family: 'Georgia', 'Times New Roman', serif;
+  touch-action: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+#game-container {
+  position: relative;
+  width: 100%; height: 100%;
+  max-width: 450px;
+  margin: 0 auto;
+}
+#gameCanvas {
+  display: block;
+  width: 100%; height: 100%;
+  background: #0a0a0a;
+  cursor: pointer;
+}
+#ui-overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+#start-screen, #result-screen {
+  pointer-events: auto;
+  text-align: center;
+  padding: 20px;
+  display: none;
+}
+#start-screen.active, #result-screen.active { display: block; }
+#start-screen h1 {
+  font-size: clamp(28px, 6vw, 42px);
+  color: #8b0000;
+  text-shadow: 0 0 20px rgba(139,0,0,0.8), 0 0 40px rgba(139,0,0,0.4);
+  letter-spacing: 6px;
+  margin-bottom: 8px;
+  font-weight: normal;
+}
+#start-screen .subtitle {
+  font-size: clamp(12px, 2.5vw, 16px);
+  color: #666;
+  letter-spacing: 8px;
+  text-transform: uppercase;
+  margin-bottom: 30px;
+}
+#start-screen .band-name {
+  font-size: clamp(18px, 4vw, 28px);
+  color: #c0c0c0;
+  text-shadow: 0 0 15px rgba(192,192,192,0.3);
+  letter-spacing: 10px;
+  margin-bottom: 40px;
+}
+.track-select {
+  pointer-events: auto;
+  margin: 20px auto;
+  max-width: 300px;
+}
+.track-select select {
+  width: 100%;
+  padding: 12px 16px;
+  background: rgba(139,0,0,0.15);
+  border: 1px solid #8b0000;
+  color: #c0c0c0;
+  font-size: 16px;
+  font-family: 'Georgia', serif;
+  letter-spacing: 2px;
+  border-radius: 4px;
+  outline: none;
+  cursor: pointer;
+}
+.track-select select option {
+  background: #1a0a0a;
+  color: #c0c0c0;
+}
+.btn {
+  pointer-events: auto;
+  display: inline-block;
+  padding: 16px 48px;
+  font-size: clamp(16px, 3.5vw, 22px);
+  font-family: 'Georgia', serif;
+  color: #c0c0c0;
+  background: linear-gradient(135deg, #2a0000, #1a0000);
+  border: 1px solid #8b0000;
+  letter-spacing: 4px;
+  cursor: pointer;
+  transition: all 0.3s;
+  text-transform: uppercase;
+  margin: 8px;
+}
+.btn:hover { background: linear-gradient(135deg, #3a0000, #2a0000); box-shadow: 0 0 20px rgba(139,0,0,0.3); }
+.btn:active { transform: scale(0.97); }
+#result-screen h2 {
+  font-size: clamp(24px, 5vw, 36px);
+  color: #8b0000;
+  text-shadow: 0 0 15px rgba(139,0,0,0.6);
+  letter-spacing: 4px;
+  margin-bottom: 20px;
+  font-weight: normal;
+}
+.stat {
+  color: #888;
+  font-size: clamp(14px, 3vw, 18px);
+  letter-spacing: 2px;
+  margin: 8px 0;
+}
+.stat span { color: #c0c0c0; }
+.stat .score-val { color: #8b0000; font-size: 1.4em; }
+</style>
+</head>
+<body>
+<div id="game-container">
+  <canvas id="gameCanvas"></canvas>
+  <div id="ui-overlay">
+    <div id="start-screen" class="active">
+      <h1>VISUAL KEi TAP</h1>
+      <div class="subtitle">— Rhythm Game —</div>
+      <div class="band-name">KAGEKŌ</div>
+      <div class="track-select">
+        <select id="trackSelect">
+          <option value="blood-moon">BLOOD MOON</option>
+          <option value="mirai-e-hashire">Mirai e Hashire</option>
+          <option value="mamoritai">Mamoritai</option>
+          <option value="in-the-darkness-we-rise">In the Darkness We Rise</option>
+          <option value="fight-forever-never-quit">Fight Forever Never Quit</option>
+          <option value="shadow-and-light">Shadow and Light</option>
+        </select>
+      </div>
+      <button class="btn" id="startBtn">▶ PLAY</button>
+      <div style="margin-top:24px;color:#555;font-size:11px;letter-spacing:2px;">
+        TAP or [A][S][D] · 3 LANES
+      </div>
+    </div>
+    <div id="result-screen">
+      <h2 id="resultTitle">RESULTS</h2>
+      <div class="stat">SCORE <span class="score-val" id="finalScore">0</span></div>
+      <div class="stat">MAX COMBO <span id="finalCombo">0</span>x</div>
+      <div class="stat">PERFECT <span id="finalPerfect">0</span></div>
+      <div class="stat">GOOD <span id="finalGood">0</span></div>
+      <div class="stat">MISS <span id="finalMiss">0</span></div>
+      <div class="stat">ACCURACY <span id="finalAcc">0</span>%</div>
+      <button class="btn" id="retryBtn">↺ RETRY</button>
+      <button class="btn" id="menuBtn">◁ MENU</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ============================================================
+// VISUAL KEi TAP — KAGEKŌ Rhythm Game
+// 3-lane rhythm game, mobile-first, Canvas-based
+// ============================================================
+
+const canvas = document.getElementById('gameCanvas');
+const ctx = canvas.getContext('2d');
+
+// --- Resize ---
+function resize() {
+  const container = document.getElementById('game-container');
+  const w = container.clientWidth;
+  const h = container.clientHeight;
+  canvas.width = w;
+  canvas.height = h;
+}
+window.addEventListener('resize', resize);
+resize();
+
+// --- Track data ---
+const TRACKS = {
+  'blood-moon': {
+    url: 'https://ProtoJay4789.github.io/music/vanito/blood-moon.mp3',
+    title: 'BLOOD MOON',
+    bpm: 170,
+    key: 'D# min',
+    sections: [
+      { time: 0, type: 'intro', duration: 8 },
+      { time: 8, type: 'kage', duration: 24 },
+      { time: 32, type: 'hikari', duration: 32 },
+      { time: 64, type: 'kage', duration: 24 },
+      { time: 88, type: 'hikari', duration: 32 },
+      { time: 120, type: 'kage', duration: 20 },
+      { time: 140, type: 'hikari', duration: 40 },
+      { time: 180, type: 'outro', duration: 12 }
+    ]
+  },
+  'mirai-e-hashire': {
+    url: 'https://ProtoJay4789.github.io/music/vanito/mirai-e-hashire.mp3',
+    title: 'Mirai e Hashire',
+    bpm: 175,
+    sections: [
+      { time: 0, type: 'intro', duration: 8 },
+      { time: 8, type: 'hikari', duration: 30 },
+      { time: 38, type: 'kage', duration: 22 },
+      { time: 60, type: 'hikari', duration: 60 }
+    ]
+  },
+  'mamoritai': {
+    url: 'https://ProtoJay4789.github.io/music/vanito/mamoritai.mp3',
+    title: 'Mamoritai',
+    bpm: 160,
+    sections: [
+      { time: 0, type: 'intro', duration: 10 },
+      { time: 10, type: 'hikari', duration: 35 },
+      { time: 45, type: 'kage', duration: 25 },
+      { time: 70, type: 'hikari', duration: 50 }
+    ]
+  },
+  'in-the-darkness-we-rise': {
+    url: 'https://ProtoJay4789.github.io/music/vanito/in-the-darkness-we-rise.mp3',
+    title: 'In the Darkness We Rise',
+    bpm: 165,
+    sections: [
+      { time: 0, type: 'intro', duration: 10 },
+      { time: 10, type: 'kage', duration: 28 },
+      { time: 38, type: 'hikari', duration: 34 },
+      { time: 72, type: 'kage', duration: 26 }
+    ]
+  },
+  'fight-forever-never-quit': {
+    url: 'https://ProtoJay4789.github.io/music/vanito/fight-forever-never-quit.mp3',
+    title: 'Fight Forever Never Quit',
+    bpm: 180,
+    sections: [
+      { time: 0, type: 'intro', duration: 8 },
+      { time: 8, type: 'kage', duration: 30 },
+      { time: 38, type: 'hikari', duration: 30 },
+      { time: 68, type: 'kage', duration: 25 }
+    ]
+  },
+  'shadow-and-light': {
+    url: 'https://ProtoJay4789.github.io/music/vanito/shadow-and-light.mp3',
+    title: 'Shadow and Light',
+    bpm: 155,
+    sections: [
+      { time: 0, type: 'intro', duration: 12 },
+      { time: 12, type: 'hikari', duration: 36 },
+      { time: 48, type: 'kage', duration: 24 },
+      { time: 72, type: 'hikari', duration: 36 }
+    ]
+  }
+};
+
+// --- Audio engine ---
+let audioCtx = null;
+let audioSource = null;
+let audioGain = null;
+let currentAudio = null;
+let audioStartTime = 0;
+let audioOffset = 0;
+
+function initAudio() {
+  if (!audioCtx) {
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    audioGain = audioCtx.createGain();
+    audioGain.gain.value = 0.7;
+    audioGain.connect(audioCtx.destination);
+  }
+}
+
+async function loadTrack(trackId) {
+  const track = TRACKS[trackId];
+  if (!track) return false;
+  
+  try {
+    if (currentAudio) {
+      currentAudio.pause();
+      currentAudio = null;
+    }
+    
+    const resp = await fetch(track.url);
+    if (!resp.ok) throw new Error('Track not found');
+    
+    const blob = await resp.blob();
+    const blobUrl = URL.createObjectURL(blob);
+    
+    currentAudio = new Audio(blobUrl);
+    currentAudio.volume = 0.5;
+    
+    // Wait for metadata
+    await new Promise((resolve, reject) => {
+      currentAudio.addEventListener('loadedmetadata', resolve, { once: true });
+      currentAudio.addEventListener('error', reject, { once: true });
+      // Timeout fallback
+      setTimeout(resolve, 3000);
+    });
+    
+    return true;
+  } catch (e) {
+    console.warn('Track load failed, using procedural audio:', e);
+    currentAudio = null;
+    return false;
+  }
+}
+
+function playAudio() {
+  if (currentAudio) {
+    currentAudio.currentTime = 0;
+    currentAudio.play().catch(e => console.warn('Audio play blocked:', e));
+  }
+}
+
+function stopAudio() {
+  if (currentAudio) {
+    currentAudio.pause();
+    currentAudio.currentTime = 0;
+  }
+}
+
+function getAudioTime() {
+  if (currentAudio && currentAudio.duration) {
+    return currentAudio.currentTime;
+  }
+  return 0;
+}
+
+function getTrackDuration(trackId) {
+  const track = TRACKS[trackId];
+  if (currentAudio && currentAudio.duration && isFinite(currentAudio.duration)) {
+    return Math.min(currentAudio.duration, 240);
+  }
+  // Fallback: estimate from sections
+  const lastSection = track.sections[track.sections.length - 1];
+  return lastSection.time + lastSection.duration;
+}
+
+// --- Beat map generator ---
+function generateBeats(trackId) {
+  const track = TRACKS[trackId];
+  if (!track) return [];
+  
+  const bpm = track.bpm;
+  const beatInterval = 60 / bpm;
+  const beats = [];
+  
+  // Generate patterns for each section
+  for (const section of track.sections) {
+    const endTime = section.time + section.duration;
+    let t = section.time;
+    
+    // Different pattern densities based on section type
+    let pattern;
+    switch (section.type) {
+      case 'intro':
+        pattern = [1, 0, 0, 1, 0, 0, 1, 0]; // sparse, 8-beat cycle
+        break;
+      case 'kage':
+        pattern = [1, 1, 0, 1, 1, 1, 0, 1, 1, 0, 1, 1]; // dense, aggressive
+        break;
+      case 'hikari':
+        pattern = [1, 0, 1, 0, 1, 1, 0, 1]; // melodic, flowing
+        break;
+      case 'outro':
+        pattern = [1, 0, 0, 0, 1, 0, 0, 0]; // slowing down
+        break;
+      default:
+        pattern = [1, 0, 1, 0];
+    }
+    
+    let beatIndex = 0;
+    while (t < endTime) {
+      if (pattern[beatIndex % pattern.length]) {
+        // Assign lane based on a pattern that feels natural
+        const lanePatterns = [
+          [0, 1, 2, 1],  // cycle through
+          [1, 0, 1, 2],
+          [2, 1, 0, 1],
+          [0, 2, 1, 0]
+        ];
+        const laneSet = lanePatterns[Math.floor(t / 4) % lanePatterns.length];
+        const lane = laneSet[Math.floor(t / beatInterval) % laneSet.length];
+        
+        // KAGE type for kage sections, HIKARI for hikari sections
+        const noteType = (section.type === 'kage') ? 'kage' : 
+                         (section.type === 'hikari') ? 'hikari' :
+                         ((section.type === 'intro' || section.type === 'outro') ? 'hikari' : '');
+        
+        beats.push({
+          lane,
+          time: t,
+          type: noteType
+        });
+      }
+      t += beatInterval;
+      beatIndex++;
+    }
+  }
+  
+  return beats;
+}
+
+// --- Game state ---
+const STATE = { MENU: 0, PLAYING: 1, RESULT: 2 };
+let gameState = STATE.MENU;
+
+const game = {
+  score: 0,
+  combo: 0,
+  maxCombo: 0,
+  perfect: 0,
+  good: 0,
+  miss: 0,
+  totalNotes: 0,
+  hits: [],
+  currentTrack: 'blood-moon',
+  beatMap: [],
+  beatIndex: 0,
+  startTime: 0,
+  elapsedTime: 0,
+  laneHits: [false, false, false],
+  hitTimer: [0, 0, 0],
+  sectionType: 'intro',
+  particles: [],
+  flashAlpha: 0,
+  warningAlpha: 0
+};
+
+// --- Constants (relative to canvas) ---
+const LANE_COUNT = 3;
+const HIT_ZONE_Y_RATIO = 0.82;
+const NOTE_SPEED = 280; // pixels per second
+const PERFECT_WINDOW = 0.08; // seconds
+const GOOD_WINDOW = 0.16;
+
+function getLaneWidth() { return canvas.width / LANE_COUNT; }
+function getHitY() { return canvas.height * HIT_ZONE_Y_RATIO; }
+
+// --- Drawing ---
+function drawBackground() {
+  const w = canvas.width, h = canvas.height;
+  
+  // Dark gradient background
+  const grad = ctx.createLinearGradient(0, 0, 0, h);
+  grad.addColorStop(0, '#0a0000');
+  grad.addColorStop(0.5, '#0d0505');
+  grad.addColorStop(1, '#1a0505');
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, 0, w, h);
+  
+  // Moon glow
+  if (gameState === STATE.PLAYING || gameState === STATE.MENU) {
+    const moonX = w / 2;
+    const moonY = h * 0.12;
+    const moonR = Math.min(w, h) * 0.08;
+    
+    // Glow
+    const glow = ctx.createRadialGradient(moonX, moonY, moonR * 0.5, moonX, moonY, moonR * 3);
+    glow.addColorStop(0, 'rgba(200,180,160,0.06)');
+    glow.addColorStop(0.5, 'rgba(200,180,160,0.02)');
+    glow.addColorStop(1, 'rgba(200,180,160,0)');
+    ctx.fillStyle = glow;
+    ctx.fillRect(0, 0, w, h);
+    
+    // Moon
+    ctx.beginPath();
+    ctx.arc(moonX, moonY, moonR, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(200,190,180,0.08)';
+    ctx.fill();
+    ctx.beginPath();
+    ctx.arc(moonX - moonR * 0.15, moonY - moonR * 0.1, moonR * 0.85, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(200,190,180,0.05)';
+    ctx.fill();
+  }
+  
+  // Fog/smoke at bottom
+  const fog = ctx.createLinearGradient(0, h * 0.7, 0, h);
+  fog.addColorStop(0, 'rgba(139,0,0,0)');
+  fog.addColorStop(1, 'rgba(139,0,0,0.04)');
+  ctx.fillStyle = fog;
+  ctx.fillRect(0, h * 0.7, w, h * 0.3);
+}
+
+function drawLanes() {
+  const w = canvas.width, h = canvas.height;
+  const laneW = getLaneWidth();
+  const hitY = getHitY();
+  
+  // Lane dividers
+  for (let i = 0; i <= LANE_COUNT; i++) {
+    const x = i * laneW;
+    ctx.beginPath();
+    ctx.moveTo(x, 0);
+    ctx.lineTo(x, h);
+    ctx.strokeStyle = 'rgba(139,0,0,0.15)';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+  }
+  
+  // Hit zone line
+  ctx.beginPath();
+  ctx.moveTo(0, hitY);
+  ctx.lineTo(w, hitY);
+  ctx.strokeStyle = 'rgba(139,0,0,0.3)';
+  ctx.lineWidth = 1;
+  ctx.setLineDash([8, 6]);
+  ctx.stroke();
+  ctx.setLineDash([]);
+  
+  // Hit zone glow
+  const hzGlow = ctx.createLinearGradient(0, hitY - 6, 0, hitY + 6);
+  hzGlow.addColorStop(0, 'rgba(139,0,0,0)');
+  hzGlow.addColorStop(0.5, 'rgba(139,0,0,0.08)');
+  hzGlow.addColorStop(1, 'rgba(139,0,0,0)');
+  ctx.fillStyle = hzGlow;
+  ctx.fillRect(0, hitY - 6, w, 12);
+  
+  // Lane hit flash
+  for (let i = 0; i < LANE_COUNT; i++) {
+    if (game.hitTimer[i] > 0) {
+      const alpha = game.hitTimer[i];
+      ctx.fillStyle = `rgba(139,0,0,${alpha * 0.15})`;
+      ctx.fillRect(i * laneW, hitY - 20, laneW, 40);
+    }
+  }
+}
+
+function drawNotes() {
+  const h = canvas.height;
+  const laneW = getLaneWidth();
+  const hitY = getHitY();
+  const now = game.elapsedTime;
+  
+  for (let i = game.beatIndex; i < game.beatMap.length; i++) {
+    const note = game.beatMap[i];
+    if (note.time < now - 0.5) { game.beatIndex = i; continue; }
+    if (note.time > now + 2.5) break;
+    
+    const timeDiff = note.time - now;
+    const y = hitY - timeDiff * NOTE_SPEED;
+    
+    if (y < -40) continue;
+    if (y > h + 20) break;
+    
+    const x = note.lane * laneW + laneW / 2;
+    const isKage = note.type === 'kage';
+    
+    // Note glow
+    const glowColor = isKage ? 'rgba(200,30,30,' : 'rgba(60,100,220,';
+    const noteColor = isKage ? '#8b0000' : '#3c64dc';
+    const noteColorLight = isKage ? '#ff2222' : '#6688ff';
+    
+    // Glow
+    ctx.beginPath();
+    ctx.arc(x, y, 16, 0, Math.PI * 2);
+    ctx.fillStyle = glowColor + '0.15)';
+    ctx.fill();
+    
+    // Outer ring
+    ctx.beginPath();
+    ctx.arc(x, y, 14, 0, Math.PI * 2);
+    ctx.strokeStyle = isKage ? 'rgba(200,30,30,0.5)' : 'rgba(60,100,220,0.5)';
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+    
+    // Inner shape
+    if (isKage) {
+      // KAGE: aggressive diamond shape
+      ctx.save();
+      ctx.translate(x, y);
+      ctx.rotate(Math.PI / 4);
+      ctx.fillStyle = noteColor;
+      ctx.globalAlpha = 0.85;
+      ctx.fillRect(-8, -8, 16, 16);
+      ctx.restore();
+    } else {
+      // HIKARI: smooth circle
+      ctx.beginPath();
+      ctx.arc(x, y, 8, 0, Math.PI * 2);
+      ctx.fillStyle = noteColor;
+      ctx.globalAlpha = 0.75;
+      ctx.fill();
+      ctx.globalAlpha = 1;
+    }
+    
+    // Center dot
+    ctx.beginPath();
+    ctx.arc(x, y, 3, 0, Math.PI * 2);
+    ctx.fillStyle = noteColorLight;
+    ctx.globalAlpha = 0.9;
+    ctx.fill();
+    ctx.globalAlpha = 1;
+  }
+}
+
+function drawParticles() {
+  for (let i = game.particles.length - 1; i >= 0; i--) {
+    const p = game.particles[i];
+    p.x += p.vx;
+    p.y += p.vy;
+    p.vy += 0.1;
+    p.life -= 0.02;
+    p.size *= 0.97;
+    
+    if (p.life <= 0 || p.size < 0.5) {
+      game.particles.splice(i, 1);
+      continue;
+    }
+    
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+    ctx.fillStyle = p.color.replace('1)', `${p.life})`);
+    ctx.fill();
+  }
+}
+
+function drawHUD() {
+  const w = canvas.width;
+  const h = canvas.height;
+  
+  // Score
+  ctx.fillStyle = 'rgba(139,0,0,0.8)';
+  ctx.font = `bold ${Math.round(w * 0.08)}px Georgia, serif`;
+  ctx.textAlign = 'center';
+  ctx.fillText(game.score, w / 2, h * 0.06);
+  
+  // Combo
+  if (game.combo >= 5) {
+    const comboAlpha = Math.min(1, 0.5 + game.combo / 50);
+    ctx.fillStyle = `rgba(192,192,192,${comboAlpha})`;
+    ctx.font = `${Math.round(w * 0.035)}px Georgia, serif`;
+    ctx.fillText(`${game.combo}x COMBO`, w / 2, h * 0.11);
+  }
+  
+  // Track info
+  const track = TRACKS[game.currentTrack];
+  ctx.fillStyle = 'rgba(160,160,160,0.4)';
+  ctx.font = `${Math.round(w * 0.028)}px Georgia, serif`;
+  ctx.textAlign = 'left';
+  ctx.fillText(track ? track.title : '', 12, h * 0.055);
+  
+  // Section indicator
+  ctx.textAlign = 'right';
+  const sectionLabel = game.sectionType.toUpperCase();
+  const sectionColor = game.sectionType === 'kage' ? 'rgba(200,30,30,0.5)' :
+                       game.sectionType === 'hikari' ? 'rgba(60,100,220,0.5)' :
+                       'rgba(160,160,160,0.3)';
+  ctx.fillStyle = sectionColor;
+  ctx.font = `${Math.round(w * 0.025)}px Georgia, serif`;
+  ctx.fillText(sectionLabel, w - 12, h * 0.055);
+  
+  // Progress bar
+  const dur = getTrackDuration(game.currentTrack);
+  if (dur > 0) {
+    const progress = Math.min(game.elapsedTime / dur, 1);
+    ctx.fillStyle = 'rgba(139,0,0,0.15)';
+    ctx.fillRect(0, h - 3, w, 3);
+    ctx.fillStyle = 'rgba(139,0,0,0.4)';
+    ctx.fillRect(0, h - 3, w * progress, 3);
+  }
+}
+
+function drawFlash() {
+  if (game.flashAlpha > 0) {
+    ctx.fillStyle = `rgba(139,0,0,${game.flashAlpha * 0.08})`;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+  }
+}
+
+// --- Menu drawing ---
+function drawMenu() {
+  const w = canvas.width, h = canvas.height;
+  
+  // Title
+  ctx.fillStyle = '#8b0000';
+  ctx.font = `bold ${Math.round(w * 0.09)}px Georgia, serif`;
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.shadowColor = 'rgba(139,0,0,0.5)';
+  ctx.shadowBlur = 30;
+  ctx.fillText('VISUAL KEi TAP', w / 2, h * 0.2);
+  ctx.shadowBlur = 0;
+  
+  ctx.fillStyle = 'rgba(160,160,160,0.4)';
+  ctx.font = `${Math.round(w * 0.035)}px Georgia, serif`;
+  ctx.fillText('— Rhythm Game —', w / 2, h * 0.28);
+  
+  ctx.fillStyle = 'rgba(180,180,180,0.5)';
+  ctx.font = `${Math.round(w * 0.05)}px Georgia, serif`;
+  ctx.letterSpacing = '8px';
+  ctx.fillText('KAGEKŌ', w / 2, h * 0.37);
+  
+  // Visual kei ornament
+  ctx.fillStyle = 'rgba(139,0,0,0.2)';
+  ctx.font = `${Math.round(w * 0.15)}px Georgia, serif`;
+  ctx.fillText('影光', w / 2, h * 0.5);
+  
+  ctx.fillStyle = 'rgba(100,100,100,0.3)';
+  ctx.font = `${Math.round(w * 0.025)}px Georgia, serif`;
+  ctx.fillText('[A] [S] [D] or TAP', w / 2, h * 0.65);
+  ctx.fillText('3 LANES · RHYTHM', w / 2, h * 0.70);
+}
+
+// --- Hit detection ---
+function handleHit(lane) {
+  if (gameState !== STATE.PLAYING) return;
+  
+  const now = game.elapsedTime;
+  let closestIdx = -1;
+  let closestDiff = Infinity;
+  
+  for (let i = game.beatIndex; i < game.beatMap.length; i++) {
+    const note = game.beatMap[i];
+    if (note.lane !== lane) continue;
+    if (note.time < now - GOOD_WINDOW) continue;
+    if (note.time > now + GOOD_WINDOW) break;
+    
+    const diff = Math.abs(note.time - now);
+    if (diff < closestDiff) {
+      closestDiff = diff;
+      closestIdx = i;
+    }
+  }
+  
+  game.laneHits[lane] = true;
+  game.hitTimer[lane] = 0.25;
+  
+  if (closestIdx === -1) return;
+  
+  const note = game.beatMap[closestIdx];
+  const diff = Math.abs(note.time - now);
+  
+  // Remove the note
+  game.beatMap.splice(closestIdx, 1);
+  
+  if (diff <= PERFECT_WINDOW) {
+    // PERFECT
+    const points = 100 + Math.floor(game.combo / 10) * 5;
+    game.score += points;
+    game.perfect++;
+    game.combo++;
+    if (game.combo > game.maxCombo) game.maxCombo = game.combo;
+    game.flashAlpha = 1;
+    
+    // Particles
+    const laneW = getLaneWidth();
+    const hitY = getHitY();
+    const x = lane * laneW + laneW / 2;
+    const color = note.type === 'kage' ? 'rgba(255,50,50,1)' : 'rgba(80,130,255,1)';
+    for (let p = 0; p < 8; p++) {
+      game.particles.push({
+        x, y: hitY,
+        vx: (Math.random() - 0.5) * 4,
+        vy: -Math.random() * 4 - 2,
+        size: 2 + Math.random() * 3,
+        life: 0.6 + Math.random() * 0.4,
+        color
+      });
+    }
+  } else if (diff <= GOOD_WINDOW) {
+    game.score += 50;
+    game.good++;
+    game.combo++;
+    if (game.combo > game.maxCombo) game.maxCombo = game.combo;
+    
+    const laneW = getLaneWidth();
+    const hitY = getHitY();
+    const x = lane * laneW + laneW / 2;
+    for (let p = 0; p < 4; p++) {
+      game.particles.push({
+        x, y: hitY,
+        vx: (Math.random() - 0.5) * 3,
+        vy: -Math.random() * 2 - 1,
+        size: 1.5 + Math.random() * 2,
+        life: 0.4,
+        color: 'rgba(200,200,200,1)'
+      });
+    }
+  }
+}
+
+// --- Miss detection ---
+function checkMisses() {
+  const now = game.elapsedTime;
+  let missed = 0;
+  
+  for (let i = game.beatIndex; i < game.beatMap.length; i++) {
+    const note = game.beatMap[i];
+    if (note.time < now - GOOD_WINDOW) {
+      game.miss++;
+      game.combo = 0;
+      missed++;
+      game.beatIndex = i + 1;
+    } else {
+      break;
+    }
+  }
+  
+  if (missed > 0) {
+    game.warningAlpha = 1;
+  }
+}
+
+// --- Update section type ---
+function updateSection() {
+  const track = TRACKS[game.currentTrack];
+  if (!track) return;
+  
+  for (const section of track.sections) {
+    if (game.elapsedTime >= section.time && game.elapsedTime < section.time + section.duration) {
+      game.sectionType = section.type;
+      return;
+    }
+  }
+}
+
+// --- Game loop ---
+function update(dt) {
+  if (gameState !== STATE.PLAYING) return;
+  
+  // Update timers
+  game.elapsedTime = getAudioTime();
+  
+  // Check for end
+  const dur = getTrackDuration(game.currentTrack);
+  if (game.elapsedTime >= dur - 0.5 || game.elapsedTime <= 0.001) {
+    endGame();
+    return;
+  }
+  
+  updateSection();
+  checkMisses();
+  
+  // Lane hit timer
+  for (let i = 0; i < LANE_COUNT; i++) {
+    if (game.hitTimer[i] > 0) game.hitTimer[i] -= dt * 2;
+  }
+  
+  // Flash decay
+  if (game.flashAlpha > 0) game.flashAlpha -= dt * 3;
+  if (game.warningAlpha > 0) game.warningAlpha -= dt * 2;
+}
+
+function draw() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  
+  if (gameState === STATE.MENU) {
+    drawBackground();
+    drawMenu();
+    return;
+  }
+  
+  if (gameState === STATE.PLAYING) {
+    drawBackground();
+    drawLanes();
+    drawNotes();
+    drawParticles();
+    drawFlash();
+    drawHUD();
+  }
+}
+
+let lastTime = 0;
+function gameLoop(timestamp) {
+  const dt = lastTime ? Math.min((timestamp - lastTime) / 1000, 0.05) : 0.016;
+  lastTime = timestamp;
+  
+  update(dt);
+  draw();
+  
+  requestAnimationFrame(gameLoop);
+}
+
+// --- Start game ---
+async function startGame(trackId) {
+  gameState = STATE.PLAYING;
+  document.getElementById('start-screen').classList.remove('active');
+  document.getElementById('result-screen').classList.remove('active');
+  
+  // Reset game state
+  game.score = 0;
+  game.combo = 0;
+  game.maxCombo = 0;
+  game.perfect = 0;
+  game.good = 0;
+  game.miss = 0;
+  game.beatIndex = 0;
+  game.particles = [];
+  game.flashAlpha = 0;
+  game.warningAlpha = 0;
+  game.currentTrack = trackId;
+  game.sectionType = 'intro';
+  game.hitTimer = [0, 0, 0];
+  game.laneHits = [false, false, false];
+  
+  // Load audio & generate beats
+  await loadTrack(trackId);
+  game.beatMap = generateBeats(trackId);
+  game.totalNotes = game.beatMap.length;
+  
+  // Start audio
+  playAudio();
+}
+
+function endGame() {
+  stopAudio();
+  gameState = STATE.RESULT;
+  
+  document.getElementById('finalScore').textContent = game.score;
+  document.getElementById('finalCombo').textContent = game.maxCombo;
+  document.getElementById('finalPerfect').textContent = game.perfect;
+  document.getElementById('finalGood').textContent = game.good;
+  document.getElementById('finalMiss').textContent = game.miss;
+  
+  const total = game.perfect + game.good + game.miss;
+  const acc = total > 0 ? Math.round((game.perfect + game.good * 0.5) / total * 100) : 0;
+  document.getElementById('finalAcc').textContent = acc;
+  
+  const track = TRACKS[game.currentTrack];
+  document.getElementById('resultTitle').textContent = track ? track.title : 'RESULTS';
+  
+  document.getElementById('result-screen').classList.add('active');
+}
+
+// --- Controls ---
+const keyMap = { 'a': 0, 's': 1, 'd': 2, 'A': 0, 'S': 1, 'D': 2 };
+
+document.addEventListener('keydown', (e) => {
+  if (gameState === STATE.PLAYING && keyMap[e.key] !== undefined) {
+    handleHit(keyMap[e.key]);
+    e.preventDefault();
+  }
+});
+
+// Touch / click on lanes
+canvas.addEventListener('click', (e) => {
+  if (gameState !== STATE.PLAYING) return;
+  const rect = canvas.getBoundingClientRect();
+  const x = (e.clientX - rect.left) / rect.width * canvas.width;
+  const lane = Math.floor(x / getLaneWidth());
+  if (lane >= 0 && lane < LANE_COUNT) handleHit(lane);
+});
+
+canvas.addEventListener('touchstart', (e) => {
+  if (gameState !== STATE.PLAYING) return;
+  e.preventDefault();
+  for (const touch of e.changedTouches) {
+    const rect = canvas.getBoundingClientRect();
+    const x = (touch.clientX - rect.left) / rect.width * canvas.width;
+    const lane = Math.floor(x / getLaneWidth());
+    if (lane >= 0 && lane < LANE_COUNT) handleHit(lane);
+  }
+}, { passive: false });
+
+// --- UI buttons ---
+document.getElementById('startBtn').addEventListener('click', () => {
+  const trackId = document.getElementById('trackSelect').value;
+  startGame(trackId);
+});
+
+document.getElementById('retryBtn').addEventListener('click', () => {
+  document.getElementById('result-screen').classList.remove('active');
+  startGame(game.currentTrack);
+});
+
+document.getElementById('menuBtn').addEventListener('click', () => {
+  stopAudio();
+  gameState = STATE.MENU;
+  document.getElementById('result-screen').classList.remove('active');
+  document.getElementById('start-screen').classList.add('active');
+});
+
+// --- Start loop ---
+gameLoop(0);
+
+// Handle visibility change (pause audio when tab hidden)
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden && currentAudio) {
+    currentAudio.pause();
+  } else if (!document.hidden && gameState === STATE.PLAYING && currentAudio) {
+    currentAudio.play().catch(() => {});
+  }
+});
+
+console.log('VISUAL KEi TAP loaded. Ready to rock.');
+</script>
+</body>
+</html>
