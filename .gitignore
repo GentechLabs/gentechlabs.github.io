@@ -10,7 +10,10 @@ assets/branding/*.gif
 assets/branding/*.webp
 assets/videos/
 **/*.mp3
+!music/vanito/*.mp3
+!music/vanito/*.png
 **/*.mp4
+!music/vanito/*.mp4
 **/*.wav
 **/*.ogg
 **/*.mov
@@ -78,3 +81,5 @@ secrets.env
 .git-credentials
 00-HQ/config/github-token.env
 *.env
+.git-credentials
+**/.pytest_cache
