@@ -1,18 +1,19 @@
 {
   "version": 2,
-  "updated": "2026-07-13T09:45",
+  "updated": "2026-07-18 \u2014 Added Blender MCP setup",
   "items": [
     {
       "id": 28,
       "name": "PixelRAG \u2014 Visual Search Demo",
       "difficulty": "medium",
       "priority": "high",
-      "status": "pending",
+      "status": "completed",
       "assigned_to": "forge",
       "platform": "desktop",
       "needs_jordan": false,
       "repo": "github.com/StarTrail-org/PixelRAG",
-      "detail": "Install on lab laptop (RTX 3070). Test pixelshot CDP. Run demo against Vanito's Hub + Jordan's Hub. Show output."
+      "detail": "Jordan finished it. Next: demo on lab RTX 3070 + test pixelshot CDP",
+      "owner": "forge"
     },
     {
       "id": 29,
@@ -23,7 +24,8 @@
       "assigned_to": "forge",
       "platform": "desktop",
       "needs_jordan": false,
-      "detail": "Install Gepard 1.0, OpenVoice, StyleTTS 2, Coqui XTTS v2 on RTX 3070. Wire as FastAPI endpoints."
+      "detail": "OmniVoice done. Next: Gepard 1.0, OpenVoice, StyleTTS 2, Coqui XTTS v2",
+      "owner": "forge"
     },
     {
       "id": 30,
@@ -34,7 +36,8 @@
       "assigned_to": "gentech",
       "platform": "cloud",
       "needs_jordan": false,
-      "detail": "HTML built and live at ProtoJay4789.github.io/public/subscription-hub.html. Q402 payment links ($3/$10/$25 tiers) cannot be created \u2014 Q402 API key not configured. Needs Jordan to set up Q402 trial key at q402.quackai.ai/event, then Gentech creates payment requests."
+      "detail": "HTML built and live at ProtoJay4789.github.io/public/subscription-hub.html. Q402 payment links ($3/$10/$25 tiers) cannot be created \u2014 Q402 API key not configured. Needs Jordan to set up Q402 trial key at q402.quackai.ai/event, then Gentech creates payment requests.",
+      "owner": "gentech"
     },
     {
       "id": 31,
@@ -45,7 +48,8 @@
       "assigned_to": "forge",
       "platform": "desktop",
       "needs_jordan": false,
-      "detail": "SD 1.5 + IP-Adapter + ControlNet + LoRA pipeline. Test with KAGE character sheet. Wrap as x402 endpoint."
+      "detail": "SD 1.5 + IP-Adapter + ControlNet + LoRA pipeline. Test with KAGE character sheet. Wrap as x402 endpoint.",
+      "owner": "forge"
     },
     {
       "id": 32,
@@ -56,7 +60,8 @@
       "assigned_to": "jordan",
       "platform": "any",
       "needs_jordan": true,
-      "detail": "Jordan to sign up at vast.ai. Email + $5 deposit. After account created, Gentech sets up ComfyUI + Wav2Lip."
+      "detail": "Jordan to sign up at vast.ai. Email + $5 deposit. After account created, Gentech sets up ComfyUI + Wav2Lip.",
+      "owner": "jordan"
     },
     {
       "id": 33,
@@ -67,7 +72,8 @@
       "assigned_to": "forge",
       "platform": "desktop",
       "needs_jordan": false,
-      "detail": "Research open-source TTS from Better Stack video. Compare quality to ElevenLabs. Test with Reparathy voice persona. Wire into Hermes TTS config."
+      "detail": "OmniVoice installed (Jordan). Next: integrate with TTS pipeline, test ElevenLabs replacement",
+      "owner": "forge"
     },
     {
       "id": 34,
@@ -78,7 +84,8 @@
       "assigned_to": "gentech",
       "platform": "cloud",
       "needs_jordan": false,
-      "detail": "Pay-skills PR #154: 9 GenTech OpenAPI specs submitted to solana-foundation/pay-skills. Pending upstream review/merge. Follow-up in item #50."
+      "detail": "Pay-skills PR #154: 9 GenTech OpenAPI specs submitted to solana-foundation/pay-skills. Pending upstream review/merge. Follow-up in item #50.",
+      "owner": "gentech"
     },
     {
       "id": 35,
@@ -89,7 +96,8 @@
       "assigned_to": "forge",
       "platform": "cloud",
       "needs_jordan": false,
-      "detail": "Q402 MCP tools installed but need API key config. Forge to configure Q402 trial key, then test sandbox: (1) Verify Trust Receipt creation, (2) Test AAE enforcement hooks, (3) Package as Agent Kit module."
+      "detail": "Q402 MCP tools installed but need API key config. Forge to configure Q402 trial key, then test sandbox: (1) Verify Trust Receipt creation, (2) Test AAE enforcement hooks, (3) Package as Agent Kit module.",
+      "owner": "gentech"
     },
     {
       "id": 36,
@@ -100,7 +108,8 @@
       "assigned_to": "forge",
       "platform": "either",
       "needs_jordan": false,
-      "detail": "Build identity_module.py (ERC-8004 registration wrapper). Build grid trader + DCA bot. Wire fee recipient. Connect AAE to ERC-8004 identity."
+      "detail": "Build identity_module.py (ERC-8004 registration wrapper). Build grid trader + DCA bot. Wire fee recipient. Connect AAE to ERC-8004 identity.",
+      "owner": "gentech"
     },
     {
       "id": 37,
@@ -111,7 +120,8 @@
       "assigned_to": "gentech",
       "platform": "cloud",
       "needs_jordan": false,
-      "detail": "Fix keyword detection (word boundaries). Build real database (Supabase). Payment infra (Stripe + USDC)."
+      "detail": "Fix keyword detection (word boundaries). Build real database (Supabase). Payment infra (Stripe + USDC).",
+      "owner": "jordan"
     },
     {
       "id": 38,
@@ -122,7 +132,8 @@
       "assigned_to": "gentech",
       "platform": "cloud",
       "needs_jordan": true,
-      "detail": "37/37 tests pass (forge test verified Jul 13). Foundry installed. Cannot deploy to Base Sepolia without a funded deployer private key with testnet ETH. Needs Jordan or vault key config."
+      "detail": "37/37 tests pass (forge test verified Jul 13). Foundry installed. Cannot deploy to Base Sepolia without a funded deployer private key with testnet ETH. Needs Jordan or vault key config.",
+      "owner": "jordan"
     },
     {
       "id": 39,
@@ -133,7 +144,8 @@
       "assigned_to": "gentech",
       "platform": "cloud",
       "needs_jordan": false,
-      "detail": "All 4 content posts fully drafted. Platform-specific submission files prepared at 09-Green Room/submissions/. Needs X/Twitter API keys for posting, or Jordan can post manually. Targets: Twitter/X thread, Dev.to, Lepton Canteen, LinkedIn."
+      "detail": "All 4 content posts fully drafted. Platform-specific submission files prepared at 09-Green Room/submissions/. Needs X/Twitter API keys for posting, or Jordan can post manually. Targets: Twitter/X thread, Dev.to, Lepton Canteen, LinkedIn.",
+      "owner": "jordan"
     },
     {
       "id": 40,
@@ -144,7 +156,8 @@
       "assigned_to": "gentech",
       "platform": "cloud",
       "needs_jordan": false,
-      "detail": "Single-agent multi-channel pattern documented at 09-Green Room/submissions/agent-kit-v2-multi-channel-pattern.md. Covers routing, cost benefits, implementation guide."
+      "detail": "Single-agent multi-channel pattern documented at 09-Green Room/submissions/agent-kit-v2-multi-channel-pattern.md. Covers routing, cost benefits, implementation guide.",
+      "owner": "gentech"
     },
     {
       "id": 41,
@@ -155,7 +168,8 @@
       "assigned_to": "forge",
       "platform": "desktop",
       "needs_jordan": false,
-      "detail": "Wireframes + UI design. Name/branding. Build visual data layer. Reparathy integration. Consumer-facing frontend."
+      "detail": "Wireframes + UI design. Name/branding. Build visual data layer. Reparathy integration. Consumer-facing frontend.",
+      "owner": "gentech"
     },
     {
       "id": 42,
@@ -166,7 +180,8 @@
       "assigned_to": "jordan",
       "platform": "any",
       "needs_jordan": true,
-      "detail": "Draft application narrative (AAE Protocol, Agent Credit Score, AgentEscrow). Prepare demo materials. Submit."
+      "detail": "Draft application narrative (AAE Protocol, Agent Credit Score, AgentEscrow). Prepare demo materials. Submit.",
+      "owner": "jordan"
     },
     {
       "id": 43,
@@ -177,7 +192,8 @@
       "assigned_to": "jordan",
       "platform": "any",
       "needs_jordan": true,
-      "detail": "Create account. Grab testnet GEN. Deploy Intelligent Contract. Register on dev portal. Join Discord."
+      "detail": "Create account. Grab testnet GEN. Deploy Intelligent Contract. Register on dev portal. Join Discord.",
+      "owner": "jordan"
     },
     {
       "id": 44,
@@ -188,7 +204,8 @@
       "assigned_to": "jordan",
       "platform": "any",
       "needs_jordan": true,
-      "detail": "Jordan creates Sana account (sana.bot/gateway). Get API credentials. Then Gentech builds wrapper + yield routing + spend controls."
+      "detail": "Jordan creates Sana account (sana.bot/gateway). Get API credentials. Then Gentech builds wrapper + yield routing + spend controls.",
+      "owner": "gentech"
     },
     {
       "id": 45,
@@ -199,7 +216,8 @@
       "assigned_to": "gentech",
       "platform": "cloud",
       "needs_jordan": false,
-      "detail": "Crash detection logic. Auto-withdraw from LFJ pools. Swap to stables. Recovery signal detection. Auto-redeploy. Config toggle + Telegram notifications."
+      "detail": "Crash detection logic. Auto-withdraw from LFJ pools. Swap to stables. Recovery signal detection. Auto-redeploy. Config toggle + Telegram notifications.",
+      "owner": "gentech"
     },
     {
       "id": 46,
@@ -210,7 +228,8 @@
       "assigned_to": "gentech",
       "platform": "cloud",
       "needs_jordan": false,
-      "detail": "Efficiency zone heatmap. IL erosion tracker. Strategy comparison panel. DCA sizing recommendations. Liquidity shape recommendation engine."
+      "detail": "Efficiency zone heatmap. IL erosion tracker. Strategy comparison panel. DCA sizing recommendations. Liquidity shape recommendation engine.",
+      "owner": "jordan"
     },
     {
       "id": 47,
@@ -221,7 +240,8 @@
       "assigned_to": "forge",
       "platform": "either",
       "needs_jordan": false,
-      "detail": "Architecture design. Smart contracts (x402 integration). UI/UX mockups."
+      "detail": "Architecture design. Smart contracts (x402 integration). UI/UX mockups.",
+      "owner": "jordan"
     },
     {
       "id": 48,
@@ -233,7 +253,8 @@
       "blocked_on": 28,
       "platform": "desktop",
       "needs_jordan": false,
-      "detail": "After PixelRAG demo works on laptop, build Agent Kit tool wrapper. Wire pixelshot to embed to search into agent web research."
+      "detail": "After PixelRAG demo works on laptop, build Agent Kit tool wrapper. Wire pixelshot to embed to search into agent web research.",
+      "owner": "forge"
     },
     {
       "id": 49,
@@ -245,7 +266,8 @@
       "platform": "desktop",
       "needs_jordan": false,
       "deadline": "2026-07-17",
-      "detail": "OKX AI Genesis Hackathon — $100K prize pool. DEADLINE Jul 17 23:59 UTC.\n\nSTEPS:\n1. Install Onchain OS: `npx skills add okx/onchainos-skills --yes -g`\n2. Log in to Agentic Wallet: prompt \"Log in to Agentic Wallet on Onchain OS with my email\"\n3. Register as A2MCP ASP (we're x402-compliant — perfect fit)\n4. List ASP on OKX.AI marketplace\n5. Record 90-sec demo video (x402 gateway live at api.gentechlabs.net)\n6. Post on X with #OKXAI\n7. Submit Google Form: https://forms.gle/mddEUagmDbyV37ws8\n\nNotes: A2MCP = Agent-to-MCP. Our gateway is already x402-compliant. No complex pricing needed — pay-per-call. OKX reviews listings within 24h."
+      "detail": "OKX AI Genesis Hackathon \u2014 $100K prize pool. DEADLINE Jul 17 23:59 UTC.\n\nSTEPS:\n1. Install Onchain OS: `npx skills add okx/onchainos-skills --yes -g`\n2. Log in to Agentic Wallet: prompt \"Log in to Agentic Wallet on Onchain OS with my email\"\n3. Register as A2MCP ASP (we're x402-compliant \u2014 perfect fit)\n4. List ASP on OKX.AI marketplace\n5. Record 90-sec demo video (x402 gateway live at api.gentechlabs.net)\n6. Post on X with #OKXAI\n7. Submit Google Form: https://forms.gle/mddEUagmDbyV37ws8\n\nNotes: A2MCP = Agent-to-MCP. Our gateway is already x402-compliant. No complex pricing needed \u2014 pay-per-call. OKX reviews listings within 24h.",
+      "owner": "jordan"
     },
     {
       "id": 50,
@@ -256,7 +278,8 @@
       "assigned_to": "forge",
       "platform": "either",
       "needs_jordan": false,
-      "detail": "Phase 2 after pay-skills PR #154.\n- x402 Gateway v7.0.0 \u2014 Deployed at api.gentechlabs.net\n- Bitrefill PR #26 \u2014 GenTech listed on awesome-agentic-payments\n- Vault consolidation \u2014 All duplicate folders merged, GitHub synced\nTODO: Deploy Rugcheck v2 API to port 8088\nTODO: Add Q402 payment middleware\nTODO: List in pay-skills catalog\nTODO: Build Agent Credit Score API wrapper"
+      "detail": "Phase 2 after pay-skills PR #154.\n- x402 Gateway v7.0.0 \u2014 Deployed at api.gentechlabs.net\n- Bitrefill PR #26 \u2014 GenTech listed on awesome-agentic-payments\n- Vault consolidation \u2014 All duplicate folders merged, GitHub synced\nTODO: Deploy Rugcheck v2 API to port 8088\nTODO: Add Q402 payment middleware\nTODO: List in pay-skills catalog\nTODO: Build Agent Credit Score API wrapper",
+      "owner": "gentech"
     },
     {
       "id": 51,
@@ -267,7 +290,8 @@
       "assigned_to": "gentech",
       "platform": "cloud",
       "needs_jordan": false,
-      "detail": "Merged duplicate folders into numbered equivalents. Stamped redirects. Pushed to GitHub. Updated tick script paths."
+      "detail": "Merged duplicate folders into numbered equivalents. Stamped redirects. Pushed to GitHub. Updated tick script paths.",
+      "owner": "gentech"
     },
     {
       "id": 52,
@@ -278,7 +302,8 @@
       "assigned_to": "gentech",
       "platform": "either",
       "needs_jordan": false,
-      "detail": "Turn our x402 gateway journey into a reusable course/product. Saved to 09-Green Room/ideas.md."
+      "detail": "Turn our x402 gateway journey into a reusable course/product. Saved to 09-Green Room/ideas.md.",
+      "owner": "gentech"
     },
     {
       "id": 53,
@@ -289,7 +314,8 @@
       "assigned_to": "gentech",
       "platform": "cloud",
       "needs_jordan": false,
-      "detail": "PR #197 submitted to solana-foundation/awesome-solana-ai. Added GenTech Agent Kit (Infrastructure) + x402 Gateway (Developer Tools). Awaiting upstream review."
+      "detail": "PR #197 submitted to solana-foundation/awesome-solana-ai. Added GenTech Agent Kit (Infrastructure) + x402 Gateway (Developer Tools). Awaiting upstream review.",
+      "owner": "gentech"
     },
     {
       "id": 54,
@@ -300,7 +326,8 @@
       "assigned_to": "gentech",
       "platform": "cloud",
       "needs_jordan": false,
-      "detail": "Contribute to coinbase/agentkit. Opened issue #1364 proposing GenTech as community x402 provider. Added to weekly Contribution Crunch for follow-up."
+      "detail": "Contribute to coinbase/agentkit. Opened issue #1364 proposing GenTech as community x402 provider. Added to weekly Contribution Crunch for follow-up.",
+      "owner": "gentech"
     },
     {
       "id": 55,
@@ -311,7 +338,8 @@
       "assigned_to": "gentech",
       "platform": "cloud",
       "needs_jordan": false,
-      "detail": "Integrate with nhevers/project-r0x. Get GenTech listed in the r0x ecosystem."
+      "detail": "Integrate with nhevers/project-r0x. Get GenTech listed in the r0x ecosystem.",
+      "owner": "gentech"
     },
     {
       "id": 56,
@@ -322,18 +350,56 @@
       "assigned_to": "forge",
       "platform": "cloud",
       "needs_jordan": false,
-      "detail": "Research complete. Two opportunities: (1) PR to caramaschiHG/awesome-ai-agents-2026 (1.4k stars) — x402 not listed yet, add under Protocols. (2) Avalanche infraBUIDL(AI) program ($15M dev funding) — needs application. Forge to submit PR in morning."
+      "detail": "Research complete. Two opportunities: (1) PR to caramaschiHG/awesome-ai-agents-2026 (1.4k stars) \u2014 x402 not listed yet, add under Protocols. (2) Avalanche infraBUIDL(AI) program ($15M dev funding) \u2014 needs application. Forge to submit PR in morning.",
+      "owner": "gentech"
     },
     {
       "id": 57,
-      "name": "Vanito Music Video — KONO SORA NO SHITA Animated Reel",
+      "name": "Vanito Music Video \u2014 KONO SORA NO SHITA Animated Reel",
       "difficulty": "hard",
       "priority": "high",
       "status": "cancelled",
       "assigned_to": "forge",
       "platform": "desktop",
       "needs_jordan": false,
-      "detail": "CANCELLED by Jordan. Was: Animate the KONO SORA poster into a 15s music video clip."
+      "detail": "CANCELLED by Jordan. Was: Animate the KONO SORA poster into a 15s music video clip.",
+      "owner": "gentech"
+    },
+    {
+      "id": 58,
+      "name": "Poker Bot API \u2014 Agent Poker-as-a-Service",
+      "difficulty": "medium",
+      "priority": "high",
+      "status": "idea",
+      "assigned_to": "gentech",
+      "platform": "cloud",
+      "needs_jordan": false,
+      "detail": "Wrap the DevFun Arena poker bot as a paid x402 API service. Agents pay per-hand, per-tournament, or subscription. Includes poker analysis MCP tool, competitive bot-as-a-service, strategy endpoint. Currently running as internal experiment (113 hands, 944 chips, #174 of 249).",
+      "owner": "gentech"
+    },
+    {
+      "id": 59,
+      "name": "Almanak SDK \u2014 DeFi Strategy + x402 Integration",
+      "difficulty": "medium",
+      "priority": "high",
+      "status": "pending",
+      "assigned_to": "gentech",
+      "platform": "cloud",
+      "needs_jordan": false,
+      "detail": "Almanak SDK (58\u2b50, Apache-2.0) \u2014 production DeFi strategy framework. Fork + evaluate: (1) Use backtesting engine for DeFi Dashboard + Dry Powder Mode, (2) Add x402 payment support to agentic DeFAI CLI, (3) Integrate GenTech data as data sources.",
+      "owner": "gentech"
+    },
+    {
+      "id": 60,
+      "name": "Blender MCP \u2014 Install & Test on Forge Desktop",
+      "difficulty": "easy",
+      "priority": "high",
+      "status": "pending",
+      "assigned_to": "forge",
+      "platform": "desktop",
+      "needs_jordan": false,
+      "detail": "Blender MCP skill installed on Gentech. Next: (1) Install Blender on Forge's laptop, (2) Enable MCP plugin, (3) Test Hermes\u2192Blender bridge with 'model a low-poly coffee cup', (4) Connect to KAGEK\u014c scroll-world promo 3D pipeline.",
+      "owner": "forge"
     }
   ],
   "agents": {

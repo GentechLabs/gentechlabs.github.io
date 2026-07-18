@@ -37,11 +37,29 @@ Items you can work on independently — no Jordan needed.
 
 ### [URGENT] #49 — OKX Hackathon Submission (easy) ⏰ DEADLINE: 2026-07-17
 **Status:** ▶️ Ready
-**What:** OKX AI Genesis Hackathon — $100K prize pool. DEADLINE Jul 17 23:59 UTC (PASSED). Forge to check if late submissions or extensions available. Steps: Onchain OS install, Agentic Wallet login, A2MCP ASP registration, 90-sec demo video, X post, Google Form.
+**What:** OKX AI Genesis Hackathon — $100K prize pool. DEADLINE Jul 17 23:59 UTC.
+
+STEPS:
+1. Install Onchain OS: `npx skills add okx/onchainos-skills --yes -g`
+2. Log in to Agentic Wallet: prompt "Log in to Agentic Wallet on Onchain OS with my email"
+3. Register as A2MCP ASP (we're x402-compliant — perfect fit)
+4. List ASP on OKX.AI marketplace
+5. Record 90-sec demo video (x402 gateway live at api.gentechlabs.net)
+6. Post on X with #OKXAI
+7. Submit Google Form: https://forms.gle/mddEUagmDbyV37ws8
+
+Notes: A2MCP = Agent-to-MCP. Our gateway is already x402-compliant. No complex pricing needed — pay-per-call. OKX reviews listings within 24h.
 
 ### [HIGH] #50 — Sell APIs to AI Agents — Phase 2: Deploy & List (medium)
 **Status:** ▶️ Ready
-**What:** Phase 2 after pay-skills PR #154 merges. TODO: Deploy Rugcheck v2 API to port 8088, add Q402 payment middleware, list in pay-skills catalog, build Agent Credit Score API wrapper.
+**What:** Phase 2 after pay-skills PR #154.
+- x402 Gateway v7.0.0 — Deployed at api.gentechlabs.net
+- Bitrefill PR #26 — GenTech listed on awesome-agentic-payments
+- Vault consolidation — All duplicate folders merged, GitHub synced
+TODO: Deploy Rugcheck v2 API to port 8088
+TODO: Add Q402 payment middleware
+TODO: List in pay-skills catalog
+TODO: Build Agent Credit Score API wrapper
 
 ---
 ## How to use this
@@ -53,16 +71,4 @@ Items you can work on independently — no Jordan needed.
 
 ---
 
-## ☁️ Cloud — Also Yours (2 in_progress items)
-
-### [HIGH] #35 — Q402 × Agent Kit Integration (medium)
-**Status:** 🔄 In Progress
-**What:** Q402 MCP installed but needs API key config. Configure trial key at q402.quackai.ai/event, then test sandbox: (1) Verify Trust Receipt creation, (2) Test AAE enforcement hooks, (3) Package as Agent Kit module. Ongoing — continue from prior session.
-
-### [MEDIUM] #56 — Chain PR Blitz — Avalanche AI Resources Submit (easy)
-**Status:** 🔄 In Progress
-**What:** Research complete. Two opportunities: (1) PR to caramaschiHG/awesome-ai-agents-2026 (1.4k stars) — add x402 under Protocols. (2) Avalanche infraBUIDL(AI) program ($15M dev funding) — needs application. Submit PR from your morning session.
-
----
-
-*Generated 2026-07-18 04:26 UTC*
+*Generated 2026-07-18 16:30 UTC*

@@ -32,3 +32,11 @@
 - [x] KeeperHub Hackathon — added to build queue (July 27)
 - [x] Build queue v2 — canonical JSON, tick script, auto handoff
 - [x] x402 Gateway v7.0.0 — deployed, verified, audited (GLM-5.2)
+
+## Inference Farming — GPU Compute as a Yield Strategy 🧠
+
+- [ ] **Concept**: Rent GPU compute → supply to decentralized inference networks → earn yields (next meta after perp farming)
+- [ ] **Why now**: Open models (Kimi K3) hit frontier quality at fraction of cost → inference volume shifts to decentralized networks → farmers needed to supply compute
+- [ ] **Projects to explore**: Dolphin AI, SN53 Engy (Bittensor subnet), AntSeed AI
+- [ ] **Our angle**: Agent economy stack (ERC-8004, x402) maps directly to inference network needs — identity, settlement, payments
+- [ ] **First step**: Research in Labs — pick one network, test the farming mechanics, evaluate ROI vs DeFi LP
