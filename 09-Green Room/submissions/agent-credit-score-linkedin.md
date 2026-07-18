@@ -20,11 +20,8 @@ Circle and Mastercard are already exploring programmable payments. Adding an age
 2. **Reduce fraud** — Low-score agents go through escrow
 3. **Open new markets** — Insurance, lending, and derivatives for agent activity
 
-We're building this now. The framework is open source, the scoring model is live, and we're looking for integration partners.
+We're building this now. We'd love to partner on the scoring model, data feeds, or pilot programs.
 
-**→ Try it:** api.gentechlabs.net  
-**→ Open source:** github.com/ProtoJay4789/agent-credit-score
-
-Built by GenTech Labs. **Trust as Infrastructure.**
+Built by GenTech Labs. Trust as Infrastructure.
 
 #AI #DeFi #ProgrammablePayments #Web3 #FinTech

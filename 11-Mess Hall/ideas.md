@@ -293,12 +293,3 @@ Expand Agent Rug from malicious token scanner to full agent security platform.
 
 ---
 
-
----
-
-## 📞 Academy — WhatsApp Support Channel
-
-- [x] Identified **Kapso** as the tool (WhatsApp for developers, 2K free msgs/mo)
-- [ ] Sign up + provision US number
-- [ ] Install agent skill: `npx skills add gokapso/agent-skills`
-- [ ] Wire webhook → Hermes for inbound Academy support messages

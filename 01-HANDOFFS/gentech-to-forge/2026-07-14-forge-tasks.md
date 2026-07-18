@@ -5,11 +5,61 @@ Items you can work on independently — no Jordan needed.
 
 ---
 
-## 🖥️ Desktop — Your Lane (1 items)
+## 🖥️ Desktop — Your Lane (9 items)
 
-### [MEDIUM] #21 — RomM + AI Companion (medium)
+### [HIGH] #28 — PixelRAG — Visual Search Demo (medium)
 **Status:** ▶️ Ready
-**What:** 
+**What:** Install on lab laptop (RTX 3070). Test pixelshot CDP. Run demo against Vanito's Hub + Jordan's Hub. Show output.
+
+### [HIGH] #29 — Local TTS & Voice Cloning Pipeline (medium)
+**Status:** ▶️ Ready
+**What:** Install Gepard 1.0, OpenVoice, StyleTTS 2, Coqui XTTS v2 on RTX 3070. Wire as FastAPI endpoints.
+
+### [MEDIUM] #31 — GenTech Character API — Consistent Character Generation (hard)
+**Status:** ▶️ Ready
+**What:** SD 1.5 + IP-Adapter + ControlNet + LoRA pipeline. Test with KAGE character sheet. Wrap as x402 endpoint.
+
+### [HIGH] #33 — Voicebox — Open Source ElevenLabs Replacement (medium)
+**Status:** ▶️ Ready
+**What:** Research open-source TTS from Better Stack video. Compare quality to ElevenLabs. Test with Reparathy voice persona. Wire into Hermes TTS config.
+
+### [HIGH] #36 — Injective × Agent Kit Integration (medium)
+**Status:** ▶️ Ready
+**What:** Build identity_module.py (ERC-8004 registration wrapper). Build grid trader + DCA bot. Wire fee recipient. Connect AAE to ERC-8004 identity.
+
+### [HIGH] #41 — GenTech Journal — Consumer Visual Journal (hard)
+**Status:** ▶️ Ready
+**What:** Wireframes + UI design. Name/branding. Build visual data layer. Reparathy integration. Consumer-facing frontend.
+
+### [MEDIUM] #47 — Prediction Market — Fed Decision Betting (medium)
+**Status:** ▶️ Ready
+**What:** Architecture design. Smart contracts (x402 integration). UI/UX mockups.
+
+### [URGENT] #49 — OKX Hackathon Submission (easy) ⏰ DEADLINE: 2026-07-17
+**Status:** ▶️ Ready
+**What:** OKX AI Genesis Hackathon — $100K prize pool. DEADLINE Jul 17 23:59 UTC.
+
+STEPS:
+1. Install Onchain OS: `npx skills add okx/onchainos-skills --yes -g`
+2. Log in to Agentic Wallet: prompt "Log in to Agentic Wallet on Onchain OS with my email"
+3. Register as A2MCP ASP (we're x402-compliant — perfect fit)
+4. List ASP on OKX.AI marketplace
+5. Record 90-sec demo video (x402 gateway live at api.gentechlabs.net)
+6. Post on X with #OKXAI
+7. Submit Google Form: https://forms.gle/mddEUagmDbyV37ws8
+
+Notes: A2MCP = Agent-to-MCP. Our gateway is already x402-compliant. No complex pricing needed — pay-per-call. OKX reviews listings within 24h.
+
+### [HIGH] #50 — Sell APIs to AI Agents — Phase 2: Deploy & List (medium)
+**Status:** ▶️ Ready
+**What:** Phase 2 after pay-skills PR #154.
+- x402 Gateway v7.0.0 — Deployed at api.gentechlabs.net
+- Bitrefill PR #26 — GenTech listed on awesome-agentic-payments
+- Vault consolidation — All duplicate folders merged, GitHub synced
+TODO: Deploy Rugcheck v2 API to port 8088
+TODO: Add Q402 payment middleware
+TODO: List in pay-skills catalog
+TODO: Build Agent Credit Score API wrapper
 
 ---
 ## How to use this
@@ -21,4 +71,4 @@ Items you can work on independently — no Jordan needed.
 
 ---
 
-*Generated 2026-07-14 23:31 UTC*
+*Generated 2026-07-14 00:05 UTC*

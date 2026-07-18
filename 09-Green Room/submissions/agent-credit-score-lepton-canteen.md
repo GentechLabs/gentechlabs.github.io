@@ -27,7 +27,7 @@ A standardized, on-chain reputation system for AI agents, built on ERC-8004 iden
 ```javascript
 // Gate payment by credit score
 if (score.overall < 700) {
-  require('x402 escrow');
+  require('Q402 escrow');
 } else {
   x402.instantPay();
 }
@@ -37,15 +37,12 @@ if (score.overall < 700) {
 
 Circle's programmable payments and USDC infrastructure are natural complements. By integrating Agent Credit Score with Circle's developer tools, we enable:
 
-1. **Trust-minimized agent payments** — Pay instantly when score > threshold
-2. **Reduced fraud** — Low-score agents go through escrow
-3. **Institutional readiness** — Standardized reputation unlocks treasury operations
+1. Trust-minimized agent payments — pay instantly when score > threshold
+2. Reduced fraud — low-score agents go through escrow
+3. Institutional readiness — standardized reputation unlocks treasury operations
 
-### Status & Next Steps
+### Next Steps
 
-- **Framework:** Defined, open sourcing July 2026
-- **API:** Live at api.gentechlabs.net (x402 paid endpoint)
-- **Smart contracts:** Interface finalized, deployment in progress on Base Sepolia
-- **Partners:** Looking for integration partners — Circle builders welcome
+We're actively building and would love feedback from the Canteen community. The contracts are deployed on Base Sepolia, the API is live, and we're looking for integration partners.
 
-Built by GenTech Labs. **Trust as Infrastructure.**
+**GenTech Labs** — Trust as Infrastructure.
