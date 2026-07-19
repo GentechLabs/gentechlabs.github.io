@@ -1,69 +1,69 @@
 {
-  "lastUpdated": "2026-07-13T20:07:11.153660+00:00",
+  "lastUpdated": "2026-07-18T20:00:32.497099+00:00",
   "pool": "AVAX/USDC",
   "chain": "Avalanche",
   "dex": "LFJ",
-  "currentPrice": 6.47,
-  "priceChange24h": 0,
-  "volume24h": 0,
-  "liquidity": 0,
+  "currentPrice": 6.56,
+  "priceChange24h": -1.29,
+  "volume24h": 918222.93,
+  "liquidity": 397365.99,
   "lpPosition": {
     "pair": "AVAX/USDC",
     "feeTier": "5bps",
     "shape": "bid-ask",
     "displayShape": "Bid-ask",
-    "currentPrice": 6.47,
-    "rangeMin": 5.82,
-    "rangeMax": 6.1,
-    "avaxAmount": 2.61974,
-    "usdcAmount": 26.889237,
-    "totalValue": 42.4,
-    "totalValueUSD": 42.4,
+    "currentPrice": 6.56,
+    "rangeMin": 6.7861,
+    "rangeMax": 7.0067,
+    "avaxAmount": 3.2099,
+    "usdcAmount": 24.44,
+    "totalValue": 45.24,
+    "totalValueUSD": 45.24,
     "activeBin": 0,
     "binStep": 10,
-    "totalBins": 28,
+    "totalBins": 149,
     "inRange": false,
-    "entryTotal": 42.25286046470589
+    "entryTotal": 47.7856622195122
   },
   "fees": {
     "dailyFees": 0,
     "cumulativeFees": 0.8228,
     "feeCurrency": "USD"
   },
-  "efficiency": 64.3,
+  "efficiency": 0.0,
   "hero": {
-    "positionUsd": 42.4,
+    "positionUsd": 45.24,
     "dailyFees": 0,
-    "efficiency": 64.3,
+    "efficiency": 0.0,
     "efficiencyZone": "Out of Range",
     "shape": "Bid-ask",
     "rangeStatus": "Out of Range",
-    "currentPrice": 6.47,
-    "rangeMin": 5.82,
-    "rangeMax": 6.1,
+    "currentPrice": 6.56,
+    "rangeMin": 6.7861,
+    "rangeMax": 7.0067,
     "milestoneNext": "Scout",
     "milestoneTarget": 5,
     "milestoneProgress": 16.5
   },
   "marketIntel": {
-    "avaxPrice": 6.47,
-    "change24h": 0,
-    "volume24h": 0,
-    "tvl": 0,
+    "avaxPrice": 6.56,
+    "change24h": -1.29,
+    "volume24h": 918222.93,
+    "tvl": 397365.99,
     "trend": "sideways",
     "news": []
   },
   "strategyAdvisor": {
-    "efficiency": 64.3,
+    "efficiency": 0.0,
     "efficiencyZone": "Out of Range",
-    "recommendedAction": "REBALANCE - price outside range",
+    "recommendedAction": "REBALANCE \u2014 price outside range",
     "dcaType": "None (Out of Range)",
-    "dcaDetails": "Price $6.47, out of range $5.82-$6.1",
-    "rebalanceTrigger": "Price exits $5.82-$6.1",
+    "dcaDetails": "Price $6.56, out of range $6.7861-$7.0067",
+    "rebalanceTrigger": "Price exits $6.7861-$7.0067",
     "compoundThreshold": 50,
     "cumulativeFees": 0.8228,
     "riskLevel": "High",
-    "riskNote": "Price $6.47, 64.3% efficiency",
+    "riskNote": "Price $6.56, 0.0% efficiency",
     "shape": "Bid-ask"
   },
   "regimeData": {
@@ -71,8 +71,8 @@
     "previous": "sideways",
     "changedAt": "2026-07-11T20:00:33.473273+00:00",
     "signals": {
-      "price": 6.74,
-      "ma20": 6.74,
+      "price": 6.48,
+      "ma20": 6.48,
       "momentum": 0,
       "volatilityPct": 0
     },
@@ -91,8 +91,8 @@
     "previous": "sideways",
     "changedAt": "2026-07-11T20:00:33.473273+00:00",
     "signals": {
-      "price": 6.47,
-      "ma20": 6.74,
+      "price": 6.48,
+      "ma20": 6.48,
       "momentum": 0,
       "volatilityPct": 0
     },
@@ -101,8 +101,8 @@
       "dcaAggressiveness": "Auto"
     },
     "recommended": {
-      "rangeLow": 6.2759,
-      "rangeHigh": 6.7288,
+      "rangeLow": 6.5378,
+      "rangeHigh": 6.9422,
       "shape": "Curve"
     }
   },
@@ -110,24 +110,24 @@
     "lpApr": 0.0,
     "lpDailyFees": 0,
     "stakingApr": 5.2,
-    "stakingDaily": 0.006,
-    "hodlReturn": 3.69,
-    "entryPrice": 6.23,
-    "currentPrice": 6.46,
+    "stakingDaily": 0.0064,
+    "hodlReturn": -4.79,
+    "entryPrice": 6.89,
+    "currentPrice": 6.56,
     "outperforming": false,
     "verdict": "LP losing vs staking"
   },
   "supportResistance": {
-    "currentPrice": 6.47,
+    "currentPrice": 6.48,
     "levels": [
       {
-        "price": 6.1,
+        "price": 7.0067,
         "type": "resistance",
         "strength": "strong",
         "label": "Range High"
       },
       {
-        "price": 5.82,
+        "price": 6.7861,
         "type": "support",
         "strength": "strong",
         "label": "Range Low"
@@ -135,19 +135,19 @@
     ]
   },
   "curveData": {
-    "currentPrice": 6.47,
-    "rangeMin": 5.82,
-    "rangeMax": 6.1,
+    "currentPrice": 6.48,
+    "rangeMin": 6.7861,
+    "rangeMax": 7.0067,
     "bins": []
   },
   "feeMilestones": {
-    "currentDailyFees": 0.595,
+    "currentDailyFees": 0,
     "cumulativeFees": 0.8228,
-    "positionUsd": 42.4,
+    "positionUsd": 45.24,
     "daysActive": 1,
     "nextMilestone": "Scout",
     "nextTarget": 5,
-    "progress": 16.5,
+    "progress": 0,
     "tiers": []
   },
   "spotPositions": {
@@ -166,7 +166,7 @@
   "transactions": [],
   "marketScenarios": {
     "currentConditions": {
-      "price": 6.47,
+      "price": 6.56,
       "trend": "sideways",
       "volatility24h": 0,
       "regime": "sideways",
@@ -176,7 +176,7 @@
       {
         "id": "bear_continued",
         "name": "Bear Continuation",
-        "subtitle": "AVAX drops to $4.53-$5.5",
+        "subtitle": "AVAX drops to $4.59-$5.58",
         "icon": "\ud83d\udc3b",
         "color": "#ef4444",
         "trigger": "BTC breaks below $60K",
@@ -190,7 +190,7 @@
       {
         "id": "sideways",
         "name": "Sideways Accumulation",
-        "subtitle": "AVAX trades $6.15-$6.79",
+        "subtitle": "AVAX trades $6.23-$6.89",
         "icon": "\u27a1\ufe0f",
         "color": "#f59e0b",
         "trigger": "BTC holds $62-68K",
@@ -204,7 +204,7 @@
       {
         "id": "bull",
         "name": "Bull Recovery",
-        "subtitle": "AVAX pushes to $7.76-$9.71",
+        "subtitle": "AVAX pushes to $7.87-$9.84",
         "icon": "\ud83d\udc02",
         "color": "#22c55e",
         "trigger": "BTC breaks $70K",
@@ -218,7 +218,7 @@
       {
         "id": "flash_crash",
         "name": "Flash Crash",
-        "subtitle": "AVAX drops to $3.23-$3.88",
+        "subtitle": "AVAX drops to $3.28-$3.94",
         "icon": "\u26a1",
         "color": "#8b5cf6",
         "trigger": "Black swan event",
@@ -234,17 +234,17 @@
       "currentScenario": "sideways",
       "alerts": [
         {
-          "price": 6.14,
+          "price": 6.23,
           "type": "danger",
           "message": "Below range \u2014 rebalance down"
         },
         {
-          "price": 5.49,
+          "price": 5.58,
           "type": "critical",
           "message": "Flash crash zone"
         },
         {
-          "price": 6.78,
+          "price": 6.89,
           "type": "info",
           "message": "Above range \u2014 rebalance up"
         }
@@ -252,75 +252,86 @@
     }
   },
   "ilCalculator": {
-    "currentPrice": 6.47,
-    "entryPrice": 6.23,
-    "positionUsd": 42.4,
+    "currentPrice": 6.56,
+    "entryPrice": 6.89,
+    "positionUsd": 45.24,
     "dailyFees": 0,
     "scenarios": [
       {
         "priceChange": -30,
-        "newPrice": 4.361,
+        "newPrice": 4.823,
         "impermanentLoss": -1.57,
+        "feeOffset": 0.0,
         "netImpact": -1.57
       },
       {
         "priceChange": -20,
-        "newPrice": 4.984,
+        "newPrice": 5.512,
         "impermanentLoss": -0.62,
+        "feeOffset": 0.0,
         "netImpact": -0.62
       },
       {
         "priceChange": -15,
-        "newPrice": 5.2955,
+        "newPrice": 5.8565,
         "impermanentLoss": -0.33,
+        "feeOffset": 0.0,
         "netImpact": -0.33
       },
       {
         "priceChange": -10,
-        "newPrice": 5.607,
+        "newPrice": 6.201,
         "impermanentLoss": -0.14,
+        "feeOffset": 0.0,
         "netImpact": -0.14
       },
       {
         "priceChange": -5,
-        "newPrice": 5.9185,
+        "newPrice": 6.5455,
         "impermanentLoss": -0.03,
+        "feeOffset": 0.0,
         "netImpact": -0.03
       },
       {
         "priceChange": 0,
-        "newPrice": 6.23,
+        "newPrice": 6.89,
         "impermanentLoss": 0.0,
+        "feeOffset": 0.0,
         "netImpact": 0.0
       },
       {
         "priceChange": 5,
-        "newPrice": 6.5415,
+        "newPrice": 7.2345,
         "impermanentLoss": -0.03,
+        "feeOffset": 0.0,
         "netImpact": -0.03
       },
       {
         "priceChange": 10,
-        "newPrice": 6.853,
+        "newPrice": 7.579,
         "impermanentLoss": -0.11,
+        "feeOffset": 0.0,
         "netImpact": -0.11
       },
       {
         "priceChange": 15,
-        "newPrice": 7.1645,
+        "newPrice": 7.9235,
         "impermanentLoss": -0.24,
+        "feeOffset": 0.0,
         "netImpact": -0.24
       },
       {
         "priceChange": 20,
-        "newPrice": 7.476,
+        "newPrice": 8.268,
         "impermanentLoss": -0.41,
+        "feeOffset": 0.0,
         "netImpact": -0.41
       },
       {
         "priceChange": 30,
-        "newPrice": 8.099,
+        "newPrice": 8.957,
         "impermanentLoss": -0.85,
+        "feeOffset": 0.0,
         "netImpact": -0.85
       }
     ]
