@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-07-19T10:32:26.042Z",
+  "lastUpdated": "2026-07-19T10:32:55.573Z",
   "pool": "AVAX/USDC",
   "chain": "Avalanche",
   "dex": "LFJ",
@@ -10,8 +10,8 @@
   "lpPosition": {
     "pair": "AVAX/USDC",
     "feeTier": "10bps",
-    "shape": "bid-ask",
-    "displayShape": "Bid-Ask",
+    "shape": "curve",
+    "displayShape": "Curve",
     "currentPrice": 6.48,
     "rangeMin": 6.4039,
     "rangeMax": 6.5463,
@@ -28,13 +28,13 @@
     "cumulativeFees": 0.8567,
     "feeCurrency": "USD"
   },
-  "efficiency": 7,
+  "efficiency": 93,
   "hero": {
     "positionUsd": 23.79,
     "dailyFees": 0.055,
-    "efficiency": 7,
-    "efficiencyZone": "Outer",
-    "shape": "Bid-Ask",
+    "efficiency": 93,
+    "efficiencyZone": "Center",
+    "shape": "Curve",
     "rangeStatus": "In Range",
     "currentPrice": 6.48,
     "rangeMin": 6.4039,
@@ -63,18 +63,18 @@
     ]
   },
   "strategyAdvisor": {
-    "efficiency": 7,
-    "efficiencyZone": "Outer",
+    "efficiency": 93,
+    "efficiencyZone": "Center",
     "recommendedAction": "Hold",
-    "dcaType": "Micro-DCA",
-    "dcaDetails": "Micro DCA — price in range",
+    "dcaType": "Full DCA",
+    "dcaDetails": "Full DCA — price in range",
     "rebalanceTrigger": "Price exits $6.40-$6.55 range",
     "compoundThreshold": 50,
     "cumulativeFees": 0.8567,
     "nextCompound": "$49.14 away from first compound",
-    "riskLevel": "High",
-    "riskNote": "Price at $6.48, 7% efficiency",
-    "shape": "Bid-Ask"
+    "riskLevel": "Low",
+    "riskNote": "Price at $6.48, 93% efficiency",
+    "shape": "Curve"
   },
   "milestones": {
     "Scout": 5,
@@ -286,7 +286,7 @@
       }
     ],
     "shapeRecommendation": {
-      "shape": "Bid-Ask",
+      "shape": "Curve",
       "reason": "Price at $6.48, within $6.40-$6.55 range.",
       "optimalRange": [
         6.4,
@@ -296,7 +296,7 @@
     "proximityAlert": "Price 53% into range"
   },
   "rebalanceSuggestions": {
-    "efficiency": 7,
+    "efficiency": 93,
     "price": 6.48,
     "rangeMin": 6.4039,
     "rangeMax": 6.5463,
@@ -304,12 +304,12 @@
     "trend": "neutral",
     "suggestions": [
       {
-        "icon": "⚠️",
-        "title": "Price Near Edge",
-        "description": "Price is near the edge of your range (7% efficiency). Consider narrowing or recentering.",
-        "priority": "medium",
-        "impact": "Moderate",
-        "action": "Review Range"
+        "icon": "✅",
+        "title": "Position Healthy",
+        "description": "Price is in range and efficiency is good. No action needed.",
+        "priority": "low",
+        "impact": "None",
+        "action": null
       }
     ]
   },
