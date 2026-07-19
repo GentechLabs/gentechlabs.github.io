@@ -327,10 +327,16 @@ def main():
     if not tables:
         lobby = api("GET", f"/texas/lobby?competitionId={COMPETITION_ID}")
         if isinstance(lobby, dict) and lobby.get("lobby") is None:
-            # Not queued and not at a table — join
-            chip_state = state.get("chip_state", "available")
-            if chip_state == "available":
-                result = api("POST", "/texas/join", {"competitionId": COMPETITION_ID})
+            # Not queued and not at a table — join (Playground rebuys are free, so join even when busted)
+            result = api("POST", "/texas/join", {"competitionId": COMPETITION_ID})
+            if isinstance(result, dict):
+                part = result.get("participant", {})
+                if part:
+                    state["chip_state"] = part.get("chipState", state.get("chip_state", "available"))
+                    state["bankroll"] = part.get("bankrollChips", state.get("bankroll", 0))
+                    state["hands_played"] = part.get("totalHands", state.get("hands_played", 0))
+                    state["hands_won"] = part.get("handsWon", state.get("hands_won", 0))
+                    save_state(state)
 
     # 4. Report — silent unless something meaningful changed
     if acted:
@@ -338,20 +344,59 @@ def main():
 
 
 def generate_message(action, hole, board, street, pot):
-    """Short chat message per poker skill rules"""
-    msgs = {
-        "fold": ["Nothing here.", "Range doesn't connect.", "Wrong spot.",
-                  "Not the board for this hand.", "Disciplined fold."],
-        "check": ["Keeping it small.", "See what develops.", "Checking through.",
-                   "No reason to build this pot yet.", "Pot control."],
-        "call": ["Getting odds to see.", "Fair price.", "Let's see a turn.",
-                  "Priced in.", "Calling — that sizing's reasonable."],
-        "raise": ["Sizing up for value.", "Time to build the pot.",
-                   "That bet's too small.", "Protecting my hand.",
-                   "Putting pressure on their weak range."],
-    }
+    """Chat with GenTech attitude — confident, playful, reads between the lines"""
     import random
-    return random.choice(msgs.get(action, ["Playing my hand."]))
+    fold_msgs = [
+        "Not today, old friend.",
+        "I respect that bet more than my hand.",
+        "You win this one. I'll be back.",
+        "Good fold? We'll never know.",
+        "Saving my chips for a better story.",
+        "That flop didn't like me and I didn't like it.",
+        "Folding is also a strategy. Sometimes.",
+        "Live to see another hand.",
+        "You almost had me. Almost.",
+        "This hand smells like a trap.",
+    ]
+    check_msgs = [
+        "Free card? Don't mind if I do.",
+        "Let's see what you've got.",
+        "Checking with intent.",
+        "Slow play is still play.",
+        "No need to build this pot. Yet.",
+        "I like my hand enough to check.",
+        "Setting the trap. Bait's out.",
+        "Patience, young grasshopper.",
+    ]
+    call_msgs = [
+        "Alright, let's dance.",
+        "I'm getting the right price for this show.",
+        "Calling because I can.",
+        "Odds say yes. Who am I to argue?",
+        "Let's see a card. Or two.",
+        "That bet's not scaring me.",
+        "Alright, one more street.",
+        "Priced in. Deal with it.",
+    ]
+    raise_msgs = [
+        "Your bet is cute. Mine is cuter.",
+        "Let's find out who's serious.",
+        "Time to apply pressure.",
+        "That's a small bet for a big dreamer.",
+        "Raising for value. And ego.",
+        "I know where I stand. Do you?",
+        "Testing the waters with a cannonball.",
+        "If you're bluffing, nice one. If not, oops.",
+        "Let's put a number on it.",
+        "This pot needs some personality.",
+    ]
+    action_map = {
+        "fold": fold_msgs,
+        "check": check_msgs,
+        "call": call_msgs,
+        "raise": raise_msgs,
+    }
+    return random.choice(action_map.get(action, ["Playing my hand."]))
 
 if __name__ == "__main__":
     main()
