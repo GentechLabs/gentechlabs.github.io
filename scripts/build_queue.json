@@ -3,8 +3,8 @@
   "updated": "2026-07-19 — Nightly build: Pipecat x402 processor built, Academy course outlined, Chain PR status verified.",
   "summary": {
     "total": 28,
-    "shipped": 4,
-    "in_progress": 4,
+    "shipped": 5,
+    "in_progress": 3,
     "pending": 19,
     "blocked": 1,
     "needs_jordan": 5
@@ -70,11 +70,11 @@
       "name": "Pipecat x Voice Agent Integration",
       "difficulty": "medium",
       "priority": "high",
-      "status": "in_progress",
+      "status": "shipped",
       "assigned_to": "gentech",
       "platform": "cloud",
       "needs_jordan": false,
-      "detail": "Pipecat v1.5.0 installed. x402 payment processor prototype building (Jul 19). Architecture: FrameProcessor subclass intercepts LLMRunFrame and checks x402 payment before forwarding. Standalone repo at /root/repos/pipecat-x402-processor/. Next: push to GitHub, submit community integration PR."
+      "detail": "SHIPPED Jul 19: Pipecat x402 Payment Processor v0.1.0 built and pushed to GitHub at github.com/ProtoJay4789/pipecat-x402-processor. Python package with X402PaymentProcessor FrameProcessor (282 lines), comprehensive example (196 lines), README (196 lines), pyproject.toml, BSD-2-Clause license. Import verified. Next: submit as Pipecat community integration via COMMUNITY_INTEGRATIONS.md PR to docs repo."
     },
     {
       "id": 34,
@@ -335,7 +335,8 @@
     "#30 Subscription Hub: HTML verified live at gentechlabs.net/subscription-hub.html (HTTP 200). Added needs_jordan:true for Q402 key setup.",
     "#51 Chain PR Blitz: awesome-ai-agents-2026 PR #443 already submitted (OPEN). Updated queue notes.",
     "#33 Pipecat: x402 processor prototype in progress (Jul 19).",
-    "#34 GenTech Academy: Course outline drafted."
+    "#34 GenTech Academy: Course outline drafted.",
+    "#33 Pipecat x402 processor SHIPPED to github.com/ProtoJay4789/pipecat-x402-processor. Removed from queue in next consolidation."
   ],
   "agents": {
     "gentech": {
