@@ -15,6 +15,7 @@
   - Enterprise: "Deploy your APIs as x402 services" — we do it for them ($499+)
 - [ ] **Assets needed**: Tutorial video, worker template, wrangler config template, deployment guide
 - [ ] **Vault reference**: `09-Green Room/x402-gateway-architecture.md`
+- [x] **Course outline drafted**: `09-Green Room/designs/gentech-academy-course-design.md` (6 modules, 3 pricing tiers, distribution plan)
 
 ## x402 Gateway — Paid API Platform as a Product 💰
 
