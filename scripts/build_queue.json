@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "updated": "2026-07-18 \u2014 Added Blender MCP setup",
+  "updated": "2026-07-18 \u2014 Added Arc x402 + Lens AI + Hackathon + Circle Grant",
   "items": [
     {
       "id": 28,
@@ -400,6 +400,68 @@
       "needs_jordan": false,
       "detail": "Blender MCP skill installed on Gentech. Next: (1) Install Blender on Forge's laptop, (2) Enable MCP plugin, (3) Test Hermes\u2192Blender bridge with 'model a low-poly coffee cup', (4) Connect to KAGEK\u014c scroll-world promo 3D pipeline.",
       "owner": "forge"
+    },
+    {
+      "id": 61,
+      "name": "Vault Watcher \u2014 Continuous RAG + Auto-Link Service",
+      "difficulty": "easy",
+      "priority": "high",
+      "status": "in_progress",
+      "assigned_to": "gentech",
+      "platform": "cloud",
+      "needs_jordan": false,
+      "detail": "Vault watcher script installed at scripts/vault_watcher.py. Uses inotifywait to watch for .md changes and instantly update the vault index. Full scan running now. Next: set up as persistent daemon (launchd/systemd or cron restart), add auto-link suggestions for new notes based on tag/keyword matching, integrate with Graphify for periodic full rebuilds."
+    },
+    {
+      "id": 62,
+      "name": "3D Agency Workspace \u2014 Three.js/WebXR Control Room",
+      "difficulty": "hard",
+      "priority": "medium",
+      "status": "pending",
+      "assigned_to": "forge",
+      "platform": "desktop",
+      "needs_jordan": false,
+      "repo": "gentech-3d-space",
+      "detail": "Build a 3D workspace for GenTech Labs that runs in-browser (Meta Ray-Ban compatible via WebXR). Visualize: Gentech + Forge as 3D avatars, active builds as floating cards, API endpoints as glowing nodes, knowledge graph as walkable space. Vanito can enter via Ray-Bans and walk through the space. Built with Three.js + WebXR. Blender for asset creation, web runtime for delivery."
+    },
+    {
+      "id": 63,
+      "name": "Arc x402 Gateway \u2014 Deploy on Arc Testnet",
+      "difficulty": "medium",
+      "priority": "high",
+      "status": "pending",
+      "assigned_to": "gentech",
+      "detail": "Port the existing x402 gateway stack to Arc (Chain 5042002). Deploy a testnet endpoint on Arc. USDC-native gas means zero friction for x402 payments. This makes us the first x402 gateway on Arc."
+    },
+    {
+      "id": 64,
+      "name": "Lens AI Integration \u2014 Verified Data Source + Revenue",
+      "difficulty": "medium",
+      "priority": "high",
+      "status": "pending",
+      "assigned_to": "gentech",
+      "detail": "Lens AI (ERC-8004 agent #842439) already supports x402. Register as a verified data source so Lens AI cites our Token Security + Wallet Analytics data and pays us in USDC on Arc every time it uses it. Self-running revenue stream."
+    },
+    {
+      "id": 65,
+      "name": "Arc Programmable Money Hackathon \u2014 Submission",
+      "difficulty": "hard",
+      "priority": "high",
+      "status": "pending",
+      "assigned_to": "gentech",
+      "platform": "cloud",
+      "needs_jordan": true,
+      "detail": "Enter the Encode Club x Arc hackathon (started Jul 13, 7 weeks). Submission: functional MVP with frontend. Project: x402 agent payment layer on Arc. Also qualifies for Circle Developer Grants ($USDC funding). Replaces CMC Labs as our priority opportunity track."
+    },
+    {
+      "id": 66,
+      "name": "Circle Developer Grant \u2014 Application",
+      "difficulty": "medium",
+      "priority": "high",
+      "status": "pending",
+      "assigned_to": "gentech",
+      "needs_jordan": true,
+      "detail": "Apply at circle.questbook.app. Tiered USDC funding + co-marketing + mentorship. Focus area #1: 'Agentic economic activity' \u2014 enabling autonomous AI agents to coordinate, contract, and settle value. This is exactly what we build. Milestone-based, so we get paid as we integrate deeper on Arc."
     }
   ],
   "agents": {

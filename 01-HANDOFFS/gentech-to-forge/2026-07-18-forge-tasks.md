@@ -7,13 +7,9 @@ Items you can work on independently — no Jordan needed.
 
 ## 🖥️ Desktop — Your Lane (9 items)
 
-### [HIGH] #28 — PixelRAG — Visual Search Demo (medium)
-**Status:** ▶️ Ready
-**What:** Install on lab laptop (RTX 3070). Test pixelshot CDP. Run demo against Vanito's Hub + Jordan's Hub. Show output.
-
 ### [HIGH] #29 — Local TTS & Voice Cloning Pipeline (medium)
 **Status:** ▶️ Ready
-**What:** Install Gepard 1.0, OpenVoice, StyleTTS 2, Coqui XTTS v2 on RTX 3070. Wire as FastAPI endpoints.
+**What:** OmniVoice done. Next: Gepard 1.0, OpenVoice, StyleTTS 2, Coqui XTTS v2
 
 ### [MEDIUM] #31 — GenTech Character API — Consistent Character Generation (hard)
 **Status:** ▶️ Ready
@@ -21,7 +17,7 @@ Items you can work on independently — no Jordan needed.
 
 ### [HIGH] #33 — Voicebox — Open Source ElevenLabs Replacement (medium)
 **Status:** ▶️ Ready
-**What:** Research open-source TTS from Better Stack video. Compare quality to ElevenLabs. Test with Reparathy voice persona. Wire into Hermes TTS config.
+**What:** OmniVoice installed (Jordan). Next: integrate with TTS pipeline, test ElevenLabs replacement
 
 ### [HIGH] #36 — Injective × Agent Kit Integration (medium)
 **Status:** ▶️ Ready
@@ -61,6 +57,10 @@ TODO: Add Q402 payment middleware
 TODO: List in pay-skills catalog
 TODO: Build Agent Credit Score API wrapper
 
+### [HIGH] #60 — Blender MCP — Install & Test on Forge Desktop (easy)
+**Status:** ▶️ Ready
+**What:** Blender MCP skill installed on Gentech. Next: (1) Install Blender on Forge's laptop, (2) Enable MCP plugin, (3) Test Hermes→Blender bridge with 'model a low-poly coffee cup', (4) Connect to KAGEKŌ scroll-world promo 3D pipeline.
+
 ---
 ## How to use this
 
@@ -71,4 +71,4 @@ TODO: Build Agent Credit Score API wrapper
 
 ---
 
-*Generated 2026-07-18 16:30 UTC*
+*Generated 2026-07-18 22:30 UTC*

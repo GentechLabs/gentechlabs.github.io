@@ -9,7 +9,7 @@ CRED_FILE = "/root/.arena-credentials"
 
 # ─── Multi-poll config ───
 POLL_INTERVAL = 8     # seconds between polls
-MAX_POLLS = 4         # 4 polls × 8s = 32s active (leaves plenty of buffer)
+MAX_POLLS = 7         # 7 polls × 8s = 56s active (only ~4s gap between cron ticks)
 DEADLINE_BUFFER = 4   # seconds before deadline to fallback (20s clock → 16s safe)
 
 def load_json(path):
@@ -107,53 +107,106 @@ def preflop_decision(hole, position, pot, stack, deadline_ok):
     if high == RANK_IDX['A'] and low == RANK_IDX['K']:
         return "raise", min(stack, max(pot * 3.5, 30))
 
-    # ─── Early position ───
+    # ─── Always raise premiums ───
+    if pair and high >= RANK_IDX['Q']:
+        return "raise", min(stack, max(pot * 3.5, 30))
+    if high == RANK_IDX['A'] and low == RANK_IDX['K']:
+        return "raise", min(stack, max(pot * 3.5, 30))
+
+    # ─── Early position (UTG/MP, seats 1-3) ───
     if position <= 2:
-        if pair and high >= RANK_IDX['T']:
+        # Raise 99+, AQ+, KQs
+        if pair and high >= RANK_IDX['9']:
             return "raise", min(stack, max(pot * 3, 20))
-        if high == RANK_IDX['A'] and low >= RANK_IDX['Q']:
+        if high >= RANK_IDX['A'] and low >= RANK_IDX['Q']:
             return "raise", min(stack, max(pot * 3, 20))
+        if suited and high == RANK_IDX['K'] and low >= RANK_IDX['Q']:
+            return "raise", min(stack, max(pot * 3, 20))
+        # Call small pairs (set mine) and suited aces
         if pair and stack >= 200:
             return "call", 0
         if suited and high == RANK_IDX['A']:
             return "call", 0
+        if suited and high == RANK_IDX['K'] and low >= RANK_IDX['J']:
+            return "call", 0
+        if suited and high == RANK_IDX['Q'] and low >= RANK_IDX['J']:
+            return "call", 0
         return "fold", 0
 
-    # ─── Late position ───
+    # ─── Late position (CO/BTN, seats 4-6) — loose ───
+    # Raise 99+, ATo+, KQo, all suited aces, suited broadways
     if pair:
-        return ("raise" if high >= RANK_IDX['T'] else "call"), 0
-    if high == RANK_IDX['A'] and low >= RANK_IDX['5']:
-        return "raise" if suited else "call", 0
-    if suited and high == RANK_IDX['K']:
+        if high >= RANK_IDX['9']:
+            return "raise", min(stack, max(pot * 3, 20))
+        if high >= RANK_IDX['5']:
+            return "call", 0  # set mine small pairs
+    if high >= RANK_IDX['A'] and low >= RANK_IDX['T']:
+        return "raise" if low >= RANK_IDX['Q'] else "call", min(stack, max(pot * 3, 20))
+    if high >= RANK_IDX['K'] and low >= RANK_IDX['Q']:
+        return "raise", min(stack, max(pot * 3, 20))
+    if high >= RANK_IDX['K'] and low >= RANK_IDX['T']:
         return "call", 0
-    if suited and gap <= 3:
+    if suited and high == RANK_IDX['A']:
+        return "raise" if low >= RANK_IDX['7'] else "call", min(stack, max(pot * 3, 20))
+    if suited and high >= RANK_IDX['K']:
         return "call", 0
-    if gap <= 2 and high >= RANK_IDX['8']:
+    if suited and gap <= 2 and low >= RANK_IDX['4']:  # suited connectors 54s+
         return "call", 0
+    if suited and gap <= 4 and high >= RANK_IDX['9']:  # suited gappers J9s+
+        return "call", 0
+    if high >= RANK_IDX['Q'] and low >= RANK_IDX['J']:
+        return "call", 0  # QJo, JTo
+    if high >= RANK_IDX['T'] and gap <= 2:
+        return "call", 0  # broadways JT, QT, KT
 
-    # ─── Blind defense ───
+    # ─── Blind defense (SB/BB, seats 7-8) — don't bleed chips ───
     if position >= 6:
-        if suited or pair or high >= RANK_IDX['9']:
+        # Any ace, any king, any pair, any 2 suited, broadways
+        if high == RANK_IDX['A']:
             return "call", 0
+        if pair:
+            return "call", 0
+        if suited:
+            return "call", 0
+        if high == RANK_IDX['K']:
+            return "call", 0
+        if high >= RANK_IDX['Q'] and low >= RANK_IDX['9']:
+            return "call", 0
+        if high >= RANK_IDX['T'] and low >= RANK_IDX['8']:
+            return "call", 0
+        # Last-resort defense with any 2 overcards
+        if high >= RANK_IDX['J'] and gap <= 2:
+            return "call", 0
+        return "fold", 0
+
     return "fold", 0
 
 def postflop_decision(score, pot, stack, committed, board, hole, deadline_ok):
+    """Exploit passive meta — heavy c-bets, double barrels, value thin"""
     if not deadline_ok:
         return "check" if committed == 0 else "call", 0
+
+    # ─── Strong hands — go for max value ───
     if score >= 3:  # trips+
-        return "raise", min(stack, max(int(pot * 0.8), 20))
+        return "raise", min(stack, int(pot * 1.0))  # pot-sized, field calls wide
     if score >= 2:  # two pair+
-        return "raise", min(stack, max(int(pot * 0.65), 15))
-    if score >= 1:  # pair
-        if committed == 0 and len(board) <= 3:
-            return "raise", min(stack, max(int(pot * 0.5), 10))
-        return "call", 0
-    # Nothing — c-bet if we raised pre and board is dry
-    if committed > 0 and len(board) <= 3 and hole:
-        r0 = RANK_IDX.get(parse_card(hole[0])[0], 0)
-        r1 = RANK_IDX.get(parse_card(hole[1])[0], 0)
-        if max(r0, r1) >= RANK_IDX['A']:
-            return "raise", min(stack, max(int(pot * 0.5), 10))
+        return "raise", min(stack, max(int(pot * 0.75), 15))
+
+    # ─── Top pair — value bet ───
+    if score >= 1:
+        if len(board) <= 3:
+            return "raise", min(stack, max(int(pot * 0.6), 10))  # c-bet flop
+        return "raise", min(stack, max(int(pot * 0.5), 10))  # value turn+
+
+    # ─── Nothing (score == 0) ───
+    # C-bet any flop we raised pre — field folds too much
+    if committed > 0:  # we raised preflop
+        if len(board) <= 3:
+            return "raise", min(stack, max(int(pot * 0.5), 10))  # c-bet
+        # Double barrel on scare turns
+        if len(board) == 4:
+            return "raise", min(stack, max(int(pot * 0.6), 12))  # second barrel
+    # Give up on river with nothing
     return "check", 0
 
 def generate_message(action, hole, board, street, pot):
