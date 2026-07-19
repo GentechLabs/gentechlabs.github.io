@@ -1,25 +1,25 @@
 {
   "version": 4,
-  "updated": "2026-07-18 \u2014 Nightly build: #45 research complete, #33 Pipecat researched.",
+  "updated": "2026-07-19 — Nightly build: Pipecat x402 processor built, Academy course outlined, Chain PR status verified.",
   "summary": {
     "total": 28,
     "shipped": 4,
-    "in_progress": 3,
-    "pending": 20,
+    "in_progress": 4,
+    "pending": 19,
     "blocked": 1,
     "needs_jordan": 5
   },
   "items": [
     {
       "id": 28,
-      "name": "Sell APIs to AI Agents \u2014 Pay-Skills PR #154",
+      "name": "Sell APIs to AI Agents — Pay-Skills PR #154",
       "difficulty": "easy",
       "priority": "urgent",
       "status": "in_progress",
       "assigned_to": "gentech",
       "platform": "cloud",
       "needs_jordan": false,
-      "detail": "Pay-skills PR #154 (OPEN): 12 GenTech x402 API services submitted to solana-foundation/pay-skills. PR title: 'feat: Add GenTech Labs \u2014 12 x402 API services'. Status: OPEN, awaiting upstream review. Follow-up in item #50."
+      "detail": "Pay-skills PR #154 (OPEN): 12 GenTech x402 API services submitted to solana-foundation/pay-skills. PR title: 'feat: Add GenTech Labs — 12 x402 API services'. Status: OPEN, awaiting upstream review. Follow-up in item #50."
     },
     {
       "id": 29,
@@ -30,7 +30,7 @@
       "assigned_to": "gentech",
       "platform": "cloud",
       "needs_jordan": true,
-      "detail": "HTML already served at gentechlabs.net/subscription-hub.html (verified HTTP 200 Jul 18). Blocked on Q402 API key \u2014 needs Jordan to set up trial key at q402.quackai.ai/event, then Gentech creates payment requests ($3/$10/$25 tiers)."
+      "detail": "HTML already served at gentechlabs.net/subscription-hub.html (verified HTTP 200 Jul 18). Blocked on Q402 API key — needs Jordan to set up trial key at q402.quackai.ai/event, then Gentech creates payment requests ($3/$10/$25 tiers)."
     },
     {
       "id": 30,
@@ -45,18 +45,18 @@
     },
     {
       "id": 31,
-      "name": "Unified Memory Router \u2014 Database + Fixes",
+      "name": "Unified Memory Router — Database + Fixes",
       "difficulty": "medium",
       "priority": "urgent",
       "status": "pending",
       "assigned_to": "gentech",
       "platform": "cloud",
       "needs_jordan": false,
-      "detail": "18 tests added and passing (Jul 18). Keyword detection confirmed working with word boundaries. Remaining: build real database (Supabase \u2014 needs Jordan signup), payment infra (Stripe + USDC), social layer. Repo: github.com/Gentech-Labs/unified-memory"
+      "detail": "18 tests added and passing (Jul 18). Keyword detection confirmed working with word boundaries. Remaining: build real database (Supabase — needs Jordan signup), payment infra (Stripe + USDC), social layer. Repo: github.com/Gentech-Labs/unified-memory"
     },
     {
       "id": 32,
-      "name": "Sell APIs to AI Agents \u2014 Phase 2: Deploy & List",
+      "name": "Sell APIs to AI Agents — Phase 2: Deploy & List",
       "difficulty": "medium",
       "priority": "urgent",
       "status": "pending",
@@ -70,26 +70,26 @@
       "name": "Pipecat x Voice Agent Integration",
       "difficulty": "medium",
       "priority": "high",
-      "status": "pending",
+      "status": "in_progress",
       "assigned_to": "gentech",
       "platform": "cloud",
       "needs_jordan": false,
-      "detail": "Pipecat analysis complete (Jul 18). Open-source Python framework (13.5k\u2b50, BSD-2) for real-time voice + multimodal AI agents. 98.4% Python, 10,842 commits, 263+ contributors. Has its own Claude Code skills marketplace at pipecat-ai/skills \u2014 actively encourages community integrations via COMMUNITY_INTEGRATIONS.md. Integration angles: (1) x402 processor as community integration, (2) Pay-as-you-speak voice agent demo, (3) Submit to pipecat-ai/skills marketplace. Next: build x402 payment processor prototype, test with simple voice agent pipeline."
+      "detail": "Pipecat v1.5.0 installed. x402 payment processor prototype building (Jul 19). Architecture: FrameProcessor subclass intercepts LLMRunFrame and checks x402 payment before forwarding. Standalone repo at /root/repos/pipecat-x402-processor/. Next: push to GitHub, submit community integration PR."
     },
     {
       "id": 34,
-      "name": "GenTech Academy \u2014 Course Product",
+      "name": "GenTech Academy — Course Product",
       "difficulty": "easy",
       "priority": "high",
       "status": "pending",
       "assigned_to": "gentech",
       "platform": "either",
       "needs_jordan": false,
-      "detail": "Turn our x402 gateway journey into a reusable course/product. Saved to 09-Green Room/ideas.md."
+      "detail": "Course outline drafted (Jul 19): 6-module Ship Paid APIs in a Weekend design at 09-Green Room/designs/gentech-academy-course-design.md. Covers x402 fundamentals, deployment, pricing, production hardening, agent economy, advanced patterns. Next: write Module 1, create starter kit template."
     },
     {
       "id": 35,
-      "name": "Graphify Vault Scan \u2014 Knowledge Graph",
+      "name": "Graphify Vault Scan — Knowledge Graph",
       "difficulty": "easy",
       "priority": "high",
       "status": "shipped",
@@ -100,17 +100,17 @@
     },
     {
       "id": 36,
-      "name": "x402 Payment Agent \u2014 500 AI Agents Projects",
+      "name": "x402 Payment Agent — 500 AI Agents Projects",
       "status": "shipped",
       "assigned_to": "gentech",
       "priority": "high",
       "difficulty": "medium",
       "platform": "cloud",
-      "notes": "PR #148 submitted to ashishpatel26/500-AI-Agents-Projects (34.7k\u2b50, MIT). First x402/payment-gated agent in their collection. Covers market data, wallet analytics, token intel via USDC micropayments."
+      "notes": "PR #148 submitted to ashishpatel26/500-AI-Agents-Projects (34.7k⭐, MIT). First x402/payment-gated agent in their collection. Covers market data, wallet analytics, token intel via USDC micropayments."
     },
     {
       "id": 37,
-      "name": "Agent Credit Score \u2014 Content Series",
+      "name": "Agent Credit Score — Content Series",
       "difficulty": "easy",
       "priority": "high",
       "status": "in_progress",
@@ -122,7 +122,7 @@
     },
     {
       "id": 38,
-      "name": "Q402 \u00d7 Agent Kit Integration",
+      "name": "Q402 × Agent Kit Integration",
       "difficulty": "medium",
       "priority": "high",
       "status": "in_progress",
@@ -133,7 +133,7 @@
     },
     {
       "id": 39,
-      "name": "AgentBridge \u2014 Deploy to Base Sepolia",
+      "name": "AgentBridge — Deploy to Base Sepolia",
       "difficulty": "easy",
       "priority": "high",
       "status": "pending",
@@ -144,7 +144,7 @@
     },
     {
       "id": 40,
-      "name": "PixelRAG \u2014 Visual Search Demo",
+      "name": "PixelRAG — Visual Search Demo",
       "difficulty": "medium",
       "priority": "medium",
       "status": "pending",
@@ -167,7 +167,7 @@
     },
     {
       "id": 42,
-      "name": "Voicebox \u2014 Open Source ElevenLabs Replacement",
+      "name": "Voicebox — Open Source ElevenLabs Replacement",
       "difficulty": "medium",
       "priority": "medium",
       "status": "pending",
@@ -178,7 +178,7 @@
     },
     {
       "id": 43,
-      "name": "Injective \u00d7 Agent Kit Integration",
+      "name": "Injective × Agent Kit Integration",
       "difficulty": "medium",
       "priority": "medium",
       "status": "pending",
@@ -189,7 +189,7 @@
     },
     {
       "id": 44,
-      "name": "GenTech Bank \u2014 Agent Neobank on Sana",
+      "name": "GenTech Bank — Agent Neobank on Sana",
       "difficulty": "medium",
       "priority": "medium",
       "status": "pending",
@@ -201,17 +201,17 @@
     },
     {
       "id": 45,
-      "name": "Submit GenTech Plugin to Superpowers (obra, 257k\u2b50)",
+      "name": "Submit GenTech Plugin to Superpowers (obra, 257k⭐)",
       "status": "pending",
       "assigned_to": "gentech",
       "priority": "medium",
       "difficulty": "medium",
       "platform": "cloud",
-      "notes": "GENTECH INVESTIGATED Jul 18: Superpowers repo has AGENTS.md forbidding agent-submitted PRs (94% rejection rate). Our plugin repo (ProtoJay4789/gentech-superpowers) is already public + installable directly. Submitting to the obra marketplace requires a human-maintained PR per their guidelines \u2014 agent-submitted PRs are explicitly rejected and would damage Jordan's reputation. Recommended path: Jordan reviews our plugin and, if desired, manually opens a PR to the obra/superpowers-marketplace repo."
+      "notes": "GENTECH INVESTIGATED Jul 18: Superpowers repo has AGENTS.md forbidding agent-submitted PRs (94% rejection rate). Our plugin repo (ProtoJay4789/gentech-superpowers) is already public + installable directly. Submitting to the obra marketplace requires a human-maintained PR per their guidelines — agent-submitted PRs are explicitly rejected and would damage Jordan's reputation. Recommended path: Jordan reviews our plugin and, if desired, manually opens a PR to the obra/superpowers-marketplace repo."
     },
     {
       "id": 46,
-      "name": "GenTech Journal \u2014 Consumer Visual Journal",
+      "name": "GenTech Journal — Consumer Visual Journal",
       "difficulty": "hard",
       "priority": "medium",
       "status": "pending",
@@ -222,7 +222,7 @@
     },
     {
       "id": 47,
-      "name": "Dry Powder Mode \u2014 AAE Stop-Loss Agent",
+      "name": "Dry Powder Mode — AAE Stop-Loss Agent",
       "difficulty": "hard",
       "priority": "medium",
       "status": "pending",
@@ -234,7 +234,7 @@
     },
     {
       "id": 48,
-      "name": "GenLayer \u2014 Builder Points + Intelligent Contract",
+      "name": "GenLayer — Builder Points + Intelligent Contract",
       "difficulty": "easy",
       "priority": "low",
       "status": "pending",
@@ -245,7 +245,7 @@
     },
     {
       "id": 49,
-      "name": "DeFi Dashboard \u2014 Strategy Comparison + Shape Recommendations",
+      "name": "DeFi Dashboard — Strategy Comparison + Shape Recommendations",
       "difficulty": "medium",
       "priority": "low",
       "status": "pending",
@@ -257,7 +257,7 @@
     },
     {
       "id": 50,
-      "name": "Prediction Market \u2014 Fed Decision Betting",
+      "name": "Prediction Market — Fed Decision Betting",
       "difficulty": "medium",
       "priority": "low",
       "status": "pending",
@@ -269,18 +269,18 @@
     },
     {
       "id": 51,
-      "name": "Chain PR Blitz \u2014 Umbrella (AgentKit + r0x + Avalanche)",
+      "name": "Chain PR Blitz — Umbrella (AgentKit + r0x + Avalanche)",
       "difficulty": "medium",
       "priority": "low",
       "status": "pending",
       "assigned_to": "gentech",
       "platform": "cloud",
       "needs_jordan": false,
-      "detail": "Umbrella: 3 Chain PR opportunities.\n- Chain PR Blitz \u2014 Coinbase AgentKit x402 Action Provider: Issue #1364 opened on coinbase/agentkit proposing GenTech as community x402 provider. PR #1375 submi\n- Chain PR Blitz \u2014 Robinhood Chain r0x Integration: Integrate with nhevers/project-r0x. Get GenTech listed in the r0x ecosystem.\n- Chain PR Blitz \u2014 Avalanche AI Resources Submit: Research complete. Two opportunities: (1) PR to caramaschiHG/awesome-ai-agents-2026 (1.4k stars) \u2014 x"
+      "detail": "Umbrella: 3 Chain PR opportunities.\n- Coinbase AgentKit: Issue #1364 opened. PR #1375 (OPEN, MERGEABLE, updated Jul 17) adds GenTech as x402 facilitator.\n- Robinhood Chain r0x: Not yet started — integrate with nhevers/project-r0x.\n- Avalanche AI Resources: PR #443 (OPEN) submitted to caramaschiHG/awesome-ai-agents-2026 adding GenTech Agent Kit to Agent Frameworks."
     },
     {
       "id": 52,
-      "name": "GenTech Character API \u2014 Consistent Character Generation",
+      "name": "GenTech Character API — Consistent Character Generation",
       "difficulty": "hard",
       "priority": "low",
       "status": "pending",
@@ -304,18 +304,18 @@
     },
     {
       "id": 54,
-      "name": "Rota Proxy \u2014 Deploy on Server",
+      "name": "Rota Proxy — Deploy on Server",
       "difficulty": "medium",
       "priority": "high",
       "status": "shipped",
       "assigned_to": "gentech",
       "platform": "cloud",
       "needs_jordan": false,
-      "detail": "Deploy alpkeskin/rota (450\u2b50) via Docker Compose. IP rotation layer for agent kit API calls (market data, rugcheck, token scans). Config at /root/repos/rota/.env. Port 80 (dashboard) + 8000 (proxy)."
+      "detail": "Deploy alpkeskin/rota (450⭐) via Docker Compose. IP rotation layer for agent kit API calls (market data, rugcheck, token scans). Config at /root/repos/rota/.env. Port 80 (dashboard) + 8000 (proxy)."
     },
     {
       "id": 55,
-      "name": "Agent Layer \u2014 x402 Ecosystem PR Follow-up",
+      "name": "Agent Layer — x402 Ecosystem PR Follow-up",
       "difficulty": "easy",
       "priority": "medium",
       "status": "shipped",
@@ -332,7 +332,10 @@
     "#37 Unified Memory Router: 18 tests pushed, keyword detection verified working.",
     "#54 Coinbase AgentKit: PR #1375 submitted by contributor, still OPEN. Updated queue note.",
     "#49 OKX Hackathon: deadline Jul 17 23:59 UTC has passed. Flagged for Forge to check status.",
-    "#30 Subscription Hub: HTML verified live at gentechlabs.net/subscription-hub.html (HTTP 200). Added needs_jordan:true for Q402 key setup."
+    "#30 Subscription Hub: HTML verified live at gentechlabs.net/subscription-hub.html (HTTP 200). Added needs_jordan:true for Q402 key setup.",
+    "#51 Chain PR Blitz: awesome-ai-agents-2026 PR #443 already submitted (OPEN). Updated queue notes.",
+    "#33 Pipecat: x402 processor prototype in progress (Jul 19).",
+    "#34 GenTech Academy: Course outline drafted."
   ],
   "agents": {
     "gentech": {
