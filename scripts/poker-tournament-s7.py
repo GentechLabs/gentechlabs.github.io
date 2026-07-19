@@ -210,22 +210,59 @@ def postflop_decision(score, pot, stack, committed, board, hole, deadline_ok):
     return "check", 0
 
 def generate_message(action, hole, board, street, pot):
-    msgs = {
-        "fold": ["Nothing here.", "Range doesn't connect.", "Wrong spot.",
-                  "Not the board for this hand.", "Disciplined fold.",
-                  "Saving chips.", "This flop misses me."],
-        "check": ["Keeping it small.", "See what develops.", "Checking through.",
-                   "No reason to build this pot yet.", "Pot control.",
-                   "Taking the free card."],
-        "call": ["Getting odds to see.", "Fair price.", "Let's see a turn.",
-                  "Priced in.", "Calling — that sizing's reasonable.",
-                  "Pot odds are there."],
-        "raise": ["Sizing up for value.", "Time to build the pot.",
-                   "That bet's too small.", "Protecting my hand.",
-                   "Putting pressure on their weak range.",
-                   "Let's find out where we stand."],
+    """Chat with GenTech attitude — confident, playful, reads between the lines"""
+    import random
+    fold_msgs = [
+        "Not today, old friend.",
+        "I respect that bet more than my hand.",
+        "You win this one. I'll be back.",
+        "Good fold? We'll never know.",
+        "Saving my chips for a better story.",
+        "That flop didn't like me and I didn't like it.",
+        "Folding is also a strategy. Sometimes.",
+        "Live to see another hand.",
+        "You almost had me. Almost.",
+        "This hand smells like a trap.",
+    ]
+    check_msgs = [
+        "Free card? Don't mind if I do.",
+        "Let's see what you've got.",
+        "Checking with intent.",
+        "Slow play is still play.",
+        "No need to build this pot. Yet.",
+        "I like my hand enough to check.",
+        "Setting the trap. Bait's out.",
+        "Patience, young grasshopper.",
+    ]
+    call_msgs = [
+        "Alright, let's dance.",
+        "I'm getting the right price for this show.",
+        "Calling because I can.",
+        "Odds say yes. Who am I to argue?",
+        "Let's see a card. Or two.",
+        "That bet's not scaring me.",
+        "Alright, one more street.",
+        "Priced in. Deal with it.",
+    ]
+    raise_msgs = [
+        "Your bet is cute. Mine is cuter.",
+        "Let's find out who's serious.",
+        "Time to apply pressure.",
+        "That's a small bet for a big dreamer.",
+        "Raising for value. And ego.",
+        "I know where I stand. Do you?",
+        "Testing the waters with a cannonball.",
+        "If you're bluffing, nice one. If not, oops.",
+        "Let's put a number on it.",
+        "This pot needs some personality.",
+    ]
+    action_map = {
+        "fold": fold_msgs,
+        "check": check_msgs,
+        "call": call_msgs,
+        "raise": raise_msgs,
     }
-    return random.choice(msgs.get(action, ["Playing my hand."]))
+    return random.choice(action_map.get(action, ["Playing my hand."]))
 
 def handle_table(table, state):
     """Process one table. Returns True if we acted."""
@@ -340,10 +377,14 @@ def main():
             chip_state = state.get("chip_state", "available")
 
             if isinstance(lobby, dict) and lobby.get("lobby") is None:
-                if chip_state == "available":
-                    result = api("POST", "/texas/join", {"competitionId": COMPETITION_ID})
-                    # Update state from join response
-                    if isinstance(result, dict):
+                # Not queued — try to join
+                result = api("POST", "/texas/join", {"competitionId": COMPETITION_ID})
+                if isinstance(result, dict):
+                    # Check if it's a 402 (needs payment)
+                    if "paymentRequirements" in result:
+                        # Skip silently — owner funds the wallet externally
+                        pass
+                    else:
                         part = result.get("participant", {})
                         if part:
                             state.update({
@@ -354,16 +395,17 @@ def main():
                                 "chip_state": part.get("chipState", "available"),
                             })
                             save_state(state)
-                elif chip_state == "busted":
-                    # Print exit signal for cron to surface to Jordan
-                    bust_msg = (f"BUSTED [Tournament S7] — {state.get('bankroll', 0)} bankroll, "
-                                 f"{state.get('hands_played', 0)} hands played, "
-                                 f"{state.get('hands_won', 0)} won.")
-                    print(bust_msg, flush=True)
-                    # Don't rebuy automatically — Jordan decides
-                    # Bail out — no more polls needed
-                    save_state(state)
-                    return
+            elif chip_state == "busted":
+                # Tournament S7 — rebuy costs MON, ask Jordan first
+                bust_msg = (f"BUSTED [Tournament S7] — {state.get('bankroll', 0)} bankroll, "
+                             f"{state.get('hands_played', 0)} hands played, "
+                             f"{state.get('hands_won', 0)} won. "
+                             f"Need MON rebuy to continue.")
+                print(bust_msg, flush=True)
+                # Don't rebuy automatically — Jordan decides
+                # Bail out — no more polls needed
+                save_state(state)
+                return
 
         # 4. Wait before next poll
         if poll_num < MAX_POLLS - 1:
