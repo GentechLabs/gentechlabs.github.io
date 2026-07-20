@@ -5,39 +5,27 @@ Items you can work on independently — no Jordan needed.
 
 ---
 
-## 🖥️ Desktop — Your Lane (8 items)
+## 🖥️ Desktop — Your Lane (5 items)
 
-### [URGENT] #32 — Sell APIs to AI Agents — Phase 2: Deploy & List (medium)
+### [HIGH] #3 — Sell APIs to AI Agents — Phase 2: Deploy & List (medium)
 **Status:** ▶️ Ready
 **What:** Phase 2 after pay-skills PR #154 merges. TODO: Deploy Rugcheck v2 API to port 8088, add Q402 payment middleware, list in pay-skills catalog, build Agent Credit Score API wrapper.
 
-### [MEDIUM] #40 — PixelRAG — Visual Search Demo (medium)
+### [URGENT] #7 — Cloudflare Gateway — x402 Playground + Deploy GenTech on Workflows (easy)
+**Status:** ▶️ Ready
+**What:** Jordan already on Cloudflare Gateway waitlist. When approved: deploy our x402 gateway on Cloudflare Workers (withX402() support built-in). Also explore Cloudflare Agents SDK + MCP x402 integration.
+
+### [HIGH] #8 — Agentic Treasury — Build P2P Causes + Yield Brain (hard)
+**Status:** ▶️ Ready
+**What:** Build the three pillars: Yield Brain (AAE), Payment Router (x402), P2P Causes (funding platform). Spec at 00-HQ/agentic-treasury-spec.md.
+
+### [HIGH] #16 — PixelRAG — Visual Search Demo (medium)
 **Status:** ▶️ Ready
 **What:** Install on lab laptop (RTX 3070). Test pixelshot CDP. Run demo against Vanito's Hub + Jordan's Hub. Show output.
 
-### [MEDIUM] #41 — Local TTS & Voice Cloning Pipeline (medium)
-**Status:** ▶️ Ready
-**What:** Install Gepard 1.0, OpenVoice, StyleTTS 2, Coqui XTTS v2 on RTX 3070. Wire as FastAPI endpoints.
-
-### [MEDIUM] #42 — Voicebox — Open Source ElevenLabs Replacement (medium)
-**Status:** ▶️ Ready
-**What:** Research open-source TTS from Better Stack video. Compare quality to ElevenLabs. Test with Reparathy voice persona. Wire into Hermes TTS config.
-
-### [MEDIUM] #43 — Injective × Agent Kit Integration (medium)
-**Status:** ▶️ Ready
-**What:** Build identity_module.py (ERC-8004 registration wrapper). Build grid trader + DCA bot. Wire fee recipient. Connect AAE to ERC-8004 identity.
-
-### [MEDIUM] #46 — GenTech Journal — Consumer Visual Journal (hard)
-**Status:** ▶️ Ready
-**What:** Wireframes + UI design. Name/branding. Build visual data layer. Reparathy integration. Consumer-facing frontend.
-
-### [LOW] #50 — Prediction Market — Fed Decision Betting (medium)
+### [LOW] #27 — Prediction Market — Fed Decision Betting (medium)
 **Status:** ▶️ Ready
 **What:** Architecture design. Smart contracts (x402 integration). UI/UX mockups.
-
-### [LOW] #52 — GenTech Character API — Consistent Character Generation (hard)
-**Status:** ▶️ Ready
-**What:** SD 1.5 + IP-Adapter + ControlNet + LoRA pipeline. Test with KAGE character sheet. Wrap as x402 endpoint.
 
 ---
 ## How to use this
@@ -49,4 +37,4 @@ Items you can work on independently — no Jordan needed.
 
 ---
 
-*Generated 2026-07-19 09:09 UTC*
+*Generated 2026-07-19 21:09 UTC*

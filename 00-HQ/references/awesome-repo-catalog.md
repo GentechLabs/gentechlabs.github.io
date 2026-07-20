@@ -22,11 +22,14 @@ These repos already have GenTech services listed in their README.
 | bitrefill/awesome-agentic-payments | GenTech Labs (Ecosystem + x402 sections) | ✅ PR #26 merged | 15 ★. Agent payment protocol list. |
 | ahmet/awesome-web3 | GenTech x402 Gateway | 🆕 Jul 18 | PR #733 — x402 Payments Protocol section. |
 | 0xNyk/awesome-agent-cortex | GenTech Agent Kit + x402 Gateway | 🆕 Jul 18 | PR #43 (Agent Identity), PR #44 (Agent Payments). |
+| heilcheng/awesome-agent-skills | GenTech Agent Kit | 🆕 Jul 19 | PR #361 — Security & Web Intelligence section. |
 | Scottcjn/awesome-agents | GenTech x402 Gateway | 🆕 Jul 18 | PR #40 — Blockchain & Rewards section. |
 
 ## 🟢 PR Submitted (awaiting review/merge)
 | Repo | PR | What Was Submitted | Status |
 |------|----|--------------------|--------|
+| **VaitaR/awesome-web3-services** | [#1](https://github.com/VaitaR/awesome-web3-services/pull/1) | GenTech x402 Gateway in Specialized APIs | 🆕 Submitted Jul 19 |
+| **heilcheng/awesome-agent-skills** | [#361](https://github.com/heilcheng/awesome-agent-skills/pull/361) | GenTech Agent Kit in Security & Web Intelligence | 🆕 Submitted Jul 19 |
 | ahmet/awesome-web3 | [#733](https://github.com/ahmet/awesome-web3/pull/733) | GenTech x402 Gateway in x402 Payments | 🟢 MERGEABLE |
 | 0xNyk/awesome-agent-cortex | [#43](https://github.com/0xNyk/awesome-agent-cortex/pull/43) | GenTech Agent Kit in Agent Identity & Wallets | 🟢 MERGEABLE |
 | 0xNyk/awesome-agent-cortex | [#44](https://github.com/0xNyk/awesome-agent-cortex/pull/44) | GenTech x402 Gateway in Agent Payments | 🟢 MERGEABLE |
@@ -45,6 +48,8 @@ These repos already have GenTech services listed in their README.
 ## ⏸️ Skipped / Evaluated (not submitted)
 | Repo | Category | Why Skipped | Evaluated |
 |------|----------|-------------|-----------|
+| **ARUNAGIRINATHAN-K/awesome-ai-agents-2026** | AI agents | ❌ **Forking disabled by owner** — 1.5k★, perfect fit for Agent Kit but needs Jordan to manually submit. Patch ready at `awesome-ai-agents-2026-fork`. | 2026-07-19 |
+| **starton-io/awesome-web3-tools-and-dapps** | Web3 tools | ❌ **Forking disabled by owner** — needs Jordan to manually fork and PR. | 2026-07-19 |
 | MentionNetwork/awesome-agentic-commerce | Ecommerce | Agentic commerce list — none of our services fit | 2026-07-17 |
 | ong/awesome-decentralized-finance | DeFi | Lists major DeFi protocols, not analytics tools | 2026-07-17 |
 | BlockRunAI/awesome-blockrun | BlockRun ecosystem | Our Agent Kit uses BlockRun as one of many integrations | 2026-07-17 |
