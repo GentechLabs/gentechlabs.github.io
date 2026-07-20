@@ -1,4 +1,5 @@
 {
+<<<<<<< Updated upstream
   "lastUpdated": "2026-07-19T22:06:25.952Z",
   "pool": "AVAX/USDC",
   "chain": "Avalanche",
@@ -7,11 +8,22 @@
   "priceChange24h": -2.37,
   "volume24h": 519740.09,
   "liquidity": 392758.8,
+=======
+  "lastUpdated": "2026-06-29T20:10:58.102Z",
+  "pool": "AVAX/USDC",
+  "chain": "Avalanche",
+  "dex": "LFJ",
+  "currentPrice": 6.72,
+  "priceChange24h": 6.07,
+  "volume24h": 1891537.54,
+  "liquidity": 385848.73,
+>>>>>>> Stashed changes
   "lpPosition": {
     "pair": "AVAX/USDC",
     "feeTier": "10bps",
     "shape": "curve",
     "displayShape": "Curve",
+<<<<<<< Updated upstream
     "currentPrice": 6.42,
     "rangeMin": 6.4039,
     "rangeMax": 6.5463,
@@ -57,12 +69,63 @@
       },
       {
         "headline": "LFJ AVAX/USDC pool volume: $519.7K",
+=======
+    "currentPrice": 6.72,
+    "rangeMin": 6.6054,
+    "rangeMax": 6.8201,
+    "avaxAmount": 2.857598,
+    "usdcAmount": 28.524918,
+    "totalValue": 47.73,
+    "totalValueUSD": 47.73,
+    "activeBin": 8362870,
+    "binStep": 10,
+    "totalBins": 33,
+    "entryPrice": 6.711891576895444
+  },
+  "fees": {
+    "dailyFees": 0.749,
+    "cumulativeFees": 1.2611,
+    "feeCurrency": "USD"
+  },
+  "efficiency": 93,
+  "hero": {
+    "positionUsd": 47.73,
+    "dailyFees": 0.749,
+    "efficiency": 93,
+    "efficiencyZone": "Center",
+    "shape": "Curve",
+    "rangeStatus": "In Range",
+    "currentPrice": 6.72,
+    "rangeMin": 6.6054,
+    "rangeMax": 6.8201,
+    "milestoneNext": "Scout",
+    "milestoneTarget": 5,
+    "milestoneProgress": 15,
+    "entryPrice": 6.711891576895444,
+    "impermanentLossPercent": 0.12
+  },
+  "marketIntel": {
+    "avaxPrice": 6.72,
+    "change24h": 6.07,
+    "volume24h": 1891537.54,
+    "tvl": 385848.73,
+    "trend": "bullish",
+    "news": [
+      {
+        "headline": "AVAX up 6.07% in 24h",
+        "impact": "bullish",
+        "relevance": "high"
+      },
+      {
+        "headline": "LFJ AVAX/USDC pool volume: $1891.5K",
+>>>>>>> Stashed changes
         "impact": "neutral",
         "relevance": "medium"
       }
     ]
   },
   "strategyAdvisor": {
+<<<<<<< Updated upstream
     "efficiency": 23,
     "efficiencyZone": "Outer",
     "recommendedAction": "Hold",
@@ -74,6 +137,19 @@
     "nextCompound": "$49.00 away from first compound",
     "riskLevel": "High",
     "riskNote": "Price at $6.42, 23% efficiency",
+=======
+    "efficiency": 93,
+    "efficiencyZone": "Center",
+    "recommendedAction": "Hold",
+    "dcaType": "Full DCA",
+    "dcaDetails": "Full DCA \u2014 price in range",
+    "rebalanceTrigger": "Price exits $6.61-$6.82 range",
+    "compoundThreshold": 50,
+    "cumulativeFees": 1.2611,
+    "nextCompound": "$48.74 away from first compound",
+    "riskLevel": "Low",
+    "riskNote": "Price at $6.72, 93% efficiency",
+>>>>>>> Stashed changes
     "shape": "Curve"
   },
   "milestones": {
@@ -83,9 +159,15 @@
     "Sovereign": 100
   },
   "feeMilestones": {
+<<<<<<< Updated upstream
     "currentDailyFees": 0.072,
     "cumulativeFees": 1.003,
     "positionUsd": 23.73,
+=======
+    "currentDailyFees": 0.749,
+    "cumulativeFees": 1.2611,
+    "positionUsd": 47.73,
+>>>>>>> Stashed changes
     "daysActive": 1,
     "nextMilestone": "Scout",
     "nextTarget": 5,
@@ -93,7 +175,7 @@
     "tiers": [
       {
         "tier": 1,
-        "icon": "🔭",
+        "icon": "\ud83d\udd2d",
         "label": "Scout",
         "target": 5,
         "unlocks": "Entry strategies (CURVE)",
@@ -101,7 +183,7 @@
       },
       {
         "tier": 2,
-        "icon": "⚔️",
+        "icon": "\u2694\ufe0f",
         "label": "Raider",
         "target": 20,
         "unlocks": "SPOT + BIDIRECTIONAL shapes",
@@ -109,7 +191,7 @@
       },
       {
         "tier": 3,
-        "icon": "👑",
+        "icon": "\ud83d\udc51",
         "label": "Warlord",
         "target": 50,
         "unlocks": "Multi-pool positions",
@@ -117,7 +199,7 @@
       },
       {
         "tier": 4,
-        "icon": "🏰",
+        "icon": "\ud83c\udff0",
         "label": "Sovereign",
         "target": 100,
         "unlocks": "Custom strategy creation + mentorship",
@@ -126,6 +208,7 @@
     ]
   },
   "curveData": {
+<<<<<<< Updated upstream
     "currentPrice": 6.42,
     "rangeMin": 6.4039,
     "rangeMax": 6.5463,
@@ -244,10 +327,181 @@
         "price": 6.5463,
         "depth": 0.06306067972633841,
         "id": 8362843
+=======
+    "currentPrice": 6.72,
+    "rangeMin": 6.6054,
+    "rangeMax": 6.8201,
+    "bins": [
+      {
+        "price": 6.6054,
+        "depth": 0.10090321145970386,
+        "id": 8362852
+      },
+      {
+        "price": 6.612,
+        "depth": 0.1333521116320442,
+        "id": 8362853
+      },
+      {
+        "price": 6.6186,
+        "depth": 0.17309341585901453,
+        "id": 8362854
+      },
+      {
+        "price": 6.6253,
+        "depth": 0.22067305375905716,
+        "id": 8362855
+      },
+      {
+        "price": 6.6319,
+        "depth": 0.2763159942923855,
+        "id": 8362856
+      },
+      {
+        "price": 6.6385,
+        "depth": 0.33982061783073586,
+        "id": 8362857
+      },
+      {
+        "price": 6.6452,
+        "depth": 0.4104697663213684,
+        "id": 8362858
+      },
+      {
+        "price": 6.6518,
+        "depth": 0.486967366528918,
+        "id": 8362859
+      },
+      {
+        "price": 6.6584,
+        "depth": 0.5674221225654615,
+        "id": 8362860
+      },
+      {
+        "price": 6.6651,
+        "depth": 0.6493816133276504,
+        "id": 8362861
+      },
+      {
+        "price": 6.6718,
+        "depth": 0.7299297666919926,
+        "id": 8362862
+      },
+      {
+        "price": 6.6784,
+        "depth": 0.8058421511035337,
+        "id": 8362863
+      },
+      {
+        "price": 6.6851,
+        "depth": 0.8737883364527547,
+        "id": 8362864
+      },
+      {
+        "price": 6.6918,
+        "depth": 0.9305720586327666,
+        "id": 8362865
+      },
+      {
+        "price": 6.6985,
+        "depth": 0.9733773140855773,
+        "id": 8362866
+      },
+      {
+        "price": 6.7052,
+        "depth": 1,
+        "id": 8362867
+      },
+      {
+        "price": 6.7119,
+        "depth": 0.9721734393754579,
+        "id": 8362868
+      },
+      {
+        "price": 6.7186,
+        "depth": 0.9279146193742247,
+        "id": 8362869
+      },
+      {
+        "price": 6.7253,
+        "depth": 0.903008589960308,
+        "id": 8362870
+      },
+      {
+        "price": 6.7321,
+        "depth": 0.8632797680244545,
+        "id": 8362871
+      },
+      {
+        "price": 6.7388,
+        "depth": 0.8106022648281034,
+        "id": 8362872
+      },
+      {
+        "price": 6.7455,
+        "depth": 0.7475694801877307,
+        "id": 8362873
+      },
+      {
+        "price": 6.7523,
+        "depth": 0.6771467725165867,
+        "id": 8362874
+      },
+      {
+        "price": 6.759,
+        "depth": 0.6024230254181947,
+        "id": 8362875
+      },
+      {
+        "price": 6.7658,
+        "depth": 0.5263902212934459,
+        "id": 8362876
+      },
+      {
+        "price": 6.7726,
+        "depth": 0.45175353832964305,
+        "id": 8362877
+      },
+      {
+        "price": 6.7793,
+        "depth": 0.3807876134053453,
+        "id": 8362878
+      },
+      {
+        "price": 6.7861,
+        "depth": 0.31524743586508885,
+        "id": 8362879
+      },
+      {
+        "price": 6.7929,
+        "depth": 0.2563349433347803,
+        "id": 8362880
+      },
+      {
+        "price": 6.7997,
+        "depth": 0.2047158942522884,
+        "id": 8362881
+      },
+      {
+        "price": 6.8065,
+        "depth": 0.16057680512194883,
+        "id": 8362882
+      },
+      {
+        "price": 6.8133,
+        "depth": 0.12370907592102916,
+        "id": 8362883
+      },
+      {
+        "price": 6.8201,
+        "depth": 0.09360688921719672,
+        "id": 8362884
+>>>>>>> Stashed changes
       }
     ]
   },
   "walletBalances": {
+<<<<<<< Updated upstream
     "avax": 0.09755365779524727,
     "wavax": 6.0667105623e-7,
     "usdc": 0.000006,
@@ -258,27 +512,51 @@
     "levels": [
       {
         "price": 6.55,
+=======
+    "avax": 0.09741800219393641,
+    "wavax": 6.0667105586e-07,
+    "usdc": 7e-06,
+    "liquidUsd": 0.65
+  },
+  "supportResistance": {
+    "currentPrice": 6.72,
+    "levels": [
+      {
+        "price": 6.82,
+>>>>>>> Stashed changes
         "type": "resistance",
         "strength": "strong",
         "label": "Range High",
         "note": "Current position top"
       },
       {
+<<<<<<< Updated upstream
         "price": 6.57,
+=======
+        "price": 6.86,
+>>>>>>> Stashed changes
         "type": "resistance",
         "strength": "weak",
         "label": "Minor Resistance",
         "note": "Local high"
       },
       {
+<<<<<<< Updated upstream
         "price": 6.4,
+=======
+        "price": 6.61,
+>>>>>>> Stashed changes
         "type": "support",
         "strength": "strong",
         "label": "Range Low",
         "note": "Current position bottom"
       },
       {
+<<<<<<< Updated upstream
         "price": 6.38,
+=======
+        "price": 6.56,
+>>>>>>> Stashed changes
         "type": "support",
         "strength": "weak",
         "label": "Minor Support",
@@ -287,6 +565,7 @@
     ],
     "shapeRecommendation": {
       "shape": "Curve",
+<<<<<<< Updated upstream
       "reason": "Price at $6.42, within $6.40-$6.55 range.",
       "optimalRange": [
         6.4,
@@ -318,6 +597,31 @@
         "priority": "low",
         "impact": "Risk",
         "action": "Adjust Down"
+=======
+      "reason": "Price at $6.72, within $6.61-$6.82 range.",
+      "optimalRange": [
+        6.61,
+        6.82
+      ]
+    },
+    "proximityAlert": "Price 53% into range"
+  },
+  "rebalanceSuggestions": {
+    "efficiency": 93,
+    "price": 6.72,
+    "rangeMin": 6.6054,
+    "rangeMax": 6.8201,
+    "volatility": 6.07,
+    "trend": "bullish",
+    "suggestions": [
+      {
+        "icon": "\ud83d\udcc8",
+        "title": "Bullish Momentum",
+        "description": "AVAX is up 24h. Consider shifting range slightly higher to capture upside.",
+        "priority": "low",
+        "impact": "Opportunity",
+        "action": "Adjust Up"
+>>>>>>> Stashed changes
       }
     ]
   },
@@ -332,8 +636,21 @@
       "date": "2026-07-19",
       "type": "Snapshot",
       "token": "AVAX/USDC",
+<<<<<<< Updated upstream
       "amount": "3.5261 WAVAX + 1.10 USDC",
       "usd": "23.73",
+=======
+      "amount": "2.8576 WAVAX + 28.52 USDC",
+      "usd": "47.73",
+      "status": "In Range"
+    },
+    {
+      "date": "2026-06-28",
+      "type": "Snapshot",
+      "token": "AVAX/USDC",
+      "amount": "0.4141 WAVAX + 44.66 USDC",
+      "usd": "47.33",
+>>>>>>> Stashed changes
       "status": "In Range"
     },
     {
@@ -344,5 +661,9 @@
       "usd": "24.06",
       "status": "In Range"
     }
-  ]
+  ],
+  "ilCalculator": {
+    "entryPrice": 6.711891576895444,
+    "impermanentLossPercent": 0.12
+  }
 }
