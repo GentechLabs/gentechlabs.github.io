@@ -5,7 +5,7 @@ Items you can work on independently — no Jordan needed unless noted.
 
 ---
 
-## 🖥️ Desktop — Your Lane (5 items)
+## 🖥️ Desktop — Your Lane (7 items)
 
 ### [HIGH] #3 — Sell APIs to AI Agents — Phase 2: Deploy & List (medium)
 **Status:** ▶️ Ready (waiting on pay-skills PR #154 merge)
@@ -26,6 +26,14 @@ Items you can work on independently — no Jordan needed unless noted.
 ### [LOW] #27 — Prediction Market — Fed Decision Betting (medium)
 **Status:** ▶️ Ready
 **What:** Architecture design. Smart contracts (x402 integration). UI/UX mockups.
+
+### [MEDIUM] #38 — Agent Arcade — Build Phase 1 (hard)
+**Status:** ▶️ Ready
+**What:** Browser-based agent arcade. Spec at 10-Labs/agent-arcade-build-queue.md. Lobby page, poker cabinet (already built), MCP server per game, x402 rebuys, ARC stablecoin.
+
+### [MEDIUM] #47 — Remotion Video Pipeline — Social Media Engine Extension (medium)
+**Status:** ▶️ Ready
+**What:** Extend Social Media Engine cron with Remotion video rendering. Forge runs a 7pm cron on RTX 3070: picks up text draft, renders short video via Remotion (React → MP4), delivers to Entertainment group. Needs: Remotion project setup, video template components, cron job on desktop.
 
 ---
 
@@ -49,12 +57,13 @@ Items you can work on independently — no Jordan needed unless noted.
 
 These are being handled on the cloud side:
 - **#1 Subscription Hub** — Waiting on Jordan's wallet address for Q402 payment links
-- **#2 Pay-Skills PR #154** — Open, awaiting upstream review
+- **#2 Pay-Skills PR #154** — Open, awaiting upstream review (no action since Jul 12)
 - **#5 XRPL x402 Skill** — Draft ready, needs Jordan to fork + submit
 - **#6 NEAR x402 PR** — Draft ready, needs Jordan to fork + submit
 - **#15 Arc x402 Gateway** — 15/15 tests pass, needs Jordan's wallet to deploy
-- **#37 x402 Compliance Scanner** — Code pushed, PR blocked by GitHub rate limit
+- **#37 x402 Compliance Scanner** — PR #2905 is OPEN and mergeable at x402-foundation/x402
 - **#39 Dexter-DAO Integration** — Research complete, plan written
+- **#28 Chain PR Blitz** — PR #443 closed (no merge), replacement #455 open
 
 ---
 
@@ -81,4 +90,4 @@ These are being handled on the cloud side:
 
 ---
 
-*Generated 2026-07-20 09:02 UTC — Comprehensive handoff*
+*Generated 2026-07-20 12:34 UTC — Comprehensive handoff*
