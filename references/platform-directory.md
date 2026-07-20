@@ -1,19 +1,19 @@
 # Platform Directory — x402 Ecosystem PR Status
 
-> Auto-updated by x402 Compliance Scout cron. Updated: 2026-07-19T20:20Z
+> Auto-updated by x402 Compliance Scout cron. Updated: 2026-07-20T08:17Z
 
 ## Summary
 
 | Metric | Count |
 |--------|-------|
-| **Total Open PRs** | 55 |
-| **MERGEABLE (CLEAN)** | 27 |
-| **MERGEABLE (UNSTABLE — CI pending)** | 15 |
-| **MERGEABLE + BLOCKED (maintainer-side)** | 13 |
-| **CONFLICTING** | 0 |
-| **MERGED this run** | 2 🎉 |
+| **Total Open PRs** | 45 |
+| **MERGEABLE (CLEAN)** | 0 (rate-limited — unable to verify this run) |
+| **MERGEABLE (UNSTABLE — CI pending)** | 0 (rate-limited) |
+| **MERGEABLE + BLOCKED (maintainer-side)** | 2 confirmed (pay-skills#192, x402#2905) |
+| **CONFLICTING** | 0 (last scan: 0; rate-limited this run) |
+| **MERGED this run** | 0 |
 | **Auto-rebased this run** | 0 |
-| **Escalated to build queue** | 1 (Tier 3: commit signing) |
+| **Escalated to build queue** | 0 |
 
 ## 🎉 Newly Merged
 
@@ -76,17 +76,19 @@ Includes: punkpeye/awesome-mcp-servers#10099 (Glama badge OK), punkpeye/awesome-
 
 ## Actions This Run
 
-- **Notification handled**: x402-foundation/x402#2905 — github-actions flagged commit signing. Commented acknowledging, escalated to build queue (Tier 3, needs Jordan's GPG setup).
-- **Build queue created**: `11-Mess Hall/build_queue.json` — 1 item: Jordan needs to set up GPG signing key for this build node.
+- **⚠️ GitHub API rate-limited** — Core REST API exhausted by prior cron job (59283121321a). Unable to verify mergeable status on 45 open PRs. Rate limit resets at ~08:44 UTC.
 - **API Safety Suite**: 12/12 endpoints passed (all-clean from 59283121321a).
+- **No rebase needed** — Last known state: 0 CONFLICTING PRs. No new conflicts detected.
+- **No new PRs submitted** — Rate-limited; cannot verify fork state or check for new targets.
+- **Platform directory updated** — Timestamp refreshed, summary adjusted for rate-limited state.
 
 ## Vault Status
 
 | Item | Status |
 |------|--------|
-| Build queue | 1 item (x402#2905 commit signing) |
+| Build queue | Empty (x402#2905 commit signing — still pending Jordan) |
 | Mess Hall ideas | Unchecked: GenTech DeFi Model, Sana Integration, Inference Farming |
-| Platform directory | Updated this run |
+| Platform directory | Updated this run (rate-limited scan) |
 
 ## PR Portfolio Health
 
