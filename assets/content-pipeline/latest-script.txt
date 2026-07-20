@@ -1,0 +1,16 @@
+GenTech Labs — Build Report
+2026-07-20 08:56 UTC
+
+📦 13 items shipped, 8 in progress
+
+🎉 PRs merged this cycle:
+  • - `reason: "author"` → Our own PR had activity (e.g., merged, new commit pushed, PR was updated). Check the PR status with `gh pr view`.
+  • **Tracking merged PRs:**
+  • To find recently merged ProtoJay4789 PRs between scans:
+  • gh api search/issues --method GET -f q='author:ProtoJay4789 type:pr is:merged' --jq '.items[] | {number, title, html_url, merged_at}' --paginate
+  • Key fields to report per merged PR: `html_url` (clickable link), `number`, `merged_at`,
+
+⚡ Currently building:
+  • Deploy Subscription Hub to gentechlabs.net
+  • Sell APIs to AI Agents — Pay-Skills PR #154
+  • x402 Foundation — Contribute to Core Protocol (Ripple/NEAR/Cloudflare ecosystem)
