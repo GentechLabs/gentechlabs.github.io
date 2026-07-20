@@ -7,7 +7,7 @@
 
 | Repo | PR / Listing | What Was Submitted | Status |
 |------|-------------|--------------------|--------|
-| caramaschiHG/awesome-ai-agents-2026 | [#455](https://github.com/caramaschiHG/awesome-ai-agents-2026/pull/455) | GenTech Agent Kit in Protocol Tooling | 🟢 Open |
+| caramaschiHG/awesome-ai-agents-2026 | [#443](https://github.com/caramaschiHG/awesome-ai-agents-2026/pull/443) | GenTech Agent Kit in Agent Frameworks | 🔴 Closed (no merge) — replaced by #455 |
 | ahmet/awesome-web3 | [#733](https://github.com/ahmet/awesome-web3/pull/733) | GenTech x402 Gateway in x402 Payments Protocol | 🟢 Open |
 | 0xNyk/awesome-agent-cortex | [#43](https://github.com/0xNyk/awesome-agent-cortex/pull/43) | GenTech Agent Kit in Agent Identity & Wallets | 🟢 Open |
 | 0xNyk/awesome-agent-cortex | [#44](https://github.com/0xNyk/awesome-agent-cortex/pull/44) | GenTech x402 Gateway in Agent Payments | 🟢 Open |

@@ -1,19 +1,27 @@
 # LP + Milestone Tracker Rules — AVAX/USDC (AAE v2)
 
 > Established: 2026-04-18
-> Updated: 2026-04-28 — Position: range $9.00–$9.45 (curve), rebalanced Apr 29
+> Updated: 2026-07-20 — Position: range $6.07–$7.04 (curve, 149 bins), rebalanced by Jordan
 > Status: Active
 > Pool: LFJ V2.2 AVAX/USDC (binStep 10, pool 0x864d4e5ee7318e97483db7eb0912e09f161516ea)
 
 ## Current Position
 
-- **Range:** $9.00 — $9.45 (rebalanced Apr 29, curve)
-- **Position:** ~$135.24 (3.446 AVAX @ $31.87 + 103.38 USDC @ $103.37)
+- **Range:** $6.0735 — $7.0418 (149 bins, Curve)
+- **Position:** ~$24.10 (1.579 AVAX @ $6.54 + 13.78 USDC)
 - **Shape:** Curve
 - **Strategy:** Bear market accumulation — farm the bottom, compound rewards
-- **Crash Scenario (Dadrian):** If AVAX drops to $8.30-9.00, DCA strategy will work itself out through Impermanent Loss (IL). Continuous DCA at lower prices builds cheaper positions—IL math naturally offsets price decay over time.
-- **Optimal Entry Range:** During crash, consider 70 USDC / 30 AVAX bid-ask weighting (Curve-style concentrated liquidity).
-- **Current Tool:** Bid-Ask shape — range widened for stability
+- **Entry Price:** $6.54
+- **24h Fees:** $0.28
+- **Status:** 🟢 In Range — price $6.54 well within $6.07–$7.04
+
+### Update Protocol
+When Jordan shows new position data (screenshot or numbers), update these files:
+1. `/root/.hermes/scripts/.lfj-aae-config.json` — position amounts, range, entry price
+2. `/root/.hermes/scripts/.lfj-position-tracker.json` — amounts + range
+3. This rules doc — summary section above
+
+The LP Monitor cron job reads from #1 and #2 — no script changes needed. Next run picks up the new data automatically.
 
 ---
 
@@ -77,22 +85,22 @@ The monitor now outputs **structured JSON signals** for AAE squad treasury + pro
 ## Monitoring Rules (Jordan's Exact Spec)
 
 ### Rule 1 — Check Frequency
-⏰ LP Monitor runs **frequently** via consolidated cron job `2563e78bcf72` (currently every 10 min — may adjust to 4×/day per preference).
+⏰ LP Monitor runs **every 10 min** via cron job `92c52122abab` (script: `lp-monitor-v2.py`).
 
-### Rule 2 — In Range + High Efficiency → SILENT
-🤫 Price in range AND fee efficiency **50–100%** → **no alert, stay silent** (compact log only)
+### Rule 2 — Normal Check-in (2x/hour)
+🟢 Price in range AND fee efficiency **≥ 50%** → report every **30 min** so Jordan sees fee efficiency humming. Silent in between.
 
-### Rule 3 — In Range + Low Efficiency → ALERT
-⚠️ Price in range BUT fee efficiency **< 50%** → alert: *"fee efficiency dropping — consider rebalancing"*
+### Rule 3 — Low Efficiency → ALERT
+⚠️ Fee efficiency **< 50%** → **immediate alert** with rebalance recommendation (shape + range). Debounces 10 min before repeating.
 
 ### Rule 4 — Out of Range → ALERT
-⚠️ Price out of range → **immediate alert** (v2: no 5-min delay, structured signal handles confirmation)
+🔴 Price out of range → **immediate alert** with migration suggestion. No debounce.
 
-### Rule 5 — Overnight Pause
-🌙 **Pause at 11 PM**, resume at **6:30 AM** (EDT/EST)
+### Rule 5 — Quiet Hours
+🌙 **11 PM – 6 AM ET** → truly silent. No message, no Telegram noise.
 
-### Rule 6 — Recovery Alert
-🔔 When price returns to range after being out → alert with "recovered"
+### Rule 6 — Capital Add / DCA
+💰 When Jordan adds capital or DCAs, show the **full AAE suite**: fee efficiency, position value, milestone progress, next rank target ($5/day = Recruit).
 
 ---
 

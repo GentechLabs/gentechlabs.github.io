@@ -307,6 +307,60 @@ console.log(data); // { symbol: 'ETH', price: 3500.42, ... }
 
 ---
 
+## Lesson 2.6: DNS — A Records vs CNAMEs (and the Loop That Broke Our APIs)
+
+### The Two Record Types
+
+When you put your Worker behind a custom domain (like `api.your-site.com` instead of `your-worker.workers.dev`), you need a DNS record. Two options:
+
+| Record | What It Does | Example |
+|--------|-------------|---------|
+| **A record** | Points a name directly to an IP address | `rugcheck` → `2.24.195.196` |
+| **CNAME** | Points a name to another domain name | `rugcheck` → `gentechlabs.net` |
+
+### The Rule
+
+- **A record** → your server's IP. Use this for anything running on a VPS.
+- **CNAME** → a Cloudflare Worker URL. Use this for Workers.
+
+### The Loop That Broke Our APIs
+
+We had `rugcheck.gentechlabs.net` as a CNAME pointing to `gentechlabs.net`. The problem? `gentechlabs.net` itself is proxied through Cloudflare (orange cloud). So Cloudflare asked itself "where is gentechlabs.net?" and got back its own IP. It tried to connect to itself → **522 error**. The API was down for days and we didn't know why.
+
+The same issue affected `deals`, `gas`, `prices`, and `security` — all CNAMEs pointing back to the proxied root domain.
+
+### The Fix
+
+Delete the CNAME, add an A record pointing to your server's real IP:
+
+| Step | Action |
+|------|--------|
+| 1 | Delete the CNAME record |
+| 2 | Add an A record: Name = subdomain, IPv4 = your server IP |
+| 3 | Toggle the orange cloud (proxy) ON |
+| 4 | Save |
+
+### When to Use Each
+
+```
+A record  → VPS-hosted APIs (rugcheck, prices, gas, security)
+CNAME    → Cloudflare Workers (api → your-worker.workers.dev)
+CNAME    → DO NOT point to a proxied root domain (causes loop)
+```
+
+### Quick Test
+
+After fixing DNS, verify with curl:
+
+```bash
+# Should return 200, not 522
+curl -s -o /dev/null -w "%{http_code}" https://rugcheck.your-site.com/v1/health
+```
+
+If you get 200, the loop is broken. If you still get 522, check that the A record points to your actual server IP and the orange cloud is on.
+
+---
+
 ## Hands-on Exercise: Deploy a "Hello World" Paid Endpoint in 15 Minutes
 
 ### Goal
