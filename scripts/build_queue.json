@@ -1,13 +1,13 @@
 {
   "version": 10,
-  "updated": "2026-07-20 — Nightly maintenance: removed 13 shipped items, fixed duplicate ID 36→40",
+  "updated": "2026-07-20 \u2014 Nightly digest: fixed summary counts (handoff added items without updating), renumbered duplicate IDs 39\u219247, 40\u219248",
   "summary": {
-    "total": 28,
-    "shipped": 13,
-    "in_progress": 8,
-    "pending": 14,
+    "total": 37,
+    "shipped": 0,
+    "in_progress": 9,
+    "pending": 22,
     "blocked": 6,
-    "needs_jordan": 7
+    "needs_jordan": 14
   },
   "items": [
     {
@@ -23,18 +23,18 @@
     },
     {
       "id": 2,
-      "name": "Sell APIs to AI Agents — Pay-Skills PR #154",
+      "name": "Sell APIs to AI Agents \u2014 Pay-Skills PR #154",
       "difficulty": "easy",
       "priority": "high",
       "status": "in_progress",
       "assigned_to": "gentech",
       "platform": "cloud",
       "needs_jordan": false,
-      "detail": "Pay-skills PR #154 (OPEN): 12 GenTech x402 API services submitted to solana-foundation/pay-skills. PR title: 'feat: Add GenTech Labs — 12 x402 API services'. Status: OPEN, awaiting upstream review. Follow-up in item #50."
+      "detail": "Pay-skills PR #154 (OPEN): 12 GenTech x402 API services submitted to solana-foundation/pay-skills. PR title: 'feat: Add GenTech Labs \u2014 12 x402 API services'. Status: OPEN, awaiting upstream review. Follow-up in item #50."
     },
     {
       "id": 3,
-      "name": "Sell APIs to AI Agents — Phase 2: Deploy & List",
+      "name": "Sell APIs to AI Agents \u2014 Phase 2: Deploy & List",
       "difficulty": "medium",
       "priority": "high",
       "status": "pending",
@@ -45,65 +45,71 @@
     },
     {
       "id": 4,
-      "name": "x402 Foundation — Contribute to Core Protocol (Ripple/NEAR/Cloudflare ecosystem)",
+      "name": "x402 Foundation \u2014 Contribute to Core Protocol (Ripple/NEAR/Cloudflare ecosystem)",
       "difficulty": "medium",
       "priority": "urgent",
       "status": "in_progress",
       "assigned_to": "forge",
-      "detail": "Contribute to github.com/x402-foundation/x402. We have a production x402 gateway — rare expertise. Focus: XRPL + RLUSD payment patterns, NEAR agent integration patterns. Join Slack (slack.x402.org), submit PR with our x402 learnings.",
-      "note": "Handed to Forge. Two PRs already merged this week. Notifications + Slack + further protocol contributions."
+      "detail": "Contribute to github.com/x402-foundation/x402. We have a production x402 gateway \u2014 rare expertise. Focus: XRPL + RLUSD payment patterns, NEAR agent integration patterns. Join Slack (slack.x402.org), submit PR with our x402 learnings.",
+      "note": "Handed to Forge. Two PRs already merged this week. Notifications + Slack + further protocol contributions.",
+      "platform": "either"
     },
     {
       "id": 5,
-      "name": "Ripple XRPL — Agent Wallet + Payments Skills Contribution",
+      "name": "Ripple XRPL \u2014 Agent Wallet + Payments Skills Contribution",
       "difficulty": "medium",
       "priority": "urgent",
       "status": "in_progress",
       "assigned_to": "gentech",
       "detail": "XRPL skills ecosystem mapped. x402 compliance skill drafted at 10-Labs/xrpl-x402-compliance-skill.md (9.3KB). Covers: 402 challenge handling, RLUSD settlement, facilitator integration, agent-to-agent patterns. PR target: add to XRPLF/xrpl-dev-portal/.claude/skills/xrpl-skills/ as xrpl-x402-compliance. Needs Jordan to fork repo and submit PR.",
-      "note": "XRPL skills ecosystem mapped. Gap: no x402 compliance skill. t54-labs/x402-xrpl is the facilitator. PR target: add x402 compliance skill to XRPLF/xrpl-dev-portal/.claude/skills/xrpl-skills/"
+      "note": "XRPL skills ecosystem mapped. Gap: no x402 compliance skill. t54-labs/x402-xrpl is the facilitator. PR target: add x402 compliance skill to XRPLF/xrpl-dev-portal/.claude/skills/xrpl-skills/",
+      "platform": "either"
     },
     {
       "id": 6,
-      "name": "NEAR Protocol — AI Agent Integration + x402",
+      "name": "NEAR Protocol \u2014 AI Agent Integration + x402",
       "difficulty": "medium",
       "priority": "urgent",
       "status": "in_progress",
       "assigned_to": "gentech",
       "detail": "NEAR intents agent example repo stale (Feb 2025). x402 integration PR draft at 10-Labs/near-x402-integration-pr-draft.md. Covers: x402 payment flow for NEAR agents, Q402 integration, cross-chain data access. Needs Jordan to fork near-examples/near-intents-agent-example and submit PR.",
-      "note": "near-examples/near-intents-agent-example found (stale Feb 2025). NEAR is x402 Foundation member. Gap: no x402 integration in agent examples. PR target: add x402 payment flow to near-intents-agent-example"
+      "note": "near-examples/near-intents-agent-example found (stale Feb 2025). NEAR is x402 Foundation member. Gap: no x402 integration in agent examples. PR target: add x402 payment flow to near-intents-agent-example",
+      "platform": "either"
     },
     {
       "id": 7,
-      "name": "Cloudflare Gateway — x402 Playground + Deploy GenTech on Workflows",
+      "name": "Cloudflare Gateway \u2014 x402 Playground + Deploy GenTech on Workflows",
       "difficulty": "easy",
       "priority": "urgent",
       "status": "pending",
       "assigned_to": "forge",
       "needs_jordan": true,
       "detail": "Jordan already on Cloudflare Gateway waitlist. When approved: deploy our x402 gateway on Cloudflare Workers (withX402() support built-in). Also explore Cloudflare Agents SDK + MCP x402 integration.",
-      "note": "Handed to Forge. Jordan on waitlist."
+      "note": "Handed to Forge. Jordan on waitlist.",
+      "platform": "either"
     },
     {
       "id": 8,
-      "name": "Agentic Treasury — Build P2P Causes + Yield Brain",
+      "name": "Agentic Treasury \u2014 Build P2P Causes + Yield Brain",
       "difficulty": "hard",
       "priority": "high",
       "status": "pending",
       "assigned_to": "forge",
       "needs_jordan": false,
-      "detail": "Build the three pillars: Yield Brain (AAE), Payment Router (x402), P2P Causes (funding platform). Spec at 00-HQ/agentic-treasury-spec.md."
+      "detail": "Build the three pillars: Yield Brain (AAE), Payment Router (x402), P2P Causes (funding platform). Spec at 00-HQ/agentic-treasury-spec.md.",
+      "platform": "either"
     },
     {
       "id": 10,
-      "name": "NVIDIA SkillSpector — x402 YARA Rules Contribution",
+      "name": "NVIDIA SkillSpector \u2014 x402 YARA Rules Contribution",
       "difficulty": "medium",
       "priority": "low",
       "status": "pending",
       "assigned_to": "gentech",
       "needs_jordan": false,
       "detail": "Add x402/payment security YARA rules. Catch hardcoded keys, unsafe payTo manipulation. Use + Contribute + Integrate.",
-      "note": "Researched Jul 20: SkillSpector 2.3.13 (13.4k stars). 68 vulnerability patterns across 17 categories. YARA rules are packaged internally — the repo uses YARA as one of many analyzers. x402/payment security YARA rules would be a meaningful contribution. Needs: (1) clone repo, (2) study existing YARA rule format, (3) write rules for hardcoded API keys, unsafe payTo manipulation, x402 proof forgery. Deferred — medium effort, low urgency."
+      "note": "Researched Jul 20: SkillSpector 2.3.13 (13.4k stars). 68 vulnerability patterns across 17 categories. YARA rules are packaged internally \u2014 the repo uses YARA as one of many analyzers. x402/payment security YARA rules would be a meaningful contribution. Needs: (1) clone repo, (2) study existing YARA rule format, (3) write rules for hardcoded API keys, unsafe payTo manipulation, x402 proof forgery. Deferred \u2014 medium effort, low urgency.",
+      "platform": "either"
     },
     {
       "id": 11,
@@ -113,53 +119,58 @@
       "status": "pending",
       "assigned_to": "gentech",
       "needs_jordan": true,
-      "detail": "Launch $GENTECH on Bankr. 100B supply, 85% LP, 15% creator vesting. Needs Jordan's wallet connect."
+      "detail": "Launch $GENTECH on Bankr. 100B supply, 85% LP, 15% creator vesting. Needs Jordan's wallet connect.",
+      "platform": "either"
     },
     {
       "id": 12,
-      "name": "Arc Programmable Money Hackathon — Agentic Treasury Submission",
+      "name": "Arc Programmable Money Hackathon \u2014 Agentic Treasury Submission",
       "difficulty": "hard",
       "priority": "high",
       "status": "pending",
       "assigned_to": "gentech",
       "needs_jordan": true,
-      "detail": "Encode Club x Arc hackathon. Functional MVP of Agentic Treasury: yield brain + payment router + P2P causes."
+      "detail": "Encode Club x Arc hackathon. Functional MVP of Agentic Treasury: yield brain + payment router + P2P causes.",
+      "platform": "either"
     },
     {
       "id": 13,
-      "name": "Circle Developer Grant — Agentic Treasury (Arc pivot)",
+      "name": "Circle Developer Grant \u2014 Agentic Treasury (Arc pivot)",
       "difficulty": "medium",
       "priority": "high",
       "status": "pending",
       "assigned_to": "gentech",
       "needs_jordan": false,
       "detail": "Tiered USDC funding. Focus #1: Agentic economic activity. Apply at circle.questbook.app.",
-      "note": "Pivot to Arc-oriented. Submit after hackathon."
+      "note": "Pivot to Arc-oriented. Submit after hackathon.",
+      "platform": "either"
     },
     {
       "id": 14,
-      "name": "Lens AI Integration — Verified Data Source",
+      "name": "Lens AI Integration \u2014 Verified Data Source",
       "difficulty": "medium",
       "priority": "high",
       "status": "blocked",
       "assigned_to": "gentech",
       "needs_jordan": false,
       "detail": "RESEARCHED Jul 19: 'Lens AI' appears to be Arclens (Arc ecosystem hub). ERC-8004 agent ID 842439 doesn't resolve on any chain. Arclens runs x402 oracle for Arc project risk verdicts. Next step: contact Arclens team about registering GenTech as verified data source. Needs Jordan to reach out.",
-      "blocked_on": null
+      "blocked_on": null,
+      "platform": "either"
     },
     {
       "id": 15,
-      "name": "Arc x402 Gateway — Deploy on Arc Testnet",
+      "name": "Arc x402 Gateway \u2014 Deploy on Arc Testnet",
       "difficulty": "medium",
       "priority": "high",
       "status": "in_progress",
       "assigned_to": "gentech",
       "needs_jordan": false,
-      "detail": "Arc x402 Gateway built and tested at /root/repos/arc-x402-gateway/. 15/15 tests pass. FastAPI gateway with 3 pricing tiers (micro/standard/premium), HMAC proof verification, simulation mode, OpenAPI spec. README, LICENSE, .gitignore, .env.example all present. Needs: (1) RECIPIENT_ADDRESS from Jordan, (2) deploy to VPS port 8088, (3) test against real Arc testnet RPC."
+      "detail": "Arc x402 Gateway built and tested at /root/repos/arc-x402-gateway/. 15/15 tests pass. FastAPI gateway with 3 pricing tiers (micro/standard/premium), HMAC proof verification, simulation mode, OpenAPI spec. README, LICENSE, .gitignore, .env.example all present. Needs: (1) RECIPIENT_ADDRESS from Jordan, (2) deploy to VPS port 8088, (3) test against real Arc testnet RPC.",
+      "platform": "either"
     },
     {
       "id": 16,
-      "name": "PixelRAG — Visual Search Demo",
+      "name": "PixelRAG \u2014 Visual Search Demo",
       "difficulty": "medium",
       "priority": "high",
       "status": "pending",
@@ -171,7 +182,7 @@
     },
     {
       "id": 22,
-      "name": "Agent Credit Score — Content Series",
+      "name": "Agent Credit Score \u2014 Content Series",
       "difficulty": "easy",
       "priority": "high",
       "status": "in_progress",
@@ -183,29 +194,29 @@
     },
     {
       "id": 24,
-      "name": "Q402 × Agent Kit Integration",
+      "name": "Q402 \u00d7 Agent Kit Integration",
       "difficulty": "medium",
       "priority": "high",
       "status": "in_progress",
       "assigned_to": "forge",
       "platform": "cloud",
       "needs_jordan": false,
-      "detail": "Q402 trial key live (q402_live_37…, 2000 credits, BNB chain). API key config resolved. Forge can now: (1) verify Trust Receipt creation, (2) test AAE enforcement hooks, (3) package as Agent Kit module."
+      "detail": "Q402 trial key live (q402_live_37\u2026, 2000 credits, BNB chain). API key config resolved. Forge can now: (1) verify Trust Receipt creation, (2) test AAE enforcement hooks, (3) package as Agent Kit module."
     },
     {
       "id": 25,
-      "name": "Submit GenTech Plugin to Superpowers (obra, 257k⭐)",
+      "name": "Submit GenTech Plugin to Superpowers (obra, 257k\u2b50)",
       "status": "pending",
       "assigned_to": "gentech",
       "priority": "medium",
       "difficulty": "medium",
       "platform": "cloud",
-      "notes": "GENTECH INVESTIGATED Jul 18: Superpowers repo has AGENTS.md forbidding agent-submitted PRs (94% rejection rate). Our plugin repo (ProtoJay4789/gentech-superpowers) is already public + installable directly. Submitting to the obra marketplace requires a human-maintained PR per their guidelines — agent-submitted PRs are explicitly rejected and would damage Jordan's reputation. Recommended path: Jordan reviews our plugin and, if desired, manually opens a PR to the obra/superpowers-marketplace repo.",
+      "notes": "GENTECH INVESTIGATED Jul 18: Superpowers repo has AGENTS.md forbidding agent-submitted PRs (94% rejection rate). Our plugin repo (ProtoJay4789/gentech-superpowers) is already public + installable directly. Submitting to the obra marketplace requires a human-maintained PR per their guidelines \u2014 agent-submitted PRs are explicitly rejected and would damage Jordan's reputation. Recommended path: Jordan reviews our plugin and, if desired, manually opens a PR to the obra/superpowers-marketplace repo.",
       "note": "One-time PR to obra (257k stars). Do when model routing is final."
     },
     {
       "id": 27,
-      "name": "Prediction Market — Fed Decision Betting",
+      "name": "Prediction Market \u2014 Fed Decision Betting",
       "difficulty": "medium",
       "priority": "low",
       "status": "pending",
@@ -217,19 +228,19 @@
     },
     {
       "id": 28,
-      "name": "Chain PR Blitz — Umbrella (AgentKit + r0x + Avalanche)",
+      "name": "Chain PR Blitz \u2014 Umbrella (AgentKit + r0x + Avalanche)",
       "difficulty": "medium",
       "priority": "low",
       "status": "pending",
       "assigned_to": "gentech",
       "platform": "cloud",
       "needs_jordan": false,
-      "detail": "Umbrella: 3 Chain PR opportunities.\n- Coinbase AgentKit: Issue #1364 opened. PR #1375 (OPEN, MERGEABLE, updated Jul 17) adds GenTech as x402 facilitator.\n- Robinhood Chain r0x: Not yet started — integrate with nhevers/project-r0x.\n- Avalanche AI Resources: PR #443 (OPEN) submitted to caramaschiHG/awesome-ai-agents-2026 adding GenTech Agent Kit to Agent Frameworks.",
+      "detail": "Umbrella: 3 Chain PR opportunities.\n- Coinbase AgentKit: Issue #1364 opened. PR #1375 (OPEN, MERGEABLE, updated Jul 17) adds GenTech as x402 facilitator.\n- Robinhood Chain r0x: Not yet started \u2014 integrate with nhevers/project-r0x.\n- Avalanche AI Resources: PR #443 (OPEN) submitted to caramaschiHG/awesome-ai-agents-2026 adding GenTech Agent Kit to Agent Frameworks.",
       "note": "Low urgency. Batch with other ecosystem PRs."
     },
     {
       "id": 31,
-      "name": "AgentBridge — Deploy to Base Sepolia",
+      "name": "AgentBridge \u2014 Deploy to Base Sepolia",
       "difficulty": "easy",
       "priority": "high",
       "status": "blocked",
@@ -241,7 +252,7 @@
     },
     {
       "id": 32,
-      "name": "GenTech Bank — Agent Neobank on Sana",
+      "name": "GenTech Bank \u2014 Agent Neobank on Sana",
       "difficulty": "medium",
       "priority": "high",
       "status": "blocked",
@@ -266,7 +277,7 @@
     },
     {
       "id": 34,
-      "name": "GenLayer — Builder Points + Intelligent Contract",
+      "name": "GenLayer \u2014 Builder Points + Intelligent Contract",
       "difficulty": "easy",
       "priority": "low",
       "status": "blocked",
@@ -291,31 +302,118 @@
     },
     {
       "id": 39,
-      "name": "Dexter-DAO SDK Integration — Evaluate + Plan",
+      "name": "Dexter-DAO SDK Integration \u2014 Evaluate + Plan",
       "status": "pending",
       "priority": "high",
       "assigned_to": "gentech",
       "platform": "cloud",
       "note": "Integrate @dexterai/x402 into GenTech stack. Tabs (Solana vaults), batch settlement (EVM), one-shot payments. Cross-pollinate: add tab support to our gateway, add our compliance patterns to their SDK.",
-      "detail": "RESEARCHED Jul 20: @dexterai/x402 v5.4.2 (TypeScript, npm). Key features: (1) Tabs — non-custodial Solana vaults with passkey-based spending limits, on-chain program enforces caps; (2) One-shot x402 across 11 chains (Solana, Base, Polygon, Arbitrum, Optimism, Avalanche, BSC, World Chain, Monad, Robinhood Chain, SKALE); (3) Batch settlement (EVM) — prepay escrow, off-chain vouchers; (4) Discovery/auto-listing through Dexter facilitator. Cross-pollination plan: (A) Add tab middleware to our Arc x402 gateway — tabOrExactMiddleware supports both tab and one-shot; (B) Add our compliance patterns to their SDK (Zod validation code ready at /root/dexter-sdk-full/); (C) Register our APIs on Dexter facilitator for auto-discovery. PR #36 (Zod validation) code ready at /root/dexter-sdk-full/ — needs Jordan to fork and submit."
+      "detail": "RESEARCHED Jul 20: @dexterai/x402 v5.4.2 (TypeScript, npm). Key features: (1) Tabs \u2014 non-custodial Solana vaults with passkey-based spending limits, on-chain program enforces caps; (2) One-shot x402 across 11 chains (Solana, Base, Polygon, Arbitrum, Optimism, Avalanche, BSC, World Chain, Monad, Robinhood Chain, SKALE); (3) Batch settlement (EVM) \u2014 prepay escrow, off-chain vouchers; (4) Discovery/auto-listing through Dexter facilitator. Cross-pollination plan: (A) Add tab middleware to our Arc x402 gateway \u2014 tabOrExactMiddleware supports both tab and one-shot; (B) Add our compliance patterns to their SDK (Zod validation code ready at /root/dexter-sdk-full/); (C) Register our APIs on Dexter facilitator for auto-discovery. PR #36 (Zod validation) code ready at /root/dexter-sdk-full/ \u2014 needs Jordan to fork and submit.",
+      "difficulty": "medium"
     },
     {
       "id": 40,
-      "name": "Dexter-DAO PR #36 — Submit Zod Validation (manual fork)",
+      "name": "Dexter-DAO PR #36 \u2014 Submit Zod Validation (manual fork)",
       "status": "pending",
       "priority": "high",
       "assigned_to": "jordan",
       "platform": "jordan",
-      "note": "Code committed and pushed to ProtoJay4789:feat/compliance-scanner (+362 lines). PR creation failed due to GitHub API rate limit (Jul 20). Retry when rate limit resets."
+      "note": "Code committed and pushed to ProtoJay4789:feat/compliance-scanner (+362 lines). PR creation failed due to GitHub API rate limit (Jul 20). Retry when rate limit resets.",
+      "difficulty": "easy"
     },
     {
       "id": 37,
-      "name": "x402 Compliance Scanner — Open PR #2905",
+      "name": "x402 Compliance Scanner \u2014 Open PR #2905",
       "status": "pending",
       "priority": "high",
       "assigned_to": "gentech",
       "platform": "cloud",
-      "note": "Code committed and pushed to ProtoJay4789:feat/compliance-scanner (+362 lines). PR creation failed due to GitHub API rate limit. Retry: gh pr create --repo x402-foundation/x402 --head ProtoJay4789:feat/compliance-scanner --base main --title 'feat(examples): add x402 compliance scanner' --body 'Adds portable Python compliance scanner for x402 endpoint validation.'"
+      "note": "Code committed and pushed to ProtoJay4789:feat/compliance-scanner (+362 lines). PR creation failed due to GitHub API rate limit. Retry: gh pr create --repo x402-foundation/x402 --head ProtoJay4789:feat/compliance-scanner --base main --title 'feat(examples): add x402 compliance scanner' --body 'Adds portable Python compliance scanner for x402 endpoint validation.'",
+      "difficulty": "medium"
+    },
+    {
+      "id": 38,
+      "name": "Agent Arcade \u2014 Build Phase 1",
+      "status": "pending",
+      "priority": "medium",
+      "assigned_to": "forge",
+      "platform": "desktop",
+      "note": "Browser-based agent arcade. Spec at 10-Labs/agent-arcade-build-queue.md. Lobby page, poker cabinet (already built), MCP server per game, x402 rebuys, ARC stablecoin. Forge's next major build.",
+      "difficulty": "hard"
+    },
+    {
+      "id": 47,
+      "name": "Remotion Video Pipeline \u2014 Social Media Engine Extension",
+      "status": "pending",
+      "priority": "medium",
+      "assigned_to": "forge",
+      "platform": "desktop",
+      "note": "Extend Social Media Engine cron (e7b632043e30, Wed/Sat 10am) with Remotion video rendering. Forge runs a 7pm cron on RTX 3070: picks up the text draft, renders a short video via Remotion (React \u2192 MP4), delivers to Entertainment group. Needs: Remotion project setup, video template components, cron job on Forge's desktop.",
+      "difficulty": "medium"
+    },
+    {
+      "id": 48,
+      "name": "Agent Rug 2.0 \u2014 Security Platform",
+      "status": "in_progress",
+      "priority": "high",
+      "assigned_to": "gentech",
+      "platform": "cloud",
+      "note": "Expand from Solana token scanner to full agent security platform. Agent verification, contract verification, variant detection, attack vector mapping. Research phase: existing tools (Token Security, CertiK AI Auditor, Hacken Audit Agent), MCP attack vectors (Unit 42 findings), agent CVEs (+255% YoY). Build on top of rugcheck v2 API.",
+      "difficulty": "hard"
+    },
+    {
+      "id": 41,
+      "name": "GenTech DeFi Model \u2014 Fine-Tuned Financial AI",
+      "status": "pending",
+      "priority": "low",
+      "assigned_to": "jordan",
+      "platform": "jordan",
+      "note": "Fine-tune DeepSeek R1 Distill 32B on proprietary DeFi data. 26 training pairs ready. Needs $30-60 USDC for Modal GPU run."
+    },
+    {
+      "id": 42,
+      "name": "EvoMap Integration \u2014 Agent Pattern Capsules",
+      "status": "pending",
+      "priority": "low",
+      "assigned_to": "jordan",
+      "platform": "jordan",
+      "note": "Publish agent patterns as EvoMap Capsules. CLI: npm install -g @evomap/evolver. Needs Jordan signup."
+    },
+    {
+      "id": 43,
+      "name": "Sana Wallet Integration \u2014 Agent Visa Card",
+      "status": "pending",
+      "priority": "low",
+      "assigned_to": "jordan",
+      "platform": "jordan",
+      "note": "Sana bot provides Visa card + USDC on/off-ramp for agents. GenTech provides DeFi yield + x402 payments. Needs Jordan account at sana.bot/gateway."
+    },
+    {
+      "id": 44,
+      "name": "Agents as Pets \u2014 Interactive AI Companion",
+      "status": "pending",
+      "priority": "low",
+      "assigned_to": "jordan",
+      "platform": "jordan",
+      "note": "Tamagotchi-style agent with real utility \u2014 works DeFi/content for you. Care for it \u2192 it works \u2192 earn rewards \u2192 upgrade. Needs full spec."
+    },
+    {
+      "id": 45,
+      "name": "CMC Labs Accelerator \u2014 Application",
+      "status": "pending",
+      "priority": "high",
+      "assigned_to": "jordan",
+      "platform": "jordan",
+      "note": "Jordan handles when home. Draft narrative ready (AAE, Agent Credit Score, AgentEscrow)."
+    },
+    {
+      "id": 46,
+      "name": "Superteam Earn \u2014 KYC Submission",
+      "status": "pending",
+      "priority": "high",
+      "assigned_to": "jordan",
+      "platform": "jordan",
+      "note": "Submit KYC on Superteam Earn page to unlock first 100 USDG tranche. Jordan handles when home."
     }
   ],
   "consolidation_notes": [
