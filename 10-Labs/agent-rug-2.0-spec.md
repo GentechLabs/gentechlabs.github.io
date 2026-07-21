@@ -102,11 +102,12 @@ All paid via x402 micropayments (same as rugcheck v2).
 - [x] CORS, rate limiting, error handling
 - [x] Cloudflare DNS fixed (A record → 2.24.195.196)
 
-### Phase 2: Agent Identity (Next)
-- [ ] ERC-8004 registry integration
-- [ ] Wallet reputation scoring (on-chain history analysis)
-- [ ] Agent verification endpoint (`/v1/agent/{id}`)
-- [ ] Tests for identity verification
+### Phase 2: Agent Identity (Current)
+- [x] ERC-8004 registry integration (simulation mode)
+- [x] Wallet reputation scoring (on-chain history analysis)
+- [x] Agent verification endpoint (`/v1/agent/{id}`)
+- [x] Tests for identity verification (37 tests, all passing)
+- [ ] Real on-chain ERC-8004 lookup (Brickken MCP integration)
 
 ### Phase 3: MCP Trust Scoring
 - [ ] MCP server schema analysis

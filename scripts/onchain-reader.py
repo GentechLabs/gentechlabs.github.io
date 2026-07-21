@@ -53,10 +53,10 @@ DEX_CONFIGS = {
         "dexscreener_chain": "avalanche",
         "tokenX": "WAVAX",
         "tokenY": "USDC",
-        # ABI function selectors (4-byte)
-        "getActiveId": "0x80afabfa",  # getActiveId()
-        "getBin": "0x4f019328",       # getBin(uint24)
-        "getReserves": "0x0902f1ac",  # getReserves()
+        # ABI function selectors (4-byte) — CORRECT keccak256 (NOT sha3-256!)
+        "getActiveId": "0xdbe65edc",  # keccak256("getActiveId()")[:4]
+        "getBin": "0x0abe9688",       # keccak256("getBin(uint24)")[:4]
+        "getReserves": "0x0902f1ac",  # keccak256("getReserves()")[:4]
     },
     "uniswap_v3": {
         "name": "Uniswap V3",
@@ -215,10 +215,10 @@ def get_lfj_position(wallet, pool_address):
         # Scan a range around active bin (most positions span ~40-80 bins)
         scan_range = range(max(0, active_bin - 100), active_bin + 100)
         for bin_id in scan_range:
-            # balanceOf(address, uint256) selector: 0x016c0910
+            # balanceOf(address, uint256) selector: 0x00fdd58e
             padded_wallet = wallet.lower().replace("0x", "").zfill(64)
             padded_bin = hex(bin_id)[2:].zfill(64)
-            result = eth_call(chain, pool_address, f"0x016c0910{padded_wallet}{padded_bin}")
+            result = eth_call(chain, pool_address, f"0x00fdd58e{padded_wallet}{padded_bin}")
             if result and result != "0x":
                 balance = int(result, 16)
                 if balance > 0:
