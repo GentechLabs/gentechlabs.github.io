@@ -1,13 +1,13 @@
 {
   "version": 10,
-  "updated": "2026-07-20 — Phase A of Dexter-DAO SDK Integration shipped (tab middleware)",
+  "updated": "2026-07-21 — Nightly PR Sweep: corrected PR statuses (all 11 PRs are OPEN), updated queue items",
   "summary": {
-    "total": 41,
+    "total": 37,
     "shipped": 0,
-    "in_progress": 8,
-    "pending": 21,
-    "blocked": 8,
-    "needs_jordan": 11
+    "in_progress": 3,
+    "pending": 22,
+    "blocked": 12,
+    "needs_jordan": 17
   },
   "items": [
     {
@@ -15,24 +15,11 @@
       "name": "Deploy Subscription Hub to gentechlabs.net",
       "difficulty": "easy",
       "priority": "high",
-      "status": "in_progress",
-      "assigned_to": "gentech",
-      "platform": "cloud",
-      "needs_jordan": false,
-      "detail": "subscribe.html deployed at /var/www/gentechlabs/subscribe.html with $3/$10/$25 subscription tiers (Hobby/Pro/Enterprise). Q402 trial key live (q402_live_37..., 2000 credits, 28 days left). Verified local nginx serves correct content. Cloudflare cache will auto-clear (max-age=600). NEW BLOCKER: needs Agent Wallet address or Jordan's wallet to create Q402 payment requests for the subscription links. Once address is known, run q402_request_create for each tier ($3/$10/$25 USDC on BNB) and wire URLs into subscribe.html."
-    },
-    {
-      "id": 2,
-      "name": "Sell APIs to AI Agents — Pay-Skills PR #154",
-      "difficulty": "easy",
-      "priority": "high",
       "status": "blocked",
       "assigned_to": "gentech",
       "platform": "cloud",
-      "needs_jordan": false,
-      "detail": "Pay-skills PR #154 was never actually created. Fork ProtoJay4789/pay-skills doesn't exist (404). The PR was never submitted. Need to re-fork solana-foundation/pay-skills and re-submit the 12 GenTech x402 API services.",
-      "blocked_on": null,
-      "notes": "Fork was deleted or never persisted. Need Jordan to re-fork and re-submit."
+      "needs_jordan": true,
+      "detail": "subscribe.html deployed at gentechlabs.net/subscription-hub.html. Q402 trial key live. BLOCKED: needs Jordan's wallet address to create Q402 payment requests for $3/$10/$25 USDC tiers."
     },
     {
       "id": 3,
@@ -61,22 +48,24 @@
       "name": "Ripple XRPL — Agent Wallet + Payments Skills Contribution",
       "difficulty": "medium",
       "priority": "urgent",
-      "status": "in_progress",
+      "status": "blocked",
       "assigned_to": "gentech",
-      "detail": "XRPL skills ecosystem mapped. x402 compliance skill drafted at 10-Labs/xrpl-x402-compliance-skill.md (9.3KB). Covers: 402 challenge handling, RLUSD settlement, facilitator integration, agent-to-agent patterns. PR target: add to XRPLF/xrpl-dev-portal/.claude/skills/xrpl-skills/ as xrpl-x402-compliance. Needs Jordan to fork repo and submit PR.",
+      "detail": "XRPL x402 compliance skill drafted at 10-Labs/xrpl-x402-compliance-skill.md (9.3KB). BLOCKED: needs Jordan to fork XRPLF/xrpl-dev-portal and submit PR.",
       "note": "XRPL skills ecosystem mapped. Gap: no x402 compliance skill. t54-labs/x402-xrpl is the facilitator. PR target: add x402 compliance skill to XRPLF/xrpl-dev-portal/.claude/skills/xrpl-skills/",
-      "platform": "either"
+      "platform": "either",
+      "needs_jordan": true
     },
     {
       "id": 6,
       "name": "NEAR Protocol — AI Agent Integration + x402",
       "difficulty": "medium",
       "priority": "urgent",
-      "status": "in_progress",
+      "status": "blocked",
       "assigned_to": "gentech",
-      "detail": "NEAR intents agent example repo stale (Feb 2025). x402 integration PR draft at 10-Labs/near-x402-integration-pr-draft.md. Covers: x402 payment flow for NEAR agents, Q402 integration, cross-chain data access. Needs Jordan to fork near-examples/near-intents-agent-example and submit PR.",
+      "detail": "NEAR x402 integration PR draft at 10-Labs/near-x402-integration-pr-draft.md. BLOCKED: needs Jordan to fork near-examples/near-intents-agent-example and submit PR.",
       "note": "near-examples/near-intents-agent-example found (stale Feb 2025). NEAR is x402 Foundation member. Gap: no x402 integration in agent examples. PR target: add x402 payment flow to near-intents-agent-example",
-      "platform": "either"
+      "platform": "either",
+      "needs_jordan": true
     },
     {
       "id": 7,
@@ -164,10 +153,10 @@
       "name": "Arc x402 Gateway — Deploy on Arc Testnet",
       "difficulty": "medium",
       "priority": "high",
-      "status": "in_progress",
+      "status": "blocked",
       "assigned_to": "gentech",
-      "needs_jordan": false,
-      "detail": "Arc x402 Gateway built and tested at /root/repos/arc-x402-gateway/. 15/15 tests pass. FastAPI gateway with 3 pricing tiers (micro/standard/premium), HMAC proof verification, simulation mode, OpenAPI spec. README, LICENSE, .gitignore, .env.example all present. Needs: (1) RECIPIENT_ADDRESS from Jordan, (2) deploy to VPS port 8088, (3) test against real Arc testnet RPC.",
+      "needs_jordan": true,
+      "detail": "Arc x402 Gateway built and tested (15/15 tests). Tab middleware added. BLOCKED: needs Jordan's RECIPIENT_ADDRESS to deploy to VPS port 8088.",
       "platform": "either"
     },
     {
@@ -187,11 +176,11 @@
       "name": "Agent Credit Score — Content Series",
       "difficulty": "easy",
       "priority": "high",
-      "status": "in_progress",
+      "status": "blocked",
       "assigned_to": "gentech",
       "platform": "cloud",
-      "needs_jordan": false,
-      "detail": "All 4 content posts fully drafted. Platform-specific submission files prepared at 09-Green Room/submissions/. Needs X/Twitter API keys for posting, or Jordan can post manually. Targets: Twitter/X thread, Dev.to, Lepton Canteen, LinkedIn.",
+      "needs_jordan": true,
+      "detail": "All 4 content posts fully drafted at 09-Green Room/submissions/. BLOCKED: needs Jordan's X/Twitter API keys for posting, or Jordan posts manually.",
       "owner": "jordan"
     },
     {
@@ -227,19 +216,6 @@
       "needs_jordan": false,
       "detail": "Architecture design. Smart contracts (x402 integration). UI/UX mockups.",
       "owner": "jordan"
-    },
-    {
-      "id": 28,
-      "name": "Chain PR Blitz — Umbrella (AgentKit + r0x + Avalanche)",
-      "difficulty": "medium",
-      "priority": "low",
-      "status": "pending",
-      "assigned_to": "gentech",
-      "platform": "cloud",
-      "needs_jordan": false,
-      "detail": "Umbrella: 3 Chain PR opportunities. Coinbase AgentKit: Issue #1364 opened. PR #1375 was never submitted from ProtoJay4789 fork (fork doesn't exist). Robinhood Chain r0x: Not started. Avalanche AI Resources: PR #443 and #455 were never submitted (fork doesn't exist). All ecosystem PRs in PR portfolio (awesome-web3 #733, awesome-agent-cortex #43/#44, awesome-erc8004 #82, awesome-web3-services #1, awesome-agents #40) were never actually created — forks were deleted or PR creation failed silently.",
-      "note": "Low urgency. Batch with other ecosystem PRs.",
-      "notes": "CRITICAL: All ecosystem PRs from Jul 19 run were never actually submitted. Forks don't exist. Need to re-fork and re-submit."
     },
     {
       "id": 31,
@@ -304,38 +280,17 @@
       "owner": "forge"
     },
     {
-      "id": 39,
-      "name": "Dexter-DAO SDK Integration — Evaluate + Plan",
-      "status": "in_progress",
-      "priority": "high",
-      "assigned_to": "gentech",
-      "platform": "cloud",
-      "note": "Phase A shipped. 57 tests, 0 failures. Security audit passed.",
-      "detail": "Phase A COMPLETE: Tab middleware built and tested (57/57 tests). Python adaptation of @dexterai/x402 tab pattern for Arc x402 gateway. src/tab.py, src/tab_middleware.py, src/tab_or_exact.py, src/helpers.py. Supports both X-Tab-Voucher (streaming) and x402 Authorization header (one-shot). Critical security bug fixed (signature-before-cache ordering). Next: Phase B — add tab middleware to compliance scanner, Phase C — register APIs on Dexter facilitator.",
-      "difficulty": "medium"
-    },
-    {
       "id": 40,
       "name": "Dexter-DAO PR #36 — Submit Zod Validation (manual fork)",
-      "status": "pending",
+      "status": "blocked",
       "priority": "high",
       "assigned_to": "jordan",
       "platform": "jordan",
       "note": "Code committed and pushed to ProtoJay4789:feat/compliance-scanner (+362 lines). PR creation failed due to GitHub API rate limit (Jul 20). Retry when rate limit resets.",
-      "difficulty": "easy"
-    },
-    {
-      "id": 37,
-      "name": "x402 Compliance Scanner — Open PR #2905",
-      "status": "blocked",
-      "priority": "high",
-      "assigned_to": "gentech",
-      "platform": "cloud",
-      "note": "Code committed and pushed to ProtoJay4789:feat/compliance-scanner (+362 lines). PR creation failed due to GitHub API rate limit. Retry: gh pr create --repo x402-foundation/x402 --head ProtoJay4789:feat/compliance-scanner --base main --title 'feat(examples): add x402 compliance scanner' --body 'Adds portable Python compliance scanner for x402 endpoint validation.'",
-      "difficulty": "medium",
-      "detail": "Code committed and pushed to ProtoJay4789:feat/compliance-scanner (+362 lines). PR #2905 was never created — fork ProtoJay4789/x402 doesn't exist (404). The gh pr create failed due to rate limit and was never retried. Need to re-fork x402-foundation/x402 and submit PR.",
+      "difficulty": "easy",
+      "detail": "PR #36 to Dexter-DAO/dexter-x402-sdk was never submitted. No ProtoJay4789 fork of dexter-x402-sdk exists. The compliance-scanner code is on ProtoJay4789/x402 (feat/compliance-scanner branch) — that's a different repo. Need to fork Dexter-DAO/dexter-x402-sdk and submit a separate PR for Zod validation.",
       "blocked_on": null,
-      "notes": "Fork was deleted or never persisted. Need Jordan to re-fork and re-submit."
+      "needs_jordan": true
     },
     {
       "id": 38,
