@@ -116,11 +116,11 @@ All paid via x402 micropayments (same as rugcheck v2).
 - [ ] MCP trust score endpoint (`/v1/mcp/{url}`)
 
 ### Phase 4: x402 Payment Audit
-- [ ] 402 response shape validation
-- [ ] accepts[] schema verification
-- [ ] Proof verification patterns
-- [ ] Security header audit
-- [ ] x402 audit endpoint (`/v1/x402/{endpoint}`)
+- [x] 402 response shape validation
+- [x] accepts[] schema verification
+- [x] Proof verification patterns
+- [x] Security header audit
+- [x] x402 audit endpoint (`/v1/x402/{endpoint}`)
 
 ### Phase 5: Full Agent Scan
 - [ ] OWASP Agentic Top 10 coverage
@@ -149,9 +149,9 @@ All paid via x402 micropayments (same as rugcheck v2).
 
 ## 10. Next Steps
 
-1. [ ] Phase 2: Build agent identity verification
-2. [ ] Phase 3: Build MCP trust scoring
-3. [ ] Phase 4: Build x402 payment audit
+1. [x] Phase 2: Build agent identity verification
+2. [x] Phase 3: Build MCP trust scoring
+3. [x] Phase 4: Build x402 payment audit
 4. [ ] Phase 5: Full scan + reporting
 5. [ ] Deploy to production (extends existing rugcheck API)
 6. [ ] List on pay-skills catalog

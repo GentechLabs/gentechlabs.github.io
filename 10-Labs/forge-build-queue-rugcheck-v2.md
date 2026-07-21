@@ -1,3 +1,8 @@
+⚠️ **DEPRECATED — Build Queue moved to JSON**
+The canonical build queue is now at `scripts/build_queue.json`.
+This file is stale — do not edit or reference it.
+Run `python3 /root/.hermes/profiles/gentech/scripts/build_queue_tick.py` to regenerate the Forge handoff.
+
 # Forge Build Queue — Rugcheck v2 Fix
 
 **Priority:** High

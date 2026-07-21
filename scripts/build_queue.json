@@ -1,12 +1,12 @@
 {
   "version": 10,
   "summary": {
-    "total": 37,
-    "shipped": 0,
-    "in_progress": 3,
-    "pending": 22,
+    "total": 40,
+    "shipped": 1,
+    "in_progress": 2,
+    "pending": 26,
     "blocked": 12,
-    "needs_jordan": 17
+    "needs_jordan": 21
   },
   "items": [
     {
@@ -312,23 +312,14 @@
       "difficulty": "medium"
     },
     {
-      "id": 48,
-      "name": "Agent Rug 2.0 \u2014 Security Platform",
-      "status": "in_progress",
-      "priority": "high",
-      "assigned_to": "gentech",
-      "platform": "cloud",
-      "note": "Phase 3 (MCP Trust Scoring) built: mcp_trust.py + 34 tests, /v1/mcp/{url} endpoint live on port 8088. Detects tool poisoning, schema issues, provider reputation, security headers. Next: Phase 4 (x402 Payment Audit).",
-      "difficulty": "hard"
-    },
-    {
       "id": 41,
       "name": "GenTech DeFi Model \u2014 Fine-Tuned Financial AI",
       "status": "pending",
       "priority": "low",
       "assigned_to": "jordan",
       "platform": "jordan",
-      "note": "Fine-tune DeepSeek R1 Distill 32B on proprietary DeFi data. 26 training pairs ready. Needs $30-60 USDC for Modal GPU run."
+      "note": "Fine-tune DeepSeek R1 Distill 32B on proprietary DeFi data. 26 training pairs ready. Needs $30-60 USDC for Modal GPU run.",
+      "difficulty": "medium"
     },
     {
       "id": 42,
@@ -337,7 +328,8 @@
       "priority": "low",
       "assigned_to": "jordan",
       "platform": "jordan",
-      "note": "Publish agent patterns as EvoMap Capsules. CLI: npm install -g @evomap/evolver. Needs Jordan signup."
+      "note": "Publish agent patterns as EvoMap Capsules. CLI: npm install -g @evomap/evolver. Needs Jordan signup.",
+      "difficulty": "medium"
     },
     {
       "id": 43,
@@ -346,7 +338,8 @@
       "priority": "low",
       "assigned_to": "jordan",
       "platform": "jordan",
-      "note": "Sana bot provides Visa card + USDC on/off-ramp for agents. GenTech provides DeFi yield + x402 payments. Needs Jordan account at sana.bot/gateway."
+      "note": "Sana bot provides Visa card + USDC on/off-ramp for agents. GenTech provides DeFi yield + x402 payments. Needs Jordan account at sana.bot/gateway.",
+      "difficulty": "medium"
     },
     {
       "id": 44,
@@ -355,7 +348,8 @@
       "priority": "low",
       "assigned_to": "jordan",
       "platform": "jordan",
-      "note": "Tamagotchi-style agent with real utility \u2014 works DeFi/content for you. Care for it \u2192 it works \u2192 earn rewards \u2192 upgrade. Needs full spec."
+      "note": "Tamagotchi-style agent with real utility \u2014 works DeFi/content for you. Care for it \u2192 it works \u2192 earn rewards \u2192 upgrade. Needs full spec.",
+      "difficulty": "medium"
     },
     {
       "id": 45,
@@ -364,7 +358,8 @@
       "priority": "high",
       "assigned_to": "jordan",
       "platform": "jordan",
-      "note": "Jordan handles when home. Draft narrative ready (AAE, Agent Credit Score, AgentEscrow)."
+      "note": "Jordan handles when home. Draft narrative ready (AAE, Agent Credit Score, AgentEscrow).",
+      "difficulty": "medium"
     },
     {
       "id": 46,
@@ -373,7 +368,8 @@
       "priority": "high",
       "assigned_to": "jordan",
       "platform": "jordan",
-      "note": "Submit KYC on Superteam Earn page to unlock first 100 USDG tranche. Jordan handles when home."
+      "note": "Submit KYC on Superteam Earn page to unlock first 100 USDG tranche. Jordan handles when home.",
+      "difficulty": "medium"
     },
     {
       "id": 49,
@@ -418,6 +414,61 @@
       "platform": "jordan",
       "needs_jordan": true,
       "detail": "Log into OKX AI dev portal, review current A2MCP ASP listing. Update service description to include new endpoints (compliance scanner, Agent Credit Score). Consider adding A2A listing for custom services."
+    },
+    {
+      "id": 53,
+      "status": "pending",
+      "priority": "high",
+      "reason": "Shows GOAT we're building on their stack before July 29 call. Proves DevRel value.",
+      "name": "Submit GOAT AgentKit PR #7 \u2014 Compliance Plugin + ERC-8004 Fix",
+      "detail": "Manual web UI submission. Go to https://github.com/ProtoJay4789/goat-agentkit \u2192 Click 'Contribute' \u2192 'Open Pull Request' \u2192 Verify GOATNetwork/agentkit \u2190 ProtoJay4789:feat/compliance-plugin \u2192 Create PR. Code is already pushed and ready.",
+      "needs_jordan": true,
+      "difficulty": "easy",
+      "platform": "either",
+      "assigned_to": "jordan"
+    },
+    {
+      "id": 54,
+      "status": "pending",
+      "priority": "medium",
+      "name": "Atelier \u2014 Review Agent Profile",
+      "detail": "Log into useatelier.ai, check our agent listing, update services/endpoints",
+      "needs_jordan": true,
+      "difficulty": "easy",
+      "platform": "either",
+      "assigned_to": "jordan"
+    },
+    {
+      "id": 55,
+      "status": "pending",
+      "priority": "medium",
+      "name": "Swarms \u2014 Update Agent Listing",
+      "detail": "Log into Swarms marketplace, update agent name/description/pricing, enable x402 toggle",
+      "needs_jordan": true,
+      "difficulty": "easy",
+      "platform": "either",
+      "assigned_to": "jordan"
+    },
+    {
+      "id": 56,
+      "status": "pending",
+      "priority": "medium",
+      "name": "OKX AI \u2014 Review ASP Listing",
+      "detail": "Check our OKX AI marketplace listing, update with new endpoints/services",
+      "needs_jordan": true,
+      "difficulty": "easy",
+      "platform": "either",
+      "assigned_to": "jordan"
+    },
+    {
+      "id": 57,
+      "title": "Injective Labs \u2014 iAgent x402 Payment Integration",
+      "description": "Add x402 payment support to Injective's iAgent (50\u2b50, Python, AI agent fine-tuned on Injective trading). Pattern: same as GOAT AgentKit compliance plugin. Agents on Injective could pay for services through our gateway. Also explore injective-ts (154\u2b50) and sdk-python (46\u2b50) for x402 plugin integration.",
+      "effort": "Medium",
+      "status": "pending",
+      "priority": "high",
+      "reason": "Cosmos-based DeFi chain with EVM compatibility. iAgent is Python-based and agent-focused \u2014 natural fit for x402. 181 repos in ecosystem. Big distribution play.",
+      "requires_jordan": false
     }
   ],
   "consolidation_notes": [
@@ -448,5 +499,5 @@
     }
   },
   "note": "Pruned 7 items. Total: 43 -> 36",
-  "updated": "2026-07-22 \u2014 Nightly build: MCP Trust Scoring module built (Phase 3 of Agent Rug 2.0), 34 tests, endpoint live on port 8088"
+  "updated": "2026-07-21 22:31 UTC"
 }
