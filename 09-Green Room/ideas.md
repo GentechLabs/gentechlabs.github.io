@@ -76,6 +76,7 @@
 - **GenTech Suite — Milestones Layer** — `11-Mess Hall/ideas/genTech-milestones-spec.md`
 - **GenTech Suite — Activity/Hobby Layer** — `11-Mess Hall/ideas/activity-hobby-layer.md`
 - **Agent Kit Installer** — `11-Mess Hall/ideas/agent-kit-installer-spec.md`
+- **GenTech Career Prep** — AI career coach: interview prep, salary negotiation, job strategy, salary research. Born from Jordan's DevRel prep. "Level the playing field for people who don't know what they don't know."
 
 ---
 

@@ -1,9 +1,9 @@
 {
-  "lastUpdated": "2026-07-20T20:00:48.128696+00:00",
+  "lastUpdated": "2026-07-21T20:00:33.194599+00:00",
   "pool": "AVAX/USDC",
   "chain": "Avalanche",
   "dex": "LFJ",
-  "currentPrice": 6.55,
+  "currentPrice": 6.6,
   "priceChange24h": -2.37,
   "volume24h": 519740.09,
   "liquidity": 392758.8,
@@ -12,7 +12,7 @@
     "feeTier": "5bps",
     "shape": "curve",
     "displayShape": "Curve",
-    "currentPrice": 6.55,
+    "currentPrice": 6.6,
     "rangeMin": 6.4039,
     "rangeMax": 6.5463,
     "avaxAmount": 3.526087,
@@ -23,7 +23,7 @@
     "binStep": 10,
     "totalBins": 23,
     "inRange": false,
-    "entryTotal": 23.009387261908397
+    "entryTotal": 23.001494343333334
   },
   "fees": {
     "dailyFees": 0,
@@ -38,7 +38,7 @@
     "efficiencyZone": "Out of Range",
     "shape": "Curve",
     "rangeStatus": "Out of Range",
-    "currentPrice": 6.55,
+    "currentPrice": 6.6,
     "rangeMin": 6.4039,
     "rangeMax": 6.5463,
     "milestoneNext": "Scout",
@@ -46,7 +46,7 @@
     "milestoneProgress": 20.1
   },
   "marketIntel": {
-    "avaxPrice": 6.55,
+    "avaxPrice": 6.6,
     "change24h": -2.37,
     "volume24h": 519740.09,
     "tvl": 392758.8,
@@ -69,12 +69,12 @@
     "efficiencyZone": "Out of Range",
     "recommendedAction": "REBALANCE \u2014 price outside range",
     "dcaType": "None (Out of Range)",
-    "dcaDetails": "Price $6.55, out of range $6.4039-$6.5463",
+    "dcaDetails": "Price $6.6, out of range $6.4039-$6.5463",
     "rebalanceTrigger": "Price exits $6.4039-$6.5463",
     "compoundThreshold": 50,
     "cumulativeFees": 1.003,
     "riskLevel": "High",
-    "riskNote": "Price $6.55, 23% efficiency",
+    "riskNote": "Price $6.6, 23% efficiency",
     "shape": "Curve"
   },
   "regimeData": {
@@ -122,9 +122,9 @@
     "lpDailyFees": 0,
     "stakingApr": 5.2,
     "stakingDaily": 0.0034,
-    "hodlReturn": 5.14,
+    "hodlReturn": 5.94,
     "entryPrice": 6.23,
-    "currentPrice": 6.55,
+    "currentPrice": 6.6,
     "outperforming": false,
     "verdict": "LP losing vs staking"
   },
@@ -391,7 +391,7 @@
   ],
   "marketScenarios": {
     "currentConditions": {
-      "price": 6.55,
+      "price": 6.6,
       "trend": "sideways",
       "volatility24h": 0,
       "regime": "sideways",
@@ -401,7 +401,7 @@
       {
         "id": "bear_continued",
         "name": "Bear Continuation",
-        "subtitle": "AVAX drops to $4.58-$5.57",
+        "subtitle": "AVAX drops to $4.62-$5.61",
         "icon": "\ud83d\udc3b",
         "color": "#ef4444",
         "trigger": "BTC breaks below $60K",
@@ -415,7 +415,7 @@
       {
         "id": "sideways",
         "name": "Sideways Accumulation",
-        "subtitle": "AVAX trades $6.22-$6.88",
+        "subtitle": "AVAX trades $6.27-$6.93",
         "icon": "\u27a1\ufe0f",
         "color": "#f59e0b",
         "trigger": "BTC holds $62-68K",
@@ -429,7 +429,7 @@
       {
         "id": "bull",
         "name": "Bull Recovery",
-        "subtitle": "AVAX pushes to $7.86-$9.82",
+        "subtitle": "AVAX pushes to $7.92-$9.9",
         "icon": "\ud83d\udc02",
         "color": "#22c55e",
         "trigger": "BTC breaks $70K",
@@ -443,7 +443,7 @@
       {
         "id": "flash_crash",
         "name": "Flash Crash",
-        "subtitle": "AVAX drops to $3.27-$3.93",
+        "subtitle": "AVAX drops to $3.3-$3.96",
         "icon": "\u26a1",
         "color": "#8b5cf6",
         "trigger": "Black swan event",
@@ -459,17 +459,17 @@
       "currentScenario": "sideways",
       "alerts": [
         {
-          "price": 6.22,
+          "price": 6.27,
           "type": "danger",
           "message": "Below range \u2014 rebalance down"
         },
         {
-          "price": 5.57,
+          "price": 5.61,
           "type": "critical",
           "message": "Flash crash zone"
         },
         {
-          "price": 6.88,
+          "price": 6.93,
           "type": "info",
           "message": "Above range \u2014 rebalance up"
         }
@@ -477,7 +477,7 @@
     }
   },
   "ilCalculator": {
-    "currentPrice": 6.55,
+    "currentPrice": 6.6,
     "entryPrice": 6.23,
     "positionUsd": 23.73,
     "dailyFees": 0,
