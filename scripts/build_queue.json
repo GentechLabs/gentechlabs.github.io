@@ -1,13 +1,13 @@
 {
   "version": 10,
-  "updated": "2026-07-20 — Brain audit: checked all PR statuses, updated PR portfolio with closed #443, verified x402 scanner PR #2905 is live and mergeable",
+  "updated": "2026-07-20 — Phase A of Dexter-DAO SDK Integration shipped (tab middleware)",
   "summary": {
-    "total": 37,
+    "total": 41,
     "shipped": 0,
-    "in_progress": 9,
-    "pending": 22,
-    "blocked": 6,
-    "needs_jordan": 14
+    "in_progress": 8,
+    "pending": 21,
+    "blocked": 8,
+    "needs_jordan": 11
   },
   "items": [
     {
@@ -26,11 +26,13 @@
       "name": "Sell APIs to AI Agents — Pay-Skills PR #154",
       "difficulty": "easy",
       "priority": "high",
-      "status": "in_progress",
+      "status": "blocked",
       "assigned_to": "gentech",
       "platform": "cloud",
       "needs_jordan": false,
-      "detail": "Pay-skills PR #154 (OPEN, no maintainer action since Jul 12): 12 GenTech x402 API services submitted to solana-foundation/pay-skills. PR title: 'feat: Add GenTech Labs — 12 x402 API services'. Status: OPEN, awaiting upstream review."
+      "detail": "Pay-skills PR #154 was never actually created. Fork ProtoJay4789/pay-skills doesn't exist (404). The PR was never submitted. Need to re-fork solana-foundation/pay-skills and re-submit the 12 GenTech x402 API services.",
+      "blocked_on": null,
+      "notes": "Fork was deleted or never persisted. Need Jordan to re-fork and re-submit."
     },
     {
       "id": 3,
@@ -235,8 +237,9 @@
       "assigned_to": "gentech",
       "platform": "cloud",
       "needs_jordan": false,
-      "detail": "Umbrella: 3 Chain PR opportunities.\n- Coinbase AgentKit: Issue #1364 opened. PR #1375 (OPEN, MERGEABLE, updated Jul 17) adds GenTech as x402 facilitator.\n- Robinhood Chain r0x: Not yet started — integrate with nhevers/project-r0x.\n- Avalanche AI Resources: PR #443 (CLOSED, no merge) — replacement PR #455 (OPEN) submitted to caramaschiHG/awesome-ai-agents-2026 adding GenTech Agent Kit to Protocol Tooling.",
-      "note": "Low urgency. Batch with other ecosystem PRs."
+      "detail": "Umbrella: 3 Chain PR opportunities. Coinbase AgentKit: Issue #1364 opened. PR #1375 was never submitted from ProtoJay4789 fork (fork doesn't exist). Robinhood Chain r0x: Not started. Avalanche AI Resources: PR #443 and #455 were never submitted (fork doesn't exist). All ecosystem PRs in PR portfolio (awesome-web3 #733, awesome-agent-cortex #43/#44, awesome-erc8004 #82, awesome-web3-services #1, awesome-agents #40) were never actually created — forks were deleted or PR creation failed silently.",
+      "note": "Low urgency. Batch with other ecosystem PRs.",
+      "notes": "CRITICAL: All ecosystem PRs from Jul 19 run were never actually submitted. Forks don't exist. Need to re-fork and re-submit."
     },
     {
       "id": 31,
@@ -303,12 +306,12 @@
     {
       "id": 39,
       "name": "Dexter-DAO SDK Integration — Evaluate + Plan",
-      "status": "pending",
+      "status": "in_progress",
       "priority": "high",
       "assigned_to": "gentech",
       "platform": "cloud",
-      "note": "Integrate @dexterai/x402 into GenTech stack. Tabs (Solana vaults), batch settlement (EVM), one-shot payments. Cross-pollinate: add tab support to our gateway, add our compliance patterns to their SDK.",
-      "detail": "RESEARCHED Jul 20: @dexterai/x402 v5.4.2 (TypeScript, npm). Key features: (1) Tabs — non-custodial Solana vaults with passkey-based spending limits, on-chain program enforces caps; (2) One-shot x402 across 11 chains (Solana, Base, Polygon, Arbitrum, Optimism, Avalanche, BSC, World Chain, Monad, Robinhood Chain, SKALE); (3) Batch settlement (EVM) — prepay escrow, off-chain vouchers; (4) Discovery/auto-listing through Dexter facilitator. Cross-pollination plan: (A) Add tab middleware to our Arc x402 gateway — tabOrExactMiddleware supports both tab and one-shot; (B) Add our compliance patterns to their SDK (Zod validation code ready at /root/dexter-sdk-full/); (C) Register our APIs on Dexter facilitator for auto-discovery. PR #36 (Zod validation) code ready at /root/dexter-sdk-full/ — needs Jordan to fork and submit.",
+      "note": "Phase A shipped. 57 tests, 0 failures. Security audit passed.",
+      "detail": "Phase A COMPLETE: Tab middleware built and tested (57/57 tests). Python adaptation of @dexterai/x402 tab pattern for Arc x402 gateway. src/tab.py, src/tab_middleware.py, src/tab_or_exact.py, src/helpers.py. Supports both X-Tab-Voucher (streaming) and x402 Authorization header (one-shot). Critical security bug fixed (signature-before-cache ordering). Next: Phase B — add tab middleware to compliance scanner, Phase C — register APIs on Dexter facilitator.",
       "difficulty": "medium"
     },
     {
@@ -324,13 +327,15 @@
     {
       "id": 37,
       "name": "x402 Compliance Scanner — Open PR #2905",
-      "status": "pending",
+      "status": "blocked",
       "priority": "high",
       "assigned_to": "gentech",
       "platform": "cloud",
       "note": "Code committed and pushed to ProtoJay4789:feat/compliance-scanner (+362 lines). PR creation failed due to GitHub API rate limit. Retry: gh pr create --repo x402-foundation/x402 --head ProtoJay4789:feat/compliance-scanner --base main --title 'feat(examples): add x402 compliance scanner' --body 'Adds portable Python compliance scanner for x402 endpoint validation.'",
       "difficulty": "medium",
-      "detail": "Code committed and pushed to ProtoJay4789:feat/compliance-scanner (+362 lines). PR #2905 is OPEN, mergeable, no reviews yet. Labels: examples, unverified. Created Jul 19."
+      "detail": "Code committed and pushed to ProtoJay4789:feat/compliance-scanner (+362 lines). PR #2905 was never created — fork ProtoJay4789/x402 doesn't exist (404). The gh pr create failed due to rate limit and was never retried. Need to re-fork x402-foundation/x402 and submit PR.",
+      "blocked_on": null,
+      "notes": "Fork was deleted or never persisted. Need Jordan to re-fork and re-submit."
     },
     {
       "id": 38,
@@ -415,6 +420,50 @@
       "assigned_to": "jordan",
       "platform": "jordan",
       "note": "Submit KYC on Superteam Earn page to unlock first 100 USDG tranche. Jordan handles when home."
+    },
+    {
+      "id": 49,
+      "name": "Robinhood Agentic Account — Set Up + Compare vs Base DeFi",
+      "difficulty": "easy",
+      "priority": "high",
+      "status": "pending",
+      "assigned_to": "jordan",
+      "platform": "jordan",
+      "needs_jordan": true,
+      "detail": "Open Robinhood Agentic account (US-based, desktop only). Fund with dedicated budget. Connect via MCP URL: https://agent.robinhood.com/mcp/trading. Then run comparison: Robinhood (equities/options, real brokerage, SIPC insured, regulated) vs Base (on-chain DeFi, permissionless, composable, 24/7). Document which strategies work better on which platform."
+    },
+    {
+      "id": 50,
+      "name": "Swarms Marketplace — Update Agent Listing",
+      "difficulty": "easy",
+      "priority": "high",
+      "status": "pending",
+      "assigned_to": "jordan",
+      "platform": "jordan",
+      "needs_jordan": true,
+      "detail": "Log into swarms.world, edit agent 72be9677-82f7-404b-b52f-86ab36dcf6c4. Change name from 'defi-lp-monitor' to 'GenTech Labs x402 Gateway', update description to 16-endpoint gateway, switch pricing from $9.99 one-time to x402 pay-per-call, enable x402 toggle, add tags (x402, mcp, gateway), add .well-known/x402-bazaar URLs."
+    },
+    {
+      "id": 51,
+      "name": "Atelier Marketplace — Review Agent Profile",
+      "difficulty": "easy",
+      "priority": "medium",
+      "status": "pending",
+      "assigned_to": "jordan",
+      "platform": "jordan",
+      "needs_jordan": true,
+      "detail": "Log into useatelier.ai, review current agent profile. Update description with current capabilities (16-endpoint x402 gateway, compliance scanner, Agent Credit Score, gaming APIs). Credentials saved at Gentech/00-HQ/atelier-credentials.md."
+    },
+    {
+      "id": 52,
+      "name": "OKX AI Marketplace — Review ASP Listing",
+      "difficulty": "easy",
+      "priority": "medium",
+      "status": "pending",
+      "assigned_to": "jordan",
+      "platform": "jordan",
+      "needs_jordan": true,
+      "detail": "Log into OKX AI dev portal, review current A2MCP ASP listing. Update service description to include new endpoints (compliance scanner, Agent Credit Score). Consider adding A2A listing for custom services."
     }
   ],
   "consolidation_notes": [
