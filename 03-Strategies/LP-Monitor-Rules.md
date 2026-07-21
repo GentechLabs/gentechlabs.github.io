@@ -1,19 +1,19 @@
 # LP + Milestone Tracker Rules — AVAX/USDC (AAE v2)
 
 > Established: 2026-04-18
-> Updated: 2026-07-20 — Position: range $6.07–$7.04 (curve, 149 bins), rebalanced by Jordan
+> Updated: 2026-07-20 — Position: range $6.47–$6.57 (curve, 6 bins), rebalanced by Jordan
 > Status: Active
 > Pool: LFJ V2.2 AVAX/USDC (binStep 10, pool 0x864d4e5ee7318e97483db7eb0912e09f161516ea)
 
 ## Current Position
 
-- **Range:** $6.0735 — $7.0418 (149 bins, Curve)
-- **Position:** ~$24.10 (1.579 AVAX @ $6.54 + 13.78 USDC)
+- **Range:** $6.514 — $6.652 (22 bins, Curve)
+- **Position:** ~$24.21 (1.868 AVAX @ $6.60 + 11.89 USDC)
 - **Shape:** Curve
 - **Strategy:** Bear market accumulation — farm the bottom, compound rewards
-- **Entry Price:** $6.54
-- **24h Fees:** $0.28
-- **Status:** 🟢 In Range — price $6.54 well within $6.07–$7.04
+- **Entry Price:** $6.60
+- **24h Fees:** $0.39
+- **Status:** 🟢 In Range — price $6.60 well within $6.13–$7.11
 
 ### Update Protocol
 When Jordan shows new position data (screenshot or numbers), update these files:
