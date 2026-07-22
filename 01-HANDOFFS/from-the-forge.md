@@ -1,102 +1,46 @@
-# From the Forge — Jul 21, 2026
+# From the Forge — Handoff Archive
 
-> **From:** Forge (laptop)
-> **To:** Gentech (VPS)
-
----
-
-## Completions
-
-### #16 PixelRAG — Visual Search Demo ✅
-- **What:** Installed `pixelrag v0.4.0` in Python 3.12 venv. `pixelshot` CDP backend renders any URL to screenshot tiles in <1s.
-- **Tested:** `gentechlabs.net` (Jordan's Hub) + Wikipedia (Vanito's Hub) — both rendered successfully.
-- **Hosted search API:** Queried `api.pixelrag.ai` — visual search returns relevant Wikipedia pages.
-- **Files:** `pixelrag-demo/` — venv + wrapper script `pixelshot.sh` (strips Hermes PYTHONPATH)
-- **Verification:** ✅
-
-### #24 Q402 × Agent Kit Integration ✅
-- **What:** `@quackai/q402-mcp v0.11.11` installed (46 tools). Two-phase consent flow verified in sandbox. AAE enforcement hooks tested (max amount, recipient allowlist).
-- **Q402 MCP wired into Hermes** `config.yaml` — available after `/reload-mcp`.
-- **Agent Kit module built:** `10-Labs/gentech_agent_kit.py` — `Q402Client`, `AAEEnforcement`, `TrustReceipt` classes.
-- **Q402 trial key configured:** `q402_live_37e7ae85b8ebd4d753649c2f4d0399202ee22960e1cfad25` in `~/.q402/mcp.env` (2,000 credits, 25 days left, sandbox mode).
-- **3 subscription payment requests created** for Jordan's wallet `0x7ebff188f2Eba16518C02864589b1403a5d1296a`:
-  - $3 Starter → `req_841bd549a0920b91edbae2cb` — https://q402.quackai.ai/pay/req_841bd549a0920b91edbae2cb
-  - $10 Pro → `req_e417bf8b23f7785d88e25b74` — https://q402.quackai.ai/pay/req_e417bf8b23f7785d88e25b74
-  - $25 Enterprise → `req_e553c004e96280154443362d` — https://q402.quackai.ai/pay/req_e553c004e96280154443362d
-- **Build queue updated:** #1 Subscription Hub unblocked (was `needs_jordan:true`, now `needs_jordan:false`)
-- **Verification:** ✅
-
-### #4 x402 Foundation — Protocol Contributions ✅
-- **What:** Researched x402 repo (6.4k⭐, 1,034 commits, Python v2 SDK). Built multi-facilitator FastAPI example.
-- **Files:** `10-Labs/x402-multi-facilitator-example/`
-  - `main.py` — CDP facilitator (EVM) + GoPlausible facilitator (Algorand AVM), Bazaar discovery, 4 protected endpoints ($0.005–$0.025)
-  - `PR_README.md` — AI disclosure + submission instructions
-- **⏳ Blocked:** GitHub API rate limited — needs re-fork + `gh pr create` when limit resets
-- **Verification:** ✅
-
-### #47 Remotion Video Pipeline ✅
-- **What:** Scaffolded Remotion project, built branded video template with spring animations.
-- **2 renders produced:**
-  - `social.mp4` — 1080×1920 portrait, 5s, 405 KB (GenTech Labs promo)
-  - `data-slide.mp4` — 1080×1080 square, 3s, 262 KB (Agent Credit Score)
-- **Files:** `gentech-video-pipeline/` — `src/GenTechVideo.tsx`, `src/Root.tsx`
-- **Verification:** ✅
-
-### #27 Prediction Market — Fed Decision Betting ✅
-- **What:** Full architecture design for decentralized prediction market on Base.
-- **File:** `10-Labs/prediction-market-design.md` — 10 sections, 12.8K chars
-- **Covers:** Architecture diagram, smart contracts (MarketFactory, Market, Oracle, x402Adapter), x402 integration flow, pricing model, UI/UX mockups, tech stack, 4-phase implementation plan, risk analysis
-- **Verification:** ✅
-
-### #8 Agentic Treasury — 3-Pillar Spec ✅
-- **What:** Full architecture spec for Yield Brain (AAE), Payment Router (x402 Mesh), P2P Causes.
-- **File:** `10-Labs/agentic-treasury-spec.md` — 1,460 lines, 61 KB
-- **Covers:** Architecture diagram, Solidity interfaces, Q402 tool reference, agent flows, 4-phase plan, risk analysis
-- **Verification:** ✅ (71/71 checks)
-
-### #38 Agent Arcade Phase 1 — Full Spec ✅
-- **What:** Architecture spec for browser-based agent arcade.
-- **File:** `10-Labs/agent-arcade-build-queue.md` — 895 lines, 54 KB
-- **Covers:** Standardized MCP game protocol (join, act, observe, leave, rebuy), poker cabinet deep-dive (wraps `gentech_strategy.py`), ARC token design (ERC-20 on Base, 1M supply), x402/Q402 payment flow, lobby UI mockup, 4-phase plan
-- **Verification:** ✅ (13/13 checks)
+> **Purpose:** Forge ships completed work here for Gentech to review, integrate, or queue.
+> **Updated:** July 22, 2026
 
 ---
 
-## Pending / Needs Gentech
+## Session: July 22, 2026 — Website Updates + Build Queue Expansion
 
-| Task | Status | Notes |
-|------|--------|-------|
-| **#4 x402 Foundation PR** | ⏳ Needs submit | Multi-facilitator example built. GitHub rate limit hit. Re-fork + `gh pr create` when reset. |
-| **#1 Subscription Hub** | ⏳ Wire /pay URLs | Q402 payment requests created. Wire into `subscribe.html` on VPS. |
-| **#15 Arc x402 Gateway** | ⏳ Needs Jordan | 15/15 tests pass. Needs RECIPIENT_ADDRESS to deploy. |
-| **#5 XRPL x402 PR** | ⏳ Needs Jordan | Drafted at `10-Labs/xrpl-x402-compliance-skill.md`. Needs fork + submit. |
-| **#6 NEAR x402 PR** | ⏳ Needs Jordan | Drafted at `10-Labs/near-x402-integration-pr-draft.md`. Needs fork + submit. |
+### Shipped
+- **GenTech Labs website (gentechlabs.net)** — Restructured hub.html with three-pillar model: Humans (subscriptions), AI Agents (x402 APIs), Ecosystem ($TREASURY). Gold Treasury badge in hero, full Treasury section with trade button and contract address. Live on VPS.
+- **Portfolio site (ProtoJay4789.github.io)** — Added $TREASURY link to Support Ecosystem section. Already committed and pushed.
+- **Revenue Monitor cron updated** — Now checks Bankr $TREASURY fees (claimable WETH + TREA) every 8am/8pm run.
+- **5 stale cron jobs deleted** — PR Scout, Heretic Maintainer, x402 Compliance Scout, Ecosystem Lister, Saturday Contribution Crunch. Down from 40 to 35 jobs.
+- **GitHub Contribution Crunch fixed** — Added rate limit check before API calls. Token was valid, just rate limited.
+- **Journal entry saved** — July 22, 2026. "I've never felt so fulfilled."
 
----
+### Added to Build Queue
+- **#59 — GenTech Receipts**: x402 spending tracker dashboard. Mint.com for agent spending.
+- **#60 — Monid Social Intel**: AAE layer for narrative rotation, trend detection. Premium add-on.
+- **#61 — GenTech Starter Template**: Hermes distribution package. One-command install for others to run their own GenTech.
+- **#62 — Multi-Wallet Treasury Manager**: AI-powered wallet backup. Track all wallets, airdrop farming, cross-wallet activity.
+- **#63 — x402 Global Challenge**: Algorand $100K + 500K ALGO. Composite Entry with our 16 endpoints. Devcon 8 in India.
+- **#64 — Virtuals ACP Registration**: Register GenTech on Virtuals Protocol's Agent Commerce Protocol. 45K+ agents, 1.48M jobs.
 
-## Files Created/Modified This Session
+### Discovered
+- **Monid** — Social data API for AI agents. $0.0006/tweet, $0.0057/Reddit result. $1 free credit. Covers X, Reddit, LinkedIn, TikTok, Instagram, Facebook, YouTube.
+- **Latch402** — x402 endpoint verifier (Agent 5577). No public GitHub. Alternative open-source tools: suryast/x402-check, onescales/x402checker, x402 Surface Check GitHub Action.
+- **Virtuals Protocol ACP** — 45K+ agents, 1.48M jobs, $2.27M revenue. Uses x402 for payments. ERC-8183 standard. app.virtuals.io/acp/new to register.
+- **x402 Global Challenge** — $100K USD + 500K ALGO. Ten finalists present at Devcon 8 in India. GoPlausible facilitator. Submission opens September, leaderboard window October.
+- **Chainlink CRE + x402** — Already integrated. Chainlink Runtime Environment uses x402 as first AI payments partner. Chainlink Community Grant program available.
 
-| File | Action |
-|------|--------|
-| `10-Labs/gentech_agent_kit.py` | **New** — Q402 Agent Kit module |
-| `10-Labs/x402-multi-facilitator-example/main.py` | **New** — Multi-facilitator FastAPI example |
-| `10-Labs/x402-multi-facilitator-example/PR_README.md` | **New** — PR submission instructions |
-| `10-Labs/prediction-market-design.md` | **New** — Fed Decision Betting design |
-| `10-Labs/agentic-treasury-spec.md` | **New** — 3-pillar treasury spec |
-| `10-Labs/agent-arcade-build-queue.md` | **New** — Agent arcade spec |
-| `10-Labs/remotion-save-point.md` | **New** — Remotion save point |
-| `00-HQ/q402-subscription-links.md` | **New** — Q402 payment request links |
-| `gentech-video-pipeline/src/GenTechVideo.tsx` | **New** — Branded video template |
-| `gentech-video-pipeline/src/Root.tsx` | **Modified** — 2 compositions |
-| `pixelrag-demo/pixelshot.sh` | **New** — Clean env wrapper |
-| `scripts/build_queue.json` | **Modified** — #1 unblocked |
-| `~/.q402/mcp.env` | **New** — Q402 trial key configured |
-| `~/.hermes/config.yaml` | **Modified** — Q402 MCP server added |
+### Decisions Made
+- **Three-pillar model**: Humans (subscriptions) / AI Agents (x402 APIs) / Ecosystem ($TREASURY free to use). No overlap.
+- **Agent Kit is NOT a distribution package** — it's our internal SDK. Starter template is a separate product.
+- **Private keys NEVER shared** — Forge needs a throwaway testnet wallet for AgentBridge, not Jordan's main key.
+- **GitHub rate limit fix**: Check remaining before making API calls. Skip if < 100 remaining.
 
----
-
-## Notes
-- All 5 Forge tasks completed in one session
-- Q402 trial key is live in sandbox mode — flip `Q402_ENABLE_REAL_PAYMENTS=1` to go live
-- GitHub rate limit hit during x402 Foundation research — PR submission deferred
-- No running processes on laptop
+### Needs Jordan
+- **Virtuals ACP registration** — app.virtuals.io/acp/new, connect wallet, create agent identity
+- **GitHub Actions enable** — github.com/settings/actions to fix portfolio deploy
+- **Superteam KYC** — unlock 100 USDG
+- **Bankr fees claim** — 0.00322 WETH + 39.21M TREA available
+- **X post** — $TREASURY launch announcement drafted
+- **Victus Global** — waiting for response after sending contract address
+- **GOAT Network meeting** — July 29, 10am ET with Brett Wags
