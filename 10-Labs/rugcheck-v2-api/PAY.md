@@ -1,8 +1,8 @@
 ---
 name: rugcheck-v2-api
-title: "Rugcheck v2 — Agent Security & Credit Scoring"
-description: "Pay-per-request agent security scanning and credit scoring platform. Scan agents for token risk, identity, MCP trust, payment flow integrity, and attack vectors. Get agent credit scores (0-850) with on-chain activity, reputation, age, and volume factors."
-use_case: "Use for agent security risk assessment, vulnerability scanning, creditworthiness evaluation, on-chain reputation scoring, and compliance checks before agent-to-agent interactions or DeFi integrations."
+title: "Rugcheck v2 — CLARITY Act Agent Compliance Platform"
+description: "CLARITY Act-compliant agent security scanning, identity verification, and credit scoring. The regulatory compliance layer for the agent economy. Scan agents for token risk, identity (ERC-8004), MCP trust, payment flow integrity, and attack vectors. Get agent credit scores (0-850) with on-chain activity, reputation, age, and volume factors. CLARITY Act DeFi Exclusion (Sec. 309/409) compliant."
+use_case: "Use for CLARITY Act compliance verification, agent security risk assessment, vulnerability scanning, creditworthiness evaluation, on-chain reputation scoring, and compliance checks before agent-to-agent interactions or DeFi integrations. Required for institutional partners who need to verify agent compliance before transacting."
 category: security
 service_url: https://rugcheck.gentechlabs.net
 sandbox_service_url: https://sandbox.rugcheck.gentechlabs.net

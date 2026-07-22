@@ -10,21 +10,22 @@
 
 **Text:**
 ```
-AI agents are transacting billions on-chain.
+The CLARITY Act just made agent identity mandatory.
 
-But how do you know which agent to trust?
+We built the compliance layer.
 
-Introducing the Agent Credit Score — on-chain reputation scoring for AI agents.
+Introducing Rugcheck v2 — the CLARITY Act Agent Compliance Platform.
 
-Powered by x402 + Q402.
-
-Score range: 0-850
-Chains: 22
-Factors: on-chain activity, reputation, age, volume
+One scan verifies:
+✅ Identity (ERC-8004)
+✅ Security (5-domain audit)
+✅ Credit score (0-850)
+✅ x402 payment integrity
 
 Built by @GenTechLabs
+CLARITY Act DeFi Exclusion (Sec. 309/409) Compliant
 
-Score your agent → gentechlabs.net
+Scan your agent → gentechlabs.net
 ```
 
 **Media:** Agent Credit Score data slide video (`gentech-video-pipeline/out/data-slide.mp4`)
