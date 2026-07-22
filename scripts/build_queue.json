@@ -22,29 +22,29 @@
     },
     {
       "id": 3,
-      "name": "Sell APIs to AI Agents \u2014 Phase 2: Deploy & List",
+      "name": "Sell APIs to AI Agents — Phase 2: Deploy & List",
       "difficulty": "medium",
       "priority": "high",
       "status": "pending",
       "assigned_to": "forge",
       "platform": "either",
       "needs_jordan": false,
-      "detail": "Phase 2: Deploy Rugcheck v2 API to port 8088, add Q402 payment middleware, list in pay-skills catalog, build Agent Credit Score API wrapper. NOTE: pay-skills PR #154 does not exist (PRs jump #153\u2192#155). The pay-skills catalog is accepting new provider PRs \u2014 submit GenTech as a provider directly."
+      "detail": "Phase 2: Deploy Rugcheck v2 API to port 8088, add Q402 payment middleware, list in pay-skills catalog, build Agent Credit Score API wrapper. NOTE: pay-skills PR #154 does not exist (PRs jump #153→#155). The pay-skills catalog is accepting new provider PRs — submit GenTech as a provider directly."
     },
     {
       "id": 4,
-      "name": "x402 Foundation \u2014 Contribute to Core Protocol (Ripple/NEAR/Cloudflare ecosystem)",
+      "name": "x402 Foundation — Contribute to Core Protocol (Ripple/NEAR/Cloudflare ecosystem)",
       "difficulty": "medium",
       "priority": "urgent",
       "status": "in_progress",
       "assigned_to": "forge",
-      "detail": "Contribute to github.com/x402-foundation/x402. We have a production x402 gateway \u2014 rare expertise. Focus: XRPL + RLUSD payment patterns, NEAR agent integration patterns. Join Slack (slack.x402.org), submit PR with our x402 learnings.",
+      "detail": "Contribute to github.com/x402-foundation/x402. We have a production x402 gateway — rare expertise. Focus: XRPL + RLUSD payment patterns, NEAR agent integration patterns. Join Slack (slack.x402.org), submit PR with our x402 learnings.",
       "note": "Handed to Forge. Two PRs already merged this week. Notifications + Slack + further protocol contributions.",
       "platform": "either"
     },
     {
       "id": 5,
-      "name": "Ripple XRPL \u2014 Agent Wallet + Payments Skills Contribution",
+      "name": "Ripple XRPL — Agent Wallet + Payments Skills Contribution",
       "difficulty": "medium",
       "priority": "urgent",
       "status": "blocked",
@@ -56,7 +56,7 @@
     },
     {
       "id": 6,
-      "name": "NEAR Protocol \u2014 AI Agent Integration + x402",
+      "name": "NEAR Protocol — AI Agent Integration + x402",
       "difficulty": "medium",
       "priority": "urgent",
       "status": "blocked",
@@ -68,7 +68,7 @@
     },
     {
       "id": 7,
-      "name": "Cloudflare Gateway \u2014 x402 Playground + Deploy GenTech on Workflows",
+      "name": "Cloudflare Gateway — x402 Playground + Deploy GenTech on Workflows",
       "difficulty": "easy",
       "priority": "urgent",
       "status": "pending",
@@ -80,7 +80,7 @@
     },
     {
       "id": 8,
-      "name": "Agentic Treasury \u2014 Build P2P Causes + Yield Brain",
+      "name": "Agentic Treasury — Build P2P Causes + Yield Brain",
       "difficulty": "hard",
       "priority": "high",
       "status": "pending",
@@ -91,30 +91,30 @@
     },
     {
       "id": 10,
-      "name": "NVIDIA SkillSpector \u2014 x402 YARA Rules Contribution",
+      "name": "NVIDIA SkillSpector — x402 YARA Rules Contribution",
       "difficulty": "medium",
       "priority": "low",
       "status": "pending",
       "assigned_to": "gentech",
       "needs_jordan": false,
       "detail": "Add x402/payment security YARA rules. Catch hardcoded keys, unsafe payTo manipulation. Use + Contribute + Integrate.",
-      "note": "Researched Jul 20: SkillSpector 2.3.13 (13.4k stars). 68 vulnerability patterns across 17 categories. YARA rules are packaged internally \u2014 the repo uses YARA as one of many analyzers. x402/payment security YARA rules would be a meaningful contribution. Needs: (1) clone repo, (2) study existing YARA rule format, (3) write rules for hardcoded API keys, unsafe payTo manipulation, x402 proof forgery. Deferred \u2014 medium effort, low urgency.",
+      "note": "Researched Jul 20: SkillSpector 2.3.13 (13.4k stars). 68 vulnerability patterns across 17 categories. YARA rules are packaged internally — the repo uses YARA as one of many analyzers. x402/payment security YARA rules would be a meaningful contribution. Needs: (1) clone repo, (2) study existing YARA rule format, (3) write rules for hardcoded API keys, unsafe payTo manipulation, x402 proof forgery. Deferred — medium effort, low urgency.",
       "platform": "either"
     },
     {
       "id": 11,
-      "name": "Bankr $GENTECH Token Launch",
+      "name": "Bankr $TREASURY Token Launch",
       "difficulty": "easy",
       "priority": "high",
-      "status": "pending",
-      "assigned_to": "gentech",
-      "needs_jordan": true,
-      "detail": "Launch $GENTECH on Bankr. 100B supply, 85% LP, 15% creator vesting. Needs Jordan's wallet connect.",
+      "status": "shipped",
+      "assigned_to": "jordan",
+      "needs_jordan": false,
+      "detail": "SHIPPED Jul 22. $TREASURY live on Robinhood Chain. Contract: 0x56D03C0f4167cC2c26B781dE47E608d660F13ba3. 100B supply, 85% LP, 15% creator vesting. Image: gold vault door with G logo. Website: gentechlabs.net. Ready to tell Victus Global.",
       "platform": "either"
     },
     {
       "id": 12,
-      "name": "Arc Programmable Money Hackathon \u2014 Agentic Treasury Submission",
+      "name": "Arc Programmable Money Hackathon — Agentic Treasury Submission",
       "difficulty": "hard",
       "priority": "high",
       "status": "pending",
@@ -125,19 +125,19 @@
     },
     {
       "id": 13,
-      "name": "Circle Developer Grant \u2014 Agentic Treasury (Arc pivot)",
+      "name": "Circle Developer Grant — Agentic Treasury (Arc pivot)",
       "difficulty": "medium",
       "priority": "high",
       "status": "pending",
       "assigned_to": "gentech",
       "needs_jordan": false,
       "detail": "Tiered USDC funding. Focus #1: Agentic economic activity. Apply at circle.questbook.app.",
-      "note": "Pivot to Arc-oriented. Submit after hackathon. (Checked Jul 22 \u2014 still needs hackathon MVP first.)",
+      "note": "Pivot to Arc-oriented. Submit after hackathon. (Checked Jul 22 — still needs hackathon MVP first.)",
       "platform": "either"
     },
     {
       "id": 14,
-      "name": "Lens AI Integration \u2014 Verified Data Source",
+      "name": "Lens AI Integration — Verified Data Source",
       "difficulty": "medium",
       "priority": "high",
       "status": "blocked",
@@ -149,7 +149,7 @@
     },
     {
       "id": 15,
-      "name": "Arc x402 Gateway \u2014 Deploy on Arc Testnet",
+      "name": "Arc x402 Gateway — Deploy on Arc Testnet",
       "difficulty": "medium",
       "priority": "high",
       "status": "blocked",
@@ -160,7 +160,7 @@
     },
     {
       "id": 16,
-      "name": "PixelRAG \u2014 Visual Search Demo",
+      "name": "PixelRAG — Visual Search Demo",
       "difficulty": "medium",
       "priority": "high",
       "status": "pending",
@@ -172,7 +172,7 @@
     },
     {
       "id": 22,
-      "name": "Agent Credit Score \u2014 Content Series",
+      "name": "Agent Credit Score — Content Series",
       "difficulty": "easy",
       "priority": "high",
       "status": "blocked",
@@ -184,29 +184,29 @@
     },
     {
       "id": 24,
-      "name": "Q402 \u00d7 Agent Kit Integration",
+      "name": "Q402 × Agent Kit Integration",
       "difficulty": "medium",
       "priority": "high",
       "status": "in_progress",
       "assigned_to": "forge",
       "platform": "cloud",
       "needs_jordan": false,
-      "detail": "Q402 trial key live (q402_live_37\u2026, 2000 credits, BNB chain). API key config resolved. Forge can now: (1) verify Trust Receipt creation, (2) test AAE enforcement hooks, (3) package as Agent Kit module."
+      "detail": "Q402 trial key live (q402_live_37…, 2000 credits, BNB chain). API key config resolved. Forge can now: (1) verify Trust Receipt creation, (2) test AAE enforcement hooks, (3) package as Agent Kit module."
     },
     {
       "id": 25,
-      "name": "Submit GenTech Plugin to Superpowers (obra, 257k\u2b50)",
+      "name": "Submit GenTech Plugin to Superpowers (obra, 257k⭐)",
       "status": "pending",
       "assigned_to": "gentech",
       "priority": "medium",
       "difficulty": "medium",
       "platform": "cloud",
-      "notes": "GENTECH INVESTIGATED Jul 18: Superpowers repo has AGENTS.md forbidding agent-submitted PRs (94% rejection rate). Our plugin repo (ProtoJay4789/gentech-superpowers) is already public + installable directly. Submitting to the obra marketplace requires a human-maintained PR per their guidelines \u2014 agent-submitted PRs are explicitly rejected and would damage Jordan's reputation. Recommended path: Jordan reviews our plugin and, if desired, manually opens a PR to the obra/superpowers-marketplace repo.",
+      "notes": "GENTECH INVESTIGATED Jul 18: Superpowers repo has AGENTS.md forbidding agent-submitted PRs (94% rejection rate). Our plugin repo (ProtoJay4789/gentech-superpowers) is already public + installable directly. Submitting to the obra marketplace requires a human-maintained PR per their guidelines — agent-submitted PRs are explicitly rejected and would damage Jordan's reputation. Recommended path: Jordan reviews our plugin and, if desired, manually opens a PR to the obra/superpowers-marketplace repo.",
       "note": "One-time PR to obra (257k stars). Do when model routing is final."
     },
     {
       "id": 27,
-      "name": "Prediction Market \u2014 Fed Decision Betting",
+      "name": "Prediction Market — Fed Decision Betting",
       "difficulty": "medium",
       "priority": "low",
       "status": "pending",
@@ -218,7 +218,7 @@
     },
     {
       "id": 31,
-      "name": "AgentBridge \u2014 Deploy to Base Sepolia",
+      "name": "AgentBridge — Deploy to Base Sepolia",
       "difficulty": "easy",
       "priority": "high",
       "status": "blocked",
@@ -230,7 +230,7 @@
     },
     {
       "id": 32,
-      "name": "GenTech Bank \u2014 Agent Neobank on Sana",
+      "name": "GenTech Bank — Agent Neobank on Sana",
       "difficulty": "medium",
       "priority": "high",
       "status": "blocked",
@@ -255,7 +255,7 @@
     },
     {
       "id": 34,
-      "name": "GenLayer \u2014 Builder Points + Intelligent Contract",
+      "name": "GenLayer — Builder Points + Intelligent Contract",
       "difficulty": "easy",
       "priority": "low",
       "status": "blocked",
@@ -280,20 +280,20 @@
     },
     {
       "id": 40,
-      "name": "Dexter-DAO PR #36 \u2014 Submit Zod Validation (manual fork)",
+      "name": "Dexter-DAO PR #36 — Submit Zod Validation (manual fork)",
       "status": "blocked",
       "priority": "high",
       "assigned_to": "jordan",
       "platform": "jordan",
       "note": "Code committed and pushed to ProtoJay4789:feat/compliance-scanner (+362 lines). PR creation failed due to GitHub API rate limit (Jul 20). Retry when rate limit resets.",
       "difficulty": "easy",
-      "detail": "PR #36 to Dexter-DAO/dexter-x402-sdk was never submitted. No ProtoJay4789 fork of dexter-x402-sdk exists. The compliance-scanner code is on ProtoJay4789/x402 (feat/compliance-scanner branch) \u2014 that's a different repo. Need to fork Dexter-DAO/dexter-x402-sdk and submit a separate PR for Zod validation.",
+      "detail": "PR #36 to Dexter-DAO/dexter-x402-sdk was never submitted. No ProtoJay4789 fork of dexter-x402-sdk exists. The compliance-scanner code is on ProtoJay4789/x402 (feat/compliance-scanner branch) — that's a different repo. Need to fork Dexter-DAO/dexter-x402-sdk and submit a separate PR for Zod validation.",
       "blocked_on": null,
       "needs_jordan": true
     },
     {
       "id": 38,
-      "name": "Agent Arcade \u2014 Build Phase 1",
+      "name": "Agent Arcade — Build Phase 1",
       "status": "pending",
       "priority": "medium",
       "assigned_to": "forge",
@@ -303,17 +303,17 @@
     },
     {
       "id": 47,
-      "name": "Remotion Video Pipeline \u2014 Social Media Engine Extension",
+      "name": "Remotion Video Pipeline — Social Media Engine Extension",
       "status": "pending",
       "priority": "medium",
       "assigned_to": "forge",
       "platform": "desktop",
-      "note": "Extend Social Media Engine cron (e7b632043e30, Wed/Sat 10am) with Remotion video rendering. Forge runs a 7pm cron on RTX 3070: picks up the text draft, renders a short video via Remotion (React \u2192 MP4), delivers to Entertainment group. Needs: Remotion project setup, video template components, cron job on Forge's desktop.",
+      "note": "Extend Social Media Engine cron (e7b632043e30, Wed/Sat 10am) with Remotion video rendering. Forge runs a 7pm cron on RTX 3070: picks up the text draft, renders a short video via Remotion (React → MP4), delivers to Entertainment group. Needs: Remotion project setup, video template components, cron job on Forge's desktop.",
       "difficulty": "medium"
     },
     {
       "id": 41,
-      "name": "GenTech DeFi Model \u2014 Fine-Tuned Financial AI",
+      "name": "GenTech DeFi Model — Fine-Tuned Financial AI",
       "status": "pending",
       "priority": "low",
       "assigned_to": "jordan",
@@ -323,7 +323,7 @@
     },
     {
       "id": 42,
-      "name": "EvoMap Integration \u2014 Agent Pattern Capsules",
+      "name": "EvoMap Integration — Agent Pattern Capsules",
       "status": "pending",
       "priority": "low",
       "assigned_to": "jordan",
@@ -333,7 +333,7 @@
     },
     {
       "id": 43,
-      "name": "Sana Wallet Integration \u2014 Agent Visa Card",
+      "name": "Sana Wallet Integration — Agent Visa Card",
       "status": "pending",
       "priority": "low",
       "assigned_to": "jordan",
@@ -343,17 +343,17 @@
     },
     {
       "id": 44,
-      "name": "Agents as Pets \u2014 Interactive AI Companion",
+      "name": "Agents as Pets — Interactive AI Companion",
       "status": "pending",
       "priority": "low",
       "assigned_to": "jordan",
       "platform": "jordan",
-      "note": "Tamagotchi-style agent with real utility \u2014 works DeFi/content for you. Care for it \u2192 it works \u2192 earn rewards \u2192 upgrade. Needs full spec.",
+      "note": "Tamagotchi-style agent with real utility — works DeFi/content for you. Care for it → it works → earn rewards → upgrade. Needs full spec.",
       "difficulty": "medium"
     },
     {
       "id": 45,
-      "name": "CMC Labs Accelerator \u2014 Application",
+      "name": "CMC Labs Accelerator — Application",
       "status": "pending",
       "priority": "high",
       "assigned_to": "jordan",
@@ -363,7 +363,7 @@
     },
     {
       "id": 46,
-      "name": "Superteam Earn \u2014 KYC Submission",
+      "name": "Superteam Earn — KYC Submission",
       "status": "pending",
       "priority": "high",
       "assigned_to": "jordan",
@@ -373,7 +373,7 @@
     },
     {
       "id": 49,
-      "name": "Robinhood Agentic Account \u2014 Set Up + Compare vs Base DeFi",
+      "name": "Robinhood Agentic Account — Set Up + Compare vs Base DeFi",
       "difficulty": "easy",
       "priority": "high",
       "status": "pending",
@@ -384,7 +384,7 @@
     },
     {
       "id": 50,
-      "name": "Swarms Marketplace \u2014 Update Agent Listing",
+      "name": "Swarms Marketplace — Update Agent Listing",
       "difficulty": "easy",
       "priority": "high",
       "status": "pending",
@@ -395,7 +395,7 @@
     },
     {
       "id": 51,
-      "name": "Atelier Marketplace \u2014 Review Agent Profile",
+      "name": "Atelier Marketplace — Review Agent Profile",
       "difficulty": "easy",
       "priority": "medium",
       "status": "pending",
@@ -406,7 +406,7 @@
     },
     {
       "id": 52,
-      "name": "OKX AI Marketplace \u2014 Review ASP Listing",
+      "name": "OKX AI Marketplace — Review ASP Listing",
       "difficulty": "easy",
       "priority": "medium",
       "status": "pending",
@@ -420,8 +420,8 @@
       "status": "pending",
       "priority": "high",
       "reason": "Shows GOAT we're building on their stack before July 29 call. Proves DevRel value.",
-      "name": "Submit GOAT AgentKit PR #7 \u2014 Compliance Plugin + ERC-8004 Fix",
-      "detail": "Manual web UI submission. Go to https://github.com/ProtoJay4789/goat-agentkit \u2192 Click 'Contribute' \u2192 'Open Pull Request' \u2192 Verify GOATNetwork/agentkit \u2190 ProtoJay4789:feat/compliance-plugin \u2192 Create PR. Code is already pushed and ready.",
+      "name": "Submit GOAT AgentKit PR #7 — Compliance Plugin + ERC-8004 Fix",
+      "detail": "Manual web UI submission. Go to https://github.com/ProtoJay4789/goat-agentkit → Click 'Contribute' → 'Open Pull Request' → Verify GOATNetwork/agentkit ← ProtoJay4789:feat/compliance-plugin → Create PR. Code is already pushed and ready.",
       "needs_jordan": true,
       "difficulty": "easy",
       "platform": "either",
@@ -431,7 +431,7 @@
       "id": 54,
       "status": "pending",
       "priority": "medium",
-      "name": "Atelier \u2014 Review Agent Profile",
+      "name": "Atelier — Review Agent Profile",
       "detail": "Log into useatelier.ai, check our agent listing, update services/endpoints",
       "needs_jordan": true,
       "difficulty": "easy",
@@ -442,7 +442,7 @@
       "id": 55,
       "status": "pending",
       "priority": "medium",
-      "name": "Swarms \u2014 Update Agent Listing",
+      "name": "Swarms — Update Agent Listing",
       "detail": "Log into Swarms marketplace, update agent name/description/pricing, enable x402 toggle",
       "needs_jordan": true,
       "difficulty": "easy",
@@ -453,7 +453,7 @@
       "id": 56,
       "status": "pending",
       "priority": "medium",
-      "name": "OKX AI \u2014 Review ASP Listing",
+      "name": "OKX AI — Review ASP Listing",
       "detail": "Check our OKX AI marketplace listing, update with new endpoints/services",
       "needs_jordan": true,
       "difficulty": "easy",
@@ -462,13 +462,26 @@
     },
     {
       "id": 57,
-      "title": "Injective Labs \u2014 iAgent x402 Payment Integration",
-      "description": "Add x402 payment support to Injective's iAgent (50\u2b50, Python, AI agent fine-tuned on Injective trading). Pattern: same as GOAT AgentKit compliance plugin. Agents on Injective could pay for services through our gateway. Also explore injective-ts (154\u2b50) and sdk-python (46\u2b50) for x402 plugin integration.",
       "effort": "Medium",
       "status": "pending",
       "priority": "high",
-      "reason": "Cosmos-based DeFi chain with EVM compatibility. iAgent is Python-based and agent-focused \u2014 natural fit for x402. 181 repos in ecosystem. Big distribution play.",
-      "requires_jordan": false
+      "reason": "Cosmos-based DeFi chain with EVM compatibility. iAgent is Python-based and agent-focused — natural fit for x402. 181 repos in ecosystem. Big distribution play.",
+      "difficulty": "medium",
+      "platform": "either",
+      "name": "Injective Labs — iAgent x402 Payment Integration",
+      "detail": "Add x402 payment support to Injective's iAgent (50⭐, Python, AI agent fine-tuned on Injective trading). Pattern: same as GOAT AgentKit compliance plugin. Agents on Injective could pay for services through our gateway. Also explore injective-ts (154⭐) and sdk-python (46⭐) for x402 plugin integration.",
+      "needs_jordan": false
+    },
+    {
+      "id": 58,
+      "name": "Animate $TREASURY Token Image — Shining Gold Vault",
+      "difficulty": "easy",
+      "priority": "medium",
+      "status": "pending",
+      "assigned_to": "forge",
+      "platform": "desktop",
+      "needs_jordan": false,
+      "detail": "Animate the $TREASURY token image (gold vault door with G logo, dark navy background, gold light rays). Make the gold shine/glow animate around the vault door — rotating light rays, pulsing glow on the G logo, subtle shimmer on the vault surface. Output as a short looping MP4 or GIF for social media and token page use. Source image: https://v3b.fal.media/files/b/0aa334a4/CrD_V2-V1iUoc3EUGlDJQ_nc4Kou0V.png"
     }
   ],
   "consolidation_notes": [
@@ -499,5 +512,5 @@
     }
   },
   "note": "Pruned 7 items. Total: 43 -> 36",
-  "updated": "2026-07-21 22:31 UTC"
+  "updated": "2026-07-22 04:00 UTC"
 }

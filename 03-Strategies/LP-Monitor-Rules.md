@@ -7,13 +7,13 @@
 
 ## Current Position
 
-- **Range:** $6.50 — $6.65 (Curve)
-- **Position:** ~$24.25 (1.424 AVAX @ $6.59 + 14.86 USDC)
+- **Range:** $6.514 — $6.652 (22 bins, Curve)
+- **Position:** ~$24.21 (1.868 AVAX @ $6.60 + 11.89 USDC)
 - **Shape:** Curve
 - **Strategy:** Bear market accumulation — farm the bottom, compound rewards
-- **Entry Price:** $6.59
-- **24h Fees:** $0.12
-- **Status:** 🟢 In Range — price $6.59 at center
+- **Entry Price:** $6.60
+- **24h Fees:** $0.39
+- **Status:** 🟢 In Range — price $6.60 well within $6.13–$7.11
 
 ### Update Protocol
 When Jordan shows new position data (screenshot or numbers), update these files:
@@ -101,15 +101,6 @@ The monitor now outputs **structured JSON signals** for AAE squad treasury + pro
 
 ### Rule 6 — Capital Add / DCA
 💰 When Jordan adds capital or DCAs, show the **full AAE suite**: fee efficiency, position value, milestone progress, next rank target ($5/day = Recruit).
-
----
-
-## Robinhood Agentic Trading MCP
-Configured in `config.yaml` as `robinhood-trading`:
-- **URL:** `https://agent.robinhood.com/mcp/trading`
-- **Status:** Configured, awaiting auth on next gateway restart
-- **Purpose:** Read portfolio, check buying power, execute Tradesta signals
-- **Next step:** Restart gateway → authenticate → link Agentic account
 
 ---
 
