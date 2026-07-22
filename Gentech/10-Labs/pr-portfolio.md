@@ -1,45 +1,48 @@
-# GenTech PR Portfolio
+# PR Portfolio — GenTech Ecosystem Listings
 
-> Tracking all submitted PRs, marketplace registrations, and listings.
-> Updated: 2026-07-16
+> Log of all submitted pull requests to awesome repos and directories.
+> Each entry: repo, PR link, what was submitted, date, status.
 
----
+## ⚠️ IMPORTANT — Jul 20 Audit
 
-## Submitted & Awaiting Review
+**All PRs from Jul 19 run were never actually created.** The forks (ProtoJay4789/x402, ProtoJay4789/pay-skills, ProtoJay4789/awesome-ai-agents-2026) don't exist on GitHub. The `gh pr create` commands failed due to API rate limits and were never retried. The PR portfolio entries below are aspirational — they represent what was *intended* to be submitted, not what was actually created.
 
-| PR | Repo | Status | What |
-|----|------|--------|------|
-| #572 | BankrBot/skills | 🆕 NEW | GenTech Labs x402 Gateway skill (16 endpoints, 6 chains) |
-| #190 | solana-foundation/pay-skills | 🟢 MERGEABLE | 9 refreshed + 2 new catalog entries |
-| #197 | solana-foundation/awesome-solana-ai | 🟡 CONFLICT FIXED | GenTech Agent Kit in SDKs + AI sections |
-| #10099 | punkpeye/awesome-mcp-servers | 🟢 MERGEABLE | GenTech Agent Kit MCP server listing |
-| #410 | p-e-w/heretic | 🟢 MERGEABLE | Fix Byte tensor crash in ARA abliteration |
-| #30 | mark3labs/x402-go | 🟢 MERGEABLE | Add GenTech demo to README |
-| #26 | bitrefill/awesome-agentic-payments | 🟢 MERGEABLE | GenTech Labs service provider listing |
-| #810 | xpaysh/awesome-x402 | 🟢 MERGEABLE | GenTech Agent Kit + x402 Gateway listing |
-| #440 | Merit-Systems/awesome-agentic-commerce | 🟢 MERGEABLE | GenTech Labs service provider |
-| #835 | jamesmurdza/awesome-ai-devtools | 🆕 NEW | GenTech Agent Kit in Multi-Agent |
-| #3 | sanafi-onchain/sanabot-skills | 🔵 OPEN | GenTech x402 skill pack (16 endpoints) |
+**Action needed:** Re-fork each upstream repo and re-submit PRs.
 
-## Marketplaces & Registrations
+## 2026-07-19 Run (Ecosystem Lister Cron) — ⚠️ NONE ACTUALLY SUBMITTED
 
-| Platform | Status | Notes |
-|----------|--------|-------|
-| Circle Agent Marketplace | ✅ Submitted Jul 15 | 5 endpoints, awaiting review |
-| Virtuals ACP | ✅ Live Jul 15 | 5 offerings, Spark Tier $200/wk approved |
-| Sana Bot | ✅ API key active | Skill pack PR #3 upstream |
-| Pay Skills | ✅ PR #190 | 9 services merged, awaiting review |
-| OKX AI Marketplace | ✅ Live Jul 15 | Agent listed |
-| x402scan | 🔴 URL changed 404 | Needs re-registration |
+| Repo | PR / Listing | What Was Submitted | Status |
+|------|-------------|--------------------|--------|
+| caramaschiHG/awesome-ai-agents-2026 | [#443](https://github.com/caramaschiHG/awesome-ai-agents-2026/pull/443) | GenTech Agent Kit in Agent Frameworks | 🔴 Never submitted — fork deleted |
+| ahmet/awesome-web3 | [#733](https://github.com/ahmet/awesome-web3/pull/733) | GenTech x402 Gateway in x402 Payments Protocol | 🔴 Never submitted — fork deleted |
+| 0xNyk/awesome-agent-cortex | [#43](https://github.com/0xNyk/awesome-agent-cortex/pull/43) | GenTech Agent Kit in Agent Identity & Wallets | 🔴 Never submitted — fork deleted |
+| 0xNyk/awesome-agent-cortex | [#44](https://github.com/0xNyk/awesome-agent-cortex/pull/44) | GenTech x402 Gateway in Agent Payments | 🔴 Never submitted — fork deleted |
+| sudeepb02/awesome-erc8004 | [#82](https://github.com/sudeepb02/awesome-erc8004/pull/82) | GenTech Agent Kit in Infrastructure & SDKs | 🔴 Never submitted — fork deleted |
+| xpaysh/awesome-x402 | Already listed | GenTech Labs (agent economy infrastructure, 48 x402 endpoints) | ✅ Listed in Production Implementations |
+| sudeepb02/awesome-erc8004 | Already listed | GenTech Labs Agent (Avalanche #1770) | ✅ Listed under Agent Services |
+| VaitaR/awesome-web3-services | [#1](https://github.com/VaitaR/awesome-web3-services/pull/1) | GenTech x402 Gateway in Specialized APIs | 🔴 Never submitted — fork deleted |
+| Scottcjn/awesome-agents | [#40](https://github.com/Scottcjn/awesome-agents/pull/40) | GenTech x402 Gateway in Blockchain & Rewards | 🔴 Never submitted — fork deleted |
 
-## Merged ✅
+## 2026-07-18 Run
 
-| PR | Repo | What |
-|----|------|------|
-| #7 | Internet-Court/awesome-internet-court | GenTech listed |
-| #26 | bitrefill/awesome-agentic-payments | GenTech Labs |
-| #36 | caramaschiHG/awesome-ai-agents | GenTech Agent Kit |
+| Repo | PR | What Was Submitted | Status |
+|------|----|--------------------|--------|
+| Scottcjn/awesome-agents | [#40](https://github.com/Scottcjn/awesome-agents/pull/40) | GenTech x402 Gateway in Blockchain & Rewards | 🔴 Never submitted — fork deleted |
 
----
+## x402 Foundation PRs
 
-*Maintained by PR Scout cron. Updated when new PRs are submitted or statuses change.*
+| Repo | PR | What Was Submitted | Status |
+|------|----|--------------------|--------|
+| x402-foundation/x402 | [#2905](https://github.com/x402-foundation/x402/pull/2905) | x402 Compliance Scanner (feat/examples) | 🔴 Never submitted — fork ProtoJay4789/x402 doesn't exist |
+
+## Pay-Skills PRs
+
+| Repo | PR | What Was Submitted | Status |
+|------|----|--------------------|--------|
+| solana-foundation/pay-skills | [#154](https://github.com/solana-foundation/pay-skills/pull/154) | 12 GenTech x402 API services | 🔴 Never submitted — fork ProtoJay4789/pay-skills doesn't exist |
+
+## Coinbase AgentKit
+
+| Repo | PR | What Was Submitted | Status |
+|------|----|--------------------|--------|
+| coinbase/agentkit | [#1375](https://github.com/coinbase/agentkit/pull/1375) | GenTech as x402 facilitator | 🔴 Never submitted — fork ProtoJay4789/genTech-agent-kit is not a fork of coinbase/agentkit |

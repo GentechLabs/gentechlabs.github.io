@@ -1,0 +1,371 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Rugcheck v2 API",
+    "description": "Agent security scanning and credit scoring platform with x402/Q402 payment middleware",
+    "version": "2.0.0",
+    "contact": {
+      "name": "GenTech Labs",
+      "url": "https://gentechlabs.net"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://rugcheck.gentechlabs.net",
+      "description": "Production server"
+    },
+    {
+      "url": "https://sandbox.rugcheck.gentechlabs.net",
+      "description": "Sandbox server"
+    }
+  ],
+  "paths": {
+    "/api/v1/agent/status": {
+      "get": {
+        "summary": "Service health check",
+        "description": "Returns service status, version, uptime, and metrics. No payment required.",
+        "operationId": "agentStatus",
+        "tags": ["Public"],
+        "responses": {
+          "200": {
+            "description": "Service status",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StatusResponse"
+                }
+              }
+            }
+          }
+        },
+        "x-pay-skills": {
+          "pricing": null
+        }
+      }
+    },
+    "/api/v1/pricing": {
+      "get": {
+        "summary": "List endpoint pricing",
+        "description": "List all available endpoints and their prices. No payment required.",
+        "operationId": "pricing",
+        "tags": ["Public"],
+        "responses": {
+          "200": {
+            "description": "Pricing tiers",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PricingResponse"
+                }
+              }
+            }
+          }
+        },
+        "x-pay-skills": {
+          "pricing": null
+        }
+      }
+    },
+    "/.well-known/x402-bazaar": {
+      "get": {
+        "summary": "Bazaar discovery",
+        "description": "Bazaar discovery endpoint for automated agent routing. No payment required.",
+        "operationId": "bazaarDiscovery",
+        "tags": ["Discovery"],
+        "responses": {
+          "200": {
+            "description": "Bazaar metadata",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "x-pay-skills": {
+          "pricing": null
+        }
+      }
+    },
+    "/api/v1/agent/scan": {
+      "post": {
+        "summary": "Scan agent for security risks",
+        "description": "Scan an agent for security risks across token risk, identity, MCP trust, payment flow, and attack vectors. Requires $0.025 payment via x402.",
+        "operationId": "agentScan",
+        "tags": ["Agent Security"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ScanRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Scan results",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ScanResponse"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment required — x402 challenge",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "accepts": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "scheme": {"type": "string"},
+                          "price": {"type": "string"},
+                          "network": {"type": "string"},
+                          "payTo": {"type": "string"}
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-pay-skills": {
+          "pricing": {
+            "dimensions": [
+              {
+                "direction": "usage",
+                "unit": "requests",
+                "scale": 1
+              }
+            ],
+            "tiers": [
+              {
+                "price_usd": 0.025
+              }
+            ]
+          }
+        }
+      }
+    },
+    "/api/v1/agent/credit-score": {
+      "post": {
+        "summary": "Get agent credit score",
+        "description": "Get agent credit score (0-850) with detailed factors including on-chain activity, reputation, agent age, and transaction volume. Requires $0.01 payment via x402.",
+        "operationId": "agentCreditScore",
+        "tags": ["Agent Credit"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreditScoreRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Credit score results",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreditScoreResponse"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment required — x402 challenge",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "accepts": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "scheme": {"type": "string"},
+                          "price": {"type": "string"},
+                          "network": {"type": "string"},
+                          "payTo": {"type": "string"}
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-pay-skills": {
+          "pricing": {
+            "dimensions": [
+              {
+                "direction": "usage",
+                "unit": "requests",
+                "scale": 1
+              }
+            ],
+            "tiers": [
+              {
+                "price_usd": 0.01
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "StatusResponse": {
+        "type": "object",
+        "properties": {
+          "status": {"type": "string"},
+          "service": {"type": "string"},
+          "version": {"type": "string"},
+          "uptime_seconds": {"type": "integer"},
+          "agents_scanned": {"type": "integer"},
+          "credits_evaluated": {"type": "integer"},
+          "q402_enabled": {"type": "boolean"}
+        }
+      },
+      "PricingResponse": {
+        "type": "object",
+        "properties": {
+          "gateway": {"type": "string"},
+          "version": {"type": "string"},
+          "tiers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PricingTier"
+            }
+          }
+        }
+      },
+      "PricingTier": {
+        "type": "object",
+        "properties": {
+          "endpoint": {"type": "string"},
+          "method": {"type": "string"},
+          "path": {"type": "string"},
+          "price": {"type": "string"},
+          "chain": {"type": "string"},
+          "scheme": {"type": "string"},
+          "description": {"type": "string"}
+        }
+      },
+      "ScanRequest": {
+        "type": "object",
+        "required": ["agent_id"],
+        "properties": {
+          "agent_id": {
+            "type": "string",
+            "description": "Agent identifier (address, DID, or name)"
+          },
+          "chain": {
+            "type": "string",
+            "description": "Chain to scan on",
+            "default": "solana"
+          },
+          "deep_scan": {
+            "type": "boolean",
+            "description": "Run deep analysis (more checks)",
+            "default": false
+          }
+        }
+      },
+      "ScanResponse": {
+        "type": "object",
+        "properties": {
+          "agent_id": {"type": "string"},
+          "risk_score": {"type": "integer", "minimum": 0, "maximum": 100},
+          "risk_level": {"type": "string"},
+          "findings": {
+            "type": "array",
+            "items": {"$ref": "#/components/schemas/ScanFinding"}
+          },
+          "checks_passed": {"type": "integer"},
+          "checks_failed": {"type": "integer"},
+          "recommendations": {
+            "type": "array",
+            "items": {"type": "string"}
+          },
+          "scan_timestamp": {"type": "string"},
+          "scan_id": {"type": "string"}
+        }
+      },
+      "ScanFinding": {
+        "type": "object",
+        "properties": {
+          "severity": {"type": "string"},
+          "category": {"type": "string"},
+          "title": {"type": "string"},
+          "description": {"type": "string"},
+          "recommendation": {"type": "string"}
+        }
+      },
+      "CreditScoreRequest": {
+        "type": "object",
+        "required": ["agent_id"],
+        "properties": {
+          "agent_id": {
+            "type": "string",
+            "description": "Agent identifier"
+          },
+          "chain": {
+            "type": "string",
+            "description": "Primary chain",
+            "default": "solana"
+          }
+        }
+      },
+      "CreditScoreResponse": {
+        "type": "object",
+        "properties": {
+          "agent_id": {"type": "string"},
+          "score": {"type": "integer", "minimum": 0, "maximum": 850},
+          "score_rating": {"type": "string"},
+          "factors": {
+            "type": "array",
+            "items": {"$ref": "#/components/schemas/CreditFactor"}
+          },
+          "on_chain_activity": {"type": "object"},
+          "reputation": {"type": "object"},
+          "recommendations": {
+            "type": "array",
+            "items": {"type": "string"}
+          },
+          "history": {
+            "type": "array",
+            "items": {"type": "object"}
+          },
+          "evaluated_at": {"type": "string"}
+        }
+      },
+      "CreditFactor": {
+        "type": "object",
+        "properties": {
+          "name": {"type": "string"},
+          "score": {"type": "integer", "minimum": 0, "maximum": 100},
+          "weight": {"type": "number", "minimum": 0, "maximum": 1},
+          "description": {"type": "string"}
+        }
+      }
+    }
+  }
+}
