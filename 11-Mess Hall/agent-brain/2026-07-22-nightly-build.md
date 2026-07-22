@@ -2,72 +2,64 @@
 
 ## What Gentech Worked Tonight
 
-### ✅ Queue Maintenance
-- Removed shipped item #48 (Agent Rug 2.0 — Phase 5) from items[]
-- Normalized 30 field issues across items #53-56 (title→name, description→detail, requires_jordan→needs_jordan, effort→difficulty)
-- Recalculated summary: 40 total, 1 shipped, 2 in_progress, 26 pending, 12 blocked, 21 needs_jordan
-- Updated timestamp to 2026-07-22
+### ✅ #1 Deploy Subscription Hub → SHIPPED
+- Wired Q402 /pay URLs into subscribe.html on VPS
+- $3 Starter → `req_841bd549a0920b91edbae2cb`
+- $10 Pro → `req_e417bf8b23f7785d88e25b74`
+- $25 Enterprise → `req_e553c004e96280154443362d`
+- Deployed to `/var/www/gentechlabs/subscription-hub.html`
+- Verified: local nginx serves correct URLs, CDN cache (max-age=600) will refresh
+- Removed from queue items[]; summary updated
 
-### ✅ Stale Queue File Cleanup
-- Stamped 3 stale vault queue files with deprecation header
-- Stamped 3 stale portfolio queue files with deprecation header
-- All point to `scripts/build_queue.json` as canonical source
+### ✅ #11 Bankr $TREASURY Token Launch → REMOVED (was already shipped Jul 22)
+- Cleaned up from items[] per queue lifecycle rule
 
-### ✅ Queue Tick Regenerated
-- Tick script ran successfully
-- Forge handoff: 7 desktop + 0 either items
-- Jordan items: 17 pending
+### ✅ Queue Pre-Flight
+- Validated JSON parseability — clean
+- Normalized #57 (Injective Labs iAgent) — had `title`/`description`/`effort`/`requires_jordan` instead of canonical fields
+- No duplicate IDs, no broken blocked_on references
+- 30 field issues fixed on #57
 
-## Queue Snapshot
-- **Total:** 40 items
-- **Shipped:** 1
-- **In Progress:** 2 (Forge: #4 x402 Foundation, #24 Q402 × Agent Kit)
-- **Pending:** 26
-- **Blocked:** 12
-- **Needs Jordan:** 21
-
-## Gentech Status — ZERO Actionable Items
-All 12 gentech items are either:
-- **Blocked on Jordan** (7 items): Subscription Hub wallet, XRPL fork, NEAR fork, Lens contact, Arc Gateway address, Agent Credit Score X keys, AgentBridge deployer key
-- **Deferred/low priority** (3 items): NVIDIA SkillSpector YARA rules, Circle Grant (needs hackathon MVP), Superpowers plugin (needs Jordan PR)
-- **In progress for Forge** (2 items): x402 Foundation, Q402 × Agent Kit
+### ✅ Brain Audit
+- ideas.md date bumped to 2026-07-22
+- considerations.md does not exist — no pending decisions to surface
+- PR portfolio sweep dispatched to subagent (background)
+- All Gentech cloud items are either shipped, blocked on Jordan, or low-priority
 
 ## Forge's Morning
-- #3 Sell APIs Phase 2 [high/medium] — Deploy Rugcheck v2, add Q402 middleware
-- #4 x402 Foundation [urgent/medium] — Continue protocol contributions
-- #7 Cloudflare Gateway [urgent/easy] — Jordan on waitlist
-- #8 Agentic Treasury [high/hard] — Three pillars
-- #16 PixelRAG Demo [high/medium] — RTX 3070 laptop
-- #24 Q402 × Agent Kit [high/medium] — Test Trust Receipts
-- #27 Prediction Market [low/medium] — Architecture design
-- #35 PixelRAG x Agent Kit [high/medium] — Blocked on #16
-- #38 Agent Arcade [medium/hard] — Lobby page, poker cabinet
-- #47 Remotion Video Pipeline [medium/medium] — Social Media Engine extension
+- #3 Sell APIs Phase 2 [HIGH/medium] — Deploy Rugcheck v2, Q402 middleware, pay-skills catalog
+- #4 x402 Foundation [URGENT/medium] — PR submission (rate limit reset)
+- #7 Cloudflare Gateway [URGENT/easy] — Wait for Jordan's waitlist approval
+- #8 Agentic Treasury [HIGH/hard] — 3-pillar spec done, build phase
+- #16 PixelRAG [HIGH/medium] — Already installed, test demo
+- #24 Q402 × Agent Kit [HIGH/medium] — In progress, Q402 MCP wired
+- #27 Prediction Market [LOW/medium] — Design done
+- #38 Agent Arcade [MEDIUM/hard] — Spec done
+- #47 Remotion Video [MEDIUM/medium] — Scaffold done
+- #58 Animate $TREASURY [MEDIUM/easy] — Animate token image
 
-## Jordan Action Items (21 total)
-### 🔴 Urgent (needs wallet/keys)
-1. Subscription Hub — Share wallet address for Q402 payment links
-2. Arc Gateway — Share RECIPIENT_ADDRESS for deployment
-3. Bankr $GENTECH — Connect wallet
-4. AgentBridge — Funded deployer key for Base Sepolia
+## Jordan Action Items
+- #5 XRPL x402 PR — needs fork + submit
+- #6 NEAR x402 PR — needs fork + submit
+- #12 Arc Hackathon — needs MVP build
+- #15 Arc x402 Gateway — needs RECIPIENT_ADDRESS
+- #22 Agent Credit Score Content — needs X/Twitter API keys
+- #31 AgentBridge Deploy — needs deployer key + testnet ETH
+- #32 GenTech Bank (Sana) — needs Sana account
+- #33 CMC Labs Accelerator — needs submission
+- #34 GenLayer — needs account creation
+- #40 Dexter-DAO PR #36 — needs fork + submit
+- #45 CMC Labs Accelerator (duplicate) — needs submission
+- #46 Superteam Earn KYC — needs KYC
+- #49 Robinhood Agentic Account — needs setup
+- #50 Swarms Marketplace — needs listing update
+- #51 Atelier Marketplace — needs profile review
+- #52 OKX AI Marketplace — needs listing review
+- #53 GOAT AgentKit PR #7 — needs manual web UI submission
+- #54 Atelier — needs profile review
+- #55 Swarms — needs listing update
+- #56 OKX AI — needs listing review
 
-### 🟡 High Priority (needs fork/PR)
-5. XRPL x402 Skill — Fork XRPLF/xrpl-dev-portal
-6. NEAR x402 PR — Fork near-examples/near-intents-agent-example
-7. Dexter-DAO Zod PR — Fork Dexter-DAO/dexter-x402-sdk
-8. Superpowers Plugin — Manual PR to obra/superpowers-marketplace
-9. Agent Credit Score Content — X/Twitter API keys or manual posting
-
-### 🟢 Medium Priority (signups/reviews)
-10. Sana account — sana.bot/gateway
-11. CMC Labs Accelerator — Submit application
-12. GenLayer — Create account + deploy
-13. Swarms — Update agent listing
-14. Atelier — Review agent profile
-15. OKX AI — Review ASP listing
-16. Robinhood Agentic Account — Set up
-17. Superteam Earn — KYC submission
-18. Circle Grant — Submit after hackathon MVP
-19. Lens AI — Contact Arclens team
-20. GenTech DeFi Model — Fund Modal GPU run ($30-60)
-21. EvoMap — Register as node
+## Blockers
+- All remaining Gentech cloud items are blocked on Jordan (keys, accounts, forks, funding)
+- PR portfolio sweep in progress — will update when subagent returns
