@@ -1,0 +1,2518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Darkest Raybands</title>
+  <style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Courier New', monospace;
+  background: linear-gradient(180deg, #0a0a0a 0%, #1a1a0a 50%, #0d0d08 100%);
+  color: #e0e0e0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+/* Dungeon Background Pattern */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image:
+    radial-gradient(circle at 20% 30%, rgba(255, 100, 0, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(255, 100, 0, 0.15) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* ============================================
+   META RAY-BAN DISPLAY: 600x600 px
+   ============================================ */
+.hud-container {
+  width: 600px;
+  height: 600px;
+  background: linear-gradient(180deg, #1a1a1a 0%, #0d0d0d 100%);
+  border: 2px solid #3a3a3a;
+  border-radius: 16px;
+  padding: 6px;
+  display: flex;
+  flex-direction: row;
+  gap: 6px;
+  box-shadow: 0 0 40px rgba(139, 69, 19, 0.3);
+  overflow: hidden;
+}
+
+/* ============================================
+   LEFT SIDE: GAME MAIN
+   ============================================ */
+.game-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  overflow: hidden;
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 3px;
+  border-bottom: 1px solid #3a3a3a;
+}
+
+.level-indicator {
+  font-size: 10px;
+  color: #8b4513;
+  font-weight: bold;
+}
+
+.turn-indicator {
+  font-size: 9px;
+  padding: 2px 6px;
+  border-radius: 6px;
+  background: #2d5a27;
+  color: #90ee90;
+  font-weight: bold;
+}
+
+.turn-indicator.enemy-turn {
+  background: #8b0000;
+  color: #ff6b6b;
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+/* ============================================
+   2D COMBAT AREA - Side View
+   ============================================ */
+.combat-area-2d {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(180deg, #0d0d0d 0%, #1a1a0a 100%);
+  border-radius: 6px;
+  border: 1px solid #3a3a3a;
+  padding: 8px;
+  position: relative;
+  overflow: hidden;
+  min-height: 220px;
+}
+
+/* Hero Side (Left) */
+.hero-side {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  z-index: 10;
+}
+
+/* Enemy Side (Right) */
+.enemy-side {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  z-index: 10;
+}
+
+/* Combat Slots */
+.combat-slot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.slot-character {
+  width: 70px;
+  height: 80px;
+  position: relative;
+}
+
+.slot-character svg {
+  width: 100%;
+  height: 100%;
+}
+
+.slot-hp-bar {
+  width: 60px;
+  height: 6px;
+  background: #2a2a2a;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.slot-hp-fill {
+  height: 100%;
+  transition: width 0.3s ease;
+  border-radius: 3px;
+}
+
+.hero-hp-fill {
+  background: linear-gradient(90deg, #228b22, #90ee90);
+}
+
+.enemy-hp-fill {
+  background: linear-gradient(90deg, #8b0000, #ff6b6b);
+}
+
+.slot-name {
+  font-size: 7px;
+  color: #a0a0a0;
+  text-align: center;
+}
+
+/* Attack Zone (Center) */
+.attack-zone {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 20;
+}
+
+.attacking-character {
+  width: 80px;
+  height: 100px;
+  position: absolute;
+  transition: all 0.3s ease;
+}
+
+.attacking-character svg {
+  width: 100%;
+  height: 100%;
+}
+
+.attacking-character.hidden {
+  display: none;
+}
+
+/* Attack Animations */
+@keyframes heroAttack {
+  0% { transform: translateX(-100px); }
+  40% { transform: translateX(0px); }
+  60% { transform: translateX(0px) scale(1.1); }
+  100% { transform: translateX(-100px); }
+}
+
+@keyframes enemyAttack {
+  0% { transform: translateX(100px); }
+  40% { transform: translateX(0px); }
+  60% { transform: translateX(0px) scale(1.1); }
+  100% { transform: translateX(100px); }
+}
+
+.attacking-character.hero-attacking {
+  animation: heroAttack 0.8s ease-in-out;
+}
+
+.attacking-character.enemy-attacking {
+  animation: enemyAttack 0.8s ease-in-out;
+}
+
+/* Dead slot */
+.combat-slot.dead .slot-character {
+  opacity: 0.3;
+  filter: grayscale(100%);
+}
+
+/* Current turn indicator */
+.combat-slot.current-turn {
+  filter: drop-shadow(0 0 6px #00ff00);
+}
+
+/* ============================================
+   PARTY PANEL - Display only
+   ============================================ */
+.party-panel {
+  background: #1a1a1a;
+  border: 1px solid #3a3a3a;
+  border-radius: 4px;
+  padding: 3px;
+}
+
+.party-container {
+  display: flex;
+  gap: 3px;
+  justify-content: center;
+}
+
+.party-member {
+  background: #0d0d0d;
+  border: 1px solid #2a2a2a;
+  border-radius: 3px;
+  padding: 2px 4px;
+  flex: 1;
+  max-width: 120px;
+}
+
+.party-member.dead {
+  opacity: 0.4;
+}
+
+.member-header {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  font-size: 7px;
+}
+
+.member-icon {
+  font-size: 8px;
+}
+
+.member-name {
+  font-weight: bold;
+  color: #ffd700;
+  font-size: 7px;
+}
+
+.member-role {
+  font-size: 6px;
+  color: #a0a0a0;
+  text-transform: uppercase;
+}
+
+.hp-bar-mini {
+  height: 4px;
+  background: #2a2a2a;
+  border-radius: 2px;
+  overflow: hidden;
+  margin-top: 2px;
+}
+
+.hp-fill-mini {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+.stats-mini {
+  display: flex;
+  gap: 4px;
+  font-size: 6px;
+  color: #a0a0a0;
+  margin-top: 1px;
+}
+
+.ap-stat { color: #4ecdc4; }
+
+.current-turn-indicator {
+  font-size: 6px;
+  color: #00ff00;
+  font-weight: bold;
+  text-align: center;
+  animation: glow 1.5s infinite alternate;
+}
+
+@keyframes glow {
+  from { text-shadow: 0 0 3px #00ff00; }
+  to { text-shadow: 0 0 8px #00ff00; }
+}
+
+/* ============================================
+   RIGHT SIDEBAR
+   ============================================ */
+.game-sidebar {
+  width: 160px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  overflow: hidden;
+}
+
+/* Tab Bar */
+.sidebar-tabs {
+  display: flex;
+  gap: 2px;
+}
+
+.tab-btn {
+  flex: 1;
+  padding: 6px;
+  background: #1a1a1a;
+  border: 1px solid #3a3a3a;
+  border-radius: 4px;
+  color: #a0a0a0;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tab-btn.active {
+  background: #2a2a2a;
+  border-color: #ffd700;
+  color: #ffd700;
+}
+
+.tab-btn:active {
+  transform: scale(0.95);
+}
+
+/* Sidebar Panels */
+.sidebar-panel {
+  background: #1a1a1a;
+  border: 1px solid #3a3a3a;
+  border-radius: 4px;
+  padding: 4px;
+  flex: 1;
+  overflow: hidden;
+  display: none;
+}
+
+.sidebar-panel.active {
+  display: flex;
+  flex-direction: column;
+}
+
+.panel-title {
+  font-size: 9px;
+  color: #ffd700;
+  font-weight: bold;
+  margin-bottom: 3px;
+  text-align: center;
+  padding: 2px;
+  background: #2a2a2a;
+  border-radius: 3px;
+}
+
+/* Abilities Container */
+.abilities-container {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.abilities-container::-webkit-scrollbar {
+  width: 2px;
+}
+
+/* Ability Cards - Large touch targets */
+.ability-card {
+  background: #0d0d0d;
+  border: 2px solid #2a2a2a;
+  border-radius: 4px;
+  padding: 6px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  border-left-width: 3px;
+}
+
+.ability-card:active:not(.disabled) {
+  transform: scale(0.97);
+  background: #1a1a1a;
+}
+
+.ability-card.disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.ability-name {
+  font-size: 9px;
+  font-weight: bold;
+  margin-bottom: 1px;
+}
+
+.ability-desc {
+  font-size: 7px;
+  color: #a0a0a0;
+  line-height: 1.2;
+}
+
+.ability-cost {
+  font-size: 7px;
+  color: #4ecdc4;
+  margin-top: 2px;
+}
+
+/* ============================================
+   ITEMS PANEL
+   ============================================ */
+.items-container {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.items-container::-webkit-scrollbar {
+  width: 2px;
+}
+
+.item-card {
+  background: #0d0d0d;
+  border: 2px solid #2a2a2a;
+  border-radius: 4px;
+  padding: 6px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.item-card:active:not(.disabled) {
+  transform: scale(0.97);
+  background: #1a1a1a;
+}
+
+.item-card.disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.item-icon {
+  font-size: 16px;
+}
+
+.item-info {
+  flex: 1;
+}
+
+.item-name {
+  font-size: 9px;
+  font-weight: bold;
+  color: #90ee90;
+}
+
+.item-desc {
+  font-size: 7px;
+  color: #a0a0a0;
+}
+
+.item-count {
+  font-size: 8px;
+  color: #ffd700;
+  font-weight: bold;
+}
+
+/* ============================================
+   COMBAT LOG
+   ============================================ */
+.combat-log {
+  background: #0d0d0d;
+  border: 1px solid #2a2a2a;
+  border-radius: 4px;
+  padding: 3px;
+  height: 50px;
+  overflow-y: auto;
+  font-size: 7px;
+}
+
+.combat-log::-webkit-scrollbar {
+  width: 2px;
+}
+
+.log-entry {
+  padding: 1px 0;
+  border-bottom: 1px solid #1a1a1a;
+  color: #a0a0a0;
+  line-height: 1.3;
+}
+
+/* ============================================
+   OVERLAYS
+   ============================================ */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.9);
+  z-index: 100;
+}
+
+.overlay.hidden {
+  display: none !important;
+}
+
+.overlay-content {
+  text-align: center;
+  padding: 30px;
+}
+
+.overlay h1 {
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+.overlay p {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.restart-btn {
+  padding: 12px 24px;
+  font-size: 16px;
+  background: #8b4513;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+}
+
+.restart-btn:hover {
+  background: #a0522d;
+}
+
+/* ============================================
+   DEATH ANIMATION
+   ============================================ */
+.dying {
+  animation: dyingFlash 0.5s ease-in-out;
+}
+
+@keyframes dyingFlash {
+  0% { filter: brightness(1); }
+  50% { filter: brightness(2) saturate(0); }
+  100% { filter: brightness(0.5) saturate(0); }
+}
+
+/* ============================================
+   VISUAL EFFECTS
+   ============================================ */
+.effect-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 50;
+}
+
+.damage-text {
+  position: absolute;
+  font-size: 20px;
+  font-weight: bold;
+  color: #ff4444;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  animation: damageFloat 1s ease-out forwards;
+  z-index: 60;
+}
+
+.heal-text {
+  position: absolute;
+  font-size: 20px;
+  font-weight: bold;
+  color: #44ff44;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  animation: damageFloat 1s ease-out forwards;
+  z-index: 60;
+}
+
+@keyframes damageFloat {
+  0% { opacity: 1; transform: translateY(0) scale(1); }
+  100% { opacity: 0; transform: translateY(-30px) scale(1.3); }
+}
+
+.ability-effect {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  animation: effectPop 0.6s ease-out forwards;
+}
+
+@keyframes effectPop {
+  0% { opacity: 0; transform: scale(0.3); }
+  50% { opacity: 1; transform: scale(1.1); }
+  100% { opacity: 0; transform: scale(0.8); }
+}
+
+/* Effect Types */
+.fire-effect {
+  background: radial-gradient(circle, #ff6600 0%, #ff0000 50%, transparent 70%);
+}
+
+.heal-effect {
+  background: radial-gradient(circle, #00ff88 0%, #00aa44 50%, transparent 70%);
+}
+
+.shield-effect {
+  background: radial-gradient(circle, #4488ff 0%, #2244aa 50%, transparent 70%);
+}
+
+.lightning-effect {
+  background: radial-gradient(circle, #ffff00 0%, #ffaa00 50%, transparent 70%);
+}
+
+.slash-effect {
+  background: linear-gradient(45deg, transparent 30%, #ffffff 50%, transparent 70%);
+}
+
+.frost-effect {
+  background: radial-gradient(circle, #88ddff 0%, #44aaff 50%, transparent 70%);
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 650px) {
+  .hud-container {
+    width: 100vw;
+    height: 100vh;
+    border-radius: 0;
+  }
+}
+  </style>
+</head>
+<body>
+  <div id="hud" class="hud-container">
+    <div id="effect-container" class="effect-container"></div>
+    <div class="game-main">
+      <div class="header">
+        <div class="level-indicator">Level: <span id="level">1</span></div>
+        <div id="turn-indicator" class="turn-indicator player-turn">Your turn</div>
+      </div>
+      <div class="combat-area-2d">
+        <div class="hero-side">
+          <div id="hero-slot-1" class="combat-slot hero-slot" data-index="0">
+            <div class="slot-character" id="hero-1"></div>
+            <div class="slot-hp-bar">
+              <div class="slot-hp-fill hero-hp-fill" id="hero-1-hp" style="width: 100%"></div>
+            </div>
+          </div>
+          <div id="hero-slot-2" class="combat-slot hero-slot" data-index="1">
+            <div class="slot-character" id="hero-2"></div>
+            <div class="slot-hp-bar">
+              <div class="slot-hp-fill hero-hp-fill" id="hero-2-hp" style="width: 100%"></div>
+            </div>
+          </div>
+          <div id="hero-slot-3" class="combat-slot hero-slot" data-index="2">
+            <div class="slot-character" id="hero-3"></div>
+            <div class="slot-hp-bar">
+              <div class="slot-hp-fill hero-hp-fill" id="hero-3-hp" style="width: 100%"></div>
+            </div>
+          </div>
+        </div>
+        <div class="attack-zone">
+          <div id="attacking-character" class="attacking-character hidden"></div>
+        </div>
+        <div class="enemy-side">
+          <div id="enemy-slot" class="combat-slot enemy-slot">
+            <div class="slot-character" id="enemy-1"></div>
+            <div class="slot-hp-bar">
+              <div class="slot-hp-fill enemy-hp-fill" id="enemy-1-hp" style="width: 100%"></div>
+            </div>
+            <div class="slot-name" id="enemy-name">Skeleton</div>
+          </div>
+        </div>
+      </div>
+      <div class="party-panel">
+        <div id="party-container" class="party-container"></div>
+      </div>
+    </div>
+    <div class="game-sidebar">
+      <div class="sidebar-tabs">
+        <button class="tab-btn active" id="abilities-tab">⚔️</button>
+        <button class="tab-btn" id="items-tab">🎒</button>
+      </div>
+      <div class="sidebar-panel active" id="abilities-panel">
+        <div class="panel-title">Abilities</div>
+        <div id="abilities-container" class="abilities-container"></div>
+      </div>
+      <div class="sidebar-panel" id="items-panel" style="display: none;">
+        <div class="panel-title">Items</div>
+        <div id="items-container" class="items-container"></div>
+      </div>
+      <div class="combat-log" id="combat-log">
+        <div class="log-entry">Combat log initialized...</div>
+      </div>
+    </div>
+  </div>
+  <div id="game-over" class="overlay hidden" style="display: none;">
+    <div class="overlay-content">
+      <h1>💀 YOUR PARTY FELL</h1>
+      <p>The dungeon claims another soul.</p>
+      <button id="restart-btn-over" class="restart-btn">Start Over</button>
+    </div>
+  </div>
+  <div id="game-won" class="overlay hidden" style="display: none;">
+    <div class="overlay-content">
+      <h1>⚔️ VICTORY!</h1>
+      <p>Your party conquers the dungeon!</p>
+      <button id="restart-btn-won" class="restart-btn">New Run</button>
+    </div>
+  </div>
+  <script>
+/* === classes.js === */
+// Party classes for Darkest Dungeon-style roguelike
+const CLASSES = {
+  warrior: {
+    name: 'Warrior',
+    role: 'tank',
+    position: 'front',
+    baseStats: {
+      maxHp: 120,
+      damage: 15,
+      speed: 45,
+      dodge: 10,
+      protection: 15
+    },
+    abilities: {
+      slash: {
+        name: 'Slash',
+        desc: 'Basic sword attack',
+        damage: 15,
+        apCost: 0,
+        type: 'physical'
+      },
+      defend: {
+        name: 'Defend',
+        desc: 'Increase protection for turn',
+        apCost: 0,
+        type: 'defense'
+      },
+      taunt: {
+        name: 'Taunt',
+        desc: 'Force enemy to target you',
+        apCost: 1,
+        type: 'debuff'
+      },
+      cleave: {
+        name: 'Cleave',
+        desc: 'Hit all enemies',
+        damage: 10,
+        apCost: 2,
+        type: 'physical'
+      },
+      ironWill: {
+        name: 'Iron Will',
+        desc: 'Heal self + increase protection',
+        healAmount: 30,
+        apCost: 2,
+        type: 'heal'
+      }
+    }
+  },
+  hunter: {
+    name: 'Hunter',
+    role: 'damage',
+    position: 'flexible',
+    baseStats: {
+      maxHp: 80,
+      damage: 20,
+      speed: 60,
+      dodge: 20,
+      protection: 5
+    },
+    abilities: {
+      shoot: {
+        name: 'Shoot',
+        desc: 'Quick crossbow shot',
+        damage: 20,
+        apCost: 0,
+        type: 'physical'
+      },
+      aimedShot: {
+        name: 'Aimed Shot',
+        desc: 'High damage, high accuracy',
+        damage: 35,
+        apCost: 1,
+        type: 'physical'
+      },
+      trap: {
+        name: 'Trap',
+        desc: 'Setup trap (stun next enemy attack)',
+        apCost: 1,
+        type: 'debuff'
+      },
+      huntersMark: {
+        name: 'Hunter\'s Mark',
+        desc: 'Increase damage taken by enemy',
+        apCost: 1,
+        type: 'debuff'
+      },
+      rapidFire: {
+        name: 'Rapid Fire',
+        desc: '3 shots, moderate damage each',
+        damage: 12,
+        apCost: 2,
+        type: 'physical'
+      }
+    }
+  },
+  mage: {
+    name: 'Mage',
+    role: 'crowdControl',
+    position: 'back',
+    baseStats: {
+      maxHp: 60,
+      damage: 25,
+      speed: 50,
+      dodge: 15,
+      protection: 0
+    },
+    abilities: {
+      fireball: {
+        name: 'Fireball',
+        desc: 'Magical fire damage',
+        damage: 25,
+        apCost: 0,
+        type: 'magical'
+      },
+      frostNova: {
+        name: 'Frost Nova',
+        desc: 'Freeze enemy (skip turn)',
+        apCost: 1,
+        type: 'cc'
+      },
+      chainLightning: {
+        name: 'Chain Lightning',
+        desc: 'Bounce lightning to all enemies',
+        damage: 18,
+        apCost: 2,
+        type: 'magical'
+      },
+      heal: {
+        name: 'Heal',
+        desc: 'Restore ally HP',
+        healAmount: 40,
+        apCost: 1,
+        type: 'heal'
+      },
+      shield: {
+        name: 'Shield',
+        desc: 'Protect ally from damage',
+        apCost: 1,
+        type: 'defense'
+      }
+    }
+  }
+};
+const CLASS_COLORS = {
+  warrior: '#8b4513',
+  hunter: '#228b22',
+  mage: '#4169e1'
+};
+const CLASS_ICONS = {
+  warrior: '⚔️',
+  hunter: '🏹',
+  mage: '🔮'
+};
+
+/* === game-constants.js === */
+const ENEMIES = {
+  skeleton: {
+    name: 'Skeleton',
+    hp: 40,
+    maxHp: 40,
+    speed: 50,
+    damage: 12,
+    special: 'boneShard',
+    abilities: {
+      boneShard: {
+        name: 'Bone Shard',
+        description: 'Throws sharp bones at target',
+        damage: 12,
+        type: 'physical',
+        cooldown: 0,
+        effect: 'boneShardEffect'
+      },
+      skeletalSwipe: {
+        name: 'Skeletal Swipe',
+        description: 'A slow but deadly claw attack',
+        damage: 18,
+        type: 'physical',
+        cooldown: 2,
+        effect: 'swipeEffect'
+      }
+    }
+  },
+  zombie: {
+    name: 'Zombie',
+    hp: 70,
+    maxHp: 70,
+    speed: 30,
+    damage: 15,
+    special: 'poison',
+    abilities: {
+      zombieBite: {
+        name: 'Zombie Bite',
+        description: 'Bites target, may poison',
+        damage: 15,
+        type: 'physical',
+        cooldown: 0,
+        effect: 'biteEffect'
+      },
+      poisonSpit: {
+        name: 'Poison Spit',
+        description: 'Spits toxic bile, poisons target',
+        damage: 10,
+        type: 'poison',
+        cooldown: 3,
+        effect: 'poisonEffect',
+        poisonDamage: 7,
+        poisonChance: 0.4
+      }
+    }
+  },
+  ghost: {
+    name: 'Ghost',
+    hp: 55,
+    maxHp: 55,
+    speed: 80,
+    damage: 18,
+    special: 'phase',
+    abilities: {
+      ghostlyTouch: {
+        name: 'Ghostly Touch',
+        description: 'Cold touch bypasses armor',
+        damage: 18,
+        type: 'magical',
+        cooldown: 0,
+        effect: 'touchEffect',
+        bypassesArmor: true
+      },
+      soulDrain: {
+        name: 'Soul Drain',
+        description: 'Drains HP to heal itself',
+        damage: 20,
+        type: 'magical',
+        cooldown: 2,
+        effect: 'drainEffect',
+        healPercent: 0.3
+      }
+    }
+  },
+  deathKnight: {
+    name: 'Death Knight',
+    hp: 120,
+    maxHp: 120,
+    speed: 65,
+    damage: 22,
+    special: 'undead',
+    abilities: {
+      deathStrike: {
+        name: 'Death Strike',
+        description: 'Powerful blade attack with dark magic',
+        damage: 22,
+        type: 'physical',
+        cooldown: 0,
+        effect: 'deathStrikeEffect'
+      },
+      darkBlast: {
+        name: 'Dark Blast',
+        description: 'Unleashes dark energy, AOE damage',
+        damage: 18,
+        type: 'magical',
+        cooldown: 2,
+        effect: 'darkBlastEffect',
+        isAOE: true
+      },
+      raiseDead: {
+        name: 'Raise Dead',
+        description: 'Summons skeletal reinforcements',
+        damage: 0,
+        type: 'summon',
+        cooldown: 4,
+        effect: 'raiseDeadEffect',
+        summonDamage: 10
+      }
+    }
+  }
+};
+const LEVELS = [1, 2, 3];
+const ACTIONS = {
+  attack: { name: 'Attack', cost: 0, damage: 12, type: 'physical' },
+  guard: { name: 'Guard', cost: 0, damage: 0, type: 'defense' },
+  counter: { name: 'Counter', cost: 1, damage: 18, type: 'counter' },
+  holyStrike: { name: 'Holy Strike', cost: 2, damage: 25, type: 'holy' },
+  smite: { name: 'Smite', cost: 2, damage: 22, type: 'holy' },
+  heavyStrike: { name: 'Heavy Strike', cost: 2, damage: 28, type: 'physical' },
+  quickStrike: { name: 'Quick Strike', cost: 1, damage: 15, type: 'physical' },
+  taunt: { name: 'Taunt', cost: 1, damage: 5, type: 'mental' },
+  potion: { name: 'Potion', cost: 0, damage: 0, type: 'heal' }
+};
+const GESTURE_MAP = {
+  attack: 'fist_clench',
+  guard: 'palm_open_wrist_rotate',
+  counter: 'pinch_upward_flick',
+  holyStrike: 'double_tap_forward',
+  smite: 'double_tap_backward',
+  potion: 'peace_sign'
+};
+const KEYBOARD_MAP = {
+  'a': 'attack',
+  'g': 'guard',
+  'c': 'counter',
+  'h': 'holyStrike',
+  's': 'smite',
+  'e': 'heavyStrike',
+  'q': 'quickStrike',
+  't': 'taunt',
+  'p': 'potion'
+};
+
+/* === characters.js === */
+// Character SVG models for Meta Ray-Ban Fighter - Premium Cool Designs
+const CHARACTERS = {
+  // HEROES - Premium Designs with Glowing Effects
+  warrior: {
+    name: 'Warrior',
+    svg: `
+      <svg viewBox="0 0 80 120" class="warrior-sprite">
+        <!-- Glow Effect -->
+        <defs>
+          <filter id="warriorGlow" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="2" result="blur"/>
+            <feMerge>
+              <feMergeNode in="blur"/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+          </filter>
+        </defs>
+        <!-- Cape with gradient -->
+        <path d="M20 30 Q15 50 20 70 L35 70 L35 30 Z" fill="url(#capeGradient)" opacity="0.8"/>
+        <defs>
+          <linearGradient id="capeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#dc143c;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#8b0000;stop-opacity:1" />
+          </linearGradient>
+        </defs>
+        <!-- Helmet with wing design -->
+        <path d="M28 5 Q40 -5 52 5 L50 20 Q40 18 30 20 Z" fill="url(#helmetGradient)" stroke="#ffd700" stroke-width="2" filter="url(#warriorGlow)"/>
+        <defs>
+          <linearGradient id="helmetGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#ffd700;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#daa520;stop-opacity:1" />
+          </linearGradient>
+        </defs>
+        <!-- Wings on helmet -->
+        <path d="M30 8 Q35 -3 40 5" fill="#dc143c" stroke="#8b0000" stroke-width="1"/>
+        <path d="M50 8 Q45 -3 40 5" fill="#dc143c" stroke="#8b0000" stroke-width="1"/>
+        <!-- Visor with glow -->
+        <rect x="30" y="12" width="20" height="8" fill="#1a1a1a" stroke="#ff0000" stroke-width="1"/>
+        <circle cx="35" cy="16" r="2" fill="#ff0000">
+          <animate attributeName="opacity" values="0.5;1;0.5" dur="2s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="45" cy="16" r="2" fill="#ff0000">
+          <animate attributeName="opacity" values="0.5;1;0.5" dur="2s" repeatCount="indefinite"/>
+        </circle>
+        <!-- Face -->
+        <rect x="30" y="22" width="20" height="10" fill="#f5deb3"/>
+        <!-- Body Armor with glowing runes -->
+        <rect x="25" y="32" width="30" height="40" fill="url(#armorGradient)" stroke="#ffd700" stroke-width="2" filter="url(#warriorGlow)"/>
+        <defs>
+          <linearGradient id="armorGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#e8e8e8;stop-opacity:1" />
+            <stop offset="50%" style="stop-color:#c0c0c0;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#a0a0a0;stop-opacity:1" />
+          </linearGradient>
+        </defs>
+        <!-- Glowing runes on chest -->
+        <path d="M32 35 L36 40 L32 45" fill="none" stroke="#00ff00" stroke-width="1">
+          <animate attributeName="stroke-opacity" values="0.3;1;0.3" dur="1.5s" repeatCount="indefinite"/>
+        </path>
+        <path d="M48 35 L44 40 L48 45" fill="none" stroke="#00ff00" stroke-width="1">
+          <animate attributeName="stroke-opacity" values="0.3;1;0.3" dur="1.5s" repeatCount="indefinite"/>
+        </path>
+        <!-- Energy Sword -->
+        <rect x="55" y="30" width="5" height="50" fill="url(#swordGradient)" stroke="#00ffff" stroke-width="1" filter="url(#warriorGlow)"/>
+        <defs>
+          <linearGradient id="swordGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+            <stop offset="50%" style="stop-color:#00ffff;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#0066ff;stop-opacity:1" />
+          </linearGradient>
+        </defs>
+        <!-- Sword glow -->
+        <rect x="56" y="30" width="3" height="50" fill="none" stroke="#00ffff" stroke-width="2" opacity="0.5">
+          <animate attributeName="stroke-width" values="2;4;2" dur="1s" repeatCount="indefinite"/>
+        </rect>
+        <!-- Energy Shield -->
+        <ellipse cx="15" cy="52" rx="8" ry="12" fill="none" stroke="#ffd700" stroke-width="3" opacity="0.7">
+          <animate attributeName="stroke-opacity" values="0.5;1;0.5" dur="2s" repeatCount="indefinite"/>
+        </ellipse>
+        <!-- Legs with energy trails -->
+        <rect x="30" y="72" width="8" height="40" fill="url(#armorGradient)" stroke="#ffd700" stroke-width="1"/>
+        <rect x="42" y="72" width="8" height="40" fill="url(#armorGradient)" stroke="#ffd700" stroke-width="1"/>
+      </svg>
+    `
+  },
+  hunter: {
+    name: 'Hunter',
+    svg: `
+      <svg viewBox="0 0 80 120" class="hunter-sprite">
+        <!-- Glow Effect -->
+        <defs>
+          <filter id="hunterGlow" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="2" result="blur"/>
+            <feMerge>
+              <feMergeNode in="blur"/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+          </filter>
+        </defs>
+        <!-- Magic Hood -->
+        <ellipse cx="40" cy="18" rx="18" ry="20" fill="url(#hoodGradient)" stroke="#00ff00" stroke-width="2" filter="url(#hunterGlow)"/>
+        <defs>
+          <radialGradient id="hoodGradient" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" style="stop-color:#228b22;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#006400;stop-opacity:1" />
+          </radialGradient>
+        </defs>
+        <!-- Mystical rune on hood -->
+        <circle cx="40" cy="10" r="4" fill="#00ff00" opacity="0.7">
+          <animate attributeName="r" values="4;5;4" dur="2s" repeatCount="indefinite"/>
+        </circle>
+        <!-- Face -->
+        <ellipse cx="40" cy="22" rx="10" ry="12" fill="#f5deb3"/>
+        <!-- Glowing eyes -->
+        <ellipse cx="35" cy="20" rx="3" ry="4" fill="#00ff00">
+          <animate attributeName="fill-opacity" values="0.6;1;0.6" dur="1s" repeatCount="indefinite"/>
+        </ellipse>
+        <ellipse cx="45" cy="20" rx="3" ry="4" fill="#00ff00">
+          <animate attributeName="fill-opacity" values="0.6;1;0.6" dur="1s" repeatCount="indefinite"/>
+        </ellipse>
+        <!-- Energy Leather Armor -->
+        <rect x="28" y="34" width="24" height="35" fill="url(#leatherGradient)" stroke="#00ff00" stroke-width="1" filter="url(#hunterGlow)"/>
+        <defs>
+          <linearGradient id="leatherGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#2e8b57;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#1a5e1a;stop-opacity:1" />
+          </linearGradient>
+        </defs>
+        <!-- Energy vines on armor -->
+        <path d="M32 38 Q36 42 32 48 Q36 52 32 58" fill="none" stroke="#00ff00" stroke-width="1" opacity="0.7">
+          <animate attributeName="stroke-dasharray" values="5,5;10,5;5,5" dur="1s" repeatCount="indefinite"/>
+        </path>
+        <!-- Glowing Quiver -->
+        <rect x="52" y="36" width="8" height="25" fill="url(#quiverGradient)" stroke="#00ff00" stroke-width="1"/>
+        <defs>
+          <linearGradient id="quiverGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color:#8b4513;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#5a2d0a;stop-opacity:1" />
+          </linearGradient>
+        </defs>
+        <!-- Energy arrows -->
+        <line x1="54" y1="38" x2="54" y2="58" stroke="#00ff00" stroke-width="2" opacity="0.8">
+          <animate attributeName="stroke-opacity" values="0.5;1;0.5" dur="1.5s" repeatCount="indefinite"/>
+        </line>
+        <!-- Energy Crossbow -->
+        <rect x="55" y="48" width="25" height="5" fill="#8b4513" stroke="#00ff00" stroke-width="1"/>
+        <line x1="78" y1="43" x2="78" y2="58" stroke="#00ff00" stroke-width="2">
+          <animate attributeName="stroke-width" values="2;3;2" dur="0.5s" repeatCount="indefinite"/>
+        </line>
+        <circle cx="78" cy="50" r="3" fill="#00ff00" opacity="0.8">
+          <animate attributeName="r" values="3;4;3" dur="0.5s" repeatCount="indefinite"/>
+        </circle>
+        <!-- Energy Dagger -->
+        <rect x="6" y="48" width="12" height="3" fill="#c0c0c0" stroke="#00ff00" stroke-width="1"/>
+        <polygon points="6,49 0,50 6,51" fill="#00ff00">
+          <animate attributeName="fill-opacity" values="0.6;1;0.6" dur="1s" repeatCount="indefinite"/>
+        </polygon>
+        <!-- Legs with energy markings -->
+        <rect x="30" y="69" width="8" height="35" fill="url(#leatherGradient)" stroke="#00ff00" stroke-width="1"/>
+        <rect x="42" y="69" width="8" height="35" fill="url(#leatherGradient)" stroke="#00ff00" stroke-width="1"/>
+      </svg>
+    `
+  },
+  mage: {
+    name: 'Mage',
+    svg: `
+      <svg viewBox="0 0 80 120" class="mage-sprite">
+        <!-- Glow Effect -->
+        <defs>
+          <filter id="mageGlow" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="3" result="blur"/>
+            <feMerge>
+              <feMergeNode in="blur"/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+          </filter>
+        </defs>
+        <!-- Magical Hat -->
+        <path d="M25 25 L40 0 L55 25 Z" fill="url(#hatGradient)" stroke="#00ffff" stroke-width="2" filter="url(#mageGlow)"/>
+        <defs>
+          <linearGradient id="hatGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color:#4169e1;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#1e3a8a;stop-opacity:1" />
+          </linearGradient>
+        </defs>
+        <!-- Hat brim -->
+        <ellipse cx="40" cy="25" rx="18" ry="6" fill="#4169e1" stroke="#00ffff" stroke-width="2"/>
+        <!-- Star on hat -->
+        <polygon points="40,8 42,14 48,14 43,18 45,24 40,20 35,24 37,18 32,14 38,14" fill="#00ffff">
+          <animate attributeName="opacity" values="0.5;1;0.5" dur="1s" repeatCount="indefinite"/>
+        </polygon>
+        <!-- Face -->
+        <ellipse cx="40" cy="38" rx="12" ry="14" fill="#f5deb3"/>
+        <!-- Mystical eyes -->
+        <circle cx="35" cy="36" r="2" fill="#00ffff">
+          <animate attributeName="r" values="2;3;2" dur="1.5s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="45" cy="36" r="2" fill="#00ffff">
+          <animate attributeName="r" values="2;3;2" dur="1.5s" repeatCount="indefinite"/>
+        </circle>
+        <!-- Magical Beard -->
+        <path d="M32 44 Q40 52 48 44" fill="#e0e0e0" stroke="#00ffff" stroke-width="1"/>
+        <!-- Magical Robe with energy patterns -->
+        <path d="M28 48 L18 100 L62 100 L52 48 Z" fill="url(#robeGradient)" stroke="#00ffff" stroke-width="2" filter="url(#mageGlow)"/>
+        <defs>
+          <linearGradient id="robeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#4169e1;stop-opacity:1" />
+            <stop offset="50%" style="stop-color:#1e3a8a;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#0a0a5a;stop-opacity:1" />
+          </linearGradient>
+        </defs>
+        <!-- Energy patterns on robe -->
+        <path d="M25 55 L35 55 L35 65 L25 65 Z" fill="none" stroke="#00ffff" stroke-width="1" opacity="0.6">
+          <animate attributeName="stroke-opacity" values="0.3;0.8;0.3" dur="1s" repeatCount="indefinite"/>
+        </path>
+        <path d="M45 55 L55 55 L55 65 L45 65 Z" fill="none" stroke="#00ffff" stroke-width="1" opacity="0.6">
+          <animate attributeName="stroke-opacity" values="0.3;0.8;0.3" dur="1s" repeatCount="indefinite"/>
+        </path>
+        <!-- Magical Staff -->
+        <rect x="58" y="25" width="4" height="75" fill="url(#staffGradient)" stroke="#00ffff" stroke-width="1"/>
+        <defs>
+          <linearGradient id="staffGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color:#8b4513;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#5a2d0a;stop-opacity:1" />
+          </linearGradient>
+        </defs>
+        <!-- Glowing orb on staff -->
+        <circle cx="60" cy="20" r="8" fill="url(#orbGradient)" filter="url(#mageGlow)">
+          <animate attributeName="r" values="8;9;8" dur="1s" repeatCount="indefinite"/>
+        </circle>
+        <defs>
+          <radialGradient id="orbGradient" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" style="stop-color:#00ffff;stop-opacity:1" />
+            <stop offset="50%" style="stop-color:#4169e1;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#1e3a8a;stop-opacity:1" />
+          </radialGradient>
+        </defs>
+        <circle cx="60" cy="20" r="4" fill="#ffffff" opacity="0.8">
+          <animate attributeName="opacity" values="0.5;1;0.5" dur="0.5s" repeatCount="indefinite"/>
+        </circle>
+        <!-- Orb glow -->
+        <ellipse cx="60" cy="20" rx="12" ry="12" fill="none" stroke="#00ffff" stroke-width="1" opacity="0.4">
+          <animate attributeName="rx" values="12;14;12" dur="1s" repeatCount="indefinite"/>
+          <animate attributeName="ry" values="12;14;12" dur="1s" repeatCount="indefinite"/>
+        </ellipse>
+        <!-- Left hand casting spell -->
+        <circle cx="20" cy="60" r="6" fill="#00ffff" opacity="0.8">
+          <animate attributeName="r" values="6;7;6" dur="0.8s" repeatCount="indefinite"/>
+        </circle>
+        <ellipse cx="20" cy="60" rx="10" ry="10" fill="none" stroke="#00ffff" stroke-width="1" opacity="0.5">
+          <animate attributeName="opacity" values="0.3;0.7;0.3" dur="0.8s" repeatCount="indefinite"/>
+        </ellipse>
+        <!-- Magic sparkles -->
+        <circle cx="25" cy="55" r="1" fill="#00ffff">
+          <animate attributeName="opacity" values="0;1;0" dur="0.5s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="15" cy="65" r="1" fill="#00ffff">
+          <animate attributeName="opacity" values="0;1;0" dur="0.5s" repeatCount="indefinite" begin="0.25s"/>
+        </circle>
+        <circle cx="20" cy="70" r="1" fill="#00ffff">
+          <animate attributeName="opacity" values="0;1;0" dur="0.5s" repeatCount="indefinite" begin="0.5s"/>
+        </circle>
+      </svg>
+    `
+  },
+  // ENEMIES - Menacing Designs
+  skeleton: {
+    name: 'Skeleton',
+    svg: `
+      <svg viewBox="0 0 80 120" class="skeleton-sprite">
+        <!-- Skull with eerie glow -->
+        <ellipse cx="40" cy="20" rx="15" ry="18" fill="#f5f5dc" stroke="#ff0000" stroke-width="2"/>
+        <ellipse cx="40" cy="20" rx="15" ry="18" fill="none" stroke="#ff0000" stroke-width="1" opacity="0.5">
+          <animate attributeName="opacity" values="0.2;0.6;0.2" dur="1s" repeatCount="indefinite"/>
+        </ellipse>
+        <!-- Glowing eye sockets -->
+        <ellipse cx="33" cy="18" rx="4" ry="5" fill="#1a1a1a"/>
+        <ellipse cx="33" cy="18" rx="4" ry="5" fill="none" stroke="#ff0000" stroke-width="1" opacity="0.5">
+          <animate attributeName="stroke-opacity" values="0.3;0.8;0.3" dur="0.8s" repeatCount="indefinite"/>
+        </ellipse>
+        <circle cx="33" cy="18" r="1.5" fill="#ff0000">
+          <animate attributeName="r" values="1.5;2;1.5" dur="0.5s" repeatCount="indefinite"/>
+        </circle>
+        <ellipse cx="47" cy="18" rx="4" ry="5" fill="#1a1a1a"/>
+        <ellipse cx="47" cy="18" rx="4" ry="5" fill="none" stroke="#ff0000" stroke-width="1" opacity="0.5">
+          <animate attributeName="stroke-opacity" values="0.3;0.8;0.3" dur="0.8s" repeatCount="indefinite"/>
+        </ellipse>
+        <circle cx="47" cy="18" r="1.5" fill="#ff0000">
+          <animate attributeName="r" values="1.5;2;1.5" dur="0.5s" repeatCount="indefinite"/>
+        </circle>
+        <!-- Nose hole with red glow -->
+        <path d="M40 22 L38 28 L42 28 Z" fill="#1a1a1a"/>
+        <path d="M40 22 L38 28 L42 28 Z" fill="none" stroke="#ff0000" stroke-width="1" opacity="0.4">
+          <animate attributeName="stroke-opacity" values="0.2;0.6;0.2" dur="1s" repeatCount="indefinite"/>
+        </path>
+        <!-- Teeth with rot effect -->
+        <line x1="33" y1="32" x2="47" y2="32" stroke="#1a1a1a" stroke-width="2"/>
+        <line x1="35" y1="32" x2="35" y2="36" stroke="#1a1a1a" stroke-width="1"/>
+        <line x1="40" y1="32" x2="40" y2="35" stroke="#1a1a1a" stroke-width="1"/>
+        <line x1="45" y1="32" x2="45" y2="35" stroke="#1a1a1a" stroke-width="1"/>
+        <!-- Ribs with ghostly glow -->
+        <line x1="25" y1="45" x2="55" y2="45" stroke="#f5f5dc" stroke-width="3"/>
+        <line x1="25" y1="45" x2="55" y2="45" stroke="none" fill="none">
+          <animate attributeName="stroke-width" values="3;4;3" dur="1s" repeatCount="indefinite"/>
+        </line>
+        <line x1="25" y1="52" x2="55" y2="52" stroke="#f5f5dc" stroke-width="3"/>
+        <line x1="25" y1="59" x2="55" y2="59" stroke="#f5f5dc" stroke-width="3"/>
+        <!-- Spine -->
+        <line x1="40" y1="40" x2="40" y2="70" stroke="#f5f5dc" stroke-width="3"/>
+        <line x1="40" y1="40" x2="40" y2="70" stroke="#ff0000" stroke-width="1" opacity="0.3">
+          <animate attributeName="stroke-opacity" values="0.2;0.6;0.2" dur="1s" repeatCount="indefinite"/>
+        </line>
+        <!-- Arms with menacing claws -->
+        <line x1="25" y1="45" x2="10" y2="70" stroke="#f5f5dc" stroke-width="2"/>
+        <line x1="10" y1="70" x2="5" y2="78" stroke="#f5f5dc" stroke-width="2"/>
+        <line x1="10" y1="70" x2="8" y2="82" stroke="#f5f5dc" stroke-width="2"/>
+        <line x1="55" y1="45" x2="70" y2="70" stroke="#f5f5dc" stroke-width="2"/>
+        <line x1="70" y1="70" x2="75" y2="78" stroke="#f5f5dc" stroke-width="2"/>
+        <line x1="70" y1="70" x2="72" y2="82" stroke="#f5f5dc" stroke-width="2"/>
+        <!-- Legs -->
+        <line x1="35" y1="70" x2="30" y2="110" stroke="#f5f5dc" stroke-width="2"/>
+        <line x1="45" y1="70" x2="50" y2="110" stroke="#f5f5dc" stroke-width="2"/>
+        <!-- Bone glow effect -->
+        <ellipse cx="40" cy="50" rx="20" ry="30" fill="none" stroke="#ff0000" stroke-width="1" opacity="0.2">
+          <animate attributeName="rx" values="20;22;20" dur="2s" repeatCount="indefinite"/>
+          <animate attributeName="ry" values="30;32;30" dur="2s" repeatCount="indefinite"/>
+        </ellipse>
+      </svg>
+    `
+  },
+  zombie: {
+    name: 'Zombie',
+    svg: `
+      <svg viewBox="0 0 80 120" class="zombie-sprite">
+        <!-- Rotting head with toxic glow -->
+        <ellipse cx="40" cy="20" rx="16" ry="19" fill="url(#zombieSkin)" stroke="#4a0080" stroke-width="2"/>
+        <defs>
+          <radialGradient id="zombieSkin" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" style="stop-color:#6b8e23;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#2d4a0c;stop-opacity:1" />
+          </radialGradient>
+        </defs>
+        <!-- One missing eye, one glowing red -->
+        <ellipse cx="33" cy="18" rx="5" ry="6" fill="#2d4a0c"/>
+        <line x1="30" y1="15" x2="36" y2="21" stroke="#1a1a1a" stroke-width="1"/>
+        <line x1="36" y1="15" x2="30" y2="21" stroke="#1a1a1a" stroke-width="1"/>
+        <ellipse cx="48" cy="18" rx="5" ry="6" fill="#1a1a1a"/>
+        <circle cx="48" cy="18" r="2" fill="#ff0000">
+          <animate attributeName="r" values="2;3;2" dur="0.8s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="48" cy="18" r="4" fill="none" stroke="#ff0000" stroke-width="1" opacity="0.5">
+          <animate attributeName="r" values="4;5;4" dur="0.8s" repeatCount="indefinite"/>
+        </circle>
+        <!-- Stitched mouth dripping with venom -->
+        <path d="M32 32 L48 32" stroke="#1a1a1a" stroke-width="2"/>
+        <path d="M35 30 L35 34" stroke="#4a0080" stroke-width="1"/>
+        <path d="M42 30 L42 34" stroke="#4a0080" stroke-width="1"/>
+        <path d="M45 30 L45 34" stroke="#4a0080" stroke-width="1"/>
+        <!-- Venom drip -->
+        <ellipse cx="40" cy="36" rx="2" ry="4" fill="#8b008b" opacity="0.7">
+          <animate attributeName="cy" values="36;40;36" dur="2s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values="0.7;0.3;0.7" dur="2s" repeatCount="indefinite"/>
+        </ellipse>
+        <!-- Ripped toxic body -->
+        <rect x="28" y="40" width="24" height="35" fill="url(#zombieBody)" stroke="#4a0080" stroke-width="1"/>
+        <defs>
+          <linearGradient id="zombieBody" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#4a6a1a;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#2d4a0c;stop-opacity:1" />
+          </linearGradient>
+        </defs>
+        <!-- Toxic holes in body -->
+        <circle cx="35" cy="50" r="3" fill="#4a0080" opacity="0.6">
+          <animate attributeName="opacity" values="0.4;0.8;0.4" dur="1s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="45" cy="60" r="2" fill="#4a0080" opacity="0.6">
+          <animate attributeName="opacity" values="0.4;0.8;0.4" dur="1.2s" repeatCount="indefinite"/>
+        </circle>
+        <!-- Ripped clothes -->
+        <path d="M30 42 L35 45 L32 48 L36 51 L30 54" fill="none" stroke="#3a5a1a" stroke-width="2"/>
+        <path d="M50 42 L45 45 L48 48 L44 51 L50 54" fill="none" stroke="#3a5a1a" stroke-width="2"/>
+        <!-- Toxic aura -->
+        <ellipse cx="40" cy="55" rx="22" ry="25" fill="none" stroke="#4a0080" stroke-width="1" opacity="0.3">
+          <animate attributeName="rx" values="22;24;22" dur="2s" repeatCount="indefinite"/>
+          <animate attributeName="ry" values="25;27;25" dur="2s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values="0.2;0.4;0.2" dur="2s" repeatCount="indefinite"/>
+        </ellipse>
+        <!-- Arms with toxic claws -->
+        <rect x="15" y="42" width="12" height="30" fill="#6b8e23" stroke="#4a0080" stroke-width="1"/>
+        <line x1="10" y1="72" x2="5" y2="80" stroke="#6b8e23" stroke-width="2"/>
+        <line x1="10" y1="72" x2="8" y2="85" stroke="#6b8e23" stroke-width="2"/>
+        <line x1="10" y1="72" x2="12" y2="88" stroke="#6b8e23" stroke-width="2"/>
+        <rect x="53" y="42" width="12" height="30" fill="#6b8e23" stroke="#4a0080" stroke-width="1"/>
+        <line x1="70" y1="72" x2="75" y2="80" stroke="#6b8e23" stroke-width="2"/>
+        <line x1="70" y1="72" x2="72" y2="85" stroke="#6b8e23" stroke-width="2"/>
+        <line x1="70" y1="72" x2="68" y2="88" stroke="#6b8e23" stroke-width="2"/>
+        <!-- Legs -->
+        <rect x="30" y="75" width="10" height="35" fill="#6b8e23" stroke="#4a0080" stroke-width="1"/>
+        <rect x="40" y="75" width="10" height="35" fill="#6b8e23" stroke="#4a0080" stroke-width="1"/>
+      </svg>
+    `
+  },
+  ghost: {
+    name: 'Ghost',
+    svg: `
+      <svg viewBox="0 0 80 120" class="ghost-sprite">
+        <!-- Ethereal body with ghostly glow -->
+        <path d="M20 10 Q40 0 60 10 Q70 20 70 40 Q70 60 65 75 Q60 90 55 80 Q50 70 45 80 Q40 90 35 80 Q30 70 25 80 Q20 90 15 75 Q10 60 10 40 Q10 20 20 10" fill="url(#ghostBody)" stroke="#87ceeb" stroke-width="2"/>
+        <defs>
+          <radialGradient id="ghostBody" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" style="stop-color:#e0ffff;stop-opacity:0.9" />
+            <stop offset="50%" style="stop-color:#b0c4de;stop-opacity:0.8" />
+            <stop offset="100%" style="stop-color:#778899;stop-opacity:0.7" />
+          </radialGradient>
+        </defs>
+        <!-- Eerie glow pulsing -->
+        <path d="M20 10 Q40 0 60 10 Q70 20 70 40 Q70 60 65 75 Q60 90 55 80 Q50 70 45 80 Q40 90 35 80 Q30 70 25 80 Q20 90 15 75 Q10 60 10 40 Q10 20 20 10" fill="none" stroke="#87ceeb" stroke-width="1" opacity="0.5">
+          <animate attributeName="opacity" values="0.3;0.7;0.3" dur="1.5s" repeatCount="indefinite"/>
+        </path>
+        <!-- Glowing eyes -->
+        <ellipse cx="32" cy="35" rx="6" ry="8" fill="#1a1a1a"/>
+        <ellipse cx="32" cy="35" rx="6" ry="8" fill="none" stroke="#00ffff" stroke-width="1" opacity="0.5">
+          <animate attributeName="stroke-opacity" values="0.3;0.8;0.3" dur="1s" repeatCount="indefinite"/>
+        </ellipse>
+        <circle cx="34" cy="33" r="2" fill="#00ffff">
+          <animate attributeName="r" values="2;2.5;2" dur="0.8s" repeatCount="indefinite"/>
+        </circle>
+        <ellipse cx="48" cy="35" rx="6" ry="8" fill="#1a1a1a"/>
+        <ellipse cx="48" cy="35" rx="6" ry="8" fill="none" stroke="#00ffff" stroke-width="1" opacity="0.5">
+          <animate attributeName="stroke-opacity" values="0.3;0.8;0.3" dur="1s" repeatCount="indefinite"/>
+        </ellipse>
+        <circle cx="50" cy="33" r="2" fill="#00ffff">
+          <animate attributeName="r" values="2;2.5;2" dur="0.8s" repeatCount="indefinite"/>
+        </circle>
+        <!-- Sinister smile -->
+        <path d="M35 50 Q40 55 45 50" stroke="#1a1a1a" stroke-width="2" fill="none"/>
+        <!-- Ghostly aura -->
+        <ellipse cx="40" cy="50" rx="35" ry="45" fill="none" stroke="#87ceeb" stroke-width="1" opacity="0.3">
+          <animate attributeName="rx" values="35;38;35" dur="2s" repeatCount="indefinite"/>
+          <animate attributeName="ry" values="45;48;45" dur="2s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values="0.2;0.4;0.2" dur="2s" repeatCount="indefinite"/>
+        </ellipse>
+        <!-- Floating particles -->
+        <circle cx="25" cy="25" r="1" fill="#87ceeb" opacity="0.6">
+          <animate attributeName="cy" values="25;20;25" dur="2s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values="0.6;0.2;0.6" dur="2s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="55" cy="30" r="1" fill="#87ceeb" opacity="0.6">
+          <animate attributeName="cy" values="30;25;30" dur="2.5s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values="0.6;0.2;0.6" dur="2.5s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="35" cy="70" r="1" fill="#87ceeb" opacity="0.6">
+          <animate attributeName="cy" values="70;65;70" dur="1.8s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values="0.6;0.2;0.6" dur="1.8s" repeatCount="indefinite"/>
+        </circle>
+      </svg>
+    `
+  },
+  deathKnight: {
+    name: 'Death Knight',
+    svg: `
+      <svg viewBox="0 0 80 120" class="death-knight-sprite">
+        <!-- Menacing dark armor with blood glow -->
+        <!-- Helmet -->
+        <rect x="28" y="5" width="24" height="25" fill="url(#darkArmor)" stroke="#8b0000" stroke-width="2"/>
+        <defs>
+          <linearGradient id="darkArmor" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#4a4a4a;stop-opacity:1" />
+            <stop offset="50%" style="stop-color:#2f2f2f;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#1a1a1a;stop-opacity:1" />
+          </linearGradient>
+        </defs>
+        <!-- Blood glow on helmet -->
+        <rect x="28" y="5" width="24" height="25" fill="none" stroke="#8b0000" stroke-width="1" opacity="0.4">
+          <animate attributeName="stroke-opacity" values="0.3;0.7;0.3" dur="1s" repeatCount="indefinite"/>
+        </rect>
+        <!-- Visor with blood-red eyes -->
+        <rect x="30" y="12" width="20" height="8" fill="#1a1a1a" stroke="#8b0000" stroke-width="1"/>
+        <rect x="32" y="14" width="4" height="4" fill="#ff0000">
+          <animate attributeName="fill-opacity" values="0.6;1;0.6" dur="0.8s" repeatCount="indefinite"/>
+        </rect>
+        <rect x="44" y="14" width="4" height="4" fill="#ff0000">
+          <animate attributeName="fill-opacity" values="0.6;1;0.6" dur="0.8s" repeatCount="indefinite"/>
+        </rect>
+        <!-- Blood plume -->
+        <path d="M40 5 Q50 -8 55 5 Q60 0 55 10" fill="#8b0000" stroke="#5a0000" stroke-width="1" opacity="0.8">
+          <animate attributeName="opacity" values="0.6;1;0.6" dur="1.2s" repeatCount="indefinite"/>
+        </path>
+        <!-- Dark armor body with blood runes -->
+        <rect x="25" y="30" width="30" height="45" fill="url(#darkArmor)" stroke="#8b0000" stroke-width="2"/>
+        <!-- Blood runes on armor -->
+        <path d="M32 35 L36 40 L32 45" fill="none" stroke="#8b0000" stroke-width="1">
+          <animate attributeName="stroke-opacity" values="0.3;0.8;0.3" dur="1s" repeatCount="indefinite"/>
+        </path>
+        <path d="M48 35 L44 40 L48 45" fill="none" stroke="#8b0000" stroke-width="1">
+          <animate attributeName="stroke-opacity" values="0.3;0.8;0.3" dur="1s" repeatCount="indefinite"/>
+        </path>
+        <!-- Dark energy sword -->
+        <rect x="55" y="35" width="5" height="40" fill="url(#darkSword)" stroke="#8b0000" stroke-width="1"/>
+        <defs>
+          <linearGradient id="darkSword" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color:#4a4a4a;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#1a1a1a;stop-opacity:1" />
+          </linearGradient>
+        </defs>
+        <!-- Sword blood glow -->
+        <rect x="56" y="35" width="3" height="40" fill="none" stroke="#8b0000" stroke-width="2" opacity="0.6">
+          <animate attributeName="stroke-width" values="2;3;2" dur="0.8s" repeatCount="indefinite"/>
+        </rect>
+        <!-- Blood shield -->
+        <rect x="10" y="35" width="12" height="35" fill="url(#darkArmor)" stroke="#8b0000" stroke-width="2"/>
+        <circle cx="16" cy="52" r="6" fill="#8b0000" stroke="#5a0000" stroke-width="1" opacity="0.7">
+          <animate attributeName="r" values="6;7;6" dur="1s" repeatCount="indefinite"/>
+        </circle>
+        <!-- Dark aura -->
+        <ellipse cx="40" cy="50" rx="35" ry="45" fill="none" stroke="#8b0000" stroke-width="1" opacity="0.4">
+          <animate attributeName="rx" values="35;38;35" dur="2s" repeatCount="indefinite"/>
+          <animate attributeName="ry" values="45;48;45" dur="2s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values="0.3;0.5;0.3" dur="2s" repeatCount="indefinite"/>
+        </ellipse>
+        <!-- Legs -->
+        <rect x="30" y="75" width="10" height="40" fill="url(#darkArmor)" stroke="#8b0000" stroke-width="1"/>
+        <rect x="40" y="75" width="10" height="40" fill="url(#darkArmor)" stroke="#8b0000" stroke-width="1"/>
+        <!-- Blood particles -->
+        <circle cx="20" cy="40" r="1" fill="#8b0000" opacity="0.6">
+          <animate attributeName="cy" values="40;35;40" dur="2s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values="0.6;0.2;0.6" dur="2s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="60" cy="45" r="1" fill="#8b0000" opacity="0.6">
+          <animate attributeName="cy" values="45;40;45" dur="2.5s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values="0.6;0.2;0.6" dur="2.5s" repeatCount="indefinite"/>
+        </circle>
+      </svg>
+    `
+  }
+};
+
+/* === game-state.js === */
+class PartyMember {
+  constructor(classKey, name) {
+    const classData = CLASSES[classKey];
+    this.classKey = classKey;
+    this.name = name || classData.name;
+    this.role = classData.role;
+    this.position = classData.position;
+    this.abilities = classData.abilities;
+    this.color = CLASS_COLORS[classKey];
+    this.maxHp = classData.baseStats.maxHp;
+    this.hp = classData.baseStats.maxHp;
+    this.maxAp = 2;
+    this.ap = 2;
+    this.damage = classData.baseStats.damage;
+    this.speed = classData.baseStats.speed;
+    this.dodge = classData.baseStats.dodge;
+    this.protection = classData.baseStats.protection;
+    this.isAlive = true;
+    this.buffs = [];
+  }
+  takeDamage(damage, isPhysical = true) {
+    if (!this.isAlive) return 0;
+    let actualDamage = damage;
+    if (isPhysical && this.protection > 0) {
+      actualDamage = Math.max(0, damage - this.protection);
+      console.log(`${this.name} blocked ${damage - actualDamage} damage`);
+    }
+    this.hp = Math.max(0, this.hp - actualDamage);
+    if (this.hp <= 0) {
+      this.isAlive = false;
+      this.hp = 0;
+    }
+    return actualDamage;
+  }
+  heal(amount) {
+    if (!this.isAlive) return 0;
+    this.hp = Math.min(this.maxHp, this.hp + amount);
+    return amount;
+  }
+  useAbility(abilityKey) {
+    const ability = this.abilities[abilityKey];
+    if (!ability) {
+      console.error(`Ability ${abilityKey} not found for ${this.name}`);
+      return null;
+    }
+    if (this.ap < ability.cost) {
+      console.error(`Not enough AP for ${ability.name}`);
+      return null;
+    }
+    this.ap -= ability.cost;
+    return { ...ability, classKey: this.classKey, userName: this.name };
+  }
+  resetAp() {
+    this.ap = this.maxAp;
+  }
+}
+class GameState {
+  constructor() {
+    this.party = [];
+    this.currentEnemy = null;
+    this.level = 1;
+    this.maxLevel = 3;
+    this.gameOver = false;
+    this.combatLog = [];
+    this.potions = 3;
+    this.turnOrder = [];
+    this.currentTurnIndex = 0;
+    this.enemyBuffs = [];
+  }
+  initParty(members = ['warrior', 'hunter', 'mage']) {
+    this.party = members.map((classKey, index) => {
+      const names = ['Sir Galahad', 'Aria Swiftarrow', 'Elara Moonweaver'];
+      return new PartyMember(classKey, names[index]);
+    });
+    this.log(`Party formed: ${this.party.map(m => m.name).join(', ')}`);
+  }
+  reset() {
+    this.party = [];
+    this.currentEnemy = null;
+    this.level = 1;
+    this.gameOver = false;
+    this.combatLog = [];
+    this.potions = 3;
+    this.turnOrder = [];
+    this.currentTurnIndex = 0;
+    this.enemyBuffs = [];
+  }
+  log(message) {
+    this.combatLog.push(message);
+    console.log(message);
+  }
+  startLevel(levelNum) {
+    this.level = levelNum;
+    this.enemyBuffs = [];
+    const enemyKeys = ['skeleton', 'zombie', 'ghost', 'deathKnight'];
+    const enemyKey = levelNum <= 3 ? enemyKeys[levelNum - 1] : 'deathKnight';
+    const baseEnemy = ENEMIES[enemyKey] || ENEMIES.skeleton;
+    this.currentEnemy = {
+      ...baseEnemy,
+      hp: baseEnemy.hp + (levelNum - 1) * 10,
+      maxHp: baseEnemy.maxHp + (levelNum - 1) * 10,
+      damage: baseEnemy.damage + (levelNum - 1) * 3,
+      stunned: 0,
+      forcedTarget: null,
+      damageTakenBonus: 0
+    };
+    this.turnOrder = this.buildTurnOrder();
+    this.currentTurnIndex = 0;
+    this.log(`Level ${levelNum}: ${this.currentEnemy.name} appears!`);
+    this.log(`HP: ${this.currentEnemy.hp} | Damage: ${this.currentEnemy.damage}`);
+  }
+  buildTurnOrder() {
+    const livingParty = this.party.filter(m => m.isAlive);
+    const turns = [];
+    livingParty.forEach(member => {
+      turns.push({
+        type: 'player',
+        member: member,
+        speed: member.speed,
+        name: member.name
+      });
+    });
+    if (this.currentEnemy && this.currentEnemy.hp > 0 && this.currentEnemy.stunned <= 0) {
+      turns.push({
+        type: 'enemy',
+        speed: this.currentEnemy.speed,
+        name: this.currentEnemy.name
+      });
+    }
+    return turns.sort((a, b) => b.speed - a.speed);
+  }
+  getCurrentTurn() {
+    return this.turnOrder[this.currentTurnIndex];
+  }
+  isPartyAlive() {
+    return this.party.some(m => m.isAlive);
+  }
+  playerAction(member, abilityKey) {
+    const ability = member.useAbility(abilityKey);
+    if (!ability) {
+      return { success: false, message: 'Cannot use ability' };
+    }
+    const enemy = this.currentEnemy;
+    let result = { damage: 0, heal: 0, message: '', effects: [] };
+    if (ability.type === 'heal' && ability.target === 'ally') {
+      const lowestHpMember = this.party
+        .filter(m => m.isAlive)
+        .sort((a, b) => (a.hp / a.maxHp) - (b.hp / b.maxHp))[0];
+      if (lowestHpMember) {
+        const healAmount = lowestHpMember.heal(ability.heal);
+        result.heal = healAmount;
+        result.message = `${member.name} healed ${lowestHpMember.name} for ${healAmount} HP`;
+        this.log(result.message);
+      }
+    } else if (ability.type === 'buff' && ability.target === 'ally') {
+      const lowestHpMember = this.party
+        .filter(m => m.isAlive)
+        .sort((a, b) => (a.hp / a.maxHp) - (b.hp / b.maxHp))[0];
+      if (lowestHpMember && ability.effect) {
+        lowestHpMember.protection += ability.effect.protection;
+        lowestHpMember.buffs.push({
+          name: ability.name,
+          effect: ability.effect,
+          duration: ability.effect.duration
+        });
+        result.message = `${member.name} shielded ${lowestHpMember.name}`;
+        this.log(result.message);
+      }
+    } else if (ability.type === 'cc' && ability.effect?.stun) {
+      this.currentEnemy.stunned = ability.effect.stun;
+      result.message = `${member.name} stunned the enemy!`;
+      this.log(result.message);
+      result.effects.push({ type: 'stun', duration: ability.effect.stun });
+    } else if (ability.type === 'debuff') {
+      if (ability.effect?.forcedTarget) {
+        this.currentEnemy.forcedTarget = member;
+        result.message = `${member.name} taunted the enemy!`;
+        this.log(result.message);
+      }
+      if (ability.effect?.damageTaken) {
+        this.currentEnemy.damageTakenBonus = ability.effect.damageTaken;
+        result.message = `${member.name} marked the enemy!`;
+        this.log(result.message);
+      }
+      if (ability.effect?.stun) {
+        this.currentEnemy.stunned = ability.effect.stun;
+        result.message = `${member.name} trapped the enemy!`;
+        this.log(result.message);
+      }
+    } else {
+      let damage = ability.damage || member.damage;
+      if (ability.hits) {
+        damage *= ability.hits;
+      }
+      if (ability.type === 'magical' || member.classKey === 'mage') {
+        damage *= 2;
+      }
+      if (ability.critBonus) {
+        const critRoll = Math.random() * 100;
+        if (critRoll < ability.critBonus + member.dodge) {
+          damage *= 2;
+          result.message = `CRITICAL HIT! ${member.name}'s ${ability.name} dealt ${damage} damage!`;
+        } else {
+          result.message = `${member.name} used ${ability.name}: ${damage} damage`;
+        }
+      } else {
+        result.message = `${member.name} used ${ability.name}: ${damage} damage`;
+      }
+      if (this.currentEnemy.damageTakenBonus > 0) {
+        damage = Math.floor(damage * (1 + this.currentEnemy.damageTakenBonus / 100));
+        result.message += ` (marked: +${this.currentEnemy.damageTakenBonus}%)`;
+      }
+      this.currentEnemy.hp -= damage;
+      result.damage = damage;
+      this.log(result.message);
+      if (this.currentEnemy.hp <= 0) {
+        this.log(`${this.currentEnemy.name} has been defeated!`);
+      }
+    }
+    return { success: true, ...result };
+  }
+  usePotion(targetMember) {
+    if (this.potions <= 0) {
+      return { success: false, message: 'No potions left' };
+    }
+    if (!targetMember || !targetMember.isAlive) {
+      return { success: false, message: 'Invalid target' };
+    }
+    const healAmount = Math.floor(targetMember.maxHp * 0.5);
+    targetMember.heal(healAmount);
+    this.potions--;
+    this.log(`${targetMember.name} used potion: +${healAmount} HP`);
+    this.log(`Potions remaining: ${this.potions}`);
+    return { success: true, heal: healAmount, target: targetMember.name };
+  }
+  enemyTurn() {
+    if (!this.currentEnemy || this.currentEnemy.hp <= 0) return 0;
+    const enemy = this.currentEnemy;
+    // Check if enemy is stunned
+    if (enemy.stunned && enemy.stunned > 0) {
+      this.log(`${enemy.name} is stunned and cannot act!`);
+      return 0;
+    }
+    // Pick a random ability from enemy's abilities
+    const abilities = Object.values(enemy.abilities || {});
+    const availableAbilities = abilities.filter(ab => ab.cooldown === 0);
+    if (availableAbilities.length === 0) {
+      // If all abilities on cooldown, wait
+      abilities.forEach(ab => ab.cooldown = Math.max(0, ab.cooldown - 1));
+      return 0;
+    }
+    const ability = availableAbilities[Math.floor(Math.random() * availableAbilities.length)];
+    let damage = ability.damage || enemy.damage;
+    let totalDamage = 0;
+    let effectType = ability.effect || 'attackEffect';
+    // Cooldown management
+    abilities.forEach(ab => ab.cooldown = Math.max(0, ab.cooldown - 1));
+    const abilityIndex = Object.keys(enemy.abilities).findIndex(k => enemy.abilities[k].name === ability.name);
+    if (abilityIndex !== -1) {
+      const abilityKey = Object.keys(enemy.abilities)[abilityIndex];
+      enemy.abilities[abilityKey].cooldown = enemy.abilities[abilityKey].cooldown + 2;
+    }
+    // Find target
+    const livingParty = this.party.filter(m => m.isAlive);
+    if (livingParty.length === 0) return 0;
+    let target = enemy.forcedTarget;
+    if (!target || !target.isAlive) {
+      target = livingParty[Math.floor(Math.random() * livingParty.length)];
+    }
+    // Handle AOE attacks
+    if (ability.isAOE) {
+      this.log(`${enemy.name} used ${ability.name}!`);
+      livingParty.forEach(member => {
+        const actualDamage = member.takeDamage(damage);
+        totalDamage += actualDamage;
+        this.log(`  → ${member.name}: ${actualDamage} damage`);
+      });
+      effectType = 'aoeEffect';
+    } else {
+      // Handle special ability effects
+      if (ability.bypassesArmor) {
+        const actualDamage = target.takeDamage(damage, 0); // No armor
+        totalDamage = actualDamage;
+        this.log(`${enemy.name} used ${ability.name}: ${actualDamage} damage (bypassed armor!)`);
+        effectType = 'bypassEffect';
+      } else if (ability.poisonChance && Math.random() < ability.poisonChance) {
+        const actualDamage = target.takeDamage(damage);
+        totalDamage = actualDamage;
+        target.poisoned = (target.poisoned || 0) + 2;
+        this.log(`${enemy.name} used ${ability.name}: ${actualDamage} damage + poisoned!`);
+        effectType = 'poisonEffect';
+      } else if (ability.healPercent) {
+        const actualDamage = target.takeDamage(damage);
+        totalDamage = actualDamage;
+        const healAmount = Math.floor(damage * ability.healPercent);
+        enemy.hp = Math.min(enemy.maxHp, enemy.hp + healAmount);
+        this.log(`${enemy.name} used ${ability.name}: ${actualDamage} damage, healed ${healAmount} HP`);
+        effectType = 'drainEffect';
+      } else if (ability.summonDamage) {
+        this.log(`${enemy.name} used ${ability.name}! Skeleton attacks too!`);
+        const actualDamage = target.takeDamage(damage);
+        const summonDamage = target.takeDamage(ability.summonDamage);
+        totalDamage = actualDamage + summonDamage;
+        this.log(`  → Main: ${actualDamage} damage`);
+        this.log(`  → Summon: ${summonDamage} damage`);
+        effectType = 'summonEffect';
+      } else {
+        // Regular attack
+        const actualDamage = target.takeDamage(damage);
+        totalDamage = actualDamage;
+        this.log(`${enemy.name} used ${ability.name}: ${actualDamage} damage`);
+      }
+    }
+    // Check for poison damage
+    this.party.forEach(member => {
+      if (member.poisoned > 0) {
+        const poisonDmg = Math.floor(ability.poisonDamage || 7);
+        const actualDamage = member.takeDamage(poisonDmg);
+        this.log(`${member.name} took ${actualDamage} poison damage`);
+        member.poisoned--;
+      }
+    });
+    if (!this.isPartyAlive()) {
+      this.gameOver = true;
+      this.log('💀 GAME OVER - Your party has fallen!');
+    }
+    return { totalDamage, effectType, ability };
+  }
+  advanceTurn() {
+    this.currentTurnIndex = (this.currentTurnIndex + 1) % this.turnOrder.length;
+    const currentTurn = this.getCurrentTurn();
+    if (currentTurn.type === 'player') {
+      currentTurn.member.resetAp();
+    }
+    if (this.currentEnemy) {
+      if (this.currentEnemy.stunned > 0) {
+        this.currentEnemy.stunned--;
+        this.log(`${this.currentEnemy.name} is stunned!`);
+      }
+      if (this.currentEnemy.forcedTarget) {
+        this.currentEnemy.forcedTarget = null;
+      }
+      if (this.currentEnemy.damageTakenBonus > 0) {
+        this.currentEnemy.damageTakenBonus = 0;
+      }
+    }
+    this.party.forEach(member => {
+      member.buffs = member.buffs.filter(buff => {
+        buff.duration--;
+        if (buff.duration <= 0) {
+          if (buff.effect.protection) {
+            member.protection -= buff.effect.protection;
+          }
+          return false;
+        }
+        return true;
+      });
+    });
+  }
+  checkVictory() {
+    if (this.currentEnemy.hp <= 0) {
+      if (this.level < this.maxLevel) {
+        const nextLevel = this.level + 1;
+        return {
+          won: false,
+          nextLevel,
+          message: `Victory! Continue to Level ${nextLevel}`
+        };
+      } else {
+        return { won: true, message: '🏆 Victory! You conquered the dungeon!' };
+      }
+    }
+    return null;
+  }
+  checkGameOver() {
+    if (!this.isPartyAlive()) {
+      return { gameOver: true, message: '💀 Your party has fallen!' };
+    }
+    return null;
+  }
+}
+
+/* === gesture-controller.js === */
+// Gesture simulator for demo development
+// In production, this would interface with Meta Neural Band SDK
+class GestureController {
+  constructor(onGesture) {
+    this.onGesture = onGesture;
+    this.isListening = false;
+  }
+  start() {
+    if (this.isListening) return;
+    this.isListening = true;
+    document.addEventListener('keydown', this.handleKeyPress);
+    console.log('Gesture controller started. Use A/G/C/H/S/P keys to simulate gestures.');
+  }
+  stop() {
+    this.isListening = false;
+    document.removeEventListener('keydown', this.handleKeyPress);
+  }
+  handleKeyPress = (e) => {
+    const key = e.key.toLowerCase();
+    const actionMap = {
+      'a': 'attack',
+      'g': 'guard',
+      'c': 'counter',
+      'h': 'holyStrike',
+      's': 'smite',
+      'p': 'potion'
+    };
+    const gestureName = actionMap[key];
+    if (gestureName && this.onGesture) {
+      console.log(`Gesture detected: ${gestureName}`);
+      this.onGesture(gestureName);
+    }
+  };
+  // Simulate EMG gesture detection (for Meta Neural Band integration)
+  async detectEMGGesture() {
+    // In production, this would call Meta Neural Band SDK
+    // Example:
+    // const gesture = await MetaNeuralBand.detectGesture();
+    // return gesture;
+    // Demo: random gesture for testing (rarely used)
+    const gestures = ['attack', 'guard', 'counter', 'holyStrike', 'smite', 'potion'];
+    return gestures[Math.floor(Math.random() * gestures.length)];
+  }
+}
+
+/* === touch-controller.js === */
+class TouchController {
+  constructor(onAction) {
+    this.onAction = onAction;
+    this.isListening = false;
+    this.touchZones = [];
+  }
+  start() {
+    if (this.isListening) return;
+    this.isListening = true;
+    document.querySelectorAll('.touch-zone').forEach(zone => {
+      this.touchZones.push(zone);
+      zone.addEventListener('click', (e) => {
+        e.preventDefault();
+        const action = zone.getAttribute('data-action');
+        if (action && this.onAction) {
+          this.onAction(action);
+          this.visualFeedback(zone);
+        }
+      });
+      zone.addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        zone.style.transform = 'scale(0.95)';
+      }, { passive: false });
+      zone.addEventListener('touchend', (e) => {
+        e.preventDefault();
+        zone.style.transform = 'scale(1)';
+        const action = zone.getAttribute('data-action');
+        if (action && this.onAction) {
+          this.onAction(action);
+        }
+      });
+    });
+    console.log('Touch controller started. Tap action buttons to play.');
+  }
+  stop() {
+    this.isListening = false;
+    this.touchZones.forEach(zone => {
+      zone.removeEventListener('click', () => {});
+      zone.removeEventListener('touchstart', () => {});
+      zone.removeEventListener('touchend', () => {});
+    });
+  }
+  visualFeedback(zone) {
+    zone.classList.add('active');
+    setTimeout(() => zone.classList.remove('active'), 200);
+  }
+}
+
+/* === app.js === */
+class MetaFighterApp {
+  constructor() {
+    this.gameState = new GameState();
+    this.gestureController = new GestureController((action) => this.handleAction(action));
+    this.touchController = new TouchController((action) => this.handleAction(action));
+    this.selectedMemberIndex = 0;
+    this.currentTab = 'abilities';
+    this.ui = {
+      level: document.getElementById('level'),
+      turnIndicator: document.getElementById('turn-indicator'),
+      combatLog: document.getElementById('combat-log'),
+      enemyName: document.getElementById('enemy-name'),
+      attackingCharacter: document.getElementById('attacking-character'),
+      effectContainer: document.getElementById('effect-container'),
+      abilitiesContainer: document.getElementById('abilities-container'),
+      itemsContainer: document.getElementById('items-container'),
+      abilitiesPanel: document.getElementById('abilities-panel'),
+      itemsPanel: document.getElementById('items-panel'),
+      abilitiesTab: document.getElementById('abilities-tab'),
+      itemsTab: document.getElementById('items-tab'),
+      partyContainer: document.getElementById('party-container'),
+      gameOver: document.getElementById('game-over'),
+      gameWon: document.getElementById('game-won'),
+      restartBtnOver: document.getElementById('restart-btn-over'),
+      restartBtnWon: document.getElementById('restart-btn-won'),
+      heroSlots: [
+        document.getElementById('hero-slot-1'),
+        document.getElementById('hero-slot-2'),
+        document.getElementById('hero-slot-3')
+      ],
+      heroSlotChars: [
+        document.getElementById('hero-1'),
+        document.getElementById('hero-2'),
+        document.getElementById('hero-3')
+      ],
+      heroSlotHPs: [
+        document.getElementById('hero-1-hp'),
+        document.getElementById('hero-2-hp'),
+        document.getElementById('hero-3-hp')
+      ],
+      enemySlot: document.getElementById('enemy-slot'),
+      enemySlotChar: document.getElementById('enemy-1'),
+      enemySlotHP: document.getElementById('enemy-1-hp')
+    };
+    this.init();
+  }
+  init() {
+    this.ui.restartBtnOver.addEventListener('click', () => this.restartGame());
+    this.ui.restartBtnWon.addEventListener('click', () => this.restartGame());
+    // Tab switching
+    this.ui.abilitiesTab.addEventListener('click', () => this.switchTab('abilities'));
+    this.ui.itemsTab.addEventListener('click', () => this.switchTab('items'));
+    this.startGame();
+  }
+  switchTab(tab) {
+    this.currentTab = tab;
+    if (tab === 'abilities') {
+      this.ui.abilitiesPanel.classList.add('active');
+      this.ui.abilitiesPanel.style.display = 'flex';
+      this.ui.itemsPanel.classList.remove('active');
+      this.ui.itemsPanel.style.display = 'none';
+      this.ui.abilitiesTab.classList.add('active');
+      this.ui.itemsTab.classList.remove('active');
+    } else {
+      this.ui.itemsPanel.classList.add('active');
+      this.ui.itemsPanel.style.display = 'flex';
+      this.ui.abilitiesPanel.classList.remove('active');
+      this.ui.abilitiesPanel.style.display = 'none';
+      this.ui.itemsTab.classList.add('active');
+      this.ui.abilitiesTab.classList.remove('active');
+    }
+  }
+  startGame() {
+    this.gameState.reset();
+    this.gameState.initParty(['warrior', 'hunter', 'mage']);
+    this.gameState.startLevel(1);
+    this.isGameActive = true;
+    this.gestureController.start();
+    this.touchController.start();
+    this.selectedMemberIndex = 0;
+    this.renderCombatSlots();
+    this.renderAbilities();
+    this.renderItems();
+    this.updateUI();
+    this.processTurn();
+  }
+  restartGame() {
+    document.body.classList.remove('dying');
+    this.ui.gameOver.classList.add('hidden');
+    this.ui.gameOver.style.display = 'none';
+    this.ui.gameWon.classList.add('hidden');
+    this.ui.gameWon.style.display = 'none';
+    this.startGame();
+  }
+  renderCombatSlots() {
+    // Render heroes
+    this.gameState.party.forEach((member, index) => {
+      const slot = this.ui.heroSlots[index];
+      const charEl = this.ui.heroSlotChars[index];
+      const hpEl = this.ui.heroSlotHPs[index];
+      if (!member.isAlive) {
+        slot.classList.add('dead');
+      } else {
+        slot.classList.remove('dead');
+      }
+      // Get character SVG
+      const character = CHARACTERS[member.classKey];
+      if (character) {
+        charEl.innerHTML = character.svg;
+      }
+      // Update HP bar
+      const hpPercent = (member.hp / member.maxHp) * 100;
+      hpEl.style.width = `${hpPercent}%`;
+    });
+    // Render enemy
+    const enemy = this.gameState.currentEnemy;
+    if (enemy) {
+      let enemyName = enemy.name.toLowerCase();
+      if (enemyName === 'death knight') enemyName = 'deathKnight';
+      const enemyCharacter = CHARACTERS[enemyName];
+      if (enemyCharacter) {
+        this.ui.enemySlotChar.innerHTML = enemyCharacter.svg;
+      }
+      this.ui.enemyName.textContent = enemy.name;
+      const hpPercent = (enemy.hp / enemy.maxHp) * 100;
+      this.ui.enemySlotHP.style.width = `${hpPercent}%`;
+    }
+  }
+  renderAbilities() {
+    const currentTurn = this.gameState.getCurrentTurn();
+    if (!currentTurn || currentTurn.type !== 'player') {
+      this.ui.abilitiesContainer.innerHTML = '<div class="no-selection">Wait for your turn...</div>';
+      return;
+    }
+    const member = this.gameState.party.find(m => m.name === currentTurn.name);
+    if (!member || !member.isAlive) {
+      this.ui.abilitiesContainer.innerHTML = '<div class="no-selection">Character is dead!</div>';
+      return;
+    }
+    this.ui.abilitiesContainer.innerHTML = '';
+    Object.entries(member.abilities).forEach(([key, ability]) => {
+      const abilityEl = document.createElement('div');
+      abilityEl.className = `ability-card ${ability.apCost > member.ap ? 'disabled' : ''}`;
+      abilityEl.style.borderLeftColor = member.color;
+      abilityEl.innerHTML = `
+        <div class="ability-name">${ability.name}</div>
+        <div class="ability-desc">${ability.desc}</div>
+        <div class="ability-cost">Cost: ${ability.apCost} AP</div>
+      `;
+      if (ability.apCost <= member.ap && member.isAlive) {
+        abilityEl.addEventListener('click', () => {
+          this.handleAbility(key);
+        });
+      }
+      this.ui.abilitiesContainer.appendChild(abilityEl);
+    });
+  }
+  renderItems() {
+    const potionCount = this.gameState.potions;
+    this.ui.itemsContainer.innerHTML = `
+      <div class="item-card ${potionCount <= 0 ? 'disabled' : ''}" id="potion-item">
+        <div class="item-icon">🧪</div>
+        <div class="item-info">
+          <div class="item-name">Health Potion</div>
+          <div class="item-desc">Restore 30 HP to lowest ally</div>
+        </div>
+        <div class="item-count">x${potionCount}</div>
+      </div>
+    `;
+    if (potionCount > 0) {
+      document.getElementById('potion-item').addEventListener('click', () => {
+        this.usePotion();
+      });
+    }
+  }
+  updateUI() {
+    const { level, combatLog } = this.gameState;
+    this.ui.level.textContent = level;
+    // Update turn indicator
+    const currentTurn = this.gameState.getCurrentTurn();
+    if (currentTurn) {
+      if (currentTurn.type === 'player') {
+        this.ui.turnIndicator.textContent = `${currentTurn.name}'s turn`;
+        this.ui.turnIndicator.className = 'turn-indicator player-turn';
+      } else {
+        this.ui.turnIndicator.textContent = 'Enemy turn';
+        this.ui.turnIndicator.className = 'turn-indicator enemy-turn';
+      }
+    }
+    // Highlight current character slot
+    this.ui.heroSlots.forEach((slot, i) => {
+      if (currentTurn && currentTurn.type === 'player') {
+        const member = this.gameState.party[i];
+        if (member && member.name === currentTurn.name) {
+          slot.classList.add('current-turn');
+        } else {
+          slot.classList.remove('current-turn');
+        }
+      } else {
+        slot.classList.remove('current-turn');
+      }
+    });
+    // Update combat log
+    this.ui.combatLog.innerHTML = '';
+    combatLog.slice(-8).forEach(log => {
+      const logEl = document.createElement('div');
+      logEl.className = 'log-entry';
+      logEl.textContent = log;
+      this.ui.combatLog.appendChild(logEl);
+    });
+    this.ui.combatLog.scrollTop = this.ui.combatLog.scrollHeight;
+  }
+  processTurn() {
+    const currentTurn = this.gameState.getCurrentTurn();
+    if (!currentTurn) return;
+    if (currentTurn.type === 'player') {
+      this.renderAbilities();
+      this.renderItems();
+    } else if (currentTurn.type === 'enemy') {
+      this.ui.turnIndicator.textContent = 'Enemy turn';
+      this.ui.turnIndicator.className = 'turn-indicator enemy-turn';
+      setTimeout(() => {
+        this.performEnemyAttack();
+      }, 500);
+    }
+  }
+  performEnemyAttack() {
+    const enemy = this.gameState.currentEnemy;
+    if (!enemy) return;
+    // Get a living hero to attack
+    const livingHeroes = this.gameState.party.filter(m => m.isAlive);
+    if (livingHeroes.length === 0) return;
+    const target = livingHeroes[Math.floor(Math.random() * livingHeroes.length)];
+    const targetIndex = this.gameState.party.indexOf(target);
+    // Animate enemy attacking
+    this.ui.enemySlotChar.classList.add('enemy-attacking');
+    // Show effect on target hero
+    setTimeout(() => {
+      const slotEl = this.ui.heroSlots[targetIndex];
+      const rect = slotEl.getBoundingClientRect();
+      const hudRect = this.ui.effectContainer.getBoundingClientRect();
+      this.showEffectAt(
+        rect.left - hudRect.left + rect.width/2,
+        rect.top - hudRect.top + rect.height/2,
+        'slash-effect'
+      );
+      // Deal damage
+      const damage = Math.max(1, enemy.damage - target.def);
+      target.hp = Math.max(0, target.hp - damage);
+      this.showDamageAt(
+        rect.left - hudRect.left + rect.width/2,
+        rect.top - hudRect.top,
+        damage
+      );
+      this.gameState.log(`${enemy.name} attacks ${target.name} for ${damage} damage!`);
+      setTimeout(() => {
+        this.ui.enemySlotChar.classList.remove('enemy-attacking');
+        this.renderCombatSlots();
+        this.updateUI();
+        // Check game over
+        const gameOverCheck = this.gameState.checkGameOver();
+        if (gameOverCheck?.gameOver) {
+          this.isGameActive = false;
+          this.triggerDeathAnimation();
+          return;
+        }
+        this.gameState.advanceTurn();
+        this.renderCombatSlots();
+        this.updateUI();
+        this.processTurn();
+      }, 500);
+    }, 400);
+  }
+  handleAbility(abilityKey) {
+    if (!this.isGameActive) return;
+    const currentTurn = this.gameState.getCurrentTurn();
+    if (!currentTurn || currentTurn.type !== 'player') return;
+    const member = this.gameState.party.find(m => m.name === currentTurn.name);
+    if (!member || !member.isAlive) return;
+    const result = this.gameState.playerAction(member, abilityKey);
+    if (!result.success) return;
+    // Animate hero attacking
+    const memberIndex = this.gameState.party.indexOf(member);
+    const slotChar = this.ui.heroSlotChars[memberIndex];
+    slotChar.classList.add('hero-attacking');
+    // Show effect on enemy
+    setTimeout(() => {
+      const enemyRect = this.ui.enemySlot.getBoundingClientRect();
+      const hudRect = this.ui.effectContainer.getBoundingClientRect();
+      const ability = member.abilities[abilityKey];
+      let effectType = 'slash-effect';
+      if (ability.type === 'magical') effectType = 'fire-effect';
+      else if (ability.type === 'heal') effectType = 'heal-effect';
+      else if (ability.type === 'cc') effectType = 'frost-effect';
+      this.showEffectAt(
+        enemyRect.left - hudRect.left + enemyRect.width/2,
+        enemyRect.top - hudRect.top + enemyRect.height/2,
+        effectType
+      );
+      if (result.damage > 0) {
+        this.showDamageAt(
+          enemyRect.left - hudRect.left + enemyRect.width/2,
+          enemyRect.top - hudRect.top,
+          result.damage
+        );
+      }
+      this.renderCombatSlots();
+      this.updateUI();
+      setTimeout(() => {
+        slotChar.classList.remove('hero-attacking');
+        // Check victory
+        const victoryCheck = this.gameState.checkVictory();
+        if (victoryCheck?.won) {
+          this.isGameActive = false;
+          this.ui.gameWon.classList.remove('hidden');
+          this.ui.gameWon.style.display = 'flex';
+          return;
+        }
+        if (victoryCheck?.nextLevel) {
+          this.showLevelTransition(victoryCheck.nextLevel);
+          return;
+        }
+        this.gameState.advanceTurn();
+        this.renderCombatSlots();
+        this.renderAbilities();
+        this.renderItems();
+        this.updateUI();
+        this.processTurn();
+      }, 500);
+    }, 400);
+  }
+  handleAction(action) {
+    const currentTurn = this.gameState.getCurrentTurn();
+    if (!currentTurn || currentTurn.type !== 'player') return;
+    const member = this.gameState.party.find(m => m.name === currentTurn.name);
+    if (!member || !member.isAlive) return;
+    if (member.abilities[action]) {
+      this.handleAbility(action);
+    }
+  }
+  usePotion() {
+    if (!this.isGameActive) return;
+    if (this.gameState.potions <= 0) {
+      this.gameState.log('No potions left!');
+      return;
+    }
+    const livingParty = this.gameState.party.filter(m => m.isAlive);
+    if (livingParty.length === 0) return;
+    const lowestMember = livingParty.reduce((lowest, current) => 
+      current.hp < lowest.hp ? current : lowest
+    );
+    const healAmount = 30;
+    lowestMember.hp = Math.min(lowestMember.maxHp, lowestMember.hp + healAmount);
+    this.gameState.potions--;
+    this.gameState.log(`${lowestMember.name} used potion: +${healAmount} HP`);
+    // Show heal effect
+    const memberIndex = this.gameState.party.indexOf(lowestMember);
+    const slotEl = this.ui.heroSlots[memberIndex];
+    const rect = slotEl.getBoundingClientRect();
+    const hudRect = this.ui.effectContainer.getBoundingClientRect();
+    this.showEffectAt(
+      rect.left - hudRect.left + rect.width/2,
+      rect.top - hudRect.top + rect.height/2,
+      'heal-effect'
+    );
+    this.showHealAt(
+      rect.left - hudRect.left + rect.width/2,
+      rect.top - hudRect.top,
+      healAmount
+    );
+    this.renderCombatSlots();
+    this.renderItems();
+    this.updateUI();
+  }
+  showEffectAt(x, y, effectType) {
+    const effectEl = document.createElement('div');
+    effectEl.className = `ability-effect ${effectType}`;
+    effectEl.style.left = `${x - 40}px`;
+    effectEl.style.top = `${y - 40}px`;
+    this.ui.effectContainer.appendChild(effectEl);
+    setTimeout(() => effectEl.remove(), 600);
+  }
+  showDamageAt(x, y, damage) {
+    const textEl = document.createElement('div');
+    textEl.className = 'damage-text';
+    textEl.textContent = `-${damage}`;
+    textEl.style.left = `${x - 15}px`;
+    textEl.style.top = `${y}px`;
+    this.ui.effectContainer.appendChild(textEl);
+    setTimeout(() => textEl.remove(), 1000);
+  }
+  showHealAt(x, y, amount) {
+    const textEl = document.createElement('div');
+    textEl.className = 'heal-text';
+    textEl.textContent = `+${amount}`;
+    textEl.style.left = `${x - 15}px`;
+    textEl.style.top = `${y}px`;
+    this.ui.effectContainer.appendChild(textEl);
+    setTimeout(() => textEl.remove(), 1000);
+  }
+  showLevelTransition(nextLevel) {
+    this.ui.turnIndicator.textContent = `Level ${nextLevel} approaching...`;
+    setTimeout(() => {
+      this.gameState.startLevel(nextLevel);
+      this.renderCombatSlots();
+      this.renderAbilities();
+      this.renderItems();
+      this.updateUI();
+      this.processTurn();
+    }, 1500);
+  }
+  triggerDeathAnimation() {
+    document.body.classList.add('dying');
+    setTimeout(() => {
+      this.ui.gameOver.classList.remove('hidden');
+      this.ui.gameOver.style.display = 'flex';
+    }, 1500);
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  const app = new MetaFighterApp();
+});
+  </script>
+</body>
+</html>

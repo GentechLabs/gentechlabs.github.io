@@ -1,0 +1,17 @@
+[workspace]
+members = [
+    "programs/agent-registry",
+    "programs/job-escrow",
+    "programs/reputation",
+    "programs/dispute-resolver",
+]
+resolver = "2"
+
+[workspace.metadata.anchor]
+anchor-version = "0.30.1"
+
+[profile.release]
+overflow-checks = true
+lto = "fat"
+codegen-units = 1
+opt-level = 3

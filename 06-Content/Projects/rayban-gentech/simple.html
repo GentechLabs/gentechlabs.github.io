@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Gentech</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#000;color:#fff;font-family:system-ui,sans-serif;padding:20px}
+h1{color:#00ff88;font-size:24px;margin-bottom:20px;text-align:center}
+p{color:#888;font-size:14px;margin-bottom:15px;text-align:center}
+.chat{background:#111;border:1px solid #333;border-radius:12px;padding:15px;margin:15px 0}
+.msg{padding:10px;margin:8px 0;border-radius:8px;font-size:14px;line-height:1.4}
+.user{background:#00ff88;color:#000;text-align:right}
+.bot{background:#1a1a2e;border:1px solid #333}
+form{margin-top:20px}
+input[type=text]{width:100%;padding:15px;border-radius:24px;border:1px solid #333;background:#111;color:#fff;font-size:16px;margin-bottom:10px}
+input:focus{border-color:#00ff88;outline:none}
+button{width:100%;padding:15px;border-radius:24px;border:none;background:#00ff88;color:#000;font-size:18px;font-weight:bold;cursor:pointer}
+button:active{background:#00cc6a}
+.error{color:#ff4466;text-align:center;padding:10px}
+.success{color:#00ff88;text-align:center;padding:10px}
+</style>
+</head>
+<body>
+<h1>⚡ GENTECH</h1>
+<p>AI Assistant for Meta Ray-Ban</p>
+
+<div class="chat">
+<div class="msg bot">👋 Welcome! Type a message below to chat with Gentech.</div>
+</div>
+
+<form method="POST" action="/send">
+<input type="text" name="message" placeholder="Type your message..." required autocomplete="off">
+<button type="submit">Send Message</button>
+</form>
+
+</body>
+</html>

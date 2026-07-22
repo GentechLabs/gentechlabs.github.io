@@ -1,0 +1,1233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GenTech Hub — Jordan</title>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* AVAX / GenTech Theme */
+            --bg: #0a0e17;
+            --bg-alt: #111827;
+            --panel-bg: #1a2235;
+            --panel-border: #2a3a52;
+            --text: #e2e8f0;
+            --text-dim: #8899aa;
+            --avax-red: #e84142;
+            --avax-red-dim: rgba(232,65,66,0.15);
+            --gold: #e8652a;
+            --gold-dim: rgba(232,101,42,0.15);
+            --success: #00ff88;
+            --danger: #ff4466;
+            --cyan: #00d4ff;
+            --purple: #a855f7;
+            --blue: #3b82f6;
+            --radius: 12px;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            padding-bottom: 80px; /* space for bottom nav */
+        }
+
+        /* Header */
+        .hub-header {
+            background: linear-gradient(135deg, #e84142 0%, #e8652a 40%, #d4a017 100%);
+            padding: 20px 16px 16px;
+            text-align: center;
+        }
+        .hub-header h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3em;
+            font-weight: 700;
+            color: #fff;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+        .hub-header .subtitle {
+            font-size: 0.75em;
+            color: rgba(255,255,255,0.8);
+            margin-top: 2px;
+        }
+
+        /* Tab Sections */
+        .tab-section {
+            display: none;
+            padding: 16px;
+            max-width: 480px;
+            margin: 0 auto;
+            animation: fadeIn 0.25s ease;
+        }
+        .tab-section.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Bottom Nav */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #111827;
+            border-top: 1px solid #2a3a52;
+            display: flex;
+            justify-content: space-evenly;
+            padding: 10px 4px 12px;
+            z-index: 100;
+        }
+        .nav-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            background: none;
+            border: none;
+            color: #8899aa;
+            font-size: 0.58em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 6px 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border-radius: 8px;
+            min-width: 0;
+        }
+        .nav-btn .nav-icon { font-size: 1.5em; line-height: 1; }
+        .nav-btn.active {
+            color: var(--gold);
+            background: rgba(232,101,42,0.1);
+        }
+
+        /* ===== YIELD FARM TAB (merged DeFi + Rainbow + Rotation) ===== */
+        .stat-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+        .stat-card {
+            background: var(--panel-bg);
+            border: 1px solid var(--panel-border);
+            border-radius: var(--radius);
+            padding: 14px;
+            text-align: center;
+        }
+        .stat-card.full { grid-column: 1 / -1; }
+        .stat-label {
+            font-size: 0.65em;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--text-dim);
+            margin-bottom: 4px;
+        }
+        .stat-value {
+            font-size: 1.4em;
+            font-weight: 700;
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--gold);
+        }
+        .stat-value.green { color: var(--success); }
+        .stat-value.red { color: var(--danger); }
+        .stat-value.cyan { color: var(--cyan); }
+        .stat-sub {
+            font-size: 0.72em;
+            color: var(--text-dim);
+            margin-top: 2px;
+        }
+
+        /* Rewards */
+        .rewards-box {
+            background: rgba(0,255,136,0.06);
+            border: 1px solid rgba(0,255,136,0.15);
+            border-radius: var(--radius);
+            padding: 14px;
+            text-align: center;
+            margin-bottom: 12px;
+        }
+        .rewards-label {
+            font-size: 0.65em;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--success);
+            opacity: 0.8;
+        }
+        .rewards-value {
+            font-size: 1.3em;
+            font-weight: 700;
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--success);
+            margin-top: 3px;
+        }
+        .rewards-usd {
+            font-size: 0.82em;
+            color: var(--text-dim);
+            margin-top: 2px;
+        }
+
+        /* Section card */
+        .card {
+            background: var(--panel-bg);
+            border: 1px solid var(--panel-border);
+            border-radius: var(--radius);
+            padding: 14px;
+            margin-bottom: 10px;
+        }
+        .card-title {
+            font-size: 0.7em;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--text-dim);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .card-title .dot {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: var(--gold);
+        }
+
+        /* Position rows */
+        .pos-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+        }
+        .pos-row:last-child { border-bottom: none; }
+        .pos-token { font-weight: 600; font-size: 0.9em; }
+        .pos-amount {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.82em;
+            color: var(--text-dim);
+        }
+        .pos-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 600;
+            color: var(--gold);
+        }
+
+        /* Range bar */
+        .range-bar {
+            position: relative;
+            height: 28px;
+            background: var(--bg-alt);
+            border-radius: 6px;
+            overflow: hidden;
+            margin: 8px 0;
+        }
+        .range-fill {
+            position: absolute;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(232,65,66,0.3), rgba(232,101,42,0.5), rgba(0,255,136,0.3));
+            border-radius: 6px;
+        }
+        .range-marker {
+            position: absolute;
+            top: -2px;
+            width: 3px;
+            height: 32px;
+            background: #fff;
+            border-radius: 2px;
+            box-shadow: 0 0 8px rgba(255,255,255,0.5);
+        }
+        .range-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.72em;
+            color: var(--text-dim);
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .range-current {
+            text-align: center;
+            font-size: 0.78em;
+            color: var(--cyan);
+            margin-top: 4px;
+        }
+
+        /* Config grid */
+        .config-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px;
+        }
+        .config-item {
+            padding: 8px;
+            background: var(--bg-alt);
+            border-radius: 6px;
+        }
+        .config-key {
+            font-size: 0.6em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-dim);
+            margin-bottom: 2px;
+        }
+        .config-val {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.82em;
+            font-weight: 500;
+        }
+
+        /* Strategy note */
+        .strategy-note {
+            background: rgba(232,101,42,0.06);
+            border: 1px solid rgba(232,101,42,0.15);
+            border-radius: var(--radius);
+            padding: 10px 12px;
+            font-size: 0.78em;
+            color: var(--text-dim);
+            line-height: 1.5;
+            margin-bottom: 10px;
+        }
+        .strategy-note strong { color: var(--gold); }
+
+        /* Status badge */
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.75em;
+            font-weight: 500;
+        }
+        .status-badge.active {
+            background: rgba(0,255,136,0.1);
+            border: 1px solid rgba(0,255,136,0.25);
+            color: var(--success);
+        }
+        .pulse {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--success);
+            animation: pulse 2s ease-in-out infinite;
+        }
+        @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+        @keyframes rbPulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.04); } }
+
+        /* ===== GAMING TAB ===== */
+        .game-card {
+            background: var(--panel-bg);
+            border: 1px solid var(--panel-border);
+            border-radius: var(--radius);
+            padding: 16px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .game-card:hover {
+            border-color: #c9a84c;
+            transform: translateY(-1px);
+        }
+        .game-card h3 {
+            font-family: 'Cinzel', serif;
+            color: #c9a84c;
+            font-size: 1em;
+            margin-bottom: 6px;
+        }
+        .game-card p {
+            font-size: 0.82em;
+            color: var(--text-dim);
+            line-height: 1.5;
+        }
+        .game-card .tag {
+            display: inline-block;
+            font-size: 0.65em;
+            padding: 3px 8px;
+            border-radius: 10px;
+            background: rgba(201,168,76,0.12);
+            color: #c9a84c;
+            margin-top: 8px;
+        }
+
+        /* ===== TRAVEL TAB ===== */
+        .trip-card {
+            background: var(--panel-bg);
+            border: 1px solid var(--panel-border);
+            border-radius: var(--radius);
+            padding: 16px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .trip-card:hover {
+            border-color: var(--gold);
+            transform: translateY(-1px);
+        }
+        .trip-card h3 {
+            color: var(--gold);
+            font-size: 1em;
+            margin-bottom: 4px;
+        }
+        .trip-card .dates {
+            font-size: 0.78em;
+            color: var(--text-dim);
+        }
+        .trip-card .status-pill {
+            display: inline-block;
+            font-size: 0.65em;
+            padding: 3px 8px;
+            border-radius: 10px;
+            margin-top: 6px;
+        }
+        .status-pill.planning { background: rgba(59,130,246,0.12); color: var(--blue); }
+        .status-pill.confirmed { background: rgba(0,255,136,0.1); color: var(--success); }
+
+        /* Portfolio link */
+        .portfolio-link {
+            display: block;
+            text-align: center;
+            padding: 12px;
+            background: var(--panel-bg);
+            border: 1px solid var(--panel-border);
+            border-radius: var(--radius);
+            color: var(--gold);
+            text-decoration: none;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin-top: 12px;
+            transition: all 0.2s;
+        }
+        .portfolio-link:hover {
+            background: rgba(232,101,42,0.1);
+            border-color: var(--gold);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 14px;
+            font-size: 0.65em;
+            color: var(--text-dim);
+            opacity: 0.5;
+        }
+
+        /* Settings modal */
+        .settings-option.selected {
+            border-color: var(--gold) !important;
+            background: rgba(232,101,42,0.1) !important;
+        }
+        .settings-option.selected::after {
+            content: '✓';
+            margin-left: auto;
+            color: var(--gold);
+            font-weight: 700;
+        }
+        @keyframes slideUp {
+            from { transform: translateY(100%); }
+            to { transform: translateY(0); }
+        }
+
+        /* AVAX theme accent */
+        .avax-accent {
+            background: linear-gradient(135deg, rgba(232,65,66,0.08), rgba(232,101,42,0.08));
+            border: 1px solid rgba(232,65,66,0.2);
+            border-radius: var(--radius);
+            padding: 12px;
+            margin-bottom: 12px;
+        }
+        .avax-accent .avax-label {
+            font-size: 0.65em;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--avax-red);
+            margin-bottom: 4px;
+        }
+
+        /* Section divider */
+        .section-divider {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 18px 0 14px;
+        }
+        .section-divider::before,
+        .section-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--panel-border);
+        }
+        .section-divider span {
+            font-size: 0.72em;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--text-dim);
+            white-space: nowrap;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <div class="hub-header" style="position:relative;">
+        <h1>⚡ GenTech Hub</h1>
+        <div class="subtitle">Jordan's Command Center</div>
+        <button onclick="openSettings()" style="position:absolute; top:14px; right:14px; background:rgba(255,255,255,0.15); border:none; border-radius:50%; width:32px; height:32px; font-size:1em; cursor:pointer; color:#fff; backdrop-filter:blur(4px);" title="Settings">⚙️</button>
+    </div>
+
+    <!-- Settings Modal -->
+    <div id="settings-modal" style="display:none; position:fixed; inset:0; z-index:200; background:rgba(0,0,0,0.6); backdrop-filter:blur(4px); align-items:flex-end; justify-content:center;" onclick="if(event.target===this)closeSettings()">
+        <div style="background:var(--panel-bg); border:1px solid var(--panel-border); border-radius:16px 16px 0 0; padding:20px; width:100%; max-width:480px; animation:slideUp 0.25s ease;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+                <h3 style="font-size:1em; color:var(--text);">⚙️ Settings</h3>
+                <button onclick="closeSettings()" style="background:none; border:none; color:var(--text-dim); font-size:1.2em; cursor:pointer;">✕</button>
+            </div>
+            <p style="font-size:0.78em; color:var(--text-dim); margin-bottom:12px;">Choose which dashboard opens when you visit the hub.</p>
+            <div style="display:flex; flex-direction:column; gap:8px; margin-bottom:16px;">
+                <button class="settings-option" data-tab="yieldfarm" onclick="setDefaultTab('yieldfarm')" style="display:flex; align-items:center; gap:10px; padding:12px; background:var(--bg-alt); border:1px solid var(--panel-border); border-radius:10px; cursor:pointer; text-align:left; color:var(--text); font-family:inherit; font-size:0.88em; transition:all 0.2s;">
+                    <span style="font-size:1.3em;">🌾</span>
+                    <div><strong>Yield Farm</strong><br><span style="font-size:0.8em; color:var(--text-dim);">LP tracker, rainbow, rotation</span></div>
+                </button>
+                <button class="settings-option" data-tab="gaming" onclick="setDefaultTab('gaming')" style="display:flex; align-items:center; gap:10px; padding:12px; background:var(--bg-alt); border:1px solid var(--panel-border); border-radius:10px; cursor:pointer; text-align:left; color:var(--text); font-family:inherit; font-size:0.88em; transition:all 0.2s;">
+                    <span style="font-size:1.3em;">🎮</span>
+                    <div><strong>Gaming</strong><br><span style="font-size:0.8em; color:var(--text-dim);">POE2 builds, characters</span></div>
+                </button>
+                <button class="settings-option" data-tab="travel" onclick="setDefaultTab('travel')" style="display:flex; align-items:center; gap:10px; padding:12px; background:var(--bg-alt); border:1px solid var(--panel-border); border-radius:10px; cursor:pointer; text-align:left; color:var(--text); font-family:inherit; font-size:0.88em; transition:all 0.2s;">
+                    <span style="font-size:1.3em;">✈️</span>
+                    <div><strong>Travel</strong><br><span style="font-size:0.8em; color:var(--text-dim);">Trips, flights, budget</span></div>
+                </button>
+                <button class="settings-option" data-tab="portfolio" onclick="setDefaultTab('portfolio')" style="display:flex; align-items:center; gap:10px; padding:12px; background:var(--bg-alt); border:1px solid var(--panel-border); border-radius:10px; cursor:pointer; text-align:left; color:var(--text); font-family:inherit; font-size:0.88em; transition:all 0.2s;">
+                    <span style="font-size:1.3em;">👨‍💻</span>
+                    <div><strong>Portfolio</strong><br><span style="font-size:0.8em; color:var(--text-dim);">Projects, hackathons</span></div>
+                </button>
+            </div>
+            <button class="settings-save" onclick="closeSettings()" style="width:100%; padding:12px; background:var(--gold); border:none; border-radius:10px; color:#fff; font-weight:600; font-size:0.9em; cursor:pointer; font-family:inherit;">Done</button>
+        </div>
+    </div>
+
+    <!-- ===== YIELD FARM TAB (merged) ===== -->
+    <div class="tab-section active" id="tab-yieldfarm">
+
+        <!-- Status badge -->
+        <div style="text-align:center; margin: 10px 0 14px;">
+            <span class="status-badge active" id="lp-status">
+                <span class="pulse"></span> <span id="lp-status-text">Connecting...</span>
+            </span>
+        </div>
+
+        <!-- AVAX banner -->
+        <div class="avax-accent">
+            <div class="avax-label">🗺️ Avalanche C-Chain · LFJ Concentrated Liquidity</div>
+            <div style="font-size:0.85em; color:var(--text-dim);">AVAX/USDC · Loading...</div>
+        </div>
+
+        <!-- Hero Stats -->
+        <div class="stat-row">
+            <div class="stat-card full">
+                <div class="stat-label">Total Position</div>
+                <div class="stat-value" id="total-value">—</div>
+                <div class="stat-sub" id="position-split">Loading...</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">AVAX Price</div>
+                <div class="stat-value cyan" id="avax-price">—</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">24h</div>
+                <div class="stat-value" id="change-24h">—</div>
+            </div>
+        </div>
+
+        <!-- Fee Efficiency + Range Status -->
+        <div class="stat-row">
+            <div class="stat-card">
+                <div class="stat-label">Fee Efficiency</div>
+                <div class="stat-value" id="efficiency" style="font-size:1.2em;">—</div>
+                <div class="stat-sub" id="efficiency-zone"></div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Range Status</div>
+                <div class="stat-value" id="range-status" style="font-size:1.1em;">—</div>
+                <div class="stat-sub" id="range-detail"></div>
+            </div>
+        </div>
+
+        <!-- DCA Strategy -->
+        <div class="strategy-note" id="dca-note">
+            <strong>DCA:</strong> <span id="dca-text">Loading...</span>
+        </div>
+
+        <!-- Liquidity Range -->
+        <div class="card">
+            <div class="card-title"><span class="dot"></span> Liquidity Range</div>
+            <div class="range-bar">
+                <div class="range-fill" style="left:0; width:100%;"></div>
+                <div class="range-marker" id="range-marker" style="left:50%;"></div>
+            </div>
+            <div class="range-labels">
+                <span id="range-low">—</span>
+                <span id="range-high">—</span>
+            </div>
+            <div class="range-current">Current: <strong id="range-current-price">—</strong></div>
+        </div>
+
+        <!-- Position Breakdown -->
+        <div class="card">
+            <div class="card-title"><span class="dot"></span> Position</div>
+            <div class="pos-row">
+                <div>
+                    <div class="pos-token">AVAX</div>
+                    <div class="pos-amount" id="avax-amount">—</div>
+                </div>
+                <div class="pos-value" id="avax-val">—</div>
+            </div>
+            <div class="pos-row">
+                <div>
+                    <div class="pos-token">USDC</div>
+                    <div class="pos-amount" id="usdc-amount">—</div>
+                </div>
+                <div class="pos-value" id="usdc-val">—</div>
+            </div>
+        </div>
+
+        <!-- Pool Config -->
+        <div class="card">
+            <div class="card-title"><span class="dot"></span> Config</div>
+            <div class="config-grid" id="config-grid-yieldfarm">
+                <div class="config-item"><div class="config-key">Fee</div><div class="config-val">—</div></div>
+                <div class="config-item"><div class="config-key">Shape</div><div class="config-val">—</div></div>
+                <div class="config-item"><div class="config-key">Chain</div><div class="config-val">Avalanche</div></div>
+                <div class="config-item"><div class="config-key">Protocol</div><div class="config-val">LFJ</div></div>
+            </div>
+        </div>
+
+        <!-- Pool Stats -->
+        <div class="card">
+            <div class="card-title"><span class="dot"></span> Pool Stats</div>
+            <div class="config-grid">
+                <div class="config-item">
+                    <div class="config-key">24h Volume</div>
+                    <div class="config-val" id="vol-24h">—</div>
+                </div>
+                <div class="config-item">
+                    <div class="config-key">Liquidity</div>
+                    <div class="config-val" id="tvl">—</div>
+                </div>
+            </div>
+        </div>
+
+        <a class="portfolio-link" href="https://protojay4789.github.io/DeFi/defi-dashboard.html" target="_blank">Open Full Dashboard →</a>
+
+        <!-- ===== RAINBOW ZONE ===== -->
+        <div class="section-divider"><span>🌈 Rainbow Zone</span></div>
+
+        <!-- Rainbow Chart (bands visualization) -->
+        <div id="rainbow-chart" style="border-radius:12px; overflow:hidden; border:1px solid var(--panel-border); margin-bottom:14px;">
+            <div style="height:320px; position:relative;" id="rainbow-bars">
+                <div style="text-align:center; padding:60px 0; color:var(--text-dim);">Loading rainbow...</div>
+            </div>
+        </div>
+
+        <!-- Current Zone -->
+        <div id="rainbow-zone" class="card" style="border-left:4px solid; margin-bottom:14px;">
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px;">
+                <span id="zone-emoji" style="font-size:1.6em;"></span>
+                <div>
+                    <div id="zone-name" style="font-weight:700; font-size:1.1em;"></div>
+                    <div id="zone-desc" style="font-size:0.82em; color:var(--text-dim);"></div>
+                </div>
+            </div>
+            <div id="zone-advice" style="background:rgba(255,255,255,0.04); border-radius:8px; padding:10px; font-size:0.82em; border-left:3px solid;"></div>
+        </div>
+
+        <!-- Rainbow Quick Stats -->
+        <div class="stat-row" id="rainbow-stats">
+            <div class="stat-card">
+                <div class="stat-label">Efficiency</div>
+                <div class="stat-value" id="rb-efficiency" style="font-size:1.2em;">—</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">APR</div>
+                <div class="stat-value" id="rb-apr" style="font-size:1.2em; color:var(--gold);">—</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Daily Fees</div>
+                <div class="stat-value" id="rb-fees" style="font-size:1.1em; color:#22c55e;">—</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">24h Change</div>
+                <div class="stat-value" id="rb-change" style="font-size:1.1em;">—</div>
+            </div>
+        </div>
+
+        <!-- 30-Day History -->
+        <div class="card" style="margin-bottom:14px;">
+            <div class="card-title"><span class="dot"></span> 30-Day Efficiency</div>
+            <canvas id="rb-history" style="width:100%; height:100px;"></canvas>
+        </div>
+
+        <!-- Rainbow Legend -->
+        <div class="card" style="margin-bottom:14px;">
+            <div class="card-title"><span class="dot"></span> Rainbow Bands</div>
+            <div id="rb-legend" style="display:flex; flex-direction:column; gap:8px;"></div>
+        </div>
+
+        <!-- ===== NARRATIVE ROTATION ===== -->
+        <div class="section-divider"><span>🔄 Narrative Rotation</span></div>
+
+        <div id="rotation-content">
+            <div style="text-align:center; padding:40px 0; color:var(--text-dim);">Loading rotation data...</div>
+        </div>
+
+        <!-- ===== ECONOMIC CALENDAR ===== -->
+        <div class="section-divider"><span>📅 Macro Events</span></div>
+
+        <div id="macro-events">
+            <div style="text-align:center; padding:40px 0; color:var(--text-dim);">Loading macro data...</div>
+        </div>
+
+        <div class="footer" id="yieldfarm-footer" style="font-size:0.65em; color:var(--text-dim); opacity:0.5;">
+            ⚠️ Not financial advice · Data: DexScreener + LFJ · Rotation updated Sundays
+        </div>
+    </div>
+
+    <!-- ===== GAMING TAB ===== -->
+    <div class="tab-section" id="tab-gaming">
+        <div style="margin-bottom:14px;">
+            <h2 style="font-family:'Cinzel',serif; color:#c9a84c; font-size:1.1em;">🎮 Gaming Hub</h2>
+            <p style="font-size:0.78em; color:var(--text-dim); margin-top:2px;">POE2 builds & character tracking</p>
+        </div>
+
+        <div class="game-card" onclick="window.open('Gaming/poe2-dashboard.html','_blank')">
+            <h3>⚡ Monk — Storm Weaver</h3>
+            <p>Crit-based lightning build. Mapping focused with high mobility.</p>
+            <span class="tag">Active Build</span>
+        </div>
+
+        <div class="game-card" onclick="window.open('Gaming/poe2-dashboard.html','_blank')">
+            <h3>🔥 Sorceress — New League</h3>
+            <p>Caster build for the new league. Exploring elemental damage.</p>
+            <span class="tag">League Start</span>
+        </div>
+
+        <div class="game-card" onclick="window.open('Gaming/passive-planner.html','_blank')">
+            <h3>🌳 Passive Tree Planner</h3>
+            <p>Interactive skill tree builder for planning passive allocations.</p>
+            <span class="tag">Tool</span>
+        </div>
+
+        <a class="portfolio-link" href="https://protojay4789.github.io/Gaming/poe2-dashboard.html" target="_blank">Open Full Dashboard →</a>
+
+        <div class="footer">GenTech Gaming</div>
+    </div>
+
+    <!-- ===== TRAVEL TAB ===== -->
+    <div class="tab-section" id="tab-travel">
+        <div style="margin-bottom:14px;">
+            <h2 style="font-size:1.1em; color:var(--gold);">✈️ Travel Planner</h2>
+            <p style="font-size:0.78em; color:var(--text-dim); margin-top:2px;">Trips, flights & budget tracking</p>
+        </div>
+
+        <div class="trip-card" onclick="window.open('Travels/travel-dashboard.html','_blank')">
+            <h3>🇵🇭 Philippines — Trip 1</h3>
+            <div class="dates">September 2026 · Makati / Christel</div>
+            <span class="status-pill planning">Planning</span>
+        </div>
+
+        <div class="trip-card" onclick="window.open('Travels/travel-dashboard.html','_blank')">
+            <h3>🏖️ Philippines — Trip 2 + Boracay</h3>
+            <div class="dates">Nov/Dec 2026 · Boracay island hopping</div>
+            <span class="status-pill planning">Planning</span>
+        </div>
+
+        <a class="portfolio-link" href="https://protojay4789.github.io/Travels/travel-dashboard.html" target="_blank">Open Full Dashboard →</a>
+
+        <div class="footer">GenTech Travel</div>
+    </div>
+
+    <!-- ===== PORTFOLIO TAB ===== -->
+    <div class="tab-section" id="tab-portfolio">
+        <div style="margin-bottom:14px;">
+            <h2 style="font-size:1.1em; color:var(--blue);">👨‍💻 Portfolio</h2>
+            <p style="font-size:0.78em; color:var(--text-dim); margin-top:2px;">Projects, skills & hackathon tracker</p>
+        </div>
+
+        <a class="portfolio-link" href="https://protojay4789.github.io/" target="_blank" style="border-color:var(--blue); color:var(--blue);">
+            Open Full Portfolio →
+        </a>
+
+        <div class="footer">GenTech Portfolio</div>
+    </div>
+
+    <!-- Bottom Navigation (4 tabs: Yield Farm, Gaming, Travel, More) -->
+    <nav class="bottom-nav">
+        <button class="nav-btn active" onclick="switchTab('yieldfarm')" id="nav-yieldfarm">
+            <span class="nav-icon">🌾</span>
+            Yield Farm
+        </button>
+        <button class="nav-btn" onclick="switchTab('gaming')" id="nav-gaming">
+            <span class="nav-icon">🎮</span>
+            Gaming
+        </button>
+        <button class="nav-btn" onclick="switchTab('travel')" id="nav-travel">
+            <span class="nav-icon">✈️</span>
+            Travel
+        </button>
+        <button class="nav-btn" onclick="switchTab('portfolio')" id="nav-portfolio">
+            <span class="nav-icon">📊</span>
+            More
+        </button>
+    </nav>
+
+    <script>
+        // --- Config ---
+        const DATA_URL = 'https://raw.githubusercontent.com/ProtoJay4789/ProtoJay4789.github.io/main/DeFi/defi-data.json';
+        const POOL_ADDRESS = '0x864d4e5ee7318e97483db7eb0912e09f161516ea';
+        const HUB_LS_KEY = 'jordan-hub-default-tab';
+        const REFRESH_MS = 60000; // 1 minute
+
+        // --- Tab switching ---
+        function switchTab(tab) {
+            document.querySelectorAll('.tab-section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            const section = document.getElementById('tab-' + tab);
+            const btn = document.getElementById('nav-' + tab);
+            if (section) section.classList.add('active');
+            if (btn) btn.classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        // --- Settings: Default Tab ---
+        function openSettings() { document.getElementById('settings-modal').style.display = 'flex'; }
+        function closeSettings() { document.getElementById('settings-modal').style.display = 'none'; }
+        function setDefaultTab(tab) {
+            localStorage.setItem(HUB_LS_KEY, tab);
+            document.querySelectorAll('.settings-option').forEach(o => o.classList.toggle('selected', o.dataset.tab === tab));
+            const btn = document.querySelector('.settings-save');
+            const originalText = btn.textContent;
+            btn.textContent = '✓ Saved'; btn.style.color = 'var(--success)';
+            setTimeout(() => { btn.textContent = originalText; btn.style.color = ''; }, 1500);
+        }
+        function getSavedTab() {
+            const saved = localStorage.getItem(HUB_LS_KEY);
+            // Migrate old tab names to new merged tab
+            if (saved === 'defi' || saved === 'rainbow' || saved === 'rotation') {
+                localStorage.setItem(HUB_LS_KEY, 'yieldfarm');
+                return 'yieldfarm';
+            }
+            return saved || 'yieldfarm';
+        }
+
+        // --- Yield Farm: Live Data Engine ---
+        function fmt(n) {
+            if (n >= 1e6) return '$' + (n / 1e6).toFixed(1) + 'M';
+            if (n >= 1e3) return '$' + (n / 1e3).toFixed(1) + 'K';
+            return '$' + n.toFixed(2);
+        }
+
+        function formatShape(shape) {
+            if (!shape) return 'Curve';
+            return shape.charAt(0).toUpperCase() + shape.slice(1);
+        }
+
+        function getEfficiencyColor(eff) {
+            if (eff >= 70) return 'green';
+            if (eff >= 50) return 'cyan';
+            return 'red';
+        }
+
+        async function fetchPositionData() {
+            try {
+                // 1. Load canonical position data from GitHub
+                const dataResp = await fetch(DATA_URL + '?' + Date.now(), { cache: 'no-store' });
+                const data = await dataResp.json();
+                const pos = data.lpPosition || {};
+                const fees = data.fees || {};
+
+                const price = parseFloat(pos.currentPrice || data.currentPrice || 0);
+                const rangeLow = parseFloat(pos.rangeMin || 0);
+                const rangeHigh = parseFloat(pos.rangeMax || 0);
+                const shape = (pos.shape || 'curve').toLowerCase();
+                const avaxHeld = parseFloat(pos.avaxAmount || 0);
+                const usdcHeld = parseFloat(pos.usdcAmount || 0);
+                const totalVal = parseFloat(pos.totalValueUSD || pos.totalValue || 0);
+                const binStep = parseInt(pos.binStep || 10, 10);
+                const feeTier = (binStep / 100).toFixed(2) + '%';
+
+                // 2. Overlay live DexScreener price + pool stats
+                let change24 = 0, vol24 = 0, liqUsd = 0;
+                try {
+                    const dexResp = await fetch(`https://api.dexscreener.com/latest/dex/pairs/avalanche/${POOL_ADDRESS}`);
+                    const dex = await dexResp.json();
+                    const pair = dex.pairs && dex.pairs[0] ? dex.pairs[0] : null;
+                    if (pair) {
+                        change24 = parseFloat(pair.priceChange?.h24 || 0);
+                        vol24 = parseFloat(pair.volume?.h24 || 0);
+                        liqUsd = parseFloat(pair.liquidity?.usd || 0);
+                    }
+                } catch (e) {
+                    console.warn('DexScreener overlay failed, using data file values', e);
+                    vol24 = parseFloat(data.volume24h || 0);
+                    liqUsd = parseFloat(data.liquidity || 0);
+                }
+
+                const livePrice = price || price;
+                const avaxVal = avaxHeld * livePrice;
+                const inRange = livePrice >= rangeLow && livePrice <= rangeHigh;
+                const rangeWidth = rangeHigh - rangeLow;
+                const markerPct = rangeWidth > 0
+                    ? Math.max(0, Math.min(100, ((livePrice - rangeLow) / rangeWidth) * 100))
+                    : 50;
+
+                // 3. Update DOM
+                document.getElementById('avax-price').textContent = '$' + livePrice.toFixed(4);
+                document.getElementById('total-value').textContent = fmt(totalVal);
+                document.getElementById('position-split').textContent = `${avaxHeld.toFixed(3)} AVAX + ${usdcHeld.toFixed(2)} USDC`;
+
+                const changeEl = document.getElementById('change-24h');
+                changeEl.textContent = (change24 >= 0 ? '+' : '') + change24.toFixed(2) + '%';
+                changeEl.className = 'stat-value ' + (change24 >= 0 ? 'green' : 'red');
+
+                const eff = parseFloat(data.efficiency || 0);
+                const effEl = document.getElementById('efficiency');
+                effEl.textContent = eff.toFixed(1) + '%';
+                effEl.className = 'stat-value ' + getEfficiencyColor(eff);
+                document.getElementById('efficiency-zone').textContent = data.efficiencyZone || (eff >= 70 ? 'Center zone' : eff >= 50 ? 'Mid zone' : 'Edge zone');
+
+                const rangeEl = document.getElementById('range-status');
+                rangeEl.textContent = inRange ? '🟢 In Range' : '🔴 OUT';
+                rangeEl.className = 'stat-value ' + (inRange ? 'green' : 'red');
+                document.getElementById('range-detail').textContent = inRange
+                    ? `Efficiency ${eff.toFixed(0)}%`
+                    : livePrice < rangeLow ? 'Below range' : 'Above range';
+
+                document.getElementById('dca-text').textContent = data.recommendedAction || (inRange ? 'In range — earn fees, DCA on dips' : 'OUT — rebalance or wait for re-entry');
+
+                document.getElementById('range-marker').style.left = markerPct + '%';
+                document.getElementById('range-low').textContent = '$' + rangeLow.toFixed(2);
+                document.getElementById('range-high').textContent = '$' + rangeHigh.toFixed(2);
+                document.getElementById('range-current-price').textContent = '$' + livePrice.toFixed(4);
+
+                document.getElementById('avax-amount').textContent = avaxHeld.toFixed(4);
+                document.getElementById('avax-val').textContent = fmt(avaxVal);
+                document.getElementById('usdc-amount').textContent = usdcHeld.toFixed(2);
+                document.getElementById('usdc-val').textContent = fmt(usdcHeld);
+
+                document.getElementById('vol-24h').textContent = fmt(vol24);
+                document.getElementById('tvl').textContent = fmt(liqUsd);
+
+                // Config grid
+                const configGrid = document.getElementById('config-grid-yieldfarm');
+                if (configGrid) {
+                    configGrid.innerHTML = `
+                        <div class="config-item"><div class="config-key">Fee</div><div class="config-val">${feeTier}</div></div>
+                        <div class="config-item"><div class="config-key">Shape</div><div class="config-val">${formatShape(shape)}</div></div>
+                        <div class="config-item"><div class="config-key">Chain</div><div class="config-val">Avalanche</div></div>
+                        <div class="config-item"><div class="config-key">Protocol</div><div class="config-val">LFJ</div></div>
+                    `;
+                }
+
+                // AVAX banner
+                const bannerSub = document.querySelector('#tab-yieldfarm .avax-accent div:last-child');
+                if (bannerSub) {
+                    bannerSub.textContent = `AVAX/USDC · ${feeTier} Fee Tier · ${formatShape(shape)} Shape`;
+                }
+
+                document.getElementById('lp-status-text').textContent = inRange ? 'Position Active' : '⚠️ Out of Range';
+
+                const now = new Date().toLocaleString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
+                const lastUpdated = data.lastUpdated ? new Date(data.lastUpdated).toLocaleString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' }) : now;
+                document.getElementById('yieldfarm-footer').textContent = `Live · ${lastUpdated} · Refreshes every 60s`;
+
+            } catch (err) {
+                console.error('Data fetch failed:', err);
+                document.getElementById('lp-status-text').textContent = '⚠️ Data Error';
+                document.getElementById('yieldfarm-footer').textContent = 'Retry in 60s...';
+            }
+        }
+
+        // --- Yield Rainbow ---
+        const RAINBOW_DATA_URL = 'https://raw.githubusercontent.com/ProtoJay4789/ProtoJay4789.github.io/main/DeFi/rainbow/yield-rainbow-data.json';
+        const RAINBOW_BANDS = [
+            { id: 'euphoria', name: 'Euphoria', emoji: '🔴', color: '#e84142', gradient: 'linear-gradient(135deg, #e84142, #ff3366)', effMin: 90, effMax: 100, desc: 'Maximum concentration. APR unsustainable.', advice: '⚠️ Time to take profits. Diversify.' },
+            { id: 'peak', name: 'Peak Yield', emoji: '🟠', color: '#f59e0b', gradient: 'linear-gradient(135deg, #f59e0b, #f97316)', effMin: 75, effMax: 90, desc: 'Sweet spot. Fees significantly outpace IL.', advice: '✅ Hold strong. Compound weekly.' },
+            { id: 'harvest', name: 'Harvest Mode', emoji: '🟡', color: '#eab308', gradient: 'linear-gradient(135deg, #eab308, #facc15)', effMin: 60, effMax: 75, desc: 'Healthy farming. Fees outpacing IL.', advice: '🌾 Keep farming. Consider increasing size.' },
+            { id: 'accum', name: 'Accumulation', emoji: '🟢', color: '#22c55e', gradient: 'linear-gradient(135deg, #22c55e, #16a34a)', effMin: 40, effMax: 60, desc: 'Smart money positioning. Fees starting to offset IL.', advice: '🧠 DCA into position. Patience pays.' },
+            { id: 'bleed', name: 'Bleeding Edge', emoji: '🔵', color: '#3b82f6', gradient: 'linear-gradient(135deg, #3b82f6, #6366f1)', effMin: 20, effMax: 40, desc: 'Near range boundary. IL outpaces fees.', advice: '🩸 Micro-DCA only. Prepare to rebalance.' },
+            { id: 'panic', name: 'Panic Farm', emoji: '🟣', color: '#a855f7', gradient: 'linear-gradient(135deg, #a855f7, #7c3aed)', effMin: 0, effMax: 20, desc: 'Maximum fear. Historically: generational entry.', advice: '🔥 Be greedy when others are fearful.' }
+        ];
+
+        function getRainbowBand(efficiency) {
+            for (const b of RAINBOW_BANDS) {
+                if (efficiency >= b.effMin && efficiency < b.effMax) return b;
+            }
+            return RAINBOW_BANDS[0];
+        }
+
+        function drawRainbowBars(data) {
+            const container = document.getElementById('rainbow-bars');
+            if (!container) return;
+            const efficiency = data.metrics ? data.metrics.efficiency : 0;
+            const currentBand = getRainbowBand(efficiency);
+            const bandH = 320 / RAINBOW_BANDS.length;
+
+            let html = '';
+            RAINBOW_BANDS.forEach((band, i) => {
+                const isCurrent = band.id === currentBand.id;
+                const opacity = isCurrent ? 1 : 0.55;
+                const top = i * bandH;
+                html += `<div style="position:absolute; left:0; right:0; top:${top}px; height:${bandH}px; background:${band.gradient}; opacity:${opacity}; display:flex; align-items:center; padding:0 16px; ${isCurrent ? 'box-shadow:inset 0 0 30px rgba(255,255,255,0.12); border-top:2px solid rgba(255,255,255,0.3); border-bottom:2px solid rgba(255,255,255,0.3);' : ''}">
+                    <span style="font-size:0.72em; font-weight:600; text-transform:uppercase; letter-spacing:1px; color:white; text-shadow:0 1px 3px rgba(0,0,0,0.5);">${band.emoji} ${band.name}</span>
+                    <span style="margin-left:auto; font-family:'JetBrains Mono',monospace; font-size:0.62em; color:rgba(255,255,255,0.7); text-shadow:0 1px 3px rgba(0,0,0,0.5);">Eff: ${band.effMin}–${band.effMax}%</span>
+                </div>`;
+                if (isCurrent) {
+                    const price = data.position ? data.position.currentPrice : 0;
+                    html += `<div style="position:absolute; right:14px; top:${top + bandH/2 - 14}px; background:rgba(0,0,0,0.85); border:2px solid white; border-radius:8px; padding:4px 10px; font-size:0.68em; font-weight:700; font-family:'JetBrains Mono',monospace; color:white; white-space:nowrap; z-index:10; animation:rbPulse 2s ease-in-out infinite; box-shadow:0 0 20px rgba(255,255,255,0.2);">$${price.toFixed(4)} ← YOU</div>`;
+                }
+            });
+            container.innerHTML = html;
+        }
+
+        function renderRainbowZone(data) {
+            const efficiency = data.metrics ? data.metrics.efficiency : 0;
+            const band = getRainbowBand(efficiency);
+            const card = document.getElementById('rainbow-zone');
+            if (!card) return;
+            card.style.borderLeftColor = band.color;
+            document.getElementById('zone-emoji').textContent = band.emoji;
+            document.getElementById('zone-name').textContent = band.name;
+            document.getElementById('zone-name').style.color = band.color;
+            document.getElementById('zone-desc').textContent = band.desc;
+            const advice = document.getElementById('zone-advice');
+            advice.textContent = band.advice;
+            advice.style.borderLeftColor = band.color;
+        }
+
+        function renderRainbowStats(data) {
+            if (!data.metrics) return;
+            const m = data.metrics;
+            document.getElementById('rb-efficiency').textContent = m.efficiency.toFixed(1) + '%';
+            document.getElementById('rb-efficiency').style.color = m.efficiency >= 70 ? '#22c55e' : m.efficiency >= 50 ? '#eab308' : '#e84142';
+            document.getElementById('rb-apr').textContent = m.annualizedApr.toFixed(0) + '%';
+            document.getElementById('rb-fees').textContent = '$' + m.dailyFees.toFixed(4);
+            const changeEl = document.getElementById('rb-change');
+            changeEl.textContent = (m.priceChange24h >= 0 ? '+' : '') + m.priceChange24h.toFixed(2) + '%';
+            changeEl.style.color = m.priceChange24h >= 0 ? '#22c55e' : '#e84142';
+        }
+
+        function renderRainbowLegend() {
+            const container = document.getElementById('rb-legend');
+            if (!container) return;
+            container.innerHTML = RAINBOW_BANDS.map(b =>
+                `<div style="display:flex; align-items:center; gap:8px;">
+                    <div style="width:14px; height:14px; border-radius:3px; background:${b.gradient}; flex-shrink:0;"></div>
+                    <span style="font-size:0.78em; font-weight:600; color:${b.color};">${b.emoji} ${b.name}</span>
+                    <span style="font-size:0.7em; color:var(--text-dim); margin-left:auto;">Eff ${b.effMin}–${b.effMax}%</span>
+                </div>`
+            ).join('');
+        }
+
+        function drawRainbowHistory(canvasId, history, bandColor) {
+            const canvas = document.getElementById(canvasId);
+            if (!canvas || !history || history.length < 2) return;
+            const ctx = canvas.getContext('2d');
+            const dpr = window.devicePixelRatio || 1;
+            const rect = canvas.getBoundingClientRect();
+            canvas.width = rect.width * dpr;
+            canvas.height = rect.height * dpr;
+            ctx.scale(dpr, dpr);
+            const w = rect.width, h = rect.height;
+            const pad = 8, chartH = h - pad * 2, chartW = w;
+
+            // Band backgrounds
+            [{min:90,c:'rgba(232,65,66,0.12)'},{min:75,c:'rgba(245,158,11,0.1)'},{min:60,c:'rgba(234,179,8,0.08)'},{min:40,c:'rgba(34,197,94,0.06)'},{min:20,c:'rgba(59,130,246,0.06)'},{min:0,c:'rgba(168,85,247,0.06)'}].forEach(b => {
+                const y = pad + chartH * (1 - b.min / 100);
+                ctx.fillStyle = b.c;
+                ctx.fillRect(0, y - chartH * 0.1, chartW, chartH * 0.1);
+            });
+
+            // Line
+            ctx.beginPath();
+            ctx.strokeStyle = bandColor;
+            ctx.lineWidth = 2;
+            ctx.lineJoin = 'round';
+            const step = chartW / (history.length - 1);
+            history.forEach((v, i) => {
+                const x = i * step, y = pad + chartH * (1 - v / 100);
+                i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+            });
+            ctx.stroke();
+
+            // Fill
+            const last = history[history.length - 1];
+            ctx.lineTo((history.length - 1) * step, h - pad);
+            ctx.lineTo(0, h - pad);
+            ctx.closePath();
+            const grad = ctx.createLinearGradient(0, pad, 0, h - pad);
+            grad.addColorStop(0, bandColor + '25');
+            grad.addColorStop(1, bandColor + '05');
+            ctx.fillStyle = grad;
+            ctx.fill();
+
+            // Dot
+            const dotX = (history.length - 1) * step, dotY = pad + chartH * (1 - last / 100);
+            ctx.beginPath(); ctx.arc(dotX, dotY, 4, 0, Math.PI * 2);
+            ctx.fillStyle = bandColor; ctx.fill();
+            ctx.strokeStyle = 'white'; ctx.lineWidth = 1.5; ctx.stroke();
+        }
+
+        async function fetchRainbowData() {
+            try {
+                const res = await fetch(RAINBOW_DATA_URL + '?t=' + Date.now());
+                if (!res.ok) throw new Error('No rainbow data');
+                const data = await res.json();
+                drawRainbowBars(data);
+                renderRainbowZone(data);
+                renderRainbowStats(data);
+                renderRainbowLegend();
+                const efficiency = data.metrics ? data.metrics.efficiency : 0;
+                const band = getRainbowBand(efficiency);
+                drawRainbowHistory('rb-history', data.history, band.color);
+            } catch (e) {
+                console.warn('Rainbow fetch failed:', e);
+            }
+        }
+
+        // --- Narrative Rotation ---
+        const ROTATION_NARRATIVES = {
+            'AI & Data': { emoji: '🤖', coins: 'FET, RENDER, TAO, AKT', thesis: 'AI compute, data markets, inference' },
+            'RWA': { emoji: '🏠', coins: 'ONDO, PLU, CPOOL', thesis: 'Tokenized treasuries, real estate' },
+            'DeFi Blue Chips': { emoji: '🏦', coins: 'UNI, AAVE, LINK, MKR', thesis: 'DEX, lending, oracles' },
+            'L1 / L2': { emoji: '⛓️', coins: 'SOL, AVAX, NEAR, ARB', thesis: 'Base layers and scaling' },
+            'Meme': { emoji: '🐸', coins: 'DOGE, PEPE, WIF, BONK', thesis: 'Community-driven momentum' },
+            'Gaming': { emoji: '🎮', coins: 'IMX, GALA, PYTH', thesis: 'On-chain gaming, virtual worlds' }
+        };
+
+        async function fetchRotationData() {
+            const container = document.getElementById('rotation-content');
+            if (!container) return;
+            try {
+                // Try to load from the weekly scanner output
+                const res = await fetch('https://raw.githubusercontent.com/ProtoJay4789/ProtoJay4789.github.io/main/DeFi/rainbow/rotation-data.json?t=' + Date.now());
+                if (res.ok) {
+                    const data = await res.json();
+                    renderRotation(container, data);
+                    return;
+                }
+            } catch (e) {}
+            // Fallback: show static narrative cards
+            renderRotationFallback(container);
+        }
+
+        function renderRotation(container, data) {
+            const narratives = data.narratives || [];
+            if (narratives.length === 0) { renderRotationFallback(container); return; }
+            container.innerHTML = narratives.map((n, i) => {
+                const zone = n.zone || '';
+                const zoneColor = zone.includes('Hot') ? '#22c55e' : zone.includes('Warm') ? '#3b82f6' : zone.includes('Cool') ? '#eab308' : '#e84142';
+                return `<div class="card" style="margin-bottom:10px; border-left:4px solid ${zoneColor};">
+                    <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
+                        <span style="font-size:1.3em;">${n.emoji || '📊'}</span>
+                        <span style="font-weight:700; font-size:0.95em;">${n.name}</span>
+                        <span style="margin-left:auto; font-size:0.7em; color:${zoneColor}; font-weight:600;">${zone}</span>
+                    </div>
+                    <div style="font-size:0.78em; color:var(--text-dim); margin-bottom:4px;">${n.thesis || ''}</div>
+                    <div style="font-size:0.72em; color:var(--text-dim);">Coins: ${n.coins || ''}</div>
+                    ${n.score !== undefined ? `<div style="font-size:0.72em; margin-top:4px; color:var(--gold);">Score: ${n.score > 0 ? '+' : ''}${n.score.toFixed(1)}</div>` : ''}
+                </div>`;
+            }).join('');
+        }
+
+        function renderRotationFallback(container) {
+            container.innerHTML = Object.entries(ROTATION_NARRATIVES).map(([name, n]) =>
+                `<div class="card" style="margin-bottom:10px; border-left:4px solid var(--panel-border);">
+                    <div style="display:flex; align-items:center; gap:8px; margin-bottom:4px;">
+                        <span style="font-size:1.3em;">${n.emoji}</span>
+                        <span style="font-weight:700; font-size:0.95em;">${name}</span>
+                    </div>
+                    <div style="font-size:0.78em; color:var(--text-dim);">${n.thesis}</div>
+                    <div style="font-size:0.72em; color:var(--text-dim); margin-top:2px;">Coins: ${n.coins}</div>
+                </div>`
+            ).join('') + '<div style="text-align:center; font-size:0.72em; color:var(--text-dim); margin-top:12px;">📊 Full rotation data updates Sundays at 3:30 PM ET</div>';
+        }
+
+        // --- Economic Calendar ---
+        async function fetchMacroEvents() {
+            const container = document.getElementById('macro-events');
+            if (!container) return;
+            try {
+                const res = await fetch('https://raw.githubusercontent.com/ProtoJay4789/ProtoJay4789.github.io/main/DeFi/economic-calendar.json?t=' + Date.now());
+                if (!res.ok) { renderMacroFallback(container); return; }
+                const data = await res.json();
+                renderMacroEvents(container, data);
+            } catch (e) {
+                renderMacroFallback(container);
+            }
+        }
+
+        function renderMacroEvents(container, data) {
+            const events = data.events || [];
+            if (events.length === 0) { renderMacroFallback(container); return; }
+
+            let html = '';
+
+            // Summary card
+            if (data.summary) {
+                html += `<div class="card" style="margin-bottom:10px; border-left:4px solid var(--gold); background:rgba(234,179,8,0.05);">
+                    <div style="font-size:0.82em; font-weight:600; color:var(--gold); margin-bottom:4px;">📊 ${data.date || 'Today'}</div>
+                    <div style="font-size:0.78em; color:var(--text-dim); line-height:1.4;">${data.summary}</div>
+                </div>`;
+            }
+
+            // Event cards
+            events.forEach(ev => {
+                const borderColor = ev.impact === 'high' ? '#e84142' : ev.impact === 'medium' ? '#eab308' : '#3b82f6';
+                const impactBg = ev.impact === 'high' ? 'rgba(232,65,66,0.06)' : ev.impact === 'medium' ? 'rgba(234,179,8,0.06)' : 'rgba(59,130,246,0.06)';
+
+                html += `<div class="card" style="margin-bottom:10px; border-left:4px solid ${borderColor}; background:${impactBg};">
+                    <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
+                        <span style="font-size:1.2em;">${ev.emoji || '📅'}</span>
+                        <div>
+                            <div style="font-weight:700; font-size:0.92em;">${ev.name}</div>
+                            <div style="font-size:0.72em; color:var(--text-dim);">${ev.time || ''} · Forecast: ${ev.forecast || '—'} · Previous: ${ev.previous || '—'}</div>
+                        </div>
+                    </div>
+                    <div style="font-size:0.78em; color:var(--text-dim); margin-bottom:4px;">${ev.description || ''}</div>
+                    ${ev.volatility ? `<div style="font-size:0.72em; color:var(--text-dim);">⚡ Volatility: ${ev.volatility}</div>` : ''}
+                    ${ev.avxBias ? `<div style="font-size:0.72em; color:var(--gold); margin-top:2px;">🎯 AVAX: ${ev.avxBias}</div>` : ''}
+                </div>`;
+            });
+
+            // Timestamp
+            if (data.lastUpdated) {
+                const updated = new Date(data.lastUpdated);
+                const timeStr = updated.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+                html += `<div style="text-align:center; font-size:0.68em; color:var(--text-dim); margin-top:8px; opacity:0.6;">Updated ${timeStr} ET</div>`;
+            }
+
+            container.innerHTML = html;
+        }
+
+        function renderMacroFallback(container) {
+            container.innerHTML = `<div class="card" style="border-left:4px solid var(--panel-border);">
+                <div style="font-weight:600; font-size:0.88em; margin-bottom:4px;">📅 Economic Calendar</div>
+                <div style="font-size:0.78em; color:var(--text-dim);">Macro events data updates daily. Check back after the next Fed release.</div>
+            </div>`;
+        }
+
+        // --- Init ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const saved = getSavedTab();
+            switchTab(saved);
+            document.querySelectorAll('.settings-option').forEach(o => o.classList.toggle('selected', o.dataset.tab === saved));
+            fetchPositionData();
+            fetchRainbowData();
+            fetchRotationData();
+            fetchMacroEvents();
+            setInterval(fetchPositionData, REFRESH_MS);
+            setInterval(fetchRainbowData, REFRESH_MS);
+            setInterval(fetchMacroEvents, REFRESH_MS * 5); // Refresh macro every 5 min
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,162 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "title": "AAE-LP-Signal-Spec",
+  "description": "Structured signal schema for DeFi LP position monitoring (AVAX/USDC, Uniswap v3, LFJ V2.2, Metaplex, Drift)",
+  "type": "object",
+  "required": ["position_id", "token_pair", "chain", "timestamp", "price", "pool_stats", "position_status", "rewards", "fees", "gas_stats", "health_score"],
+  "properties": {
+    "position_id": {
+      "type": "string",
+      "description": "Unique LP token ID or position ID (e.g., LFJ NFT token ID or Uniswap v3 position ID)"
+    },
+    "token_pair": {
+      "type": "object",
+      "properties": {
+        "token0": {"type": "string", "example": "AVAX"},
+        "token1": {"type": "string", "example": "USDC"},
+        "token0_address": {"type": "string", "pattern": "^0x[a-fA-F0-9]{40}$"},
+        "token1_address": {"type": "string", "pattern": "^0x[a-fA-F0-9]{40}$"},
+        "decimals0": {"type": "integer"},
+        "decimals1": {"type": "integer"}
+      },
+      "required": ["token0", "token1", "token0_address", "token1_address", "decimals0", "decimals1"]
+    },
+    "chain": {
+      "type": "string",
+      "enum": ["avalanche", "base", "solana", "ethereum"],
+      "description": "Blockchain network"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "UTC timestamp of snapshot"
+    },
+    "price": {
+      "type": "object",
+      "properties": {
+        "token0_in_token1": {"type": "number", "description": "AVAX price in USDC"},
+        "source": {"type": "string", "enum": ["birdeye", "dexscreener", "onchain_rpcs", "subgraph"]},
+        "source_url": {"type": "string"},
+        "last_update": {"type": "string", "format": "date-time"}
+      },
+      "required": ["token0_in_token1", "source"]
+    },
+    "pool_stats": {
+      "type": "object",
+      "properties": {
+        "liquidity_usd": {"type": "number", "description": "Total pool liquidity"},
+        "volume_24h": {"type": "number", "description": "24h trading volume"},
+        "volume_7d": {"type": "number", "description": "7-day volume"},
+        "fee_rate": {"type": "number", "description": "Pool fee tier (e.g. 0.0005 = 0.05%)" },
+        "apy": {"type": "number", "description": "Base APY from fees"},
+        "emissions_apr": {"type": "number", "description": "Additional emissions APR (e.g. Trader Joe rewards)"},
+        "combined_apr": {"type": "number", "description": "APY + Emissions = Total APR"},
+        "liquidity_depth": {"type": "object", "properties": {
+          "bid_depth": {"type": "number"},
+          "ask_depth": {"type": "number"},
+          "spread_bps": {"type": "number"}
+        }}
+      },
+      "required": ["liquidity_usd", "volume_24h", "fee_rate", "apy", "emissions_apr", "combined_apr"]
+    },
+    "position_status": {
+      "type": "object",
+      "properties": {
+        "in_range": {"type": "boolean"},
+        "fee_efficiency_pct": {"type": "number", "minimum": 0, "maximum": 100},
+        "range_config": {
+          "type": "object",
+          "properties": {
+            "lower_price": {"type": "number"},
+            "upper_price": {"type": "number"},
+            "current_price_pct_from_mid": {"type": "number"}
+          },
+          "required": ["lower_price", "upper_price"]
+        },
+        "token0_held": {"type": "number"},
+        "token1_held": {"type": "number"},
+        "position_value_usd": {"type": "number"}
+      },
+      "required": ["in_range", "fee_efficiency_pct", "range_config", "token0_held", "token1_held", "position_value_usd"]
+    },
+    "rewards": {
+      "type": "object",
+      "properties": {
+        "claimable_token0": {"type": "number"},
+        "claimable_token1": {"type": "number"},
+        "claimable_usd": {"type": "number"},
+        "pending_accrued": {"type": "number"},
+        "pending_accrued_usd": {"type": "number"},
+        "last_claim_time": {"type": "string", "format": "date-time", "nullable": true},
+        "auto_compound_enabled": {"type": "boolean"}
+      },
+      "required": ["claimable_token0", "claimable_token1", "claimable_usd", "pending_accrued"]
+    },
+    "fees": {
+      "type": "object",
+      "properties": {
+        "fees_24h": {"type": "number"},
+        "fees_24h_usd": {"type": "number"},
+        "fees_since_entry": {"type": "number"},
+        "fees_since_entry_usd": {"type": "number"},
+        "daily_yield_target": {"type": "number", "description": "Daily fee target for milestone tracking"},
+        "days_to_next_milestone": {"type": "integer"}
+      },
+      "required": ["fees_24h", "fees_24h_usd", "fees_since_entry", "fees_since_entry_usd"]
+    },
+    "gas_stats": {
+      "type": "object",
+      "properties": {
+        "chain_gas_usd": {"type": "number", "description": "Current gas cost in USD for a claim/compound operation"},
+        "gas_worth_claiming": {"type": "boolean", "description": "True if gas cost < claimable rewards"},
+        "optimized_route": {"type": "string", "enum": ["direct", "layer2", "aggregator"], "description": "Recommended gas optimization route"},
+        "gas_cache_minutes": {"type": "integer", "description": "Seconds since last gas price fetch"}
+      },
+      "required": ["chain_gas_usd", "gas_worth_claiming", "optimized_route", "gas_cache_minutes"]
+    },
+    "health_score": {
+      "type": "object",
+      "properties": {
+        "composite_score": {"type": "integer", "minimum": 0, "maximum": 100},
+        "components": {
+          "type": "object",
+          "properties": {
+            "in_range_score": {"type": "integer"},
+            "fee_growth_score": {"type": "integer"},
+            "gas_efficiency_score": {"type": "integer"},
+            "pool_liquidity_score": {"type": "integer"}
+          },
+          "required": ["in_range_score", "fee_growth_score", "gas_efficiency_score", "pool_liquidity_score"]
+        },
+        "recommendations": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "Actionable recommendations based on score analysis"
+        }
+      },
+      "required": ["composite_score", "components", "recommendations"]
+    },
+    "milestone_progress": {
+      "type": "object",
+      "properties": {
+        "current_milestone_label": {"type": "string", "description": "e.g. \"$5/day\", \"$10/day\""},
+        "current_milestone_daily_fees": {"type": "number"},
+        "next_milestone_label": {"type": "string"},
+        "next_milestone_daily_fees": {"type": "number"},
+        "days_since_entry": {"type": "number", "description": "Days since position created or last rebalance"},
+        "projected_days_to_next": {"type": "integer", "description": "Est. days to reach next milestone at current pace"}
+      },
+      "required": ["current_milestone_label", "next_milestone_label", "days_since_entry"]
+    },
+    "dca_schedule": {
+      "type": "object",
+      "properties": {
+        "weekly_capital": {"type": "number", "description": "Current planned DCA amount"},
+        "dynamic_adjustment": {"type": "boolean", "description": "Is DCA pacing automatically adjusted?"},
+        "next_dca_day": {"type": "integer", "description": "Day of week (0=Mon, 6=Sun)"},
+        "dca_reason": {"type": "string", "description": "e.g. \"Amazon Flex income\", \"Fixed allocation\""}
+      },
+      "required": ["weekly_capital", "next_dca_day", "dca_reason"]
+    }
+  }
+}

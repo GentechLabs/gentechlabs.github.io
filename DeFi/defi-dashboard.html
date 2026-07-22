@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AAE DeFi Milestone — GenTech Labs</title>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0a0e17;
+            --bg-alt: #111827;
+            --panel-bg: #1a2235;
+            --panel-border: #2a3a52;
+            --text: #e2e8f0;
+            --text-dim: #8899aa;
+            --avax-red: #e84142;
+            --gold: #e8652a;
+            --success: #00ff88;
+            --danger: #ff4466;
+            --cyan: #00d4ff;
+            --purple: #a855f7;
+            --blue: #3b82f6;
+            --radius: 12px;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        /* ===== HEADER ===== */
+        .dash-header {
+            background: linear-gradient(135deg, #e84142 0%, #e8652a 40%, #d4a017 100%);
+            padding: 16px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+        .dash-header h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.1em;
+            color: #fff;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+        .dash-header .sub {
+            font-size: 0.65em;
+            color: rgba(255,255,255,0.7);
+            letter-spacing: 1px;
+        }
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .header-right a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            font-size: 0.8em;
+            padding: 6px 12px;
+            border-radius: 6px;
+            background: rgba(255,255,255,0.1);
+            transition: 0.2s;
+        }
+        .header-right a:hover { background: rgba(255,255,255,0.2); }
+        .status-dot {
+            width: 8px; height: 8px; border-radius: 50%;
+            display: inline-block;
+            animation: pulse 2s ease-in-out infinite;
+        }
+        .status-dot.live { background: var(--success); }
+        @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+        /* ===== LAYOUT ===== */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 16px;
+        }
+
+        /* ===== NAV PILLS ===== */
+        .pill-nav {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        .pill-nav .pill {
+            padding: 10px 20px;
+            border-radius: 30px;
+            background: var(--panel-bg);
+            border: 1px solid var(--panel-border);
+            color: var(--text-dim);
+            cursor: pointer;
+            font-size: 0.82em;
+            font-weight: 500;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+        .pill-nav .pill:hover {
+            border-color: var(--gold);
+            color: var(--text);
+        }
+        .pill-nav .pill.active {
+            background: linear-gradient(135deg, rgba(232,101,42,0.2), rgba(232,65,66,0.15));
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+
+        /* ===== SECTIONS ===== */
+        .dash-section { display: none; }
+        .dash-section.active { display: block; animation: fadeIn 0.3s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .section-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.4em;
+            color: var(--gold);
+            margin-bottom: 16px;
+        }
+        .section-title .emoji { margin-right: 8px; }
+
+        /* ===== CARDS ===== */
+        .card {
+            background: var(--panel-bg);
+            border: 1px solid var(--panel-border);
+            border-radius: var(--radius);
+            padding: 16px;
+            margin-bottom: 12px;
+        }
+        .card-title {
+            font-size: 0.7em;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--text-dim);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* ===== GRIDS ===== */
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+        .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+
+        .stat-card {
+            background: var(--panel-bg);
+            border: 1px solid var(--panel-border);
+            border-radius: var(--radius);
+            padding: 14px;
+            text-align: center;
+        }
+        .stat-label {
+            font-size: 0.65em;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--text-dim);
+            margin-bottom: 4px;
+        }
+        .stat-value {
+            font-size: 1.4em;
+            font-weight: 700;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .stat-value.gold { color: var(--gold); }
+        .stat-value.green { color: var(--success); }
+        .stat-value.red { color: var(--danger); }
+        .stat-value.cyan { color: var(--cyan); }
+        .stat-value.purple { color: var(--purple); }
+        .stat-sub {
+            font-size: 0.72em;
+            color: var(--text-dim);
+            margin-top: 2px;
+        }
+
+        .pos-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+        }
+        .pos-row:last-child { border-bottom: none; }
+        .pos-label { font-weight: 600; font-size: 0.9em; }
+        .pos-val {
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 600;
+            color: var(--gold);
+        }
+        .pos-sub {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.82em;
+            color: var(--text-dim);
+        }
+
+        /* ===== RANGE BAR ===== */
+        .range-bar {
+            position: relative;
+            height: 28px;
+            background: var(--bg-alt);
+            border-radius: 6px;
+            overflow: hidden;
+            margin: 8px 0;
+        }
+        .range-fill {
+            position: absolute;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(232,65,66,0.3), rgba(232,101,42,0.5), rgba(0,255,136,0.3));
+            border-radius: 6px;
+        }
+        .range-marker {
+            position: absolute;
+            top: -2px;
+            width: 3px;
+            height: 32px;
+            background: #fff;
+            border-radius: 2px;
+            box-shadow: 0 0 8px rgba(255,255,255,0.5);
+        }
+        .range-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.72em;
+            color: var(--text-dim);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* ===== RAINBOW ===== */
+        .rainbow-container {
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--panel-border);
+            margin-bottom: 14px;
+            height: 280px;
+            position: relative;
+        }
+
+        /* ===== ROTATION ===== */
+        .rot-card {
+            border-left: 4px solid var(--panel-border);
+            margin-bottom: 10px;
+        }
+
+        /* ===== MACRO ===== */
+        .macro-event {
+            border-left: 4px solid var(--panel-border);
+            margin-bottom: 10px;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 0.65em;
+            color: var(--text-dim);
+            opacity: 0.5;
+            border-top: 1px solid var(--panel-border);
+            margin-top: 30px;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr 1fr; }
+            .dash-header { padding: 12px 16px; }
+            .dash-header h1 { font-size: 0.95em; }
+            .header-right a { font-size: 0.7em; padding: 4px 8px; }
+            .pill-nav .pill { font-size: 0.75em; padding: 8px 14px; }
+        }
+        @media (max-width: 480px) {
+            .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+        }
+
+        /* ===== STATUS BADGE ===== */
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75em;
+            font-weight: 500;
+        }
+        .status-badge.active {
+            background: rgba(0,255,136,0.1);
+            border: 1px solid rgba(0,255,136,0.25);
+            color: var(--success);
+        }
+        .status-badge.inactive {
+            background: rgba(255,68,102,0.1);
+            border: 1px solid rgba(255,68,102,0.25);
+            color: var(--danger);
+        }
+
+        /* ===== LOADING ===== */
+        .loading-placeholder {
+            text-align: center;
+            padding: 30px;
+            color: var(--text-dim);
+            font-size: 0.9em;
+        }
+
+        /* Empty state */
+        .empty-state {
+            text-align: center;
+            padding: 30px;
+            color: var(--text-dim);
+        }
+        .empty-state .big { font-size: 2em; margin-bottom: 8px; }
+        .empty-state p { font-size: 0.85em; }
+    </style>
+</head>
+<body>
+
+    <!-- ===== HEADER ===== -->
+    <div class="dash-header">
+        <div>
+            <h1>⚡ AAE DeFi Milestone</h1>
+            <div class="sub">GenTech Labs · Command Center</div>
+        </div>
+        <div class="header-right">
+            <span style="display:flex; align-items:center; gap:6px; font-size:0.75em; color:rgba(255,255,255,0.7);">
+                <span class="status-dot live" id="header-status"></span>
+                <span id="header-status-text">Live</span>
+            </span>
+            <a href="https://protojay4789.github.io/Jordan/">← Hub</a>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <!-- ===== PILL NAV ===== -->
+        <nav class="pill-nav" id="pill-nav">
+            <button class="pill active" data-section="command">🎯 Command Center</button>
+            <button class="pill" data-section="rainbow">🌈 Yield Rainbow</button>
+            <button class="pill" data-section="rotation">🔄 Narrative Rotation</button>
+            <button class="pill" data-section="macro">📅 Macro News</button>
+        </nav>
+
+        <!-- ============================================================ -->
+        <!-- SECTION 1: COMMAND CENTER                                    -->
+        <!-- ============================================================ -->
+        <div class="dash-section active" id="section-command">
+
+            <div class="pill-nav" style="margin-bottom:14px; gap:6px;">
+                <button class="pill active" data-subsection="overview" onclick="switchSubSection('overview')" style="font-size:0.75em; padding:6px 14px;">📊 Overview</button>
+                <button class="pill" data-subsection="yields" onclick="switchSubSection('yields')" style="font-size:0.75em; padding:6px 14px;">💰 Yield Ops</button>
+                <button class="pill" data-subsection="position" onclick="switchSubSection('position')" style="font-size:0.75em; padding:6px 14px;">🎯 LP Tracker</button>
+            </div>
+
+            <!-- Overview Subsection -->
+            <div class="sub-section active" id="sub-overview">
+                <h2 class="section-title">📊 Market Pulse</h2>
+                <div class="grid-4" id="market-prices">
+                    <div class="stat-card"><div class="stat-label">BTC</div><div class="stat-value gold" id="price-btc">—</div><div class="stat-sub" id="change-btc"></div></div>
+                    <div class="stat-card"><div class="stat-label">ETH</div><div class="stat-value cyan" id="price-eth">—</div><div class="stat-sub" id="change-eth"></div></div>
+                    <div class="stat-card"><div class="stat-label">SOL</div><div class="stat-value purple" id="price-sol">—</div><div class="stat-sub" id="change-sol"></div></div>
+                    <div class="stat-card"><div class="stat-label">AVAX</div><div class="stat-value" id="price-avax" style="color:#e84142;">—</div><div class="stat-sub" id="change-avax"></div></div>
+                </div>
+
+                <!-- Watchlist -->
+                <div class="card">
+                    <div class="card-title">👁️ Watchlist</div>
+                    <div id="watchlist-content">
+                        <div class="loading-placeholder">Loading watchlist...</div>
+                    </div>
+                </div>
+
+                <!-- Thesis Summary -->
+                <div class="card" style="border-left:4px solid var(--gold); background:rgba(232,101,42,0.04);">
+                    <div class="card-title" style="color:var(--gold);">📋 Current Thesis</div>
+                    <div style="font-size:0.85em; line-height:1.7; color:var(--text-dim);">
+                        <strong style="color:var(--text);">Bear Market Accumulation:</strong> July pump likely a final trap. 
+                        Expect Aug/Sep capitulation below $60K. Oct 2026 bottom target (~$52K).
+                        DCA on dips below $60K. RH Chain + institutional custody approvals are 
+                        structural tailwinds for next cycle.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Yield Ops Subsection -->
+            <div class="sub-section" id="sub-yields">
+                <h2 class="section-title">💰 Yield Opportunities</h2>
+
+                <div id="yield-opportunities">
+                    <div class="loading-placeholder">Scanning yield opportunities...</div>
+                </div>
+            </div>
+
+            <!-- LP Tracker Subsection -->
+            <div class="sub-section" id="sub-position">
+                <h2 class="section-title">🎯 Last Known Pool Activity</h2>
+                <div id="position-content">
+                    <div class="card" style="border-left:4px solid var(--gold); background:rgba(232,101,42,0.04); margin-bottom:10px;">
+                        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:8px;">
+                            <div>
+                                <div style="font-weight:700; font-size:1em;">AVAX/USDC</div>
+                                <div style="font-size:0.72em; color:var(--text-dim);">Avalanche · LFJ · 5bps</div>
+                            </div>
+                            <span class="status-badge inactive">Closed Sep 2026</span>
+                        </div>
+                    </div>
+
+                    <div class="grid-2" style="margin-bottom:10px;">
+                        <div class="stat-card">
+                            <div class="stat-label">Total Deployed</div>
+                            <div class="stat-value gold" style="font-size:1.2em;">$42.40</div>
+                            <div class="stat-sub">2.62 AVAX + $26.89 USDC</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">Cumulative Fees</div>
+                            <div class="stat-value green" style="font-size:1.2em;">$0.82</div>
+                            <div class="stat-sub">Earned while active</div>
+                        </div>
+                    </div>
+
+                    <div class="card" style="margin-bottom:10px;">
+                        <div class="card-title">Pool Config</div>
+                        <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px;">
+                            <div style="padding:8px;background:var(--bg-alt);border-radius:6px;">
+                                <div style="font-size:0.6em;text-transform:uppercase;letter-spacing:1px;color:var(--text-dim);">Shape</div>
+                                <div style="font-family:JetBrains Mono,monospace;font-size:0.82em;font-weight:500;">Bid-Ask</div>
+                            </div>
+                            <div style="padding:8px;background:var(--bg-alt);border-radius:6px;">
+                                <div style="font-size:0.6em;text-transform:uppercase;letter-spacing:1px;color:var(--text-dim);">Range</div>
+                                <div style="font-family:JetBrains Mono,monospace;font-size:0.82em;font-weight:500;">$5.82 – $6.10</div>
+                            </div>
+                            <div style="padding:8px;background:var(--bg-alt);border-radius:6px;">
+                                <div style="font-size:0.6em;text-transform:uppercase;letter-spacing:1px;color:var(--text-dim);">Peak Efficiency</div>
+                                <div style="font-family:JetBrains Mono,monospace;font-size:0.82em;font-weight:500;color:var(--success);">64.3%</div>
+                            </div>
+                            <div style="padding:8px;background:var(--bg-alt);border-radius:6px;">
+                                <div style="font-size:0.6em;text-transform:uppercase;letter-spacing:1px;color:var(--text-dim);">Entry Price</div>
+                                <div style="font-family:JetBrains Mono,monospace;font-size:0.82em;font-weight:500;">$6.23/AVAX</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card" style="margin-bottom:10px;">
+                        <div class="card-title">Milestone Progress</div>
+                        <div style="display:flex; align-items:center; gap:12px;">
+                            <span style="font-size:1.3em;">🪖</span>
+                            <div style="flex:1;">
+                                <div style="display:flex; justify-content:space-between; font-size:0.72em; margin-bottom:4px;">
+                                    <span>Scout → Raider</span>
+                                    <span style="color:var(--gold);">$5 target</span>
+                                </div>
+                                <div style="background:var(--bg-alt); border-radius:10px; height:8px; overflow:hidden;">
+                                    <div style="height:100%; width:16.5%; background:linear-gradient(90deg,var(--gold),var(--success)); border-radius:10px;"></div>
+                                </div>
+                                <div style="font-size:0.65em; color:var(--text-dim); margin-top:2px;">16.5% to next milestone · $0.82 of $5.00</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="text-align:center; font-size:0.75em; color:var(--text-dim); padding:10px;">
+                        Pool closed ahead of Sep 2026 trip. Data reflects final state.
+                        <span id="position-last-update" style="display:block; margin-top:4px; opacity:0.6;">Last active: Jul 2026</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- SECTION 2: YIELD RAINBOW                                     -->
+        <!-- ============================================================ -->
+        <div class="dash-section" id="section-rainbow">
+            <h2 class="section-title">🌈 Yield Rainbow</h2>
+
+            <div class="rainbow-container" id="rainbow-bars">
+                <div class="loading-placeholder" style="padding:120px 0;">Loading rainbow...</div>
+            </div>
+
+            <div id="rainbow-zone" class="card" style="border-left:4px solid;">
+                <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px;">
+                    <span id="zone-emoji" style="font-size:1.6em;"></span>
+                    <div>
+                        <div id="zone-name" style="font-weight:700; font-size:1.1em;"></div>
+                        <div id="zone-desc" style="font-size:0.82em; color:var(--text-dim);"></div>
+                    </div>
+                </div>
+                <div id="zone-advice" style="background:rgba(255,255,255,0.04); border-radius:8px; padding:10px; font-size:0.82em; border-left:3px solid;"></div>
+            </div>
+
+            <div class="grid-4" id="rainbow-stats">
+                <div class="stat-card"><div class="stat-label">Efficiency</div><div class="stat-value" id="rb-efficiency" style="font-size:1.2em;">—</div></div>
+                <div class="stat-card"><div class="stat-label">APR</div><div class="stat-value gold" id="rb-apr" style="font-size:1.2em;">—</div></div>
+                <div class="stat-card"><div class="stat-label">Daily Fees</div><div class="stat-value" id="rb-fees" style="font-size:1.1em; color:#22c55e;">—</div></div>
+                <div class="stat-card"><div class="stat-label">24h Change</div><div class="stat-value" id="rb-change" style="font-size:1.1em;">—</div></div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">30-Day Efficiency</div>
+                <canvas id="rb-history" style="width:100%; height:100px;"></canvas>
+            </div>
+
+            <div class="card">
+                <div class="card-title">Rainbow Bands</div>
+                <div id="rb-legend" style="display:flex; flex-direction:column; gap:6px;"></div>
+            </div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- SECTION 3: NARRATIVE ROTATION                                -->
+        <!-- ============================================================ -->
+        <div class="dash-section" id="section-rotation">
+            <h2 class="section-title">🔄 Narrative Rotation</h2>
+
+            <div class="card" style="border-left:4px solid var(--cyan); margin-bottom:16px;">
+                <div style="font-size:0.78em; color:var(--text-dim); line-height:1.6;">
+                    Tracks which crypto sectors are in play. Updated Sundays 3:30 PM ET.
+                    <span id="rotation-timestamp" style="display:block; margin-top:4px; color:var(--text-dim); opacity:0.6;"></span>
+                </div>
+            </div>
+
+            <div id="rotation-content">
+                <div class="loading-placeholder">Loading rotation data...</div>
+            </div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- SECTION 4: MACRO NEWS                                        -->
+        <!-- ============================================================ -->
+        <div class="dash-section" id="section-macro">
+            <h2 class="section-title">📅 Macro Events</h2>
+
+            <div id="macro-events">
+                <div class="loading-placeholder">Loading macro data...</div>
+            </div>
+        </div>
+
+        <div class="footer">
+            AAE DeFi Milestone Suite · GenTech Labs · Data refreshes every 60s · Not financial advice
+        </div>
+    </div>
+
+    <script>
+        // ================================================================
+        // CONFIG
+        // ================================================================
+        const WATCHLIST_TOKENS = [
+            { symbol: 'BTC', name: 'Bitcoin' },
+            { symbol: 'ETH', name: 'Ethereum' },
+            { symbol: 'SOL', name: 'Solana' },
+            { symbol: 'AVAX', name: 'Avalanche' },
+            { symbol: 'JTO', name: 'Jito' },
+            { symbol: 'AAVE', name: 'Aave' },
+            { symbol: 'TAO', name: 'Bittensor' },
+            { symbol: 'AERO', name: 'Aerodrome' }
+        ];
+
+        const YIELD_OPPS = [
+            {
+                name: 'yiUSD — Yield Yak',
+                protocol: 'Yield Yak',
+                chain: 'Base',
+                asset: 'USDC',
+                apy: '4.2%',
+                tvl: '$1.1K',
+                url: 'https://yieldyak.com/base/milk/0xB5803023B8fa8BFe7d64E373297dFaA24e3B5962/',
+                note: 'Just launched. 0% fees. Auto-rebalances across Aave, Morpho, Spark, Aerodrome.',
+                tag: 'New'
+            },
+            {
+                name: 'aiUSD — Yield Yak',
+                protocol: 'Yield Yak',
+                chain: 'Avalanche',
+                asset: 'USDC',
+                apy: '9.1%',
+                tvl: '$976K',
+                url: 'https://yieldyak.com/avalanche/milk/0xdC038cFf8E55416a5189e37F382879c19217a4CB/',
+                note: 'Proven vault. Diversified across Benqi, Aave, Spark, Silo.',
+                tag: 'Proven'
+            },
+            {
+                name: 'Morpho Gauntlet USDC Prime',
+                protocol: 'Morpho',
+                chain: 'Base',
+                asset: 'USDC',
+                apy: '~4%',
+                tvl: '$100M+',
+                url: 'https://app.morpho.org/',
+                note: 'Curated by Gauntlet. Institutional-grade lending.',
+                tag: 'Blue Chip'
+            },
+            {
+                name: 'Steakhouse USDC Instant',
+                protocol: 'Morpho',
+                chain: 'Base',
+                asset: 'USDC',
+                apy: '~4%',
+                tvl: '$50M+',
+                url: 'https://app.morpho.org/',
+                note: 'Instant withdrawal. Steakhouse-curated risk params.',
+                tag: 'Liquid'
+            }
+        ];
+
+        const RAINBOW_BANDS = [
+            { id: 'euphoria', name: 'Euphoria', emoji: '🔴', color: '#e84142', gradient: 'linear-gradient(135deg, #e84142, #ff3366)', effMin: 90, effMax: 100, desc: 'Maximum concentration. APR unsustainable.', advice: '⚠️ Time to take profits. Diversify.' },
+            { id: 'peak', name: 'Peak Yield', emoji: '🟠', color: '#f59e0b', gradient: 'linear-gradient(135deg, #f59e0b, #f97316)', effMin: 75, effMax: 90, desc: 'Sweet spot. Fees significantly outpace IL.', advice: '✅ Hold strong. Compound weekly.' },
+            { id: 'harvest', name: 'Harvest Mode', emoji: '🟡', color: '#eab308', gradient: 'linear-gradient(135deg, #eab308, #facc15)', effMin: 60, effMax: 75, desc: 'Healthy farming. Fees outpacing IL.', advice: '🌾 Keep farming. Consider increasing size.' },
+            { id: 'accum', name: 'Accumulation', emoji: '🟢', color: '#22c55e', gradient: 'linear-gradient(135deg, #22c55e, #16a34a)', effMin: 40, effMax: 60, desc: 'Smart money positioning. Fees starting to offset IL.', advice: '🧠 DCA into position. Patience pays.' },
+            { id: 'bleed', name: 'Bleeding Edge', emoji: '🔵', color: '#3b82f6', gradient: 'linear-gradient(135deg, #3b82f6, #6366f1)', effMin: 20, effMax: 40, desc: 'Near range boundary. IL outpaces fees.', advice: '🩸 Micro-DCA only. Prepare to rebalance.' },
+            { id: 'panic', name: 'Panic Farm', emoji: '🟣', color: '#a855f7', gradient: 'linear-gradient(135deg, #a855f7, #7c3aed)', effMin: 0, effMax: 20, desc: 'Maximum fear. Historically: generational entry.', advice: '🔥 Be greedy when others are fearful.' }
+        ];
+
+        const ROTATION_NARRATIVES = {
+            'AI & Data': { emoji: '🤖', coins: 'FET, RENDER, TAO, AKT', thesis: 'AI compute, data markets, inference agents' },
+            'RWA': { emoji: '🏠', coins: 'ONDO, PLU, CPOOL', thesis: 'Tokenized treasuries, real estate, institutional' },
+            'DeFi Blue Chips': { emoji: '🏦', coins: 'UNI, AAVE, LINK, MKR', thesis: 'DEX, lending, oracles, yield' },
+            'L1 / L2': { emoji: '⛓️', coins: 'SOL, AVAX, NEAR, ARB', thesis: 'Base layers, scaling, RH Chain' },
+            'Meme': { emoji: '🐸', coins: 'DOGE, PEPE, WIF, BONK', thesis: 'Community-driven momentum, RH Chain CashCat' },
+            'Gaming': { emoji: '🎮', coins: 'IMX, GALA, PYTH', thesis: 'On-chain gaming, virtual worlds, AI companions' }
+        };
+
+        // ================================================================
+        // NAVIGATION
+        // ================================================================
+        function switchSection(section) {
+            document.querySelectorAll('.dash-section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.pill-nav .pill').forEach(b => b.classList.remove('active'));
+            const sec = document.getElementById('section-' + section);
+            const btn = document.querySelector(`.pill[data-section="${section}"]`);
+            if (sec) sec.classList.add('active');
+            if (btn) btn.classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        function switchSubSection(ss) {
+            // Only works within command center
+            const parent = document.getElementById('section-command');
+            parent.querySelectorAll('.sub-section').forEach(s => s.classList.remove('active'));
+            parent.querySelectorAll('[data-subsection]').forEach(b => b.classList.remove('active'));
+            const sec = document.getElementById('sub-' + ss);
+            const btn = parent.querySelector(`[data-subsection="${ss}"]`);
+            if (sec) sec.classList.add('active');
+            if (btn) btn.classList.add('active');
+        }
+
+        document.getElementById('pill-nav').addEventListener('click', (e) => {
+            if (e.target.classList.contains('pill')) {
+                switchSection(e.target.dataset.section);
+            }
+        });
+
+        // ================================================================
+        // HELPERS
+        // ================================================================
+        function fmt(n) {
+            if (n === undefined || n === null) return '—';
+            if (n >= 1e9) return '$' + (n / 1e9).toFixed(1) + 'B';
+            if (n >= 1e6) return '$' + (n / 1e6).toFixed(1) + 'M';
+            if (n >= 1e3) return '$' + (n / 1e3).toFixed(1) + 'K';
+            if (n < 1) return '$' + n.toFixed(4);
+            return '$' + n.toFixed(2);
+        }
+
+        function fmtCompact(n) {
+            if (n >= 1e9) return (n / 1e9).toFixed(1) + 'B';
+            if (n >= 1e6) return (n / 1e6).toFixed(1) + 'M';
+            if (n >= 1e3) return (n / 1e3).toFixed(1) + 'K';
+            return n.toFixed(2);
+        }
+
+        // ================================================================
+        // COMMAND CENTER — Market Prices
+        // ================================================================
+        async function fetchMarketPrices() {
+            const symbols = ['BTC', 'ETH', 'SOL', 'AVAX'];
+            try {
+                // Use CoinGecko free API — more reliable than DexScreener for major tokens
+                const res = await fetch(
+                    'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana,avalanche-2&vs_currencies=usd&include_24hr_change=true',
+                    { cache: 'no-store' }
+                );
+                if (res.ok) {
+                    const data = await res.json();
+                    const MAP = {
+                        'BTC': { id: 'bitcoin', el: 'btc' },
+                        'ETH': { id: 'ethereum', el: 'eth' },
+                        'SOL': { id: 'solana', el: 'sol' },
+                        'AVAX': { id: 'avalanche-2', el: 'avax' }
+                    };
+                    for (const [sym, info] of Object.entries(MAP)) {
+                        const token = data[info.id];
+                        if (token && token.usd) {
+                            const price = token.usd;
+                            const change = token.usd_24h_change || 0;
+                            document.getElementById('price-' + info.el).textContent = fmt(price);
+                            const el = document.getElementById('change-' + info.el);
+                            el.textContent = (change >= 0 ? '+' : '') + change.toFixed(2) + '%';
+                            el.style.color = change >= 0 ? 'var(--success)' : 'var(--danger)';
+                        }
+                    }
+                    return;
+                }
+            } catch (e) {
+                console.warn('CoinGecko failed, trying DexScreener fallback:', e);
+            }
+
+            // Fallback: DexScreener with known good pair addresses
+            const DEX_FALLBACK = {
+                'BTC': { chain: 'base', address: '0xf272fa039c68a79015b721df554f3bcb8a54016df9075e67a654b4d63e6afc51' },
+                'SOL': { chain: 'base', address: '0x1131DB5977242a03eBeaD1aCD18F80A9A29e5922' }
+            };
+            for (const [sym, pair] of Object.entries(DEX_FALLBACK)) {
+                try {
+                    const resp = await fetch(`https://api.dexscreener.com/latest/dex/pairs/${pair.chain}/${pair.address}`, { cache: 'no-store' });
+                    const d = await resp.json();
+                    const p = d.pair;
+                    if (p && p.priceUsd) {
+                        const price = parseFloat(p.priceUsd);
+                        const change = parseFloat(p.priceChange?.h24 || 0);
+                        document.getElementById('price-' + sym.toLowerCase()).textContent = fmt(price);
+                        const el = document.getElementById('change-' + sym.toLowerCase());
+                        el.textContent = (change >= 0 ? '+' : '') + change.toFixed(2) + '%';
+                        el.style.color = change >= 0 ? 'var(--success)' : 'var(--danger)';
+                    }
+                } catch (e) {}
+            }
+        }
+
+        // ================================================================
+        // COMMAND CENTER — Watchlist
+        // ================================================================
+        async function fetchWatchlist() {
+            const container = document.getElementById('watchlist-content');
+            let rows = '';
+
+            // Use CoinGecko for all watchlist tokens
+            try {
+                const ids = 'bitcoin,ethereum,solana,avalanche-2,jito,jupiter,aave,bittensor,aerodrome';
+                const res = await fetch(
+                    `https://api.coingecko.com/api/v3/simple/price?ids=${ids}&vs_currencies=usd&include_24hr_change=true`,
+                    { cache: 'no-store' }
+                );
+                if (res.ok) {
+                    const data = await res.json();
+                    const CG_MAP = {
+                        'BTC': 'bitcoin', 'ETH': 'ethereum', 'SOL': 'solana',
+                        'AVAX': 'avalanche-2', 'JTO': 'jito-governance-token',
+                        'AAVE': 'aave', 'TAO': 'bittensor', 'AERO': 'aerodrome-finance'
+                    };
+                    for (const [symbol, cgId] of Object.entries(CG_MAP)) {
+                        const tok = data[cgId];
+                        if (tok && tok.usd) {
+                            const price = tok.usd;
+                            const change = tok.usd_24h_change || 0;
+                            rows += `<div class="pos-row">
+                                <div>
+                                    <div class="pos-label">${symbol}</div>
+                                    <div class="pos-sub">${WATCHLIST_TOKENS.find(t => t.symbol === symbol)?.name || ''}</div>
+                                </div>
+                                <div style="text-align:right;">
+                                    <div class="pos-val">${fmt(price)}</div>
+                                    <div class="pos-sub" style="color:${change >= 0 ? 'var(--success)' : 'var(--danger)'}">${change >= 0 ? '+' : ''}${change.toFixed(2)}%</div>
+                                </div>
+                            </div>`;
+                        }
+                    }
+                    container.innerHTML = rows || '<div class="empty-state"><p>No watchlist data available</p></div>';
+                    return;
+                }
+            } catch (e) {
+                console.warn('CoinGecko watchlist failed', e);
+            }
+        }
+
+        // ================================================================
+        // COMMAND CENTER — Yield Opportunities
+        // ================================================================
+        function renderYieldOpps() {
+            const container = document.getElementById('yield-opportunities');
+            container.innerHTML = YIELD_OPPS.map(o => `
+                <div class="card" style="border-left:4px solid ${o.tag === 'New' ? 'var(--cyan)' : o.tag === 'Proven' ? 'var(--success)' : 'var(--blue)'};">
+                    <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
+                        <span style="font-weight:700; font-size:0.95em;">${o.name}</span>
+                        <span style="margin-left:auto; font-size:0.65em; padding:2px 10px; border-radius:10px; background:rgba(255,255,255,0.06); color:var(--gold); border:1px solid rgba(232,101,42,0.3);">${o.tag}</span>
+                    </div>
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:8px;">
+                        <div><span style="font-size:0.65em; color:var(--text-dim);">APY</span><br><span style="font-weight:700; color:var(--success);">${o.apy}</span></div>
+                        <div><span style="font-size:0.65em; color:var(--text-dim);">TVL</span><br><span style="font-weight:700;">${o.tvl}</span></div>
+                        <div><span style="font-size:0.65em; color:var(--text-dim);">Chain</span><br><span>${o.chain}</span></div>
+                        <div><span style="font-size:0.65em; color:var(--text-dim);">Asset</span><br><span>${o.asset}</span></div>
+                    </div>
+                    <div style="font-size:0.78em; color:var(--text-dim); margin-bottom:8px;">${o.note}</div>
+                    <a href="${o.url}" target="_blank" style="display:inline-block; font-size:0.75em; color:var(--cyan); text-decoration:none;">Open vault →</a>
+                </div>
+            `).join('');
+        }
+
+        // ================================================================
+        // RAINBOW
+        // ================================================================
+        function getRainbowBand(eff) {
+            for (const b of RAINBOW_BANDS) {
+                if (eff >= b.effMin && eff < b.effMax) return b;
+            }
+            return RAINBOW_BANDS[0];
+        }
+
+        function drawRainbowBars(efficiency) {
+            const container = document.getElementById('rainbow-bars');
+            if (!container) return;
+            const currentBand = getRainbowBand(efficiency);
+            const bandH = 280 / RAINBOW_BANDS.length;
+
+            let html = '';
+            RAINBOW_BANDS.forEach((band, i) => {
+                const isCurrent = band.id === currentBand.id;
+                const opacity = isCurrent ? 1 : 0.5;
+                const top = i * bandH;
+                html += `<div style="position:absolute; left:0; right:0; top:${top}px; height:${bandH}px; background:${band.gradient}; opacity:${opacity}; display:flex; align-items:center; padding:0 20px; ${isCurrent ? 'box-shadow:inset 0 0 30px rgba(255,255,255,0.12); border-top:2px solid rgba(255,255,255,0.3); border-bottom:2px solid rgba(255,255,255,0.3);' : ''}">
+                    <span style="font-size:0.75em; font-weight:600; text-transform:uppercase; letter-spacing:1px; color:white; text-shadow:0 1px 3px rgba(0,0,0,0.5);">${band.emoji} ${band.name}</span>
+                    <span style="margin-left:auto; font-family:'JetBrains Mono',monospace; font-size:0.65em; color:rgba(255,255,255,0.7); text-shadow:0 1px 3px rgba(0,0,0,0.5);">Eff: ${band.effMin}–${band.effMax}%</span>
+                </div>`;
+            });
+            container.innerHTML = html;
+        }
+
+        function renderRainbowZone(data) {
+            const efficiency = data.metrics ? data.metrics.efficiency : 50;
+            const band = getRainbowBand(efficiency);
+            const card = document.getElementById('rainbow-zone');
+            if (!card) return;
+            card.style.borderLeftColor = band.color;
+            document.getElementById('zone-emoji').textContent = band.emoji;
+            document.getElementById('zone-name').textContent = band.name;
+            document.getElementById('zone-name').style.color = band.color;
+            document.getElementById('zone-desc').textContent = band.desc;
+            const advice = document.getElementById('zone-advice');
+            advice.textContent = band.advice;
+            advice.style.borderLeftColor = band.color;
+        }
+
+        function renderRainbowStats(data) {
+            if (!data.metrics) return;
+            const m = data.metrics;
+            document.getElementById('rb-efficiency').textContent = m.efficiency.toFixed(1) + '%';
+            document.getElementById('rb-efficiency').style.color = m.efficiency >= 70 ? '#22c55e' : m.efficiency >= 50 ? '#eab308' : '#e84142';
+            document.getElementById('rb-apr').textContent = m.annualizedApr.toFixed(0) + '%';
+            document.getElementById('rb-fees').textContent = '$' + m.dailyFees.toFixed(4);
+            const changeEl = document.getElementById('rb-change');
+            changeEl.textContent = (m.priceChange24h >= 0 ? '+' : '') + m.priceChange24h.toFixed(2) + '%';
+            changeEl.style.color = m.priceChange24h >= 0 ? '#22c55e' : '#e84142';
+        }
+
+        function renderRainbowLegend() {
+            const container = document.getElementById('rb-legend');
+            if (!container) return;
+            container.innerHTML = RAINBOW_BANDS.map(b =>
+                `<div style="display:flex; align-items:center; gap:8px;">
+                    <div style="width:14px; height:14px; border-radius:3px; background:${b.gradient}; flex-shrink:0;"></div>
+                    <span style="font-size:0.78em; font-weight:600; color:${b.color};">${b.emoji} ${b.name}</span>
+                    <span style="font-size:0.7em; color:var(--text-dim); margin-left:auto;">Eff ${b.effMin}–${b.effMax}%</span>
+                </div>`
+            ).join('');
+        }
+
+        function drawRainbowHistory(canvasId, history, bandColor) {
+            const canvas = document.getElementById(canvasId);
+            if (!canvas || !history || history.length < 2) return;
+            const ctx = canvas.getContext('2d');
+            const dpr = window.devicePixelRatio || 1;
+            const rect = canvas.getBoundingClientRect();
+            canvas.width = rect.width * dpr;
+            canvas.height = rect.height * dpr;
+            ctx.scale(dpr, dpr);
+            const w = rect.width, h = rect.height;
+            const pad = 8, chartH = h - pad * 2, chartW = w;
+
+            [{min:90,c:'rgba(232,65,66,0.12)'},{min:75,c:'rgba(245,158,11,0.1)'},{min:60,c:'rgba(234,179,8,0.08)'},{min:40,c:'rgba(34,197,94,0.06)'},{min:20,c:'rgba(59,130,246,0.06)'},{min:0,c:'rgba(168,85,247,0.06)'}].forEach(b => {
+                const y = pad + chartH * (1 - b.min / 100);
+                ctx.fillStyle = b.c;
+                ctx.fillRect(0, y - chartH * 0.1, chartW, chartH * 0.1);
+            });
+
+            ctx.beginPath();
+            ctx.strokeStyle = bandColor;
+            ctx.lineWidth = 2;
+            ctx.lineJoin = 'round';
+            const step = chartW / (history.length - 1);
+            history.forEach((v, i) => {
+                const x = i * step, y = pad + chartH * (1 - v / 100);
+                i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+            });
+            ctx.stroke();
+
+            const last = history[history.length - 1];
+            ctx.lineTo((history.length - 1) * step, h - pad);
+            ctx.lineTo(0, h - pad);
+            ctx.closePath();
+            const grad = ctx.createLinearGradient(0, pad, 0, h - pad);
+            grad.addColorStop(0, bandColor + '25');
+            grad.addColorStop(1, bandColor + '05');
+            ctx.fillStyle = grad;
+            ctx.fill();
+
+            const dotX = (history.length - 1) * step, dotY = pad + chartH * (1 - last / 100);
+            ctx.beginPath(); ctx.arc(dotX, dotY, 4, 0, Math.PI * 2);
+            ctx.fillStyle = bandColor; ctx.fill();
+            ctx.strokeStyle = 'white'; ctx.lineWidth = 1.5; ctx.stroke();
+        }
+
+        async function fetchRainbowData() {
+            try {
+                const res = await fetch('https://raw.githubusercontent.com/ProtoJay4789/ProtoJay4789.github.io/main/DeFi/rainbow/yield-rainbow-data.json?t=' + Date.now());
+                if (!res.ok) throw new Error('No rainbow data');
+                const data = await res.json();
+                const efficiency = data.metrics ? data.metrics.efficiency : 50;
+                drawRainbowBars(efficiency);
+                renderRainbowZone(data);
+                renderRainbowStats(data);
+                renderRainbowLegend();
+                const band = getRainbowBand(efficiency);
+                drawRainbowHistory('rb-history', data.history || [50,48,52,47,53,51,49,55,52,50,48,46,49,51,50,52,54,53,51,49,47,50,52,51,50,48,49,51,52,50], band.color);
+            } catch (e) {
+                // Fallback: show default rainbow
+                drawRainbowBars(50);
+                renderRainbowLegend();
+                const band = getRainbowBand(50);
+                document.getElementById('zone-emoji').textContent = band.emoji;
+                document.getElementById('zone-name').textContent = band.name;
+                document.getElementById('zone-name').style.color = band.color;
+                document.getElementById('zone-desc').textContent = 'No live data — showing default bands';
+                document.getElementById('zone-advice').textContent = 'Rainbow data not available. Check back after the next cron sync.';
+                document.getElementById('rb-efficiency').textContent = '—'; document.getElementById('rb-apr').textContent = '—';
+                document.getElementById('rb-fees').textContent = '—'; document.getElementById('rb-change').textContent = '—';
+            }
+        }
+
+        // ================================================================
+        // ROTATION
+        // ================================================================
+        async function fetchRotationData() {
+            const container = document.getElementById('rotation-content');
+            if (!container) return;
+            try {
+                const res = await fetch('https://raw.githubusercontent.com/ProtoJay4789/ProtoJay4789.github.io/main/DeFi/rainbow/rotation-data.json?t=' + Date.now());
+                if (res.ok) {
+                    const data = await res.json();
+                    renderRotation(container, data);
+                    return;
+                }
+            } catch (e) {}
+            renderRotationFallback(container);
+        }
+
+        function renderRotation(container, data) {
+            const narratives = data.narratives || [];
+            if (narratives.length === 0) { renderRotationFallback(container); return; }
+            container.innerHTML = narratives.map((n, i) => {
+                const zone = n.zone || '';
+                const zoneColor = zone.includes('Hot') ? '#22c55e' : zone.includes('Warm') ? '#3b82f6' : zone.includes('Cool') ? '#eab308' : '#e84142';
+                return `<div class="card rot-card" style="border-left-color:${zoneColor};">
+                    <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
+                        <span style="font-size:1.3em;">${n.emoji || '📊'}</span>
+                        <span style="font-weight:700; font-size:0.95em;">${n.name}</span>
+                        <span style="margin-left:auto; font-size:0.7em; color:${zoneColor}; font-weight:600;">${zone}</span>
+                    </div>
+                    <div style="font-size:0.78em; color:var(--text-dim); margin-bottom:4px;">${n.thesis || ''}</div>
+                    <div style="font-size:0.72em; color:var(--text-dim);">Coins: ${n.coins || ''}</div>
+                    ${n.score !== undefined ? `<div style="font-size:0.72em; margin-top:4px; color:var(--gold);">Score: ${n.score > 0 ? '+' : ''}${n.score.toFixed(1)}</div>` : ''}
+                </div>`;
+            }).join('');
+        }
+
+        function renderRotationFallback(container) {
+            container.innerHTML = Object.entries(ROTATION_NARRATIVES).map(([name, n]) =>
+                `<div class="card rot-card" style="border-left-color:var(--panel-border);">
+                    <div style="display:flex; align-items:center; gap:8px; margin-bottom:4px;">
+                        <span style="font-size:1.3em;">${n.emoji}</span>
+                        <span style="font-weight:700; font-size:0.95em;">${name}</span>
+                    </div>
+                    <div style="font-size:0.78em; color:var(--text-dim);">${n.thesis}</div>
+                    <div style="font-size:0.72em; color:var(--text-dim); margin-top:2px;">Coins: ${n.coins}</div>
+                </div>`
+            ).join('') + '<div style="text-align:center; font-size:0.72em; color:var(--text-dim); margin-top:12px; opacity:0.6;">📊 Full rotation data updates Sundays at 3:30 PM ET</div>';
+        }
+
+        // ================================================================
+        // MACRO
+        // ================================================================
+        async function fetchMacroEvents() {
+            const container = document.getElementById('macro-events');
+            if (!container) return;
+            try {
+                const res = await fetch('https://raw.githubusercontent.com/ProtoJay4789/ProtoJay4789.github.io/main/DeFi/economic-calendar.json?t=' + Date.now());
+                if (!res.ok) { renderMacroFallback(container); return; }
+                const data = await res.json();
+                renderMacroEvents(container, data);
+            } catch (e) {
+                renderMacroFallback(container);
+            }
+        }
+
+        function renderMacroEvents(container, data) {
+            const events = data.events || [];
+            let html = '';
+
+            if (data.summary) {
+                html += `<div class="card" style="border-left:4px solid var(--gold); background:rgba(234,179,8,0.05);">
+                    <div style="font-size:0.82em; font-weight:600; color:var(--gold); margin-bottom:4px;">📊 ${data.date || 'Today'}</div>
+                    <div style="font-size:0.78em; color:var(--text-dim); line-height:1.4;">${data.summary}</div>
+                </div>`;
+            }
+
+            events.forEach(ev => {
+                const borderColor = ev.impact === 'high' ? '#e84142' : ev.impact === 'medium' ? '#eab308' : '#3b82f6';
+                const impactBg = ev.impact === 'high' ? 'rgba(232,65,66,0.06)' : ev.impact === 'medium' ? 'rgba(234,179,8,0.06)' : 'rgba(59,130,246,0.06)';
+                html += `<div class="card macro-event" style="border-left-color:${borderColor}; background:${impactBg};">
+                    <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
+                        <span style="font-size:1.2em;">${ev.emoji || '📅'}</span>
+                        <div>
+                            <div style="font-weight:700; font-size:0.92em;">${ev.name}</div>
+                            <div style="font-size:0.72em; color:var(--text-dim);">${ev.time || ''} · Forecast: ${ev.forecast || '—'} · Previous: ${ev.previous || '—'}</div>
+                        </div>
+                    </div>
+                    <div style="font-size:0.78em; color:var(--text-dim); margin-bottom:4px;">${ev.description || ''}</div>
+                    ${ev.volatility ? `<div style="font-size:0.72em; color:var(--text-dim);">⚡ Volatility: ${ev.volatility}</div>` : ''}
+                    ${ev.avxBias ? `<div style="font-size:0.72em; color:var(--gold); margin-top:2px;">🎯 AVAX: ${ev.avxBias}</div>` : ''}
+                </div>`;
+            });
+
+            if (data.lastUpdated) {
+                const updated = new Date(data.lastUpdated);
+                const timeStr = updated.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+                html += `<div style="text-align:center; font-size:0.68em; color:var(--text-dim); margin-top:8px; opacity:0.6;">Updated ${timeStr} ET</div>`;
+            }
+
+            container.innerHTML = html || '<div class="card"><div class="empty-state"><p>No upcoming macro events</p></div></div>';
+        }
+
+        function renderMacroFallback(container) {
+            container.innerHTML = `<div class="card" style="border-left:4px solid var(--panel-border);">
+                <div style="font-weight:600; font-size:0.88em; margin-bottom:4px;">📅 Economic Calendar</div>
+                <div style="font-size:0.78em; color:var(--text-dim);">Macro events data updates daily. Check back after the next Fed release.</div>
+            </div>`;
+        }
+
+        // ================================================================
+        // INIT
+        // ================================================================
+        document.addEventListener('DOMContentLoaded', () => {
+            fetchMarketPrices();
+            fetchWatchlist();
+            renderYieldOpps();
+            fetchRainbowData();
+            fetchRotationData();
+            fetchMacroEvents();
+
+            setInterval(() => {
+                fetchMarketPrices();
+            }, 60000);
+
+            setInterval(() => {
+                fetchRainbowData();
+            }, 60000);
+
+            setInterval(() => {
+                fetchMacroEvents();
+            }, 300000);
+
+            // Update header status
+            document.getElementById('header-status-text').textContent = 'Live';
+        });
+    </script>
+</body>
+</html>

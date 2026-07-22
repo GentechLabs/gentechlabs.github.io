@@ -1,0 +1,58 @@
+/* Dashboard styling for Home.md */
+.dashboard h1 {
+  font-size: 2.5em;
+  font-weight: 800;
+  margin-bottom: 0.3em;
+}
+
+.dashboard h2 {
+  font-size: 1.4em;
+  font-weight: 700;
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+  color: var(--interactive-accent);
+}
+
+.dashboard h3 {
+  font-size: 1.1em;
+  font-weight: 600;
+  margin-top: 1em;
+  margin-bottom: 0.3em;
+}
+
+.dashboard blockquote {
+  border-left: 4px solid var(--interactive-accent);
+  padding: 0.5em 1em;
+  background: var(--background-secondary);
+  border-radius: 4px;
+  font-style: italic;
+}
+
+.dashboard table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.dashboard table th {
+  background: var(--background-secondary);
+  padding: 0.5em 1em;
+  text-align: left;
+  font-weight: 600;
+}
+
+.dashboard table td {
+  padding: 0.5em 1em;
+  border-bottom: 1px solid var(--background-modifier-border);
+}
+
+/* Tag colors in preview */
+.tag[href="#active"] { color: #22c55e; }
+.tag[href="#idea"] { color: #eab308; }
+.tag[href="#done"] { color: #3b82f6; }
+.tag[href="#blocked"] { color: #ef4444; }
+.tag[href="#review"] { color: #a855f7; }
+
+/* Daily note styling */
+.daily-note {
+  padding: 1em;
+}

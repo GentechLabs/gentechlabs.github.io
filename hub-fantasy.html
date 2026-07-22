@@ -1,0 +1,1502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GenTech Hub — Jordan</title>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400&family=MedievalSharp&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Fantasy RPG Theme */
+            --parchment: #f4e4c1;
+            --parchment-dark: #d4c4a1;
+            --parchment-shadow: #b8a888;
+            --wood-dark: #3d2b1f;
+            --wood-medium: #5c3d2e;
+            --wood-light: #8b6b4a;
+            --wood-grain: #6b4e37;
+            --gold: #d4a847;
+            --gold-bright: #f0c75e;
+            --gold-dim: #a07830;
+            --text-dark: #2a1f14;
+            --text-body: #4a3c2e;
+            --text-light: #f4e4c1;
+            --accent-blue: #4a7c9b;
+            --accent-purple: #7b5ea7;
+            --accent-green: #5a8a3c;
+            --accent-red: #c94444;
+            --sunset-top: #1a2a4a;
+            --sunset-mid: #c97040;
+            --sunset-bottom: #f0a050;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Crimson Text', Georgia, serif;
+            font-size: 17px;
+            color: var(--text-body);
+            min-height: 100vh;
+            padding-bottom: 80px;
+            /* Sunset landscape background */
+            background: 
+                linear-gradient(180deg, 
+                    var(--sunset-top) 0%, 
+                    #2a3a5a 15%, 
+                    #5a4a6a 25%, 
+                    var(--sunset-mid) 45%, 
+                    var(--sunset-bottom) 65%, 
+                    #e8c080 80%, 
+                    #d4a060 100%
+                );
+            background-attachment: fixed;
+        }
+        /* Parchment texture overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: 
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 3px,
+                    rgba(180,160,120,0.03) 3px,
+                    rgba(180,160,120,0.03) 4px
+                );
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Header - Stone Banner */
+        .hub-header {
+            background: linear-gradient(180deg, #4a3828 0%, #2a1a0e 100%);
+            padding: 20px 16px 18px;
+            text-align: center;
+            border-bottom: 4px solid var(--gold-dim);
+            box-shadow: 
+                0 4px 16px rgba(0,0,0,0.5),
+                inset 0 1px 0 rgba(212,168,71,0.3);
+            position: relative;
+            z-index: 10;
+        }
+        .hub-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+        .hub-header::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                var(--gold-dim) 20%, 
+                var(--gold) 50%, 
+                var(--gold-dim) 80%, 
+                transparent 100%
+            );
+        }
+        .hub-header h1 {
+            font-family: 'Cinzel', serif;
+            font-weight: 900;
+            font-size: 1.2em;
+            color: var(--gold);
+            text-shadow: 
+                2px 2px 0 #1a0e04,
+                0 0 20px rgba(212,168,71,0.4);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+        .hub-header .subtitle {
+            font-family: 'Crimson Text', serif;
+            font-size: 0.85em;
+            color: var(--parchment-dark);
+            margin-top: 4px;
+            font-style: italic;
+        }
+
+        /* Tab Sections */
+        .tab-section {
+            display: none;
+            padding: 16px;
+            max-width: 480px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+            animation: fadeIn 0.3s ease;
+        }
+        .tab-section.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        /* Bottom Nav - Dark Wood Bar */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(180deg, #3a2a1a 0%, #1a0e04 100%);
+            border-top: 3px solid var(--gold-dim);
+            display: flex;
+            justify-content: space-evenly;
+            padding: 10px 4px 14px;
+            z-index: 100;
+            box-shadow: 0 -4px 16px rgba(0,0,0,0.4);
+        }
+        .nav-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            background: none;
+            border: none;
+            color: var(--parchment-dark);
+            font-family: 'Cinzel', serif;
+            font-size: 0.55em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 6px 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border-radius: 6px;
+        }
+        .nav-btn .nav-icon { font-size: 1.5em; line-height: 1; }
+        .nav-btn.active {
+            color: var(--gold);
+            background: rgba(212,168,71,0.15);
+            border: 1px solid rgba(212,168,71,0.3);
+            text-shadow: 0 0 10px rgba(212,168,71,0.5);
+        }
+        .nav-btn:hover {
+            color: var(--gold-bright);
+            transform: translateY(-2px);
+        }
+
+        /* ===== PARCHMENT CARD ===== */
+        .parchment-card {
+            background: linear-gradient(135deg, var(--parchment) 0%, var(--parchment-dark) 100%);
+            border: 2px solid var(--wood-light);
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 14px;
+            position: relative;
+            box-shadow: 
+                0 4px 12px rgba(0,0,0,0.3),
+                inset 0 1px 0 rgba(255,255,255,0.3),
+                inset 0 -1px 0 rgba(0,0,0,0.1);
+            transition: all 0.2s;
+        }
+        .parchment-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 
+                0 6px 20px rgba(0,0,0,0.4),
+                inset 0 1px 0 rgba(255,255,255,0.3),
+                0 0 20px rgba(212,168,71,0.2);
+        }
+        /* Rolled edge effect */
+        .parchment-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: 10px;
+            right: 10px;
+            height: 6px;
+            background: linear-gradient(180deg, var(--parchment-shadow), transparent);
+            border-radius: 0 0 50% 50%;
+        }
+
+        /* ===== WOOD PANEL ===== */
+        .wood-panel {
+            background: linear-gradient(180deg, var(--wood-medium) 0%, var(--wood-dark) 100%);
+            border: 2px solid var(--wood-light);
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 14px;
+            position: relative;
+            box-shadow: 
+                0 4px 12px rgba(0,0,0,0.4),
+                inset 0 1px 0 rgba(139,107,74,0.3);
+            transition: all 0.2s;
+        }
+        .wood-panel:hover {
+            transform: translateY(-2px);
+            box-shadow: 
+                0 6px 20px rgba(0,0,0,0.5),
+                0 0 15px rgba(212,168,71,0.15);
+        }
+        /* Wood grain lines */
+        .wood-panel::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 8px,
+                rgba(139,107,74,0.1) 8px,
+                rgba(139,107,74,0.1) 9px
+            );
+            border-radius: 6px;
+            pointer-events: none;
+        }
+
+        /* ===== GOLD HEADING ===== */
+        .gold-heading {
+            font-family: 'Cinzel', serif;
+            font-weight: 700;
+            font-size: 0.7em;
+            color: var(--gold);
+            text-shadow: 1px 1px 0 #1a0e04;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .gold-heading .icon {
+            font-size: 1.3em;
+        }
+
+        /* ===== STAT ROW (RPG Style) ===== */
+        .stat-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 14px;
+        }
+        .stat-card {
+            background: linear-gradient(180deg, var(--wood-medium) 0%, var(--wood-dark) 100%);
+            border: 2px solid var(--wood-light);
+            border-radius: 8px;
+            padding: 14px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+        }
+        .stat-card.full { grid-column: 1 / -1; }
+        .stat-label {
+            font-family: 'Cinzel', serif;
+            font-size: 0.5em;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--parchment-dark);
+            margin-bottom: 6px;
+        }
+        .stat-value {
+            font-family: 'Cinzel', serif;
+            font-size: 1.4em;
+            font-weight: 700;
+            color: var(--gold);
+            text-shadow: 1px 1px 0 #1a0e04;
+        }
+        .stat-value.green { color: #7ec850; }
+        .stat-value.red { color: #e86060; }
+        .stat-value.blue { color: var(--accent-blue); }
+        .stat-sub {
+            font-size: 0.8em;
+            color: var(--parchment-dark);
+            margin-top: 4px;
+            font-style: italic;
+        }
+
+        /* ===== REWARDS BOX ===== */
+        .rewards-box {
+            background: linear-gradient(135deg, rgba(90,138,60,0.2), rgba(126,200,80,0.15));
+            border: 2px solid rgba(126,200,80,0.4);
+            border-radius: 8px;
+            padding: 14px;
+            text-align: center;
+            margin-bottom: 14px;
+        }
+        .rewards-label {
+            font-family: 'Cinzel', serif;
+            font-size: 0.5em;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #7ec850;
+        }
+        .rewards-value {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3em;
+            font-weight: 700;
+            color: #7ec850;
+            text-shadow: 1px 1px 0 #1a0e04;
+            margin-top: 4px;
+        }
+
+        /* ===== STATUS BADGE ===== */
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-family: 'Cinzel', serif;
+            font-size: 0.55em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border: 2px solid;
+        }
+        .status-badge.active {
+            background: rgba(126,200,80,0.15);
+            border-color: #7ec850;
+            color: #7ec850;
+        }
+        .pulse {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #7ec850;
+            animation: pulse 2s ease-in-out infinite;
+        }
+        @keyframes pulse { 0%,100% { opacity: 1; box-shadow: 0 0 6px #7ec850; } 50% { opacity: 0.5; box-shadow: none; } }
+
+        /* ===== POSITION ROWS ===== */
+        .pos-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px dashed var(--wood-light);
+        }
+        .pos-row:last-child { border-bottom: none; }
+        .pos-token { 
+            font-family: 'Cinzel', serif;
+            font-size: 0.65em;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+        .pos-amount {
+            font-size: 0.85em;
+            color: var(--text-body);
+            margin-top: 2px;
+        }
+        .pos-value {
+            font-family: 'Cinzel', serif;
+            font-size: 1em;
+            font-weight: 700;
+            color: var(--gold-dim);
+        }
+
+        /* ===== RANGE BAR ===== */
+        .range-bar {
+            position: relative;
+            height: 28px;
+            background: var(--wood-dark);
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 10px 0;
+            border: 2px solid var(--wood-light);
+        }
+        .range-fill {
+            position: absolute;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                rgba(201,68,68,0.5) 0%, 
+                rgba(212,168,71,0.6) 50%, 
+                rgba(126,200,80,0.5) 100%
+            );
+        }
+        .range-marker {
+            position: absolute;
+            top: -2px;
+            width: 4px;
+            height: 32px;
+            background: var(--gold-bright);
+            border-radius: 2px;
+            box-shadow: 0 0 10px rgba(240,199,94,0.7);
+        }
+        .range-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8em;
+            color: var(--text-body);
+            font-style: italic;
+        }
+        .range-current {
+            text-align: center;
+            font-size: 0.85em;
+            color: var(--accent-blue);
+            margin-top: 6px;
+            font-weight: 600;
+        }
+
+        /* ===== CONFIG GRID ===== */
+        .config-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+        .config-item {
+            padding: 10px;
+            background: rgba(0,0,0,0.15);
+            border-radius: 6px;
+            border: 1px solid var(--wood-light);
+        }
+        .config-key {
+            font-family: 'Cinzel', serif;
+            font-size: 0.45em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--parchment-dark);
+            margin-bottom: 4px;
+        }
+        .config-val {
+            font-family: 'Cinzel', serif;
+            font-size: 0.9em;
+            font-weight: 700;
+            color: var(--gold);
+        }
+
+        /* ===== STRATEGY NOTE ===== */
+        .strategy-note {
+            background: linear-gradient(135deg, rgba(212,168,71,0.1), rgba(160,120,48,0.1));
+            border: 2px solid rgba(212,168,71,0.3);
+            border-radius: 8px;
+            padding: 12px 14px;
+            font-size: 0.9em;
+            color: var(--text-body);
+            line-height: 1.5;
+            margin-bottom: 14px;
+            font-style: italic;
+        }
+        .strategy-note strong { 
+            color: var(--gold-dim); 
+            font-style: normal;
+            font-family: 'Cinzel', serif;
+        }
+
+        /* ===== SECTION DIVIDER ===== */
+        .section-divider {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 20px 0 16px;
+        }
+        .section-divider::before,
+        .section-divider::after {
+            content: '';
+            flex: 1;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--gold-dim), transparent);
+        }
+        .section-divider span {
+            font-family: 'Cinzel', serif;
+            font-size: 0.6em;
+            font-weight: 700;
+            color: var(--gold);
+            text-shadow: 1px 1px 0 #1a0e04;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        /* ===== GAME CARD (RPG Quest Style) ===== */
+        .game-card {
+            background: linear-gradient(135deg, var(--parchment) 0%, var(--parchment-dark) 100%);
+            border: 2px solid var(--wood-light);
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+        .game-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 
+                0 8px 24px rgba(0,0,0,0.4),
+                0 0 20px rgba(212,168,71,0.3);
+            border-color: var(--gold);
+        }
+        .game-card h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 0.7em;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 6px;
+        }
+        .game-card p {
+            font-size: 0.9em;
+            color: var(--text-body);
+            line-height: 1.5;
+        }
+        .game-card .tag {
+            display: inline-block;
+            font-family: 'Cinzel', serif;
+            font-size: 0.45em;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 4px;
+            background: rgba(212,168,71,0.2);
+            color: var(--gold-dim);
+            margin-top: 10px;
+            border: 1px solid var(--gold-dim);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* ===== PORTFOLIO LINK ===== */
+        .portfolio-link {
+            display: block;
+            text-align: center;
+            padding: 14px;
+            margin: 16px 0;
+            background: linear-gradient(135deg, var(--wood-medium), var(--wood-dark));
+            border: 2px solid var(--gold-dim);
+            border-radius: 8px;
+            color: var(--gold);
+            text-decoration: none;
+            font-family: 'Cinzel', serif;
+            font-size: 0.6em;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: all 0.2s;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+        .portfolio-link:hover {
+            background: linear-gradient(135deg, var(--wood-light), var(--wood-medium));
+            border-color: var(--gold);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.4), 0 0 15px rgba(212,168,71,0.2);
+        }
+
+        /* ===== TRIP CARD ===== */
+        .trip-card {
+            background: linear-gradient(135deg, var(--parchment) 0%, var(--parchment-dark) 100%);
+            border: 2px solid var(--wood-light);
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+        .trip-card:hover {
+            border-color: var(--gold);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+        }
+        .trip-card h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 0.65em;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 6px;
+        }
+        .trip-card .dates {
+            font-size: 0.85em;
+            color: var(--text-body);
+            margin-bottom: 8px;
+            font-style: italic;
+        }
+        .status-pill {
+            display: inline-block;
+            font-family: 'Cinzel', serif;
+            font-size: 0.45em;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 4px;
+            background: rgba(123,94,167,0.2);
+            color: var(--accent-purple);
+            border: 1px solid var(--accent-purple);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            text-align: center;
+            padding: 16px;
+            font-family: 'Cinzel', serif;
+            font-size: 0.5em;
+            color: var(--parchment-dark);
+            font-style: italic;
+            opacity: 0.7;
+        }
+
+        /* ===== SETTINGS MODAL ===== */
+        .settings-option.selected {
+            border-color: var(--gold) !important;
+            background: rgba(212,168,71,0.15) !important;
+        }
+        .settings-option.selected::after {
+            content: '✓';
+            margin-left: auto;
+            color: var(--gold);
+            font-weight: 700;
+        }
+        @keyframes slideUp {
+            from { transform: translateY(100%); }
+            to { transform: translateY(0); }
+        }
+
+        /* ===== RPG STATUS BARS (Bottom) ===== */
+        .rpg-status-bar {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            padding: 10px 16px;
+            background: linear-gradient(180deg, rgba(26,14,4,0.9), rgba(26,14,4,0.95));
+            border-top: 2px solid var(--gold-dim);
+            margin-bottom: 10px;
+        }
+        .rpg-stat {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .rpg-stat .label {
+            font-family: 'Cinzel', serif;
+            font-size: 0.5em;
+            font-weight: 700;
+            color: var(--parchment-dark);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .rpg-stat .value {
+            font-family: 'Cinzel', serif;
+            font-size: 0.6em;
+            font-weight: 700;
+            color: var(--gold);
+            text-shadow: 1px 1px 0 #1a0e04;
+        }
+        /* Vigor gems */
+        .vigor-gems {
+            display: flex;
+            gap: 4px;
+        }
+        .vigor-gem {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, var(--gold-bright), var(--gold-dim));
+            border: 1px solid var(--gold);
+            box-shadow: 0 0 4px rgba(212,168,71,0.5);
+        }
+        .vigor-gem.empty {
+            background: radial-gradient(circle at 30% 30%, #4a3a2a, #2a1a0a);
+            border-color: #4a3a2a;
+            box-shadow: none;
+        }
+
+        /* ===== RAINBOW CHART ===== */
+        #rainbow-chart {
+            border: 3px solid var(--wood-light);
+            border-radius: 8px;
+            overflow: hidden;
+            background: var(--wood-dark);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+        }
+
+        /* ===== AVAX BANNER ===== */
+        .avax-banner {
+            background: linear-gradient(135deg, rgba(74,124,155,0.2), rgba(74,124,155,0.1));
+            border: 2px solid rgba(74,124,155,0.4);
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 14px;
+            text-align: center;
+        }
+        .avax-banner .chain-label {
+            font-family: 'Cinzel', serif;
+            font-size: 0.5em;
+            font-weight: 700;
+            color: var(--accent-blue);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+        .avax-banner .pair-info {
+            font-size: 0.9em;
+            color: var(--text-body);
+            margin-top: 4px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header - Stone Banner -->
+    <div class="hub-header">
+        <h1>⚔️ GenTech Hub</h1>
+        <div class="subtitle">Jordan's Quest Board</div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div id="settings-modal" style="display:none; position:fixed; inset:0; z-index:200; background:rgba(0,0,0,0.7); backdrop-filter:blur(4px); align-items:flex-end; justify-content:center;" onclick="if(event.target===this)closeSettings()">
+        <div style="background:linear-gradient(180deg, var(--wood-medium), var(--wood-dark)); border:2px solid var(--gold-dim); border-radius:16px 16px 0 0; padding:20px; width:100%; max-width:480px; animation:slideUp 0.25s ease;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+                <h3 style="font-family:'Cinzel',serif; font-size:0.7em; font-weight:700; color:var(--gold); text-shadow:1px 1px 0 #1a0e04;">⚙️ Quest Settings</h3>
+                <button onclick="closeSettings()" style="background:none; border:none; color:var(--parchment-dark); font-size:1.2em; cursor:pointer;">✕</button>
+            </div>
+            <p style="font-size:0.85em; color:var(--parchment-dark); margin-bottom:12px; font-style:italic;">Choose your default quest board:</p>
+            <div style="display:flex; flex-direction:column; gap:8px; margin-bottom:16px;">
+                <button class="settings-option" data-tab="yieldfarm" onclick="setDefaultTab('yieldfarm')" style="display:flex; align-items:center; gap:10px; padding:12px; background:rgba(0,0,0,0.2); border:2px solid var(--wood-light); border-radius:8px; cursor:pointer; text-align:left; color:var(--parchment); font-family:inherit; font-size:0.9em; transition:all 0.2s;">
+                    <span style="font-size:1.3em;">🌾</span>
+                    <div><strong>Yield Farm</strong><br><span style="font-size:0.8em; color:var(--parchment-dark);">LP tracker, rainbow, rotation</span></div>
+                </button>
+                <button class="settings-option" data-tab="gaming" onclick="setDefaultTab('gaming')" style="display:flex; align-items:center; gap:10px; padding:12px; background:rgba(0,0,0,0.2); border:2px solid var(--wood-light); border-radius:8px; cursor:pointer; text-align:left; color:var(--parchment); font-family:inherit; font-size:0.9em; transition:all 0.2s;">
+                    <span style="font-size:1.3em;">🎮</span>
+                    <div><strong>Gaming</strong><br><span style="font-size:0.8em; color:var(--parchment-dark);">POE2 builds, characters</span></div>
+                </button>
+                <button class="settings-option" data-tab="travel" onclick="setDefaultTab('travel')" style="display:flex; align-items:center; gap:10px; padding:12px; background:rgba(0,0,0,0.2); border:2px solid var(--wood-light); border-radius:8px; cursor:pointer; text-align:left; color:var(--parchment); font-family:inherit; font-size:0.9em; transition:all 0.2s;">
+                    <span style="font-size:1.3em;">✈️</span>
+                    <div><strong>Travel</strong><br><span style="font-size:0.8em; color:var(--parchment-dark);">Trips, flights, budget</span></div>
+                </button>
+                <button class="settings-option" data-tab="portfolio" onclick="setDefaultTab('portfolio')" style="display:flex; align-items:center; gap:10px; padding:12px; background:rgba(0,0,0,0.2); border:2px solid var(--wood-light); border-radius:8px; cursor:pointer; text-align:left; color:var(--parchment); font-family:inherit; font-size:0.9em; transition:all 0.2s;">
+                    <span style="font-size:1.3em;">👨‍💻</span>
+                    <div><strong>Workshop</strong><br><span style="font-size:0.8em; color:var(--parchment-dark);">Projects, hackathons</span></div>
+                </button>
+            </div>
+            <button onclick="closeSettings()" style="width:100%; padding:12px; background:linear-gradient(180deg, var(--gold), var(--gold-dim)); border:none; border-radius:8px; color:#1a0e04; font-family:'Cinzel',serif; font-size:0.6em; font-weight:700; cursor:pointer; text-transform:uppercase; letter-spacing:1px;">Save & Close</button>
+        </div>
+    </div>
+
+    <!-- ===== YIELD FARM TAB ===== -->
+    <div class="tab-section active" id="tab-yieldfarm">
+
+        <!-- Status badge -->
+        <div style="text-align:center; margin: 10px 0 14px;">
+            <span class="status-badge active" id="lp-status">
+                <span class="pulse"></span> <span id="lp-status-text">Connecting...</span>
+            </span>
+        </div>
+
+        <!-- Chain Banner -->
+        <div class="avax-banner">
+            <div class="chain-label">🏔️ Avalanche C-Chain · LFJ Concentrated Liquidity</div>
+            <div class="pair-info">AVAX/USDC · Loading...</div>
+        </div>
+
+        <!-- Hero Stats -->
+        <div class="stat-row">
+            <div class="stat-card full">
+                <div class="stat-label">Total Harvest</div>
+                <div class="stat-value" id="total-value">—</div>
+                <div class="stat-sub" id="position-split">Loading...</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">AVAX Price</div>
+                <div class="stat-value blue" id="avax-price">—</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">24h Change</div>
+                <div class="stat-value" id="change-24h">—</div>
+            </div>
+        </div>
+
+        <!-- Fee Efficiency + Range Status -->
+        <div class="stat-row">
+            <div class="stat-card">
+                <div class="stat-label">Crop Efficiency</div>
+                <div class="stat-value" id="efficiency" style="font-size:1.3em;">—</div>
+                <div class="stat-sub" id="efficiency-zone"></div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Field Status</div>
+                <div class="stat-value" id="range-status" style="font-size:1.1em;">—</div>
+                <div class="stat-sub" id="range-detail"></div>
+            </div>
+        </div>
+
+        <!-- DCA Strategy -->
+        <div class="strategy-note" id="dca-note">
+            <strong>🌾 DCA:</strong> <span id="dca-text">Loading...</span>
+        </div>
+
+        <!-- Liquidity Range -->
+        <div class="wood-panel">
+            <div class="gold-heading"><span class="icon">🗺️</span> Field Range</div>
+            <div class="range-bar">
+                <div class="range-fill" style="left:0; width:100%;"></div>
+                <div class="range-marker" id="range-marker" style="left:50%;"></div>
+            </div>
+            <div class="range-labels">
+                <span id="range-low">—</span>
+                <span id="range-high">—</span>
+            </div>
+            <div class="range-current">Current: <strong id="range-current-price">—</strong></div>
+        </div>
+
+        <!-- Position Breakdown -->
+        <div class="parchment-card">
+            <div class="gold-heading"><span class="icon">📦</span> Barn Storage</div>
+            <div class="pos-row">
+                <div>
+                    <div class="pos-token">AVAX</div>
+                    <div class="pos-amount" id="avax-amount">—</div>
+                </div>
+                <div class="pos-value" id="avax-val">—</div>
+            </div>
+            <div class="pos-row">
+                <div>
+                    <div class="pos-token">USDC</div>
+                    <div class="pos-amount" id="usdc-amount">—</div>
+                </div>
+                <div class="pos-value" id="usdc-val">—</div>
+            </div>
+        </div>
+
+        <!-- Pool Config -->
+        <div class="wood-panel">
+            <div class="gold-heading"><span class="icon">⚙️</span> Farm Config</div>
+            <div class="config-grid" id="config-grid-yieldfarm">
+                <div class="config-item"><div class="config-key">Fee Tier</div><div class="config-val">—</div></div>
+                <div class="config-item"><div class="config-key">Shape</div><div class="config-val">—</div></div>
+                <div class="config-item"><div class="config-key">Chain</div><div class="config-val">Avalanche</div></div>
+                <div class="config-item"><div class="config-key">Protocol</div><div class="config-val">LFJ</div></div>
+            </div>
+        </div>
+
+        <!-- Pool Stats -->
+        <div class="parchment-card">
+            <div class="gold-heading"><span class="icon">📊</span> Farm Stats</div>
+            <div class="config-grid">
+                <div class="config-item" style="background:rgba(60,40,20,0.15); border-color:var(--wood-light);">
+                    <div class="config-key">24h Volume</div>
+                    <div class="config-val" id="vol-24h">—</div>
+                </div>
+                <div class="config-item" style="background:rgba(60,40,20,0.15); border-color:var(--wood-light);">
+                    <div class="config-key">Liquidity</div>
+                    <div class="config-val" id="tvl">—</div>
+                </div>
+            </div>
+        </div>
+
+        <a class="portfolio-link" href="https://protojay4789.github.io/DeFi/defi-dashboard.html" target="_blank">Open Full Farm →</a>
+
+        <!-- ===== RAINBOW ZONE ===== -->
+        <div class="section-divider"><span>🌈 Harvest Festival</span></div>
+
+        <!-- Rainbow Chart -->
+        <div id="rainbow-chart" style="margin-bottom:14px;">
+            <div style="height:320px; position:relative;" id="rainbow-bars">
+                <div style="text-align:center; padding:60px 0; color:var(--parchment-dark); font-style:italic;">Loading rainbow...</div>
+            </div>
+        </div>
+
+        <!-- Current Zone -->
+        <div id="rainbow-zone" class="parchment-card" style="border-left:4px solid; margin-bottom:14px;">
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px;">
+                <span id="zone-emoji" style="font-size:1.6em;"></span>
+                <div>
+                    <div id="zone-name" style="font-family:'Cinzel',serif; font-size:0.65em; font-weight:700; color:var(--text-dark);"></div>
+                    <div id="zone-desc" style="font-size:0.85em; color:var(--text-body); font-style:italic;"></div>
+                </div>
+            </div>
+            <div id="zone-advice" style="background:rgba(60,40,20,0.1); border-radius:6px; padding:10px; font-size:0.85em; border-left:3px solid; font-style:italic;"></div>
+        </div>
+
+        <!-- Rainbow Quick Stats -->
+        <div class="stat-row" id="rainbow-stats">
+            <div class="stat-card">
+                <div class="stat-label">Efficiency</div>
+                <div class="stat-value" id="rb-efficiency" style="font-size:1.3em;">—</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">APR</div>
+                <div class="stat-value" id="rb-apr" style="font-size:1.3em;">—</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Daily Fees</div>
+                <div class="stat-value" id="rb-fees" style="font-size:1.1em; color:#7ec850;">—</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">24h Change</div>
+                <div class="stat-value" id="rb-change" style="font-size:1.1em;">—</div>
+            </div>
+        </div>
+
+        <!-- 30-Day History -->
+        <div class="wood-panel" style="margin-bottom:14px;">
+            <div class="gold-heading"><span class="icon">📈</span> 30-Day Harvest</div>
+            <canvas id="rb-history" style="width:100%; height:100px;"></canvas>
+        </div>
+
+        <!-- Rainbow Legend -->
+        <div class="parchment-card" style="margin-bottom:14px;">
+            <div class="gold-heading"><span class="icon">📋</span> Season Guide</div>
+            <div id="rb-legend" style="display:flex; flex-direction:column; gap:10px;"></div>
+        </div>
+
+        <!-- ===== NARRATIVE ROTATION ===== -->
+        <div class="section-divider"><span>🔄 Crop Rotation</span></div>
+
+        <div id="rotation-content">
+            <div style="text-align:center; padding:40px 0; color:var(--parchment-dark); font-style:italic;">Loading rotation data...</div>
+        </div>
+
+        <!-- ===== ECONOMIC CALENDAR ===== -->
+        <div class="section-divider"><span>📅 Weather Forecast</span></div>
+
+        <div id="macro-events">
+            <div style="text-align:center; padding:40px 0; color:var(--parchment-dark); font-style:italic;">Loading weather data...</div>
+        </div>
+
+        <!-- RPG Status Bar -->
+        <div class="rpg-status-bar">
+            <div class="rpg-stat">
+                <span class="label">Vigor:</span>
+                <div class="vigor-gems">
+                    <div class="vigor-gem"></div>
+                    <div class="vigor-gem"></div>
+                    <div class="vigor-gem"></div>
+                    <div class="vigor-gem"></div>
+                    <div class="vigor-gem"></div>
+                    <div class="vigor-gem empty"></div>
+                    <div class="vigor-gem empty"></div>
+                </div>
+            </div>
+            <div class="rpg-stat">
+                <span class="label">💎 Crystals:</span>
+                <span class="value" id="crystal-count">1,247</span>
+            </div>
+        </div>
+
+        <div class="footer" id="yieldfarm-footer">
+            ⚔️ Not financial advice · Data: DexScreener + LFJ · Updated weekly
+        </div>
+    </div>
+
+    <!-- ===== GAMING TAB ===== -->
+    <div class="tab-section" id="tab-gaming">
+        <div style="margin-bottom:14px;">
+            <h2 style="font-family:'Cinzel',serif; font-size:0.8em; font-weight:700; color:var(--text-dark); text-shadow:1px 1px 0 rgba(212,168,71,0.3);">🎮 Gaming Guild</h2>
+            <p style="font-size:0.85em; color:var(--text-body); margin-top:4px; font-style:italic;">POE2 builds & character tracking</p>
+        </div>
+
+        <div class="game-card" onclick="window.open('Gaming/poe2-dashboard.html','_blank')">
+            <h3>⚡ Monk — Storm Weaver</h3>
+            <p>Crit-based lightning build. Mapping focused with high mobility.</p>
+            <span class="tag">Active Build</span>
+        </div>
+
+        <div class="game-card" onclick="window.open('Gaming/poe2-dashboard.html','_blank')">
+            <h3>🔥 Sorceress — New League</h3>
+            <p>Caster build for the new league. Exploring elemental damage.</p>
+            <span class="tag">League Start</span>
+        </div>
+
+        <div class="game-card" onclick="window.open('Gaming/passive-planner.html','_blank')">
+            <h3>🌳 Passive Tree Planner</h3>
+            <p>Interactive skill tree builder for planning passive allocations.</p>
+            <span class="tag">Tool</span>
+        </div>
+
+        <a class="portfolio-link" href="https://protojay4789.github.io/Gaming/poe2-dashboard.html" target="_blank">Open Full Guild Hall →</a>
+
+        <div class="footer">GenTech Gaming</div>
+    </div>
+
+    <!-- ===== TRAVEL TAB ===== -->
+    <div class="tab-section" id="tab-travel">
+        <div style="margin-bottom:14px;">
+            <h2 style="font-family:'Cinzel',serif; font-size:0.8em; font-weight:700; color:var(--text-dark); text-shadow:1px 1px 0 rgba(212,168,71,0.3);">🗺️ Travel Map</h2>
+            <p style="font-size:0.85em; color:var(--text-body); margin-top:4px; font-style:italic;">Trips, flights & budget tracking</p>
+        </div>
+
+        <div class="trip-card" onclick="window.open('Travels/travel-dashboard.html','_blank')">
+            <h3>🇵🇭 Philippines — Quest 1</h3>
+            <div class="dates">September 2026 · Makati / Christel</div>
+            <span class="status-pill planning">Planning</span>
+        </div>
+
+        <div class="trip-card" onclick="window.open('Travels/travel-dashboard.html','_blank')">
+            <h3>🏖️ Philippines — Quest 2 + Boracay</h3>
+            <div class="dates">Nov/Dec 2026 · Boracay island hopping</div>
+            <span class="status-pill planning">Planning</span>
+        </div>
+
+        <a class="portfolio-link" href="https://protojay4789.github.io/Travels/travel-dashboard.html" target="_blank">Open Full Map →</a>
+
+        <div class="footer">GenTech Travel</div>
+    </div>
+
+    <!-- ===== PORTFOLIO TAB ===== -->
+    <div class="tab-section" id="tab-portfolio">
+        <div style="margin-bottom:14px;">
+            <h2 style="font-family:'Cinzel',serif; font-size:0.8em; font-weight:700; color:var(--accent-purple); text-shadow:1px 1px 0 rgba(123,94,167,0.3);">🔧 Workshop</h2>
+            <p style="font-size:0.85em; color:var(--text-body); margin-top:4px; font-style:italic;">Projects, skills & hackathon tracker</p>
+        </div>
+
+        <a class="portfolio-link" href="https://protojay4789.github.io/" target="_blank" style="border-color:var(--accent-purple); color:var(--accent-purple);">
+            Open Full Workshop →
+        </a>
+
+        <div class="footer">GenTech Portfolio</div>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+        <button class="nav-btn active" onclick="switchTab('yieldfarm')" id="nav-yieldfarm">
+            <span class="nav-icon">🌾</span>
+            Farm
+        </button>
+        <button class="nav-btn" onclick="switchTab('gaming')" id="nav-gaming">
+            <span class="nav-icon">🎮</span>
+            Gaming
+        </button>
+        <button class="nav-btn" onclick="switchTab('travel')" id="nav-travel">
+            <span class="nav-icon">🗺️</span>
+            Travel
+        </button>
+        <button class="nav-btn" onclick="switchTab('portfolio')" id="nav-portfolio">
+            <span class="nav-icon">🔧</span>
+            More
+        </button>
+    </nav>
+
+    <script>
+        // --- Config ---
+        const DATA_URL = 'https://raw.githubusercontent.com/ProtoJay4789/ProtoJay4789.github.io/main/DeFi/defi-data.json';
+        const POOL_ADDRESS = '0x864d4e5ee7318e97483db7eb0912e09f161516ea';
+        const HUB_LS_KEY = 'jordan-hub-default-tab';
+        const REFRESH_MS = 60000;
+
+        // --- Tab switching ---
+        function switchTab(tab) {
+            document.querySelectorAll('.tab-section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            const section = document.getElementById('tab-' + tab);
+            const btn = document.getElementById('nav-' + tab);
+            if (section) section.classList.add('active');
+            if (btn) btn.classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        // --- Settings ---
+        function openSettings() { document.getElementById('settings-modal').style.display = 'flex'; }
+        function closeSettings() { document.getElementById('settings-modal').style.display = 'none'; }
+        function setDefaultTab(tab) {
+            localStorage.setItem(HUB_LS_KEY, tab);
+            document.querySelectorAll('.settings-option').forEach(o => o.classList.toggle('selected', o.dataset.tab === tab));
+        }
+        function getSavedTab() {
+            const saved = localStorage.getItem(HUB_LS_KEY);
+            if (saved === 'defi' || saved === 'rainbow' || saved === 'rotation') {
+                localStorage.setItem(HUB_LS_KEY, 'yieldfarm');
+                return 'yieldfarm';
+            }
+            return saved || 'yieldfarm';
+        }
+
+        // --- Yield Farm: Live Data Engine ---
+        function fmt(n) {
+            if (n >= 1e6) return '$' + (n / 1e6).toFixed(1) + 'M';
+            if (n >= 1e3) return '$' + (n / 1e3).toFixed(1) + 'K';
+            return '$' + n.toFixed(2);
+        }
+
+        function formatShape(shape) {
+            if (!shape) return 'Curve';
+            return shape.charAt(0).toUpperCase() + shape.slice(1);
+        }
+
+        function getEfficiencyColor(eff) {
+            if (eff >= 70) return 'green';
+            if (eff >= 50) return 'blue';
+            return 'red';
+        }
+
+        async function fetchPositionData() {
+            try {
+                const dataResp = await fetch(DATA_URL + '?' + Date.now(), { cache: 'no-store' });
+                const data = await dataResp.json();
+                const pos = data.lpPosition || {};
+                const fees = data.fees || {};
+
+                const price = parseFloat(pos.currentPrice || data.currentPrice || 0);
+                const rangeLow = parseFloat(pos.rangeMin || 0);
+                const rangeHigh = parseFloat(pos.rangeMax || 0);
+                const shape = (pos.shape || 'curve').toLowerCase();
+                const avaxHeld = parseFloat(pos.avaxAmount || 0);
+                const usdcHeld = parseFloat(pos.usdcAmount || 0);
+                const totalVal = parseFloat(pos.totalValueUSD || pos.totalValue || 0);
+                const binStep = parseInt(pos.binStep || 10, 10);
+                const feeTier = (binStep / 100).toFixed(2) + '%';
+
+                let change24 = 0, vol24 = 0, liqUsd = 0;
+                try {
+                    const dexResp = await fetch(`https://api.dexscreener.com/latest/dex/pairs/avalanche/${POOL_ADDRESS}`);
+                    const dex = await dexResp.json();
+                    const pair = dex.pairs && dex.pairs[0] ? dex.pairs[0] : null;
+                    if (pair) {
+                        change24 = parseFloat(pair.priceChange?.h24 || 0);
+                        vol24 = parseFloat(pair.volume?.h24 || 0);
+                        liqUsd = parseFloat(pair.liquidity?.usd || 0);
+                    }
+                } catch (e) {
+                    console.warn('DexScreener overlay failed', e);
+                    vol24 = parseFloat(data.volume24h || 0);
+                    liqUsd = parseFloat(data.liquidity || 0);
+                }
+
+                const livePrice = price;
+                const avaxVal = avaxHeld * livePrice;
+                const inRange = livePrice >= rangeLow && livePrice <= rangeHigh;
+                const rangeWidth = rangeHigh - rangeLow;
+                const markerPct = rangeWidth > 0
+                    ? Math.max(0, Math.min(100, ((livePrice - rangeLow) / rangeWidth) * 100))
+                    : 50;
+
+                document.getElementById('avax-price').textContent = '$' + livePrice.toFixed(4);
+                document.getElementById('total-value').textContent = fmt(totalVal);
+                document.getElementById('position-split').textContent = `${avaxHeld.toFixed(3)} AVAX + ${usdcHeld.toFixed(2)} USDC`;
+
+                const changeEl = document.getElementById('change-24h');
+                changeEl.textContent = (change24 >= 0 ? '+' : '') + change24.toFixed(2) + '%';
+                changeEl.className = 'stat-value ' + (change24 >= 0 ? 'green' : 'red');
+
+                const eff = parseFloat(data.efficiency || 0);
+                const effEl = document.getElementById('efficiency');
+                effEl.textContent = eff.toFixed(1) + '%';
+                effEl.className = 'stat-value ' + getEfficiencyColor(eff);
+                document.getElementById('efficiency-zone').textContent = data.efficiencyZone || (eff >= 70 ? 'Center zone' : eff >= 50 ? 'Mid zone' : 'Edge zone');
+
+                const rangeEl = document.getElementById('range-status');
+                rangeEl.textContent = inRange ? '🟢 In Range' : '🔴 OUT';
+                rangeEl.className = 'stat-value ' + (inRange ? 'green' : 'red');
+                document.getElementById('range-detail').textContent = inRange
+                    ? `Spread: $${rangeLow.toFixed(2)} – $${rangeHigh.toFixed(2)}`
+                    : 'Adjust range to capture fees';
+
+                document.getElementById('dca-text').textContent = data.dcaNote || 'No DCA active — monitor price levels';
+
+                document.getElementById('range-low').textContent = '$' + rangeLow.toFixed(2);
+                document.getElementById('range-high').textContent = '$' + rangeHigh.toFixed(2);
+                document.getElementById('range-current-price').textContent = '$' + livePrice.toFixed(4);
+                document.getElementById('range-marker').style.left = markerPct + '%';
+
+                document.getElementById('avax-amount').textContent = avaxHeld.toFixed(4) + ' AVAX';
+                document.getElementById('avax-val').textContent = '$' + avaxVal.toFixed(2);
+                document.getElementById('usdc-amount').textContent = usdcHeld.toFixed(2) + ' USDC';
+                document.getElementById('usdc-val').textContent = '$' + usdcHeld.toFixed(2);
+
+                document.getElementById('lp-status-text').textContent = 'Active — Harvesting';
+                document.getElementById('lp-status').className = 'status-badge active';
+
+                const configGrid = document.getElementById('config-grid-yieldfarm');
+                if (configGrid) {
+                    const items = configGrid.querySelectorAll('.config-val');
+                    if (items[0]) items[0].textContent = feeTier;
+                    if (items[1]) items[1].textContent = formatShape(shape);
+                }
+
+                document.getElementById('vol-24h').textContent = fmt(vol24);
+                document.getElementById('tvl').textContent = fmt(liqUsd);
+
+                if (fees.totalEarned !== undefined) {
+                    const rewardsBox = document.querySelector('.rewards-box');
+                    if (rewardsBox) {
+                        rewardsBox.style.display = 'block';
+                        rewardsBox.querySelector('.rewards-value').textContent = '$' + parseFloat(fees.totalEarned).toFixed(2);
+                    }
+                }
+
+            } catch (e) {
+                console.error('Yield farm data fetch failed:', e);
+                document.getElementById('lp-status-text').textContent = 'Connection lost';
+            }
+        }
+
+        // --- Rainbow ---
+        const RAINBOW_BANDS = [
+            { name: 'Euphoria', emoji: '🔴', color: '#c94444', gradient: 'linear-gradient(90deg, #c94444, #e86060)', effMin: 90, effMax: 100, advice: 'Take profits. Diversify.' },
+            { name: 'Peak Yield', emoji: '🟠', color: '#d4a847', gradient: 'linear-gradient(90deg, #d4a847, #f0c75e)', effMin: 75, effMax: 90, advice: 'Hold strong. Compound weekly.' },
+            { name: 'Harvest Mode', emoji: '🟡', color: '#c9a040', gradient: 'linear-gradient(90deg, #c9a040, #e0c060)', effMin: 60, effMax: 75, advice: 'Keep farming. Increase size.' },
+            { name: 'Accumulation', emoji: '🟢', color: '#5a8a3c', gradient: 'linear-gradient(90deg, #5a8a3c, #7ec850)', effMin: 40, effMax: 60, advice: 'DCA. Patience pays.' },
+            { name: 'Bleeding Edge', emoji: '🔵', color: '#4a7c9b', gradient: 'linear-gradient(90deg, #4a7c9b, #6a9cbb)', effMin: 20, effMax: 40, advice: 'Micro-DCA only.' },
+            { name: 'Panic Farm', emoji: '🟣', color: '#7b5ea7', gradient: 'linear-gradient(90deg, #7b5ea7, #9b7ec7)', effMin: 0, effMax: 20, advice: 'Generational entry. Be greedy.' }
+        ];
+
+        function getRainbowBand(eff) {
+            return RAINBOW_BANDS.find(b => eff >= b.effMin && eff < b.effMax) || RAINBOW_BANDS[RAINBOW_BANDS.length - 1];
+        }
+
+        const RAINBOW_DATA_URL = 'https://raw.githubusercontent.com/ProtoJay4789/ProtoJay4789.github.io/main/DeFi/rainbow/yield-rainbow-data.json';
+
+        function drawRainbowBars(data) {
+            if (!data.bands) return;
+            const container = document.getElementById('rainbow-bars');
+            if (!container) return;
+            container.innerHTML = '';
+
+            const efficiency = data.metrics ? data.metrics.efficiency : 0;
+            const currentBand = getRainbowBand(efficiency);
+
+            const barHeight = 100 / RAINBOW_BANDS.length;
+            RAINBOW_BANDS.forEach((band, i) => {
+                const isActive = band.name === currentBand.name;
+                const div = document.createElement('div');
+                div.style.cssText = `
+                    position: absolute;
+                    left: 0;
+                    right: 0;
+                    bottom: ${i * barHeight}%;
+                    height: ${barHeight}%;
+                    background: ${band.gradient};
+                    opacity: ${isActive ? 0.95 : 0.25};
+                    transition: opacity 0.3s;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    padding: 0 12px;
+                    border-bottom: 1px solid rgba(0,0,0,0.2);
+                `;
+                div.innerHTML = `
+                    <span style="font-family:'Cinzel',serif; font-size:0.7em; font-weight:700; color:#fff; text-shadow:2px 2px 0 rgba(0,0,0,0.5);">${band.emoji} ${band.name}</span>
+                    <span style="font-family:'Cinzel',serif; font-size:0.6em; color:rgba(255,255,255,0.8); text-shadow:1px 1px 0 rgba(0,0,0,0.5);">${band.effMin}–${band.effMax}%</span>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        function renderRainbowZone(data) {
+            if (!data.metrics) return;
+            const efficiency = data.metrics.efficiency;
+            const band = getRainbowBand(efficiency);
+
+            document.getElementById('zone-emoji').textContent = band.emoji;
+            document.getElementById('zone-name').textContent = band.name;
+            document.getElementById('zone-desc').textContent = `Efficiency: ${efficiency.toFixed(1)}%`;
+            const zone = document.getElementById('rainbow-zone');
+            zone.style.borderLeftColor = band.color;
+
+            const advice = document.getElementById('zone-advice');
+            advice.textContent = band.advice;
+            advice.style.borderLeftColor = band.color;
+        }
+
+        function renderRainbowStats(data) {
+            if (!data.metrics) return;
+            const m = data.metrics;
+            document.getElementById('rb-efficiency').textContent = m.efficiency.toFixed(1) + '%';
+            document.getElementById('rb-efficiency').style.color = m.efficiency >= 70 ? '#7ec850' : m.efficiency >= 50 ? '#d4a847' : '#e86060';
+            document.getElementById('rb-apr').textContent = m.annualizedApr.toFixed(0) + '%';
+            document.getElementById('rb-fees').textContent = '$' + m.dailyFees.toFixed(4);
+            const changeEl = document.getElementById('rb-change');
+            changeEl.textContent = (m.priceChange24h >= 0 ? '+' : '') + m.priceChange24h.toFixed(2) + '%';
+            changeEl.style.color = m.priceChange24h >= 0 ? '#7ec850' : '#e86060';
+        }
+
+        function renderRainbowLegend() {
+            const container = document.getElementById('rb-legend');
+            if (!container) return;
+            container.innerHTML = RAINBOW_BANDS.map(b =>
+                `<div style="display:flex; align-items:center; gap:10px; padding:8px 10px; background:rgba(60,40,20,0.1); border-radius:6px; border:1px solid var(--wood-light);">
+                    <div style="width:18px; height:18px; border-radius:4px; background:${b.gradient}; flex-shrink:0; border:1px solid rgba(0,0,0,0.2);"></div>
+                    <span style="font-family:'Cinzel',serif; font-size:0.5em; font-weight:700; color:var(--text-dark);">${b.emoji} ${b.name}</span>
+                    <span style="font-size:0.8em; color:var(--text-body); margin-left:auto; font-style:italic;">Eff ${b.effMin}–${b.effMax}%</span>
+                </div>`
+            ).join('');
+        }
+
+        function drawRainbowHistory(canvasId, history, bandColor) {
+            const canvas = document.getElementById(canvasId);
+            if (!canvas || !history || history.length < 2) return;
+            const ctx = canvas.getContext('2d');
+            const dpr = window.devicePixelRatio || 1;
+            const rect = canvas.getBoundingClientRect();
+            canvas.width = rect.width * dpr;
+            canvas.height = rect.height * dpr;
+            ctx.scale(dpr, dpr);
+            const w = rect.width, h = rect.height;
+            const pad = 8, chartH = h - pad * 2, chartW = w;
+
+            [{min:90,c:'rgba(201,68,68,0.15)'},{min:75,c:'rgba(212,168,71,0.12)'},{min:60,c:'rgba(201,160,64,0.1)'},{min:40,c:'rgba(90,138,60,0.08)'},{min:20,c:'rgba(74,124,155,0.08)'},{min:0,c:'rgba(123,94,167,0.08)'}].forEach(b => {
+                const y = pad + chartH * (1 - b.min / 100);
+                ctx.fillStyle = b.c;
+                ctx.fillRect(0, y - chartH * 0.1, chartW, chartH * 0.1);
+            });
+
+            ctx.beginPath();
+            ctx.strokeStyle = bandColor;
+            ctx.lineWidth = 2;
+            ctx.lineJoin = 'round';
+            const step = chartW / (history.length - 1);
+            history.forEach((v, i) => {
+                const x = i * step, y = pad + chartH * (1 - v / 100);
+                i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+            });
+            ctx.stroke();
+
+            const last = history[history.length - 1];
+            ctx.lineTo((history.length - 1) * step, h - pad);
+            ctx.lineTo(0, h - pad);
+            ctx.closePath();
+            const grad = ctx.createLinearGradient(0, pad, 0, h - pad);
+            grad.addColorStop(0, bandColor + '30');
+            grad.addColorStop(1, bandColor + '05');
+            ctx.fillStyle = grad;
+            ctx.fill();
+
+            const dotX = (history.length - 1) * step, dotY = pad + chartH * (1 - last / 100);
+            ctx.beginPath(); ctx.arc(dotX, dotY, 5, 0, Math.PI * 2);
+            ctx.fillStyle = bandColor; ctx.fill();
+            ctx.strokeStyle = '#f4e4c1'; ctx.lineWidth = 2; ctx.stroke();
+        }
+
+        async function fetchRainbowData() {
+            try {
+                const res = await fetch(RAINBOW_DATA_URL + '?t=' + Date.now());
+                if (!res.ok) throw new Error('No rainbow data');
+                const data = await res.json();
+                drawRainbowBars(data);
+                renderRainbowZone(data);
+                renderRainbowStats(data);
+                renderRainbowLegend();
+                const efficiency = data.metrics ? data.metrics.efficiency : 0;
+                const band = getRainbowBand(efficiency);
+                drawRainbowHistory('rb-history', data.history, band.color);
+            } catch (e) {
+                console.warn('Rainbow fetch failed:', e);
+            }
+        }
+
+        // --- Narrative Rotation ---
+        const ROTATION_NARRATIVES = {
+            'AI & Data': { emoji: '🤖', coins: 'FET, RENDER, TAO, AKT', thesis: 'AI compute, data markets, inference' },
+            'RWA': { emoji: '🏠', coins: 'ONDO, PLU, CPOOL', thesis: 'Tokenized treasuries, real estate' },
+            'DeFi Blue Chips': { emoji: '🏦', coins: 'UNI, AAVE, LINK, MKR', thesis: 'DEX, lending, oracles' },
+            'L1 / L2': { emoji: '⛓️', coins: 'SOL, AVAX, NEAR, ARB', thesis: 'Base layers and scaling' },
+            'Meme': { emoji: '🐸', coins: 'DOGE, PEPE, WIF, BONK', thesis: 'Community-driven momentum' },
+            'Gaming': { emoji: '🎮', coins: 'IMX, GALA, PYTH', thesis: 'On-chain gaming, virtual worlds' }
+        };
+
+        async function fetchRotationData() {
+            const container = document.getElementById('rotation-content');
+            if (!container) return;
+            try {
+                const res = await fetch('https://raw.githubusercontent.com/ProtoJay4789/ProtoJay4789.github.io/main/DeFi/rainbow/rotation-data.json?t=' + Date.now());
+                if (res.ok) {
+                    const data = await res.json();
+                    renderRotation(container, data);
+                    return;
+                }
+            } catch (e) {}
+            renderRotationFallback(container);
+        }
+
+        function renderRotation(container, data) {
+            const narratives = data.narratives || [];
+            if (narratives.length === 0) { renderRotationFallback(container); return; }
+            container.innerHTML = narratives.map((n, i) => {
+                const zone = n.zone || '';
+                const zoneColor = zone.includes('Hot') ? '#5a8a3c' : zone.includes('Warm') ? '#4a7c9b' : zone.includes('Cool') ? '#d4a847' : '#c94444';
+                return `<div class="parchment-card" style="margin-bottom:10px; border-left:4px solid ${zoneColor};">
+                    <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px;">
+                        <span style="font-size:1.4em;">${n.emoji || '📊'}</span>
+                        <span style="font-family:'Cinzel',serif; font-size:0.6em; font-weight:700; color:var(--text-dark);">${n.name}</span>
+                        <span style="margin-left:auto; font-family:'Cinzel',serif; font-size:0.45em; font-weight:600; color:${zoneColor}; text-transform:uppercase;">${zone}</span>
+                    </div>
+                    <div style="font-size:0.85em; color:var(--text-body); margin-bottom:4px;">${n.thesis || ''}</div>
+                    <div style="font-size:0.8em; color:var(--text-body);">Coins: ${n.coins || ''}</div>
+                    ${n.score !== undefined ? `<div style="font-size:0.8em; margin-top:6px; color:var(--gold-dim); font-weight:600;">Score: ${n.score > 0 ? '+' : ''}${n.score.toFixed(1)}</div>` : ''}
+                </div>`;
+            }).join('');
+        }
+
+        function renderRotationFallback(container) {
+            container.innerHTML = Object.entries(ROTATION_NARRATIVES).map(([name, n]) =>
+                `<div class="parchment-card" style="margin-bottom:10px; border-left:4px solid var(--wood-light);">
+                    <div style="display:flex; align-items:center; gap:10px; margin-bottom:6px;">
+                        <span style="font-size:1.4em;">${n.emoji}</span>
+                        <span style="font-family:'Cinzel',serif; font-size:0.6em; font-weight:700; color:var(--text-dark);">${name}</span>
+                    </div>
+                    <div style="font-size:0.85em; color:var(--text-body);">${n.thesis}</div>
+                    <div style="font-size:0.8em; color:var(--text-body); margin-top:4px;">Coins: ${n.coins}</div>
+                </div>`
+            ).join('') + '<div style="text-align:center; font-family:\'Cinzel\',serif; font-size:0.5em; color:var(--text-body); margin-top:14px; font-style:italic;">📊 Full rotation data updates Sundays at 3:30 PM ET</div>';
+        }
+
+        // --- Economic Calendar ---
+        async function fetchMacroEvents() {
+            const container = document.getElementById('macro-events');
+            if (!container) return;
+            try {
+                const res = await fetch('https://raw.githubusercontent.com/ProtoJay4789/ProtoJay4789.github.io/main/DeFi/economic-calendar.json?t=' + Date.now());
+                if (!res.ok) { renderMacroFallback(container); return; }
+                const data = await res.json();
+                renderMacroEvents(container, data);
+            } catch (e) {
+                renderMacroFallback(container);
+            }
+        }
+
+        function renderMacroEvents(container, data) {
+            const events = data.events || [];
+            if (events.length === 0) { renderMacroFallback(container); return; }
+
+            let html = '';
+
+            if (data.summary) {
+                html += `<div class="parchment-card" style="margin-bottom:10px; border-left:4px solid var(--gold-dim);">
+                    <div style="font-family:'Cinzel',serif; font-size:0.55em; font-weight:700; color:var(--gold-dim); margin-bottom:6px;">📅 ${data.date || 'Today'}</div>
+                    <div style="font-size:0.85em; color:var(--text-body); line-height:1.5;">${data.summary}</div>
+                </div>`;
+            }
+
+            events.forEach(ev => {
+                const borderColor = ev.impact === 'high' ? '#c94444' : ev.impact === 'medium' ? '#d4a847' : '#4a7c9b';
+                const impactBg = ev.impact === 'high' ? 'rgba(201,68,68,0.08)' : ev.impact === 'medium' ? 'rgba(212,168,71,0.08)' : 'rgba(74,124,155,0.08)';
+
+                html += `<div class="wood-panel" style="margin-bottom:10px; border-left:4px solid ${borderColor};">
+                    <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px;">
+                        <span style="font-size:1.3em;">${ev.emoji || '📅'}</span>
+                        <div>
+                            <div style="font-family:'Cinzel',serif; font-size:0.55em; font-weight:700; color:var(--gold);">${ev.name}</div>
+                            <div style="font-size:0.8em; color:var(--parchment-dark);">${ev.time || ''} · Forecast: ${ev.forecast || '—'} · Previous: ${ev.previous || '—'}</div>
+                        </div>
+                    </div>
+                    <div style="font-size:0.85em; color:var(--parchment-dark); margin-bottom:4px;">${ev.description || ''}</div>
+                    ${ev.volatility ? `<div style="font-size:0.8em; color:var(--parchment-dark);">⚡ Volatility: ${ev.volatility}</div>` : ''}
+                    ${ev.avxBias ? `<div style="font-size:0.8em; color:var(--gold); margin-top:4px;">🎯 AVAX: ${ev.avxBias}</div>` : ''}
+                </div>`;
+            });
+
+            html += `<div style="text-align:center; font-family:'Cinzel',serif; font-size:0.5em; color:var(--text-body); margin-top:14px; font-style:italic;">📅 Last updated: ${data.lastUpdated || 'Unknown'}</div>`;
+
+            container.innerHTML = html;
+        }
+
+        function renderMacroFallback(container) {
+            container.innerHTML = `
+                <div class="parchment-card" style="text-align:center;">
+                    <div style="font-size:1.2em; margin-bottom:8px;">📅</div>
+                    <div style="font-family:'Cinzel',serif; font-size:0.55em; font-weight:700; color:var(--text-dark); margin-bottom:6px;">Weather Station</div>
+                    <div style="font-size:0.85em; color:var(--text-body); font-style:italic;">No weather data available. Check back soon!</div>
+                </div>
+            `;
+        }
+
+        // --- Init ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedTab = getSavedTab();
+            switchTab(savedTab);
+            document.querySelectorAll('.settings-option').forEach(o => {
+                o.classList.toggle('selected', o.dataset.tab === savedTab);
+            });
+
+            fetchPositionData();
+            fetchRainbowData();
+            fetchRotationData();
+            fetchMacroEvents();
+
+            setInterval(fetchPositionData, REFRESH_MS);
+            setInterval(fetchRainbowData, 60000);
+        });
+    </script>
+</body>
+</html>

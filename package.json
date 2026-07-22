@@ -1,0 +1,16 @@
+{
+  "name": "gentechlabs-worker",
+  "version": "1.0.0",
+  "description": "GenTech Labs API - x402 pay-per-call endpoints",
+  "main": "src/worker.ts",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "deploy:staging": "wrangler deploy --env staging"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20260626.1",
+    "typescript": "^5.9.3",
+    "wrangler": "^3.114.17"
+  }
+}

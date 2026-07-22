@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Gentech</title>
+<style>
+body{margin:0;padding:0;background:#000;color:#fff;font-family:system-ui,sans-serif;font-size:16px}
+.hdr{background:#111;padding:10px 14px;border-bottom:1px solid #333;display:flex;justify-content:space-between;align-items:center}
+.hdr .logo{color:#00ff88;font-size:18px;font-weight:bold;letter-spacing:2px}
+.hdr .stat{color:#888;font-size:11px}
+.chat{padding:12px;height:50vh;overflow-y:auto}
+.msg{margin:8px 0;padding:10px 14px;border-radius:16px;max-width:85%;font-size:15px;line-height:1.4}
+.user{background:#00ff88;color:#000;margin-left:auto;text-align:right}
+.bot{background:#1a1a2e;border:1px solid #333}
+.status{text-align:center;padding:6px;color:#888;font-size:12px}
+.input{padding:12px;background:#111;border-top:1px solid #333}
+.row{display:flex;gap:10px;align-items:center}
+input[type=text]{flex:1;padding:14px;border-radius:24px;border:1px solid #333;background:#000;color:#fff;font-size:16px;outline:none}
+input:focus{border-color:#00ff88}
+.send{padding:14px 24px;border-radius:24px;border:none;background:#00ff88;color:#000;font-size:16px;font-weight:bold;cursor:pointer}
+.mic{width:60px;height:60px;border-radius:50%;border:2px solid #00ff88;background:transparent;color:#00ff88;font-size:24px;cursor:pointer}
+.mic.recording{background:#ff4466;border-color:#ff4466;color:#fff}
+</style>
+</head>
+<body>
+<div class="hdr">
+  <div class="logo">GENTECH</div>
+  <div class="stat" id="status">Connecting...</div>
+</div>
+<div class="chat" id="chat">
+  <div class="msg bot">⚡ Type a message below to chat with Gentech.</div>
+</div>
+<div class="status" id="thinking" style="display:none">⏳ Thinking...</div>
+<div class="input">
+  <div class="row">
+    <input type="text" id="msg" placeholder="Type your message...">
+    <button class="send" onclick="sendMsg()">Send</button>
+  </div>
+</div>
+
+<script>
+var API='https://converted-masters-cornell-isa.trycloudflare.com';
+var token='';
+var isRecording=false;
+var recognition=null;
+var transcript='';
+
+// Initialize session
+fetch(API+'/api/session',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({label:'rayban'})})
+.then(function(r){return r.json()})
+.then(function(d){
+  token=d.token;
+  document.getElementById('status').textContent='Connected';
+  if(d.greeting) addMsg(d.greeting,'bot');
+})
+.catch(function(){document.getElementById('status').textContent='Offline'});
+
+function addMsg(text,type){
+  var div=document.createElement('div');
+  div.className='msg '+type;
+  div.textContent=text;
+  document.getElementById('chat').appendChild(div);
+  document.getElementById('chat').scrollTop=99999;
+}
+
+function sendMsg(){
+  var input=document.getElementById('msg');
+  var text=input.value.trim();
+  if(!text) return;
+  input.value='';
+  addMsg(text,'user');
+  document.getElementById('thinking').style.display='block';
+  
+  fetch(API+'/api/chat',{
+    method:'POST',
+    headers:{'Content-Type':'application/json','Authorization':'Bearer '+token},
+    body:JSON.stringify({message:text})
+  })
+  .then(function(r){return r.json()})
+  .then(function(d){
+    document.getElementById('thinking').style.display='none';
+    addMsg(d.response||'(no response)','bot');
+  })
+  .catch(function(){
+    document.getElementById('thinking').style.display='none';
+    addMsg('Connection error','bot');
+  });
+}
+
+// Handle Enter key
+document.getElementById('msg').addEventListener('keypress',function(e){
+  if(e.key==='Enter') sendMsg();
+});
+
+// Voice recognition
+if('webkitSpeechRecognition' in window || 'SpeechRecognition' in window){
+  var SpeechRecognition=window.SpeechRecognition||window.webkitSpeechRecognition;
+  recognition=new SpeechRecognition();
+  recognition.continuous=true;
+  recognition.interimResults=true;
+  recognition.lang='en-US';
+  
+  recognition.onresult=function(event){
+    var interim='';
+    for(var i=event.resultIndex;i<event.results.length;i++){
+      if(event.results[i].isFinal){
+        transcript+=event.results[i][0].transcript;
+      }else{
+        interim+=event.results[i][0].transcript;
+      }
+    }
+    document.getElementById('msg').value=(transcript+interim).trim();
+  };
+  
+  recognition.onend=function(){
+    isRecording=false;
+    document.querySelector('.mic').classList.remove('recording');
+    document.querySelector('.mic').textContent='🎤';
+    if(transcript.trim()) sendMsg();
+    transcript='';
+  };
+}
+
+function toggleMic(){
+  if(!recognition){
+    alert('Voice not supported');
+    return;
+  }
+  if(isRecording){
+    recognition.stop();
+  }else{
+    isRecording=true;
+    transcript='';
+    document.getElementById('msg').value='';
+    document.querySelector('.mic').classList.add('recording');
+    document.querySelector('.mic').textContent='⏹';
+    recognition.start();
+  }
+}
+</script>
+</body>
+</html>

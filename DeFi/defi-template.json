@@ -1,0 +1,295 @@
+{
+  "meta": {
+    "title": "GENTECH DASHBOARD",
+    "subtitle": "AAE DeFi \u2014 Yield Farming Command Center",
+    "dataUrl": "defi-data.json",
+    "refreshMs": 0,
+    "version": "v2.0",
+    "brand": "GENTECH DASHBOARD",
+    "badge": "AAE DeFi"
+  },
+  "theme": {
+    "mode": "dark",
+    "colors": {
+      "--bg": "#0d0d0d",
+      "--panel-bg": "#1a1a1a",
+      "--panel-border": "#2a2a2a",
+      "--panel-shadow": "rgba(232,65,66,0.08)",
+      "--text": "#e8e8e8",
+      "--text-dim": "#808080",
+      "--gold": "#e84142",
+      "--gold-dim": "#b33233",
+      "--accent": "#c0c0c0",
+      "--danger": "#ff4444",
+      "--success": "#e84142",
+      "--radius": "12px"
+    },
+    "fonts": {
+      "heading": "'Inter', -apple-system, sans-serif",
+      "body": "'Inter', -apple-system, sans-serif"
+    },
+    "container": {
+      "maxWidth": "1100px"
+    }
+  },
+  "tabs": [
+    {
+      "id": "farming",
+      "label": "Farming",
+      "icon": "\ud83c\udf3e",
+      "sections": [
+        "hero-efficiency",
+        "regime-detector",
+        "strategy-comparison",
+        "market-intel",
+        "support-resistance",
+        "strategy-advisor",
+        "lp-curve"
+      ]
+    },
+    {
+      "id": "spot",
+      "label": "Spot",
+      "icon": "\ud83d\udc8e",
+      "sections": [
+        "spot-positions"
+      ]
+    },
+    {
+      "id": "rebalance",
+      "label": "Rebalance",
+      "icon": "\ud83d\udd04",
+      "sections": [
+        "rebalance-suggestions"
+      ]
+    },
+    {
+      "id": "milestones",
+      "label": "Milestones",
+      "icon": "\ud83c\udfc6",
+      "sections": [
+        "fee-milestones",
+        "trajectory"
+      ]
+    },
+    {
+      "id": "activity",
+      "label": "Activity",
+      "icon": "\ud83d\udccb",
+      "sections": [
+        "activity-log",
+        "lp-stats",
+        "transactions"
+      ]
+    },
+    {
+      "id": "scenarios",
+      "label": "Scenarios",
+      "icon": "\ud83c\udfaf",
+      "sections": [
+        "market-scenarios",
+        "il-calculator"
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "id": "hero-efficiency",
+      "title": null,
+      "type": "custom",
+      "dataSource": "hero",
+      "customRender": "heroEfficiency"
+    },
+    {
+      "id": "regime-detector",
+      "title": "Autonomous Regime",
+      "icon": "\ud83e\udd16",
+      "type": "custom",
+      "dataSource": "regime",
+      "customRender": "regimeDetector"
+    },
+    {
+      "id": "strategy-comparison",
+      "title": "Performance vs Alternatives",
+      "icon": "\ud83d\udcca",
+      "type": "custom",
+      "dataSource": "strategyComparison",
+      "customRender": "strategyComparison"
+    },
+    {
+      "title": "\ud83c\udf08 Yield Rainbow Spectrum",
+      "customRender": "yieldSpectrum",
+      "dataSource": "yieldSpectrum"
+    },
+    {
+      "id": "market-intel",
+      "title": "AVAX Market Intelligence",
+      "icon": "\ud83d\udce1",
+      "type": "custom",
+      "dataSource": "marketIntel",
+      "customRender": "marketIntel"
+    },
+    {
+      "id": "support-resistance",
+      "title": "Support & Resistance",
+      "icon": "\ud83d\udcca",
+      "type": "custom",
+      "dataSource": "supportResistance",
+      "customRender": "supportResistance"
+    },
+    {
+      "id": "strategy-advisor",
+      "title": "Strategy Advisor",
+      "icon": "\ud83c\udfaf",
+      "type": "custom",
+      "dataSource": "strategyAdvisor",
+      "customRender": "strategyAdvisor"
+    },
+    {
+      "id": "lp-curve",
+      "title": "Liquidity Distribution",
+      "icon": "\ud83d\udd14",
+      "type": "custom",
+      "dataSource": "curveData",
+      "customRender": "lpCurve"
+    },
+    {
+      "id": "fee-milestones",
+      "title": "Fee Income Milestones",
+      "icon": "\ud83c\udfc6",
+      "type": "custom",
+      "dataSource": "feeMilestones",
+      "customRender": "feeMilestones"
+    },
+    {
+      "id": "trajectory",
+      "title": "Trajectory to Next Milestone",
+      "icon": "\ud83d\udcc8",
+      "type": "custom",
+      "dataSource": "feeMilestones",
+      "customRender": "trajectory"
+    },
+    {
+      "id": "spot-positions",
+      "title": "Spot Positions",
+      "icon": "\ud83d\udc8e",
+      "type": "custom",
+      "dataSource": "spotPositions",
+      "customRender": "spotPositions"
+    },
+    {
+      "id": "activity-log",
+      "title": "Activity Log",
+      "icon": "\ud83d\udccb",
+      "type": "custom",
+      "dataSource": "activityLog",
+      "customRender": "activityLog"
+    },
+    {
+      "id": "lp-stats",
+      "title": "Position Details",
+      "icon": "\ud83d\udcb0",
+      "type": "stats",
+      "dataSource": "lpPosition",
+      "cardTemplate": {
+        "fields": [
+          {
+            "key": "pair",
+            "label": "Pair",
+            "format": "text"
+          },
+          {
+            "key": "feeTier",
+            "label": "Fee Tier",
+            "format": "text"
+          },
+          {
+            "key": "shape",
+            "label": "Shape",
+            "format": "text"
+          },
+          {
+            "key": "currentPrice",
+            "label": "Current Price",
+            "format": "text"
+          },
+          {
+            "key": "rangeMin",
+            "label": "Range Min",
+            "format": "text"
+          },
+          {
+            "key": "rangeMax",
+            "label": "Range Max",
+            "format": "text"
+          }
+        ]
+      }
+    },
+    {
+      "id": "rebalance-suggestions",
+      "title": "Rebalance Suggestions",
+      "icon": "\ud83d\udd04",
+      "type": "custom",
+      "dataSource": "rebalanceSuggestions",
+      "customRender": "rebalanceSuggestions"
+    },
+    {
+      "id": "transactions",
+      "title": "Recent Activity",
+      "icon": "\ud83d\udcdc",
+      "type": "table",
+      "dataSource": "transactions",
+      "cardTemplate": {
+        "fields": [
+          {
+            "key": "date",
+            "label": "Date",
+            "format": "date"
+          },
+          {
+            "key": "type",
+            "label": "Type",
+            "format": "badge"
+          },
+          {
+            "key": "token",
+            "label": "Token"
+          },
+          {
+            "key": "amount",
+            "label": "Amount"
+          },
+          {
+            "key": "usd",
+            "label": "USD",
+            "format": "money"
+          },
+          {
+            "key": "status",
+            "label": "Status",
+            "format": "badge"
+          }
+        ]
+      }
+    },
+    {
+      "id": "market-scenarios",
+      "title": "Market Scenarios",
+      "icon": "\ud83c\udfaf",
+      "type": "custom",
+      "dataSource": "marketScenarios",
+      "customRender": "marketScenarios"
+    },
+    {
+      "title": "\ud83d\udd04 Narrative Rotation",
+      "customRender": "narrativeRotation",
+      "dataSource": "narrativeRotation"
+    }
+  ],
+  "footer": {
+    "brand": "GENTECH DASHBOARD",
+    "version": "AAE DeFi v2.0 \u2014 Farming Command Center",
+    "showTimestamp": true
+  }
+}

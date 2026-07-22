@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GenTech — Agent Pass Profile</title>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <style>
+        :root {
+            --bg: #0a0a0f;
+            --panel-bg: #12121a;
+            --panel-border: #1e1e2e;
+            --text: #e4e4e7;
+            --text-dim: #71717a;
+            --gold: #c9a84c;
+            --accent: #3b82f6;
+            --success: #22c55e;
+            --warning: #f59e0b;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Header */
+        .header {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #1a1a2e 0%, #0a0a0f 100%);
+            border-radius: 16px;
+            margin-bottom: 20px;
+        }
+        
+        .avatar {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+        
+        .name {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--gold);
+            margin-bottom: 5px;
+        }
+        
+        .location {
+            color: var(--text-dim);
+            margin-bottom: 10px;
+        }
+        
+        .bio {
+            font-style: italic;
+            color: var(--text-dim);
+        }
+        
+        /* Tabs */
+        .tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+            overflow-x: auto;
+            padding: 4px;
+            background: var(--panel-bg);
+            border-radius: 12px;
+        }
+        
+        .tab {
+            flex: 1;
+            min-width: 80px;
+            padding: 12px 16px;
+            border: none;
+            background: transparent;
+            color: var(--text-dim);
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.2s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .tab:hover {
+            background: rgba(255,255,255,0.05);
+        }
+        
+        .tab.active {
+            background: rgba(201, 168, 76, 0.15);
+            color: var(--gold);
+        }
+        
+        .tab-icon {
+            font-size: 20px;
+        }
+        
+        .tab-label {
+            font-size: 12px;
+        }
+        
+        /* Panels */
+        .panel {
+            display: none;
+            background: var(--panel-bg);
+            border: 1px solid var(--panel-border);
+            border-radius: 12px;
+            padding: 20px;
+        }
+        
+        .panel.active {
+            display: block;
+        }
+        
+        .panel-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        /* Stats */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        
+        .stat-box {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--panel-border);
+            border-radius: 8px;
+            padding: 16px;
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--gold);
+        }
+        
+        .stat-label {
+            font-size: 12px;
+            color: var(--text-dim);
+            margin-top: 4px;
+        }
+        
+        /* Dish Cards */
+        .dish-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--panel-border);
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 12px;
+        }
+        
+        .dish-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        
+        .dish-name {
+            font-weight: 600;
+            font-size: 16px;
+        }
+        
+        .dish-rating {
+            color: var(--gold);
+        }
+        
+        .dish-date {
+            font-size: 12px;
+            color: var(--text-dim);
+        }
+        
+        .dish-feedback {
+            font-style: italic;
+            color: var(--text-dim);
+            margin-top: 8px;
+        }
+        
+        .dish-substitutions {
+            margin-top: 8px;
+            font-size: 13px;
+        }
+        
+        .dish-substitutions span {
+            background: rgba(59, 130, 246, 0.2);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+        
+        /* Flavor Profile */
+        .flavor-bar {
+            margin-bottom: 12px;
+        }
+        
+        .flavor-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 4px;
+            font-size: 14px;
+        }
+        
+        .flavor-track {
+            height: 8px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .flavor-fill {
+            height: 100%;
+            background: var(--gold);
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+        
+        /* Journal Entry */
+        .journal-entry {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--panel-border);
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 12px;
+        }
+        
+        .journal-mood {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+        
+        .journal-text {
+            line-height: 1.6;
+        }
+        
+        .journal-date {
+            font-size: 12px;
+            color: var(--text-dim);
+            margin-top: 8px;
+        }
+        
+        /* Trip Card */
+        .trip-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--panel-border);
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 12px;
+        }
+        
+        .trip-name {
+            font-weight: 600;
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+        
+        .trip-dates {
+            color: var(--text-dim);
+            margin-bottom: 4px;
+        }
+        
+        .trip-vibe {
+            font-style: italic;
+            color: var(--text-dim);
+        }
+        
+        .trip-status {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+            margin-top: 8px;
+        }
+        
+        .trip-status.planning {
+            background: rgba(245, 158, 11, 0.2);
+            color: var(--warning);
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: var(--text-dim);
+            font-size: 12px;
+        }
+        
+        /* Mobile */
+        @media (max-width: 600px) {
+            .tabs {
+                flex-wrap: nowrap;
+            }
+            
+            .tab {
+                min-width: 70px;
+                padding: 10px 12px;
+            }
+            
+            .tab-icon {
+                font-size: 18px;
+            }
+            
+            .tab-label {
+                font-size: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="avatar" id="avatar">🇵🇭</div>
+            <div class="name" id="name">Christel</div>
+            <div class="location" id="location">Manila, Philippines</div>
+            <div class="bio" id="bio">Loves cooking, sharing life, and expressing feelings</div>
+        </div>
+        
+        <!-- Tabs -->
+        <div class="tabs" id="tabs">
+            <!-- Tabs injected by JS -->
+        </div>
+        
+        <!-- Panels -->
+        <div id="panels">
+            <!-- Panels injected by JS -->
+        </div>
+        
+        <!-- Footer -->
+        <div class="footer">
+            Powered by GenTech Agent Pass
+        </div>
+    </div>
+    
+    <script>
+        // Profile data loaded from JSON
+        let profileData = null;
+        let activeTab = null;
+        
+        // Load profile data
+        async function loadProfile(name) {
+            try {
+                const res = await fetch(`${name}.json?v=${Date.now()}`);
+                profileData = await res.json();
+                renderProfile();
+            } catch (error) {
+                console.error('Failed to load profile:', error);
+            }
+        }
+        
+        // Render profile
+        function renderProfile() {
+            // Update header
+            document.getElementById('avatar').textContent = profileData.profile.avatar;
+            document.getElementById('name').textContent = profileData.profile.name;
+            document.getElementById('location').textContent = profileData.profile.location;
+            document.getElementById('bio').textContent = profileData.profile.bio;
+            
+            // Render tabs
+            renderTabs();
+            
+            // Render first enabled panel
+            const firstEnabled = Object.keys(profileData.layers).find(
+                key => profileData.layers[key].enabled
+            );
+            if (firstEnabled) {
+                switchTab(firstEnabled);
+            }
+        }
+        
+        // Render tabs
+        function renderTabs() {
+            const tabsContainer = document.getElementById('tabs');
+            tabsContainer.innerHTML = '';
+            
+            Object.entries(profileData.layers).forEach(([key, layer]) => {
+                if (!layer.enabled) return;
+                
+                const tab = document.createElement('button');
+                tab.className = 'tab';
+                tab.dataset.tab = key;
+                tab.innerHTML = `
+                    <span class="tab-icon">${layer.icon}</span>
+                    <span class="tab-label">${layer.title}</span>
+                `;
+                tab.onclick = () => switchTab(key);
+                tabsContainer.appendChild(tab);
+            });
+        }
+        
+        // Switch tab
+        function switchTab(tabKey) {
+            activeTab = tabKey;
+            
+            // Update tab styles
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.toggle('active', tab.dataset.tab === tabKey);
+            });
+            
+            // Render panel
+            renderPanel(tabKey);
+        }
+        
+        // Render panel
+        function renderPanel(tabKey) {
+            const panelsContainer = document.getElementById('panels');
+            panelsContainer.innerHTML = '';
+            
+            const layer = profileData.layers[tabKey];
+            const panel = document.createElement('div');
+            panel.className = 'panel active';
+            
+            switch (tabKey) {
+                case 'cookbook':
+                    panel.innerHTML = renderCookbook(layer);
+                    break;
+                case 'journal':
+                    panel.innerHTML = renderJournal(layer);
+                    break;
+                case 'travel':
+                    panel.innerHTML = renderTravel(layer);
+                    break;
+                default:
+                    panel.innerHTML = `<p>Layer not implemented yet.</p>`;
+            }
+            
+            panelsContainer.appendChild(panel);
+        }
+        
+        // Render Cookbook
+        function renderCookbook(layer) {
+            let html = `
+                <div class="panel-title">${layer.icon} ${layer.title}</div>
+                <div class="stats-grid">
+                    <div class="stat-box">
+                        <div class="stat-value">${layer.stats.totalDishes}</div>
+                        <div class="stat-label">Dishes</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-value">${layer.stats.favoritesSaved}</div>
+                        <div class="stat-label">Favorites</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-value">${layer.stats.substitutionsLogged}</div>
+                        <div class="stat-label">Substitutions</div>
+                    </div>
+                </div>
+            `;
+            
+            // Flavor Profile
+            if (layer.flavorProfile) {
+                html += `<h3 style="margin-bottom: 16px;">Flavor Profile</h3>`;
+                Object.entries(layer.flavorProfile).forEach(([flavor, value]) => {
+                    html += `
+                        <div class="flavor-bar">
+                            <div class="flavor-label">
+                                <span>${flavor}</span>
+                                <span>${value}%</span>
+                            </div>
+                            <div class="flavor-track">
+                                <div class="flavor-fill" style="width: ${value}%"></div>
+                            </div>
+                        </div>
+                    `;
+                });
+            }
+            
+            // Recent Dishes
+            if (layer.recentDishes && layer.recentDishes.length > 0) {
+                html += `<h3 style="margin: 24px 0 16px;">Recent Dishes</h3>`;
+                layer.recentDishes.forEach(dish => {
+                    html += `
+                        <div class="dish-card">
+                            <div class="dish-header">
+                                <span class="dish-name">${dish.title}</span>
+                                <span class="dish-rating">${'★'.repeat(dish.rating)}${'☆'.repeat(5 - dish.rating)}</span>
+                            </div>
+                            <div class="dish-date">${dish.date}</div>
+                            ${dish.feedback ? `<div class="dish-feedback">"${dish.feedback}"</div>` : ''}
+                            ${dish.substitutions.length > 0 ? `
+                                <div class="dish-substitutions">
+                                    Substitutions: ${dish.substitutions.map(s => `<span>${s}</span>`).join(' ')}
+                                </div>
+                            ` : ''}
+                        </div>
+                    `;
+                });
+            }
+            
+            return html;
+        }
+        
+        // Render Journal
+        function renderJournal(layer) {
+            let html = `
+                <div class="panel-title">${layer.icon} ${layer.title}</div>
+                <div class="stats-grid">
+                    <div class="stat-box">
+                        <div class="stat-value">${layer.stats.totalEntries}</div>
+                        <div class="stat-label">Entries</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-value">${layer.stats.moodTrend}</div>
+                        <div class="stat-label">Mood Trend</div>
+                    </div>
+                </div>
+            `;
+            
+            if (layer.entries && layer.entries.length > 0) {
+                layer.entries.forEach(entry => {
+                    html += `
+                        <div class="journal-entry">
+                            <div class="journal-mood">${entry.mood || '📝'}</div>
+                            <div class="journal-text">${entry.text}</div>
+                            <div class="journal-date">${entry.date}</div>
+                        </div>
+                    `;
+                });
+            } else {
+                html += `
+                    <div style="text-align: center; padding: 40px; color: var(--text-dim);">
+                        <p>No journal entries yet.</p>
+                        <p style="font-size: 14px; margin-top: 8px;">Start sharing your thoughts and feelings.</p>
+                    </div>
+                `;
+            }
+            
+            return html;
+        }
+        
+        // Render Travel
+        function renderTravel(layer) {
+            let html = `
+                <div class="panel-title">${layer.icon} ${layer.title}</div>
+            `;
+            
+            if (layer.trips && layer.trips.length > 0) {
+                layer.trips.forEach(trip => {
+                    html += `
+                        <div class="trip-card">
+                            <div class="trip-name">${trip.name}</div>
+                            <div class="trip-dates">${trip.startDate} → ${trip.endDate}</div>
+                            <div class="trip-location">${trip.location}</div>
+                            <div class="trip-vibe">"${trip.vibe}"</div>
+                            <div class="trip-status planning">${trip.status}</div>
+                        </div>
+                    `;
+                });
+            } else {
+                html += `
+                    <div style="text-align: center; padding: 40px; color: var(--text-dim);">
+                        <p>No trips planned yet.</p>
+                    </div>
+                `;
+            }
+            
+            return html;
+        }
+        
+        // Initialize with profile name from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const profileName = urlParams.get('name') || 'christel';
+        loadProfile(profileName);
+        
+        // Auto-detect layer from conversation
+        function autoDetectLayer(text) {
+            const lower = text.toLowerCase();
+            
+            // Cookbook
+            const cookbookKeywords = ['recipe', 'cooked', 'made', 'ingredients', 'dish', 'meal', 'food'];
+            if (cookbookKeywords.some(k => lower.includes(k))) return 'cookbook';
+            
+            // Journal
+            const journalKeywords = ['feeling', 'today was', 'stressed', 'happy', 'sad', 'grateful'];
+            if (journalKeywords.some(k => lower.includes(k))) return 'journal';
+            
+            // Travel
+            const travelKeywords = ['trip', 'flight', 'hotel', 'vacation', 'travel', 'packing'];
+            if (travelKeywords.some(k => lower.includes(k))) return 'travel';
+            
+            // Gaming
+            const gamingKeywords = ['build', 'character', 'class', 'skills', 'level', 'poe2'];
+            if (gamingKeywords.some(k => lower.includes(k))) return 'gaming';
+            
+            // Finance
+            const financeKeywords = ['portfolio', 'yield', 'staking', 'defi', 'token'];
+            if (financeKeywords.some(k => lower.includes(k))) return 'finance';
+            
+            return null;
+        }
+        
+        // Import memory from text
+        function importFromText(text) {
+            const layer = autoDetectLayer(text);
+            if (!layer) return null;
+            
+            return {
+                layer,
+                content: text,
+                source: 'import',
+                date: new Date().toISOString()
+            };
+        }
+        
+        // Import memory from file
+        async function importFromFile(file) {
+            const text = await file.text();
+            const memories = [];
+            
+            // Split by paragraphs
+            const paragraphs = text.split('\n\n');
+            for (const para of paragraphs) {
+                const detected = importFromText(para);
+                if (detected) memories.push(detected);
+            }
+            
+            return memories;
+        }
+    </script>
+</body>
+</html>

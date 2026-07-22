@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { 
+    width: 1280px; 
+    height: 633px; 
+    background: linear-gradient(135deg, #0a0a12 0%, #1a1a2e 50%, #0d1117 100%);
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  /* Grid pattern overlay */
+  .grid-overlay {
+    position: absolute;
+    inset: 0;
+    background-image: 
+      linear-gradient(rgba(99, 102, 241, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(99, 102, 241, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+  
+  /* Glow effects */
+  .glow-1 {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, transparent 70%);
+    top: -100px;
+    right: -100px;
+    border-radius: 50%;
+  }
+  .glow-2 {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(168, 85, 247, 0.12) 0%, transparent 70%);
+    bottom: -50px;
+    left: -50px;
+    border-radius: 50%;
+  }
+  .glow-3 {
+    position: absolute;
+    width: 250px;
+    height: 250px;
+    background: radial-gradient(circle, rgba(34, 197, 94, 0.1) 0%, transparent 70%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+  }
+  
+  .container {
+    position: relative;
+    z-index: 1;
+    padding: 60px 80px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(99, 102, 241, 0.15);
+    border: 1px solid rgba(99, 102, 241, 0.3);
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    color: #818cf8;
+    width: fit-content;
+    margin-bottom: 24px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  
+  .badge-dot {
+    width: 8px;
+    height: 8px;
+    background: #22c55e;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+  
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+  }
+  
+  h1 {
+    font-size: 56px;
+    font-weight: 700;
+    color: #f8fafc;
+    line-height: 1.1;
+    margin-bottom: 16px;
+    letter-spacing: -1px;
+  }
+  
+  h1 span {
+    background: linear-gradient(135deg, #818cf8, #a855f7, #22c55e);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .subtitle {
+    font-size: 22px;
+    color: #94a3b8;
+    margin-bottom: 40px;
+    max-width: 600px;
+    line-height: 1.4;
+  }
+  
+  .pillars {
+    display: flex;
+    gap: 24px;
+  }
+  
+  .pillar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 16px 24px;
+    border-radius: 12px;
+    min-width: 200px;
+  }
+  
+  .pillar-icon {
+    font-size: 28px;
+  }
+  
+  .pillar-text {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .pillar-label {
+    font-size: 11px;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  
+  .pillar-value {
+    font-size: 16px;
+    color: #e2e8f0;
+    font-weight: 600;
+  }
+  
+  .bottom-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #818cf8, #a855f7, #22c55e, #f59e0b);
+  }
+  
+  .corner-logo {
+    position: absolute;
+    top: 40px;
+    right: 60px;
+    font-size: 48px;
+    opacity: 0.8;
+  }
+  
+  .version {
+    position: absolute;
+    bottom: 24px;
+    right: 60px;
+    font-size: 12px;
+    color: #475569;
+    letter-spacing: 1px;
+  }
+</style>
+</head>
+<body>
+  <div class="grid-overlay"></div>
+  <div class="glow-1"></div>
+  <div class="glow-2"></div>
+  <div class="glow-3"></div>
+  
+  <div class="corner-logo">⚡</div>
+  
+  <div class="container">
+    <div class="badge">
+      <div class="badge-dot"></div>
+      Agent Economy Infrastructure
+    </div>
+    
+    <h1>GenTech <span>Agent Kit</span></h1>
+    
+    <div class="subtitle">
+      Identity. Execution. Audit. The modular stack for AI agents in the decentralized economy.
+    </div>
+    
+    <div class="pillars">
+      <div class="pillar">
+        <div class="pillar-icon">🔐</div>
+        <div class="pillar-text">
+          <div class="pillar-label">Identity</div>
+          <div class="pillar-value">ERC-8004</div>
+        </div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon">⚡</div>
+        <div class="pillar-text">
+          <div class="pillar-label">Payments</div>
+          <div class="pillar-value">x402 + Circle</div>
+        </div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon">📊</div>
+        <div class="pillar-text">
+          <div class="pillar-label">Audit</div>
+          <div class="pillar-value">On-Chain Logs</div>
+        </div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon">🤖</div>
+        <div class="pillar-text">
+          <div class="pillar-label">Agents</div>
+          <div class="pillar-value">Autonomous</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="bottom-bar"></div>
+  <div class="version">v1.0 — GEN TECH LABS</div>
+</body>
+</html>

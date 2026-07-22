@@ -1,0 +1,27 @@
+name = "gentechlabs-api"
+compatibility_date = "2024-01-01"
+account_id = "a618b777aff85c5360bd847629385b4d"
+main = "src/worker.ts"
+
+[vars]
+ENVIRONMENT = "production"
+VPS_IP = "2.24.195.196"
+VPS_PORT = "80"
+
+# Routes for API domains
+# Custom domains for API routing
+[[routes]]
+pattern = "https://deals.gentechlabs.net/*"
+zone_name = "gentechlabs.net"
+
+[[routes]]
+pattern = "https://api.gentechlabs.net/*"
+zone_name = "gentechlabs.net"
+
+[[routes]]
+pattern = "https://gentechlabs.net/api/*"
+zone_name = "gentechlabs.net"
+
+[[routes]]
+pattern = "https://gentechlabs.net/v1/*"
+zone_name = "gentechlabs.net"
