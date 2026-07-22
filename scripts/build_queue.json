@@ -1,12 +1,12 @@
 {
   "version": 10,
   "summary": {
-    "total": 34,
-    "shipped": 11,
+    "total": 37,
+    "shipped": 12,
     "in_progress": 1,
-    "pending": 22,
+    "pending": 25,
     "blocked": 11,
-    "needs_jordan": 19
+    "needs_jordan": 25
   },
   "items": [
     {
@@ -373,19 +373,6 @@
       "assigned_to": "jordan"
     },
     {
-      "id": 57,
-      "effort": "Medium",
-      "status": "pending",
-      "priority": "high",
-      "reason": "Cosmos-based DeFi chain with EVM compatibility. iAgent is Python-based and agent-focused — natural fit for x402. 181 repos in ecosystem. Big distribution play.",
-      "difficulty": "medium",
-      "platform": "either",
-      "name": "Injective Labs — iAgent x402 Payment Integration",
-      "detail": "Add x402 payment support to Injective's iAgent (50⭐, Python, AI agent fine-tuned on Injective trading). Pattern: same as GOAT AgentKit compliance plugin. Injective is now an x402 Foundation member — contributing here builds credibility with the Foundation directly. Research complete at 10-Labs/injective-iagent-x402-research.md.",
-      "needs_jordan": false,
-      "note": "RESEARCHED Jul 23: Injective joined x402 Foundation Jul 16, 2026. x402 live on Injective mainnet (650ms blocks, $0.0001/tx). iAgent repo (50⭐, Python, Quart server) has architecture ready for x402 middleware. Research doc at 10-Labs/injective-iagent-x402-research.md. Next: fork iAgent, add x402 payment middleware, submit PR."
-    },
-    {
       "id": 58,
       "name": "Animate $TREASURY Token Image — Shining Gold Vault",
       "difficulty": "easy",
@@ -395,6 +382,72 @@
       "platform": "desktop",
       "needs_jordan": false,
       "detail": "Animate the $TREASURY token image (gold vault door with G logo, dark navy background, gold light rays). Make the gold shine/glow animate around the vault door — rotating light rays, pulsing glow on the G logo, subtle shimmer on the vault surface. Output as a short looping MP4 or GIF for social media and token page use. Source image: https://v3b.fal.media/files/b/0aa334a4/CrD_V2-V1iUoc3EUGlDJQ_nc4Kou0V.png"
+    },
+    {
+      "id": 59,
+      "name": "GenTech Receipts — x402 Spending Tracker Dashboard",
+      "difficulty": "medium",
+      "priority": "high",
+      "status": "pending",
+      "assigned_to": "forge",
+      "platform": "desktop",
+      "needs_jordan": false,
+      "detail": "Build a dashboard that aggregates all x402 payments across every service. Shows monthly spend ($2.37 across 1,240 calls), breakdown by endpoint/agent/day, optional budget alerts. Mint.com for agent spending. Free feature of the Treasury. Can also be a subscription add-on for humans."
+    },
+    {
+      "id": 60,
+      "name": "Monid Social Intelligence — AAE Layer Integration",
+      "difficulty": "medium",
+      "priority": "high",
+      "status": "pending",
+      "assigned_to": "forge",
+      "platform": "desktop",
+      "needs_jordan": false,
+      "detail": "Wire Monid social data API into the AAE project as a new layer. Social intelligence for narrative rotation, trend detection, and brand monitoring. Premium subscription add-on for humans ($X/mo) or pay-per-call via x402 for agents. Covers X, Reddit, LinkedIn, TikTok, Instagram. $1 free credit to start."
+    },
+    {
+      "id": 61,
+      "name": "GenTech Starter Template — Hermes Distribution Package",
+      "difficulty": "hard",
+      "priority": "high",
+      "status": "pending",
+      "assigned_to": "forge",
+      "platform": "desktop",
+      "needs_jordan": false,
+      "detail": "Package GenTech Labs as a distributable Hermes starter template. Uses Hermes Skills Hub (hermes skills browse/install), external skill directories, and skill bundles. Includes: pre-configured skills, vault structure, cron jobs, handoff pipeline, API keys setup script, documentation. Let Vanito, Dave, or anyone run their own GenTech with one command. Research Hermes distribution system first — hermes skills browse, hermes skills search, external_dirs config, skill bundles."
+    },
+    {
+      "id": 62,
+      "name": "Multi-Wallet Treasury Manager — AI-Powered Wallet Backup",
+      "difficulty": "hard",
+      "priority": "medium",
+      "status": "pending",
+      "assigned_to": "forge",
+      "platform": "desktop",
+      "needs_jordan": false,
+      "detail": "The Agentic Treasury should manage multiple wallets, not just one. AI-powered wallet backup system — if you lose a MetaMask password, the treasury helps recover. Track all wallets, their balances, airdrop farming positions, and cross-wallet activity. One dashboard to see everything. Inspired by Jordan's vision: 'a treasury should manage multiple wallets that you have.'"
+    },
+    {
+      "id": 63,
+      "name": "x402 Global Challenge — Algorand $100K + 500K ALGO",
+      "difficulty": "medium",
+      "priority": "urgent",
+      "status": "pending",
+      "assigned_to": "forge",
+      "platform": "desktop",
+      "needs_jordan": false,
+      "detail": "The Agentic Treasury should manage multiple wallets, not just one. AI-powered wallet backup system — if you lose a MetaMask password, the treasury helps recover. Track all wallets, their balances, airdrop farming positions, and cross-wallet activity. One dashboard to see everything. Inspired by Jordan's vision: 'a treasury should manage multiple wallets that you have.'"
+    },
+    {
+      "id": 64,
+      "name": "Virtuals ACP — Register GenTech as Agent Provider",
+      "difficulty": "easy",
+      "priority": "urgent",
+      "status": "pending",
+      "assigned_to": "jordan",
+      "platform": "jordan",
+      "needs_jordan": true,
+      "detail": "Register GenTech Labs on Virtuals Protocol's Agent Commerce Protocol (ACP). 45K+ agents, 1.48M jobs, $2.27M revenue. ACP uses x402 for payments — our gateway is a natural fit. Go to app.virtuals.io/acp/new, connect wallet, create agent identity. Then list our x402 gateway as an ACP offering so other agents can discover and hire us. Also explore: listing $TREASURY in their capital markets layer."
     }
   ],
   "consolidation_notes": [
@@ -414,7 +467,8 @@
     "#1 Subscription Hub — SHIPPED: Q402 /pay URLs wired into subscribe.html on VPS",
     "#11 Bankr $TREASURY — REMOVED from items[] (was already shipped Jul 22)",
     "Removed shipped items from Forge Jul 21 session: #1, #8, #16, #24, #27, #38, #47",
-    "Normalized field names for #57, #59 (effort→difficulty, title→name, description→detail, requires_jordan→needs_jordan)"
+    "Normalized field names for #57, #59 (effort→difficulty, title→name, description→detail, requires_jordan→needs_jordan)",
+    "Removed shipped item #57 — Injective iAgent x402 Integration. Code pushed to github.com/ProtoJay4789/iagent-x402. 15/15 tests pass."
   ],
   "agents": {
     "gentech": {
@@ -431,5 +485,5 @@
     }
   },
   "note": "Pruned 7 items. Total: 43 -> 36",
-  "updated": "2026-07-23 04:00 UTC"
+  "updated": "2026-07-22 12:50 UTC"
 }
