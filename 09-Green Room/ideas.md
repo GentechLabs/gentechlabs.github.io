@@ -1,7 +1,7 @@
 # 🧠 Green Room — Ideas to Build
 
 > Build first, talk later. Promoted from `11-Mess Hall/ideas.md`.
-> Updated: 2026-07-16
+> Updated: 2026-07-22
 
 ---
 
