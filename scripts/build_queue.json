@@ -2,24 +2,13 @@
   "version": 10,
   "summary": {
     "total": 40,
-    "shipped": 1,
+    "shipped": 5,
     "in_progress": 2,
-    "pending": 26,
-    "blocked": 12,
-    "needs_jordan": 21
+    "pending": 27,
+    "blocked": 11,
+    "needs_jordan": 19
   },
   "items": [
-    {
-      "id": 1,
-      "name": "Deploy Subscription Hub to gentechlabs.net",
-      "difficulty": "easy",
-      "priority": "high",
-      "status": "pending",
-      "assigned_to": "gentech",
-      "platform": "cloud",
-      "needs_jordan": false,
-      "detail": "subscribe.html deployed at gentechlabs.net/subscription-hub.html. Q402 payment requests created: $3 (req_841bd549a0920b91edbae2cb), $10 (req_e417bf8b23f7785d88e25b74), $25 (req_e553c004e96280154443362d). Wire /pay URLs into subscribe.html on VPS."
-    },
     {
       "id": 3,
       "name": "Sell APIs to AI Agents — Phase 2: Deploy & List",
@@ -99,17 +88,6 @@
       "needs_jordan": false,
       "detail": "Add x402/payment security YARA rules. Catch hardcoded keys, unsafe payTo manipulation. Use + Contribute + Integrate.",
       "note": "Researched Jul 20: SkillSpector 2.3.13 (13.4k stars). 68 vulnerability patterns across 17 categories. YARA rules are packaged internally — the repo uses YARA as one of many analyzers. x402/payment security YARA rules would be a meaningful contribution. Needs: (1) clone repo, (2) study existing YARA rule format, (3) write rules for hardcoded API keys, unsafe payTo manipulation, x402 proof forgery. Deferred — medium effort, low urgency.",
-      "platform": "either"
-    },
-    {
-      "id": 11,
-      "name": "Bankr $TREASURY Token Launch",
-      "difficulty": "easy",
-      "priority": "high",
-      "status": "shipped",
-      "assigned_to": "jordan",
-      "needs_jordan": false,
-      "detail": "SHIPPED Jul 22. $TREASURY live on Robinhood Chain. Contract: 0x56D03C0f4167cC2c26B781dE47E608d660F13ba3. 100B supply, 85% LP, 15% creator vesting. Image: gold vault door with G logo. Website: gentechlabs.net. Ready to tell Victus Global.",
       "platform": "either"
     },
     {
@@ -495,7 +473,11 @@
     "#51 Chain PR Blitz: awesome-ai-agents-2026 PR #443 already submitted (OPEN). Updated queue notes.",
     "#33 Pipecat: x402 processor prototype in progress (Jul 19).",
     "#34 GenTech Academy: Course outline drafted.",
-    "#33 Pipecat x402 processor SHIPPED to github.com/ProtoJay4789/pipecat-x402-processor. Removed from queue in next consolidation."
+    "#33 Pipecat x402 processor SHIPPED to github.com/ProtoJay4789/pipecat-x402-processor. Removed from queue in next consolidation.",
+    "#1 Subscription Hub — SHIPPED: Q402 /pay URLs wired into subscribe.html on VPS",
+    "#11 Bankr $TREASURY — REMOVED from items[] (was already shipped Jul 22)",
+    "#1 Subscription Hub — SHIPPED: Q402 /pay URLs wired into subscribe.html on VPS",
+    "#11 Bankr $TREASURY — REMOVED from items[] (was already shipped Jul 22)"
   ],
   "agents": {
     "gentech": {
@@ -512,5 +494,5 @@
     }
   },
   "note": "Pruned 7 items. Total: 43 -> 36",
-  "updated": "2026-07-22 04:00 UTC"
+  "updated": "2026-07-22 04:06 UTC"
 }
