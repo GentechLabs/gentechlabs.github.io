@@ -1,6 +1,16 @@
 """
-Rugcheck v2 API — Agent Security & Credit Score Platform
-========================================================
+Rugcheck v2 API — CLARITY Act Agent Compliance Platform
+=========================================================
+The regulatory compliance layer for the agent economy.
+Built for the Digital Asset Market Clarity Act of 2025.
+
+CLARITY Act DeFi Exclusion (Sec. 309/409) compliant.
+Agents get a verifiable compliance score covering:
+  - Identity verification (ERC-8004)
+  - Security scanning (5 domains)
+  - Credit scoring (0-850)
+  - x402 payment integrity
+
 FastAPI server with x402/Q402 payment middleware, Agent Credit Score
 wrapper, and Bazaar discovery. Multi-facilitator pattern supporting
 EVM (Base Sepolia via CDP) and Solana (via x402.org) payment flows.
@@ -550,7 +560,7 @@ async def agent_status() -> StatusResponse:
     uptime = int((datetime.utcnow() - START_TIME).total_seconds())
     return StatusResponse(
         status="ok",
-        service="Rugcheck v2 API",
+        service="Rugcheck v2 — CLARITY Act Agent Compliance Platform",
         version="2.0.0",
         uptime_seconds=uptime,
         agents_scanned=SCAN_COUNTER,

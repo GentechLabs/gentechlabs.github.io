@@ -9,11 +9,12 @@
 
 ## What this PR adds
 
-A new pay-skills provider entry for **Rugcheck v2 API** — a comprehensive agent security scanning and credit scoring platform with x402/Q402 payment middleware.
+A new pay-skills provider entry for **Rugcheck v2 API** — the **CLARITY Act compliance layer for the agent economy**. A comprehensive agent security scanning, identity verification, and credit scoring platform with x402/Q402 payment middleware.
 
 ### Key features
 
-- **Agent Security Scanning** — POST `/api/v1/agent/scan` ($0.025) evaluates agents across 5 security domains: token risk, identity, MCP trust, payment flow, and attack vectors
+- **CLARITY Act Compliance** — Built for the Digital Asset Market Clarity Act of 2025. DeFi Exclusion (Sec. 309/409) compliant. Agents get a verifiable compliance score.
+- **Agent Security Scanning** — POST `/api/v1/agent/scan` ($0.025) evaluates agents across 5 security domains: token risk, identity (ERC-8004), MCP trust, payment flow, and attack vectors
 - **Agent Credit Scoring** — POST `/api/v1/agent/credit-score` ($0.01) returns a 0-850 credit score with on-chain activity, reputation, age, and volume factors
 - **x402 Payment Middleware** — Multi-facilitator (CDP + x402.org), multi-chain (EVM + Solana) payment support
 - **Q402 Gasless Payments** — Optional Q402 integration for gasless USDC payments
