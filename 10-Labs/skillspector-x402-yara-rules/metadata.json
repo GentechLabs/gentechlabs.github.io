@@ -1,0 +1,33 @@
+{
+  "name": "x402-payment-security-yara-rules",
+  "version": "1.0.0",
+  "description": "YARA rules for detecting x402 payment protocol security vulnerabilities in AI agent skills",
+  "author": "10-Labs",
+  "license": "Apache-2.0",
+  "skillspector_min_version": "2.3.0",
+  "rules_count": 26,
+  "categories": [
+    "payment_replay_idempotency",
+    "settlement_bypass",
+    "cache_leakage_header_confusion",
+    "payment_injection_prompt_manipulation",
+    "facilitator_discovery_manipulation",
+    "resource_binding_authorization",
+    "protocol_implementation_flaws",
+    "wallet_key_exposure",
+    "economic_dos_budget_exhaustion",
+    "cross_sdk_encoding_drift"
+  ],
+  "references": [
+    "arXiv:2605.11781",
+    "https://x402.org/",
+    "https://docs.cdp.coinbase.com/x402/welcome",
+    "https://www.halborn.com/blog/post/x402-explained-security-risks-and-controls-for-http-402-micropayments",
+    "https://agentlisa.ai/x402/position-paper"
+  ],
+  "severity_distribution": {
+    "CRITICAL": 6,
+    "HIGH": 10,
+    "MEDIUM": 10
+  }
+}
