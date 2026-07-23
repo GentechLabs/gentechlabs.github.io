@@ -47,15 +47,19 @@ Items you can work on independently — no Jordan needed.
 3. The next build queue tick will auto-mark them as shipped
 
 ### Completion report format
-When you finish something, write to `01-HANDOFFS/forge-completions.md`:
+Write to `01-HANDOFFS/forge-completions.md` **as each item finishes** — don't batch them up.
+
 ```markdown
 # Forge Completions — 2026-07-23
-## Shipped
+## Just shipped
 - #59 GenTech Receipts
-- #62 Multi-Wallet Treasury
-## Notes
-- Hit a blocker on #65, need Q402 docs
+## Still working
+- #62 Multi-Wallet Treasury — 60% done
+## Blocked
+- #65 OpenClaw Skill — need Q402 docs
 ```
+
+**Rule:** Ship → Report → Next item. Don't wait until everything's done.
 
 ---
 
