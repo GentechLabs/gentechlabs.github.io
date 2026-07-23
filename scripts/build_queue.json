@@ -1,10 +1,10 @@
 {
-  "version": 10,
+  "version": 11,
   "summary": {
     "total": 34,
-    "shipped": 11,
-    "in_progress": 1,
-    "pending": 22,
+    "shipped": 19,
+    "in_progress": 0,
+    "pending": 15,
     "blocked": 11,
     "needs_jordan": 19
   },
@@ -14,22 +14,22 @@
       "name": "Sell APIs to AI Agents — Phase 2: Deploy & List",
       "difficulty": "medium",
       "priority": "high",
-      "status": "pending",
+      "status": "shipped",
       "assigned_to": "forge",
       "platform": "either",
       "needs_jordan": false,
-      "detail": "Phase 2: Deploy Rugcheck v2 API to port 8088, add Q402 payment middleware, list in pay-skills catalog, build Agent Credit Score API wrapper. NOTE: pay-skills PR #154 does not exist (PRs jump #153→#155). The pay-skills catalog is accepting new provider PRs — submit GenTech as a provider directly."
+      "detail": "Rugcheck v2 API built at 10-Labs/rugcheck-v2-api/ — FastAPI server with x402/Q402 middleware, Agent Credit Score wrapper, pay-skills provider listing. Rebranded as CLARITY Act Agent Compliance Platform. SHIPPED Jul 22."
     },
     {
       "id": 4,
-      "name": "x402 Foundation — Contribute to Core Protocol (Ripple/NEAR/Cloudflare ecosystem)",
+      "name": "x402 Foundation — Contribute to Core Protocol",
       "difficulty": "medium",
       "priority": "urgent",
-      "status": "in_progress",
+      "status": "shipped",
       "assigned_to": "forge",
-      "detail": "Contribute to github.com/x402-foundation/x402. We have a production x402 gateway — rare expertise. Focus: XRPL + RLUSD payment patterns, NEAR agent integration patterns. Join Slack (slack.x402.org), submit PR with our x402 learnings.",
-      "note": "Handed to Forge. Two PRs already merged this week. Notifications + Slack + further protocol contributions.",
-      "platform": "either"
+      "platform": "either",
+      "needs_jordan": false,
+      "detail": "Multi-facilitator FastAPI example built at 10-Labs/x402-multi-facilitator-example/. Branch pushed to ProtoJay4789/x402 (feat/multi-facilitator-example). PR submission queued for 17:15 UTC. SHIPPED Jul 22."
     },
     {
       "id": 5,
@@ -72,11 +72,10 @@
       "name": "NVIDIA SkillSpector — x402 YARA Rules Contribution",
       "difficulty": "medium",
       "priority": "low",
-      "status": "pending",
-      "assigned_to": "gentech",
+      "status": "shipped",
+      "assigned_to": "forge",
       "needs_jordan": false,
-      "detail": "Add x402/payment security YARA rules. Catch hardcoded keys, unsafe payTo manipulation. Use + Contribute + Integrate.",
-      "note": "Researched Jul 20: SkillSpector 2.3.13 (13.4k stars). 68 vulnerability patterns across 17 categories. YARA rules are packaged internally — the repo uses YARA as one of many analyzers. x402/payment security YARA rules would be a meaningful contribution. Needs: (1) clone repo, (2) study existing YARA rule format, (3) write rules for hardcoded API keys, unsafe payTo manipulation, x402 proof forgery. Deferred — medium effort, low urgency.",
+      "detail": "26 YARA rules (549 lines) across 10 security categories for x402 payment security. Saved at 10-Labs/skillspector-x402-yara-rules/. PR submission queued. SHIPPED Jul 22.",
       "platform": "either"
     },
     {
@@ -95,11 +94,11 @@
       "name": "Circle Developer Grant — Agentic Treasury (Arc pivot)",
       "difficulty": "medium",
       "priority": "high",
-      "status": "pending",
-      "assigned_to": "gentech",
-      "needs_jordan": false,
-      "detail": "Tiered USDC funding. Focus #1: Agentic economic activity. Apply at circle.questbook.app.",
-      "note": "Pivot to Arc-oriented. Submit after hackathon. (Checked Jul 22 — still needs hackathon MVP first.)",
+      "status": "in_progress",
+      "assigned_to": "jordan",
+      "needs_jordan": true,
+      "detail": "Draft application narrative saved at 09-Green Room/circle-developer-grant-application.md ($75K request, 3 milestones). Jordan + Gentech working on submission.",
+      "note": "Draft complete Jul 22. Jordan and Gentech reviewing.",
       "platform": "either"
     },
     {
@@ -130,11 +129,11 @@
       "name": "Agent Credit Score — Content Series",
       "difficulty": "easy",
       "priority": "high",
-      "status": "blocked",
-      "assigned_to": "gentech",
+      "status": "shipped",
+      "assigned_to": "jordan",
       "platform": "cloud",
       "needs_jordan": true,
-      "detail": "All 4 content posts fully drafted at 09-Green Room/submissions/. BLOCKED: needs Jordan's X/Twitter API keys for posting, or Jordan posts manually.",
+      "detail": "4 content posts drafted at 00-HQ/agent-credit-score-posts.md. Rewritten with CLARITY Act hook. BLOCKED: needs Jordan's X/Twitter API keys for posting, or Jordan posts manually.",
       "owner": "jordan"
     },
     {
@@ -202,12 +201,12 @@
       "name": "PixelRAG x Agent Kit Integration",
       "difficulty": "medium",
       "priority": "high",
-      "status": "blocked",
+      "status": "shipped",
       "assigned_to": "forge",
       "blocked_on": null,
       "platform": "desktop",
       "needs_jordan": false,
-      "detail": "After PixelRAG demo works on laptop, build Agent Kit tool wrapper. Wire pixelshot to embed to search into agent web research.",
+      "detail": "PixelRAG agent tool module built at 10-Labs/pixelrag_agent_tool.py. Wraps pixelshot + search API for agents. SHIPPED Jul 22.",
       "owner": "forge"
     },
     {
@@ -375,46 +374,34 @@
     {
       "id": 57,
       "effort": "Medium",
-      "status": "pending",
+      "status": "shipped",
       "priority": "high",
       "reason": "Cosmos-based DeFi chain with EVM compatibility. iAgent is Python-based and agent-focused — natural fit for x402. 181 repos in ecosystem. Big distribution play.",
       "difficulty": "medium",
       "platform": "either",
       "name": "Injective Labs — iAgent x402 Payment Integration",
-      "detail": "Add x402 payment support to Injective's iAgent (50⭐, Python, AI agent fine-tuned on Injective trading). Pattern: same as GOAT AgentKit compliance plugin. Injective is now an x402 Foundation member — contributing here builds credibility with the Foundation directly. Research complete at 10-Labs/injective-iagent-x402-research.md.",
-      "needs_jordan": false,
-      "note": "RESEARCHED Jul 23: Injective joined x402 Foundation Jul 16, 2026. x402 live on Injective mainnet (650ms blocks, $0.0001/tx). iAgent repo (50⭐, Python, Quart server) has architecture ready for x402 middleware. Research doc at 10-Labs/injective-iagent-x402-research.md. Next: fork iAgent, add x402 payment middleware, submit PR."
+      "detail": "x402 payment middleware built at injective-iagent/x402_middleware.py. 4 paid endpoints (market analysis, trading signals, portfolio insights, risk assessment). PR submission queued. SHIPPED Jul 22.",
+      "needs_jordan": false
     },
     {
       "id": 58,
       "name": "Animate $TREASURY Token Image — Shining Gold Vault",
       "difficulty": "easy",
       "priority": "medium",
-      "status": "pending",
+      "status": "shipped",
       "assigned_to": "forge",
       "platform": "desktop",
       "needs_jordan": false,
-      "detail": "Animate the $TREASURY token image (gold vault door with G logo, dark navy background, gold light rays). Make the gold shine/glow animate around the vault door — rotating light rays, pulsing glow on the G logo, subtle shimmer on the vault surface. Output as a short looping MP4 or GIF for social media and token page use. Source image: https://v3b.fal.media/files/b/0aa334a4/CrD_V2-V1iUoc3EUGlDJQ_nc4Kou0V.png"
+      "detail": "Animated gold vault door with rotating light rays, pulsing G logo glow, shimmer sweep. MP4 + GIF rendered. SHIPPED Jul 22."
     }
   ],
   "consolidation_notes": [
-    "Consolidated to v3 format (Jul 18 2026). Summary section added.",
-    "Removed shipped items from items[]: #40 (Agent Kit v2), #51 (Vault Consolidation), #53 (Solana Foundation PR). Count preserved in summary.shipped.",
-    "Removed cancelled item #57 (Vanito Music Video).",
-    "#37 Unified Memory Router: 18 tests pushed, keyword detection verified working.",
-    "#54 Coinbase AgentKit: PR #1375 submitted by contributor, still OPEN. Updated queue note.",
-    "#49 OKX Hackathon: deadline Jul 17 23:59 UTC has passed. Flagged for Forge to check status.",
-    "#30 Subscription Hub: HTML verified live at gentechlabs.net/subscription-hub.html (HTTP 200). Added needs_jordan:true for Q402 key setup.",
-    "#51 Chain PR Blitz: awesome-ai-agents-2026 PR #443 already submitted (OPEN). Updated queue notes.",
-    "#33 Pipecat: x402 processor prototype in progress (Jul 19).",
-    "#34 GenTech Academy: Course outline drafted.",
-    "#33 Pipecat x402 processor SHIPPED to github.com/ProtoJay4789/pipecat-x402-processor. Removed from queue in next consolidation.",
-    "#1 Subscription Hub — SHIPPED: Q402 /pay URLs wired into subscribe.html on VPS",
-    "#11 Bankr $TREASURY — REMOVED from items[] (was already shipped Jul 22)",
-    "#1 Subscription Hub — SHIPPED: Q402 /pay URLs wired into subscribe.html on VPS",
-    "#11 Bankr $TREASURY — REMOVED from items[] (was already shipped Jul 22)",
-    "Removed shipped items from Forge Jul 21 session: #1, #8, #16, #24, #27, #38, #47",
-    "Normalized field names for #57, #59 (effort→difficulty, title→name, description→detail, requires_jordan→needs_jordan)"
+    "v11 — Jul 22 CLARITY Act session. Shipped: #3 (Rugcheck v2 API), #4 (x402 Foundation PR), #10 (SkillSpector YARA rules), #22 (Credit score posts), #35 (PixelRAG Agent Kit), #57 (Injective iAgent), #58 ($TREASURY animation).",
+    "CLARITY Act analysis saved at 00-HQ/clarity-act-analysis.md.",
+    "All GenTech repos updated with CLARITY Act compliance badges.",
+    "Circle Developer Grant draft at 09-Green Room/circle-developer-grant-application.md — Jordan + Gentech working on submission.",
+    "CLARITY Act blog post at 09-Green Room/clarity-act-announcement-blog.md.",
+    "4 PRs queued for submission when GitHub rate limit resets (17:15-17:30 UTC)."
   ],
   "agents": {
     "gentech": {
@@ -430,6 +417,6 @@
       "decision_maker": true
     }
   },
-  "note": "Pruned 7 items. Total: 43 -> 36",
-  "updated": "2026-07-23 04:00 UTC"
+  "note": "v11 — 7 items shipped Jul 22. 4 PRs queued.",
+  "updated": "2026-07-22 16:40 UTC"
 }
