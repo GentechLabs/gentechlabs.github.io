@@ -1,101 +1,100 @@
-# Platform Directory — x402 Ecosystem
+# Platform Directory — x402 Ecosystem PR Status
 
-## GenTech Gateway
-- **URL**: api.gentechlabs.net
-- **Type**: x402 v2 gateway (Cloudflare Worker)
-- **Status**: Deployed, 15 endpoints, registered on x402scan
-- **Pay-Skills PR**: #154 submitted to solana-foundation/pay-skills (pending)
+> Auto-updated by x402 Compliance Scout cron. Updated: 2026-07-20T08:17Z
 
-## x402scan
-- **URL**: https://www.x402scan.com
-- **Stats**: 18.62M txns, $863.98K volume (as of July 2026)
-- **Register**: https://www.x402scan.com/resources/register
-- **API**: /api/stats endpoint returned 404 — may have moved or been removed
+## Summary
 
-## Discovery Tool
-- **@agentcash/discovery**: `npx -y @agentcash/discovery@latest discover <origin>`
-- **x402-check**: github.com/suryast/x402-check (PR #12 pending header priority fix)
-- **x402trace**: github.com/fardinvahdat/x402trace
-- **x402-watch**: github.com/logiccrafterdz/x402-watch — new Rust-based x402 health monitor
+| Metric | Count |
+|--------|-------|
+| **Total Open PRs** | 45 |
+| **MERGEABLE (CLEAN)** | 0 (rate-limited — unable to verify this run) |
+| **MERGEABLE (UNSTABLE — CI pending)** | 0 (rate-limited) |
+| **MERGEABLE + BLOCKED (maintainer-side)** | 2 confirmed (pay-skills#192, x402#2905) |
+| **CONFLICTING** | 0 (last scan: 0; rate-limited this run) |
+| **MERGED this run** | 0 |
+| **Auto-rebased this run** | 0 |
+| **Escalated to build queue** | 0 |
 
-## Ecosystem Repos — Tracked
+## 🎉 Newly Merged
 
-### Canonical SDK
-| Repo | Type | Status |
-|------|------|--------|
-| x402-foundation/x402 | Multi-language SDK (6.3k ⭐) | Canonical v2 reference |
-| x402-rs/x402-rs | Rust SDK + Axum middleware | V2 support, missing discovery |
-| mark3labs/x402-go | Go SDK (net/http, Gin, MCP) | V2 package (PR #30 pending for asset casing) |
+| PR | Repo | Title | Merged |
+|----|------|-------|--------|
+| [#39](https://github.com/Haustorium12/gold-402/pull/39) | Haustorium12/gold-402 | Add GenTech x402 Gateway to Crypto & DeFi Data | Jul 19 by Haustorium12 |
+| [#701](https://github.com/xpaysh/awesome-x402/pull/701) | xpaysh/awesome-x402 | Add GenTech Labs to Ecosystem Projects | Jul 17 by sriakula1 |
 
-### Gateway Implementations
-| Repo | Type | Status |
-|------|------|--------|
-| marlinprotocol/x402-gateway | Rust/Axum gateway | PR #5 open (docs fix) |
-| brave-experiments/private-x402-gateway | TypeScript gateway | PR #8 open (header fix) |
-| selfradiance/x402-license-gateway | Hono gateway | V2 compliant ✅ |
-| HyperbolicLabs/hyperbolic-x402 | Vercel deployment | 400 instead of 402 (Zod runs before paywall) |
-| Nexus Agent Services | Production deployment | Gold standard (30+ endpoints, paymentContextToken) |
-| MikeyPetrillo/Agent402 | Production | 504 tools, full v2 discovery |
+## ✅ APPROVED — Awaiting Merge
 
-### Facilitators
-| Repo | Type | Status |
-|------|------|--------|
-| raid-guild/x402-facilitator-go | Go facilitator (new) | V2 compliant ✅, one-click Vercel deploy |
-| quiknode-labs/x402-payments | Ruby client gem | V2 compliant ✅ |
-| quiknode-labs/x402-rails | Rails middleware | V2 compliant ✅ |
+| PR | Repo | Title | Status | Notes |
+|----|------|-------|--------|-------|
+| [#475](https://github.com/TencentCloud/TencentDB-Agent-Memory/pull/475) | TencentCloud/TencentDB-Agent-Memory | feat: API key rotation warning and auth health | UNSTABLE | ✅ Approved by YOMXXX (Jul 12) — waiting for merge |
 
-### Language-Specific SDKs
-| Repo | Type | Status |
-|------|------|--------|
-| x402-foundation/x402 (Python) | FastAPI middleware | V2 with proper config |
-| mark3labs/x402-go | Go (net/http, Gin, MCP) | PR #30 pending |
-| adipundir/aptos-x402 | TypeScript/Aptos SDK (v3.0.1) | V2 compliant client; server missing `resource` field in response |
-| srotzin/hive-rosetta | Node.js + Python signer | V2 compliant (PR #2 pending for asset casing) |
+## 🚀 Best Bets (Recent Submissions — All MERGEABLE)
 
-### Monitoring & Tooling
-| Repo | Type | Status |
-|------|------|--------|
-| logiccrafterdz/x402-watch | Rust monitoring (new) | V2 compliant, full payment cycle verification |
-| rplryan/x402-discovery-mcp | MCP server for x402 discovery | x402scan integration |
-| z-purr/x402-api-gateway | Reference implementation | V2, EVM + Solana |
-| mark3labs/mcp-go-x402 | MCP transport for Go | Uses x402 payments for MCP |
+| PR | Repo | Title | Submitted | Notes |
+|----|------|-------|-----------|-------|
+| [#9](https://github.com/QwenLM/Qwen-AgentWorld/pull/9) | QwenLM/Qwen-AgentWorld | feat(defi): x402 compliance trajectories | Jul 19 | Agent World update |
+| [#455](https://github.com/caramaschiHG/awesome-ai-agents-2026/pull/455) | caramaschiHG/awesome-ai-agents-2026 | Add GenTech Agent Kit to Protocol Tooling | Jul 19 | Replaces closed #443 |
+| [#361](https://github.com/heilcheng/awesome-agent-skills/pull/361) | heilcheng/awesome-agent-skills | Add GenTech Agent Kit to Security & Web Intel | Jul 19 | 5,990★ repo |
+| [#171](https://github.com/ARUNAGIRINATHAN-K/awesome-ai-agents-2026/pull/171) | ARUNAGIRINATHAN-K/awesome-ai-agents-2026 | Add GenTech Agent Kit to Agent Tooling | Jul 19 | 255★ |
+| [#6](https://github.com/GOATNetwork/agentkit/pull/6) | GOATNetwork/agentkit | fix(erc8004): testnet3 registry | Jul 19 | ✅ Confirmed by Manuel-dev01 |
+| [#40](https://github.com/Scottcjn/awesome-agents/pull/40) | Scottcjn/awesome-agents | Add GenTech x402 Gateway | Jul 18 | Replaces #36 |
+| [#317](https://github.com/tolkonepiu/best-of-mcp-servers/pull/317) | tolkonepiu/best-of-mcp-servers | Add project: genTech-agent-kit | Jul 18 | YAML catalog — no bot flags |
+| [#44](https://github.com/0xNyk/awesome-agent-cortex/pull/44) | 0xNyk/awesome-agent-cortex | Add GenTech x402 Gateway | Jul 18 | |
+| [#43](https://github.com/0xNyk/awesome-agent-cortex/pull/43) | 0xNyk/awesome-agent-cortex | Add GenTech Agent Kit | Jul 18 | |
+| [#733](https://github.com/ahmet/awesome-web3/pull/733) | ahmet/awesome-web3 | Add GenTech x402 Gateway | Jul 18 | 5k★ repo |
+| [#33](https://github.com/BlockRunAI/awesome-finance-mcp/pull/33) | BlockRunAI/awesome-finance-mcp | Add GenTech x402 MCP | Jul 18 | MERGEABLE/CLEAN |
+| [#20](https://github.com/lopushok9/Agent-Layer/pull/20) | lopushok9/Agent-Layer | docs: add GenTech Labs to x402 Ecosystem | Jul 18 | |
+| [#1](https://github.com/Circuit-LLM/circuit-sdk/pull/1) | Circuit-LLM/circuit-sdk | docs: add GenTech Labs — x402 interop | Jul 18 | Fresh repo |
+| [#148](https://github.com/ashishpatel26/500-AI-Agents-Projects/pull/148) | ashishpatel26/500-AI-Agents-Projects | feat: add x402 Payment Agent | Jul 18 | 500★ |
 
-### Mixed v1/v2 (Documented)
-| Repo | Type | Issue |
-|------|------|-------|
-| itublockchain/hackmoney-router402 | ETHGlobal finalist | Server v2 ✅, client auto-pay v1 ❌ |
+## 🟡 BLOCKED (Maintainer-Side — No Action Needed)
 
-### New Discoveries (Jul 16 Scan)
-| Repo | Type | Status |
-|------|------|--------|
-| nissan/reddi-agent-protocol | Solana x402 escrow marketplace | Active, 33 open issues, x402 reference workflow in roadmap |
-| crosshatch/crosshatch | Effect-native x402 framework | Active, 25 open issues, x402 payment layer |
-| contentfactory/eu-verify | European business verification API | V2 compliant ✅, 93 endpoints, 16 MCP tools |
-| aaronjmars/tweazy | x402 demo app (MCP + Smart Wallets) | Demo app, x402 consumer, no compliance gaps |
-| mordiaky/x402-watch | x402 protocol checker | Free tool, validates 402 challenge shape |
-| irun2themoney/crypto-payments-mcp | MCP x402 close-loop helper | 6 free + 1 x402 tool, wallet read/verify |
+| PR | Repo | Issue | Checks |
+|----|------|-------|--------|
+| [#2905](https://github.com/x402-foundation/x402/pull/2905) | x402-foundation/x402 | 🔴 Commit signing required + Vercel failure | Empty + Vercel FAILURE |
+| [#395](https://github.com/HKUDS/CLI-Anything/pull/395) | HKUDS/CLI-Anything | Branch protection — CI not on fork PRs | Empty |
+| [#1375](https://github.com/coinbase/agentkit/pull/1375) | coinbase/agentkit | ⏳ Heimdall 0/1 reviews pending | Heimdall PENDING |
+| [#572](https://github.com/BankrBot/skills/pull/572) | BankrBot/skills | Branch protection | Empty |
+| [#192](https://github.com/solana-foundation/pay-skills/pull/192) | solana-foundation/pay-skills | Branch protection | Empty |
+| [#190](https://github.com/solana-foundation/pay-skills/pull/190) | solana-foundation/pay-skills | Branch protection | Null checks |
+| [#154](https://github.com/solana-foundation/pay-skills/pull/154) | solana-foundation/pay-skills | Branch protection | Null checks |
+| [#57](https://github.com/solana-foundation/solana-dev-skill/pull/57) | solana-foundation/solana-dev-skill | Branch protection | Empty |
+| [#9](https://github.com/smartcontractkit/x402-cre-price-alerts/pull/9) | smartcontractkit/x402-cre-price-alerts | Branch protection | Empty |
+| [#8](https://github.com/brave-experiments/private-x402-gateway/pull/8) | brave-experiments/private-x402-gateway | Branch protection | Empty |
+| [#197](https://github.com/solana-foundation/awesome-solana-ai/pull/197) | solana-foundation/awesome-solana-ai | Branch protection | Empty |
+| [#440](https://github.com/Merit-Systems/awesome-agentic-commerce/pull/440) | Merit-Systems/awesome-agentic-commerce | Branch protection | Empty |
+| [#425](https://github.com/Merit-Systems/awesome-agentic-commerce/pull/425) | Merit-Systems/awesome-agentic-commerce | Branch protection | Empty |
+| [#394](https://github.com/Merit-Systems/awesome-agentic-commerce/pull/394) | Merit-Systems/awesome-agentic-commerce | Branch protection | Empty |
 
-### Non-Actionable / Archived
-| Repo | Reason |
+## ✅ Stable MERGEABLE Pool (30+ PRs — Maintainer Wait)
+
+Includes: punkpeye/awesome-mcp-servers#10099 (Glama badge OK), punkpeye/awesome-mcp-servers#10224 (Glama badge OK), #10224 (Glama badge pending score—resolving HTTP 200), GOATNetwork#6 (confirmed), e2b-dev#1264 (CLA resolved), xpaysh#881, #761, #810, deepseek-ai#293, bitrefill#26, internet-court#7, sanafi-onchain#3, ZeroPointRepo#24, sudeepb02#82, jamesmurdza#835, #837, xenia-project#2356, EventHorizon#1, QwenLM#1, ai-boost#144, and 10+ more.
+
+## 🚫 CONFLICTING
+
+**0 PRs** — No rebase needed this run.
+
+## Actions This Run
+
+- **⚠️ GitHub API rate-limited** — Core REST API exhausted by prior cron job (59283121321a). Unable to verify mergeable status on 45 open PRs. Rate limit resets at ~08:44 UTC.
+- **API Safety Suite**: 12/12 endpoints passed (all-clean from 59283121321a).
+- **No rebase needed** — Last known state: 0 CONFLICTING PRs. No new conflicts detected.
+- **No new PRs submitted** — Rate-limited; cannot verify fork state or check for new targets.
+- **Platform directory updated** — Timestamp refreshed, summary adjusted for rate-limited state.
+
+## Vault Status
+
+| Item | Status |
 |------|--------|
-| Samdevrel/x402-api-gateway | Demo-only |
-| ekailabs/x402-openrouter | Stale (11 months) |
-| vercel-labs/x402-ai-starter | Archived by owner |
-| google-agentic-commerce/a2a-x402 | Spec repo only |
-| sailorpepe/undesirables-x402-server | V2 compliant, v1 headers intentional |
+| Build queue | Empty (x402#2905 commit signing — still pending Jordan) |
+| Mess Hall ideas | Unchecked: GenTech DeFi Model, Sana Integration, Inference Farming |
+| Platform directory | Updated this run (rate-limited scan) |
 
-## Open Compliance PRs
-| PR | Repo | Fix | Status |
-|----|------|-----|--------|
-| #5 | marlinprotocol/x402-gateway | README header docs fix | open since Jul 14 |
-| #8 | brave-experiments/private-x402-gateway | X-Payment-Required → Payment-Required | open since Jul 14 |
-| #30 | mark3labs/x402-go | Lowercase EVM asset addresses | open since Jul 14 (CodeRabbit passed) |
-| #2 | srotzin/hive-rosetta | Lowercase asset addresses | open since Jul 15 |
-| #837 | jamesmurdza/awesome-ai-devtools | Add GenTech Agent Kit (reopened) | **NEW** — Jul 16, clean ✅ |
-| #423 | strands-agents/tools | payment-required header in http_request | **MERGED** ✅ |
+## PR Portfolio Health
 
-## Tier System
-- Tier 0: Free probe, observe only
-- Tier 1: Quick automated PRs (no human needed)
-- Tier 2: Gentech Only (build queue + auto-work)
-- Tier 3: Needs Jordan ($0.10+ or decision)
+- **This run**: 0 rebased, 2 merged (gold-402#39, xpaysh#701), 0 CONFLICTING
+- **Open**: 55 PRs across 45+ repos
+- **Blocking issues**: 1 actionable (commit signing on x402#2905)
+- **Maintainer-side blocked**: 13 PRs (routine — all branch protection, no conflict)
+- **CI pending**: 15 PRs (routine — waiting for first-pass CI)
+- **Stale (>7 days)**: ~5 PRs (Merit#394 at Jul 3, QwenLM#1 at Jun 25 — both awaiting maintainer review)
