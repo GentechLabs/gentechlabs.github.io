@@ -1,12 +1,12 @@
 {
-  "version": 11,
+  "version": 13,
   "summary": {
-    "total": 36,
+    "total": 32,
     "shipped": 0,
     "in_progress": 1,
-    "pending": 25,
+    "pending": 21,
     "blocked": 10,
-    "needs_jordan": 24
+    "needs_jordan": 26
   },
   "items": [
     {
@@ -174,7 +174,8 @@
       "assigned_to": "jordan",
       "platform": "jordan",
       "note": "Fine-tune DeepSeek R1 Distill 32B on proprietary DeFi data. 26 training pairs ready. Needs $30-60 USDC for Modal GPU run.",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "needs_jordan": true
     },
     {
       "id": 42,
@@ -184,7 +185,8 @@
       "assigned_to": "jordan",
       "platform": "jordan",
       "note": "Publish agent patterns as EvoMap Capsules. CLI: npm install -g @evomap/evolver. Needs Jordan signup.",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "needs_jordan": true
     },
     {
       "id": 43,
@@ -194,7 +196,8 @@
       "assigned_to": "jordan",
       "platform": "jordan",
       "note": "Sana bot provides Visa card + USDC on/off-ramp for agents. GenTech provides DeFi yield + x402 payments. Needs Jordan account at sana.bot/gateway.",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "needs_jordan": true
     },
     {
       "id": 44,
@@ -204,17 +207,8 @@
       "assigned_to": "jordan",
       "platform": "jordan",
       "note": "Tamagotchi-style agent with real utility — works DeFi/content for you. Care for it → it works → earn rewards → upgrade. Needs full spec.",
-      "difficulty": "medium"
-    },
-    {
-      "id": 45,
-      "name": "CMC Labs Accelerator — Application",
-      "status": "pending",
-      "priority": "high",
-      "assigned_to": "jordan",
-      "platform": "jordan",
-      "note": "Jordan handles when home. Draft narrative ready (AAE, Agent Credit Score, AgentEscrow).",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "needs_jordan": true
     },
     {
       "id": 46,
@@ -224,7 +218,8 @@
       "assigned_to": "jordan",
       "platform": "jordan",
       "note": "Submit KYC on Superteam Earn page to unlock first 100 USDG tranche. Jordan handles when home.",
-      "difficulty": "medium"
+      "difficulty": "medium",
+      "needs_jordan": true
     },
     {
       "id": 49,
@@ -277,39 +272,6 @@
       "reason": "Shows GOAT we're building on their stack before July 29 call. Proves DevRel value.",
       "name": "Submit GOAT AgentKit PR #7 — Compliance Plugin + ERC-8004 Fix",
       "detail": "Manual web UI submission. Go to https://github.com/ProtoJay4789/goat-agentkit → Click 'Contribute' → 'Open Pull Request' → Verify GOATNetwork/agentkit ← ProtoJay4789:feat/compliance-plugin → Create PR. Code is already pushed and ready.",
-      "needs_jordan": true,
-      "difficulty": "easy",
-      "platform": "either",
-      "assigned_to": "jordan"
-    },
-    {
-      "id": 54,
-      "status": "pending",
-      "priority": "medium",
-      "name": "Atelier — Review Agent Profile",
-      "detail": "Log into useatelier.ai, check our agent listing, update services/endpoints",
-      "needs_jordan": true,
-      "difficulty": "easy",
-      "platform": "either",
-      "assigned_to": "jordan"
-    },
-    {
-      "id": 55,
-      "status": "pending",
-      "priority": "medium",
-      "name": "Swarms — Update Agent Listing",
-      "detail": "Log into Swarms marketplace, update agent name/description/pricing, enable x402 toggle",
-      "needs_jordan": true,
-      "difficulty": "easy",
-      "platform": "either",
-      "assigned_to": "jordan"
-    },
-    {
-      "id": 56,
-      "status": "pending",
-      "priority": "medium",
-      "name": "OKX AI — Review ASP Listing",
-      "detail": "Check our OKX AI marketplace listing, update with new endpoints/services",
       "needs_jordan": true,
       "difficulty": "easy",
       "platform": "either",
@@ -402,6 +364,18 @@
       "platform": "desktop",
       "needs_jordan": false,
       "detail": "Integrate Unity CLI (released Jul 20) into our agent pipeline. Agent-native game development with no concurrency limits."
+    },
+    {
+      "id": 68,
+      "name": "Composio x402 Payment Connector",
+      "status": "pending",
+      "assigned_to": "forge",
+      "priority": "high",
+      "difficulty": "medium",
+      "platform": "either",
+      "detail": "Build an x402 payment connector for Composio (500+ app integrations through one MCP server). Every Composio user can accept USDC micropayments through our gateway. Distribution multiplier for GenTech.",
+      "needs_jordan": true,
+      "notes": "DISCOVERED Jul 22 by Forge. Needs Jordan to run hermes mcp login composio first. Then build: Composio MCP server → GenTech x402 gateway proxy → revenue share on every payment."
     }
   ],
   "consolidation_notes": [
@@ -410,7 +384,8 @@
     "All GenTech repos updated with CLARITY Act compliance badges.",
     "Circle Developer Grant draft at 09-Green Room/circle-developer-grant-application.md — Jordan + Gentech working on submission.",
     "CLARITY Act blog post at 09-Green Room/clarity-act-announcement-blog.md.",
-    "4 PRs queued for submission when GitHub rate limit resets (17:15-17:30 UTC)."
+    "4 PRs queued for submission when GitHub rate limit resets (17:15-17:30 UTC).",
+    "Merged duplicate items: #45→#33 CMC Labs, #55→#50 Swarms, #54→#51 Atelier, #56→#52 OKX AI"
   ],
   "agents": {
     "gentech": {
@@ -427,5 +402,5 @@
     }
   },
   "note": "v11 — 7 items shipped Jul 22. 4 PRs queued.",
-  "updated": "2026-07-23T04:03:07Z"
+  "updated": "2026-07-23T10:24:40Z"
 }
