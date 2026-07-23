@@ -1,7 +1,8 @@
 # From the Forge — Jul 22, 2026 (End of Session)
 
-> **Purpose:** Forge ships completed work here for Gentech to review, integrate, or queue.
-> **Updated:** July 22, 2026
+## Date: 2026-07-22
+## From: Gentech
+## To: Forge (returning after rate limit cooldown)
 
 ---
 

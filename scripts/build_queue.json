@@ -1,36 +1,14 @@
 {
   "version": 11,
   "summary": {
-    "total": 34,
-    "shipped": 19,
-    "in_progress": 0,
-    "pending": 15,
-    "blocked": 11,
-    "needs_jordan": 25
+    "total": 35,
+    "shipped": 27,
+    "in_progress": 1,
+    "pending": 24,
+    "blocked": 10,
+    "needs_jordan": 23
   },
   "items": [
-    {
-      "id": 3,
-      "name": "Sell APIs to AI Agents — Phase 2: Deploy & List",
-      "difficulty": "medium",
-      "priority": "high",
-      "status": "shipped",
-      "assigned_to": "forge",
-      "platform": "either",
-      "needs_jordan": false,
-      "detail": "Rugcheck v2 API built at 10-Labs/rugcheck-v2-api/ — FastAPI server with x402/Q402 middleware, Agent Credit Score wrapper, pay-skills provider listing. Rebranded as CLARITY Act Agent Compliance Platform. SHIPPED Jul 22."
-    },
-    {
-      "id": 4,
-      "name": "x402 Foundation — Contribute to Core Protocol",
-      "difficulty": "medium",
-      "priority": "urgent",
-      "status": "shipped",
-      "assigned_to": "forge",
-      "platform": "either",
-      "needs_jordan": false,
-      "detail": "Multi-facilitator FastAPI example built at 10-Labs/x402-multi-facilitator-example/. Branch pushed to ProtoJay4789/x402 (feat/multi-facilitator-example). PR submission queued for 17:15 UTC. SHIPPED Jul 22."
-    },
     {
       "id": 5,
       "name": "Ripple XRPL — Agent Wallet + Payments Skills Contribution",
@@ -68,17 +46,6 @@
       "platform": "either"
     },
     {
-      "id": 10,
-      "name": "NVIDIA SkillSpector — x402 YARA Rules Contribution",
-      "difficulty": "medium",
-      "priority": "low",
-      "status": "shipped",
-      "assigned_to": "forge",
-      "needs_jordan": false,
-      "detail": "26 YARA rules (549 lines) across 10 security categories for x402 payment security. Saved at 10-Labs/skillspector-x402-yara-rules/. PR submission queued. SHIPPED Jul 22.",
-      "platform": "either"
-    },
-    {
       "id": 12,
       "name": "Arc Programmable Money Hackathon — Agentic Treasury Submission",
       "difficulty": "hard",
@@ -108,7 +75,7 @@
       "priority": "high",
       "status": "blocked",
       "assigned_to": "gentech",
-      "needs_jordan": false,
+      "needs_jordan": true,
       "detail": "RESEARCHED Jul 19: 'Lens AI' appears to be Arclens (Arc ecosystem hub). ERC-8004 agent ID 842439 doesn't resolve on any chain. Arclens runs x402 oracle for Arc project risk verdicts. Next step: contact Arclens team about registering GenTech as verified data source. Needs Jordan to reach out.",
       "blocked_on": null,
       "platform": "either"
@@ -125,27 +92,17 @@
       "platform": "either"
     },
     {
-      "id": 22,
-      "name": "Agent Credit Score — Content Series",
-      "difficulty": "easy",
-      "priority": "high",
-      "status": "shipped",
-      "assigned_to": "jordan",
-      "platform": "cloud",
-      "needs_jordan": true,
-      "detail": "4 content posts drafted at 00-HQ/agent-credit-score-posts.md. Rewritten with CLARITY Act hook. BLOCKED: needs Jordan's X/Twitter API keys for posting, or Jordan posts manually.",
-      "owner": "jordan"
-    },
-    {
       "id": 25,
       "name": "Submit GenTech Plugin to Superpowers (obra, 257k⭐)",
-      "status": "pending",
+      "status": "blocked",
       "assigned_to": "gentech",
       "priority": "medium",
       "difficulty": "medium",
       "platform": "cloud",
       "notes": "GENTECH INVESTIGATED Jul 18: Superpowers repo has AGENTS.md forbidding agent-submitted PRs (94% rejection rate). Our plugin repo (ProtoJay4789/gentech-superpowers) is already public + installable directly. Submitting to the obra marketplace requires a human-maintained PR per their guidelines — agent-submitted PRs are explicitly rejected and would damage Jordan's reputation. Recommended path: Jordan reviews our plugin and, if desired, manually opens a PR to the obra/superpowers-marketplace repo.",
-      "note": "One-time PR to obra (257k stars). Do when model routing is final."
+      "note": "One-time PR to obra (257k stars). Do when model routing is final.",
+      "needs_jordan": true,
+      "detail": "Superpowers repo has AGENTS.md forbidding agent-submitted PRs (94% rejection rate). Our plugin repo is public + installable. Submitting to obra marketplace requires a human-maintained PR. BLOCKED: needs Jordan to manually open PR if desired."
     },
     {
       "id": 31,
@@ -195,19 +152,6 @@
       "needs_jordan": true,
       "detail": "Create account. Grab testnet GEN. Deploy Intelligent Contract. Register on dev portal. Join Discord.",
       "blocked_on": null
-    },
-    {
-      "id": 35,
-      "name": "PixelRAG x Agent Kit Integration",
-      "difficulty": "medium",
-      "priority": "high",
-      "status": "shipped",
-      "assigned_to": "forge",
-      "blocked_on": null,
-      "platform": "desktop",
-      "needs_jordan": false,
-      "detail": "PixelRAG agent tool module built at 10-Labs/pixelrag_agent_tool.py. Wraps pixelshot + search API for agents. SHIPPED Jul 22.",
-      "owner": "forge"
     },
     {
       "id": 40,
@@ -372,27 +316,92 @@
       "assigned_to": "jordan"
     },
     {
-      "id": 57,
-      "effort": "Medium",
-      "status": "shipped",
+      "id": 59,
+      "name": "GenTech Receipts — x402 Spending Tracker",
+      "difficulty": "easy",
       "priority": "high",
-      "reason": "Cosmos-based DeFi chain with EVM compatibility. iAgent is Python-based and agent-focused — natural fit for x402. 181 repos in ecosystem. Big distribution play.",
-      "difficulty": "medium",
+      "status": "pending",
+      "assigned_to": "forge",
       "platform": "either",
-      "name": "Injective Labs — iAgent x402 Payment Integration",
-      "detail": "x402 payment middleware built at injective-iagent/x402_middleware.py. 4 paid endpoints (market analysis, trading signals, portfolio insights, risk assessment). PR submission queued. SHIPPED Jul 22.",
-      "needs_jordan": false
+      "needs_jordan": false,
+      "detail": "Build a spending tracker dashboard for x402 payments. Track per-agent spend, daily totals, and receipt verification."
     },
     {
-      "id": 58,
-      "name": "Animate $TREASURY Token Image — Shining Gold Vault",
+      "id": 60,
+      "name": "Monid Social Intel — AAE Narrative Rotation",
       "difficulty": "easy",
       "priority": "medium",
-      "status": "shipped",
+      "status": "pending",
+      "assigned_to": "forge",
+      "platform": "either",
+      "needs_jordan": false,
+      "detail": "Social intelligence tool for monitoring AAE narrative across platforms. Track sentiment, mentions, and engagement."
+    },
+    {
+      "id": 61,
+      "name": "GenTech Starter Template — Hermes Distribution",
+      "difficulty": "medium",
+      "priority": "high",
+      "status": "pending",
+      "assigned_to": "forge",
+      "platform": "either",
+      "needs_jordan": false,
+      "detail": "Create a starter template for Hermes agents that includes x402 gateway, Q402 integration, and GenTech patterns. Distribution channel for GenTech."
+    },
+    {
+      "id": 62,
+      "name": "Multi-Wallet Treasury Manager",
+      "difficulty": "medium",
+      "priority": "high",
+      "status": "pending",
+      "assigned_to": "forge",
+      "platform": "either",
+      "needs_jordan": false,
+      "detail": "The Agentic Treasury should manage multiple wallets, not just one. Build multi-wallet support with per-wallet strategies and rebalancing."
+    },
+    {
+      "id": 63,
+      "name": "x402 Global Challenge — Composite Entry ($100K + 500K ALGO)",
+      "difficulty": "hard",
+      "priority": "urgent",
+      "status": "pending",
+      "assigned_to": "forge",
+      "platform": "either",
+      "needs_jordan": true,
+      "detail": "x402 Global Challenge on Algorand. Composite entry combining multiple x402 patterns. $100K prize pool + 500K ALGO. Deadline: TBD."
+    },
+    {
+      "id": 64,
+      "name": "Virtuals ACP Registration",
+      "difficulty": "easy",
+      "priority": "medium",
+      "status": "pending",
+      "assigned_to": "jordan",
+      "platform": "jordan",
+      "needs_jordan": true,
+      "detail": "Register GenTech on Virtuals ACP at app.virtuals.io/acp/new. Needs wallet auth — Jordan must handle."
+    },
+    {
+      "id": 65,
+      "name": "GenTech OpenClaw Skill — x402 Gateway + Self-Improvement Loop",
+      "difficulty": "medium",
+      "priority": "high",
+      "status": "pending",
+      "assigned_to": "forge",
+      "platform": "either",
+      "needs_jordan": false,
+      "detail": "Build a GenTech skill for OpenClaw (384k stars) that wraps our x402 gateway with a self-improvement loop. Contribute to OpenClaw ecosystem."
+    },
+    {
+      "id": 66,
+      "name": "Unity CLI Integration — Agent-Native Game Dev Pipeline",
+      "difficulty": "medium",
+      "priority": "medium",
+      "status": "pending",
       "assigned_to": "forge",
       "platform": "desktop",
       "needs_jordan": false,
-      "detail": "Animated gold vault door with rotating light rays, pulsing G logo glow, shimmer sweep. MP4 + GIF rendered. SHIPPED Jul 22."
+      "detail": "Integrate Unity CLI (released Jul 20) into our agent pipeline. Agent-native game development with no concurrency limits."
     }
   ],
   "consolidation_notes": [
@@ -418,5 +427,5 @@
     }
   },
   "note": "v11 — 7 items shipped Jul 22. 4 PRs queued.",
-  "updated": "2026-07-22 16:40 UTC"
+  "updated": "2026-07-23T04:03:07Z"
 }

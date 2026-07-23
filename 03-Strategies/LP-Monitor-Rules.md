@@ -7,13 +7,13 @@
 
 ## Current Position
 
-- **Range:** $6.09 — $7.06 (149 bins, Curve)
-- **Position:** ~$24.22 (1.717 AVAX @ $6.55 + 12.96 USDC)
+- **Range:** $6.50 — $6.69 (Curve)
+- **Position:** ~$24.32 (1.826 AVAX @ $6.50 + 12.28 USDC)
 - **Shape:** Curve
 - **Strategy:** Bear market accumulation — farm the bottom, compound rewards
-- **Entry Price:** $6.55
-- **24h Fees:** $0.20
-- **Status:** 🟢 In Range — price $6.55 dead center
+- **Entry Price:** $6.50
+- **24h Fees:** $0.17
+- **Status:** 🟢 In Range — price $6.61 within range
 
 ### Update Protocol
 When Jordan shows new position data (screenshot or numbers), update these files:
