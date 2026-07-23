@@ -1,76 +1,93 @@
-# From the Forge — Jul 22, 2026 (End of Session)
+# Forge Handoff — July 22-23 Night Session
 
-## Date: 2026-07-22
-## From: Gentech
-## To: Forge (returning after rate limit cooldown)
-
----
-
-## PRs Submitted This Session
-
-| PR | Status | URL |
-|----|--------|-----|
-| **x402 Foundation #2929** | ✅ **Submitted** | https://github.com/x402-foundation/x402/pull/2929 |
-| **awesome-x402 CLARITY Act badges** | ✅ Already had open PR | CLARITY Act badges on all 4 GenTech entries |
-| **awesome-agentic-commerce CLARITY Act badge** | ✅ Already had open PR | GenTech listing tagged |
-| **Injective iAgent x402 middleware** | ⏳ Branch pushed, needs `gh pr create` | `ProtoJay4789:feat/x402-payment-middleware` |
-
-## CLARITY Act — The Big Idea
-
-**CLARITY Act compliance = x402 compliance.** We merge them into one product. GenTech becomes the compliance layer for the agent economy.
-
-```
-Agent wants to transact → GenTech verifies:
-  1. Identity (ERC-8004 registration)
-  2. Security (Rugcheck v2 — 5-domain scan)
-  3. Credit score (0-850 reputation)
-  4. x402 compliance (payment integrity)
-  
-→ Compliance badge issued → Agent can transact with institutional partners
-```
-
-## Files in Vault
-
-| File | Description |
-|------|-------------|
-| `00-HQ/clarity-act-analysis.md` | Full 9K analysis — what the Act does, market impact, 11 action items |
-| `00-HQ/agent-credit-score-posts.md` | 4 posts rewritten with CLARITY Act hook |
-| `01-HANDOFFS/from-the-forge.md` | This handoff |
-| `09-Green Room/circle-developer-grant-application.md` | $75K Circle Developer Grant draft (Jordan + Gentech working on it) |
-| `09-Green Room/clarity-act-announcement-blog.md` | Blog post: "The CLARITY Act Just Made Agent Identity Mandatory" |
-| `10-Labs/rugcheck-v2-api/` | Rebranded as "CLARITY Act Agent Compliance Platform" |
-| `10-Labs/skillspector-x402-yara-rules/` | 26 YARA rules (549 lines) for x402 payment security |
-| `10-Labs/x402-pr-ready.md` | Save point for x402 Foundation PR |
-| `scripts/build_queue.json` | v11 — 7 items shipped this session |
-
-## Repos Updated with CLARITY Act Badges
-
-| Repo | What Changed |
-|------|-------------|
-| `pages-deploy/gentechlabs-index.html` | Two badges in hero: "CLARITY Act Compliant" + "DeFi Exclusion Sec. 309/409" |
-| `x402-gateway/README.md` | Added CLARITY Act compliance line |
-| `x402-gateway/server.json` | Description updated |
-| `awesome-x402-fork/README.md` | All 4 GenTech entries tagged |
-| `awesome-agentic-commerce-fork/README.md` | GenTech entry tagged |
-
-## What's Left for Tomorrow
-
-### Forge can do (when rate limit resets)
-- **Injective iAgent PR** — `gh pr create` from `injective-iagent/` directory
-
-### Needs Jordan
-- **#5 XRPL x402 PR** — Fork XRPLF/xrpl-dev-portal + submit compliance skill
-- **#6 NEAR x402 PR** — Fork near-examples/near-intents-agent-example + submit integration
-- **#7 Cloudflare Gateway** — Deploy when waitlist approved
-- **#33 CMC Labs Accelerator** — Submit application
-- **#15 Arc x402 Gateway** — Share RECIPIENT_ADDRESS to deploy
-- **#31 AgentBridge** — Get testnet ETH + share deployer key
-- **#50 Swarms** — Update agent listing
-- **#53 GOAT AgentKit PR #7** — Submit compliance plugin
+## Date: 2026-07-23
+## From: Gentech (running on OpenCode Go — Ollama Cloud capped)
+## To: Forge
 
 ---
 
-## Notes
-- GitHub rate limit hit multiple times this session. Resets every hour.
-- Obsidian Sync launched but may not have completed — files are in the vault at `Vault/Gentech/Gentech/`
-- No running processes on laptop
+## Model Routing — TAS v2
+
+**Stack changed today:**
+- 🥇 **Ollama Cloud** (primary, $0, 100/wk) — burned through in 3 days, resets ~Jul 26
+- 🥈 **OpenCode Go** (fallback, $10/mo, 1,000/mo) — currently active, 63% used, 17 days left
+- ❌ **Nous axed** — saved $20/mo. Total stack: $10/mo
+- **V2 logic**: Pre-emptive switching at 85-90% cap, not on failure
+- **Auto-return** to Ollama Cloud when it resets
+
+Jordan needs to run `hermes fallback add` on his machine to re-add OpenCode Go as the sole fallback (I cleared Nous from the VPS side).
+
+---
+
+## ✅ Completed Tonight
+
+### Victus Global — Robinhood Ecosystem Fund ($10M)
+- Jordan DMed them after their fund announcement, they moved to Telegram
+- $TREASURY passes their minimum requirement (token must be trading on Robinhood Chain)
+- **Active conversation** — they asked for the trading link
+- Prep doc saved: `10-Labs/victus-global-call-prep.md`
+- **Key ask**: Liquidity support for $TREASURY pool ($50-100K)
+
+### Circle Grant Application (2026 Cohort 2)
+- Full 7-section draft completed for Circle's grant program
+- Investor deck created: `gentechlabs.net/investor-deck.html` (10-slide reveal.js)
+- Key integrations: USDC (live), CCTP (planned), Arc (planned), Programmable Wallets (planned)
+
+### Website — Hub Page Updated
+- Added **"7 Chains"** badge and **"Multi-Chain Agent Treasury"** section
+- ⚠️ **Cloudflare Worker issue** — The `gentechlabs-api` Worker intercepts root traffic. Jordan needs to remove the root domain route.
+
+### OKX A2A Agent — Fixed for 24/7 Uptime
+- "Gen Tech Strategies" rejected because it wasn't online 24/7
+- **Fixed on VPS:**
+  - Node.js upgraded to v22.14.0
+  - `@okxweb3/a2a-node` installed
+  - A2A daemon running (pid 2777058)
+  - Systemd service for auto-start on boot
+  - Onchain OS skills installed
+- **Needs Jordan**: Restart Hermes (`/restart`), register agent with Onchain OS, resubmit
+
+### Composio — Discovered as Distribution Multiplier
+- 500+ app integrations through one MCP server
+- **Build queue #68**: Composio x402 Payment Connector
+- Vision: Every Composio user can accept USDC micropayments through our gateway
+
+---
+
+## Build Queue Status
+- **36 items total** — 0 shipped, 1 in progress, 25 pending, 10 blocked
+- **4 duplicates identified** (#33/#45 CMC, #50/#55 Swarms, #51/#54 Atelier, #52/#56 OKX AI)
+- **Needs your help**: Review items Forge completed so we can mark them shipped
+
+---
+
+## ⏳ Priority — Needs Jordan
+
+| Priority | What |
+|----------|------|
+| 🔴 | **Victus Global Telegram** — Active convo, send trading link |
+| 🔴 | **Cloudflare Worker root route** — Remove at dash.cloudflare.com |
+| 🔴 | **DNS records** — A records for vanito + portfolio subdomains |
+| 🔴 | **Composio OAuth** — Run `hermes mcp login composio` on your machine |
+| 🔴 | **OKX A2A resubmit** — Restart Hermes, register agent, resubmit |
+| 🟡 | **Circle grant submission** | Review + submit |
+| 🟡 | **Fallback re-add** | Run `hermes fallback add` → pick opencode-go |
+| 🟡 | **Superteam KYC** | Unlock 100 USDG |
+| 🟡 | **Claim Bankr fees** | 0.00322 WETH + 39.21M TREA |
+
+---
+
+## 🔧 Forge's Tasks
+- **#58** — Animate $TREASURY token image (Seedance 2.0, desktop GPU)
+- **#65** — GenTech OpenClaw Skill (384k-star distribution)
+- **#66** — Unity CLI Integration
+- **#68** — Composio x402 Payment Connector (start after Jordan auths OAuth)
+- **Kagekō 3D** — Visual Kei rhythm game in Unreal 5.8
+
+---
+
+## 📝 Notes
+- Three-pillar model: Humans ($3/$10/$25 subs), AI Agents (x402 pay-per-call), Ecosystem (free Treasury)
+- Agent economy is crypto's Trojan horse — game devs adopt x402 without caring about blockchain
+- Composio + x402 = 500+ apps becoming revenue streams
+- Chinese AI ban risk — model-agnostic routing already in place
