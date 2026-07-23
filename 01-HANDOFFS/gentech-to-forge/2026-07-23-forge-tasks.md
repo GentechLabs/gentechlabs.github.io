@@ -43,9 +43,19 @@ Items you can work on independently — no Jordan needed.
 ## How to use this
 
 1. Pick a **Desktop** item and start working
-2. When you hit a stopping point, save a brain note in `11-Mess Hall/agent-brain/`
-3. When something ships, update the queue via: `assigned_to: gentech, status: shipped`
-4. If you're blocked by Gentech or Jordan, tag it `blocked` + set `blocked_on`
+2. When done, **write completed item IDs** to `01-HANDOFFS/forge-completions.md` using format below
+3. The next build queue tick will auto-mark them as shipped
+
+### Completion report format
+When you finish something, write to `01-HANDOFFS/forge-completions.md`:
+```markdown
+# Forge Completions — 2026-07-23
+## Shipped
+- #59 GenTech Receipts
+- #62 Multi-Wallet Treasury
+## Notes
+- Hit a blocker on #65, need Q402 docs
+```
 
 ---
 
