@@ -1303,51 +1303,6 @@
           </div>
         </div>
 
-        <!-- ═══ WIP MUSIC VIDEOS ═══ -->
-        <div style="flex:1; min-width:140px; background:linear-gradient(180deg, #1a1a0a 0%, #0d0d02 100%); border-radius:10px; border:1px solid #3d3d1a; border-style:dashed; padding:14px; position:relative; overflow:hidden;">
-          <div style="position:absolute; top:0; left:0; width:4px; height:100%; background:#888800;"></div>
-          <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px;">
-            <div style="width:32px; height:32px; border-radius:50%; background:#888800; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:0.9rem; color:#fff; flex-shrink:0;">W</div>
-            <div>
-              <div style="font-size:0.85rem; font-weight:700; color:#cccc44;">WORK IN PROGRESS</div>
-              <div style="font-size:0.65rem; color:#887744; font-style:italic;">Select which to feature</div>
-            </div>
-          </div>
-          <div style="display:flex; flex-direction:column; gap:6px;">
-            <div style="background:rgba(200,200,50,0.08); border-radius:6px; padding:6px 8px; border:1px solid rgba(200,200,50,0.15);">
-              <div style="font-size:0.7rem; font-weight:600; color:#cccc44;">BLOOD MOON RISING</div>
-              <div style="font-size:0.65rem; color:#998844; margin-top:2px;">V8 · Latest · In Yami no Naka De</div>
-              <video controls preload="none" style="width:100%; border-radius:4px; margin-top:4px;" poster="music/vanito/kage-yami-no-naka-de.png">
-                <source src="music/vanito/blood-moon-rising-v8-compressed.mp4" type="video/mp4">
-              </video>
-            </div>
-            <div style="background:rgba(200,200,50,0.08); border-radius:6px; padding:6px 8px; border:1px solid rgba(200,200,50,0.15);">
-              <div style="font-size:0.7rem; font-weight:600; color:#cccc44;">BLOOD MOON (V1)</div>
-              <div style="font-size:0.65rem; color:#998844; margin-top:2px;">First version · 7 scenes</div>
-              <video controls preload="none" style="width:100%; border-radius:4px; margin-top:4px;">
-                <source src="music/vanito/blood-moon-video-compressed.mp4" type="video/mp4">
-              </video>
-            </div>
-            <div style="background:rgba(200,200,50,0.05); border-radius:6px; padding:6px 8px; border:1px solid rgba(200,200,50,0.08);">
-              <div style="font-size:0.7rem; font-weight:600; color:#cccc44;">4AM — MUSIC VIDEO</div>
-              <div style="font-size:0.65rem; color:#998844; margin-top:2px;">KAGE solo</div>
-              <video controls preload="none" style="width:100%; border-radius:4px; margin-top:4px;">
-                <source src="music/vanito/4am-music-video-compressed.mp4" type="video/mp4">
-              </video>
-            </div>
-            <div style="background:rgba(200,200,50,0.05); border-radius:6px; padding:6px 8px; border:1px solid rgba(200,200,50,0.08);">
-              <div style="font-size:0.7rem; font-weight:600; color:#cccc44;">BLOOD ON THE STRINGS</div>
-              <div style="font-size:0.65rem; color:#998844; margin-top:2px;">Original demo</div>
-              <audio controls preload="none" style="width:100%; height:28px; border-radius:4px;">
-                <source src="music/vanito/blood-on-the-strings-track.mp3" type="audio/mpeg">
-              </audio>
-            </div>
-            <div style="margin-top:6px; padding:6px; background:rgba(200,200,50,0.03); border-radius:4px; text-align:center;">
-              <span style="font-size:0.6rem; color:#665533;">👆 Pick one to feature above</span>
-            </div>
-          </div>
-        </div>
-
         <!-- ═══ HIKARI SIDE ═══ -->
         <div style="flex:1; min-width:140px; background:linear-gradient(180deg, #1a0505 0%, #0d0202 100%); border-radius:10px; border:1px solid #3d1a1a; padding:14px; position:relative; overflow:hidden;">
           <div style="position:absolute; top:0; left:0; width:4px; height:100%; background:#cc3333;"></div>
@@ -1624,6 +1579,54 @@
 
   </div>
 
+  <!-- ═══════ STUDIO TAB ═══════ -->
+  <div id="tab-studio" class="tab-content">
+
+    <div class="section-title" style="color:#cccc44;">🎬 Studio — Work in Progress</div>
+    <div style="font-size:0.85rem; color:#888; margin-bottom:16px; text-align:center;">All music videos in production · Pick one to feature</div>
+
+    <div class="card" style="background:linear-gradient(180deg, #1a1a0a 0%, #0d0d02 100%); border:1px solid #3d3d1a; border-style:dashed; padding:16px;">
+
+      <div style="background:rgba(200,200,50,0.08); border-radius:8px; padding:12px; border:1px solid rgba(200,200,50,0.15); margin-bottom:12px;">
+        <div style="font-size:0.85rem; font-weight:700; color:#cccc44;">BLOOD MOON RISING 🏆</div>
+        <div style="font-size:0.7rem; color:#998844; margin-bottom:6px;">V8 · Latest · Currently featured in Yami no Naka De</div>
+        <video controls preload="none" style="width:100%; border-radius:6px;" poster="music/vanito/kage-yami-no-naka-de.png">
+          <source src="music/vanito/blood-moon-rising-v8-compressed.mp4" type="video/mp4">
+        </video>
+      </div>
+
+      <div style="background:rgba(200,200,50,0.06); border-radius:8px; padding:12px; border:1px solid rgba(200,200,50,0.1); margin-bottom:12px;">
+        <div style="font-size:0.85rem; font-weight:700; color:#cccc44;">BLOOD MOON (V1)</div>
+        <div style="font-size:0.7rem; color:#998844; margin-bottom:6px;">First version · 7 scenes · 35s animation</div>
+        <video controls preload="none" style="width:100%; border-radius:6px;">
+          <source src="music/vanito/blood-moon-video-compressed.mp4" type="video/mp4">
+        </video>
+      </div>
+
+      <div style="background:rgba(200,200,50,0.06); border-radius:8px; padding:12px; border:1px solid rgba(200,200,50,0.1); margin-bottom:12px;">
+        <div style="font-size:0.85rem; font-weight:700; color:#cccc44;">4AM — MUSIC VIDEO</div>
+        <div style="font-size:0.7rem; color:#998844; margin-bottom:6px;">KAGE solo · Seedance cinematic</div>
+        <video controls preload="none" style="width:100%; border-radius:6px;">
+          <source src="music/vanito/4am-music-video-compressed.mp4" type="video/mp4">
+        </video>
+      </div>
+
+      <div style="background:rgba(200,200,50,0.06); border-radius:8px; padding:12px; border:1px solid rgba(200,200,50,0.1); margin-bottom:12px;">
+        <div style="font-size:0.85rem; font-weight:700; color:#cccc44;">BLOOD ON THE STRINGS</div>
+        <div style="font-size:0.7rem; color:#998844; margin-bottom:6px;">Original KAGE demo track</div>
+        <audio controls preload="none" style="width:100%; border-radius:4px;">
+          <source src="music/vanito/blood-on-the-strings-track.mp3" type="audio/mpeg">
+        </audio>
+      </div>
+
+      <div style="padding:8px; background:rgba(200,200,50,0.04); border-radius:6px; text-align:center;">
+        <span style="font-size:0.7rem; color:#887744;">More coming as you direct 🎬</span>
+      </div>
+
+    </div>
+
+  </div>
+
 </div>
 
 <!-- Footer -->
@@ -1653,6 +1656,10 @@
   <button class="nav-item" data-tab="characters" onclick="switchTab('characters')">
     <span class="icon">🎭</span>
     <span>Artists</span>
+  </button>
+  <button class="nav-item" data-tab="studio" onclick="switchTab('studio')">
+    <span class="icon">🎬</span>
+    <span>Studio</span>
   </button>
   <button class="nav-item" data-tab="chat" onclick="switchTab('chat')">
     <span class="icon">💬</span>
