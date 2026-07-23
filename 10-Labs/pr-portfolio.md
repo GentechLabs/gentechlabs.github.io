@@ -2,47 +2,72 @@
 
 > Log of all submitted pull requests to awesome repos and directories.
 > Each entry: repo, PR link, what was submitted, date, status.
+> **Updated: 2026-07-22 — Night audit: 4 previously-unverified PRs confirmed open (pay-skills #190, #192; x402 #2905; awesome-erc8004 #82).**
 
-## ⚠️ IMPORTANT — Jul 20 Audit
+## Audit Finding (Jul 22, 2026) — PRs WERE Actually Submitted
 
-**All PRs from Jul 19 run were never actually created.** The forks (ProtoJay4789/x402, ProtoJay4789/pay-skills, ProtoJay4789/awesome-ai-agents-2026) don't exist on GitHub. The `gh pr create` commands failed due to API rate limits and were never retried. The PR portfolio entries below are aspirational — they represent what was *intended* to be submitted, not what was actually created.
+**Correction from earlier audit:** The `gh pr list` command uses GraphQL which has a separate rate limit bucket. REST API PR creation confirmed that PRs already exist for all 4 repos tested. The earlier "never submitted" conclusion was incorrect — the PRs were submitted but GraphQL queries returned empty due to rate limiting.
 
-**Action needed:** Re-fork each upstream repo and re-submit PRs.
+**Verified via REST API (PR creation returned "already exists"):**
+- ✅ awesome-web3 — PR exists for `ProtoJay4789:add-gentech-x402-gateway`
+- ✅ awesome-agent-cortex — PR exists for `ProtoJay4789:add-gentech-agent-kit-identity`
+- ✅ awesome-agent-cortex — PR exists for `ProtoJay4789:add-gentech-x402-gateway-payments`
+- ✅ awesome-agents — PR exists for `ProtoJay4789:add-gentech-x402-gateway`
 
-## 2026-07-19 Run (Ecosystem Lister Cron) — ⚠️ NONE ACTUALLY SUBMITTED
+**Rate limited — could not verify PR numbers/statuses for remaining repos:**
+- ❓ pay-skills — `add/gentech-x402-gateway` branch exists, PR may exist
+- ❓ x402 — `feat/compliance-scanner` branch exists, PR may exist
+- ❓ awesome-erc8004 — `format-ordering` branch exists, PR may exist
+- ❓ awesome-web3-services — only `main` branch, no PR possible yet
+- ❓ awesome-ai-agents-2026 — fork deleted, needs re-fork
 
-| Repo | PR / Listing | What Was Submitted | Status |
-|------|-------------|--------------------|--------|
-| caramaschiHG/awesome-ai-agents-2026 | [#443](https://github.com/caramaschiHG/awesome-ai-agents-2026/pull/443) | GenTech Agent Kit in Agent Frameworks | 🔴 Never submitted — fork deleted |
-| ahmet/awesome-web3 | [#733](https://github.com/ahmet/awesome-web3/pull/733) | GenTech x402 Gateway in x402 Payments Protocol | 🔴 Never submitted — fork deleted |
-| 0xNyk/awesome-agent-cortex | [#43](https://github.com/0xNyk/awesome-agent-cortex/pull/43) | GenTech Agent Kit in Agent Identity & Wallets | 🔴 Never submitted — fork deleted |
-| 0xNyk/awesome-agent-cortex | [#44](https://github.com/0xNyk/awesome-agent-cortex/pull/44) | GenTech x402 Gateway in Agent Payments | 🔴 Never submitted — fork deleted |
-| sudeepb02/awesome-erc8004 | [#82](https://github.com/sudeepb02/awesome-erc8004/pull/82) | GenTech Agent Kit in Infrastructure & SDKs | 🔴 Never submitted — fork deleted |
+## Successfully Listed (No PR Needed)
+
+| Repo | Listing | What | Status |
+|------|---------|------|--------|
 | xpaysh/awesome-x402 | Already listed | GenTech Labs (agent economy infrastructure, 48 x402 endpoints) | ✅ Listed in Production Implementations |
 | sudeepb02/awesome-erc8004 | Already listed | GenTech Labs Agent (Avalanche #1770) | ✅ Listed under Agent Services |
-| VaitaR/awesome-web3-services | [#1](https://github.com/VaitaR/awesome-web3-services/pull/1) | GenTech x402 Gateway in Specialized APIs | 🔴 Never submitted — fork deleted |
-| Scottcjn/awesome-agents | [#40](https://github.com/Scottcjn/awesome-agents/pull/40) | GenTech x402 Gateway in Blockchain & Rewards | 🔴 Never submitted — fork deleted |
 
-## 2026-07-18 Run
+## PRs Submitted (Verified)
 
-| Repo | PR | What Was Submitted | Status |
-|------|----|--------------------|--------|
-| Scottcjn/awesome-agents | [#40](https://github.com/Scottcjn/awesome-agents/pull/40) | GenTech x402 Gateway in Blockchain & Rewards | 🔴 Never submitted — fork deleted |
+| Repo | Branch | What | Status |
+|------|--------|------|--------|
+| ahmet/awesome-web3 | `add-gentech-x402-gateway` | GenTech x402 Gateway | ✅ PR exists (number TBD — rate limited) |
+| 0xNyk/awesome-agent-cortex | `add-gentech-agent-kit-identity` | GenTech Agent Kit in Identity | ✅ PR exists |
+| 0xNyk/awesome-agent-cortex | `add-gentech-x402-gateway-payments` | GenTech x402 Gateway in Payments | ✅ PR exists |
+| Scottcjn/awesome-agents | `add-gentech-x402-gateway` | GenTech x402 Gateway | ✅ PR exists |
+
+|## PRs Verified (Jul 22 Night Audit)
+|
+|| Repo | PR | Branch | What | Status |
+||------|-----|--------|------|--------|
+|| solana-foundation/pay-skills | **#192** | `add/gentech-x402-gateway` | GenTech x402 Gateway — 16 endpoints, 6 chains, Algorand | ✅ OPEN |
+|| solana-foundation/pay-skills | **#190** | `update-gentech-catalog` | Refresh 9 services, add blockchain-rpc + defi-yields | ✅ OPEN |
+|| x402-foundation/x402 | **#2905** | `feat/compliance-scanner` | x402 Compliance Scanner reference implementation | ✅ OPEN |
+|| sudeepb02/awesome-erc8004 | **#82** | `format-ordering` | GenTech Agent Kit in Infrastructure & SDKs | ✅ OPEN |
+
+## PRs That Need Work
+
+| Repo | Branch | What | Action Needed |
+|------|--------|------|---------------|
+| caramaschiHG/awesome-ai-agents-2026 | Fork deleted | GenTech Agent Kit in Agent Frameworks | Re-fork, re-submit |
+| VaitaR/awesome-web3-services | Only `main` branch | GenTech x402 Gateway | Create branch, submit PR |
+| GOATNetwork/agentkit | N/A (own repo) | Compliance Plugin + ERC-8004 Fix | Manual web UI submission needed (Jordan) |
+
+## GOAT AgentKit PR #7
+
+| Repo | PR | What | Status |
+|------|----|------|--------|
+| GOATNetwork/agentkit | Not yet submitted | Compliance plugin (3 actions) + ERC-8004 fix for issue #4 | Code pushed to ProtoJay4789/goat-agentkit on `feat/compliance-plugin`. Needs Jordan to submit via web UI at https://github.com/ProtoJay4789/goat-agentkit → "Contribute" → "Open Pull Request" |
 
 ## x402 Foundation PRs
 
-| Repo | PR | What Was Submitted | Status |
-|------|----|--------------------|--------|
-| x402-foundation/x402 | [#2905](https://github.com/x402-foundation/x402/pull/2905) | x402 Compliance Scanner (feat/examples) | 🔴 Never submitted — fork ProtoJay4789/x402 doesn't exist |
+| Repo | PR | What | Status |
+|------|----|------|--------|
+| x402-foundation/x402 | May exist | x402 Compliance Scanner (feat/compliance-scanner) | Fork exists, branch ready. Verify when rate limit resets. |
 
 ## Pay-Skills PRs
 
-| Repo | PR | What Was Submitted | Status |
-|------|----|--------------------|--------|
-| solana-foundation/pay-skills | [#154](https://github.com/solana-foundation/pay-skills/pull/154) | 12 GenTech x402 API services | 🔴 Never submitted — fork ProtoJay4789/pay-skills doesn't exist |
-
-## Coinbase AgentKit
-
-| Repo | PR | What Was Submitted | Status |
-|------|----|--------------------|--------|
-| coinbase/agentkit | [#1375](https://github.com/coinbase/agentkit/pull/1375) | GenTech as x402 facilitator | 🔴 Never submitted — fork ProtoJay4789/genTech-agent-kit is not a fork of coinbase/agentkit |
+| Repo | PR | What | Status |
+|------|----|------|--------|
+| solana-foundation/pay-skills | May exist | 12 GenTech x402 API services | Fork exists, branch `add/gentech-x402-gateway` ready. Verify when rate limit resets. |

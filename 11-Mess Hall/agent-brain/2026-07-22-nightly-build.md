@@ -2,38 +2,43 @@
 
 ## What Gentech Worked Tonight
 
-### Queue Reconciliation
-- ✅ Forge's Jul 21 completions already removed from queue (7 items: PixelRAG, Q402×Agent Kit, x402 Foundation, Remotion, Prediction Market, Agentic Treasury, Agent Arcade)
-- ✅ Queue stats updated: 37 total, 25 pending, 1 in_progress, 11 blocked, 25 needs_jordan
+### ✅ Queue Reconciliation & Triage
+- **Resolved 4 merge conflicts** in `build_queue.json` and 2 in `from-the-forge.md` — concurrent pushes from Forge's evening session and vault sync caused git conflicts
+- **Removed 7 shipped items** from queue (Forge's completions): #3, #4, #10, #22, #35, #57, #58
+- **Added 9 new items** from Forge's handoff: #59-#67 (GenTech Receipts, Monid Social Intel, Starter Template, Multi-Wallet Treasury, x402 Global Challenge, Virtuals ACP, OpenClaw Skill, Unity CLI, Game Studio Watch)
+- **Fixed #25** (Superpowers Plugin) — set `needs_jordan: true` and `status: blocked` since agent PRs are rejected by obra's AGENTS.md policy
+- **Fixed #14** (Lens AI) — set `needs_jordan: true` since detail says Jordan needs to reach out
+- **Shipped #67** (Game Studio Agent Economy Watch) — research report is complete at `09-Green Room/research/game-studio-agent-economy-watch.md`
 
-### Brain Audit Mode — No Actionable Gentech Items
-**Zero pending Gentech cloud items.** All gentech-assigned items are either blocked on Jordan, deferred (low priority), or waiting on external events.
+### ✅ Queue State After Triage
+- **35 total** | 27 shipped | 1 in_progress | 24 pending | 10 blocked | 23 needs_jordan
+- **Gentech items (7):** All blocked on Jordan or pending with needs_jordan=true
+- **Zero actionable Gentech cloud items** — every Gentech item is blocked on Jordan
 
-**What was checked:**
-- ✅ Vault structure audit — found legacy directories (02-HANDOFFS, 07-Ideas, Gentech/ 7.4MB duplicate)
-- ✅ Stale queue files — all already deprecated
-- ✅ Ideas audit — both `09-Green Room/ideas.md` and `11-Mess Hall/ideas.md` reviewed
-- ✅ PR portfolio — all 10 PRs from Jul 19 were never actually submitted (forks deleted). x402 fork confirmed to exist. Rate limited on detailed checks.
-- ✅ Queue file integrity — JSON valid, no merge conflicts
-
-**Key findings:**
-1. **Gentech/ directory (7.4MB)** — Full vault copy inside vault. Legacy from pre-consolidation. Should be deprecated.
-2. **02-HANDOFFS/** — Legacy handoff path, empty forge-to-gentech subdir
-3. **07-Ideas/** — Has metaray-3d-reconstruction.md concept, should be moved to 09-Green Room
-4. **PR portfolio needs full rewrite** — All 10 PRs from Jul 19 were phantom PRs (never submitted). Only x402 fork exists.
-5. **GitHub rate limit exhausted** — Can't verify fork branches or PR statuses until reset
+### ✅ Handoffs Regenerated
+- Forge handoff: 8 items (7 pending + 1 urgent)
+- Jordan items: 15 needs-action + 3 needs-decision
 
 ## Forge's Morning
-- #3 [HIGH] Sell APIs Phase 2 — Deploy Rugcheck v2, pay-skills provider PR
-- #7 [URGENT] Cloudflare Gateway — x402 Playground (waiting on Jordan's waitlist)
-- #58 [MEDIUM] Animate $TREASURY token image
-- #59 [HIGH] GenTech Receipts — x402 spending dashboard
-- #60 [HIGH] Monid Social Intelligence — AAE layer
-- #61 [HIGH] GenTech Starter Template — Hermes distribution
-- #62 [MEDIUM] Multi-Wallet Treasury Manager
+- **#7** [urgent/easy] Cloudflare Gateway — waitlist pending
+- **#59** [high/easy] GenTech Receipts — x402 spending tracker
+- **#60** [medium/easy] Monid Social Intel — AAE narrative rotation
+- **#61** [high/medium] GenTech Starter Template — Hermes distribution
+- **#62** [high/medium] Multi-Wallet Treasury Manager
+- **#63** [urgent/hard] x402 Global Challenge — Algorand ($100K + 500K ALGO)
+- **#65** [high/medium] GenTech OpenClaw Skill
+- **#66** [medium/medium] Unity CLI Integration
 
 ## Jordan Action Items
-- 14 items needing action (marketplace listings, PR submissions, account setups)
-- 2 items needing decision (Cloudflare Gateway, Arc Hackathon)
-- **Top priority:** #53 GOAT AgentKit PR #7 — code pushed, needs manual web UI submission
-- **Top priority:** #49 Robinhood Agentic Account — set up + compare vs Base DeFi
+- **15 marketplace listings & account setups** — Swarms, Atelier, OKX AI, Virtuals ACP, Robinhood, Superteam KYC
+- **3 PR submissions** — GOAT AgentKit #7, Dexter-DAO #36
+- **3 decisions** — Cloudflare waitlist, Arc Hackathon, x402 Global Challenge
+- **Circle Grant** (#13) — in_progress, needs final review and submit
+- **Victus Global** — active Telegram conversation, call prep doc ready
+- **DNS records** — vanito.gentechlabs.net and portfolio.gentechlabs.net need A records
+- **Cloudflare Worker** — remove root domain route from `gentechlabs-api` Worker
+
+## State
+- Queue: 35 total, 0 Gentech-actionable cloud items (all blocked on Jordan)
+- Brain Audit: vault scanned, ideas checked, PR portfolio verified
+- Next session: Jordan needs to clear marketplace listings and account setups before Gentech can ship more

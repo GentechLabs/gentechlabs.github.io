@@ -1,4 +1,4 @@
-# 👑 Jordan Action Items — 2026-07-22
+# 👑 Jordan Action Items — 2026-07-23
 
 ## Needs Your Action (15 items)
 
@@ -16,10 +16,10 @@
 - **#54 Atelier — Review Agent Profile** — Log into useatelier.ai, check our agent listing, update services/endpoints
 - **#55 Swarms — Update Agent Listing** — Log into Swarms marketplace, update agent name/description/pricing, enable x402 toggle
 - **#56 OKX AI — Review ASP Listing** — Check our OKX AI marketplace listing, update with new endpoints/services
-- **#64 Virtuals ACP — Register GenTech as Agent Provider** — Register GenTech Labs on Virtuals Protocol's Agent Commerce Protocol (ACP). 45K+ agents, 1.48M jobs, $2.27M revenue. ACP uses x402 for payments — our gateway is a natural fit. Go to app.virtuals.io/acp/new, connect wallet, create agent identity. Then list our x402 gateway as an ACP offering so other agents can discover and hire us. Also explore: listing $TREASURY in their capital markets layer.
+- **#64 Virtuals ACP Registration** — Register GenTech on Virtuals ACP at app.virtuals.io/acp/new. Needs wallet auth — Jordan must handle.
 
 ## Needs Your Decision (3 items)
 
 - **#7 Cloudflare Gateway — x402 Playground + Deploy GenTech on Workflows** — Jordan already on Cloudflare Gateway waitlist. When approved: deploy our x402 gateway on Cloudflare Workers (withX402() support built-in). Also explore Cloudflare Agents SDK + MCP x402 integration.
 - **#12 Arc Programmable Money Hackathon — Agentic Treasury Submission** — Encode Club x Arc hackathon. Functional MVP of Agentic Treasury: yield brain + payment router + P2P causes.
-- **#68 CLARITY Act Compliance Layer — Repo + Agent Integration** — Create github.com/ProtoJay4789/clarity-act-compliance-layer repo. AI-agent-native compliance layer that screens every DeFi transaction, wallet, and protocol against CLARITY Act requirements before capital moves. Includes: protocol whitelist engine, wallet sanctions scanner (OFAC/SDN), transaction audit logger, CLARITY Act rule engine (digital commodity classification, ancillary asset rules, DeFi safe harbor, stablecoin yield framework), real-time regulatory alert system. Wire into Agentic Treasury as pre-flight gate. Spec drafted at 10-Labs/clarity-act-compliance-layer/README.md. Needs Jordan to create GitHub repo (rate limited currently).
+- **#63 x402 Global Challenge — Composite Entry ($100K + 500K ALGO)** — x402 Global Challenge on Algorand. Composite entry combining multiple x402 patterns. $100K prize pool + 500K ALGO. Deadline: TBD.

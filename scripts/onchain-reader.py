@@ -195,7 +195,7 @@ def get_lfj_position(wallet, pool_address):
     chain = "avalanche"
 
     # Get active bin (current price point)
-    active_result = eth_call(chain, pool_address, "0x80afabfa")
+    active_result = eth_call(chain, pool_address, "0xdbe65edc")
     active_bin = int(active_result, 16) if active_result and active_result != "0x" else None
 
     # Get reserves

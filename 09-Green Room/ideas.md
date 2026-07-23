@@ -13,7 +13,7 @@
 - **Needs you:** Fund Modal GPU run (~$30-60 USDC on Base)
 - Revenue: API key selling, x402 ($0.01-0.05/query), EvoMap Capsules
 - **Priority:** 🏆 Milestone — could become "ChatGPT for DeFi"
-- [ ] Add to build queue as #58
+- [x] Add to build queue as #58
 
 ## 🏆 Agent Kit v2 — Modular Agent Framework
 **Source:** Jordan brainstorm (Jun 18) | **Status:** Spec complete, ready to build
@@ -41,7 +41,7 @@
 - GenTech provides DeFi yield + x402 payments → "Your agent earns yield, you spend anywhere"
 - **Needs you:** Create Sana account at sana.bot/gateway (email signup)
 - Then: get API keys, test earn → store → spend loop
-- [ ] Add to build queue as #59
+- [x] Add to build queue as #59
 
 ## EvoMap Integration
 **Source:** YouTube (Jun 18) | **Status:** Research done, ready to register
@@ -77,6 +77,7 @@
 - **GenTech Suite — Activity/Hobby Layer** — `11-Mess Hall/ideas/activity-hobby-layer.md`
 - **Agent Kit Installer** — `11-Mess Hall/ideas/agent-kit-installer-spec.md`
 - **GenTech Career Prep** — AI career coach: interview prep, salary negotiation, job strategy, salary research. Born from Jordan's DevRel prep. "Level the playing field for people who don't know what they don't know."
+- **Meta Ray-Ban 3D Reconstruction** — `09-Green Room/specs/metaray-3d-reconstruction.md` — Wearable 3D reconstruction pipeline using Meta Ray-Ban + LingBot-Map. x402 inference API. Promoted from `07-Ideas/`.
 
 ---
 
