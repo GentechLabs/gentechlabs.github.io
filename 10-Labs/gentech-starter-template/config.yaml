@@ -1,0 +1,70 @@
+# ═══════════════════════════════════════════════════════════════
+# GenTech Starter Template — Hermes Agent Configuration
+# ═══════════════════════════════════════════════════════════════
+# Fork this template to bootstrap any new agent with:
+#   • x402 payment gateway (pay-per-call endpoints)
+#   • Q402 subscription billing (recurring payments)
+#   • GenTech model routing (GLM-5.2 for audits, deepseek for daily)
+#   • CLARITY Act compliance layer
+#
+# Quick start: cp .env.template .env, fill in keys, then run:
+#   hermes setup
+#   hermes tools
+#
+# Docs: https://hermes-agent.nousresearch.com/docs
+# ═══════════════════════════════════════════════════════════════
+
+model:
+  default: deepseek-v4-flash
+  provider: opencode-go
+  # ── Switch to GenTech recommended for audits ──
+  # default: glm-5.2
+  # provider: zai
+  base_url: ""
+
+agent:
+  max_turns: 60
+  image_input_mode: native
+  verbose: false
+  reasoning_effort: medium
+
+terminal:
+  backend: local
+  cwd: .
+  timeout: 180
+  home_mode: auto
+
+web:
+  backend: firecrawl
+
+# ── Skills ────────────────────────────────────────────────────
+skills:
+  enabled:
+    - x402-gateway          # x402 payment integration
+    - q402-payments         # Q402 subscription billing
+    - model-routing         # GenTech audit-aware routing
+    - gentech-patterns      # Core GenTech development patterns
+
+# ── Custom Providers ──────────────────────────────────────────
+# Uncomment and add your API keys to .env to enable:
+custom_providers:
+  # x402 Gateway — pay-per-call endpoint protection
+  # x402:
+  #   api_key: ${X402_API_KEY}
+  #   base_url: ${X402_GATEWAY_URL}
+  #
+  # Q402 — subscription billing
+  # q402:
+  #   api_key: ${Q402_API_KEY}
+  #   base_url: https://api.q402.io/v1
+
+# ── Plugins ───────────────────────────────────────────────────
+plugins: []
+
+# ── Vault Sync ────────────────────────────────────────────────
+# Point to a shared Obsidian vault or git repo for multi-agent sync
+# vault:
+#   path: ./vault
+#   sync:
+#     backend: git
+#     remote: origin
