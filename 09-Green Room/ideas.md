@@ -98,3 +98,10 @@
 - [x] GenTech Travel — live in dashboard
 - [x] GenTech Gaming — live in dashboard
 - [x] GenTech Finance — live in dashboard
+- [x] Quantum-Safe Treasury Phase 1 — hybrid SPHINCS+ signing, circuit breaker, fresh addresses, 39/39 tests
+- [x] CLARITY Act compliance badges — all repos tagged, blog post published
+- [x] Rugcheck v2 API — rebranded as CLARITY Act Agent Compliance Platform
+- [x] SkillSpector YARA rules — 26 rules (549 lines) for x402 payment security
+- [x] Revenue Monitor — bug fixed (KNOWN_SERVICES→KNOWN_SENDERS rename)
+- [x] Academy Module 4 — Production-Grade x402 Services
+- [x] Build Queue visibility page + generator script
