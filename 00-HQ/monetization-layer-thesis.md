@@ -32,6 +32,18 @@ No API keys. No subscriptions. No human approval per transaction. Just HTTP 402 
 | **Marketplace Audit** | Tracks listings across 7+ marketplaces | Builders who want distribution |
 | **Auto-Company Skill** | Monetization skill for autonomous agent companies | Agent-based dev shops |
 | **Content Pipeline** | Remotion + ElevenLabs video generation | Marketing and demos |
+| **Quantum-Safe Treasury** | Hybrid ECDSA + PQC signing, fresh addresses per tx | DAOs, funds, agent wallets |
+| **Own Intelligence (D5)** | Self-trained models, no reliance on frontier black-boxes | Independence from opaque AI providers |
+
+## Core Principles
+
+| Principle | What it means | What we build from it |
+|-----------|--------------|----------------------|
+| **No Gatekeeping** | Technology should be accessible, not locked behind corporate or government walls | x402 gateway (no API keys, no subscriptions), open-source everything |
+| **Trust Through Preparation** | Trust isn't claimed — it's earned by being ready for what others ignore | Quantum-safe treasury from day one, compliance scanner before regulations require it |
+| **Decentralized by Default** | No single point of failure, no kill switch, no central authority that can flip a lever | Gateway runs on anyone's infrastructure, treasury uses multi-chain, agents are autonomous |
+| **Own Your Intelligence** | Don't depend on black-box models trained on undisclosed data | D5 — self-trained models, auditable training data, no opaque dependencies |
+| **Builders First** | The person who wrote the code should be the first to get paid | Pay-per-call x402, no VC dilution, no storefront tax |
 
 ## The Vision
 
