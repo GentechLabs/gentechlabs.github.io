@@ -34,8 +34,8 @@
 |---|------|-------------|-----|
 | 3a | Ambush BEFORE | Surrounded by multiple shadows, defensive stance | `https://blockrun.ai/api/media/media/images/2026/07/24/6534b504-0518-43b8-bacd-2a0515f0d121.png` |
 | 3b | Ambush AFTER | First shadow lunges, KAGE counters | `https://blockrun.ai/api/media/media/images/2026/07/24/31b66398-d99e-463f-8a0e-2fc739a40d62.png` |
-| 3c | Strike BEFORE | Wind up to swing guitar like a bat | `https://blockrun.ai/api/media/media/images/2026/07/24/0c1f1ad1-f366-4ad3-b47f-655720d75c6a.png` |
-| 3d | Strike AFTER | Impact — shadow explodes into red particles | `https://blockrun.ai/api/media/media/images/2026/07/24/d0762fdb-d331-4c22-84eb-c372a75bab7a.png` |
+| 3c | Strike BEFORE | Wind up to swing guitar like a bat — hands opposite sides of neck | `https://blockrun.ai/api/media/media/images/2026/07/24/d02ce2b8-2771-426d-95f1-d14d331849a9.png` |
+| 3d | Strike AFTER | Impact — shadow explodes into red particles (user approved) | `https://raw.githubusercontent.com/ProtoJay4789/ProtoJay4789.github.io/main/music/vanito/kage-film-assets/swing-impact-after.jpg` |
 | 3e | Strum BEFORE | About to strum, red energy building around guitar | `https://blockrun.ai/api/media/media/images/2026/07/24/cd1be972-89b2-41ad-aa4e-3abb1b0555af.png` |
 | 3f | Strum AFTER | Red rings pulse outward, shadows reel back | `https://blockrun.ai/api/media/media/images/2026/07/24/7b1ab9e9-3efe-4fb2-b972-15751b38afe2.png` |
 | 3g | Leap BEFORE | Crouched, about to jump, shadows reaching up | `https://blockrun.ai/api/media/media/images/2026/07/24/3f8f06e9-9b8f-456d-9404-babced68dee7.png` |
