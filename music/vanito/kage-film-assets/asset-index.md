@@ -1,5 +1,5 @@
 # KAGE — BLOOD MOON RISING
-## Complete Storyboard & Film Asset Index
+## Complete Expanded Storyboard — 20 Keyframes
 
 ---
 
@@ -11,67 +11,50 @@
 
 ---
 
-### FULL STORYBOARD — 4 Clips, 12 Keyframes
+### CLIP 1 — THE VIGIL (0-10s)
 
-#### CLIP 1 — THE VIGIL (0-10s)
+| # | Description | URL |
+|---|-------------|-----|
+| 1a | BEFORE — Puddle with "A GenTech Labs Production" reflected, moon, Tokyo Tower | `https://blockrun.ai/api/media/media/images/2026/07/24/fdfc522d-8c89-426f-a60c-33d47b9cc888.jpg` |
+| 1b | AFTER — Boot steps on puddle, text disperses, water splashes | `https://blockrun.ai/api/media/media/images/2026/07/24/ec37a619-9a3e-4e29-9f4a-b488bd34681e.png` |
+| 1c | KAGE walks toward edge, back view, guitar strapped | `https://blockrun.ai/api/media/media/images/2026/07/24/ee7573ab-5b3b-4906-af6a-479d65c04d52.png` |
 
-| Frame | Description | Image |
-|-------|-------------|-------|
-| 1a — BEFORE | Low angle puddle. "A GenTech Labs Production" reflected in the water. Blood red moon. Rain ripples. | [![1a](https://blockrun.ai/api/media/media/images/2026/07/24/fdfc522d-8c89-426f-a60c-33d47b9cc888.jpg)](https://blockrun.ai/api/media/media/images/2026/07/24/fdfc522d-8c89-426f-a60c-33d47b9cc888.jpg) |
-| 1b — AFTER | KAGE's boot steps onto the puddle. Text disperses into fragments. Water splashes upward. Boot walks away. | [![1b](https://blockrun.ai/api/media/media/images/2026/07/24/ec37a619-9a3e-4e29-9f4a-b488bd34681e.png)](https://blockrun.ai/api/media/media/images/2026/07/24/ec37a619-9a3e-4e29-9f4a-b488bd34681e.png) |
-| 1c | KAGE walks across the rooftop toward the edge. Back 3/4 view. Coat billowing. Guitar strapped. Hand on neck. Moon ahead. | [![1c](https://blockrun.ai/api/media/media/images/2026/07/24/ee7573ab-5b3b-4906-af6a-479d65c04d52.png)](https://blockrun.ai/api/media/media/images/2026/07/24/ee7573ab-5b3b-4906-af6a-479d65c04d52.png) |
+### CLIP 2 — THE REVEAL (10-20s)
 
-⬇️ *KAGE reaches the edge*
+| # | Description | URL |
+|---|-------------|-----|
+| 2a | KAGE walking toward camera, front tracking shot | `https://blockrun.ai/api/media/media/images/2026/07/24/bd4129f4-f032-4c6e-9ce2-05f5b4e7238a.png` |
+| 2b | KAGE profile, stops at edge, about to raise guitar | `https://blockrun.ai/api/media/media/images/2026/07/24/d72f19b6-a439-4ea4-b6b4-a4d908c6965f.png` |
+| 2c | KAGE grabs guitar mid-lift | `https://blockrun.ai/api/media/media/images/2026/07/24/af672d32-a805-4c03-8caf-b3eb0c8f65b7.png` |
+| 2d | THE CHORD — guitar raised, rain explodes, phoenix flares | `https://blockrun.ai/api/media/media/images/2026/07/24/78c364c7-06ec-4dc1-aba8-d0181c6568d2.png` |
 
----
+### CLIP 3 — THE BATTLE (20-35s)
 
-#### CLIP 2 — THE REVEAL (10-20s)
+| # | Beat | Description | URL |
+|---|------|-------------|-----|
+| 3a | Ambush BEFORE | Surrounded by multiple shadows, defensive stance | `https://blockrun.ai/api/media/media/images/2026/07/24/6534b504-0518-43b8-bacd-2a0515f0d121.png` |
+| 3b | Ambush AFTER | First shadow lunges, KAGE counters | `https://blockrun.ai/api/media/media/images/2026/07/24/31b66398-d99e-463f-8a0e-2fc739a40d62.png` |
+| 3c | Strike BEFORE | Wind up to swing guitar like a bat | `https://blockrun.ai/api/media/media/images/2026/07/24/0c1f1ad1-f366-4ad3-b47f-655720d75c6a.png` |
+| 3d | Strike AFTER | Impact — shadow explodes into red particles | `https://blockrun.ai/api/media/media/images/2026/07/24/d0762fdb-d331-4c22-84eb-c372a75bab7a.png` |
+| 3e | Strum BEFORE | About to strum, red energy building around guitar | `https://blockrun.ai/api/media/media/images/2026/07/24/cd1be972-89b2-41ad-aa4e-3abb1b0555af.png` |
+| 3f | Strum AFTER | Red rings pulse outward, shadows reel back | `https://blockrun.ai/api/media/media/images/2026/07/24/7b1ab9e9-3efe-4fb2-b972-15751b38afe2.png` |
+| 3g | Leap BEFORE | Crouched, about to jump, shadows reaching up | `https://blockrun.ai/api/media/media/images/2026/07/24/3f8f06e9-9b8f-456d-9404-babced68dee7.png` |
+| 3h | Leap AFTER | Mid-air, guitar raised, shadows grab below | `https://blockrun.ai/api/media/media/images/2026/07/24/c6a83c49-14fe-441e-8465-ae00746bcb91.png` |
+| 3i | Finale | Last shadow dissolves into red mist | `https://blockrun.ai/api/media/media/images/2026/07/24/50b98029-bb3a-4123-8c8a-f9dd46cf8630.png` |
 
-| Frame | Description | Image |
-|-------|-------------|-------|
-| 2a | KAGE walking toward camera, front tracking shot. Guitar in hand. Moon behind shoulder. | [![2a](https://blockrun.ai/api/media/media/images/2026/07/24/bd4129f4-f032-4c6e-9ce2-05f5b4e7238a.png)](https://blockrun.ai/api/media/media/images/2026/07/24/bd4129f4-f032-4c6e-9ce2-05f5b4e7238a.png) |
-| 2b | KAGE stops at the edge. Profile view facing the moon. Both hands on guitar, about to raise. | [![2b](https://blockrun.ai/api/media/media/images/2026/07/24/d72f19b6-a439-4ea4-b6b4-a4d908c6965f.png)](https://blockrun.ai/api/media/media/images/2026/07/24/d72f19b6-a439-4ea4-b6b4-a4d908c6965f.png) |
-| 2c — GRAB | KAGE reaches for and grabs the guitar, mid-lift. Hands gripping neck and body. Coat opens with motion. | [![2c](https://blockrun.ai/api/media/media/images/2026/07/24/af672d32-a805-4c03-8caf-b3eb0c8f65b7.png)](https://blockrun.ai/api/media/media/images/2026/07/24/af672d32-a805-4c03-8caf-b3eb0c8f65b7.png) |
-| 2d — CHORD | **THE CHORD.** Guitar raised, chord strikes. Rain explodes outward in a sphere. Coat whips back. Phoenix flares. | [![2d](https://blockrun.ai/api/media/media/images/2026/07/24/78c364c7-06ec-4dc1-aba8-d0181c6568d2.png)](https://blockrun.ai/api/media/media/images/2026/07/24/78c364c7-06ec-4dc1-aba8-d0181c6568d2.png) |
+### CLIP 4 — THE VICTORY (35-45s)
 
-⬇️ *Shockwave settles. Shadows emerge from the darkness.*
+| # | Description | URL |
+|---|-------------|-----|
+| 4a | KAGE victorious, guitar planted, phoenix glowing, pull back | `https://blockrun.ai/api/media/media/images/2026/07/24/97153443-e136-404b-b783-d5c2c2b76428.png` |
 
----
+### OTHER ASSETS
+| Asset | URL |
+|-------|-----|
+| KAGE Sheet (seed) | `https://blockrun.ai/api/media/media/images/2026/07/24/bb1043d9-51b7-4c20-8112-4ed6b6a13d4a.png` |
+| Shadow Sheet (seed) | `https://blockrun.ai/api/media/media/images/2026/07/24/b69de6a1-88b6-46b6-bc23-e9dd38b9e8d4.png` |
 
-#### CLIP 3 — THE BATTLE (20-30s)
-
-| Frame | Description | Image |
-|-------|-------------|-------|
-| 3a | KAGE stands in the aftermath. Shadow creatures with glowing red eyes rise behind him. | [![3a](https://blockrun.ai/api/media/media/images/2026/07/24/3bf72867-7288-4099-9522-c01e0cd94a2f.png)](https://blockrun.ai/api/media/media/images/2026/07/24/3bf72867-7288-4099-9522-c01e0cd94a2f.png) |
-| 3b | KAGE fights. 360° camera orbit. Guitar swings through shadow creatures. Phoenix glowing. | [![3b](https://blockrun.ai/api/media/media/images/2026/07/24/6131981f-242c-42c0-812c-af5e2c562e61.png)](https://blockrun.ai/api/media/media/images/2026/07/24/6131981f-242c-42c0-812c-af5e2c562e61.png) |
-| 3c | Final shadow dissolves into red mist. KAGE lands center frame. | [![3c](https://blockrun.ai/api/media/media/images/2026/07/24/50b98029-bb3a-4123-8c8a-f9dd46cf8630.png)](https://blockrun.ai/api/media/media/images/2026/07/24/50b98029-bb3a-4123-8c8a-f9dd46cf8630.png) |
-
-⬇️ *Mist clears. KAGE plants the guitar.*
-
----
-
-#### CLIP 4 — THE VICTORY (30-40s)
-
-| Frame | Description | Image |
-|-------|-------------|-------|
-| 4a | KAGE victorious. Guitar planted on the rooftop. Phoenix glowing crimson. Rain softens. | [![4a](https://blockrun.ai/api/media/media/images/2026/07/24/97153443-e136-404b-b783-d5c2c2b76428.png)](https://blockrun.ai/api/media/media/images/2026/07/24/97153443-e136-404b-b783-d5c2c2b76428.png) |
-
-⬇️ *Slow pull back. Title fades in: "KAGE — BLOOD MOON RISING". Fade to black.*
-
----
-
-### STORYBOARD FLOW (Animation Order)
-
+### ANIMATION FLOW
 ```
-1a (Puddle BEFORE) → 1b (Boot steps, text disperses) → 1c (Walks to edge) 
-    → 2a (Front walk) → 2b (Profile, stops) → 2c (Grabs guitar) → 2d (Chord explodes) 
-    → 3a (Shadows rise) → 3b (360 orbit fight) → 3c (Shadow dissolves) 
-    → 4a (Victory, pull back, title)
+1a → 1b → 1c → 2a → 2b → 2c → 2d → 3a → 3b → 3c → 3d → 3e → 3f → 3g → 3h → 3i → 4a
 ```
-
-### PRODUCTION NOTES
-- All KAGE character images use GPT Image 2 edited from character sheet
-- Shadow creature images use GPT Image 2 edited from both character sheets
-- Environment-only images (puddle alone) use Seedream 5.0 Pro
-- Animation pipeline: storyboard image → seed for Seedance 2.0 → 10s clip → trim 0.7s → ffmpeg stitch
-- Balance: $18.69 remaining — enough to animate all 4 clips
