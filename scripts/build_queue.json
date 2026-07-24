@@ -386,17 +386,18 @@
       "name": "Quantum-Safe Treasury — Hybrid Signing Core Implementation",
       "difficulty": "hard",
       "priority": "high",
-      "status": "pending",
+      "status": "shipped",
       "assigned_to": "gentech",
       "platform": "cloud",
       "needs_jordan": false,
-      "detail": "Build hybrid signing (ECDSA + SPHINCS+) for Agentic Treasury. Fresh address generation. Quantum emergency circuit. Based on design doc at 10-Labs/quantum-safe-agentic-treasury.md.",
-      "note": " Design doc at 10-Labs/quantum-safe-agentic-treasury.md (no code yet). Corrected from in_progress to pending — no implementation started."
+      "detail": "Phase 1 COMPLETE Jul 24. Built quantum_treasury package: hybrid ECDSA+SPHINCS+ (SLH-DSA) signing, fresh address generation, model interaction logging, quantum emergency circuit, 39/39 tests. Real NIST PQC via liboqs. Design doc at 10-Labs/quantum-safe-agentic-treasury.md. Risk assessment at 10-Labs/quantum-risk-assessment.md. Phase 2 (persistent key storage, auto-rotation) queued.",
+      "note": "Phase 1 shipped Jul 24 nightly build."
     }
   ],
   "consolidation_notes": [
     "v11 — Jul 22 CLARITY Act session. Shipped: #3 (Rugcheck v2 API), #4 (x402 Foundation PR), #10 (SkillSpector YARA rules), #22 (Credit score posts), #35 (PixelRAG Agent Kit), #57 (Injective iAgent), #58 ($TREASURY animation).",
     "v14 — Jul 23 Afternoon session. Shipped: Revenue Monitor bug fix (KNOWN_SERVICES→KNOWN_SENDERS), Build Queue visibility page + generator script, Academy Module 4 (Production-Grade x402 Services).",
+    "v15 — Jul 24 Nightly build. Shipped: #69 Quantum-Safe Treasury Phase 1 (hybrid signing, fresh addresses, model logging, circuit breaker, risk assessment). 39/39 tests. Real SPHINCS+ (SLH-DSA) via liboqs.",
     "CLARITY Act analysis saved at 00-HQ/clarity-act-analysis.md.",
     "All GenTech repos updated with CLARITY Act compliance badges.",
     "Circle Developer Grant draft at 09-Green Room/circle-developer-grant-application.md — Jordan + Gentech working on submission.",
@@ -418,6 +419,6 @@
       "decision_maker": true
     }
   },
-  "note": "v14 — Jul 23 session: Revenue Monitor fix, Build Queue page, Academy Module 4.",
-  "updated": "2026-07-23T12:30:00Z"
+  "note": "v15 — Jul 24 nightly: Quantum-Safe Treasury Phase 1 shipped.",
+  "updated": "2026-07-24T04:30:00Z"
 }
