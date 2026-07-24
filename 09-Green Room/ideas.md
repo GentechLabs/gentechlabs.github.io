@@ -70,14 +70,16 @@
 - Revenue: free basic, premium skins, skill marketplace
 - [ ] Full spec at `09-Green Room/specs/agents-as-pets.md`
 
-## Other Mess Hall Ideas (specs written, not started)
-- **Decentralized Travel Community** — `11-Mess Hall/ideas/decentralized-travel-community.md`
-- **GenTech Suite — Tutors Layer** — `11-Mess Hall/ideas/education-layer-tutors.md`
-- **GenTech Suite — Milestones Layer** — `11-Mess Hall/ideas/genTech-milestones-spec.md`
-- **GenTech Suite — Activity/Hobby Layer** — `11-Mess Hall/ideas/activity-hobby-layer.md`
-- **Agent Kit Installer** — `11-Mess Hall/ideas/agent-kit-installer-spec.md`
-- **GenTech Career Prep** — AI career coach: interview prep, salary negotiation, job strategy, salary research. Born from Jordan's DevRel prep. "Level the playing field for people who don't know what they don't know."
-- **Meta Ray-Ban 3D Reconstruction** — `09-Green Room/specs/metaray-3d-reconstruction.md` — Wearable 3D reconstruction pipeline using Meta Ray-Ban + LingBot-Map. x402 inference API. Promoted from `07-Ideas/`.
+| ## Other Mess Hall Ideas (concepts, no standalone specs)
+- **GenTech Career Prep** — AI career coach: interview prep, salary negotiation, job strategy, salary research. Born from Jordan's DevRel prep.
+- **Agent Kit Installer** — CLI tool for one-command Hermes agent setup
+- **GenTech Suite — Tutors Layer** — Education layer for agent-assisted learning
+- **GenTech Suite — Milestones Layer** — Goal-tracking and achievement system
+- **GenTech Suite — Activity/Hobby Layer** — Activity discovery and recommendation layer
+- **Decentralized Travel Community** — Token-gated travel coordination
+
+## Promoted from Legacy (07-Ideas/)
+- **Meta Ray-Ban 3D Reconstruction** — `09-Green Room/specs/metaray-3d-reconstruction.md` — Wearable 3D reconstruction pipeline using Meta Ray-Ban + LingBot-Map. x402 inference API. Promoted from `07-Ideas/` Jul 23.
 
 ---
 
