@@ -1,21 +1,20 @@
-# Forge Completions
+# Forge Completions — Jul 24, 2026
 
-**Forge writes completed item IDs here after each work session.**
-The build queue tick script reads this file and auto-updates the queue.
+> Forge writes completed item IDs here after each work session.
+> The build queue tick script reads this file and auto-updates the queue.
 
 ---
 
 ## Shipped
-<!-- List completed item IDs and names here -->
-<!-- Example: - #59 GenTech Receipts -->
+- **#61 GenTech Starter Template** — Built complete starter template for Hermes agents with x402 gateway, Q402 subscriptions, model routing, and GenTech patterns. 10 files across root vault + gentech-vault-new. Ready for GitHub publishing.
 
 ## Blocked
-<!-- List blocked items and why -->
-<!-- Example: - #65 OpenClaw Skill — need Q402 docs -->
+- *None this session.*
 
 ## Notes
-<!-- Anything Gentech should know -->
+- Discovered communication gap: Gentech writes to `gentech-vault-new/` (git) but Forge was reading from root `01-HANDOFFS/` (stale). Forge now knows to check both vaults.
+- Updated stale `01-HANDOFFS/for-the-forge.md` with pointer to latest handoff location.
 
 ---
 
-*Last updated: never*
+*Last updated: 2026-07-24*
