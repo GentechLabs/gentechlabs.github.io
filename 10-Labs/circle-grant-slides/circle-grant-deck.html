@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1920, height=1080">
+<title>GenTech Labs — Agentic Treasury</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: #0a0a0f;
+    color: #e2e2e8;
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+  }
+
+  .slide {
+    width: 1920px;
+    height: 1080px;
+    padding: 80px 100px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Grid background */
+  .slide::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+  }
+
+  /* Accent glow */
+  .slide::after {
+    content: '';
+    position: absolute;
+    top: -30%; right: -20%;
+    width: 800px;
+    height: 800px;
+    background: radial-gradient(circle, rgba(0, 130, 255, 0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .tag {
+    display: inline-block;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    background: rgba(0, 130, 255, 0.15);
+    color: #4a9eff;
+    border: 1px solid rgba(0, 130, 255, 0.3);
+    margin-bottom: 24px;
+  }
+
+  h1 {
+    font-size: 64px;
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -1.5px;
+    color: #ffffff;
+    margin-bottom: 24px;
+  }
+
+  h1 .highlight {
+    background: linear-gradient(135deg, #4a9eff 0%, #6c5ce7 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  h2 {
+    font-size: 42px;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.5px;
+    color: #ffffff;
+    margin-bottom: 20px;
+  }
+
+  h3 {
+    font-size: 28px;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 16px;
+  }
+
+  p, .body-text {
+    font-size: 22px;
+    line-height: 1.6;
+    color: #a0a0b8;
+    max-width: 900px;
+  }
+
+  .big-number {
+    font-size: 80px;
+    font-weight: 900;
+    background: linear-gradient(135deg, #4a9eff 0%, #6c5ce7 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+  }
+
+  .label {
+    font-size: 16px;
+    color: #7a7a9a;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+    margin-top: 8px;
+  }
+
+  /* Three-column layout */
+  .cols-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    margin-top: 40px;
+  }
+
+  .col {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 16px;
+    padding: 36px;
+    backdrop-filter: blur(10px);
+  }
+
+  .col-icon {
+    font-size: 36px;
+    margin-bottom: 16px;
+  }
+
+  .col h4 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 12px;
+  }
+
+  .col p {
+    font-size: 16px;
+    color: #9090b0;
+    line-height: 1.5;
+  }
+
+  /* Stats row */
+  .stats {
+    display: flex;
+    gap: 48px;
+    margin-top: 40px;
+  }
+
+  .stat-item { text-align: center; }
+
+  /* Bottom logo */
+  .footer {
+    position: absolute;
+    bottom: 40px;
+    left: 100px;
+    right: 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    color: #5a5a7a;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    padding-top: 24px;
+  }
+
+  .footer-logo {
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    background: linear-gradient(135deg, #4a9eff 0%, #6c5ce7 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .page-num {
+    color: #4a4a6a;
+    font-weight: 500;
+  }
+
+  /* Title slide specific */
+  .title-slide { justify-content: center; align-items: center; text-align: center; }
+  .title-slide h1 { font-size: 80px; margin-bottom: 16px; }
+  .title-slide .subtitle { font-size: 26px; color: #7a7a9a; margin-bottom: 48px; }
+  .title-slide .date { font-size: 16px; color: #5a5a7a; }
+
+  /* Divider */
+  .divider {
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, #4a9eff, #6c5ce7);
+    border-radius: 2px;
+    margin-bottom: 24px;
+  }
+
+  /* What we've built table */
+  .build-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-top: 24px;
+  }
+
+  .build-item {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 12px;
+    padding: 20px 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .build-check {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: rgba(0, 200, 100, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #00cc66;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+
+  .build-text {
+    font-size: 17px;
+    font-weight: 500;
+    color: #e0e0ee;
+  }
+
+  .build-detail {
+    font-size: 14px;
+    color: #7a7a9a;
+    margin-top: 2px;
+  }
+
+  /* Layer diagram */
+  .layers {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 24px;
+    width: 100%;
+    max-width: 800px;
+  }
+
+  .layer {
+    display: flex;
+    align-items: center;
+    padding: 20px 28px;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .layer-0 { background: rgba(108, 92, 231, 0.15); border-color: rgba(108, 92, 231, 0.3); }
+  .layer-1 { background: rgba(0, 130, 255, 0.15); border-color: rgba(0, 130, 255, 0.3); }
+  .layer-2 { background: rgba(0, 200, 100, 0.15); border-color: rgba(0, 200, 100, 0.3); }
+  .layer-3 { background: rgba(255, 170, 0, 0.15); border-color: rgba(255, 170, 0, 0.3); }
+
+  .layer-num {
+    font-size: 14px;
+    font-weight: 700;
+    width: 40px;
+    color: #5a5a8a;
+  }
+
+  .layer-name {
+    font-size: 20px;
+    font-weight: 700;
+    width: 200px;
+    color: #ffffff;
+  }
+
+  .layer-desc {
+    font-size: 16px;
+    color: #a0a0b8;
+    flex: 1;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 16px;
+  }
+
+  ul li {
+    font-size: 19px;
+    color: #c0c0d8;
+    padding: 8px 0;
+    padding-left: 28px;
+    position: relative;
+    line-height: 1.5;
+  }
+
+  ul li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: #4a9eff;
+    font-weight: 700;
+  }
+
+  .logos {
+    display: flex;
+    gap: 32px;
+    align-items: center;
+    margin-top: 32px;
+  }
+
+  .logo-chip {
+    padding: 10px 24px;
+    border-radius: 8px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    font-size: 18px;
+    font-weight: 600;
+    color: #b0b0c8;
+  }
+
+  .ask-amount {
+    font-size: 96px;
+    font-weight: 900;
+    background: linear-gradient(135deg, #4a9eff 0%, #00cc66 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .ask-label {
+    font-size: 22px;
+    color: #7a7a9a;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+
+<!-- SLIDE 1: TITLE -->
+<div class="slide title-slide">
+  <div class="tag">Circle Developer Grant</div>
+  <h1>Agentic Treasury</h1>
+  <div class="subtitle">Autonomous Compliance + Treasury Infrastructure<br>for the AI Agent Economy</div>
+  <div style="margin-top: 24px;">
+    <div style="display: flex; gap: 16px; justify-content: center;">
+      <span class="logo-chip">GenTech Labs</span>
+      <span class="logo-chip">$75,000 USDC</span>
+    </div>
+  </div>
+  <div class="date" style="margin-top: 48px;">July 2026</div>
+  <div class="footer">
+    <span class="footer-logo">GenTech Labs</span>
+    <span class="page-num">01 / 10</span>
+  </div>
+</div>
+
+<!-- SLIDE 2: PROBLEM -->
+<div class="slide">
+  <div class="tag">The Problem</div>
+  <h1>The Agent Economy Has<br><span class="highlight">No Compliance Rail</span></h1>
+  <div class="divider"></div>
+  <p style="max-width: 1100px; margin-bottom: 24px;">The CLARITY Act (signed July 2026) requires verified on-chain identity, traceable payments, and DeFi compliance for any AI agent transacting with US persons. Most agent infrastructure ignores this.</p>
+
+  <div class="cols-3">
+    <div class="col">
+      <div class="col-icon">💸</div>
+      <h4>Can't Earn</h4>
+      <p>Agents can't sell API access or charge for compute without a human payment processor in the loop.</p>
+    </div>
+    <div class="col">
+      <div class="col-icon">🛒</div>
+      <h4>Can't Spend</h4>
+      <p>Agents can't pay for services without API keys, rate limits, and human-approved billing.</p>
+    </div>
+    <div class="col">
+      <div class="col-icon">🏦</div>
+      <h4>Can't Allocate</h4>
+      <p>Agents can't manage a treasury — deposit, yield, route, or fund — without a human touching a wallet.</p>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-logo">GenTech Labs</span>
+    <span class="page-num">02 / 10</span>
+  </div>
+</div>
+
+<!-- SLIDE 3: SOLUTION OVERVIEW -->
+<div class="slide">
+  <div class="tag">The Solution</div>
+  <h1>The GenTech Rail</h1>
+  <div class="divider"></div>
+  <p style="max-width: 1000px; margin-bottom: 16px;">The compliance and payment rail that every agent routes through — analogous to how Chainlink became the standard oracle every DeFi protocol uses.</p>
+
+  <div class="layers">
+    <div class="layer layer-0">
+      <div class="layer-num">L0</div>
+      <div class="layer-name">Compliance Layer</div>
+      <div class="layer-desc">ERC-8004 identity verification · CLARITY Act DeFi Exclusion · Transaction audit trail · Compliance badge API</div>
+    </div>
+    <div class="layer layer-1">
+      <div class="layer-num">L1</div>
+      <div class="layer-name">Yield Brain</div>
+      <div class="layer-desc">Autonomous yield engine — deposit USDC into Aave, Compound, Morpho · Auto-rebalance by risk and yield curves</div>
+    </div>
+    <div class="layer layer-2">
+      <div class="layer-num">L2</div>
+      <div class="layer-name">Payment Router</div>
+      <div class="layer-desc">16+ live x402 endpoints · USDC on Base · Gasless Q402 protocol · Cross-chain via CCTP</div>
+    </div>
+    <div class="layer layer-3">
+      <div class="layer-num">L3</div>
+      <div class="layer-name">Ecosystem Rail</div>
+      <div class="layer-desc">Automated PR cron across 18+ repos · P2P causes · Open-source SDK</div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-logo">GenTech Labs</span>
+    <span class="page-num">03 / 10</span>
+  </div>
+</div>
+
+<!-- SLIDE 4: CLARITY ACT COMPLIANCE -->
+<div class="slide">
+  <div class="tag">Compliance Moat</div>
+  <h1>Built for the <span class="highlight">CLARITY Act</span></h1>
+  <div class="divider"></div>
+  <p style="max-width: 1000px;">Compliance isn't bolted on — it's in our architecture from day one.</p>
+
+  <div class="cols-3" style="margin-top: 32px;">
+    <div class="col">
+      <div class="col-icon">🛡️</div>
+      <h4>Identity Verification</h4>
+      <p>Every agent has an ERC-8004 on-chain identity. Lookup, verify, and reputation scoring on every transaction.</p>
+    </div>
+    <div class="col">
+      <div class="col-icon">⚖️</div>
+      <h4>DeFi Exclusion (Sec. 309/409)</h4>
+      <p>Safe harbor implementation so CLARITY Act-compliant agents can interact with DeFi protocols.</p>
+    </div>
+    <div class="col">
+      <div class="col-icon">📋</div>
+      <h4>Audit Trail</h4>
+      <p>Every x402 payment is logged, traceable, and verifiable on-chain. Compliance badge for verified agents.</p>
+    </div>
+  </div>
+
+  <div style="margin-top: 32px; padding: 20px 28px; background: rgba(0,130,255,0.08); border: 1px solid rgba(0,130,255,0.2); border-radius: 12px;">
+    <p style="font-size: 18px; color: #b0b0d0;"><strong style="color: #fff;">Circle + GenTech:</strong> A regulated stablecoin issuer paired with a compliance-first agent infrastructure. Both building infrastructure regulators can trust.</p>
+  </div>
+
+  <div class="footer">
+    <span class="footer-logo">GenTech Labs</span>
+    <span class="page-num">04 / 10</span>
+  </div>
+</div>
+
+<!-- SLIDE 5: WHAT'S LIVE -->
+<div class="slide">
+  <div class="tag">Live Today</div>
+  <h1>Production Infrastructure<br><span class="highlight">Running Now</span></h1>
+  <div class="divider"></div>
+
+  <div class="build-grid">
+    <div class="build-item">
+      <div class="build-check">✓</div>
+      <div><div class="build-text">x402 Payment Gateway</div><div class="build-detail">16+ endpoints · USDC on Base · On-chain verification</div></div>
+    </div>
+    <div class="build-item">
+      <div class="build-check">✓</div>
+      <div><div class="build-text">Rugcheck v2</div><div class="build-detail">11-factor token risk scoring</div></div>
+    </div>
+    <div class="build-item">
+      <div class="build-check">✓</div>
+      <div><div class="build-text">DeFi Intelligence API</div><div class="build-detail">TVL, yield, chains · 200+ protocols</div></div>
+    </div>
+    <div class="build-item">
+      <div class="build-check">✓</div>
+      <div><div class="build-text">ERC-8004 Identity Registry</div><div class="build-detail">On-chain agent identity on Avalanche</div></div>
+    </div>
+    <div class="build-item">
+      <div class="build-check">✓</div>
+      <div><div class="build-text">Q402 Gasless Payments</div><div class="build-detail">Agents pay without holding gas tokens</div></div>
+    </div>
+    <div class="build-item">
+      <div class="build-check">✓</div>
+      <div><div class="build-text">GenTech Agent Kit (MCP)</div><div class="build-detail">One install · Market data, DeFi, x402 rails</div></div>
+    </div>
+    <div class="build-item">
+      <div class="build-check">✓</div>
+      <div><div class="build-text">Agent Arena</div><div class="build-detail">Rogue-lite trading game · Base + Solana</div></div>
+    </div>
+    <div class="build-item">
+      <div class="build-check">✓</div>
+      <div><div class="build-text">CLARITY Act Compliance Badge</div><div class="build-detail">All repos tagged, compliance layer live</div></div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-logo">GenTech Labs</span>
+    <span class="page-num">05 / 10</span>
+  </div>
+</div>
+
+<!-- SLIDE 6: METRICS -->
+<div class="slide">
+  <div class="tag">Traction</div>
+  <h1>Metrics & <span class="highlight">Velocity</span></h1>
+  <div class="divider"></div>
+
+  <div style="display: flex; gap: 64px; margin-top: 40px; justify-content: center;">
+    <div class="stat-item">
+      <div class="big-number">16+</div>
+      <div class="label">Live x402 Endpoints</div>
+    </div>
+    <div class="stat-item">
+      <div class="big-number">5</div>
+      <div class="label">Hackathon Wins</div>
+    </div>
+    <div class="stat-item">
+      <div class="big-number">6</div>
+      <div class="label">Chains Supported</div>
+    </div>
+    <div class="stat-item">
+      <div class="big-number">12+</div>
+      <div class="label">Daily Cron Jobs</div>
+    </div>
+  </div>
+
+  <div style="display: flex; gap: 64px; margin-top: 48px; justify-content: center;">
+    <div class="stat-item">
+      <div class="big-number">18+</div>
+      <div class="label">Ecosystem Listings</div>
+    </div>
+    <div class="stat-item">
+      <div class="big-number">45+</div>
+      <div class="label">Paid Endpoints</div>
+    </div>
+    <div class="stat-item">
+      <div class="big-number">1</div>
+      <div class="label">Solo Founder</div>
+    </div>
+    <div class="stat-item">
+      <div class="big-number">3K+</div>
+      <div class="label">Monthly API Calls</div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-logo">GenTech Labs</span>
+    <span class="page-num">06 / 10</span>
+  </div>
+</div>
+
+<!-- SLIDE 7: WHY CIRCLE -->
+<div class="slide">
+  <div class="tag">Strategic Alignment</div>
+  <h1>Why Circle + <span class="highlight">USDC</span></h1>
+  <div class="divider"></div>
+
+  <div class="cols-3">
+    <div class="col">
+      <div class="col-icon">💵</div>
+      <h4>USDC Is Agent-Native</h4>
+      <p>Stable, programmable, settlement-final. Every x402 payment is a USDC transaction on Circle's infrastructure.</p>
+    </div>
+    <div class="col">
+      <div class="col-icon">🔗</div>
+      <h4>x402 + USDC = Standard</h4>
+      <p>HTTP 402 Payment Required is emerging as the agent-to-agent payment standard. We're early adopters and contributors.</p>
+    </div>
+    <div class="col">
+      <div class="col-icon">🎯</div>
+      <h4>"Agentic Economic Activity"</h4>
+      <p>Circle explicitly lists this as a grant priority. Our compliance-first approach makes us a safer bet than teams treating regulation as an afterthought.</p>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-logo">GenTech Labs</span>
+    <span class="page-num">07 / 10</span>
+  </div>
+</div>
+
+<!-- SLIDE 8: MILESTONES -->
+<div class="slide">
+  <div class="tag">Roadmap</div>
+  <h1>Grant Milestones</h1>
+  <div class="divider"></div>
+
+  <div class="layers">
+    <div class="layer layer-1">
+      <div class="layer-num">M1</div>
+      <div class="layer-name" style="width: 240px;">Compliance Layer MVP</div>
+      <div class="layer-desc">Month 1-2 · $25K · Deploy CLARITY Act verification rail on Base + Arc · ERC-8004 in every payment flow · Yield Brain contracts · 500+ agent identities</div>
+    </div>
+    <div class="layer layer-2">
+      <div class="layer-num">M2</div>
+      <div class="layer-name" style="width: 240px;">Payment Router Expansion</div>
+      <div class="layer-desc">Month 2-4 · $30K · Multi-chain x402 mesh · Circle Nanopayments · CCTP routing · Q402 on Arc · 30+ endpoints</div>
+    </div>
+    <div class="layer layer-3">
+      <div class="layer-num">M3</div>
+      <div class="layer-name" style="width: 240px;">Ecosystem Rail</div>
+      <div class="layer-desc">Month 4-6 · $20K · P2P Causes · Agent SDK · 5+ marketplace listings · Open-source compliance reference</div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="footer-logo">GenTech Labs</span>
+    <span class="page-num">08 / 10</span>
+  </div>
+</div>
+
+<!-- SLIDE 9: ASK -->
+<div class="slide" style="justify-content: center; align-items: center; text-align: center;">
+  <div class="tag">The Ask</div>
+  <div class="ask-amount">$75,000</div>
+  <div class="ask-label">USDC · 3 Milestones · 6 Months</div>
+
+  <div style="max-width: 800px; margin: 48px auto 0;">
+    <p style="font-size: 20px; color: #c0c0d8; line-height: 1.7;">
+      Fund the compliance and payment rail for the entire agent economy.<br>
+      Every x402 payment is a USDC transaction.<br>
+      Every agent identity verification runs on Circle's infrastructure.<br>
+      <strong style="color: #ffffff;">As the agent economy grows, the transaction volume on Circle grows with it.</strong>
+    </p>
+  </div>
+
+  <div class="logos" style="justify-content: center; margin-top: 48px;">
+    <span class="logo-chip">USDC</span>
+    <span class="logo-chip">x402</span>
+    <span class="logo-chip">Base</span>
+    <span class="logo-chip">Arc</span>
+    <span class="logo-chip">CLARITY Act</span>
+  </div>
+
+  <div class="footer">
+    <span class="footer-logo">GenTech Labs</span>
+    <span class="page-num">09 / 10</span>
+  </div>
+</div>
+
+<!-- SLIDE 10: CLOSE -->
+<div class="slide" style="justify-content: center; align-items: center; text-align: center;">
+  <div class="tag">GenTech Labs</div>
+  <h1 style="font-size: 72px; margin-bottom: 16px;">The Standard Rail<br>for Agent <span class="highlight">Commerce</span></h1>
+  <div class="divider" style="margin: 24px auto;"></div>
+  <p style="font-size: 24px; color: #7a7a9a; max-width: 700px; line-height: 1.6;">
+    Chainlink didn't become the standard oracle by building a better DeFi protocol.<br>
+    They built the rail that every protocol needed.<br><br>
+    <strong style="color: #e0e0ee;">We're doing the same for agent compliance and payments.</strong>
+  </p>
+
+  <div style="margin-top: 48px;">
+    <p style="font-size: 18px; color: #5a5a7a;">
+      Jordan Jones · ProtoJay4789 · jordanjones0902@gmail.com<br>
+      gentechlabs.net · api.gentechlabs.net · github.com/ProtoJay4789
+    </p>
+  </div>
+
+  <div class="footer">
+    <span class="footer-logo">GenTech Labs</span>
+    <span class="page-num">10 / 10</span>
+  </div>
+</div>
+
+</body>
+</html>

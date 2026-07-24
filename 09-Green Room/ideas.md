@@ -77,6 +77,8 @@
 - **GenTech Suite — Milestones Layer** — Goal-tracking and achievement system
 - **GenTech Suite — Activity/Hobby Layer** — Activity discovery and recommendation layer
 - **Decentralized Travel Community** — Token-gated travel coordination
+- **GenTech Onboarding Playbook** — Training non-technical collaborators into orchestrators. Jocelyn is the pilot. If the playbook works for her, it works for anyone. Document the pipeline: voice cloning (ElevenLabs/Pipecat/Omnivoice) → tool fluency → orchestrator delegation.
+- **Jocelyn Voice Pipeline** — Clone her voice for agent deployment. Capture samples → ElevenLabs voice model → Pipecat/Omnivoice agent pipeline. Tracked at `00-HQ/collaborators/jocelyn-progress.md`.
 
 ## Promoted from Legacy (07-Ideas/)
 - **Meta Ray-Ban 3D Reconstruction** — `09-Green Room/specs/metaray-3d-reconstruction.md` — Wearable 3D reconstruction pipeline using Meta Ray-Ban + LingBot-Map. x402 inference API. Promoted from `07-Ideas/` Jul 23.
