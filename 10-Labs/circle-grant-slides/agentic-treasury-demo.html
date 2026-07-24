@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1920, height=1080">
+<title>Agentic Treasury Demo — Arc</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap');
+
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{
+    font-family:'Inter',system-ui,-apple-system,sans-serif;
+    background:#08080e;
+    color:#e0e0ec;
+    overflow:hidden;
+  }
+
+  .frame{
+    width:1920px;height:1080px;
+    position:relative;
+    overflow:hidden;
+    display:flex;flex-direction:column;
+  }
+
+  /* ── Scene Manager ── */
+  .scene{display:none;width:100%;height:100%}
+  .scene.active{display:flex;flex-direction:column}
+
+  /* ── Scene 1: Dashboard ── */
+  .dashboard{
+    padding: 32px 40px;
+    height:100%;
+    display:flex;flex-direction:column;
+  }
+
+  .top-bar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:24px;
+  }
+
+  .logo-bar{
+    display:flex;align-items:center;gap:12px;
+  }
+  .logo-bar .logo{
+    font-size:20px;font-weight:800;
+    background:linear-gradient(135deg,#4a9eff,#6c5ce7);
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  }
+  .logo-bar .badge{
+    padding:4px 12px;border-radius:12px;
+    background:rgba(0,200,100,0.12);border:1px solid rgba(0,200,100,0.2);
+    font-size:11px;font-weight:600;color:#00cc66;
+  }
+  .top-bar .chain{
+    display:flex;align-items:center;gap:8px;
+    padding:8px 16px;border-radius:8px;
+    background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);
+    font-size:13px;color:#7a7a9a;
+  }
+  .top-bar .chain strong{color:#e0e0ec;font-weight:600}
+
+  .balance-row{
+    display:flex;gap:24px;margin-bottom:24px;
+  }
+  .balance-card{
+    flex:1;
+    background:rgba(255,255,255,0.03);
+    border:1px solid rgba(255,255,255,0.06);
+    border-radius:14px;padding:20px 24px;
+  }
+  .balance-card .label{font-size:12px;color:#6a6a8a;text-transform:uppercase;letter-spacing:0.5px}
+  .balance-card .amount{font-size:28px;font-weight:800;color:#fff;margin-top:4px}
+  .balance-card .change{font-size:13px;margin-top:4px}
+  .balance-card .change.up{color:#00cc66}
+  .balance-card .change.down{color:#ff4444}
+
+  .main-panel{
+    display:flex;gap:24px;flex:1;min-height:0;
+  }
+
+  /* Left panel: Portfolio */
+  .portfolio{
+    flex:1;
+    background:rgba(255,255,255,0.02);
+    border:1px solid rgba(255,255,255,0.06);
+    border-radius:14px;padding:20px;
+    display:flex;flex-direction:column;
+  }
+  .portfolio h3{
+    font-size:14px;font-weight:600;color:#6a6a8a;
+    text-transform:uppercase;letter-spacing:0.5px;margin-bottom:12px;
+  }
+  .asset-row{
+    display:flex;justify-content:space-between;align-items:center;
+    padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.04);
+  }
+  .asset-row:last-child{border:none}
+  .asset-info{display:flex;align-items:center;gap:10px}
+  .asset-icon{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px}
+  .asset-name{font-size:14px;font-weight:600;color:#e0e0ec}
+  .asset-detail{font-size:12px;color:#6a6a8a}
+  .asset-value{text-align:right}
+  .asset-value .val{font-size:14px;font-weight:600;color:#fff}
+  .asset-value .pct{font-size:12px}
+  .asset-value .pct.up{color:#00cc66}
+  .asset-value .pct.down{color:#ff4444}
+
+  /* Right panel: Price Watch + Activity */
+  .right-panel{
+    width:420px;
+    display:flex;flex-direction:column;gap:16px;
+  }
+
+  .price-watch{
+    background:rgba(255,255,255,0.02);
+    border:1px solid rgba(255,255,255,0.06);
+    border-radius:14px;padding:20px;flex:1;
+  }
+  .price-watch h3{
+    font-size:14px;font-weight:600;color:#6a6a8a;
+    text-transform:uppercase;letter-spacing:0.5px;margin-bottom:12px;
+  }
+
+  .trigger-row{
+    display:flex;justify-content:space-between;align-items:center;
+    padding:8px 12px;border-radius:8px;margin-bottom:6px;
+    background:rgba(255,255,255,0.02);
+  }
+  .trigger-row .pair{font-size:13px;font-weight:600;color:#e0e0ec}
+  .trigger-row .condition{font-size:12px;color:#6a6a8a}
+  .trigger-row .status{
+    font-size:11px;font-weight:600;padding:3px 10px;border-radius:10px;
+  }
+  .status.active{background:rgba(74,158,255,0.12);color:#4a9eff;border:1px solid rgba(74,158,255,0.2)}
+  .status.armed{background:rgba(0,200,100,0.12);color:#00cc66;border:1px solid rgba(0,200,100,0.2)}
+  .status.fired{background:rgba(255,170,0,0.12);color:#ffaa00;border:1px solid rgba(255,170,0,0.2)}
+
+  .activity-feed{
+    background:rgba(255,255,255,0.02);
+    border:1px solid rgba(255,255,255,0.06);
+    border-radius:14px;padding:20px;
+  }
+  .activity-feed h3{
+    font-size:14px;font-weight:600;color:#6a6a8a;
+    text-transform:uppercase;letter-spacing:0.5px;margin-bottom:12px;
+  }
+  .log-entry{
+    display:flex;gap:10px;padding:6px 0;
+    border-bottom:1px solid rgba(255,255,255,0.03);
+    font-size:12px;
+  }
+  .log-entry:last-child{border:none}
+  .log-time{color:#4a4a6a;font-family:'JetBrains Mono',monospace;font-size:11px;width:70px;flex-shrink:0}
+  .log-msg{color:#8080a0}
+  .log-msg strong{color:#e0e0ec;font-weight:500}
+
+  /* ── Scene 2: Trigger Alert ── */
+  .alert-overlay{
+    position:absolute;top:0;left:0;right:0;bottom:0;
+    background:rgba(8,8,14,0.85);
+    display:flex;align-items:center;justify-content:center;
+    backdrop-filter:blur(4px);
+  }
+  .alert-box{
+    background:#12121e;border:1px solid rgba(255,170,0,0.3);
+    border-radius:20px;padding:48px 56px;
+    text-align:center;max-width:580px;
+    box-shadow:0 0 60px rgba(255,170,0,0.08);
+  }
+  .alert-box .icon{font-size:48px;margin-bottom:16px}
+  .alert-box h2{font-size:28px;font-weight:800;color:#fff;margin-bottom:8px}
+  .alert-box p{font-size:16px;color:#7a7a9a;margin-bottom:20px}
+  .alert-box .detail{
+    background:rgba(255,170,0,0.08);
+    border:1px solid rgba(255,170,0,0.15);
+    border-radius:10px;padding:16px 20px;
+    display:flex;justify-content:space-between;margin-bottom:16px;
+  }
+  .alert-box .detail-item{text-align:left}
+  .alert-box .detail-item .lbl{font-size:11px;color:#6a6a8a;text-transform:uppercase}
+  .alert-box .detail-item .vl{font-size:18px;font-weight:700;color:#fff;margin-top:2px}
+  .alert-box .detail-item .vl.highlight{color:#ffaa00}
+
+  .btn-execute{
+    background:linear-gradient(135deg,#4a9eff,#6c5ce7);
+    border:none;border-radius:10px;padding:14px 48px;
+    font-size:16px;font-weight:700;color:#fff;cursor:pointer;
+    transition:all 0.3s;font-family:'Inter',sans-serif;
+  }
+  .btn-execute:hover{transform:translateY(-1px);box-shadow:0 8px 30px rgba(74,158,255,0.2)}
+
+  /* ── Scene 3: Execution ── */
+  .exec-flow{
+    padding:60px 80px;height:100%;
+    display:flex;flex-direction:column;justify-content:center;
+    align-items:center;text-align:center;
+  }
+  .exec-flow .step-icon{
+    width:80px;height:80px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-size:36px;margin-bottom:24px;
+  }
+  .exec-flow .step-icon.loading{
+    border:3px solid rgba(74,158,255,0.3);
+    border-top-color:#4a9eff;
+    animation:spin 1s linear infinite;
+  }
+  @keyframes spin{to{transform:rotate(360deg)}}
+
+  .exec-flow h2{font-size:32px;font-weight:800;color:#fff;margin-bottom:8px}
+  .exec-flow p{font-size:18px;color:#7a7a9a;margin-bottom:16px}
+
+  .tx-details{
+    background:rgba(255,255,255,0.03);
+    border:1px solid rgba(255,255,255,0.06);
+    border-radius:12px;padding:20px 28px;margin-top:16px;
+    text-align:left;width:100%;max-width:500px;
+  }
+  .tx-row{display:flex;justify-content:space-between;padding:6px 0;font-size:14px}
+  .tx-row .lbl{color:#6a6a8a}
+  .tx-row .val{color:#e0e0ec;font-weight:500}
+  .tx-row .val.green{color:#00cc66}
+  .tx-row .val.blue{color:#4a9eff}
+
+  /* ── Scene 4: Complete ── */
+  .complete{
+    padding:60px 80px;height:100%;
+    display:flex;flex-direction:column;justify-content:center;
+    align-items:center;text-align:center;
+  }
+  .complete .check{
+    width:80px;height:80px;border-radius:50%;
+    background:rgba(0,200,100,0.12);
+    border:2px solid rgba(0,200,100,0.3);
+    display:flex;align-items:center;justify-content:center;
+    font-size:40px;margin-bottom:24px;
+  }
+  .complete h2{font-size:32px;font-weight:800;color:#fff;margin-bottom:8px}
+  .complete p{font-size:18px;color:#7a7a9a;margin-bottom:24px}
+  .complete .summary{
+    background:rgba(255,255,255,0.03);
+    border:1px solid rgba(255,255,255,0.06);
+    border-radius:12px;padding:24px 32px;
+    width:100%;max-width:500px;
+  }
+  .complete .summary .s-row{
+    display:flex;justify-content:space-between;padding:8px 0;
+    border-bottom:1px solid rgba(255,255,255,0.04);font-size:15px;
+  }
+  .complete .summary .s-row:last-child{border:none}
+  .complete .summary .lbl{color:#6a6a8a}
+  .complete .summary .val{color:#e0e0ec;font-weight:600}
+  .complete .summary .val.green{color:#00cc66}
+
+  /* ── Transition overlays ── */
+  .fade-overlay{
+    position:absolute;top:0;left:0;right:0;bottom:0;
+    background:#08080e;pointer-events:none;
+    opacity:0;transition:opacity 0.5s;
+  }
+  .fade-overlay.show{opacity:1}
+
+  /* ── Status bar ── */
+  .status-bar{
+    padding:10px 32px;
+    display:flex;justify-content:space-between;
+    font-size:12px;color:#4a4a6a;
+    border-top:1px solid rgba(255,255,255,0.04);
+    font-family:'JetBrains Mono',monospace;
+  }
+
+  /* Scene-specific colors */
+  .scene-dashboard .top-bar .chain strong{color:#4a9eff}
+  .scene-trigger .alert-box .icon{color:#ffaa00}
+  .scene-exec .step-icon{background:rgba(74,158,255,0.12)}
+  .scene-ready .tx-row .val{color:#00cc66}
+</style>
+</head>
+<body>
+
+<div class="frame" id="demo-frame">
+
+  <!-- SCENE 1: Dashboard -->
+  <div class="scene scene-dashboard active" id="scene-1">
+    <div class="dashboard">
+      <div class="top-bar">
+        <div class="logo-bar">
+          <span class="logo">GenTech Labs</span>
+          <span class="badge">● LIVE</span>
+        </div>
+        <div class="chain">
+          <span>⚡</span>
+          <span>Connected to <strong>Arc</strong> · Block #1,842,937</span>
+        </div>
+      </div>
+
+      <div class="balance-row">
+        <div class="balance-card">
+          <div class="label">Total Treasury Value</div>
+          <div class="amount">$24,582.40</div>
+          <div class="change up">+2.3% today</div>
+        </div>
+        <div class="balance-card">
+          <div class="label">USDC Available</div>
+          <div class="amount">$12,400.00</div>
+          <div class="change" style="color:#6a6a8a">Liquid · Ready to deploy</div>
+        </div>
+        <div class="balance-card">
+          <div class="label">Yield Positions</div>
+          <div class="amount">$12,182.40</div>
+          <div class="change up">+4.8% APY · <span style="color:#6a6a8a">Aave + Morpho</span></div>
+        </div>
+      </div>
+
+      <div class="main-panel">
+        <div class="portfolio">
+          <h3>Portfolio</h3>
+          <div class="asset-row">
+            <div class="asset-info">
+              <div class="asset-icon" style="background:rgba(0,200,100,0.12)">⚡</div>
+              <div>
+                <div class="asset-name">ARC</div>
+                <div class="asset-detail">Arc Native</div>
+              </div>
+            </div>
+            <div class="asset-value">
+              <div class="val">1,842.50 ARC</div>
+              <div class="pct up">$5,527.50</div>
+            </div>
+          </div>
+          <div class="asset-row">
+            <div class="asset-info">
+              <div class="asset-icon" style="background:rgba(74,158,255,0.12)">₿</div>
+              <div>
+                <div class="asset-name">BTC</div>
+                <div class="asset-detail">Wrapped on Arc</div>
+              </div>
+            </div>
+            <div class="asset-value">
+              <div class="val">0.42 BTC</div>
+              <div class="pct up">$28,140.00</div>
+            </div>
+          </div>
+          <div class="asset-row">
+            <div class="asset-info">
+              <div class="asset-icon" style="background:rgba(108,92,231,0.12)">◆</div>
+              <div>
+                <div class="asset-name">ETH</div>
+                <div class="asset-detail">Wrapped on Arc</div>
+              </div>
+            </div>
+            <div class="asset-value">
+              <div class="val">3.80 ETH</div>
+              <div class="pct up">$12,540.00</div>
+            </div>
+          </div>
+          <div class="asset-row">
+            <div class="asset-info">
+              <div class="asset-icon" style="background:rgba(255,170,0,0.12)">◎</div>
+              <div>
+                <div class="asset-name">SOL</div>
+                <div class="asset-detail">Wormhole on Arc</div>
+              </div>
+            </div>
+            <div class="asset-value">
+              <div class="val">15.20 SOL</div>
+              <div class="pct down">$2,280.00</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="right-panel">
+          <div class="price-watch">
+            <h3>⏰ Price Triggers</h3>
+            <div class="trigger-row">
+              <div><div class="pair">BTC/USDC</div><div class="condition">Buy if ≥ $68,500</div></div>
+              <span class="status active">● Watching</span>
+            </div>
+            <div class="trigger-row" style="background:rgba(255,170,0,0.06);border:1px solid rgba(255,170,0,0.15)">
+              <div><div class="pair">SOL/USDC</div><div class="condition">Buy if ≤ $145.00</div></div>
+              <span class="status armed" style="background:rgba(255,170,0,0.15);color:#ffaa00;border-color:rgba(255,170,0,0.3)">🔫 Armed</span>
+            </div>
+            <div class="trigger-row">
+              <div><div class="pair">ETH/USDC</div><div class="condition">Buy if ≥ $3,450</div></div>
+              <span class="status active">● Watching</span>
+            </div>
+          </div>
+
+          <div class="activity-feed">
+            <h3>📋 Activity Log</h3>
+            <div class="log-entry"><span class="log-time">13:42:08</span><span class="log-msg">Yield Brain rebalanced <strong>$2,400</strong> → Morpho</span></div>
+            <div class="log-entry"><span class="log-time">13:38:15</span><span class="log-msg">Price feed updated <strong>SOL</strong>: $146.20</span></div>
+            <div class="log-entry"><span class="log-time">13:30:00</span><span class="log-msg">Treasury check: <strong>$24,582.40</strong> (+2.3%)</span></div>
+            <div class="log-entry"><span class="log-time">13:22:44</span><span class="log-msg">x402 payment received: <strong>$0.50</strong> — Rugcheck API</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="status-bar">
+      <span>Agentic Treasury · Arc Mainnet</span>
+      <span>SOL trigger armed at $145.00</span>
+    </div>
+  </div>
+
+  <!-- SCENE 2: Trigger Alert -->
+  <div class="scene scene-trigger" id="scene-2">
+    <div class="dashboard" style="filter:blur(2px);opacity:0.4;pointer-events:none">
+      <!-- Same dashboard but blurred -->
+      <div class="top-bar"><div class="logo-bar"><span class="logo">GenTech Labs</span><span class="badge">● LIVE</span></div><div class="chain"><span>⚡</span><span>Connected to <strong>Arc</strong> · Block #1,842,951</span></div></div>
+      <div class="balance-row"><div class="balance-card"><div class="label">Total Treasury Value</div><div class="amount">$24,582.40</div></div><div class="balance-card"><div class="label">USDC Available</div><div class="amount">$12,400.00</div></div><div class="balance-card"><div class="label">Yield Positions</div><div class="amount">$12,182.40</div></div></div>
+      <div class="main-panel"><div class="portfolio"><h3>Portfolio</h3></div><div class="right-panel"></div></div>
+    </div>
+
+    <div class="alert-overlay">
+      <div class="alert-box">
+        <div class="icon">⚡</div>
+        <h2>Price Trigger Activated!</h2>
+        <p>SOL/USDC has hit your target level. Agentic Treasury is ready to execute.</p>
+        <div class="detail">
+          <div class="detail-item"><div class="lbl">Trigger</div><div class="vl">SOL ≤ $145.00</div></div>
+          <div class="detail-item"><div class="lbl">Current Price</div><div class="vl highlight">$144.80</div></div>
+          <div class="detail-item"><div class="lbl">To Execute</div><div class="vl">$2,500 USDC</div></div>
+        </div>
+        <button class="btn-execute" onclick="showScene(3)">▶ Execute Trade</button>
+      </div>
+    </div>
+
+    <div class="status-bar"><span>⚠️ TRIGGER FIRED — SOL/USDC at $144.80</span><span>Awaiting execution confirmation</span></div>
+  </div>
+
+  <!-- SCENE 3: Executing -->
+  <div class="scene scene-exec" id="scene-3">
+    <div class="exec-flow">
+      <div class="step-icon loading">⚡</div>
+      <h2>Executing Trade</h2>
+      <p>Agentic Treasury is processing your automated strategy on Arc</p>
+      <div class="tx-details">
+        <div class="tx-row"><span class="lbl">From</span><span class="val blue">Agentic Treasury (0x4a...9eff)</span></div>
+        <div class="tx-row"><span class="lbl">Action</span><span class="val">Buy SOL</span></div>
+        <div class="tx-row"><span class="lbl">Amount</span><span class="val">$2,500 USDC</span></div>
+        <div class="tx-row"><span class="lbl">Route</span><span class="val">Arc DEX Aggregator</span></div>
+        <div class="tx-row" style="border-top:1px solid rgba(255,255,255,0.06);padding-top:8px;margin-top:4px">
+          <span class="lbl">Status</span><span class="val green">● Confirming on Arc...</span>
+        </div>
+      </div>
+    </div>
+    <div class="status-bar"><span>⏳ Transaction in progress</span><span>Arc Block #1,842,952 · 2 confirmations</span></div>
+  </div>
+
+  <!-- SCENE 4: Complete -->
+  <div class="scene scene-ready" id="scene-4">
+    <div class="complete">
+      <div class="check">✓</div>
+      <h2>Trade Executed Successfully</h2>
+      <p>Your Agentic Treasury autonomously bought SOL at the target price on Arc.</p>
+      <div class="summary">
+        <div class="s-row"><span class="lbl">Transaction</span><span class="val blue">0x7a...b3f2</span></div>
+        <div class="s-row"><span class="lbl">Executed Price</span><span class="val green">$144.80 per SOL</span></div>
+        <div class="s-row"><span class="lbl">Amount Bought</span><span class="val">17.26 SOL</span></div>
+        <div class="s-row"><span class="lbl">USDC Spent</span><span class="val">$2,500.00</span></div>
+        <div class="s-row"><span class="lbl">Settlement</span><span class="val green">Final · 32 confirmations</span></div>
+        <div class="s-row" style="border-top:1px solid rgba(255,255,255,0.06);padding-top:10px;margin-top:4px">
+          <span class="lbl" style="font-weight:600;color:#e0e0ec">Remaining Treasury</span><span class="val" style="font-size:18px;font-weight:800">$22,082.40</span>
+        </div>
+      </div>
+    </div>
+    <div class="status-bar"><span>✅ Trade complete — SOL position updated</span><span>Arc Block #1,842,953 · 32/32 confirmations</span></div>
+  </div>
+</div>
+
+<script>
+let currentScene = 1;
+const totalScenes = 4;
+
+function showScene(n) {
+  // Hide all
+  document.querySelectorAll('.scene').forEach(s => s.classList.remove('active'));
+  // Show target
+  document.getElementById(`scene-${n}`).classList.add('active');
+  currentScene = n;
+
+  // Auto-advance for scenes 3→4 (execution completes)
+  if (n === 3) {
+    setTimeout(() => showScene(4), 3000);
+  }
+}
+
+// Auto-advance from scene 2→3 after 3 seconds (auto-execute)
+setTimeout(() => showScene(3), 3500);
+
+// Scene indicators
+const indicators = document.createElement('div');
+indicators.style.cssText = 'position:fixed;bottom:48px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:10';
+for (let i = 1; i <= totalScenes; i++) {
+  const dot = document.createElement('div');
+  dot.style.cssText = 'width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.15);transition:all 0.3s';
+  dot.dataset.scene = i;
+  indicators.appendChild(dot);
+}
+document.body.appendChild(indicators);
+
+// Show current scene indicator
+function updateDots() {
+  document.querySelectorAll(indicators.tagName === 'DIV' ? 'div[data-scene]' : '.indicators div').forEach((d, i) => {
+    d.style.background = i + 1 === currentScene ? '#4a9eff' : 'rgba(255,255,255,0.15)';
+    d.style.transform = i + 1 === currentScene ? 'scale(1.3)' : 'scale(1)';
+  });
+}
+
+// Override showScene to update dots
+const origShow = showScene;
+showScene = function(n) {
+  document.querySelectorAll('.scene').forEach(s => s.classList.remove('active'));
+  document.getElementById(`scene-${n}`).classList.add('active');
+  currentScene = n;
+  updateDots();
+  if (n === 3) setTimeout(() => showScene(4), 3000);
+};
+
+// Click dots to navigate scenes
+document.addEventListener('click', (e) => {
+  const dot = e.target.closest('[data-scene]');
+  if (dot) showScene(parseInt(dot.dataset.scene));
+});
+
+// Initial dot update
+updateDots();
+</script>
+</body>
+</html>
