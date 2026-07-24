@@ -14,9 +14,10 @@
 - **#53 Submit GOAT AgentKit PR #7 — Compliance Plugin + ERC-8004 Fix** — Manual web UI submission. Go to https://github.com/ProtoJay4789/goat-agentkit → Click 'Contribute' → 'Open Pull Request' → Verify GOATNetwork/agentkit ← ProtoJay4789:feat/compliance-plugin → Create PR. Code is already pushed and ready.
 - **#64 Virtuals ACP Registration** — Register GenTech on Virtuals ACP at app.virtuals.io/acp/new. Needs wallet auth — Jordan must handle.
 
-## Needs Your Decision (4 items)
+## Needs Your Decision (5 items)
 
 - **#7 Cloudflare Gateway — x402 Playground + Deploy GenTech on Workflows** — Jordan already on Cloudflare Gateway waitlist. When approved: deploy our x402 gateway on Cloudflare Workers (withX402() support built-in). Also explore Cloudflare Agents SDK + MCP x402 integration.
 - **#12 Arc Programmable Money Hackathon — Agentic Treasury Submission** — Encode Club x Arc hackathon. Functional MVP of Agentic Treasury: yield brain + payment router + P2P causes.
 - **#63 x402 Global Challenge — Composite Entry ($100K + 500K ALGO)** — x402 Global Challenge on Algorand. Composite entry combining multiple x402 patterns. $100K prize pool + 500K ALGO. Deadline: TBD.
 - **#68 Composio x402 Payment Connector** — Build an x402 payment connector for Composio (500+ app integrations through one MCP server). Every Composio user can accept USDC micropayments through our gateway. Distribution multiplier for GenTech.
+- **#69 Celo Agentic Payments Hackathon — Most x402 Payments Track ($1K)** — Celo Agentic Payments & DeFAI Hackathon. Deadline: Aug 3, 2026. Most x402 Payments track ($1K prize) — deploy our existing x402 gateway on Celo and generate real x402 payment volume. Also: Most Revenue Generated ($3K) and Highest AskBots Agent Ranking ($500). Registration via Celo Builder Skill for attribution tag.
