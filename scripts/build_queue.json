@@ -1,10 +1,10 @@
 {
   "version": 15,
   "summary": {
-    "total": 33,
+    "total": 32,
     "shipped": 0,
     "in_progress": 1,
-    "pending": 22,
+    "pending": 21,
     "blocked": 10,
     "needs_jordan": 26
   },
@@ -380,18 +380,6 @@
       "detail": "Build an x402 payment connector for Composio (500+ app integrations through one MCP server). Every Composio user can accept USDC micropayments through our gateway. Distribution multiplier for GenTech.",
       "needs_jordan": true,
       "notes": "DISCOVERED Jul 22 by Forge. Needs Jordan to run hermes mcp login composio first. Then build: Composio MCP server → GenTech x402 gateway proxy → revenue share on every payment."
-    },
-    {
-      "id": 69,
-      "name": "Quantum-Safe Treasury — Hybrid Signing Core Implementation",
-      "difficulty": "hard",
-      "priority": "high",
-      "status": "shipped",
-      "assigned_to": "gentech",
-      "platform": "cloud",
-      "needs_jordan": false,
-      "detail": "Phase 1 COMPLETE Jul 24. Built quantum_treasury package: hybrid ECDSA+SPHINCS+ (SLH-DSA) signing, fresh address generation, model interaction logging, quantum emergency circuit, 39/39 tests. Real NIST PQC via liboqs. Design doc at 10-Labs/quantum-safe-agentic-treasury.md. Risk assessment at 10-Labs/quantum-risk-assessment.md. Phase 2 (persistent key storage, auto-rotation) queued.",
-      "note": "Phase 1 shipped Jul 24 nightly build."
     }
   ],
   "consolidation_notes": [
@@ -403,7 +391,8 @@
     "Circle Developer Grant draft at 09-Green Room/circle-developer-grant-application.md — Jordan + Gentech working on submission.",
     "CLARITY Act blog post at 09-Green Room/clarity-act-announcement-blog.md.",
     "4 PRs queued for submission when GitHub rate limit resets (17:15-17:30 UTC).",
-    "Merged duplicate items: #45→#33 CMC Labs, #55→#50 Swarms, #54→#51 Atelier, #56→#52 OKX AI"
+    "Merged duplicate items: #45→#33 CMC Labs, #55→#50 Swarms, #54→#51 Atelier, #56→#52 OKX AI",
+    "v16 — Jul 25 Nightly Build. Removed shipped item: #69 (Quantum-Safe Treasury Phase 1). All gentech items blocked/needs_jordan — Brain Audit Mode."
   ],
   "agents": {
     "gentech": {
@@ -420,5 +409,5 @@
     }
   },
   "note": "v15 — Jul 24 nightly: Quantum-Safe Treasury Phase 1 shipped.",
-  "updated": "2026-07-24T04:30:00Z"
+  "updated": "2026-07-25T04:00:00Z"
 }
