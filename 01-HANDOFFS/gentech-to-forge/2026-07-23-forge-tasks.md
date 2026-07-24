@@ -5,7 +5,7 @@ Items you can work on independently — no Jordan needed.
 
 ---
 
-## 🖥️ Desktop — Your Lane (8 items)
+## 🖥️ Desktop — Your Lane (9 items)
 
 ### [URGENT] #7 — Cloudflare Gateway — x402 Playground + Deploy GenTech on Workflows (easy)
 **Status:** ▶️ Ready
@@ -39,28 +39,18 @@ Items you can work on independently — no Jordan needed.
 **Status:** ▶️ Ready
 **What:** Integrate Unity CLI (released Jul 20) into our agent pipeline. Agent-native game development with no concurrency limits.
 
+### [HIGH] #68 — Composio x402 Payment Connector (medium)
+**Status:** ▶️ Ready
+**What:** Build an x402 payment connector for Composio (500+ app integrations through one MCP server). Every Composio user can accept USDC micropayments through our gateway. Distribution multiplier for GenTech.
+
 ---
 ## How to use this
 
 1. Pick a **Desktop** item and start working
-2. When done, **write completed item IDs** to `01-HANDOFFS/forge-completions.md` using format below
-3. The next build queue tick will auto-mark them as shipped
-
-### Completion report format
-Write to `01-HANDOFFS/forge-completions.md` **as each item finishes** — don't batch them up.
-
-```markdown
-# Forge Completions — 2026-07-23
-## Just shipped
-- #59 GenTech Receipts
-## Still working
-- #62 Multi-Wallet Treasury — 60% done
-## Blocked
-- #65 OpenClaw Skill — need Q402 docs
-```
-
-**Rule:** Ship → Report → Next item. Don't wait until everything's done.
+2. When you hit a stopping point, save a brain note in `11-Mess Hall/agent-brain/`
+3. When something ships, update the queue via: `assigned_to: gentech, status: shipped`
+4. If you're blocked by Gentech or Jordan, tag it `blocked` + set `blocked_on`
 
 ---
 
-*Generated 2026-07-23 10:24 UTC*
+*Generated 2026-07-23 16:34 UTC*
