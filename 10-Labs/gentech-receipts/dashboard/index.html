@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GenTech Receipts — x402 Spending Dashboard</title>
+<style>
+  :root {
+    --bg: #0a0e17;
+    --card: #111827;
+    --border: #1f2937;
+    --green: #22c55e;
+    --purple: #a855f7;
+    --blue: #3b82f6;
+    --orange: #f97316;
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: var(--bg); color: var(--text); padding: 24px; max-width: 1200px; margin: 0 auto;
+  }
+  .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px; }
+  .header h1 { font-size: 24px; font-weight: 700; }
+  .header h1 span { color: var(--green); }
+  .badge { font-size: 11px; padding: 4px 10px; border-radius: 999px; background: #1a2332; color: var(--muted); }
+  .stats-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 24px; }
+  .stat-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
+  .stat-card .label { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px; }
+  .stat-card .value { font-size: 28px; font-weight: 700; }
+  .stat-card .sub { font-size: 13px; color: var(--muted); margin-top: 4px; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
+  @media (max-width: 768px) { .grid { grid-template-columns: 1fr; } }
+  .card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
+  .card h2 { font-size: 14px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 16px; }
+  .bar-chart { display: flex; flex-direction: column; gap: 8px; }
+  .bar-row { display: flex; align-items: center; gap: 12px; }
+  .bar-label { width: 140px; font-size: 13px; text-align: right; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .bar-track { flex: 1; height: 20px; background: #1a2332; border-radius: 6px; overflow: hidden; position: relative; }
+  .bar-fill { height: 100%; border-radius: 6px; transition: width 0.6s ease; }
+  .bar-value { width: 50px; font-size: 12px; color: var(--muted); text-align: right; }
+  .bar-fill.green { background: linear-gradient(90deg, #22c55e, #16a34a); }
+  .bar-fill.purple { background: linear-gradient(90deg, #a855f7, #7c3aed); }
+  .bar-fill.blue { background: linear-gradient(90deg, #3b82f6, #2563eb); }
+  .bar-fill.orange { background: linear-gradient(90deg, #f97316, #ea580c); }
+  .chain-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 14px; }
+  .chain-row:last-child { border-bottom: none; }
+  .daily-chart { display: flex; align-items: flex-end; gap: 4px; height: 120px; padding-top: 8px; }
+  .daily-bar { flex: 1; display: flex; flex-direction: column; align-items: center; }
+  .daily-bar .day-fill { width: 100%; border-radius: 4px 4px 0 0; background: linear-gradient(180deg, #22c55e, #16a34a); min-height: 4px; transition: height 0.6s ease; }
+  .daily-bar .day-label { font-size: 10px; color: var(--muted); margin-top: 4px; }
+  .tx-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .tx-table th { text-align: left; color: var(--muted); font-weight: 500; padding: 6px 8px; border-bottom: 1px solid var(--border); }
+  .tx-table td { padding: 6px 8px; border-bottom: 1px solid #1a2332; }
+  .tx-table tr:hover td { background: #1a2332; }
+  .chain-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; }
+  .chain-dot.base { background: #0052ff; }
+  .chain-dot.polygon { background: #8247e5; }
+  .chain-dot.arbitrum { background: #2d374b; }
+  .status-badge { font-size: 11px; padding: 2px 8px; border-radius: 999px; }
+  .status-badge.verified { background: #052e16; color: var(--green); }
+  .status-badge.pending { background: #1c1917; color: var(--orange); }
+  .timestamp { font-size: 11px; color: var(--muted); }
+  .loading { text-align: center; padding: 40px; color: var(--muted); }
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>🪪 GenTech <span>Receipts</span></h1>
+  <div>
+    <span class="badge" id="period-badge">Loading...</span>
+    <span class="badge" style="margin-left:8px">x402 v2</span>
+  </div>
+</div>
+
+<div class="stats-row" id="stats-row">
+  <div class="stat-card"><div class="label">Total Volume (7d)</div><div class="value" id="stat-volume">—</div><div class="sub">USDC</div></div>
+  <div class="stat-card"><div class="label">Total Calls</div><div class="value" id="stat-calls">—</div><div class="sub" id="stat-avg">— avg per call</div></div>
+  <div class="stat-card"><div class="label">Unique Callers</div><div class="value" id="stat-callers">—</div><div class="sub">wallet addresses</div></div>
+  <div class="stat-card"><div class="label">Receipt Validity</div><div class="value" id="stat-validity">—</div><div class="sub">verified rate</div></div>
+</div>
+
+<div class="grid">
+  <div class="card">
+    <h2>By Endpoint</h2>
+    <div class="bar-chart" id="endpoint-chart"></div>
+  </div>
+  <div class="card">
+    <h2>By Chain</h2>
+    <div id="chain-list"></div>
+  </div>
+</div>
+
+<div class="card" style="margin-bottom:24px">
+  <h2>Daily Volume (7 days)</h2>
+  <div class="daily-chart" id="daily-chart"></div>
+</div>
+
+<div class="card">
+  <h2>Recent Transactions</h2>
+  <table class="tx-table">
+    <thead><tr><th>Tx</th><th>Chain</th><th>Endpoint</th><th>Caller</th><th>Amount</th><th>Status</th><th>Time</th></tr></thead>
+    <tbody id="tx-table-body"></tbody>
+  </table>
+</div>
+
+<script>
+async function loadData() {
+  try {
+    let resp;
+    try {
+      resp = await fetch('/api/data');
+    } catch {
+      // Fallback: embedded sample data
+      renderData(await fetch('/api/data').catch(() => null));
+      return;
+    }
+    const data = await resp.json();
+    renderData(data);
+  } catch {
+    document.querySelector('.loading').textContent = 'Failed to load data';
+  }
+}
+
+function renderData(data) {
+  const s = data.summary;
+  
+  document.getElementById('period-badge').textContent = 
+    `${s.period_start.slice(0,10)} → ${s.period_end.slice(0,10)}`;
+  document.getElementById('stat-volume').textContent = `$${s.total_volume_usdc.toFixed(2)}`;
+  document.getElementById('stat-calls').textContent = s.total_calls.toLocaleString();
+  document.getElementById('stat-avg').textContent = `$${s.avg_payment_usdc.toFixed(2)} avg per call`;
+  document.getElementById('stat-callers').textContent = s.unique_callers;
+
+  const verified = data.recent_transactions.filter(t => t.verified).length;
+  const total = data.recent_transactions.length;
+  document.getElementById('stat-validity').textContent = total > 0 ? `${Math.round(verified/total*100)}%` : '—';
+
+  // Endpoint chart
+  const maxVol = Math.max(...data.by_endpoint.map(e => e.volume));
+  const colors = ['green', 'purple', 'blue', 'orange', 'green', 'purple', 'blue'];
+  document.getElementById('endpoint-chart').innerHTML = data.by_endpoint
+    .sort((a,b) => b.volume - a.volume)
+    .map((ep, i) => `
+      <div class="bar-row">
+        <div class="bar-label">${ep.endpoint.replace('/api/', '')}</div>
+        <div class="bar-track">
+          <div class="bar-fill ${colors[i % colors.length]}" style="width:${(ep.volume/maxVol*100)}%"></div>
+        </div>
+        <div class="bar-value">$${ep.volume.toFixed(1)}</div>
+      </div>
+    `).join('');
+
+  // Chain breakdown
+  const totalVol = s.total_volume_usdc;
+  document.getElementById('chain-list').innerHTML = data.by_chain.map(ch => `
+    <div class="chain-row">
+      <span><span class="chain-dot ${ch.chain.toLowerCase()}"></span>${ch.chain}</span>
+      <span>${ch.calls.toLocaleString()} calls</span>
+      <span style="font-weight:600">$${ch.volume.toFixed(2)}</span>
+      <span style="color:var(--muted);font-size:12px">(${(ch.volume/totalVol*100).toFixed(1)}%)</span>
+    </div>
+  `).join('');
+
+  // Daily chart
+  const maxDaily = Math.max(...data.daily_totals.map(d => d.volume_usdc));
+  document.getElementById('daily-chart').innerHTML = data.daily_totals.map(d => `
+    <div class="daily-bar">
+      <div class="day-fill" style="height:${(d.volume_usdc/maxDaily*100)}%"></div>
+      <div class="day-label">${d.date.slice(5)}</div>
+    </div>
+  `).join('');
+
+  // Recent transactions
+  document.getElementById('tx-table-body').innerHTML = data.recent_transactions.map(tx => `
+    <tr>
+      <td class="timestamp">${tx.tx_hash.slice(0,10)}...</td>
+      <td><span class="chain-dot ${tx.chain.toLowerCase()}"></span>${tx.chain}</td>
+      <td>${tx.endpoint.replace('/api/', '')}</td>
+      <td class="timestamp">${tx.caller.slice(0,6)}...${tx.caller.slice(-4)}</td>
+      <td>$${tx.amount_usdc.toFixed(2)}</td>
+      <td><span class="status-badge ${tx.verified ? 'verified' : 'pending'}">${tx.verified ? '✅ Verified' : '⏳ Pending'}</span></td>
+      <td class="timestamp">${new Date(tx.timestamp).toLocaleTimeString()}</td>
+    </tr>
+  `).join('');
+}
+
+loadData();
+// Auto-refresh
+setInterval(loadData, 30000);
+</script>
+</body>
+</html>

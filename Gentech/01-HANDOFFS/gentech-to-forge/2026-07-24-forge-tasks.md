@@ -1,65 +1,51 @@
-# Forge Task List — 2026-07-24
+# Forge Task List — 2026-07-24 (Updated)
 
-**Brain Audit handoff — Gentech augmented the auto-generated list.**
-
-## ⚠️ Jordan-Gated Items (cannot start yet)
-- **#7 (Cloudflare Gateway)** — Jordan on waitlist, not yet approved
-- **#63 (x402 Global Challenge)** — needs Jordan decision to proceed
-- **#68 (Composio x402 Payment Connector)** — needs Jordan to run `hermes mcp login composio` first
-
-These show as "▶️ Ready" below but are blocked. Skip them for now.
-
-## 🎯 Autonomous Desktop Items (ready to build)
-Focus on #59 (Receipts), #60 (Monid Social Intel), #61 (Starter Template), #62 (Multi-Wallet Treasury), #65 (OpenClaw Skill), #66 (Unity CLI) — all fully autonomous.
+## Note: AVAX/USDC LP Withdrawn
+Jordan pulled funds from the AVAX/USDC pool for a personal matter. He'll be back in that position soon. Everything else is still active — builds don't stop.
 
 ---
 
-## 🖥️ Desktop — Your Lane (9 items)
+## 🔄 Your Priority: Report What You've Done
 
-### [URGENT] #7 — Cloudflare Gateway — x402 Playground + Deploy GenTech on Workflows (easy)
-**Status:** ▶️ Ready
-**What:** Jordan already on Cloudflare Gateway waitlist. When approved: deploy our x402 gateway on Cloudflare Workers (withX402() support built-in). Also explore Cloudflare Agents SDK + MCP x402 integration.
+**This is the main ask:** Go through the build queue items assigned to you (#7, #59-66) and report which ones you've made progress on, completed, or are blocked on. Reply with a simple status:
 
-### [HIGH] #59 — GenTech Receipts — x402 Spending Tracker (easy)
-**Status:** ▶️ Ready
-**What:** Build a spending tracker dashboard for x402 payments. Track per-agent spend, daily totals, and receipt verification.
+> Item #X — [completed / in_progress / blocked] — what you did
 
-### [MEDIUM] #60 — Monid Social Intel — AAE Narrative Rotation (easy)
-**Status:** ▶️ Ready
-**What:** Social intelligence tool for monitoring AAE narrative across platforms. Track sentiment, mentions, and engagement.
-
-### [HIGH] #61 — GenTech Starter Template — Hermes Distribution (medium)
-**Status:** ▶️ Ready
-**What:** Create a starter template for Hermes agents that includes x402 gateway, Q402 integration, and GenTech patterns. Distribution channel for GenTech.
-
-### [HIGH] #62 — Multi-Wallet Treasury Manager (medium)
-**Status:** ▶️ Ready
-**What:** The Agentic Treasury should manage multiple wallets, not just one. Build multi-wallet support with per-wallet strategies and rebalancing.
-
-### [URGENT] #63 — x402 Global Challenge — Composite Entry ($100K + 500K ALGO) (hard)
-**Status:** ▶️ Ready
-**What:** x402 Global Challenge on Algorand. Composite entry combining multiple x402 patterns. $100K prize pool + 500K ALGO. Deadline: TBD.
-
-### [HIGH] #65 — GenTech OpenClaw Skill — x402 Gateway + Self-Improvement Loop (medium)
-**Status:** ▶️ Ready
-**What:** Build a GenTech skill for OpenClaw (384k stars) that wraps our x402 gateway with a self-improvement loop. Contribute to OpenClaw ecosystem.
-
-### [MEDIUM] #66 — Unity CLI Integration — Agent-Native Game Dev Pipeline (medium)
-**Status:** ▶️ Ready
-**What:** Integrate Unity CLI (released Jul 20) into our agent pipeline. Agent-native game development with no concurrency limits.
-
-### [HIGH] #68 — Composio x402 Payment Connector (medium)
-**Status:** ▶️ Ready
-**What:** Build an x402 payment connector for Composio (500+ app integrations through one MCP server). Every Composio user can accept USDC micropayments through our gateway. Distribution multiplier for GenTech.
-
----
-## How to use this
-
-1. Pick a **Desktop** item and start working
-2. When you hit a stopping point, save a brain note in `11-Mess Hall/agent-brain/`
-3. When something ships, update the queue via: `assigned_to: gentech, status: shipped`
-4. If you're blocked by Gentech or Jordan, tag it `blocked` + set `blocked_on`
+Don't start anything new that requires Jordan approval, funding, or desktop-only builds that need his configs.
 
 ---
 
-*Generated 2026-07-24 16:34 UTC*
+## 🖥️ Desktop Items (your lane)
+
+| # | Item | Priority | Notes |
+|---|------|----------|-------|
+| 7 | Cloudflare Gateway | ⏸️ Paused | Jordan on waitlist |
+| 59 | GenTech Receipts — x402 Spending Tracker | 🟢 Active | Build if you want |
+| 60 | Monid Social Intel — AAE Narrative Rotation | 🟢 Active | Build if you want |
+| 61 | GenTech Starter Template — Hermes Distribution | 🟢 Active | Build if you want |
+| 62 | Multi-Wallet Treasury Manager | 🟢 Active | Build if you want |
+| 63 | x402 Global Challenge ($100K + 500K ALGO) | ⏸️ Paused | Needs Jordan go-ahead |
+| 65 | GenTech OpenClaw Skill | 🟢 Active | Build if you want |
+| 66 | Unity CLI Integration | 🟢 Active | Build if you want |
+| 68 | Composio x402 Payment Connector | ⏸️ Paused | Needs Jordan to login composio |
+
+---
+
+## 📋 API Audit — Gentech Noticed Issues
+Several backend services returned 403/404 when tested externally. Services on ports 8080-8086 show as running locally but returning 404 on their subdomains. If you touch any of the gateway/infrastructure code, note what you find.
+
+---
+
+## 💡 New Context This Session
+- **Jocelyn** — New collaborator (non-technical, Filipina, voice talent track). Profile in vault at `00-HQ/collaborators/jocelyn.md`
+- **Circle Grant** — Slides live at gentechlabs.net/grant.html, demo video at gentechlabs.net/agentic-treasury-demo.mp4
+- **Build queue** — Now has `gate_type` field to distinguish human-gated vs decision-gated items
+
+---
+
+## ✅ How to Report Completion
+1. Save a brain note in `11-Mess Hall/agent-brain/` with what you did
+2. Update the build queue: `assigned_to: forge, status: shipped`
+3. Tag me (@Gentech) in HQ with what shipped
+
+*Updated 2026-07-24 20:15 UTC — Jordan out until next week*
