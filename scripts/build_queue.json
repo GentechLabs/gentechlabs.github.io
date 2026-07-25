@@ -1,7 +1,7 @@
 {
   "version": 15,
   "summary": {
-    "total": 34,
+    "total": 28,
     "shipped": 6,
     "in_progress": 1,
     "pending": 17,
@@ -328,54 +328,6 @@
       "gate_type": "human"
     },
     {
-      "id": 59,
-      "name": "GenTech Receipts — x402 Spending Tracker",
-      "difficulty": "easy",
-      "priority": "high",
-      "status": "shipped",
-      "assigned_to": "forge",
-      "platform": "desktop",
-      "needs_jordan": false,
-      "detail": "Build a spending tracker dashboard for x402 payments. Track per-agent spend, daily totals, and receipt verification.",
-      "human_gated": false
-    },
-    {
-      "id": 60,
-      "name": "Monid Social Intel — AAE Narrative Rotation",
-      "difficulty": "easy",
-      "priority": "medium",
-      "status": "shipped",
-      "assigned_to": "forge",
-      "platform": "desktop",
-      "needs_jordan": false,
-      "detail": "Social intelligence tool for monitoring AAE narrative across platforms. Track sentiment, mentions, and engagement.",
-      "human_gated": false
-    },
-    {
-      "id": 61,
-      "name": "GenTech Starter Template — Hermes Distribution",
-      "difficulty": "medium",
-      "priority": "high",
-      "status": "shipped",
-      "assigned_to": "forge",
-      "platform": "desktop",
-      "needs_jordan": false,
-      "detail": "Create a starter template for Hermes agents that includes x402 gateway, Q402 integration, and GenTech patterns. Distribution channel for GenTech.",
-      "human_gated": false
-    },
-    {
-      "id": 62,
-      "name": "Multi-Wallet Treasury Manager",
-      "difficulty": "medium",
-      "priority": "high",
-      "status": "shipped",
-      "assigned_to": "forge",
-      "platform": "desktop",
-      "needs_jordan": false,
-      "detail": "The Agentic Treasury should manage multiple wallets, not just one. Build multi-wallet support with per-wallet strategies and rebalancing.",
-      "human_gated": false
-    },
-    {
       "id": 63,
       "name": "x402 Global Challenge — Composite Entry ($100K + 500K ALGO)",
       "difficulty": "hard",
@@ -400,30 +352,6 @@
       "detail": "Register GenTech on Virtuals ACP at app.virtuals.io/acp/new. Needs wallet auth — Jordan must handle.",
       "human_gated": true,
       "gate_type": "human"
-    },
-    {
-      "id": 65,
-      "name": "GenTech OpenClaw Skill — x402 Gateway + Self-Improvement Loop",
-      "difficulty": "medium",
-      "priority": "high",
-      "status": "shipped",
-      "assigned_to": "forge",
-      "platform": "desktop",
-      "needs_jordan": false,
-      "detail": "Build a GenTech skill for OpenClaw (384k stars) that wraps our x402 gateway with a self-improvement loop. Contribute to OpenClaw ecosystem.",
-      "human_gated": false
-    },
-    {
-      "id": 66,
-      "name": "Unity CLI Integration — Agent-Native Game Dev Pipeline",
-      "difficulty": "medium",
-      "priority": "medium",
-      "status": "shipped",
-      "assigned_to": "forge",
-      "platform": "desktop",
-      "needs_jordan": false,
-      "detail": "Integrate Unity CLI (released Jul 20) into our agent pipeline. Agent-native game development with no concurrency limits.",
-      "human_gated": false
     },
     {
       "id": 68,
@@ -480,7 +408,8 @@
     "v16 — Jul 25 Nightly Build. Removed shipped item: #69 (Quantum-Safe Treasury Phase 1). All gentech items blocked/needs_jordan — Brain Audit Mode.",
     "v16 — Jul 24 Brain Audit: Added #69 Celo Hackathon. All 7 gentech items Jordan-blocked. Vault scan: no stale shipped items. x402 gateway running (simulation mode, 1.4d uptime). Celo hackathon deadline Aug 3.",
     "v16 — Jul 24 Nightly build log. Researched Celo x402 deployment for #69 — gateway at 8090 (8d uptime, 15 endpoints), adding Celo is config-only. All gentech cloud items Jordan-blocked. Build log at 11-Mess Hall/build-logs/2026-07-24-2200-build-log.md.",
-    "v17 — Jul 25 Nightly build. Updated queue: 6 Forge items shipped (#59 Receipts, #60 Monid, #61 Starter Template, #62 Multi-Wallet, #65 OpenClaw, #66 Unity CLI). All gentech items still Jordan-blocked. Gateway healthy (6 chains, 15 endpoints, 8090 online). Celo hackathon deadline Aug 3."
+    "v17 — Jul 25 Nightly build. Updated queue: 6 Forge items shipped (#59 Receipts, #60 Monid, #61 Starter Template, #62 Multi-Wallet, #65 OpenClaw, #66 Unity CLI). All gentech items still Jordan-blocked. Gateway healthy (6 chains, 15 endpoints, 8090 online). Celo hackathon deadline Aug 3.",
+    "v18 — Jul 26 Nightly build. Removed 6 shipped Forge items (#59 Receipts, #60 Monid, #61 Starter Template, #62 Multi-Wallet, #65 OpenClaw, #66 Unity CLI) from items[] per queue lifecycle rule. All gentech items Jordan-blocked — entering Brain Audit Mode."
   ],
   "agents": {
     "gentech": {
@@ -496,8 +425,8 @@
       "decision_maker": true
     }
   },
-  "note": "v18 — Jul 26 Overnight maintenance. Verified: no PRs merged (GOAT, Dexter-DAO, XRPL, NEAR, Superpowers all still unsubmitted). All 10 blocked items remain Jordan-gated. No count drift.",
-  "updated": "2026-07-26T06:00:00Z",
+  "note": "v18 — Jul 26 Nightly build. Queue cleanup: removed 6 shipped Forge items. All 9 gentech items remain Jordan-blocked. Brain Audit Mode active.",
+  "updated": "2026-07-25T09:04:51Z",
   "gate_summary": {
     "human_gated": 18,
     "decision_gated": 10,
