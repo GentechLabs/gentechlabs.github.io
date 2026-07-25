@@ -1,78 +1,78 @@
-# Blood Moon — WIP Storyboard
+# Blood Moon Rising — Final WIP Storyboard
 
 **Character:** KAGE
 **Production:** A GenTech Labs Production
-**Status:** Pre-visualization complete — ready for animation
+**Last audit:** Jul 25, 2026
 
 ---
 
-## Reference Sheets
+## CONSISTENT ATMOSPHERE LOCKED
+Deep dark blue-black base. Blood red moon + Tokyo Tower as only warm sources. Dark concrete rooftop wet/reflective from heavy rain. Industrial black metal railing. Small utility structure on right. Heavy vertical rain. High contrast. Red reflections shimmer on wet ground. **Every frame must match this.**
 
-![KAGE Sheet](https://blockrun.ai/api/media/media/images/2026/07/24/bb1043d9-51b7-4c20-8112-4ed6b6a13d4a.png)
-*KAGE — Character Reference*
-
-![Shadow Sheet](https://blockrun.ai/api/media/media/images/2026/07/24/b69de6a1-88b6-46b6-bc23-e9dd38b9e8d4.png)
-*Shadow Creature — Enemy Reference*
-
----
-
-## CLIP 1 — The Vigil (0-10s)
-
-**1a — BEFORE:** Puddle with "A GenTech Labs Production" reflected
-![1a](https://blockrun.ai/api/media/media/images/2026/07/24/92025c75-4b47-499e-97a4-0a11147f055c.png)
-
-**1b — AFTER:** Boot steps onto puddle. Text disperses. Water splashes.
-![1b](https://blockrun.ai/api/media/media/images/2026/07/24/ec37a619-9a3e-4e29-9f4a-b488bd34681e.png)
-
-**1c:** KAGE walks across rooftop toward the edge. Guitar strapped. Hand on neck.
-![1c](https://blockrun.ai/api/media/media/images/2026/07/24/ee7573ab-5b3b-4906-af6a-479d65c04d52.png)
+## KAGE ACCESSORIES (must be in every frame)
+- HEAVY INDUSTRIAL SILVER CHAIN diagonally across chest (left shoulder to right hip)
+- Silver razor blade pendant on thin chain
+- Silver waist chain with padlock
+- Black scribble tattoos on forearms and back of hands
+- Black Gibson Les Paul guitar
+- NO floating chains on enemies/background
 
 ---
 
-## CLIP 2 — The Reveal (10-20s)
+## CLIP 1 — THE VIGIL (0-10s)
+| Frame | Description | Status |
+|-------|-------------|--------|
+| **1a** — BEFORE | Puddle reflecting KAGE + "A GenTech Labs Production" + blood moon + Tokyo Tower | ✅ APPROVED |
+| | `https://blockrun.ai/api/media/media/images/2026/07/25/708794e4-8fd7-4c37-9c58-9ba7927f4cda.png` | |
+| **1b** — AFTER | Boot steps into puddle, water splashes upward, reflection/text ripples and disperses | ✅ APPROVED |
+| | `https://blockrun.ai/api/media/media/images/2026/07/25/72abf3f1-6125-4755-806f-dee4b640204c.png` | |
+| **1c** — Walk | KAGE walking toward edge, back to camera, guitar over shoulder | ✅ APPROVED |
+| | `https://blockrun.ai/api/media/media/images/2026/07/25/def301b3-f313-4ab3-ae7b-27aca5c7e9d3.png` | |
 
-**2a:** KAGE walking toward camera, front tracking shot.
-![2a](https://blockrun.ai/api/media/media/images/2026/07/24/bd4129f4-f032-4c6e-9ce2-05f5b4e7238a.png)
+## CLIP 2 — THE REVEAL (10-20s)
+| Frame | Description | Status |
+|-------|-------------|--------|
+| **2a** — Walk front | KAGE walking toward camera, guitar in hand, heavy chain across chest | ✅ APPROVED |
+| | `https://blockrun.ai/api/media/media/images/2026/07/25/990a7e9c-2c39-4669-9128-51392129591a.png` | |
+| **2b** — Profile/Stance | KAGE stops, looks out at city | ❌ NEEDS REGEN |
+| **2c** — Guitar grab | KAGE swings guitar off shoulder, grabs it | ❌ NEEDS REGEN |
+| **2d** — Chord explosion | KAGE strums power chord, red energy shockwave bursts outward | ❌ NEEDS REGEN |
 
-**2b:** KAGE stops at the edge, profile view, about to raise guitar.
-![2b](https://blockrun.ai/api/media/media/images/2026/07/24/d72f19b6-a439-4ea4-b6b4-a4d908c6965f.png)
+## CLIP 3 — THE BATTLE (20-30s)
+| Frame | Description | Status |
+|-------|-------------|--------|
+| **3a** — BEFORE | Surrounded by multiple shadow creatures, defensive stance | ✅ APPROVED |
+| | `https://blockrun.ai/api/media/media/images/2026/07/25/ba9b32f8-92a9-49db-a41e-91762bade2a7.png` | |
+| **3b** — AFTER | Shadow lunges, KAGE counter-strikes | ✅ APPROVED |
+| | `https://blockrun.ai/api/media/media/images/2026/07/25/dfdc3711-9164-4502-9c81-0972ff1e840b.png` | |
+| **3c** — Wind up | Axe wind up — USER'S IMAGE, both hands on neck, body raised to strike | ✅ APPROVED |
+| | `https://blockrun.ai/api/media/media/images/2026/07/25/8c1b5a8b-525c-4306-a0ee-18b4171b2b58.png` | |
+| **3d** — Impact | Home run swing connects with shadow creature | ⚠️ PENDING — use chain-fixed impact |
+| | `https://blockrun.ai/api/media/media/images/2026/07/25/4249acd8-538f-4ae6-8df6-c7a59caf8ad5.png` | |
+| **3e** — BEFORE | About to strum — energy building, creatures advancing | ✅ OK (needs chain check) |
+| | `https://blockrun.ai/api/media/media/images/2026/07/24/cd1be972-89b2-41ad-aa4e-3abb1b0555af.png` | |
+| **3f** — AFTER | Red energy rings pulse from strum, shadow creatures reel | ✅ OK |
+| | `https://blockrun.ai/api/media/media/images/2026/07/24/7b1ab9e9-3efe-4fb2-b972-15751b38afe2.png` | |
+| **3g** — BEFORE | Crouched mid-rooftop, about to leap upward (NOT at edge) | ✅ CHAINS FIXED |
+| | `https://blockrun.ai/api/media/media/images/2026/07/25/202c49dd-bc10-4163-a450-8b8a0ae7ddd5.png` | |
+| **3h** — AFTER | Leaping upward from center of roof, shadows reaching | ✅ APPROVED |
+| | `https://blockrun.ai/api/media/media/images/2026/07/25/6213d952-f25b-45b2-8dc9-9b830e1b6874.png` | |
+| **3i** — Final strike | KAGE delivers final blow, guitar swings in massive arc | ❓ NOT IN USE |
+| **3j** — Dissolve | Last shadow dissolves into red mist | ❓ NOT IN USE |
 
-**2c — GRAB:** KAGE reaches for and grabs the guitar, mid-lift.
-![2c](https://blockrun.ai/api/media/media/images/2026/07/24/af672d32-a805-4c03-8caf-b3eb0c8f65b7.png)
-
-**2d — CHORD:** Chord strikes. Rain explodes. Phoenix flares.
-![2d](https://blockrun.ai/api/media/media/images/2026/07/24/78c364c7-06ec-4dc1-aba8-d0181c6568d2.png)
+## CLIP 4 — THE VICTORY (30-40s)
+| Frame | Description | Status |
+|-------|-------------|--------|
+| **4a** — Victory | KAGE stands victorious, guitar planted on ground, looks at blood moon | ✅ APPROVED |
+| | `https://blockrun.ai/api/media/media/images/2026/07/25/7d7adf84-ddc1-43ef-9977-3aeba84fe507.png` | |
+| **4b** — Final pullback | Wide shot, KAGE small against moon, title card overlay | ❌ NOT GENERATED |
 
 ---
 
-## CLIP 3 — The Battle (20-30s)
+## ISSUES FOUND
 
-**3a:** Shadows emerge behind KAGE after the chord.
-![3a](https://blockrun.ai/api/media/media/images/2026/07/24/3bf72867-7288-4099-9522-c01e0cd94a2f.png)
-
-**3b:** 360° orbit fight. KAGE swings guitar through shadows.
-![3b](https://blockrun.ai/api/media/media/images/2026/07/24/6131981f-242c-42c0-812c-af5e2c562e61.png)
-
-**3c:** Final shadow dissolves into red mist.
-![3c](https://blockrun.ai/api/media/media/images/2026/07/24/50b98029-bb3a-4123-8c8a-f9dd46cf8630.png)
-
----
-
-## CLIP 4 — The Victory (30-40s)
-
-**4a:** KAGE victorious. Guitar planted. Phoenix glowing. Pull back → title.
-![4a](https://blockrun.ai/api/media/media/images/2026/07/24/97153443-e136-404b-b783-d5c2c2b76428.png)
-
----
-
-## Animation Flow
-
-```
-1a → 1b → 1c → 2a → 2b → 2c → 2d → 3a → 3b → 3c → 4a
-```
-
-- **4 Seedance 2.0 clips** (10s each)
-- **Sound design:** Rain ambience, chord impact, combat hits, shadow dissolves
-- **Title cards:** "A GenTech Labs Production" (puddle) → "KAGE — BLOOD MOON RISING" (end)
-- **Budget:** ~$13.00 to animate
-- **Balance:** $18.43
+1. **2b, 2c, 2d** — Old images deleted from CDN (404). Need to regenerate with consistent atmosphere + chains.
+2. **3d** — Home run experiments rejected. Use chain-fixed impact as final.
+3. **3e, 3f** — From old batch, verified OK for atmosphere but need chain check.
+4. **3i, 3j, 4b** — Not generated or not in final plan.
+5. **END CARD** — "A GenTech Labs Production" title card needed for end.
