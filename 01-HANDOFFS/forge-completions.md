@@ -10,6 +10,8 @@
 - **#59 GenTech Receipts** — x402 spending tracker dashboard with CLI tracker, receipt verification, and HTML dashboard. Python scripts verified working.
 - **#60 Monid Social Intel** — AAE narrative rotation monitoring tool. CLI scanner with sentiment analysis, platform breakdowns, and content signals. Verified running.
 - **#66 Unity CLI Integration** — Agent-native game dev pipeline skill + wrapper script for Unity CLI (released Jul 20). Covers install, editor management, live C# eval, Pipeline package, and MCP integration.
+- **#62 Multi-Wallet Treasury Manager** — Multi-wallet treasury manager with configurable wallets, proportional allocation, threshold-based rebalancing, and unified reporting. Verified running.
+- **#65 GenTech OpenClaw Skill** — ClawHub-compatible x402 gateway skill for OpenClaw (384k stars). YAML frontmatter, self-improvement loop, receipt tracking, 7 paid endpoints.
 
 ## Blocked
 - *None this session.*
