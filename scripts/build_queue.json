@@ -1,12 +1,12 @@
 {
-  "version": 23,
+  "version": 24,
   "summary": {
-    "total": 8,
+    "total": 9,
     "shipped": 0,
     "in_progress": 1,
-    "pending": 7,
+    "pending": 8,
     "blocked": 0,
-    "needs_jordan": 8
+    "needs_jordan": 9
   },
   "items": [
     {
@@ -116,13 +116,28 @@
       "gate_type": "decision",
       "detail": "AI Factory Hackathon by lablab.ai / NativelyAI. Online, August 3-10, 2026. Build real AI-native applications using native.builder. Good fit for our x402 payment stack. Needs Jordan: check registration status, decide go/no-go.",
       "note": "Discovered Jul 25 Brain Audit via blockrun_search."
+    },
+    {
+      "id": 80,
+      "name": "Keeperhub Agents Onchain Hackathon — x402 Onchain Agents ($5K+)",
+      "difficulty": "easy",
+      "priority": "urgent",
+      "status": "pending",
+      "assigned_to": "jordan",
+      "platform": "any",
+      "needs_jordan": true,
+      "human_gated": true,
+      "gate_type": "decision",
+      "detail": "Keeperhub Agents Onchain Hackathon (Aug 13 deadline, build phase starts Jul 27 — T-2 days). AI agents executing real onchain transactions. Very aligned with our x402 gateway + compliance stack. $5K+ prize pool. Discovered Jul 25 Nightly Brain Audit via blockrun_search.",
+      "note": "Needs Jordan: check registration at Keeperhub, decide go/no-go. Build phase starts Jul 27 — decision needed ASAP."
     }
   ],
   "consolidation_notes": [
     "v20 — Jul 25 Arcade Sprint. Added #73 Super Arcade Tennis (in progress), #74 Arcade Landing Page, #75 Fork MengTo Skills.",
     "v21 — Jul 25 Afternoon. Added #76 Syra Marketplace registration, #77 Open Generative AI self-host. Tennis live at arcade.gentechlabs.net. MengTo fork pushed successfully.",
     "v22 — Jul 25 Nightly: Removed #75 (Fork MengTo — shipped). Recalculated summary. All items Jordan-blocked, entering Brain Audit mode.",
-    "v23 — Jul 25 Nightly Brain Audit: Added #78 Kite AI (0K), #79 AI Factory (Aug 3-10). Updated OKX #72 urgency note, Arcade #73 status note."
+    "v23 — Jul 25 Nightly Brain Audit: Added #78 Kite AI (0K), #79 AI Factory (Aug 3-10). Updated OKX #72 urgency note, Arcade #73 status note.",
+    "v24 — Jul 25 Nightly Brain Audit: Added #80 Keeperhub Agents Onchain Hackathon (urgent, Jul 27 start). Moved stale nightly reports to agent-brain/. All PRs still open (10/10). Infrastructure healthy."
   ],
   "agents": {
     "gentech": {
@@ -139,7 +154,7 @@
     }
   },
   "note": "v21 — Jul 25 Afternoon session. Arcade momentum: tennis live, MengTo fork done, 3 new items queued (Syra, Open Generative AI, 3D lobby).",
-  "updated": "2026-07-25T16:32:16Z",
+  "updated": "2026-07-25T22:33:00Z",
   "gate_summary": {
     "human_gated": 30,
     "decision_gated": 12,
