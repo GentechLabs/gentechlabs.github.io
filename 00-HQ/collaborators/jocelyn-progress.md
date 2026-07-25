@@ -30,6 +30,11 @@
 - Primary path: voice cloning (ElevenLabs, Pipecat, Omnivoice) → orchestrator training
 - Profile saved to vault, mapping registered
 
+**2026-07-24 — Telegram Handle Added**
+- Jocelyn shared handle: @Celinealison92
+- Profile updated, mapping updated
+- System now recognizes her messages in any group
+
 ---
 
 ### Voice Pipeline (Future)

@@ -1,10 +1,10 @@
 {
-  "version": 16,
+  "version": 19,
   "summary": {
-    "total": 29,
-    "shipped": 6,
+    "total": 30,
+    "shipped": 0,
     "in_progress": 1,
-    "pending": 17,
+    "pending": 19,
     "blocked": 10,
     "needs_jordan": 29
   },
@@ -75,7 +75,7 @@
       "needs_jordan": true,
       "detail": "Encode Club x Arc hackathon. Functional MVP of Agentic Treasury: yield brain + payment router + P2P causes.",
       "platform": "either",
-      "note": " [WAITING ON JORDAN]",
+      "note": " [WAITING ON JORDAN] Deadline: Aug 9, 2026 (Demo Day Aug 20). Accelerator placement prize.",
       "human_gated": true,
       "gate_type": "decision"
     },
@@ -377,9 +377,9 @@
       "platform": "desktop",
       "detail": "Build an x402 payment connector for Composio (500+ app integrations through one MCP server). Every Composio user can accept USDC micropayments through our gateway. Distribution multiplier for GenTech.",
       "needs_jordan": true,
-      "notes": "DISCOVERED Jul 22 by Forge. Needs Jordan to run hermes mcp login composio first. Then build: Composio MCP server → GenTech x402 gateway proxy → revenue share on every payment.",
       "human_gated": true,
-      "gate_type": "decision"
+      "gate_type": "decision",
+      "note": "DISCOVERED Jul 22 by Forge. Needs Jordan to run hermes mcp login composio first. Then build: Composio MCP server → GenTech x402 gateway proxy → revenue share on every payment."
     },
     {
       "id": 69,
@@ -396,7 +396,7 @@
       "gate_type": "decision"
     },
     {
-      "id": 70,
+      "id": 71,
       "name": "FrameForge — AI Storyboard Service (previs pipeline)",
       "difficulty": "medium",
       "priority": "high",
@@ -407,6 +407,20 @@
       "human_gated": true,
       "gate_type": "decision",
       "detail": "Controlled pre-vis pipeline: character sheet → locked look → camera-native storyboard frames. Proven on Vanito's KAGE film. Spec at 09-Green Room/specs/frameforge-ai-storyboard-service.md. Jordan decides: (1) build MVP (landing page + character locker API), (2) test demand via service-first (simple landing page + order form), or (3) wait for KAGE film to complete first. Revenue model: service $1.5K–$5K/project, API $3–$5/frame, ~80% margins."
+    },
+    {
+      "id": 72,
+      "name": "OKX AI Genesis Hackathon — x402 ASP Submission ($100K)",
+      "difficulty": "medium",
+      "priority": "urgent",
+      "status": "pending",
+      "assigned_to": "gentech",
+      "platform": "cloud",
+      "needs_jordan": true,
+      "human_gated": true,
+      "gate_type": "decision",
+      "detail": "OKX AI Genesis Hackathon on X Layer. $100K prize pool. Build ASPs leveraging x402 payments. Deadline: July 27, 2026, 23:59 UTC (2 days). Our x402 gateway (8090, 6 services, 15+ endpoints, 2.2d uptime) is already deployed — config-only for X Layer support. Needs Jordan: registration on OKX dev portal xlayer.okx.com + x402 wallet on X Layer + go/no-go decision.",
+      "note": "DISCOVERED via Brain Audit Jul 25. Deadline T-2 days! Our x402 gateway architecture is proven — adding X Layer is a config change. Jordan needs to register and provide wallet."
     }
   ],
   "consolidation_notes": [
@@ -423,7 +437,8 @@
     "v16 — Jul 24 Brain Audit: Added #69 Celo Hackathon. All 7 gentech items Jordan-blocked. Vault scan: no stale shipped items. x402 gateway running (simulation mode, 1.4d uptime). Celo hackathon deadline Aug 3.",
     "v16 — Jul 24 Nightly build log. Researched Celo x402 deployment for #69 — gateway at 8090 (8d uptime, 15 endpoints), adding Celo is config-only. All gentech cloud items Jordan-blocked. Build log at 11-Mess Hall/build-logs/2026-07-24-2200-build-log.md.",
     "v17 — Jul 25 Nightly build. Updated queue: 6 Forge items shipped (#59 Receipts, #60 Monid, #61 Starter Template, #62 Multi-Wallet, #65 OpenClaw, #66 Unity CLI). All gentech items still Jordan-blocked. Gateway healthy (6 chains, 15 endpoints, 8090 online). Celo hackathon deadline Aug 3.",
-    "v18 — Jul 26 Nightly build. Removed 6 shipped Forge items (#59 Receipts, #60 Monid, #61 Starter Template, #62 Multi-Wallet, #65 OpenClaw, #66 Unity CLI) from items[] per queue lifecycle rule. All gentech items Jordan-blocked — entering Brain Audit Mode."
+    "v18 — Jul 26 Nightly build. Removed 6 shipped Forge items (#59 Receipts, #60 Monid, #61 Starter Template, #62 Multi-Wallet, #65 OpenClaw, #66 Unity CLI) from items[] per queue lifecycle rule. All gentech items Jordan-blocked — entering Brain Audit Mode.",
+    "v19 — Jul 25 Nightly Build / Brain Audit. Added #72 OKX AI Genesis Hackathon ($100K, deadline Jul 27). Gateway healthy (8090, 6 services, x402 v2). Queue cleanup: duplicate #70→71 (FrameForge), summary recalculated. All gentech items remain Jordan-blocked — flagging urgent OKX deadline."
   ],
   "agents": {
     "gentech": {
@@ -440,10 +455,10 @@
     }
   },
   "note": "v18 — Jul 26 Nightly build. Queue cleanup: removed 6 shipped Forge items. All 9 gentech items remain Jordan-blocked. Brain Audit Mode active.",
-  "updated": "2026-07-25T09:04:51Z",
+  "updated": "2026-07-25T22:00:00Z",
   "gate_summary": {
-    "human_gated": 18,
-    "decision_gated": 10,
-    "autonomous": 6
+    "human_gated": 29,
+    "decision_gated": 11,
+    "autonomous": -10
   }
 }

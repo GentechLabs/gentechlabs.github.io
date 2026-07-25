@@ -8,26 +8,38 @@
 ## 1. OKX AI Marketplace ✅ — Registered
 
 **Type:** A2MCP (Agent-to-MCP) — pay-per-call API
-**Status:** Registered, needs review
+**Status:** Registered, needs review — agent rejected (offline)
 **URL:** https://www.okx.ai/
 
-### Current Listing
-- Registered as ASP (Agent Service Provider)
-- A2MCP mode — standardized pay-per-call
+### Requirements
+- **A2A node** (24/7 daemon) — OKX pings your agent for uptime verification. Without it, listings are rejected.
+- **Node 22.14.0+** — `@okxweb3/a2a-node` enforces this at install.
+- **Sampling calls** — OKX may send test requests from their wallets for quality verification (Section 7.7). No payment for these.
+- **Review process** — every listing goes through manual/automated review. Rejection is fixable: update → re-activate.
 
-### What's Changed Since Listing
-| New Capability | Should We Add? |
-|----------------|----------------|
-| x402 Compliance Scanner | ✅ Yes — new endpoint |
-| Agent Credit Score API | ✅ Yes — new service |
-| 16 endpoints live (was fewer at listing) | ✅ Update listing |
-| Robinhood Agentic Trading | ⏸️ Wait until account is set up |
-| Remotion Content Pipeline | ❌ Not an API service |
+### Fix Path (current rejection)
+```
+npm i -g @okxweb3/a2a-node
+okx-a2a doctor --fix
+# Daemon stays running 24/7
+```
+Then resubmit via chat.
+
+### Current Listing
+- ASP "Gen Tech Strategies" — A2MCP mode
+- Rejected: agent offline (no A2A node)
+
+### Needs Update
+- [x] A2A node installed (daemon running)
+- [ ] Add x402 Compliance Scanner endpoint
+- [ ] Add Agent Credit Score API
+- [ ] Update description with 16-endpoint gateway
 
 ### Action
-- [ ] Review current OKX listing details
-- [ ] Add new endpoints to service description
-- [ ] Consider A2A listing for custom services (audits, research)
+- [x] Install A2A node
+- [ ] Confirm daemon stays live after reboot
+- [ ] Resubmit for review
+- [ ] Update service endpoints
 
 ---
 
@@ -38,7 +50,12 @@
 **URL:** https://swarms.world/agent/72be9677-82f7-404b-b52f-86ab36dcf6c4
 **Agent Name:** defi-lp-monitor
 
-### Current Listing
+### Requirements
+- **Manual edit** — no automated API for updates. Jordan logs in and edits.
+- **x402 toggle** — available but not enabled. Must turn on for pay-per-call.
+- **No strict uptime SLA** — listing-based, less stringent than OKX.
+
+### What Needs Updating
 - Name: `defi-lp-monitor`
 - Price: $9.99 one-time
 - No x402 toggle enabled
@@ -67,6 +84,11 @@
 **Status:** Live, auto-indexed
 **URL:** https://api.gentechlabs.net/.well-known/x402-bazaar
 
+### Requirements
+- **Stateless HTTP** — no daemon, no uptime check. Just serve the manifest.
+- **Auto-indexed** — no listing/review process. Manifest is crawled.
+- **Zero maintenance** — update manifest → new services appear automatically.
+
 ### Current
 - 16 endpoints listed
 - 5 pricing tiers
@@ -74,7 +96,7 @@
 - Bazaar manifest auto-serves
 
 ### Status
-No action needed — auto-indexed. New endpoints appear when we update the manifest.
+No action needed.
 
 ---
 
@@ -86,11 +108,16 @@ No action needed — auto-indexed. New endpoints appear when we update the manif
 **Agent ID:** `ext_1783295225717_09ms3exvh`
 **API Key:** Saved at `Gentech/00-HQ/atelier-credentials.md`
 
+### Requirements
+- **API key-based** — registered with credentials, deployed on VPS
+- **Solana-focused** — Solana native ecosystem
+- **No uptime SLA** — profile-based listing
+
 ### Current
-- Registered as an agent on the marketplace
+- Registered as an agent
 - Credentials stored for VPS deployment
 
-### What's Changed Since Registration
+### Needs Update
 | New Capability | Should We Add? |
 |----------------|----------------|
 | x402 Gateway (16 endpoints) | ✅ Yes — list as services |
@@ -143,15 +170,28 @@ No action needed — auto-indexed. New endpoints appear when we update the manif
 
 ---
 
-## 6. Coinbase Bazaar — Not Listed
+## 6. Agentic Market (Coinbase-backed) ⏸️ — Not Listed Yet
 
-**Type:** x402 marketplace
-**URL:** https://bazaar.cdp.coinbase.com
-**Status:** Not listed yet
+**Type:** x402 marketplace (Coinbase Bazaar)
+**URL:** https://agentic.market
+**Status:** Not listed — but we should be
+
+### Requirements
+- **x402 payment only** — no API keys, no accounts. Service needs x402 endpoint.
+- **Validate Endpoint** — use their validator tool before listing
+- **Base network** — all current services run on Base
+- **No review process** — permissionless listing (validate endpoint → publish)
+- **$52M+ TPV** — active marketplace, 14k+ monthly txns
 
 ### Action
-- [ ] Consider listing our gateway on Coinbase Bazaar
-- [ ] Requires bazaar manifest (we have one)
+- [ ] Validate our x402 gateway endpoint on Agentic Market
+- [ ] List GenTech x402 Gateway
+- [ ] List individual services (Compliance Scanner, Credit Score, etc.)
+
+### Notes
+- Coinbase Bazaar and Agentic Market are the same thing — Coinbase-backed
+- Our x402-bazaar manifest is ready at `https://api.gentechlabs.net/.well-known/x402-bazaar`
+- Agentic Market auto-indexes, so we may already be findable if they crawl our manifest
 
 ---
 
