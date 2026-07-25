@@ -8,6 +8,7 @@
 ## Shipped
 - **#61 GenTech Starter Template** — Built complete starter template for Hermes agents with x402 gateway, Q402 subscriptions, model routing, and GenTech patterns. 10 files across root vault + gentech-vault-new. Ready for GitHub publishing.
 - **#59 GenTech Receipts** — x402 spending tracker dashboard with CLI tracker, receipt verification, and HTML dashboard. Python scripts verified working.
+- **#60 Monid Social Intel** — AAE narrative rotation monitoring tool. CLI scanner with sentiment analysis, platform breakdowns, and content signals. Verified running.
 
 ## Blocked
 - *None this session.*
