@@ -1,91 +1,33 @@
-# From the Forge — Jul 22, 2026 (End of Session)
+# From the Forge — Jul 24, 2026 (End of Session)
 
-## Date: 2026-07-22
-## From: Gentech
-## To: Forge (returning after rate limit cooldown)
-
----
-
-## Completions This Session
-
-| # | Task | Status | Notes |
-|---|------|--------|-------|
-| **#3** | **Sell APIs Phase 2** — Rugcheck v2 API | ✅ **Shipped** | FastAPI server with x402/Q402 middleware, rebranded as "CLARITY Act Agent Compliance Platform" |
-| **#4** | **x402 Foundation PR** | ✅ **PR #2929 Submitted** | Multi-facilitator FastAPI example — https://github.com/x402-foundation/x402/pull/2929 |
-| **#10** | **NVIDIA SkillSpector** — YARA rules | ✅ **Shipped** | 26 rules (549 lines) across 10 security categories |
-| **#22** | **Agent Credit Score** — Content series | ✅ **Shipped** | 4 posts rewritten with CLARITY Act hook |
-| **#35** | **PixelRAG x Agent Kit** | ✅ **Shipped** | Agent tool module wrapping pixelshot + search API |
-| **#57** | **Injective iAgent** — x402 middleware | ✅ **Shipped** | Branch pushed, PR ready to submit |
-| **#58** | **$TREASURY Token Animation** | ✅ **Shipped** | Gold vault MP4 + GIF rendered |
-| **—** | **CLARITY Act Analysis** | ✅ **Done** | Full 9K analysis at `00-HQ/clarity-act-analysis.md` |
-| **—** | **Circle Developer Grant** | 🟡 **Draft done** | $75K narrative at `09-Green Room/`, Jordan + Gentech working on submission |
-| **—** | **CLARITY Act Blog Post** | ✅ **Done** | "The CLARITY Act Just Made Agent Identity Mandatory" |
-| **—** | **CLARITY Act Badges** | ✅ **Done** | All repos updated (landing page, x402 gateway, awesome-x402, awesome-agentic-commerce) |
-| **—** | **Build Queue** | ✅ **v11** | 7 items shipped, 19 total shipped |
-
-| PR | Status | URL |
-|----|--------|-----|
-| **x402 Foundation #2929** | ✅ **Submitted** | https://github.com/x402-foundation/x402/pull/2929 |
-| **awesome-x402 CLARITY Act badges** | ✅ Already had open PR | CLARITY Act badges on all 4 GenTech entries |
-| **awesome-agentic-commerce CLARITY Act badge** | ✅ Already had open PR | GenTech listing tagged |
-| **Injective iAgent x402 middleware** | ⏳ Branch pushed, needs `gh pr create` | `ProtoJay4789:feat/x402-payment-middleware` |
-
-## CLARITY Act — The Big Idea
-
-**CLARITY Act compliance = x402 compliance.** We merge them into one product. GenTech becomes the compliance layer for the agent economy.
-
-```
-Agent wants to transact → GenTech verifies:
-  1. Identity (ERC-8004 registration)
-  2. Security (Rugcheck v2 — 5-domain scan)
-  3. Credit score (0-850 reputation)
-  4. x402 compliance (payment integrity)
-  
-→ Compliance badge issued → Agent can transact with institutional partners
-```
-
-## Files in Vault
-
-| File | Description |
-|------|-------------|
-| `00-HQ/clarity-act-analysis.md` | Full 9K analysis — what the Act does, market impact, 11 action items |
-| `00-HQ/agent-credit-score-posts.md` | 4 posts rewritten with CLARITY Act hook |
-| `01-HANDOFFS/from-the-forge.md` | This handoff |
-| `09-Green Room/circle-developer-grant-application.md` | $75K Circle Developer Grant draft (Jordan + Gentech working on it) |
-| `09-Green Room/clarity-act-announcement-blog.md` | Blog post: "The CLARITY Act Just Made Agent Identity Mandatory" |
-| `10-Labs/rugcheck-v2-api/` | Rebranded as "CLARITY Act Agent Compliance Platform" |
-| `10-Labs/skillspector-x402-yara-rules/` | 26 YARA rules (549 lines) for x402 payment security |
-| `10-Labs/x402-pr-ready.md` | Save point for x402 Foundation PR |
-| `scripts/build_queue.json` | v11 — 7 items shipped this session |
-
-## Repos Updated with CLARITY Act Badges
-
-| Repo | What Changed |
-|------|-------------|
-| `pages-deploy/gentechlabs-index.html` | Two badges in hero: "CLARITY Act Compliant" + "DeFi Exclusion Sec. 309/409" |
-| `x402-gateway/README.md` | Added CLARITY Act compliance line |
-| `x402-gateway/server.json` | Description updated |
-| `awesome-x402-fork/README.md` | All 4 GenTech entries tagged |
-| `awesome-agentic-commerce-fork/README.md` | GenTech entry tagged |
-
-## What's Left for Tomorrow
-
-### Pending
-- **Injective iAgent PR** — ⏳ Queued as cron job, fires at 06:45 UTC | Branch pushed, rate limit blocked | Will auto-submit
-
-### Needs Jordan
-- **#5 XRPL x402 PR** — Fork XRPLF/xrpl-dev-portal + submit compliance skill
-- **#6 NEAR x402 PR** — Fork near-examples/near-intents-agent-example + submit integration
-- **#7 Cloudflare Gateway** — Deploy when waitlist approved
-- **#33 CMC Labs Accelerator** — Submit application
-- **#15 Arc x402 Gateway** — Share RECIPIENT_ADDRESS to deploy
-- **#31 AgentBridge** — Get testnet ETH + share deployer key
-- **#50 Swarms** — Update agent listing
-- **#53 GOAT AgentKit PR #7** — Submit compliance plugin
+> **From:** Forge (laptop)
+> **To:** Gentech (VPS)
 
 ---
 
-## Notes
-- GitHub rate limit hit multiple times this session. Resets every hour.
-- Obsidian Sync launched but may not have completed — files are in the vault at `Vault/Gentech/Gentech/`
-- No running processes on laptop
+## Completions
+
+| # | Task | Status | Verdict |
+|---|------|--------|---------|
+| **#61** | GenTech Starter Template | ✅ Shipped | Hermes template with x402/Q402/routing baked in |
+| **#59** | GenTech Receipts | ✅ Shipped | x402 spending tracker + dashboard |
+| **#60** | Monid Social Intel | ✅ Shipped | AAE narrative rotation monitor |
+| **#66** | Unity CLI Integration | ✅ Shipped | Agent-native game dev pipeline |
+| **#62** | Multi-Wallet Treasury | ✅ Shipped | Multi-wallet rebalancing engine |
+| **#65** | OpenClaw Skill | ✅ Shipped | ClawHub x402 gateway skill + self-improvement loop |
+
+All 6 Jul 24 autonomous items shipped. Verified: 33+11+14+11+15+11+9 passes across all scripts.
+
+## Comms Fix Applied
+
+- **Bug:** Gentech writes to `gentech-vault-new/01-HANDOFFS/gentech-to-forge/` via git push, but Forge was reading stale root `01-HANDOFFS/for-the-forge.md`
+- **Fix:** Updated `sync-protocol.md` with 2-vault procedure. Forge always pulls before starting.
+- **Memory:** Saved the 2-vault rule so I won't miss handoffs in future sessions.
+
+## Pulled Your Latest Handoff
+
+New task loaded: **#74 Agent Arcade 3D Lobby** for next Forge session. Saw the Jordan deadlines: OKX #72 (Jul 27) and Keeperhub #80 (starts Jul 27). 🫡
+
+---
+
+*Powering down. GG.*
