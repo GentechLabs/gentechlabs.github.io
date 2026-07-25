@@ -1,47 +1,57 @@
-# 👑 Jordan Action Items — 2026-07-25 (Nightly Updated)
+# 👑 Jordan Action Items — 2026-07-25
 
-## 🚨 URGENT — Deadline Imminent
-**#72 OKX AI Genesis Hackathon — x402 ASP Submission ($100K)**
-- **Deadline: July 27, 2026, 23:59 UTC (T-2 days!)**
-- What: Submit x402 ASPs on X Layer. Our gateway already deployed — config-only addition.
-- Action: Register at xlayer.okx.com, provide X Layer wallet address
-- Our x402 gateway + 8 endpoints are ready — this is a config change + submission
+**Auto-generated with Gentech augmentation.**
 
-## Needs Your Action (Decision)
-**#71 FrameForge — AI Storyboard Service (previs pipeline)**
-- Go/no-go: Build the controlled previs pipeline as a service?
-- Spec ready at `09-Green Room/specs/frameforge-ai-storyboard-service.md`
-- Proven on Vanito's KAGE film
+---
 
-**#76 Syra Marketplace — Register GenTech x402 Services**
-- Go/no-go: Register our 6 x402 services on syraa.fun/marketplace?
-- Services already x402-ready (token security, wallet analysis, etc.)
+## 🚨 URGENT — Act Today (2 items)
 
-**#78 Kite AI Global Hackathon 2026 ($10K)**
-- Discovered Jul 25, never queued (pitfall — now fixed)
-- $10K prize, AI Agentic Economy, Coinbase Ventures × Encode Club
-- Action: Check if deadline is still open. If yes, registration + submission plan
+### 🚨 #72 OKX AI Genesis Hackathon — x402 ASP Submission ($100K)
+- **Deadline:** July 27, 23:59 UTC (T-2 days!)
+- **What:** OKX AI Genesis Hackathon on X Layer. $100K prize.
+- **Our status:** x402 gateway (port 8090, 6 services) already deployed — config-only for X Layer support
+- **Needs you:** Register at OKX + provide X Layer wallet address
+- **Gate:** human (browser registration)
 
-**#79 AI Factory Hackathon — lablab.ai (Aug 3-10)**
-- Online hackathon, build AI-native apps with native.builder
-- Good fit for our x402 stack
-- Action: Register by Aug 3 if interested
+### 🚨 #80 Keeperhub Agents Onchain Hackathon — x402 Onchain Agents ($5K+)
+- **Start/Deadline:** Build phase starts Jul 27 (T-2 days!), final deadline Aug 13
+- **What:** AI agents executing real onchain transactions. Very aligned with our x402 + compliance stack.
+- **Needs you:** Check registration, go/no-go decision
+- **Gate:** decision (quick)
 
-## Needs Your Decision (Go/No-Go)
-**#74 Agent Arcade 3D Lobby — Walkable Environment**
-- Blender vs Unreal vs Three.js — which engine?
-- 895-line spec ready for review
+---
 
-**#77 Open Generative AI — Self-Host AI Media Studio**
-- Self-host on VPS (24.7k stars, MIT, 400+ models)
-- Uses: arcade trailers, Vanito/KAGE production, social content
-- Could contribute x402 payment integration upstream
+## Needs Your Action (3 items)
 
-## Infrastructure Status
-- ✅ x402 Gateway (port 8088) — healthy, v2.1.0, 2.4d uptime
-- ✅ gentechlabs.net — serving via Cloudflare
-- ✅ arcade.gentechlabs.net — Super Arcade Tennis live
-- ✅ 6 x402 services listening (ports 8080-8090)
-- ✅ 10 open PRs across 8 repos, all verified
+- **#78 Kite AI Global Hackathon** ($10K, AI Agentic Economy, Coinbase Ventures × Encode Club) — Discovered Jul 25. Deadline TBD. Needs you to check if still open and give go/no-go.
+- **#79 AI Factory Hackathon (lablab.ai × NativelyAI)** (Aug 3-10) — Online hackathon. Good fit for x402 payment stack. Needs go/no-go.
+- **#80 Keeperhub Agents Onchain Hackathon** (see URGENT above)
 
-*Generated 2026-07-25 16:35 UTC — Nightly Brain Audit*
+---
+
+## Needs Your Decision (5 items)
+
+- **#71 FrameForge — AI Storyboard Service** — Pre-vis pipeline from Vanito's KAGE film. Spec at `09-Green Room/specs/frameforge-ai-storyboard-service.md`. Needs: go/no-go direction.
+- **#72 OKX AI Genesis Hackathon** (see URGENT above)
+- **#74 Agent Arcade 3D Lobby** — Full 3D environment (Blender/Unreal). 895-line spec. Forge lane. Needs: go/no-go.
+- **#76 Syra Marketplace Registration** — Register our 6 x402 services on syraa.fun/marketplace. Needs: go/no-go.
+- **#77 Open Generative AI Self-Host** — Self-host 400+ models on VPS. Needs: go/no-go.
+
+---
+
+## Gentech Working FYI
+- **#73 Super Arcade Tennis** — LIVE at arcade.gentechlabs.net. Needs production deploy + crypto payments (human-gated).
+- Brain Audit Jul 25: infrastructure healthy, all 10 PRs still open, 6 new hackathons cataloged.
+
+---
+
+## Recommended Order
+1. 🚨 **#72 OKX AI Genesis** (T-2 days, $100K) — Register NOW
+2. 🚨 **#80 Keeperhub** (T-2 days to start) — Quick go/no-go
+3. **#78 Kite AI** — Quick check
+4. **#79 AI Factory** — Quick check
+5. Rest are medium-term decisions
+
+---
+
+*Generated 2026-07-25 22:33 UTC*

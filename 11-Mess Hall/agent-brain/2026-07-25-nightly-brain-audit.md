@@ -1,43 +1,54 @@
-# Agent Brain — Nightly Brain Audit 2026-07-25
+# Nightly Brain Audit — Jul 25, 2026
 
-## What I Did
+## What I Did Tonight
 
-### ✅ Queue Maintenance
-- **Fixed summary** — Was wildly stale (said 22 pending, 31 needs_jordan, 10 blocked). Recalculated from actual items: 5 pending, 6 needs_jordan, 0 blocked.
-- **Removed #75** (Fork MengTo Skills — shipped)
-- **Added #78** — Kite AI Global Hackathon ($10K, Coinbase Ventures × Encode)
-- **Added #79** — AI Factory Hackathon (lablab.ai, Aug 3-10)
-- **Updated version** from 22 → 23
+### Session Started: 22:31 UTC (6:31 PM ET)
+### Queue State: 8 items → 9 items (added #80)
 
-### ✅ Brain Audit Activities
-1. **Hackathon scan** — Found 2 new opportunities to queue. AI Factory (Aug 3-10) and Kite AI ($10K) both relevant to x402 stack.
-2. **Legacy check** — `_legacy/` has archive folders (old vault structure), `07-Ideas/` is gone, `02-HANDOFFS/` is gone. `09-Green Room/specs/` has 2 specs (FrameForge, MetaRay 3D Recon).
-3. **Infrastructure verification** — All services healthy:
-   - x402 Gateway (8088): v2.1.0, 2.4d uptime, simulation mode
-   - gentechlabs.net: 200 via Cloudflare
-   - arcade.gentechlabs.net: Super Arcade Tennis live
-   - Ports 8080-8090 all listening
-4. **PR portfolio** — 10 open PRs across 8 repos, all verified Jul 24. One unsubmitted PR (GOATNetwork/agentkit) needs Jordan's manual web UI submission.
+### Brain Audit Activities
 
-### ✅ From-the-forge.md Check
-- Dated Jul 22 — 3 days stale. No new completions to reconcile (all prior shipped items already removed from queue).
+**1. Infrastructure Health Check — All Green**
+- ✅ x402 Gateway (port 8088) — healthy, up 229k seconds
+- ✅ Gentech Labs (gentechlabs.net) — HTTP 200 via Cloudflare
+- ✅ Arcade (arcade.gentechlabs.net) — HTTP 200, nginx serving
+- ✅ All core services running (ports 80, 443, 8080-8090)
 
-## What Needs Jordan (All Items Blocked)
-| # | Item | Gate | Priority |
-|---|------|------|----------|
-| 72 | OKX AI Genesis Hackathon | **Deadline Jul 27!** | 🚨 URGENT |
-| 71 | FrameForge Storyboard | Decision | HIGH |
-| 78 | Kite AI Hackathon | Decision | HIGH |
-| 79 | AI Factory Hackathon | Decision | HIGH |
-| 76 | Syra Marketplace | Decision | MEDIUM |
-| 74 | Arcade 3D Lobby | Decision | HIGH |
-| 77 | Open Generative AI | Decision | MEDIUM |
-| 73 | Super Arcade Tennis | Human (prod deploy) | HIGH |
+**2. PR Portfolio Sweep — All 10 PRs Open**
+- solana-foundation/pay-skills: #154, #190, #192 — all open
+- x402-foundation/x402: #2905 — open
+- sudeepb02/awesome-erc8004: #82 — open
+- ahmet/awesome-web3: #733 — open
+- 0xNyk/awesome-agent-cortex: #43, #44 — open
+- Scottcjn/awesome-agents: #40 — open
+- caramaschiHG/awesome-ai-agents-2026: #455 — open
 
-## Queue State
-- Total: 8 items (all pending/in_progress, all 👑 needs_jordan)
-- No items Gentech can build autonomously
-- Next actionable moment: when Jordan provides wallet/decisions
+**3. Hackathon Scan — 6 New Opportunities Found**
+- Added **#80 Keeperhub Agents Onchain Hackathon** ($5K+, Jul 27 - Aug 13) to queue as urgent
+- Cataloged 5 more in 09-Green Room/ideas.md
 
-## Infrastructure
-All good. No alerts.
+**4. Stale File Cleanup**
+- Moved 3 stale nightly-report-*.md files from vault root to agent-brain/
+
+**5. Forge Handoff Reconciliation**
+- `from-the-forge.md` dated Jul 22 (3 days stale) — not trusted
+- `forge-completions.md` dated Jul 24 — 6 items shipped (#61, #59, #60, #66, #62, #65)
+- All completions already reconciled via prior consolidation notes (v22, v23)
+
+**6. Zero Actionable Gentech Items**
+- All 9 items have `needs_jordan: true`
+- Bottleneck is Jordan's attention
+
+## What's Waiting on Jordan
+- **🚨 #72 OKX AI Genesis Hackathon** — T-2 days until deadline! Needs Jordan to register + provide wallet
+- **#80 Keeperhub Onchain Hackathon** — Build phase starts Jul 27 (T-2 days!) — needs go/no-go decision
+- **#71 FrameForge** — Decision on previs pipeline direction
+- **#73 Arcade Tennis** — Production deploy + crypto payments (human-gated)
+- **#76 Syra Marketplace** — Decision on registration
+- **#77 Open Generative AI** — Decision on self-host
+- **#78 Kite AI Hackathon** — Check if still open
+- **#79 AI Factory Hackathon** — Check registration, go/no-go
+
+## Quick Stats
+- Queue: 9 total | 1 in_progress | 8 pending | 0 blocked | **9 needs_jordan**
+- PR Portfolio: 10 open across 8 repos
+- This session: Added #80, ideas.md updated, stale files cleaned, infra verified
