@@ -1,46 +1,36 @@
-# Forge Task List — 2026-07-25 (Nightly Update)
+# Forge Task List — 2026-07-25 (Nightly Augmented)
 
-> ⚠️ **Augmented handoff** — Auto-generated tick said all 3 items are "Ready" but they're all Jordan-gated. This version adds the actual blockage context.
+> ⚠️ **AUGMENTED** — Auto-generated handoff marked #74 as "Ready" but it actually needs Jordan decision first.
+> All 8 queue items are Jordan-gated. No cloud work possible tonight.
 
-## Gentech Status This Morning
-- **Queue:** 28 total · 6 shipped (cumulative) · 1 in_progress · 17 pending · 10 blocked
-- **Gentech:** All 9 items blocked on Jordan (no cloud work possible overnight)
-- **Shipped (this week):** #59 Receipts, #60 Monid, #61 Starter Template, #62 Multi-Wallet, #65 OpenClaw, #66 Unity CLI — all confirmed ✅
-- **Infrastructure:** Gateway on 8088 running v2.1.0 (simulation, 2.1d uptime, 8 endpoints). gentechlabs.net serving via Cloudflare.
+## Queue Snapshot (Nightly Brain Audit)
+- **Total:** 8 items · All 👑 needs_jordan
+- **In progress:** #73 Super Arcade Tennis (live at arcade.gentechlabs.net, needs Jordan for prod deploy)
+- **Urgent:** #72 OKX AI Genesis Hackathon — **Deadline July 27, 23:59 UTC (T-2 DAYS!)**
+- **Newly added:** #78 Kite AI ($10K, Coinbase Ventures × Encode), #79 AI Factory (Aug 3-10)
 
-## 🖥️ Desktop Items (All Jordan-gated — see below)
+## 🖥️ Desktop Items
+### [HIGH] #74 — Agent Arcade 3D Lobby — Walkable Environment (hard)
+**Status:** ⏸️ **Paused — needs Jordan go/no-go on approach**
+- Jordan must decide: Blender vs Unreal vs Three.js for the 3D lobby
+- Spec exists at ProtoJay4789.github.io/10-Labs/agent-arcade-build-queue.md (895 lines)
+- Cannot start until direction is confirmed
 
-### [URGENT] #7 — Cloudflare Gateway (easy)
-**Status:** ⏸️ **Paused — Jordan on waitlist**
-**What:** Deploy x402 gateway on Cloudflare Workers. Jordan is on Gateway waitlist — needs approval before Forge can proceed.
+## What Gentech Did Tonight
+- ✅ Fixed queue summary (was 31 needs_jordan, actually 8)
+- ✅ Removed shipped item #75 (Fork MengTo Skills)
+- ✅ Brain Audit: added #78 Kite AI + #79 AI Factory to queue
+- ✅ Verified infrastructure: Gateway (8088) healthy, gentechlabs.net up, arcade live
+- ✅ PR portfolio: 10 open PRs, all verified
 
-### [URGENT] #63 — x402 Global Challenge ($100K + 500K ALGO) (hard)
-**Status:** ⏸️ **Paused — needs Jordan go-ahead**
-**Deadline:** TBD (submission opens September, leaderboard October)
-**What:** Algorand x402 Global Challenge. Composite entry with our 16 x402 endpoints. $100K + 500K ALGO prize.
+## ⚡ When Jordan Returns
+Urgent order for his attention:
+1. **#72 OKX AI Genesis Hackathon** — T-2 days! Register + provide X Layer wallet
+2. **#71 FrameForge** — Decision: build the previs pipeline as a service?
+3. **#76 Syra Marketplace** — Decision: register our 6 x402 services?
+4. **#78 Kite AI** — Check deadline, go/no-go
+5. **#79 AI Factory** — Register for Aug 3-10 hackathon?
+6. **#74 Arcade 3D Lobby** — Which engine?
+7. **#77 Open Generative AI** — Self-host decision?
 
-### [HIGH] #68 — Composio x402 Payment Connector (medium)
-**Status:** ⏸️ **Paused — needs Jordan to run `hermes mcp login composio`**
-**What:** Build x402 payment connector for Composio (500+ apps). First step requires Jordan to authenticate Composio MCP.
-
-## New Discovery This Night
-- **Kite AI Global Hackathon 2026** ($10K, AI Agentic Economy, Coinbase Ventures × Encode Club) — highly relevant to our x402 stack. Needs Jordan to check if deadline is still open.
-
-## ⚡ Quick Wins Forge Can Do Without Jordan
-*None identified this session — all 3 desktop items are Jordan-gated.*
-
-## Upcoming Deadlines
-| Date | Item | Action |
-|------|------|--------|
-| **Aug 3** | #69 Celo Hackathon ($1K x402 track) | Needs Jordan: go/no-go + Celo payTo wallet |
-
-## Previous 6 Items Shipped ✅
-Your completions from Jul 22-24 are confirmed removed from queue:
-- #59 GenTech Receipts — x402 Spending Tracker
-- #60 Monid Social Intel — AAE Narrative Rotation
-- #61 GenTech Starter Template — Hermes Distribution
-- #62 Multi-Wallet Treasury Manager
-- #65 GenTech OpenClaw Skill
-- #66 Unity CLI Integration
-
-*Updated 2026-07-25 09:06 UTC — Nightly Build Session*
+*Updated 2026-07-25 16:35 UTC — Nightly Brain Audit*
