@@ -1,0 +1,317 @@
+{
+  "summary": {
+    "total_volume_usdc": 847.5,
+    "total_calls": 1247,
+    "unique_callers": 23,
+    "avg_payment_usdc": 0.68,
+    "period_start": "2026-07-17T20:28:00.954442",
+    "period_end": "2026-07-24T20:28:00.954442"
+  },
+  "by_endpoint": [
+    {
+      "endpoint": "/api/analyze",
+      "calls": 412,
+      "volume": 289.4,
+      "price": 0.7
+    },
+    {
+      "endpoint": "/api/scan",
+      "calls": 298,
+      "volume": 208.6,
+      "price": 0.7
+    },
+    {
+      "endpoint": "/api/credit-score",
+      "calls": 187,
+      "volume": 93.5,
+      "price": 0.5
+    },
+    {
+      "endpoint": "/api/compliance-check",
+      "calls": 156,
+      "volume": 109.2,
+      "price": 0.7
+    },
+    {
+      "endpoint": "/api/treasury/balance",
+      "calls": 98,
+      "volume": 49.0,
+      "price": 0.5
+    },
+    {
+      "endpoint": "/api/predict",
+      "calls": 52,
+      "volume": 52.0,
+      "price": 1.0
+    },
+    {
+      "endpoint": "/api/trade/signal",
+      "calls": 44,
+      "volume": 45.8,
+      "price": 1.04
+    }
+  ],
+  "by_chain": [
+    {
+      "chain": "Base",
+      "calls": 612,
+      "volume": 416.5
+    },
+    {
+      "chain": "Polygon",
+      "calls": 389,
+      "volume": 264.52
+    },
+    {
+      "chain": "Arbitrum",
+      "calls": 246,
+      "volume": 166.48
+    }
+  ],
+  "daily_totals": [
+    {
+      "date": "2026-07-18",
+      "volume_usdc": 84.0,
+      "calls": 125
+    },
+    {
+      "date": "2026-07-19",
+      "volume_usdc": 102.0,
+      "calls": 153
+    },
+    {
+      "date": "2026-07-20",
+      "volume_usdc": 120.0,
+      "calls": 180
+    },
+    {
+      "date": "2026-07-21",
+      "volume_usdc": 138.0,
+      "calls": 206
+    },
+    {
+      "date": "2026-07-22",
+      "volume_usdc": 156.0,
+      "calls": 234
+    },
+    {
+      "date": "2026-07-23",
+      "volume_usdc": 84.0,
+      "calls": 125
+    },
+    {
+      "date": "2026-07-24",
+      "volume_usdc": 102.0,
+      "calls": 153
+    }
+  ],
+  "top_callers": [
+    {
+      "address": "0x742d...4a29",
+      "calls": 187,
+      "volume": 127.16
+    },
+    {
+      "address": "0x8f3e...b721",
+      "calls": 143,
+      "volume": 97.24
+    },
+    {
+      "address": "0x1abc...9de4",
+      "calls": 112,
+      "volume": 76.16
+    },
+    {
+      "address": "0x5def...3c18",
+      "calls": 98,
+      "volume": 66.64
+    },
+    {
+      "address": "0x3f7a...e502",
+      "calls": 76,
+      "volume": 51.68
+    }
+  ],
+  "recent_transactions": [
+    {
+      "tx_hash": "0x9d78112482aa7e58dcd5dd2cdc7d54d4",
+      "chain": "Base",
+      "endpoint": "/api/analyze",
+      "caller": "0x742d...4a29",
+      "amount_usdc": 0.5,
+      "timestamp": "2026-07-24T20:28:00.962967",
+      "verified": false
+    },
+    {
+      "tx_hash": "0x254312e29ef6414657f12ee6d0d74225",
+      "chain": "Polygon",
+      "endpoint": "/api/scan",
+      "caller": "0x8f3e...b721",
+      "amount_usdc": 0.75,
+      "timestamp": "2026-07-24T20:11:00.962967",
+      "verified": false
+    },
+    {
+      "tx_hash": "0x9727b36b44a6a1e768a7d1fc283f7188",
+      "chain": "Arbitrum",
+      "endpoint": "/api/credit-score",
+      "caller": "0x1abc...9de4",
+      "amount_usdc": 1.0,
+      "timestamp": "2026-07-24T19:54:00.962967",
+      "verified": false
+    },
+    {
+      "tx_hash": "0xa8443c4b827cf68dd876c4d0729116c6",
+      "chain": "Base",
+      "endpoint": "/api/compliance-check",
+      "caller": "0x5def...3c18",
+      "amount_usdc": 1.25,
+      "timestamp": "2026-07-24T19:52:00.962967",
+      "verified": true
+    },
+    {
+      "tx_hash": "0xdb9297c4258bc8b32fb5713c155ee300",
+      "chain": "Polygon",
+      "endpoint": "/api/treasury/balance",
+      "caller": "0x3f7a...e502",
+      "amount_usdc": 1.5,
+      "timestamp": "2026-07-24T19:35:00.962967",
+      "verified": true
+    },
+    {
+      "tx_hash": "0x4d9bd4d896fc2643bf4e9e619f385906",
+      "chain": "Arbitrum",
+      "endpoint": "/api/predict",
+      "caller": "0x742d...4a29",
+      "amount_usdc": 0.5,
+      "timestamp": "2026-07-24T19:18:00.962967",
+      "verified": true
+    },
+    {
+      "tx_hash": "0xdce64b5d7a7c5e0ea2fcca3181de1628",
+      "chain": "Base",
+      "endpoint": "/api/trade/signal",
+      "caller": "0x8f3e...b721",
+      "amount_usdc": 0.75,
+      "timestamp": "2026-07-24T19:16:00.962967",
+      "verified": true
+    },
+    {
+      "tx_hash": "0x6135ba89fab327f0517c9d1446caa4b2",
+      "chain": "Polygon",
+      "endpoint": "/api/analyze",
+      "caller": "0x1abc...9de4",
+      "amount_usdc": 1.0,
+      "timestamp": "2026-07-24T18:59:00.962967",
+      "verified": true
+    },
+    {
+      "tx_hash": "0x396b1f8c3d132f548ad22b10c9da6e63",
+      "chain": "Arbitrum",
+      "endpoint": "/api/scan",
+      "caller": "0x5def...3c18",
+      "amount_usdc": 1.25,
+      "timestamp": "2026-07-24T18:42:00.962967",
+      "verified": true
+    },
+    {
+      "tx_hash": "0x83922bffe268dab7dcbc068612653272",
+      "chain": "Base",
+      "endpoint": "/api/credit-score",
+      "caller": "0x3f7a...e502",
+      "amount_usdc": 1.5,
+      "timestamp": "2026-07-24T18:40:00.962967",
+      "verified": true
+    },
+    {
+      "tx_hash": "0x4feeca84a18c48aad1dc61eb38ab5bf0",
+      "chain": "Polygon",
+      "endpoint": "/api/compliance-check",
+      "caller": "0x742d...4a29",
+      "amount_usdc": 0.5,
+      "timestamp": "2026-07-24T18:23:00.962967",
+      "verified": true
+    },
+    {
+      "tx_hash": "0xab3780b121458b0bed9d8b8fa20bc6bd",
+      "chain": "Arbitrum",
+      "endpoint": "/api/treasury/balance",
+      "caller": "0x8f3e...b721",
+      "amount_usdc": 0.75,
+      "timestamp": "2026-07-24T18:06:00.962967",
+      "verified": true
+    },
+    {
+      "tx_hash": "0x0dc6e4e16c86da353a26e52deb19bf51",
+      "chain": "Base",
+      "endpoint": "/api/predict",
+      "caller": "0x1abc...9de4",
+      "amount_usdc": 1.0,
+      "timestamp": "2026-07-24T18:04:00.962967",
+      "verified": true
+    },
+    {
+      "tx_hash": "0x46f82ba1058d1597d6d75a6245573c08",
+      "chain": "Polygon",
+      "endpoint": "/api/trade/signal",
+      "caller": "0x5def...3c18",
+      "amount_usdc": 1.25,
+      "timestamp": "2026-07-24T17:47:00.962967",
+      "verified": true
+    },
+    {
+      "tx_hash": "0x57c47b086e742b4dfdc9b5bc33703df4",
+      "chain": "Arbitrum",
+      "endpoint": "/api/analyze",
+      "caller": "0x3f7a...e502",
+      "amount_usdc": 1.5,
+      "timestamp": "2026-07-24T17:30:00.962967",
+      "verified": true
+    },
+    {
+      "tx_hash": "0x9be274f0d2192ae1c9c92a9cdf4f7cde",
+      "chain": "Base",
+      "endpoint": "/api/scan",
+      "caller": "0x742d...4a29",
+      "amount_usdc": 0.5,
+      "timestamp": "2026-07-24T17:28:00.962967",
+      "verified": true
+    },
+    {
+      "tx_hash": "0xfebf903c3118d7d3f06dd785964c6405",
+      "chain": "Polygon",
+      "endpoint": "/api/credit-score",
+      "caller": "0x8f3e...b721",
+      "amount_usdc": 0.75,
+      "timestamp": "2026-07-24T17:11:00.962967",
+      "verified": true
+    },
+    {
+      "tx_hash": "0x08f3275a0a4592224afa5bfa1a69e8aa",
+      "chain": "Arbitrum",
+      "endpoint": "/api/compliance-check",
+      "caller": "0x1abc...9de4",
+      "amount_usdc": 1.0,
+      "timestamp": "2026-07-24T16:54:00.962967",
+      "verified": true
+    },
+    {
+      "tx_hash": "0x243198b57481c94c05f620845f186083",
+      "chain": "Base",
+      "endpoint": "/api/treasury/balance",
+      "caller": "0x5def...3c18",
+      "amount_usdc": 1.25,
+      "timestamp": "2026-07-24T16:52:00.962967",
+      "verified": true
+    },
+    {
+      "tx_hash": "0xce1d182238198ec430f1bbb679a01174",
+      "chain": "Polygon",
+      "endpoint": "/api/predict",
+      "caller": "0x3f7a...e502",
+      "amount_usdc": 1.5,
+      "timestamp": "2026-07-24T16:35:00.962967",
+      "verified": true
+    }
+  ]
+}
