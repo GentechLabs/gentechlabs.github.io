@@ -1,7 +1,7 @@
 # Forge Task List — 2026-07-24 (Updated)
 
-## ⚠️ Jordan is Out Until Next Week
-Personal emergency — LP funds withdrawn, no new spend or builds requiring Jordan until confirmed back.
+## Note: AVAX/USDC LP Withdrawn
+Jordan pulled funds from the AVAX/USDC pool for a personal matter. He'll be back in that position soon. Everything else is still active — builds don't stop.
 
 ---
 
