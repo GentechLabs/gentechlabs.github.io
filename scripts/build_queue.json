@@ -1,12 +1,12 @@
 {
-  "version": 27,
+  "version": 28,
   "summary": {
-    "total": 9,
+    "total": 11,
     "shipped": 0,
     "in_progress": 1,
-    "pending": 7,
+    "pending": 9,
     "blocked": 1,
-    "needs_jordan": 9
+    "needs_jordan": 11
   },
   "items": [
     {
@@ -131,6 +131,34 @@
       "gate_type": "decision",
       "detail": "Build with DataHub Agent Hackathon by DataHub/Acryl Data. Deadline: Aug 10, 2026 (15 days). $20.5K total prizes ($6K grand, 4x$3K category). MCP + Agent Context Kit — build AI agents grounded in metadata graphs. Highly aligned with our x402+MCP stack. Online via Devpost. https://datahub.devpost.com/",
       "note": "Discovered Jul 26 Nightly Brain Audit via blockrun_search. Categories include Agents That Do Real Work, Metadata-Aware Code Gen, Production ML Agents. Needs Jordan: register at Devpost, decide go/no-go."
+    },
+    {
+      "id": 82,
+      "name": "Algorand Global x402 Challenge — Composite Entry ($100K + 500K ALGO)",
+      "difficulty": "medium",
+      "priority": "high",
+      "status": "pending",
+      "assigned_to": "gentech",
+      "platform": "cloud",
+      "needs_jordan": true,
+      "human_gated": true,
+      "gate_type": "decision",
+      "detail": "Algorand Global x402 Challenge — $100K USD + 500K ALGO prize pool. Leaderboard is open. Build pay-per-request API services on Algorand mainnet. Top 5 winners ($25K-$15K) + 500K ALGO across top 20. Culminates at Devcon 8 India. Our x402 gateway already supports multi-chain — config-only for ALGO. Was previously #63, removed during consolidation. Re-added Jul 26.",
+      "note": "Re-discovered via Brain Audit Jul 26. Jordan needs to register at algorand.co/global-x402-challenge and provide ALGO wallet address."
+    },
+    {
+      "id": 83,
+      "name": "CockroachDB × AWS — Build with Agentic Memory ($8.75K)",
+      "difficulty": "easy",
+      "priority": "medium",
+      "status": "pending",
+      "assigned_to": "gentech",
+      "platform": "cloud",
+      "needs_jordan": true,
+      "human_gated": true,
+      "gate_type": "decision",
+      "detail": "CockroachDB × AWS Hackathon: Build with Agentic Memory. Submissions Jun 30 - Aug 18, 2026. $8,750 total prizes ($5K/$2.5K/$1.25K). Requirements: 2+ CockroachDB tools (MCP Server, Vector Indexing, ccloud CLI) + 1+ AWS service (Bedrock, Lambda, ECS, S3, SageMaker). Build persistent memory for AI agents. Devpost: cockroachdb-ai.devpost.com.",
+      "note": "Discovered Jul 26 Brain Audit via blockrun_search. 23 days until deadline. Needs Jordan: register at Devpost (cockroachdb-ai.devpost.com), decide go/no-go."
     }
   ],
   "consolidation_notes": [
@@ -141,7 +169,8 @@
     "v24 — Jul 25 Nightly Brain Audit: Added #80 Keeperhub Agents Onchain Hackathon (urgent, Jul 27 start). Moved stale nightly reports to agent-brain/. All PRs still open (10/10). Infrastructure healthy.",
     "v25 — Forge Jul 25: #74 Agent Arcade 3D Lobby shipped. #78 Kite AI flagged as unconfirmed (no source, $0K, Jordan disputed). Queue audit sent to Gentech for review.",
     "v26 — Jul 26 Nightly: Removed #74 (shipped). Recalculated summary. All gentech items Jordan-blocked — entering Brain Audit.",
-    "v27 — Jul 26 Nightly Brain Audit: Added #81 DataHub Agent Hackathon ($20.5K, MCP, Aug 10). Moved stale nightly report to agent-brain/. Updated ideas.md with new findings."
+    "v27 — Jul 26 Nightly Brain Audit: Added #81 DataHub Agent Hackathon ($20.5K, MCP, Aug 10). Moved stale nightly report to agent-brain/. Updated ideas.md with new findings.",
+    "v28 — Jul 26 Evening Brain Audit: Added #82 Algorand Global x402 Challenge ($100K+500K ALGO, re-added former #63), #83 CockroachDB × AWS Agentic Memory ($8.75K, Aug 18). All items Jordan-blocked."
   ],
   "agents": {
     "gentech": {
@@ -158,7 +187,7 @@
     }
   },
   "note": "v25 — Forge audit: #74 shipped, #78 disputed. Awaiting Gentech review.",
-  "updated": "2026-07-26T04:14:35Z",
+  "updated": "2026-07-26T09:05:00Z",
   "gate_summary": {
     "human_gated": 30,
     "decision_gated": 12,

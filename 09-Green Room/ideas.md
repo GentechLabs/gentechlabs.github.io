@@ -105,6 +105,10 @@
 - [ ] **The Great Agent Hackathon** (Jul 23 - Aug 25, enterprise AI agents)
 - [ ] **HackAgentAIx 2026** (Jul 30-31, £1,750) — 48hr online autonomous AI agent sprint. Small prize, easy to enter.
 
+## 🎯 New Opportunities Discovered (Jul 26 Evening Brain Audit)
+- [ ] **Algorand Global x402 Challenge** ($100K + 500K ALGO) — Leaderboard open, pay-per-request API services on Algorand. Top 5 cash ($25K-$15K) + 500K ALGO. Culminates at Devcon 8 India. Our x402 gateway is already multi-chain. Added to queue as #82. Needs Jordan: register at algorand.co/global-x402-challenge.
+- [ ] **CockroachDB × AWS — Build with Agentic Memory** ($8.75K, deadline Aug 18) — Persistent memory for AI agents using CockroachDB MCP Server + AWS services. Online via Devpost (cockroachdb-ai.devpost.com). Added to queue as #83. Needs Jordan: register, decide go/no-go.
+
 ## Ready to Test (skills exist, need execution)
 - [ ] **WURK.FUN microtasks** — Agent-to-human microtask skill, ready to test
 - [ ] **Coinbase for Agents** — Monitoring, validate our stack fits
