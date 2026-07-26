@@ -153,8 +153,8 @@ const GAMES = [
 // ── Scene Setup ──
 const container = document.getElementById('canvas-container');
 const scene = new THREE.Scene();
-scene.background = new THREE.Color(0x0a0e17);
-scene.fog = new THREE.FogExp2(0x0a0e17, 0.010);
+scene.background = new THREE.Color(0x1a2030);
+scene.fog = new THREE.FogExp2(0x0a0e17, 0.004);
 
 const camera = new THREE.PerspectiveCamera(55, window.innerWidth / window.innerHeight, 0.1, 100);
 camera.position.set(0, 5, 13);
@@ -165,7 +165,7 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
-renderer.toneMappingExposure = 1.0;
+renderer.toneMappingExposure = 2.0;
 renderer.outputColorSpace = THREE.SRGBColorSpace;
 container.appendChild(renderer.domElement);
 
@@ -190,10 +190,10 @@ controls.autoRotateSpeed = 0.4;
 controls.update();
 
 // ── Lights ──
-const ambient = new THREE.AmbientLight(0x1a2332, 0.4);
+const ambient = new THREE.AmbientLight(0x2a3a4a, 0.9);
 scene.add(ambient);
 
-const mainLight = new THREE.DirectionalLight(0xffffff, 0.8);
+const mainLight = new THREE.DirectionalLight(0xffffff, 2.5);
 mainLight.position.set(8, 15, 5);
 mainLight.castShadow = true;
 mainLight.shadow.mapSize.width = 1024;
@@ -202,13 +202,13 @@ scene.add(mainLight);
 
 // Per-cabinet spotlights
 GAMES.forEach(g => {
-  const spot = new THREE.SpotLight(g.color, 0.6, 10, Math.PI / 8, 0.5, 1);
+  const spot = new THREE.SpotLight(g.color, 1.5, 12, Math.PI / 6, 0.3, 1.5);
   spot.position.set(g.pos[0], 5, g.pos[2] - 1);
   spot.target.position.set(g.pos[0], 0, g.pos[2]);
   scene.add(spot);
   scene.add(spot.target);
 
-  const helper = new THREE.PointLight(g.color, 0.15, 4);
+  const helper = new THREE.PointLight(g.color, 0.5, 6);
   helper.position.set(g.pos[0], 0.5, g.pos[2]);
   scene.add(helper);
 });
@@ -216,9 +216,9 @@ GAMES.forEach(g => {
 // ── Floor ──
 const floorGeo = new THREE.PlaneGeometry(28, 28);
 const floorMat = new THREE.MeshStandardMaterial({
-  color: 0x0a0e17,
-  metalness: 0.1,
-  roughness: 0.85,
+  color: 0x1a2030,
+  metalness: 0.2,
+  roughness: 0.7,
 });
 const floor = new THREE.Mesh(floorGeo, floorMat);
 floor.rotation.x = -Math.PI / 2;
@@ -249,7 +249,7 @@ function createWall(w, h, pos, rotY = 0) {
   const m = new THREE.MeshStandardMaterial({
     color: 0x131826,
     metalness: 0.05, roughness: 0.9,
-    transparent: true, opacity: 0.6, side: THREE.DoubleSide
+    transparent: true, opacity: 0.25, side: THREE.DoubleSide
   });
   const mesh = new THREE.Mesh(g, m);
   mesh.position.set(pos[0], pos[1], pos[2]);
