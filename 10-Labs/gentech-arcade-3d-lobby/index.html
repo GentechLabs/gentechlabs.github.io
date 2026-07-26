@@ -5,88 +5,102 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Agent Arcade — 3D Lobby</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap');
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { font-family: 'Inter', sans-serif; background: #0a0e17; overflow: hidden; color: #e2e8f0; }
   #canvas-container { width: 100vw; height: 100vh; display: block; }
 
-  /* HUD Overlay */
   #hud { position: fixed; top: 0; left: 0; width: 100%; pointer-events: none; z-index: 10; }
   #hud > * { pointer-events: auto; }
 
   #top-bar {
     display: flex; justify-content: space-between; align-items: center;
-    padding: 16px 24px; background: linear-gradient(180deg, rgba(10,14,23,0.95) 0%, transparent 100%);
+    padding: 16px 24px;
+    background: linear-gradient(180deg, rgba(10,14,23,0.92) 0%, rgba(10,14,23,0.4) 60%, transparent 100%);
   }
   #top-bar h1 { font-size: 20px; font-weight: 800; letter-spacing: -0.02em; }
-  #top-bar h1 span { color: #22c55e; }
-  .hud-right { display: flex; align-items: center; gap: 12px; }
+  #top-bar h1 .accent { color: #22c55e; }
+  #top-bar .subtitle { font-size: 11px; color: #475569; font-weight: 400; margin-left: 8px; letter-spacing: 0.1em; text-transform: uppercase; }
+  .hud-right { display: flex; align-items: center; gap: 10px; }
   .hud-btn {
-    padding: 8px 16px; border-radius: 8px; border: 1px solid #1f2937;
-    background: rgba(17,24,39,0.8); color: #e2e8f0; font-size: 13px; font-weight: 600;
-    cursor: pointer; transition: all 0.2s; backdrop-filter: blur(8px);
+    padding: 8px 16px; border-radius: 8px; border: 1px solid rgba(31,41,55,0.6);
+    background: rgba(17,24,39,0.7); color: #e2e8f0; font-size: 13px; font-weight: 600;
+    cursor: pointer; transition: all 0.2s; backdrop-filter: blur(12px);
   }
-  .hud-btn:hover { border-color: #22c55e; background: rgba(34,197,94,0.1); }
-  .hud-btn.primary { background: #22c55e; color: #0a0e17; border-color: #22c55e; }
-  .hud-btn.primary:hover { background: #16a34a; }
-  .arc-balance { font-size: 14px; font-weight: 700; color: #22c55e; }
-  .arc-balance span { font-size: 11px; color: #94a3b8; font-weight: 400; }
+  .hud-btn:hover { border-color: rgba(34,197,94,0.5); background: rgba(34,197,94,0.08); }
+  .hud-btn.primary {
+    background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+    color: #0a0e17; border: none; font-weight: 700;
+  }
+  .hud-btn.primary:hover { transform: translateY(-1px); box-shadow: 0 4px 20px rgba(34,197,94,0.3); }
+  .arc-balance {
+    display: flex; align-items: center; gap: 6px;
+    padding: 6px 14px 6px 10px; border-radius: 8px;
+    background: rgba(34,197,94,0.08); border: 1px solid rgba(34,197,94,0.2);
+    font-size: 14px; font-weight: 700; color: #22c55e;
+  }
+  .arc-balance::before { content: '◆'; font-size: 10px; }
+  .arc-balance span { font-size: 11px; color: #4ade80; font-weight: 400; }
 
-  /* Game Info Panel (appears when clicking a cabinet) */
   #game-panel {
-    position: fixed; bottom: 40px; left: 50%; transform: translateX(-50%);
-    background: rgba(17,24,39,0.95); border: 1px solid #1f2937; border-radius: 16px;
-    padding: 24px 32px; backdrop-filter: blur(16px);
-    display: none; z-index: 20; min-width: 400px;
-    pointer-events: auto;
+    position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%);
+    background: rgba(15,18,30,0.95); border: 1px solid rgba(31,41,55,0.8);
+    border-radius: 16px; padding: 24px 32px; backdrop-filter: blur(24px);
+    display: none; z-index: 20; min-width: 440px;
+    pointer-events: auto; box-shadow: 0 24px 80px rgba(0,0,0,0.6);
   }
-  #game-panel.visible { display: block; animation: slideUp 0.3s ease; }
-  @keyframes slideUp { from { opacity: 0; transform: translateX(-50%) translateY(20px); } to { opacity: 1; transform: translateX(-50%) translateY(0); } }
-  #game-panel .gp-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
-  #game-panel .gp-name { font-size: 18px; font-weight: 700; }
-  #game-panel .gp-status { font-size: 12px; padding: 4px 10px; border-radius: 999px; }
-  #game-panel .gp-status.live { background: #052e16; color: #22c55e; }
-  #game-panel .gp-status.soon { background: #1c1917; color: #f97316; }
-  #game-panel .gp-details { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 16px; }
-  #game-panel .gp-detail { font-size: 13px; color: #94a3b8; }
-  #game-panel .gp-detail strong { color: #e2e8f0; }
+  #game-panel.visible { display: block; animation: panelUp 0.35s cubic-bezier(0.16,1,0.3,1); }
+  @keyframes panelUp { from { opacity: 0; transform: translateX(-50%) translateY(24px) scale(0.96); } to { opacity: 1; transform: translateX(-50%) translateY(0) scale(1); } }
+  #game-panel .gp-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+  #game-panel .gp-name { font-size: 20px; font-weight: 700; }
+  #game-panel .gp-status { font-size: 11px; padding: 4px 12px; border-radius: 999px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; }
+  #game-panel .gp-status.live { background: rgba(34,197,94,0.12); color: #22c55e; border: 1px solid rgba(34,197,94,0.2); }
+  #game-panel .gp-status.soon { background: rgba(249,115,22,0.12); color: #fb923c; border: 1px solid rgba(249,115,22,0.2); }
+  #game-panel .gp-status.planned { background: rgba(100,116,139,0.12); color: #94a3b8; border: 1px solid rgba(100,116,139,0.2); }
+  #game-panel .gp-details { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 16px; margin-bottom: 18px; }
+  #game-panel .gp-detail { font-size: 13px; color: #64748b; padding: 6px 0; border-bottom: 1px solid rgba(31,41,55,0.4); }
+  #game-panel .gp-detail strong { color: #e2e8f0; font-weight: 600; }
   #game-panel .gp-actions { display: flex; gap: 10px; }
-  #game-panel .gp-close { position: absolute; top: 12px; right: 16px; background: none; border: none; color: #64748b; font-size: 18px; cursor: pointer; }
+  #game-panel .gp-close {
+    position: absolute; top: 14px; right: 16px; background: none; border: none;
+    color: #475569; font-size: 18px; cursor: pointer; transition: color 0.2s; padding: 4px;
+  }
+  #game-panel .gp-close:hover { color: #e2e8f0; }
 
-  /* Controls hint */
   #controls-hint {
-    position: fixed; bottom: 120px; left: 50%; transform: translateX(-50%);
-    font-size: 12px; color: #475569; text-align: center; pointer-events: none;
-    z-index: 5; transition: opacity 1s;
+    position: fixed; bottom: 100px; left: 50%; transform: translateX(-50%);
+    font-size: 12px; color: rgba(71,85,105,0.6); text-align: center; pointer-events: none;
+    z-index: 5; transition: opacity 1.5s; letter-spacing: 0.02em;
   }
 
-  /* Loading screen */
   #loading {
     position: fixed; inset: 0; display: flex; align-items: center; justify-content: center;
-    background: #0a0e17; z-index: 100; flex-direction: column; gap: 16px;
+    background: #0a0e17; z-index: 100; flex-direction: column; gap: 20px;
     transition: opacity 0.8s ease;
   }
   #loading.hidden { opacity: 0; pointer-events: none; }
-  .loader { width: 40px; height: 40px; border: 3px solid #1f2937; border-top-color: #22c55e; border-radius: 50%; animation: spin 0.8s linear infinite; }
+  .loader-ring { width: 48px; height: 48px; border: 2px solid rgba(31,41,55,0.4); border-top-color: #22c55e; border-right-color: #22c55e; border-radius: 50%; animation: spin 0.9s cubic-bezier(0.6,0,0.4,1) infinite; }
   @keyframes spin { to { transform: rotate(360deg); } }
-  #loading p { font-size: 14px; color: #94a3b8; }
+  #loading p { font-size: 14px; color: #475569; letter-spacing: 0.05em; }
+  #loading .brand { font-size: 11px; color: #1f2937; letter-spacing: 0.2em; text-transform: uppercase; margin-top: 8px; }
 </style>
 </head>
 <body>
 
 <div id="loading">
-  <div class="loader"></div>
+  <div class="loader-ring"></div>
   <p>Loading Agent Arcade...</p>
+  <div class="brand">GenTech Labs</div>
 </div>
 
 <div id="canvas-container"></div>
 
 <div id="hud">
   <div id="top-bar">
-    <h1>🕹️ Agent <span>Arcade</span></h1>
+    <h1>🕹️ Agent <span class="accent">Arcade</span><span class="subtitle">3D Lobby</span></h1>
     <div class="hud-right">
       <span class="arc-balance">0 <span>ARC</span></span>
-      <button class="hud-btn" id="btn-leaderboard">🏆 Leaderboard</button>
+      <button class="hud-btn" id="btn-leaderboard">🏆</button>
       <button class="hud-btn primary" id="btn-connect">Connect Wallet</button>
     </div>
   </div>
@@ -99,10 +113,10 @@
     <div class="gp-status" id="gp-status">Status</div>
   </div>
   <div class="gp-details">
-    <div class="gp-detail">Entry: <strong id="gp-entry">—</strong></div>
-    <div class="gp-detail">Players: <strong id="gp-players">—</strong></div>
-    <div class="gp-detail">Pot: <strong id="gp-pot">—</strong></div>
-    <div class="gp-detail">Difficulty: <strong id="gp-diff">—</strong></div>
+    <div class="gp-detail">Entry Fee &nbsp;<strong id="gp-entry">—</strong></div>
+    <div class="gp-detail">Players &nbsp;<strong id="gp-players">—</strong></div>
+    <div class="gp-detail">Prize Pot &nbsp;<strong id="gp-pot">—</strong></div>
+    <div class="gp-detail">Type &nbsp;<strong id="gp-diff">—</strong></div>
   </div>
   <div class="gp-actions">
     <button class="hud-btn primary" id="gp-join">🎮 Join Game</button>
@@ -110,7 +124,7 @@
   </div>
 </div>
 
-<div id="controls-hint">WASD to move · Click cabinets to interact · Scroll to zoom</div>
+<div id="controls-hint">Click + drag to look around · Scroll to zoom · Click cabinets to interact</div>
 
 <script type="importmap">
 {
@@ -128,30 +142,31 @@ import { CSS2DRenderer, CSS2DObject } from 'three/addons/renderers/CSS2DRenderer
 
 // ── Game Data ──
 const GAMES = [
-  { id: 'poker',      name: '♠️  Poker',         status: 'live',   entry: '10 ARC', players: '4/6', pot: '1,240 ARC', diff: 'Strategic', color: 0x22c55e, pos: [-6, 0, -5] },
-  { id: 'blackjack',  name: '🃏  Blackjack',     status: 'soon',   entry: '5 ARC',  players: '0/4', pot: '—',         diff: 'Luck + Skill', color: 0xf97316, pos: [0, 0, -6] },
-  { id: 'connect4',   name: '🔴  Connect Four',  status: 'soon',   entry: '2 ARC',  players: '0/2', pot: '—',         diff: 'Tactical', color: 0x3b82f6, pos: [6, 0, -5] },
-  { id: 'tictactoe',  name: '❌  Tic-Tac-Toe',   status: 'soon',   entry: '1 ARC',  players: '0/2', pot: '—',         diff: 'Quick', color: 0xa855f7, pos: [-4, 0, 2] },
-  { id: 'backgammon', name: '🎲  Backgammon',    status: 'planned',entry: '3 ARC',  players: '0/2', pot: '—',         diff: 'Classic', color: 0x64748b, pos: [4, 0, 2] },
-  { id: 'pong',       name: '🏓  Pong',          status: 'planned',entry: '1 ARC',  players: '0/2', pot: '—',         diff: 'Arcade', color: 0x64748b, pos: [0, 0, 3] },
+  { id: 'poker',      name: '♠️  Poker',         status: 'live',   entry: '10 ARC', players: '4/6', pot: '1,240 ARC', diff: 'Strategic', color: 0x22c55e, pos: [-6.5, 0, -5], emissive: 0x22c55e },
+  { id: 'blackjack',  name: '🃏  Blackjack',     status: 'soon',   entry: '5 ARC',  players: '0/4', pot: '—',         diff: 'Luck + Skill', color: 0xf97316, pos: [0, 0, -6.5], emissive: 0xf97316 },
+  { id: 'connect4',   name: '🔴  Connect Four',  status: 'soon',   entry: '2 ARC',  players: '0/2', pot: '—',         diff: 'Tactical', color: 0x3b82f6, pos: [6.5, 0, -5], emissive: 0x3b82f6 },
+  { id: 'tictactoe',  name: '❌  Tic-Tac-Toe',   status: 'soon',   entry: '1 ARC',  players: '0/2', pot: '—',         diff: 'Quick', color: 0xa855f7, pos: [-4.5, 0, 2], emissive: 0xa855f7 },
+  { id: 'backgammon', name: '🎲  Backgammon',    status: 'planned',entry: '3 ARC',  players: '0/2', pot: '—',         diff: 'Classic', color: 0x64748b, pos: [4.5, 0, 2], emissive: 0x475569 },
+  { id: 'pong',       name: '🏓  Pong',          status: 'planned',entry: '1 ARC',  players: '0/2', pot: '—',         diff: 'Arcade', color: 0xec4899, pos: [0, 0, 3.5], emissive: 0xec4899 },
 ];
 
 // ── Scene Setup ──
 const container = document.getElementById('canvas-container');
 const scene = new THREE.Scene();
-scene.fog = new THREE.FogExp2(0x0a0e17, 0.012);
+scene.background = new THREE.Color(0x0a0e17);
+scene.fog = new THREE.FogExp2(0x0a0e17, 0.010);
 
-const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 100);
-camera.position.set(0, 6, 12);
-camera.lookAt(0, 0, -2);
+const camera = new THREE.PerspectiveCamera(55, window.innerWidth / window.innerHeight, 0.1, 100);
+camera.position.set(0, 5, 13);
 
-const renderer = new THREE.WebGLRenderer({ antialias: true });
+const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
-renderer.toneMappingExposure = 1.2;
+renderer.toneMappingExposure = 1.0;
+renderer.outputColorSpace = THREE.SRGBColorSpace;
 container.appendChild(renderer.domElement);
 
 const labelRenderer = new CSS2DRenderer();
@@ -164,41 +179,46 @@ container.appendChild(labelRenderer.domElement);
 
 // ── Controls ──
 const controls = new OrbitControls(camera, renderer.domElement);
-controls.target.set(0, 0, -2);
+controls.target.set(0, 0, -1.5);
 controls.enableDamping = true;
-controls.dampingFactor = 0.08;
-controls.maxPolarAngle = Math.PI / 2.1;
+controls.dampingFactor = 0.06;
+controls.maxPolarAngle = Math.PI / 2.15;
 controls.minDistance = 3;
-controls.maxDistance = 20;
+controls.maxDistance = 22;
 controls.autoRotate = true;
-controls.autoRotateSpeed = 0.5;
+controls.autoRotateSpeed = 0.4;
 controls.update();
 
 // ── Lights ──
-const ambient = new THREE.AmbientLight(0x1a2332, 0.6);
+const ambient = new THREE.AmbientLight(0x1a2332, 0.4);
 scene.add(ambient);
 
-const mainLight = new THREE.DirectionalLight(0xffffff, 1.5);
-mainLight.position.set(5, 12, 8);
+const mainLight = new THREE.DirectionalLight(0xffffff, 0.8);
+mainLight.position.set(8, 15, 5);
 mainLight.castShadow = true;
 mainLight.shadow.mapSize.width = 1024;
 mainLight.shadow.mapSize.height = 1024;
 scene.add(mainLight);
 
-const fillLight = new THREE.DirectionalLight(0x22c55e, 0.3);
-fillLight.position.set(-5, 4, -5);
-scene.add(fillLight);
+// Per-cabinet spotlights
+GAMES.forEach(g => {
+  const spot = new THREE.SpotLight(g.color, 0.6, 10, Math.PI / 8, 0.5, 1);
+  spot.position.set(g.pos[0], 5, g.pos[2] - 1);
+  spot.target.position.set(g.pos[0], 0, g.pos[2]);
+  scene.add(spot);
+  scene.add(spot.target);
 
-const rimLight = new THREE.DirectionalLight(0x3b82f6, 0.2);
-rimLight.position.set(0, -2, -10);
-scene.add(rimLight);
+  const helper = new THREE.PointLight(g.color, 0.15, 4);
+  helper.position.set(g.pos[0], 0.5, g.pos[2]);
+  scene.add(helper);
+});
 
 // ── Floor ──
-const floorGeo = new THREE.PlaneGeometry(30, 30);
+const floorGeo = new THREE.PlaneGeometry(28, 28);
 const floorMat = new THREE.MeshStandardMaterial({
-  color: 0x0f1729,
-  metalness: 0.3,
-  roughness: 0.7,
+  color: 0x0a0e17,
+  metalness: 0.1,
+  roughness: 0.85,
 });
 const floor = new THREE.Mesh(floorGeo, floorMat);
 floor.rotation.x = -Math.PI / 2;
@@ -206,51 +226,101 @@ floor.position.y = -0.01;
 floor.receiveShadow = true;
 scene.add(floor);
 
-// Grid helper (neon)
-const gridHelper = new THREE.GridHelper(30, 40, 0x1f2937, 0x1a2332);
-gridHelper.position.y = 0;
+// Neon grid
+const gridHelper = new THREE.GridHelper(28, 36, 0x1f2937, 0x1a2332);
+gridHelper.position.y = 0.01;
 scene.add(gridHelper);
 
-// ── Room Walls ──
-function createWall(w, h, color, pos, rotY = 0) {
-  const g = new THREE.BoxGeometry(w, h, 0.1);
-  const m = new THREE.MeshStandardMaterial({ color, metalness: 0.1, roughness: 0.8, transparent: true, opacity: 0.3, side: THREE.DoubleSide });
+// Glow floor overlay
+const glowFloorGeo = new THREE.PlaneGeometry(20, 16);
+const glowFloorMat = new THREE.MeshBasicMaterial({
+  color: 0x22c55e,
+  transparent: true,
+  opacity: 0.015,
+});
+const glowFloor = new THREE.Mesh(glowFloorGeo, glowFloorMat);
+glowFloor.rotation.x = -Math.PI / 2;
+glowFloor.position.set(0, 0.02, -1.5);
+scene.add(glowFloor);
+
+// ── Walls ──
+function createWall(w, h, pos, rotY = 0) {
+  const g = new THREE.BoxGeometry(w, h, 0.05);
+  const m = new THREE.MeshStandardMaterial({
+    color: 0x131826,
+    metalness: 0.05, roughness: 0.9,
+    transparent: true, opacity: 0.6, side: THREE.DoubleSide
+  });
   const mesh = new THREE.Mesh(g, m);
   mesh.position.set(pos[0], pos[1], pos[2]);
   mesh.rotation.y = rotY;
   scene.add(mesh);
   return mesh;
 }
-createWall(20, 5, 0x1a2332, [0, 2.5, -8]);
-createWall(20, 5, 0x1a2332, [0, 2.5, 8]);
-createWall(16, 5, 0x1a2332, [-10, 2.5, 0], Math.PI / 2);
-createWall(16, 5, 0x1a2332, [10, 2.5, 0], Math.PI / 2);
+createWall(22, 5, [0, 2.5, -8.5]);
+createWall(22, 5, [0, 2.5, 8.5]);
+createWall(18, 5, [-11, 2.5, 0], Math.PI / 2);
+createWall(18, 5, [11, 2.5, 0], Math.PI / 2);
 
-// Ceiling
-const ceilGeo = new THREE.PlaneGeometry(20, 16);
-const ceilMat = new THREE.MeshStandardMaterial({ color: 0x0f1729, transparent: true, opacity: 0.5, side: THREE.DoubleSide });
-const ceil = new THREE.Mesh(ceilGeo, ceilMat);
-ceil.rotation.x = Math.PI / 2;
-ceil.position.y = 5;
-scene.add(ceil);
+// ── Animated Neon Strips ──
+const neonColors = [0x22c55e, 0x3b82f6, 0xa855f7, 0xf97316];
+const neonStrips = [];
 
-// ── Neon Strip Lighting ──
-function createNeonStrip(start, end, color = 0x22c55e) {
-  const points = [new THREE.Vector3(start[0], start[1], start[2]), new THREE.Vector3(end[0], end[1], end[2])];
-  const g = new THREE.BufferGeometry().setFromPoints(points);
-  const m = new THREE.LineBasicMaterial({ color, transparent: true, opacity: 0.3 });
+function createNeonStrip(points, color, offset = 0) {
+  const g = new THREE.BufferGeometry().setFromPoints(
+    points.map(p => new THREE.Vector3(p[0], p[1], p[2]))
+  );
+  const m = new THREE.LineBasicMaterial({ color, transparent: true, opacity: 0.15 });
   const line = new THREE.Line(g, m);
   scene.add(line);
-  // Glow
-  const m2 = new THREE.LineBasicMaterial({ color, transparent: true, opacity: 0.08 });
-  const g2 = new THREE.BufferGeometry().setFromPoints(points.map(p => p.clone().add(new THREE.Vector3(0, 0.02, 0))));
+
+  const m2 = new THREE.LineBasicMaterial({ color, transparent: true, opacity: 0.04 });
+  const g2 = new THREE.BufferGeometry().setFromPoints(
+    points.map(p => new THREE.Vector3(p[0], p[1] + 0.03, p[2]))
+  );
   const line2 = new THREE.Line(g2, m2);
   scene.add(line2);
+
+  return { line, material: m, baseOpacity: 0.15, offset, color };
 }
 
-createNeonStrip([-10, 4.8, -8], [10, 4.8, -8], 0x22c55e);
-createNeonStrip([-10, 4.8, 8], [10, 4.8, 8], 0x3b82f6);
-createNeonStrip([-10, 0.1, -8], [-10, 0.1, 8], 0x22c55e);
+const strips = [
+  createNeonStrip([[-11, 0.3, -8.5], [11, 0.3, -8.5]], 0x22c55e, 0),
+  createNeonStrip([[-11, 4.8, -8.5], [11, 4.8, -8.5]], 0x22c55e, 1.5),
+  createNeonStrip([[-11, 0.3, 8.5], [11, 0.3, 8.5]], 0x3b82f6, 3),
+  createNeonStrip([[-11, 4.8, 8.5], [11, 4.8, 8.5]], 0xa855f7, 0.8),
+  createNeonStrip([[-11, 2.5, -8.5], [-11, 2.5, 8.5]], 0xf97316, 2),
+  createNeonStrip([[11, 2.5, -8.5], [11, 2.5, 8.5]], 0x22c55e, 4),
+];
+
+// ── Particle System ──
+const particleCount = 400;
+const particlesGeo = new THREE.BufferGeometry();
+const positions = new Float32Array(particleCount * 3);
+const sizes = new Float32Array(particleCount);
+const speeds = new Float32Array(particleCount);
+
+for (let i = 0; i < particleCount; i++) {
+  positions[i * 3] = (Math.random() - 0.5) * 20;
+  positions[i * 3 + 1] = Math.random() * 5;
+  positions[i * 3 + 2] = (Math.random() - 0.5) * 16 - 1;
+  sizes[i] = 0.005 + Math.random() * 0.015;
+  speeds[i] = 0.002 + Math.random() * 0.006;
+}
+particlesGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+particlesGeo.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
+
+const particleMat = new THREE.PointsMaterial({
+  color: 0x22c55e,
+  size: 0.03,
+  transparent: true,
+  opacity: 0.3,
+  blending: THREE.AdditiveBlending,
+  depthWrite: false,
+  sizeAttenuation: true,
+});
+const particleSystem = new THREE.Points(particlesGeo, particleMat);
+scene.add(particleSystem);
 
 // ── Arcade Cabinets ──
 const cabinets = [];
@@ -258,130 +328,149 @@ let selectedGame = null;
 
 function createCabinet(game) {
   const group = new THREE.Group();
-  
+
+  // Base platform
+  const baseGeo = new THREE.BoxGeometry(2.2, 0.08, 0.8);
+  const baseMat = new THREE.MeshStandardMaterial({ color: 0x1a2332, metalness: 0.5, roughness: 0.4 });
+  const base = new THREE.Mesh(baseGeo, baseMat);
+  base.position.set(0, 0.04, -0.15);
+  base.receiveShadow = true;
+  group.add(base);
+
   // Cabinet body
-  const bodyGeo = new THREE.BoxGeometry(1.8, 2.4, 1.2);
   const bodyMat = new THREE.MeshStandardMaterial({
-    color: 0x111827,
-    metalness: 0.3,
-    roughness: 0.6,
+    color: 0x111827, metalness: 0.2, roughness: 0.5,
   });
-  const body = new THREE.Mesh(bodyGeo, bodyMat);
-  body.position.y = 1.2;
+  const body = new THREE.Mesh(new THREE.BoxGeometry(1.8, 2.2, 0.7), bodyMat);
+  body.position.set(0, 1.1, -0.05);
   body.castShadow = true;
   group.add(body);
 
-  // Screen (glowing)
-  const screenGeo = new THREE.BoxGeometry(1.2, 0.8, 0.08);
+  // Screen bezel
+  const bezelMat = new THREE.MeshStandardMaterial({ color: 0x0a0e17, metalness: 0.3, roughness: 0.6 });
+  const bezel = new THREE.Mesh(new THREE.BoxGeometry(1.3, 0.9, 0.05), bezelMat);
+  bezel.position.set(0, 1.55, 0.4);
+  group.add(bezel);
+
+  // Screen (emissive)
   const screenMat = new THREE.MeshStandardMaterial({
     color: game.color,
     emissive: game.color,
-    emissiveIntensity: game.status === 'live' ? 0.4 : 0.1,
+    emissiveIntensity: game.status === 'live' ? 0.6 : 0.15,
     metalness: 0.1,
-    roughness: 0.3,
+    roughness: 0.2,
   });
-  const screen = new THREE.Mesh(screenGeo, screenMat);
-  screen.position.set(0, 1.6, 0.7);
+  const screen = new THREE.Mesh(new THREE.BoxGeometry(1.15, 0.75, 0.03), screenMat);
+  screen.position.set(0, 1.55, 0.43);
   group.add(screen);
 
-  // Marquee
-  const marqueeGeo = new THREE.BoxGeometry(1.6, 0.3, 0.08);
+  // Marquee (top sign)
   const marqueeMat = new THREE.MeshStandardMaterial({
     color: game.color,
     emissive: game.color,
-    emissiveIntensity: 0.2,
+    emissiveIntensity: 0.3,
   });
-  const marquee = new THREE.Mesh(marqueeGeo, marqueeMat);
-  marquee.position.set(0, 2.2, 0.7);
+  const marquee = new THREE.Mesh(new THREE.BoxGeometry(1.6, 0.25, 0.05), marqueeMat);
+  marquee.position.set(0, 2.15, 0.4);
   group.add(marquee);
 
-  // Glow ring around screen (for live games)
+  // Side LED strips
+  const ledMat = new THREE.MeshBasicMaterial({
+    color: game.color,
+    transparent: true, opacity: 0.2,
+  });
+  for (let side of [-0.95, 0.95]) {
+    const led = new THREE.Mesh(new THREE.BoxGeometry(0.03, 1.6, 0.01), ledMat);
+    led.position.set(side, 1.2, 0.4);
+    group.add(led);
+  }
+
+  // Glow ring (live games only)
   if (game.status === 'live') {
-    const ringGeo = new THREE.RingGeometry(0.65, 0.7, 32);
     const ringMat = new THREE.MeshBasicMaterial({
       color: game.color,
       transparent: true,
-      opacity: 0.3,
+      opacity: 0.2,
       side: THREE.DoubleSide,
     });
-    const ring = new THREE.Mesh(ringGeo, ringMat);
-    ring.position.set(0, 1.6, 0.75);
+    const ring = new THREE.Mesh(new THREE.RingGeometry(0.62, 0.68, 48), ringMat);
+    ring.position.set(0, 1.55, 0.46);
     group.add(ring);
   }
 
-  // Base platform
-  const baseGeo = new THREE.BoxGeometry(2, 0.1, 0.6);
-  const baseMat = new THREE.MeshStandardMaterial({ color: 0x1f2937 });
-  const base = new THREE.Mesh(baseGeo, baseMat);
-  base.position.y = -0.05;
-  base.position.z = -0.3;
-  group.add(base);
-
-  // Position
+  // Position and rotate
   group.position.set(game.pos[0], game.pos[1], game.pos[2]);
-  
-  // Rotate to face center
   const angle = Math.atan2(-game.pos[0], -game.pos[2]);
   group.rotation.y = angle;
 
   scene.add(group);
+  return { group, game, screenMat, marqueeMat, ledMat };
+}
 
-  // Label (CSS2D)
-  const labelDiv = document.createElement('div');
-  labelDiv.textContent = game.name;
-  labelDiv.style.color = '#e2e8f0';
-  labelDiv.style.fontSize = '13px';
-  labelDiv.style.fontWeight = '600';
-  labelDiv.style.textShadow = '0 0 10px rgba(0,0,0,0.8)';
-  labelDiv.style.background = 'rgba(10,14,23,0.8)';
-  labelDiv.style.padding = '4px 12px';
-  labelDiv.style.borderRadius = '6px';
-  labelDiv.style.border = '1px solid #1f2937';
-  labelDiv.style.backdropFilter = 'blur(4px)';
-  labelDiv.style.pointerEvents = 'none';
+GAMES.forEach(g => cabinets.push(createCabinet(g)));
+
+// ── Labels (CSS2D) ──
+GAMES.forEach(game => {
+  const div = document.createElement('div');
+  div.textContent = game.name;
+  div.style.color = '#e2e8f0';
+  div.style.fontSize = '12px';
+  div.style.fontWeight = '600';
+  div.style.textShadow = '0 0 20px rgba(0,0,0,0.9)';
+  div.style.background = 'rgba(10,14,23,0.85)';
+  div.style.padding = '4px 14px';
+  div.style.borderRadius = '6px';
+  div.style.border = '1px solid rgba(31,41,55,0.6)';
+  div.style.backdropFilter = 'blur(8px)';
+  div.style.pointerEvents = 'none';
+  div.style.fontFamily = 'Inter, sans-serif';
 
   if (game.status === 'live') {
     const dot = document.createElement('span');
     dot.textContent = ' ● ';
     dot.style.color = '#22c55e';
     dot.style.fontSize = '10px';
-    labelDiv.prepend(dot);
+    div.prepend(dot);
   }
 
-  const label = new CSS2DObject(labelDiv);
-  label.position.set(game.pos[0], game.pos[1] + 2.8, game.pos[2]);
+  const label = new CSS2DObject(div);
+  label.position.set(game.pos[0], 2.7, game.pos[2]);
   scene.add(label);
-
-  return { group, game };
-}
-
-GAMES.forEach(g => cabinets.push(createCabinet(g)));
+});
 
 // ── Center Neon Sign ──
-function createNeonSign() {
-  const textGeo = new THREE.BoxGeometry(4, 0.3, 0.05);
-  const textMat = new THREE.MeshStandardMaterial({
-    color: 0x22c55e,
-    emissive: 0x22c55e,
-    emissiveIntensity: 0.2,
-    transparent: true,
-    opacity: 0.6,
+const signGroup = new THREE.Group();
+const signBarMat = new THREE.MeshStandardMaterial({
+  color: 0x22c55e, emissive: 0x22c55e, emissiveIntensity: 0.15, transparent: true, opacity: 0.5
+});
+['AGENT', 'ARCADE'].forEach((word, i) => {
+  const w = word.length * 0.25;
+  const bar = new THREE.Mesh(new THREE.BoxGeometry(w, 0.08, 0.03), signBarMat);
+  bar.position.set(0, 3.6 - i * 0.4, -8.2);
+  signGroup.add(bar);
+});
+scene.add(signGroup);
+
+// ── Floating ARC tokens ──
+const tokens = [];
+for (let i = 0; i < 5; i++) {
+  const tMat = new THREE.MeshStandardMaterial({
+    color: 0x22c55e, emissive: 0x22c55e, emissiveIntensity: 0.1,
+    metalness: 0.8, roughness: 0.2,
   });
-  const sign1 = new THREE.Mesh(textGeo, textMat);
-  sign1.position.set(0, 3.5, -7.8);
-  scene.add(sign1);
-
-  const sign2 = sign1.clone();
-  sign2.position.set(0, 3.2, -7.8);
-  sign2.scale.set(0.7, 1, 1);
-  sign2.material = textMat.clone();
-  sign2.material.color.setHex(0x3b82f6);
-  sign2.material.emissive.setHex(0x3b82f6);
-  scene.add(sign2);
+  const token = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.1, 0.02, 16), tMat);
+  token.position.set(
+    (Math.random() - 0.5) * 12,
+    Math.random() * 2 + 1,
+    (Math.random() - 0.5) * 10 - 2
+  );
+  token.rotation.x = Math.PI / 2;
+  token.userData = { speed: 0.3 + Math.random() * 0.5, floatPhase: Math.random() * Math.PI * 2 };
+  scene.add(token);
+  tokens.push(token);
 }
-createNeonSign();
 
-// ── Raycaster for click detection ──
+// ── Raycaster ──
 const raycaster = new THREE.Raycaster();
 const pointer = new THREE.Vector2();
 
@@ -389,17 +478,13 @@ function getCabinetFromClick(event) {
   const rect = renderer.domElement.getBoundingClientRect();
   pointer.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
   pointer.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
-
   raycaster.setFromCamera(pointer, camera);
 
-  // Check each cabinet's body mesh
   for (const cab of cabinets) {
-    const body = cab.group.children[0]; // First child is the body
+    const body = cab.group.children[1];
     if (body) {
       const intersects = raycaster.intersectObject(body, true);
-      if (intersects.length > 0) {
-        return cab;
-      }
+      if (intersects.length > 0) return cab;
     }
   }
   return null;
@@ -410,7 +495,7 @@ renderer.domElement.addEventListener('click', (event) => {
   if (cab) {
     showGamePanel(cab.game);
     controls.autoRotate = false;
-    setTimeout(() => { controls.autoRotate = true; }, 8000);
+    setTimeout(() => { controls.autoRotate = true; }, 10000);
   }
 });
 
@@ -419,40 +504,29 @@ const panel = document.getElementById('game-panel');
 function showGamePanel(game) {
   selectedGame = game;
   document.getElementById('gp-name').textContent = game.name;
-  const statusEl = document.getElementById('gp-status');
-  statusEl.textContent = game.status === 'live' ? '● LIVE' : game.status === 'soon' ? '● Coming Soon' : '● Planned';
-  statusEl.className = 'gp-status ' + game.status;
+  const st = document.getElementById('gp-status');
+  st.textContent = game.status === 'live' ? '● Live Now' : game.status === 'soon' ? '● Coming Soon' : '● Planned';
+  st.className = 'gp-status ' + game.status;
   document.getElementById('gp-entry').textContent = game.entry;
   document.getElementById('gp-players').textContent = game.players;
   document.getElementById('gp-pot').textContent = game.pot;
   document.getElementById('gp-diff').textContent = game.diff;
 
-  const joinBtn = document.getElementById('gp-join');
+  const jb = document.getElementById('gp-join');
   if (game.status === 'live') {
-    joinBtn.disabled = false;
-    joinBtn.textContent = '🎮 Join Game';
-    joinBtn.className = 'hud-btn primary';
+    jb.disabled = false; jb.textContent = '🎮 Join Game'; jb.className = 'hud-btn primary';
   } else {
-    joinBtn.disabled = true;
-    joinBtn.textContent = '🔒 Coming Soon';
-    joinBtn.className = 'hud-btn';
+    jb.disabled = true; jb.textContent = '🔒 Coming Soon'; jb.className = 'hud-btn';
   }
-
   panel.classList.add('visible');
 }
 
-document.getElementById('gp-close').addEventListener('click', () => {
-  panel.classList.remove('visible');
-  selectedGame = null;
-});
-
+document.getElementById('gp-close').addEventListener('click', () => { panel.classList.remove('visible'); selectedGame = null; });
 document.getElementById('gp-join').addEventListener('click', () => {
-  if (selectedGame && selectedGame.status === 'live') {
-    alert(`Joining ${selectedGame.name}... (x402 payment flow incoming)`);
-  }
+  if (selectedGame?.status === 'live') alert(`Joining ${selectedGame.name}...\n\nx402 payment flow incoming in next update.`);
 });
 
-// ── Connect Wallet Button ──
+// ── HUD Handlers ──
 const connectBtn = document.getElementById('btn-connect');
 connectBtn.addEventListener('click', () => {
   connectBtn.textContent = 'Connecting...';
@@ -463,15 +537,17 @@ connectBtn.addEventListener('click', () => {
   }, 800);
 });
 
-// ── Leaderboard Button ──
 document.getElementById('btn-leaderboard').addEventListener('click', () => {
-  alert('🏆 Leaderboard\n\n1. GenTech Poker Bot — 4,200 ARC\n2. ForgeBot v2 — 2,800 ARC\n3. Gentech Smash — 1,900 ARC\n4. AlphaPoker — 1,100 ARC\n5. TightBot — 600 ARC');
+  alert('🏆 Weekly Leaderboard\n\n' +
+    '1. 🤖 GenTech Poker Bot — 4,200 ARC\n' +
+    '2. 🤖 ForgeBot v2 — 2,800 ARC\n' +
+    '3. 🤖 Gentech Smash — 1,900 ARC\n' +
+    '4. 🤖 AlphaPoker — 1,100 ARC\n' +
+    '5. 🤖 TightBot — 600 ARC');
 });
 
-// ── Controls Hint Auto-Hide ──
-setTimeout(() => {
-  document.getElementById('controls-hint').style.opacity = '0';
-}, 8000);
+// ── Controls Hint ──
+setTimeout(() => { document.getElementById('controls-hint').style.opacity = '0'; }, 10000);
 
 // ── Resize ──
 window.addEventListener('resize', () => {
@@ -482,32 +558,64 @@ window.addEventListener('resize', () => {
 });
 
 // ── Animation Loop ──
+const clock = new THREE.Clock();
+
 function animate() {
   requestAnimationFrame(animate);
+  const t = clock.getElapsedTime();
+
+  // Animate neon strips
+  neonStrips.forEach((s, i) => {
+    s.material.opacity = s.baseOpacity + Math.sin(t * 0.8 + s.offset) * 0.08;
+  });
+
+  // Animate particles (slow drift upward)
+  const pos = particleSystem.geometry.attributes.position.array;
+  for (let i = 0; i < particleCount; i++) {
+    pos[i * 3 + 1] += speeds[i];
+    if (pos[i * 3 + 1] > 5) pos[i * 3 + 1] = 0;
+  }
+  particleSystem.geometry.attributes.position.needsUpdate = true;
+
+  // Animate floating coins
+  tokens.forEach((t, i) => {
+    t.position.y += Math.sin(t.userData.floatPhase + clock.getElapsedTime() * t.userData.speed) * 0.001;
+    t.rotation.z = Math.sin(clock.getElapsedTime() * 0.5 + i) * 0.1;
+  });
+
+  // Animate live cabinet screens (gentle pulse)
+  cabinets.forEach(cab => {
+    if (cab.game.status === 'live') {
+      const pulse = 0.4 + Math.sin(t * 1.5 + cab.game.pos[0]) * 0.2;
+      cab.screenMat.emissiveIntensity = pulse;
+      cab.marqueeMat.emissiveIntensity = 0.2 + Math.sin(t * 0.8 + cab.game.pos[0]) * 0.1;
+    }
+  });
+
+  // Sign glow
+  signGroup.children.forEach((child, i) => {
+    if (child.isMesh) {
+      child.material.emissiveIntensity = 0.1 + Math.sin(t * 0.6 + i * 0.5) * 0.08;
+    }
+  });
+
   controls.update();
   renderer.render(scene, camera);
   labelRenderer.render(scene, camera);
 }
 animate();
 
-// ── Hide Loading ──
-setTimeout(() => {
-  document.getElementById('loading').classList.add('hidden');
-}, 1000);
+// ── Loading ──
+setTimeout(() => document.getElementById('loading').classList.add('hidden'), 800);
 
-console.log('🕹️ Agent Arcade 3D Lobby loaded');
-console.log(`🏗️  ${GAMES.length} cabinets placed`);
-
-// ── Keyboard Shortcuts ──
+// ── Keyboard ──
 document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') {
-    panel.classList.remove('visible');
-    selectedGame = null;
-  }
-  if (e.key === 'r' || e.key === 'R') {
-    controls.autoRotate = !controls.autoRotate;
-  }
+  if (e.key === 'Escape') { panel.classList.remove('visible'); selectedGame = null; }
+  if (e.key === 'r' || e.key === 'R') controls.autoRotate = !controls.autoRotate;
 });
+
+console.log('🕹️ Agent Arcade 3D Lobby — Enhanced Edition');
+console.log(`🏗️  ${GAMES.length} cabinets · ${particleCount} particles · ${neonStrips.length} neon strips`);
 </script>
 </body>
 </html>
