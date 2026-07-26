@@ -15,6 +15,17 @@
 - **Priority:** 🏆 Milestone — could become "ChatGPT for DeFi"
 - [x] Add to build queue as #58
 
+## 🏆 Agent Arcade — Walkable 3D Game Environment
+**Source:** Jordan vision (Jul 25) | **Status:** First cabinet shipped, full arcade queued
+- **Vision:** 3D arcade lobby (Three.js) where you walk around with your agent, approach cabinets, play or spectate
+- **Cabinet 1: Super Arcade Tennis** — LIVE at arcade.gentechlabs.net 🎾
+  - Isometric tennis, chain power-shots (BTC/ETH/SOL), AI opponent, scoring
+  - Built with MengTo's open-source Three.js game dev skills
+- **Upcoming cabinets:** Poker, Blackjack, Connect Four, Tic-Tac-Toe (from existing spec)
+- **Deep spec:** ProtoJay4789.github.io/10-Labs/agent-arcade-build-queue.md (895 lines)
+- **Revenue:** Entry fees via x402, prize pools, ARC token, agent-vs-agent tournaments
+- **Next:** Build the 3D lobby environment (Forge, desktop lane)
+
 ## 🏆 Agent Kit v2 — Modular Agent Framework
 **Source:** Jordan brainstorm (Jun 18) | **Status:** Spec complete, ready to build
 - Modular skill system, auto-detection, identity persistence, skill marketplace
@@ -84,6 +95,15 @@
 - **Meta Ray-Ban 3D Reconstruction** — `09-Green Room/specs/metaray-3d-reconstruction.md` — Wearable 3D reconstruction pipeline using Meta Ray-Ban + LingBot-Map. x402 inference API. Promoted from `07-Ideas/` Jul 23.
 
 ---
+
+## 🎯 New Opportunities Discovered (Jul 25-26 Nightly Brain Audit)
+- [ ] **Keeperhub Agents Onchain Hackathon** ($5K+, Jul 27 - Aug 13) — Onchain agents, aligned with x402 + compliance stack. Added to queue as #80.
+- [ ] **HackerRank Orchestrate** (Aug 1-7, virtual 24hr) — Build production-ready AI agent. Good for x402 payment flow showcases.
+- [ ] **AI Agent Builder Series (AI House × Google)** (submissions Aug 1, Grand Finale Aug 8)
+- [x] **Build with DataHub: The Agent Hackathon** (deadline Aug 10, $20.5K) — Added to queue as #81. MCP + agent context kit aligned with x402.
+- [ ] **VSLive! Microsoft AI Hackathon** (Jul 28 kickoff, Redmond) — "Best AI Agent" category. In-person.
+- [ ] **The Great Agent Hackathon** (Jul 23 - Aug 25, enterprise AI agents)
+- [ ] **HackAgentAIx 2026** (Jul 30-31, £1,750) — 48hr online autonomous AI agent sprint. Small prize, easy to enter.
 
 ## Ready to Test (skills exist, need execution)
 - [ ] **WURK.FUN microtasks** — Agent-to-human microtask skill, ready to test
