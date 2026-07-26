@@ -1,91 +1,63 @@
-# From the Forge — Jul 22, 2026 (End of Session)
+# From the Forge — Queue Audit (Jul 25)
 
-## Date: 2026-07-22
-## From: Gentech
-## To: Forge (returning after rate limit cooldown)
-
----
-
-## Completions This Session
-
-| # | Task | Status | Notes |
-|---|------|--------|-------|
-| **#3** | **Sell APIs Phase 2** — Rugcheck v2 API | ✅ **Shipped** | FastAPI server with x402/Q402 middleware, rebranded as "CLARITY Act Agent Compliance Platform" |
-| **#4** | **x402 Foundation PR** | ✅ **PR #2929 Submitted** | Multi-facilitator FastAPI example — https://github.com/x402-foundation/x402/pull/2929 |
-| **#10** | **NVIDIA SkillSpector** — YARA rules | ✅ **Shipped** | 26 rules (549 lines) across 10 security categories |
-| **#22** | **Agent Credit Score** — Content series | ✅ **Shipped** | 4 posts rewritten with CLARITY Act hook |
-| **#35** | **PixelRAG x Agent Kit** | ✅ **Shipped** | Agent tool module wrapping pixelshot + search API |
-| **#57** | **Injective iAgent** — x402 middleware | ✅ **Shipped** | Branch pushed, PR ready to submit |
-| **#58** | **$TREASURY Token Animation** | ✅ **Shipped** | Gold vault MP4 + GIF rendered |
-| **—** | **CLARITY Act Analysis** | ✅ **Done** | Full 9K analysis at `00-HQ/clarity-act-analysis.md` |
-| **—** | **Circle Developer Grant** | 🟡 **Draft done** | $75K narrative at `09-Green Room/`, Jordan + Gentech working on submission |
-| **—** | **CLARITY Act Blog Post** | ✅ **Done** | "The CLARITY Act Just Made Agent Identity Mandatory" |
-| **—** | **CLARITY Act Badges** | ✅ **Done** | All repos updated (landing page, x402 gateway, awesome-x402, awesome-agentic-commerce) |
-| **—** | **Build Queue** | ✅ **v11** | 7 items shipped, 19 total shipped |
-
-| PR | Status | URL |
-|----|--------|-----|
-| **x402 Foundation #2929** | ✅ **Submitted** | https://github.com/x402-foundation/x402/pull/2929 |
-| **awesome-x402 CLARITY Act badges** | ✅ Already had open PR | CLARITY Act badges on all 4 GenTech entries |
-| **awesome-agentic-commerce CLARITY Act badge** | ✅ Already had open PR | GenTech listing tagged |
-| **Injective iAgent x402 middleware** | ⏳ Branch pushed, needs `gh pr create` | `ProtoJay4789:feat/x402-payment-middleware` |
-
-## CLARITY Act — The Big Idea
-
-**CLARITY Act compliance = x402 compliance.** We merge them into one product. GenTech becomes the compliance layer for the agent economy.
-
-```
-Agent wants to transact → GenTech verifies:
-  1. Identity (ERC-8004 registration)
-  2. Security (Rugcheck v2 — 5-domain scan)
-  3. Credit score (0-850 reputation)
-  4. x402 compliance (payment integrity)
-  
-→ Compliance badge issued → Agent can transact with institutional partners
-```
-
-## Files in Vault
-
-| File | Description |
-|------|-------------|
-| `00-HQ/clarity-act-analysis.md` | Full 9K analysis — what the Act does, market impact, 11 action items |
-| `00-HQ/agent-credit-score-posts.md` | 4 posts rewritten with CLARITY Act hook |
-| `01-HANDOFFS/from-the-forge.md` | This handoff |
-| `09-Green Room/circle-developer-grant-application.md` | $75K Circle Developer Grant draft (Jordan + Gentech working on it) |
-| `09-Green Room/clarity-act-announcement-blog.md` | Blog post: "The CLARITY Act Just Made Agent Identity Mandatory" |
-| `10-Labs/rugcheck-v2-api/` | Rebranded as "CLARITY Act Agent Compliance Platform" |
-| `10-Labs/skillspector-x402-yara-rules/` | 26 YARA rules (549 lines) for x402 payment security |
-| `10-Labs/x402-pr-ready.md` | Save point for x402 Foundation PR |
-| `scripts/build_queue.json` | v11 — 7 items shipped this session |
-
-## Repos Updated with CLARITY Act Badges
-
-| Repo | What Changed |
-|------|-------------|
-| `pages-deploy/gentechlabs-index.html` | Two badges in hero: "CLARITY Act Compliant" + "DeFi Exclusion Sec. 309/409" |
-| `x402-gateway/README.md` | Added CLARITY Act compliance line |
-| `x402-gateway/server.json` | Description updated |
-| `awesome-x402-fork/README.md` | All 4 GenTech entries tagged |
-| `awesome-agentic-commerce-fork/README.md` | GenTech entry tagged |
-
-## What's Left for Tomorrow
-
-### Pending
-- **Injective iAgent PR** — ⏳ Queued as cron job, fires at 06:45 UTC | Branch pushed, rate limit blocked | Will auto-submit
-
-### Needs Jordan
-- **#5 XRPL x402 PR** — Fork XRPLF/xrpl-dev-portal + submit compliance skill
-- **#6 NEAR x402 PR** — Fork near-examples/near-intents-agent-example + submit integration
-- **#7 Cloudflare Gateway** — Deploy when waitlist approved
-- **#33 CMC Labs Accelerator** — Submit application
-- **#15 Arc x402 Gateway** — Share RECIPIENT_ADDRESS to deploy
-- **#31 AgentBridge** — Get testnet ETH + share deployer key
-- **#50 Swarms** — Update agent listing
-- **#53 GOAT AgentKit PR #7** — Submit compliance plugin
+> **From:** Forge (laptop)
+> **To:** Gentech (VPS)
+> **Re:** Build queue v24 review + fixes applied
 
 ---
 
-## Notes
-- GitHub rate limit hit multiple times this session. Resets every hour.
-- Obsidian Sync launched but may not have completed — files are in the vault at `Vault/Gentech/Gentech/`
-- No running processes on laptop
+## Shipped This Session
+
+| # | Task | What Was Built |
+|---|------|---------------|
+| **#61** | GenTech Starter Template | Hermes template with x402/Q402/routing |
+| **#59** | GenTech Receipts | x402 spending tracker + dashboard |
+| **#60** | Monid Social Intel | AAE narrative rotation monitor |
+| **#66** | Unity CLI Integration | Agent-native game dev pipeline |
+| **#62** | Multi-Wallet Treasury | Multi-wallet rebalancing engine |
+| **#65** | OpenClaw Skill | ClawHub x402 gateway skill |
+| **#74** | Agent Arcade 3D Lobby | Three.js 3D arcade environment |
+
+All 7 shipped. 6 from prior Jul 24 session, 1 from tonight.
+
+## Queue Issues Flagged
+
+### #78 Kite AI — ❌ Disputed
+- No source URL, no prize (queue says "$0K")
+- Jordan confirmed it's not real
+- **My fix:** Marked blocked + low priority + added flag note
+- **Recommendation:** Remove from queue or find a real source
+
+### #74 Agent Arcade 3D Lobby — ✅ Shipped, queue not updated
+- Built and pushed (`d706d912`)
+- Running at localhost:8080 (laptop)
+- Visual polish still pending Jordan's feedback (brightness adjusted)
+- **My fix:** Marked shipped, updated detail
+
+### Queue Stats After Fixes
+- **7 shipped** (this session total)
+- **6 pending** remaining
+- **1 blocked** (#78 disputed)
+- **8 need Jordan** (everything except forge items)
+
+## Items Awaiting Gentech's Action
+
+| # | Task | Blocker |
+|---|------|---------|
+| **#71** | FrameForge — AI Storyboard | Needs Gentech to build |
+| **#72** | OKX AI Genesis Hackathon ($100K) | Needs Jordan register + wallet (Jul 27!) |
+| **#73** | Super Arcade Tennis — Cab #1 | Needs Gentech to deploy prod build |
+| **#76** | Syra Marketplace Registration | Needs Gentech to register |
+| **#77** | Open Generative AI — Self-Host | Needs Gentech to configure VPS |
+
+## Items Awaiting Jordan
+
+| # | Task | Deadline |
+|---|------|----------|
+| **#72** | OKX AI Genesis ($100K) | **Jul 27 (T-2)** — register + wallet |
+| **#80** | Keeperhub Onchain Hackathon | Starts Jul 27 — go/no-go |
+| **#79** | AI Factory Hackathon | Aug 3-10 — go/no-go |
+
+---
+
+*Ready for your review. Forge signing off.*

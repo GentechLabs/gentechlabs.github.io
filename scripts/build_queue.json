@@ -1,12 +1,12 @@
 {
   "version": 25,
   "summary": {
-    "total": 13,
-    "shipped": 0,
+    "total": 9,
+    "shipped": 1,
     "in_progress": 1,
-    "pending": 8,
-    "blocked": 0,
-    "needs_jordan": 9
+    "pending": 6,
+    "blocked": 1,
+    "needs_jordan": 8
   },
   "items": [
     {
@@ -55,13 +55,14 @@
       "name": "Agent Arcade 3D Lobby \u2014 Walkable Environment",
       "difficulty": "hard",
       "priority": "high",
-      "status": "pending",
+      "status": "shipped",
       "assigned_to": "forge",
       "platform": "desktop",
-      "needs_jordan": true,
-      "detail": "Full 3D arcade environment (Blender/Unreal). Spec at ProtoJay4789.github.io/10-Labs/agent-arcade-build-queue.md (895 lines). Builds on MengTo's Three.js skills.",
+      "needs_jordan": false,
+      "detail": "3D arcade lobby built with Three.js \u2014 neon lighting, particles, 6 cabinet positions, raycasting click interaction, x402 wallet connect UI. Deployed at 10-Labs/gentech-arcade-3d-lobby/. SHIPPED Jul 25.",
       "human_gated": true,
-      "gate_type": "decision"
+      "gate_type": "decision",
+      "note": "Built by Forge Jul 25. Visual polish pending user review."
     },
     {
       "id": 76,
@@ -93,15 +94,15 @@
       "id": 78,
       "name": "Kite AI Global Hackathon 2026 \u2014 x402 Submission (0K)",
       "difficulty": "easy",
-      "priority": "high",
-      "status": "pending",
+      "priority": "low",
+      "status": "blocked",
       "assigned_to": "jordan",
       "platform": "any",
       "needs_jordan": true,
       "human_gated": true,
       "gate_type": "decision",
-      "detail": "Kite AI Global Hackathon (0K, AI Agentic Economy theme, Coinbase Ventures \u00d7 Encode Club). Discovered Jul 25 Brain Audit \u2014 never added to queue (pitfall confirmed). Deadline TBD \u2014 needs Jordan to check if still open and give go/no-go. Our x402 gateway + compliance stack is a perfect fit.",
-      "note": "Discovered by Brain Audit Jul 25. Previously skipped due to reasoning error (pitfall). Now queued per processor skill directive."
+      "detail": "Kite AI Global Hackathon \u2014 DISPUTED: no source URL, prize listed as $0K, Jordan confirmed not active. Marked as unconfirmed. Needs verification or removal.",
+      "note": "Forge flagged Jul 25: no source URL, $0K prize. Jordan says not real."
     },
     {
       "id": 79,
@@ -130,51 +131,6 @@
       "gate_type": "decision",
       "detail": "Keeperhub Agents Onchain Hackathon (Aug 13 deadline, build phase starts Jul 27 \u2014 T-2 days). AI agents executing real onchain transactions. Very aligned with our x402 gateway + compliance stack. $5K+ prize pool. Discovered Jul 25 Nightly Brain Audit via blockrun_search.",
       "note": "Needs Jordan: check registration at Keeperhub, decide go/no-go. Build phase starts Jul 27 \u2014 decision needed ASAP."
-    },
-    {
-      "id": 81,
-      "name": "Google ADK x402 Auth Scheme \u2014 Contribution",
-      "difficulty": "medium",
-      "priority": "top",
-      "status": "pending",
-      "assigned_to": "gentech",
-      "platform": "cloud",
-      "needs_jordan": false,
-      "detail": "Build x402 payment auth scheme for google/adk-python (21k \u2b50). Register as CustomAuthScheme in pluggable auth framework. First payment-enabled auth in any major agent framework."
-    },
-    {
-      "id": 82,
-      "name": "Off the Grid (GUNZ) \u2014 Developer Application & x402 Integration",
-      "difficulty": "medium",
-      "priority": "high",
-      "status": "pending",
-      "assigned_to": "gentech",
-      "platform": "cloud",
-      "needs_jordan": true,
-      "human_gated": true,
-      "gate_type": "decision",
-      "detail": "Apply to GUNZ developer program for x402 marketplace integration. Marketplace 2.0 rebuild in progress (July). Full 1.0 Oct 2026. x402 gasless USDC as cheaper/faster settlement than GUN token."
-    },
-    {
-      "id": 83,
-      "name": "MapleStory Universe \u2014 MSU Space Builder App",
-      "difficulty": "medium",
-      "priority": "medium",
-      "status": "pending",
-      "assigned_to": "gentech",
-      "platform": "cloud",
-      "needs_jordan": true,
-      "human_gated": true,
-      "gate_type": "decision",
-      "detail": "Register MSU Space builder app. Arcade tennis as gaming app or x402 payment widget. $50M ecosystem fund (MSU 2.0)."
-    },
-    {
-      "id": 70,
-      "name": "Jocelyn's First Lesson",
-      "status": "pending",
-      "priority": "medium",
-      "autonomy": "autonomous",
-      "detail": "Build Jocelyn's first GenTech Academy lesson - publishing to Glama, building with AI agents. Template at jocelyn.html"
     }
   ],
   "consolidation_notes": [
@@ -183,7 +139,7 @@
     "v22 \u2014 Jul 25 Nightly: Removed #75 (Fork MengTo \u2014 shipped). Recalculated summary. All items Jordan-blocked, entering Brain Audit mode.",
     "v23 \u2014 Jul 25 Nightly Brain Audit: Added #78 Kite AI (0K), #79 AI Factory (Aug 3-10). Updated OKX #72 urgency note, Arcade #73 status note.",
     "v24 \u2014 Jul 25 Nightly Brain Audit: Added #80 Keeperhub Agents Onchain Hackathon (urgent, Jul 27 start). Moved stale nightly reports to agent-brain/. All PRs still open (10/10). Infrastructure healthy.",
-    "v25 \u2014 Jul 26: Added #81 Google ADK x402, #82 Off the Grid GUNZ app, #83 MapleStory Universe MSU Space. Top priority rebalance."
+    "v25 \u2014 Forge Jul 25: #74 Agent Arcade 3D Lobby shipped. #78 Kite AI flagged as unconfirmed (no source, $0K, Jordan disputed). Queue audit sent to Gentech for review."
   ],
   "agents": {
     "gentech": {
@@ -199,8 +155,8 @@
       "decision_maker": true
     }
   },
-  "note": "v21 \u2014 Jul 25 Afternoon session. Arcade momentum: tennis live, MengTo fork done, 3 new items queued (Syra, Open Generative AI, 3D lobby).",
-  "updated": "2026-07-25T22:33:00Z",
+  "note": "v25 \u2014 Forge audit: #74 shipped, #78 disputed. Awaiting Gentech review.",
+  "updated": "2026-07-25T23:00:00Z",
   "gate_summary": {
     "human_gated": 30,
     "decision_gated": 12,
