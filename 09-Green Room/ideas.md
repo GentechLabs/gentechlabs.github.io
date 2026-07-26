@@ -96,13 +96,14 @@
 
 ---
 
-## 🎯 New Opportunities Discovered (Jul 25 Nightly Brain Audit)
+## 🎯 New Opportunities Discovered (Jul 25-26 Nightly Brain Audit)
 - [ ] **Keeperhub Agents Onchain Hackathon** ($5K+, Jul 27 - Aug 13) — Onchain agents, aligned with x402 + compliance stack. Added to queue as #80.
 - [ ] **HackerRank Orchestrate** (Aug 1-7, virtual 24hr) — Build production-ready AI agent. Good for x402 payment flow showcases.
 - [ ] **AI Agent Builder Series (AI House × Google)** (submissions Aug 1, Grand Finale Aug 8)
-- [ ] **Build with DataHub: The Agent Hackathon** (deadline Aug 10, $20.5K)
+- [x] **Build with DataHub: The Agent Hackathon** (deadline Aug 10, $20.5K) — Added to queue as #81. MCP + agent context kit aligned with x402.
 - [ ] **VSLive! Microsoft AI Hackathon** (Jul 28 kickoff, Redmond) — "Best AI Agent" category. In-person.
 - [ ] **The Great Agent Hackathon** (Jul 23 - Aug 25, enterprise AI agents)
+- [ ] **HackAgentAIx 2026** (Jul 30-31, £1,750) — 48hr online autonomous AI agent sprint. Small prize, easy to enter.
 
 ## Ready to Test (skills exist, need execution)
 - [ ] **WURK.FUN microtasks** — Agent-to-human microtask skill, ready to test
