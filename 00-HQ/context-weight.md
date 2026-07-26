@@ -1,6 +1,6 @@
 # 🧠 Context Weight — GenTech Labs
 
-> Auto-generated: 2026-07-25 16:27 ET · Loads on session start so every group has context.
+> Auto-generated: 2026-07-26 00:09 ET · Loads on session start so every group has context.
 > Source: build_queue.json + vault state
 
 ---
@@ -11,9 +11,12 @@
 - [HIGH] Super Arcade Tennis — Cab #1 for GenTech Arcade — in_progress
 - [HIGH] Agent Arcade 3D Lobby — Walkable Environment — pending
 - [HIGH] Open Generative AI — Self-Host AI Media Studio — pending
+- [HIGH] Kite AI Global Hackathon 2026 — x402 Submission (0K) — pending
+- [HIGH] AI Factory Hackathon — lablab.ai x NativelyAI (Aug 3-10) — pending
+- [URGENT] Keeperhub Agents Onchain Hackathon — x402 Onchain Agents ($5K+) — pending
 
 ## 🏗️ Build Queue
-7 total · 22 pending · 10 blocked
+10 total · 8 pending · 0 blocked
 
 ## 🚨 Blockers
 None
@@ -32,7 +35,7 @@ See 11-Mess Hall/considerations.md
 - **Forge** — Desktop agent · Handles local builds
 
 ## 🔗 Quick Links
-- Build queue: `scripts/build_queue.json` (7 items)
+- Build queue: `scripts/build_queue.json` (10 items)
 - Jocelyn's hub: gentechlabs.net/jocelyn.html
 - Investor deck: gentechlabs.net/grant.html
 - Demo video: gentechlabs.net/agentic-treasury-demo.mp4
