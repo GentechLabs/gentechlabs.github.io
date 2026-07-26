@@ -41,14 +41,63 @@ BACKEND_ROUTES = {
 
 
 def build_payment_required(service_name: str, price_usd: float) -> dict:
-    """Build x402 v2 PaymentRequired payload"""
+    """Build x402 v2 PaymentRequired payload — compliant with Agentic Market validator"""
+    price_atomic = int(price_usd * 1000000)  # USDC has 6 decimals
     return {
-        "version": "2.0",
-        "accepts": [{"scheme": "x402", "network": "base", "asset": "USDC"}],
-        "price": {"amount": str(price_usd), "currency": "USD"},
-        "payTo": os.getenv("X402_PAYTO_ADDRESS", ""),
-        "maxTimeoutSeconds": 300,
-        "description": f"Payment for {service_name}",
+        "x402Version": 2,
+        "resource": {
+            "url": f"https://api.gentechlabs.net/v1/{service_name.lower().replace(' ', '-')}",
+            "description": f"GenTech Labs x402 — {service_name}",
+            "mimeType": "application/json"
+        },
+        "accepts": [
+            {
+                "scheme": "exact",
+                "network": "eip155:8453",
+                "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+                "amount": str(price_atomic),
+                "payTo": os.getenv("X402_PAYTO_ADDRESS", "0xF9dcBFF7EdDd76c58412fd46f4160c96312ce734"),
+                "maxTimeoutSeconds": 300
+            }
+        ],
+        "extensions": {
+            "bazaar": {
+                "bazaarResourceServerExtension": True,
+                "discoveryUrl": "https://api.gentechlabs.net/.well-known/x402-bazaar",
+                "info": {
+                    "title": "GenTech Labs x402 Gateway",
+                    "description": "Pay-per-call API gateway with 6 services across Base Network. Token security, wallet analysis, agent discovery, market intelligence, DeFi LP analytics, NFT search.",
+                    "version": "7.0.0",
+                    "x402Version": 2,
+                    "seller": {
+                        "name": "GenTech Labs",
+                        "website": "https://gentechlabs.net"
+                    },
+                    "input": {
+                        "example": {
+                            "address": "0x1234567890abcdef1234567890abcdef12345678"
+                        }
+                    },
+                    "output": {
+                        "description": "Returns a JSON object with the requested service result or an error message.",
+                        "example": {
+                            "success": True,
+                            "data": {
+                                "risk": "low",
+                                "score": 85
+                            }
+                        }
+                    }
+                },
+                "schema": {
+                    "type": "object",
+                    "properties": {
+                        "result": {"type": "object"},
+                        "error": {"type": "string"}
+                    }
+                }
+            }
+        }
     }
 
 

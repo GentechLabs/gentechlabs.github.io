@@ -1,12 +1,12 @@
 {
-  "version": 29,
+  "version": 27,
   "summary": {
-    "total": 10,
+    "total": 9,
     "shipped": 0,
     "in_progress": 1,
-    "pending": 8,
+    "pending": 7,
     "blocked": 1,
-    "needs_jordan": 10
+    "needs_jordan": 9
   },
   "items": [
     {
@@ -33,8 +33,8 @@
       "needs_jordan": true,
       "human_gated": true,
       "gate_type": "decision",
-      "detail": "OKX AI Genesis Hackathon on X Layer. $100K prize pool. Deadline: July 27, 2026, 23:59 UTC (T-1 day!). Our x402 gateway (8090, 6 services) is already deployed — config-only for X Layer support.",
-      "note": "⚠️ Deadline TOMORROW! Jordan must register + provide X Layer wallet by July 27 23:59 UTC."
+      "detail": "OKX AI Genesis Hackathon on X Layer. $100K prize pool. Deadline: July 27, 2026, 23:59 UTC (T-2 days!). Our x402 gateway (8090, 6 services) is already deployed — config-only for X Layer support.",
+      "note": "DISCOVERED via Brain Audit Jul 25. Deadline T-2 days! Adding X Layer is a config change. Jordan needs to register and provide wallet. | ⚠️ T-2 days as of Jul 25! Jordan must register + provide X Layer wallet by July 27 23:59 UTC."
     },
     {
       "id": 73,
@@ -115,21 +115,8 @@
       "needs_jordan": true,
       "human_gated": true,
       "gate_type": "decision",
-      "detail": "Keeperhub Agents Onchain Hackathon (Aug 13 deadline, build phase starts Jul 27 — TODAY). AI agents executing real onchain transactions. Very aligned with our x402 gateway + compliance stack. $5K+ prize pool. Discovered Jul 25 Nightly Brain Audit via blockrun_search.",
+      "detail": "Keeperhub Agents Onchain Hackathon (Aug 13 deadline, build phase starts Jul 27 — T-2 days). AI agents executing real onchain transactions. Very aligned with our x402 gateway + compliance stack. $5K+ prize pool. Discovered Jul 25 Nightly Brain Audit via blockrun_search.",
       "note": "Needs Jordan: check registration at Keeperhub, decide go/no-go. Build phase starts Jul 27 — decision needed ASAP."
-    },
-    {
-      "id": 84,
-      "name": "Higgsfield CLI — Arcade Asset Pipeline",
-      "difficulty": "easy",
-      "priority": "low",
-      "status": "pending",
-      "assigned_to": "gentech",
-      "platform": "cloud",
-      "needs_jordan": true,
-      "human_gated": true,
-      "gate_type": "decision",
-      "detail": "Sign up for Higgsfield (~$15/mo), auth CLI, test Text-to-3D and Image-to-3D for arcade cabinet generation. 57 models across 3D/image/video/audio. Installed at /usr/local/bin/higgsfield."
     },
     {
       "id": 81,
@@ -154,9 +141,7 @@
     "v24 — Jul 25 Nightly Brain Audit: Added #80 Keeperhub Agents Onchain Hackathon (urgent, Jul 27 start). Moved stale nightly reports to agent-brain/. All PRs still open (10/10). Infrastructure healthy.",
     "v25 — Forge Jul 25: #74 Agent Arcade 3D Lobby shipped. #78 Kite AI flagged as unconfirmed (no source, $0K, Jordan disputed). Queue audit sent to Gentech for review.",
     "v26 — Jul 26 Nightly: Removed #74 (shipped). Recalculated summary. All gentech items Jordan-blocked — entering Brain Audit.",
-    "v27 — Jul 26 Nightly Brain Audit: Added #81 DataHub Agent Hackathon ($20.5K, MCP, Aug 10). Moved stale nightly report to agent-brain/. Updated ideas.md with new findings.",
-    "v28 — Jul 26: Added #84 Higgsfield CLI arcade pipeline (low priority).",
-    "v29 — Jul 26 Overnight: Fixed summary drift (pending 7→8, needs_jordan 9→10). Full PR portfolio audit: ALL 10 PRs across 8 repos returned 404 — systematically deleted, not merged. PR portfolio flagged for rebuild."
+    "v27 — Jul 26 Nightly Brain Audit: Added #81 DataHub Agent Hackathon ($20.5K, MCP, Aug 10). Moved stale nightly report to agent-brain/. Updated ideas.md with new findings."
   ],
   "agents": {
     "gentech": {
@@ -172,8 +157,8 @@
       "decision_maker": true
     }
   },
-  "note": "v29 — Jul 26 overnight: fixed summary drift (pending 7→8, needs_jordan 9→10). PR portfolio audit: all 10 PRs deleted (404 across 8 repos).",
-  "updated": "2026-07-26T06:05:00Z",
+  "note": "v25 — Forge audit: #74 shipped, #78 disputed. Awaiting Gentech review.",
+  "updated": "2026-07-26T04:14:35Z",
   "gate_summary": {
     "human_gated": 30,
     "decision_gated": 12,

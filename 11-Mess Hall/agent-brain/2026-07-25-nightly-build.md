@@ -1,44 +1,53 @@
-# Nightly Build — 2026-07-25 (Sat)
+# Nightly Build — 2026-07-25
 
 ## What Gentech Worked Tonight
 
 ### Queue Maintenance
-- ✅ Removed 6 shipped Forge items from items[] (per queue lifecycle rule):
-  - #59 GenTech Receipts — x402 Spending Tracker
-  - #60 Monid Social Intel — AAE Narrative Rotation
-  - #61 GenTech Starter Template — Hermes Distribution
-  - #62 Multi-Wallet Treasury Manager
-  - #65 GenTech OpenClaw Skill
-  - #66 Unity CLI Integration
-- Recalculated summary counts
-- Added consolidation note v18
-- Committed + pushed to vault
+- **Duplicate ID #70 fixed** — FrameForge reassigned to #71. Jocelyn's First Lesson kept at #70. Self-caused by manual edit collision.
+- **Summary recalculated** — shipped reset to 0 per lifecycle rule. All 30 items now have accurate status counts.
+- **Field normalization** — 1 field fix (notes→note on #25 Superpowers).
 
-### Infrastructure Verification
-- ✅ Gateway at 8088: Running v2.1.0 simulation mode, 8 endpoints, 2.1d uptime
-- ✅ gentechlabs.net: HTTP 200 via Cloudflare (last modified Jul 22)
-- ✅ Ports 8080-8090 all listening (nginx at 8089, services on 8080/2/4/6/8/90)
+### Brain Audit Mode — All Gentech Items Jordan-Blocked
 
-### Brain Audit — Hackathon Scan
-- 🆕 **Kite AI Global Hackathon 2026** (Encode Club) — $10K prize pool, AI Agentic Economy theme, Coinbase Ventures partner. Highly relevant to our x402 stack. Needs Jordan to check if still open.
-- 🔄 **Celo #69** — Deadline Aug 3 (9 days). Needs Jordan's go/no-go + Celo payTo wallet.
-- ℹ️ Agentic AI Innovation Challenge — starts Jul 25, non-cash prizes. Low priority.
+**Infrastructure verified:**
+- ✅ x402 Gateway v2 — port 8090, 6 services, 2.2 day uptime, status "operational" (backends degraded = simulation mode)
+- ✅ x402 Gateway v1 — port 8088 (same codebase)
+- ✅ gentechlabs.net — serving landing page with CLARITY Act badges (Cloudflare, last modified ~30 min ago)
+- ✅ nginx serving on 80/443/8089
+- Python processes on 8080/8082/8084/8086 (docker, other apps)
 
-## All Gentech Items Jordan-Blocked — Zero Actionable
+**Time-sensitive hackathon discovery:**
+- 🚨 **OKX AI Genesis Hackathon** — Deadline **July 27, 2026, 23:59 UTC** (T-2 days!). $100K prize pool. Build x402 ASPs on X Layer. Added as #72.
+- 🗓️ **Celo Agentic Payments Hackathon** — Already #69. Deadline Aug 3. Still needs Jordan's go/no-go.
+- 🗓️ **Arc/Encode Programmable Money Hackathon** — Already #12. Deadline Aug 9. Updated with confirmed date.
 
-Every gentech-assigned item needs Jordan:
-- **Urgent/decision-gated:** #15 Arc x402 Gateway (needs RECIPIENT_ADDRESS), #31 AgentBridge (needs deployer key), #69 Celo hackathon (go/no-go)
-- **Urgent/human-gated:** #5 XRPL PR (needs fork), #6 NEAR PR (needs fork)
-- **High/decision-gated:** #12 Arc Treasury submission strategy, #14 Lens AI contact, #70 FrameForge direction
+**Added to queue:**
+- `#72` OKX AI Genesis Hackathon — urgent, needs Jordan decision + registration + wallet
 
-## Blockers for Jordan
-1. **RECIPIENT_ADDRESS** — Blocks #15 Arc x402 Gateway deployment
-2. **Deployer key** — Blocks #31 AgentBridge Base Sepolia deployment
-3. **Celo decision** — Blocks #69 hackathon ($1K track, deadline Aug 3)
-4. **Gate_type clean-up needed** — Items #12, #14, #70 have `gate_type: "decision"` but aren't urgent-decision tagged the same way as #15/#31
+## Forge's Morning
+No new Forge items from this session. Previous session's 6 shipped items already removed from queue. From-the-forge.md still from Jul 22 — stale.
 
-## Kite AI Hackathon Discovery
-- $10K prize pool, AI Agentic Economy
-- Coinbase Ventures partner, Encode Club organization
-- Our x402 gateway is already built — Kite AI is "first AI Payments Blockchain"
-- **Recommendation:** Investigate whether deadline is still open. If so, this is a natural x402 submission target.
+## Jordan Action Items (URGENT first)
+
+### 🔴 URGENT — Deadline < 7 days
+1. **#72 OKX AI Genesis Hackathon** — Deadline **July 27** (2 days). Go/no-go decision + register on xlayer.okx.com + provide X Layer wallet. Our x402 gateway is ready for config-only X Layer addition.
+2. **#69 Celo Agentic Payments Hackathon** — Deadline **Aug 3** (9 days). Go/no-go + Celo payTo wallet address. Gateway architecture proven.
+
+### 🟡 This Week
+3. **#15 Arc x402 Gateway** — Blocked waiting on RECIPIENT_ADDRESS to deploy to port 8088
+4. **#53 GOAT AgentKit PR #7** — Code pushed, needs manual web UI PR submission
+5. **#33 CMC Labs Accelerator** — Draft ready, needs submission
+6. **#31 AgentBridge** — 37/37 tests passing, needs testnet ETH + deployer key
+7. **#5 XRPL x402 PR** — Compliance skill drafted, needs fork + PR submission
+8. **#6 NEAR x402 PR** — Integration draft ready, needs fork + PR submission
+
+### 🔵 Ongoing
+9. **#71 FrameForge** — Spec at 09-Green Room/specs/, needs design direction decision
+10. **#70 Jocelyn's First Lesson** — Template built, needs Jordan to tag when ready to start
+11. **#25 Superpowers Plugin** — Repo public, needs Jordan to manually open PR (AGENTS.md forbids agent PRs)
+12. **#12 Arc Programmable Money Hackathon** — Agentic Treasury submission, needs direction
+
+### Infrastructure Health
+- x402 Gateway: ✅ Operational (simulation mode), 6 services, 2.2d uptime
+- gentechlabs.net: ✅ Serving live
+- All 30 queue items: needs_jordan = 28. Zero autonomous items. Every lane blocked on Jordan.

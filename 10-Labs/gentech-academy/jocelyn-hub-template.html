@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jocelyn — GenTech Labs</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{
+    font-family:'Inter',system-ui,-apple-system,sans-serif;
+    background:#08080e;
+    color:#e0e0ec;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+  }
+  .page{max-width:900px;width:100%;padding:60px 24px}
+
+  /* Header */
+  .header{text-align:center;margin-bottom:48px}
+  .avatar{
+    width:120px;height:120px;border-radius:50%;
+    background:linear-gradient(135deg,#4a9eff33,#6c5ce733);
+    border:2px solid #4a9eff44;
+    margin:0 auto 16px;
+    display:flex;align-items:center;justify-content:center;
+    font-size:48px;
+  }
+  .header h1{font-size:36px;font-weight:800;color:#fff;margin-bottom:4px}
+  .header .from{color:#6a6a8a;font-size:16px}
+  .header .badge{
+    display:inline-block;padding:4px 14px;border-radius:12px;
+    background:rgba(74,158,255,0.12);border:1px solid rgba(74,158,255,0.2);
+    font-size:12px;font-weight:600;color:#4a9eff;margin-top:12px;
+  }
+
+  /* Sections */
+  .section{margin-bottom:40px}
+  .section h2{
+    font-size:20px;font-weight:700;color:#fff;margin-bottom:12px;
+    padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,0.06);
+  }
+  .section p{font-size:16px;line-height:1.8;color:#9090b0}
+
+  /* Voice Player */
+  .voice-card{
+    background:rgba(255,255,255,0.03);
+    border:1px solid rgba(255,255,255,0.08);
+    border-radius:14px;padding:24px;
+    display:flex;align-items:center;gap:16px;
+    margin:16px 0;
+  }
+  .voice-card .play-btn{
+    width:48px;height:48px;border-radius:50%;
+    background:linear-gradient(135deg,#4a9eff,#6c5ce7);
+    border:none;color:#fff;font-size:20px;cursor:pointer;
+    flex-shrink:0;transition:transform 0.2s;
+  }
+  .voice-card .play-btn:hover{transform:scale(1.05)}
+  .voice-card .info{flex:1}
+  .voice-card .info .label{font-size:12px;color:#6a6a8a;text-transform:uppercase;letter-spacing:0.5px}
+  .voice-card .info .name{font-size:18px;font-weight:700;color:#fff;margin-top:2px}
+
+  /* Lesson Grid */
+  .lessons{display:grid;grid-template-columns:1fr;gap:12px;margin-top:16px}
+  .lesson{
+    background:rgba(255,255,255,0.02);
+    border:1px solid rgba(255,255,255,0.06);
+    border-radius:10px;padding:16px 20px;
+    display:flex;align-items:center;gap:14px;
+    transition:border-color 0.2s;
+  }
+  .lesson:hover{border-color:rgba(74,158,255,0.2)}
+  .lesson .num{
+    width:32px;height:32px;border-radius:50%;
+    background:rgba(74,158,255,0.12);color:#4a9eff;
+    display:flex;align-items:center;justify-content:center;
+    font-size:14px;font-weight:700;flex-shrink:0;
+  }
+  .lesson .info{flex:1}
+  .lesson .info .title{font-size:15px;font-weight:600;color:#fff}
+  .lesson .info .desc{font-size:13px;color:#6a6a8a;margin-top:2px}
+  .lesson .status{
+    font-size:11px;padding:3px 10px;border-radius:10px;
+    font-weight:600;flex-shrink:0;
+  }
+  .status-upcoming{background:rgba(255,255,255,0.05);color:#6a6a8a;border:1px solid rgba(255,255,255,0.08)}
+  .status-coming{background:rgba(74,158,255,0.1);color:#4a9eff;border:1px solid rgba(74,158,255,0.2)}
+
+  /* Links */
+  .links{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px}
+  .links a{
+    padding:10px 20px;border-radius:8px;
+    font-size:14px;font-weight:600;text-decoration:none;
+    transition:all 0.2s;
+  }
+  .links a.primary{background:linear-gradient(135deg,#4a9eff,#6c5ce7);color:#fff}
+  .links a.secondary{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);color:#9090b0}
+  .links a:hover{transform:translateY(-1px)}
+
+  /* Tabs */
+  .tab-nav{display:flex;gap:6px;margin-bottom:16px;flex-wrap:wrap}
+  .tab-btn{
+    padding:10px 20px;border-radius:8px;border:1px solid rgba(255,255,255,0.08);
+    background:rgba(255,255,255,0.02);color:#9090b0;font-size:14px;font-weight:600;
+    cursor:pointer;transition:all 0.2s;font-family:'Inter',sans-serif;
+  }
+  .tab-btn:hover{color:#e0e0ec;background:rgba(255,255,255,0.05)}
+  .tab-btn.active{color:#fff;background:rgba(74,158,255,0.12);border-color:rgba(74,158,255,0.25)}
+  .tab-content{display:none}
+  .tab-content.active{display:block}
+  .tab-content p{font-size:15px;line-height:1.8;color:#9090b0;padding:16px 20px;background:rgba(255,255,255,0.02);border-radius:10px;border:1px solid rgba(255,255,255,0.04)}
+
+  footer{text-align:center;padding:32px 0;color:#4a4a6a;font-size:13px;border-top:1px solid rgba(255,255,255,0.04);width:100%}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="avatar">👩‍💻</div>
+    <h1>Jocelyn</h1>
+    <p class="from">Lapu-Lapu, Cebu, Philippines 🇵🇭</p>
+    <span class="badge">GenTech Academy · Student</span>
+  </div>
+
+  <!-- About -->
+  <div class="section">
+    <h2>About Me</h2>
+    <p>
+      <!-- Jocelyn will write this herself — her story, her words -->
+      I'm Jocelyn, from Lapu-Lapu City, Cebu. I'm learning about AI and technology 
+      through GenTech Academy. I want to use my voice to help others learn too.
+    </p>
+    <div class="voice-card">
+      <button class="play-btn">▶</button>
+      <div class="info">
+        <div class="label">My AI Voice</div>
+        <div class="name">Jocelyn — English</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- My Journey -->
+  <div class="section">
+    <h2>My Journey</h2>
+    <p>
+      <!-- Her learning path will go here -->
+      Step by step, I'm learning how to work with AI — from voice cloning to 
+      building web pages. Every lesson is something new.
+    </p>
+  </div>
+
+  <!-- Interests Tabs -->
+  <div class="section">
+    <h2>Things I Love</h2>
+    <div class="tabs">
+      <div class="tab-nav">
+        <button class="tab-btn active" onclick="switchTab('travel')">✈️ Travel</button>
+        <button class="tab-btn" onclick="switchTab('shopping')">🛍️ Shopping</button>
+        <button class="tab-btn" onclick="switchTab('cooking')">🍳 Cooking</button>
+      </div>
+      <div class="tab-content active" id="tab-travel">
+        <p>I love exploring new places! Lapu-Lapu is beautiful — we have Mactan beaches, amazing sunsets, and fresh seafood. One day I want to visit Japan and Korea.</p>
+      </div>
+      <div class="tab-content" id="tab-shopping">
+        <p>From Cebu's local markets to online finds — I enjoy finding good deals. My favorite is shopping for clothes and gadgets that help me learn.</p>
+      </div>
+      <div class="tab-content" id="tab-cooking">
+        <p>I love Filipino food! My specialty is sinigang and adobo. Cooking is like following a recipe — just like how you follow instructions in AI!</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lessons -->
+  <div class="section">
+    <h2>GenTech Academy Lessons</h2>
+    <div class="lessons">
+      <div class="lesson">
+        <div class="num">1</div>
+        <div class="info">
+          <div class="title">Build My First Web Page</div>
+          <div class="desc">I told an AI what I wanted, and it built this page for me</div>
+        </div>
+        <span class="status status-coming">✅ Done</span>
+      </div>
+      <div class="lesson">
+        <div class="num">2</div>
+        <div class="info">
+          <div class="title">Record My AI Voice</div>
+          <div class="desc">My voice cloned with ElevenLabs — now it speaks for me</div>
+        </div>
+        <span class="status status-coming">✅ Done</span>
+      </div>
+      <div class="lesson">
+        <div class="num">3</div>
+        <div class="info">
+          <div class="title">What is AI?</div>
+          <div class="desc">Understanding the basics — what AI can and can't do</div>
+        </div>
+        <span class="status status-upcoming">⬜ Coming</span>
+      </div>
+      <div class="lesson">
+        <div class="num">4</div>
+        <div class="info">
+          <div class="title">Voice AI & Me</div>
+          <div class="desc">How voice cloning works and how I can earn with it</div>
+        </div>
+        <span class="status status-upcoming">⬜ Coming</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Links -->
+  <div class="section">
+    <h2>Connect</h2>
+    <div class="links">
+      <a href="#" class="primary">GenTech Academy</a>
+      <a href="#" class="secondary">My Voice Sample</a>
+    </div>
+  </div>
+
+</div>
+<footer>GenTech Labs · Built with ❤️</footer>
+<script>
+function switchTab(name) {
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+  document.querySelector('[onclick="switchTab(\'' + name + '\')"]').classList.add('active');
+}
+</script>
+</body>
+</html>
