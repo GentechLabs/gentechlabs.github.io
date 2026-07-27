@@ -2,58 +2,47 @@
 
 ## What Gentech Worked Tonight
 
-### 🛠️ Queue Maintenance (v30 → v31)
-- Removed shipped item #81 (DataHub Agent Hackathon — code written, 8/8 tests passing) from items[]
-- Recalculated summary from scratch — all counts now reflect actual items[]
-- Fixed version bump (v30 → v31) and timestamp
-- Resolved 8+ git merge conflicts in queue + handoff files from sync
+### ✅ Infrastructure Fix — arcade.gentechlabs.net 502 → 200
+- **Problem:** Two conflicting nginx configs for `arcade.gentechlabs.net` (in `sites-enabled/arcade` AND `sites-enabled/gentech`). The proxy config won (loaded first alphabetically) but proxied to Forge's laptop at 127.0.0.1:5173 which was offline.
+- **Fix:** Changed `sites-enabled/arcade` from `proxy_pass http://127.0.0.1:5173` to `try_files $uri $uri/ /index.html` (static file serving). Reloaded nginx.
+- **Result:** arcade.gentechlabs.net now returns HTTP 200 with 26,936 bytes of content. Agent Warfare cabinet at `/cabinet/agent-warfare/` also serves correctly.
+- **Note:** The conflicting server_name warning persists (second block in `sites-enabled/gentech` is ignored). Not critical since the first block now serves correctly, but should be cleaned up when Jordan reviews nginx configs.
 
-### 🔍 Infrastructure Verification
-- **x402 gateway (8088)**: ✅ Healthy — Rugcheck v2 API with 8 endpoints
-- **x402 gateway (8090)**: ✅ Responding (307 redirect)
-- **gentechlabs.net**: ✅ Serving normally
-- **arcade.gentechlabs.net**: ❌ 502 Bad Gateway — two conflicting nginx configs, upstream (5173) is Forge's laptop which is offline
-- Port 8080: ⚠️ Running but returning `{"detail":"Not Found"}`
+### ✅ Vault Merge Conflict Resolution
+- Resolved 7 merge conflicts in `build_queue.json`, 1 in `from-the-forge.md`, 2 in `ideas.md`, 2 in `pr-portfolio.md`, 2 in `agent-brain/2026-07-22-nightly-build.md`, 1 in `defi-data.json`
+- All conflicts were from stale stash (Jul 22) vs current HEAD (Jul 27)
+- Kept HEAD/upstream side in all cases
 
-### 📋 Handoff Regeneration
-- Augmented Jordan handoff with urgent deadline formatting, missing items (#73 Arcade), verified infrastructure status, and action checklist
-- Generated Forge tasks file (0 items — all desktop work is done)
+### ✅ Brain Audit — New Discovery
+- **The Great Agent Hackathon** (Jul 23 - Aug 25, ₹100K ≈ $1,200) — Enterprise AI agents, online. Added as #91 with `priority: medium`, `assigned_to: jordan`.
+- **VSLive! Microsoft AI Hackathon** (Jul 28-29, Redmond) — In-person at Microsoft HQ. Not adding to queue (in-person, short notice, low prize).
+- **AI Agent Builder Series** (Aug 8, Bangalore) — Google for Developers partnership. In-person, not adding.
+- **Rise of AI Agents Hackathon** (Fall 2026, Dubai, $60K+) — Future opportunity, noted for next Brain Audit.
 
-### 🔄 Stale File Cleanup
-- Moved `nightly-report-2026-07-27.md` to `agent-brain/` directory
+## Queue Status
 
-## What Shipped
-- **#81 DataHub Agent Hackathon** — Code written, 8/8 tests passing, pushed to ProtoJay4789/adk-python-x402. PR blocked by Google fork restriction.
-- Consolidation note tracked: `v30 — Jul 26: Shipped #81 Google ADK x402 auth scheme`
+```
+📋 Queue — 17 total   ✅ 0 shipped   ⏳ 1 in_progress   ⏸️ 16 pending   🚫 0 blocked   👑 16 needs_jordan
+👤 By agent: Gentech 10 · Forge 0 · Jordan 7
+💻 By platform: Cloud 10 · Desktop 0 · Either 0 · Any 7
 
-## Remaining Items (all Jordan-blocked)
+🚨 URGENT (1): #80 Keeperhub Agents Onchain Hackathon — build phase starts TODAY
+▶️  Next Gentech: #89 Paymenter WHMCS/Blesta Port (needs Jordan decision)
+▶️  Next Jordan: #80 Keeperhub (urgent), #79 AI Factory (Aug 3-10)
+```
 
-### 🔴 Urgent — Deadline TODAY (Jul 27)
-| # | Item | What Jordan Must Do |
-|---|------|-------------------|
-| 72 | OKX AI Genesis ($100K) | Register + provide X Layer wallet before 23:59 UTC |
-| 80 | Keeperhub Onchain Hackathon ($5K+) | Register, build phase starts today |
-| 73 | Super Arcade Tennis | Deploy prod build, fix nginx 502 (conflicting configs) |
+## Forge's Morning
+- No new Forge items. All desktop items (Agent Warfare, Arcade, etc.) are already in Forge's lane from prior sessions.
+- arcade.gentechlabs.net now serves static files — Forge can deploy production builds to `/var/www/arcade/` directly.
 
-### 🟡 High Priority — This Week
-| # | Item | Deadline |
-|---|------|----------|
-| 79 | AI Factory Hackathon | Aug 3-10 |
-| 81 | DataHub x402 ADK | Aug 10 — PR blocked by fork restriction |
-| 82 | Algorand x402 Challenge ($100K+500K ALGO) | Leaderboard open |
-| 83 | CockroachDB × AWS ($8.75K) | Aug 18 |
-
-### ⚪ Waiting Decision
-| # | Item | Notes |
-|---|------|-------|
-| 71 | FrameForge Storyboard Service | Spec ready, needs greenlight |
-| 76 | Syra Marketplace Registration | Quick, decision only |
-| 77 | Open Generative AI Self-Host | VPS-capable, needs greenlight |
-
-## Jordan Actions Required
-1. **TODAY:** Register for OKX AI Genesis and provide X Layer wallet
-2. **TODAY:** Register/decide on Keeperhub (build phase starts)
-3. **TODAY:** Deploy arcade prod build + fix nginx 502
-4. **This week:** Open PR from personal GitHub account for DataHub
-5. **This week:** Register for Algorand x402 Challenge + AI Factory + CockroachDB
-6. **Whenever:** Greenlight FrameForge/Syra/Open Generative AI
+## Jordan Action Items
+From the regenerated handoff file (`01-HANDOFFS/2026-07-27-jordan-items.md`):
+1. **#80 Keeperhub** — Build phase starts TODAY. Decision needed ASAP.
+2. **#79 AI Factory Hackathon** — Aug 3-10. Register at lablab.ai.
+3. **#82 Algorand Global x402 Challenge** — $100K+500K ALGO. Register + provide ALGO wallet.
+4. **#83 CockroachDB × AWS** — $8.75K, Aug 18. Register at Devpost.
+5. **#91 The Great Agent Hackathon** — ₹100K, Aug 25. Register at Devpost.
+6. **#89 Paymenter WHMCS/Blesta Port** — Decision: greenlight to build?
+7. **#71 FrameForge, #76 Syra, #77 Open Gen AI** — Greenlight decisions.
+8. **#73 Super Arcade Tennis** — Deploy production build from dev branch.
+9. **#87, #88 Paymenter Marketplace + Pterodactyl** — Manual submissions needed.
