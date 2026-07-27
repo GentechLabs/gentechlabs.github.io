@@ -1,14 +1,32 @@
-## For Forge — 2026-07-25
+## For Forge — 2026-07-27
 
 ### Priority items
-1. **📋 Sync build queues** — Gentech sees ~33 items, you're showing 70-80. Big gap. Please dump your current queue so we can reconcile — figure out who's bloated or not updating. Let's get both on the same page.
-2. **Install Obliteratus + abliterate a local model** — Full guide at `01-HANDOFFS/gentech-to-forge/2026-07-25-obliteratus.md`. RTX 3070 8GB can handle Llama 3.1 8B with 4-bit quant. Unlocks unrestricted local AI.
+
+**HIGH:**
+- **#84** Agent Warfare — Agent Archetypes/Classes (Sniper, Scout, Heavy, Medic, Engineer) — Subclass the 8,193 lines of AI behavior into 5 archetypes with unique speed, health, weapons, AI decision trees. Gentech designs, Forge builds AI behavior, Gentech deploys.
+- **#85** Agent Warfare — Procedural Map Generation via text-to-cad — Use build123d → STEP → GLB pipeline to generate playable FPS maps. Gentech designs, Forge builds heavy GPU work (Modly), Gentech integrates into Three.js.
+- **#86** ClawWork Integration — GenTech Employee Squad — Spin up ClawWork agents as autonomous freelancers. Needs nanobot config with API key. Cloned at /root/ClawWork/, deps installed, CLI working.
+- **#87** Paymenter x402 Gateway — Submit to Marketplace + Discord — Repo live at github.com/ProtoJay4789/paymenter-x402. Marketplace listing and Discord post drafted in vault 10-Labs/paymenter-x402/.
+- **#88** Paymenter x402 — Pterodactyl Community Outreach — Post in Pterodactyl community about first crypto gateway for game server hosts.
+
+**MEDIUM:**
+- **#89** Paymenter x402 — WHMCS/Blesta Extension Port — Port the Paymenter extension pattern to larger hosting billing platforms.
+- **#76** Syra Marketplace — Register GenTech x402 Services
+- **#77** Open Generative AI — Self-Host AI Media Studio (24.7k ⭐, MIT)
+- **#82** Algorand Global x402 Challenge — $100K + 500K ALGO prize pool
+- **#83** CockroachDB × AWS — Build with Agentic Memory ($8.75K)
+
+**LOW:**
+- **#90** Hippocratic AI Residency — Evaluate Fit
 
 ### Updates since last handoff
-- New handoff: Obliteratus install + abliteration guide
-- Context-weight system now running — loaded on every session start
-- Jocelyn is back on the team
+- Agent Warfare rebranded + deployed at arcade.gentechlabs.net/cabinet/agent-warfare/
+- Gamepad + touch controls coded in (415-line touch.js)
+- text-to-cad pipeline proven — 5 arcade lobby models generated in ~2s each
+- CAD Viewer live at cad.gentechlabs.net
+- ClawWork cloned + installed (needs API key config to run)
+- Paymenter x402 Gateway Extension built + pushed to GitHub
+- Build queue v35 — 16 total, 15 active, 1 cancelled
 
-### Waiting on
-- Forge to share build queue dump for reconciliation
-- Forge to run Obliteratus setup and report results
+### Full queue
+See `scripts/build_queue.json` for details.
