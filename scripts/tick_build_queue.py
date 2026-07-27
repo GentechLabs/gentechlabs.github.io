@@ -73,6 +73,45 @@ def write_for_forge(queue: dict, shipped: list[int]):
     return "\n".join(lines)
 
 
+def renumber_items(queue):
+    """Renumber all items 1..N so highest ID always equals total count.
+    Active items first (sorted by priority), then cancelled/shipped at the end."""
+    priority_order = {'urgent': 0, 'high': 1, 'medium': 2, 'low': 3, 'none': 4}
+
+    active = [i for i in queue["items"] if i["status"] not in ("cancelled", "shipped")]
+    inactive = [i for i in queue["items"] if i["status"] in ("cancelled", "shipped")]
+
+    # Sort active by priority, then original ID
+    active.sort(key=lambda i: (priority_order.get(i.get('priority', 'medium'), 2), i.get('_orig_id', i['id'])))
+
+    # Renumber
+    for idx, item in enumerate(active, 1):
+        item['_orig_id'] = item['id']
+        item['id'] = idx
+
+    for idx, item in enumerate(inactive, len(active) + 1):
+        item['_orig_id'] = item['id']
+        item['id'] = idx
+
+    queue["items"] = active + inactive
+    return queue
+
+
+def recalc_summary(queue):
+    """Recalculate all summary fields from current items."""
+    active = [i for i in queue["items"] if i["status"] not in ("cancelled", "shipped")]
+    queue["summary"]["total"] = len(queue["items"])
+    queue["summary"]["shipped"] = sum(1 for i in queue["items"] if i["status"] == "shipped")
+    queue["summary"]["in_progress"] = sum(1 for i in queue["items"] if i["status"] == "in_progress")
+    queue["summary"]["pending"] = sum(1 for i in queue["items"] if i["status"] == "pending")
+    queue["summary"]["blocked"] = 0
+    queue["summary"]["needs_jordan"] = sum(1 for i in active if i.get("needs_jordan", False))
+    queue["gate_summary"]["human_gated"] = sum(1 for i in active if i.get("human_gated", False))
+    queue["gate_summary"]["decision_gated"] = sum(1 for i in active if i.get("gate_type") == "decision")
+    queue["gate_summary"]["autonomous"] = 0
+    return queue
+
+
 def main():
     shipped_ids = parse_completions(COMPLETIONS)
     queue = load_queue(QUEUE)
@@ -96,15 +135,9 @@ def main():
         print("No items needed updating (already shipped or not found).")
         return
 
-    # Recalculate summary
-    active = [i for i in queue["items"] if i["status"] != "cancelled"]
-    queue["summary"]["total"] = len(queue["items"])
-    queue["summary"]["shipped"] = sum(1 for i in queue["items"] if i["status"] == "shipped")
-    queue["summary"]["in_progress"] = sum(1 for i in queue["items"] if i["status"] == "in_progress")
-    queue["summary"]["pending"] = sum(1 for i in queue["items"] if i["status"] == "pending")
-    queue["summary"]["needs_jordan"] = sum(1 for i in active if i.get("needs_jordan", False))
-    queue["gate_summary"]["human_gated"] = sum(1 for i in active if i.get("human_gated", False))
-    queue["gate_summary"]["decision_gated"] = sum(1 for i in active if i.get("gate_type") == "decision")
+    # Renumber and recalc
+    queue = renumber_items(queue)
+    queue = recalc_summary(queue)
 
     queue["version"] += 1
     queue["updated"] = date.today().isoformat()
@@ -114,7 +147,7 @@ def main():
         return
 
     save_queue(QUEUE, queue)
-    print(f"\nQueue saved: v{queue['version']}, {queue['summary']['shipped']} shipped")
+    print(f"\nQueue saved: v{queue['version']}, {queue['summary']['total']} items, {queue['summary']['shipped']} shipped")
 
     # Write fresh for-the-forge.md
     forge_text = write_for_forge(queue, updated)
