@@ -21,6 +21,11 @@
 - **Cabinet 1: Super Arcade Tennis** — LIVE at arcade.gentechlabs.net 🎾
   - Isometric tennis, chain power-shots (BTC/ETH/SOL), AI opponent, scoring
   - Built with MengTo's open-source Three.js game dev skills
+- **Cabinet 2: Agent Warfare** — LIVE at arcade.gentechlabs.net/cabinet/agent-warfare/ 🎮
+  - AI-vs-AI tactical FPS, procedural everything, GenTech branded
+  - Gamepad + touch controls coded in
+  - **Agent archetypes/classes:** Sniper, Scout, Heavy, Medic, Engineer — each with unique speed, health, weapons, AI behavior
+  - **Procedural maps:** text-to-cad pipeline generates playable levels from descriptions
 - **Upcoming cabinets:** Poker, Blackjack, Connect Four, Tic-Tac-Toe (from existing spec)
 - **Deep spec:** ProtoJay4789.github.io/10-Labs/agent-arcade-build-queue.md (895 lines)
 - **Revenue:** Entry fees via x402, prize pools, ARC token, agent-vs-agent tournaments
