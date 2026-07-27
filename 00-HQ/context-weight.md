@@ -1,6 +1,6 @@
 # 🧠 Context Weight — GenTech Labs
 
-> Auto-generated: 2026-07-26 07:02 ET · Loads on session start so every group has context.
+> Auto-generated: 2026-07-27 00:26 ET · Loads on session start so every group has context.
 > Source: build_queue.json + vault state
 
 ---
@@ -12,16 +12,16 @@
 - [HIGH] Open Generative AI — Self-Host AI Media Studio — pending
 - [HIGH] AI Factory Hackathon — lablab.ai x NativelyAI (Aug 3-10) — pending
 - [URGENT] Keeperhub Agents Onchain Hackathon — x402 Onchain Agents ($5K+) — pending
-- [HIGH] Build with DataHub: The Agent Hackathon ($20.5K) — pending
+- [HIGH] Algorand Global x402 Challenge — Composite Entry ($100K + 500K ALGO) — pending
 
 ## 🏗️ Build Queue
-10 total · 8 pending · 1 blocked
+10 total · 8 pending · 0 blocked
 
 ## 🚨 Blockers
-- **Kite AI Global Hackathon 2026 — x402 Submission (0K)** — Kite AI Global Hackathon — DISPUTED: no source URL, prize listed as $0K, Jordan confirmed not active. Marked as unconfir
+None
 
 ## ✅ Recently Done
-See 00-HQ/recently-done.md
+- Build with DataHub: The Agent Hackathon ($20.5K)
 
 ## 🎯 Key Decisions
 See 11-Mess Hall/considerations.md
