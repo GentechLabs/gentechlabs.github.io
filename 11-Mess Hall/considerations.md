@@ -1,18 +1,16 @@
 ---
-date: 2026-07-26
+date: 2026-07-28
 status: active
-last-updated: 2026-07-26 20:26 ET
+last-updated: 2026-07-28 20:06 ET
 ---
 
 # 🧠 Considerations — Open Decisions
 
 > Decision points requiring Jordan's input. Updated from brain snapshot context.
 
-## 🚨 Urgent — DEADLINES TOMORROW (Jul 27)
+## 🚨 Urgent — DEADLINES APPROACHING
 
-- [ ] 🚨 **OKX AI Genesis Hackathon #72** — **DEADLINE TOMORROW Jul 27 ($100K).** Add X Layer support = config change. **Jordan must: (1) register NOW, (2) provide X Layer wallet address.** Gentech ready to deploy.
-- [ ] 🚨 **Keeperhub Agents Onchain Hackathon #80** — **Build phase starts TOMORROW Jul 27 ($5K+).** Very aligned with x402 + compliance stack. **Jordan: go/no-go TODAY.**
-- [ ] 🚨 **Arc Programmable Money Hackathon** — **Deadline TOMORROW Jul 27. Jordan: submission decision TODAY.**
+- [ ] 🚨 **Algorand Global x402 Challenge #82** — **Deadline Jul 31 (3 days).** $100K + 500K ALGO, leaderboard open. x402 gateway is multi-chain, config-only for ALGO. **Jordan: register at algorand.co/global-x402-challenge.**
 
 ## 🔴 High Priority
 
@@ -26,11 +24,13 @@ last-updated: 2026-07-26 20:26 ET
 - [ ] **Kite AI Global Hackathon #78** — ⚠️ DISPUTED — no source URL or prize. Needs Jordan to confirm removal.
 - [ ] **AI Factory Hackathon #79** — lablab.ai × NativelyAI, Aug 3-10. **Jordan: register?**
 - [ ] **GenTech Academy #81** — Initial repo live at `ProtoJay4789/gentech-academy`. Module 1 "Put Your AI on the Grid" shipped with Telegram/Discord/X templates. **Jordan: flesh out Module 2 (Paid APIs), polish Jocelyn example, promote.**
-- [ ] **Algorand Global x402 Challenge #82** — $100K + 500K ALGO, leaderboard open. x402 gateway is multi-chain, config-only for ALGO. **Jordan: register at algorand.co/global-x402-challenge.**
 - [ ] **CockroachDB × AWS — Agentic Memory #83** — $8.75K, Aug 18 deadline. Persistent memory + MCP Server. **Jordan: register?**
 
 ## ✅ Recently Resolved
 
+- **OKX AI Genesis Hackathon #72** — Deadline passed Jul 27. No registration received.
+- **Keeperhub Agents Onchain #80** — Build phase started Jul 27. Pending Jordan go/no-go.
+- **Arc Programmable Money Hackathon** — Deadline passed Jul 27. No submission.
 - **Celo Agentic Payments Hackathon #69** — Researched (Jul 24). Ready to execute on go-ahead.
 - **MengTo Fork #75** — Shipped (Jul 25).
 - **x402 Gateway v7.0.0** — Deployed and verified.
@@ -39,6 +39,6 @@ last-updated: 2026-07-26 20:26 ET
 
 ## 🔗 Related
 
-- [[brain-snapshot-2026-07-26]] — Full context snapshot
+- [[brain-snapshot-2026-07-28]] — Full context snapshot
 - [[context-weight]] — Auto-generated project overview
 - [[build_queue.json]] — v28, 11 items
