@@ -1,10 +1,10 @@
 {
-  "version": 44,
+  "version": 45,
   "summary": {
     "total": 22,
     "shipped": 0,
     "in_progress": 1,
-    "pending": 18,
+    "pending": 20,
     "blocked": 0,
     "needs_jordan": 21
   },
@@ -38,7 +38,7 @@
       "gate_type": "action",
       "detail": "Arc Programmable Money Hackathon (Encode Club). Agentic Economy track. Deadline Aug 9 (6 days). Jordan needs to: (1) get testnet USDC from faucet.circle.com, (2) provide Arc wallet address for deploy. Gentech has: x402 deploy script ready, ArcAgentWallet.sol written, foundry.toml configured with arc_testnet RPC. Then: deploy contracts, build demo, 3-min video, deck, repo.",
       "recommended_tier": "k2.7",
-      "_orig_id": 22
+      "_orig_id": 2
     },
     {
       "id": 3,
@@ -52,7 +52,7 @@
       "human_gated": true,
       "gate_type": "decision",
       "detail": "Controlled pre-vis pipeline: character sheet \u2192 locked look \u2192 camera-native storyboard frames. Proven on Vanito's KAGE film. Spec at 09-Green Room/specs/frameforge-ai-storyboard-service.md.",
-      "_orig_id": 2,
+      "_orig_id": 3,
       "recommended_tier": "k3"
     },
     {
@@ -68,7 +68,7 @@
       "human_gated": true,
       "gate_type": "human",
       "note": "Arcade.gentechlabs.net live, game works. Needs Jordan for: (1) deploy production build, (2) wire crypto payments. Build code is done on dev branch.",
-      "_orig_id": 3,
+      "_orig_id": 4,
       "recommended_tier": "flash"
     },
     {
@@ -83,7 +83,7 @@
       "detail": "Self-host Open Generative AI (24.7k stars, MIT) on VPS. 400+ models (Flux, Midjourney, Kling, Sora, Veo, Seedance, lip sync). Next.js 14 + MuAPI backend. Use for arcade game trailers, Vanito/KAGE production, social media content. Could contribute x402 payment integration.",
       "human_gated": true,
       "gate_type": "decision",
-      "_orig_id": 4,
+      "_orig_id": 5,
       "recommended_tier": "k2.7"
     },
     {
@@ -99,7 +99,7 @@
       "gate_type": "decision",
       "detail": "AI Factory Hackathon by lablab.ai / NativelyAI. Online, August 3-10, 2026. Build real AI-native applications using native.builder. Good fit for our x402 payment stack. Needs Jordan: check registration status, decide go/no-go.",
       "note": "Discovered Jul 25 Brain Audit via blockrun_search.",
-      "_orig_id": 5,
+      "_orig_id": 6,
       "recommended_tier": "flash"
     },
     {
@@ -115,7 +115,7 @@
       "gate_type": "decision",
       "detail": "Algorand Global x402 Challenge \u2014 $100K USD + 500K ALGO prize pool. Leaderboard is open. Build pay-per-request API services on Algorand mainnet. Top 5 winners ($25K-$15K) + 500K ALGO across top 20. Culminates at Devcon 8 India. Our x402 gateway already supports multi-chain \u2014 config-only for ALGO. Was previously #63, removed during consolidation. Re-added Jul 26.",
       "note": "Re-discovered via Brain Audit Jul 26. Jordan needs to register at algorand.co/global-x402-challenge and provide ALGO wallet address.",
-      "_orig_id": 6,
+      "_orig_id": 7,
       "recommended_tier": "flash"
     },
     {
@@ -130,7 +130,7 @@
       "human_gated": true,
       "gate_type": "decision",
       "detail": "Subclass the 8,193 lines of AI behavior in src/ai/ into 5 archetypes: Sniper (high ground, holds angles), Scout (fast, flanks), Heavy (pushes chokepoints), Medic (heals, support), Engineer (deploys cover/turrets). Each with unique speed, health, weapons, and AI decision trees.",
-      "_orig_id": 7,
+      "_orig_id": 8,
       "recommended_tier": "k2.7"
     },
     {
@@ -145,7 +145,7 @@
       "human_gated": true,
       "gate_type": "decision",
       "detail": "Use text-to-cad pipeline (build123d \u2192 STEP \u2192 GLB) to generate playable FPS maps from descriptions. Urban courtyard, warehouse, desert outpost, etc. Drop GLB into Three.js scene as playable level. Ship with a dozen procedurally-generated maps.",
-      "_orig_id": 8,
+      "_orig_id": 9,
       "recommended_tier": "k2.7"
     },
     {
@@ -160,7 +160,7 @@
       "human_gated": true,
       "gate_type": "decision",
       "detail": "Spin up ClawWork agents as autonomous freelancers earning on GDPVal tasks. $19K/8hrs demonstrated by ATIC+Qwen3.5-Plus. Funds VPS, arcade, x402 payouts. Needs nanobot config with API key. Cloned at /root/ClawWork/, dependencies installed, CLI working.",
-      "_orig_id": 9,
+      "_orig_id": 10,
       "recommended_tier": "k2.7"
     },
     {
@@ -175,7 +175,7 @@
       "human_gated": true,
       "gate_type": "action",
       "detail": "Submit paymenter-x402 extension to Paymenter marketplace (paymenter.org/marketplace). Post in Paymenter Discord community (1.9k members). Repo live at github.com/ProtoJay4789/paymenter-x402. Marketplace listing and Discord post drafted in vault.",
-      "_orig_id": 10,
+      "_orig_id": 11,
       "recommended_tier": "flash"
     },
     {
@@ -190,7 +190,7 @@
       "human_gated": true,
       "gate_type": "action",
       "detail": "Post in Pterodactyl community (Discord, forums) about the first crypto gateway for game server hosts. Game server hosts are the biggest Paymenter use case \u2014 their customers already hold crypto.",
-      "_orig_id": 11,
+      "_orig_id": 12,
       "recommended_tier": "flash"
     },
     {
@@ -205,7 +205,7 @@
       "human_gated": true,
       "gate_type": "action",
       "detail": "Two platforms running locally. (1) Multica at localhost:3001 \u2014 create GenTech workspace, add Hermes agent, spin up ClawWork agents as teammates on the board. Fixed verification code 402402. (2) Paperclip at ProtoJay4789/paperclip (fork, 74.8K stars, build fixed) \u2014 start dev server, build genTech-shop plugin for build queue panel + service catalog. Both greenlit by Jordan.",
-      "_orig_id": 12,
+      "_orig_id": 13,
       "recommended_tier": "flash"
     },
     {
@@ -220,7 +220,7 @@
       "human_gated": true,
       "gate_type": "decision",
       "detail": "Forked at github.com/ProtoJay4789/evm-cortex. 50 agents, 94 skills for Ethereum protocol engineering. Extend with: (1) x402 payment skills for paid audits, (2) GenTech-specific agents (ClawWork audit squad), (3) ERC-8004 agent identity patterns. Deploy ClawWork agents through it for paid Solidity auditing on freelancer platforms. Installable on Claude Code, Codex, Cursor, OpenClaw.",
-      "_orig_id": 13,
+      "_orig_id": 14,
       "recommended_tier": "k3"
     },
     {
@@ -235,7 +235,7 @@
       "human_gated": true,
       "gate_type": "action",
       "detail": "Fine-tune DeepSeek R1 Distill 32B on 26 DeFi instruction pairs via QLoRA. Single A10G on BlockRun Modal. Cost: $2.50. Time: ~1 hour. Scripts ready at 10-Labs/defi-model/. Training data at final-training-20260618.jsonl. Jordan funds BlockRun wallet, then run: python3 run-modal.py",
-      "_orig_id": 14,
+      "_orig_id": 15,
       "recommended_tier": "flash"
     },
     {
@@ -251,7 +251,7 @@
       "gate_type": "decision",
       "detail": "Port Cesium Flight Simulator (422 stars, TypeScript/React) into GenTech Arcade as a flight cabinet. Add AI agent wingmen flying alongside. Improve graphics, add combat/racing modes. Real-world terrain via Cesium Ion. Multiplayer with agents. Repo: github.com/WilliamAvHolmberg/cesium-flight-simulator",
       "recommended_tier": "k2.7",
-      "_orig_id": 15
+      "_orig_id": 16
     },
     {
       "id": 17,
@@ -265,7 +265,7 @@
       "detail": "Register Gentech's x402 gateway services on Syra (syraa.fun/marketplace). Syra supports creator skills with payToAddress. Our 6 services (token security, wallet analysis, etc.) already x402-ready. MCP server + SDK for agent access.",
       "human_gated": true,
       "gate_type": "decision",
-      "_orig_id": 16,
+      "_orig_id": 17,
       "recommended_tier": "k3"
     },
     {
@@ -281,7 +281,7 @@
       "gate_type": "decision",
       "detail": "CockroachDB \u00d7 AWS Hackathon: Build with Agentic Memory. Submissions Jun 30 - Aug 18, 2026. $8,750 total prizes ($5K/$2.5K/$1.25K). Requirements: 2+ CockroachDB tools (MCP Server, Vector Indexing, ccloud CLI) + 1+ AWS service (Bedrock, Lambda, ECS, S3, SageMaker). Build persistent memory for AI agents. Devpost: cockroachdb-ai.devpost.com.",
       "note": "Discovered Jul 26 Brain Audit via blockrun_search. 23 days until deadline. Needs Jordan: register at Devpost (cockroachdb-ai.devpost.com), decide go/no-go.",
-      "_orig_id": 17,
+      "_orig_id": 18,
       "recommended_tier": "flash"
     },
     {
@@ -296,7 +296,7 @@
       "human_gated": true,
       "gate_type": "decision",
       "detail": "Port the Paymenter x402 extension pattern to WHMCS and Blesta \u2014 the two largest hosting billing platforms. Same gateway hooks, same x402 integration. Much larger markets than Paymenter.",
-      "_orig_id": 18,
+      "_orig_id": 19,
       "recommended_tier": "k2.7"
     },
     {
@@ -312,7 +312,7 @@
       "gate_type": "decision",
       "detail": "The Great Agent Hackathon \u2014 build AI agents for the enterprise. Online, July 23 - August 25, 2026. \u20b9100,000 in prizes (~$1,200 USD). Enterprise AI agent focus. Discovered Jul 27 Nightly Brain Audit via blockrun_search.",
       "note": "Discovered Jul 27 Nightly Brain Audit. Online, still open. Needs Jordan: register at Devpost, decide go/no-go.",
-      "_orig_id": 19,
+      "_orig_id": 20,
       "recommended_tier": "k3"
     },
     {
@@ -327,7 +327,7 @@
       "human_gated": true,
       "gate_type": "decision",
       "detail": "Evaluate Hippocratic AI Deployment Engineering Residency against orchestrator-friendly filter. Paid 3+ month program building production AI agents in healthcare. Polaris 5.0 architecture uses 22-model constellation for safety. $1.64B valuation, NVIDIA-backed.",
-      "_orig_id": 20,
+      "_orig_id": 21,
       "recommended_tier": "k3"
     },
     {
@@ -343,7 +343,7 @@
       "gate_type": "decision",
       "detail": "CANCELLED \u2014 Jul 27 deadline missed. Jordan decided not to pursue. Can re-list if OKX reopens.",
       "note": "DISCOVERED via Brain Audit Jul 25. Deadline T-2 days! Adding X Layer is a config change. Jordan needs to register and provide wallet. | \u26a0\ufe0f T-2 days as of Jul 25! Jordan must register + provide X Layer wallet by July 27 23:59 UTC.",
-      "_orig_id": 21,
+      "_orig_id": 22,
       "recommended_tier": "flash"
     }
   ],
@@ -372,8 +372,8 @@
   "note": "v36 \u2014 Jul 27 Nightly: Fixed arcade.gentechlabs.net 502 (proxy\u2192static). Added #91 Great Agent Hackathon. All items Jordan-blocked.",
   "updated": "2026-07-28",
   "gate_summary": {
-    "human_gated": 19,
-    "decision_gated": 14,
+    "human_gated": 21,
+    "decision_gated": 15,
     "autonomous": 0
   },
   "model_strategy": {
