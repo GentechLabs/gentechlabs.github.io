@@ -1,61 +1,22 @@
 # 👑 Jordan Action Items — 2026-07-27
 
-> **Nightly Build Session** — Generated 04:15 UTC
-> Queue v31 — 9 total (7 Gentech, 2 Jordan), all need Jordan
+## Needs Your Action (6 items)
 
-## 🚨 Today's Deadline (Jul 27)
+- **#87 Paymenter x402 Gateway — Submit to Marketplace + Discord** — Submit paymenter-x402 extension to Paymenter marketplace (paymenter.org/marketplace). Post in Paymenter Discord community (1.9k members). Repo live at github.com/ProtoJay4789/paymenter-x402. Marketplace listing and Discord post drafted in vault.
+- **#88 Paymenter x402 — Pterodactyl Community Outreach** — Post in Pterodactyl community (Discord, forums) about the first crypto gateway for game server hosts. Game server hosts are the biggest Paymenter use case — their customers already hold crypto.
+- **#90 Hippocratic AI Residency — Evaluate Fit** — Evaluate Hippocratic AI Deployment Engineering Residency against orchestrator-friendly filter. Paid 3+ month program building production AI agents in healthcare. Polaris 5.0 architecture uses 22-model constellation for safety. $1.64B valuation, NVIDIA-backed.
+- **#79 AI Factory Hackathon — lablab.ai x NativelyAI (Aug 3-10)** — AI Factory Hackathon by lablab.ai / NativelyAI. Online, August 3-10, 2026. Build real AI-native applications using native.builder. Good fit for our x402 payment stack. Needs Jordan: check registration status, decide go/no-go.
+- **#80 Keeperhub Agents Onchain Hackathon — x402 Onchain Agents ($5K+)** — Keeperhub Agents Onchain Hackathon (Aug 13 deadline, build phase starts Jul 27 — T-2 days). AI agents executing real onchain transactions. Very aligned with our x402 gateway + compliance stack. $5K+ prize pool. Discovered Jul 25 Nightly Brain Audit via blockrun_search.
+- **#91 The Great Agent Hackathon — Enterprise AI Agents (₹100K)** — The Great Agent Hackathon — build AI agents for the enterprise. Online, July 23 - August 25, 2026. ₹100,000 in prizes (~$1,200 USD). Enterprise AI agent focus. Discovered Jul 27 Nightly Brain Audit via blockrun_search.
 
-### #72 OKX AI Genesis Hackathon — $100K Prize
-**Deadline: TODAY, Jul 27 @ 23:59 UTC**
-- Our x402 gateway (8088) is already deployed with 6 services
-- Adding X Layer = config change only
-- **You need to:**
-  1. Register at OKX AI Genesis (hackathon page)
-  2. Provide X Layer wallet address so we can configure payment settlement
-  3. Decide on submission strategy
-- ⏱️ ~15 minutes total, $100K potential
+## Needs Your Decision (9 items)
 
-### #80 Keeperhub Agents Onchain Hackathon — $5K+
-**Build phase starts TODAY, Jul 27 — deadline Aug 13**
-- AI agents executing onchain transactions
-- Very aligned with our x402 gateway + compliance stack
-- **You need to:** Decide go/no-go and register at Keeperhub
-
-### #73 Super Arcade Tennis — Cab #1
-**Status: Built, needs production deployment**
-- Code is done on dev branch
-- Game works at localhost:8080 on Forge's laptop
-- **Problem:** arcade.gentechlabs.net returns 502 Bad Gateway
-  - Nginx proxies to 127.0.0.1:5173 (Forge's Vite dev server, offline)
-  - Two conflicting nginx configs for arcade.gentechlabs.net (in sites-enabled/arcade AND sites-enabled/gentech)
-- **You need to:**
-  1. Deploy production build from dev branch
-  2. Fix nginx config conflict (disable one of the two server blocks)
-
-## Needs Action (urgency order)
-
-| # | Task | Deadline | Action Needed |
-|---|------|----------|-------------|
-| #80 | Keeperhub Agents Onchain Hackathon | Starts TODAY, Aug 13 deadline | Register, decide go/no-go |
-| #79 | AI Factory Hackathon ($8.75K) | Aug 3-10 | Register at lablab.ai, decide go/no-go |
-| #81 | DataHub Agent Hackathon ($20.5K) | Aug 10 | ⚠️ Code already written & tested, PR blocked by fork restriction — needs Jordan to open from personal account |
-| #82 | Algorand Global x402 Challenge ($100K+500K ALGO) | Leaderboard open | Register at algorand.co/global-x402-challenge, provide ALGO wallet |
-| #83 | CockroachDB × AWS — Agentic Memory ($8.75K) | Aug 18 | Register at cockroachdb-ai.devpost.com |
-
-## Needs Decision (no deadline, framework choices)
-
-| # | Task | What's Needed |
-|---|------|-------------|
-| #71 | FrameForge — AI Storyboard Service | Greenlight to build. Spec at 09-Green Room/specs/frameforge-ai-storyboard-service.md |
-| #76 | Syra Marketplace — Register x402 Services | Greenlight to list our 6 x402 services on syraa.fun/marketplace |
-| #77 | Open Generative AI — Self-Host Media Studio | Greenlight to deploy 400+ model AI media studio on VPS |
-
-## Infrastructure Status (FYI)
-
-| Service | Status | Notes |
-|---------|--------|-------|
-| x402 Gateway (8088) | ✅ Healthy | Rugcheck v2 API — 8 endpoints, full OpenAPI |
-| x402 Gateway (8090) | ✅ Responding | 307 redirect (likely pointing to 8088) |
-| gentechlabs.net | ✅ Healthy | Nginx + Let's Encrypt |
-| arcade.gentechlabs.net | ❌ 502 Bad Gateway | Conflicting nginx configs; upstream (5173) offline |
-| Port 8080 (dev server) | ⚠️ Running | Returns `{"detail":"Not Found"}` — not the right service |
+- **#89 Paymenter x402 — WHMCS/Blesta Extension Port** — Port the Paymenter x402 extension pattern to WHMCS and Blesta — the two largest hosting billing platforms. Same gateway hooks, same x402 integration. Much larger markets than Paymenter.
+- **#84 Agent Warfare — Agent Archetypes/Classes (Sniper, Scout, Heavy, Medic, Engineer)** — Subclass the 8,193 lines of AI behavior in src/ai/ into 5 archetypes: Sniper (high ground, holds angles), Scout (fast, flanks), Heavy (pushes chokepoints), Medic (heals, support), Engineer (deploys cover/turrets). Each with unique speed, health, weapons, and AI decision trees.
+- **#85 Agent Warfare — Procedural Map Generation via text-to-cad** — Use text-to-cad pipeline (build123d → STEP → GLB) to generate playable FPS maps from descriptions. Urban courtyard, warehouse, desert outpost, etc. Drop GLB into Three.js scene as playable level. Ship with a dozen procedurally-generated maps.
+- **#86 ClawWork Integration — GenTech Employee Squad** — Spin up ClawWork agents as autonomous freelancers earning on GDPVal tasks. $19K/8hrs demonstrated by ATIC+Qwen3.5-Plus. Funds VPS, arcade, x402 payouts. Needs nanobot config with API key. Cloned at /root/ClawWork/, dependencies installed, CLI working.
+- **#71 FrameForge — AI Storyboard Service (previs pipeline)** — Controlled pre-vis pipeline: character sheet → locked look → camera-native storyboard frames. Proven on Vanito's KAGE film. Spec at 09-Green Room/specs/frameforge-ai-storyboard-service.md.
+- **#76 Syra Marketplace — Register GenTech x402 Services** — Register Gentech's x402 gateway services on Syra (syraa.fun/marketplace). Syra supports creator skills with payToAddress. Our 6 services (token security, wallet analysis, etc.) already x402-ready. MCP server + SDK for agent access.
+- **#77 Open Generative AI — Self-Host AI Media Studio** — Self-host Open Generative AI (24.7k stars, MIT) on VPS. 400+ models (Flux, Midjourney, Kling, Sora, Veo, Seedance, lip sync). Next.js 14 + MuAPI backend. Use for arcade game trailers, Vanito/KAGE production, social media content. Could contribute x402 payment integration.
+- **#82 Algorand Global x402 Challenge — Composite Entry ($100K + 500K ALGO)** — Algorand Global x402 Challenge — $100K USD + 500K ALGO prize pool. Leaderboard is open. Build pay-per-request API services on Algorand mainnet. Top 5 winners ($25K-$15K) + 500K ALGO across top 20. Culminates at Devcon 8 India. Our x402 gateway already supports multi-chain — config-only for ALGO. Was previously #63, removed during consolidation. Re-added Jul 26.
+- **#83 CockroachDB × AWS — Build with Agentic Memory ($8.75K)** — CockroachDB × AWS Hackathon: Build with Agentic Memory. Submissions Jun 30 - Aug 18, 2026. $8,750 total prizes ($5K/$2.5K/$1.25K). Requirements: 2+ CockroachDB tools (MCP Server, Vector Indexing, ccloud CLI) + 1+ AWS service (Bedrock, Lambda, ECS, S3, SageMaker). Build persistent memory for AI agents. Devpost: cockroachdb-ai.devpost.com.
