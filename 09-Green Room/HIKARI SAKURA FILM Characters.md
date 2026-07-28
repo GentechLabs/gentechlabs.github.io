@@ -20,7 +20,10 @@
 
 ## Sakura no Chikai Scene (Keyframe)
 **Scene:** HIKARI at 21 in her childhood room, sitting on wooden floor, acoustic guitar in her lap, facing a rainy window. Cherry blossom tree outside. Father/child silhouette in doorway memory. "桜" shirt, dark jeans, sneakers.
-**Final edit:** https://vanito.gentechlabs.net/characters/hikari-sakura-scene.png
+**Final edit:** https://vanito.gentechlabs.net/characters/sakura-final.png
+**Hair edit (v1):** https://vanito.gentechlabs.net/characters/sakura-hikari-hair.png
+**Full scene (v2):** https://vanito.gentechlabs.net/characters/hikari-sakura-v2.png
+**Full scene (v3):** https://vanito.gentechlabs.net/characters/hikari-sakura-v3.png
 
 ## Style Guide
 All character sheets use the same gothic/visual-kei aesthetic:
