@@ -1,7 +1,7 @@
 ---
-date: 2026-07-28
+date: 2026-07-29
 status: active
-last-updated: 2026-07-28 20:06 ET
+last-updated: 2026-07-29 00:08 ET
 ---
 
 # 🧠 Considerations — Open Decisions
@@ -10,7 +10,8 @@ last-updated: 2026-07-28 20:06 ET
 
 ## 🚨 Urgent — DEADLINES APPROACHING
 
-- [ ] 🚨 **Algorand Global x402 Challenge #82** — **Deadline Jul 31 (3 days).** $100K + 500K ALGO, leaderboard open. x402 gateway is multi-chain, config-only for ALGO. **Jordan: register at algorand.co/global-x402-challenge.**
+- [ ] 🚨 **Web tools down** — Firecrawl (via Nous Portal) has no paid credits. Can't open URLs, Instagram/X posts, or web pages. **Jordan: approve free self-hosted option or add Nous credits?** Vanito waiting on this.
+- [ ] 🚨 **Algorand Global x402 Challenge #82** — **Deadline Jul 31 (2 days).** $100K + 500K ALGO, leaderboard open. x402 gateway is multi-chain, config-only for ALGO. **Jordan: register at algorand.co/global-x402-challenge.**
 
 ## 🔴 High Priority
 
