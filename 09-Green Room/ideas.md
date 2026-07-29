@@ -59,6 +59,14 @@
 - Then: get API keys, test earn → store → spend loop
 - [x] Add to build queue as #59
 
+## Hermes Mobile — Lightweight Agent for Phones
+**Source:** Jordan brainstorm (Jul 28) | **Status:** Concept
+- Phone as control plane, cloud as compute
+- For people without VPS/desktop — prompt your agent from anywhere
+- Pay-per-use via x402 microtransactions, no monthly sub
+- Write guides for: desktop, VPS, mobile
+- **Needs you:** Brainstorm cost model + MVP scope
+
 ## EvoMap Integration
 **Source:** YouTube (Jun 18) | **Status:** Research done, ready to register
 - Publish agent patterns as "Capsules" → earn credits → revenue
