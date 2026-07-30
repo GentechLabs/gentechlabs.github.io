@@ -1,6 +1,6 @@
 # 🧠 Context Weight — GenTech Labs
 
-> Auto-generated: 2026-07-29 00:08 ET · Loads on session start so every group has context.
+> Auto-generated: 2026-07-30 00:06 ET · Loads on session start so every group has context.
 > Source: build_queue.json + vault state
 
 ---
@@ -18,7 +18,7 @@
 - [HIGH] ClawWork Integration — GenTech Employee Squad — pending
 
 ## 🏗️ Build Queue
-25 total · 20 pending · 0 blocked
+28 total · 24 pending · 0 blocked
 
 ## 🚨 Blockers
 None
@@ -37,7 +37,7 @@ See 11-Mess Hall/considerations.md
 - **Forge** — Desktop agent · Handles local builds
 
 ## 🔗 Quick Links
-- Build queue: `scripts/build_queue.json` (25 items)
+- Build queue: `scripts/build_queue.json` (28 items)
 - Jocelyn's hub: gentechlabs.net/jocelyn.html
 - Investor deck: gentechlabs.net/grant.html
 - Demo video: gentechlabs.net/agentic-treasury-demo.mp4
