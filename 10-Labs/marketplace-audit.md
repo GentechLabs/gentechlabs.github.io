@@ -1,6 +1,6 @@
 # GenTech Labs — Marketplace Audit
 
-**Date:** 2026-07-22
+**Date:** 2026-07-29
 **Purpose:** Track every marketplace we're listed on, what's live, what needs updating.
 
 ---
