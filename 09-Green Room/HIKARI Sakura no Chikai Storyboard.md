@@ -4,7 +4,7 @@
 **Duration:** 4:29 (269s)
 **Style:** Dark gothic/visual-kei painterly rendering
 **Character:** HIKARI (age 21) in her childhood room
-**Version:** V14 FINAL (updated 2026-07-31, overnight)
+**Version:** V14 FINAL 2 (updated 2026-07-31)
 
 ---
 
@@ -18,7 +18,7 @@
 | 2 | Outside House | 0:05-0:10 | `sakura-outside-v2.mp4` | Rain, cherry blossom tree, warm window light |
 | 3 | **Strumming v3 — Muffin LEFT** | 0:10-0:12 | `sakura-strum-v3-2s.mp4` | HIKARI strums, Muffin on LEFT watches |
 | 4 | T1: Finger Hovering | 0:12-0:16 | `sakura-hover-v2.mp4` | Extreme close-up, finger above string |
-| 5 | **Tilt-up + Muffin (TRIMMED)** | 0:16-0:19 | `sakura-tilt-up-muffin-3s.mp4` | Low angle, Muffin stares up, 3s (was 8s) |
+| 5 | **Tilt-up + Muffin (TRIMMED)** | 0:16-0:19 | `sakura-tilt-up-muffin-3s.mp4` | Muffin stares up at her, 3s (was 8s) |
 | 6 | **Guitar Close-up 1** | 0:19-0:23 | `sakura-guitar-cu1.mp4` | Hands strumming, plain guitar |
 | 7 | **Guitar Close-up 2** | 0:23-0:27 | `sakura-guitar-cu2.mp4` | Traditional sleeve, strumming |
 | 8 | **Guitar Close-up 3** | 0:27-0:31 | `sakura-guitar-cu3.mp4` | Sakura-decorated guitar, strumming |
@@ -31,7 +31,7 @@
 | # | Scene | Time | Clip | What's Happening |
 |---|-------|------|------|------------------|
 | 12 | Doorway Glow | 0:41-0:45 | `fixed-sakura-clip6-doorway.mp4` | Golden light growing |
-| 13 | **T2 — ORIGINAL Silhouettes** | 0:45-0:49 | `sakura-t2-v4.mp4` | Papa + young HIKARI walk INTO doorway (ORIGINAL) |
+| 13 | **T2 — ORIGINAL v1 SILHOUETTES** | 0:45-0:49 | `sakura-t2-walking.mp4` | Papa in 麺田中 apron + pigtail HIKARI walk into golden doorway (RAMEN SHOP, v1) |
 | 14 | Scene 2: Chorus | 0:49-0:57 | `sakura-scene2-v4.mp4` | Memory arrives |
 | 15 | T3: Petal on Photo | 0:57-1:01 | `sakura-t3-v3.mp4` | Petal lands on framed photo |
 | 16 | T4: Determination | 1:01-1:05 | `sakura-t4-v3.mp4` | Hand grips fretboard |
@@ -43,7 +43,7 @@
 | # | Scene | Time | Clip | What's Happening |
 |---|-------|------|------|------------------|
 | 19 | T5: Memory Trigger | 1:19-1:23 | `sakura-t5-v7.mp4` | Light swells |
-| 20 | **Flashback — ORIGINAL Dancing** | 1:23-1:33 | `sakura-flashback-v3.mp4` | Papa spins young HIKARI (ORIGINAL 10s) |
+| 20 | **Flashback — ORIGINAL Dancing** | 1:23-1:33 | `sakura-flashback-v3.mp4` | OLD Papa (salt-and-pepper) spins young HIKARI (ORIGINAL v1) |
 | 21 | T6: Return | 1:33-1:37 | `sakura-t6-v3.mp4` | Petal clears, back in room |
 
 ### Bridge → Final Build (1:37-2:09)
@@ -82,8 +82,8 @@
 | Guitar CU 1/2/3 | `sakura-guitar-cu1/2/3.png` |
 | Evolved Guitar | `sakura-evolved-guitar.png` |
 | Petting | `sakura-muffin-petting-v3.png` |
-| T2 (ORIGINAL) | `sakura-t2-v4.png` |
-| Flashback (ORIGINAL) | `sakura-flashback-v3.png` |
+| T2 (ORIGINAL v1) | `sakura-t2-walking.mp4` (ramen shop, Papa apron + pigtail girl) |
+| Flashback (ORIGINAL v1) | `sakura-flashback-v3.mp4` (OLD Papa spinning) |
 | Ending | `sakura-ending-v3.png` |
 
 ## Character Sheets
@@ -91,7 +91,7 @@
 | Character | Sheet |
 |-----------|-------|
 | HIKARI (Adult) | https://vanito.gentechlabs.net/characters/hikari-adult-sheet.jpg |
-| Papa Tanaka V3 | https://vanito.gentechlabs.net/characters/papa-tanaka-v3.png |
+| Papa Tanaka V3 (OLDER) | https://vanito.gentechlabs.net/characters/papa-tanaka-v3.png |
 | Young HIKARI V3 | https://vanito.gentechlabs.net/characters/young-hikari-v3.png |
 | Muffin | https://vanito.gentechlabs.net/characters/muffin-character-sheet.png |
 
@@ -100,8 +100,8 @@
 - Muffin: tortoiseshell-and-white, white bib, white paws, pale green-yellow eyes, orange nose stripe
 - Framed photo: Papa holding baby HIKARI (black pigtails)
 - Guitar evolution: Phase 1 plain → Phase 2 petals → Phase 3 full bloom (evolved guitar in film)
-- Silhouettes: ORIGINAL T2 (Papa + young HIKARI walking INTO doorway)
-- Papa dancing: ORIGINAL flashback (v3)
+- Silhouettes: ORIGINAL v1 T2 — Papa in 麺田中 apron + pigtail HIKARI in ramen shop doorway
+- Papa dancing: ORIGINAL v1 flashback — OLD Papa (salt-and-pepper) spinning young HIKARI
 
 ## Song Reference
 https://vanito.gentechlabs.net/music/vanito/hikari-sakura-no-chikai-final.mp3
