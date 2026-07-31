@@ -39,6 +39,31 @@ last-updated: 2026-07-30 20:08 ET
 - **CLARITY Act Compliance** — Badges live on all repos.
 - **Stale PRs** — All 10 PRs confirmed still open (no action needed from us).
 
+## 🆕 DeepSeek V4-Flash Official API — LIVE in public beta (Jul 31, 2026)
+
+**Source:** [DeepSeek announcement tweet](https://x.com/i/status/2083084415157022911) — 2.46M views, 16K likes. Docs: api-docs.deepseek.com
+
+### What changed
+- Official API live at api.deepseek.com, native **Responses API** support, fully adapted for **Codex**
+- Agent capabilities massively upgraded vs V4-Pro-Preview (Flash-0731 vs Pro-Preview):
+  - DeepSWE: **54.4 vs 12.8** (4.2x)
+  - Terminal Bench 2.1: **82.7 vs 72.1**
+  - Cybergym: **76.7 vs 52.7**
+  - Toolathlon-Verified: **70.3 vs 55.9**
+  - Agents' Last Exam: **25.2 vs 16.5**
+  - AutomationBench: **25.1 vs 12.8**
+  - DSBench-FullStack: **68.7 vs 41.8**
+  - DSBench-Hard: **59.6 vs 31.1**
+- DeepSeek docs now list **Hermes Agent** as an official agent integration (install → setup → select DeepSeek provider)
+
+### Why this matters to us
+- We already run on `deepseek/deepseek-v4-flash` (Nous provider) — this is a massive capability jump for the same tier we use daily
+- Our DEV tier (develop-and-verify pipeline) is DeepSeek V4 Flash — stronger agentic coding = faster build queue
+- **Decision to consider:** switch from Nous provider to direct DeepSeek API (api.deepseek.com, sk- key) for lower cost / official support? Also evaluate Z.AI / Ollama Cloud in the same pass.
+- Codex CLI integration now officially supported — our codex delegation path gets a free upgrade
+
+**Status:** ☑️ tracked — **Jordan: evaluate provider switch vs current Nous setup (open question)**
+
 ## 🔗 Related
 
 - [[brain-snapshot-2026-07-28]] — Full context snapshot
