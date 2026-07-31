@@ -1,7 +1,7 @@
 ---
 date: 2026-07-30
 status: active
-last-updated: 2026-07-30 20:06 ET
+last-updated: 2026-07-30 20:08 ET
 ---
 
 # 🧠 Considerations — Open Decisions
@@ -10,8 +10,8 @@ last-updated: 2026-07-30 20:06 ET
 
 ## 🚨 Urgent — DEADLINES APPROACHING
 
-- [ ] 🚨 **Web tools down** — Firecrawl (via Nous Portal) has no paid credits. Can't open URLs, Instagram/X posts, or web pages. **Jordan: approve free self-hosted option or add Nous credits?** Vanito waiting on this.
-- [ ] 🚨 **Algorand Global x402 Challenge #82** — **Deadline Jul 31 (1 day).** $100K + 500K ALGO, leaderboard open. x402 gateway is multi-chain, config-only for ALGO. **Jordan: register at algorand.co/global-x402-challenge.**
+- [ ] 🚨 **Algorand Global x402 Challenge #82** — **Deadline Jul 31 (TOMORROW).** $100K + 500K ALGO, leaderboard open. x402 gateway is multi-chain, config-only for ALGO. **Jordan: register at algorand.co/global-x402-challenge.**
+- [ ] 🚨 **Arc Programmable Money Hackathon** — **Deadline Aug 9 (10 days, urgent).** Deploy x402 + Agent Wallet on Arc L1 (Encode Club, Agentic Economy track). **Jordan: (1) get testnet USDC from faucet.circle.com, (2) deploy x402.** *Queue shows PENDING — not passed.*
 
 ## 🔴 High Priority
 
@@ -33,7 +33,6 @@ last-updated: 2026-07-30 20:06 ET
 - **Web tools down** — RESOLVED. Agent Reach is the default web backend. Firecrawl no longer needed.
 - **OKX AI Genesis Hackathon #72** — Deadline passed Jul 27. No registration received.
 - **Keeperhub Agents Onchain #80** — Build phase started Jul 27. Pending Jordan go/no-go.
-- **Arc Programmable Money Hackathon** — Deadline passed Jul 27. No submission.
 - **Celo Agentic Payments Hackathon #69** — Researched (Jul 24). Ready to execute on go-ahead.
 - **MengTo Fork #75** — Shipped (Jul 25).
 - **x402 Gateway v7.0.0** — Deployed and verified.
@@ -44,4 +43,4 @@ last-updated: 2026-07-30 20:06 ET
 
 - [[brain-snapshot-2026-07-28]] — Full context snapshot
 - [[context-weight]] — Auto-generated project overview
-- [[build_queue.json]] — v28, 11 items
+- [[build_queue.json]] — v52, 30 items
