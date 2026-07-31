@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HIKARI — Sakura no Chikai | V14 Storyboard</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Noto+Serif+JP:wght@400;700&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #0A0A0A; color: #E0D5C0; font-family: 'Cinzel', serif; min-height: 100vh; }
+  .header { text-align: center; padding: 60px 20px 40px; background: linear-gradient(180deg, #1A0A0A 0%, #0A0A0A 100%); border-bottom: 1px solid rgba(204, 0, 0, 0.3); }
+  .header h1 { font-size: 3.5em; color: #CC0000; letter-spacing: 8px; text-transform: uppercase; text-shadow: 0 0 40px rgba(204, 0, 0, 0.3); }
+  .header .jp { font-family: 'Noto Serif JP', serif; font-size: 1.5em; color: #FF8844; margin-top: 10px; }
+  .header .sub { font-size: 1em; color: #888; margin-top: 8px; letter-spacing: 4px; }
+  .header .meta { font-size: 0.8em; color: #666; margin-top: 15px; letter-spacing: 2px; }
+  .nav { display: flex; justify-content: center; gap: 10px; padding: 20px; flex-wrap: wrap; background: #0D0D0D; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid rgba(204, 0, 0, 0.2); }
+  .nav a { color: #888; text-decoration: none; font-size: 0.75em; letter-spacing: 2px; padding: 8px 16px; border: 1px solid #222; transition: all 0.3s; }
+  .nav a:hover { color: #CC0000; border-color: #CC0000; }
+  .scene { max-width: 1200px; margin: 60px auto; padding: 0 20px; }
+  .scene-title { text-align: center; margin-bottom: 30px; }
+  .scene-title h2 { font-size: 1.8em; color: #CC0000; letter-spacing: 4px; }
+  .scene-title .time { color: #FF8844; font-size: 0.9em; letter-spacing: 2px; margin-top: 5px; }
+  .scene-title .desc { color: #888; font-size: 0.8em; margin-top: 10px; letter-spacing: 1px; max-width: 600px; margin-left: auto; margin-right: auto; line-height: 1.6; }
+  .frame-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+  .frame-grid.single { grid-template-columns: minmax(300px, 600px); justify-content: center; }
+  .frame-card { background: #111; border: 1px solid #222; overflow: hidden; transition: all 0.3s; }
+  .frame-card:hover { border-color: #CC0000; transform: translateY(-4px); }
+  .frame-card img { width: 100%; height: 300px; object-fit: cover; display: block; cursor: pointer; }
+  .frame-card .label { padding: 12px 16px; font-size: 0.7em; color: #888; letter-spacing: 2px; text-transform: uppercase; background: #0D0D0D; border-top: 1px solid #222; }
+  .frame-card .label strong { color: #E0D5C0; }
+  .frame-card .label .time-tag { color: #FF8844; margin-left: 10px; }
+  .frame-card .label .vote { color: #FFAA44; margin-left: 10px; cursor: pointer; }
+  .frame-card .label .vote:hover { color: #CC0000; }
+  .frame-card.flagged { border-color: #CC0000; }
+  .frame-card.fixed { border-color: #44CC44; }
+  .frame-card.needs-review { border-color: #FFAA44; }
+  .section-divider { text-align: center; padding: 20px; color: #333; font-size: 0.8em; letter-spacing: 4px; }
+  .section-divider span { display: inline-block; padding: 0 20px; background: #0A0A0A; }
+  .lightbox { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.95); z-index: 1000; justify-content: center; align-items: center; cursor: pointer; }
+  .lightbox.active { display: flex; }
+  .lightbox img { max-width: 95vw; max-height: 95vh; object-fit: contain; }
+  .lightbox .lb-time { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); color: #888; font-size: 0.8em; letter-spacing: 2px; background: rgba(0,0,0,0.7); padding: 8px 20px; border: 1px solid #333; }
+  footer { text-align: center; padding: 60px 20px; color: #333; font-size: 0.7em; letter-spacing: 2px; border-top: 1px solid #111; }
+  @media (max-width: 768px) { .header h1 { font-size: 2em; } .frame-grid { grid-template-columns: 1fr; } .frame-card img { height: 200px; } }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>HIKARI</h1>
+  <div class="jp">桜の約束</div>
+  <div class="sub">SAKURA NO CHIKAI</div>
+  <div class="meta">V14 STORYBOARD · 28 SCENES · 4:29 · FULL SONG</div>
+</div>
+
+<div class="nav">
+  <a href="#opening">Opening</a>
+  <a href="#outside">Outside</a>
+  <a href="#strum">Strum</a>
+  <a href="#hover">Hover</a>
+  <a href="#tilt">Tilt+Muffin</a>
+  <a href="#pet">Pet</a>
+  <a href="#v1">V1</a>
+  <a href="#doorway">Doorway</a>
+  <a href="#t2">T2</a>
+  <a href="#chorus">Chorus</a>
+  <a href="#transitions">Trans</a>
+  <a href="#v2">V2</a>
+  <a href="#c2">C2</a>
+  <a href="#flashback">Flashback</a>
+  <a href="#bridge">Bridge</a>
+  <a href="#build">Build</a>
+  <a href="#outro">Outro</a>
+  <a href="#closing">Closing</a>
+</div>
+
+<!-- 1: OPENING TITLE with MUFFIN -->
+<div class="scene" id="opening">
+  <div class="scene-title">
+    <h2>1 · OPENING TITLE</h2>
+    <div class="time">0:00 — 0:05 · TITLE CARD WITH MUFFIN</div>
+  </div>
+  <div class="frame-grid single">
+    <div class="frame-card needs-review">
+      <img src="https://vanito.gentechlabs.net/videos/sakura-v14-opening-extract.mp4" alt="Opening with Muffin" onclick="openLightbox(this.src)" style="height: auto; max-height: 500px; object-fit: contain;">
+      <div class="label"><strong>🔥 NEW — TITLE WITH MUFFIN</strong> <span class="time-tag">0:00-0:05</span></div>
+      <div class="label">Title card "桜の約束" with Muffin in corner watching · 5s</div>
+    </div>
+  </div>
+</div>
+
+<div class="section-divider"><span>✦</span></div>
+
+<!-- 2: OUTSIDE HOUSE -->
+<div class="scene" id="outside">
+  <div class="scene-title">
+    <h2>2 · OUTSIDE THE HOUSE</h2>
+    <div class="time">0:05 — 0:10 · ESTABLISHING SHOT</div>
+  </div>
+  <div class="frame-grid single">
+    <div class="frame-card">
+      <img src="https://vanito.gentechlabs.net/characters/sakura-outside-v2.png" alt="Outside house" onclick="openLightbox(this.src)">
+      <div class="label"><strong>OUTSIDE HOUSE</strong> <span class="time-tag">0:05-0:10</span></div>
+      <div class="label">Extreme wide · Rain falling, cherry blossom tree, warm window light · 5s</div>
+    </div>
+  </div>
+</div>
+
+<div class="section-divider"><span>✦</span></div>
+
+<!-- 3: STRUMMING WITH MUFFIN WATCHING -->
+<div class="scene" id="strum">
+  <div class="scene-title">
+    <h2>3 · HIKARI STRUMMING</h2>
+    <div class="time">0:10 — 0:12 · WITH MUFFIN WATCHING</div>
+  </div>
+  <div class="frame-grid single">
+    <div class="frame-card needs-review">
+      <img src="https://vanito.gentechlabs.net/characters/sakura-strum-muffin.png" alt="Strumming with Muffin" onclick="openLightbox(this.src)">
+      <div class="label"><strong>🔥 STRUMMING + MUFFIN WATCHING</strong> <span class="time-tag">0:10-0:12</span></div>
+      <div class="label">HIKARI strums guitar, Muffin on LEFT watching · Face visible · 2s</div>
+      <div class="label"><span class="vote">⚠️ NEEDS REVIEW — currently 2s, might need animation</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="section-divider"><span>✦</span></div>
+
+<!-- 4: FINGER HOVERING -->
+<div class="scene" id="hover">
+  <div class="scene-title">
+    <h2>4 · FINGER HOVERING</h2>
+    <div class="time">0:12 — 0:16 · THE MOMENT BEFORE SOUND</div>
+  </div>
+  <div class="frame-grid single">
+    <div class="frame-card">
+      <img src="https://vanito.gentechlabs.net/characters/sakura-hover-v2.png" alt="Finger hovering" onclick="openLightbox(this.src)">
+      <div class="label"><strong>T1 — HOVER</strong> <span class="time-tag">0:12-0:16</span></div>
+      <div class="label">Extreme close-up · Finger hovering above guitar string · 4s</div>
+    </div>
+  </div>
+</div>
+
+<div class="section-divider"><span>✦</span></div>
+
+<!-- 5: TILT-UP WITH MUFFIN -->
+<div class="scene" id="tilt">
+  <div class="scene-title">
+    <h2>5 · TILT-UP WITH MUFFIN</h2>
+    <div class="time">0:16 — 0:24 · LOW ANGLE, MUFFIN POPS UP</div>
+  </div>
+  <div class="frame-grid single">
+    <div class="frame-card">
+      <img src="https://vanito.gentechlabs.net/characters/sakura-tilt-up-muffin.png" alt="Tilt-up Muffin" onclick="openLightbox(this.src)">
+      <div class="label"><strong>TILT-UP + MUFFIN</strong> <span class="time-tag">0:16-0:24</span></div>
+      <div class="label">Low angle · HIKARI strumming, Muffin pops head up on right · 8s</div>
+    </div>
+  </div>
+</div>
+
+<div class="section-divider"><span>✦</span></div>
+
+<!-- 6: MUFFIN PETTING -->
+<div class="scene" id="pet">
+  <div class="scene-title">
+    <h2>6 · MUFFIN PETTING</h2>
+    <div class="time">0:24 — 0:28 · INTERACTIVE MOMENT</div>
+  </div>
+  <div class="frame-grid single">
+    <div class="frame-card needs-review">
+      <img src="https://vanito.gentechlabs.net/characters/sakura-muffin-petting-v3.png" alt="Muffin petting" onclick="openLightbox(this.src)">
+      <div class="label"><strong>🔥 MUFFIN PETTING</strong> <span class="time-tag">0:24-0:28</span></div>
+      <div class="label">HIKARI pets Muffin, Muffin leans into her arm · 4s</div>
+    </div>
+  </div>
+</div>
+
+<div class="section-divider"><span>✦</span></div>
+
+<!-- 7: V1 FIRST NOTES -->
+<div class="scene" id="v1">
+  <div class="scene-title">
+    <h2>7 · V1 — FIRST NOTES</h2>
+    <div class="time">0:28 — 0:34 · SHE BEGINS TO SING</div>
+  </div>
+  <div class="frame-grid single">
+    <div class="frame-card needs-review">
+      <img src="https://vanito.gentechlabs.net/characters/sakura-v1-v2.png" alt="V1 First Notes" onclick="openLightbox(this.src)">
+      <div class="label"><strong>V1 — FIRST NOTES</strong> <span class="time-tag">0:28-0:34</span></div>
+      <div class="label">Medium 3/4 · HIKARI singing softly · <span style="color:#CC0000;">⚠️ 29-31s may look static — needs stronger animation</span> · 6s</div>
+    </div>
+  </div>
+</div>
+
+<div class="section-divider"><span>✦</span></div>
+
+<!-- 8: DOORWAY GLOW -->
+<div class="scene" id="doorway">
+  <div class="scene-title">
+    <h2>8 · DOORWAY GLOW</h2>
+    <div class="time">0:34 — 0:38 · GOLDEN LIGHT GROWING</div>
+  </div>
+  <div class="frame-grid single">
+    <div class="frame-card">
+      <img src="https://vanito.gentechlabs.net/characters/sakura-clip6-doorway.png" alt="Doorway glow" onclick="openLightbox(this.src)">
+      <div class="label"><strong>DOORWAY GLOW</strong> <span class="time-tag">0:34-0:38</span></div>
+      <div class="label">Golden light intensifying · Light spilling across floor · 4s</div>
+    </div>
+  </div>
+</div>
+
+<div class="section-divider"><span>✦</span></div>
+
+<!-- 9: T2 SILHOUETTES -->
+<div class="scene" id="t2">
+  <div class="scene-title">
+    <h2>9 · T2 — SILHOUETTES WALKING</h2>
+    <div class="time">0:38 — 0:42 · PAPA + HIKARI TO THE DOOR</div>
+  </div>
+  <div class="frame-grid single">
+    <div class="frame-card fixed">
+      <img src="https://vanito.gentechlabs.net/characters/sakura-t2-v4.png" alt="T2 silhouettes" onclick="openLightbox(this.src)">
+      <div class="label"><strong>🔥 T2 — FIXED</strong> <span class="time-tag">0:38-0:42</span></div>
+      <div class="label">Papa + young HIKARI silhouettes walking toward doorway · <span style="color:#44CC44;">✅ Restored to full 4s</span> · 4s</div>
+    </div>
+  </div>
+</div>
+
+<div class="section-divider"><span>✦</span></div>
+
+<!-- 10: CHORUS -->
+<div class="scene" id="chorus">
+  <div class="scene-title">
+    <h2>10 · SCENE 2 — CHORUS</h2>
+    <div class="time">0:42 — 0:50 · MEMORY ARRIVES</div>
+  </div>
+  <div class="frame-grid single">
+    <div class="frame-card">
+      <img src="https://vanito.gentechlabs.net/characters/sakura-scene2-v4.png" alt="Chorus" onclick="openLightbox(this.src)">
+      <div class="label"><strong>CHORUS</strong> <span class="time-tag">0:42-0:50</span></div>
+      <div class="label">HIKARI plays, silhouettes in golden doorway · 8s</div>
+    </div>
+  </div>
+</div>
+
+<div class="section-divider"><span>♢</span></div>
+
+<!-- 11-14: TRANSITIONS + V2 + C2 -->
+<div class="scene" id="transitions">
+  <div class="scene-title">
+    <h2>11-14 · TRANSITIONS + VERSE 2</h2>
+    <div class="time">0:50 — 1:15 · PETAL · GRIP · STRENGTH</div>
+  </div>
+  <div class="frame-grid">
+    <div class="frame-card">
+      <img src="https://vanito.gentechlabs.net/characters/sakura-t3-v3.png" alt="T3 Petal" onclick="openLightbox(this.src)">
+      <div class="label"><strong>T3 — PETAL ON PHOTO</strong> <span class="time-tag">0:50-0:54</span> 4s</div>
+    </div>
+    <div class="frame-card">
+      <img src="https://vanito.gentechlabs.net/characters/sakura-t4-v3.png" alt="T4 Grip" onclick="openLightbox(this.src)">
+      <div class="label"><strong>T4 — HAND GRIP</strong> <span class="time-tag">0:54-0:58</span> 4s</div>
+    </div>
+    <div class="frame-card">
+      <img src="https://vanito.gentechlabs.net/characters/sakura-v2-v3.png" alt="V2" onclick="openLightbox(this.src)">
+      <div class="label"><strong>V2 — FINDING STRENGTH</strong> <span class="time-tag">0:58-1:04</span> 6s</div>
+    </div>
+    <div class="frame-card">
+      <img src="https://vanito.gentechlabs.net/characters/sakura-c2-v4.png" alt="C2" onclick="openLightbox(this.src)">
+      <div class="label"><strong>C2 — POWER PEAKING</strong> <span class="time-tag">1:04-1:12</span> 8s</div>
+    </div>
+  </div>
+</div>
+
+<div class="section-divider"><span>♢</span></div>
+
+<!-- 15: T5 MEMORY TRIGGER -->
+<div class="scene">
+  <div class="scene-title">
+    <h2>15 · T5 — MEMORY TRIGGER</h2>
+    <div class="time">1:12 — 1:16 · LIGHT SWELLS</div>
+  </div>
+  <div class="frame-grid single">
+    <div class="frame-card">
+      <img src="https://vanito.gentechlabs.net/characters/sakura-t5-v7.png" alt="T5" onclick="openLightbox(this.src)">
+      <div class="label"><strong>T5 — MEMORY TRIGGER</strong> <span class="time-tag">1:12-1:16</span> 4s</div>
+    </div>
+  </div>
+</div>
+
+<div class="section-divider"><span>✦</span></div>
+
+<!-- 16: FLASHBACK -->
+<div class="scene" id="flashback">
+  <div class="scene-title">
+    <h2>16 · FLASHBACK</h2>
+    <div class="time">1:16 — 1:30 · PAPA + YOUNG HIKARI DANCING</div>
+  </div>
+  <div class="frame-grid single">
+    <div class="frame-card">
+      <img src="https://vanito.gentechlabs.net/characters/sakura-flashback-v4.png" alt="Flashback" onclick="openLightbox(this.src)">
+      <div class="label"><strong>FLASHBACK</strong> <span class="time-tag">1:16-1:30</span> 14s</div>
+      <div class="label">Papa Tanaka spinning young HIKARI in cherry blossom field · Golden hour</div>
+    </div>
+  </div>
+</div>
+
+<div class="section-divider"><span>♢</span></div>
+
+<!-- 17: T6 RETURN -->
+<div class="scene">
+  <div class="scene-title">
+    <h2>17 · T6 — RETURN</h2>
+    <div class="time">1:30 — 1:34 · BACK TO THE ROOM</div>
+  </div>
+  <div class="frame-grid single">
+    <div class="frame-card">
+      <img src="https://vanito.gentechlabs.net/characters/sakura-t6-v3.png" alt="T6" onclick="openLightbox(this.src)">
+      <div class="label"><strong>T6 — RETURN</strong> <span class="time-tag">1:30-1:34</span> 4s</div>
+    </div>
+  </div>
+</div>
+
+<div class="section-divider"><span>♢</span></div>
+
+<!-- 18-20: BRIDGE -->
+<div class="scene" id="bridge">
+  <div class="scene-title">
+    <h2>18-20 · THE BRIDGE</h2>
+    <div class="time">1:34 — 1:49 · RAW EMOTION</div>
+  </div>
+  <div class="frame-grid">
+    <div class="frame-card">
+      <img src="https://vanito.gentechlabs.net/characters/sakura-3a-v4.png" alt="3a" onclick="openLightbox(this.src)">
+      <div class="label"><strong>3a — BEFORE</strong> <span class="time-tag">1:34-1:39</span> 5s</div>
+    </div>
+    <div class="frame-card">
+      <img src="https://vanito.gentechlabs.net/characters/sakura-bridge-bangs.png" alt="Bridge" onclick="openLightbox(this.src)">
+      <div class="label"><strong>BRIDGE — EMOTION</strong> <span class="time-tag">1:39-1:44</span> 5s</div>
+    </div>
+    <div class="frame-card">
+      <img src="https://vanito.gentechlabs.net/characters/sakura-3b-v4.png" alt="3b" onclick="openLightbox(this.src)">
+      <div class="label"><strong>3b — AFTER</strong> <span class="time-tag">1:44-1:49</span> 5s</div>
+    </div>
+  </div>
+</div>
+
+<div class="section-divider"><span>✦</span></div>
+
+<!-- 21-22: BUILD + T7 -->
+<div class="scene" id="build">
+  <div class="scene-title">
+    <h2>21-22 · FINAL BUILD + HOPE</h2>
+    <div class="time">1:49 — 1:59 · THE LOUDEST PART</div>
+  </div>
+  <div class="frame-grid">
+    <div class="frame-card">
+      <img src="https://vanito.gentechlabs.net/characters/sakura-build-v3.png" alt="Build" onclick="openLightbox(this.src)">
+      <div class="label"><strong>BUILD</strong> <span class="time-tag">1:49-1:55</span> 6s</div>
+    </div>
+    <div class="frame-card">
+      <img src="https://vanito.gentechlabs.net/characters/sakura-t7-v3.png" alt="T7" onclick="openLightbox(this.src)">
+      <div class="label"><strong>T7 — SUNLIGHT</strong> <span class="time-tag">1:55-1:59</span> 4s</div>
+    </div>
+  </div>
+</div>
+
+<div class="section-divider"><span>♢</span></div>
+
+<!-- 23-28: OUTRO + CLOSING -->
+<div class="scene" id="outro">
+  <div class="scene-title">
+    <h2>23-28 · FINAL CHORUS / OUTRO</h2>
+    <div class="time">1:59 — 2:33 · PEACE</div>
+  </div>
+  <div class="frame-grid">
+    <div class="frame-card">
+      <img src="https://vanito.gentechlabs.net/characters/sakura-4a-v5.png" alt="4a" onclick="openLightbox(this.src)">
+      <div class="label"><strong>4a — BEFORE FINAL</strong> <span class="time-tag">1:59-2:04</span> 5s</div>
+    </div>
+    <div class="frame-card">
+      <img src="https://vanito.gentechlabs.net/characters/sakura-scene4-v4.png" alt="Scene4" onclick="openLightbox(this.src)">
+      <div class="label"><strong>SCENE 4 — OUTRO</strong> <span class="time-tag">2:04-2:12</span> 8s</div>
+    </div>
+    <div class="frame-card">
+      <img src="https://vanito.gentechlabs.net/characters/sakura-outro-v4.png" alt="Outro transition" onclick="openLightbox(this.src)">
+      <div class="label"><strong>OUTRO TRANSITION</strong> <span class="time-tag">2:12-2:17</span> 5s</div>
+    </div>
+    <div class="frame-card">
+      <img src="https://vanito.gentechlabs.net/characters/sakura-4b-v4.png" alt="4b" onclick="openLightbox(this.src)">
+      <div class="label"><strong>4b — EMPTY ROOM</strong> <span class="time-tag">2:17-2:22</span> 5s</div>
+    </div>
+    <div class="frame-card">
+      <img src="https://vanito.gentechlabs.net/characters/sakura-credit-v3.png" alt="Credit" onclick="openLightbox(this.src)">
+      <div class="label"><strong>END CREDIT</strong> <span class="time-tag">2:22-2:27</span> 5s</div>
+    </div>
+    <div class="frame-card">
+      <img src="https://vanito.gentechlabs.net/characters/sakura-closing-v3.png" alt="Closing" onclick="openLightbox(this.src)">
+      <div class="label"><strong>CLOSING PRODUCTION</strong> <span class="time-tag">2:27-2:33</span> 5s</div>
+    </div>
+  </div>
+  <div style="text-align:center; margin-top:20px; color:#666; font-size:0.8em;">
+    + Song outro plays until 4:29 with final frame held (135 keyframes, no freeze)
+  </div>
+</div>
+
+<div class="section-divider"><span>✦</span></div>
+
+<div class="scene" id="closing" style="text-align:center; padding:40px;">
+  <div style="color:#CC0000; font-size:1.2em; letter-spacing:4px;">LEGEND</div>
+  <div style="margin-top:20px; color:#888; font-size:0.8em; letter-spacing:2px;">
+    <span style="display:inline-block; width:12px; height:12px; background:#111; border:1px solid #FFAA44; margin-right:8px;"></span> <span style="margin-right:30px;">⚠️ Needs Review</span>
+    <span style="display:inline-block; width:12px; height:12px; background:#111; border:1px solid #44CC44; margin-right:8px;"></span> <span style="margin-right:30px;">✅ Fixed</span>
+    <span style="display:inline-block; width:12px; height:12px; background:#111; border:1px solid #CC0000; margin-right:8px;"></span> <span style="margin-right:30px;">🔄 New Change</span>
+  </div>
+  <div style="margin-top:30px; display:flex; justify-content:center; gap:20px; flex-wrap:wrap;">
+    <a href="https://vanito.gentechlabs.net/videos/sakura-final-v14.mp4" style="color:#FF8844; text-decoration:none; border:1px solid #FF8844; padding:12px 30px; letter-spacing:2px;">▶ WATCH V14</a>
+  </div>
+</div>
+
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <img id="lightbox-img" src="" alt="">
+  <div class="lb-time" id="lb-time"></div>
+</div>
+
+<footer>
+  <p>GEN TECH LABS · HIKARI · SAKURA NO CHIKAI · V14</p>
+  <p style="margin-top:5px; color:#222;">Updated 2026-07-30 · Review each scene and flag what needs fixing</p>
+</footer>
+
+<script>
+function openLightbox(src) {
+  document.getElementById('lightbox-img').src = src;
+  document.getElementById('lightbox').classList.add('active');
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('active');
+}
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeLightbox();
+});
+</script>
+</body>
+</html>
