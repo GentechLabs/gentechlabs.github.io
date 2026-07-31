@@ -1,7 +1,7 @@
 ---
 date: 2026-07-30
 status: brain-snapshot
-last-updated: 2026-07-30T20:06 ET
+last-updated: 2026-07-30 20:08 ET
 ---
 
 # 🧠 Brain Snapshot — 2026-07-30
@@ -10,38 +10,50 @@ last-updated: 2026-07-30T20:06 ET
 
 ## 📅 Date
 - Day: Thursday
-- Time: 20:06 ET
+- Time: 20:08 ET
 
 ## 🚨 Urgent Deadlines
 
 | Item | Deadline | Days Left | Status |
 |------|----------|-----------|--------|
 | Algorand Global x402 Challenge | Jul 31 | **1** | 🔴 TOMORROW |
-| HackAgentAIx 2026 | Jul 30-31 | **1** | 🔴 TOMORROW |
-| AI Factory Hackathon | Aug 3-10 | 11 | 🟡 Medium |
-| HackerRank Orchestrate | Aug 1-7 | 8 | 🟡 Medium |
-| Build with DataHub | Aug 10 | 11 | 🟡 Medium |
-| Arc Programmable Money | Aug 9 | 10 | 🟡 Medium |
-| CockroachDB × AWS | Aug 18 | 19 | 🟢 Relaxed |
-| The Great Agent Hackathon | Aug 25 | 26 | 🟢 Relaxed |
+| HackerRank Orchestrate | Aug 01 | **2** | 🟡 Medium |
+| AI Factory Hackathon (start) | Aug 03 | **4** | 🟡 Medium |
+| Arc Programmable Money | Aug 09 | **10** | 🔴 Urgent |
+| Build with DataHub | Aug 10 | **11** | 🟡 Medium |
+| AI Factory Hackathon (end) | Aug 10 | **11** | 🟡 Medium |
+| Keeperhub Agents Onchain | Aug 13 | **14** | 🟡 Medium |
+| CockroachDB × AWS | Aug 18 | **19** | 🟢 Relaxed |
+| The Great Agent Hackathon | Aug 25 | **26** | 🟢 Relaxed |
 
-## ✅ Deadlines Passed
-- OKX AI Genesis #72 — deadline passed Jul 27
-- Arc Programmable Money Hackathon — deadline passed Jul 27 (but still listed as Aug 9 in queue — contradiction)
-- Keeperhub Agents Onchain #80 — build phase started Jul 27
+## ✅ Deadlines Passed (verified)
+- OKX AI Genesis #72 — passed Jul 27. No registration received.
+- Arc Programmable Money Hackathon — **NOT passed** (see correction below). Queue shows pending, deadline Aug 9.
 
-## 🏗️ Active Builds
-- Super Arcade Tennis — dev live at arcade.gentechlabs.net
+## 🏗️ Active Builds (from build_queue.json v52)
+- Super Arcade Tennis — in_progress, dev live at arcade.gentechlabs.net
 - FrameForge — AI Storyboard Service (previs pipeline)
 - Open Generative AI — Self-Host AI Media Studio
 - Agent Warfare — Archetypes + Procedural Maps
 - ClawWork Integration — GenTech Employee Squad
 - Paymenter x402 Gateway — Marketplace + Discord
+- Algorand Global x402 Challenge — Composite entry ($100K + 500K ALGO)
+- Arc Programmable Money — x402 + Agent Wallet on Arc L1
+- Keeperhub Agents Onchain — x402 onchain agents ($5K+)
+- AI Factory Hackathon — lablab.ai × NativelyAI
 
 ## 📊 Build Queue
-- v50, 28 items total
-- 1 in_progress, 24 pending, 0 blocked
-- 27 items need Jordan
+- v52, 30 items total
+- 1 in_progress, 28 pending, 1 cancelled, 0 blocked
+- 29 items need Jordan's input
+
+## 🧠 Open Decisions (from considerations.md)
+- 🚨 **Algorand Global x402 Challenge** — Deadline Jul 31 (TOMORROW). Register at algorand.co/global-x402-challenge.
+- 🔴 **Arc Programmable Money** — Deadline Aug 9 (urgent). Jordan: get testnet USDC from faucet.circle.com, deploy x402 + Agent Wallet.
+- 🔴 **Super Arcade Tennis #73** — Deploy production build + wire crypto payments?
+- 🔴 **FrameForge #71** — Productize AI Storyboard Service?
+- 🔴 **Open Generative AI #77** — Self-host AI media studio go/no-go?
+- 🟡 **Syra Marketplace #76, AI Factory #79, GenTech Academy #81, Kimi K3 #82, CockroachDB #83** — awaiting Jordan direction.
 
 ## 🏪 Marketplace Status
 - OKX AI: Registered, needs A2A node daemon verified + resubmit
