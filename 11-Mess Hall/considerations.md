@@ -1,7 +1,7 @@
 ---
-date: 2026-07-30
+date: 2026-07-31
 status: active
-last-updated: 2026-07-30 20:08 ET
+last-updated: 2026-07-31 20:07 ET
 ---
 
 # 🧠 Considerations — Open Decisions
@@ -10,8 +10,8 @@ last-updated: 2026-07-30 20:08 ET
 
 ## 🚨 Urgent — DEADLINES APPROACHING
 
-- [ ] 🚨 **Algorand Global x402 Challenge #82** — **Deadline Jul 31 (TOMORROW).** $100K + 500K ALGO, leaderboard open. x402 gateway is multi-chain, config-only for ALGO. **Jordan: register at algorand.co/global-x402-challenge.**
-- [ ] 🚨 **Arc Programmable Money Hackathon** — **Deadline Aug 9 (10 days, urgent).** Deploy x402 + Agent Wallet on Arc L1 (Encode Club, Agentic Economy track). **Jordan: (1) get testnet USDC from faucet.circle.com, (2) deploy x402.** *Queue shows PENDING — not passed.*
+- [ ] 🚨 **Algorand Global x402 Challenge #82** — **⚠️ Deadline Jul 31 (DEADLINE TODAY).** $100K + 500K ALGO, leaderboard open. x402 gateway is multi-chain, config-only for ALGO. **Jordan: register at algorand.co/global-x402-challenge.**
+- [ ] 🚨 **Arc Programmable Money Hackathon** — **Deadline Aug 9 (9 days, urgent).** Deploy x402 + Agent Wallet on Arc L1 (Encode Club, Agentic Economy track). **Jordan: (1) get testnet USDC from faucet.circle.com, (2) deploy x402.** *Queue shows PENDING — not passed.*
 
 ## 🔴 High Priority
 

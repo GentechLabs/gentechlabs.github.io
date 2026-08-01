@@ -1,6 +1,6 @@
 # 🧠 Context Weight — GenTech Labs
 
-> Auto-generated: 2026-07-31 00:07 ET · Loads on session start so every group has context.
+> Auto-generated: 2026-08-01 00:07 ET · Loads on session start so every group has context.
 > Source: build_queue.json + vault state
 
 ---
