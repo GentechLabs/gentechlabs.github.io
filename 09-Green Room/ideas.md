@@ -5,6 +5,16 @@
 
 ---
 
+## 🏆 Model Strength Score — Train, Compare, Sell AI Models
+**Source:** Jordan brainstorm (Aug 1) — triggered by Bittensor/Covenant AI drama | **Status:** Spec complete, ready to prototype
+- Score trained models 0-850 like Agent Credit Score: Data Quality (30%), Benchmarks (25%), Trainer Reputation (20%), Age/Uptime (15%), Market Adoption (10%)
+- Design principle: score IS the governance — staked reputation, on-chain provenance, no kill switch (Bittensor lessons)
+- First listing: GenTech DeFi Model (fine-tune on Modal ~$30-60) — becomes our proof-of-concept marketplace model
+- Revenue: score API ($0.01-0.05), listing fee, 2-5% inference take rate, premium verification
+- Full spec: `09-Green Room/specs/model-strength-score.md`
+- **Needs you:** Greenlight + fund Modal GPU run for the DeFi Model prototype
+- [x] Add to build queue as #32
+
 ## 🏆 GenTech DeFi Model — Fine-Tuned Financial AI
 **Source:** Jordan brainstorm (Jun 18) | **Status:** Research complete, under $50 to prototype
 - Fine-tune DeepSeek R1 Distill 32B on our proprietary DeFi data
