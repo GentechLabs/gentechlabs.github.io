@@ -1,5 +1,5 @@
 {
-  "version": 57,
+  "version": 58,
   "summary": {
     "total": 32,
     "shipped": 1,
@@ -504,7 +504,8 @@
     "v35 — Jul 27 Session: Added #87 Paymenter Marketplace submission, #88 Pterodactyl outreach, #89 WHMCS/Blesta port, #90 Hippocratic AI Residency eval. All Jordan-blocked.",
     "v32 — Jul 27: Model strategy set. deepseek-v4-flash primary, Kimi K3 for audits/reasoning. Forge notified.",
     "v52 — Jul 30 Nightly: Added #29 Gemini XPRIZE (M) and #30 DataHub Agent Hackathon (0.5K). Both urgent deadlines.",
-    "v56 — Aug 1 overnight maintenance: recomputed summary (total 30→31, shipped 0→1 for #31 Yield.xyz MCP) and gate_summary from items[]. No open upstream PRs tracked in queue items; no blockers resolved."
+    "v56 — Aug 1 overnight maintenance: recomputed summary (total 30→31, shipped 0→1 for #31 Yield.xyz MCP) and gate_summary from items[]. No open upstream PRs tracked in queue items; no blockers resolved.",
+    "v58 — Aug 2 overnight maintenance: gate_summary.human_gated corrected 30→31 (recounted from items[]). Status counts verified accurate (32 total: 29 pending, 1 in_progress, 1 shipped, 1 cancelled). No queue items track open upstream PRs; no blocked items. GitHub search API unavailable for this token (422 on user search) — PR check done by queue inspection instead."
   ],
   "agents": {
     "gentech": {
@@ -521,9 +522,9 @@
     }
   },
   "note": "v36 — Jul 27 Nightly: Fixed arcade.gentechlabs.net 502 (proxy→static). Added #91 Great Agent Hackathon. All items Jordan-blocked.",
-  "updated": "2026-08-01",
+  "updated": "2026-08-02",
   "gate_summary": {
-    "human_gated": 30,
+    "human_gated": 31,
     "decision_gated": 22,
     "autonomous": 0
   },
