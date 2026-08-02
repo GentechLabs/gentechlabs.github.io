@@ -1,13 +1,13 @@
 {
-  "version": 56,
+  "version": 57,
   "summary": {
-    "total": 31,
+    "total": 32,
     "shipped": 1,
     "in_progress": 1,
-    "pending": 28,
+    "pending": 29,
     "blocked": 0,
     "cancelled": 1,
-    "needs_jordan": 29
+    "needs_jordan": 30
   },
   "items": [
     {
@@ -480,6 +480,20 @@
       "platform": "any",
       "detail": "Yield.xyz × Syra — x402-native yield discovery MCP (yield-mcp-server v1.0.0 at mcp.yield.xyz/mcp). 3,000+ yield opportunities across 80+ networks (lending, vaults, staking, RWAs, liquid staking). 22 tools: yields_get_all/get, balances, enter/exit/claim, TVL+APY history, risk params, KYC, builder tools. Pay per call via x402 (Coinbase CDP Facilitator), no API key. Integration: wire into GTA as live yield intelligence source; complements cufolio + yield-rainbow. Source: Syra tweet Jul 31 2026.",
       "recommended_tier": "k2.7"
+    },
+    {
+      "id": 32,
+      "name": "Model Strength Score — score trained models 0-850 for marketplace",
+      "difficulty": "medium",
+      "priority": "high",
+      "status": "pending",
+      "assigned_to": "gentech",
+      "platform": "cloud",
+      "needs_jordan": true,
+      "human_gated": true,
+      "gate_type": "greenlight",
+      "detail": "Score AI models 0-850 like Agent Credit Score: Data Quality 30%, Benchmarks 25%, Trainer Reputation 20%, Age/Uptime 15%, Market Adoption 10%. Bittensor lessons baked in: staked reputation, on-chain provenance, no kill switch. First listing = GenTech DeFi Model (Modal GPU ~$30-60). Revenue: score API $0.01-0.05, listing fee, 2-5% inference take. Spec: 09-Green Room/specs/model-strength-score.md. Needs Jordan greenlight + Modal GPU funding.",
+      "recommended_tier": "k3"
     }
   ],
   "consolidation_notes": [
