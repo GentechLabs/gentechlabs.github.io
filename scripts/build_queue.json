@@ -52,12 +52,13 @@
       "status": "pending",
       "assigned_to": "gentech",
       "platform": "cloud",
-      "needs_jordan": true,
-      "human_gated": true,
+      "needs_jordan": false,
+      "human_gated": false,
       "gate_type": "decision",
       "detail": "Controlled pre-vis pipeline: character sheet \u2192 locked look \u2192 camera-native storyboard frames. Proven on Vanito's KAGE film. Spec at 09-Green Room/specs/frameforge-ai-storyboard-service.md.",
       "_orig_id": 3,
-      "recommended_tier": "k3"
+      "recommended_tier": "k3",
+      "note": "[Jordan GO Aug 3: ship + start]"
     },
     {
       "id": 4,
@@ -83,12 +84,13 @@
       "status": "pending",
       "assigned_to": "gentech",
       "platform": "cloud",
-      "needs_jordan": true,
+      "needs_jordan": false,
       "detail": "Self-host Open Generative AI (24.7k stars, MIT) on VPS. 400+ models (Flux, Midjourney, Kling, Sora, Veo, Seedance, lip sync). Next.js 14 + MuAPI backend. Use for arcade game trailers, Vanito/KAGE production, social media content. Could contribute x402 payment integration.",
-      "human_gated": true,
+      "human_gated": false,
       "gate_type": "decision",
       "_orig_id": 5,
-      "recommended_tier": "k2.7"
+      "recommended_tier": "k2.7",
+      "note": "[Jordan GO Aug 3: ship + start]"
     },
     {
       "id": 6,
@@ -126,31 +128,33 @@
       "id": 8,
       "name": "Agent Warfare \u2014 Agent Archetypes/Classes (Sniper, Scout, Heavy, Medic, Engineer)",
       "difficulty": "hard",
-      "priority": "high",
+      "priority": "urgent",
       "status": "pending",
       "assigned_to": "gentech",
       "platform": "cloud",
-      "needs_jordan": true,
-      "human_gated": true,
+      "needs_jordan": false,
+      "human_gated": false,
       "gate_type": "decision",
       "detail": "Subclass the 8,193 lines of AI behavior in src/ai/ into 5 archetypes: Sniper (high ground, holds angles), Scout (fast, flanks), Heavy (pushes chokepoints), Medic (heals, support), Engineer (deploys cover/turrets). Each with unique speed, health, weapons, and AI decision trees.",
       "_orig_id": 8,
-      "recommended_tier": "k2.7"
+      "recommended_tier": "k2.7",
+      "note": "[Jordan TOP PRIORITY Aug 3: character design, map design, performance, sound, gameplay - must be crispy. Futuristic GenTech shooter. Custom weapons later.]"
     },
     {
       "id": 9,
       "name": "Agent Warfare \u2014 Procedural Map Generation via text-to-cad",
       "difficulty": "medium",
-      "priority": "high",
+      "priority": "urgent",
       "status": "pending",
       "assigned_to": "gentech",
       "platform": "cloud",
-      "needs_jordan": true,
-      "human_gated": true,
+      "needs_jordan": false,
+      "human_gated": false,
       "gate_type": "decision",
       "detail": "Use text-to-cad pipeline (build123d \u2192 STEP \u2192 GLB) to generate playable FPS maps from descriptions. Urban courtyard, warehouse, desert outpost, etc. Drop GLB into Three.js scene as playable level. Ship with a dozen procedurally-generated maps.",
       "_orig_id": 9,
-      "recommended_tier": "k2.7"
+      "recommended_tier": "k2.7",
+      "note": "[Jordan TOP PRIORITY Aug 3: character design, map design, performance, sound, gameplay - must be crispy. Futuristic GenTech shooter. Custom weapons later.]"
     },
     {
       "id": 10,
@@ -160,12 +164,13 @@
       "status": "pending",
       "assigned_to": "gentech",
       "platform": "cloud",
-      "needs_jordan": true,
-      "human_gated": true,
+      "needs_jordan": false,
+      "human_gated": false,
       "gate_type": "decision",
       "detail": "Spin up ClawWork agents as autonomous freelancers earning on GDPVal tasks. $19K/8hrs demonstrated by ATIC+Qwen3.5-Plus. Funds VPS, arcade, x402 payouts. Needs nanobot config with API key. Cloned at /root/ClawWork/, dependencies installed, CLI working.",
       "_orig_id": 10,
-      "recommended_tier": "k2.7"
+      "recommended_tier": "k2.7",
+      "note": "[Jordan GO Aug 3: ship + start]"
     },
     {
       "id": 11,
@@ -222,12 +227,13 @@
       "status": "pending",
       "assigned_to": "gentech",
       "platform": "cloud",
-      "needs_jordan": true,
-      "human_gated": true,
+      "needs_jordan": false,
+      "human_gated": false,
       "gate_type": "decision",
       "detail": "Forked at github.com/ProtoJay4789/evm-cortex. 50 agents, 94 skills for Ethereum protocol engineering. Extend with: (1) x402 payment skills for paid audits, (2) GenTech-specific agents (ClawWork audit squad), (3) ERC-8004 agent identity patterns. Deploy ClawWork agents through it for paid Solidity auditing on freelancer platforms. Installable on Claude Code, Codex, Cursor, OpenClaw.",
       "_orig_id": 14,
-      "recommended_tier": "k3"
+      "recommended_tier": "k3",
+      "note": "[Jordan GO Aug 3: ship + start]"
     },
     {
       "id": 15,
@@ -252,12 +258,13 @@
       "status": "pending",
       "assigned_to": "gentech",
       "platform": "cloud",
-      "needs_jordan": true,
-      "human_gated": true,
+      "needs_jordan": false,
+      "human_gated": false,
       "gate_type": "decision",
       "detail": "Port Cesium Flight Simulator (422 stars, TypeScript/React) into GenTech Arcade as a flight cabinet. Add AI agent wingmen flying alongside. Improve graphics, add combat/racing modes. Real-world terrain via Cesium Ion. Multiplayer with agents. Repo: github.com/WilliamAvHolmberg/cesium-flight-simulator\n\nGeoLibre integration: Real-world 3D building footprints, elevation data, satellite imagery, and planetary maps (Mars, Moon) via MapLibre GL JS + DuckDB-WASM. Combined with Cesium global terrain for full DogFighters map system.",
       "recommended_tier": "k2.7",
-      "_orig_id": 16
+      "_orig_id": 16,
+      "note": "[Jordan GO Aug 3: ship + start]"
     },
     {
       "id": 17,
@@ -267,12 +274,13 @@
       "status": "pending",
       "assigned_to": "gentech",
       "platform": "cloud",
-      "needs_jordan": true,
-      "human_gated": true,
+      "needs_jordan": false,
+      "human_gated": false,
       "gate_type": "decision",
       "detail": "Integrate ACE-Step UI (4.5K stars, open-source Suno alternative) into GenTech stack. (1) Arcade cabinet background music \u2014 per-cabinet tracks generated from mood prompts. (2) Demo video soundtracks \u2014 no copyright risk for hackathon submissions. (3) GenTech branding \u2014 jingle, intro/outro music. (4) Vanito's music studio \u2014 custom tracks for KAGE films, social content. Needs ACE-Step 1.5 model running (GPU). Repo cloned at /root/ace-step-ui/.",
       "recommended_tier": "k2.7",
-      "_orig_id": 17
+      "_orig_id": 17,
+      "note": "[Jordan GO Aug 3: ship + start]"
     },
     {
       "id": 18,
@@ -282,12 +290,13 @@
       "status": "pending",
       "assigned_to": "gentech",
       "platform": "cloud",
-      "needs_jordan": true,
-      "human_gated": true,
+      "needs_jordan": false,
+      "human_gated": false,
       "gate_type": "decision",
       "detail": "Integrate GeoLibre (3.2K stars, MIT, TypeScript/Tauri) into DogFighters map pipeline. Real building footprints, elevation data, satellite imagery, planetary maps. 700+ GIS tools for terrain analysis. Runs in browser via MapLibre GL JS + DuckDB-WASM. Repo: github.com/opengeos/GeoLibre",
       "recommended_tier": "k2.7",
-      "_orig_id": 18
+      "_orig_id": 18,
+      "note": "[Jordan GO Aug 3: ship + start]"
     },
     {
       "id": 19,
@@ -313,12 +322,13 @@
       "status": "pending",
       "assigned_to": "gentech",
       "platform": "cloud",
-      "needs_jordan": true,
-      "human_gated": true,
+      "needs_jordan": false,
+      "human_gated": false,
       "gate_type": "action",
       "detail": "Fork ai-job-search (28.1K stars, MIT). (1) Set up Jordan's profile \u2014 skills, experience, portfolio link. (2) Wire into job search workflow \u2014 tailored CV + cover letters via Claude Code. (3) Package as GenTech Academy module \u2014 'AI-Powered Job Search' case study. Repo: github.com/MadsLorentzen/ai-job-search\n\nTarget companies (remote): Zapier, Supabase, Temporal, Render, Linear, Cresta, Fieldguide, Chainguard, Vanta, RevenueCat. Jordan confirmed go. Micro1 called him a top prospect \u2014 AI test after GOAT meeting.",
       "recommended_tier": "k2.7",
-      "_orig_id": 20
+      "_orig_id": 20,
+      "note": "[Jordan GO Aug 3: ship + start]"
     },
     {
       "id": 21,
@@ -360,11 +370,11 @@
       "status": "pending",
       "assigned_to": "gentech",
       "platform": "cloud",
-      "needs_jordan": true,
-      "human_gated": true,
+      "needs_jordan": false,
+      "human_gated": false,
       "gate_type": "decision",
       "detail": "CockroachDB \u00d7 AWS Hackathon: Build with Agentic Memory. Submissions Jun 30 - Aug 18, 2026. $8,750 total prizes ($5K/$2.5K/$1.25K). Requirements: 2+ CockroachDB tools (MCP Server, Vector Indexing, ccloud CLI) + 1+ AWS service (Bedrock, Lambda, ECS, S3, SageMaker). Build persistent memory for AI agents. Devpost: cockroachdb-ai.devpost.com.",
-      "note": "Discovered Jul 26 Brain Audit via blockrun_search. 23 days until deadline. Needs Jordan: register at Devpost (cockroachdb-ai.devpost.com), decide go/no-go.",
+      "note": "Discovered Jul 26 Brain Audit via blockrun_search. 23 days until deadline. Needs Jordan: register at Devpost (cockroachdb-ai.devpost.com), decide go/no-go. [Jordan GO Aug 3: ship + start]",
       "_orig_id": 22,
       "recommended_tier": "flash"
     },
@@ -390,13 +400,13 @@
       "difficulty": "easy",
       "priority": "medium",
       "status": "pending",
-      "assigned_to": "jordan",
+      "assigned_to": "gentech",
       "platform": "any",
-      "needs_jordan": true,
-      "human_gated": true,
+      "needs_jordan": false,
+      "human_gated": false,
       "gate_type": "decision",
       "detail": "The Great Agent Hackathon \u2014 build AI agents for the enterprise. Online, July 23 - August 25, 2026. \u20b9100,000 in prizes (~$1,200 USD). Enterprise AI agent focus. Discovered Jul 27 Nightly Brain Audit via blockrun_search.",
-      "note": "Discovered Jul 27 Nightly Brain Audit. Online, still open. Needs Jordan: register at Devpost, decide go/no-go.",
+      "note": "Discovered Jul 27 Nightly Brain Audit. Online, still open. Needs Jordan: register at Devpost, decide go/no-go. [Jordan GO Aug 3: ship + start]",
       "_orig_id": 24,
       "recommended_tier": "k3"
     },
@@ -408,12 +418,13 @@
       "status": "pending",
       "assigned_to": "gentech",
       "platform": "cloud",
-      "needs_jordan": true,
-      "human_gated": true,
+      "needs_jordan": false,
+      "human_gated": false,
       "gate_type": "decision",
       "detail": "Quick scan of awesome-selfhosted (309K \u2b50) for any self-hosted tools we're missing. Replace paid services where possible. Low priority \u2014 we already self-host most of our stack.",
       "recommended_tier": "flash",
-      "_orig_id": 28
+      "_orig_id": 28,
+      "note": "[Jordan GO Aug 3: ship + start]"
     },
     {
       "id": 27,
@@ -421,14 +432,15 @@
       "difficulty": "easy",
       "priority": "low",
       "status": "pending",
-      "assigned_to": "jordan",
+      "assigned_to": "gentech",
       "platform": "any",
-      "needs_jordan": true,
-      "human_gated": true,
+      "needs_jordan": false,
+      "human_gated": false,
       "gate_type": "decision",
       "detail": "Evaluate Hippocratic AI Deployment Engineering Residency against orchestrator-friendly filter. Paid 3+ month program building production AI agents in healthcare. Polaris 5.0 architecture uses 22-model constellation for safety. $1.64B valuation, NVIDIA-backed.",
       "_orig_id": 25,
-      "recommended_tier": "k3"
+      "recommended_tier": "k3",
+      "note": "[Jordan GO Aug 3: ship + start]"
     },
     {
       "id": 28,
