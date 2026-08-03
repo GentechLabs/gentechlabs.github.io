@@ -39,7 +39,10 @@
       "gate_type": "action",
       "detail": "Arc Programmable Money Hackathon (Encode Club). Agentic Economy track. Deadline Aug 9 (6 days). Jordan needs to: (1) get testnet USDC from faucet.circle.com, (2) provide Arc wallet address for deploy. Gentech has: x402 deploy script ready, ArcAgentWallet.sol written, foundry.toml configured with arc_testnet RPC. Then: deploy contracts, build demo, 3-min video, deck, repo.",
       "recommended_tier": "k2.7",
-      "_orig_id": 2
+      "_orig_id": 2,
+      "github_op": "repo_check",
+      "github_repo": "ProtoJay4789/deploy-agentic-treasury",
+      "notes": "[GitHub gated → scheduler: repo deploy-agentic-treasury]"
     },
     {
       "id": 3,
@@ -61,14 +64,14 @@
       "name": "Super Arcade Tennis — Cab #1 for GenTech Arcade",
       "difficulty": "medium",
       "priority": "high",
-      "status": "in_progress",
+      "status": "blocked",
       "assigned_to": "gentech",
       "platform": "cloud",
       "needs_jordan": true,
-      "detail": "First arcade cabinet. Three.js isometric tennis, chain power-shots (BTC/ETH/SOL), AI opponent. LIVE at arcade.gentechlabs.net. Part of larger Agent Arcade vision.",
+      "detail": "First arcade cabinet. Three.js isometric tennis, chain power-shots (BTC/ETH/SOL), AI opponent. LIVE at arcade.gentechlabs.net. Part of larger Agent Arcade vision. [GAME LIVE Aug 3 — only x402 payments remain, Jordan-gated]",
       "human_gated": true,
       "gate_type": "human",
-      "note": "Arcade.gentechlabs.net live, game works. Needs Jordan for: (1) deploy production build, (2) wire crypto payments. Build code is done on dev branch.",
+      "note": "GAME IS LIVE at arcade.gentechlabs.net (root /). Only remaining work = x402 crypto-payments wiring (needs Jordan wallet/funds). Verified Aug 3: serves HTTP 200, full game code present.",
       "_orig_id": 4,
       "recommended_tier": "flash"
     },
