@@ -4,7 +4,7 @@
     "total": 32,
     "shipped": 1,
     "in_progress": 0,
-    "pending": 29,
+    "pending": 30,
     "blocked": 1,
     "cancelled": 1,
     "needs_jordan": 30
@@ -514,6 +514,20 @@
       "gate_type": "greenlight",
       "detail": "Score AI models 0-850 like Agent Credit Score: Data Quality 30%, Benchmarks 25%, Trainer Reputation 20%, Age/Uptime 15%, Market Adoption 10%. Bittensor lessons baked in: staked reputation, on-chain provenance, no kill switch. First listing = GenTech DeFi Model (Modal GPU ~$30-60). Revenue: score API $0.01-0.05, listing fee, 2-5% inference take. Spec: 09-Green Room/specs/model-strength-score.md. Needs Jordan greenlight + Modal GPU funding.",
       "recommended_tier": "k3"
+    },
+    {
+      "id": 33,
+      "name": "Paperclip Control Plane \u2014 fix embedded Postgres startup (root EACCES)",
+      "difficulty": "medium",
+      "priority": "medium",
+      "status": "pending",
+      "assigned_to": "gentech",
+      "platform": "cloud",
+      "needs_jordan": false,
+      "human_gated": false,
+      "gate_type": "action",
+      "detail": "Paperclip (control plane for AI-agent companies, fork of HenkDz/paperclip) can't start. `pnpm dev` crashes at embedded Postgres init. ROOT CAUSE: three-way conflict. (1) embedded-postgres refuses to run as root. (2) `createPostgresUser: true` (added to migration-runtime.ts) makes it spawn initdb as OS user 'postgres', but (3) the Postgres binary + repo live under /root (mode 700), which the postgres user cannot traverse -> EACCES spawning initdb even though pgdata relocated to /var/lib/paperclip/db (postgres-writable). Fix options: (A) run Paperclip under a dedicated non-root systemd user with repo+binaries relocated outside /root, (B) use PGlite (embedded, no separate postgres binary) instead of embedded-postgres, or (C) relax /root traversal for postgres (least secure, not preferred). Recommended: (B) PGlite in dev per AGENTS.md 'use embedded PGlite by leaving DATABASE_URL unset' \u2014 investigate why it falls back to embedded-postgres instead. Status: infra setup task, not a code bug in our logic. Added Aug 3 2026 (Jordan GO: map out fix).",
+      "note": "[Jordan GO Aug 3: add to build list to map out fix]. Paperclip fork at /root/paperclip-fork. Also needs genTech-shop plugin once running (queue #13). Repo not pushed to GitHub yet."
     }
   ],
   "consolidation_notes": [
