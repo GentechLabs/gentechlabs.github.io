@@ -99,3 +99,4 @@ Jordan's commitment (more free time this week due to reduced work hours). Work B
 - [[brain-snapshot-2026-07-28]] — Full context snapshot
 - [[context-weight]] — Auto-generated project overview
 - [[build_queue.json]] — v52, 30 items
+- [x] Bankr API key wired into revenue monitor (bk_usr_...37XZ, saved to profile .env). Bankr wallet EVM 0x99ae... SOL 6mcf... — currently $0 across 9 chains. Distinct from x402 revenue wallet (0x7ebf...). Monitor now reports Bankr portfolio each run.
