@@ -1,11 +1,11 @@
 {
-  "version": 58,
+  "version": 59,
   "summary": {
     "total": 32,
     "shipped": 1,
-    "in_progress": 1,
+    "in_progress": 0,
     "pending": 29,
-    "blocked": 0,
+    "blocked": 1,
     "cancelled": 1,
     "needs_jordan": 30
   },
@@ -508,7 +508,8 @@
     "v32 — Jul 27: Model strategy set. deepseek-v4-flash primary, Kimi K3 for audits/reasoning. Forge notified.",
     "v52 — Jul 30 Nightly: Added #29 Gemini XPRIZE (M) and #30 DataHub Agent Hackathon (0.5K). Both urgent deadlines.",
     "v56 — Aug 1 overnight maintenance: recomputed summary (total 30→31, shipped 0→1 for #31 Yield.xyz MCP) and gate_summary from items[]. No open upstream PRs tracked in queue items; no blockers resolved.",
-    "v58 — Aug 2 overnight maintenance: gate_summary.human_gated corrected 30→31 (recounted from items[]). Status counts verified accurate (32 total: 29 pending, 1 in_progress, 1 shipped, 1 cancelled). No queue items track open upstream PRs; no blocked items. GitHub search API unavailable for this token (422 on user search) — PR check done by queue inspection instead."
+    "v58 — Aug 2 overnight maintenance: gate_summary.human_gated corrected 30→31 (recounted from items[]). Status counts verified accurate (32 total: 29 pending, 1 in_progress, 1 shipped, 1 cancelled). No queue items track open upstream PRs; no blocked items. GitHub search API unavailable for this token (422 on user search) — PR check done by queue inspection instead.",
+    "v59 — Aug 3 overnight maintenance: PR merge check via GitHub events API + repo-scoped queries (user-search API still 422). No queue item has a merged upstream PR: awesome-mcp-servers #21 PRs opened 07-14/07-16 but unmerged; merged PRs this window were to unrelated repos (gold-402, RPCS3/rpcs3, xpaysh/awesome-x402). Blocked item #4 (Super Arcade Tennis) blocker still unresolved — x402 payments wiring remains Jordan-gated. Corrected summary drift: blocked 0→1, in_progress 1→0 (item #4 is blocked; nothing in_progress)."
   ],
   "agents": {
     "gentech": {
@@ -525,7 +526,7 @@
     }
   },
   "note": "v36 — Jul 27 Nightly: Fixed arcade.gentechlabs.net 502 (proxy→static). Added #91 Great Agent Hackathon. All items Jordan-blocked.",
-  "updated": "2026-08-02",
+  "updated": "2026-08-03",
   "gate_summary": {
     "human_gated": 31,
     "decision_gated": 22,
