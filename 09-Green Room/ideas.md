@@ -41,6 +41,19 @@
 - **Revenue:** Entry fees via x402, prize pools, ARC token, agent-vs-agent tournaments
 - **Next:** Build the 3D lobby environment (Forge, desktop lane)
 
+## 🏆 GenTech Book Reader / GenTech EDU — Interactive Visual Books + AR Glasses
+**Source:** Jordan brainstorm (Aug 3) | **Status:** Concept — strong flagship fit, connects Tutors Layer + visual pipeline
+- **Vision:** Read PDFs as beautiful clothbound "books" in a Three.js shelf, not flat document viewers. Open a volume, turn curved pages, orbit the binding.
+- **Visual-first (GenTech EDU):** every concept gets a picture beside the description — like a real textbook plate. Agent writes the explanation AND generates a matching illustration using our proven visual pipeline (character sheets → Seedance → frames, the Vanito/FrameForge capability). Learning becomes visual, not just text.
+- **AR-first:** Meta Ray-Ban Display-compatible — read in your glasses with 600×600 viewport, touch/swipe page turns, bundled single-file HTML (no ES6 modules — glasses WebView doesn't support them).
+- **Why it works:** Reuses the MengTo Complete Shelf deterministic transition pattern (banked to `arcade-cabinet` skill) + proven Meta Ray-Ban bundling (`meta-rayban-game-development`) + the storyboard/visual pipeline (`frameforge` spec, KAGE film).
+- **The book = the app:** themed volumes (x402 Gateway, Agent Arcade, DeFi Model, GenTech Academy...) — each a branded interactive book with agent-authored text + generated illustration plates.
+- **The connection layer:** agents as co-readers (pre-annotate, ask-the-book, tutor mode), agents co-write volumes from our vault, shared reading rooms, x402 gating.
+- **Revenue:** x402 pay-per-book, subscription hub, premium AR reading tier, Academy course companion.
+- **Tech stack:** single-file Three.js + PDF.js page rendering + cloth/material shaders + state machine (hero→opening→detail→closing) + image generation for illustration plates.
+- **Needs you:** Greenlight scope (MVP = one visual book, desktop + glasses) | **Recommended tier:** T1 flash build, ~1-2 days
+- [ ] Add to build queue
+
 ## 🏆 Agent Kit v2 — Modular Agent Framework
 **Source:** Jordan brainstorm (Jun 18) | **Status:** Spec complete, ready to build
 - Modular skill system, auto-detection, identity persistence, skill marketplace
@@ -131,6 +144,21 @@
 ## 🎯 New Opportunities Discovered (Jul 26 Evening Brain Audit)
 - [ ] **Algorand Global x402 Challenge** ($100K + 500K ALGO) — Leaderboard open, pay-per-request API services on Algorand. Top 5 cash ($25K-$15K) + 500K ALGO. Culminates at Devcon 8 India. Our x402 gateway is already multi-chain. Added to queue as #82. Needs Jordan: register at algorand.co/global-x402-challenge.
 - [ ] **CockroachDB × AWS — Build with Agentic Memory** ($8.75K, deadline Aug 18) — Persistent memory for AI agents using CockroachDB MCP Server + AWS services. Online via Devpost (cockroachdb-ai.devpost.com). Added to queue as #83. Needs Jordan: register, decide go/no-go.
+
+## 🆕 Ecosystem Signal — Swarms v14 "Zena" (kyegomez/swarms, Aug 1)
+- PyPI 14.0.0 shipped; 7,017⭐, Apache-2.0, Python. New: AutoAgentBuilder, unified MCP Manager with OAuth, 3 new multi-agent architectures, sandboxed computer-use, GraphWorkflow ("60× faster than LangGraph" = marketing, unverified)
+- README advertises **x402 interop** — validates x402 as the agent-payment standard, potential integration surface
+- Not a Hermes threat (Python orchestration library vs our gateway+skills platform). Watch: their MCP Manager + AutoAgentBuilder patterns; steal what's useful, ignore the hype
+
+## 🆕 Ecosystem Signal — Claude Code Faceless Video Project (Hasan Aboul Hasan, Aug 2)
+- Video: "Claude Can Now Make Any Video You Want in Minutes!" (youtu.be/1JZKKAg3UX8) — 1.01M subs creator
+- One open-source project (GitHub) + Claude Code + Remotion engine → chess tutorial, kids story, Vox-style documentary, all animated in code (layers, not screen recordings). ElevenLabs voice + word-perfect caption sync
+- Workflow: VS Code + Claude Code → download project → paste .env keys → describe video → Claude writes plan (hook/scenes/timing) → approve → builds in minutes
+- **Why relevant:** We already run Remotion in content-pipeline + ElevenLabs (key revived Aug 2) + Claude Code. ~80% of the stack already ours
+- **Opportunity:** Faceless educational shorts (3Blue1Brown style) as GenTech content / hackathon demos; or wrap as a paid service
+- **Status:** Intel archived. Needs Jordan: go/no-go on pulling the repo + building a test short
+- [ ] Pull repo and test on VPS
+- [ ] Build a GenTech-branded demo short
 
 ## Ready to Test (skills exist, need execution)
 - [ ] **WURK.FUN microtasks** — Agent-to-human microtask skill, ready to test

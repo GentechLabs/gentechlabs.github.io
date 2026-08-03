@@ -1,22 +1,23 @@
 ---
 date: 2026-08-02
 status: brain-snapshot
-last-updated: 2026-08-02 00:07 ET
+last-updated: 2026-08-02 20:07 ET
+run: EOD
 ---
 
-# 🧠 Brain Snapshot — 2026-08-02
+# 🧠 Brain Snapshot — 2026-08-02 (EOD)
 
-> Auto-generated from vault state. Context for session continuity.
+> Auto-generated from vault state. Context for session continuity. Overwrites the 00:07 midday run with the full end-of-day view.
 
 ## 📅 Date
 - Day: Sunday
-- Time: 00:07 ET
+- Time: 20:07 ET (EOD run)
 
 ## 🚨 Urgent Deadlines
 
 | Item | Deadline | Days Left | Status |
 |------|----------|-----------|--------|
-| AI Factory Hackathon (start) | Aug 03 | **1** | 🟡 Medium |
+| AI Factory Hackathon (start) | Aug 03 | **1 (TOMORROW)** | 🚨 Urgent |
 | Arc Programmable Money | Aug 09 | **7** | 🔴 Urgent |
 | Build with DataHub | Aug 10 | **8** | 🟡 Medium |
 | AI Factory Hackathon (end) | Aug 10 | **8** | 🟡 Medium |
@@ -25,10 +26,9 @@ last-updated: 2026-08-02 00:07 ET
 | The Great Agent Hackathon | Aug 25 | **23** | 🟢 Relaxed |
 
 ## ✅ Deadlines Passed (verified)
-- Algorand Global x402 Challenge #82 — passed Jul 31 (-2 days). Was DEADLINE TODAY. No confirmation of registration received — verify with Jordan.
-- HackerRank Orchestrate — passed Aug 01 (-1 day).
-- OKX AI Genesis #72 — passed Jul 27.
-- Arc Programmable Money Hackathon — **NOT passed** (deadline Aug 9, queue shows pending).
+- Algorand Global x402 Challenge #82 — passed Jul 31. No confirmation of registration on file — verify with Jordan (considerations.md flags as open).
+- HackerRank Orchestrate — passed Aug 01.
+- OKX AI Genesis #72 — passed Jul 27. No registration received.
 
 ## 🏗️ Active Builds (from build_queue.json)
 - Super Arcade Tennis — in_progress, dev live at arcade.gentechlabs.net
@@ -37,27 +37,29 @@ last-updated: 2026-08-02 00:07 ET
 - Agent Warfare — Archetypes + Procedural Maps
 - ClawWork Integration — GenTech Employee Squad
 - Paymenter x402 Gateway — Marketplace + Discord
-- Algorand Global x402 Challenge — Composite entry ($100K + 500K ALGO) — deadline passed, verify status
-- Arc Programmable Money — x402 + Agent Wallet on Arc L1
+- Algorand Global x402 Challenge — Composite entry ($100K + 500K ALGO) — deadline passed, verify status with Jordan
+- Arc Programmable Money — x402 + Agent Wallet on Arc L1 (urgent, Aug 9)
 - Keeperhub Agents Onchain — x402 onchain agents ($5K+)
-- AI Factory Hackathon — lablab.ai × NativelyAI
+- AI Factory Hackathon — lablab.ai × NativelyAI (starts Aug 3)
 
 ## 📊 Build Queue
-- v52, 32 items total
-- 1 in_progress, 29 pending, 0 blocked
+- 32 items total · 1 in_progress (Super Arcade Tennis) · 29 pending · 0 blocked
 - 29 items need Jordan's input
 
 ## 🧠 Open Decisions (from considerations.md)
+- 🚨 **AI Factory Hackathon #79** — STARTS TOMORROW (Aug 3). Jordan: register? (elevated to urgent this run)
 - 🚨 **Arc Programmable Money** — Deadline Aug 9 (7 days, urgent). Jordan: get testnet USDC from faucet.circle.com, deploy x402 + Agent Wallet.
 - 🔴 **Super Arcade Tennis #73** — Deploy production build + wire crypto payments?
 - 🔴 **FrameForge #71** — Productize AI Storyboard Service?
 - 🔴 **Open Generative AI #77** — Self-host AI media studio go/no-go?
-- 🟡 **Syra Marketplace #76, AI Factory #79, GenTech Academy #81, Kimi K3 #82, CockroachDB #83** — awaiting Jordan direction.
+- 🟡 **Syra Marketplace #76, Keeperhub #80, AI Factory #79, GenTech Academy #81, Kimi K3 #82, CockroachDB #83** — awaiting Jordan direction.
 - ⚠️ **Algorand Global x402 Challenge #82** — Deadline Jul 31 PASSED. Verify whether Jordan registered (no record on file).
 - 🆕 **DeepSeek V4-Flash Official API** — LIVE in public beta (Jul 31). Jordan: evaluate provider switch (Nous → direct api.deepseek.com) vs Z.AI / Ollama Cloud.
+- 🔭 **DeepSeek Code (Harness)** — dedicated coding agent in closed beta soon. Watch as 4th delegation backend.
 
 ## 🚨 Blockers
 - None reported in build queue. Consideration items awaiting Jordan input are the main gating factor.
+- ⚠️ Narrative Rotation cron CMC key not loaded in pre-run (2026-08-02 run rebuilt manually from CMC Pro). Jordan: confirm cron pre-run fix or switch to CoinGecko free API.
 
 ## 🏪 Marketplace Status
 - OKX AI: Registered, needs A2A node daemon verified + resubmit
@@ -70,4 +72,4 @@ last-updated: 2026-08-02 00:07 ET
 ## 🔗 Related
 - [[considerations]] — Open decisions
 - [[context-weight]] — Project overview
-- [[brain-snapshot-2026-07-31]] — Previous snapshot
+- [[brain-snapshot-2026-08-01]] — Previous day
