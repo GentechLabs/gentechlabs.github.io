@@ -652,21 +652,22 @@
       "name": "DataHub Agent Hackathon \u2014 MCP Context Agent (0.5K)",
       "difficulty": "medium",
       "priority": "urgent",
-      "status": "pending",
+      "status": "in_progress",
       "assigned_to": "gentech",
       "platform": "cloud",
       "needs_jordan": false,
       "human_gated": false,
       "gate_type": "decision",
       "detail": "Build with DataHub: The Agent Hackathon. $20,500 total prizes ($6K grand / $3K x4 category / $1K x2 HM). Build AI agents using DataHub context graph via MCP Server. Four categories: Agents That Do Real Work, Metadata-Aware Code Generation, Resilient AI Systems, Open/Wildcard. Deadline: Aug 10, 2026 (11 days). Register at datahub.devpost.com. Our MCP experience + x402 stack fits well. Needs Jordan: register on Devpost, decide go/no-go.",
-      "note": "Discovered Jul 30 Nightly Brain Audit via web_search. 11 days to deadline \u2014 urgent. [Jordan GO Aug 3: un-gated, workable overnight] [Jordan REGISTERED on Devpost Aug 3 \u2014 build GO, deadline Aug 10]",
+      "note": "DataHub local stack RUNNING on VPS port 28080 (isolated from x402 on 8080). showcase-ecommerce datapack loaded. Next: build lineage-guard agent (blast-radius via downstream lineage, write-back to graph, monetize via x402). Rebuild config saved to /root/datahub-agent-build/DATAHUB-RUNNING-CONFIG.md.",
       "recommended_tier": "k2.7",
       "group": "labs",
       "routing": {
         "group": "labs",
         "build_in": "labs",
         "handoff_on_complete": true
-      }
+      },
+      "vps_24_7": true
     },
     {
       "id": 31,
