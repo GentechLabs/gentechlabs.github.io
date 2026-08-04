@@ -1,0 +1,137 @@
+{
+  "meta": {
+    "title": "GenTech Cookbook — Filipino → Cincinnati Ingredient Substitution Engine",
+    "purpose": "For a Filipino dish, map every ingredient to what's buyable in Cincinnati, OH (Jordan's local Kroger + Jungle Jim's + CAM Asian Market). Approximate prices are more important than exact — the substitute IS the point.",
+    "updated": "2026-08-03",
+    "price_note": "Prices are rough US averages (USD). Kroger street pricing varies. Exact price is secondary to knowing the substitute.",
+    "stores": {
+      "kroger": "Jordan's local Kroger — carries most everyday + many Asian staples",
+      "jungle_jims": "Jungle Jim's International Market (Fairfield / Union Township) — THE place for Filipino staples: Mama Sita's, Maggi, bagoong, cane vinegar",
+      "cam": "CAM International Market — Asian grocer, Filipino + Southeast Asian staples",
+      "online": "Amazon / Weee! / Asian Food Grocer for anything not local"
+    }
+  },
+
+  "ingredient_substitutions": [
+    {
+      "ingredient": "cane vinegar (sukang maasim / sukang iloko)",
+      "filipino_dish_use": "Adobo, sinigang (souring agent), dipping sauces",
+      "substitute": "Rice vinegar (unseasoned) OR white vinegar + pinch of sugar",
+      "where": "Kroger (rice vinegar is common)",
+      "approx_usd": 3.5,
+      "note": "Rice vinegar is the closest match — milder, slightly sweet like cane vinegar. Distilled white vinegar works in a pinch but is harsher; add a little sugar."
+    },
+    {
+      "ingredient": "tamarind (sampalok)",
+      "filipino_dish_use": "Sinigang (sour broth)",
+      "substitute": "Tamarind paste OR packaged sinigang mix (Knorr/Mama Sita's)",
+      "where": "Jungle Jim's or CAM (tamarind paste, sinigang mix) — Kroger may carry tamarind in international aisle",
+      "approx_usd": 3.0,
+      "note": "Sinigang mix is the cheat-code: a packet gives the exact sour-salty flavor. Tamarind paste is the more 'real' route."
+    },
+    {
+      "ingredient": "shrimp paste (bagoong alamang)",
+      "filipino_dish_use": "Kare-kare, eggplant w/ bagoong, pinakbet",
+      "substitute": "Thai shrimp paste (kapi / gapi) OR Vietnamese mam tom",
+      "where": "CAM or Jungle Jim's (Thai/Vietnamese aisle) — NOT at a standard Kroger",
+      "approx_usd": 5.0,
+      "note": "Thai shrimp paste is the closest. It's saltier/fermented differently but works. Barrio Fiesta is the Filipino brand to look for at Asian grocers."
+    },
+    {
+      "ingredient": "chayote (sayote)",
+      "filipino_dish_use": "Tinola, pinakbet, chopsuey",
+      "substitute": "Chayote IS available in the US — buy it fresh",
+      "where": "Kroger (produce) or any Latin/international grocer",
+      "approx_usd": 1.5,
+      "note": "No substitution needed — chayote is commonly stocked in US supermarkets, especially ones with a Hispanic section. If not found: zucchini or green papaya."
+    },
+    {
+      "ingredient": "chili leaves (sili leaves / dahon ng sili)",
+      "filipino_dish_use": "Tinola (added last, wilted)",
+      "substitute": "Baby spinach OR moringa leaves (malunggay) if available",
+      "where": "Kroger (baby spinach always) — moringa at Asian grocers",
+      "approx_usd": 3.0,
+      "note": "Chili leaves are hard to find in the US. Spinach is the easy stand-in for the 'wilted greens' finish. Moringa (malunggay) is the truer substitute if an Asian grocer has it."
+    },
+    {
+      "ingredient": "fish sauce (patis)",
+      "filipino_dish_use": "Sinigang, tinola, adobo (salt/savor)",
+      "substitute": "Thai/Vietnamese fish sauce (Red Boat, Three Crabs, Squid brand)",
+      "where": "Kroger (international aisle) or CAM",
+      "approx_usd": 4.0,
+      "note": "Easily found. Squid brand is the classic Filipino/Southeast Asian choice, at Asian grocers. Kroger carries Red Boat in the international aisle."
+    },
+    {
+      "ingredient": "soy sauce (toyo)",
+      "filipino_dish_use": "Adobo, caldereta, stir-fries",
+      "substitute": "Kikkoman or any soy sauce (Silver Swan is the Filipino brand)",
+      "where": "Kroger — everywhere",
+      "approx_usd": 3.0,
+      "note": "No issue. Silver Swan (Filipino) at Asian grocers is the authentic choice, but Kikkoman at Kroger works fine."
+    },
+    {
+      "ingredient": "liver spread (rennet / nergubes)",
+      "filipino_dish_use": "Caldereta (the secret umami ingredient)",
+      "substitute": "Liver pâté / liverwurst from the deli — OR skip (add a little more soy + tomato)",
+      "where": "Kroger deli / refrigerated",
+      "approx_usd": 4.0,
+      "note": "Chicken/tomato liver pâté is the closest. If unavailable, caldereta still works without it — the flavor is slightly less rich."
+    },
+    {
+      "ingredient": "Mama Sita's / instant mixes",
+      "filipino_dish_use": "Caldereta mix, sinigang mix, adobo mix",
+      "substitute": "The actual branded mixes — buy at Jungle Jim's / CAM, or Amazon/Weee!",
+      "where": "Jungle Jim's, CAM, or online",
+      "approx_usd": 3.0,
+      "note": "These are Filipino-specific brands. Jungle Jim's carries them. This is a case where the 'substitute' is just finding the authentic product."
+    },
+    {
+      "ingredient": "Maggi Sarap / seasoning granules",
+      "filipino_dish_use": "Caldereta, sautés (MSG umami)",
+      "substitute": "Maggi Seasoning (liquid) OR MSG (Accent) OR chicken bouillon powder",
+      "where": "Kroger (MSG/Accent, bouillon) — Maggi liquid in international aisle",
+      "approx_usd": 3.0,
+      "note": "Maggi Sarap granules are specific, but the umami goal is covered by liquid Maggi or plain MSG."
+    },
+    {
+      "ingredient": "coconut milk / cream (gata)",
+      "filipino_dish_use": "Ginataang dishes, desserts",
+      "substitute": "Canned coconut milk (Chaokoh, Aroy-D) — no substitution needed",
+      "where": "Kroger (baking/Asian aisle) — everywhere",
+      "approx_usd": 3.0,
+      "note": "Easily found in any US supermarket."
+    },
+    {
+      "ingredient": "ube / purple yam",
+      "filipino_dish_use": "Ube desserts, halo-halo",
+      "substitute": "Ube halaya (cooked jam) from Asian grocer OR ube extract for flavor",
+      "where": "Jungle Jim's, CAM, or online",
+      "approx_usd": 6.0,
+      "note": "Fresh ube is hard to find. Ube halaya jars or ube extract are the practical route."
+    },
+    {
+      "ingredient": "banana ketchup (banana sauce / UFC)",
+      "filipino_dish_use": "Spaghetti, Filipino-style hot dogs, fried dishes",
+      "substitute": "The authentic UFC brand — at Asian grocers or online. Not easily subbed.",
+      "where": "Jungle Jim's, CAM, Amazon, Weee!",
+      "approx_usd": 4.0,
+      "note": "No good Western substitute — it's sweet and orange-red. Buy the real thing."
+    },
+    {
+      "ingredient": "bitter melon (ampalaya)",
+      "filipino_dish_use": "Pinakbet, ginisang ampalaya",
+      "substitute": "Bitter melon IS available at Asian grocers (fresh)",
+      "where": "CAM, Jungle Jim's — sometimes Kroger's international produce",
+      "approx_usd": 2.0,
+      "note": "Available fresh at Asian markets. If truly stuck, the closest flavor is a small amount of zucchini + a bitter green, but it's not the same."
+    },
+    {
+      "ingredient": "okra (okra)",
+      "filipino_dish_use": "Pinakbet",
+      "substitute": "Okra IS available fresh in US",
+      "where": "Kroger — common in summer",
+      "approx_usd": 2.0,
+      "note": "Easily found, especially in the South/Midwest summer."
+    }
+  ]
+}

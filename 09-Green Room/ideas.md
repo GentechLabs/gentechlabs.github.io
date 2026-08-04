@@ -1,7 +1,21 @@
 # 🧠 Green Room — Ideas to Build
 
 > Build first, talk later. Promoted from `11-Mess Hall/ideas.md`.
-> Updated: 2026-07-22
+> Updated: 2026-08-03
+
+---
+
+## 🏆 GTA — Open Execution + Authorized Proxy (THE flagship)
+**Source:** Jordan vision (Aug 3) | **Status:** Thesis confirmed, driving the build
+- **GTA = open execution + authorized-proxy layer.** Your agent does everything for you across every venue you're entitled to use, without you being in the room or tied to one platform.
+- **Two layers:**
+  1. **Open aggregation & execution** — tap every agent-native rail (Coinbase CDP ✅ live, Robinhood MCP, Polymarket, Ondo). Venue-agnostic; swap rail in config, keep the agent logic.
+  2. **Authorized proxy** — agent signs into and operates YOUR accounts (bill-pay, forms, transfers) via OAuth/saved sessions. Reframes "agent-as-VPN" cleanly: a remote operator you granted permission to, NOT a ToS-evasion mask.
+- **Granular permissions** (read/trade/move/withdraw/cold-storage) — the trust substrate. Withdrawals always human-confirmed. Trade-only keys.
+- **Strategic edge:** CLARITY deepens US venues, moving the arb opportunity ONTO clean rails. We arbitrage *between* platforms while everyone else picks one.
+- Full thesis: `09-Green Room/specs/gta-product-thesis.md`
+- **Next:** Composio research (open-sourced account-sign-in) → Robinhood perp leg → Polymarket/Ondo.
+- [x] Coinbase spot leg live (Aug 3)
 
 ---
 
@@ -40,6 +54,14 @@
 - **Deep spec:** ProtoJay4789.github.io/10-Labs/agent-arcade-build-queue.md (895 lines)
 - **Revenue:** Entry fees via x402, prize pools, ARC token, agent-vs-agent tournaments
 - **Next:** Build the 3D lobby environment (Forge, desktop lane)
+
+## 🏆 GenTech Subscription Layers — Open Core + Premium Integrations
+**Source:** Jordan pricing brainstorm (Aug 3) | **Status:** Spec complete, ready to build
+- **Open core (free, earn per-tx):** Agentic Treasury (GTA), trading/swap fees, **dry powder defense system** (stop-loss, circuit breakers — always free, trust model), x402 rails.
+- **Premium integrations ($10–15–20/mo, NOT $20–50):** Narrative Rotation (built, anchor), **BYO News Feed** (flagship — wire your own news source into sentiment/triggers), Signal Packs, Alert Webhooks, Backtest Studio.
+- Full spec: `09-Green Room/specs/gentech-subscription-tiers.md`
+- **Sequencing (Jordan, Aug 3):** build the agentic treasury (GTA) fully first → subscriptions later. Spec = idea bank, not build target yet.
+- [ ] Revisit when GTA is together
 
 ## 🏆 GenTech Book Reader / GenTech EDU — Interactive Visual Books + AR Glasses
 **Source:** Jordan brainstorm (Aug 3) | **Status:** Concept — strong flagship fit, connects Tutors Layer + visual pipeline
