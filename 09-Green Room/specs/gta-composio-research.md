@@ -6,16 +6,20 @@
 
 ---
 
-## The critical honest finding
+## The critical honest finding (CORRECTED Aug 3 after Jordan shared the repo)
 
-**Composio open-sourced the SKILL DEFINITIONS, not the core platform.**
+**Jordan was right — the full SDK is open-sourced.** `ComposioHQ/composio` (29.5k★, MIT, active) contains:
+- **Python SDK** (`python/`) and **TypeScript SDK** (`ts/`) — fully open, including tool calling, `auth_configs`, `connected_accounts`, MCP support, `tool_router`, provider adapters (OpenAI/Anthropic/Gemini/CrewAI/LangChain etc.)
+- Verified locally: cloned `next` branch, MIT license, auth + connected-accounts + tool-router code all present in the repo.
 
-- Open source: `composio-community/skills` (GitHub) — the `skills/composio` skill, `awesome-claude-skills`, `awesome-codex-skills`. These are **docs + tool metadata** (what tools exist, how to call them). Free to copy, self-hostable as markdown.
-- Still hosted SaaS: the **core value — managed authentication (OAuth flows, refresh tokens), credential storage, and tool execution** — runs on Composio's cloud behind `COMPOSIO_API_KEY`. This is NOT open source.
+**BUT — and this is the nuance that decides the architecture — the AUTH BACKEND is still their cloud.**
+- The SDK defaults to `environment="production"` (Composio's hosted API), and reads `COMPOSIO_BASE_URL` only if set.
+- The repo has **no self-hostable server** — no docker-compose, no backend/ dir, no local execution engine.
+- So: the **client** is fully self-hostable, but the **server that stores/refreshes OAuth tokens and hosts the tool execution** is not in the open repo.
 
 **Implication for GTA's authorized-proxy layer:**
-- If we route user account sign-ins through Composio → user accounts are linked in **Composio's cloud**, executed on their infra, billed per-invocation after free tier.
-- If we want truly self-hosted / no-third-party credential custody → we **build the OAuth plumbing ourselves** (the hard part Composio solves).
+- The open SDK is far more useful than "just skill docs" (my earlier under-count). We can build the GTA client on it.
+- BUT self-hosting the full auth/execution backend still means building the server side ourselves, OR pointing the SDK at Composio's cloud (`COMPOSIO_API_KEY`).
 
 ---
 

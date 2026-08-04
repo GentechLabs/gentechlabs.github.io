@@ -2,9 +2,9 @@
   "version": 61,
   "summary": {
     "total": 33,
-    "shipped": 1,
-    "in_progress": 0,
-    "pending": 31,
+    "shipped": 2,
+    "in_progress": 1,
+    "pending": 28,
     "blocked": 1,
     "cancelled": 1,
     "needs_jordan": 30
@@ -733,13 +733,13 @@
       "name": "API Audit Fix \u2014 Replace placeholder/dead endpoints (crypto-price, gas-price, token-security)",
       "difficulty": "easy",
       "priority": "high",
-      "status": "pending",
+      "status": "shipped",
       "assigned_to": "gentech",
       "platform": "any",
       "needs_jordan": false,
       "human_gated": false,
       "gate_type": null,
-      "detail": "Audit (Aug 3) found 3 live APIs return HARDCODED placeholder data nobody would pay for. crypto-price-api (/v1/price/{symbol}) returns price:0.0 placeholder; gas-price-api (/v1/gas) returns all-zero gas_prices placeholder; token-security-api (/v1/score/{mint}) returns score:0 level:unknown placeholder. Wire real data: crypto-price -> crypto-price-fetch skill / CoinGecko fallback; gas-price -> Etherscan/OracleGAS or live RPC gas; token-security -> reuse Rugcheck engine (already real, port 8088). Also note agent-search-api (/root/agent-search-api/main.py) has real /search endpoints but NOT currently served on 8091 (that port runs x402-backend@agent_discovery instead) \u2014 verify its systemd service exists. Deal-tracker-api v1/deals was ALSO a stub returning [] \u2014 NOW FIXED (Aug 3) with real CheapShark engine + price-watch/release-radar/preorder-advisor endpoints (6 tests passing)."
+      "detail": "Audit (Aug 3) found 3 live APIs return HARDCODED placeholder data nobody would pay for. crypto-price-api (/v1/price/{symbol}) returns price:0.0 placeholder; gas-price-api (/v1/gas) returns all-zero gas_prices placeholder; token-security-api (/v1/score/{mint}) returns score:0 level:unknown placeholder. Wire real data: crypto-price -> crypto-price-fetch skill / CoinGecko fallback; gas-price -> Etherscan/OracleGAS or live RPC gas; token-security -> reuse Rugcheck engine (already real, port 8088). Also note agent-search-api (/root/agent-search-api/main.py) has real /search endpoints but NOT currently served on 8091 (that port runs x402-backend@agent_discovery instead) \u2014 verify its systemd service exists. Deal-tracker-api v1/deals was ALSO a stub returning [] \u2014 NOW FIXED (Aug 3) with real CheapShark engine + price-watch/release-radar/preorder-advisor endpoints (6 tests passing). **SHIPPED (Aug 3):** all 3 placeholder APIs fixed and live. crypto-price (CMC->CoinGecko), gas-price (live RPC+Polygon), token-security (proxies Rugcheck). Added api-audit.py to kit + academy Module 5. Deal-tracker fixed earlier same day. Agent-search-api still orphaned (port conflict) - flagged for Jordan."
     }
   ],
   "consolidation_notes": [
