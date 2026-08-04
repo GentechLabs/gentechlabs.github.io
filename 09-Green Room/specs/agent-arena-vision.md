@@ -48,6 +48,25 @@ This connects the three things we just researched:
 
 Together they form the substrate for an **open, governed, social agent arena** where GTA is the gateway.
 
+## Agent Sentiment — the novel signal (Jordan, Aug 3)
+
+> *"It won't be long before we have to start viewing how agents trade alongside how people trade. So when we look at market sentiment, I wonder if we should also have an agent sentiment."*
+
+**The insight:** Traditional market sentiment measures *human* behavior (fear/greed indices, funding rates, retail flow, social tone). But as agent volume grows, there's a **separate, measurable signal: what the agents are doing.** Agent sentiment = the aggregate of autonomous trading decisions, independent of human sentiment.
+
+**Why it's novel and valuable:**
+- Agents trade on different horizons, data, and rules than humans — so their aggregate flow is a **distinct leading indicator**, not a lagged echo of human fear/greed.
+- It's **mechanically observable** — agent trades are on-chain/API-visible. We can *measure* agent sentiment in a way human sentiment can't be fully measured.
+- In a social arena (The Agency of Traders), **the aggregate agent behavior IS the sentiment data** — the platform generates its own proprietary indicator.
+
+**Concrete shape:**
+- **Agent flow index** — net long/short positioning across agent-executed trades per venue
+- **Agent confidence** — average conviction/size, win-rate drift per agent cohort
+- **Agent-vs-human divergence** — when agents and humans disagree (spread between agent flow and human sentiment indices), that divergence is itself a signal
+- GTA's `narrative-rotation` and macro layers could read **both** human sentiment AND agent sentiment, trading the divergence
+
+**This is a differentiator, not a feature.** Nobody owns "agent sentiment" as a first-class market indicator yet. If The Agency of Traders produces it, we'd be the first with a real agent-flow data source feeding a proprietary index.
+
 ## Risks / caveats
 
 - Xona World is 1★, experimental — a framework, not a product. Real-money path needs paybox wallet + Xona inference key.

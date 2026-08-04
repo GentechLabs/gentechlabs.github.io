@@ -23,6 +23,39 @@
 | 4c | Crypto Price API | api.gentechlabs.net/v1/price (port 8082) | real-time crypto prices | 🟢 LIVE (was placeholder, fixed Aug 3) | 2026-08-03 |
 | 4d | Gas Price API | api.gentechlabs.net/v1/gas (port 8084) | live gas prices (eth/base/polygon) | 🟢 LIVE (was all-zero placeholder, fixed Aug 3) | 2026-08-03 |
 | 4e | Token Security API | api.gentechlabs.net/v1/score (port 8086) | Solana token risk scoring → Rugcheck engine | 🟢 LIVE (was placeholder, now proxies Rugcheck, fixed Aug 3) | 2026-08-03 |
+| 4f | Agent Search API (search.gentechlabs.net) | https://search.gentechlabs.net | standalone Exa/Grok/Surf search | ⚫ DISABLED (dead shell — no provider keys; port conflict with gateway agent_discovery) | 2026-08-04 |
+| 4g | **OpenDexter (x402 marketplace)** | https://open.dexter.cash/mcp | x402 API marketplace MCP — discover + pay x402 APIs (x402_search/check/access/wallet) | 🔭 EXPLORED Aug 3 — endpoint verified live, tools enumerated, search proven. **Jordan wants us listed here.** Next: find provider-submission flow to list our services. | 2026-08-03 |
+
+## 📊 ACCURATE API INVENTORY (verified Aug 4, 2026)
+
+The real, working, revenue-capable API surface. **This is the number to use** when counting "how many APIs are live."
+
+**Via x402 gateway (api.gentechlabs.net, 8 services, all backends 🟢 ok):**
+| # | Service | Endpoint | Backend port | Data source |
+|---|---------|----------|--------------|-------------|
+| 1 | token_security | /v1/token-security | 8088 (Rugcheck) | Solana risk scoring |
+| 2 | market_intelligence | /v1/market | 8082 (crypto-price) | CoinMarketCap→CoinGecko |
+| 3 | agent_discovery | /v1/agents/search | 8091 | 8004scan ERC-8004 registry |
+| 4 | defi_lp_analytics | /v1/defi/lp | 8092 | DexScreener |
+| 5 | wallet_analysis | /v1/wallet/portfolio | 8093 | Solana RPC + DexScreener |
+| 6 | nft_search | /v1/nft/search | 8094 | Magic Eden |
+| 7 | treasury_defender | /v1/defender | 8096 | RPC + DexScreener |
+| 8 | lineage_guard | /v1/lineage | 8095 | DataHub GMS |
+
+**Standalone APIs (direct subdomains):**
+| # | API | Domain | Port |
+|---|-----|--------|------|
+| 9 | Games / Deals | deals.gentechlabs.net | 8080 |
+| 10 | Crypto Price | prices.gentechlabs.net | 8082 |
+| 11 | Gas Price | gas.gentechlabs.net | 8084 |
+| 12 | Token Security (proxy) | security.gentechlabs.net | 8086 |
+| 13 | Rugcheck | rugcheck.gentechlabs.net | 8088 |
+
+**TOTAL: 13 live, working, revenue-capable APIs** (8 gateway services + 5 standalone). Plus the deal-tracker games API adds 4 gaming sub-endpoints (deals, price-watch, release-radar, preorder-advisor) on port 8080.
+
+**DISABLED/DEAD (do not count):** Agent Search API (search.gentechlabs.net) — no provider keys, port conflict. ⚠️ deals.gentechlabs.net has an SSL/DNS cert gap (resolves to VPS direct IP, cert doesn't cover it) — works on localhost:8080 but public HTTPS fails; needs Cloudflare proxy toggle.
+
+
 | 5 | GitHub — Gentech-Labs org | https://github.com/Gentech-Labs | programmable-money-x402, genTech-agent-kit, agent-credit-score (21 repos) | 🟢 PUBLIC + VISIBLE | 2026-08-02 |
 | 6 | GitHub — ProtoJay4789 (personal) | https://github.com/ProtoJay4789 | All repos (kit, portfolio, etc.) | ⚠️ FLAGGED — web 404s despite public; use ORG URLs | 2026-08-02 |
 | 7 | Agentic.Market (Bazaar) | https://agentic.market | Auto-indexed when CDP facilitator settles a payment | ⏳ NOT INDEXED YET — needs first on-chain settlement | 2026-08-02 |
@@ -32,6 +65,8 @@
 | # | Platform | Notes | Action needed |
 |---|----------|-------|---------------|
 | 8 | x402.org / x402scan | Standard x402 scanner — check if we appear | Verify listing after fix settles |
+| 8b | **Syra (syraa.fun)** | https://syraa.fun/marketplace | x402 marketplace — register our services (creator skills with payToAddress) | ⏳ PENDING — jordan-queue #22. **Jordan clarified Aug 3: 'Syra' (not CIRA).** Add to registry. Action: register x402 services. |
+| 8c | **OpenDexter** | https://open.dexter.cash/mcp | x402 API marketplace MCP — get our services listed | 🟢 VERIFIED x402-ready (Aug 3). **Funding state:** `0x7ebff...` = 2.97 USDC+gas (Jordan's owner wallet, NO private key in env); `0x3d117...` = signable GTA arb wallet but only 0.001 USDC. **Path to listed:** get USDC into signable wallet (or signing for 0x7ebff) → settle x402 via Dexter facilitator → auto-catalog → claim resource. | 2026-08-03 |
 | 9 | signal402 / other x402 directories | Was submitted earlier — verify status | Check + update |
 | 10 | MCP directories (mcp-directory, etc.) | Our mcp-directory service reports ok — confirm which directories list us | Audit + collect URLs |
 
@@ -61,4 +96,4 @@
 | **Treasury Defender (new service #7)** | Multi-chain | LIVE ✅ (Aug 2) | New paid x402 service (port 8096): classifies any token KNOWN/SUSPICIOUS (homoglyph detection + liquidity check), quarantines flagged tokens, returns safe burn calldata. 3 scam tokens from Jordan's Avalanche wallet already quarantined (ÚSDС, USḌC, UЅDС). Manifest v9.0.0. | Add to Bankr skill + x402-list rescan | 2026-08-02 |
 ---
 
-*Last updated: 2026-08-02 (created by Jordan directive — keep this file current)*
+*Last updated: 2026-08-03 (OpenDexter added row 4g — created by Jordan directive — keep this file current)*

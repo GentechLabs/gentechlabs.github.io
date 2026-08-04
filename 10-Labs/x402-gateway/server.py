@@ -141,12 +141,17 @@ def payment_required_response(service_name: str, price_usd: float) -> Response:
 def extract_proof(request: Request) -> str | None:
     """Extract a payment proof from standard x402 headers.
 
-    Accepts both the v2 convention (Authorization: x402 <json>) and the
-    earlier X-Payment convention. Returns the raw proof string or None.
+    Accepts the v2 convention (Authorization: x402 <json>), the CDP SDK
+    PAYMENT-SIGNATURE header (base64 JSON), and the earlier X-Payment
+    convention. Returns the raw proof string or None.
     """
     auth = request.headers.get("Authorization", "")
     if auth.lower().startswith("x402 "):
         return auth[5:].strip()
+    # CDP SDK v2 sends the payment payload here (base64-encoded JSON)
+    psig = request.headers.get("PAYMENT-SIGNATURE") or request.headers.get("payment-signature")
+    if psig:
+        return psig.strip()
     # X-Payment header may carry the proof directly (older convention)
     xpay = request.headers.get("X-Payment") or request.headers.get("X-PAYMENT")
     if xpay:
@@ -166,19 +171,46 @@ def verify_proof_via_cdp(proof_str: str, expected_price: float) -> tuple[bool, s
     """
     cdp_key = os.getenv("CDP_API_KEY", "")
     cdp_secret = os.getenv("CDP_API_KEY_SECRET", "")
+    cdp_key_id = os.getenv("CDP_API_KEY_ID", "")
     if not cdp_key:
         return False, "CDP_API_KEY not configured"
 
-    # The x402 proof sent by a client is a JSON envelope
+    # The x402 proof sent by a client is a JSON envelope. The CDP SDK
+    # (PAYMENT-SIGNATURE header) base64-encodes it; the Authorization: x402
+    # convention sends it raw. Handle both.
     try:
         proof = json.loads(proof_str)
     except json.JSONDecodeError:
-        return False, "proof is not valid JSON"
+        # Not raw JSON — try base64-decoding (CDP SDK v2 PAYMENT-SIGNATURE)
+        try:
+            import base64 as _b64
+            decoded = _b64.b64decode(proof_str + "=" * (-len(proof_str) % 4)).decode("utf-8")
+            proof = json.loads(decoded)
+        except Exception:
+            return False, "proof is not valid JSON or base64 JSON"
 
     # If it's already the facilitator-style payload, pass through; otherwise
     # wrap it as paymentPayload. The CDP /verify endpoint accepts the full
     # envelope (paymentPayload + paymentRequirements).
     payload = proof if "paymentPayload" in proof else {"paymentPayload": proof}
+
+    # Build the full CDP envelope. CDP /verify and /settle require
+    # { x402Version, paymentPayload, paymentRequirements }. The payment
+    # payload (paymentPayload) already carries the accepted payment option;
+    # paymentRequirements must be THAT accepted option object directly
+    # (with scheme at the top level) — not wrapped in an "accepts" array.
+    try:
+        _pp = payload.get("paymentPayload", payload)
+        _ver = _pp.get("x402Version", 2)
+        _accepted_opt = _pp.get("accepted", {})
+        if _accepted_opt:
+            payload = {
+                "x402Version": _ver,
+                "paymentPayload": _pp,
+                "paymentRequirements": _accepted_opt,
+            }
+    except Exception:
+        pass
 
     # Build the requirements side from our known challenge (cheap local check
     # before hitting the facilitator)
@@ -195,11 +227,65 @@ def verify_proof_via_cdp(proof_str: str, expected_price: float) -> tuple[bool, s
 
     headers = {}
     if cdp_secret:
-        import hmac as _hmac, hashlib as _hash
-        ts = str(int(time.time()))
-        msg = f"{ts}{cdp_key}".encode()
-        sig = _hmac.new(cdp_secret.encode(), msg, _hash.sha256).hexdigest()
-        headers = {"Authorization": f"Bearer {cdp_key}", "X-CDP-Timestamp": ts, "X-CDP-Signature": sig}
+        # CDP requires a JWT (EdDSA for Ed25519 keys, ES256 for EC PEM keys),
+        # signed with the API key secret, with a `uris` claim binding the
+        # request method/host/path. The JWT is PATH-BOUND — a token minted for
+        # /verify will be rejected on /settle, so we mint one per path.
+        try:
+            import base64 as _b64, secrets as _secrets
+            from nacl.signing import SigningKey
+
+            def _b64url(data: bytes) -> str:
+                return _b64.urlsafe_b64encode(data).rstrip(b"=").decode()
+
+            # Detect key type: base64 Ed25519 (64 bytes) vs PEM EC
+            try:
+                decoded = _b64.b64decode(cdp_secret)
+                is_ed25519 = len(decoded) == 64
+            except Exception:
+                is_ed25519 = False
+
+            def _jwt(op_path: str) -> str:
+                nonlocal _b64url
+                now = int(time.time())
+                nonce = _secrets.token_hex(16)
+                host = "api.cdp.coinbase.com"
+                method = "POST"
+                if is_ed25519:
+                    seed = decoded[:32]
+                    signing_key = SigningKey(seed)
+                    header = {"alg": "EdDSA", "kid": cdp_key_id, "typ": "JWT", "nonce": nonce}
+                    claims = {
+                        "sub": cdp_key_id, "iss": "cdp", "aud": "cdp_service",
+                        "uris": [f"{method} {host}{op_path}"],
+                        "iat": now, "nbf": now, "exp": now + 120,
+                    }
+                    signing_input = f"{_b64url(json.dumps(header).encode())}.{_b64url(json.dumps(claims).encode())}"
+                    sig = signing_key.sign(signing_input.encode()).signature
+                    return f"{signing_input}.{_b64url(sig)}"
+                else:
+                    # PEM EC key → ES256
+                    from cryptography.hazmat.primitives import serialization, hashes
+                    from cryptography.hazmat.primitives.asymmetric import ec, utils
+                    from cryptography.hazmat.backends import default_backend
+                    _raw_key = serialization.load_pem_private_key(cdp_secret.encode(), password=None, backend=default_backend())
+                    key = _raw_key  # type: ignore[assignment]
+                    assert isinstance(key, ec.EllipticCurvePrivateKey)
+                    header = {"alg": "ES256", "kid": cdp_key_id, "typ": "JWT", "nonce": nonce}
+                    claims = {
+                        "sub": cdp_key_id, "iss": "cdp", "aud": "cdp_service",
+                        "uris": [f"{method} {host}{op_path}"],
+                        "iat": now, "nbf": now, "exp": now + 120,
+                    }
+                    signing_input = f"{_b64url(json.dumps(header).encode())}.{_b64url(json.dumps(claims).encode())}"
+                    der_sig = key.sign(signing_input.encode(), ec.ECDSA(hashes.SHA256()))
+                    r, s = utils.decode_dss_signature(der_sig)
+                    sig = r.to_bytes(32, "big") + s.to_bytes(32, "big")
+                    return f"{signing_input}.{_b64url(sig)}"
+
+            headers = {"Authorization": f"Bearer {_jwt('/platform/v2/x402/verify')}"}
+        except Exception as e:
+            return False, f"CDP JWT generation failed: {e}"
     else:
         headers = {"Authorization": f"Bearer {cdp_key}"}
 
@@ -211,7 +297,22 @@ def verify_proof_via_cdp(proof_str: str, expected_price: float) -> tuple[bool, s
                 headers={**headers, "Content-Type": "application/json"},
             )
         if resp.status_code == 200:
-            return True, "verified"
+            # Verify succeeded. Now SETTLE so the CDP Bazaar indexes us —
+            # indexing runs after settle completes, verify alone is not enough.
+            # MUST use a fresh JWT bound to /settle (the /verify JWT is rejected).
+            try:
+                settle_headers = {"Authorization": f"Bearer {_jwt('/platform/v2/x402/settle')}"}
+                with httpx.Client(timeout=30) as client:
+                    settle_resp = client.post(
+                        "https://api.cdp.coinbase.com/platform/v2/x402/settle",
+                        json=payload,
+                        headers={**settle_headers, "Content-Type": "application/json"},
+                    )
+                if settle_resp.status_code == 200:
+                    return True, "verified + settled"
+                return True, f"verified (settle returned {settle_resp.status_code})"
+            except Exception as e:
+                return True, f"verified (settle failed: {e})"
         return False, f"facilitator returned {resp.status_code}: {resp.text[:200]}"
     except Exception as e:
         return False, f"facilitator unreachable: {e}"
@@ -431,10 +532,12 @@ async def paid_endpoint(service: str, path: str, request: Request):
 @app.get("/status")
 async def status():
     backend_status = {}
-    for name, url in BACKEND_ROUTES.items():
+    for name, route in BACKEND_ROUTES.items():
+        base = route[0]  # tuple (base, public_prefix, backend_prefix)
         try:
             async with httpx.AsyncClient(timeout=3) as c:
-                r = await c.get(f"{url}/health")
+                # Backends expose health at /v1/health (not /health). Fix Aug 2026.
+                r = await c.get(f"{base}/v1/health")
                 backend_status[name] = "ok" if r.status_code == 200 else "degraded"
         except Exception:
             backend_status[name] = "down"

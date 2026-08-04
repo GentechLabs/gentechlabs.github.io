@@ -94,6 +94,19 @@
 **Status:** Concept
 - "Stripe for AI agents" — `npx create-x402-api my-api`
 - Revenue: % per tx or flat $49/mo
+
+## x402 Marketplace Connector Guides — "How to Get Listed Everywhere"
+**Status:** Concept (Jordan, Aug 3 2026)
+- **The insight:** every x402 marketplace/protocol catalogs DIFFERENTLY, and nobody's written the connective tissue. We're hitting this friction live (CDP settles→indexes, Dexter settles→catalogs, Syra uses on-chain identity/8004). Other builders will hit the same wall.
+- **The product:** a living set of guides — "how to connect your x402 API to ANY marketplace" — kept updated as protocols change.
+  - CDP Bazaar (settle→index, needs `paymentPayload.resource`)
+  - OpenDexter/Dexter (settle through Dexter facilitator→auto-catalog)
+  - Syra (on-chain identity + 8004/SAP + payToAddress)
+  - x402.org, Agentic.Market, 8004scan, Monid, pay-skills, etc.
+- **Why us:** we're literally doing this right now, for real, with our own gateway. We have the battle-tested knowledge.
+- **Revenue:** free guide → premium "Connector Pack" → enterprise "get me listed everywhere" service.
+- **Synergy:** extends the existing "GenTech Academy — Ship Paid APIs in a Weekend" course (line 89). This is the distribution/listing chapter.
+- **Differentiator:** not a generic tutorial — a maintained, protocol-by-protocol reference that tracks the actual (changing) cataloging rules.
 - [ ] Scaffold the CLI tool
 
 ## Sana Wallet Integration
