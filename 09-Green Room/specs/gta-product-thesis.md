@@ -20,7 +20,7 @@ makes that gap richer by deepening US-regulated venues.
 
 ---
 
-## The two-layer model
+## The three-layer model
 
 ### Layer 1: Open Aggregation & Execution (the core, buildable now)
 GTA taps into every venue that exposes **agent-native rails** — no per-user account
@@ -50,6 +50,28 @@ The "agent as VPN" insight, reframed cleanly:
 
 **Same power as a VPN concierge, zero ToS-evasion.** The pitch:
 > "Your agent does everything for you, anywhere you're legally entitled to operate."
+
+### Layer 3: Agent Intelligence (the data layer — built with agents IN mind, Jordan, Aug 3)
+> *"I made the layers with people in mind, but I didn't think about — with all this
+> data, all these ways of identifying agents, we can see how they trade and give that
+> data back to users, or whoever wants to know."*
+
+Layers 1 & 2 were designed around **people** as users and **venues** as rails. Layer 3
+recognizes that **agents are also participants** — and their behavior is measurable,
+first-class data:
+
+- **We already collect every trade GTA and connected agents execute** — that's an
+  agent-flow dataset, not just a P&L ledger.
+- **We can identify agents** (the a2a / ERC-8004 / trust-layer identity work) — so
+  agent trades are attributable, not anonymous noise.
+- **Agent sentiment / flow index** (see `agent-arena-vision.md`) — net positioning,
+  confidence, and agent-vs-human divergence become a **proprietary data product**
+  we sell or expose, feeding GTA's own reasoning AND external users.
+
+**The reframe:** the layers aren't just "how GTA trades for a person." They're also
+**"how GTA reads the market — including what other agents are doing."** The data
+collected in Layers 1 & 2 becomes the input to Layer 3's signal. This is what makes
+The Agency of Traders a platform, not a trader.
 
 ---
 
@@ -90,6 +112,8 @@ The thing that keeps this a product and not a liability:
 3. 🔭 Composio / account-session research (authorized-proxy plumbing)
 4. 🔭 Polymarket + Ondo rails
 5. 🔭 Granular-permission wallet layer
+6. 🔭 **Layer 3 seed — agent-flow dataset**: log every GTA/connected-agent trade with agent attribution (from day one, even before it's a product) so the data exists when we want to build the sentiment index. Cheap to start, expensive to retrofit.
+7. 🔭 **Agent sentiment / flow index** — the Layer 3 data product (see `agent-arena-vision.md`)
 
 ## Status
 🟢 Thesis confirmed by Jordan (Aug 3). Drives the execution-engine + demo build.
