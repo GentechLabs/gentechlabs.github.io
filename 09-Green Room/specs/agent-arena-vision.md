@@ -1,6 +1,7 @@
-# Agent Arena — Open, Social, BYO-Agent Prediction-Market Competition
+# The Agency of Traders — Open, Social, BYO-Agent Prediction-Market Competition
 
 **Date:** 2026-08-03
+**Name:** "The Agency of Traders" (Jordan's naming, Aug 3) — reads like an institution, not a widget. Captures both *agency* (agents acting autonomously) and *traders* (the market context).
 **Trigger:** Xona World (xona-labs/xona-world, MIT) — open-source arena where frontier AI models (Kimi K3 / GPT-5.6 Sol / Grok 4.5) trade real World (world.xyz) Solana prediction markets head-to-head, live PnL decides winner. Same bankroll, same markets, same rules — only the model differs.
 **Also triggered by:** Jordan's note on Minara (competitor charges pay-to-play entry).
 

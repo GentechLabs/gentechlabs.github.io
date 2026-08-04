@@ -166,6 +166,11 @@ Jordan's decision on the Gears E:D beta: **NOT pre-ordering for beta access.** E
 
 **📄 Full spec:** `09-Green Room/specs/gentech-subscription-tiers.md` — open core (per-tx) + premium integration tiers ($10–15–20/mo). **Sequencing (Jordan, Aug 3):** build the agentic treasury (GTA) fully first → subscriptions come later. Spec kept as idea bank, not a build target.
 
+## 🚀 GTA — Action Items (Aug 3, for tomorrow)
+- [ ] **Robinhood KYC + OAuth** (Jordan) — perp leg for basis arb. One-time in-app.
+- [ ] **Fund Coinbase wallet** (Jordan) — moves spot leg from dry-run to real execution.
+- [ ] **Composio fork decision** (Jordan + Gentech) — GTA authorized-proxy layer: build on open `ComposioHQ/composio` SDK (their cloud for OAuth tokens, fast) vs self-host auth backend (full custody, the trust moat). Research: `09-Green Room/specs/gta-composio-research.md`.
+
 ## 🔗 Related
 
 - [[brain-snapshot-2026-07-28]] — Full context snapshot
