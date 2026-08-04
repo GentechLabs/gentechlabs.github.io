@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Helldivers 2 — Jordan's Loadouts</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: #05070f;
+            color: #e0ddd4;
+            min-height: 100vh;
+        }
+        .header {
+            background: linear-gradient(135deg, #0a1628, #10243f);
+            border-bottom: 2px solid #00d4ff;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+        .header h1 {
+            font-size: 2em;
+            color: #00d4ff;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            text-shadow: 0 0 20px rgba(0,212,255,0.3);
+        }
+        .header .subtitle {
+            color: #c9a84c;
+            font-size: 1.1em;
+        }
+        .header .badge {
+            display: inline-block;
+            margin-top: 12px;
+            padding: 4px 14px;
+            background: rgba(0,212,255,0.12);
+            border: 1px solid #00d4ff;
+            border-radius: 20px;
+            color: #7ee0ff;
+            font-size: 0.9em;
+        }
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .section {
+            margin-bottom: 30px;
+        }
+        .section h2 {
+            color: #00d4ff;
+            font-size: 1.4em;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #1e3a5f;
+            padding-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .loadout-card {
+            background: #0a1628;
+            border: 1px solid #1e3a5f;
+            border-radius: 12px;
+            padding: 22px;
+            margin-bottom: 22px;
+            position: relative;
+        }
+        .loadout-card h3 {
+            color: #00d4ff;
+            font-size: 1.5em;
+            margin-bottom: 4px;
+        }
+        .warfront {
+            display: inline-block;
+            padding: 3px 12px;
+            border-radius: 14px;
+            font-size: 0.85em;
+            font-weight: bold;
+            margin: 6px 8px 10px 0;
+        }
+        .warfront-bots { background: rgba(255,60,60,0.15); color: #ff7b7b; border: 1px solid #ff4d4d; }
+        .warfront-bugs { background: rgba(220,180,0,0.15); color: #ffe066; border: 1px solid #e0c000; }
+        .warfront-illuminate { background: rgba(120,160,255,0.15); color: #9db8ff; border: 1px solid #6b8cff; }
+        .meta-line {
+            color: #c9a84c;
+            font-size: 0.95em;
+            margin-bottom: 14px;
+        }
+        .loadout-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+        .loadout-item {
+            background: #0d1b33;
+            border: 1px solid #1e3a5f;
+            border-radius: 8px;
+            padding: 12px 14px;
+            border-left: 3px solid #00d4ff;
+        }
+        .loadout-item .label {
+            color: #5f8fc9;
+            font-size: 0.75em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+        .loadout-item .value {
+            color: #e0ddd4;
+            font-weight: 600;
+            font-size: 1.02em;
+        }
+        .stratagems {
+            margin: 16px 0;
+            list-style: none;
+        }
+        .stratagems li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 9px 12px;
+            background: #0d1b33;
+            border-radius: 6px;
+            margin-bottom: 6px;
+            border-left: 3px solid #c9a84c;
+        }
+        .stratagem-icon { font-size: 1.2em; }
+        .stratagem-name { color: #e0ddd4; font-weight: 500; }
+        .note {
+            margin-top: 14px;
+            padding: 10px 14px;
+            background: #0d1b33;
+            border-radius: 6px;
+            color: #9fb4d8;
+            font-size: 0.92em;
+            border-left: 3px solid #5f8fc9;
+        }
+        .loading {
+            color: #00d4ff;
+            text-align: center;
+            padding: 40px;
+        }
+        .empty {
+            color: #5f8fc9;
+            text-align: center;
+            padding: 40px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Helldivers 2 — Loadouts</h1>
+        <div class="subtitle">For Super Earth 🇺🇸</div>
+        <div class="badge">OJAY4789 · Lv 74 · Exemplary Subject</div>
+    </div>
+
+    <div class="container">
+        <div class="section">
+            <h2>My Builds</h2>
+            <div id="loadout-grid">
+                <div class="loading">Loading loadouts...</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const STRATAGEM_ICONS = {
+            "bullet": "🔥",
+            "supply": "📦",
+            "sentry": "🛡️",
+            "laser": "⚡",
+            "default": "🪖"
+        };
+
+        function iconFor(name) {
+            const n = name.toLowerCase();
+            if (n.includes('bullet') || n.includes('strike') || n.includes('orbital') || n.includes('barrage')) return "🔥";
+            if (n.includes('supply') || n.includes('pack')) return "📦";
+            if (n.includes('sentry')) return "🛡️";
+            if (n.includes('laser')) return "⚡";
+            if (n.includes('mortar')) return "💥";
+            return "🪖";
+        }
+
+        function warfrontClass(w) {
+            const n = w.toLowerCase();
+            if (n.includes('bug') || n.includes('terminid')) return "warfront-bugs";
+            if (n.includes('illumin')) return "warfront-illuminate";
+            return "warfront-bots";
+        }
+
+        function renderLoadouts(data) {
+            const grid = document.getElementById('loadout-grid');
+            if (!data || !data.loadouts || data.loadouts.length === 0) {
+                grid.innerHTML = '<div class="empty">No loadouts saved yet. Tell Gentech your build to add one!</div>';
+                return;
+            }
+            grid.innerHTML = data.loadouts.map(l => `
+                <div class="loadout-card">
+                    <h3>${l.alias}</h3>
+                    <span class="warfront ${warfrontClass(l.warfront)}">${l.warfront}</span>
+                    <span style="color:#5f8fc9; font-size:0.9em;">${l.role || ''}</span>
+                    <div class="meta-line">${l.level ? 'Lv ' + l.level : ''}${l.rank ? ' · ' + l.rank : ''}${l.lastUpdated ? ' · Updated ' + l.lastUpdated : ''}</div>
+
+                    <div class="loadout-grid">
+                        <div class="loadout-item"><div class="label">Primary</div><div class="value">${l.loadout.primary}</div></div>
+                        <div class="loadout-item"><div class="label">Secondary</div><div class="value">${l.loadout.secondary}</div></div>
+                        <div class="loadout-item"><div class="label">Throwable</div><div class="value">${l.loadout.throwable}</div></div>
+                        <div class="loadout-item"><div class="label">Armor</div><div class="value">${l.loadout.armor}</div></div>
+                        ${l.loadout.booster ? `<div class="loadout-item"><div class="label">Booster</div><div class="value">${l.loadout.booster}</div></div>` : ''}
+                    </div>
+
+                    <div style="color:#c9a84c; font-size:0.8em; text-transform:uppercase; letter-spacing:1px; margin-bottom:8px;">Stratagems</div>
+                    <ul class="stratagems">
+                        ${l.stratagems.map(s => `<li><span class="stratagem-icon">${iconFor(s)}</span><span class="stratagem-name">${s}</span></li>`).join('')}
+                    </ul>
+
+                    <div class="note">
+                        <strong style="color:#c9a84c;">${l.strength ? 'Strengths: ' : ''}</strong>${l.strength || ''}
+                        ${l.weakness ? '<br><strong style="color:#ff7b7b;">Watch out: </strong>' + l.weakness : ''}
+                        ${l.notes ? '<br><strong style="color:#5f8fc9;">Notes: </strong>' + l.notes : ''}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        async function loadData() {
+            try {
+                const res = await fetch('helldivers2-loadouts.json?t=' + Date.now());
+                const data = await res.json();
+                renderLoadouts(data);
+            } catch (e) {
+                console.error('Failed to load loadouts:', e);
+                document.getElementById('loadout-grid').innerHTML =
+                    '<div class="empty">Could not load build data.</div>';
+            }
+        }
+        loadData();
+    </script>
+</body>
+</html>
