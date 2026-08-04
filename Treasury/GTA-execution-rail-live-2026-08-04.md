@@ -76,3 +76,12 @@ Verified via live CDP quote + CoinGecko + vault brain:
 LINK passed live CDP quote verification. PAXG/AVAX/ONDO/SOL/TAO need either a real on-chain
 address verified against `get_swap_price` (for EVM) or a Jupiter swap path (for Solana)
 before we claim the buy list is executable. Do NOT invent addresses.
+
+## Agentic Treasury now tracks executed positions (Aug 4, 2026)
+- Added a 💼 GTA Pos layer to `agentic-treasury.py` that reads LIVE on-chain balances
+  of the CDP server account each run (USDC + cbBTC), so the fused report shows REAL
+  executed holdings — not just arb windows.
+- Shows: `💼 GTA Pos | USDC $5.50 | cbBTC 0.000077` — tracks our $5 cbBTC fill + remaining USDC.
+- Implementation: web3 eth_call (base.drpc.org), `int.from_bytes(raw,'big')` (NOT int(raw,16)
+  — eth_call returns bytes, not hex). RPC 403s raw urllib; must use web3.
+- Cron (Agentic Treasury `1cbde1d52242`) picks this up automatically — no job change needed.
