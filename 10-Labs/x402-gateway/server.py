@@ -61,9 +61,85 @@ URL_TO_SERVICE = {
 }
 
 
+# --- Multi-network payment support -------------------------------------
+# CAIP-2 network registry. Each entry describes one settlement rail we can
+# actually receive USDC on. A network is only advertised in `accepts` when a
+# payTo address is configured for it — never advertise a rail we can't settle.
+NETWORKS = {
+    "base": {
+        "network": "eip155:8453",
+        "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+        "decimals": 6,
+        "payto_env": "X402_PAYTO_ADDRESS",
+        "payto_default": "0xF9dcBFF7EdDd76c58412fd46f4160c96312ce734",
+        "extra": {"name": "USD Coin", "version": "2"},
+    },
+    "algorand": {
+        # CAIP-2 genesis hash prefix for Algorand mainnet
+        "network": "algorand:wGHE2Pwdvd7S12BL5FaOP20EGYesN73k",
+        # USDC on Algorand is ASA (asset id), not a contract address
+        "asset": "31566704",
+        "decimals": 6,
+        "payto_env": "X402_PAYTO_ALGORAND",
+        "payto_default": "",
+        "extra": {"name": "USD Coin", "assetType": "ASA", "assetId": 31566704},
+    },
+}
+
+# Order matters — first entry is the preferred rail for clients that take
+# accepts[0] blindly. Base stays first for backward compatibility.
+_DEFAULT_NETWORKS = "base"
+
+
+def enabled_networks() -> list[dict]:
+    """Resolve X402_NETWORKS into concrete, settleable network configs.
+
+    Unknown names are ignored rather than fatal. Networks without a payTo
+    address are dropped. Always falls back to Base so the gateway can never
+    end up advertising zero rails.
+    """
+    raw = os.getenv("X402_NETWORKS", _DEFAULT_NETWORKS)
+    names = [n.strip().lower() for n in raw.split(",") if n.strip()]
+    resolved = []
+    for name in names:
+        cfg = NETWORKS.get(name)
+        if cfg is None:
+            continue  # unknown network — ignore, don't crash the gateway
+        payto = os.getenv(cfg["payto_env"], cfg["payto_default"])
+        if not payto:
+            continue  # can't receive here — don't advertise it
+        resolved.append({**cfg, "payTo": payto})
+    if not resolved:
+        base = NETWORKS["base"]
+        resolved = [{**base, "payTo": os.getenv(base["payto_env"], base["payto_default"])}]
+    return resolved
+
+
+def is_network_accepted(network: str | None) -> bool:
+    """True when a proof's CAIP-2 network is one we currently accept.
+
+    Proofs that omit `network` are accepted for backward compatibility with
+    older clients that predate multi-network support.
+    """
+    if not network:
+        return True
+    return any(n["network"] == network for n in enabled_networks())
+
+
 def build_payment_required(service_name: str, price_usd: float) -> dict:
     """Build x402 v2 PaymentRequired payload — compliant with Agentic Market validator"""
     price_atomic = int(price_usd * 1000000)  # USDC has 6 decimals
+    accepts = []
+    for net in enabled_networks():
+        accepts.append({
+            "scheme": "exact",
+            "network": net["network"],
+            "asset": net["asset"],
+            "amount": str(int(round(price_usd * (10 ** net["decimals"])))),
+            "payTo": net["payTo"],
+            "maxTimeoutSeconds": 300,
+            "extra": net["extra"],
+        })
     return {
         "x402Version": 2,
         "resource": {
@@ -71,20 +147,7 @@ def build_payment_required(service_name: str, price_usd: float) -> dict:
             "description": f"GenTech Labs x402 — {service_name}",
             "mimeType": "application/json"
         },
-        "accepts": [
-            {
-                "scheme": "exact",
-                "network": "eip155:8453",
-                "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
-                "amount": str(price_atomic),
-                "payTo": os.getenv("X402_PAYTO_ADDRESS", "0xF9dcBFF7EdDd76c58412fd46f4160c96312ce734"),
-                "maxTimeoutSeconds": 300,
-                "extra": {
-                    "name": "USD Coin",
-                    "version": "2"
-                }
-            }
-        ],
+        "accepts": accepts,
         "extensions": {
             "bazaar": {
                 "bazaarResourceServerExtension": True,
@@ -218,8 +281,13 @@ def verify_proof_via_cdp(proof_str: str, expected_price: float) -> tuple[bool, s
         accepted = payload["paymentPayload"].get("accepted", payload["paymentPayload"])
         amount = str(accepted.get("amount", "0"))
         pay_to = accepted.get("payTo", "")
+        proof_network = accepted.get("network")
     except (KeyError, TypeError):
         return False, "proof missing accepted fields"
+
+    # Reject proofs settled on a rail we don't accept, BEFORE any remote call.
+    if not is_network_accepted(proof_network):
+        return False, f"network {proof_network!r} not accepted"
 
     # Local structural checks (fast fail before remote call)
     if Decimal(amount) < Decimal(str(int(expected_price * 1000000))):
@@ -336,6 +404,9 @@ def verify_proof_simulation(proof_str: str, expected_price: float) -> tuple[bool
     valid_after = int(proof.get("validAfter", 0) or 0)
     valid_before = int(proof.get("validBefore", 0) or 0)
     signature = proof.get("signature", "")
+
+    if not is_network_accepted(proof.get("network")):
+        return False, f"network {proof.get('network')!r} not accepted"
 
     now = int(time.time())
     if valid_after and now < valid_after:
