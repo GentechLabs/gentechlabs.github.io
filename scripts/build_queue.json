@@ -1,11 +1,11 @@
 {
- "version": 62,
+ "version": 63,
  "summary": {
   "total": 34,
-  "shipped": 2,
+  "shipped": 3,
   "done": 1,
   "in_progress": 1,
-  "pending": 28,
+  "pending": 27,
   "blocked": 1,
   "cancelled": 1,
   "needs_jordan": 7
@@ -150,14 +150,14 @@
    "name": "Algorand Global x402 Challenge — Composite Entry ($100K + 500K ALGO)",
    "difficulty": "medium",
    "priority": "high",
-   "status": "pending",
+   "status": "shipped",
    "assigned_to": "gentech",
    "platform": "cloud",
    "needs_jordan": false,
    "human_gated": false,
    "gate_type": "decision",
    "detail": "Algorand Global x402 Challenge — $100K USD + 500K ALGO prize pool. Leaderboard is open. Build pay-per-request API services on Algorand mainnet. Top 5 winners ($25K-$15K) + 500K ALGO across top 20. Culminates at Devcon 8 India. Our x402 gateway already supports multi-chain — config-only for ALGO. Was previously #63, removed during consolidation. Re-added Jul 26.",
-   "note": "Re-discovered via Brain Audit Jul 26. Jordan needs to register at algorand.co/global-x402-challenge and provide ALGO wallet address. [Jordan GO Aug 3: un-gated, workable overnight]",
+   "note": "SHIPPED Aug 4 overnight. Gateway multi-network support built + deployed. Added NETWORKS CAIP-2 registry (base eip155:8453, algorand:wGHE2Pwdvd7S12BL5FaOP20EGYesN73k w/ USDC ASA 31566704), enabled_networks() resolver driven by X402_NETWORKS env, is_network_accepted() wired into BOTH verify_proof_via_cdp and verify_proof_simulation so proofs on non-accepted rails are rejected before any remote call. Fail-safe: a network is only advertised when its payTo is configured, unknown names ignored, always falls back to Base. 17/17 tests pass (test_networks.py). Live gateway restarted + verified: https://api.gentechlabs.net returns HTTP 402, accepts=[eip155:8453] (backward compatible, byte-identical to prior payload), all 8 backends ok. Proved 2-rail activation on scratch instance port 8399. REMAINING (Jordan-gated): Algorand wallet address + register at algorand.co/global-x402-challenge. Once X402_PAYTO_ALGORAND is set, ALGO goes live with zero code change.",
    "_orig_id": 7,
    "recommended_tier": "flash",
    "group": "labs",
@@ -165,7 +165,8 @@
     "group": "labs",
     "build_in": "labs",
     "handoff_on_complete": true
-   }
+   },
+   "shipped_date": "2026-08-04"
   },
   {
    "id": 8,
