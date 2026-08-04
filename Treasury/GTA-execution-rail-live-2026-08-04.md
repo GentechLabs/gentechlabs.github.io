@@ -85,3 +85,8 @@ before we claim the buy list is executable. Do NOT invent addresses.
 - Implementation: web3 eth_call (base.drpc.org), `int.from_bytes(raw,'big')` (NOT int(raw,16)
   — eth_call returns bytes, not hex). RPC 403s raw urllib; must use web3.
 - Cron (Agentic Treasury `1cbde1d52242`) picks this up automatically — no job change needed.
+
+## P&L added to GTA Pos layer (Aug 4, 2026)
+- Now shows live P&L vs entry: `💼 GTA Pos | USDC $5.50 | cbBTC 0.000077 (≈$10.47) 🔴P&L -0.03 (-0.66%)`
+- Entry state recorded in `.gta-positions.json` (cbBTC LONG, $5.00 cost, 0.0000772 qty, tx hash).
+- Price source: Coinbase `BTC-USD/spot` — **CBTC-USD 404s** (cbBTC tracks BTC 1:1). This was the silent-N/A trap.
