@@ -1,0 +1,53 @@
+# GTA Execution Rail — LIVE (Aug 4, 2026)
+
+## Breakthrough: CDP wallet secret obtained + wired
+- **Root cause of the execution blocker:** the value previously stored at
+  `/root/.blockrun/cdp-wallet-secret` (88-char base64) was an **Ed25519 key** — the
+  same shape as the read-only `CDP_API_KEY_SECRET`. The SDK's wallet-signing path
+  needs a **DER PKCS#8 EC P-256 (secp256r1) key** for ES256 signing.
+- **Jordan provided the correct secret** (starts `MIGHAgEA…`, decodes to 138-byte DER
+  EC P-256). Verified via `serialization.load_der_private_key` → `ECPrivateKey`, curve
+  `secp256r1`. Persisted to `/root/.blockrun/cdp-wallet-secret` (chmod 600).
+- **Wired into BOTH profiles** `.env`: `gentech-treasury` and `gentech`.
+
+## Verified working
+- `CdpClient()` auth → `list_accounts` → 3 server accounts on Base.
+- CDP server account `0x77C6…` funded: **10.5 USDC + 0.0003 ETH** (gas).
+- `get_swap_price` (USDC→cbBTC) → live quote `price_ratio=0.0015438`.
+- `gta_coinbase_leg.py --symbol BTC --side buy --dry-run` → quote_received:true.
+
+## Cron fix (Treasury profile)
+- **Root cause:** GTA/Treasury cron jobs run under the `gentech-treasury` profile, but
+  ALL scripts lived in the `gentech` profile `scripts/` dir. Treasury `scripts/` was
+  EMPTY → every bare-script `no_agent` cron failed with "Script not found".
+- **Fix:** copied the full script set (`tradesta-watcher/signal`, `gta-arb-monitor`,
+  `gta-arb-api`, `gta_executor`, `gta_coinbase_leg`, `cmc-watchlist`,
+  `narrative-rotation`, `agentic-treasury.*`, `coin-rainbow`, `yield-rainbow`,
+  `fed-event-tracker`, `lp-monitor-v2`, `cron_theme`, + JSON state) into
+  `/root/.hermes/profiles/gentech-treasury/scripts/`.
+- Verified `tradesta-watcher.py` and `gta-arb-monitor.py` run cleanly from treasury dir.
+- `agentic-treasury.sh` hardcodes the gentech path — intentional, still works.
+
+## ✅ FIRST REAL TRADE EXECUTED (Aug 4, 2026)
+- $5 USDC → cbBTC on Base. **Swap SUCCESS on-chain (block 49546749).**
+- USDC 10.5→5.5, cbBTC 0.0000772 received, native ETH intact.
+
+### ⚠️ CRITICAL LESSONS (SDK misled us — verify on-chain ALWAYS)
+1. **`executed: true` from the SDK is NOT proof of success.** First attempt returned
+   `executed: true` + a tx hash but the tx actually **reverted on-chain**
+   (`TRANSFER_FROM_FAILED`, status 0). The Permit2 approval was missing.
+2. **Permit2 approval is a REQUIRED one-time step.** CDP server-account USDC swaps use
+   Permit2 signatures. Until the wallet grants `approve(USDC → Permit2, max)`, every
+   swap reverts silently. Fix: send an `approve(address,uint256)` tx via
+   `acct.send_transaction(...)` to Permit2 (`0x000000000022D473030F116dDEE9F6B43aC78BA3`).
+   Now done — allowance is max uint, persists.
+3. **Always read the tx receipt** (`get_transaction_receipt`, check `status==1`) + verify
+   balances changed before declaring success. Never trust the SDK's success flag alone.
+4. **CDP CLI bug:** `gta_coinbase_leg.py --dry-run` defaults True with NO way to disable
+   via CLI (`--no-dry-run` fails). Real execution must call `run_spot_leg(dry_run=False)`
+   programmatically, not the CLI.
+
+## Next
+- Remit path CDP server account → Jordan EOA for profit return.
+- Buy-list acquisition rails (SOL/TAO/AVAX/LINK/ONDO/PAXG) + vault brain research.
+- Expand `SUPPORTED` map in gta_coinbase_leg.py with verified PAXG/AVAX addresses.
