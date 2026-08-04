@@ -80,6 +80,19 @@ Jordan's decision on the Gears E:D beta: **NOT pre-ordering for beta access.** E
 
 **Action:** Logged as **build queue #34** (high priority, easy). Fix = wire real data (crypto → CoinGecko fallback, gas → Etherscan/live RPC, token-security → reuse working Rugcheck engine). **Jordan: confirm this goes on the build list.**
 
+---
+
+**✅ FIXED (Aug 3) — all 3 placeholder APIs now return live data:**
+- **crypto-price-api** (8082) — CMC→CoinGecko fallback chain. Live: BTC $63.4K, ETH $1.86K. Test `test_crypto_api.py` (3 pass).
+- **gas-price-api** (8084) — live RPC (eth/base) + Polygon gas station. Live: eth 0.09, base 0.01, polygon 405 gwei.
+- **token-security-api** (8086) — now a thin proxy to the working Rugcheck engine (port 8088), returns proper 402 payment challenge. Test `test_token_security_api.py` (2 pass).
+
+**✅ Pushed to kit + academy (Aug 3):**
+- **agent kit:** `services/api-audit.py` — reusable API health auditor + documented in `services/README.md`. Committed to `Gentech-Labs/genTech-agent-kit` (verified via GitHub API).
+- **academy:** Module 5 "Auditing Your APIs" — placeholder trap, audit recipe, reuse-don't-duplicate pattern, real incident. Committed to `ProtoJay4789/gentech-academy` (verified via GitHub API).
+
+**⚠️ Agent-search-api still orphaned:** no systemd service; nginx routes `search.gentechlabs.net` → 8091 but that port runs the x402 agent_discovery backend. The standalone search API (real /search endpoints, EXA/GROK/SURF keys) isn't running. **Needs a port/service decision — flagged for Jordan.**
+
 ## ✅ Recently Resolved
 
 - **Web tools down** — RESOLVED. Agent Reach is the default web backend. Firecrawl no longer needed.
