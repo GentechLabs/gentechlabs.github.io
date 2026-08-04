@@ -1,18 +1,19 @@
 {
- "version": 61,
+ "version": 62,
  "summary": {
-  "total": 33,
+  "total": 34,
   "shipped": 2,
+  "done": 1,
   "in_progress": 1,
   "pending": 28,
   "blocked": 1,
   "cancelled": 1,
-  "needs_jordan": 30
+  "needs_jordan": 7
  },
  "items": [
   {
    "id": 1,
-   "name": "Keeperhub Agents Onchain Hackathon \u2014 x402 Onchain Agents ($5K+)",
+   "name": "Keeperhub Agents Onchain Hackathon — x402 Onchain Agents ($5K+)",
    "difficulty": "easy",
    "priority": "urgent",
    "status": "in_progress",
@@ -21,8 +22,8 @@
    "needs_jordan": false,
    "human_gated": false,
    "gate_type": null,
-   "detail": "KeeperHub Agents Onchain Hackathon (deadline Aug 13, 2026 \u2014 9 days). JORDAN CONFIRMED GO (Aug 3). Build: wire GTA arb executor to KeeperHub MCP, execute ONE real onchain tx via KeeperHub, film it, assemble submission. Must include live tx link (judging requirement). $5K + $1K bounties. Plan: 09-Green Room/specs/keeperhub-build-plan.md.",
-   "note": "KeeperHub UNLOCKED. Aug 4 overnight: real workflow created in org \u2014 'GTA Yield Guard \u2014 Aave Health Factor Auto-Rebalancer (Base)' ID r0nfoic9vk12ik1h3af67 (schedule 15m -> aave-v3/get-user-account-data -> condition HF<1.5 -> approve USDC -> Pool.supply). Test execution launched: exec ID 1momvt8frv3pa97hhaxu9. BLOCKER: wallet 0x53A8...8EA has 0 ETH and 0 USDC on Base mainnet AND Base Sepolia \u2014 cannot produce the live tx link the judges require. Needs Jordan to fund (~$15 ETH + ~$10 USDC on Base).",
+   "detail": "KeeperHub Agents Onchain Hackathon (deadline Aug 13, 2026 — 9 days). JORDAN CONFIRMED GO (Aug 3). Build: wire GTA arb executor to KeeperHub MCP, execute ONE real onchain tx via KeeperHub, film it, assemble submission. Must include live tx link (judging requirement). $5K + $1K bounties. Plan: 09-Green Room/specs/keeperhub-build-plan.md.",
+   "note": "KeeperHub UNLOCKED. Aug 4 overnight: real workflow created in org — 'GTA Yield Guard — Aave Health Factor Auto-Rebalancer (Base)' ID r0nfoic9vk12ik1h3af67 (schedule 15m -> aave-v3/get-user-account-data -> condition HF<1.5 -> approve USDC -> Pool.supply). Test execution launched: exec ID 1momvt8frv3pa97hhaxu9. BLOCKER: wallet 0x53A8...8EA has 0 ETH and 0 USDC on Base mainnet AND Base Sepolia — cannot produce the live tx link the judges require. Needs Jordan to fund (~$15 ETH + ~$10 USDC on Base).",
    "_orig_id": 1,
    "recommended_tier": "k3",
    "group": "labs",
@@ -34,7 +35,7 @@
   },
   {
    "id": 2,
-   "name": "Arc Programmable Money Hackathon \u2014 Deploy x402 + Agent Wallet on Arc L1",
+   "name": "Arc Programmable Money Hackathon — Deploy x402 + Agent Wallet on Arc L1",
    "difficulty": "medium",
    "priority": "urgent",
    "status": "pending",
@@ -48,7 +49,7 @@
    "_orig_id": 2,
    "github_op": "repo_check",
    "github_repo": "ProtoJay4789/deploy-agentic-treasury",
-   "notes": "[GitHub gated \u2192 scheduler: repo deploy-agentic-treasury]",
+   "notes": "[GitHub gated → scheduler: repo deploy-agentic-treasury]",
    "group": "labs",
    "routing": {
     "group": "labs",
@@ -58,7 +59,7 @@
   },
   {
    "id": 3,
-   "name": "FrameForge \u2014 AI Storyboard Service (previs pipeline)",
+   "name": "FrameForge — AI Storyboard Service (previs pipeline)",
    "difficulty": "medium",
    "priority": "high",
    "status": "pending",
@@ -67,7 +68,7 @@
    "needs_jordan": false,
    "human_gated": false,
    "gate_type": "decision",
-   "detail": "Controlled pre-vis pipeline: character sheet \u2192 locked look \u2192 camera-native storyboard frames. Proven on Vanito's KAGE film. Spec at 09-Green Room/specs/frameforge-ai-storyboard-service.md.",
+   "detail": "Controlled pre-vis pipeline: character sheet → locked look → camera-native storyboard frames. Proven on Vanito's KAGE film. Spec at 09-Green Room/specs/frameforge-ai-storyboard-service.md.",
    "_orig_id": 3,
    "recommended_tier": "k3",
    "note": "[Jordan GO Aug 3: ship + start]",
@@ -80,14 +81,14 @@
   },
   {
    "id": 4,
-   "name": "Super Arcade Tennis \u2014 Cab #1 for GenTech Arcade",
+   "name": "Super Arcade Tennis — Cab #1 for GenTech Arcade",
    "difficulty": "medium",
    "priority": "high",
    "status": "blocked",
    "assigned_to": "gentech",
    "platform": "cloud",
    "needs_jordan": true,
-   "detail": "First arcade cabinet. Three.js isometric tennis, chain power-shots (BTC/ETH/SOL), AI opponent. LIVE at arcade.gentechlabs.net. Part of larger Agent Arcade vision. [GAME LIVE Aug 3 \u2014 only x402 payments remain, Jordan-gated]",
+   "detail": "First arcade cabinet. Three.js isometric tennis, chain power-shots (BTC/ETH/SOL), AI opponent. LIVE at arcade.gentechlabs.net. Part of larger Agent Arcade vision. [GAME LIVE Aug 3 — only x402 payments remain, Jordan-gated]",
    "human_gated": true,
    "gate_type": "human",
    "note": "GAME IS LIVE at arcade.gentechlabs.net (root /). Only remaining work = x402 crypto-payments wiring (needs Jordan wallet/funds). Verified Aug 3: serves HTTP 200, full game code present.",
@@ -102,7 +103,7 @@
   },
   {
    "id": 5,
-   "name": "Open Generative AI \u2014 Self-Host AI Media Studio",
+   "name": "Open Generative AI — Self-Host AI Media Studio",
    "difficulty": "medium",
    "priority": "high",
    "status": "pending",
@@ -124,7 +125,7 @@
   },
   {
    "id": 6,
-   "name": "AI Factory Hackathon \u2014 lablab.ai x NativelyAI (Aug 3-10)",
+   "name": "AI Factory Hackathon — lablab.ai x NativelyAI (Aug 3-10)",
    "difficulty": "easy",
    "priority": "high",
    "status": "pending",
@@ -146,7 +147,7 @@
   },
   {
    "id": 7,
-   "name": "Algorand Global x402 Challenge \u2014 Composite Entry ($100K + 500K ALGO)",
+   "name": "Algorand Global x402 Challenge — Composite Entry ($100K + 500K ALGO)",
    "difficulty": "medium",
    "priority": "high",
    "status": "pending",
@@ -155,7 +156,7 @@
    "needs_jordan": false,
    "human_gated": false,
    "gate_type": "decision",
-   "detail": "Algorand Global x402 Challenge \u2014 $100K USD + 500K ALGO prize pool. Leaderboard is open. Build pay-per-request API services on Algorand mainnet. Top 5 winners ($25K-$15K) + 500K ALGO across top 20. Culminates at Devcon 8 India. Our x402 gateway already supports multi-chain \u2014 config-only for ALGO. Was previously #63, removed during consolidation. Re-added Jul 26.",
+   "detail": "Algorand Global x402 Challenge — $100K USD + 500K ALGO prize pool. Leaderboard is open. Build pay-per-request API services on Algorand mainnet. Top 5 winners ($25K-$15K) + 500K ALGO across top 20. Culminates at Devcon 8 India. Our x402 gateway already supports multi-chain — config-only for ALGO. Was previously #63, removed during consolidation. Re-added Jul 26.",
    "note": "Re-discovered via Brain Audit Jul 26. Jordan needs to register at algorand.co/global-x402-challenge and provide ALGO wallet address. [Jordan GO Aug 3: un-gated, workable overnight]",
    "_orig_id": 7,
    "recommended_tier": "flash",
@@ -168,7 +169,7 @@
   },
   {
    "id": 8,
-   "name": "Agent Warfare \u2014 Agent Archetypes/Classes (Sniper, Scout, Heavy, Medic, Engineer)",
+   "name": "Agent Warfare — Agent Archetypes/Classes (Sniper, Scout, Heavy, Medic, Engineer)",
    "difficulty": "hard",
    "priority": "urgent",
    "status": "pending",
@@ -190,7 +191,7 @@
   },
   {
    "id": 9,
-   "name": "Agent Warfare \u2014 Procedural Map Generation via text-to-cad",
+   "name": "Agent Warfare — Procedural Map Generation via text-to-cad",
    "difficulty": "medium",
    "priority": "urgent",
    "status": "pending",
@@ -199,7 +200,7 @@
    "needs_jordan": false,
    "human_gated": false,
    "gate_type": "decision",
-   "detail": "Use text-to-cad pipeline (build123d \u2192 STEP \u2192 GLB) to generate playable FPS maps from descriptions. Urban courtyard, warehouse, desert outpost, etc. Drop GLB into Three.js scene as playable level. Ship with a dozen procedurally-generated maps.",
+   "detail": "Use text-to-cad pipeline (build123d → STEP → GLB) to generate playable FPS maps from descriptions. Urban courtyard, warehouse, desert outpost, etc. Drop GLB into Three.js scene as playable level. Ship with a dozen procedurally-generated maps.",
    "_orig_id": 9,
    "recommended_tier": "k2.7",
    "note": "[Jordan TOP PRIORITY Aug 3: character design, map design, performance, sound, gameplay - must be crispy. Futuristic GenTech shooter. Custom weapons later.]",
@@ -212,7 +213,7 @@
   },
   {
    "id": 10,
-   "name": "ClawWork Integration \u2014 GenTech Employee Squad",
+   "name": "ClawWork Integration — GenTech Employee Squad",
    "difficulty": "medium",
    "priority": "high",
    "status": "pending",
@@ -234,7 +235,7 @@
   },
   {
    "id": 11,
-   "name": "Paymenter x402 Gateway \u2014 Submit to Marketplace + Discord",
+   "name": "Paymenter x402 Gateway — Submit to Marketplace + Discord",
    "difficulty": "easy",
    "priority": "high",
    "status": "pending",
@@ -256,7 +257,7 @@
   },
   {
    "id": 12,
-   "name": "Paymenter x402 \u2014 Pterodactyl Community Outreach",
+   "name": "Paymenter x402 — Pterodactyl Community Outreach",
    "difficulty": "easy",
    "priority": "high",
    "status": "pending",
@@ -265,7 +266,7 @@
    "needs_jordan": false,
    "human_gated": false,
    "gate_type": "action",
-   "detail": "Post in Pterodactyl community (Discord, forums) about the first crypto gateway for game server hosts. Game server hosts are the biggest Paymenter use case \u2014 their customers already hold crypto.",
+   "detail": "Post in Pterodactyl community (Discord, forums) about the first crypto gateway for game server hosts. Game server hosts are the biggest Paymenter use case — their customers already hold crypto.",
    "_orig_id": 12,
    "recommended_tier": "flash",
    "note": "[Jordan GO Aug 3: un-gated, workable overnight]",
@@ -278,7 +279,7 @@
   },
   {
    "id": 13,
-   "name": "Multica + Paperclip \u2014 Set Up ClawWork Squad + GenTech Shop Plugin",
+   "name": "Multica + Paperclip — Set Up ClawWork Squad + GenTech Shop Plugin",
    "difficulty": "medium",
    "priority": "high",
    "status": "pending",
@@ -287,7 +288,7 @@
    "needs_jordan": true,
    "human_gated": true,
    "gate_type": "action",
-   "detail": "Two platforms running locally. (1) Multica at localhost:3001 \u2014 create GenTech workspace, add Hermes agent, spin up ClawWork agents as teammates on the board. Fixed verification code 402402. (2) Paperclip at ProtoJay4789/paperclip (fork, 74.8K stars, build fixed) \u2014 start dev server, build genTech-shop plugin for build queue panel + service catalog. Both greenlit by Jordan.",
+   "detail": "Two platforms running locally. (1) Multica at localhost:3001 — create GenTech workspace, add Hermes agent, spin up ClawWork agents as teammates on the board. Fixed verification code 402402. (2) Paperclip at ProtoJay4789/paperclip (fork, 74.8K stars, build fixed) — start dev server, build genTech-shop plugin for build queue panel + service catalog. Both greenlit by Jordan.",
    "_orig_id": 13,
    "recommended_tier": "flash",
    "group": "labs",
@@ -299,7 +300,7 @@
   },
   {
    "id": 14,
-   "name": "EVM Cortex \u2014 Fork + Extend with x402 + GenTech Audit Squad",
+   "name": "EVM Cortex — Fork + Extend with x402 + GenTech Audit Squad",
    "difficulty": "medium",
    "priority": "high",
    "status": "pending",
@@ -321,7 +322,7 @@
   },
   {
    "id": 15,
-   "name": "DeFi Model \u2014 QLoRA Fine-Tune DeepSeek R1 32B on BlockRun",
+   "name": "DeFi Model — QLoRA Fine-Tune DeepSeek R1 32B on BlockRun",
    "difficulty": "easy",
    "priority": "high",
    "status": "pending",
@@ -342,7 +343,7 @@
   },
   {
    "id": 16,
-   "name": "Cesium Flight Sim \u2014 Arcade Cabinet with Agent Wingmen",
+   "name": "Cesium Flight Sim — Arcade Cabinet with Agent Wingmen",
    "difficulty": "medium",
    "priority": "high",
    "status": "pending",
@@ -364,7 +365,7 @@
   },
   {
    "id": 17,
-   "name": "ACE-Step UI \u2014 Arcade Soundtrack System + GenTech Music Studio",
+   "name": "ACE-Step UI — Arcade Soundtrack System + GenTech Music Studio",
    "difficulty": "medium",
    "priority": "high",
    "status": "pending",
@@ -373,7 +374,7 @@
    "needs_jordan": false,
    "human_gated": false,
    "gate_type": "decision",
-   "detail": "Integrate ACE-Step UI (4.5K stars, open-source Suno alternative) into GenTech stack. (1) Arcade cabinet background music \u2014 per-cabinet tracks generated from mood prompts. (2) Demo video soundtracks \u2014 no copyright risk for hackathon submissions. (3) GenTech branding \u2014 jingle, intro/outro music. (4) Vanito's music studio \u2014 custom tracks for KAGE films, social content. Needs ACE-Step 1.5 model running (GPU). Repo cloned at /root/ace-step-ui/.",
+   "detail": "Integrate ACE-Step UI (4.5K stars, open-source Suno alternative) into GenTech stack. (1) Arcade cabinet background music — per-cabinet tracks generated from mood prompts. (2) Demo video soundtracks — no copyright risk for hackathon submissions. (3) GenTech branding — jingle, intro/outro music. (4) Vanito's music studio — custom tracks for KAGE films, social content. Needs ACE-Step 1.5 model running (GPU). Repo cloned at /root/ace-step-ui/.",
    "recommended_tier": "k2.7",
    "_orig_id": 17,
    "note": "[Jordan GO Aug 3: ship + start]",
@@ -386,7 +387,7 @@
   },
   {
    "id": 18,
-   "name": "GeoLibre \u2014 GIS Data Pipeline for DogFighters Maps",
+   "name": "GeoLibre — GIS Data Pipeline for DogFighters Maps",
    "difficulty": "medium",
    "priority": "high",
    "status": "pending",
@@ -408,7 +409,7 @@
   },
   {
    "id": 19,
-   "name": "Agent Builders Cup \u2014 Hummingbot Agent Trading ($20K+ + $1K capital)",
+   "name": "Agent Builders Cup — Hummingbot Agent Trading ($20K+ + $1K capital)",
    "difficulty": "medium",
    "priority": "high",
    "status": "pending",
@@ -420,7 +421,7 @@
    "detail": "Agent Builders Cup by Hummingbot/Botcamp. PRIZE NOW $20K+ (was $15K). 7 teams, 14 agent seats. $1K USDC starting capital per agent (builder keeps P&L). Venues: Binance, Gate.io, Hyperliquid, Derive, XRPL, Solana, Bitget. Sponsor teams: Bitget, Derive, Gate, Meteora, Orca, XRPL. Two build paths: Hummingbot V2 Controller (rule-based) or Condor Agent (LLM-driven). DEADLINES: registration closes Aug 15, 2026; build window Aug 1-31; judging Sep 1-30; finals Oct 1-2 livestreamed; winners Oct 7 at Token2049 Singapore. 50 builders registered so far. Register: botcamp.xyz/hackathons/agent-builders-cup-1",
    "recommended_tier": "k2.7",
    "_orig_id": 19,
-   "note": "Jordan confirmed go. Register at botcamp.xyz/hackathons/agent-builders-cup-1. Only 10 seats \u2014 register ASAP.",
+   "note": "Jordan confirmed go. Register at botcamp.xyz/hackathons/agent-builders-cup-1. Only 10 seats — register ASAP.",
    "group": "labs",
    "routing": {
     "group": "labs",
@@ -430,7 +431,7 @@
   },
   {
    "id": 20,
-   "name": "AI Job Search \u2014 Fork + Set Up Jordan's Profile + GenTech Academy Module",
+   "name": "AI Job Search — Fork + Set Up Jordan's Profile + GenTech Academy Module",
    "difficulty": "easy",
    "priority": "high",
    "status": "pending",
@@ -439,7 +440,7 @@
    "needs_jordan": false,
    "human_gated": false,
    "gate_type": "action",
-   "detail": "Fork ai-job-search (28.1K stars, MIT). (1) Set up Jordan's profile \u2014 skills, experience, portfolio link. (2) Wire into job search workflow \u2014 tailored CV + cover letters via Claude Code. (3) Package as GenTech Academy module \u2014 'AI-Powered Job Search' case study. Repo: github.com/MadsLorentzen/ai-job-search\n\nTarget companies (remote): Zapier, Supabase, Temporal, Render, Linear, Cresta, Fieldguide, Chainguard, Vanta, RevenueCat. Jordan confirmed go. Micro1 called him a top prospect \u2014 AI test after GOAT meeting.",
+   "detail": "Fork ai-job-search (28.1K stars, MIT). (1) Set up Jordan's profile — skills, experience, portfolio link. (2) Wire into job search workflow — tailored CV + cover letters via Claude Code. (3) Package as GenTech Academy module — 'AI-Powered Job Search' case study. Repo: github.com/MadsLorentzen/ai-job-search\n\nTarget companies (remote): Zapier, Supabase, Temporal, Render, Linear, Cresta, Fieldguide, Chainguard, Vanta, RevenueCat. Jordan confirmed go. Micro1 called him a top prospect — AI test after GOAT meeting.",
    "recommended_tier": "k2.7",
    "_orig_id": 20,
    "note": "[Jordan GO Aug 3: ship + start]",
@@ -452,7 +453,7 @@
   },
   {
    "id": 21,
-   "name": "awesome-mcp-servers \u2014 Contribute GenTech x402 + MCP Listings",
+   "name": "awesome-mcp-servers — Contribute GenTech x402 + MCP Listings",
    "difficulty": "easy",
    "priority": "high",
    "status": "pending",
@@ -461,10 +462,10 @@
    "needs_jordan": false,
    "human_gated": false,
    "gate_type": "decision",
-   "detail": "Submit PRs to awesome-mcp-servers (91K \u2b50) listing our x402 gateway and GenTech MCP servers. Also list on cinderwright x402 Discovery Hub (1450+ services indexed). Check agoragentic-integrations for agent-to-agent marketplace listing. Eat the meat: get our services discoverable. Spit out the potatoes: skip the rest.",
+   "detail": "Submit PRs to awesome-mcp-servers (91K ⭐) listing our x402 gateway and GenTech MCP servers. Also list on cinderwright x402 Discovery Hub (1450+ services indexed). Check agoragentic-integrations for agent-to-agent marketplace listing. Eat the meat: get our services discoverable. Spit out the potatoes: skip the rest.",
    "recommended_tier": "flash",
    "_orig_id": 27,
-   "note": "[Jordan GO Aug 3: un-gated, workable overnight] [Jordan REGISTERED Aug 3 \u2014 build GO, deadline Aug 13]",
+   "note": "[Jordan GO Aug 3: un-gated, workable overnight] [Jordan REGISTERED Aug 3 — build GO, deadline Aug 13]",
    "group": "labs",
    "routing": {
     "group": "labs",
@@ -474,7 +475,7 @@
   },
   {
    "id": 22,
-   "name": "Syra Marketplace \u2014 Register GenTech x402 Services",
+   "name": "Syra Marketplace — Register GenTech x402 Services",
    "difficulty": "easy",
    "priority": "medium",
    "status": "pending",
@@ -496,7 +497,7 @@
   },
   {
    "id": 23,
-   "name": "CockroachDB \u00d7 AWS \u2014 Build with Agentic Memory ($8.75K)",
+   "name": "CockroachDB × AWS — Build with Agentic Memory ($8.75K)",
    "difficulty": "easy",
    "priority": "medium",
    "status": "pending",
@@ -505,7 +506,7 @@
    "needs_jordan": false,
    "human_gated": false,
    "gate_type": "decision",
-   "detail": "CockroachDB \u00d7 AWS Hackathon: Build with Agentic Memory. Submissions Jun 30 - Aug 18, 2026. $8,750 total prizes ($5K/$2.5K/$1.25K). Requirements: 2+ CockroachDB tools (MCP Server, Vector Indexing, ccloud CLI) + 1+ AWS service (Bedrock, Lambda, ECS, S3, SageMaker). Build persistent memory for AI agents. Devpost: cockroachdb-ai.devpost.com.",
+   "detail": "CockroachDB × AWS Hackathon: Build with Agentic Memory. Submissions Jun 30 - Aug 18, 2026. $8,750 total prizes ($5K/$2.5K/$1.25K). Requirements: 2+ CockroachDB tools (MCP Server, Vector Indexing, ccloud CLI) + 1+ AWS service (Bedrock, Lambda, ECS, S3, SageMaker). Build persistent memory for AI agents. Devpost: cockroachdb-ai.devpost.com.",
    "note": "Discovered Jul 26 Brain Audit via blockrun_search. 23 days until deadline. Needs Jordan: register at Devpost (cockroachdb-ai.devpost.com), decide go/no-go. [Jordan GO Aug 3: ship + start]",
    "_orig_id": 22,
    "recommended_tier": "flash",
@@ -518,7 +519,7 @@
   },
   {
    "id": 24,
-   "name": "Paymenter x402 \u2014 WHMCS/Blesta Extension Port",
+   "name": "Paymenter x402 — WHMCS/Blesta Extension Port",
    "difficulty": "medium",
    "priority": "medium",
    "status": "pending",
@@ -527,7 +528,7 @@
    "needs_jordan": false,
    "human_gated": false,
    "gate_type": "decision",
-   "detail": "Port the Paymenter x402 extension pattern to WHMCS and Blesta \u2014 the two largest hosting billing platforms. Same gateway hooks, same x402 integration. Much larger markets than Paymenter.",
+   "detail": "Port the Paymenter x402 extension pattern to WHMCS and Blesta — the two largest hosting billing platforms. Same gateway hooks, same x402 integration. Much larger markets than Paymenter.",
    "_orig_id": 23,
    "recommended_tier": "k2.7",
    "note": "[Jordan GO Aug 3: un-gated, workable overnight]",
@@ -540,7 +541,7 @@
   },
   {
    "id": 25,
-   "name": "The Great Agent Hackathon \u2014 Enterprise AI Agents (\u20b9100K)",
+   "name": "The Great Agent Hackathon — Enterprise AI Agents (₹100K)",
    "difficulty": "easy",
    "priority": "medium",
    "status": "pending",
@@ -549,7 +550,7 @@
    "needs_jordan": false,
    "human_gated": false,
    "gate_type": "decision",
-   "detail": "The Great Agent Hackathon \u2014 build AI agents for the enterprise. Online, July 23 - August 25, 2026. \u20b9100,000 in prizes (~$1,200 USD). Enterprise AI agent focus. Discovered Jul 27 Nightly Brain Audit via blockrun_search.",
+   "detail": "The Great Agent Hackathon — build AI agents for the enterprise. Online, July 23 - August 25, 2026. ₹100,000 in prizes (~$1,200 USD). Enterprise AI agent focus. Discovered Jul 27 Nightly Brain Audit via blockrun_search.",
    "note": "Discovered Jul 27 Nightly Brain Audit. Online, still open. Needs Jordan: register at Devpost, decide go/no-go. [Jordan GO Aug 3: ship + start]",
    "_orig_id": 24,
    "recommended_tier": "k3",
@@ -562,7 +563,7 @@
   },
   {
    "id": 26,
-   "name": "awesome-selfhosted \u2014 Audit for GenTech Stack Gaps",
+   "name": "awesome-selfhosted — Audit for GenTech Stack Gaps",
    "difficulty": "easy",
    "priority": "medium",
    "status": "pending",
@@ -571,7 +572,7 @@
    "needs_jordan": false,
    "human_gated": false,
    "gate_type": "decision",
-   "detail": "Quick scan of awesome-selfhosted (309K \u2b50) for any self-hosted tools we're missing. Replace paid services where possible. Low priority \u2014 we already self-host most of our stack.",
+   "detail": "Quick scan of awesome-selfhosted (309K ⭐) for any self-hosted tools we're missing. Replace paid services where possible. Low priority — we already self-host most of our stack.",
    "recommended_tier": "flash",
    "_orig_id": 28,
    "note": "[Jordan GO Aug 3: ship + start]",
@@ -584,7 +585,7 @@
   },
   {
    "id": 27,
-   "name": "Hippocratic AI Residency \u2014 Evaluate Fit",
+   "name": "Hippocratic AI Residency — Evaluate Fit",
    "difficulty": "easy",
    "priority": "low",
    "status": "pending",
@@ -606,7 +607,7 @@
   },
   {
    "id": 28,
-   "name": "OKX AI Genesis Hackathon \u2014 x402 ASP Submission ($100K)",
+   "name": "OKX AI Genesis Hackathon — x402 ASP Submission ($100K)",
    "difficulty": "medium",
    "priority": "none",
    "status": "cancelled",
@@ -615,8 +616,8 @@
    "needs_jordan": false,
    "human_gated": true,
    "gate_type": "decision",
-   "detail": "CANCELLED \u2014 Jul 27 deadline missed. Jordan decided not to pursue. Can re-list if OKX reopens.",
-   "note": "DISCOVERED via Brain Audit Jul 25. Deadline T-2 days! Adding X Layer is a config change. Jordan needs to register and provide wallet. | \u26a0\ufe0f T-2 days as of Jul 25! Jordan must register + provide X Layer wallet by July 27 23:59 UTC.",
+   "detail": "CANCELLED — Jul 27 deadline missed. Jordan decided not to pursue. Can re-list if OKX reopens.",
+   "note": "DISCOVERED via Brain Audit Jul 25. Deadline T-2 days! Adding X Layer is a config change. Jordan needs to register and provide wallet. | ⚠️ T-2 days as of Jul 25! Jordan must register + provide X Layer wallet by July 27 23:59 UTC.",
    "_orig_id": 26,
    "recommended_tier": "flash",
    "group": "labs",
@@ -628,7 +629,7 @@
   },
   {
    "id": 29,
-   "name": "Build with Gemini XPRIZE \u2014 AI Business with x402 Payments (M)",
+   "name": "Build with Gemini XPRIZE — AI Business with x402 Payments (M)",
    "difficulty": "hard",
    "priority": "urgent",
    "status": "pending",
@@ -637,8 +638,8 @@
    "needs_jordan": true,
    "human_gated": true,
    "gate_type": "decision",
-   "detail": "Build with Gemini XPRIZE by XPRIZE \u00d7 Google. M total prizes (00K grand prize). Build a real AI business operated by AI agents with real revenue. Must use at least one Google Cloud product. Categories include Money & Financial Access \u2014 perfect for our x402 payment gateway. Deadline: Aug 17, 2026 (18 days). Register at xprize.devpost.com. Our x402 gateway + agent stack fits the Money & Financial Access category. Needs Jordan: register on Devpost, decide go/no-go.",
-   "note": "Discovered Jul 30 Nightly Brain Audit via web_search. M prize pool \u2014 highest-value opportunity in queue.",
+   "detail": "Build with Gemini XPRIZE by XPRIZE × Google. M total prizes (00K grand prize). Build a real AI business operated by AI agents with real revenue. Must use at least one Google Cloud product. Categories include Money & Financial Access — perfect for our x402 payment gateway. Deadline: Aug 17, 2026 (18 days). Register at xprize.devpost.com. Our x402 gateway + agent stack fits the Money & Financial Access category. Needs Jordan: register on Devpost, decide go/no-go.",
+   "note": "Discovered Jul 30 Nightly Brain Audit via web_search. M prize pool — highest-value opportunity in queue.",
    "recommended_tier": "k3",
    "group": "labs",
    "routing": {
@@ -649,7 +650,7 @@
   },
   {
    "id": 30,
-   "name": "DataHub Agent Hackathon \u2014 MCP Context Agent (0.5K)",
+   "name": "DataHub Agent Hackathon — MCP Context Agent (0.5K)",
    "difficulty": "medium",
    "priority": "urgent",
    "status": "done",
@@ -671,7 +672,7 @@
   },
   {
    "id": 31,
-   "name": "Yield.xyz MCP integration \u2014 GTA yield intelligence layer",
+   "name": "Yield.xyz MCP integration — GTA yield intelligence layer",
    "difficulty": "easy",
    "priority": "medium",
    "status": "shipped",
@@ -679,7 +680,7 @@
    "assigned_to": "gentech",
    "needs_jordan": false,
    "platform": "any",
-   "detail": "Yield.xyz \u00d7 Syra \u2014 x402-native yield discovery MCP (yield-mcp-server v1.0.0 at mcp.yield.xyz/mcp). 3,000+ yield opportunities across 80+ networks (lending, vaults, staking, RWAs, liquid staking). 22 tools: yields_get_all/get, balances, enter/exit/claim, TVL+APY history, risk params, KYC, builder tools. Pay per call via x402 (Coinbase CDP Facilitator), no API key. Integration: wire into GTA as live yield intelligence source; complements cufolio + yield-rainbow. Source: Syra tweet Jul 31 2026.",
+   "detail": "Yield.xyz × Syra — x402-native yield discovery MCP (yield-mcp-server v1.0.0 at mcp.yield.xyz/mcp). 3,000+ yield opportunities across 80+ networks (lending, vaults, staking, RWAs, liquid staking). 22 tools: yields_get_all/get, balances, enter/exit/claim, TVL+APY history, risk params, KYC, builder tools. Pay per call via x402 (Coinbase CDP Facilitator), no API key. Integration: wire into GTA as live yield intelligence source; complements cufolio + yield-rainbow. Source: Syra tweet Jul 31 2026.",
    "recommended_tier": "k2.7",
    "group": "labs",
    "routing": {
@@ -690,7 +691,7 @@
   },
   {
    "id": 32,
-   "name": "Model Strength Score \u2014 score trained models 0-850 for marketplace",
+   "name": "Model Strength Score — score trained models 0-850 for marketplace",
    "difficulty": "medium",
    "priority": "high",
    "status": "pending",
@@ -710,7 +711,7 @@
   },
   {
    "id": 33,
-   "name": "Paperclip Control Plane \u2014 fix embedded Postgres startup (root EACCES)",
+   "name": "Paperclip Control Plane — fix embedded Postgres startup (root EACCES)",
    "difficulty": "medium",
    "priority": "medium",
    "status": "pending",
@@ -719,7 +720,7 @@
    "needs_jordan": false,
    "human_gated": false,
    "gate_type": "action",
-   "detail": "Paperclip (control plane for AI-agent companies, fork of HenkDz/paperclip) can't start. `pnpm dev` crashes at embedded Postgres init. ROOT CAUSE: three-way conflict. (1) embedded-postgres refuses to run as root. (2) `createPostgresUser: true` (added to migration-runtime.ts) makes it spawn initdb as OS user 'postgres', but (3) the Postgres binary + repo live under /root (mode 700), which the postgres user cannot traverse -> EACCES spawning initdb even though pgdata relocated to /var/lib/paperclip/db (postgres-writable). Fix options: (A) run Paperclip under a dedicated non-root systemd user with repo+binaries relocated outside /root, (B) use PGlite (embedded, no separate postgres binary) instead of embedded-postgres, or (C) relax /root traversal for postgres (least secure, not preferred). Recommended: (B) PGlite in dev per AGENTS.md 'use embedded PGlite by leaving DATABASE_URL unset' \u2014 investigate why it falls back to embedded-postgres instead. Status: infra setup task, not a code bug in our logic. Added Aug 3 2026 (Jordan GO: map out fix).",
+   "detail": "Paperclip (control plane for AI-agent companies, fork of HenkDz/paperclip) can't start. `pnpm dev` crashes at embedded Postgres init. ROOT CAUSE: three-way conflict. (1) embedded-postgres refuses to run as root. (2) `createPostgresUser: true` (added to migration-runtime.ts) makes it spawn initdb as OS user 'postgres', but (3) the Postgres binary + repo live under /root (mode 700), which the postgres user cannot traverse -> EACCES spawning initdb even though pgdata relocated to /var/lib/paperclip/db (postgres-writable). Fix options: (A) run Paperclip under a dedicated non-root systemd user with repo+binaries relocated outside /root, (B) use PGlite (embedded, no separate postgres binary) instead of embedded-postgres, or (C) relax /root traversal for postgres (least secure, not preferred). Recommended: (B) PGlite in dev per AGENTS.md 'use embedded PGlite by leaving DATABASE_URL unset' — investigate why it falls back to embedded-postgres instead. Status: infra setup task, not a code bug in our logic. Added Aug 3 2026 (Jordan GO: map out fix).",
    "note": "[Jordan GO Aug 3: add to build list to map out fix]. Paperclip fork at /root/paperclip-fork. Also needs genTech-shop plugin once running (queue #13). Repo not pushed to GitHub yet.",
    "group": "labs",
    "routing": {
@@ -730,7 +731,7 @@
   },
   {
    "id": 34,
-   "name": "API Audit Fix \u2014 Replace placeholder/dead endpoints (crypto-price, gas-price, token-security)",
+   "name": "API Audit Fix — Replace placeholder/dead endpoints (crypto-price, gas-price, token-security)",
    "difficulty": "easy",
    "priority": "high",
    "status": "shipped",
@@ -739,20 +740,21 @@
    "needs_jordan": false,
    "human_gated": false,
    "gate_type": null,
-   "detail": "Audit (Aug 3) found 3 live APIs return HARDCODED placeholder data nobody would pay for. crypto-price-api (/v1/price/{symbol}) returns price:0.0 placeholder; gas-price-api (/v1/gas) returns all-zero gas_prices placeholder; token-security-api (/v1/score/{mint}) returns score:0 level:unknown placeholder. Wire real data: crypto-price -> crypto-price-fetch skill / CoinGecko fallback; gas-price -> Etherscan/OracleGAS or live RPC gas; token-security -> reuse Rugcheck engine (already real, port 8088). Also note agent-search-api (/root/agent-search-api/main.py) has real /search endpoints but NOT currently served on 8091 (that port runs x402-backend@agent_discovery instead) \u2014 verify its systemd service exists. Deal-tracker-api v1/deals was ALSO a stub returning [] \u2014 NOW FIXED (Aug 3) with real CheapShark engine + price-watch/release-radar/preorder-advisor endpoints (6 tests passing). **SHIPPED (Aug 3):** all 3 placeholder APIs fixed and live. crypto-price (CMC->CoinGecko), gas-price (live RPC+Polygon), token-security (proxies Rugcheck). Added api-audit.py to kit + academy Module 5. Deal-tracker fixed earlier same day. Agent-search-api still orphaned (port conflict) - flagged for Jordan."
+   "detail": "Audit (Aug 3) found 3 live APIs return HARDCODED placeholder data nobody would pay for. crypto-price-api (/v1/price/{symbol}) returns price:0.0 placeholder; gas-price-api (/v1/gas) returns all-zero gas_prices placeholder; token-security-api (/v1/score/{mint}) returns score:0 level:unknown placeholder. Wire real data: crypto-price -> crypto-price-fetch skill / CoinGecko fallback; gas-price -> Etherscan/OracleGAS or live RPC gas; token-security -> reuse Rugcheck engine (already real, port 8088). Also note agent-search-api (/root/agent-search-api/main.py) has real /search endpoints but NOT currently served on 8091 (that port runs x402-backend@agent_discovery instead) — verify its systemd service exists. Deal-tracker-api v1/deals was ALSO a stub returning [] — NOW FIXED (Aug 3) with real CheapShark engine + price-watch/release-radar/preorder-advisor endpoints (6 tests passing). **SHIPPED (Aug 3):** all 3 placeholder APIs fixed and live. crypto-price (CMC->CoinGecko), gas-price (live RPC+Polygon), token-security (proxies Rugcheck). Added api-audit.py to kit + academy Module 5. Deal-tracker fixed earlier same day. Agent-search-api still orphaned (port conflict) - flagged for Jordan."
   }
  ],
  "consolidation_notes": [
-  "v32 \u2014 Jul 27 Session: Agent Warfare rebranded + deployed. Gamepad + touch controls added. text-to-cad pipeline proven (5 models). CAD Viewer live at cad.gentechlabs.net. ClawWork cloned + installed.",
-  "v33 \u2014 Jul 27 Session: Added #84 Agent Archetypes, #85 Procedural Maps, #86 ClawWork Employee Squad to queue. All Jordan-blocked.",
-  "v31 \u2014 Jul 27: Cancelled #72 OKX (deadline missed). Algorand #82 promoted to top priority.",
-  "v34 \u2014 Jul 27 Session: Built Paymenter x402 Gateway Extension. Pushed to GitHub (github.com/ProtoJay4789/paymenter-x402). Marketplace listing + Discord post drafted.",
-  "v35 \u2014 Jul 27 Session: Added #87 Paymenter Marketplace submission, #88 Pterodactyl outreach, #89 WHMCS/Blesta port, #90 Hippocratic AI Residency eval. All Jordan-blocked.",
-  "v32 \u2014 Jul 27: Model strategy set. deepseek-v4-flash primary, Kimi K3 for audits/reasoning. Forge notified.",
-  "v52 \u2014 Jul 30 Nightly: Added #29 Gemini XPRIZE (M) and #30 DataHub Agent Hackathon (0.5K). Both urgent deadlines.",
-  "v56 \u2014 Aug 1 overnight maintenance: recomputed summary (total 30\u219231, shipped 0\u21921 for #31 Yield.xyz MCP) and gate_summary from items[]. No open upstream PRs tracked in queue items; no blockers resolved.",
-  "v58 \u2014 Aug 2 overnight maintenance: gate_summary.human_gated corrected 30\u219231 (recounted from items[]). Status counts verified accurate (32 total: 29 pending, 1 in_progress, 1 shipped, 1 cancelled). No queue items track open upstream PRs; no blocked items. GitHub search API unavailable for this token (422 on user search) \u2014 PR check done by queue inspection instead.",
-  "v59 \u2014 Aug 3 overnight maintenance: PR merge check via GitHub events API + repo-scoped queries (user-search API still 422). No queue item has a merged upstream PR: awesome-mcp-servers #21 PRs opened 07-14/07-16 but unmerged; merged PRs this window were to unrelated repos (gold-402, RPCS3/rpcs3, xpaysh/awesome-x402). Blocked item #4 (Super Arcade Tennis) blocker still unresolved \u2014 x402 payments wiring remains Jordan-gated. Corrected summary drift: blocked 0\u21921, in_progress 1\u21920 (item #4 is blocked; nothing in_progress)."
+  "v32 — Jul 27 Session: Agent Warfare rebranded + deployed. Gamepad + touch controls added. text-to-cad pipeline proven (5 models). CAD Viewer live at cad.gentechlabs.net. ClawWork cloned + installed.",
+  "v33 — Jul 27 Session: Added #84 Agent Archetypes, #85 Procedural Maps, #86 ClawWork Employee Squad to queue. All Jordan-blocked.",
+  "v31 — Jul 27: Cancelled #72 OKX (deadline missed). Algorand #82 promoted to top priority.",
+  "v34 — Jul 27 Session: Built Paymenter x402 Gateway Extension. Pushed to GitHub (github.com/ProtoJay4789/paymenter-x402). Marketplace listing + Discord post drafted.",
+  "v35 — Jul 27 Session: Added #87 Paymenter Marketplace submission, #88 Pterodactyl outreach, #89 WHMCS/Blesta port, #90 Hippocratic AI Residency eval. All Jordan-blocked.",
+  "v32 — Jul 27: Model strategy set. deepseek-v4-flash primary, Kimi K3 for audits/reasoning. Forge notified.",
+  "v52 — Jul 30 Nightly: Added #29 Gemini XPRIZE (M) and #30 DataHub Agent Hackathon (0.5K). Both urgent deadlines.",
+  "v56 — Aug 1 overnight maintenance: recomputed summary (total 30→31, shipped 0→1 for #31 Yield.xyz MCP) and gate_summary from items[]. No open upstream PRs tracked in queue items; no blockers resolved.",
+  "v58 — Aug 2 overnight maintenance: gate_summary.human_gated corrected 30→31 (recounted from items[]). Status counts verified accurate (32 total: 29 pending, 1 in_progress, 1 shipped, 1 cancelled). No queue items track open upstream PRs; no blocked items. GitHub search API unavailable for this token (422 on user search) — PR check done by queue inspection instead.",
+  "v59 — Aug 3 overnight maintenance: PR merge check via GitHub events API + repo-scoped queries (user-search API still 422). No queue item has a merged upstream PR: awesome-mcp-servers #21 PRs opened 07-14/07-16 but unmerged; merged PRs this window were to unrelated repos (gold-402, RPCS3/rpcs3, xpaysh/awesome-x402). Blocked item #4 (Super Arcade Tennis) blocker still unresolved — x402 payments wiring remains Jordan-gated. Corrected summary drift: blocked 0→1, in_progress 1→0 (item #4 is blocked; nothing in_progress).",
+  "v62 — Aug 4 overnight maintenance: PR merge check via GitHub events API (user-search API still 422, GraphQL rate-limited). No queue item has a newly merged upstream PR — #21 awesome-mcp-servers PRs still unmerged; only merges on record (gold-402, RPCS3, xpaysh/awesome-x402) are unrelated to queue items. Blockers unchanged: #4 Super Arcade Tennis (x402 wiring, Jordan wallet) and #1 KeeperHub (wallet 0x53A8...8EA unfunded on Base) both still Jordan-gated. Fixed major summary drift: total 33→34, added done:1 (#30 DataHub), needs_jordan 30→7, gate_summary human_gated 31→8, decision_gated 22→21, autonomous 0→26 — all recounted from items[]."
  ],
  "agents": {
   "gentech": {
@@ -768,12 +770,12 @@
    "decision_maker": true
   }
  },
- "note": "v36 \u2014 Jul 27 Nightly: Fixed arcade.gentechlabs.net 502 (proxy\u2192static). Added #91 Great Agent Hackathon. All items Jordan-blocked.",
- "updated": "2026-08-03",
+ "note": "v36 — Jul 27 Nightly: Fixed arcade.gentechlabs.net 502 (proxy→static). Added #91 Great Agent Hackathon. All items Jordan-blocked.",
+ "updated": "2026-08-04",
  "gate_summary": {
-  "human_gated": 31,
-  "decision_gated": 22,
-  "autonomous": 0
+  "human_gated": 8,
+  "decision_gated": 21,
+  "autonomous": 26
  },
  "model_strategy": {
   "version": "v3",
