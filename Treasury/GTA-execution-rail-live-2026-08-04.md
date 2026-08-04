@@ -51,3 +51,20 @@
 - Remit path CDP server account → Jordan EOA for profit return.
 - Buy-list acquisition rails (SOL/TAO/AVAX/LINK/ONDO/PAXG) + vault brain research.
 - Expand `SUPPORTED` map in gta_coinbase_leg.py with verified PAXG/AVAX addresses.
+
+## Buy-list acquisition rails (Aug 4, 2026)
+Verified via live CDP quote + CoinGecko + vault brain:
+
+| Asset | Native chain | Base rail? | Acquisition path |
+|---|---|---|---|
+| **BTC/cbBTC** | Base | ✅ wired + traded | CDP spot leg (DONE, $5 fill) |
+| **LINK** | Base | ✅ VERIFIED + added to SUPPORTED | CDP spot leg — 0x88fb150bdc53a65fe94dea0c9ba0a6daf8c6e196, 18 dec, quotes live |
+| **PAXG** | Ethereum | ❌ no native Base | CDP spot on **ethereum** net, OR bridged (verify live first) |
+| **AVAX** | Avalanche | ❌ no native Base | native Avalanche rail (our wallet / CDP server account is Base-only) |
+| **ONDO** | Ethereum | ❌ no native Base | CDP spot on ethereum, OR bridged (verify live) |
+| **SOL/TAO** | Solana | ❌ EVM rail N/A | **Jupiter swap** on Solana; USDC bridge Base→Solana exists at `10-Labs/AAE-Dry-Powder-Vault/agent/solana_bridge_adapter.py` (Across) |
+
+**Key discipline:** a CoinGecko `platforms.base` address is a *candidate*, not verified. Only
+LINK passed live CDP quote verification. PAXG/AVAX/ONDO/SOL/TAO need either a real on-chain
+address verified against `get_swap_price` (for EVM) or a Jupiter swap path (for Solana)
+before we claim the buy list is executable. Do NOT invent addresses.
