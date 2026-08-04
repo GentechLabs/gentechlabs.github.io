@@ -52,6 +52,14 @@
 - Buy-list acquisition rails (SOL/TAO/AVAX/LINK/ONDO/PAXG) + vault brain research.
 - Expand `SUPPORTED` map in gta_coinbase_leg.py with verified PAXG/AVAX addresses.
 
+## Remit path — BUILT + dry-run verified (Aug 4, 2026)
+`gta_remit.py` returns profit from the CDP server account (`0x77C6…`) → Jordan's GTA
+EOA (`0x3d117Bf42218c3244AA0Ad011E8651A615230eCb`) → spendable via his Coinbase card.
+- Uses the CDP account's `transfer()` — signing key stays in Coinbase's TEE, never touched.
+- Dry-run is the default; `--no-dry-run` executes. Verified from BOTH profiles.
+- Synced to treasury profile. NOT yet executed with real funds (nothing to remit — $0 profit so far).
+- ⚠️ Reminder: ALWAYS verify the receipt on-chain; the SDK's success flag is not proof.
+
 ## Buy-list acquisition rails (Aug 4, 2026)
 Verified via live CDP quote + CoinGecko + vault brain:
 
