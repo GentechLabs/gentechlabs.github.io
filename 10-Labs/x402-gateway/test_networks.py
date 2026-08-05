@@ -29,7 +29,9 @@ def test_registry_has_base_and_algorand(monkeypatch):
     assert "base" in s.NETWORKS
     assert "algorand" in s.NETWORKS
     assert s.NETWORKS["base"]["network"] == "eip155:8453"
-    assert s.NETWORKS["algorand"]["network"].startswith("algorand:")
+    # Full CAIP-2 — MUST match the GoPlausible facilitator's /supported string
+    # so Algorand proofs verify. A truncated genesis-hash makes the rail unmatchable.
+    assert s.NETWORKS["algorand"]["network"] == "algorand:wGHE2Pwdvd7S12BL5FaOP20EGYesN73ktiC1qzkkit8="
 
 
 def test_algorand_uses_usdc_asa_id(monkeypatch):
@@ -76,6 +78,16 @@ def test_algorand_amount_is_atomic_for_its_decimals(monkeypatch):
     s = _load(monkeypatch, "algorand")
     acc = s.build_payment_required("Token Security", 0.25)["accepts"][0]
     assert acc["amount"] == "250000"  # 0.25 * 1e6
+
+
+def test_algorand_accept_carries_challenge_tag(monkeypatch):
+    """Algorand rail must carry the x402-global-challenge tag (Algorand Global
+    x402 Challenge: the tag in the resource x402 config is how activity is
+    attributed to the competition)."""
+    monkeypatch.setenv("X402_PAYTO_ALGORAND", "A" * 58)
+    s = _load(monkeypatch, "algorand")
+    acc = s.build_payment_required("Token Security", 0.01)["accepts"][0]
+    assert acc["extra"].get("tag") == "x402-global-challenge"
 
 
 def test_unknown_network_is_ignored_not_fatal(monkeypatch):
@@ -181,3 +193,26 @@ def test_simulation_legacy_proof_without_network_still_works(monkeypatch):
     s = _load(monkeypatch, "base")
     ok, reason = s.verify_proof_simulation(_signed_proof(s), 0.01)
     assert ok, reason
+
+
+# --- GoPlausible routing ---------------------------------------------------
+
+def test_proof_network_extraction_v2_envelope(monkeypatch):
+    s = _load(monkeypatch, None)
+    algo = s.NETWORKS["algorand"]["network"]
+    proof = json.dumps({
+        "paymentPayload": {"accepted": {"network": algo}},
+    })
+    assert s._proof_network(proof) == algo
+
+
+def test_proof_network_extraction_flat(monkeypatch):
+    s = _load(monkeypatch, None)
+    proof = json.dumps({"network": "eip155:8453"})
+    assert s._proof_network(proof) == "eip155:8453"
+
+
+def test_proof_network_returns_none_on_garbage(monkeypatch):
+    s = _load(monkeypatch, None)
+    assert s._proof_network("not-json-{{") is None
+    assert s._proof_network("") is None
