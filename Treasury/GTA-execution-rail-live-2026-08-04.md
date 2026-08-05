@@ -90,3 +90,19 @@ before we claim the buy list is executable. Do NOT invent addresses.
 - Now shows live P&L vs entry: `💼 GTA Pos | USDC $5.50 | cbBTC 0.000077 (≈$10.47) 🔴P&L -0.03 (-0.66%)`
 - Entry state recorded in `.gta-positions.json` (cbBTC LONG, $5.00 cost, 0.0000772 qty, tx hash).
 - Price source: Coinbase `BTC-USD/spot` — **CBTC-USD 404s** (cbBTC tracks BTC 1:1). This was the silent-N/A trap.
+
+## Cron fleet consolidation (Aug 4, 2026)
+Jordan: the Agentic Treasury fused report now replaces the standalone GTA crons.
+REMOVED (simulated/redundant):
+- GTA Watcher (ab75cb79f6ec) — reported phantom 3x leveraged position, not held
+- GTA Signal (ac3040c8bf15) — generated leveraged signals for a venue we don't trade
+- GTA Fund Monitor (182f21572585) — HL balance check, we trade Coinbase spot now
+- CLARITY Act Vote Tracker duplicate (008ba45a22f0) — paused dup of active 8d40bf2cbe43
+
+KEPT (data producers the treasury DEPENDS on):
+- GTA Arb Monitor (81f57cc36b11) — writes .gta-arb-state.json
+- GTA Executor (a11f9e0205f3) — logs agent-flow.jsonl (Layer 3 attribution)
+- Agentic Treasury (1cbde1d52242) — the fused product
+- Narrative, CMC, FOMC, CLARITY(active), LP Monitor — separate domains/feeders
+
+⚠️ GAP: `.aae-hybrid-signal.json` (regime feed) — producer `aae-hybrid-signal.py` MISSING, no cron. Regime layer shows N/A. Flagged for rebuild.
