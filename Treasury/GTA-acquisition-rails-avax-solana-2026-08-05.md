@@ -91,3 +91,17 @@ AVAX rail options:
     matches our architecture, but no Safe custody.
 Recommend (b) for speed to execution (easy->hard), (a) if we want Almanak's strategy/backtest
 capabilities for AVAX.
+
+## AVAX rail — DECISIVE finding (Aug 5, 2026)
+- CDP swap API does NOT cover Avalanche (only base, ethereum, arbitrum, optimism, polygon).
+- CDP server ACCOUNT is Base/Ethereum-only: `list_token_balances(network='avalanche')` rejected
+  (enum allows only base/base-sepolia/ethereum). So the TEE-managed CDP key CANNOT sign on Avalanche.
+- Verified Avalanche C-Chain works: WAVAX (0xB31f...66c7, 18dec) + native USDC (0xB97E...48a6E, 6dec)
+  both live; TraderJoe Router V1 (0x60aE...33d4) getAmountsOut = 1 USDC -> 0.149 WAVAX.
+- Aggregators: 1inch needs paid key (401); 0x no route for WAVAX pair (404). TraderJoe direct router
+  is the working path, but it needs an APPROVAL + a signer that can act on Avalanche.
+- CONCLUSION: a "thin" AVAX swap cannot reuse the CDP server wallet (wrong chain). It needs EITHER
+  (a) Almanak with Safe+signer (full custody path), OR (b) a SEPARATE Avalanche keypair the agent
+  holds directly (raw signing — different security posture than CDP's TEE).
+- This is a real custody decision for Jordan, not a coding step. All other 6 assets are execution-ready
+  on rails that already work (CDP Base/Eth, Jupiter Solana).
