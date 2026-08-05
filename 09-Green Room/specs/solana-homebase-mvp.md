@@ -72,3 +72,18 @@ The grant asks for coding subscription receipts totaling $200. Current stack:
 - `github.com/ProtoJay4789/x402-gateway` (gateway)
 - `github.com/ProtoJay4789/agent-economy-solana` (contracts)
 - New: `github.com/ProtoJay4789/solana-homebase` (this orchestrator)
+
+## ♻️ Reusable across the Solana lane (strategic value)
+This isn't just a grant deliverable — it's a **reusable submission asset** for
+every Solana hackathon:
+- **Colosseum Solana hackathon** — next window **Sep 28 – Nov 2, 2026** (2026
+  schedule; Frontier was Apr 6–May 11, next is Sep 28–Nov 2). The agentic-treasury-
+  on-Solana angle fits the agent/DeFi tracks.
+- Other Solana hackathons: any that want Solana-integrated AI agents.
+- **Why it compounds:** one Solana Homebase MVP = grant tranche-2 unlock + Arc
+  demo + Colosseum entry + a live reference product. Built once, submitted many
+  times.
+
+### Watch
+- **Colosseum registration** for the Sep 28–Nov 2 window — monitor colosseum.com
+  for when registration opens. Jordan registered for Frontier earlier (agent track).
