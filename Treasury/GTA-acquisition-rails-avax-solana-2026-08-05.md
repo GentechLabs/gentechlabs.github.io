@@ -67,3 +67,27 @@
   2 per chain.
 - STILL NEEDS: fund the Solana keypair (0 SOL) to actually execute — SOL for gas + USDC
   bridged Base->Solana (CCTP/Across).
+
+## Almanak env setup progress (Aug 5, 2026)
+- Created isolated Python 3.12 venv: `/root/.hermes/profiles/gentech/venvs/almanak-venv`
+  (does NOT touch the working 3.11 treasury stack). python3.12.3.
+- Installed almanak **2.24.0** (newer than the 1.0.9 the PyPI index showed earlier).
+  CLI works: `almanak --version`, `almanak ax --help`, `almanak ax swap ... --dry-run`.
+- ⚠️ BLOCKER (architecture): Almanak is NOT a keypair swap rail. It runs on **Safe smart
+  accounts + Zodiac signer service**. `almanak ax swap USDC AVAX 1 --chain avalanche --dry-run`
+  fails with `wallet_address: required` because no wallet/safe is configured.
+- Config keys: `ALMANAK_PLATFORM_WALLETS` (JSON wallet mapping), `ALMANAK_SIGNER_SERVICE_ENDPOINT_ROOT`,
+  `ALMANAK_SIGNER_SERVICE_JWT`. Signer service must be running (gateway + Safe).
+- Implication: wiring AVAX via Almanak means deploying/managing a Safe + signer service —
+  heavier ops footprint than our CDP/Jupiter legs. It's a real decision for Jordan, not a
+  one-liner.
+
+## DECISION for Jordan
+AVAX rail options:
+(a) **Almanak (full)**: deploy Safe + Zodiac signer service. Institutional-grade (backtest,
+    Safe custody, gateway), but a real ops build. Best long-term for active AVAX strategies.
+(b) **Thin Avalanche swap** (mirror CDP leg): swap USDC->AVAX on Avalanche C-Chain via a
+    DEX router directly (we already have Avalanche USDC + TraderJoe in brain config). Lighter,
+    matches our architecture, but no Safe custody.
+Recommend (b) for speed to execution (easy->hard), (a) if we want Almanak's strategy/backtest
+capabilities for AVAX.
