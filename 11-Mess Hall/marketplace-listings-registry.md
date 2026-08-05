@@ -15,7 +15,7 @@
 
 | # | Platform | URL / Location | What's tracked | Status | Last verified |
 |---|----------|---------------|----------------|--------|---------------|
-| 1 | x402-list.com | https://x402-list.com/services/gentech-labs-x402-gateway | 6 endpoints, uptime, compliance, signability, price, traction | 🟢 ONLINE (was "route not signable" → fixed EIP-712 + standard header 2026-08-02) | 2026-08-02 |
+| 1 | x402-list.com | https://x402-list.com/services/gentech-labs-x402-gateway | 6 endpoints, uptime, compliance, signability, price, traction | 🟢 ONLINE — page cache STALE (shows 6 services/Base; manifest has 8/6chains, will self-correct on ~5h rescan). Full sweep Aug 5 | 2026-08-05 |
 | 2 | 8004scan.io (ERC-8004 registry) | https://8004scan.io/agents?chain=43114 · agent #1770 | GenTech Labs identity, 16 x402 endpoints, feedback | 🟢 LIVE (Avalanche, owner 0x7ebff188f2Eba16518C02864589b1403a5d1296a) | 2026-08-02 |
 | 3 | api.gentechlabs.net (gateway) | https://api.gentechlabs.net | 6 paid x402 services, /.well-known/x402, bazaar manifest v9.0.0 | 🟢 LIVE — 8 services, manifest v9.0.0 (re-verified 2026-08-05) | 2026-08-05 |
 | 4 | gentechlabs.net | https://gentechlabs.net | Landing page, links to gateway + kit | 🟢 | 2026-08-02 |
@@ -99,6 +99,6 @@ The real, working, revenue-capable API surface. **This is the number to use** wh
 | **Treasury Defender (new service #7)** | Multi-chain | LIVE ✅ (Aug 2) | New paid x402 service (port 8096): classifies any token KNOWN/SUSPICIOUS (homoglyph detection + liquidity check), quarantines flagged tokens, returns safe burn calldata. 3 scam tokens from Jordan's Avalanche wallet already quarantined (ÚSDС, USḌC, UЅDС). Manifest v9.0.0. | Add to Bankr skill + x402-list rescan | 2026-08-02 |
 ---
 
-*Last updated: 2026-08-05 (Marketplace Scout weekly sweep — gateway re-verified live v9.0.0, 8 services; added 3 NEW sell-side marketplaces: Freelance AI/PayAI, BotWork, Amadeus Agent Hub)*
+*Last updated: 2026-08-05 (FULL SWEEP — manifest v9.0.0 verified 8 services/6 chains ✅; x402-list page cache lagging (6→8, auto-rescan); gentechlabs.net API section synced to true 8; OpenDexter MCP verified reachable; Syra=curated/partner (no self-serve); registrations needing Jordan: Syra, BotWork, Swarms, Atelier)*
 
 | **Solana Homebase** | https://github.com/Gentech-Labs/solana-homebase | Agentic Treasury orchestrator — Solana homebase (Superteam tranche-2 MVP) | 🟢 PUBLIC + LIVE (Aug 5) | 2026-08-05 |
