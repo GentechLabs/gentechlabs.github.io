@@ -880,5 +880,41 @@
     "detail": "Jordan request Aug 5. Job 38eda06b0a11 (Agent Marketplace Income Scanner \u2014 Hive/OKX/earn.fi/Multi-Marketplace). Seed it with the marketplaces we are ALREADY listed on (from 11-Mess Hall/marketplace-listings-registry.md) so it dedupes existing and scans for NEW places to launch. Start in a fresh session.",
     "source": "Jordan (Aug 5, 2026)",
     "notes": "Fresh session with fresh context requested before working this. Handoff: 01-HANDOFFS/gentech-to-labs/2026-08-05-algorand-x402-wallet.md (deferred section)."
+  },
+  {
+    "id": 43,
+    "name": "Treasury — Gas Refuel Engine (self-funding loop)",
+    "difficulty": "medium",
+    "priority": "high",
+    "status": "shipped",
+    "assigned_to": "gentech",
+    "platform": "cloud",
+    "needs_jordan": false,
+    "human_gated": false,
+    "gate_type": "build",
+    "detail": "gas_refuel.py — the treasury's self-sustaining loop. Monitors CDP Base ETH, swaps USDC->ETH when gas drops below 0.0015 (hysteresis arm) to reach 0.003 target, capped $5, only if USDC>= $1. REAL gated by AAE_GAS_REAL + CDP creds. This is the 'keep itself funded' intelligence. 12 tests, K2.7-audited.",
+    "note": "Shipped Aug 5. Live dry-run verified: reads real CDP gas 0.000298 < arm -> proposes $5 USDC->ETH swap. K2.7 flagged hysteresis churn bug -> fixed with ARM band. Self-funding is the differentiator we sell.",
+    "_orig_id": null,
+    "recommended_tier": 1,
+    "group": "Treasury",
+    "routing": "Treasury"
+  },
+  {
+    "id": 44,
+    "name": "Treasury — Live-Test Runner (dry-run harness)",
+    "difficulty": "easy",
+    "priority": "high",
+    "status": "shipped",
+    "assigned_to": "gentech",
+    "platform": "cloud",
+    "needs_jordan": false,
+    "human_gated": false,
+    "gate_type": "build",
+    "detail": "run_treasury_tests.py — consolidated dry-run harness proving all treasury modules read live state and decide correctly WITHOUT moving funds: gas refuel, regime gate, yield LP, close executor, live balances. Pre-flight for the real money-moving test.",
+    "note": "Shipped Aug 5. Run: python3 run_treasury_tests.py. All 5 legs dry-run clean. Next: fund ~$25 + flip real flags for the live round-trip.",
+    "_orig_id": null,
+    "recommended_tier": 1,
+    "group": "Treasury",
+    "routing": "Treasury"
   }
 ]
