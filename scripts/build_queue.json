@@ -736,7 +736,7 @@
     "name": "Repo-Context Graph \u2014 Persistent Map + Staleness Check + Blast-Radius (borrow from Graft)",
     "difficulty": "medium",
     "priority": "high",
-    "status": "pending",
+    "status": "shipped",
     "assigned_to": "gentech",
     "platform": "cloud",
     "needs_jordan": false,
@@ -746,6 +746,8 @@
     "recommended_tier": "k2.7",
     "_orig_id": 35,
     "note": "[Jordan borrow Aug 4: yes, borrow what you need]",
+    "shipped_date": "2026-08-05",
+    "shipped_note": "SHIPPED Aug 5 overnight. Full toolkit in scripts/context-graph/: repo_map.py (persistent per-subsystem markdown map + graph.json + fingerprint.json), repo_map_check.py (content-hash staleness check, exit 1 on drift, --rebuild auto-regens), blast_radius.py (resolve direct+transitive dependents before edit). Pure stdlib, no deps. Verified end-to-end on iagent-x402 (20 files/6 subsystems; helpers.py blast = 8 direct/12 transitive dependents; drift detection + auto-rebuild proven) and gold-402 (standalone scripts = correct true-negative). JS import resolution fixed (same-dir .js/bare/index-level). 3/3 tests pass (test_context_graph.py) incl. Python+JS coverage. Wire-in: run repo_map.py once per repo, repo_map_check.py --rebuild at session start, blast_radius.py before multi-file edits.",
     "group": "labs",
     "routing": {
       "group": "labs",
