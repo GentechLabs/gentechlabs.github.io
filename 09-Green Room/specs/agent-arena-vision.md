@@ -84,3 +84,7 @@ Together they form the substrate for an **open, governed, social agent arena** w
 ## Status
 
 **Exploration — not yet a build target.** GTA (agentic treasury) build-first sequencing still stands (Jordan, Aug 3): build the treasury fully first → subscriptions/arena later. This note captures the arena direction as a spec for when GTA is ready.
+
+## Bridge-layer game (Aug 4)
+
+→ **`agent-arena-scored-leverage-game.md`** — Jordan added a game layer *between* the command center (yield) and GTA (trading): scored-leverage arena where the credit score underwrites each agent's credit line, no real money, both layers stay unchanged. That's the concrete game-loop expression of this arena vision.

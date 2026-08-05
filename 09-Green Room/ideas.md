@@ -196,6 +196,10 @@
 - [ ] Build a GenTech-branded demo short
 
 ## Ready to Test (skills exist, need execution)
+
+- [ ] **CopilotKit Channels SDK** — Open-source SDK (MIT) to bring any agent into Slack/Microsoft Teams/Discord/Telegram with **native interactive UI** (Slack Block Kit, Teams Adaptive Cards). 147⭐, early but from CopilotKit (established agent framework org). Connects AG-UI-compatible agents (LangGraph, CrewAI, Pydantic AI, ADK) — keeps agent's tools/model/logic, adds platform-native rendering + **human approval gates** in-conversation. Extends our single-agent-multi-channel pattern beyond Telegram to Slack/Teams/Discord. Approval gates = natural fit for x402 payment confirmations in-chat. Source: github.com/CopilotKit/channels-sdk, Aug 4. **Watch — evaluate once stable.**
+- [x] **Vibe-Trading (HKUDS)** — installed v0.1.12 to hermes venv (CLI `vibe-trading` works). BLOCKER: needs a real LLM API key (OpenRouter/OpenAI) to power the agent brain + Shadow Account. Candidate for #19 Builders Cup. Source: x.com/0xMarioNawfal list, Aug 4.
+- [ ] **AI-Job-Search (MadsLorentzen)** — Claude Code agent: evaluate postings, tailor CV, write cover letters, interview prep. 29.6k⭐ MIT, real-world proof (author: 69 apps → 20 interviews → hired Jun 2026). Built for Danish boards but pattern is board-agnostic — swap for our targets. Directly serves Jordan's remote blockchain/cloud role hunt. Source: x.com/0xMarioNawfal list, Aug 4.
 - [ ] **WURK.FUN microtasks** — Agent-to-human microtask skill, ready to test
 - [ ] **Coinbase for Agents** — Monitoring, validate our stack fits
 
