@@ -1,0 +1,62 @@
+# Solana as Homebase — Agentic Treasury MVP (Superteam Tranche-2 Deliverable)
+
+**Status:** Spec — BUILDING (Aug 5)
+**Grant:** Superteam Earn Agentic Engineering — Tranche 2 unlock (second $100)
+**Goal:** A live, working MVP with **Solana integration** + documentable $200 coding subs.
+
+## Why Solana is the homebase
+- **USDC settlement is the point** — Solana does sub-second, sub-cent USDC. The grant's own
+  application committed to "Solana as the primary high-speed settlement layer."
+- **Cheaper than bridging** — agents pay on the destination chain directly, no bridge fee/wait.
+- **Matches the tranche-2 requirement** verbatim: "live MVP + some Solana integration."
+
+## What already exists (verified, don't rebuild)
+| Piece | Location | Status |
+|-------|----------|--------|
+| **Jupiter swap leg** | `gentech-treasury/scripts/gta_solana_leg.py` | ✅ LIVE quotes verified (SOL $1→0.0134, TAO $1→0.00505) |
+| **Solana bridge adapter** | `10-Labs/AAE-Dry-Powder-Vault/agent/solana_bridge_adapter.py` | ✅ Across Base→Solana USDC |
+| **solders + solana-py** | venv | ✅ installed |
+| **Yield LP engine** | `gentech-treasury/scripts/yield_lp_engine.py` | ✅ Phase A |
+| **Close executor** | `gentech-treasury/scripts/gta_close_executor.py` | ✅ Phase B |
+| **Regime gate** | `gentech-treasury/scripts/regime_gate.py` | ✅ Phase C |
+| **x402 gateway (multi-chain)** | `10-Labs/x402-gateway/server.py` | ✅ Base + Algorand rails |
+
+## The MVP loop (Solana homebase)
+```
+Agent earns USDC via x402 (any chain)
+        ↓
+Bridge USDC → Solana (Across adapter, sub-5s)
+        ↓
+Treasury deploys USDC on Solana yield (Jupiter/routes)
+        ↓
+Regime gate decides: accumulate (yield) vs trade (SOL/TAO via Jupiter)
+        ↓
+Agent pays services from Solana wallet (sub-cent gas)
+        ↓
+Receipt logged (Q402 trust receipt pattern)
+```
+
+## What I'm building now (this session)
+1. **Solana homebase orchestrator** — `solana_homebase.py`: ties bridge→deploy→yield→pay
+   into one command (mirrors the venue-agnostic engine pattern). DRY_RUN by default.
+2. **Verify the bridge adapter imports + quotes** cleanly (web3 present?).
+3. **Wire the Solana leg into the treasury allocator** so SOL/TAO is a valid deployment target.
+4. **Tranche-2 package** — a README + demo script that shows: live Solana quote → (bridged)
+   → on-chain proof. This is the video + repo the grant reviewer sees.
+
+## Funding needed to go LIVE (Jordan, from grant)
+- Solana wallet gas: **~$2 SOL** (for Jupiter swaps)
+- USDC to deploy: **~$20 USDC on Solana** (bridge from grant)
+- Test end-to-end: SOL buy, TAO buy, receipt.
+
+## $200 coding-subscription documentation (tranche-2 requirement)
+The grant asks for coding subscription receipts totaling $200. Current stack:
+- OpenCode Go $10/mo, Ollama Cloud Pro $20/mo, Nous $20/mo, VPS $42/mo = **~$92/mo**.
+- **Need $200 total** — document 2-3 months of these (or add dev tools). Jordan to confirm
+  which receipts we can upload. This is the "agentic subscriptions" he flagged.
+
+## Repos for the submission
+- `github.com/ProtoJay4789/solana-x402-mvp` (MVP)
+- `github.com/ProtoJay4789/x402-gateway` (gateway)
+- `github.com/ProtoJay4789/agent-economy-solana` (contracts)
+- New: `github.com/ProtoJay4789/solana-homebase` (this orchestrator)
