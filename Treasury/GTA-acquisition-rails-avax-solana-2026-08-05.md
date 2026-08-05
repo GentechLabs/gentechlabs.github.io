@@ -57,3 +57,13 @@
 - Wallet: existing keypair 4CTVx59fQThAQEN1yV3eUMsVCcmuXNjCmfRH8Bd9UcPb (Anchor deploy key)
   has **0 SOL** — needs SOL for gas + USDC (bridged Base->Solana via CCTP/Across) to trade.
 - To execute SOL: fund the keypair, set SOLANA_KEYPAIR_FILE, run with no --dry-run.
+
+## TAO mint VERIFIED + wired (Aug 5, 2026)
+- Real mint: **taoC6xyv2v8tDLcev4uaGUgV4vdQsWJrGft2kcBRrBY** (Bittensor native on Solana
+  via Wormhole Sunrise). Confirmed via Solscan token page, verified against live Jupiter
+  quote (HTTP 200). 6 decimals.
+- Leg now quotes BOTH: SOL ~0.0135/$1, TAO ~0.00497/$1.
+- Buy list now: BTC, LINK (Base) | PAXG, ONDO (Ethereum) | SOL, TAO (Solana) = 6 assets,
+  2 per chain.
+- STILL NEEDS: fund the Solana keypair (0 SOL) to actually execute — SOL for gas + USDC
+  bridged Base->Solana (CCTP/Across).
