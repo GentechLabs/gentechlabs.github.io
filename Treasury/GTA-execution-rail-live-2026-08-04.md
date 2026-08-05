@@ -106,3 +106,16 @@ KEPT (data producers the treasury DEPENDS on):
 - Narrative, CMC, FOMC, CLARITY(active), LP Monitor — separate domains/feeders
 
 ⚠️ GAP: `.aae-hybrid-signal.json` (regime feed) — producer `aae-hybrid-signal.py` MISSING, no cron. Regime layer shows N/A. Flagged for rebuild.
+
+## Regime producer rebuilt (Aug 5, 2026)
+- Root cause: `.aae-hybrid-signal.json` (regime feed) had NO producer cron; the script was
+  missing from the treasury scripts dir. Regime layer showed N/A.
+- Fixed: copied `aae-hybrid-signal.py` + its 3 components (`regime_classifier.py`,
+  `strategy_returns.py`, `allocation_engine.py`) from vault `Treasury/scripts/` into the
+  treasury profile scripts dir.
+- Created cron `bc999a35e0cd` "AAE Regime Producer" (0 7,13,19 * * *, no_agent, local deliver)
+  — silently regenerates the feed 3x/day; treasury reads it.
+- ⚠️ HOME is profile-scoped → the script writes to
+  `~/.hermes/profiles/gentech-treasury/home/.hermes/scripts/.aae-hybrid-signal.json`,
+  which is exactly where `agentic-treasury.py` resolves `~/.hermes/scripts` — so it matches.
+- Verified: treasury now shows `🌡️ Regime: RANGE_BOUND (65%)` (was N/A).
