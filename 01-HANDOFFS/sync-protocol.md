@@ -58,6 +58,19 @@ Each group agent has a symmetric return path so Gentech picks up its work:
   still consumed by `tick_build_queue.py`. The new per-group return folders generalize
   this to labs/entertainment/finance/hq.
 
+## ROUTING RULE — Forge = the desktop lane (Jordan, Aug 5)
+
+"Forge only" is shorthand for **desktop only**. Forge runs on Jordan's PC, so anything
+that's easier done on the desktop should route to Forge **regardless of group**:
+- MetaMask / wallet signing
+- Browser logins + account actions (uphive wallet link, OKX, etc.)
+- Local files / desktop-only tools
+- Opening a website Jordan has to see
+
+When writing a handoff, if the task needs Jordan at a desktop, direct it to
+`gentech-to-forge/` (or note "Forge (desktop)" in the per-group note) so it lands on
+the right lane. Forge returns via `forge-to-gentech/` + `forge-completions.md`.
+
 ## Important
 
 - **Group agents sometimes push only to GitHub** — always `git pull vault main` before reading handoffs.
