@@ -45,3 +45,15 @@
    but heavier than our thin CDP leg). Or keep AVAX on a simpler native Avalanche swap first?
 2. SOL/TAO via Jupiter — build a thin `gta_solana_leg.py` mirroring our CDP leg pattern
    (quote → sign → swap → verify tx)? This matches our existing architecture best.
+
+## Solana leg BUILT (Aug 5, 2026) — gta_solana_leg.py
+- Mirrors the CDP leg pattern: quote -> sign -> swap -> verify. Uses Jupiter.
+- SOL VERIFIED + quoting live: ~0.0135 SOL per $1 USDC (dry-run).
+- TAO mint NOT yet verified -> leg gracefully returns unverified-mint-TAO. (Discipline:
+  never invent an address. Placeholder returned "WrongSize" from Jupiter.)
+- ⚠️ Jupiter endpoint gotcha: `quote-api.jup.ag` and `tokens.jup.ag` are IPv6-only /
+  blocked on this VPS. The working host is **`api.jup.ag/swap/v1/quote`** (IPv4, returns
+  real quotes). lite-api is IPv6-only. This is the #1 gotcha for any Solana build here.
+- Wallet: existing keypair 4CTVx59fQThAQEN1yV3eUMsVCcmuXNjCmfRH8Bd9UcPb (Anchor deploy key)
+  has **0 SOL** — needs SOL for gas + USDC (bridged Base->Solana via CCTP/Across) to trade.
+- To execute SOL: fund the keypair, set SOLANA_KEYPAIR_FILE, run with no --dry-run.
