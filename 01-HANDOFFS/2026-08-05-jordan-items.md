@@ -30,3 +30,11 @@ KeeperHub execution wallet `0x53A8...8EA` still needs ~$15 ETH + ~$10 USDC on Ba
 ## Notes
 - All real-exec flags (`AAE_LP_REAL`, `AAE_CLOSE_REAL`) are OFF. Never flip without explicit Jordan go.
 - CDP creds (API key + wallet secret) are present and wired.
+
+## ✅ Jordan GO decisions (Aug 5)
+- **ALL high-priority + medium items = GO** (Jordan: "all of the high-priority stuff is a go. The medium stuff is definitely a go.")
+- **Kite AI (#78)** — RESOLVED. Agent Passport already done; hackathon already concluded. Removed.
+- **Syra Marketplace (#76)** — definitely get listed (GO).
+- **#12 (GenTech Academy Module 3) + #13 (Voice Stack LiveKit vs Pipecat)** — GO, work on these.
+- **Agentic Treasury** = top grant use; fund live round-trip (~$26) first.
+- **KeeperHub** (~$25) + **Algorand** (~$8) — fund from grant. Reserve ~$50 for agentic subscriptions.
