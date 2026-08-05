@@ -17,7 +17,7 @@
 |---|----------|---------------|----------------|--------|---------------|
 | 1 | x402-list.com | https://x402-list.com/services/gentech-labs-x402-gateway | 6 endpoints, uptime, compliance, signability, price, traction | 🟢 ONLINE (was "route not signable" → fixed EIP-712 + standard header 2026-08-02) | 2026-08-02 |
 | 2 | 8004scan.io (ERC-8004 registry) | https://8004scan.io/agents?chain=43114 · agent #1770 | GenTech Labs identity, 16 x402 endpoints, feedback | 🟢 LIVE (Avalanche, owner 0x7ebff188f2Eba16518C02864589b1403a5d1296a) | 2026-08-02 |
-| 3 | api.gentechlabs.net (gateway) | https://api.gentechlabs.net | 6 paid x402 services, /.well-known/x402, bazaar manifest v8.0.0 | 🟢 ALL 6 SERVICES PAYING E2E | 2026-08-02 |
+| 3 | api.gentechlabs.net (gateway) | https://api.gentechlabs.net | 6 paid x402 services, /.well-known/x402, bazaar manifest v9.0.0 | 🟢 LIVE — 8 services, manifest v9.0.0 (re-verified 2026-08-05) | 2026-08-05 |
 | 4 | gentechlabs.net | https://gentechlabs.net | Landing page, links to gateway + kit | 🟢 | 2026-08-02 |
 | 4b | Games API (deal-tracker) | api.gentechlabs.net/v1/games/* (port 8080) | deal search, price-watch, release-radar, preorder-advisor | 🟢 LIVE + real data (was stub `[]`, fixed Aug 3) | 2026-08-03 |
 | 4c | Crypto Price API | api.gentechlabs.net/v1/price (port 8082) | real-time crypto prices | 🟢 LIVE (was placeholder, fixed Aug 3) | 2026-08-03 |
@@ -96,4 +96,4 @@ The real, working, revenue-capable API surface. **This is the number to use** wh
 | **Treasury Defender (new service #7)** | Multi-chain | LIVE ✅ (Aug 2) | New paid x402 service (port 8096): classifies any token KNOWN/SUSPICIOUS (homoglyph detection + liquidity check), quarantines flagged tokens, returns safe burn calldata. 3 scam tokens from Jordan's Avalanche wallet already quarantined (ÚSDС, USḌC, UЅDС). Manifest v9.0.0. | Add to Bankr skill + x402-list rescan | 2026-08-02 |
 ---
 
-*Last updated: 2026-08-03 (OpenDexter added row 4g — created by Jordan directive — keep this file current)*
+*Last updated: 2026-08-05 (Marketplace Scout weekly sweep — gateway re-verified live v9.0.0, 8 services; no new marketplaces discovered beyond tracked list)*
