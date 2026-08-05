@@ -119,3 +119,14 @@ KEPT (data producers the treasury DEPENDS on):
   `~/.hermes/profiles/gentech-treasury/home/.hermes/scripts/.aae-hybrid-signal.json`,
   which is exactly where `agentic-treasury.py` resolves `~/.hermes/scripts` — so it matches.
 - Verified: treasury now shows `🌡️ Regime: RANGE_BOUND (65%)` (was N/A).
+
+## Buy list expanded: PAXG + ONDO live on Ethereum (Aug 5, 2026)
+- Verified PAXG (0x45804880de22913dafe09f4980848ece6ecbaf78, 18dec) and ONDO
+  (0xfaba6f8e4a5e8ab82f62fe7c39859fa577269be3, 18dec) TRADEABLE on the **ethereum** network
+  via live CDP get_swap_price.
+- Made `gta_coinbase_leg.py` NETWORK-AWARE: each token carries `net` (base/ethereum), and the
+  swap uses the correct per-network native USDC (USDC_BY_NETWORK). Buy/sell/quotes all route
+  on the token's own chain.
+- Buy list now executable: **BTC, LINK (Base) + PAXG, ONDO (Ethereum)** = 4 assets.
+- AVAX still unsupported (native Avalanche rail not wired — CDP swap account is Base/Eth).
+- SOL/TAO still need Jupiter (Solana).
