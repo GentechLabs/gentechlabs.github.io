@@ -1,7 +1,7 @@
 ---
-date: 2026-08-03
+date: 2026-08-04
 status: active
-last-updated: 2026-08-03 20:09 ET
+last-updated: 2026-08-04 20:07 ET
 ---
 
 # 🧠 Considerations — Open Decisions
@@ -10,9 +10,10 @@ last-updated: 2026-08-03 20:09 ET
 
 ## 🚨 Urgent — DEADLINES APPROACHING
 
+- [ ] 🚨 **Keeperhub Agents Onchain #80** — **JORDAN CONFIRMED GO.** Real KeeperHub workflow created (GTA Yield Guard — Aave health-factor auto-rebalancer, Base, exec test launched). **🚨 FUNDING BLOCKER: wallet 0x53A8...8EA has 0 ETH + 0 USDC on Base mainnet AND Sepolia — cannot produce the live tx link judges require. Jordan: fund ~$15 ETH + ~$10 USDC on Base.** Deadline Aug 13.
 - [ ] 🚨 **Algorand Global x402 Challenge #82** — **⚠️ DEADLINE PASSED Jul 31.** $100K + 500K ALGO. No record of registration on file. **Jordan: confirm if registered / still eligible for late leaderboard, or mark dead.**
-- [ ] 🚨 **Arc Programmable Money Hackathon** — **⚠️ Deadline Aug 9 (6 days, urgent).** Deploy x402 + Agent Wallet on Arc L1 (Encode Club, Agentic Economy track). **Jordan: (1) get testnet USDC from faucet.circle.com, (2) deploy x402.** *Queue shows PENDING — not passed.*
-- [ ] 🚨 **AI Factory Hackathon #79** — **⚠️ STARTS TODAY (Aug 3).** lablab.ai × NativelyAI, Aug 3-10. **Jordan: register?** *(Elevated from Medium this EOD run — day advanced.)*
+- [ ] 🚨 **Arc Programmable Money Hackathon** — **⚠️ Deadline Aug 9 (5 days, urgent).** Deploy x402 + Agent Wallet on Arc L1 (Encode Club, Agentic Economy track). **Jordan: (1) get testnet USDC from faucet.circle.com, (2) deploy x402.** *Queue shows PENDING — not passed.*
+- [ ] 🚨 **AI Factory Hackathon #79** — **Runs Aug 3-10 (2 days in).** lablab.ai × NativelyAI. **Jordan: register?**
 
 ## 🔴 High Priority
 
@@ -21,6 +22,8 @@ last-updated: 2026-08-03 20:09 ET
 - [ ] **Open Generative AI #77** — Self-host AI media studio (400+ models). **Jordan: go/no-go?**
 
 ## 🟡 Medium Priority
+
+- [ ] **Voice Stack: LiveKit Agents vs Pipecat** — LiveKit Agents (12.4k⭐, Apache-2.0, realtime voice AI framework) is a potential alternative/complement to our current **Pipecat 1.5.0** + custom `pipecat-x402-processor`. LiveKit strengths: native MCP support, self-hostable full stack (LiveKit server = widely-used WebRTC media server), telephony/SIP, semantic turn detection, built-in test/judge framework. We're already invested in Pipecat (voice-agent-config + speech-engine skills, Jocelyn pipeline, x402 processor). **Jordan: evaluate LiveKit Agents as the voice layer for agent deployments, or stay on Pipecat?** Source: github.com/livekit/agents, Aug 4.
 
 - [ ] **Narrative Rotation cron — CMC key not loaded in pre-run** — The weekly `narrative-rotation.py` pre-run hit HTTP 401 on every CoinMarketCap fetch (wrote all-zero JSON: BTC $0.00, all narratives "Cooling" score +0.0). Root cause: the inline pre-run step doesn't read `/root/.hermes/scripts/cmc_config.json` (which holds a working `coinmarketcap_api_key`). The 2026-08-02 run was rebuilt manually from the CMC Pro endpoint and pushed. **Jordan: confirm the cron pre-run is fixed to load the CMC key (or switch to CoinGecko free API) so next week's run is real, not zeros.**
 - [ ] **Syra Marketplace #76** — Register x402 services on syraa.fun. Easy win. **Jordan: go/no-go?**
