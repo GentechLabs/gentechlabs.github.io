@@ -37,3 +37,18 @@ Standing it up is invested once and pays across:
 ## Status
 Architecture decision recorded. Almanak remains in isolated venv, not activated.
 Next: keep the ready treasury rails moving; Almanak/arena is a distinct later build.
+
+## Correction — Almanak signing is LIGHTER than first assessed (Aug 5, 2026)
+- Almanak accepts a plain **`ALMANAK_PRIVATE_KEY`** for direct wallet signing (ax derives
+  the wallet from it, `ax.py`). The Safe+Zodiac signer service is an OPTIONAL custody layer,
+  not strictly required. This materially lowers the "heavy" ops footprint.
+- Backtest engine PROVEN: `almanak strat backtest pnl` ran a live historical sim on
+  avalanche (fetched 1417 price points for the USDC pair), no custody needed. Backtesting
+  works with NO key — ideal for the arena comparison layer.
+- Scaffolded `avax_arena` strategy (`arena/`, ta_swap template, avalanche) — the seed
+  strategy for the arena.
+- ⚠️ Custody caveat: a plain private key on the box = raw-signing (different posture than
+  CDP's TEE). Setting ALMANAK_PRIVATE_KEY to real funds is a Jordan decision. Backtest/
+  comparison runs need no key at all.
+- ⚠️ Token config: template used symbol-based tokens (WETH/USDC) which now warn (deprecated
+  in SDK 3.0); config already carries the real avalanche addresses — good.
