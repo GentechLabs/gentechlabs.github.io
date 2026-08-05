@@ -42,6 +42,8 @@ The **brain already exists** — `regime_classifier.py` + `allocation_engine.py`
 
 **Composition model (Jordan, Aug 5 — mirrors Yield Yak):** the treasury is an **orchestration layer, not a protocol builder**. We do NOT build AMMs/farms — we compose existing protocols (Morpho, Aave, Trader Joe, Jupiter, Almanak) as interchangeable sockets and let the agent compound, enforce, and move money across them. The durable value is the brain + guard rails + payment rails + on-ramp. As protocols open agent-native APIs (Trader Joe via Almanak is already live), we plug in via **config, not rebuild**. The Yield Yak pattern: they don't build farms, they compose existing ones and compound — same here.
 
+**Portable home chain (Jordan, Aug 5):** users can **choose which chain holds their main treasury funds**, and switch at any time — since chains are fungible and future chains will do different things. This is a first-class product capability, not an afterthought. Example: if Algorand pursues quantum-safety, we advertise "make Algorand your home for the agentic wallet — your funds are quantum-safe" — the wallet is chain-portable, so ARC / Algorand / Base / Ethereum can each be a *home base*. The treasury's venue-agnostic design makes the home-chain a **config choice**, not a rebuild. (Algorand is already a live x402 rail — see 01-HANDOFFS.)
+
 ---
 
 ## 3. Build phases (Easy → Hard, Karpathy-gated)

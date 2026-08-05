@@ -69,6 +69,9 @@ The real, working, revenue-capable API surface. **This is the number to use** wh
 | 8c | **OpenDexter** | https://open.dexter.cash/mcp | x402 API marketplace MCP — get our services listed | 🟢 VERIFIED x402-ready (Aug 3). **Funding state:** `0x7ebff...` = 2.97 USDC+gas (Jordan's owner wallet, NO private key in env); `0x3d117...` = signable GTA arb wallet but only 0.001 USDC. **Path to listed:** get USDC into signable wallet (or signing for 0x7ebff) → settle x402 via Dexter facilitator → auto-catalog → claim resource. | 2026-08-03 |
 | 9 | signal402 / other x402 directories | Was submitted earlier — verify status | Check + update |
 | 10 | MCP directories (mcp-directory, etc.) | Our mcp-directory service reports ok — confirm which directories list us | Audit + collect URLs |
+| 11 | **Freelance AI (by PayAI)** | https://build.avax.network/integrations/payai | Decentralized agent marketplace where AI agents hire/work for each other, x402 (Solana, Base, Avalanche). PayAI = the facilitator behind our WURK flow. Sell-side: list GenTech x402 services as freelance offerings. | Discovered 2026-08-05 (income scan). Open-entry (x402 standard, no stake). Register agents as sellers. |
+| 12 | **BotWork** | https://www.botwork.network/ | P2P AI-agent freelance network (libp2p task protocol), escrow on Base L2, 90/5/5 split. TS SDK `npx botwork init`. Agents bid on tasks, deliver, get paid. Sell-side fit for GenTech dev/analysis agents. | Discovered 2026-08-05 (income scan). Open-entry, MIT SDK. List an agent via SDK. |
+| 13 | **Amadeus Protocol — Agent Hub** | https://thegrid.id (amadeus_protocol) | AI agent marketplace (built on Bitte.ai infra) for trading/DeFi automation/investment agents. Cross-chain (Sui, Solana, ETH). Sell-side: list DeFi/analytics agents. | Discovered 2026-08-05 (income scan). Check registration flow before committing. |
 
 ## ⚪ KNOWN BUT NOT PURSUED / OTHER
 
@@ -96,4 +99,4 @@ The real, working, revenue-capable API surface. **This is the number to use** wh
 | **Treasury Defender (new service #7)** | Multi-chain | LIVE ✅ (Aug 2) | New paid x402 service (port 8096): classifies any token KNOWN/SUSPICIOUS (homoglyph detection + liquidity check), quarantines flagged tokens, returns safe burn calldata. 3 scam tokens from Jordan's Avalanche wallet already quarantined (ÚSDС, USḌC, UЅDС). Manifest v9.0.0. | Add to Bankr skill + x402-list rescan | 2026-08-02 |
 ---
 
-*Last updated: 2026-08-05 (Marketplace Scout weekly sweep — gateway re-verified live v9.0.0, 8 services; no new marketplaces discovered beyond tracked list)*
+*Last updated: 2026-08-05 (Marketplace Scout weekly sweep — gateway re-verified live v9.0.0, 8 services; added 3 NEW sell-side marketplaces: Freelance AI/PayAI, BotWork, Amadeus Agent Hub)*
