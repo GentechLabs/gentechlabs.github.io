@@ -40,6 +40,8 @@ The **brain already exists** — `regime_classifier.py` + `allocation_engine.py`
 
 **Principle (locked by Jordan Aug 5):** AAE rules are the product; venues are interchangeable rails. Restriction-bypass = choosing the *right compliant venue*, never a ToS-violating one. Hyperliquid stays detection-only (US gray zone); execution runs on Coinbase spot (LIVE), Robinhood perps (pending), Solana/AVAX rails (built).
 
+**Composition model (Jordan, Aug 5 — mirrors Yield Yak):** the treasury is an **orchestration layer, not a protocol builder**. We do NOT build AMMs/farms — we compose existing protocols (Morpho, Aave, Trader Joe, Jupiter, Almanak) as interchangeable sockets and let the agent compound, enforce, and move money across them. The durable value is the brain + guard rails + payment rails + on-ramp. As protocols open agent-native APIs (Trader Joe via Almanak is already live), we plug in via **config, not rebuild**. The Yield Yak pattern: they don't build farms, they compose existing ones and compound — same here.
+
 ---
 
 ## 3. Build phases (Easy → Hard, Karpathy-gated)
@@ -52,7 +54,7 @@ The **brain already exists** — `regime_classifier.py` + `allocation_engine.py`
   - `DRY_RUN` default (no funds move) — mirrors `gta_executor.py` pattern
   - `REAL` only with explicit `AAE_LP_REAL=1` + funded wallet
   - Order plan: {leg, venue, token_pair, amount, action: provide/rebalance/withdraw}
-- **A2. Wire stablecoin LP venue** (determine which on the box — Base Aave/other stable pool; KeeperHub `kh_` key is execution-eligible per memory)
+- **A2. Wire stablecoin LP venue** — **RESOLVED: Morpho USDC vault on Base (5.03% APY)** — best yield AND on the Coinbase CDP rail. Locked as `DEFAULT_VENUE` in `yield_lp_engine.py`. (Aave-BNB 3.28%, Lista 2.3% rejected as lower yield.)
 - **A3. Daily swap-fee accumulator** — cron harvests fees, logs to `agent-flow.jsonl` (Layer-3 attribution), remits
 - **A4. Tests** — TDD: dry-run produce/rebalance/withdraw plans, quiet-hours, threshold gating
 
@@ -72,16 +74,16 @@ The **brain already exists** — `regime_classifier.py` + `allocation_engine.py`
 - **C2. Risk auto-tilt:** aggressive allocations only in trending; RANGE_BOUND/HIGH_VOLATILITY force back to yield mode
 - **C3. Position sizing** scales with regime confidence (Kelly-lite, capped)
 
-**Acceptance:** engine demonstrably stays in yield mode in RANGE_BOUND, flips to trading mode when regime flips to trending — verified by replay against `.aae-price-history.json`.
+**Acceptance:** engine demonstrably stays in yield mode in RANGE_BOUND, flips to trading mode when regime flips to trending — verified live (Aug 5): RANGE_BOUND→YIELD, BULL_TRENDING@90%→TRADE ($116.67 / 78% of 15% cap), BEAR_TRENDING@50%→stays YIELD. Also verified via `test_regime_gate.py` (18 tests) including stale-signal → YIELD, direction (bull=long/bear=short), negative-treasury guard.
 
 ---
 
 ## 4. Dev/Audit workflow (Jordan's directive)
 
 Per `develop-and-verify`:
-- **DEV (write code + tests):** DeepSeek V4 Flash — `deepseek-v4-flash:0731` (ollama-cloud, current)
-- **AUDIT (review pass):** Kimi K2.7 — `kimi-k2.7` via ollama-cloud/llama cloud when available
-- **Big-boy (only if needed):** Kimi K3 via OpenRouter for architecture/security sign-off
+- **DEV (write code + tests):** DeepSeek V4 Flash — `deepseek-v4-flash:0731` (ollama-cloud)
+- **AUDIT (review pass):** Kimi K2.7 — **`kimi-k2.7-code` on Ollama Cloud** (need `reasoning_effort: low` OR a `system` message to stop reasoning-swallow; see develop-and-verify skill)
+- **Big-boy (ON HOLD):** Kimi K3 (`kimi-k3`) is extra-usage only — not usable on our plan. **No top-up planned (Jordan, Aug 5).** Use K2.7 until K3 becomes normal/subscription usage.
 - **Karpathy gates every phase:** no scope creep, no drive-by refactors, testable acceptance criteria, verify persistence before declaring done
 - **Audit checklist:** hardcoded secrets, error-detail leakage, input bounds, weak randomness (use `secrets`/`uuid4`), verify-then-mutate ordering, pre-compiled regex
 
@@ -89,10 +91,10 @@ Per `develop-and-verify`:
 
 ## 5. Deliverables & demo
 
-- **Executable modules:** `yield_lp_engine.py`, CLOSE wiring in `gta_executor.py`, verified `gta_remit.py`
-- **Tests:** TDD suite, green on DRY_RUN (no funds), audit-passed by K2.7
-- **Vault spec (this file):** plan of record
-- **Build queue:** add as items with `recommended_tier` (A→flash, B→k2.7, C→k2.7) + `needs_jordan` flags where funding/decision gated
+- **Executable modules (ALL SHIPPED Aug 5):** `yield_lp_engine.py` (Phase A, Morpho-Base LP leg), `gta_close_executor.py` + CLOSE wiring in `gta_executor.py` (Phase B, sell→remit→EOA), `regime_gate.py` (Phase C, YIELD/TRADE mode brain), verified `gta_remit.py`
+- **Tests:** **85 green across 4 suites** (yield 48 + close 8 + executor 11 + regime gate 18), all DRY_RUN-safe (no funds), **K2.7 audit CLEAN** on all phases
+- **Vault spec (this file):** plan of record — now updated to reflect shipped state + composition model
+- **Build queue:** items #38 (A), #39 (B), #40 (C) all **shipped** in Treasury group
 - **Demo (per Jordan's rule):** major product → auto-add to demo site (gentechlabs.net) with live DRY_RUN dashboard showing regime → allocation → order plan → would-trade
 
 ---

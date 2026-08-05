@@ -75,14 +75,17 @@ NETWORKS = {
         "extra": {"name": "USD Coin", "version": "2"},
     },
     "algorand": {
-        # CAIP-2 genesis hash prefix for Algorand mainnet
-        "network": "algorand:wGHE2Pwdvd7S12BL5FaOP20EGYesN73k",
+        # CAIP-2 genesis hash prefix for Algorand mainnet. MUST match the full
+        # string the GoPlausible facilitator advertises (/supported) so proofs
+        # verify — a truncated genesis-hash segment makes the rail unmatchable.
+        "network": "algorand:wGHE2Pwdvd7S12BL5FaOP20EGYesN73ktiC1qzkkit8=",
         # USDC on Algorand is ASA (asset id), not a contract address
         "asset": "31566704",
         "decimals": 6,
         "payto_env": "X402_PAYTO_ALGORAND",
         "payto_default": "",
-        "extra": {"name": "USD Coin", "assetType": "ASA", "assetId": 31566704},
+        "extra": {"name": "USD Coin", "assetType": "ASA", "assetId": 31566704,
+                  "tag": "x402-global-challenge"},
     },
 }
 
@@ -386,6 +389,109 @@ def verify_proof_via_cdp(proof_str: str, expected_price: float) -> tuple[bool, s
         return False, f"facilitator unreachable: {e}"
 
 
+def _proof_network(proof_str: str) -> str | None:
+    """Extract the CAIP-2 network a proof claims to be settled on.
+
+    Reads `network` from the accepted payment option (v2 envelope) or the flat
+    proof. Used to route a proof to the facilitator that handles its rail.
+    """
+    try:
+        proof = json.loads(proof_str)
+    except json.JSONDecodeError:
+        try:
+            import base64 as _b64
+            decoded = _b64.b64decode(proof_str + "=" * (-len(proof_str) % 4)).decode("utf-8")
+            proof = json.loads(decoded)
+        except Exception:
+            return None
+    pp = proof.get("paymentPayload", proof) if isinstance(proof, dict) else {}
+    accepted = pp.get("accepted", {}) if isinstance(pp, dict) else {}
+    if isinstance(accepted, dict) and accepted.get("network"):
+        return accepted.get("network")
+    if isinstance(pp, dict) and pp.get("network"):
+        return pp.get("network")
+    if isinstance(proof, dict):
+        return proof.get("network")
+    return None
+
+
+GOPLAUSIBLE_FACILITATOR = os.getenv(
+    "GOPLAUSIBLE_FACILITATOR_URL",
+    "https://facilitator.goplausible.xyz",
+)
+
+
+def verify_proof_via_goplausible(proof_str: str, expected_price: float) -> tuple[bool, str]:
+    """Verify + settle a proof against the GoPlausible x402 facilitator.
+
+    Handles Algorand (AVM) and any non-CDP rail. The GoPlausible /verify and
+    /settle endpoints take the same {paymentPayload, paymentRequirements}
+    envelope the CDP path already builds, and require no auth. This is the
+    path the Algorand Global x402 Challenge counts: settlements must land via
+    the GoPlausible facilitator, with the challenge tag on the resource.
+    """
+    try:
+        proof = json.loads(proof_str)
+    except json.JSONDecodeError:
+        try:
+            import base64 as _b64
+            decoded = _b64.b64decode(proof_str + "=" * (-len(proof_str) % 4)).decode("utf-8")
+            proof = json.loads(decoded)
+        except Exception:
+            return False, "proof is not valid JSON or base64 JSON"
+
+    payload = proof if "paymentPayload" in proof else {"paymentPayload": proof}
+    try:
+        _pp = payload.get("paymentPayload", payload)
+        _ver = _pp.get("x402Version", 2)
+        _accepted_opt = _pp.get("accepted", {})
+        if _accepted_opt:
+            payload = {
+                "x402Version": _ver,
+                "paymentPayload": _pp,
+                "paymentRequirements": _accepted_opt,
+            }
+    except Exception:
+        pass
+
+    # Local structural guard: reject proofs on a rail we don't advertise.
+    try:
+        accepted = payload["paymentPayload"].get("accepted", payload["paymentPayload"])
+        network = accepted.get("network")
+    except (KeyError, TypeError):
+        network = None
+    if not is_network_accepted(network):
+        return False, f"network {network!r} not accepted"
+
+    try:
+        with httpx.Client(timeout=20) as client:
+            v = client.post(
+                f"{GOPLAUSIBLE_FACILITATOR}/verify",
+                json=payload,
+                headers={"Content-Type": "application/json"},
+            )
+        if v.status_code != 200:
+            return False, f"goplausible verify {v.status_code}: {v.text[:200]}"
+        body = v.json()
+        if not body.get("isValid", False):
+            return False, body.get("invalidReason", "invalid")
+        # Verify OK → settle so the Bazaar indexes us and the leaderboard counts.
+        try:
+            with httpx.Client(timeout=30) as client:
+                s = client.post(
+                    f"{GOPLAUSIBLE_FACILITATOR}/settle",
+                    json=payload,
+                    headers={"Content-Type": "application/json"},
+                )
+            if s.status_code == 200 and s.json().get("success"):
+                return True, "verified + settled (goplausible)"
+            return True, f"verified (goplausible settle {s.status_code})"
+        except Exception as e:
+            return True, f"verified (goplausible settle failed: {e})"
+    except Exception as e:
+        return False, f"goplausible unreachable: {e}"
+
+
 def verify_proof_simulation(proof_str: str, expected_price: float) -> tuple[bool, str]:
     """Verify a proof using the local HMAC secret (simulation mode).
 
@@ -527,13 +633,21 @@ async def paid_endpoint(service: str, path: str, request: Request):
     if not proof:
         return payment_required_response(service_name, price)
 
-    # Verify the proof — production path via CDP facilitator, simulation
-    # fallback via local HMAC (matches our SDK/ARC gateway dev flow).
+    # Verify the proof — route by the proof's settlement network.
+    # - Algorand/other non-EVM rails → GoPlausible facilitator (challenge path)
+    # - EVM (Base) → CDP facilitator
+    # - simulation fallback via local HMAC (matches our SDK/ARC gateway dev flow).
     mode = os.getenv("PAYMENT_VERIFY_MODE", "auto")
+    proof_network = _proof_network(proof)
+    is_avm = proof_network is not None and proof_network.startswith("algorand:")
     if mode == "simulation":
         valid, reason = verify_proof_simulation(proof, price)
     elif mode == "cdp":
         valid, reason = verify_proof_via_cdp(proof, price)
+    elif is_avm:
+        # Algorand proof → GoPlausible facilitator (required for the x402
+        # Global Challenge — settlements must land through GoPlausible).
+        valid, reason = verify_proof_via_goplausible(proof, price)
     else:
         # auto: try CDP when a key exists, else simulation
         if os.getenv("CDP_API_KEY"):
