@@ -5,10 +5,22 @@
 **Goal:** A live, working MVP with **Solana integration** + documentable $200 coding subs.
 
 ## Why Solana is the homebase
-- **USDC settlement is the point** — Solana does sub-second, sub-cent USDC. The grant's own
-  application committed to "Solana as the primary high-speed settlement layer."
-- **Cheaper than bridging** — agents pay on the destination chain directly, no bridge fee/wait.
-- **Matches the tranche-2 requirement** verbatim: "live MVP + some Solana integration."
+- **USDC settlement is the point** — sub-second, sub-cent, native.
+- **Cheaper than bridging** — agents pay on the destination chain directly.
+- Matches the tranche-2 requirement: "live MVP + some Solana integration."
+
+### ⭐ The real advantage: the Solana DeFi community
+Solana isn't just a fast ledger — it's a **liquidity network with its own builder
+communities**. An agentic treasury on Solana can tap into:
+- **Meteora** — dynamic liquidity pools + concentrated LP strategies
+- **Orca** — the "concentrated liquidity" DEX, tight-range yield
+- **Raydium** — the central AMM + staking/farms
+- **+ 30 more routed through Jupiter** (Phoenix, Pump.fun, Jito, etc.)
+
+Every one of these is a place where idle USDC earns yield, and a community our
+agents can transact with. That's the edge over EVM: **one Solana wallet reaches
+the whole ecosystem through Jupiter**, no bridging between DEXs. This is the
+story the grant + Arc demo should lead with.
 
 ## What already exists (verified, don't rebuild)
 | Piece | Location | Status |
