@@ -100,3 +100,5 @@ The real, working, revenue-capable API surface. **This is the number to use** wh
 ---
 
 *Last updated: 2026-08-05 (Marketplace Scout weekly sweep — gateway re-verified live v9.0.0, 8 services; added 3 NEW sell-side marketplaces: Freelance AI/PayAI, BotWork, Amadeus Agent Hub)*
+
+| **Solana Homebase** | https://github.com/Gentech-Labs/solana-homebase | Agentic Treasury orchestrator — Solana homebase (Superteam tranche-2 MVP) | 🟢 PUBLIC + LIVE (Aug 5) | 2026-08-05 |
