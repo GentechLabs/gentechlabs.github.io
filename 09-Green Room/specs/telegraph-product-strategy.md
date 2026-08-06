@@ -44,6 +44,24 @@ Telegraph is a marketplace for **verified intelligence** that agents act on with
 
 - **Don't spread thin.** Own 2-3 categories where we're genuinely differentiated. Don't try to be everything.
 
+## Competitive intel — telegraph-usecases repo (Aug 6)
+
+All 6 existing use cases are **consumers** of intelligence — they all use the same 4 subnets (ItsAI 32, Bitmind 34, DeSearch 101, Groq LLM 102). **Nobody is a supplier.** The Miner (supply) side is wide open — that's our whitespace.
+
+| Use case | What it does | Subnets used |
+|---|---|---|
+| TruthWire | X post → AI-content detection | ItsAI, Bitmind |
+| TrustFilter | URL/message → scam/phishing | Groq LLM |
+| ScholarGuard | PDF/DOCX → AI-writing detection | ItsAI, Bitmind |
+| ReviewRadar | Amazon reviews → AI-vs-human | ItsAI |
+| Polymarket Sniper Bot | news → LLM → trade decision | DeSearch, Groq LLM |
+| AdGuard | article → deepfake + AI-text → pause ads | Bitmind, ItsAI |
+
+**Key insights:**
+- **The Polymarket Sniper Bot is directly in our lane** — agentic trading using news + LLM. GTA-adjacent. We can build better using our sentiment index + agent reputation signals.
+- **They pay via Solana + Polygon USDC** — not Base. Telegraph's payment rails are already multi-chain, validating our multi-chain x402 approach.
+- **The competition is all on the Application track (consumers).** The Miner track (suppliers) is where the whitespace is — and that's where we plant the flag. We're the layer *underneath* these apps, not a competitor to them.
+
 ## Action items
 - [ ] Jordan: register at hackathon.telegraphprotocol.com (early = track access + Discord)
 - [ ] Gentech: write YAML miners for 2-3 gateway services (token security, market intel, wallet analysis)
