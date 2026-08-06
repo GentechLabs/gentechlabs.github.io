@@ -92,6 +92,16 @@ AVAX rail options:
 Recommend (b) for speed to execution (easy->hard), (a) if we want Almanak's strategy/backtest
 capabilities for AVAX.
 
+## ✅ DECISION MADE (Aug 6, 2026) — Jordan chose (a) Almanak FULL
+- **Jordan's call:** "using the Almanak stack the full is probably going to be better because
+  most of everything is already there instead of us trying to build it like ourselves."
+- **Rationale:** compose Almanak's institutional infrastructure (Safe custody, gateway, backtest,
+  TraderJoe LP connector) rather than build our own custody/signing from scratch.
+- **Next step:** deploy Safe + Zodiac signer service, configure `ALMANAK_PLATFORM_WALLETS` +
+  `ALMANAK_SIGNER_SERVICE_ENDPOINT_ROOT` + `ALMANAK_SIGNER_SERVICE_JWT`, then scaffold the
+  `traderjoe_lp` strategy for the AVAX/USDC V2 pool.
+- **Owner:** The Steward (Agentic Treasury) — this is the AVAX rail for the treasury.
+
 ## AVAX rail — DECISIVE finding (Aug 5, 2026)
 - CDP swap API does NOT cover Avalanche (only base, ethereum, arbitrum, optimism, polygon).
 - CDP server ACCOUNT is Base/Ethereum-only: `list_token_balances(network='avalanche')` rejected
