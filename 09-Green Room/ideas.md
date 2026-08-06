@@ -1,7 +1,15 @@
 # 🧠 Green Room — Ideas to Build
 
 > Build first, talk later. Promoted from `11-Mess Hall/ideas.md`.
-> Updated: 2026-08-03
+> Updated: 2026-08-06
+
+---
+
+## ✅ CONFIRMED AHEAD (Aug 6) — Multi-model routing is our architecture
+**Source:** @ClawUpAI tweet (Aug 6) — "the future isn't single-model, it's orchestrated intelligence"
+- External validation that we're already ahead: we have a **routing layer** (task→model), a **model router**, and a **cron job router** — makes the build much cheaper.
+- We route cheap models (kimi-k2.7-code via Ollama Cloud) for routine work, frontier for complex reasoning. Already live in the Consigliere.
+- No action needed — this confirms our design, doesn't change it.
 
 ---
 
