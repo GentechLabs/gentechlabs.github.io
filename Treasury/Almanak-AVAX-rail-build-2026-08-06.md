@@ -3,6 +3,31 @@
 **Decision (Jordan, Aug 6):** Almanak FULL — compose Safe + signer + TraderJoe, don't
 build custody. Owner: The Steward (Agentic Treasury).
 
+## ✅ KEYPAIR GENERATED + WIRED (Aug 6, 2026)
+- **Steward Avalanche keypair created** (fresh, eth_account):
+  - Address: `0x572ABd6461BED2258615E6b99c585Ab7c5d05037`
+  - Private key stored at `/root/.blockrun/almanak-steward-key` (chmod 600, 64-hex)
+  - Address stored at `/root/.blockrun/almanak-steward-address`
+- **`ALMANAK_PRIVATE_KEY` wired into BOTH profiles** (`gentech-treasury/.env` +
+  `gentech/.env`), value hidden in chat. Verified derivation matches stored address.
+- **Gateway now recognizes the Steward wallet** — `ax balance AVAX` returns the
+  address with 0 balance (SUCCESS). The key is being picked up.
+- **Swap rail now QUOTES real:** `ax swap USDC AVAX 1 --chain avalanche --dry-run`
+  → `amount_out 0.1548 AVAX` per $1 USDC (live price). `Simulation: ERROR` is now
+  ONLY because the signer has 0 balance — not a config issue.
+- **Reboot-safe:** key is on disk (not just env), both .env files persist.
+
+## ⏸ NEXT — FUND THE STEWARD WALLET
+To execute the AVAX leg, the Steward wallet `0x572ABd6461BED2258615E6b99c585Ab7c5d05037`
+needs: **AVAX for gas** + **USDC (native, `0xB97E...48a6E`)** to buy/trade. Currently 0.
+Same funding pattern as Solana — a small slice makes it live.
+
+## Next
+1. **Fund Steward Avalanche wallet** (AVAX gas + USDC).
+2. Scaffold `traderjoe_lp` strategy for the AVAX/USDC V2 pool.
+3. Execute dry-run swap end-to-end (once funded).
+4. Graduate from local signer (a) to Safe+Zodiac (b) as institutional end-state.
+
 ## ✅ VERIFIED — DATA SIDE OF THE RAIL IS LIVE
 Almanak 2.24.0 gateway auto-starts on `127.0.0.1:50051` and returns REAL live data
 on Avalanche with NO wallet configured:
