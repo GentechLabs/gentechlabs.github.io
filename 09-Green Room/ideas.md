@@ -226,6 +226,7 @@
 - [ ] **AI-Job-Search (MadsLorentzen)** — Claude Code agent: evaluate postings, tailor CV, write cover letters, interview prep. 29.6k⭐ MIT, real-world proof (author: 69 apps → 20 interviews → hired Jun 2026). Built for Danish boards but pattern is board-agnostic — swap for our targets. Directly serves Jordan's remote blockchain/cloud role hunt. Source: x.com/0xMarioNawfal list, Aug 4.
 - [ ] **WURK.FUN microtasks** — Agent-to-human microtask skill, ready to test
 - [ ] **Coinbase for Agents** — Monitoring, validate our stack fits
+- [ ] **Cross-chain bridge cost test via agent rails** — Jordan (Aug 6): test whether moving money between chains via agent rails (Across/CCTP + Jupiter) is cheaper than manual bridging. Treasury has the adapters (`solana_bridge_adapter.py`, `gta_solana_leg.py`). Compare agent-rail cost vs manual bridge on Base→Solana USDC. Log results to Treasury.
 
 ---
 
