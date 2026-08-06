@@ -16,14 +16,17 @@ from datetime import datetime, timedelta
 from pathlib import Path
 
 # ── Config ──────────────────────────────────────────────────────────────
-WALLET_EVM = "0x7ebff188f2Eba16518C02864589b1403a5d1296a"
+# Treasury receiving wallets (x402 settlements land here)
+WALLET_EVM = "0x77C622D02A1518fC0FDcd83B8C28010FA5ebB7dE"   # CDP server account (primary x402 receiver)
+WALLET_ARB = "0x3d117Bf42218c3244AA0Ad011E8651A615230eCb"   # GTA arb wallet (payer / settlement source)
+WALLET_KH  = "0x53A8DFA431D03A36499f9DB70AAFbb00C28308EA"   # KeeperHub execution wallet
 WALLET_SOL = "71Y3H36eb2WRGseYM9GwinjNawfMfAUbcof5eeWGoGSA"
 DATA_DIR = Path("/root/.hermes/profiles/gentech/scripts")
 TRACKER_FILE = DATA_DIR / "revenue-tracker.json"
 
-# USDC contract addresses per chain
+# USDC contract addresses per chain (Base uses the CURRENT address)
 USDC_CONTRACTS = {
-    "base": "0x83358933e220DBD71d557b2c7c88c4b48eb88b43",
+    "base": "0x833589fCD6eDb6E08f4c7C32D4f71b54bDA02913",   # FIXED: was 0x83358933...b43 (stale)
     "avalanche": "0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E",
     "bnb": "0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d",
 }
@@ -409,14 +412,15 @@ def run():
     balances = get_wallet_balances()
     sol_price = get_sol_price()
 
-    # 3. Scan chains for USDC transfers
+    # 3. Scan chains for USDC transfers (CDP account + arb wallet)
     new_transfers = []
     for chain in ("base", "avalanche", "bnb"):
         last_block = data.get("last_scan_block", {}).get(chain, 0)
-        transfers = fetch_usdc_transfers(chain, WALLET_EVM, last_block)
-        for t in transfers:
-            if t["tx_hash"] not in existing_txs:
-                new_transfers.append(t)
+        for wallet in (WALLET_EVM, WALLET_ARB):
+            transfers = fetch_usdc_transfers(chain, wallet, last_block)
+            for t in transfers:
+                if t["tx_hash"] not in existing_txs:
+                    new_transfers.append(t)
         if transfers:
             data.setdefault("last_scan_block", {})[chain] = max(t["block"] for t in transfers)
 
@@ -427,7 +431,7 @@ def run():
             new_transfers.append(t)
 
     # Filter out self-transfers (LP deposits, internal moves)
-    our_wallets = {WALLET_EVM.lower(), WALLET_SOL.lower()}
+    our_wallets = {WALLET_EVM.lower(), WALLET_SOL.lower(), WALLET_ARB.lower(), WALLET_KH.lower()}
     external = [t for t in new_transfers if t["sender"].lower() not in our_wallets]
     data["transactions"].extend(external)
 
@@ -536,6 +540,14 @@ def format_report(result):
             lines.append(f"    • {svc}: ${info['total_usdc']:.4f} ({info['tx_count']} txs)")
     else:
         lines.append("  No sources yet")
+
+    # ── Settlement Rails (the 3 rails) ──
+    lines.append("")
+    lines.append("🛤️ Settlement Rails")
+    lines.append("  ✅ x402 (CDP facilitator) — Base USDC, EIP-3009, gasless")
+    lines.append("  ✅ Q402 (gasless) — 12 chains, EIP-7702, per-tx + daily caps")
+    lines.append("  ✅ Solana/Jupiter — Solana homebase, sub-cent gas")
+    lines.append("  ⏳ Algorand — opted into USDC ASA 31566704, awaiting funding")
 
     if result["new_payments"]:
         lines.append("")
