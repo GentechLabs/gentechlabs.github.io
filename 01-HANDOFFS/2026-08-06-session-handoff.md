@@ -1,29 +1,29 @@
-# Session Handoff — Aug 5/6 (overnight)
+# Session Handoff — Aug 6 (evening) → next session
 
-**Date:** 2026-08-05 → 2026-08-06
-**Status:** Progress saved, clean pickup tomorrow.
+**Date:** 2026-08-06
+**Status:** Clean pickup. Jordan starting a new session; SOL top-up pending.
 
 ---
 
-## ✅ DONE tonight
-1. **First real x402 settlement** — 0.005 USDC settled on-chain (arb wallet `0x3d117…` debited 0.481→0.476). Fixed stale CDP creds in x402-api (restarted service). Bazaar indexing check cron set for 08:00 UTC.
-2. **Algorand wallet** — opted into USDC ASA 31566704 (txn `D4ZESUWYNZ6HYN77FQDVDQ2RVN7MRNRCC3FVH4ATJVZIKZJUAYUA`). Ready to receive USDC.
-3. **gentechlabs.net** — synced API section to true 8 live services + 5 standalone APIs.
-4. **Treasury demo** — added as 2nd demo at `gentechlabs.net/treasury-demo.html` (live).
-5. **DataHub submission** — lineage-guard pushed public to `Gentech-Labs/lineage-guard` (was 404, now live) + README + Devpost draft (`09-Green Room/submissions/datahub-devpost-draft.md`) + demo video exists.
-6. **Wallet funding verified** — CDP (31.5 USDC), KeeperHub (10 USDC + 0.0079 ETH), Algorand (55 ALGO, USDC opted-in).
+## ✅ DONE this session
+1. **Naming locked** — AAE (slogan) / Agentic Treasury (product) / The Steward (agent) / DeFi Milestones (feature). Cleaned GTA/consigliere refs across Treasury docs + handoffs. Code: `💼 GTA Pos` → `💼 Steward Pos` in `agentic-treasury.py` (verified runs clean).
+2. **Consigliere model wired** — `openai:kimi-k2.7-code` via Ollama Cloud (`https://ollama.com/v1`). Strategy loads, `is_pydantic_ai_model: True`. `.env` created in `/root/condor` (TELEGRAM_TOKEN + ADMIN_USER_ID + OLLAMA key). Gitignored, secrets safe.
+3. **Hummingbot gateway FIXED** — was crash-looping (no TLS certs, SEC-048 mTLS). Generated full mTLS cert set (CA+server+client, passphrase `gentech_config_2026`), added SAN for `gateway` hostname, synced to API container. **Now working**: API→gateway returns 200, connectors = Meteora (CLMM), Jupiter (router), Raydium, Uniswap; chains = Solana mainnet-beta + Ethereum (base/avax/arb).
+4. **DataHub prep** — added Apache 2.0 LICENSE to `Gentech-Labs/lineage-guard` (was missing — #1 submission miss). Repo public, README live, demo video 32s (<3min). Deadline **Mon Aug 10 21:00 UTC**. Jordan pastes writeup+video+repo at datahub.devpost.com.
+5. **Cloudflare dashboard** — confirmed healthy. 4xx/5xx = bot noise (WAF working). x402 gateway all 8 services return correct 402. Ready for announcement.
+6. **Green Room** — logged multi-model routing confirmation + cross-chain bridge cost test idea.
 
-## ⏳ PENDING / TOMORROW
-1. **KeeperHub live tx** — blocked by KeeperHub platform outage (status.keeperhub.com, "app degraded" Aug 6 01:58 UTC). Workflow "GTA Proof Transfer — USDC on Base" (`8q0q6f7y8px4umktkdr74`) created + enabled. **Retry cron set for 03:00 UTC** — will fire once outage resolves. Verify wallet `0x53A8…8EA` USDC drops below 10.0.
-2. **DataHub submit** — Jordan pastes Devpost writeup + video + repo link at datahub.devpost.com (deadline Aug 10).
-3. **Agent Builders Cup** — Jordan: "I thought most of it was built, we just got to do something." The Steward agent IS built (cross-venue arb + strategy, committed in /root/condor). Remaining: fund/test wallet, pick primary venue, wire condor server config. Registration closes Aug 15. **Figure out next step tomorrow.**
-4. **CDP Bazaar indexing** — verify at 08:00 UTC (cron set).
-5. **Colosseum** — GitHub account flagged (ProtoJay4789) blocks OAuth. Need clean account for Colosseum login + Copilot token.
+## 🔴 PENDING / NEXT
+1. **SOL top-up** — Jordan sending SOL to `BE815V7ojVz63PDxFFSEQyGSe5PZE2fAdKUU6Rd5pUvP` (currently 0 SOL). Keypair: `/root/.gentech/wallets/solana_jordan-personal_20260622_120527.json`.
+2. **Wire condor → gateway** — once SOL lands, finish condor config to point Consigliere at Meteora via hummingbot gateway, then live boot test.
+3. **Beep campaign** — Jordan back tomorrow after work. Galxe quest `GCfyStZbpx`, $20K BEEP pool, 103 participants, no visible end date. Requires 1 trade >$10 via Beep's Telegram terminal + 1 referral.
+4. **DataHub submit** — Jordan pastes writeup at datahub.devpost.com before Aug 10 21:00 UTC.
+5. **AVAX rail** — decision made: **Almanak full** (Safe+signer+TraderJoe). The Steward to deploy. AVAX LP ($23.73, out of range) to be managed via Almanak.
 
 ## KEY FACTS
-- KeeperHub wallet: `0x53A8DFA431D03A36499f9DB70AAFbb00C28308EA` (10 USDC, 0.0079 ETH on Base)
+- Solana wallet: `BE815V7ojVz63PDxFFSEQyGSe5PZE2fAdKUU6Rd5pUvP` (0 SOL)
 - CDP account: `0x77C622D02A1518fC0FDcd83B8C28010FA5ebB7dE` (31.5 USDC)
-- Algorand: `6IXPRMSYQBZSP2KIPH6BQ7MP4XN7VP6MWGHCLLF52K5R4IYCPA74TU2MTI` (55 ALGO, USDC opted-in)
-- Solana: `BE815V7ojVz63PDxFFSEQyGSe5PZE2fAdKUU6Rd5pUvP`
-- KeeperHub workflow: `8q0q6f7y8px4umktkdr74`
-- DataHub repo: `Gentech-Labs/lineage-guard`
+- Hummingbot API: `localhost:8002` (Basic auth), gateway `gateway:15888` (mTLS, passphrase `gentech_config_2026`)
+- Gateway connectors ready: Meteora, Jupiter, Raydium, Uniswap
+- DataHub repo: `Gentech-Labs/lineage-guard` (LICENSE now live)
+- Beep quest: `https://app.galxe.com/quest/BeepAI_labs/GCfyStZbpx`
