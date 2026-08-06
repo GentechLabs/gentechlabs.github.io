@@ -1,12 +1,12 @@
-# Standing Autonomy Authorization — GTA Execution (Aug 6, 2026)
+# Standing Autonomy Authorization — The Steward Execution (Aug 6, 2026)
 
 **Jordan's standing rule (verbatim intent):** "While I'm at work, you're free to move
 autonomously, just let me know what's going on. Keep me informed because I'm always
 going to look at my phone late to make these moves."
 
 ## What this authorizes
-During Jordan's work hours, Gentech may **execute verified, above-threshold GTA
-opportunities WITHOUT waiting for real-time approval.**
+During Jordan's work hours, The Steward (Agentic Treasury) may **execute verified,
+above-threshold opportunities WITHOUT waiting for real-time approval.**
 
 ## Guardrails (non-negotiable)
 1. **Only execute on live ≥10 bps signals** on a **wired, verified rail.** No exceptions.

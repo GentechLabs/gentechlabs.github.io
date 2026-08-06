@@ -1,18 +1,18 @@
-# GTA Handoff — Treasury Group Context Update
+# The Steward Handoff — Treasury Group Context Update
 
 **Date:** 2026-08-04
 **From:** Gentech (HQ)
 **To:** Agentic Treasury Group
-**Why:** Jordan asked to ensure the Treasury group has the GTA updates so the fused command center reads GTA correctly.
+**Why:** Jordan asked to ensure the Treasury group has the Agentic Treasury updates so the fused command center reads correctly.
 
 ---
 
-## What changed (GTA, Aug 3–4)
+## What changed (Agentic Treasury, Aug 3–4)
 
-GTA has a **bigger vision now** and its Coinbase spot leg is **live**. This updates how the `⚡ GTA Arb` line in the fused report should be interpreted.
+The Agentic Treasury has a **bigger vision now** and its Coinbase spot leg is **live**. This updates how the `⚡ GTA Arb` line in the fused report should be interpreted.
 
-### 1. GTA Product Thesis — now the flagship
-Captured in `09-Green Room/specs/gta-product-thesis.md`. GTA = **open execution + authorized-proxy layer**, two layers:
+### 1. Agentic Treasury Product Thesis — now the flagship
+Captured in `09-Green Room/specs/gta-product-thesis.md`. The Agentic Treasury = **open execution + authorized-proxy layer**, two layers:
 1. Open aggregation across agent-native rails (Coinbase ✅ live, Robinhood ⏳ pending, Polymarket, Ondo)
 2. Authorized proxy — agent operates *your* accounts via OAuth/saved sessions (the "agent-as-VPN" reframe)
 
