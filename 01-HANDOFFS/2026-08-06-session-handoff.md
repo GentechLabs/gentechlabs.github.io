@@ -16,7 +16,7 @@
 ## ⏳ PENDING / TOMORROW
 1. **KeeperHub live tx** — blocked by KeeperHub platform outage (status.keeperhub.com, "app degraded" Aug 6 01:58 UTC). Workflow "GTA Proof Transfer — USDC on Base" (`8q0q6f7y8px4umktkdr74`) created + enabled. **Retry cron set for 03:00 UTC** — will fire once outage resolves. Verify wallet `0x53A8…8EA` USDC drops below 10.0.
 2. **DataHub submit** — Jordan pastes Devpost writeup + video + repo link at datahub.devpost.com (deadline Aug 10).
-3. **Agent Builders Cup** — Jordan: "I thought most of it was built, we just got to do something." Consigliere agent IS built (cross-venue arb + strategy, committed in /root/condor). Remaining: fund/test wallet, pick primary venue, wire condor server config. Registration closes Aug 15. **Figure out next step tomorrow.**
+3. **Agent Builders Cup** — Jordan: "I thought most of it was built, we just got to do something." The Steward agent IS built (cross-venue arb + strategy, committed in /root/condor). Remaining: fund/test wallet, pick primary venue, wire condor server config. Registration closes Aug 15. **Figure out next step tomorrow.**
 4. **CDP Bazaar indexing** — verify at 08:00 UTC (cron set).
 5. **Colosseum** — GitHub account flagged (ProtoJay4789) blocks OAuth. Need clean account for Colosseum login + Copilot token.
 

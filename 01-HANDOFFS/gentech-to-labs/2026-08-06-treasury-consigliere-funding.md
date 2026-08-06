@@ -1,14 +1,14 @@
 # Handoff to Treasury — Aug 6, 2026
 
 **From:** Gentech (HQ)
-**To:** Treasury agent (gentech-treasury profile)
+**To:** The Steward (Treasury agent, gentech-treasury profile)
 **Group:** Gentech Treasury
 
 ---
 
-## Task for today: Prep the Consigliere funding path (Agent Builders Cup)
+## Task for today: Prep the Steward funding path (Agent Builders Cup)
 
-Jordan is funding the Solana wallet `BE815V7ojVz63PDxFFSEQyGSe5PZE2fAdKUU6Rd5pUvP` directly with SOL (~1h from now). The Consigliere agent (Meteora LP + cross-venue arb, `/root/condor`) needs that SOL for Meteora rent (~0.057 SOL/slot) + gas + the 0.3 SOL reserve.
+Jordan is funding the Solana wallet `BE815V7ojVz63PDxFFSEQyGSe5PZE2fAdKUU6Rd5pUvP` directly with SOL (~1h from now). The Steward agent (Meteora LP + cross-venue arb, `/root/condor`) needs that SOL for Meteora rent (~0.057 SOL/slot) + gas + the 0.3 SOL reserve.
 
 **Your job today — verify the execution rails are ready, NOT move money:**
 

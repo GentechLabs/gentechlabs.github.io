@@ -1,4 +1,4 @@
-# GTA — Session Progress Checkpoint (Aug 5, 2026)
+# The Steward — Session Progress Checkpoint (Aug 5, 2026)
 
 ## What's DONE (this session + prior)
 1. **Execution rail LIVE** — first real trade: $5 USDC → cbBTC on Base, verified on-chain.
@@ -8,7 +8,7 @@
    - ALWAYS verify tx receipt (status==1); the SDK's `executed: true` is NOT proof.
 2. **Buy list expanded** — LINK verified + added to `gta_coinbase_leg.py SUPPORTED` map.
 3. **Remit path built** — `gta_remit.py` CDP server account → Jordan EOA → card. Dry-run verified.
-4. **Agentic Treasury tracks real positions + P&L** — added `💼 GTA Pos` layer reading live
+4. **Agentic Treasury tracks real positions + P&L** — added `💼 Steward Pos` layer reading live
    on-chain balances + `.gta-positions.json` entry state → shows P&L.
 5. **Cron fleet consolidated** — removed GTA Watcher, GTA Signal, GTA Fund Monitor, dup
    CLARITY tracker. Kept data producers (Arb Monitor, Executor, Narrative, CMC, FOMC, CLARITY, LP).
@@ -39,7 +39,7 @@
 - `gta_coinbase_leg.py` — Coinbase spot executor (BTC + LINK in SUPPORTED)
 - `gta_remit.py` — profit remit CDP → EOA
 - `.gta-positions.json` — executed position entry state
-- `agentic-treasury.py` — fused report (Regime + GTA Pos + Arb + Narrative + rainbows)
+- `agentic-treasury.py` — fused report (Regime + Steward Pos + Arb + Narrative + rainbows)
 - `.gta-arb-state.json` — arb window feed (from GTA Arb Monitor cron)
 - `aae-hybrid-signal.py` + components — regime producer (cron bc999a35e0cd)
 - Brain: `Treasury/GTA-execution-rail-live-2026-08-04.md`

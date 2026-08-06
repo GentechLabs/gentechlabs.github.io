@@ -48,9 +48,9 @@ def main():
     lines.append("   (read-only RPC, real balances)")
     lines.append("-" * 60)
     pos = run([sys.executable, os.path.join(SCRIPT_DIR, "agentic-treasury.py")])
-    # extract the GTA Pos line
+    # extract the Steward Pos line
     for line in pos.splitlines():
-        if "GTA Pos" in line:
+        if "Steward Pos" in line:
             lines.append(f"   {line.strip()}")
     lines.append("")
 
