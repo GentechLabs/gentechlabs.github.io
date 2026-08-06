@@ -1,7 +1,7 @@
 # Gentech → Labs — 2026-08-05 — Algorand x402 Challenge Wallet + Status
 
 **Queue item:** #7 / #82 — Algorand Global x402 Challenge — Composite Entry ($100K + 500K ALGO)
-**Status:** ✅ **ALGORAND RAIL LIVE (Aug 6).** Wallet created, registration confirmed, rail activated on live gateway.
+**Status:** ✅ **ALGORAND RAIL LIVE + FIRST MAINNET SETTLEMENT (Aug 6).** Wallet created, registration confirmed, rail activated, real on-chain settlement verified.
 
 ## What changed today (Aug 5)
 1. **Algorand mainnet account GENERATED** (fresh, we own the private key this time).
@@ -39,6 +39,14 @@
 - `grep -E "X402_NETWORKS|X402_PAYTO_ALGORAND" /root/.hermes/profiles/gentech/.env` — ✅ SET Aug 6 (base,algorand + payTo)
 - `curl https://api.gentechlabs.net/.well-known/x402-bazaar` — ✅ shows 7 chains incl algorand
 - `/status` on live gateway — ✅ operational
+
+## ✅ FIRST MAINNET SETTLEMENT (Aug 6)
+- **Txid:** `GQBF6UBBQHMEM3HI4FIUHRIFOIJQEG462NOPCSXJXHTOV77LNMWA`
+- **Type:** axfer (USDC ASA 31566704), 0.01 USDC (10000 micro), confirmed round 63817906
+- **Flow:** 402 challenge → signed Algorand tx → verified + settled via GoPlausible → gateway HTTP 200 `paid:true`
+- **Fix made:** `PAYMENT_VERIFY_MODE` was `cdp` (forced all proofs through CDP, bypassing AVM→GoPlausible). Changed to `auto` so Algorand proofs route to GoPlausible (challenge-required path). Restarted x402-api.
+- **Test script:** `/root/.algorand/algo_settle_test.py` (reusable end-to-end mainnet settlement test)
+- **Demo capture:** pending — capture the 402→pay→200 flow for the submission/showcase.
 
 ## Deferred (next fresh session per Jordan)
 - **Upgrade the Agent Marketplace Income Scanner cron** (`38eda06b0a11`) to include already-listed
