@@ -1,7 +1,7 @@
 # Gentech → Labs — 2026-08-05 — Algorand x402 Challenge Wallet + Status
 
 **Queue item:** #7 / #82 — Algorand Global x402 Challenge — Composite Entry ($100K + 500K ALGO)
-**Status:** WALLET CREATED (Jordan confirmed registration). Build pipeline next.
+**Status:** ✅ **ALGORAND RAIL LIVE (Aug 6).** Wallet created, registration confirmed, rail activated on live gateway.
 
 ## What changed today (Aug 5)
 1. **Algorand mainnet account GENERATED** (fresh, we own the private key this time).
@@ -24,21 +24,21 @@
 
 ## What remains (in order)
 1. **Fund the wallet** — send ALGO + USDC (ASA 31566704) to the address above, and OPT-IN the address
-   to USDC ASA 31566704 first. Jordan action (or fund via a faucet/exchange).
-2. **Activate ALGO rail on live gateway** (2 env vars, no code change):
+   to USDC ASA 31566704 first. Jordan action (or fund via a faucet/exchange). *(Wallet has a tiny test-funding amount per Jordan Aug 6.)*
+2. **Activate ALGO rail on live gateway** (2 env vars, no code change): ✅ **DONE Aug 6**
    ```
    X402_NETWORKS="base,algorand"
    X402_PAYTO_ALGORAND="6IXPRMSYQBZSP2KIPH6BQ7MP4XN7VP6MWGHCLLF52K5R4IYCPA74TU2MTI"
    ```
    then `systemctl restart x402-api`. Gateway service: `/etc/systemd/system/x402-api.service`,
-   EnvironmentFile `/root/.hermes/profiles/gentech/.env`.
+   EnvironmentFile `/root/.hermes/profiles/gentech/.env`. **VERIFIED: 402 accepts now shows base + algorand; bazaar manifest updated to 7 chains.**
 3. **Test Mainnet payment end-to-end** — x402 request → pay → settle via GoPlausible → paid response →
-   USDC lands in payTo → endpoint shows on leaderboard under `x402-global-challenge` tag.
+   USDC lands in payTo → endpoint shows on leaderboard under `x402-global-challenge` tag. **NEXT: fund wallet, then run a real mainnet settlement test.**
 
 ## Verify gateway state next session
-- `grep -E "X402_NETWORKS|X402_PAYTO_ALGORAND" /root/.hermes/profiles/gentech/.env` (currently unset)
-- `curl https://api.gentechlabs.net/.well-known/x402-bazaar` — check for algorand rail
-- `/status` on live gateway
+- `grep -E "X402_NETWORKS|X402_PAYTO_ALGORAND" /root/.hermes/profiles/gentech/.env` — ✅ SET Aug 6 (base,algorand + payTo)
+- `curl https://api.gentechlabs.net/.well-known/x402-bazaar` — ✅ shows 7 chains incl algorand
+- `/status` on live gateway — ✅ operational
 
 ## Deferred (next fresh session per Jordan)
 - **Upgrade the Agent Marketplace Income Scanner cron** (`38eda06b0a11`) to include already-listed
