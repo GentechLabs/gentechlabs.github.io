@@ -1,7 +1,7 @@
 ---
-date: 2026-08-04
+date: 2026-08-05
 status: active
-last-updated: 2026-08-04 20:07 ET
+last-updated: 2026-08-05 20:06 ET
 ---
 
 # 🧠 Considerations — Open Decisions
@@ -12,8 +12,8 @@ last-updated: 2026-08-04 20:07 ET
 
 - [ ] 🚨 **Keeperhub Agents Onchain #80** — **JORDAN CONFIRMED GO.** Real KeeperHub workflow created (GTA Yield Guard — Aave health-factor auto-rebalancer, Base, exec test launched). **🚨 FUNDING BLOCKER: wallet 0x53A8...8EA has 0 ETH + 0 USDC on Base mainnet AND Sepolia — cannot produce the live tx link judges require. Jordan: fund ~$15 ETH + ~$10 USDC on Base.** Deadline Aug 13.
 - [ ] 🚨 **Algorand Global x402 Challenge #82** — **⚠️ DEADLINE PASSED Jul 31.** $100K + 500K ALGO. No record of registration on file. **Jordan: confirm if registered / still eligible for late leaderboard, or mark dead.**
-- [ ] 🚨 **Arc Programmable Money Hackathon** — **⚠️ Deadline Aug 9 (5 days, urgent).** Deploy x402 + Agent Wallet on Arc L1 (Encode Club, Agentic Economy track). **Jordan: (1) get testnet USDC from faucet.circle.com, (2) deploy x402.** *Queue shows PENDING — not passed.*
-- [ ] 🚨 **AI Factory Hackathon #79** — **Runs Aug 3-10 (2 days in).** lablab.ai × NativelyAI. **Jordan: register?**
+- [ ] 🚨 **Arc Programmable Money Hackathon** — **⚠️ Deadline Aug 9 (4 days, urgent).** Deploy x402 + Agent Wallet on Arc L1 (Encode Club, Agentic Economy track). **Jordan: (1) get testnet USDC from faucet.circle.com, (2) deploy x402.** *Queue shows PENDING — not passed.*
+- [ ] 🚨 **AI Factory Hackathon #79** — **Runs Aug 3-10 (5 days in, 5 days left).** lablab.ai × NativelyAI. **Jordan: register?**
 
 ## 🔴 High Priority
 
