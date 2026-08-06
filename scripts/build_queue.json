@@ -963,11 +963,7 @@
   },
   {
     "id": 47,
-<<<<<<< Updated upstream
     "name": "Dual-Protocol Payments \u2014 add MPP (paymentauth.org) rail alongside x402",
-=======
-    "name": "Dual-Protocol Payments — add MPP (paymentauth.org) rail alongside x402",
->>>>>>> Stashed changes
     "difficulty": "medium",
     "priority": "medium",
     "status": "pending",
@@ -976,13 +972,8 @@
     "needs_jordan": false,
     "human_gated": false,
     "gate_type": null,
-<<<<<<< Updated upstream
     "detail": "Add MPP (Machine Payments Protocol, paymentauth.org \u2014 IETF draft, Tempo Labs + Stripe) as a second payment rail on the x402 gateway. PayAI's agentic-payments SDK (github.com/PayAINetwork/agentic-payments, @payai/agentic-payments v0.1.6) accepts BOTH x402 and MPP on one endpoint: unauthenticated -> 402 with PAYMENT-REQUIRED (x402) AND WWW-Authenticate: Payment (MPP) headers; either settles. MPP is payment-method agnostic (EVM, Solana, Lightning, Stripe, USDC, Stellar, Hedera, Tempo) via registered method IDs. Our gateway is x402-only today. BORROW the mechanism (unlicensed TS, don't fork): dual-challenge 402 + settle-on-success buffering pattern. PayAI facilitator free tier 10K settles/mo, $0.001/tx after, no API key. 16 networks incl Solana/Base/X Layer. Reference: 11-Mess Hall/payai-mpp-dual-rail.md.",
     "note": "Discovered Aug 6 via PayAINetwork GitHub org. PayAI = #2 x402 facilitator, already our Solana leg (payai_facilitator.py) + behind WURK flow. MPP spec is IETF draft-httpauth-payment-00 (Jul 2026, expires Jan 2027) \u2014 early but Stripe-backed. Dual-rail = serve both x402 and MPP clients on same endpoint.",
-=======
-    "detail": "Add MPP (Machine Payments Protocol, paymentauth.org — IETF draft, Tempo Labs + Stripe) as a second payment rail on the x402 gateway. PayAI's agentic-payments SDK (github.com/PayAINetwork/agentic-payments, @payai/agentic-payments v0.1.6) accepts BOTH x402 and MPP on one endpoint: unauthenticated -> 402 with PAYMENT-REQUIRED (x402) AND WWW-Authenticate: Payment (MPP) headers; either settles. MPP is payment-method agnostic (EVM, Solana, Lightning, Stripe, USDC, Stellar, Hedera, Tempo) via registered method IDs. Our gateway is x402-only today. BORROW the mechanism (unlicensed TS, don't fork): dual-challenge 402 + settle-on-success buffering pattern. PayAI facilitator free tier 10K settles/mo, $0.001/tx after, no API key. 16 networks incl Solana/Base/X Layer. Reference: 11-Mess Hall/payai-mpp-dual-rail.md.",
-    "note": "Discovered Aug 6 via PayAINetwork GitHub org. PayAI = #2 x402 facilitator, already our Solana leg (payai_facilitator.py) + behind WURK flow. MPP spec is IETF draft-httpauth-payment-00 (Jul 2026, expires Jan 2027) — early but Stripe-backed. Dual-rail = serve both x402 and MPP clients on same endpoint.",
->>>>>>> Stashed changes
     "_orig_id": 47,
     "recommended_tier": "k3",
     "group": "labs",
@@ -994,11 +985,7 @@
   },
   {
     "id": 48,
-<<<<<<< Updated upstream
     "name": "BOT Chain Builder Challenge #2 \u2014 RWA Yield Guard Agent (AI \u00d7 RWA)",
-=======
-    "name": "BOT Chain Builder Challenge #2 — RWA Yield Guard Agent (AI × RWA)",
->>>>>>> Stashed changes
     "difficulty": "medium",
     "priority": "high",
     "status": "pending",
@@ -1007,13 +994,8 @@
     "needs_jordan": true,
     "human_gated": true,
     "gate_type": "action",
-<<<<<<< Updated upstream
     "detail": "BOT Chain Builder Challenge #2 (AI \u00d7 RWA, up to 5,000 USDT). Build Aug 10\u201320, Demo Day Aug 22, winners Aug 27. Product: RWA Yield Guard Agent \u2014 AI-driven asset-management agent monitoring RWA/stablecoin positions on BOT Chain, auto-rebalancing on health/yield/risk. GTA evolution. Hits RWA (highest-priority) + AI Native (AI as core on-chain decision-maker) tracks at once. HARD REQ: BOT Chain Mainnet deploy (testnet excluded). Network: chain ID 677, RPC rpc.botchain.ai, EVM-compatible, ~$0.06/tx, 0.75s blocks, 1 BOT gas/project. Plan: 09-Green Room/specs/botchain-rwa-build-plan.md. JORDAN-GATED: register at luma.com/238et7cw + join Builder Hub t.me/BotChain_official/61.",
     "note": "Scouted Aug 6. Competitive intel: Meridian (mrdn.finance) is BOT Chain ecosystem partner \u2014 decentralized inference router powered by x402 (400+ models, 19 chains). Direct adjacent player to our x402 gateway; validates x402 as standard on BOT Chain. Learning value: BOT Chain AI Agent Launchpad V1 \u2014 agent wallets earn 80% of trading-fee revenue once token lists on MemeX (deep-end agent-as-service model we haven't explored).",
-=======
-    "detail": "BOT Chain Builder Challenge #2 (AI × RWA, up to 5,000 USDT). Build Aug 10–20, Demo Day Aug 22, winners Aug 27. Product: RWA Yield Guard Agent — AI-driven asset-management agent monitoring RWA/stablecoin positions on BOT Chain, auto-rebalancing on health/yield/risk. GTA evolution. Hits RWA (highest-priority) + AI Native (AI as core on-chain decision-maker) tracks at once. HARD REQ: BOT Chain Mainnet deploy (testnet excluded). Network: chain ID 677, RPC rpc.botchain.ai, EVM-compatible, ~$0.06/tx, 0.75s blocks, 1 BOT gas/project. Plan: 09-Green Room/specs/botchain-rwa-build-plan.md. JORDAN-GATED: register at luma.com/238et7cw + join Builder Hub t.me/BotChain_official/61.",
-    "note": "Scouted Aug 6. Competitive intel: Meridian (mrdn.finance) is BOT Chain ecosystem partner — decentralized inference router powered by x402 (400+ models, 19 chains). Direct adjacent player to our x402 gateway; validates x402 as standard on BOT Chain. Learning value: BOT Chain AI Agent Launchpad V1 — agent wallets earn 80% of trading-fee revenue once token lists on MemeX (deep-end agent-as-service model we haven't explored).",
->>>>>>> Stashed changes
     "_orig_id": 48,
     "recommended_tier": "k2.7",
     "group": "labs",
@@ -1025,11 +1007,7 @@
   },
   {
     "id": 49,
-<<<<<<< Updated upstream
     "name": "Telegraph Season I Hackathon \u2014 x402 Miner Track ($15K)",
-=======
-    "name": "Telegraph Season I Hackathon — x402 Miner Track ($15K)",
->>>>>>> Stashed changes
     "difficulty": "easy",
     "priority": "high",
     "status": "pending",
@@ -1038,13 +1016,8 @@
     "needs_jordan": true,
     "human_gated": true,
     "gate_type": "action",
-<<<<<<< Updated upstream
     "detail": "Telegraph Season I Hackathon ($15K across 3 rounds: H1 $5K Aug 17\u2013Sep 7, H2 $10K mid-Oct, H3 mainnet Dec). Telegraph = machine-intelligence protocol on Base that USES x402 natively (PayAI facilitator, PAYMENT-SIGNATURE header, 402 challenge) \u2014 our exact stack. Miner track = wrap any API/model/tool via YAML (config-only). We have a catalog of x402-ready services (token security, market intel, wallet analysis, agent discovery). Plan: 09-Green Room/specs/telegraph-hackathon-build-plan.md. JORDAN-GATED: register at hackathon.telegraphprotocol.com (early = track access + private Discord).",
     "note": "Scouted Aug 6. Telegraph uses x402 natively \u2014 validates our stack. Miner track = YAML wrap of existing gateway services, no greenfield build. First-mover on another venue. 300+ builders registered. Register early for track access + core team support.",
-=======
-    "detail": "Telegraph Season I Hackathon ($15K across 3 rounds: H1 $5K Aug 17–Sep 7, H2 $10K mid-Oct, H3 mainnet Dec). Telegraph = machine-intelligence protocol on Base that USES x402 natively (PayAI facilitator, PAYMENT-SIGNATURE header, 402 challenge) — our exact stack. Miner track = wrap any API/model/tool via YAML (config-only). We have a catalog of x402-ready services (token security, market intel, wallet analysis, agent discovery). Plan: 09-Green Room/specs/telegraph-hackathon-build-plan.md. JORDAN-GATED: register at hackathon.telegraphprotocol.com (early = track access + private Discord).",
-    "note": "Scouted Aug 6. Telegraph uses x402 natively — validates our stack. Miner track = YAML wrap of existing gateway services, no greenfield build. First-mover on another venue. 300+ builders registered. Register early for track access + core team support.",
->>>>>>> Stashed changes
     "_orig_id": 49,
     "recommended_tier": "flash",
     "group": "labs",
@@ -1056,11 +1029,7 @@
   },
   {
     "id": 50,
-<<<<<<< Updated upstream
     "name": "NOT THE GHOST cover \u2014 composite Hikari into original (surgical edit)",
-=======
-    "name": "NOT THE GHOST cover — composite Hikari into original (surgical edit)",
->>>>>>> Stashed changes
     "difficulty": "medium",
     "priority": "high",
     "status": "pending",
@@ -1069,9 +1038,6 @@
     "needs_jordan": false,
     "human_gated": false,
     "gate_type": null,
-<<<<<<< Updated upstream
-    "detail": "Jordan wants the ORIGINAL NOT THE GHOST cover kept pixel-identical, with Hikari composited in surgically (Photoshop/GIMP). AI image models (FLUX 2) keep reinterpreting the whole scene \u2014 this needs real compositing. See 01-HANDOFFS/gentech-to-forge/2026-08-06-not-the-ghost-hikari.md for full brief + asset URLs."
-=======
     "detail": "Jordan wants the ORIGINAL NOT THE GHOST cover kept pixel-identical, with Hikari composited in surgically (Photoshop/GIMP). AI image models (FLUX 2) keep reinterpreting the whole scene — this needs real compositing. See 01-HANDOFFS/gentech-to-forge/2026-08-06-not-the-ghost-hikari.md for full brief + asset URLs."
   },
   {
@@ -1094,6 +1060,5 @@
       "handoff_on_complete": true
     },
     "note": "Jordan GO (Aug 6): 'yes add this' + 'look into how to build an Agentic bridge for the Treasury and what transaction fee that would look like for users.' Logged to Green Room ideas as the bridge-cost test. Missing rail blocks treasury cross-chain autonomy."
->>>>>>> Stashed changes
   }
 ]
