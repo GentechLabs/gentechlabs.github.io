@@ -920,5 +920,45 @@
     "recommended_tier": 1,
     "group": "Treasury",
     "routing": "Treasury"
+  },
+  {
+    "id": 45,
+    "name": "Treasury — 0x x402 Swap Rail (credential-free, multi-chain)",
+    "difficulty": "hard",
+    "priority": "high",
+    "status": "pending",
+    "assigned_to": "gentech",
+    "platform": "cloud",
+    "needs_jordan": false,
+    "human_gated": false,
+    "gate_type": "build",
+    "detail": "zero_x402_leg.py — wire 0x Swap API via x402 (no API key, pay $0.01 USDC/request from wallet). Validates GenTech's x402 thesis + enables credential-free, attributable, multi-rail swaps. DRY_RUN-first, REAL gated by AAE_X402_REAL=1. Uses Q402 trial key (live, 2000 credits). Spec: 09-Green Room/specs/0x-x402-swap-rail.md",
+    "note": "Scoped Aug 5. 0x x402 endpoint currently rate-limited (429, team cap, retry ~1h) — live test blocked until it clears. 0x API key verified working (needs 0x-version: v2 header).",
+    "_orig_id": null,
+    "recommended_tier": 1,
+    "group": "Treasury",
+    "routing": "Treasury"
+  },
+  {
+    "id": 46,
+    "name": "ComfyUI — Self-Hosted Brand Asset Pipeline (Consigliere Fed Chair family)",
+    "difficulty": "medium",
+    "priority": "medium",
+    "status": "pending",
+    "assigned_to": "jordan",
+    "platform": "desktop",
+    "needs_jordan": true,
+    "human_gated": true,
+    "gate_type": "action",
+    "detail": "ComfyUI (Comfy-Org/ComfyUI, 124k stars, GPL-3.0) — the most powerful modular diffusion GUI/backend. Runs FLUX/SDXL/Wan/LTX locally on a GPU. USE CASE: character consistency for the Consigliere Fed Chair family + treasury emblems. IPAdapter+InstantID locks the Powell face so every chain Fed Chair (Solana/Arc/Base/ETH) keeps the SAME face, just recolored; train a Consigliere LoRA once for a consistent brand family; reusable node graph recolors the hex 'G' emblem per chain. VPS has NO GPU (4-core/15GB/22GB free) so this is a DESKTOP tool. Needs: GPU laptop/desktop (12GB+ VRAM ideal, 3060 sweet spot; min 4GB VRAM/16GB RAM for SDXL). Install: pip install comfyui or portable build from github.com/Comfy-Org/ComfyUI; see docs.comfy.org/installation/system_requirements. Deliverable: Consigliere LoRA + per-chain workflow generating the full Fed Chair cabinet + treasury emblems in one consistent pass; finished assets return to VPS for site/avatars.",
+    "note": "Desktop-only (no GPU on VPS). Setup guide + LoRA workflow to be written for Jordan.",
+    "_orig_id": 46,
+    "recommended_tier": "flash",
+    "group": "labs",
+    "routing": {
+      "group": "labs",
+      "build_in": "labs",
+      "handoff_on_complete": true
+    }
   }
 ]
