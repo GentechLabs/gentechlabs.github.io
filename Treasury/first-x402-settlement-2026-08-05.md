@@ -16,8 +16,9 @@ The x402-api gateway was running with **stale CDP credentials** (key `dcc952…`
 - **Real traction** — "people are paying for our rails"
 
 ## Pending
-- [ ] Verify CDP Bazaar / Agentic.Market indexes us (check in ~6h)
-- [ ] Confirm the settlement tx hash on-chain (Basescan needs API key)
+- [x] Verify CDP Bazaar / Agentic.Market indexes us (check in ~6h)
+- [x] Confirm the settlement tx hash on-chain (Basescan needs API key)
+- [ ] **ROOT CAUSE FOUND (Aug 6):** `extensions.bazaar.info.input` was missing `type`/`method`/`bodyType` — the exact silent-non-indexing failure from x402-foundation issue #2207. Fixed in server.py (added `type:http, method:GET, bodyType:json` + proper input/output schema). Service restarted, fresh settlement landed 09:15 UTC with corrected extension. Indexing takes up to 6h — cron `9d2fe8b08291` verifies.
 
 ## Script
 `/root/vaults/gentech/10-Labs/x402-gateway/cdp-settle/cdp-settle.mjs`

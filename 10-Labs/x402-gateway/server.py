@@ -165,11 +165,15 @@ def build_payment_required(service_name: str, price_usd: float) -> dict:
                         "website": "https://gentechlabs.net"
                     },
                     "input": {
+                        "type": "http",
+                        "method": "GET",
+                        "bodyType": "json",
                         "example": {
                             "address": "0x1234567890abcdef1234567890abcdef12345678"
                         }
                     },
                     "output": {
+                        "type": "json",
                         "description": "Returns a JSON object with the requested service result or an error message.",
                         "example": {
                             "success": True,
@@ -181,11 +185,30 @@ def build_payment_required(service_name: str, price_usd: float) -> dict:
                     }
                 },
                 "schema": {
+                    "$schema": "https://json-schema.org/draft/2020-12/schema",
                     "type": "object",
                     "properties": {
-                        "result": {"type": "object"},
-                        "error": {"type": "string"}
-                    }
+                        "input": {
+                            "type": "object",
+                            "additionalProperties": False,
+                            "properties": {
+                                "type": {"const": "http", "type": "string"},
+                                "method": {"enum": ["GET", "POST", "PUT", "PATCH"], "type": "string"},
+                                "bodyType": {"enum": ["json", "form-data", "text"], "type": "string"},
+                                "body": {"type": "object", "properties": {"address": {"type": "string"}}, "required": []}
+                            },
+                            "required": ["type", "method", "bodyType", "body"]
+                        },
+                        "output": {
+                            "type": "object",
+                            "properties": {
+                                "type": {"type": "string"},
+                                "example": {"type": "object"}
+                            },
+                            "required": ["type"]
+                        }
+                    },
+                    "required": ["input"]
                 }
             }
         }
