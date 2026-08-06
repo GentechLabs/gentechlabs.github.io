@@ -220,6 +220,14 @@
 - **Why it matters:** Solana market-maker infra = the venue our GTA arb executor + Consigliere (queue #19) operate on. Tighter spreads = cleaner arb for us. ACE concept = same direction as our agentic-execution thesis (agents controlling their own tx landing).
 - **Status:** Watch-and-benefit signal, no build. Logged for context.
 
+## 🆕 Test — Cross-Chain Bridge Cost via Agent Rails (Aug 6)
+- **Jordan's question:** is moving money between chains via agent rails cheaper than manual bridging?
+- **Setup:** Solana wallet `BE815V7ojVz63PDxFFSEQyGSe5PZE2fAdKUU6Rd5pUvP` being funded with SOL.
+  Bridge adapter (`solana_bridge_adapter.py`, Across Base→Solana) + Jupiter leg both execution-ready.
+- **Test:** bridge a small USDC slice Base→Solana via the adapter, compare total cost (fees + gas)
+  vs manual bridging. Log the result.
+- **Status:** logged for future test — Jordan funding SOL first.
+
 ## 🆕 Strategic Signal — BlackRock BRSRV (Aug 6): enterprise wants its own home
 - BlackRock launched **BRSRV** (stablecoin reserve vehicle, cash + T-bills + overnight
   repos, GENIUS Act reserve-qualified). Ownership recorded on **Solana, Ethereum, Tempo**.
