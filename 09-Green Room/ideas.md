@@ -185,6 +185,19 @@
 - README advertises **x402 interop** — validates x402 as the agent-payment standard, potential integration surface
 - Not a Hermes threat (Python orchestration library vs our gateway+skills platform). Watch: their MCP Manager + AutoAgentBuilder patterns; steal what's useful, ignore the hype
 
+## 🏆 BOT Chain Builder Challenge #2 — AI × RWA (Aug 6 scout)
+**Source:** Jordan shared x.com/BOTChain_ai/status/2085216340609273908 | **Status:** Scouting → scoping
+- **What:** BOT Chain (AI-native L1, EVM-compatible, DePIN + PoSA, 0.75s blocks, near-zero fees, backed by NIX/Gemhead/Alpha). Challenge #2 = AI Native + RWA tracks, up to **5,000 USDT**.
+- **Timeline:** Build Aug 10–20, Demo Day Aug 22, winners Aug 27. Signup: luma.com/238et7cw (Jordan signs up — same Luma as other hackathons).
+- **Hard reqs:** BOT Chain **Mainnet** deploy (testnet won't count), public demo site, wallet integration, GitHub repo, complete business loop. Review: Product 30% / Mainnet Integration 25% / Innovation 20% / UX 15% / Technical 10%.
+- **RWA is highest-priority track.** AI track needs AI as *core* on-chain decision-maker (not just chat/API call).
+- **Why us:** squarely our lane — x402 middleware, agent economy (ERC-8004), GTA treasury agent. Strongest play = **AI-driven RWA asset-management agent** (hits top track + AI-core at once, natural GTA evolution).
+- **Competitive intel — Meridian (mrdn.finance):** BOT Chain ecosystem partner. It's a **decentralized inference router powered by x402** — 400+ models, 19 settlement chains, pay-as-you-go, no KYC. Direct adjacent player to our x402 gateway. We'd be measured against it. (No prior vault notes on Meridian — this is the first.)
+- **Also worth learning:** BOT Chain's AI Agent Launchpad V1 — agent wallets earn 80% of trading-fee revenue once token listed on MemeX. Deep-end agent-as-service model we haven't explored.
+- **Next:** Jordan registers on Luma → scope the RWA asset-management agent build → check BOT Chain dev docs (dev-docs.botchain.ai) + GitHub (github.com/BOTChain-bot).
+- [ ] Jordan: register at luma.com/238et7cw
+- [ ] Scope AI-driven RWA asset-management agent (GTA evolution)
+
 ## 🆕 Strategic Signal — BlackRock BRSRV (Aug 6): enterprise wants its own home
 - BlackRock launched **BRSRV** (stablecoin reserve vehicle, cash + T-bills + overnight
   repos, GENIUS Act reserve-qualified). Ownership recorded on **Solana, Ethereum, Tempo**.
