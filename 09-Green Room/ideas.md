@@ -198,6 +198,17 @@
 - [ ] Jordan: register at luma.com/238et7cw
 - [ ] Scope AI-driven RWA asset-management agent (GTA evolution)
 
+## 🏆 Telegraph Season I Hackathon — x402 Miner Track (Aug 6 scout)
+**Source:** Jordan shared x.com/0x_beni_/status/2085335083700179233 | **Status:** Scoping → GO (Jordan Aug 6, register when home)
+- **What:** Telegraph = machine-intelligence protocol (Base) where agents buy verified intelligence, miners supply it. **Uses x402 natively** (PayAI facilitator, PAYMENT-SIGNATURE header, 402 challenge) — our exact stack.
+- **Prize:** $15K across 3 rounds (H1 $5K Aug 17–Sep 7, H2 $10K mid-Oct, H3 mainnet Dec). 300+ builders registered.
+- **Tracks:** 1) Miner (wrap any API/model/tool via YAML — supply layer), 2) Script Author (eval scripts that rank miners), 3) Application (agents on live miners, opens later).
+- **Why us:** Miner track = "wrap an API via YAML." We have a catalog of x402-ready services (token security, market intel, wallet analysis, agent discovery). Config-only integration, no greenfield build. First-mover on another venue.
+- **Plan:** `09-Green Room/specs/telegraph-hackathon-build-plan.md`
+- **Next:** Jordan registers (early = track access + private Discord) → pick 2-3 gateway services → write YAML miners → register on-chain → test x402 flow.
+- [ ] Jordan: register at hackathon.telegraphprotocol.com
+- [ ] Gentech: write YAML miners for 2-3 gateway services
+
 ## 🆕 Ecosystem Signal — Syra expands to Algorand (Aug 6): multichain agent infra
 - **Syra** (syraa.fun, already queue #22 — register our x402 services there) announced full **Algorand** integration, expanding beyond Solana + Base. "Machine Money for Agents" — every AI agent operates on any chain, earns revenue, interacts frictionlessly.
 - **Why it matters:** (1) **Validates our multichain thesis** — we just shipped the Algorand rail on our x402 gateway (queue #7, code-ready, waiting on Jordan's Algorand wallet). Syra landing there confirms Algorand is a real agent-economy venue. (2) **Syra is a peer, not a threat** — agent infrastructure/marketplace; we're x402 middleware + GTA treasury agent. Same rail, different lane. (3) Pairs with the **Algorand Global x402 Challenge** ($100K + 500K ALGO).
