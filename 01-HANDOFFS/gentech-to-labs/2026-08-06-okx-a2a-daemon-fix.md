@@ -25,7 +25,7 @@ Daemon logs: `wakeup-notify succeeded (4905,2849,2848,2847)`, `heartbeat sent`, 
 `onchainos agent activate --agent-id 4905 --preferred-language en` → `submitApproval.success:true, approvalStatus:2` = "Listing under review."
 
 ## Also
-- `onchainos` CLI is 4.0.0 vs skill expects 4.3.0 / `preflight` not recognized — monitor for upgrade.
-- okx-a2a 0.1.11 (latest), all doctor checks pass.
+- `onchainos` upgraded 4.0.0 → **4.4.6** (latest) via `onchainos upgrade --skill-version 4.3.0` (Aug 6). `preflight` now works. Skill still v4.3.0 — `npx skills add okx/onchainos-skills --yes -g` hit known "global skill installation" limitation (files install, safe to ignore).
+- okx-a2a 0.1.11 (latest), all doctor checks pass, agentCount=4/activeClients=4, daemon healthy post-upgrade.
 
 **WATCH:** confirm #4905 clears review. If OKX sends another test task, the daemon should now respond.
