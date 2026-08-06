@@ -960,5 +960,27 @@
       "build_in": "labs",
       "handoff_on_complete": true
     }
+  },
+  {
+    "id": 47,
+    "name": "Dual-Protocol Payments \u2014 add MPP (paymentauth.org) rail alongside x402",
+    "difficulty": "medium",
+    "priority": "medium",
+    "status": "pending",
+    "assigned_to": "gentech",
+    "platform": "any",
+    "needs_jordan": false,
+    "human_gated": false,
+    "gate_type": null,
+    "detail": "Add MPP (Machine Payments Protocol, paymentauth.org \u2014 IETF draft, Tempo Labs + Stripe) as a second payment rail on the x402 gateway. PayAI's agentic-payments SDK (github.com/PayAINetwork/agentic-payments, @payai/agentic-payments v0.1.6) accepts BOTH x402 and MPP on one endpoint: unauthenticated -> 402 with PAYMENT-REQUIRED (x402) AND WWW-Authenticate: Payment (MPP) headers; either settles. MPP is payment-method agnostic (EVM, Solana, Lightning, Stripe, USDC, Stellar, Hedera, Tempo) via registered method IDs. Our gateway is x402-only today. BORROW the mechanism (unlicensed TS, don't fork): dual-challenge 402 + settle-on-success buffering pattern. PayAI facilitator free tier 10K settles/mo, $0.001/tx after, no API key. 16 networks incl Solana/Base/X Layer. Reference: 11-Mess Hall/payai-mpp-dual-rail.md.",
+    "note": "Discovered Aug 6 via PayAINetwork GitHub org. PayAI = #2 x402 facilitator, already our Solana leg (payai_facilitator.py) + behind WURK flow. MPP spec is IETF draft-httpauth-payment-00 (Jul 2026, expires Jan 2027) \u2014 early but Stripe-backed. Dual-rail = serve both x402 and MPP clients on same endpoint.",
+    "_orig_id": 47,
+    "recommended_tier": "k3",
+    "group": "labs",
+    "routing": {
+      "group": "labs",
+      "build_in": "labs",
+      "handoff_on_complete": true
+    }
   }
 ]
