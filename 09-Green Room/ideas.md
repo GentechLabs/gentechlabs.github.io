@@ -220,6 +220,21 @@
 - **Why it matters:** Solana market-maker infra = the venue our GTA arb executor + Consigliere (queue #19) operate on. Tighter spreads = cleaner arb for us. ACE concept = same direction as our agentic-execution thesis (agents controlling their own tx landing).
 - **Status:** Watch-and-benefit signal, no build. Logged for context.
 
+## 🆕 Ecosystem Signal — MetaMask Agent Wallet (Aug 6): mainstream validation
+- MetaMask launched **Agent Wallet** (GA today) — self-custodial wallet for AI agents.
+  TEE-secured keys, user-defined spend limits + protocol allowlists, Guard/Beast modes,
+  security-by-default on every tx (simulation + Blockaid + MEV, $10K protection).
+- **Chains:** Ethereum, Linea, Arbitrum, **Avalanche**, Optimism, Base, Polygon, BSC, Sei, Hyperliquid.
+- **Capabilities:** send, swap/bridge, perps (HL), prediction markets (Polymarket),
+  yield vaults (Aave), **x402 payments**, market data. **ERC-8004 native.**
+- **Why it matters to us:** direct mainstream validation of our thesis — x402 payments,
+  ERC-8004 agent identity, the agentic-treasury product shape, granular permissions
+  (our trust substrate), and Avalanche support. MetaMask = the wallet *home*; GenTech =
+  the intelligence + x402 middleware tollbooth. They complement more than compete.
+- Full note: `09-Green Room/specs/metamask-agent-wallet-signal-2026-08-06.md`
+- **Status:** watch-and-benefit. Potential future rail (MetaMask Agent Wallet as a
+  custody/execution venue — it supports x402 + ERC-8004 + Avalanche).
+
 ## 🆕 Test — Cross-Chain Bridge Cost via Agent Rails (Aug 6)
 - **Jordan's question:** is moving money between chains via agent rails cheaper than manual bridging?
 - **Setup:** Solana wallet `BE815V7ojVz63PDxFFSEQyGSe5PZE2fAdKUU6Rd5pUvP` being funded with SOL.
