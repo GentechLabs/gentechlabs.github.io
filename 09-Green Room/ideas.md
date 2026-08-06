@@ -198,6 +198,17 @@
 - [ ] Jordan: register at luma.com/238et7cw
 - [ ] Scope AI-driven RWA asset-management agent (GTA evolution)
 
+## 🆕 Ecosystem Signal — Syra expands to Algorand (Aug 6): multichain agent infra
+- **Syra** (syraa.fun, already queue #22 — register our x402 services there) announced full **Algorand** integration, expanding beyond Solana + Base. "Machine Money for Agents" — every AI agent operates on any chain, earns revenue, interacts frictionlessly.
+- **Why it matters:** (1) **Validates our multichain thesis** — we just shipped the Algorand rail on our x402 gateway (queue #7, code-ready, waiting on Jordan's Algorand wallet). Syra landing there confirms Algorand is a real agent-economy venue. (2) **Syra is a peer, not a threat** — agent infrastructure/marketplace; we're x402 middleware + GTA treasury agent. Same rail, different lane. (3) Pairs with the **Algorand Global x402 Challenge** ($100K + 500K ALGO).
+- **Jordan's read (Aug 6):** "We are right where we need to be... We could be one of the first movers to do it right on Algorand. Let's go." → **First-mover play on Algorand.**
+- **Status:** Logged. Algorand first-mover decision wired into `11-Mess Hall/considerations.md`.
+
+## 🆕 Ecosystem Signal — Jito BAM Maker Priority Plugin (MPP) (Aug 6): Solana MM infra
+- Jito's BAM shipped MPP — first "Application Controlled Execution" (ACE) plugin. MMs insert txs at top of every BAM micro-batch for deterministic price-update landing. 17 programs (BisonFi, Tessera, Scorch...), $500M+ daily spot volume, ~39% of oracle updates in BAM slots via MPP, fee cut to 1 lamport/CU/tx.
+- **Why it matters:** Solana market-maker infra = the venue our GTA arb executor + Consigliere (queue #19) operate on. Tighter spreads = cleaner arb for us. ACE concept = same direction as our agentic-execution thesis (agents controlling their own tx landing).
+- **Status:** Watch-and-benefit signal, no build. Logged for context.
+
 ## 🆕 Strategic Signal — BlackRock BRSRV (Aug 6): enterprise wants its own home
 - BlackRock launched **BRSRV** (stablecoin reserve vehicle, cash + T-bills + overnight
   repos, GENIUS Act reserve-qualified). Ownership recorded on **Solana, Ethereum, Tempo**.
