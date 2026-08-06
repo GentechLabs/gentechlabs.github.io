@@ -115,6 +115,29 @@ The thing that keeps this a product and not a liability:
 6. 🔭 **Layer 3 seed — agent-flow dataset**: log every GTA/connected-agent trade with agent attribution (from day one, even before it's a product) so the data exists when we want to build the sentiment index. Cheap to start, expensive to retrofit.
 7. 🔭 **Agent sentiment / flow index** — the Layer 3 data product (see `agent-arena-vision.md`)
 
+## Strategic signal — BlackRock BRSRV (Aug 6, 2026): the enterprise "home"
+BlackRock launched **BRSRV** (Daily Reinvestment Stablecoin Reserve Vehicle) — an
+institutional fund backing stablecoins, invested in cash + short-term Treasuries +
+overnight repos, built to qualify as a reserve asset under the GENIUS Act. Ownership
+is recorded on **Solana, Ethereum, and Tempo**.
+
+**Jordan's read (confirmed):** "Enterprise is gonna want their own home." Institutional
+money wants a *controlled box* — their own custody, compliance, reporting — not a
+public free-for-all. The chains are just the settlement rails underneath.
+
+**Why this strengthens our thesis, not weakens it:**
+- The enterprise "home" still needs a payment rail to move in/out. Someone has to be
+  the tollbooth between the institutional vault and the public chains — per-tx,
+  auditable, gasless. **That's the x402 middleware layer we're building.**
+- **The home is the product, the rail is the moat.** Enterprises build their own
+  custody/compliance boxes; they won't build settlement rails (too expensive, too
+  risky). The middleware connecting box → chain is where the recurring fee lives.
+- **Tempo's inclusion is the tell.** BlackRock picked a non-EVM rail alongside Solana
+  and Ethereum → **multi-rail is a first-class requirement, not a nice-to-have.**
+  GTA must be rail-agnostic by design — settle wherever the counterparty lives.
+
+**Play:** don't compete with the enterprise home — be the door they walk through.
+
 ## Status
 🟢 Thesis confirmed by Jordan (Aug 3). Drives the execution-engine + demo build.
 **Next:** Composio research (open-sourced account-sign-in stack) to unlock Layer 2.

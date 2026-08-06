@@ -185,6 +185,17 @@
 - README advertises **x402 interop** — validates x402 as the agent-payment standard, potential integration surface
 - Not a Hermes threat (Python orchestration library vs our gateway+skills platform). Watch: their MCP Manager + AutoAgentBuilder patterns; steal what's useful, ignore the hype
 
+## 🆕 Strategic Signal — BlackRock BRSRV (Aug 6): enterprise wants its own home
+- BlackRock launched **BRSRV** (stablecoin reserve vehicle, cash + T-bills + overnight
+  repos, GENIUS Act reserve-qualified). Ownership recorded on **Solana, Ethereum, Tempo**.
+- **Jordan's read:** "Enterprise is gonna want their own home" — institutional money
+  wants a controlled custody/compliance box, not a public free-for-all.
+- **Why it matters to us:** the enterprise home still needs a payment rail in/out →
+  that's our x402 middleware tollbooth. Home = product, rail = moat. Tempo (non-EVM)
+  inclusion validates **multi-rail as first-class** — GTA must be rail-agnostic.
+- **Play:** don't compete with the enterprise home — be the door they walk through.
+- Wired into `09-Green Room/specs/gta-product-thesis.md` (Strategic signal section).
+
 ## 🆕 Ecosystem Signal — Claude Code Faceless Video Project (Hasan Aboul Hasan, Aug 2)
 - Video: "Claude Can Now Make Any Video You Want in Minutes!" (youtu.be/1JZKKAg3UX8) — 1.01M subs creator
 - One open-source project (GitHub) + Claude Code + Remotion engine → chess tutorial, kids story, Vox-style documentary, all animated in code (layers, not screen recordings). ElevenLabs voice + word-perfect caption sync
