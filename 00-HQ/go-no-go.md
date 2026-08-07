@@ -32,6 +32,8 @@ purpose: "Jordan's go/no-go control panel. Check a box = decision made. Gentech 
 - [ ] **CockroachDB × AWS Agentic Memory #83** — register? $8.75K, Aug 18.
 - [ ] **Kimi K3 Content Pipeline #82** — fund wallet → test frame consistency loop.
 - [ ] **Bug Bounties Comeback** — test open·kritt on our own repos first (build-queue #34), then decide on Immunefi.
+- [ ] **BuildX AI Season Hackathon (#53)** — X Layer/OKX, up to $300K USDT. We already live on X Layer. Slots after the urgent ones. Deadline Aug 21. Confirm go + dedicated X account.
+- [ ] **1517 Fund (#54)** — low-effort micro-grant side application. No equity, no relocation. Only if spare cycles.
 
 ---
 
