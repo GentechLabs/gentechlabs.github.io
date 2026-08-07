@@ -71,6 +71,24 @@
 - **Sequencing (Jordan, Aug 3):** build the agentic treasury (GTA) fully first → subscriptions later. Spec = idea bank, not build target yet.
 - [ ] Revisit when GTA is together
 
+## 🆕 GenTech EDU — Agentic Treasury Onboarding & Honest-Expectations Layer (Aug 7)
+**Source:** Jordan (Treasury group) | **Status:** Idea captured, spec written
+- **Thesis:** EDU is how we break down the Agentic Treasury for users — what we
+  recommend, how to get started, common mistakes when prompting/working with agents,
+  and **honest expectations** (the same way The Steward told Jordan "this may give
+  smaller returns").
+- **Why it matters (market-maker funnel):** every market maker starts small ($25–50/wk
+  → scale). EDU makes that funnel safe + honest — surface the REAL numbers before a
+  user commits (e.g. "$31.50 at 12% APY ≈ $3.78/yr"), so reputation is built on honesty.
+- **Per-pool content:** what it is, what we recommend, realistic returns at small size,
+  how to get started, common mistakes, risk profile.
+- **Distinct from the Book Reader / EDU visual-books concept (below):** that's the
+  visual/AR reading product; this is the treasury onboarding + expectations layer.
+- Full spec: `09-Green Room/specs/gentech-edu-agentic-treasury.md`
+- **Next:** build the first EDU page for the Trader Joe V2 AVAX/USDC pool (the rail
+  we're about to fund) as the pilot.
+- [ ] Build EDU pilot page for Trader Joe V2 AVAX/USDC pool
+
 ## 🏆 GenTech Book Reader / GenTech EDU — Interactive Visual Books + AR Glasses
 **Source:** Jordan brainstorm (Aug 3) | **Status:** Concept — strong flagship fit, connects Tutors Layer + visual pipeline
 - **Vision:** Read PDFs as beautiful clothbound "books" in a Three.js shelf, not flat document viewers. Open a volume, turn curved pages, orbit the binding.
