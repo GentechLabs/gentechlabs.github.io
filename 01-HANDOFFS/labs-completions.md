@@ -8,3 +8,10 @@
 ## Shipped
 
 *None this session.*
+
+---
+
+## 2026-08-07
+
+- #29 — Build with Gemini XPRIZE / Circle Agentic Economy Prize: SIE x402 service shipped + live on gateway (api.gentechlabs.net/v1/sie/embeddings → HTTP 402). Adapter tested, gateway routing wired, bazaar manifest v9.1.0, GCP deploy config + Circle agent scaffold + proof checklist + README. Committed.
+- #52 — Krexa integration scouted + logged (credit layer for x402 gateway on Solana). Green Room + build queue. Awaiting Jordan invite code.
