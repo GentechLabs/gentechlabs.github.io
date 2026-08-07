@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Super Earth Armed Forces — Loadout Registry</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: #0b0e09;
+            color: #d6d3c4;
+            min-height: 100vh;
+            background-image:
+                repeating-linear-gradient(0deg, rgba(255,255,255,0.015) 0 1px, transparent 1px 3px),
+                repeating-linear-gradient(90deg, rgba(255,255,255,0.015) 0 1px, transparent 1px 3px);
+        }
+        /* Military stencil headers */
+        .stencil {
+            font-family: 'Impact', 'Arial Black', sans-serif;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            -webkit-text-stroke: 0.5px rgba(0,0,0,0.6);
+        }
+
+        /* ═══ TOP BAR ═══ */
+        .top-bar {
+            background: #14170f;
+            border-bottom: 3px solid #7a7f6a;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8px 20px;
+            font-size: 0.72em;
+            letter-spacing: 2px;
+            color: #9a9f88;
+            text-transform: uppercase;
+        }
+        .top-bar .unit { color: #c9a84c; font-weight: bold; }
+        .top-bar .cls { color: #e8d24a; }
+
+        /* ═══ HEADER ═══ */
+        .header {
+            background: linear-gradient(180deg, #1a1f12 0%, #12160c 100%);
+            border-bottom: 4px solid #e8d24a;
+            padding: 26px 20px 20px;
+            text-align: center;
+            position: relative;
+        }
+        .header::after {
+            content: "★ ★ ★ ★ ★";
+            position: absolute;
+            bottom: 6px;
+            left: 0; right: 0;
+            text-align: center;
+            color: rgba(232,210,74,0.25);
+            letter-spacing: 10px;
+            font-size: 0.7em;
+        }
+        .header .flag {
+            font-size: 1.1em;
+            letter-spacing: 4px;
+            color: #c9a84c;
+            margin-bottom: 6px;
+        }
+        .header h1 {
+            font-size: 2.4em;
+            color: #e8d24a;
+            text-shadow: 0 2px 0 #000, 0 0 25px rgba(232,210,74,0.25);
+            margin-bottom: 6px;
+        }
+        .header .subtitle {
+            color: #9a9f88;
+            font-size: 1em;
+            letter-spacing: 2px;
+        }
+        .header .soldier {
+            display: inline-block;
+            margin-top: 12px;
+            padding: 6px 20px;
+            background: #0b0e09;
+            border: 1px solid #7a7f6a;
+            border-left: 4px solid #c9a84c;
+            color: #d6d3c4;
+            font-size: 0.85em;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        .header .soldier strong { color: #e8d24a; }
+
+        .container { max-width: 1100px; margin: 0 auto; padding: 24px 20px; }
+
+        /* ═══ SECTION TITLE ═══ */
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 18px;
+        }
+        .section-title .tag {
+            background: #e8d24a;
+            color: #12160c;
+            font-weight: bold;
+            font-size: 0.8em;
+            letter-spacing: 2px;
+            padding: 4px 10px;
+        }
+        .section-title h2 {
+            color: #d6d3c4;
+            font-size: 1.3em;
+            letter-spacing: 3px;
+        }
+        .section-title .line {
+            flex: 1;
+            height: 1px;
+            background: #3d4333;
+        }
+
+        /* ═══ LOADOUT CARD ═══ */
+        .loadout-card {
+            background: linear-gradient(180deg, #191e11 0%, #12160c 100%);
+            border: 1px solid #3d4333;
+            border-left: 6px solid #c9a84c;
+            border-radius: 4px;
+            padding: 22px;
+            margin-bottom: 24px;
+            position: relative;
+        }
+        .loadout-card::before {
+            content: "▲ ▲ ▲ ▲ ▲";
+            position: absolute;
+            top: 0; right: 0;
+            padding: 4px 12px;
+            color: rgba(201,168,76,0.2);
+            letter-spacing: 4px;
+            font-size: 0.7em;
+        }
+        .loadout-card h3 {
+            color: #e8d24a;
+            font-size: 1.7em;
+            letter-spacing: 2px;
+            margin-bottom: 4px;
+        }
+        .warfront {
+            display: inline-block;
+            padding: 3px 14px;
+            font-size: 0.8em;
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin: 6px 8px 10px 0;
+            border: 1px solid;
+        }
+        .warfront-bots { background: rgba(190,60,40,0.15); color: #ff8a70; border-color: #be3c28; }
+        .warfront-bugs { background: rgba(200,170,30,0.15); color: #ffe066; border-color: #c8aa1e; }
+        .warfront-illuminate { background: rgba(90,140,220,0.15); color: #9db8ff; border-color: #5a8cdc; }
+        .role {
+            color: #9a9f88;
+            font-size: 0.9em;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        .meta-line {
+            color: #7a7f6a;
+            font-size: 0.85em;
+            letter-spacing: 1px;
+            margin-bottom: 14px;
+        }
+        .meta-line strong { color: #c9a84c; }
+
+        /* ═══ EQUIPMENT GRID ═══ */
+        .equip-label {
+            color: #c9a84c;
+            font-size: 0.72em;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin: 14px 0 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .equip-label::after { content: "──"; color: #3d4333; flex: 1; }
+        .equip-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+        }
+        .equip-item {
+            background: #0d1109;
+            border: 1px solid #3d4333;
+            border-radius: 3px;
+            padding: 12px 14px;
+            position: relative;
+            overflow: hidden;
+        }
+        .equip-item::before {
+            content: "▪";
+            position: absolute;
+            top: 2px; right: 6px;
+            color: #3d4333;
+        }
+        .equip-item .label {
+            color: #7a7f6a;
+            font-size: 0.7em;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+        .equip-item .value {
+            color: #d6d3c4;
+            font-weight: 600;
+            font-size: 1em;
+        }
+
+        /* ═══ STRATAGEMS ═══ */
+        .stratagems {
+            list-style: none;
+            margin: 10px 0;
+        }
+        .stratagems li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 14px;
+            background: #0d1109;
+            border: 1px solid #3d4333;
+            border-left: 4px solid #c9a84c;
+            margin-bottom: 6px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95em;
+        }
+        .stratagem-num {
+            color: #7a7f6a;
+            font-size: 0.75em;
+            letter-spacing: 1px;
+            min-width: 24px;
+        }
+        .stratagem-icon { font-size: 1.1em; }
+        .stratagem-name { color: #d6d3c4; font-weight: 500; letter-spacing: 0.5px; }
+
+        /* ═══ INTEL NOTE ═══ */
+        .intel {
+            margin-top: 14px;
+            padding: 12px 16px;
+            background: #0d1109;
+            border: 1px dashed #4a523c;
+            border-left: 4px solid #7a7f6a;
+            color: #b5b09c;
+            font-size: 0.9em;
+            line-height: 1.6;
+        }
+        .intel .lbl {
+            color: #c9a84c;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-size: 0.75em;
+        }
+
+        .loading, .empty {
+            color: #7a7f6a;
+            text-align: center;
+            padding: 40px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* ═══ FOOTER ═══ */
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #4a523c;
+            font-size: 0.75em;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            border-top: 2px solid #2a2e20;
+            margin-top: 30px;
+        }
+        .footer .stars { color: #c9a84c; letter-spacing: 8px; display: block; margin-bottom: 6px; }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <span>SEAF · <span class="unit">REGISTRY 07</span></span>
+        <span>SUPER EARTH ARMED FORCES</span>
+        <span class="cls">⚠ CLASSIFIED</span>
+    </div>
+
+    <div class="header">
+        <div class="flag">★ ★ ★ FOR SUPER EARTH ★ ★ ★</div>
+        <h1>HELLDIVERS LOADOUT REGISTRY</h1>
+        <div class="subtitle">SOLDIER · ARMORY · ORDNANCE · MISSION INTEL</div>
+        <div class="soldier">
+            CALLSIGN: <strong>OJAY4789</strong> &nbsp;·&nbsp; RANK: <strong>Lv 74</strong> &nbsp;·&nbsp; <strong>EXEMPLARY SUBJECT</strong>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="section-title">
+            <span class="tag">FIELDED</span>
+            <h2>ACTIVE LOADOUTS</h2>
+            <div class="line"></div>
+        </div>
+        <div id="loadout-grid">
+            <div class="loading">Retrieving loadout registry...</div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <span class="stars">★★★★★</span>
+        LIBERTY · DEMOCRACY · FREEDOM
+    </div>
+
+    <script>
+        function iconFor(name) {
+            const n = name.toLowerCase();
+            if (n.includes('bullet') || n.includes('strike') || n.includes('orbital') || n.includes('barrage') || n.includes('storm')) return "🔥";
+            if (n.includes('supply') || n.includes('pack')) return "📦";
+            if (n.includes('sentry')) return "🛡️";
+            if (n.includes('laser')) return "⚡";
+            if (n.includes('mortar')) return "💥";
+            if (n.includes('eagle')) return "🦅";
+            if (n.includes('grenade') || n.includes('bomb')) return "💣";
+            if (n.includes('rail') || n.includes('cannon') || n.includes('recoil') || n.includes('rocket')) return "🚀";
+            if (n.includes('shield')) return "🛡️";
+            if (n.includes('jet') || n.includes('jump')) return "🎒";
+            return "🪖";
+        }
+
+        function warfrontClass(w) {
+            const n = w.toLowerCase();
+            if (n.includes('bug') || n.includes('terminid')) return "warfront-bugs";
+            if (n.includes('illumin')) return "warfront-illuminate";
+            return "warfront-bots";
+        }
+
+        function renderLoadouts(data) {
+            const grid = document.getElementById('loadout-grid');
+            if (!data || !data.loadouts || data.loadouts.length === 0) {
+                grid.innerHTML = '<div class="empty">No loadouts fielded yet. Report a build to HQ.</div>';
+                return;
+            }
+            grid.innerHTML = data.loadouts.map(l => `
+                <div class="loadout-card">
+                    <h3>${l.alias}</h3>
+                    <span class="warfront ${warfrontClass(l.warfront)}">${l.warfront}</span>
+                    <span class="role">${l.role || ''}</span>
+                    <div class="meta-line">
+                        ${l.level ? 'RANK <strong>Lv ' + l.level + '</strong>' : ''}${l.rank ? ' · <strong>' + l.rank + '</strong>' : ''}${l.lastUpdated ? ' · FIELDED <strong>' + l.lastUpdated + '</strong>' : ''}
+                    </div>
+
+                    <div class="equip-label">🛡️ Field Equipment</div>
+                    <div class="equip-grid">
+                        <div class="equip-item"><div class="label">Primary</div><div class="value">${l.loadout.primary}</div></div>
+                        <div class="equip-item"><div class="label">Secondary</div><div class="value">${l.loadout.secondary}</div></div>
+                        <div class="equip-item"><div class="label">Throwable</div><div class="value">${l.loadout.throwable}</div></div>
+                        <div class="equip-item"><div class="label">Armor</div><div class="value">${l.loadout.armor}</div></div>
+                        ${l.loadout.booster ? `<div class="equip-item"><div class="label">Booster</div><div class="value">${l.loadout.booster}</div></div>` : ''}
+                    </div>
+
+                    <div class="equip-label">🪖 Ordnance / Stratagems</div>
+                    <ul class="stratagems">
+                        ${l.stratagems.map((s, i) => `<li><span class="stratagem-num">[${i+1}]</span><span class="stratagem-icon">${iconFor(s)}</span><span class="stratagem-name">${s}</span></li>`).join('')}
+                    </ul>
+
+                    <div class="intel">
+                        ${l.strength ? '<span class="lbl">Strength: </span>' + l.strength + '<br>' : ''}
+                        ${l.weakness ? '<span class="lbl">Weakness: </span>' + l.weakness + '<br>' : ''}
+                        ${l.notes ? '<span class="lbl">Intel: </span>' + l.notes : ''}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        async function loadData() {
+            try {
+                const res = await fetch('helldivers2-loadouts.json?t=' + Date.now());
+                const data = await res.json();
+                renderLoadouts(data);
+            } catch (e) {
+                console.error('Failed to load loadouts:', e);
+                document.getElementById('loadout-grid').innerHTML =
+                    '<div class="empty">Registry link down. Check comms.</div>';
+            }
+        }
+        loadData();
+    </script>
+</body>
+</html>

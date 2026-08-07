@@ -1,0 +1,54 @@
+version: "1"
+kind: subnet
+id: 1001
+slug: gentech-token-security
+protocol: generic
+name: GenTech Token Security
+description: >
+  Token risk scoring and rugcheck analysis. Returns a verified risk score and
+  classification for any token address across Solana, Base, Ethereum, and BNB.
+  Agents use this to avoid scam tokens before moving money.
+base_url: https://api.gentechlabs.net
+
+auth:
+  type: none
+
+rate_limit_per_sec: 5
+cache_ttl_sec: 30
+circuit_threshold: 5
+circuit_cooldown_seconds: 30
+
+endpoints:
+  - path: /v1/security/score/{address}
+    external_path: /v1/security/score/{address}
+    method: GET
+    description: Token risk score and rugcheck analysis for a token address.
+
+semantics:
+  signal_mapping:
+    type: token_risk
+    confidence_field: risk_score
+    label_field: classification
+  supported_intents:
+    - token_risk_assessment
+    - rugcheck
+    - token_safety_check
+    - scam_detection
+
+on_chain:
+  description: Token risk classification for on-chain signal data.
+  transform: direct
+  min_price_usdc: 0.01
+  fields:
+    integers:
+      - index: 0
+        name: risk_score_x100
+        description: Token risk score 0-100 times 100.
+        source_path: risk_score
+        multiplier: 100
+    bools:
+      - index: 0
+        name: is_safe
+        description: Whether the token is classified as safe.
+        source_path: classification
+        transform_rule: bool_from_eq:safe

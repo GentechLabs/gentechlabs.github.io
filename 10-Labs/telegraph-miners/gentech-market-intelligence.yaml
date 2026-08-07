@@ -1,0 +1,53 @@
+version: "1"
+kind: subnet
+id: 1003
+slug: gentech-market-intelligence
+protocol: generic
+name: GenTech Market Intelligence
+description: >
+  Real-time crypto market price data. Returns a verified price for any symbol
+  (BTC, ETH, SOL, etc.) across Solana, Base, Ethereum, and BNB. Agents use this
+  to make informed trading and rebalancing decisions.
+base_url: https://api.gentechlabs.net
+
+auth:
+  type: none
+
+rate_limit_per_sec: 10
+cache_ttl_sec: 15
+circuit_threshold: 5
+circuit_cooldown_seconds: 30
+
+endpoints:
+  - path: /v1/market/price/{symbol}
+    external_path: /v1/market/price/{symbol}
+    method: GET
+    description: Real-time crypto market price for a symbol.
+
+semantics:
+  signal_mapping:
+    type: market_price
+    confidence_field: confidence
+    label_field: symbol
+  supported_intents:
+    - market_price
+    - price_check
+    - crypto_quote
+    - trading_signal
+
+on_chain:
+  description: Market price snapshot for on-chain signal data.
+  transform: direct
+  min_price_usdc: 0.005
+  fields:
+    integers:
+      - index: 0
+        name: price_usd_x100
+        description: Price in USD times 100.
+        source_path: price_usd
+        multiplier: 100
+    strings:
+      - index: 0
+        name: symbol
+        description: Asset symbol.
+        source_path: symbol

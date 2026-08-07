@@ -15,10 +15,47 @@
 
 | # | Platform | URL / Location | What's tracked | Status | Last verified |
 |---|----------|---------------|----------------|--------|---------------|
-| 1 | x402-list.com | https://x402-list.com/services/gentech-labs-x402-gateway | 6 endpoints, uptime, compliance, signability, price, traction | 🟢 ONLINE (was "route not signable" → fixed EIP-712 + standard header 2026-08-02) | 2026-08-02 |
+| 1 | x402-list.com | https://x402-list.com/services/gentech-labs-x402-gateway | 6 endpoints, uptime, compliance, signability, price, traction | 🟢 ONLINE — page cache STALE (shows 6 services/Base; manifest has 8/6chains, will self-correct on ~5h rescan). Full sweep Aug 5 | 2026-08-05 |
 | 2 | 8004scan.io (ERC-8004 registry) | https://8004scan.io/agents?chain=43114 · agent #1770 | GenTech Labs identity, 16 x402 endpoints, feedback | 🟢 LIVE (Avalanche, owner 0x7ebff188f2Eba16518C02864589b1403a5d1296a) | 2026-08-02 |
-| 3 | api.gentechlabs.net (gateway) | https://api.gentechlabs.net | 6 paid x402 services, /.well-known/x402, bazaar manifest v8.0.0 | 🟢 ALL 6 SERVICES PAYING E2E | 2026-08-02 |
+| 3 | api.gentechlabs.net (gateway) | https://api.gentechlabs.net | 6 paid x402 services, /.well-known/x402, bazaar manifest v9.0.0 | 🟢 LIVE — 8 services, manifest v9.0.0 (re-verified 2026-08-05) | 2026-08-05 |
 | 4 | gentechlabs.net | https://gentechlabs.net | Landing page, links to gateway + kit | 🟢 | 2026-08-02 |
+| 4b | Games API (deal-tracker) | api.gentechlabs.net/v1/games/* (port 8080) | deal search, price-watch, release-radar, preorder-advisor | 🟢 LIVE + real data (was stub `[]`, fixed Aug 3) | 2026-08-03 |
+| 4c | Crypto Price API | api.gentechlabs.net/v1/price (port 8082) | real-time crypto prices | 🟢 LIVE (was placeholder, fixed Aug 3) | 2026-08-03 |
+| 4d | Gas Price API | api.gentechlabs.net/v1/gas (port 8084) | live gas prices (eth/base/polygon) | 🟢 LIVE (was all-zero placeholder, fixed Aug 3) | 2026-08-03 |
+| 4e | Token Security API | api.gentechlabs.net/v1/score (port 8086) | Solana token risk scoring → Rugcheck engine | 🟢 LIVE (was placeholder, now proxies Rugcheck, fixed Aug 3) | 2026-08-03 |
+| 4f | Agent Search API (search.gentechlabs.net) | https://search.gentechlabs.net | standalone Exa/Grok/Surf search | ⚫ DISABLED (dead shell — no provider keys; port conflict with gateway agent_discovery) | 2026-08-04 |
+| 4g | **OpenDexter (x402 marketplace)** | https://open.dexter.cash/mcp | x402 API marketplace MCP — discover + pay x402 APIs (x402_search/check/access/wallet) | 🔭 EXPLORED Aug 3 — endpoint verified live, tools enumerated, search proven. **Jordan wants us listed here.** Next: find provider-submission flow to list our services. | 2026-08-03 |
+
+## 📊 ACCURATE API INVENTORY (verified Aug 4, 2026)
+
+The real, working, revenue-capable API surface. **This is the number to use** when counting "how many APIs are live."
+
+**Via x402 gateway (api.gentechlabs.net, 8 services, all backends 🟢 ok):**
+| # | Service | Endpoint | Backend port | Data source |
+|---|---------|----------|--------------|-------------|
+| 1 | token_security | /v1/token-security | 8088 (Rugcheck) | Solana risk scoring |
+| 2 | market_intelligence | /v1/market | 8082 (crypto-price) | CoinMarketCap→CoinGecko |
+| 3 | agent_discovery | /v1/agents/search | 8091 | 8004scan ERC-8004 registry |
+| 4 | defi_lp_analytics | /v1/defi/lp | 8092 | DexScreener |
+| 5 | wallet_analysis | /v1/wallet/portfolio | 8093 | Solana RPC + DexScreener |
+| 6 | nft_search | /v1/nft/search | 8094 | Magic Eden |
+| 7 | treasury_defender | /v1/defender | 8096 | RPC + DexScreener |
+| 8 | lineage_guard | /v1/lineage | 8095 | DataHub GMS |
+
+**Standalone APIs (direct subdomains):**
+| # | API | Domain | Port |
+|---|-----|--------|------|
+| 9 | Games / Deals | deals.gentechlabs.net | 8080 |
+| 10 | Crypto Price | prices.gentechlabs.net | 8082 |
+| 11 | Gas Price | gas.gentechlabs.net | 8084 |
+| 12 | Token Security (proxy) | security.gentechlabs.net | 8086 |
+| 13 | Rugcheck | rugcheck.gentechlabs.net | 8088 |
+
+**TOTAL: 13 live, working, revenue-capable APIs** (8 gateway services + 5 standalone). Plus the deal-tracker games API adds 4 gaming sub-endpoints (deals, price-watch, release-radar, preorder-advisor) on port 8080.
+
+**DISABLED/DEAD (do not count):** Agent Search API (search.gentechlabs.net) — no provider keys, port conflict. ⚠️ deals.gentechlabs.net has an SSL/DNS cert gap (resolves to VPS direct IP, cert doesn't cover it) — works on localhost:8080 but public HTTPS fails; needs Cloudflare proxy toggle.
+
+
 | 5 | GitHub — Gentech-Labs org | https://github.com/Gentech-Labs | programmable-money-x402, genTech-agent-kit, agent-credit-score (21 repos) | 🟢 PUBLIC + VISIBLE | 2026-08-02 |
 | 6 | GitHub — ProtoJay4789 (personal) | https://github.com/ProtoJay4789 | All repos (kit, portfolio, etc.) | ⚠️ FLAGGED — web 404s despite public; use ORG URLs | 2026-08-02 |
 | 7 | Agentic.Market (Bazaar) | https://agentic.market | Auto-indexed when CDP facilitator settles a payment | ⏳ NOT INDEXED YET — needs first on-chain settlement | 2026-08-02 |
@@ -28,8 +65,13 @@
 | # | Platform | Notes | Action needed |
 |---|----------|-------|---------------|
 | 8 | x402.org / x402scan | Standard x402 scanner — check if we appear | Verify listing after fix settles |
+| 8b | **Syra (syraa.fun)** | https://syraa.fun/marketplace | x402 marketplace — register our services (creator skills with payToAddress) | ⏳ PENDING — jordan-queue #22. **Jordan clarified Aug 3: 'Syra' (not CIRA).** Add to registry. Action: register x402 services. |
+| 8c | **OpenDexter** | https://open.dexter.cash/mcp | x402 API marketplace MCP — get our services listed | 🟢 VERIFIED x402-ready (Aug 3). **Funding state:** `0x7ebff...` = 2.97 USDC+gas (Jordan's owner wallet, NO private key in env); `0x3d117...` = signable GTA arb wallet but only 0.001 USDC. **Path to listed:** get USDC into signable wallet (or signing for 0x7ebff) → settle x402 via Dexter facilitator → auto-catalog → claim resource. | 2026-08-03 |
 | 9 | signal402 / other x402 directories | Was submitted earlier — verify status | Check + update |
 | 10 | MCP directories (mcp-directory, etc.) | Our mcp-directory service reports ok — confirm which directories list us | Audit + collect URLs |
+| 11 | **Freelance AI (by PayAI)** | https://build.avax.network/integrations/payai | Decentralized agent marketplace where AI agents hire/work for each other, x402 (Solana, Base, Avalanche). PayAI = the facilitator behind our WURK flow. Sell-side: list GenTech x402 services as freelance offerings. | Discovered 2026-08-05 (income scan). Open-entry (x402 standard, no stake). Register agents as sellers. |
+| 12 | **BotWork** | https://www.botwork.network/ | P2P AI-agent freelance network (libp2p task protocol), escrow on Base L2, 90/5/5 split. TS SDK `npx botwork init`. Agents bid on tasks, deliver, get paid. Sell-side fit for GenTech dev/analysis agents. | Discovered 2026-08-05 (income scan). Open-entry, MIT SDK. List an agent via SDK. |
+| 13 | **Amadeus Protocol — Agent Hub** | https://thegrid.id (amadeus_protocol) | AI agent marketplace (built on Bitte.ai infra) for trading/DeFi automation/investment agents. Cross-chain (Sui, Solana, ETH). Sell-side: list DeFi/analytics agents. | Discovered 2026-08-05 (income scan). Check registration flow before committing. |
 
 ## ⚪ KNOWN BUT NOT PURSUED / OTHER
 
@@ -57,4 +99,6 @@
 | **Treasury Defender (new service #7)** | Multi-chain | LIVE ✅ (Aug 2) | New paid x402 service (port 8096): classifies any token KNOWN/SUSPICIOUS (homoglyph detection + liquidity check), quarantines flagged tokens, returns safe burn calldata. 3 scam tokens from Jordan's Avalanche wallet already quarantined (ÚSDС, USḌC, UЅDС). Manifest v9.0.0. | Add to Bankr skill + x402-list rescan | 2026-08-02 |
 ---
 
-*Last updated: 2026-08-02 (created by Jordan directive — keep this file current)*
+*Last updated: 2026-08-05 (FULL SWEEP — manifest v9.0.0 verified 8 services/6 chains ✅; x402-list page cache lagging (6→8, auto-rescan); gentechlabs.net API section synced to true 8; OpenDexter MCP verified reachable; Syra=curated/partner (no self-serve); registrations needing Jordan: Syra, BotWork, Swarms, Atelier)*
+
+| **Solana Homebase** | https://github.com/Gentech-Labs/solana-homebase | Agentic Treasury orchestrator — Solana homebase (Superteam tranche-2 MVP) | 🟢 PUBLIC + LIVE (Aug 5) | 2026-08-05 |

@@ -68,7 +68,7 @@ All 21 Gentech cloud items are decision-gated (need a yes/no or config value fro
 - [ ] **#24** Paymenter x402 — WHMCS/Blesta port. (needs repo choice)
 
 **Already action-gated / waiting on earlier steps:**
-- [ ] **#20** AI Job Search — Fork + Jordan profile setup. (needs fork)
+- [x] **#20** AI Job Search — repo forked + pushed (ProtoJay4789/ai-job-search), Jordan profile loaded. REWORKED as Hermes-native (no Claude Code needed): new skill `hermes-job-application` merges the methodology with our working scanner. USABLE NOW.
 
 **Stale/deadline check needed:**
 - [ ] **#1** Keeperhub — verify still active (was urgent)
