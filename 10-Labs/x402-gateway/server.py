@@ -46,6 +46,7 @@ BACKEND_ROUTES = {
     "nft_search": ("http://127.0.0.1:8094", "search", "/v1/nft/search"),
     "treasury_defender": ("http://127.0.0.1:8096", "defender/", "/v1/defender/"),
     "lineage_guard": ("http://127.0.0.1:8095", "lineage/", "/v1/lineage/"),
+    "sie_inference": ("http://127.0.0.1:8097", "", "/v1/"),
 }
 
 # Public URL segment (first path element after /v1/) -> manifest service key
@@ -58,6 +59,7 @@ URL_TO_SERVICE = {
     "nft": "nft_search",
     "defender": "treasury_defender",
     "lineage": "lineage_guard",
+    "sie": "sie_inference",
 }
 
 
