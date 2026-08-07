@@ -2,17 +2,38 @@
 
 **Date:** 2026-08-07
 **Source:** Jordan (Treasury group conversation)
-**Status:** Idea — capture only, not yet built
+**Status:** Idea captured — refined scope (Aug 7)
 
 ## The thesis (Jordan, verbatim intent)
 
-GenTech EDU is how we **break down the Agentic Treasury** for users. It's the
-onboarding + education layer that tells people:
+GenTech EDU is a **learning module for our own infrastructure** — how to use the
+GenTech Hub, how to use the GenTech Treasury, etc. It's an EDU for our products and
+services. **Current focus: DeFi + setting a DeFi milestone.**
+
+It tells users:
 - **What we recommend** (which pool/rail to start with)
 - **How to get started** (the exact steps)
 - **Common mistakes** people make when prompting / working with agents
 - **Honest expectations** — the same way The Steward told Jordan "this might be
   too small for what you're trying to do" or "this gives smaller returns."
+
+## Scope (refined Aug 7)
+
+- **Not** the visual-books / AR reading product (that's the separate "GenTech Book
+  Reader / EDU" concept in ideas.md).
+- **Is** a practical learning module covering our infrastructure: GenTech Hub,
+  GenTech Treasury, and the DeFi milestone ladder.
+- **DeFi milestone focus:** teach users the milestone ladder and how to climb it.
+
+## The DeFi Milestone Ladder (from `.lfj-aae-config.json`)
+
+| Tier | Label | Daily fees | Unlocks |
+|------|-------|-----------|---------|
+| 1 | Scout | $5/day | Entry strategies (CURVE) |
+| 2 | Raider | $20/day | SPOT + BIDIRECTIONAL shapes |
+| 3 | Warlord | $55/day | Multi-pool positions |
+| 4 | Fisher | $100/day | Multi-asset farming (LINK, TAO, SOL) |
+| 5 | Sovereign | $200/day | Custom strategy creation |
 
 ## Why this matters (the market-maker funnel)
 
@@ -59,5 +80,5 @@ yield-farmers that promise big APY and hide the small-capital reality.
 - Does EDU cover the "Agency of Traders" BYO-agent arena too, or just the treasury?
 
 ## Next step
-Capture as a Green Room idea + spec. Build the first EDU page for the Trader Joe
-V2 AVAX/USDC pool as the pilot (it's the rail we're about to fund).
+Build the first EDU page for the Trader Joe V2 AVAX/USDC pool as the pilot (it's the
+rail we're about to fund + the existing live position).
