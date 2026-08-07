@@ -1,0 +1,32 @@
+# SIE x402 Service — docker-compose (local dev / GCP Cloud Run)
+# Deploy to GCP Cloud Run:
+#   gcloud run deploy sie-x402 --source . --region us-central1 \
+#     --allow-unauthenticated --port 8097
+# The adapter (8097) is the public paid endpoint; SIE (8080) stays internal.
+
+services:
+  sie:
+    image: ghcr.io/superlinked/sie-server:latest-cpu-default
+    container_name: sie
+    ports:
+      - "8080:8080"
+    volumes:
+      - sie-hf-cache:/app/.cache/huggingface
+    restart: unless-stopped
+
+  adapter:
+    build:
+      context: ..
+      dockerfile: gcp/Dockerfile
+    container_name: sie-x402-adapter
+    environment:
+      SIE_BASE_URL: http://sie:8080
+      SIE_PRICE_USD: "0.01"
+    ports:
+      - "8097:8097"
+    depends_on:
+      - sie
+    restart: unless-stopped
+
+volumes:
+  sie-hf-cache:
