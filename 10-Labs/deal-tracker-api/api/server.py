@@ -15,6 +15,8 @@ app.add_middleware(
 
 import os, json, urllib.request, urllib.parse
 
+from . import games
+
 ROBINHOOD_CLIENT_ID = "LtLiNmbs9owbYfWgBlC68Z2VujIPuvGoAiSYr8xW"
 ROBINHOOD_TOKEN_FILE = "/root/repos/hyperliquid-python-sdk/robinhood_token.json"
 ROBINHOOD_CRED_FILE = "/root/repos/hyperliquid-python-sdk/robinhood_cred.json"
@@ -67,11 +69,37 @@ async def health():
 
 
 @app.get("/v1/deals")
-async def list_deals():
-    return {
-        "deals": [],
-        "count": 0,
-    }
+async def list_deals(title: str = "", upper_price: float = 9999, limit: int = 10):
+    """Search game deals by title (CheapShark). Returns real, data-backed results."""
+    try:
+        result = games.search_deals(title, upper_price=upper_price, limit=limit)
+        return result
+    except Exception as e:
+        return {"error": str(e), "query": title, "count": 0, "deals": []}
+
+
+@app.post("/v1/games/price-watch")
+async def create_price_watch(title: str, target_price: float, max_price: float = 9999):
+    """Create/update a target-price watch for a game title."""
+    return games.add_price_watch(title, target_price, max_price)
+
+
+@app.get("/v1/games/price-watch")
+async def get_price_watch():
+    """List price watches and scan for deals at/below target price."""
+    return games.check_price_watches()
+
+
+@app.get("/v1/games/release-radar")
+async def get_release_radar(notes: str = ""):
+    """Tracked titles with beta windows / launch dates."""
+    return games.release_radar(notes or None)
+
+
+@app.get("/v1/games/preorder-advisor")
+async def get_preorder_advisor(title: str):
+    """'Is this pre-order worth it?' — value judgment."""
+    return games.preorder_advisor(title)
 
 
 if __name__ == "__main__":

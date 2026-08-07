@@ -1,16 +1,86 @@
 {
   "recentDishes": [
     {
+      "id": "dish-20260803-adobo",
+      "title": "Chicken Adobo",
+      "date": "2026-08-03",
+      "rating": null,
+      "substitutions": [
+        {
+          "ingredient": "cane vinegar (sukang maasim)",
+          "substitute": "Rice vinegar (unseasoned) ~$3.50 at Kroger, or white vinegar + pinch sugar"
+        },
+        {
+          "ingredient": "soy sauce (toyo)",
+          "substitute": "Kikkoman at Kroger ~$3 \u2014 Silver Swan at Asian grocer for authentic"
+        },
+        {
+          "ingredient": "bay leaves",
+          "substitute": "Dried bay leaves at Kroger \u2014 no substitution needed"
+        },
+        {
+          "ingredient": "whole peppercorns",
+          "substitute": "Kroger spice aisle \u2014 no substitution needed"
+        },
+        {
+          "ingredient": "garlic",
+          "substitute": "Fresh garlic at Kroger \u2014 no substitution needed"
+        }
+      ],
+      "feedback": "Jordan's example: a Filipino dish to make in Cincinnati",
+      "source": "conversation",
+      "cook": "Jordan",
+      "context": "The whole point of the substitution engine \u2014 knowing the substitute is what matters more than price",
+      "ingredients": [
+        "chicken",
+        "soy sauce",
+        "cane vinegar",
+        "bay leaves",
+        "whole peppercorns",
+        "garlic"
+      ],
+      "method": "Classic adobo: braise chicken in soy + vinegar + garlic + bay leaves + peppercorns until tender. Simmer to reduce."
+    },
+    {
       "id": "dish-20260619-1201",
       "title": "Beef Caldereta",
       "date": "2026-06-19",
       "rating": null,
-      "substitutions": [],
-      "feedback": "Comfort food — proper Filipino dinner after a long workday",
+      "substitutions": [
+        {
+          "ingredient": "liver spread (nergubes)",
+          "substitute": "Chicken/tomato liver p\u00e2t\u00e9 from Kroger deli (~$4); caldereta works without it if needed"
+        },
+        {
+          "ingredient": "Maggi Sarap",
+          "substitute": "Maggi liquid OR MSG (Accent) / chicken bouillon (~$3)"
+        },
+        {
+          "ingredient": "Mama Sita's Caldereta mix",
+          "substitute": "Authentic brand at Jungle Jim's / CAM / Amazon (~$3)"
+        },
+        {
+          "ingredient": "soy sauce",
+          "substitute": "Kikkoman at Kroger (~$3) \u2014 Silver Swan at Asian grocers for authentic"
+        }
+      ],
+      "feedback": "Comfort food \u2014 proper Filipino dinner after a long workday",
       "source": "voice message",
       "cook": "Christel",
-      "context": "Friday evening — got home from work, cooked caldereta for family dinner",
-      "ingredients": ["beef", "soy sauce", "tomato sauce", "liver spread (nergubes)", "Maggi Sarap", "Mama Sita's Caldereta mix", "carrots", "bell pepper", "onion", "garlic", "black pepper"],
+      "context": "Friday evening \u2014 got home from work, cooked caldereta for family dinner",
+      "ingredients": [
+        "beef",
+        "soy sauce",
+        "tomato sauce",
+        "liver spread (nergubes)",
+        "Maggi Sarap",
+        "Mama Sita's Caldereta mix",
+        "carrots",
+        "bell pepper",
+        "onion",
+        "garlic",
+        "black pepper"
+      ],
       "method": "Marinate beef in soy sauce. Fry the beef. Boil in water until tender. Add tomato sauce, liver spread, Maggi Sarap, and Mama Sita's Caldereta mix. Add carrots and bell pepper. Cook until carrots are soft. Serve for dinner."
     },
     {
@@ -18,21 +88,56 @@
       "title": "Chicken Tinola",
       "date": "2026-06-14",
       "rating": null,
-      "substitutions": [],
-      "feedback": "Delicious and perfect for rainy weather — classic Filipino comfort food",
+      "substitutions": [
+        {
+          "ingredient": "chili leaves (sili leaves)",
+          "substitute": "Baby spinach (~$3) \u2014 moringa/malunggay at Asian grocers if available"
+        },
+        {
+          "ingredient": "sayote",
+          "substitute": "Chayote IS in US Kroger produce (~$1.50); else zucchini"
+        },
+        {
+          "ingredient": "green chili",
+          "substitute": "Fresh jalape\u00f1o or serrano at Kroger"
+        },
+        {
+          "ingredient": "crushed pepper",
+          "substitute": "Whole peppercorns, ground fresh at Kroger"
+        }
+      ],
+      "feedback": "Delicious and perfect for rainy weather \u2014 classic Filipino comfort food",
       "source": "voice message",
       "cook": "Christel",
-      "context": "Sunday family dinner — Filipino family day",
-      "ingredients": ["chicken", "garlic", "onion", "crushed pepper", "ginger", "green chili", "chili leaves (sili leaves)", "sayote"],
-      "method": "Sauté garlic, onion, crushed pepper, and ginger. Add chicken and sear. Add water, bring to boil, add salt (or fish sauce if no salt). Boil until chicken is cooked. Add chili leaves, cook 10 seconds. Serve hot."
+      "context": "Sunday family dinner \u2014 Filipino family day",
+      "ingredients": [
+        "chicken",
+        "garlic",
+        "onion",
+        "crushed pepper",
+        "ginger",
+        "green chili",
+        "chili leaves (sili leaves)",
+        "sayote"
+      ],
+      "method": "Saut\u00e9 garlic, onion, crushed pepper, and ginger. Add chicken and sear. Add water, bring to boil, add salt (or fish sauce if no salt). Boil until chicken is cooked. Add chili leaves, cook 10 seconds. Serve hot."
     },
     {
       "id": "dish-20260612-1922",
       "title": "Fried Bread Rolls",
       "date": "2026-06-12",
       "rating": null,
-      "substitutions": [],
-      "feedback": "Merienda or dinner alternative — comfort food, crowd-pleaser",
+      "substitutions": [
+        {
+          "ingredient": "bread flour",
+          "substitute": "All-purpose flour works at Kroger"
+        },
+        {
+          "ingredient": "yeast",
+          "substitute": "Active dry or instant yeast at Kroger"
+        }
+      ],
+      "feedback": "Merienda or dinner alternative \u2014 comfort food, crowd-pleaser",
       "source": "conversation",
       "cook": "Christel",
       "context": "Day off, making bread rolls for the family"
@@ -42,7 +147,16 @@
       "title": "Fried Eggplant with Bagoong Alamang",
       "date": "2026-06-13",
       "rating": null,
-      "substitutions": [],
+      "substitutions": [
+        {
+          "ingredient": "bagoong alamang",
+          "substitute": "Thai shrimp paste (kapi) at CAM/Jungle Jim's (~$5) \u2014 Barrio Fiesta brand if available"
+        },
+        {
+          "ingredient": "eggplant",
+          "substitute": "Kroger \u2014 no substitution needed"
+        }
+      ],
       "feedback": "Comfort food for rainy evenings in the Philippines",
       "source": "conversation",
       "cook": "Christel",
@@ -53,19 +167,28 @@
       "title": "Pork Sinigang",
       "date": "2026-05-24",
       "rating": null,
-      "substitutions": [],
-      "feedback": "Everyone's favorite — berry delicious",
+      "substitutions": [
+        {
+          "ingredient": "tamarind (sampalok)",
+          "substitute": "Tamarind paste (~$3) OR Knorr/Mama Sita's sinigang mix (~$3) at Jungle Jim's/CAM"
+        },
+        {
+          "ingredient": "fish sauce",
+          "substitute": "Red Boat / Squid brand at Kroger international aisle or CAM (~$4)"
+        }
+      ],
+      "feedback": "Everyone's favorite \u2014 berry delicious",
       "source": "voice message (backfill)",
       "cook": "Christel",
-      "context": "Sunday family day — cooked for daughters, classic Filipino tradition"
+      "context": "Sunday family day \u2014 cooked for daughters, classic Filipino tradition"
     }
   ],
   "stats": {
-    "totalDishes": 5,
+    "totalDishes": 6,
     "favoritesSaved": 0,
-    "substitutionsLogged": 0,
+    "substitutionsLogged": 19,
     "lastCooked": "2026-06-19"
   },
   "substitutionLog": [],
-  "lastUpdated": "2026-06-19"
+  "lastUpdated": "2026-08-03"
 }
