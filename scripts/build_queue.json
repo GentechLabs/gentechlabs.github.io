@@ -2130,5 +2130,26 @@
    "handoff_on_complete": true
   },
   "note": "Jordan GO (Aug 6): 'yes add this' + 'look into how to build an Agentic bridge for the Treasury and what transaction fee that would look like for users.' Logged to Green Room ideas as the bridge-cost test. Missing rail blocks treasury cross-chain autonomy."
+ },
+ {
+  "id": 52,
+  "name": "Krexa Integration \u2014 Credit Layer for x402 Gateway (Solana)",
+  "difficulty": "medium",
+  "priority": "medium",
+  "status": "pending",
+  "assigned_to": "jordan",
+  "platform": "cloud",
+  "needs_jordan": true,
+  "human_gated": true,
+  "gate_type": "action",
+  "detail": "Krexa = credit infrastructure for AI agents on Solana (mainnet-beta, invite-gated). Gives agents credit: borrow USDC against on-chain Krexit Score (200-850), no co-signer, auto-repay via Revenue Router. COMPLEMENTARY to us: x402 is the payment rail, Krexa is the credit layer on top. 350+ agents deployed. Plays: (1) list our x402 gateway services on their Pay.sh catalog (Solana Foundation + Google Cloud) for new distribution; (2) cross-reference our Agent Credit Score with Krexit Score; (3) @krexa/x402 middleware = 3-line Express monetization on Solana. Access: invite code via Discord discord.gg/aMSEG7yj or @krexa_xyz open drops. Needs Jordan: grab invite code, then I run krexa activate <code> + test CLI/SDK/MCP.",
+  "note": "Scouted Aug 7. Invite-gated. Jordan given Discord link + framing to request code. Once code in hand: activate, init service agent, test x402 pay, list on Pay.sh.",
+  "recommended_tier": "k2.7",
+  "group": "labs",
+  "routing": {
+   "group": "labs",
+   "build_in": "labs",
+   "handoff_on_complete": true
+  }
  }
 ]
