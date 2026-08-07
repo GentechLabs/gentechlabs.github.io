@@ -89,6 +89,29 @@ NETWORKS = {
         "extra": {"name": "USD Coin", "assetType": "ASA", "assetId": 31566704,
                   "tag": "x402-global-challenge"},
     },
+    "avalanche": {
+        # Avalanche C-Chain mainnet. Settled via the PayAI facilitator
+        # (facilitator.payai.network) — the rail that lets our Avalanche-listed
+        # services (AgentScan #1770, ERC-8004 identities) actually receive USDC.
+        "network": "eip155:43114",
+        # Native USDC on Avalanche C-Chain (Circle-issued, 6 decimals)
+        "asset": "0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E",
+        "decimals": 6,
+        "payto_env": "X402_PAYTO_AVALANCHE",
+        "payto_default": "",
+        "extra": {"name": "USD Coin", "version": "2"},
+    },
+    "xlayer": {
+        # X Layer mainnet (OKX). Settled via the PayAI facilitator. Our ERC-8004
+        # agent identities live on XLayer — this rail lets those services settle.
+        "network": "eip155:196",
+        # Native Circle USDC on X Layer (6 decimals)
+        "asset": "0xB6CEceAB302E2E4948951eE7843FC24E92933061",
+        "decimals": 6,
+        "payto_env": "X402_PAYTO_XLAYER",
+        "payto_default": "",
+        "extra": {"name": "USD Coin", "version": "2"},
+    },
 }
 
 # Order matters — first entry is the preferred rail for clients that take
@@ -445,6 +468,84 @@ GOPLAUSIBLE_FACILITATOR = os.getenv(
     "https://facilitator.goplausible.xyz",
 )
 
+# PayAI x402 facilitator — settles Avalanche (and other EVM) rails. This is the
+# rail that lets our Avalanche-listed services actually receive USDC. Free tier
+# $0/mo up to 10K settlements/mo, then $0.001/tx. No API key required.
+PAYAI_FACILITATOR = os.getenv(
+    "PAYAI_FACILITATOR_URL",
+    "https://facilitator.payai.network",
+)
+
+
+def verify_proof_via_payai(proof_str: str, expected_price: float) -> tuple[bool, str]:
+    """Verify + settle a proof against the PayAI x402 facilitator.
+
+    Handles Avalanche (eip155:43114) and any other PayAI-supported EVM rail.
+    Same {paymentPayload, paymentRequirements} envelope as the GoPlausible path.
+    PayAI /verify returns {isValid, invalidReason, invalidMessage}; /settle
+    returns {success, transaction, network, payer}.
+    """
+    try:
+        proof = json.loads(proof_str)
+    except json.JSONDecodeError:
+        try:
+            import base64 as _b64
+            decoded = _b64.b64decode(proof_str + "=" * (-len(proof_str) % 4)).decode("utf-8")
+            proof = json.loads(decoded)
+        except Exception:
+            return False, "proof is not valid JSON or base64 JSON"
+
+    payload = proof if "paymentPayload" in proof else {"paymentPayload": proof}
+    try:
+        _pp = payload.get("paymentPayload", payload)
+        _ver = _pp.get("x402Version", 2)
+        _accepted_opt = _pp.get("accepted", {})
+        if _accepted_opt:
+            payload = {
+                "x402Version": _ver,
+                "paymentPayload": _pp,
+                "paymentRequirements": _accepted_opt,
+            }
+    except Exception:
+        pass
+
+    # Local structural guard: reject proofs on a rail we don't advertise.
+    try:
+        accepted = payload["paymentPayload"].get("accepted", payload["paymentPayload"])
+        network = accepted.get("network")
+    except (KeyError, TypeError):
+        network = None
+    if not is_network_accepted(network):
+        return False, f"network {network!r} not accepted"
+
+    try:
+        with httpx.Client(timeout=20) as client:
+            v = client.post(
+                f"{PAYAI_FACILITATOR}/verify",
+                json=payload,
+                headers={"Content-Type": "application/json"},
+            )
+        if v.status_code != 200:
+            return False, f"payai verify {v.status_code}: {v.text[:200]}"
+        body = v.json()
+        if not body.get("isValid", False):
+            return False, body.get("invalidReason", "invalid")
+        # Verify OK → settle so the payment actually lands.
+        try:
+            with httpx.Client(timeout=30) as client:
+                s = client.post(
+                    f"{PAYAI_FACILITATOR}/settle",
+                    json=payload,
+                    headers={"Content-Type": "application/json"},
+                )
+            if s.status_code == 200 and s.json().get("success"):
+                return True, "verified + settled (payai)"
+            return True, f"verified (payai settle {s.status_code})"
+        except Exception as e:
+            return True, f"verified (payai settle failed: {e})"
+    except Exception as e:
+        return False, f"payai unreachable: {e}"
+
 
 def verify_proof_via_goplausible(proof_str: str, expected_price: float) -> tuple[bool, str]:
     """Verify + settle a proof against the GoPlausible x402 facilitator.
@@ -660,11 +761,14 @@ async def paid_endpoint(service: str, path: str, request: Request):
 
     # Verify the proof — route by the proof's settlement network.
     # - Algorand/other non-EVM rails → GoPlausible facilitator (challenge path)
+    # - Avalanche (eip155:43114) → PayAI facilitator (settles our Avalanche rail)
     # - EVM (Base) → CDP facilitator
     # - simulation fallback via local HMAC (matches our SDK/ARC gateway dev flow).
     mode = os.getenv("PAYMENT_VERIFY_MODE", "auto")
     proof_network = _proof_network(proof)
     is_avm = proof_network is not None and proof_network.startswith("algorand:")
+    is_avalanche = proof_network == "eip155:43114"
+    is_xlayer = proof_network == "eip155:196"
     if mode == "simulation":
         valid, reason = verify_proof_simulation(proof, price)
     elif mode == "cdp":
@@ -673,6 +777,10 @@ async def paid_endpoint(service: str, path: str, request: Request):
         # Algorand proof → GoPlausible facilitator (required for the x402
         # Global Challenge — settlements must land through GoPlausible).
         valid, reason = verify_proof_via_goplausible(proof, price)
+    elif is_avalanche or is_xlayer:
+        # Avalanche / X Layer proof → PayAI facilitator (settles our rails so
+        # AgentScan-listed + XLayer-identity services can actually receive USDC).
+        valid, reason = verify_proof_via_payai(proof, price)
     else:
         # auto: try CDP when a key exists, else simulation
         if os.getenv("CDP_API_KEY"):

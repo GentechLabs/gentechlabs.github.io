@@ -141,3 +141,27 @@ public free-for-all. The chains are just the settlement rails underneath.
 ## Status
 🟢 Thesis confirmed by Jordan (Aug 3). Drives the execution-engine + demo build.
 **Next:** Composio research (open-sourced account-sign-in stack) to unlock Layer 2.
+
+## Productization spark (Aug 7, Jordan verbatim intent)
+> "It's all set up and ready — to think that the agentic treasury is pretty much
+> built just only for me is crazy. I want to get it into the hands of so many people,
+> but I also want to make money. I cannot wait to test this later."
+
+- **The MVP demo is the proof, not the product.** The treasury works for Jordan
+  (CDP spot live, AVAX LP built, Robinhood perp wiring, arb detection). That demo
+  becomes the onramp: small deposit → prove the rail → scale (the market-maker funnel).
+- **Go-to-market = GenTech EDU** (learning module: how to use the Hub/Treasury,
+  honest expectations per pool) + **GenTech subscription tiers** (open core free,
+  per-tx fees; premium integrations $10–20/mo).
+- **Revenue intent:** per-tx fees on the x402 rail + yield-farm sideline (LP)
+  + subscriptions for premium integrations.
+- **"Test it later"** = Jordan's standing rule: he checks his phone late to make moves.
+  The treasury is built to execute autonomously with his oversight, not to replace him.
+
+## Live build state (Aug 7)
+- Coinbase CDP spot leg: ✅ live + funded ($31.50 USDC + cbBTC)
+- Base→Avalanche bridge (`gta_avax_bridge.py`): ✅ built, dry-run verified
+- Trader Joe V2 AVAX/USDC LP entry (`gta_avax_lp_direct.py`): ✅ built, dry-run verified
+- Robinhood perp leg: 🔧 OAuth link ready, callback infra live, awaiting Jordan's approval
+- Hyperliquid: 🧭 detection-only (US gray zone — never execute)
+- GTA Executor: 🟡 dry-run, awaiting wired perp leg to go live

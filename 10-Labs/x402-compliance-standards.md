@@ -140,6 +140,41 @@ Before submitting any x402 service to a marketplace:
 
 ---
 
+## 5b. Facilitator Reference — by Network (Jordan directive, 2026-08-07)
+
+> **Why this matters:** A facilitator is the payment rail that settles x402 payments. Without one, an x402 service can *advertise* but cannot *receive money*. The registry (AgentScan) makes us findable; the facilitator makes us payable. They go together — pick the right facilitator for the network you're deploying on.
+
+**Rule:** Before deploying an x402 service on any network, confirm a facilitator is available for that network and wire it in. Don't ship a service that can't settle.
+
+| Network | Recommended Facilitator | Notes / Install |
+|---------|------------------------|-----------------|
+| **Avalanche (C-Chain)** | **PayAI** (`facilitator.payai.network`) | Avalanche-native x402. Network string `avalanche` (mainnet) / `avalanche-fuji` (testnet). SDKs: TypeScript + Python. Free tier $0/mo up to 10K settlements/mo, then $0.001/tx. Install: `x402-express` middleware with `FACILITATOR_URL=https://facilitator.payai.network`, `NETWORK=avalanche`, `ADDRESS=<payTo>`. |
+| **Solana** | **PayAI** | Native Solana settlement, no API key. We already integrate via `payai_facilitator.py` (Jun 25) — our Solana leg. Also the facilitator behind our WURK flow. |
+| **Base** | **Q402** / **Coinbase CDP** | Q402 = gasless EIP-7702 (USDC+USDT). Coinbase CDP = x402 facilitator. Both documented in gateway README. |
+| **X Layer** | **PayAI** | PayAI supports X Layer (16 networks incl. X Layer). Natural fit — our ERC-8004 identities live on XLayer. |
+| **Multi-network** | **PayAI `@payai/agentic-payments`** | Dual-protocol SDK (x402 + MPP) — one Express middleware serves both rails. 16 networks. See `11-Mess Hall/payai-mpp-dual-rail.md` (build-queue #47). |
+
+**Key facts (from `payai-mpp-dual-rail.md`, 2026-08-06):**
+- PayAI is the **#2 x402 facilitator by volume**, native Solana settlement, no API key needed.
+- Free tier: $0/mo, up to 10,000 settlements/mo. Beyond: $0.001/tx (min tx $0.001).
+- **16 networks:** Solana, Base, X Layer, Avalanche, Arbitrum, Polygon, Sei, SKALE (+ testnets).
+- **No license on PayAI repos** — borrow the mechanism, not the code. TypeScript-only SDK (we're Python-first).
+
+**Install pattern (Avalanche, from PayAI docs):**
+```bash
+# .env
+FACILITATOR_URL=https://facilitator.payai.network
+NETWORK=avalanche        # or avalanche-fuji for testnet
+ADDRESS=0x...            # wallet that receives payments
+```
+```js
+// Express middleware
+import { paymentMiddleware } from "x402-express";
+app.use(paymentMiddleware(payTo, { "GET /weather": { price: "$0.001", network: "avalanche" } }, { url: facilitatorUrl }));
+```
+
+---
+
 ## 6. Incident Log
 
 | Date | Issue | Cause | Fix | Documented |
@@ -149,6 +184,7 @@ Before submitting any x402 service to a marketplace:
 | 2026-07-24 | Port 8090 API gateway down for 77k+ restarts | `server.py` missing from agent-kit-q402 repo, systemd misconfigured | Built new x402 gateway at `10-Labs/x402-gateway/server.py`, updated systemd service | ✅ This file |
 | 2026-07-24 | PAYMENT-REQUIRED header missing | Old implementation only returned 402 in response body | New gateway returns proper base64-encoded `PAYMENT-REQUIRED` header per v2 spec | ✅ This file |
 | 2026-07-24 | Cloudflare WAF blocking api.gentechlabs.net | Cloudflare error 1003 on `/.well-known/` and `/v1/` paths; `/health` works | **Fix requires dashboard:** Cloudflare → Security → WAF → allow `api.gentechlabs.net/.well-known/*` and `/v1/*` | ⏸️ Needs Jordan |
+| 2026-08-07 | **No revenue despite traffic — Avalanche rail missing** | Gateway only advertised Base + Algorand; Avalanche-listed services (AgentScan #1770) had **no settlement rail** — clients on Avalanche literally could not pay. Likely a major cause of traffic-without-revenue. | Added **Avalanche rail** (`eip155:43114`, native USDC `0xB97EF9...`) to `NETWORKS`, wired **PayAI facilitator** (`facilitator.payai.network`) verify+settle path, set `X402_PAYTO_AVALANCHE=0x7ebff...`, enabled `X402_NETWORKS="base,algorand,avalanche"`. Gateway now advertises 3 rails. 24 tests pass. | ✅ This file |
 
 ---
 

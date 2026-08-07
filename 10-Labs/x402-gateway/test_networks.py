@@ -216,3 +216,58 @@ def test_proof_network_returns_none_on_garbage(monkeypatch):
     s = _load(monkeypatch, None)
     assert s._proof_network("not-json-{{") is None
     assert s._proof_network("") is None
+
+
+# --- Avalanche rail (PayAI facilitator) -----------------------------------
+
+def test_registry_has_avalanche(monkeypatch):
+    s = _load(monkeypatch, None)
+    assert "avalanche" in s.NETWORKS
+    assert s.NETWORKS["avalanche"]["network"] == "eip155:43114"
+    # Native USDC on Avalanche C-Chain
+    assert s.NETWORKS["avalanche"]["asset"] == "0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E"
+    assert s.NETWORKS["avalanche"]["decimals"] == 6
+
+
+def test_avalanche_enabled_when_payto_set(monkeypatch):
+    monkeypatch.setenv("X402_NETWORKS", "base,avalanche")
+    monkeypatch.setenv("X402_PAYTO_AVALANCHE", "0x7ebff188f2Eba16518C02864589b1403a5d1296a")
+    s = _load(monkeypatch, "base,avalanche")
+    payload = s.build_payment_required("Token Security", 0.01)
+    nets = [a["network"] for a in payload["accepts"]]
+    assert "eip155:43114" in nets
+    avax = [a for a in payload["accepts"] if a["network"] == "eip155:43114"][0]
+    assert avax["payTo"] == "0x7ebff188f2Eba16518C02864589b1403a5d1296a"
+    assert avax["amount"] == "10000"  # 0.01 * 1e6
+
+
+def test_avalanche_dropped_without_payto(monkeypatch):
+    monkeypatch.setenv("X402_NETWORKS", "base,avalanche")
+    monkeypatch.delenv("X402_PAYTO_AVALANCHE", raising=False)
+    s = _load(monkeypatch, None)
+    payload = s.build_payment_required("Token Security", 0.01)
+    nets = [a["network"] for a in payload["accepts"]]
+    assert "eip155:43114" not in nets  # never advertise a rail we can't settle
+
+
+# --- X Layer rail (PayAI facilitator) -------------------------------------
+
+def test_registry_has_xlayer(monkeypatch):
+    s = _load(monkeypatch, None)
+    assert "xlayer" in s.NETWORKS
+    assert s.NETWORKS["xlayer"]["network"] == "eip155:196"
+    # Native Circle USDC on X Layer
+    assert s.NETWORKS["xlayer"]["asset"] == "0xB6CEceAB302E2E4948951eE7843FC24E92933061"
+    assert s.NETWORKS["xlayer"]["decimals"] == 6
+
+
+def test_xlayer_enabled_when_payto_set(monkeypatch):
+    monkeypatch.setenv("X402_NETWORKS", "base,xlayer")
+    monkeypatch.setenv("X402_PAYTO_XLAYER", "0x7ebff188f2Eba16518C02864589b1403a5d1296a")
+    s = _load(monkeypatch, "base,xlayer")
+    payload = s.build_payment_required("Token Security", 0.01)
+    nets = [a["network"] for a in payload["accepts"]]
+    assert "eip155:196" in nets
+    xl = [a for a in payload["accepts"] if a["network"] == "eip155:196"][0]
+    assert xl["payTo"] == "0x7ebff188f2Eba16518C02864589b1403a5d1296a"
+    assert xl["amount"] == "10000"
