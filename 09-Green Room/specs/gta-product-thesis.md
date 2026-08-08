@@ -103,6 +103,32 @@ The thing that keeps this a product and not a liability:
   pitch. Don't build a business on helping users bypass ToS.
 - **Competition framing** → everyone picks one platform; we arbitrage *between* them.
 
+## "We're the connector and supplier, not the competitor" (Jordan's durable principle)
+
+**Source:** Jordan, repeatedly across the brain + reaffirmed Aug 7 re: HawkFi.
+**Verbatim (Aug 7):** "For a long time in the brain, I kept saying that none of these
+guys are our competition, and we're just, we could get paid by being the connector
+and supplier."
+
+**The principle:** Every AI-yield/market-making/agent-economy platform (HawkFi,
+Almanak, Q402, MetaMask Agent Wallet, Syra, Meridian, BOT Chain...) is a **rail or a
+partner, never a rival.** We make money by being the **connector** (x402 middleware
+between their venue and the chains) and the **supplier** (the intelligence + agent
+rails underneath). If a platform does what we do "but not the exact way" — that's an
+integration surface, not a threat.
+
+**Operational rule:** When we find an adjacent platform, the default move is
+RESEARCH their stack → find the integration/contribution surface → connect or supply,
+before ever considering competition.
+
+**Case studies in flight:**
+- **HawkFi** (Aug 7): AI market-making agents on tokenized stocks. Researching
+  whether we can connect (as a rail), contribute, or supply the MM-agent infra.
+- **Almanak** (Aug 7): we use their SDK as our AVAX rail + filed a price-oracle bug
+  fix. Contributor + integrator.
+- **Q402 / MetaMask Agent Wallet / Syra / Meridian:** complementary rails we compose,
+  not compete with.
+
 ---
 
 ## Build order (this thesis drives the build)
