@@ -1,6 +1,6 @@
 # 🧠 Context Weight — GenTech Labs
 
-> Auto-generated: 2026-08-07 00:16 ET · Loads on session start so every group has context.
+> Auto-generated: 2026-08-08 00:08 ET · Loads on session start so every group has context.
 > Source: build_queue.json + vault state
 
 ---
@@ -18,7 +18,7 @@
 - [HIGH] Paymenter x402 — Pterodactyl Community Outreach — pending
 
 ## 🏗️ Build Queue
-51 total · 30 pending · 1 blocked
+54 total · 32 pending · 1 blocked
 
 ## 🚨 Blockers
 - **Super Arcade Tennis — Cab #1 for GenTech Arcade** — First arcade cabinet. Three.js isometric tennis, chain power-shots (BTC/ETH/SOL), AI opponent. LIVE at arcade.gentechlab
@@ -28,7 +28,7 @@
 - awesome-selfhosted — Audit for GenTech Stack Gaps
 - Hippocratic AI Residency — Evaluate Fit
 - Yield.xyz MCP integration — GTA yield intelligence layer
-- API Audit Fix — Replace placeholder/dead endpoints (crypto-price, gas-price, token-security)
+- Paperclip Control Plane — fix embedded Postgres startup (root EACCES)
 
 ## 🎯 Key Decisions
 See 11-Mess Hall/considerations.md
@@ -41,7 +41,7 @@ See 11-Mess Hall/considerations.md
 - **Forge** — Desktop agent · Handles local builds
 
 ## 🔗 Quick Links
-- Build queue: `scripts/build_queue.json` (51 items)
+- Build queue: `scripts/build_queue.json` (54 items)
 - Jocelyn's hub: gentechlabs.net/jocelyn.html
 - Investor deck: gentechlabs.net/grant.html
 - Demo video: gentechlabs.net/agentic-treasury-demo.mp4
