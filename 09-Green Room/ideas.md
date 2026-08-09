@@ -71,6 +71,24 @@
 - **Sequencing (Jordan, Aug 3):** build the agentic treasury (GTA) fully first → subscriptions later. Spec = idea bank, not build target yet.
 - [ ] Revisit when GTA is together
 
+## 🆕 GenTech EDU — Agentic Treasury Onboarding & Honest-Expectations Layer (Aug 7)
+**Source:** Jordan (Treasury group) | **Status:** Idea captured, spec written
+- **Thesis:** EDU is how we break down the Agentic Treasury for users — what we
+  recommend, how to get started, common mistakes when prompting/working with agents,
+  and **honest expectations** (the same way The Steward told Jordan "this may give
+  smaller returns").
+- **Why it matters (market-maker funnel):** every market maker starts small ($25–50/wk
+  → scale). EDU makes that funnel safe + honest — surface the REAL numbers before a
+  user commits (e.g. "$31.50 at 12% APY ≈ $3.78/yr"), so reputation is built on honesty.
+- **Per-pool content:** what it is, what we recommend, realistic returns at small size,
+  how to get started, common mistakes, risk profile.
+- **Distinct from the Book Reader / EDU visual-books concept (below):** that's the
+  visual/AR reading product; this is the treasury onboarding + expectations layer.
+- Full spec: `09-Green Room/specs/gentech-edu-agentic-treasury.md`
+- **Next:** build the first EDU page for the Trader Joe V2 AVAX/USDC pool (the rail
+  we're about to fund) as the pilot.
+- [ ] Build EDU pilot page for Trader Joe V2 AVAX/USDC pool
+
 ## 🏆 GenTech Book Reader / GenTech EDU — Interactive Visual Books + AR Glasses
 **Source:** Jordan brainstorm (Aug 3) | **Status:** Concept — strong flagship fit, connects Tutors Layer + visual pipeline
 - **Vision:** Read PDFs as beautiful clothbound "books" in a Three.js shelf, not flat document viewers. Open a volume, turn curved pages, orbit the binding.
@@ -274,6 +292,7 @@
 
 ## Ready to Test (skills exist, need execution)
 
+- [ ] **Krexa — Credit Infrastructure for AI Agents on Solana** — Live mainnet-beta, invite-gated. Gives AI agents credit: borrow USDC against on-chain **Krexit Score** (200–850), no human co-signer, auto-repay from future revenue via Revenue Router. **Complementary to us, not competitor** — "x402 is the payment rail; Krexa is the credit layer on top." 350+ agents deployed. **Why it matters:** (1) our x402 gateway services can be listed on their **Pay.sh catalog** (Solana Foundation + Google Cloud) for new distribution; (2) validates our Agent Credit Score direction (they have Krexit Score 200–850); (3) `@krexa/x402` middleware = 3-line Express monetization on Solana, same pattern as our gateway. **Access:** invite code via Discord `discord.gg/aMSEG7yj` or @krexa_xyz open drops. Source: krexa.xyz, Aug 7. **Needs Jordan:** grab invite code → I run `krexa activate <code>` + test CLI/SDK/MCP.
 - [ ] **CopilotKit Channels SDK** — Open-source SDK (MIT) to bring any agent into Slack/Microsoft Teams/Discord/Telegram with **native interactive UI** (Slack Block Kit, Teams Adaptive Cards). 147⭐, early but from CopilotKit (established agent framework org). Connects AG-UI-compatible agents (LangGraph, CrewAI, Pydantic AI, ADK) — keeps agent's tools/model/logic, adds platform-native rendering + **human approval gates** in-conversation. Extends our single-agent-multi-channel pattern beyond Telegram to Slack/Teams/Discord. Approval gates = natural fit for x402 payment confirmations in-chat. Source: github.com/CopilotKit/channels-sdk, Aug 4. **Watch — evaluate once stable.**
 - [x] **Vibe-Trading (HKUDS)** — installed v0.1.12 to hermes venv (CLI `vibe-trading` works). BLOCKER: needs a real LLM API key (OpenRouter/OpenAI) to power the agent brain + Shadow Account. Candidate for #19 Builders Cup. Source: x.com/0xMarioNawfal list, Aug 4.
 - [ ] **AI-Job-Search (MadsLorentzen)** — Claude Code agent: evaluate postings, tailor CV, write cover letters, interview prep. 29.6k⭐ MIT, real-world proof (author: 69 apps → 20 interviews → hired Jun 2026). Built for Danish boards but pattern is board-agnostic — swap for our targets. Directly serves Jordan's remote blockchain/cloud role hunt. Source: x.com/0xMarioNawfal list, Aug 4.

@@ -8,6 +8,7 @@ GitHub API refuses forks with `403: You cannot fork this repository at this time
 - [ ] Fork **Dexter-DAO/dexter** → ⚠️ name may be stale (API 404) — search GitHub for the current Dexter-DAO repo before forking
 - [ ] Fork **near-examples/near-ai-agent-market** → ⚠️ name may be stale (API 404) — search GitHub for the current near AI agent market repo before forking
 - [ ] Fork **diegosouzapw/OmniRoute** → https://github.com/diegosouzapw/OmniRoute/fork — needed to submit our **#9251 STREAM_EARLY_EOF breaker fix** (committed `71d2ea3`, tests 13/13 + 27/27 green, ready in /tmp/OmniRoute). Tell Gentech the fork URL → Gentech pushes branch + opens PR "Closes #9251"
+- [ ] Fork **almanak-co/sdk** → https://github.com/almanak-co/sdk/fork — needed to submit our **Trader Joe V2 price-oracle bug fix** (WAVAX resolves on arbitrum instead of avalanche, breaking `open_lp_position` on Avalanche). Issue + fix draft staged in vault. Tell Gentech the fork URL → Gentech pushes branch + opens PR.
 
 Then tell Gentech the fork URLs → Gentech clones, rebrands, pushes.
 
@@ -71,6 +72,7 @@ All 21 Gentech cloud items are decision-gated (need a yes/no or config value fro
 - [x] **#20** AI Job Search — repo forked + pushed (ProtoJay4789/ai-job-search), Jordan profile loaded. REWORKED as Hermes-native (no Claude Code needed): new skill `hermes-job-application` merges the methodology with our working scanner. USABLE NOW.
 
 **Stale/deadline check needed:**
+- [ ] **#2 Arc Programmable Money** — 🔴 **FINAL SUBMISSIONS due Aug 9 midnight** (verified encodeclub.com). We submitted a checkpoint already — Jordan to check at home whether they now want a full demo video + repo link, or if the checkpoint counts. Aug 22 = event window end, NOT submission.
 - [ ] **#1** Keeperhub — verify still active (was urgent)
 - [ ] **#6** AI Factory Hackathon (Aug 3-10) — confirm entry
 - [ ] **#25** The Great Agent Hackathon — confirm entry
