@@ -103,6 +103,32 @@ The thing that keeps this a product and not a liability:
   pitch. Don't build a business on helping users bypass ToS.
 - **Competition framing** → everyone picks one platform; we arbitrage *between* them.
 
+## "We're the connector and supplier, not the competitor" (Jordan's durable principle)
+
+**Source:** Jordan, repeatedly across the brain + reaffirmed Aug 7 re: HawkFi.
+**Verbatim (Aug 7):** "For a long time in the brain, I kept saying that none of these
+guys are our competition, and we're just, we could get paid by being the connector
+and supplier."
+
+**The principle:** Every AI-yield/market-making/agent-economy platform (HawkFi,
+Almanak, Q402, MetaMask Agent Wallet, Syra, Meridian, BOT Chain...) is a **rail or a
+partner, never a rival.** We make money by being the **connector** (x402 middleware
+between their venue and the chains) and the **supplier** (the intelligence + agent
+rails underneath). If a platform does what we do "but not the exact way" — that's an
+integration surface, not a threat.
+
+**Operational rule:** When we find an adjacent platform, the default move is
+RESEARCH their stack → find the integration/contribution surface → connect or supply,
+before ever considering competition.
+
+**Case studies in flight:**
+- **HawkFi** (Aug 7): AI market-making agents on tokenized stocks. Researching
+  whether we can connect (as a rail), contribute, or supply the MM-agent infra.
+- **Almanak** (Aug 7): we use their SDK as our AVAX rail + filed a price-oracle bug
+  fix. Contributor + integrator.
+- **Q402 / MetaMask Agent Wallet / Syra / Meridian:** complementary rails we compose,
+  not compete with.
+
 ---
 
 ## Build order (this thesis drives the build)
@@ -141,3 +167,27 @@ public free-for-all. The chains are just the settlement rails underneath.
 ## Status
 🟢 Thesis confirmed by Jordan (Aug 3). Drives the execution-engine + demo build.
 **Next:** Composio research (open-sourced account-sign-in stack) to unlock Layer 2.
+
+## Productization spark (Aug 7, Jordan verbatim intent)
+> "It's all set up and ready — to think that the agentic treasury is pretty much
+> built just only for me is crazy. I want to get it into the hands of so many people,
+> but I also want to make money. I cannot wait to test this later."
+
+- **The MVP demo is the proof, not the product.** The treasury works for Jordan
+  (CDP spot live, AVAX LP built, Robinhood perp wiring, arb detection). That demo
+  becomes the onramp: small deposit → prove the rail → scale (the market-maker funnel).
+- **Go-to-market = GenTech EDU** (learning module: how to use the Hub/Treasury,
+  honest expectations per pool) + **GenTech subscription tiers** (open core free,
+  per-tx fees; premium integrations $10–20/mo).
+- **Revenue intent:** per-tx fees on the x402 rail + yield-farm sideline (LP)
+  + subscriptions for premium integrations.
+- **"Test it later"** = Jordan's standing rule: he checks his phone late to make moves.
+  The treasury is built to execute autonomously with his oversight, not to replace him.
+
+## Live build state (Aug 7)
+- Coinbase CDP spot leg: ✅ live + funded ($31.50 USDC + cbBTC)
+- Base→Avalanche bridge (`gta_avax_bridge.py`): ✅ built, dry-run verified
+- Trader Joe V2 AVAX/USDC LP entry (`gta_avax_lp_direct.py`): ✅ built, dry-run verified
+- Robinhood perp leg: 🔧 OAuth link ready, callback infra live, awaiting Jordan's approval
+- Hyperliquid: 🧭 detection-only (US gray zone — never execute)
+- GTA Executor: 🟡 dry-run, awaiting wired perp leg to go live

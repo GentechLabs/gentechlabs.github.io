@@ -1,7 +1,7 @@
 ---
-date: 2026-08-06
+date: 2026-08-09
 status: active
-last-updated: 2026-08-06 20:16 ET
+last-updated: 2026-08-09 04:00 ET
 ---
 
 # 🧠 Considerations — Open Decisions
@@ -10,11 +10,11 @@ last-updated: 2026-08-06 20:16 ET
 
 ## 🚨 Urgent — DEADLINES APPROACHING
 
-- [ ] 🚨 **Algorand First-Mover Play (Aug 6)** — **⚠️ DEADLINE TODAY Aug 6.** **JORDAN: "Let's go."** Syra just expanded to Algorand (multichain agent infra). We already shipped the Algorand rail on our x402 gateway (queue #7, code-ready). **We can be one of the first movers to do x402 right on Algorand.** **Jordan: (1) provide Algorand wallet address so X402_PAYTO_ALGORAND goes live (zero code change), (2) confirm Algorand Global x402 Challenge #82 registration status (deadline passed Jul 31 — late leaderboard or dead?).** This is the boost — first-mover on a fresh x402 venue.
-- [ ] 🚨 **Keeperhub Agents Onchain #80** — **JORDAN CONFIRMED GO.** Real KeeperHub workflow created (GTA Yield Guard — Aave health-factor auto-rebalancer, Base, exec test launched). **🚨 FUNDING BLOCKER: wallet 0x53A8...8EA has 0 ETH + 0 USDC on Base mainnet AND Sepolia — cannot produce the live tx link judges require. Jordan: fund ~$15 ETH + ~$10 USDC on Base.** Deadline Aug 13.
+- [ ] 🚨 **Algorand First-Mover Play (Aug 6)** — **✅ COMPOSITE ENTRY SHIPPED (Aug 7).** Context-weight "Recently Done" confirms the Algorand Global x402 Challenge — Composite Entry ($100K + 500K ALGO) is shipped. **Jordan: (1) provide Algorand wallet address so X402_PAYTO_ALGORAND goes live (zero code change), (2) confirm late-leaderboard eligibility or mark dead** (original deadline Jul 31 passed, no registration on file).
+- [ ] 🚨 **Keeperhub Agents Onchain #80** — **JORDAN CONFIRMED GO.** **✅ PROOF TRANSFER COMPLETE Aug 8:** Real 0.01 USDC on-chain transfer from KeeperHub wallet to Treasury CDP (TX 0x88fe6c9a...b1df, Base, block 49682145, success). Wallet funded. **REMAINING: film demo video + assemble GitHub submission (README, video, live tx link). Deadline Aug 13.**
 - [ ] 🚨 **Algorand Global x402 Challenge #82** — **⚠️ DEADLINE PASSED Jul 31.** $100K + 500K ALGO. No record of registration on file. **Jordan: confirm if registered / still eligible for late leaderboard, or mark dead.** *(Now tied to the Algorand First-Mover Play above.)*
-- [ ] 🚨 **Arc Programmable Money Hackathon** — **⚠️ Deadline Aug 9 (2 days, urgent).** Deploy x402 + Agent Wallet on Arc L1 (Encode Club, Agentic Economy track). **Jordan: (1) get testnet USDC from faucet.circle.com, (2) deploy x402.** *Queue shows PENDING — not passed.*
-- [ ] 🚨 **AI Factory Hackathon #79** — **Runs Aug 3-10 (3 days in, 4 days left).** lablab.ai × NativelyAI. **Jordan: register?**
+- [ ] 🚨 **Arc Programmable Money Hackathon** — **⚠️ DEADLINE TODAY Aug 9.** ArcAgentWallet.sol deployed on testnet, 57/57 tests pass, repo public (github.com/Gentech-Labs/programmable-money-x402). **BUILD COMPLETE + VERIFIED Aug 8. MARKED SHIPPED by labs Aug 9. Jordan: submit final project + 3-min video + repo link if not already done via checkpoint.**
+- [ ] 🚨 **AI Factory Hackathon #79** — **⚠️ DEADLINE TOMORROW Aug 10.** lablab.ai × NativelyAI. **MARKED SHIPPED by labs Aug 9.** Jordan: confirm submission status.
 
 ## 🔴 High Priority
 

@@ -72,6 +72,7 @@ The real, working, revenue-capable API surface. **This is the number to use** wh
 | 11 | **Freelance AI (by PayAI)** | https://build.avax.network/integrations/payai | Decentralized agent marketplace where AI agents hire/work for each other, x402 (Solana, Base, Avalanche). PayAI = the facilitator behind our WURK flow. Sell-side: list GenTech x402 services as freelance offerings. | Discovered 2026-08-05 (income scan). Open-entry (x402 standard, no stake). Register agents as sellers. |
 | 12 | **BotWork** | https://www.botwork.network/ | P2P AI-agent freelance network (libp2p task protocol), escrow on Base L2, 90/5/5 split. TS SDK `npx botwork init`. Agents bid on tasks, deliver, get paid. Sell-side fit for GenTech dev/analysis agents. | Discovered 2026-08-05 (income scan). Open-entry, MIT SDK. List an agent via SDK. |
 | 13 | **Amadeus Protocol — Agent Hub** | https://thegrid.id (amadeus_protocol) | AI agent marketplace (built on Bitte.ai infra) for trading/DeFi automation/investment agents. Cross-chain (Sui, Solana, ETH). Sell-side: list DeFi/analytics agents. | Discovered 2026-08-05 (income scan). Check registration flow before committing. |
+| 14 | **BountyBook** | https://www.bountybook.ai · API https://api.bountybook.ai | Agent-first task marketplace on Base (x402/USDC). 121 open jobs, $636 available, avg $12.68/hr, 4% fee. REST API, no browser — identity = ETH key. Perfect fit for GenTech Python/TS/Rust dev + research agents. | Discovered 2026-08-07 (income scan). Open-entry, no stake, no incorporation. Register agent via /auth/nonce+verify, claim jobs. |
 
 ## ⚪ KNOWN BUT NOT PURSUED / OTHER
 
@@ -99,6 +100,6 @@ The real, working, revenue-capable API surface. **This is the number to use** wh
 | **Treasury Defender (new service #7)** | Multi-chain | LIVE ✅ (Aug 2) | New paid x402 service (port 8096): classifies any token KNOWN/SUSPICIOUS (homoglyph detection + liquidity check), quarantines flagged tokens, returns safe burn calldata. 3 scam tokens from Jordan's Avalanche wallet already quarantined (ÚSDС, USḌC, UЅDС). Manifest v9.0.0. | Add to Bankr skill + x402-list rescan | 2026-08-02 |
 ---
 
-*Last updated: 2026-08-05 (FULL SWEEP — manifest v9.0.0 verified 8 services/6 chains ✅; x402-list page cache lagging (6→8, auto-rescan); gentechlabs.net API section synced to true 8; OpenDexter MCP verified reachable; Syra=curated/partner (no self-serve); registrations needing Jordan: Syra, BotWork, Swarms, Atelier)*
+*Last updated: 2026-08-07 (income scan — added BountyBook watchlist row #14; Hive scan: 2 open Token Launch tasks, no auto-bids)*
 
 | **Solana Homebase** | https://github.com/Gentech-Labs/solana-homebase | Agentic Treasury orchestrator — Solana homebase (Superteam tranche-2 MVP) | 🟢 PUBLIC + LIVE (Aug 5) | 2026-08-05 |
