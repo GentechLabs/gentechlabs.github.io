@@ -1,7 +1,7 @@
 ---
-date: 2026-08-07
+date: 2026-08-09
 status: active
-last-updated: 2026-08-07 20:08 ET
+last-updated: 2026-08-09 04:00 ET
 ---
 
 # 🧠 Considerations — Open Decisions
@@ -11,10 +11,10 @@ last-updated: 2026-08-07 20:08 ET
 ## 🚨 Urgent — DEADLINES APPROACHING
 
 - [ ] 🚨 **Algorand First-Mover Play (Aug 6)** — **✅ COMPOSITE ENTRY SHIPPED (Aug 7).** Context-weight "Recently Done" confirms the Algorand Global x402 Challenge — Composite Entry ($100K + 500K ALGO) is shipped. **Jordan: (1) provide Algorand wallet address so X402_PAYTO_ALGORAND goes live (zero code change), (2) confirm late-leaderboard eligibility or mark dead** (original deadline Jul 31 passed, no registration on file).
-- [ ] 🚨 **Keeperhub Agents Onchain #80** — **JORDAN CONFIRMED GO.** Real KeeperHub workflow created (GTA Yield Guard — Aave health-factor auto-rebalancer, Base, exec test launched). **🚨 FUNDING BLOCKER: wallet 0x53A8...8EA has 0 ETH + 0 USDC on Base mainnet AND Sepolia — cannot produce the live tx link judges require. Jordan: fund ~$15 ETH + ~$10 USDC on Base.** Deadline Aug 13.
+- [ ] 🚨 **Keeperhub Agents Onchain #80** — **JORDAN CONFIRMED GO.** **✅ PROOF TRANSFER COMPLETE Aug 8:** Real 0.01 USDC on-chain transfer from KeeperHub wallet to Treasury CDP (TX 0x88fe6c9a...b1df, Base, block 49682145, success). Wallet funded. **REMAINING: film demo video + assemble GitHub submission (README, video, live tx link). Deadline Aug 13.**
 - [ ] 🚨 **Algorand Global x402 Challenge #82** — **⚠️ DEADLINE PASSED Jul 31.** $100K + 500K ALGO. No record of registration on file. **Jordan: confirm if registered / still eligible for late leaderboard, or mark dead.** *(Now tied to the Algorand First-Mover Play above.)*
-- [ ] 🚨 **Arc Programmable Money Hackathon** — **⚠️ Deadline Aug 9 (1 day, URGENT).** Deploy x402 + Agent Wallet on Arc L1 (Encode Club, Agentic Economy track). **UPDATE Aug 4: Jordan completed the Circle testnet faucet step.** **NEXT NEEDED FROM JORDAN: provide Arc wallet address for deploy.** Gentech has: x402 deploy script ready, ArcAgentWallet.sol written, foundry.toml configured with arc_testnet RPC. Then: deploy contracts, build demo, 3-min video, deck, repo. *Queue shows PENDING — not passed.*
-- [ ] 🚨 **AI Factory Hackathon #79** — **Runs Aug 3-10 (2 days left).** lablab.ai × NativelyAI. **Jordan: register?**
+- [ ] 🚨 **Arc Programmable Money Hackathon** — **⚠️ DEADLINE TODAY Aug 9.** ArcAgentWallet.sol deployed on testnet, 57/57 tests pass, repo public (github.com/Gentech-Labs/programmable-money-x402). **BUILD COMPLETE + VERIFIED Aug 8. MARKED SHIPPED by labs Aug 9. Jordan: submit final project + 3-min video + repo link if not already done via checkpoint.**
+- [ ] 🚨 **AI Factory Hackathon #79** — **⚠️ DEADLINE TOMORROW Aug 10.** lablab.ai × NativelyAI. **MARKED SHIPPED by labs Aug 9.** Jordan: confirm submission status.
 
 ## 🔴 High Priority
 
