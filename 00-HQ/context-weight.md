@@ -1,6 +1,6 @@
 # 🧠 Context Weight — GenTech Labs
 
-> Auto-generated: 2026-08-08 00:08 ET · Loads on session start so every group has context.
+> Auto-generated: 2026-08-09 00:37 ET · Loads on session start so every group has context.
 > Source: build_queue.json + vault state
 
 ---
@@ -11,24 +11,24 @@
 - [HIGH] FrameForge — AI Storyboard Service (previs pipeline) — pending
 - [HIGH] Open Generative AI — Self-Host AI Media Studio — pending
 - [HIGH] AI Factory Hackathon — lablab.ai x NativelyAI (Aug 3-10) — in_progress
-- [URGENT] Agent Warfare — Agent Archetypes/Classes (Sniper, Scout, Heavy, Medic, Engineer) — pending
 - [URGENT] Agent Warfare — Procedural Map Generation via text-to-cad — pending
 - [HIGH] ClawWork Integration — GenTech Employee Squad — pending
 - [HIGH] Paymenter x402 Gateway — Submit to Marketplace + Discord — pending
 - [HIGH] Paymenter x402 — Pterodactyl Community Outreach — pending
+- [HIGH] Multica + Paperclip — Set Up ClawWork Squad + GenTech Shop Plugin — pending
 
 ## 🏗️ Build Queue
-54 total · 32 pending · 1 blocked
+52 total · 28 pending · 1 blocked
 
 ## 🚨 Blockers
 - **Super Arcade Tennis — Cab #1 for GenTech Arcade** — First arcade cabinet. Three.js isometric tennis, chain power-shots (BTC/ETH/SOL), AI opponent. LIVE at arcade.gentechlab
 
 ## ✅ Recently Done
 - Algorand Global x402 Challenge — Composite Entry ($100K + 500K ALGO)
+- Agent Warfare — Agent Archetypes/Classes (Sniper, Scout, Heavy, Medic, Engineer)
 - awesome-selfhosted — Audit for GenTech Stack Gaps
 - Hippocratic AI Residency — Evaluate Fit
-- Yield.xyz MCP integration — GTA yield intelligence layer
-- Paperclip Control Plane — fix embedded Postgres startup (root EACCES)
+- Build with Gemini XPRIZE — AI Business with x402 Payments (M)
 
 ## 🎯 Key Decisions
 See 11-Mess Hall/considerations.md
@@ -41,7 +41,7 @@ See 11-Mess Hall/considerations.md
 - **Forge** — Desktop agent · Handles local builds
 
 ## 🔗 Quick Links
-- Build queue: `scripts/build_queue.json` (54 items)
+- Build queue: `scripts/build_queue.json` (52 items)
 - Jocelyn's hub: gentechlabs.net/jocelyn.html
 - Investor deck: gentechlabs.net/grant.html
 - Demo video: gentechlabs.net/agentic-treasury-demo.mp4
