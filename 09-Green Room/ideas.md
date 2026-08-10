@@ -23,6 +23,16 @@
 
 ---
 
+## 🔌 MCP 2026-07-28 stateless spec — SAP MCP migration decision (Aug 10)
+**Source:** Better Stack video + SDK source + live testing on `gentech-sap-mcp`
+- The 2026-07-28 MCP spec makes the protocol **stateless**: deletes `initialize` handshake + `Mcp-Session-Id` header → scale-to-zero on Workers/Cloud Run, round-robin load balancing, no Redis session store. New `Mcp-Method`/`Mcp-Name` headers, `ttlMs`/`cacheScope` hints, multi-round-trip elicitation, Tasks→official extension. 12-month deprecation window; SDKs bumped to v2.
+- **Root constraint discovered by testing:** a stateless `StreamableHTTPServerTransport` **cannot be reused across requests** (SDK throws), AND an MCP `Server` can only connect to **one** transport. So the official stateless pattern = **fresh `Server` per request** (see SDK `simpleStatelessStreamableHttp` example).
+- **Decision: SAP MCP stays stateful.** It holds a signer (key material) + SAP client — a fresh-Server-per-request rebuild is heavy and semantically wrong. Documented in `http.ts`. Migrate only if/when it moves to scale-to-zero serverless or multi-instance LB.
+- **Inventory:** `gentech-sap-mcp` (stateful, keep), `injective-mcp-server` (stdio — stateless HTTP N/A), `yield_mcp.py` (client, not ours). Third-party consumers not ours to change.
+- **Action when migrating any future MCP server to stateless:** use fresh-Server-per-request factory pattern; don't reuse a transport.
+
+---
+
 ## 🧠 ONE BRAIN, NATIVE SKINS (Aug 10) — product architecture + GTM principle
 **Source:** Jordan strategy conversation (Base grant, Solana homebase, Flaunch/Robinhood token launches)
 - **The engine and the product are two layers.** Engine (GTA) = reasoning, venue-agnostic execution, trust/permissions, and the proprietary **agent-sentiment data**. This is the moat, and it's multi-chain by design (data richness).
