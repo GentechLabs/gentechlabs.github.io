@@ -36,6 +36,8 @@ last-updated: 2026-08-10 00:15 UTC (EOD Aug 9 ET sweep)
 
 - [ ] **Bug Bounties Comeback?** — We stopped because AI agents couldn't produce solid PoCs ("proof of LOC"). open·kritt (Kritt-ai, Blockian team) now handles that: scan agents run as root in disposable containers (compile/run tests/build exploits) and post-scripts emit PoCs via `_reserved_poc` + reports. **Jordan: test on our own repos first (build-queue #34), then decide if we point it at Immunefi targets for bounty revenue.**
 
+- [ ] **ego-lite browser — WATCH (Aug 10)** — Shared-logged-in-browser for agents (citrolabs, MIT, 9.5k★). Purpose-built for the #20 auto-apply gap (login-walled Lever/Greenhouse/Workday + form submission). **BUT macOS-only today; our VPS is Linux → can't run yet.** Windows/Linux on roadmap. **Action when it ships cross-platform:** re-evaluate as (1) AI Job Search auto-apply completion, (2) login-gated marketplace/dashboard unblocker, (3) GTA layer-2 authorized-proxy enabler (browser surface). Full eval in `09-Green Room/ideas.md` (Aug 10). **Jordan: watch for cross-platform release; don't block #20 on it.**
+
 ## 🎓 Learning Track — AWS + Cyfrin Updraft (Aug 3)
 
 Jordan's commitment (more free time this week due to reduced work hours). Work BOTH in parallel alongside job apps + hackathons. **⚠️ Check-in was due Sunday (Aug 9) — status unknown.**
