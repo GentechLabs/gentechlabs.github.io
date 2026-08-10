@@ -33,13 +33,11 @@
 
 ---
 
-## 🎯 Superteam Earn — Agent-Eligible Opportunity Watcher (Aug 10)
-**What:** Daily cron (`0 12 * * *`, job `a58a45b1887d`) → `superteam-earn-watcher.py`
-- Polls Superteam agent API (`/api/agents/listings/live`) for **live, agent-eligible** (`AGENT_ALLOWED`/`AGENT_ONLY`) listings with **future deadlines**, in our lanes (agent, x402, DeFi, narrative/sentiment, Solana/Base, escrow, treasury).
-- **Silent (no delivery) when nothing actionable** — only alerts when a real live listing drops. no_agent watchdog pattern.
-- Auth: `gentech-labs-x402` agent key (registered Jul 23). Recency filter: skips expired/stale listings.
-- **Fits "green light to scan"** (Jordan, Aug 10). Parallel: Jordan checking the $100 Agentic Engineering form (human-gated — agent API can't submit grants).
-- **Key finding logged:** the agent API only surfaces bounty/hackathon listings (not grant forms); grants are human-gated (KYC, X verify) so the watcher covers bounties while Jordan handles grant forms.
+## 🎯 Opportunity Scanner — Superteam source folded in (Aug 10)
+**Clarification (Jordan, Aug 10):** the broad opportunity scanner (agent/orchestrator-friendly jobs + hackathons + grants) ALREADY exists — it's the **"5-Star Opportunity Scanner — Hackathons + Jobs + Grants"** cron in the **`gentech` profile** (Mon/Thu 10am, job `71d5c3e3b245`, last ran Aug 10). That's the real scanner.
+- **Added Superteam Earn as a source** to its prompt: polls `/api/agents/listings/live` (key `sk_bf47...`, agent `gentech-labs-x402`) for live, agent-eligible listings in our lanes.
+- **Removed the standalone gizmo Superteam watcher** I'd created (a58a45b1887d) — redundant now.
+- **Key nuance logged:** grants on superteam.fun are human-gated (KYC + X-verify); the scanner flags them as "Jordan applies via form," and only auto-surfaces agent-submittable bounties/hackathons.
 
 ---
 
