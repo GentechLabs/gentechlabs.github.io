@@ -1,7 +1,7 @@
 ---
-date: 2026-08-09
+date: 2026-08-10
 status: active
-last-updated: 2026-08-09 04:00 ET
+last-updated: 2026-08-10 00:15 UTC (EOD Aug 9 ET sweep)
 ---
 
 # 🧠 Considerations — Open Decisions
@@ -13,7 +13,7 @@ last-updated: 2026-08-09 04:00 ET
 - [ ] 🚨 **Algorand First-Mover Play (Aug 6)** — **✅ COMPOSITE ENTRY SHIPPED (Aug 7).** Context-weight "Recently Done" confirms the Algorand Global x402 Challenge — Composite Entry ($100K + 500K ALGO) is shipped. **Jordan: (1) provide Algorand wallet address so X402_PAYTO_ALGORAND goes live (zero code change), (2) confirm late-leaderboard eligibility or mark dead** (original deadline Jul 31 passed, no registration on file).
 - [ ] 🚨 **Keeperhub Agents Onchain #80** — **JORDAN CONFIRMED GO.** **✅ PROOF TRANSFER COMPLETE Aug 8:** Real 0.01 USDC on-chain transfer from KeeperHub wallet to Treasury CDP (TX 0x88fe6c9a...b1df, Base, block 49682145, success). Wallet funded. **REMAINING: film demo video + assemble GitHub submission (README, video, live tx link). Deadline Aug 13.**
 - [ ] 🚨 **Algorand Global x402 Challenge #82** — **⚠️ DEADLINE PASSED Jul 31.** $100K + 500K ALGO. No record of registration on file. **Jordan: confirm if registered / still eligible for late leaderboard, or mark dead.** *(Now tied to the Algorand First-Mover Play above.)*
-- [ ] 🚨 **Arc Programmable Money Hackathon** — **⚠️ DEADLINE TODAY Aug 9.** ArcAgentWallet.sol deployed on testnet, 57/57 tests pass, repo public (github.com/Gentech-Labs/programmable-money-x402). **BUILD COMPLETE + VERIFIED Aug 8. MARKED SHIPPED by labs Aug 9. Jordan: submit final project + 3-min video + repo link if not already done via checkpoint.**
+- [x] 🚨 **Arc Programmable Money Hackathon** — **⚠️ DEADLINE TODAY Aug 9 — ✅ SHIPPED.** ArcAgentWallet.sol deployed on testnet, 57/57 tests pass, repo public. **BUILD COMPLETE + VERIFIED Aug 8. MARKED SHIPPED by labs Aug 9.** → Move to Recently Resolved after midnight.
 - [ ] 🚨 **AI Factory Hackathon #79** — **⚠️ DEADLINE TOMORROW Aug 10.** lablab.ai × NativelyAI. **MARKED SHIPPED by labs Aug 9.** Jordan: confirm submission status.
 
 ## 🔴 High Priority
@@ -38,7 +38,7 @@ last-updated: 2026-08-09 04:00 ET
 
 ## 🎓 Learning Track — AWS + Cyfrin Updraft (Aug 3)
 
-Jordan's commitment (more free time this week due to reduced work hours). Work BOTH in parallel alongside job apps + hackathons. **Check in Sunday (Aug 9) on progress for both.**
+Jordan's commitment (more free time this week due to reduced work hours). Work BOTH in parallel alongside job apps + hackathons. **⚠️ Check-in was due Sunday (Aug 9) — status unknown.**
 
 - [ ] **AWS Solutions Architect Associate (SAA-C03)** — Amazon subsidizes the exam. 2-3 week focused sprint. Credential value for the "cloud engineering" half. Not a daily-tooling shift (we run VPS/nginx/Cloudflare) — a resume + credential unlock.
 - [ ] **Cyfrin Updraft — Solidity/security-audit track** (Patrick Collins). Deep multi-week curriculum. Highest differentiation value — unlocks paid smart-contract audits ($1K-5K/audit) via the x402 gateway. Complements our `solidity-security`, `audit-fix-verify`, `solana-anchor-development` skills.
@@ -101,7 +101,7 @@ Jordan's decision on the Gears E:D beta: **NOT pre-ordering for beta access.** E
 
 - **Web tools down** — RESOLVED. Agent Reach is the default web backend. Firecrawl no longer needed.
 - **OKX AI Genesis Hackathon #72** — Deadline passed Jul 27. No registration received.
-- **Keeperhub Agents Onchain #80** — Build phase started Jul 27. Pending Jordan go/no-go.
+- **Keeperhub Agents Onchain #80** — ✅ GO confirmed. PROOF TRANSFER COMPLETE Aug 8. Remaining: demo video + README. Deadline Aug 13.
 - **Celo Agentic Payments Hackathon #69** — Researched (Jul 24). Ready to execute on go-ahead.
 - **MengTo Fork #75** — Shipped (Jul 25).
 - **x402 Gateway v7.0.0** — Deployed and verified.
