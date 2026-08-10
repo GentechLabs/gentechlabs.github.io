@@ -58,6 +58,36 @@ Each group agent has a symmetric return path so Gentech picks up its work:
   still consumed by `tick_build_queue.py`. The new per-group return folders generalize
   this to labs/entertainment/finance/hq.
 
+## ROUTING RULE — Forge = the desktop lane (Jordan, Aug 5 + Aug 10)
+
+**Desktop-routed work always surfaces in the morning digest — never silently queues.**
+Jordan's directive (Aug 10): if any overnight/cron system decides a task must be done on
+the desktop, put it on the Forge list (gentech-to-forge/) AND make sure the morning digest
+tells Jordan "here's what Forge needs to do" so nothing is missed. Handoffs are useless if
+Jordan never sees the queue — surface them.
+
+### Full multi-lane handoff (Aug 10)
+Every group agent can hand off to any other lane if the work belongs there:
+- **Treasury/Finance work** (build-list items like #38 Treasury Phase A) → `gentech-to-treasury/`,
+  picked up by the Treasury agent, returned via `treasury-to-gentech/` + `treasury-completions.md`
+  (same skeleton as Forge — folders already exist).
+- **Desktop-needed work** (wallet signing, browser logins, local tools, sites Jordan must see)
+  → `gentech-to-forge/` (or note "Forge (desktop)" in the per-group note).
+- **Anything Forge/desktop that surfaces overnight** → the morning digest MUST list it so Jordan
+  picks it up. Do not assume he'll check the folder.
+
+### Mess Hall = the council (Jordan directive Aug 10)
+The Mess Hall's original purpose: every agent reads it AND contributes its own perspective.
+Different opinions are welcome and encouraged — Jordan wants real viewpoint diversity, not
+one echo. On every wake-up, each agent:
+1. Reads `11-Mess Hall/considerations.md` for open decisions.
+2. Contributes its genuine take on any open item it has a view on — prefixed with its agent
+   name (Gentech/Gizmo/Treasury), with a clear read + risk + recommendation. Disagreeing is
+   encouraged if reasoned.
+3. Skips items another agent already covered (add a delta only, don't duplicate).
+
+This is documented in `wake-up-protocol` Step 3d (propagated to all profiles).
+
 ## ROUTING RULE — Forge = the desktop lane (Jordan, Aug 5)
 
 "Forge only" is shorthand for **desktop only**. Forge runs on Jordan's PC, so anything
