@@ -59,3 +59,4 @@ Run your own x402 gateway: `git clone https://github.com/ProtoJay4789/x402-gatew
 ---
 
 *MIT License — open-source contribution from GenTech Labs*
+*Repo verified live: Aug 10, 2026 — 7 files, public, branch: main*
