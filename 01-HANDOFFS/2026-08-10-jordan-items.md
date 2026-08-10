@@ -27,6 +27,11 @@
 
 ## ✅ SHIPPED OVERNIGHT
 
+### #9 Agent Warfare — Procedural Map Generation (urgent, Jordan TOP PRIORITY)
+- Seed-driven generator: `?mapseed=NUM` swaps static layout for generated building rows + set pieces.
+- Fixed street-face orientation inversion + kerb encroachment. `procedural.test.mjs` PASS.
+- Built, committed (`cbf85a0`), deployed to arcade cabinet (origin + CDN verified).
+
 ### #11 Paymenter x402 Marketplace
 - Standalone GitHub repo created: github.com/ProtoJay4789/paymenter-x402
 - Marketplace listing + Discord post drafted

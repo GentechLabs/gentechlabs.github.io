@@ -290,6 +290,14 @@
 - [ ] Pull repo and test on VPS
 - [ ] Build a GenTech-branded demo short
 
+## 🕐 DEFERRED — Base Ecosystem Fund (venture raise, revisit later)
+**Source:** x.com/base status 2085352160963780618 (Aug 6) | **Status:** Logged, deferred by Jordan
+- Base's strategic investment arm (with Coinbase Ventures). Pre-seed + seed checks for teams building on Base. Backed 30+ teams; apps open at base.org/ecosystem-fund/apply.
+- **Why us fits:** explicit **AI Agents** portfolio category; **Blockrun already in their portfolio** (the wallet infra our CDP runs on); funds onchain primitives + real economic activity = our x402/GTA thesis. Perks: white-glove support, AWS/Azure/Alchemy credits, Coinbase Prime + Onramp access.
+- **Application (5 steps):** 1) Company (name, what building, website, X) · 2) Team (founder bios w/ role + prior exp, Telegram/X/LinkedIn, size, location) · 3) Idea (problem, why, how long, current traction) · 4) Funding (raised before?, runway, goals) · 5) Why Base (what's on Base, why BEF, pitch deck URL).
+- **Jordan's call (Aug 10):** come back later. Venture raise (not a grant) — needs a founding team w/ bios, **live GTA revenue/traction**, runway, and a pitch deck. Applying now with no traction risks burning a strong fit.
+- **Revisit trigger:** GTA live on-chain revenue (even modest per-tx fees) + pitch deck + team positioning.
+
 ## Ready to Test (skills exist, need execution)
 
 - [ ] **Krexa — Credit Infrastructure for AI Agents on Solana** — Live mainnet-beta, invite-gated. Gives AI agents credit: borrow USDC against on-chain **Krexit Score** (200–850), no human co-signer, auto-repay from future revenue via Revenue Router. **Complementary to us, not competitor** — "x402 is the payment rail; Krexa is the credit layer on top." 350+ agents deployed. **Why it matters:** (1) our x402 gateway services can be listed on their **Pay.sh catalog** (Solana Foundation + Google Cloud) for new distribution; (2) validates our Agent Credit Score direction (they have Krexit Score 200–850); (3) `@krexa/x402` middleware = 3-line Express monetization on Solana, same pattern as our gateway. **Access:** invite code via Discord `discord.gg/aMSEG7yj` or @krexa_xyz open drops. Source: krexa.xyz, Aug 7. **Needs Jordan:** grab invite code → I run `krexa activate <code>` + test CLI/SDK/MCP.
