@@ -33,6 +33,36 @@
 
 ---
 
+## 🧭 EGO-LITE EVALUATION (Aug 10) — shared-logged-in-browser for agents (citrolabs, MIT, 9.5k★)
+**Repo cloned + read:** `ego-browser` CDP harness + `skills/ego-browser/SKILL.md` (v1.2.6). **Candidate for unblocking login-gated web work.**
+
+### What it is
+- One browser where human + agents work in parallel. Agents run in isolated **task spaces** that **inherit the user's login state** (cookies/Chrome data) — so agents operate authenticated sites without touching the human's tabs or stealing focus.
+- Agent drives it via `ego-browser nodejs <<'EOF' ... EOF` heredocs calling in-page JS helpers (`snapshotText`, `click`, `fillInput`, `uploadFile`, `js`, `cdp`). Task-space model: `useOrCreateTaskSpace`, `handOffTaskSpace`/`takeOverTaskSpace` (explicit user-confirm handoff for login/captcha), `completeTaskSpace`. Strong snapshot + semantic/visual/DOM workflows.
+
+### ⛔ THE DECISIVE CONSTRAINT — macOS ONLY (today)
+- ego lite app ships for **macOS only** (arm64/x64 .dmg). **Windows and Linux are on the roadmap, not shipped.**
+- We run on a **Linux VPS** (`Host: Linux 6.8.0`). The `ego-browser` command is provided by the **closed-source ego lite app**, not the repo. So **it cannot run on our box today.**
+- Our current browser-automation path (`computer-use` skill / cua-driver) is cross-platform (mac/win/linux) and headless-Chromium capable. ego lite does NOT replace it — it would be an *additional* surface for Jordan's own macOS machine.
+
+### Application map (if we had a macOS surface — e.g. Jordan's local machine)
+1. **AI Job Search (#20) auto-apply completion:** the exact gap — login-walled Lever/Greenhouse/Workday postings + actual form submission. ego-lite's shared-login + task-space handoff for captchas is purpose-built for this.
+2. **Login-gated marketplaces/dashboards** (Superteam earn forms, marketplaces, OAuth surfaces) — same unblocking pattern.
+3. **GTA layer-2 authorized-proxy enabler** for the browser surface (agent operates accounts user is entitled to, without user in the room).
+
+### Security model (sound, with controls)
+- Task-space **ownership** model (`agent`/`agentDelegatedToUser`/`user`); agent-owned spaces can't seize user-owned ones; `handOffTaskSpace` requires explicit user action for login/captcha/consent.
+- **Blast-radius note (mirrors GTA):** agent operating logged-in state = agent acts *as* user on that site. Fine for job postings; must NOT get free rein over money/custody surfaces without granular read-vs-submit controls.
+- Data stored locally; no server-side custody.
+
+### Verdict / recommendation
+- **Not buildable on our Linux VPS today** (macOS-only app). **Don't block #20 on it.**
+- **Keep watching** — Linux/Windows is on the roadmap; if/when shipped, re-evaluate as the auto-apply completion for #20 and the browser-proxy enabler.
+- **For now:** continue #20 with the Hermes-native path (web_extract + curl + JSON-LD + delegate_task reviewer) that already works. ego lite is a **future accelerator**, not a current dependency.
+- Candidate to mirror in `11-Mess Hall/considerations.md` as a watch-item.
+
+---
+
 ## 🎯 Opportunity Scanner — Superteam source folded in (Aug 10)
 **Clarification (Jordan, Aug 10):** the broad opportunity scanner (agent/orchestrator-friendly jobs + hackathons + grants) ALREADY exists — it's the **"5-Star Opportunity Scanner — Hackathons + Jobs + Grants"** cron in the **`gentech` profile** (Mon/Thu 10am, job `71d5c3e3b245`, last ran Aug 10). That's the real scanner.
 - **Added Superteam Earn as a source** to its prompt: polls `/api/agents/listings/live` (key `sk_bf47...`, agent `gentech-labs-x402`) for live, agent-eligible listings in our lanes.
