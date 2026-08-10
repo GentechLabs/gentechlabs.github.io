@@ -13,6 +13,16 @@
 
 ---
 
+## 📡 COMPETITIVE REFERENCE (Aug 9) — AgentLayer ships x402 DeFi yield skills
+**Source:** BNN @BNNBags tweet + AgentLayer (@agentlayer_ai) — "AI agents can now build DeFi yield strategies through x402"
+- AgentLayer adding specialized DeFi skills: analyze protocols, evaluate risk, generate yield. **First x402-powered AgentLayer service live via x402 endpoint.**
+- **Validation, not a threat:** confirms our GTA + x402-rail thesis. x402 as agentic-DeFi payment layer is being commoditized (~200M tx / $50B via x402 per Solana).
+- **Our edge:** the moat is moving UP-STACK — from "build the rail" to "proprietary signal + live funded executor." Every team will ship generic analyze→risk→yield skills (table stakes in 12mo). Our first-mover signal = **agent-sentiment index**; GTA executes on it as gateway.
+- **Action:** (1) Don't rebuild generic skills — build the edge. (2) Watch AgentLayer as a DISTRIBUTION channel for listing GTA/agent tooling, not just a competitor.
+- Reference: solana-foundation/tokens (open-sourced canonical Solana asset registry) — clean data feed option for Solana leg, avoid raw RPC token scraping.
+
+---
+
 ## 🏆 GTA — Open Execution + Authorized Proxy (THE flagship)
 **Source:** Jordan vision (Aug 3) | **Status:** Thesis confirmed, driving the build
 - **GTA = open execution + authorized-proxy layer.** Your agent does everything for you across every venue you're entitled to use, without you being in the room or tied to one platform.
