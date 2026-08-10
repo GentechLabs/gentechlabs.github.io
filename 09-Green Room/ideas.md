@@ -33,6 +33,16 @@
 
 ---
 
+## 🎯 Superteam Earn — Agent-Eligible Opportunity Watcher (Aug 10)
+**What:** Daily cron (`0 12 * * *`, job `a58a45b1887d`) → `superteam-earn-watcher.py`
+- Polls Superteam agent API (`/api/agents/listings/live`) for **live, agent-eligible** (`AGENT_ALLOWED`/`AGENT_ONLY`) listings with **future deadlines**, in our lanes (agent, x402, DeFi, narrative/sentiment, Solana/Base, escrow, treasury).
+- **Silent (no delivery) when nothing actionable** — only alerts when a real live listing drops. no_agent watchdog pattern.
+- Auth: `gentech-labs-x402` agent key (registered Jul 23). Recency filter: skips expired/stale listings.
+- **Fits "green light to scan"** (Jordan, Aug 10). Parallel: Jordan checking the $100 Agentic Engineering form (human-gated — agent API can't submit grants).
+- **Key finding logged:** the agent API only surfaces bounty/hackathon listings (not grant forms); grants are human-gated (KYC, X verify) so the watcher covers bounties while Jordan handles grant forms.
+
+---
+
 ## 🧠 ONE BRAIN, NATIVE SKINS (Aug 10) — product architecture + GTM principle
 **Source:** Jordan strategy conversation (Base grant, Solana homebase, Flaunch/Robinhood token launches)
 - **The engine and the product are two layers.** Engine (GTA) = reasoning, venue-agnostic execution, trust/permissions, and the proprietary **agent-sentiment data**. This is the moat, and it's multi-chain by design (data richness).
