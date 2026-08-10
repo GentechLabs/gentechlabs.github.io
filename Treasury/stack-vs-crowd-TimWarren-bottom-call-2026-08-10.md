@@ -26,8 +26,12 @@ Tim himself is NOT declaring the bottom: "not declaring," "not at 4-yr cycle bot
 - **Disagree on conclusion**: our regime is RANGE_BOUND/HOLD at 0.65, not ACCUM. A confirmed bottom would flip us toward ACCUM with rising confidence. We're not there — CLARITY (punted to Sept/Oct) still unresolved, per our CLARITY tracker.
 - **Our stack's real lead**: **LINK is the rotation destination** — +12.4 bps contango (highest) + top DeFi Blue Chip narrative (+3.7% 30d). The blanket "crypto bottom" misses the *sectoral* rotation our data flags.
 
-## Flags
-- **AVAX/USDC LP position 0% efficiency** — idled out of range (price 6.6, range 6.04–6.196). Rebalance when rail funded.
+## Flags — HONESTY CORRECTION (Aug 10, Jordan-corrected)
+- **The AVAX/USDC "0% efficiency" LP is NOT a live position.** It's a simulated/stale monitor
+  reference (data Jul 28, positionUsd $24.32) — the rail is **UNFUNDED**: AVAX steward wallet
+  holds **0.0 AVAX**. Real executable capital is **$38.27 in CDP** (USDC $31.52 + cbBTC + gas).
+  Do NOT present simulated LP efficiency as a live farm leak. The actual next step is funding
+  the AVAX rail (gas + USDC), THEN the Trader Joe LP becomes real and monitorable.
 
 ## Decision
 - **No trade.** Posture unchanged: YIELD / RANGE_BOUND. Do NOT chase the bottom-call; be ready to deploy into a *confirmed* post-flush regime (our regime flip, not the video's).
