@@ -63,6 +63,30 @@
 
 ---
 
+## 🎥 VISION AGENTS EVALUATION (Aug 10) — realtime voice+vision agents (GetStream, 8k★, Apache-2.0)
+**Repo cloned + read:** `agents-core/vision_agents/` (MCP manager, remote/local MCP servers, agent core). **Candidate for voice/vision lane + x402-as-tool integration.**
+
+### What it is
+- Open framework for **real-time voice + vision AI agents** — agents that watch, listen, and understand video. Combines fast CV models (YOLO, Roboflow) with realtime LLMs (Gemini Live, OpenAI Realtime) over Stream's edge network (join ~500ms, audio/video <30ms). Actively developed (last commit Aug 7).
+- **MCP support is first-class:** `MCPManager` connects to `MCPServerRemote` (HTTP Streamable) or `MCPServerLocal` (stdio), auto-registers every MCP tool with the LLM's function registry (prefixed `mcp_{idx}_{tool}`). Clean, well-engineered client.
+- **No payment/x402 hooks exist yet** — grep across agents-core + plugins found zero x402/402/payment references. **Greenfield integration surface.**
+
+### Why it matters to us
+1. **x402-as-tool is a clean build:** our x402 gateway services (token security, market intel, wallet analysis, agent discovery) can be exposed as an MCP server and wired in via `MCPServerRemote(url=...)`. A voice/vision agent then calls them mid-conversation — a natural "agent pays per call" surface. This is the GTA/x402 thesis applied to realtime voice+vision.
+2. **Vision capability we lack:** we have voice (Pipecat) but no realtime *vision* agent. This adds "watch and understand video" — relevant to emulation/companion (vision-based AI Player 2), moderation, and the "watch movies with you" product direction.
+3. **Complement to Pipecat:** different realtime voice/vision framework — evaluate alongside the LiveKit vs Pipecat question.
+
+### Caveats (honest)
+- **Stream's edge network is the moat** — low-latency story leans on their infra (free tier 333K participant-min/mo). "Open" but the edge is theirs.
+- **Current limitations (their own):** video AI struggles with small text; context degrades on ~30s+ continuous video; realtime models need audio/text to trigger (video alone won't prompt output).
+
+### Verdict / recommendation
+- **Strong candidate to evaluate for the voice/vision lane** — especially the x402-as-tool integration and the vision capability we lack.
+- **Not a build-now** (we're mid-Pipecat). File as a candidate alongside LiveKit vs Pipecat.
+- **Product direction worth exploring:** "agents that watch with you" (movies, emulation, coaching) — connects to entertainment lane + Vanito's film work.
+
+---
+
 ## 🎯 Opportunity Scanner — Superteam source folded in (Aug 10)
 **Clarification (Jordan, Aug 10):** the broad opportunity scanner (agent/orchestrator-friendly jobs + hackathons + grants) ALREADY exists — it's the **"5-Star Opportunity Scanner — Hackathons + Jobs + Grants"** cron in the **`gentech` profile** (Mon/Thu 10am, job `71d5c3e3b245`, last ran Aug 10). That's the real scanner.
 - **Added Superteam Earn as a source** to its prompt: polls `/api/agents/listings/live` (key `sk_bf47...`, agent `gentech-labs-x402`) for live, agent-eligible listings in our lanes.
