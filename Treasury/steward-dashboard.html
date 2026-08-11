@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Steward — Agentic Treasury | GenTech Labs</title>
+<meta name="description" content="Live command center for the GenTech Agentic Treasury — position, curve shape, fee efficiency, yield vs staking vs hodl.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #09090b;
+  --card: #18181b;
+  --card-2: #1f1f23;
+  --border: #27272a;
+  --accent: #8b5cf6;
+  --accent-2: #06b6d4;
+  --success: #00ff88;
+  --danger: #ff4466;
+  --warn: #f59e0b;
+  --text: #fafafa;
+  --text-dim: #a1a1aa;
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-sans);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+/* Animated mesh */
+.mesh { position: fixed; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
+.mesh::before, .mesh::after {
+  content: ''; position: absolute; border-radius: 50%; filter: blur(120px); opacity: 0.15;
+}
+.mesh::before {
+  width: 600px; height: 600px; background: radial-gradient(circle, #8b5cf6 0%, transparent 70%);
+  top: -200px; left: 50%; transform: translateX(-50%); animation: meshFloat 8s ease-in-out infinite alternate;
+}
+.mesh::after {
+  width: 500px; height: 500px; background: radial-gradient(circle, #06b6d4 0%, transparent 70%);
+  bottom: -150px; left: 20%; animation: meshFloat 10s ease-in-out infinite alternate-reverse;
+}
+@keyframes meshFloat {
+  0% { transform: translateX(-50%) translate(0,0); }
+  100% { transform: translateX(-50%) translate(40px,30px); }
+}
+.container { max-width: 1200px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 1; }
+.mono { font-family: var(--font-mono); }
+
+/* Nav */
+nav {
+  position: sticky; top: 0; z-index: 100; backdrop-filter: blur(16px);
+  background: rgba(9,9,11,0.72); border-bottom: 1px solid var(--border);
+}
+.nav-inner { max-width: 1200px; margin: 0 auto; padding: 14px 20px; display: flex; align-items: center; justify-content: space-between; }
+.brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 1.05em; }
+.brand .logo { width: 30px; height: 30px; border-radius: 8px; background: linear-gradient(135deg, var(--accent), var(--accent-2)); display: flex; align-items: center; justify-content: center; font-size: 15px; }
+.brand .sub { font-size: 0.7em; color: var(--text-dim); font-weight: 400; }
+.nav-links { display: flex; gap: 8px; }
+.nav-links a { color: var(--text-dim); text-decoration: none; font-size: 0.85em; padding: 6px 12px; border-radius: 8px; transition: all .2s; }
+.nav-links a:hover, .nav-links a.active { color: var(--text); background: var(--card-2); }
+
+/* Hero */
+.hero { padding: 40px 0 20px; }
+.hero h1 { font-size: clamp(1.6em, 4vw, 2.4em); font-weight: 800; letter-spacing: -0.02em; }
+.hero h1 .grad { background: linear-gradient(90deg, var(--accent), var(--accent-2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.hero .sub { color: var(--text-dim); margin-top: 8px; font-size: 0.95em; }
+.hero .status-pill { display: inline-flex; align-items: center; gap: 8px; margin-top: 16px; padding: 6px 14px; border-radius: 999px; font-size: 0.8em; font-weight: 600; border: 1px solid var(--border); }
+.status-pill .dot { width: 8px; height: 8px; border-radius: 50%; }
+.status-pill.in .dot { background: var(--success); box-shadow: 0 0 8px var(--success); }
+.status-pill.out .dot { background: var(--danger); box-shadow: 0 0 8px var(--danger); }
+
+/* Grid */
+.grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px; padding: 20px 0 40px; }
+.card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 20px; }
+.card h3 { font-size: 0.75em; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-dim); margin-bottom: 12px; }
+.card .big { font-size: 1.8em; font-weight: 700; font-family: var(--font-mono); }
+.card .label { font-size: 0.75em; color: var(--text-dim); }
+.card .row { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border-bottom: 1px solid var(--border); font-size: 0.85em; }
+.card .row:last-child { border-bottom: none; }
+.card .row .k { color: var(--text-dim); }
+.card .row .v { font-family: var(--font-mono); font-weight: 500; }
+
+/* Spans */
+.span-3 { grid-column: span 3; }
+.span-4 { grid-column: span 4; }
+.span-5 { grid-column: span 5; }
+.span-6 { grid-column: span 6; }
+.span-7 { grid-column: span 7; }
+.span-8 { grid-column: span 8; }
+.span-12 { grid-column: span 12; }
+
+/* Curve viz */
+.curve-wrap { position: relative; height: 120px; margin-top: 8px; }
+.curve-band { position: absolute; top: 0; bottom: 0; background: linear-gradient(90deg, rgba(139,92,246,0.15), rgba(6,182,212,0.15)); border: 1px solid rgba(139,92,246,0.4); border-radius: 6px; }
+.curve-price { position: absolute; top: -6px; bottom: -6px; width: 2px; background: var(--success); box-shadow: 0 0 8px var(--success); }
+.curve-price::after { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 10px; height: 10px; border-radius: 50%; background: var(--success); }
+.curve-axis { display: flex; justify-content: space-between; font-size: 0.7em; color: var(--text-dim); font-family: var(--font-mono); margin-top: 4px; }
+
+/* Fee bar */
+.fee-bar { height: 10px; background: var(--card-2); border-radius: 6px; overflow: hidden; margin-top: 8px; }
+.fee-bar .fill { height: 100%; border-radius: 6px; background: linear-gradient(90deg, var(--accent), var(--success)); transition: width .5s; }
+
+/* Tier toggle */
+.tier-toggle { display: flex; gap: 4px; background: var(--card-2); border-radius: 10px; padding: 4px; }
+.tier-toggle button { flex: 1; padding: 8px 12px; border: none; background: transparent; color: var(--text-dim); border-radius: 8px; cursor: pointer; font-size: 0.8em; font-weight: 600; transition: all .2s; }
+.tier-toggle button.active { background: var(--accent); color: #fff; }
+
+/* Countdown */
+.countdown { font-family: var(--font-mono); font-size: 1.4em; font-weight: 700; color: var(--warn); }
+
+/* Footer */
+footer { border-top: 1px solid var(--border); padding: 24px 0; text-align: center; color: var(--text-dim); font-size: 0.8em; position: relative; z-index: 1; }
+
+/* Responsive */
+@media (max-width: 900px) {
+  .span-3, .span-4, .span-5, .span-6, .span-7, .span-8 { grid-column: span 12; }
+  .nav-links { display: none; }
+}
+@media (max-width: 600px) {
+  .card { padding: 16px; }
+  .card .big { font-size: 1.4em; }
+}
+</style>
+</head>
+<body>
+<div class="mesh"></div>
+
+<nav>
+  <div class="nav-inner">
+    <div class="brand">
+      <div class="logo">🛡️</div>
+      <div>The Steward <span class="sub">Agentic Treasury</span></div>
+    </div>
+    <div class="nav-links">
+      <a href="#" class="active">Treasury</a>
+      <a href="#">Cookbook</a>
+      <a href="#">Travel</a>
+      <a href="#">Meta Ray-Ban</a>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+  <!-- Hero -->
+  <div class="hero">
+    <h1>The Steward <span class="grad">Command Center</span></h1>
+    <div class="sub">Live on-chain position · Autonomous rebalancing · Honest numbers</div>
+    <div class="status-pill in" id="statusPill"><span class="dot"></span><span id="statusText">Loading…</span></div>
+  </div>
+
+  <!-- Tier toggle -->
+  <div style="display:flex; justify-content:flex-end; margin-bottom:4px;">
+    <div class="tier-toggle" id="tierToggle">
+      <button data-tier="operator" class="active">Operator (full autonomy)</button>
+      <button data-tier="user">User (recommend + confirm)</button>
+    </div>
+  </div>
+
+  <div class="grid">
+    <!-- Position card -->
+    <div class="card span-4">
+      <h3>Position</h3>
+      <div class="big" id="posRead">—</div>
+      <div class="row"><span class="k">Shape</span><span class="v" id="posShape">—</span></div>
+      <div class="row"><span class="k">Bins</span><span class="v" id="posBins">—</span></div>
+      <div class="row"><span class="k">Range</span><span class="v" id="posRange">—</span></div>
+      <div class="row"><span class="k">Live price</span><span class="v" id="posPrice">—</span></div>
+      <div class="row"><span class="k">Chain</span><span class="v" id="posChain">Avalanche</span></div>
+    </div>
+
+    <!-- Curve viz -->
+    <div class="card span-8">
+      <h3>Curve Shape</h3>
+      <div class="curve-wrap" id="curveWrap">
+        <div class="curve-band" id="curveBand" style="left:0%; right:0%;"></div>
+        <div class="curve-price" id="curvePrice" style="left:50%;"></div>
+      </div>
+      <div class="curve-axis"><span id="axisLow">—</span><span id="axisMid">—</span><span id="axisHigh">—</span></div>
+    </div>
+
+    <!-- Fee efficiency -->
+    <div class="card span-4">
+      <h3>Fee Efficiency</h3>
+      <div class="big" id="feeEff">—</div>
+      <div class="fee-bar"><div class="fill" id="feeFill" style="width:0%"></div></div>
+      <div class="label" id="feeLabel" style="margin-top:8px;">—</div>
+    </div>
+
+    <!-- Yield vs staking vs hodl -->
+    <div class="card span-4">
+      <h3>Yield vs Staking vs HODL</h3>
+      <div class="row"><span class="k">LP (in-range)</span><span class="v" id="yLP">—</span></div>
+      <div class="row"><span class="k">Staking (5.2%)</span><span class="v" id="yStake">—</span></div>
+      <div class="row"><span class="k">HODL 24h</span><span class="v" id="yHodl">—</span></div>
+      <div class="row"><span class="k">Verdict</span><span class="v" id="yVerdict">—</span></div>
+    </div>
+
+    <!-- Market context -->
+    <div class="card span-4">
+      <h3>Market Context</h3>
+      <div class="row"><span class="k">AVAX price</span><span class="v" id="mPrice">—</span></div>
+      <div class="row"><span class="k">24h change</span><span class="v" id="mChg">—</span></div>
+      <div class="row"><span class="k">Volume 24h</span><span class="v" id="mVol">—</span></div>
+      <div class="row"><span class="k">Liquidity</span><span class="v" id="mLiq">—</span></div>
+    </div>
+
+    <!-- CPI countdown -->
+    <div class="card span-12">
+      <h3>Next Macro Event — CPI</h3>
+      <div class="countdown" id="cpiCountdown">—</div>
+      <div class="label" style="margin-top:8px;">CPI releases Wed Aug 12, 8:30 AM ET · Bid-Ask at 7:45 AM ET · Curve back Aug 13</div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  GenTech Labs · The Steward Agentic Treasury · Live on-chain data · <span id="footTime">—</span>
+</footer>
+
+<script>
+const PAIR = "0x864d4e5ee7318e97483db7eb0912e09f161516ea";
+const CHAIN = "avalanche";
+const POS_VAL = 43.0; // measured deployed capital (Aug 11 2026)
+const STAKING_APR = 5.2;
+const CPI_ET = new Date("2026-08-12T08:30:00-04:00");
+
+let tier = "operator";
+
+// Tier toggle
+document.getElementById("tierToggle").addEventListener("click", (e) => {
+  const btn = e.target.closest("button");
+  if (!btn) return;
+  tier = btn.dataset.tier;
+  document.querySelectorAll("#tierToggle button").forEach(b => b.classList.remove("active"));
+  btn.classList.add("active");
+  renderTier();
+});
+
+function renderTier() {
+  const pill = document.getElementById("statusPill");
+  const statusText = document.getElementById("statusText");
+  if (tier === "operator") {
+    pill.className = "status-pill in";
+    statusText.textContent = "Full autonomy — agent rebalances on its own";
+  } else {
+    pill.className = "status-pill in";
+    statusText.textContent = "Recommend + confirm — you approve every move";
+  }
+}
+
+// Fetch live pool data from DexScreener (public, no key)
+async function fetchPool() {
+  try {
+    const r = await fetch(`https://api.dexscreener.com/latest/dex/pairs/${CHAIN}/${PAIR}`);
+    const d = await r.json();
+    const p = d.pairs && d.pairs[0];
+    if (!p) return null;
+    return {
+      price: parseFloat(p.priceUsd),
+      chg24h: parseFloat(p.priceChange?.h24 || 0),
+      vol24h: parseFloat(p.volume?.h24 || 0),
+      liquidity: parseFloat(p.liquidity?.usd || 0)
+    };
+  } catch (e) { return null; }
+}
+
+// Fetch position state from the heartbeat data file (updated by cron)
+async function fetchPosition() {
+  try {
+    const r = await fetch("steward-state.json", { cache: "no-store" });
+    const d = await r.json();
+    return d;
+  } catch (e) { return null; }
+}
+
+function fmtUsd(n) { return "$" + (n || 0).toLocaleString(undefined, {maximumFractionDigits: 2}); }
+function fmtM(n) { return "$" + ((n||0)/1e6).toFixed(1) + "M"; }
+
+function render(data) {
+  const pos = data?.position || {};
+  const pool = data?.pool || {};
+  const inRange = pos.inRange;
+
+  // Status
+  const pill = document.getElementById("statusPill");
+  pill.className = "status-pill " + (inRange ? "in" : "out");
+  document.getElementById("statusText").textContent = inRange
+    ? "IN range — earning fees" : "OUT of range — rebalancing";
+
+  // Position
+  document.getElementById("posRead").textContent = pos.read || "—";
+  document.getElementById("posShape").textContent = pos.shape || "curve";
+  document.getElementById("posBins").textContent = pos.bins || "—";
+  document.getElementById("posRange").textContent = pos.rangeLow && pos.rangeHigh
+    ? `$${pos.rangeLow}–$${pos.rangeHigh}` : "—";
+  document.getElementById("posPrice").textContent = pool.price ? "$" + pool.price.toFixed(4) : "—";
+
+  // Curve viz
+  if (pos.rangeLow && pos.rangeHigh && pool.price) {
+    const lo = pos.rangeLow, hi = pos.rangeHigh, pr = pool.price;
+    const span = hi - lo;
+    const bandLeft = Math.max(0, (lo - (pr - span)) / (2*span) * 100);
+    const bandRight = 100 - Math.max(0, ((pr + span) - hi) / (2*span) * 100);
+    document.getElementById("curveBand").style.left = bandLeft + "%";
+    document.getElementById("curveBand").style.right = (100 - bandRight) + "%";
+    const pricePct = ((pr - (pr - span)) / (2*span)) * 100;
+    document.getElementById("curvePrice").style.left = Math.min(100, Math.max(0, pricePct)) + "%";
+    document.getElementById("axisLow").textContent = "$" + lo.toFixed(3);
+    document.getElementById("axisMid").textContent = "$" + pr.toFixed(3);
+    document.getElementById("axisHigh").textContent = "$" + hi.toFixed(3);
+  }
+
+  // Fee efficiency
+  const eff = inRange ? 100 : 0;
+  document.getElementById("feeEff").textContent = eff + "%";
+  document.getElementById("feeFill").style.width = eff + "%";
+  document.getElementById("feeLabel").textContent = inRange ? "Earning fees in range" : "Not earning — OUT of range";
+
+  // Yield vs staking vs hodl
+  const lpDaily = POS_VAL * 0.005;
+  const stakeDaily = POS_VAL * STAKING_APR / 100 / 365;
+  document.getElementById("yLP").textContent = "~$" + lpDaily.toFixed(2) + "/day";
+  document.getElementById("yStake").textContent = "~$" + stakeDaily.toFixed(2) + "/day";
+  const chg = pool.chg24h || 0;
+  document.getElementById("yHodl").textContent = (chg >= 0 ? "+" : "") + chg.toFixed(1) + "% 24h";
+  document.getElementById("yVerdict").textContent = inRange ? "LP farming the chop" : "LP OUT — not earning";
+
+  // Market
+  document.getElementById("mPrice").textContent = pool.price ? "$" + pool.price.toFixed(2) : "—";
+  document.getElementById("mChg").textContent = pool.chg24h != null ? (pool.chg24h>=0?"+":"") + pool.chg24h.toFixed(1) + "%" : "—";
+  document.getElementById("mVol").textContent = pool.vol24h ? fmtM(pool.vol24h) : "—";
+  document.getElementById("mLiq").textContent = pool.liquidity ? fmtM(pool.liquidity) : "—";
+
+  renderTier();
+}
+
+// CPI countdown
+function tickCountdown() {
+  const now = new Date();
+  const diff = CPI_ET - now;
+  const el = document.getElementById("cpiCountdown");
+  if (diff <= 0) { el.textContent = "CPI released — watch the move"; return; }
+  const d = Math.floor(diff / 86400000);
+  const h = Math.floor((diff % 86400000) / 3600000);
+  const m = Math.floor((diff % 3600000) / 60000);
+  const s = Math.floor((diff % 60000) / 1000);
+  el.textContent = (d>0? d+"d ":"") + h + "h " + m + "m " + s + "s";
+}
+
+async function refresh() {
+  const [pool, pos] = await Promise.all([fetchPool(), fetchPosition()]);
+  // pos is the full state {updated, position, pool}; extract the position object
+  render({ pool, position: pos?.position || pos });
+  document.getElementById("footTime").textContent = new Date().toLocaleString();
+}
+
+// Initial + refresh every 30s
+refresh();
+setInterval(refresh, 30000);
+setInterval(tickCountdown, 1000);
+tickCountdown();
+</script>
+</body>
+</html>
