@@ -241,15 +241,101 @@ def build_payment_required(service_name: str, price_usd: float) -> dict:
 
 
 def payment_required_response(service_name: str, price_usd: float) -> Response:
-    """Return HTTP 402 with PAYMENT-REQUIRED header and body"""
+    """Return HTTP 402 with PAYMENT-REQUIRED header and body.
+
+    Dual-rail: also emits a `WWW-Authenticate: Payment` (MPP) challenge so
+    MPP clients (IETF draft-httpauth-payment-00) can settle the same endpoint.
+    """
     payload = build_payment_required(service_name, price_usd)
     payload_b64 = base64.b64encode(json.dumps(payload).encode()).decode()
+    # MPP challenge — payment-method agnostic. We advertise the EVM method
+    # (settles via our existing USDC rails). intent=charge for pay-per-call.
+    mpp_challenge = (
+        'Payment id="gentech-x402", method="evm", '
+        f'intent="charge", amount="{price_usd}", '
+        f'currency="USDC", description="GenTech Labs x402 - {service_name}"'
+    )
     return Response(
         status_code=402,
         content=json.dumps(payload),
         media_type="application/json",
-        headers={"PAYMENT-REQUIRED": payload_b64, "Access-Control-Allow-Origin": "*"},
+        headers={
+            "PAYMENT-REQUIRED": payload_b64,
+            "WWW-Authenticate": mpp_challenge,
+            "Access-Control-Allow-Origin": "*",
+        },
     )
+
+
+def extract_mpp_credential(request: Request) -> dict | None:
+    """Extract an MPP credential from `Authorization: Payment <credential>`.
+
+    MPP (Machine Payments Protocol) uses the HTTP `Payment` auth scheme:
+    `Authorization: Payment <base64-json-credential>`. Returns the parsed
+    credential dict, or None if the header is absent / not an MPP credential.
+    """
+    auth = request.headers.get("Authorization", "")
+    if not auth.lower().startswith("payment "):
+        return None
+    raw = auth.split(" ", 1)[1].strip()
+    if not raw:
+        return None
+    try:
+        cred = json.loads(base64.b64decode(raw).decode())
+    except (ValueError, json.JSONDecodeError):
+        return None
+    if not isinstance(cred, dict):
+        return None
+    cred["scheme"] = "Payment"
+    cred["credential"] = raw
+    return cred
+
+
+def verify_mpp_simulation(credential_str: str, expected_price: float) -> tuple[bool, str]:
+    """Verify an MPP credential using the local HMAC secret (simulation mode).
+
+    Mirrors verify_proof_simulation: HMAC(amount:recipient:nonce:validAfter:
+    validBefore, GATEWAY_SECRET). MPP is payment-method agnostic; we accept
+    the EVM method (settles via our USDC rails). This is the dev/simulation
+    path — production MPP settlement would go through a facilitator.
+    """
+    secret = os.getenv("GATEWAY_SECRET", "dev-secret-change-in-production")
+    try:
+        cred = json.loads(credential_str)
+    except json.JSONDecodeError:
+        return False, "credential is not valid JSON"
+
+    method = cred.get("method", "")
+    if method != "evm":
+        return False, f"unsupported MPP method {method!r} (only 'evm' supported)"
+
+    amount = str(cred.get("amount", "0"))
+    recipient = cred.get("recipient", "")
+    nonce = str(cred.get("nonce", ""))
+    valid_after = int(cred.get("validAfter", 0) or 0)
+    valid_before = int(cred.get("validBefore", 0) or 0)
+    signature = cred.get("signature", "")
+
+    if not is_network_accepted(cred.get("network")):
+        return False, f"network {cred.get('network')!r} not accepted"
+
+    now = int(time.time())
+    if valid_after and now < valid_after:
+        return False, "not yet valid"
+    if valid_before and now > valid_before:
+        return False, "expired"
+
+    if Decimal(amount) < Decimal(str(int(expected_price * 1000000))):
+        return False, "amount below required price"
+
+    expected = hmac.new(
+        secret.encode(),
+        f"{amount}:{recipient}:{nonce}:{valid_after}:{valid_before}".encode(),
+        hashlib.sha256,
+    ).hexdigest()
+    if not hmac.compare_digest(expected, signature):
+        return False, "invalid signature"
+    return True, "verified (mpp simulation)"
 
 
 def extract_proof(request: Request) -> str | None:
@@ -754,10 +840,30 @@ async def paid_endpoint(service: str, path: str, request: Request):
 
     price = float(service_config.get("price_usd", 0.01)) if service_config else 0.01
     proof = extract_proof(request)
+    mpp_cred = extract_mpp_credential(request)
 
-    # No proof → return 402 with payment requirements
-    if not proof:
+    # No proof → return 402 with payment requirements (dual-rail: x402 + MPP)
+    if not proof and not mpp_cred:
         return payment_required_response(service_name, price)
+
+    # MPP credential present → verify via the MPP rail (simulation for now).
+    # MPP is payment-method agnostic; we accept the EVM method which settles
+    # via our existing USDC rails. Production MPP settlement would go through
+    # a facilitator (PayAI etc.) — simulation covers the dev/ARC flow.
+    if mpp_cred and not proof:
+        valid, reason = verify_mpp_simulation(
+            json.dumps({k: v for k, v in mpp_cred.items() if k not in ("scheme", "credential")}),
+            price,
+        )
+        if not valid:
+            return Response(
+                status_code=402,
+                content=json.dumps({"error": "mpp_credential_invalid", "reason": reason}),
+                media_type="application/json",
+                headers={"Access-Control-Allow-Origin": "*"},
+            )
+        # MPP settled — route to backend (same path as x402 proof)
+        return await _route_to_backend(service_key, path, request, proof or mpp_cred.get("credential", ""))
 
     # Verify the proof — route by the proof's settlement network.
     # - Algorand/other non-EVM rails → GoPlausible facilitator (challenge path)
@@ -804,10 +910,20 @@ async def paid_endpoint(service: str, path: str, request: Request):
         )
 
     # Route to backend service
+    return await _route_to_backend(service_key, path, request, proof or "")
+
+
+async def _route_to_backend(service_key: str, path: str, request: Request, payment_token: str):
+    """Proxy a paid request to the backend service for `service_key`.
+
+    Shared by the x402 proof path and the MPP credential path. `payment_token`
+    is the proof/credential string forwarded to the backend on the standard
+    x402 headers so downstream services can validate the payment themselves.
+    """
     backend = BACKEND_ROUTES.get(service_key)
     if not backend:
         return {"service": service_key, "path": path, "status": "available",
-                "price_usd": price, "paid": True}
+                "paid": True}
 
     # Proxy to backend
     try:
@@ -823,9 +939,9 @@ async def paid_endpoint(service: str, path: str, request: Request):
             params = dict(request.query_params)
             headers = {
                 "X-Real-IP": request.client.host if request.client else "unknown",
-                "X-402-Token": proof or "",
+                "X-402-Token": payment_token,
                 # Backend expects the proof on this header (rugcheck MVP gate)
-                "X-Payment-Proof": proof or "",
+                "X-Payment-Proof": payment_token,
             }
 
             if request.method == "GET":
@@ -843,7 +959,7 @@ async def paid_endpoint(service: str, path: str, request: Request):
             )
 
     except httpx.RequestError as e:
-        return {"error": f"Backend unavailable: {str(e)}", "service": service,
+        return {"error": f"Backend unavailable: {str(e)}", "service": service_key,
                 "status": "degraded"}
 
 
