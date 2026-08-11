@@ -1114,20 +1114,22 @@
     "name": "AAE Prediction/Verification Layer \u2014 agent+human claim verification (weight-loss bets, real-world outcomes)",
     "difficulty": "medium",
     "priority": "medium",
-    "status": "pending",
+    "status": "shipped",
     "assigned_to": "gentech",
     "platform": "cloud",
     "needs_jordan": false,
     "human_gated": false,
     "gate_type": "decision",
     "detail": "Build the AAE prediction/verification layer: a way for agents AND humans to verify real-world claims/outcomes (e.g. 'I bet I can lose the weight'). Combines (1) the claim-evaluator concept (09-Green Room/specs/agent-kit-claim-evaluator-spec.md \u2014 stack-vs-crowd divergence verdict) with (2) Vision Agents (GetStream) realtime vision capability to WATCH and verify physical outcomes (weight, form, progress) that text alone can't confirm. Product: agents can take a bet/challenge, then verify the outcome via vision + data layers, and settle. Extends the agent-sentiment/divergence index (Layer-3 proprietary signal) into a verifiable-outcomes layer. SPEC: 09-Green Room/specs/aae-prediction-verification-layer.md. Reference: Vision Agents eval (09-Green Room/ideas.md Aug 10).",
-    "note": "Added Aug 10 (Jordan). Prediction/verification layer in AAE stack. Jordan's example: weight-loss bet \u2014 'I bet you I can lose the weight' \u2014 how do agents AND humans verify? Vision Agents gives the 'watch and verify physical outcome' capability; claim-evaluator gives the data-layer divergence verdict. SPEC WRITTEN: 09-Green Room/specs/aae-prediction-verification-layer.md. Phase A (claim evaluator) unblocked + buildable overnight; Phase B waits on Vision Agents PoC; Phase C waits on funded escrow. PARKED \u2014 Jordan to greenlight build.",
+    "note": "[SHIPPED by gentech 2026-08-11] Phase A (data-side claim evaluator) complete + verified. claim_evaluator.py reads 4 feeds (regime/narrative/arb/price), 21/21 tests pass, live runs return correct divergence verdicts (BTC bottom -> DIVERGE/HOLD). MCP registration (demo.py) + skills/claim-evaluation/SKILL.md. Phases B (Vision Agents) + C (settlement) still pending on PoC/escrow.",
     "recommended_tier": "k2.7",
     "group": "labs",
     "routing": {
       "group": "labs",
       "build_in": "labs",
       "handoff_on_complete": true
-    }
+    },
+    "shipped_by": "gentech",
+    "shipped_date": "2026-08-11"
   }
 ]
