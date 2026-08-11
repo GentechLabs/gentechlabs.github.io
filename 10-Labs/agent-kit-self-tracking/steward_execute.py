@@ -292,17 +292,17 @@ def step_convert(w3, acct, dry_run: bool, want_usdc: bool = True) -> Dict[str, A
     return send_and_wait(w3, acct, fn, "convert")
 
 
-def step_redeploy(w3, acct, dry_run: bool) -> Dict[str, Any]:
-    """Redeploy a fresh curve on the current active bin (re-center + re-earn)."""
+def step_redeploy(w3, acct, dry_run: bool, shape: str = "curve") -> Dict[str, Any]:
+    """Redeploy a fresh curve (or bid-ask) on the current active bin (re-center + re-earn)."""
     if dry_run:
         # Use the SDK-corrected curve deploy script in dry-run mode
         import subprocess
-        proc = subprocess.run([sys.executable, DEPLOY_SCRIPT, "--spread", "5", "--dry-run"],
+        proc = subprocess.run([sys.executable, DEPLOY_SCRIPT, "--spread", "5", "--shape", shape, "--dry-run"],
                               capture_output=True, text=True, timeout=120)
         return {"ok": proc.returncode == 0, "label": "redeploy", "dry_run": True,
                 "stdout": proc.stdout[-1500:], "stderr": proc.stderr[-500:]}
     import subprocess
-    proc = subprocess.run([sys.executable, DEPLOY_SCRIPT, "--spread", "5", "--execute", "--yes"],
+    proc = subprocess.run([sys.executable, DEPLOY_SCRIPT, "--spread", "5", "--shape", shape, "--execute", "--yes"],
                           capture_output=True, text=True, timeout=180)
     ok = proc.returncode == 0 and "deployed" in proc.stdout.lower()
     return {"ok": ok, "label": "redeploy", "dry_run": False,
@@ -311,7 +311,7 @@ def step_redeploy(w3, acct, dry_run: bool) -> Dict[str, Any]:
 
 # ── Orchestrator ─────────────────────────────────────────────────────────
 
-def run(mode: str = "withdraw", dry_run: bool = True, want_usdc: bool = True) -> Dict[str, Any]:
+def run(mode: str = "withdraw", dry_run: bool = True, want_usdc: bool = True, shape: str = "curve") -> Dict[str, Any]:
     """Run the execution cycle. Returns a receipt with every step's result."""
     receipt = {
         "mode": mode, "dry_run": dry_run, "wallet": STEWARD,
@@ -361,7 +361,7 @@ def run(mode: str = "withdraw", dry_run: bool = True, want_usdc: bool = True) ->
 
     # Step 3: redeploy (re-center) — only for the full rebalance mode
     if mode == "withdraw-redeploy":
-        s3 = step_redeploy(w3, acct, dry_run)
+        s3 = step_redeploy(w3, acct, dry_run, shape=shape)
         receipt["steps"].append(s3)
         if not s3.get("ok"):
             receipt["ok"] = False
@@ -398,6 +398,7 @@ def main() -> int:
     ap.add_argument("--mode", choices=["withdraw", "withdraw-convert", "withdraw-redeploy"],
                     default="withdraw")
     ap.add_argument("--convert-to", choices=["usdc", "wavax"], default="usdc")
+    ap.add_argument("--shape", choices=["curve", "bid-ask"], default="curve")
     ap.add_argument("--dry-run", action="store_true", default=True)
     ap.add_argument("--execute", action="store_true")
     ap.add_argument("--yes", action="store_true")
@@ -406,7 +407,7 @@ def main() -> int:
     dry_run = not args.execute
     want_usdc = args.convert_to == "usdc"
 
-    receipt = run(mode=args.mode, dry_run=dry_run, want_usdc=want_usdc)
+    receipt = run(mode=args.mode, dry_run=dry_run, want_usdc=want_usdc, shape=args.shape)
     print(format_receipt(receipt))
     return 0 if receipt["ok"] else 1
 
