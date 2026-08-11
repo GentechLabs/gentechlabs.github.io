@@ -127,6 +127,18 @@ def gas_ok() -> bool:
         return False
 
 
+def get_position_after() -> str:
+    """Re-read the live position after a rebalance, return a compact read string."""
+    try:
+        pos = read_position()
+        p = next((x for x in pos.get("positions", []) if "error" not in x), None)
+        if p:
+            return p.get("read", "n/a")
+    except Exception:
+        pass
+    return ""
+
+
 # ── Decision ─────────────────────────────────────────────────────────────
 
 def decide(position: Dict[str, Any], regime: Dict[str, str],
@@ -220,6 +232,10 @@ def main() -> int:
     ap.add_argument("--watchdog", action="store_true",
                     help="quiet mode: print ONLY when action-worthy (OUT of range); "
                          "silent otherwise — for a cheap no_agent cron")
+    ap.add_argument("--autonomous", action="store_true",
+                    help="FULL AUTONOMY: detect need, execute the rebalance itself "
+                         "(withdraw-redeploy via steward_execute.py), and report the "
+                         "plan + result. Jordan is alerted AFTER, not asked to confirm.")
     args = ap.parse_args()
 
     regime = read_regime()
@@ -241,6 +257,42 @@ def main() -> int:
                 print(f"   Position: {pos_read}")
             print(f"   To act: python3 {DEPLOY_SCRIPT} --execute --yes")
         # else: silent (no output = no_agent cron sends nothing)
+        return 0
+
+    # ── AUTONOMOUS mode: detect need, execute, report (Jordan alerted AFTER) ──
+    if args.autonomous:
+        if decision["action"] != "rebalance":
+            # Healthy — stay silent (no noise). The heartbeat covers the pulse.
+            return 0
+        p = next((x for x in position.get("positions", []) if "error" not in x), None)
+        pos_read = p.get("read", "") if p else ""
+        print(f"🛡️ STEWARD — AUTONOMOUS REBALANCE")
+        print(f"   ⚠️ OUT of range (fee eff {decision['fee_eff']:.0f}%)")
+        print(f"   Reason: {decision['reason']}")
+        if pos_read:
+            print(f"   Before: {pos_read}")
+        print(f"   Plan: withdraw + redeploy {decision['shape']} on current price")
+        # Execute the full withdraw-redeploy cycle via steward_execute.py
+        import subprocess
+        exec_script = os.path.join(HERE, "steward_execute.py")
+        shape = decision["shape"].lower()
+        proc = subprocess.run(
+            [sys.executable, exec_script, "--mode", "withdraw-redeploy",
+             "--shape", shape, "--execute", "--yes"],
+            capture_output=True, text=True, timeout=300)
+        ok = proc.returncode == 0
+        print(f"   Executed: {'✅' if ok else '❌'}")
+        if proc.stdout:
+            print(f"   {proc.stdout[-1200:]}")
+        if proc.stderr:
+            print(f"   stderr: {proc.stderr[-300:]}")
+        if ok:
+            with open(stamp_file, "w") as f:
+                json.dump({"ts": _now_iso()}, f)
+            # Verify the new on-chain state
+            new_pos = get_position_after()
+            if new_pos:
+                print(f"   ✅ Back at: {new_pos}")
         return 0
 
     print("=" * 52)
