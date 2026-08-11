@@ -110,7 +110,7 @@ def main():
 
     # Redeploy curve
     print("\nRedeploying curve...")
-    deploy = os.path.join(HERE, "deploy_lp_curve.py")
+    deploy = "/root/.hermes/profiles/gentech-treasury/scripts/deploy_lp_curve.py"
     proc = subprocess.run([sys.executable, deploy, "--execute", "--yes"],
                           capture_output=True, text=True, timeout=180)
     print(proc.stdout[-1500:])
