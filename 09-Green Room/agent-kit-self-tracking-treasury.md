@@ -55,4 +55,15 @@ Agent Kit install
 4. Skills: `skills/treasury/self-tracking/SKILL.md` (self-onboarding).
 
 ## Status
-🔵 IDEA — logged, not built. Jordan to greenlight scope/priority.
+🟢 **BUILT — Aug 11, 2026.** Deliverables live in `10-Labs/agent-kit-self-tracking/`:
+- `discover_positions.py` — generalized `discover_positions(chain, wallet)` (reuses
+  the `layer_lp_live()` live-RPC pattern; auto-widens the bin scan to tolerate price
+  drift — verified live against the deployed AVAX/USDC curve).
+- `treasury_config.json` — wallet + chains + optional pools template.
+- `provision.sh` — one-command cron provisioning (validated, dry-run + live).
+- `skills/agent-kit-self-tracking-treasury/SKILL.md` — self-onboarding skill.
+
+Live test (Aug 11): auto-discovered the Steward's 11-bin AVAX/USDC curve, correctly
+flagged it **OUT of range** (AVAX $6.24 vs band $6.42–$6.48) after price drift — the
+exact kind of signal self-tracking should surface. Base/Ethereum wallet-balance layer
+also works. Scope to extend: Meteora DLMM (Solana), Monad/Trader Joe.
