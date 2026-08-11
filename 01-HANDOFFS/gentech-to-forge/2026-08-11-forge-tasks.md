@@ -12,6 +12,13 @@ Items you can work on independently — no Jordan needed.
 **What:** Jordan wants the ORIGINAL NOT THE GHOST cover kept pixel-identical, with Hikari composited in surgically (Photoshop/GIMP). AI image models (FLUX 2) keep reinterpreting the whole scene — this needs real compositing. See 01-HANDOFFS/gentech-to-forge/2026-08-06-not-the-ghost-hikari.md for full brief + asset URLs.
 
 ---
+
+## ℹ️ Not your lane (for reference)
+
+- **#46 ComfyUI — Self-Hosted Brand Asset Pipeline** — desktop/GPU, but **`assigned_to: jordan` + `needs_jordan: True`**. This is **Jordan-gated**, not Forge's. Do NOT pick it up unless Jordan explicitly hands it to you.
+
+---
+
 ## How to use this
 
 1. Pick a **Desktop** item and start working
