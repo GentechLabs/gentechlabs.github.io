@@ -64,10 +64,20 @@ def get_pool():
 def main():
     pos = get_position()
     pool = get_pool()
+    # AAE regime-driven allocation (from regime_classifier ground truth, Aug 11)
+    alloc = {
+        "regime": "RANGE_BOUND",
+        "lp": 40,
+        "staking": 30,
+        "hodl": 15,
+        "lending": 15,
+        "conf": 0.65,
+    }
     state = {
         "updated": datetime.now(timezone(timedelta(hours=-4))).isoformat(),
         "position": pos,
         "pool": pool,
+        "allocation": alloc,
     }
     os.makedirs(os.path.dirname(STATE_FILE), exist_ok=True)
     with open(STATE_FILE, "w") as f:
