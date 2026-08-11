@@ -37,22 +37,6 @@ is an autonomous act, not a manual wallet hop.
 - **Underlying bridge providers:** Across (sub-5s, ~0.06-0.10% LP fee + ~0.02% relayer),
   CCTP (Circle, burns/mints — no third-party relayers), deBridge (flat fee, >$50K).
 
-## ⚠️ Native-gas disclaimer (Jordan, Aug 10, 2026) — SHIP THIS
-**The bridge moves USDC, NOT native gas.** A bridged USDC landing on a chain with 0 native
-gas (AVAX/SOL/ETH) is **stranded** — it cannot pay for the LP entry, swap, or exit tx. This
-was a live-verified gap: the AVAX steward wallet sat at 0.000000 AVAX while USDC was ready
-to bridge.
-
-**Product rule (must show at/ before bridge time):**
-> **"Ensure the destination chain already holds native gas (AVAX/SOL/ETH) to operate."**
-
-**Jordan's operating practice to encode:** keep ~$0.60 native gas buffer on each yield
-rail (e.g. ~$0.60 AVAX on Trader Joe) so the rail can always afford entries and exits.
-**Self-funding loop is the goal:** once a rail is funded with gas + USDC, the treasury's
-yield should be able to top up its own gas going forward — the rail funds itself. Bridge
-adapter should (a) check destination native-gas balance before burning, (b) warn if below
-the ~$0.60 operating floor, and (c) never claim "ready to trade" on a gas-less destination.
-
 ## Real fee data (Across Base→Avalanche route — to verify live)
 See the research below. Target: quote `app.across.to/api/suggested-fees` for
 Base(8453)→Avalanche(43114), USDC→USDC, to get the actual total cost + time.

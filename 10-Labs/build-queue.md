@@ -24,5 +24,3 @@
 | # | Item | Priority | Status | Notes |
 |---|------|----------|--------|-------|
 | 41 | **OpenDexter Marketplace — List x402 Gateway services** | High | Pending | open.dexter.cash/mcp — x402 API marketplace MCP. Registry row 4g verified Aug 3 (endpoint live, tools enumerated, search proven). Jordan wants us listed. Next: find provider-submission flow. Funding path identified: 0x7ebff owner wallet 2.97 USDC; GTA arb wallet signable 0.001 USDC. |
-
-| 42 | **Agent Kit Claim Evaluator — stack-vs-crowd layer** | High | 🅿️ Parked — spec written | Jordan (Aug 10): after manual stack-vs-crowd exercise (Tim Warren bottom-call), make it a BUILT-IN Agent Kit layer. `services/claim_evaluator.py` = MCP tool: `claim_evaluator.evaluate(claim, asset)` → pulls kit's own regime/narrative/arb/price → diffs claim vs layers → verdict (AGREE/DIVERGE/CONFIRMED) + action read (HOLD/ACCUM/DEFENSIVE). Shows the layers so users SEE the stack = demo of our strengths. Productizes the agent-sentiment/divergence (Layer-3). Spec: `09-Green Room/specs/agent-kit-claim-evaluator-spec.md`. Build steps in spec. |
