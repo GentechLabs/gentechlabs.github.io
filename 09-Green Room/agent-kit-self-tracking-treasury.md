@@ -67,7 +67,9 @@ Agent Kit install
   IN-range = hold. 10-min frequency guard. REAL execution guarded (--yes + gas + wallet).
 - `test_steward_rebalance.py` — 10 passing decision tests (shape switch, hold, guard).
 - `skills/agent-kit-self-tracking-treasury/SKILL.md` — self-onboarding skill.
-- Cron `4ec19d462760` — Steward Position Check every 10m (dry-run, flags OUT-of-range).
+- Cron `51bc9900e24d` — **Steward Position Watchdog every 10m** (AAE pattern:
+  cheap `no_agent` script job, silent when healthy, emits actionable OUT-of-range
+  signal via `steward-watchdog.sh`). Replaces the old paused LP Monitor v2 cadence.
 
 Live test (Aug 11): Steward correctly decided **REBALANCE** on the live position —
 regime RANGE_BOUND (CURVE shape), position OUT (fee eff 0%, $6.20 vs band

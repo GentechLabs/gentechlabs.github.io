@@ -217,6 +217,9 @@ def main() -> int:
     ap.add_argument("--execute", action="store_true",
                     help="actually re-center the position (guarded)")
     ap.add_argument("--yes", action="store_true", help="confirm real execution")
+    ap.add_argument("--watchdog", action="store_true",
+                    help="quiet mode: print ONLY when action-worthy (OUT of range); "
+                         "silent otherwise — for a cheap no_agent cron")
     args = ap.parse_args()
 
     regime = read_regime()
@@ -226,6 +229,19 @@ def main() -> int:
     stamp_file = os.path.join(HERE, ".steward-last-rebalance.json")
     last_ts = (load_json(stamp_file, {}) or {}).get("ts")
     decision = decide(position, regime, last_ts)
+
+    # ── WATCHDOG mode: emit only on a real signal (silent watchdog cron) ──
+    if args.watchdog:
+        if decision["action"] == "rebalance":
+            p = next((x for x in position.get("positions", []) if "error" not in x), None)
+            pos_read = p.get("read", "") if p else ""
+            print(f"🛡️ Steward: {decision['action'].upper()} — {decision['shape']}")
+            print(f"   {decision['reason']} (fee eff {decision['fee_eff']:.0f}%)")
+            if pos_read:
+                print(f"   Position: {pos_read}")
+            print(f"   To act: python3 {DEPLOY_SCRIPT} --spread 5 --execute --yes")
+        # else: silent (no output = no_agent cron sends nothing)
+        return 0
 
     print("=" * 52)
     print("🛡️  STEWARD — POSITION DECISION")
