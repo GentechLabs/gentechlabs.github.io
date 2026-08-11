@@ -80,3 +80,19 @@ All 21 Gentech cloud items are decision-gated (need a yes/no or config value fro
 - [ ] **#29** Gemini XPRIZE — confirm entry + model
 
 **Note:** I'm working the pure-Gentech stuff autonomously (Super Arcade Tennis verified live, GitHub scheduler running). Everything above is genuinely waiting on your call.
+
+## 🚀 Accelerators & Grants — FUNDING QUEUE (added Aug 11, on Jordan's break)
+
+Goal: land one funding shot to go full-time off Amazon. SPC already in the pipe; adding two more for three total shots. Nothing to lose.
+
+| Program | Status | Decision | In-person | $ |
+|---------|--------|----------|-----------|---|
+| **SPC Founder Fellowship** | ⏳ Submitted Aug 1 | 2-4 wks (late Aug/early Sep) | NY-based | fellowship |
+| **Alliance DAO** | ❌ Not applied | ~1 wk after apply | 3 wks NYC (2 onboarding + Demo Day) | $500K @ $5M post |
+| **Subspace Grant** | ❌ Not applied | milestone-based | Remote | AI3/stablecoin/USD |
+
+- [ ] **Alliance DAO** — DRAFT APPLICATION (top priority, year-round, no deadline). Use real traction: live x402 gateway (api.gentechlabs.net, 7 chains, 15+ endpoints), real settlement, ERC-8004 #1770, self-evolution harness. ~20 min form. Submit early (reviews year-round, 1 wk decision). **Jordan confirms NYC commitment (3 wks) before submit.**
+- [ ] **Subspace Foundation Grant** — DRAFT + SUBMIT (easy win, remote). Category: AI-Powered dApp (on-chain agents for finance) or Integration (bridges/SDKs). Form at subspace.foundation/grants-program.
+- [ ] **Fetch.ai Accelerator** — evaluate only if we want to build on Fetch.ai stack (detour from x402 lane). Lower priority.
+
+**Status:** Jordan on break (Aug 11) — play the game, enjoy off day. Resume accelerator/grant drafting after. Do NOT auto-submit; needs Jordan's go + NYC commitment for Alliance.
