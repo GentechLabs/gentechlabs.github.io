@@ -354,8 +354,12 @@ def run(mode: str = "withdraw", dry_run: bool = True, want_usdc: bool = True, sh
         receipt["error"] = s1.get("error", "withdraw failed")
         return receipt
 
-    # Step 2: convert (unless mode is plain withdraw)
-    if mode in ("withdraw-convert", "withdraw-redeploy"):
+    # Step 2: convert — ONLY for withdraw-convert. For withdraw-redeploy we
+    # SKIP the convert: the withdraw already returns both WAVAX + USDC in the
+    # LP's natural ratio, and the redeploy needs BOTH tokens. Converting all
+    # to USDC leaves 0 WAVAX → addLiquidity reverts (the bug that stranded
+    # the position Aug 11 2026).
+    if mode == "withdraw-convert":
         s2 = step_convert(w3, acct, dry_run, want_usdc=want_usdc)
         receipt["steps"].append(s2)
 

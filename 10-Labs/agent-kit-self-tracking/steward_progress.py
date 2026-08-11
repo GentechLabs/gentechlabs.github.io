@@ -39,14 +39,16 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 BASELINE_FILE = os.path.join(HERE, ".steward-wallet-baseline.json")
 
 # Milestone tiers — D5 daily-fee ranking (Jordan's system, canonical ladder
-# from AAE DeFi Milestone: Scout→Raider→Warlord→Sovereign)
+# from AAE DeFi Milestone: Untested→Scout→Raider→Warlord→Sovereign)
+# Tier 0 = brand-new / untested (screams "new"), then the earned ranks.
 MILESTONES = [
+    {"tier": 0, "label": "Untested", "daily_fees": 0,   "unlocks": "First deposit — prove the engine"},
     {"tier": 1, "label": "Scout",    "daily_fees": 5,   "unlocks": "Entry strategies (CURVE)"},
     {"tier": 2, "label": "Raider",   "daily_fees": 20,  "unlocks": "SPOT + BIDIRECTIONAL shapes"},
     {"tier": 3, "label": "Warlord",  "daily_fees": 55,  "unlocks": "Multi-pool positions"},
     {"tier": 4, "label": "Sovereign","daily_fees": 200, "unlocks": "Custom strategy creation + mentorship"},
 ]
-TIER_ICONS = {1: "🔭", 2: "⚔️", 3: "👑", 4: "🏰"}
+TIER_ICONS = {0: "🌱", 1: "🔭", 2: "⚔️", 3: "👑", 4: "🏰"}
 
 # Deposit detection
 DEPOSIT_FLOOR_USD = 1.0        # ignore deltas under $1 (noise)
@@ -145,7 +147,7 @@ def rank_and_progress(daily_fees: float) -> Dict[str, Any]:
             break
 
     if current_tier is None:
-        label = "Unranked"
+        label = "Untested"
         progress = round((daily_fees / MILESTONES[0]["daily_fees"]) * 100, 0) if MILESTONES[0]["daily_fees"] else 0
         rank_icon = "🌱"
     elif next_tier is None:
