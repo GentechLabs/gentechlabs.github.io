@@ -184,7 +184,7 @@ def execute_rebalance(dry_run: bool = True) -> Dict[str, Any]:
     if dry_run:
         return {
             "executed": False, "dry_run": True,
-            "command": f"python3 {DEPLOY_SCRIPT} --spread 5 --execute --yes",
+            "command": f"python3 {DEPLOY_SCRIPT} --execute --yes",
         }
 
     # REAL execution guards — refuse to fake success.
@@ -198,7 +198,7 @@ def execute_rebalance(dry_run: bool = True) -> Dict[str, Any]:
     import subprocess
     try:
         proc = subprocess.run(
-            [sys.executable, DEPLOY_SCRIPT, "--spread", "5", "--execute", "--yes"],
+            [sys.executable, DEPLOY_SCRIPT, "--execute", "--yes"],
             capture_output=True, text=True, timeout=180)
         ok = proc.returncode == 0 and "deployed" in proc.stdout.lower()
         return {
@@ -239,7 +239,7 @@ def main() -> int:
             print(f"   {decision['reason']} (fee eff {decision['fee_eff']:.0f}%)")
             if pos_read:
                 print(f"   Position: {pos_read}")
-            print(f"   To act: python3 {DEPLOY_SCRIPT} --spread 5 --execute --yes")
+            print(f"   To act: python3 {DEPLOY_SCRIPT} --execute --yes")
         # else: silent (no output = no_agent cron sends nothing)
         return 0
 
