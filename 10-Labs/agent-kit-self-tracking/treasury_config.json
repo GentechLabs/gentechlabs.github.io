@@ -1,0 +1,20 @@
+{
+  "_comment": "Agent Kit — Self-Tracking Treasury config. Set your wallet(s) + chains. Auto-discovery probes each chain and reports every deployed LP/position with ZERO manual wiring. Optional 'pools' narrow the probe (faster); omit to auto-discover.",
+  "wallet": "0x572ABd6461BED2258615E6b99c585Ab7c5d05037",
+  "chains": ["avalanche", "base"],
+  "pools": {
+    "avalanche": [
+      {
+        "name": "LFJ AVAX/USDC V2.2",
+        "type": "lfj_v22",
+        "address": "0x864d4e5ee7318e97483db7eb0912e09f161516ea",
+        "tokenX": "WAVAX",
+        "tokenY": "USDC",
+        "bin_step": 10
+      }
+    ],
+    "base": []
+  },
+  "price_source": "coingecko",
+  "output": "self-tracking-report.json"
+}
