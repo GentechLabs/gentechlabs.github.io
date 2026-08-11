@@ -62,12 +62,18 @@ def _now_iso() -> str:
     return datetime.now(timezone.utc).isoformat()
 
 
-# ── ABI (removeLiquidity + balanceOf + swap) ─────────────────────────────
+# ── ABI (removeLiquidity + swap) — LFJ V2.2 router signatures ─────────────
 ROUTER_ABI = [{
     "inputs": [
+        {"internalType": "address", "name": "tokenX", "type": "address"},
+        {"internalType": "address", "name": "tokenY", "type": "address"},
+        {"internalType": "uint16", "name": "binStep", "type": "uint16"},
+        {"internalType": "uint256", "name": "amountXMin", "type": "uint256"},
+        {"internalType": "uint256", "name": "amountYMin", "type": "uint256"},
         {"internalType": "uint256[]", "name": "ids", "type": "uint256[]"},
         {"internalType": "uint256[]", "name": "amounts", "type": "uint256[]"},
         {"internalType": "address", "name": "to", "type": "address"},
+        {"internalType": "uint256", "name": "deadline", "type": "uint256"},
     ],
     "name": "removeLiquidity",
     "outputs": [
@@ -78,19 +84,24 @@ ROUTER_ABI = [{
     "type": "function",
 }, {
     "inputs": [
-        {"internalType": "bool", "name": "swapForY", "type": "bool"},
         {"internalType": "uint256", "name": "amountIn", "type": "uint256"},
-        {"internalType": "uint256", "name": "minAmountOut", "type": "uint256"},
+        {"internalType": "uint256", "name": "amountOutMin", "type": "uint256"},
+        {"components": [
+            {"internalType": "uint256[]", "name": "pairBinSteps", "type": "uint256[]"},
+            {"internalType": "uint8[]", "name": "versions", "type": "uint8[]"},
+            {"internalType": "address[]", "name": "tokenPath", "type": "address[]"},
+        ], "internalType": "struct ILBRouter.Path", "name": "path", "type": "tuple"},
         {"internalType": "address", "name": "to", "type": "address"},
+        {"internalType": "uint256", "name": "deadline", "type": "uint256"},
     ],
-    "name": "swap",
-    "outputs": [
-        {"internalType": "uint256", "name": "amountInUsed", "type": "uint256"},
-        {"internalType": "uint256", "name": "amountOut", "type": "uint256"},
-    ],
+    "name": "swapExactTokensForTokens",
+    "outputs": [{"internalType": "uint256", "name": "amountOut", "type": "uint256"}],
     "stateMutability": "nonpayable",
     "type": "function",
 }]
+
+# LFJ V2.2 router Version enum: V2_2 = 3 (verified by live simulation)
+VERSION_V22 = 3
 
 ERC20_ABI = [{
     "constant": True, "inputs": [{"name": "a", "type": "address"}],
@@ -184,13 +195,14 @@ def _avax_usd() -> float:
 
 
 def step_approve(w3, acct, dry_run: bool) -> Dict[str, Any]:
-    """setApprovalForAll(router, true) on the LB pair — REQUIRED before
-    removeLiquidity can burn the LB tokens (Trader Joe V2 uses ERC1155-style
-    approval, not ERC20 approve). Idempotent + cheap. Selector 0xa22cb465."""
+    """approveForAll(router, true) on the LB pair — REQUIRED before
+    removeLiquidity can burn the LB tokens. LFJ V2.2 LBToken uses
+    approveForAll(address,bool) = 0xe584b654 (NOT the ERC1155 setApprovalForAll
+    selector 0xa22cb465, which reverts on V2.2 pairs). Idempotent + cheap."""
     if dry_run:
         return {"ok": True, "label": "approve", "dry_run": True,
                 "note": "approval would be set (idempotent)"}
-    # Check first — skip if already approved
+    # Check first — skip if already approved (isApprovedForAll = 0xe985e9c5)
     data = "0xe985e9c5" + acct.address[2:].lower().zfill(64) + ROUTER[2:].lower().zfill(64)
     try:
         approved = int.from_bytes(w3.eth.call({"to": PAIR, "data": data}), "big")
@@ -198,8 +210,8 @@ def step_approve(w3, acct, dry_run: bool) -> Dict[str, Any]:
             return {"ok": True, "label": "approve", "note": "already approved"}
     except Exception:
         pass
-    # setApprovalForAll(address operator, bool approved) = 0xa22cb465
-    set_sel = "0xa22cb465" + ROUTER[2:].lower().zfill(64) + ("0" * 63 + "1")
+    # approveForAll(address spender, bool approved) = 0xe584b654
+    set_sel = "0xe584b654" + ROUTER[2:].lower().zfill(64) + ("0" * 63 + "1")
     tx = {
         "to": PAIR, "data": set_sel,
         "from": acct.address,
@@ -229,7 +241,9 @@ def step_withdraw(w3, acct, dry_run: bool) -> Dict[str, Any]:
         b = int.from_bytes(w3.eth.call({"to": PAIR, "data": bal_sel + acct.address[2:].lower().zfill(64) + hex(bin_id)[2:].zfill(64)}), "big")
         amounts.append(b)
 
-    fn = router.functions.removeLiquidity(bins, amounts, acct.address)
+    fn = router.functions.removeLiquidity(
+        WAVAX, USDC, BIN_STEP, 0, 0, bins, amounts, acct.address,
+        int(time.time()) + 600)
     if dry_run:
         try:
             x, y = fn.call({"from": acct.address})
@@ -251,21 +265,23 @@ def step_withdraw(w3, acct, dry_run: bool) -> Dict[str, Any]:
 
 
 def step_convert(w3, acct, dry_run: bool, want_usdc: bool = True) -> Dict[str, Any]:
-    """Swap proceeds toward USDC (or WAVAX). Uses the V2.2 router swap."""
+    """Swap proceeds toward USDC (or WAVAX). Uses the V2.2 router
+    swapExactTokensForTokens with a Path struct (Version.V2_2 = 3)."""
     router = w3.eth.contract(address=ROUTER, abi=ROUTER_ABI)
     if want_usdc:
         in_token, out_token = WAVAX, USDC
-        swap_for_y = True
     else:
         in_token, out_token = USDC, WAVAX
-        swap_for_y = False
     amount_in = bal(w3, in_token, acct.address)
     if amount_in <= 0:
         return {"ok": True, "label": "convert", "note": "no proceeds to convert", "amount_in": 0}
-    fn = router.functions.swap(swap_for_y, amount_in, 0, acct.address)
+    path = {"pairBinSteps": [BIN_STEP], "versions": [VERSION_V22],
+            "tokenPath": [in_token, out_token]}
+    fn = router.functions.swapExactTokensForTokens(
+        amount_in, 0, path, acct.address, int(time.time()) + 600)
     if dry_run:
         try:
-            _, out = fn.call({"from": acct.address})
+            out = fn.call({"from": acct.address})
             return {"ok": True, "label": "convert", "dry_run": True,
                     "in_token": "WAVAX" if want_usdc else "USDC",
                     "out_token": "USDC" if want_usdc else "WAVAX",
