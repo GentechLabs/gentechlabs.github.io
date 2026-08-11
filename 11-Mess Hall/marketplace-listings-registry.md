@@ -58,7 +58,7 @@ The real, working, revenue-capable API surface. **This is the number to use** wh
 
 | 5 | GitHub — Gentech-Labs org | https://github.com/Gentech-Labs | programmable-money-x402, genTech-agent-kit, agent-credit-score (21 repos) | 🟢 PUBLIC + VISIBLE | 2026-08-02 |
 | 6 | GitHub — ProtoJay4789 (personal) | https://github.com/ProtoJay4789 | All repos (kit, portfolio, etc.) | ⚠️ FLAGGED — web 404s despite public; use ORG URLs | 2026-08-02 |
-| 7 | Agentic.Market (Bazaar) | https://agentic.market | Auto-indexed when CDP facilitator settles a payment | ⏳ NOT INDEXED YET — needs first on-chain settlement | 2026-08-02 |
+| 7 | Agentic.Market (Bazaar) | https://agentic.market | Auto-indexed when CDP facilitator settles a payment | ⏳ SETTLEMENT LANDED Aug 11 — real 0.025 USDC on Base (wallet 0x7ebff, nonce 7). Indexing lags up to 6h; verify after. Was NOT settling before (gateway simulation-overwrite bug, fixed Aug 11). | 2026-08-11 |
 
 ## 🟡 PENDING / WATCHLIST
 
