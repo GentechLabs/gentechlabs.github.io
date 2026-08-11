@@ -24,7 +24,7 @@
 - Plus small BNB + USDC in account.
 
 ## Action items / next steps
-- [x] **Submit tranche 2 (Final Tranche Request)** — Jordan submitted 2026-08-10. Repo used: `github.com/ProtoJay4789/agent-economy-solana` (real Solana MVP). Payout cadence: approvals Mondays, paid Friday same week.
+- [ ] **Decide the MVP for tranche 2** — must be live + have Solana integration (Arc Agentic Treasury already has Solana rails; Agent Warfare/arcade also candidates)
 - [ ] **Document $200 in coding subscriptions** — Jordan-confirmed Aug 7: VPS $43/mo + OpenCode Go $10/mo + Ollama Cloud $20/mo = **$73/mo fixed** (+ Nous ~$5-10 occasional). **3 months ≈ $219** clears $200. Upload 3 months of VPS/OpenCode/Ollama receipts (or 2 months + Nous).
 - [ ] Swap USDG→USDC on Solana if consolidating
 - [ ] Allocate grant: Agentic Treasury live test (~$26) → KeeperHub (~$25) → Algorand (~$8) → reserve for the $200 subscription documentation + buffer

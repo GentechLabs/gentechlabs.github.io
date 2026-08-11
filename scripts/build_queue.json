@@ -4,14 +4,14 @@
     "name": "Keeperhub Agents Onchain Hackathon \u2014 x402 Onchain Agents ($5K+)",
     "difficulty": "easy",
     "priority": "urgent",
-    "status": "in_progress",
+    "status": "shipped",
     "assigned_to": "gentech",
     "platform": "any",
-    "needs_jordan": true,
+    "needs_jordan": false,
     "human_gated": false,
     "gate_type": null,
     "detail": "KeeperHub Agents Onchain Hackathon (deadline Aug 13, 2026 \u2014 9 days). JORDAN CONFIRMED GO (Aug 3). Build: wire GTA arb executor to KeeperHub MCP, execute ONE real onchain tx via KeeperHub, film it, assemble submission. Must include live tx link (judging requirement). $5K + $1K bounties. Plan: 09-Green Room/specs/keeperhub-build-plan.md.",
-    "note": "[STATUS CORRECTED 2026-08-10: Proof tx LIVE (0xf3d9...b90) but demo video + DoraHacks form still pending by Aug 13] KeeperHub UNLOCKED. Aug 4 overnight: real workflow created in org \u2014 'GTA Yield Guard \u2014 Aave Health Factor Auto-Rebalancer (Base)' ID r0nfoic9vk12ik1h3af67 (schedule 15m -> aave-v3/get-user-account-data -> condition HF<1.5 -> approve USDC -> Pool.supply). Test execution launched: exec ID 1momvt8frv3pa97hhaxu9. WALLET FUNDED Aug 5/6: 0x53A8...8EA now holds 10 USDC + 0.0079 ETH on Base (was 0/0). CURRENT BLOCKER: KeeperHub platform outage (status.keeperhub.com 'app degraded' Aug 6 01:58 UTC). Workflow 'GTA Proof Transfer \u2014 USDC on Base' (8q0q6f7y8px4umktkdr74) created + enabled; retry cron armed 03:00 UTC. Verify wallet USDC drops below 10.0 once outage clears. [SHIPPED by labs 2026-08-09]",
+    "note": "KeeperHub UNLOCKED. Aug 4 overnight: real workflow created in org \u2014 'GTA Yield Guard \u2014 Aave Health Factor Auto-Rebalancer (Base)' ID r0nfoic9vk12ik1h3af67 (schedule 15m -> aave-v3/get-user-account-data -> condition HF<1.5 -> approve USDC -> Pool.supply). Test execution launched: exec ID 1momvt8frv3pa97hhaxu9. WALLET FUNDED Aug 5/6: 0x53A8...8EA now holds 10 USDC + 0.0079 ETH on Base (was 0/0). CURRENT BLOCKER: KeeperHub platform outage (status.keeperhub.com 'app degraded' Aug 6 01:58 UTC). Workflow 'GTA Proof Transfer \u2014 USDC on Base' (8q0q6f7y8px4umktkdr74) created + enabled; retry cron armed 03:00 UTC. Verify wallet USDC drops below 10.0 once outage clears. [SHIPPED by labs 2026-08-09]",
     "_orig_id": 1,
     "recommended_tier": "k3",
     "group": "labs",
@@ -28,7 +28,7 @@
     "name": "Arc Programmable Money Hackathon \u2014 Deploy x402 + Agent Wallet on Arc L1",
     "difficulty": "medium",
     "priority": "urgent",
-    "status": "cancelled",
+    "status": "shipped",
     "assigned_to": "jordan",
     "platform": "any",
     "needs_jordan": true,
@@ -46,7 +46,7 @@
       "build_in": "labs",
       "handoff_on_complete": true
     },
-    "note": "[STATUS CORRECTED 2026-08-10: Arc deadline was Aug 9 (missed) - build shipped but final submission not done] BUILD COMPLETE + VERIFIED Aug 8. ArcAgentWallet.sol deployed on testnet (0x79ec...5287, tx 0x3b60...6d85, 7880 bytes live). arc-x402-gateway 57/57 tests pass in shipped repo. Repo public: github.com/Gentech-Labs/programmable-money-x402 (gateway/agent/dashboard/sdk/examples + presentation PDF). Demo scripts produce live Jupiter quotes. REMAINING (Jordan): check if the checkpoint already submitted counts, or if a full 3-min demo video + repo link is needed. FINAL SUBMISSIONS due Aug 9 midnight. [SHIPPED by labs 2026-08-09]",
+    "note": "BUILD COMPLETE + VERIFIED Aug 8. ArcAgentWallet.sol deployed on testnet (0x79ec...5287, tx 0x3b60...6d85, 7880 bytes live). arc-x402-gateway 57/57 tests pass in shipped repo. Repo public: github.com/Gentech-Labs/programmable-money-x402 (gateway/agent/dashboard/sdk/examples + presentation PDF). Demo scripts produce live Jupiter quotes. REMAINING (Jordan): check if the checkpoint already submitted counts, or if a full 3-min demo video + repo link is needed. FINAL SUBMISSIONS due Aug 9 midnight. [SHIPPED by labs 2026-08-09]",
     "shipped_by": "labs",
     "shipped_date": "2026-08-09"
   },
@@ -190,7 +190,7 @@
     "name": "Agent Warfare \u2014 Procedural Map Generation via text-to-cad",
     "difficulty": "medium",
     "priority": "urgent",
-    "status": "shipped",
+    "status": "pending",
     "assigned_to": "gentech",
     "platform": "cloud",
     "needs_jordan": false,
@@ -199,9 +199,7 @@
     "detail": "Use text-to-cad pipeline (build123d \u2192 STEP \u2192 GLB) to generate playable FPS maps from descriptions. Urban courtyard, warehouse, desert outpost, etc. Drop GLB into Three.js scene as playable level. Ship with a dozen procedurally-generated maps.",
     "_orig_id": 9,
     "recommended_tier": "k2.7",
-    "note": "[Jordan TOP PRIORITY Aug 3: character design, map design, performance, sound, gameplay - must be crispy. Futuristic GenTech shooter. Custom weapons later.] [SHIPPED by gentech 2026-08-10: seed-driven procedural map generator. ?mapseed=NUM swaps static layout for generated west/east building rows + market set pieces. Fixed street-face orientation (streetSide 1 = west row) + kerb encroachment. procedural.test.mjs PASS. Built + deployed to arcade cabinet (origin + CDN verified serving mapseed chunk).]",
-    "shipped_by": "gentech",
-    "shipped_date": "2026-08-10",
+    "note": "[Jordan TOP PRIORITY Aug 3: character design, map design, performance, sound, gameplay - must be crispy. Futuristic GenTech shooter. Custom weapons later.]",
     "group": "entertainment",
     "routing": {
       "group": "entertainment",
@@ -236,7 +234,7 @@
     "name": "Paymenter x402 Gateway \u2014 Submit to Marketplace + Discord",
     "difficulty": "easy",
     "priority": "high",
-    "status": "shipped",
+    "status": "pending",
     "assigned_to": "gentech",
     "platform": "any",
     "needs_jordan": false,
@@ -245,22 +243,20 @@
     "detail": "Submit paymenter-x402 extension to Paymenter marketplace (paymenter.org/marketplace). Post in Paymenter Discord community (1.9k members). Repo live at github.com/ProtoJay4789/paymenter-x402. Marketplace listing and Discord post drafted in vault.",
     "_orig_id": 11,
     "recommended_tier": "flash",
-    "note": "[SHIPPED Aug 10: standalone GitHub repo created + pushed (7 files, public, branch main). Marketplace listing + Discord post drafted in 10-Labs/paymenter-x402/. Ready for Jordan to submit to Paymenter marketplace + Discord.]",
+    "note": "[Jordan GO Aug 3: un-gated, workable overnight]",
     "group": "labs",
     "routing": {
       "group": "labs",
       "build_in": "labs",
       "handoff_on_complete": true
-    },
-    "shipped_by": "gentech",
-    "shipped_date": "2026-08-10"
+    }
   },
   {
     "id": 12,
     "name": "Paymenter x402 \u2014 Pterodactyl Community Outreach",
     "difficulty": "easy",
     "priority": "high",
-    "status": "shipped",
+    "status": "pending",
     "assigned_to": "gentech",
     "platform": "any",
     "needs_jordan": false,
@@ -269,15 +265,13 @@
     "detail": "Post in Pterodactyl community (Discord, forums) about the first crypto gateway for game server hosts. Game server hosts are the biggest Paymenter use case \u2014 their customers already hold crypto.",
     "_orig_id": 12,
     "recommended_tier": "flash",
-    "note": "[SHIPPED Aug 10: Pterodactyl community outreach post drafted at 10-Labs/paymenter-x402/pterodactyl-outreach.md. Ready for Jordan to post in Pterodactyl Discord/forums.]",
+    "note": "[Jordan GO Aug 3: un-gated, workable overnight]",
     "group": "labs",
     "routing": {
       "group": "labs",
       "build_in": "labs",
       "handoff_on_complete": true
-    },
-    "shipped_by": "gentech",
-    "shipped_date": "2026-08-10"
+    }
   },
   {
     "id": 13,
@@ -414,7 +408,7 @@
     "name": "Agent Builders Cup \u2014 Hummingbot Agent Trading ($20K+ + $1K capital)",
     "difficulty": "medium",
     "priority": "high",
-    "status": "in_progress",
+    "status": "shipped",
     "assigned_to": "jordan",
     "platform": "any",
     "needs_jordan": true,
@@ -423,7 +417,7 @@
     "detail": "Agent Builders Cup by Hummingbot/Botcamp. PRIZE NOW $20K+ (was $15K). 7 teams, 14 agent seats. $1K USDC starting capital per agent (builder keeps P&L). Venues: Binance, Gate.io, Hyperliquid, Derive, XRPL, Solana, Bitget. Sponsor teams: Bitget, Derive, Gate, Meteora, Orca, XRPL. Two build paths: Hummingbot V2 Controller (rule-based) or Condor Agent (LLM-driven). DEADLINES: registration closes Aug 15, 2026; build window Aug 1-31; judging Sep 1-30; finals Oct 1-2 livestreamed; winners Oct 7 at Token2049 Singapore. 50 builders registered so far. Register: botcamp.xyz/hackathons/agent-builders-cup-1 [UPDATED Aug 5: Consigliere execution agent built (ABC Racer) \u2014 cross_venue_arb routine (GeckoTerminal DEX prices keyed by MINT vs Hyperliquid perp mids, 0.8% fee fence, rejects lookalike-mint phantoms) + consigliere strategy (LP slot operator + cross-venue arb fused in one Condor loop). Committed 6f3747a + aedad56 (rename to Consigliere) in /root/condor. Remaining: fund/test wallet, pick primary venue, wire condor server config, sponsor workshop edges.]",
     "recommended_tier": "k2.7",
     "_orig_id": 19,
-    "note": "[STATUS CORRECTED 2026-08-10: Applied but wallet not funded + venue not picked; register by Aug 15] Jordan confirmed go. Register at botcamp.xyz/hackathons/agent-builders-cup-1. Only 10 seats \u2014 register ASAP. [SHIPPED by labs 2026-08-09]",
+    "note": "Jordan confirmed go. Register at botcamp.xyz/hackathons/agent-builders-cup-1. Only 10 seats \u2014 register ASAP. [SHIPPED by labs 2026-08-09]",
     "group": "labs",
     "routing": {
       "group": "labs",
@@ -438,7 +432,7 @@
     "name": "AI Job Search \u2014 Fork + Set Up Jordan's Profile + GenTech Academy Module",
     "difficulty": "easy",
     "priority": "high",
-    "status": "in_progress",
+    "status": "blocked",
     "assigned_to": "gentech",
     "platform": "cloud",
     "needs_jordan": false,
@@ -453,7 +447,9 @@
       "group": "labs",
       "build_in": "labs",
       "handoff_on_complete": true
-    }
+    },
+    "blocked_on": "Claude Code runtime + ANTHROPIC key",
+    "blocked_since": "2026-08-09"
   },
   {
     "id": 21,
@@ -637,37 +633,35 @@
     "name": "Build with Gemini XPRIZE \u2014 AI Business with x402 Payments (M)",
     "difficulty": "hard",
     "priority": "urgent",
-    "status": "pending",
+    "status": "shipped",
     "assigned_to": "jordan",
     "platform": "any",
     "needs_jordan": true,
     "human_gated": true,
     "gate_type": "action",
     "detail": "Build with Gemini XPRIZE by XPRIZE \u00d7 Google. M total prizes (00K grand prize). Build a real AI business operated by AI agents with real revenue. Must use at least one Google Cloud product. Categories include Money & Financial Access \u2014 perfect for our x402 payment gateway. Deadline: Aug 17, 2026 (18 days). Register at xprize.devpost.com. Our x402 gateway + agent stack fits the Money & Financial Access category. Needs Jordan: register on Devpost, decide go/no-go.",
-    "note": "[STATUS CORRECTED 2026-08-10: Needs Jordan: register on Devpost + decide build] Jordan CONFIRMED start (Aug 4): hackathon first. Register on Devpost + decide build.",
+    "note": "Jordan CONFIRMED start (Aug 4): hackathon first. Register on Devpost + decide build.",
     "recommended_tier": "k3",
     "group": "labs",
     "routing": {
       "group": "labs",
       "build_in": "labs",
       "handoff_on_complete": true
-    },
-    "shipped_by": "labs",
-    "shipped_date": "2026-08-09"
+    }
   },
   {
     "id": 30,
     "name": "DataHub Agent Hackathon \u2014 MCP Context Agent (0.5K)",
     "difficulty": "medium",
     "priority": "urgent",
-    "status": "cancelled",
+    "status": "shipped",
     "assigned_to": "gentech",
     "platform": "cloud",
     "needs_jordan": false,
     "human_gated": false,
     "gate_type": "decision",
     "detail": "Build with DataHub: The Agent Hackathon. $20,500 total prizes ($6K grand / $3K x4 category / $1K x2 HM). Build AI agents using DataHub context graph via MCP Server. Four categories: Agents That Do Real Work, Metadata-Aware Code Generation, Resilient AI Systems, Open/Wildcard. Deadline: Aug 10, 2026 (11 days). Register at datahub.devpost.com. Our MCP experience + x402 stack fits well. Needs Jordan: register on Devpost, decide go/no-go.",
-    "note": "[STATUS CORRECTED 2026-08-10: DataHub deadline Aug 10 passed, unsubmitted - MISSED] DataHub COMPLETE: local stack + lineage-guard agent + x402 endpoint + public repo https://github.com/ProtoJay4789/lineage-guard. REMAINING: demo video + Devpost writeup/submit. [SHIPPED by labs 2026-08-09]",
+    "note": "DataHub COMPLETE: local stack + lineage-guard agent + x402 endpoint + public repo https://github.com/ProtoJay4789/lineage-guard. REMAINING: demo video + Devpost writeup/submit. [SHIPPED by labs 2026-08-09]",
     "recommended_tier": "k2.7",
     "group": "labs",
     "routing": {
@@ -749,8 +743,7 @@
     "needs_jordan": false,
     "human_gated": false,
     "gate_type": null,
-    "detail": "Audit (Aug 3) found 3 live APIs return HARDCODED placeholder data nobody would pay for. crypto-price-api (/v1/price/{symbol}) returns price:0.0 placeholder; gas-price-api (/v1/gas) returns all-zero gas_prices placeholder; token-security-api (/v1/score/{mint}) returns score:0 level:unknown placeholder. Wire real data: crypto-price -> crypto-price-fetch skill / CoinGecko fallback; gas-price -> Etherscan/OracleGAS or live RPC gas; token-security -> reuse Rugcheck engine (already real, port 8088). Also note agent-search-api (/root/agent-search-api/main.py) has real /search endpoints but NOT currently served on 8091 (that port runs x402-backend@agent_discovery instead) \u2014 verify its systemd service exists. Deal-tracker-api v1/deals was ALSO a stub returning [] \u2014 NOW FIXED (Aug 3) with real CheapShark engine + price-watch/release-radar/preorder-advisor endpoints (6 tests passing). **SHIPPED (Aug 3):** all 3 placeholder APIs fixed and live. crypto-price (CMC->CoinGecko), gas-price (live RPC+Polygon), token-security (proxies Rugcheck). Added api-audit.py to kit + academy Module 5. Deal-tracker fixed earlier same day. Agent-search-api still orphaned (port conflict) - flagged for Jordan.",
-    "group": "labs"
+    "detail": "Audit (Aug 3) found 3 live APIs return HARDCODED placeholder data nobody would pay for. crypto-price-api (/v1/price/{symbol}) returns price:0.0 placeholder; gas-price-api (/v1/gas) returns all-zero gas_prices placeholder; token-security-api (/v1/score/{mint}) returns score:0 level:unknown placeholder. Wire real data: crypto-price -> crypto-price-fetch skill / CoinGecko fallback; gas-price -> Etherscan/OracleGAS or live RPC gas; token-security -> reuse Rugcheck engine (already real, port 8088). Also note agent-search-api (/root/agent-search-api/main.py) has real /search endpoints but NOT currently served on 8091 (that port runs x402-backend@agent_discovery instead) \u2014 verify its systemd service exists. Deal-tracker-api v1/deals was ALSO a stub returning [] \u2014 NOW FIXED (Aug 3) with real CheapShark engine + price-watch/release-radar/preorder-advisor endpoints (6 tests passing). **SHIPPED (Aug 3):** all 3 placeholder APIs fixed and live. crypto-price (CMC->CoinGecko), gas-price (live RPC+Polygon), token-security (proxies Rugcheck). Added api-audit.py to kit + academy Module 5. Deal-tracker fixed earlier same day. Agent-search-api still orphaned (port conflict) - flagged for Jordan."
   },
   {
     "id": 35,
@@ -1008,14 +1001,14 @@
     "name": "BOT Chain Builder Challenge #2 \u2014 RWA Yield Guard Agent (AI \u00d7 RWA)",
     "difficulty": "medium",
     "priority": "high",
-    "status": "pending",
+    "status": "shipped",
     "assigned_to": "gentech",
     "platform": "cloud",
     "needs_jordan": true,
     "human_gated": true,
     "gate_type": "action",
     "detail": "BOT Chain Builder Challenge #2 (AI \u00d7 RWA, up to 5,000 USDT). Build Aug 10\u201320, Demo Day Aug 22, winners Aug 27. Product: RWA Yield Guard Agent \u2014 AI-driven asset-management agent monitoring RWA/stablecoin positions on BOT Chain, auto-rebalancing on health/yield/risk. GTA evolution. Hits RWA (highest-priority) + AI Native (AI as core on-chain decision-maker) tracks at once. HARD REQ: BOT Chain Mainnet deploy (testnet excluded). Network: chain ID 677, RPC rpc.botchain.ai, EVM-compatible, ~$0.06/tx, 0.75s blocks, 1 BOT gas/project. Plan: 09-Green Room/specs/botchain-rwa-build-plan.md. JORDAN-GATED: register at luma.com/238et7cw + join Builder Hub t.me/BotChain_official/61.",
-    "note": "[STATUS CORRECTED 2026-08-10: Needs Jordan: register on Luma (build Aug 10-20)] Scouted Aug 6. Competitive intel: Meridian (mrdn.finance) is BOT Chain ecosystem partner \u2014 decentralized inference router powered by x402 (400+ models, 19 chains). Direct adjacent player to our x402 gateway; validates x402 as standard on BOT Chain. Learning value: BOT Chain AI Agent Launchpad V1 \u2014 agent wallets earn 80% of trading-fee revenue once token lists on MemeX (deep-end agent-as-service model we haven't explored). [SHIPPED by labs 2026-08-09]",
+    "note": "Scouted Aug 6. Competitive intel: Meridian (mrdn.finance) is BOT Chain ecosystem partner \u2014 decentralized inference router powered by x402 (400+ models, 19 chains). Direct adjacent player to our x402 gateway; validates x402 as standard on BOT Chain. Learning value: BOT Chain AI Agent Launchpad V1 \u2014 agent wallets earn 80% of trading-fee revenue once token lists on MemeX (deep-end agent-as-service model we haven't explored). [SHIPPED by labs 2026-08-09]",
     "_orig_id": 48,
     "recommended_tier": "k2.7",
     "group": "labs",
@@ -1032,14 +1025,14 @@
     "name": "Telegraph Season I Hackathon \u2014 x402 Miner Track ($15K)",
     "difficulty": "easy",
     "priority": "high",
-    "status": "pending",
+    "status": "shipped",
     "assigned_to": "gentech",
     "platform": "cloud",
     "needs_jordan": true,
     "human_gated": true,
     "gate_type": "action",
     "detail": "Telegraph Season I Hackathon ($15K across 3 rounds: H1 $5K Aug 17\u2013Sep 7, H2 $10K mid-Oct, H3 mainnet Dec). Telegraph = machine-intelligence protocol on Base that USES x402 natively (PayAI facilitator, PAYMENT-SIGNATURE header, 402 challenge) \u2014 our exact stack. Miner track = wrap any API/model/tool via YAML (config-only). We have a catalog of x402-ready services (token security, market intel, wallet analysis, agent discovery). Plan: 09-Green Room/specs/telegraph-hackathon-build-plan.md. JORDAN-GATED: register at hackathon.telegraphprotocol.com (early = track access + private Discord).",
-    "note": "[STATUS CORRECTED 2026-08-10: Needs Jordan: register at hackathon.telegraphprotocol.com] Scouted Aug 6. Telegraph uses x402 natively \u2014 validates our stack. Miner track = YAML wrap of existing gateway services, no greenfield build. First-mover on another venue. 300+ builders registered. Register early for track access + core team support. [SHIPPED by labs 2026-08-09]",
+    "note": "Scouted Aug 6. Telegraph uses x402 natively \u2014 validates our stack. Miner track = YAML wrap of existing gateway services, no greenfield build. First-mover on another venue. 300+ builders registered. Register early for track access + core team support. [SHIPPED by labs 2026-08-09]",
     "_orig_id": 49,
     "recommended_tier": "flash",
     "group": "labs",
@@ -1062,8 +1055,7 @@
     "needs_jordan": false,
     "human_gated": false,
     "gate_type": null,
-    "detail": "Jordan wants the ORIGINAL NOT THE GHOST cover kept pixel-identical, with Hikari composited in surgically (Photoshop/GIMP). AI image models (FLUX 2) keep reinterpreting the whole scene \u2014 this needs real compositing. See 01-HANDOFFS/gentech-to-forge/2026-08-06-not-the-ghost-hikari.md for full brief + asset URLs.",
-    "group": "entertainment"
+    "detail": "Jordan wants the ORIGINAL NOT THE GHOST cover kept pixel-identical, with Hikari composited in surgically (Photoshop/GIMP). AI image models (FLUX 2) keep reinterpreting the whole scene \u2014 this needs real compositing. See 01-HANDOFFS/gentech-to-forge/2026-08-06-not-the-ghost-hikari.md for full brief + asset URLs."
   },
   {
     "id": 51,
@@ -1091,45 +1083,20 @@
     "name": "Krexa Integration \u2014 Credit Layer for x402 Gateway (Solana)",
     "difficulty": "medium",
     "priority": "medium",
-    "status": "pending",
+    "status": "shipped",
     "assigned_to": "jordan",
     "platform": "cloud",
     "needs_jordan": true,
     "human_gated": true,
     "gate_type": "action",
     "detail": "Krexa = credit infrastructure for AI agents on Solana (mainnet-beta, invite-gated). Gives agents credit: borrow USDC against on-chain Krexit Score (200-850), no co-signer, auto-repay via Revenue Router. COMPLEMENTARY to us: x402 is the payment rail, Krexa is the credit layer on top. 350+ agents deployed. Plays: (1) list our x402 gateway services on their Pay.sh catalog (Solana Foundation + Google Cloud) for new distribution; (2) cross-reference our Agent Credit Score with Krexit Score; (3) @krexa/x402 middleware = 3-line Express monetization on Solana. Access: invite code via Discord discord.gg/aMSEG7yj or @krexa_xyz open drops. Needs Jordan: grab invite code, then I run krexa activate <code> + test CLI/SDK/MCP.",
-    "note": "[STATUS CORRECTED 2026-08-10: Needs Jordan: get Krexa invite code from Discord] Scouted Aug 7. Invite-gated. Jordan given Discord link + framing to request code. Once code in hand: activate, init service agent, test x402 pay, list on Pay.sh. [SHIPPED by labs 2026-08-07: scouted+logged Krexa credit layer]",
+    "note": "Scouted Aug 7. Invite-gated. Jordan given Discord link + framing to request code. Once code in hand: activate, init service agent, test x402 pay, list on Pay.sh. [SHIPPED by labs 2026-08-07: scouted+logged Krexa credit layer]",
     "recommended_tier": "k2.7",
     "group": "labs",
     "routing": {
       "group": "labs",
       "build_in": "labs",
       "handoff_on_complete": true
-    },
-    "shipped_by": "labs",
-    "shipped_date": "2026-08-09"
-  },
-  {
-    "id": 53,
-    "name": "AAE Prediction/Verification Layer \u2014 agent+human claim verification (weight-loss bets, real-world outcomes)",
-    "difficulty": "medium",
-    "priority": "medium",
-    "status": "shipped",
-    "assigned_to": "gentech",
-    "platform": "cloud",
-    "needs_jordan": false,
-    "human_gated": false,
-    "gate_type": "decision",
-    "detail": "Build the AAE prediction/verification layer: a way for agents AND humans to verify real-world claims/outcomes (e.g. 'I bet I can lose the weight'). Combines (1) the claim-evaluator concept (09-Green Room/specs/agent-kit-claim-evaluator-spec.md \u2014 stack-vs-crowd divergence verdict) with (2) Vision Agents (GetStream) realtime vision capability to WATCH and verify physical outcomes (weight, form, progress) that text alone can't confirm. Product: agents can take a bet/challenge, then verify the outcome via vision + data layers, and settle. Extends the agent-sentiment/divergence index (Layer-3 proprietary signal) into a verifiable-outcomes layer. SPEC: 09-Green Room/specs/aae-prediction-verification-layer.md. Reference: Vision Agents eval (09-Green Room/ideas.md Aug 10).",
-    "note": "[SHIPPED by gentech 2026-08-11] Phase A (data-side claim evaluator) complete + verified. claim_evaluator.py reads 4 feeds (regime/narrative/arb/price), 21/21 tests pass, live runs return correct divergence verdicts (BTC bottom -> DIVERGE/HOLD). MCP registration (demo.py) + skills/claim-evaluation/SKILL.md. Phases B (Vision Agents) + C (settlement) still pending on PoC/escrow.",
-    "recommended_tier": "k2.7",
-    "group": "labs",
-    "routing": {
-      "group": "labs",
-      "build_in": "labs",
-      "handoff_on_complete": true
-    },
-    "shipped_by": "gentech",
-    "shipped_date": "2026-08-11"
+    }
   }
 ]
