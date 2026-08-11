@@ -5,6 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Steward — Agentic Treasury | GenTech Labs</title>
 <meta name="description" content="Live command center for the GenTech Agentic Treasury — position, curve shape, fee efficiency, yield vs staking vs hodl.">
+<link rel="manifest" href="/Treasury/manifest.json">
+<meta name="theme-color" content="#8b5cf6">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="apple-touch-icon" href="/Treasury/icons/icon-192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
@@ -116,6 +121,39 @@ nav {
 /* Countdown */
 .countdown { font-family: var(--font-mono); font-size: 1.4em; font-weight: 700; color: var(--warn); }
 
+/* Chat panel */
+#chatFab {
+  position: fixed; bottom: 24px; right: 24px; z-index: 200;
+  width: 56px; height: 56px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 24px; cursor: pointer; box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+  border: none; transition: transform .2s;
+}
+#chatFab:hover { transform: scale(1.08); }
+#chatPanel {
+  position: fixed; bottom: 90px; right: 24px; z-index: 200;
+  width: 360px; max-width: calc(100vw - 48px); height: 480px; max-height: 70vh;
+  background: var(--card); border: 1px solid var(--border); border-radius: 14px;
+  display: none; flex-direction: column; overflow: hidden;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+}
+#chatPanel.open { display: flex; }
+#chatHead {
+  padding: 12px 16px; background: var(--card-2); border-bottom: 1px solid var(--border);
+  font-weight: 600; font-size: 0.9em; display: flex; justify-content: space-between; align-items: center;
+}
+#chatClose { cursor: pointer; color: var(--text-dim); font-size: 1.1em; }
+#chatLog { flex: 1; overflow-y: auto; padding: 12px 16px; font-size: 0.85em; display: flex; flex-direction: column; gap: 8px; }
+#chatLog .msg { padding: 8px 12px; border-radius: 10px; max-width: 85%; line-height: 1.4; }
+#chatLog .user { align-self: flex-end; background: var(--accent); color: #fff; }
+#chatLog .bot { align-self: flex-start; background: var(--card-2); border: 1px solid var(--border); }
+#chatLog .err { align-self: flex-start; background: rgba(255,68,102,0.15); border: 1px solid var(--danger); color: var(--danger); }
+#chatInputRow { display: flex; gap: 8px; padding: 12px; border-top: 1px solid var(--border); }
+#chatInput { flex: 1; background: var(--card-2); border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; color: var(--text); font-size: 0.85em; }
+#chatInput:focus { outline: none; border-color: var(--accent); }
+#chatSend { background: var(--accent); color: #fff; border: none; border-radius: 8px; padding: 10px 16px; font-weight: 600; cursor: pointer; }
+
 /* Footer */
 footer { border-top: 1px solid var(--border); padding: 24px 0; text-align: center; color: var(--text-dim); font-size: 0.8em; position: relative; z-index: 1; }
 
@@ -224,6 +262,17 @@ footer { border-top: 1px solid var(--border); padding: 24px 0; text-align: cente
 <footer>
   GenTech Labs · The Steward Agentic Treasury · Live on-chain data · <span id="footTime">—</span>
 </footer>
+
+<!-- Chat panel (web-bridge to Hermes) -->
+<div id="chatFab" title="Talk to the Steward">💬</div>
+<div id="chatPanel">
+  <div id="chatHead">🛡️ Talk to the Steward <span id="chatClose">✕</span></div>
+  <div id="chatLog"></div>
+  <div id="chatInputRow">
+    <input id="chatInput" placeholder="Ask the Steward…" autocomplete="off">
+    <button id="chatSend">Send</button>
+  </div>
+</div>
 
 <script>
 const PAIR = "0x864d4e5ee7318e97483db7eb0912e09f161516ea";
@@ -367,6 +416,80 @@ refresh();
 setInterval(refresh, 30000);
 setInterval(tickCountdown, 1000);
 tickCountdown();
+
+// PWA: register service worker for offline + install
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("/Treasury/sw.js").catch(() => {});
+  });
+}
+
+// ── Chat (web-bridge to Hermes) ──
+const chatFab = document.getElementById("chatFab");
+const chatPanel = document.getElementById("chatPanel");
+const chatLog = document.getElementById("chatLog");
+const chatInput = document.getElementById("chatInput");
+const chatSend = document.getElementById("chatSend");
+const chatClose = document.getElementById("chatClose");
+// Bridge server (same-origin when served via bridge; else the VPS bridge)
+const BRIDGE = (location.port === "8765") ? "" : "http://" + location.hostname + ":8765";
+let chatToken = null;
+
+chatFab.addEventListener("click", () => {
+  chatPanel.classList.toggle("open");
+  if (chatPanel.classList.contains("open")) {
+    chatInput.focus();
+    if (!chatToken) initChat();
+  }
+});
+chatClose.addEventListener("click", () => chatPanel.classList.remove("open"));
+
+function addMsg(text, who) {
+  const div = document.createElement("div");
+  div.className = "msg " + who;
+  div.textContent = text;
+  chatLog.appendChild(div);
+  chatLog.scrollTop = chatLog.scrollHeight;
+}
+
+async function initChat() {
+  try {
+    const r = await fetch(BRIDGE + "/api/session", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ label: "steward-web" })
+    });
+    const d = await r.json();
+    chatToken = d.token;
+    addMsg("Connected to the Steward. Ask anything about the position, yield, or strategy.", "bot");
+  } catch (e) {
+    addMsg("Bridge offline — use Telegram to reach the Steward.", "err");
+  }
+}
+
+async function sendChat() {
+  const text = chatInput.value.trim();
+  if (!text) return;
+  addMsg(text, "user");
+  chatInput.value = "";
+  addMsg("…", "bot");
+  try {
+    if (!chatToken) await initChat();
+    const r = await fetch(BRIDGE + "/api/chat?dept=strategies", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "Authorization": "Bearer " + chatToken },
+      body: JSON.stringify({ message: text })
+    });
+    const d = await r.json();
+    chatLog.lastChild.remove();
+    addMsg(d.response || "No response.", "bot");
+  } catch (e) {
+    chatLog.lastChild.remove();
+    addMsg("Bridge offline — use Telegram to reach the Steward.", "err");
+  }
+}
+chatSend.addEventListener("click", sendChat);
+chatInput.addEventListener("keydown", (e) => { if (e.key === "Enter") sendChat(); });
 </script>
 </body>
 </html>
