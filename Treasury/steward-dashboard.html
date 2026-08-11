@@ -431,8 +431,8 @@ const chatLog = document.getElementById("chatLog");
 const chatInput = document.getElementById("chatInput");
 const chatSend = document.getElementById("chatSend");
 const chatClose = document.getElementById("chatClose");
-// Bridge server (same-origin when served via bridge; else the VPS bridge)
-const BRIDGE = (location.port === "8765") ? "" : "http://" + location.hostname + ":8765";
+// Bridge server — same-origin via nginx /bridge/ proxy (port 8765 not exposed publicly)
+const BRIDGE = "/bridge";
 let chatToken = null;
 
 chatFab.addEventListener("click", () => {
