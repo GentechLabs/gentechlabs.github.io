@@ -236,6 +236,8 @@ footer { border-top: 1px solid var(--border); padding: 24px 0; text-align: cente
       <div class="row"><span class="k">LP (in-range)</span><span class="v" id="yLP">—</span></div>
       <div class="row"><span class="k">Staking (5.2%)</span><span class="v" id="yStake">—</span></div>
       <div class="row"><span class="k">HODL 24h</span><span class="v" id="yHodl">—</span></div>
+      <div class="row"><span class="k" style="color:var(--accent);">▲ vs Staking</span><span class="v" id="yVsStake" style="color:var(--success);font-weight:700;">—</span></div>
+      <div class="row"><span class="k" style="color:var(--accent);">▲ vs HODL</span><span class="v" id="yVsHodl" style="color:var(--success);font-weight:700;">—</span></div>
       <div class="row"><span class="k">Verdict</span><span class="v" id="yVerdict">—</span></div>
     </div>
 
@@ -426,20 +428,48 @@ function render(data) {
     document.getElementById("axisHigh").textContent = "$" + hi.toFixed(3);
   }
 
-  // Fee efficiency
-  const eff = inRange ? 100 : 0;
+  // Fee efficiency — REAL, not binary. How centered the live price is in the
+  // bin range: dead-center = 100% (max fee capture), drifting to an edge = lower.
+  // OUT of range = 0.
+  let eff, effLabel;
+  if (!inRange) {
+    eff = 0; effLabel = "Not earning — OUT of range";
+  } else if (pos.rangeLow && pos.rangeHigh && pool.price) {
+    const lo = pos.rangeLow, hi = pos.rangeHigh, pr = pool.price;
+    const center = (lo + hi) / 2;
+    const halfSpan = (hi - lo) / 2;
+    // distance from center as fraction of half-span (0 = center, 1 = edge)
+    const dist = Math.abs(pr - center) / halfSpan;
+    eff = Math.max(0, Math.round((1 - dist) * 100));
+    effLabel = dist < 0.15 ? "Price dead-center — max fee capture"
+      : dist < 0.5 ? "Price drifting — still earning"
+      : "Price near edge — watch it";
+  } else {
+    eff = 100; effLabel = "Earning fees in range";
+  }
   document.getElementById("feeEff").textContent = eff + "%";
   document.getElementById("feeFill").style.width = eff + "%";
-  document.getElementById("feeLabel").textContent = inRange ? "Earning fees in range" : "Not earning — OUT of range";
+  document.getElementById("feeFill").style.background = eff < 40 ? "var(--warn)" : "";
+  document.getElementById("feeLabel").textContent = effLabel;
 
   // Yield vs staking vs hodl
   const lpDaily = POS_VAL * 0.005;
   const stakeDaily = POS_VAL * STAKING_APR / 100 / 365;
-  document.getElementById("yLP").textContent = "~$" + lpDaily.toFixed(2) + "/day";
+  document.getElementById("yLP").textContent = inRange ? ("~$" + lpDaily.toFixed(2) + "/day") : "$0.00/day";
   document.getElementById("yStake").textContent = "~$" + stakeDaily.toFixed(2) + "/day";
   const chg = pool.chg24h || 0;
-  document.getElementById("yHodl").textContent = (chg >= 0 ? "+" : "") + chg.toFixed(1) + "% 24h";
+  // HODL 24h in $ (gain/loss on position)
+  const hodlDaily = POS_VAL * chg / 100;
+  document.getElementById("yHodl").textContent = (chg >= 0 ? "+" : "") + chg.toFixed(1) + "% 24h" + " (" + (hodlDaily >= 0 ? "+" : "") + "$" + hodlDaily.toFixed(2) + ")";
   document.getElementById("yVerdict").textContent = inRange ? "LP farming the chop" : "LP OUT — not earning";
+
+  // Deltas — how much MORE LP earns vs staking and vs HODL (only meaningful in-range)
+  const vsStake = inRange ? (lpDaily - stakeDaily) : null;
+  document.getElementById("yVsStake").textContent = vsStake == null
+    ? "LP OUT" : "+$" + vsStake.toFixed(2) + "/day";
+  const vsHodl = inRange ? (lpDaily - hodlDaily) : null;
+  document.getElementById("yVsHodl").textContent = vsHodl == null
+    ? "LP OUT" : (vsHodl >= 0 ? "+" : "") + "$" + vsHodl.toFixed(2) + "/day";
 
   // Market
   document.getElementById("mPrice").textContent = pool.price ? "$" + pool.price.toFixed(2) : "—";
