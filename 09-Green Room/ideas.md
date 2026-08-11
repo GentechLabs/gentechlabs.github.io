@@ -424,3 +424,12 @@
 - [x] Revenue Monitor — bug fixed (KNOWN_SERVICES→KNOWN_SENDERS rename)
 - [x] Academy Module 4 — Production-Grade x402 Services
 - [x] Build Queue visibility page + generator script
+
+---
+## 🆕 Ecosystem Signal — Browser-Use CLI 3.0 (Teknium/Nous, Aug 10): 60% less browser token spend
+- **Source:** x.com/Teknium/status/2086881909209252209. Teknium = Nous Research CTO, creator of Hermes.
+- **What:** Browser-Use CLI 3.0 — new backend for driving the browser. ~60% less token spend per task, no accuracy drop (in-house tests).
+- **How:** (1) Tool schema collapsed from 8 context-heavy tools to 1; (2) agent drives the CLI with code instead of many individual actions.
+- **Compatibility:** works for everyone — local browser, Browserbase, browser-use. Except camofox-local.
+- **Why it matters to us:** we run Hermes + browser automation (browser_* tools, Browserbase). Token spend is a recurring cost — a 60% cut on browser tasks is material.
+- **Status:** WATCH-AND-ADOPT. Verify against our Hermes browser config next time we touch it. Not urgent.
