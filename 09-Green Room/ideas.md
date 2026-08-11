@@ -331,3 +331,4 @@
 - [x] Revenue Monitor — bug fixed (KNOWN_SERVICES→KNOWN_SENDERS rename)
 - [x] Academy Module 4 — Production-Grade x402 Services
 - [x] Build Queue visibility page + generator script
+- [ ] **Auto-pause watchdog on empty wallet**: when funds are withdrawn and there's no LP to track, auto-pause/remove the Position Watchdog cron (no more "no bins" spam). When a deposit is detected, auto-resume + auto-detect the position shape and what to do. (Jordan, Aug 11 2026)
