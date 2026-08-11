@@ -61,9 +61,15 @@ Agent Kit install
   drift — verified live against the deployed AVAX/USDC curve).
 - `treasury_config.json` — wallet + chains + optional pools template.
 - `provision.sh` — one-command cron provisioning (validated, dry-run + live).
+- `steward_rebalance.py` — **the Steward's autonomous decision loop.** Reads live
+  regime + position, picks shape by regime (RANGE_BOUND→CURVE, HIGH_VOLATILITY→
+  BID_ASK), and decides rebalance/hold. OUT-of-range + regime-appropriate = rebalance;
+  IN-range = hold. 10-min frequency guard. REAL execution guarded (--yes + gas + wallet).
+- `test_steward_rebalance.py` — 10 passing decision tests (shape switch, hold, guard).
 - `skills/agent-kit-self-tracking-treasury/SKILL.md` — self-onboarding skill.
+- Cron `4ec19d462760` — Steward Position Check every 10m (dry-run, flags OUT-of-range).
 
-Live test (Aug 11): auto-discovered the Steward's 11-bin AVAX/USDC curve, correctly
-flagged it **OUT of range** (AVAX $6.24 vs band $6.42–$6.48) after price drift — the
-exact kind of signal self-tracking should surface. Base/Ethereum wallet-balance layer
-also works. Scope to extend: Meteora DLMM (Solana), Monad/Trader Joe.
+Live test (Aug 11): Steward correctly decided **REBALANCE** on the live position —
+regime RANGE_BOUND (CURVE shape), position OUT (fee eff 0%, $6.20 vs band
+$6.42–$6.48). Gas measured ~$0.001/cycle (0.1 gwei), so re-centering is effectively
+free. Scope to extend: Meteora DLMM (Solana), Monad/Trader Joe.
