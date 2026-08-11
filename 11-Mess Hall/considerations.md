@@ -1,7 +1,7 @@
 ---
-date: 2026-08-10
+date: 2026-08-11
 status: active
-last-updated: 2026-08-10 00:15 UTC (EOD Aug 9 ET sweep)
+last-updated: 2026-08-11 00:06 UTC (EOD Aug 10 ET sweep)
 ---
 
 # 🧠 Considerations — Open Decisions
@@ -13,8 +13,7 @@ last-updated: 2026-08-10 00:15 UTC (EOD Aug 9 ET sweep)
 - [ ] 🚨 **Algorand First-Mover Play (Aug 6)** — **✅ COMPOSITE ENTRY SHIPPED (Aug 7).** Context-weight "Recently Done" confirms the Algorand Global x402 Challenge — Composite Entry ($100K + 500K ALGO) is shipped. **Jordan: (1) provide Algorand wallet address so X402_PAYTO_ALGORAND goes live (zero code change), (2) confirm late-leaderboard eligibility or mark dead** (original deadline Jul 31 passed, no registration on file).
 - [ ] 🚨 **Keeperhub Agents Onchain #80** — **JORDAN CONFIRMED GO.** **✅ PROOF TRANSFER COMPLETE Aug 8:** Real 0.01 USDC on-chain transfer from KeeperHub wallet to Treasury CDP (TX 0x88fe6c9a...b1df, Base, block 49682145, success). Wallet funded. **REMAINING: film demo video + assemble GitHub submission (README, video, live tx link). Deadline Aug 13.**
 - [ ] 🚨 **Algorand Global x402 Challenge #82** — **⚠️ DEADLINE PASSED Jul 31.** $100K + 500K ALGO. No record of registration on file. **Jordan: confirm if registered / still eligible for late leaderboard, or mark dead.** *(Now tied to the Algorand First-Mover Play above.)*
-- [x] 🚨 **Arc Programmable Money Hackathon** — **⚠️ DEADLINE TODAY Aug 9 — ✅ SHIPPED.** ArcAgentWallet.sol deployed on testnet, 57/57 tests pass, repo public. **BUILD COMPLETE + VERIFIED Aug 8. MARKED SHIPPED by labs Aug 9.** → Move to Recently Resolved after midnight.
-- [ ] 🚨 **AI Factory Hackathon #79** — **⚠️ DEADLINE TOMORROW Aug 10.** lablab.ai × NativelyAI. **MARKED SHIPPED by labs Aug 9.** Jordan: confirm submission status.
+- [ ] 🚨 **AI Factory Hackathon #79** — **⚠️ DEADLINE TODAY Aug 10.** lablab.ai × NativelyAI. **MARKED SHIPPED by labs Aug 9.** Jordan: confirm submission status.
 
 ## 🔴 High Priority
 
@@ -101,6 +100,7 @@ Jordan's decision on the Gears E:D beta: **NOT pre-ordering for beta access.** E
 
 ## ✅ Recently Resolved
 
+- **Arc Programmable Money Hackathon** — ✅ SHIPPED (Aug 9). ArcAgentWallet.sol deployed on testnet, 57/57 tests pass, repo public. Moved from active considerations.
 - **Web tools down** — RESOLVED. Agent Reach is the default web backend. Firecrawl no longer needed.
 - **OKX AI Genesis Hackathon #72** — Deadline passed Jul 27. No registration received.
 - **Keeperhub Agents Onchain #80** — ✅ GO confirmed. PROOF TRANSFER COMPLETE Aug 8. Remaining: demo video + README. Deadline Aug 13.
