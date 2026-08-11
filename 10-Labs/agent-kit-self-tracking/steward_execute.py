@@ -297,12 +297,12 @@ def step_redeploy(w3, acct, dry_run: bool, shape: str = "curve") -> Dict[str, An
     if dry_run:
         # Use the SDK-corrected curve deploy script in dry-run mode
         import subprocess
-        proc = subprocess.run([sys.executable, DEPLOY_SCRIPT, "--spread", "5", "--shape", shape, "--dry-run"],
+        proc = subprocess.run([sys.executable, DEPLOY_SCRIPT, "--shape", shape, "--dry-run"],
                               capture_output=True, text=True, timeout=120)
         return {"ok": proc.returncode == 0, "label": "redeploy", "dry_run": True,
                 "stdout": proc.stdout[-1500:], "stderr": proc.stderr[-500:]}
     import subprocess
-    proc = subprocess.run([sys.executable, DEPLOY_SCRIPT, "--spread", "5", "--shape", shape, "--execute", "--yes"],
+    proc = subprocess.run([sys.executable, DEPLOY_SCRIPT, "--shape", shape, "--execute", "--yes"],
                           capture_output=True, text=True, timeout=180)
     ok = proc.returncode == 0 and "deployed" in proc.stdout.lower()
     return {"ok": ok, "label": "redeploy", "dry_run": False,
