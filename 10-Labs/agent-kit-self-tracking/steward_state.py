@@ -87,21 +87,25 @@ def main():
     icon = "🟢" if in_range else "🔴"
     lines = [
         f"🛡️ STEWARD HEARTBEAT — {datetime.now(timezone(timedelta(hours=-4))).strftime('%Y-%m-%d %H:%M ET')}",
-        f"   {icon} {pos.get('read', 'n/a')}",
+        "",
+        f"{icon} **Position**: {pos.get('read', 'n/a')}",
         f"   Shape: Curve · {pos.get('bins', 0)} bins · range ${pos.get('rangeLow', 0):.4f}–${pos.get('rangeHigh', 0):.4f}",
-        f"   Fee efficiency: {100 if in_range else 0}% {'(earning)' if in_range else '(OUT — not earning)'}",
+        f"   Fee efficiency: {100 if in_range else 0}% {'✅ earning' if in_range else '⚠️ OUT — not earning'}",
+        "",
     ]
     if pool:
-        lines.append(f"   AVAX ${pool.get('price', 0):.2f} ({pool.get('chg24h', 0):+.1f}% 24h) · vol ${pool.get('vol24h', 0)/1e6:.1f}M · liq ${pool.get('liquidity', 0)/1e6:.1f}M")
+        lines.append(f"📊 **Market**: AVAX ${pool.get('price', 0):.2f} ({pool.get('chg24h', 0):+.1f}% 24h) · vol ${pool.get('vol24h', 0)/1e6:.1f}M · liq ${pool.get('liquidity', 0)/1e6:.1f}M")
+        lines.append("")
     pos_val = 43.0
     lp_daily = pos_val * 0.005
     stake_daily = pos_val * 5.2 / 100 / 365
-    lines.append("   ── Yield vs Staking vs HODL ──")
-    lines.append(f"   LP:     ~${lp_daily:.2f}/day while in-range (chop rate)")
-    lines.append(f"   Stake:  ~${stake_daily:.2f}/day (5.2% APR)")
-    lines.append(f"   HODL:   {'winning' if pool.get('chg24h', 0) > 0 else 'losing'} ({pool.get('chg24h', 0):+.1f}% 24h)")
-    lines.append(f"   Verdict: {'LP farming the chop' if in_range else 'LP OUT — not earning'}")
-    lines.append("   📅 CPI tomorrow 8:30 ET → Bid-Ask at 7:45 ET, Curve back 8/13")
+    lines.append("💰 **Yield vs Staking vs HODL**")
+    lines.append(f"   • LP:     ~${lp_daily:.2f}/day while in-range (chop rate)")
+    lines.append(f"   • Stake:  ~${stake_daily:.2f}/day (5.2% APR)")
+    lines.append(f"   • HODL:   {'winning' if pool.get('chg24h', 0) > 0 else 'losing'} ({pool.get('chg24h', 0):+.1f}% 24h)")
+    lines.append(f"   • Verdict: {'LP farming the chop' if in_range else 'LP OUT — not earning'}")
+    lines.append("")
+    lines.append("📅 **Next macro event**: CPI tomorrow 8:30 ET → Bid-Ask at 7:45 ET, Curve back 8/13")
     print("\n".join(lines))
     return 0
 

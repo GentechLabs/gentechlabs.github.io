@@ -5,6 +5,19 @@
 
 ---
 
+## 🏆 GenTech Hub PWA — One installable app for the autonomous agent economy
+**Source:** Jordan brainstorm (Aug 11) — "can we put all this together on the same PWA?" | **Status:** Spec complete, template built, ready to build
+- Unify Treasury/Steward, Arcade, Cookbook, Travel, Meta Ray-Ban into ONE installable PWA shell — shared manifest, sw.js, one wallet, one /bridge/ chat
+- NOT separate PWAs, NOT one blob — shared shell + distinct module screens
+- Proven by the Steward Command Center (gentechlabs.net/Treasury/) — the working POC
+- Makes "the agent economy in one installable app" tangible — the thesis in product form
+- Reusable template DONE at `10-Labs/pwa-template/` (one-command scaffold)
+- Revenue: drives gateway usage; each module is a funnel to x402 services
+- Full spec: `09-Green Room/specs/gentech-hub-pwa-architecture.md`
+- [x] Add to build queue as #55 (Labs, high)
+
+---
+
 ## ✅ CONFIRMED AHEAD (Aug 6) — Multi-model routing is our architecture
 **Source:** @ClawUpAI tweet (Aug 6) — "the future isn't single-model, it's orchestrated intelligence"
 - External validation that we're already ahead: we have a **routing layer** (task→model), a **model router**, and a **cron job router** — makes the build much cheaper.
