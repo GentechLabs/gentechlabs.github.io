@@ -59,8 +59,8 @@ Gentech Labs · api.gentechlabs.net · github.com/Gentech-Labs
 - Next action: **book the 15-min call** at https://calendar.app.google/iJJxUn6mjS5dum66
 - Goal of call: discuss on-chain execution overlap + position our KeeperHub Agents Onchain build (GTA arb executor → KeeperHub MCP).
 
-## 2026-08-05 — KeeperHub call BOOKED
-- 15-min call with Simon KP (KeeperHub founder) booked for **Tuesday Aug 11, 6:00 PM ET**.
-- Calendar link: https://calendar.app.google/iJJxUn6mjS5dum66
-- Purpose: on-chain execution overlap + position our Agents Onchain build (GTA arb executor → KeeperHub MCP, one live tx).
-- Reminder needed ~Aug 10/11.
+## 2026-08-05 — KeeperHub call BOOKED → CANCELLED (Aug 11)
+- 15-min call with Simon KP (KeeperHub founder) was booked for **Tuesday Aug 11, 6:00 PM ET**.
+- **Jordan decided Aug 11: NOT doing the call.** Too much in flight, couldn't prep the build. Keeping KeeperHub on the back burner as-is for now.
+- Calendar link (no longer needed): https://calendar.app.google/iJJxUn6mjS5dum66
+- Revisit only if/when Jordan re-prioritizes on-chain execution overlap.
