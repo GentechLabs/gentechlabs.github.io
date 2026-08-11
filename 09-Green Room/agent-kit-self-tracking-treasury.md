@@ -66,10 +66,18 @@ Agent Kit install
   BID_ASK), and decides rebalance/hold. OUT-of-range + regime-appropriate = rebalance;
   IN-range = hold. 10-min frequency guard. REAL execution guarded (--yes + gas + wallet).
 - `test_steward_rebalance.py` — 10 passing decision tests (shape switch, hold, guard).
+- `steward_progress.py` — **deposit detection + milestone progress.** Detects NEW
+  deposits to the wallet (delta vs persisted baseline, guarded against price drift
+  by a %+$ floor), maps daily fees to the canonical AAE DeFi Milestone ladder
+  (Scout $5 → Raider $20 → Warlord $55 → Sovereign $200), reports % to next rank +
+  estimated fees. `test_steward_progress.py` — 12 passing tests.
 - `skills/agent-kit-self-tracking-treasury/SKILL.md` — self-onboarding skill.
 - Cron `51bc9900e24d` — **Steward Position Watchdog every 10m** (AAE pattern:
   cheap `no_agent` script job, silent when healthy, emits actionable OUT-of-range
   signal via `steward-watchdog.sh`). Replaces the old paused LP Monitor v2 cadence.
+- Cron `bc885594238f` — **Steward Deposit Watchdog every 15m** (no_agent, silent
+  until Jordan sends new money, then reports rank/progress/fees via
+  `steward-deposit-watchdog.sh`).
 
 Live test (Aug 11): Steward correctly decided **REBALANCE** on the live position —
 regime RANGE_BOUND (CURVE shape), position OUT (fee eff 0%, $6.20 vs band
