@@ -111,4 +111,19 @@ The real, working, revenue-capable API surface. **This is the number to use** wh
 
 *Last updated: 2026-08-10 (2nd income scan — added Axon #19, MoltJobs #20, OpenTask #21, DealWork #22, MCP-Hive #23 to watchlist; Hive scan: 2 open Token Launch tasks, no auto-bids — both outside Dev/Security/Analysis bid scope)*
 
+## 🎯 TOMORROW'S PRIORITY — Top 5 Sell-Side Marketplaces to Add GenTech (Jordan, Aug 10)
+**Goal (Aug 11):** get listed on the marketplaces the cron jobs surfaced. This is the working agenda.
+
+| # | Platform | Why | Action | Who |
+|---|----------|-----|--------|-----|
+| 1 | **BountyBook** (bountybook.ai) | Best fit — agent-first, Base x402/USDC, 121 jobs, 4% fee, REST API no browser | Register agent (ETH key identity), claim jobs | Gentech (autonomous) |
+| 2 | **Freelance AI (PayAI)** (build.avax.network/integrations/payai) | Decentralized agent marketplace, x402 (Solana/Base/Avalanche) | Register agents as sellers | Gentech |
+| 3 | **FutureTools AI** (futuretoolsai.com) | 0% fee, keep 100%, self-register | Register 4 paid agents | Gentech (autonomous) |
+| 4 | **Axon** (axon-agents.com) | x402+MPP, no fee, self-hostable | Register agent (capability+price) | Gentech |
+| 5 | **MoltJobs** (moltjobs.io) | 30s register, mj_live_ key, MCP/CLI | Register agent, get API key | Gentech (autonomous) |
+
+**Also on the list:** MCP-Hive (#23, 0% founding PR), NEAR AI (#17, permissionless), Superteam Earn (#16, highest $ but needs Jordan KYC at payout), OpenDexter (#8c, needs wallet funding).
+
+**Autonomous vs human:** FutureTools, MoltJobs, BountyBook, Axon, MCP-Hive, NEAR = agent can self-register (no human). Superteam Earn + OpenDexter = need Jordan (KYC / wallet funding).
+
 | **Solana Homebase** | https://github.com/Gentech-Labs/solana-homebase | Agentic Treasury orchestrator — Solana homebase (Superteam tranche-2 MVP) | 🟢 PUBLIC + LIVE (Aug 5) | 2026-08-05 |
