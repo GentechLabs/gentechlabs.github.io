@@ -102,12 +102,11 @@ nav {
 .span-8 { grid-column: span 8; }
 .span-12 { grid-column: span 12; }
 
-/* Curve viz */
-.curve-wrap { position: relative; height: 120px; margin-top: 8px; }
-.curve-band { position: absolute; top: 0; bottom: 0; background: linear-gradient(90deg, rgba(139,92,246,0.15), rgba(6,182,212,0.15)); border: 1px solid rgba(139,92,246,0.4); border-radius: 6px; }
-.curve-price { position: absolute; top: -6px; bottom: -6px; width: 2px; background: var(--success); box-shadow: 0 0 8px var(--success); }
-.curve-price::after { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 10px; height: 10px; border-radius: 50%; background: var(--success); }
+/* Curve viz — HD bell curve */
+.curve-wrap { position: relative; height: 180px; margin-top: 8px; }
+#curveCanvas { width: 100%; height: 100%; display: block; border-radius: 8px; background: linear-gradient(180deg, rgba(139,92,246,0.06), rgba(6,182,212,0.06)); }
 .curve-axis { display: flex; justify-content: space-between; font-size: 0.7em; color: var(--text-dim); font-family: var(--font-mono); margin-top: 4px; }
+.curve-axis .mid { color: var(--success); font-weight: 700; }
 
 /* Fee bar */
 .fee-bar { height: 10px; background: var(--card-2); border-radius: 6px; overflow: hidden; margin-top: 8px; }
@@ -217,11 +216,10 @@ footer { border-top: 1px solid var(--border); padding: 24px 0; text-align: cente
     <!-- Curve viz -->
     <div class="card span-8">
       <h3>Curve Shape</h3>
-      <div class="curve-wrap" id="curveWrap">
-        <div class="curve-band" id="curveBand" style="left:0%; right:0%;"></div>
-        <div class="curve-price" id="curvePrice" style="left:50%;"></div>
+      <div class="curve-wrap">
+        <canvas id="curveCanvas" width="800" height="200"></canvas>
       </div>
-      <div class="curve-axis"><span id="axisLow">—</span><span id="axisMid">—</span><span id="axisHigh">—</span></div>
+      <div class="curve-axis"><span id="axisLow">—</span><span class="mid" id="axisMid">—</span><span id="axisHigh">—</span></div>
     </div>
 
     <!-- Fee efficiency -->
@@ -251,10 +249,20 @@ footer { border-top: 1px solid var(--border); padding: 24px 0; text-align: cente
     </div>
 
     <!-- CPI countdown -->
-    <div class="card span-12">
+    <div class="card span-6">
       <h3>Next Macro Event — CPI</h3>
       <div class="countdown" id="cpiCountdown">—</div>
       <div class="label" style="margin-top:8px;">CPI releases Wed Aug 12, 8:30 AM ET · Bid-Ask at 7:45 AM ET · Curve back Aug 13</div>
+    </div>
+
+    <!-- AAE allocation (regime-driven treasury layers) -->
+    <div class="card span-6">
+      <h3>AAE Allocation — Regime-Driven</h3>
+      <div class="row"><span class="k">Regime</span><span class="v" id="aaeRegime">—</span></div>
+      <div class="row"><span class="k">LP (yield)</span><span class="v" id="aaeLp">—</span></div>
+      <div class="row"><span class="k">Staking</span><span class="v" id="aaeStaking">—</span></div>
+      <div class="row"><span class="k">HODL</span><span class="v" id="aaeHodl">—</span></div>
+      <div class="row"><span class="k">Lending</span><span class="v" id="aaeLend">—</span></div>
     </div>
   </div>
 </div>
@@ -352,16 +360,67 @@ function render(data) {
     ? `$${pos.rangeLow}–$${pos.rangeHigh}` : "—";
   document.getElementById("posPrice").textContent = pool.price ? "$" + pool.price.toFixed(4) : "—";
 
-  // Curve viz
+  // Curve viz — HD bell curve (Trader Joe style)
   if (pos.rangeLow && pos.rangeHigh && pool.price) {
     const lo = pos.rangeLow, hi = pos.rangeHigh, pr = pool.price;
+    const cv = document.getElementById("curveCanvas");
+    const ctx = cv.getContext("2d");
+    const W = cv.width, H = cv.height;
+    ctx.clearRect(0, 0, W, H);
+
+    // Map price -> x (log scale across [lo, hi] with padding)
+    const pad = 40;
     const span = hi - lo;
-    const bandLeft = Math.max(0, (lo - (pr - span)) / (2*span) * 100);
-    const bandRight = 100 - Math.max(0, ((pr + span) - hi) / (2*span) * 100);
-    document.getElementById("curveBand").style.left = bandLeft + "%";
-    document.getElementById("curveBand").style.right = (100 - bandRight) + "%";
-    const pricePct = ((pr - (pr - span)) / (2*span)) * 100;
-    document.getElementById("curvePrice").style.left = Math.min(100, Math.max(0, pricePct)) + "%";
+    const xOf = (p) => pad + ((p - lo) / span) * (W - 2 * pad);
+    const prX = xOf(pr);
+
+    // Draw a bell curve peaking at the active bin (dead-center of range for a curve).
+    const peak = (W - 2 * pad) / 2 + pad; // centered
+    const sigma = (W - 2 * pad) / 4; // spread
+    const base = H * 0.82, amp = H * 0.68;
+
+    // Gradient fill under the curve
+    const grad = ctx.createLinearGradient(0, 0, 0, H);
+    grad.addColorStop(0, "rgba(139,92,246,0.55)");
+    grad.addColorStop(1, "rgba(139,92,246,0.05)");
+    ctx.beginPath();
+    for (let x = 0; x <= W; x++) {
+      const g = Math.exp(-((x - peak) ** 2) / (2 * sigma * sigma));
+      const y = base - g * amp;
+      if (x === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+    }
+    ctx.lineTo(W, H); ctx.lineTo(0, H); ctx.closePath();
+    ctx.fillStyle = grad;
+    ctx.fill();
+
+    // Line outline
+    ctx.beginPath();
+    for (let x = 0; x <= W; x++) {
+      const g = Math.exp(-((x - peak) ** 2) / (2 * sigma * sigma));
+      const y = base - g * amp;
+      if (x === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+    }
+    ctx.strokeStyle = "rgba(139,92,246,0.9)";
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    // In-range highlight band + current price line
+    ctx.fillStyle = "rgba(6,182,212,0.10)";
+    ctx.fillRect(pad, 0, W - 2 * pad, H);
+    // Price marker
+    ctx.strokeStyle = "rgba(0,255,136,0.9)";
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(prX, 10); ctx.lineTo(prX, H - 12);
+    ctx.stroke();
+    // Marker dot
+    ctx.beginPath();
+    ctx.arc(prX, base - Math.exp(-((prX - peak) ** 2) / (2 * sigma * sigma)) * amp, 5, 0, Math.PI * 2);
+    ctx.fillStyle = "#00ff88";
+    ctx.shadowColor = "#00ff88"; ctx.shadowBlur = 10;
+    ctx.fill();
+    ctx.shadowBlur = 0;
+
     document.getElementById("axisLow").textContent = "$" + lo.toFixed(3);
     document.getElementById("axisMid").textContent = "$" + pr.toFixed(3);
     document.getElementById("axisHigh").textContent = "$" + hi.toFixed(3);
@@ -387,6 +446,14 @@ function render(data) {
   document.getElementById("mChg").textContent = pool.chg24h != null ? (pool.chg24h>=0?"+":"") + pool.chg24h.toFixed(1) + "%" : "—";
   document.getElementById("mVol").textContent = pool.vol24h ? fmtM(pool.vol24h) : "—";
   document.getElementById("mLiq").textContent = pool.liquidity ? fmtM(pool.liquidity) : "—";
+
+  // AAE regime-driven allocation (from regime_classifier ground truth)
+  const alloc = data?.allocation || {};
+  document.getElementById("aaeRegime").textContent = alloc.regime || "RANGE_BOUND";
+  document.getElementById("aaeLp").textContent = alloc.lp != null ? alloc.lp + "%" : "40%";
+  document.getElementById("aaeStaking").textContent = alloc.staking != null ? alloc.staking + "%" : "30%";
+  document.getElementById("aaeHodl").textContent = alloc.hodl != null ? alloc.hodl + "%" : "15%";
+  document.getElementById("aaeLend").textContent = alloc.lending != null ? alloc.lending + "%" : "15%";
 
   renderTier();
 }
