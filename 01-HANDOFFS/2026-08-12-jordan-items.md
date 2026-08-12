@@ -2,7 +2,7 @@
 
 ## 🔴 URGENT — Time-sensitive (from considerations + stale-notes)
 
-- **#80 Keeperhub Agents Onchain — DEADLINE Aug 13 (TOMORROW)** — JORDAN CONFIRMED GO. Proof transfer complete Aug 8 (0.01 USDC on-chain, Base). **REMAINING: film demo video + assemble GitHub submission.** This is the #1 priority — needs Jordan's hands today.
+- **#80 Keeperhub Agents Onchain — DEADLINE Aug 13 (TOMORROW)** — JORDAN CONFIRMED GO. Proof transfer complete Aug 8 (0.01 USDC on-chain, Base). **Public repo LIVE: https://github.com/Gentech-Labs/keeperhub-yield-guard** (LICENSE verified ✅). **REMAINING: film demo video (90-120s script ready at 10-Labs/keeperhub-rebalancer/DEMO-SCRIPT-2026-08-12.md) + optionally open a small Aave position for a live rebalance tx, then submit.**
 - **🏆 Delphi Agent Arena (Gensyn) — TRADING LIVE Aug 10–24 ($10K)** — JORDAN REGISTERED Aug 12. Agent scaffolded at /root/delphi-arena. **NEED: testnet API key (delphi-api-access.gensyn.ai) + throwaway signing key with TST.** 2-min unlock, then I run it. See 10-Labs/delphi-arena/README.md.
 - **#83 CockroachDB × AWS — Agentic Memory — Aug 18 (6 days)** — $8.75K. **Jordan REGISTERING Aug 12** (Devpost cockroachdb-ai.devpost.com).
 - **#29 Build with Gemini XPRIZE — deadline Aug 17 (5 days)** — Register at xprize.devpost.com, **Jordan REGISTERING Aug 12**. Circle Agentic Economy bonus ($50K) already shipped by labs.
