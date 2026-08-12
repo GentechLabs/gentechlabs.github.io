@@ -23,7 +23,7 @@ TRACKER_FILE = DATA_DIR / "revenue-tracker.json"
 
 # USDC contract addresses per chain
 USDC_CONTRACTS = {
-    "base": "0x83358933e220DBD71d557b2c7c88c4b48eb88b43",
+    "base": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
     "avalanche": "0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E",
     "bnb": "0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d",
 }
@@ -405,6 +405,8 @@ def get_marketplace_income():
     results = []
     # AgentLux — only surface REAL income events: pending hire to accept + settled payout
     results.append(get_agentlux_earnings())
+    # Nevermined — LIVE (registered Aug 12). Income = settled USDC (already scanned on-chain
+    # via the USDC transfer scan to our wallet). No extra API poll needed.
     return results
 
 
