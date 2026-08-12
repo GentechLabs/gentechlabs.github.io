@@ -135,7 +135,7 @@
 - Revenue: % per tx or flat $49/mo
 
 ## x402 Marketplace Connector Guides — "How to Get Listed Everywhere"
-**Status:** Concept (Jordan, Aug 3 2026)
+**Status:** Concept (Jordan, Aug 3 2026) → **FLESHED OUT (Aug 12 nightly)**
 - **The insight:** every x402 marketplace/protocol catalogs DIFFERENTLY, and nobody's written the connective tissue. We're hitting this friction live (CDP settles→indexes, Dexter settles→catalogs, Syra uses on-chain identity/8004). Other builders will hit the same wall.
 - **The product:** a living set of guides — "how to connect your x402 API to ANY marketplace" — kept updated as protocols change.
   - CDP Bazaar (settle→index, needs `paymentPayload.resource`)
@@ -147,6 +147,17 @@
 - **Synergy:** extends the existing "GenTech Academy — Ship Paid APIs in a Weekend" course (line 89). This is the distribution/listing chapter.
 - **Differentiator:** not a generic tutorial — a maintained, protocol-by-protocol reference that tracks the actual (changing) cataloging rules.
 - [ ] Scaffold the CLI tool
+- **Concrete first deliverable (cheap, high-leverage):** a `connectors/` doc set under `10-Labs/x402-gateway/` capturing the exact listing steps we've already done:
+  1. **OpenDexter** — registry row 4g verified Aug 3 (endpoint live, tools enumerated: x402_search/check/access/wallet). Funding path identified (0x7ebff owner wallet).
+  2. **Syra** — on-chain identity + 8004/SAP + payToAddress (queue #22, pending).
+  3. **awesome-mcp-servers** — PR #11773 submitted Aug 9 (x402-gateway + GTA execution engine).
+  4. **Paymenter marketplace** — listing drafted (queue #11).
+  - Each doc: what the marketplace catalogs, the exact payload/registration fields, the settle→index flow, and the gotcha we hit.
+- **Why now:** we have 4+ real listing experiences in the last 9 days. Capturing them while fresh is near-zero marginal cost and produces the first "Connector Pack" chapter immediately.
+- [ ] Write `connectors/opendexter.md` (data already in hand)
+- [ ] Write `connectors/syra.md` (after #22 ships)
+- [ ] Write `connectors/awesome-mcp-servers.md` (PR #11773 context)
+- [ ] Write `connectors/paymenter.md` (after #11 ships)
 
 ## Sana Wallet Integration
 **Source:** @sanafionchain (Jun 18) | **Status:** Research done, needs account creation

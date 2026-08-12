@@ -190,7 +190,7 @@
     "name": "Agent Warfare \u2014 Procedural Map Generation via text-to-cad",
     "difficulty": "medium",
     "priority": "urgent",
-    "status": "pending",
+    "status": "shipped",
     "assigned_to": "gentech",
     "platform": "cloud",
     "needs_jordan": false,
@@ -199,13 +199,15 @@
     "detail": "Use text-to-cad pipeline (build123d \u2192 STEP \u2192 GLB) to generate playable FPS maps from descriptions. Urban courtyard, warehouse, desert outpost, etc. Drop GLB into Three.js scene as playable level. Ship with a dozen procedurally-generated maps.",
     "_orig_id": 9,
     "recommended_tier": "k2.7",
-    "note": "[Jordan TOP PRIORITY Aug 3: character design, map design, performance, sound, gameplay - must be crispy. Futuristic GenTech shooter. Custom weapons later.]",
+    "note": "[Jordan TOP PRIORITY Aug 3: character design, map design, performance, sound, gameplay - must be crispy. Futuristic GenTech shooter. Custom weapons later.] [VERIFIED shipped 2026-08-12: ?mapseed=NUM procedural maps live, cbf85a0, tests pass, deployed to /var/www/arcade/cabinet/agent-warfare/]",
     "group": "entertainment",
     "routing": {
       "group": "entertainment",
       "build_in": "entertainment",
       "handoff_on_complete": true
-    }
+    },
+    "shipped_by": "gentech",
+    "shipped_date": "2026-08-12"
   },
   {
     "id": 10,
@@ -641,14 +643,16 @@
     "human_gated": true,
     "gate_type": "action",
     "detail": "Build with Gemini XPRIZE by XPRIZE \u00d7 Google. M total prizes (00K grand prize). Build a real AI business operated by AI agents with real revenue. Must use at least one Google Cloud product. Categories include Money & Financial Access \u2014 perfect for our x402 payment gateway. Deadline: Aug 17, 2026 (18 days). Register at xprize.devpost.com. Our x402 gateway + agent stack fits the Money & Financial Access category. Needs Jordan: register on Devpost, decide go/no-go.",
-    "note": "Jordan CONFIRMED start (Aug 4): hackathon first. Register on Devpost + decide build.",
+    "note": "Jordan CONFIRMED start (Aug 4): hackathon first. Register on Devpost + decide build. [SHIPPED by labs 2026-08-12]",
     "recommended_tier": "k3",
     "group": "labs",
     "routing": {
       "group": "labs",
       "build_in": "labs",
       "handoff_on_complete": true
-    }
+    },
+    "shipped_by": "labs",
+    "shipped_date": "2026-08-12"
   },
   {
     "id": 30,
@@ -1079,7 +1083,7 @@
     "name": "Agentic Bridge \u2014 Base\u2192Avalanche USDC rail + per-bridge fee layer",
     "difficulty": "medium",
     "priority": "high",
-    "status": "pending",
+    "status": "shipped",
     "assigned_to": "gentech",
     "platform": "cloud",
     "needs_jordan": false,
@@ -1093,7 +1097,9 @@
       "build_in": "Treasury",
       "handoff_on_complete": true
     },
-    "note": "Jordan GO (Aug 6): 'yes add this' + 'look into how to build an Agentic bridge for the Treasury and what transaction fee that would look like for users.' Logged to Green Room ideas as the bridge-cost test. Missing rail blocks treasury cross-chain autonomy."
+    "note": "Jordan GO (Aug 6): 'yes add this' + 'look into how to build an Agentic bridge for the Treasury and what transaction fee that would look like for users.' Logged to Green Room ideas as the bridge-cost test. Missing rail blocks treasury cross-chain autonomy. [SHIPPED by gentech 2026-08-12: avax_bridge_adapter.py Base\u2192Avalanche USDC rail via Across, live API quote (0.010% fee, 3s fill), GenTech 20bps fee layer, 8/8 tests pass incl 2 live]",
+    "shipped_by": "gentech",
+    "shipped_date": "2026-08-12"
   },
   {
     "id": 52,
