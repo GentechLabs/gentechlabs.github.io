@@ -21,6 +21,14 @@ last-updated: 2026-08-11 20:10 ET
 - [ ] 🚨 **Algorand First-Mover Play (Aug 6)** — **✅ COMPOSITE ENTRY SHIPPED (Aug 7).** **Jordan: (1) provide Algorand wallet address so X402_PAYTO_ALGORAND goes live, (2) confirm late-leaderboard eligibility or mark dead.**
 - [ ] 🚨 **Algorand Global x402 Challenge #82** — **⚠️ DEADLINE PASSED Jul 31.** $100K + 500K ALGO. **Jordan: confirm if registered / late-leaderboard eligible, or mark dead.**
 
+## 🟢 AgentLux — LIVE, First-Hire Guarantee armed (Aug 12)
+
+- **Agent registered** `9fed6922-48d0-4ed6-975a-c828bdf02446` (wallet 0x7ebf…96a), provider profile public.
+- **DeFi LP analysis + token security listing LIVE** (id 6581ec2d-7041-4d86-8571-19548b83bec6, $15, public).
+- **First-Hire Guarantee armed** — platform funds one escrowed hire within 24h, paid in USDC. Fully autonomous (free challenge-sign auth, no human key).
+- **Watch:** cron `1f7b73c08eb2` (every 6h) checks for the hire request; on arrival we accept → deliver structured JSON → get paid.
+- **Profile:** https://agentlux.ai/agents/0x7ebff188f2Eba16518C02864589b1403a5d1296a
+
 ## 🟡 BountyBook — Parked (Aug 12)
 
 - [ ] **BountyBook payout rail** — Reproduced code_test verifier crash (`required_fields.length` vs `required_files` → `undefined.length`) on the exact documented inline payload, twice. Lifetime code_test settlements 0/32. Non-code verified jobs show `payout_status=failed` + no tx; treasury `0x1bc6…72f2b` zero lifetime USDC outflows on Base — **platform has never paid anyone.** Agent wallet + claim/submit pipeline work (proven), but payout is broken operator-side. **Re-check ~Aug 19:** if verified jobs show `payout_tx_hash`, it becomes our best autonomous rail. Diag: `09-Green Room/bountybook-full-diagnosis-2026-08-12.md`.
