@@ -17,13 +17,14 @@ run: EOD (Aug 10 ET) / daily-sync
 
 | Item | Deadline | Days Left | Status |
 |------|----------|-----------|--------|
-| AI Factory Hackathon | Aug 10 | **0 — TODAY** | ✅ SHIPPED (labs Aug 9), needs Jordan submission confirm |
-| Build with DataHub | Aug 10 | **0 — TODAY** | 🟡 Needs submission confirm |
-| Keeperhub Agents Onchain | Aug 13 | **3** | ✅ PROOF TRANSFER DONE (Aug 8), needs demo video + README |
-| Gears E:D Open Beta | Aug 13–17 | **3** | 🎮 Gaming — price-watch active |
-| CockroachDB × AWS | Aug 18 | **8** | 🟢 Jordan: register? |
+| **CPI Release (macro event)** | Aug 12 8:30 AM ET | **1 — TOMORROW** | 🎯 CPI War-Room LOCKED — Bid-Ask reposition 07:45 ET, Curve revert 09:00 ET Aug 13 |
+| Keeperhub Agents Onchain #80 | Aug 13 | **2** | ✅ PROOF TRANSFER DONE (Aug 8), needs demo video + README |
+| Gears E:D Open Beta | Aug 13–17 | **2** | 🎮 Gaming — price-watch active |
+| CockroachDB × AWS | Aug 18 | **7** | 🟢 Jordan: register? |
 
 ## ✅ Deadlines Passed (verified)
+- AI Factory Hackathon (Aug 10) — ✅ SHIPPED, submission confirm pending.
+- Build with DataHub (Aug 10) — ✅ passed, submission confirm pending.
 - Arc Programmable Money (Aug 9) — ✅ SHIPPED, moved to Recently Resolved.
 - Algorand First-Mover Play (Aug 6) — passed. Composite entry shipped. Jordan: confirm late-leaderboard eligibility or mark dead.
 - Algorand Global x402 Challenge (Jul 31) — passed. No registration confirmation.
@@ -73,10 +74,13 @@ run: EOD (Aug 10 ET) / daily-sync
 - WhatsApp Cloud API still blocked on Meta credentials
 
 ## 🚨 Blockers
-- **CDP SDK not installed** in vault venv — bridge adapter can't execute real transactions
+- **🔑 AVAX KEY COMPROMISE (Aug 11)** — Jordan's **personal AVAX private key was pasted in chat** (derives to Main `0x7ebf...96a`, ~0.099 AVAX). Stored locked-down (`/root/.blockrun/jordan-personal-avax-key`, 600) but chat history is synced → **NOT safe. Jordan must rotate/move funds.**
+- **CPI event tomorrow (Aug 12 8:30 AM ET)** — Steward War-Room play staged (Bid-Ask 07:45 ET → Curve 09:00 ET Aug 13). Watchdog `51bc9900e24d` is the breakout eyes.
+- **CDP SDK not installed** in vault venv — bridge adapter can't execute real transactions (note: Steward executes on Avalanche via its own rail, verified live).
 - **Crossmint staging account** — needs Jordan signup at staging.crossmint.com
 - **Manual GitHub forks** — 5 repos, API-blocked (403). Jordan must fork via web UI
 - **WhatsApp Cloud API** — Meta app + credentials needed from Jordan
+- **GTA real-execution rails** — AVAX/ONDO rails need wiring (CDP Base/Ethereum-only) + GTA_HL_KEY set.
 - **3 placeholder APIs fixed** (Aug 3) but agent-search-api still orphaned (no systemd service)
 
 ## 🔗 Related
