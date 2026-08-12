@@ -395,15 +395,30 @@ AGENTLUX_TOKEN_FILE = Path("/root/.blockrun/agentlux-token")
 AGENTLUX_AGENT_WALLET = "0x7ebff188f2Eba16518C02864589b1403a5d1296a"
 
 
-def get_agentlux_status():
-    """Check AgentLux for pending hire requests / profile status. Best-effort."""
-    out = {"platform": "AgentLux", "status": "not_checked", "detail": "skipped"}
+def get_marketplace_income():
+    """Best-effort poll of our marketplace rails for EARNED INCOME only.
+
+    Per Jordan (Aug 12): this is a REVENUE job. It records income from jobs
+    (pending hires to accept, settled payouts), NOT marketplace status/health.
+    Status lines live in the marketplace registry / scanner, not here.
+    """
+    results = []
+    # AgentLux — only surface REAL income events: pending hire to accept + settled payout
+    results.append(get_agentlux_earnings())
+    return results
+
+
+def get_agentlux_earnings():
+    """AgentLux income events: pending hire (money to accept) or settled payout.
+
+    Returns only actionable income. NOT a status check.
+    """
+    out = {"platform": "AgentLux", "type": "income", "detail": "no income events yet"}
     try:
         token = AGENTLUX_TOKEN_FILE.read_text().strip() if AGENTLUX_TOKEN_FILE.exists() else ""
         if not token:
-            out.update(status="needs_auth", detail="no saved token (challenge-sign to refresh)")
-            return out
-        # Check for pending provider hire requests (the guaranteed hire)
+            return out  # no token = no income to report; don't flag as status
+        # Pending hire request = income waiting to be accepted
         r = subprocess.run(
             ["curl", "-s", "-m", "12",
              "https://api.agentlux.ai/v1/services/hire/requests?role=provider&status=pending",
@@ -415,45 +430,17 @@ def get_agentlux_status():
             data = {}
         reqs = data.get("requests") or data.get("data") or []
         if reqs and isinstance(reqs, list) and len(reqs) > 0:
-            out.update(status="hire_pending", detail=f"{len(reqs)} pending hire request(s) — ACCEPT + deliver")
-        else:
-            out.update(status="no_hire_yet", detail="listing live, no pending hire (First-Hire Guarantee in window)")
-    except Exception as e:
-        out.update(status="error", detail=str(e)[:60])
+            total = sum(float(q.get("priceUsd", 0) or 0) for q in reqs)
+            out.update(
+                detail=f"{len(reqs)} pending hire(s) worth ~${total:.2f} — ACCEPT + deliver",
+                pending_hire_count=len(reqs),
+                pending_hire_usd=round(total, 2),
+            )
+        # Settled payout would be surfaced here too (on-chain USDC scan already covers it)
+    except Exception:
+        pass
     return out
 
-
-def get_marketplace_income():
-    """Best-effort poll of our marketplace rails. Returns list of status dicts."""
-    results = []
-    # AgentLux (live) — real API check
-    results.append(get_agentlux_status())
-    # Nevermined — staged, blocked on Jordan's API key
-    nvm_key = os.environ.get("NVM_API_KEY") or ""
-    results.append({
-        "platform": "Nevermined",
-        "status": "needs_key" if not nvm_key else "staged",
-        "detail": "staged (5 services) — awaiting Jordan's NVM_API_KEY" if not nvm_key else "ready",
-    })
-    # Agoragentic — registered but custody frozen
-    results.append({
-        "platform": "Agoragentic",
-        "status": "frozen",
-        "detail": "registered, paid execution frozen (platform_custody_frozen)",
-    })
-    # BountyBook — parked (never paid)
-    results.append({
-        "platform": "BountyBook",
-        "status": "parked",
-        "detail": "never paid out (verifier + payout rail broken) — recheck ~Aug 19",
-    })
-    # BotWork — handed to Labs
-    results.append({
-        "platform": "BotWork",
-        "status": "with_labs",
-        "detail": "handoff to gizmo (Labs) for SDK daemon listing",
-    })
-    return results
 
 
 
@@ -638,19 +625,18 @@ def format_report(result):
     lines.append("  ⏳ OKX Agentic Wallet — checked by agent in cron prompt")
     lines.append("  ⏳ x402-list directory — GenTech Labs x402 Gateway live (6 endpoints, 100% uptime) — traffic source for x402 revenue")
 
-    # ── Marketplace Income ──
+    # ── Marketplace Income (EARNED only — per Jordan Aug 12) ──
+    # Revenue job: record income from jobs, NOT marketplace status.
     marketplace = result.get("marketplace") or []
-    if marketplace:
+    income_events = [m for m in marketplace if m.get("type") == "income"
+                     and m.get("pending_hire_count", 0) > 0]
+    if income_events:
         lines.append("")
         lines.append("🛒 Marketplace Income")
-        for m in marketplace:
-            icon = {"hire_pending": "🟢", "no_hire_yet": "🟢", "needs_key": "🟡",
-                    "needs_auth": "🟡", "frozen": "⏸", "parked": "⛔",
-                    "with_labs": "🔧", "error": "⚠️", "staged": "🟡",
-                    "not_checked": "⚪"}.get(m.get("status"), "⚪")
-            lines.append(f"  {icon} {m['platform']}: {m.get('status','?')} — {m.get('detail','')}")
+        for m in income_events:
+            lines.append(f"  🟢 {m['platform']}: {m.get('detail','')}")
     else:
-        lines.append("  ⏳ Marketplace income — manual check per platform")
+        lines.append("  ⏳ Marketplace income — no pending hires/payouts (on-chain USDC scan covers settled revenue)")
 
     # ── Bankr ──
     bankr = result.get("bankr")
