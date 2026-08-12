@@ -9,11 +9,7 @@
 
 ## Needs Your Action (carried from Aug 11)
 
-- **Nevermined API key (NEW Aug 12)** — I cannot self-register (needs email/GitHub login + email verification). I've staged the whole registration; I just need ONE thing from you whenever after work:
-  1. Go to **https://nevermined.app** → sign in
-  2. **Settings → Global NVM API Keys → + New API Key** → copy it
-  3. Paste it here. I've already set the BUILDER_ADDRESS (your wallet `0x7ebf…96a`) so the payout lands in your wallet. Then I run the script and we're live on Nevermined (1.2M req/day, sell-side, USDC/x402).
-  - Full checklist: `09-Green Room/nevermined-registration-checklist-2026-08-12.md`
+- **Nevermined — ✅ DONE (Aug 12).** Key received, 5 services registered live on mainnet. No action needed.
 - **#13 Multica + Paperclip** — ClawWork squad + genTech-shop plugin. Both greenlit.
 - **#15 DeFi Model** — QLoRA fine-tune DeepSeek R1 32B. $2.50, ~1hr. Fund BlockRun wallet.
 - **#36 Superteam USA** — remote membership application (us.superteam.fun/join).
