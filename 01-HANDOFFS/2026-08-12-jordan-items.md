@@ -1,31 +1,14 @@
 # 👑 Jordan Action Items — 2026-08-12
 
-## 🔴 URGENT — Time-sensitive (from considerations + stale-notes)
+## Needs Your Action (5 items)
 
-- **#80 Keeperhub Agents Onchain — DEADLINE Aug 13 (TOMORROW)** — JORDAN CONFIRMED GO. Proof transfer complete Aug 8 (0.01 USDC on-chain, Base). **Public repo LIVE: https://github.com/Gentech-Labs/keeperhub-yield-guard** (LICENSE verified ✅). **REMAINING: film demo video (90-120s script ready at 10-Labs/keeperhub-rebalancer/DEMO-SCRIPT-2026-08-12.md) + optionally open a small Aave position for a live rebalance tx, then submit.**
-- **🏆 Delphi Agent Arena (Gensyn) — TRADING LIVE Aug 10–24 ($10K)** — JORDAN REGISTERED Aug 12. Agent scaffolded at /root/delphi-arena. **NEED: testnet API key (delphi-api-access.gensyn.ai) + throwaway signing key with TST.** 2-min unlock, then I run it. See 10-Labs/delphi-arena/README.md.
-- **#83 CockroachDB × AWS — Agentic Memory — Aug 18 (6 days, 5pm EDT)** — $8,750 (1st $5K). **Jordan REGISTERING Aug 12.** This is OUR lane — re-home existing vault/session-memory onto CockroachDB as the storage layer + deploy on AWS. Build brief ready at 01-HANDOFFS/gentech-to-labs/2026-08-12-cockroachdb-memory.md. Needs 2 CockroachDB tools + 1 AWS service, public repo with LICENSE, <3min video.
-- **#29 Build with Gemini XPRIZE — Aug 17 (5 days, 1pm PDT)** — $2M pool (1st $500K). **Jordan REGISTERING Aug 12.** MUST be agent-operated + integrate Gemini API/Vertex AI. Build brief ready at 01-HANDOFFS/gentech-to-labs/2026-08-12-gemini-xprize.md.
+- **#13 Multica + Paperclip — Set Up ClawWork Squad + GenTech Shop Plugin** — Two platforms running locally. (1) Multica at localhost:3001 — create GenTech workspace, add Hermes agent, spin up ClawWork agents as teammates on the board. Fixed verification code 402402. (2) Paperclip at ProtoJay4789/paperclip (fork, 74.8K stars, build fixed) — start dev server, build genTech-shop plugin for build queue panel + service catalog. Both greenlit by Jordan.
+- **#15 DeFi Model — QLoRA Fine-Tune DeepSeek R1 32B on BlockRun** — Fine-tune DeepSeek R1 Distill 32B on 26 DeFi instruction pairs via QLoRA. Single A10G on BlockRun Modal. Cost: $2.50. Time: ~1 hour. Scripts ready at 10-Labs/defi-model/. Training data at final-training-20260618.jsonl. Jordan funds BlockRun wallet, then run: python3 run-modal.py
+- **#29 Build with Gemini XPRIZE — AI Business with x402 Payments (M)** — Build with Gemini XPRIZE by XPRIZE × Google. M total prizes (00K grand prize). Build a real AI business operated by AI agents with real revenue. Must use at least one Google Cloud product. Categories include Money & Financial Access — perfect for our x402 payment gateway. Deadline: Aug 17, 2026 (18 days). Register at xprize.devpost.com. Our x402 gateway + agent stack fits the Money & Financial Access category. Needs Jordan: register on Devpost, decide go/no-go.
+- **#36 Superteam USA — Remote Community Membership Application** — Superteam USA (Solana Foundation-backed, no equity/fees). Apply for REMOTE community membership via us.superteam.fun/join. Jordan confirmed Aug 4: Miami Resident Builder seat is OFF (does not live in Miami) — remote membership only. Aligns with Solana learning track + x402/agent-economy thesis.
+- **#46 ComfyUI — Self-Hosted Brand Asset Pipeline (Consigliere Fed Chair family)** — ComfyUI (Comfy-Org/ComfyUI, 124k stars, GPL-3.0) — the most powerful modular diffusion GUI/backend. Runs FLUX/SDXL/Wan/LTX locally on a GPU. USE CASE: character consistency for the Consigliere Fed Chair family + treasury emblems. IPAdapter+InstantID locks the Powell face so every chain Fed Chair (Solana/Arc/Base/ETH) keeps the SAME face, just recolored; train a Consigliere LoRA once for a consistent brand family; reusable node graph recolors the hex 'G' emblem per chain. VPS has NO GPU (4-core/15GB/22GB free) so this is a DESKTOP tool. Needs: GPU laptop/desktop (12GB+ VRAM ideal, 3060 sweet spot; min 4GB VRAM/16GB RAM for SDXL). Install: pip install comfyui or portable build from github.com/Comfy-Org/ComfyUI; see docs.comfy.org/installation/system_requirements. Deliverable: Consigliere LoRA + per-chain workflow generating the full Fed Chair cabinet + treasury emblems in one consistent pass; finished assets return to VPS for site/avatars.
 
-## Needs Your Action (carried from Aug 11)
+## Needs Your Decision (2 items)
 
-- **Nevermined — ✅ DONE (Aug 12).** Key received, 5 services registered live on mainnet. No action needed.
-- **#13 Multica + Paperclip** — ClawWork squad + genTech-shop plugin. Both greenlit.
-- **#15 DeFi Model** — QLoRA fine-tune DeepSeek R1 32B. $2.50, ~1hr. Fund BlockRun wallet.
-- **#36 Superteam USA** — remote membership application (us.superteam.fun/join).
-- **#46 ComfyUI** — desktop GPU tool for Consigliere Fed Chair brand family.
-- **#52 Krexa** — grab invite code (Discord discord.gg/aMSEG7yj), then I activate + test.
-
-## Needs Your Decision
-
-- **#32 Model Strength Score** — greenlight + Modal GPU funding.
-- **#48 BOT Chain** — register at luma.com/238et7cw (build window Aug 10-20).
-- **#49 Telegraph** — register at hackathon.telegraphprotocol.com (H1 Aug 17-Sep 7).
-
-## Blockers / Notes
-
-- **#1 KeeperHub** — USDC tx failed "invalid address" earlier; Jordan investigating. Wallet still 10 USDC on Base.
-- **#2 Arc** — FINAL SUBMISSIONS due Aug 9 midnight (passed). Confirm if checkpoint submitted counts, or if full 3-min demo video + repo link needed.
-- **#6 AI Factory** — deadline passed Aug 10. Confirm submission status (if not submitted, this is done).
-- **#30 DataHub** — demo video + Devpost submit (deadline was Aug 10).
-- **#53 Vault git divergence** — main 40 vs origin 3 commits. Needs Jordan go-ahead to pull-rebase + push.
+- **#32 Model Strength Score — score trained models 0-850 for marketplace** — Score AI models 0-850 like Agent Credit Score: Data Quality 30%, Benchmarks 25%, Trainer Reputation 20%, Age/Uptime 15%, Market Adoption 10%. Bittensor lessons baked in: staked reputation, on-chain provenance, no kill switch. First listing = GenTech DeFi Model (Modal GPU ~$30-60). Revenue: score API $0.01-0.05, listing fee, 2-5% inference take. Spec: 09-Green Room/specs/model-strength-score.md. Needs Jordan greenlight + Modal GPU funding.
+- **#53 Vault Git Divergence Cleanup — main 40 vs origin 3** — Vault repo main has diverged (40 local commits vs 3 on origin) from concurrent nightly-build commits colliding. backdoor-defense doc committed locally but push rejected. Fix: pull-rebase the nightly commits properly, resolve build_queue.json conflict, push. Needs Jordan go-ahead since it touches shared history.
