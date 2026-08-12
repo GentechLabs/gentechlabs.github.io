@@ -11,3 +11,7 @@
 ## 2026-08-12
 
 - #55 — GenTech Hub PWA: Hub launcher LIVE at gentechlabs.net/hub-launcher.html + root manifest.json + sw.js + icons. Verified: all serve HTTP 200, manifest valid JSON, launcher links Treasury/Steward, Arcade, Yield Rainbow, Vanito/KAGE, Arc x402, Hub Engine. Cookbook/Travel/Ray-Ban marked SOON (not yet built).
+- #51 — Agentic Bridge Base→Avalanche USDC rail: `avax_bridge_adapter.py` fills the missing treasury rail via Across. Live API fee quotes (0.010% fee, 3s fill), GenTech 20bps per-bridge fee layer, bridge() execution + status check, graceful estimate fallback. 8/8 tests pass (incl 2 live). Execution Jordan-gated (Steward wallet unfunded).
+- #9 — Agent Warfare procedural maps: verified shipped (cbf85a0, ?mapseed=NUM live, tests pass, deployed). Queue was stale; marked shipped.
+- #29 — Gemini XPRIZE: annotated labs return (shipped 2026-08-12).
+- Resolved #53 vault divergence: merged origin/main, took newer remote defi-data, kept valid local build_queue + rotation-data (remote copies had conflict markers). Pushed clean.
