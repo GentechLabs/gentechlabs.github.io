@@ -32,7 +32,6 @@
   a live product.
 
 ## Action
-- [ ] **Watch inbox** for Solana Foundation approval/rejection email (~1 week)
-- [ ] If approved: this is the **primary treasury funding source** (up to $10k) —
-  reallocate plan around it
-- [ ] Keep Solana Homebase MVP public + building so the submission stays strong
+- [x] **Inbox check (Aug 12)** — Jordan re-visited the site: still shows the application (no "approved"/"rejected" status), no decision email. Likely a large applicant pool + rolling review. **Status: STILL PENDING, no signal.**
+- [ ] Re-check ~Aug 19 (1 week later). If still nothing, treat as soft-wait — do not reallocate treasury around an unconfirmed grant.
+- [x] Keep Solana Homebase MVP public + building so the submission stays strong
