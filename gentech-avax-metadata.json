@@ -1,8 +1,8 @@
 {
   "name": "GenTech Labs",
-  "description": "AI agent economy infrastructure — risk scoring, data access, identity verification, and DeFi intelligence for autonomous agents. 16 x402-monetized endpoints across blockchain, travel, and intelligence categories.",
-  "image": "https://raw.githubusercontent.com/ProtoJay4789/ProtoJay4789.github.io/main/gentech-logo.png",
-  "version": "1.3.1",
+  "description": "AI agent economy infrastructure \u2014 risk scoring, data access, identity verification, and DeFi intelligence for autonomous agents. 16 x402-monetized endpoints across blockchain, travel, and intelligence categories.",
+  "image": "https://gentechlabs.net/gentech-logo.png",
+  "version": "1.3.2",
   "author": "ProtoJay4789",
   "homepage": "https://gentechlabs.net",
   "contact": "https://github.com/ProtoJay4789",
@@ -14,7 +14,15 @@
     "openSource": true,
     "license": "MIT",
     "agentKit": "v0.3.0",
-    "tags": ["agent-economy", "x402", "blockchain", "security", "defi", "infrastructure", "mcp"]
+    "tags": [
+      "agent-economy",
+      "x402",
+      "blockchain",
+      "security",
+      "defi",
+      "infrastructure",
+      "mcp"
+    ]
   },
   "skills": [
     "security_privacy/security_privacy",
@@ -81,66 +89,147 @@
       "type": "x402",
       "url": "https://gentechlabs.net/v1/score/{mint}",
       "name": "Rugcheck v2",
-      "description": "Token risk scoring — 11-factor safety analysis including holder distribution, LP status, contract verification, and scam patterns",
+      "description": "Token risk scoring \u2014 11-factor safety analysis including holder distribution, LP status, contract verification, and scam patterns",
       "oasfVersion": "1.0",
-      "skills": ["token_analysis", "risk_classification", "fraud_detection", "security_privacy"],
-      "domains": ["blockchain", "security", "defi"],
-      "pricing": { "model": "pay-per-query", "amount": 0.01, "currency": "USDC", "protocol": "x402" },
+      "skills": [
+        "token_analysis",
+        "risk_classification",
+        "fraud_detection",
+        "security_privacy"
+      ],
+      "domains": [
+        "blockchain",
+        "security",
+        "defi"
+      ],
+      "pricing": {
+        "model": "pay-per-query",
+        "amount": 0.01,
+        "currency": "USDC",
+        "protocol": "x402"
+      },
       "active": true
     },
     {
       "type": "x402",
       "url": "https://gentechlabs.net/v1/defi/{protocol}",
       "name": "DeFi Intelligence",
-      "description": "DeFi protocol intelligence — TVL, yield pools, chain breakdown, and historical data from DefiLlama",
+      "description": "DeFi protocol intelligence \u2014 TVL, yield pools, chain breakdown, and historical data from DefiLlama",
       "oasfVersion": "1.0",
-      "skills": ["defi_analytics", "defi_monitoring", "market_analysis", "data_access"],
-      "domains": ["defi", "blockchain", "finance"],
-      "pricing": { "model": "pay-per-query", "amount": 0.05, "currency": "USDC", "protocol": "x402" },
+      "skills": [
+        "defi_analytics",
+        "defi_monitoring",
+        "market_analysis",
+        "data_access"
+      ],
+      "domains": [
+        "defi",
+        "blockchain",
+        "finance"
+      ],
+      "pricing": {
+        "model": "pay-per-query",
+        "amount": 0.05,
+        "currency": "USDC",
+        "protocol": "x402"
+      },
       "active": true
     },
     {
       "type": "x402",
       "url": "https://gentechlabs.net/v1/travel/search",
       "name": "Travel Intelligence",
-      "description": "Travel search — Google Maps places, restaurants, hotels with price and rating data",
+      "description": "Travel search \u2014 Google Maps places, restaurants, hotels with price and rating data",
       "oasfVersion": "1.0",
-      "skills": ["search", "data_access", "retrieval_of_information"],
-      "domains": ["travel", "tourism", "data"],
-      "pricing": { "model": "pay-per-query", "amount": 0.01, "currency": "USDC", "protocol": "x402" },
+      "skills": [
+        "search",
+        "data_access",
+        "retrieval_of_information"
+      ],
+      "domains": [
+        "travel",
+        "tourism",
+        "data"
+      ],
+      "pricing": {
+        "model": "pay-per-query",
+        "amount": 0.01,
+        "currency": "USDC",
+        "protocol": "x402"
+      },
       "active": true
     },
     {
       "type": "x402",
       "url": "https://gentechlabs.net/v1/content/{platform}",
       "name": "Content Intelligence",
-      "description": "Content scraping — X, Reddit, YouTube, Instagram trends and analysis",
+      "description": "Content scraping \u2014 X, Reddit, YouTube, Instagram trends and analysis",
       "oasfVersion": "1.0",
-      "skills": ["content_scraping", "content_analysis", "trend_detection", "social_media_analysis"],
-      "domains": ["content", "social_media", "analytics"],
-      "pricing": { "model": "pay-per-query", "amount": 0.02, "currency": "USDC", "protocol": "x402" },
+      "skills": [
+        "content_scraping",
+        "content_analysis",
+        "trend_detection",
+        "social_media_analysis"
+      ],
+      "domains": [
+        "content",
+        "social_media",
+        "analytics"
+      ],
+      "pricing": {
+        "model": "pay-per-query",
+        "amount": 0.02,
+        "currency": "USDC",
+        "protocol": "x402"
+      },
       "active": true
     },
     {
       "type": "x402",
       "url": "https://gentechlabs.net/v1/agent/search",
       "name": "Agent Discovery",
-      "description": "AI agent discovery — search by capability, chain, and protocol across ERC-8004 registries",
+      "description": "AI agent discovery \u2014 search by capability, chain, and protocol across ERC-8004 registries",
       "oasfVersion": "1.0",
-      "skills": ["agent_verification", "search", "data_access"],
-      "domains": ["ai-agents", "identity", "blockchain"],
-      "pricing": { "model": "pay-per-query", "amount": 0.005, "currency": "USDC", "protocol": "x402" },
+      "skills": [
+        "agent_verification",
+        "search",
+        "data_access"
+      ],
+      "domains": [
+        "ai-agents",
+        "identity",
+        "blockchain"
+      ],
+      "pricing": {
+        "model": "pay-per-query",
+        "amount": 0.005,
+        "currency": "USDC",
+        "protocol": "x402"
+      },
       "active": true
     },
     {
       "type": "x402",
       "url": "https://gentechlabs.net/v1/identity/{address}",
       "name": "ERC-8004 Identity",
-      "description": "ERC-8004 identity lookup — verify agent registration and reputation across 22 chains",
+      "description": "ERC-8004 identity lookup \u2014 verify agent registration and reputation across 22 chains",
       "oasfVersion": "1.0",
-      "skills": ["agent_identity", "agent_verification", "on_chain_analysis"],
-      "domains": ["identity", "blockchain", "ai-agents"],
-      "pricing": { "model": "pay-per-query", "amount": 0.001, "currency": "USDC", "protocol": "x402" },
+      "skills": [
+        "agent_identity",
+        "agent_verification",
+        "on_chain_analysis"
+      ],
+      "domains": [
+        "identity",
+        "blockchain",
+        "ai-agents"
+      ],
+      "pricing": {
+        "model": "pay-per-query",
+        "amount": 0.001,
+        "currency": "USDC",
+        "protocol": "x402"
+      },
       "active": true
     },
     {
@@ -149,9 +238,22 @@
       "name": "Smart Wallet Deploy",
       "description": "Safe wallet deployment via Zyfai SDK with yield optimization",
       "oasfVersion": "1.0",
-      "skills": ["payment_processing", "defi_analytics", "infrastructure"],
-      "domains": ["payments", "defi", "blockchain"],
-      "pricing": { "model": "pay-per-query", "amount": 0.01, "currency": "USDC", "protocol": "x402" },
+      "skills": [
+        "payment_processing",
+        "defi_analytics",
+        "infrastructure"
+      ],
+      "domains": [
+        "payments",
+        "defi",
+        "blockchain"
+      ],
+      "pricing": {
+        "model": "pay-per-query",
+        "amount": 0.01,
+        "currency": "USDC",
+        "protocol": "x402"
+      },
       "active": true
     },
     {
@@ -160,20 +262,49 @@
       "name": "Yield Opportunities",
       "description": "Top DeFi yields across protocols via Zyfai SDK",
       "oasfVersion": "1.0",
-      "skills": ["defi_monitoring", "market_analysis", "data_access"],
-      "domains": ["defi", "finance", "blockchain"],
-      "pricing": { "model": "pay-per-query", "amount": 0.001, "currency": "USDC", "protocol": "x402" },
+      "skills": [
+        "defi_monitoring",
+        "market_analysis",
+        "data_access"
+      ],
+      "domains": [
+        "defi",
+        "finance",
+        "blockchain"
+      ],
+      "pricing": {
+        "model": "pay-per-query",
+        "amount": 0.001,
+        "currency": "USDC",
+        "protocol": "x402"
+      },
       "active": true
     },
     {
       "type": "mcp",
       "url": "https://github.com/ProtoJay4789/genTech-agent-kit",
       "name": "GenTech Agent Kit",
-      "description": "MCP server — one install gives any AI agent market data, DeFi intelligence, and x402 payment rails. uvx-installable, 6 tools, plugin system.",
+      "description": "MCP server \u2014 one install gives any AI agent market data, DeFi intelligence, and x402 payment rails. uvx-installable, 6 tools, plugin system.",
       "oasfVersion": "1.0",
-      "skills": ["mcp_server", "uvx_install", "agent_to_agent", "payment_processing", "defi_analytics"],
-      "domains": ["ai-agents", "infrastructure", "payments", "defi"],
-      "pricing": { "model": "pay-per-query", "amount": 0.001, "currency": "USDC", "protocol": "x402" },
+      "skills": [
+        "mcp_server",
+        "uvx_install",
+        "agent_to_agent",
+        "payment_processing",
+        "defi_analytics"
+      ],
+      "domains": [
+        "ai-agents",
+        "infrastructure",
+        "payments",
+        "defi"
+      ],
+      "pricing": {
+        "model": "pay-per-query",
+        "amount": 0.001,
+        "currency": "USDC",
+        "protocol": "x402"
+      },
       "install": "uvx --from git+https://github.com/ProtoJay4789/genTech-agent-kit.git gentech-kit",
       "active": true
     },
@@ -183,8 +314,14 @@
       "name": "Health Check",
       "description": "System health and uptime monitoring for all GenTech services",
       "oasfVersion": "1.0",
-      "skills": ["infrastructure", "quality_assurance"],
-      "domains": ["infrastructure", "technology"],
+      "skills": [
+        "infrastructure",
+        "quality_assurance"
+      ],
+      "domains": [
+        "infrastructure",
+        "technology"
+      ],
       "active": true
     }
   ]
