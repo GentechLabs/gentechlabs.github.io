@@ -2,10 +2,10 @@
 
 ## 🔴 URGENT — Time-sensitive (from considerations + stale-notes)
 
-- **CPI Release — Wed Aug 12 8:30 AM ET (TODAY)** — Treasury CPI War-Room play LOCKED. Regime RANGE_BOUND (conf .65), RSI 24.1 oversold, 24h -3.6%. Expected AVAX ±4-7%. Staged: **07:45 ET Aug 12** `steward_execute --m...`. Confirm go before 07:45 ET.
-- **#80 Keeperhub Agents Onchain — DEADLINE Aug 13 (1 day)** — JORDAN CONFIRMED GO. Proof transfer complete Aug 8 (0.01 USDC on-chain, Base). **REMAINING: film demo video + assemble GitHub submission.** This is the #1 priority — needs Jordan's hands today.
-- **#83 CockroachDB × AWS — Agentic Memory — Aug 18 (6 days)** — $8.75K. **Jordan: register?** (Devpost cockroachdb-ai.devpost.com)
-- **#29 Build with Gemini XPRIZE — deadline Aug 17 (5 days)** — Register at xprize.devpost.com, decide go/no-go. Circle Agentic Economy bonus ($50K) already shipped by labs.
+- **#80 Keeperhub Agents Onchain — DEADLINE Aug 13 (TOMORROW)** — JORDAN CONFIRMED GO. Proof transfer complete Aug 8 (0.01 USDC on-chain, Base). **REMAINING: film demo video + assemble GitHub submission.** This is the #1 priority — needs Jordan's hands today.
+- **🏆 Delphi Agent Arena (Gensyn) — TRADING LIVE Aug 10–24 ($10K)** — JORDAN REGISTERED Aug 12. Agent scaffolded at /root/delphi-arena. **NEED: testnet API key (delphi-api-access.gensyn.ai) + throwaway signing key with TST.** 2-min unlock, then I run it. See 10-Labs/delphi-arena/README.md.
+- **#83 CockroachDB × AWS — Agentic Memory — Aug 18 (6 days)** — $8.75K. **Jordan REGISTERING Aug 12** (Devpost cockroachdb-ai.devpost.com).
+- **#29 Build with Gemini XPRIZE — deadline Aug 17 (5 days)** — Register at xprize.devpost.com, **Jordan REGISTERING Aug 12**. Circle Agentic Economy bonus ($50K) already shipped by labs.
 
 ## Needs Your Action (carried from Aug 11)
 
