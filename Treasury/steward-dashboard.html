@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Steward — Agentic Treasury | GenTech Labs</title>
+<meta name="description" content="Live command center for the GenTech Agentic Treasury — position, curve shape, fee efficiency, yield vs staking vs hodl.">
+<link rel="manifest" href="/Treasury/manifest.json">
+<meta name="theme-color" content="#8b5cf6">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="apple-touch-icon" href="/Treasury/icons/icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #09090b;
+  --card: #18181b;
+  --card-2: #1f1f23;
+  --border: #27272a;
+  --accent: #8b5cf6;
+  --accent-2: #06b6d4;
+  --success: #00ff88;
+  --danger: #ff4466;
+  --warn: #f59e0b;
+  --text: #fafafa;
+  --text-dim: #a1a1aa;
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-sans);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+/* Animated mesh */
+.mesh { position: fixed; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
+.mesh::before, .mesh::after {
+  content: ''; position: absolute; border-radius: 50%; filter: blur(120px); opacity: 0.15;
+}
+.mesh::before {
+  width: 600px; height: 600px; background: radial-gradient(circle, #8b5cf6 0%, transparent 70%);
+  top: -200px; left: 50%; transform: translateX(-50%); animation: meshFloat 8s ease-in-out infinite alternate;
+}
+.mesh::after {
+  width: 500px; height: 500px; background: radial-gradient(circle, #06b6d4 0%, transparent 70%);
+  bottom: -150px; left: 20%; animation: meshFloat 10s ease-in-out infinite alternate-reverse;
+}
+@keyframes meshFloat {
+  0% { transform: translateX(-50%) translate(0,0); }
+  100% { transform: translateX(-50%) translate(40px,30px); }
+}
+.container { max-width: 1200px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 1; }
+.mono { font-family: var(--font-mono); }
+
+/* Nav */
+nav {
+  position: sticky; top: 0; z-index: 100; backdrop-filter: blur(16px);
+  background: rgba(9,9,11,0.72); border-bottom: 1px solid var(--border);
+}
+.nav-inner { max-width: 1200px; margin: 0 auto; padding: 14px 20px; display: flex; align-items: center; justify-content: space-between; }
+.brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 1.05em; }
+.brand .logo { width: 30px; height: 30px; border-radius: 8px; background: linear-gradient(135deg, var(--accent), var(--accent-2)); display: flex; align-items: center; justify-content: center; font-size: 15px; }
+.brand .sub { font-size: 0.7em; color: var(--text-dim); font-weight: 400; }
+.nav-links { display: flex; gap: 8px; }
+.nav-links a { color: var(--text-dim); text-decoration: none; font-size: 0.85em; padding: 6px 12px; border-radius: 8px; transition: all .2s; }
+.nav-links a:hover, .nav-links a.active { color: var(--text); background: var(--card-2); }
+
+/* Hero */
+.hero { padding: 40px 0 20px; }
+.hero h1 { font-size: clamp(1.6em, 4vw, 2.4em); font-weight: 800; letter-spacing: -0.02em; }
+.hero h1 .grad { background: linear-gradient(90deg, var(--accent), var(--accent-2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.hero .sub { color: var(--text-dim); margin-top: 8px; font-size: 0.95em; }
+.hero .status-pill { display: inline-flex; align-items: center; gap: 8px; margin-top: 16px; padding: 6px 14px; border-radius: 999px; font-size: 0.8em; font-weight: 600; border: 1px solid var(--border); }
+.status-pill .dot { width: 8px; height: 8px; border-radius: 50%; }
+.status-pill.in .dot { background: var(--success); box-shadow: 0 0 8px var(--success); }
+.status-pill.out .dot { background: var(--danger); box-shadow: 0 0 8px var(--danger); }
+
+/* Grid */
+.grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px; padding: 20px 0 40px; }
+.card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 20px; }
+.card h3 { font-size: 0.75em; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-dim); margin-bottom: 12px; }
+.card .big { font-size: 1.8em; font-weight: 700; font-family: var(--font-mono); }
+.card .label { font-size: 0.75em; color: var(--text-dim); }
+.card .row { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border-bottom: 1px solid var(--border); font-size: 0.85em; }
+.card .row:last-child { border-bottom: none; }
+.card .row .k { color: var(--text-dim); }
+.card .row .v { font-family: var(--font-mono); font-weight: 500; }
+
+/* Spans */
+.span-3 { grid-column: span 3; }
+.span-4 { grid-column: span 4; }
+.span-5 { grid-column: span 5; }
+.span-6 { grid-column: span 6; }
+.span-7 { grid-column: span 7; }
+.span-8 { grid-column: span 8; }
+.span-12 { grid-column: span 12; }
+
+/* Curve viz — HD bell curve */
+.curve-wrap { position: relative; height: 180px; margin-top: 8px; }
+#curveCanvas { width: 100%; height: 100%; display: block; border-radius: 8px; background: linear-gradient(180deg, rgba(139,92,246,0.06), rgba(6,182,212,0.06)); }
+.curve-axis { display: flex; justify-content: space-between; font-size: 0.7em; color: var(--text-dim); font-family: var(--font-mono); margin-top: 4px; }
+.curve-axis .mid { color: var(--success); font-weight: 700; }
+
+/* Fee bar */
+.fee-bar { height: 10px; background: var(--card-2); border-radius: 6px; overflow: hidden; margin-top: 8px; }
+.fee-bar .fill { height: 100%; border-radius: 6px; background: linear-gradient(90deg, var(--accent), var(--success)); transition: width .5s; }
+
+/* Tier toggle */
+.tier-toggle { display: flex; gap: 4px; background: var(--card-2); border-radius: 10px; padding: 4px; }
+.tier-toggle button { flex: 1; padding: 8px 12px; border: none; background: transparent; color: var(--text-dim); border-radius: 8px; cursor: pointer; font-size: 0.8em; font-weight: 600; transition: all .2s; }
+.tier-toggle button.active { background: var(--accent); color: #fff; }
+
+/* Countdown */
+.countdown { font-family: var(--font-mono); font-size: 1.4em; font-weight: 700; color: var(--warn); }
+
+/* Chat panel */
+#chatFab {
+  position: fixed; bottom: 24px; right: 24px; z-index: 200;
+  width: 56px; height: 56px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 24px; cursor: pointer; box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+  border: none; transition: transform .2s;
+}
+#chatFab:hover { transform: scale(1.08); }
+#chatPanel {
+  position: fixed; bottom: 90px; right: 24px; z-index: 200;
+  width: 360px; max-width: calc(100vw - 48px); height: 480px; max-height: 70vh;
+  background: var(--card); border: 1px solid var(--border); border-radius: 14px;
+  display: none; flex-direction: column; overflow: hidden;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+}
+#chatPanel.open { display: flex; }
+#chatHead {
+  padding: 12px 16px; background: var(--card-2); border-bottom: 1px solid var(--border);
+  font-weight: 600; font-size: 0.9em; display: flex; justify-content: space-between; align-items: center;
+}
+#chatClose { cursor: pointer; color: var(--text-dim); font-size: 1.1em; }
+#chatLog { flex: 1; overflow-y: auto; padding: 12px 16px; font-size: 0.85em; display: flex; flex-direction: column; gap: 8px; }
+#chatLog .msg { padding: 8px 12px; border-radius: 10px; max-width: 85%; line-height: 1.4; }
+#chatLog .user { align-self: flex-end; background: var(--accent); color: #fff; }
+#chatLog .bot { align-self: flex-start; background: var(--card-2); border: 1px solid var(--border); }
+#chatLog .err { align-self: flex-start; background: rgba(255,68,102,0.15); border: 1px solid var(--danger); color: var(--danger); }
+#chatInputRow { display: flex; gap: 8px; padding: 12px; border-top: 1px solid var(--border); }
+#chatInput { flex: 1; background: var(--card-2); border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; color: var(--text); font-size: 0.85em; }
+#chatInput:focus { outline: none; border-color: var(--accent); }
+#chatSend { background: var(--accent); color: #fff; border: none; border-radius: 8px; padding: 10px 16px; font-weight: 600; cursor: pointer; }
+
+/* Footer */
+footer { border-top: 1px solid var(--border); padding: 24px 0; text-align: center; color: var(--text-dim); font-size: 0.8em; position: relative; z-index: 1; }
+
+/* Responsive */
+@media (max-width: 900px) {
+  .span-3, .span-4, .span-5, .span-6, .span-7, .span-8 { grid-column: span 12; }
+  .nav-links { display: none; }
+}
+@media (max-width: 600px) {
+  .card { padding: 16px; }
+  .card .big { font-size: 1.4em; }
+}
+</style>
+</head>
+<body>
+<div class="mesh"></div>
+
+<nav>
+  <div class="nav-inner">
+    <div class="brand">
+      <div class="logo">🛡️</div>
+      <div>The Steward <span class="sub">Agentic Treasury</span></div>
+    </div>
+    <div class="nav-links">
+      <a href="#" class="active">Treasury</a>
+      <a href="#">Cookbook</a>
+      <a href="#">Travel</a>
+      <a href="#">Meta Ray-Ban</a>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+  <!-- Hero -->
+  <div class="hero">
+    <h1>The Steward <span class="grad">Command Center</span></h1>
+    <div class="sub">Live on-chain position · Autonomous rebalancing · Honest numbers</div>
+    <div class="status-pill in" id="statusPill"><span class="dot"></span><span id="statusText">Loading…</span></div>
+  </div>
+
+  <!-- Tier toggle -->
+  <div style="display:flex; justify-content:flex-end; margin-bottom:4px;">
+    <div class="tier-toggle" id="tierToggle">
+      <button data-tier="operator" class="active">Operator (full autonomy)</button>
+      <button data-tier="user">User (recommend + confirm)</button>
+    </div>
+  </div>
+
+  <div class="grid">
+    <!-- Position card -->
+    <div class="card span-4">
+      <h3>Position</h3>
+      <div class="big" id="posRead">—</div>
+      <div class="row"><span class="k">Shape</span><span class="v" id="posShape">—</span></div>
+      <div class="row"><span class="k">Bins</span><span class="v" id="posBins">—</span></div>
+      <div class="row"><span class="k">Range</span><span class="v" id="posRange">—</span></div>
+      <div class="row"><span class="k">Live price</span><span class="v" id="posPrice">—</span></div>
+      <div class="row"><span class="k">Chain</span><span class="v" id="posChain">Avalanche</span></div>
+    </div>
+
+    <!-- Curve viz -->
+    <div class="card span-8">
+      <h3>Curve Shape</h3>
+      <div class="curve-wrap">
+        <canvas id="curveCanvas" width="800" height="200"></canvas>
+      </div>
+      <div class="curve-axis"><span id="axisLow">—</span><span class="mid" id="axisMid">—</span><span id="axisHigh">—</span></div>
+    </div>
+
+    <!-- Fee efficiency -->
+    <div class="card span-4">
+      <h3>Fee Efficiency</h3>
+      <div class="big" id="feeEff">—</div>
+      <div class="fee-bar"><div class="fill" id="feeFill" style="width:0%"></div></div>
+      <div class="label" id="feeLabel" style="margin-top:8px;">—</div>
+    </div>
+
+    <!-- Yield vs staking vs hodl -->
+    <div class="card span-4">
+      <h3>Yield vs Staking vs HODL</h3>
+      <div class="row"><span class="k">LP (in-range)</span><span class="v" id="yLP">—</span></div>
+      <div class="row"><span class="k">Staking (5.2%)</span><span class="v" id="yStake">—</span></div>
+      <div class="row"><span class="k">HODL 24h</span><span class="v" id="yHodl">—</span></div>
+      <div class="row"><span class="k" style="color:var(--accent);">▲ vs Staking</span><span class="v" id="yVsStake" style="color:var(--success);font-weight:700;">—</span></div>
+      <div class="row"><span class="k" style="color:var(--accent);">▲ vs HODL</span><span class="v" id="yVsHodl" style="color:var(--success);font-weight:700;">—</span></div>
+      <div class="row"><span class="k">Verdict</span><span class="v" id="yVerdict">—</span></div>
+    </div>
+
+    <!-- Market context -->
+    <div class="card span-4">
+      <h3>Market Context</h3>
+      <div class="row"><span class="k">AVAX price</span><span class="v" id="mPrice">—</span></div>
+      <div class="row"><span class="k">24h change</span><span class="v" id="mChg">—</span></div>
+      <div class="row"><span class="k">Volume 24h</span><span class="v" id="mVol">—</span></div>
+      <div class="row"><span class="k">Liquidity</span><span class="v" id="mLiq">—</span></div>
+    </div>
+
+    <!-- CPI countdown -->
+    <div class="card span-6">
+      <h3>Next Macro Event — CPI</h3>
+      <div class="countdown" id="cpiCountdown">—</div>
+      <div class="label" style="margin-top:8px;">CPI releases Wed Aug 12, 8:30 AM ET · Bid-Ask at 7:45 AM ET · Curve back Aug 13</div>
+    </div>
+
+    <!-- AAE allocation (regime-driven treasury layers) -->
+    <div class="card span-6">
+      <h3>AAE Allocation — Regime-Driven</h3>
+      <div class="row"><span class="k">Regime</span><span class="v" id="aaeRegime">—</span></div>
+      <div class="row"><span class="k">LP (yield)</span><span class="v" id="aaeLp">—</span></div>
+      <div class="row"><span class="k">Staking</span><span class="v" id="aaeStaking">—</span></div>
+      <div class="row"><span class="k">HODL</span><span class="v" id="aaeHodl">—</span></div>
+      <div class="row"><span class="k">Lending</span><span class="v" id="aaeLend">—</span></div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  GenTech Labs · The Steward Agentic Treasury · Live on-chain data · <span id="footTime">—</span>
+</footer>
+
+<!-- Chat panel (web-bridge to Hermes) -->
+<div id="chatFab" title="Talk to the Steward">💬</div>
+<div id="chatPanel">
+  <div id="chatHead">🛡️ Talk to the Steward <span id="chatClose">✕</span></div>
+  <div id="chatLog"></div>
+  <div id="chatInputRow">
+    <input id="chatInput" placeholder="Ask the Steward…" autocomplete="off">
+    <button id="chatSend">Send</button>
+  </div>
+</div>
+
+<script>
+const PAIR = "0x864d4e5ee7318e97483db7eb0912e09f161516ea";
+const CHAIN = "avalanche";
+const POS_VAL = 43.0; // measured deployed capital (Aug 11 2026)
+const STAKING_APR = 5.2;
+const CPI_ET = new Date("2026-08-12T08:30:00-04:00");
+
+let tier = "operator";
+
+// Tier toggle
+document.getElementById("tierToggle").addEventListener("click", (e) => {
+  const btn = e.target.closest("button");
+  if (!btn) return;
+  tier = btn.dataset.tier;
+  document.querySelectorAll("#tierToggle button").forEach(b => b.classList.remove("active"));
+  btn.classList.add("active");
+  renderTier();
+});
+
+function renderTier() {
+  const pill = document.getElementById("statusPill");
+  const statusText = document.getElementById("statusText");
+  if (tier === "operator") {
+    pill.className = "status-pill in";
+    statusText.textContent = "Full autonomy — agent rebalances on its own";
+  } else {
+    pill.className = "status-pill in";
+    statusText.textContent = "Recommend + confirm — you approve every move";
+  }
+}
+
+// Fetch live pool data from DexScreener (public, no key)
+async function fetchPool() {
+  try {
+    const r = await fetch(`https://api.dexscreener.com/latest/dex/pairs/${CHAIN}/${PAIR}`);
+    const d = await r.json();
+    const p = d.pairs && d.pairs[0];
+    if (!p) return null;
+    return {
+      price: parseFloat(p.priceUsd),
+      chg24h: parseFloat(p.priceChange?.h24 || 0),
+      vol24h: parseFloat(p.volume?.h24 || 0),
+      liquidity: parseFloat(p.liquidity?.usd || 0)
+    };
+  } catch (e) { return null; }
+}
+
+// Fetch position state from the heartbeat data file (updated by cron)
+async function fetchPosition() {
+  try {
+    const r = await fetch("steward-state.json", { cache: "no-store" });
+    const d = await r.json();
+    return d;
+  } catch (e) { return null; }
+}
+
+function fmtUsd(n) { return "$" + (n || 0).toLocaleString(undefined, {maximumFractionDigits: 2}); }
+function fmtM(n) { return "$" + ((n||0)/1e6).toFixed(1) + "M"; }
+
+function render(data) {
+  const pos = data?.position || {};
+  const pool = data?.pool || {};
+  const inRange = pos.inRange;
+
+  // Status
+  const pill = document.getElementById("statusPill");
+  pill.className = "status-pill " + (inRange ? "in" : "out");
+  document.getElementById("statusText").textContent = inRange
+    ? "IN range — earning fees" : "OUT of range — rebalancing";
+
+  // Position
+  document.getElementById("posRead").textContent = pos.read || "—";
+  document.getElementById("posShape").textContent = pos.shape || "curve";
+  document.getElementById("posBins").textContent = pos.bins || "—";
+  document.getElementById("posRange").textContent = pos.rangeLow && pos.rangeHigh
+    ? `$${pos.rangeLow}–$${pos.rangeHigh}` : "—";
+  document.getElementById("posPrice").textContent = pool.price ? "$" + pool.price.toFixed(4) : "—";
+
+  // Curve viz — HD bell curve (Trader Joe style)
+  if (pos.rangeLow && pos.rangeHigh && pool.price) {
+    const lo = pos.rangeLow, hi = pos.rangeHigh, pr = pool.price;
+    const cv = document.getElementById("curveCanvas");
+    const ctx = cv.getContext("2d");
+    const W = cv.width, H = cv.height;
+    ctx.clearRect(0, 0, W, H);
+
+    // Map price -> x (log scale across [lo, hi] with padding)
+    const pad = 40;
+    const span = hi - lo;
+    const xOf = (p) => pad + ((p - lo) / span) * (W - 2 * pad);
+    const prX = xOf(pr);
+
+    // Draw a bell curve peaking at the active bin (dead-center of range for a curve).
+    const peak = (W - 2 * pad) / 2 + pad; // centered
+    const sigma = (W - 2 * pad) / 4; // spread
+    const base = H * 0.82, amp = H * 0.68;
+
+    // Gradient fill under the curve
+    const grad = ctx.createLinearGradient(0, 0, 0, H);
+    grad.addColorStop(0, "rgba(139,92,246,0.55)");
+    grad.addColorStop(1, "rgba(139,92,246,0.05)");
+    ctx.beginPath();
+    for (let x = 0; x <= W; x++) {
+      const g = Math.exp(-((x - peak) ** 2) / (2 * sigma * sigma));
+      const y = base - g * amp;
+      if (x === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+    }
+    ctx.lineTo(W, H); ctx.lineTo(0, H); ctx.closePath();
+    ctx.fillStyle = grad;
+    ctx.fill();
+
+    // Line outline
+    ctx.beginPath();
+    for (let x = 0; x <= W; x++) {
+      const g = Math.exp(-((x - peak) ** 2) / (2 * sigma * sigma));
+      const y = base - g * amp;
+      if (x === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+    }
+    ctx.strokeStyle = "rgba(139,92,246,0.9)";
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    // In-range highlight band + current price line
+    ctx.fillStyle = "rgba(6,182,212,0.10)";
+    ctx.fillRect(pad, 0, W - 2 * pad, H);
+    // Price marker
+    ctx.strokeStyle = "rgba(0,255,136,0.9)";
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(prX, 10); ctx.lineTo(prX, H - 12);
+    ctx.stroke();
+    // Marker dot
+    ctx.beginPath();
+    ctx.arc(prX, base - Math.exp(-((prX - peak) ** 2) / (2 * sigma * sigma)) * amp, 5, 0, Math.PI * 2);
+    ctx.fillStyle = "#00ff88";
+    ctx.shadowColor = "#00ff88"; ctx.shadowBlur = 10;
+    ctx.fill();
+    ctx.shadowBlur = 0;
+
+    document.getElementById("axisLow").textContent = "$" + lo.toFixed(3);
+    document.getElementById("axisMid").textContent = "$" + pr.toFixed(3);
+    document.getElementById("axisHigh").textContent = "$" + hi.toFixed(3);
+  }
+
+  // Fee efficiency — REAL, not binary. How centered the live price is in the
+  // bin range: dead-center = 100% (max fee capture), drifting to an edge = lower.
+  // OUT of range = 0.
+  let eff, effLabel;
+  if (!inRange) {
+    eff = 0; effLabel = "Not earning — OUT of range";
+  } else if (pos.rangeLow && pos.rangeHigh && pool.price) {
+    const lo = pos.rangeLow, hi = pos.rangeHigh, pr = pool.price;
+    const center = (lo + hi) / 2;
+    const halfSpan = (hi - lo) / 2;
+    // Guard against degenerate range (lo==hi → halfSpan=0 → div-by-zero → NaN)
+    if (halfSpan <= 0) {
+      eff = 100; effLabel = "Earning fees in range";
+    } else {
+      // distance from center as fraction of half-span (0 = center, 1 = edge)
+      const dist = Math.abs(pr - center) / halfSpan;
+      eff = Math.max(0, Math.round((1 - dist) * 100));
+      effLabel = dist < 0.15 ? "Price dead-center — max fee capture"
+        : dist < 0.5 ? "Price drifting — still earning"
+        : "Price near edge — watch it";
+    }
+  } else {
+    eff = 100; effLabel = "Earning fees in range";
+  }
+  document.getElementById("feeEff").textContent = eff + "%";
+  document.getElementById("feeFill").style.width = eff + "%";
+  document.getElementById("feeFill").style.background = eff < 40 ? "var(--warn)" : "";
+  document.getElementById("feeLabel").textContent = effLabel;
+
+  // Yield vs staking vs hodl
+  const lpDaily = POS_VAL * 0.005;
+  const stakeDaily = POS_VAL * STAKING_APR / 100 / 365;
+  document.getElementById("yLP").textContent = inRange ? ("~$" + lpDaily.toFixed(2) + "/day") : "$0.00/day";
+  document.getElementById("yStake").textContent = "~$" + stakeDaily.toFixed(2) + "/day";
+  const chg = pool.chg24h || 0;
+  // HODL 24h in $ (gain/loss on position)
+  const hodlDaily = POS_VAL * chg / 100;
+  document.getElementById("yHodl").textContent = (chg >= 0 ? "+" : "") + chg.toFixed(1) + "% 24h" + " (" + (hodlDaily >= 0 ? "+" : "") + "$" + hodlDaily.toFixed(2) + ")";
+  document.getElementById("yVerdict").textContent = inRange ? "LP farming the chop" : "LP OUT — not earning";
+
+  // Deltas — how much MORE LP earns vs staking and vs HODL (only meaningful in-range)
+  const vsStake = inRange ? (lpDaily - stakeDaily) : null;
+  document.getElementById("yVsStake").textContent = vsStake == null
+    ? "LP OUT" : "+$" + vsStake.toFixed(2) + "/day";
+  const vsHodl = inRange ? (lpDaily - hodlDaily) : null;
+  document.getElementById("yVsHodl").textContent = vsHodl == null
+    ? "LP OUT" : (vsHodl >= 0 ? "+" : "") + "$" + vsHodl.toFixed(2) + "/day";
+
+  // Market
+  document.getElementById("mPrice").textContent = pool.price ? "$" + pool.price.toFixed(2) : "—";
+  document.getElementById("mChg").textContent = pool.chg24h != null ? (pool.chg24h>=0?"+":"") + pool.chg24h.toFixed(1) + "%" : "—";
+  document.getElementById("mVol").textContent = pool.vol24h ? fmtM(pool.vol24h) : "—";
+  document.getElementById("mLiq").textContent = pool.liquidity ? fmtM(pool.liquidity) : "—";
+
+  // AAE regime-driven allocation (from regime_classifier ground truth)
+  const alloc = data?.allocation || {};
+  document.getElementById("aaeRegime").textContent = alloc.regime || "RANGE_BOUND";
+  document.getElementById("aaeLp").textContent = alloc.lp != null ? alloc.lp + "%" : "40%";
+  document.getElementById("aaeStaking").textContent = alloc.staking != null ? alloc.staking + "%" : "30%";
+  document.getElementById("aaeHodl").textContent = alloc.hodl != null ? alloc.hodl + "%" : "15%";
+  document.getElementById("aaeLend").textContent = alloc.lending != null ? alloc.lending + "%" : "15%";
+
+  renderTier();
+}
+
+// CPI countdown
+function tickCountdown() {
+  const now = new Date();
+  const diff = CPI_ET - now;
+  const el = document.getElementById("cpiCountdown");
+  if (diff <= 0) { el.textContent = "CPI released — watch the move"; return; }
+  const d = Math.floor(diff / 86400000);
+  const h = Math.floor((diff % 86400000) / 3600000);
+  const m = Math.floor((diff % 3600000) / 60000);
+  const s = Math.floor((diff % 60000) / 1000);
+  el.textContent = (d>0? d+"d ":"") + h + "h " + m + "m " + s + "s";
+}
+
+async function refresh() {
+  const [pool, pos] = await Promise.all([fetchPool(), fetchPosition()]);
+  // pos is the full state {updated, position, pool}; extract the position object
+  render({ pool, position: pos?.position || pos });
+  document.getElementById("footTime").textContent = new Date().toLocaleString();
+}
+
+// Initial + refresh every 30s
+refresh();
+setInterval(refresh, 30000);
+setInterval(tickCountdown, 1000);
+tickCountdown();
+
+// PWA: register service worker for offline + install
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("/Treasury/sw.js").catch(() => {});
+  });
+}
+
+// ── Chat (web-bridge to Hermes) ──
+const chatFab = document.getElementById("chatFab");
+const chatPanel = document.getElementById("chatPanel");
+const chatLog = document.getElementById("chatLog");
+const chatInput = document.getElementById("chatInput");
+const chatSend = document.getElementById("chatSend");
+const chatClose = document.getElementById("chatClose");
+// Bridge server — same-origin via nginx /bridge/ proxy (port 8765 not exposed publicly)
+const BRIDGE = "/bridge";
+let chatToken = null;
+
+chatFab.addEventListener("click", () => {
+  chatPanel.classList.toggle("open");
+  if (chatPanel.classList.contains("open")) {
+    chatInput.focus();
+    if (!chatToken) initChat();
+  }
+});
+chatClose.addEventListener("click", () => chatPanel.classList.remove("open"));
+
+function addMsg(text, who) {
+  const div = document.createElement("div");
+  div.className = "msg " + who;
+  div.textContent = text;
+  chatLog.appendChild(div);
+  chatLog.scrollTop = chatLog.scrollHeight;
+}
+
+async function initChat() {
+  try {
+    const r = await fetch(BRIDGE + "/api/session", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ label: "steward-web" })
+    });
+    const d = await r.json();
+    chatToken = d.token;
+    addMsg("Connected to the Steward. Ask anything about the position, yield, or strategy.", "bot");
+  } catch (e) {
+    addMsg("Bridge offline — use Telegram to reach the Steward.", "err");
+  }
+}
+
+async function sendChat() {
+  const text = chatInput.value.trim();
+  if (!text) return;
+  addMsg(text, "user");
+  chatInput.value = "";
+  addMsg("…", "bot");
+  try {
+    if (!chatToken) await initChat();
+    const r = await fetch(BRIDGE + "/api/chat?dept=strategies", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "Authorization": "Bearer " + chatToken },
+      body: JSON.stringify({ message: text })
+    });
+    const d = await r.json();
+    chatLog.lastChild.remove();
+    addMsg(d.response || "No response.", "bot");
+  } catch (e) {
+    chatLog.lastChild.remove();
+    addMsg("Bridge offline — use Telegram to reach the Steward.", "err");
+  }
+}
+chatSend.addEventListener("click", sendChat);
+chatInput.addEventListener("keydown", (e) => { if (e.key === "Enter") sendChat(); });
+</script>
+</body>
+</html>
