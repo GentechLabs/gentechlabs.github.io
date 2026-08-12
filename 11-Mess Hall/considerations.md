@@ -1,37 +1,43 @@
 ---
-date: 2026-08-09
+date: 2026-08-11
 status: active
-last-updated: 2026-08-09 04:00 ET
+last-updated: 2026-08-11 20:10 ET
 ---
 
 # 🧠 Considerations — Open Decisions
 
 > Decision points requiring Jordan's input. Updated from brain snapshot context.
 
-## 🚨 Urgent — DEADLINES APPROACHING
+## 🚨 Urgent — DEADLINES + MACRO EVENT
 
-- [ ] 🚨 **Algorand First-Mover Play (Aug 6)** — **✅ COMPOSITE ENTRY SHIPPED (Aug 7).** Context-weight "Recently Done" confirms the Algorand Global x402 Challenge — Composite Entry ($100K + 500K ALGO) is shipped. **Jordan: (1) provide Algorand wallet address so X402_PAYTO_ALGORAND goes live (zero code change), (2) confirm late-leaderboard eligibility or mark dead** (original deadline Jul 31 passed, no registration on file).
-- [ ] 🚨 **Keeperhub Agents Onchain #80** — **JORDAN CONFIRMED GO.** **✅ PROOF TRANSFER COMPLETE Aug 8:** Real 0.01 USDC on-chain transfer from KeeperHub wallet to Treasury CDP (TX 0x88fe6c9a...b1df, Base, block 49682145, success). Wallet funded. **REMAINING: film demo video + assemble GitHub submission (README, video, live tx link). Deadline Aug 13.**
-- [ ] 🚨 **Algorand Global x402 Challenge #82** — **⚠️ DEADLINE PASSED Jul 31.** $100K + 500K ALGO. No record of registration on file. **Jordan: confirm if registered / still eligible for late leaderboard, or mark dead.** *(Now tied to the Algorand First-Mover Play above.)*
-- [ ] 🚨 **Arc Programmable Money Hackathon** — **⚠️ DEADLINE TODAY Aug 9.** ArcAgentWallet.sol deployed on testnet, 57/57 tests pass, repo public (github.com/Gentech-Labs/programmable-money-x402). **BUILD COMPLETE + VERIFIED Aug 8. MARKED SHIPPED by labs Aug 9. Jordan: submit final project + 3-min video + repo link if not already done via checkpoint.**
-- [ ] 🚨 **AI Factory Hackathon #79** — **⚠️ DEADLINE TOMORROW Aug 10.** lablab.ai × NativelyAI. **MARKED SHIPPED by labs Aug 9.** Jordan: confirm submission status.
+- [ ] 🚨 **CPI Release — Wed Aug 12 8:30 AM ET (TOMORROW)** — Treasury CPI War-Room play LOCKED. Regime RANGE_BOUND (conf .65), RSI 24.1 oversold, 24h -3.6%. Expected AVAX ±4-7%. Staged: **07:45 ET Aug 12** `steward_execute --mode withdraw-redeploy --shape bid-ask` (reposition edges ±5% 45 min pre-release), **09:00 ET Aug 13** revert to Curve. 10-min watchdog `51bc9900e24d` is the breakout eyes. Steward full autonomy active — will self-execute the rebalance.
+- [ ] 🚨 **Keeperhub Agents Onchain #80** — **DEADLINE Aug 13 (2 days).** JORDAN CONFIRMED GO. **✅ PROOF TRANSFER COMPLETE Aug 8** (0.01 USDC on-chain, TX 0x88fe6c9a...b1df, Base). **REMAINING: film demo video + assemble GitHub submission (README, video, live tx link).**
+- [ ] 🚨 **CockroachDB × AWS — Agentic Memory #83** — **Aug 18 (7 days).** $8.75K, persistent memory + MCP Server. **Jordan: register?**
+- [ ] ✅ **AI Factory Hackathon #79** — **DEADLINE PASSED Aug 10.** lablab.ai × NativelyAI. **MARKED SHIPPED by labs Aug 9.** Jordan: confirm submission status (if not submitted, this is done).
+- [ ] ✅ **Build with DataHub** — **DEADLINE PASSED Aug 10.** Needs submission confirm. If not submitted, mark closed.
+- [ ] ✅ **Arc Programmable Money Hackathon** — **DEADLINE PASSED Aug 9.** SHIPPED + verified (ArcAgentWallet.sol, 57/57 tests). Moved to Recently Resolved.
+- [ ] 🚨 **Algorand First-Mover Play (Aug 6)** — **✅ COMPOSITE ENTRY SHIPPED (Aug 7).** **Jordan: (1) provide Algorand wallet address so X402_PAYTO_ALGORAND goes live, (2) confirm late-leaderboard eligibility or mark dead.**
+- [ ] 🚨 **Algorand Global x402 Challenge #82** — **⚠️ DEADLINE PASSED Jul 31.** $100K + 500K ALGO. **Jordan: confirm if registered / late-leaderboard eligible, or mark dead.**
 
 ## 🔴 High Priority
 
+- [ ] 🔴 **🔑 AVAX KEY ROTATION (COMPROMISE EVENT)** — Jordan's **personal AVAX private key was pasted in chat** (derives to Main `0x7ebf...96a`, ~0.099 AVAX, nonce 5363). Stored locked-down at `/root/.blockrun/jordan-personal-avax-key` (600), but chat history is synced so local storage does NOT make it safe. **Jordan: rotate the key / move funds off that address.** Do not treat as handled because it's on disk.
 - [ ] **Super Arcade Tennis #73 production deploy** — Code done and live on dev at arcade.gentechlabs.net. **Jordan: (a) deploy production build, (b) wire crypto payments?**
 - [ ] **FrameForge #71** — AI Storyboard Service (previs pipeline). Spec at 09-Green Room/specs/. **Jordan: direction decision?** (Proven on KAGE film — ready to productize.)
 - [ ] **Open Generative AI #77** — Self-host AI media studio (400+ models). **Jordan: go/no-go?**
+- [ ] **Make other GenTech surfaces PWAs** (Treasury decision Aug 11) — Jordan: "make the other GenTech surfaces PWAs, tie to the website." Steward PWA is the proof-of-concept. **No build until scoped in HQ/CLI.**
+- [ ] **GTA real-execution rails** — GTA scan logged **ENTER AVAX** (short Hyperliquid / buy Coinbase) but NOT executable: AVAX spot leg NOT in `gta_coinbase_leg.py` SUPPORTED map (CDP is Base/Ethereum-only); `GTA_HL_KEY` unset (perp leg detection-only). ONDO 24.36 bps best live but perp leg lacks HL key. **Jordan: approve wiring AVAX/ONDO rails + set HL key.** No funds moved — standing-autonomy guardrail honored.
 
 ## 🟡 Medium Priority
 
 - [x] **Voice Stack: LiveKit vs Pipecat** — ✅ GO (Jordan Aug 5). Evaluate LiveKit Agents. — LiveKit Agents (12.4k⭐, Apache-2.0, realtime voice AI framework) is a potential alternative/complement to our current **Pipecat 1.5.0** + custom `pipecat-x402-processor`. LiveKit strengths: native MCP support, self-hostable full stack (LiveKit server = widely-used WebRTC media server), telephony/SIP, semantic turn detection, built-in test/judge framework. We're already invested in Pipecat (voice-agent-config + speech-engine skills, Jocelyn pipeline, x402 processor). **Jordan: evaluate LiveKit Agents as the voice layer for agent deployments, or stay on Pipecat?** Source: github.com/livekit/agents, Aug 4.
 
-- [ ] **Narrative Rotation cron — CMC key not loaded in pre-run** — The weekly `narrative-rotation.py` pre-run hit HTTP 401 on every CoinMarketCap fetch (wrote all-zero JSON: BTC $0.00, all narratives "Cooling" score +0.0). Root cause: the inline pre-run step doesn't read `/root/.hermes/scripts/cmc_config.json` (which holds a working `coinmarketcap_api_key`). The 2026-08-02 run was rebuilt manually from the CMC Pro endpoint and pushed. **Jordan: confirm the cron pre-run is fixed to load the CMC key (or switch to CoinGecko free API) so next week's run is real, not zeros.**
+- [ ] **Narrative Rotation cron — CMC key not loaded in pre-run** — The weekly `narrative-rotation.py` pre-run hit HTTP 401 on every CoinMarketCap fetch (wrote all-zero JSON). Root cause: the inline pre-run step doesn't read `/root/.hermes/scripts/cmc_config.json` (holds working `coinmarketcap_api_key`). The 2026-08-02 run was rebuilt manually from CMC Pro endpoint. **Jordan: confirm the cron pre-run is fixed to load the CMC key (or switch to CoinGecko free API) so next week's run is real, not zeros.**
 - [x] **Syra Marketplace #76** — ✅ GO (Jordan Aug 5). Register x402 services on syraa.fun. — Register x402 services on syraa.fun. Easy win. **Jordan: go/no-go?**
 - [x] **Kite AI (#78)** — ✅ RESOLVED (Aug 5): Jordan confirmed. Kite **Agent Passport** integration was **already done** (`10-Labs/kite-passport-hermes` — Hermes skill + GenTech Shop services in Kite catalog + Q402 receipts). The **Kite AI Global Hackathon 2026** (the queue item) **already concluded** — finale aired, winners announced. No pending entry. Removed from active consideration.
-- [ ] **AI Factory Hackathon #79** — lablab.ai × NativelyAI, Aug 3-10. **Jordan: register?**
+- [x] **AI Factory Hackathon #79** — ✅ DEADLINE PASSED Aug 10, shipped. Moved to urgent section.
 - [x] **GenTech Academy #81** — ✅ GO (Jordan Aug 5). — Initial repo live at `ProtoJay4789/gentech-academy`. Module 1 (AI on Grid) + Module 2 (Visual Pipeline) shipped. Module 3 (AI + 3D Engines / Kimi K3 content creation) next. **Jordan: direction — Blender MCP workflow or Kimi K3 frame critic loop?**
-- [ ] **Kimi K3 Content Pipeline #82** — Frame critic + prompt engineer loop for Seedance. Test when wallet funded. Kimi K3 available via BlockRun ($3/$15 per M tokens, 1M context, vision). **Jordan: fund wallet → test frame consistency feedback loop.**
+- [ ] **Kimi K3 Content Pipeline #82** — Frame critic + prompt engineer loop for Seedance. Kimi K3 available via BlockRun ($3/$15 per M tokens, 1M context, vision). **Treasury model confirmed (Aug 11): Kimi 2.7 (`kimi-k2.7-code`) + Kimi K3 in ollama-cloud model list. Jordan: fund wallet → test frame consistency feedback loop.** *(Wallet is funded — Steward active on real funds.)*
 - [ ] **CockroachDB × AWS — Agentic Memory #83** — $8.75K, Aug 18 deadline. Persistent memory + MCP Server. **Jordan: register?**
 
 - [ ] **Bug Bounties Comeback?** — We stopped because AI agents couldn't produce solid PoCs ("proof of LOC"). open·kritt (Kritt-ai, Blockian team) now handles that: scan agents run as root in disposable containers (compile/run tests/build exploits) and post-scripts emit PoCs via `_reserved_poc` + reports. **Jordan: test on our own repos first (build-queue #34), then decide if we point it at Immunefi targets for bounty revenue.**
@@ -99,9 +105,18 @@ Jordan's decision on the Gears E:D beta: **NOT pre-ordering for beta access.** E
 
 ## ✅ Recently Resolved
 
+- **Steward EXIT RAIL PROVEN (Aug 11)** — `steward_execute.py --withdraw-convert` ran live end-to-end on real funds. All 3 txs mined (approve 6d5e95…, withdraw c7da23…, convert ad9e83…), gas ~$0.0003. **43.47 USDC landed**, position closed. Exit rail + honesty layer validated.
+- **Steward FULL AUTONOMY (Aug 11)** — `steward_rebalance.py --autonomous` rebalances on its own (detect OUT-of-range → withdraw-redeploy → alert Jordan after, not before). Watchdog `51bc9900e24d` every 10m (auto + alert), heartbeat `73cdf5227ca4` every 30m (always pings).
+- **Steward PWA + Web-Bridge Chat (Aug 11)** — Dashboard live at `gentechlabs.net/Treasury/steward-dashboard.html` (installable PWA, web-bridge chat to control Steward from site). Bridge nginx `/bridge/` proxy fixed (was broken on :8765).
+- **CPI War-Room play staged (Aug 11)** — Bid-Ask at T-45min (07:45 ET Aug 12) → Curve revert (09:00 ET Aug 13). `steward_macro.py` = reusable news-driven rebalance loop.
+- **Withdraw-Redeploy bug fixed (Aug 11)** — no longer converts all WAVAX→USDC (stranded position); position recovered to IN range (11 bins, earning).
+- **Bridge fixed + HD bell curve + AAE allocation (Aug 11)** — chat tab nginx proxy, Trader Joe-style bell curve canvas, regime-driven allocation card.
+- **Agent Kit self-tracking treasury (Aug 11)** — auto-provisioning, +±256 bin discovery bugfix (was ±20, missed drifted curve).
+- **Crossmint modular stack (Aug 10)** — spec written; Tier 1 (onramp-only) greenlit. Needs Jordan staging signup.
+- **awesome-mcp-servers PR #11773 (Aug 10)** — submitted to punkpeye/awesome-mcp-servers (91K⭐). Two GenTech entries.
+- **Agent Warfare archetypes shipped** (Aug 10) — Sniper, Scout, Heavy, Medic, Engineer.
 - **Web tools down** — RESOLVED. Agent Reach is the default web backend. Firecrawl no longer needed.
 - **OKX AI Genesis Hackathon #72** — Deadline passed Jul 27. No registration received.
-- **Keeperhub Agents Onchain #80** — Build phase started Jul 27. Pending Jordan go/no-go.
 - **Celo Agentic Payments Hackathon #69** — Researched (Jul 24). Ready to execute on go-ahead.
 - **MengTo Fork #75** — Shipped (Jul 25).
 - **x402 Gateway v7.0.0** — Deployed and verified.
