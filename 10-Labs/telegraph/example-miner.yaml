@@ -1,0 +1,76 @@
+# GenTech Research Miner — Telegraph H1
+# Wraps Tavily search as a WEB_SEARCH / NEWS_SEARCH / RESEARCH_SYNTHESIS miner.
+# Validate at integrate.telegraphprotocol.com BEFORE registering (on-chain = immutable).
+#
+# NOTE: raw key NEVER in this file — only the env_var name. Node reads TAVILY_API_KEY at runtime.
+
+version: "1"
+kind: miner
+id: 9001                        # pick an unused numeric id (check /miner-dispatcher/integrations)
+slug: gentech-research
+protocol: generic               # not bittensor — generic provider
+name: GenTech Research (Tavily)
+description: >-
+  Autonomous web search and news intelligence via Tavily. Returns cited,
+  up-to-date search results, news headlines, and synthesized research answers.
+  Built by GenTech Labs — verifiable search intelligence for agents.
+docs:
+  website: https://gentechlabs.net
+  repository: https://github.com/Gentech-Labs/gentech-research-miner
+base_url: https://api.tavily.com
+auth:
+  type: bearer
+  env_var: TAVILY_API_KEY
+  header_name: Authorization
+  value_prefix: "Bearer "
+
+endpoints:
+  # --- WEB_SEARCH ---
+  - path: /search
+    external_path: /search
+    method: POST
+    description: Semantic web search with citations
+    content_type: application/json
+    param_map:
+      query: query
+      max_results: max_results
+  # --- NEWS_SEARCH ---
+  - path: /news
+    external_path: /search
+    method: POST
+    description: News headline search (topic = news)
+    content_type: application/json
+  # --- RESEARCH_SYNTHESIS ---
+  - path: /research
+    external_path: /search
+    method: POST
+    description: Research synthesis with included answer
+    content_type: application/json
+
+semantics:
+  signal_mapping:
+    confidence_field: score
+    reason_field: answer
+  supported_intents:
+    - WEB_SEARCH
+    - NEWS_SEARCH
+    - RESEARCH_SYNTHESIS
+    - FACT_CHECK
+
+on_chain:
+  transform: direct
+  min_price_usdc: 0.01
+  fields:
+    strings:
+      - index: 0
+        name: answer
+        source_path: answer   # verified: Tavily top-level field when include_answer=true
+    integers:
+      - index: 0
+        name: response_time_ms
+        source_path: response_time  # verified: Tavily top-level float seconds → scale to ms
+        multiplier: 1000
+
+rate_limit_per_sec: 5
+circuit_threshold: 5
+circuit_cooldown_seconds: 30
