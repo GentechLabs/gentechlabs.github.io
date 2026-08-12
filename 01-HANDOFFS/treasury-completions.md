@@ -17,3 +17,8 @@
 - BUILT Steward Command Center PWA + web-bridge chat — live at gentechlabs.net/Treasury/steward-dashboard.html; manifest + sw.js + icons; bridge fixed via nginx /bridge/ proxy
 - UPGRADED Steward dashboard: HD Trader Joe-style bell-curve liquidity viz + AAE regime-driven allocation card (RANGE_BOUND → 40/30/15/15)
 - WROTE PWA stand-alone decision handoff → treasury-to-gentech/2026-08-11-pwa-stand-alone-decision.md (Jordan: make other GenTech surfaces PWAs, discuss with JinTech)
+
+## 2026-08-12
+- ⛔ CPI Bid-Ask reposition BLOCKED — verified on-chain (3 independent reads): Steward wallet holds NO LP position, 0 WAVAX, ~0.0006 USDC, only 0.2979 AVAX gas. No tx sent, no funds moved. Root-cause via Snowtrace: ~43.72 USDC swept OFF the wallet Aug 11 evening to 0xeee3fe6c...26e6c9 (residual 22.39 to 0xeee3c4ea...). Position that the play expected to reposition no longer exists.
+- 🔎 Found wallet went empty ~30 min after the Aug 11 "recovery" (closed 19:41→20:05, re-entered 20:05→20:06, re-closed + swept 20:15→20:18). 10-min watchdog log (20:31) confirms empty. Watchdog/heartbeat crons were paused → empty wallet went unreported; dashboard state stale. Recommend re-enable heartbeat + pause the two enabled CPI one-shots (31432dce0de9, e13db42767b0).
+- 🔧 Handoff written → treasury-to-gentech/2026-08-12.md. Jordan to confirm if the sweep was intentional (wind-down/emergency) or unexpected.

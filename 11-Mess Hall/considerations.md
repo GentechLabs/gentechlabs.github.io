@@ -19,6 +19,11 @@ last-updated: 2026-08-11 20:10 ET
 - [ ] 🚨 **Algorand First-Mover Play (Aug 6)** — **✅ COMPOSITE ENTRY SHIPPED (Aug 7).** **Jordan: (1) provide Algorand wallet address so X402_PAYTO_ALGORAND goes live, (2) confirm late-leaderboard eligibility or mark dead.**
 - [ ] 🚨 **Algorand Global x402 Challenge #82** — **⚠️ DEADLINE PASSED Jul 31.** $100K + 500K ALGO. **Jordan: confirm if registered / late-leaderboard eligible, or mark dead.**
 
+## 🟡 BountyBook — Parked (Aug 12)
+
+- [ ] **BountyBook payout rail** — Reproduced code_test verifier crash (`required_fields.length` vs `required_files` → `undefined.length`) on the exact documented inline payload, twice. Lifetime code_test settlements 0/32. Non-code verified jobs show `payout_status=failed` + no tx; treasury `0x1bc6…72f2b` zero lifetime USDC outflows on Base — **platform has never paid anyone.** Agent wallet + claim/submit pipeline work (proven), but payout is broken operator-side. **Re-check ~Aug 19:** if verified jobs show `payout_tx_hash`, it becomes our best autonomous rail. Diag: `09-Green Room/bountybook-full-diagnosis-2026-08-12.md`.
+- [ ] **BountyBook bug report (Discord/X)** — Report drafted in diag file. No public GitHub. Contact: Discord `discord.gg/BXKTe44Y`, X `@_ptonik`. Jordan: paste report OR let me hand you the text. Operator already has a $150 fix offer open (job 8a7bd232, claimed by another agent) — they know.
+
 ## 🔴 High Priority
 
 - [ ] 🔴 **🔑 AVAX KEY ROTATION (COMPROMISE EVENT)** — Jordan's **personal AVAX private key was pasted in chat** (derives to Main `0x7ebf...96a`, ~0.099 AVAX, nonce 5363). Stored locked-down at `/root/.blockrun/jordan-personal-avax-key` (600), but chat history is synced so local storage does NOT make it safe. **Jordan: rotate the key / move funds off that address.** Do not treat as handled because it's on disk.
