@@ -172,7 +172,7 @@ def build_payment_required(service_name: str, price_usd: float) -> dict:
         "x402Version": 2,
         "resource": {
             "url": f"https://api.gentechlabs.net/v1/{service_name.lower().replace(' ', '-')}",
-            "description": f"GenTech Labs x402 — {service_name}",
+            "description": f"GenTech Labs x402 - {service_name}",
             "mimeType": "application/json"
         },
         "accepts": accepts,
