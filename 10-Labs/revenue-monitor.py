@@ -16,17 +16,14 @@ from datetime import datetime, timedelta
 from pathlib import Path
 
 # ── Config ──────────────────────────────────────────────────────────────
-# Treasury receiving wallets (x402 settlements land here)
-WALLET_EVM = "0x77C622D02A1518fC0FDcd83B8C28010FA5ebB7dE"   # CDP server account (primary x402 receiver)
-WALLET_ARB = "0x3d117Bf42218c3244AA0Ad011E8651A615230eCb"   # GTA arb wallet (payer / settlement source)
-WALLET_KH  = "0x53A8DFA431D03A36499f9DB70AAFbb00C28308EA"   # KeeperHub execution wallet
+WALLET_EVM = "0x7ebff188f2Eba16518C02864589b1403a5d1296a"
 WALLET_SOL = "71Y3H36eb2WRGseYM9GwinjNawfMfAUbcof5eeWGoGSA"
 DATA_DIR = Path("/root/.hermes/profiles/gentech/scripts")
 TRACKER_FILE = DATA_DIR / "revenue-tracker.json"
 
-# USDC contract addresses per chain (Base uses the CURRENT address)
+# USDC contract addresses per chain
 USDC_CONTRACTS = {
-    "base": "0x833589fCD6eDb6E08f4c7C32D4f71b54bDA02913",   # FIXED: was 0x83358933...b43 (stale)
+    "base": "0x83358933e220DBD71d557b2c7c88c4b48eb88b43",
     "avalanche": "0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E",
     "bnb": "0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d",
 }
@@ -387,6 +384,79 @@ def get_bankr_balances():
         return {"error": str(e)}
 
 
+# ── Marketplace Income (Aug 12, 2026) ──────────────────────────────────
+# New sell-side rails we've stood up. Polled by the Revenue Monitor so
+# Jordan sees marketplace earnings alongside on-chain x402 revenue.
+# Best-effort: any failure here must NOT break the rest of the report.
+
+# AgentLux — the live autonomous rail. First-Hire Guarantee armed Aug 12.
+AGENTLUX_AGENT_ID = "9fed6922-48d0-4ed6-975a-c828bdf02446"
+AGENTLUX_TOKEN_FILE = Path("/root/.blockrun/agentlux-token")
+AGENTLUX_AGENT_WALLET = "0x7ebff188f2Eba16518C02864589b1403a5d1296a"
+
+
+def get_agentlux_status():
+    """Check AgentLux for pending hire requests / profile status. Best-effort."""
+    out = {"platform": "AgentLux", "status": "not_checked", "detail": "skipped"}
+    try:
+        token = AGENTLUX_TOKEN_FILE.read_text().strip() if AGENTLUX_TOKEN_FILE.exists() else ""
+        if not token:
+            out.update(status="needs_auth", detail="no saved token (challenge-sign to refresh)")
+            return out
+        # Check for pending provider hire requests (the guaranteed hire)
+        r = subprocess.run(
+            ["curl", "-s", "-m", "12",
+             "https://api.agentlux.ai/v1/services/hire/requests?role=provider&status=pending",
+             "-H", f"Authorization: Bearer {token}"],
+            capture_output=True, text=True, timeout=15)
+        try:
+            data = json.loads(r.stdout)
+        except json.JSONDecodeError:
+            data = {}
+        reqs = data.get("requests") or data.get("data") or []
+        if reqs and isinstance(reqs, list) and len(reqs) > 0:
+            out.update(status="hire_pending", detail=f"{len(reqs)} pending hire request(s) — ACCEPT + deliver")
+        else:
+            out.update(status="no_hire_yet", detail="listing live, no pending hire (First-Hire Guarantee in window)")
+    except Exception as e:
+        out.update(status="error", detail=str(e)[:60])
+    return out
+
+
+def get_marketplace_income():
+    """Best-effort poll of our marketplace rails. Returns list of status dicts."""
+    results = []
+    # AgentLux (live) — real API check
+    results.append(get_agentlux_status())
+    # Nevermined — staged, blocked on Jordan's API key
+    nvm_key = os.environ.get("NVM_API_KEY") or ""
+    results.append({
+        "platform": "Nevermined",
+        "status": "needs_key" if not nvm_key else "staged",
+        "detail": "staged (5 services) — awaiting Jordan's NVM_API_KEY" if not nvm_key else "ready",
+    })
+    # Agoragentic — registered but custody frozen
+    results.append({
+        "platform": "Agoragentic",
+        "status": "frozen",
+        "detail": "registered, paid execution frozen (platform_custody_frozen)",
+    })
+    # BountyBook — parked (never paid)
+    results.append({
+        "platform": "BountyBook",
+        "status": "parked",
+        "detail": "never paid out (verifier + payout rail broken) — recheck ~Aug 19",
+    })
+    # BotWork — handed to Labs
+    results.append({
+        "platform": "BotWork",
+        "status": "with_labs",
+        "detail": "handoff to gizmo (Labs) for SDK daemon listing",
+    })
+    return results
+
+
+
 # ── Scan + Report ───────────────────────────────────────────────────────
 
 def run():
@@ -412,15 +482,14 @@ def run():
     balances = get_wallet_balances()
     sol_price = get_sol_price()
 
-    # 3. Scan chains for USDC transfers (CDP account + arb wallet)
+    # 3. Scan chains for USDC transfers
     new_transfers = []
     for chain in ("base", "avalanche", "bnb"):
         last_block = data.get("last_scan_block", {}).get(chain, 0)
-        for wallet in (WALLET_EVM, WALLET_ARB):
-            transfers = fetch_usdc_transfers(chain, wallet, last_block)
-            for t in transfers:
-                if t["tx_hash"] not in existing_txs:
-                    new_transfers.append(t)
+        transfers = fetch_usdc_transfers(chain, WALLET_EVM, last_block)
+        for t in transfers:
+            if t["tx_hash"] not in existing_txs:
+                new_transfers.append(t)
         if transfers:
             data.setdefault("last_scan_block", {})[chain] = max(t["block"] for t in transfers)
 
@@ -431,7 +500,7 @@ def run():
             new_transfers.append(t)
 
     # Filter out self-transfers (LP deposits, internal moves)
-    our_wallets = {WALLET_EVM.lower(), WALLET_SOL.lower(), WALLET_ARB.lower(), WALLET_KH.lower()}
+    our_wallets = {WALLET_EVM.lower(), WALLET_SOL.lower()}
     external = [t for t in new_transfers if t["sender"].lower() not in our_wallets]
     data["transactions"].extend(external)
 
@@ -483,6 +552,9 @@ def run():
     # 7. Bankr wallet (distinct channel)
     bankr = get_bankr_balances()
 
+    # 8. Marketplace income (best-effort poll of our rails)
+    marketplace = get_marketplace_income()
+
     return {
         "snapshot": snapshot,
         "health": health,
@@ -496,6 +568,7 @@ def run():
         "sol_usdc_balance": sol_usdc_val,
         "sol_price": sol_price,
         "bankr": bankr,
+        "marketplace": marketplace,
     }
 
 
@@ -541,14 +614,6 @@ def format_report(result):
     else:
         lines.append("  No sources yet")
 
-    # ── Settlement Rails (the 3 rails) ──
-    lines.append("")
-    lines.append("🛤️ Settlement Rails")
-    lines.append("  ✅ x402 (CDP facilitator) — Base USDC, EIP-3009, gasless")
-    lines.append("  ✅ Q402 (gasless) — 12 chains, EIP-7702, per-tx + daily caps")
-    lines.append("  ✅ Solana/Jupiter — Solana homebase, sub-cent gas")
-    lines.append("  ⏳ Algorand — opted into USDC ASA 31566704, awaiting funding")
-
     if result["new_payments"]:
         lines.append("")
         lines.append("  ⚡ New transfer(s) detected!")
@@ -572,7 +637,20 @@ def format_report(result):
     lines.append("  ⏳ Q402 wallet — checked by agent in cron prompt")
     lines.append("  ⏳ OKX Agentic Wallet — checked by agent in cron prompt")
     lines.append("  ⏳ x402-list directory — GenTech Labs x402 Gateway live (6 endpoints, 100% uptime) — traffic source for x402 revenue")
-    lines.append("  ⏳ Marketplace income — manual check per platform")
+
+    # ── Marketplace Income ──
+    marketplace = result.get("marketplace") or []
+    if marketplace:
+        lines.append("")
+        lines.append("🛒 Marketplace Income")
+        for m in marketplace:
+            icon = {"hire_pending": "🟢", "no_hire_yet": "🟢", "needs_key": "🟡",
+                    "needs_auth": "🟡", "frozen": "⏸", "parked": "⛔",
+                    "with_labs": "🔧", "error": "⚠️", "staged": "🟡",
+                    "not_checked": "⚪"}.get(m.get("status"), "⚪")
+            lines.append(f"  {icon} {m['platform']}: {m.get('status','?')} — {m.get('detail','')}")
+    else:
+        lines.append("  ⏳ Marketplace income — manual check per platform")
 
     # ── Bankr ──
     bankr = result.get("bankr")
