@@ -1,7 +1,7 @@
 ---
-date: 2026-08-11
+date: 2026-08-12
 status: active
-last-updated: 2026-08-11 20:10 ET
+last-updated: 2026-08-12 20:10 ET
 ---
 
 # 🧠 Considerations — Open Decisions
@@ -10,9 +10,9 @@ last-updated: 2026-08-11 20:10 ET
 
 ## 🚨 Urgent — DEADLINES + MACRO EVENT
 
-- [ ] 🚨 **CPI Release — Wed Aug 12 8:30 AM ET (TOMORROW)** — Treasury CPI War-Room play LOCKED. Regime RANGE_BOUND (conf .65), RSI 24.1 oversold, 24h -3.6%. Expected AVAX ±4-7%. Staged: **07:45 ET Aug 12** `steward_execute --mode withdraw-redeploy --shape bid-ask` (reposition edges ±5% 45 min pre-release), **09:00 ET Aug 13** revert to Curve. 10-min watchdog `51bc9900e24d` is the breakout eyes. Steward full autonomy active — will self-execute the rebalance.
-- [ ] 🚨 **Keeperhub Agents Onchain #80** — **DEADLINE Aug 13 (2 days).** JORDAN CONFIRMED GO. **✅ PROOF TRANSFER COMPLETE Aug 8** (0.01 USDC on-chain, TX 0x88fe6c9a...b1df, Base). **REMAINING: film demo video + assemble GitHub submission (README, video, live tx link).**
-- [ ] 🚨 **CockroachDB × AWS — Agentic Memory #83** — **Aug 18 (7 days).** $8.75K, persistent memory + MCP Server. **Jordan: register?**
+- [ ] 🚨 **CPI Release — Wed Aug 12 8:30 AM ET (TODAY, RELEASED)** — Treasury CPI War-Room play LOCKED. Regime RANGE_BOUND (conf .65), RSI 24.1 oversold, 24h -3.6%. Expected AVAX ±4-7%. Staged: **07:45 ET Aug 12** `steward_execute --mode withdraw-redeploy --shape bid-ask` (reposition edges ±5% 45 min pre-release — should have fired this morning), **09:00 ET Aug 13** revert to Curve. 10-min watchdog `51bc9900e24d` is the breakout eyes. Steward full autonomy active — will self-execute the rebalance. **Verify the bid-ask reposition actually executed this morning + confirm the 09:00 ET Aug 13 Curve revert is still armed.**
+- [ ] 🚨 **Keeperhub Agents Onchain #80** — **⚠️ DEADLINE TOMORROW Aug 13 (1 day).** JORDAN CONFIRMED GO. **✅ PROOF TRANSFER COMPLETE Aug 8** (0.01 USDC on-chain, TX 0x88fe6c9a...b1df, Base). **REMAINING: film demo video + assemble GitHub submission (README, video, live tx link).**
+- [ ] 🚨 **CockroachDB × AWS — Agentic Memory #83** — **Aug 18 (6 days).** $8.75K, persistent memory + MCP Server. **Jordan: register?**
 - [ ] ✅ **AI Factory Hackathon #79** — **DEADLINE PASSED Aug 10.** lablab.ai × NativelyAI. **MARKED SHIPPED by labs Aug 9.** Jordan: confirm submission status (if not submitted, this is done).
 - [ ] ✅ **Build with DataHub** — **DEADLINE PASSED Aug 10.** Needs submission confirm. If not submitted, mark closed.
 - [ ] ✅ **Arc Programmable Money Hackathon** — **DEADLINE PASSED Aug 9.** SHIPPED + verified (ArcAgentWallet.sol, 57/57 tests). Moved to Recently Resolved.
