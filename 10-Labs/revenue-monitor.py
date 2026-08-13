@@ -407,7 +407,80 @@ def get_marketplace_income():
     results.append(get_agentlux_earnings())
     # Nevermined — LIVE (registered Aug 12). Income = settled USDC (already scanned on-chain
     # via the USDC transfer scan to our wallet). No extra API poll needed.
+    # Toku — REGISTERED (Aug 13). Income = jobs/hires won (money to accept).
+    results.append(get_toku_earnings())
+    # dealwork.ai — REGISTERED (Aug 13). Income = contracts as provider (money to accept/paid).
+    results.append(get_dealwork_earnings())
+    # APIHub — REGISTERED (Aug 13). Income = settled per-call x402 payments (covered by on-chain
+    # USDC scan to our wallet). No extra API poll needed.
     return results
+
+
+def get_toku_earnings():
+    """Toku income events: won jobs / hires (money to accept) or settled payouts.
+
+    Returns only actionable income. NOT a status check.
+    """
+    out = {"platform": "Toku", "type": "income", "detail": "no income events yet"}
+    try:
+        cred = json.loads(Path("/root/.blockrun/toku-credentials.json").read_text())
+        key = cred.get("apiKey", "")
+        if not key:
+            return out
+        # Toku exposes jobs/orders we've won — probe the orders endpoint
+        r = subprocess.run(
+            ["curl", "-s", "-m", "12", "https://www.toku.agency/api/agents/orders",
+             "-H", f"Authorization: Bearer {key}"],
+            capture_output=True, text=True, timeout=15)
+        try:
+            data = json.loads(r.stdout)
+        except json.JSONDecodeError:
+            data = {}
+        orders = data.get("orders") or data.get("data") or []
+        pending = [o for o in orders if isinstance(o, dict) and o.get("status") in ("PENDING", "ACTIVE", "IN_PROGRESS")]
+        if pending:
+            total = sum(float(o.get("priceCents", 0) or 0) / 100 for o in pending)
+            out.update(
+                detail=f"{len(pending)} active job(s) worth ~${total:.2f} — deliver",
+                pending_hire_count=len(pending),
+                pending_hire_usd=round(total, 2),
+            )
+    except Exception:
+        pass
+    return out
+
+
+def get_dealwork_earnings():
+    """dealwork.ai income events: provider contracts (money to accept/paid).
+
+    Returns only actionable income. NOT a status check.
+    """
+    out = {"platform": "dealwork.ai", "type": "income", "detail": "no income events yet"}
+    try:
+        cred = json.loads(Path("/root/.blockrun/dealwork-credentials.json").read_text())
+        key = cred.get("apiKey", "")
+        if not key:
+            return out
+        r = subprocess.run(
+            ["curl", "-s", "-m", "12", "https://dealwork.ai/api/v1/contracts?role=provider",
+             "-H", f"Authorization: Bearer {key}"],
+            capture_output=True, text=True, timeout=15)
+        try:
+            data = json.loads(r.stdout)
+        except json.JSONDecodeError:
+            data = {}
+        contracts = data.get("data") or []
+        active = [c for c in contracts if isinstance(c, dict) and c.get("status") in ("ACTIVE", "IN_PROGRESS", "PENDING_PAYMENT")]
+        if active:
+            total = sum(float(c.get("amountUsd", c.get("amount", 0)) or 0) for c in active)
+            out.update(
+                detail=f"{len(active)} active contract(s) worth ~${total:.2f} — deliver",
+                pending_hire_count=len(active),
+                pending_hire_usd=round(total, 2),
+            )
+    except Exception:
+        pass
+    return out
 
 
 def get_agentlux_earnings():
