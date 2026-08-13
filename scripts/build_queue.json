@@ -1,29 +1,5 @@
 [
   {
-    "id": 1,
-    "name": "Keeperhub Agents Onchain Hackathon — x402 Onchain Agents ($5K+)",
-    "difficulty": "easy",
-    "priority": "urgent",
-    "status": "shipped",
-    "assigned_to": "gentech",
-    "platform": "any",
-    "needs_jordan": false,
-    "human_gated": false,
-    "gate_type": null,
-    "detail": "KeeperHub Agents Onchain Hackathon (deadline Aug 13, 2026 — 9 days). JORDAN CONFIRMED GO (Aug 3). Build: wire GTA arb executor to KeeperHub MCP, execute ONE real onchain tx via KeeperHub, film it, assemble submission. Must include live tx link (judging requirement). $5K + $1K bounties. Plan: 09-Green Room/specs/keeperhub-build-plan.md.",
-    "note": "KeeperHub UNLOCKED. Aug 4 overnight: real workflow created in org — 'GTA Yield Guard — Aave Health Factor Auto-Rebalancer (Base)' ID r0nfoic9vk12ik1h3af67 (schedule 15m -> aave-v3/get-user-account-data -> condition HF<1.5 -> approve USDC -> Pool.supply). Test execution launched: exec ID 1momvt8frv3pa97hhaxu9. WALLET FUNDED Aug 5/6: 0x53A8...8EA now holds 10 USDC + 0.0079 ETH on Base (was 0/0). CURRENT BLOCKER: KeeperHub platform outage (status.keeperhub.com 'app degraded' Aug 6 01:58 UTC). Workflow 'GTA Proof Transfer — USDC on Base' (8q0q6f7y8px4umktkdr74) created + enabled; retry cron armed 03:00 UTC. Verify wallet USDC drops below 10.0 once outage clears. [SHIPPED by labs 2026-08-09]",
-    "_orig_id": 1,
-    "recommended_tier": "k3",
-    "group": "labs",
-    "routing": {
-      "group": "labs",
-      "build_in": "labs",
-      "handoff_on_complete": true
-    },
-    "shipped_by": "labs",
-    "shipped_date": "2026-08-09"
-  },
-  {
     "id": 2,
     "name": "Arc Programmable Money Hackathon — Deploy x402 + Agent Wallet on Arc L1",
     "difficulty": "medium",
@@ -770,24 +746,6 @@
       "build_in": "labs",
       "handoff_on_complete": true
     }
-  },
-  {
-    "id": 37,
-    "name": "Unichain Treasury Deployment + Grant",
-    "difficulty": "medium",
-    "priority": "medium",
-    "status": "pending",
-    "assigned_to": "gentech",
-    "platform": "unichain",
-    "needs_jordan": false,
-    "human_gated": false,
-    "gate_type": "build",
-    "detail": "Uniswap Foundation grants (Unichain Developer/Retro, up to $7.5K) + 'Innovation upon the DeFi Experience' bucket explicitly covers treasury & asset management. Win condition = DEPLOY our Agentic Treasury / GTA component on Unichain, not just apply. Jordan OK'd Aug 4. Target after Aug 13 (KeeperHub/DataHub deadlines). Rolling deadline. Repos: x402-gateway, gta-execution-engine.",
-    "note": "Add 2026-08-04. Sequence AFTER KeeperHub + DataHub submissions. Port treasury yield or GTA arb executor to Unichain, document, apply via share.hsforms.com/18Kv3hTvDSt-x1wK9va0OYwsdca9.",
-    "_orig_id": null,
-    "recommended_tier": 2,
-    "group": "Treasury",
-    "routing": "Treasury"
   },
   {
     "id": 38,

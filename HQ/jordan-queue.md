@@ -73,7 +73,7 @@ All 21 Gentech cloud items are decision-gated (need a yes/no or config value fro
 
 **Stale/deadline check needed:**
 - [ ] **#2 Arc Programmable Money** — 🔴 **FINAL SUBMISSIONS due Aug 9 midnight** (verified encodeclub.com). We submitted a checkpoint already — Jordan to check at home whether they now want a full demo video + repo link, or if the checkpoint counts. Aug 22 = event window end, NOT submission.
-- [ ] **#1** Keeperhub — verify still active (was urgent)
+- [ ] **#1** ~~Keeperhub — verify still active (was urgent)~~ — SKIPPED Aug 12
 - [ ] **#6** AI Factory Hackathon (Aug 3-10) — confirm entry
 - [ ] **#25** The Great Agent Hackathon — confirm entry
 - [ ] **#27** Hippocratic AI Residency — evaluate fit

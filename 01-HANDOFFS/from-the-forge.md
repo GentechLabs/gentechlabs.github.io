@@ -55,7 +55,7 @@ All 7 shipped. 6 from prior Jul 24 session, 1 from tonight.
 | # | Task | Deadline |
 |---|------|----------|
 | **#72** | OKX AI Genesis ($100K) | **Jul 27 (T-2)** — register + wallet |
-| **#80** | Keeperhub Onchain Hackathon | Starts Jul 27 — go/no-go |
+| **#80** | ~~Keeperhub Onchain Hackathon~~ | SKIPPED Aug 12 |
 | **#79** | AI Factory Hackathon | Aug 3-10 — go/no-go |
 
 ---
