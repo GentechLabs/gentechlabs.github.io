@@ -20,3 +20,5 @@
 
 - #14 — EVM Cortex x402-payments skill: added `skills/x402-payments/SKILL.md` to the fork (95 skills). Covers 402 flow, facilitator selection per network, middleware ordering, Bazaar manifest, paid-audit wiring. Committed a6a3e65 + pushed to github.com/ProtoJay4789/evm-cortex (verified on origin).
 - Applied group returns: #29 (labs), #49 (labs), #50 (forge) marked shipped 2026-08-13.
+- **x402 Marketplace Connector Guides** (fleshed-out idea → shipped): `10-Labs/x402-gateway/connectors/` doc set — README + opendexter.md + cdp-bazaar.md + awesome-mcp-servers.md (all verified from real listing work) + syra.md/paymenter.md scaffolds (pending #22/#11). First "Connector Pack" chapter captured while fresh.
+- Applied group returns: #8 (entertainment + treasury) attribution added; treasury 2026-08-12 return consumed (CPI wallet swept empty → blocker logged to jordan-items).

@@ -154,10 +154,11 @@
   4. **Paymenter marketplace** — listing drafted (queue #11).
   - Each doc: what the marketplace catalogs, the exact payload/registration fields, the settle→index flow, and the gotcha we hit.
 - **Why now:** we have 4+ real listing experiences in the last 9 days. Capturing them while fresh is near-zero marginal cost and produces the first "Connector Pack" chapter immediately.
-- [ ] Write `connectors/opendexter.md` (data already in hand)
-- [ ] Write `connectors/syra.md` (after #22 ships)
-- [ ] Write `connectors/awesome-mcp-servers.md` (PR #11773 context)
-- [ ] Write `connectors/paymenter.md` (after #11 ships)
+- [x] Write `connectors/opendexter.md` (data already in hand) — SHIPPED 2026-08-13
+- [x] Write `connectors/cdp-bazaar.md` — SHIPPED 2026-08-13
+- [x] Write `connectors/awesome-mcp-servers.md` (PR #11773 context) — SHIPPED 2026-08-13
+- [ ] Write `connectors/syra.md` (after #22 ships) — scaffolded 2026-08-13
+- [ ] Write `connectors/paymenter.md` (after #11 ships) — scaffolded 2026-08-13
 
 ## Sana Wallet Integration
 **Source:** @sanafionchain (Jun 18) | **Status:** Research done, needs account creation
