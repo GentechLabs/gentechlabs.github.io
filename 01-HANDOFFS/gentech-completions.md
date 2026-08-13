@@ -15,3 +15,8 @@
 - #9 — Agent Warfare procedural maps: verified shipped (cbf85a0, ?mapseed=NUM live, tests pass, deployed). Queue was stale; marked shipped.
 - #29 — Gemini XPRIZE: annotated labs return (shipped 2026-08-12).
 - Resolved #53 vault divergence: merged origin/main, took newer remote defi-data, kept valid local build_queue + rotation-data (remote copies had conflict markers). Pushed clean.
+
+## 2026-08-13
+
+- #14 — EVM Cortex x402-payments skill: added `skills/x402-payments/SKILL.md` to the fork (95 skills). Covers 402 flow, facilitator selection per network, middleware ordering, Bazaar manifest, paid-audit wiring. Committed a6a3e65 + pushed to github.com/ProtoJay4789/evm-cortex (verified on origin).
+- Applied group returns: #29 (labs), #49 (labs), #50 (forge) marked shipped 2026-08-13.
