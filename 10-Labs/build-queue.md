@@ -24,3 +24,20 @@
 | # | Item | Priority | Status | Notes |
 |---|------|----------|--------|-------|
 | 41 | **OpenDexter Marketplace — List x402 Gateway services** | High | Pending | open.dexter.cash/mcp — x402 API marketplace MCP. Registry row 4g verified Aug 3 (endpoint live, tools enumerated, search proven). Jordan wants us listed. Next: find provider-submission flow. Funding path identified: 0x7ebff owner wallet 2.97 USDC; GTA arb wallet signable 0.001 USDC. |
+
+## Hackathon — Aug 13 Additions
+
+| # | Item | Priority | Status | Notes |
+|---|------|----------|--------|-------|
+| 42 | **0G Bridge Buildathon — Wave 3 (AKINDO WaveHack)** | High | 🟢 BUILDING — scaffold done | Wave 3 = **$7,500 USDC + $7,500 0G credits = $15,000**, largest of the 6-wave program. Register: app.akindo.io/wave-hacks/Z4MlX4vreI72ol6pd. **UNIFIED BUILD (Jordan Aug 13):** AI DeFi agent on 0G stack — 0G Compute (LLM inference) + 0G Storage (trade log) + 0G Chain (ERC-7857 identity) + **Kite AI** (agentic-payment settlement) + **Goldsky** (pay-per-call RPC, x402 v2 verified) + Circle USDC rail. Scaffold at `10-Labs/0g-defi-agent/` (SDK wired, Goldsky x402 challenge verified, agent loop dry-run). Hits "AI DeFi dashboards or trading bots" track (30% = 0G stack integration). **Next:** fund agent wallet (0G testnet + Circle USDC), real 0G Compute call, real Goldsky paid call, Kite Passport registration, demo video. |
+| 43 | **Midnight Buildathon — 1st Buildathon on Midnight (AKINDO WaveHack)** | High | 🟡 Evaluate — shares unified build | **$12,500 USDT total grant across 3 waves**, judged by @MidnightNtwrk. Register: app.akindo.io/wave-hacks/jaMZjqPOBsLXvjdG. Wave 1 starts Aug 27, deadline Sep 2. **Unified angle:** privacy-first agent identity + selective disclosure on the settlement layer (Kite AI / 0G). Same AI DeFi agent, privacy-advantaged finance/identity app. Fresh Compact/ZK stack — secondary to 0G. |
+| 44 | **Kite AI — agentic-payment backbone (weave into all builds)** | High | 🟡 Research → integrate | "Katai" = **Kite AI** (gokite.ai). First blockchain for agentic payments: EVM PoS L1, **Agent Passport** (verifiable agent identity + programmable wallet + spending limits), stablecoin rails, mainnet live (Apr 2026). Founded by Databricks/Uber/UC Berkeley vets. **Jordan's direction (Aug 13):** weave Kite AI into all of these — 0G, Midnight, Goldsky, Circle Gemini. It's the settlement layer for the unified AI DeFi agent. **Next:** Agent Passport registration, SDK integration into `0g-defi-agent`. |
+
+## Opportunity Scanner Picks — Aug 13 (scoped, recommended by Gentech)
+
+| # | Item | Priority | Status | Notes |
+|---|------|----------|--------|-------|
+| 45 | **BUIDL CTC 2026 Fall (Creditcoin) — $15K** | High | 🟢 Recommended — add to queue | DeFi/RWA/AI agent on Creditcoin EVM. **Reuse ~80%** (port 0G/Kite AI DeFi agent, swap chain). Effort: Small-Medium (1-2 days). **Deadline Sep 6 (24 days) — ✅ feasible.** Register: dorahacks.io/hackathon/buidl-ctc-2026-fall. |
+| 46 | **CALL-E: Your Code Is Calling — $10K** | High | 🟢 Recommended — add to queue | Turn code into an AI agent that makes real phone calls. **Reuse ~70%** (voice/agent stack exists: speech-engine, TTS). Effort: Small-Medium (1-2 days). **Deadline Sep 14 (32 days) — ✅ feasible.** Register: call-e.devpost.com. |
+| 47 | **Agentic Cinema (Google Cloud) — $75K** | High | 🟢 Recommended — add to queue | Agentic AI workflows on Gemini + Google Cloud Agent Builder, integrate partner tech. **Reuse ~65%** (we're GCP-native for Circle prize). Effort: Medium (2-3 days). **Deadline Sep 7 (25 days) — ✅ feasible.** Register: agentic-cinema.devpost.com. |
+| 48 | **All Things Agentic (Google) — $180K** | Medium | 🟡 Stretch — only if bandwidth | "Next-gen AI agents on Gemini + Google Cloud." Broad + competitive. **Reuse ~60%.** Effort: Large (3-5 days, needs polish to win big field). **Deadline Aug 31 (18 days) — ⚠️ tight.** Register: allthingsagentichackathon.devpost.com. Only commit after easy wins. |
