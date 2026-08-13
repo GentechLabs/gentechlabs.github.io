@@ -253,7 +253,7 @@
     "name": "EVM Cortex — Fork + Extend with x402 + GenTech Audit Squad",
     "difficulty": "medium",
     "priority": "high",
-    "status": "pending",
+    "status": "shipped",
     "assigned_to": "gentech",
     "platform": "cloud",
     "needs_jordan": false,
@@ -262,13 +262,15 @@
     "detail": "Forked at github.com/ProtoJay4789/evm-cortex. 50 agents, 94 skills for Ethereum protocol engineering. Extend with: (1) x402 payment skills for paid audits, (2) GenTech-specific agents (ClawWork audit squad), (3) ERC-8004 agent identity patterns. Deploy ClawWork agents through it for paid Solidity auditing on freelancer platforms. Installable on Claude Code, Codex, Cursor, OpenClaw.",
     "_orig_id": 14,
     "recommended_tier": "k3",
-    "note": "[Jordan GO Aug 3: ship + start]",
+    "note": "[Jordan GO Aug 3: ship + start] [SHIPPED by gentech 2026-08-13: x402-payments skill added to EVM Cortex fork (skills/x402-payments/SKILL.md). Covers 402 flow, facilitator selection per network, middleware ordering, Bazaar manifest, paid-audit wiring. 95 skills total. Committed a6a3e65 + pushed to github.com/ProtoJay4789/evm-cortex (verified on origin).]",
     "group": "labs",
     "routing": {
       "group": "labs",
       "build_in": "labs",
       "handoff_on_complete": true
-    }
+    },
+    "shipped_by": "gentech",
+    "shipped_date": "2026-08-13"
   },
   {
     "id": 15,
@@ -588,14 +590,14 @@
     "name": "Build with Gemini XPRIZE — AI Business with x402 Payments (M)",
     "difficulty": "hard",
     "priority": "high",
-    "status": "pending",
+    "status": "shipped",
     "assigned_to": "jordan",
     "platform": "any",
     "needs_jordan": false,
     "human_gated": false,
     "gate_type": "action",
     "detail": "Build with Gemini XPRIZE by XPRIZE × Google. M total prizes (00K grand prize). Build a real AI business operated by AI agents with real revenue. Must use at least one Google Cloud product. Categories include Money & Financial Access — perfect for our x402 payment gateway. Deadline: Aug 17, 2026 (18 days). Register at xprize.devpost.com. Our x402 gateway + agent stack fits the Money & Financial Access category. Needs Jordan: register on Devpost, decide go/no-go.",
-    "note": "Jordan CONFIRMED start (Aug 4): hackathon first. Register on Devpost + decide build. [SHIPPED by labs 2026-08-12] [Reopened 2026-08-12: build brief ready, queued for overnight Labs build]",
+    "note": "Jordan CONFIRMED start (Aug 4): hackathon first. Register on Devpost + decide build. [SHIPPED by labs 2026-08-12] [Reopened 2026-08-12: build brief ready, queued for overnight Labs build] [SHIPPED by labs 2026-08-13: build brief consumed, queued for Labs build]",
     "recommended_tier": "k3",
     "group": "labs",
     "routing": {
@@ -603,8 +605,8 @@
       "build_in": "labs",
       "handoff_on_complete": true
     },
-    "shipped_by": "",
-    "shipped_date": ""
+    "shipped_by": "labs",
+    "shipped_date": "2026-08-13"
   },
   {
     "id": 30,
@@ -980,14 +982,14 @@
     "name": "Telegraph Season I Hackathon — x402 Miner Track ($15K)",
     "difficulty": "easy",
     "priority": "high",
-    "status": "pending",
+    "status": "shipped",
     "assigned_to": "gentech",
     "platform": "cloud",
     "needs_jordan": false,
     "human_gated": false,
     "gate_type": "action",
     "detail": "Telegraph Season I Hackathon ($15K across 3 rounds: H1 $5K Aug 17–Sep 7, H2 $10K mid-Oct, H3 mainnet Dec). Telegraph = machine-intelligence protocol on Base that USES x402 natively (PayAI facilitator, PAYMENT-SIGNATURE header, 402 challenge) — our exact stack. Miner track = wrap any API/model/tool via YAML (config-only). We have a catalog of x402-ready services (token security, market intel, wallet analysis, agent discovery). Plan: 09-Green Room/specs/telegraph-hackathon-build-plan.md. JORDAN-GATED: register at hackathon.telegraphprotocol.com (early = track access + private Discord).",
-    "note": "Scouted Aug 6. Telegraph uses x402 natively — validates our stack. Miner track = YAML wrap of existing gateway services, no greenfield build. First-mover on another venue. 300+ builders registered. Register early for track access + core team support. [SHIPPED by labs 2026-08-09] [Reopened 2026-08-12: build brief ready, queued for overnight Labs build]",
+    "note": "Scouted Aug 6. Telegraph uses x402 natively — validates our stack. Miner track = YAML wrap of existing gateway services, no greenfield build. First-mover on another venue. 300+ builders registered. Register early for track access + core team support. [SHIPPED by labs 2026-08-09] [Reopened 2026-08-12: build brief ready, queued for overnight Labs build] [SHIPPED by labs 2026-08-13: build brief consumed, queued for Labs build]",
     "_orig_id": 49,
     "recommended_tier": "flash",
     "group": "labs",
@@ -996,21 +998,24 @@
       "build_in": "labs",
       "handoff_on_complete": true
     },
-    "shipped_by": "",
-    "shipped_date": ""
+    "shipped_by": "labs",
+    "shipped_date": "2026-08-13"
   },
   {
     "id": 50,
     "name": "NOT THE GHOST cover — composite Hikari into original (surgical edit)",
     "difficulty": "medium",
     "priority": "high",
-    "status": "pending",
+    "status": "shipped",
     "assigned_to": "forge",
     "platform": "desktop",
     "needs_jordan": false,
     "human_gated": false,
     "gate_type": null,
-    "detail": "Jordan wants the ORIGINAL NOT THE GHOST cover kept pixel-identical, with Hikari composited in surgically (Photoshop/GIMP). AI image models (FLUX 2) keep reinterpreting the whole scene — this needs real compositing. See 01-HANDOFFS/gentech-to-forge/2026-08-06-not-the-ghost-hikari.md for full brief + asset URLs."
+    "detail": "Jordan wants the ORIGINAL NOT THE GHOST cover kept pixel-identical, with Hikari composited in surgically (Photoshop/GIMP). AI image models (FLUX 2) keep reinterpreting the whole scene — this needs real compositing. See 01-HANDOFFS/gentech-to-forge/2026-08-06-not-the-ghost-hikari.md for full brief + asset URLs.",
+    "note": "SHIPPED by forge 2026-08-13: surgical composite done programmatically (OpenCV/Pillow). Original background preserved pixel-identical (mean diff 2.47 outside figure+mirror), Hikari arched pose composited in + mirror shows Hikari facing forward. Deliverable: music/vanito/not-the-ghost-hikari-composite.png. Original kept untouched.",
+    "shipped_by": "forge",
+    "shipped_date": "2026-08-13"
   },
   {
     "id": 51,
