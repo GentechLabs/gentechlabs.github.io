@@ -15,9 +15,7 @@ This is the delegation board Jordan reads to see every handoff and where it's go
 - **forge** — desktop dev workbench
 - **labs** — build/code work
 - **entertainment** — content, social, arcade
-- **strategies** — finance, DeFi, portfolio
-- **finance** — treasury/money operations
-- **treasury** — treasury agent
+- **treasury** — finance, DeFi, portfolio, yield (consolidated from "strategies"/"finance" Aug 12)
 - **gizmo** — Labs bot
 
 ## Protocol
