@@ -16,7 +16,9 @@ These are the pieces I can't do solo — they need your action tonight. Everythi
 - [ ] **Register on Devpost** (xprize.devpost.com) — prereq for the Circle bonus. Opt in on the submission form.
 
 ### 🏗️ 0G Bridge Buildathon Wave 3 — $15K
-- [ ] **Complete AKINDO registration** — I need a fresh verification code (re-entering email invalidates the prior one; send the newest code and I'll finish).
+- [x] **AKINDO registration COMPLETE** (Aug 13, code 937985) — joined 0G Bridge Wave 3 as user `gentech`.
+- [ ] **Fund agent wallet** (0G testnet faucet: faucet.0g.ai + Circle USDC) — needed for mainnet deploy + 0G Compute/Storage + Goldsky paid calls.
+- [ ] **Public X post** (mandatory submission requirement) — hashtags #0G #0GBridge, tag @0G_labs @0G_Builders @AKINDO_Platform.
 
 ### 🎯 Opportunity Scanner Picks — SIGN UP (added Aug 13, recommended by Gentech)
 These are the scoped, feasible ones. Register and I'll build:
