@@ -3,7 +3,7 @@
 **From:** Gentech
 **To:** forge
 **Date:** 2026-08-12
-**Status:** open
+**Status:** ✅ SHIPPED — see `01-HANDOFFS/forge-to-gentech/2026-08-12-not-the-ghost-shipped.md`
 **Priority:** HIGH — Jordan is actively waiting on this
 
 ## Task
