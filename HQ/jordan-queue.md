@@ -1,5 +1,30 @@
 # Jordan's Action Items — Orchestrator List
 
+## 🎯 Agent Economy Builds — HUMAN-GATED (added Aug 13)
+
+These are the pieces I can't do solo — they need your action tonight. Everything else is running autonomously.
+
+### 🏆 Agent Builders Cup (#19) — $20K+ · registration closes **Aug 15 (2 days)**
+- [ ] **Fund/test the agent wallet** — the Consigliere racer is built and verified live (232 Hyperliquid perps, real arb routes). Needs a funded wallet to trade.
+- [ ] **Pick primary venue** — Solana/Hyperliquid is our lane (cross-venue arb: Meteora/Orca/Raydium spot vs Hyperliquid perp).
+- [ ] **Wire condor server config** — point the Condor server at the funded wallet + venue.
+
+### 📡 Telegraph Season I (#49) — $15K · H1 opens **Aug 17**
+- [ ] **Register at integrate.telegraphprotocol.com** — early = track access + Discord support. (Miner YAML is drafted + schema-validated; I'll validate + register on-chain once you're in.)
+
+### 🎯 Gemini XPRIZE Agentic Economy Prize — $50K Circle bonus · register **Aug 17**
+- [ ] **Register on Devpost** (xprize.devpost.com) — prereq for the Circle bonus. Opt in on the submission form.
+
+### 🏗️ 0G Bridge Buildathon Wave 3 — $15K
+- [ ] **Complete AKINDO registration** — I need a fresh verification code (re-entering email invalidates the prior one; send the newest code and I'll finish).
+
+### 🎯 Opportunity Scanner Picks — SIGN UP (added Aug 13, recommended by Gentech)
+These are the scoped, feasible ones. Register and I'll build:
+- [ ] **BUIDL CTC 2026 Fall (Creditcoin) — $15K** — dorahacks.io/hackathon/buidl-ctc-2026-fall — Sep 6, reuse ~80%, easy
+- [ ] **CALL-E: Your Code Is Calling — $10K** — call-e.devpost.com — Sep 14, reuse ~70%, easy
+- [ ] **Agentic Cinema (Google Cloud) — $75K** — agentic-cinema.devpost.com — Sep 7, reuse ~65%, medium
+- [ ] **All Things Agentic (Google) — $180K** — allthingsagentichackathon.devpost.com — Aug 31, stretch (only if bandwidth)
+
 ## 🔴 Manual GitHub Forks — API BLOCKED (Aug 2, verified)
 
 GitHub API refuses forks with `403: You cannot fork this repository at this time` — this is the known account restriction, not a rate limit. **Jintech cannot fork by itself.** Manual fork via GitHub web UI (one click each): go to repo page → Fork → create. ~2 minutes total.

@@ -3,9 +3,13 @@
 # Validate at integrate.telegraphprotocol.com BEFORE registering (on-chain = immutable).
 #
 # NOTE: raw key NEVER in this file — only the env_var name. Node reads TAVILY_API_KEY at runtime.
+# Schema-validated against the Telegraph YAML Standard (Aug 13):
+#   - kind must be "subnet" (on-demand) or "validator" (polled) — NOT "miner"
+#   - semantics.signal_mapping.type must be a canonical enum value
+#   - supported_intents must be lowercase canonical intent strings
 
 version: "1"
-kind: miner
+kind: subnet
 id: 9001                        # pick an unused numeric id (check /miner-dispatcher/integrations)
 slug: gentech-research
 protocol: generic               # not bittensor — generic provider
@@ -49,25 +53,29 @@ endpoints:
 
 semantics:
   signal_mapping:
+    type: search_relevance        # canonical enum value (was missing — validation failure)
     confidence_field: score
     reason_field: answer
-  supported_intents:
-    - WEB_SEARCH
-    - NEWS_SEARCH
-    - RESEARCH_SYNTHESIS
-    - FACT_CHECK
+  supported_intents:              # lowercase canonical intents (was uppercase — validation failure)
+    - web_search
+    - news_search
+    - research_synthesis
+    - fact_check
 
 on_chain:
+  description: Current web-search relevance signal for on-chain data.
   transform: direct
   min_price_usdc: 0.01
   fields:
     strings:
       - index: 0
         name: answer
+        description: Synthesized answer text
         source_path: answer   # verified: Tavily top-level field when include_answer=true
     integers:
       - index: 0
         name: response_time_ms
+        description: Response time in milliseconds
         source_path: response_time  # verified: Tavily top-level float seconds → scale to ms
         multiplier: 1000
 
