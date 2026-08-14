@@ -1,7 +1,7 @@
 ---
-date: 2026-08-12
+date: 2026-08-13
 status: active
-last-updated: 2026-08-12 20:10 ET
+last-updated: 2026-08-13 20:10 ET
 ---
 
 # 🧠 Considerations — Open Decisions
@@ -10,9 +10,10 @@ last-updated: 2026-08-12 20:10 ET
 
 ## 🚨 Urgent — DEADLINES + MACRO EVENT
 
-- [ ] 🚨 **CPI Release — Wed Aug 12 8:30 AM ET (TODAY, RELEASED)** — Treasury CPI War-Room play LOCKED. Regime RANGE_BOUND (conf .65), RSI 24.1 oversold, 24h -3.6%. Expected AVAX ±4-7%. Staged: **07:45 ET Aug 12** `steward_execute --mode withdraw-redeploy --shape bid-ask` (reposition edges ±5% 45 min pre-release — should have fired this morning), **09:00 ET Aug 13** revert to Curve. 10-min watchdog `51bc9900e24d` is the breakout eyes. Steward full autonomy active — will self-execute the rebalance. **Verify the bid-ask reposition actually executed this morning + confirm the 09:00 ET Aug 13 Curve revert is still armed.**
-- [ ] 🚨 **Keeperhub Agents Onchain #80** — **⚠️ DEADLINE TOMORROW Aug 13 (1 day).** JORDAN CONFIRMED GO. **✅ PROOF TRANSFER COMPLETE Aug 8** (0.01 USDC on-chain, TX 0x88fe6c9a...b1df, Base). **REMAINING: film demo video + assemble GitHub submission (README, video, live tx link).**
-- [ ] 🚨 **CockroachDB × AWS — Agentic Memory #83** — **Aug 18 (6 days).** $8.75K, persistent memory + MCP Server. **Jordan: register?**
+- [ ] 🚨 **CPI Release — Wed Aug 12 8:30 AM ET (RELEASED) — ⚠️ REPOSITION BLOCKED** — Treasury CPI War-Room play was staged (regime RANGE_BOUND, RSI 24.1, expected AVAX ±4-7%) but **the Steward wallet was swept empty Aug 11 evening** (~43.72 USDC off to `0xeee3fe6c...`). No LFJ V2.2 position exists on `0x572ABd6461BED2258615E6b99c585Ab7c5d05037` (0 WAVAX, ~0.0006 USDC, 0.2979 AVAX gas). **Jordan: confirm if the sweep was an intentional treasury wind-down/emergency move or unexpected.** If unintentional, immediate review needed. Two CPI one-shots (`31432dce0de9`, `e13db42767b0`) recommended paused + position heartbeat re-enabled.
+- [ ] 🚨 **Keeperhub Agents Onchain #80** — **⚠️ DEADLINE TODAY Aug 13.** JORDAN CONFIRMED GO. **✅ PROOF TRANSFER COMPLETE Aug 8** (0.01 USDC on-chain, TX 0x88fe6c9a...b1df, Base). **REMAINING: film demo video + assemble GitHub submission (README, video, live tx link).** #1 priority.
+- [ ] 🚨 **Build with Gemini XPRIZE #29** — **Aug 17 (4 days).** Labs marked shipped (build brief consumed) but **Jordan still needs to register on Devpost** (xprize.devpost.com) + decide build. Money & Financial Access category fits our x402 gateway.
+- [ ] 🚨 **CockroachDB × AWS — Agentic Memory #83** — **Aug 18 (5 days).** $8.75K, persistent memory + MCP Server (Devpost cockroachdb-ai.devpost.com). **Jordan: register?**
 - [ ] ✅ **AI Factory Hackathon #79** — **DEADLINE PASSED Aug 10.** lablab.ai × NativelyAI. **MARKED SHIPPED by labs Aug 9.** Jordan: confirm submission status (if not submitted, this is done).
 - [ ] ✅ **Build with DataHub** — **DEADLINE PASSED Aug 10.** Needs submission confirm. If not submitted, mark closed.
 - [ ] ✅ **Arc Programmable Money Hackathon** — **DEADLINE PASSED Aug 9.** SHIPPED + verified (ArcAgentWallet.sol, 57/57 tests). Moved to Recently Resolved.
