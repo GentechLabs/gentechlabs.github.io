@@ -1186,7 +1186,7 @@
     "name": "DeepSeek Harness \u2014 GenTech x402 Plugin (dsh-plugin)",
     "difficulty": "medium",
     "priority": "high",
-    "status": "pending",
+    "status": "shipped",
     "assigned_to": "gentech",
     "platform": "cloud",
     "needs_jordan": false,
@@ -1194,7 +1194,9 @@
     "gate_type": "build",
     "detail": "DeepSeek Harness (dsh) open-sourced Aug 13 2026, MIT, 46k stars/3.6k forks day one. 'Everything is a plugin' on Cordis meta-framework. Run: npx @deepseek-ai/dsh web (UI at 127.0.0.1:3080). Opportunity: build a GenTech x402 payment plugin so dsh agents can pay-per-call our gateway. Early contributor visibility on a hot project. Repo: github.com/deepseek-ai/deepseek-harness. Plugin topic: dsh-plugin.",
     "group": "labs",
-    "note": "TRACKED Aug 13 2026. Squeeze in after micro1 interview prep. Early plugin = visibility on 46k-star project.",
-    "github_repo": "deepseek-ai/deepseek-harness"
+    "note": "SHIPPED by gentech 2026-08-14. Built 10-Labs/dsh-plugin-gentech-x402/: dependency-free x402 client core (src/x402-client.js + keccak.js, zero npm deps) + Cordis plugin (src/plugin.js) registering 5 gentech_* tools (services/discover free; token_security, wallet_analysis, market_intel paid ~$0.01) with a ctx.gentechSettle settlement seam. 19/19 tests pass (keccak known vectors, live gateway discovery HTTP 402, plugin registration + settlement-seam wiring). Live-verified against api.gentechlabs.net: discover returns 402 with Base USDC rail, bazaar manifest lists 9 services v9.1.0. First x402 payment plugin in the dsh ecosystem; dsh-plugin topic for visibility. Repo: github.com/deepseek-ai/deepseek-harness.",
+    "github_repo": "deepseek-ai/deepseek-harness",
+    "shipped_by": "gentech",
+    "shipped_date": "2026-08-14"
   }
 ]
