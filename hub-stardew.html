@@ -799,6 +799,13 @@
             <div style="text-align:center; padding:40px 0; color:var(--text-dim);">Loading weather data...</div>
         </div>
 
+        <!-- ===== YIELD RAIL FINDER ===== -->
+        <div class="section-divider"><span>🧭 Rail Finder</span></div>
+
+        <div id="rail-finder">
+            <div style="text-align:center; padding:40px 0; color:var(--text-dim);">Loading rail heat-map...</div>
+        </div>
+
         <div class="footer" id="yieldfarm-footer">
             🌾 Not financial advice · Data: DexScreener + LFJ · Updated weekly
         </div>
@@ -1319,6 +1326,79 @@
             `;
         }
 
+        // --- Yield Rail Finder ---
+        const RAIL_FINDER_URL = 'https://raw.githubusercontent.com/ProtoJay4789/ProtoJay4789.github.io/main/DeFi/rainbow/rail-finder-data.json';
+
+        async function fetchRailFinder() {
+            const container = document.getElementById('rail-finder');
+            if (!container) return;
+            try {
+                const res = await fetch(RAIL_FINDER_URL + '?t=' + Date.now());
+                if (res.ok) {
+                    const data = await res.json();
+                    renderRailFinder(container, data);
+                    return;
+                }
+            } catch (e) {}
+            renderRailFinderFallback(container);
+        }
+
+        function renderRailFinder(container, data) {
+            const rails = (data.rails || []).filter(r => r.ok);
+            if (rails.length === 0) { renderRailFinderFallback(container); return; }
+            rails.sort((a, b) => b.headlineApy - a.headlineApy);
+
+            const hot = rails[0];
+            let html = `<div class="card" style="margin-bottom:10px; border-left:4px solid ${hot.bandColor}; background:rgba(${hot.bandColor==='#e84142'?'232,65,66':hot.bandColor==='#f59e0b'?'245,158,11':hot.bandColor==='#eab308'?'234,179,8':hot.bandColor==='#22c55e'?'34,197,94':hot.bandColor==='#3b82f6'?'59,130,246':'168,85,247'},0.08);">
+                <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px;">
+                    <span style="font-size:1.6em;">${hot.bandEmoji}</span>
+                    <div>
+                        <div style="font-family:var(--pixel-font); font-size:0.55em; color:var(--wheat-gold);">HOTTEST RAIL</div>
+                        <div style="font-size:1.1em;">${hot.icon} ${hot.label}</div>
+                    </div>
+                    <div style="margin-left:auto; text-align:right;">
+                        <div style="font-size:1.4em; color:${hot.bandColor};">${hot.headlineApy}%</div>
+                        <div style="font-size:0.75em; color:var(--text-dim);">${hot.headlineProvider} · ${hot.token}</div>
+                    </div>
+                </div>
+            </div>`;
+
+            html += rails.map(r => {
+                const stabWarn = r.isStable ? '' : ' <span style="font-size:0.75em; color:var(--text-dim);">(volatile)</span>';
+                const picks = (r.top || []).slice(0, 2).map(t =>
+                    `${t.token} ${t.apy}% ${t.provider}`).join(' · ');
+                return `<div class="card" style="margin-bottom:10px; border-left:4px solid ${r.bandColor};">
+                    <div style="display:flex; align-items:center; gap:10px; margin-bottom:6px;">
+                        <span style="font-size:1.3em;">${r.bandEmoji}</span>
+                        <span style="font-family:var(--pixel-font); font-size:0.5em; color:var(--wheat-gold);">${r.label}</span>
+                        <span style="margin-left:auto; font-size:1.2em; color:${r.bandColor};">${r.headlineApy}%</span>
+                    </div>
+                    <div style="font-size:0.8em; color:var(--text-dim);">${r.headlineProvider} · ${r.token}${stabWarn}</div>
+                    <div style="font-size:0.75em; color:var(--text-dim); margin-top:4px;">Best: ${picks}</div>
+                </div>`;
+            }).join('');
+
+            html += `<div style="text-align:center; font-family:var(--pixel-font); font-size:0.4em; color:var(--text-dim); margin-top:14px;">🧭 Updated ${formatRailTime(data.lastUpdated)} · 🔴≥8% 🟠6-8 🟡5-6 🟢4-5 🔵3-4 🟣<3</div>`;
+            container.innerHTML = html;
+        }
+
+        function formatRailTime(iso) {
+            if (!iso) return 'recently';
+            try {
+                const d = new Date(iso);
+                return d.toLocaleString('en-US', { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' });
+            } catch (e) { return 'recently'; }
+        }
+
+        function renderRailFinderFallback(container) {
+            container.innerHTML = `
+                <div class="card" style="text-align:center;">
+                    <div style="font-size:1.2em; margin-bottom:8px;">🧭</div>
+                    <div style="font-family:var(--pixel-font); font-size:0.5em; color:var(--wheat-gold); margin-bottom:6px;">Rail Finder</div>
+                    <div style="font-size:0.85em; color:var(--text-dim);">No cross-rail yield data yet. Check back after the next scan!</div>
+                </div>`;
+        }
+
         // --- Init ---
         document.addEventListener('DOMContentLoaded', () => {
             const savedTab = getSavedTab();
@@ -1331,9 +1411,11 @@
             fetchRainbowData();
             fetchRotationData();
             fetchMacroEvents();
+            fetchRailFinder();
 
             setInterval(fetchPositionData, REFRESH_MS);
             setInterval(fetchRainbowData, 60000);
+            setInterval(fetchRailFinder, 300000);
         });
     </script>
 </body>
