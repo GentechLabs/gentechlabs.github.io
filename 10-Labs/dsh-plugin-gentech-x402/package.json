@@ -1,0 +1,17 @@
+{
+  "name": "gentech-x402-client",
+  "version": "1.0.0",
+  "description": "Dependency-free x402 pay-per-call client core (used by the dsh-plugin-gentech-x402 DeepSeek Harness plugin)",
+  "type": "module",
+  "main": "src/x402-client.js",
+  "exports": {
+    ".": "./src/x402-client.js"
+  },
+  "scripts": {
+    "test": "node --test tests/*.test.mjs"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  }
+}
