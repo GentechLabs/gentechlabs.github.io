@@ -798,6 +798,7 @@ async def openapi():
             "version": MANIFEST.get("version", "9.0.0"),
             "description": "Pay-per-call API gateway with 7 services across Base Network. Token security, wallet analysis, agent discovery, market intelligence, DeFi LP analytics, NFT search, treasury defense.",
             "contact": {"email": "jordanjones0902@gmail.com", "name": "GenTech Labs", "url": "https://gentechlabs.net"},
+            "x-guidance": "Call /v1/{service}/{path} with a JSON body. Services: token_security (risk score an address), wallet_analysis (portfolio P&L), agent_discovery (search on-chain agents), market_intelligence (token price/volume), defi_lp_analytics (LP position scoring), nft_search (Magic Eden search), treasury_defender (token quarantine). Unauthenticated calls return HTTP 402 with x402 payment requirements (USDC on Base). Pay via EIP-3009 and retry with Authorization: x402 <proof>.",
         },
         "servers": [{"url": "https://api.gentechlabs.net"}],
         "security": [{"x402": []}],
@@ -823,8 +824,22 @@ async def openapi():
                     {"name": "service", "in": "path", "required": True, "schema": {"type": "string"}},
                     {"name": "path", "in": "path", "required": True, "schema": {"type": "string"}},
                 ],
-                "get": {"summary": "Paid x402 endpoint (service/path)", "responses": {"402": {"description": "Payment required"}, "200": {"description": "OK"}}},
-                "post": {"summary": "Paid x402 endpoint (service/path)", "responses": {"402": {"description": "Payment required"}, "200": {"description": "OK"}}},
+                "get": {
+                    "summary": "Paid x402 endpoint (service/path)",
+                    "x-payment-info": {
+                        "price": {"mode": "fixed", "currency": "USD", "amount": "0.010000"},
+                        "protocols": [{"x402": {}}],
+                    },
+                    "responses": {"402": {"description": "Payment required"}, "200": {"description": "OK"}},
+                },
+                "post": {
+                    "summary": "Paid x402 endpoint (service/path)",
+                    "x-payment-info": {
+                        "price": {"mode": "fixed", "currency": "USD", "amount": "0.010000"},
+                        "protocols": [{"x402": {}}],
+                    },
+                    "responses": {"402": {"description": "Payment required"}, "200": {"description": "OK"}},
+                },
             },
         },
     }

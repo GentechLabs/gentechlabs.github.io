@@ -413,6 +413,8 @@ def get_marketplace_income():
     results.append(get_dealwork_earnings())
     # APIHub — REGISTERED (Aug 13). Income = settled per-call x402 payments (covered by on-chain
     # USDC scan to our wallet). No extra API poll needed.
+    # AgentCash — LIVE (Aug 14). Discovery-gated x402/MPP rail (indexes our /openapi.json +
+    # 402 responses). Income = settled USDC to our wallet (covered by on-chain scan). No API poll.
     return results
 
 
