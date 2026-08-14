@@ -1,6 +1,6 @@
 # 🧠 Context Weight — GenTech Labs
 
-> Auto-generated: 2026-08-13 00:08 ET · Loads on session start so every group has context.
+> Auto-generated: 2026-08-14 00:08 ET · Loads on session start so every group has context.
 > Source: build_queue.json + vault state
 
 ---
@@ -12,24 +12,24 @@
 - [HIGH] Paymenter x402 Gateway — Submit to Marketplace + Discord — pending
 - [HIGH] Paymenter x402 — Pterodactyl Community Outreach — pending
 - [HIGH] Multica + Paperclip — Set Up ClawWork Squad + GenTech Shop Plugin — pending
-- [HIGH] EVM Cortex — Fork + Extend with x402 + GenTech Audit Squad — pending
 - [HIGH] DeFi Model — QLoRA Fine-Tune DeepSeek R1 32B on BlockRun — pending
 - [HIGH] Cesium Flight Sim — Arcade Cabinet with Agent Wingmen — pending
 - [HIGH] ACE-Step UI — Arcade Soundtrack System + GenTech Music Studio — pending
+- [HIGH] GeoLibre — GIS Data Pipeline for DogFighters Maps — pending
 
 ## 🏗️ Build Queue
-54 total · 24 pending · 2 blocked
+52 total · 19 pending · 2 blocked
 
 ## 🚨 Blockers
 - **Super Arcade Tennis — Cab #1 for GenTech Arcade** — First arcade cabinet. Three.js isometric tennis, chain power-shots (BTC/ETH/SOL), AI opponent. LIVE at arcade.gentechlab
 - **AI Job Search — Fork + Set Up Jordan's Profile + GenTech Academy Module** — Fork ai-job-search (28.1K stars, MIT). (1) Set up Jordan's profile — skills, experience, portfolio link. (2) Wire into j
 
 ## ✅ Recently Done
-- Keeperhub Agents Onchain Hackathon — x402 Onchain Agents ($5K+)
 - Arc Programmable Money Hackathon — Deploy x402 + Agent Wallet on Arc L1
 - Algorand Global x402 Challenge — Composite Entry ($100K + 500K ALGO)
 - Agent Warfare — Agent Archetypes/Classes (Sniper, Scout, Heavy, Medic, Engineer)
 - Agent Warfare — Procedural Map Generation via text-to-cad
+- EVM Cortex — Fork + Extend with x402 + GenTech Audit Squad
 
 ## 🎯 Key Decisions
 See 11-Mess Hall/considerations.md
@@ -42,7 +42,7 @@ See 11-Mess Hall/considerations.md
 - **Forge** — Desktop agent · Handles local builds
 
 ## 🔗 Quick Links
-- Build queue: `scripts/build_queue.json` (54 items)
+- Build queue: `scripts/build_queue.json` (52 items)
 - Jocelyn's hub: gentechlabs.net/jocelyn.html
 - Investor deck: gentechlabs.net/grant.html
 - Demo video: gentechlabs.net/agentic-treasury-demo.mp4
