@@ -123,3 +123,14 @@ Goal: land one funding shot to go full-time off Amazon. SPC already in the pipe;
 - [ ] **Fetch.ai Accelerator** — evaluate only if we want to build on Fetch.ai stack (detour from x402 lane). Lower priority.
 
 **Status:** Jordan on break (Aug 11) — play the game, enjoy off day. Resume accelerator/grant drafting after. Do NOT auto-submit; needs Jordan's go + NYC commitment for Alliance.
+
+## 🎮 Saints Row 2 Juiced Patch — CONTRIBUTION (added Aug 13, for tomorrow)
+
+Jordan's favorite game. Wants to help the kobraworksmodding team with their issues. **Needs in-game testing on Windows to verify — can't be done from the VPS.**
+
+- [ ] **Issue #67 — UI breaks below 720p** (`good first issue`, `original bug`) — **root-caused by Gentech.** Bug in `Monkey Patch/Render/Render2D.cpp` → `get_vint_res_limit()`: the final block (`if (currentX < 1280.0f || currentY < 720.0f) { targetX = currentX; targetY = currentY; }`) **overrides the 720p clamp** and feeds raw sub-720p resolution into the UI. Fix = remove/guard that override so the 720p virtual buffer is respected. Repo cloned at `/tmp/sr2jp`.
+- [ ] **Verify the fix in-game** — build with VS 2022 (C++23), test at a sub-720p resolution (e.g. 1024×768 or 800×600), confirm HUD no longer breaks.
+- [ ] **Post the code-level analysis as a comment on issue #67** — Gentech has drafted the exact lines + proposed fix; Jordan reviews before submit.
+- [ ] **Optional follow-up:** Issue #13 (rare aspect ratios, same UI-scaling family) — revisit after #67.
+
+**Context:** org explicitly welcomes contributions. `SR2IssuesList` repo (28 open) is the easier doc/triage entry point. Main repo is C/C++ engine work — needs hands-on Windows testing, not agent-shippable.
