@@ -1,0 +1,42 @@
+# AWS Lambda deployment template (SAM / Serverless-style)
+# Deploys the agentic memory layer as a Lambda function behind an HTTP endpoint.
+#
+# Deploy with the AWS SAM CLI:
+#   sam build && sam deploy --guided
+# Set COCKROACH_DSN to your CockroachDB Cloud connection string.
+
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-31
+Description: GenTech Agent Memory — CockroachDB-backed persistent memory for AI agents
+
+Globals:
+  Function:
+    Timeout: 30
+    MemorySize: 256
+    Runtime: python3.11
+    Environment:
+      Variables:
+        COCKROACH_DSN: !Ref CockroachDSN
+
+Parameters:
+  CockroachDSN:
+    Type: String
+    Description: CockroachDB connection string (postgresql://user@host:26257/db?sslmode=verify-full)
+
+Resources:
+  AgentMemoryFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: src/
+      Handler: lambda_handler.handler
+      Events:
+        Api:
+          Type: Api
+          Properties:
+            Path: /memory
+            Method: any
+
+Outputs:
+  AgentMemoryApi:
+    Description: API Gateway endpoint URL
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/memory"

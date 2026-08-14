@@ -467,7 +467,7 @@
     "human_gated": false,
     "gate_type": "decision",
     "detail": "CockroachDB \u00d7 AWS Hackathon: Build with Agentic Memory. Submissions Jun 30 - Aug 18, 2026. $8,750 total prizes ($5K/$2.5K/$1.25K). Requirements: 2+ CockroachDB tools (MCP Server, Vector Indexing, ccloud CLI) + 1+ AWS service (Bedrock, Lambda, ECS, S3, SageMaker). Build persistent memory for AI agents. Devpost: cockroachdb-ai.devpost.com.",
-    "note": "Discovered Jul 26 Brain Audit via blockrun_search. 23 days until deadline. Needs Jordan: register at Devpost (cockroachdb-ai.devpost.com), decide go/no-go. [Jordan GO Aug 3: ship + start]",
+    "note": "Discovered Jul 26 Brain Audit via blockrun_search. 23 days until deadline. Needs Jordan: register at Devpost (cockroachdb-ai.devpost.com), decide go/no-go. [Jordan GO Aug 3: ship + start] [SHIPPED by gentech 2026-08-14: GenTech Agent Memory layer built + verified against live CockroachDB v24.3.4. src/db.py (schema + vector index), src/memory.py (AgentMemory: write/search/recent/consolidate/forget/stats), src/lambda_handler.py (AWS Lambda JSON-RPC API), src/mcp_server.py (MCP tools). 9/9 tests pass. Demo verified end-to-end. Uses 2 CockroachDB tools (distributed vector indexing + MCP server pattern) + 1 AWS service (Lambda). Apache 2.0 LICENSE at root. REMAINING (Jordan): register on Devpost, record <3min demo video, push public repo.]",
     "_orig_id": 22,
     "recommended_tier": "flash",
     "group": "labs",
@@ -475,7 +475,10 @@
       "group": "labs",
       "build_in": "labs",
       "handoff_on_complete": true
-    }
+    },
+    "shipped_by": "gentech",
+    "shipped_date": "2026-08-14",
+    "status": "shipped"
   },
   {
     "id": 24,
