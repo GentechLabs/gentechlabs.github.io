@@ -11,7 +11,7 @@ module.exports = {
   networks: {
     cc3: {
       url: "https://rpc.cc3-testnet.creditcoin.network",
-      chainId: 102287,
+      chainId: 102031,
       accounts: process.env.AGENT_PRIVATE_KEY ? [process.env.AGENT_PRIVATE_KEY] : [],
     },
   },
