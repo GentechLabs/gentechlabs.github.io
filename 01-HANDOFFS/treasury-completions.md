@@ -26,3 +26,9 @@
 ## 2026-08-14
 - #yield-rail-finder BUILT Yield Rail Finder — cross-rail yield heat-map on the Rainbow scale (Base/Aerodrome, Solana/Meteora, Avalanche/LFJ, Monad). Scans Yield.xyz via existing yield_mcp.py, ranks APY, flags volatile native-token yields. Cron 1e56137050df (daily 1pm UTC). Live test: Avalanche 7% (Securitize RWA) Hot, Solana 5.88% (Kamino), Base 5.64% (Fluid). 🧭 Rail Finder section added to Yield Farm tab (hub-stardew.html) + data committed to main (DeFi/rainbow/rail-finder-data.json).
 - ⚠️ Found pre-existing GitHub Pages deploy issue (NOT from this build): site serves stale gh-pages branch, even old files 404 on live site. New data committed to main, renders once Pages deploys from main or branch fixed.
+
+## 2026-08-15
+- #income-strategy 90-Day Income Plan GREENLIT — honest 3-agent audit ($26 lifetime, ZERO real customers) → 6-step plan (human pricing page → AgentLux → consulting → re-fund treasury → Mastercard/StableHacks → Apify). Positioning: win ORCHESTRATORS, wedge = convenience, consulting = orchestrator wedge.
+- Brain snapshot committed + pushed (`00-HQ/brain-snapshots/brain-snapshot-2026-08-15-income-strategy.md`).
+- Docs: positioning-win-orchestrators.md, service-offers-consulting.md, human-pricing-gateway spec, mastercard-innovation-challenge, dinari-dshares-rail.
+- Handoff written → gentech-to-hq/2026-08-15-income-strategy-handoff.md (HQ to coordinate step 1 + surface human-gated items).
