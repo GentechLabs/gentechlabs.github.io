@@ -21,7 +21,7 @@ The x402 ecosystem is exploding (Coinbase, Cloudflare, AWS, Stripe all adopting)
 
 ## Where to post
 - GitHub org (Gentech-Labs) — as a SERVICES.md / offers doc
-- X (tag x402, Coinbase, relevant protocols)
+- **Social media (X, LinkedIn, etc.) → HAND OFF TO ENTERTAINMENT GROUP** (Jordan, Aug 15: "Any social media posting should be hand off to Entertainment group"). Entertainment drafts + fires the posts.
 - Agent marketplaces with human buyers: Toku, dealwork, Atelier
 - Mastercard Innovation Challenge demo (Aug 31) as the portfolio piece
 

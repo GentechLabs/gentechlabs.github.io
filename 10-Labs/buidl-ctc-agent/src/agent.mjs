@@ -120,7 +120,56 @@ async function main() {
   };
   const decision = decideAction(verified, context);
   console.log(`🤖 Decision: ${decision.action} — ${decision.reason}`);
-  return { proofData, verified, decision };
+
+  // 4. Trigger the on-chain action on Creditcoin (the machine-money loop).
+  const eventId = await triggerOnChain(proofData, verified, context);
+  return { proofData, verified, decision, eventId };
+}
+
+// ── Step 4: Trigger on-chain action on Creditcoin ─────────────────────────
+/**
+ * Record the verified cross-chain event on the VerifiedRebalance contract and,
+ * if it clears the threshold, trigger the rebalance action. This is the
+ * "action" side of the machine-money loop — the agent's verified decision
+ * becomes a real on-chain transaction on Creditcoin.
+ * @param {object} proofData - the verified proof (chainKey, blockNumber, txHash)
+ * @param {boolean} verified - on-chain proof verification result
+ * @param {object} context - decoded tx data (amountUsd, token)
+ * @returns {Promise<string>} the eventId (bytes32) recorded on-chain
+ */
+export async function triggerOnChain(proofData, verified, context) {
+  const CONTRACT_ADDRESS = process.env.CONTRACT_ADDRESS;
+  if (!CONTRACT_ADDRESS) {
+    console.log('   (no CONTRACT_ADDRESS set — skipping on-chain trigger)');
+    return null;
+  }
+  const { JsonRpcProvider, Wallet, Contract } = await import('ethers');
+  const provider = new JsonRpcProvider(CREDITCOIN_RPC);
+  const wallet = new Wallet(process.env.AGENT_PRIVATE_KEY, provider);
+
+  // Minimal ABI for recordVerifiedEvent + the event
+  const abi = [
+    'function recordVerifiedEvent(uint256 chainKey, uint256 blockNumber, bytes32 txHash, uint256 amountUsd, bool verified, uint256 rebalanceThresholdUsd) external returns (bytes32)',
+    'event VerifiedEventRecorded(bytes32 indexed eventId, uint256 chainKey, uint256 blockNumber, bytes32 txHash, uint256 amountUsd, bool verified)',
+  ];
+  const contract = new Contract(CONTRACT_ADDRESS, abi, wallet);
+
+  const txHash = proofData.txHash || proofData.txHashBytes || '0x';
+  const amountUsd = context.amountUsd || 0;
+  const threshold = Number(process.env.REBALANCE_THRESHOLD_USD || 100);
+
+  console.log(`   Recording verified event on ${CONTRACT_ADDRESS}...`);
+  const tx = await contract.recordVerifiedEvent(
+    proofData.chainKey,
+    proofData.headerNumber || 0,
+    txHash,
+    amountUsd,
+    verified,
+    threshold
+  );
+  const receipt = await tx.wait();
+  console.log(`   ✅ On-chain trigger tx: ${receipt.hash}`);
+  return receipt.hash;
 }
 
 // Allow import from tests without auto-running
