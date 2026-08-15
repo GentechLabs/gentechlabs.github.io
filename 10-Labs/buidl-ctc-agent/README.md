@@ -71,8 +71,10 @@ node -e "import('@gluwa/usc-sdk').then(async ({chainInfo}) => {
 
 ## Requirements met
 
-- [x] Working Attestcoin Protocol integration code (USC SDK proof + verify)
-- [ ] Deployed on testnet (Creditcoin CC3 Testnet) — pending contract deploy
+- [x] Working Attestcoin Protocol integration code (USC SDK proof + verify) — **verified live on CC3 testnet** (getSupportedChains returns Ethereum + Sepolia)
+- [x] Creditcoin action contract (`contracts/VerifiedRebalance.sol`) — **compiles + 4/4 tests pass** (records verified events, refuses unverified, triggers rebalance above threshold, owner-only)
+- [x] Agent wired to trigger on-chain action (`src/agent.mjs` → `triggerOnChain`)
+- [ ] Deployed on testnet (Creditcoin CC3 Testnet) — **HUMAN-GATED: fund throwaway key `0x72d4...E041` via Creditcoin Discord `/faucet`, then `npx hardhat run scripts/deploy.mjs --network cc3`**
 - [ ] GitHub repo + README
 - [ ] Project deck / whitepaper
 - [ ] Prototype demo video

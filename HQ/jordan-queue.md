@@ -1,5 +1,29 @@
 # Jordan's Action Items — Orchestrator List
 
+## 🎯 TODAY'S HUMAN-GATED ITEMS (added Aug 15 — demo sprint prep)
+
+These are the pieces I can't do solo. Everything else is running autonomously.
+
+### 🏗️ BUIDL CTC 2026 Fall (#45) — $15K · Sep 6 · **build DONE, needs deploy**
+- [ ] **Fund CC3 testnet key via Creditcoin Discord faucet** — join `discord.gg/Gu43zTfmtc`, run `/faucet address:0x72d42937797a8be2DF04e31e45C57c5D868aE041` in `#token-faucet`. Then Gentech deploys + we record the demo. (Contract compiles, 4/4 tests pass, deck + demo script ready.)
+
+### 🏗️ 0G Bridge Buildathon Wave 3 — $15K · **testnet work done, needs funding**
+- [ ] **Fund agent wallet** (~$2-3 Circle USDC; 0G testnet gas free via faucet.0g.ai) — after work tomorrow ~6:37 PM is fine. Then Gentech runs real 0G Compute + Goldsky calls + mainnet deploy.
+- [ ] **Public X post** (mandatory submission) — #0G #0GBridge, tag @0G_labs @0G_Builders @AKINDO_Platform.
+
+### 🐛 CockroachDB × AWS (#23) — $8.75K · **Aug 18 (3 days) · build DONE**
+- [ ] **Register on Devpost** (cockroachdb.devpost.com) — the hard gate.
+- [ ] **Record <3min demo video** — Gentech drafts the script, you record.
+
+### 🎯 Delphi Agent Arena — $10K · Aug 24 · **registered + wallet set**
+- [ ] **Get testnet API key** from `https://delphi-api-access.gensyn.ai/` (connect wallet → generate testnet key → paste to Gentech). Last unlock before the agent trades.
+
+### 🏆 Agent Builders Cup (#19) — $20K+ · **registration closes Aug 15 (today)**
+- [ ] **Fund/test the agent wallet** — Consigliere racer built + verified. Fund after work tomorrow if needed, but register today.
+
+### ☎️ CALL-E (#46) — $10K · Sep 14 · **registered**
+- [ ] **Run `calle auth login` once** (browser auth, human-gated) — then Gentech builds the phone-call agent.
+
 ## 🎯 Agent Economy Builds — HUMAN-GATED (added Aug 13)
 
 These are the pieces I can't do solo — they need your action tonight. Everything else is running autonomously.

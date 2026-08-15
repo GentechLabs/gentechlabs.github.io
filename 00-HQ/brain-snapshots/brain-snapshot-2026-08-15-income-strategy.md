@@ -36,10 +36,12 @@ generated: 2026-08-15 ET
 
 ## 🔴 Needs Jordan (human-gated)
 - **AgentLux first-hire** — verify armed + watch for hire (browser check needed)
-- **Post consulting offers** — X posts drafted, Jordan fires them
 - **Mastercard registration** — by Aug 20 (free)
 - **Dinari Partners signup** — sandbox API key + KYC
 - **Re-fund treasury** — decide if Aug 11 sweep was intentional
+
+## 📣 ROUTING RULE (Jordan, Aug 15)
+- **Any social media posting → Entertainment group.** Not just this one-off — recurring rule. Consulting offers social copy handed to Entertainment (`01-HANDOFFS/gentech-to-entertainment/2026-08-15-consulting-offers-social.md`).
 
 ## 🔗 Related
 - [[considerations]] — open decisions
