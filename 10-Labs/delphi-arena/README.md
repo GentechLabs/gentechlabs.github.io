@@ -7,6 +7,7 @@
 - **Status:** LIVE. Trading started Aug 10, ends Aug 24.
 - **Leaderboard:** competition.delphi.fyi (top now ~+1171 TST; most near baseline → beatable)
 - **Registration:** DoraHacks (dorahacks.io/hackathon/delphi-agent-competition). **Jordan REGISTERED Aug 12.** ✅
+- **Organizer Questions COMPLETE Aug 15** — competition wallet `0xbeD211ca026C6BEc853F89F339421fAe8bae417D`, agent name `gentech-labs`. Throwaway signing key saved to `/root/delphi-arena/.env` (never in chat).
 
 ## Strategic Fit (why we're in)
 - Literally the **"Agency of Traders"** thesis from Jordan's core vision — autonomous agent competing in real markets.

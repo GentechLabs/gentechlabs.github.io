@@ -51,7 +51,9 @@ npm run agent          # run the loop (dry-run settlement)
 - [x] 0G SDK wired (`@0glabs/0g-serving-broker`, `@0glabs/0g-ts-sdk`) — verified loads
 - [x] Goldsky x402 rail verified — returns proper x402 v2 challenge (USDC, $0.005/call)
 - [x] Agent scaffold — 0G Compute analysis + Goldsky RPC read + Kite settlement (dry-run)
-- [ ] Fund agent wallet (0G testnet + Circle USDC)
+- [x] 0G testnet RPC verified live (block 0x2f5015b)
+- [x] 0G Compute provider discovered (testnet chatbot, qwen2.5-omni-7b, TEE-verified) — `0xa48f01287233509FD694a22Bf840225062E67836`
+- [ ] Fund agent wallet (0G testnet + Circle USDC) — ~$2-3 real, rest free via faucet
 - [ ] Real 0G Compute inference call
 - [ ] Real Goldsky paid call
 - [ ] Kite AI Agent Passport registration
