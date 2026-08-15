@@ -1,7 +1,7 @@
 ---
-date: 2026-08-13
+date: 2026-08-15
 status: active
-last-updated: 2026-08-13 20:10 ET
+last-updated: 2026-08-15 00:09 ET
 ---
 
 # 🧠 Considerations — Open Decisions
@@ -11,14 +11,14 @@ last-updated: 2026-08-13 20:10 ET
 ## 🚨 Urgent — DEADLINES + MACRO EVENT
 
 - [x] 🚨 **CPI Release — Wed Aug 12 8:30 AM ET (RELEASED) — ⚠️ REPOSITION BLOCKED** — Treasury CPI War-Room play was staged (regime RANGE_BOUND, RSI 24.1, expected AVAX ±4-7%) but **the Steward wallet was swept empty Aug 11 evening** (~43.72 USDC off to `0xeee3fe6c...`). No LFJ V2.2 position exists on `0x572ABd6461BED2258615E6b99c585Ab7c5d05037` (0 WAVAX, ~0.0006 USDC, 0.2979 AVAX gas). **✅ RESOLVED Aug 13 — Jordan confirmed the sweep was INTENTIONAL**: he tested whether the agentic treasury could send funds back to his Coinbase wallet, it worked (real USDC landed), and he kept the money. No unexpected move, no review needed. Two CPI one-shots (`31432dce0de9`, `e13db42767b0`) recommended paused + position heartbeat re-enabled.
-- [ ] 🚨 **Keeperhub Agents Onchain #80** — **⚠️ DEADLINE TODAY Aug 13.** JORDAN CONFIRMED GO. **✅ PROOF TRANSFER COMPLETE Aug 8** (0.01 USDC on-chain, TX 0x88fe6c9a...b1df, Base). **REMAINING: film demo video + assemble GitHub submission (README, video, live tx link).** #1 priority.
-- [ ] 🚨 **Build with Gemini XPRIZE #29** — **Aug 17 (4 days).** Labs marked shipped (build brief consumed) but **Jordan still needs to register on Devpost** (xprize.devpost.com) + decide build. Money & Financial Access category fits our x402 gateway.
-- [ ] 🚨 **CockroachDB × AWS — Agentic Memory #83** — **Aug 18 (5 days).** $8.75K, persistent memory + MCP Server (Devpost cockroachdb-ai.devpost.com). **Jordan: register?**
+- [ ] 🚨 **Keeperhub Agents Onchain #80** — **⚠️ DEADLINE PASSED Aug 13.** JORDAN CONFIRMED GO. **✅ PROOF TRANSFER COMPLETE Aug 8** (0.01 USDC on-chain, TX 0x88fe6c9a...b1df, Base). **REMAINING was: film demo video + assemble GitHub submission (README, video, live tx link). Verify submission status — if not submitted, mark closed.**
+- [ ] 🚨 **Build with Gemini XPRIZE #29** — **Aug 17 (2 days).** Labs marked shipped (build brief consumed) but **Jordan still needs to register on Devpost** (xprize.devpost.com) + decide build. Money & Financial Access category fits our x402 gateway. **⚠️ Approaching deadline.**
+- [ ] 🚨 **CockroachDB × AWS — Agentic Memory #83** — **Aug 18 (3 days).** $8.75K, persistent memory + MCP Server (Devpost cockroachdb-ai.devpost.com). **Jordan: register?** **⚠️ Approaching deadline.**
 - [ ] ✅ **AI Factory Hackathon #79** — **DEADLINE PASSED Aug 10.** lablab.ai × NativelyAI. **MARKED SHIPPED by labs Aug 9.** Jordan: confirm submission status (if not submitted, this is done).
 - [ ] ✅ **Build with DataHub** — **DEADLINE PASSED Aug 10.** Needs submission confirm. If not submitted, mark closed.
 - [ ] ✅ **Arc Programmable Money Hackathon** — **DEADLINE PASSED Aug 9.** SHIPPED + verified (ArcAgentWallet.sol, 57/57 tests). Moved to Recently Resolved.
 - [ ] 🔴 **Superteam USA — Remote Community Membership** — Applied. **Jordan confirmed Aug 12: applied for second triage, now waiting on their decision.** (Superteam Earn agent `gentech-labs-x402` registered Jul 23; us.superteam.fun/join remote membership.) Status: PENDING second triage.
-- [ ] 🟡 **Solana Foundation USA Grant** — Applied Aug 5 (~$8.2k avg/up to $10k USDG). **Aug 12 check: site still shows application, no approval/rejection email, no status change** — likely large applicant pool. STILL PENDING. Do not reallocate treasury around unconfirmed grant. Re-check ~Aug 19. Tracked: Treasury/2026-08-05-solana-foundation-usa-grant.md
+- [ ] 🟡 **Solana Foundation USA Grant** — Applied Aug 5 (~$8.2k avg/up to $10k USDG). **Aug 12 check: site still shows application, no approval/rejection email, no status change** — likely large applicant pool. STILL PENDING. Do not reallocate treasury around unconfirmed grant. **Re-check ~Aug 19 (4 days).** Tracked: Treasury/2026-08-05-solana-foundation-usa-grant.md
 - [ ] 🚨 **Algorand First-Mover Play (Aug 6)** — **✅ COMPOSITE ENTRY SHIPPED (Aug 7).** **Jordan: (1) provide Algorand wallet address so X402_PAYTO_ALGORAND goes live, (2) confirm late-leaderboard eligibility or mark dead.**
 - [ ] 🚨 **Algorand Global x402 Challenge #82** — **⚠️ DEADLINE PASSED Jul 31.** $100K + 500K ALGO. **Jordan: confirm if registered / late-leaderboard eligible, or mark dead.**
 
@@ -69,7 +69,7 @@ Jordan's commitment (more free time this week due to reduced work hours). Work B
 
 ## 🎮 Gaming Lane — Gears of War E-Day (Aug 3)
 
-Jordan's decision on the Gears E:D beta: **NOT pre-ordering for beta access.** Early Access (Aug 6) is Horde-only — not interested. Will wait for the **Open Beta (Aug 13–17, Versus 4v4 + Horde Siege, everyone).** This is a marketing-noise-vs-value case: pre-order perk was weak (paying for 3 days of a mode he doesn't play).
+Jordan's decision on the Gears E:D beta: **NOT pre-ordering for beta access.** Early Access (Aug 6) is Horde-only — not interested. **Open Beta (Aug 13–17, Versus 4v4 + Horde Siege, everyone) — ⚠️ CURRENTLY LIVE (Aug 15).** This is a marketing-noise-vs-value case: pre-order perk was weak (paying for 3 days of a mode he doesn't play).
 
 - [ ] **Action:** Set up Gears E:D **price-watch** (standard edition deal) + **release/open-beta tracker** in shop/hub — catch the discount and the Aug 13–17 window.
 - [ ] **Opportunity:** Gaming is the next service lane — package price-watch w/ auto-buy (x402), pre-order/access advisor, release radar (game-intelligence skill exists), meta/loadout intel, and gaming-commerce middleware (agent buying/selling keys+DLC+cosmetics through our x402 rail as fee-earning middleman).
