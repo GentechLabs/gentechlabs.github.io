@@ -327,8 +327,13 @@
   - **C-Chain Round 5 (July 30, 2026)** — rewards builders generating real on-chain activity measured by **AVAX burned via gas fees**. Agent-generated activity = measurable gas burn = a submission angle.
 - **Why it matters to us:** we already run 24/7 VPS + have the LFJ/Trader Joe Avalanche rail (memory). The agent-as-validator is a natural extension: infrastructure GenTech actually operates, and Retro9000 could pay for it retroactively via on-chain activity.
 - **Next:** decide lane (L1 validator vs delegator) → scope a proper L1 validator setup as a treasury experiment → check retro9000.avax.network for current round eligibility. Needs Jordan: greenlight the treasury experiment + any AVAX stake decision.
-- [ ] Scope L1 validator setup (agent-run, post-Etna) as treasury experiment
-- [ ] Check Retro9000 C-Chain Round 5 / L1s round eligibility
+- **SCOPED (Aug 15):** full honest scope at `09-Green Room/specs/agentic-treasury-avalanche-l1-scope.md`. Verdict: deploy OUR OWN Avalanche L1 (Phase B, ~1-2 wks, <$50 capital) is the play — NOT the 2,000-AVAX Primary Network validator. L1 validators pay ~1.3 AVAX/mo post-Etna, no stake. B0=validator node on VPS → B1=Fuji L1 → B2=Teleporter USDC bridge → B3=mainnet + Retro9000 L1s submission. Phase C (migrate treasury onto the L1 as home chain) deferred — keep treasury venue-agnostic.
+- [ ] Scope L1 validator setup (agent-run, post-Etna) as treasury experiment → **DONE (scoped 2026-08-15)**
+- [x] Check Retro9000 C-Chain Round 5 / L1s round eligibility → **L1s & Infrastructure Tooling round is LIVE ($40M AVAX), eligibility = deploy an L1**
+- [ ] B0: install avalanche-cli + run validator node on VPS (needs Jordan greenlight)
+- [ ] B1: deploy gentech-l1 on Fuji, single validator set
+- [ ] B2: Teleporter/ICM USDC bridge L1 ↔ C-Chain
+- [ ] B3: mainnet L1 + Retro9000 L1s submission
 
 ## Ready to Test (skills exist, need execution)
 
