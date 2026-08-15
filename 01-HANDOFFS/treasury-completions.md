@@ -32,3 +32,4 @@
 - Brain snapshot committed + pushed (`00-HQ/brain-snapshots/brain-snapshot-2026-08-15-income-strategy.md`).
 - Docs: positioning-win-orchestrators.md, service-offers-consulting.md, human-pricing-gateway spec, mastercard-innovation-challenge, dinari-dshares-rail.
 - Handoff written → gentech-to-hq/2026-08-15-income-strategy-handoff.md (HQ to coordinate step 1 + surface human-gated items).
+- #avax-strategy PIVOTED: scoped "Agentic Treasury as Avalanche L1" (`09-Green Room/specs/agentic-treasury-avalanche-l1-scope.md`) → **Jordan chose NO L1 for now**. Shipped whitepaper (`Treasury/agentic-treasury-whitepaper.md`) + scoped C-Chain play (`Treasury/retro9000-cchain-play-scope.md`). Research: Retro9000 C-Chain evolved to verified-user engagement scoring (R4+, top 20, 5x new-project multiplier) — favors real users over tx spam. L1 route deferred, B0-B3 parked, C0-C4 queued.

@@ -329,12 +329,15 @@
 - **Next:** decide lane (L1 validator vs delegator) → scope a proper L1 validator setup as a treasury experiment → check retro9000.avax.network for current round eligibility. Needs Jordan: greenlight the treasury experiment + any AVAX stake decision.
 - **SCOPED (Aug 15):** full honest scope at `09-Green Room/specs/agentic-treasury-avalanche-l1-scope.md`. Verdict: deploy OUR OWN Avalanche L1 (Phase B, ~1-2 wks, <$50 capital) is the play — NOT the 2,000-AVAX Primary Network validator. L1 validators pay ~1.3 AVAX/mo post-Etna, no stake. B0=validator node on VPS → B1=Fuji L1 → B2=Teleporter USDC bridge → B3=mainnet + Retro9000 L1s submission. Phase C (migrate treasury onto the L1 as home chain) deferred — keep treasury venue-agnostic.
 - **PRODUCT THESIS (Jordan, Aug 15):** "This is our AVAX strategy for the next round. The thesis is: use our website with our chat model baked in. You can take the treasury on the go with our cron job as a present that's interchangeable. Our AgentKit is front and center, open sourced and all." → **The website is the front door (chat model = the interface), the cron job = a 24/7 portable treasury presence (interchangeable across chains/venues via config), and AgentKit is the canonical open-source repo the L1 + submission center on.**
-- [ ] Scope L1 validator setup (agent-run, post-Etna) as treasury experiment → **DONE (scoped 2026-08-15)**
-- [x] Check Retro9000 C-Chain Round 5 / L1s round eligibility → **L1s & Infrastructure Tooling round is LIVE ($40M AVAX), eligibility = deploy an L1**
-- [ ] B0: install avalanche-cli + run validator node on VPS (needs Jordan greenlight)
-- [ ] B1: deploy gentech-l1 on Fuji, single validator set
-- [ ] B2: Teleporter/ICM USDC bridge L1 ↔ C-Chain
-- [ ] B3: mainnet L1 + Retro9000 L1s submission
+- **DIRECTION (Jordan, Aug 15): NO L1 for now — ship the product + whitepaper + C-Chain play.** Whitepaper drafted (`Treasury/agentic-treasury-whitepaper.md`). C-Chain play scoped (`Treasury/retro9000-cchain-play-scope.md`). Key research finding: Retro9000 C-Chain mechanics EVOLVED — R1-3 = pure gas-burn ranking, but **R4+ = verified-user engagement scoring** (top 20, 5x new-project multiplier). This favors real users + community, not tx spam — perfect fit for the treasury product.
+- [ ] Scope L1 validator setup (agent-run, post-Etna) as treasury experiment → **DONE (scoped 2026-08-15) — L1 DEFERRED, C-Chain chosen**
+- [x] Check Retro9000 C-Chain Round 5 / L1s round eligibility → **L1s & Infrastructure Tooling round is LIVE ($40M AVAX), eligibility = deploy an L1; C-Chain R5 ended Jul 30, R6 TBD**
+- [x] B0-B3 (L1 validator route) → **DEFERRED (Jordan Aug 15: no L1 for now, C-Chain chosen)**
+- [ ] C0: verify treasury executes on C-Chain + fund small demo slice (needs Jordan greenlight + AVAX/USDC)
+- [ ] C1: user-facing website + chat model as the front door
+- [ ] C2: portability demo (cron job, chain switch via config)
+- [ ] C3: AgentKit repo public + readable
+- [ ] C4: Retro9000 submission + verified-user base + social feed
 
 ## Ready to Test (skills exist, need execution)
 
