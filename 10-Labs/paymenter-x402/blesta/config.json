@@ -1,0 +1,44 @@
+{
+    "version": "1.0.0",
+    "name": "x402",
+    "description": "x402 Crypto Gateway for Blesta — accept gasless crypto payments via GenTech Labs",
+    "authors": [
+        {
+            "name": "GenTech Labs",
+            "url": "https://gentechlabs.net"
+        }
+    ],
+    "type": "merchant",
+    "require": {
+        "blesta": ">=4.0"
+    },
+    "settings": [
+        {
+            "key": "x402_gateway_url",
+            "label": "x402 Gateway URL",
+            "type": "text",
+            "default": "https://api.gentechlabs.net/x402",
+            "description": "Your x402 gateway endpoint (default: GenTech public gateway)"
+        },
+        {
+            "key": "x402_merchant_wallet",
+            "label": "Merchant Wallet Address",
+            "type": "text",
+            "description": "Wallet where payments settle (Solana or EVM address)"
+        },
+        {
+            "key": "x402_chain",
+            "label": "Blockchain Network",
+            "type": "select",
+            "options": ["solana", "base", "ethereum", "polygon"],
+            "default": "solana"
+        },
+        {
+            "key": "x402_token",
+            "label": "Accepted Token",
+            "type": "select",
+            "options": ["USDC", "USDT", "SOL", "ETH"],
+            "default": "USDC"
+        }
+    ]
+}

@@ -23,3 +23,4 @@
 ## ℹ️ Info
 
 - **FrameForge #3 SHIPPED** this session (2026-08-15) — core pipeline + CLI + compile verified. Next: Phase 1 service portal launch (order form + delivery page), then Phase 2 API.
+- **Paymenter x402 → WHMCS/Blesta #24 SHIPPED** this session (2026-08-15) — WHMCS + Blesta gateway modules built, all 6 PHP files pass `php -l`, 24/24 test assertions pass. Larger hosting-billing markets than Paymenter. Next: external submission to WHMCS/Blesta marketplaces (human-gated).
