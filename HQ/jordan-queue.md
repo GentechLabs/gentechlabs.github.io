@@ -10,7 +10,7 @@ These are the pieces I can't do solo — they need your action tonight. Everythi
 - [ ] **Wire condor server config** — point the Condor server at the funded wallet + venue.
 
 ### 📡 Telegraph Season I (#49) — $15K · H1 opens **Aug 17**
-- [ ] **Register at integrate.telegraphprotocol.com** — early = track access + Discord support. (Miner YAML is drafted + schema-validated; I'll validate + register on-chain once you're in.)
+- [x] **Register at integrate.telegraphprotocol.com** — early = track access + Discord support. (Miner YAML is drafted + schema-validated; I'll validate + register on-chain once you're in.)
 
 ### 🎯 Gemini XPRIZE Agentic Economy Prize — $50K Circle bonus · register **Aug 17**
 - [ ] **Register on Devpost** (xprize.devpost.com) — prereq for the Circle bonus. Opt in on the submission form.
@@ -22,8 +22,8 @@ These are the pieces I can't do solo — they need your action tonight. Everythi
 
 ### 🎯 Opportunity Scanner Picks — SIGN UP (added Aug 13, recommended by Gentech)
 These are the scoped, feasible ones. Register and I'll build:
-- [ ] **BUIDL CTC 2026 Fall (Creditcoin) — $15K** — dorahacks.io/hackathon/buidl-ctc-2026-fall — Sep 6, reuse ~80%, easy
-- [ ] **CALL-E: Your Code Is Calling — $10K** — call-e.devpost.com — Sep 14, reuse ~70%, easy
+- [x] **BUIDL CTC 2026 Fall (Creditcoin) — $15K** — dorahacks.io/hackathon/buidl-ctc-2026-fall — Sep 6, reuse ~80%, easy
+- [x] **CALL-E: Your Code Is Calling — $10K** — call-e.devpost.com — Sep 14, reuse ~70%, easy
 - [ ] **Agentic Cinema (Google Cloud) — $75K** — agentic-cinema.devpost.com — Sep 7, reuse ~65%, medium
 - [ ] **All Things Agentic (Google) — $180K** — allthingsagentichackathon.devpost.com — Aug 31, stretch (only if bandwidth)
 

@@ -1,17 +1,19 @@
 {
   "name": "buidl-ctc-agent",
   "version": "1.0.0",
-  "main": "index.js",
+  "description": "GenTech Verified Agent — BUIDL CTC 2026 Fall (Creditcoin). Attestcoin Protocol + AI decision layer.",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "agent": "node src/agent.mjs",
+    "compile": "hardhat compile",
+    "deploy": "hardhat run scripts/deploy.mjs --network cc3"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
   "dependencies": {
     "@gluwa/usc-contracts": "^0.1.2",
     "@gluwa/usc-sdk": "^0.18.0",
     "ethers": "^6.17.0"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^5.0.0",
+    "hardhat": "^2.29.0"
   }
 }
