@@ -31,7 +31,7 @@
     "name": "FrameForge \u2014 AI Storyboard Service (previs pipeline)",
     "difficulty": "medium",
     "priority": "high",
-    "status": "pending",
+    "status": "shipped",
     "assigned_to": "gentech",
     "platform": "cloud",
     "needs_jordan": false,
@@ -40,7 +40,7 @@
     "detail": "Controlled pre-vis pipeline: character sheet \u2192 locked look \u2192 camera-native storyboard frames. Proven on Vanito's KAGE film. Spec at 09-Green Room/specs/frameforge-ai-storyboard-service.md.",
     "_orig_id": 3,
     "recommended_tier": "k3",
-    "note": "[Jordan GO Aug 3: ship + start]",
+    "note": "[Jordan GO Aug 3: ship + start] SHIPPED by gentech 2026-08-15. Built 10-Labs/frameforge/: character locker (src/character.py), storyboard engine (src/engine.py), ffmpeg compile (src/compile.py), CLI. 11/11 tests pass. Live demo: KAGE locked, 4-frame Neon Run storyboard, compiled neon-run.mp4 (4s, ffprobe-verified). Landing page at web/index.html.",
     "group": "labs",
     "routing": {
       "group": "labs",
@@ -460,7 +460,7 @@
     "name": "CockroachDB \u00d7 AWS \u2014 Build with Agentic Memory ($8.75K)",
     "difficulty": "easy",
     "priority": "medium",
-    "status": "pending",
+    "status": "shipped",
     "assigned_to": "gentech",
     "platform": "cloud",
     "needs_jordan": false,
@@ -477,8 +477,7 @@
       "handoff_on_complete": true
     },
     "shipped_by": "gentech",
-    "shipped_date": "2026-08-14",
-    "status": "shipped"
+    "shipped_date": "2026-08-14"
   },
   {
     "id": 24,
