@@ -95,3 +95,30 @@ The x402 gateway is live in production — 16+ paid endpoints at api.gentechlabs
 - **Q4 Funding:** No institutional funding. Revenue: micro1 contract ($80/hr), hackathon prizes, Circle Grant pending, x402 live micropayments. $400K-$1M ask = quit job, build full-time.
 - **Q5 Problem space:** Payment systems built for humans don't work for agents. GenTech = open-source payment + compliance rail for the agent economy. CLARITY Act (Jul 2026) makes compliance urgent.
 - **Q6 Why you:** Solo builder shipping production infra — live gateway, gasless settlement, compliance, credit scoring, self-evolution. Doesn't need a co-founder to prototype; needs capital to go full-time.
+
+---
+
+## 🔍 RESEARCH — Other People's Experience (saved Aug 15, 2026)
+
+### Process (confirmed across sources)
+1. Apply online → response in **1-3 weeks**
+2. Shortlisted → **1:1 / 2:1 interview** with fund partners (Nadia Eldeib, inaugural 2021 cohort: "conversational and electric")
+3. Accepted → sign investment terms → funded immediately
+
+### The terms — NOT a grant, an equity investment
+- **$400K upfront for 7% equity (SAFE)** + **$600K guaranteed at next outside-led round** (~$1M total)
+- Plus up to $1M in credits/perks (AI/cloud providers)
+- **We give SPC 7% of the company.** It's venture money, not self-funding.
+
+### Real frictions for us (Jordan in Ohio, unincorporated)
+1. **In-person bootcamp REQUIRED** — SF, NYC, or Bengaluru. Nadia's 2021 cohort was remote, but today the program "requires attending a bootcamp in-person and you must join in a physical location where South Park Commons exists." Cincinnati ≠ relocation-friendly for a day job.
+2. **7% equity for $400K** — venture-scale frame, "go from -1 to 0." May imply pivoting AWAY from GenTech x402 rail toward a venture-scale idea.
+3. **Bank account/entity:** actually EASIER here — SPC helps founders set up the company post-acceptance. Entity isn't a hard blocker if accepted, but requires signing a SAFE + equity trade.
+
+### Honest read
+SPC is not "self-funding to keep building GenTech." It's **venture capital for a venture-scale company**, requiring in-person presence + 7% equity. Different path than the x402/agent-economy building we've been doing. **No decision needed until they respond** (submitted Aug 1, 2-4 wk window = late Aug/early Sep). If accepted, THEN weigh: 7% equity + relocating + pivot-to-venture vs keeping GenTech as-is. If rejected, zero cost.
+
+### Sources
+- Nadia Eldeib (inaugural 2021 SPC fellow, now CodeYam): blog.nseldeib.com/p/applying-to-the-south-park-commons
+- elev-x.com SPC review 2026
+- Causo Hub SPC guide 2026 (terms/process)

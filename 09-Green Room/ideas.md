@@ -315,6 +315,21 @@
 - [ ] Pull repo and test on VPS
 - [ ] Build a GenTech-branded demo short
 
+## 🆕 Avalanche Retro9000 — Agent-Run Validator as the Bypass (Aug 15)
+**Source:** Jordan (Treasury group) — from the "how much to be an AVAX validator?" thread | **Status:** Idea captured
+- **The idea:** Use an **agent as a bypass** — run the Avalanche validator on our VPS, so you don't need your own electricity/hardware. Agent handles 24/7 ops, monitoring, uptime.
+- **The cost split:** Primary Network validator needs **2,000 AVAX self-stake (~$13K)** — the hard wall. Agent + VPS only makes the *ops* cheap (4c/8t, 16GB, 1TB NVMe, ~$60–100/mo = low-stake spec), and we already run 24/7 infra.
+- **The cheap lanes (where agents genuinely win):**
+  - **L1 validator (post-ACP-77/Etna)** — NO 2,000 AVAX needed, no Primary Network validation. Just a recurring validation fee + the L1's own token. This is the true "agent makes it cheap" lane.
+  - **Delegator** — 25 AVAX (~$163), park tiny capital, earn validator yield.
+- **Retro9000 tie-in ($40M AVAX grant program):**
+  - Live round: **Avalanche L1s & Infrastructure Tooling** — deploying an L1 or critical dev tooling (an agent-run validator/L1 = tooling) can qualify.
+  - **C-Chain Round 5 (July 30, 2026)** — rewards builders generating real on-chain activity measured by **AVAX burned via gas fees**. Agent-generated activity = measurable gas burn = a submission angle.
+- **Why it matters to us:** we already run 24/7 VPS + have the LFJ/Trader Joe Avalanche rail (memory). The agent-as-validator is a natural extension: infrastructure GenTech actually operates, and Retro9000 could pay for it retroactively via on-chain activity.
+- **Next:** decide lane (L1 validator vs delegator) → scope a proper L1 validator setup as a treasury experiment → check retro9000.avax.network for current round eligibility. Needs Jordan: greenlight the treasury experiment + any AVAX stake decision.
+- [ ] Scope L1 validator setup (agent-run, post-Etna) as treasury experiment
+- [ ] Check Retro9000 C-Chain Round 5 / L1s round eligibility
+
 ## Ready to Test (skills exist, need execution)
 
 - [ ] **Krexa — Credit Infrastructure for AI Agents on Solana** — Live mainnet-beta, invite-gated. Gives AI agents credit: borrow USDC against on-chain **Krexit Score** (200–850), no human co-signer, auto-repay from future revenue via Revenue Router. **Complementary to us, not competitor** — "x402 is the payment rail; Krexa is the credit layer on top." 350+ agents deployed. **Why it matters:** (1) our x402 gateway services can be listed on their **Pay.sh catalog** (Solana Foundation + Google Cloud) for new distribution; (2) validates our Agent Credit Score direction (they have Krexit Score 200–850); (3) `@krexa/x402` middleware = 3-line Express monetization on Solana, same pattern as our gateway. **Access:** invite code via Discord `discord.gg/aMSEG7yj` or @krexa_xyz open drops. Source: krexa.xyz, Aug 7. **Needs Jordan:** grab invite code → I run `krexa activate <code>` + test CLI/SDK/MCP.

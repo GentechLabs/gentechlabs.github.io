@@ -1,5 +1,11 @@
 # Jordan's Action Items — Orchestrator List
 
+## 🎯 GRANT APPLICATIONS — HUMAN-GATED (added Aug 15)
+Drafts ready in `09-Green Room/grant-application-drafts.md` — copy-paste + submit:
+- [ ] **AI Grant** (aigrant.org) — fill founder background, paste into form. Non-dilutive $5-50K, rolling.
+- [ ] **The Graph** (thegraph.typeform.com/applynow) — link GitHub + submit. Open to individuals.
+- [ ] **Optimism Retro Funding** — needs OP Atlas setup + KYC.
+
 ## 🎯 TODAY'S HUMAN-GATED ITEMS (added Aug 15 — demo sprint prep)
 
 These are the pieces I can't do solo. Everything else is running autonomously.
