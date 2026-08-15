@@ -29,3 +29,7 @@
 - Consumed group returns: labs #29/52/19/2/30/48/49 + entertainment #50 + forge #50 + treasury #38/51 — all already shipped in global build_queue.json (applied in prior sessions). IDs 1,6,73,71,61,60,66,62,65 are per-lane, not in global queue. Nothing new to apply.
 - Infra health: gateway root HTTP 200, hub-launcher HTTP 200.
 - #23 — CockroachDB × AWS "Build with Agentic Memory": GenTech Agent Memory layer built + verified against live CockroachDB v24.3.4. src/db.py (schema + vector index), src/memory.py (AgentMemory: write/search/recent/consolidate/forget/stats), src/lambda_handler.py (AWS Lambda JSON-RPC API), src/mcp_server.py (MCP tools). 9/9 tests pass. Demo verified end-to-end. Uses 2 CockroachDB tools (distributed vector indexing + MCP server pattern) + 1 AWS service (Lambda). Apache 2.0 LICENSE at root. Shipped to 10-Labs/cockroachdb-agentic-memory/. REMAINING (Jordan): register on Devpost, record <3min demo video, push public repo.
+
+## 2026-08-15
+
+- #3 — FrameForge AI Storyboard Service: built `10-Labs/frameforge/`. Character locker (src/character.py, deterministic locked look from reference sheet), storyboard engine (src/engine.py, camera-native SVG frames), ffmpeg compile (src/compile.py), CLI (lock/build/compile), landing page (web/index.html). 11/11 tests pass. Live demo: KAGE locked (seed 2406723895), 4-frame "Neon Run" storyboard, compiled neon-run.mp4 (4s, ffprobe-verified). Shipped to 10-Labs/frameforge/.

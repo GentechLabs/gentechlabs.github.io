@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FrameForge — AI Storyboard Service</title>
+<style>
+  :root { --ink:#111; --paper:#faf7f2; --accent:#c9a227; --muted:#666; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:Georgia,serif; background:var(--paper); color:var(--ink); line-height:1.6; }
+  header { background:var(--ink); color:var(--paper); padding:3rem 2rem; text-align:center; }
+  header h1 { font-size:2.6rem; letter-spacing:.02em; }
+  header p { color:#ccc; margin-top:.5rem; font-size:1.1rem; }
+  .accent { color:var(--accent); }
+  .wrap { max-width:960px; margin:0 auto; padding:2rem; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1.5rem; margin:2rem 0; }
+  .card { background:#fff; border:1px solid #e5e0d6; border-radius:8px; padding:1.5rem; }
+  .card h3 { color:var(--accent); margin-bottom:.5rem; }
+  .pricing { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1.5rem; margin:2rem 0; }
+  .tier { background:#fff; border:1px solid #e5e0d6; border-radius:8px; padding:1.5rem; text-align:center; }
+  .tier .price { font-size:2rem; color:var(--ink); margin:.5rem 0; }
+  .tier ul { list-style:none; text-align:left; margin-top:1rem; }
+  .tier li { padding:.3rem 0; border-bottom:1px dashed #eee; }
+  .cta { display:inline-block; background:var(--accent); color:var(--ink); font-weight:bold;
+         padding:.8rem 1.6rem; border-radius:6px; text-decoration:none; margin-top:1rem; }
+  .cta:hover { background:#b8921f; }
+  footer { text-align:center; color:var(--muted); padding:2rem; font-size:.9rem; }
+  .tag { display:inline-block; background:var(--ink); color:var(--paper); font-size:.75rem;
+         padding:.2rem .6rem; border-radius:20px; margin-right:.4rem; }
+</style>
+</head>
+<body>
+<header>
+  <h1>FrameForge</h1>
+  <p>Character reference sheet → locked look → camera-ready storyboard frames.<br>
+  <span class="accent">No randomness. No character drift.</span></p>
+</header>
+
+<div class="wrap">
+  <section>
+    <h2>What it is</h2>
+    <p>A controlled pre-visualization service for directors and studios. Upload a
+    character reference sheet, describe your scenes, and get a consistent,
+    camera-native storyboard in an afternoon — not weeks. Built on the pipeline
+    we proved on the KAGE film: every frame carries the full character coating,
+    so the look never drifts between shots.</p>
+    <p style="margin-top:1rem">
+      <span class="tag">Character consistency</span>
+      <span class="tag">Camera-direction-native</span>
+      <span class="tag">Editable shot lists</span>
+      <span class="tag">Studio-grade output</span>
+    </p>
+  </section>
+
+  <section class="pricing">
+    <div class="tier">
+      <h3>Storyboard</h3>
+      <div class="price">$1,500</div>
+      <p>Up to 10 scenes, 3 frames each</p>
+      <ul>
+        <li>Character locker (locked look)</li>
+        <li>Camera-native frames</li>
+        <li>Compiled animatic video</li>
+        <li>2 revision rounds</li>
+      </ul>
+      <a class="cta" href="#order">Get a Storyboard</a>
+    </div>
+    <div class="tier">
+      <h3>Express</h3>
+      <div class="price">$2,500</div>
+      <p>48-hour turnaround</p>
+      <ul>
+        <li>Everything in Storyboard</li>
+        <li>Priority queue</li>
+        <li>Same-day revisions</li>
+      </ul>
+      <a class="cta" href="#order">Get a Storyboard</a>
+    </div>
+    <div class="tier">
+      <h3>Per scene</h3>
+      <div class="price">$150</div>
+      <p>Additional scenes beyond the first 10</p>
+      <ul>
+        <li>Same locked character</li>
+        <li>Same camera grammar</li>
+      </ul>
+      <a class="cta" href="#order">Add Scenes</a>
+    </div>
+  </section>
+
+  <section id="order">
+    <h2>Get a Storyboard</h2>
+    <p>Tell us about your project. We'll lock your character and deliver a
+    storyboard you can iterate on before commissioning final art.</p>
+    <p style="margin-top:1rem; color:var(--muted)">
+      Order form coming online. For now, reach the FrameForge team through the
+      GenTech Labs channel.
+    </p>
+  </section>
+</div>
+
+<footer>
+  FrameForge — a GenTech Labs service. Built on the KAGE previs pipeline.
+</footer>
+</body>
+</html>
