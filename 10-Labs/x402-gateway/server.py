@@ -192,7 +192,9 @@ def build_payment_required(service_name: str, price_usd: float) -> dict:
                     "input": {
                         "type": "http",
                         "method": "GET",
-                        "bodyType": "json",
+                        "pathParams": {
+                            "address": {"type": "string", "description": "Token or wallet address to score"}
+                        },
                         "example": {
                             "address": "0x1234567890abcdef1234567890abcdef12345678"
                         }
@@ -218,11 +220,12 @@ def build_payment_required(service_name: str, price_usd: float) -> dict:
                             "additionalProperties": False,
                             "properties": {
                                 "type": {"const": "http", "type": "string"},
-                                "method": {"enum": ["GET", "POST", "PUT", "PATCH"], "type": "string"},
-                                "bodyType": {"enum": ["json", "form-data", "text"], "type": "string"},
-                                "body": {"type": "object", "properties": {"address": {"type": "string"}}, "required": []}
+                                "method": {"enum": ["GET", "HEAD", "DELETE"], "type": "string"},
+                                "queryParams": {"type": "object", "additionalProperties": True},
+                                "pathParams": {"type": "object", "additionalProperties": True},
+                                "headers": {"type": "object", "additionalProperties": True}
                             },
-                            "required": ["type", "method", "bodyType", "body"]
+                            "required": ["type", "method"]
                         },
                         "output": {
                             "type": "object",
