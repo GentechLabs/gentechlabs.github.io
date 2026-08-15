@@ -178,6 +178,7 @@ footer { border-top: 1px solid var(--border); padding: 24px 0; text-align: cente
     </div>
     <div class="nav-links">
       <a href="#" class="active">Treasury</a>
+      <a href="/Treasury/whitepaper.html">Whitepaper</a>
       <a href="#">Cookbook</a>
       <a href="#">Travel</a>
       <a href="#">Meta Ray-Ban</a>
@@ -438,17 +439,12 @@ function render(data) {
     const lo = pos.rangeLow, hi = pos.rangeHigh, pr = pool.price;
     const center = (lo + hi) / 2;
     const halfSpan = (hi - lo) / 2;
-    // Guard against degenerate range (lo==hi → halfSpan=0 → div-by-zero → NaN)
-    if (halfSpan <= 0) {
-      eff = 100; effLabel = "Earning fees in range";
-    } else {
-      // distance from center as fraction of half-span (0 = center, 1 = edge)
-      const dist = Math.abs(pr - center) / halfSpan;
-      eff = Math.max(0, Math.round((1 - dist) * 100));
-      effLabel = dist < 0.15 ? "Price dead-center — max fee capture"
-        : dist < 0.5 ? "Price drifting — still earning"
-        : "Price near edge — watch it";
-    }
+    // distance from center as fraction of half-span (0 = center, 1 = edge)
+    const dist = Math.abs(pr - center) / halfSpan;
+    eff = Math.max(0, Math.round((1 - dist) * 100));
+    effLabel = dist < 0.15 ? "Price dead-center — max fee capture"
+      : dist < 0.5 ? "Price drifting — still earning"
+      : "Price near edge — watch it";
   } else {
     eff = 100; effLabel = "Earning fees in range";
   }

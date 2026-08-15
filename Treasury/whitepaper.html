@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Agentic Treasury — Whitepaper | GenTech Labs</title>
+<meta name="description" content="The Agentic Treasury — GenTech Labs' self-custody treasury agent. Read the full whitepaper: problem, architecture, security model, honest economics, and roadmap.">
+<meta name="theme-color" content="#8b5cf6">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #09090b;
+  --card: #18181b;
+  --card-2: #1f1f23;
+  --border: #27272a;
+  --accent: #8b5cf6;
+  --accent-2: #06b6d4;
+  --success: #00ff88;
+  --danger: #ff4466;
+  --warn: #f59e0b;
+  --text: #fafafa;
+  --text-dim: #a1a1aa;
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-sans);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+.mesh { position: fixed; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
+.mesh::before, .mesh::after {
+  content: ''; position: absolute; border-radius: 50%; filter: blur(120px); opacity: 0.13;
+}
+.mesh::before {
+  width: 600px; height: 600px; background: radial-gradient(circle, #8b5cf6 0%, transparent 70%);
+  top: -200px; left: 50%; transform: translateX(-50%);
+}
+.mesh::after {
+  width: 500px; height: 500px; background: radial-gradient(circle, #06b6d4 0%, transparent 70%);
+  bottom: -150px; left: 20%;
+}
+.container { max-width: 860px; margin: 0 auto; padding: 0 22px; position: relative; z-index: 1; }
+nav {
+  position: sticky; top: 0; z-index: 10; background: rgba(9,9,11,0.85);
+  backdrop-filter: blur(12px); border-bottom: 1px solid var(--border);
+}
+.nav-inner { max-width: 1200px; margin: 0 auto; padding: 14px 20px; display: flex; align-items: center; justify-content: space-between; }
+.brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 1.02em; }
+.brand .logo { font-size: 1.4em; }
+.brand .sub { color: var(--text-dim); font-weight: 500; font-size: 0.78em; }
+.nav-links { display: flex; gap: 8px; }
+.nav-links a { color: var(--text-dim); text-decoration: none; font-size: 0.85em; padding: 6px 12px; border-radius: 8px; transition: all .2s; }
+.nav-links a:hover, .nav-links a.active { color: var(--text); background: var(--card-2); }
+@media (max-width: 720px) { .nav-links { display: none; } }
+
+header.doc { padding: 56px 0 24px; }
+.kicker { text-transform: uppercase; letter-spacing: 0.14em; font-size: 0.72em; color: var(--accent); font-weight: 600; }
+h1 { font-size: 2.3em; line-height: 1.15; margin: 10px 0 14px; font-weight: 800; }
+.grad {
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.doc-sub { color: var(--text-dim); font-size: 1.05em; max-width: 640px; }
+.meta-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+.pill { font-size: 0.74em; padding: 4px 11px; border-radius: 999px; border: 1px solid var(--border); color: var(--text-dim); background: var(--card); }
+.pill.acc { color: var(--accent); border-color: var(--accent); }
+.pill.ok { color: var(--success); border-color: var(--success); }
+
+.abstract { margin: 26px 0; padding: 22px 24px; border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 12px; background: var(--card); }
+.abstract h3 { font-size: 0.78em; text-transform: uppercase; letter-spacing: 0.12em; color: var(--accent); margin-bottom: 8px; }
+
+section { margin: 42px 0; }
+section h2 { font-size: 1.45em; margin-bottom: 14px; font-weight: 700; }
+section h2 .num { color: var(--accent); font-family: var(--font-mono); margin-right: 10px; }
+section p { margin: 12px 0; color: var(--text); }
+section ul, section ol { margin: 12px 0 12px 22px; color: var(--text); }
+section li { margin: 7px 0; }
+section li strong { color: var(--text); }
+.dim { color: var(--text-dim); }
+
+table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.9em; }
+th, td { text-align: left; padding: 11px 13px; border-bottom: 1px solid var(--border); vertical-align: top; }
+th { color: var(--text-dim); font-weight: 600; font-size: 0.8em; text-transform: uppercase; letter-spacing: 0.05em; }
+td:first-child { color: var(--accent); font-weight: 600; white-space: nowrap; }
+
+blockquote { margin: 18px 0; padding: 14px 18px; border-left: 3px solid var(--accent-2); background: var(--card); border-radius: 0 10px 10px 0; }
+blockquote p { margin: 0; color: var(--text-dim); font-style: italic; }
+
+.code { font-family: var(--font-mono); background: var(--card-2); border: 1px solid var(--border); border-radius: 10px; padding: 18px; margin: 16px 0; overflow-x: auto; font-size: 0.82em; line-height: 1.6; white-space: pre; }
+.tag { display:inline-block; font-size:0.72em; padding:2px 8px; border-radius:6px; background:var(--card-2); border:1px solid var(--border); color:var(--text-dim); margin:2px 2px 2px 0; }
+.footer { border-top: 1px solid var(--border); margin: 56px 0 40px; padding-top: 22px; color: var(--text-dim); font-size: 0.85em; text-align: center; }
+.footer a { color: var(--accent); text-decoration: none; }
+</style>
+</head>
+<body>
+<div class="mesh"></div>
+
+<nav>
+  <div class="nav-inner">
+    <div class="brand"><div class="logo">🛡️</div><div>The Steward <span class="sub">Agentic Treasury</span></div></div>
+    <div class="nav-links">
+      <a href="/Treasury/steward-dashboard.html">Treasury</a>
+      <a href="#" class="active">Whitepaper</a>
+      <a href="/demo.html">Demo Suite</a>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+  <header class="doc">
+    <div class="kicker">GenTech Labs · The Steward</div>
+    <h1>The Agentic Treasury<br><span class="grad">Whitepaper</span></h1>
+    <div class="doc-sub">A self-custody treasury agent that reads your wallet on-chain, watches your deployed liquidity, rebalances it when the market calls for it, and never moves your money without you knowing exactly what's happening.</div>
+    <div class="meta-row">
+      <span class="pill acc">Draft v1.0</span>
+      <span class="pill">August 15, 2026</span>
+      <span class="pill ok">Self-Custody</span>
+      <span class="pill ok">CLARITY Act Compliant</span>
+    </div>
+  </header>
+
+  <div class="abstract">
+    <h3>Abstract</h3>
+    <p>The Agentic Treasury is GenTech's flagship product — an autonomous, self-custody treasury manager for the agent economy. It closes the loop the DeFi industry has only talked about: an agent that doesn't just <em>report</em> on a position, but actually <em>manages</em> it — detecting, deciding, executing, and verifying — all while keeping the user in control of their own keys.</p>
+  </div>
+
+  <section>
+    <h2><span class="num">01</span>The Problem</h2>
+    <p>Three truths are colliding in DeFi right now:</p>
+    <ol>
+      <li><strong>Yield is real but mis-marketed.</strong> Most yield-farmers promise fantasy APY and hide the small-capital reality. A $50 position earns ~$3–4/yr. The industry hides this; we refuse to.</li>
+      <li><strong>Agents report but don't execute.</strong> Every analytics dashboard tells you <em>where</em> your liquidity is, but nothing <em>moves</em> it when the market regime shifts. The gap between "signal" and "action" is the untapped value.</li>
+      <li><strong>Trust is the bottleneck.</strong> The agent economy can't grow until users trust that an autonomous agent won't run off with their money. Self-custody + explicit human gates are the only credible answer.</li>
+    </ol>
+  </section>
+
+  <section>
+    <h2><span class="num">02</span>The Product</h2>
+    <p>The Agentic Treasury reads your wallet on-chain, auto-discovers any liquidity position, watches it continuously, and — depending on your tier — either <strong>recommends</strong> a move for approval or <strong>executes</strong> a well-tested strategy automatically.</p>
+    <blockquote><p>The core loop — the whole product: Check the position → see what it's doing → decide where it should be → withdraw → redeploy → verify on-chain.</p></blockquote>
+    <table>
+      <tr><th></th><th>Tier 1 — Operator</th><th>Tier 2 — User</th></tr>
+      <tr><td>Self-custody</td><td>✅ Your wallet</td><td>✅ Your wallet</td></tr>
+      <tr><td>Position monitoring</td><td>✅ Live</td><td>✅ Live</td></tr>
+      <tr><td>Strategy recommendations</td><td>✅ Yes</td><td>✅ Yes</td></tr>
+      <tr><td>Auto-rebalance</td><td>✅ Yes</td><td>❌ You confirm every move</td></tr>
+      <tr><td>Macro war-room (CPI/FOMC/NFP)</td><td>✅ Auto</td><td>📋 Plan only — your call</td></tr>
+    </table>
+    <p class="dim"><strong>The rule that makes this trustworthy:</strong> your money moves only when you say so. Tier-2 never auto-executes. Period.</p>
+  </section>
+
+  <section>
+    <h2><span class="num">03</span>Architecture — AAE Rules Above, Venues Below</h2>
+    <p>The treasury is built on the <strong>AAE (Autonomous Agentic Economy)</strong> stack — a modular 8-layer infrastructure stack for AI agents: identity, payments, intelligence, and real DeFi position management.</p>
+    <div class="code">             ┌──────────────────────────────────────────────┐
+             │  AAE RULE LAYER (venue-agnostic, the brain)  │
+             │  regime_classifier → allocation_engine        │
+             │  → decide() → plan() → verify() → remit()     │
+             └───────────────┬──────────────────────────────┘
+                             │ venue-agnostic order plans
+        ┌────────────────────┼────────────────────────────┐
+        │                    │                            │
+   ┌────▼─────┐        ┌─────▼─────┐              ┌───────▼───────┐
+   │ LP leg   │        │ Trade leg │              │ Remit leg     │
+   │ yield    │        │ basis arb │              │ CDP→EOA→card  │
+   │ (swap    │        │ / momentum│              │ (self-orbit)  │
+   │ fees)    │        │           │              │               │
+   └──────────┘        └───────────┘              └───────────────┘
+   COINBASE    SOLANA   AVALANCHE  ETHEREUM       COINBASE CDP
+   (base)      (Jupiter) (LFJ)     (PAXG/ONDO)    server account</div>
+    <p><strong>Composition model:</strong> the treasury is an <strong>orchestration layer, not a protocol builder.</strong> We compose existing protocols (Trader Joe/LFJ, Morpho, Aave, Jupiter) as interchangeable sockets. The durable value is the brain + guard rails + payment rails + on-ramp, not the venue.</p>
+    <p><strong>Portable home chain:</strong> users can choose which chain holds their main treasury funds, and switch at any time — since chains are fungible config, not rebuilds.</p>
+  </section>
+
+  <section>
+    <h2><span class="num">04</span>The Agent (The Steward)</h2>
+    <p><strong>The Steward</strong> is the treasury's agent — the trusted hand on the treasury. It:</p>
+    <ul>
+      <li><strong>Discovers</strong> your positions on-chain (no manual entry).</li>
+      <li><strong>Watches</strong> them continuously (every 10 minutes by default).</li>
+      <li><strong>Decides</strong> the right shape based on the current market regime.</li>
+      <li><strong>Executes</strong> (in Tier-1) withdraw → convert → redeploy, with a gas buffer and on-chain verification of every step.</li>
+      <li><strong>Verifies</strong> by transaction receipt — never by declaration.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2><span class="num">05</span>The Shapes (What the Agent "Thinks")</h2>
+    <p>Think of your liquidity as a <em>shape</em> the agent places around the current price.</p>
+    <table>
+      <tr><th>Shape</th><th>When</th><th>What it does</th></tr>
+      <tr><td>Curve</td><td>Default — chop, mild trends</td><td>Spread across a range; earns fees as price oscillates. Fewer bins in chop = taller = more per tick.</td></tr>
+      <tr><td>Bid-Ask</td><td>Big move coming (CPI/FOMC/NFP)</td><td>Concentrated at two edges; catches a hard swing on either side. Wider to survive the move.</td></tr>
+      <tr><td>Spot</td><td>Confirmed one-way trend</td><td>All-in one direction — rare, only when you're sure.</td></tr>
+    </table>
+    <p><strong>The lever:</strong> Curve in chop → fewer bins (~23). Bid-ask when about to swing → wider (~31). The edges must sit far enough apart to catch the whole move.</p>
+  </section>
+
+  <section>
+    <h2><span class="num">06</span>The Market Regime Engine</h2>
+    <table>
+      <tr><th>Regime</th><th>Posture</th></tr>
+      <tr><td>RANGE_BOUND</td><td>→ Yield mode (LP/staking) — the default</td></tr>
+      <tr><td>BULL_TRENDING / BEAR_TRENDING</td><td>→ Trading mode, only at high confidence</td></tr>
+      <tr><td>HIGH_VOLATILITY</td><td>→ Back to yield / defense</td></tr>
+      <tr><td>PRICE_DISCOVERY</td><td>→ Trading mode, gated</td></tr>
+    </table>
+    <p>The engine stays in yield mode in chop and only flips to trading when the regime signal is clear. A stale or low-confidence signal forces the treasury back to defense. <strong>It refuses to fake success.</strong></p>
+  </section>
+
+  <section>
+    <h2><span class="num">07</span>Security Model</h2>
+    <ul>
+      <li><strong>Self-custody, always.</strong> Your keys, your wallet, your money. We never hold custody.</li>
+      <li><strong>Human gates.</strong> Tier-2 never auto-executes. Withdrawals always human-confirmed.</li>
+      <li><strong>Least-privilege keys.</strong> Trade-only keys; withdrawal keys kept separate.</li>
+      <li><strong>On-chain verification.</strong> Every action verified by transaction receipt, not declared success.</li>
+      <li><strong>When in doubt, hold.</strong> If a transaction reverts, the agent stops and reports honestly.</li>
+      <li><strong>Honest numbers.</strong> Real on-chain yields, never fabricated APY.</li>
+    </ul>
+    <p><strong>The CLARITY Act moat:</strong> the treasury operates on CLARITY Act DeFi Exclusion (Sec. 309/409) compliant rails. Every endpoint on gentechlabs.net is compliance-verified. As the CLARITY Act makes agent identity + compliance mandatory, the treasury is already regulatory-ready.</p>
+  </section>
+
+  <section>
+    <h2><span class="num">08</span>Honest Economics</h2>
+    <p>This is the part most yield farmers hide, and the part that defines us.</p>
+    <ul>
+      <li>A <strong>$50 USDC/AVAX position</strong> on the LFJ rail earns roughly <strong>$0.26–0.30/day ≈ $3–4/yr.</strong> Real. Not a fantasy APY.</li>
+      <li>Fees are a function of <strong>movement</strong>, not efficiency.</li>
+      <li><strong>Impermanent loss is real.</strong> The agent helps you decide when to stay, when to DCA, and when to exit to hold instead.</li>
+    </ul>
+    <table>
+      <tr><th>Tier</th><th>Label</th><th>Daily fees</th></tr>
+      <tr><td>0</td><td>Grunt</td><td>$5/day</td></tr>
+      <tr><td>1</td><td>Scout</td><td>$10/day</td></tr>
+      <tr><td>2</td><td>Raider</td><td>$20/day</td></tr>
+      <tr><td>3</td><td>Warlord</td><td>$50/day</td></tr>
+      <tr><td>4</td><td>Sovereign</td><td>$100/day</td></tr>
+    </table>
+    <p class="dim"><strong>The market-maker funnel:</strong> every market maker starts small. Users deposit a small slice → the treasury proves the rail → the user scales. Honest expectations make that funnel safe.</p>
+  </section>
+
+  <section>
+    <h2><span class="num">09</span>The Trust Contract</h2>
+    <ul>
+      <li><strong>Your keys, your wallet, your money.</strong> We never hold custody.</li>
+      <li><strong>Nothing auto-executes on a Tier-2 account.</strong> Every real move is confirmed.</li>
+      <li><strong>We show real on-chain numbers</strong>, never a fabricated APY. If a position earns $3/yr, we say so.</li>
+      <li><strong>When in doubt, we hold.</strong> The agent refuses to fake success.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2><span class="num">10</span>Roadmap</h2>
+    <table>
+      <tr><th>Phase</th><th>Status</th><th>Description</th></tr>
+      <tr><td>Payment Rails</td><td>✅ Live</td><td>x402 gateway, 6 chains</td></tr>
+      <tr><td>Agent Identity</td><td>✅ Live</td><td>ERC-8004, credit scoring</td></tr>
+      <tr><td>Executable Yield (LP) leg</td><td>✅ Shipped</td><td>Morpho/LFJ LP executor (85 tests)</td></tr>
+      <tr><td>Close + Remit leg</td><td>✅ Shipped</td><td>CDP → EOA → card</td></tr>
+      <tr><td>Regime-triggered auto-trade</td><td>✅ Shipped</td><td>Gated on clear trend</td></tr>
+      <tr><td>User onboarding (EDU)</td><td>🔧 Building</td><td>Getting-started guide shipped</td></tr>
+      <tr><td>Agent Commerce</td><td>🔧 Building</td><td>Marketplace, escrow, dispute</td></tr>
+    </table>
+  </section>
+
+  <div class="footer">
+    <p>GenTech Labs · The Steward · Draft v1.0 · Aug 15, 2026</p>
+    <p>Contact: Jordan Jones — <a href="https://github.com/ProtoJay4789">github.com/ProtoJay4789</a></p>
+    <p style="margin-top:8px;font-size:0.75em;"><a href="/Treasury/steward-dashboard.html">← Back to the Treasury Command Center</a></p>
+  </div>
+</div>
+</body>
+</html>
