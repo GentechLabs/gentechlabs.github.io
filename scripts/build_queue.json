@@ -484,7 +484,7 @@
     "name": "Paymenter x402 \u2014 WHMCS/Blesta Extension Port",
     "difficulty": "medium",
     "priority": "medium",
-    "status": "pending",
+    "status": "shipped",
     "assigned_to": "gentech",
     "platform": "cloud",
     "needs_jordan": false,
@@ -493,13 +493,15 @@
     "detail": "Port the Paymenter x402 extension pattern to WHMCS and Blesta \u2014 the two largest hosting billing platforms. Same gateway hooks, same x402 integration. Much larger markets than Paymenter.",
     "_orig_id": 23,
     "recommended_tier": "k2.7",
-    "note": "[Jordan GO Aug 3: un-gated, workable overnight]",
+    "note": "[Jordan GO Aug 3: un-gated, workable overnight] [SHIPPED by gentech 2026-08-15: WHMCS module (x402.php + x402callback.php) + Blesta module (x402.php + x402_pay.php + x402_callback.php + config.json + en_us lang) built in 10-Labs/paymenter-x402/whmcs/ + blesta/. All 6 PHP files pass php -l. 24/24 test assertions pass (test_x402_ports.php): payment URL generation (default gateway, trailing-slash strip, all 4 chains, all 4 tokens, 2dp amounts, receipt flag, reference prefix, redirect preservation) + callback reference regex + blesta config.json schema. README at whmcs-blesta-README.md.]",
     "group": "labs",
     "routing": {
       "group": "labs",
       "build_in": "labs",
       "handoff_on_complete": true
-    }
+    },
+    "shipped_by": "gentech",
+    "shipped_date": "2026-08-15"
   },
   {
     "id": 25,
