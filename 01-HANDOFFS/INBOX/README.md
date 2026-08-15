@@ -1,4 +1,4 @@
-# 📥 Group Inboxes — Delegation & Handoff
+# 📥 Group Inboxes — Delegation & Handoff (V4 full mesh)
 
 Clean group-to-group handoff. **Anyone can drop a note into any group's inbox.**
 This is the delegation board Jordan reads to see every handoff and where it's going.
@@ -18,14 +18,20 @@ This is the delegation board Jordan reads to see every handoff and where it's go
 - **treasury** — finance, DeFi, portfolio, yield (consolidated from "strategies"/"finance" Aug 12)
 - **gizmo** — Labs bot
 
-## Protocol
+## Protocol (V4 — full mesh)
 1. **Send:** write `<date>-<topic>.md` into the target group's inbox folder.
    Format below. Commit + push (or `ob sync`).
 2. **Read:** each group's wake-up / morning digest reads its inbox.
    Gentech reads ALL inboxes every morning and surfaces anything unaddressed.
 3. **Resolve:** when addressed, tick the checkbox `- [x]` and move the file to
-   `_archive/` (or delete). 
+   `_archive/` (or delete).
 4. **Purge:** nightly maintenance wipes `_archive/` entries older than 7 days.
+
+**V4 mesh:** any group can hand off to any other group — not just back to
+Gentech. For approval/decisions → `hq`; context → the group that holds it;
+build → `labs`/`forge`; content → `entertainment`; finance → `treasury`.
+Gentech's overnight scanner reads every `<group>-to-<group>/` folder, so
+nothing is lost regardless of who sent it to whom.
 
 ## Note format
 ```markdown

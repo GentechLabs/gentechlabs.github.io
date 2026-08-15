@@ -1,20 +1,23 @@
-# Handoff Sync Protocol (V4 — all groups)
+# Handoff Sync Protocol (V4 — full mesh, all groups)
 
-## The loop: every group sends work back, Gentech consumes overnight
+## The loop: ANY group can hand off to ANY other group
+
+V4 is a **full mesh**, not hub-and-spoke. Every group can send work to every
+other group for approval, context, or handoff — not just back to Gentech.
 
 ```
-OUTBOUND (Gentech → group agent)
-Gentech writes → 01-HANDOFFS/gentech-to-<group>/   (dated task files, per group)
-                 gentech-to-forge/                 (legacy Forge path)
+MESH (any group → any group)
+<from>-to-<to>/   → 01-HANDOFFS/<from>-to-<to>/   (dated task/context files)
+                    e.g. labs-to-treasury/, entertainment-to-hq/, forge-to-labs/
 
-RETURN (group agent → Gentech)
-Group writes    → 01-HANDOFFS/<group>-to-gentech/  (dated "here's what I did" files)
-                 <group>-completions.md            (item IDs shipped, e.g. "- **#42** — built X")
+RETURN (any group → any group)
+<from>-to-<to>/   → 01-HANDOFFS/<from>-to-<to>/   (dated "here's what I did" files)
+<from>-completions.md                            (item IDs shipped, e.g. "- **#42** — built X")
 
-Groups: labs, entertainment, finance (Treasury), hq, forge.
+Groups: labs, entertainment, finance (Treasury), hq, forge, gizmo.
 
 CONSUME (overnight, Gentech)
-group-returns-scanner.py  → reads EVERY <group>-to-gentech/ + <group>-completions.md,
+group-returns-scanner.py  → reads EVERY <group>-to-<group>/ + <group>-completions.md,
                             extracts shipped item IDs + notes, emits JSON
 Nightly Build Session     → applies returned IDs to build_queue.json (status → shipped)
 Morning Digest            → surfaces group returns + stale notes to Jordan
@@ -22,11 +25,21 @@ Morning Digest            → surfaces group returns + stale notes to Jordan
 VAULT SYNC → git push vault → github.com/ProtoJay4789/gentech-vault.git
 ```
 
+### Mesh routing rules
+- **Approval/decision needed** → hand off to `hq` (Jordan's lane) or the group that owns the decision.
+- **Context needed** → hand off to the group that holds the context (e.g. a finance decision that needs Labs' technical read → `labs-to-treasury/`).
+- **Build work** → hand off to `labs` (or `forge` for desktop-only work).
+- **Content/social** → hand off to `entertainment`.
+- **Finance/portfolio/yield** → hand off to `treasury`.
+- **Gentech still consumes ALL returns overnight** — the mesh doesn't remove Gentech's consolidation role; it adds direct peer handoffs on top. Gentech's scanner reads every `<group>-to-<group>/` folder, so nothing gets lost regardless of who sent it to whom.
+
 ## Return file contract (for any group agent)
 
-Each group agent has a symmetric return path so Gentech picks up its work:
+Each group agent has a symmetric return path to ANY other group, so work
+flows peer-to-peer and Gentech still picks everything up overnight:
 
-- **Return folder:** `01-HANDOFFS/<group>-to-gentech/` — drop dated `.md` files here:
+- **Return folder:** `01-HANDOFFS/<from>-to-<to>/` — drop dated `.md` files here
+  (e.g. `labs-to-treasury/2026-08-15.md` for Labs → Treasury):
   ```
   ## From <Group> — <date>
   ### ✅ Completed this session
