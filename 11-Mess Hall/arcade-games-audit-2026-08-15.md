@@ -111,14 +111,14 @@
 ## Consolidated Fix List (build order)
 
 ### P0 — Arcade root experience
-1. **Deploy 3D lobby** to arcade root, wire the 4 real games to cabinets (replaces placeholder GAMES array)
-2. **Add mobile touch to Super Arcade Tennis** (it's the current root — unplayable on mobile)
-3. **Add menu + pause to Super Arcade Tennis**
+1. **Deploy 3D lobby** to arcade root, wire the 4 real games to cabinets (replaces placeholder GAMES array) — **DONE 2026-08-16** (deployed to `/lobby/`, wired to real cabinets)
+2. **Add mobile touch to Super Arcade Tennis** (it's the current root — unplayable on mobile) — **DONE 2026-08-16** (virtual joystick + SWING button)
+3. **Add menu + pause to Super Arcade Tennis** — **pause DONE 2026-08-16**; menu still TODO
 
 ### P1 — Polish
-4. **Add pause to Visual Kei Tap** (Escape key)
-5. **Verify King's Gambit mobile + menu** on real device
-6. **Real-device mobile perf test on Agent Warfare** (12MB bundle)
+4. **Add pause to Visual Kei Tap** (Escape key) — **DONE 2026-08-16**
+5. **Verify King's Gambit mobile + menu** on real device — TODO
+6. **Real-device mobile perf test on Agent Warfare** (12MB bundle) — TODO
 
 ### P2 — Vision
 7. **Anime environment** (Stylized Components water/grass) into the lobby
