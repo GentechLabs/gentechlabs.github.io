@@ -565,6 +565,16 @@ PAYAI_FACILITATOR = os.getenv(
     "https://facilitator.payai.network",
 )
 
+# Dexter x402 facilitator — the rail that auto-catalogs us on the OpenDexter
+# marketplace (open.dexter.cash/mcp). OpenDexter only indexes gateways that
+# settle through the Dexter facilitator (x402.dexter.cash), NOT CDP/GoPlausible/
+# PayAI. Supports eip155:8453 (Base) with the `exact` scheme. No API key required.
+# Enable by setting X402_USE_DEXTER=1 (routes Base proofs here instead of CDP).
+DEXTER_FACILITATOR = os.getenv(
+    "DEXTER_FACILITATOR_URL",
+    "https://x402.dexter.cash",
+)
+
 
 def verify_proof_via_payai(proof_str: str, expected_price: float) -> tuple[bool, str]:
     """Verify + settle a proof against the PayAI x402 facilitator.
@@ -705,6 +715,81 @@ def verify_proof_via_goplausible(proof_str: str, expected_price: float) -> tuple
             return True, f"verified (goplausible settle failed: {e})"
     except Exception as e:
         return False, f"goplausible unreachable: {e}"
+
+
+def verify_proof_via_dexter(proof_str: str, expected_price: float) -> tuple[bool, str]:
+    """Verify + settle a proof against the Dexter x402 facilitator.
+
+    This is the rail that auto-catalogs us on the OpenDexter marketplace
+    (open.dexter.cash/mcp). OpenDexter only indexes gateways that settle through
+    the Dexter facilitator (x402.dexter.cash) — CDP/GoPlausible/PayAI settlements
+    do NOT trigger cataloging. Dexter supports eip155:8453 (Base) with the
+    `exact` scheme, matching our primary rail. No API key required.
+
+    Same {x402Version, paymentPayload, paymentRequirements} envelope as the
+    GoPlausible/PayAI paths. /verify returns {isValid, invalidReason};
+    /settle returns {success, transaction, network, payer}.
+    """
+    try:
+        proof = json.loads(proof_str)
+    except json.JSONDecodeError:
+        try:
+            import base64 as _b64
+            decoded = _b64.b64decode(proof_str + "=" * (-len(proof_str) % 4)).decode("utf-8")
+            proof = json.loads(decoded)
+        except Exception:
+            return False, "proof is not valid JSON or base64 JSON"
+
+    payload = proof if "paymentPayload" in proof else {"paymentPayload": proof}
+    try:
+        _pp = payload.get("paymentPayload", payload)
+        _ver = _pp.get("x402Version", 2)
+        _accepted_opt = _pp.get("accepted", {})
+        if _accepted_opt:
+            payload = {
+                "x402Version": _ver,
+                "paymentPayload": _pp,
+                "paymentRequirements": _accepted_opt,
+            }
+    except Exception:
+        pass
+
+    # Local structural guard: reject proofs on a rail we don't advertise.
+    try:
+        accepted = payload["paymentPayload"].get("accepted", payload["paymentPayload"])
+        network = accepted.get("network")
+    except (KeyError, TypeError):
+        network = None
+    if not is_network_accepted(network):
+        return False, f"network {network!r} not accepted"
+
+    try:
+        with httpx.Client(timeout=20) as client:
+            v = client.post(
+                f"{DEXTER_FACILITATOR}/verify",
+                json=payload,
+                headers={"Content-Type": "application/json"},
+            )
+        if v.status_code != 200:
+            return False, f"dexter verify {v.status_code}: {v.text[:200]}"
+        body = v.json()
+        if not body.get("isValid", False):
+            return False, body.get("invalidReason", "invalid")
+        # Verify OK → settle so OpenDexter auto-catalogs us.
+        try:
+            with httpx.Client(timeout=30) as client:
+                s = client.post(
+                    f"{DEXTER_FACILITATOR}/settle",
+                    json=payload,
+                    headers={"Content-Type": "application/json"},
+                )
+            if s.status_code == 200 and s.json().get("success"):
+                return True, "verified + settled (dexter)"
+            return True, f"verified (dexter settle {s.status_code})"
+        except Exception as e:
+            return True, f"verified (dexter settle failed: {e})"
+    except Exception as e:
+        return False, f"dexter unreachable: {e}"
 
 
 def verify_proof_simulation(proof_str: str, expected_price: float) -> tuple[bool, str]:
@@ -886,17 +971,22 @@ async def paid_endpoint(service: str, path: str, request: Request):
     # Verify the proof — route by the proof's settlement network.
     # - Algorand/other non-EVM rails → GoPlausible facilitator (challenge path)
     # - Avalanche (eip155:43114) → PayAI facilitator (settles our Avalanche rail)
-    # - EVM (Base) → CDP facilitator
+    # - EVM (Base) → CDP facilitator, OR Dexter when X402_USE_DEXTER=1
+    #   (Dexter is the rail that auto-catalogs us on OpenDexter marketplace)
     # - simulation fallback via local HMAC (matches our SDK/ARC gateway dev flow).
     mode = os.getenv("PAYMENT_VERIFY_MODE", "auto")
     proof_network = _proof_network(proof)
     is_avm = proof_network is not None and proof_network.startswith("algorand:")
     is_avalanche = proof_network == "eip155:43114"
     is_xlayer = proof_network == "eip155:196"
+    is_base = proof_network == "eip155:8453"
+    use_dexter = os.getenv("X402_USE_DEXTER", "0") == "1"
     if mode == "simulation":
         valid, reason = verify_proof_simulation(proof, price)
     elif mode == "cdp":
         valid, reason = verify_proof_via_cdp(proof, price)
+    elif mode == "dexter":
+        valid, reason = verify_proof_via_dexter(proof, price)
     elif is_avm:
         # Algorand proof → GoPlausible facilitator (required for the x402
         # Global Challenge — settlements must land through GoPlausible).
@@ -905,6 +995,10 @@ async def paid_endpoint(service: str, path: str, request: Request):
         # Avalanche / X Layer proof → PayAI facilitator (settles our rails so
         # AgentScan-listed + XLayer-identity services can actually receive USDC).
         valid, reason = verify_proof_via_payai(proof, price)
+    elif is_base and use_dexter:
+        # Base proof + Dexter enabled → settle through Dexter so OpenDexter
+        # auto-catalogs us. This is the marketplace-listing lever (#41).
+        valid, reason = verify_proof_via_dexter(proof, price)
     else:
         # auto: try CDP when a key exists, else simulation
         if os.getenv("CDP_API_KEY"):

@@ -49,5 +49,18 @@ pay-per-call via x402. Directly in our lane — we build x402 gateways.
 
 - Registry row 4g verified Aug 3 (endpoint live, tools enumerated).
 - Funding path identified (0x7ebff owner wallet).
-- **Next:** determine the provider-submission flow to list our x402 services;
-  cross-ref against marketplace-audit.md.
+- **Aug 12:** 0.005 USDC self-payment through Dexter's facilitator succeeded
+  (tx on Base, eip155:8453). Root-cause fix: removed em-dash from challenge
+  description (broke Node `btoa()`).
+- **Aug 16 (ROOT CAUSE FOUND):** Our gateway was NOT appearing in `x402_search`
+  despite the Aug 12 settlement because **our gateway settles Base proofs via
+  the CDP facilitator, NOT the Dexter facilitator.** OpenDexter only auto-catalogs
+  gateways that settle through `x402.dexter.cash`. CDP/GoPlausible/PayAI
+  settlements do NOT trigger cataloging.
+- **Aug 16 (FIX SHIPPED):** Added `verify_proof_via_dexter()` to the gateway
+  (`server.py`) — routes Base (`eip155:8453`) proofs through the Dexter
+  facilitator when `X402_USE_DEXTER=1` (or `PAYMENT_VERIFY_MODE=dexter`).
+  Dexter supports Base with the `exact` scheme, no API key. 8/8 new tests pass
+  (45 total). **Next:** set `X402_USE_DEXTER=1` on the gateway service, then
+  trigger a real Base settlement through Dexter → OpenDexter auto-catalogs us.
+  Re-check `x402_search` ~24h after.
