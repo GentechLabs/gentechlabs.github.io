@@ -47,6 +47,7 @@ BACKEND_ROUTES = {
     "treasury_defender": ("http://127.0.0.1:8096", "defender/", "/v1/defender/"),
     "lineage_guard": ("http://127.0.0.1:8095", "lineage/", "/v1/lineage/"),
     "sie_inference": ("http://127.0.0.1:8097", "", "/v1/"),
+    "deal_tracker": ("http://127.0.0.1:8080", "", "/v1/"),
 }
 
 # Public URL segment (first path element after /v1/) -> manifest service key
@@ -60,6 +61,7 @@ URL_TO_SERVICE = {
     "defender": "treasury_defender",
     "lineage": "lineage_guard",
     "sie": "sie_inference",
+    "deals": "deal_tracker",
 }
 
 
@@ -884,9 +886,9 @@ async def openapi():
         "info": {
             "title": "GenTech Labs x402 Gateway",
             "version": MANIFEST.get("version", "9.0.0"),
-            "description": "Pay-per-call API gateway with 7 services across Base Network. Token security, wallet analysis, agent discovery, market intelligence, DeFi LP analytics, NFT search, treasury defense.",
+            "description": "Pay-per-call API gateway with 10 services across Base Network. Token security, wallet analysis, agent discovery, market intelligence, DeFi LP analytics, NFT search, treasury defense, game deal tracking.",
             "contact": {"email": "jordanjones0902@gmail.com", "name": "GenTech Labs", "url": "https://gentechlabs.net"},
-            "x-guidance": "Call /v1/{service}/{path} with a JSON body. Services: token_security (risk score an address), wallet_analysis (portfolio P&L), agent_discovery (search on-chain agents), market_intelligence (token price/volume), defi_lp_analytics (LP position scoring), nft_search (Magic Eden search), treasury_defender (token quarantine). Unauthenticated calls return HTTP 402 with x402 payment requirements (USDC on Base). Pay via EIP-3009 and retry with Authorization: x402 <proof>.",
+            "x-guidance": "Call /v1/{service}/{path} with a JSON body. Services: token_security (risk score an address), wallet_analysis (portfolio P&L), agent_discovery (search on-chain agents), market_intelligence (token price/volume), defi_lp_analytics (LP position scoring), nft_search (Magic Eden search), treasury_defender (token quarantine), deal_tracker (game deals/price-watch/release radar). Unauthenticated calls return HTTP 402 with x402 payment requirements (USDC on Base). Pay via EIP-3009 and retry with Authorization: x402 <proof>.",
         },
         "servers": [{"url": "https://api.gentechlabs.net"}],
         "security": [{"x402": []}],

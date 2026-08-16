@@ -16,6 +16,7 @@ app.add_middleware(
 import os, json, urllib.request, urllib.parse
 
 from . import games
+from . import physical_media
 
 ROBINHOOD_CLIENT_ID = "LtLiNmbs9owbYfWgBlC68Z2VujIPuvGoAiSYr8xW"
 ROBINHOOD_TOKEN_FILE = "/root/repos/hyperliquid-python-sdk/robinhood_token.json"
@@ -100,6 +101,39 @@ async def get_release_radar(notes: str = ""):
 async def get_preorder_advisor(title: str):
     """'Is this pre-order worth it?' — value judgment."""
     return games.preorder_advisor(title)
+
+
+# --- Physical Media Scarcity Tracker (Jordan-confirmed Aug 16) ---
+@app.get("/v1/physical/search")
+async def physical_search(title: str = "", limit: int = 20):
+    """Search the physical media scarcity catalog (4K, steelbook, vinyl, boutique)."""
+    return physical_media.search(title=title, limit=limit)
+
+
+@app.get("/v1/physical/leaderboard")
+async def physical_leaderboard(limit: int = 10):
+    """Top-scarcity titles — the 'buy now' list."""
+    return physical_media.scarcity_leaderboard(limit=limit)
+
+
+@app.post("/v1/physical/watch")
+async def physical_add_watch(title: str, target_score: int = 70):
+    """Track a physical media title; alert when scarcity crosses target_score."""
+    return physical_media.add_watch(title, target_score)
+
+
+@app.get("/v1/physical/watch")
+async def physical_check_watches():
+    """Scan watched physical media titles for scarcity alerts."""
+    return physical_media.check_watches()
+
+
+@app.post("/v1/physical/title")
+async def physical_add_title(
+    title: str, format: str, label: str, msrp: float, scarcity: int, note: str = ""
+):
+    """Add a new title to the scarcity catalog (curated intelligence)."""
+    return physical_media.add_title(title, format, label, msrp, scarcity, note)
 
 
 if __name__ == "__main__":

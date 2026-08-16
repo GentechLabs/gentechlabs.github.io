@@ -20,6 +20,7 @@
 | `09-Green Room/` | Ideas, specs, character sheets, film bibles, context-bridge | New ideas, deep-dive specs, creative/film work |
 | `10-Labs/` | Build projects, hackathons, x402 gateway, agent kits, research | Any build, hackathon, or technical project |
 | `03-Projects/` | Named projects (AgentEscrow, Agora, genlayer, portfolio) | Named-project work |
+| `03-Strategies/` | Grant applications queue | Grant application work |
 | `Projects/` | Legacy project redirect | Only when explicitly referenced |
 | `06-Content/` | Portfolio, frontend design, social layer, content projects | Content/portfolio/frontend work |
 
