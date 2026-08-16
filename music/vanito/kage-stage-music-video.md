@@ -38,6 +38,16 @@
 - **Budget:** top up ~$1.50 before the next clip
 - **LLM:** weekly usage was 82% when paused — resume when it drops (or route to Z.AI/OpenCode Go)
 
+## 🎬 NEXT SCENE (LOCKED — Vanito's idea, 5s, 45-50s of song)
+**Scene 7 — "The Shadows Appear"** (5s, scored to 45-50s)
+- **0-2s:** KAGE keeps rapping while playing the guitar (continues from v7's rapping beat)
+- **2-5s:** KAGE STOPS playing, looks around SHOCKED — shadows start appearing and flying around him, multiple shadow figures circling him
+- He looks around at the shadows, wondering what's about to happen — "oh my god, where did they come from" energy
+- **Camera:** rotate in circles around him IF it doesn't break the scene; otherwise KAGE just looks around at the flying shadows
+- **Chain from:** last frame of `kage-rapping.mp4` (verified clean — KAGE mid-performance, cathedral stage, blood moon)
+- **Budget needed:** ~$1.50 top-up (wallet at $0.49)
+- **Generator:** `gen-stage-shadows.mjs` (to create on resume)
+
 ## The Task
 Produce a **stage music video** of KAGE performing "Church of the Dead" live on stage.
 
