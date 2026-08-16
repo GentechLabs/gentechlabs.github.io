@@ -42,8 +42,8 @@ These are the pieces I can't do solo — they need your action tonight. Everythi
 ### 📡 Telegraph Season I (#49) — $15K · H1 opens **Aug 17**
 - [x] **Register at integrate.telegraphprotocol.com** — early = track access + Discord support. (Miner YAML is drafted + schema-validated; I'll validate + register on-chain once you're in.)
 
-### 🎯 Gemini XPRIZE Agentic Economy Prize — $50K Circle bonus · register **Aug 17**
-- [ ] **Register on Devpost** (xprize.devpost.com) — prereq for the Circle bonus. Opt in on the submission form.
+### 🎯 Gemini XPRIZE Agentic Economy Prize — $50K Circle bonus · ~~register Aug 17~~
+- [x] **DROPPED Aug 15 (Jordan decision)** — zero actual Gemini/Vertex code existed (only a build brief); 2 days was "way too tight" for a $2M pool. Unregistered, refocusing on CockroachDB + Delphi. Do not re-flag.
 
 ### 🏗️ 0G Bridge Buildathon Wave 3 — $15K
 - [x] **AKINDO registration COMPLETE** (Aug 13, code 937985) — joined 0G Bridge Wave 3 as user `gentech`.
