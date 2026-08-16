@@ -42,9 +42,10 @@
 **Scene 7 — "The Shadows Appear"** (5s, scored to 45-50s)
 - **0-2s:** KAGE keeps rapping while playing the guitar (continues from v7's rapping beat)
 - **2-5s:** KAGE STOPS playing, looks around SHOCKED — black smoke shadows start appearing and flowing/flying around him, circling him
-- **Shadows = BLACK SMOKE**, not developed figures — wispy, flowing, swirling around him in the air
-- He looks around at the smoke shadows, wondering what's about to happen — "oh my god, where did they come from" energy
-- **Camera:** ZOOM OUT so we see KAGE in the air with the black smoke shadows flying/circling around him (no rotating camera — zoom out instead)
+- **Shadows = BLACK SMOKE**, not developed figures — wispy, flowing, swirling
+- **KAGE STAYS ON THE STAGE** (he does NOT leave the ground) — he's still, just looking around shocked
+- **Camera:** ZOOM OUT so we see KAGE on the stage with the black smoke shadows circling AROUND THE STAGE around him — the smoke flies in circles around the stage, not right next to him, but around the whole stage area
+- He looks around at the smoke circling the stage, wondering what's about to happen — "oh my god, where did they come from" energy
 - **Chain from:** last frame of `kage-rapping.mp4` (verified clean — KAGE mid-performance, cathedral stage, blood moon)
 - **Budget needed:** ~$1.50 top-up (wallet at $0.49)
 - **Generator:** `gen-stage-shadows.mjs` (to create on resume)
