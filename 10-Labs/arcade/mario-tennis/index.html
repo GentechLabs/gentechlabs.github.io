@@ -8,32 +8,89 @@
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { overflow: hidden; background: #0a0a1a; font-family: 'Segoe UI', system-ui, sans-serif; }
   canvas { display: block; }
-  #ui { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; }
-  #score { position: absolute; top: 20px; left: 50%; transform: translateX(-50%); color: #fff; font-size: 32px; font-weight: 800; letter-spacing: 2px; text-shadow: 0 2px 8px rgba(0,0,0,0.8); }
-  #score span { margin: 0 30px; }
+  #ui { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 10; }
+  #score { position: absolute; top: 20px; left: 50%; transform: translateX(-50%); color: #fff; font-size: 32px; font-weight: 800; letter-spacing: 2px; text-shadow: 0 2px 8px rgba(0,0,0,0.8); display: flex; align-items: center; gap: 20px; }
   #score .p1 { color: #4fc3f7; }
   #score .p2 { color: #ff7043; }
   #score .divider { color: rgba(255,255,255,0.3); font-weight: 300; }
-  #info { position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,0.5); font-size: 14px; text-align: center; pointer-events: none; }
-  #serve-hint { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: #fff; font-size: 28px; font-weight: 700; opacity: 0; transition: opacity 0.3s; text-shadow: 0 2px 12px rgba(0,0,0,0.9); letter-spacing: 1px; }
+  #chain-power { position: absolute; bottom: 100px; left: 50%; transform: translateX(-50%); display: flex; gap: 12px; pointer-events: none; }
+  .chain-slot { width: 50px; height: 50px; border-radius: 12px; background: rgba(255,255,255,0.05); border: 2px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; color: rgba(255,255,255,0.3); transition: all 0.3s; }
+  .chain-slot.active { border-color: #4fc3f7; background: rgba(79,195,247,0.15); color: #fff; transform: scale(1.05); }
+  .chain-slot.used { border-color: #ff7043; background: rgba(255,112,67,0.15); color: #ff7043; }
+  #collect-hint { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -80px); color: #ffd700; font-size: 22px; font-weight: 700; opacity: 0; text-shadow: 0 0 20px rgba(255,215,0,0.5); pointer-events: none; transition: opacity 0.3s; text-align: center; }
+  #collect-hint.show { opacity: 1; }
+  #chain-announce { position: absolute; top: 35%; left: 50%; transform: translate(-50%, -50%); font-size: 48px; font-weight: 900; opacity: 0; text-shadow: 0 0 40px rgba(255,215,0,0.8); pointer-events: none; transition: all 0.5s; letter-spacing: 4px; white-space: nowrap; }
+  #chain-announce.show { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
+  #chain-announce.btc { color: #f7931a; }
+  #chain-announce.eth { color: #8b8cf7; }
+  #chain-announce.sol { color: #00d18c; }
+  #serve-hint { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: #fff; font-size: 28px; font-weight: 700; opacity: 0; text-shadow: 0 2px 12px rgba(0,0,0,0.9); letter-spacing: 1px; }
   #serve-hint.show { opacity: 1; }
   #game-over { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: #fff; font-size: 48px; font-weight: 900; text-align: center; opacity: 0; transition: opacity 0.5s; text-shadow: 0 4px 20px rgba(0,0,0,0.9); }
   #game-over.show { opacity: 1; }
   #game-over .sub { font-size: 20px; font-weight: 400; margin-top: 10px; opacity: 0.7; }
   #game-over .restart { font-size: 18px; margin-top: 20px; color: #4fc3f7; cursor: pointer; pointer-events: auto; }
-  .powerup-icon { position: absolute; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; opacity: 0; transition: opacity 0.3s; pointer-events: none; }
-  .powerup-icon.show { opacity: 1; }
-  .powerup-icon.p1 { top: 100px; left: 80px; background: rgba(79,195,247,0.3); border: 2px solid #4fc3f7; }
-  .powerup-icon.p2 { top: 100px; right: 80px; background: rgba(255,112,67,0.3); border: 2px solid #ff7043; }
+  #info { position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,0.3); font-size: 12px; text-align: center; pointer-events: none; letter-spacing: 0.5px; }
+  .chain-label { position: absolute; bottom: 160px; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,0.2); font-size: 11px; letter-spacing: 3px; text-transform: uppercase; pointer-events: none; }
+  #coin-popup { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: #ffd700; font-size: 72px; font-weight: 900; opacity: 0; pointer-events: none; text-shadow: 0 0 60px rgba(255,215,0,0.6); }
+  #coin-popup.show { animation: coinPop 0.8s ease-out forwards; }
+  @keyframes coinPop { 0% { opacity: 1; transform: translate(-50%, -50%) scale(0.5); } 50% { opacity: 1; transform: translate(-50%, -60%) scale(1.2); } 100% { opacity: 0; transform: translate(-50%, -80%) scale(1); } }
+  #pause-btn {
+    position: absolute; top: 20px; right: 20px; z-index: 20;
+    width: 44px; height: 44px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.2);
+    background: rgba(10,10,26,0.7); color: #fff; font-size: 18px; cursor: pointer;
+    backdrop-filter: blur(8px); pointer-events: auto;
+  }
+  #pause-btn:hover { border-color: #4fc3f7; }
+  #pause-overlay {
+    position: absolute; inset: 0; z-index: 30; display: none;
+    align-items: center; justify-content: center; background: rgba(5,5,15,0.7);
+    backdrop-filter: blur(6px); pointer-events: auto;
+  }
+  #pause-overlay.show { display: flex; }
+  .po-box { text-align: center; color: #fff; }
+  .po-title { font-size: 48px; font-weight: 900; letter-spacing: 6px; text-shadow: 0 0 30px rgba(79,195,247,0.5); }
+  .po-sub { font-size: 14px; color: rgba(255,255,255,0.5); margin-top: 10px; }
+  .po-resume {
+    margin-top: 24px; padding: 12px 32px; border-radius: 12px; border: none;
+    background: linear-gradient(135deg, #4fc3f7, #0288d1); color: #fff; font-size: 16px; font-weight: 700;
+    cursor: pointer; pointer-events: auto;
+  }
+  .po-resume:hover { transform: translateY(-1px); box-shadow: 0 4px 20px rgba(79,195,247,0.4); }
+  #swing-btn {
+    position: absolute; bottom: 30px; right: 24px; z-index: 20;
+    width: 88px; height: 88px; border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, rgba(79,195,247,0.4), rgba(2,136,209,0.6));
+    border: 2px solid rgba(79,195,247,0.6); color: #fff; font-size: 14px; font-weight: 800;
+    letter-spacing: 1px; display: flex; align-items: center; justify-content: center;
+    pointer-events: auto; user-select: none; -webkit-user-select: none; touch-action: none;
+  }
+  #swing-btn:active { transform: scale(0.94); background: radial-gradient(circle at 30% 30%, rgba(79,195,247,0.7), rgba(2,136,209,0.8)); }
 </style>
 </head>
 <body>
 
 <div id="ui">
-  <div id="score"><span class="p1" id="p1-score">0</span><span class="divider">|</span><span class="p2" id="p2-score">0</span></div>
+  <div id="score">
+    <span class="p1" id="p1-score">0</span>
+    <span class="divider">|</span>
+    <span class="p2" id="p2-score">0</span>
+  </div>
+  <div id="chain-power">
+    <div class="chain-slot" id="slot-0">BTC</div>
+    <div class="chain-slot" id="slot-1">ETH</div>
+    <div class="chain-slot" id="slot-2">SOL</div>
+  </div>
+  <div class="chain-label">power shots collected</div>
+  <div id="collect-hint">⚡ Hit the coin to collect a chain power!</div>
+  <div id="chain-announce"></div>
+  <div id="coin-popup"></div>
   <div id="serve-hint">PRESS SPACE TO SERVE</div>
-  <div id="game-over"><span id="winner-text">PLAYER WINS!</span><div class="sub" id="final-score">6-4</div><div class="restart" id="restart-btn">▶ PLAY AGAIN</div></div>
-  <div id="info">WASD · SPACE to swing · First to 6 wins</div>
+  <div id="game-over"><span id="winner-text">YOU WIN!</span><div class="sub" id="final-score">6-4</div><div class="restart" id="restart-btn">▶ PLAY AGAIN</div></div>
+  <div id="info">WASD · SPACE swing · collect chain coins for power shots</div>
+  <button id="pause-btn" title="Pause (Esc/P)">⏸</button>
+  <div id="pause-overlay"><div class="po-box"><div class="po-title">PAUSED</div><div class="po-sub">Press Esc / P or tap ▶ to resume</div><button class="po-resume" id="po-resume">▶ RESUME</button></div></div>
+  <div id="swing-btn" style="display:none">SWING</div>
 </div>
 
 <script type="importmap">
@@ -46,6 +103,19 @@
 
 <script type="module">
 import * as THREE from 'three';
+
+// === CHAIN CONFIG ===
+const CHAINS = [
+  { id: 'btc', name: 'BITCOIN', symbol: 'BTC', color: 0xf7931a, emissive: 0xf7931a, 
+    desc: 'Heavy Power Serve', effect: '2x power, shockwave trail', 
+    lines: ['BTC!', 'BITCOIN!', 'DIGITAL GOLD!'] },
+  { id: 'eth', name: 'ETHEREUM', symbol: 'ETH', color: 0x8b8cf7, emissive: 0x8b8cf7,
+    desc: 'Smart Rally Shot', effect: 'Curve trajectory, harder return',
+    lines: ['ETH!', 'ETHEREUM!', 'SMART CONTRACT!'] },
+  { id: 'sol', name: 'SOLANA', symbol: 'SOL', color: 0x00d18c, emissive: 0x00d18c,
+    desc: 'Speed Shot', effect: 'Fast ball, AI can\'t react',
+    lines: ['SOL!', 'SOLANA!', 'TO THE MOON!'] },
+];
 
 // === SETUP ===
 const scene = new THREE.Scene();
@@ -93,25 +163,18 @@ scene.add(rimLight);
 // === COURT ===
 const courtGroup = new THREE.Group();
 
-// Court surface
 const courtGeo = new THREE.BoxGeometry(14, 0.3, 20);
-const courtMat = new THREE.MeshStandardMaterial({ 
-  color: 0x1a6b3c, 
-  roughness: 0.7, 
-  metalness: 0.1
-});
+const courtMat = new THREE.MeshStandardMaterial({ color: 0x1a6b3c, roughness: 0.7, metalness: 0.1 });
 const court = new THREE.Mesh(courtGeo, courtMat);
 court.position.y = -0.15;
 court.receiveShadow = true;
 courtGroup.add(court);
 
-// Court border / clay area
 const borderMat = new THREE.MeshStandardMaterial({ color: 0x8b4513, roughness: 1 });
 const border = new THREE.Mesh(new THREE.BoxGeometry(15, 0.1, 21), borderMat);
 border.position.y = -0.3;
 courtGroup.add(border);
 
-// Lines
 const lineMat = new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.5 });
 const lineY = 0.01;
 
@@ -121,30 +184,24 @@ function addLine(x, z, w, h) {
   courtGroup.add(mesh);
 }
 
-// Court lines
-addLine(0, -9.8, 13.6, 0.06);  // back top
-addLine(0, 9.8, 13.6, 0.06);   // back bottom
-addLine(-6.8, 0, 0.06, 19.6);  // left side
-addLine(6.8, 0, 0.06, 19.6);   // right side
-addLine(0, 0, 13.6, 0.06);     // net line (under net)
-addLine(0, -3.5, 13.6, 0.04);  // service line top
-addLine(0, 3.5, 13.6, 0.04);   // service line bottom
-// Center service line
-addLine(0, -6.65, 0.04, 6.3);  // top half center
-addLine(0, 6.65, 0.04, 6.3);   // bottom half center
-
-// Doubles sidelines
+addLine(0, -9.8, 13.6, 0.06);
+addLine(0, 9.8, 13.6, 0.06);
+addLine(-6.8, 0, 0.06, 19.6);
+addLine(6.8, 0, 0.06, 19.6);
+addLine(0, 0, 13.6, 0.06);
+addLine(0, -3.5, 13.6, 0.04);
+addLine(0, 3.5, 13.6, 0.04);
+addLine(0, -6.65, 0.04, 6.3);
+addLine(0, 6.65, 0.04, 6.3);
 addLine(-7.3, 0, 0.04, 19.6);
 addLine(7.3, 0, 0.04, 19.6);
 
-// Net
-const netMat = new THREE.MeshStandardMaterial({ color: 0xcccccc, roughness: 0.8, transparent: true, opacity: 0.6, wireframe: false });
+const netMat = new THREE.MeshStandardMaterial({ color: 0xcccccc, roughness: 0.8, transparent: true, opacity: 0.6 });
 const net = new THREE.Mesh(new THREE.BoxGeometry(13.8, 1.2, 0.06), netMat);
 net.position.set(0, 0.6, 0);
 net.castShadow = true;
 courtGroup.add(net);
 
-// Net poles
 const poleMat = new THREE.MeshStandardMaterial({ color: 0x888888, metalness: 0.6, roughness: 0.3 });
 for (let x of [-6.9, 6.9]) {
   const pole = new THREE.Mesh(new THREE.CylinderGeometry(0.08, 0.08, 1.3, 8), poleMat);
@@ -152,7 +209,6 @@ for (let x of [-6.9, 6.9]) {
   courtGroup.add(pole);
 }
 
-// Net top band
 const bandMat = new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.5 });
 const band = new THREE.Mesh(new THREE.BoxGeometry(13.8, 0.06, 0.08), bandMat);
 band.position.set(0, 1.2, 0);
@@ -160,8 +216,7 @@ courtGroup.add(band);
 
 scene.add(courtGroup);
 
-// === STADIUM / BACKGROUND ===
-// Simple arena columns
+// === STADIUM ===
 const colMat = new THREE.MeshStandardMaterial({ color: 0x2a2a4a, roughness: 0.8, metalness: 0.1 });
 for (let angle = 0; angle < 8; angle++) {
   const rad = (angle / 8) * Math.PI * 2;
@@ -170,15 +225,12 @@ for (let angle = 0; angle < 8; angle++) {
   col.position.set(Math.sin(rad) * r, 2, Math.cos(rad) * r);
   col.castShadow = true;
   scene.add(col);
-  
-  // Light glow at top
   const glowMat = new THREE.MeshStandardMaterial({ color: 0x4fc3f7, emissive: 0x4fc3f7, emissiveIntensity: 0.3, transparent: true, opacity: 0.3 });
   const glow = new THREE.Mesh(new THREE.SphereGeometry(0.2, 8, 8), glowMat);
   glow.position.set(Math.sin(rad) * r, 4.2, Math.cos(rad) * r);
   scene.add(glow);
 }
 
-// Ground plane (arena floor)
 const groundMat = new THREE.MeshStandardMaterial({ color: 0x1a1a2e, roughness: 1 });
 const ground = new THREE.Mesh(new THREE.PlaneGeometry(40, 40), groundMat);
 ground.rotation.x = -Math.PI / 2;
@@ -186,32 +238,68 @@ ground.position.y = -0.35;
 ground.receiveShadow = true;
 scene.add(ground);
 
+// === CHAIN COINS (collectible power-ups) ===
+const coins = [];
+function spawnCoin() {
+  // Remove existing coin
+  coins.forEach(c => scene.remove(c));
+  coins.length = 0;
+  
+  if (state.powerShotCharges.length >= 3) return; // Max 3 charges
+  
+  const chain = CHAINS[Math.floor(Math.random() * CHAINS.length)];
+  const coinMat = new THREE.MeshStandardMaterial({
+    color: chain.color,
+    emissive: chain.emissive,
+    emissiveIntensity: 0.5,
+    metalness: 0.8,
+    roughness: 0.2
+  });
+  
+  const coin = new THREE.Mesh(new THREE.CylinderGeometry(0.3, 0.3, 0.08, 16), coinMat);
+  coin.position.set(
+    (Math.random() - 0.5) * 8,
+    0.3,
+    (Math.random() - 0.5) * 10
+  );
+  
+  // Inner glow ring
+  const innerMat = new THREE.MeshBasicMaterial({ color: chain.emissive, transparent: true, opacity: 0.3 });
+  const inner = new THREE.Mesh(new THREE.RingGeometry(0.08, 0.15, 16), innerMat);
+  inner.rotation.x = -Math.PI / 2;
+  inner.position.y = 0.05;
+  coin.add(inner);
+  
+  // Symbol text (simple box approximation)
+  const symMat = new THREE.MeshBasicMaterial({ color: 0xffffff });
+  
+  coin.userData = { chain, collected: false, bobOffset: Math.random() * Math.PI * 2 };
+  scene.add(coin);
+  coins.push(coin);
+}
+
 // === PLAYERS ===
 function createPlayer(x, z, color, isAI = false) {
   const group = new THREE.Group();
   
-  // Body
   const bodyMat = new THREE.MeshStandardMaterial({ color, roughness: 0.6, metalness: 0.1 });
   const body = new THREE.Mesh(new THREE.CylinderGeometry(0.5, 0.6, 1.2, 8), bodyMat);
   body.position.y = 0.6;
   body.castShadow = true;
   group.add(body);
   
-  // Head
   const headMat = new THREE.MeshStandardMaterial({ color: 0xffddbb, roughness: 0.5 });
   const head = new THREE.Mesh(new THREE.SphereGeometry(0.35, 8, 8), headMat);
   head.position.y = 1.3;
   head.castShadow = true;
   group.add(head);
   
-  // Visor (Mario hat style)
   const visorMat = new THREE.MeshStandardMaterial({ color: isAI ? 0xff4400 : 0x0044ff, roughness: 0.7 });
   const visor = new THREE.Mesh(new THREE.CylinderGeometry(0.4, 0.5, 0.15, 8), visorMat);
   visor.position.set(0, 1.5, 0.1);
   visor.rotation.x = 0.2;
   group.add(visor);
   
-  // Racket arm
   const armMat = new THREE.MeshStandardMaterial({ color: 0xffddbb, roughness: 0.5 });
   const arm = new THREE.Mesh(new THREE.CylinderGeometry(0.06, 0.08, 0.5, 6), armMat);
   arm.position.set(0.4, 0.9, 0);
@@ -219,7 +307,6 @@ function createPlayer(x, z, color, isAI = false) {
   arm.rotation.x = -0.3;
   group.add(arm);
   
-  // Racket
   const racketMat = new THREE.MeshStandardMaterial({ color: 0xdddddd, roughness: 0.3, metalness: 0.2 });
   const racket = new THREE.Mesh(new THREE.CylinderGeometry(0.02, 0.02, 0.4, 4), new THREE.MeshStandardMaterial({ color: 0x888888 }));
   racket.position.set(0.6, 1.0, 0);
@@ -231,15 +318,7 @@ function createPlayer(x, z, color, isAI = false) {
   group.add(racketHead);
   
   group.position.set(x, 0, z);
-  group.userData = {
-    racketGroup: group,
-    swingAngle: 0,
-    isSwinging: false,
-    swingTimer: 0,
-    moveSpeed: isAI ? 0.12 : 0,
-    isAI
-  };
-  
+  group.userData = { isSwinging: false, swingTimer: 0, moveSpeed: isAI ? 0.12 : 0, isAI };
   return group;
 }
 
@@ -250,20 +329,12 @@ const ai = createPlayer(0, 5, 0xff5722, true);
 scene.add(ai);
 
 // === BALL ===
-const ballMat = new THREE.MeshStandardMaterial({ 
-  color: 0xffffff, 
-  roughness: 0.2, 
-  metalness: 0.1,
-  emissive: 0xffffaa,
-  emissiveIntensity: 0.1
-});
+const ballMat = new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.2, metalness: 0.1, emissive: 0xffffaa, emissiveIntensity: 0.1 });
 const ball = new THREE.Mesh(new THREE.SphereGeometry(0.15, 12, 12), ballMat);
 ball.castShadow = true;
 scene.add(ball);
 
 // Ball trail
-const trailPositions = [];
-const trailMat = new THREE.MeshBasicMaterial({ color: 0xffffaa, transparent: true, opacity: 0.3 });
 const trailGroup = new THREE.Group();
 scene.add(trailGroup);
 
@@ -275,20 +346,141 @@ const state = {
   p1Score: 0,
   p2Score: 0,
   serving: true,
-  server: 0, // 0 = player, 1 = AI
+  server: 0,
   rallyCount: 0,
   gameOver: false,
+  paused: false,
   serveTimer: 0,
-  aiHitTimer: 0,
   aiSwingCooldown: 0,
-  powerUp: null,
-  powerUpTimer: 0
+  powerShotCharges: [], // [{ chain, used: false }]
+  powerShotActive: null,
+  coinSpawnTimer: 5,
 };
 
-// Player input
 const keys = {};
-document.addEventListener('keydown', e => { keys[e.key.toLowerCase()] = true; });
+document.addEventListener('keydown', e => {
+  keys[e.key.toLowerCase()] = true;
+  if (e.key === 'Escape' || e.key === 'p' || e.key === 'P') togglePause();
+});
 document.addEventListener('keyup', e => { keys[e.key.toLowerCase()] = false; });
+
+// === MOBILE TOUCH CONTROLS ===
+// Left half = virtual joystick (move). Right half = tap to swing/serve.
+// A dedicated SWING button (bottom-right) for reliable serve/swing.
+const touch = { joyActive: false, joyId: null, joyOrigin: {x:0,y:0}, joyVec: {x:0,y:0}, swingHeld: false };
+const isTouchDevice = ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
+
+function setupTouchControls() {
+  const el = renderer.domElement;
+  el.style.touchAction = 'none';
+
+  el.addEventListener('touchstart', (e) => {
+    if (state.paused || state.gameOver) return;
+    for (const t of e.changedTouches) {
+      const x = t.clientX, y = t.clientY;
+      const w = window.innerWidth, h = window.innerHeight;
+      // Swing button zone: bottom-right quadrant
+      if (x > w * 0.6 && y > h * 0.6) {
+        touch.swingHeld = true;
+        keys[' '] = true;
+      } else if (!touch.joyActive) {
+        // Joystick zone: anywhere else (left + upper-right)
+        touch.joyActive = true;
+        touch.joyId = t.identifier;
+        touch.joyOrigin = { x, y };
+        touch.joyVec = { x: 0, y: 0 };
+      }
+    }
+    e.preventDefault();
+  }, { passive: false });
+
+  el.addEventListener('touchmove', (e) => {
+    for (const t of e.changedTouches) {
+      if (touch.joyActive && t.identifier === touch.joyId) {
+        let dx = t.clientX - touch.joyOrigin.x;
+        let dy = t.clientY - touch.joyOrigin.y;
+        const max = 50;
+        const len = Math.hypot(dx, dy);
+        if (len > max) { dx = dx / len * max; dy = dy / len * max; }
+        touch.joyVec = { x: dx / max, y: dy / max };
+      }
+    }
+    e.preventDefault();
+  }, { passive: false });
+
+  el.addEventListener('touchend', (e) => {
+    for (const t of e.changedTouches) {
+      if (touch.joyActive && t.identifier === touch.joyId) {
+        touch.joyActive = false;
+        touch.joyVec = { x: 0, y: 0 };
+      }
+    }
+    // Release swing if no remaining touches in swing zone
+    if (e.touches.length === 0) {
+      touch.swingHeld = false;
+      keys[' '] = false;
+    }
+    e.preventDefault();
+  }, { passive: false });
+
+  el.addEventListener('touchcancel', () => {
+    touch.joyActive = false;
+    touch.joyVec = { x: 0, y: 0 };
+    touch.swingHeld = false;
+    keys[' '] = false;
+  });
+}
+
+// === PAUSE ===
+function togglePause() {
+  if (state.gameOver) return;
+  state.paused = !state.paused;
+  document.getElementById('pause-overlay').classList.toggle('show', state.paused);
+  document.getElementById('pause-btn').textContent = state.paused ? '▶' : '⏸';
+}
+
+// === UI ===
+const slots = [document.getElementById('slot-0'), document.getElementById('slot-1'), document.getElementById('slot-2')];
+const collectHint = document.getElementById('collect-hint');
+const chainAnnounce = document.getElementById('chain-announce');
+const coinPopup = document.getElementById('coin-popup');
+
+function updatePowerSlots() {
+  slots.forEach((s, i) => {
+    s.classList.remove('active', 'used');
+    if (i < state.powerShotCharges.length) {
+      const c = state.powerShotCharges[i];
+      if (c.used) {
+        s.classList.add('used');
+        s.textContent = '●';
+        s.style.color = 'rgba(255,255,255,0.15)';
+      } else {
+        s.classList.add('active');
+        s.textContent = c.chain.symbol;
+        s.style.color = `#${c.chain.color.toString(16).padStart(6, '0')}`;
+        s.style.borderColor = `#${c.chain.color.toString(16).padStart(6, '0')}`;
+      }
+    } else {
+      s.textContent = ['BTC', 'ETH', 'SOL'][i];
+      s.style.color = 'rgba(255,255,255,0.3)';
+      s.style.borderColor = 'rgba(255,255,255,0.1)';
+    }
+  });
+}
+
+function announceChain(chain) {
+  const el = document.getElementById('chain-announce');
+  el.textContent = `⚡ ${chain.symbol}!`;
+  el.className = `show ${chain.id}`;
+  setTimeout(() => el.classList.remove('show'), 1500);
+}
+
+function showCoinPopup(symbol) {
+  const pop = document.getElementById('coin-popup');
+  pop.textContent = `✦${symbol}✦`;
+  pop.className = 'show';
+  setTimeout(() => pop.className = '', 800);
+}
 
 // === GAME FUNCTIONS ===
 
@@ -297,6 +489,7 @@ function resetBall(serverPlayer) {
   state.serving = true;
   state.server = serverPlayer;
   state.serveTimer = 1.5;
+  state.powerShotActive = null;
   
   if (serverPlayer === 0) {
     ball.position.set(0, 0.5, -5);
@@ -304,33 +497,91 @@ function resetBall(serverPlayer) {
     state.ballVel.set(0, 0, 0);
     document.getElementById('serve-hint').textContent = 'PRESS SPACE TO SERVE';
     document.getElementById('serve-hint').classList.add('show');
+    collectHint.classList.remove('show');
   } else {
     ball.position.set(0, 0.5, 5);
     state.ballPos.set(0, 0.5, 5);
     state.ballVel.set(0, 0, 0);
     document.getElementById('serve-hint').textContent = 'AI SERVING...';
     document.getElementById('serve-hint').classList.add('show');
-    state.aiHitTimer = 1.0;
+    setTimeout(() => serveBall(), 1000);
   }
 }
 
 function serveBall() {
-  if (state.gameOver) return;
   state.ballActive = true;
   state.serving = false;
   state.rallyCount = 0;
   document.getElementById('serve-hint').classList.remove('show');
   
-  // Serve toward opponent
   const dir = state.server === 0 ? -1 : 1;
   const spread = (Math.random() - 0.5) * 0.3;
   state.ballVel.set(spread * 3, 0.8, dir * 6);
 }
 
-function hitBall(fromPlayer, hitZ) {
+function usePowerShot(fromPlayer) {
+  // Find the first unused charge
+  const charge = state.powerShotCharges.find(c => !c.used);
+  if (!charge) return false;
+  
+  charge.used = true;
+  state.powerShotActive = charge.chain;
+  updatePowerSlots();
+  announceChain(charge.chain);
+  
+  // Voice line via popup
+  const lines = charge.chain.lines;
+  const line = lines[Math.floor(Math.random() * lines.length)];
+  showCoinPopup(line);
+  
+  return true;
+}
+
+function hitBall(fromPlayer) {
   const dir = fromPlayer === player ? -1 : 1;
   const spread = (Math.random() - 0.5) * 0.2;
-  const power = 0.7 + Math.random() * 0.3;
+  let power = 0.7 + Math.random() * 0.3;
+  
+  // Check for power shot
+  let isPowerShot = false;
+  const chargeIndex = state.powerShotCharges.findIndex(c => !c.used);
+  
+  if (chargeIndex >= 0 && fromPlayer === player && keys['q']) {
+    // Player pressed Q for power shot
+    isPowerShot = usePowerShot(player);
+  } else if (chargeIndex >= 0 && fromPlayer === player && Math.random() < 0.1) {
+    // 10% chance auto-trigger if charges available
+    isPowerShot = usePowerShot(player);
+  }
+  
+  if (isPowerShot && state.powerShotActive) {
+    const chain = state.powerShotActive;
+    const chainPower = CHAINS.indexOf(chain) + 1;
+    power *= 1.3 + chainPower * 0.2;
+    
+    // Chain-specific effects
+    if (chain.id === 'btc') {
+      // Heavy power — fast, low arc
+      state.ballVel.y = 0.1;
+    } else if (chain.id === 'eth') {
+      // Smart curve — add spin
+      state.ballVel.x += (Math.random() - 0.5) * 3;
+      state.ballVel.y = 0.5;
+    } else if (chain.id === 'sol') {
+      // Speed — fastest, AI can't react
+      power *= 1.5;
+    }
+    
+    // Visual effect on ball
+    ballMat.color.setHex(chain.color);
+    ballMat.emissive.setHex(chain.color);
+    ballMat.emissiveIntensity = 1.0;
+    setTimeout(() => {
+      ballMat.color.setHex(0xffffff);
+      ballMat.emissive.setHex(0xffffaa);
+      ballMat.emissiveIntensity = 0.1;
+    }, 800);
+  }
   
   state.ballVel.set(
     spread * 4,
@@ -343,24 +594,12 @@ function hitBall(fromPlayer, hitZ) {
   // Swing animation
   fromPlayer.userData.isSwinging = true;
   fromPlayer.userData.swingTimer = 0.3;
-  
-  // Power-up check
-  if (state.powerUp && state.powerUpTimer > 0) {
-    state.ballVel.multiplyScalar(1.3);
-    ballMat.color.setHex(0xff4400);
-    ballMat.emissive.setHex(0xff4400);
-    ballMat.emissiveIntensity = 0.5;
-    setTimeout(() => {
-      ballMat.color.setHex(0xffffff);
-      ballMat.emissive.setHex(0xffffaa);
-      ballMat.emissiveIntensity = 0.1;
-    }, 500);
-    state.powerUpTimer = 0;
-  }
 }
 
 function scorePoint(scorer) {
   if (state.gameOver) return;
+  
+  state.powerShotActive = null;
   
   if (scorer === 0) {
     state.p1Score++;
@@ -370,16 +609,9 @@ function scorePoint(scorer) {
     document.getElementById('p2-score').textContent = state.p2Score;
   }
   
-  // Check win
-  if (state.p1Score >= 6) {
-    endGame(0);
-    return;
-  } else if (state.p2Score >= 6) {
-    endGame(1);
-    return;
-  }
+  if (state.p1Score >= 6) { endGame(0); return; }
+  if (state.p2Score >= 6) { endGame(1); return; }
   
-  // Alternate serve every 2 points
   const totalPoints = state.p1Score + state.p2Score;
   const nextServer = Math.floor(totalPoints / 2) % 2;
   resetBall(nextServer);
@@ -396,11 +628,34 @@ document.getElementById('restart-btn').addEventListener('click', () => {
   state.p1Score = 0;
   state.p2Score = 0;
   state.gameOver = false;
+  state.paused = false;
+  state.powerShotCharges = [];
+  state.powerShotActive = null;
+  state.coinSpawnTimer = 3;
   document.getElementById('p1-score').textContent = '0';
   document.getElementById('p2-score').textContent = '0';
   document.getElementById('game-over').classList.remove('show');
+  document.getElementById('pause-overlay').classList.remove('show');
+  document.getElementById('pause-btn').textContent = '⏸';
+  updatePowerSlots();
   resetBall(0);
 });
+
+// Pause / resume controls
+document.getElementById('pause-btn').addEventListener('click', togglePause);
+document.getElementById('po-resume').addEventListener('click', togglePause);
+
+// Mobile swing button (pointer events for both touch + mouse)
+const swingBtn = document.getElementById('swing-btn');
+swingBtn.addEventListener('pointerdown', (e) => { e.preventDefault(); keys[' '] = true; });
+swingBtn.addEventListener('pointerup', (e) => { e.preventDefault(); keys[' '] = false; });
+swingBtn.addEventListener('pointercancel', () => { keys[' '] = false; });
+
+// Show swing button + init touch controls on touch devices
+if (isTouchDevice) {
+  swingBtn.style.display = 'flex';
+  setupTouchControls();
+}
 
 // === AI ===
 function updateAI(delta) {
@@ -409,26 +664,21 @@ function updateAI(delta) {
   const aiPos = ai.position;
   const ballPos = state.ballPos;
   
-  // Track ball on AI's side
   if (ballPos.z > 0 && state.ballActive) {
-    // Move toward ball's x position
     const dx = ballPos.x - aiPos.x;
     aiPos.x += Math.sign(dx) * Math.min(Math.abs(dx) * 2, 0.12);
     aiPos.x = Math.max(-5.5, Math.min(5.5, aiPos.x));
     
-    // Move z toward ball's landing zone
     const targetZ = Math.min(ballPos.z + 1, 7);
     const dz = targetZ - aiPos.z;
     aiPos.z += Math.sign(dz) * Math.min(Math.abs(dz), 0.08);
     
-    // Hit when ball is in range
     const dist = aiPos.distanceTo(ballPos);
     if (dist < 1.0 && ballPos.z > 1.5 && state.aiSwingCooldown <= 0) {
-      hitBall(ai, aiPos.z);
+      hitBall(ai);
       state.aiSwingCooldown = 0.5;
     }
   } else {
-    // Return to center
     aiPos.x += (0 - aiPos.x) * 0.02;
     aiPos.z += (5 - aiPos.z) * 0.02;
   }
@@ -447,25 +697,43 @@ function updatePlayer(delta) {
   if (keys['a'] || keys['arrowleft']) dx -= speed;
   if (keys['d'] || keys['arrowright']) dx += speed;
   
+  // Mobile virtual joystick (screen-space: up = -z toward net, right = +x)
+  if (touch.joyActive) {
+    dx += touch.joyVec.x * speed;
+    dz -= touch.joyVec.y * speed;
+  }
+  
   if (dx !== 0 || dz !== 0) {
     const len = Math.sqrt(dx*dx + dz*dz);
     player.position.x += dx / len * speed;
     player.position.z += dz / len * speed;
   }
   
-  // Clamp to court
   player.position.x = Math.max(-6, Math.min(6, player.position.x));
   player.position.z = Math.max(-8, Math.min(-1, player.position.z));
   
-  // Swing
+  // Swing / Serve
   if (keys[' '] && !state.gameOver) {
     if (state.serving && state.server === 0) {
       serveBall();
     } else if (state.ballActive && !player.userData.isSwinging) {
       const dist = player.position.distanceTo(ball.position);
       if (dist < 1.2 && ball.position.z < 0) {
-        hitBall(player, player.position.z);
+        hitBall(player);
       }
+    }
+  }
+  
+  // Power shot key (Q) — consumed on next hit automatically via hitBall
+  if (keys['q']) {
+    // Show hint that power shot is ready
+    if (state.powerShotCharges.some(c => !c.used)) {
+      collectHint.textContent = '⚡ Q + SPACE for power shot!';
+      collectHint.classList.add('show');
+    }
+  } else {
+    if (collectHint.textContent.includes('Q')) {
+      collectHint.classList.remove('show');
     }
   }
 }
@@ -476,47 +744,74 @@ const clock = new THREE.Clock();
 function update() {
   const delta = Math.min(clock.getDelta(), 0.05);
   
-  // Serve timer
-  if (state.serving && state.server === 1) {
-    state.aiHitTimer -= delta;
-    if (state.aiHitTimer <= 0) {
-      serveBall();
+  // Paused: freeze game logic but keep rendering (so the overlay shows)
+  if (state.paused) {
+    requestAnimationFrame(update);
+    renderer.render(scene, camera);
+    return;
+  }
+  
+  // Coin spawn timer
+  state.coinSpawnTimer -= delta;
+  if (state.coinSpawnTimer <= 0 && !state.gameOver) {
+    spawnCoin();
+    state.coinSpawnTimer = 8 + Math.random() * 6;
+    collectHint.textContent = '⚡ Hit the coin to collect a chain power!';
+    collectHint.classList.add('show');
+    setTimeout(() => collectHint.classList.remove('show'), 3000);
+  }
+  
+  // Animate coins
+  coins.forEach(coin => {
+    if (!coin.userData.collected) {
+      coin.position.y = 0.3 + Math.sin(Date.now() * 0.003 + coin.userData.bobOffset) * 0.1;
+      coin.rotation.y += delta * 2;
+      
+      // Check collision with player
+      const dist = player.position.distanceTo(coin.position);
+      if (dist < 1.2 && coins.length > 0 && state.powerShotCharges.length < 3) {
+        coin.userData.collected = true;
+        const chain = coin.userData.chain;
+        state.powerShotCharges.push({ chain, used: false });
+        updatePowerSlots();
+        announceChain(chain);
+        showCoinPopup(`+${chain.symbol}`);
+        scene.remove(coin);
+        
+        // Collect effect
+        collectHint.textContent = `✦ ${chain.name} power shot ready!`;
+        collectHint.classList.add('show');
+        setTimeout(() => collectHint.classList.remove('show'), 2000);
+      }
     }
+  });
+  
+  // Serve
+  if (state.serving && state.server === 1) {
+    // Handled in setTimeout in resetBall
   }
   
   if (state.ballActive && !state.gameOver) {
-    // Gravity
     state.ballVel.y -= 1.5 * delta;
     
-    // Update position
     state.ballPos.x += state.ballVel.x * delta;
     state.ballPos.y += state.ballVel.y * delta;
     state.ballPos.z += state.ballVel.z * delta;
     
-    // Floor bounce
     if (state.ballPos.y < 0.15) {
       state.ballPos.y = 0.15;
       state.ballVel.y *= 0.6;
       if (Math.abs(state.ballVel.y) < 0.1) state.ballVel.y = 0;
     }
     
-    // Wall bounces (side)
     if (Math.abs(state.ballPos.x) > 6.5) {
       state.ballPos.x = Math.sign(state.ballPos.x) * 6.5;
       state.ballVel.x *= -0.8;
     }
     
-    // Out of bounds (past player)
-    if (state.ballPos.z < -9) {
-      scorePoint(1); // AI scores
-      return;
-    }
-    if (state.ballPos.z > 9) {
-      scorePoint(0); // Player scores
-      return;
-    }
+    if (state.ballPos.z < -9) { scorePoint(1); cleanup(); return; }
+    if (state.ballPos.z > 9) { scorePoint(0); cleanup(); return; }
     
-    // Net collision
     if (Math.abs(state.ballPos.z) < 0.08 && state.ballPos.y < 1.3) {
       state.ballVel.z *= -0.3;
       state.ballVel.x *= 0.5;
@@ -529,24 +824,17 @@ function update() {
     trailPositions.push(state.ballPos.clone());
     if (trailPositions.length > 15) trailPositions.shift();
     
-    // Clear trail
-    while (trailGroup.children.length > 0) {
-      trailGroup.remove(trailGroup.children[0]);
-    }
+    while (trailGroup.children.length > 0) trailGroup.remove(trailGroup.children[0]);
     
-    // Rebuild trail
     for (let i = 0; i < trailPositions.length; i++) {
       const alpha = (i / trailPositions.length) * 0.4;
-      const trailMat2 = new THREE.MeshBasicMaterial({ 
-        color: 0xffffaa, transparent: true, opacity: alpha 
-      });
-      const trailBall = new THREE.Mesh(new THREE.SphereGeometry(0.04 * (i / trailPositions.length + 0.5), 4), trailMat2);
-      trailBall.position.copy(trailPositions[i]);
-      trailGroup.add(trailBall);
+      const tMat = new THREE.MeshBasicMaterial({ color: state.powerShotActive ? state.powerShotActive.color : 0xffffaa, transparent: true, opacity: alpha });
+      const tBall = new THREE.Mesh(new THREE.SphereGeometry(0.04 * (i / trailPositions.length + 0.5), 4), tMat);
+      tBall.position.copy(trailPositions[i]);
+      trailGroup.add(tBall);
     }
   }
   
-  // Update AI
   updateAI(delta);
   updatePlayer(delta);
   
@@ -554,7 +842,7 @@ function update() {
   for (let p of [player, ai]) {
     if (p.userData.isSwinging) {
       p.userData.swingTimer -= delta;
-      const arm = p.children[3]; // arm
+      const arm = p.children[3];
       if (arm) {
         arm.rotation.x = -0.3 - (p.userData.swingTimer / 0.3) * 1.5;
         arm.rotation.z = -0.5 - (p.userData.swingTimer / 0.3) * 0.5;
@@ -562,15 +850,11 @@ function update() {
       if (p.userData.swingTimer <= 0) {
         p.userData.isSwinging = false;
         const arm2 = p.children[3];
-        if (arm2) {
-          arm2.rotation.x = -0.3;
-          arm2.rotation.z = -0.5;
-        }
+        if (arm2) { arm2.rotation.x = -0.3; arm2.rotation.z = -0.5; }
       }
     }
   }
   
-  // Camera sway
   const time = Date.now() * 0.001;
   camera.position.x = 18 + Math.sin(time * 0.02) * 0.5;
   camera.lookAt(0, 0, 0);
@@ -579,21 +863,32 @@ function update() {
   requestAnimationFrame(update);
 }
 
-// === RESIZE ===
+function cleanup() {
+  // Clean up coins on point
+  coins.forEach(c => scene.remove(c));
+  coins.length = 0;
+}
+
+const trailPositions = [];
+
 window.addEventListener('resize', () => {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
   renderer.setSize(window.innerWidth, window.innerHeight);
 });
 
-// === START ===
 resetBall(0);
 update();
 
-// Dev controls for testing
-console.log('Super Arcade Tennis — GenTech Labs');
-console.log('WASD to move · SPACE to swing/serve');
-
+console.log('🏟️ Super Arcade Tennis — GenTech Labs');
+console.log('WASD move · SPACE swing/serve · Q + SPACE for chain power shots');
+console.log('Collect BTC, ETH, SOL coins for special moves!');
 </script>
+<!-- GenTech Arcade Cabinet Nav -->
+<div id="cabinet-nav" style="position:fixed;top:12px;left:12px;z-index:9999;display:flex;gap:8px;pointer-events:auto;font-family:'Segoe UI',system-ui,sans-serif;">
+  <a href="/" style="text-decoration:none;background:rgba(10,10,30,0.8);border:1px solid rgba(255,255,255,0.25);color:#fff;padding:6px 12px;border-radius:20px;font-size:12px;font-weight:600;backdrop-filter:blur(4px);">🏟️ Tennis</a>
+  <a href="/cabinet/agent-warfare/" style="text-decoration:none;background:rgba(10,10,30,0.8);border:1px solid rgba(255,255,255,0.25);color:#fff;padding:6px 12px;border-radius:20px;font-size:12px;font-weight:600;backdrop-filter:blur(4px);">🎮 Agent Warfare</a>
+  <a href="/cabinet/kings-gambit/" style="text-decoration:none;background:rgba(201,171,116,0.25);border:1px solid #c9ab74;color:#f4e3bd;padding:6px 12px;border-radius:20px;font-size:12px;font-weight:600;backdrop-filter:blur(4px);">♟️ King's Gambit</a>
+</div>
 </body>
 </html>
