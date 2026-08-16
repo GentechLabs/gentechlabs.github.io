@@ -43,7 +43,7 @@
 - **Design (opposite KAGE):** PLATINUM-WHITE spiky hair (signature) · cold glowing STEEL-BLUE eyes (vs amber) · black duster with blue inner lining + SILVER DRAGON emblem on back (vs red phoenix) · blackwork thorn tattoos w/ cold white/blue rune accents · DARK BLUE-STEEL electric guitar with silver dragon decal, held like a weapon · menacing, controlled, boss-villain presence.
 - **Role:** the shadow that drops onto the stage (Scene 8) — the villain/rival guitarist.
 - **Generator:** `gen-kage-rival-sheet.mjs` at `/root/.hermes/blockrun-mcp/`.
-- **NAME:** [pending Vanito pick]
+- **NAME:** **KIRI (霧, "mist/fog")** — LOCKED Aug 16 (Vanito pick). He literally materializes out of the black smoke on stage; the mist the shadow was born from. Cold, elusive, menacing.
 
 ## 🎬 NEXT SCENE (LOCKED — Vanito's idea, 5s, 45-50s of song)
 **Scene 7 — "The Shadows Appear"** (5s, scored to 45-50s)
