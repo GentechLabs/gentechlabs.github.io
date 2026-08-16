@@ -38,19 +38,16 @@
 - **Budget:** top up ~$1.50 before the next clip
 - **LLM:** weekly usage was 82% when paused — resume when it drops (or route to Z.AI/OpenCode Go)
 
+## 🎸 KAGE'S RIVAL — "the White-Haired Shadow" (LOCKED Aug 16, Vanito approved)
+- **Asset:** `music/vanito/kage-rival-sheet.png` — a proper VILLAIN, own design, not a recolor. Dark-mirror of KAGE.
+- **Design (opposite KAGE):** PLATINUM-WHITE spiky hair (signature) · cold glowing STEEL-BLUE eyes (vs amber) · black duster with blue inner lining + SILVER DRAGON emblem on back (vs red phoenix) · blackwork thorn tattoos w/ cold white/blue rune accents · DARK BLUE-STEEL electric guitar with silver dragon decal, held like a weapon · menacing, controlled, boss-villain presence.
+- **Role:** the shadow that drops onto the stage (Scene 8) — the villain/rival guitarist.
+- **Generator:** `gen-kage-rival-sheet.mjs` at `/root/.hermes/blockrun-mcp/`.
+- **NAME:** [pending Vanito pick]
+
 ## 🎬 NEXT SCENE (LOCKED — Vanito's idea, 5s, 45-50s of song)
 **Scene 7 — "The Shadows Appear"** (5s, scored to 45-50s)
 - **✅ DONE Aug 16** — `music/vanito/kage-cotd-scene7-shadows.mp4` (5.06s) generated + audited. Crimson light shift LANDED (cool white → deep crimson as smoke swarms), black smoke circling stage, KAGE grounded on stage. Vault ✅.
-- **0-2s:** KAGE keeps rapping while playing the guitar (continues from v7's rapping beat)
-- **2-5s:** KAGE STOPS playing, looks around SHOCKED — black smoke shadows start appearing and flowing/flying around him, circling him
-- **Shadows = BLACK SMOKE**, not developed figures — wispy, flowing, swirling
-- **KAGE STAYS ON THE STAGE** (he does NOT leave the ground) — he's still, just looking around shocked
-- **Camera:** ZOOM OUT so we see KAGE on the stage with the black smoke shadows circling AROUND THE STAGE around him — the smoke flies in circles around the stage, not right next to him, but around the whole stage area
-- He looks around at the smoke circling the stage, wondering what's about to happen — "oh my god, where did they come from" energy
-- **Chain from:** last frame of `kage-rapping.mp4` (verified clean — KAGE mid-performance, cathedral stage, blood moon)
-- **LIGHTING (LOCKED — Vanito approved Aug 16):** as the black smoke circles the stage, stage lighting shifts cool-white → DEEP CRIMSON wash, silhouetting the black smoke against the red. Flat, steady — NO strobe. Reasoning: black smoke reads as mud on the cool stage; red makes it pop + matches KAGE's #CC0000 palette, stage goes hostile as threat appears. One atmospheric line in the prompt, let the generator handle beam angles.
-- **⚠️ OPEN REVIEW:** final-frame vision read = KAGE calm/focused, NOT visibly shocked. May need regenerate with shock pushed harder if Vanito wants more alarm.
-- **Generator:** `gen-stage-shadows.mjs` (READY at `/root/.hermes/blockrun-mcp/` — lighting line baked into ACTION block)
 
 ## The Task
 Produce a **stage music video** of KAGE performing "Church of the Dead" live on stage.
