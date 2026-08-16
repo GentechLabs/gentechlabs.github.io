@@ -1,7 +1,19 @@
 # KAGE Stage Music Video — Church of the Dead (NEXT WEEK)
 
-**Status:** IN PROGRESS · Intro clip DONE ✅
+**Status:** IN PROGRESS · **PAUSED Aug 16 — weekly LLM usage at 82%, resume after reset** · 45s built (v7)
 **Owner:** Vanito + Gentech
+
+## ✅ CURRENT STATE — 45s STAGE VIDEO (v7, the rapping beat, APPROVED)
+- **`music/vanito/kage-cotd-stage-v7.mp4`** (45s) — the current best cut, scored contiguously with the stage edition song (0-45s). Vault + VPS ✅.
+- VPS: `https://vanito.gentechlabs.net/music/vanito/kage-cotd-stage-v7.mp4` (200 verified)
+- **Sequence (45s, one continuous stage-edition track):**
+  1. **0-20s** — stitched opening (`kage-cotd-opening.mp4`): cathedral establishing + KAGE's first power chord
+  2. **20-25s** — brief flashback: KAGE fighting shadow creatures (reused `kage-church-sb6.mp4`, zero cost)
+  3. **25-30s** — back to guitar: head thrown back, guitar on fire (`kage-stage-chorus-shred.mp4`)
+  4. **30-35s** — camera orbits the stage (`kage-camera-orbit.mp4`)
+  5. **35-40s** — breakdown solo (`kage-breakdown-solo.mp4`)
+  6. **40-45s** — **KAGE RAPS while playing guitar** (`kage-rapping.mp4`) — NO microphone, mouth moves like rapping (NOT screaming), hands only on guitar. This was the fix Vanito requested (the earlier singing clip had a mic + screaming mouth — rejected).
+- **Budget:** ~$0.50 USDC left on Base (needs ~$1.50 top-up for next clip)
 
 ## ✅ DONE — CINEMATIC OPENING + CATHEDRAL STAGE (saved, don't forget)
 - `music/vanito/kage-cotd-opening.mp4` (20s) — CHAINED + SCORED opening sequence: (1) cinematic establishing shot of cathedral + blood moon with "GEN TECH PRODUCTION" + "VANITO FILM" dispersing (0-10s), (2) KAGE shredding the electric guitar at the cathedral stage (10-20s). Scored contiguously with the stage edition (0-20s). 1280p, 14M. Vault + repo + VPS ✅.
@@ -18,6 +30,13 @@
 - VPS: `https://vanito.gentechlabs.net/music/vanito/kage-stage-intro.mp4`
 - Generators: `gen-stage-intro-keyframe.mjs` + `gen-stage-intro-clip.mjs` in `/root/.hermes/blockrun-mcp/`
 - NOT YET scored to the stage edition song — next step is syncing the chord strike to the song's opening.
+
+## NEXT BEATS (resume after weekly reset)
+- **Guitar rev** — KAGE revving the guitar like a throttle
+- **Finale** — the big ending moment
+- Keep the show going — Vanito wants it to keep building, get fancy, KAGE rapping/singing to the music
+- **Budget:** top up ~$1.50 before the next clip
+- **LLM:** weekly usage was 82% when paused — resume when it drops (or route to Z.AI/OpenCode Go)
 
 ## The Task
 Produce a **stage music video** of KAGE performing "Church of the Dead" live on stage.
