@@ -47,8 +47,9 @@
 - **Camera:** ZOOM OUT so we see KAGE on the stage with the black smoke shadows circling AROUND THE STAGE around him — the smoke flies in circles around the stage, not right next to him, but around the whole stage area
 - He looks around at the smoke circling the stage, wondering what's about to happen — "oh my god, where did they come from" energy
 - **Chain from:** last frame of `kage-rapping.mp4` (verified clean — KAGE mid-performance, cathedral stage, blood moon)
+- **LIGHTING (LOCKED — Vanito approved Aug 16):** as the black smoke circles the stage, stage lighting shifts cool-white → DEEP CRIMSON wash, silhouetting the black smoke against the red. Flat, steady — NO strobe. Reasoning: black smoke reads as mud on the cool stage; red makes it pop + matches KAGE's #CC0000 palette, stage goes hostile as threat appears. One atmospheric line in the prompt, let the generator handle beam angles.
 - **Budget needed:** ~$1.50 top-up (wallet at $0.49)
-- **Generator:** `gen-stage-shadows.mjs` (to create on resume)
+- **Generator:** `gen-stage-shadows.mjs` (READY at `/root/.hermes/blockrun-mcp/` — lighting line already baked into ACTION block)
 
 ## The Task
 Produce a **stage music video** of KAGE performing "Church of the Dead" live on stage.
