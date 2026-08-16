@@ -16,7 +16,7 @@ You don't run Claude Cowork/ChatGPT Work as enterprise SaaS — you run **GenTec
 - One runs scheduled jobs (revenue monitor, opportunity scanner, cron watchdogs)
 - They share context through a synced Obsidian vault + messaging gateways
 - You debug reasoning gaps, tool-use failures, connector auth — daily
-- **Hackathon wins prove shipping velocity** (Solana, Avalanche, ETHGlobal, etc.)
+- **Hackathon experience + submissions** prove shipping velocity (Solana, Avalanche, ETHGlobal, CockroachDB, etc.) — active across multiple builds, wins still to come
 
 ---
 
@@ -80,7 +80,7 @@ You don't run Claude Cowork/ChatGPT Work as enterprise SaaS — you run **GenTec
 ## ✅ YOUR WINNING MOVES
 - ✅ Lead with the GenTech fleet as proof of agent orchestration
 - ✅ Use their vocabulary (connectors, workflows, MCP) while grounding in your real work
-- ✅ Mention hackathons as proof of velocity
+- ✅ Mention hackathon **experience + shipped builds** as proof of velocity (NOT wins — be honest: submissions, not victories yet)
 - ✅ Be honest where your experience differs — it reads as credibility
 
 ---

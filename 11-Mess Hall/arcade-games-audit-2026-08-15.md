@@ -2,16 +2,17 @@
 
 > Compatibility audit of all GenTech Arcade games: mobile/desktop, performance,
 > menus, pause, completeness, glitches. Source: live VPS files + local repos.
+> **UPDATED 2026-08-16: P0 fixes shipped (3D lobby deployed + wired, Tennis mobile+pause, VKT pause).**
 
 ## Summary Table
 
 | Game | Mobile | Desktop | Menu | Pause | Perf | Completeness | Verdict |
 |------|--------|---------|------|-------|------|--------------|---------|
-| **Super Arcade Tennis** (root) | ❌ NONE | ✅ WASD+Space | ❌ none | ❌ none | ✅ OK | 🟡 Playable, needs work | **Fix: mobile + menu + pause** |
+| **Super Arcade Tennis** (root) | ✅ Touch+SWING (Aug 16) | ✅ WASD+Space | ❌ none | ✅ Esc/P (Aug 16) | ✅ OK | 🟡 Playable, needs menu | **Fix: menu (remaining)** |
 | **Agent Warfare** | ✅ Touch+Gamepad | ✅ Full | ✅ Full | ✅ Escape | ✅ quality tiers | ✅ Most complete | **Ship-ready** |
 | **King's Gambit** | ⚠️ React, needs check | ✅ | ✅ | ⚠️ | ✅ | ✅ | **Verify mobile** |
-| **Visual Kei Tap** | ✅ Touch+Mouse | ✅ Keys | ✅ Start/Results | ❌ no pause | ✅ | ✅ | **Add pause** |
-| **3D Lobby** | ⚠️ | ✅ | N/A | N/A | ✅ | ❌ NOT DEPLOYED + placeholder games | **Deploy + wire real games** |
+| **Visual Kei Tap** | ✅ Touch+Mouse | ✅ Keys | ✅ Start/Results | ✅ Esc/P (Aug 16) | ✅ | ✅ | **Ship-ready** |
+| **3D Lobby** | ⚠️ | ✅ | N/A | N/A | ✅ | ✅ DEPLOYED + real games (Aug 16) | **Live at /lobby/** |
 
 ---
 

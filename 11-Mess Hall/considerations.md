@@ -58,7 +58,30 @@ last-updated: 2026-08-15 20:12 ET
 
 - [ ] **Bug Bounties Comeback?** — We stopped because AI agents couldn't produce solid PoCs ("proof of LOC"). open·kritt (Kritt-ai, Blockian team) now handles that: scan agents run as root in disposable containers (compile/run tests/build exploits) and post-scripts emit PoCs via `_reserved_poc` + reports. **Jordan: test on our own repos first (build-queue #34), then decide if we point it at Immunefi targets for bounty revenue.**
 
-## 🎓 Learning Track — AWS + Cyfrin Updraft (Aug 3)
+## 🧭 CURRENT STRATEGY — All Groups (Aug 15/16, 2026)
+
+> **Where we're coming from.** Jordan's confirmed operating strategy. Every group should align to this.
+
+### Core: GenTech is the edge, traditional signals unlock the door
+- **GenTech** (agent fleet, x402 rail, hackathon builds) = our differentiator — proves shipping velocity, AI orchestration, real deployed infrastructure.
+- **Traditional credentials** (AWS SAA-C03 + Cyfrin Updraft/Solidity) = the *gatekeeper signals* the traditional job market still requires. We use GenTech to speed up learning, but the certs make us "look right" to employers stuck on the old way.
+- **Framing for interviews/apps:** honest on wins vs submissions — we have **hackathon experience + shipped builds, NO wins yet.** Present velocity through completed builds, working code, live deployments. Never overclaim.
+
+### Dual-track career plan (Jordan decision Aug 15)
+- **PRIMARY:** Land a **remote role** we qualify for (AI agent power-user, Learning Trainer L3, agent/cloud roles), working in the background.
+- **Amazon:** stay normal **full-time (blue badge)**, NOT PA promotion (not a people-person; PA = golden handcuffs + memorizing coworkers). Amazon = income + blue badge + **AWS cert benefit** while searching. Easy transfer, peace of mind.
+- **AWS cert is the one asset serving BOTH tracks** — keep as north star.
+
+### DoorDash as flexible side income
+- NOT a new W-2 job (no schedule lock-in, won't sink vacation). Fills **open days** when no hackathon/build is in flight. Funds: trips (Cebu 2wk + Sosua), agentic treasury, debt catch-up.
+
+### ⏫ PRIORITY SHIFT (NEW — Jordan Aug 15)
+**After the current hackathons wrap, we SLOW DOWN on hackathons and SPEED UP on school (AWS cert → Cyfrin Updraft).** School becomes the new primary priority. We'll still participate in hackathons, but at a slower cadence.
+
+### X/developer account dual-posting (NEW)
+- Goal: add our ex-developer account so we can **post autonomously on BOTH accounts** (main + developer).
+
+## 🎓 Learning Track — AWS + Cyfrin Updraft (Aug 3, updated Aug 15)
 
 Jordan's commitment (more free time this week due to reduced work hours). Work BOTH in parallel alongside job apps + hackathons. **Check in Sunday (Aug 9) on progress for both.**
 
@@ -66,6 +89,13 @@ Jordan's commitment (more free time this week due to reduced work hours). Work B
 - [ ] **Cyfrin Updraft — Solidity/security-audit track** (Patrick Collins). Deep multi-week curriculum. Highest differentiation value — unlocks paid smart-contract audits ($1K-5K/audit) via the x402 gateway. Complements our `solidity-security`, `audit-fix-verify`, `solana-anchor-development` skills.
 
 **Sequencing note:** Finish active hackathons first (Arc Aug 9, DataHub Aug 10, Keeperhub Aug 13, CockroachDB Aug 18) → AWS cert → Cyfrin as the differentiator. Both now on the website roadmap (gentechlabs.net → Phase 5 — Credential Depth).
+
+### 🌀 AGENT TWIST — Standing Learning Principle (Jordan, Aug 15/16)
+**"Always attach an agent twist."** Whenever learning anything (AWS, Cyfrin/Solidity, OpenClaw-era agent tooling), always ask:
+- How can this help GenTech?
+- How could an agent use/automate this?
+- How does this fit our agent fleet / x402 rail / agent economy?
+Cyfrin/curriculum content is often dated (pre-agent-era); we always modernize it through the agent lens. This keeps learning directly feeding the build, not just checking boxes. **Apply to ALL future learning (AWS cert, Cyfrin, anything).**
 
 ## 🎮 Gaming Lane — Gears of War E-Day (Aug 3)
 

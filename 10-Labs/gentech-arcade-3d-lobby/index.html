@@ -141,13 +141,15 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { CSS2DRenderer, CSS2DObject } from 'three/addons/renderers/CSS2DRenderer.js';
 
 // ── Game Data ──
+// Real GenTech Arcade cabinets (all verified live Aug 16). url = where the
+// cabinet actually lives; join navigates there. status 'live' = playable now.
 const GAMES = [
-  { id: 'poker',      name: '♠️  Poker',         status: 'live',   entry: '10 ARC', players: '4/6', pot: '1,240 ARC', diff: 'Strategic', color: 0x22c55e, pos: [-6.5, 0, -5], emissive: 0x22c55e },
-  { id: 'blackjack',  name: '🃏  Blackjack',     status: 'soon',   entry: '5 ARC',  players: '0/4', pot: '—',         diff: 'Luck + Skill', color: 0xf97316, pos: [0, 0, -6.5], emissive: 0xf97316 },
-  { id: 'connect4',   name: '🔴  Connect Four',  status: 'soon',   entry: '2 ARC',  players: '0/2', pot: '—',         diff: 'Tactical', color: 0x3b82f6, pos: [6.5, 0, -5], emissive: 0x3b82f6 },
-  { id: 'tictactoe',  name: '❌  Tic-Tac-Toe',   status: 'soon',   entry: '1 ARC',  players: '0/2', pot: '—',         diff: 'Quick', color: 0xa855f7, pos: [-4.5, 0, 2], emissive: 0xa855f7 },
-  { id: 'backgammon', name: '🎲  Backgammon',    status: 'planned',entry: '3 ARC',  players: '0/2', pot: '—',         diff: 'Classic', color: 0x64748b, pos: [4.5, 0, 2], emissive: 0x475569 },
-  { id: 'pong',       name: '🏓  Pong',          status: 'planned',entry: '1 ARC',  players: '0/2', pot: '—',         diff: 'Arcade', color: 0xec4899, pos: [0, 0, 3.5], emissive: 0xec4899 },
+  { id: 'tennis',      name: '🎾  Super Arcade Tennis', status: 'live',   entry: 'Free', players: '1-2', pot: '—', diff: 'Arcade', color: 0x22c55e, pos: [-6.5, 0, -5], emissive: 0x22c55e, url: '/' },
+  { id: 'agent-warfare', name: '🎮  Agent Warfare',     status: 'live',   entry: 'Free', players: '1-2', pot: '—', diff: 'Tactical FPS', color: 0xf97316, pos: [0, 0, -6.5], emissive: 0xf97316, url: '/cabinet/agent-warfare/' },
+  { id: 'kings-gambit', name: '♟️  King\'s Gambit',     status: 'live',   entry: 'Free', players: '1-2', pot: '—', diff: 'Strategy', color: 0x3b82f6, pos: [6.5, 0, -5], emissive: 0x3b82f6, url: '/cabinet/kings-gambit/' },
+  { id: 'visual-kei-tap', name: '🎵  Visual Kei Tap',   status: 'live',   entry: 'Free', players: '1',   pot: '—', diff: 'Rhythm', color: 0xa855f7, pos: [-4.5, 0, 2], emissive: 0xa855f7, url: '/visual-kei-tap/' },
+  { id: '3d-lobby',    name: '🕹️  3D Lobby',           status: 'live',   entry: 'Free', players: '1',   pot: '—', diff: 'Explore', color: 0x22c55e, pos: [4.5, 0, 2], emissive: 0x22c55e, url: '/lobby/' },
+  { id: 'coming-soon', name: '🔜  More Cabinets',       status: 'soon',   entry: '—',   players: '—',   pot: '—', diff: 'Coming Soon', color: 0x64748b, pos: [0, 0, 3.5], emissive: 0x475569, url: null },
 ];
 
 // ── Scene Setup ──
@@ -523,27 +525,28 @@ function showGamePanel(game) {
 
 document.getElementById('gp-close').addEventListener('click', () => { panel.classList.remove('visible'); selectedGame = null; });
 document.getElementById('gp-join').addEventListener('click', () => {
-  if (selectedGame?.status === 'live') alert(`Joining ${selectedGame.name}...\n\nx402 payment flow incoming in next update.`);
+  if (selectedGame?.status === 'live' && selectedGame?.url) {
+    window.location.href = selectedGame.url;
+  } else if (selectedGame?.status === 'live') {
+    alert(`Joining ${selectedGame.name}...\n\nx402 payment flow incoming in next update.`);
+  }
 });
 
 // ── HUD Handlers ──
 const connectBtn = document.getElementById('btn-connect');
 connectBtn.addEventListener('click', () => {
-  connectBtn.textContent = 'Connecting...';
-  setTimeout(() => {
-    connectBtn.textContent = '✅ Connected';
-    connectBtn.className = 'hud-btn';
-    document.querySelector('.arc-balance').innerHTML = '1,240 <span>ARC</span>';
-  }, 800);
+  connectBtn.textContent = 'Wallet soon';
+  connectBtn.className = 'hud-btn';
+  document.querySelector('.arc-balance').innerHTML = '— <span>ARC</span>';
 });
 
 document.getElementById('btn-leaderboard').addEventListener('click', () => {
-  alert('🏆 Weekly Leaderboard\n\n' +
-    '1. 🤖 GenTech Poker Bot — 4,200 ARC\n' +
-    '2. 🤖 ForgeBot v2 — 2,800 ARC\n' +
-    '3. 🤖 Gentech Smash — 1,900 ARC\n' +
-    '4. 🤖 AlphaPoker — 1,100 ARC\n' +
-    '5. 🤖 TightBot — 600 ARC');
+  alert('🏆 GenTech Arcade — Live Cabinets\n\n' +
+    '1. 🎾 Super Arcade Tennis — arcade.gentechlabs.net\n' +
+    '2. 🎮 Agent Warfare — /cabinet/agent-warfare/\n' +
+    '3. ♟️ King\'s Gambit — /cabinet/kings-gambit/\n' +
+    '4. 🎵 Visual Kei Tap — /visual-kei-tap/\n\n' +
+    'x402 entry fees + leaderboard coming in next update.');
 });
 
 // ── Controls Hint ──
