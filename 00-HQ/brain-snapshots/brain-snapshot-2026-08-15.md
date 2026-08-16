@@ -74,6 +74,7 @@ generated: 2026-08-15 20:10 ET (EOD run — overwrote 00:09 overnight snapshot)
 ## 🎓 Learning Track — AWS + Cyfrin Updraft
 
 - AWS SAA-C03 + Cyfrin Updraft (Solidity/security-audit). Sequencing: finish active hackathons → AWS cert → Cyfrin.
+- **⏫ PRIORITY SHIFT (Aug 15):** after current hackathons wrap, SLOW DOWN hackathons + SPEED UP school. School = new primary priority. Certs = gatekeeper signals for the traditional job market; GenTech = our edge. **Strategy doc: `11-Mess Hall/considerations.md` → "CURRENT STRATEGY" section.**
 
 ## 🎮 Gaming Lane — Gears of War E-Day
 
