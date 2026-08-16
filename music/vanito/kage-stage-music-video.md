@@ -40,6 +40,7 @@
 
 ## 🎬 NEXT SCENE (LOCKED — Vanito's idea, 5s, 45-50s of song)
 **Scene 7 — "The Shadows Appear"** (5s, scored to 45-50s)
+- **✅ DONE Aug 16** — `music/vanito/kage-cotd-scene7-shadows.mp4` (5.06s) generated + audited. Crimson light shift LANDED (cool white → deep crimson as smoke swarms), black smoke circling stage, KAGE grounded on stage. Vault ✅.
 - **0-2s:** KAGE keeps rapping while playing the guitar (continues from v7's rapping beat)
 - **2-5s:** KAGE STOPS playing, looks around SHOCKED — black smoke shadows start appearing and flowing/flying around him, circling him
 - **Shadows = BLACK SMOKE**, not developed figures — wispy, flowing, swirling
@@ -48,8 +49,8 @@
 - He looks around at the smoke circling the stage, wondering what's about to happen — "oh my god, where did they come from" energy
 - **Chain from:** last frame of `kage-rapping.mp4` (verified clean — KAGE mid-performance, cathedral stage, blood moon)
 - **LIGHTING (LOCKED — Vanito approved Aug 16):** as the black smoke circles the stage, stage lighting shifts cool-white → DEEP CRIMSON wash, silhouetting the black smoke against the red. Flat, steady — NO strobe. Reasoning: black smoke reads as mud on the cool stage; red makes it pop + matches KAGE's #CC0000 palette, stage goes hostile as threat appears. One atmospheric line in the prompt, let the generator handle beam angles.
-- **Budget needed:** ~$1.50 top-up (wallet at $0.49)
-- **Generator:** `gen-stage-shadows.mjs` (READY at `/root/.hermes/blockrun-mcp/` — lighting line already baked into ACTION block)
+- **⚠️ OPEN REVIEW:** final-frame vision read = KAGE calm/focused, NOT visibly shocked. May need regenerate with shock pushed harder if Vanito wants more alarm.
+- **Generator:** `gen-stage-shadows.mjs` (READY at `/root/.hermes/blockrun-mcp/` — lighting line baked into ACTION block)
 
 ## The Task
 Produce a **stage music video** of KAGE performing "Church of the Dead" live on stage.
