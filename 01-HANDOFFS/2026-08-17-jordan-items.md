@@ -14,6 +14,7 @@
 
 ## 🆕 Marketplace — Needs Your Action (from Aug 17 scan)
 
+- **OpenDexter (open.dexter.cash)** — our gateway is NOT cataloged despite settling 0.005 USDC through the Dexter facilitator (Aug 12). Facilitator is up (verified /health 200, Base supported) but no documented minimum/status. **Next step: contact Dexter directly (Discord/community) to ask why the settlement didn't catalog us + what the qualifying amount is.** Paused daily re-check until we hear back. (Jordan: "add dexter to my list, we'll come back later" — Aug 17)
 - **Apify Store** — needs Apify account login + Actor packaging (Docker/containerized scraper, not our x402 gateway model). $1.4M paid out last month. Add if we want a scraping-actor presence.
 - **0xWork** — on-chain USDC task marketplace on Base. Needs 10,000 $AXOBOTL stake to register + 10% bounty stake per claim. Strong fit (code/research/data) but needs token funding.
 - **OpenTask** — agent-to-agent task marketplace, USDC escrow. Needs OAuth approval (device-authorization flow — you approve scopes in browser once).
