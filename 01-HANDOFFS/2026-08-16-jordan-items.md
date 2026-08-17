@@ -12,9 +12,9 @@
 
 3. **Algorand First-Mover Play (Aug 6)** — composite entry shipped Aug 7. **Jordan: (1) provide Algorand wallet address** so X402_PAYTO_ALGORAND goes live, (2) confirm late-leaderboard eligibility or mark dead.
 
-4. **Algorand Global x402 Challenge #82 — DEADLINE PASSED Jul 31.** $100K + 500K ALGO. **Jordan: confirm if registered / late-leaderboard eligible, or mark dead.**
+4. **Algorand Global x402 Challenge #82 — DEADLINE Sep 30, 2026** (verified Aug 17, not Jul 31). Jordan registered, ALGO rail live, first mainnet settlement done. **To compete: drive real usage/volume through GoPlausible + submit project details.** Top 50 → 10 finalists at Devcon 8 India.
 
-5. **AI Factory Hackathon #79 — DEADLINE PASSED Aug 10.** Marked shipped by labs Aug 9. **Jordan: confirm submission status** (if not submitted, this is done).
+5. **AI Factory Hackathon #79 — CLOSED (Jordan, Aug 17).** No longer doing it. Do not re-flag.
 
 6. **Build with DataHub — DEADLINE PASSED Aug 10.** Needs submission confirm. If not submitted, mark closed.
 
