@@ -1,7 +1,7 @@
 ---
-date: 2026-08-15
+date: 2026-08-17
 status: active
-last-updated: 2026-08-15 20:12 ET
+last-updated: 2026-08-17 00:06 ET
 ---
 
 # 🧠 Considerations — Open Decisions
@@ -13,12 +13,13 @@ last-updated: 2026-08-15 20:12 ET
 - [x] 🚨 **CPI Release — Wed Aug 12 8:30 AM ET (RELEASED) — ⚠️ REPOSITION BLOCKED** — Treasury CPI War-Room play was staged (regime RANGE_BOUND, RSI 24.1, expected AVAX ±4-7%) but **the Steward wallet was swept empty Aug 11 evening** (~43.72 USDC off to `0xeee3fe6c...`). No LFJ V2.2 position exists on `0x572ABd6461BED2258615E6b99c585Ab7c5d05037` (0 WAVAX, ~0.0006 USDC, 0.2979 AVAX gas). **✅ RESOLVED Aug 13 — Jordan confirmed the sweep was INTENTIONAL**: he tested whether the agentic treasury could send funds back to his Coinbase wallet, it worked (real USDC landed), and he kept the money. No unexpected move, no review needed. Two CPI one-shots (`31432dce0de9`, `e13db42767b0`) recommended paused + position heartbeat re-enabled.
 - [ ] 🚨 **Keeperhub Agents Onchain #80** — **⚠️ DEADLINE PASSED Aug 13.** JORDAN CONFIRMED GO. **✅ PROOF TRANSFER COMPLETE Aug 8** (0.01 USDC on-chain, TX 0x88fe6c9a...b1df, Base). **REMAINING was: film demo video + assemble GitHub submission (README, video, live tx link). Verify submission status — if not submitted, mark closed.**
 - [x] 🚨 **Build with Gemini XPRIZE #29** — **DROPPED Aug 15 (Jordan decision).** Was Aug 17 deadline. Zero actual Gemini/Vertex code existed (only a build brief); 2 days was "way too tight" for a $2M pool. Jordan chose to unregister and refocus on CockroachDB + Delphi. Marked closed — do not re-flag.
-- [ ] 🚨 **CockroachDB × AWS — Agentic Memory #83** — **Aug 18 (3 days).** $8.75K, persistent memory + MCP Server (Devpost cockroachdb-ai.devpost.com). **Jordan: register?** **⚠️ Approaching deadline.**
+- [ ] 🚨 **CockroachDB × AWS — Agentic Memory #83** — **Aug 18 (1 day).** $8.75K, persistent memory + MCP Server (Devpost cockroachdb-ai.devpost.com). **Agent Memory layer BUILT + verified** (shipped 2026-08-14, `10-Labs/cockroachdb-agentic-memory/`, 9/9 tests, live CockroachDB v24.3.4). **REMAINING (Jordan):** register on Devpost, record <3min demo, push public repo. **⚠️ CLOSEST ACTIONABLE DEADLINE — HIGHEST PRIORITY.**
 - [ ] ✅ **AI Factory Hackathon #79** — **DEADLINE PASSED Aug 10.** lablab.ai × NativelyAI. **MARKED SHIPPED by labs Aug 9.** Jordan: confirm submission status (if not submitted, this is done).
 - [ ] ✅ **Build with DataHub** — **DEADLINE PASSED Aug 10.** Needs submission confirm. If not submitted, mark closed.
 - [ ] ✅ **Arc Programmable Money Hackathon** — **DEADLINE PASSED Aug 9.** SHIPPED + verified (ArcAgentWallet.sol, 57/57 tests). Moved to Recently Resolved.
 - [ ] 🔴 **Superteam USA — Remote Community Membership** — Applied. **Jordan confirmed Aug 12: applied for second triage, now waiting on their decision.** (Superteam Earn agent `gentech-labs-x402` registered Jul 23; us.superteam.fun/join remote membership.) Status: PENDING second triage.
-- [ ] 🟡 **Solana Foundation USA Grant** — Applied Aug 5 (~$8.2k avg/up to $10k USDG). **Aug 12 check: site still shows application, no approval/rejection email, no status change** — likely large applicant pool. STILL PENDING. Do not reallocate treasury around unconfirmed grant. **Re-check ~Aug 19 (4 days).** Tracked: Treasury/2026-08-05-solana-foundation-usa-grant.md
+- [ ] 🟡 **Solana Foundation USA Grant** — Applied Aug 5 (~$8.2k avg/up to $10k USDG). **Aug 12 check: site still shows application, no approval/rejection email, no status change** — likely large applicant pool. STILL PENDING. Do not reallocate treasury around unconfirmed grant. **Re-check ~Aug 19 (2 days).** Tracked: Treasury/2026-08-05-solana-foundation-usa-grant.md
+- [ ] 🚨 **Mastercard Innovation Challenge** — **Jordan to register by Aug 20; submit Aug 31.** Credential > prize framing (W33 review, Aug 16).
 - [ ] 🚨 **Algorand First-Mover Play (Aug 6)** — **✅ COMPOSITE ENTRY SHIPPED (Aug 7).** **Jordan: (1) provide Algorand wallet address so X402_PAYTO_ALGORAND goes live, (2) confirm late-leaderboard eligibility or mark dead.**
 - [ ] 🚨 **Algorand Global x402 Challenge #82** — **⚠️ DEADLINE PASSED Jul 31.** $100K + 500K ALGO. **Jordan: confirm if registered / late-leaderboard eligible, or mark dead.**
 
@@ -99,7 +100,7 @@ Cyfrin/curriculum content is often dated (pre-agent-era); we always modernize it
 
 ## 🎮 Gaming Lane — Gears of War E-Day (Aug 3)
 
-Jordan's decision on the Gears E:D beta: **NOT pre-ordering for beta access.** Early Access (Aug 6) is Horde-only — not interested. **Open Beta (Aug 13–17, Versus 4v4 + Horde Siege, everyone) — ⚠️ CURRENTLY LIVE (Aug 15).** This is a marketing-noise-vs-value case: pre-order perk was weak (paying for 3 days of a mode he doesn't play).
+Jordan's decision on the Gears E:D beta: **NOT pre-ordering for beta access.** Early Access (Aug 6) is Horde-only — not interested. **Open Beta (Aug 13–17, Versus 4v4 + Horde Siege, everyone) — ⚠️ ENDS TODAY (Aug 17).** This is a marketing-noise-vs-value case: pre-order perk was weak (paying for 3 days of a mode he doesn't play).
 
 - [ ] **Action:** Set up Gears E:D **price-watch** (standard edition deal) + **release/open-beta tracker** in shop/hub — catch the discount and the Aug 13–17 window.
 - [ ] **Opportunity:** Gaming is the next service lane — package price-watch w/ auto-buy (x402), pre-order/access advisor, release radar (game-intelligence skill exists), meta/loadout intel, and gaming-commerce middleware (agent buying/selling keys+DLC+cosmetics through our x402 rail as fee-earning middleman).
@@ -149,8 +150,61 @@ Jordan's decision on the Gears E:D beta: **NOT pre-ordering for beta access.** E
 
 **⚠️ Agent-search-api still orphaned:** no systemd service; nginx routes `search.gentechlabs.net` → 8091 but that port runs the x402 agent_discovery backend. The standalone search API (real /search endpoints, EXA/GROK/SURF keys) isn't running. **Needs a port/service decision — flagged for Jordan.**
 
+## 🆕 Fleet Reorganization (Aug 16)
+
+- **Gizmo** (Labs) — SOUL updated to proper Labs build specialist (was a gentech clone). Owns build queue execution, verification, honest blockers. Name kept (Jordan's choice).
+- **Pixel** (Entertainment) — NEW worker live (`@Enterthebrainsbot`), owns Entertainment + 5 cron jobs (GenTech Shop sweeps, game intel, POE2, social engine). Gentech's copies paused — no double-fire.
+- **yoyo, desmond, dmob** — permanently deleted (orphaned identities).
+- **Gentech** — now consolidates to HQ for strategy; workers handle their groups.
+- **The Steward** (gentech-treasury) — SOUL already current, no changes. Fleet model others catch up to.
+
+## 🆕 Harness → Shop-Intel Model (Revenue Model, Aug 16)
+
+**Jordan (Entertainment group, Aug 16):** "shift it over to the labs group. We really got to work on this thing. This is also another revenue model for us."
+
+- **Core insight:** The harness already routes models to tasks (Evolution → DeepSeek V4 Flash, Critic → Kimi K2.7, Verifier → DeepSeek). That's the exact machinery a fine-tune needs. The harness is the **factory**; the shop-intel model is the **product**.
+- **Physical Media Scarcity Tracker — SHIPPED + verified live (Aug 16)** in `10-Labs/deal-tracker-api/api/physical_media.py`. 5 endpoints live, 15/15 tests. Curated catalog: 4K UHD, steelbooks, vinyl, boutique (Criterion OOP, PS5 post-2028, Interstellar steelbook, Taylor Swift collector). Scarcity score 0-100 with bands.
+- **Revenue model:** paid x402 shop-intel API, scarcity alerts as a service, Model Strength Score marketplace listing.
+- **Handed to Labs** to brainstorm + scope the pipeline, decide base model (DeepSeek R1 32B vs Kimi), define eval gate, add to build queue. Human-gated: Jordan funds BlockRun wallet (~$2.50-60).
+
+## 🆕 Agentic Treasury = Avalanche L1 (Jordan, Aug 15)
+
+- Locked L1 product thesis; scoped C-Chain play + Retro9000 agent-run validator idea; whitepaper v1.0 drafted + published.
+- **Dinari dShares tokenized equity rail GREENLIT (Aug 15):** 724 US stocks/ETFs on Dinari Financial Network (Avalanche L1) — on-thesis for Agentic Treasury equity leg. **Jordan: Partners signup + sandbox API key + KYC; Labs: scaffold `dinari-rail`.**
+
+## 🆕 OpenDexter Dexter Facilitator Rail (#41, Aug 16)
+
+- **Root cause found:** gateway settles Base via CDP, but OpenDexter only auto-catalogs gateways settling through Dexter facilitator (`x402.dexter.cash`). CDP/GoPlausible/PayAI settlements do NOT trigger cataloging.
+- **Code shipped:** `verify_proof_via_dexter()` + routing (Base proofs → Dexter when `X402_USE_DEXTER=1`). 8/8 tests, full suite 45/45.
+- **OPS REMAINING (Labs):** set `X402_USE_DEXTER=1`, trigger real Base settlement, re-check `x402_search` ~24h.
+
+## 🆕 Arcade P0 Fixes SHIPPED (Aug 16)
+
+- **3D Lobby deployed + wired to real games** — `arcade.gentechlabs.net/lobby/`. Replaced placeholder GAMES with 4 real cabinets (Super Arcade Tennis, Agent Warfare, King's Gambit, Visual Kei Tap). Removed fictional ARC economy (honest — no fake balances).
+- **Super Arcade Tennis** — mobile touch (virtual joystick + SWING button) + pause.
+- **Visual Kei Tap** — pause (Escape/P + RESUME button).
+- **Remaining:** Tennis main menu (last P0), King's Gambit mobile verify, Agent Warfare mobile perf (12MB bundle — code-split).
+
+## 🛠️ Hermes / Skills Status (W33 review, Aug 16)
+
+- **Local:** Hermes v0.20.1. **Upstream:** v0.20.2 (released 2026.8.16). **774 commits behind**, 7 security/hardening-related.
+- **18 hub skills have updates.** Unavailable upstream: `base`, `social-content`, `youtube-full`, `hermes-buzz-shared-profile`, `cufolio`.
+- **Recommendation:** Do NOT auto-apply. **Jordan: run `hermes update` in a controlled window (restart required), then `hermes skills check` + apply.** Review breaking changes before production.
+
 ## ✅ Recently Resolved
 
+- **Physical Media Scarcity Tracker SHIPPED** (Aug 16) — 5 endpoints, 15/15 tests. `10-Labs/deal-tracker-api/api/physical_media.py`.
+- **OpenDexter Dexter facilitator rail SHIPPED** (Aug 16) — 45/45 tests, OPS remaining (set `X402_USE_DEXTER=1`, trigger settlement).
+- **Arcade P0 fixes SHIPPED** (Aug 16) — 3D lobby + mobile tennis + VKT pause.
+- **#55 GenTech Hub PWA launcher LIVE** — gentechlabs.net/hub-launcher.html.
+- **#51 Agentic Bridge Base→Avalanche USDC rail** (Across, 8/8 tests).
+- **#59 DeepSeek Harness x402 plugin** (dsh-plugin, 19/19 tests) — first x402 payment plugin in dsh ecosystem.
+- **#47 Dual-Protocol Payments** (x402 + MPP rails, 37/37 tests).
+- **#23 CockroachDB × AWS Agentic Memory** (9/9 tests).
+- **#9 Agent Warfare procedural maps** (verified shipped).
+- **#14 EVM Cortex x402-payments skill** added to fork.
+- **Paymenter x402 → WHMCS/Blesta #24 SHIPPED** (2026-08-15) — 24/24 tests. Next: external submission (human-gated).
+- **FrameForge #3 SHIPPED** (2026-08-15) — 11/11 tests.
 - **Steward EXIT RAIL PROVEN (Aug 11)** — `steward_execute.py --withdraw-convert` ran live end-to-end on real funds. All 3 txs mined (approve 6d5e95…, withdraw c7da23…, convert ad9e83…), gas ~$0.0003. **43.47 USDC landed**, position closed. Exit rail + honesty layer validated.
 - **Steward FULL AUTONOMY (Aug 11)** — `steward_rebalance.py --autonomous` rebalances on its own (detect OUT-of-range → withdraw-redeploy → alert Jordan after, not before). Watchdog `51bc9900e24d` every 10m (auto + alert), heartbeat `73cdf5227ca4` every 30m (always pings).
 - **Steward PWA + Web-Bridge Chat (Aug 11)** — Dashboard live at `gentechlabs.net/Treasury/steward-dashboard.html` (installable PWA, web-bridge chat to control Steward from site). Bridge nginx `/bridge/` proxy fixed (was broken on :8765).
@@ -238,7 +292,9 @@ Jordan's decision on the Gears E:D beta: **NOT pre-ordering for beta access.** E
 
 ## 🔗 Related
 
-- [[brain-snapshot-2026-07-28]] — Full context snapshot
+- [[brain-snapshot-2026-08-17]] — Latest context snapshot (overnight, captures Aug 16)
+- [[2026-08-16-weekly-review]] — W33 weekly review (brain sync, skills, x402 scan)
+- [[brain-snapshot-2026-08-15]] — Prior snapshot
 - [[context-weight]] — Auto-generated project overview
 - [[build_queue.json]] — v52, 30 items
 - [x] Bankr API key wired into revenue monitor (bk_usr_...37XZ, saved to profile .env). Bankr wallet EVM 0x99ae... SOL 6mcf... — currently $0 across 9 chains. Distinct from x402 revenue wallet (0x7ebf...). Monitor now reports Bankr portfolio each run.
