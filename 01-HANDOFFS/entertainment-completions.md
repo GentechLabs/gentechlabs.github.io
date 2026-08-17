@@ -15,3 +15,4 @@
 *Last updated: 2026-08-17*
 
 - **2026-08-17 KAGE CotD stage MV COMPLETE** — v21 FINAL (117.8s) live at https://vanito.gentechlabs.net/music/vanito/kage-cotd-stage-v21.mp4. Full arc incl. new rival KIRI, sunrise farewell, GenTech Production/Vanito Film outro. Reusable prompts saved as skill `kage-cotd-stage-mv`.
+- **2026-08-16 KAGE/KIRI animated Live Photo wallpaper (iPhone 16 Pro Max)** — rain-version video delivered; Vanito converted via intoLive app, set as animated lock-screen wallpaper (1320×2868 portrait). Workflow saved as skill `animated-wallpaper-live-photo`.
