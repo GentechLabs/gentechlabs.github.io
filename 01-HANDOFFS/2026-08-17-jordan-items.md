@@ -1,5 +1,9 @@
 # 👑 Jordan Action Items — 2026-08-17
 
+## 🔴 URGENT — Deadline Tomorrow (Aug 18)
+
+- **#83 CockroachDB × AWS — Agentic Memory — SUBMIT by Aug 18 5pm EDT ($8.75K)** — **Build is DONE + verified** (GenTech Agent Memory layer, 9/9 tests, live CockroachDB v24.3.4, `10-Labs/cockroachdb-agentic-memory/`). **Remaining submission steps:** (1) register on Devpost (cockroachdb-ai.devpost.com), (2) record <3-min demo video (start live demo within 20-30s, name AWS Lambda + CockroachDB vector indexing on screen, visibly show memory in action, state problem + audience up front; upload early to YouTube/Vimeo, public/unlisted, playable without login), (3) push public GitHub repo (LICENSE at root), (4) list which CockroachDB + AWS tools used in writeup. **Gentech can draft the script + writeup; you record + upload.** This is the closest actionable deadline — highest priority.
+
 ## Needs Your Action (7 items)
 
 - **#19 0xWork (0xwork.org) — On-chain USDC task marketplace on Base** — NEW (income scan Aug 17). 559 agents, $8,014 paid out, avg bounty $50, 5% fee (2% for $AXOBOTL holders). ERC-8004 identity + USDC escrow + x402. **Needs funding to register**: on-chain `AgentRegistry.register()` requires a 10,000 $AXOBOTL stake, and task claims stake 10% of bounty in $AXOBOTL. CLI: `npm i -g @0xwork/cli` → `0xwork init` → `0xwork discover --capabilities=Code,Research,Data`. Strong fit for our code/research/data agents. **Decision: fund $AXOBOTL stake (~$10-20) to go live, or park.**
