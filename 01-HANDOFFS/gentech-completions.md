@@ -41,6 +41,10 @@
 ## 2026-08-17
 
 - **#14 — Super Arcade Tennis Main Menu [P0]** (entertainment lane, built on VPS): arcade root no longer boots straight into play. Added title screen + mode select (Quick Match first-to-6 / Tiebreak first-to-10 via `state.targetScore`) + ▶ PLAY + How-to-Play instructions overlay. Game boots to menu (`state.started=false`, update loop renders court without running physics/AI; Esc/P gated behind started). node --check SYNTAX OK, all 22 getElementById ids resolve, live HTTP 200 + menu markers verified on arcade.gentechlabs.net. Handoff: `01-HANDOFFS/gentech-to-entertainment/2026-08-17-super-arcade-tennis-main-menu.md`. Queue #14 marked shipped 2026-08-17.
+- **#23 — Agent Warfare Procedural Map Selector (enhancement)**: main menu now has a PROCEDURAL MAP selector row (Static Market / Sector-7 / Warehouse / Refinery / Outpost / Arena). Selected seed flows menu → `__GAME_CONFIG__.mapSeed` → world generation (config first, then `?mapseed=NUM` URL fallback). `npm run build` clean, node --check OK on 3 files, deployed to `/var/www/arcade/cabinet/agent-warfare/`, live verified (HTTP 200, mapSeed + PROCEDURAL MAP markers in served bundle). Committed + pushed `2e7c528`. Handoff: `01-HANDOFFS/gentech-to-entertainment/2026-08-17-agent-warfare-map-selector.md`. Queue #23 note updated.
+- **Paymenter x402 repo published**: pushed WHMCS/Blesta ports + test suite to `ProtoJay4789/paymenter-x402` main (bb1857d). Repo verified live via git (web 404s due to known ProtoJay4789 account issue — use ORG URLs). Unblocks #4/#5 repo-link requirement.
+- Applied group returns: all already applied in prior sessions (labs #29/52/19/2/30/48/49, entertainment #50/8/9/38, treasury #51/8, forge #59/50). IDs 1,6,73,71,61,60,66,62,65 are per-lane, not in global queue. Nothing new to apply.
+- Infra health: gateway root HTTP 200, hub-launcher HTTP 200, arcade root HTTP 200, lobby HTTP 200, agent-warfare HTTP 200, kings-gambit HTTP 200.
 
 ## 2026-08-16
 

@@ -504,7 +504,7 @@
     "detail": "Use text-to-cad pipeline (build123d \u2192 STEP \u2192 GLB) to generate playable FPS maps from descriptions. Urban courtyard, warehouse, desert outpost, etc. Drop GLB into Three.js scene as playable level. Ship with a dozen procedurally-generated maps.",
     "_orig_id": 9,
     "recommended_tier": "k2.7",
-    "note": "[Jordan TOP PRIORITY Aug 3: character design, map design, performance, sound, gameplay - must be crispy. Futuristic GenTech shooter. Custom weapons later.] [VERIFIED shipped 2026-08-12: ?mapseed=NUM procedural maps live, cbf85a0, tests pass, deployed to /var/www/arcade/cabinet/agent-warfare/]",
+    "note": "[Jordan TOP PRIORITY Aug 3: character design, map design, performance, sound, gameplay - must be crispy. Futuristic GenTech shooter. Custom weapons later.] [VERIFIED shipped 2026-08-12: ?mapseed=NUM procedural maps live, cbf85a0, tests pass, deployed to /var/www/arcade/cabinet/agent-warfare/] [ENHANCED 2026-08-17: procedural map SELECTOR added to main menu (Static Market / Sector-7 / Warehouse / Refinery / Outpost / Arena). mapSeed flows from menu → __GAME_CONFIG__ → world generation. Build 2e7c528, deployed + verified live (HTTP 200, mapSeed + PROCEDURAL MAP markers in served bundle).]",
     "group": "entertainment",
     "routing": {
       "group": "entertainment",
