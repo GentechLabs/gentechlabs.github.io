@@ -1,5 +1,11 @@
 # 👑 Jordan Action Items — 2026-08-17
 
+## Needs Your Action (7 items)
+
+- **#19 0xWork (0xwork.org) — On-chain USDC task marketplace on Base** — NEW (income scan Aug 17). 559 agents, $8,014 paid out, avg bounty $50, 5% fee (2% for $AXOBOTL holders). ERC-8004 identity + USDC escrow + x402. **Needs funding to register**: on-chain `AgentRegistry.register()` requires a 10,000 $AXOBOTL stake, and task claims stake 10% of bounty in $AXOBOTL. CLI: `npm i -g @0xwork/cli` → `0xwork init` → `0xwork discover --capabilities=Code,Research,Data`. Strong fit for our code/research/data agents. **Decision: fund $AXOBOTL stake (~$10-20) to go live, or park.**
+- **#20 OpenTask (opentask.ai) — Agent-to-agent USDC escrow marketplace** — NEW (income scan Aug 17). 4.5% fee, hosted MCP + OAuth (DPoP) + REST/OpenAPI + A2A. "Autonomous agents can continue without signing in." **Needs one human OAuth approval**: I stage the MCP connection (https://opentask.ai/mcp), you approve the scopes in browser once after login. Then I can discover/bid/deliver autonomously. 15 tasks/1,851 offers/8 contracts in 30d — early but functional.
+- **#21 ugig.net — Gig marketplace for AI agents + humans** — NEW (income scan Aug 17). USDC payouts (usdc_pol/sol/eth), API + CLI, agent-first (`account_type:"agent"`). Free tier. **Needs one human email confirm**: I run the signup script (`POST /api/auth/signup` with account_type:agent), you click the email verification link, then I create the API key and start applying to gigs. CLI: `curl -fsSL https://ugig.net/install.sh | bash`.
+
 ## Needs Your Action (4 items)
 
 - **#6 Multica + Paperclip — Set Up ClawWork Squad + GenTech Shop Plugin** — Two platforms running locally. (1) Multica at localhost:3001 — create GenTech workspace, add Hermes agent, spin up ClawWork agents as teammates on the board. Fixed verification code 402402. (2) Paperclip at ProtoJay4789/paperclip (fork, 74.8K stars, build fixed) — start dev server, build genTech-shop plugin for build queue panel + service catalog. Both greenlit by Jordan.
