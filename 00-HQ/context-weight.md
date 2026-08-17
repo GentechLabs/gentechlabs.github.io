@@ -1,6 +1,6 @@
 # 🧠 Context Weight — GenTech Labs
 
-> Auto-generated: 2026-08-16 00:06 ET · Loads on session start so every group has context.
+> Auto-generated: 2026-08-17 00:06 ET · Loads on session start so every group has context.
 > Source: build_queue.json + vault state
 
 ---
@@ -18,7 +18,7 @@
 - [HIGH] Model Strength Score — score trained models 0-850 for marketplace — pending
 
 ## 🏗️ Build Queue
-56 total · 16 pending · 2 blocked
+57 total · 16 pending · 2 blocked
 
 ## 🚨 Blockers
 - **Super Arcade Tennis — Cab #1 for GenTech Arcade** — First arcade cabinet. Three.js isometric tennis, chain power-shots (BTC/ETH/SOL), AI opponent. LIVE at arcade.gentechlab
@@ -42,7 +42,7 @@ See 11-Mess Hall/considerations.md
 - **Forge** — Desktop agent · Handles local builds
 
 ## 🔗 Quick Links
-- Build queue: `scripts/build_queue.json` (56 items)
+- Build queue: `scripts/build_queue.json` (57 items)
 - Jocelyn's hub: gentechlabs.net/jocelyn.html
 - Investor deck: gentechlabs.net/grant.html
 - Demo video: gentechlabs.net/agentic-treasury-demo.mp4
