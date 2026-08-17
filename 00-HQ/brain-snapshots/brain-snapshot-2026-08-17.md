@@ -132,6 +132,7 @@ generated: 2026-08-17 00:06 ET (overnight run — captures Aug 16 activity)
 - **100M+ cumulative x402 agentic transactions on Base** through Q1 2026 (Chainalysis). Linux Foundation governs. V2 spec = recommended baseline.
 - Every major player building x402 layers: Coinbase CDP, Stripe, Circle, Cloudflare, AWS Bedrock, thirdweb, PayAI.
 - **Strategic takeaways:** Base is volume leader (confirms Base-first posture); facilitator flexibility is our moat; Circle nanopayments = natural third rail (we ship x402 + MPP dual-rail #47); real customers > self-settlements.
+- **🚀 INSTITUTIONAL VALIDATION (Aug 17):** OpenAI published an official cookbook — "Controlled Agentic Commerce with AgentCore Payments" — pairing OpenAI Agents SDK + AWS Bedrock AgentCore Payments + x402, settling USDC on Base. Biggest endorsement yet of our exact thesis. Distribution channel: AWS enterprise customers learning x402 = more buyers for our gateway. Full analysis: `09-Green Room/openai-aws-x402-cookbook-validation-2026-08-17.md`. Actions: verify our gateway against the cookbook flow, add AgentCore to facilitator map, reference in consulting offer, feed into AWS SAA-C03 study.
 
 ## ✅ Recently Resolved
 
