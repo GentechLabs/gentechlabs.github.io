@@ -31,13 +31,13 @@ generated: 2026-08-17 00:06 ET (overnight run — captures Aug 16 activity)
 - **CockroachDB × AWS — Agentic Memory #83** — **Aug 18 (1 day).** $8.75K. **Agent Memory layer BUILT + verified** (shipped 2026-08-14, `10-Labs/cockroachdb-agentic-memory/`, 9/9 tests, live CockroachDB v24.3.4). **REMAINING (Jordan):** register on Devpost (cockroachdb-ai.devpost.com), record <3min demo, push public repo. **CLOSEST ACTIONABLE DEADLINE — HIGHEST PRIORITY.**
 - **Mastercard Innovation Challenge** — **Jordan to register by Aug 20; submit Aug 31.** Credential > prize framing.
 - **Keeperhub Agents Onchain #80** — DEADLINE PASSED Aug 13. JORDAN CONFIRMED GO. Proof transfer complete Aug 8. Remaining was film demo + GitHub submission. **Verify submission status — if not submitted, mark closed.**
-- **AI Factory Hackathon #79** — DEADLINE PASSED Aug 10. Confirm submission status.
+- **AI Factory Hackathon #79** — CLOSED (Jordan, Aug 17). No longer doing it. Do not re-flag.
 - **Build with DataHub** — DEADLINE PASSED Aug 10. Confirm submission.
 - **Arc Programmable Money Hackathon** — DEADLINE PASSED Aug 9. SHIPPED + verified (57/57).
 - **Superteam USA Remote Community Membership** — Applied, second triage PENDING decision.
 - **Solana Foundation USA Grant** — Applied Aug 5. STILL PENDING. **Re-check ~Aug 19 (2 days).**
 - **Algorand First-Mover Play** — Composite entry shipped Aug 7. Jordan: provide wallet address + confirm eligibility.
-- **Algorand Global x402 Challenge #82** — DEADLINE PASSED Jul 31. Jordan: confirm / mark dead.
+- **Algorand Global x402 Challenge #82** — **DEADLINE Sep 30, 2026** (verified Aug 17). Jordan registered, ALGO rail live, first mainnet settlement done (Aug 6). **To compete: drive real usage/volume through GoPlausible + submit project details.** Top 50 → 10 finalists at Devcon 8 India (early Nov).
 
 ## 🟢 AgentLux — LIVE, First-Hire Guarantee armed
 
