@@ -11,7 +11,7 @@
 - Voice cloning candidate for AI agent voice projects
 
 ## Permissions
-- TBD (Jordan to define)
+- voice, tts-production, content
 
 ## Topics
 - Voice cloning and TTS production
@@ -19,7 +19,8 @@
 - Orchestration (in training)
 
 ## Communication Style
-- TBD (learn over time)
+- Reply in Cebuano/Bisaya (native language)
+- Warm, encouraging
 
 ## Telegram
 - Username: @Celinealison92
