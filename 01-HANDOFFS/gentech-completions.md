@@ -38,6 +38,10 @@
 - **Dinari dShares tokenized equity rail** (handoff to Labs, GREENLIT): 724 US stocks/ETFs (full S&P 500) open to US investors, settling on Dinari Financial Network (Avalanche L1). B2B API + official SDKs (JS/TS, Python, Java, Go), self-custodied wallets supported, USD+ yield-bearing cash leg. On-thesis for Agentic Treasury equity leg. Intel: `Treasury/dinari-dshares-rail.md`; handoff: `01-HANDOFFS/gentech-to-labs/2026-08-15-dinari-dshares-rail.md`. Jordan to do Partners signup + sandbox API key + KYC; Labs to scaffold `dinari-rail` (Python SDK, sandbox test with faucet).
 - **90-day income plan + positioning** (GREENLIT by Jordan): 3-agent audit found $26 = self-settlements, zero real customers; agent economy too small for near-term income. Plan: (1) human pricing page, (2) close AgentLux first-hire, (3) x402 consulting + DeFi security review, (4) re-fund treasury, (5) Mastercard + one deep hackathon, (6) Apify actors. Positioning: win ORCHESTRATORS not individual agents; wedge = convenience. Docs: `00-HQ/positioning-win-orchestrators.md`, `00-HQ/service-offers-consulting.md`, `01-HANDOFFS/gentech-to-labs/2026-08-15-human-pricing-gateway.md`.
 
+## 2026-08-17
+
+- **#14 — Super Arcade Tennis Main Menu [P0]** (entertainment lane, built on VPS): arcade root no longer boots straight into play. Added title screen + mode select (Quick Match first-to-6 / Tiebreak first-to-10 via `state.targetScore`) + ▶ PLAY + How-to-Play instructions overlay. Game boots to menu (`state.started=false`, update loop renders court without running physics/AI; Esc/P gated behind started). node --check SYNTAX OK, all 22 getElementById ids resolve, live HTTP 200 + menu markers verified on arcade.gentechlabs.net. Handoff: `01-HANDOFFS/gentech-to-entertainment/2026-08-17-super-arcade-tennis-main-menu.md`. Queue #14 marked shipped 2026-08-17.
+
 ## 2026-08-16
 
 - **Arcade P0 fixes (from 2026-08-15 audit)** — shipped to live arcade:
