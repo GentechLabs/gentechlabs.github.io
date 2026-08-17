@@ -1,15 +1,5 @@
 # 👑 Jordan Action Items — 2026-08-17
 
-## 🔴 URGENT — Deadline Tomorrow (Aug 18)
-
-- **#83 CockroachDB × AWS — Agentic Memory — SUBMIT by Aug 18 5pm EDT ($8.75K)** — **Build is DONE + verified** (GenTech Agent Memory layer, 9/9 tests, live CockroachDB v24.3.4, `10-Labs/cockroachdb-agentic-memory/`). **Remaining submission steps:** (1) register on Devpost (cockroachdb-ai.devpost.com), (2) record <3-min demo video (start live demo within 20-30s, name AWS Lambda + CockroachDB vector indexing on screen, visibly show memory in action, state problem + audience up front; upload early to YouTube/Vimeo, public/unlisted, playable without login), (3) push public GitHub repo (LICENSE at root), (4) list which CockroachDB + AWS tools used in writeup. **Gentech can draft the script + writeup; you record + upload.** This is the closest actionable deadline — highest priority.
-
-## Needs Your Action (7 items)
-
-- **#19 0xWork (0xwork.org) — On-chain USDC task marketplace on Base** — NEW (income scan Aug 17). 559 agents, $8,014 paid out, avg bounty $50, 5% fee (2% for $AXOBOTL holders). ERC-8004 identity + USDC escrow + x402. **Needs funding to register**: on-chain `AgentRegistry.register()` requires a 10,000 $AXOBOTL stake, and task claims stake 10% of bounty in $AXOBOTL. CLI: `npm i -g @0xwork/cli` → `0xwork init` → `0xwork discover --capabilities=Code,Research,Data`. Strong fit for our code/research/data agents. **Decision: fund $AXOBOTL stake (~$10-20) to go live, or park.**
-- **#20 OpenTask (opentask.ai) — Agent-to-agent USDC escrow marketplace** — NEW (income scan Aug 17). 4.5% fee, hosted MCP + OAuth (DPoP) + REST/OpenAPI + A2A. "Autonomous agents can continue without signing in." **Needs one human OAuth approval**: I stage the MCP connection (https://opentask.ai/mcp), you approve the scopes in browser once after login. Then I can discover/bid/deliver autonomously. 15 tasks/1,851 offers/8 contracts in 30d — early but functional.
-- **#21 ugig.net — Gig marketplace for AI agents + humans** — NEW (income scan Aug 17). USDC payouts (usdc_pol/sol/eth), API + CLI, agent-first (`account_type:"agent"`). Free tier. **Needs one human email confirm**: I run the signup script (`POST /api/auth/signup` with account_type:agent), you click the email verification link, then I create the API key and start applying to gigs. CLI: `curl -fsSL https://ugig.net/install.sh | bash`.
-
 ## Needs Your Action (4 items)
 
 - **#6 Multica + Paperclip — Set Up ClawWork Squad + GenTech Shop Plugin** — Two platforms running locally. (1) Multica at localhost:3001 — create GenTech workspace, add Hermes agent, spin up ClawWork agents as teammates on the board. Fixed verification code 402402. (2) Paperclip at ProtoJay4789/paperclip (fork, 74.8K stars, build fixed) — start dev server, build genTech-shop plugin for build queue panel + service catalog. Both greenlit by Jordan.
@@ -21,3 +11,11 @@
 
 - **#12 Model Strength Score — score trained models 0-850 for marketplace** — Score AI models 0-850 like Agent Credit Score: Data Quality 30%, Benchmarks 25%, Trainer Reputation 20%, Age/Uptime 15%, Market Adoption 10%. Bittensor lessons baked in: staked reputation, on-chain provenance, no kill switch. First listing = GenTech DeFi Model (Modal GPU ~$30-60). Revenue: score API $0.01-0.05, listing fee, 2-5% inference take. Spec: 09-Green Room/specs/model-strength-score.md. Needs Jordan greenlight + Modal GPU funding.
 - **#18 Vault Git Divergence Cleanup — main 40 vs origin 3** — Vault repo main has diverged (40 local commits vs 3 on origin) from concurrent nightly-build commits colliding. backdoor-defense doc committed locally but push rejected. Fix: pull-rebase the nightly commits properly, resolve build_queue.json conflict, push. Needs Jordan go-ahead since it touches shared history.
+
+## 🆕 Marketplace — Needs Your Action (from Aug 17 scan)
+
+- **Apify Store** — needs Apify account login + Actor packaging (Docker/containerized scraper, not our x402 gateway model). $1.4M paid out last month. Add if we want a scraping-actor presence.
+- **0xWork** — on-chain USDC task marketplace on Base. Needs 10,000 $AXOBOTL stake to register + 10% bounty stake per claim. Strong fit (code/research/data) but needs token funding.
+- **OpenTask** — agent-to-agent task marketplace, USDC escrow. Needs OAuth approval (device-authorization flow — you approve scopes in browser once).
+- **ugig.net** — gig marketplace for agents + humans, USDC payouts. Needs email confirmation before API key creation.
+- **Fetch.ai Agentverse** — needs FET token to register on Almanac (different protocol from USDC). Skip unless you want a FET presence.
