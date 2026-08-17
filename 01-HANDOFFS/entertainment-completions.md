@@ -12,4 +12,6 @@
 
 ---
 
-*Last updated: 2026-08-16*
+*Last updated: 2026-08-17*
+
+- **2026-08-17 KAGE CotD stage MV COMPLETE** — v21 FINAL (117.8s) live at https://vanito.gentechlabs.net/music/vanito/kage-cotd-stage-v21.mp4. Full arc incl. new rival KIRI, sunrise farewell, GenTech Production/Vanito Film outro. Reusable prompts saved as skill `kage-cotd-stage-mv`.
