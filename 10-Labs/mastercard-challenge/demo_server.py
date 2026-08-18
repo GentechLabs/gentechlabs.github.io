@@ -18,6 +18,7 @@ from urllib.parse import parse_qs, urlparse
 
 from red_team import generate_attack, generate_batch
 from blue_team import evaluate, evaluate_batch
+from live_stack import full_demo_payload
 
 INDEX_HTML = None
 SEED = 42
@@ -68,6 +69,11 @@ class Handler(BaseHTTPRequestHandler):
 
         if path == "/api/health":
             self._send(200, json.dumps({"ok": True}).encode())
+            return
+
+        if path == "/api/live-stack":
+            # Real data from the deployed fraud/security stack
+            self._send(200, json.dumps(full_demo_payload()).encode())
             return
 
         self._send(404, json.dumps({"error": "not found"}).encode())

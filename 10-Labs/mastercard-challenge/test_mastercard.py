@@ -11,6 +11,7 @@ sys.path.insert(0, HERE)
 
 import red_team as red
 import blue_team as blue
+import live_stack as live
 
 
 class TestRedTeam(unittest.TestCase):
@@ -86,6 +87,24 @@ class TestBlueTeam(unittest.TestCase):
         )
         v = blue.evaluate(a)
         self.assertEqual(v.decision, "ALLOW")
+
+
+class TestLiveStack(unittest.TestCase):
+    def test_known_token_classified(self):
+        r = live.classify_token(43114, live.USDC_AVAX)
+        self.assertEqual(r.get("status"), "KNOWN")
+
+    def test_homoglyph_flagged_suspicious(self):
+        r = live.classify_token(43114, live.HOMOGLYPH_USDC)
+        self.assertEqual(r.get("status"), "SUSPICIOUS")
+
+    def test_full_payload_shape(self):
+        p = live.full_demo_payload()
+        self.assertIn("agent_scan", p)
+        self.assertIn("token_known", p)
+        self.assertIn("token_homoglyph", p)
+        self.assertIn("services", p)
+        self.assertIsInstance(p["agent_scan"]["owasp_checks"], list)
 
 
 if __name__ == "__main__":
