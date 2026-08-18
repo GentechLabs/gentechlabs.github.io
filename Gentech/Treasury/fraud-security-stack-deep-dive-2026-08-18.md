@@ -44,15 +44,26 @@
 | Pre-execution governance (stop at boundary) | Mastercard red/blue demo | 🟢 built today |
 | Agent credit scoring | Agent Credit Score engine | ⚠️ in source, not deployed |
 
-## The honest gap
-Our **strongest, proven** fraud layer is **token-level** (rugs, homoglyphs, quarantine, burn). That's real and it's live. But the APA's question is broader — **agentic** fraud: how an *agent* gets authorized and how *agent-driven* fraud gets caught. That's where the Mastercard demo (pre-execution governance) and the ERC-8004 identity + credit-score engine (in rugcheck source, not deployed) are the forward-looking pieces.
+## The honest gap — CORRECTED (2026-08-18 audit)
+**My earlier "source ahead of deploy" read was WRONG.** The deployed rugcheck at `/root/rugcheck/` (v2.1.0, git repo, clean) is actually **AHEAD** of the vault source — it already has:
+- OWASP Agentic Top 10 full scan (55 checks) — `full_scan.py`
+- ERC-8004 identity verification — `agent_identity.py`
+- MCP server trust scoring — `mcp_trust.py`
+- x402 endpoint audit — `x402_audit.py`
+- Token risk scoring (bags_scanner) — the live `/v1/score/{mint}`
+
+**Verified live:** all 8 endpoints respond; 178/178 tests pass (after installing pytest-asyncio — the 26 "failures" were a missing plugin, not a code bug).
+
+**The real gap found:** our **x402-compliance-scanner** was stale (v1 spec) — it flagged the live gateway as non-compliant (25/39) because it wrongly required a `type` field in `accepts[]` and v1 top-level fields. The gateway is actually **fully x402 v2 compliant** (16/16 after fixing the scanner). Fixed the scanner to the verified v2 spec (Coinbase CDP, PayAI, x402.org).
 
 ## Recommendation
-1. **Deploy the newer rugcheck agent-scan/credit-score engine** (source is ahead of live) — closes the identity + credit-score gap with work we already have.
-2. **Position the Mastercard demo as the "agentic fraud" showcase** — it's the pre-execution governance answer to APA's question, and it's our doorway into that conversation.
-3. **Treasury Defender is our proof point** — 3 real homoglyph scams caught. Lead with that.
+1. ✅ **x402-compliance-scanner fixed to v2 spec** — gateway verified 16/16 compliant.
+2. ✅ **All components verified** — rugcheck 178/178, token-security 2/2, mastercard demo 10/10, treasury-defender live.
+3. **Position the Mastercard demo as the "agentic fraud" showcase** — it's the pre-execution governance answer to APA's question.
+4. **Treasury Defender is our proof point** — 3 real homoglyph scams caught. Lead with that.
 
 ## Next actions
-- [ ] Deploy rugcheck v2.0.0 agent-scan engine (source → live)
+- [x] Fix x402-compliance-scanner to v2 spec
+- [x] Verify all components (rugcheck 178/178, token-security 2/2, mastercard 10/10)
 - [ ] Wire Treasury Defender + Rugcheck into the Mastercard demo as the "real data" layer
 - [ ] Track APA standards vs ERC-8004 direction
