@@ -176,6 +176,9 @@ async function loadLiveStack() {
     const erc = s.erc8004_registered
       ? '<div class="row">ERC-8004 identity: <b style="color:var(--green)">REGISTERED</b></div>'
       : '<div class="row">ERC-8004 identity: <b style="color:var(--amber)">not registered</b></div>';
+    const credit = s.credit_score != null
+      ? `<div class="row">Agent credit score: <b style="color:var(--green)">${s.credit_score}</b> (${s.credit_level})</div>`
+      : '<div class="row">Agent credit score: <b>n/a</b></div>';
     const tk = p.token_known.status;
     const th = p.token_homoglyph.status;
     const tkColor = tk === 'KNOWN' ? 'var(--green)' : 'var(--amber)';
@@ -185,6 +188,7 @@ async function loadLiveStack() {
         <span class="tag high">${src} · agent ${s.agent_id}</span>
         ${owasp}
         ${erc}
+        ${credit}
         <div class="row">Wallet reputation: <b>${s.wallet_reputation ?? 'n/a'}</b></div>
       </div>
       <div class="intent">

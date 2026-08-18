@@ -41,7 +41,9 @@ USDC_AVAX = "0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E"
 HOMOGLYPH_USDC = "0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6F"
 
 # A real agent address for the identity/scan demo (GenTech main treasury)
-AGENT_ID = "0x7ebff...96a"
+# Use the ERC-8004-registered GenTech agent so the demo shows a verified
+# identity + credit score (agent 1770 = "GenTech Labs Agent", score 76.7/HIGH).
+AGENT_ID = "1770"
 
 
 @dataclass
@@ -57,6 +59,8 @@ class LiveScan:
     token_status: Optional[str]
     token_reasons: list[str]
     source: str  # "live" | "simulated"
+    credit_score: Optional[float] = None
+    credit_level: Optional[str] = None
     fetched_at_utc: str = field(
         default_factory=lambda: datetime.now(timezone.utc).isoformat()
     )
@@ -100,6 +104,8 @@ def scan_agent(agent_id: str = AGENT_ID) -> LiveScan:
         owasp_checks=(scan.get("owasp_checks") or []) if scan else [],
         erc8004_registered=bool(ident and ident.get("erc8004_registered")),
         wallet_reputation=ident.get("wallet_reputation_score") if ident else None,
+        credit_score=ident.get("overall_score") if ident else None,
+        credit_level=ident.get("overall_level") if ident else None,
         token_status=None,
         token_reasons=[],
         source="live",
@@ -142,6 +148,7 @@ def _self_test() -> int:
     print(f"  agent_scan.owasp_score   : {p['agent_scan']['owasp_score']}")
     print(f"  agent_scan.owasp_level   : {p['agent_scan']['owasp_level']}")
     print(f"  agent_scan.erc8004       : {p['agent_scan']['erc8004_registered']}")
+    print(f"  agent_scan.credit_score  : {p['agent_scan']['credit_score']} ({p['agent_scan']['credit_level']})")
     print(f"  token_known.status       : {p['token_known'].get('status')}")
     print(f"  token_homoglyph.status   : {p['token_homoglyph'].get('status')}")
     print(f"  services                 : {p['services']}")
