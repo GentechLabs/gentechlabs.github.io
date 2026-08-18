@@ -18,15 +18,21 @@ governance, the counter-position to stochastic post-hoc fraud detection.
   or **ALLOW** (all checks pass). Every block carries the exact rule that
   fired — a concrete ERC-8004 / x402 audit trail.
 - 🖥️ **Web UI** (`index.html` + `demo_server.py`) — attack → verdict dashboard.
+- 🛡️ **Live stack** (`live_stack.py`) — pulls **real output from the deployed
+  fraud/security layer** (RugCheck v2 OWASP Agentic Top 10 agent scan + Treasury
+  Defender token classification) so the demo is backed by live tooling, not just
+  simulation. Degrades gracefully to a labelled "simulated" fallback if a
+  service is down.
 
 ## Run
 ```bash
 # 1. Tests (no server needed)
-python3 test_mastercard.py          # 10/10 pass
+python3 test_mastercard.py          # 13/13 pass
 
 # 2. CLI
 python3 red_team.py --count 5 --seed 42
 python3 blue_team.py --count 5 --seed 42
+python3 live_stack.py --self-test   # verify live services reachable
 
 # 3. Web prototype
 python3 demo_server.py --port 8080
@@ -38,6 +44,7 @@ python3 demo_server.py --port 8080
 GET /api/attack            → one simulated attack intent
 GET /api/attack/batch?n=5  → batch of attack intents
 GET /api/evaluate          → blue-team verdicts
+GET /api/live-stack        → real data from RugCheck v2 + Treasury Defender
 GET /api/health
 ```
 
@@ -46,9 +53,10 @@ GET /api/health
 |------|---------|
 | `red_team.py` | Attack simulator (7 attack types) |
 | `blue_team.py` | Pre-execution governance guard (BLOCK/FLAG/ALLOW) |
+| `live_stack.py` | Live-data integration (RugCheck v2 + Treasury Defender) |
 | `index.html` | Presentable web UI |
-| `demo_server.py` | Local server wiring red+blue to the UI |
-| `test_mastercard.py` | 10-test suite |
+| `demo_server.py` | Local server wiring red+blue+live to the UI |
+| `test_mastercard.py` | 13-test suite |
 
 ## Fit / rationale
 The AAE stack is **deterministic pre-execution governance** — policy-bound
@@ -56,6 +64,8 @@ execution, ERC-8004 identity, audit trail, x402 rails. This challenge is the
 stage to prove that governance-first beats detection-only for agentic fraud.
 
 ## Status
-- ✅ Build scaffolded + verified (2026-08-18): tests 10/10, server works
+- ✅ Build scaffolded + verified (2026-08-18): tests 13/13, server works
+- ✅ **Live stack wired** (2026-08-18): demo now pulls real data from RugCheck v2
+  (OWASP Agentic Top 10 agent scan) + Treasury Defender (token classification)
 - ⏸ **Jordan must register by Aug 20**: https://luma.com/kyz978xv
 - 📅 Submission deadline Aug 31 · GFF presentation Sept 8-11 Mumbai

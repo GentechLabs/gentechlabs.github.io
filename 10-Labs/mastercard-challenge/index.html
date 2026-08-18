@@ -84,6 +84,14 @@
       <div id="verdicts"><div class="empty">Attack intents appear on the left. Click "Evaluate All" to run the guard.</div></div>
     </div>
   </div>
+
+  <div class="panel" style="margin-top:20px">
+    <h2>🛡️ Live Stack — Real Data from the Deployed Fraud/Security Layer</h2>
+    <div class="btn-row">
+      <button class="primary" onclick="loadLiveStack()">Load Live Stack</button>
+    </div>
+    <div id="livestack"><div class="empty">Click "Load Live Stack" to pull real output from RugCheck v2 + Treasury Defender.</div></div>
+  </div>
 </div>
 
 <footer>GenTech Labs · Agentic Treasury · Pre-execution governance (ERC-8004 / x402 audit trail)</footer>
@@ -154,6 +162,41 @@ async function evaluateAll() {
   } catch(e) { alert('Backend not reachable. Run: python3 demo_server.py'); }
 }
 function clearAll() { pending = []; evaluated = []; renderIntents(); renderVerdicts(); }
+
+async function loadLiveStack() {
+  const el = document.getElementById('livestack');
+  el.innerHTML = '<div class="empty">Loading live stack…</div>';
+  try {
+    const p = await api('/api/live-stack');
+    const s = p.agent_scan;
+    const src = s.source === 'live' ? '🟢 LIVE' : '🟡 SIMULATED';
+    const owasp = s.owasp_score != null
+      ? `<div class="row">OWASP Agentic Top 10 score: <b>${s.owasp_score}</b> (${s.owasp_level})</div>`
+      : '<div class="row">OWASP scan: <b>unavailable</b></div>';
+    const erc = s.erc8004_registered
+      ? '<div class="row">ERC-8004 identity: <b style="color:var(--green)">REGISTERED</b></div>'
+      : '<div class="row">ERC-8004 identity: <b style="color:var(--amber)">not registered</b></div>';
+    const tk = p.token_known.status;
+    const th = p.token_homoglyph.status;
+    const tkColor = tk === 'KNOWN' ? 'var(--green)' : 'var(--amber)';
+    const thColor = th === 'SUSPICIOUS' ? 'var(--red)' : 'var(--green)';
+    el.innerHTML = `
+      <div class="intent">
+        <span class="tag high">${src} · agent ${s.agent_id}</span>
+        ${owasp}
+        ${erc}
+        <div class="row">Wallet reputation: <b>${s.wallet_reputation ?? 'n/a'}</b></div>
+      </div>
+      <div class="intent">
+        <span class="tag medium">Treasury Defender · token classification</span>
+        <div class="row">Real USDC: <b style="color:${tkColor}">${tk}</b></div>
+        <div class="row">Homoglyph USDC: <b style="color:${thColor}">${th}</b></div>
+        <div class="req">${(p.token_homoglyph.reasons||[]).join('; ')}</div>
+      </div>`;
+  } catch(e) {
+    el.innerHTML = '<div class="empty">Live stack unreachable. Run: python3 demo_server.py</div>';
+  }
+}
 </script>
 </body>
 </html>
