@@ -55,3 +55,6 @@
 - Applied group returns: all already applied in prior sessions (labs #29/52/19/2/30/48/49, entertainment #50/8/9/38, treasury #51/8, forge #59/50). IDs 1,6,73,71,61,60,66,62,65 are per-lane, not in global queue. Nothing new to apply.
 - Infra health: gateway root HTTP 200, hub-launcher HTTP 200, arcade root HTTP 200, all 4 cabinets HTTP 200.
 - **#41 — OpenDexter Marketplace listing (Dexter facilitator rail)**: root cause found — gateway settles Base via CDP, but OpenDexter only auto-catalogs gateways that settle through the Dexter facilitator (`x402.dexter.cash`). Added `verify_proof_via_dexter()` to `10-Labs/x402-gateway/server.py` (routes Base `eip155:8453` proofs via Dexter when `X402_USE_DEXTER=1` or `PAYMENT_VERIFY_MODE=dexter`). 8/8 new tests pass (45 total). OPS REMAINING: set `X402_USE_DEXTER=1` on gateway service + trigger real Base settlement, re-check `x402_search` ~24h. Handoff: `01-HANDOFFS/gentech-to-labs/2026-08-16-opendexter-dexter-rail.md`.
+
+## 2026-08-18 Nightly Build
+- **#3 ClawWork Integration — Employee Squad**: SHIPPED + VERIFIED (infra). Router shim live on :8011 (chat round-trip OK), GDPVal pipeline loads 220 tasks (avg $259.45) + daily task selection works. Committed /root/ClawWork.
