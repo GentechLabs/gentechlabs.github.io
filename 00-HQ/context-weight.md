@@ -1,6 +1,6 @@
 # 🧠 Context Weight — GenTech Labs
 
-> Auto-generated: 2026-08-17 00:06 ET · Loads on session start so every group has context.
+> Auto-generated: 2026-08-18 00:07 ET · Loads on session start so every group has context.
 > Source: build_queue.json + vault state
 
 ---
@@ -18,18 +18,18 @@
 - [HIGH] Model Strength Score — score trained models 0-850 for marketplace — pending
 
 ## 🏗️ Build Queue
-57 total · 16 pending · 2 blocked
+57 total · 15 pending · 2 blocked
 
 ## 🚨 Blockers
 - **Super Arcade Tennis — Cab #1 for GenTech Arcade** — First arcade cabinet. Three.js isometric tennis, chain power-shots (BTC/ETH/SOL), AI opponent. LIVE at arcade.gentechlab
 - **AI Job Search — Fork + Set Up Jordan's Profile + GenTech Academy Module** — Fork ai-job-search (28.1K stars, MIT). (1) Set up Jordan's profile — skills, experience, portfolio link. (2) Wire into j
 
 ## ✅ Recently Done
+- Super Arcade Tennis — Main Menu (title/mode/instructions) [P0]
 - Arc Programmable Money Hackathon — Deploy x402 + Agent Wallet on Arc L1
 - FrameForge — AI Storyboard Service (previs pipeline)
 - Algorand Global x402 Challenge — Composite Entry ($100K + 500K ALGO)
 - Agent Warfare — Agent Archetypes/Classes (Sniper, Scout, Heavy, Medic, Engineer)
-- Agent Warfare — Procedural Map Generation via text-to-cad
 
 ## 🎯 Key Decisions
 See 11-Mess Hall/considerations.md
