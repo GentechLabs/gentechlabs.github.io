@@ -57,8 +57,16 @@ class Check:
 
 # ── Core checks ─────────────────────────────────────────────────────────────
 
-REQUIRED_402_FIELDS = ["status", "x402version", "accepts", "network", "asset", "amount", "payment_address"]
-ACCEPTS_FIELDS = ["type", "scheme", "network", "amount", "asset", "payTo"]
+# x402 v2 spec (verified 2026-08-18 against Coinbase CDP, PayAI, x402.org):
+# Top-level PaymentRequired body = { x402Version, resource, accepts, extensions }.
+# The v1 fields (status/x402version/payment_address) are gone in v2 — payment
+# data moved to headers (PAYMENT-REQUIRED) and the body carries the challenge.
+REQUIRED_402_FIELDS = ["x402Version", "resource", "accepts"]
+# x402 v2 spec (verified 2026-08-18 against Coinbase CDP, PayAI, x402.org):
+# accepts[] entries use scheme/network/amount/asset/payTo/maxTimeoutSeconds/extra.
+# There is NO 'type' field in the v2 spec — earlier versions of this scanner
+# wrongly required it, producing false negatives on compliant gateways.
+ACCEPTS_FIELDS = ["scheme", "network", "amount", "asset", "payTo"]
 
 def check_402_response(url: str, timeout: int = 10) -> tuple[list[Check], dict]:
     """
@@ -95,46 +103,33 @@ def check_402_response(url: str, timeout: int = 10) -> tuple[list[Check], dict]:
         else:
             checks.append(Check(f"field_{field}", True, f"'{field}' present"))
 
-    # x402 version check
-    version = body.get("x402version")
+    # x402 version check (v2: x402Version at top level)
+    version = body.get("x402Version")
     if version in (2, "2", "x402-v2"):
-        checks.append(Check("x402version_format", True, f"x402version = {version}"))
+        checks.append(Check("x402version_format", True, f"x402Version = {version}"))
     else:
-        checks.append(Check("x402version_format", False, f"Unexpected version: {version}"))
+        checks.append(Check("x402version_format", False, f"Unexpected x402Version: {version}"))
 
-    # Network must be non-empty
-    if body.get("network"):
-        checks.append(Check("network_valid", True, f"network = {body['network']}"))
+    # resource must be present and carry a url (v2)
+    resource = body.get("resource")
+    if isinstance(resource, dict) and resource.get("url"):
+        checks.append(Check("resource_valid", True, f"resource.url = {resource['url']}"))
     else:
-        checks.append(Check("network_valid", False, "network is empty"))
+        checks.append(Check("resource_valid", False, "resource.url missing or empty"))
 
-    # Amount must be positive integer string
-    amt = body.get("amount", "0")
-    if isinstance(amt, str) and amt.isdigit() and int(amt) > 0:
-        checks.append(Check("amount_valid", True, f"amount = {amt}"))
-    else:
-        checks.append(Check("amount_valid", False, f"Invalid amount: {amt!r}"))
-
-    # Payment address present
-    if body.get("payment_address"):
-        checks.append(Check("payment_address_present", True, f"payment_address = {body['payment_address'][:10]}..."))
-    else:
-        checks.append(Check("payment_address_present", False, "payment_address is empty"))
-
-    # Accepts array validation
+    # accepts[] entries must each carry a positive amount + payTo (v2)
     accepts = body.get("accepts", [])
-    if not isinstance(accepts, list):
-        checks.append(Check("accepts_type", False, "accepts is not a list"))
-    elif len(accepts) == 0:
-        checks.append(Check("accepts_nonempty", False, "accepts array is empty"))
-    else:
-        checks.append(Check("accepts_nonempty", True, f"{len(accepts)} payment option(s)"))
+    if isinstance(accepts, list) and accepts:
         for i, entry in enumerate(accepts):
-            for f in ACCEPTS_FIELDS:
-                if f not in entry:
-                    checks.append(Check(f"accepts[{i}].{f}", False, f"Entry {i} missing '{f}'"))
-                else:
-                    checks.append(Check(f"accepts[{i}].{f}", True, f"accepts[{i}].{f} = {entry[f]}"))
+            amt = entry.get("amount", "0")
+            if isinstance(amt, str) and amt.isdigit() and int(amt) > 0:
+                checks.append(Check(f"accepts[{i}].amount_valid", True, f"amount = {amt}"))
+            else:
+                checks.append(Check(f"accepts[{i}].amount_valid", False, f"Invalid amount: {amt!r}"))
+            if entry.get("payTo"):
+                checks.append(Check(f"accepts[{i}].payTo_present", True, f"payTo = {entry['payTo'][:10]}..."))
+            else:
+                checks.append(Check(f"accepts[{i}].payTo_present", False, "payTo is empty"))
 
     # CORS
     cors = None
