@@ -38,3 +38,4 @@
 - Cron fixes: Steward watchdog/deposit/heartbeat/capital_gate paths → canonical repo; heartbeat paused; $25 USD report floor in capital_gate
 - Dinari dShares rail scaffolded (dinari-rail wrapper + README)
 - Mastercard Innovation Challenge: registration link verified (luma.com/kyz978xv), build scaffolded (red/blue-team + web UI, 10/10 tests)
+- #mastercard-live-stack — wired live fraud stack (RugCheck v2 + Treasury Defender) into Mastercard demo as real-data layer; tests 13/13
