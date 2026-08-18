@@ -33,10 +33,11 @@ reference for cross-venue LP on Solana CLMMs.
 - **Check wallet balance BEFORE computing `--amount`** — multiple SPL accounts.
 - **`*_pct` params are already percent** — `position_width_pct: 10` = 10%, not 0.10.
 
-## What this means for our ABC Racer / Condor agent
+## What this means for our Arbiter (Consigliere / cross_venue_arb) agent
 
-Our existing ABC Racer (cross_venue_arb: GeckoTerminal DEX prices vs Hyperliquid perp
-mids, 0.8% fee fence) already does cross-venue detection. The `lp-agent` skill shows the
+Our existing agent — **Arbiter** (formerly "ABC Racer"; strategy = Consigliere, routine =
+cross_venue_arb) — already does cross-venue detection: GeckoTerminal DEX prices vs
+Hyperliquid perp mids, 0.8% fee fence. The `lp-agent` skill shows the
 **LP execution side** — how to actually deploy positions across Meteora/Orca/Raydium.
 Combining our arb detection with their LP executor = the full multi-sponsor play.
 
