@@ -9,18 +9,14 @@ Asia-only restrictions.
 
 ## Active targets
 
-### 1. ZIGChain — Infrastructure / Systems Operations Engineer (Junior–Mid) ⭐⭐⭐⭐⭐
+### 1. ZIGChain — Infrastructure / Systems Operations Engineer (Junior–Mid) ❌ STALE — SKIP
 - **Link:** https://zigchain.recruitee.com/o/infrastructure-systems-operations-engineer
-- **Pay:** $40k–$50k + 15% ZIG tokens | Fully remote worldwide | Posted ~18d ago
-- **Why strong fit:** Matches what Jordan ACTUALLY does — Linux, systemd, Docker, nginx,
-  AWS, node ops, Bash/Python automation, credential hygiene. JD literally lists "The Org
-  Is AI: building and orchestrating agents is basic literacy here" — that's our whole fleet.
-- **Must-haves:** Linux admin, Bash, AWS (EC2/VPC/IAM/S3/CloudWatch), Terraform working
-  level, networking (TCP/IP/DNS/SSH), Git, credential hygiene. Jordan has all but Terraform
-  deep — has applied configs.
-- **Apply:** upload CV/resume + cover letter on recruitee. REQUIRES manual CV upload.
-- **Status:** DRAFT cover letter written → `job-apps/zigchain-infra-systems-ops-engineer.md`
-- **Next:** Jordan reviews/approves → submit on recruitee.
+- **Pay:** $40k–$50k + 15% ZIG tokens | Fully remote worldwide
+- **DATE CHECK (Jordan's rule Aug 18):** web3.career flags **"This job is closed"** and
+  jobgether shows **"30+ days ago"** (posted ~Jul 27). Recruitee page loads but listing is
+  stale/dead. **→ MOVED ON. Do NOT apply.** The cover letter draft exists but was the exact
+  trap the date rule prevents — perfect fit, dead listing. Keep file only as a template example.
+- **Status:** ❌ DEAD (verified). Cover letter draft retained for reference only.
 
 ### 2. Yamata — Solidity/EVM Developer Intern (Prediction Markets) ⭐⭐⭐⭐
 - **Link:** wellfound.com/role/r/smart-contract-developer
