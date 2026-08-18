@@ -24,7 +24,7 @@ Dinari (dShares) opened **724 tokenized US stocks/ETFs — full S&P 500 — to U
 
 ## Blockers / human-gated
 - **Jordan:** Partners signup (https://partners.dinari.com/auth/register), sandbox API key, entity + KYC. Production key stays private.
-- **Labs:** needs the sandbox key to scaffold + test. Can start the wrapper structure now (SDK install, client, order/portfolio stubs) without the key.
+- **Labs:** needs the sandbox key to test. **Wrapper scaffold is BUILT** (2026-08-18) at `10-Labs/agent-kit-self-tracking/dinari-rail/` — `dinari_rail.py` (market/limit orders, portfolio + dividend + cash reads, sandbox mint), `requirements.txt` (`dinari-api-sdk>=0.15`), `README.md`. Self-test passes. Ready to validate with the faucet once Jordan's sandbox key lands.
 
 ## Full intel
 `Treasury/dinari-dshares-rail.md` in the vault.
