@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mastercard Innovation Challenge 2026 — Pre-Execution Governance Guard</title>
+<style>
+  :root {
+    --bg: #0b0f1a; --panel: #131a2b; --panel2: #1a2338;
+    --line: #26314d; --text: #e6ecf7; --muted: #8fa0c0;
+    --green: #2ecc71; --amber: #f1c40f; --red: #e74c3c;
+    --blue: #3b82f6; --accent: #f0ab4e;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: -apple-system, 'Segoe UI', Roboto, sans-serif; min-height: 100vh; }
+  header { padding: 24px 32px; border-bottom: 1px solid var(--line); background: linear-gradient(180deg, #0d1322, var(--bg)); }
+  header h1 { font-size: 20px; letter-spacing: 0.3px; }
+  header h1 span { color: var(--accent); }
+  header p { color: var(--muted); font-size: 13px; margin-top: 6px; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 24px 32px 60px; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  @media (max-width: 800px) { .grid { grid-template-columns: 1fr; } }
+  .panel { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 20px; }
+  .panel h2 { font-size: 14px; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 14px; }
+  .btn-row { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 16px; }
+  button { background: var(--panel2); color: var(--text); border: 1px solid var(--line); border-radius: 8px; padding: 10px 16px; cursor: pointer; font-size: 14px; transition: all .15s; }
+  button:hover { border-color: var(--accent); }
+  button.primary { background: var(--blue); border-color: var(--blue); font-weight: 600; }
+  button.primary:hover { filter: brightness(1.1); }
+  .intent { border: 1px solid var(--line); border-radius: 10px; padding: 14px; margin-bottom: 12px; background: var(--panel2); }
+  .intent .tag { display: inline-block; font-size: 11px; padding: 3px 8px; border-radius: 20px; margin-bottom: 8px; font-weight: 600; }
+  .tag.high { background: rgba(231,76,60,.15); color: #ff8a8a; }
+  .tag.critical { background: rgba(231,76,60,.25); color: #ffb3b3; }
+  .tag.medium { background: rgba(241,196,15,.15); color: #ffe27a; }
+  .intent .row { font-size: 13px; color: var(--muted); margin: 3px 0; }
+  .intent .row b { color: var(--text); font-weight: 600; }
+  .intent .req { font-size: 12px; font-style: italic; color: var(--muted); margin-top: 8px; border-top: 1px dashed var(--line); padding-top: 8px; }
+  .verdict { border-radius: 10px; padding: 12px 14px; margin-bottom: 12px; border: 1px solid; }
+  .verdict.BLOCK { border-color: var(--red); background: rgba(231,76,60,.08); }
+  .verdict.FLAG { border-color: var(--amber); background: rgba(241,196,15,.07); }
+  .verdict.ALLOW { border-color: var(--green); background: rgba(46,204,113,.07); }
+  .verdict .head { font-weight: 700; font-size: 15px; display: flex; justify-content: space-between; align-items: center; }
+  .verdict.BLOCK .head { color: #ff9a9a; } .verdict.FLAG .head { color: #ffe27a; } .verdict.ALLOW .head { color: #7ee8b0; }
+  .verdict .reason { font-size: 13px; color: var(--muted); margin-top: 6px; }
+  .verdict .audit { font-size: 12px; margin-top: 6px; font-family: ui-monospace, monospace; color: var(--accent); }
+  .stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-bottom: 20px; }
+  .stat { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 14px; text-align: center; }
+  .stat .num { font-size: 26px; font-weight: 800; }
+  .stat .lbl { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: .5px; margin-top: 4px; }
+  .stat .num.green { color: var(--green); } .stat .num.amber { color: var(--amber); } .stat .num.red { color: var(--red); }
+  footer { color: var(--muted); font-size: 12px; text-align: center; padding: 24px; border-top: 1px solid var(--line); }
+  .empty { color: var(--muted); text-align: center; padding: 30px; font-size: 14px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Mastercard Innovation Challenge <span>2026</span></h1>
+  <p>Pre-Execution Governance Guard — Deterministic Fraud Prevention at the Boundary · Red team / blue team demo</p>
+</header>
+
+<div class="wrap">
+  <div class="stats">
+    <div class="stat"><div class="num" id="sBlocked" style="color:var(--red)">0</div><div class="lbl">Blocked</div></div>
+    <div class="stat"><div class="num" id="sFlagged" style="color:var(--amber)">0</div><div class="lbl">Flagged</div></div>
+    <div class="stat"><div class="num" id="sAllowed" style="color:var(--green)">0</div><div class="lbl">Allowed</div></div>
+  </div>
+
+  <div class="grid">
+    <div class="panel">
+      <h2>🔴 Red Team — Attack Simulation</h2>
+      <div class="btn-row">
+        <button class="primary" onclick="runAttack()">Simulate One Attack</button>
+        <button onclick="runBatch()">Simulate Batch (5)</button>
+      </div>
+      <div id="intents"><div class="empty">Click "Simulate One Attack" to generate an incoming payment intent.</div></div>
+    </div>
+
+    <div class="panel">
+      <h2>🔵 Blue Team — Governance Guard</h2>
+      <div class="btn-row">
+        <button class="primary" onclick="evaluateAll()">Evaluate All</button>
+        <button onclick="clearAll()">Clear</button>
+      </div>
+      <div id="verdicts"><div class="empty">Attack intents appear on the left. Click "Evaluate All" to run the guard.</div></div>
+    </div>
+  </div>
+</div>
+
+<footer>GenTech Labs · Agentic Treasury · Pre-execution governance (ERC-8004 / x402 audit trail)</footer>
+
+<script>
+let pending = [];       // intents awaiting evaluation
+let evaluated = [];     // verdicts
+
+const SEVERITY = {
+  phishing_prompt:"high", velocity_spike:"medium", amount_anomaly:"high",
+  identity_spoof:"critical", out_of_policy:"high", chain_shift:"medium", injection:"critical"
+};
+
+async function api(path) {
+  const r = await fetch(path);
+  if (!r.ok) throw new Error(path);
+  return r.json();
+}
+
+function renderIntents() {
+  const el = document.getElementById('intents');
+  if (!pending.length) { el.innerHTML = '<div class="empty">No pending intents.</div>'; return; }
+  el.innerHTML = pending.map((i, idx) => {
+    const sev = SEVERITY[i.attack_type] || 'high';
+    return `<div class="intent">
+      <span class="tag ${sev}">${(i.attack_type||'').replace(/_/g,' ').toUpperCase()}</span>
+      <div class="row">#${idx+1} · <b>${i.amount_usd ? '$'+Number(i.amount_usd).toLocaleString(undefined,{maximumFractionDigits:2}) : '$?'}</b> · chain <b>${i.chain}</b></div>
+      <div class="row">payer <b>${i.payer}</b> → payee <b>${i.payee}</b></div>
+      <div class="req">"${(i.request_text||'').slice(0,90)}"</div>
+    </div>`;
+  }).join('');
+}
+
+function renderVerdicts() {
+  const el = document.getElementById('verdicts');
+  const b = evaluated.filter(v=>v.decision==='BLOCK').length;
+  const f = evaluated.filter(v=>v.decision==='FLAG').length;
+  const a = evaluated.filter(v=>v.decision==='ALLOW').length;
+  document.getElementById('sBlocked').textContent = b;
+  document.getElementById('sFlagged').textContent = f;
+  document.getElementById('sAllowed').textContent = a;
+  if (!evaluated.length) { el.innerHTML = '<div class="empty">No evaluations yet.</div>'; return; }
+  el.innerHTML = evaluated.map(v => `
+    <div class="verdict ${v.decision}">
+      <div class="head"><span>${v.decision === 'BLOCK' ? '⛔' : v.decision === 'FLAG' ? '🚩' : '✅'} ${v.decision}</span><span style="font-size:11px;color:var(--muted)">${(v.attack_type||'intent').replace(/_/g,' ')}</span></div>
+      <div class="reason">${v.reason}</div>
+      ${v.rules && v.rules.length ? `<div class="audit">rules: ${v.rules.join(', ')}</div>` : ''}
+    </div>`).join('');
+}
+
+async function runAttack() {
+  try {
+    const i = await api('/api/attack');
+    pending.push(i); renderIntents();
+  } catch(e) { alert('Backend not reachable. Run: python3 demo_server.py'); }
+}
+async function runBatch() {
+  try {
+    const items = await api('/api/attack/batch?n=5');
+    pending.push(...items); renderIntents();
+  } catch(e) { alert('Backend not reachable. Run: python3 demo_server.py'); }
+}
+async function evaluateAll() {
+  if (!pending.length) return;
+  try {
+    const vs = await api('/api/evaluate');
+    evaluated = vs; pending = []; renderIntents(); renderVerdicts();
+  } catch(e) { alert('Backend not reachable. Run: python3 demo_server.py'); }
+}
+function clearAll() { pending = []; evaluated = []; renderIntents(); renderVerdicts(); }
+</script>
+</body>
+</html>
