@@ -32,6 +32,7 @@ A **red-team/blue-team agent demo**:
 3. **Web UI** — clean prototype showing attack → blocked, with a presentable dashboard.
 
 ## Next actions
-- **Jordan (human-gated):** register by Aug 20 (free). Link TBD — confirm official registration URL.
-- **Labs:** scaffold the red/blue-team demo + web UI. Reuse AAE identity + x402 rails.
+- ✅ **Registration link VERIFIED (2026-08-18):** https://luma.com/kyz978xv — "Mastercard Innovation Challenge @ GFF 2026" by Mastercard AI Garage (931 going). **Jordan must register by Aug 20.**
+- ✅ **Build KICKED OFF + scaffolded (2026-08-18)** at `10-Labs/mastercard-challenge/` — `red_team.py` (7 attack types), `blue_team.py` (pre-execution governance BLOCK/FLAG/ALLOW), `index.html` + `demo_server.py` (web prototype), `test_mastercard.py` (10/10 pass). Verified server works.
+- ⏸ **Labs next:** extend red-team realism (more attack patterns), add session-aware evaluation to the server, polish UI, prep demo video + README by Aug 31.
 - **Gentech:** track in hackathon queue; prepare submission materials (README, demo video, social posts) by Aug 31.
