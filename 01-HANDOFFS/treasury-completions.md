@@ -39,3 +39,4 @@
 - Dinari dShares rail scaffolded (dinari-rail wrapper + README)
 - Mastercard Innovation Challenge: registration link verified (luma.com/kyz978xv), build scaffolded (red/blue-team + web UI, 10/10 tests)
 - #mastercard-live-stack — wired live fraud stack (RugCheck v2 + Treasury Defender) into Mastercard demo as real-data layer; tests 13/13
+- #mastercard-identity-credit — surfaced ERC-8004 identity + agent credit score (76.7/HIGH) in Mastercard demo
