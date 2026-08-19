@@ -1,7 +1,7 @@
 ---
 date: 2026-08-18
 status: active
-last-updated: 2026-08-18 00:07 ET
+last-updated: 2026-08-18 20:06 ET
 ---
 
 # 🧠 Considerations — Open Decisions
@@ -13,13 +13,13 @@ last-updated: 2026-08-18 00:07 ET
 - [x] 🚨 **CPI Release — Wed Aug 12 8:30 AM ET (RELEASED) — ⚠️ REPOSITION BLOCKED** — Treasury CPI War-Room play was staged (regime RANGE_BOUND, RSI 24.1, expected AVAX ±4-7%) but **the Steward wallet was swept empty Aug 11 evening** (~43.72 USDC off to `0xeee3fe6c...`). No LFJ V2.2 position exists on `0x572ABd6461BED2258615E6b99c585Ab7c5d05037` (0 WAVAX, ~0.0006 USDC, 0.2979 AVAX gas). **✅ RESOLVED Aug 13 — Jordan confirmed the sweep was INTENTIONAL**: he tested whether the agentic treasury could send funds back to his Coinbase wallet, it worked (real USDC landed), and he kept the money. No unexpected move, no review needed. Two CPI one-shots (`31432dce0de9`, `e13db42767b0`) recommended paused + position heartbeat re-enabled.
 - [ ] 🚨 **Keeperhub Agents Onchain #80** — **⚠️ DEADLINE PASSED Aug 13.** JORDAN CONFIRMED GO. **✅ PROOF TRANSFER COMPLETE Aug 8** (0.01 USDC on-chain, TX 0x88fe6c9a...b1df, Base). **REMAINING was: film demo video + assemble GitHub submission (README, video, live tx link). Verify submission status — if not submitted, mark closed.**
 - [x] 🚨 **Build with Gemini XPRIZE #29** — **DROPPED Aug 15 (Jordan decision).** Was Aug 17 deadline. Zero actual Gemini/Vertex code existed (only a build brief); 2 days was "way too tight" for a $2M pool. Jordan chose to unregister and refocus on CockroachDB + Delphi. Marked closed — do not re-flag.
-- [ ] 🚨 **CockroachDB × AWS — Agentic Memory #83** — **⚠️ DEADLINE TODAY (Aug 18).** $8.75K, persistent memory + MCP Server (Devpost cockroachdb-ai.devpost.com). **Agent Memory layer BUILT + verified** (shipped 2026-08-14, `10-Labs/cockroachdb-agentic-memory/`, 9/9 tests, live CockroachDB v24.3.4). **REMAINING (Jordan):** register on Devpost, record <3min demo, push public repo. **⚠️ CLOSEST ACTIONABLE DEADLINE — HIGHEST PRIORITY.**
+- [ ] 🚨 **CockroachDB × AWS — Agentic Memory #83** — **⚠️ DEADLINE WAS TODAY (Aug 18).** $8.75K, persistent memory + MCP Server (Devpost cockroachdb-ai.devpost.com). **Agent Memory layer BUILT + verified** (shipped 2026-08-14, `10-Labs/cockroachdb-agentic-memory/`, 9/9 tests, live CockroachDB v24.3.4). **REMAINING (Jordan):** register on Devpost, record <3min demo, push public repo. **⚠️ CLOSEST ACTIONABLE — verify submission status now.**
 - [ ] ✅ **AI Factory Hackathon #79** — **DEADLINE PASSED Aug 10.** lablab.ai × NativelyAI. **MARKED SHIPPED by labs Aug 9.** Jordan: confirm submission status (if not submitted, this is done).
 - [ ] ✅ **Build with DataHub** — **DEADLINE PASSED Aug 10.** Needs submission confirm. If not submitted, mark closed.
 - [ ] ✅ **Arc Programmable Money Hackathon** — **DEADLINE PASSED Aug 9.** SHIPPED + verified (ArcAgentWallet.sol, 57/57 tests). Moved to Recently Resolved.
 - [ ] 🔴 **Superteam USA — Remote Community Membership** — Applied. **Jordan confirmed Aug 12: applied for second triage, now waiting on their decision.** (Superteam Earn agent `gentech-labs-x402` registered Jul 23; us.superteam.fun/join remote membership.) Status: PENDING second triage.
 - [ ] 🟡 **Solana Foundation USA Grant** — Applied Aug 5 (~$8.2k avg/up to $10k USDG). **Aug 12 check: site still shows application, no approval/rejection email, no status change** — likely large applicant pool. STILL PENDING. Do not reallocate treasury around unconfirmed grant. **Re-check ~Aug 19 (1 day).** Tracked: Treasury/2026-08-05-solana-foundation-usa-grant.md
-- [ ] 🚨 **Mastercard Innovation Challenge** — **Jordan to register by Aug 20 (2 days); submit Aug 31.** Credential > prize framing (W33 review, Aug 16).
+- [ ] 🚨 **Mastercard Innovation Challenge** — **Jordan to register by Aug 20 (1 day); submit Aug 31.** Credential > prize framing (W33 review, Aug 16). **BUILD KICKED OFF (Aug 18)** — registration verified (luma.com/kyz978xv, free); `10-Labs/mastercard-challenge/` scaffolded (red_team 7 attack types + blue_team governance + live fraud stack `live_stack.py`, tests 13/13; ERC-8004 identity + credit 76.7/HIGH surfaced). Labs: extend realism, session-aware eval, polish UI, demo video by Aug 31.
 - [ ] 🚨 **Algorand First-Mover Play (Aug 6)** — **✅ COMPOSITE ENTRY SHIPPED (Aug 7).** **Jordan: (1) provide Algorand wallet address so X402_PAYTO_ALGORAND goes live, (2) confirm late-leaderboard eligibility or mark dead.**
 - [ ] 🚨 **Algorand Global x402 Challenge #82** — **⚠️ DEADLINE PASSED Jul 31.** $100K + 500K ALGO. **Jordan: confirm if registered / late-leaderboard eligible, or mark dead.**
 
@@ -194,6 +194,10 @@ Jordan's decision on the Gears E:D beta: **NOT pre-ordering for beta access.** E
 
 ## ✅ Recently Resolved
 
+- **ClawWork Employee Squad infra SHIPPED (#3, Aug 18)** — provider-fallback router live on `127.0.0.1:8011` (Ollama Cloud→OpenCode Go), verified chat round-trip vs deepseek-v4-flash. GDPVal pipeline loads 220 tasks ($82–$5004, avg $259). NEXT: run one GDPVal task end-to-end (labs) to prove a real deliverable + settlement.
+- **Dinari dShares rail SCAFFOLDED (Aug 18)** — `agent-kit-self-tracking/dinari-rail/`, self-test passes. Jordan: Partners signup + sandbox API key + KYC to validate.
+- **Fraud/Security Stack AUDIT + COMPLIANCE (Aug 18)** — rugcheck v2.1.0 confirmed AHEAD of vault source; x402-compliance-scanner fixed to v2 spec (was false-negative flagging); gateway 16/16 compliant; rugcheck 178/178, token-security 2/2, mastercard 10/10.
+- **Mastercard Innovation Challenge build KICKED OFF (Aug 18)** — live fraud stack wired, tests 13/13, ERC-8004 identity + credit score surfaced. Register by Aug 20.
 - **KAGE "Church of the Dead" Stage Music Video COMPLETE (v21 FINAL, Aug 17)** — 117.8s full arc, live at vanito.gentechlabs.net/music/vanito/kage-cotd-stage-v21.mp4. New character KIRI (mist) added. Reusable prompts saved as skill `kage-cotd-stage-mv`.
 - **Agentic Treasury Edge built (Aug 17)** — `yield_vs_baseline.py agentic_edge()` shows active vs passive HODL/stake. Conservative 1.15x multiplier, honest flags. NOT yet wired into Yield Rail Finder report.
 - **Super Arcade Tennis Main Menu [P0] SHIPPED** (Aug 17) — title/mode/instructions.
