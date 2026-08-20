@@ -40,3 +40,12 @@
 - Mastercard Innovation Challenge: registration link verified (luma.com/kyz978xv), build scaffolded (red/blue-team + web UI, 10/10 tests)
 - #mastercard-live-stack — wired live fraud stack (RugCheck v2 + Treasury Defender) into Mastercard demo as real-data layer; tests 13/13
 - #mastercard-identity-credit — surfaced ERC-8004 identity + agent credit score (76.7/HIGH) in Mastercard demo
+
+## 2026-08-20
+- #DEPLOY — AVAX/USDC CURVE LIVE on real funds (~$29 deployed, 17 bins IN range, posture → DEPLOYED). Auto-deploy leg wired; full $29 working; $1.50 USDC + 0.3 AVAX gas buffer.
+- #autodeploy — wired funded-wallet-no-position → auto-deploy into the decision layer (steward_rebalance.py) + verified live.
+- #deploy-bugfixes — stale price source + flat→Gaussian liquidity distribution (was reverting ZeroShares); verified via re-run.
+- #lp-monitor-consolidation — LP detail merged into Agentic Treasury fused report; standalone LP Monitor cron paused.
+- #payg-skip — BENQI PAYG validator SKIPPED (no staking rewards = cost, not income); logged conditional in retro9000-cchain-play-scope.
+- #solana-rail — 4 signals (OOBE+MultiHopper, Ampersend+AWS, 8004scan+Krexa, Ramp) → Solana second rail; feature-bridge + freedom-planner ideas captured.
+
