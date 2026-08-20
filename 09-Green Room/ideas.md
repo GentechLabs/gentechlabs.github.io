@@ -339,6 +339,30 @@
 - [ ] C3: AgentKit repo public + readable
 - [ ] C4: Retro9000 submission + verified-user base + social feed
 
+## 🆕 Cross-Chain Feature Bridge — "One Chain's Capability, Every Chain" (Aug 20)
+
+**Source:** Jordan (Treasury group) — from the Krexa/8004scan Solana thread. | **Status:** Idea captured, needs scoping
+
+**The insight:** We're not just the money router — we help people get where they are. But what if one chain has a capability another chain lacks? We can **bridge features**, not just assets. Same identity (ERC-8004) across chains means a capability built on one rail can be exposed on every rail.
+
+**Concrete example (the trigger):** Krexa gives Solana agents **onchain credit** (Krexit Score 200–850, borrow USDC, auto-repay from revenue). That's a capability Solana has that Base/Avalanche don't natively. We already have the same ERC-8004 identity on Avalanche (#1770) + Base. So: can we **expose Krexa-style credit as a service on our other rails** — or build our own version of the credit layer and offer it cross-chain?
+
+**The pattern (our own version):** We already do this with the **multi-agent strategy via Telegram** — we took a capability (agent orchestration) and made it work across our fleet/groups. The feature-bridge is the same instinct applied to chains: take a primitive that lives on one rail and make it available everywhere.
+
+**Why it matters:**
+- **Identity is the unlock.** ERC-8004 (same contract, 22 chains) means an agent's reputation/credit follows it across chains. That's the substrate that makes feature-bridging possible — we don't rebuild identity per chain, we port the *capability*.
+- **We're the tollbooth.** If we can bridge features, we become the layer that lets any chain's capability reach every chain — the middleware moat, not just asset movement.
+- **Differentiation.** Everyone moves money. Few move *capabilities*. This is a wedge.
+
+**Open questions for Jordan:**
+1. Do we **integrate** Krexa (list our x402 services on their Pay.sh catalog, use their credit layer) or **build our own** credit layer and offer it cross-chain? (Krexa is invite-gated — we'd need the invite code either way.)
+2. What's the first feature to bridge? (Credit is the obvious candidate — it's the missing "trust it" leg after identity+reputation.)
+3. Is this a **product** (a service we sell) or a **capability** (something that makes our existing rails stronger)?
+
+**Related:** Krexa is already in "Ready to Test" below (invite-gated, `@krexa/x402` middleware = 3-line Express monetization on Solana). This idea elevates it from "test a tool" to "strategic feature-bridge play."
+
+---
+
 ## Ready to Test (skills exist, need execution)
 
 - [ ] **Krexa — Credit Infrastructure for AI Agents on Solana** — Live mainnet-beta, invite-gated. Gives AI agents credit: borrow USDC against on-chain **Krexit Score** (200–850), no human co-signer, auto-repay from future revenue via Revenue Router. **Complementary to us, not competitor** — "x402 is the payment rail; Krexa is the credit layer on top." 350+ agents deployed. **Why it matters:** (1) our x402 gateway services can be listed on their **Pay.sh catalog** (Solana Foundation + Google Cloud) for new distribution; (2) validates our Agent Credit Score direction (they have Krexit Score 200–850); (3) `@krexa/x402` middleware = 3-line Express monetization on Solana, same pattern as our gateway. **Access:** invite code via Discord `discord.gg/aMSEG7yj` or @krexa_xyz open drops. Source: krexa.xyz, Aug 7. **Needs Jordan:** grab invite code → I run `krexa activate <code>` + test CLI/SDK/MCP.

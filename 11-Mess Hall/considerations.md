@@ -23,6 +23,16 @@ last-updated: 2026-08-18 20:06 ET
 - [ ] 🚨 **Algorand First-Mover Play (Aug 6)** — **✅ COMPOSITE ENTRY SHIPPED (Aug 7).** **Jordan: (1) provide Algorand wallet address so X402_PAYTO_ALGORAND goes live, (2) confirm late-leaderboard eligibility or mark dead.**
 - [ ] 🚨 **Algorand Global x402 Challenge #82** — **⚠️ DEADLINE PASSED Jul 31.** $100K + 500K ALGO. **Jordan: confirm if registered / late-leaderboard eligible, or mark dead.**
 
+## 🆕 MultiHopper — Solana Private Routing Rail (Aug 20)
+
+- **Signal:** OOBE Protocol (SAP) partnering with MultiHopper — programmable onchain privacy routing on Solana. Agents on SAP get MultiHopper payment routing through OOBE tooling; shared revenue on routed txs.
+- **What it is:** non-custodial, compliance-checked (TRM Labs) multi-hop asset routing. MCP-compatible + REST (OpenAPI 3.1), 3-call lifecycle (create → prepare → confirm-broadcast), signing stays client-side. 2,800+ mainnet transfers, revenue positive, Top 3 by Visa at Solana Colosseum Berlin, SOC 2 + GDPR.
+- **Why us:** Solana = our second rail (Base = volume, Solana = compounding agent economy). This is the "move it" layer for treasury — private, compliant, programmable. Complements Ampersend (pay-for-APIs buyer-side) vs MultiHopper (route-value treasury movement).
+- **Tier 1 (50/50 revenue share, first 500 devs):** permanent, no caps, Day 1 API creds + sandbox. Worth grabbing early.
+- **⏳ JORDAN ACTION (wallet connect, ~2 min):** connect Solana wallet at `multihopper.com/developer/dashboard` (prod, `mh_live_` key) or `devnet.multihopper.com/developer/dashboard` (test, `mh_test_` key). No email signup path — wallet connect only. Use the same wallet as SAP/agent ops.
+- **After key:** Steward wires MCP server (`https://dev-docs.multihopper.com/mcp`) into Hermes config + scopes as treasury routing rail.
+- **Docs:** dev-docs.multihopper.com (quickstart, agentic-integration, mcp-server). MCP server URL: `https://dev-docs.multihopper.com/mcp`.
+
 ## 🟢 AgentLux — LIVE, First-Hire Guarantee armed (Aug 12)
 
 - **Agent registered** `9fed6922-48d0-4ed6-975a-c828bdf02446` (wallet 0x7ebf…96a), provider profile public.
