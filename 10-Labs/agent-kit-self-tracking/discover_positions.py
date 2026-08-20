@@ -240,7 +240,35 @@ def read_lfj_v22_position(wallet: str, pool: Dict[str, Any], chain: str = "avala
         # Live pair price (tokenX in tokenY): active bin price is the market rate
         market_price = _bin_price_lfj(active, bin_step)  # Y per X
         in_range = (low <= market_price <= high) if (low and high) else True
-        position_usd = None  # honest: don't invent a precise USD value
+
+        # ── Deployed position value (USD) — honest accounting ─────────
+        # LFJ V2.2 getBin returns tightly-packed uint128s that don't ABI-decode
+        # cleanly, and pool-level getReserves() is pool-wide (30K+ AVAX), NOT
+        # our share. So we value the position from the wallet ledger:
+        #   deployed = known_funded_usd − loose_wallet_value − native_gas.
+        # funded_usd comes from treasury_config ("funded_usd"), set at deposit.
+        # If not set, report None (honest) rather than inventing a number.
+        position_usd = None
+        try:
+            cfg_funded = None
+            try:
+                with open(os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                       "treasury_config.json")) as _cfgf:
+                    cfg_funded = json.load(_cfgf).get("funded_usd")
+            except Exception:
+                cfg_funded = None
+            if cfg_funded and price_x:
+                # wallet loose value from discover_wallet_balances
+                wb = discover_wallet_balances(chain, wallet)
+                loose_usd = 0.0
+                for sym, amt in wb.items():
+                    if sym == "AVAX" or sym == "WAVAX":
+                        loose_usd += amt * price_x
+                    elif sym in ("USDC", "USDC_e", "USDT_e"):
+                        loose_usd += amt  # ~1 USD stable
+                position_usd = round(max(cfg_funded - loose_usd, 0.0), 2)
+        except Exception:
+            position_usd = None
 
         return {
             "name": pool.get("name"),
