@@ -137,3 +137,28 @@ The C-Chain play is "real" when, end to end:
 
 - **Needs Jordan:** (1) greenlight Phase C0-C4, (2) confirm whether to enter R6 (need to check when it opens + R5 results), (3) any C-Chain USDC/AVAX to fund the demo slice.
 - **My immediate next step once greenlit:** C0 — verify the treasury can execute on C-Chain and fund a small demo slice. Then C1-C4 in sequence.
+
+---
+
+## 11. BENQI PAYG — affordable agent-run validator (the infra angle, Aug 20)
+
+**Source:** BENQI Ignite PAYG (app.benqi.fi/ignite). **This is an OPTION within the Retro9000 play, not a yield rail.**
+
+### What it is
+- **No 2,000 AVAX ($13K) upfront stake needed.** Pay a **weekly fee**, BENQI supplies the full 2,000 AVAX validator stake, you run the node.
+- **Min fee: 8 AVAX/week (~$57).** One-time fee, min stake 0. 2-wk=16 AVAX, 4-wk=30 AVAX, 8/12-wk cheaper per wk. 5% discount paid in QI. Payable AVAX/USDC/QI.
+- **Agent-wireable:** run node on our VPS (already 24/7) → extract Node ID + BLS Key + BLS Sig → submit PAYG → BENQI stakes.
+
+### The honest catch — it is a COST, not income
+- **PAYG earns NO staking rewards** (BENQI keeps them). Rewards are "minimal."
+- So PAYG alone is NOT an income stream. It only becomes income **IF Retro9000 awards** the agent-run-validator infra play.
+- **The intersection:** Retro9000's "L1s & Infrastructure Tooling" round ($40M AVAX) rewards critical infra. An agent-run validator generating real on-chain activity = an infra-tooling submission angle. PAYG makes that affordable ($57/wk vs $13K stake).
+
+### How to log it (Jordan's request — "log as an income stream for Retro9000")
+- **Income:** CONTINGENT on Retro9000 awarding the infra/instrumentation angle. Not guaranteed.
+- **Cost to run:** ~$57/wk (8 AVAX) + VPS hosting (we already run 24/7 infra, ~$0 marginal).
+- **Breakeven:** needs a Retro9000 award ≥ the rental cost. A small award (>$57) flips it net-positive.
+
+### Gate / next
+- Only pursue if we target the **Infrastructure Tooling** round AND can demonstrate the agent actually runs the validator (uptime, monitoring) — not just pay to rent it.
+- **Needs Jordan:** go/no-go on a 1-2 week PAYG experiment when R6/infra round timing is confirmed. Do NOT log this as recurring yield — it's a conditional grant play.
