@@ -1,0 +1,10 @@
+# 👑 Jordan Action Items — 2026-08-20
+
+## Needs Your Action (1 items)
+
+- **#46 ComfyUI — Self-Hosted Brand Asset Pipeline (Consigliere Fed Chair family)** — ComfyUI (Comfy-Org/ComfyUI, 124k stars, GPL-3.0) — the most powerful modular diffusion GUI/backend. Runs FLUX/SDXL/Wan/LTX locally on a GPU. USE CASE: character consistency for the Consigliere Fed Chair family + treasury emblems. IPAdapter+InstantID locks the Powell face so every chain Fed Chair (Solana/Arc/Base/ETH) keeps the SAME face, just recolored; train a Consigliere LoRA once for a consistent brand family; reusable node graph recolors the hex 'G' emblem per chain. VPS has NO GPU (4-core/15GB/22GB free) so this is a DESKTOP tool. Needs: GPU laptop/desktop (12GB+ VRAM ideal, 3060 sweet spot; min 4GB VRAM/16GB RAM for SDXL). Install: pip install comfyui or portable build from github.com/Comfy-Org/ComfyUI; see docs.comfy.org/installation/system_requirements. Deliverable: Consigliere LoRA + per-chain workflow generating the full Fed Chair cabinet + treasury emblems in one consistent pass; finished assets return to VPS for site/avatars.
+
+## Needs Your Decision (2 items)
+
+- **#32 Model Strength Score — score trained models 0-850 for marketplace** — Score AI models 0-850 like Agent Credit Score: Data Quality 30%, Benchmarks 25%, Trainer Reputation 20%, Age/Uptime 15%, Market Adoption 10%. Bittensor lessons baked in: staked reputation, on-chain provenance, no kill switch. First listing = GenTech DeFi Model (Modal GPU ~$30-60). Revenue: score API $0.01-0.05, listing fee, 2-5% inference take. Spec: 09-Green Room/specs/model-strength-score.md. Needs Jordan greenlight + Modal GPU funding.
+- **#41 OpenDexter Marketplace — List GenTech x402 Gateway Services** — List GenTech x402 gateway services on OpenDexter (open.dexter.cash/mcp) — an x402 API marketplace MCP. Registry row 4g verified Aug 3: endpoint live, tools enumerated (x402_search/check/access/wallet), search proven. Jordan explicitly wants us listed here. Next: find the provider-submission flow to register our services.
