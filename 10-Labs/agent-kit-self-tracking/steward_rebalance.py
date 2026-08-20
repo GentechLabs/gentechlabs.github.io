@@ -127,6 +127,37 @@ def gas_ok() -> bool:
         return False
 
 
+# Minimum deployable capital (USDC) before auto-deploy triggers. Below this we
+# stay as dry powder — don't burn gas opening a sub-$10 position.
+DEPLOY_MIN_USDC = 10.0
+DEPLOY_EXEC_SCRIPT = os.environ.get(
+    "STEWARD_EXEC_SCRIPT",
+    "/root/.hermes/profiles/gentech-treasury/scripts/gta_avax_lp_execute.py")
+
+
+def has_deployable_capital() -> float:
+    """Return deployable USDC on the Steward wallet (0 if none / error).
+
+    This is the trigger for the auto-deploy leg: a funded wallet with no live
+    position means the treasury should open a fresh curve, not sit as dry
+    powder. Returns the USDC amount available to deploy.
+    """
+    try:
+        from discover_positions import get_erc20_balance
+        cfg = load_json(os.path.join(HERE, "treasury_config.json"), {}) or {}
+        wallet = cfg.get("wallet") or os.environ.get("STEWARD_WALLET")
+        if not isinstance(wallet, str):
+            return 0.0
+        # USDC on Avalanche C-Chain
+        usdc_contract = "0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E"
+        raw = get_erc20_balance("avalanche", usdc_contract, wallet)
+        if raw is None:
+            return 0.0
+        return raw / 1e6
+    except Exception:
+        return 0.0
+
+
 def get_position_after() -> str:
     """Re-read the live position after a rebalance, return a compact read string."""
     try:
@@ -149,7 +180,20 @@ def decide(position: Dict[str, Any], regime: Dict[str, str],
     shape = REGIME_SHAPE.get(regime_name, "CURVE")
 
     # No live position -> nothing to act on
-    if "error" in position or not position.get("positions"):
+    has_live_pos = any(
+        "error" not in p for p in (position.get("positions") or []))
+    if "error" in position or not has_live_pos:
+        # Auto-deploy leg (Jordan, Aug 20 2026): a funded wallet with no live
+        # position means the treasury should open a fresh curve, not sit as
+        # dry powder. Only deploy when there's real deployable capital AND
+        # enough native gas. Below the floor we stay liquid.
+        deployable = has_deployable_capital()
+        if deployable >= DEPLOY_MIN_USDC and gas_ok():
+            return {
+                "action": "deploy", "shape": shape,
+                "reason": (f"funded wallet, no position — auto-deploy "
+                           f"${deployable:.2f} USDC curve"), "fee_eff": eff,
+            }
         return {
             "action": "hold", "shape": shape,
             "reason": "no deployable position detected", "fee_eff": eff,
@@ -248,7 +292,7 @@ def main() -> int:
 
     # ── WATCHDOG mode: emit only on a real signal (silent watchdog cron) ──
     if args.watchdog:
-        if decision["action"] == "rebalance":
+        if decision["action"] in ("rebalance", "deploy"):
             p = next((x for x in position.get("positions", []) if "error" not in x), None)
             pos_read = p.get("read", "") if p else ""
             print(f"🛡️ Steward: {decision['action'].upper()} — {decision['shape']}")
@@ -261,6 +305,31 @@ def main() -> int:
 
     # ── AUTONOMOUS mode: detect need, execute, report (Jordan alerted AFTER) ──
     if args.autonomous:
+        if decision["action"] == "deploy":
+            # Funded wallet, no position — open a fresh curve (auto-deploy).
+            import subprocess
+            deployable = has_deployable_capital()
+            deployable = max(10.0, deployable - 1.0)  # keep a little USDC + gas buffer
+            print(f"🛡️ STEWARD — AUTONOMOUS DEPLOY (no position)")
+            print(f"   Reason: {decision['reason']}")
+            print(f"   Plan: open {decision['shape']} curve for ${deployable:.2f}")
+            proc = subprocess.run(
+                [sys.executable, DEPLOY_EXEC_SCRIPT, "--amount", str(deployable),
+                 "--bin-spread", "5", "--execute", "--yes"],
+                capture_output=True, text=True, timeout=300)
+            ok = proc.returncode == 0
+            print(f"   Executed: {'✅' if ok else '❌'}")
+            if proc.stdout:
+                print(f"   {proc.stdout[-1200:]}")
+            if proc.stderr:
+                print(f"   stderr: {proc.stderr[-300:]}")
+            if ok:
+                with open(stamp_file, "w") as f:
+                    json.dump({"ts": _now_iso()}, f)
+                new_pos = get_position_after()
+                if new_pos:
+                    print(f"   ✅ Position live: {new_pos}")
+            return 0
         if decision["action"] != "rebalance":
             # Healthy — stay silent (no noise). The heartbeat covers the pulse.
             return 0
