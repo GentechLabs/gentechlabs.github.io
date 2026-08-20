@@ -363,6 +363,34 @@
 
 ---
 
+## 🆕 Treasury Onboarding — Goal Preference System (Aug 20)
+
+**Source:** Jordan (Treasury group) — "Canva-style onboarding: pick your top preferences; yield farming should be the default goal throughout the agentic treasury, but users can set custom goals — also for trading."
+
+**The idea:** When a user sets up the Agentic Treasury, an onboarding step asks their **primary goal** (like Canva asks favorite presets). Yield farming is the **default** (D5 milestone = yield-farming preference, esp. AVAX), but users pick their own:
+- **Yield farming** (default) — LP curve, fee efficiency, in-range target.
+- **Trading** — spot DCA, arb, narrative rotation.
+- **Custom goal** — user defines what "win" means (e.g. "save $X", "passive income", "grow the bag by Y%").
+
+**Why it's powerful:**
+1. **It shapes the whole treasury.** One preference flips the default behavior — which the existing machinery already supports via `steward-buylist-overrides.json` (council can flip `strategy` per symbol: `FARM > trade` vs `TRADE > farm`). Onboarding just becomes the *human* gate that sets the initial overrides instead of the council discovering them.
+2. **Yield-farm default is honest + on-thesis.** Our whole edge is fee-efficient LP on the AVAX rail. Defaulting new users there is both the best first experience and what we're built for.
+3. **It's the trust layer.** A user who sets "trading" shouldn't get surprise yield-farm behavior, and vice versa. Explicit goal = no surprise = trust. Matches the GenTech EDU honest-expectations principle.
+4. **Extends to trading.** Same mechanism — "goal = basis arb" or "goal = accumulate BTC on dips" becomes a config the treasury holds across runs, not a one-off.
+
+**Mapping to existing machinery (the build is mostly wiring, not greenfield):**
+| Goal | Sets | Mechanism |
+|------|------|-----------|
+| Yield farming (default) | `steward-buylist-overrides.json` → AVAX `FARM>trade`, LP deployed | already live |
+| Trading | overrides → `TRADE>farm`, enable executor | `gta_executor.py` |
+| Custom | user-defined target + guardrail | posture + stop-loss/circuit-breaker |
+
+**The deliverable:** a tiny onboarding form (web PWA step or /start prompt) that writes the user's goal into a config the treasury reads every run — so goal preference is a standing rule, not a one-off. Plus a **default** that's yield-farming (D5).
+
+**Status:** Idea captured. Scoped for when we productize the treasury as a user-facing service (ties into GenTech Hub PWA + EDU onboarding).
+
+---
+
 ## Ready to Test (skills exist, need execution)
 
 - [ ] **Krexa — Credit Infrastructure for AI Agents on Solana** — Live mainnet-beta, invite-gated. Gives AI agents credit: borrow USDC against on-chain **Krexit Score** (200–850), no human co-signer, auto-repay from future revenue via Revenue Router. **Complementary to us, not competitor** — "x402 is the payment rail; Krexa is the credit layer on top." 350+ agents deployed. **Why it matters:** (1) our x402 gateway services can be listed on their **Pay.sh catalog** (Solana Foundation + Google Cloud) for new distribution; (2) validates our Agent Credit Score direction (they have Krexit Score 200–850); (3) `@krexa/x402` middleware = 3-line Express monetization on Solana, same pattern as our gateway. **Access:** invite code via Discord `discord.gg/aMSEG7yj` or @krexa_xyz open drops. Source: krexa.xyz, Aug 7. **Needs Jordan:** grab invite code → I run `krexa activate <code>` + test CLI/SDK/MCP.
