@@ -58,3 +58,10 @@
 
 ## 2026-08-18 Nightly Build
 - **#3 ClawWork Integration — Employee Squad**: SHIPPED + VERIFIED (infra). Router shim live on :8011 (chat round-trip OK), GDPVal pipeline loads 220 tasks (avg $259.45) + daily task selection works. Committed /root/ClawWork.
+
+## 2026-08-20 Nightly Build
+- **#4 Paymenter x402 Gateway — RE-GATED (needs Jordan)**: repo verified live (main @ bb1857d), listing + Discord post drafted. Submission needs Jordan's live Paymenter account + Discord bot token; canonical `Paymenter/Extensions` repo is archived/read-only (no PR path). Queue #4 → needs_jordan=true.
+- **Fleshed out `connectors/paymenter.md`** (10-Labs/x402-gateway/connectors/) with exact listing fields (title/category/short-desc/config table/support links) — ready to paste when Jordan unblocks. Connector Pack now 4/5 docs done (opendexter, cdp-bazaar, awesome-mcp-servers, paymenter).
+- **Group returns consumed**: all returned IDs (labs/entertainment/treasury/forge) already marked shipped in prior sessions — nothing new to apply.
+- **Infra health**: gateway 200, hub-launcher 200, arcade 200. Vault synced + pushed (54e9b38b).
+- **Jordan items** written to `01-HANDOFFS/2026-08-20-jordan-items.md` (Mastercard register TODAY, #4 Paymenter, #where-are-the-funds, Model Strength Score, Dinari, Krexa, C0).
