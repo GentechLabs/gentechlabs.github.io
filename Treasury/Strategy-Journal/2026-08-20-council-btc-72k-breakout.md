@@ -36,3 +36,14 @@ Thesis fully supported (bull confirmed, breakout to $76K). **Gate dissents** —
 
 ## Standing posture
 Jordan rebuilding after storm emergency; wants back in as BTC nears Sept. When capital clears the $25 gate, deploy per buy-list zones (BTC DCA spot, AVAX LFJ yield-farm).
+
+---
+
+## Addendum — x402 ecosystem signal (Jordan shared @CoinMarketCap)
+
+**x402 processed 14M AI-agent payments in 30 days** (Token Terminal). Base 7.3M, Polygon 5.6M.
+
+- **Direct validation of GenTech's core thesis** — we are x402 per-tx middleware. The rail we built on is the busiest in the ecosystem.
+- **Fundamental/business signal, not price** — no deploy. Gate still flat.
+- **Base at 7.3M** confirms our home rail is where the volume is.
+- Supports the win-ORCHESTRATORS + wedge=convenience strategy. When treasury funds return, we collect per-tx spread on the busiest rail.
