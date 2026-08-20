@@ -389,6 +389,28 @@
 
 **Status:** Idea captured. Scoped for when we productize the treasury as a user-facing service (ties into GenTech Hub PWA + EDU onboarding).
 
+### 🔑 The deeper layer — it's a FREEDOM PLANNER, not just ranks (Jordan, Aug 20)
+
+**The emotional/utility core:** the ranks aren't gamification — they convert "my money working" into a **plan for financial freedom**. Jordan's exact framing:
+- "I need **$20,000** in here to work **less** at my job."
+- "I need **$50,000** to **quit** my job and rely on the yield farm."
+
+The D-ranks (Scout/Grunt/Recruit...) show **daily yield earned**, which makes it easy to see in real time "how much do I need deployed so I don't have to work?" The daily-income number is the bridge from "I have $X saved" to "I can live off this."
+
+**It's universal — traders want the same thing.** Jordan's extension (Aug 20): traders also want to know they can eventually quit their job and become a **full-time trader** — and they want to see their **projections** ("if I build to $30K trading at my expected edge, that's $X/mo, and that gets me off the paycheck"). Same mechanism, different strategy: the freedom planner takes the user's edge/projection and shows the path to quitting, regardless of yield-farm or trading.
+
+**Design implication:** goals + journal + ranks are **one connected thing**, not three features:
+- **Goal = the freedom target** ("reduce work at $20K", "quit at $50K").
+- **Rank = the daily-income progress bar** toward it.
+- **Journal = the narrative of the money working.**
+- **Projection = "X more days/at this yield or edge, and I'm free."**
+
+A user sets a freedom target ("$50K"), and the treasury translates it into a **required daily yield** (or expected trading edge), and the rank system shows how close each day's fees get to it. That turns the abstract ("grow capital") into concrete ("X more days and I'm free").
+
+**Product framing:** "The agentic treasury is your investment plan that runs itself — set your freedom number, and it tells you how much money needs to be working to get you there."
+
+**Captured for the product build** (GenTech Hub PWA onboarding + EDU + journal + rank tiers). This is the emotional hook that makes the treasury sticky — it's not "manage an LP," it's "how do I stop working."
+
 ---
 
 ## Ready to Test (skills exist, need execution)
