@@ -7,7 +7,10 @@
     "status": "shipped",
     "assigned_to": "gentech",
     "platform": "cloud",
+    "needs_jordan": true,
     "detail": "First arcade cabinet. Three.js isometric tennis, chain power-shots (BTC/ETH/SOL), AI opponent. LIVE at arcade.gentechlabs.net. Part of larger Agent Arcade vision. [GAME LIVE Aug 3 — only x402 payments remain, Jordan-gated]",
+    "human_gated": true,
+    "gate_type": "human",
     "note": "GAME IS LIVE at arcade.gentechlabs.net (root /). Only remaining work = x402 crypto-payments wiring (needs Jordan wallet/funds). Verified Aug 3: serves HTTP 200, full game code present. [Returned by entertainment 2026-08-18]",
     "_orig_id": 4,
     "recommended_tier": "flash",
@@ -18,8 +21,7 @@
       "handoff_on_complete": true
     },
     "shipped_by": "labs",
-    "shipped_date": "2026-08-18",
-    "needs_jordan": false
+    "shipped_date": "2026-08-18"
   },
   {
     "id": 2,
@@ -29,7 +31,10 @@
     "status": "shipped",
     "assigned_to": "gentech",
     "platform": "cloud",
+    "needs_jordan": false,
     "detail": "Self-host Open Generative AI (24.7k stars, MIT) on VPS. 400+ models (Flux, Midjourney, Kling, Sora, Veo, Seedance, lip sync). Next.js 14 + MuAPI backend. Use for arcade game trailers, Vanito/KAGE production, social media content. Could contribute x402 payment integration.",
+    "human_gated": false,
+    "gate_type": "decision",
     "_orig_id": 5,
     "recommended_tier": "k2.7",
     "note": "[Jordan GO Aug 3: ship + start] [Returned by entertainment 2026-08-18]",
@@ -40,8 +45,7 @@
       "handoff_on_complete": true
     },
     "shipped_by": "labs",
-    "shipped_date": "2026-08-18",
-    "needs_jordan": false
+    "shipped_date": "2026-08-18"
   },
   {
     "id": 3,
@@ -51,6 +55,9 @@
     "status": "shipped",
     "assigned_to": "gentech",
     "platform": "cloud",
+    "needs_jordan": false,
+    "human_gated": false,
+    "gate_type": "decision",
     "detail": "Spin up ClawWork agents as autonomous freelancers earning on GDPVal tasks. $19K/8hrs demonstrated by ATIC+Qwen3.5-Plus. Funds VPS, arcade, x402 payouts. Needs nanobot config with API key. Cloned at /root/ClawWork/, dependencies installed, CLI working.",
     "_orig_id": 10,
     "recommended_tier": "k2.7",
@@ -62,8 +69,7 @@
       "handoff_on_complete": true
     },
     "shipped_by": "gentech",
-    "shipped_date": "2026-08-18",
-    "needs_jordan": false
+    "shipped_date": "2026-08-18"
   },
   {
     "id": 4,
@@ -95,6 +101,9 @@
     "status": "shipped",
     "assigned_to": "gentech",
     "platform": "any",
+    "needs_jordan": false,
+    "human_gated": false,
+    "gate_type": "action",
     "detail": "Post in Pterodactyl community (Discord, forums) about the first crypto gateway for game server hosts. Game server hosts are the biggest Paymenter use case — their customers already hold crypto.",
     "_orig_id": 12,
     "recommended_tier": "flash",
@@ -106,8 +115,7 @@
       "handoff_on_complete": true
     },
     "shipped_by": "entertainment",
-    "shipped_date": "2026-08-18",
-    "needs_jordan": false
+    "shipped_date": "2026-08-18"
   },
   {
     "id": 6,
@@ -117,6 +125,9 @@
     "status": "shipped",
     "assigned_to": "jordan",
     "platform": "any",
+    "needs_jordan": true,
+    "human_gated": true,
+    "gate_type": "action",
     "detail": "Two platforms running locally. (1) Multica at localhost:3001 — create GenTech workspace, add Hermes agent, spin up ClawWork agents as teammates on the board. Fixed verification code 402402. (2) Paperclip at ProtoJay4789/paperclip (fork, 74.8K stars, build fixed) — start dev server, build genTech-shop plugin for build queue panel + service catalog. Both greenlit by Jordan.",
     "_orig_id": 13,
     "recommended_tier": "flash",
@@ -128,8 +139,7 @@
     },
     "shipped_by": "labs",
     "shipped_date": "2026-08-18",
-    "note": "[Returned by entertainment 2026-08-18]",
-    "needs_jordan": false
+    "note": "[Returned by entertainment 2026-08-18]"
   },
   {
     "id": 7,
@@ -139,6 +149,9 @@
     "status": "shipped",
     "assigned_to": "jordan",
     "platform": "any",
+    "needs_jordan": true,
+    "human_gated": true,
+    "gate_type": "action",
     "detail": "Fine-tune DeepSeek R1 Distill 32B on 26 DeFi instruction pairs via QLoRA. Single A10G on BlockRun Modal. Cost: $2.50. Time: ~1 hour. Scripts ready at 10-Labs/defi-model/. Training data at final-training-20260618.jsonl. Jordan funds BlockRun wallet, then run: python3 run-modal.py",
     "_orig_id": 15,
     "recommended_tier": "flash",
@@ -149,8 +162,7 @@
       "handoff_on_complete": true
     },
     "shipped_by": "entertainment",
-    "shipped_date": "2026-08-18",
-    "needs_jordan": false
+    "shipped_date": "2026-08-18"
   },
   {
     "id": 8,
@@ -160,6 +172,9 @@
     "status": "shipped",
     "assigned_to": "gentech",
     "platform": "cloud",
+    "needs_jordan": false,
+    "human_gated": false,
+    "gate_type": "decision",
     "detail": "Port Cesium Flight Simulator (422 stars, TypeScript/React) into GenTech Arcade as a flight cabinet. Add AI agent wingmen flying alongside. Improve graphics, add combat/racing modes. Real-world terrain via Cesium Ion. Multiplayer with agents. Repo: github.com/WilliamAvHolmberg/cesium-flight-simulator\n\nGeoLibre integration: Real-world 3D building footprints, elevation data, satellite imagery, and planetary maps (Mars, Moon) via MapLibre GL JS + DuckDB-WASM. Combined with Cesium global terrain for full DogFighters map system.",
     "recommended_tier": "k2.7",
     "_orig_id": 16,
@@ -171,8 +186,7 @@
       "handoff_on_complete": true
     },
     "shipped_by": "entertainment",
-    "shipped_date": "2026-08-18",
-    "needs_jordan": false
+    "shipped_date": "2026-08-18"
   },
   {
     "id": 9,
@@ -182,6 +196,9 @@
     "status": "shipped",
     "assigned_to": "forge",
     "platform": "desktop",
+    "needs_jordan": false,
+    "human_gated": false,
+    "gate_type": "decision",
     "detail": "Integrate ACE-Step UI (4.5K stars, open-source Suno alternative) into GenTech stack. (1) Arcade cabinet background music — per-cabinet tracks generated from mood prompts. (2) Demo video soundtracks — no copyright risk for hackathon submissions. (3) GenTech branding — jingle, intro/outro music. (4) Vanito's music studio — custom tracks for KAGE films, social content. Needs ACE-Step 1.5 model running (GPU). Repo cloned at /root/ace-step-ui/. ROUTED TO FORGE (RTX 3070 desktop lane) — GPU-bound model; VPS has no GPU.",
     "recommended_tier": "k2.7",
     "_orig_id": 17,
@@ -193,8 +210,7 @@
       "handoff_on_complete": true
     },
     "shipped_by": "entertainment",
-    "shipped_date": "2026-08-18",
-    "needs_jordan": false
+    "shipped_date": "2026-08-18"
   },
   {
     "id": 10,
@@ -204,6 +220,9 @@
     "status": "shipped",
     "assigned_to": "gentech",
     "platform": "cloud",
+    "needs_jordan": false,
+    "human_gated": false,
+    "gate_type": "decision",
     "detail": "Integrate GeoLibre (3.2K stars, MIT, TypeScript/Tauri) into DogFighters map pipeline. Real building footprints, elevation data, satellite imagery, planetary maps. 700+ GIS tools for terrain analysis. Runs in browser via MapLibre GL JS + DuckDB-WASM. Repo: github.com/opengeos/GeoLibre",
     "recommended_tier": "k2.7",
     "_orig_id": 18,
@@ -215,8 +234,7 @@
       "handoff_on_complete": true
     },
     "shipped_by": "entertainment",
-    "shipped_date": "2026-08-18",
-    "needs_jordan": false
+    "shipped_date": "2026-08-18"
   },
   {
     "id": 11,
@@ -226,6 +244,9 @@
     "status": "shipped",
     "assigned_to": "gentech",
     "platform": "cloud",
+    "needs_jordan": false,
+    "human_gated": false,
+    "gate_type": "action",
     "detail": "Fork ai-job-search (28.1K stars, MIT). (1) Set up Jordan's profile — skills, experience, portfolio link. (2) Wire into job search workflow — tailored CV + cover letters via Claude Code. (3) Package as GenTech Academy module — 'AI-Powered Job Search' case study. Repo: github.com/MadsLorentzen/ai-job-search\n\nTarget companies (remote): Zapier, Supabase, Temporal, Render, Linear, Cresta, Fieldguide, Chainguard, Vanta, RevenueCat. Jordan confirmed go. Micro1 called him a top prospect — AI test after GOAT meeting.",
     "recommended_tier": "k2.7",
     "_orig_id": 20,
@@ -239,8 +260,7 @@
     "blocked_on": "Claude Code runtime + ANTHROPIC key",
     "blocked_since": "2026-08-09",
     "shipped_by": "entertainment",
-    "shipped_date": "2026-08-18",
-    "needs_jordan": false
+    "shipped_date": "2026-08-18"
   },
   {
     "id": 12,
@@ -271,6 +291,9 @@
     "status": "shipped",
     "assigned_to": "jordan",
     "platform": "any",
+    "needs_jordan": true,
+    "human_gated": true,
+    "gate_type": "application",
     "detail": "Superteam USA (Solana Foundation-backed, no equity/fees). Apply for REMOTE community membership via us.superteam.fun/join. Jordan confirmed Aug 4: Miami Resident Builder seat is OFF (does not live in Miami) — remote membership only. Aligns with Solana learning track + x402/agent-economy thesis.",
     "note": "Tweet Aug 3 @SuperteamUSA. Apply: https://us.superteam.fun. Remote membership = VC warm intros, Rangers, Solana builder network, credibility. Portfolio-first pitch: Solana bootcamp + hackathon track record + x402 stack.",
     "group": "labs",
@@ -281,8 +304,7 @@
     },
     "_orig_id": 36,
     "shipped_by": "entertainment",
-    "shipped_date": "2026-08-18",
-    "needs_jordan": false
+    "shipped_date": "2026-08-18"
   },
   {
     "id": 14,
@@ -292,6 +314,9 @@
     "status": "shipped",
     "assigned_to": "pixel",
     "platform": "cloud",
+    "needs_jordan": false,
+    "human_gated": false,
+    "gate_type": "action",
     "detail": "Last open P0 from arcade audit. Super Arcade Tennis (arcade.gentechlabs.net root) boots straight into play — no title screen, no mode select, no instructions. Build a main menu state before the rally: title + (Start / How to Play / Mode select) + instructions overlay. File: /var/www/arcade/index.html (single-file Three.js). Mobile touch + pause already shipped Aug 16.",
     "recommended_tier": "flash",
     "_orig_id": 60,
@@ -303,8 +328,7 @@
       "handoff_on_complete": true
     },
     "shipped_by": "gentech",
-    "shipped_date": "2026-08-17",
-    "needs_jordan": false
+    "shipped_date": "2026-08-17"
   },
   {
     "id": 15,
@@ -314,7 +338,10 @@
     "status": "shipped",
     "assigned_to": "gentech",
     "platform": "cloud",
+    "needs_jordan": false,
     "detail": "Register Gentech's x402 gateway services on Syra (syraa.fun/marketplace). Syra supports creator skills with payToAddress. Our 6 services (token security, wallet analysis, etc.) already x402-ready. MCP server + SDK for agent access.",
+    "human_gated": false,
+    "gate_type": "decision",
     "_orig_id": 22,
     "recommended_tier": "k3",
     "note": "[Jordan GO Aug 3: un-gated, workable overnight]",
@@ -325,8 +352,7 @@
       "handoff_on_complete": true
     },
     "shipped_by": "entertainment",
-    "shipped_date": "2026-08-18",
-    "needs_jordan": false
+    "shipped_date": "2026-08-18"
   },
   {
     "id": 16,
@@ -336,6 +362,9 @@
     "status": "shipped",
     "assigned_to": "gentech",
     "platform": "any",
+    "needs_jordan": false,
+    "human_gated": false,
+    "gate_type": "decision",
     "detail": "The Great Agent Hackathon — build AI agents for the enterprise. Online, July 23 - August 25, 2026. ₹100,000 in prizes (~$1,200 USD). Enterprise AI agent focus. Discovered Jul 27 Nightly Brain Audit via blockrun_search.",
     "note": "Discovered Jul 27 Nightly Brain Audit. Online, still open. Needs Jordan: register at Devpost, decide go/no-go. [Jordan GO Aug 3: ship + start]",
     "_orig_id": 25,
@@ -347,8 +376,7 @@
       "handoff_on_complete": true
     },
     "shipped_by": "entertainment",
-    "shipped_date": "2026-08-18",
-    "needs_jordan": false
+    "shipped_date": "2026-08-18"
   },
   {
     "id": 17,
@@ -358,6 +386,9 @@
     "status": "shipped",
     "assigned_to": "jordan",
     "platform": "desktop",
+    "needs_jordan": true,
+    "human_gated": true,
+    "gate_type": "action",
     "detail": "ComfyUI (Comfy-Org/ComfyUI, 124k stars, GPL-3.0) — the most powerful modular diffusion GUI/backend. Runs FLUX/SDXL/Wan/LTX locally on a GPU. USE CASE: character consistency for the Consigliere Fed Chair family + treasury emblems. IPAdapter+InstantID locks the Powell face so every chain Fed Chair (Solana/Arc/Base/ETH) keeps the SAME face, just recolored; train a Consigliere LoRA once for a consistent brand family; reusable node graph recolors the hex 'G' emblem per chain. VPS has NO GPU (4-core/15GB/22GB free) so this is a DESKTOP tool. Needs: GPU laptop/desktop (12GB+ VRAM ideal, 3060 sweet spot; min 4GB VRAM/16GB RAM for SDXL). Install: pip install comfyui or portable build from github.com/Comfy-Org/ComfyUI; see docs.comfy.org/installation/system_requirements. Deliverable: Consigliere LoRA + per-chain workflow generating the full Fed Chair cabinet + treasury emblems in one consistent pass; finished assets return to VPS for site/avatars.",
     "note": "Desktop-only (no GPU on VPS). Setup guide + LoRA workflow to be written for Jordan. [JORDAN SIGNING UP Aug 15 on Devpost]",
     "_orig_id": 46,
@@ -369,8 +400,7 @@
       "handoff_on_complete": true
     },
     "shipped_by": "entertainment",
-    "shipped_date": "2026-08-18",
-    "needs_jordan": false
+    "shipped_date": "2026-08-18"
   },
   {
     "id": 18,
@@ -380,6 +410,9 @@
     "status": "shipped",
     "assigned_to": "gentech",
     "platform": "local",
+    "needs_jordan": true,
+    "human_gated": true,
+    "gate_type": "decision",
     "detail": "Vault repo main has diverged (40 local commits vs 3 on origin) from concurrent nightly-build commits colliding. backdoor-defense doc committed locally but push rejected. Fix: pull-rebase the nightly commits properly, resolve build_queue.json conflict, push. Needs Jordan go-ahead since it touches shared history.",
     "_orig_id": 53,
     "recommended_tier": "flash",
@@ -390,8 +423,7 @@
       "handoff_on_complete": true
     },
     "shipped_by": "entertainment",
-    "shipped_date": "2026-08-18",
-    "needs_jordan": false
+    "shipped_date": "2026-08-18"
   },
   {
     "id": 19,
@@ -401,6 +433,9 @@
     "status": "shipped",
     "assigned_to": "jordan",
     "platform": "any",
+    "needs_jordan": true,
+    "human_gated": true,
+    "gate_type": "action",
     "detail": "Arc Programmable Money Hackathon (Encode Club x Arc House). Agentic Economy track. FINAL SUBMISSIONS DUE: SUNDAY AUG 9 2026, midnight (verified on encodeclub.com Aug 7). Aug 22 = end of event window/accelerator, NOT submission. Build: ArcAgentWallet.sol deployed on testnet (5042002), arc-x402-gateway 57/57 tests, demo scripts live. NEEDED FROM JORDAN: (1) submit final project + team, (2) record 3-min video pitch + demo, (3) code repo link. Track: Agentic Economy - AI agents that hold wallets, pay autonomously.",
     "recommended_tier": "k2.7",
     "_orig_id": 2,
@@ -415,8 +450,7 @@
     },
     "note": "BUILD COMPLETE + VERIFIED Aug 8. ArcAgentWallet.sol deployed on testnet (0x79ec...5287, tx 0x3b60...6d85, 7880 bytes live). arc-x402-gateway 57/57 tests pass in shipped repo. Repo public: github.com/Gentech-Labs/programmable-money-x402 (gateway/agent/dashboard/sdk/examples + presentation PDF). Demo scripts produce live Jupiter quotes. REMAINING (Jordan): check if the checkpoint already submitted counts, or if a full 3-min demo video + repo link is needed. FINAL SUBMISSIONS due Aug 9 midnight. [SHIPPED by labs 2026-08-09] [Returned by labs 2026-08-18]",
     "shipped_by": "labs",
-    "shipped_date": "2026-08-09",
-    "needs_jordan": false
+    "shipped_date": "2026-08-09"
   },
   {
     "id": 20,
@@ -426,6 +460,9 @@
     "status": "shipped",
     "assigned_to": "gentech",
     "platform": "cloud",
+    "needs_jordan": false,
+    "human_gated": false,
+    "gate_type": "decision",
     "detail": "Controlled pre-vis pipeline: character sheet → locked look → camera-native storyboard frames. Proven on Vanito's KAGE film. Spec at 09-Green Room/specs/frameforge-ai-storyboard-service.md.",
     "_orig_id": 3,
     "recommended_tier": "k3",
@@ -435,8 +472,7 @@
       "group": "labs",
       "build_in": "labs",
       "handoff_on_complete": true
-    },
-    "needs_jordan": false
+    }
   },
   {
     "id": 21,
@@ -446,6 +482,9 @@
     "status": "shipped",
     "assigned_to": "gentech",
     "platform": "cloud",
+    "needs_jordan": false,
+    "human_gated": false,
+    "gate_type": "decision",
     "detail": "Algorand Global x402 Challenge — $100K USD + 500K ALGO prize pool. Leaderboard is open. Build pay-per-request API services on Algorand mainnet. Top 5 winners ($25K-$15K) + 500K ALGO across top 20. Culminates at Devcon 8 India. Our x402 gateway already supports multi-chain — config-only for ALGO. Was previously #63, removed during consolidation. Re-added Jul 26. VERIFIED Aug 4: gateway x402-api v2.0 healthy (HTTP 200 root, 402 on /v1/price/btc). test_networks.py 17/17 pass (algorand registry, atomic decimals, omitted-when-no-payto). LIVE 402 accepts currently [eip155:8453] Base ONLY — Algorand rail is code-ready but NOT live until X402_PAYTO_ALGORAND is set. STILL JORDAN-GATED: provide Algorand wallet address + register at algorand.co/global-x402-challenge.",
     "note": "SHIPPED Aug 4 overnight. Gateway multi-network support built + deployed. Added NETWORKS CAIP-2 registry (base eip155:8453, algorand:wGHE2Pwdvd7S12BL5FaOP20EGYesN73k w/ USDC ASA 31566704), enabled_networks() resolver driven by X402_NETWORKS env, is_network_accepted() wired into BOTH verify_proof_via_cdp and verify_proof_simulation so proofs on non-accepted rails are rejected before any remote call. Fail-safe: a network is only advertised when its payTo is configured, unknown names ignored, always falls back to Base. 17/17 tests pass (test_networks.py). Live gateway restarted + verified: https://api.gentechlabs.net returns HTTP 402, accepts=[eip155:8453] (backward compatible, byte-identical to prior payload), all 8 backends ok. Proved 2-rail activation on scratch instance port 8399. REMAINING (Jordan-gated): Algorand wallet address + register at algorand.co/global-x402-challenge. Once X402_PAYTO_ALGORAND is set, ALGO goes live with zero code change.",
     "_orig_id": 7,
@@ -456,8 +495,7 @@
       "build_in": "labs",
       "handoff_on_complete": true
     },
-    "shipped_date": "2026-08-04",
-    "needs_jordan": false
+    "shipped_date": "2026-08-04"
   },
   {
     "id": 22,
@@ -467,6 +505,9 @@
     "status": "shipped",
     "assigned_to": "gentech",
     "platform": "cloud",
+    "needs_jordan": false,
+    "human_gated": false,
+    "gate_type": "decision",
     "detail": "Subclass the 8,193 lines of AI behavior in src/ai/ into 5 archetypes: Sniper (high ground, holds angles), Scout (fast, flanks), Heavy (pushes chokepoints), Medic (heals, support), Engineer (deploys cover/turrets). Each with unique speed, health, weapons, and AI decision trees.",
     "_orig_id": 8,
     "recommended_tier": "k2.7",
@@ -478,8 +519,7 @@
       "handoff_on_complete": true
     },
     "shipped_by": "gentech",
-    "shipped_date": "2026-08-08",
-    "needs_jordan": false
+    "shipped_date": "2026-08-08"
   },
   {
     "id": 23,
@@ -489,6 +529,9 @@
     "status": "shipped",
     "assigned_to": "gentech",
     "platform": "cloud",
+    "needs_jordan": false,
+    "human_gated": false,
+    "gate_type": "decision",
     "detail": "Use text-to-cad pipeline (build123d → STEP → GLB) to generate playable FPS maps from descriptions. Urban courtyard, warehouse, desert outpost, etc. Drop GLB into Three.js scene as playable level. Ship with a dozen procedurally-generated maps.",
     "_orig_id": 9,
     "recommended_tier": "k2.7",
@@ -500,8 +543,7 @@
       "handoff_on_complete": true
     },
     "shipped_by": "gentech",
-    "shipped_date": "2026-08-12",
-    "needs_jordan": false
+    "shipped_date": "2026-08-12"
   },
   {
     "id": 24,
@@ -511,6 +553,9 @@
     "status": "shipped",
     "assigned_to": "gentech",
     "platform": "cloud",
+    "needs_jordan": false,
+    "human_gated": false,
+    "gate_type": "decision",
     "detail": "Forked at github.com/ProtoJay4789/evm-cortex. 50 agents, 94 skills for Ethereum protocol engineering. Extend with: (1) x402 payment skills for paid audits, (2) GenTech-specific agents (ClawWork audit squad), (3) ERC-8004 agent identity patterns. Deploy ClawWork agents through it for paid Solidity auditing on freelancer platforms. Installable on Claude Code, Codex, Cursor, OpenClaw.",
     "_orig_id": 14,
     "recommended_tier": "k3",
@@ -522,8 +567,7 @@
       "handoff_on_complete": true
     },
     "shipped_by": "gentech",
-    "shipped_date": "2026-08-13",
-    "needs_jordan": false
+    "shipped_date": "2026-08-13"
   },
   {
     "id": 25,
@@ -533,6 +577,9 @@
     "status": "shipped",
     "assigned_to": "jordan",
     "platform": "any",
+    "needs_jordan": true,
+    "human_gated": true,
+    "gate_type": "action",
     "detail": "Agent Builders Cup by Hummingbot/Botcamp. PRIZE NOW $20K+ (was $15K). 7 teams, 14 agent seats. $1K USDC starting capital per agent (builder keeps P&L). Venues: Binance, Gate.io, Hyperliquid, Derive, XRPL, Solana, Bitget. Sponsor teams: Bitget, Derive, Gate, Meteora, Orca, XRPL. Two build paths: Hummingbot V2 Controller (rule-based) or Condor Agent (LLM-driven). DEADLINES: registration closes Aug 15, 2026; build window Aug 1-31; judging Sep 1-30; finals Oct 1-2 livestreamed; winners Oct 7 at Token2049 Singapore. 50 builders registered so far. Register: botcamp.xyz/hackathons/agent-builders-cup-1 [UPDATED Aug 5: Arbiter execution agent built (Consigliere strategy + cross_venue_arb routine) — cross_venue_arb routine (GeckoTerminal DEX prices keyed by MINT vs Hyperliquid perp mids, 0.8% fee fence, rejects lookalike-mint phantoms) + consigliere strategy (LP slot operator + cross-venue arb fused in one Condor loop). Committed 6f3747a + aedad56 (rename to Consigliere) in /root/condor. Remaining: fund/test wallet, pick primary venue, wire condor server config, sponsor workshop edges.]",
     "recommended_tier": "k2.7",
     "_orig_id": 19,
@@ -544,8 +591,7 @@
       "handoff_on_complete": true
     },
     "shipped_by": "labs",
-    "shipped_date": "2026-08-09",
-    "needs_jordan": false
+    "shipped_date": "2026-08-09"
   },
   {
     "id": 26,
@@ -555,6 +601,9 @@
     "status": "shipped",
     "assigned_to": "gentech",
     "platform": "cloud",
+    "needs_jordan": false,
+    "human_gated": false,
+    "gate_type": "decision",
     "detail": "Submit PRs to awesome-mcp-servers (91K ⭐) listing our x402 gateway and GenTech MCP servers. Also list on cinderwright x402 Discovery Hub (1450+ services indexed). Check agoragentic-integrations for agent-to-agent marketplace listing. Eat the meat: get our services discoverable. Spit out the potatoes: skip the rest.",
     "recommended_tier": "flash",
     "_orig_id": 21,
@@ -566,8 +615,7 @@
       "handoff_on_complete": true
     },
     "shipped_date": "2026-08-09",
-    "shipped_by": "gentech",
-    "needs_jordan": false
+    "shipped_by": "gentech"
   },
   {
     "id": 27,
@@ -577,6 +625,9 @@
     "status": "shipped",
     "assigned_to": "gentech",
     "platform": "cloud",
+    "needs_jordan": false,
+    "human_gated": false,
+    "gate_type": "decision",
     "detail": "CockroachDB × AWS Hackathon: Build with Agentic Memory. Submissions Jun 30 - Aug 18, 2026. $8,750 total prizes ($5K/$2.5K/$1.25K). Requirements: 2+ CockroachDB tools (MCP Server, Vector Indexing, ccloud CLI) + 1+ AWS service (Bedrock, Lambda, ECS, S3, SageMaker). Build persistent memory for AI agents. Devpost: cockroachdb-ai.devpost.com.",
     "note": "Discovered Jul 26 Brain Audit via blockrun_search. 23 days until deadline. Needs Jordan: register at Devpost (cockroachdb-ai.devpost.com), decide go/no-go. [Jordan GO Aug 3: ship + start] [SHIPPED by gentech 2026-08-14: GenTech Agent Memory layer built + verified against live CockroachDB v24.3.4. src/db.py (schema + vector index), src/memory.py (AgentMemory: write/search/recent/consolidate/forget/stats), src/lambda_handler.py (AWS Lambda JSON-RPC API), src/mcp_server.py (MCP tools). 9/9 tests pass. Demo verified end-to-end. Uses 2 CockroachDB tools (distributed vector indexing + MCP server pattern) + 1 AWS service (Lambda). Apache 2.0 LICENSE at root. REMAINING (Jordan): register on Devpost, record <3min demo video, push public repo.]",
     "_orig_id": 23,
@@ -588,8 +639,7 @@
       "handoff_on_complete": true
     },
     "shipped_by": "gentech",
-    "shipped_date": "2026-08-14",
-    "needs_jordan": false
+    "shipped_date": "2026-08-14"
   },
   {
     "id": 28,
@@ -599,6 +649,9 @@
     "status": "shipped",
     "assigned_to": "gentech",
     "platform": "cloud",
+    "needs_jordan": false,
+    "human_gated": false,
+    "gate_type": "decision",
     "detail": "Port the Paymenter x402 extension pattern to WHMCS and Blesta — the two largest hosting billing platforms. Same gateway hooks, same x402 integration. Much larger markets than Paymenter.",
     "_orig_id": 24,
     "recommended_tier": "k2.7",
@@ -610,8 +663,7 @@
       "handoff_on_complete": true
     },
     "shipped_by": "gentech",
-    "shipped_date": "2026-08-15",
-    "needs_jordan": false
+    "shipped_date": "2026-08-15"
   },
   {
     "id": 29,
@@ -621,6 +673,9 @@
     "status": "shipped",
     "assigned_to": "gentech",
     "platform": "cloud",
+    "needs_jordan": false,
+    "human_gated": false,
+    "gate_type": "decision",
     "detail": "Quick scan of awesome-selfhosted (309K ⭐) for any self-hosted tools we're missing. Replace paid services where possible. Low priority — we already self-host most of our stack.",
     "recommended_tier": "flash",
     "_orig_id": 26,
@@ -630,8 +685,7 @@
       "group": "labs",
       "build_in": "labs",
       "handoff_on_complete": true
-    },
-    "needs_jordan": false
+    }
   },
   {
     "id": 30,
@@ -641,6 +695,9 @@
     "status": "shipped",
     "assigned_to": "gentech",
     "platform": "any",
+    "needs_jordan": false,
+    "human_gated": false,
+    "gate_type": "decision",
     "detail": "Evaluate Hippocratic AI Deployment Engineering Residency against orchestrator-friendly filter. Paid 3+ month program building production AI agents in healthcare. Polaris 5.0 architecture uses 22-model constellation for safety. $1.64B valuation, NVIDIA-backed.",
     "_orig_id": 27,
     "recommended_tier": "k3",
@@ -650,8 +707,7 @@
       "group": "labs",
       "build_in": "labs",
       "handoff_on_complete": true
-    },
-    "needs_jordan": false
+    }
   },
   {
     "id": 31,
@@ -661,6 +717,9 @@
     "status": "cancelled",
     "assigned_to": "gentech",
     "platform": "cloud",
+    "needs_jordan": false,
+    "human_gated": true,
+    "gate_type": "decision",
     "detail": "CANCELLED — Jul 27 deadline missed. Jordan decided not to pursue. Can re-list if OKX reopens.",
     "note": "DISCOVERED via Brain Audit Jul 25. Deadline T-2 days! Adding X Layer is a config change. Jordan needs to register and provide wallet. | ⚠️ T-2 days as of Jul 25! Jordan must register + provide X Layer wallet by July 27 23:59 UTC.",
     "_orig_id": 28,
@@ -670,8 +729,7 @@
       "group": "labs",
       "build_in": "labs",
       "handoff_on_complete": true
-    },
-    "needs_jordan": false
+    }
   },
   {
     "id": 32,
@@ -681,6 +739,9 @@
     "status": "cancelled",
     "assigned_to": "jordan",
     "platform": "any",
+    "needs_jordan": false,
+    "human_gated": false,
+    "gate_type": "action",
     "detail": "Build with Gemini XPRIZE by XPRIZE × Google. M total prizes (00K grand prize). Build a real AI business operated by AI agents with real revenue. Must use at least one Google Cloud product. Categories include Money & Financial Access — perfect for our x402 payment gateway. Deadline: Aug 17, 2026 (18 days). Register at xprize.devpost.com. Our x402 gateway + agent stack fits the Money & Financial Access category. Needs Jordan: register on Devpost, decide go/no-go.",
     "note": "Jordan CONFIRMED start (Aug 4): hackathon first. Register on Devpost + decide build. [SHIPPED by labs 2026-08-12] [Reopened 2026-08-12: build brief ready, queued for overnight Labs build] [SHIPPED by labs 2026-08-13: build brief consumed, queued for Labs build] [DROPPED Aug 15 by Jordan — unregistered, refocus on CockroachDB + Delphi]",
     "recommended_tier": "k3",
@@ -692,8 +753,7 @@
     },
     "shipped_by": "labs",
     "shipped_date": "2026-08-13",
-    "_orig_id": 29,
-    "needs_jordan": false
+    "_orig_id": 29
   },
   {
     "id": 33,
@@ -703,6 +763,9 @@
     "status": "shipped",
     "assigned_to": "gentech",
     "platform": "cloud",
+    "needs_jordan": false,
+    "human_gated": false,
+    "gate_type": "decision",
     "detail": "Build with DataHub: The Agent Hackathon. $20,500 total prizes ($6K grand / $3K x4 category / $1K x2 HM). Build AI agents using DataHub context graph via MCP Server. Four categories: Agents That Do Real Work, Metadata-Aware Code Generation, Resilient AI Systems, Open/Wildcard. Deadline: Aug 10, 2026 (11 days). Register at datahub.devpost.com. Our MCP experience + x402 stack fits well. Needs Jordan: register on Devpost, decide go/no-go.",
     "note": "DataHub COMPLETE: local stack + lineage-guard agent + x402 endpoint + public repo https://github.com/ProtoJay4789/lineage-guard. REMAINING: demo video + Devpost writeup/submit. [SHIPPED by labs 2026-08-09]",
     "recommended_tier": "k2.7",
@@ -715,8 +778,7 @@
     "vps_24_7": true,
     "shipped_by": "labs",
     "shipped_date": "2026-08-09",
-    "_orig_id": 30,
-    "needs_jordan": false
+    "_orig_id": 30
   },
   {
     "id": 34,
@@ -726,6 +788,7 @@
     "status": "shipped",
     "shipped_note": "Aug 1 nightly: scripts/yield_mcp.py client (JSON-RPC to mcp.yield.xyz/mcp, no API key, x402-aware) + scripts/tests/test_yield_mcp.py (9 tests, incl. live smoke). CLI: top/risk/networks/tools with server-side network/type/token filters and health-aware ranking. Verified live against 245 opportunities.",
     "assigned_to": "gentech",
+    "needs_jordan": false,
     "platform": "any",
     "detail": "Yield.xyz × Syra — x402-native yield discovery MCP (yield-mcp-server v1.0.0 at mcp.yield.xyz/mcp). 3,000+ yield opportunities across 80+ networks (lending, vaults, staking, RWAs, liquid staking). 22 tools: yields_get_all/get, balances, enter/exit/claim, TVL+APY history, risk params, KYC, builder tools. Pay per call via x402 (Coinbase CDP Facilitator), no API key. Integration: wire into GTA as live yield intelligence source; complements cufolio + yield-rainbow. Source: Syra tweet Jul 31 2026.",
     "recommended_tier": "k2.7",
@@ -736,8 +799,7 @@
       "handoff_on_complete": true
     },
     "_orig_id": 31,
-    "note": "[Returned by entertainment 2026-08-18]",
-    "needs_jordan": false
+    "note": "[Returned by entertainment 2026-08-18]"
   },
   {
     "id": 35,
@@ -747,6 +809,9 @@
     "status": "shipped",
     "assigned_to": "gentech",
     "platform": "cloud",
+    "needs_jordan": false,
+    "human_gated": false,
+    "gate_type": "action",
     "detail": "Paperclip (control plane for AI-agent companies, fork of HenkDz/paperclip) can't start. `pnpm dev` crashes at embedded Postgres init. ROOT CAUSE: three-way conflict. (1) embedded-postgres refuses to run as root. (2) `createPostgresUser: true` (added to migration-runtime.ts) makes it spawn initdb as OS user 'postgres', but (3) the Postgres binary + repo live under /root (mode 700), which the postgres user cannot traverse -> EACCES spawning initdb even though pgdata relocated to /var/lib/paperclip/db (postgres-writable). Fix options: (A) run Paperclip under a dedicated non-root systemd user with repo+binaries relocated outside /root, (B) use PGlite (embedded, no separate postgres binary) instead of embedded-postgres, or (C) relax /root traversal for postgres (least secure, not preferred). Recommended: (B) PGlite in dev per AGENTS.md 'use embedded PGlite by leaving DATABASE_URL unset' — investigate why it falls back to embedded-postgres instead. Status: infra setup task, not a code bug in our logic. Added Aug 3 2026 (Jordan GO: map out fix).",
     "note": "[Jordan GO Aug 3: add to build list to map out fix]. Paperclip fork at /root/paperclip-fork. Also needs genTech-shop plugin once running (queue #13). Repo not pushed to GitHub yet. [Returned by entertainment 2026-08-18]",
     "group": "labs",
@@ -755,8 +820,7 @@
       "build_in": "labs",
       "handoff_on_complete": true
     },
-    "_orig_id": 33,
-    "needs_jordan": false
+    "_orig_id": 33
   },
   {
     "id": 36,
@@ -766,10 +830,12 @@
     "status": "shipped",
     "assigned_to": "gentech",
     "platform": "any",
+    "needs_jordan": false,
+    "human_gated": false,
+    "gate_type": null,
     "detail": "Audit (Aug 3) found 3 live APIs return HARDCODED placeholder data nobody would pay for. crypto-price-api (/v1/price/{symbol}) returns price:0.0 placeholder; gas-price-api (/v1/gas) returns all-zero gas_prices placeholder; token-security-api (/v1/score/{mint}) returns score:0 level:unknown placeholder. Wire real data: crypto-price -> crypto-price-fetch skill / CoinGecko fallback; gas-price -> Etherscan/OracleGAS or live RPC gas; token-security -> reuse Rugcheck engine (already real, port 8088). Also note agent-search-api (/root/agent-search-api/main.py) has real /search endpoints but NOT currently served on 8091 (that port runs x402-backend@agent_discovery instead) — verify its systemd service exists. Deal-tracker-api v1/deals was ALSO a stub returning [] — NOW FIXED (Aug 3) with real CheapShark engine + price-watch/release-radar/preorder-advisor endpoints (6 tests passing). **SHIPPED (Aug 3):** all 3 placeholder APIs fixed and live. crypto-price (CMC->CoinGecko), gas-price (live RPC+Polygon), token-security (proxies Rugcheck). Added api-audit.py to kit + academy Module 5. Deal-tracker fixed earlier same day. Agent-search-api still orphaned (port conflict) - flagged for Jordan.",
     "_orig_id": 34,
-    "note": "[Returned by entertainment 2026-08-18]",
-    "needs_jordan": false
+    "note": "[Returned by entertainment 2026-08-18]"
   },
   {
     "id": 37,
@@ -779,6 +845,9 @@
     "status": "shipped",
     "assigned_to": "gentech",
     "platform": "cloud",
+    "needs_jordan": false,
+    "human_gated": false,
+    "gate_type": "decision",
     "detail": "Borrow 3 mechanisms from NanoNets/Graft (832 stars, MIT, verified runs 0.8.2) into our own self-orientation: (1) persistent repo map — build a compact repo-context markdown graph once (per-subsystem: what it does + crux lines + depends_on/used_by links) and load it at session start instead of cold-start re-exploring; (2) staleness-aware refresh — cheap structural freshness check (mtimes/content-hashes vs map fingerprint) before acting, fail loudly on drift like graft check; (3) blast-radius-on-edit — resolve callers/imports/dependents before editing a shared symbol. Do NOT adopt the CLI/dependency (NanoNets control plane, global hooks into ~/.codex .claude .cursor). Port the ~200-line structural core into our own design. Spec: 09-Green Room/specs/graft-context-graph-borrow.md.",
     "recommended_tier": "k2.7",
     "_orig_id": 35,
@@ -791,8 +860,7 @@
       "build_in": "labs",
       "handoff_on_complete": true
     },
-    "shipped_by": "gentech",
-    "needs_jordan": false
+    "shipped_by": "gentech"
   },
   {
     "id": 38,
@@ -802,6 +870,9 @@
     "status": "shipped",
     "assigned_to": "gentech",
     "platform": "cloud",
+    "needs_jordan": false,
+    "human_gated": false,
+    "gate_type": "build",
     "detail": "Make the top allocation leg executable. yield_lp_engine.py (venue-agnostic, DRY_RUN-first mirroring gta_executor). Reads .aae-allocation-result.json, produces provide/rebalance/withdraw order plans. Wire stablecoin LP venue on Base (Aave vs Q402 q402_yield_deposit). Daily swap-fee accumulator cron -> agent-flow.jsonl. TDD: dry-run produce/rebalance/withdraw, quiet-hours, threshold gating. Spec: 09-Green Room/specs/agentic-treasury-yield-trade-engine.md",
     "note": "Add 2026-08-05. Jordan greenlit end-to-end. Regime now RANGE_BOUND -> LP 40% top allocation. Build with DeepSeek V4 Flash (DEV) -> Kimi K2.7 (AUDIT). TOP PRIORITY treasury group. [Returned by entertainment 2026-08-18]",
     "_orig_id": 38,
@@ -809,8 +880,7 @@
     "group": "Treasury",
     "routing": "Treasury",
     "shipped_by": "gentech",
-    "shipped_date": "2026-08-11",
-    "needs_jordan": false
+    "shipped_date": "2026-08-11"
   },
   {
     "id": 39,
@@ -820,6 +890,9 @@
     "status": "shipped",
     "assigned_to": "gentech",
     "platform": "cloud",
+    "needs_jordan": false,
+    "human_gated": false,
+    "gate_type": "build",
     "detail": "Close the loop. Wire CLOSE path in gta_executor.py (currently a deliberate stub) to Coinbase CDP transfer(). Verify gta_remit.py profit CDP -> Jordan EOA (0x3d11...eCb) -> card, receipt-checked on-chain each run. Auto-exit on engine signals (spread normalize <3bps / stop-loss +50bps / 7-day hold). Spec: 09-Green Room/specs/agentic-treasury-yield-trade-engine.md",
     "note": "Add 2026-08-05. Depends on Phase A (39 depends on 38). Closes the self-orbit loop. AUDIT tier K2.7.",
     "_orig_id": 39,
@@ -827,8 +900,7 @@
     "group": "Treasury",
     "routing": "Treasury",
     "shipped_by": "gentech",
-    "shipped_date": "2026-08-11",
-    "needs_jordan": false
+    "shipped_date": "2026-08-11"
   },
   {
     "id": 40,
@@ -838,6 +910,9 @@
     "status": "shipped",
     "assigned_to": "gentech",
     "platform": "cloud",
+    "needs_jordan": false,
+    "human_gated": false,
+    "gate_type": "build",
     "detail": "Highest risk, last. Auto-ENTER trading leg ONLY when regime in {BULL_TRENDING, BEAR_TRENDING, PRICE_DISCOVERY} at confidence threshold. Risk auto-tilt (aggressive only in trending). Position sizing scales with regime confidence (Kelly-lite capped). Verify by replay against .aae-price-history.json: stays in yield mode in RANGE_BOUND, flips in trending. Spec: 09-Green Room/specs/agentic-treasury-yield-trade-engine.md",
     "note": "Add 2026-08-05. Depends on Phase B (40 depends on 39). Req: regime feed (.aae-hybrid-signal.json) healthy first. AUDIT tier K2.7.",
     "_orig_id": 40,
@@ -845,8 +920,7 @@
     "group": "Treasury",
     "routing": "Treasury",
     "shipped_by": "gentech",
-    "shipped_date": "2026-08-11",
-    "needs_jordan": false
+    "shipped_date": "2026-08-11"
   },
   {
     "id": 41,
@@ -856,7 +930,10 @@
     "status": "shipped",
     "assigned_to": "gentech",
     "platform": "cloud",
+    "needs_jordan": false,
     "detail": "List GenTech x402 gateway services on OpenDexter (open.dexter.cash/mcp) — an x402 API marketplace MCP. Registry row 4g verified Aug 3: endpoint live, tools enumerated (x402_search/check/access/wallet), search proven. Jordan explicitly wants us listed here. Next: find the provider-submission flow to register our services.",
+    "human_gated": false,
+    "gate_type": "decision",
     "recommended_tier": "k3",
     "note": "[Marketplace Scout 2026-08-05] Jordan-wanted listing (registry row 4g). OpenDexter is x402-ready. SHIPPED 2026-08-16: root cause found (gateway settled Base via CDP, not Dexter facilitator — OpenDexter only catalogs Dexter-settled gateways). Added verify_proof_via_dexter() to server.py (routes Base proofs via x402.dexter.cash when X402_USE_DEXTER=1). 8/8 new tests pass (45 total). REMAINING (ops): set X402_USE_DEXTER=1 on gateway service + trigger real Base settlement, then re-check x402_search ~24h.",
     "group": "labs",
@@ -867,8 +944,7 @@
     },
     "shipped_date": "2026-08-16",
     "shipped_by": "gentech",
-    "_orig_id": 41,
-    "needs_jordan": false
+    "_orig_id": 41
   },
   {
     "id": 42,
@@ -878,6 +954,7 @@
     "status": "shipped",
     "assigned_to": "gentech",
     "platform": "cron",
+    "needs_jordan": false,
     "detail": "Jordan request Aug 5. Job 38eda06b0a11 (Agent Marketplace Income Scanner — Hive/OKX/earn.fi/Multi-Marketplace). Seed it with the marketplaces we are ALREADY listed on (from 11-Mess Hall/marketplace-listings-registry.md) so it dedupes existing and scans for NEW places to launch. Start in a fresh session.",
     "source": "Jordan (Aug 5, 2026)",
     "notes": "Fresh session with fresh context requested before working this. Handoff: 01-HANDOFFS/gentech-to-labs/2026-08-05-algorand-x402-wallet.md (deferred section).",
@@ -885,8 +962,7 @@
     "group": "labs",
     "note": "SHIPPED Aug 5. Marketplace scanner V2 (#42, crown job). Built marketplace-seed.py (parses registry -> exclusion list), rewrote cron 38eda06b0a11 to DEDUPE vs registry and hunt NEW sell-side marketplaces with why-there + income estimate + entry friction. Live test run found 3 NEW platforms (Freelance AI/PayAI, BotWork, Amadeus Agent Hub), appended as registry watchlist rows 11-13. Forge=desktop lane routing rule added to sync-protocol.",
     "shipped_by": "gentech",
-    "_orig_id": 42,
-    "needs_jordan": false
+    "_orig_id": 42
   },
   {
     "id": 43,
@@ -896,6 +972,9 @@
     "status": "shipped",
     "assigned_to": "gentech",
     "platform": "cloud",
+    "needs_jordan": false,
+    "human_gated": false,
+    "gate_type": "build",
     "detail": "gas_refuel.py — the treasury's self-sustaining loop. Monitors CDP Base ETH, swaps USDC->ETH when gas drops below 0.0015 (hysteresis arm) to reach 0.003 target, capped $5, only if USDC>= $1. REAL gated by AAE_GAS_REAL + CDP creds. This is the 'keep itself funded' intelligence. 12 tests, K2.7-audited.",
     "note": "Shipped Aug 5. Live dry-run verified: reads real CDP gas 0.000298 < arm -> proposes $5 USDC->ETH swap. K2.7 flagged hysteresis churn bug -> fixed with ARM band. Self-funding is the differentiator we sell.",
     "_orig_id": 43,
@@ -903,8 +982,7 @@
     "group": "Treasury",
     "routing": "Treasury",
     "shipped_by": "gentech",
-    "shipped_date": "2026-08-11",
-    "needs_jordan": false
+    "shipped_date": "2026-08-11"
   },
   {
     "id": 44,
@@ -914,6 +992,9 @@
     "status": "shipped",
     "assigned_to": "gentech",
     "platform": "cloud",
+    "needs_jordan": false,
+    "human_gated": false,
+    "gate_type": "build",
     "detail": "run_treasury_tests.py — consolidated dry-run harness proving all treasury modules read live state and decide correctly WITHOUT moving funds: gas refuel, regime gate, yield LP, close executor, live balances. Pre-flight for the real money-moving test.",
     "note": "Shipped Aug 5. Run: python3 run_treasury_tests.py. All 5 legs dry-run clean. Next: fund ~$25 + flip real flags for the live round-trip.",
     "_orig_id": 44,
@@ -921,8 +1002,7 @@
     "group": "Treasury",
     "routing": "Treasury",
     "shipped_by": "gentech",
-    "shipped_date": "2026-08-11",
-    "needs_jordan": false
+    "shipped_date": "2026-08-11"
   },
   {
     "id": 45,
@@ -932,6 +1012,9 @@
     "status": "shipped",
     "assigned_to": "gentech",
     "platform": "cloud",
+    "needs_jordan": false,
+    "human_gated": false,
+    "gate_type": "build",
     "detail": "zero_x402_leg.py — wire 0x Swap API via x402 (no API key, pay $0.01 USDC/request from wallet). Validates GenTech's x402 thesis + enables credential-free, attributable, multi-rail swaps. DRY_RUN-first, REAL gated by AAE_X402_REAL=1. Uses Q402 trial key (live, 2000 credits). Spec: 09-Green Room/specs/0x-x402-swap-rail.md",
     "note": "Scoped Aug 5. 0x x402 endpoint currently rate-limited (429, team cap, retry ~1h) — live test blocked until it clears. 0x API key verified working (needs 0x-version: v2 header). [JORDAN REGISTERED Aug 15 on DoraHacks]",
     "_orig_id": 45,
@@ -939,8 +1022,7 @@
     "group": "Treasury",
     "routing": "Treasury",
     "shipped_by": "gentech",
-    "shipped_date": "2026-08-11",
-    "needs_jordan": false
+    "shipped_date": "2026-08-11"
   },
   {
     "id": 46,
@@ -950,6 +1032,9 @@
     "status": "shipped",
     "assigned_to": "gentech",
     "platform": "any",
+    "needs_jordan": false,
+    "human_gated": false,
+    "gate_type": null,
     "detail": "Add MPP (Machine Payments Protocol, paymentauth.org — IETF draft, Tempo Labs + Stripe) as a second payment rail on the x402 gateway. PayAI's agentic-payments SDK (github.com/PayAINetwork/agentic-payments, @payai/agentic-payments v0.1.6) accepts BOTH x402 and MPP on one endpoint: unauthenticated -> 402 with PAYMENT-REQUIRED (x402) AND WWW-Authenticate: Payment (MPP) headers; either settles. MPP is payment-method agnostic (EVM, Solana, Lightning, Stripe, USDC, Stellar, Hedera, Tempo) via registered method IDs. Our gateway is x402-only today. BORROW the mechanism (unlicensed TS, don't fork): dual-challenge 402 + settle-on-success buffering pattern. PayAI facilitator free tier 10K settles/mo, $0.001/tx after, no API key. 16 networks incl Solana/Base/X Layer. Reference: 11-Mess Hall/payai-mpp-dual-rail.md.",
     "note": "Discovered Aug 6 via PayAINetwork GitHub org. PayAI = #2 x402 facilitator, already our Solana leg (payai_facilitator.py) + behind WURK flow. MPP spec is IETF draft-httpauth-payment-00 (Jul 2026, expires Jan 2027) — early but Stripe-backed. Dual-rail = serve both x402 and MPP clients on same endpoint. | SHIPPED 2026-08-11 (gentech): MPP dual-rail added to x402 gateway. 402 now emits BOTH PAYMENT-REQUIRED (x402) + WWW-Authenticate: Payment (MPP) headers; MPP EVM credentials verified via HMAC simulation and routed to backend. 37/37 tests pass (11 new MPP). Live-verified: 402 dual-challenge + MPP-settled 200 with real token-security data.",
     "_orig_id": 47,
@@ -961,8 +1046,7 @@
       "handoff_on_complete": true
     },
     "shipped_by": "gentech",
-    "shipped_date": "2026-08-11",
-    "needs_jordan": false
+    "shipped_date": "2026-08-11"
   },
   {
     "id": 47,
@@ -972,6 +1056,9 @@
     "status": "cancelled",
     "assigned_to": "gentech",
     "platform": "cloud",
+    "needs_jordan": true,
+    "human_gated": true,
+    "gate_type": "action",
     "detail": "BOT Chain Builder Challenge #2 (AI × RWA, up to 5,000 USDT). Build Aug 10–20, Demo Day Aug 22, winners Aug 27. Product: RWA Yield Guard Agent — AI-driven asset-management agent monitoring RWA/stablecoin positions on BOT Chain, auto-rebalancing on health/yield/risk. GTA evolution. Hits RWA (highest-priority) + AI Native (AI as core on-chain decision-maker) tracks at once. HARD REQ: BOT Chain Mainnet deploy (testnet excluded). Network: chain ID 677, RPC rpc.botchain.ai, EVM-compatible, ~$0.06/tx, 0.75s blocks, 1 BOT gas/project. Plan: 09-Green Room/specs/botchain-rwa-build-plan.md. JORDAN-GATED: register at luma.com/238et7cw + join Builder Hub t.me/BotChain_official/61.",
     "note": "Scouted Aug 6. Competitive intel: Meridian (mrdn.finance) is BOT Chain ecosystem partner — decentralized inference router powered by x402 (400+ models, 19 chains). Direct adjacent player to our x402 gateway; validates x402 as standard on BOT Chain. Learning value: BOT Chain AI Agent Launchpad V1 — agent wallets earn 80% of trading-fee revenue once token lists on MemeX (deep-end agent-as-service model we haven't explored). [SHIPPED by labs 2026-08-09] [JORDAN REGISTERED Aug 15 at luma.com/238et7cw + Builder Hub] [UNREGISTERED Aug 18: too tight, no gas/wallet/demo. Contract archived, reusable as GTA evolution.]",
     "_orig_id": 48,
@@ -983,8 +1070,7 @@
       "handoff_on_complete": true
     },
     "shipped_by": "labs",
-    "shipped_date": "2026-08-09",
-    "needs_jordan": false
+    "shipped_date": "2026-08-09"
   },
   {
     "id": 48,
@@ -994,6 +1080,9 @@
     "status": "shipped",
     "assigned_to": "gentech",
     "platform": "cloud",
+    "needs_jordan": false,
+    "human_gated": false,
+    "gate_type": "action",
     "detail": "Telegraph Season I Hackathon ($15K across 3 rounds: H1 $5K Aug 17–Sep 7, H2 $10K mid-Oct, H3 mainnet Dec). Telegraph = machine-intelligence protocol on Base that USES x402 natively (PayAI facilitator, PAYMENT-SIGNATURE header, 402 challenge) — our exact stack. Miner track = wrap any API/model/tool via YAML (config-only). We have a catalog of x402-ready services (token security, market intel, wallet analysis, agent discovery). Plan: 09-Green Room/specs/telegraph-hackathon-build-plan.md. JORDAN-GATED: register at hackathon.telegraphprotocol.com (early = track access + private Discord).",
     "note": "Scouted Aug 6. Telegraph uses x402 natively — validates our stack. Miner track = YAML wrap of existing gateway services, no greenfield build. First-mover on another venue. 300+ builders registered. Register early for track access + core team support. [SHIPPED by labs 2026-08-09] [Reopened 2026-08-12: build brief ready, queued for overnight Labs build] [SHIPPED by labs 2026-08-13: build brief consumed, queued for Labs build] [JORDAN REGISTERED Aug 15 at hackathon.telegraphprotocol.com] [Returned by labs 2026-08-18]",
     "_orig_id": 49,
@@ -1005,8 +1094,7 @@
       "handoff_on_complete": true
     },
     "shipped_by": "labs",
-    "shipped_date": "2026-08-13",
-    "needs_jordan": false
+    "shipped_date": "2026-08-13"
   },
   {
     "id": 49,
@@ -1016,12 +1104,14 @@
     "status": "shipped",
     "assigned_to": "forge",
     "platform": "desktop",
+    "needs_jordan": false,
+    "human_gated": false,
+    "gate_type": null,
     "detail": "Jordan wants the ORIGINAL NOT THE GHOST cover kept pixel-identical, with Hikari composited in surgically (Photoshop/GIMP). AI image models (FLUX 2) keep reinterpreting the whole scene — this needs real compositing. See 01-HANDOFFS/gentech-to-forge/2026-08-06-not-the-ghost-hikari.md for full brief + asset URLs.",
     "note": "SHIPPED by forge 2026-08-13: surgical composite done programmatically (OpenCV/Pillow). Original background preserved pixel-identical (mean diff 2.47 outside figure+mirror), Hikari arched pose composited in + mirror shows Hikari facing forward. Deliverable: music/vanito/not-the-ghost-hikari-composite.png. Original kept untouched. [Returned by labs 2026-08-18] [Returned by entertainment 2026-08-18]",
     "shipped_by": "forge",
     "shipped_date": "2026-08-13",
-    "_orig_id": 50,
-    "needs_jordan": false
+    "_orig_id": 50
   },
   {
     "id": 50,
@@ -1031,6 +1121,9 @@
     "status": "shipped",
     "assigned_to": "gentech",
     "platform": "cloud",
+    "needs_jordan": false,
+    "human_gated": false,
+    "gate_type": "decision",
     "detail": "Build the missing cross-chain rail for the Agentic Treasury. Capability matrix + spec: Treasury/Agentic-Bridge-capability-and-spec-2026-08-06.md. The treasury can bridge Base→Solana autonomously (solana_bridge_adapter.py, Across) but NOT Base→Avalanche (CDP signs Base/Eth only). Fill that gap so the treasury can move itself to where the edge is (rebalance TraderJoe AVAX/USDC, deploy dry powder, bridge profit home). Then add a per-bridge fee layer for users (GenTech spread on top of the underlying ~0.01% Across cost). Underlying economics verified live (Across Base→Avalanche USDC: relay fee ~0.0108%, fill ~3s). This is the 'portable home chain' (Aug 5) + x402-per-tx-fee thesis applied to movement.",
     "recommended_tier": "k2.7",
     "group": "Treasury",
@@ -1042,8 +1135,7 @@
     "note": "Jordan GO (Aug 6): 'yes add this' + 'look into how to build an Agentic bridge for the Treasury and what transaction fee that would look like for users.' Logged to Green Room ideas as the bridge-cost test. Missing rail blocks treasury cross-chain autonomy. [SHIPPED by gentech 2026-08-12: avax_bridge_adapter.py Base→Avalanche USDC rail via Across, live API quote (0.010% fee, 3s fill), GenTech 20bps fee layer, 8/8 tests pass incl 2 live] [Returned by entertainment 2026-08-18] [Returned by forge 2026-08-18]",
     "shipped_by": "gentech",
     "shipped_date": "2026-08-12",
-    "_orig_id": 51,
-    "needs_jordan": false
+    "_orig_id": 51
   },
   {
     "id": 51,
@@ -1053,6 +1145,9 @@
     "status": "shipped",
     "assigned_to": "jordan",
     "platform": "cloud",
+    "needs_jordan": true,
+    "human_gated": true,
+    "gate_type": "action",
     "detail": "Krexa = credit infrastructure for AI agents on Solana (mainnet-beta, invite-gated). Gives agents credit: borrow USDC against on-chain Krexit Score (200-850), no co-signer, auto-repay via Revenue Router. COMPLEMENTARY to us: x402 is the payment rail, Krexa is the credit layer on top. 350+ agents deployed. Plays: (1) list our x402 gateway services on their Pay.sh catalog (Solana Foundation + Google Cloud) for new distribution; (2) cross-reference our Agent Credit Score with Krexit Score; (3) @krexa/x402 middleware = 3-line Express monetization on Solana. Access: invite code via Discord discord.gg/aMSEG7yj or @krexa_xyz open drops. Needs Jordan: grab invite code, then I run krexa activate <code> + test CLI/SDK/MCP.",
     "note": "Scouted Aug 7. Invite-gated. Jordan given Discord link + framing to request code. Once code in hand: activate, init service agent, test x402 pay, list on Pay.sh. [SHIPPED by labs 2026-08-07: scouted+logged Krexa credit layer] [Returned by treasury 2026-08-18]",
     "recommended_tier": "k2.7",
@@ -1064,8 +1159,7 @@
     },
     "shipped_by": "gentech",
     "shipped_date": "2026-08-11",
-    "_orig_id": 52,
-    "needs_jordan": false
+    "_orig_id": 52
   },
   {
     "id": 52,
@@ -1075,6 +1169,9 @@
     "status": "shipped",
     "assigned_to": "gentech",
     "platform": "cloud",
+    "needs_jordan": false,
+    "human_gated": false,
+    "gate_type": "decided",
     "detail": "AAE Prediction/Verification Layer, Phase A (data-side claim evaluator): claim_evaluator.py reads 4 kit data layers (regime/narrative/arb/price) → divergence verdict. 21/21 tests pass. Live verified (BTC bottom → DIVERGE/HOLD). MCP registration + SKILL.md. Shipped to 10-Labs/agent-kit-claim-evaluator/.",
     "_orig_id": 54,
     "recommended_tier": "k2.7",
@@ -1086,8 +1183,7 @@
     },
     "shipped_by": "gentech",
     "shipped_date": "2026-08-11",
-    "note": "[Returned by labs 2026-08-18]",
-    "needs_jordan": false
+    "note": "[Returned by labs 2026-08-18]"
   },
   {
     "id": 53,
@@ -1097,6 +1193,9 @@
     "status": "shipped",
     "assigned_to": "labs",
     "platform": "web",
+    "needs_jordan": false,
+    "human_gated": false,
+    "gate_type": null,
     "detail": "Jordan greenlit Aug 11: unify all GenTech surfaces (Treasury/Steward, Arcade, Cookbook, Travel, Meta Ray-Ban) into ONE installable PWA shell 'GenTech Hub'. Shared manifest.json (scope '/'), shared sw.js, one /bridge/ chat proxy, one wallet. NOT separate PWAs, NOT one blob — shared shell + distinct module screens. Full spec: 09-Green Room/specs/gentech-hub-pwa-architecture.md. Proven template: Steward Command Center (gentechlabs.net/Treasury/).",
     "note": "Reusable PWA template BUILT at 10-Labs/pwa-template/ (manifest.json, sw.js, index.html with chat-bridge FAB, icons/, one-command scaffold README). Spec at 09-Green Room/specs/gentech-hub-pwa-architecture.md. Build order: 1) template (DONE), 2) Hub home/launcher at /, 3) refactor surfaces into shell (Steward done; add Arcade/Cookbook/Travel/Ray-Ban), 4) shared wallet + dept-routed bridge. [SHIPPED by gentech 2026-08-12: Hub launcher LIVE at gentechlabs.net/hub-launcher.html + root manifest.json + sw.js + icons. Verified: all serve HTTP 200, manifest valid JSON, launcher links Treasury/Steward, Arcade, Yield Rainbow, Vanito/KAGE, Arc x402, Hub Engine. Cookbook/Travel/Ray-Ban marked SOON (not yet built).] [Returned by entertainment 2026-08-18]",
     "recommended_tier": "k3",
@@ -1106,8 +1205,7 @@
       "build_in": "labs",
       "handoff_on_complete": true
     },
-    "_orig_id": 55,
-    "needs_jordan": false
+    "_orig_id": 55
   },
   {
     "id": 54,
@@ -1117,13 +1215,15 @@
     "status": "cancelled",
     "assigned_to": "jordan",
     "platform": "cloud",
+    "needs_jordan": false,
+    "human_gated": false,
+    "gate_type": "decision",
     "detail": "Jordan decided to leave KeeperHub (2026-08-13). No further integration work. Status: cancelled/decided.",
     "group": "labs",
     "note": "DECIDED by Jordan 2026-08-13: leaving KeeperHub. Closed.",
     "shipped_by": "jordan",
     "shipped_date": "2026-08-13",
-    "_orig_id": 56,
-    "needs_jordan": false
+    "_orig_id": 56
   },
   {
     "id": 55,
@@ -1133,13 +1233,15 @@
     "status": "shipped",
     "assigned_to": "jordan",
     "platform": "cloud",
+    "needs_jordan": false,
+    "human_gated": false,
+    "gate_type": "action",
     "detail": "Personal AVAX private key was pasted in chat (compromise event). Jordan confirmed the key has been rotated / taken care of (2026-08-13). Resolved.",
     "group": "labs",
     "note": "RESOLVED by Jordan 2026-08-13: AVAX key rotation taken care of. No longer a blocker.",
     "shipped_by": "jordan",
     "shipped_date": "2026-08-13",
-    "_orig_id": 57,
-    "needs_jordan": false
+    "_orig_id": 57
   },
   {
     "id": 56,
@@ -1149,13 +1251,15 @@
     "status": "shipped",
     "assigned_to": "gentech",
     "platform": "cloud",
+    "needs_jordan": false,
+    "human_gated": false,
+    "gate_type": "action",
     "detail": "Treasury CPI macro-event repositioning (bid-ask before release, curve after). Jordan confirmed this was discussed and handled (2026-08-13). Note: Steward wallet currently holds no LP position (funds moved off Aug 11); crons paused.",
     "group": "labs",
     "note": "HANDLED by Jordan 2026-08-13: Treasury CPI discussed. Steward wallet empty (funds moved off Aug 11), crons paused.",
     "shipped_by": "jordan",
     "shipped_date": "2026-08-13",
-    "_orig_id": 58,
-    "needs_jordan": false
+    "_orig_id": 58
   },
   {
     "id": 57,
@@ -1165,14 +1269,16 @@
     "status": "shipped",
     "assigned_to": "gentech",
     "platform": "cloud",
+    "needs_jordan": false,
+    "human_gated": false,
+    "gate_type": "build",
     "detail": "DeepSeek Harness (dsh) open-sourced Aug 13 2026, MIT, 46k stars/3.6k forks day one. 'Everything is a plugin' on Cordis meta-framework. Run: npx @deepseek-ai/dsh web (UI at 127.0.0.1:3080). Opportunity: build a GenTech x402 payment plugin so dsh agents can pay-per-call our gateway. Early contributor visibility on a hot project. Repo: github.com/deepseek-ai/deepseek-harness. Plugin topic: dsh-plugin.",
     "group": "labs",
     "note": "SHIPPED by gentech 2026-08-14. Built 10-Labs/dsh-plugin-gentech-x402/: dependency-free x402 client core (src/x402-client.js + keccak.js, zero npm deps) + Cordis plugin (src/plugin.js) registering 5 gentech_* tools (services/discover free; token_security, wallet_analysis, market_intel paid ~$0.01) with a ctx.gentechSettle settlement seam. 19/19 tests pass (keccak known vectors, live gateway discovery HTTP 402, plugin registration + settlement-seam wiring). Live-verified against api.gentechlabs.net: discover returns 402 with Base USDC rail, bazaar manifest lists 9 services v9.1.0. First x402 payment plugin in the dsh ecosystem; dsh-plugin topic for visibility. Repo: github.com/deepseek-ai/deepseek-harness.",
     "github_repo": "deepseek-ai/deepseek-harness",
     "shipped_by": "gentech",
     "shipped_date": "2026-08-14",
-    "_orig_id": 59,
-    "needs_jordan": false
+    "_orig_id": 59
   },
   {
     "id": 58,
@@ -1182,6 +1288,9 @@
     "status": "shipped",
     "assigned_to": "gentech",
     "platform": "unichain",
+    "needs_jordan": false,
+    "human_gated": false,
+    "gate_type": "build",
     "detail": "Uniswap Foundation grants (Unichain Developer/Retro, up to $7.5K) + 'Innovation upon the DeFi Experience' bucket explicitly covers treasury & asset management. Win condition = DEPLOY our Agentic Treasury / GTA component on Unichain, not just apply. Jordan OK'd Aug 4. Rolling deadline. Repos: x402-gateway, gta-execution-engine.",
     "note": "[SHIPPED by gentech 2026-08-20: Unichain pool reader + allocator ported + verified against live Unichain mainnet (chainId 130, USDC/WETH 0.05% pool 0x65081c...bcf1). unichain_pool_reader.py reads real sqrtPriceX96→price, tick, fee. unichain_allocator.py = regime-driven LP/lending/hold recommendation, gas-aware. 9/9 tests pass (pytest + plain). Repo: 10-Labs/unichain-treasury/. Deployment of actual position gated on capital on Unichain (wallet flat).]",
     "_orig_id": null,
@@ -1189,7 +1298,6 @@
     "group": "Treasury",
     "routing": "Treasury",
     "shipped_by": "gentech",
-    "shipped_date": "2026-08-20",
-    "needs_jordan": false
+    "shipped_date": "2026-08-20"
   }
 ]

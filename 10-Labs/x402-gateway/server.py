@@ -881,27 +881,35 @@ async def health():
 @app.get("/openapi.json")
 async def openapi():
     """Full OpenAPI spec — free endpoints marked security:[], paid endpoints
-    carry the x402 security scheme so x402scan can probe them correctly."""
+    carry the x402 security scheme + per-service x-payment-info so AgentCash /
+    x402scan can probe and index each service with its real price and schema.
+    """
     free = {"security": []}
     spec = {
-        "openapi": "3.0.0",
+        "openapi": "3.1.0",
         "info": {
-            "title": "GenTech Labs x402 Gateway",
+            "title": MANIFEST.get("name", "GenTech Labs x402 Gateway"),
             "version": MANIFEST.get("version", "9.0.0"),
-            "description": "Pay-per-call API gateway with 10 services across Base Network. Token security, wallet analysis, agent discovery, market intelligence, DeFi LP analytics, NFT search, treasury defense, game deal tracking.",
+            "description": MANIFEST.get(
+                "description",
+                "Pay-per-call API gateway. Token security, wallet analysis, agent discovery, market intelligence, DeFi LP analytics, NFT search, treasury defense, game deal tracking.",
+            ),
             "contact": {"email": "jordanjones0902@gmail.com", "name": "GenTech Labs", "url": "https://gentechlabs.net"},
-            "x-guidance": "Call /v1/{service}/{path} with a JSON body. Services: token_security (risk score an address), wallet_analysis (portfolio P&L), agent_discovery (search on-chain agents), market_intelligence (token price/volume), defi_lp_analytics (LP position scoring), nft_search (Magic Eden search), treasury_defender (token quarantine), deal_tracker (game deals/price-watch/release radar). Unauthenticated calls return HTTP 402 with x402 payment requirements (USDC on Base). Pay via EIP-3009 and retry with Authorization: x402 <proof>.",
+            "x-guidance": "Call a paid endpoint without a proof to receive HTTP 402 with x402 payment requirements (USDC). Pay via the 402 challenge and retry with the payment proof. Free endpoints (/health, /status, /openapi.json, /.well-known/*) need no payment.",
         },
-        "servers": [{"url": "https://api.gentechlabs.net"}],
+        "servers": [{"url": MANIFEST.get("url", "https://api.gentechlabs.net")}],
         "security": [{"x402": []}],
         "components": {
             "securitySchemes": {
                 "x402": {
                     "type": "http",
                     "scheme": "bearer",
-                    "description": "x402 payment proof. Call without a proof to receive HTTP 402 with payment requirements (USDC on Base). Pay via EIP-3009 and retry with Authorization: x402 <proof>.",
+                    "description": "x402 payment proof. Call without a proof to receive HTTP 402 with payment requirements. Pay and retry with the returned proof.",
                 }
             }
+        },
+        "x-discovery": {
+            "ownershipProofs": ["gentechlabs-erc8004-1770"],
         },
         "paths": {
             "/": {"get": {"summary": "Root", "security": []}},
@@ -911,37 +919,125 @@ async def openapi():
             "/.well-known/x402": {"get": {"summary": "x402 discovery", "security": []}},
             "/.well-known/x402-bazaar": {"get": {"summary": "x402 bazaar manifest", "security": []}},
             "/.well-known/agent-card.json": {"get": {"summary": "Agent card", "security": []}},
-            "/v1/{service}/{path}": {
-                "parameters": [
-                    {"name": "service", "in": "path", "required": True, "schema": {"type": "string"}},
-                    {"name": "path", "in": "path", "required": True, "schema": {"type": "string"}},
-                ],
-                "get": {
-                    "summary": "Paid x402 endpoint (service/path)",
-                    "x-payment-info": {
-                        "price": {"mode": "fixed", "currency": "USD", "amount": "0.010000"},
-                        "protocols": [{"x402": {}}],
-                    },
-                    "responses": {"402": {"description": "Payment required"}, "200": {"description": "OK"}},
-                },
-                "post": {
-                    "summary": "Paid x402 endpoint (service/path)",
-                    "x-payment-info": {
-                        "price": {"mode": "fixed", "currency": "USD", "amount": "0.010000"},
-                        "protocols": [{"x402": {}}],
-                    },
-                    "responses": {"402": {"description": "Payment required"}, "200": {"description": "OK"}},
-                },
-            },
         },
     }
+    # Build one path entry per paid service from the manifest so each carries its
+    # real price, a 402 response, and an input/output schema (AgentCash requires
+    # these; the old generic /v1/{service}/{path} failed "Input/Output Schema Missing").
+    for key, svc in SERVICES.items():
+        endpoint = svc.get("endpoint", f"/v1/{key}/{{input}}")
+        price = svc.get("price_usd")
+        if price is None:
+            continue  # skip services without a listed price (e.g. treasury_defender)
+        path = endpoint.split("?")[0]  # strip query-string examples
+        # Extract path params like {address} / {symbol} / {chainId} for the schema
+        path_params = [p[1:-1] for p in path.split("/") if p.startswith("{") and p.endswith("}")]
+        params = [
+            {"name": p, "in": "path", "required": True, "schema": {"type": "string"}}
+            for p in path_params
+        ]
+        # A minimal request body/example so probes can send valid input (fixes
+        # "Expected 402, got 400" / "Input Schema Missing").
+        request_body = None
+        if key == "agent_research":
+            request_body = {
+                "required": True,
+                "content": {"application/json": {"schema": {"type": "object", "properties": {
+                    "task": {"type": "string", "description": "What to research"},
+                    "topic": {"type": "string", "description": "Topic / focus"},
+                }}, "example": {"task": "summarize", "topic": "bitcoin"}}},
+            }
+        elif key == "deal_tracker":
+            request_body = {
+                "required": False,
+                "content": {"application/json": {"schema": {"type": "object", "properties": {
+                    "type": {"type": "string", "enum": ["deals", "price", "releases"]},
+                }}, "example": {"type": "deals"}}},
+            }
+        operation = {
+            "summary": f"{svc.get('description', key)}",
+            "tags": [key],
+            "x-payment-info": {
+                "price": {"mode": "fixed", "currency": "USD", "amount": f"{price:.6f}"},
+                "protocols": [{"x402": {}}],
+            },
+            "responses": {
+                "200": {"description": "Success (after x402 payment)"},
+                "402": {"description": "Payment required — returns x402 challenge"},
+            },
+        }
+        if params:
+            operation["parameters"] = params
+        if request_body:
+            operation["requestBody"] = request_body
+        spec["paths"][path] = {"get": operation}
+        # FREE preview route for the services that have one (pattern from Grey
+        # Ridge — lets agents taste data before paying). Route is /v1/{service}/preview.
+        if key in PREVIEW_SAMPLES:
+            # map public URL segment back (service_key -> url segment)
+            url_seg = key
+            for seg, sk in URL_TO_SERVICE.items():
+                if sk == key:
+                    url_seg = seg
+                    break
+            preview_path = f"/v1/{url_seg}/preview"
+            spec["paths"][preview_path] = {"get": {
+                "summary": f"Free preview — sample of {svc.get('description', key)}",
+                "tags": [key],
+                "security": [],
+                "x-preview": True,
+                "responses": {"200": {"description": "Sample data (free, no payment)"}},
+            }}
     return spec
 
 
 # Dynamic paid endpoint routing
+# Free /preview samples — curated illustrative data so agents can verify the
+# SHAPE of the response before paying. Values are samples, NOT live/real data
+# (mirrors Grey Ridge's "withholds detail" pattern). Full data requires payment.
+def _preview_json(data):
+    from fastapi.responses import JSONResponse
+    return JSONResponse(data, media_type="application/json")
+
+PREVIEW_SAMPLES = {
+    "market_intelligence": _preview_json({
+        "symbol": "ETH", "price": 2300.00, "change_24h": "+1.2%",
+        "note": "SAMPLE — call paid /v1/market/price/{symbol} for live price",
+    }),
+    "token_security": _preview_json({
+        "address": "0x1234...", "risk": "low", "score": 85,
+        "flags": [], "note": "SAMPLE — call paid /v1/security/score/{address} for full audit",
+    }),
+    "wallet_analysis": _preview_json({
+        "wallet": "0x1234...", "pnl_24h": "+$12.50", "portfolio_value": "$500.00",
+        "note": "SAMPLE — call paid /v1/wallet/portfolio/{address} for full P&L",
+    }),
+    "defi_lp_analytics": _preview_json({
+        "position": "0x1234...", "shape": "stable", "efficiency": "high",
+        "note": "SAMPLE — call paid /v1/defi/lp/{address} for full analysis",
+    }),
+    "agent_research": _preview_json({
+        "task": "sample", "topic": "bitcoin", "summary": "Research returns structured findings.",
+        "note": "SAMPLE — call paid /v1/agent/research for full report",
+    }),
+    "deal_tracker": _preview_json({
+        "type": "deals", "count": 3, "sample": ["Deal A", "Deal B", "Deal C"],
+        "note": "SAMPLE — call paid /v1/deals/deals for full list",
+    }),
+}
 @app.api_route("/v1/{service}/{path:path}", methods=["GET", "POST"])
 async def paid_endpoint(service: str, path: str, request: Request):
     service_key = URL_TO_SERVICE.get(service, service)
+    # FREE PREVIEW — bypass the payment gate so agents can verify data quality
+    # before paying (pattern learned from Grey Ridge, Aug 20 2026). Returns a
+    # curated SAMPLE (withholds full paid data), not a live forwarded call, so
+    # we never give away the real product for free.
+    if path.startswith("preview") or "/preview" in path or path.endswith("/preview"):
+        return PREVIEW_SAMPLES.get(service_key, Response(
+            status_code=404,
+            content=json.dumps({"error": "preview_not_available", "service": service_key}),
+            media_type="application/json",
+        ))
     service_name = service.replace("_", " ").title()
     service_config = SERVICES.get(service_key)
 
@@ -985,6 +1081,25 @@ async def paid_endpoint(service: str, path: str, request: Request):
     is_xlayer = proof_network == "eip155:196"
     is_base = proof_network == "eip155:8453"
     use_dexter = os.getenv("X402_USE_DEXTER", "0") == "1"
+
+    def _is_outage(reason: str) -> bool:
+        """True only if the facilitator is UNREACHABLE (network/timing out),
+        NOT when it rejected the proof. We fail over only on genuine outages."""
+        return "unreachable" in reason.lower()
+
+    def _try_over(facilitators):
+        """Try facilitators in order; fall back only on outage, never on a
+        reached-but-invalid verdict. Returns (valid, reason, used_label)."""
+        last = (False, "no facilitators configured")
+        for fn, label in facilitators:
+            valid, reason = fn(proof, price)
+            if valid:
+                return True, reason, label
+            if not _is_outage(reason):
+                # facilitator reached a verdict (proof invalid) — stop, reject
+                return False, reason, label
+            last = (False, f"{label}: {reason}")
+        return False, last[1], "all"
     if mode == "simulation":
         valid, reason = verify_proof_simulation(proof, price)
     elif mode == "cdp":
@@ -1001,14 +1116,18 @@ async def paid_endpoint(service: str, path: str, request: Request):
         valid, reason = verify_proof_via_payai(proof, price)
     elif is_base and use_dexter:
         # Base proof + Dexter enabled → settle through Dexter so OpenDexter
-        # auto-catalogs us. This is the marketplace-listing lever (#41).
-        valid, reason = verify_proof_via_dexter(proof, price)
+        # auto-catalogs us (#41). FALL BACK to CDP if Dexter is unreachable so
+        # a Dexter outage never blocks Base settlement (single-POF fix, Aug 20).
+        valid, reason, _ = _try_over([
+            (verify_proof_via_dexter, "dexter"),
+            (verify_proof_via_cdp, "cdp"),
+        ])
     else:
         # auto: try CDP when a key exists, else simulation
         if os.getenv("CDP_API_KEY"):
             valid, reason = verify_proof_via_cdp(proof, price)
-            if not valid and "CDP_API_KEY not configured" not in reason:
-                # CDP said invalid — do NOT fall back to simulation, reject
+            if not valid and "CDP_API_KEY not configured" not in reason and not _is_outage(reason):
+                # CDP reached a verdict — do NOT fall back to simulation, reject
                 return Response(
                     status_code=402,
                     content=json.dumps({"error": "payment_proof_invalid", "reason": reason}),

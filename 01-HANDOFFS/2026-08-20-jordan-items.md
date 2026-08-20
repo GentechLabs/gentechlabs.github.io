@@ -1,22 +1,6 @@
-# Jordan Items — 2026-08-20
+# 👑 Jordan Action Items — 2026-08-20
 
-## 🔴 Urgent / Time-sensitive
+## Needs Your Decision (2 items)
 
-- **Mastercard Innovation Challenge 2026** — **register by Aug 20 (TODAY)** at https://luma.com/kyz978xv (free). Labs scaffolded the red/blue-team demo (13/13 tests pass, live fraud-stack data layer, ERC-8004 identity + credit score 76.7/HIGH). Submit by Aug 31. This is the one hard deadline today.
-
-## 🟡 Needs Jordan action (blocking autonomous work)
-
-- **#4 Paymenter x402 Gateway — Submit to Marketplace + Discord** — RE-GATED 2026-08-20. Repo is live (github.com/ProtoJay4789/paymenter-x402, main @ bb1857d), marketplace listing + Discord post are drafted and ready to paste. But submission needs **Jordan's live Paymenter account** (paymenter.org/marketplace UI) + **Discord bot token**. The canonical `Paymenter/Extensions` GitHub repo is archived/read-only, so there's no PR path. Connector doc fleshed out in the meantime.
-
-## 🟠 Open decisions surfaced (not deciding for you)
-
-- **#where-are-the-funds** (from treasury 2026-08-12): ~$43.7 was swept off the Steward wallet to `0xeee3fe6c5604c1069a50690043de57848826e9c6` on Aug 11 evening. Jordan needs to confirm whether this was an intentional treasury wind-down/emergency move or unexpected. If unintentional, immediate review needed.
-- **#12 Model Strength Score** (queue #12) — needs Jordan greenlight + Modal GPU funding (~$30-60).
-- **Dinari dShares rail** — Jordan needs Partners account + sandbox API key + KYC to unblock the equity leg.
-- **Krexa credit layer** — Jordan needs to grab an invite code (discord.gg/aMSEG7yj) so I can run `krexa activate <code>`.
-- **C0: verify treasury executes on C-Chain + fund small demo slice** — needs Jordan greenlight + AVAX/USDC.
-
-## 📋 Standing (from prior sessions, still open)
-
-- Register at Devpost (CockroachDB × AWS "Build with Agentic Memory" — #23 shipped, needs Devpost registration + <3min demo video + public repo push).
-- Keeperhub, Arc, AI Factory hackathon registrations.
+- **#4 Paymenter x402 Gateway — Submit to Marketplace + Discord** — Submit paymenter-x402 extension to Paymenter marketplace (paymenter.org/marketplace). Post in Paymenter Discord community (1.9k members). Repo live at github.com/ProtoJay4789/paymenter-x402. Marketplace listing and Discord post drafted in vault.
+- **#12 Model Strength Score — score trained models 0-850 for marketplace** — Score AI models 0-850 like Agent Credit Score: Data Quality 30%, Benchmarks 25%, Trainer Reputation 20%, Age/Uptime 15%, Market Adoption 10%. Bittensor lessons baked in: staked reputation, on-chain provenance, no kill switch. First listing = GenTech DeFi Model (Modal GPU ~$30-60). Revenue: score API $0.01-0.05, listing fee, 2-5% inference take. Spec: 09-Green Room/specs/model-strength-score.md. Needs Jordan greenlight + Modal GPU funding.
