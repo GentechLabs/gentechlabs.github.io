@@ -49,3 +49,11 @@
 - #payg-skip — BENQI PAYG validator SKIPPED (no staking rewards = cost, not income); logged conditional in retro9000-cchain-play-scope.
 - #solana-rail — 4 signals (OOBE+MultiHopper, Ampersend+AWS, 8004scan+Krexa, Ramp) → Solana second rail; feature-bridge + freedom-planner ideas captured.
 
+
+## 2026-08-20
+- #DEPLOY AVAX/USDC LFJ curve LIVE on real funds ($29). Auto-deploy wired; posture DEPLOYED.
+- FIXED deploy bugs (stale price source, flat->Gaussian distribution).
+- FIXED rebalance redeploy bug (deploy_lp_curve all-balance revert -> rewired to gta_avax_lp_execute). Position recovered 11 bins IN range.
+- LP Monitor consolidated into Agentic Treasury report; standalone paused.
+- BENQI PAYG validator SKIPPED (cost not income; conditional Retro9000).
+- Solana second rail (MultiHopper/Krexa/Ramp) + Cross-Chain Feature Bridge + Freedom Planner ideas logged.
