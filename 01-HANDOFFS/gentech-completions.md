@@ -65,3 +65,9 @@
 - **Group returns consumed**: all returned IDs (labs/entertainment/treasury/forge) already marked shipped in prior sessions — nothing new to apply.
 - **Infra health**: gateway 200, hub-launcher 200, arcade 200. Vault synced + pushed (54e9b38b).
 - **Jordan items** written to `01-HANDOFFS/2026-08-20-jordan-items.md` (Mastercard register TODAY, #4 Paymenter, #where-are-the-funds, Model Strength Score, Dinari, Krexa, C0).
+
+## 2026-08-21
+
+- **GenTech EDU pilot page — LFJ AVAX/USDC pool** (fleshed-out stale idea → shipped): `09-Green Room/gentech-edu/lfj-avax-usdc-pool-pilot.md`. Honest-expectations per-pool guide for the treasury's default rail, written from LIVE verified numbers (discover_positions.py → 11 bins · IN range · $7.31 · ~$26.77 deployed). Covers what the pool is, real returns at small size (the hidden part), exact start steps, common mistakes (incl. the CompositionFactorFlawed bug we fixed), risk profile, milestone ladder, trust contract.
+- Consumed group returns: labs #29/52/19/2/30/1/6/48/49, entertainment #50/9/14/8/73/71/38/17/60/16/22/23/1/20/29/30/34/35/36/53/49/2/5/10/15/6/7/13/18/11, treasury #51/8, forge #61/59/60/66/62/65/50 — all already shipped in global build_queue.json (applied in prior sessions). Per-lane IDs (entertainment 73/71/60, forge 61/59/60/66/62/65) are lane-local, not in the global queue. Nothing new to apply.
+- Infra health: gateway root 200, bazaar manifest 402 (expected paywall), hub-launcher 200, arcade 200.

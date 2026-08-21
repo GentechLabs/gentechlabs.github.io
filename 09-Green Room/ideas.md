@@ -100,7 +100,7 @@
 - Full spec: `09-Green Room/specs/gentech-edu-agentic-treasury.md`
 - **Next:** build the first EDU page for the Trader Joe V2 AVAX/USDC pool (the rail
   we're about to fund) as the pilot.
-- [ ] Build EDU pilot page for Trader Joe V2 AVAX/USDC pool
+- [x] Build EDU pilot page for Trader Joe V2 AVAX/USDC pool → **SHIPPED 2026-08-21** (`09-Green Room/gentech-edu/lfj-avax-usdc-pool-pilot.md`), live numbers verified (11 bins · IN range · $7.31 · ~$26.77 deployed)
 
 ## 🏆 GenTech Book Reader / GenTech EDU — Interactive Visual Books + AR Glasses
 **Source:** Jordan brainstorm (Aug 3) | **Status:** Concept — strong flagship fit, connects Tutors Layer + visual pipeline
