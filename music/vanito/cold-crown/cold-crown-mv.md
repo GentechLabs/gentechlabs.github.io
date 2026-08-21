@@ -30,6 +30,8 @@ Kono kiri wa kesshite tokenai
 - He walks to the edge, stands, looks around
 - **CAMERA on his face → he pulls the hood DOWN** to reveal his platinum hair + face, eyes scanning LEFT to RIGHT
 - **Beat drops → falls forward, straight down, eyes closed**
+- **BEAT DROP TIMESTAMP (CONFIRMED):** 30.6s in `cold-crown-clip-audio.mp3` (loudest crash 26-34s). Fall syncs here.
+- **DROP KEYFRAME (APPROVED v2):** `cold-crown-drop-kf-v2.png` — rooftop edge above, eyes CLOSED, black LEATHER jacket (silver D-rings/straps/dragon emblem, NOT trench coat), mist streaming, dense fog, 3D CG film-look. Anchored to `kiri-film-sheet.png` for face+outfit lock.
 - Very foggy and messy — you only see fog as he falls, but you still track his character through it
 - **Mist streaming off him**
 
