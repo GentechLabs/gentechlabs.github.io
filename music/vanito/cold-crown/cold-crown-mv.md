@@ -26,10 +26,16 @@ Kono kiri wa kesshite tokenai
 ## 🎬 MV OPENING (LOCKED)
 **Opening scene — locked in session, now captured here:**
 - Foggy rooftop, KIRI alone, **NO guitar**
+- **NEW: hoodie UP over his head** (pre-keyframe) — he starts with the hood covering his head
 - He walks to the edge, stands, looks around
+- **CAMERA on his face → he pulls the hood DOWN** to reveal his platinum hair + face, eyes scanning LEFT to RIGHT
 - **Beat drops → falls forward, straight down, eyes closed**
 - Very foggy and messy — you only see fog as he falls, but you still track his character through it
 - **Mist streaming off him**
+
+## 🧥 FILM LOOK — HOOD UP / HOOD DOWN
+- **Hood UP (pre-keyframe, APPROVED v4):** `cold-crown-hoodup-prekf-v4.png` — black hooded leather jacket w/ hood up, SILVER WINGED DRAGON emblem on back (his signature logo), standing MID-ROOF walking toward the edge, seen from behind. Anime-stylized, no guitar. Live on VPS.
+- **Hood DOWN (the reveal beat):** he pulls it down with both hands moving up to the hood, revealing platinum hair + vivid ice-blue eyes. Eyes scan LEFT → RIGHT. Capture the hands moving up to the hood and pulling it down.
 
 ## 🎵 OPENING TRACK (saved)
 - **`music/vanito/cold-crown/cold-crown-opening.mp3`** — 182s (~3min). Vanito's pick: use this at the start of the video, "when I start anything until I'm ready." The intro build-up before the main action.
