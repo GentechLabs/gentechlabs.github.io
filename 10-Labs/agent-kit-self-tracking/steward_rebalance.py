@@ -315,7 +315,7 @@ def main() -> int:
             print(f"   Plan: open {decision['shape']} curve for ${deployable:.2f}")
             proc = subprocess.run(
                 [sys.executable, DEPLOY_EXEC_SCRIPT, "--amount", str(deployable),
-                 "--bin-spread", "5", "--execute", "--yes"],
+                 "--bin-spread", "11", "--execute", "--yes"],
                 capture_output=True, text=True, timeout=300)
             ok = proc.returncode == 0
             print(f"   Executed: {'✅' if ok else '❌'}")
