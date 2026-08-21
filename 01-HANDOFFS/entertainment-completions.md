@@ -23,3 +23,5 @@
 *Last updated: 2026-08-21*
 
 - **Memory posture fix (2026-08-21)** — MEMORY.md was OVER CAP (2208/2200). Pruned in one atomic batch to 95% (2107/2200): deleted completed-work log, compressed Cold Crown block to point at vault spec. Added discipline note (save to brain at 80%/85%). Memory adds work again. Context bridge: `09-Green Room/context-bridge/context-pixel-2026-08-21.md`.
+- **2026-08-21 Cold Crown (KIRI MV) opening beats** — Beats 1-4 + stitch built/approved/deployed: `cold-crown-beat1-walk.mp4`, `cold-crown-beat2-edge.mp4`, `cold-crown-beat3-v5-hooddown.mp4`, `cold-crown-beat4-eyescan-v2.mp4`, `cold-crown-stitch-w-audio.mp4`. Live on vanito.gentechlabs.net.
+- **2026-08-21 Cold Crown cinematic drop** — Drop keyframe v4 approved (`cold-crown-drop-kf.png`), Drop A (free-fall trick) + Drop B (silver smoke from eyes) done. Beat drop pinned at 30.6s. Drop REDO queued (proper skydive + closed-eye silver-mist). Full report: `01-HANDOFFS/entertainment-to-gentech/2026-08-21.md`.
