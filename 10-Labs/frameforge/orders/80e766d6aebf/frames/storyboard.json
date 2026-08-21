@@ -1,0 +1,91 @@
+{
+  "title": "Neon Run",
+  "character": {
+    "name": "Neon Run",
+    "coating": "KAGE is a crimson-haired cyberpunk courier in a charcoal tactical jacket with steel accents. Pale skin, gold visor, navy undersuit. Moody, low-key lighting.",
+    "seed": 2406723895,
+    "palette": [
+      "#8e1a1a",
+      "#2b2b2b",
+      "#4682b4",
+      "#c9a227",
+      "#1a2a4a"
+    ],
+    "source": "KAGE is a crimson-haired cyberpunk courier in a charcoal tactical jacket with steel accents. Pale skin, gold visor, navy undersuit. Moody, low-key lighting.",
+    "version": "1.0"
+  },
+  "shots": [
+    {
+      "scene": 1,
+      "index": 1,
+      "description": "KAGE enters the neon alley",
+      "camera_angle": "low",
+      "shot_size": "wide",
+      "movement": "dolly",
+      "lighting": "neon",
+      "mood": "tense"
+    },
+    {
+      "scene": 1,
+      "index": 2,
+      "description": "KAGE draws her blade",
+      "camera_angle": "eye",
+      "shot_size": "medium",
+      "movement": "static",
+      "lighting": "neon",
+      "mood": "focused"
+    },
+    {
+      "scene": 2,
+      "index": 1,
+      "description": "The drone closes in overhead",
+      "camera_angle": "high",
+      "shot_size": "close",
+      "movement": "crane",
+      "lighting": "harsh",
+      "mood": "threat"
+    }
+  ],
+  "frame_count": 3,
+  "prompts": [
+    {
+      "shot": {
+        "scene": 1,
+        "index": 1,
+        "description": "KAGE enters the neon alley",
+        "camera_angle": "low",
+        "shot_size": "wide",
+        "movement": "dolly",
+        "lighting": "neon",
+        "mood": "tense"
+      },
+      "prompt": "[0-3s] low-angle, subject towering; wide establishing shot; dolly in. KAGE enters the neon alley. Character: KAGE is a crimson-haired cyberpunk courier in a charcoal tactical jacket with steel accents. Pale skin, gold visor, navy undersuit. Moody, low-key lighting.. Lighting: neon. Mood: tense. Palette: #8e1a1a, #2b2b2b, #4682b4, #c9a227, #1a2a4a."
+    },
+    {
+      "shot": {
+        "scene": 1,
+        "index": 2,
+        "description": "KAGE draws her blade",
+        "camera_angle": "eye",
+        "shot_size": "medium",
+        "movement": "static",
+        "lighting": "neon",
+        "mood": "focused"
+      },
+      "prompt": "[0-3s] eye-level, neutral; medium shot, waist up; locked-off tripod. KAGE draws her blade. Character: KAGE is a crimson-haired cyberpunk courier in a charcoal tactical jacket with steel accents. Pale skin, gold visor, navy undersuit. Moody, low-key lighting.. Lighting: neon. Mood: focused. Palette: #8e1a1a, #2b2b2b, #4682b4, #c9a227, #1a2a4a."
+    },
+    {
+      "shot": {
+        "scene": 2,
+        "index": 1,
+        "description": "The drone closes in overhead",
+        "camera_angle": "high",
+        "shot_size": "close",
+        "movement": "crane",
+        "lighting": "harsh",
+        "mood": "threat"
+      },
+      "prompt": "[0-3s] high-angle, subject diminished; close-up, face; crane up. The drone closes in overhead. Character: KAGE is a crimson-haired cyberpunk courier in a charcoal tactical jacket with steel accents. Pale skin, gold visor, navy undersuit. Moody, low-key lighting.. Lighting: harsh. Mood: threat. Palette: #8e1a1a, #2b2b2b, #4682b4, #c9a227, #1a2a4a."
+    }
+  ]
+}

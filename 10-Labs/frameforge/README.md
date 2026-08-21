@@ -57,3 +57,22 @@ Each shot carries camera direction that maps to composition rules:
 **Shipped 2026-08-15** by Gentech (nightly build). Core pipeline + CLI + compile
 verified end-to-end. Next: service portal landing page + order form (Phase 1
 launch), then API (Phase 2).
+
+**Service portal shipped 2026-08-21** — `app.py` (Flask) exposes the full
+Phase-1 service flow:
+
+| Endpoint | Purpose |
+|----------|---------|
+| `GET /` | Landing page with working order form |
+| `POST /api/order` | Create order (character sheet + shot list + tier) → runs lock→build→compile |
+| `GET /order/<id>` | Delivery page (frames + compiled animatic) |
+| `GET /orders/<id>/frame/<file>` | Serve a generated SVG frame |
+| `GET /orders/<id>/video` | Serve the compiled MP4 |
+| `GET /api/orders` | List orders (status) |
+| `GET /api/health` / `GET /api/tiers` | Health + pricing |
+
+**Run it:** `python3 app.py` → serves on port `8123` (orders persist under
+`orders/<id>/`). Verified end-to-end with a live "Neon Run" order: 3 frames
+locked, delivery page 200, video 200 (3.0s MP4, ffprobe-verified). Remaining
+for Phase 1 launch: nginx reverse-proxy + TLS, and wire the payment rail
+(x402) so orders can be paid.
