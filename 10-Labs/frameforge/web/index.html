@@ -28,6 +28,53 @@
   .tag { display:inline-block; background:var(--ink); color:var(--paper); font-size:.75rem;
          padding:.2rem .6rem; border-radius:20px; margin-right:.4rem; }
 </style>
+<script>
+document.getElementById('order-form').addEventListener('submit', async function (e) {
+  e.preventDefault();
+  const status = document.getElementById('order-status');
+  const btn = document.getElementById('order-submit');
+  btn.disabled = true;
+  status.textContent = 'Generating your storyboard…';
+
+  // Parse shot list lines: "description | angle | size | movement"
+  const shots = [];
+  document.getElementById('f-shots').value.split('\n').map(s => s.trim()).filter(Boolean).forEach((line, i) => {
+    const parts = line.split('|').map(p => p.trim());
+    const scene = Math.floor(i / 3) + 1;
+    shots.push({
+      scene, index: (i % 3) + 1,
+      description: parts[0] || 'Untitled shot',
+      camera_angle: parts[1] || 'eye',
+      shot_size: parts[2] || 'medium',
+      movement: parts[3] || 'static',
+      lighting: 'neon', mood: 'tense'
+    });
+  });
+
+  try {
+    const resp = await fetch('/api/order', {
+      method: 'POST', headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        project: document.getElementById('f-project').value,
+        tier: document.getElementById('f-tier').value,
+        character_sheet: document.getElementById('f-sheet').value,
+        shots
+      })
+    });
+    const data = await resp.json();
+    if (!resp.ok) { status.style.color = '#b00020'; status.textContent = 'Error: ' + (data.error || 'unknown'); }
+    else {
+      status.style.color = '#1a7f37';
+      status.innerHTML = '✅ Storyboard ready — ' + data.meta.frame_count + ' frames. <a href="' + data.delivery_url + '">Open delivery page</a>';
+    }
+  } catch (err) {
+    status.style.color = '#b00020';
+    status.textContent = 'Error: ' + err.message;
+  } finally {
+    btn.disabled = false;
+  }
+});
+</script>
 </head>
 <body>
 <header>
@@ -92,10 +139,42 @@
     <h2>Get a Storyboard</h2>
     <p>Tell us about your project. We'll lock your character and deliver a
     storyboard you can iterate on before commissioning final art.</p>
-    <p style="margin-top:1rem; color:var(--muted)">
-      Order form coming online. For now, reach the FrameForge team through the
-      GenTech Labs channel.
-    </p>
+
+    <div style="background:#fff;border:1px solid #e5e0d6;border-radius:8px;padding:1.5rem;margin-top:1.5rem">
+      <form id="order-form">
+        <div style="margin-bottom:1rem">
+          <label style="display:block;font-weight:bold;margin-bottom:.3rem">Project title</label>
+          <input type="text" id="f-project" value="Neon Run" required
+                 style="width:100%;padding:.6rem;border:1px solid #ddd;border-radius:6px">
+        </div>
+
+        <div style="margin-bottom:1rem">
+          <label style="display:block;font-weight:bold;margin-bottom:.3rem">Character reference sheet</label>
+          <textarea id="f-sheet" rows="3" required
+                    style="width:100%;padding:.6rem;border:1px solid #ddd;border-radius:6px;font-family:monospace">A crimson-haired cyberpunk courier in a charcoal tactical jacket with steel accents. Pale skin, gold visor, navy undersuit. Moody, low-key lighting.</textarea>
+        </div>
+
+        <div style="margin-bottom:1rem">
+          <label style="display:block;font-weight:bold;margin-bottom:.3rem">Shot list (one per line: description | angle | size | movement)</label>
+          <textarea id="f-shots" rows="6" required
+                    style="width:100%;padding:.6rem;border:1px solid #ddd;border-radius:6px;font-family:monospace">Hero enters the neon alley | low | wide | dolly
+Hero draws her blade | eye | medium | static
+The drone closes in overhead | high | close | crane
+Hero leaps across rooftops | dutch | full | handheld</textarea>
+        </div>
+
+        <div style="margin-bottom:1rem">
+          <label style="display:block;font-weight:bold;margin-bottom:.3rem">Tier</label>
+          <select id="f-tier" style="padding:.6rem;border:1px solid #ddd;border-radius:6px">
+            <option value="storyboard">Storyboard — $1,500</option>
+            <option value="express">Express 48h — $2,500</option>
+          </select>
+        </div>
+
+        <button type="submit" class="cta" id="order-submit">Generate Storyboard</button>
+        <div id="order-status" style="margin-top:1rem;font-weight:bold"></div>
+      </form>
+    </div>
   </section>
 </div>
 
