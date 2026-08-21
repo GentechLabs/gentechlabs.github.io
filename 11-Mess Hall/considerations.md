@@ -1,7 +1,7 @@
 ---
-date: 2026-08-18
+date: 2026-08-20
 status: active
-last-updated: 2026-08-18 20:06 ET
+last-updated: 2026-08-21 00:06 ET
 ---
 
 # 🧠 Considerations — Open Decisions
@@ -18,13 +18,18 @@ last-updated: 2026-08-18 20:06 ET
 - [ ] ✅ **Build with DataHub** — **DEADLINE PASSED Aug 10.** Needs submission confirm. If not submitted, mark closed.
 - [ ] ✅ **Arc Programmable Money Hackathon** — **DEADLINE PASSED Aug 9.** SHIPPED + verified (ArcAgentWallet.sol, 57/57 tests). Moved to Recently Resolved.
 - [ ] 🔴 **Superteam USA — Remote Community Membership** — Applied. **Jordan confirmed Aug 12: applied for second triage, now waiting on their decision.** (Superteam Earn agent `gentech-labs-x402` registered Jul 23; us.superteam.fun/join remote membership.) Status: PENDING second triage.
-- [ ] 🟡 **Solana Foundation USA Grant** — Applied Aug 5 (~$8.2k avg/up to $10k USDG). **Aug 12 check: site still shows application, no approval/rejection email, no status change** — likely large applicant pool. STILL PENDING. Do not reallocate treasury around unconfirmed grant. **Re-check ~Aug 19 (1 day).** Tracked: Treasury/2026-08-05-solana-foundation-usa-grant.md
+- [ ] 🟡 **Solana Foundation USA Grant** — Applied Aug 5 (~$8.2k avg/up to $10k USDG). **Aug 20 check: site still shows application, no approval/rejection email, no status change** — likely large applicant pool. STILL PENDING. Do not reallocate treasury around unconfirmed grant. **Re-check ~Aug 22.** Tracked: Treasury/2026-08-05-solana-foundation-usa-grant.md
 - [x] 🚨 **Mastercard Innovation Challenge** — **✅ REGISTERED Aug 18** (luma.com/kyz978xv, free) + build kicked off (13/13 tests, live fraud stack). Submit Aug 31. Credential > prize framing (W33 review, Aug 16). `10-Labs/mastercard-challenge/` scaffolded (red_team 7 attack types + blue_team governance + live fraud stack `live_stack.py`; ERC-8004 identity + credit 76.7/HIGH surfaced). Labs: extend realism, session-aware eval, polish UI, demo video by Aug 31.
 - [ ] 🚨 **Algorand First-Mover Play (Aug 6)** — **✅ COMPOSITE ENTRY SHIPPED (Aug 7).** **Jordan: (1) provide Algorand wallet address so X402_PAYTO_ALGORAND goes live, (2) confirm late-leaderboard eligibility or mark dead.**
 - [ ] 🚨 **Algorand Global x402 Challenge #82** — **⚠️ DEADLINE PASSED Jul 31.** $100K + 500K ALGO. **Jordan: confirm if registered / late-leaderboard eligible, or mark dead.**
 
-## 🆕 MultiHopper — Solana Private Routing Rail (Aug 20)
+## 🆕 Aug 20 — Unichain Treasury SHIPPED + GTA dry-run
 
+- **Unichain Treasury Port SHIPPED (#58)** — Agentic Treasury / GTA asset-management layer ported to **Unichain** (chainId 130), the deployable proof for the Uniswap Foundation grant. `10-Labs/unichain-treasury/`: live v3 pool reader (real RPC) + regime allocator + tests **9/9 pass**. Live: USDC/WETH 0.05% pool `0x65081c...dbcf1` (~$2,250/ETH). **Blocker:** onchain deploy gated on capital on Unichain (wallet flat ~$1.88). Application form: `share.hsforms.com/18Kv3hTvDSt-x1wK9va0OYwsdca9`.
+- **GTA Execution Engine dry-run (#GTA-DRYRUN)** — decision **ENTER** (basis ≥ 10 bps). Freshest live scan picks **SOL (14.96 bps)** as top basis. Plan: short SOL perp (Hyperliquid) / buy SOL spot (Coinbase). **NO funds moved — dry-run only.** Awaiting Jordan approval to enable real execution.
+- **Fixed pre-existing git merge conflict** in `scripts/build_queue.json` (was invalid JSON) — took HEAD side of 12 blocks; file now valid (58 items).
+
+## 🆕 MultiHopper — Solana Private Routing Rail (Aug 20)
 - **Signal:** OOBE Protocol (SAP) partnering with MultiHopper — programmable onchain privacy routing on Solana. Agents on SAP get MultiHopper payment routing through OOBE tooling; shared revenue on routed txs.
 - **What it is:** non-custodial, compliance-checked (TRM Labs) multi-hop asset routing. MCP-compatible + REST (OpenAPI 3.1), 3-call lifecycle (create → prepare → confirm-broadcast), signing stays client-side. 2,800+ mainnet transfers, revenue positive, Top 3 by Visa at Solana Colosseum Berlin, SOC 2 + GDPR.
 - **Why us:** Solana = our second rail (Base = volume, Solana = compounding agent economy). This is the "move it" layer for treasury — private, compliant, programmable. Complements Ampersend (pay-for-APIs buyer-side) vs MultiHopper (route-value treasury movement).
