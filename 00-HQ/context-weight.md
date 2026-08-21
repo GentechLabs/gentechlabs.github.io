@@ -1,6 +1,6 @@
 # 🧠 Context Weight — GenTech Labs
 
-> Auto-generated: 2026-08-19 00:06 ET · Loads on session start so every group has context.
+> Auto-generated: 2026-08-21 00:06 ET · Loads on session start so every group has context.
 > Source: build_queue.json + vault state
 
 ---
@@ -10,7 +10,7 @@
 - [HIGH] Model Strength Score — score trained models 0-850 for marketplace — pending
 
 ## 🏗️ Build Queue
-57 total · 2 pending · 0 blocked
+58 total · 2 pending · 0 blocked
 
 ## 🚨 Blockers
 None
@@ -33,7 +33,7 @@ See 11-Mess Hall/considerations.md
 - **Forge** — Desktop agent · Handles local builds
 
 ## 🔗 Quick Links
-- Build queue: `scripts/build_queue.json` (57 items)
+- Build queue: `scripts/build_queue.json` (58 items)
 - Jocelyn's hub: gentechlabs.net/jocelyn.html
 - Investor deck: gentechlabs.net/grant.html
 - Demo video: gentechlabs.net/agentic-treasury-demo.mp4
