@@ -191,6 +191,23 @@ def _vote(name, emoji, stance, note, block=None):
     return f"{emoji} **{name}:** {stance} — {note}"
 
 
+def _read_market_sentiment():
+    """Read the weekly market-sentiment radar (narrative rotation renamed Aug
+    2026): the overall bull/bear stance + top rotations + macro thermometer.
+    Returns dict or None. Source: DeFi/rainbow/market-sentiment.json (the
+    market-sentiment.py cron output)."""
+    for p in (
+        "/root/repos/ProtoJay4789.github.io/DeFi/rainbow/market-sentiment.json",
+        os.path.join(SCRIPT_DIR, "..", "..", "ProtoJay4789.github.io", "DeFi", "rainbow", "market-sentiment.json"),
+    ):
+        try:
+            with open(p) as f:
+                return json.load(f)
+        except Exception:
+            continue
+    return None
+
+
 def _state_path():
     """Resolve the shared treasury-state.json path."""
     return os.environ.get(
@@ -288,7 +305,20 @@ def main():
     else:
         L.append(_vote("Regime", "🌦️", "NO DATA", "regime state unavailable", None))
 
-    # ── Member: Dominance (alt-season trigger) ───────────────────────────
+    # ── Member 5: Market Sentiment radar (the weekly bull/bear stance) ───────
+    sent = _read_market_sentiment()
+    if sent:
+        stance = sent.get("read") or sent.get("signals", {}).get("read") or ""
+        narr = sent.get("narratives", [])
+        top = narr[0]["name"] if narr else "n/a"
+        s_low = stance.lower()
+        block = "green" if "risk-on" in s_low or "bull" in s_low else ("red" if "risk-off" in s_low or "bear" in s_low else None)
+        note = f"{stance} | top: {top}" if stance else f"top rotation: {top}"
+        L.append(_vote("Sentiment", "📈", stance or "radar read", note, block))
+    else:
+        L.append(_vote("Sentiment", "📈", "NO DATA", "market-sentiment radar unavailable", None))
+
+    # ── Member: Dominance (alt-season trigger) ───────────────────────────────
     dom = _read_dominance()
     if dom is not None:
         trend = dom.get("trend", "n/a")
