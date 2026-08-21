@@ -64,8 +64,18 @@ DEPLOY_SCRIPT = os.environ.get(
 REDEPLOY_EXEC_SCRIPT = os.environ.get(
     "STEWARD_REDEPLOY_SCRIPT",
     "/root/.hermes/profiles/gentech-treasury/scripts/gta_avax_lp_execute.py")
-REDEPLOY_BIN_SPREAD = 5
 REDEPLOY_AMOUNT_USD = 13.0
+
+# Jordan's bin lever (Aug 11 2026): curve in chop → FEWER bins (±11 = 23 bins),
+# bid-ask when about to swing → WIDER (±15 = 31 bins). The deploy rail inherits
+# these from the shape; callers must NOT hardcode --bin-spread 5 (that pins the
+# curve at 11 bins / ~1% wide and it churns out of range in any trending market).
+REDEPLOY_BIN_SPREAD_BY_SHAPE = {"curve": 11, "bid-ask": 15}
+
+
+def _redeploy_spread(shape: str) -> int:
+    """Shape-aware bin spread for the redeploy leg (Jordan's lever)."""
+    return REDEPLOY_BIN_SPREAD_BY_SHAPE.get(shape, 11)
 
 
 def _now_iso() -> str:
@@ -314,7 +324,7 @@ def step_redeploy(w3, acct, dry_run: bool, shape: str = "curve") -> Dict[str, An
         proc = subprocess.run(
             [sys.executable, REDEPLOY_EXEC_SCRIPT,
              "--amount", str(REDEPLOY_AMOUNT_USD),
-             "--bin-spread", str(REDEPLOY_BIN_SPREAD), "--dry-run"],
+             "--bin-spread", str(_redeploy_spread(shape)), "--dry-run"],
             capture_output=True, text=True, timeout=120)
         return {"ok": proc.returncode == 0, "label": "redeploy", "dry_run": True,
                 "stdout": proc.stdout[-600:], "stderr": proc.stderr[-200:]}
@@ -322,7 +332,7 @@ def step_redeploy(w3, acct, dry_run: bool, shape: str = "curve") -> Dict[str, An
     proc = subprocess.run(
         [sys.executable, REDEPLOY_EXEC_SCRIPT,
          "--amount", str(REDEPLOY_AMOUNT_USD),
-         "--bin-spread", str(REDEPLOY_BIN_SPREAD), "--execute", "--yes"],
+         "--bin-spread", str(_redeploy_spread(shape)), "--execute", "--yes"],
         capture_output=True, text=True, timeout=180)
     ok = proc.returncode == 0 and "deployed" in proc.stdout.lower()
     return {"ok": ok, "label": "redeploy", "dry_run": False,
