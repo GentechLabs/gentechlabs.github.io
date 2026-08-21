@@ -37,8 +37,12 @@ Kono kiri wa kesshite tokenai
 
 ---
 
-## 🧊 KIRI CANON (locked)
-- **Design:** platinum-white spiky hair, cold glowing steel-blue eyes, pale skin, black duster w/ blue inner lining + silver dragon emblem, arm thorn tattoos (cold white/blue rune accents), dark blue-steel Warlock guitar with silver dragon decal.
+## 🧊 KIRI CANON (locked — UPDATED Aug 21)
+- **FACE (NEW, canonical):** platinum-silver-white choppy layered spiky anime-rock hair w/ bangs across forehead, **VIVID LUMINOUS ICE-BLUE eyes** (electric/cobalt — NOT steel-blue, NOT grey), sharp arched silver brows, sharp V jaw, high cheekbones, **youthful anime-stylized bishonen** (NOT aged realistic). Reference: `cold-crown/kiri-face-reference.png` (right figure of KAGE vs KIRI cathedral faceoff).
+- **Master sheet (v3):** `cold-crown/kiri-sheet-v3.png` — triptych, black duster + silver dragon wing emblem, blue lining. Canon default.
+- **FILM look sheet:** `cold-crown/kiri-film-sheet.png` — triptych, **black HOODED leather jacket + silver hardware + grunge tactical trousers w/ chains + combat boots**, foggy rooftop bg. THIS is the Cold Crown "stage" look.
+- **Old sheet** `kage-rival-sheet.png` (steel-blue/grey eyes, aged face) — SUPERSEDED by v3. Keep as historical ref only.
+- **NO GUITAR in this film** — hands empty, whole film.
 - **Origin:** The Frost Estate, mountains north of Tokyo. Clan trained him for flawless precision, "no applause, only again and better."
 - **The One Flaw:** Heard KAGE's raw street scream, felt envy — his cold was respected, never loved.
 - **Personality:** Ice isn't absence of feeling — feeling frozen into control. His tragedy: freezing more to win proves he can only *perform* what KAGE feels.
