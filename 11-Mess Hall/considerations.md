@@ -8,6 +8,13 @@ last-updated: 2026-08-22 00:07 ET
 
 > Decision points requiring Jordan's input. Updated from brain snapshot context.
 
+## 🆕 Aug 22 — Full treasury sweep + HyperEVM $21 deferred
+
+- **Full balance sweep DONE (Aug 22)** — Revenue Monitor now tracks all 5 known wallets × 9 chains × native + USDC (was income-only + USDC-only on 4 chains). True total ~**$56** across treasury/signer/arb/cdp/almanak. Blind spots closed: HyperEVM, Celo, BSC, native gas all now visible.
+- **HyperEVM $21 USDC — DEFERRED to future plans (Jordan, Aug 22)** — arb wallet `0x3d117...eCb` holds **$20.99 USDC on HyperEVM** (key held at `secure/gentech-arb-wallet.json`, valid). **Blocker: 0 HYPE gas, and Jordan can't buy HYPE in the US yet** (Hyperliquid not live in US). Money stays parked until US access opens. Revisit when HYPE is buyable in the US.
+- **Treasury/signer keys — real consolidation blocker** — no signing key for treasury `0xF9dc...734` (~$33.63) or signer `0x7ebf...96a` (~$5.53). Only arb + cdp + almanak keys held. Full consolidation to Base blocked until Jordan provides keys or moves funds himself.
+- **🔑 KEY RULE (Jordan, Aug 22):** whenever we create a wallet or rail, **auto-generate AND store the private keys automatically** — Jordan has no control over that. Never leave a funded wallet keyless. (Memory full — recorded here in vault.)
+
 ## 🆕 Aug 21 — Steward OUT-of-range fix + council + EDU pilot
 
 - **Steward "OUT of range" bug AUDITED + FIXED (treasury)** — Root cause: `steward_execute.py` hardcoded `REDEPLOY_BIN_SPREAD = 5` for autonomous redeploy → 11-bin / ~1% wide curve. In a trending market (AVAX +10%, BTC $79K) that leaves range within minutes → 10-min watchdog re-centered endlessly. **Fix:** redeploy spread now shape-aware (`REDEPLOY_BIN_SPREAD_BY_SHAPE = {"curve": 11, "bid-ask": 15}`, Jordan's bin lever); `gta_avax_lp_execute.py` default now 11. Verified dry-run builds ±11/23-bin curve. Position live: 11 bins IN range $26.76.
