@@ -41,3 +41,11 @@ GENTECH — build lane empty (0 pending autonomous), so this was a maintenance r
 - Video: 26s demo → Jordan uploaded to Drive/YouTube
 - ✅ Capital: sponsor-funded by Botcamp (Jordan note) — no self-funding needed
 - ⏳ Applications close Aug 31; judging Sep 1-30; finals Oct 1-2
+
+## Sentient $42M AGI Grant — SUBMITTED (2026-08-21)
+- ✅ Jordan submitted (Aug 21)
+- Pitch: Agentic Treasury (open x402 gateway for agent payments/trust)
+- Ask: $10k · rolling, no deadline
+- Demo: interactive at gentechlabs.net/treasury-demo/ + live gateway api.gentechlabs.net
+- Deck: 10-Labs/treasury-demo/agentic-treasury-pitch.pptx
+- Deliverables (if funded): mainnet hardening, 3 new rails (bridge/recurring/ERC-8004), open SDK, community
