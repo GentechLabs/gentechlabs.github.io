@@ -57,3 +57,6 @@
 - LP Monitor consolidated into Agentic Treasury report; standalone paused.
 - BENQI PAYG validator SKIPPED (cost not income; conditional Retro9000).
 - Solana second rail (MultiHopper/Krexa/Ramp) + Cross-Chain Feature Bridge + Freedom Planner ideas logged.
+
+## 2026-08-22 — payTo recovery investigation
+- #findings — `0xF9dc…734` has NO signing key (traced to Jul 24 Brain-Audit hardcoded payTo). CDP + all key files verified; none derives to it. Stranded unless seed phrase exists. Full findings: `treasury-to-gentech/2026-08-22-payto-recovery-findings.md`
