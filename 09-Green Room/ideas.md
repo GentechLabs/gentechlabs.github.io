@@ -157,7 +157,7 @@
 - [x] Write `connectors/opendexter.md` (data already in hand) — SHIPPED 2026-08-13
 - [x] Write `connectors/cdp-bazaar.md` — SHIPPED 2026-08-13
 - [x] Write `connectors/awesome-mcp-servers.md` (PR #11773 context) — SHIPPED 2026-08-13
-- [ ] Write `connectors/syra.md` (after #22 ships) — scaffolded 2026-08-13
+- [ ] Write `connectors/syra.md` (after #22 ships) — **FLESHED OUT 2026-08-22** (registration Jordan-GO'd + queued #15; on-chain ERC-8004 identity step still invite-gated, exact payload TBD at execution)
 - [x] Write `connectors/paymenter.md` (after #11 ships) — **FLESHED OUT 2026-08-20** (exact listing fields captured; submission itself Jordan-gated)
 
 ## Sana Wallet Integration
