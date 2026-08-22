@@ -449,3 +449,19 @@ A user sets a freedom target ("$50K"), and the treasury translates it into a **r
 - [x] Academy Module 4 — Production-Grade x402 Services
 - [x] Build Queue visibility page + generator script
 - [ ] **Auto-pause watchdog on empty wallet**: when funds are withdrawn and there's no LP to track, auto-pause/remove the Position Watchdog cron (no more "no bins" spam). When a deposit is detected, auto-resume + auto-detect the position shape and what to do. (Jordan, Aug 11 2026)
+
+## 🆕 AVAX Rails Map — Accumulate AVAX spot + COQ spot (Aug 21)
+**Source:** Jordan (Treasury group) | **Status:** Tracked, no deploy yet (wallet flat after wind-down)
+
+**Core stays:** Trader Joe V2 (LFJ) AVAX/USDC = our farm rail. No switch. This map is about *additional* AVAX rails for spot accumulation.
+
+- **Yield Yak** (the O.G. Avalanche autocompounder, launched 2021, battle-tested) — deposit into vaults, it auto-harvests + reinvests. Jordan's "put money in, it compounds" model. It even wraps LFJ pools.
+  - **LFJ COQ-AVAX vault** (`0x3441D5B446e303cB8Fe79187D9D0F620f67e4670`) — verified: underlyings COQ 453M (~$44) + WAVAX 5.67 (~$44) = ~$88 total deposits, 0% withdrawal fee, JLP strategy.
+  - **⚠️ CAUTION:** the COQ-AVAX vault page shows **"Rewards Ended"** + APY **-**(none). TVL is tiny (~$88). With rewards ended and no APY, it's currently a *dead/sleeping* vault — not earning. Don't deploy there yet. The pool exists but is NOT a yield source right now.
+  - The *concept* (Yield Yak wrapping our LFJ positions for hands-off autocompound) is sound and worth wiring when a live/rewarded vault matches our pool.
+- **BlackHole Protocol** — Avalanche-native yield vault (Black token emissions). Jordan has used it + likes it. ⚠️ TVL ~$3.1M, -17.6%/30d, APY driven by BLACK emissions (normalizes fast). Research/watch-sized, not treasury-sized.
+- **BENQI** — lending leg (lend USDC/AVAX, borrow). Established.
+- **GMX** — perps/trade leg (long/short AVAX w/ leverage). Not a farm.
+- **Yodiac** — (Jordan's original phrasing) = Yield Yak's hands-off autocompound model. We already DO this via Steward rebalancing; Yield Yak just does it continuously.
+
+**Next when capital returns:** re-deploy LFJ AVAX/USDC first (core), then evaluate a Yield Yak autocompound vault (only if it's actually rewarded/live) as a second accumulation rail.

@@ -1,12 +1,20 @@
 ---
-date: 2026-08-20
+date: 2026-08-21
 status: active
-last-updated: 2026-08-21 00:06 ET
+last-updated: 2026-08-22 00:07 ET
 ---
 
 # 🧠 Considerations — Open Decisions
 
 > Decision points requiring Jordan's input. Updated from brain snapshot context.
+
+## 🆕 Aug 21 — Steward OUT-of-range fix + council + EDU pilot
+
+- **Steward "OUT of range" bug AUDITED + FIXED (treasury)** — Root cause: `steward_execute.py` hardcoded `REDEPLOY_BIN_SPREAD = 5` for autonomous redeploy → 11-bin / ~1% wide curve. In a trending market (AVAX +10%, BTC $79K) that leaves range within minutes → 10-min watchdog re-centered endlessly. **Fix:** redeploy spread now shape-aware (`REDEPLOY_BIN_SPREAD_BY_SHAPE = {"curve": 11, "bid-ask": 15}`, Jordan's bin lever); `gta_avax_lp_execute.py` default now 11. Verified dry-run builds ±11/23-bin curve. Position live: 11 bins IN range $26.76.
+- **Treasury council — BTC $79K short-liquidation** — Minutes `Treasury/Strategy-Journal/2026-08-21-council-btc-79k-liquidation.md`. Verdict CONSENSUS bull; deployed (cbBTC +22%, AVAX LFJ in range). Vault committed `3260da53`.
+- **GenTech EDU pilot SHIPPED** — `09-Green Room/gentech-edu/lfj-avax-usdc-pool-pilot.md` (live verified: 11 bins IN range, ~$26.77 deployed).
+- **Agent Builders Cup — Meteora draft** — Consigliere (Solana CLMM LP MM). **HL perp leg DROPPED (Jordan, no Hyperliquid access)** — Solana-only. Submit by Aug 31; needs wallet fund + final submit.
+- **Cold Crown (KIRI) MV** — opening LOCKED + deployed; **$0.59 wallet blocks drop REDO** (skydive + closed-eye mist) + more build-up beats.
 
 ## 🚨 Urgent — DEADLINES + MACRO EVENT
 
