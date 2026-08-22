@@ -63,3 +63,4 @@
 
 ## 2026-08-22 — rail audit + keypairs + revenue monitor
 - #rail-audit — all 5 rails keyed (Base re-pointed, Solana keypair generated, Algorand confirmed keyed). Revenue Monitor picks up all. Key rule wired into agent-kit provisioner. Algorand settle test verified live (HTTP 200 paid:true).
+- #GTA-DRYRUN — GTA dry-run: ENTER ONDO HELD (YIELD_FARM mode-gate), no funds moved.
