@@ -1214,5 +1214,27 @@
     },
     "blocked_on": "Jordan registration + wallet/funds for gas",
     "blocked_since": "2026-08-21"
+  },
+  {
+    "id": 62,
+    "_orig_id": 62,
+    "name": "ThreeUI Energy Orb — WebGL background on gentechlabs.net hero",
+    "difficulty": "easy",
+    "priority": "high",
+    "status": "shipped",
+    "assigned_to": "gentech",
+    "platform": "cloud",
+    "detail": "Upgraded gentechlabs.net (index.html) with ThreeUI Community Energy Orb as a full-page animated WebGL background. Self-contained vanilla GL (no build step), dimmed (opacity 0.5, brightness 0.55) so content stays readable. MIT licensed from MengTo/threeui.",
+    "note": "[SHIPPED 2026-08-21: injected before </body>. Verified live: pixel-rendering confirmed (1,063,636 lit px, avg lum 79 in live rAF), 0 JS errors, content readable above bg. Backup: index.html.bak-20260821-threeui. Uses same EnergyOrb shader verified in threeui-demo.]",
+    "recommended_tier": "flash",
+    "group": "labs",
+    "routing": {
+      "group": "labs",
+      "build_in": "labs",
+      "handoff_on_complete": true
+    },
+    "shipped_by": "labs",
+    "shipped_date": "2026-08-21",
+    "needs_jordan": false
   }
 ]
