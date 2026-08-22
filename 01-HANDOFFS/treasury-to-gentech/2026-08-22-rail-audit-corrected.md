@@ -24,10 +24,11 @@ keypair we hold is `BE815V7…UvP` (jordan-personal, different address). **Solan
 | Algorand | 6IXPRM…4MTI | ✅ /root/.algorand | ✅ | 🟢 |
 | Solana | Hv2N2…57Ru | ❌ NO KEYPAIR | ❌ | 🔴 |
 
-## Gas floor raised to $1.00/chain (Jordan, Aug 22)
-`steward_bridge.py` `GAS_FLOOR_AVAX` 0.60 → **1.00**. Each chain keeps ≥$1.00 native gas
-so the agentic bridge can always move funds. **Action: top up Avalanche signer gas**
-(currently 0.099 AVAX ≈ $0.74, below the new floor).
+## Gas floor standard — $0.60–$1.00/chain (Jordan, Aug 22)
+`steward_bridge.py` `GAS_FLOOR_AVAX` = **0.60** (Jordan's $0.60–$1.00 standard). Each chain
+keeps ~$0.60–$1.00 native gas so the agentic bridge can always move funds. Most times we
+won't need that much, but the floor means we never worry about stranded funds. Current
+Avalanche signer gas = 0.099 AVAX (~$0.74) — within range, no action needed.
 
 ## Next actions
 1. **Solana**: generate + store a keypair, or re-point `X402_PAYTO_SOLANA` to a wallet we
