@@ -1,0 +1,23 @@
+{
+  "_comment": "Steward Council overrides — the council can update these based on Fed meetings / market events. The buy list merges these over the static defaults each run. Format: {SYMBOL: {field: value}}. Fields: method, yield, strategy, zones (optional).",
+  "BTC": {
+    "_note": "Council verdict Aug 19 21:31 UTC — BTC crossed $69.5K bull-confirmation. Jordan: accumulate now, hold for Q3/Q4 bull. Zones widened so $69.5K reads ACCUMULATE (was Watch).",
+    "method": "spot (DCA) — accumulate on dips, hold for Q3/Q4 bull",
+    "yield": "no — hold or lend (Coinbase 3.5% APY)",
+    "strategy": "ACCUMULATE now (bull confirmed at $69.5K) — DCA spot, hold for Q3/Q4",
+    "zones": [0, 58000, 72000, 80000, 999999]
+  },
+  "AVAX": {
+    "_note": "Council verdict Aug 19 — Jordan: yield-farm AVAX through the rally, our core rail. Reinforces existing FARM>trade default.",
+    "method": "yield-farm (LFJ V2.2 curve LP) — farm through the rally",
+    "yield": "yes — LFJ V2.2 curve LP, staking 5.2%",
+    "strategy": "FARM > trade (yield-farm AVAX while BTC leads — our core rail)"
+  },
+  "COQ": {
+    "_note": "Council verdict Aug 22 00:17 UTC (MIXED, meme rotation #1) — COQ is a TRADE, NOT a yield farm. Yield Yak COQ-AVAX vault dead (rewards ended, no APY, ~$88 TVL); memecoin LP carries brutal impermanent loss (COQ -98.5% off ATH). Meme/Community is top rotation. Small, stop-protected trade leg only — never farm COQ like AVAX.",
+    "method": "trade (small, stop-protected) — meme momentum, not yield",
+    "yield": "no — no viable autocompound rail (Yak COQ-AVAX dead); LP IL risk too high",
+    "strategy": "TRADE COQ as momentum play on meme rotation; AVAX = yield, COQ = trade, never conflate",
+    "zones": [0, 0.00000009, 0.00000012, 0.00000018, 999999]
+  }
+}

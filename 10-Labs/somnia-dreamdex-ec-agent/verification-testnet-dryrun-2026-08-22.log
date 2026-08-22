@@ -1,0 +1,13 @@
+
+> ec-oracle-follow@0.1.0 start
+> tsx src/index.ts
+
+2026-08-22T04:05:55.506Z oracle-follow up as (no key, dry run) · dryRun=true · model=strike interval=8000ms window=60000ms edge=0.03 maxDisagreement=0.1 maxHorizons=30 (30min)
+2026-08-22T04:05:57.292Z warming up spot history for ETH
+2026-08-22T04:05:57.701Z warming up spot history for BTC
+2026-08-22T04:06:36.914Z idle · 8 tradable · flat · warming up ×8
+2026-08-22T04:07:02.575Z DRY BUY_YES 5 BTC-0-22AUG26-0500/tUSDC#YES @ ~0.357 (opening 78397.00 vs spot 78274.53, vol 0.112% measured, r muted, tilt +0.083 off market 0.341, pUp 0.424, fair 0.424, ask 0.355)
+2026-08-22T04:07:03.399Z DRY BUY_NO 5 BTC-0-22AUG26-0415/tUSDC#NO @ ~0.866 (opening 78397.00 vs spot 78273.75, vol 0.111% measured, r -0.0015, tilt -0.096 off market 0.852, pUp 0.052, fair 0.948, ask 0.864)
+2026-08-22T04:07:18.088Z idle · 8 tradable · net 10 · model disagrees with market ×2, no edge ×5, at max shares ×1 · ETH-0-22AUG26-0415/tUSDC#NO model 0.808 vs market 0.454 (off by 0.354) · closest BTC-0-22AUG26-0800/tUSDC#YES ref opening 78397.00 vol 0.101% tilt +0.037 fair 0.458 ask 0.436 (needs 0.008 more)
+2026-08-22T04:07:43.071Z BTC-0-22AUG26-0415/tUSDC: signal favours YES but we hold 5 NO — sitting out (buying the other leg would only mint sets)
+2026-08-22T04:07:54.776Z oracle-follow stopped

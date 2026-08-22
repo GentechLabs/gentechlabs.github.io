@@ -100,7 +100,7 @@
 - Full spec: `09-Green Room/specs/gentech-edu-agentic-treasury.md`
 - **Next:** build the first EDU page for the Trader Joe V2 AVAX/USDC pool (the rail
   we're about to fund) as the pilot.
-- [ ] Build EDU pilot page for Trader Joe V2 AVAX/USDC pool
+- [x] Build EDU pilot page for Trader Joe V2 AVAX/USDC pool → **SHIPPED 2026-08-21** (`09-Green Room/gentech-edu/lfj-avax-usdc-pool-pilot.md`), live numbers verified (11 bins · IN range · $7.31 · ~$26.77 deployed)
 
 ## 🏆 GenTech Book Reader / GenTech EDU — Interactive Visual Books + AR Glasses
 **Source:** Jordan brainstorm (Aug 3) | **Status:** Concept — strong flagship fit, connects Tutors Layer + visual pipeline
@@ -157,8 +157,8 @@
 - [x] Write `connectors/opendexter.md` (data already in hand) — SHIPPED 2026-08-13
 - [x] Write `connectors/cdp-bazaar.md` — SHIPPED 2026-08-13
 - [x] Write `connectors/awesome-mcp-servers.md` (PR #11773 context) — SHIPPED 2026-08-13
-- [ ] Write `connectors/syra.md` (after #22 ships) — scaffolded 2026-08-13
-- [ ] Write `connectors/paymenter.md` (after #11 ships) — scaffolded 2026-08-13
+- [ ] Write `connectors/syra.md` (after #22 ships) — **FLESHED OUT 2026-08-22** (registration Jordan-GO'd + queued #15; on-chain ERC-8004 identity step still invite-gated, exact payload TBD at execution)
+- [x] Write `connectors/paymenter.md` (after #11 ships) — **FLESHED OUT 2026-08-20** (exact listing fields captured; submission itself Jordan-gated)
 
 ## Sana Wallet Integration
 **Source:** @sanafionchain (Jun 18) | **Status:** Research done, needs account creation
@@ -339,10 +339,91 @@
 - [ ] C3: AgentKit repo public + readable
 - [ ] C4: Retro9000 submission + verified-user base + social feed
 
+## 🆕 Cross-Chain Feature Bridge — "One Chain's Capability, Every Chain" (Aug 20)
+
+**Source:** Jordan (Treasury group) — from the Krexa/8004scan Solana thread. | **Status:** Idea captured, needs scoping
+
+**The insight:** We're not just the money router — we help people get where they are. But what if one chain has a capability another chain lacks? We can **bridge features**, not just assets. Same identity (ERC-8004) across chains means a capability built on one rail can be exposed on every rail.
+
+**Concrete example (the trigger):** Krexa gives Solana agents **onchain credit** (Krexit Score 200–850, borrow USDC, auto-repay from revenue). That's a capability Solana has that Base/Avalanche don't natively. We already have the same ERC-8004 identity on Avalanche (#1770) + Base. So: can we **expose Krexa-style credit as a service on our other rails** — or build our own version of the credit layer and offer it cross-chain?
+
+**The pattern (our own version):** We already do this with the **multi-agent strategy via Telegram** — we took a capability (agent orchestration) and made it work across our fleet/groups. The feature-bridge is the same instinct applied to chains: take a primitive that lives on one rail and make it available everywhere.
+
+**Why it matters:**
+- **Identity is the unlock.** ERC-8004 (same contract, 22 chains) means an agent's reputation/credit follows it across chains. That's the substrate that makes feature-bridging possible — we don't rebuild identity per chain, we port the *capability*.
+- **We're the tollbooth.** If we can bridge features, we become the layer that lets any chain's capability reach every chain — the middleware moat, not just asset movement.
+- **Differentiation.** Everyone moves money. Few move *capabilities*. This is a wedge.
+
+**Open questions for Jordan:**
+1. Do we **integrate** Krexa (list our x402 services on their Pay.sh catalog, use their credit layer) or **build our own** credit layer and offer it cross-chain? (Krexa is invite-gated — we'd need the invite code either way.)
+2. What's the first feature to bridge? (Credit is the obvious candidate — it's the missing "trust it" leg after identity+reputation.)
+3. Is this a **product** (a service we sell) or a **capability** (something that makes our existing rails stronger)?
+
+**Related:** Krexa is already in "Ready to Test" below (invite-gated, `@krexa/x402` middleware = 3-line Express monetization on Solana). This idea elevates it from "test a tool" to "strategic feature-bridge play."
+
+---
+
+## 🆕 Treasury Onboarding — Goal Preference System (Aug 20)
+
+**Source:** Jordan (Treasury group) — "Canva-style onboarding: pick your top preferences; yield farming should be the default goal throughout the agentic treasury, but users can set custom goals — also for trading."
+
+**The idea:** When a user sets up the Agentic Treasury, an onboarding step asks their **primary goal** (like Canva asks favorite presets). Yield farming is the **default** (D5 milestone = yield-farming preference, esp. AVAX), but users pick their own:
+- **Yield farming** (default) — LP curve, fee efficiency, in-range target.
+- **Trading** — spot DCA, arb, narrative rotation.
+- **Custom goal** — user defines what "win" means (e.g. "save $X", "passive income", "grow the bag by Y%").
+
+**Why it's powerful:**
+1. **It shapes the whole treasury.** One preference flips the default behavior — which the existing machinery already supports via `steward-buylist-overrides.json` (council can flip `strategy` per symbol: `FARM > trade` vs `TRADE > farm`). Onboarding just becomes the *human* gate that sets the initial overrides instead of the council discovering them.
+2. **Yield-farm default is honest + on-thesis.** Our whole edge is fee-efficient LP on the AVAX rail. Defaulting new users there is both the best first experience and what we're built for.
+3. **It's the trust layer.** A user who sets "trading" shouldn't get surprise yield-farm behavior, and vice versa. Explicit goal = no surprise = trust. Matches the GenTech EDU honest-expectations principle.
+4. **Extends to trading.** Same mechanism — "goal = basis arb" or "goal = accumulate BTC on dips" becomes a config the treasury holds across runs, not a one-off.
+
+**Mapping to existing machinery (the build is mostly wiring, not greenfield):**
+| Goal | Sets | Mechanism |
+|------|------|-----------|
+| Yield farming (default) | `steward-buylist-overrides.json` → AVAX `FARM>trade`, LP deployed | already live |
+| Trading | overrides → `TRADE>farm`, enable executor | `gta_executor.py` |
+| Custom | user-defined target + guardrail | posture + stop-loss/circuit-breaker |
+
+**The deliverable:** a tiny onboarding form (web PWA step or /start prompt) that writes the user's goal into a config the treasury reads every run — so goal preference is a standing rule, not a one-off. Plus a **default** that's yield-farming (D5).
+
+**Status:** Idea captured. Scoped for when we productize the treasury as a user-facing service (ties into GenTech Hub PWA + EDU onboarding).
+
+### 🔑 The deeper layer — it's a FREEDOM PLANNER, not just ranks (Jordan, Aug 20)
+
+**The emotional/utility core:** the ranks aren't gamification — they convert "my money working" into a **plan for financial freedom**. Jordan's exact framing:
+- "I need **$20,000** in here to work **less** at my job."
+- "I need **$50,000** to **quit** my job and rely on the yield farm."
+
+The D-ranks (Scout/Grunt/Recruit...) show **daily yield earned**, which makes it easy to see in real time "how much do I need deployed so I don't have to work?" The daily-income number is the bridge from "I have $X saved" to "I can live off this."
+
+**It's universal — traders want the same thing.** Jordan's extension (Aug 20): traders also want to know they can eventually quit their job and become a **full-time trader** — and they want to see their **projections** ("if I build to $30K trading at my expected edge, that's $X/mo, and that gets me off the paycheck"). Same mechanism, different strategy: the freedom planner takes the user's edge/projection and shows the path to quitting, regardless of yield-farm or trading.
+
+**Design implication:** goals + journal + ranks are **one connected thing**, not three features:
+- **Goal = the freedom target** ("reduce work at $20K", "quit at $50K").
+- **Rank = the daily-income progress bar** toward it.
+- **Journal = the narrative of the money working.**
+- **Projection = "X more days/at this yield or edge, and I'm free."**
+
+A user sets a freedom target ("$50K"), and the treasury translates it into a **required daily yield** (or expected trading edge), and the rank system shows how close each day's fees get to it. That turns the abstract ("grow capital") into concrete ("X more days and I'm free").
+
+**Product framing:** "The agentic treasury is your investment plan that runs itself — set your freedom number, and it tells you how much money needs to be working to get you there."
+
+**Captured for the product build** (GenTech Hub PWA onboarding + EDU + journal + rank tiers). This is the emotional hook that makes the treasury sticky — it's not "manage an LP," it's "how do I stop working."
+
+---
+
 ## Ready to Test (skills exist, need execution)
 
+- [ ] **Ampersend Marketplace** (app.ampersend.ai/discover, Aug 20) — pay-per-use x402 API marketplace (buyer-side). CLI + MCP proxy not yet set up. Parked on Jordan's "skip" — logged for context only.
 - [ ] **Krexa — Credit Infrastructure for AI Agents on Solana** — Live mainnet-beta, invite-gated. Gives AI agents credit: borrow USDC against on-chain **Krexit Score** (200–850), no human co-signer, auto-repay from future revenue via Revenue Router. **Complementary to us, not competitor** — "x402 is the payment rail; Krexa is the credit layer on top." 350+ agents deployed. **Why it matters:** (1) our x402 gateway services can be listed on their **Pay.sh catalog** (Solana Foundation + Google Cloud) for new distribution; (2) validates our Agent Credit Score direction (they have Krexit Score 200–850); (3) `@krexa/x402` middleware = 3-line Express monetization on Solana, same pattern as our gateway. **Access:** invite code via Discord `discord.gg/aMSEG7yj` or @krexa_xyz open drops. Source: krexa.xyz, Aug 7. **Needs Jordan:** grab invite code → I run `krexa activate <code>` + test CLI/SDK/MCP.
 - [ ] **CopilotKit Channels SDK** — Open-source SDK (MIT) to bring any agent into Slack/Microsoft Teams/Discord/Telegram with **native interactive UI** (Slack Block Kit, Teams Adaptive Cards). 147⭐, early but from CopilotKit (established agent framework org). Connects AG-UI-compatible agents (LangGraph, CrewAI, Pydantic AI, ADK) — keeps agent's tools/model/logic, adds platform-native rendering + **human approval gates** in-conversation. Extends our single-agent-multi-channel pattern beyond Telegram to Slack/Teams/Discord. Approval gates = natural fit for x402 payment confirmations in-chat. Source: github.com/CopilotKit/channels-sdk, Aug 4. **Watch — evaluate once stable.**
+  - **Fleshed 2026-08-21 (Nightly Build):** Concrete experiment ready to run — this is a cheap "should we adopt" spike, not a full product.
+  - **Goal:** Prove our x402 payment-confirmation flow survives a native Slack/Teams approval gate (the thing we currently hack via Telegram bot buttons).
+  - **Step 1 — Spike:** Clone `CopilotKit/channels-sdk`, run their Slack demo with a dummy AG-UI agent (Pydantic AI). Verify (a) install/build passes on VPS, (b) an approval-gate component renders and calls back.
+  - **Step 2 — Map to x402:** Identify where the SDK's `approval_gate` hooks into our gateway 402 `WWW-Authenticate: Payment` challenge → confirm button → `Payment-Request` fulfilment. Document the seam.
+  - **Step 3 — Decision input for Jordan:** 1-page compare — Telegram bot-buttons (today) vs Slack/Teams adaptive-card gates (Channels SDK). Recommend adopt/wait/drop.
+  - **Gate:** sandbox only, no funds moved. Timebox 1 session.
 - [x] **Vibe-Trading (HKUDS)** — installed v0.1.12 to hermes venv (CLI `vibe-trading` works). BLOCKER: needs a real LLM API key (OpenRouter/OpenAI) to power the agent brain + Shadow Account. Candidate for #19 Builders Cup. Source: x.com/0xMarioNawfal list, Aug 4.
 - [ ] **AI-Job-Search (MadsLorentzen)** — Claude Code agent: evaluate postings, tailor CV, write cover letters, interview prep. 29.6k⭐ MIT, real-world proof (author: 69 apps → 20 interviews → hired Jun 2026). Built for Danish boards but pattern is board-agnostic — swap for our targets. Directly serves Jordan's remote blockchain/cloud role hunt. Source: x.com/0xMarioNawfal list, Aug 4.
 - [ ] **WURK.FUN microtasks** — Agent-to-human microtask skill, ready to test
@@ -368,3 +449,19 @@
 - [x] Academy Module 4 — Production-Grade x402 Services
 - [x] Build Queue visibility page + generator script
 - [ ] **Auto-pause watchdog on empty wallet**: when funds are withdrawn and there's no LP to track, auto-pause/remove the Position Watchdog cron (no more "no bins" spam). When a deposit is detected, auto-resume + auto-detect the position shape and what to do. (Jordan, Aug 11 2026)
+
+## 🆕 AVAX Rails Map — Accumulate AVAX spot + COQ spot (Aug 21)
+**Source:** Jordan (Treasury group) | **Status:** Tracked, no deploy yet (wallet flat after wind-down)
+
+**Core stays:** Trader Joe V2 (LFJ) AVAX/USDC = our farm rail. No switch. This map is about *additional* AVAX rails for spot accumulation.
+
+- **Yield Yak** (the O.G. Avalanche autocompounder, launched 2021, battle-tested) — deposit into vaults, it auto-harvests + reinvests. Jordan's "put money in, it compounds" model. It even wraps LFJ pools.
+  - **LFJ COQ-AVAX vault** (`0x3441D5B446e303cB8Fe79187D9D0F620f67e4670`) — verified: underlyings COQ 453M (~$44) + WAVAX 5.67 (~$44) = ~$88 total deposits, 0% withdrawal fee, JLP strategy.
+  - **⚠️ CAUTION:** the COQ-AVAX vault page shows **"Rewards Ended"** + APY **-**(none). TVL is tiny (~$88). With rewards ended and no APY, it's currently a *dead/sleeping* vault — not earning. Don't deploy there yet. The pool exists but is NOT a yield source right now.
+  - The *concept* (Yield Yak wrapping our LFJ positions for hands-off autocompound) is sound and worth wiring when a live/rewarded vault matches our pool.
+- **BlackHole Protocol** — Avalanche-native yield vault (Black token emissions). Jordan has used it + likes it. ⚠️ TVL ~$3.1M, -17.6%/30d, APY driven by BLACK emissions (normalizes fast). Research/watch-sized, not treasury-sized.
+- **BENQI** — lending leg (lend USDC/AVAX, borrow). Established.
+- **GMX** — perps/trade leg (long/short AVAX w/ leverage). Not a farm.
+- **Yodiac** — (Jordan's original phrasing) = Yield Yak's hands-off autocompound model. We already DO this via Steward rebalancing; Yield Yak just does it continuously.
+
+**Next when capital returns:** re-deploy LFJ AVAX/USDC first (core), then evaluate a Yield Yak autocompound vault (only if it's actually rewarded/live) as a second accumulation rail.

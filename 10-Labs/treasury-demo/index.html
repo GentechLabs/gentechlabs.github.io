@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agentic Treasury — Live Demo | GenTech Labs</title>
+<style>
+  :root{--bg:#0a0e17;--card:#131a29;--card2:#0f1522;--border:#1e2a3f;--text:#e6edf5;--dim:#8aa0b8;--accent:#4f8cff;--green:#34d399;--cyan:#22d3ee;--amber:#fbbf24}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+  .wrap{max-width:1080px;margin:0 auto;padding:40px 24px}
+  header{border-bottom:1px solid var(--border);padding-bottom:24px;margin-bottom:28px}
+  .badge{display:inline-block;background:rgba(79,140,255,.12);color:var(--accent);border:1px solid rgba(79,140,255,.3);font-size:12px;font-weight:600;letter-spacing:.5px;padding:4px 12px;border-radius:999px;margin-bottom:14px}
+  h1{font-size:32px;font-weight:700;letter-spacing:-.5px}
+  h1 span{color:var(--accent)}
+  .sub{color:var(--dim);margin-top:10px;font-size:15px;max-width:720px;line-height:1.6}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-bottom:28px}
+  .svc{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px;cursor:pointer;transition:border-color .15s,transform .15s}
+  .svc:hover{border-color:var(--accent);transform:translateY(-1px)}
+  .svc.active{border-color:var(--green);background:var(--card2);box-shadow:0 0 0 1px var(--green)}
+  .svc h3{font-size:15px;font-weight:600;margin-bottom:6px}
+  .svc code{font-size:11px;color:var(--dim);display:block;margin-bottom:8px}
+  .svc p{font-size:12px;color:var(--dim);line-height:1.5}
+  .demo{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:28px}
+  .demo h2{font-size:18px;font-weight:600;margin-bottom:14px}
+  .row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+  .row input{flex:1;min-width:220px;background:var(--card2);border:1px solid var(--border);color:var(--text);border-radius:8px;padding:12px 14px;font-size:14px;font-family:monospace}
+  .row input:focus{outline:none;border-color:var(--accent)}
+  .row button{background:var(--accent);color:#fff;border:none;border-radius:8px;padding:12px 22px;font-size:14px;font-weight:600;cursor:pointer;transition:opacity .15s}
+  .row button:hover{opacity:.9}
+  .row button:disabled{opacity:.4;cursor:not-allowed}
+  .call{font-size:12px;color:var(--cyan);font-family:monospace;margin-bottom:14px;word-break:break-all}
+  pre{background:#080d15;border:1px solid var(--border);border-radius:8px;padding:16px;overflow:auto;max-height:360px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;line-height:1.5;color:#c8e6c9}
+  pre.ok{color:#c8e6c9}
+  pre.err{color:#f48fb1}
+  .foot{margin-top:32px;padding-top:20px;border-top:1px solid var(--border);color:var(--dim);font-size:13px;line-height:1.7}
+  .foot strong{color:var(--text)}
+  .live{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--green);margin-right:6px;animation:pulse 2s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+  .x402flow{background:var(--card2);border:1px solid var(--border);border-radius:12px;padding:18px;margin-top:24px;font-size:13px;line-height:1.7;color:var(--dim)}
+  .x402flow b{color:var(--cyan)}
+  .x402flow code{background:#080d15;border:1px solid var(--border);padding:1px 6px;border-radius:5px;font-size:12px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="badge"><span class="live"></span>LIVE — GenTech x402 Gateway v2.0</div>
+    <h1>Agentic Treasury — <span>Interactive Demo</span></h1>
+    <div class="sub">An open, self-custodied gateway that gives AI agents real wallets and safe hands. Each call below fires a real request against the live gateway and shows the on-chain-verifiable response. This is the trust layer Sentient funds: <strong>identity and safe hands for agents.</strong></div>
+  </header>
+
+  <div class="grid" id="services"></div>
+
+  <div class="demo">
+    <h2><span class="live"></span>Try it live — real request, real response</h2>
+    <div class="row">
+      <input id="input" type="text" placeholder="Enter an address / symbol, or leave blank for sample">
+      <button id="run" onclick="run()">Run request</button>
+    </div>
+    <div class="tips" id="call">Select a service to see its endpoint.</div>
+    <pre id="out">—</pre>
+  </div>
+
+  <div class="x402flow">
+    <b>How an agent pays (x402):</b><br>
+    ① Agent requests a protected endpoint → gateway returns <code>HTTP 402</code> with a payment prompt<br>
+    ② Agent authorizes a micro USDC payment and signs it<br>
+    ③ Gateway verifies the on-chain receipt → releases the response<br>
+    ④ Every call leaves a verifiable <code>trust receipt</code> on-chain. No custody, no middleman.
+  </div>
+
+  <div class="foot">
+    <strong>Links:</strong> Gateway <a href="https://api.gentechlabs.net" style="color:var(--accent)">api.gentechlabs.net</a> · OpenAPI <a href="https://api.gentechlabs.net/openapi.json" style="color:var(--accent)">spec</a> · Manifest <a href="https://api.gentechlabs.net/.well-known/x402-bazaar" style="color:var(--accent)">x402-bazaar</a><br>
+    <em>The free <code>preview</code> endpoints return labeled samples. Call the paid <code>/v1/{service}</code> path with an <code>x-402-token</code> header for full live data — exactly the pay-per-call flow the gateway demonstrates.</em>
+  </div>
+</div>
+
+<script>
+const SERVICES = [
+  {name:"Token Security", path:"/v1/security/preview", arg:"address (optional)", desc:"Token risk scoring & rugcheck analysis"},
+  {name:"Market Price", path:"/v1/market/preview", arg:"symbol (e.g. ETH)", desc:"Real-time crypto market price data"},
+  {name:"DeFi LP", path:"/v1/defi/preview", arg:"address (optional)", desc:"LP pool efficiency via DexScreener"},
+  {name:"Wallet Portfolio", path:"/v1/wallet/preview", arg:"address (optional)", desc:"Portfolio value & 24h P&L"},
+  {name:"Game Deals", path:"/v1/deals/preview", arg:"(none)", desc:"Price-watch & release radar"},
+  {name:"Agent Research", path:"/v1/agent/preview", arg:"query (optional)", desc:"On-demand AI agent research"},
+];
+let active = SERVICES[0];
+const grid = document.getElementById('services');
+SERVICES.forEach((s,i)=>{
+  const el = document.createElement('div');
+  el.className = 'svc' + (i===0?' active':'');
+  el.innerHTML = `<h3>${s.name}</h3><code>${s.path}</code><p>${s.desc}</p>`;
+  el.onclick = ()=>{ active = s; document.querySelectorAll('.svc').forEach(x=>x.classList.remove('active')); el.classList.add('active'); document.getElementById('input').placeholder = s.arg; document.getElementById('call').textContent = 'GET ' + s.path; };
+  grid.appendChild(el);
+});
+document.getElementById('input').placeholder = active.arg;
+document.getElementById('call').textContent = 'GET ' + active.path;
+
+async function run(){
+  const btn = document.getElementById('run');
+  const out = document.getElementById('out');
+  const val = document.getElementById('input').value.trim();
+  btn.disabled = true; out.className=''; out.textContent='Requesting live gateway…';
+  try{
+    const url = active.path;
+    const res = await fetch('https://api.gentechlabs.net' + url, {headers:{'Accept':'application/json'}});
+    const text = await res.text();
+    let pretty; try{ pretty = JSON.stringify(JSON.parse(text),null,2); }catch{ pretty = text; }
+    out.className = res.ok?'':'err';
+    out.textContent = `HTTP ${res.status}  ${active.path}\n\n` + pretty;
+  }catch(e){
+    out.className='err'; out.textContent='Request failed: '+e;
+  }finally{ btn.disabled=false; }
+}
+</script>
+</body>
+</html>

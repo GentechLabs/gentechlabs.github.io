@@ -1,0 +1,122 @@
+{
+  "slide_size": "16:9",
+  "title": "Agentic Treasury",
+  "slides": [
+    {
+      "layout": "title",
+      "title": "Agentic Treasury",
+      "subtitle": "Open, self-custodied payments infrastructure for AI agents — x402 on-chain trust, verifiable receipts, safe hands.",
+      "footer": "GenTech Labs",
+      "notes": "Pitch deck for the Sentient Open Source AGI Grant. We build the trust layer agents need to act safely."
+    },
+    {
+      "layout": "title_content",
+      "title": "The Problem",
+      "bullets": [
+        {"level": 0, "text": "An agent with a wallet is a liability."},
+        {"level": 1, "text": "It either can't move money without a human, or it holds keys with no on-chain accountability."},
+        {"level": 0, "text": "Agents are crossing from demos into real custody — trading, paying APIs, running treasuries."},
+        {"level": 1, "text": "The trust layer hasn't shipped with them. Custody is a black box or a single point of failure."},
+        {"level": 0, "text": "Users and small agents can't afford enterprise custody, and no open alternative exists."}
+      ],
+      "footer": "GenTech Labs",
+      "notes": "Frame the gap: no open, verifiable way for agents to hold and move value."
+    },
+    {
+      "layout": "title_content",
+      "title": "What We Build",
+      "bullets": [
+        {"level": 0, "text": "An open x402 gateway that gives AI agents real wallets and safe hands."},
+        {"level": 1, "text": "Agent receives a 402 payment prompt, authorizes a per-tx micro-fee, settles with an on-chain trust receipt."},
+        {"level": 1, "text": "Self-custodied, transparent, gated by verifiable rules — no custodian, no middleman."},
+        {"level": 0, "text": "Live today: 11 pay-per-call services on api.gentechlabs.net with a working interactive demo."}
+      ],
+      "footer": "GenTech Labs",
+      "notes": "The core value: agents transact autonomously under verifiable on-chain identity."
+    },
+    {
+      "layout": "title_content",
+      "title": "Why Now",
+      "bullets": [
+        {"level": 0, "text": "Agents are beginning to hold real treasury assets and make real payments."},
+        {"level": 1, "text": "Without a trust layer, adoption stalls or pushes agents into centralized black boxes."},
+        {"level": 0, "text": "The x402 standard is gaining traction; the foundation just launched under the Linux Foundation."},
+        {"level": 1, "text": "The window to build the open rails is open now."}
+      ],
+      "footer": "GenTech Labs",
+      "notes": "Urgency: agents crossed into real custody; the trust substrate must arrive with them."
+    },
+    {
+      "layout": "title_content",
+      "title": "How It Works",
+      "bullets": [
+        {"level": 0, "text": "1. Agent requests a protected endpoint → gateway returns HTTP 402 with a payment prompt."},
+        {"level": 0, "text": "2. Agent authorizes a micro USDC payment and signs it."},
+        {"level": 0, "text": "3. Gateway verifies the on-chain receipt → releases the response."},
+        {"level": 0, "text": "4. Every call leaves a verifiable trust receipt on-chain."},
+        {"level": 1, "text": "No custody. No middleman. Fully auditable."}
+      ],
+      "footer": "GenTech Labs",
+      "notes": "The x402 flow, made concrete."
+    },
+    {
+      "layout": "title_content",
+      "title": "Live Today",
+      "bullets": [
+        {"level": 0, "text": "Gateway v2.0 live on api.gentechlabs.net — 11 services across 7 chains."},
+        {"level": 1, "text": "Token security, wallet analysis, agent discovery, market intelligence, DeFi LP, treasury_defender, and more."},
+        {"level": 0, "text": "Interactive demo: gentechlabs.net/treasury-demo/"},
+        {"level": 0, "text": "OpenAPI spec + x402-bazaar manifest published."}
+      ],
+      "footer": "GenTech Labs",
+      "notes": "We're not pitching vaporware — the gateway runs today."
+    },
+    {
+      "layout": "title_content",
+      "title": "Why This Team",
+      "bullets": [
+        {"level": 0, "text": "GenTech Labs runs live agent rails every day — treasury classification, LP automation, cross-venue signals, ERC-8004 identity."},
+        {"level": 1, "text": "We built the treasury because our own agents execute real value."},
+        {"level": 1, "text": "We've lived its failure modes, so we ship the trust layer it needs."},
+        {"level": 0, "text": "Agents building the trust layer agents need."}
+      ],
+      "footer": "GenTech Labs",
+      "notes": "Credibility: we're dogfooding the infra we're asking to build out."
+    },
+    {
+      "layout": "title_content",
+      "title": "What the Grant Unlocks",
+      "bullets": [
+        {"level": 0, "text": "Mainnet hardening (wks 1-4): audited custody, gasless EIP-7702, public trust-receipt schema."},
+        {"level": 0, "text": "Three new rails (wks 3-8): Base→Avalanche bridge, recurring subscriptions, ERC-8004 identity payments."},
+        {"level": 0, "text": "Open SDK (wks 6-10): MIT reference bot so any builder pays-per-call in an hour."},
+        {"level": 0, "text": "Community (wks 8-12): migration guides + onboarding for 5 external teams."}
+      ],
+      "footer": "GenTech Labs",
+      "notes": "$10k, three months, four measurable deliverables."
+    },
+    {
+      "layout": "title_content",
+      "title": "Open. Yours. Accessible.",
+      "bullets": [
+        {"level": 0, "text": "Open — anyone can run it, inspect it, build on it."},
+        {"level": 0, "text": "Yours to keep — self-custody means no one can cut you off."},
+        {"level": 0, "text": "Empowering, not extractive — capability, not harvesting."},
+        {"level": 1, "text": "Aligned with Sentient's principles: private by default, good for humanity."}
+      ],
+      "footer": "GenTech Labs",
+      "notes": "Map the project directly to Sentient's six funding principles."
+    },
+    {
+      "layout": "title_content",
+      "title": "Contact",
+      "bullets": [
+        {"level": 0, "text": "Gateway: api.gentechlabs.net"},
+        {"level": 0, "text": "Interactive demo: gentechlabs.net/treasury-demo/"},
+        {"level": 0, "text": "x402 manifest: api.gentechlabs.net/.well-known/x402-bazaar"}
+      ],
+      "footer": "GenTech Labs",
+      "notes": "Direct links for the reviewer to verify live."
+    }
+  ]
+}
