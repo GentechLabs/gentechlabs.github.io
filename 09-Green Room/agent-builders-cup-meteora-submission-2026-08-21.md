@@ -1,71 +1,70 @@
 # Agent Builders Cup — Meteora Submission Draft (2026-08-21)
 
 **Team chosen:** Meteora (Solana-native seat)
-**Strategy:** Consigliere — LP Slot Operator + Cross-Venue Arbitrage
+**Strategy:** Consigliere — LP Slot Operator (Solana CLMM market-making)
 **Code:** `/root/condor/agents/solana_dex_lp_expert/strategies/consigliere/strategy.md`
 **Status:** Draft ready → needs wallet fund + final submit before Aug 31
+
+## SCOPE NOTE (Jordan correction Aug 21)
+We do NOT have Hyperliquid access. The strategy is scoped to **Solana-only**
+CLMM LP market-making (Meteora / Orca / Raydium via Jupiter). The Hyperliquid
+perp arb leg is DROPPED from the submission — we don't claim a venue we can't
+execute. All copy below reflects Solana-only.
 
 ---
 
 ## Form Field Drafts (matches the Botcamp "New Strategy" form)
 
 ### Strategy Title
-**Consigliere — Solana CLMM LP + Cross-Venue Arbitrage Agent**
+**Consigliere — Solana CLMM LP Market-Making Agent**
 
 ### Summary
-A live execution agent that runs the **fee-yield LP core** on Solana CLMM pools
-(Meteora / Orca / Raydium) and layers a **cross-venue arbitrage detector**
-against Hyperliquid perps on top. One Condor agent, two coordinated levers,
-per-slot TP/SL, capital rotation. Built on GenTech's treasury rail (x402),
-moving capital trustlessly, per-transaction.
+A live execution agent that runs a **fee-yield LP core** on Solana CLMM pools
+(Meteora / Orca / Raydium), with per-slot TP/SL and disciplined capital
+rotation. One Condor agent, deterministic slot discipline, built on GenTech's
+trustless x402 rail.
 
 ### Detailed Description
 
 **Description**
 Consigliere reads the market, applies judgment, and acts on the builder's
-behalf. It runs two coordinated layers in a single ~2-minute tick loop:
-1. **LP layer (fee-yield core)** — monitors open CLMM slots, exits on TP/SL,
-   fills one free slot with the best-yielding pool it doesn't already hold.
-2. **Arb layer (edge lever)** — each tick scans cross-venue spreads
-   (Meteora/Orca/Raydium spot vs Hyperliquid perp) for the token universe it
-   already holds; only acts when a route clears the mandatory fee fence.
+behalf. It runs a single coordinated LP loop on a ~2-minute tick:
+1. **Adopt + monitor** open CLMM slots (Meteora/Orca/Raydium).
+2. **Exit** any slot at take-profit / stop-loss / idle out-of-range.
+3. **Fill ONE free slot** with the best-yielding pool it doesn't already hold,
+   with deterministic per-slot range logic and width clamps.
 
 **Markets**
-- Solana CLMM: **Meteora / Orca / Raydium** (spot LP)
-- Hyperliquid perpetuals (arb vs spot)
+- Solana CLMM: **Meteora / Orca / Raydium** (spot LP), swaps via **Jupiter**
 - Token universe: SOL, JUP, WIF, PENGU (+ what the pool scanner ranks top)
 
 **Parameters**
-- `frequency_sec`: 120 (2-min tick)
-- `quote_asset`: SOL · `base_pct`: 20 · `slots`: 3
-- `take_profit_pct` / `stop_loss_pct`: 20 · `out_of_range_max_sec`: 1800
+- `frequency_sec`: 120 (2-min tick) · `quote_asset`: SOL · `base_pct`: 20
+- `slots`: 3 · `take_profit_pct` / `stop_loss_pct`: 20 · `out_of_range_max_sec`: 1800
 - `venues`: meteora,orca,raydium · `ranking_window`: 24h
-- `arb_min_spread_pct`: 0.8 (fee fence) · `arb_include_hyperliquid`: true
-- `capital_per_slot`: auto · `risk_limits.min_wallet_sol_reserve`: 0.3
-- Guardrails: mint-not-symbol matching (no phantom spreads), per-slot width
-  clamp (Meteora < 69 bins, Orca/Raydium ≤ 120), 0.995 hair-sub on entry,
-  one slot fill per tick, never arb a token not held.
+- `risk_limits.min_wallet_sol_reserve`: 0.3
+- Guardrails: mint-not-symbol matching, per-slot width clamp (Meteora < 69
+  bins, Orca/Raydium ≤ 120), 0.995 hair-cut on entry, one slot fill per tick,
+  one distinct token per slot.
 
 **Status**
-Build + verified in GenTech's Condor stack (`agents/solana_dex_lp_expert/`).
-Live-tested against Meteora/Orca/Raydium price conventions and Hyperliquid
-perp mid. Ready to race with a funded wallet.
+- Slot inventory + P&L per tick (slots held, exits, fills, free slots)
+- Wallet reserve (min SOL kept for rent) + solvency
 
 **Events**
-- LP slot TP/SL exits and fills (journaled per tick)
-- Arb route rotations (fee-fence-gated, max 1/tick)
-- Solvency / reserve guardrails (min SOL kept for rent)
+- Slot TP/SL exits and fills (journaled per tick)
+- Out-of-range / idle-slot re-entry triggers
+- Solvency / reserve guardrails
 
 ### Code Files
 - `agents/solana_dex_lp_expert/strategies/consigliere/strategy.md` — the
-  strategy playbook (LP slot operator + cross-venue arb)
+  strategy playbook (LP slot operator)
 - `agents/solana_dex_lp_expert/strategies/consigliere/` — routines, skills
   (`pool_ranking`, `lp_range_config`, `slot_exit`), per-session journals
 - Repo: GenTech Labs Condor stack (`/root/condor/`)
 
 ### Video Link
-_(narration demo — generated, hosted at URL below)_
-https://gentechlabs.net/agent-builders-cup-meteora-demo.mp4
+https://gentechlabs.net/videos/agent-builders-cup-meteora-demo.mp4
 
 ---
 
