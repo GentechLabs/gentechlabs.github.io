@@ -77,7 +77,7 @@ NETWORKS = {
         "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
         "decimals": 6,
         "payto_env": "X402_PAYTO_ADDRESS",
-        "payto_default": "0xF9dcBFF7EdDd76c58412fd46f4160c96312ce734",
+        "payto_default": "0x7ebff188f2Eba16518C02864589b1403a5d1296a",
         "extra": {"name": "USD Coin", "version": "2"},
     },
     "algorand": {
