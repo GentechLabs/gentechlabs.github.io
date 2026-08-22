@@ -1,5 +1,5 @@
-# 🏆 Delphi Agent Arena (Gensyn × Delphi) — $10K · LIVE
-*Added 2026-08-12. Trading window Aug 10–24 (12 days left). Zero real-money risk (TST testnet).*
+# 🏆 Delphi Agent Arena (Gensyn × Delphi) — $10K · SKIPPED
+*Added 2026-08-12. **SKIPPED 2026-08-22** — we did not go through with the competition (Jordan forgot it; deprioritized). Agent scaffold preserved at `/root/delphi-arena/trade.js` for reuse. Prediction-market rail effort redirected to the Telegraph supersignal/Polymarket pattern (see `10-Labs/telegraph-miners/PREDICTION-MARKET-RAIL-ASSESSMENT.md`).*
 
 ## The Competition
 - **What:** Autonomous agent trades Gensyn's Delphi information/prediction markets on-chain. Top 3 P&L split **$10,000** from GensynFND.
