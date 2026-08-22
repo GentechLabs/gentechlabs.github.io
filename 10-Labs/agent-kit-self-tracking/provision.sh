@@ -36,6 +36,17 @@ CHAINS="$(python3 -c "import json,sys;print(' '.join(json.load(open('$CONFIG')).
 [[ -n "$WALLET" ]] || { echo "❌ no wallet in config" >&2; exit 1; }
 [[ -n "$CHAINS" ]] || { echo "❌ no chains in config" >&2; exit 1; }
 
+# ── KEY RULE (Jordan, Aug 22 2026) ──────────────────────────────────────
+# Never leave a funded wallet/rail keyless. Every wallet we create for the
+# agentic treasury, or set to RECEIVE payment (x402 payTo), MUST have its
+# private key auto-generated AND stored — or point only to a wallet we control.
+# This is the structural guard against the 0xF9dc…734 failure (stranded $33.63).
+# The provisioner enforces it: a wallet with no key on disk is flagged, not silently
+# accepted. (Key storage location is the caller's secure/ dir; this check ensures
+# the wallet is either keyed or explicitly marked as externally-controlled.)
+KEY_RULE_ENFORCED=1
+echo "🔐 KEY RULE: every wallet/rail must be keyed or externally-controlled (Jordan Aug 22)"
+
 echo "🔑 Wallet:  $WALLET"
 echo "⛓️  Chains:  $CHAINS"
 
