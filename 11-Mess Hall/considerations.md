@@ -8,6 +8,16 @@ last-updated: 2026-08-22 00:07 ET
 
 > Decision points requiring Jordan's input. Updated from brain snapshot context.
 
+## 🆕 Aug 22 — Krexa × Agentic Treasury deep dive (credit rail)
+
+- **Krexa = financial OS for AI agents** — on-chain credit on Solana mainnet (7 Anchor programs) + Monad. Agents register, get a **Krexit Score (200–850)**, borrow USDC against it, repay automatically via a **Revenue Router** (splits each $: 10% protocol fee → 40% debt service → 50% agent). No human co-signer. **Polygon integration live (Aug 22)** — cross-chain bridge via deBridge (Solana↔Polygon/Base/Arb/Avalanche/etc).
+- **Credit levels:** L1 $500 @ 36.5% (entry) · L2 $20K @ 29.2% (score 500+) · L3 $50K @ 21.9% (score 650+ KYA2) · L4 $500K @ 18.25% (score 750+ KYA2). USDC. No seat fee — Krexa earns 10% protocol fee on repayments.
+- **Our treasury Solana wallet `DjCjLZM9...Xbf3` LIVE score: 237 → L1 Micro ($500 @ 36.5%), not registered.** No SNS/compute boost yet.
+- **Why it matters:** (1) working capital without a funded wallet — our treasury is capital-constrained (~$56 total, Unichain blocked at $1.88); (2) Revenue Router IS our x402 per-tx-fee model, structurally enforced as repayment; (3) Solana = our second rail; (4) Krexit Score = reusable "Agency of Traders" underwriting signal.
+- **Caveats:** 36.5% APR at L1 is expensive (only worth it if deployed capital earns > that); score 237 is low (need repayment history + profitability for L2); invite code required to activate; PDA wallet = no private key (custody shift); complements, doesn't replace our x402 gateway.
+- **Full deep dive:** `09-Green Room/krexa-agentic-treasury-deep-dive-2026-08-22.md`.
+- **⏳ JORDAN DECISION:** register the treasury agent on Krexa now (free, starts the score clock) or hold until we have revenue to repay against? **Recommendation: register now (free) + study Revenue Router as reference; revisit borrowing when treasury has real revenue flow.**
+
 ## 🆕 Aug 22 — Syra case study (study only, no paid calls) + OKX audit
 
 - **Syra x402 merchant — CASE STUDY (Jordan, Aug 22):** Syra (`@syra_agent`) is a pay-per-call crypto-intel merchant over x402 (USDC on Solana). Consult-first pattern: `syra_consult` (free) routes intent → returns paid tool → HTTP 402 quote → agent wallet settles. **Jordan: study it as a reference implementation, do NOT make paid calls now.** It's a working x402 merchant loop (consult-free → 402-quote → agent-wallet settle) — the blueprint for our own paid APIs. Also: ERC-8004 registration (`/8004/register-agent`) + AgentScore Passport identity-gating + multi-chain rails (Solana, Base, **OKX X Layer USDT0**). Skill: `api.syraa.fun/skill.md`. **Action:** pull `/x402/capabilities`, `/openapi.json`, ERC-8004 flow as case study → feeds `agent-marketplace-integration` + `x402-api-compliance`. No spend.
