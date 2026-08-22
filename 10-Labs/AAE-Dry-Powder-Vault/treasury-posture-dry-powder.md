@@ -1,19 +1,21 @@
-# Treasury Posture — Dry Powder Mode
+# Treasury Posture — DEPLOYED Mode
 
-**Date:** 2026-08-13
-**Source:** Jordan (direct instruction, Gentech Treasury group)
+**Date:** 2026-08-20
+**Source:** Jordan greenlight (Gentech Treasury group) + Steward Council verdict — yield-farm AVAX rail, DeFi Milestone goal.
 
 ## Status
-The GTA treasury is in **DRY POWDER mode**. Jordan is using most of his capital for emergency funds right now, so there should be **nothing deployed** in the GTA wallets on any of the rails.
+The GTA treasury is now in **DEPLOYED mode**. Jordan funded ~$29 USDC; the Steward auto-deployed the first AVAX/USDC curve position on LFJ V2.2. The treasury is actively earning fees.
+
+## On-chain position (verified live)
+- **Pool:** LFJ V2.2 AVAX/USDC 5bps (`0x864d4e5e...516ea`)
+- **Position:** 11 bins · IN range · ~$7.19 Y/X [7.1553–7.2272]
+- **Deployed value:** ~$21 (0.97 WAVAX + 8.00 USDC in position) + gas buffer
+- **Wallet:** `0x572ABd6461BED2258615E6b99c585Ab7c5d05037`
 
 ## What this means
-- **Empty LP position is intentional and correct** — do NOT treat it as a problem to fix
-- **Do NOT auto-deploy curves or reposition** when the macro loop looks idle
-- Keep the treasury **liquid and ready** — only deploy on an explicit greenlight from Jordan
-- ~$1.86 native gas in the wallet is sufficient to execute when the word is given
-
-## Standing rule
-Until Jordan says otherwise: **dry powder = hold, don't deploy.** The macro-event auto-execution loop stays quiet (no repositioning) because there's nothing deployed to reposition, and that's exactly right.
+- **Auto-deploy wired** — funded wallet + no position → opens a fresh curve automatically (Jordan, Aug 20). The autonomous rebalance loop keeps it in range / fee-efficient.
+- **Auto-rebalance live** — detects OUT-of-range / low fee-eff, withdraws + redeploys on its own, alerts Jordan AFTER.
+- **DeFi Milestone is the goal** — treasury deployed toward the milestone, not parked as dry powder.
 
 ## Reversal trigger
-Jordan gives the greenlight to deploy → then resume normal CURVE-default / BID_ASK-before-macro-event behavior.
+Jordan explicitly returns the treasury to DRY POWDER (emergency funds) → update this file + stand down the deploy/rebalance legs.

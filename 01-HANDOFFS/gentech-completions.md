@@ -55,3 +55,26 @@
 - Applied group returns: all already applied in prior sessions (labs #29/52/19/2/30/48/49, entertainment #50/8/9/38, treasury #51/8, forge #59/50). IDs 1,6,73,71,61,60,66,62,65 are per-lane, not in global queue. Nothing new to apply.
 - Infra health: gateway root HTTP 200, hub-launcher HTTP 200, arcade root HTTP 200, all 4 cabinets HTTP 200.
 - **#41 — OpenDexter Marketplace listing (Dexter facilitator rail)**: root cause found — gateway settles Base via CDP, but OpenDexter only auto-catalogs gateways that settle through the Dexter facilitator (`x402.dexter.cash`). Added `verify_proof_via_dexter()` to `10-Labs/x402-gateway/server.py` (routes Base `eip155:8453` proofs via Dexter when `X402_USE_DEXTER=1` or `PAYMENT_VERIFY_MODE=dexter`). 8/8 new tests pass (45 total). OPS REMAINING: set `X402_USE_DEXTER=1` on gateway service + trigger real Base settlement, re-check `x402_search` ~24h. Handoff: `01-HANDOFFS/gentech-to-labs/2026-08-16-opendexter-dexter-rail.md`.
+
+## 2026-08-18 Nightly Build
+- **#3 ClawWork Integration — Employee Squad**: SHIPPED + VERIFIED (infra). Router shim live on :8011 (chat round-trip OK), GDPVal pipeline loads 220 tasks (avg $259.45) + daily task selection works. Committed /root/ClawWork.
+
+## 2026-08-20 Nightly Build
+- **#4 Paymenter x402 Gateway — RE-GATED (needs Jordan)**: repo verified live (main @ bb1857d), listing + Discord post drafted. Submission needs Jordan's live Paymenter account + Discord bot token; canonical `Paymenter/Extensions` repo is archived/read-only (no PR path). Queue #4 → needs_jordan=true.
+- **Fleshed out `connectors/paymenter.md`** (10-Labs/x402-gateway/connectors/) with exact listing fields (title/category/short-desc/config table/support links) — ready to paste when Jordan unblocks. Connector Pack now 4/5 docs done (opendexter, cdp-bazaar, awesome-mcp-servers, paymenter).
+- **Group returns consumed**: all returned IDs (labs/entertainment/treasury/forge) already marked shipped in prior sessions — nothing new to apply.
+- **Infra health**: gateway 200, hub-launcher 200, arcade 200. Vault synced + pushed (54e9b38b).
+- **Jordan items** written to `01-HANDOFFS/2026-08-20-jordan-items.md` (Mastercard register TODAY, #4 Paymenter, #where-are-the-funds, Model Strength Score, Dinari, Krexa, C0).
+
+## 2026-08-21
+
+- **GenTech EDU pilot page — LFJ AVAX/USDC pool** (fleshed-out stale idea → shipped): `09-Green Room/gentech-edu/lfj-avax-usdc-pool-pilot.md`. Honest-expectations per-pool guide for the treasury's default rail, written from LIVE verified numbers (discover_positions.py → 11 bins · IN range · $7.31 · ~$26.77 deployed). Covers what the pool is, real returns at small size (the hidden part), exact start steps, common mistakes (incl. the CompositionFactorFlawed bug we fixed), risk profile, milestone ladder, trust contract.
+- Consumed group returns: labs #29/52/19/2/30/1/6/48/49, entertainment #50/9/14/8/73/71/38/17/60/16/22/23/1/20/29/30/34/35/36/53/49/2/5/10/15/6/7/13/18/11, treasury #51/8, forge #61/59/60/66/62/65/50 — all already shipped in global build_queue.json (applied in prior sessions). Per-lane IDs (entertainment 73/71/60, forge 61/59/60/66/62/65) are lane-local, not in the global queue. Nothing new to apply.
+- Infra health: gateway root 200, bazaar manifest 402 (expected paywall), hub-launcher 200, arcade 200.
+- **Fleshed-out idea → ready-to-spike**: `CopilotKit Channels SDK` (09-Green Room/ideas.md "Ready to Test") promoted from watch-item to a concrete 3-step x402 approval-gate spike (clone+Slack demo → map `approval_gate` to our gateway 402 challenge → 1-page Telegram-vs-Slack/Teams recommendation for Jordan). Sandbox-only, no funds. This extends our multi-channel x402 pattern beyond Telegram.
+- Vault synced (ob sync clean) + pushed 1f67ba2b (rebased over remote divergence).
+
+## 2026-08-22 Nightly Build
+
+- **#63 — Somnia x DreamDEX Event Contracts Hackathon — AI Trading Agent**: PROTOTYPE VERIFIED LIVE on Somnia testnet. `ec-oracle-follow` strategy connects to the DreamDEX venue (VENUE_ID set), scans 8 tradable binary markets, measures realized vol from the on-chain EMA oracle feed, and makes edge-gated DRY takes (BUY_YES + BUY_NO) with all risk limits firing (max shares, model-disagreement muzzle at 0.354 gap, opposing-leg sit-out). Evidence: `10-Labs/somnia-dreamdex-ec-agent/verification-testnet-dryrun-2026-08-22.log`. Handoff: `01-HANDOFFS/gentech-to-labs/2026-08-22-somnia-dreamdex-ec-prototype.md`. Queue #63 marked shipped 2026-08-22. REMAINING for submission (deadline Sep 8): funded testnet key for real fills, GitHub repo, demo video, feedback report.
+- Applied group returns: #61 (labs + forge both reported) marked shipped 2026-08-22. All other returned IDs (labs #29/52/62/19/2/30/1/6/48/49, entertainment #50/9/14/8/73/71/38/17/60/16/22/23/20/34/35/36/53/5/10/15/7/13/18/11, treasury #51/8, forge #59/66/65/50) already shipped in prior sessions; per-lane IDs (not in global queue) skipped. Nothing new to apply beyond #61.

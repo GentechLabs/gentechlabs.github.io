@@ -1,27 +1,57 @@
 ---
-date: 2026-08-17
+date: 2026-08-21
 status: active
-last-updated: 2026-08-17 00:06 ET
+last-updated: 2026-08-22 00:07 ET
 ---
 
 # 🧠 Considerations — Open Decisions
 
 > Decision points requiring Jordan's input. Updated from brain snapshot context.
 
+## 🆕 Aug 22 — Full treasury sweep + HyperEVM $21 deferred
+
+- **Full balance sweep DONE (Aug 22)** — Revenue Monitor now tracks all 5 known wallets × 9 chains × native + USDC (was income-only + USDC-only on 4 chains). True total ~**$56** across treasury/signer/arb/cdp/almanak. Blind spots closed: HyperEVM, Celo, BSC, native gas all now visible.
+- **HyperEVM $21 USDC — DEFERRED to future plans (Jordan, Aug 22)** — arb wallet `0x3d117...eCb` holds **$20.99 USDC on HyperEVM** (key held at `secure/gentech-arb-wallet.json`, valid). **Blocker: 0 HYPE gas, and Jordan can't buy HYPE in the US yet** (Hyperliquid not live in US). Money stays parked until US access opens. Revisit when HYPE is buyable in the US.
+- **Treasury/signer keys — RESOLVED (Jordan, Aug 22): taking the L.** `0xF9dc...734` (~$33.63) was a hardcoded receive-only `payTo` settlement address (added Jul 24-25 in `10-Labs/x402-gateway/server.py`) — **no key was ever generated for it**, so the balance is stranded. Jordan decided to **take the L and move on** to the new keyed settlements. Documented as a known loss; do not re-flag. **Fix already done by Treasury:** all rails re-pointed to keyed wallets (Base/Avalanche/XLayer → `0x7ebf`, Algorand → `/root/.algorand/`, Solana → `secure/solana-treasury-payto.json`).
+- **🔑 KEY RULE (Jordan, Aug 22):** whenever we create a wallet or rail, **auto-generate AND store the private keys automatically** — Jordan has no control over that. Never leave a funded wallet keyless. (Memory full — recorded here in vault.)
+
+## 🆕 Aug 21 — Steward OUT-of-range fix + council + EDU pilot
+
+- **Steward "OUT of range" bug AUDITED + FIXED (treasury)** — Root cause: `steward_execute.py` hardcoded `REDEPLOY_BIN_SPREAD = 5` for autonomous redeploy → 11-bin / ~1% wide curve. In a trending market (AVAX +10%, BTC $79K) that leaves range within minutes → 10-min watchdog re-centered endlessly. **Fix:** redeploy spread now shape-aware (`REDEPLOY_BIN_SPREAD_BY_SHAPE = {"curve": 11, "bid-ask": 15}`, Jordan's bin lever); `gta_avax_lp_execute.py` default now 11. Verified dry-run builds ±11/23-bin curve. Position live: 11 bins IN range $26.76.
+- **Treasury council — BTC $79K short-liquidation** — Minutes `Treasury/Strategy-Journal/2026-08-21-council-btc-79k-liquidation.md`. Verdict CONSENSUS bull; deployed (cbBTC +22%, AVAX LFJ in range). Vault committed `3260da53`.
+- **GenTech EDU pilot SHIPPED** — `09-Green Room/gentech-edu/lfj-avax-usdc-pool-pilot.md` (live verified: 11 bins IN range, ~$26.77 deployed).
+- **Agent Builders Cup — Meteora draft** — Consigliere (Solana CLMM LP MM). **HL perp leg DROPPED (Jordan, no Hyperliquid access)** — Solana-only. Submit by Aug 31; needs wallet fund + final submit.
+- **Cold Crown (KIRI) MV** — opening LOCKED + deployed; **$0.59 wallet blocks drop REDO** (skydive + closed-eye mist) + more build-up beats.
+
 ## 🚨 Urgent — DEADLINES + MACRO EVENT
 
 - [x] 🚨 **CPI Release — Wed Aug 12 8:30 AM ET (RELEASED) — ⚠️ REPOSITION BLOCKED** — Treasury CPI War-Room play was staged (regime RANGE_BOUND, RSI 24.1, expected AVAX ±4-7%) but **the Steward wallet was swept empty Aug 11 evening** (~43.72 USDC off to `0xeee3fe6c...`). No LFJ V2.2 position exists on `0x572ABd6461BED2258615E6b99c585Ab7c5d05037` (0 WAVAX, ~0.0006 USDC, 0.2979 AVAX gas). **✅ RESOLVED Aug 13 — Jordan confirmed the sweep was INTENTIONAL**: he tested whether the agentic treasury could send funds back to his Coinbase wallet, it worked (real USDC landed), and he kept the money. No unexpected move, no review needed. Two CPI one-shots (`31432dce0de9`, `e13db42767b0`) recommended paused + position heartbeat re-enabled.
-- [ ] 🚨 **Keeperhub Agents Onchain #80** — **⚠️ DEADLINE PASSED Aug 13.** JORDAN CONFIRMED GO. **✅ PROOF TRANSFER COMPLETE Aug 8** (0.01 USDC on-chain, TX 0x88fe6c9a...b1df, Base). **REMAINING was: film demo video + assemble GitHub submission (README, video, live tx link). Verify submission status — if not submitted, mark closed.**
+- [x] 🚨 **Keeperhub Agents Onchain #80** — **✅ DROPPED (Jordan, Aug 20).** Was Aug 13 deadline. Proof transfer was complete (0.01 USDC on-chain, TX 0x88fe6c9a...b1df, Base) but Jordan chose not to pursue the demo video + GitHub submission. Marked closed — do not re-flag.
 - [x] 🚨 **Build with Gemini XPRIZE #29** — **DROPPED Aug 15 (Jordan decision).** Was Aug 17 deadline. Zero actual Gemini/Vertex code existed (only a build brief); 2 days was "way too tight" for a $2M pool. Jordan chose to unregister and refocus on CockroachDB + Delphi. Marked closed — do not re-flag.
-- [ ] 🚨 **CockroachDB × AWS — Agentic Memory #83** — **Aug 18 (1 day).** $8.75K, persistent memory + MCP Server (Devpost cockroachdb-ai.devpost.com). **Agent Memory layer BUILT + verified** (shipped 2026-08-14, `10-Labs/cockroachdb-agentic-memory/`, 9/9 tests, live CockroachDB v24.3.4). **REMAINING (Jordan):** register on Devpost, record <3min demo, push public repo. **⚠️ CLOSEST ACTIONABLE DEADLINE — HIGHEST PRIORITY.**
+- [x] 🚨 **CockroachDB × AWS — Agentic Memory #83** — **✅ DROPPED (Jordan, Aug 20).** Was Aug 18 deadline, $8.75K. Agent Memory layer was BUILT + verified (shipped 2026-08-14, `10-Labs/cockroachdb-agentic-memory/`, 9/9 tests, live CockroachDB v24.3.4) but Jordan chose not to pursue submission. Marked closed — do not re-flag.
 - [ ] ✅ **AI Factory Hackathon #79** — **DEADLINE PASSED Aug 10.** lablab.ai × NativelyAI. **MARKED SHIPPED by labs Aug 9.** Jordan: confirm submission status (if not submitted, this is done).
 - [ ] ✅ **Build with DataHub** — **DEADLINE PASSED Aug 10.** Needs submission confirm. If not submitted, mark closed.
 - [ ] ✅ **Arc Programmable Money Hackathon** — **DEADLINE PASSED Aug 9.** SHIPPED + verified (ArcAgentWallet.sol, 57/57 tests). Moved to Recently Resolved.
 - [ ] 🔴 **Superteam USA — Remote Community Membership** — Applied. **Jordan confirmed Aug 12: applied for second triage, now waiting on their decision.** (Superteam Earn agent `gentech-labs-x402` registered Jul 23; us.superteam.fun/join remote membership.) Status: PENDING second triage.
-- [ ] 🟡 **Solana Foundation USA Grant** — Applied Aug 5 (~$8.2k avg/up to $10k USDG). **Aug 12 check: site still shows application, no approval/rejection email, no status change** — likely large applicant pool. STILL PENDING. Do not reallocate treasury around unconfirmed grant. **Re-check ~Aug 19 (2 days).** Tracked: Treasury/2026-08-05-solana-foundation-usa-grant.md
-- [ ] 🚨 **Mastercard Innovation Challenge** — **Jordan to register by Aug 20; submit Aug 31.** Credential > prize framing (W33 review, Aug 16).
+- [ ] 🟡 **Solana Foundation USA Grant** — Applied Aug 5 (~$8.2k avg/up to $10k USDG). **Aug 20 check: site still shows application, no approval/rejection email, no status change** — likely large applicant pool. STILL PENDING. Do not reallocate treasury around unconfirmed grant. **Re-check ~Aug 22.** Tracked: Treasury/2026-08-05-solana-foundation-usa-grant.md
+- [x] 🚨 **Mastercard Innovation Challenge** — **✅ REGISTERED Aug 18** (luma.com/kyz978xv, free) + build kicked off (13/13 tests, live fraud stack). Submit Aug 31. Credential > prize framing (W33 review, Aug 16). `10-Labs/mastercard-challenge/` scaffolded (red_team 7 attack types + blue_team governance + live fraud stack `live_stack.py`; ERC-8004 identity + credit 76.7/HIGH surfaced). Labs: extend realism, session-aware eval, polish UI, demo video by Aug 31.
 - [ ] 🚨 **Algorand First-Mover Play (Aug 6)** — **✅ COMPOSITE ENTRY SHIPPED (Aug 7).** **Jordan: (1) provide Algorand wallet address so X402_PAYTO_ALGORAND goes live, (2) confirm late-leaderboard eligibility or mark dead.**
 - [ ] 🚨 **Algorand Global x402 Challenge #82** — **⚠️ DEADLINE PASSED Jul 31.** $100K + 500K ALGO. **Jordan: confirm if registered / late-leaderboard eligible, or mark dead.**
+
+## 🆕 Aug 20 — Unichain Treasury SHIPPED + GTA dry-run
+
+- **Unichain Treasury Port SHIPPED (#58)** — Agentic Treasury / GTA asset-management layer ported to **Unichain** (chainId 130), the deployable proof for the Uniswap Foundation grant. `10-Labs/unichain-treasury/`: live v3 pool reader (real RPC) + regime allocator + tests **9/9 pass**. Live: USDC/WETH 0.05% pool `0x65081c...dbcf1` (~$2,250/ETH). **Blocker:** onchain deploy gated on capital on Unichain (wallet flat ~$1.88). Application form: `share.hsforms.com/18Kv3hTvDSt-x1wK9va0OYwsdca9`.
+- **GTA Execution Engine dry-run (#GTA-DRYRUN)** — decision **ENTER** (basis ≥ 10 bps). Freshest live scan picks **SOL (14.96 bps)** as top basis. Plan: short SOL perp (Hyperliquid) / buy SOL spot (Coinbase). **NO funds moved — dry-run only.** Awaiting Jordan approval to enable real execution.
+- **Fixed pre-existing git merge conflict** in `scripts/build_queue.json` (was invalid JSON) — took HEAD side of 12 blocks; file now valid (58 items).
+
+## 🆕 MultiHopper — Solana Private Routing Rail (Aug 20)
+- **Signal:** OOBE Protocol (SAP) partnering with MultiHopper — programmable onchain privacy routing on Solana. Agents on SAP get MultiHopper payment routing through OOBE tooling; shared revenue on routed txs.
+- **What it is:** non-custodial, compliance-checked (TRM Labs) multi-hop asset routing. MCP-compatible + REST (OpenAPI 3.1), 3-call lifecycle (create → prepare → confirm-broadcast), signing stays client-side. 2,800+ mainnet transfers, revenue positive, Top 3 by Visa at Solana Colosseum Berlin, SOC 2 + GDPR.
+- **Why us:** Solana = our second rail (Base = volume, Solana = compounding agent economy). This is the "move it" layer for treasury — private, compliant, programmable. Complements Ampersend (pay-for-APIs buyer-side) vs MultiHopper (route-value treasury movement).
+- **Tier 1 (50/50 revenue share, first 500 devs):** permanent, no caps, Day 1 API creds + sandbox. Worth grabbing early.
+- **⏳ JORDAN ACTION (wallet connect, ~2 min):** connect Solana wallet at `multihopper.com/developer/dashboard` (prod, `mh_live_` key) or `devnet.multihopper.com/developer/dashboard` (test, `mh_test_` key). No email signup path — wallet connect only. Use the same wallet as SAP/agent ops.
+- **After key:** Steward wires MCP server (`https://dev-docs.multihopper.com/mcp`) into Hermes config + scopes as treasury routing rail.
+- **Docs:** dev-docs.multihopper.com (quickstart, agentic-integration, mcp-server). MCP server URL: `https://dev-docs.multihopper.com/mcp`.
 
 ## 🟢 AgentLux — LIVE, First-Hire Guarantee armed (Aug 12)
 
@@ -39,7 +69,8 @@ last-updated: 2026-08-17 00:06 ET
 ## 🔴 High Priority
 
 - [ ] 🔴 **🔑 AVAX KEY ROTATION (COMPROMISE EVENT)** — Jordan's **personal AVAX private key was pasted in chat** (derives to Main `0x7ebf...96a`, ~0.099 AVAX, nonce 5363). Stored locked-down at `/root/.blockrun/jordan-personal-avax-key` (600), but chat history is synced so local storage does NOT make it safe. **Jordan: rotate the key / move funds off that address.** Do not treat as handled because it's on disk.
-- [ ] **Super Arcade Tennis #73 production deploy** — Code done and live on dev at arcade.gentechlabs.net. **Jordan: (a) deploy production build, (b) wire crypto payments?**
+- [ ] 🔴 **Build Queue Audit — backfill completion metadata (Pixel, Aug 17)** — Jordan flagged queue keeps inflating (50→60→70) despite shipping. Audit: 57 total (37 shipped, 15 pending, 3 cancelled, 2 blocked). **7 shipped items have NO `shipped_date`** (#20 FrameForge, #29 awesome-selfhosted, #30 Hippocratic AI, #34 Yield.xyz, #35 Paperclip Control Plane, #36 API Audit Fix, #53 GenTech Hub PWA). **36 of 37 shipped items have NO `shipped_note`** (only #34 has one). **2 items lack a `group` field** (#36 API Audit Fix, #49 NOT THE GHOST). **Pending (15) all greenlit Aug 3, aging silently** — no age/priority signal. **Recommended:** (1) backfill shipped-without-date/note items with completion metadata OR downgrade confidence; (2) add age/priority to pending items; (3) confirm #36 and #49's group. Full audit: `01-HANDOFFS/entertainment-to-gentech/2026-08-17-build-queue-audit.md`.
+- [ ] **Super Arcade Tennis #73 production deploy** — **Main Menu [P0] SHIPPED (Aug 17)** (title/mode/instructions). Code done and live on dev at arcade.gentechlabs.net. **Jordan: (a) deploy production build, (b) wire crypto payments?**
 - [ ] **FrameForge #71** — AI Storyboard Service (previs pipeline). Spec at 09-Green Room/specs/. **Jordan: direction decision?** (Proven on KAGE film — ready to productize.)
 - [ ] **Open Generative AI #77** — Self-host AI media studio (400+ models). **Jordan: go/no-go?**
 - [ ] **Make other GenTech surfaces PWAs** (Treasury decision Aug 11) — Jordan: "make the other GenTech surfaces PWAs, tie to the website." Steward PWA is the proof-of-concept. **No build until scoped in HQ/CLI.**
@@ -55,7 +86,7 @@ last-updated: 2026-08-17 00:06 ET
 - [x] **AI Factory Hackathon #79** — ✅ DEADLINE PASSED Aug 10, shipped. Moved to urgent section.
 - [x] **GenTech Academy #81** — ✅ GO (Jordan Aug 5). — Initial repo live at `ProtoJay4789/gentech-academy`. Module 1 (AI on Grid) + Module 2 (Visual Pipeline) shipped. Module 3 (AI + 3D Engines / Kimi K3 content creation) next. **Jordan: direction — Blender MCP workflow or Kimi K3 frame critic loop?**
 - [ ] **Kimi K3 Content Pipeline #82** — Frame critic + prompt engineer loop for Seedance. Kimi K3 available via BlockRun ($3/$15 per M tokens, 1M context, vision). **Treasury model confirmed (Aug 11): Kimi 2.7 (`kimi-k2.7-code`) + Kimi K3 in ollama-cloud model list. Jordan: fund wallet → test frame consistency feedback loop.** *(Wallet is funded — Steward active on real funds.)*
-- [ ] **CockroachDB × AWS — Agentic Memory #83** — $8.75K, Aug 18 deadline. Persistent memory + MCP Server. **Jordan: register?**
+- [x] **CockroachDB × AWS — Agentic Memory #83** — ✅ DROPPED (Jordan, Aug 20). Built + verified but not submitted. Closed.
 
 - [ ] **Bug Bounties Comeback?** — We stopped because AI agents couldn't produce solid PoCs ("proof of LOC"). open·kritt (Kritt-ai, Blockian team) now handles that: scan agents run as root in disposable containers (compile/run tests/build exploits) and post-scripts emit PoCs via `_reserved_poc` + reports. **Jordan: test on our own repos first (build-queue #34), then decide if we point it at Immunefi targets for bounty revenue.**
 
@@ -193,6 +224,15 @@ Jordan's decision on the Gears E:D beta: **NOT pre-ordering for beta access.** E
 
 ## ✅ Recently Resolved
 
+- **ClawWork Employee Squad infra SHIPPED (#3, Aug 18)** — provider-fallback router live on `127.0.0.1:8011` (Ollama Cloud→OpenCode Go), verified chat round-trip vs deepseek-v4-flash. GDPVal pipeline loads 220 tasks ($82–$5004, avg $259). NEXT: run one GDPVal task end-to-end (labs) to prove a real deliverable + settlement.
+- **Dinari dShares rail SCAFFOLDED (Aug 18)** — `agent-kit-self-tracking/dinari-rail/`, self-test passes. Jordan: Partners signup + sandbox API key + KYC to validate.
+- **Fraud/Security Stack AUDIT + COMPLIANCE (Aug 18)** — rugcheck v2.1.0 confirmed AHEAD of vault source; x402-compliance-scanner fixed to v2 spec (was false-negative flagging); gateway 16/16 compliant; rugcheck 178/178, token-security 2/2, mastercard 10/10.
+- **Mastercard Innovation Challenge build KICKED OFF (Aug 18)** — live fraud stack wired, tests 13/13, ERC-8004 identity + credit score surfaced. Register by Aug 20.
+- **KAGE "Church of the Dead" Stage Music Video COMPLETE (v21 FINAL, Aug 17)** — 117.8s full arc, live at vanito.gentechlabs.net/music/vanito/kage-cotd-stage-v21.mp4. New character KIRI (mist) added. Reusable prompts saved as skill `kage-cotd-stage-mv`.
+- **Agentic Treasury Edge built (Aug 17)** — `yield_vs_baseline.py agentic_edge()` shows active vs passive HODL/stake. Conservative 1.15x multiplier, honest flags. NOT yet wired into Yield Rail Finder report.
+- **Super Arcade Tennis Main Menu [P0] SHIPPED** (Aug 17) — title/mode/instructions.
+- **Agent Warfare Procedural Map Selector SHIPPED** (Aug 17) — 6-map selector, deployed.
+- **Paymenter x402 repo published** (Aug 17) — `ProtoJay4789/paymenter-x402` main (bb1857d).
 - **Physical Media Scarcity Tracker SHIPPED** (Aug 16) — 5 endpoints, 15/15 tests. `10-Labs/deal-tracker-api/api/physical_media.py`.
 - **OpenDexter Dexter facilitator rail SHIPPED** (Aug 16) — 45/45 tests, OPS remaining (set `X402_USE_DEXTER=1`, trigger settlement).
 - **Arcade P0 fixes SHIPPED** (Aug 16) — 3D lobby + mobile tennis + VKT pause.

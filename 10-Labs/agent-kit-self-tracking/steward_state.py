@@ -61,18 +61,39 @@ def get_pool():
     }
 
 
+def get_regime():
+    """Read the live regime from the regime classifier state (now BTC-based)."""
+    for p in (
+        os.path.expanduser("~/.hermes/scripts/.aae-regime-state.json"),
+        "/root/.hermes/profiles/gentech-treasury/home/.hermes/scripts/.aae-regime-state.json",
+        "/root/.hermes/scripts/.aae-regime-state.json",
+    ):
+        try:
+            with open(p) as f:
+                d = json.load(f)
+            regime = d.get("regime", "RANGE_BOUND")
+            conf = d.get("confidence", 0.5)
+            # Map regime -> allocation (regime-driven treasury layers)
+            alloc_map = {
+                "BULL_TRENDING": {"lp": 30, "staking": 20, "hodl": 40, "lending": 10},
+                "PRICE_DISCOVERY": {"lp": 25, "staking": 15, "hodl": 50, "lending": 10},
+                "RANGE_BOUND": {"lp": 40, "staking": 30, "hodl": 15, "lending": 15},
+                "ACCUMULATION": {"lp": 35, "staking": 25, "hodl": 30, "lending": 10},
+                "HIGH_VOLATILITY": {"lp": 20, "staking": 20, "hodl": 40, "lending": 20},
+                "BEAR_TRENDING": {"lp": 15, "staking": 20, "hodl": 45, "lending": 20},
+            }
+            a = alloc_map.get(regime, {"lp": 40, "staking": 30, "hodl": 15, "lending": 15})
+            return {"regime": regime, "conf": conf, **a}
+        except Exception:
+            continue
+    return {"regime": "RANGE_BOUND", "lp": 40, "staking": 30, "hodl": 15, "lending": 15, "conf": 0.65}
+
+
 def main():
     pos = get_position()
     pool = get_pool()
     # AAE regime-driven allocation (from regime_classifier ground truth, Aug 11)
-    alloc = {
-        "regime": "RANGE_BOUND",
-        "lp": 40,
-        "staking": 30,
-        "hodl": 15,
-        "lending": 15,
-        "conf": 0.65,
-    }
+    alloc = get_regime()
     state = {
         "updated": datetime.now(timezone(timedelta(hours=-4))).isoformat(),
         "position": pos,

@@ -1,5 +1,8 @@
 # Jordan's Action Items — Orchestrator List
 
+## Agent Marketplace — NEEDS HUMAN (added Aug 17, marketplace scanner)
+- [ ] **AgentPact (agentpact.xyz)** — link wallet `0x7ebf…96a` to agent `9fed6922-48d0-4ed6-975a-c828bdf02446` so we can post paid USDC offers. Account registered + API key issued autonomously (Aug 17), but posting a paid `usdc` offer returns "Link a valid wallet address to your agent before advertising the 'usdc' payment rail." Wallet linking requires owner signature (agent can't sign). One browser action: sign wallet-link on AgentPact. (https://agentpact.xyz)
+
 ## 🎯 GRANT APPLICATIONS — HUMAN-GATED (added Aug 15)
 Drafts ready in `09-Green Room/grant-application-drafts.md` — copy-paste + submit:
 - [ ] **AI Grant** (aigrant.org) — fill founder background, paste into form. Non-dilutive $5-50K, rolling.
