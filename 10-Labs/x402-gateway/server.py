@@ -117,8 +117,8 @@ NETWORKS = {
 }
 
 # Order matters — first entry is the preferred rail for clients that take
-# accepts[0] blindly. Base stays first for backward compatibility.
-_DEFAULT_NETWORKS = "base"
+# accepts[0] blindly. X Layer first (OKX requires it for ERC-8004 services).
+_DEFAULT_NETWORKS = "xlayer"
 
 
 def enabled_networks() -> list[dict]:
