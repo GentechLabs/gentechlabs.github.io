@@ -14,12 +14,13 @@ All verified live (HTTP 200, content confirmed).
 
 ## What changed — website (ProtoJay4789.github.io)
 - `DeFi/defi-dashboard.html` — button, section title, loading text → "Market Sentiment"
-- Committed to **both `main` and `gh-pages`** branches (gh-pages is what the live site serves)
+- Committed to **both `main` and `gh-pages`** branches.
 
-## ⚠️ Pre-existing issue found (not caused by this change)
-The live GitHub Pages site (`ProtoJay4789.github.io`) returns **404 on the whole site** — it was
-down before this change too. The rename is correctly on both branches, but the site isn't
-serving. Needs a separate deploy fix (Pages source branch / build config).
+## ⚠️ Correction (Jordan, Aug 22 2026)
+**GitHub Pages is RETIRED.** The live site is the **VPS + Cloudflare** (gentechlabs.net),
+served directly from `/var/www/gentechlabs/` (not git-tracked). The ProtoJay4789.github.io
+404 is irrelevant — that repo is no longer the deployment target. The demo site
+(gentechlabs.net) is the source of truth and is fully live with the rename.
 
 ## Note
 The `rotation-data.json` file in the website repo has **git merge-conflict markers** (`<<<<<<<`)
