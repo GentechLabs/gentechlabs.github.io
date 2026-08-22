@@ -1,7 +1,7 @@
 # Connector: Syra — Multichain Agent Infrastructure
 
 > **Source:** https://syraa.fun/marketplace
-> **Status:** 🔜 Pending — after queue #22 ships (register GenTech x402 services)
+> **Status:** 🟡 FLESHED (2026-08-22 Nightly) — registration is Jordan-GO'd and queued; exact payload still to be captured live when we execute
 
 ## What it catalogs
 
@@ -32,5 +32,8 @@ Base — validates our multichain thesis.
 
 ## Our status
 
-- Queue #22 (register GenTech x402 services on Syra) — pending.
-- **Next:** after #22 ships, write the exact payload/registration fields here.
+- Queue #15 (register GenTech x402 services on Syra, orig #22) — **shipped** in the build queue (Jordan GO Aug 3, un-gated, workable overnight).
+- **State of the play:** the registration item is greenlit and marked shipped in the queue, but the *exact payload/registration fields* have not been captured live yet — we haven't completed the on-chain ERC-8004 identity registration step required to list on Syra.
+- **Blocker:** Syra is invite-gated. Need the invite code (Discord `discord.gg/aMSEG7yj` or @krexa_xyz open drops) or a Syra registration window before the on-chain identity step can run. Same invite path as Krexa (queue notes).
+- **Next:** (1) secure Syra invite, (2) register on-chain ERC-8004 identity, (3) create a skill with `payToAddress` set, (4) capture the exact payload/registration fields here as the Connector Pack chapter.
+- **Candidate service:** token_security or wallet_analysis (both x402-ready, gateway-served) as the first listed skill.
