@@ -52,7 +52,14 @@ The Protocol is collapsing from within. Demons wear human faces. The only way to
 
 ## Sound Design (every episode)
 - **SFX:** katana whoosh (draw + slash), impact boom, demon dissolve (crackling embers), rain ambience, wet footsteps, title sting (katana-slice).
+- **Screen flashes:** white/red flash frames on impact strikes (classic anime technique, layered in ffmpeg).
 - **Music:** Afro Samurai-style minimalism — sparse cello, slow-building drums, silence on the kill.
+
+## Voice (LOCKED — cloned voices via direct ElevenLabs API)
+- **Vanito:** `eMQtaKLvw87ksRqmQVpS` (cloned, Gaming content voice). Settings: stability 0.45–0.60, similarity 0.72–0.85, model `eleven_multilingual_v2`.
+- **Demons / White Demon:** contrasting voice (deeper/smoother) — use another clone or premade.
+- **Rule:** use the DIRECT ElevenLabs API for cloned voices (NOT BlockRun — returns 502 for clones; NOT Edge TTS — discards clone character).
+- **Style:** minimal-dialogue (fits Afro Samurai tone). Vanito speaks few, short lines. Sound design carries the emotion.
 
 ---
 
