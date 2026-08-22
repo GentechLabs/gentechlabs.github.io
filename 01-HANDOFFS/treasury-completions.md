@@ -60,3 +60,6 @@
 
 ## 2026-08-22 — payTo recovery investigation
 - #findings — `0xF9dc…734` has NO signing key (traced to Jul 24 Brain-Audit hardcoded payTo). CDP + all key files verified; none derives to it. Stranded unless seed phrase exists. Full findings: `treasury-to-gentech/2026-08-22-payto-recovery-findings.md`
+
+## 2026-08-22 — rail audit + keypairs + revenue monitor
+- #rail-audit — all 5 rails keyed (Base re-pointed, Solana keypair generated, Algorand confirmed keyed). Revenue Monitor picks up all. Key rule wired into agent-kit provisioner. Algorand settle test verified live (HTTP 200 paid:true).
