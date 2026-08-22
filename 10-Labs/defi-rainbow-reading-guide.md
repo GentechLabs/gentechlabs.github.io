@@ -77,4 +77,27 @@ bin density, NOT actual fee earnings. Always ask: is price at an edge?
 rainbow (buy/sell) and the yield rainbow (LP shape) respond to different signals and can
 point different directions. Read the right one for the job.
 
+## 🔀 Why trading ≠ yield farming: the arbitrage dimension (Jordan, Aug 22 2026)
+
+Trading is **bigger than price direction** — it includes **arbitrage**, which yield farming
+does not. "Not only are we going to be looking at the price, but we're going to be looking
+at it from **different rails** as well, that we'd be doing arbitrage between."
+
+- **Yield farming** = one lens: *are my LP bins in range and earning?* Same pool, same chain,
+  single price. No cross-rail dimension.
+- **Trading** = multiple lenses: the **price rainbow** (is it cheap/expensive?) PLUS the
+  **arbitrage lens** (does the SAME asset trade at different prices across venues?).
+
+The coin price rainbow is only part of the trading picture. The rest is **cross-rail basis**:
+| Rail A | Rail B | What divergence means |
+|--------|--------|------------------------|
+| Spot (Coinbase) | Perp (Hyperliquid) | **Contango** (perp>spot): short perp + long spot |
+| Spot | Perp | **Backwardation** (perp<spot): long perp + short spot |
+| DEX | CEX | Liquidity/price gaps → arb |
+
+That's what our **GTA Arb Monitor** (`gta-arb-monitor.py`) does — scans Hyperliquid perp vs
+Coinbase spot for basis > threshold. ONDO caught +10.6 bps contango before the news broke.
+The arb lens is a *separate* signal from the price rainbow; trading fuses them, yield farming
+doesn't. **That's why the two rainbows are different — and it's for the best.**
+
 *Not financial advice. Value-zone visualization only.*
