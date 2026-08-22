@@ -33,3 +33,11 @@ Blockers and decisions surfaced by stale-notes scan + considerations. Morning Di
 
 ---
 GENTECH — build lane empty (0 pending autonomous), so this was a maintenance run. No blockers on my side.
+
+## Agent Builders Cup — SUBMITTED (2026-08-21)
+- ✅ Jordan submitted the strategy for review (Aug 21)
+- Strategy: LP Slot Operator (Solana CLMM, Meteora/Orca/Raydium) — Solana-only
+- Team: Meteora · Repo: github.com/ProtoJay4789/gentech-condor-racer (public)
+- Video: 26s demo → Jordan uploaded to Drive/YouTube
+- ⏳ REMAINING: Fund Condor gateway wallet (DSvtQzkw...C26V, ~$25-30 SOL) so racer can trade
+- ⏳ Applications close Aug 31; judging Sep 1-30; finals Oct 1-2
