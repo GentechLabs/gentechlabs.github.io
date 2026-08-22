@@ -8,6 +8,11 @@ last-updated: 2026-08-22 00:07 ET
 
 > Decision points requiring Jordan's input. Updated from brain snapshot context.
 
+## 🆕 Aug 22 — Syra case study (study only, no paid calls) + OKX audit
+
+- **Syra x402 merchant — CASE STUDY (Jordan, Aug 22):** Syra (`@syra_agent`) is a pay-per-call crypto-intel merchant over x402 (USDC on Solana). Consult-first pattern: `syra_consult` (free) routes intent → returns paid tool → HTTP 402 quote → agent wallet settles. **Jordan: study it as a reference implementation, do NOT make paid calls now.** It's a working x402 merchant loop (consult-free → 402-quote → agent-wallet settle) — the blueprint for our own paid APIs. Also: ERC-8004 registration (`/8004/register-agent`) + AgentScore Passport identity-gating + multi-chain rails (Solana, Base, **OKX X Layer USDT0**). Skill: `api.syraa.fun/skill.md`. **Action:** pull `/x402/capabilities`, `/openapi.json`, ERC-8004 flow as case study → feeds `agent-marketplace-integration` + `x402-api-compliance`. No spend.
+- **OKX audit — 4 agents rejected, 3 root causes (Aug 22):** daemon healthy (ready:true, 4/4, CLI current). All 4 agents (#4905 Forge, #2849 DeFi, #2848 Curve, #2847 Treasury) have **empty `serviceList: []`** (→ A2MCP 404/405) + #2849 has **payment chain wrong (Base 8453 vs X Layer 196)**. **Fixes pending Jordan go:** (1) reorder `X402_NETWORKS` → xlayer first, (2) attach real A2MCP services to all 4 (live `/v1/` endpoints verified up), (3) re-list all 4, (4) verify "Listing under review". **Jordan: approve the 3 fixes + re-list?**
+
 ## 🆕 Aug 22 — Full treasury sweep + HyperEVM $21 deferred
 
 - **Full balance sweep DONE (Aug 22)** — Revenue Monitor now tracks all 5 known wallets × 9 chains × native + USDC (was income-only + USDC-only on 4 chains). True total ~**$56** across treasury/signer/arb/cdp/almanak. Blind spots closed: HyperEVM, Celo, BSC, native gas all now visible.
