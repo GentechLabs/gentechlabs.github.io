@@ -1,0 +1,60 @@
+version: "1"
+kind: subnet
+id: 0
+slug: gentech-token-security
+protocol: generic
+name: GenTech Token Security
+description: >
+  Token risk scoring and rugcheck analysis. Scans a token/contract address for
+  honeypots, low-liquidity rug pulls, homoglyph scams, and sketchy contracts.
+  Backed by GenTech's x402 gateway (api.gentechlabs.net) — 11 live paid services
+  across 7 chains, paid per-call in USDC. This miner wraps the token_security
+  service: a real, production, pay-per-call API.
+base_url: https://api.gentechlabs.net
+
+auth:
+  type: none
+
+endpoints:
+  - path: /v1/security/score/{address}
+    external_path: /v1/security/score/{address}
+    method: GET
+    description: >
+      Token risk scoring and rugcheck analysis for a given token/contract
+      address. Returns an 11-factor risk score with SAFU verdict, liquidity
+      check, homoglyph detection, and flagged-issue details.
+
+semantics:
+  signal_mapping:
+    type: token_risk
+    label_field: verdict
+    reason_field: notes
+    confidence_field: risk_score
+  supported_intents:
+    - token_risk_assessment
+    - rugcheck
+    - token_security_check
+    - smart_contract_risk
+
+on_chain:
+  description: Token risk assessment for on-chain signal data.
+  transform: direct
+  min_price_usdc: 0.01
+  fields:
+    integers:
+      - index: 0
+        name: risk_score_x100
+        description: Token risk score (0-100) times 100.
+        source_path: risk_score
+        multiplier: 100
+    strings:
+      - index: 0
+        name: verdict
+        description: SAFU verdict for the token (safe, risky, honeypot, etc).
+        source_path: verdict
+    bools:
+      - index: 0
+        name: is_honeypot
+        description: Whether the token is flagged as a honeypot.
+        source_path: is_honeypot
+        transform_rule: bool_from_eq:true

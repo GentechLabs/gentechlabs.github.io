@@ -55,8 +55,56 @@ def gateway_pid(profile):
 
 
 def restart_gateway(profile):
-    code, out = run(f"hermes gateway restart --profile {profile} 2>&1", timeout=60)
+    # Use the systemd unit when it exists (reliable, no duplicate spawn).
+    code, out = run(f"systemctl --user restart hermes-gateway-{profile}.service 2>&1", timeout=60)
+    if code != 0 or "Failed" in out or "not" in out:
+        # fall back to the CLI restart
+        code, out = run(f"hermes gateway restart --profile {profile} 2>&1", timeout=60)
     return code, out.strip()
+
+
+def current_profile():
+    """Determine which profile's gateway is running THIS script, by walking the
+    parent-process chain up to the hermes gateway process. Returns the profile
+    name, or None if we can't tell (e.g. run from a plain shell)."""
+    import os
+    pid = os.getppid()
+    for _ in range(12):
+        try:
+            with open(f"/proc/{pid}/cmdline", "rb") as f:
+                cmd = f.read().decode(errors="ignore").replace("\x00", " ").strip()
+            if "gateway run" in cmd:
+                for p in PROFILES:
+                    if f"--profile {p}" in cmd or f"profile {p}" in cmd or f"/{p}" in cmd:
+                        return p
+                # systemd unit name also encodes the profile
+                if "hermes-gateway" in cmd:
+                    for p in PROFILES:
+                        if p in cmd:
+                            return p
+                return None
+        except FileNotFoundError:
+            return None
+        # walk up
+        try:
+            with open(f"/proc/{pid}/stat") as f:
+                parts = f.read().split()
+                pid = int(parts[3])
+        except (FileNotFoundError, ValueError, IndexError):
+            return None
+    return None
+
+
+def restart_current_detached(profile):
+    """Restart the CURRENT profile's gateway in a detached session so it survives
+    the script being killed by its own gateway restart. Runs ~3s after exit."""
+    import subprocess
+    script = (
+        "sleep 3 && "
+        f"systemctl --user restart hermes-gateway-{profile}.service"
+    )
+    subprocess.Popen(["bash", "-c", script], start_new_session=True,
+                     stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
 
 def main():
@@ -77,6 +125,14 @@ def main():
         print(f"  {p}: {gateway_pid(p)}")
     print()
 
+    # Detect which profile is running this script (so we don't kill ourselves).
+    runner = current_profile()
+    if runner:
+        print(f"Running inside gateway for profile: {runner}")
+    else:
+        print("Not running inside a gateway (standalone shell) — restarting all.")
+    print()
+
     if check_only:
         print("CHECK MODE — no changes made.")
         return 0
@@ -91,19 +147,28 @@ def main():
         print()
 
     print("--- Restarting all profile gateways ---")
-    for p in PROFILES:
+    # Restart every profile EXCEPT the one running this script first.
+    others = [p for p in PROFILES if p != runner]
+    for p in others:
         code, out = restart_gateway(p)
         status = "✅" if code == 0 else "❌"
         print(f"  {status} {p}: {out[:200]}")
         time.sleep(2)  # stagger restarts
 
-    print()
-    print("--- Post-restart state ---")
-    for p in PROFILES:
-        print(f"  {p}: {gateway_pid(p)}")
+    # Restart the current profile LAST, detached, so the script survives.
+    if runner:
+        print(f"  ⏳ {runner} (current): queued for detached restart after script exits")
+        restart_current_detached(runner)
 
     print()
-    print("Fleet update complete. All gateways restarted on new code.")
+    print("--- Post-restart state (other profiles) ---")
+    for p in others:
+        print(f"  {p}: {gateway_pid(p)}")
+    if runner:
+        print(f"  {runner}: restarting now in a detached session — will be back on new code shortly")
+
+    print()
+    print("Fleet update complete. All gateways restarting on new code.")
     return 0
 
 
