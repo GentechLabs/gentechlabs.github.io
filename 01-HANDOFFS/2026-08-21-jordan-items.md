@@ -39,5 +39,5 @@ GENTECH — build lane empty (0 pending autonomous), so this was a maintenance r
 - Strategy: LP Slot Operator (Solana CLMM, Meteora/Orca/Raydium) — Solana-only
 - Team: Meteora · Repo: github.com/ProtoJay4789/gentech-condor-racer (public)
 - Video: 26s demo → Jordan uploaded to Drive/YouTube
-- ⏳ REMAINING: Fund Condor gateway wallet (DSvtQzkw...C26V, ~$25-30 SOL) so racer can trade
+- ✅ Capital: sponsor-funded by Botcamp (Jordan note) — no self-funding needed
 - ⏳ Applications close Aug 31; judging Sep 1-30; finals Oct 1-2
