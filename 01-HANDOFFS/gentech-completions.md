@@ -73,3 +73,8 @@
 - Infra health: gateway root 200, bazaar manifest 402 (expected paywall), hub-launcher 200, arcade 200.
 - **Fleshed-out idea → ready-to-spike**: `CopilotKit Channels SDK` (09-Green Room/ideas.md "Ready to Test") promoted from watch-item to a concrete 3-step x402 approval-gate spike (clone+Slack demo → map `approval_gate` to our gateway 402 challenge → 1-page Telegram-vs-Slack/Teams recommendation for Jordan). Sandbox-only, no funds. This extends our multi-channel x402 pattern beyond Telegram.
 - Vault synced (ob sync clean) + pushed 1f67ba2b (rebased over remote divergence).
+
+## 2026-08-22 Nightly Build
+
+- **#63 — Somnia x DreamDEX Event Contracts Hackathon — AI Trading Agent**: PROTOTYPE VERIFIED LIVE on Somnia testnet. `ec-oracle-follow` strategy connects to the DreamDEX venue (VENUE_ID set), scans 8 tradable binary markets, measures realized vol from the on-chain EMA oracle feed, and makes edge-gated DRY takes (BUY_YES + BUY_NO) with all risk limits firing (max shares, model-disagreement muzzle at 0.354 gap, opposing-leg sit-out). Evidence: `10-Labs/somnia-dreamdex-ec-agent/verification-testnet-dryrun-2026-08-22.log`. Handoff: `01-HANDOFFS/gentech-to-labs/2026-08-22-somnia-dreamdex-ec-prototype.md`. Queue #63 marked shipped 2026-08-22. REMAINING for submission (deadline Sep 8): funded testnet key for real fills, GitHub repo, demo video, feedback report.
+- Applied group returns: #61 (labs + forge both reported) marked shipped 2026-08-22. All other returned IDs (labs #29/52/62/19/2/30/1/6/48/49, entertainment #50/9/14/8/73/71/38/17/60/16/22/23/20/34/35/36/53/5/10/15/7/13/18/11, treasury #51/8, forge #59/66/65/50) already shipped in prior sessions; per-lane IDs (not in global queue) skipped. Nothing new to apply beyond #61.
