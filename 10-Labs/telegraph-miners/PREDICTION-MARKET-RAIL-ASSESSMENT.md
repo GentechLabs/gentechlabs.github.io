@@ -9,14 +9,14 @@
 3. **Trade decision** — `trade-decision.service.ts`: LLM (Groq via Telegraph subnet 102) decides buy_yes/buy_no/wait, with a likelihood-based safety gate (won't force a trade below 50%).
 4. **Execution** — `polymarket.service.ts`: fetches active markets from `gamma-api.polymarket.com`, prices, liquidity. Pays Telegraph inference via x402 (Polygon USDC).
 
-## Fit for Agentic Treasury (GTA)
+## Fit for Agentic Treasury (The Steward)
 This is **exactly** the prediction-market rail the brain has been building toward:
-- **Delphi Arena** ($10K, ends Aug 24) — same thesis, different venue (Gensyn Delphi info markets). Agent scaffold at `/root/delphi-arena/trade.js`.
+- **The Steward (Agentic Treasury)** — the current name for the autonomous treasury agent (GTA was the earlier working name). Core vision: deposit USDC, self-manages — earn, bridge, yield, pay.
+- **Delphi Arena** ($10K, ends Aug 24) — same thesis, different venue (Gensyn Delphi info markets). Agent scaffold at `/root/delphi-arena/trade.js`. **SKIPPED 2026-08-22** (didn't go through with it).
 - **#63 Somnia × DreamDEX** — prediction markets + AI trading agents (our prototype shipped last night).
-- **Agentic Treasury (GTA)** core vision — autonomous agent treasury that trades.
 - **Agent-Sentiment index** — prediction-market flow as a signal proxy.
 
-The Telegraph signal → match → decide → trade loop is a reusable pattern: **consume Telegraph intelligence, route to a prediction-market rail, execute autonomously.** That's the machine-money loop.
+The Telegraph signal → match → decide → trade loop is a reusable pattern: **consume Telegraph intelligence, route to a prediction-market rail, execute autonomously.** That's the machine-money loop. This becomes **The Steward's Polymarket rail**.
 
 ## Strategic recommendation
 - **Miner track (#49):** ship the Token Security miner YAML (done) + 1 more. Cheap, config-only, 75% of score is normalized performance. Post on X (25%).
