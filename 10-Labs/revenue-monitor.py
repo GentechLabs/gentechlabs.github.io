@@ -666,31 +666,21 @@ def format_report(result):
     lines.append(f"  BNB: {b.get('bnb', 0):.4f}")
     lines.append("")
 
-    # ── Revenue ──
-    lines.append("💵 x402 Revenue")
-    lines.append(f"  Total earned: ${result['total_revenue']:.4f} USDC")
-    lines.append(f"  Transactions tracked: {result['total_transactions']}")
-    if result["revenue_by_service"]:
-        lines.append("")
-        lines.append("  By source:")
-        for svc, info in result["revenue_by_service"].items():
-            lines.append(f"    • {svc}: ${info['total_usdc']:.4f} ({info['tx_count']} txs)")
-    else:
-        lines.append("  No sources yet")
-
+    # ── Revenue (CURRENT only — no stale lifetime totals, per Jordan) ──
+    # Report what changed since the last scan + current balances. Drop the
+    # cumulative "Total earned / transactions tracked" lifetime numbers that
+    # re-surface old revenue every run.
+    lines.append("💵 x402 Revenue (this scan)")
     if result["new_payments"]:
-        lines.append("")
-        lines.append("  ⚡ New transfer(s) detected!")
+        lines.append(f"  ⚡ {len(result['new_payments'])} new payment(s) this scan:")
         for tx in result["new_payments"]:
             tag = "✅ x402" if tx["service"] != "unknown" else "ℹ️ unknown"
             lines.append(f"    +${tx['amount_usdc']:.4f} from {tx['sender'][:10]}... ({tx['chain']}) [{tag}]")
-
-    if not result["new_payments"] and result["total_revenue"] == 0:
-        lines.append("")
-        lines.append("  ⏳ No payments yet — infrastructure ready, awaiting first x402 transaction")
-    elif not result["new_payments"] and result["total_revenue"] > 0:
-        lines.append("")
-        lines.append("  📋 No new transfers since last scan")
+    else:
+        lines.append("  ⏳ No new payments since last scan")
+    # Current spendable balances (live, not cumulative)
+    if result.get("sol_usdc_balance"):
+        lines.append(f"  SOL USDC now: {result['sol_usdc_balance']:.2f}")
 
     # ── Balance Sources ──
     lines.append("")
