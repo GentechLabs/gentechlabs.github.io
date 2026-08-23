@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agentic Treasury — $10 Starter Loop</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:#020617; color:#e2e8f0; font-family:'JetBrains Mono',monospace; min-height:100vh; padding:40px 20px; }
+  .wrap { max-width:1100px; margin:0 auto; }
+  .header { text-align:center; margin-bottom:28px; }
+  .header .dot { display:inline-block; width:10px; height:10px; border-radius:50%; background:#22d3ee; margin-right:8px; animation:pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.3} }
+  .header h1 { font-size:22px; font-weight:700; letter-spacing:.5px; color:#f8fafc; }
+  .header .sub { font-size:12px; color:#94a3b8; margin-top:8px; }
+  .card { background:#0f172a; border:1px solid #1e293b; border-radius:14px; overflow:hidden; }
+  .stage-tabs { display:flex; gap:6px; padding:16px 20px; border-bottom:1px solid #1e293b; background:#0b1120; flex-wrap:wrap; }
+  .stage-tab { font-size:10px; padding:6px 12px; border-radius:999px; background:#0f172a; border:1px solid #334155; color:#cbd5e1; }
+  .stage-tab.active { background:#164e63; border-color:#22d3ee; color:#a5f3fc; }
+  .flow { display:flex; flex-direction:column; gap:0; padding:8px 0; }
+  .row { display:flex; align-items:stretch; padding:14px 20px; position:relative; }
+  .row + .row { border-top:1px dashed #1e293b; }
+  .node { flex:1; display:flex; align-items:flex-start; gap:14px; }
+  .icon { width:44px; height:44px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:20px; flex-shrink:0; border:1.5px solid; }
+  .node-front .icon { background:rgba(8,51,68,.4); border-color:#22d3ee; }
+  .node-back .icon { background:rgba(6,78,59,.4); border-color:#34d399; }
+  .node-db .icon { background:rgba(76,29,149,.4); border-color:#a78bfa; }
+  .node-sec .icon { background:rgba(136,19,55,.4); border-color:#fb7185; }
+  .node-ext .icon { background:rgba(30,41,59,.5); border-color:#94a3b8; }
+  .node-sys .icon { background:rgba(120,53,15,.3); border-color:#fbbf24; }
+  .txt { padding-top:2px; }
+  .txt .t { font-size:13px; font-weight:700; color:#f1f5f9; }
+  .txt .s { font-size:10px; color:#94a3b8; margin-top:4px; line-height:1.5; }
+  .txt .tag { display:inline-block; font-size:9px; padding:2px 8px; border-radius:999px; margin-top:6px; background:#164e63; color:#a5f3fc; }
+  .tag.red { background:#4c0519; color:#fda4af; }
+  .tag.green { background:#052e16; color:#86efac; }
+  .tag.amber { background:#451a03; color:#fcd34d; }
+  .tag.violet { background:#2e1065; color:#c4b5fd; }
+  .arrow-badge { width:34px; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:16px; color:#334155; }
+  .arrow-badge.down { color:#22d3ee; }
+  .warn { background:#0b1120; border:1px solid #fb7185; border-left:4px solid #fb7185; border-radius:10px; padding:14px 20px; margin:18px 20px; }
+  .warn h3 { font-size:12px; color:#fda4af; margin-bottom:6px; }
+  .warn p { font-size:11px; color:#e2e8f0; line-height:1.6; }
+  .loop-note { background:#0b1120; border:1px solid #34d399; border-left:4px solid #34d399; border-radius:10px; padding:14px 20px; margin:18px 20px; }
+  .loop-note h3 { font-size:12px; color:#86efac; margin-bottom:6px; }
+  .loop-note p { font-size:11px; color:#e2e8f0; line-height:1.6; }
+  .summary { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:20px; }
+  .card { padding:0; }
+  .card-in { padding:16px 18px; }
+  .card-in h3 { font-size:11px; color:#22d3ee; margin-bottom:10px; letter-spacing:.5px; }
+  .card-in ul { list-style:none; }
+  .card-in li { font-size:10px; color:#cbd5e1; padding:5px 0; border-bottom:1px solid #1e293b; display:flex; align-items:center; gap:8px; }
+  .card-in li:last-child { border-bottom:none; }
+  .card-in li::before { content:"•"; color:#22d3ee; }
+  .footer { text-align:center; font-size:10px; color:#475569; margin-top:22px; }
+  @media (max-width:700px){ .summary{grid-template-columns:1fr;} .row{flex-direction:column;} .arrow-badge{transform:rotate(90deg); padding:4px 0;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="header">
+    <h1><span class="dot"></span>AGENTIC TREASURY — $10 STARTER LOOP</h1>
+    <div class="sub">Deploy $10 · The kit watches its own capital · Rebalances only when it pays</div>
+  </div>
+
+  <div class="card">
+    <div class="stage-tabs">
+      <span class="stage-tab active">SETUP</span>
+      <span class="stage-tab">PROVISION</span>
+      <span class="stage-tab">DEPLOY</span>
+      <span class="stage-tab">AUTO-TRACK</span>
+      <span class="stage-tab">DECIDE</span>
+      <span class="stage-tab">REPORT</span>
+    </div>
+
+    <div class="flow">
+      <!-- Step 1 -->
+      <div class="row">
+        <div class="node node-sec">
+          <div class="step"><div class="icon">🔑</div><div class="txt">
+            <div class="t">1 · Create wallet + store its key</div>
+            <div class="s">Generate the keypair, save it (chmod 600), and recover it from the file BEFORE sending a cent.</div>
+            <span class="tag red">RULES OF THE GAME</span>
+          </div></div>
+        </div>
+        <div class="arrow-badge down">↓</div>
+        <div class="node node-ext">
+          <div class="step"><div class="icon">💵</div><div class="txt">
+            <div class="t">2 · Fund ~$10 USDC</div>
+            <div class="s">Small and disposable. This is your test rocket — proof the loop works before real money.</div>
+            <span class="tag amber">$10 TEST</span>
+          </div></div>
+        </div>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="row">
+        <div class="node node-db">
+          <div class="step"><div class="icon">⚙️</div><div class="txt">
+            <div class="t">3 · treasury_config.json</div>
+            <div class="s">Wallet + chains + optional pools. ONE file = the source of truth. All crons read from it — nothing gets mixed up.</div>
+            <span class="tag violet">SINGLE SOURCE OF TRUTH</span>
+          </div></div>
+        </div>
+        <div class="arrow-badge down">↓</div>
+        <div class="node node-back">
+          <div class="step"><div class="icon">🚀</div><div class="txt">
+            <div class="t">4 · provision.sh --dry-run</div>
+            <div class="s">Validates the config + probes each chain and SHOWS the plan before any cron registers. Go live only when clean.</div>
+            <span class="tag green">SAFE BY DEFAULT</span>
+          </div></div>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="row">
+        <div class="node node-sys">
+          <div class="step"><div class="icon">📡</div><div class="txt">
+            <div class="t">5 · discover_positions.py</div>
+            <div class="s">Reads LIVE on-chain data via public RPC + price feeds. Auto-finds your deployed LP. No "go tell it about my pool."</div>
+            <span class="tag amber">ZERO MANUAL WIRING</span>
+          </div></div>
+        </div>
+        <div class="arrow-badge down">↓</div>
+        <div class="node node-front">
+          <div class="step"><div class="icon">🛡️</div><div class="txt">
+            <div class="t">6 · steward_rebalance.py</div>
+            <div class="s">The decision loop: OUT-of-range + regime-appropriate = rebalance. IN-range = hold. 10-min frequency guard.</div>
+            <span class="tag green">AUTONOMOUS</span>
+          </div></div>
+        </div>
+      </div>
+
+      <div class="loop-note">
+        <h3>↻ THE TRUST LOOP</h3>
+        <p>Deploy → kit auto-discovers → reports honestly → rebalances only when gas-justified. You prove the whole loop at <strong>$10</strong> before any real capital. The kit is chain-agnostic (LFJ, Meteora, Base, Ethereum — same pattern), so one config tracks everything.</p>
+      </div>
+
+      <div class="warn">
+        <h3>⚠️ THE RULE WE WON'T BREAK AGAIN</h3>
+        <p><strong>Every wallet you create must store its own private key</strong> — or point only to a wallet you control. A funded wallet with no key is a failure, not an oversight. We stranding $33.63 on a keyless wallet once. The provisioner now flags it, structurally, on every run. The guardrail is in the code, not in a reminder.</p>
+      </div>
+  </div>
+
+  <div class="summary">
+    <div class="card">
+      <div class="card-in">
+        <h3>NO WALLET MIXING</h3>
+        <ul>
+          <li>One wallet per treasury, always keyed</li>
+          <li>Per-chain isolation — probed separately</li>
+          <li>Per-pool isolation — errors never block</li>
+          <li>Single config = source of truth</li>
+        </ul>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-in">
+        <h3>THE $10 GOAL</h3>
+        <ul>
+          <li>Watch auto-discovery work live</li>
+          <li>See honest reporting, no over-claiming</li>
+          <li>Learn when it holds vs rebalances</li>
+          <li>Understand the trust loop before scale</li>
+        </ul>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-in">
+        <h3>STACK</h3>
+        <ul>
+          <li>Wallet + stored key (non-negotiable)</li>
+          <li>treasury_config.json</li>
+          <li>discover_positions.py</li>
+          <li>steward_rebalance.py + provision.sh</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">Agentic Treasury — Starter Guide for Kazo · Gentech Treasury</div>
+</div>
+</body>
+</html>
