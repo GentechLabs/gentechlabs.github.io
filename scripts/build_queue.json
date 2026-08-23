@@ -436,7 +436,8 @@
       "build_in": "labs",
       "handoff_on_complete": true
     },
-    "needs_jordan": false
+    "needs_jordan": false,
+    "shipped_date": "2026-08-15"
   },
   {
     "id": 21,
@@ -457,7 +458,8 @@
       "handoff_on_complete": true
     },
     "shipped_date": "2026-08-04",
-    "needs_jordan": true
+    "needs_jordan": true,
+    "blocked_on": "Awaiting Jordan: Algorand wallet address to set X402_PAYTO_ALGORAND (ALGO rail goes live, zero code change)"
   },
   {
     "id": 22,
@@ -631,7 +633,8 @@
       "build_in": "labs",
       "handoff_on_complete": true
     },
-    "needs_jordan": false
+    "needs_jordan": false,
+    "shipped_date": "2026-08-06"
   },
   {
     "id": 30,
@@ -651,7 +654,8 @@
       "build_in": "labs",
       "handoff_on_complete": true
     },
-    "needs_jordan": false
+    "needs_jordan": false,
+    "shipped_date": "2026-08-06"
   },
   {
     "id": 31,
@@ -769,7 +773,8 @@
     "detail": "Audit (Aug 3) found 3 live APIs return HARDCODED placeholder data nobody would pay for. crypto-price-api (/v1/price/{symbol}) returns price:0.0 placeholder; gas-price-api (/v1/gas) returns all-zero gas_prices placeholder; token-security-api (/v1/score/{mint}) returns score:0 level:unknown placeholder. Wire real data: crypto-price -> crypto-price-fetch skill / CoinGecko fallback; gas-price -> Etherscan/OracleGAS or live RPC gas; token-security -> reuse Rugcheck engine (already real, port 8088). Also note agent-search-api (/root/agent-search-api/main.py) has real /search endpoints but NOT currently served on 8091 (that port runs x402-backend@agent_discovery instead) \u2014 verify its systemd service exists. Deal-tracker-api v1/deals was ALSO a stub returning [] \u2014 NOW FIXED (Aug 3) with real CheapShark engine + price-watch/release-radar/preorder-advisor endpoints (6 tests passing). **SHIPPED (Aug 3):** all 3 placeholder APIs fixed and live. crypto-price (CMC->CoinGecko), gas-price (live RPC+Polygon), token-security (proxies Rugcheck). Added api-audit.py to kit + academy Module 5. Deal-tracker fixed earlier same day. Agent-search-api still orphaned (port conflict) - flagged for Jordan.",
     "_orig_id": 34,
     "note": "[Returned by entertainment 2026-08-18]",
-    "needs_jordan": false
+    "needs_jordan": false,
+    "shipped_date": "2026-08-03"
   },
   {
     "id": 37,
@@ -1006,7 +1011,8 @@
     },
     "shipped_by": "labs",
     "shipped_date": "2026-08-13",
-    "needs_jordan": false
+    "needs_jordan": false,
+    "blocked_on": "Awaiting Jordan/onchain: register miner on-chain (needs wallet+gas) + post progress on X tagged @Telegraphprotoc (25% score)"
   },
   {
     "id": 49,
@@ -1107,7 +1113,8 @@
       "handoff_on_complete": true
     },
     "_orig_id": 55,
-    "needs_jordan": false
+    "needs_jordan": false,
+    "shipped_date": "2026-08-12"
   },
   {
     "id": 54,
@@ -1211,7 +1218,8 @@
     },
     "blocked_on": "Jordan registration + wallet/funds for gas",
     "blocked_since": "2026-08-21",
-    "needs_jordan": false
+    "needs_jordan": false,
+    "shipped_date": "2026-08-22"
   },
   {
     "id": 62,
@@ -1252,7 +1260,8 @@
       "handoff_on_complete": true
     },
     "deadline": "2026-09-08",
-    "needs_jordan": false
+    "needs_jordan": false,
+    "shipped_date": "2026-08-22"
   },
   {
     "id": 64,

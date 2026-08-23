@@ -24,3 +24,4 @@
 - BlendCap mocap scout → Forge handoff (labs-to-forge/2026-08-21-blendcap-mocap.md). Local video mocap for Blender, vault-backed scope. Forge go/no-go.
 - Anti-slop skills review — already run strongest (humanizer @blader port). No new installs.
 - #49 Telegraph Miner — first miner YAML (gentech-token-security) written at 10-Labs/telegraph-miners/. Cloned+studied telegraph-usecases repo; Polymarket bot (supersignal) assessed as prediction-market rail for Agentic Treasury. Register on-chain + X posts remain.
+- 3D Generation Toolkit scout → Forge (labs-to-forge/2026-08-22-3d-generation-toolkit.md). Runnable alternatives to paper-only WorldClaw: Hunyuan3D-2 (runnable code), TRELLIS, TripoSR, territory (agent voxel engine), threejson (MIT web-native). Jordan green light.
