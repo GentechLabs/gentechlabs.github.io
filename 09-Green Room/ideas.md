@@ -449,6 +449,14 @@ A user sets a freedom target ("$50K"), and the treasury translates it into a **r
 - [x] Academy Module 4 — Production-Grade x402 Services
 - [x] Build Queue visibility page + generator script
 - [ ] **Auto-pause watchdog on empty wallet**: when funds are withdrawn and there's no LP to track, auto-pause/remove the Position Watchdog cron (no more "no bins" spam). When a deposit is detected, auto-resume + auto-detect the position shape and what to do. (Jordan, Aug 11 2026)
+  - **FLESHED OUT 2026-08-23 (Nightly Build):** Concrete, cheap, high-value maintenance item — directly kills recurring "no bins" cron spam.
+  - **The problem:** Position Watchdog cron fires on an empty/flat wallet → logs "no bins" every run → noise in the treasury report + wasted cron cycles.
+  - **The fix (mostly wiring, not greenfield):**
+    1. **Detect empty:** at cron start, read wallet balance + LP position state. If balance ≈ 0 AND no open position → set a `watchdog_paused` flag (persisted, e.g. `Treasury/watchdog-state.json`).
+    2. **Auto-pause:** when flag set, cron exits early with a single "⏸ paused — wallet empty, no LP to track" line (no per-bin spam). Optionally disable the cron schedule entry.
+    3. **Auto-resume:** on each run, if flag set but a deposit is detected (balance > threshold OR a position appears), clear the flag, re-detect the position shape (bins, range, pool), and resume normal reporting.
+  - **Where it lives:** the Position Watchdog cron (treasury lane) — same pattern as the existing `steward_rebalance.py` auto-deploy leg (funded-wallet-no-position → auto-deploy). Reuse that detection logic.
+  - **Gate:** sandbox/read-only first — no funds moved. Timebox 1 session. No Jordan decision needed (pure noise-reduction maintenance).
 
 ## 🆕 AVAX Rails Map — Accumulate AVAX spot + COQ spot (Aug 21)
 **Source:** Jordan (Treasury group) | **Status:** Tracked, no deploy yet (wallet flat after wind-down)
