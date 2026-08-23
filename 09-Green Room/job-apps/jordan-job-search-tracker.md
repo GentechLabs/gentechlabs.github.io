@@ -7,9 +7,29 @@ Asia-only restrictions.
 **Location correction:** Jordan is based in **Cincinnati, Ohio (USA)** — NOT Cebu.
 (Cebu is a vacation destination.) LI.FI (EMEA/APAC required) is therefore OUT.
 
+## Remote job boards — reference source list (Aug 22, 2026)
+
+Manual-browsing sources for Jordan + inputs for the AI job search project:
+1. **Wellfound (AngelList Talent)** — `wellfound.com` / `angel.co` — ⚠️ CAPTCHA-blocked in our automated scanner, but fine for manual browsing
+2. **We Work Remotely** — `weworkremotely.com` — good volume, mostly senior
+3. **Himalayas** — `himalayas.app` — ⚠️ Cloudflare-blocked in automation, fine manually
+4. **Remotive** — `remotive.com` — ✅ usable in our tooling; source of the 150-remote-companies sheet
+5. **Job Board Search** — `jobboardsearch.com` — aggregator meta-search across boards
+
+Plus existing scanner sources: web3.career (JSON-LD, ✅), crypto.jobs (curl), cryptocurrencyjobs.co.
+
 ## Active targets
 
-### 1. QuickNode — Technical Support Engineer ✅ FRESH (posted today, verified live)
+### 1. Apex Trade — Entry-Level Crypto Market Specialist ✅ SUBMITTED (Aug 22, 2026)
+- **Link:** https://apexcgroup.co/work/web3career?source=web3.career
+- **Location:** Worldwide remote
+- **Role:** Crypto market analyst/ops — monitor price, liquidity, market signals, structured reporting. Entry-level, full training provided, mentor-led.
+- **Income:** $60K–$80K/yr (per web3.career JSON-LD)
+- **Why applied:** Real salary, worldwide remote, fresh (posted Aug 21), entry-level + training. GenTech edge: live agentic treasury = proof not a beginner. "Plug the Agentic Treasury" angle.
+- **Status:** SUBMITTED Aug 22, 2026 via Apex direct form. Follow-up cadence 7-day. Track in 04-Entertainment/Applications/apex-trade-crypto-market-specialist-tracker.md when created.
+- **Guardrail:** Direct-form on their domain, asks contact + trading experience. Never share keys/seed/wallet access in any application.
+
+### 2. QuickNode — Technical Support Engineer ✅ FRESH (posted today, verified live)
 - **Link:** cryptocurrencyjobs.co/engineering/quicknode-technical-support-engineer/
   · Direct: simplify.jobs/p/1c55bc66-7180-473a-871d-a2b98210eb97
 - **Location:** **Remote in USA** + Canada + Hallandale Beach FL. Jordan (Cincinnati) qualifies ✅
