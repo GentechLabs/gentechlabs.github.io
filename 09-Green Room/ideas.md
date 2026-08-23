@@ -448,7 +448,7 @@ A user sets a freedom target ("$50K"), and the treasury translates it into a **r
 - [x] Revenue Monitor — bug fixed (KNOWN_SERVICES→KNOWN_SENDERS rename)
 - [x] Academy Module 4 — Production-Grade x402 Services
 - [x] Build Queue visibility page + generator script
-- [ ] **Auto-pause watchdog on empty wallet**: when funds are withdrawn and there's no LP to track, auto-pause/remove the Position Watchdog cron (no more "no bins" spam). When a deposit is detected, auto-resume + auto-detect the position shape and what to do. (Jordan, Aug 11 2026)
+- [x] **Auto-pause watchdog on empty wallet**: when funds are withdrawn and there's no LP to track, auto-pause/remove the Position Watchdog cron (no more "no bins" spam). When a deposit is detected, auto-resume + auto-detect the position shape and what to do. (Jordan, Aug 11 2026)
   - **FLESHED OUT 2026-08-23 (Nightly Build):** Concrete, cheap, high-value maintenance item — directly kills recurring "no bins" cron spam.
   - **The problem:** Position Watchdog cron fires on an empty/flat wallet → logs "no bins" every run → noise in the treasury report + wasted cron cycles.
   - **The fix (mostly wiring, not greenfield):**
@@ -457,6 +457,7 @@ A user sets a freedom target ("$50K"), and the treasury translates it into a **r
     3. **Auto-resume:** on each run, if flag set but a deposit is detected (balance > threshold OR a position appears), clear the flag, re-detect the position shape (bins, range, pool), and resume normal reporting.
   - **Where it lives:** the Position Watchdog cron (treasury lane) — same pattern as the existing `steward_rebalance.py` auto-deploy leg (funded-wallet-no-position → auto-deploy). Reuse that detection logic.
   - **Gate:** sandbox/read-only first — no funds moved. Timebox 1 session. No Jordan decision needed (pure noise-reduction maintenance).
+  - **✅ RESOLVED 2026-08-23 (Nightly Build audit):** the "no bins" spam source is **already gone**. The standalone LP Monitor cron was paused Aug 20 (consolidated into the Agentic Treasury fused report), and the legacy steward watchdog/heartbeat/deposit crons (`51bc9900e24d`, `bc885594238f`, `73cdf5227ca4`) are **no longer present in `cron/jobs.json`**. The surviving `steward_rebalance.py --watchdog` path is already silent on empty wallets (emits only on `rebalance`/`deploy` actions; otherwise no output). No further build needed — marked resolved, not a live task.
 
 ## 🆕 AVAX Rails Map — Accumulate AVAX spot + COQ spot (Aug 21)
 **Source:** Jordan (Treasury group) | **Status:** Tracked, no deploy yet (wallet flat after wind-down)
