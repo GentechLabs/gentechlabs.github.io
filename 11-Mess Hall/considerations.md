@@ -1,7 +1,7 @@
 ---
 date: 2026-08-21
 status: active
-last-updated: 2026-08-22 00:07 ET
+last-updated: 2026-08-23 00:06 ET
 ---
 
 # 🧠 Considerations — Open Decisions
@@ -48,7 +48,7 @@ last-updated: 2026-08-22 00:07 ET
 - [ ] ✅ **Build with DataHub** — **DEADLINE PASSED Aug 10.** Needs submission confirm. If not submitted, mark closed.
 - [ ] ✅ **Arc Programmable Money Hackathon** — **DEADLINE PASSED Aug 9.** SHIPPED + verified (ArcAgentWallet.sol, 57/57 tests). Moved to Recently Resolved.
 - [ ] 🔴 **Superteam USA — Remote Community Membership** — Applied. **Jordan confirmed Aug 12: applied for second triage, now waiting on their decision.** (Superteam Earn agent `gentech-labs-x402` registered Jul 23; us.superteam.fun/join remote membership.) Status: PENDING second triage.
-- [ ] 🟡 **Solana Foundation USA Grant** — Applied Aug 5 (~$8.2k avg/up to $10k USDG). **Aug 20 check: site still shows application, no approval/rejection email, no status change** — likely large applicant pool. STILL PENDING. Do not reallocate treasury around unconfirmed grant. **Re-check ~Aug 22.** Tracked: Treasury/2026-08-05-solana-foundation-usa-grant.md
+- [ ] 🟡 **Solana Foundation USA Grant** — Applied Aug 5 (~$8.2k avg/up to $10k USDG). **Aug 20 check: status still shows application, no approval/rejection email, no status change** — likely large applicant pool. STILL PENDING. Do not reallocate treasury around unconfirmed grant. **Re-check ~Aug 26** (next check window). Tracked: Treasury/2026-08-05-solana-foundation-usa-grant.md
 - [x] 🚨 **Mastercard Innovation Challenge** — **✅ REGISTERED Aug 18** (luma.com/kyz978xv, free) + build kicked off (13/13 tests, live fraud stack). Submit Aug 31. Credential > prize framing (W33 review, Aug 16). `10-Labs/mastercard-challenge/` scaffolded (red_team 7 attack types + blue_team governance + live fraud stack `live_stack.py`; ERC-8004 identity + credit 76.7/HIGH surfaced). Labs: extend realism, session-aware eval, polish UI, demo video by Aug 31.
 - [ ] 🚨 **Algorand First-Mover Play (Aug 6)** — **✅ COMPOSITE ENTRY SHIPPED (Aug 7).** **Jordan: (1) provide Algorand wallet address so X402_PAYTO_ALGORAND goes live, (2) confirm late-leaderboard eligibility or mark dead.**
 - [ ] 🚨 **Algorand Global x402 Challenge #82** — **⚠️ DEADLINE PASSED Jul 31.** $100K + 500K ALGO. **Jordan: confirm if registered / late-leaderboard eligible, or mark dead.**
