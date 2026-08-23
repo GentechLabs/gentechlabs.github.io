@@ -36,4 +36,17 @@
 - **Vault remote divergence** (gentech-vault.git) — needs reconciliation decision; not force-pushed.
 - **Fleet gateway restarts** — need a separate shell (not inside a gateway) to run `fleet_update.py` for all 4 to load new code.
 
+---
+
+## 09:00 Update (second Nightly Build run)
+
+**Maintenance mode again** (gate count 0). This run:
+
+1. **Group returns re-verified** — all returned shipped IDs already applied in prior sessions (semantically identical to HEAD). IDs 74/73/71/60 are per-lane, not in global queue. Treasury #21 (Algorand) correctly `in_progress` + Jordan-gated. **Nothing new to apply.**
+2. **Resolved a stale idea** — the "Auto-pause watchdog on empty wallet" idea (Jordan Aug 11) was **already resolved by prior work**: the standalone LP Monitor cron was paused Aug 20, and the legacy steward watchdog/heartbeat/deposit crons (`51bc9900e24d`, `bc885594238f`, `73cdf5227ca4`) are **no longer in `cron/jobs.json`**. The surviving `steward_rebalance.py --watchdog` path is already silent on empty wallets. Marked `[x]` resolved in `09-Green Room/ideas.md` with the audit trail.
+3. **ob sync** — "Fully synced" (large media files >5MB skipped as expected).
+4. **Infra health re-verified** — gateway `/health` OK (6 networks, 16 paid endpoints, multichain, bazaar_indexed), x402-list **ONLINE / 100% uptime / 6 endpoints**, arcade 200, steward-dashboard 200. Treasury `/` 403 is just directory-listing disabled (the app serves fine).
+
+**No new Jordan decisions surfaced this run** — the stale/urgent list from the 04:00 run above still stands.
+
 — Gentech
