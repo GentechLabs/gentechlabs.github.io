@@ -1,6 +1,8 @@
 # 👑 Jordan Action Items — 2026-08-22
 
-## Needs Your Decision (2 items)
+## Needs Your Decision (4 items)
 
 - **#4 Paymenter x402 Gateway — Submit to Marketplace + Discord** — Submit paymenter-x402 extension to Paymenter marketplace (paymenter.org/marketplace). Post in Paymenter Discord community (1.9k members). Repo live at github.com/ProtoJay4789/paymenter-x402. Marketplace listing and Discord post drafted in vault.
 - **#12 Model Strength Score — score trained models 0-850 for marketplace** — Score AI models 0-850 like Agent Credit Score: Data Quality 30%, Benchmarks 25%, Trainer Reputation 20%, Age/Uptime 15%, Market Adoption 10%. Bittensor lessons baked in: staked reputation, on-chain provenance, no kill switch. First listing = GenTech DeFi Model (Modal GPU ~$30-60). Revenue: score API $0.01-0.05, listing fee, 2-5% inference take. Spec: 09-Green Room/specs/model-strength-score.md. Needs Jordan greenlight + Modal GPU funding.
+- **#64 Agents for Humans Hackathon (Amazon) — $40K build** — REGISTERED Aug 22. Build a Strands Agents SDK agent that handles repetitive tasks. Track: Professional Agents (Treasury Agent — DeFi portfolio busywork, x402 integration). Deadline Sep 14 5pm PDT. Build research handed to Gizmo (Labs). Jordan: review Gizmo's build scope + approve direction. Request $50 AWS credits (Resources tab).
+- **#65 Circle Agent Marketplace — list bankr x402 services** — Curated x402 catalog (83 services/1018 endpoints), USDC per-call, no signup for buyers. We already have bankr returning 402 correctly. Needed: (1) OpenAPI spec for our services, (2) clean EVM payout wallet (sanctions-screened), (3) submit intake form forms.gle/7YFzvdmMcn1JH5tF6. Low effort, reuses bankr, new agent-discovery surface. Jordan: approve using a clean EVM wallet for payouts + give go on listing.

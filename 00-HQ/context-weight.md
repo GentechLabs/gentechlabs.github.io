@@ -1,6 +1,6 @@
 # 🧠 Context Weight — GenTech Labs
 
-> Auto-generated: 2026-08-22 00:06 ET · Loads on session start so every group has context.
+> Auto-generated: 2026-08-23 00:06 ET · Loads on session start so every group has context.
 > Source: build_queue.json + vault state
 
 ---
@@ -8,9 +8,11 @@
 ## 📊 Active Projects
 - [HIGH] Paymenter x402 Gateway — Submit to Marketplace + Discord — pending
 - [HIGH] Model Strength Score — score trained models 0-850 for marketplace — pending
+- [HIGH] Algorand Global x402 Challenge — Composite Entry ($100K + 500K ALGO) — in_progress
+- [HIGH] Telegraph Season I Hackathon — x402 Miner Track ($15K) — in_progress
 
 ## 🏗️ Build Queue
-58 total · 2 pending · 0 blocked
+62 total · 3 pending · 0 blocked
 
 ## 🚨 Blockers
 None
@@ -33,7 +35,7 @@ See 11-Mess Hall/considerations.md
 - **Forge** — Desktop agent · Handles local builds
 
 ## 🔗 Quick Links
-- Build queue: `scripts/build_queue.json` (58 items)
+- Build queue: `scripts/build_queue.json` (62 items)
 - Jocelyn's hub: gentechlabs.net/jocelyn.html
 - Investor deck: gentechlabs.net/grant.html
 - Demo video: gentechlabs.net/agentic-treasury-demo.mp4
