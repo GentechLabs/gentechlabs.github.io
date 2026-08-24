@@ -1,40 +1,62 @@
 {
-  "lastUpdated": "2026-08-17T13:00:58.870789+00:00",
+  "lastUpdated": "2026-08-24T20:20:29.331255+00:00",
   "rails": [
     {
       "net": "base",
       "label": "Base / Aerodrome",
       "icon": "\u26d3\ufe0f",
       "ok": true,
-      "headlineApy": 5.31,
-      "headlineProvider": "fluid",
-      "headlineType": "lending",
-      "headlineTvl": 9166694.95,
+      "headlineApy": 5.11,
+      "headlineProvider": "yearn",
+      "headlineType": "vault",
+      "headlineTvl": 1819383.15,
       "token": "USDC",
       "isStable": true,
       "band": "Warm",
       "bandEmoji": "\ud83d\udfe1",
       "bandColor": "#eab308",
+      "edge": {
+        "symbol": "USDC",
+        "headline_apy": 5.11,
+        "active_multiplier": 1.15,
+        "active_apy": 5.88,
+        "hodl_30d": 0.01,
+        "stake_apr": 0.0,
+        "vs_hodl": 5.86,
+        "vs_stake": 5.88,
+        "vs_passive_best": 5.86,
+        "separation": "\ud83d\ude80 Agentic Treasury beats passive"
+      },
+      "baseline": {
+        "symbol": "USDC",
+        "apy": 5.11,
+        "stake_apr": 0.0,
+        "hodl_30d": 0.01,
+        "beats_stake": true,
+        "beats_hodl": true,
+        "net_edge": 5.09,
+        "label": "\u2705 beats both"
+      },
       "top": [
         {
-          "apy": 5.31,
-          "provider": "fluid",
-          "type": "lending",
-          "tvl": 9166694.95,
+          "apy": 5.11,
+          "provider": "yearn",
+          "type": "vault",
+          "tvl": 1819383.15,
           "token": "USDC"
         },
         {
-          "apy": 5.06,
-          "provider": "yearn",
-          "type": "vault",
-          "tvl": 1817481.61,
+          "apy": 4.75,
+          "provider": "fluid",
+          "type": "lending",
+          "tvl": 9100170.49,
           "token": "USDC"
         },
         {
           "apy": 4.52,
           "provider": "morpho",
           "type": "vault",
-          "tvl": 23053103.83,
+          "tvl": 21566056.62,
           "token": "USDC"
         }
       ]
@@ -44,28 +66,50 @@
       "label": "Solana / Meteora",
       "icon": "\ud83c\udf0a",
       "ok": true,
-      "headlineApy": 5.28,
+      "headlineApy": 5.49,
       "headlineProvider": "kamino",
       "headlineType": "vault",
-      "headlineTvl": 11558395.53,
+      "headlineTvl": 10218558.45,
       "token": "USDC",
       "isStable": true,
       "band": "Warm",
       "bandEmoji": "\ud83d\udfe1",
       "bandColor": "#eab308",
+      "edge": {
+        "symbol": "USDC",
+        "headline_apy": 5.49,
+        "active_multiplier": 1.15,
+        "active_apy": 6.31,
+        "hodl_30d": 0.01,
+        "stake_apr": 0.0,
+        "vs_hodl": 6.3,
+        "vs_stake": 6.31,
+        "vs_passive_best": 6.3,
+        "separation": "\ud83d\ude80 Agentic Treasury beats passive"
+      },
+      "baseline": {
+        "symbol": "USDC",
+        "apy": 5.49,
+        "stake_apr": 0.0,
+        "hodl_30d": 0.01,
+        "beats_stake": true,
+        "beats_hodl": true,
+        "net_edge": 5.47,
+        "label": "\u2705 beats both"
+      },
       "top": [
         {
-          "apy": 5.28,
+          "apy": 5.49,
           "provider": "kamino",
           "type": "vault",
-          "tvl": 11558395.53,
+          "tvl": 10218558.45,
           "token": "USDC"
         },
         {
-          "apy": 5.25,
+          "apy": 5.29,
           "provider": "kamino",
           "type": "vault",
-          "tvl": 1172552.09,
+          "tvl": 1657668.57,
           "token": "USDC"
         }
       ]
@@ -75,28 +119,50 @@
       "label": "Avalanche / LFJ",
       "icon": "\ud83c\udfd4\ufe0f",
       "ok": true,
-      "headlineApy": 6.97,
+      "headlineApy": 6.91,
       "headlineProvider": "securitize",
       "headlineType": "real_world_asset",
-      "headlineTvl": 4896792.2,
+      "headlineTvl": 4900228.27,
       "token": "USDC",
       "isStable": true,
       "band": "Hot",
       "bandEmoji": "\ud83d\udfe0",
       "bandColor": "#f59e0b",
+      "edge": {
+        "symbol": "USDC",
+        "headline_apy": 6.91,
+        "active_multiplier": 1.15,
+        "active_apy": 7.95,
+        "hodl_30d": 0.01,
+        "stake_apr": 0.0,
+        "vs_hodl": 7.93,
+        "vs_stake": 7.95,
+        "vs_passive_best": 7.93,
+        "separation": "\ud83d\ude80 Agentic Treasury beats passive"
+      },
+      "baseline": {
+        "symbol": "USDC",
+        "apy": 6.91,
+        "stake_apr": 0.0,
+        "hodl_30d": 0.01,
+        "beats_stake": true,
+        "beats_hodl": true,
+        "net_edge": 6.9,
+        "label": "\u2705 beats both"
+      },
       "top": [
         {
-          "apy": 6.97,
+          "apy": 6.91,
           "provider": "securitize",
           "type": "real_world_asset",
-          "tvl": 4896792.2,
+          "tvl": 4900228.27,
           "token": "USDC"
         },
         {
-          "apy": 3.27,
+          "apy": 3.15,
           "provider": "aave",
           "type": "lending",
-          "tvl": 59066359.95,
+          "tvl": 60227746.78,
           "token": "USDC"
         }
       ]
@@ -106,28 +172,50 @@
       "label": "Monad (future)",
       "icon": "\ud83e\uddec",
       "ok": true,
-      "headlineApy": 14.83,
+      "headlineApy": 14.81,
       "headlineProvider": "stakekit",
       "headlineType": "staking",
-      "headlineTvl": 294187375.48,
+      "headlineTvl": 446215928.47,
       "token": "MON",
       "isStable": false,
       "band": "On Fire",
       "bandEmoji": "\ud83d\udd34",
       "bandColor": "#e84142",
+      "edge": {
+        "symbol": "MON",
+        "headline_apy": 14.81,
+        "active_multiplier": 1.15,
+        "active_apy": 17.03,
+        "hodl_30d": 49.96,
+        "stake_apr": 0.0,
+        "vs_hodl": -32.93,
+        "vs_stake": 17.03,
+        "vs_passive_best": -32.93,
+        "separation": "\u26a0\ufe0f active still below passive best"
+      },
+      "baseline": {
+        "symbol": "MON",
+        "apy": 14.81,
+        "stake_apr": 0.0,
+        "hodl_30d": 49.96,
+        "beats_stake": true,
+        "beats_hodl": false,
+        "net_edge": -35.15,
+        "label": "\u26a0\ufe0f below passive baseline"
+      },
       "top": [
         {
-          "apy": 14.83,
+          "apy": 14.81,
           "provider": "stakekit",
           "type": "staking",
-          "tvl": 294187375.48,
+          "tvl": 446215928.47,
           "token": "MON"
         },
         {
-          "apy": 7.87,
+          "apy": 3.3,
           "provider": "morpho",
           "type": "vault",
-          "tvl": 1830977.81,
+          "tvl": 1832802.82,
           "token": "AUSD"
         }
       ]
