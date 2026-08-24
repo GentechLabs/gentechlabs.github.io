@@ -125,7 +125,19 @@
             padding: 22px;
             margin-bottom: 24px;
             position: relative;
+            display: grid;
+            grid-template-columns: 150px 1fr;
+            gap: 20px;
         }
+        .soldier-img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border: 2px solid #3d4333;
+            border-bottom: 3px solid #c9a84c;
+            border-radius: 4px;
+        }
+        .loadout-body { min-width: 0; }
         .loadout-card::before {
             content: "▲ ▲ ▲ ▲ ▲";
             position: absolute;
@@ -292,7 +304,7 @@
         <h1>HELLDIVERS LOADOUT REGISTRY</h1>
         <div class="subtitle">SOLDIER · ARMORY · ORDNANCE · MISSION INTEL</div>
         <div class="soldier">
-            CALLSIGN: <strong>OJAY4789</strong> &nbsp;·&nbsp; RANK: <strong>Lv 74</strong> &nbsp;·&nbsp; <strong>EXEMPLARY SUBJECT</strong>
+            CALLSIGN: <strong>ProtoJay4789</strong> &nbsp;·&nbsp; RANK: <strong>Lv 74</strong> &nbsp;·&nbsp; <strong>EXEMPLARY SUBJECT</strong>
         </div>
     </div>
 
@@ -343,6 +355,8 @@
             }
             grid.innerHTML = data.loadouts.map(l => `
                 <div class="loadout-card">
+                    ${l.soldier ? `<img class="soldier-img" src="${l.soldier}" alt="${l.alias} soldier">` : ''}
+                    <div class="loadout-body">
                     <h3>${l.alias}</h3>
                     <span class="warfront ${warfrontClass(l.warfront)}">${l.warfront}</span>
                     <span class="role">${l.role || ''}</span>
@@ -368,6 +382,7 @@
                         ${l.strength ? '<span class="lbl">Strength: </span>' + l.strength + '<br>' : ''}
                         ${l.weakness ? '<span class="lbl">Weakness: </span>' + l.weakness + '<br>' : ''}
                         ${l.notes ? '<span class="lbl">Intel: </span>' + l.notes : ''}
+                    </div>
                     </div>
                 </div>
             `).join('');
