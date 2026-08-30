@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>4-Year Cycle Accuracy — GenTech Treasury</title>
+<style>
+  :root{
+    --bg:#0b0e14; --panel:#121722; --panel2:#161d2b; --line:#232c3f;
+    --txt:#e8edf7; --mut:#8b96ad; --green:#2ecc71; --yellow:#f1c40f;
+    --orange:#e67e22; --red:#e74c3c; --accent:#5b8cff;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--txt);font-family:'Segoe UI',system-ui,-apple-system,sans-serif;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:24px 16px 48px}
+  header{text-align:center;margin-bottom:8px}
+  header h1{font-size:1.45rem;font-weight:700;letter-spacing:.5px}
+  header h1 span{color:var(--accent)}
+  header .sub{color:var(--mut);font-size:.85rem;margin-top:4px}
+  .gauge-card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:28px 32px 20px;margin-top:18px;width:100%;max-width:640px;text-align:center}
+  .ends{display:flex;justify-content:space-between;font-size:.8rem;color:var(--mut);margin-bottom:6px}
+  .ends .l{color:var(--green)} .ends .r{color:var(--red)}
+  svg{width:100%;height:auto;display:block}
+  .score-wrap{margin-top:-58px;pointer-events:none}
+  .score{font-size:3.4rem;font-weight:800;line-height:1}
+  .band{display:inline-block;margin-top:8px;padding:5px 16px;border-radius:999px;font-weight:700;font-size:.9rem;letter-spacing:1px}
+  .verdict{color:var(--mut);font-size:.9rem;margin-top:10px;max-width:460px;margin-left:auto;margin-right:auto}
+  .price{margin-top:10px;font-size:.85rem;color:var(--mut)}
+  .price b{color:var(--txt)}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px;width:100%;max-width:900px;margin-top:18px}
+  .card{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:16px 18px}
+  .card h3{font-size:.78rem;text-transform:uppercase;letter-spacing:1.2px;color:var(--accent);margin-bottom:8px}
+  .card .big{font-size:1.35rem;font-weight:700}
+  .card .note{color:var(--mut);font-size:.82rem;margin-top:6px;line-height:1.45}
+  .legacy{background:linear-gradient(135deg,#13202f,#101a26);border:1px solid #1f3a5c;border-radius:12px;padding:18px 20px;width:100%;max-width:900px;margin-top:18px}
+  .legacy h2{font-size:.85rem;letter-spacing:1.5px;text-transform:uppercase;color:#7fb3ff;margin-bottom:10px}
+  .legacy p{font-size:.92rem;line-height:1.65;color:#c9d6ec}
+  .legacy p+p{margin-top:8px}
+  .scale{display:flex;gap:4px;width:100%;max-width:640px;margin-top:14px;font-size:.68rem;color:var(--mut)}
+  .scale div{flex:1;text-align:center;padding-top:6px;border-top:4px solid}
+  .scale .s0{border-color:var(--green)} .scale .s1{border-color:var(--yellow)}
+  .scale .s2{border-color:var(--orange)} .scale .s3{border-color:var(--red)}
+  footer{margin-top:26px;color:#57617a;font-size:.75rem;text-align:center;line-height:1.6}
+  .updated{font-size:.75rem;color:var(--mut);margin-top:12px}
+  .err{color:var(--red);font-weight:600}
+</style>
+</head>
+<body>
+<header>
+  <h1>⏰ 4-Year <span>Cycle Accuracy</span></h1>
+  <div class="sub">Does the old Bitcoin calendar — halving → top → bear year → “wait for October” — still hold?</div>
+</header>
+
+<div class="gauge-card">
+  <div class="ends"><span class="l">◀ 4-Year Cycle Holds</span><span class="r">Cycle Decoupled ▶</span></div>
+  <svg viewBox="0 0 400 230" id="gauge"></svg>
+  <div class="score-wrap">
+    <div class="score" id="score">—</div>
+    <div><span class="band" id="band">LOADING…</span></div>
+    <div class="verdict" id="verdict"></div>
+    <div class="price" id="price"></div>
+  </div>
+</div>
+
+<div class="scale">
+  <div class="s0">0-30<br>INTACT</div>
+  <div class="s1">30-60<br>STRETCHING</div>
+  <div class="s2">60-85<br>STRETCHED</div>
+  <div class="s3">85-100<br>DECOUPLED</div>
+</div>
+
+<div class="grid" id="cards"></div>
+
+<div class="legacy">
+  <h2>📖 The legacy translation</h2>
+  <p id="legacy-text">Loading…</p>
+</div>
+
+<footer>
+  GenTech Treasury · Steward cycle lens · <span id="updated"></span><br>
+  Sources: Yahoo Finance BTC daily/monthly · Reference: halvings 2016/2020, prior bears −77%/−84%, prior reclaim ~28 months.<br>
+  Data over narrative. Not financial advice.
+</footer>
+
+<script>
+const ARC_CX=200, ARC_CY=200, R=150;
+function polar(angle){const a=(angle-180)*Math.PI/180;return [ARC_CX+R*Math.cos(a), ARC_CY+R*Math.sin(a)];}
+function arcPath(a0,a1){const [x0,y0]=polar(a0),[x1,y1]=polar(a1);
+  return `M ${x0.toFixed(1)} ${y0.toFixed(1)} A ${R} ${R} 0 0 1 ${x1.toFixed(1)} ${y1.toFixed(1)}`;}
+
+function drawGauge(score){
+  const svg=document.getElementById('gauge');
+  const bands=[[0,30,'#2ecc71',.35],[30,60,'#f1c40f',.35],[60,85,'#e67e22',.35],[85,100,'#e74c3c',.35]];
+  let inner=`<path d="${arcPath(0,100)}" stroke="#1a2233" stroke-width="26" fill="none" stroke-linecap="round"/>`;
+  for(const [a0,a1,c] of bands){
+    inner+=`<path d="${arcPath(a0,a1)}" stroke="${c}" stroke-width="18" fill="none" opacity="0.55" stroke-linecap="butt"/>`;
+  }
+  for(let v=0;v<=100;v+=10){
+    const [x0,y0]=polar(v),[x1,y1]=polar(v);
+    const [tx,ty]=polar(v);
+    const rIn=R-16,rOut=R-24;
+    const ix=ARC_CX+rIn*Math.cos((v-180)*Math.PI/180), iy=ARC_CY+rIn*Math.sin((v-180)*Math.PI/180);
+    const ox=ARC_CX+rOut*Math.cos((v-180)*Math.PI/180), oy=ARC_CY+rOut*Math.sin((v-180)*Math.PI/180);
+    inner+=`<line x1="${ix.toFixed(1)}" y1="${iy.toFixed(1)}" x2="${ox.toFixed(1)}" y2="${oy.toFixed(1)}" stroke="#3a465e" stroke-width="1.5"/>`;
+    const rTxt=R-38;
+    const tx2=ARC_CX+rTxt*Math.cos((v-180)*Math.PI/180), ty2=ARC_CY+rTxt*Math.sin((v-180)*Math.PI/180);
+    inner+=`<text x="${tx2.toFixed(1)}" y="${(ty2+4).toFixed(1)}" fill="#66718c" font-size="11" text-anchor="middle">${v}</text>`;
+  }
+  const ang=Math.max(0,Math.min(100,score));
+  const [ex,ey]=polar(ang);
+  inner+=`<line x1="${ARC_CX}" y1="${ARC_CY}" x2="${ex.toFixed(1)}" y2="${(ey-0).toFixed(1)}" stroke="#e8edf7" stroke-width="4" stroke-linecap="round"/>`;
+  inner+=`<circle cx="${ARC_CX}" cy="${ARC_CY}" r="9" fill="#e8edf7"/>`;
+  inner+=`<circle cx="${ARC_CX}" cy="${ARC_CY}" r="4" fill="#0b0e14"/>`;
+  svg.innerHTML=inner;
+}
+
+function bandColor(b){
+  if(b.includes('INTACT'))return 'var(--green)';
+  if(b.includes('STRETCHING'))return 'var(--yellow)';
+  if(b.includes('STRETCHED'))return 'var(--orange)';
+  return 'var(--red)';
+}
+
+function legacyText(d){
+  const cf=d.cycle_facts||{};
+  const top=cf.cycle_top||{};
+  const s=d.score;
+  let p1;
+  if(s<30){
+    p1=`<b>The old clock is still working.</b> This cycle's top came ${top.days_post_halving} days after the halving — the historical window is 526–548 days, so it landed on schedule. The bear that followed was −${Math.abs(cf.max_drawdown)}% — real pain, but shallower than the −77%/−84% of 2018 and 2022.`;
+  }else if(s<60){
+    p1=`<b>The clock is slipping but not broken.</b> Some parts of the old calendar held, others didn't. Partial respect is still due.`;
+  }else{
+    p1=`<b>The old calendar is losing authority.</b> Multiple core assumptions of the 4-year rhythm have broken this cycle.`;
+  }
+  const yoy=cf.yoy_change;
+  const yoyTxt=(yoy==null)?'':(yoy>0?` Price is <b>+${yoy}%</b> versus the same month last year`:` Price is <b>${yoy}%</b> versus the same month last year`);
+  return `${p1}${yoyTxt} — so the seasonal “wait for the dip” trade currently ${yoy>0?'has weaker tape support':'has tape support'}. The honest read: <b>the timing of the cycle held; the depth is moderating.</b> If depth keeps compressing each cycle, the calendar will fade — watch this gauge, not the folklore.`;
+}
+
+fetch('./cycle-accuracy.json').then(r=>r.json()).then(d=>{
+  drawGauge(d.score);
+  document.getElementById('score').textContent=d.score.toFixed(1);
+  const b=document.getElementById('band');
+  b.textContent=d.band; b.style.background=bandColor(d.band)+'22'; b.style.color=bandColor(d.band);
+  b.style.border=`1px solid ${bandColor(d.band)}66`;
+  document.getElementById('verdict').textContent=d.verdict;
+  document.getElementById('price').innerHTML=`BTC <b>$${d.price_now.toLocaleString()}</b> · halving +${d.cycle_facts.days_since_halving} days`;
+  const c=d.components, cf=d.cycle_facts;
+  const cards=[
+    ['🕐 Top timing', `${cf.cycle_top.days_post_halving}d post-halving`, `${c.top_timing.detail}. Historical: 526-548d. ${cf.cycle_top.in_historical_window?'✅ On schedule.':'⚠️ Off schedule.'}`],
+    ['📉 Bear depth', `${cf.max_drawdown}%`, c.drawdown_compression.detail + '. Shallower = decoupling from the old rhythm.'],
+    ['🔄 Reclaim speed', cf.reclaimed_top?`${cf.reclaim_months} months`:'Not yet', (c.recovery_speed.detail) + '. Prior tops took ~28 months to reclaim.'],
+    ['📅 Seasonality', `${cf.yoy_change>0?'+':''}${cf.yoy_change}% YoY`, c.seasonality_test.detail],
+  ];
+  document.getElementById('cards').innerHTML=cards.map(([h,big,note])=>
+    `<div class="card"><h3>${h}</h3><div class="big">${big}</div><div class="note">${note}</div></div>`).join('');
+  document.getElementById('legacy-text').innerHTML=legacyText(d);
+  document.getElementById('updated').textContent='updated '+new Date(d.lastUpdated).toLocaleString();
+}).catch(e=>{
+  document.getElementById('score').textContent='—';
+  document.getElementById('score').className='score err';
+  document.getElementById('band').textContent='DATA UNAVAILABLE';
+  document.getElementById('verdict').textContent='cycle-accuracy.json failed to load — never serve stale as live.';
+  console.error(e);
+});
+</script>
+</body>
+</html>
