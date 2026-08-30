@@ -2,591 +2,238 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>DeFi Yield Rainbow — GenTech</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Market Sentiment — GenTech Treasury</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-:root {
-    --bg: #0a0e17;
-    --bg-alt: #111827;
-    --panel-bg: #1a1f2e;
-    --panel-border: #2a3a52;
-    --gold: #c9a84c;
-    --aae-red: #e84142;
-    --text: #e2e8f0;
-    --text-dim: #6b7b8d;
+:root{
+  --bg:#0a0e17; --panel:#121722; --panel2:#161d2b; --line:#232c3f;
+  --txt:#e2e8f0; --mut:#6b7b8d; --gold:#c9a84c; --green:#2ecc71; --yellow:#f1c40f;
+  --orange:#e67e22; --red:#e74c3c; --accent:#5b8cff; --aae-red:#e84142;
 }
-
-* { margin: 0; padding: 0; box-sizing: border-box; }
-
-body {
-    font-family: 'Inter', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-    overflow-x: hidden;
-}
-
-.header {
-    background: linear-gradient(135deg, #0a0e17 0%, #1a1f2e 50%, #0a0e17 100%);
-    padding: 48px 20px 32px;
-    text-align: center;
-    border-bottom: 1px solid var(--panel-border);
-    position: relative;
-}
-
-.header::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: 
-        radial-gradient(ellipse at 20% 50%, rgba(232,65,66,0.08) 0%, transparent 50%),
-        radial-gradient(ellipse at 80% 50%, rgba(59,130,246,0.08) 0%, transparent 50%);
-    pointer-events: none;
-}
-
-.header h1 {
-    font-size: 1.8em;
-    font-weight: 800;
-    background: linear-gradient(135deg, #e84142, #f59e0b, #22c55e, #3b82f6, #a855f7);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    margin-bottom: 6px;
-    position: relative;
-}
-
-.header .subtitle {
-    color: var(--text-dim);
-    font-size: 0.85em;
-    position: relative;
-}
-
-.back-link {
-    position: fixed;
-    top: 12px;
-    left: 12px;
-    text-decoration: none;
-    color: var(--text-dim);
-    font-size: 0.85em;
-    padding: 6px 12px;
-    border: 1px solid var(--panel-border);
-    border-radius: 6px;
-    background: var(--panel-bg);
-    z-index: 1000;
-    transition: all 0.2s;
-}
-.back-link:hover { border-color: var(--gold); color: var(--gold); }
-
-.container {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px 16px;
-}
-
-/* Rainbow Chart */
-.rainbow-container {
-    position: relative;
-    margin: 24px 0;
-    border-radius: 16px;
-    overflow: hidden;
-    border: 1px solid var(--panel-border);
-    background: var(--panel-bg);
-}
-
-.rainbow-chart {
-    position: relative;
-    height: 380px;
-    overflow: hidden;
-}
-
-.rainbow-band {
-    position: absolute;
-    left: 0;
-    right: 0;
-    display: flex;
-    align-items: center;
-    padding: 0 20px;
-    transition: all 0.3s;
-}
-
-.rainbow-band .band-name {
-    font-size: 0.75em;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    opacity: 0.9;
-    text-shadow: 0 1px 3px rgba(0,0,0,0.5);
-}
-
-.rainbow-band .band-range {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.65em;
-    opacity: 0.7;
-    margin-left: auto;
-    text-shadow: 0 1px 3px rgba(0,0,0,0.5);
-}
-
-.rainbow-band.current {
-    box-shadow: inset 0 0 40px rgba(255,255,255,0.1);
-    border-top: 2px solid rgba(255,255,255,0.3);
-    border-bottom: 2px solid rgba(255,255,255,0.3);
-}
-
-.current-marker {
-    position: absolute;
-    right: 16px;
-    background: rgba(0,0,0,0.8);
-    border: 2px solid white;
-    border-radius: 8px;
-    padding: 4px 10px;
-    font-size: 0.7em;
-    font-weight: 700;
-    font-family: 'JetBrains Mono', monospace;
-    white-space: nowrap;
-    z-index: 10;
-    animation: pulse-marker 2s ease-in-out infinite;
-    box-shadow: 0 0 20px rgba(255,255,255,0.2);
-}
-
-@keyframes pulse-marker {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-}
-
-/* Current Band Card */
-.band-card {
-    background: var(--panel-bg);
-    border: 1px solid var(--panel-border);
-    border-radius: 12px;
-    padding: 20px;
-    margin-bottom: 16px;
-    position: relative;
-    overflow: hidden;
-}
-
-.band-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; bottom: 0;
-    width: 4px;
-    border-radius: 4px 0 0 4px;
-}
-
-.band-card .band-header {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 12px;
-}
-
-.band-card .band-emoji {
-    font-size: 1.8em;
-}
-
-.band-card .band-title {
-    font-size: 1.2em;
-    font-weight: 700;
-}
-
-.band-card .band-desc {
-    color: var(--text-dim);
-    font-size: 0.9em;
-    line-height: 1.5;
-    margin-bottom: 12px;
-}
-
-.band-card .band-advice {
-    background: rgba(255,255,255,0.05);
-    border-radius: 8px;
-    padding: 12px;
-    font-size: 0.85em;
-    line-height: 1.5;
-    border-left: 3px solid;
-}
-
-/* Stats Grid */
-.stats-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    margin-bottom: 16px;
-}
-
-.stat-card {
-    background: var(--panel-bg);
-    border: 1px solid var(--panel-border);
-    border-radius: 10px;
-    padding: 14px;
-    text-align: center;
-}
-
-.stat-card .stat-value {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 1.4em;
-    font-weight: 700;
-    margin-bottom: 4px;
-}
-
-.stat-card .stat-label {
-    font-size: 0.7em;
-    color: var(--text-dim);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-.stat-card.highlight {
-    border-color: var(--gold);
-    background: linear-gradient(135deg, rgba(201,168,76,0.05), transparent);
-}
-
-/* History Line */
-.history-section {
-    background: var(--panel-bg);
-    border: 1px solid var(--panel-border);
-    border-radius: 12px;
-    padding: 20px;
-    margin-bottom: 16px;
-}
-
-.history-section h3 {
-    font-size: 0.85em;
-    color: var(--text-dim);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 16px;
-}
-
-.history-canvas {
-    width: 100%;
-    height: 120px;
-}
-
-/* Disclaimer */
-.disclaimer {
-    text-align: center;
-    color: var(--text-dim);
-    font-size: 0.7em;
-    padding: 20px;
-    opacity: 0.6;
-}
-
-/* Loading */
-.loading {
-    text-align: center;
-    padding: 60px 20px;
-    color: var(--text-dim);
-}
-
-.loading .spinner {
-    width: 40px;
-    height: 40px;
-    border: 3px solid var(--panel-border);
-    border-top-color: var(--gold);
-    border-radius: 50%;
-    animation: spin 0.8s linear infinite;
-    margin: 0 auto 16px;
-}
-
-@keyframes spin {
-    to { transform: rotate(360deg); }
-}
-
-/* Fade in animation */
-.fade-in {
-    opacity: 0;
-    transform: translateY(20px);
-    animation: fadeIn 0.5s ease forwards;
-}
-
-@keyframes fadeIn {
-    to { opacity: 1; transform: translateY(0); }
-}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--txt);font-family:'Inter',sans-serif;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:0 14px 56px}
+.back-link{position:fixed;top:12px;left:12px;text-decoration:none;color:var(--mut);font-size:.85em;padding:6px 12px;border:1px solid var(--line);border-radius:6px;background:var(--panel);z-index:1000}
+.back-link:hover{border-color:var(--gold);color:var(--gold)}
+.header{text-align:center;padding:52px 10px 8px;width:100%;max-width:720px}
+.header h1{font-size:1.7em;font-weight:800;background:linear-gradient(135deg,#e84142,#f59e0b,#22c55e,#3b82f6,#a855f7);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.header .sub{color:var(--mut);font-size:.85em;margin-top:6px}
+.sec-title{width:100%;max-width:720px;text-align:center;margin:34px 0 6px;font-size:.78rem;letter-spacing:2px;text-transform:uppercase;color:var(--accent)}
+.sec-note{width:100%;max-width:720px;text-align:center;color:var(--mut);font-size:.78rem;margin-bottom:12px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px 22px;width:100%;max-width:720px}
+/* gauge */
+.ends{display:flex;justify-content:space-between;font-size:.78rem;color:var(--mut);margin-bottom:4px}
+.ends .l{color:var(--green)}.ends .r{color:var(--red)}
+svg#gauge{width:100%;max-width:480px;height:auto;display:block;margin:0 auto}
+.score-wrap{margin-top:-46px;text-align:center;pointer-events:none}
+.score{font-size:2.9rem;font-weight:800;line-height:1}
+.band{display:inline-block;margin-top:8px;padding:5px 16px;border-radius:999px;font-weight:700;font-size:.85rem;letter-spacing:1px}
+.verdict{color:var(--mut);font-size:.88rem;margin-top:10px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px;width:100%;max-width:720px;margin-top:14px}
+.mini{background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.mini h4{font-size:.7rem;text-transform:uppercase;letter-spacing:1.2px;color:var(--accent);margin-bottom:6px}
+.mini .big{font-size:1.2rem;font-weight:700}
+.mini .note{color:var(--mut);font-size:.78rem;margin-top:5px;line-height:1.5}
+.legacy{background:linear-gradient(135deg,#13202f,#101a26);border:1px solid #1f3a5c;border-radius:12px;padding:16px 18px;width:100%;max-width:720px;margin-top:14px}
+.legacy h3{font-size:.75rem;letter-spacing:1.5px;text-transform:uppercase;color:#7fb3ff;margin-bottom:8px}
+.legacy p{font-size:.9rem;line-height:1.65;color:#c9d6ec}
+/* macro */
+.macro-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;width:100%;max-width:720px}
+.mstat{background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:14px;text-align:center}
+.mstat .v{font-size:1.15rem;font-weight:700}
+.mstat .k{color:var(--mut);font-size:.72rem;text-transform:uppercase;letter-spacing:1px;margin-top:4px}
+.macro-read{width:100%;max-width:720px;text-align:center;margin-top:12px;font-weight:700;font-size:.95rem;padding:10px;border-radius:10px;background:var(--panel2);border:1px solid var(--line)}
+/* radar */
+.narr{display:flex;flex-direction:column;gap:10px;width:100%;max-width:720px}
+.nrow{display:flex;align-items:center;gap:12px;background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.nrow .rank{font-family:'JetBrains Mono',monospace;color:var(--mut);font-size:.8rem;width:26px;text-align:center}
+.nrow .nemo{font-size:1.3rem}
+.nrow .nmain{flex:1;min-width:0}
+.nrow .nname{font-weight:700;font-size:.95rem}
+.nrow .ncoins{color:var(--mut);font-size:.75rem;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.nrow .nright{text-align:right}
+.nrow .nsent{font-weight:700;font-size:.82rem}
+.nrow .nscore{font-family:'JetBrains Mono',monospace;color:var(--mut);font-size:.75rem;margin-top:2px}
+.zoontag{display:inline-block;padding:2px 8px;border-radius:6px;font-size:.7rem;font-weight:700;margin-left:8px;vertical-align:middle}
+/* rainbow */
+.archived{width:100%;max-width:720px;background:#1a1420;border:1px solid #4a2c3a;color:#d8a5b8;border-radius:10px;padding:10px 14px;font-size:.8rem;text-align:center;margin-bottom:10px}
+.rb{position:relative;height:44px;display:flex;align-items:center;padding:0 16px;border-radius:0}
+.rb .bn{font-size:.72rem;font-weight:600;text-transform:uppercase;letter-spacing:1px;text-shadow:0 1px 3px rgba(0,0,0,.6)}
+.rb .br{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:.7rem;opacity:.85;text-shadow:0 1px 3px rgba(0,0,0,.6)}
+.rb-wrap{overflow:hidden;border-radius:12px;border:1px solid var(--line);width:100%;max-width:720px}
+.rb-wrap.archived .rb{opacity:.45;filter:saturate(.6)}
+.errsec{width:100%;max-width:720px;color:var(--mut);font-size:.85rem;text-align:center;padding:18px;border:1px dashed var(--line);border-radius:12px}
+footer{margin-top:40px;color:#57617a;font-size:.72rem;text-align:center;line-height:1.7;max-width:720px}
+footer a{color:#7fb3ff;text-decoration:none}
+.updated{font-size:.72rem;color:var(--mut);text-align:center;margin-top:10px}
+@media(max-width:520px){.nrow .ncoins{display:none}}
 </style>
 </head>
 <body>
 <a href="../hub.html" class="back-link">🏠 Hub</a>
 
 <div class="header">
-    <h1>🌈 DeFi Yield Rainbow</h1>
-    <div class="subtitle">LP Farming Risk Visualization — GenTech Labs</div>
+  <h1>Market Sentiment</h1>
+  <div class="sub">One read, many lenses — cycle clock, macro fuel, narrative rotation, yield zones. Every lens confirms the others.</div>
 </div>
 
-<div class="container" id="app">
-    <div class="loading" id="loading">
-        <div class="spinner"></div>
-        <div>Loading rainbow data...</div>
-    </div>
+<div class="sec-title">⏰ 4-Year Cycle Accuracy</div>
+<div class="sec-note">Does the old calendar — halving → top → bear year → “wait for October” — still hold?</div>
+<div class="card">
+  <div class="ends"><span class="l">◀ 4-Year Cycle Holds</span><span class="r">Cycle Decoupled ▶</span></div>
+  <svg viewBox="0 0 400 230" id="gauge"></svg>
+  <div class="score-wrap">
+    <div class="score" id="score">—</div>
+    <div><span class="band" id="band">LOADING…</span></div>
+    <div class="verdict" id="verdict"></div>
+  </div>
+  <div class="grid" id="cyc-cards"></div>
+  <div class="legacy">
+    <h3>📖 The legacy translation</h3>
+    <p id="legacy-text">Loading…</p>
+  </div>
 </div>
+
+<div class="sec-title">🌡️ Macro Liquidity Thermometer</div>
+<div class="sec-note">On-chain dollar supply + BTC dominance — the bull/bear backdrop for everything below.</div>
+<div class="macro-grid" id="macro-grid"></div>
+<div class="macro-read" id="macro-read">loading…</div>
+
+<div class="sec-title">📊 Narrative Radar</div>
+<div class="sec-note">Where money is rotating — ranked by momentum score across six sectors.</div>
+<div class="narr" id="narr"></div>
+
+<div class="sec-title">🌈 Yield Rainbow Zones</div>
+<div class="sec-note">The classic GenTech rainbow — where a farm sits on the risk curve. Market-wide zones, honest position state.</div>
+<div id="rainbow-sec" class="errsec">loading…</div>
+
+<footer>
+  GenTech Treasury · Steward lens stack · data over narrative · not financial advice<br>
+  <span id="foot-updated"></span><br>
+  Lenses: <a href="cycle-accuracy.html">cycle gauge (standalone)</a> · sources: Yahoo Finance, CoinGecko, CoinMarketCap, Alternative.me
+</footer>
 
 <script>
-const DATA_URL = 'yield-rainbow-data.json';
+const ARC_CX=200, ARC_CY=200, R=150;
+function polar(angle){const a=(angle-180)*Math.PI/180;return [ARC_CX+R*Math.cos(a), ARC_CY+R*Math.sin(a)];}
+function arcPath(a0,a1){const [x0,y0]=polar(a0),[x1,y1]=polar(a1);
+  return `M ${x0.toFixed(1)} ${y0.toFixed(1)} A ${R} ${R} 0 0 1 ${x1.toFixed(1)} ${y1.toFixed(1)}`;}
+function drawGauge(score){
+  const svg=document.getElementById('gauge');
+  const bands=[[0,30,'#2ecc71'],[30,60,'#f1c40f'],[60,85,'#e67e22'],[85,100,'#e74c3c']];
+  let inner=`<path d="${arcPath(0,100)}" stroke="#1a2233" stroke-width="26" fill="none" stroke-linecap="round"/>`;
+  for(const [a0,a1,c] of bands) inner+=`<path d="${arcPath(a0,a1)}" stroke="${c}" stroke-width="18" fill="none" opacity="0.55"/>`;
+  for(let v=0;v<=100;v+=10){
+    const rIn=R-16,rOut=R-24,rTxt=R-38;
+    const cIn=Math.cos((v-180)*Math.PI/180), sIn=Math.sin((v-180)*Math.PI/180);
+    inner+=`<line x1="${(ARC_CX+rIn*cIn).toFixed(1)}" y1="${(ARC_CY+rIn*sIn).toFixed(1)}" x2="${(ARC_CX+rOut*cIn).toFixed(1)}" y2="${(ARC_CY+rOut*sIn).toFixed(1)}" stroke="#3a465e" stroke-width="1.5"/>`;
+    inner+=`<text x="${(ARC_CX+rTxt*cIn).toFixed(1)}" y="${(ARC_CY+rTxt*sIn+4).toFixed(1)}" fill="#66718c" font-size="11" text-anchor="middle">${v}</text>`;
+  }
+  const ang=Math.max(0,Math.min(100,score));
+  const [ex,ey]=polar(ang);
+  inner+=`<line x1="${ARC_CX}" y1="${ARC_CY}" x2="${ex.toFixed(1)}" y2="${ey.toFixed(1)}" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round"/>`;
+  inner+=`<circle cx="${ARC_CX}" cy="${ARC_CY}" r="9" fill="#e2e8f0"/><circle cx="${ARC_CX}" cy="${ARC_CY}" r="4" fill="#0a0e17"/>`;
+  svg.innerHTML=inner;
+}
+function bandColor(b){if(b.includes('INTACT'))return 'var(--green)';if(b.includes('STRETCHING'))return 'var(--yellow)';if(b.includes('STRETCHED'))return 'var(--orange)';return 'var(--red)';}
+function fmtB(v){return v>=1e12?`$${(v/1e12).toFixed(2)}T`:v>=1e9?`$${(v/1e9).toFixed(0)}B`:`$${v/1e6|0}M`;}
+function ageHours(iso){try{return (Date.now()-new Date(iso).getTime())/36e5;}catch(e){return 999;}}
 
-function getBandOpacity(bandPosition, currentPosition) {
-    const diff = Math.abs(bandPosition - currentPosition);
-    return Math.max(0.5, 1 - diff * 0.12);
+async function jget(url){const r=await fetch(url+'?t='+Date.now());if(!r.ok)throw new Error(url+' '+r.status);return r.json();}
+
+function legacyText(d){
+  const cf=d.cycle_facts||{}, top=cf.cycle_top||{}, s=d.score;
+  let p1;
+  if(s<30) p1=`<b>The old clock is still working.</b> This cycle's top came ${top.days_post_halving} days after the halving — the historical window is 526–548 days, so it landed on schedule. The bear that followed was ${cf.max_drawdown}% — real pain, but shallower than the −77%/−84% of 2018 and 2022.`;
+  else if(s<60) p1=`<b>The clock is slipping but not broken.</b> Some parts of the old calendar held, others didn't. Partial respect is still due.`;
+  else p1=`<b>The old calendar is losing authority.</b> Multiple core assumptions of the 4-year rhythm have broken this cycle.`;
+  const yoy=cf.yoy_change;
+  const yoyTxt=(yoy==null)?'':(yoy>0?` Price is <b>+${yoy}%</b> versus the same month last year`:` Price is <b>${yoy}%</b> versus the same month last year`);
+  return `${p1}${yoyTxt} — the seasonal “wait for the dip” trade currently ${yoy>0?'has weaker tape support':'has tape support'}. The honest read: <b>the timing of the cycle held; the depth is moderating.</b> Watch this gauge, not the folklore.`;
 }
 
-function renderRainbowChart(data) {
-    const { currentBand, bands, position, metrics } = data;
-    const container = document.getElementById('app');
-    
-    // Sort bands by rainbow_position (1 = top, 6 = bottom)
-    const sortedBands = [...bands].sort((a, b) => a.rainbow_position - b.rainbow_position);
-    const bandHeight = 380 / sortedBands.length;
-    
-    let chartHTML = '<div class="rainbow-container fade-in"><div class="rainbow-chart">';
-    
-    sortedBands.forEach((band, i) => {
-        const isCurrent = band.id === currentBand.id;
-        const opacity = getBandOpacity(band.rainbow_position, currentBand.position);
-        const top = i * bandHeight;
-        
-        chartHTML += `
-            <div class="rainbow-band ${isCurrent ? 'current' : ''}" 
-                 style="top: ${top}px; height: ${bandHeight}px; 
-                        background: ${band.gradient}; 
-                        opacity: ${opacity};">
-                <span class="band-name">${band.emoji} ${band.name}</span>
-                <span class="band-range">Eff: ${band.efficiency_min}–${band.efficiency_max}%</span>
-            </div>
-        `;
-        
-        if (isCurrent) {
-            chartHTML += `
-                <div class="current-marker" style="top: ${top + bandHeight/2 - 12}px;">
-                    ${position.currentPrice.toFixed(4)} ← HERE
-                </div>
-            `;
-        }
-    });
-    
-    chartHTML += '</div></div>';
-    return chartHTML;
+function renderCycle(d){
+  drawGauge(d.score);
+  document.getElementById('score').textContent=d.score.toFixed(1);
+  const b=document.getElementById('band');
+  b.textContent=d.band;b.style.background=bandColor(d.band)+'22';b.style.color=bandColor(d.band);b.style.border=`1px solid ${bandColor(d.band)}66`;
+  document.getElementById('verdict').textContent=d.verdict;
+  const c=d.components, cf=d.cycle_facts;
+  document.getElementById('cyc-cards').innerHTML=[
+    ['🕐 Top timing',`${cf.cycle_top.days_post_halving}d post-halving`,`${c.top_timing.detail}. Historical: 526-548d. ${cf.cycle_top.in_historical_window?'✅ On schedule.':'⚠️ Off schedule.'}`],
+    ['📉 Bear depth',`${cf.max_drawdown}%`,c.drawdown_compression.detail+'. Shallower = decoupling from the old rhythm.'],
+    ['🔄 Reclaim speed',cf.reclaimed_top?`${cf.reclaim_months} months`:'Not yet',c.recovery_speed.detail+'. Prior tops took ~28 months to reclaim.'],
+    ['📅 Seasonality',`${cf.yoy_change>0?'+':''}${cf.yoy_change}% YoY`,c.seasonality_test.detail],
+  ].map(([h,big,note])=>`<div class="mini"><h4>${h}</h4><div class="big">${big}</div><div class="note">${note}</div></div>`).join('');
+  document.getElementById('legacy-text').innerHTML=legacyText(d);
 }
 
-function renderCurrentBand(data) {
-    const { currentBand, metrics } = data;
-    
-    return `
-        <div class="band-card fade-in" style="animation-delay: 0.1s;">
-            <div style="position:absolute;top:0;left:0;bottom:0;width:4px;background:${currentBand.color};border-radius:4px 0 0 4px;"></div>
-            <div class="band-header">
-                <span class="band-emoji">${currentBand.emoji}</span>
-                <span class="band-title" style="color:${currentBand.color}">${currentBand.name}</span>
-            </div>
-            <div class="band-desc">${currentBand.description}</div>
-            <div class="band-advice" style="border-left-color:${currentBand.color}">
-                ${currentBand.advice}
-            </div>
-        </div>
-    `;
+function renderMacro(m){
+  const g=document.getElementById('macro-grid');
+  if(!m||m.btc_dominance==null){g.outerHTML='<div class="errsec">macro thermometer unavailable — never serve stale as live</div>';document.getElementById('macro-read').style.display='none';return;}
+  const dd=(m.btc_dom_delta!=null)?`${m.btc_dom_delta>0?'+':''}${m.btc_dom_delta.toFixed(2)}pp`:'—';
+  const dcol=(m.btc_dom_delta<0)?'var(--green)':(m.btc_dom_delta>0?'var(--red)':'var(--mut)');
+  g.innerHTML=`
+    <div class="mstat"><div class="v">${m.btc_dominance.toFixed(1)}%</div><div class="k">BTC dominance</div><div class="v" style="font-size:.85rem;color:${dcol}">${dd}</div></div>
+    <div class="mstat"><div class="v">${fmtB(m.usdt_mcap||0)}</div><div class="k">USDT cap</div></div>
+    <div class="mstat"><div class="v">${fmtB(m.usdc_mcap||0)}</div><div class="k">USDC cap</div></div>
+    <div class="mstat"><div class="v">${fmtB(m.stablecoin_mcap_total||0)}</div><div class="k">Stablecoin fuel</div></div>`;
+  const read=m.read||'—';
+  const col=read.includes('RISK-ON')?'var(--green)':read.includes('RISK-OFF')?'var(--red)':'var(--yellow)';
+  const el=document.getElementById('macro-read');
+  el.textContent=read;el.style.color=col;el.style.borderColor=col+'44';
 }
 
-function renderStats(data) {
-    const { metrics, position } = data;
-    const efficiencyColor = metrics.efficiency >= 70 ? '#22c55e' : 
-                           metrics.efficiency >= 50 ? '#eab308' : 
-                           metrics.efficiency >= 30 ? '#f59e0b' : '#e84142';
-    
-    return `
-        <div class="stats-grid fade-in" style="animation-delay: 0.2s;">
-            <div class="stat-card highlight">
-                <div class="stat-value" style="color:${efficiencyColor}">${metrics.efficiency}%</div>
-                <div class="stat-label">Efficiency</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-value" style="color:var(--gold)">${metrics.annualizedApr.toFixed(0)}%</div>
-                <div class="stat-label">APR</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-value" style="color:#22c55e">$${metrics.dailyFees.toFixed(4)}</div>
-                <div class="stat-label">Daily Fees</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-value" style="color:#3b82f6">$${metrics.weeklyFees.toFixed(2)}</div>
-                <div class="stat-label">Weekly Fees</div>
-            </div>
-        </div>
-    `;
+function zoneColor(z){if(z.includes('Hot'))return '#22c55e';if(z.includes('Warm'))return '#3b82f6';if(z.includes('Cooling'))return '#f59e0b';return '#e84142';}
+function sentColor(s){if(s.includes('Bullish'))return '#22c55e';if(s.includes('Bearish'))return '#e84142';return '#f59e0b';}
+function renderRadar(d){
+  const ns=d.narratives||[];
+  if(!ns.length){document.getElementById('narr').outerHTML='<div class="errsec">narrative radar unavailable</div>';return;}
+  document.getElementById('narr').innerHTML=ns.map(n=>`
+    <div class="nrow">
+      <div class="rank">#${n.rank}</div>
+      <div class="nemo">${n.emoji}</div>
+      <div class="nmain">
+        <span class="nname">${n.name}</span>
+        <span class="zoontag" style="background:${zoneColor(n.zone)}22;color:${zoneColor(n.zone)}">${n.zone}</span>
+        <div class="ncoins">${n.coins}</div>
+      </div>
+      <div class="nright">
+        <div class="nsent" style="color:${sentColor(n.sentiment)}">${n.sentiment}</div>
+        <div class="nscore">score ${n.score>0?'+':''}${n.score} · v/c ${n.vol_cap_ratio}%</div>
+      </div>
+    </div>`).join('');
 }
 
-function renderPriceInfo(data) {
-    const { position, metrics } = data;
-    const changeColor = metrics.priceChange24h >= 0 ? '#22c55e' : '#e84142';
-    const changeEmoji = metrics.priceChange24h >= 0 ? '📈' : '📉';
-    
-    return `
-        <div class="stats-grid fade-in" style="animation-delay: 0.3s;">
-            <div class="stat-card">
-                <div class="stat-value" style="font-size:1.1em;">$${position.currentPrice.toFixed(4)}</div>
-                <div class="stat-label">AVAX Price</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-value" style="color:${changeColor};font-size:1.1em;">
-                    ${changeEmoji} ${metrics.priceChange24h >= 0 ? '+' : ''}${metrics.priceChange24h.toFixed(2)}%
-                </div>
-                <div class="stat-label">24h Change</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-value" style="font-size:1em;">$${position.rangeLow.toFixed(2)}–$${position.rangeHigh.toFixed(2)}</div>
-                <div class="stat-label">Range</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-value" style="font-size:1em;">$${position.positionUsd.toFixed(2)}</div>
-                <div class="stat-label">Position</div>
-            </div>
-        </div>
-    `;
+function renderRainbow(){
+  const sec=document.getElementById('rainbow-sec');
+  jget('yield-rainbow-data.json').then(d=>{
+    const age=ageHours(d.lastUpdated);
+    const archived=age>24;
+    const bands=[...(d.bands||[])].sort((a,b)=>a.rainbow_position-b.rainbow_position);
+    let wrap=`<div class="rb-wrap${archived?' archived':''}">`;
+    bands.forEach(b=>{wrap+=`<div class="rb" style="background:${b.gradient}"><span class="bn">${b.emoji} ${b.name}</span><span class="br">Eff ${b.efficiency_min}–${b.efficiency_max}%</span></div>`;});
+    wrap+='</div>';
+    let note='';
+    if(archived) note=`<div class="archived">🗄️ ARCHIVED FEED — the AVAX/USDC farm this tracked was closed Aug 21, 2026 (capital pulled by Jordan). Zones shown for reference only — no live position is marked. Feed returns when a farm is live.</div>`;
+    sec.innerHTML=note+wrap;
+  }).catch(e=>{sec.innerHTML=`yield rainbow unavailable — ${e.message}`;});
 }
 
-function drawHistoryChart(canvasId, history, currentBand, bands) {
-    const canvas = document.getElementById(canvasId);
-    if (!canvas) return;
-    
-    const ctx = canvas.getContext('2d');
-    const dpr = window.devicePixelRatio || 1;
-    const rect = canvas.getBoundingClientRect();
-    canvas.width = rect.width * dpr;
-    canvas.height = rect.height * dpr;
-    ctx.scale(dpr, dpr);
-    
-    const w = rect.width;
-    const h = rect.height;
-    const padding = { top: 10, bottom: 20, left: 0, right: 0 };
-    const chartH = h - padding.top - padding.bottom;
-    const chartW = w - padding.left - padding.right;
-    
-    // Draw band backgrounds
-    const bandColors = [
-        { min: 90, color: 'rgba(232,65,66,0.15)' },
-        { min: 75, color: 'rgba(245,158,11,0.12)' },
-        { min: 60, color: 'rgba(234,179,8,0.1)' },
-        { min: 40, color: 'rgba(34,197,94,0.08)' },
-        { min: 20, color: 'rgba(59,130,246,0.08)' },
-        { min: 0, color: 'rgba(168,85,247,0.08)' },
-    ];
-    
-    bandColors.forEach(band => {
-        const y = padding.top + chartH * (1 - band.min / 100);
-        const bandH = chartH * (10 / 100);
-        ctx.fillStyle = band.color;
-        ctx.fillRect(padding.left, y - bandH, chartW, bandH);
-    });
-    
-    // Draw grid lines
-    ctx.strokeStyle = 'rgba(255,255,255,0.05)';
-    ctx.lineWidth = 1;
-    for (let i = 0; i <= 4; i++) {
-        const y = padding.top + (chartH * i / 4);
-        ctx.beginPath();
-        ctx.moveTo(padding.left, y);
-        ctx.lineTo(w - padding.right, y);
-        ctx.stroke();
-    }
-    
-    if (history.length < 2) return;
-    
-    // Draw the line
-    ctx.beginPath();
-    ctx.strokeStyle = currentBand.color;
-    ctx.lineWidth = 2.5;
-    ctx.lineJoin = 'round';
-    ctx.lineCap = 'round';
-    
-    const stepX = chartW / (history.length - 1);
-    
-    history.forEach((val, i) => {
-        const x = padding.left + i * stepX;
-        const y = padding.top + chartH * (1 - val / 100);
-        if (i === 0) ctx.moveTo(x, y);
-        else ctx.lineTo(x, y);
-    });
-    ctx.stroke();
-    
-    // Draw gradient fill
-    const gradient = ctx.createLinearGradient(0, padding.top, 0, h - padding.bottom);
-    gradient.addColorStop(0, currentBand.color + '30');
-    gradient.addColorStop(1, currentBand.color + '05');
-    
-    ctx.lineTo(padding.left + (history.length - 1) * stepX, h - padding.bottom);
-    ctx.lineTo(padding.left, h - padding.bottom);
-    ctx.closePath();
-    ctx.fillStyle = gradient;
-    ctx.fill();
-    
-    // Draw current value dot
-    const lastVal = history[history.length - 1];
-    const dotX = padding.left + (history.length - 1) * stepX;
-    const dotY = padding.top + chartH * (1 - lastVal / 100);
-    
-    ctx.beginPath();
-    ctx.arc(dotX, dotY, 5, 0, Math.PI * 2);
-    ctx.fillStyle = currentBand.color;
-    ctx.fill();
-    ctx.strokeStyle = 'white';
-    ctx.lineWidth = 2;
-    ctx.stroke();
-    
-    // Glow effect
-    ctx.beginPath();
-    ctx.arc(dotX, dotY, 10, 0, Math.PI * 2);
-    ctx.fillStyle = currentBand.color + '20';
-    ctx.fill();
-}
-
-async function init() {
-    const app = document.getElementById('app');
-    
-    try {
-        const res = await fetch(DATA_URL + '?t=' + Date.now());
-        if (!res.ok) throw new Error('Failed to load data');
-        const data = await res.json();
-        
-        // Remove loading
-        app.innerHTML = '';
-        
-        // Render sections
-        app.innerHTML = `
-            ${renderRainbowChart(data)}
-            ${renderCurrentBand(data)}
-            ${renderStats(data)}
-            ${renderPriceInfo(data)}
-            <div class="history-section fade-in" style="animation-delay: 0.4s;">
-                <h3>📈 30-Day Efficiency History</h3>
-                <canvas id="history-chart" class="history-canvas"></canvas>
-            </div>
-            <div class="disclaimer">
-                ⚠️ Not financial advice. Rainbow charts are for visualization only.<br>
-                Generated: ${new Date(data.lastUpdated).toLocaleString()} • ${data.meta.dataSources.join(', ')}
-            </div>
-        `;
-        
-        // Draw history chart after DOM is ready
-        requestAnimationFrame(() => {
-            drawHistoryChart('history-chart', data.history, data.currentBand, data.bands);
-        });
-        
-    } catch (err) {
-        app.innerHTML = `
-            <div class="loading">
-                <div style="font-size:2em;margin-bottom:16px;">⚠️</div>
-                <div>Failed to load rainbow data</div>
-                <div style="color:var(--text-dim);font-size:0.8em;margin-top:8px;">${err.message}</div>
-            </div>
-        `;
-    }
-}
-
-// Auto-refresh every 60s
-setInterval(init, 60000);
-
-// Refresh on visibility change
-document.addEventListener('visibilitychange', () => {
-    if (document.visibilityState === 'visible') init();
-});
-
-init();
+(async function init(){
+  try{renderCycle(await jget('cycle-accuracy.json'));}
+  catch(e){document.getElementById('score').textContent='—';document.getElementById('band').textContent='DATA UNAVAILABLE';document.getElementById('verdict').textContent='cycle gauge failed to load — never serve stale as live.';}
+  const prim=await jget('market-sentiment.json').catch(()=>null);
+  if(prim){
+    renderMacro(prim.macro);
+    renderRadar(prim);
+    document.getElementById('foot-updated').textContent='radar updated '+new Date(prim.lastUpdated).toLocaleString();
+  }else{
+    document.getElementById('macro-grid').outerHTML='<div class="errsec">market-sentiment.json failed to load</div>';
+  }
+  renderRainbow();
+})();
 </script>
 </body>
 </html>
