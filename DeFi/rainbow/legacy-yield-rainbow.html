@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>DeFi Yield Rainbow — GenTech</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+    --bg: #0a0e17;
+    --bg-alt: #111827;
+    --panel-bg: #1a1f2e;
+    --panel-border: #2a3a52;
+    --gold: #c9a84c;
+    --aae-red: #e84142;
+    --text: #e2e8f0;
+    --text-dim: #6b7b8d;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.header {
+    background: linear-gradient(135deg, #0a0e17 0%, #1a1f2e 50%, #0a0e17 100%);
+    padding: 48px 20px 32px;
+    text-align: center;
+    border-bottom: 1px solid var(--panel-border);
+    position: relative;
+}
+
+.header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: 
+        radial-gradient(ellipse at 20% 50%, rgba(232,65,66,0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 50%, rgba(59,130,246,0.08) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.header h1 {
+    font-size: 1.8em;
+    font-weight: 800;
+    background: linear-gradient(135deg, #e84142, #f59e0b, #22c55e, #3b82f6, #a855f7);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 6px;
+    position: relative;
+}
+
+.header .subtitle {
+    color: var(--text-dim);
+    font-size: 0.85em;
+    position: relative;
+}
+
+.back-link {
+    position: fixed;
+    top: 12px;
+    left: 12px;
+    text-decoration: none;
+    color: var(--text-dim);
+    font-size: 0.85em;
+    padding: 6px 12px;
+    border: 1px solid var(--panel-border);
+    border-radius: 6px;
+    background: var(--panel-bg);
+    z-index: 1000;
+    transition: all 0.2s;
+}
+.back-link:hover { border-color: var(--gold); color: var(--gold); }
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px 16px;
+}
+
+/* Rainbow Chart */
+.rainbow-container {
+    position: relative;
+    margin: 24px 0;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid var(--panel-border);
+    background: var(--panel-bg);
+}
+
+.rainbow-chart {
+    position: relative;
+    height: 380px;
+    overflow: hidden;
+}
+
+.rainbow-band {
+    position: absolute;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    transition: all 0.3s;
+}
+
+.rainbow-band .band-name {
+    font-size: 0.75em;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: 0.9;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+}
+
+.rainbow-band .band-range {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65em;
+    opacity: 0.7;
+    margin-left: auto;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+}
+
+.rainbow-band.current {
+    box-shadow: inset 0 0 40px rgba(255,255,255,0.1);
+    border-top: 2px solid rgba(255,255,255,0.3);
+    border-bottom: 2px solid rgba(255,255,255,0.3);
+}
+
+.current-marker {
+    position: absolute;
+    right: 16px;
+    background: rgba(0,0,0,0.8);
+    border: 2px solid white;
+    border-radius: 8px;
+    padding: 4px 10px;
+    font-size: 0.7em;
+    font-weight: 700;
+    font-family: 'JetBrains Mono', monospace;
+    white-space: nowrap;
+    z-index: 10;
+    animation: pulse-marker 2s ease-in-out infinite;
+    box-shadow: 0 0 20px rgba(255,255,255,0.2);
+}
+
+@keyframes pulse-marker {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+/* Current Band Card */
+.band-card {
+    background: var(--panel-bg);
+    border: 1px solid var(--panel-border);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 16px;
+    position: relative;
+    overflow: hidden;
+}
+
+.band-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; bottom: 0;
+    width: 4px;
+    border-radius: 4px 0 0 4px;
+}
+
+.band-card .band-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.band-card .band-emoji {
+    font-size: 1.8em;
+}
+
+.band-card .band-title {
+    font-size: 1.2em;
+    font-weight: 700;
+}
+
+.band-card .band-desc {
+    color: var(--text-dim);
+    font-size: 0.9em;
+    line-height: 1.5;
+    margin-bottom: 12px;
+}
+
+.band-card .band-advice {
+    background: rgba(255,255,255,0.05);
+    border-radius: 8px;
+    padding: 12px;
+    font-size: 0.85em;
+    line-height: 1.5;
+    border-left: 3px solid;
+}
+
+/* Stats Grid */
+.stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.stat-card {
+    background: var(--panel-bg);
+    border: 1px solid var(--panel-border);
+    border-radius: 10px;
+    padding: 14px;
+    text-align: center;
+}
+
+.stat-card .stat-value {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.4em;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.stat-card .stat-label {
+    font-size: 0.7em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.stat-card.highlight {
+    border-color: var(--gold);
+    background: linear-gradient(135deg, rgba(201,168,76,0.05), transparent);
+}
+
+/* History Line */
+.history-section {
+    background: var(--panel-bg);
+    border: 1px solid var(--panel-border);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 16px;
+}
+
+.history-section h3 {
+    font-size: 0.85em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 16px;
+}
+
+.history-canvas {
+    width: 100%;
+    height: 120px;
+}
+
+/* Disclaimer */
+.disclaimer {
+    text-align: center;
+    color: var(--text-dim);
+    font-size: 0.7em;
+    padding: 20px;
+    opacity: 0.6;
+}
+
+/* Loading */
+.loading {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--text-dim);
+}
+
+.loading .spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid var(--panel-border);
+    border-top-color: var(--gold);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin: 0 auto 16px;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Fade in animation */
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeIn 0.5s ease forwards;
+}
+
+@keyframes fadeIn {
+    to { opacity: 1; transform: translateY(0); }
+}
+</style>
+</head>
+<body>
+<a href="../hub.html" class="back-link">🏠 Hub</a>
+
+<div class="header">
+    <h1>🌈 DeFi Yield Rainbow</h1>
+    <div class="subtitle">LP Farming Risk Visualization — GenTech Labs</div>
+</div>
+
+<div class="container" id="app">
+    <div class="loading" id="loading">
+        <div class="spinner"></div>
+        <div>Loading rainbow data...</div>
+    </div>
+</div>
+
+<script>
+const DATA_URL = 'yield-rainbow-data.json';
+
+function getBandOpacity(bandPosition, currentPosition) {
+    const diff = Math.abs(bandPosition - currentPosition);
+    return Math.max(0.5, 1 - diff * 0.12);
+}
+
+function renderRainbowChart(data) {
+    const { currentBand, bands, position, metrics } = data;
+    const container = document.getElementById('app');
+    
+    // Sort bands by rainbow_position (1 = top, 6 = bottom)
+    const sortedBands = [...bands].sort((a, b) => a.rainbow_position - b.rainbow_position);
+    const bandHeight = 380 / sortedBands.length;
+    
+    let chartHTML = '<div class="rainbow-container fade-in"><div class="rainbow-chart">';
+    
+    sortedBands.forEach((band, i) => {
+        const isCurrent = band.id === currentBand.id;
+        const opacity = getBandOpacity(band.rainbow_position, currentBand.position);
+        const top = i * bandHeight;
+        
+        chartHTML += `
+            <div class="rainbow-band ${isCurrent ? 'current' : ''}" 
+                 style="top: ${top}px; height: ${bandHeight}px; 
+                        background: ${band.gradient}; 
+                        opacity: ${opacity};">
+                <span class="band-name">${band.emoji} ${band.name}</span>
+                <span class="band-range">Eff: ${band.efficiency_min}–${band.efficiency_max}%</span>
+            </div>
+        `;
+        
+        if (isCurrent) {
+            chartHTML += `
+                <div class="current-marker" style="top: ${top + bandHeight/2 - 12}px;">
+                    ${position.currentPrice.toFixed(4)} ← HERE
+                </div>
+            `;
+        }
+    });
+    
+    chartHTML += '</div></div>';
+    return chartHTML;
+}
+
+function renderCurrentBand(data) {
+    const { currentBand, metrics } = data;
+    
+    return `
+        <div class="band-card fade-in" style="animation-delay: 0.1s;">
+            <div style="position:absolute;top:0;left:0;bottom:0;width:4px;background:${currentBand.color};border-radius:4px 0 0 4px;"></div>
+            <div class="band-header">
+                <span class="band-emoji">${currentBand.emoji}</span>
+                <span class="band-title" style="color:${currentBand.color}">${currentBand.name}</span>
+            </div>
+            <div class="band-desc">${currentBand.description}</div>
+            <div class="band-advice" style="border-left-color:${currentBand.color}">
+                ${currentBand.advice}
+            </div>
+        </div>
+    `;
+}
+
+function renderStats(data) {
+    const { metrics, position } = data;
+    const efficiencyColor = metrics.efficiency >= 70 ? '#22c55e' : 
+                           metrics.efficiency >= 50 ? '#eab308' : 
+                           metrics.efficiency >= 30 ? '#f59e0b' : '#e84142';
+    
+    return `
+        <div class="stats-grid fade-in" style="animation-delay: 0.2s;">
+            <div class="stat-card highlight">
+                <div class="stat-value" style="color:${efficiencyColor}">${metrics.efficiency}%</div>
+                <div class="stat-label">Efficiency</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" style="color:var(--gold)">${metrics.annualizedApr.toFixed(0)}%</div>
+                <div class="stat-label">APR</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" style="color:#22c55e">$${metrics.dailyFees.toFixed(4)}</div>
+                <div class="stat-label">Daily Fees</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" style="color:#3b82f6">$${metrics.weeklyFees.toFixed(2)}</div>
+                <div class="stat-label">Weekly Fees</div>
+            </div>
+        </div>
+    `;
+}
+
+function renderPriceInfo(data) {
+    const { position, metrics } = data;
+    const changeColor = metrics.priceChange24h >= 0 ? '#22c55e' : '#e84142';
+    const changeEmoji = metrics.priceChange24h >= 0 ? '📈' : '📉';
+    
+    return `
+        <div class="stats-grid fade-in" style="animation-delay: 0.3s;">
+            <div class="stat-card">
+                <div class="stat-value" style="font-size:1.1em;">$${position.currentPrice.toFixed(4)}</div>
+                <div class="stat-label">AVAX Price</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" style="color:${changeColor};font-size:1.1em;">
+                    ${changeEmoji} ${metrics.priceChange24h >= 0 ? '+' : ''}${metrics.priceChange24h.toFixed(2)}%
+                </div>
+                <div class="stat-label">24h Change</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" style="font-size:1em;">$${position.rangeLow.toFixed(2)}–$${position.rangeHigh.toFixed(2)}</div>
+                <div class="stat-label">Range</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" style="font-size:1em;">$${position.positionUsd.toFixed(2)}</div>
+                <div class="stat-label">Position</div>
+            </div>
+        </div>
+    `;
+}
+
+function drawHistoryChart(canvasId, history, currentBand, bands) {
+    const canvas = document.getElementById(canvasId);
+    if (!canvas) return;
+    
+    const ctx = canvas.getContext('2d');
+    const dpr = window.devicePixelRatio || 1;
+    const rect = canvas.getBoundingClientRect();
+    canvas.width = rect.width * dpr;
+    canvas.height = rect.height * dpr;
+    ctx.scale(dpr, dpr);
+    
+    const w = rect.width;
+    const h = rect.height;
+    const padding = { top: 10, bottom: 20, left: 0, right: 0 };
+    const chartH = h - padding.top - padding.bottom;
+    const chartW = w - padding.left - padding.right;
+    
+    // Draw band backgrounds
+    const bandColors = [
+        { min: 90, color: 'rgba(232,65,66,0.15)' },
+        { min: 75, color: 'rgba(245,158,11,0.12)' },
+        { min: 60, color: 'rgba(234,179,8,0.1)' },
+        { min: 40, color: 'rgba(34,197,94,0.08)' },
+        { min: 20, color: 'rgba(59,130,246,0.08)' },
+        { min: 0, color: 'rgba(168,85,247,0.08)' },
+    ];
+    
+    bandColors.forEach(band => {
+        const y = padding.top + chartH * (1 - band.min / 100);
+        const bandH = chartH * (10 / 100);
+        ctx.fillStyle = band.color;
+        ctx.fillRect(padding.left, y - bandH, chartW, bandH);
+    });
+    
+    // Draw grid lines
+    ctx.strokeStyle = 'rgba(255,255,255,0.05)';
+    ctx.lineWidth = 1;
+    for (let i = 0; i <= 4; i++) {
+        const y = padding.top + (chartH * i / 4);
+        ctx.beginPath();
+        ctx.moveTo(padding.left, y);
+        ctx.lineTo(w - padding.right, y);
+        ctx.stroke();
+    }
+    
+    if (history.length < 2) return;
+    
+    // Draw the line
+    ctx.beginPath();
+    ctx.strokeStyle = currentBand.color;
+    ctx.lineWidth = 2.5;
+    ctx.lineJoin = 'round';
+    ctx.lineCap = 'round';
+    
+    const stepX = chartW / (history.length - 1);
+    
+    history.forEach((val, i) => {
+        const x = padding.left + i * stepX;
+        const y = padding.top + chartH * (1 - val / 100);
+        if (i === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+    });
+    ctx.stroke();
+    
+    // Draw gradient fill
+    const gradient = ctx.createLinearGradient(0, padding.top, 0, h - padding.bottom);
+    gradient.addColorStop(0, currentBand.color + '30');
+    gradient.addColorStop(1, currentBand.color + '05');
+    
+    ctx.lineTo(padding.left + (history.length - 1) * stepX, h - padding.bottom);
+    ctx.lineTo(padding.left, h - padding.bottom);
+    ctx.closePath();
+    ctx.fillStyle = gradient;
+    ctx.fill();
+    
+    // Draw current value dot
+    const lastVal = history[history.length - 1];
+    const dotX = padding.left + (history.length - 1) * stepX;
+    const dotY = padding.top + chartH * (1 - lastVal / 100);
+    
+    ctx.beginPath();
+    ctx.arc(dotX, dotY, 5, 0, Math.PI * 2);
+    ctx.fillStyle = currentBand.color;
+    ctx.fill();
+    ctx.strokeStyle = 'white';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+    
+    // Glow effect
+    ctx.beginPath();
+    ctx.arc(dotX, dotY, 10, 0, Math.PI * 2);
+    ctx.fillStyle = currentBand.color + '20';
+    ctx.fill();
+}
+
+async function init() {
+    const app = document.getElementById('app');
+    
+    try {
+        const res = await fetch(DATA_URL + '?t=' + Date.now());
+        if (!res.ok) throw new Error('Failed to load data');
+        const data = await res.json();
+        
+        // Remove loading
+        app.innerHTML = '';
+        
+        // Render sections
+        app.innerHTML = `
+            ${renderRainbowChart(data)}
+            ${renderCurrentBand(data)}
+            ${renderStats(data)}
+            ${renderPriceInfo(data)}
+            <div class="history-section fade-in" style="animation-delay: 0.4s;">
+                <h3>📈 30-Day Efficiency History</h3>
+                <canvas id="history-chart" class="history-canvas"></canvas>
+            </div>
+            <div class="disclaimer">
+                ⚠️ Not financial advice. Rainbow charts are for visualization only.<br>
+                Generated: ${new Date(data.lastUpdated).toLocaleString()} • ${data.meta.dataSources.join(', ')}
+            </div>
+        `;
+        
+        // Draw history chart after DOM is ready
+        requestAnimationFrame(() => {
+            drawHistoryChart('history-chart', data.history, data.currentBand, data.bands);
+        });
+        
+    } catch (err) {
+        app.innerHTML = `
+            <div class="loading">
+                <div style="font-size:2em;margin-bottom:16px;">⚠️</div>
+                <div>Failed to load rainbow data</div>
+                <div style="color:var(--text-dim);font-size:0.8em;margin-top:8px;">${err.message}</div>
+            </div>
+        `;
+    }
+}
+
+// Auto-refresh every 60s
+setInterval(init, 60000);
+
+// Refresh on visibility change
+document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible') init();
+});
+
+init();
+</script>
+</body>
+</html>
