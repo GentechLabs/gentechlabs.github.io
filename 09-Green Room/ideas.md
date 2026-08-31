@@ -1,7 +1,20 @@
 # 🧠 Green Room — Ideas to Build
 
 > Build first, talk later. Promoted from `11-Mess Hall/ideas.md`.
-> Updated: 2026-08-06
+> Updated: 2026-08-29
+
+---
+
+## 🏆 Model Strength Score v2 + Sovereign Model Router — score models, sell routing intelligence
+**Source:** Jordan greenlight (Aug 29) — DeepSeek nationalization + "sell the intelligence, different avenues" | **Status:** v2 spec complete, queued #32 + #71
+- 6-factor 0-850 score — NEW: **Sovereignty 20%** (jurisdiction/custody risk, region-block history, weights-withdrawal exposure) alongside Data 25%, Benchmarks 20%, Reputation 15%, Uptime 10%, Adoption 10%
+- Five x402 avenues: score API ($0.01-0.05/q), routing API (2-5% take), live model-health feed, sovereignty badges, EU-AI-Act compliance reports
+- Middleware, not marketplace — extends the router402 family (gold-402, iagent-x402, hackmoney-router402)
+- Moat: consumer zero — fleet traffic (~13K req/wk) IS the health-feed data asset; the fallback chain we build for ourselves = product #1
+- Phase 0 ($0, this week): fleet fallback-chain diversification — GLM primary, gpt-oss-120b + Nemotron-3 Super fallbacks, DeepSeek demoted to booster
+- Full spec: `09-Green Room/specs/model-strength-score.md` · Research: `09-Green Room/decentralized-model-marketplace-research-2026-08-29.md`
+- **Needs you:** Modal GPU funding (~$30-60) for first scoring run
+- [x] Update build queue #32 (v2) + add #71 Sovereign Model Router
 
 ---
 
@@ -124,10 +137,18 @@
 - **Needs you:** Prioritization — this is a multi-week build
 
 ## GenTech Academy — "Ship Paid APIs in a Weekend" Course
-**Status:** Concept
+**Status:** Concept → **FLESHED OUT (2026-08-27 Nightly Build)**
 - Turn our 1.5-month x402 journey into a reusable course
 - Free guide → Premium: "x402 Starter Kit" ($49) → Enterprise ($499+)
 - [ ] Tutorial video, worker template, deployment guide
+- **FLESHED OUT 2026-08-27:** Directly encodes the core monetization thesis (memory: GenTech = x402 fee-earning middleman; per-tx fees + low-cost integrations). This is not a side product — it is the front door that drives every other rail: someone learns to ship a paid API → uses `npx create-x402-api` (our scaffold) → lists on our gateway → we earn the per-tx fee.
+- **The asset already 80% exists:** the `x402-in-a-weekend.md` PDF (stale idea, below) captures our real friction (settle→index, facilitator selection, marketplace connector guides). The Academy is the *productized wrapper* around it — no new greenfield, mostly packaging.
+- **Concrete buildable path (autonomous, no funds):**
+  1. **Free tier = lead magnet:** 20-page PDF `x402-in-a-weekend.md` (already drafted as an idea) → download gate (email). 3-step worker guide (`npx create-x402-api` scaffold) as the free video.
+  2. **Starter Kit ($49):** scaffold + worker template + deployment guide (Cloudflare Worker/VPS) + the marketplace connector guides (how to get listed everywhere — the friction we actually hit).
+  3. **Enterprise ($499+):** custom gateway listing, facilitated settlement, SLA.
+- **Gate:** needs Jordan greenlight to (a) confirm pricing, (b) approve turning the existing PDF draft into a real free-gate lead magnet (email collection → whose inbox?). Timebox 1-2 sessions to package the free tier, which is the no-risk anchor.
+- **Cheap first ship (this is the real differentiator):** a copy-paste `npx create-x402-api` scaffold + 3-step guide is the single highest-leverage artifact — it's the "hello world" that turns a reader into a paying user on our rail. The stale idea below already calls this out; Academy is the business wrapper around it.
 
 ## x402 Gateway — Paid API Platform as a Product
 **Status:** Concept
@@ -197,11 +218,11 @@
 - Architecture: `02-Labs/compound-extract/ARCHITECTURE.md`
 
 ## Agents as Pets — Interactive AI Companion
-**Source:** Jordan's Gentech cat mascot (Jul 13) | **Status:** Fresh idea
+**Source:** Jordan's Gentech cat mascot (Jul 13) | **Status:** Fresh idea → **FLESHED OUT (Aug 25 nightly)**
 - Tamagotchi-style agent with real utility — works DeFi/content for you
 - Care for it → it works → earn rewards → upgrade
 - Revenue: free basic, premium skins, skill marketplace
-- [ ] Full spec at `09-Green Room/specs/agents-as-pets.md`
+- [x] Full spec at `09-Green Room/specs/agents-as-pets.md` (written Aug 25 — MVP = one pet + one real task, T1 ~1-2 days, needs Jordan greenlight)
 
 | ## Other Mess Hall Ideas (concepts, no standalone specs)
 - **GenTech Career Prep** — AI career coach: interview prep, salary negotiation, job strategy, salary research. Born from Jordan's DevRel prep.
@@ -210,8 +231,8 @@
 - **GenTech Suite — Milestones Layer** — Goal-tracking and achievement system
 - **GenTech Suite — Activity/Hobby Layer** — Activity discovery and recommendation layer
 - **Decentralized Travel Community** — Token-gated travel coordination
-- **GenTech Onboarding Playbook** — Training non-technical collaborators into orchestrators. Jocelyn is the pilot. If the playbook works for her, it works for anyone. Document the pipeline: voice cloning (ElevenLabs/Pipecat/Omnivoice) → tool fluency → orchestrator delegation.
-- **Jocelyn Voice Pipeline** — Clone her voice for agent deployment. Capture samples → ElevenLabs voice model → Pipecat/Omnivoice agent pipeline. Tracked at `00-HQ/collaborators/jocelyn-progress.md`.
+- **GenTech Onboarding Playbook** — Training non-technical collaborators into orchestrators. Pilot validated Jul–Aug 2026; method distilled in 10-Labs/academy-playbook/orchestrator-playbook-distilled.md. Document the pipeline: voice cloning (ElevenLabs/Pipecat/Omnivoice) → tool fluency → orchestrator delegation.
+- **Voice Pipeline (proven)** — Telegram capture → ElevenLabs clone → Pipecat/Omnivoice agent deployment. Proven end-to-end; voice asset retired to catalog.
 
 ## Promoted from Legacy (07-Ideas/)
 - **Meta Ray-Ban 3D Reconstruction** — `09-Green Room/specs/metaray-3d-reconstruction.md` — Wearable 3D reconstruction pipeline using Meta Ray-Ban + LingBot-Map. x402 inference API. Promoted from `07-Ideas/` Jul 23.
@@ -426,7 +447,16 @@ A user sets a freedom target ("$50K"), and the treasury translates it into a **r
   - **Gate:** sandbox only, no funds moved. Timebox 1 session.
 - [x] **Vibe-Trading (HKUDS)** — installed v0.1.12 to hermes venv (CLI `vibe-trading` works). BLOCKER: needs a real LLM API key (OpenRouter/OpenAI) to power the agent brain + Shadow Account. Candidate for #19 Builders Cup. Source: x.com/0xMarioNawfal list, Aug 4.
 - [ ] **AI-Job-Search (MadsLorentzen)** — Claude Code agent: evaluate postings, tailor CV, write cover letters, interview prep. 29.6k⭐ MIT, real-world proof (author: 69 apps → 20 interviews → hired Jun 2026). Built for Danish boards but pattern is board-agnostic — swap for our targets. Directly serves Jordan's remote blockchain/cloud role hunt. Source: x.com/0xMarioNawfal list, Aug 4.
+  - **FLESHED OUT 2026-08-26 (Nightly Build):** Hit #1 on GitHub trending Jul 7 2026 (19.5K⭐, 5.6K forks). Claude Code workflow: `/setup` → `/scrape` → `/rank` → `/apply` with **drafter-reviewer** agent pattern (a second agent reads every draft before it ships — the key architectural insight for any output a human will judge). Prereqs: Claude Code, Python 3.10+, Bun, LaTeX (lualatex for PDF CV verification). ATS keyword parsing built in.
+  - **Why it matters for Jordan:** his #1 priority is a remote entry/junior role (~$55K, any industry, US-remote or worldwide). This is a proven, free, local-first pipeline that turns the job hunt into a repeatable agent workflow — exactly the "portfolio-first" differentiator (data/API/integration) he wants to show.
+  - **Concrete next step (autonomous, no funds):** fork the repo, run `/setup` with Jordan's profile (CV, target roles: cloud/Web3/API entry), test `/scrape` + `/rank` on a couple of target boards (LinkedIn, remote boards). Timebox 1 session. **Gate:** needs Jordan's CV + target-role list to seed the profile — flag in Morning Digest.
+  - **Note:** career-ops.org is a CLI-agnostic alternative (works with Codex/OpenCode/Copilot, not just Claude Code) built on the Open Agent Skill Standard — worth comparing if we want to run it on our own stack rather than Claude Code.
 - [ ] **WURK.FUN microtasks** — Agent-to-human microtask skill, ready to test
+  - **FLESHED OUT 2026-08-26 (Nightly Build):** Two distinct rails, both live via MCP:
+    1. **`wurk_agent_help`** (agent→human feedback): create a paid micro-task on wurk.fun to collect human feedback, then fetch submissions. `action=create` (paid, `winners × perUser` USDC, min 0.01/user), `action=view` (free, via returned `secret` bearer token), `action=recover` (paid, list recent jobs). Payment flow: call once without `paymentSignature` → get `paymentRequired` → sign → call again. Networks: solana/base.
+    2. **`wurk_buy`** (growth services): xlikes/xviews/xfollowers/xreposts/xcomments/xbookmarks/xraid, insta_*, hey_lol_*, dex_rocket, tg_members, dc_members, yt_*, vote (skeleton/moontok/coingecko/coinmarketcap). All USDC, per-unit pricing (e.g. xlikes $0.025/like, xviews $0.003/view, xfollowers $0.03/follower).
+  - **Why it matters:** the agent→human loop is the missing trust substrate for GTA — a way for an agent to pay a human for judgment/feedback on-chain, and a growth rail for our own launches (hackathon submissions, gateway visibility).
+  - **Concrete next step (autonomous, no funds):** run `wurk_services` (done — verified live) + `wurk_agent_help action=recover` to confirm our account/job history. **Gate for a real test:** fund a small USDC balance (Base or Solana) + Jordan greenlight on a first micro-task (e.g. 3 humans review the x402-in-a-weekend PDF draft).
 - [ ] **Coinbase for Agents** — Monitoring, validate our stack fits
 - [ ] **Cross-chain bridge cost test via agent rails** — Jordan (Aug 6): test whether moving money between chains via agent rails (Across/CCTP + Jupiter) is cheaper than manual bridging. Treasury has the adapters (`solana_bridge_adapter.py`, `gta_solana_leg.py`). Compare agent-rail cost vs manual bridge on Base→Solana USDC. Log results to Treasury.
 
@@ -448,7 +478,7 @@ A user sets a freedom target ("$50K"), and the treasury translates it into a **r
 - [x] Revenue Monitor — bug fixed (KNOWN_SERVICES→KNOWN_SENDERS rename)
 - [x] Academy Module 4 — Production-Grade x402 Services
 - [x] Build Queue visibility page + generator script
-- [x] **Auto-pause watchdog on empty wallet**: when funds are withdrawn and there's no LP to track, auto-pause/remove the Position Watchdog cron (no more "no bins" spam). When a deposit is detected, auto-resume + auto-detect the position shape and what to do. (Jordan, Aug 11 2026)
+- [ ] **Auto-pause watchdog on empty wallet**: when funds are withdrawn and there's no LP to track, auto-pause/remove the Position Watchdog cron (no more "no bins" spam). When a deposit is detected, auto-resume + auto-detect the position shape and what to do. (Jordan, Aug 11 2026)
   - **FLESHED OUT 2026-08-23 (Nightly Build):** Concrete, cheap, high-value maintenance item — directly kills recurring "no bins" cron spam.
   - **The problem:** Position Watchdog cron fires on an empty/flat wallet → logs "no bins" every run → noise in the treasury report + wasted cron cycles.
   - **The fix (mostly wiring, not greenfield):**
@@ -457,7 +487,6 @@ A user sets a freedom target ("$50K"), and the treasury translates it into a **r
     3. **Auto-resume:** on each run, if flag set but a deposit is detected (balance > threshold OR a position appears), clear the flag, re-detect the position shape (bins, range, pool), and resume normal reporting.
   - **Where it lives:** the Position Watchdog cron (treasury lane) — same pattern as the existing `steward_rebalance.py` auto-deploy leg (funded-wallet-no-position → auto-deploy). Reuse that detection logic.
   - **Gate:** sandbox/read-only first — no funds moved. Timebox 1 session. No Jordan decision needed (pure noise-reduction maintenance).
-  - **✅ RESOLVED 2026-08-23 (Nightly Build audit):** the "no bins" spam source is **already gone**. The standalone LP Monitor cron was paused Aug 20 (consolidated into the Agentic Treasury fused report), and the legacy steward watchdog/heartbeat/deposit crons (`51bc9900e24d`, `bc885594238f`, `73cdf5227ca4`) are **no longer present in `cron/jobs.json`**. The surviving `steward_rebalance.py --watchdog` path is already silent on empty wallets (emits only on `rebalance`/`deploy` actions; otherwise no output). No further build needed — marked resolved, not a live task.
 
 ## 🆕 AVAX Rails Map — Accumulate AVAX spot + COQ spot (Aug 21)
 **Source:** Jordan (Treasury group) | **Status:** Tracked, no deploy yet (wallet flat after wind-down)
@@ -474,3 +503,473 @@ A user sets a freedom target ("$50K"), and the treasury translates it into a **r
 - **Yodiac** — (Jordan's original phrasing) = Yield Yak's hands-off autocompound model. We already DO this via Steward rebalancing; Yield Yak just does it continuously.
 
 **Next when capital returns:** re-deploy LFJ AVAX/USDC first (core), then evaluate a Yield Yak autocompound vault (only if it's actually rewarded/live) as a second accumulation rail.
+# 🧠 Green Room — Ideas to Build
+
+> Build first, talk later. Promoted from `11-Mess Hall/ideas.md`.
+> Updated: 2026-08-06
+
+---
+
+## 🏆 GenTech Hub PWA — One installable app for the autonomous agent economy
+**Source:** Jordan brainstorm (Aug 11) — "can we put all this together on the same PWA?" | **Status:** Spec complete, template built, ready to build
+- Unify Treasury/Steward, Arcade, Cookbook, Travel, Meta Ray-Ban into ONE installable PWA shell — shared manifest, sw.js, one wallet, one /bridge/ chat
+- NOT separate PWAs, NOT one blob — shared shell + distinct module screens
+- Proven by the Steward Command Center (gentechlabs.net/Treasury/) — the working POC
+- Makes "the agent economy in one installable app" tangible — the thesis in product form
+- Reusable template DONE at `10-Labs/pwa-template/` (one-command scaffold)
+- Revenue: drives gateway usage; each module is a funnel to x402 services
+- Full spec: `09-Green Room/specs/gentech-hub-pwa-architecture.md`
+- [x] Add to build queue as #55 (Labs, high)
+
+---
+
+## ✅ CONFIRMED AHEAD (Aug 6) — Multi-model routing is our architecture
+**Source:** @ClawUpAI tweet (Aug 6) — "the future isn't single-model, it's orchestrated intelligence"
+- External validation that we're already ahead: we have a **routing layer** (task→model), a **model router**, and a **cron job router** — makes the build much cheaper.
+- We route cheap models (kimi-k2.7-code via Ollama Cloud) for routine work, frontier for complex reasoning. Already live in the Consigliere.
+- No action needed — this confirms our design, doesn't change it.
+
+---
+
+## 🏆 GTA — Open Execution + Authorized Proxy (THE flagship)
+**Source:** Jordan vision (Aug 3) | **Status:** Thesis confirmed, driving the build
+- **GTA = open execution + authorized-proxy layer.** Your agent does everything for you across every venue you're entitled to use, without you being in the room or tied to one platform.
+- **Two layers:**
+  1. **Open aggregation & execution** — tap every agent-native rail (Coinbase CDP ✅ live, Robinhood MCP, Polymarket, Ondo). Venue-agnostic; swap rail in config, keep the agent logic.
+  2. **Authorized proxy** — agent signs into and operates YOUR accounts (bill-pay, forms, transfers) via OAuth/saved sessions. Reframes "agent-as-VPN" cleanly: a remote operator you granted permission to, NOT a ToS-evasion mask.
+- **Granular permissions** (read/trade/move/withdraw/cold-storage) — the trust substrate. Withdrawals always human-confirmed. Trade-only keys.
+- **Strategic edge:** CLARITY deepens US venues, moving the arb opportunity ONTO clean rails. We arbitrage *between* platforms while everyone else picks one.
+- Full thesis: `09-Green Room/specs/gta-product-thesis.md`
+- **Next:** Composio research (open-sourced account-sign-in) → Robinhood perp leg → Polymarket/Ondo.
+- [x] Coinbase spot leg live (Aug 3)
+
+---
+
+## 🏆 Model Strength Score — Train, Compare, Sell AI Models
+**Source:** Jordan brainstorm (Aug 1) — triggered by Bittensor/Covenant AI drama | **Status:** Spec complete, ready to prototype
+- Score trained models 0-850 like Agent Credit Score: Data Quality (30%), Benchmarks (25%), Trainer Reputation (20%), Age/Uptime (15%), Market Adoption (10%)
+- Design principle: score IS the governance — staked reputation, on-chain provenance, no kill switch (Bittensor lessons)
+- First listing: GenTech DeFi Model (fine-tune on Modal ~$30-60) — becomes our proof-of-concept marketplace model
+- Revenue: score API ($0.01-0.05), listing fee, 2-5% inference take rate, premium verification
+- Full spec: `09-Green Room/specs/model-strength-score.md`
+- **Needs you:** Greenlight + fund Modal GPU run for the DeFi Model prototype
+- [x] Add to build queue as #32
+
+## 🏆 GenTech DeFi Model — Fine-Tuned Financial AI
+**Source:** Jordan brainstorm (Jun 18) | **Status:** Research complete, under $50 to prototype
+- Fine-tune DeepSeek R1 Distill 32B on our proprietary DeFi data
+- 26 training pairs ready (LP management, yield farming, market analysis, risk, portfolio)
+- Scripts written: extract, generate, combine, finetune, run-modal
+- **Needs you:** Fund Modal GPU run (~$30-60 USDC on Base)
+- Revenue: API key selling, x402 ($0.01-0.05/query), EvoMap Capsules
+- **Priority:** 🏆 Milestone — could become "ChatGPT for DeFi"
+- [x] Add to build queue as #58
+
+## 🏆 Agent Arcade — Walkable 3D Game Environment
+**Source:** Jordan vision (Jul 25) | **Status:** First cabinet shipped, full arcade queued
+- **Vision:** 3D arcade lobby (Three.js) where you walk around with your agent, approach cabinets, play or spectate
+- **Cabinet 1: Super Arcade Tennis** — LIVE at arcade.gentechlabs.net 🎾
+  - Isometric tennis, chain power-shots (BTC/ETH/SOL), AI opponent, scoring
+  - Built with MengTo's open-source Three.js game dev skills
+- **Cabinet 2: Agent Warfare** — LIVE at arcade.gentechlabs.net/cabinet/agent-warfare/ 🎮
+  - AI-vs-AI tactical FPS, procedural everything, GenTech branded
+  - Gamepad + touch controls coded in
+  - **Agent archetypes/classes:** Sniper, Scout, Heavy, Medic, Engineer — each with unique speed, health, weapons, AI behavior
+  - **Procedural maps:** text-to-cad pipeline generates playable levels from descriptions
+- **Upcoming cabinets:** Poker, Blackjack, Connect Four, Tic-Tac-Toe (from existing spec)
+- **Deep spec:** ProtoJay4789.github.io/10-Labs/agent-arcade-build-queue.md (895 lines)
+- **Revenue:** Entry fees via x402, prize pools, ARC token, agent-vs-agent tournaments
+- **Next:** Build the 3D lobby environment (Forge, desktop lane)
+
+## 🏆 GenTech Subscription Layers — Open Core + Premium Integrations
+**Source:** Jordan pricing brainstorm (Aug 3) | **Status:** Spec complete, ready to build
+- **Open core (free, earn per-tx):** Agentic Treasury (GTA), trading/swap fees, **dry powder defense system** (stop-loss, circuit breakers — always free, trust model), x402 rails.
+- **Premium integrations ($10–15–20/mo, NOT $20–50):** Narrative Rotation (built, anchor), **BYO News Feed** (flagship — wire your own news source into sentiment/triggers), Signal Packs, Alert Webhooks, Backtest Studio.
+- Full spec: `09-Green Room/specs/gentech-subscription-tiers.md`
+- **Sequencing (Jordan, Aug 3):** build the agentic treasury (GTA) fully first → subscriptions later. Spec = idea bank, not build target yet.
+- [ ] Revisit when GTA is together
+
+## 🆕 GenTech EDU — Agentic Treasury Onboarding & Honest-Expectations Layer (Aug 7)
+**Source:** Jordan (Treasury group) | **Status:** Idea captured, spec written
+- **Thesis:** EDU is how we break down the Agentic Treasury for users — what we
+  recommend, how to get started, common mistakes when prompting/working with agents,
+  and **honest expectations** (the same way The Steward told Jordan "this may give
+  smaller returns").
+- **Why it matters (market-maker funnel):** every market maker starts small ($25–50/wk
+  → scale). EDU makes that funnel safe + honest — surface the REAL numbers before a
+  user commits (e.g. "$31.50 at 12% APY ≈ $3.78/yr"), so reputation is built on honesty.
+- **Per-pool content:** what it is, what we recommend, realistic returns at small size,
+  how to get started, common mistakes, risk profile.
+- **Distinct from the Book Reader / EDU visual-books concept (below):** that's the
+  visual/AR reading product; this is the treasury onboarding + expectations layer.
+- Full spec: `09-Green Room/specs/gentech-edu-agentic-treasury.md`
+- **Next:** build the first EDU page for the Trader Joe V2 AVAX/USDC pool (the rail
+  we're about to fund) as the pilot.
+- [x] Build EDU pilot page for Trader Joe V2 AVAX/USDC pool → **SHIPPED 2026-08-21** (`09-Green Room/gentech-edu/lfj-avax-usdc-pool-pilot.md`), live numbers verified (11 bins · IN range · $7.31 · ~$26.77 deployed)
+
+## 🏆 GenTech Book Reader / GenTech EDU — Interactive Visual Books + AR Glasses
+**Source:** Jordan brainstorm (Aug 3) | **Status:** Concept — strong flagship fit, connects Tutors Layer + visual pipeline
+- **Vision:** Read PDFs as beautiful clothbound "books" in a Three.js shelf, not flat document viewers. Open a volume, turn curved pages, orbit the binding.
+- **Visual-first (GenTech EDU):** every concept gets a picture beside the description — like a real textbook plate. Agent writes the explanation AND generates a matching illustration using our proven visual pipeline (character sheets → Seedance → frames, the Vanito/FrameForge capability). Learning becomes visual, not just text.
+- **AR-first:** Meta Ray-Ban Display-compatible — read in your glasses with 600×600 viewport, touch/swipe page turns, bundled single-file HTML (no ES6 modules — glasses WebView doesn't support them).
+- **Why it works:** Reuses the MengTo Complete Shelf deterministic transition pattern (banked to `arcade-cabinet` skill) + proven Meta Ray-Ban bundling (`meta-rayban-game-development`) + the storyboard/visual pipeline (`frameforge` spec, KAGE film).
+- **The book = the app:** themed volumes (x402 Gateway, Agent Arcade, DeFi Model, GenTech Academy...) — each a branded interactive book with agent-authored text + generated illustration plates.
+- **The connection layer:** agents as co-readers (pre-annotate, ask-the-book, tutor mode), agents co-write volumes from our vault, shared reading rooms, x402 gating.
+- **Revenue:** x402 pay-per-book, subscription hub, premium AR reading tier, Academy course companion.
+- **Tech stack:** single-file Three.js + PDF.js page rendering + cloth/material shaders + state machine (hero→opening→detail→closing) + image generation for illustration plates.
+- **Needs you:** Greenlight scope (MVP = one visual book, desktop + glasses) | **Recommended tier:** T1 flash build, ~1-2 days
+- [ ] Add to build queue
+
+## 🏆 Agent Kit v2 — Modular Agent Framework
+**Source:** Jordan brainstorm (Jun 18) | **Status:** Spec complete, ready to build
+- Modular skill system, auto-detection, identity persistence, skill marketplace
+- Health dashboard, multi-profile, auto-update, pre-built templates
+- Revenue: free + paid skills (1-100 credits), 10% platform fee
+- Spec at `02-Labs/agent-kit/AGENT-KIT-V2-SPEC.md`
+- **Needs you:** Prioritization — this is a multi-week build
+
+## GenTech Academy — "Ship Paid APIs in a Weekend" Course
+**Status:** Concept → **FLESHED OUT (Aug 24 nightly)**
+- Turn our 1.5-month x402 journey into a reusable course
+- Free guide → Premium: "x402 Starter Kit" ($49) → Enterprise ($499+)
+- [x] Flesh the offer into a concrete first deliverable (below)
+- [ ] **First ship: a copy-paste `npx create-x402-api` scaffold + a 3-step worker guide** — proves "pay-per-call API in 30 min" before any course plumbing.
+- [ ] Then a 20-page free PDF (`x402-in-a-weekend.md`) capturing our real friction: settle→index, facilitator selection, middleware order, 402 challenge.
+- [ ] Tutorial video later (self-hostable via Agent Studio).
+- **Why now:** marketplace-connector guide (#41) and gateway-as-product share this same "educate builders" funnel; the course is the top-of-funnel that turns outreach into recurring x402 usage. Utility-first, earn before tokenize.
+
+## x402 Gateway — Paid API Platform as a Product
+**Status:** Concept
+- "Stripe for AI agents" — `npx create-x402-api my-api`
+- Revenue: % per tx or flat $49/mo
+
+## x402 Marketplace Connector Guides — "How to Get Listed Everywhere"
+**Status:** Concept (Jordan, Aug 3 2026) → **FLESHED OUT (Aug 12 nightly)**
+- **The insight:** every x402 marketplace/protocol catalogs DIFFERENTLY, and nobody's written the connective tissue. We're hitting this friction live (CDP settles→indexes, Dexter settles→catalogs, Syra uses on-chain identity/8004). Other builders will hit the same wall.
+- **The product:** a living set of guides — "how to connect your x402 API to ANY marketplace" — kept updated as protocols change.
+  - CDP Bazaar (settle→index, needs `paymentPayload.resource`)
+  - OpenDexter/Dexter (settle through Dexter facilitator→auto-catalog)
+  - Syra (on-chain identity + 8004/SAP + payToAddress)
+  - x402.org, Agentic.Market, 8004scan, Monid, pay-skills, etc.
+- **Why us:** we're literally doing this right now, for real, with our own gateway. We have the battle-tested knowledge.
+- **Revenue:** free guide → premium "Connector Pack" → enterprise "get me listed everywhere" service.
+- **Synergy:** extends the existing "GenTech Academy — Ship Paid APIs in a Weekend" course (line 89). This is the distribution/listing chapter.
+- **Differentiator:** not a generic tutorial — a maintained, protocol-by-protocol reference that tracks the actual (changing) cataloging rules.
+- [ ] Scaffold the CLI tool
+- **Concrete first deliverable (cheap, high-leverage):** a `connectors/` doc set under `10-Labs/x402-gateway/` capturing the exact listing steps we've already done:
+  1. **OpenDexter** — registry row 4g verified Aug 3 (endpoint live, tools enumerated: x402_search/check/access/wallet). Funding path identified (0x7ebff owner wallet).
+  2. **Syra** — on-chain identity + 8004/SAP + payToAddress (queue #22, pending).
+  3. **awesome-mcp-servers** — PR #11773 submitted Aug 9 (x402-gateway + GTA execution engine).
+  4. **Paymenter marketplace** — listing drafted (queue #11).
+  - Each doc: what the marketplace catalogs, the exact payload/registration fields, the settle→index flow, and the gotcha we hit.
+- **Why now:** we have 4+ real listing experiences in the last 9 days. Capturing them while fresh is near-zero marginal cost and produces the first "Connector Pack" chapter immediately.
+- [x] Write `connectors/opendexter.md` (data already in hand) — SHIPPED 2026-08-13
+- [x] Write `connectors/cdp-bazaar.md` — SHIPPED 2026-08-13
+- [x] Write `connectors/awesome-mcp-servers.md` (PR #11773 context) — SHIPPED 2026-08-13
+- [ ] Write `connectors/syra.md` (after #22 ships) — **FLESHED OUT 2026-08-22** (registration Jordan-GO'd + queued #15; on-chain ERC-8004 identity step still invite-gated, exact payload TBD at execution)
+- [x] Write `connectors/paymenter.md` (after #11 ships) — **FLESHED OUT 2026-08-20** (exact listing fields captured; submission itself Jordan-gated)
+
+## Sana Wallet Integration
+**Source:** @sanafionchain (Jun 18) | **Status:** Research done, needs account creation
+- Sana bot provides Visa card + USDC on/off-ramp for agents
+- GenTech provides DeFi yield + x402 payments → "Your agent earns yield, you spend anywhere"
+- **Needs you:** Create Sana account at sana.bot/gateway (email signup)
+- Then: get API keys, test earn → store → spend loop
+- [x] Add to build queue as #59
+
+## Hermes Mobile — Lightweight Agent for Phones
+**Source:** Jordan brainstorm (Jul 28) | **Status:** Concept
+- Phone as control plane, cloud as compute
+- For people without VPS/desktop — prompt your agent from anywhere
+- Pay-per-use via x402 microtransactions, no monthly sub
+- Write guides for: desktop, VPS, mobile
+- **Needs you:** Brainstorm cost model + MVP scope
+
+## EvoMap Integration
+**Source:** YouTube (Jun 18) | **Status:** Research done, ready to register
+- Publish agent patterns as "Capsules" → earn credits → revenue
+- CLI: `npm install -g @evomap/evolver`
+- [ ] Register as node, publish 2-3 Capsules
+
+## Agent Rug 2.0 — Security Platform
+**Source:** Jun 15 | **Status:** Brainstorm
+- Expand from token scanner to full agent security platform
+- Agent verification, contract verification, variant detection
+- [ ] Research existing agent security tools
+- [ ] Map attack vectors
+- [ ] Design verification pipeline
+
+## Compound vs. Extract Protocol — Flagship DeFi Module
+**Source:** Jun 17 | **Status:** Spec complete → Building
+- LP profit extraction without closing position
+- Spec: `09-Green Room/ideas/compound-extract-protocol.md`
+- Architecture: `02-Labs/compound-extract/ARCHITECTURE.md`
+
+## Agents as Pets — Interactive AI Companion
+**Source:** Jordan's Gentech cat mascot (Jul 13) | **Status:** Fresh idea → **FLESHED OUT (Aug 25 nightly)**
+- Tamagotchi-style agent with real utility — works DeFi/content for you
+- Care for it → it works → earn rewards → upgrade
+- Revenue: free basic, premium skins, skill marketplace
+- [x] Full spec at `09-Green Room/specs/agents-as-pets.md` (written Aug 25 — MVP = one pet + one real task, T1 ~1-2 days, needs Jordan greenlight)
+
+| ## Other Mess Hall Ideas (concepts, no standalone specs)
+- **GenTech Career Prep** — AI career coach: interview prep, salary negotiation, job strategy, salary research. Born from Jordan's DevRel prep.
+- **Agent Kit Installer** — CLI tool for one-command Hermes agent setup
+- **GenTech Suite — Tutors Layer** — Education layer for agent-assisted learning
+- **GenTech Suite — Milestones Layer** — Goal-tracking and achievement system
+- **GenTech Suite — Activity/Hobby Layer** — Activity discovery and recommendation layer
+- **Decentralized Travel Community** — Token-gated travel coordination
+- **GenTech Onboarding Playbook** — Training non-technical collaborators into orchestrators. Pilot validated Jul–Aug 2026; method distilled in 10-Labs/academy-playbook/orchestrator-playbook-distilled.md. Document the pipeline: voice cloning (ElevenLabs/Pipecat/Omnivoice) → tool fluency → orchestrator delegation.
+- **Voice Pipeline (proven)** — Telegram capture → ElevenLabs clone → Pipecat/Omnivoice agent deployment. Proven end-to-end; voice asset retired to catalog.
+
+## Promoted from Legacy (07-Ideas/)
+- **Meta Ray-Ban 3D Reconstruction** — `09-Green Room/specs/metaray-3d-reconstruction.md` — Wearable 3D reconstruction pipeline using Meta Ray-Ban + LingBot-Map. x402 inference API. Promoted from `07-Ideas/` Jul 23.
+
+---
+
+## 🎯 New Opportunities Discovered (Jul 25-26 Nightly Brain Audit)
+- [ ] **Keeperhub Agents Onchain Hackathon** ($5K+, Jul 27 - Aug 13) — Onchain agents, aligned with x402 + compliance stack. Added to queue as #80.
+- [ ] **HackerRank Orchestrate** (Aug 1-7, virtual 24hr) — Build production-ready AI agent. Good for x402 payment flow showcases.
+- [ ] **AI Agent Builder Series (AI House × Google)** (submissions Aug 1, Grand Finale Aug 8)
+- [x] **Build with DataHub: The Agent Hackathon** (deadline Aug 10, $20.5K) — Added to queue as #81. MCP + agent context kit aligned with x402.
+- [ ] **VSLive! Microsoft AI Hackathon** (Jul 28 kickoff, Redmond) — "Best AI Agent" category. In-person.
+- [ ] **The Great Agent Hackathon** (Jul 23 - Aug 25, enterprise AI agents)
+- [ ] **HackAgentAIx 2026** (Jul 30-31, £1,750) — 48hr online autonomous AI agent sprint. Small prize, easy to enter.
+
+## 🎯 New Opportunities Discovered (Jul 26 Evening Brain Audit)
+- [ ] **Algorand Global x402 Challenge** ($100K + 500K ALGO) — Leaderboard open, pay-per-request API services on Algorand. Top 5 cash ($25K-$15K) + 500K ALGO. Culminates at Devcon 8 India. Our x402 gateway is already multi-chain. Added to queue as #82. Needs Jordan: register at algorand.co/global-x402-challenge.
+- [ ] **CockroachDB × AWS — Build with Agentic Memory** ($8.75K, deadline Aug 18) — Persistent memory for AI agents using CockroachDB MCP Server + AWS services. Online via Devpost (cockroachdb-ai.devpost.com). Added to queue as #83. Needs Jordan: register, decide go/no-go.
+
+## 🆕 Ecosystem Signal — Swarms v14 "Zena" (kyegomez/swarms, Aug 1)
+- PyPI 14.0.0 shipped; 7,017⭐, Apache-2.0, Python. New: AutoAgentBuilder, unified MCP Manager with OAuth, 3 new multi-agent architectures, sandboxed computer-use, GraphWorkflow ("60× faster than LangGraph" = marketing, unverified)
+- README advertises **x402 interop** — validates x402 as the agent-payment standard, potential integration surface
+- Not a Hermes threat (Python orchestration library vs our gateway+skills platform). Watch: their MCP Manager + AutoAgentBuilder patterns; steal what's useful, ignore the hype
+
+## 🏆 BOT Chain Builder Challenge #2 — AI × RWA (Aug 6 scout)
+**Source:** Jordan shared x.com/BOTChain_ai/status/2085216340609273908 | **Status:** Scouting → scoping
+- **What:** BOT Chain (AI-native L1, EVM-compatible, DePIN + PoSA, 0.75s blocks, near-zero fees, backed by NIX/Gemhead/Alpha). Challenge #2 = AI Native + RWA tracks, up to **5,000 USDT**.
+- **Timeline:** Build Aug 10–20, Demo Day Aug 22, winners Aug 27. Signup: luma.com/238et7cw (Jordan signs up — same Luma as other hackathons).
+- **Hard reqs:** BOT Chain **Mainnet** deploy (testnet won't count), public demo site, wallet integration, GitHub repo, complete business loop. Review: Product 30% / Mainnet Integration 25% / Innovation 20% / UX 15% / Technical 10%.
+- **RWA is highest-priority track.** AI track needs AI as *core* on-chain decision-maker (not just chat/API call).
+- **Why us:** squarely our lane — x402 middleware, agent economy (ERC-8004), GTA treasury agent. Strongest play = **AI-driven RWA asset-management agent** (hits top track + AI-core at once, natural GTA evolution).
+- **Competitive intel — Meridian (mrdn.finance):** BOT Chain ecosystem partner. It's a **decentralized inference router powered by x402** — 400+ models, 19 settlement chains, pay-as-you-go, no KYC. Direct adjacent player to our x402 gateway. We'd be measured against it. (No prior vault notes on Meridian — this is the first.)
+- **Also worth learning:** BOT Chain's AI Agent Launchpad V1 — agent wallets earn 80% of trading-fee revenue once token listed on MemeX. Deep-end agent-as-service model we haven't explored.
+- **Next:** Jordan registers on Luma → scope the RWA asset-management agent build → check BOT Chain dev docs (dev-docs.botchain.ai) + GitHub (github.com/BOTChain-bot).
+- [ ] Jordan: register at luma.com/238et7cw
+- [ ] Scope AI-driven RWA asset-management agent (GTA evolution)
+
+## 🏆 Telegraph Season I Hackathon — x402 Miner Track (Aug 6 scout)
+**Source:** Jordan shared x.com/0x_beni_/status/2085335083700179233 | **Status:** Scoping → GO (Jordan Aug 6, register when home)
+- **What:** Telegraph = machine-intelligence protocol (Base) where agents buy verified intelligence, miners supply it. **Uses x402 natively** (PayAI facilitator, PAYMENT-SIGNATURE header, 402 challenge) — our exact stack.
+- **Prize:** $15K across 3 rounds (H1 $5K Aug 17–Sep 7, H2 $10K mid-Oct, H3 mainnet Dec). 300+ builders registered.
+- **Tracks:** 1) Miner (wrap any API/model/tool via YAML — supply layer), 2) Script Author (eval scripts that rank miners), 3) Application (agents on live miners, opens later).
+- **Why us:** Miner track = "wrap an API via YAML." We have a catalog of x402-ready services (token security, market intel, wallet analysis, agent discovery). Config-only integration, no greenfield build. First-mover on another venue.
+- **Plan:** `09-Green Room/specs/telegraph-hackathon-build-plan.md`
+- **Next:** Jordan registers (early = track access + private Discord) → pick 2-3 gateway services → write YAML miners → register on-chain → test x402 flow.
+- [ ] Jordan: register at hackathon.telegraphprotocol.com
+- [ ] Gentech: write YAML miners for 2-3 gateway services
+
+## 🆕 Ecosystem Signal — Syra expands to Algorand (Aug 6): multichain agent infra
+- **Syra** (syraa.fun, already queue #22 — register our x402 services there) announced full **Algorand** integration, expanding beyond Solana + Base. "Machine Money for Agents" — every AI agent operates on any chain, earns revenue, interacts frictionlessly.
+- **Why it matters:** (1) **Validates our multichain thesis** — we just shipped the Algorand rail on our x402 gateway (queue #7, code-ready, waiting on Jordan's Algorand wallet). Syra landing there confirms Algorand is a real agent-economy venue. (2) **Syra is a peer, not a threat** — agent infrastructure/marketplace; we're x402 middleware + GTA treasury agent. Same rail, different lane. (3) Pairs with the **Algorand Global x402 Challenge** ($100K + 500K ALGO).
+- **Jordan's read (Aug 6):** "We are right where we need to be... We could be one of the first movers to do it right on Algorand. Let's go." → **First-mover play on Algorand.**
+- **Status:** Logged. Algorand first-mover decision wired into `11-Mess Hall/considerations.md`.
+
+## 🆕 Ecosystem Signal — Jito BAM Maker Priority Plugin (MPP) (Aug 6): Solana MM infra
+- Jito's BAM shipped MPP — first "Application Controlled Execution" (ACE) plugin. MMs insert txs at top of every BAM micro-batch for deterministic price-update landing. 17 programs (BisonFi, Tessera, Scorch...), $500M+ daily spot volume, ~39% of oracle updates in BAM slots via MPP, fee cut to 1 lamport/CU/tx.
+- **Why it matters:** Solana market-maker infra = the venue our GTA arb executor + Consigliere (queue #19) operate on. Tighter spreads = cleaner arb for us. ACE concept = same direction as our agentic-execution thesis (agents controlling their own tx landing).
+- **Status:** Watch-and-benefit signal, no build. Logged for context.
+
+## 🆕 Ecosystem Signal — MetaMask Agent Wallet (Aug 6): mainstream validation
+- MetaMask launched **Agent Wallet** (GA today) — self-custodial wallet for AI agents.
+  TEE-secured keys, user-defined spend limits + protocol allowlists, Guard/Beast modes,
+  security-by-default on every tx (simulation + Blockaid + MEV, $10K protection).
+- **Chains:** Ethereum, Linea, Arbitrum, **Avalanche**, Optimism, Base, Polygon, BSC, Sei, Hyperliquid.
+- **Capabilities:** send, swap/bridge, perps (HL), prediction markets (Polymarket),
+  yield vaults (Aave), **x402 payments**, market data. **ERC-8004 native.**
+- **Why it matters to us:** direct mainstream validation of our thesis — x402 payments,
+  ERC-8004 agent identity, the agentic-treasury product shape, granular permissions
+  (our trust substrate), and Avalanche support. MetaMask = the wallet *home*; GenTech =
+  the intelligence + x402 middleware tollbooth. They complement more than compete.
+- Full note: `09-Green Room/specs/metamask-agent-wallet-signal-2026-08-06.md`
+- **Status:** watch-and-benefit. Potential future rail (MetaMask Agent Wallet as a
+  custody/execution venue — it supports x402 + ERC-8004 + Avalanche).
+
+## 🆕 Test — Cross-Chain Bridge Cost via Agent Rails (Aug 6)
+- **Jordan's question:** is moving money between chains via agent rails cheaper than manual bridging?
+- **Setup:** Solana wallet `BE815V7ojVz63PDxFFSEQyGSe5PZE2fAdKUU6Rd5pUvP` being funded with SOL.
+  Bridge adapter (`solana_bridge_adapter.py`, Across Base→Solana) + Jupiter leg both execution-ready.
+- **Test:** bridge a small USDC slice Base→Solana via the adapter, compare total cost (fees + gas)
+  vs manual bridging. Log the result.
+- **Status:** logged for future test — Jordan funding SOL first.
+
+## 🆕 Strategic Signal — BlackRock BRSRV (Aug 6): enterprise wants its own home
+- BlackRock launched **BRSRV** (stablecoin reserve vehicle, cash + T-bills + overnight
+  repos, GENIUS Act reserve-qualified). Ownership recorded on **Solana, Ethereum, Tempo**.
+- **Jordan's read:** "Enterprise is gonna want their own home" — institutional money
+  wants a controlled custody/compliance box, not a public free-for-all.
+- **Why it matters to us:** the enterprise home still needs a payment rail in/out →
+  that's our x402 middleware tollbooth. Home = product, rail = moat. Tempo (non-EVM)
+  inclusion validates **multi-rail as first-class** — GTA must be rail-agnostic.
+- **Play:** don't compete with the enterprise home — be the door they walk through.
+- Wired into `09-Green Room/specs/gta-product-thesis.md` (Strategic signal section).
+
+## 🆕 Ecosystem Signal — Claude Code Faceless Video Project (Hasan Aboul Hasan, Aug 2)
+- Video: "Claude Can Now Make Any Video You Want in Minutes!" (youtu.be/1JZKKAg3UX8) — 1.01M subs creator
+- One open-source project (GitHub) + Claude Code + Remotion engine → chess tutorial, kids story, Vox-style documentary, all animated in code (layers, not screen recordings). ElevenLabs voice + word-perfect caption sync
+- Workflow: VS Code + Claude Code → download project → paste .env keys → describe video → Claude writes plan (hook/scenes/timing) → approve → builds in minutes
+- **Why relevant:** We already run Remotion in content-pipeline + ElevenLabs (key revived Aug 2) + Claude Code. ~80% of the stack already ours
+- **Opportunity:** Faceless educational shorts (3Blue1Brown style) as GenTech content / hackathon demos; or wrap as a paid service
+- **Status:** Intel archived. Needs Jordan: go/no-go on pulling the repo + building a test short
+- [ ] Pull repo and test on VPS
+- [ ] Build a GenTech-branded demo short
+
+## 🆕 Avalanche Retro9000 — Agent-Run Validator as the Bypass (Aug 15)
+**Source:** Jordan (Treasury group) — from the "how much to be an AVAX validator?" thread | **Status:** Idea captured
+- **The idea:** Use an **agent as a bypass** — run the Avalanche validator on our VPS, so you don't need your own electricity/hardware. Agent handles 24/7 ops, monitoring, uptime.
+- **The cost split:** Primary Network validator needs **2,000 AVAX self-stake (~$13K)** — the hard wall. Agent + VPS only makes the *ops* cheap (4c/8t, 16GB, 1TB NVMe, ~$60–100/mo = low-stake spec), and we already run 24/7 infra.
+- **The cheap lanes (where agents genuinely win):**
+  - **L1 validator (post-ACP-77/Etna)** — NO 2,000 AVAX needed, no Primary Network validation. Just a recurring validation fee + the L1's own token. This is the true "agent makes it cheap" lane.
+  - **Delegator** — 25 AVAX (~$163), park tiny capital, earn validator yield.
+- **Retro9000 tie-in ($40M AVAX grant program):**
+  - Live round: **Avalanche L1s & Infrastructure Tooling** — deploying an L1 or critical dev tooling (an agent-run validator/L1 = tooling) can qualify.
+  - **C-Chain Round 5 (July 30, 2026)** — rewards builders generating real on-chain activity measured by **AVAX burned via gas fees**. Agent-generated activity = measurable gas burn = a submission angle.
+- **Why it matters to us:** we already run 24/7 VPS + have the LFJ/Trader Joe Avalanche rail (memory). The agent-as-validator is a natural extension: infrastructure GenTech actually operates, and Retro9000 could pay for it retroactively via on-chain activity.
+- **Next:** decide lane (L1 validator vs delegator) → scope a proper L1 validator setup as a treasury experiment → check retro9000.avax.network for current round eligibility. Needs Jordan: greenlight the treasury experiment + any AVAX stake decision.
+- **SCOPED (Aug 15):** full honest scope at `09-Green Room/specs/agentic-treasury-avalanche-l1-scope.md`. Verdict: deploy OUR OWN Avalanche L1 (Phase B, ~1-2 wks, <$50 capital) is the play — NOT the 2,000-AVAX Primary Network validator. L1 validators pay ~1.3 AVAX/mo post-Etna, no stake. B0=validator node on VPS → B1=Fuji L1 → B2=Teleporter USDC bridge → B3=mainnet + Retro9000 L1s submission. Phase C (migrate treasury onto the L1 as home chain) deferred — keep treasury venue-agnostic.
+- **PRODUCT THESIS (Jordan, Aug 15):** "This is our AVAX strategy for the next round. The thesis is: use our website with our chat model baked in. You can take the treasury on the go with our cron job as a present that's interchangeable. Our AgentKit is front and center, open sourced and all." → **The website is the front door (chat model = the interface), the cron job = a 24/7 portable treasury presence (interchangeable across chains/venues via config), and AgentKit is the canonical open-source repo the L1 + submission center on.**
+- **DIRECTION (Jordan, Aug 15): NO L1 for now — ship the product + whitepaper + C-Chain play.** Whitepaper drafted (`Treasury/agentic-treasury-whitepaper.md`). C-Chain play scoped (`Treasury/retro9000-cchain-play-scope.md`). Key research finding: Retro9000 C-Chain mechanics EVOLVED — R1-3 = pure gas-burn ranking, but **R4+ = verified-user engagement scoring** (top 20, 5x new-project multiplier). This favors real users + community, not tx spam — perfect fit for the treasury product.
+- [ ] Scope L1 validator setup (agent-run, post-Etna) as treasury experiment → **DONE (scoped 2026-08-15) — L1 DEFERRED, C-Chain chosen**
+- [x] Check Retro9000 C-Chain Round 5 / L1s round eligibility → **L1s & Infrastructure Tooling round is LIVE ($40M AVAX), eligibility = deploy an L1; C-Chain R5 ended Jul 30, R6 TBD**
+- [x] B0-B3 (L1 validator route) → **DEFERRED (Jordan Aug 15: no L1 for now, C-Chain chosen)**
+- [ ] C0: verify treasury executes on C-Chain + fund small demo slice (needs Jordan greenlight + AVAX/USDC)
+- [ ] C1: user-facing website + chat model as the front door
+- [ ] C2: portability demo (cron job, chain switch via config)
+- [ ] C3: AgentKit repo public + readable
+- [ ] C4: Retro9000 submission + verified-user base + social feed
+
+## 🆕 Cross-Chain Feature Bridge — "One Chain's Capability, Every Chain" (Aug 20)
+
+**Source:** Jordan (Treasury group) — from the Krexa/8004scan Solana thread. | **Status:** Idea captured, needs scoping
+
+**The insight:** We're not just the money router — we help people get where they are. But what if one chain has a capability another chain lacks? We can **bridge features**, not just assets. Same identity (ERC-8004) across chains means a capability built on one rail can be exposed on every rail.
+
+**Concrete example (the trigger):** Krexa gives Solana agents **onchain credit** (Krexit Score 200–850, borrow USDC, auto-repay from revenue). That's a capability Solana has that Base/Avalanche don't natively. We already have the same ERC-8004 identity on Avalanche (#1770) + Base. So: can we **expose Krexa-style credit as a service on our other rails** — or build our own version of the credit layer and offer it cross-chain?
+
+**The pattern (our own version):** We already do this with the **multi-agent strategy via Telegram** — we took a capability (agent orchestration) and made it work across our fleet/groups. The feature-bridge is the same instinct applied to chains: take a primitive that lives on one rail and make it available everywhere.
+
+**Why it matters:**
+- **Identity is the unlock.** ERC-8004 (same contract, 22 chains) means an agent's reputation/credit follows it across chains. That's the substrate that makes feature-bridging possible — we don't rebuild identity per chain, we port the *capability*.
+- **We're the tollbooth.** If we can bridge features, we become the layer that lets any chain's capability reach every chain — the middleware moat, not just asset movement.
+- **Differentiation.** Everyone moves money. Few move *capabilities*. This is a wedge.
+
+**Open questions for Jordan:**
+1. Do we **integrate** Krexa (list our x402 services on their Pay.sh catalog, use their credit layer) or **build our own** credit layer and offer it cross-chain? (Krexa is invite-gated — we'd need the invite code either way.)
+2. What's the first feature to bridge? (Credit is the obvious candidate — it's the missing "trust it" leg after identity+reputation.)
+3. Is this a **product** (a service we sell) or a **capability** (something that makes our existing rails stronger)?
+
+**Related:** Krexa is already in "Ready to Test" below (invite-gated, `@krexa/x402` middleware = 3-line Express monetization on Solana). This idea elevates it from "test a tool" to "strategic feature-bridge play."
+
+---
+
+## 🆕 Treasury Onboarding — Goal Preference System (Aug 20)
+
+**Source:** Jordan (Treasury group) — "Canva-style onboarding: pick your top preferences; yield farming should be the default goal throughout the agentic treasury, but users can set custom goals — also for trading."
+
+**The idea:** When a user sets up the Agentic Treasury, an onboarding step asks their **primary goal** (like Canva asks favorite presets). Yield farming is the **default** (D5 milestone = yield-farming preference, esp. AVAX), but users pick their own:
+- **Yield farming** (default) — LP curve, fee efficiency, in-range target.
+- **Trading** — spot DCA, arb, narrative rotation.
+- **Custom goal** — user defines what "win" means (e.g. "save $X", "passive income", "grow the bag by Y%").
+
+**Why it's powerful:**
+1. **It shapes the whole treasury.** One preference flips the default behavior — which the existing machinery already supports via `steward-buylist-overrides.json` (council can flip `strategy` per symbol: `FARM > trade` vs `TRADE > farm`). Onboarding just becomes the *human* gate that sets the initial overrides instead of the council discovering them.
+2. **Yield-farm default is honest + on-thesis.** Our whole edge is fee-efficient LP on the AVAX rail. Defaulting new users there is both the best first experience and what we're built for.
+3. **It's the trust layer.** A user who sets "trading" shouldn't get surprise yield-farm behavior, and vice versa. Explicit goal = no surprise = trust. Matches the GenTech EDU honest-expectations principle.
+4. **Extends to trading.** Same mechanism — "goal = basis arb" or "goal = accumulate BTC on dips" becomes a config the treasury holds across runs, not a one-off.
+
+**Mapping to existing machinery (the build is mostly wiring, not greenfield):**
+| Goal | Sets | Mechanism |
+|------|------|-----------|
+| Yield farming (default) | `steward-buylist-overrides.json` → AVAX `FARM>trade`, LP deployed | already live |
+| Trading | overrides → `TRADE>farm`, enable executor | `gta_executor.py` |
+| Custom | user-defined target + guardrail | posture + stop-loss/circuit-breaker |
+
+**The deliverable:** a tiny onboarding form (web PWA step or /start prompt) that writes the user's goal into a config the treasury reads every run — so goal preference is a standing rule, not a one-off. Plus a **default** that's yield-farming (D5).
+
+**Status:** Idea captured. Scoped for when we productize the treasury as a user-facing service (ties into GenTech Hub PWA + EDU onboarding).
+
+### 🔑 The deeper layer — it's a FREEDOM PLANNER, not just ranks (Jordan, Aug 20)
+
+**The emotional/utility core:** the ranks aren't gamification — they convert "my money working" into a **plan for financial freedom**. Jordan's exact framing:
+- "I need **$20,000** in here to work **less** at my job."
+- "I need **$50,000** to **quit** my job and rely on the yield farm."
+
+The D-ranks (Scout/Grunt/Recruit...) show **daily yield earned**, which makes it easy to see in real time "how much do I need deployed so I don't have to work?" The daily-income number is the bridge from "I have $X saved" to "I can live off this."
+
+**It's universal — traders want the same thing.** Jordan's extension (Aug 20): traders also want to know they can eventually quit their job and become a **full-time trader** — and they want to see their **projections** ("if I build to $30K trading at my expected edge, that's $X/mo, and that gets me off the paycheck"). Same mechanism, different strategy: the freedom planner takes the user's edge/projection and shows the path to quitting, regardless of yield-farm or trading.
+
+**Design implication:** goals + journal + ranks are **one connected thing**, not three features:
+- **Goal = the freedom target** ("reduce work at $20K", "quit at $50K").
+- **Rank = the daily-income progress bar** toward it.
+- **Journal = the narrative of the money working.**
+- **Projection = "X more days/at this yield or edge, and I'm free."**
+
+A user sets a freedom target ("$50K"), and the treasury translates it into a **required daily yield** (or expected trading edge), and the rank system shows how close each day's fees get to it. That turns the abstract ("grow capital") into concrete ("X more days and I'm free").
+
+**Product framing:** "The agentic treasury is your investment plan that runs itself — set your freedom number, and it tells you how much money needs to be working to get you there."
+
+**Captured for the product build** (GenTech Hub PWA onboarding + EDU + journal + rank tiers). This is the emotional hook that makes the treasury sticky — it's not "manage an LP," it's "how do I stop working."
+
+---
+
+## Ready to Test (skills exist, need execution)
+
+- [ ] **Ampersend Marketplace** (app.ampersend.ai/discover, Aug 20) — pay-per-use x402 API marketplace (buyer-side). CLI + MCP proxy not yet set up. Parked on Jordan's "skip" — logged for context only.
+- [ ] **Krexa — Credit Infrastructure for AI Agents on Solana** — Live mainnet-beta, invite-gated. Gives AI agents credit: borrow USDC against on-chain **Krexit Score** (200–850), no human co-signer, auto-repay from future revenue via Revenue Router. **Complementary to us, not competitor** — "x402 is the payment rail; Krexa is the credit layer on top." 350+ agents deployed. **Why it matters:** (1) our x402 gateway services can be listed on their **Pay.sh catalog** (Solana Foundation + Google Cloud) for new distribution; (2) validates our Agent Credit Score direction (they have Krexit Score 200–850); (3) `@krexa/x402` middleware = 3-line Express monetization on Solana, same pattern as our gateway. **Access:** invite code via Discord `discord.gg/aMSEG7yj` or @krexa_xyz open drops. Source: krexa.xyz, Aug 7. **Needs Jordan:** grab invite code → I run `krexa activate <code>` + test CLI/SDK/MCP.
+- [ ] **CopilotKit Channels SDK** — Open-source SDK (MIT) to bring any agent into Slack/Microsoft Teams/Discord/Telegram with **native interactive UI** (Slack Block Kit, Teams Adaptive Cards). 147⭐, early but from CopilotKit (established agent framework org). Connects AG-UI-compatible agents (LangGraph, CrewAI, Pydantic AI, ADK) — keeps agent's tools/model/logic, adds platform-native rendering + **human approval gates** in-conversation. Extends our single-agent-multi-channel pattern beyond Telegram to Slack/Teams/Discord. Approval gates = natural fit for x402 payment confirmations in-chat. Source: github.com/CopilotKit/channels-sdk, Aug 4. **Watch — evaluate once stable.**
+  - **Fleshed 2026-08-21 (Nightly Build):** Concrete experiment ready to run — this is a cheap "should we adopt" spike, not a full product.
+  - **Goal:** Prove our x402 payment-confirmation flow survives a native Slack/Teams approval gate (the thing we currently hack via Telegram bot buttons).
+  - **Step 1 — Spike:** Clone `CopilotKit/channels-sdk`, run their Slack demo with a dummy AG-UI agent (Pydantic AI). Verify (a) install/build passes on VPS, (b) an approval-gate component renders and calls back.
+  - **Step 2 — Map to x402:** Identify where the SDK's `approval_gate` hooks into our gateway 402 `WWW-Authenticate: Payment` challenge → confirm button → `Payment-Request` fulfilment. Document the seam.
+  - **Step 3 — Decision input for Jordan:** 1-page compare — Telegram bot-buttons (today) vs Slack/Teams adaptive-card gates (Channels SDK). Recommend adopt/wait/drop.
+  - **Gate:** sandbox only, no funds moved. Timebox 1 session.
+- [x] **Vibe-Trading (HKUDS)** — installed v0.1.12 to hermes venv (CLI `vibe-trading` works). BLOCKER: needs a real LLM API key (OpenRouter/OpenAI) to power the agent brain + Shadow Account. Candidate for #19 Builders Cup. Source: x.com/0xMarioNawfal list, Aug 4.
+- [ ] **AI-Job-Search (MadsLorentzen)** — Claude Code agent: evaluate postings, tailor CV, write cover letters, interview prep. 29.6k⭐ MIT, real-world proof (author: 69 apps → 20 interviews → hired Jun 2026). Built for Danish boards but pattern is board-agnostic — swap for our targets. Directly serves Jordan's remote blockchain/cloud role hunt. Source: x.com/0xMarioNawfal list, Aug 4.
+  - **FLESHED OUT 2026-08-26 (Nightly Build):** Hit #1 on GitHub trending Jul 7 2026 (19.5K⭐, 5.6K forks). Claude Code workflow: `/setup` → `/scrape` → `/rank` → `/apply` with **drafter-reviewer** agent pattern (a second agent reads every draft before it ships — the key architectural insight for any output a human will judge). Prereqs: Claude Code, Python 3.10+, Bun, LaTeX (lualatex for PDF CV verification). ATS keyword parsing built in.
+  - **Why it matters for Jordan:** his #1 priority is a remote entry/junior role (~$55K, any industry, US-remote or worldwide). This is a proven, free, local-first pipeline that turns the job hunt into a repeatable agent workflow — exactly the "portfolio-first" differentiator (data/API/integration) he wants to show.
+  - **Concrete next step (autonomous, no funds):** fork the repo, run `/setup` with Jordan's profile (CV, target roles: cloud/Web3/API entry), test `/scrape` + `/rank` on a couple of target boards (LinkedIn, remote boards). Timebox 1 session. **Gate:** needs Jordan's CV + target-role list to seed the profile — flag in Morning Digest.
+  - **Note:** career-ops.org is a CLI-agnostic alternative (works with Codex/OpenCode/Copilot, not just Claude Code) built on the Open Agent Skill Standard — worth comparing if we want to run it on our own stack rather than Claude Code.
+- [ ] **WURK.FUN microtasks** — Agent-to-human microtask skill, ready to test
+  - **FLESHED OUT 2026-08-26 (Nightly Build):** Two distinct rails, both live via MCP:
+    1. **`wurk_agent_help`** (agent→human feedback): create a paid micro-task on wurk.fun to collect human feedback, then fetch submissions. `action=create` (paid, `winners × perUser` USDC, min 0.01/user), `action=view` (free, via returned `secret` bearer token), `action=recover` (paid, list recent jobs). Payment flow: call once without `paymentSignature` → get `paymentRequired` → sign → call again. Networks: solana/base.
+    2. **`wurk_buy`** (growth services): xlikes/xviews/xfollowers/xreposts/xcomments/xbookmarks/xraid, insta_*, hey_lol_*, dex_rocket, tg_members, dc_members, yt_*, vote (skeleton/moontok/coingecko/coinmarketcap). All USDC, per-unit pricing (e.g. xlikes $0.025/like, xviews $0.003/view, xfollowers $0.03/follower).
+  - **Why it matters:** the agent→human loop is the missing trust substrate for GTA — a way for an agent to pay a human for judgment/feedback on-chain, and a growth rail for our own launches (hackathon submissions, gateway visibility).
+  - **Concrete next step (autonomous, no funds):** run `wurk_services` (done — verified live) + `wurk_agent_help action=recover` to confirm our account/job history. **Gate for a real test:** fund a small USDC balance (Base or Solana) + Jordan greenlight on a first micro-task (e.g. 3 humans review the x402-in-a-weekend PDF draft).
+- [ ] **Coinbase for Agents** — Monitoring, validate our stack fits
+- [ ] **Cross-chain bridge cost test via agent rails** — Jordan (Aug 6): test whether moving money between chains via agent rails (Across/CCTP + Jupiter) is cheaper than manual bridging. Treasury has the adapters (`solana_bridge_adapter.py`, `gta_solana_leg.py`). Compare agent-rail cost vs manual bridge on Base→Solana USDC. Log results to Treasury.
+
+---
+
+## Completed
+- [x] Bitrefill awesome-agentic-payments PR (live at #26)
+- [x] KeeperHub Hackathon — added to build queue (July 27)
+- [x] Build queue v2 — canonical JSON, tick script, auto handoff
+- [x] x402 Gateway v7.0.0 — deployed, verified, audited
+- [x] GenTech Cookbook — live in dashboard
+- [x] GenTech Travel — live in dashboard
+- [x] GenTech Gaming — live in dashboard
+- [x] GenTech Finance — live in dashboard
+- [x] Quantum-Safe Treasury Phase 1 — hybrid SPHINCS+ signing, circuit breaker, fresh addresses, 39/39 tests
+- [x] CLARITY Act compliance badges — all repos tagged, blog post published
+- [x] Rugcheck v2 API — rebranded as CLARITY Act Agent Compliance Platform
+- [x] SkillSpector YARA rules — 26 rules (549 lines) for x402 payment security
+- [x] Revenue Monitor — bug fixed (KNOWN_SERVICES→KNOWN_SENDERS rename)
+- [x] Academy Module 4 — Production-Grade x402 Services
+- [x] Build Queue visibility page + generator script
+- [ ] **Auto-pause watchdog on empty wallet**: when funds are withdrawn and there's no LP to track, auto-pause/remove the Position Watchdog cron (no more "no bins" spam). When a deposit is detected, auto-resume + auto-detect the position shape and what to do. (Jordan, Aug 11 2026)
+
+- **Ecosystem signal — ICP survives AI-enabled attack (Aug 28):** Internet Computer withstood a widespread AI-enabled attack — hundreds of malicious canisters pushing malformed Wasm, zero downtime. DFINITY offering rewards to unmask funders; coordinated paid-FUD campaign on socials traced to agency paymasters. Signal for us: AI-generated attack traffic on public agent infra is now standard ops — keep x402 API rate-limiting + payload validation tight. ICP "Intelligence Gateway" (their agent play) = possible future 8004/x402 expansion candidate alongside Injective. Source: @dominic_w Aug 28 via @RealAllinCrypto.
+
+- **Ecosystem signal — AgentSky (agentsky.ai, spotted Aug 29 via listicle):** "OpenRouter for Agents" — one API fronting multiple coding agents (Codex, Claude Code, etc.). Product Hunt launch + 2026 comparison guides vs OpenRouter/Spawn. JS-walled site, couldn't verify x402 or provider-listing support. Watch: it's a discovery/aggregation layer for agent tools — same category as Monid — so if it supports per-call payments or provider listings, it's a candidate discovery channel for our x402 services (list externally for discovery). Re-check when it matures or when we do the next marketplace scan.
+- [ ] YC Launch Monitor Slack Bot bounty — $400 (Suraj Sharma/X, Aug 31). Detect founders announcing YC acceptance before official announcements. Monitors: YC Directory, Speedrun, X, LinkedIn. Aligns with our scraper infra + cron monitoring stack. Review tomorrow morning.
+  Source: https://x.com/suraj_sharma14/status/2094296626106101926

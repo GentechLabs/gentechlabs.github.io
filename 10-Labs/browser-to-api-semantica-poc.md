@@ -58,9 +58,9 @@ browser-to-api  →  .o11y/<run>/api-spec/{openapi.yaml, client.mjs, index.html,
 ## Next steps (Labs)
 
 - [x] **Wire `deal_tracker` into x402 gateway** — LIVE (v9.2.0). `/v1/deals/{path}` → backend `/v1/{path}`, $0.005/call, USDC on Base. Verified 402 challenge.
-- [x] **Animated explainer** — 30s GSAP → extended to 57s with Jocelyn voiceover. `explainer/gentech-website-to-api-narrated.mp4`
+- [x] **Animated explainer** — 30s GSAP → extended to 57s with a cloned voiceover. `explainer/gentech-website-to-api-narrated.mp4`
 - [x] **Live demo** — real browser capture of deals API → x402 challenge → OpenAPI spec → client. `live-demo/live-demo.mp4`
-- [x] **Jocelyn voiceover** — `dwPf6y3q42Kdh7xBSGKx` (Jocelyn-English, cloned), 5 segments, `eleven_multilingual_v2`, stability 0.60/similarity 0.85/speed 0.95. Muxed into narrated explainer.
+- [x] **Cloned voiceover** — `dwPf6y3q42Kdh7xBSGKx` (Jocelyn-English asset), 5 segments, `eleven_multilingual_v2`, stability 0.60/similarity 0.85/speed 0.95. Muxed into narrated explainer.
 - [x] **Deployed to demo site** — both videos live at `gentechlabs.net/videos/`, embedded in `demo.html` (video section + "Website → Paid API" card in Payment Infrastructure). Verified HTTP 200 + content.
 - [ ] Report the skill-installer bug (missing support files) to Nous
 - [ ] Decide: use browser-to-api to auto-generate OpenAPI specs for our Hub surfaces → feed x402 gateway
