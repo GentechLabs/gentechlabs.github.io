@@ -7,8 +7,8 @@
     "scope": "auto-execute routine maintenance + regime-driven moves; ASK before farm<->trade flips, leverage, or pulling the farm for arb"
   },
   "mode": "YIELD_FARM",
-  "mode_updated_at": "2026-08-22T00:18:54.957035+00:00",
-  "mode_updated_by": "council auto (PRICE_DISCOVERY)",
+  "mode_updated_at": "2026-09-01T06:02:38.653029+00:00",
+  "mode_updated_by": "council auto (RANGE_BOUND)",
   "regime": {
     "value": "BULL_TRENDING",
     "confidence": 0.6,
@@ -44,15 +44,10 @@
     "avax_rail": "FARM > trade",
     "curve_bins": "11-25, default 23 (\u00b111); bid-ask \u00b115 when about to swing",
     "capital_gate": "deploy only above $25 dry powder",
-    "council_verdict_aug21": "CONSENSUS bull \u2014 hold deployed, stay in farm, cbBTC long +22%"
+    "council_verdict_aug21": "CONSENSUS bull \u2014 hold deployed, stay in farm, cbBTC long +22%",
+    "council_verdict_aug31": "Jordan authorized TRADE mode for the bull (Aug 31 2026 chat) despite Fed hike repricing (Warsh Jackson Hole Aug 28, Barclays double-hike call, ~60% Sep hike odds). Executor truth gates live. Awaiting funding \u2014 wallet flat (0.0001 AVAX, no positions). Deactivation trigger: Jordan ruling or council DISSENT with capital at risk."
   },
   "judgment_note": "Council recommended TRADE on BULL_TRENDING regime, but at $26 deployed the farm is the right vehicle \u2014 leverage-trading a $26 pool risks liquidation for pennies. Steward judgment: STAY YIELD_FARM, widen curve to 23 bins, keep cbBTC long. Revisit TRADE when dry powder clears a meaningful threshold.",
-  "pending_mode": {
-    "mode": "TRADE",
-    "reason": "regime BULL_TRENDING",
-    "requested_at": "2026-08-24T20:02:52.484599+00:00",
-    "requested_by": "council"
-  },
   "watch_inputs": {
     "geopolitical": {
       "event": "US strikes Larak Island (Strait of Hormuz) Aug 30; Iran retaliation on US targets in Jordan Aug 31 \u2014 war resumed after Aug 17 MoU expiry",
@@ -77,5 +72,12 @@
       },
       "updated": "2026-08-31T03:30:22.959944+00:00"
     }
+  },
+  "standing_rule_updated_at": "2026-08-31T23:51:50.109686+00:00",
+  "pending_mode": {
+    "mode": "TRADE",
+    "reason": "regime BULL_TRENDING",
+    "requested_at": "2026-09-01T11:12:21.670398+00:00",
+    "requested_by": "council"
   }
 }
