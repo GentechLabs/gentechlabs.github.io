@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Beginner's Guide to the Bull Market — GenTech EDU</title>
+<style>
+  :root{--bg:#0b0e14; --panel:#121722; --panel2:#161d2b; --line:#232c3f;
+    --txt:#e8edf7; --mut:#8b96ad; --green:#2ecc71; --yellow:#f1c40f;
+    --orange:#e67e22; --red:#e74c3c; --accent:#5b8cff;}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--txt);font-family:'Segoe UI',system-ui,-apple-system,sans-serif;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:24px 16px 48px;line-height:1.55}
+  header{text-align:center;max-width:760px}
+  header h1{font-size:1.7rem;font-weight:800}
+  header h1 span{color:var(--accent)}
+  header .sub{color:var(--mut);font-size:.85rem;margin-top:6px}
+  .badge-row{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:12px}
+  .badge{background:var(--panel2);border:1px solid var(--line);border-radius:999px;padding:4px 12px;font-size:.72rem;color:var(--mut)}
+  .badge.live{color:var(--green);border-color:rgba(46,204,113,.35)}
+  .wrap{width:100%;max-width:860px;margin-top:8px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:26px 28px;margin-top:20px}
+  .card h2{font-size:1.15rem;margin-bottom:6px}
+  .card h2 .tag{font-size:.68rem;background:var(--panel2);border:1px solid var(--line);border-radius:6px;padding:2px 8px;vertical-align:middle;color:var(--mut);margin-left:8px}
+  .card p.lead{color:var(--mut);font-size:.92rem;margin-bottom:14px}
+  .card p{margin:8px 0;font-size:.95rem}
+  .card ul,.card ol{margin:10px 0 4px 22px}
+  .card li{margin:6px 0;font-size:.93rem}
+  .big-idea{border-left:3px solid var(--accent);padding:10px 16px;background:var(--panel2);border-radius:0 10px 10px 0;color:var(--txt);font-size:1.02rem;margin:12px 0}
+  table{width:100%;border-collapse:collapse;margin:12px 0;font-size:.88rem}
+  th{color:var(--mut);text-align:left;font-weight:600;font-size:.78rem;text-transform:uppercase;letter-spacing:.04em;padding:8px 10px;border-bottom:1px solid var(--line)}
+  td{padding:9px 10px;border-bottom:1px solid rgba(35,44,63,.6)}
+  tr:last-child td{border-bottom:none}
+  .gauge-card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:28px 24px 20px;margin-top:14px;text-align:center}
+  .ends{display:flex;justify-content:space-between;font-size:.8rem;color:var(--mut);margin-bottom:6px}
+  .ends .l{color:var(--green);font-weight:600}.ends .r{color:var(--red);font-weight:600}
+  #score{font-size:2.6rem;font-weight:800;margin-top:-64px}
+  #band{display:inline-block;margin-top:6px;padding:4px 14px;border-radius:999px;font-size:.82rem;font-weight:700}
+  .verdict{color:var(--mut);font-size:.9rem;margin-top:10px}
+  .ladder{margin:14px 0}
+  .rung{display:flex;align-items:center;gap:12px;margin:10px 0}
+  .rung .bar{height:34px;border-radius:8px;display:flex;align-items:center;padding:0 14px;font-weight:700;font-size:.85rem;white-space:nowrap;min-width:170px;justify-content:center}
+  .rung .desc{color:var(--mut);font-size:.85rem}
+  .rb{height:26px;border-radius:8px;display:flex;align-items:center;padding:0 12px;font-size:.8rem;font-weight:600;min-width:210px}
+  .card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-top:14px}
+  .mini{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:16px 18px}
+  .mini h3{font-size:.95rem;margin-bottom:6px}
+  .mini p{color:var(--mut);font-size:.85rem;margin:0}
+  .example{background:rgba(91,140,255,.06);border:1px solid rgba(91,140,255,.2);border-radius:10px;padding:14px 18px;margin:12px 0;font-size:.9rem}
+  .example b{color:var(--accent)}
+  .print-card{background:linear-gradient(135deg,rgba(46,204,113,.07),rgba(91,140,255,.07));border:1px solid rgba(91,140,255,.25);border-radius:14px;padding:22px 24px;margin-top:14px}
+  .print-card ol{margin-left:20px}
+  .print-card li{margin:8px 0;font-weight:600}
+  .print-card li span{color:var(--mut);font-weight:400}
+  footer{text-align:center;color:var(--mut);font-size:.8rem;margin-top:36px;line-height:1.8}
+  footer a{color:var(--accent);text-decoration:none}
+  .warn{color:var(--red);font-weight:700}
+  .ok{color:var(--green);font-weight:700}
+</style>
+</head>
+<body>
+<header>
+  <h1>🐂 Beginner's Guide to the <span>Bull Market</span></h1>
+  <div class="sub">GenTech EDU · Module 1 · Start with Bitcoin · Learn to read the market before you move</div>
+  <div class="badge-row">
+    <span class="badge">📖 Guide</span>
+    <span class="badge live">● LIVE SENTIMENT DATA</span>
+    <span class="badge">🛡️ The Steward · GenTech Treasury</span>
+  </div>
+</header>
+
+<div class="wrap">
+
+<div class="card">
+  <h2>Why this guide exists</h2>
+  <p class="lead">Most beginners lose money one way: they buy the top because everyone is excited, then sell the bottom because everyone is scared. Always reacting to feelings.</p>
+  <p>The fix isn't a secret coin pick. It's learning to read <b>market sentiment</b> — the mood of the whole market — and letting that, not your emotions, decide when you move. These are the exact tools the GenTech treasury runs daily, scaled down for a beginner.</p>
+  <p class="big-idea">In a bull market, <b>every dip is an opportunity — not a knife.</b> But that's only true when the data says so. Here's how to check.</p>
+</div>
+
+<div class="card">
+  <h2>Lesson 1 — Zoom Out First <span class="tag">DAILY LIES, MONTHLY TELLS</span></h2>
+  <p class="lead">Stare at the daily chart and every day feels like a crisis. Zoom out.</p>
+  <table>
+    <tr><th>Window</th><th>What it tells you</th><th>Rule</th></tr>
+    <tr><td><b>1d</b></td><td>Today's noise</td><td>Never decide on this alone</td></tr>
+    <tr><td><b>7d</b></td><td>This week's direction</td><td>Context for the daily move</td></tr>
+    <tr><td><b>1m</b></td><td>The actual trend</td><td class="ok">The truth-teller</td></tr>
+  </table>
+  <div class="example">📈 <b>Worked example (Sep 1, 2026):</b> BTC showed <b>−0.8% today</b> — scary on the daily. Zoom out: <b>+22.8% over 30 days</b>. The daily was noise; the monthly showed the market reversing upward. That's why we zoom out before feeling anything about a red day.</div>
+  <p><b>The 200-day moving average (200d MA)</b> is the market's long memory — the average price of the last 200 days:</p>
+  <ul>
+    <li>Price <b>above</b> the 200d MA → long trend is up (bull territory)</li>
+    <li>Price <b>below</b> it → long trend is down or still healing</li>
+  </ul>
+</div>
+
+<div class="card">
+  <h2>Lesson 2 — Read the Mood <span class="tag">FEAR &amp; GREED INDEX</span></h2>
+  <p class="lead">The Fear &amp; Greed Index boils the market's emotions into one number, 0–100. This dial is fetching the live reading right now:</p>
+  <div class="gauge-card">
+    <div class="ends"><span class="l">← FEAR · opportunity</span><span class="r">GREED · caution →</span></div>
+    <svg id="gauge" width="400" height="230" viewBox="0 0 400 230" style="max-width:100%"></svg>
+    <div id="score">…</div>
+    <div id="band">fetching live data…</div>
+    <p class="verdict" id="verdict">Loading…</p>
+    <p class="price">Live from alternative.me · <span id="updated"></span></p>
+  </div>
+  <table>
+    <tr><th>Value</th><th>Mood</th><th>What it means</th></tr>
+    <tr><td>0–24</td><td>🔴 Extreme Fear</td><td>Panicking. Historically where fortunes are made</td></tr>
+    <tr><td>25–44</td><td>🟠 Fear</td><td>Nervous selling — good staggered entries</td></tr>
+    <tr><td>45–55</td><td>🟡 Neutral</td><td>No edge either way</td></tr>
+    <tr><td>56–75</td><td>🟢 Greed</td><td>Happy buying — dips get bought, don't chase</td></tr>
+    <tr><td>76–100</td><td>🔴 Extreme Greed</td><td>Party is loud — take profits, don't add</td></tr>
+  </table>
+  <p><b>The contrarian rule:</b> buy when others are fearful, be careful when others are greedy. But don't be a robot — greed (60–80) during an early bull trend is <i>normal</i>. Greed only turns dangerous at extremes <i>and</i> price far above trend. Read the mood <b>with</b> the trend, never alone.</p>
+</div>
+
+<div class="card">
+  <h2>Lesson 3 — Buy Zones: The Value Ladder <span class="tag">NEVER ALL AT ONCE</span></h2>
+  <p class="lead">We never buy "all at once." We set zones — price levels where a coin becomes a better deal — and let the market come to us.</p>
+  <table>
+    <tr><th>Zone</th><th>Meaning</th><th>Action</th></tr>
+    <tr><td>🔥 <b>Deep Value</b></td><td>Unusually cheap vs its range</td><td class="ok">Strongest buy zone</td></tr>
+    <tr><td>🟢 <b>Accumulate</b></td><td>Fair-to-good value</td><td class="ok">Buy in small steps (DCA)</td></tr>
+    <tr><td>🔵 <b>Watch</b></td><td>Neutral, nothing special</td><td>Do nothing, watch</td></tr>
+    <tr><td>⚪ <b>Extended</b></td><td>Rich vs recent range</td><td class="warn">Don't buy — maybe trim</td></tr>
+  </table>
+  <p class="lead">Worked example — BTC at $78,008 (Extended: don't chase). A beginner's ladder with $100:</p>
+  <div class="ladder">
+    <div class="rung"><div class="bar" style="background:rgba(139,150,173,.18);color:#c7cfdd">$78,008 · NOW</div><div class="desc">⚪ Extended — set no orders here. Patience is a position.</div></div>
+    <div class="rung"><div class="bar" style="background:rgba(241,196,15,.18);color:#f1c40f">$71–72K · Tier 1</div><div class="desc">30% — first add zone, near trend support</div></div>
+    <div class="rung"><div class="bar" style="background:rgba(46,204,113,.18);color:#2ecc71">$66–67K · Tier 2</div><div class="desc">30% — second add, mid-trend</div></div>
+    <div class="rung"><div class="bar" style="background:rgba(91,140,255,.2);color:#5b8cff">$60–61K · Tier 3</div><div class="desc">40% — the "gift zone", still above the long-term trend line</div></div>
+  </div>
+  <p>A beginner doesn't need to predict "up or down." Set three small orders at the zones and let the market come to you.</p>
+</div>
+
+<div class="card">
+  <h2>Lesson 4 — The DeFi Rainbow <span class="tag">VALUE AT A GLANCE</span></h2>
+  <p class="lead">A color mood-ring for each coin, built from its 7-day and 30-day momentum:</p>
+  <div class="rb">
+    <div class="rung"><div class="rb" style="background:rgba(155,89,182,.25);color:#c39bd3">🟣 Panic Farm</div><div class="desc">Generational cheap — be greedy when others fear</div></div>
+    <div class="rung"><div class="rb" style="background:rgba(41,128,185,.25);color:#7fb3d5">🔵 Bleeding Edge</div><div class="desc">Cheap — start micro-buys</div></div>
+    <div class="rung"><div class="rb" style="background:rgba(46,204,113,.18);color:#7dcea0">🟢 Accumulation</div><div class="desc">Fair value — steady DCA</div></div>
+    <div class="rung"><div class="rb" style="background:rgba(241,196,15,.15);color:#f1c40f">🟡 Harvest Mode</div><div class="desc">Healthy — hold and compound</div></div>
+    <div class="rung"><div class="rb" style="background:rgba(230,126,34,.18);color:#e67e22">🟠 Peak Yield</div><div class="desc">Rich — trim into strength</div></div>
+    <div class="rung"><div class="rb" style="background:rgba(231,76,60,.2);color:#e74c3c">🔴 Euphoria</div><div class="desc">Take profits — price is stretched</div></div>
+  </div>
+  <p>Beginner mapping: 🟣🔵 = buy zones · 🟢🟡 = hold · 🟠🔴 = sell zones.</p>
+</div>
+
+<div class="card">
+  <h2>Lesson 5 — How to Buy a Dip (Without Catching a Knife)</h2>
+  <p class="lead">A "knife" is a falling price you buy too early — and it keeps falling. The protection is boring, and it works:</p>
+  <ol>
+    <li><b>Never deploy everything at once</b> — split every buy into 3 parts.</li>
+    <li><b>Buy in tiers, not at one price</b> — 30% / 30% / 40% down the ladder.</li>
+    <li><b>Only buy dips in an uptrend</b> (price above the 200d MA). Dips in a downtrend aren't opportunities — they're the trend.</li>
+    <li><b>Check sentiment before each buy.</b> Extreme Fear + uptrend = the best combo in crypto.</li>
+    <li><b>Time is on your side.</b> Missing the exact bottom is fine — ladders catch the average.</li>
+  </ol>
+  <p class="big-idea">One sentence: <i>in a confirmed uptrend, buy the fear in tiers — not the excitement in one shot.</i></p>
+</div>
+
+<div class="card">
+  <h2>Lesson 6 — Where a Beginner Actually Starts</h2>
+  <ul>
+    <li><b>Start with Bitcoin.</b> It's the tide every other coin swims in.</li>
+    <li><b>Spot only. No leverage.</b> Borrowed money turns an opportunity into a liquidation.</li>
+    <li><b>Small size.</b> An amount you could lose without changing your life. Year one is for learning, not earning.</li>
+    <li><b>Set the ladder before you look at the price again.</b> Decide your tiers when calm, not when the chart is bleeding.</li>
+    <li><b>Zoom out weekly.</b> Check the 1d if curious — decide on the 1m.</li>
+  </ul>
+</div>
+
+<div class="card">
+  <h2>The Steward's Beginner Card <span class="tag">THE WHOLE COURSE ON ONE CARD</span></h2>
+  <div class="print-card">
+    <ol>
+      <li>Is price above the 200d MA? <span>→ No: wait, or tiny DCA only</span></li>
+      <li>What does Fear &amp; Greed say? <span>→ Extreme fear = gift · extreme greed = trim</span></li>
+      <li>Where is price vs the buy zones? <span>→ Extended = don't chase</span></li>
+      <li>Ladder set? (3 tiers, never all-in) <span>→ No ladder, no buy</span></li>
+      <li>Spot only, no leverage <span>→ Always, until experienced</span></li>
+    </ol>
+  </div>
+</div>
+
+<div class="card">
+  <h2>Final Exam — Today's Actual Tape <span class="tag">SEP 1, 2026</span></h2>
+  <table>
+    <tr><td>BTC price</td><td><b>$78,008</b> — −0.8% today, <b>+22.8% monthly</b>, +12% above 200d MA</td></tr>
+    <tr><td>Trend</td><td class="ok">Uptrend confirmed (above 200d MA)</td></tr>
+    <tr><td>Sentiment</td><td>🟢 Greed 69, rising (warm, not euphoric)</td></tr>
+    <tr><td>Zone read</td><td>⚪ Extended — don't chase at 78K</td></tr>
+    <tr><td>Correct move</td><td>Set tiered bids at 71–72K / 66–67K / 60–61K and wait</td></tr>
+  </table>
+  <p>If the market never dips to your ladder, you keep your cash and you still won. <i>"Every dip is an opportunity, not a knife" — now you can check when that sentence is true, yourself.</i></p>
+</div>
+
+</div>
+
+<footer>
+  🛡️ GenTech Treasury · The Steward · Module 1 of GenTech EDU<br>
+  Live gauge: alternative.me Fear &amp; Greed Index · Worked examples: Sep 1, 2026 tape<br>
+  <a href="https://gentechlabs.net/demo.html">🏠 Back to the Demo Suite</a><br>
+  Data over narrative. Not financial advice — education only.
+</footer>
+
+<script>
+const ARC_CX=200, ARC_CY=200, R=150;
+function polar(angle){const a=(angle-180)*Math.PI/180;return [ARC_CX+R*Math.cos(a), ARC_CY+R*Math.sin(a)];}
+function arcPath(a0,a1){const [x0,y0]=polar(a0),[x1,y1]=polar(a1);
+  return `M ${x0.toFixed(1)} ${y0.toFixed(1)} A ${R} ${R} 0 0 1 ${x1.toFixed(1)} ${y1.toFixed(1)}`;}
+
+function drawGauge(score){
+  const svg=document.getElementById('gauge');
+  // Bands colored by ACTION: fear side = green (opportunity), greed side = red (caution)
+  const bands=[[0,25,'#2ecc71'],[25,45,'#a3e635'],[45,55,'#f1c40f'],[55,75,'#e67e22'],[75,100,'#e74c3c']];
+  let inner=`<path d="${arcPath(0,100)}" stroke="#1a2233" stroke-width="26" fill="none" stroke-linecap="round"/>`;
+  for(const [a0,a1,c] of bands){
+    inner+=`<path d="${arcPath(a0,a1)}" stroke="${c}" stroke-width="18" fill="none" opacity="0.55" stroke-linecap="butt"/>`;
+  }
+  for(let v=0;v<=100;v+=10){
+    const rIn=R-16,rOut=R-24;
+    const ix=ARC_CX+rIn*Math.cos((v-180)*Math.PI/180), iy=ARC_CY+rIn*Math.sin((v-180)*Math.PI/180);
+    const ox=ARC_CX+rOut*Math.cos((v-180)*Math.PI/180), oy=ARC_CY+rOut*Math.sin((v-180)*Math.PI/180);
+    inner+=`<line x1="${ix.toFixed(1)}" y1="${iy.toFixed(1)}" x2="${ox.toFixed(1)}" y2="${oy.toFixed(1)}" stroke="#3a465e" stroke-width="1.5"/>`;
+    const rTxt=R-38;
+    const tx=ARC_CX+rTxt*Math.cos((v-180)*Math.PI/180), ty=ARC_CY+rTxt*Math.sin((v-180)*Math.PI/180);
+    inner+=`<text x="${tx.toFixed(1)}" y="${(ty+4).toFixed(1)}" fill="#66718c" font-size="11" text-anchor="middle">${v}</text>`;
+  }
+  const ang=Math.max(0,Math.min(100,score));
+  const [ex,ey]=polar(ang);
+  inner+=`<line x1="${ARC_CX}" y1="${ARC_CY}" x2="${ex.toFixed(1)}" y2="${ey.toFixed(1)}" stroke="#e8edf7" stroke-width="4" stroke-linecap="round"/>`;
+  inner+=`<circle cx="${ARC_CX}" cy="${ARC_CY}" r="9" fill="#e8edf7"/>`;
+  inner+=`<circle cx="${ARC_CX}" cy="${ARC_CY}" r="4" fill="#0b0e14"/>`;
+  svg.innerHTML=inner;
+}
+
+function moodName(v){
+  if(v<25)return'🔴 Extreme Fear';
+  if(v<45)return'🟠 Fear';
+  if(v<56)return'🟡 Neutral';
+  if(v<76)return'🟢 Greed';
+  return'🔴 Extreme Greed';
+}
+
+function verdictText(v){
+  if(v<25)return'People are panicking. Historically where fortunes are made — the gift zone.';
+  if(v<45)return'Nervous selling. Good zone for staggered entries.';
+  if(v<56)return'No edge either way. Watch and wait.';
+  if(v<76)return'People are buying happily. Dips get bought fast — but don\'t chase. Set ladders below.';
+  return'The party is loud. This is where you take profits, not add.';
+}
+
+fetch('https://api.alternative.me/fng/?limit=1')
+  .then(r=>r.json())
+  .then(d=>{
+    const v=parseInt(d.data[0].value);
+    drawGauge(v);
+    document.getElementById('score').textContent=v;
+    const bandEl=document.getElementById('band');
+    bandEl.textContent=moodName(v);
+    document.getElementById('verdict').textContent=verdictText(v);
+    document.getElementById('updated').textContent=new Date().toLocaleString();
+  })
+  .catch(()=>{
+    document.getElementById('verdict').innerHTML='⚠️ DATA UNAVAILABLE — never serve stale as live. Refresh to retry.';
+  });
+</script>
+</body>
+</html>

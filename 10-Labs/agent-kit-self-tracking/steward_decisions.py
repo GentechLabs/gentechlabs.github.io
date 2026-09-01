@@ -21,12 +21,32 @@ from __future__ import annotations
 import json
 import os
 import sys
+import time
 from datetime import datetime, timezone
 
 JOURNAL = os.environ.get(
     "STEWARD_DECISIONS_FILE",
     "/root/ProtoJay4789.github.io/10-Labs/agent-kit-self-tracking/steward-decisions.jsonl")
 WATERMARK = JOURNAL + ".last_report"
+# Fresh-truth audit (Aug 31 2026): the journal went 9.2 days without a write
+# while this report kept firing "ok" every 4h — silence had become
+# indistinguishable from a dead writer. A quiet journal now self-reports.
+JOURNAL_LIVENESS_H = 72.0
+
+
+def _journal_liveness_line() -> str:
+    """Non-empty warning string if the journal looks orphaned, else ''."""
+    try:
+        age_h = (time.time() - os.path.getmtime(JOURNAL)) / 3600.0
+    except OSError:
+        return ("⚠️ **DECISIONS JOURNAL MISSING** — the journal file could not be "
+                "read; autonomous decisions are not being recorded.")
+    if age_h > JOURNAL_LIVENESS_H:
+        return (f"⚠️ **JOURNAL QUIET {age_h/24:.1f}d** — no decisions logged since "
+                f"{datetime.fromtimestamp(os.path.getmtime(JOURNAL), timezone.utc):%b %d %H:%M UTC}. "
+                "Not a report of decisions: a health check. Council/executor "
+                "writers should call steward_decisions.py --log on every action.")
+    return ""
 
 
 def _now_iso() -> str:
@@ -57,6 +77,13 @@ def report() -> str:
     report, then advance the watermark. Empty output if nothing new."""
     entries = _read_entries()
     if not entries:
+        # Fresh-truth audit (Aug 31 2026): empty journal used to mean "nothing to
+        # report". But a MISSING journal is a dead writer, not a quiet one — that
+        # must always speak. A present-but-quiet journal is surfaced by the
+        # liveness check below instead of total silence.
+        warn = _journal_liveness_line()
+        if "MISSING" in warn:
+            return warn
         return ""
     # Watermark = ts of the last entry we've already reported.
     last_ts = None
@@ -67,7 +94,9 @@ def report() -> str:
         pass
     new = [e for e in entries if last_ts is None or e.get("ts", "") > last_ts]
     if not new:
-        return ""
+        # Nothing new since the last report — but if the journal itself looks
+        # orphaned, say so. Silence must not be a mask for a dead writer.
+        return (_journal_liveness_line() or "").strip()
 
     lines = ["🛡️ STEWARD DECISIONS — what I did and why"]
     for e in new:
