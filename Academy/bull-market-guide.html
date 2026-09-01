@@ -41,6 +41,13 @@
   .rung .bar{height:34px;border-radius:8px;display:flex;align-items:center;padding:0 14px;font-weight:700;font-size:.85rem;white-space:nowrap;min-width:170px;justify-content:center}
   .rung .desc{color:var(--mut);font-size:.85rem}
   .rb{height:26px;border-radius:8px;display:flex;align-items:center;padding:0 12px;font-size:.8rem;font-weight:600;min-width:210px}
+  .rb-stack{margin:14px 0}
+  .rung{flex-wrap:wrap}
+  @media (max-width:600px){
+    table{display:block;overflow-x:auto;white-space:nowrap;-webkit-overflow-scrolling:touch}
+    .rung .bar{min-width:0;width:100%}
+    .rung .desc{width:100%}
+  }
   .card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-top:14px}
   .mini{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:16px 18px}
   .mini h3{font-size:.95rem;margin-bottom:6px}
@@ -139,7 +146,7 @@
 <div class="card">
   <h2>Lesson 4 — The DeFi Rainbow <span class="tag">VALUE AT A GLANCE</span></h2>
   <p class="lead">A color mood-ring for each coin, built from its 7-day and 30-day momentum:</p>
-  <div class="rb">
+  <div class="rb-stack">
     <div class="rung"><div class="rb" style="background:rgba(155,89,182,.25);color:#c39bd3">🟣 Panic Farm</div><div class="desc">Generational cheap — be greedy when others fear</div></div>
     <div class="rung"><div class="rb" style="background:rgba(41,128,185,.25);color:#7fb3d5">🔵 Bleeding Edge</div><div class="desc">Cheap — start micro-buys</div></div>
     <div class="rung"><div class="rb" style="background:rgba(46,204,113,.18);color:#7dcea0">🟢 Accumulation</div><div class="desc">Fair value — steady DCA</div></div>
