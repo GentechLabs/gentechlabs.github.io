@@ -64,18 +64,64 @@ DEPLOY_SCRIPT = os.environ.get(
 REDEPLOY_EXEC_SCRIPT = os.environ.get(
     "STEWARD_REDEPLOY_SCRIPT",
     "/root/.hermes/profiles/gentech-treasury/scripts/gta_avax_lp_execute.py")
-REDEPLOY_AMOUNT_USD = 13.0
 
-# Jordan's bin lever (Aug 11 2026): curve in chop → FEWER bins (±11 = 23 bins),
-# bid-ask when about to swing → WIDER (±15 = 31 bins). The deploy rail inherits
-# these from the shape; callers must NOT hardcode --bin-spread 5 (that pins the
-# curve at 11 bins / ~1% wide and it churns out of range in any trending market).
-REDEPLOY_BIN_SPREAD_BY_SHAPE = {"curve": 11, "bid-ask": 15}
+# FULL-CAPITAL RULE (Jordan, Sep 3 2026): "whenever we rebalance, we take ALL of
+# the money and rebalance — not two separate pools, one side never idle." The
+# redeploy leg computes live working capital (USDC + WAVAX value) on-chain and
+# deploys ALL of it. No hardcoded $13. Only the dust buffer stays out.
+REDEPLOY_AMOUNT_USD = None  # sentinel: resolved live per-run via _redeploy_budget()
+
+# Jordan's bin lever (updated Sep 3 2026 from LIVE on-chain router behavior):
+# LFJ currently REJECTS spreads beyond ±7 (idSlippage error 0x9931a6ae for
+# ±9/±11/±15; ±5/±6/±7 simulate clean). Empirical map, read-only eth_call sims:
+#   2026-09-03: ±5/±6/±7 OK · ±9/±11/±15 REVERT (and Sep 2 real tx reverts at ±11)
+# Curve → ±7 (widest accepted = max fee capture in chop); bid-ask → ±7 too
+# (wider isn't available until LFJ's boundary loosens; the ±7 cap binds anyway).
+REDEPLOY_BIN_SPREAD_BY_SHAPE = {"curve": 7, "bid-ask": 7}
 
 
 def _redeploy_spread(shape: str) -> int:
     """Shape-aware bin spread for the redeploy leg (Jordan's lever)."""
-    return REDEPLOY_BIN_SPREAD_BY_SHAPE.get(shape, 11)
+    return REDEPLOY_BIN_SPREAD_BY_SHAPE.get(shape, 7)
+
+
+def _redeploy_budget(w3, acct, include_position: bool = False) -> float:
+    """FULL-CAPITAL budget (Jordan, Sep 3 2026): the redeploy leg deploys ALL
+    working capital — USDC + WAVAX value live on the Steward wallet, minus a
+    small dust buffer. Nothing idles; no hardcoded $13.
+
+    include_position=True (dry-run): ALSO add the live LP position value —
+    in withdraw-redeploy the withdraw lands BEFORE the redeploy, so the
+    post-withdraw wallet holds LP value too. Without this, dry-run plans
+    understate the budget (real runs read balances after the withdraw).
+
+    Fallback on read failure: $13 (the old value) — conservative-high so a
+    transient RPC hiccup can't zero the budget and strand capital as idle.
+    The executor's built-in safety-reduce scales down if the wallet is short.
+    """
+    try:
+        usdc = bal(w3, USDC, acct.address) / 1e6
+        wavax = bal(w3, WAVAX, acct.address) / 1e18
+        price = _avax_usd()
+        if price <= 0:
+            price = 7.0  # last-resort estimate; executor still guards sizing
+        working = usdc + wavax * price
+        if include_position:
+            # LP value folds back in on withdraw (full-capital rule)
+            try:
+                from discover_positions import discover_positions
+                d = discover_positions("avalanche", STEWARD)
+                p = next((x for x in d.get("positions", [])
+                          if "error" not in x), None)
+                if p:
+                    working += float(p.get("positionUsd", 0) or 0)
+            except Exception:
+                pass
+        if working >= 1.0:
+            return round(working - 0.10, 2)  # dust buffer stays out
+    except Exception:
+        pass
+    return 13.0
 
 
 def _now_iso() -> str:
@@ -206,12 +252,31 @@ def send_and_wait(w3, acct, fn, label: str) -> Dict[str, Any]:
 
 
 def _avax_usd() -> float:
+    """AVAX/USD — chain-first (our LP's active bin IS the live oracle), CoinGecko backup.
+    Returns 0.0 ONLY if both fail; the gas-check caller treats 0.0 as 'no price'
+    and substitutes a CONSERVATIVE HIGH estimate (never a fabricated low)."""
+    try:
+        import urllib.request
+        from web3 import Web3
+        w3 = Web3(Web3.HTTPProvider("https://api.avax.network/ext/bc/C/rpc"))
+        pair = Web3.to_checksum_address("0x864d4e5ee7318e97483db7eb0912e09f161516ea")
+        sel = "0x" + w3.keccak(text="getActiveId()")[:4].hex()
+        active = int.from_bytes(w3.eth.call({"to": pair, "data": sel}), "big")
+        # LFJ V2.2 binStep=10: price = 1.001 ^ (id - 2^23) * 1e12, USDC per WAVAX
+        price = ((1 + 10 / 10000) ** (active - 2**23)) * 1e12
+        if 1.0 < price < 1000.0:
+            return price
+    except Exception:
+        pass
     try:
         import urllib.request
         with urllib.request.urlopen("https://api.coingecko.com/api/v3/simple/price?ids=avalanche-2&vs_currencies=usd", timeout=8) as r:
-            return float(json.load(r)["avalanche-2"]["usd"])
+            cg = float(json.load(r)["avalanche-2"]["usd"])
+            if 1.0 < cg < 1000.0:
+                return cg
     except Exception:
-        return 0.0
+        pass
+    return 0.0
 
 
 def step_approve(w3, acct, dry_run: bool) -> Dict[str, Any]:
@@ -321,17 +386,31 @@ def step_redeploy(w3, acct, dry_run: bool, shape: str = "curve") -> Dict[str, An
     """
     if dry_run:
         import subprocess
+        # Dry-run: project post-withdraw balances (wallet + LP value) so the
+        # plan shows the TRUE full-capital redeploy size.
+        amount = _redeploy_budget(w3, acct, include_position=True)
         proc = subprocess.run(
             [sys.executable, REDEPLOY_EXEC_SCRIPT,
-             "--amount", str(REDEPLOY_AMOUNT_USD),
+             "--amount", str(amount),
              "--bin-spread", str(_redeploy_spread(shape)), "--dry-run"],
             capture_output=True, text=True, timeout=120)
+        combined = (proc.stdout + proc.stderr).lower()
+        if proc.returncode != 0 and "insufficient" in combined:
+            # EXPECTED in dry-run: the wallet is empty pre-withdraw because the
+            # capital sits IN the LP. The real run withdraws FIRST (full-capital
+            # rule), then this leg sees full balances. Not a failure.
+            return {"ok": True, "label": "redeploy", "dry_run": True,
+                    "note": (f"dry-run plan ${amount:.2f} @ ±{_redeploy_spread(shape)} — "
+                             f"wallet short pre-withdraw (capital is in the LP); "
+                             f"the real run withdraws first, then funds this leg"),
+                    "stdout": proc.stdout[-400:], "stderr": proc.stderr[-200:]}
         return {"ok": proc.returncode == 0, "label": "redeploy", "dry_run": True,
                 "stdout": proc.stdout[-600:], "stderr": proc.stderr[-200:]}
     import subprocess
+    amount = _redeploy_budget(w3, acct)
     proc = subprocess.run(
         [sys.executable, REDEPLOY_EXEC_SCRIPT,
-         "--amount", str(REDEPLOY_AMOUNT_USD),
+         "--amount", str(amount),
          "--bin-spread", str(_redeploy_spread(shape)), "--execute", "--yes"],
         capture_output=True, text=True, timeout=180)
     ok = proc.returncode == 0 and "deployed" in proc.stdout.lower()
@@ -360,7 +439,13 @@ def run(mode: str = "withdraw", dry_run: bool = True, want_usdc: bool = True, sh
     # caught with <$1 to cover the move)
     if not dry_run:
         native = w3.eth.get_balance(acct.address) / 1e18
-        avax_usd = _avax_usd() or 6.0
+        avax_usd = _avax_usd()
+        if avax_usd <= 0:
+            # No price from chain OR CoinGecko: assume a HIGH price — conservative
+            # for the gas check. A fabricated LOW here blocks rebalances while
+            # the position bleeds fees (the $0.87 false-refusal incident).
+            avax_usd = 100.0
+            print(f"   ⚠️ no AVAX price feed — using conservative ${avax_usd} for gas check")
         native_usd = native * avax_usd
         if native_usd < GAS_MIN_USD:
             receipt["ok"] = False

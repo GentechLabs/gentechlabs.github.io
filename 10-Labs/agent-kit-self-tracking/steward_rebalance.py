@@ -49,6 +49,12 @@ DEPLOY_SCRIPT = os.environ.get(
     "STEWARD_DEPLOY_SCRIPT",
     "/root/.hermes/profiles/gentech-treasury/scripts/deploy_lp_curve.py")
 
+# Silence layer (Jordan, Sep 3 2026): alert ONCE per condition, then stay
+# silent until it resolves or changes. No more re-firing the same failed
+# attempt every 10 minutes.
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import steward_silence as silence
+
 # Rebalance thresholds
 OUT_OF_RANGE_FEE_EFF = 50.0   # fee efficiency % below this -> consider rebalance
 REBALANCE_MIN_DELAY_S = 600   # don't rebalance more than once per 10 min
@@ -106,13 +112,29 @@ def read_position() -> Dict[str, Any]:
 
 
 def fee_efficiency(position: Dict[str, Any]) -> float:
-    """Fee efficiency from the live position. IN range = 100, OUT = 0."""
+    """CONTINUOUS fee efficiency (Jordan's soft-floor rule, Sep 3 2026).
+
+    100% = price at the exact center of our bin range (max fee capture).
+    0%   = price at a range edge / out of range.
+    Linear distance-from-center: eff = (1 - |frac - 0.5| * 2) * 100.
+
+    Replaces the old binary in/out measure — "IN range" says nothing about how
+    much of our curve is actually being crossed by trades.
+    """
     if not position or "positions" not in position:
         return 0.0
     pos = next((p for p in position["positions"] if "error" not in p), None)
     if not pos:
         return 0.0
-    return 100.0 if pos.get("inRange") else 0.0
+    if not pos.get("inRange"):
+        return 0.0
+    lo, hi = pos.get("rangeLow"), pos.get("rangeHigh")
+    price = pos.get("livePriceUsd")
+    if not (isinstance(lo, (int, float)) and isinstance(hi, (int, float))
+            and isinstance(price, (int, float)) and hi > lo):
+        return 100.0 if pos.get("inRange") else 0.0
+    frac = max(0.0, min(1.0, (price - lo) / (hi - lo)))
+    return max(0.0, 1.0 - abs(frac - 0.5) * 2.0) * 100.0
 
 
 def gas_ok() -> bool:
@@ -172,6 +194,47 @@ def get_position_after() -> str:
 
 # ── Decision ─────────────────────────────────────────────────────────────
 
+# Jordan's soft-floor rule (Sep 3 2026): "if fee efficiency is below 60-70% for
+# a while and rebalancing doesn't cost much — rebalance." In range but hovering
+# near an edge = weak fee capture. Sustained weakness triggers a proactive
+# re-center (gas is pennies; missed fees are not).
+SOFT_FLOOR_EFF = 65.0          # below this (while in range) starts the timer
+SOFT_FLOOR_PERSIST_MIN = 20    # sustained minutes below floor before acting
+# 20 min = exactly 2 consecutive 10-min watchdog readings below floor (Jordan,
+# Sep 3 2026: "after 20 minutes we can definitely say we need to rebalance").
+SOFT_FLOOR_FILE = os.path.join(HERE, ".steward-soft-floor-state.json")
+
+
+def _soft_floor_tick(eff: float) -> float:
+    """Track how long fee efficiency has been below the soft floor.
+
+    Returns minutes sustained (0 if not below floor). Writes/clears the state
+    file so the timer survives across 10-min cron runs (stateful debounce).
+    """
+    import os as _os
+    if eff >= SOFT_FLOOR_EFF:
+        # Healthy — clear the timer
+        try:
+            if _os.path.exists(SOFT_FLOOR_FILE):
+                _os.remove(SOFT_FLOOR_FILE)
+        except Exception:
+            pass
+        return 0.0
+    st = load_json(SOFT_FLOOR_FILE, {}) or {}
+    first = st.get("first_seen")
+    if not first:
+        with open(SOFT_FLOOR_FILE, "w") as f:
+            json.dump({"first_seen": _now_iso(), "eff": eff}, f)
+        return 0.0
+    try:
+        first_dt = datetime.fromisoformat(first)
+        return (datetime.now(timezone.utc) - first_dt).total_seconds() / 60.0
+    except (ValueError, TypeError):
+        with open(SOFT_FLOOR_FILE, "w") as f:
+            json.dump({"first_seen": _now_iso(), "eff": eff}, f)
+        return 0.0
+
+
 def decide(position: Dict[str, Any], regime: Dict[str, str],
            last_rebalance_ts: Optional[str] = None) -> Dict[str, Any]:
     """The Steward's rebalance decision for the current state."""
@@ -199,20 +262,36 @@ def decide(position: Dict[str, Any], regime: Dict[str, str],
             "reason": "no deployable position detected", "fee_eff": eff,
         }
 
-    # Not out of range -> hold (stay in pool, keep earning)
-    if eff >= OUT_OF_RANGE_FEE_EFF:
+    # Jordan's SOFT-FLOOR rule (Sep 3 2026): in range but fee capture weak
+    # (price hovering near a range edge) for a sustained stretch -> re-center.
+    # Rebuke of "in range = fine": a curve with price pinned at an edge earns
+    # a fraction of center-position fees, and gas costs ~nothing — so after a
+    # persistence window, re-centering is rational even while technically IN.
+    reason = ""
+    if 0.0 < eff < SOFT_FLOOR_EFF:
+        sustained_min = _soft_floor_tick(eff)
+        if sustained_min < SOFT_FLOOR_PERSIST_MIN:
+            return {
+                "action": "hold", "shape": shape,
+                "reason": (f"fee eff {eff:.0f}% below soft floor "
+                           f"({SOFT_FLOOR_EFF:.0f}%) for "
+                           f"{sustained_min:.0f}m (< {SOFT_FLOOR_PERSIST_MIN}m) — watching"),
+                "fee_eff": eff,
+            }
+        reason = (f"fee eff {eff:.0f}% < {SOFT_FLOOR_EFF:.0f}% sustained "
+                  f"{sustained_min:.0f}m — proactive re-center {shape}")
+        # fall through to the shared frequency guard below
+    elif eff >= SOFT_FLOOR_EFF:
+        _soft_floor_tick(eff)  # clears the timer
         return {
             "action": "hold", "shape": shape,
-            "reason": f"in range (fee eff {eff:.0f}%) — stay in pool", "fee_eff": eff,
+            "reason": f"in range, fee eff {eff:.0f}% — stay in pool", "fee_eff": eff,
         }
+    else:
+        # Fully OUT of range (eff == 0) — immediate re-center, no wait.
+        reason = f"OUT of range — re-center {shape} on current price"
 
-    # Out of range. Is re-centering justified?
-    # Gas is effectively free on Avalanche (measured ~$0.001), so the gate is
-    # "is the shape right for the regime" + "not too frequent."
-    reason = (f"OUT of range (fee eff {eff:.0f}%) — re-center {shape} on "
-              f"current price")
-
-    # Frequency guard
+    # Frequency guard (applies to both soft-floor and out-of-range triggers)
     if last_rebalance_ts:
         try:
             last = datetime.fromisoformat(last_rebalance_ts.replace("Z", "+00:00"))
@@ -304,18 +383,29 @@ def main() -> int:
         return 0
 
     # ── AUTONOMOUS mode: detect need, execute, report (Jordan alerted AFTER) ──
+    # Silence layer (Jordan, Sep 3 2026): each condition alerts ONCE, then stays
+    # silent while it persists — re-alerts only on resolution->recurrence or the
+    # periodic reminder window (default 6h). Resolving the condition re-arms it.
     if args.autonomous:
         if decision["action"] == "deploy":
             # Funded wallet, no position — open a fresh curve (auto-deploy).
+            # SILENCE GATE: if this condition was already reported and is still
+            # unresolved, stay quiet — the deploy already failed, re-announcing
+            # every 10 min is noise, not monitoring.
+            if silence.silenced("auto-deploy"):
+                return 0
             import subprocess
             deployable = has_deployable_capital()
             deployable = max(10.0, deployable - 1.0)  # keep a little USDC + gas buffer
             print(f"🛡️ STEWARD — AUTONOMOUS DEPLOY (no position)")
             print(f"   Reason: {decision['reason']}")
-            print(f"   Plan: open {decision['shape']} curve for ${deployable:.2f}")
+            # Spread fix (Jordan, Sep 2 2026): ±11 reverts on LFJ (proven by
+            # read-only eth_call simulation 2026-09-03). ±5 with 11 bins is the
+            # working setting — same one auto-compound uses.
+            print(f"   Plan: open {decision['shape']} curve ±5 for ${deployable:.2f}")
             proc = subprocess.run(
                 [sys.executable, DEPLOY_EXEC_SCRIPT, "--amount", str(deployable),
-                 "--bin-spread", "11", "--execute", "--yes"],
+                 "--bin-spread", "5", "--allocation", "0.5", "--execute", "--yes"],
                 capture_output=True, text=True, timeout=300)
             ok = proc.returncode == 0
             print(f"   Executed: {'✅' if ok else '❌'}")
@@ -326,12 +416,28 @@ def main() -> int:
             if ok:
                 with open(stamp_file, "w") as f:
                     json.dump({"ts": _now_iso()}, f)
+                silence.mark_success("auto-deploy")
                 new_pos = get_position_after()
                 if new_pos:
                     print(f"   ✅ Position live: {new_pos}")
+            else:
+                # Failure — suppress further attempts for 6h (one reminder after
+                # that), instead of re-announcing the same failure every 10 min.
+                silence.mark_failure(
+                    "auto-deploy", (proc.stderr or proc.stdout or "unknown")[-300:],
+                    retry_hours=6)
             return 0
         if decision["action"] != "rebalance":
             # Healthy — stay silent (no noise). The heartbeat covers the pulse.
+            # Conditions RESOLVED (position live / back in range): re-arm the
+            # silence keys so the NEXT occurrence alerts fresh (suppress-until-
+            # resolution pattern).
+            silence.mark_success("auto-deploy")
+            silence.mark_success("rebalance")
+            return 0
+        # Rebalance leg — same silence discipline: alert ONCE per out-of-range
+        # episode, stay silent while it persists, re-arm on success.
+        if silence.silenced("rebalance"):
             return 0
         p = next((x for x in position.get("positions", []) if "error" not in x), None)
         pos_read = p.get("read", "") if p else ""
@@ -358,10 +464,17 @@ def main() -> int:
         if ok:
             with open(stamp_file, "w") as f:
                 json.dump({"ts": _now_iso()}, f)
+            silence.mark_success("rebalance")
             # Verify the new on-chain state
             new_pos = get_position_after()
             if new_pos:
                 print(f"   ✅ Back at: {new_pos}")
+        else:
+            # Failed re-center — suppress for 2h instead of re-attempting +
+            # re-announcing every 10 min (gas + noise discipline).
+            silence.mark_failure(
+                "rebalance", (proc.stderr or proc.stdout or "unknown")[-300:],
+                retry_hours=2)
         return 0
 
     print("=" * 52)
