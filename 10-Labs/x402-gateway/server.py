@@ -23,6 +23,228 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# =============================================================================
+# HUMAN API-KEY TIER (Priority #1 income — converts x402-only to human-payable)
+# -----------------------------------------------------------------------------
+# Humans can't hold agent wallets, so they can't pay via x402. This tier lets a
+# human buy an API key (card via Stripe, or self-serve issue) and call the same
+# 13 endpoints with `Authorization: Bearer <api_key>`. x402 stays intact for
+# agents — this is purely additive.
+#
+# Key store: a JSON file keyed by api-key-id → {key_hash, tier, email, plan,
+# monthly_limit, used_this_month, month_key, revoked, created_at}. Only the
+# SHA-256 hash of the key is stored (never the plaintext). Usage is tracked
+# per key+month for rate limiting.
+# =============================================================================
+import secrets as _secrets
+import threading as _threading
+
+_KEYS_DIR = os.getenv("HUMAN_KEYS_DIR", os.path.join(os.path.dirname(os.path.abspath(__file__)), "human-keys"))
+_KEYS_FILE = os.path.join(_KEYS_DIR, "api_keys.json")
+os.makedirs(_KEYS_DIR, exist_ok=True)
+_KEYS_LOCK = _threading.Lock()
+
+# Pricing tiers (mirrors handoff recommendation)
+HUMAN_PLANS = {
+    "free":   {"monthly_calls": 50,    "desc": "Free trial — 50 calls/mo"},
+    "basic":  {"monthly_calls": 5000,  "desc": "$19/mo — 5,000 calls"},
+    "unlimited": {"monthly_calls": None, "desc": "$99/mo — unlimited"},
+}
+
+
+def _load_keys() -> dict:
+    try:
+        with open(_KEYS_FILE) as f:
+            return json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError):
+        return {}
+
+
+def _save_keys(keys: dict):
+    tmp = _KEYS_FILE + ".tmp"
+    with open(tmp, "w") as f:
+        json.dump(keys, f, indent=2)
+    os.replace(tmp, _KEYS_FILE)
+
+
+def _month() -> str:
+    return time.strftime("%Y-%m")
+
+
+def hash_key(raw_key: str) -> str:
+    return hashlib.sha256(raw_key.encode()).hexdigest()
+
+
+def issue_human_key(plan: str = "free", label: str = "") -> dict | None:
+    """Create a new human API key. Returns the plaintext key ONCE (the caller
+    must deliver it to the buyer). Only the hash is stored.
+    Returns None if the plan is unknown."""
+    if plan not in HUMAN_PLANS:
+        return None
+    raw = "gt_" + _secrets.token_hex(24)
+    key_hash = hash_key(raw)
+    key_id = "k_" + _secrets.token_hex(6)
+    now = int(time.time())
+    with _KEYS_LOCK:
+        keys = _load_keys()
+        keys[key_id] = {
+            "hash": key_hash,
+            "plan": plan,
+            "label": label,
+            "enabled": True,
+            "used_this_month": 0,
+            "month": _month(),
+            "created_at": now,
+        }
+        _save_keys(keys)
+    return {"id": key_id, "key": raw, "plan": plan, **HUMAN_PLANS[plan]}
+
+
+def revoke_human_key(key_id: str) -> bool:
+    with _KEYS_LOCK:
+        keys = _load_keys()
+        if key_id not in keys:
+            return False
+        keys[key_id]["enabled"] = False
+        _save_keys(keys)
+    return True
+
+
+def list_human_keys() -> list[dict]:
+    with _KEYS_LOCK:
+        keys = _load_keys()
+    out = []
+    for k, v in keys.items():
+        out.append({
+            "id": k, "plan": v.get("plan"), "label": v.get("label"),
+            "enabled": v.get("enabled"), "used_this_month": v.get("used_this_month", 0),
+            "month": v.get("month"), "created_at": v.get("created_at"),
+        })
+    return out
+
+
+def verify_human_key(raw_key: str) -> dict | None:
+    """Validate a raw key against the store, enforce plan monthly limit, and
+    increment usage. Returns a normalized {key_id, plan} dict or None."""
+    if not raw_key:
+        return None
+    key_hash = hash_key(raw_key)
+    with _KEYS_LOCK:
+        keys = _load_keys()
+        for k, v in keys.items():
+            if v.get("hash") != key_hash:
+                continue
+            if not v.get("enabled", True):
+                return None
+            limit = HUMAN_PLANS.get(v.get("plan", "free"), {}).get("monthly_calls")
+            m = _month()
+            if v.get("month") != m:
+                v["month"] = m
+                v["used_this_month"] = 0
+            if limit is not None and v.get("used_this_month", 0) >= limit:
+                return {"key_id": k, "plan": v.get("plan"), "quota_exceeded": True}
+            v["used_this_month"] = v.get("used_this_month", 0) + 1
+            _save_keys(keys)
+            return {"key_id": k, "plan": v.get("plan"), "quota_exceeded": False}
+    return None
+
+
+def extract_human_key(request: Request) -> str | None:
+    """Read the API key from `Authorization: Bearer <key>` or `X-API-Key: <key>`."""
+    auth = request.headers.get("Authorization", "")
+    if auth.lower().startswith("bearer "):
+        return auth[7:].strip()
+    xk = request.headers.get("X-API-Key") or request.headers.get("x-api-key")
+    if xk:
+        return xk.strip()
+    return None
+
+
+def admin_authorized(request: Request) -> bool:
+    """Gate the admin key-management endpoints behind the configured admin key."""
+    admin = os.getenv("GATEWAY_ADMIN_KEY", "")
+    if not admin:
+        return False
+    supplied = extract_human_key(request)
+    if not supplied:
+        return False
+    return hmac.compare_digest(supplied, admin)
+
+
+
+# --- OKX Pay SDK integration (Sep 3, 2026 — Treasury Steward directive) -------------
+# OKX's test agent now auto-pays and expects settlement via THEIR facilitator
+# (/api/v6/pay/x402/*), verified on their stack. The official SDK
+# (`okxweb3-app-x402`) ships OKXFacilitatorClient; we wire it additively:
+#   - Gate: OKX_PAY_SDK=1 env (rollback = unset → PayAI path resumes)
+#   - Creds: OKX_API_KEY / OKX_SECRET_KEY / OKX_PASSPHRASE in gentech .env
+#     (Jordan-gated — portal application; absent creds → PayAI fallback)
+#   - Scope: /v1/okx/* alias only; generic routes keep the multi-rail proof rails.
+
+async def verify_settle_via_okx(proof: str, price: float, resource_url: str):
+    """Verify + settle a payment payload via the OKX facilitator.
+
+    Returns (valid: bool, reason: str, settled: bool). Uses the official
+    `okxweb3-app-x402` SDK (OKXFacilitatorClient). Credentials from env;
+    if the SDK or creds are missing, returns (False, "okx_sdk_unavailable")
+    so the caller can fall back to the PayAI rail (multi-rail stays intact).
+    """
+    api_key = os.getenv("OKX_API_KEY", "")
+    secret_key = os.getenv("OKX_SECRET_KEY", "")
+    passphrase = os.getenv("OKX_PASSPHRASE", "")
+    if not (api_key and secret_key and passphrase):
+        return False, "okx_credentials_missing"
+    try:
+        from x402.http.okx_facilitator_client import (
+            OKXFacilitatorClient,
+            OKXFacilitatorConfig,
+        )
+        from x402.http.okx_auth import OKXAuthConfig
+    except ImportError:
+        return False, "okx_sdk_unavailable"
+
+    try:
+        import httpx as _httpx
+        payload = json.loads(proof) if proof.strip().startswith("{") else {
+            "x402Version": 2,
+            "resource": {"url": resource_url},
+            "payload": proof,
+        }
+        network = os.getenv("OKX_SETTLEMENT_NETWORK", "eip155:196")
+        asset = os.getenv("OKX_SETTLEMENT_ASSET", "0x779ddc60ec685bcbec1ea0d1a7094293e5cfd736")
+        pay_to = os.getenv("PAY_TO_XLAYER", os.getenv("PAY_TO_EVM", "0x7ebff188f2Eba16518C02864589b1403a5d1296a"))
+        amount_units = str(int(price * 1_000_000))
+        requirements = {
+            "scheme": "exact",
+            "network": network,
+            "asset": asset,
+            "amount": amount_units,
+            "payTo": pay_to,
+            "resource": resource_url,
+        }
+        config = OKXFacilitatorConfig(
+            auth=OKXAuthConfig(api_key=api_key, secret_key=secret_key, passphrase=passphrase),
+            sync_settle=True,
+        )
+        client = OKXFacilitatorClient(config)
+        try:
+            verify_resp = await client.verify(payload, requirements)
+            if not getattr(verify_resp, "isValid", False):
+                reason = getattr(verify_resp, "invalidReason", None) or "verify_failed"
+                return False, f"okx_verify_failed: {reason}"
+            settle = await client.settle(payload, requirements)
+            success = getattr(settle, "success", False)
+            tx = getattr(settle, "transaction", None) or getattr(settle, "transactionHash", "")
+            if not success:
+                reason = getattr(settle, "errorReason", None) or "settle_failed"
+                return False, f"okx_settle_failed: {reason}"
+            return True, tx or "okx_settled"
+        finally:
+            await client.aclose()
+    except Exception as e:  # noqa: BLE001 — facilitator errors must never 500 the gateway
+        return False, f"okx_facilitator_error: {str(e)[:200]}"
+
+
 # Load service manifest
 MANIFEST_PATH = "/var/www/gentechlabs/.well-known/x402-bazaar"
 try:
@@ -46,8 +268,7 @@ BACKEND_ROUTES = {
     "nft_search": ("http://127.0.0.1:8094", "search", "/v1/nft/search"),
     "treasury_defender": ("http://127.0.0.1:8096", "defender/", "/v1/defender/"),
     "lineage_guard": ("http://127.0.0.1:8095", "lineage/", "/v1/lineage/"),
-    "deal_tracker": ("http://127.0.0.1:8080", "", "/v1/"),
-    "agent_research": ("http://127.0.0.1:8100", "agent/", "/v1/agent/"),
+    "sie_inference": ("http://127.0.0.1:8097", "", "/v1/"),
 }
 
 # Public URL segment (first path element after /v1/) -> manifest service key
@@ -60,8 +281,7 @@ URL_TO_SERVICE = {
     "nft": "nft_search",
     "defender": "treasury_defender",
     "lineage": "lineage_guard",
-    "deals": "deal_tracker",
-    "agent": "agent_research",
+    "sie": "sie_inference",
 }
 
 
@@ -107,10 +327,22 @@ NETWORKS = {
         # X Layer mainnet (OKX). Settled via the PayAI facilitator. Our ERC-8004
         # agent identities live on XLayer — this rail lets those services settle.
         "network": "eip155:196",
-        # Native Circle USDC on X Layer (6 decimals)
-        "asset": "0xB6CEceAB302E2E4948951eE7843FC24E92933061",
+        # USDT0 (OKX's official settlement stablecoin on X Layer, 6 decimals).
+        # OKX A2MCP spec requires this exact asset for X Layer settlement.
+        "asset": "0x779ded0c9e1022225f8e0630b35a9b54be713736",
         "decimals": 6,
         "payto_env": "X402_PAYTO_XLAYER",
+        "payto_default": "",
+        "extra": {"name": "USD₮0", "version": "1"},
+    },
+    "solana": {
+        # Solana mainnet. Settled via the PayAI facilitator (supports
+        # solana:5eykt4...). USDC on Solana is an SPL token (mint EPjFWdd5...),
+        # not a contract address — payTo is a Solana address.
+        "network": "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+        "asset": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",  # USDC mint on Solana
+        "decimals": 6,
+        "payto_env": "X402_PAYTO_SOLANA",
         "payto_default": "",
         "extra": {"name": "USD Coin", "version": "2"},
     },
@@ -156,9 +388,50 @@ def is_network_accepted(network: str | None) -> bool:
     return any(n["network"] == network for n in enabled_networks())
 
 
-def build_payment_required(service_name: str, price_usd: float) -> dict:
-    """Build x402 v2 PaymentRequired payload — compliant with Agentic Market validator"""
+def build_payment_required(service_name: str, price_usd: float, request_url: str | None = None, okx: bool | None = None) -> dict:
+    """Build x402 v2 PaymentRequired payload — compliant with Agentic Market validator.
+
+    OKX-compliant mode: OKX's A2MCP validator rejects multi-network accepts and
+    unknown extension blocks (3rd rejection, Aug 25). When enabled, emit a
+    SINGLE-network X Layer challenge with resource.url set to the exact probed
+    request URL and NO extensions block — matching OKX's documented schema
+    (web3.okx.com/onchainos/dev-docs/okxai/howtomcp).
+
+    `okx` resolution order: explicit arg > X_OKX_COMPLIANT env > False.
+    The /v1/okx/* alias routes pass okx=True unconditionally so OKX probes get
+    the single-rail challenge even while normal routes serve multi-rail
+    challenges for Dexter / CDP Bazaar (Aug 30 multi-rail requirement).
+    """
     price_atomic = int(price_usd * 1000000)  # USDC has 6 decimals
+
+    if okx is None:
+        okx = os.getenv("X_OKX_COMPLIANT", "").lower() in ("1", "true", "yes", "on")
+    if okx:
+        # OKX validator: exactly one network (X Layer / eip155:196), no extensions.
+        xlayer = NETWORKS["xlayer"]
+        payto = os.getenv(xlayer["payto_env"], xlayer["payto_default"])
+        if not payto:
+            payto = NETWORKS["base"]["payto_default"]  # same settlement wallet
+        amount = str(int(round(price_usd * (10 ** xlayer["decimals"]))))
+        resource_url = request_url or f"https://api.gentechlabs.net/v1/{service_name.lower().replace(' ', '-')}"
+        return {
+            "x402Version": 2,
+            "resource": {
+                "url": resource_url,
+                "description": f"GenTech Labs x402 - {service_name}",
+                "mimeType": "application/json",
+            },
+            "accepts": [{
+                "scheme": "exact",
+                "network": xlayer["network"],
+                "asset": xlayer["asset"],
+                "amount": str(int(round(price_usd * (10 ** xlayer["decimals"])))),
+                "payTo": payto,
+                "maxTimeoutSeconds": 300,
+                "extra": xlayer["extra"],
+            }],
+        }
+
     accepts = []
     for net in enabled_networks():
         accepts.append({
@@ -175,7 +448,10 @@ def build_payment_required(service_name: str, price_usd: float) -> dict:
         "resource": {
             "url": f"https://api.gentechlabs.net/v1/{service_name.lower().replace(' ', '-')}",
             "description": f"GenTech Labs x402 - {service_name}",
-            "mimeType": "application/json"
+            "mimeType": "application/json",
+            "serviceName": f"GenTech {service_name}",
+            "tags": ["x402", "treasury", "defi", "yield", "intelligence"],
+            "iconUrl": "https://gentechlabs.net/gentech-logo.png"
         },
         "accepts": accepts,
         "extensions": {
@@ -184,7 +460,7 @@ def build_payment_required(service_name: str, price_usd: float) -> dict:
                 "discoveryUrl": "https://api.gentechlabs.net/.well-known/x402-bazaar",
                 "info": {
                     "title": "GenTech Labs x402 Gateway",
-                    "description": "Pay-per-call API gateway with 7 services across Base Network. Token security, wallet analysis, agent discovery, market intelligence, DeFi LP analytics, NFT search, treasury defense.",
+                    "description": "Cross-chain agentic treasury + x402 payment infrastructure for the agent economy. Pay-per-call DeFi intelligence, yield scanning, wallet analysis, agent identity/trust, and market data across 7 chains - the infrastructure layer agents hire to manage capital and route payments, not another chatbot. Treasury-first, utility-second, backed by real on-chain revenue.",
                     "version": MANIFEST.get("version", "9.0.0"),
                     "x402Version": 2,
                     "seller": {
@@ -245,28 +521,31 @@ def build_payment_required(service_name: str, price_usd: float) -> dict:
     }
 
 
-def payment_required_response(service_name: str, price_usd: float) -> Response:
+def payment_required_response(service_name: str, price_usd: float, request_url: str | None = None, okx: bool | None = None) -> Response:
     """Return HTTP 402 with PAYMENT-REQUIRED header and body.
 
-    Dual-rail: also emits a `WWW-Authenticate: Payment` (MPP) challenge so
-    MPP clients (IETF draft-httpauth-payment-00) can settle the same endpoint.
+    x402 v2 only. NOTE (Aug 24, 2026): we previously ALSO emitted a
+    `WWW-Authenticate: Payment` (MPP) challenge here for dual-rail support.
+    That broke OKX A2MCP review — OKX's validator branches to the
+    WWW-Authenticate path first (Priority 1 in their protocol), and our MPP
+    challenge was incomplete (no `request=` payload, no `expires=`), so the
+    sandbox reported "did not return the x402 challenge in the response
+    header." Fix: emit ONLY the PAYMENT-REQUIRED x402 v2 header so the
+    validator parses the correct challenge. See okx-a2a-daemon-ops skill ref
+    2026-08-24-challenge-header-not-detected.md.
+
+    X_OKX_COMPLIANT=1 additionally collapses the challenge to a single X Layer
+    network with no extensions block (see build_payment_required). The okx arg
+    overrides the env — the /v1/okx/* alias passes okx=True unconditionally.
     """
-    payload = build_payment_required(service_name, price_usd)
+    payload = build_payment_required(service_name, price_usd, request_url, okx=okx)
     payload_b64 = base64.b64encode(json.dumps(payload).encode()).decode()
-    # MPP challenge — payment-method agnostic. We advertise the EVM method
-    # (settles via our existing USDC rails). intent=charge for pay-per-call.
-    mpp_challenge = (
-        'Payment id="gentech-x402", method="evm", '
-        f'intent="charge", amount="{price_usd}", '
-        f'currency="USDC", description="GenTech Labs x402 - {service_name}"'
-    )
     return Response(
         status_code=402,
         content=json.dumps(payload),
         media_type="application/json",
         headers={
             "PAYMENT-REQUIRED": payload_b64,
-            "WWW-Authenticate": mpp_challenge,
             "Access-Control-Allow-Origin": "*",
         },
     )
@@ -567,16 +846,6 @@ PAYAI_FACILITATOR = os.getenv(
     "https://facilitator.payai.network",
 )
 
-# Dexter x402 facilitator — the rail that auto-catalogs us on the OpenDexter
-# marketplace (open.dexter.cash/mcp). OpenDexter only indexes gateways that
-# settle through the Dexter facilitator (x402.dexter.cash), NOT CDP/GoPlausible/
-# PayAI. Supports eip155:8453 (Base) with the `exact` scheme. No API key required.
-# Enable by setting X402_USE_DEXTER=1 (routes Base proofs here instead of CDP).
-DEXTER_FACILITATOR = os.getenv(
-    "DEXTER_FACILITATOR_URL",
-    "https://x402.dexter.cash",
-)
-
 
 def verify_proof_via_payai(proof_str: str, expected_price: float) -> tuple[bool, str]:
     """Verify + settle a proof against the PayAI x402 facilitator.
@@ -719,81 +988,6 @@ def verify_proof_via_goplausible(proof_str: str, expected_price: float) -> tuple
         return False, f"goplausible unreachable: {e}"
 
 
-def verify_proof_via_dexter(proof_str: str, expected_price: float) -> tuple[bool, str]:
-    """Verify + settle a proof against the Dexter x402 facilitator.
-
-    This is the rail that auto-catalogs us on the OpenDexter marketplace
-    (open.dexter.cash/mcp). OpenDexter only indexes gateways that settle through
-    the Dexter facilitator (x402.dexter.cash) — CDP/GoPlausible/PayAI settlements
-    do NOT trigger cataloging. Dexter supports eip155:8453 (Base) with the
-    `exact` scheme, matching our primary rail. No API key required.
-
-    Same {x402Version, paymentPayload, paymentRequirements} envelope as the
-    GoPlausible/PayAI paths. /verify returns {isValid, invalidReason};
-    /settle returns {success, transaction, network, payer}.
-    """
-    try:
-        proof = json.loads(proof_str)
-    except json.JSONDecodeError:
-        try:
-            import base64 as _b64
-            decoded = _b64.b64decode(proof_str + "=" * (-len(proof_str) % 4)).decode("utf-8")
-            proof = json.loads(decoded)
-        except Exception:
-            return False, "proof is not valid JSON or base64 JSON"
-
-    payload = proof if "paymentPayload" in proof else {"paymentPayload": proof}
-    try:
-        _pp = payload.get("paymentPayload", payload)
-        _ver = _pp.get("x402Version", 2)
-        _accepted_opt = _pp.get("accepted", {})
-        if _accepted_opt:
-            payload = {
-                "x402Version": _ver,
-                "paymentPayload": _pp,
-                "paymentRequirements": _accepted_opt,
-            }
-    except Exception:
-        pass
-
-    # Local structural guard: reject proofs on a rail we don't advertise.
-    try:
-        accepted = payload["paymentPayload"].get("accepted", payload["paymentPayload"])
-        network = accepted.get("network")
-    except (KeyError, TypeError):
-        network = None
-    if not is_network_accepted(network):
-        return False, f"network {network!r} not accepted"
-
-    try:
-        with httpx.Client(timeout=20) as client:
-            v = client.post(
-                f"{DEXTER_FACILITATOR}/verify",
-                json=payload,
-                headers={"Content-Type": "application/json"},
-            )
-        if v.status_code != 200:
-            return False, f"dexter verify {v.status_code}: {v.text[:200]}"
-        body = v.json()
-        if not body.get("isValid", False):
-            return False, body.get("invalidReason", "invalid")
-        # Verify OK → settle so OpenDexter auto-catalogs us.
-        try:
-            with httpx.Client(timeout=30) as client:
-                s = client.post(
-                    f"{DEXTER_FACILITATOR}/settle",
-                    json=payload,
-                    headers={"Content-Type": "application/json"},
-                )
-            if s.status_code == 200 and s.json().get("success"):
-                return True, "verified + settled (dexter)"
-            return True, f"verified (dexter settle {s.status_code})"
-        except Exception as e:
-            return True, f"verified (dexter settle failed: {e})"
-    except Exception as e:
-        return False, f"dexter unreachable: {e}"
-
-
 def verify_proof_simulation(proof_str: str, expected_price: float) -> tuple[bool, str]:
     """Verify a proof using the local HMAC secret (simulation mode).
 
@@ -879,35 +1073,27 @@ async def health():
 @app.get("/openapi.json")
 async def openapi():
     """Full OpenAPI spec — free endpoints marked security:[], paid endpoints
-    carry the x402 security scheme + per-service x-payment-info so AgentCash /
-    x402scan can probe and index each service with its real price and schema.
-    """
+    carry the x402 security scheme so x402scan can probe them correctly."""
     free = {"security": []}
     spec = {
-        "openapi": "3.1.0",
+        "openapi": "3.0.0",
         "info": {
-            "title": MANIFEST.get("name", "GenTech Labs x402 Gateway"),
+            "title": "GenTech Labs x402 Gateway",
             "version": MANIFEST.get("version", "9.0.0"),
-            "description": MANIFEST.get(
-                "description",
-                "Pay-per-call API gateway. Token security, wallet analysis, agent discovery, market intelligence, DeFi LP analytics, NFT search, treasury defense, game deal tracking.",
-            ),
+            "description": "Cross-chain agentic treasury + x402 payment infrastructure for the agent economy. Pay-per-call DeFi intelligence, yield scanning, wallet analysis, agent identity/trust, and market data across 7 chains — the infrastructure layer agents hire to manage capital and route payments. Treasury-first, utility-second, backed by real on-chain revenue.",
             "contact": {"email": "jordanjones0902@gmail.com", "name": "GenTech Labs", "url": "https://gentechlabs.net"},
-            "x-guidance": "Call a paid endpoint without a proof to receive HTTP 402 with x402 payment requirements (USDC). Pay via the 402 challenge and retry with the payment proof. Free endpoints (/health, /status, /openapi.json, /.well-known/*) need no payment.",
+            "x-guidance": "Call /v1/{service}/{path} with a JSON body. Services: token_security (risk score an address), wallet_analysis (portfolio P&L), agent_discovery (search on-chain agents), market_intelligence (token price/volume), defi_lp_analytics (LP position scoring), nft_search (Magic Eden search), treasury_defender (token quarantine). Unauthenticated calls return HTTP 402 with x402 payment requirements (USDC on Base). Pay via EIP-3009 and retry with Authorization: x402 <proof>.",
         },
-        "servers": [{"url": MANIFEST.get("url", "https://api.gentechlabs.net")}],
+        "servers": [{"url": "https://api.gentechlabs.net"}],
         "security": [{"x402": []}],
         "components": {
             "securitySchemes": {
                 "x402": {
                     "type": "http",
                     "scheme": "bearer",
-                    "description": "x402 payment proof. Call without a proof to receive HTTP 402 with payment requirements. Pay and retry with the returned proof.",
+                    "description": "x402 payment proof. Call without a proof to receive HTTP 402 with payment requirements (USDC on Base). Pay via EIP-3009 and retry with Authorization: x402 <proof>.",
                 }
             }
-        },
-        "x-discovery": {
-            "ownershipProofs": ["gentechlabs-erc8004-1770"],
         },
         "paths": {
             "/": {"get": {"summary": "Root", "security": []}},
@@ -917,125 +1103,130 @@ async def openapi():
             "/.well-known/x402": {"get": {"summary": "x402 discovery", "security": []}},
             "/.well-known/x402-bazaar": {"get": {"summary": "x402 bazaar manifest", "security": []}},
             "/.well-known/agent-card.json": {"get": {"summary": "Agent card", "security": []}},
+            "/v1/{service}/{path}": {
+                "parameters": [
+                    {"name": "service", "in": "path", "required": True, "schema": {"type": "string"}},
+                    {"name": "path", "in": "path", "required": True, "schema": {"type": "string"}},
+                ],
+                "get": {
+                    "summary": "Paid x402 endpoint (service/path)",
+                    "x-payment-info": {
+                        "price": {"mode": "fixed", "currency": "USD", "amount": "0.010000"},
+                        "protocols": [{"x402": {}}],
+                    },
+                    "responses": {"402": {"description": "Payment required"}, "200": {"description": "OK"}},
+                },
+                "post": {
+                    "summary": "Paid x402 endpoint (service/path)",
+                    "x-payment-info": {
+                        "price": {"mode": "fixed", "currency": "USD", "amount": "0.010000"},
+                        "protocols": [{"x402": {}}],
+                    },
+                    "responses": {"402": {"description": "Payment required"}, "200": {"description": "OK"}},
+                },
+            },
         },
     }
-    # Build one path entry per paid service from the manifest so each carries its
-    # real price, a 402 response, and an input/output schema (AgentCash requires
-    # these; the old generic /v1/{service}/{path} failed "Input/Output Schema Missing").
-    for key, svc in SERVICES.items():
-        endpoint = svc.get("endpoint", f"/v1/{key}/{{input}}")
-        price = svc.get("price_usd")
-        if price is None:
-            continue  # skip services without a listed price (e.g. treasury_defender)
-        path = endpoint.split("?")[0]  # strip query-string examples
-        # Extract path params like {address} / {symbol} / {chainId} for the schema
-        path_params = [p[1:-1] for p in path.split("/") if p.startswith("{") and p.endswith("}")]
-        params = [
-            {"name": p, "in": "path", "required": True, "schema": {"type": "string"}}
-            for p in path_params
-        ]
-        # A minimal request body/example so probes can send valid input (fixes
-        # "Expected 402, got 400" / "Input Schema Missing").
-        request_body = None
-        if key == "agent_research":
-            request_body = {
-                "required": True,
-                "content": {"application/json": {"schema": {"type": "object", "properties": {
-                    "task": {"type": "string", "description": "What to research"},
-                    "topic": {"type": "string", "description": "Topic / focus"},
-                }}, "example": {"task": "summarize", "topic": "bitcoin"}}},
-            }
-        elif key == "deal_tracker":
-            request_body = {
-                "required": False,
-                "content": {"application/json": {"schema": {"type": "object", "properties": {
-                    "type": {"type": "string", "enum": ["deals", "price", "releases"]},
-                }}, "example": {"type": "deals"}}},
-            }
-        operation = {
-            "summary": f"{svc.get('description', key)}",
-            "tags": [key],
-            "x-payment-info": {
-                "price": {"mode": "fixed", "currency": "USD", "amount": f"{price:.6f}"},
-                "protocols": [{"x402": {}}],
-            },
-            "responses": {
-                "200": {"description": "Success (after x402 payment)"},
-                "402": {"description": "Payment required — returns x402 challenge"},
-            },
-        }
-        if params:
-            operation["parameters"] = params
-        if request_body:
-            operation["requestBody"] = request_body
-        spec["paths"][path] = {"get": operation}
-        # FREE preview route for the services that have one (pattern from Grey
-        # Ridge — lets agents taste data before paying). Route is /v1/{service}/preview.
-        if key in PREVIEW_SAMPLES:
-            # map public URL segment back (service_key -> url segment)
-            url_seg = key
-            for seg, sk in URL_TO_SERVICE.items():
-                if sk == key:
-                    url_seg = seg
-                    break
-            preview_path = f"/v1/{url_seg}/preview"
-            spec["paths"][preview_path] = {"get": {
-                "summary": f"Free preview — sample of {svc.get('description', key)}",
-                "tags": [key],
-                "security": [],
-                "x-preview": True,
-                "responses": {"200": {"description": "Sample data (free, no payment)"}},
-            }}
     return spec
 
 
-# Dynamic paid endpoint routing
-# Free /preview samples — curated illustrative data so agents can verify the
-# SHAPE of the response before paying. Values are samples, NOT live/real data
-# (mirrors Grey Ridge's "withholds detail" pattern). Full data requires payment.
-def _preview_json(data):
-    from fastapi.responses import JSONResponse
-    return JSONResponse(data, media_type="application/json")
+# --- Human API-key management endpoints (Priority #1 income) ---------------
 
-PREVIEW_SAMPLES = {
-    "market_intelligence": _preview_json({
-        "symbol": "ETH", "price": 2300.00, "change_24h": "+1.2%",
-        "note": "SAMPLE — call paid /v1/market/price/{symbol} for live price",
-    }),
-    "token_security": _preview_json({
-        "address": "0x1234...", "risk": "low", "score": 85,
-        "flags": [], "note": "SAMPLE — call paid /v1/security/score/{address} for full audit",
-    }),
-    "wallet_analysis": _preview_json({
-        "wallet": "0x1234...", "pnl_24h": "+$12.50", "portfolio_value": "$500.00",
-        "note": "SAMPLE — call paid /v1/wallet/portfolio/{address} for full P&L",
-    }),
-    "defi_lp_analytics": _preview_json({
-        "position": "0x1234...", "shape": "stable", "efficiency": "high",
-        "note": "SAMPLE — call paid /v1/defi/lp/{address} for full analysis",
-    }),
-    "agent_research": _preview_json({
-        "task": "sample", "topic": "bitcoin", "summary": "Research returns structured findings.",
-        "note": "SAMPLE — call paid /v1/agent/research for full report",
-    }),
-    "deal_tracker": _preview_json({
-        "type": "deals", "count": 3, "sample": ["Deal A", "Deal B", "Deal C"],
-        "note": "SAMPLE — call paid /v1/deals/deals for full list",
-    }),
-}
-@app.api_route("/v1/{service}/{path:path}", methods=["GET", "POST"])
-async def paid_endpoint(service: str, path: str, request: Request):
-    service_key = URL_TO_SERVICE.get(service, service)
-    # FREE PREVIEW — bypass the payment gate so agents can verify data quality
-    # before paying (pattern learned from Grey Ridge, Aug 20 2026). Returns a
-    # curated SAMPLE (withholds full paid data), not a live forwarded call, so
-    # we never give away the real product for free.
-    if path.startswith("preview") or "/preview" in path or path.endswith("/preview"):
-        return PREVIEW_SAMPLES.get(service_key, Response(
-            status_code=404,
-            content=json.dumps({"error": "preview_not_available", "service": service_key}),
+
+@app.post("/v1/human/signup")
+async def human_signup(request: Request):
+    """Self-serve signup — issue a key. Intended to be called from the
+    subscribe page after (or during) a card checkout. Paid plans are issued
+    post-Stripe-webhook; free tier can be issued immediately."""
+    try:
+        body = await request.json()
+    except Exception:
+        body = {}
+    plan = (body.get("plan") or "free").lower()
+    label = body.get("label", "")
+    # Only allow free self-serve issuance (paid plans go through payment).
+    if plan != "free":
+        return Response(
+            status_code=402,
+            content=json.dumps({"error": "paid_plans_require_checkout",
+                                "message": f"{plan} is a paid plan — complete checkout first."}),
             media_type="application/json",
-        ))
+        )
+    key = issue_human_key("free", label)
+    if key is None:
+        return Response(status_code=400, content=json.dumps({"error": "unknown_plan"}),
+                        media_type="application/json")
+    # Return the plaintext key exactly once.
+    return Response(
+        content=json.dumps({"api_key": key["key"], "id": key["id"], "plan": key["plan"],
+                            "monthly_calls": key["monthly_calls"]}),
+        media_type="application/json",
+        headers={"Access-Control-Allow-Origin": "*"},
+    )
+
+
+@app.get("/v1/human/keys")
+async def list_keys(request: Request):
+    if not admin_authorized(request):
+        return Response(status_code=401, content=json.dumps({"error": "unauthorized"}),
+                        media_type="application/json")
+    return Response(content=json.dumps({"keys": list_human_keys()}),
+                    media_type="application/json",
+                    headers={"Access-Control-Allow-Origin": "*"})
+
+
+@app.post("/v1/human/keys/{key_id}/revoke")
+async def revoke_key(key_id: str, request: Request):
+    if not admin_authorized(request):
+        return Response(status_code=401, content=json.dumps({"error": "unauthorized"}),
+                        media_type="application/json")
+    ok = revoke_human_key(key_id)
+    if not ok:
+        return Response(status_code=404, content=json.dumps({"error": "key_not_found"}),
+                        media_type="application/json")
+    return {"ok": True, "revoked": key_id}
+
+
+@app.post("/v1/human/keys/issue")
+async def issue_key(request: Request):
+    """Admin-issued key for any plan (called by a payment webhook or admin)."""
+    if not admin_authorized(request):
+        return Response(status_code=401, content=json.dumps({"error": "unauthorized"}),
+                        media_type="application/json")
+    try:
+        body = await request.json()
+    except Exception:
+        body = {}
+    plan = (body.get("plan") or "basic").lower()
+    label = body.get("label", "")
+    key = issue_human_key(plan, label)
+    if key is None:
+        return Response(status_code=400, content=json.dumps({"error": "unknown_plan"}),
+                        media_type="application/json")
+    return Response(content=json.dumps({"api_key": key["key"], "id": key["id"], "plan": key["plan"]}),
+                    media_type="application/json")
+
+
+# Dynamic paid endpoint routing
+@app.api_route("/v1/okx/{service}/{path:path}", methods=["GET", "POST"])
+async def paid_endpoint_okx_alias(service: str, path: str, request: Request):
+    """OKX A2MCP probe alias (Sep 2, 2026).
+
+    Serves the SAME paid services as /v1/{service}/* but ALWAYS emits the
+    single-network X Layer challenge (okx=True), regardless of the
+    X_OKX_COMPLIANT env. Needed because the Aug 30 Dexter settlement fix
+    re-enabled multi-rail accepts on normal routes — which OKX's validator
+    rejects ("did not return the x402 challenge in the header"). OKX probes
+    only the endpoints listed in each agent's serviceList; those now point at
+    /v1/okx/* URLs. Payment proofs on X Layer (eip155:196) settle via PayAI
+    exactly as before.
+    """
+    return await paid_endpoint(service, path, request, okx_alias=True)
+
+
+@app.api_route("/v1/{service}/{path:path}", methods=["GET", "POST"])
+async def paid_endpoint(service: str, path: str, request: Request, okx_alias: bool = False):
+    service_key = URL_TO_SERVICE.get(service, service)
     service_name = service.replace("_", " ").title()
     service_config = SERVICES.get(service_key)
 
@@ -1043,9 +1234,50 @@ async def paid_endpoint(service: str, path: str, request: Request):
     proof = extract_proof(request)
     mpp_cred = extract_mpp_credential(request)
 
+    # HUMAN API-KEY tier (Priority #1 income). A valid human key skips the 402
+    # challenge entirely and routes straight to the backend — the additive path
+    # that lets humans buy our APIs. x402/MPP stay for agents.
+    human_key = extract_human_key(request)
+    if human_key:
+        human = verify_human_key(human_key)
+        if human is None:
+            return Response(
+                status_code=401,
+                content=json.dumps({"error": "invalid_api_key"}),
+                media_type="application/json",
+                headers={"Access-Control-Allow-Origin": "*"},
+            )
+        if human.get("quota_exceeded"):
+            return Response(
+                status_code=429,
+                content=json.dumps({"error": "quota_exceeded", "plan": human.get("plan")}),
+                media_type="application/json",
+                headers={"Access-Control-Allow-Origin": "*"},
+            )
+        return await _route_to_backend(service_key, path, request, f"human:{human.get('key_id')}")
+
     # No proof → return 402 with payment requirements (dual-rail: x402 + MPP)
     if not proof and not mpp_cred:
-        return payment_required_response(service_name, price)
+        resp = payment_required_response(service_name, price, str(request.url), okx=True if okx_alias else None)
+        # MPP dual-rail (Sep 3, Jordan GO): add WWW-Authenticate: Payment challenge
+        # ONLY on the generic multi-rail path. The /v1/okx/* alias stays x402-only
+        # (OKX validator priority-branches on WWW-Authenticate; incomplete MPP
+        # challenges failed our Aug 24 review — see payment_required_response docstring).
+        if not okx_alias:
+            import base64 as _b64
+            mpp_challenge = {
+                "intent": "charge",
+                "amount": str(int(price * 1_000_000)),
+                "currency": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+                "recipient": os.getenv("PAY_TO_EVM", "0x7ebff188f2Eba16518C02864589b1403a5d1296a"),
+                "methodDetails": {"chainId": 8453, "feePayer": False},
+            }
+            req_b64 = _b64.urlsafe_b64encode(json.dumps(mpp_challenge).encode()).decode().rstrip("=")
+            resp.headers["WWW-Authenticate"] = (
+                f'Payment realm="api.gentechlabs.net", method="evm", '
+                f'intent="charge", request="{req_b64}"'
+            )
+        return resp
 
     # MPP credential present → verify via the MPP rail (simulation for now).
     # MPP is payment-method agnostic; we accept the EVM method which settles
@@ -1069,63 +1301,53 @@ async def paid_endpoint(service: str, path: str, request: Request):
     # Verify the proof — route by the proof's settlement network.
     # - Algorand/other non-EVM rails → GoPlausible facilitator (challenge path)
     # - Avalanche (eip155:43114) → PayAI facilitator (settles our Avalanche rail)
-    # - EVM (Base) → CDP facilitator, OR Dexter when X402_USE_DEXTER=1
-    #   (Dexter is the rail that auto-catalogs us on OpenDexter marketplace)
+    # - EVM (Base) → CDP facilitator
     # - simulation fallback via local HMAC (matches our SDK/ARC gateway dev flow).
     mode = os.getenv("PAYMENT_VERIFY_MODE", "auto")
     proof_network = _proof_network(proof)
     is_avm = proof_network is not None and proof_network.startswith("algorand:")
     is_avalanche = proof_network == "eip155:43114"
     is_xlayer = proof_network == "eip155:196"
-    is_base = proof_network == "eip155:8453"
-    use_dexter = os.getenv("X402_USE_DEXTER", "0") == "1"
-
-    def _is_outage(reason: str) -> bool:
-        """True only if the facilitator is UNREACHABLE (network/timing out),
-        NOT when it rejected the proof. We fail over only on genuine outages."""
-        return "unreachable" in reason.lower()
-
-    def _try_over(facilitators):
-        """Try facilitators in order; fall back only on outage, never on a
-        reached-but-invalid verdict. Returns (valid, reason, used_label)."""
-        last = (False, "no facilitators configured")
-        for fn, label in facilitators:
-            valid, reason = fn(proof, price)
-            if valid:
-                return True, reason, label
-            if not _is_outage(reason):
-                # facilitator reached a verdict (proof invalid) — stop, reject
-                return False, reason, label
-            last = (False, f"{label}: {reason}")
-        return False, last[1], "all"
+    # OKX Pay SDK path (Sep 3): on the okx alias, verify+settle via THEIR facilitator first.
+    if (
+        okx_alias
+        and is_xlayer
+        and os.getenv("OKX_PAY_SDK", "").lower() in ("1", "true", "yes", "on")
+    ):
+        okx_valid, okx_reason = await verify_settle_via_okx(
+            proof, price, str(request.url)
+        )
+        if okx_valid:
+            return await _route_to_backend(service_key, path, request, okx_reason)
+        # fall through to PayAI ONLY when creds/SDK are unavailable — an actual
+        # verify/settle failure is a rejection, not a fallback (no double-spend risk).
+        if okx_reason not in ("okx_credentials_missing", "okx_sdk_unavailable"):
+            return Response(
+                status_code=402,
+                content=json.dumps({"error": "payment_proof_invalid", "reason": okx_reason}),
+                media_type="application/json",
+                headers={"Access-Control-Allow-Origin": "*"},
+            )
+    is_solana = proof_network is not None and proof_network.startswith("solana:")
     if mode == "simulation":
         valid, reason = verify_proof_simulation(proof, price)
     elif mode == "cdp":
         valid, reason = verify_proof_via_cdp(proof, price)
-    elif mode == "dexter":
-        valid, reason = verify_proof_via_dexter(proof, price)
     elif is_avm:
         # Algorand proof → GoPlausible facilitator (required for the x402
         # Global Challenge — settlements must land through GoPlausible).
         valid, reason = verify_proof_via_goplausible(proof, price)
-    elif is_avalanche or is_xlayer:
-        # Avalanche / X Layer proof → PayAI facilitator (settles our rails so
-        # AgentScan-listed + XLayer-identity services can actually receive USDC).
+    elif is_avalanche or is_xlayer or is_solana:
+        # Avalanche / X Layer / Solana proof → PayAI facilitator (settles our
+        # rails so AgentScan-listed + XLayer-identity + Solana services can
+        # actually receive USDC). PayAI supports solana:5eykt4... mainnet.
         valid, reason = verify_proof_via_payai(proof, price)
-    elif is_base and use_dexter:
-        # Base proof + Dexter enabled → settle through Dexter so OpenDexter
-        # auto-catalogs us (#41). FALL BACK to CDP if Dexter is unreachable so
-        # a Dexter outage never blocks Base settlement (single-POF fix, Aug 20).
-        valid, reason, _ = _try_over([
-            (verify_proof_via_dexter, "dexter"),
-            (verify_proof_via_cdp, "cdp"),
-        ])
     else:
         # auto: try CDP when a key exists, else simulation
         if os.getenv("CDP_API_KEY"):
             valid, reason = verify_proof_via_cdp(proof, price)
-            if not valid and "CDP_API_KEY not configured" not in reason and not _is_outage(reason):
-                # CDP reached a verdict — do NOT fall back to simulation, reject
+            if not valid and "CDP_API_KEY not configured" not in reason:
+                # CDP said invalid — do NOT fall back to simulation, reject
                 return Response(
                     status_code=402,
                     content=json.dumps({"error": "payment_proof_invalid", "reason": reason}),
@@ -1228,7 +1450,14 @@ async def root():
             "/health": "Health check",
             "/status": "Backend status",
             "/.well-known/x402-bazaar": "Service manifest",
-            "/v1/{service}/{path}": "Paid endpoint (requires x-402-token header)",
+            "/v1/{service}/{path}": "Paid endpoint (x402 proof OR human API key)",
+            "/v1/human/signup": "Self-serve free trial key (POST {plan, label})",
+            "/v1/human/keys": "Admin: list keys (GATEWAY_ADMIN_KEY)",
+            "/v1/human/keys/{key_id}/revoke": "Admin: revoke key",
+        },
+        "human": {
+            "auth": "Authorization: Bearer <api_key>",
+            "plans": HUMAN_PLANS,
         },
         "docs": "/docs",
     }
