@@ -1,9 +1,9 @@
 {
-  "lastUpdated": "2026-09-03T11:28:10.786841+00:00",
+  "lastUpdated": "2026-09-03T12:53:29.990244+00:00",
   "pool": "AVAX/USDC",
   "chain": "Avalanche",
   "dex": "LFJ",
-  "currentPrice": 7.27,
+  "currentPrice": 7.29,
   "priceChange24h": -2.37,
   "volume24h": 519740.09,
   "liquidity": 392758.8,
@@ -12,41 +12,41 @@
     "feeTier": "5bps",
     "shape": "curve",
     "displayShape": "Curve",
-    "currentPrice": 7.27,
-    "rangeMin": 6.4039,
-    "rangeMax": 6.5463,
-    "avaxAmount": 3.526087,
-    "usdcAmount": 1.09538,
-    "totalValue": 23.73,
-    "totalValueUSD": 23.73,
-    "activeBin": 8362825,
+    "currentPrice": 7.29,
+    "rangeMin": 7.227156,
+    "rangeMax": 7.328996,
+    "avaxAmount": 0,
+    "usdcAmount": 0,
+    "totalValue": 27.78,
+    "totalValueUSD": 27.78,
+    "activeBin": 8362952,
     "binStep": 10,
-    "totalBins": 23,
-    "inRange": false,
-    "entryTotal": 22.53852808303989
+    "totalBins": 15,
+    "inRange": true,
+    "entryTotal": 0.0
   },
   "fees": {
     "dailyFees": 0,
     "cumulativeFees": 1.003,
     "feeCurrency": "USD"
   },
-  "efficiency": 23,
+  "efficiency": 76.6,
   "hero": {
-    "positionUsd": 23.73,
+    "positionUsd": 27.78,
     "dailyFees": 0,
-    "efficiency": 23,
-    "efficiencyZone": "Out of Range",
+    "efficiency": 76.6,
+    "efficiencyZone": "In Range",
     "shape": "Curve",
-    "rangeStatus": "Out of Range",
-    "currentPrice": 7.27,
-    "rangeMin": 6.4039,
-    "rangeMax": 6.5463,
+    "rangeStatus": "In Range",
+    "currentPrice": 7.29,
+    "rangeMin": 7.227156,
+    "rangeMax": 7.328996,
     "milestoneNext": "Scout",
     "milestoneTarget": 5,
     "milestoneProgress": 20.1
   },
   "marketIntel": {
-    "avaxPrice": 7.27,
+    "avaxPrice": 7.29,
     "change24h": -2.37,
     "volume24h": 519740.09,
     "tvl": 392758.8,
@@ -65,16 +65,16 @@
     ]
   },
   "strategyAdvisor": {
-    "efficiency": 23,
-    "efficiencyZone": "Out of Range",
-    "recommendedAction": "REBALANCE \u2014 price outside range",
-    "dcaType": "None (Out of Range)",
-    "dcaDetails": "Price $7.27, out of range $6.4039-$6.5463",
-    "rebalanceTrigger": "Price exits $6.4039-$6.5463",
+    "efficiency": 76.6,
+    "efficiencyZone": "In Range",
+    "recommendedAction": "Hold",
+    "dcaType": "Auto",
+    "dcaDetails": "Price $7.29, in range $7.227156-$7.328996",
+    "rebalanceTrigger": "Price exits $7.227156-$7.328996",
     "compoundThreshold": 50,
     "cumulativeFees": 1.003,
-    "riskLevel": "High",
-    "riskNote": "Price $7.27, 23% efficiency",
+    "riskLevel": "Medium",
+    "riskNote": "Price $7.29, 76.6% efficiency",
     "shape": "Curve"
   },
   "regimeData": {
@@ -121,10 +121,10 @@
     "lpApr": 0.0,
     "lpDailyFees": 0,
     "stakingApr": 5.2,
-    "stakingDaily": 0.0034,
-    "hodlReturn": 18.6,
+    "stakingDaily": 0.004,
+    "hodlReturn": 18.92,
     "entryPrice": 6.13,
-    "currentPrice": 7.27,
+    "currentPrice": 7.29,
     "outperforming": false,
     "verdict": "LP losing vs staking"
   },
@@ -391,7 +391,7 @@
   ],
   "marketScenarios": {
     "currentConditions": {
-      "price": 7.27,
+      "price": 7.29,
       "trend": "sideways",
       "volatility24h": 0,
       "regime": "sideways",
@@ -401,7 +401,7 @@
       {
         "id": "bear_continued",
         "name": "Bear Continuation",
-        "subtitle": "AVAX drops to $5.09-$6.18",
+        "subtitle": "AVAX drops to $5.1-$6.2",
         "icon": "\ud83d\udc3b",
         "color": "#ef4444",
         "trigger": "BTC breaks below $60K",
@@ -415,7 +415,7 @@
       {
         "id": "sideways",
         "name": "Sideways Accumulation",
-        "subtitle": "AVAX trades $6.91-$7.63",
+        "subtitle": "AVAX trades $6.93-$7.65",
         "icon": "\u27a1\ufe0f",
         "color": "#f59e0b",
         "trigger": "BTC holds $62-68K",
@@ -429,7 +429,7 @@
       {
         "id": "bull",
         "name": "Bull Recovery",
-        "subtitle": "AVAX pushes to $8.72-$10.9",
+        "subtitle": "AVAX pushes to $8.75-$10.94",
         "icon": "\ud83d\udc02",
         "color": "#22c55e",
         "trigger": "BTC breaks $70K",
@@ -443,7 +443,7 @@
       {
         "id": "flash_crash",
         "name": "Flash Crash",
-        "subtitle": "AVAX drops to $3.63-$4.36",
+        "subtitle": "AVAX drops to $3.65-$4.37",
         "icon": "\u26a1",
         "color": "#8b5cf6",
         "trigger": "Black swan event",
@@ -459,17 +459,17 @@
       "currentScenario": "sideways",
       "alerts": [
         {
-          "price": 6.91,
+          "price": 6.93,
           "type": "danger",
           "message": "Below range \u2014 rebalance down"
         },
         {
-          "price": 6.18,
+          "price": 6.2,
           "type": "critical",
           "message": "Flash crash zone"
         },
         {
-          "price": 7.63,
+          "price": 7.65,
           "type": "info",
           "message": "Above range \u2014 rebalance up"
         }
@@ -477,9 +477,9 @@
     }
   },
   "ilCalculator": {
-    "currentPrice": 7.27,
+    "currentPrice": 7.29,
     "entryPrice": 6.13,
-    "positionUsd": 23.73,
+    "positionUsd": 27.78,
     "dailyFees": 0,
     "scenarios": [
       {
