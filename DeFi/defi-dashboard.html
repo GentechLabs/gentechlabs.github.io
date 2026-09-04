@@ -912,7 +912,7 @@
 
         async function fetchRainbowData() {
             try {
-                const res = await fetch('https://raw.githubusercontent.com/ProtoJay4789/ProtoJay4789.github.io/main/DeFi/rainbow/yield-rainbow-data.json?t=' + Date.now());
+                const res = await fetch('https://raw.githubusercontent.com/GentechLabs/gentechlabs.github.io/main/DeFi/rainbow/yield-rainbow-data.json?t=' + Date.now());
                 if (!res.ok) throw new Error('No rainbow data');
                 const data = await res.json();
                 const efficiency = data.metrics ? data.metrics.efficiency : 50;
@@ -944,7 +944,7 @@
             const container = document.getElementById('rotation-content');
             if (!container) return;
             try {
-                const res = await fetch('https://raw.githubusercontent.com/ProtoJay4789/ProtoJay4789.github.io/main/DeFi/rainbow/rotation-data.json?t=' + Date.now());
+                const res = await fetch('https://raw.githubusercontent.com/GentechLabs/gentechlabs.github.io/main/DeFi/rainbow/rotation-data.json?t=' + Date.now());
                 if (res.ok) {
                     const data = await res.json();
                     renderRotation(container, data);
@@ -993,7 +993,7 @@
             const container = document.getElementById('macro-events');
             if (!container) return;
             try {
-                const res = await fetch('https://raw.githubusercontent.com/ProtoJay4789/ProtoJay4789.github.io/main/DeFi/economic-calendar.json?t=' + Date.now());
+                const res = await fetch('https://raw.githubusercontent.com/GentechLabs/gentechlabs.github.io/main/DeFi/economic-calendar.json?t=' + Date.now());
                 if (!res.ok) { renderMacroFallback(container); return; }
                 const data = await res.json();
                 renderMacroEvents(container, data);

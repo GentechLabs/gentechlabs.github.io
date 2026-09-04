@@ -901,7 +901,7 @@
 
     <script>
         // --- Config ---
-        const DATA_URL = 'https://raw.githubusercontent.com/ProtoJay4789/ProtoJay4789.github.io/main/DeFi/defi-data.json';
+        const DATA_URL = 'https://raw.githubusercontent.com/GentechLabs/gentechlabs.github.io/main/DeFi/defi-data.json';
         const POOL_ADDRESS = '0x864d4e5ee7318e97483db7eb0912e09f161516ea';
         const HUB_LS_KEY = 'jordan-hub-default-tab';
         const REFRESH_MS = 60000;
@@ -1070,7 +1070,7 @@
             return RAINBOW_BANDS.find(b => eff >= b.effMin && eff < b.effMax) || RAINBOW_BANDS[RAINBOW_BANDS.length - 1];
         }
 
-        const RAINBOW_DATA_URL = 'https://raw.githubusercontent.com/ProtoJay4789/ProtoJay4789.github.io/main/DeFi/rainbow/yield-rainbow-data.json';
+        const RAINBOW_DATA_URL = 'https://raw.githubusercontent.com/GentechLabs/gentechlabs.github.io/main/DeFi/rainbow/yield-rainbow-data.json';
 
         function drawRainbowBars(data) {
             if (!data.bands) return;
@@ -1224,7 +1224,7 @@
             const container = document.getElementById('rotation-content');
             if (!container) return;
             try {
-                const res = await fetch('https://raw.githubusercontent.com/ProtoJay4789/ProtoJay4789.github.io/main/DeFi/rainbow/rotation-data.json?t=' + Date.now());
+                const res = await fetch('https://raw.githubusercontent.com/GentechLabs/gentechlabs.github.io/main/DeFi/rainbow/rotation-data.json?t=' + Date.now());
                 if (res.ok) {
                     const data = await res.json();
                     renderRotation(container, data);
@@ -1271,7 +1271,7 @@
             const container = document.getElementById('macro-events');
             if (!container) return;
             try {
-                const res = await fetch('https://raw.githubusercontent.com/ProtoJay4789/ProtoJay4789.github.io/main/DeFi/economic-calendar.json?t=' + Date.now());
+                const res = await fetch('https://raw.githubusercontent.com/GentechLabs/gentechlabs.github.io/main/DeFi/economic-calendar.json?t=' + Date.now());
                 if (!res.ok) { renderMacroFallback(container); return; }
                 const data = await res.json();
                 renderMacroEvents(container, data);
@@ -1327,7 +1327,7 @@
         }
 
         // --- Yield Rail Finder ---
-        const RAIL_FINDER_URL = 'https://raw.githubusercontent.com/ProtoJay4789/ProtoJay4789.github.io/main/DeFi/rainbow/rail-finder-data.json';
+        const RAIL_FINDER_URL = 'https://raw.githubusercontent.com/GentechLabs/gentechlabs.github.io/main/DeFi/rainbow/rail-finder-data.json';
 
         async function fetchRailFinder() {
             const container = document.getElementById('rail-finder');
