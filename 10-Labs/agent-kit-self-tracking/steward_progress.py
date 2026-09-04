@@ -30,6 +30,7 @@ from __future__ import annotations
 
 import json
 import os
+import time
 import sys
 from datetime import datetime, timezone
 from typing import Any, Dict, Optional
@@ -81,28 +82,32 @@ def read_wallet_value() -> Dict[str, Any]:
         data = discover_positions("avalanche", wallet)
         if "error" in data:
             return {"error": data["error"]}
-        # Wallet value: native + stablecoin balances (in USD)
+        # TOTAL treasury value = liquid + LP (Jordan, Sep 3 2026: a deposit
+        # detector that can't see the LP misreads every rebalance as a
+        # deposit — the 16:16 "+720%" false alarm; internal swaps between
+        # USDC/WAVAX/LP are NOT deposits, they are the machine working).
         balances = data.get("balances", {})
-        value_usd = 0.0
-        # AVAX/ETH native priced via CoinGecko through discover's price source
         from discover_positions import fetch_asset_price
         avax_usd = fetch_asset_price("AVAX") or 0.0
         native = balances.get("AVAX", 0.0) or 0.0
-        value_usd += native * avax_usd
-        # Stablecoins ~ 1:1
+        wavax = balances.get("WAVAX", 0.0) or 0.0
+        value_usd = native * avax_usd          # native gas
+        value_usd += wavax * avax_usd          # wrapped AVAX (same asset)
         for sym in ("USDC", "USDC_e", "USDT_e", "USDT"):
             value_usd += float(balances.get(sym, 0.0) or 0.0)
-        # LP position value (approx from the position, if present)
+        # LP position value — chain truth from the reader
         pos = next((p for p in data.get("positions", []) if "error" not in p), None)
-        lp_val = pos.get("positionUsd") if pos else None
-        # LP value not precisely measured (honest: positionUsd stays None) —
-        # so the wallet-value here reflects liquid balances; LP is separately
-        # estimated by the position read. Keep honest.
+        if pos and isinstance(pos.get("positionUsd"), (int, float)):
+            value_usd += float(pos["positionUsd"])
         return {
             "value_usd": round(value_usd, 2),
             "native_usd": round(native * avax_usd, 2),
-            "stable_usd": round(value_usd - native * avax_usd, 2),
+            "stable_usd": round(float(balances.get("USDC", 0.0) or 0.0)
+                                + float(balances.get("USDC_e", 0.0) or 0.0)
+                                + float(balances.get("USDT_e", 0.0) or 0.0)
+                                + float(balances.get("USDT", 0.0) or 0.0), 2),
             "avax_price": round(avax_usd, 4),
+            "lp_usd": (round(float(pos["positionUsd"]), 2) if pos else 0.0),
             "lp_bins": (pos.get("bins", 0) if pos else 0),
             "in_range": (pos.get("inRange") if pos else False),
         }
@@ -173,6 +178,33 @@ def rank_and_progress(daily_fees: float) -> Dict[str, Any]:
     }
 
 
+
+def _machine_active_recently(hours: float = 2.0) -> bool:
+    """True if the treasury machine executed a rebalance/deploy/compound
+    within the last `hours` — during that window, value deltas are internal
+    churn, not deposits (Jordan, Sep 3 2026: '+720% deposit' was machine
+    churn misread as new money)."""
+    import glob, json as _json
+    stamps = [
+        "/root/ProtoJay4789.github.io/10-Labs/agent-kit-self-tracking/.steward-last-rebalance.json",
+    ]
+    # auto-compound stamps + any last-action stamps in both script homes
+    EXCLUDE = {".steward-wallet-baseline.json",      # this script's own output
+               ".steward-silence-state.json",        # messaging state, not action
+               ".steward-council-trigger-state.json"}  # council chatter
+    for pat in ("/root/ProtoJay4789.github.io/10-Labs/agent-kit-self-tracking/.steward-*.json",
+                "/root/.hermes/profiles/gentech-treasury/scripts/.steward-*.json"):
+        stamps.extend(s for s in glob.glob(pat)
+                      if os.path.basename(s) not in EXCLUDE)
+    cutoff = time.time() - hours * 3600
+    for s in stamps:
+        try:
+            if os.path.getmtime(s) >= cutoff:
+                return True
+        except OSError:
+            continue
+    return False
+
 def detect_deposit(current: Dict[str, float]) -> Dict[str, Any]:
     """Compare current wallet value to the persisted baseline. Detects deposits.
 
@@ -194,7 +226,10 @@ def detect_deposit(current: Dict[str, float]) -> Dict[str, Any]:
         delta = current_value - prior_value
         delta_pct = (delta / prior_value) * 100.0 if prior_value else 0.0
         # A deposit: value went UP beyond noise floor AND beyond price-drift %
-        if delta >= DEPOSIT_FLOOR_USD and delta_pct >= DEPOSIT_MIN_PCT:
+        # AND the machine was quiet (no rebalance/deploy/compound in the last
+        # 2h) — during machine activity, value deltas are internal churn.
+        if (delta >= DEPOSIT_FLOOR_USD and delta_pct >= DEPOSIT_MIN_PCT
+                and not _machine_active_recently(hours=2.0)):
             result["detected"] = True
             result["delta_pct"] = round(delta_pct, 1)
 
