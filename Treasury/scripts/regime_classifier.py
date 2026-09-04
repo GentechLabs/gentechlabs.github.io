@@ -22,9 +22,18 @@ from dataclasses import dataclass, asdict
 
 # ── Config ──────────────────────────────────────────────────────────────────
 
-STATE_DIR = os.path.expanduser("~/.hermes/scripts")
+STATE_DIR = "/root/.hermes/scripts"  # absolute — expanduser() broke under profile HOME (audit Aug 29)
 REGIME_STATE_FILE = os.path.join(STATE_DIR, ".aae-regime-state.json")
-PRICE_HISTORY_FILE = os.path.join(STATE_DIR, ".aae-price-history.json")
+# SERIES-SPLIT FIX (Sep 4, 2026): BTC and AVAX used to share ONE history file.
+# Mixed series ($81k next to $7.49) produced ATR 1323% → false HIGH_VOLATILITY
+# → wrong LP shape (BID_ASK). Each asset now gets its own series file. The old
+# mixed file is legacy AVAX data (its AVAX-era entries predate the BTC cron).
+PRICE_HISTORY_FILE = os.path.join(STATE_DIR, ".aae-price-history.json")      # AVAX (legacy)
+BTC_HISTORY_FILE = os.path.join(STATE_DIR, ".aae-btc-price-history.json")    # BTC (market leader)
+
+
+def _history_file_for(series: str) -> str:
+    return BTC_HISTORY_FILE if series == "btc" else PRICE_HISTORY_FILE
 
 # Regime classification thresholds
 THRESHOLDS = {
@@ -80,6 +89,62 @@ def fetch_dexscreener_data(pool_address: str) -> Optional[Dict]:
     }
 
 
+def fetch_btc_data() -> Optional[Dict]:
+    """Fetch BTC price/volume — CoinGecko primary, CMC fallback (Sep 4, 2026:
+    CoinGecko 429s left the regime UNKNOWN on random ticks; CMC key lives in
+    /root/.hermes/scripts/cmc_config.json and is already used by the buylist)."""
+    url = ("https://api.coingecko.com/api/v3/coins/bitcoin/market_chart"
+           "?vs_currency=usd&days=30&interval=daily")
+    data = fetch_json(url)
+    if not data or "prices" not in data or not data["prices"]:
+        data = None
+    if data:
+        prices = data["prices"]
+        # CoinGecko returns [[ts, price], ...] oldest first
+        price = prices[-1][1]
+        # 7d change from 7 days ago
+        price_7d_ago = prices[-8][1] if len(prices) >= 8 else prices[0][1]
+        price_change_7d = (price - price_7d_ago) / price_7d_ago if price_7d_ago else None
+        # 24h change from 1 day ago (daily interval -> last two points)
+        price_24h_ago = prices[-2][1] if len(prices) >= 2 else price
+        price_change_24h = (price - price_24h_ago) / price_24h_ago if price_24h_ago else 0
+        # Volume proxy: use total_volumes series if present
+        volume_24h = 0.0
+        if "total_volumes" in data and data["total_volumes"]:
+            volume_24h = float(data["total_volumes"][-1][1])
+        return {
+            "price_usd": price,
+            "volume_24h": volume_24h,
+            "price_change_24h": price_change_24h,
+            "price_change_7d": price_change_7d,
+            "source": "coingecko-btc",
+        }
+    # ── CMC fallback (live quote; 24h/7d changes from the quote itself) ──
+    try:
+        key = ""
+        try:
+            with open(os.path.join(STATE_DIR, "cmc_config.json")) as f:
+                key = json.load(f).get("coinmarketcap_api_key", "")
+        except Exception:
+            key = os.environ.get("CMC_API_KEY", "")
+        if not key:
+            return None
+        req = urllib.request.Request(
+            "https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?id=1&convert=USD",
+            headers={"X-CMC_PRO_API_KEY": key, "Accept": "application/json"})
+        with urllib.request.urlopen(req, timeout=15) as r:
+            q = json.load(r)["data"]["1"]["quote"]["USD"]
+        return {
+            "price_usd": float(q["price"]),
+            "volume_24h": float(q.get("volume_24h") or 0),
+            "price_change_24h": float(q.get("percent_change_24h") or 0) / 100,
+            "price_change_7d": float(q.get("percent_change_7d") or 0) / 100,
+            "source": "cmc-btc-fallback",
+        }
+    except Exception:
+        return None
+
+
 def fetch_defillama_yields(protocol: str = "benqi") -> Optional[Dict]:
     """Fetch staking/lending APR from DeFiLlama Yields API."""
     url = "https://yields.llama.fi/pools"
@@ -104,35 +169,37 @@ def fetch_defillama_yields(protocol: str = "benqi") -> Optional[Dict]:
 
 # ── Price History ───────────────────────────────────────────────────────────
 
-def load_price_history() -> List[Dict]:
-    """Load price history from state file."""
+def load_price_history(series: str = "avax") -> List[Dict]:
+    """Load price history from state file (per-series: 'avax' or 'btc')."""
     try:
-        with open(PRICE_HISTORY_FILE) as f:
+        with open(_history_file_for(series)) as f:
             data = json.load(f)
             return data.get("history", [])
     except (FileNotFoundError, json.JSONDecodeError):
         return []
 
 
-def save_price_history(history: List[Dict]):
-    """Save price history to state file."""
-    os.makedirs(os.path.dirname(PRICE_HISTORY_FILE), exist_ok=True)
+def save_price_history(history: List[Dict], series: str = "avax") -> None:
+    """Save price history to state file (per-series: 'avax' or 'btc')."""
+    path = _history_file_for(series)
+    os.makedirs(os.path.dirname(path), exist_ok=True)
     # Trim to last N days
     cutoff = time.time() - (PRICE_HISTORY_DAYS * 86400)
     history = [h for h in history if h.get("timestamp", 0) > cutoff]
-    with open(PRICE_HISTORY_FILE, "w") as f:
+    with open(path, "w") as f:
         json.dump({"history": history, "last_updated": datetime.now(timezone.utc).isoformat()}, f, indent=2)
 
 
-def record_price(price: float, volume_24h: float, timestamp: Optional[float] = None):
-    """Record a price data point."""
-    history = load_price_history()
+def record_price(price: float, volume_24h: float, timestamp: Optional[float] = None,
+                 series: str = "avax"):
+    """Record a price data point (per-series: 'avax' or 'btc')."""
+    history = load_price_history(series)
     history.append({
         "timestamp": timestamp or time.time(),
         "price": price,
         "volume_24h": volume_24h,
     })
-    save_price_history(history)
+    save_price_history(history, series)
 
 
 # ── Technical Indicators ────────────────────────────────────────────────────
@@ -285,10 +352,10 @@ def run_classification(pool_address: str = "0x864d4e5ee7318e97483db7eb0912e09f16
     price_change_7d = dex.get("price_change_7d")
 
     # 2. Record price in history
-    record_price(price, volume_24h)
+    record_price(price, volume_24h, series="avax")
 
     # 3. Load price history for indicators
-    raw_history = load_price_history()
+    raw_history = load_price_history("avax")
     prices = [h["price"] for h in raw_history]
 
     # Compute volume average from history
@@ -335,6 +402,76 @@ def run_classification(pool_address: str = "0x864d4e5ee7318e97483db7eb0912e09f16
         "atr_pct": atr_pct,
         "timestamp": datetime.now(timezone.utc).isoformat(),
         "data_points": len(prices),
+    }
+
+    os.makedirs(os.path.dirname(REGIME_STATE_FILE), exist_ok=True)
+    with open(REGIME_STATE_FILE, "w") as f:
+        json.dump(result, f, indent=2)
+
+    return result
+
+
+def run_btc_classification() -> Dict[str, Any]:
+    """Run regime classification on BTC (the market leader) instead of the AVAX pool.
+
+    In a BTC-led bull market the regime label should read BTC, not a single
+    AVAX pool. This is the entry point the cron uses (Jordan, Aug 19 2026).
+    """
+    btc = fetch_btc_data()
+    if not btc:
+        return {"error": "Failed to fetch BTC data", "regime": "UNKNOWN", "confidence": 0}
+
+    price = btc["price_usd"]
+    volume_24h = btc["volume_24h"]
+    price_change_24h = btc["price_change_24h"]
+    price_change_7d = btc.get("price_change_7d")
+
+    # Record price in history (BTC series — SEPARATE from AVAX, series-split fix Sep 4 2026)
+    record_price(price, volume_24h, series="btc")
+
+    raw_history = load_price_history("btc")
+    prices = [h["price"] for h in raw_history]
+
+    volumes = [h["volume_24h"] for h in raw_history[-7:]] if len(raw_history) >= 7 else [volume_24h]
+    volume_avg = sum(volumes) / len(volumes) if volumes else volume_24h
+
+    rsi = compute_rsi(prices) if len(prices) >= 15 else None
+    atr = compute_atr(prices, prices, prices) if len(prices) >= 15 else None
+    atr_pct = atr / price if atr and price > 0 else None
+
+    regime, confidence, details = classify_regime(
+        price_7d_change=price_change_7d,
+        volume_24h=volume_24h,
+        volume_avg=volume_avg,
+        rsi_14=rsi,
+        atr_pct=atr_pct,
+        price_history=prices[-20:] if prices else [],
+    )
+
+    prev_regime = "UNKNOWN"
+    try:
+        with open(REGIME_STATE_FILE) as f:
+            state = json.load(f)
+            prev_regime = state.get("regime", "UNKNOWN")
+    except (FileNotFoundError, json.JSONDecodeError):
+        pass
+
+    result = {
+        "regime": regime,
+        "confidence": confidence,
+        "prev_regime": prev_regime,
+        "regime_changed": regime != prev_regime and prev_regime != "UNKNOWN",
+        "details": details,
+        "price": price,
+        "volume_24h": volume_24h,
+        "volume_avg_7d": round(volume_avg, 2),
+        "price_change_24h": price_change_24h,
+        "price_change_7d": price_change_7d,
+        "rsi_14": rsi,
+        "atr_pct": atr_pct,
+        "timestamp": datetime.now(timezone.utc).isoformat(),
+        "data_points": len(prices),
+        "source": "coingecko-btc",
     }
 
     os.makedirs(os.path.dirname(REGIME_STATE_FILE), exist_ok=True)

@@ -148,17 +148,48 @@ def estimate_lp_returns(
     position_value: float,
     fees_24h: float,
     price_change_24h: float,
-    range_width_pct: float = 0.05,  # 5% range width
+    range_width_pct: float = 0.05,  # full range width as fraction of price
 ) -> Dict[str, float]:
     """
     Estimate LP net return (fees - impermanent loss).
 
-    IL approximation for concentrated liquidity:
-    IL ≈ (price_change)^2 / (8 * range_width^2) for narrow ranges
+    EXACT v3 MATH (Sep 4, 2026 fix): the old approximation
+    il ≈ (Δp)²/(8·w²) diverges for narrow ranges (±1.5% range + 3% move read
+    as 48% IL → fake "-$11/day, -3008% APR"). Real concentrated-liquidity IL
+    is BOUNDED: once price exits the range the position is a fixed token mix.
+    We compute the true LP value curve:
+      in-range:  V(p) = p·L·(1/√p − 1/√p_b) + L·(√p − √p_a)
+      exit-low:  V(p) = p·L·(1/√p_a − 1/√p_b)   (all token0)
+      exit-high: V(p) = L·(√p_b − √p_a)          (all token1)
+    vs HODL of the entry mix. Entry p0 = √(p_a·p_b) (50/50 by construction).
     """
-    # Impermanent loss approximation
-    il_pct = (price_change_24h / 100) ** 2 / (8 * range_width_pct ** 2) if range_width_pct > 0 else 0
-    il_usd = position_value * il_pct
+    import math
+    w = max(range_width_pct, 0.005)          # full range width, min 0.5%
+    p0 = max(position_value, 0.01)           # nominal anchor (only ratios matter)
+    pb = p0 * (1 + w / 2)
+    pa = p0 * p0 / pb                        # GEOMETRIC center: √(pa·pb) = p0
+    # entry at geometric center → exactly 50/50 composition
+    y0 = position_value / 2.0                # token1 (USDC side) at entry
+    L = y0 / (math.sqrt(p0) - math.sqrt(pa)) if math.sqrt(p0) > math.sqrt(pa) else 0.0
+
+    p1 = p0 * (1 + price_change_24h / 100)   # price after the 24h move
+
+    if L > 0 and p1 > 0:
+        if p1 <= pa:
+            x_exit = L * (1 / math.sqrt(pa) - 1 / math.sqrt(pb))
+            v_lp = p1 * x_exit
+        elif p1 >= pb:
+            v_lp = L * (math.sqrt(pb) - math.sqrt(pa))
+        else:
+            x = L * (1 / math.sqrt(p1) - 1 / math.sqrt(pb))
+            y = L * (math.sqrt(p1) - math.sqrt(pa))
+            v_lp = p1 * x + y
+        # HODL: entry was 50/50 → hodl value scales as (p1/p0 + 1)/2
+        v_hodl = position_value * (p1 / p0 + 1) / 2.0
+        il_usd = (v_hodl - v_lp)  # positive = LP underperforms HODL
+        il_pct = il_usd / position_value if position_value > 0 else 0.0
+    else:
+        il_usd, il_pct = 0.0, 0.0
 
     # Net return
     net_return_24h = fees_24h - il_usd
@@ -193,6 +224,9 @@ def estimate_hodl_returns(
         "spot_value": round(spot_value, 2),
         "return_24h": round(daily_return, 4),
         "return_24h_pct": round(price_change_24h_pct, 2),
+        # NOTE (Sep 4): daily_apr_equiv annualizes a SINGLE day's move — a +3%
+        # day reads as 1095% APR. It is NOT a forecast. Kept only so the
+        # leaderboard sorts consistently; display layers should label it.
         "apr_equivalent": round(daily_apr_equiv, 1),
         "return_7d": round(weekly_return, 4) if weekly_return is not None else None,
         "return_7d_pct": price_change_7d_pct,
@@ -206,6 +240,7 @@ def run_strategy_comparison(
     spot_value: float = 0.0961,  # AVAX in wallet
     fees_24h: float = 0.0,
     price_change_24h_pct: float = 0.5,
+    range_width_pct: float = 0.05,  # 5% default; callers pass the LIVE range width
 ) -> Dict[str, Any]:
     """
     Run full strategy comparison.
@@ -236,6 +271,7 @@ def run_strategy_comparison(
         position_value=position_value,
         fees_24h=fees_24h,
         price_change_24h=price_change_24h_pct,
+        range_width_pct=range_width_pct,
     )
     result["strategies"]["lp"] = lp
 
