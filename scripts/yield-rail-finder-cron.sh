@@ -4,7 +4,7 @@
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-REPO="/root/ProtoJay4789.github.io"
+REPO="/root/repos/gentechlabs.github.io"
 DATA_FILE="DeFi/rainbow/rail-finder-data.json"
 
 # 1. Run the finder, write hub JSON, print human report.

@@ -16,7 +16,7 @@ from datetime import datetime, timezone, timedelta
 HERE = os.path.dirname(os.path.abspath(__file__))
 WALLET = "0x572ABd6461BED2258615E6b99c585Ab7c5d05037"
 PAIR = "0x864d4e5ee7318e97483db7eb0912e09f161516ea"
-STATE_FILE = "/root/ProtoJay4789.github.io/Treasury/steward-state.json"
+STATE_FILE = "/root/repos/gentechlabs.github.io/Treasury/steward-state.json"
 
 
 def fetch_json(url, timeout=12):

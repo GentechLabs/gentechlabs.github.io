@@ -48,7 +48,7 @@ class CopyDivergence:
              "steward_execute.py", "auto_compound.py", "steward_silence.py"]
     CANON = "/root/vaults/gentech/10-Labs/agent-kit-self-tracking"
     TARGETS = [
-        "/root/ProtoJay4789.github.io/10-Labs/agent-kit-self-tracking",
+        "/root/repos/gentechlabs.github.io/10-Labs/agent-kit-self-tracking",
         "/root/.hermes/profiles/gentech-treasury/scripts",
     ]
 

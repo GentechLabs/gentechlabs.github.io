@@ -28,7 +28,7 @@ def hermes_path(filename: str) -> str:
 AAE_CONFIG_PATH = hermes_path(".lfj-aae-config.json")
 STATE_FILE = hermes_path(".lfj-defi-state.json")
 POSITION_TRACKER_PATH = hermes_path(".lfj-position-tracker.json")
-DASHBOARD_DATA_PATH = "/root/ProtoJay4789.github.io/DeFi/defi-data.json"
+DASHBOARD_DATA_PATH = "/root/repos/gentechlabs.github.io/DeFi/defi-data.json"
 
 DEXSCREENER_URL_TEMPLATE = "https://api.dexscreener.com/latest/dex/pairs/avalanche/{pool_address}"
 

@@ -22,7 +22,7 @@ from datetime import datetime, timezone
 
 JOURNAL = os.environ.get(
     "STEWARD_DECISIONS_FILE",
-    "/root/ProtoJay4789.github.io/10-Labs/agent-kit-self-tracking/steward-decisions.jsonl")
+    "/root/repos/gentechlabs.github.io/10-Labs/agent-kit-self-tracking/steward-decisions.jsonl")
 OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                    "training-data", "decision-training.jsonl")
 

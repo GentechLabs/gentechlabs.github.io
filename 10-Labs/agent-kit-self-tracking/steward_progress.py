@@ -123,7 +123,7 @@ def estimate_daily_fees(value_usd: float) -> float:
     # Canonical source: AAE DeFi Milestone dashboard feed (already correct)
     for path in (
         "/root/vaults/gentech/DeFi/defi-data.json",
-        "/root/ProtoJay4789.github.io/DeFi/defi-data.json",
+        "/root/repos/gentechlabs.github.io/DeFi/defi-data.json",
     ):
         try:
             with open(path) as f:
@@ -186,13 +186,13 @@ def _machine_active_recently(hours: float = 2.0) -> bool:
     churn misread as new money)."""
     import glob, json as _json
     stamps = [
-        "/root/ProtoJay4789.github.io/10-Labs/agent-kit-self-tracking/.steward-last-rebalance.json",
+        "/root/repos/gentechlabs.github.io/10-Labs/agent-kit-self-tracking/.steward-last-rebalance.json",
     ]
     # auto-compound stamps + any last-action stamps in both script homes
     EXCLUDE = {".steward-wallet-baseline.json",      # this script's own output
                ".steward-silence-state.json",        # messaging state, not action
                ".steward-council-trigger-state.json"}  # council chatter
-    for pat in ("/root/ProtoJay4789.github.io/10-Labs/agent-kit-self-tracking/.steward-*.json",
+    for pat in ("/root/repos/gentechlabs.github.io/10-Labs/agent-kit-self-tracking/.steward-*.json",
                 "/root/.hermes/profiles/gentech-treasury/scripts/.steward-*.json"):
         stamps.extend(s for s in glob.glob(pat)
                       if os.path.basename(s) not in EXCLUDE)

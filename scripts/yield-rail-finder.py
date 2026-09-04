@@ -57,7 +57,7 @@ HEAT_BANDS = [
 
 HUB_JSON_PATH = os.environ.get(
     "RAIL_FINDER_HUB_PATH",
-    "/root/ProtoJay4789.github.io/DeFi/rainbow/rail-finder-data.json",
+    "/root/repos/gentechlabs.github.io/DeFi/rainbow/rail-finder-data.json",
 )
 
 
