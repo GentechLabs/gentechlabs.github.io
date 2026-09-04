@@ -26,7 +26,7 @@ from datetime import datetime, timezone
 
 JOURNAL = os.environ.get(
     "STEWARD_DECISIONS_FILE",
-    "/root/ProtoJay4789.github.io/10-Labs/agent-kit-self-tracking/steward-decisions.jsonl")
+    "/root/repos/gentechlabs.github.io/10-Labs/agent-kit-self-tracking/steward-decisions.jsonl")
 WATERMARK = JOURNAL + ".last_report"
 # Fresh-truth audit (Aug 31 2026): the journal went 9.2 days without a write
 # while this report kept firing "ok" every 4h — silence had become

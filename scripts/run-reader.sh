@@ -12,7 +12,7 @@ echo "🔄 $(date '+%Y-%m-%d %H:%M:%S') — Running on-chain position reader"
 node reader.mjs --wallet "$WALLET" --shape "$SHAPE" 2>&1
 
 # Sync to GitHub Pages
-REPO="/root/ProtoJay4789.github.io"
+REPO="/root/repos/gentechlabs.github.io"
 cd "$REPO"
 git add DeFi/defi-data.json
 git diff --cached --quiet || git commit -m "auto: on-chain position update $(date +%H:%M)" && git push 2>&1

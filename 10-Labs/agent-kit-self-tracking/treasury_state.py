@@ -27,7 +27,7 @@ from datetime import datetime, timezone
 # Canonical state file. Cron jobs may point here via env override.
 STATE_PATH = os.environ.get(
     "TREASURY_STATE_FILE",
-    "/root/ProtoJay4789.github.io/10-Labs/agent-kit-self-tracking/treasury-state.json")
+    "/root/repos/gentechlabs.github.io/10-Labs/agent-kit-self-tracking/treasury-state.json")
 
 # Modes the treasury can be in. Only the council changes mode.
 MODES = {"YIELD_FARM", "TRADE", "DRY_POWDER"}

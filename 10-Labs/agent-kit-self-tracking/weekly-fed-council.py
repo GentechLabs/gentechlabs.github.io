@@ -31,7 +31,7 @@ sys.path.insert(0, SCRIPT_DIR)
 
 JOURNAL = os.environ.get(
     "STEWARD_DECISIONS_FILE",
-    "/root/ProtoJay4789.github.io/10-Labs/agent-kit-self-tracking/steward-decisions.jsonl")
+    "/root/repos/gentechlabs.github.io/10-Labs/agent-kit-self-tracking/steward-decisions.jsonl")
 JOURNAL_DIR = "/root/vaults/gentech/Treasury/Strategy-Journal"
 TTS_SCRIPT = "/root/.hermes/profiles/gentech/scripts/steve-harvey-tts.py"
 OUTPUT_DIR = "/tmp/steve-harvey-fed"

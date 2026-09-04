@@ -212,7 +212,7 @@ def _state_path():
     """Resolve the shared treasury-state.json path."""
     return os.environ.get(
         "TREASURY_STATE_FILE",
-        "/root/ProtoJay4789.github.io/10-Labs/agent-kit-self-tracking/treasury-state.json")
+        "/root/repos/gentechlabs.github.io/10-Labs/agent-kit-self-tracking/treasury-state.json")
 
 
 def _write_mode(mode: str, by: str):
