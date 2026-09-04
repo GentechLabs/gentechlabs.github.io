@@ -23,24 +23,52 @@ SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, SCRIPT_DIR)
 
 # Import our modules
-from regime_classifier import run_classification
+from regime_classifier import run_btc_classification
 from strategy_returns import run_strategy_comparison, format_leaderboard
 from allocation_engine import run_allocation_engine, format_allocation
 
 # ── Config ──────────────────────────────────────────────────────────────────
 
 POOL_ADDRESS = "0x864d4e5ee7318e97483db7eb0912e09f161516ea"
-STATE_DIR = os.path.expanduser("~/.hermes/scripts")
+STATE_DIR = "/root/.hermes/scripts"  # absolute — expanduser() broke under profile HOME (audit Aug 29)
 SIGNAL_FILE = os.path.join(STATE_DIR, ".aae-hybrid-signal.json")
 
-# Position config (from AAE monitor)
+# Position config — LIVE READ (Sep 4, 2026 fix: the old hardcode $134.94 /
+# range 9.75-10.01 was ancient and fed a fake "LP -$11/day (-3008% APR)"
+# leaderboard). The live LP position is read from chain truth at run time;
+# POSITION stays only as a last-resort fallback if discovery fails.
 POSITION = {
-    "total_usd": 134.94,
-    "token0_amount": 3.446,
-    "token1_amount": 103.38,
-    "range_low": 9.75,
-    "range_high": 10.01,
+    "total_usd": 25.43,
+    "token0_amount": 0.214,
+    "token1_amount": 23.73,
+    "range_low": 7.4248,
+    "range_high": 7.5370,
 }
+
+
+STEWARD_WALLET = "0x572ABd6461BED2258615E6b99c585Ab7c5d05037"
+
+
+def _live_position():
+    """Live LP position from chain truth (discover_positions). Returns
+    (total_usd, range_width_pct, price_change_24h) or None on failure."""
+    try:
+        sys.path.insert(0, "/root/repos/gentechlabs.github.io/10-Labs/agent-kit-self-tracking")
+        from discover_positions import discover_positions
+        data = discover_positions("avalanche", STEWARD_WALLET)
+        for pos in data.get("positions", []):
+            if pos.get("type") == "lfj_v22":
+                rl, rh = float(pos.get("rangeLow") or 0), float(pos.get("rangeHigh") or 0)
+                px = float(pos.get("livePriceUsd") or 0)
+                width_pct = ((rh - rl) / px) if (rl and rh and px) else 0.10
+                return {
+                    "total_usd": float(pos.get("positionUsd") or 0),
+                    "range_width_pct": max(0.02, round(width_pct, 4)),  # floor 2%
+                    "price_change_24h": None,  # filled from DexScreener below
+                }
+    except Exception:
+        return None
+    return None
 
 
 # ── Unified Pipeline ───────────────────────────────────────────────────────
@@ -67,7 +95,7 @@ def run_hybrid_signal(
 
     # ── Step 1: Regime Classification ───────────────────────────────────
     try:
-        regime_data = run_classification(POOL_ADDRESS)
+        regime_data = run_btc_classification()
         signal["pipeline"]["regime"] = {
             "status": "ok",
             "regime": regime_data.get("regime", "UNKNOWN"),
@@ -89,15 +117,47 @@ def run_hybrid_signal(
 
     # ── Step 2: Strategy Returns ────────────────────────────────────────
     try:
-        # Get fees from regime data if available (fallback to 0)
-        fees_24h = 0.0  # Would come from AAE monitor in production
-        price_change = regime_data.get("details", {}).get("momentum_7d", 0) or 0
+        # LIVE READ (Sep 4, 2026 fix — was: stale hardcode + fees_24h=0 +
+        # BTC 7d momentum fed into a 24h IL formula = fake "LP -$11/day").
+        #  a) position value + range width from chain truth
+        #  b) AVAX 24h price change from DexScreener (the IL formula is 24h)
+        #  c) fees from the chain-truth fee ledger (drift-adjusted daily est)
+        live = _live_position()
+        pos_usd = (live or {}).get("total_usd") or POSITION["total_usd"]
+        range_width = (live or {}).get("range_width_pct") or 0.10
+
+        price_change = 0.5  # fallback: AVAX 24h %
+        try:
+            from regime_classifier import fetch_dexscreener_data
+            dex = fetch_dexscreener_data(POOL_ADDRESS)
+            if dex and dex.get("price_change_24h") is not None:
+                price_change = float(dex["price_change_24h"])
+        except Exception:
+            pass
+
+        fees_24h = 0.0
+        try:
+            # NON-MUTATING ledger read (Sep 4: calling run() here appended
+            # snapshots outside watchdog cadence AND its short-window daily
+            # estimate spanned churn → fake +$171/day. Load + measure only,
+            # accept ONLY a churn-free 24h window, sanity-cap at 2%/day.)
+            sys.path.insert(0, "/root/repos/gentechlabs.github.io/10-Labs/agent-kit-self-tracking")
+            import steward_fee_ledger as _sfl
+            led = _sfl.load()
+            snap = _sfl.snapshot()
+            fw = _sfl.fees_since(snap["epoch"] - 86400, led["snapshots"], snap)
+            if fw.get("fees_usd") is not None and fw.get("window_h"):
+                est = float(fw["fees_usd"]) / float(fw["window_h"]) * 24
+                fees_24h = round(min(max(est, 0.0), 0.02 * (pos_usd or 1)), 4)
+        except Exception:
+            pass
 
         returns_data = run_strategy_comparison(
-            position_value=POSITION["total_usd"],
+            position_value=pos_usd,
             spot_value=0.0961,  # AVAX in wallet
             fees_24h=fees_24h,
-            price_change_24h_pct=price_change * 100 if price_change else 0.5,
+            price_change_24h_pct=price_change,
+            range_width_pct=range_width,
         )
         signal["pipeline"]["returns"] = {
             "status": "ok",
