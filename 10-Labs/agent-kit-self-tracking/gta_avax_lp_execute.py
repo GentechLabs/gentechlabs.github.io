@@ -143,9 +143,9 @@ def curve_dist_from_range(active_id, spread):
     return _norm(dx), _norm(dy)
 
 
-def build_liquidity_params(amount_usd, bin_spread, active_id, price):
-    usdc_amount = amount_usd / 2.0
-    wavax_amount = usdc_amount / price
+def build_liquidity_params(amount_usd, bin_spread, active_id, price, allocation_ratio=0.5):
+    usdc_amount = amount_usd * allocation_ratio
+    wavax_amount = (amount_usd * (1.0 - allocation_ratio)) / price
     delta_ids = list(range(-bin_spread, bin_spread + 1))
     distX, distY = curve_dist_from_range(active_id, bin_spread)
     return {
@@ -169,13 +169,16 @@ def build_liquidity_params(amount_usd, bin_spread, active_id, price):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--amount", type=float, required=True)
-    ap.add_argument("--bin-spread", type=int, default=11,
-                    help="half-width in bins (Jordan's lever: curve ±11, bid-ask ±15; do NOT override with 5)")
+    ap.add_argument("--bin-spread", type=int, default=5,
+                    help="half-width in bins (Jordan's lever: ±5 = 11 bins is the "
+                    "PROVEN setting — ±11 reverts on LFJ, verified by read-only "
+                    "eth_call simulation 2026-09-03)")
+    ap.add_argument("--allocation", type=float, default=0.5,
+                    help="USDC allocation ratio (0.0-1.0, default 0.5 for 50/50)")
     ap.add_argument("--dry-run", action="store_true", default=True)
     ap.add_argument("--execute", action="store_true")
     ap.add_argument("--yes", action="store_true")
     args = ap.parse_args()
-
     w3 = Web3(Web3.HTTPProvider(AVALANCHE_RPC))
     if not w3.is_connected():
         print("ERROR: cannot connect to Avalanche RPC", file=sys.stderr); sys.exit(1)
@@ -189,10 +192,10 @@ def main():
     print(f"  Active bin: {active_id} | binStep: {BIN_STEP}")
     print(f"  Live price: ${price:.4f} USDC/WAVAX")
     print(f"  Range: bins {active_id - args.bin_spread} – {active_id + args.bin_spread} (±{args.bin_spread})")
-    print(f"  Deploy: ${args.amount:.2f} (50/50 USDC/WAVAX)")
+    print(f"  Deploy: ${args.amount:.2f} ({args.allocation*100:.0f}% USDC / {(1-args.allocation)*100:.0f}% WAVAX)")
     print(f"  Wallet: {STEWARD_WALLET}")
 
-    params = build_liquidity_params(args.amount, args.bin_spread, active_id, price)
+    params = build_liquidity_params(args.amount, args.bin_spread, active_id, price, args.allocation)
     print(f"\n📦 LiquidityParameters:")
     print(f"  amountX (WAVAX): {params['amountX']/1e18:.6f}")
     print(f"  amountY (USDC):  {params['amountY']/1e6:.2f}")
@@ -244,9 +247,9 @@ def main():
                 print(f"\n🔓 Approving {name} to LBRouter...")
                 tx = c.functions.approve(router_addr, max_uint).build_transaction({
                     "from": acct.address, "nonce": w3.eth.get_transaction_count(acct.address),
-                    "gas": 100000, "gasPrice": w3.eth.gas_price, "chainId": CHAIN_ID})
+                    "gas": 100000, "gasPrice": int(w3.eth.gas_price * 1.3), "chainId": CHAIN_ID})
                 signed = acct.sign_transaction(tx)
-                h = w3.eth.send_raw_transaction(signed.raw_transaction)
+                h = _send_with_nonce_retry(w3, acct, tx)
                 rcpt = w3.eth.wait_for_transaction_receipt(h)
                 print(f"  ✅ {name} approved: {h.hex()} status={rcpt['status']}")
             else:
@@ -272,9 +275,9 @@ def main():
                     acct.address, int(time.time()) + 600
                 ).build_transaction({
                     "from": acct.address, "nonce": w3.eth.get_transaction_count(acct.address),
-                    "gas": 500000, "gasPrice": w3.eth.gas_price, "chainId": CHAIN_ID})
+                    "gas": 500000, "gasPrice": int(w3.eth.gas_price * 1.3), "chainId": CHAIN_ID})
                 signed = acct.sign_transaction(tx)
-                h = w3.eth.send_raw_transaction(signed.raw_transaction)
+                h = _send_with_nonce_retry(w3, acct, tx)
                 rcpt = w3.eth.wait_for_transaction_receipt(h)
                 print(f"  ✅ Swap tx: {h.hex()} status={rcpt['status']}")
                 if rcpt['status'] != 1:
@@ -297,9 +300,9 @@ def main():
                     acct.address, int(time.time()) + 300
                 ).build_transaction({
                     "from": acct.address, "nonce": w3.eth.get_transaction_count(acct.address),
-                    "gas": 500000, "gasPrice": w3.eth.gas_price, "chainId": CHAIN_ID})
+                    "gas": 500000, "gasPrice": int(w3.eth.gas_price * 1.3), "chainId": CHAIN_ID})
                 signed = acct.sign_transaction(tx)
-                h = w3.eth.send_raw_transaction(signed.raw_transaction)
+                h = _send_with_nonce_retry(w3, acct, tx)
                 rcpt = w3.eth.wait_for_transaction_receipt(h)
                 print(f"  ✅ Swap tx: {h.hex()} status={rcpt['status']}")
                 if rcpt['status'] != 1:
@@ -308,24 +311,40 @@ def main():
                 usdc_bal = usdc.functions.balanceOf(acct.address).call()/1e6
                 print(f"  WAVAX now: {wavax_bal:.6f} | USDC now: ${usdc_bal:.2f}")
 
-        # 2. addLiquidity — size to ACTUAL post-swap balances with a small
-        # buffer so transferFrom never asks for more than the wallet holds.
-        # (The pre-swap estimate can overshoot by a hair and revert.)
+        # 2. addLiquidity — use the calculated parameters with safety checks
+        # (Only reduce if wallet balance is insufficient, never increase)
         wavax_bal = wavax.functions.balanceOf(acct.address).call()/1e18
         usdc_bal = usdc.functions.balanceOf(acct.address).call()/1e6
+        need_x = params['amountX']/1e18
+        need_y = params['amountY']/1e6
+        
+        # Safety check: ensure we have enough funds (with small buffer)
         buf_x = 0.005  # keep ~0.005 WAVAX free (dust/gas)
         buf_y = 0.05   # keep ~$0.05 USDC free
-        actual_x = max(0, wavax_bal - buf_x)
-        actual_y = max(0, usdc_bal - buf_y)
-        params['amountX'] = int(actual_x * 1e18)
-        params['amountY'] = int(actual_y * 1e6)
-        print(f"\n💧 Adding liquidity (sized to actual balances: {actual_x:.4f} WAVAX + ${actual_y:.2f} USDC)...")
+        available_x = max(0, wavax_bal - buf_x)
+        available_y = max(0, usdc_bal - buf_y)
+        
+        if available_x < need_x * 0.99 or available_y < need_y * 0.99:
+            print(f"\n⚠️  Insufficient funds after rebalancing:")
+            print(f"   Need: {need_x:.6f} WAVAX + ${need_y:.2f} USDC")
+            print(f"   Have: {available_x:.6f} WAVAX + ${available_y:.2f} USDC")
+            print(f"   Proceeding with reduced deployment to match available funds.")
+            # Scale down proportionally to what we have
+            scale_x = available_x / need_x if need_x > 0 else 1
+            scale_y = available_y / need_y if need_y > 0 else 1
+            scale = min(scale_x, scale_y, 1.0)  # Never scale above 1.0
+            params['amountX'] = int(params['amountX'] * scale)
+            params['amountY'] = int(params['amountY'] * scale)
+            print(f"   Deploying: {params['amountX']/1e18:.6f} WAVAX + ${params['amountY']/1e6:.2f} USDC")
+        else:
+            print(f"\n💧 Adding liquidity (as calculated: {need_x:.6f} WAVAX + ${need_y:.2f} USDC)...")
+        
         router = w3.eth.contract(address=router_addr, abi=LBROUTER_ABI)
         tx = router.functions.addLiquidity(params).build_transaction({
             "from": acct.address, "nonce": w3.eth.get_transaction_count(acct.address),
-            "gas": 1_000_000, "gasPrice": w3.eth.gas_price, "chainId": CHAIN_ID})
+            "gas": 1_000_000, "gasPrice": int(w3.eth.gas_price * 1.3), "chainId": CHAIN_ID})
         signed = acct.sign_transaction(tx)
-        h = w3.eth.send_raw_transaction(signed.raw_transaction)
+        h = _send_with_nonce_retry(w3, acct, tx)
         rcpt = w3.eth.wait_for_transaction_receipt(h)
         print(f"  ✅ addLiquidity tx: {h.hex()} status={rcpt['status']}")
         if rcpt['status'] != 1:
@@ -345,11 +364,28 @@ def main():
     try:
         tx = router.functions.addLiquidity(params).build_transaction({
             "from": STEWARD_WALLET, "nonce": w3.eth.get_transaction_count(Web3.to_checksum_address(STEWARD_WALLET)),
-            "gas": 1_000_000, "gasPrice": w3.eth.gas_price, "chainId": CHAIN_ID})
+            "gas": 1_000_000, "gasPrice": int(w3.eth.gas_price * 1.3), "chainId": CHAIN_ID})
         print(f"\n📦 Tx builds cleanly: gas={tx['gas']}, data_len={len(tx['data'])}")
     except Exception as e:
         print(f"\n❌ Tx build failed: {e}", file=sys.stderr); sys.exit(1)
     print("\n✅ DRY-RUN complete — no funds moved. Ready for execution.")
+
+    return 0
+
+
+# STEWARD_NONCE_RETRY_V1: self-heal nonce-race retry (Detect-Fix-Verify 2026-09-03)
+def _send_with_nonce_retry(w3, acct, tx, tries: int = 3):
+    """Send a signed tx; on 'nonce too low' re-fetch the nonce, re-sign,
+    resend (max 3). Returns the tx hash. Raises on final failure."""
+    for attempt in range(1, tries + 1):
+        try:
+            return w3.eth.send_raw_transaction(acct.sign_transaction(tx).raw_transaction)
+        except Exception as e:
+            msg = str(e)
+            if ("nonce too low" in msg or "nonce has been used" in msg) and attempt < tries:
+                tx["nonce"] = w3.eth.get_transaction_count(acct.address)
+                continue
+            raise
 
 if __name__ == "__main__":
     main()

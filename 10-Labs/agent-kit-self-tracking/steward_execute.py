@@ -233,7 +233,7 @@ def send_and_wait(w3, acct, fn, label: str) -> Dict[str, Any]:
         "from": acct.address,
         "nonce": w3.eth.get_transaction_count(acct.address),
         "gas": GAS_LIMIT,
-        "gasPrice": w3.eth.gas_price,
+        "gasPrice": int(w3.eth.gas_price * 1.3),
         "chainId": CHAIN_ID,
     })
     signed = acct.sign_transaction(tx)
@@ -301,7 +301,7 @@ def step_approve(w3, acct, dry_run: bool) -> Dict[str, Any]:
         "to": PAIR, "data": set_sel,
         "from": acct.address,
         "nonce": w3.eth.get_transaction_count(acct.address),
-        "gas": 100_000, "gasPrice": w3.eth.gas_price, "chainId": CHAIN_ID,
+        "gas": 100_000, "gasPrice": int(w3.eth.gas_price * 1.3), "chainId": CHAIN_ID,
     }
     signed = acct.sign_transaction(tx)
     h = w3.eth.send_raw_transaction(signed.raw_transaction)

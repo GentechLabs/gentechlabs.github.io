@@ -361,6 +361,28 @@ def main() -> int:
                          "plan + result. Jordan is alerted AFTER, not asked to confirm.")
     args = ap.parse_args()
 
+    # SELF-HEAL (Jordan, Sep 3 2026): detect known failure signatures and
+    # fix them before acting. Safe fixes only — funds are never moved here.
+    try:
+        from steward_selfheal import run_selfheal
+        for line in run_selfheal():
+            print(f"   {line}")
+    except Exception as e:
+        print(f"   ⚠️ self-heal layer failed to load: {e}")
+
+    # FEE LEDGER: hourly committed sweep (Jordan Sep 3: fees from chain, with
+    # compounding). Every 10-min cycle takes a snapshot; on the hour it
+    # advances the sweep pointer (bounded churn windows).
+    try:
+        from steward_fee_ledger import run as _fee_run
+        _now_min = time.gmtime().tm_min
+        if _now_min < 10:  # first 10-min cycle of each hour commits the sweep
+            _fee_res = _fee_run(dry_run=False)
+        else:
+            _fee_res = _fee_run(dry_run=True)   # sample only, no pointer advance
+    except Exception as e:
+        print(f"   ⚠️ fee ledger sweep failed: {e}")
+
     regime = read_regime()
     position = read_position()
 
@@ -389,40 +411,47 @@ def main() -> int:
     if args.autonomous:
         if decision["action"] == "deploy":
             # Funded wallet, no position — open a fresh curve (auto-deploy).
-            # SILENCE GATE: if this condition was already reported and is still
-            # unresolved, stay quiet — the deploy already failed, re-announcing
-            # every 10 min is noise, not monitoring.
-            if silence.silenced("auto-deploy"):
-                return 0
+            # SILENCE GOVERNS MESSAGING, NOT EXECUTION (Jordan, Sep 3 2026):
+            # the machine attempts every cycle, but announces only once per
+            # episode. A suppressed message must never park the capital —
+            # silence that parks money is a bug, not discipline.
+            quiet = silence.silenced("auto-deploy")
             import subprocess
             deployable = has_deployable_capital()
             deployable = max(10.0, deployable - 1.0)  # keep a little USDC + gas buffer
-            print(f"🛡️ STEWARD — AUTONOMOUS DEPLOY (no position)")
-            print(f"   Reason: {decision['reason']}")
-            # Spread fix (Jordan, Sep 2 2026): ±11 reverts on LFJ (proven by
-            # read-only eth_call simulation 2026-09-03). ±5 with 11 bins is the
-            # working setting — same one auto-compound uses.
-            print(f"   Plan: open {decision['shape']} curve ±5 for ${deployable:.2f}")
+            if not quiet:
+                print(f"🛡️ STEWARD — AUTONOMOUS DEPLOY (no position)")
+                print(f"   Reason: {decision['reason']}")
+                # Spread ±7 = router max (empirically mapped): in fast markets
+                # ±5 leaves too little idSlippage headroom between simulate
+                # and mine (reverted 2026-09-03 14:42 during the pump).
+                print(f"   Plan: open {decision['shape']} curve ±7 for ${deployable:.2f}")
+            import subprocess
             proc = subprocess.run(
                 [sys.executable, DEPLOY_EXEC_SCRIPT, "--amount", str(deployable),
-                 "--bin-spread", "5", "--allocation", "0.5", "--execute", "--yes"],
+                 "--bin-spread", "7", "--allocation", "0.5", "--execute", "--yes"],
                 capture_output=True, text=True, timeout=300)
             ok = proc.returncode == 0
-            print(f"   Executed: {'✅' if ok else '❌'}")
-            if proc.stdout:
-                print(f"   {proc.stdout[-1200:]}")
-            if proc.stderr:
-                print(f"   stderr: {proc.stderr[-300:]}")
+            if not quiet:
+                print(f"   Executed: {'✅' if ok else '❌'}")
+                if proc.stdout:
+                    print(f"   {proc.stdout[-1200:]}")
+                if proc.stderr:
+                    print(f"   stderr: {proc.stderr[-300:]}")
             if ok:
                 with open(stamp_file, "w") as f:
                     json.dump({"ts": _now_iso()}, f)
                 silence.mark_success("auto-deploy")
                 new_pos = get_position_after()
-                if new_pos:
+                if new_pos and quiet:
+                    # Recovery after a suppressed failure = state change —
+                    # announce once, re-arm.
+                    print(f"🛡️ STEWARD — auto-deploy recovered: {new_pos}")
+                elif new_pos:
                     print(f"   ✅ Position live: {new_pos}")
             else:
-                # Failure — suppress further attempts for 6h (one reminder after
-                # that), instead of re-announcing the same failure every 10 min.
+                # Failure — message suppressed for 6h (one reminder after
+                # that), but the NEXT cycle still retries execution silently.
                 silence.mark_failure(
                     "auto-deploy", (proc.stderr or proc.stdout or "unknown")[-300:],
                     retry_hours=6)
@@ -435,18 +464,19 @@ def main() -> int:
             silence.mark_success("auto-deploy")
             silence.mark_success("rebalance")
             return 0
-        # Rebalance leg — same silence discipline: alert ONCE per out-of-range
-        # episode, stay silent while it persists, re-arm on success.
-        if silence.silenced("rebalance"):
-            return 0
+        # Rebalance leg — silence governs MESSAGING, not execution: withdraw+
+        # redeploy is attempted every cycle while out of range; it announces
+        # only once per episode (one reminder after retry_hours).
+        quiet = silence.silenced("rebalance")
         p = next((x for x in position.get("positions", []) if "error" not in x), None)
         pos_read = p.get("read", "") if p else ""
-        print(f"🛡️ STEWARD — AUTONOMOUS REBALANCE")
-        print(f"   ⚠️ OUT of range (fee eff {decision['fee_eff']:.0f}%)")
-        print(f"   Reason: {decision['reason']}")
-        if pos_read:
-            print(f"   Before: {pos_read}")
-        print(f"   Plan: withdraw + redeploy {decision['shape']} on current price")
+        if not quiet:
+            print(f"🛡️ STEWARD — AUTONOMOUS REBALANCE")
+            print(f"   ⚠️ OUT of range (fee eff {decision['fee_eff']:.0f}%)")
+            print(f"   Reason: {decision['reason']}")
+            if pos_read:
+                print(f"   Before: {pos_read}")
+            print(f"   Plan: withdraw + redeploy {decision['shape']} on current price")
         # Execute the full withdraw-redeploy cycle via steward_execute.py
         import subprocess
         exec_script = os.path.join(HERE, "steward_execute.py")
@@ -456,22 +486,26 @@ def main() -> int:
              "--shape", shape, "--execute", "--yes"],
             capture_output=True, text=True, timeout=300)
         ok = proc.returncode == 0
-        print(f"   Executed: {'✅' if ok else '❌'}")
-        if proc.stdout:
-            print(f"   {proc.stdout[-1200:]}")
-        if proc.stderr:
-            print(f"   stderr: {proc.stderr[-300:]}")
+        if not quiet:
+            print(f"   Executed: {'✅' if ok else '❌'}")
+            if proc.stdout:
+                print(f"   {proc.stdout[-1200:]}")
+            if proc.stderr:
+                print(f"   stderr: {proc.stderr[-300:]}")
         if ok:
             with open(stamp_file, "w") as f:
                 json.dump({"ts": _now_iso()}, f)
             silence.mark_success("rebalance")
             # Verify the new on-chain state
             new_pos = get_position_after()
-            if new_pos:
+            if new_pos and quiet:
+                # Recovery after failed attempts = state change — announce once.
+                print(f"🛡️ STEWARD — re-center recovered: {new_pos}")
+            elif new_pos:
                 print(f"   ✅ Back at: {new_pos}")
         else:
-            # Failed re-center — suppress for 2h instead of re-attempting +
-            # re-announcing every 10 min (gas + noise discipline).
+            # Failed re-center — message suppressed for 2h; next cycle still
+            # attempts the fix silently (capital must never sit parked).
             silence.mark_failure(
                 "rebalance", (proc.stderr or proc.stdout or "unknown")[-300:],
                 retry_hours=2)
