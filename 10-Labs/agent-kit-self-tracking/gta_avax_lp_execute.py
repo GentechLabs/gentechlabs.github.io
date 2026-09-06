@@ -256,19 +256,28 @@ def main():
                 print(f"  ✅ {name} already approved")
 
         # 1b. Rebalance to ~50/50 if the wallet is imbalanced.
-        # If WAVAX is short -> swap USDC -> WAVAX. If USDC is short -> swap
-        # WAVAX -> USDC. This handles a withdraw that returned the position
-        # mostly in one token (the rebalance-after-withdraw case).
+        # Handles three cases:
+        #   (a) WAVAX short, USDC ample  → swap USDC → WAVAX
+        #   (b) USDC short, WAVAX ample  → swap WAVAX → USDC
+        #   (c) BOTH short relative to target — one side has more total value.
+        #       Swap from the richer side to cover the poorer side so the full
+        #       deploy amount can go through instead of scaling down.
         need_wavax = params['amountX']/1e18
         need_usdc = params['amountY']/1e6
-        if wavax_bal < need_wavax and usdc_bal > need_usdc + 0.1:
+        val_wavax = wavax_bal * price   # USD value of WAVAX holding
+        val_usdc = usdc_bal             # USD value of USDC holding
+        total_val = val_wavax + val_usdc
+        if total_val < need_wavax * price + need_usdc - 0.15:
+            print(f"\\n⚠️  Wallet total (${total_val:.2f}) below deploy target "
+                  f"(${need_wavax*price+need_usdc:.2f}) — will deploy what fits.")
+        elif wavax_bal < need_wavax and usdc_bal > need_usdc + 0.1:
             swap_usdc = (need_wavax - wavax_bal) * price
             swap_usdc = min(swap_usdc, usdc_bal - 0.05)
             if swap_usdc > 0.01:
-                print(f"\n🔄 Swapping ${swap_usdc:.2f} USDC -> WAVAX (need {need_wavax:.4f} WAVAX)...")
+                print(f"\\n🔄 Swapping ${swap_usdc:.2f} USDC -> WAVAX (need {need_wavax:.4f} WAVAX)...")
                 router = w3.eth.contract(address=router_addr, abi=LBROUTER_ABI)
                 amount_in = int(swap_usdc * 1e6)
-                amount_out_min = int((swap_usdc / price) * 0.99 * 1e18)  # 1% slippage
+                amount_out_min = int((swap_usdc / price) * 0.99 * 1e18)
                 tx = router.functions.swapExactTokensForTokens(
                     amount_in, amount_out_min,
                     ([BIN_STEP], [3], [Web3.to_checksum_address(USDC), Web3.to_checksum_address(WAVAX)]),
@@ -286,14 +295,13 @@ def main():
                 usdc_bal = usdc.functions.balanceOf(acct.address).call()/1e6
                 print(f"  WAVAX now: {wavax_bal:.6f} | USDC now: ${usdc_bal:.2f}")
         elif usdc_bal < need_usdc and wavax_bal > need_wavax + 0.01:
-            # Excess WAVAX, short USDC -> swap WAVAX -> USDC.
             swap_wavax = (need_usdc - usdc_bal) / price
-            swap_wavax = min(swap_wavax, wavax_bal - 0.1)  # keep a little WAVAX
+            swap_wavax = min(swap_wavax, wavax_bal - 0.1)
             if swap_wavax > 0.001:
-                print(f"\n🔄 Swapping {swap_wavax:.4f} WAVAX -> USDC (need ${need_usdc:.2f} USDC)...")
+                print(f"\\n🔄 Swapping {swap_wavax:.4f} WAVAX -> USDC (need ${need_usdc:.2f} USDC)...")
                 router = w3.eth.contract(address=router_addr, abi=LBROUTER_ABI)
                 amount_in = int(swap_wavax * 1e18)
-                amount_out_min = int(swap_wavax * price * 0.99 * 1e6)  # 1% slippage
+                amount_out_min = int(swap_wavax * price * 0.99 * 1e6)
                 tx = router.functions.swapExactTokensForTokens(
                     amount_in, amount_out_min,
                     ([BIN_STEP], [3], [Web3.to_checksum_address(WAVAX), Web3.to_checksum_address(USDC)]),
@@ -310,6 +318,63 @@ def main():
                 wavax_bal = wavax.functions.balanceOf(acct.address).call()/1e18
                 usdc_bal = usdc.functions.balanceOf(acct.address).call()/1e6
                 print(f"  WAVAX now: {wavax_bal:.6f} | USDC now: ${usdc_bal:.2f}")
+        elif wavax_bal < need_wavax and usdc_bal < need_usdc:
+            # Both short — swap from the richer side to cover the poorer side.
+            # Move the poorer side up to its target, then re-check.
+            if val_wavax > val_usdc:
+                # WAVAX-rich: swap WAVAX → USDC to cover USDC shortfall
+                usdc_short = need_usdc - usdc_bal
+                wavax_to_swap = usdc_short / price
+                wavax_to_swap = min(wavax_to_swap, wavax_bal - need_wavax - 0.01)
+                if wavax_to_swap > 0.001:
+                    print(f"\\n🔄 Both short — WAVAX-rich: swapping {wavax_to_swap:.4f} WAVAX -> USDC "
+                          f"(need ${usdc_short:.2f} more USDC)...")
+                    router = w3.eth.contract(address=router_addr, abi=LBROUTER_ABI)
+                    amount_in = int(wavax_to_swap * 1e18)
+                    amount_out_min = int(wavax_to_swap * price * 0.99 * 1e6)
+                    tx = router.functions.swapExactTokensForTokens(
+                        amount_in, amount_out_min,
+                        ([BIN_STEP], [3], [Web3.to_checksum_address(WAVAX), Web3.to_checksum_address(USDC)]),
+                        acct.address, int(time.time()) + 300
+                    ).build_transaction({
+                        "from": acct.address, "nonce": w3.eth.get_transaction_count(acct.address),
+                        "gas": 500000, "gasPrice": int(w3.eth.gas_price * 1.3), "chainId": CHAIN_ID})
+                    signed = acct.sign_transaction(tx)
+                    h = _send_with_nonce_retry(w3, acct, tx)
+                    rcpt = w3.eth.wait_for_transaction_receipt(h)
+                    print(f"  ✅ Swap tx: {h.hex()} status={rcpt['status']}")
+                    if rcpt['status'] != 1:
+                        print("  ❌ Swap REVERTED!", file=sys.stderr); sys.exit(1)
+                    wavax_bal = wavax.functions.balanceOf(acct.address).call()/1e18
+                    usdc_bal = usdc.functions.balanceOf(acct.address).call()/1e6
+                    print(f"  WAVAX now: {wavax_bal:.6f} | USDC now: ${usdc_bal:.2f}")
+            else:
+                # USDC-rich: swap USDC → WAVAX to cover WAVAX shortfall
+                wavax_short = need_wavax - wavax_bal
+                usdc_to_swap = wavax_short * price
+                usdc_to_swap = min(usdc_to_swap, usdc_bal - need_usdc - 0.05)
+                if usdc_to_swap > 0.01:
+                    print(f"\\n🔄 Both short — USDC-rich: swapping ${usdc_to_swap:.2f} USDC -> WAVAX "
+                          f"(need {wavax_short:.4f} more WAVAX)...")
+                    router = w3.eth.contract(address=router_addr, abi=LBROUTER_ABI)
+                    amount_in = int(usdc_to_swap * 1e6)
+                    amount_out_min = int((usdc_to_swap / price) * 0.99 * 1e18)
+                    tx = router.functions.swapExactTokensForTokens(
+                        amount_in, amount_out_min,
+                        ([BIN_STEP], [3], [Web3.to_checksum_address(USDC), Web3.to_checksum_address(WAVAX)]),
+                        acct.address, int(time.time()) + 600
+                    ).build_transaction({
+                        "from": acct.address, "nonce": w3.eth.get_transaction_count(acct.address),
+                        "gas": 500000, "gasPrice": int(w3.eth.gas_price * 1.3), "chainId": CHAIN_ID})
+                    signed = acct.sign_transaction(tx)
+                    h = _send_with_nonce_retry(w3, acct, tx)
+                    rcpt = w3.eth.wait_for_transaction_receipt(h)
+                    print(f"  ✅ Swap tx: {h.hex()} status={rcpt['status']}")
+                    if rcpt['status'] != 1:
+                        print("  ❌ Swap REVERTED!", file=sys.stderr); sys.exit(1)
+                    wavax_bal = wavax.functions.balanceOf(acct.address).call()/1e18
+                    usdc_bal = usdc.functions.balanceOf(acct.address).call()/1e6
+                    print(f"  WAVAX now: {wavax_bal:.6f} | USDC now: ${usdc_bal:.2f}")
 
         # 2. addLiquidity — use the calculated parameters with safety checks
         # (Only reduce if wallet balance is insufficient, never increase)
