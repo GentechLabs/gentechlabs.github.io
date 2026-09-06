@@ -48,9 +48,12 @@ STEWARD = Web3.to_checksum_address("0x572ABd6461BED2258615E6b99c585Ab7c5d05037")
 KEY_FILE = "/root/.blockrun/almanak-steward-key"
 BIN_STEP = 10
 GAS_LIMIT = 1_500_000
-# ~$1 native-gas buffer per chain (Jordan's rule: gas spikes hard in explosive
-# markets; never get caught unable to cover a move)
-GAS_MIN_USD = 1.0
+# Native-gas floor (Jordan's rule: gas spikes hard in explosive
+# markets; never get caught unable to cover a move).
+# Lowered Sep 5 2026 — the old $1.00 buffer was blocking execution
+# with $0.96 on hand; Avalanche gas is cheap and the buffer should
+# unblock the rebalance, not park the position.
+GAS_MIN_USD = 0.20
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 DEPLOY_SCRIPT = os.environ.get(
