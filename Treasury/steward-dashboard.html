@@ -267,6 +267,33 @@ footer { border-top: 1px solid var(--border); padding: 24px 0; text-align: cente
       <div class="row"><span class="k">HODL</span><span class="v" id="aaeHodl">—</span></div>
       <div class="row"><span class="k">Lending</span><span class="v" id="aaeLend">—</span></div>
     </div>
+
+    <!-- Council verdict -->
+    <div class="card span-6">
+      <h3>Council Verdict</h3>
+      <div class="row"><span class="k">Mode</span><span class="v" id="cMode">—</span></div>
+      <div class="row"><span class="k">Regime</span><span class="v" id="cRegime">—</span></div>
+      <div class="row"><span class="k">Autonomy</span><span class="v" id="cAutonomy">—</span></div>
+      <div class="row"><span class="k">Rail</span><span class="v" id="cRail">—</span></div>
+      <div class="row"><span class="k">Strategy</span><span class="v" id="cStrategy">—</span></div>
+    </div>
+
+    <!-- Fee / tier progression -->
+    <div class="card span-4">
+      <h3>Fee &amp; Tier Progression</h3>
+      <div class="row"><span class="k">Position value</span><span class="v" id="fPos">—</span></div>
+      <div class="row"><span class="k">Last snapshot</span><span class="v" id="fLast">—</span></div>
+      <div class="row"><span class="k">Snapshots</span><span class="v" id="fCount">—</span></div>
+      <div class="row"><span class="k">Tier</span><span class="v" id="fTier">—</span></div>
+    </div>
+
+    <!-- Activity feed -->
+    <div class="card span-8">
+      <h3>Live Activity Feed</h3>
+      <div id="activityFeed" style="max-height:220px; overflow-y:auto; font-size:0.82em;">
+        <div class="label">Loading…</div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -485,6 +512,48 @@ function render(data) {
   document.getElementById("aaeStaking").textContent = alloc.staking != null ? alloc.staking + "%" : "30%";
   document.getElementById("aaeHodl").textContent = alloc.hodl != null ? alloc.hodl + "%" : "15%";
   document.getElementById("aaeLend").textContent = alloc.lending != null ? alloc.lending + "%" : "15%";
+
+  // Council verdict
+  const council = data?.operations?.council || {};
+  document.getElementById("cMode").textContent = council.mode || "—";
+  document.getElementById("cRegime").textContent = council.regime || "—";
+  document.getElementById("cAutonomy").textContent = council.autonomy ? "✅ Granted" : "—";
+  // Rail + strategy derived from mode/regime (the council's executive call)
+  const rail = council.mode === "YIELD_FARM" ? "LFJ AVAX/USDC (farm)" : council.mode === "TRADE" ? "Trade rail" : "Dry powder";
+  const strat = council.regime === "BULL_TRENDING" ? "Hold + farm" : council.regime === "RANGE_BOUND" ? "Curve, earn fees" : "Watch";
+  document.getElementById("cRail").textContent = rail;
+  document.getElementById("cStrategy").textContent = strat;
+
+  // Fee & tier progression
+  const fees = data?.operations?.fees || {};
+  document.getElementById("fPos").textContent = fees.position_usd ? fmtUsd(fees.position_usd) : "—";
+  document.getElementById("fLast").textContent = fees.last_total ? fmtUsd(fees.last_total) : "—";
+  document.getElementById("fCount").textContent = fees.snapshot_count ? fees.snapshot_count + " snapshots" : "—";
+  // Tier ladder: Untested → Scout($5/d) → Raider($20/d) → Warlord($55/d) → Sovereign($200/d)
+  const posVal = fees.position_usd || 0;
+  const tier = posVal >= 200 ? "Sovereign 🏰" : posVal >= 55 ? "Warlord 👑" : posVal >= 20 ? "Raider ⚔️" : posVal >= 5 ? "Scout 🔭" : "Untested 🌱";
+  document.getElementById("fTier").textContent = tier;
+
+  // Live activity feed
+  const activity = data?.operations?.activity || [];
+  const feed = document.getElementById("activityFeed");
+  if (activity.length === 0) {
+    feed.innerHTML = '<div class="label">No recent activity — machine quiet (healthy).</div>';
+  } else {
+    feed.innerHTML = activity.map(a => {
+      if (a.kind === "rebalance") {
+        const ok = a.resolved ? "✅" : "⏳";
+        return `<div class="row"><span class="k">${ok} Rebalance (${a.type})</span><span class="v">${a.since ? new Date(a.since).toLocaleString() : "—"}</span></div>`;
+      }
+      if (a.kind === "compound") {
+        const icon = a.action === "compound" ? (a.ok ? "✅" : "❌") : "⏸";
+        const amt = a.amount_usd ? " $" + a.amount_usd.toFixed(2) : "";
+        const why = a.reasons && a.reasons.length ? " — " + a.reasons.join("; ") : "";
+        return `<div class="row"><span class="k">${icon} ${a.action}${amt}</span><span class="v">${a.ts ? new Date(a.ts*1000).toLocaleString() : "—"}</span></div>`;
+      }
+      return "";
+    }).join("");
+  }
 
   renderTier();
 }
