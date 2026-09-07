@@ -372,6 +372,29 @@ def _strategy_recommendation(stance, reg, vol=None):
     }
 
 
+def _read_farm_vs_trade():
+    """Read the buy list's farm-vs-trade signal (the source of truth).
+
+    The buy list (steward-buylist.py) aggregates each coin's method/yield/
+    strategy into a market-wide lean: FARM / TRADE / BALANCED. The council's
+    rail decision consumes this directly — the 'crocodile' market-fit read
+    becomes an official input, not just a hint in the report.
+    """
+    for p in (
+        "/root/.hermes/scripts/.steward-buylist-state.json",
+        "/root/.hermes/profiles/gentech-treasury/scripts/.steward-buylist-state.json",
+    ):
+        try:
+            with open(p) as f:
+                d = json.load(f)
+            fvt = d.get("farm_vs_trade")
+            if fvt:
+                return fvt
+        except Exception:
+            continue
+    return None
+
+
 def _rail_recommendation(stance, reg, liquidity=None):
     """The council's RAIL decision: which chain/pool to farm + whether to trade.
 
@@ -401,6 +424,17 @@ def _rail_recommendation(stance, reg, liquidity=None):
     sol_liq = liquidity.get("sol_liq", 0)
     avax_liq = liquidity.get("avax_liq", 0)
 
+    # ── Farm-vs-trade signal (source of truth from the buy list) ───────
+    # The 'crocodile' market-fit read: if the buy list leans TRADE, the
+    # treasury should favor the trade leg; if FARM, favor the farm leg.
+    fvt = _read_farm_vs_trade()
+    fvt_lean = (fvt or {}).get("lean", "BALANCED")
+    fvt_note = ""
+    if fvt_lean == "TRADE":
+        fvt_note = "buy list leans TRADE — favor the trade leg"
+    elif fvt_lean == "FARM":
+        fvt_note = "buy list leans FARM — favor the farm leg"
+
     # ── Farm rail: where liquidity is best ────────────────────────────
     # If SOL has materially more liquidity, farm SOL (Meteora) and trade AVAX.
     # Otherwise keep farming AVAX (LFJ) — it's live and proven.
@@ -423,6 +457,10 @@ def _rail_recommendation(stance, reg, liquidity=None):
         trade += " — long bias, sell into strength"
     elif "HAWKISH" in stance:
         trade += " — defensive, keep powder dry"
+
+    # Fold the farm-vs-trade signal into the rationale
+    if fvt_note:
+        rationale += f" | {fvt_note}"
 
     return {"rail": rail, "farm": farm, "trade": trade, "rationale": rationale}
 
