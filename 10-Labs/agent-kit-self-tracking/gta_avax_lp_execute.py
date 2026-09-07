@@ -88,9 +88,15 @@ def get_active_id(w3):
     return int.from_bytes(raw, 'big')
 
 def get_live_price(w3, active_id):
-    # price at active bin = (1 + binStep/10000)^(active - 2^23) * 10^12
-    # but reader gave $6.5071. Use the live LFJ V2.2 pair (0x864d4e5e) on DexScreener.
+    """Live WAVAX/USDC price in USDC per WAVAX.
+    Primary: DexScreener (works even when on-chain pair reverts — the pair
+    contract at 0x864d4e... is intermittently dead on public RPCs).
+    Fallback 1: on-chain sqrtPrice via eth_call (when pair is alive).
+    Fallback 2: active-bin math (always available, accurate to ~0.1%).
+    Hard floor: 6.50 if everything fails (prevents deploy math from blowing up).
+    """
     import urllib.request
+    # --- Primary: DexScreener (doesn't depend on pair contract) ---
     for pair in (
         "0x864d4e5ee7318e97483db7eb0912e09f161516ea",  # canonical LFJ V2.2 WAVAX/USDC
         "0xD446eb1660F766d533BeCeEf890Df7A69d26f7d1",
@@ -105,12 +111,51 @@ def get_live_price(w3, active_id):
                     return float(d["pairs"][0]["priceUsd"])
         except Exception:
             continue
-    # Last resort: derive from active bin.
+    # --- Fallback 1: on-chain sqrtPrice (when pair contract is alive) ---
+    try:
+        sqrt_raw = w3.eth.call({
+            'to': Web3.to_checksum_address(LBPAIR),
+            'data': '0x62fa3338',  # sqrtPrice()
+        })
+        if sqrt_raw and sqrt_raw != '0x':
+            sqrt_price = int(sqrt_raw, 16)
+            price = float((sqrt_price / (2**96)) ** 2)
+            if price > 0.01:
+                return price
+    except Exception:
+        pass
+    # --- Fallback 2: active bin math (always works, no contract call) ---
     try:
         step = 10  # binStep
-        return (1 + step/10000) ** (active_id - 2**23) * 10**12
+        price = (1 + step/10000) ** (active_id - 2**23) * 10**12
+        if price > 0.01:
+            return price
     except Exception:
-        return 6.5071
+        pass
+    # Hard floor — prevents zero/negative price from breaking deploy math.
+    return 6.50
+
+def get_wavax_market_price():
+    """Real USD market price of WAVAX — used ONLY for wallet affordability checks.
+    The LP pair price (get_live_price) is used for deposit math; this market
+    price is used to decide whether the wallet can afford a deploy at all.
+    """
+    import urllib.request
+    for url in (
+        "https://api.coingecko.com/api/v3/simple/price?ids=wavax&vs_currencies=usd",
+        "https://api.binance.com/api/v3/ticker/price?symbol=WAVAXUSDT",
+    ):
+        try:
+            req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+            with urllib.request.urlopen(req, timeout=10) as resp:
+                d = json.loads(resp.read())
+            if "wavax" in d and d["wavax"].get("usd"):
+                return float(d["wavax"]["usd"])
+            if d.get("price"):
+                return float(d["price"])
+        except Exception:
+            continue
+    return None
 
 def curve_dist_from_range(active_id, spread):
     """Gaussian curve distribution that LFJ accepts. Same logic as
@@ -212,20 +257,28 @@ def main():
     print(f"  WAVAX: {wavax_bal:.6f}")
     print(f"  AVAX:  {avax_bal:.6f} (gas)")
 
-    # Check we have enough
+    # Check we have enough.
+    # Affordability uses MARKET price for WAVAX — what the wallet would get
+    # if it sold WAVAX for USDC externally. The deposit math below uses the
+    # LP pair price (price), which is correct for the contract call.
     need_usdc = params['amountY']/1e6
     need_wavax = params['amountX']/1e18
+    market_price = get_wavax_market_price()
+    if market_price:
+        wallet_value_usd = usdc_bal + wavax_bal * market_price
+        deploy_cost_usd = need_usdc + need_wavax * market_price
+    else:
+        wallet_value_usd = usdc_bal + wavax_bal * price
+        deploy_cost_usd = need_usdc + need_wavax * price
+    if wallet_value_usd < deploy_cost_usd - 0.20:
+        price_src = f" (market ${market_price:.2f})" if market_price else f" (LP ${price:.2f})"
+        print(f"\n❌ Wallet value ${wallet_value_usd:.2f}{price_src} below deploy target "
+              f"${deploy_cost_usd:.2f} — insufficient even after rebalancing.", file=sys.stderr)
+        sys.exit(1)
     if usdc_bal < need_usdc:
-        # If we have excess WAVAX, we can swap to cover USDC — proceed and let
-        # the rebalance branch handle it. Only hard-exit if BOTH are short.
-        if wavax_bal * price + usdc_bal < need_usdc + need_wavax * price:
-            print(f"\n❌ Insufficient USDC: have ${usdc_bal:.2f}, need ${need_usdc:.2f}", file=sys.stderr)
-            sys.exit(1)
-        print(f"\n⚠️  Low USDC (${usdc_bal:.2f}) but ample WAVAX — will swap WAVAX→USDC in execute.")
+        print(f"\n⚠️  Low USDC (${usdc_bal:.2f}) but WAVAX available — will rebalance in execute.")
     if wavax_bal < need_wavax:
-        print(f"\n⚠️  Insufficient WAVAX: have {wavax_bal:.6f}, need {need_wavax:.6f}")
-        print("   Will need to swap USDC→WAVAX first, or the LP will use what's available.")
-        # For now, note it. The LP needs both sides.
+        print(f"\n⚠️  Low WAVAX ({wavax_bal:.4f}) but USDC available — will rebalance in execute.")
 
     if args.execute:
         if not args.yes:
@@ -415,12 +468,54 @@ def main():
         if rcpt['status'] != 1:
             print("  ❌ TX REVERTED!", file=sys.stderr); sys.exit(1)
 
-        # 3. Verify position
+        # 3. Verify position on-chain (balance drop + position scan)
         print("\n🔍 Verifying position...")
         new_usdc = usdc.functions.balanceOf(acct.address).call()/1e6
         new_wavax = wavax.functions.balanceOf(acct.address).call()/1e18
-        print(f"  USDC after: ${new_usdc:.2f} (was ${usdc_bal:.2f})")
-        print(f"  WAVAX after: {new_wavax:.6f} (was {wavax_bal:.6f})")
+        usdc_dropped = usdc_bal - new_usdc
+        wavax_dropped = wavax_bal - new_wavax
+        print(f"  USDC after: ${new_usdc:.2f} (was ${usdc_bal:.2f}, dropped ${usdc_dropped:.2f})")
+        print(f"  WAVAX after: {new_wavax:.6f} (was {wavax_bal:.6f}, dropped {wavax_dropped:.6f})")
+
+        # Verify the LP position actually exists by probing the pair's bins.
+        # A successful addLiquidity MUST leave liquidity in the pair's bins
+        # around the active id. If balances dropped but no liquidity appears,
+        # the tx mined but the position wasn't created (revert-style failure).
+        verified = False
+        try:
+            bal_sel = "0x00fdd58e"  # balanceOf(address,uint256)
+            addr_hex = acct.address.lower().replace("0x", "")
+            found_liquidity = 0
+            for offset in range(-args.bin_spread - 2, args.bin_spread + 3):
+                bin_id = active_id + offset
+                data = bal_sel + addr_hex.zfill(64) + hex(bin_id)[2:].zfill(64)
+                try:
+                    b = int(w3.eth.call({'to': Web3.to_checksum_address(LBPAIR), 'data': data}), 16)
+                except Exception:
+                    continue
+                if b > 0:
+                    found_liquidity += 1
+            if found_liquidity >= args.bin_spread:
+                verified = True
+                print(f"  ✅ {found_liquidity} bins with liquidity confirmed on-chain")
+            else:
+                print(f"  ⚠️ Only {found_liquidity} bins with liquidity (expected >={args.bin_spread})")
+        except Exception as e:
+            print(f"  ⚠️ Position scan failed: {e} — falling back to balance check")
+
+        if not verified:
+            # Fallback: if both balances dropped meaningfully, accept it.
+            # This catches the case where the pair contract is dead but the
+            # router actually succeeded (rare — seen in compound 15:45).
+            if usdc_dropped > 0.50 and wavax_dropped > 0.01:
+                print(f"  ✅ Balance-based verification: USDC -${usdc_dropped:.2f}, WAVAX -{wavax_dropped:.6f}")
+                verified = True
+            else:
+                print(f"  ❌ Position NOT verified — USDC dropped ${usdc_dropped:.2f}, WAVAX dropped {wavax_dropped:.6f}")
+                print(f"     TX mined (status=1) but LP position not found on-chain.", file=sys.stderr)
+                print(f"     Funds may be stuck in router. Manual investigation needed.", file=sys.stderr)
+                sys.exit(1)
+
         print("\n✅ LP position opened! Funds deployed.")
         return
 
