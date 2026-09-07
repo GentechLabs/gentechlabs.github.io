@@ -147,15 +147,12 @@ def main():
     try:
         data = json.loads(r.stdout)
     except Exception:
-        # Transient discovery failure (RPC hiccup etc.) — log for audit, but
-        # only ANNOUNCE the abort once per episode (6h window), not every 3h run.
         log_ledger({"ts": now, "action": "abort", "reason": "discovery parse failure"})
         if not silence.silenced("compound-abort"):
             print("⛔ auto-compound aborted: cannot parse discovery output")
             silence.mark_failure("compound-abort", "discovery parse failure",
                                  retry_hours=6)
         return 0
-    # Discovery parsed — cycle is healthy, re-arm the abort silence key.
     silence.mark_success("compound-abort")
     positions = data.get("positions", [])
     balances = data.get("balances", {})
@@ -163,19 +160,39 @@ def main():
     wavax_bal = balances.get("WAVAX", 0.0)
 
     if not positions:
-        reasons.append("no LP position (watchdog owns no-position deploys)")
+        # Watchdog-owned deploy: no position yet. Allow the first entry.
+        # The execute script (gta_avax_lp_execute.py) verifies the position
+        # on-chain AFTER the addLiquidity tx — if the position isn't created,
+        # the execute script exits non-zero and this compound is marked failed.
+        pass  # don't block — let the execute script's verification be the gate
 
     price = positions[0].get("livePriceUsd") if positions else None
     if not price:
         reasons.append("no live price")
 
     if reasons:
-        # silent when nothing to do — but log skip reasons for the audit trail
         log_ledger({"ts": now, "action": "skip", "reasons": reasons,
                     "idle_usd": round(usdc_bal + wavax_bal * (price or 0), 2)})
         return 0
 
-    idle_usd = usdc_bal + wavax_bal * price
+    # ── Market price for WAVAX (used only for idle valuation) ────────
+    # The LP pair price (price) is used for deposit math. For deciding how
+    # much idle capital exists, we use WAVAX's real USD market price so the
+    # engine sees the full wallet value and deploys it all instead of leaving
+    # WAVAX-rich wallets partially idle because the LP pair under-prices WAVAX.
+    MARKET_PRICE_URL = "https://api.coingecko.com/api/v3/simple/price?ids=wavax&vs_currencies=usd"
+    market_price = price  # fallback to LP pair price
+    try:
+        req = urllib.request.Request(MARKET_PRICE_URL, headers={"User-Agent": "Mozilla/5.0"})
+        with urllib.request.urlopen(req, timeout=10) as resp:
+            md = json.loads(resp.read())
+        if md.get("wavax", {}).get("usd"):
+            market_price = md["wavax"]["usd"]
+    except Exception:
+        pass  # keep LP pair price as fallback
+
+    # ── Idle valuation ────────────────────────────────────────────────
+    idle_usd = usdc_bal + wavax_bal * market_price   # ← market price here
     pos_usd = positions[0].get("positionUsd", 0)
 
     # ── Intelligence: sentiment-driven allocation ────────────────────
@@ -224,7 +241,12 @@ def main():
             out = dep.stdout.strip().splitlines()
             tail = "\n".join(out[-6:]) if out else dep.stderr[-300:]
             print(tail)
-            ok = "addLiquidity tx" in dep.stdout and "status=1" in dep.stdout
+            ok = (
+                dep.returncode == 0
+                and "addLiquidity tx" in dep.stdout
+                and "status=1" in dep.stdout
+                and "✅ LP position opened" in dep.stdout
+            )
             log_ledger({"ts": time.time(), "action": "compound", "amount_usd": deploy_usd,
                         "ok": ok, "dry_run": False, "allocation": target_share,
                         "alloc_source": alloc_source})
