@@ -89,16 +89,109 @@ def get_regime():
     return {"regime": "RANGE_BOUND", "lp": 40, "staking": 30, "hodl": 15, "lending": 15, "conf": 0.65}
 
 
+def _load_json(path, default=None):
+    try:
+        with open(path) as f:
+            return json.load(f)
+    except Exception:
+        return default
+
+
+def get_operations():
+    """Operating picture for the hub: rebalance history, compound activity,
+    fee/tier progression, council verdict, and a live activity feed."""
+    ops = {"rebalances": [], "compounds": [], "fees": {}, "council": {}, "activity": []}
+
+    # Rebalance history — from silence state (recent rebalance attempts)
+    silence = _load_json(
+        "/root/.hermes/profiles/gentech-treasury/scripts/.steward-silence-state.json")
+    if silence:
+        for key in ("rebalance", "auto-deploy"):
+            v = silence.get(key)
+            if isinstance(v, dict):
+                ops["rebalances"].append({
+                    "type": key,
+                    "since": v.get("since"),
+                    "resolved": v.get("resolved", False),
+                    "err": (v.get("err") or "")[:200],
+                })
+
+    # Compound activity — last 8 entries from the ledger
+    ledger = _load_json(
+        "/root/.hermes/profiles/gentech-treasury/scripts/.compound-ledger.json")
+    if isinstance(ledger, list):
+        for e in ledger[-8:]:
+            ops["compounds"].append({
+                "ts": e.get("ts"),
+                "action": e.get("action"),
+                "amount_usd": e.get("amount_usd"),
+                "ok": e.get("ok"),
+                "reasons": e.get("reasons", []),
+            })
+
+    # Fee / tier progression — from fee ledger + farm snapshot
+    fee_ledger = _load_json(
+        "/root/.hermes/profiles/gentech-treasury/scripts/.steward-fee-ledger.json")
+    if isinstance(fee_ledger, dict):
+        snaps = fee_ledger.get("snapshots", [])
+        if snaps:
+            ops["fees"]["last_total"] = snaps[-1].get("total_usd")
+            ops["fees"]["last_price"] = snaps[-1].get("price_usd")
+            ops["fees"]["snapshot_count"] = len(snaps)
+    farm = _load_json(
+        "/root/.hermes/profiles/gentech-treasury/scripts/.farm-snapshot.json")
+    if farm:
+        ops["fees"]["position_usd"] = farm.get("position_usd")
+        ops["fees"]["price"] = farm.get("price")
+
+    # Council verdict — from treasury-state.json
+    tstate = _load_json("/root/repos/gentechlabs.github.io/10-Labs/agent-kit-self-tracking/treasury-state.json")
+    if tstate:
+        ops["council"] = {
+            "mode": tstate.get("mode"),
+            "regime": (tstate.get("regime") or {}).get("value"),
+            "autonomy": (tstate.get("autonomy") or {}).get("granted"),
+        }
+
+    # Activity feed — merge rebalances + compounds into a chronological feed
+    for r in ops["rebalances"]:
+        ops["activity"].append({"kind": "rebalance", "type": r["type"],
+                                "since": r["since"], "resolved": r["resolved"]})
+    for c in ops["compounds"]:
+        ops["activity"].append({"kind": "compound", "action": c["action"],
+                                "ts": c["ts"], "amount_usd": c["amount_usd"],
+                                "ok": c["ok"]})
+    def _act_key(a):
+        ts = a.get("ts")
+        if isinstance(ts, (int, float)):
+            return ts
+        since = a.get("since")
+        if since:
+            try:
+                from datetime import datetime, timezone
+                return datetime.fromisoformat(since.replace("Z", "+00:00")).timestamp()
+            except Exception:
+                return 0.0
+        return 0.0
+
+    ops["activity"].sort(key=_act_key, reverse=True)
+    ops["activity"] = ops["activity"][:12]
+    return ops
+
+
 def main():
     pos = get_position()
     pool = get_pool()
     # AAE regime-driven allocation (from regime_classifier ground truth, Aug 11)
     alloc = get_regime()
+    # Operating picture for the hub (rebalances, compounds, fees, council, activity)
+    ops = get_operations()
     state = {
         "updated": datetime.now(timezone(timedelta(hours=-4))).isoformat(),
         "position": pos,
         "pool": pool,
         "allocation": alloc,
+        "operations": ops,
     }
     os.makedirs(os.path.dirname(STATE_FILE), exist_ok=True)
     with open(STATE_FILE, "w") as f:
