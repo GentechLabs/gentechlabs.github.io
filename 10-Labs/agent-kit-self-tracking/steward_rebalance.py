@@ -179,11 +179,21 @@ DEPLOY_EXEC_SCRIPT = os.environ.get(
 
 
 def has_deployable_capital() -> float:
-    """Return deployable USDC on the Steward wallet (0 if none / error).
+    """Return FULL deployable working capital (USD) on the Steward wallet
+    (0 if none / error).
 
     This is the trigger for the auto-deploy leg: a funded wallet with no live
     position means the treasury should open a fresh curve, not sit as dry
-    powder. Returns the USDC amount available to deploy.
+    powder. Returns the TOTAL deployable value.
+
+    FULL-CAPITAL fix (Sep 7 2026): this previously returned ONLY the USDC
+    balance. After a withdraw, the LP returns its natural WAVAX-heavy ratio,
+    so the wallet holds most value in WAVAX and little USDC. A USDC-only
+    check under-counted a WAVAX-heavy wallet (e.g. $25.7 total but $8 USDC),
+    so the gate `deployable >= DEPLOY_MIN_USDC (10)` failed and the watchdog
+    returned 'hold' -> a flat WAVAX-heavy pool could NEVER auto-deploy and
+    sat idle. The deploy script (gta_avax_lp_execute.py) swaps internally to
+    the 50/50 split, so it takes the full working value.
     """
     try:
         from discover_positions import get_erc20_balance
@@ -193,10 +203,23 @@ def has_deployable_capital() -> float:
             return 0.0
         # USDC on Avalanche C-Chain
         usdc_contract = "0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E"
-        raw = get_erc20_balance("avalanche", usdc_contract, wallet)
-        if raw is None:
+        raw_usdc = get_erc20_balance("avalanche", usdc_contract, wallet)
+        if raw_usdc is None:
             return 0.0
-        return raw / 1e6
+        usdc = raw_usdc / 1e6
+        # WAVAX too — value the full working capital, not just USDC
+        wavax_contract = "0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7"
+        raw_wavax = get_erc20_balance("avalanche", wavax_contract, wallet)
+        wavax = (raw_wavax / 1e18) if raw_wavax is not None else 0.0
+        # price — WAVAX USD market price for valuing the full working capital
+        try:
+            from discover_positions import fetch_asset_price
+            price = fetch_asset_price("WAVAX")
+        except Exception:
+            price = None
+        if not price or price <= 0:
+            price = 7.0  # last-resort estimate
+        return usdc + wavax * price
     except Exception:
         return 0.0
 

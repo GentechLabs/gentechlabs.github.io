@@ -1,18 +1,18 @@
 {
-  "updated": "2026-09-07T14:00:44.313598-04:00",
+  "updated": "2026-09-07T19:00:47.740241-04:00",
   "position": {
-    "read": "15 bins \u00b7 IN \u00b7 $8.1237 Y/X [8.0751\u20138.1889]",
+    "read": "15 bins \u00b7 IN \u00b7 $8.0671 Y/X [8.0028\u20138.1156]",
     "shape": "curve",
     "bins": 15,
-    "rangeLow": 8.075139,
-    "rangeHigh": 8.188929,
+    "rangeLow": 8.002825,
+    "rangeHigh": 8.115596,
     "inRange": true
   },
   "pool": {
-    "price": 8.1,
-    "chg24h": 6.39,
-    "vol24h": 1416821.95,
-    "liquidity": 705141.52
+    "price": 8.059,
+    "chg24h": 3.15,
+    "vol24h": 1151766.67,
+    "liquidity": 701656.23
   },
   "allocation": {
     "regime": "RANGE_BOUND",
@@ -23,10 +23,32 @@
     "lending": 15
   },
   "operations": {
-    "rebalances": [],
+    "rebalances": [
+      {
+        "type": "rebalance",
+        "since": "2026-09-07T22:52:50.997393+00:00",
+        "resolved": false,
+        "err": "\ud83d\udee1\ufe0f STEWARD EXECUTION \u2014 WITHDRAW-REDEPLOY\n  \u2705 APPROVE\n     already approved\n  \u2705 WITHDRAW\n     tx_hash: b3f786822056d2dc18de272b59140f409d9689832a8655aa088eae5b27b05f7d\n     gas_cost_usd: 0.00052\n  \u274c RE"
+      },
+      {
+        "type": "auto-deploy",
+        "since": "2026-09-07T22:53:41.045573+00:00",
+        "resolved": false,
+        "err": "     TX mined (status=1) but LP position not found on-chain.\n     Funds may be stuck in router. Manual investigation needed.\n"
+      }
+    ],
     "compounds": [
       {
-        "ts": 1788787952.8683922,
+        "ts": 1788817542.2817202,
+        "action": "skip",
+        "amount_usd": null,
+        "ok": null,
+        "reasons": [
+          "min-delay not elapsed (54min < 60min)"
+        ]
+      },
+      {
+        "ts": 1788818444.6596575,
         "action": "skip",
         "amount_usd": null,
         "ok": null,
@@ -35,7 +57,7 @@
         ]
       },
       {
-        "ts": 1788789095.6320086,
+        "ts": 1788819644.0205615,
         "action": "skip",
         "amount_usd": null,
         "ok": null,
@@ -44,7 +66,7 @@
         ]
       },
       {
-        "ts": 1788793900.3756137,
+        "ts": 1788820844.292575,
         "action": "skip",
         "amount_usd": null,
         "ok": null,
@@ -53,7 +75,7 @@
         ]
       },
       {
-        "ts": 1788795702.3544564,
+        "ts": 1788821079.3296723,
         "action": "skip",
         "amount_usd": null,
         "ok": null,
@@ -62,7 +84,7 @@
         ]
       },
       {
-        "ts": 1788795926.931106,
+        "ts": 1788821151.9271097,
         "action": "skip",
         "amount_usd": null,
         "ok": null,
@@ -71,7 +93,7 @@
         ]
       },
       {
-        "ts": 1788799302.3634515,
+        "ts": 1788821211.1597853,
         "action": "skip",
         "amount_usd": null,
         "ok": null,
@@ -80,16 +102,7 @@
         ]
       },
       {
-        "ts": 1788801702.239944,
-        "action": "skip",
-        "amount_usd": null,
-        "ok": null,
-        "reasons": [
-          "no live price"
-        ]
-      },
-      {
-        "ts": 1788802903.3323913,
+        "ts": 1788821603.5429683,
         "action": "skip",
         "amount_usd": null,
         "ok": null,
@@ -112,58 +125,70 @@
     },
     "activity": [
       {
+        "kind": "rebalance",
+        "type": "auto-deploy",
+        "since": "2026-09-07T22:53:41.045573+00:00",
+        "resolved": false
+      },
+      {
         "kind": "compound",
         "action": "skip",
-        "ts": 1788802903.3323913,
+        "ts": 1788821603.5429683,
+        "amount_usd": null,
+        "ok": null
+      },
+      {
+        "kind": "rebalance",
+        "type": "rebalance",
+        "since": "2026-09-07T22:52:50.997393+00:00",
+        "resolved": false
+      },
+      {
+        "kind": "compound",
+        "action": "skip",
+        "ts": 1788821211.1597853,
         "amount_usd": null,
         "ok": null
       },
       {
         "kind": "compound",
         "action": "skip",
-        "ts": 1788801702.239944,
+        "ts": 1788821151.9271097,
         "amount_usd": null,
         "ok": null
       },
       {
         "kind": "compound",
         "action": "skip",
-        "ts": 1788799302.3634515,
+        "ts": 1788821079.3296723,
         "amount_usd": null,
         "ok": null
       },
       {
         "kind": "compound",
         "action": "skip",
-        "ts": 1788795926.931106,
+        "ts": 1788820844.292575,
         "amount_usd": null,
         "ok": null
       },
       {
         "kind": "compound",
         "action": "skip",
-        "ts": 1788795702.3544564,
+        "ts": 1788819644.0205615,
         "amount_usd": null,
         "ok": null
       },
       {
         "kind": "compound",
         "action": "skip",
-        "ts": 1788793900.3756137,
+        "ts": 1788818444.6596575,
         "amount_usd": null,
         "ok": null
       },
       {
         "kind": "compound",
         "action": "skip",
-        "ts": 1788789095.6320086,
-        "amount_usd": null,
-        "ok": null
-      },
-      {
-        "kind": "compound",
-        "action": "skip",
-        "ts": 1788787952.8683922,
+        "ts": 1788817542.2817202,
         "amount_usd": null,
         "ok": null
       }
