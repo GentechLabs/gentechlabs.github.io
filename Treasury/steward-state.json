@@ -1,18 +1,18 @@
 {
-  "updated": "2026-09-07T07:39:57.309325-04:00",
+  "updated": "2026-09-07T08:00:38.995299-04:00",
   "position": {
-    "read": "15 bins \u00b7 IN \u00b7 $7.8601 Y/X [7.8053\u20137.9153]",
+    "read": "15 bins \u00b7 IN \u00b7 $7.8680 Y/X [7.8131\u20137.9232]",
     "shape": "curve",
     "bins": 15,
-    "rangeLow": 7.805332,
-    "rangeHigh": 7.91532,
+    "rangeLow": 7.813137,
+    "rangeHigh": 7.923235,
     "inRange": true
   },
   "pool": {
     "price": 7.86,
-    "chg24h": 2.22,
-    "vol24h": 1611436.29,
-    "liquidity": 698339.48
+    "chg24h": 2.33,
+    "vol24h": 1620435.9,
+    "liquidity": 698582.62
   },
   "allocation": {
     "regime": "RANGE_BOUND",
@@ -28,7 +28,7 @@
         "type": "rebalance",
         "since": "2026-09-07T11:22:41.748560+00:00",
         "resolved": false,
-        "err": "\ud83d\udee1\ufe0f STEWARD EXECUTION \u2014 WITHDRAW-REDEPLOY\n  \u2705 APPROVE\n     already approved\n  \u2705 WITHDRAW\n     tx_hash: e319c4bd4f3d6f57f14ba1651294969ca777609c717aebe93893c14d21a49e9d\n     gas_cost_usd: 0.000487\n  \u274c R"
+        "err": "\ud83d\udee1\ufe0f STEWARD EXECUTION \u2014 WITHDRAW-REDEPLOY\n  \u2705 APPROVE\n     already approved\n  \u2705 WITHDRAW\n     tx_hash: 4ff0a5e72dd890e8a052cc3f45547947aeb85977fed4bf2dbfc3fe9ad1b01798\n     gas_cost_usd: 0.000544\n  \u274c R"
       },
       {
         "type": "auto-deploy",
@@ -38,15 +38,6 @@
       }
     ],
     "compounds": [
-      {
-        "ts": 1788767320.2702065,
-        "action": "skip",
-        "amount_usd": null,
-        "ok": null,
-        "reasons": [
-          "no live price"
-        ]
-      },
       {
         "ts": 1788767499.4438188,
         "action": "skip",
@@ -108,6 +99,15 @@
         "reasons": [
           "no live price"
         ]
+      },
+      {
+        "ts": 1788781890.3485765,
+        "action": "skip",
+        "amount_usd": null,
+        "ok": null,
+        "reasons": [
+          "no live price"
+        ]
       }
     ],
     "fees": {
@@ -123,6 +123,13 @@
       "autonomy": true
     },
     "activity": [
+      {
+        "kind": "compound",
+        "action": "skip",
+        "ts": 1788781890.3485765,
+        "amount_usd": null,
+        "ok": null
+      },
       {
         "kind": "rebalance",
         "type": "auto-deploy",
@@ -181,13 +188,6 @@
         "kind": "compound",
         "action": "skip",
         "ts": 1788767499.4438188,
-        "amount_usd": null,
-        "ok": null
-      },
-      {
-        "kind": "compound",
-        "action": "skip",
-        "ts": 1788767320.2702065,
         "amount_usd": null,
         "ok": null
       }

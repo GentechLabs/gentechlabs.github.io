@@ -111,6 +111,27 @@ def read_position() -> Dict[str, Any]:
         return {"error": f"discovery failed: {e}"}
 
 
+def _settled_position(tries: int = 3, delay: float = 3.0) -> Dict[str, Any]:
+    """Settled LP read — beats the public RPC's 0-bin lag (pitfall #41).
+
+    A freshly-mined addLiquidity can read as 'no position' on the laggy public
+    Avalanche RPC. Re-reading up to `tries` times and returning the FIRST read
+    that shows a live position prevents a spurious auto-deploy when the pool
+    already has liquidity (the race that caused the destructive withdraw->fail
+    loop, Sep 7 2026). Returns the last read if none show a position.
+    """
+    last = {}
+    for i in range(tries):
+        last = read_position()
+        has_live = any(
+            "error" not in p for p in (last.get("positions") or []))
+        if has_live:
+            return last
+        if i < tries - 1:
+            time.sleep(delay)
+    return last
+
+
 def fee_efficiency(position: Dict[str, Any]) -> float:
     """CONTINUOUS fee efficiency (Jordan's soft-floor rule, Sep 3 2026).
 
@@ -242,10 +263,25 @@ def decide(position: Dict[str, Any], regime: Dict[str, str],
     regime_name = regime.get("regime", "UNKNOWN")
     shape = REGIME_SHAPE.get(regime_name, "CURVE")
 
-    # No live position -> nothing to act on
+    # No live position -> nothing to act on. But the public RPC can lag a
+    # freshly-mined addLiquidity and read '0 bins' (pitfall #41). Use a SETTLED
+    # re-read before trusting 'no position' — otherwise a laggy snapshot races a
+    # concurrent deployer and triggers a spurious auto-deploy (the destructive
+    # withdraw->fail loop, Sep 7 2026).
     has_live_pos = any(
         "error" not in p for p in (position.get("positions") or []))
     if "error" in position or not has_live_pos:
+        # Settled re-read: only auto-deploy if ALL reads confirm no position.
+        settled = _settled_position()
+        settled_live = any(
+            "error" not in p for p in (settled.get("positions") or []))
+        if settled_live:
+            # RPC lag — the pool actually has liquidity. Don't deploy; hold.
+            return {
+                "action": "hold", "shape": shape,
+                "reason": "position found on settled re-read — RPC lag, pool has liquidity",
+                "fee_eff": eff,
+            }
         # Auto-deploy leg (Jordan, Aug 20 2026): a funded wallet with no live
         # position means the treasury should open a fresh curve, not sit as
         # dry powder. Only deploy when there's real deployable capital AND
@@ -254,12 +290,12 @@ def decide(position: Dict[str, Any], regime: Dict[str, str],
         if deployable >= DEPLOY_MIN_USDC and gas_ok():
             return {
                 "action": "deploy", "shape": shape,
-                "reason": (f"funded wallet, no position — auto-deploy "
+                "reason": (f"funded wallet, no position (settled) — auto-deploy "
                            f"${deployable:.2f} USDC curve"), "fee_eff": eff,
             }
         return {
             "action": "hold", "shape": shape,
-            "reason": "no deployable position detected", "fee_eff": eff,
+            "reason": "no deployable position detected (settled)", "fee_eff": eff,
         }
 
     # Jordan's SOFT-FLOOR rule (Sep 3 2026): in range but fee capture weak

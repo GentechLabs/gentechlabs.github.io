@@ -254,6 +254,29 @@ def send_and_wait(w3, acct, fn, label: str) -> Dict[str, Any]:
     }
 
 
+def _settled_bins(w3, acct, tries: int = 3, delay: float = 3.0) -> int:
+    """Count LP bins with liquidity using a settled multi-read.
+
+    The public Avalanche RPC can lag a freshly-mined addLiquidity and return a
+    spurious '0 bins' (pitfall #41). Re-reading over a few seconds and taking
+    the max beats that lag, so the withdraw-redeploy verifier doesn't declare
+    failure (or success) off a single laggy snapshot.
+    """
+    best = 0
+    for _ in range(tries):
+        try:
+            bins = read_bin_balances(w3, acct.address)
+            if bins:
+                best = max(best, len(bins))
+        except Exception:
+            pass
+        if best >= 1:
+            # Found liquidity — no need to keep polling.
+            break
+        time.sleep(delay)
+    return best
+
+
 def _avax_usd() -> float:
     """AVAX/USD — chain-first (our LP's active bin IS the live oracle), CoinGecko backup.
     Returns 0.0 ONLY if both fail; the gas-check caller treats 0.0 as 'no price'
@@ -410,15 +433,55 @@ def step_redeploy(w3, acct, dry_run: bool, shape: str = "curve") -> Dict[str, An
         return {"ok": proc.returncode == 0, "label": "redeploy", "dry_run": True,
                 "stdout": proc.stdout[-600:], "stderr": proc.stderr[-200:]}
     import subprocess
-    amount = _redeploy_budget(w3, acct)
-    proc = subprocess.run(
-        [sys.executable, REDEPLOY_EXEC_SCRIPT,
-         "--amount", str(amount),
-         "--bin-spread", str(_redeploy_spread(shape)), "--execute", "--yes"],
-        capture_output=True, text=True, timeout=180)
-    ok = proc.returncode == 0 and "deployed" in proc.stdout.lower()
-    return {"ok": ok, "label": "redeploy", "dry_run": False,
-            "stdout": proc.stdout[-1000:], "stderr": proc.stderr[-300:]}
+    # SELF-HEAL redeploy (Sep 7 2026): the old path attempted the redeploy
+    # ONCE and gave up, leaving the pool flat after a successful withdraw.
+    # The next cycle then read "no position" and either re-withdrew nothing or
+    # raced a concurrent deployer — the destructive withdraw->fail loop we
+    # observed live (the watchdog kept killing the farm). Fix: retry the
+    # redeploy up to N times WITHIN this same cycle, re-reading the live wallet
+    # balance before each attempt (a concurrent deployer adds capital; a
+    # transient RPC revert shouldn't strand the pool). Between attempts, wait
+    # for the RPC to settle so a laggy "0 bins" read doesn't false-fail.
+    max_attempts = 3
+    attempts_log = []
+    for attempt in range(1, max_attempts + 1):
+        try:
+            amount = _redeploy_budget(w3, acct)
+        except Exception as e:
+            amount = None
+            attempts_log.append(f"attempt {attempt}: budget read failed ({e})")
+            break
+        if amount is None or amount < 1.0:
+            attempts_log.append(f"attempt {attempt}: working capital {amount} < $1 — nothing to deploy")
+            break
+        proc = subprocess.run(
+            [sys.executable, REDEPLOY_EXEC_SCRIPT,
+             "--amount", str(amount),
+             "--bin-spread", str(_redeploy_spread(shape)), "--execute", "--yes"],
+            capture_output=True, text=True, timeout=180)
+        ok = proc.returncode == 0 and "deployed" in (proc.stdout + proc.stderr).lower()
+        attempts_log.append(
+            f"attempt {attempt}: ${amount:.2f} → {'OK' if ok else 'FAIL'} "
+            f"({(proc.stderr or proc.stdout or '')[-160:].strip()})")
+        if ok:
+            # Settled-position confirm: the RPC can lag a freshly-mined LP.
+            # Multi-read over a few seconds to beat the 0-bin lag (pitfall #41).
+            bins = _settled_bins(w3, acct, tries=3, delay=3)
+            if bins > 0:
+                return {"ok": True, "label": "redeploy", "dry_run": False,
+                        "attempts": attempts_log, "bins": bins,
+                        "stdout": proc.stdout[-1000:], "stderr": proc.stderr[-300:]}
+            # Executor printed "deployed" but the settled read shows 0 bins
+            # (phantom-deploy risk): keep retrying rather than trust the print.
+            attempts_log.append(f"  ⚠️ print said deployed but settled read shows 0 bins — retry")
+            time.sleep(4 * attempt)  # backoff before retry (audit nit, Sep 7)
+            continue
+        # Transient failure — small backoff before the next try (RPC settle).
+        time.sleep(4 * attempt)
+    return {"ok": False, "label": "redeploy", "dry_run": False,
+            "attempts": attempts_log,
+            "stdout": "", "stderr": "redeploy failed after %d attempts: %s"
+                      % (max_attempts, " | ".join(attempts_log))}
 
 
 # ── Orchestrator ─────────────────────────────────────────────────────────

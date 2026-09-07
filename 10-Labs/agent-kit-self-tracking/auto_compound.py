@@ -116,20 +116,33 @@ def main():
     except Exception:
         reasons.append("no benchmark feed (lp-fees-live.json missing)")
 
-    # ── Guard 2: gas floor ───────────────────────────────────────────
+    # ── Guard 2: gas floor (cost-aware, no hard gate) ────────────────
+    # Jordan's philosophy (Sep 3 2026): NO hard gates. Calculate the actual
+    # tx cost ahead, keep that plus a ~20¢ buffer, and let the machine act.
+    # A fixed 0.10/0.14 AVAX floor parked real capital for hours (22:23 UTC
+    # lesson) — the wallet had 0.1118 AVAX, more than enough for a full
+    # withdraw-redeploy cycle (~0.036 AVAX worst case) + 20¢ buffer (~0.026).
     avax = int(rpc("eth_getBalance", [WALLET, "latest"]), 16) / 1e18
-    # Two-tier gas floor (Jordan's 0.1 rule of thumb, Sep 3 2026):
-    #   - hard floor 0.10 AVAX for ANY action (never leave less than this)
-    #   - full-cycle floor (GAS_FLOOR 0.14) applies to withdraw-redeploy,
-    #     which burns ~0.036 AVAX worst case. Plain swap/deploy legs cost
-    #     <0.0001 AVAX at current gas — blocking them on a 0.0001 rounding
-    #     miss parked capital for hours (22:23 UTC lesson).
-    hard_floor = 0.10
-    if avax < hard_floor:
-        reasons.append(f"gas below hard floor ({avax:.4f} < {hard_floor} AVAX)")
-    elif avax < GAS_FLOOR:
-        print(f"   ℹ️ gas {avax:.4f} < full-cycle floor {GAS_FLOOR}: swap/compound legs OK, "
-              f"withdraw-redeploy cycles blocked until topped up")
+    # Worst-case gas per action type (AVAX), measured on-chain:
+    #   swap/compound leg:  <0.0001 AVAX
+    #   withdraw-redeploy:  ~0.036 AVAX (full cycle, worst case)
+    # Keep the cost of the action + a ~20¢ buffer (~0.026 AVAX at ~$7.8).
+    GAS_COST_SWAP = 0.0001
+    GAS_COST_CYCLE = 0.036
+    GAS_BUFFER = 0.026   # ~20¢ at current AVAX price
+    # The most expensive action this engine can take is a full
+    # withdraw-redeploy cycle. If we can afford that + buffer, we can afford
+    # anything. Only block if we can't cover the cycle + buffer.
+    cycle_need = GAS_COST_CYCLE + GAS_BUFFER
+    if avax < cycle_need:
+        reasons.append(
+            f"gas {avax:.4f} < cycle cost {GAS_COST_CYCLE}+buffer {GAS_BUFFER} "
+            f"({cycle_need:.4f} AVAX) — top up ~${(cycle_need-avax)*7.8:.2f}")
+    else:
+        # We have enough for the full cycle + buffer. Log the headroom so the
+        # operator sees the machine is unblocked, not gated.
+        print(f"   ✅ gas {avax:.4f} AVAX ≥ cycle cost {GAS_COST_CYCLE}+buffer "
+              f"{GAS_BUFFER} ({cycle_need:.4f}) — full withdraw-redeploy unblocked")
 
     # ── Guard 3: rate limit ──────────────────────────────────────────
     try:
