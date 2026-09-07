@@ -106,6 +106,40 @@ def eth_call(chain: str, to: str, data: str) -> str:
     return rpc_call(chain, "eth_call", [{"to": to, "data": data}, "latest"])
 
 
+def _batch_eth_call(chain: str, to: str, bal_sel: str, addr_hex: str,
+                    bin_ids: list) -> list:
+    """Batch many balanceOf(addr, bin) reads into ONE JSON-RPC request.
+
+    Returns a list of int balances aligned with bin_ids. On any failure returns
+    all zeros (caller treats as 'no liquidity' — safe, never blocks discovery).
+    """
+    url = RPC_ENDPOINTS.get(chain)
+    if not url:
+        return [0] * len(bin_ids)
+    payload = [
+        {"jsonrpc": "2.0", "id": i, "method": "eth_call",
+         "params": [{"to": to, "data": bal_sel + addr_hex.zfill(64) + hex(b)[2:].zfill(64)}, "latest"]}
+        for i, b in enumerate(bin_ids)
+    ]
+    req = urllib.request.Request(
+        url, data=json.dumps(payload).encode(),
+        headers={"Content-Type": "application/json", "User-Agent": "GenTech/1.0"})
+    try:
+        with urllib.request.urlopen(req, timeout=20) as resp:
+            results = json.loads(resp.read())
+        by_id = {r.get("id"): r.get("result") for r in results}
+        out = []
+        for i in range(len(bin_ids)):
+            raw = by_id.get(i)
+            try:
+                out.append(int(raw, 16) if raw and raw != "0x" else 0)
+            except Exception:
+                out.append(0)
+        return out
+    except Exception:
+        return [0] * len(bin_ids)
+
+
 def _is_checksum_or_valid(addr: str) -> bool:
     if not addr or not isinstance(addr, str):
         return False
@@ -236,15 +270,15 @@ def read_lfj_v22_position(wallet: str, pool: Dict[str, Any], chain: str = "avala
         low = high = None
         # Auto-discovery must tolerate price drift: positions can sit far from
         # the current active bin. Start at ±20; if empty, widen to ±256.
+        # BATCH the bin reads into ONE JSON-RPC request (Sep 7 2026): a flat
+        # pool previously did 554 sequential eth_calls (41 + 513 bins) which
+        # hung past the watchdog's 180s timeout — so the auto-deploy never
+        # fired and the pool stayed flat. Batching turns that into 1 request.
         half_width = 20
         while True:
-            for offset in range(-half_width, half_width + 1):
-                bin_id = active + offset
-                data = bal_sel + addr_hex.zfill(64) + hex(bin_id)[2:].zfill(64)
-                try:
-                    b = int(eth_call(chain, pair, data), 16)
-                except Exception:
-                    continue
+            bin_ids = [active + offset for offset in range(-half_width, half_width + 1)]
+            reads = _batch_eth_call(chain, pair, bal_sel, addr_hex, bin_ids)
+            for bin_id, b in zip(bin_ids, reads):
                 if b > 0:
                     bins_with_liquidity += 1
                     p = _bin_price_lfj(bin_id, bin_step)
