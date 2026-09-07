@@ -21,12 +21,14 @@ Designed for no_agent cron (script=) or direct run.
 import json
 import os
 import sys
+import time
 import urllib.request
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, SCRIPT_DIR)
+STATE_DIR = "/root/.hermes/scripts"  # shared state dir (cmc_config.json etc.)
 
 # ── Shared treasury brain (Aug 21 2026) ─────────────────────────────────
 # The council is the ONLY body that recommends changing treasury mode. But a
@@ -111,11 +113,30 @@ def _price(symbol):
     cg = {"AVAX": "avalanche-2", "BTC": "bitcoin"}.get(symbol)
     if not cg:
         return None
+    # Primary: CoinGecko. Fallback (Sep 4, 2026): CMC — CoinGecko 429s were
+    # reading as "no price" votes in the council. CMC ids: BTC=1, AVAX=5805.
     try:
         url = f"https://api.coingecko.com/api/v3/simple/price?ids={cg}&vs_currencies=usd"
         req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0", "Accept": "application/json"})
         with urllib.request.urlopen(req, timeout=12) as r:
             return float(json.load(r)[cg]["usd"])
+    except Exception:
+        pass
+    try:
+        cmc_id = {"BTC": "1", "AVAX": "5805"}[symbol]
+        key = ""
+        try:
+            with open(os.path.join(STATE_DIR, "cmc_config.json")) as f:
+                key = json.load(f).get("coinmarketcap_api_key", "")
+        except Exception:
+            key = os.environ.get("CMC_API_KEY", "")
+        if not key:
+            return None
+        req = urllib.request.Request(
+            f"https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?id={cmc_id}&convert=USD",
+            headers={"X-CMC_PRO_API_KEY": key, "Accept": "application/json"})
+        with urllib.request.urlopen(req, timeout=12) as r:
+            return float(json.load(r)["data"][cmc_id]["quote"]["USD"]["price"])
     except Exception:
         return None
 
@@ -134,6 +155,11 @@ def _read_scanner():
     p = Path(SCRIPT_DIR) / ".gta-arb-state.json"
     try:
         if not p.exists():
+            return None
+        # Staleness gate (audit Aug 29): a 6-day-old scan showed as "basis live".
+        # No live scan data is better than stale data wearing a live label.
+        age_h = (time.time() - p.stat().st_mtime) / 3600
+        if age_h > 24:
             return None
         data = json.loads(p.read_text())
         return data.get("opportunities") or []
@@ -191,14 +217,240 @@ def _vote(name, emoji, stance, note, block=None):
     return f"{emoji} **{name}:** {stance} — {note}"
 
 
+def _executive_stance(reg, sent, dom, buy_blocks):
+    """The Fed-chair executive call: DOVISH / HAWKISH / CENTERED.
+
+    Jordan's frame (Sep 7 2026): with all the member data on the table, the
+    chair makes ONE executive decision on what rail / what strategy is best.
+    This is the 'improve the concept' piece — the council doesn't just report
+    consensus, it lands a directional stance that picks the rail.
+
+    Inputs are the directional members (regime, sentiment, dominance) plus the
+    buy-list blocks. Returns (stance, rail_call, strategy_call, rationale).
+    """
+    # ── Directional score: +1 risk-on, -1 risk-off, 0 neutral ──────────
+    score = 0
+    reasons = []
+
+    # Regime
+    r = (reg or {}).get("regime", "").upper()
+    if r in ("BULL_TRENDING", "ACCUMULATION"):
+        score += 1
+        reasons.append(f"regime {r.replace('_',' ').title()} = risk-on")
+    elif r in ("BEAR_TRENDING", "HIGH_VOLATILITY"):
+        score -= 1
+        reasons.append(f"regime {r.replace('_',' ').title()} = risk-off")
+    else:  # RANGE_BOUND / PRICE_DISCOVERY / UNKNOWN
+        reasons.append(f"regime {r.replace('_',' ').title() or 'UNKNOWN'} = neutral")
+
+    # Sentiment
+    s = (sent or {}).get("read") or (sent or {}).get("signals", {}).get("read") or ""
+    s_low = s.lower()
+    if "risk-on" in s_low or "bull" in s_low:
+        score += 1
+        reasons.append("sentiment risk-on/bull")
+    elif "risk-off" in s_low or "bear" in s_low:
+        score -= 1
+        reasons.append("sentiment risk-off/bear")
+    else:
+        reasons.append("sentiment neutral/mixed")
+
+    # Dominance (alt-season trigger): falling BTC dominance = risk-on alts
+    if dom is not None:
+        trend = dom.get("trend", "n/a")
+        if trend == "▼":
+            score += 1
+            reasons.append("BTC dominance falling = alt-season risk-on")
+        elif trend == "▲":
+            score -= 1
+            reasons.append("BTC dominance rising = flight to BTC, risk-off alts")
+
+    # Buy-list blocks: how many coins are in accumulate/deep-value (green)
+    # vs extended (red). A board heavy in accumulate zones = value = risk-on.
+    greens = sum(1 for b in buy_blocks if b == "green")
+    reds = sum(1 for b in buy_blocks if b == "red")
+    if greens > reds:
+        score += 1
+        reasons.append(f"{greens} buy-list coins in value zones vs {reds} extended")
+    elif reds > greens:
+        score -= 1
+        reasons.append(f"{reds} buy-list coins extended vs {greens} in value")
+
+    # ── Map score to stance ─────────────────────────────────────────────
+    if score >= 2:
+        stance = "🕊️ DOVISH"
+        rail_call = "Growth rails — AVAX LFJ farm + SOL Meteora; accumulate value zones"
+        strategy_call = "FARM > trade, deploy dry powder into value, widen for upside"
+    elif score <= -2:
+        stance = "🦅 HAWKISH"
+        rail_call = "Defensive — USDC dry powder, safe-haven HOLD (gold/BTC), reduce LP"
+        strategy_call = "TRADE > farm, tighten stops, keep powder dry for the dip"
+    else:
+        stance = "⚖️ CENTERED"
+        rail_call = "Hold current rail — stay the course, maintain the farm"
+        strategy_call = "Watch — no new deploys, let the farm earn, wait for a clearer signal"
+
+    return stance, rail_call, strategy_call, "; ".join(reasons)
+
+
+def _strategy_recommendation(stance, reg, vol=None):
+    """The council's deploy strategy: shape + bin count + allocation split.
+
+    Jordan's frame (Sep 7 2026): the spread and split are INTELLIGENCE, not
+    constants. The council decides how wide to be and which way to lean based
+    on stance + volatility, so the treasury stays in range all day and earns
+    a good amount.
+
+    Shape semantics (shape-semantics skill): CURVE earns from chop inside a
+    range; BID_ASK captures directional movement. The split is the direction
+    bet — USDC-heavy (70-30) sells into strength as price climbs; WAVAX-heavy
+    (30-70) buys the dip.
+
+    Returns dict: {shape, bins, split, split_label, rationale}.
+    """
+    r = (reg or {}).get("regime", "").upper()
+    # Volatility proxy: if we have a vol %, use it; else infer from regime.
+    if vol is None:
+        vol = 0.0
+        if r in ("HIGH_VOLATILITY", "PRICE_DISCOVERY"):
+            vol = 0.35
+        elif r in ("BULL_TRENDING", "BEAR_TRENDING"):
+            vol = 0.20
+        else:  # RANGE_BOUND / ACCUMULATION
+            vol = 0.10
+
+    # ── Shape: directional stance → BID_ASK, neutral → CURVE ────────────
+    if "DOVISH" in stance:
+        shape = "BID_ASK"          # risk-on, catch the up-move
+    elif "HAWKISH" in stance:
+        shape = "BID_ASK"          # risk-off, catch the down-move
+    else:
+        shape = "CURVE"            # centered, harvest chop
+
+    # ── Bin count: wider with volatility, tighter when calm ────────────
+    # Jordan's targets: curve 11-25 bins, bid-ask a bit higher (~30).
+    # Calm → tight (concentrate, earn more per bin). Choppy → wide (stay in
+    # range, don't get knocked out on a small wiggle).
+    if shape == "CURVE":
+        if vol < 0.15:
+            bins = 11          # calm — tight, max per-bin fee capture
+        elif vol < 0.30:
+            bins = 15          # moderate — balanced
+        else:
+            bins = 21          # choppy — wide, stay in range
+    else:  # BID_ASK
+        if vol < 0.15:
+            bins = 15
+        elif vol < 0.30:
+            bins = 21
+        else:
+            bins = 25          # up to ~25 for bid-ask in high vol
+
+    # ── Split: the direction bet ───────────────────────────────────────
+    # 50-50 normal (even both sides). CORRECTED Sep 7 2026 (Jordan caught it):
+    # in AVAX/USDC, tokenX=WAVAX, tokenY=USDC, price=USDC per WAVAX. When price
+    # RISES, the active bin moves up and the pool converts WAVAX→USDC in the
+    # bins crossed. So WAVAX-heavy (30-70 USDC) SELLS into strength (locks
+    # gains as AVAX climbs); USDC-heavy (70-30) ACCUMULATES AVAX on the way up.
+    if "DOVISH" in stance:
+        split = 0.30            # 30-70 WAVAX-heavy — sell into the rally
+        split_label = "30-70 (WAVAX-heavy — sell into strength)"
+    elif "HAWKISH" in stance:
+        split = 0.70            # 70-30 USDC-heavy — accumulate AVAX on the dip
+        split_label = "70-30 (USDC-heavy — accumulate on the dip)"
+    else:
+        split = 0.50            # 50-50 normal — even both sides
+        split_label = "50-50 (even — normal conditions)"
+
+    rationale = (
+        f"{shape} {bins} bins, {split_label}. "
+        f"Vol proxy {vol:.0%} → {'wide to stay in range' if vol >= 0.30 else 'tight to concentrate' if vol < 0.15 else 'balanced'}."
+    )
+    return {
+        "shape": shape, "bins": bins, "split": split,
+        "split_label": split_label, "rationale": rationale,
+    }
+
+
+def _rail_recommendation(stance, reg, liquidity=None):
+    """The council's RAIL decision: which chain/pool to farm + whether to trade.
+
+    Jordan's frame (Sep 7 2026): the treasury should farm where liquidity is
+    best and trade where the trend is. AVAX (LFJ) and SOL (Meteora) are the top
+    two rails. Solana has more liquidity coming in than Avalanche — so if the
+    goal is $200/day, the Solana pool may be the better farm, with AVAX traded
+    (or leveraged) on the side.
+
+    liquidity: optional dict {avax_liq, sol_liq, avax_vol, sol_vol} in USD.
+    If None, uses regime + stance heuristics.
+
+    Returns dict: {rail, farm, trade, rationale}.
+    """
+    r = (reg or {}).get("regime", "").upper()
+    # Liquidity proxy: if not provided, infer from regime/stance.
+    if liquidity is None:
+        # Default: AVAX is the live rail (already funded + farming). SOL is
+        # the higher-liquidity alternative (Jordan's read: more liquidity
+        # coming in than AVAX).
+        sol_liq = 1.0
+        avax_liq = 0.8
+        if r in ("BULL_TRENDING", "ACCUMULATION"):
+            sol_liq = 1.2   # SOL benefits more in a bull (higher beta)
+        liquidity = {"avax_liq": avax_liq, "sol_liq": sol_liq}
+
+    sol_liq = liquidity.get("sol_liq", 0)
+    avax_liq = liquidity.get("avax_liq", 0)
+
+    # ── Farm rail: where liquidity is best ────────────────────────────
+    # If SOL has materially more liquidity, farm SOL (Meteora) and trade AVAX.
+    # Otherwise keep farming AVAX (LFJ) — it's live and proven.
+    if sol_liq > avax_liq * 1.15:   # SOL >15% more liquid
+        farm = "SOL (Meteora)"
+        trade = "AVAX (LFJ spot/perp)"
+        rail = "SOL-farm + AVAX-trade"
+        rationale = (f"Solana liquidity {sol_liq:.1f} vs Avalanche {avax_liq:.1f} "
+                     f"(+{(sol_liq/avax_liq-1)*100:.0f}%) — farm SOL for the "
+                     f"$200/day goal, trade AVAX on the side")
+    else:
+        farm = "AVAX (LFJ)"
+        trade = "SOL (Meteora spot/perp)"
+        rail = "AVAX-farm + SOL-trade"
+        rationale = (f"Avalanche liquidity {avax_liq:.1f} vs Solana {sol_liq:.1f} — "
+                     f"keep farming AVAX (live + proven), trade SOL on the side")
+
+    # ── Direction: in a bull, lean into the trade leg ─────────────────
+    if "DOVISH" in stance:
+        trade += " — long bias, sell into strength"
+    elif "HAWKISH" in stance:
+        trade += " — defensive, keep powder dry"
+
+    return {"rail": rail, "farm": farm, "trade": trade, "rationale": rationale}
+
+
 def _read_market_sentiment():
     """Read the weekly market-sentiment radar (narrative rotation renamed Aug
     2026): the overall bull/bear stance + top rotations + macro thermometer.
     Returns dict or None. Source: DeFi/rainbow/market-sentiment.json (the
     market-sentiment.py cron output)."""
     for p in (
-        "/root/repos/ProtoJay4789.github.io/DeFi/rainbow/market-sentiment.json",
-        os.path.join(SCRIPT_DIR, "..", "..", "ProtoJay4789.github.io", "DeFi", "rainbow", "market-sentiment.json"),
+        "/root/repos/gentechlabs.github.io/DeFi/rainbow/market-sentiment.json",  # live checkout (repos/ path was dead — audit Aug 29)
+        "/root/.hermes/profiles/gentech-treasury/scripts/market-sentiment.json",
+    ):
+        try:
+            with open(p) as f:
+                return json.load(f)
+        except Exception:
+            continue
+    return None
+
+
+def _read_lp_position():
+    """Read the live LP farm position (the Fused Command Center's layer_lp,
+    folded into the council Sep 7 2026). Source: the yield-rainbow feed the
+    yield-rainbow.py cron writes every 30min. Returns a dict or None."""
+    for p in (
+        "/var/www/gentechlabs/yield-rainbow-data.json",  # live source (audit Aug 29)
+        "/root/.hermes/profiles/gentech-treasury/scripts/yield-rainbow-data.json",
     ):
         try:
             with open(p) as f:
@@ -265,9 +517,35 @@ def main():
     if cap is None:
         L.append(_vote("Gate", "🟡", "UNCERTAIN", "gate read failed — assume funded", "amber"))
     elif cap:
-        L.append(_vote("Gate", "🟢", "FUNDED", f"dry powder present (${val:,.2f})", "green"))
+        # Fail-safe inf = on-chain read failed. Say so honestly (audit Aug 29:
+        # "$inf" printed as if it were a real dollar amount).
+        if val == float("inf"):
+            valstr = "on-chain read failed — assumed funded"
+        else:
+            valstr = f"${val:,.2f}"
+        L.append(_vote("Gate", "🟢", "FUNDED", f"dry powder present ({valstr})", "green"))
     else:
         L.append(_vote("Gate", "🔴", "FLAT", f"no deployable capital (${val:,.2f})", "red"))
+
+    # ── Member: LP Position (folded from Fused Command Center, Sep 7 2026) ──
+    lp = _read_lp_position()
+    if lp:
+        pos = lp.get("position", {})
+        met = lp.get("metrics", {})
+        band = lp.get("currentBand", {})
+        price = pos.get("currentPrice", 0)
+        eff = met.get("efficiency", 0)
+        low, high = pos.get("rangeLow", 0), pos.get("rangeHigh", 0)
+        in_range = "IN" if low <= price <= high else "OUT"
+        band_emoji = band.get("emoji", "❓")
+        pos_usd = pos.get("positionUsd", 0)
+        block = "green" if in_range == "IN" and eff >= 60 else ("red" if eff == 0 else None)
+        note = f"{in_range} · {eff:.0f}% eff · {band_emoji}{band.get('name','')}"
+        if pos_usd:
+            note += f" · ${pos_usd:.2f}"
+        L.append(_vote("LP Position", "💼", f"${price:.2f}", note, block))
+    else:
+        L.append(_vote("LP Position", "💼", "NO DATA", "yield-rainbow feed unavailable", None))
 
     # ── Member: Buy List (AVAX + BTC) ────────────────────────────────────
     for sym, zones in BUY_ZONES.items():
@@ -351,11 +629,64 @@ def main():
     L.append(f"**{v}:** {msg}")
     L.append("")
 
+    # ── The Chair's executive call: DOVISH / HAWKISH / CENTERED ─────────
+    # Jordan's frame (Sep 7 2026): with all the member data on the table, the
+    # chair makes ONE executive decision on what rail / what strategy is best.
+    # This is the 'improve the concept' piece — the council lands a directional
+    # stance, not just a consensus label.
+    _buy_blocks = [v["block"] for v in _VERDICTS
+                   if v["name"].startswith("Buy List")]
+    _stance, _rail, _strat, _why = _executive_stance(reg, sent, dom, _buy_blocks)
+    L.append("━━━ 🏛️ EXECUTIVE STANCE ━━━")
+    L.append(f"**{_stance}** — the chair's call on the data")
+    L.append(f"   🛤️ Rail: {_rail}")
+    L.append(f"   🧭 Strategy: {_strat}")
+    L.append(f"   📊 Why: {_why}")
+    # ── Rail decision (Sep 7 2026): farm where liquidity is best, trade the trend ──
+    try:
+        _rail_rec = _rail_recommendation(_stance, reg)
+        L.append(f"   🚂 Rail decision: {_rail_rec['rail']}")
+        L.append(f"      Farm: {_rail_rec['farm']} | Trade: {_rail_rec['trade']}")
+        L.append(f"      {_rail_rec['rationale']}")
+    except Exception:
+        pass
+    L.append("")
+
     # ── The Chair rules: mode recommendation (Aug 21 2026) ───────────────
     # The council is the brain. Based on the regime + verdict, it decides the
     # treasury MODE. SAFE maintenance modes auto-apply (they just re-target the
     # farm). TRADE / DRY_POWDER write a PENDING request that needs Jordan's go.
     cur_mode = get_mode()
+
+    # Surface any open mode request at EVERY meeting until resolved (audit Aug 29:
+    # a TRADE request sat pending 3 days because later meetings read a different
+    # regime, hit the "unchanged" branch, and never re-asked Jordan).
+    try:
+        _pend = (load_state() or {}).get("pending_mode") or {}
+    except Exception:
+        _pend = {}
+    if _pend.get("mode") and _pend.get("mode") != cur_mode:
+        try:
+            _age_h = (datetime.now(timezone.utc) -
+                      datetime.fromisoformat(str(_pend.get("requested_at")))).total_seconds() / 3600
+        except Exception:
+            _age_h = -1
+        if _age_h > 168:
+            try:
+                _data = load_state() or {}
+                _data.pop("pending_mode", None)
+                with open(_ts.STATE_PATH, "w") as _f:
+                    json.dump(_data, _f, indent=2)
+                L.append(f"🧹 Stale mode request cleared: **{_pend['mode']}** (pending since "
+                         f"{str(_pend.get('requested_at', ''))[:10]}, never confirmed).")
+            except Exception:
+                L.append(f"🧹 Stale mode request: **{_pend['mode']}** (pending >7d) — needs manual clear.")
+        else:
+            L.append(f"⏳ **PENDING MODE REQUEST: {_pend['mode']}** — awaiting Jordan since "
+                     f"{str(_pend.get('requested_at', ''))[:10]} ({_pend.get('reason', '')}). "
+                     f"Confirm or dismiss to clear.")
+        L.append("")
+
     reg = _read_regime() or _live_regime() or {}
     regime_value = reg.get("regime", "UNKNOWN").upper()
     rec_mode = REGIME_MAINTENANCE.get(regime_value, "YIELD_FARM")
@@ -402,6 +733,44 @@ def main():
         pass
 
     L.append("📜 Minutes → `Treasury/Strategy-Journal/` (this meeting's reads + verdict)")
+
+    # ── TRUTH LAYER (fresh-truth audit, Aug 31 2026) ────────────────────
+    # The closing line CLAIMED minutes were written; nothing wrote them. A
+    # council without minutes has no memory — every meeting restarted cold.
+    # Also feeds the Steward decision journal, which the 4-hourly Decisions
+    # Report reads (that report went 9 days silent while claiming "ok").
+    minutes_path = None
+    try:
+        from pathlib import Path as _P
+        _jdir = _P("/root/vaults/gentech/Treasury/Strategy-Journal")
+        _jdir.mkdir(parents=True, exist_ok=True)
+        _ts = datetime.now(timezone.utc)
+        minutes_path = _jdir / f"{_ts:%Y-%m-%d}-council-{_ts:%H%M}.md"
+        minutes_path.write_text(
+            "# Steward Council — " + _ts.strftime("%Y-%m-%d %H:%M UTC") + "\n\n"
+            + "\n".join(L) + "\n", encoding="utf-8")
+        L.append(f"   ✍️ (minutes actually written this time: {minutes_path.name})")
+    except Exception:
+        L.append("   ⚠️ minutes write FAILED — council memory at risk")
+    # Decision journal feed: every meeting is a decision point; log it so the
+    # Decisions Report (4h) always has fresh material and stays provably alive.
+    try:
+        import subprocess as _sp
+        _verdict = next((l for l in L if "CONSENSUS" in l or "MIXED" in l or "DISSENT" in l), "")
+        _entry = {
+            "action": "COUNCIL_MEETING",
+            "symbol": "treasury",
+            "rationale": (_verdict.strip() or "council met; verdict recorded")[:400],
+            "data": {"minutes": str(minutes_path) if minutes_path else None},
+        }
+        _r = _sp.run(["python3",
+                      "/root/repos/gentechlabs.github.io/10-Labs/agent-kit-self-tracking/steward_decisions.py",
+                      "--log", json.dumps(_entry)],
+                     capture_output=True, text=True, timeout=20)
+        if _r.returncode != 0:
+            sys.stderr.write(f"[journal] council log failed: {_r.stderr.strip()[:200]}\n")
+    except Exception:
+        pass
 
     print("\n".join(L))
 
