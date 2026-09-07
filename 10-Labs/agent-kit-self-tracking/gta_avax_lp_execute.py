@@ -497,52 +497,61 @@ def main():
             print("  ❌ TX REVERTED!", file=sys.stderr); sys.exit(1)
 
         # 3. Verify position on-chain (balance drop + position scan)
-        print("\n🔍 Verifying position...")
-        new_usdc = usdc.functions.balanceOf(acct.address).call()/1e6
-        new_wavax = wavax.functions.balanceOf(acct.address).call()/1e18
-        usdc_dropped = usdc_bal - new_usdc
-        wavax_dropped = wavax_bal - new_wavax
-        print(f"  USDC after: ${new_usdc:.2f} (was ${usdc_bal:.2f}, dropped ${usdc_dropped:.2f})")
-        print(f"  WAVAX after: {new_wavax:.6f} (was {wavax_bal:.6f}, dropped {wavax_dropped:.6f})")
-
-        # Verify the LP position actually exists by probing the pair's bins.
-        # A successful addLiquidity MUST leave liquidity in the pair's bins
-        # around the active id. If balances dropped but no liquidity appears,
-        # the tx mined but the position wasn't created (revert-style failure).
+        # SETTLED VERIFY (Sep 7 2026): the public Avalanche RPC lags a
+        # freshly-mined addLiquidity — reading balances/bins immediately after
+        # the receipt can show stale balances (0 drop) and 0 bins, falsely
+        # reporting "NOT verified / funds may be stuck" right after a GOOD
+        # deploy (happened live — alarmed Jordan, funds were fine, RPC lag).
+        # Re-read up to 3x ~3s apart, accepting verification on ANY read that
+        # shows the position (bins>0) or a real balance drop. Only after all
+        # settled reads fail do we declare it a genuine problem.
+        print("\n🔍 Verifying position (settled re-read)...")
         verified = False
-        try:
-            bal_sel = "0x00fdd58e"  # balanceOf(address,uint256)
-            addr_hex = acct.address.lower().replace("0x", "")
+        verify_msgs = []
+        for vtry in range(3):
+            new_usdc = usdc.functions.balanceOf(acct.address).call()/1e6
+            new_wavax = wavax.functions.balanceOf(acct.address).call()/1e18
+            usdc_dropped = usdc_bal - new_usdc
+            wavax_dropped = wavax_bal - new_wavax
+            bal_dropped = (usdc_dropped > 0.50 and wavax_dropped > 0.01)
+            # Probe bins (settled) for the LP position
             found_liquidity = 0
-            for offset in range(-args.bin_spread - 2, args.bin_spread + 3):
-                bin_id = active_id + offset
-                data = bal_sel + addr_hex.zfill(64) + hex(bin_id)[2:].zfill(64)
-                try:
-                    b = int(w3.eth.call({'to': Web3.to_checksum_address(LBPAIR), 'data': data}), 16)
-                except Exception:
-                    continue
-                if b > 0:
-                    found_liquidity += 1
-            if found_liquidity >= args.bin_spread:
+            try:
+                bal_sel = "0x00fdd58e"
+                addr_hex = acct.address.lower().replace("0x", "")
+                for offset in range(-args.bin_spread - 2, args.bin_spread + 3):
+                    bin_id = active_id + offset
+                    data = bal_sel + addr_hex.zfill(64) + hex(bin_id)[2:].zfill(64)
+                    try:
+                        b = int(w3.eth.call({'to': Web3.to_checksum_address(LBPAIR), 'data': data}), 16)
+                    except Exception:
+                        continue
+                    if b > 0:
+                        found_liquidity += 1
+            except Exception as e:
+                verify_msgs.append(f"attempt {vtry+1}: bin scan error {e}")
+            bins_ok = found_liquidity >= args.bin_spread
+            verify_msgs.append(
+                f"attempt {vtry+1}: bins={found_liquidity} "
+                f"USDC_drop=${usdc_dropped:.2f} WAVAX_drop={wavax_dropped:.4f}")
+            if bins_ok:
                 verified = True
                 print(f"  ✅ {found_liquidity} bins with liquidity confirmed on-chain")
-            else:
-                print(f"  ⚠️ Only {found_liquidity} bins with liquidity (expected >={args.bin_spread})")
-        except Exception as e:
-            print(f"  ⚠️ Position scan failed: {e} — falling back to balance check")
+                break
+            if bal_dropped:
+                # balances moved — the tx went through (fallback)
+                verified = True
+                print(f"  ✅ Balance moved: USDC -${usdc_dropped:.2f}, WAVAX -{wavax_dropped:.4f}")
+                break
+            if vtry < 2:
+                time.sleep(3)  # let the RPC settle before declaring failure
+        print(f"  {verify_msgs[-1] if verify_msgs else 'n/a'}")
 
         if not verified:
-            # Fallback: if both balances dropped meaningfully, accept it.
-            # This catches the case where the pair contract is dead but the
-            # router actually succeeded (rare — seen in compound 15:45).
-            if usdc_dropped > 0.50 and wavax_dropped > 0.01:
-                print(f"  ✅ Balance-based verification: USDC -${usdc_dropped:.2f}, WAVAX -{wavax_dropped:.6f}")
-                verified = True
-            else:
-                print(f"  ❌ Position NOT verified — USDC dropped ${usdc_dropped:.2f}, WAVAX dropped {wavax_dropped:.6f}")
-                print(f"     TX mined (status=1) but LP position not found on-chain.", file=sys.stderr)
-                print(f"     Funds may be stuck in router. Manual investigation needed.", file=sys.stderr)
-                sys.exit(1)
+            # All settled reads failed to show the position or a balance drop.
+            print(f"  ❌ Position NOT verified after 3 settled reads — funds may be stuck.", file=sys.stderr)
+            print(f"     Manual investigation needed.", file=sys.stderr)
+            sys.exit(1)
 
         print("\n✅ LP position opened! Funds deployed.")
         return
