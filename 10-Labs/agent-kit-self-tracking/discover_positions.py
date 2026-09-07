@@ -199,12 +199,37 @@ def read_lfj_v22_position(wallet: str, pool: Dict[str, Any], chain: str = "avala
     if not _is_checksum_or_valid(wallet) or not _is_checksum_or_valid(pair):
         return {"error": "invalid address", "name": pool.get("name")}
 
+    active = None
     try:
         active_raw = eth_call(chain, pair, "0xdbe65edc")  # getActiveId()
         active = int(active_raw, 16) if active_raw and active_raw != "0x" else None
-        if active is None:
-            return {"error": "could not read active bin", "name": pool.get("name")}
+    except Exception:
+        pass
 
+    # When the pair contract is dead on-chain (reverts on public RPCs),
+    # fall back to DexScreener to derive the active bin from the price.
+    if active is None:
+        try:
+            import urllib.request, math
+            req = urllib.request.Request(
+                f"https://api.dexscreener.com/latest/dex/pairs/avalanche/{pair}",
+                headers={"User-Agent": "Mozilla/5.0"})
+            with urllib.request.urlopen(req, timeout=10) as resp:
+                d = json.loads(resp.read())
+                if d.get("pairs"):
+                    ds_price = float(d["pairs"][0].get("priceUsd") or 0)
+                    if ds_price > 0:
+                        ratio = ds_price / 10**12
+                        base = 1 + bin_step / 10000
+                        active = round(math.log(ratio, base)) + LFJ_SHIFT
+        except Exception:
+            pass
+
+    if active is None:
+        return {"error": "could not read active bin", "name": pool.get("name"),
+                "livePriceUsd": fetch_asset_price(tokenX)}
+
+    try:
         bal_sel = "0x00fdd58e"  # balanceOf(address,uint256)
         addr_hex = wallet.lower().replace("0x", "")
         bins_with_liquidity = 0
