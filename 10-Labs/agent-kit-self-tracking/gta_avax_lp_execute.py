@@ -157,19 +157,41 @@ def get_wavax_market_price():
             continue
     return None
 
-def curve_dist_from_range(active_id, spread):
-    """Gaussian curve distribution that LFJ accepts. Same logic as
-    deploy_lp_curve.py: each bin gets a non-zero share and the array sums to
-    exactly 1e18 (100%), or LFJ reverts with ZeroShares.
+def curve_dist_from_range(active_id, spread, distribution="gaussian"):
+    """Distribution of liquidity across bins that LFJ accepts. Each bin gets a
+    non-zero share and the array sums to exactly 1e18 (100%), or LFJ reverts
+    with ZeroShares.
+
+    distribution:
+      "gaussian" — narrow Gaussian (sigma 1.4/1.7). Concentrates at active bin
+                   (max fee capture in tight chop) but STARVES tail bins, so
+                   wide spreads revert on LBPair__ZeroShares (sub-wei tail).
+      "flat"     — wide-sigma curve (sigma scales with spread). Keeps tail bins
+                   funded so wider spreads (15-25 bins curve, ~30 bid-ask) pass
+                   the router. Slightly less per-bin concentration but stays in
+                   range longer and survives small price moves.
+
+    The router has NO hard spread cap (verified in LBRouter.sol/LBPair.sol
+    2026-09-07) — the only constraint is LBPair__ZeroShares: ANY bin with
+    sub-wei shares reverts the whole tx. So spread width is bounded by how much
+    capital lands in the tail bins, which the distribution controls.
     """
     import math
     neg_ids = [-1*(el+1) for el in range(spread)]
     pos_ids = [el+1 for el in range(spread)]
-    RX = len(pos_ids); sigmaX = 1.7 if RX >= 10 else 1.4
+    if distribution == "flat":
+        # Wide-sigma: sigma scales with spread so tail bins stay funded.
+        # sigma = max(1.4, spread * 0.45) keeps the curve flat enough that the
+        # tail bin gets a meaningful share at any spread.
+        sigmaX = max(1.4, spread * 0.45)
+        sigmaY = max(1.4, spread * 0.45)
+    else:
+        sigmaX = 1.7 if len(pos_ids) >= 10 else 1.4
+        sigmaY = 1.7 if len(neg_ids) >= 10 else 1.4
     AX = 1/(math.sqrt(math.pi*2)*sigmaX)
     distX = [0]*len(neg_ids) + [AX] + [2*AX*math.exp(-0.5*((ind+1)/sigmaX)**2) for ind in range(len(pos_ids))]
-    RY = len(neg_ids); sigmaY = 1.7 if RY >= 10 else 1.4
     AY = 1/(math.sqrt(math.pi*2)*sigmaY)
+    RY = len(neg_ids)
     distY = [2*AY*math.exp(-0.5*((RY-ind)/sigmaY)**2) for ind in range(len(neg_ids))] + [AY] + [0]*len(pos_ids)
     dx = [int(round(x*1e18)) for x in distX]
     dy = [int(round(y*1e18)) for y in distY]
@@ -188,11 +210,11 @@ def curve_dist_from_range(active_id, spread):
     return _norm(dx), _norm(dy)
 
 
-def build_liquidity_params(amount_usd, bin_spread, active_id, price, allocation_ratio=0.5):
+def build_liquidity_params(amount_usd, bin_spread, active_id, price, allocation_ratio=0.5, distribution="flat"):
     usdc_amount = amount_usd * allocation_ratio
     wavax_amount = (amount_usd * (1.0 - allocation_ratio)) / price
     delta_ids = list(range(-bin_spread, bin_spread + 1))
-    distX, distY = curve_dist_from_range(active_id, bin_spread)
+    distX, distY = curve_dist_from_range(active_id, bin_spread, distribution)
     return {
         "tokenX": Web3.to_checksum_address(WAVAX),
         "tokenY": Web3.to_checksum_address(USDC),
