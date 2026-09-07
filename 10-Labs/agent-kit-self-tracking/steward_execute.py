@@ -122,7 +122,19 @@ def _redeploy_budget(w3, acct, include_position: bool = False) -> float:
             except Exception:
                 pass
         if working >= 1.0:
-            return round(working - 0.10, 2)  # dust buffer stays out
+            # SPLIT-SAFE budget (Sep 7 2026): the deploy rail splits the amount
+            # 50/50 (USDC half + WAVAX half). If the USDC half exceeds the
+            # actual USDC balance, addLiquidity reverts with "ERC20: transfer
+            # amount exceeds balance" — the recurring flat-pool bug. Cap the
+            # budget so BOTH halves fit the real balances:
+            #   USDC half  = budget * 0.5  <= usdc
+            #   WAVAX half = budget * 0.5 / price <= wavax
+            # => budget <= 2*usdc AND budget <= 2*wavax*price.
+            cap_usdc = 2.0 * usdc
+            cap_wavax = 2.0 * wavax * price
+            budget = min(working - 0.10, cap_usdc, cap_wavax)
+            if budget >= 1.0:
+                return round(budget, 2)
     except Exception:
         pass
     return 13.0
