@@ -78,9 +78,10 @@ REDEPLOY_AMOUNT_USD = None  # sentinel: resolved live per-run via _redeploy_budg
 # LFJ currently REJECTS spreads beyond ±7 (idSlippage error 0x9931a6ae for
 # ±9/±11/±15; ±5/±6/±7 simulate clean). Empirical map, read-only eth_call sims:
 #   2026-09-03: ±5/±6/±7 OK · ±9/±11/±15 REVERT (and Sep 2 real tx reverts at ±11)
-# Curve → ±7 (widest accepted = max fee capture in chop); bid-ask → ±7 too
-# (wider isn't available until LFJ's boundary loosens; the ±7 cap binds anyway).
-REDEPLOY_BIN_SPREAD_BY_SHAPE = {"curve": 7, "bid-ask": 7}
+#   2026-09-07 13:30: boundary TIGHTENED — only ±5 simulates OK; ±6/±7 REVERT
+#   (live eth_call sim on the flat wallet). Curve → ±5, bid-ask → ±5.
+#   Re-map before trusting any spread (empirical, changes with pool/router state).
+REDEPLOY_BIN_SPREAD_BY_SHAPE = {"curve": 5, "bid-ask": 5}
 
 
 def _redeploy_spread(shape: str) -> int:
