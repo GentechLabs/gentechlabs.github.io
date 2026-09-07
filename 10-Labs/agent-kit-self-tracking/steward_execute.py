@@ -102,13 +102,42 @@ def _redeploy_budget(w3, acct, include_position: bool = False) -> float:
     Fallback on read failure: $13 (the old value) — conservative-high so a
     transient RPC hiccup can't zero the budget and strand capital as idle.
     The executor's built-in safety-reduce scales down if the wallet is short.
+
+    SETTLED RE-READ (Sep 7 2026): in a real withdraw-redeploy, this is called
+    immediately after the withdraw tx mines. The public Avalanche RPC lags a
+    freshly-mined tx (pitfall #41 — same family as the discovery 0-bin lag):
+    a laggy read still shows the OLD pre-withdraw balances and computes a
+    tiny budget, so the redeploy under-deploys or "finds nothing to deploy"
+    and leaves the pool flat. Re-read up to 3x, ~2s apart, taking the HIGHEST
+    working-capital read — a withdraw only ever grows the loose balance, so
+    the peak read across the settle window is the true post-withdraw capital.
     """
-    try:
+    def _read_once():
         usdc = bal(w3, USDC, acct.address) / 1e6
         wavax = bal(w3, WAVAX, acct.address) / 1e18
         price = _avax_usd()
         if price <= 0:
             price = 7.0  # last-resort estimate; executor still guards sizing
+        return usdc, wavax, price
+
+    best_usdc = best_wavax = best_price = 0.0
+    try:
+        for i in range(3):
+            usdc, wavax, price = _read_once()
+            # Withdraw only grows loose balances — take the peak across reads.
+            if usdc > best_usdc:
+                best_usdc = usdc
+            if wavax > best_wavax:
+                best_wavax = wavax
+            if price > best_price:
+                best_price = price
+            if i < 2:
+                time.sleep(2)
+    except Exception:
+        best_usdc, best_wavax, best_price = 0.0, 0.0, 7.0
+
+    try:
+        usdc, wavax, price = best_usdc, best_wavax, best_price
         working = usdc + wavax * price
         if include_position:
             # LP value folds back in on withdraw (full-capital rule)

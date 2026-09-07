@@ -370,10 +370,16 @@ def main():
                 usdc_bal = usdc.functions.balanceOf(acct.address).call()/1e6
                 print(f"  WAVAX now: {wavax_bal:.6f} | USDC now: ${usdc_bal:.2f}")
         elif usdc_bal < need_usdc and wavax_bal > need_wavax + 0.01:
-            swap_wavax = (need_usdc - usdc_bal) / price
+            # SWAP HEADROOM (Sep 7 2026): swap ~1.5% MORE WAVAX than the bare
+            # need so slippage can't leave the post-swap USDC a cent short of
+            # need. Previously this swapped exactly (need_usdc - usdc_bal)/price
+            # with a 99% min_out; in a fast market the 1% slippage left USDC a
+            # few cents under need, the safety check (need*0.99) passed, and
+            # addLiquidity reverts on the sub-cent shortfall -> flat pool.
+            swap_wavax = ((need_usdc - usdc_bal) / price) * 1.015
             swap_wavax = min(swap_wavax, wavax_bal - 0.1)
             if swap_wavax > 0.001:
-                print(f"\\n🔄 Swapping {swap_wavax:.4f} WAVAX -> USDC (need ${need_usdc:.2f} USDC)...")
+                print(f"\\n🔄 Swapping {swap_wavax:.4f} WAVAX -> USDC (need ${need_usdc:.2f} USDC, +1.5% headroom)...")
                 router = w3.eth.contract(address=router_addr, abi=LBROUTER_ABI)
                 amount_in = int(swap_wavax * 1e18)
                 amount_out_min = int(swap_wavax * price * 0.99 * 1e6)
@@ -399,7 +405,7 @@ def main():
             if val_wavax > val_usdc:
                 # WAVAX-rich: swap WAVAX → USDC to cover USDC shortfall
                 usdc_short = need_usdc - usdc_bal
-                wavax_to_swap = usdc_short / price
+                wavax_to_swap = (usdc_short / price) * 1.015
                 wavax_to_swap = min(wavax_to_swap, wavax_bal - need_wavax - 0.01)
                 if wavax_to_swap > 0.001:
                     print(f"\\n🔄 Both short — WAVAX-rich: swapping {wavax_to_swap:.4f} WAVAX -> USDC "
