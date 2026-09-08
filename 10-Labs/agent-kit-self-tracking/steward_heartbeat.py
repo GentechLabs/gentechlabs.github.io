@@ -26,6 +26,24 @@ from datetime import datetime, timezone
 HERE = os.path.dirname(os.path.abspath(__file__))
 WALLET = "0x572ABd6461BED2258615E6b99c585Ab7c5d05037"
 PAIR = "0x864d4e5ee7318e97483db7eb0912e09f161516ea"
+MACRO_SCHEDULED_STATE = "/root/.hermes/profiles/gentech-treasury/scripts/.steward-macro-scheduled.json"
+
+
+def macro_next_action():
+    """Truthful one-line summary of an ACTUALLY-enforced macro reposition, or
+    None. Replaces the old hardcoded 'CPI tomorrow 8:30 ET' line (Jordan
+    Sep 8 2026) which printed a schedule the machine never enforced. The
+    heartbeat now only reports a reposition the planner wrote to jobs.json.
+    """
+    try:
+        with open(MACRO_SCHEDULED_STATE) as f:
+            d = json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError):
+        return None
+    rebal = d.get("rebalance") or {}
+    label = d.get("label", "macro event")
+    run_at = rebal.get("run_at", "")
+    return f"{label}: BID_ASK scheduled {run_at[:16].replace('T', ' ')} UTC → stand-down CURVE"
 
 
 def _now_et() -> str:
@@ -105,9 +123,11 @@ def main() -> int:
                      f"vol ${pool.get('vol24h', 0)/1e6:.1f}M · liq ${pool.get('liquidity', 0)/1e6:.1f}M")
 
     # Yield vs staking vs hodl (honest comparison)
-    # Position value: measured at deploy time today (~$43: 3.45 WAVAX + 21.97 USDC).
-    # We use the MEASURED deployed capital, not a fabricated on-chain read.
-    pos_val = 43.0  # verified at deploy (Aug 11 2026)
+    # Position value: read LIVE from on-chain (discover_positions returns
+    # positionUsd). Jordan Sep 8 2026: the old hardcoded pos_val=43.0 (Aug 11)
+    # was FABRICATED — the real position is ~$25-28. Never print a stale
+    # number; read the chain.
+    pos_val = float(pos.get("positionUsd") or 0)
     lines.append("   ── Yield vs Staking vs HODL ──")
     if pos_val:
         # LP daily fee estimate: ~0.5% of position/day WHILE IN RANGE in chop
@@ -125,8 +145,12 @@ def main() -> int:
     else:
         lines.append("   (position USD not measured on-chain — see full report)")
 
-    # CPI countdown
-    lines.append("   📅 CPI tomorrow 8:30 ET → Bid-Ask at 7:45 ET, Curve back 8/13")
+    # Macro countdown — truthful (only shows an actually-enforced reposition)
+    macro = macro_next_action()
+    if macro:
+        lines.append(f"   📅 {macro}")
+    else:
+        lines.append("   📅 No macro reposition currently scheduled (planner enforces when CPI/FOMC/NFP <36h out)")
 
     print("\n".join(lines))
     return 0

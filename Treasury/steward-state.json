@@ -1,11 +1,18 @@
 {
-  "updated": "2026-09-08T07:31:00.617253-04:00",
-  "position": {},
+  "updated": "2026-09-08T13:30:09.374721-04:00",
+  "position": {
+    "read": "11 bins \u00b7 IN \u00b7 $8.0108 Y/X [7.9948\u20138.0751]",
+    "shape": "curve",
+    "bins": 11,
+    "rangeLow": 7.99483,
+    "rangeHigh": 8.075139,
+    "inRange": true
+  },
   "pool": {
-    "price": 8.042,
-    "chg24h": 2.33,
-    "vol24h": 490377.89,
-    "liquidity": 701274.02
+    "price": 8.01,
+    "chg24h": -0.7,
+    "vol24h": 625169.97,
+    "liquidity": 700543.19
   },
   "allocation": {
     "regime": "RANGE_BOUND",
@@ -16,64 +23,8 @@
     "lending": 15
   },
   "operations": {
-    "rebalances": [
-      {
-        "type": "rebalance",
-        "since": "2026-09-08T10:22:56.043649+00:00",
-        "resolved": false,
-        "err": "\ud83d\udee1\ufe0f STEWARD EXECUTION \u2014 WITHDRAW-REDEPLOY\n  \u2705 APPROVE\n     already approved\n  \u2705 WITHDRAW\n     tx_hash: 44357bdeb20a2229eddb934fea92cb3c95972655109991db5d8d184098dc7336\n     gas_cost_usd: 0.000373\n  \u274c R"
-      },
-      {
-        "type": "auto-deploy",
-        "since": "2026-09-08T10:31:15.874378+00:00",
-        "resolved": false,
-        "err": "  \u274c TX REVERTED!\n"
-      }
-    ],
+    "rebalances": [],
     "compounds": [
-      {
-        "ts": 1788860763.2498903,
-        "action": "rebalance",
-        "amount_usd": null,
-        "ok": true,
-        "reasons": []
-      },
-      {
-        "ts": 1788860768.1938374,
-        "action": "compound",
-        "amount_usd": 17.67,
-        "ok": false,
-        "reasons": []
-      },
-      {
-        "ts": 1788863459.8297527,
-        "action": "skip",
-        "amount_usd": null,
-        "ok": null,
-        "reasons": [
-          "min-delay not elapsed (45min < 60min)",
-          "no live price"
-        ]
-      },
-      {
-        "ts": 1788864059.7650309,
-        "action": "skip",
-        "amount_usd": null,
-        "ok": null,
-        "reasons": [
-          "min-delay not elapsed (55min < 60min)",
-          "no live price"
-        ]
-      },
-      {
-        "ts": 1788864659.9208758,
-        "action": "skip",
-        "amount_usd": null,
-        "ok": null,
-        "reasons": [
-          "no live price"
-        ]
-      },
       {
         "ts": 1788865260.1502664,
         "action": "skip",
@@ -100,14 +51,53 @@
         "reasons": [
           "no live price"
         ]
+      },
+      {
+        "ts": 1788867060.6848226,
+        "action": "skip",
+        "amount_usd": null,
+        "ok": null,
+        "reasons": [
+          "no live price"
+        ]
+      },
+      {
+        "ts": 1788871562.125814,
+        "action": "rebalance",
+        "amount_usd": null,
+        "ok": false,
+        "reasons": []
+      },
+      {
+        "ts": 1788880805.657417,
+        "action": "skip",
+        "amount_usd": null,
+        "ok": null,
+        "reasons": [
+          "no live price"
+        ]
+      },
+      {
+        "ts": 1788882310.1938148,
+        "action": "rebalance",
+        "amount_usd": null,
+        "ok": true,
+        "reasons": []
+      },
+      {
+        "ts": 1788882325.7031777,
+        "action": "compound",
+        "amount_usd": 0.9,
+        "ok": false,
+        "reasons": []
       }
     ],
     "fees": {
-      "last_total": 25.2962,
-      "last_price": 7.52,
-      "snapshot_count": 9,
-      "position_usd": 27.21,
-      "price": 8.06
+      "last_total": 25.6556,
+      "last_price": 8.01,
+      "snapshot_count": 10,
+      "position_usd": 6.15,
+      "price": 8.01
     },
     "council": {
       "mode": "YIELD_FARM",
@@ -117,6 +107,41 @@
     "activity": [
       {
         "kind": "compound",
+        "action": "compound",
+        "ts": 1788882325.7031777,
+        "amount_usd": 0.9,
+        "ok": false
+      },
+      {
+        "kind": "compound",
+        "action": "rebalance",
+        "ts": 1788882310.1938148,
+        "amount_usd": null,
+        "ok": true
+      },
+      {
+        "kind": "compound",
+        "action": "skip",
+        "ts": 1788880805.657417,
+        "amount_usd": null,
+        "ok": null
+      },
+      {
+        "kind": "compound",
+        "action": "rebalance",
+        "ts": 1788871562.125814,
+        "amount_usd": null,
+        "ok": false
+      },
+      {
+        "kind": "compound",
+        "action": "skip",
+        "ts": 1788867060.6848226,
+        "amount_usd": null,
+        "ok": null
+      },
+      {
+        "kind": "compound",
         "action": "skip",
         "ts": 1788866460.552822,
         "amount_usd": null,
@@ -135,53 +160,6 @@
         "ts": 1788865260.1502664,
         "amount_usd": null,
         "ok": null
-      },
-      {
-        "kind": "compound",
-        "action": "skip",
-        "ts": 1788864659.9208758,
-        "amount_usd": null,
-        "ok": null
-      },
-      {
-        "kind": "compound",
-        "action": "skip",
-        "ts": 1788864059.7650309,
-        "amount_usd": null,
-        "ok": null
-      },
-      {
-        "kind": "rebalance",
-        "type": "auto-deploy",
-        "since": "2026-09-08T10:31:15.874378+00:00",
-        "resolved": false
-      },
-      {
-        "kind": "compound",
-        "action": "skip",
-        "ts": 1788863459.8297527,
-        "amount_usd": null,
-        "ok": null
-      },
-      {
-        "kind": "rebalance",
-        "type": "rebalance",
-        "since": "2026-09-08T10:22:56.043649+00:00",
-        "resolved": false
-      },
-      {
-        "kind": "compound",
-        "action": "compound",
-        "ts": 1788860768.1938374,
-        "amount_usd": 17.67,
-        "ok": false
-      },
-      {
-        "kind": "compound",
-        "action": "rebalance",
-        "ts": 1788860763.2498903,
-        "amount_usd": null,
-        "ok": true
       }
     ]
   }

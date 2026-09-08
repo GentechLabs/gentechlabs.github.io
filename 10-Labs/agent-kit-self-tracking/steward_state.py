@@ -17,6 +17,30 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 WALLET = "0x572ABd6461BED2258615E6b99c585Ab7c5d05037"
 PAIR = "0x864d4e5ee7318e97483db7eb0912e09f161516ea"
 STATE_FILE = "/root/repos/gentechlabs.github.io/Treasury/steward-state.json"
+# The macro scheduler writes this when it actually enforces a reposition.
+MACRO_SCHEDULED_STATE = "/root/.hermes/profiles/gentech-treasury/scripts/.steward-macro-scheduled.json"
+
+
+def macro_next_action():
+    """Read the enforcement state. Return a truthful one-line summary of an
+    ACTUALLY-scheduled macro reposition, or None if none is enforced.
+
+    This kills the hardcoded 'CPI tomorrow → Bid-Ask at 7:45' line (Jordan
+    Sep 8 2026). That line was printed every heartbeat whether or not any
+    reposition was scheduled — it was noise, not instruction. Now the heartbeat
+    only reports a reposition that the macro planner ACTUALLY wrote to
+    jobs.json (verified via the scheduled-state file). If nothing is enforced,
+    the heartbeat says exactly that instead of inventing a schedule.
+    """
+    try:
+        with open(MACRO_SCHEDULED_STATE) as f:
+            d = json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError):
+        return None
+    rebal = d.get("rebalance") or {}
+    label = d.get("label", "macro event")
+    run_at = rebal.get("run_at", "")
+    return f"{label}: BID_ASK scheduled {run_at[:16].replace('T', ' ')} UTC → stand-down CURVE"
 
 
 def fetch_json(url, timeout=12):
@@ -210,7 +234,7 @@ def main():
     if pool:
         lines.append(f"📊 **Market**: AVAX ${pool.get('price', 0):.2f} ({pool.get('chg24h', 0):+.1f}% 24h) · vol ${pool.get('vol24h', 0)/1e6:.1f}M · liq ${pool.get('liquidity', 0)/1e6:.1f}M")
         lines.append("")
-    pos_val = 43.0
+    pos_val = float(pos.get("positionUsd") or 0)
     lp_daily = pos_val * 0.005
     stake_daily = pos_val * 5.2 / 100 / 365
     lines.append("💰 **Yield vs Staking vs HODL**")
@@ -219,7 +243,13 @@ def main():
     lines.append(f"   • HODL:   {'winning' if pool.get('chg24h', 0) > 0 else 'losing'} ({pool.get('chg24h', 0):+.1f}% 24h)")
     lines.append(f"   • Verdict: {'LP farming the chop' if in_range else 'LP OUT — not earning'}")
     lines.append("")
-    lines.append("📅 **Next macro event**: CPI tomorrow 8:30 ET → Bid-Ask at 7:45 ET, Curve back 8/13")
+    macro = macro_next_action()
+    if macro:
+        lines.append("")
+        lines.append(f"📅 **Macro (enforced)**: {macro}")
+    else:
+        lines.append("")
+        lines.append("📅 **Macro**: no reposition currently scheduled (planner enforces when a CPI/FOMC/NFP is <36h out)")
     print("\n".join(lines))
     return 0
 
