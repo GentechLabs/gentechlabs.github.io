@@ -1,18 +1,18 @@
 {
-  "updated": "2026-09-07T19:00:47.740241-04:00",
+  "updated": "2026-09-07T19:30:46.034439-04:00",
   "position": {
-    "read": "15 bins \u00b7 IN \u00b7 $8.0671 Y/X [8.0028\u20138.1156]",
+    "read": "15 bins \u00b7 IN \u00b7 $8.0671 Y/X [8.0188\u20138.1318]",
     "shape": "curve",
     "bins": 15,
-    "rangeLow": 8.002825,
-    "rangeHigh": 8.115596,
+    "rangeLow": 8.018839,
+    "rangeHigh": 8.131835,
     "inRange": true
   },
   "pool": {
-    "price": 8.059,
-    "chg24h": 3.15,
-    "vol24h": 1151766.67,
-    "liquidity": 701656.23
+    "price": 8.067,
+    "chg24h": 3.04,
+    "vol24h": 1137542.74,
+    "liquidity": 701891.73
   },
   "allocation": {
     "regime": "RANGE_BOUND",
@@ -28,34 +28,10 @@
         "type": "rebalance",
         "since": "2026-09-07T22:52:50.997393+00:00",
         "resolved": false,
-        "err": "\ud83d\udee1\ufe0f STEWARD EXECUTION \u2014 WITHDRAW-REDEPLOY\n  \u2705 APPROVE\n     already approved\n  \u2705 WITHDRAW\n     tx_hash: b3f786822056d2dc18de272b59140f409d9689832a8655aa088eae5b27b05f7d\n     gas_cost_usd: 0.00052\n  \u274c RE"
-      },
-      {
-        "type": "auto-deploy",
-        "since": "2026-09-07T22:53:41.045573+00:00",
-        "resolved": false,
-        "err": "     TX mined (status=1) but LP position not found on-chain.\n     Funds may be stuck in router. Manual investigation needed.\n"
+        "err": "\ud83d\udee1\ufe0f STEWARD EXECUTION \u2014 WITHDRAW-REDEPLOY\n  \u2705 APPROVE\n     already approved\n  \u2705 WITHDRAW\n     tx_hash: 2035d3e115c2a9d1b90a45e6f0b6a2ae27cd388362c25648b1cf723ceeddf4f6\n     gas_cost_usd: 0.000533\n  \u274c R"
       }
     ],
     "compounds": [
-      {
-        "ts": 1788817542.2817202,
-        "action": "skip",
-        "amount_usd": null,
-        "ok": null,
-        "reasons": [
-          "min-delay not elapsed (54min < 60min)"
-        ]
-      },
-      {
-        "ts": 1788818444.6596575,
-        "action": "skip",
-        "amount_usd": null,
-        "ok": null,
-        "reasons": [
-          "no live price"
-        ]
-      },
       {
         "ts": 1788819644.0205615,
         "action": "skip",
@@ -109,14 +85,32 @@
         "reasons": [
           "no live price"
         ]
+      },
+      {
+        "ts": 1788822644.763951,
+        "action": "skip",
+        "amount_usd": null,
+        "ok": null,
+        "reasons": [
+          "no live price"
+        ]
+      },
+      {
+        "ts": 1788823244.828294,
+        "action": "skip",
+        "amount_usd": null,
+        "ok": null,
+        "reasons": [
+          "no live price"
+        ]
       }
     ],
     "fees": {
       "last_total": 25.2962,
       "last_price": 7.52,
       "snapshot_count": 9,
-      "position_usd": 15.45,
-      "price": 6.8
+      "position_usd": 27.21,
+      "price": 8.06
     },
     "council": {
       "mode": "YIELD_FARM",
@@ -125,10 +119,18 @@
     },
     "activity": [
       {
-        "kind": "rebalance",
-        "type": "auto-deploy",
-        "since": "2026-09-07T22:53:41.045573+00:00",
-        "resolved": false
+        "kind": "compound",
+        "action": "skip",
+        "ts": 1788823244.828294,
+        "amount_usd": null,
+        "ok": null
+      },
+      {
+        "kind": "compound",
+        "action": "skip",
+        "ts": 1788822644.763951,
+        "amount_usd": null,
+        "ok": null
       },
       {
         "kind": "compound",
@@ -175,20 +177,6 @@
         "kind": "compound",
         "action": "skip",
         "ts": 1788819644.0205615,
-        "amount_usd": null,
-        "ok": null
-      },
-      {
-        "kind": "compound",
-        "action": "skip",
-        "ts": 1788818444.6596575,
-        "amount_usd": null,
-        "ok": null
-      },
-      {
-        "kind": "compound",
-        "action": "skip",
-        "ts": 1788817542.2817202,
         "amount_usd": null,
         "ok": null
       }
