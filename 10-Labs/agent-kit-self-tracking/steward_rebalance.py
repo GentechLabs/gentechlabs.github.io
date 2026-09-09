@@ -631,12 +631,34 @@ def main() -> int:
         exec_script = _exec_script_for_position(position)
         shape = decision["shape"].lower()
         if exec_script == BLACKHOLE_EXEC_SCRIPT:
-            # Blackhole re-center (withdraw CL -> re-mint) is NOT yet wired.
-            # Do NOT run the LFJ executor on a Blackhole position. Hold + flag.
+            # Blackhole re-center: withdraw CL -> re-mint -> re-stake via the
+            # adapter's --recenter mode. This is the Blackhole equivalent of
+            # the LFJ withdraw-redeploy cycle.
             if not quiet:
-                print(f"   ⚠️ Blackhole CL position — re-center leg not yet built. "
-                      f"Holding (won't run LFJ executor on Blackhole position).")
-            silence.mark_failure("rebalance", "blackhole re-center leg not built", retry_hours=6)
+                print(f"   🔄 Re-centering Blackhole CL position (withdraw -> re-mint -> re-stake)")
+            proc = subprocess.run(
+                [sys.executable, exec_script, "--recenter", "--execute", "--yes"],
+                capture_output=True, text=True, timeout=300)
+            ok = proc.returncode == 0 and "re-centered" in proc.stdout
+            if not quiet:
+                print(f"   Executed: {'✅' if ok else '❌'}")
+                if proc.stdout:
+                    print(f"   {proc.stdout[-1200:]}")
+                if proc.stderr:
+                    print(f"   stderr: {proc.stderr[-300:]}")
+            if ok:
+                with open(stamp_file, "w") as f:
+                    json.dump({"ts": _now_iso()}, f)
+                silence.mark_success("rebalance")
+                new_pos = get_position_after()
+                if new_pos and quiet:
+                    print(f"🛡️ STEWARD — re-center recovered: {new_pos}")
+                elif new_pos:
+                    print(f"   ✅ Back at: {new_pos}")
+            else:
+                silence.mark_failure(
+                    "rebalance", (proc.stderr or proc.stdout or "unknown")[-300:],
+                    retry_hours=2)
             return 0
         proc = subprocess.run(
             [sys.executable, exec_script, "--mode", "withdraw-redeploy",

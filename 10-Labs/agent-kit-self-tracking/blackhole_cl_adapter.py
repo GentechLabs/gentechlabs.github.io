@@ -100,6 +100,29 @@ NFPM_ABI = [
      "name": "approve", "outputs": [], "stateMutability": "nonpayable", "type": "function"},
     {"inputs": [{"name": "data", "type": "bytes[]"}], "name": "multicall",
      "outputs": [{"name": "results", "type": "bytes[]"}], "stateMutability": "payable", "type": "function"},
+    {"inputs": [{"components": [
+        {"name": "tokenId", "type": "uint256"}, {"name": "amount0Desired", "type": "uint256"},
+        {"name": "amount1Desired", "type": "uint256"}, {"name": "amount0Min", "type": "uint256"},
+        {"name": "amount1Min", "type": "uint256"}, {"name": "deadline", "type": "uint256"}],
+        "name": "params", "type": "tuple"}],
+     "name": "increaseLiquidity", "outputs": [
+        {"name": "liquidity", "type": "uint128"}, {"name": "amount0", "type": "uint256"},
+        {"name": "amount1", "type": "uint256"}],
+     "stateMutability": "payable", "type": "function"},
+    {"inputs": [{"components": [
+        {"name": "tokenId", "type": "uint256"}, {"name": "liquidity", "type": "uint128"},
+        {"name": "amount0Min", "type": "uint256"}, {"name": "amount1Min", "type": "uint256"},
+        {"name": "deadline", "type": "uint256"}], "name": "params", "type": "tuple"}],
+     "name": "decreaseLiquidity", "outputs": [
+        {"name": "amount0", "type": "uint256"}, {"name": "amount1", "type": "uint256"}],
+     "stateMutability": "payable", "type": "function"},
+    {"inputs": [{"components": [
+        {"name": "tokenId", "type": "uint256"}, {"name": "recipient", "type": "address"},
+        {"name": "amount0Max", "type": "uint128"}, {"name": "amount1Max", "type": "uint128"}],
+        "name": "params", "type": "tuple"}],
+     "name": "collect", "outputs": [
+        {"name": "amount0", "type": "uint256"}, {"name": "amount1", "type": "uint256"}],
+     "stateMutability": "nonpayable", "type": "function"},
 ]
 
 # Gauge CL: deposit(tokenId) / withdraw(tokenId)
@@ -108,6 +131,22 @@ GAUGE_CL_ABI = [
      "outputs": [], "stateMutability": "nonpayable", "type": "function"},
     {"inputs": [{"name": "tokenId", "type": "uint256"}], "name": "withdraw",
      "outputs": [], "stateMutability": "nonpayable", "type": "function"},
+]
+
+# Router V2: swapExactTokensForTokens (Trader Joe-style route struct) — used
+# to sell BLACK emissions back into pool tokens (Jordan: never hold BLACK).
+ROUTER_V2_ABI = [
+    {"inputs": [
+        {"name": "amountIn", "type": "uint256"},
+        {"name": "amountOutMin", "type": "uint256"},
+        {"components": [
+            {"name": "pair", "type": "address"}, {"name": "from", "type": "address"},
+            {"name": "to", "type": "address"}, {"name": "stable", "type": "bool"},
+            {"name": "concentrated", "type": "bool"}, {"name": "receiver", "type": "address"}],
+         "name": "routes", "type": "tuple[]"},
+        {"name": "to", "type": "address"}, {"name": "deadline", "type": "uint256"}],
+     "name": "swapExactTokensForTokens", "outputs": [{"name": "amounts", "type": "uint256[]"}],
+     "stateMutability": "nonpayable", "type": "function"},
 ]
 
 # GaugeManager.gauges(pool) -> gauge address
@@ -262,6 +301,270 @@ def _send_with_nonce_retry(w3, acct, tx, tries=3):
             raise
 
 
+def harvest(w3, acct, nfpm, farming_center, eternal_farming, token_id, key, router, dry_run=True):
+    """Harvest BLACK emissions and compound them back into the position.
+
+    Jordan's rule (Sep 8 2026): NEVER hold BLACK as yield — sell emissions
+    immediately back into pool tokens and re-mint (increaseLiquidity). This is
+    the Blackhole equivalent of the LFJ auto-compound loop.
+
+    Flow (verified from Blackhole MCP audit claimEmissions.ts):
+      1. farming_center.multicall([collectRewards(key, tokenId),
+                                    claimReward(rewardToken, user, 0)])
+         -> sends accrued BLACK to the wallet
+      2. router.swapExactTokensForTokens(BLACK -> WAVAX + USDC) via the
+         WAVAX/USDC pool (concentrated route)
+      3. nfpm.increaseLiquidity(tokenId, wavax, usdc) to compound back in
+
+    Returns a dict with the result. dry_run=True builds + estimates only.
+    """
+    fc = w3.eth.contract(address=Web3.to_checksum_address(farming_center), abi=FARMING_CENTER_ABI)
+    nfpm_c = w3.eth.contract(address=Web3.to_checksum_address(nfpm), abi=NFPM_ABI)
+    router_c = w3.eth.contract(address=Web3.to_checksum_address(router), abi=ROUTER_V2_ABI)
+    black = w3.eth.contract(address=Web3.to_checksum_address(BLACK), abi=ERC20_ABI)
+
+    # 1. Collect rewards (multicall: collectRewards + claimReward)
+    collect_cd = fc.encode_abi("collectRewards", [key, token_id])
+    claim_cd = fc.encode_abi("claimReward",
+                             [Web3.to_checksum_address(key["rewardToken"]),
+                              acct.address, 0])
+    print("\n🌾 Harvesting BLACK emissions...")
+    if dry_run:
+        print("  [dry-run] farming_center.multicall([collectRewards, claimReward])")
+    else:
+        tx = fc.functions.multicall([collect_cd, claim_cd]).build_transaction({
+            "from": acct.address, "nonce": w3.eth.get_transaction_count(acct.address),
+            "gas": 500000, "gasPrice": int(w3.eth.gas_price * 1.3), "chainId": CHAIN_ID})
+        h = _send_with_nonce_retry(w3, acct, tx)
+        rcpt = w3.eth.wait_for_transaction_receipt(h)
+        print(f"  ✅ collected: {h.hex()} status={rcpt['status']}")
+        if rcpt['status'] != 1:
+            print("  ❌ collect REVERTED", file=sys.stderr)
+            return {"ok": False, "stage": "collect"}
+
+    # 2. Check BLACK balance
+    black_bal = black.functions.balanceOf(acct.address).call() / 1e18
+    print(f"  BLACK balance: {black_bal:.6f}")
+    if black_bal < 0.0001:
+        print("  ℹ️  No meaningful BLACK to compound — nothing to do.")
+        return {"ok": True, "stage": "noop", "black": black_bal}
+
+    # 3. Sell BLACK -> WAVAX + USDC (split 50/50 via two routes)
+    # Route: BLACK -> WAVAX (concentrated pool) and BLACK -> USDC
+    # We use the WAVAX/USDC pool as the concentrated route for both legs.
+    half = int(black_bal * 1e18 / 2)
+    routes = [
+        {"pair": Web3.to_checksum_address(POOL), "from": Web3.to_checksum_address(BLACK),
+         "to": Web3.to_checksum_address(WAVAX), "stable": False, "concentrated": True,
+         "receiver": acct.address},
+        {"pair": Web3.to_checksum_address(POOL), "from": Web3.to_checksum_address(BLACK),
+         "to": Web3.to_checksum_address(USDC), "stable": False, "concentrated": True,
+         "receiver": acct.address},
+    ]
+    print("  Selling BLACK -> WAVAX + USDC (50/50)...")
+    if dry_run:
+        print("  [dry-run] router.swapExactTokensForTokens(amountIn, 0, routes, wallet)")
+    else:
+        # approve router for BLACK
+        allowance = black.functions.allowance(acct.address, Web3.to_checksum_address(router)).call()
+        if allowance < int(black_bal * 1e18):
+            tx = black.functions.approve(Web3.to_checksum_address(router), 2**256 - 1).build_transaction({
+                "from": acct.address, "nonce": w3.eth.get_transaction_count(acct.address),
+                "gas": 100000, "gasPrice": int(w3.eth.gas_price * 1.3), "chainId": CHAIN_ID})
+            h = _send_with_nonce_retry(w3, acct, tx)
+            rcpt = w3.eth.wait_for_transaction_receipt(h)
+            print(f"  ✅ BLACK approved: {h.hex()} status={rcpt['status']}")
+        tx = router_c.functions.swapExactTokensForTokens(
+            int(black_bal * 1e18), 0, routes, acct.address, int(time.time()) + 600
+        ).build_transaction({
+            "from": acct.address, "nonce": w3.eth.get_transaction_count(acct.address),
+            "gas": 500000, "gasPrice": int(w3.eth.gas_price * 1.3), "chainId": CHAIN_ID})
+        h = _send_with_nonce_retry(w3, acct, tx)
+        rcpt = w3.eth.wait_for_transaction_receipt(h)
+        print(f"  ✅ swapped: {h.hex()} status={rcpt['status']}")
+        if rcpt['status'] != 1:
+            print("  ❌ swap REVERTED", file=sys.stderr)
+            return {"ok": False, "stage": "swap"}
+
+    # 4. Compound: increaseLiquidity with the swapped WAVAX + USDC
+    wavax = w3.eth.contract(address=Web3.to_checksum_address(WAVAX), abi=ERC20_ABI)
+    usdc = w3.eth.contract(address=Web3.to_checksum_address(USDC), abi=ERC20_ABI)
+    wavax_bal = wavax.functions.balanceOf(acct.address).call()
+    usdc_bal = usdc.functions.balanceOf(acct.address).call()
+    print(f"  WAVAX to compound: {wavax_bal/1e18:.6f} · USDC: {usdc_bal/1e6:.4f}")
+    if wavax_bal < 1e15 or usdc_bal < 1e3:
+        print("  ℹ️  Swapped amounts too small to compound — leaving as wallet balance.")
+        return {"ok": True, "stage": "swap_only", "black": black_bal}
+
+    if dry_run:
+        print("  [dry-run] nfpm.increaseLiquidity(tokenId, wavax, usdc)")
+    else:
+        inc_params = {
+            "tokenId": token_id,
+            "amount0Desired": wavax_bal,
+            "amount1Desired": usdc_bal,
+            "amount0Min": 0, "amount1Min": 0,
+            "deadline": int(time.time()) + 600,
+        }
+        tx = nfpm_c.functions.increaseLiquidity(inc_params).build_transaction({
+            "from": acct.address, "nonce": w3.eth.get_transaction_count(acct.address),
+            "gas": 500000, "gasPrice": int(w3.eth.gas_price * 1.3), "chainId": CHAIN_ID})
+        h = _send_with_nonce_retry(w3, acct, tx)
+        rcpt = w3.eth.wait_for_transaction_receipt(h)
+        print(f"  ✅ compounded: {h.hex()} status={rcpt['status']}")
+        if rcpt['status'] != 1:
+            print("  ❌ increaseLiquidity REVERTED", file=sys.stderr)
+            return {"ok": False, "stage": "compound"}
+
+    return {"ok": True, "stage": "harvested", "black": black_bal}
+
+
+def recenter(w3, acct, nfpm, gauge, token_id, deployer, dry_run=True):
+    """Re-center a staked Blackhole CL position on the current price.
+
+    Blackhole CL (Algebra V3) strategy lever (docs.blackhole.xyz): when the
+    position moves OUT of range, rebalance = withdraw + re-mint centered on
+    the current price. This is the Blackhole equivalent of the LFJ re-center.
+
+    Flow:
+      1. gauge.withdraw(tokenId)  — unstake the NFT (returns to wallet)
+      2. nfpm.decreaseLiquidity(tokenId, liquidity, 0, 0, deadline)
+         — remove all liquidity, WAVAX+USDC owed to the position
+      3. nfpm.collect(tokenId, wallet, max, max) — pull tokens to wallet
+      4. re-mint a NEW position centered on current price (reuses mint path)
+      5. gauge.deposit(newTokenId) — re-stake
+
+    Returns (ok, new_token_id). dry_run=True builds + estimates only.
+    """
+    nfpm_c = w3.eth.contract(address=Web3.to_checksum_address(nfpm), abi=NFPM_ABI)
+    gauge_c = w3.eth.contract(address=Web3.to_checksum_address(gauge), abi=GAUGE_CL_ABI)
+
+    # 1. Unstake from gauge
+    print("\n🔄 Re-centering position (withdraw -> re-mint on current price)...")
+    if dry_run:
+        print("  [dry-run] gauge.withdraw(tokenId)")
+    else:
+        tx = gauge_c.functions.withdraw(token_id).build_transaction({
+            "from": acct.address, "nonce": w3.eth.get_transaction_count(acct.address),
+            "gas": 300000, "gasPrice": int(w3.eth.gas_price * 1.3), "chainId": CHAIN_ID})
+        h = _send_with_nonce_retry(w3, acct, tx)
+        rcpt = w3.eth.wait_for_transaction_receipt(h)
+        print(f"  ✅ unstaked: {h.hex()} status={rcpt['status']}")
+        if rcpt['status'] != 1:
+            print("  ❌ gauge.withdraw REVERTED", file=sys.stderr)
+            return False, None
+
+    # 2. Get current liquidity
+    pos = nfpm_c.functions.positions(token_id).call()
+    liquidity = pos[7]
+    print(f"  Current liquidity: {liquidity}")
+    if liquidity == 0:
+        print("  ℹ️  Position already has no liquidity — skipping decrease.")
+    elif dry_run:
+        print("  [dry-run] nfpm.decreaseLiquidity(tokenId, liquidity, 0, 0)")
+    else:
+        dec_params = {
+            "tokenId": token_id, "liquidity": liquidity,
+            "amount0Min": 0, "amount1Min": 0, "deadline": int(time.time()) + 600,
+        }
+        tx = nfpm_c.functions.decreaseLiquidity(dec_params).build_transaction({
+            "from": acct.address, "nonce": w3.eth.get_transaction_count(acct.address),
+            "gas": 500000, "gasPrice": int(w3.eth.gas_price * 1.3), "chainId": CHAIN_ID})
+        h = _send_with_nonce_retry(w3, acct, tx)
+        rcpt = w3.eth.wait_for_transaction_receipt(h)
+        print(f"  ✅ decreased: {h.hex()} status={rcpt['status']}")
+        if rcpt['status'] != 1:
+            print("  ❌ decreaseLiquidity REVERTED", file=sys.stderr)
+            return False, None
+
+    # 3. Collect tokens to wallet
+    if dry_run:
+        print("  [dry-run] nfpm.collect(tokenId, wallet, max, max)")
+    else:
+        col_params = {
+            "tokenId": token_id, "recipient": acct.address,
+            "amount0Max": 2**128 - 1, "amount1Max": 2**128 - 1,
+        }
+        tx = nfpm_c.functions.collect(col_params).build_transaction({
+            "from": acct.address, "nonce": w3.eth.get_transaction_count(acct.address),
+            "gas": 300000, "gasPrice": int(w3.eth.gas_price * 1.3), "chainId": CHAIN_ID})
+        h = _send_with_nonce_retry(w3, acct, tx)
+        rcpt = w3.eth.wait_for_transaction_receipt(h)
+        print(f"  ✅ collected: {h.hex()} status={rcpt['status']}")
+        if rcpt['status'] != 1:
+            print("  ❌ collect REVERTED", file=sys.stderr)
+            return False, None
+
+    # 4. Re-mint centered on current price (reuse the mint path)
+    current_tick, price = get_pool_tick(w3)
+    tick_lower, tick_upper = build_range_from_tick(current_tick, 0.10)
+    print(f"  Re-minting on current price ${price:.4f} (tick {current_tick}, "
+          f"range {tick_lower}–{tick_upper})...")
+    # Use the wallet's full WAVAX+USDC balance (real wallet in dry-run too)
+    wavax_c = w3.eth.contract(address=Web3.to_checksum_address(WAVAX), abi=ERC20_ABI)
+    usdc_c = w3.eth.contract(address=Web3.to_checksum_address(USDC), abi=ERC20_ABI)
+    bal_addr = Web3.to_checksum_address(STEWARD_WALLET) if dry_run else acct.address
+    wavax_bal = wavax_c.functions.balanceOf(bal_addr).call()
+    usdc_bal = usdc_c.functions.balanceOf(bal_addr).call()
+    if wavax_bal < 1e15 or usdc_bal < 1e3:
+        print("  ❌ Not enough WAVAX/USDC after collect to re-mint.", file=sys.stderr)
+        return False, None
+    mint_params = {
+        "token0": Web3.to_checksum_address(WAVAX),
+        "token1": Web3.to_checksum_address(USDC),
+        "deployer": Web3.to_checksum_address(deployer),
+        "tickLower": tick_lower, "tickUpper": tick_upper,
+        "amount0Desired": wavax_bal, "amount1Desired": usdc_bal,
+        "amount0Min": 0, "amount1Min": 0,
+        "recipient": acct.address, "deadline": int(time.time()) + 600,
+    }
+    if dry_run:
+        print("  [dry-run] nfpm.mint(new range)")
+        return True, None
+    tx = nfpm_c.functions.mint(mint_params).build_transaction({
+        "from": acct.address, "nonce": w3.eth.get_transaction_count(acct.address),
+        "gas": 1_000_000, "gasPrice": int(w3.eth.gas_price * 1.3), "chainId": CHAIN_ID})
+    h = _send_with_nonce_retry(w3, acct, tx)
+    rcpt = w3.eth.wait_for_transaction_receipt(h)
+    print(f"  ✅ re-minted: {h.hex()} status={rcpt['status']}")
+    if rcpt['status'] != 1:
+        print("  ❌ re-mint REVERTED", file=sys.stderr)
+        return False, None
+    # Find new tokenId
+    new_token_id = None
+    n = nfpm_c.functions.balanceOf(acct.address).call()
+    for i in range(n):
+        tid = nfpm_c.functions.tokenOfOwnerByIndex(acct.address, i).call()
+        p = nfpm_c.functions.positions(tid).call()
+        if p[2].lower() == WAVAX.lower() and p[3].lower() == USDC.lower() and tid != token_id:
+            new_token_id = tid
+            break
+    if new_token_id is None:
+        print("  ❌ Could not find new tokenId after re-mint.", file=sys.stderr)
+        return False, None
+    print(f"  ✅ New position tokenId: {new_token_id}")
+
+    # 5. Re-stake into gauge
+    approved = nfpm_c.functions.getApproved(new_token_id).call()
+    if approved.lower() != gauge:
+        tx = nfpm_c.functions.approve(Web3.to_checksum_address(gauge), new_token_id).build_transaction({
+            "from": acct.address, "nonce": w3.eth.get_transaction_count(acct.address),
+            "gas": 100000, "gasPrice": int(w3.eth.gas_price * 1.3), "chainId": CHAIN_ID})
+        h = _send_with_nonce_retry(w3, acct, tx)
+        rcpt = w3.eth.wait_for_transaction_receipt(h)
+        print(f"  ✅ gauge approved: {h.hex()} status={rcpt['status']}")
+    tx = gauge_c.functions.deposit(new_token_id).build_transaction({
+        "from": acct.address, "nonce": w3.eth.get_transaction_count(acct.address),
+        "gas": 300000, "gasPrice": int(w3.eth.gas_price * 1.3), "chainId": CHAIN_ID})
+    h = _send_with_nonce_retry(w3, acct, tx)
+    rcpt = w3.eth.wait_for_transaction_receipt(h)
+    print(f"  ✅ re-staked: {h.hex()} status={rcpt['status']}")
+    if rcpt['status'] != 1:
+        print("  ⚠️ Re-stake REVERTED (position minted but not staked).", file=sys.stderr)
+        return False, new_token_id
+    return True, new_token_id
+
+
 def main():
     ap = argparse.ArgumentParser(description="Blackhole Algebra-V3 WAVAX/USDC CL adapter")
     ap.add_argument("--amount", type=float, default=20.0, help="USD deploy amount")
@@ -270,6 +573,12 @@ def main():
     ap.add_argument("--dry-run", action="store_true", default=True)
     ap.add_argument("--execute", action="store_true")
     ap.add_argument("--yes", action="store_true")
+    ap.add_argument("--harvest", action="store_true",
+                    help="harvest BLACK emissions + compound back into the position")
+    ap.add_argument("--compound", action="store_true",
+                    help="increase liquidity on the existing position with idle wallet WAVAX+USDC")
+    ap.add_argument("--recenter", action="store_true",
+                    help="re-center the position on current price (withdraw -> re-mint -> re-stake)")
     args = ap.parse_args()
 
     w3 = Web3(Web3.HTTPProvider(AVALANCHE_RPC))
@@ -322,6 +631,130 @@ def main():
     print(f"  USDC:  ${usdc_bal:.2f}")
     print(f"  WAVAX: {wavax_bal:.6f}")
     print(f"  AVAX:  {avax_bal:.6f} (gas)")
+
+    # ── RECENTER mode: withdraw -> re-mint on current price -> re-stake ──
+    if args.recenter:
+        dry_run = not args.execute
+        if not dry_run:
+            if not args.yes:
+                print("\n❌ Refusing to re-center without --yes. Dry-run only."); sys.exit(1)
+            if not os.path.exists(STEWARD_KEY_FILE):
+                print("\n❌ Steward key not found. Cannot sign.", file=sys.stderr); sys.exit(1)
+            key_data = open(STEWARD_KEY_FILE).read().strip()
+            acct = w3.eth.account.from_key(key_data)
+            if acct.address.lower() != STEWARD_WALLET.lower():
+                print("\n❌ Key mismatch!", file=sys.stderr); sys.exit(1)
+        else:
+            acct = w3.eth.account.from_key("0x" + "0" * 64)  # dummy for dry-run
+        # Find our CL position tokenId
+        nfpm_c = w3.eth.contract(address=Web3.to_checksum_address(nfpm), abi=NFPM_ABI)
+        token_id = None
+        n = nfpm_c.functions.balanceOf(Web3.to_checksum_address(STEWARD_WALLET)).call()
+        for i in range(n):
+            tid = nfpm_c.functions.tokenOfOwnerByIndex(Web3.to_checksum_address(STEWARD_WALLET), i).call()
+            pos = nfpm_c.functions.positions(tid).call()
+            if pos[2].lower() == WAVAX.lower() and pos[3].lower() == USDC.lower():
+                token_id = tid
+                break
+        if token_id is None:
+            print("\n❌ No Blackhole CL position found to re-center.", file=sys.stderr); sys.exit(1)
+        if not gauge:
+            print("\n❌ No gauge — cannot re-center a staked position.", file=sys.stderr); sys.exit(1)
+        ok, new_tid = recenter(w3, acct, nfpm, gauge, token_id, deployer, dry_run=dry_run)
+        print(f"\n  Result: {'✅ re-centered' if ok else '❌ failed'} "
+              f"{f'(new tokenId {new_tid})' if new_tid else ''}")
+        return 0
+
+    # ── COMPOUND mode: increase liquidity on existing position with idle ──
+    if args.compound:
+        dry_run = not args.execute
+        if not dry_run:
+            if not args.yes:
+                print("\n❌ Refusing to compound without --yes. Dry-run only."); sys.exit(1)
+            if not os.path.exists(STEWARD_KEY_FILE):
+                print("\n❌ Steward key not found. Cannot sign.", file=sys.stderr); sys.exit(1)
+            key_data = open(STEWARD_KEY_FILE).read().strip()
+            acct = w3.eth.account.from_key(key_data)
+            if acct.address.lower() != STEWARD_WALLET.lower():
+                print("\n❌ Key mismatch!", file=sys.stderr); sys.exit(1)
+        else:
+            acct = w3.eth.account.from_key("0x" + "0" * 64)  # dummy for dry-run
+        # Find our CL position tokenId
+        nfpm_c = w3.eth.contract(address=Web3.to_checksum_address(nfpm), abi=NFPM_ABI)
+        token_id = None
+        n = nfpm_c.functions.balanceOf(Web3.to_checksum_address(STEWARD_WALLET)).call()
+        for i in range(n):
+            tid = nfpm_c.functions.tokenOfOwnerByIndex(Web3.to_checksum_address(STEWARD_WALLET), i).call()
+            pos = nfpm_c.functions.positions(tid).call()
+            if pos[2].lower() == WAVAX.lower() and pos[3].lower() == USDC.lower():
+                token_id = tid
+                break
+        if token_id is None:
+            print("\n❌ No Blackhole CL position found to compound.", file=sys.stderr); sys.exit(1)
+        # Idle wallet capital (WAVAX + USDC, excluding gas AVAX)
+        wavax_c = w3.eth.contract(address=Web3.to_checksum_address(WAVAX), abi=ERC20_ABI)
+        usdc_c = w3.eth.contract(address=Web3.to_checksum_address(USDC), abi=ERC20_ABI)
+        wavax_idle = wavax_c.functions.balanceOf(Web3.to_checksum_address(STEWARD_WALLET)).call()
+        usdc_idle = usdc_c.functions.balanceOf(Web3.to_checksum_address(STEWARD_WALLET)).call()
+        idle_usd = wavax_idle / 1e18 * price + usdc_idle / 1e6
+        print(f"\n💰 Compounding position #{token_id} with idle ${idle_usd:.2f} "
+              f"(WAVAX {wavax_idle/1e18:.6f} + USDC {usdc_idle/1e6:.4f})...")
+        if idle_usd < 0.50:
+            print("  ℹ️  Idle below $0.50 — nothing to compound.")
+            return 0
+        if dry_run:
+            print("  [dry-run] nfpm.increaseLiquidity(tokenId, wavax, usdc)")
+        else:
+            inc_params = {
+                "tokenId": token_id,
+                "amount0Desired": wavax_idle,
+                "amount1Desired": usdc_idle,
+                "amount0Min": 0, "amount1Min": 0,
+                "deadline": int(time.time()) + 600,
+            }
+            tx = nfpm_c.functions.increaseLiquidity(inc_params).build_transaction({
+                "from": acct.address, "nonce": w3.eth.get_transaction_count(acct.address),
+                "gas": 500000, "gasPrice": int(w3.eth.gas_price * 1.3), "chainId": CHAIN_ID})
+            h = _send_with_nonce_retry(w3, acct, tx)
+            rcpt = w3.eth.wait_for_transaction_receipt(h)
+            print(f"  ✅ compounded: {h.hex()} status={rcpt['status']}")
+            if rcpt['status'] != 1:
+                print("  ❌ increaseLiquidity REVERTED", file=sys.stderr); sys.exit(1)
+        return 0
+
+    # ── HARVEST mode: collect BLACK emissions + compound back ──────────
+    if args.harvest:
+        dry_run = not args.execute
+        if not dry_run:
+            if not args.yes:
+                print("\n❌ Refusing to harvest without --yes. Dry-run only."); sys.exit(1)
+            if not os.path.exists(STEWARD_KEY_FILE):
+                print("\n❌ Steward key not found. Cannot sign.", file=sys.stderr); sys.exit(1)
+            key_data = open(STEWARD_KEY_FILE).read().strip()
+            acct = w3.eth.account.from_key(key_data)
+            if acct.address.lower() != STEWARD_WALLET.lower():
+                print("\n❌ Key mismatch!", file=sys.stderr); sys.exit(1)
+        else:
+            acct = w3.eth.account.from_key("0x" + "0" * 64)  # dummy for dry-run
+        # Find our CL position tokenId
+        nfpm_c = w3.eth.contract(address=Web3.to_checksum_address(nfpm), abi=NFPM_ABI)
+        token_id = None
+        n = nfpm_c.functions.balanceOf(Web3.to_checksum_address(STEWARD_WALLET)).call()
+        for i in range(n):
+            tid = nfpm_c.functions.tokenOfOwnerByIndex(Web3.to_checksum_address(STEWARD_WALLET), i).call()
+            pos = nfpm_c.functions.positions(tid).call()
+            if pos[2].lower() == WAVAX.lower() and pos[3].lower() == USDC.lower():
+                token_id = tid
+                break
+        if token_id is None:
+            print("\n❌ No Blackhole CL position found to harvest.", file=sys.stderr); sys.exit(1)
+        print(f"\n🌾 Harvesting position #{token_id}...")
+        if not key:
+            print("\n❌ No incentive key — cannot harvest.", file=sys.stderr); sys.exit(1)
+        res = harvest(w3, acct, nfpm, farming_center, eternal_farming,
+                      token_id, key, router, dry_run=dry_run)
+        print(f"\n  Result: {res}")
+        return 0
 
     # Affordability check
     need_usdc = usdc_amount
