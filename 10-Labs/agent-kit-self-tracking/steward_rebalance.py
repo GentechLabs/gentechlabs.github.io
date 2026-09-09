@@ -49,6 +49,29 @@ DEPLOY_SCRIPT = os.environ.get(
     "STEWARD_DEPLOY_SCRIPT",
     "/root/.hermes/profiles/gentech-treasury/scripts/deploy_lp_curve.py")
 
+# Pool-aware execution rails (eat the meat, spit out the bones — Sep 8 2026):
+# the watchdog must route to the rail that matches the pool actually holding
+# the capital, not a hardcoded LFJ executor. A Blackhole CL position re-centered
+# with the LFJ executor would strand funds (wrong router/NFPM).
+BLACKHOLE_EXEC_SCRIPT = os.environ.get(
+    "STEWARD_BLACKHOLE_EXEC_SCRIPT",
+    "/root/.hermes/profiles/gentech-treasury/scripts/blackhole_cl_adapter.py")
+
+
+def _exec_script_for_position(position: Dict[str, Any]) -> str:
+    """Return the execution rail matching the LIVE position's pool type.
+
+    Routes by the position's 'type' field (set by discover_positions):
+      - blackhole_cl -> Blackhole Algebra adapter (mint/stake/verify)
+      - lfj_v22 / default -> LFJ executor
+    Falls back to LFJ when no live position (auto-deploy opens a fresh LFJ
+    curve, the proven default rail).
+    """
+    for p in (position.get("positions") or []):
+        if "error" not in p and p.get("type") == "blackhole_cl":
+            return BLACKHOLE_EXEC_SCRIPT
+    return DEPLOY_SCRIPT
+
 # Silence layer (Jordan, Sep 3 2026): alert ONCE per condition, then stay
 # silent until it resolves or changes. No more re-firing the same failed
 # attempt every 10 minutes.
@@ -132,7 +155,7 @@ def _settled_position(tries: int = 3, delay: float = 3.0) -> Dict[str, Any]:
     return last
 
 
-def fee_efficiency(position: Dict[str, Any]) -> float:
+def fee_efficiency(position: Dict[str, Any]) -> Optional[float]:
     """CONTINUOUS fee efficiency (Jordan's soft-floor rule, Sep 3 2026).
 
     100% = price at the exact center of our bin range (max fee capture).
@@ -141,33 +164,47 @@ def fee_efficiency(position: Dict[str, Any]) -> float:
 
     Replaces the old binary in/out measure — "IN range" says nothing about how
     much of our curve is actually being crossed by trades.
+
+    Returns None when the data is INCOMPLETE (in-range but missing range/price).
+    Never fabricate "100% perfect" from a partial read — that would make the
+    watchdog skip a rebalance it should do. Callers must treat None as UNKNOWN
+    and hold, not as optimal (audit finding, Sep 8 2026).
     """
     if not position or "positions" not in position:
-        return 0.0
+        return None
     pos = next((p for p in position["positions"] if "error" not in p), None)
     if not pos:
-        return 0.0
-    if not pos.get("inRange"):
-        return 0.0
+        return None
     lo, hi = pos.get("rangeLow"), pos.get("rangeHigh")
     price = pos.get("livePriceUsd")
-    if not (isinstance(lo, (int, float)) and isinstance(hi, (int, float))
-            and isinstance(price, (int, float)) and hi > lo):
-        return 100.0 if pos.get("inRange") else 0.0
-    frac = max(0.0, min(1.0, (price - lo) / (hi - lo)))
-    return max(0.0, 1.0 - abs(frac - 0.5) * 2.0) * 100.0
+    if pos.get("inRange"):
+        if not (isinstance(lo, (int, float)) and isinstance(hi, (int, float))
+                and isinstance(price, (int, float)) and hi > lo):
+            return None  # in-range but data incomplete — UNKNOWN, not optimal
+        frac = max(0.0, min(1.0, (price - lo) / (hi - lo)))
+        return max(0.0, 1.0 - abs(frac - 0.5) * 2.0) * 100.0
+    # Out of range — real 0.0 (a genuine "re-center now" state, not an error)
+    return 0.0
 
 
-def gas_ok() -> bool:
-    """Enough native gas on the Steward wallet to act (or refuel-able)."""
+def gas_ok() -> Optional[bool]:
+    """Enough native gas on the Steward wallet to act (or refuel-able).
+
+    Returns True / False when the read succeeds; None when the read FAILS
+    (RPC out, wallet misconfig) so the caller can distinguish a real gas-level
+    answer from an outage. An outage must ALERT, not silently block execution
+    (audit finding, Sep 8 2026).
+    """
     try:
         from discover_positions import rpc_call
         cfg = load_json(os.path.join(HERE, "treasury_config.json"), {}) or {}
         wallet = cfg.get("wallet") or os.environ.get("STEWARD_WALLET")
+        if not isinstance(wallet, str) or not wallet:
+            return None  # wallet misconfig — unknown, not "no gas"
         bal = int(rpc_call("avalanche", "eth_getBalance", [wallet, "latest"]), 16) / 1e18
         return bal >= GAS_REFUEL_MIN_AVAX
     except Exception:
-        return False
+        return None  # read failed — unknown, not silently False
 
 
 # Minimum deployable capital (USDC) before auto-deploy triggers. Below this we
@@ -178,13 +215,19 @@ DEPLOY_EXEC_SCRIPT = os.environ.get(
     "/root/.hermes/profiles/gentech-treasury/scripts/gta_avax_lp_execute.py")
 
 
-def has_deployable_capital() -> float:
+def has_deployable_capital() -> Optional[float]:
     """Return FULL deployable working capital (USD) on the Steward wallet
-    (0 if none / error).
+    (None if the read FAILED). A positive float = real deployable capital;
+    0.0 = genuinely no funds; None = couldn't read (RPC out, wallet misconfig).
 
     This is the trigger for the auto-deploy leg: a funded wallet with no live
     position means the treasury should open a fresh curve, not sit as dry
     powder. Returns the TOTAL deployable value.
+
+    Audit fix (Sep 8 2026): this used to return 0.0 for EVERY failure path,
+    so the capital gate silently treated an RPC/wallet error as "no capital"
+    and parked funds as if dry powder. Now a read failure returns None — the
+    caller must treat it as UNKNOWN (hold + alert), not "no deployable capital".
 
     FULL-CAPITAL fix (Sep 7 2026): this previously returned ONLY the USDC
     balance. After a withdraw, the LP returns its natural WAVAX-heavy ratio,
@@ -199,18 +242,20 @@ def has_deployable_capital() -> float:
         from discover_positions import get_erc20_balance
         cfg = load_json(os.path.join(HERE, "treasury_config.json"), {}) or {}
         wallet = cfg.get("wallet") or os.environ.get("STEWARD_WALLET")
-        if not isinstance(wallet, str):
-            return 0.0
+        if not isinstance(wallet, str) or not wallet:
+            return None  # wallet misconfig — unknown, not "no capital"
         # USDC on Avalanche C-Chain
         usdc_contract = "0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E"
         raw_usdc = get_erc20_balance("avalanche", usdc_contract, wallet)
         if raw_usdc is None:
-            return 0.0
+            return None  # RPC read failed — unknown, not "no capital"
         usdc = raw_usdc / 1e6
         # WAVAX too — value the full working capital, not just USDC
         wavax_contract = "0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7"
         raw_wavax = get_erc20_balance("avalanche", wavax_contract, wallet)
-        wavax = (raw_wavax / 1e18) if raw_wavax is not None else 0.0
+        if raw_wavax is None:
+            return None  # WAVAX read failed — don't under-report working capital
+        wavax = raw_wavax / 1e18
         # price — WAVAX USD market price for valuing the full working capital
         try:
             from discover_positions import fetch_asset_price
@@ -219,9 +264,9 @@ def has_deployable_capital() -> float:
             price = None
         if not price or price <= 0:
             price = 7.0  # last-resort estimate
-        return usdc + wavax * price
+        return round(usdc + wavax * price, 2)
     except Exception:
-        return 0.0
+        return None  # read failed — unknown, treat as UNKNOWN not "no capital"
 
 
 def get_position_after() -> str:
@@ -310,7 +355,24 @@ def decide(position: Dict[str, Any], regime: Dict[str, str],
         # dry powder. Only deploy when there's real deployable capital AND
         # enough native gas. Below the floor we stay liquid.
         deployable = has_deployable_capital()
-        if deployable >= DEPLOY_MIN_USDC and gas_ok():
+        if deployable is None:
+            # Read FAILED (RPC out / wallet misconfig) — UNKNOWN, not "no capital".
+            # Auto-deploy on an unreadable wallet risks a blind deploy; hold and
+            # let the alert layer tell Jordan the read failed (audit fix Sep 8).
+            return {
+                "action": "hold", "shape": shape,
+                "reason": "no position but deployable-capital read FAILED — hold (unknown), not auto-deploy",
+                "fee_eff": eff,
+            }
+        gas = gas_ok()
+        if gas is None:
+            # Gas read failed — can't confirm enough native gas to deploy safely.
+            return {
+                "action": "hold", "shape": shape,
+                "reason": "deployable capital present but gas read FAILED — hold (unknown gas)",
+                "fee_eff": eff,
+            }
+        if deployable >= DEPLOY_MIN_USDC and gas:
             return {
                 "action": "deploy", "shape": shape,
                 "reason": (f"funded wallet, no position (settled) — auto-deploy "
@@ -319,6 +381,16 @@ def decide(position: Dict[str, Any], regime: Dict[str, str],
         return {
             "action": "hold", "shape": shape,
             "reason": "no deployable position detected (settled)", "fee_eff": eff,
+        }
+
+    # fee_efficiency returned None = in-range but range/price data incomplete.
+    # Never treat partial data as "perfect center" (that skipped rebalances);
+    # hold on UNKNOWN and let the alert layer flag the incomplete read.
+    if eff is None:
+        return {
+            "action": "hold", "shape": shape,
+            "reason": "in-range but range/price data incomplete — UNKNOWN fee eff, holding",
+            "fee_eff": None,
         }
 
     # Jordan's SOFT-FLOOR rule (Sep 3 2026): in range but fee capture weak
@@ -385,9 +457,14 @@ def execute_rebalance(dry_run: bool = True) -> Dict[str, Any]:
     if not os.path.exists(DEPLOY_SCRIPT):
         return {"executed": False, "dry_run": False,
                 "error": "deploy_lp_curve.py not found"}
-    if not gas_ok():
+    gas = gas_ok()
+    if gas is None or not gas:
+        # None = gas read FAILED (RPC out / wallet misconfig) — refuse, and say
+        # WHY honestly rather than mislabeling an outage as low gas. A real
+        # deployment on an unreadable gas level is a blind deploy.
+        cause = "gas read FAILED (unknown)" if gas is None else "insufficient native gas"
         return {"executed": False, "dry_run": False,
-                "error": "insufficient native gas on Steward wallet — refusing"}
+                "error": f"{cause} on Steward wallet — refusing to deploy"}
 
     import subprocess
     try:
@@ -477,6 +554,14 @@ def main() -> int:
             quiet = silence.silenced("auto-deploy")
             import subprocess
             deployable = has_deployable_capital()
+            if deployable is None:
+                # Transient read failure on the re-read — abort this deploy
+                # attempt safely rather than passing "--amount None" to the
+                # execute script (would be a blind/mis-sized deploy).
+                if not quiet:
+                    print("🛡️ STEWARD — auto-deploy deferred: deployable-capital "
+                          "read FAILED on re-read (unknown); will retry next cycle")
+                return 0
             deployable = max(10.0, deployable - 1.0)  # keep a little USDC + gas buffer
             if not quiet:
                 print(f"🛡️ STEWARD — AUTONOMOUS DEPLOY (no position)")
@@ -536,10 +621,23 @@ def main() -> int:
             if pos_read:
                 print(f"   Before: {pos_read}")
             print(f"   Plan: withdraw + redeploy {decision['shape']} on current price")
-        # Execute the full withdraw-redeploy cycle via steward_execute.py
+        # Execute the full withdraw-redeploy cycle via the POOL-AWARE rail.
+        # Eat the meat, spit out the bones: route to the executor matching the
+        # pool that actually holds the capital. A Blackhole CL position must
+        # NOT be re-centered with the LFJ executor (wrong router/NFPM — would
+        # strand funds). If the Blackhole re-center leg isn't built yet, HOLD
+        # and flag honestly instead of running the wrong rail.
         import subprocess
-        exec_script = os.path.join(HERE, "steward_execute.py")
+        exec_script = _exec_script_for_position(position)
         shape = decision["shape"].lower()
+        if exec_script == BLACKHOLE_EXEC_SCRIPT:
+            # Blackhole re-center (withdraw CL -> re-mint) is NOT yet wired.
+            # Do NOT run the LFJ executor on a Blackhole position. Hold + flag.
+            if not quiet:
+                print(f"   ⚠️ Blackhole CL position — re-center leg not yet built. "
+                      f"Holding (won't run LFJ executor on Blackhole position).")
+            silence.mark_failure("rebalance", "blackhole re-center leg not built", retry_hours=6)
+            return 0
         proc = subprocess.run(
             [sys.executable, exec_script, "--mode", "withdraw-redeploy",
              "--shape", shape, "--execute", "--yes"],
@@ -575,7 +673,9 @@ def main() -> int:
     print("=" * 52)
     print(f"  Regime:     {regime.get('regime')} (conf {regime.get('confidence', 0):.0%})")
     print(f"  Shape:      {decision['shape']}")
-    print(f"  Fee eff:    {decision['fee_eff']:.0f}%")
+    fe = decision.get("fee_eff")
+    fee_str = "UNKNOWN (incomplete data)" if fe is None else f"{fe:.0f}%"
+    print(f"  Fee eff:    {fee_str}")
     print(f"  Action:     {decision['action'].upper()}")
     print(f"  Reason:     {decision['reason']}")
 

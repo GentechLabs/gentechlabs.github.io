@@ -47,25 +47,40 @@ def _key():
     return None
 
 
-def _chat(model, content, max_tokens=300, timeout=90):
-    body = json.dumps({
-        "model": model,
-        "messages": [{"role": "user", "content": content}],
-        "max_tokens": max_tokens,
-    }).encode()
-    req = urllib.request.Request(
-        API + "/chat/completions", data=body,
-        headers={"Content-Type": "application/json", "Authorization": f"Bearer {key}"})
-    try:
-        with urllib.request.urlopen(req, timeout=timeout) as resp:
-            d = json.loads(resp.read())
-        c = d["choices"][0]["message"]["content"]
-        fr = d["choices"][0].get("finish_reason")
-        return c, fr
-    except urllib.error.HTTPError as e:
-        return "", f"HTTP{e.code}"
-    except Exception as e:
-        return "", f"ERR:{str(e)[:40]}"
+def _chat(model, content, max_tokens=4000, timeout=90, retries=3):
+    # Retry on EmptyStreamError / transient SSE hiccup (Gentech Sep 8: an
+    # upstream SSE hiccup returns HTTP 200 + empty body; retry clears it).
+    last = ("", "ERR:no_attempt")
+    for attempt in range(max(1, retries)):
+        body = json.dumps({
+            "model": model,
+            "messages": [{"role": "user", "content": content}],
+            "max_tokens": max_tokens,
+        }).encode()
+        req = urllib.request.Request(
+            API + "/chat/completions", data=body,
+            headers={"Content-Type": "application/json", "Authorization": f"Bearer {key}"})
+        try:
+            with urllib.request.urlopen(req, timeout=timeout) as resp:
+                d = json.loads(resp.read())
+            c = d["choices"][0]["message"]["content"]
+            fr = d["choices"][0].get("finish_reason")
+            # Empty body (HTTP 200, EmptyStreamError) → retry, not "degraded"
+            if fr in (None, "length") and not (c or "").strip():
+                last = ("", "EmptyStreamError(empty body)")
+                time.sleep(1.5 * (attempt + 1))
+                continue
+            return c, fr
+        except urllib.error.HTTPError as e:
+            last = ("", f"HTTP{e.code}")
+            if e.code in (429, 500, 502, 503, 504):  # retryable
+                time.sleep(2 * (attempt + 1))
+                continue
+            return last
+        except Exception as e:
+            last = ("", f"ERR:{str(e)[:40]}")
+            time.sleep(1.5 * (attempt + 1))
+    return last
 
 
 def main():
@@ -75,12 +90,18 @@ def main():
     degraded = []
     results = []
     for label, model in PROBE:
-        # Trivial test: does it connect+auth+emit at all?
-        c0, fr0 = _chat(model, "What is 2+2? Answer with just the number.", 10, 30)
+        # Trivial test: does it connect+auth+emit at all? Give reasoning models a
+        # real budget — glm/kimi burn low max_tokens on reasoning_content before
+        # any answer (Gentech Sep 8: ≥500 tokens; we use 500 so the probe can't
+        # false-flag a healthy model as degraded).
+        c0, fr0 = _chat(model, "What is 2+2? Answer with just the number.", 500, 30)
         trivial = (fr0 == "stop" and c0.strip() != "")
-        # Substantive test: the real bar (empty on load = degraded)
+        # Substantive test: the real bar (empty on load = degraded).
+        # VERIFIED Sep 8: glm-5.3-flash + kimi need >=2000 tokens to emit a
+        # real audit answer (reasoning_content eats the budget first). Use 4000
+        # so no healthy model can be false-flagged as DEGRADED by the probe.
         if trivial:
-            c1, fr1 = _chat(model, SUBSTANTIVE, 250, 90)
+            c1, fr1 = _chat(model, SUBSTANTIVE, 4000, 90)
             sub = (fr1 == "stop" and len(c1.strip()) > 20)
         else:
             c1, fr1, sub = "", "", False

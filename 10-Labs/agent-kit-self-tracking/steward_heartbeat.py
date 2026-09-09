@@ -27,6 +27,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 WALLET = "0x572ABd6461BED2258615E6b99c585Ab7c5d05037"
 PAIR = "0x864d4e5ee7318e97483db7eb0912e09f161516ea"
 MACRO_SCHEDULED_STATE = "/root/.hermes/profiles/gentech-treasury/scripts/.steward-macro-scheduled.json"
+LEDGER_PATH = "/root/.hermes/profiles/gentech-treasury/scripts/.compound-ledger.json"
 
 
 def macro_next_action():
@@ -49,6 +50,33 @@ def macro_next_action():
 def _now_et() -> str:
     from datetime import timedelta
     return datetime.now(timezone(timedelta(hours=-4))).strftime("%Y-%m-%d %H:%M ET")
+
+
+def in_farm_days() -> float:
+    """Days since first fund-moving deploy (from compound-ledger ok entries)."""
+    try:
+        with open(LEDGER_PATH) as f:
+            ledger = json.load(f)
+    except FileNotFoundError:
+        return 0.0
+    def pt(ts):
+        if isinstance(ts, (int, float)):
+            return datetime.fromtimestamp(ts, tz=timezone.utc)
+        try:
+            return datetime.fromisoformat(str(ts).replace("Z", "+00:00"))
+        except Exception:
+            return None
+    first = None
+    for e in ledger:
+        if not isinstance(e, dict):
+            continue
+        if e.get("action") in ("compound", "rebalance") and e.get("ok"):
+            t = pt(e.get("ts"))
+            if t and (first is None or t < first):
+                first = t
+    if first is None:
+        return 0.0
+    return max(0.0, (datetime.now(timezone.utc) - first).total_seconds() / 86400)
 
 
 def fetch_json(url: str, timeout: int = 12):
@@ -109,9 +137,16 @@ def main() -> int:
     # Position
     in_range = pos.get("inRange", False)
     icon = "🟢" if in_range else "🔴"
-    lines.append(f"   {icon} {pos.get('read', 'n/a')}")
-    lines.append(f"   Shape: Curve · {pos.get('bins', 0)} bins · "
-                 f"range ${pos.get('rangeLow', 0):.4f}–${pos.get('rangeHigh', 0):.4f}")
+    ptype = pos.get("type", "")
+    pname = pos.get("name", "LP position")
+    lines.append(f"   {icon} {pname} · {pos.get('read', 'n/a')}")
+    if ptype == "blackhole_cl":
+        # CL position: show tick range + liquidity, not LFJ bin shape
+        lines.append(f"   CL position #{pos.get('tokenId')} · ticks {pos.get('tickLower')}–{pos.get('tickUpper')} · "
+                     f"range ${pos.get('rangeLow', 0):.4f}–${pos.get('rangeHigh', 0):.4f}")
+    else:
+        lines.append(f"   Shape: Curve · {pos.get('bins', 0)} bins · "
+                     f"range ${pos.get('rangeLow', 0):.4f}–${pos.get('rangeHigh', 0):.4f}")
 
     # Fee efficiency (IN range = earning; OUT = 0)
     eff = 100.0 if in_range else 0.0
@@ -129,6 +164,8 @@ def main() -> int:
     # number; read the chain.
     pos_val = float(pos.get("positionUsd") or 0)
     lines.append("   ── Yield vs Staking vs HODL ──")
+    farm_days = in_farm_days()
+    lines.append(f"   ⏳ In pool: {farm_days:.1f} days farming (since first deploy)")
     if pos_val:
         # LP daily fee estimate: ~0.5% of position/day WHILE IN RANGE in chop
         # (calibrated from the brain: $0.24/day on $46.59 = 0.515%/day). This is

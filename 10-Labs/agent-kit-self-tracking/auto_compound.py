@@ -61,6 +61,11 @@ def get_allocation():
     """Sentiment-driven allocation call: refresh the predictor, read its signal.
 
     Freshness-gated: stale/missing signal -> neutral 0.5 (never guess).
+
+    Audit fix (Sep 8 2026): the fallback previously returned TARGET_USDC_SHARE
+    (0.60) on stale/missing data, contradicting this docstring and silently
+    biasing toward the target instead of neutral. "Never guess" means neutral
+    0.5 when we can't trust the signal.
     """
     try:
         subprocess.run([sys.executable, PREDICTOR], capture_output=True, timeout=60)
@@ -73,7 +78,8 @@ def get_allocation():
             return max(0.4, min(0.6, alloc)), f"predictor: {sig.get('allocation_display')} {stance} ({conf}%)"
     except Exception:
         pass
-    return TARGET_USDC_SHARE, "predictor unavailable -> default 60/40"
+    # Neutral 0.5 on stale/missing — never guess (matches docstring contract)
+    return 0.5, "predictor unavailable or stale -> neutral 0.5 (never guess)"
 
 
 def rpc(method, params):
@@ -94,12 +100,33 @@ def erc20_balance(token, wallet_addr):
 
 
 def log_ledger(entry):
+    """Append to the compound ledger (truth layer), ATOMICALLY.
+
+    Audit fix (Sep 8 2026): the old read-modify-write was non-atomic — a crash
+    mid-dump truncated the ledger, then the next read caught the corrupt JSON,
+    hit `except: led = []`, and silently WIPED the audit trail on rewrite.
+    Now we write to a temp file and os.replace() (atomic on POSIX), and a corrupt
+    read is quarantined to a .corrupt-<ts> backup rather than discarded silently.
+    """
     try:
         led = json.load(open(LEDGER)) if os.path.exists(LEDGER) else []
-    except Exception:
+    except Exception as e:
+        # Quarantine the corrupt file so the audit trail isn't silently lost.
+        q = LEDGER + f".corrupt-{int(time.time())}"
+        try:
+            if os.path.exists(LEDGER):
+                import shutil
+                shutil.copy(LEDGER, q)
+                print(f"   ⚠️ quarantine corrupt ledger -> {q}")
+        except Exception:
+            pass
         led = []
     led.append(entry)
-    json.dump(led[-200:], open(LEDGER, "w"), indent=2)
+    # Atomic write: temp file in same dir then rename (no mid-write truncation).
+    tmp = LEDGER + ".tmp"
+    with open(tmp, "w") as f:
+        json.dump(led[-200:], f, indent=2)
+    os.replace(tmp, LEDGER)
 
 
 def main():

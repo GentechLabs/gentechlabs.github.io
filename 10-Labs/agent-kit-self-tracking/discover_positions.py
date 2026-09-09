@@ -350,6 +350,165 @@ def read_lfj_v22_position(wallet: str, pool: Dict[str, Any], chain: str = "avala
         return {"error": "position read failed", "name": pool.get("name")}
 
 
+# ── Algebra V3 (Blackhole) CL position reader ─────────────────────────
+# Blackhole's WAVAX/USDC pool is an Algebra V3 concentrated-liquidity pool.
+# Positions are ERC-721 NFTs held by the wallet via the NFPM. We read the
+# wallet's NFT balance + tokenOfOwnerByIndex + positions(tokenId) to find
+# live CL positions, and globalState() for the current tick/price.
+
+BLACKHOLE_NFPM = "0x3fED017EC0f5517Cdf2E8a9a4156c64d74252146"  # LEGACY NFPM (our pool's deployer)
+BLACKHOLE_POOL = "0x41100c6d2c6920b10d12cd8d59c8a9aa2ef56fc7"  # WAVAX/USDC Algebra V3
+_WAVAX = "0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7"
+_USDC = "0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E"
+
+
+def _erc721_balance(chain: str, nfpm: str, wallet: str) -> int:
+    padded = wallet.lower().replace("0x", "").zfill(64)
+    try:
+        r = eth_call(chain, nfpm, f"0x70a08231{padded}")  # balanceOf(address)
+        return int(r, 16) if r and r != "0x" else 0
+    except Exception:
+        return 0
+
+
+def _erc721_token_of_owner(chain: str, nfpm: str, wallet: str, index: int) -> Optional[int]:
+    padded = wallet.lower().replace("0x", "").zfill(64)
+    idx = hex(index)[2:].zfill(64)
+    try:
+        r = eth_call(chain, nfpm, f"0x2f745c59{padded}{idx}")  # tokenOfOwnerByIndex(address,uint256)
+        return int(r, 16) if r and r != "0x" else None
+    except Exception:
+        return None
+
+
+def _nfpm_position(chain: str, nfpm: str, token_id: int) -> Optional[Dict[str, Any]]:
+    """NFPM.positions(tokenId) -> {token0, token1, tickLower, tickUpper, liquidity}."""
+    tid = hex(token_id)[2:].zfill(64)
+    try:
+        r = eth_call(chain, nfpm, f"0x99fbab88{tid}")  # positions(uint256)
+        if not r or r == "0x":
+            return None
+        b = bytes.fromhex(r[2:])
+        # ABI decode: nonce(uint88) operator(160) token0(160) token1(160)
+        # deployer(160) tickLower(int24) tickUpper(int24) liquidity(uint128) ...
+        # Each is a 32-byte word in the return.
+        def _w(i):
+            return int.from_bytes(b[i*32:(i+1)*32], "big")
+        def _addr(i):
+            return "0x" + b[i*32+12:(i+1)*32].hex()
+        def _int24(i):
+            v = int.from_bytes(b[i*32+29:(i+1)*32], "big", signed=True)
+            return v
+        return {
+            "token0": _addr(2), "token1": _addr(3),
+            "tickLower": _int24(5), "tickUpper": _int24(6),
+            "liquidity": _w(7),
+        }
+    except Exception:
+        return None
+
+
+def _pool_global_state(chain: str, pool: str) -> Optional[Dict[str, Any]]:
+    """Algebra pool globalState() -> {price, tick, fee}. Decodes the packed struct."""
+    try:
+        r = eth_call(chain, pool, "0xe76c01e4")  # globalState()
+        if not r or r == "0x":
+            return None
+        b = bytes.fromhex(r[2:])
+        # ABI tuple: price(uint160) tick(int24) fee(uint16) timepointIndex(uint16)
+        # communityFeeToken0(uint8) communityFeeToken1(uint8) unlocked(bool)
+        price = int.from_bytes(b[0:32], "big")
+        tick = int.from_bytes(b[32:64][29:32], "big", signed=True)
+        fee = int.from_bytes(b[64:96][30:32], "big")
+        return {"price": price, "tick": tick, "fee": fee}
+    except Exception:
+        return None
+
+
+def read_blackhole_cl_position(wallet: str, pool: Dict[str, Any], chain: str = "avalanche") -> Dict[str, Any]:
+    """Live Blackhole Algebra-V3 CL position read (NFPM NFT-based).
+
+    Returns a normalized position dict (same shape as LFJ reader) or
+    {'error': ...}. Never raises. Reads the wallet's CL NFTs, finds the one
+    on the WAVAX/USDC pool, and reports liquidity + in-range vs the pool's
+    current tick.
+    """
+    nfpm = pool.get("nfpm", BLACKHOLE_NFPM)
+    pair = pool.get("address", BLACKHOLE_POOL)
+    tokenX = pool.get("tokenX", "WAVAX")
+    tokenY = pool.get("tokenY", "USDC")
+
+    if not _is_checksum_or_valid(wallet) or not _is_checksum_or_valid(nfpm):
+        return {"error": "invalid address", "name": pool.get("name")}
+
+    n = _erc721_balance(chain, nfpm, wallet)
+    if n == 0:
+        return {"error": "no position", "name": pool.get("name"), "bins": 0}
+
+    # Find the CL NFT on this pool
+    for i in range(n):
+        tid = _erc721_token_of_owner(chain, nfpm, wallet, i)
+        if tid is None:
+            continue
+        pos = _nfpm_position(chain, nfpm, tid)
+        if not pos:
+            continue
+        # Match pool tokens (WAVAX/USDC)
+        if (pos["token0"].lower() == _WAVAX.lower() and pos["token1"].lower() == _USDC.lower()) or \
+           (pos["token0"].lower() == _USDC.lower() and pos["token1"].lower() == _WAVAX.lower()):
+            gs = _pool_global_state(chain, pair)
+            cur_tick = gs["tick"] if gs else None
+            in_range = (pos["tickLower"] <= cur_tick <= pos["tickUpper"]) if cur_tick is not None else None
+            price_x = fetch_asset_price(tokenX)
+            # USD range from ticks: price = 1.0001^tick * 10^(dec0-dec1)
+            # WAVAX(18) / USDC(6) -> * 1e12
+            def _tick_usd(t):
+                return 1.0001 ** t * (10 ** (18 - 6))
+            range_lo = _tick_usd(pos["tickLower"]) if pos["tickLower"] is not None else None
+            range_hi = _tick_usd(pos["tickUpper"]) if pos["tickUpper"] is not None else None
+            # Position value: funded_usd - loose wallet (same honest method as LFJ)
+            position_usd = None
+            try:
+                cfg_funded = None
+                try:
+                    with open(os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                           "treasury_config.json")) as _cfgf:
+                        cfg_funded = json.load(_cfgf).get("funded_usd")
+                except Exception:
+                    cfg_funded = None
+                if cfg_funded and price_x:
+                    wb = discover_wallet_balances(chain, wallet)
+                    loose_usd = 0.0
+                    for sym, amt in wb.items():
+                        if sym in ("AVAX", "WAVAX"):
+                            loose_usd += amt * price_x
+                        elif sym in ("USDC", "USDC_e", "USDT_e"):
+                            loose_usd += amt
+                    position_usd = round(max(cfg_funded - loose_usd, 0.0), 2)
+            except Exception:
+                position_usd = None
+            return {
+                "name": pool.get("name"),
+                "type": "blackhole_cl",
+                "chain": chain,
+                "wallet": wallet,
+                "pool": pair,
+                "tokenId": tid,
+                "bins": 1 if pos["liquidity"] > 0 else 0,
+                "liquidity": pos["liquidity"],
+                "tickLower": pos["tickLower"],
+                "tickUpper": pos["tickUpper"],
+                "rangeLow": round(range_lo, 6) if range_lo else None,
+                "rangeHigh": round(range_hi, 6) if range_hi else None,
+                "inRange": in_range,
+                "livePriceUsd": round(price_x, 6) if price_x else None,
+                "positionUsd": position_usd,
+                "read": (f"CL position #{tid} · {'IN' if in_range else 'OUT'} · "
+                         f"${price_x:.4f} Y/X" if price_x else f"CL position #{tid}"),
+            }
+    return {"error": "no position on this pool", "name": pool.get("name"), "bins": 0}
+
+
 # ── top-level auto-discovery ───────────────────────────────────────────
 
 def discover_positions(chain: str, wallet: str,
@@ -395,6 +554,8 @@ def discover_positions(chain: str, wallet: str,
         try:
             if ptype == "lfj_v22":
                 pos = read_lfj_v22_position(wallet, pool, chain)
+            elif ptype == "blackhole_cl":
+                pos = read_blackhole_cl_position(wallet, pool, chain)
             else:
                 pos = {"error": f"unsupported position type: {ptype}", "name": pool.get("name")}
         except Exception:

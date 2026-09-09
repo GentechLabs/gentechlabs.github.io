@@ -99,8 +99,35 @@ def build_report(pos, balances, pool_apy, staking_apr,
     ts = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
     L.append(f"🌾 STEWARD FARM REPORT — {ts}")
     L.append("")
+    # Days in pool: first fund-moving deploy from the compound ledger
+    farm_days = 0.0
+    dated = "—"
+    try:
+        if os.path.exists(LEDGER):
+            ld = json.load(open(LEDGER))
+            def _pt(ts):
+                if isinstance(ts, (int, float)):
+                    return datetime.fromtimestamp(ts, tz=timezone.utc)
+                try:
+                    return datetime.fromisoformat(str(ts).replace("Z", "+00:00"))
+                except Exception:
+                    return None
+            first = None
+            for e in (ld if isinstance(ld, list) else []):
+                if isinstance(e, dict) and e.get("action") in ("compound", "rebalance") and e.get("ok"):
+                    t = _pt(e.get("ts"))
+                    if t and (first is None or t < first):
+                        first = t
+            if first:
+                farm_days = max(0.0, (datetime.now(timezone.utc) - first).total_seconds() / 86400)
+                dated = datetime.fromtimestamp(first.timestamp(), tz=timezone.utc).strftime("%b %d")
+            else:
+                dated = "—"
+    except Exception:
+        pass
+    L.append(f"⏳ In pool: {farm_days:.1f} days farming — since {dated}")
     L.append("📊 Position (on-chain)")
-    L.append(f"  LFJ AVAX/USDC V2.2 · {bins} bins · active bin {active}")
+    L.append(f"  {pos.get('name', 'LP position')} · {bins} bins · active bin {active}")
     in_mark = "🟢 IN RANGE — earning fees" if in_range else "🔴 OUT OF RANGE"
     L.append(f"  Value: ${pos_usd:.2f} · Price ${price:.4f} · {in_mark}")
     L.append(f"  Range: ${range_lo:.4f}–${range_hi:.4f}  [{bar} {frac*100:.0f}%]")
@@ -119,7 +146,8 @@ def build_report(pos, balances, pool_apy, staking_apr,
         L.append(f"  LP value since last report: ${delta_usd:+.4f} over {delta_hours:.1f}h (fees ± IL ± churn)")
     if pool_apy:
         daily_est = pos_usd * pool_apy / 100 / 365
-        L.append(f"  Pool-avg fee on OUR position: ~${daily_est:.4f}/day (pool avg {pool_apy:.2f}% APY, LFJ published)")
+        L.append(f"  Pool-avg fee on OUR position: ~${daily_est:.4f}/day (LFJ pool avg {pool_apy:.2f}% APY — "
+                 f"reference only; Blackhole APY not yet measured on this position)")
     else:
         L.append("  Fee estimate unavailable (stale feed) — nothing fabricated")
     if staking_apr:
@@ -161,7 +189,12 @@ def main():
         return 1
     positions = data.get("positions", [])
     balances = data.get("balances", {})
-    if not positions:
+    # Pick the LIVE position (first non-error) — pool-agnostic. When we moved
+    # LFJ→Blackhole, positions[0] became the LFJ "no position" error entry;
+    # hardcoding index 0 would report the wrong (empty) pool. "Eat the meat,
+    # spit out the bones": report whichever pool actually holds liquidity.
+    live_pos = next((p for p in positions if "error" not in p), None)
+    if not live_pos:
         print("🌾 Farm report: no LP position — nothing to farm yet")
         return 0
 
@@ -197,21 +230,21 @@ def main():
 
     # legacy single-snapshot delta (kept as churn fallback)
     snap = load(SNAPSHOT)
-    pos_usd = positions[0].get("positionUsd") or 0
+    pos_usd = live_pos.get("positionUsd") or 0
     prev = snap.get("position_usd")
     delta_usd = None
     delta_hours = None
     if prev is not None:
         delta_usd = round(pos_usd - prev, 4)
         delta_hours = round((time.time() - snap.get("ts", time.time())) / 3600, 1)
-    json.dump({"ts": time.time(), "position_usd": pos_usd, "price": positions[0].get("livePriceUsd")},
+    json.dump({"ts": time.time(), "position_usd": pos_usd, "price": live_pos.get("livePriceUsd")},
               open(SNAPSHOT, "w"), indent=2)
 
     alloc = load(ALLOC)
     led = load(LEDGER)
     last_action = next((e for e in reversed(led) if e.get("action") in ("compound", "rebalance")), None)
 
-    print(build_report(positions[0], balances, pool_apy, staking_apr,
+    print(build_report(live_pos, balances, pool_apy, staking_apr,
                        delta_usd, delta_hours, fee_note,
                        fee_daily=fee_daily, fee_apr=fee_apr,
                        alloc=alloc, last_action=last_action))
