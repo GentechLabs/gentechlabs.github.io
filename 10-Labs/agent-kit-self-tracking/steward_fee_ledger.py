@@ -210,20 +210,36 @@ def fees_between(snapshots: list, n_back: int = 2) -> dict:
 
 
 def _drift_adjusted(prev: dict, cur: dict, raw_delta: float):
-    """Separate fees from price drift: the AVAX-side holdings (LP x + wallet
-    WAVAX) gained/lost value purely from price movement. fees ≈ raw_delta −
-    price_change × avax_exposure. Both snapshots must carry per-side data."""
+    """Separate fees from price movement by REVALUING prev at the current
+    price before differencing (findings: 2026-09-08-fee-ledger, HIGH).
+
+    Old formula `fees = raw_delta − drift` algebraically cancelled the AVAX
+    terms to `usdc_cur − usdc_prev`, so fees accrued in AVAX token form
+    (LFJ pays x-side bins in WAVAX) were invisible — phantom undercount.
+
+    New formula revalues both sides at the same (current) price, so only
+    token-QUANTITY change counts as fees; pure price movement cancels:
+
+        total_cur      = stables_cur + avax_cur·px_cur
+        total_prev_rev = stables_prev + avax_prev·px_cur
+        fees           = total_cur − total_prev_rev
+        (= (avax_cur − avax_prev)·px_cur + (stables_cur − stables_prev))
+
+    If a snapshot lacks per-side data, report raw_delta — honest, never
+    a fabricated fee number."""
     try:
         if prev.get("lp_x_wavax") is None or cur.get("lp_x_wavax") is None:
-            return raw_delta  # can't adjust — report raw (honest)
+            return raw_delta  # can't revalue — report raw (honest)
+        stables_prev = float(prev.get("wallet_usdc") or 0) + float(prev.get("lp_y_usdc") or 0)
+        stables_cur = float(cur.get("wallet_usdc") or 0) + float(cur.get("lp_y_usdc") or 0)
         avax_prev = float(prev.get("lp_x_wavax") or 0) + float(prev.get("wallet_wavax") or 0)
         avax_cur = float(cur.get("lp_x_wavax") or 0) + float(cur.get("wallet_wavax") or 0)
-        px_prev = float(prev.get("price_usd") or 0)
         px_cur = float(cur.get("price_usd") or 0)
-        if not px_prev or not px_cur:
+        if not px_cur:
             return raw_delta
-        drift = avax_cur * px_cur - avax_prev * px_prev
-        return round(raw_delta - drift, 4)
+        total_cur = stables_cur + avax_cur * px_cur
+        total_prev_reval = stables_prev + avax_prev * px_cur
+        return round(total_cur - total_prev_reval, 4)
     except Exception:
         return raw_delta
 
