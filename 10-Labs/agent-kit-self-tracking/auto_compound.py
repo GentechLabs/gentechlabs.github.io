@@ -206,7 +206,12 @@ def main():
         # the execute script exits non-zero and this compound is marked failed.
         pass  # don't block — let the execute script's verification be the gate
 
-    price = positions[0].get("livePriceUsd") if positions else None
+    # Pick the LIVE position (first non-error) — pool-agnostic. When we moved
+    # LFJ→Blackhole, positions[0] became the LFJ "no position" error entry;
+    # hardcoding index 0 reads a dead pool's (missing) price and skips every
+    # cycle. "Eat the meat, spit out the bones": use whichever pool holds capital.
+    live_pos = next((p for p in positions if "error" not in p), None)
+    price = live_pos.get("livePriceUsd") if live_pos else None
     if not price:
         reasons.append("no live price")
 
@@ -233,7 +238,7 @@ def main():
 
     # ── Idle valuation ────────────────────────────────────────────────
     idle_usd = usdc_bal + wavax_bal * market_price   # ← market price here
-    pos_usd = positions[0].get("positionUsd", 0)
+    pos_usd = live_pos.get("positionUsd", 0) if live_pos else 0
 
     # ── Intelligence: sentiment-driven allocation ────────────────────
     target_share, alloc_source = get_allocation()
@@ -269,32 +274,49 @@ def main():
     # ── Decision 2: deploy idle ──────────────────────────────────────
     deploy_usd = round(idle_usd - 0.10, 2)  # dust buffer
     acted = False
+    # Pool-aware rail (eat the meat, spit out the bones — Sep 8 2026): route
+    # the compound to the executor matching the pool that actually holds the
+    # capital. A Blackhole CL position must NOT be compounded with the LFJ
+    # executor (wrong router/NFPM). Detect the live position type.
+    live_type = next((p.get("type") for p in positions if "error" not in p), None)
     if idle_usd >= MIN_COMPOUND_USD and deploy_usd >= MIN_DEPLOY_USD:
         print(f"💰 Idle capital ${idle_usd:.2f} detected (LP ${pos_usd:.2f}) — "
               f"compounding ${deploy_usd:.2f} into the pool")
         if not DRY_RUN:
-            dep = subprocess.run([sys.executable, os.path.join(SCRIPT_DIR, "gta_avax_lp_execute.py"),
-                                  "--amount", f"{deploy_usd}", "--bin-spread", "5",
-                                  "--allocation", str(target_share),
-                                  "--execute", "--yes"],
-                                 capture_output=True, text=True, timeout=300)
-            out = dep.stdout.strip().splitlines()
-            tail = "\n".join(out[-6:]) if out else dep.stderr[-300:]
-            print(tail)
-            ok = (
-                dep.returncode == 0
-                and "addLiquidity tx" in dep.stdout
-                and "status=1" in dep.stdout
-                and "✅ LP position opened" in dep.stdout
-            )
+            if live_type == "blackhole_cl":
+                # Blackhole compound: increaseLiquidity on the existing position
+                bh = os.path.join(SCRIPT_DIR, "blackhole_cl_adapter.py")
+                dep = subprocess.run([sys.executable, bh, "--compound",
+                                      "--execute", "--yes"],
+                                     capture_output=True, text=True, timeout=300)
+                out = dep.stdout.strip().splitlines()
+                tail = "\n".join(out[-6:]) if out else dep.stderr[-300:]
+                print(tail)
+                ok = dep.returncode == 0 and "compounded" in dep.stdout
+            else:
+                dep = subprocess.run([sys.executable, os.path.join(SCRIPT_DIR, "gta_avax_lp_execute.py"),
+                                      "--amount", f"{deploy_usd}", "--bin-spread", "5",
+                                      "--allocation", str(target_share),
+                                      "--execute", "--yes"],
+                                     capture_output=True, text=True, timeout=300)
+                out = dep.stdout.strip().splitlines()
+                tail = "\n".join(out[-6:]) if out else dep.stderr[-300:]
+                print(tail)
+                ok = (
+                    dep.returncode == 0
+                    and "addLiquidity tx" in dep.stdout
+                    and "status=1" in dep.stdout
+                    and "✅ LP position opened" in dep.stdout
+                )
             log_ledger({"ts": time.time(), "action": "compound", "amount_usd": deploy_usd,
                         "ok": ok, "dry_run": False, "allocation": target_share,
-                        "alloc_source": alloc_source})
+                        "alloc_source": alloc_source, "rail": live_type or "lfj"})
             acted = True
         else:
-            print(f"   [dry-run] would deploy ${deploy_usd} at {target_share*100:.0f}/{(1-target_share)*100:.0f}")
+            print(f"   [dry-run] would deploy ${deploy_usd} at {target_share*100:.0f}/{(1-target_share)*100:.0f} "
+                  f"via {'blackhole' if live_type == 'blackhole_cl' else 'lfj'} rail")
             log_ledger({"ts": time.time(), "action": "compound", "amount_usd": deploy_usd,
-                        "ok": None, "dry_run": True})
+                        "ok": None, "dry_run": True, "rail": live_type or "lfj"})
             acted = True
     elif not rebalanced:
         # healthy, nothing to do — stay silent (no_agent pattern)
