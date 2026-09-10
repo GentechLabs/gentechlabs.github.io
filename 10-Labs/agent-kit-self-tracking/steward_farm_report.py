@@ -146,10 +146,31 @@ def build_report(pos, balances, pool_apy, staking_apr,
         L.append(f"  LP value since last report: ${delta_usd:+.4f} over {delta_hours:.1f}h (fees ± IL ± churn)")
     if pool_apy:
         daily_est = pos_usd * pool_apy / 100 / 365
-        L.append(f"  Pool-avg fee on OUR position: ~${daily_est:.4f}/day (LFJ pool avg {pool_apy:.2f}% APY — "
-                 f"reference only; Blackhole APY not yet measured on this position)")
+        L.append(f"  Pool-avg fee on OUR position: ~${daily_est:.4f}/day (Blackhole pool avg {pool_apy:.2f}% APY — "
+                 f"estimate until measured; Blackhole APY not yet measured on this position)")
     else:
         L.append("  Fee estimate unavailable (stale feed) — nothing fabricated")
+    # Blackhole venue estimate — LIVE vfat numbers (with cached fallback when
+    # vfat is down). Labeled ESTIMATE, not measured. Emissions converted
+    # immediately, never held (Jordan's rule).
+    bh = {}
+    try:
+        sys.path.insert(0, VAULT_DIR)
+        import vfat_blackhole
+        bh = vfat_blackhole.fetch()
+    except Exception:
+        bh = {}
+    bh_fee_apr = bh.get("fee_apr", 26.9)
+    bh_emis_apr = bh.get("emis_apr", 189.6)
+    bh_total_apr = bh.get("total_apr", bh_fee_apr + bh_emis_apr)
+    bh_fee_d = pos_usd * bh_fee_apr / 100 / 365
+    bh_emis_d = pos_usd * bh_emis_apr / 100 / 365
+    bh_src = bh.get("source", "vfat")
+    L.append(f"  📈 Blackhole ESTIMATE (venue data, until measured):")
+    L.append(f"     Swap fees: ~${bh_fee_d:.4f}/day ({bh_fee_apr:.1f}% APR) · BLACK emis: ~${bh_emis_d:.4f}/day ({bh_emis_apr:.1f}% APR)")
+    L.append(f"     Total: ~${bh_fee_d+bh_emis_d:.4f}/day ({bh_total_apr:.1f}% APR) — assumes 100% in-range; emissions converted immediately")
+    if bh.get("error"):
+        L.append(f"     ⚠️ {bh['error']}")
     if staking_apr:
         L.append(f"  Benchmark: sAVAX staking {staking_apr}% APY")
     L.append("")

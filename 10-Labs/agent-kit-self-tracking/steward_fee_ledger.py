@@ -96,27 +96,35 @@ def avax_usd() -> float:
 
 def snapshot() -> dict:
     """Full treasury snapshot from chain truth. Liquid = USDC + WAVAX
-    (stable at $1, WAVAX at live price). LP = withdraw-sim token amounts.
+    (stable at $1, WAVAX at live price). LP = live position value from
+    discover_positions (pool-aware: handles LFJ bins AND Blackhole CL).
     Native gas AVAX is EXCLUDED (it's the engine's fuel, not yield)."""
     w3 = _w3()
     acct = _acct(w3)
     # balances
     sys.path.insert(0, HERE)
-    from discover_positions import discover_wallet_balances
+    from discover_positions import discover_wallet_balances, discover_positions
     wb = discover_wallet_balances("avalanche", WALLET)
     px = avax_usd()
     usdc = float(wb.get("USDC", 0.0) or 0.0) + float(wb.get("USDC_e", 0.0) or 0.0) \
         + float(wb.get("USDT_e", 0.0) or 0.0)
     wavax = float(wb.get("WAVAX", 0.0) or 0.0)
     liquid_usd = round(usdc + wavax * px, 4)
-    # LP via withdraw-sim (honest per-bin composition)
+    # LP via discover_positions — pool-aware. Reads the LIVE position value
+    # (Blackhole CL positionUsd, or LFJ bins). This is the fix for the
+    # LFJ-only withdraw-sim that read 0 LP on Blackhole and misread the
+    # dry-powder reserve delta as "fees" (Sep 10 2026).
+    lp_x = lp_y = None
+    lp_usd = 0.0
+    bins = 0
     try:
-        acct2 = _acct(w3)  # same key; ensures key-file presence
-        sim = withdraw_sim(w3, acct)
-        lp_x = sim.get("x_wavax") or 0.0
-        lp_y = sim.get("y_usdc") or 0.0
-        lp_usd = round(lp_x * px + lp_y, 4) if (lp_x or lp_y) else 0.0
-        bins = sim.get("bins", 0)
+        disc = discover_positions("avalanche", WALLET)
+        live = next((p for p in disc.get("positions", []) if "error" not in p), None)
+        if live:
+            lp_usd = float(live.get("positionUsd") or 0.0)
+            bins = int(live.get("bins") or 0)
+            lp_x = live.get("lp_x_wavax")
+            lp_y = live.get("lp_y_usdc")
     except Exception:
         lp_x = lp_y = None
         lp_usd = 0.0

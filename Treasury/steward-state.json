@@ -1,7 +1,7 @@
 {
-  "updated": "2026-09-10T07:30:41.491118-04:00",
+  "updated": "2026-09-10T13:30:10.473117-04:00",
   "position": {
-    "read": "CL position #3476545 \u00b7 IN \u00b7 $7.7500 Y/X",
+    "read": "CL position #3476545 \u00b7 IN \u00b7 $7.6200 Y/X",
     "shape": "curve",
     "bins": 1,
     "rangeLow": 7.187217,
@@ -9,10 +9,10 @@
     "inRange": true
   },
   "pool": {
-    "price": 7.75,
-    "chg24h": -2.47,
-    "vol24h": 1160639.02,
-    "liquidity": 692555.97
+    "price": 7.62,
+    "chg24h": -4.02,
+    "vol24h": 1645688.78,
+    "liquidity": 688437.98
   },
   "allocation": {
     "regime": "RANGE_BOUND",
@@ -23,45 +23,15 @@
     "lending": 15
   },
   "operations": {
-    "rebalances": [],
+    "rebalances": [
+      {
+        "type": "rebalance",
+        "since": "2026-09-10T13:00:58.006014+00:00",
+        "resolved": false,
+        "err": "  \u274c gauge.withdraw REVERTED\n"
+      }
+    ],
     "compounds": [
-      {
-        "ts": 1788905414.4507163,
-        "action": "skip",
-        "amount_usd": null,
-        "ok": null,
-        "reasons": [
-          "min-delay not elapsed (25min < 60min)",
-          "no live price"
-        ]
-      },
-      {
-        "ts": 1788910816.5779562,
-        "action": "skip",
-        "amount_usd": null,
-        "ok": null,
-        "reasons": [
-          "no live price"
-        ]
-      },
-      {
-        "ts": 1788913119.6563096,
-        "action": "skip",
-        "amount_usd": null,
-        "ok": null,
-        "reasons": [
-          "no live price"
-        ]
-      },
-      {
-        "ts": 1788913123.6414638,
-        "action": "skip",
-        "amount_usd": null,
-        "ok": null,
-        "reasons": [
-          "no live price"
-        ]
-      },
       {
         "ts": 1788913139.0479085,
         "action": "compound",
@@ -91,14 +61,42 @@
         "amount_usd": 2.21,
         "ok": true,
         "reasons": []
+      },
+      {
+        "ts": 1789044349.4833126,
+        "action": "rebalance",
+        "amount_usd": null,
+        "ok": true,
+        "reasons": []
+      },
+      {
+        "ts": 1789044353.1302505,
+        "action": "compound",
+        "amount_usd": 2.87,
+        "ok": true,
+        "reasons": []
+      },
+      {
+        "ts": 1789055161.6098442,
+        "action": "rebalance",
+        "amount_usd": null,
+        "ok": false,
+        "reasons": []
+      },
+      {
+        "ts": 1789055164.4727507,
+        "action": "compound",
+        "amount_usd": 2.65,
+        "ok": false,
+        "reasons": []
       }
     ],
     "fees": {
       "last_total": 25.6556,
       "last_price": 8.01,
       "snapshot_count": 10,
-      "position_usd": 28.27,
-      "price": 7.7
+      "position_usd": 25.57,
+      "price": 7.59
     },
     "council": {
       "mode": "YIELD_FARM",
@@ -106,6 +104,40 @@
       "autonomy": true
     },
     "activity": [
+      {
+        "kind": "compound",
+        "action": "compound",
+        "ts": 1789055164.4727507,
+        "amount_usd": 2.65,
+        "ok": false
+      },
+      {
+        "kind": "compound",
+        "action": "rebalance",
+        "ts": 1789055161.6098442,
+        "amount_usd": null,
+        "ok": false
+      },
+      {
+        "kind": "rebalance",
+        "type": "rebalance",
+        "since": "2026-09-10T13:00:58.006014+00:00",
+        "resolved": false
+      },
+      {
+        "kind": "compound",
+        "action": "compound",
+        "ts": 1789044353.1302505,
+        "amount_usd": 2.87,
+        "ok": true
+      },
+      {
+        "kind": "compound",
+        "action": "rebalance",
+        "ts": 1789044349.4833126,
+        "amount_usd": null,
+        "ok": true
+      },
       {
         "kind": "compound",
         "action": "compound",
@@ -132,34 +164,6 @@
         "action": "compound",
         "ts": 1788913139.0479085,
         "amount_usd": 2.22,
-        "ok": null
-      },
-      {
-        "kind": "compound",
-        "action": "skip",
-        "ts": 1788913123.6414638,
-        "amount_usd": null,
-        "ok": null
-      },
-      {
-        "kind": "compound",
-        "action": "skip",
-        "ts": 1788913119.6563096,
-        "amount_usd": null,
-        "ok": null
-      },
-      {
-        "kind": "compound",
-        "action": "skip",
-        "ts": 1788910816.5779562,
-        "amount_usd": null,
-        "ok": null
-      },
-      {
-        "kind": "compound",
-        "action": "skip",
-        "ts": 1788905414.4507163,
-        "amount_usd": null,
         "ok": null
       }
     ]
