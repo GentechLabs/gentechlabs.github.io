@@ -239,31 +239,32 @@ def bal(w3, token: str, wallet: str) -> int:
 
 
 def read_bin_balances(w3, wallet: str) -> List[int]:
-    """Read the wallet's bin ids with liquidity from the pair (reuses discovery)."""
-    sys.path.insert(0, HERE)
+    """Read the wallet's bin ids with liquidity from the LFJ V2.2 pair.
+
+    Reads getActiveId() DIRECTLY from the pair (0x864d...) rather than relying
+    on discover_positions, which only probes the pools listed in
+    treasury_config.json (the Blackhole CL pool) and never the LFJ pair — so it
+    returned a false 'no bins' even when the LFJ position held real liquidity
+    (Sep 10 2026 macro-reposition bug). The LFJ pair is the execution target,
+    so we read it directly.
+    """
+    bal_sel = "0x00fdd58e"
     try:
-        from discover_positions import discover_positions, _is_checksum_or_valid
-        cfg = json.load(open(os.path.join(HERE, "treasury_config.json")))
-        data = discover_positions("avalanche", wallet)
-        pos = next((p for p in data.get("positions", []) if "error" not in p), None)
-        if not pos:
-            return []
-        active = pos.get("activeBin")
-        if active is None:
-            return []
-        bal_sel = "0x00fdd58e"
-        bins = []
-        for offset in range(-256, 257):
-            bin_id = active + offset
-            try:
-                b = int.from_bytes(w3.eth.call({"to": PAIR, "data": bal_sel + wallet[2:].lower().zfill(64) + hex(bin_id)[2:].zfill(64)}), "big")
-            except Exception:
-                continue
-            if b > 0:
-                bins.append(bin_id)
-        return bins
+        # getActiveId() = 0xdbe65edc
+        active_raw = w3.eth.call({"to": PAIR, "data": "0xdbe65edc"})
+        active = int.from_bytes(active_raw, "big")
     except Exception:
         return []
+    bins = []
+    for offset in range(-256, 257):
+        bin_id = active + offset
+        try:
+            b = int.from_bytes(w3.eth.call({"to": PAIR, "data": bal_sel + wallet[2:].lower().zfill(64) + hex(bin_id)[2:].zfill(64)}), "big")
+        except Exception:
+            continue
+        if b > 0:
+            bins.append(bin_id)
+    return bins
 
 
 def send_and_wait(w3, acct, fn, label: str) -> Dict[str, Any]:

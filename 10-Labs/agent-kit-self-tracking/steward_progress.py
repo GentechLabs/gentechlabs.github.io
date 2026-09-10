@@ -54,6 +54,10 @@ TIER_ICONS = {0: "🌱", 1: "🔭", 2: "⚔️", 3: "👑", 4: "🏰"}
 # Deposit detection
 DEPOSIT_FLOOR_USD = 1.0        # ignore deltas under $1 (noise)
 DEPOSIT_MIN_PCT = 2.0          # delta must exceed 2% of baseline value
+# Token-unit floor: a real deposit must add at least this many token units
+# (stable + native). Price drift and internal swaps never change the unit
+# total, so this is the true deposit signal. ~$1 worth of units.
+DEPOSIT_FLOOR_UNITS = 0.15
 FEE_ESTIMATE_APR = 52.1        # annualized APR % from the live feed (52.1% observed)
 
 
@@ -99,17 +103,28 @@ def read_wallet_value() -> Dict[str, Any]:
         pos = next((p for p in data.get("positions", []) if "error" not in p), None)
         if pos and isinstance(pos.get("positionUsd"), (int, float)):
             value_usd += float(pos["positionUsd"])
+        # Token-unit totals (deposit signal). Price drift changes USD but NOT
+        # token units — a real deposit adds units. Track stablecoin units and
+        # native+wrapped units separately so machine churn (USDC<->WAVAX swaps)
+        # doesn't read as a deposit: the SUM of units is what a deposit raises.
+        stable_units = (float(balances.get("USDC", 0.0) or 0.0)
+                        + float(balances.get("USDC_e", 0.0) or 0.0)
+                        + float(balances.get("USDT_e", 0.0) or 0.0)
+                        + float(balances.get("USDT", 0.0) or 0.0))
+        native_units = native + wavax
         return {
             "value_usd": round(value_usd, 2),
             "native_usd": round(native * avax_usd, 2),
-            "stable_usd": round(float(balances.get("USDC", 0.0) or 0.0)
-                                + float(balances.get("USDC_e", 0.0) or 0.0)
-                                + float(balances.get("USDT_e", 0.0) or 0.0)
-                                + float(balances.get("USDT", 0.0) or 0.0), 2),
+            "stable_usd": round(stable_units, 2),
             "avax_price": round(avax_usd, 4),
             "lp_usd": (round(float(pos["positionUsd"]), 2) if pos else 0.0),
             "lp_bins": (pos.get("bins", 0) if pos else 0),
             "in_range": (pos.get("inRange") if pos else False),
+            # Deposit signal: total token units (stable + native). A real
+            # deposit raises this; price drift and internal swaps do not.
+            "token_units": round(stable_units + native_units, 6),
+            "stable_units": round(stable_units, 6),
+            "native_units": round(native_units, 6),
         }
     except Exception as e:
         return {"error": str(e)}
@@ -206,7 +221,12 @@ def _machine_active_recently(hours: float = 2.0) -> bool:
     return False
 
 def detect_deposit(current: Dict[str, float]) -> Dict[str, Any]:
-    """Compare current wallet value to the persisted baseline. Detects deposits.
+    """Compare current wallet to the persisted baseline. Detects deposits.
+
+    PRIMARY signal = token-unit delta (stable + native units). A real deposit
+    adds units; price drift and internal USDC<->WAVAX swaps do NOT change the
+    unit total, so they can't false-positive. USD value is kept as a secondary
+    confirmation only.
 
     Returns {detected, delta_usd, delta_pct, prior_value, new_value}.
     Also UPDATES the baseline so the next run measures fresh.
@@ -214,6 +234,10 @@ def detect_deposit(current: Dict[str, float]) -> Dict[str, Any]:
     prior = load_json(BASELINE_FILE, {}) or {}
     prior_value = float(prior.get("value_usd", 0.0) or 0.0)
     current_value = float(current.get("value_usd", 0.0) or 0.0)
+    # Token-unit signal (the real deposit detector)
+    prior_units = float(prior.get("token_units", 0.0) or 0.0)
+    current_units = float(current.get("token_units", 0.0) or 0.0)
+    unit_delta = current_units - prior_units
 
     result = {
         "prior_value": round(prior_value, 2),
@@ -222,23 +246,25 @@ def detect_deposit(current: Dict[str, float]) -> Dict[str, Any]:
         "detected": False,
     }
 
-    if current_value > 0 and prior_value > 0:
-        delta = current_value - prior_value
-        delta_pct = (delta / prior_value) * 100.0 if prior_value else 0.0
-        # A deposit: value went UP beyond noise floor AND beyond price-drift %
-        # AND the machine was quiet (no rebalance/deploy/compound in the last
-        # 2h) — during machine activity, value deltas are internal churn.
-        if (delta >= DEPOSIT_FLOOR_USD and delta_pct >= DEPOSIT_MIN_PCT
+    # A deposit = token units went UP beyond the noise floor AND the machine
+    # was quiet (no rebalance/deploy/compound in the last 2h). Unit delta is
+    # immune to price drift, so no price-drift % threshold is needed.
+    if current_units > 0 and prior_units > 0:
+        if (unit_delta >= DEPOSIT_FLOOR_UNITS
                 and not _machine_active_recently(hours=2.0)):
             result["detected"] = True
-            result["delta_pct"] = round(delta_pct, 1)
+            result["delta_pct"] = round(
+                (unit_delta / prior_units) * 100.0, 1) if prior_units else 0.0
 
     # Always persist the new baseline (whether deposit or not) so the loop
     # measures fresh deltas next run.
     with open(BASELINE_FILE, "w") as f:
         json.dump({"value_usd": current_value, "ts": _now_iso(),
                    "native_usd": current.get("native_usd"),
-                   "stable_usd": current.get("stable_usd")}, f, indent=2)
+                   "stable_usd": current.get("stable_usd"),
+                   "token_units": current_units,
+                   "stable_units": current.get("stable_units"),
+                   "native_units": current.get("native_units")}, f, indent=2)
 
     return result
 

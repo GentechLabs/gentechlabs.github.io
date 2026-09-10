@@ -419,12 +419,16 @@ def harvest(w3, acct, nfpm, farming_center, eternal_farming, token_id, key, rout
     return {"ok": True, "stage": "harvested", "black": black_bal}
 
 
-def recenter(w3, acct, nfpm, gauge, token_id, deployer, dry_run=True):
+def recenter(w3, acct, nfpm, gauge, token_id, deployer, dry_run=True, spread_pct=0.10):
     """Re-center a staked Blackhole CL position on the current price.
 
     Blackhole CL (Algebra V3) strategy lever (docs.blackhole.xyz): when the
     position moves OUT of range, rebalance = withdraw + re-mint centered on
     the current price. This is the Blackhole equivalent of the LFJ re-center.
+
+    spread_pct controls the range half-width (Jordan's shape lever):
+      - 0.10 (default) = CURVE (~10% wide, chop shape)
+      - 0.03-0.05      = BID_ASK (concentrated edges, volatility shape)
 
     Flow:
       1. gauge.withdraw(tokenId)  — unstake the NFT (returns to wallet)
@@ -497,9 +501,9 @@ def recenter(w3, acct, nfpm, gauge, token_id, deployer, dry_run=True):
 
     # 4. Re-mint centered on current price (reuse the mint path)
     current_tick, price = get_pool_tick(w3)
-    tick_lower, tick_upper = build_range_from_tick(current_tick, 0.10)
+    tick_lower, tick_upper = build_range_from_tick(current_tick, spread_pct)
     print(f"  Re-minting on current price ${price:.4f} (tick {current_tick}, "
-          f"range {tick_lower}–{tick_upper})...")
+          f"range {tick_lower}–{tick_upper}, spread {spread_pct*100:.0f}%)...")
     # Use the wallet's full WAVAX+USDC balance (real wallet in dry-run too)
     wavax_c = w3.eth.contract(address=Web3.to_checksum_address(WAVAX), abi=ERC20_ABI)
     usdc_c = w3.eth.contract(address=Web3.to_checksum_address(USDC), abi=ERC20_ABI)
@@ -660,7 +664,8 @@ def main():
             print("\n❌ No Blackhole CL position found to re-center.", file=sys.stderr); sys.exit(1)
         if not gauge:
             print("\n❌ No gauge — cannot re-center a staked position.", file=sys.stderr); sys.exit(1)
-        ok, new_tid = recenter(w3, acct, nfpm, gauge, token_id, deployer, dry_run=dry_run)
+        ok, new_tid = recenter(w3, acct, nfpm, gauge, token_id, deployer,
+                               dry_run=dry_run, spread_pct=args.spread_pct)
         print(f"\n  Result: {'✅ re-centered' if ok else '❌ failed'} "
               f"{f'(new tokenId {new_tid})' if new_tid else ''}")
         return 0
