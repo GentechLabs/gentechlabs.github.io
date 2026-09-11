@@ -6,6 +6,13 @@
 # === FOUNDRY / BUILD ARTIFACTS ===
 # === LARGE BACKUPS (never commit) ===
 # === LARGE BINARIES / ASSETS ===
+# Vanito media: mp3/mp4 already covered above; these stop new covers/keyframes
+# from being re-added by blanket `git add .` in hub-sync crons.
+# (Already-tracked files are unaffected by gitignore.)
+music/vanito/**/*.png
+music/vanito/**/*.jpg
+music/vanito/**/*.jpeg
+music/vanito/**/*.gif
 # === OBSIDIAN ===
 # === SECRETS ===
 # Secrets
