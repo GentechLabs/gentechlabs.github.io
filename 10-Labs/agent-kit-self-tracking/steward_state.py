@@ -235,11 +235,23 @@ def main():
         lines.append(f"📊 **Market**: AVAX ${pool.get('price', 0):.2f} ({pool.get('chg24h', 0):+.1f}% 24h) · vol ${pool.get('vol24h', 0)/1e6:.1f}M · liq ${pool.get('liquidity', 0)/1e6:.1f}M")
         lines.append("")
     pos_val = float(pos.get("positionUsd") or 0)
-    lp_daily = pos_val * 0.005
-    stake_daily = pos_val * 5.2 / 100 / 365
+    # Blackhole-aware yield estimate (Jordan Sep 10 2026): use the live vfat
+    # fee/emissions split, not the old LFJ-era 0.5%/day chop. Staking baseline
+    # is the real sAVAX/Benqi rate (3.77%), not the stale 5.2%. Labeled estimate.
+    try:
+        import vfat_blackhole
+        bh = vfat_blackhole.fetch()
+        if "error" in bh:
+            fee_apr, bh_src = 26.9, "cached (vfat down)"
+        else:
+            fee_apr, bh_src = bh.get("fee_apr", 26.9), "vfat live"
+    except Exception:
+        fee_apr, bh_src = 26.9, "cached"
+    lp_daily = pos_val * fee_apr / 100 / 365
+    stake_daily = pos_val * 3.77 / 100 / 365
     lines.append("💰 **Yield vs Staking vs HODL**")
-    lines.append(f"   • LP:     ~${lp_daily:.2f}/day while in-range (chop rate)")
-    lines.append(f"   • Stake:  ~${stake_daily:.2f}/day (5.2% APR)")
+    lines.append(f"   • LP:     ~${lp_daily:.2f}/day ({fee_apr:.1f}% fee APR, {bh_src})")
+    lines.append(f"   • Stake:  ~${stake_daily:.2f}/day (3.8% APR sAVAX)")
     lines.append(f"   • HODL:   {'winning' if pool.get('chg24h', 0) > 0 else 'losing'} ({pool.get('chg24h', 0):+.1f}% 24h)")
     lines.append(f"   • Verdict: {'LP farming the chop' if in_range else 'LP OUT — not earning'}")
     lines.append("")

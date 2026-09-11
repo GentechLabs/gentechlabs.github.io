@@ -167,14 +167,31 @@ def main() -> int:
     farm_days = in_farm_days()
     lines.append(f"   ⏳ In pool: {farm_days:.1f} days farming (since first deploy)")
     if pos_val:
-        # LP daily fee estimate: ~0.5% of position/day WHILE IN RANGE in chop
-        # (calibrated from the brain: $0.24/day on $46.59 = 0.515%/day). This is
-        # NOT a stable APR — it only holds while in range and price is moving.
-        lp_daily = pos_val * 0.005
-        staking_apr = 5.2  # AVAX staking baseline
+        # Blackhole-aware yield estimate (Jordan Sep 10 2026): use the live
+        # vfat fee/emissions split, not the old LFJ-era 0.5%/day chop. The
+        # staking baseline is the real sAVAX/Benqi rate (3.77%), not the stale
+        # 5.2%. Estimates are labeled — never fabricated.
+        try:
+            import vfat_blackhole
+            bh = vfat_blackhole.fetch()
+            if "error" in bh:
+                fee_apr = 26.9
+                emis_apr = 189.6
+                total_apr = 216.5
+                bh_src = "cached (vfat down)"
+            else:
+                fee_apr = bh.get("fee_apr", 26.9)
+                emis_apr = bh.get("emis_apr", 189.6)
+                total_apr = bh.get("total_apr", 216.5)
+                bh_src = "vfat live"
+        except Exception:
+            fee_apr, emis_apr, total_apr, bh_src = 26.9, 189.6, 216.5, "cached"
+        # LP daily = fee APR on position (in-range assumption), labeled estimate
+        lp_daily = pos_val * fee_apr / 100 / 365
+        staking_apr = 3.77  # sAVAX/Benqi (DefiLlama live) — real, not stale 5.2
         staking_daily = pos_val * staking_apr / 100 / 365
-        lines.append(f"   LP:     ~${lp_daily:.2f}/day while in-range (chop rate)")
-        lines.append(f"   Stake:  ~${staking_daily:.2f}/day ({staking_apr:.1f}% APR)")
+        lines.append(f"   LP:     ~${lp_daily:.2f}/day ({fee_apr:.1f}% fee APR, {bh_src})")
+        lines.append(f"   Stake:  ~${staking_daily:.2f}/day ({staking_apr:.1f}% APR sAVAX)")
         lines.append(f"   HODL:   {'winning' if pool.get('chg24h',0)>0 else 'losing'} "
                      f"({pool.get('chg24h',0):+.1f}% 24h)")
         verdict = "LP farming the chop" if in_range else "LP OUT — not earning"
