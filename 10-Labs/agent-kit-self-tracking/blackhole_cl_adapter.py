@@ -411,10 +411,10 @@ def harvest(w3, acct, nfpm, farming_center, eternal_farming, token_id, key, rout
             "gas": 500000, "gasPrice": int(w3.eth.gas_price * 1.3), "chainId": CHAIN_ID})
         h = _send_with_nonce_retry(w3, acct, tx)
         rcpt = w3.eth.wait_for_transaction_receipt(h)
-        print(f"  ✅ compounded: {h.hex()} status={rcpt['status']}")
         if rcpt['status'] != 1:
-            print("  ❌ increaseLiquidity REVERTED", file=sys.stderr)
+            print(f"  ❌ increaseLiquidity REVERTED: {h.hex()} status={rcpt['status']}", file=sys.stderr)
             return {"ok": False, "stage": "compound"}
+        print(f"  ✅ compounded: {h.hex()} status={rcpt['status']}")
 
     return {"ok": True, "stage": "harvested", "black": black_bal}
 
@@ -707,6 +707,14 @@ def main():
         if idle_usd < 0.50:
             print("  ℹ️  Idle below $0.50 — nothing to compound.")
             return 0
+        # One-sided guard (Jordan Sep 10 2026): a WAVAX/USDC concentrated
+        # position needs BOTH sides. If one side is ~0, increaseLiquidity
+        # reverts (0x32e2717a) and burns gas. Skip honestly instead of
+        # attempting a reverting tx — the idle stays as dry powder.
+        if wavax_idle < 1e15 or usdc_idle < 1e3:
+            print(f"  ℹ️  One-sided idle (WAVAX {wavax_idle/1e18:.6f} / USDC {usdc_idle/1e6:.4f}) — "
+                  f"skipping compound, holding as dry powder. Rebalance swap must run first.")
+            return 0
         if dry_run:
             print("  [dry-run] nfpm.increaseLiquidity(tokenId, wavax, usdc)")
         else:
@@ -722,9 +730,10 @@ def main():
                 "gas": 500000, "gasPrice": int(w3.eth.gas_price * 1.3), "chainId": CHAIN_ID})
             h = _send_with_nonce_retry(w3, acct, tx)
             rcpt = w3.eth.wait_for_transaction_receipt(h)
-            print(f"  ✅ compounded: {h.hex()} status={rcpt['status']}")
             if rcpt['status'] != 1:
-                print("  ❌ increaseLiquidity REVERTED", file=sys.stderr); sys.exit(1)
+                print(f"  ❌ increaseLiquidity REVERTED: {h.hex()} status={rcpt['status']}", file=sys.stderr)
+                sys.exit(1)
+            print(f"  ✅ compounded: {h.hex()} status={rcpt['status']}")
         return 0
 
     # ── HARVEST mode: collect BLACK emissions + compound back ──────────
