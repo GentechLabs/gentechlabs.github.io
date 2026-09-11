@@ -80,8 +80,14 @@ REDEPLOY_AMOUNT_USD = None  # sentinel: resolved live per-run via _redeploy_budg
 #   2026-09-03: ±5/±6/±7 OK · ±9/±11/±15 REVERT (and Sep 2 real tx reverts at ±11)
 #   2026-09-07 13:30: boundary TIGHTENED — only ±5 simulates OK; ±6/±7 REVERT
 #   (live eth_call sim on the flat wallet). Curve → ±5, bid-ask → ±5.
+#   2026-09-11 12:45: boundary RE-OPENED — live eth_call sim on the flat wallet
+#   shows ±5 / ±6 / ±7 / ±11 all OK. Restored curve → ±7 (15 bins) to match the
+#   macro stand-down spec (15 bins) and give idSlippage headroom (memory:
+#   "±7 headroom, ±5 reverts in pumps"). The redeploy leg now walks a spread
+#   fallback chain [±7 → ±5 → ±3] on revert, so a re-tightened boundary can
+#   never strand the pool flat.
 #   Re-map before trusting any spread (empirical, changes with pool/router state).
-REDEPLOY_BIN_SPREAD_BY_SHAPE = {"curve": 5, "bid-ask": 5}
+REDEPLOY_BIN_SPREAD_BY_SHAPE = {"curve": 7, "bid-ask": 5}
 
 
 def _redeploy_spread(shape: str) -> int:
@@ -89,7 +95,8 @@ def _redeploy_spread(shape: str) -> int:
     return REDEPLOY_BIN_SPREAD_BY_SHAPE.get(shape, 7)
 
 
-def _redeploy_budget(w3, acct, include_position: bool = False) -> float:
+def _redeploy_budget(w3, acct, include_position: bool = False,
+                     withdraw_value_usd: float = 0.0) -> float:
     """FULL-CAPITAL budget (Jordan, Sep 3 2026): the redeploy leg deploys ALL
     working capital — USDC + WAVAX value live on the Steward wallet, minus a
     small dust buffer. Nothing idles; no hardcoded $13.
@@ -140,28 +147,38 @@ def _redeploy_budget(w3, acct, include_position: bool = False) -> float:
         usdc, wavax, price = best_usdc, best_wavax, best_price
         working = usdc + wavax * price
         if include_position:
-            # LP value folds back in on withdraw (full-capital rule)
-            try:
-                from discover_positions import discover_positions
-                d = discover_positions("avalanche", STEWARD)
-                p = next((x for x in d.get("positions", [])
-                          if "error" not in x), None)
-                if p:
-                    working += float(p.get("positionUsd", 0) or 0)
-            except Exception:
-                pass
+            # LP value folds back in on withdraw (full-capital rule).
+            # NOTE (Sep 11 2026): do NOT estimate this by scaling raw LB token
+            # balances — LB balances are liquidity (sqrt) units, not token
+            # amounts, and scaling them produced a nonsense $24,594 plan.
+            # Do NOT use discover_positions either: it probes only the
+            # Blackhole CL pool, so its "first position" is the Blackhole rail
+            # ($7.32) which does NOT fold back into the LFJ wallet on withdraw
+            # (that inflated the plan to $27.78).
+            # The authoritative value of what folds back is the withdraw
+            # simulation's own (x_wavax, y_usdc) return — run() passes it in
+            # via withdraw_value_usd. Absent that, project nothing.
+            if withdraw_value_usd:
+                working += float(withdraw_value_usd)
         if working >= 1.0:
-            # SPLIT-SAFE budget (Sep 7 2026): the deploy rail splits the amount
-            # 50/50 (USDC half + WAVAX half). If the USDC half exceeds the
-            # actual USDC balance, addLiquidity reverts with "ERC20: transfer
-            # amount exceeds balance" — the recurring flat-pool bug. Cap the
-            # budget so BOTH halves fit the real balances:
-            #   USDC half  = budget * 0.5  <= usdc
-            #   WAVAX half = budget * 0.5 / price <= wavax
-            # => budget <= 2*usdc AND budget <= 2*wavax*price.
-            cap_usdc = 2.0 * usdc
-            cap_wavax = 2.0 * wavax * price
-            budget = min(working - 0.10, cap_usdc, cap_wavax)
+            # NO-IDLE-CAPITAL budget (Jordan, Sep 3 2026: "we take ALL the money
+            # and rebalance — one side never idle"). The deploy rail rebalances
+            # 50/50 by SWAPPING the richer side (cases a/b/c in
+            # gta_avax_lp_execute.py) and then scales down only if it still
+            # can't cover — so the budget should be the FULL working capital,
+            # not a 50/50-fit cap.
+            #
+            # Sep 11 2026: the old split-safe cap (budget <= 2*usdc AND
+            # budget <= 2*wavax*price) starved the deploy whenever the wallet
+            # was lopsided. Live case: post-withdraw 5.47 USDC + 1.06 WAVAX
+            # ($13.4) — cap_wavax = 2*1.06*7.58 = $16.1, cap_usdc = $10.94, so
+            # budget = $10.94 and ~$5.5 stayed IDLE. With ±7's wider tail bins
+            # the deploy landed only $10.91. Full working capital lets the rail
+            # swap the surplus WAVAX → USDC and deploy ~everything.
+            #
+            # Keep a dust buffer + a modest haircut so the rail's swap (1.5%
+            # slippage headroom) can't leave a half a cent short.
+            budget = min(working - 0.10, working * 0.97)
             if budget >= 1.0:
                 return round(budget, 2)
     except Exception:
@@ -446,7 +463,8 @@ def step_convert(w3, acct, dry_run: bool, want_usdc: bool = True) -> Dict[str, A
     return send_and_wait(w3, acct, fn, "convert")
 
 
-def step_redeploy(w3, acct, dry_run: bool, shape: str = "curve") -> Dict[str, Any]:
+def step_redeploy(w3, acct, dry_run: bool, shape: str = "curve",
+                  withdraw_value_usd: float = 0.0) -> Dict[str, Any]:
     """Redeploy a fresh curve on the current active bin (re-center + re-earn).
 
     Uses the WORKING rail (gta_avax_lp_execute.py) with a bounded 50/50 amount
@@ -455,9 +473,10 @@ def step_redeploy(w3, acct, dry_run: bool, shape: str = "curve") -> Dict[str, An
     """
     if dry_run:
         import subprocess
-        # Dry-run: project post-withdraw balances (wallet + LP value) so the
-        # plan shows the TRUE full-capital redeploy size.
-        amount = _redeploy_budget(w3, acct, include_position=True)
+        # Dry-run: project post-withdraw balances (wallet + the LP value that
+        # folds back) so the plan shows the TRUE full-capital redeploy size.
+        amount = _redeploy_budget(w3, acct, include_position=True,
+                                  withdraw_value_usd=withdraw_value_usd)
         proc = subprocess.run(
             [sys.executable, REDEPLOY_EXEC_SCRIPT,
              "--amount", str(amount),
@@ -487,7 +506,15 @@ def step_redeploy(w3, acct, dry_run: bool, shape: str = "curve") -> Dict[str, An
     # for the RPC to settle so a laggy "0 bins" read doesn't false-fail.
     max_attempts = 3
     attempts_log = []
+    # SPREAD FALLBACK (Sep 11 2026): LFJ's acceptable spread is empirical and
+    # moves with pool/router state (Sep 3: ±5/6/7 OK; Sep 7: only ±5). A revert
+    # at the preferred spread must not strand the pool — step down to ±5 (the
+    # proven setting) so the position always lands. ±5 is the floor; 11 bins is
+    # a valid CURVE.
+    preferred = _redeploy_spread(shape)
+    spread_chain = [preferred] + [s for s in (5, 3) if s < preferred]
     for attempt in range(1, max_attempts + 1):
+        spread = spread_chain[min(attempt - 1, len(spread_chain) - 1)]
         try:
             amount = _redeploy_budget(w3, acct)
         except Exception as e:
@@ -495,16 +522,29 @@ def step_redeploy(w3, acct, dry_run: bool, shape: str = "curve") -> Dict[str, An
             attempts_log.append(f"attempt {attempt}: budget read failed ({e})")
             break
         if amount is None or amount < 1.0:
-            attempts_log.append(f"attempt {attempt}: working capital {amount} < $1 — nothing to deploy")
-            break
+            # SETTLE-RETRY (Sep 11 2026): a freshly-mined withdraw LAGS the
+            # public RPC — the first read can still show the PRE-withdraw
+            # (near-zero) balance and compute a sub-$1 budget. This used to
+            # `break` the loop, permanently stranding the pool FLAT. Observed
+            # live on the Core-CPI stand-down: the withdraw tx mined
+            # (0xa69f22...), then the redeploy leg declared "nothing to
+            # deploy" and exited with the position flat until a manual re-run
+            # ~2 min later. A withdraw only GROWS loose balances, so wait for
+            # the RPC to settle and re-read instead of giving up on the first
+            # laggy snapshot (same family as pitfall #41).
+            attempts_log.append(
+                f"attempt {attempt}: working capital {amount} < $1 — "
+                f"RPC settle + re-read (laggy post-withdraw read)")
+            time.sleep(6 * attempt)
+            continue
         proc = subprocess.run(
             [sys.executable, REDEPLOY_EXEC_SCRIPT,
              "--amount", str(amount),
-             "--bin-spread", str(_redeploy_spread(shape)), "--execute", "--yes"],
+             "--bin-spread", str(spread), "--execute", "--yes"],
             capture_output=True, text=True, timeout=180)
         ok = proc.returncode == 0 and "deployed" in (proc.stdout + proc.stderr).lower()
         attempts_log.append(
-            f"attempt {attempt}: ${amount:.2f} → {'OK' if ok else 'FAIL'} "
+            f"attempt {attempt}: ${amount:.2f} @ ±{spread} → {'OK' if ok else 'FAIL'} "
             f"({(proc.stderr or proc.stdout or '')[-160:].strip()})")
         if ok:
             # Settled-position confirm: the RPC can lag a freshly-mined LP.
@@ -516,11 +556,26 @@ def step_redeploy(w3, acct, dry_run: bool, shape: str = "curve") -> Dict[str, An
                         "stdout": proc.stdout[-1000:], "stderr": proc.stderr[-300:]}
             # Executor printed "deployed" but the settled read shows 0 bins
             # (phantom-deploy risk): keep retrying rather than trust the print.
+            # PHANTOM vs LAG (Sep 11 2026): the deploy rail's OWN settled verify
+            # accepts a balance-drop as proof, so "deployed" + 0 bins is usually
+            # just RPC lag, not a phantom. Either way the retry is correct — a
+            # re-deploy would revert on the empty wallet rather than double up.
             attempts_log.append(f"  ⚠️ print said deployed but settled read shows 0 bins — retry")
             time.sleep(4 * attempt)  # backoff before retry (audit nit, Sep 7)
             continue
         # Transient failure — small backoff before the next try (RPC settle).
+        # The budget is re-read each attempt, so a laggy post-withdraw read on
+        # attempt 1 self-heals on attempt 2 without a manual re-run.
         time.sleep(4 * attempt)
+    # FINAL SETTLE (Sep 11 2026): out of retries, but the deploy may in fact
+    # have landed and every settled read just lagged. Do one last long settle
+    # before declaring failure, so we never report a false "failed" on a good
+    # deploy (and never re-withdraw a live position off a stale 0-bin read).
+    bins = _settled_bins(w3, acct, tries=4, delay=4)
+    if bins > 0:
+        return {"ok": True, "label": "redeploy", "dry_run": False,
+                "attempts": attempts_log, "bins": bins,
+                "note": "confirmed on final long settle after retries"}
     return {"ok": False, "label": "redeploy", "dry_run": False,
             "attempts": attempts_log,
             "stdout": "", "stderr": "redeploy failed after %d attempts: %s"
@@ -578,6 +633,14 @@ def run(mode: str = "withdraw", dry_run: bool = True, want_usdc: bool = True, sh
         receipt["error"] = s1.get("error", "withdraw failed")
         return receipt
 
+    # Value of the LFJ position that folds back into the wallet on withdraw —
+    # taken from the withdraw simulation itself (the authoritative source).
+    withdraw_value_usd = 0.0
+    if s1.get("dry_run") and s1.get("simulated_y_usdc") is not None:
+        price = _avax_usd() or 7.0
+        withdraw_value_usd = (float(s1.get("simulated_y_usdc") or 0.0)
+                              + float(s1.get("simulated_x_wavax") or 0.0) * price)
+
     # Step 2: convert — ONLY for withdraw-convert. For withdraw-redeploy we
     # SKIP the convert: the withdraw already returns both WAVAX + USDC in the
     # LP's natural ratio, and the redeploy needs BOTH tokens. Converting all
@@ -589,7 +652,8 @@ def run(mode: str = "withdraw", dry_run: bool = True, want_usdc: bool = True, sh
 
     # Step 3: redeploy (re-center) — only for the full rebalance mode
     if mode == "withdraw-redeploy":
-        s3 = step_redeploy(w3, acct, dry_run, shape=shape)
+        s3 = step_redeploy(w3, acct, dry_run, shape=shape,
+                           withdraw_value_usd=withdraw_value_usd)
         receipt["steps"].append(s3)
         if not s3.get("ok"):
             receipt["ok"] = False
