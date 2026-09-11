@@ -77,7 +77,7 @@ def fetch() -> dict:
             "source": "vfat-cached (Sep 9 2026)",
             "error": f"vfat down ({e}) — using cached verified numbers",
         }
-    items = data.get("data", {}).get("items", [])
+    items = data.get("items", data.get("data", {}).get("items", []))
     # Find our pool by address
     for it in items:
         pool = it.get("pool", {})
