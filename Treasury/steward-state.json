@@ -1,7 +1,7 @@
 {
-  "updated": "2026-09-10T19:30:48.889238-04:00",
+  "updated": "2026-09-11T01:00:26.906289-04:00",
   "position": {
-    "read": "CL position #3476545 \u00b7 IN \u00b7 $7.4500 Y/X",
+    "read": "CL position #3476545 \u00b7 IN \u00b7 $7.5000 Y/X",
     "shape": "curve",
     "bins": 1,
     "rangeLow": 7.187217,
@@ -9,10 +9,10 @@
     "inRange": true
   },
   "pool": {
-    "price": 7.44,
-    "chg24h": -4.11,
-    "vol24h": 1757435.48,
-    "liquidity": 680594.96
+    "price": 7.5,
+    "chg24h": -4.21,
+    "vol24h": 1810855.14,
+    "liquidity": 683198.06
   },
   "allocation": {
     "regime": "RANGE_BOUND",
@@ -32,34 +32,6 @@
       }
     ],
     "compounds": [
-      {
-        "ts": 1789044349.4833126,
-        "action": "rebalance",
-        "amount_usd": null,
-        "ok": true,
-        "reasons": []
-      },
-      {
-        "ts": 1789044353.1302505,
-        "action": "compound",
-        "amount_usd": 2.87,
-        "ok": true,
-        "reasons": []
-      },
-      {
-        "ts": 1789055161.6098442,
-        "action": "rebalance",
-        "amount_usd": null,
-        "ok": false,
-        "reasons": []
-      },
-      {
-        "ts": 1789055164.4727507,
-        "action": "compound",
-        "amount_usd": 2.65,
-        "ok": false,
-        "reasons": []
-      },
       {
         "ts": 1789065921.378058,
         "action": "rebalance",
@@ -83,6 +55,34 @@
       },
       {
         "ts": 1789076739.6008813,
+        "action": "compound",
+        "amount_usd": 2.65,
+        "ok": false,
+        "reasons": []
+      },
+      {
+        "ts": 1789087555.663575,
+        "action": "rebalance",
+        "amount_usd": null,
+        "ok": false,
+        "reasons": []
+      },
+      {
+        "ts": 1789087557.0438626,
+        "action": "compound",
+        "amount_usd": 2.65,
+        "ok": false,
+        "reasons": []
+      },
+      {
+        "ts": 1789098318.4032617,
+        "action": "rebalance",
+        "amount_usd": null,
+        "ok": false,
+        "reasons": []
+      },
+      {
+        "ts": 1789098319.7081852,
         "action": "compound",
         "amount_usd": 2.65,
         "ok": false,
@@ -105,6 +105,34 @@
       {
         "kind": "compound",
         "action": "compound",
+        "ts": 1789098319.7081852,
+        "amount_usd": 2.65,
+        "ok": false
+      },
+      {
+        "kind": "compound",
+        "action": "rebalance",
+        "ts": 1789098318.4032617,
+        "amount_usd": null,
+        "ok": false
+      },
+      {
+        "kind": "compound",
+        "action": "compound",
+        "ts": 1789087557.0438626,
+        "amount_usd": 2.65,
+        "ok": false
+      },
+      {
+        "kind": "compound",
+        "action": "rebalance",
+        "ts": 1789087555.663575,
+        "amount_usd": null,
+        "ok": false
+      },
+      {
+        "kind": "compound",
+        "action": "compound",
         "ts": 1789076739.6008813,
         "amount_usd": 2.65,
         "ok": false
@@ -131,38 +159,10 @@
         "ok": false
       },
       {
-        "kind": "compound",
-        "action": "compound",
-        "ts": 1789055164.4727507,
-        "amount_usd": 2.65,
-        "ok": false
-      },
-      {
-        "kind": "compound",
-        "action": "rebalance",
-        "ts": 1789055161.6098442,
-        "amount_usd": null,
-        "ok": false
-      },
-      {
         "kind": "rebalance",
         "type": "rebalance",
         "since": "2026-09-10T13:00:58.006014+00:00",
         "resolved": false
-      },
-      {
-        "kind": "compound",
-        "action": "compound",
-        "ts": 1789044353.1302505,
-        "amount_usd": 2.87,
-        "ok": true
-      },
-      {
-        "kind": "compound",
-        "action": "rebalance",
-        "ts": 1789044349.4833126,
-        "amount_usd": null,
-        "ok": true
       }
     ]
   }
