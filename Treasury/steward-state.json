@@ -1,7 +1,7 @@
 {
-  "updated": "2026-09-11T07:30:53.257468-04:00",
+  "updated": "2026-09-11T08:31:00.502017-04:00",
   "position": {
-    "read": "CL position #3476545 \u00b7 IN \u00b7 $7.3300 Y/X",
+    "read": "CL position #3476545 \u00b7 IN \u00b7 $7.3200 Y/X",
     "shape": "curve",
     "bins": 1,
     "rangeLow": 7.187217,
@@ -9,10 +9,10 @@
     "inRange": true
   },
   "pool": {
-    "price": 7.32,
-    "chg24h": -5.44,
-    "vol24h": 1871541.51,
-    "liquidity": 674643.16
+    "price": 7.29,
+    "chg24h": -5.35,
+    "vol24h": 2039567.31,
+    "liquidity": 673179.19
   },
   "allocation": {
     "regime": "RANGE_BOUND",
@@ -33,20 +33,6 @@
     ],
     "compounds": [
       {
-        "ts": 1789065921.378058,
-        "action": "rebalance",
-        "amount_usd": null,
-        "ok": false,
-        "reasons": []
-      },
-      {
-        "ts": 1789065925.1066763,
-        "action": "compound",
-        "amount_usd": 2.65,
-        "ok": false,
-        "reasons": []
-      },
-      {
         "ts": 1789076736.532715,
         "action": "rebalance",
         "amount_usd": null,
@@ -83,6 +69,20 @@
       },
       {
         "ts": 1789098319.7081852,
+        "action": "compound",
+        "amount_usd": 2.65,
+        "ok": false,
+        "reasons": []
+      },
+      {
+        "ts": 1789127154.8361442,
+        "action": "rebalance",
+        "amount_usd": null,
+        "ok": false,
+        "reasons": []
+      },
+      {
+        "ts": 1789127156.1008387,
         "action": "compound",
         "amount_usd": 2.65,
         "ok": false,
@@ -93,8 +93,8 @@
       "last_total": 25.6556,
       "last_price": 8.01,
       "snapshot_count": 10,
-      "position_usd": 25.58,
-      "price": 7.52
+      "position_usd": 25.6,
+      "price": 7.36
     },
     "council": {
       "mode": "YIELD_FARM",
@@ -102,6 +102,20 @@
       "autonomy": true
     },
     "activity": [
+      {
+        "kind": "compound",
+        "action": "compound",
+        "ts": 1789127156.1008387,
+        "amount_usd": 2.65,
+        "ok": false
+      },
+      {
+        "kind": "compound",
+        "action": "rebalance",
+        "ts": 1789127154.8361442,
+        "amount_usd": null,
+        "ok": false
+      },
       {
         "kind": "compound",
         "action": "compound",
@@ -141,20 +155,6 @@
         "kind": "compound",
         "action": "rebalance",
         "ts": 1789076736.532715,
-        "amount_usd": null,
-        "ok": false
-      },
-      {
-        "kind": "compound",
-        "action": "compound",
-        "ts": 1789065925.1066763,
-        "amount_usd": 2.65,
-        "ok": false
-      },
-      {
-        "kind": "compound",
-        "action": "rebalance",
-        "ts": 1789065921.378058,
         "amount_usd": null,
         "ok": false
       },
