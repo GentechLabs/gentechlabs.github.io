@@ -9,7 +9,7 @@
 
 ## SUMMARY
 
-Full-stack developer and founder of GenTech Labs — an AI-agent product lab with 15+ shipped public repos spanning x402 payment infrastructure, DeFi agents, and multi-agent orchestration. Strong in Python and JavaScript, working knowledge of Rust. Seeking remote AI-training and code-evaluation work.
+Full-stack developer and founder of GenTech Labs — an AI-agent product lab with 64 shipped public repos spanning x402 payment infrastructure, DeFi agents, and multi-agent orchestration. Strong in Python and JavaScript, working knowledge of Rust. Seeking remote AI-training and code-evaluation work.
 
 ---
 
@@ -18,6 +18,10 @@ Full-stack developer and founder of GenTech Labs — an AI-agent product lab wit
 - **Sovereign Model Router** — Python — Model scoring + routing intelligence API (MSS v2) with x402 per-request payment rails. Live deployed service.
 - **GenTech 0G DeFi Agent** — JavaScript — "The Agency of Traders": decentralized AI DeFi agent built on 0G.
 - **r402** — Rust — SDK for the x402 payment protocol.
+- **ra2a** — Rust — SDK for the Agent2Agent (A2A) protocol.
+- **okx-edge** — JavaScript — x402 edge service for OKX Chain: EIP-712 settlement, per-call metering.
+- **Telegraph Token Safety** — JavaScript — Token-safety checker, x402-monetized.
+- **genTech-shop** — Python — Gaming-intelligence MCP server: deals, release calendar, build health, hub sync.
 - **iAgent** — Agent fine-tuned on the Injective trading framework and documentation.
 - **GenTech Agent Kit** — Python — One-install full agent stack: MCP server, skills, plugins, orchestration.
 - **Solana Homebase** — Agentic treasury MVP (Superteam tranche-2): on-chain balances, sweeps, reporting.
@@ -33,7 +37,7 @@ Full-stack developer and founder of GenTech Labs — an AI-agent product lab wit
 |------|-------|
 | Languages | Python, JavaScript/TypeScript, Rust, SQL, Solidity (working) |
 | AI / Agents | Hermes Agent, MCP (Model Context Protocol), multi-agent orchestration, RAG, prompt engineering |
-| Web3 | x402, ERC-8004, Solana, Injective, 0G, EVM (Base/Arbitrum), DeFi protocols |
+| Web3 | x402, ERC-8004, A2A, Solana, Injective, 0G, EVM (Base/Arbitrum), DeFi protocols |
 | Infra | Linux VPS admin, Docker, nginx, Cloudflare Workers, cron automation |
 
 ---
@@ -41,7 +45,7 @@ Full-stack developer and founder of GenTech Labs — an AI-agent product lab wit
 ## EXPERIENCE
 
 **Founder & Sole Builder — GenTech Labs** (2026 – present)
-- Shipped 15+ public repos: payment-protocol SDKs, trading agents, agent frameworks, open specs
+- Shipped 64 public repos: payment-protocol SDKs, trading agents, agent frameworks, open specs
 - Operates a five-agent AI fleet on a 24/7 VPS — cron automation, inter-agent handoffs, monitoring
 - Deploys and maintains live web services: portfolio, dashboards, APIs
 
@@ -52,6 +56,7 @@ Full-stack developer and founder of GenTech Labs — an AI-agent product lab wit
 
 ## HACKATHONS & COMPETITIONS (submissions, all shipped)
 
+- **Telegraph Season I** — Track 3 (submitted Sep 2026): x402-native token-security miner
 - **Encode Club** — Programmable money: x402 payment gateway on Arc
 - **DataHub Agent Hackathon** — Lineage Guard
 - **Superteam** — Agentic Treasury, tranche-2 MVP
