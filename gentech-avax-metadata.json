@@ -2,11 +2,35 @@
   "name": "GenTech Labs \u2014 Agentic Treasury + x402 Rail",
   "description": "AI agent economy infrastructure \u2014 risk scoring, market data, DeFi LP analytics, token security, and wallet intelligence for autonomous agents. 14 live x402-monetized endpoints on Base, Avalanche, and Ethereum. Every URL below returns a valid x402 402 challenge.",
   "image": "https://gentechlabs.net/gentech-logo.png",
-  "version": "1.5.3",
+  "version": "1.5.4",
   "author": "GentechLabs",
   "homepage": "https://gentechlabs.net",
   "contact": "https://gentechlabs.net",
   "services": [
+    {
+      "name": "Web",
+      "endpoint": "https://api.gentechlabs.net/.well-known/x402",
+      "version": "2.0",
+      "description": "HTTP x402 discovery manifest \u2014 pay-per-call services.",
+      "type": "protocol",
+      "active": true
+    },
+    {
+      "name": "A2A",
+      "endpoint": "https://api.gentechlabs.net/.well-known/agent-card.json",
+      "version": "1.0.0",
+      "description": "Agent2Agent agent card for cross-agent task handoff.",
+      "type": "protocol",
+      "active": true
+    },
+    {
+      "name": "MCP",
+      "endpoint": "https://api.gentechlabs.net/mcp",
+      "version": "2025-06-18",
+      "description": "Model Context Protocol (Streamable HTTP). 15 tools: 14 paid x402 services plus a free discovery tool.",
+      "type": "protocol",
+      "active": true
+    },
     {
       "type": "x402",
       "url": "https://api.gentechlabs.net/v1/agents/search",
@@ -475,7 +499,8 @@
       "mcp",
       "payments"
     ],
-    "erc8004RegistrationFile": true
+    "erc8004RegistrationFile": true,
+    "mcpVerifiedAt": "2026-09-18"
   },
   "retiredServices": [
     {
@@ -582,5 +607,10 @@
       "endpoint": "https://api.gentechlabs.net/v1/wallet/portfolio/0x1",
       "version": "1.0"
     }
+  ],
+  "supportedProtocols": [
+    "MCP",
+    "A2A",
+    "Web"
   ]
 }
