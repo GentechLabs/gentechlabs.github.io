@@ -1,0 +1,223 @@
+{
+  "generated_at": "2026-09-18T07:55:27Z",
+  "network": {
+    "name": "Arc mainnet",
+    "chain_id": 5042,
+    "rpc": "https://rpc.mainnet.arc.io",
+    "gas_token": "USDC (native) \u2014 the same asset the wallet holds and spends"
+  },
+  "deployment": {
+    "contract": "0x5aEC22f00Cd85F46fa28A077F158B57427De79e4",
+    "deploy_tx": "0xd94e08326a84e21901b226d5a530157454b971b01b79d1361ba668cdade2f09a",
+    "deployer": "0x572ABd6461BED2258615E6b99c585Ab7c5d05037",
+    "explorer": "https://arc.etherscan.io/address/0x5aEC22f00Cd85F46fa28A077F158B57427De79e4",
+    "explorer_official": "https://explorer.arc.io/address/0x5aEC22f00Cd85F46fa28A077F158B57427De79e4"
+  },
+  "funding": {
+    "route": "CCTP v2 Forwarding Service, Avalanche (domain 1) \u2192 Arc (domain 26)",
+    "burn_tx": "0xda10d4e26b1aa469396cb60fdd84e6f435da29635dcf1440a9bab1f9a14e7506",
+    "forward_tx": "0x77f76d497cc0644eef9dcec0a8ab59094f0c084b5741876ec18a90bbdde33ce3",
+    "note": "Circle broadcast the Arc mint itself; the destination wallet held no gas beforehand."
+  },
+  "chain": {
+    "head_block": 21465760,
+    "head_time": "2026-09-18 07:55:26 UTC",
+    "gas_price_gwei": 20.1,
+    "window_blocks": 60,
+    "window_seconds": 30,
+    "block_time_s": 0.508,
+    "txs_in_window": 969,
+    "tps": 32.3,
+    "mean_gas_per_block": 2377907,
+    "gas_limit": 30000000,
+    "utilisation_pct": 7.926
+  },
+  "contract_state": {
+    "code_bytes": 7894,
+    "deploy_status": "0x1",
+    "deploy_block": 21461708,
+    "deploy_gas_used": 1760326
+  },
+  "wallet": {
+    "address": "0x572ABd6461BED2258615E6b99c585Ab7c5d05037",
+    "usdc_native": 0.948479
+  },
+  "growth_series": {
+    "note": "Identical 60-block windows sampled weekly from genesis. Each row is a real read of that block range; the final row is the most recent sample.",
+    "genesis": "2026-05-12",
+    "age_days": 129.3,
+    "samples": [
+      {
+        "date": "2026-05-18",
+        "block": 551702,
+        "txs_in_window": 0,
+        "window_seconds": 30,
+        "tps": 0.0,
+        "mean_gas_per_block": 0,
+        "gas_limit": 30000000
+      },
+      {
+        "date": "2026-05-25",
+        "block": 1713536,
+        "txs_in_window": 0,
+        "window_seconds": 30,
+        "tps": 0.0,
+        "mean_gas_per_block": 0,
+        "gas_limit": 30000000
+      },
+      {
+        "date": "2026-06-01",
+        "block": 2875370,
+        "txs_in_window": 0,
+        "window_seconds": 30,
+        "tps": 0.0,
+        "mean_gas_per_block": 0,
+        "gas_limit": 30000000
+      },
+      {
+        "date": "2026-06-08",
+        "block": 4037203,
+        "txs_in_window": 0,
+        "window_seconds": 30,
+        "tps": 0.0,
+        "mean_gas_per_block": 0,
+        "gas_limit": 30000000
+      },
+      {
+        "date": "2026-06-14",
+        "block": 5199037,
+        "txs_in_window": 0,
+        "window_seconds": 30,
+        "tps": 0.0,
+        "mean_gas_per_block": 0,
+        "gas_limit": 30000000
+      },
+      {
+        "date": "2026-06-21",
+        "block": 6360870,
+        "txs_in_window": 2,
+        "window_seconds": 31,
+        "tps": 0.065,
+        "mean_gas_per_block": 9111,
+        "gas_limit": 30000000
+      },
+      {
+        "date": "2026-06-28",
+        "block": 7522704,
+        "txs_in_window": 5,
+        "window_seconds": 31,
+        "tps": 0.161,
+        "mean_gas_per_block": 13376,
+        "gas_limit": 30000000
+      },
+      {
+        "date": "2026-07-05",
+        "block": 8684537,
+        "txs_in_window": 7,
+        "window_seconds": 30,
+        "tps": 0.233,
+        "mean_gas_per_block": 15091,
+        "gas_limit": 30000000
+      },
+      {
+        "date": "2026-07-12",
+        "block": 9846371,
+        "txs_in_window": 11,
+        "window_seconds": 30,
+        "tps": 0.367,
+        "mean_gas_per_block": 43246,
+        "gas_limit": 30000000
+      },
+      {
+        "date": "2026-07-18",
+        "block": 11008204,
+        "txs_in_window": 24,
+        "window_seconds": 30,
+        "tps": 0.8,
+        "mean_gas_per_block": 84100,
+        "gas_limit": 30000000
+      },
+      {
+        "date": "2026-07-25",
+        "block": 12170038,
+        "txs_in_window": 18,
+        "window_seconds": 30,
+        "tps": 0.6,
+        "mean_gas_per_block": 49173,
+        "gas_limit": 30000000
+      },
+      {
+        "date": "2026-08-01",
+        "block": 13331872,
+        "txs_in_window": 26,
+        "window_seconds": 31,
+        "tps": 0.839,
+        "mean_gas_per_block": 68458,
+        "gas_limit": 30000000
+      },
+      {
+        "date": "2026-08-08",
+        "block": 14493705,
+        "txs_in_window": 14,
+        "window_seconds": 30,
+        "tps": 0.467,
+        "mean_gas_per_block": 42942,
+        "gas_limit": 30000000
+      },
+      {
+        "date": "2026-08-15",
+        "block": 15655539,
+        "txs_in_window": 66,
+        "window_seconds": 30,
+        "tps": 2.2,
+        "mean_gas_per_block": 260234,
+        "gas_limit": 30000000
+      },
+      {
+        "date": "2026-08-21",
+        "block": 16817372,
+        "txs_in_window": 50,
+        "window_seconds": 30,
+        "tps": 1.667,
+        "mean_gas_per_block": 185852,
+        "gas_limit": 30000000
+      },
+      {
+        "date": "2026-08-28",
+        "block": 17979206,
+        "txs_in_window": 20,
+        "window_seconds": 31,
+        "tps": 0.645,
+        "mean_gas_per_block": 58908,
+        "gas_limit": 30000000
+      },
+      {
+        "date": "2026-09-04",
+        "block": 19141039,
+        "txs_in_window": 37,
+        "window_seconds": 30,
+        "tps": 1.233,
+        "mean_gas_per_block": 94434,
+        "gas_limit": 30000000
+      },
+      {
+        "date": "2026-09-11",
+        "block": 20302873,
+        "txs_in_window": 40,
+        "window_seconds": 31,
+        "tps": 1.29,
+        "mean_gas_per_block": 199523,
+        "gas_limit": 30000000
+      },
+      {
+        "date": "2026-09-18",
+        "block": 21464706,
+        "txs_in_window": 1180,
+        "window_seconds": 31,
+        "tps": 38.065,
+        "mean_gas_per_block": 2521236,
+        "gas_limit": 30000000
+      }
+    ]
+  }
+}

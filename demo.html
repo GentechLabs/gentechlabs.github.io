@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GenTech Labs — Live Demo Suite</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;background:#0a0e17;color:#e2e8f0;min-height:100vh}
+.container{max-width:1100px;margin:0 auto;padding:40px 24px 80px}
+
+/* Header */
+.header{text-align:center;padding:60px 0 40px}
+.header h1{font-size:2.5rem;font-weight:800;background:linear-gradient(135deg,#60a5fa,#a78bfa,#f472b6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.header p{color:#6b7b8d;font-size:1.1rem;margin-top:12px;max-width:600px;margin-left:auto;margin-right:auto}
+.header .badge{display:inline-block;padding:6px 16px;border-radius:100px;background:rgba(96,165,250,0.1);border:1px solid rgba(96,165,250,0.2);font-size:0.8rem;color:#60a5fa;margin-bottom:16px}
+
+/* Grid */
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:20px;margin-top:32px}
+
+/* Card */
+.card{background:#111827;border:1px solid #1e293b;border-radius:16px;padding:24px;transition:border-color 0.2s}
+.card:hover{border-color:#334155}
+.card .icon{font-size:2rem;margin-bottom:12px}
+.card h3{font-size:1.1rem;font-weight:700;color:#f1f5f9;margin-bottom:8px}
+.card p{font-size:0.9rem;color:#6b7b8d;line-height:1.6;margin-bottom:16px}
+.card .status{display:inline-flex;align-items:center;gap:6px;font-size:0.8rem;padding:4px 12px;border-radius:100px;margin-bottom:12px}
+.card .status.live{background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.2);color:#22c55e}
+.card .status.preview{background:rgba(250,204,21,0.1);border:1px solid rgba(250,204,21,0.2);color:#eab308}
+.card .status.soon{background:rgba(100,116,139,0.1);border:1px solid rgba(100,116,139,0.2);color:#64748b}
+.card .link{display:inline-flex;align-items:center;gap:6px;color:#60a5fa;text-decoration:none;font-size:0.85rem;font-weight:500;margin-top:8px}
+.card .link:hover{color:#93c5fd}
+
+/* Section titles */
+.section-title{font-size:1.3rem;font-weight:700;color:#f1f5f9;margin-top:48px;padding-bottom:8px;border-bottom:1px solid #1e293b}
+
+/* Demo video section */
+.video-section{background:linear-gradient(135deg,rgba(96,165,250,0.05),rgba(167,139,250,0.05));border:1px solid rgba(96,165,250,0.1);border-radius:16px;padding:32px;margin-top:32px;text-align:center}
+.video-section h2{font-size:1.3rem;font-weight:700;color:#f1f5f9;margin-bottom:8px}
+.video-section p{color:#6b7b8d;font-size:0.9rem;margin-bottom:20px}
+.video-placeholder{background:#0a0e17;border:2px dashed #1e293b;border-radius:12px;padding:60px 20px;color:#475569;font-size:0.9rem}
+.video-placeholder .play-icon{font-size:3rem;margin-bottom:12px}
+
+/* Footer */
+.footer{text-align:center;padding:40px 0;color:#475569;font-size:0.85rem;border-top:1px solid #1e293b;margin-top:60px}
+.footer a{color:#60a5fa;text-decoration:none}
+
+@media(max-width:640px){
+  .header h1{font-size:1.8rem}
+  .grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="header">
+  <div class="badge">🚀 Production · Live Demo</div>
+  <h1>GenTech Labs Suite</h1>
+  <p>Agent payment infrastructure, DeFi intelligence, and self-evolving systems — all running in production.</p>
+</div>
+
+<div class="video-section">
+  <h2>🎬 Demo Videos</h2>
+  <p>Watch the GenTech ecosystem in action — payments, yield, trading, agents, and turning any website into a paid API.</p>
+  <video controls style="width:100%;max-width:800px;border-radius:12px;background:#0a0e17;border:1px solid #1e293b">
+    <source src="https://gentechlabs.net/agentic-treasury-demo.mp4" type="video/mp4">
+    Your browser does not support video playback.
+  </video>
+  <p style="margin-top:16px;color:#6b7b8d;font-size:0.9rem">Turn any website into a paid API — narrated explainer</p>
+  <video controls style="width:100%;max-width:800px;border-radius:12px;background:#0a0e17;border:1px solid #1e293b">
+    <source src="https://gentechlabs.net/videos/website-to-api-explainer.mp4" type="video/mp4">
+    Your browser does not support video playback.
+  </video>
+</div>
+
+<h2 class="section-title">⚡ Payment Infrastructure</h2>
+<div class="grid">
+  <div class="card">
+    <div class="icon">🔵</div>
+    <div class="status live">● LIVE</div>
+    <h3>Arc Mainnet — Agent Wallet</h3>
+    <p>ArcAgentWallet deployed on Arc (chain 5042), where USDC is both the balance and the gas. Funded from zero through CCTP's Forwarding Service — no destination gas, no exchange. Live page reads the contract, the deploy transaction and network activity straight from Arc RPC.</p>
+    <a href="arc-mainnet.html" class="link">→ see it on-chain</a>
+  </div>
+  <div class="card">
+    <div class="icon">🔌</div>
+    <div class="status live">● LIVE</div>
+    <h3>x402 Payment Gateway</h3>
+    <p>11 paid x402 services across 9 chains — token security, wallet analysis, market intelligence, agent discovery, DeFi LP analytics, NFT search, treasury defender, lineage guard, agent research, SIE inference, and deal tracker. HTTP-native, no UI needed. First settlement verified on-chain.</p>
+    <a href="https://gentechlabs.net" class="link">→ gentechlabs.net</a>
+  </div>
+  <div class="card">
+    <div class="icon">⛽</div>
+    <div class="status live">● LIVE</div>
+    <h3>Q402 Gasless Settlement</h3>
+    <p>USDC/USDT on 12 chains via EIP-7702. Zero gas fees for agent-to-agent payments. Free trial on BNB, paid on 11 other chains.</p>
+    <a href="https://q402.quackai.ai" class="link">→ q402.quackai.ai</a>
+  </div>
+  <div class="card">
+    <div class="icon">🧰</div>
+    <div class="status live">● LIVE</div>
+    <h3>Agent Kit v0.4.0</h3>
+    <p>One install gives any agent payment rails, DeFi intelligence, and identity. MIT-licensed, open-source.</p>
+    <a href="https://github.com/GentechLabs/genTech-agent-kit" class="link">→ GitHub</a>
+  </div>
+  <div class="card">
+    <div class="icon">🌐</div>
+    <div class="status live">● LIVE</div>
+    <h3>Website → Paid API</h3>
+    <p>Turn any website into a billable x402 endpoint. Capture it once in a browser, get an OpenAPI spec + client, then charge per call. Deal Tracker is live on the gateway.</p>
+    <a href="https://gentechlabs.net/videos/website-to-api-explainer.mp4" class="link">→ Watch explainer</a>
+  </div>
+</div>
+
+<h2 class="section-title">📊 DeFi Intelligence</h2>
+<div class="grid">
+  <div class="card">
+    <div class="icon">🤖</div>
+    <div class="status live">● LIVE</div>
+    <h3>Agentic Treasury — Live Demo</h3>
+    <p>Autonomous treasury agent fusing 5 live layers — regime, LP farm, on-chain positions, arb windows, market sentiment — into one decision call. Real balances, real quotes, real settlement. The 2nd demo in the suite.</p>
+    <a href="https://gentechlabs.net/treasury-demo.html" class="link">→ Live Treasury Demo</a>
+  </div>
+  <div class="card">
+    <div class="icon">🏦</div>
+    <div class="status live">● LIVE</div>
+    <h3>AAE Yield Farm Command Center</h3>
+    <p>Full AAE Stack operations view — agent fleet, treasury, live yield metrics, rainbow position, ERC-8004 identity, and activity log. The command hub for the Agentic Treasury.</p>
+    <a href="https://commandcenter.gentechlabs.net" class="link">→ Command Center</a>
+  </div>
+  <div class="card">
+    <div class="icon">🌈</div>
+    <div class="status live">● LIVE</div>
+    <h3>Yield Rainbow Dashboard</h3>
+    <p>Real-time DeFi yield monitoring with rainbow bands — euphoria, accumulation, fear, and capitulation zones. Live LP position tracking.</p>
+    <a href="https://yield.gentechlabs.net" class="link">→ Live Dashboard</a>
+  </div>
+  <div class="card">
+    <div class="icon">📈</div>
+    <div class="status live">● LIVE</div>
+    <h3>GenTech Trading Agent (GTA)</h3>
+    <p>Our official AI trading agent. Cross-venue arbitrage detection — Hyperliquid perp vs Coinbase spot with real-time basis tracking. Flash loan execution engine incoming — agents that borrow, arb, and repay in one transaction.</p>
+    <a href="https://gentechlabs.net/gta-arb.html" class="link">→ Live Dashboard</a>
+  </div>
+  <div class="card">
+    <div class="icon">🔄</div>
+    <div class="status live">● LIVE</div>
+    <h3>Market Sentiment Scanner</h3>
+    <p>Weekly AI-powered market sentiment analysis across crypto sectors. Tracks which stories are gaining and losing mindshare, plus the bull/bear radar. Live dry powder analysis with USDC + USDT market cap.</p>
+    <a href="https://narrative.gentechlabs.net" class="link">→ Live Dashboard</a>
+  </div>
+</div>
+
+<h2 class="section-title">🤖 Agent Infrastructure</h2>
+<div class="grid">
+  <div class="card">
+    <div class="icon">🧬</div>
+    <div class="status live">● LIVE</div>
+    <h3>Self-Evolution Harness</h3>
+    <p>4 cron jobs running in production — Evolution proposes improvements, Critic reviews (Kimi K2.7), Verifier checks results, Gardener prunes. Running 4x daily.</p>
+    <a href="https://github.com/GentechLabs" class="link">→ GitHub</a>
+  </div>
+  <div class="card">
+    <div class="icon">📝</div>
+    <div class="status live">● LIVE</div>
+    <h3>Agent Credit Score</h3>
+    <p>ERC-8004 on-chain agent reputation. 0-850 credit score for AI agents. Trustless identity and feedback system.</p>
+    <a href="https://github.com/GentechLabs/agent-credit-score" class="link">→ GitHub</a>
+  </div>
+  <div class="card">
+    <div class="icon">🎮</div>
+    <div class="status live">● COMING SOON</div>
+    <h3>Agent Economy Arcade</h3>
+    <p>AI vs human gaming league. Agent Arena prediction layer. Agent economy meets competitive gaming — launching soon.</p>
+    <p style="font-size:0.8em;color:var(--dim);margin-top:6px;line-height:1.5;">Agents compete, humans bet, prediction markets on outcomes. First game live now — <a href="https://arcade.gentechlabs.net" style="color:#60a5fa;text-decoration:none;font-weight:600;">GenTech Smash</a> — AI vs human tennis in Godot 4.</p>
+    <a href="https://arcade.gentechlabs.net" class="link">→ Play GenTech Smash</a>
+  </div>
+  <div class="card">
+    <div class="icon">🌀</div>
+    <div class="status live">● LIVE</div>
+    <h3>3D Gaussian Splat Viewer</h3>
+    <p>Real-time radiance-field rendering. Scan a real space with a phone video, train a 3DGS model, fly through it in your browser — no 3D modeling, no GPU needed to view (WebGL).</p>
+    <a href="https://gentechlabs.net/splat-demo.html" class="link">→ Launch Viewer</a>
+  </div>
+</div>
+
+<h2 class="section-title">🎓 GenTech Academy</h2>
+  <div class="card-grid">
+    <div class="card">
+      <div class="icon">🐂</div>
+      <div class="status live">● LIVE</div>
+      <h3>Beginner's Guide to the Bull Market</h3>
+      <p>Learn to read market sentiment like a pro — Fear &amp; Greed dial with live data, buy zones, the tiered ladder, and the Steward's 5-question beginner card. Start with Bitcoin.</p>
+      <a href="https://gentechlabs.net/bull-market-guide.html" class="link">→ Start the Guide</a>
+    </div>
+  </div>
+
+<h2 class="section-title">🔧 Technical Stack</h2>
+<div class="grid">
+  <div class="card">
+    <div class="icon">🧠</div>
+    <h3>AI Models</h3>
+    <p><strong>Primary:</strong> DeepSeek V4 Flash — fast, efficient, handles 95% of workloads<br>
+    <strong>Audit/Reasoning:</strong> Kimi K2.7 Code — anti-collusion, different model family<br>
+    <strong>Provider:</strong> Ollama Cloud — 29 cron jobs running</p>
+  </div>
+  <div class="card">
+    <div class="icon">⛓️</div>
+    <h3>Blockchain</h3>
+    <p>Multi-chain: Avalanche, Base, BNB, Ethereum, Arbitrum, Solana. EIP-7702 for gasless. ERC-8004 for agent identity.</p>
+  </div>
+  <div class="card">
+    <div class="icon">☁️</div>
+    <h3>Infrastructure</h3>
+    <p>Self-hosted VPS (15GB RAM, 4 CPU). Cloudflare CDN. GitHub Pages. Hermes v0.19.0 agent framework.</p>
+  </div>
+</div>
+
+<div class="footer">
+  <p>GenTech Labs · <a href="https://demo.gentechlabs.net">Demo Suite</a> · <a href="https://github.com/GentechLabs">GitHub</a></p>
+</div>
+
+</div>
+</body>
+</html>

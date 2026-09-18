@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GenTech on Arc mainnet — live agent wallet</title>
+<meta name="description" content="ArcAgentWallet deployed on Arc mainnet (chain 5042). Live on-chain state: contract, deploy transaction, wallet balance, and measured network activity.">
+<style>
+  :root{--bg:#0a0e17;--panel:#111827;--panel2:#0f1623;--text:#e2e8f0;--dim:#94a3b8;--accent:#60a5fa;--green:#34d399;--amber:#fbbf24;--border:#1e293b;--mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+  .wrap{max-width:1100px;margin:0 auto;padding:28px 20px 72px}
+  header{border-bottom:1px solid var(--border);padding-bottom:20px;margin-bottom:26px}
+  h1{font-size:1.9rem;margin:0 0 8px;letter-spacing:-.02em}
+  .sub{color:var(--dim);margin:0}
+  .badges{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0 4px}
+  .badge{font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;padding:4px 10px;border-radius:99px;border:1px solid var(--border);background:var(--panel);color:var(--dim)}
+  .badge.live{color:#062; background:var(--green);border-color:var(--green);font-weight:700}
+  .badge.chain{color:var(--accent);border-color:#1e3a5f}
+  .grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));margin:22px 0}
+  .card{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:18px}
+  .card h2{margin:0 0 14px;font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);font-weight:600}
+  .stat{font-size:1.8rem;font-weight:700;letter-spacing:-.02em;line-height:1.15}
+  .stat small{font-size:.85rem;color:var(--dim);font-weight:400;letter-spacing:0}
+  .label{color:var(--dim);font-size:.82rem;margin-top:2px}
+  code,.mono{font-family:var(--mono);font-size:.85rem}
+  .hash{display:block;font-family:var(--mono);font-size:.8rem;word-break:break-all;color:var(--accent);text-decoration:none;margin:2px 0 10px}
+  .hash:hover{text-decoration:underline}
+  a{color:var(--accent)}
+  section{margin:34px 0}
+  section>h2{font-size:1.1rem;margin:0 0 14px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+  table{width:100%;border-collapse:collapse;font-size:.88rem}
+  th,td{text-align:right;padding:7px 8px;border-bottom:1px solid var(--border)}
+  th:first-child,td:first-child{text-align:left}
+  th{color:var(--dim);font-weight:600;font-size:.75rem;letter-spacing:.06em;text-transform:uppercase}
+  tbody tr:hover{background:var(--panel2)}
+  .up{color:var(--green)}
+  .note{background:var(--panel2);border-left:3px solid var(--accent);padding:12px 14px;border-radius:0 10px 10px 0;color:var(--dim);font-size:.9rem}
+  pre{background:#070b12;border:1px solid var(--border);border-radius:10px;padding:14px;overflow:auto;font-size:.8rem;color:#cbd5e1}
+  footer{margin-top:46px;padding-top:18px;border-top:1px solid var(--border);color:var(--dim);font-size:.85rem}
+  .freshness{color:var(--dim);font-size:.8rem}
+  .ok{color:var(--green)}
+  .kpi{border-color:#1e3a5f}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>GenTech on Arc mainnet</h1>
+    <p class="sub">An agent wallet that holds one asset — USDC for value <em>and</em> for its own fees — deployed and readable on Arc.</p>
+    <div class="badges">
+      <span class="badge live">Live</span>
+      <span class="badge chain">Arc mainnet · chain 5042</span>
+      <span class="badge">agent payments · x402</span>
+      <span class="badge" id="fresh">loading…</span>
+    </div>
+  </header>
+
+  <div class="grid">
+    <div class="card kpi">
+      <h2>Contract</h2>
+      <div class="stat ok" id="code">—</div>
+      <div class="label">bytes of runtime code, read via eth_getCode</div>
+      <a class="hash" id="addr" href="#" target="_blank" rel="noopener">—</a>
+    </div>
+    <div class="card">
+      <h2>Deploy transaction</h2>
+      <div class="stat" id="dgas">—</div>
+      <div class="label">gas used, status <span id="dstatus">—</span> at block <span id="dblock">—</span></div>
+      <a class="hash" id="dtx" href="#" target="_blank" rel="noopener">—</a>
+    </div>
+    <div class="card">
+      <h2>Wallet</h2>
+      <div class="stat" id="bal">—</div>
+      <div class="label">native USDC — balance and gas in the same asset</div>
+      <a class="hash" id="wal" href="#" target="_blank" rel="noopener">—</a>
+    </div>
+  </div>
+
+  <section>
+    <h2>Live network state <span class="freshness" id="gen"></span></h2>
+    <div class="grid">
+      <div class="card"><h2>Head block</h2><div class="stat" id="head">—</div><div class="label" id="headtime">—</div></div>
+      <div class="card"><h2>Throughput</h2><div class="stat" id="tps">—</div><div class="label" id="tpsnote">—</div></div>
+      <div class="card"><h2>Block time</h2><div class="stat" id="bt">—</div><div class="label">measured over the same window</div></div>
+      <div class="card"><h2>Gas price</h2><div class="stat" id="gp">—</div><div class="label">gwei — paid in USDC</div></div>
+    </div>
+    <p class="note" id="utilnote"></p>
+  </section>
+
+  <section>
+    <h2>How this wallet was funded — our own bridge, from zero</h2>
+    <p class="note">
+      The wallet held <strong>no USDC at all</strong> before this, and Arc charges fees <em>in</em> USDC — the classic
+      bootstrap problem: you need the asset to receive the asset, if you submit the destination mint yourself.
+      We used CCTP's <strong>Forwarding Service</strong> instead: the burn on Avalanche carried a forward request,
+      so <strong>Circle broadcast the Arc mint from its own keys</strong>. The destination needed no gas, no signing.
+      The first thing that balance did was pay for its own contract deployment.
+    </p>
+    <div class="grid">
+      <div class="card"><h2>Burn on Avalanche (domain 1)</h2><a class="hash" id="burn" href="#" target="_blank" rel="noopener">—</a></div>
+      <div class="card"><h2>Mint on Arc (domain 26), by Circle</h2><a class="hash" id="fwd" href="#" target="_blank" rel="noopener">—</a></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Is Arc actually used? Measured, weekly, same window size</h2>
+    <p class="note" id="growthnote">—</p>
+    <table>
+      <thead><tr><th>Date</th><th>Block</th><th>Txs in window</th><th>TPS</th><th>Gas / block</th><th>Utilisation</th></tr></thead>
+      <tbody id="growth"></tbody>
+    </table>
+  </section>
+
+  <section>
+    <h2>Verify it yourself</h2>
+    <p class="note">Nothing on this page is a cached screenshot. Every figure is re-read from Arc mainnet every few minutes by the script below, and the calls behind it are these:</p>
+<pre>curl -s https://rpc.mainnet.arc.io -H 'content-type: application/json' \
+  -d '{"jsonrpc":"2.0","id":1,"method":"eth_getCode","params":["0x5aEC22f00Cd85F46fa28A077F158B57427De79e4","latest"]}'
+
+curl -s https://rpc.mainnet.arc.io -H 'content-type: application/json' \
+  -d '{"jsonrpc":"2.0","id":1,"method":"eth_getTransactionReceipt","params":["0xd94e08326a84e21901b226d5a530157454b971b01b79d1361ba668cdade2f09a"]}'
+
+curl -s https://rpc.mainnet.arc.io -H 'content-type: application/json' \
+  -d '{"jsonrpc":"2.0","id":1,"method":"eth_getBalance","params":["0x572ABd6461BED2258615E6b99c585Ab7c5d05037","latest"]}'</pre>
+    <p>Raw feed behind this page: <a href="/arc-mainnet.json">/arc-mainnet.json</a></p>
+  </section>
+
+  <footer>
+    GenTech Labs · <a href="https://gentechlabs.net">gentechlabs.net</a> ·
+    x402 payments gateway · agent wallets on Arc, Base, Avalanche, Solana, Algorand, X Layer
+  </footer>
+</div>
+
+<script>
+const short = h => h ? h.slice(0,10)+'…'+h.slice(-8) : '—';
+const num = n => n==null ? '—' : n.toLocaleString('en-US');
+const arcscan = {tx:'https://arc.etherscan.io/tx/', addr:'https://arc.etherscan.io/address/', avax:'https://explorer.avax.network/tx/'};
+
+fetch('/arc-mainnet.json', {cache:'no-store'}).then(r=>r.json()).then(d=>{
+  const e = id => document.getElementById(id);
+  const dep = d.deployment||{}, cs = d.contract_state||{}, ch = d.chain||{}, w = d.wallet||{}, f = d.funding||{};
+
+  e('fresh').textContent = 'feed ' + (d.generated_at||'').replace('T',' ').replace('Z',' UTC');
+  e('code').textContent = cs.code_bytes ? num(cs.code_bytes) : 'unavailable';
+  e('addr').textContent = short(dep.contract); e('addr').href = dep.explorer || '#';
+  e('dgas').textContent = cs.deploy_gas_used ? num(cs.deploy_gas_used) : '—';
+  e('dstatus').textContent = cs.deploy_status==='0x1' ? 'success' : (cs.deploy_status||'—');
+  e('dblock').textContent = num(cs.deploy_block);
+  e('dtx').textContent = short(dep.deploy_tx); e('dtx').href = arcscan.tx + (dep.deploy_tx||'');
+  e('bal').textContent = w.usdc_native!=null ? w.usdc_native.toFixed(4)+' USDC' : '—';
+  e('wal').textContent = short(w.address); e('wal').href = arcscan.addr + (w.address||'');
+
+  e('gen').textContent = d.generated_at ? '· read ' + d.generated_at.replace('T',' ').replace('Z',' UTC') : '';
+  e('head').textContent = num(ch.head_block);
+  e('headtime').textContent = ch.head_time || '—';
+  e('tps').textContent = ch.tps!=null ? ch.tps.toFixed(2) : '—';
+  e('tpsnote').textContent = ch.txs_in_window!=null ? ch.txs_in_window.toLocaleString()+' txs in the last '+ch.window_seconds+'s' : '—';
+  e('bt').textContent = ch.block_time_s!=null ? ch.block_time_s.toFixed(3)+'s' : '—';
+  e('gp').textContent = ch.gas_price_gwei!=null ? ch.gas_price_gwei.toFixed(3) : '—';
+  if (ch.utilisation_pct!=null) e('utilnote').textContent =
+    'Measured utilisation: '+ch.utilisation_pct.toFixed(2)+'% of the '+num(ch.gas_limit)+' gas block limit — the chain is live and early, not congested. '
+    +'Mean '+num(ch.mean_gas_per_block)+' gas per block across the window.';
+  e('utilnote').innerHTML = e('utilnote').textContent;
+
+  e('burn').textContent = short(f.burn_tx); e('burn').href = arcscan.avax + (f.burn_tx||'');
+  e('fwd').textContent  = short(f.forward_tx); e('fwd').href = arcscan.tx + (f.forward_tx||'');
+
+  const g = d.growth_series;
+  if (g && g.samples && g.samples.length) {
+    e('growthnote').textContent = g.note + ' Genesis ' + g.genesis + ' — chain age ' + g.age_days + ' days.';
+    const max = Math.max(...g.samples.map(s=>s.txs_in_window||0), 1);
+    e('growth').innerHTML = g.samples.map((s,i)=>{
+      const last = i===g.samples.length-1;
+      const util = s.gas_limit ? (100*s.mean_gas_per_block/s.gas_limit) : null;
+      const mark = last ? '<span class="up">▲ live sample</span>' : '';
+      return `<tr${last?' style="background:#0f1623"':''}><td>${s.date} ${mark}</td><td>${num(s.block)}</td>`
+        + `<td>${num(s.txs_in_window)}</td><td>${(s.tps||0).toFixed(2)}</td>`
+        + `<td>${num(s.mean_gas_per_block)}</td><td>${util!=null?util.toFixed(2)+'%':'—'}</td></tr>`;
+    }).join('');
+  } else {
+    e('growthnote').textContent = 'Growth series unavailable.';
+  }
+}).catch(err=>{ document.getElementById('fresh').textContent = 'feed unavailable'; });
+</script>
+</body>
+</html>
