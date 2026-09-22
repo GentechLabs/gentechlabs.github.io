@@ -1,9 +1,9 @@
 {
-  "lastUpdated": "2026-09-20T16:39:54.995191+00:00",
+  "lastUpdated": "2026-09-22T20:03:30.293805+00:00",
   "pool": "AVAX/USDC",
   "chain": "Avalanche",
   "dex": "LFJ",
-  "currentPrice": 11.29,
+  "currentPrice": 10.95,
   "priceChange24h": -2.37,
   "volume24h": 519740.09,
   "liquidity": 392758.8,
@@ -12,41 +12,41 @@
     "feeTier": "5bps",
     "shape": "curve",
     "displayShape": "Curve",
-    "currentPrice": 11.29,
-    "rangeMin": 7.187217,
-    "rangeMax": 8.778399,
-    "avaxAmount": 0.0,
-    "usdcAmount": 69.87,
-    "totalValue": 0,
-    "totalValueUSD": 0,
-    "activeBin": 8363049,
+    "currentPrice": 10.95,
+    "rangeMin": 10.931393,
+    "rangeMax": 11.21919,
+    "avaxAmount": 7.014561,
+    "usdcAmount": 3.06,
+    "totalValue": 80.16,
+    "totalValueUSD": 80.16,
+    "activeBin": 8363360,
     "binStep": 10,
-    "totalBins": 1,
-    "inRange": false,
-    "entryTotal": 37.936501328609396
+    "totalBins": 25,
+    "inRange": true,
+    "entryTotal": 44.71230002589041
   },
   "fees": {
     "dailyFees": 0,
     "cumulativeFees": 1.003,
     "feeCurrency": "USD"
   },
-  "efficiency": 0.0,
+  "efficiency": 40.7,
   "hero": {
-    "positionUsd": 0,
+    "positionUsd": 80.16,
     "dailyFees": 0,
-    "efficiency": 0.0,
-    "efficiencyZone": "Out of Range",
+    "efficiency": 40.7,
+    "efficiencyZone": "In Range",
     "shape": "Curve",
-    "rangeStatus": "Out of Range",
-    "currentPrice": 11.29,
-    "rangeMin": 7.187217,
-    "rangeMax": 8.778399,
+    "rangeStatus": "In Range",
+    "currentPrice": 10.95,
+    "rangeMin": 10.931393,
+    "rangeMax": 11.21919,
     "milestoneNext": "Scout",
     "milestoneTarget": 5,
     "milestoneProgress": 20.1
   },
   "marketIntel": {
-    "avaxPrice": 11.29,
+    "avaxPrice": 10.95,
     "change24h": -2.37,
     "volume24h": 519740.09,
     "tvl": 392758.8,
@@ -65,16 +65,16 @@
     ]
   },
   "strategyAdvisor": {
-    "efficiency": 0.0,
-    "efficiencyZone": "Out of Range",
-    "recommendedAction": "REBALANCE \u2014 price outside range",
-    "dcaType": "None (Out of Range)",
-    "dcaDetails": "Price $11.29, out of range $7.187217-$8.778399",
-    "rebalanceTrigger": "Price exits $7.187217-$8.778399",
+    "efficiency": 40.7,
+    "efficiencyZone": "In Range",
+    "recommendedAction": "Hold",
+    "dcaType": "Auto",
+    "dcaDetails": "Price $10.95, in range $10.931393-$11.21919",
+    "rebalanceTrigger": "Price exits $10.931393-$11.21919",
     "compoundThreshold": 50,
     "cumulativeFees": 1.003,
-    "riskLevel": "High",
-    "riskNote": "Price $11.29, 0.0% efficiency",
+    "riskLevel": "Medium",
+    "riskNote": "Price $10.95, 40.7% efficiency",
     "shape": "Curve"
   },
   "regimeData": {
@@ -118,13 +118,13 @@
     }
   },
   "strategyComparison": {
-    "lpApr": 0,
+    "lpApr": 0.0,
     "lpDailyFees": 0,
     "stakingApr": 5.2,
-    "stakingDaily": 0.0,
-    "hodlReturn": 84.18,
+    "stakingDaily": 0.0114,
+    "hodlReturn": 78.63,
     "entryPrice": 6.13,
-    "currentPrice": 11.29,
+    "currentPrice": 10.95,
     "outperforming": false,
     "verdict": "LP losing vs staking"
   },
@@ -391,7 +391,7 @@
   ],
   "marketScenarios": {
     "currentConditions": {
-      "price": 11.29,
+      "price": 10.95,
       "trend": "sideways",
       "volatility24h": 0,
       "regime": "sideways",
@@ -401,7 +401,7 @@
       {
         "id": "bear_continued",
         "name": "Bear Continuation",
-        "subtitle": "AVAX drops to $7.9-$9.6",
+        "subtitle": "AVAX drops to $7.66-$9.31",
         "icon": "\ud83d\udc3b",
         "color": "#ef4444",
         "trigger": "BTC breaks below $60K",
@@ -415,7 +415,7 @@
       {
         "id": "sideways",
         "name": "Sideways Accumulation",
-        "subtitle": "AVAX trades $10.73-$11.85",
+        "subtitle": "AVAX trades $10.4-$11.5",
         "icon": "\u27a1\ufe0f",
         "color": "#f59e0b",
         "trigger": "BTC holds $62-68K",
@@ -429,7 +429,7 @@
       {
         "id": "bull",
         "name": "Bull Recovery",
-        "subtitle": "AVAX pushes to $13.55-$16.93",
+        "subtitle": "AVAX pushes to $13.14-$16.42",
         "icon": "\ud83d\udc02",
         "color": "#22c55e",
         "trigger": "BTC breaks $70K",
@@ -443,7 +443,7 @@
       {
         "id": "flash_crash",
         "name": "Flash Crash",
-        "subtitle": "AVAX drops to $5.64-$6.77",
+        "subtitle": "AVAX drops to $5.47-$6.57",
         "icon": "\u26a1",
         "color": "#8b5cf6",
         "trigger": "Black swan event",
@@ -459,17 +459,17 @@
       "currentScenario": "sideways",
       "alerts": [
         {
-          "price": 10.73,
+          "price": 10.4,
           "type": "danger",
           "message": "Below range \u2014 rebalance down"
         },
         {
-          "price": 9.6,
+          "price": 9.31,
           "type": "critical",
           "message": "Flash crash zone"
         },
         {
-          "price": 11.85,
+          "price": 11.5,
           "type": "info",
           "message": "Above range \u2014 rebalance up"
         }
@@ -477,86 +477,86 @@
     }
   },
   "ilCalculator": {
-    "currentPrice": 11.29,
+    "currentPrice": 10.95,
     "entryPrice": 6.13,
-    "positionUsd": 0,
+    "positionUsd": 80.16,
     "dailyFees": 0,
     "scenarios": [
       {
         "priceChange": -30,
         "newPrice": 4.291,
         "impermanentLoss": -1.57,
-        "feeOffset": 0,
+        "feeOffset": 0.0,
         "netImpact": -1.57
       },
       {
         "priceChange": -20,
         "newPrice": 4.904,
         "impermanentLoss": -0.62,
-        "feeOffset": 0,
+        "feeOffset": 0.0,
         "netImpact": -0.62
       },
       {
         "priceChange": -15,
         "newPrice": 5.2105,
         "impermanentLoss": -0.33,
-        "feeOffset": 0,
+        "feeOffset": 0.0,
         "netImpact": -0.33
       },
       {
         "priceChange": -10,
         "newPrice": 5.517,
         "impermanentLoss": -0.14,
-        "feeOffset": 0,
+        "feeOffset": 0.0,
         "netImpact": -0.14
       },
       {
         "priceChange": -5,
         "newPrice": 5.8235,
         "impermanentLoss": -0.03,
-        "feeOffset": 0,
+        "feeOffset": 0.0,
         "netImpact": -0.03
       },
       {
         "priceChange": 0,
         "newPrice": 6.13,
         "impermanentLoss": 0.0,
-        "feeOffset": 0,
+        "feeOffset": 0.0,
         "netImpact": 0.0
       },
       {
         "priceChange": 5,
         "newPrice": 6.4365,
         "impermanentLoss": -0.03,
-        "feeOffset": 0,
+        "feeOffset": 0.0,
         "netImpact": -0.03
       },
       {
         "priceChange": 10,
         "newPrice": 6.743,
         "impermanentLoss": -0.11,
-        "feeOffset": 0,
+        "feeOffset": 0.0,
         "netImpact": -0.11
       },
       {
         "priceChange": 15,
         "newPrice": 7.0495,
         "impermanentLoss": -0.24,
-        "feeOffset": 0,
+        "feeOffset": 0.0,
         "netImpact": -0.24
       },
       {
         "priceChange": 20,
         "newPrice": 7.356,
         "impermanentLoss": -0.41,
-        "feeOffset": 0,
+        "feeOffset": 0.0,
         "netImpact": -0.41
       },
       {
         "priceChange": 30,
         "newPrice": 7.969,
         "impermanentLoss": -0.85,
-        "feeOffset": 0,
+        "feeOffset": 0.0,
         "netImpact": -0.85
       }
     ]
