@@ -1148,7 +1148,7 @@
 </head>
 <body>
 <div style="position:fixed;top:10px;left:10px;z-index:1000;background:rgba(255,255,255,0.9);padding:8px 12px;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.1);">
-    <a href="../Profiles/hub.html" style="color:#1a6bb5;text-decoration:none;font-size:0.9em;font-weight:600;">← Back to Hub</a>
+    <a href="../hub.html" style="color:#1a6bb5;text-decoration:none;font-size:0.9em;font-weight:600;">← Back to Hub</a>
 </div>
 
   <!-- ============================================================
@@ -1189,6 +1189,20 @@
     <section id="flights-section" class="fade-in">
       <h2 class="section-title"><span class="section-icon">✈️</span> Flights</h2>
       <div class="flights-grid" id="flights-container"></div>
+    </section>
+
+    <!-- ============================================================
+         LIVE WATCH — the wire between the daily trackers and this page.
+         Rendered by renderLiveWatch() from travel-live.json. If that
+         file is missing or unreadable the section stays hidden: it must
+         never show a stale or invented number as if it were current.
+         ============================================================ -->
+    <section class="section" id="live-section" style="display:none;">
+      <h2 class="section-title"><span class="section-icon">📡</span> Live Watch</h2>
+      <div id="live-generated" style="font-size:0.8rem;opacity:0.7;margin:-8px 0 14px 4px;"></div>
+      <div class="flights-grid" id="live-container"></div>
+      <div id="live-fx-container" style="margin-top:18px;"></div>
+      <div id="live-rules-container" style="margin-top:18px;"></div>
     </section>
 
     <!-- Book with AI -->
@@ -1549,6 +1563,113 @@
     }
 
     /* ==========================================================
+       RENDER: LIVE WATCH  (the wire from the daily trackers)
+       Data: travel-live.json, built by scripts/build-travel-live.py.
+       Rule: render ONLY what is present. A null fare, an unreadable
+       feed, or a stale reading must never appear as a live number —
+       the section hides itself rather than showing an invented value.
+       ========================================================== */
+    function money0(v) { return (v === null || v === undefined) ? '—' : '$' + v.toLocaleString(); }
+
+    function renderLiveWatch(live) {
+      const section = document.getElementById('live-section');
+      if (!live || !live.flights || !live.flights.length) return;   // stay hidden
+
+      document.getElementById('live-generated').textContent =
+        `Checked ${live._generated || 'unknown'} · source: ${live._source || 'unknown'}`;
+
+      // --- fares, with trend + staleness + the major-airline flag ---
+      const c = document.getElementById('live-container');
+      c.innerHTML = live.flights.map(f => {
+        const L = f.latest || {};
+        const staleBadge = f.stale
+          ? `<span class="status-badge" style="background:#a33;color:#fff;">STALE ${f.stale.days}d</span>` : '';
+        const majorBadge = L.is_major === true
+          ? `<span class="status-badge" style="background:#2a7;color:#fff;">major</span>`
+          : (L.is_major === false
+              ? `<span class="status-badge" style="background:#b80;color:#fff;">non-major ⚠</span>` : '');
+        const d = f.delta_vs_prev;
+        const delta = (d === null || d === undefined) ? ''
+          : `<span style="color:${d < 0 ? '#2a7' : (d > 0 ? '#c33' : 'inherit')};font-weight:600;">
+               ${d < 0 ? '▼' : (d > 0 ? '▲' : '·')} ${Math.abs(d)}</span>`;
+        const low = f.low ? `low ${money0(f.low)}` : '';
+        return `
+          <div class="flight-card">
+            <div class="flight-route">${f.label || f.slug} ${staleBadge}</div>
+            <div class="flight-meta">
+              <div class="flight-meta-item">
+                <span class="flight-meta-label">Round trip:</span>
+                <span class="flight-meta-value">${money0(L.round_trip)} ${delta}</span>
+              </div>
+              <div class="flight-meta-item">
+                <span class="flight-meta-label">One way:</span>
+                <span class="flight-meta-value">${money0(L.one_way)}</span>
+              </div>
+              <div class="flight-meta-item">
+                <span class="flight-meta-label">Carrier:</span>
+                <span class="flight-meta-value">${L.carrier || '—'} ${majorBadge}</span>
+              </div>
+              <div class="flight-meta-item">
+                <span class="flight-meta-label">Elapsed:</span>
+                <span class="flight-meta-value">${L.fastest || '—'}</span>
+              </div>
+              <div class="flight-meta-item">
+                <span class="flight-meta-label">Read:</span>
+                <span class="flight-meta-value">${L.date || '—'}${low ? ' · ' + low : ''}</span>
+              </div>
+            </div>
+          </div>`;
+      }).join('');
+
+      // --- FX: a 5% currency move is worth more than most fare drops ---
+      const fx = live.fx || {};
+      const fxC = document.getElementById('live-fx-container');
+      const ccy = Object.keys(fx);
+      if (ccy.length) {
+        fxC.innerHTML = `
+          <div style="font-weight:600;margin-bottom:8px;">💱 Dollar strength (USD → local)</div>
+          <div style="display:flex;gap:22px;flex-wrap:wrap;">
+            ${ccy.map(k => `
+              <div><span style="opacity:0.7;">${k}</span>
+                <strong style="margin-left:6px;">${Number(fx[k].rate).toFixed(3)}</strong>
+                <span style="opacity:0.55;font-size:0.75rem;margin-left:6px;">${fx[k].date || ''}</span>
+              </div>`).join('')}
+          </div>`;
+      }
+
+      // --- Jordan's ticket shape, carried with the data so it cannot be forgotten ---
+      const r = live.ticket_rules;
+      const rC = document.getElementById('live-rules-container');
+      if (r) {
+        rC.innerHTML = `
+          <div style="font-weight:600;margin-bottom:8px;">🎟️ Ticket shape that counts as bookable</div>
+          <div style="font-size:0.85rem;line-height:1.7;opacity:0.9;">
+            ${(r.shapes || []).map(s =>
+              `<div>• <strong>${s.region}</strong> — ${s.elapsed} total, one ${s.max_layover} layover (${s.note})</div>`).join('')}
+            <div>• Never: ${r.never || ''}</div>
+            <div>• <strong>Never an aggregator</strong> — book direct with the carrier
+              (${(r.no_aggregators || []).slice(0,5).join(', ')}… are the ones to avoid)</div>
+            <div>• Carriers he flies: ${(r.carriers_he_flies || []).join(', ')}</div>
+            <div>• Hotels: ${r.hotels || ''}</div>
+            <div>• Ground transport: ${r.ground_transport || ''}</div>
+          </div>`;
+      }
+
+      section.style.display = 'block';
+    }
+
+    async function fetchLive() {
+      try {
+        const resp = await fetch(`travel-live.json?v=${Date.now()}`);
+        if (!resp.ok) throw new Error('no live feed');
+        return await resp.json();
+      } catch (err) {
+        console.info('Live watch unavailable:', err.message);   // hides, never fakes
+        return null;
+      }
+    }
+
+    /* ==========================================================
        RENDER: RESTAURANTS
        ========================================================== */
     function renderRestaurants(restaurants) {
@@ -1876,6 +1997,11 @@
 
       // Show main content
       document.getElementById('main').style.display = 'block';
+
+      // Live Watch — the wire from the daily trackers. Fetched separately and rendered LAST so a
+      // missing feed cannot stop the trip page from loading. Absent feed => section stays hidden.
+      const live = await fetchLive();
+      renderLiveWatch(live);
 
       // Animate progress bars
       animateProgressBars();
