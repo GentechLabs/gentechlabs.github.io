@@ -1,7 +1,7 @@
 # Jordan Jones
 
 **Email:** jordanjones0902@gmail.com
-**Portfolio:** https://portfolio.gentechlabs.net
+**Website:** https://gentechlabs.net
 **GitHub:** https://github.com/Gentech-Labs
 **Telegram:** @ProtoJay4789
 
@@ -9,11 +9,13 @@
 
 ## SUMMARY
 
-Full-stack orchestrator and founder of GenTech Labs — an AI-agent product lab with 64 shipped public repos spanning x402 payment infrastructure, DeFi agents, and multi-agent orchestration. Ships production systems by architecting and directing AI agent fleets end-to-end: spec, build, audit, deploy. Reviews Python, JavaScript/TypeScript and Rust output rather than hand-writing it. Seeking remote AI-training and code-evaluation work.
+Full-stack orchestrator and founder of GenTech Labs — an AI-agent product lab with 60+ shipped builds spanning x402 payment infrastructure, DeFi agents, and multi-agent orchestration. Ships production systems by architecting and directing AI agent fleets end-to-end: spec, build, audit, deploy. Reviews Python, JavaScript/TypeScript and Rust output rather than hand-writing it. Seeking remote AI-training and code-evaluation work.
 
 ---
 
-## SELECTED PROJECTS — GenTech Labs (github.com/Gentech-Labs)
+## SELECTED PROJECTS — GenTech Labs
+
+*Live systems and the agent fleet: **gentechlabs.net***
 
 - **Sovereign Model Router** — Python — Model scoring + routing intelligence API (MSS v2) with x402 per-request payment rails. Live deployed service.
 - **GenTech 0G DeFi Agent** — JavaScript — "The Agency of Traders": decentralized AI DeFi agent built on 0G.
@@ -46,7 +48,7 @@ Full-stack orchestrator and founder of GenTech Labs — an AI-agent product lab 
 ## EXPERIENCE
 
 - **Founder & Orchestrator — GenTech Labs** (2026 – present)
-- Shipped 64 public repos: payment-protocol SDKs, trading agents, agent frameworks, open specs
+- Shipped 60+ builds: payment-protocol SDKs, trading agents, agent frameworks, open specs
 - Directs AI agent fleets to write, audit and deploy the code; owns architecture, verification and go/no-go
 - Operates a five-agent AI fleet on a 24/7 VPS — cron automation, inter-agent handoffs, monitoring
 - Deploys and maintains live web services: portfolio, dashboards, APIs
