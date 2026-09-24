@@ -27,29 +27,37 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
+      # NOTE: actions/upload-pages-artifact has NO `include-files` input.
+      # Passing one is silently ignored and the artifact becomes the WHOLE repo
+      # (which mirrors the vault: 01-HANDOFFS/, 00-HQ/, 11-Mess Hall/).
+      # The allowlist must therefore be staged into a directory by hand.
+      - name: Stage site (explicit allowlist)
+        run: |
+          set -euo pipefail
+          rm -rf _site
+          mkdir -p _site
+          for p in index.html resume.md projects.json _config.yml .nojekyll \
+                   data assets pals DeFi Dashboards Gaming Travels Cookbook \
+                   Profiles Treasury Academy music; do
+            if [ -e "$p" ]; then
+              cp -R "$p" _site/
+              echo "staged: $p"
+            else
+              echo "absent (skipped): $p"
+            fi
+          done
+          staged=$(find _site -type f | wc -l)
+          echo "total staged files: $staged"
+          test -f _site/index.html || { echo "FATAL: _site/index.html missing"; exit 1; }
+          test -f _site/resume.md  || { echo "FATAL: _site/resume.md missing";  exit 1; }
+          if [ -d _site/01-HANDOFFS ] || [ -d _site/00-HQ ]; then
+            echo "FATAL: internal vault content staged into publish set"; exit 1
+          fi
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: '.'
-          include-files: |
-            index.html
-            resume.md
-            data/**
-            assets/**
-            pals/**
-            pals/data/**
-            DeFi/**
-            Dashboards/**
-            Gaming/**
-            Travels/**
-            Cookbook/**
-            Profiles/**
-            Treasury/**
-            Academy/**
-            music/**
-            projects.json
-            _config.yml
-            .nojekyll
+          path: '_site'
 
       - name: Deploy to GitHub Pages
         id: deployment
