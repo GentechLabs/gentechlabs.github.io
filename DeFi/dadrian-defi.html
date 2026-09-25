@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<title>Dadrian's DeFi Command Center — GenTech</title>
+<style>
+  :root { --bg:#080a0d; --card:#111519; --card2:#161b21; --line:#222a33; --txt:#e9eef4;
+          --dim:#7d8a97; --good:#2fd07f; --warn:#f0b429; --bad:#f0554a; --accent:#4da3ff;
+          --wax:#f0b429; --usd:#4da3ff; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--txt); -webkit-font-smoothing:antialiased;
+         font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif; }
+  .wrap { max-width:680px; margin:0 auto; padding:16px 14px 40px; }
+  .back { display:inline-block; margin-bottom:10px; color:var(--dim); text-decoration:none; font-size:.82em; }
+  h1 { font-size:1.28rem; margin:.1em 0 .1em; letter-spacing:-.3px; }
+  .sub { color:var(--dim); font-size:.8em; margin-bottom:14px; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:14px;
+          padding:14px; margin-bottom:11px; }
+  .lbl { color:var(--dim); font-size:.68em; text-transform:uppercase; letter-spacing:.11em;
+         margin-bottom:8px; }
+  /* instrument tiles */
+  .tiles { display:grid; grid-template-columns:1fr 1fr; gap:9px; margin-bottom:11px; }
+  .tile { background:var(--card); border:1px solid var(--line); border-radius:13px; padding:12px 13px; }
+  .tile .n { font-size:1.42rem; font-weight:700; letter-spacing:-.7px; font-variant-numeric:tabular-nums; }
+  .tile .n.sm { font-size:1.06rem; }
+  .tile .k { color:var(--dim); font-size:.66em; text-transform:uppercase; letter-spacing:.1em; }
+  .tile .note { color:var(--dim); font-size:.74em; margin-top:2px; }
+  .pill { display:inline-block; padding:2px 9px; border-radius:99px; font-size:.68em; font-weight:700; }
+  .in { background:rgba(47,208,127,.15); color:var(--good); }
+  .out { background:rgba(240,85,74,.15); color:var(--bad); }
+  .unk { background:rgba(125,138,151,.18); color:var(--dim); }
+  .z-good { color:var(--good); } .z-warn { color:var(--warn); } .z-bad { color:var(--bad); }
+  /* the shape chart */
+  #chart { width:100%; height:150px; display:block; }
+  .legend { display:flex; gap:14px; font-size:.72em; color:var(--dim); margin-top:7px; flex-wrap:wrap; }
+  /* ── the transition panel ── */
+  .trow { display:flex; justify-content:space-between; align-items:baseline; gap:10px; }
+  .tk { color:var(--dim); font-size:.72em; text-transform:uppercase; letter-spacing:.09em; }
+  .tv { font-weight:700; font-size:1.02rem; letter-spacing:-.3px; }
+  .tnote { color:var(--dim); font-size:.75em; margin-top:5px; line-height:1.45; }
+  .rung { border-left:2px solid var(--line); padding:7px 0 7px 10px; margin-top:8px; }
+  .rung .rh { font-weight:600; font-size:.86em; }
+  .rung .rg { color:var(--dim); font-size:.75em; margin-top:3px; line-height:1.4; }
+  .rung .rs { color:var(--accent); font-size:.72em; margin-top:3px; }
+  .proj { display:flex; justify-content:space-between; gap:10px; padding:5px 0;
+          border-bottom:1px solid var(--line); font-size:.8em; }
+  .proj:last-child { border-bottom:none; }
+  .proj .pa { font-weight:700; font-variant-numeric:tabular-nums; min-width:62px; }
+  .proj .pr { color:var(--dim); flex:1; }
+  .dot { display:inline-block; width:8px; height:8px; border-radius:2px; margin-right:5px; }
+  /* range ruler */
+  .ruler { position:relative; height:34px; margin:6px 0 2px; }
+  .ruler .track { position:absolute; top:11px; left:0; right:0; height:5px; border-radius:99px;
+                  background:linear-gradient(90deg,#1d2530,#243040); }
+  .ruler .zone { position:absolute; top:11px; height:5px; border-radius:99px;
+                 background:rgba(77,163,255,.35); }
+  .ruler .spot { position:absolute; top:4px; width:2px; height:19px; background:var(--txt); }
+  .ruler .spot::after { content:""; position:absolute; top:-3px; left:-3px; width:8px; height:8px;
+                        border-radius:50%; background:var(--txt); }
+  .ruler .cap { position:absolute; top:22px; font-size:.66em; color:var(--dim); }
+  .gauge { height:10px; background:#1b222b; border-radius:99px; overflow:hidden; margin:9px 0 5px; }
+  .gauge > i { display:block; height:100%; border-radius:99px; }
+  .row { display:flex; justify-content:space-between; align-items:baseline; padding:6px 0;
+         border-bottom:1px solid var(--line); }
+  .row:last-child { border-bottom:0; }
+  .row .k { color:var(--dim); font-size:.83em; }
+  .row .v { font-weight:600; font-variant-numeric:tabular-nums; }
+  .warnbox { background:rgba(240,180,41,.09); border:1px solid rgba(240,180,41,.3);
+             border-radius:11px; padding:10px 12px; font-size:.82em; margin-top:9px; }
+  .err { color:var(--warn); }
+  .foot { color:var(--dim); font-size:.7em; text-align:center; margin-top:18px; line-height:1.75; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="https://gentechlabs.net/">&larr; Dadrian's Hub</a>
+  <h1>Dadrian's DeFi Command Center</h1>
+  <div class="sub" id="sub">loading…</div>
+
+  <!-- ── COMPOUNDING LEADS (Jordan, 2026-09-25) ────────────────────────────────────────────────
+     "instead of showing how much work in capital that we have in the pool Why don't we instead
+      talk about how much is being auto compounded back into the bins or back into Our LP ... if you
+      still want to add a tab under that that shows Hey, here's what you have waiting to be
+      compounded on the next cycle you can still do that"
+     FLOW first, WAITING second. The capital-in-pool tile is DEMOTED to the end of this grid, not
+     deleted — "instead of" moves the emphasis, it does not throw the datum away.
+     If the reading could not be produced every field below renders UNKNOWN with its reason. A 0
+     would be read as "compounding is off", which is a claim about the venue we may not have. -->
+  <div class="tiles">
+    <div class="tile"><div class="k">Auto-compounded</div><div class="n" id="compflow">—</div>
+      <div class="note" id="compflowfit">—</div></div>
+    <div class="tile"><div class="k">Waiting to compound</div><div class="n sm" id="compwait">—</div>
+      <div class="note" id="compwaitnote">—</div></div>
+    <div class="tile"><div class="k">Position</div>
+      <div class="n sm"><span class="pill" id="range">—</span></div>
+      <div class="note" id="rangenote">—</div></div>
+    <div class="tile"><div class="k">Fee efficiency</div><div class="n" id="eff">—</div>
+      <div class="note" id="effnote">—</div></div>
+    <div class="tile"><div class="k">Working capital</div><div class="n" id="depl">—</div>
+      <div class="note" id="deplnote">—</div></div>
+    <div class="tile"><div class="k">Capital in pool <span style="text-transform:none;letter-spacing:0">(stock — kept, no longer the headline)</span></div>
+      <div class="n" id="cap">—</div>
+      <div class="note" id="capnote">—</div></div>
+  </div>
+
+  <div class="card">
+    <div class="lbl">Auto-compounding — the flow, and what is waiting for the next cycle</div>
+    <div class="row"><span class="k">Compounded (last 7d)</span><span class="v" id="compperiod">—</span></div>
+    <div class="row"><span class="k">Compounding rate</span><span class="v" id="comprate">—</span></div>
+    <div class="row"><span class="k">On an annualised basis</span><span class="v" id="compapr">—</span></div>
+    <div class="row"><span class="k">Waiting to compound</span><span class="v" id="compwaitrow">—</span></div>
+    <div class="row"><span class="k">Next cycle</span><span class="v" id="compdec">—</span></div>
+    <div class="row"><span class="k">Unclaimed fees</span><span class="v" id="comppend">—</span></div>
+    <div class="foot" style="text-align:left;margin-top:12px" id="compnote">—</div>
+  </div>
+
+  <div class="card">
+    <div class="lbl">Liquidity shape — where the money sits</div>
+    <svg id="chart" viewBox="0 0 600 150" preserveAspectRatio="none"></svg>
+    <div class="legend">
+      <span><i class="dot" style="background:var(--usd)"></i>USDC below spot — bids, buys WAVAX as price falls</span>
+      <span><i class="dot" style="background:var(--wax)"></i>WAVAX above spot — asks, sells as price rises</span>
+      <span><i class="dot" style="background:var(--txt)"></i>Spot</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="lbl">Where spot sits in your range</div>
+    <div class="ruler">
+      <div class="track"></div>
+      <div class="zone" id="zone"></div>
+      <div class="spot" id="spotmark" style="left:50%;display:none"></div>
+      <div class="cap" id="lo" style="left:0">—</div>
+      <div class="cap" id="hi" style="right:0">—</div>
+    </div>
+    <div class="foot" style="text-align:left;margin-top:14px" id="posnote">—</div>
+    <div class="warnbox" id="scen" style="display:none"></div>
+  </div>
+
+  <div class="card">
+    <div class="lbl">Fee efficiency — how well is this book placed to EARN? (the number is its earning power for its shape, not realised dollars: for a curve the centre earns most, for a bid-ask the edges do. Realised fees are tracked by the ledger, which stays silent until it has a rebuild-free window — Jordan, 2026-09-23: “Fee efficiency should be zero” was read as earnings, which is exactly why this caption exists.)</div>
+    <div class="gauge"><i id="effbar" style="width:0%"></i></div>
+    <div class="row"><span class="k">Shape deployed</span><span class="v" id="kind">—</span></div>
+    <div class="row"><span class="k" id="nearlbl">Money near spot</span><span class="v" id="nearspot">—</span></div>
+    <div class="row"><span class="k">Bins</span><span class="v" id="bins">—</span></div>
+    <div class="row"><span class="k">Holding</span><span class="v" id="holds">—</span></div>
+    <div class="row"><span class="k">AVAX price</span><span class="v" id="spotpx">—</span></div>
+  </div>
+
+  <div class="card">
+    <div class="lbl">Against doing nothing</div>
+    <div class="row"><span class="k">Average AVAX staker</span><span class="v" id="staker">—</span></div>
+    <div class="row"><span class="k">Just holding AVAX (30d)</span><span class="v" id="hodl">—</span></div>
+  </div>
+
+  <div class="card">
+    <div class="lbl">The goal — DeFi Milestone</div>
+    <div class="rankline"><span id="rankicon" class="rankicon">—</span>
+      <span id="rankname" class="rankname">—</span>
+      <span id="rankpct" class="rankpct">—</span></div>
+    <div class="gauge"><i id="msbar" style="width:0%"></i></div>
+    <div class="row"><span class="k">Daily fees (est.)</span><span class="v" id="msfees">—</span></div>
+    <div class="row"><span class="k">To next rank</span><span class="v" id="msnext">—</span></div>
+    <div class="row"><span class="k" id="msunlocklbl">Unlocks</span><span class="v" id="msunlock">—</span></div>
+    <div class="foot" style="text-align:left;margin-top:12px" id="msnote">—</div>
+  </div>
+
+  <!-- ── AUTONOMY / DUTY CYCLE (Jordan, 2026-09-25) ────────────────────────────────────────────
+     "Why don't we add the amount of hours that we've been active inside the pool between each
+      rebalance? I think that would also show us the benefits of what we're doing versus doing it
+      manually because you're able to rebalance and do stuff autonomously now."
+     A manual operator cannot re-center at 3am, so their capital sits OUT of range (deployed,
+     earning zero) for hours; an autonomous one is back inside in minutes. IN-RANGE hours against
+     OUT-OF-RANGE hours between rebalances IS the value of autonomy.
+     Measured in duty_cycle.py from the chain's own rebalance record plus the pool's own OHLCV
+     candles. If either source cannot be read the rows read UNKNOWN with the reason -- never 0. -->
+  <div class="card">
+    <div class="lbl">Autonomy — hours actually in the pool and EARNING, between rebalances</div>
+    <div class="row"><span class="k">In range (last 7d)</span><span class="v" id="duty7">—</span></div>
+    <div class="row"><span class="k">Out of range (last 7d)</span><span class="v" id="dutyout7">—</span></div>
+    <div class="row"><span class="k">Current streak in the pool</span><span class="v" id="dutystreak">—</span></div>
+    <div class="row"><span class="k">Avg. hours between rebalances</span><span class="v" id="dutyavg">—</span></div>
+    <div class="row"><span class="k">Longest stretch in the pool (7d)</span><span class="v" id="dutymax">—</span></div>
+    <div class="row"><span class="k">Since inception</span><span class="v" id="dutyall">—</span></div>
+    <div class="foot" style="text-align:left;margin-top:12px" id="dutynote">—</div>
+  </div>
+
+  <div class="foot">
+    Wallet <span id="wallet">—</span><br>
+    Position &amp; shape read from Avalanche contract state<br>
+    Updated <span id="updated">—</span> · <span id="stale"></span><br>
+    <span id="prov"></span>
+  </div>
+  </div>
+
+  <!-- ── NEXT TRANSITION (Jordan, 2026-09-24) ────────────────────────────────────────────────
+     "add a section next to the liquidity shape and put what transition works best and what
+      transition is going NEXT based off of the market... maybe after 10 minutes, we're still
+      earning well, but our fee efficiency is going down to 60 or maybe 45%. That's where we can
+      start getting a projection of what we would rebalance to next, so we can see the scenario."
+     Scenarios are STATES, moves are TRANSITIONS. This shows where the book IS and which rungs
+     are legal from here, with the efficiency projection underneath. -->
+  <div class="card">
+  <div class="lbl">Next transition — where this book goes from here</div>
+  <div class="trow"><span class="tk">Now</span><span class="tv" id="tnow">—</span></div>
+  <div class="tnote" id="twhy">—</div>
+  <div id="trungs"></div>
+  <div class="lbl" style="margin-top:14px">Projection — what would move it</div>
+  <div id="tproj"></div>
+  <div class="tnote" id="tfoot">—</div>
+  </div>
+
+  <script>
+// The tenant name is HARDCODED on this page. No URL parameter, no fallback, no shared list: this
+// page can only ever load its own file, so a bug cannot render someone else's money under your name.
+const DATA = "defi-data-dadrian.json";
+const NAME = "Dadrian";
+const money = n => "$" + (n ?? 0).toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2});
+
+function zoneClass(e) {
+  if (e === null || e === undefined) return "";
+  return e >= 70 ? "z-good" : e >= 50 ? "z-warn" : "z-bad";
+}
+function zoneColor(e) {
+  if (e === null || e === undefined) return "#7d8a97";
+  return e >= 70 ? "#2fd07f" : e >= 50 ? "#f0b429" : "#f0554a";
+}
+
+function drawShape(d) {
+  const svg = document.getElementById("chart");
+  const s = d.shape || [];
+  if (!s.length) { svg.innerHTML = '<text x="300" y="75" fill="#7d8a97" font-size="13" text-anchor="middle">no bins held</text>'; return; }
+  const W = 600, H = 150, pad = 4;
+  const peak = Math.max(...s.map(b => b.usd)) || 1;
+  const bw = (W - pad * 2) / s.length;
+  const px = d.price_usd || 0;
+  let out = "";
+  s.forEach((b, i) => {
+    const h = Math.max(1, (b.usd / peak) * (H - 18));
+    const x = pad + i * bw;
+    // AUDIT FIX (Kimi K3): colour compared RAW units (tokens vs dollars) — a meaningless
+    // comparison that happened to work only because non-active bins are single-asset. Compare
+    // the USD legs, so a mixed bin is coloured by which side really dominates.
+    const usdLeg = b.usdc;
+    const waxLeg = b.wavax * px;
+    let col = usdLeg > waxLeg ? "#4da3ff" : "#f0b429";
+    if (b.active) col = "#e9eef4";
+    if (b.resolved === false) col = "#6b7784";   // unresolved bin: visibly not a real value
+    out += '<rect x="' + x.toFixed(1) + '" y="' + (H - h).toFixed(1) + '" width="' +
+           Math.max(1, bw - 1.2).toFixed(1) + '" height="' + h.toFixed(1) +
+           '" fill="' + col + '" rx="1"></rect>';
+  });
+  // a hairline at the active bin so the shape reads at a glance
+  const ai = s.findIndex(b => b.active);
+  if (ai >= 0) {
+    const ax = pad + ai * bw + bw / 2;
+    out += '<line x1="' + ax.toFixed(1) + '" y1="0" x2="' + ax.toFixed(1) + '" y2="' + H +
+           '" stroke="#e9eef4" stroke-width="1" stroke-dasharray="3,3" opacity=".55"></line>';
+  }
+  svg.innerHTML = out;
+}
+
+function render(d) {
+  if (d.error) {
+    // textContent, not innerHTML: d.error carries subprocess/RPC text, which is untrusted input.
+    document.getElementById("sub").textContent = "⚠ " + d.error;
+    return;
+  }
+  document.getElementById("sub").textContent = NAME + "'s live LFJ position";
+
+  document.getElementById("cap").textContent = money(d.capital_usd);
+  // Only claim the chain agrees when the scan actually COMPLETED and the two valuations match.
+  // Saying "chain-verified" over a partially-read book is the failure this page must not make.
+  const noteEl = document.getElementById("capnote");
+  noteEl.textContent = "";
+  const dlt = d.ledger_vs_shape_delta;
+  // RE-AUDIT FIX (Kimi K3, F10): the pass band was 1% of TOTAL capital, but the delta compares two
+  // valuations of the DEPLOYED amount. With mostly-idle capital that band is loose enough to call
+  // almost any divergence "verified" — a check that can hardly fail. Scale to deployed.
+  const tol = Math.max(0.5, 0.01 * (d.deployed_usd || 0));
+  if (d.scan_truncated) {
+    noteEl.textContent = "⚠ position wider than the scan window — range may be clipped";
+  } else if (d.unresolved_bins) {
+    noteEl.textContent = "⚠ " + d.unresolved_bins + " bin(s) unread — excluded from the total";
+  } else if (typeof dlt === "number" && Math.abs(dlt) <= tol) {
+    noteEl.textContent = "chain-verified from " + d.chain_bins + " bins (Δ" + dlt + ")";
+  } else if (typeof dlt === "number") {
+    // RE-AUDIT FIX (Kimi K3, N4): this branch did not exist, so a cross-check that ran and
+    // DISAGREED fell through to "unavailable" — a check that cannot recognise its own failure.
+    // A disagreement between the ledger and the chain is the single most important thing this
+    // page can tell you, and it was being reported as "no information".
+    noteEl.textContent = "⚠ chain scan disagrees with the ledger by $" + dlt +
+                         " — one of them is wrong";
+  } else {
+    noteEl.textContent = "ledger total — chain cross-check unavailable";
+  }
+
+  const rng = document.getElementById("range");
+  rng.textContent = d.range_status;
+  // AUDIT FIX (Kimi K3): `in_range ? "in" : "out"` styled null ("Unknown") as a red failure —
+  // presenting "we do not know" as "you are out of range". Unknown gets a neutral pill.
+  rng.className = "pill " + (d.in_range === true ? "in" : d.in_range === false ? "out" : "unk");
+  // RE-AUDIT FIX (Kimi K3, F5): this read the LEDGER count and presented it as a chain
+  // fact — the same family as N7, one row over. Use the scanned count.
+  document.getElementById("rangenote").textContent =
+    (d.chain_bins === null || d.chain_bins === undefined ? "—" : d.chain_bins) + " bins held";
+
+  const e = d.efficiency_pct;
+  const el = document.getElementById("eff");
+  el.textContent = (e === null || e === undefined) ? "—" : e + "%";
+  el.className = "n " + zoneClass(e);
+  document.getElementById("effnote").textContent =
+    // ── DO NOT ASSERT A MISMATCH OUR OWN DATA CONTRADICTS (fixed 2026-09-23) ────────────────
+    // This rewrote the honest zone text ("WATCH — LOW EFFICIENCY") into the words "low — shape
+    // mismatch" for EVERY low reading, while the payload carries `label_matches_mass`. Jordan
+    // read it, believed the machine was telling him he held the wrong shape, and asked what was
+    // actually true. It was not true: the label matched the mass, and the reading was low because
+    // spot had drifted to 43% of a band built 15/30. A low number and a wrong shape are different
+    // findings — a display must not silently convert one into the other.
+    (d.label_matches_mass === false
+      ? "low — the live distribution does NOT match the " + (d.shape_kind || "?") + " label"
+      : (d.efficiency_zone || "—"))
+       .replace("WATCH — LOW EFFICIENCY", "low — spot has drifted off this shape’s peak")
+       .replace("HEALTHY", "healthy").replace("ACT NOW", "act now");
+  const bar = document.getElementById("effbar");
+  bar.style.width = (e || 0) + "%";
+  bar.style.background = zoneColor(e);
+
+  document.getElementById("depl").textContent = (d.deployed_pct || 0) + "%";
+  // RE-AUDIT FIX (Kimi K3, N6): a null idle figure rendered "$0.00 idle" as if it were a fact.
+  document.getElementById("deplnote").textContent =
+    money(d.deployed_usd) + " · " +
+    (d.idle_usd === null || d.idle_usd === undefined ? "idle unknown" : money(d.idle_usd) + " idle");
+
+  drawShape(d);
+
+  // range ruler
+  // RE-AUDIT FIX (Kimi K3, N11): a null range rendered "$null" on both ends of the ruler.
+  const hasRange = (d.range_min !== null && d.range_min !== undefined &&
+                    d.range_max !== null && d.range_max !== undefined);
+  document.getElementById("lo").textContent = hasRange ? "$" + d.range_min : "—";
+  document.getElementById("hi").textContent = hasRange ? "$" + d.range_max : "—";
+  const z = document.getElementById("zone");
+  const p = hasRange ? d.spot_pos_in_range_pct : null;
+  if (p !== null && p !== undefined) {
+    const cur = Math.max(0, Math.min(100, p));
+    document.getElementById("spotmark").style.left = cur + "%";
+    document.getElementById("spotmark").style.display = "block";
+    z.style.left = "0%"; z.style.right = "0%";
+    // AUDIT FIX (Kimi K3): the marker was clamped but the TEXT printed the raw value, so an
+    // out-of-range spot read "sits at -40% of your range". Say what is actually true instead.
+    const where = p < 0 ? "BELOW your range — nothing is being earned until price comes back up"
+                : p > 100 ? "ABOVE your range — nothing is being earned until price comes back down"
+                : p > 70 ? "near the top edge."
+                : p < 30 ? "near the bottom edge."
+                : "near the middle.";
+    document.getElementById("posnote").textContent =
+      (p >= 0 && p <= 100)
+        ? "Spot $" + d.price_usd + " sits at " + p + "% of your range — " + where
+        : "Spot $" + d.price_usd + " is " + where + " (range $" + d.range_min + "–$" + d.range_max + ")";
+  } else {
+    // RE-AUDIT FIX (Kimi K3, F11): the marker sat at its 50% CSS default when nothing was
+    // computed, drawing a confident "you are mid-range" out of no data at all. Hide it instead.
+    document.getElementById("spotmark").style.display = "none";
+    document.getElementById("posnote").textContent =
+      "Spot position unknown — " + (d.shape_kind ? "range unavailable" : "shape not recorded");
+  }
+
+  // ── THE NEXT TRANSITION (Jordan, 2026-09-24) ─────────────────────────────────────────────
+  // Scenarios are STATES, moves are TRANSITIONS. Show where the book IS and which rungs are
+  // legal from here, then the efficiency projection underneath. A classifier tells you what the
+  // market is NOW; this tells you what the book can become next, so the scenario is visible
+  // BEFORE it happens rather than reported after.
+  (function renderTransition() {
+    const t = d.transition;
+    if (!t || t.error) {
+      document.getElementById("tnow").textContent = "—";
+      document.getElementById("twhy").textContent = t && t.error
+        ? "Transition map unavailable — " + t.error
+        : "Transition map unavailable for this book.";
+      document.getElementById("tfoot").textContent = "";
+      return;
+    }
+    const pct = r => (r === null || r === undefined) ? "—" : Math.round(r * 100) + "%";
+    document.getElementById("tnow").textContent =
+      t.state + "  ·  " + (t.state_shape || "—") + " " + (t.state_bins || "—") +
+      " bins  ·  " + pct(t.state_ratio_pct === null || t.state_ratio_pct === undefined
+                          ? null : t.state_ratio_pct / 100) + " ask/WAVAX";
+    document.getElementById("twhy").textContent = t.why || "";
+
+    const rungs = (t.rungs || []).slice().sort((a, b) => (a.steps || 9) - (b.steps || 9));
+    document.getElementById("trungs").innerHTML = rungs.map(r =>
+      '<div class="rung"><div class="rh">→ ' + r.to + '  (' + (r.shape || "—") +
+      (r.bins ? " " + r.bins + " bins" : "") + (r.ratio !== null && r.ratio !== undefined
+        ? "  " + Math.round(r.ratio * 100) + "% ask" : "") + ')</div>' +
+      (r.needs ? '<div class="rg">needs: ' + r.needs + '</div>' : '') +
+      (r.steps > 1 ? '<div class="rs">' + r.steps + ' rungs away — walked, not jumped</div>' : '') +
+      '</div>').join("");
+
+    const now = (t.now_eff === null || t.now_eff === undefined) ? null : t.now_eff;
+    document.getElementById("tproj").innerHTML = (t.projection || []).map(p => {
+      const active = now === null ? false
+        : (p.at.indexOf(">=") === 0 ? now >= 70
+          : p.at.indexOf("<") === 0 ? now < 50
+          : (now >= 50 && now < 70));
+      return '<div class="proj"><span class="pa" style="' +
+        (active ? "color:var(--accent)" : "color:var(--dim)") + '">' + p.at + '</span>' +
+        '<span class="pr">' + p.action + '</span></div>';
+    }).join("");
+    document.getElementById("tfoot").textContent = now === null
+      ? "Fee efficiency unreadable — no projection without it."
+      : "This book is at " + now + "% (" + (t.now_eff_zone || "—") + "). " +
+        "The rungs above are the only legal moves from here; each one needs its guard to be true.";
+  })();
+
+  const sc = [];
+  if (e !== null && e !== undefined && e < 70) {
+    const alt = d.shape_kind === "curve" ? "bid-ask (U-shape)" : "curve (bell)";
+    // AUDIT FIX (Kimi K3): this used to be fabricated as `100 - e`. It is now whatever the real
+    // efficiency function says for the other shape, and if we do not have it we do not claim it.
+    const altTxt = (d.efficiency_alt_pct === null || d.efficiency_alt_pct === undefined)
+      ? "" : " The same liquidity as a " + alt + " would read about " + d.efficiency_alt_pct + "%.";
+    sc.push("Your " + d.shape_kind + " shape is earning " + e + "% at this spot position." + altTxt);
+  }
+  // Say it plainly when the live distribution does not match the shape's name. The efficiency
+  // figure above assumes a bell clusters at the centre and a U at the edges; if the real
+  // distribution says otherwise, that number is describing a position you do not hold.
+  if (d.label_matches_mass === false) {
+    sc.push("But the live distribution does not match the '" + d.shape_kind + "' label: only " +
+            d.mass_near_spot_pct + "% of the money sits within " + (d.near_bins || 3) + " bins of spot, so the money is " +
+            "banked away from where it trades. The reading above assumes a shape you are not " +
+            "actually holding — treat it as an estimate, not a measurement.");
+  }
+  const sw = document.getElementById("scen");
+  // Jordan, 2026-09-22: "By default check both of our pages for the same bug." The inverted-ask
+  // bug lives in the DEPLOY script, so it affects every tenant, not just the one that was noticed.
+  // Read from the bins themselves, so it reports the position, not a config label.
+  const lo = d.leg_orientation;
+  if (lo && lo.verdict && lo.verdict !== "OK") {
+    const bad = [];
+    if (lo.ask && !lo.ask.toward_spot)
+      { bad.push("ask (above spot): " + money(lo.ask.nearest_usd) + " nearest vs " +
+                 money(lo.ask.furthest_usd) + " furthest"); }
+    if (lo.bid && !lo.bid.toward_spot)
+      { bad.push("bid (below spot): " + money(lo.bid.nearest_usd) + " nearest vs " +
+                 money(lo.bid.furthest_usd) + " furthest"); }
+    sc.push("A leg is deployed UPSIDE DOWN — " + bad.join("; ") + ". Liquidity should be heaviest " +
+            "nearest spot; here it is heaviest at the FAR edge, so the bulk of the capital converts " +
+            "last and earns least. The deploy script is fixed; rebuilding this position moves money, " +
+            "so it is waiting on your go-ahead.");
+  }
+  if (sc.length) { sw.style.display = "block"; sw.textContent = "⚠︎ " + sc.join(" "); }
+  else { sw.style.display = "none"; }
+
+  // ── THE GOAL — DeFi Milestone (Jordan, 2026-09-22: "Add the Defi Milestone for the goals") ──
+  // Same honesty rule as every other read on this page: if the ladder could not be computed we
+  // render "—", never a fabricated "Untested / 0%". A missing read must not look like a real rank.
+  const msz = d.milestone;
+  // The server sends `rank_icon` for the CURRENT rank only; the next rank's icon is not a field,
+  // so map it here from the same ladder steward_progress uses. Kept in one place so it cannot
+  // disagree with the server for the current rank.
+  // LITERAL emoji, never backslash-u escapes: this block lives inside a Python non-raw string, so
+  // Python would interpret an escaped surrogate pair as REAL surrogate codepoints and the UTF-8
+  // write of the page dies with "surrogates not allowed" — AFTER the JSON already wrote, so the
+  // data looks fine while the page silently stops updating. (Hit and fixed 2026-09-22.)
+  const MSICONS = {"Untested":"🌱","Scout":"🔭","Raider":"⚔️","Warlord":"👑","Sovereign":"🏰"};
+  const msSet = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+  if (!msz || msz.error || msz.rank === undefined || msz.rank === null) {
+    msSet("rankicon", "—"); msSet("rankname", "—"); msSet("rankpct", "—");
+    msSet("msfees", "—"); msSet("msnext", "—"); msSet("msunlock", "—");
+    document.getElementById("msbar").style.width = "0%";
+    msSet("msnote", msz && msz.error
+      ? "Milestone unavailable — " + msz.error
+      : "Milestone unavailable — no reliable fee estimate for this position.");
+  } else {
+    const icon = msz.rank_icon || "";
+    msSet("rankicon", icon);
+    msSet("rankname", msz.rank || "—");
+    const p = (msz.progress_pct === null || msz.progress_pct === undefined) ? null : msz.progress_pct;
+    msSet("rankpct", p === null ? "" : p + "% to next");
+    document.getElementById("msbar").style.width = (p === null ? 0 : Math.max(0, Math.min(100, p))) + "%";
+    const df = msz.current_daily_fees;
+    msSet("msfees", (df === null || df === undefined) ? "—"
+      : "$" + Number(df).toFixed(4) + "/day  ·  " + money(msz.next_target_daily_fees) + " for " + (msz.next_rank || "next"));
+    // ── PROGRESS AS A PERCENTAGE, NOT A DOLLAR-GAP (Jordan, 2026-09-24) ────────────────────
+    // *"In the rank section, replace the more/day to progress percentage. For example:
+    //   To next rank - 4% progress to scout."*
+    // "$4.84 more/day" makes the reader hold the target in their head and do the division. The
+    // bar and the badge above already speak in percent, so this row now agrees with them.
+    const _pNext = (p === null || p === undefined) ? null : p;
+    msSet("msnext", (msz.next_rank
+      ? (_pNext === null
+          ? "— progress to " + (MSICONS[msz.next_rank] || "") + " " + msz.next_rank
+          : _pNext + "% progress to " + (MSICONS[msz.next_rank] || "") + " " + msz.next_rank)
+      : "Top rank reached"));
+    // NOTE: rank_and_progress returns `unlocks` (the NEXT tier's unlock) — verified against the
+    // live function 2026-09-22. There is no next_unlocks/current_unlocks/next_rank_icon key;
+    // reading those names rendered `undefined` silently, which is the false-value bug class.
+    msSet("msunlock", msz.unlocks || "—");
+    msSet("msunlocklbl", msz.next_rank ? "Unlocks at " + msz.next_rank : "Unlocked");
+    msSet("msnote", "Ranked on estimated daily fees"
+      + (msz.estimated ? " (a projection from the deployed book, not a settled ledger figure)" : "")
+      + ". Ladder: Untested → 🔭 Scout $5 → ⚔️ Raider $20 → 👑 Warlord $55 → 🏰 Sovereign $200 per day.");
+  }
+
+  // ── AUTONOMY — DUTY CYCLE (Jordan, 2026-09-25) ──────────────────────────────────────────────
+  // "Why don't we add the amount of hours that we've been active inside the pool between each
+  //  rebalance? ... you're able to rebalance and do stuff autonomously now."
+  // IN RANGE = deployed with spot inside the held bins (earning). OUT OF RANGE = deployed with
+  // spot outside them (earning zero). The ratio between them is what autonomy buys, so they are
+  // shown separately and FLAT (withdrawn) time is never folded into "out of range".
+  // SAME HONESTY RULE AS THE MILESTONE: an unreadable source renders an explicit UNKNOWN with the
+  // reason. A 0 here would read as "fully out of range" -- a claim about the book -- when in truth
+  // nothing was measured, which is the failure mode this treasury has hit repeatedly.
+  const dset = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+  const dhh = h => (h === null || h === undefined) ? "—" : (Math.round(h * 10) / 10) + "h";
+  const dpct = p => (p === null || p === undefined) ? "—" : p + "%";
+  // ── COMPOUNDING — THE HEADLINE (Jordan, 2026-09-25) ────────────────────────────────────────
+  // FLOW first, then WAITING. Every field degrades to UNKNOWN *with its reason*; no field may
+  // render a 0 to mean "could not read it" -- a 0 here would read as "compounding is off", which
+  // is a claim about the venue, and this project's most repeated bug is a false zero.
+  const cp = d.compound;
+  const cn = v => (v === null || v === undefined);
+  const cusd = v => cn(v) ? null : (v < 1 ? "$" + Number(v).toFixed(4) : "$" + Number(v).toFixed(2));
+  const flowOk = !!cp && cp.status === "ok" && !cn(cp.period_low_usd) && !cn(cp.period_high_usd);
+  if (flowOk) {
+    const same = cp.period_low_usd === cp.period_high_usd;
+    dset("compflow", same ? cusd(cp.period_low_usd) : cusd(cp.period_low_usd) + " – " + cusd(cp.period_high_usd));
+    dset("compflowfit", "folded back into the bins, over " + cp.period_days + "d"
+      + (cp.bracket_x && cp.bracket_x > 2
+          ? " · two sources disagree ×" + Number(cp.bracket_x).toFixed(2) + " — a RANGE, not a number"
+          : (cp.single_source ? " · single source — no cross-check available" : "")));
+    dset("compperiod", (same ? cusd(cp.period_low_usd)
+        : cusd(cp.period_low_usd) + " – " + cusd(cp.period_high_usd)) + " over " + cp.period_days + " days");
+    dset("comprate", cn(cp.rate_pct_per_day_low) ? "UNKNOWN"
+        : Number(cp.rate_pct_per_day_low).toFixed(6) + " – " + Number(cp.rate_pct_per_day_high).toFixed(6) + " %/day");
+    dset("compapr", cn(cp.apr_pct_low) ? "UNKNOWN"
+        : Number(cp.apr_pct_low).toFixed(2) + "% – " + Number(cp.apr_pct_high).toFixed(2) + "% /yr");
+    const dv = cp.derivations || {};
+    const parts = [];
+    Object.keys(dv).forEach(k => {
+      const o = dv[k] || {};
+      if (!cn(o.per_day_usd)) parts.push(k + " $" + Number(o.per_day_usd).toFixed(4) + "/day");
+      else if (o.error) parts.push(k + " UNKNOWN (" + o.error + ")");
+    });
+    dset("compnote", "Derivations: " + (parts.join(" · ") || "none") + ". They do not share a "
+      + "numerator, so where they agree the figure is solid and where they disagree the spread is "
+      + "shown rather than one end picked."
+      + (cp.pending_fee_note ? " " + cp.pending_fee_note + "." : ""));
+  } else {
+    ["compflow", "compperiod", "comprate", "compapr"].forEach(i => dset(i, "UNKNOWN"));
+    dset("compflowfit", "UNKNOWN — " + ((cp && cp.error) || "no compounding reading was produced for this build"));
+    dset("compnote", "UNKNOWN — " + ((cp && cp.error) || "no compounding reading was produced for this build")
+      + " (showing UNKNOWN, not a zero.)");
+  }
+  // WAITING — "here's what you have waiting to be compounded on the next cycle"
+  if (cp && !cn(cp.waiting_usd)) {
+    dset("compwait", cusd(cp.waiting_usd));
+    dset("compwaitnote", "deployed on the next cycle"
+      + (cp.waiting_price_source ? " · priced from " + cp.waiting_price_source : ""));
+    dset("compwaitrow", cusd(cp.waiting_usd) + " — " + (cp.waiting_note || "idle working capital"));
+  } else {
+    dset("compwait", "UNKNOWN");
+    dset("compwaitnote", "UNKNOWN — not a zero");
+    dset("compwaitrow", "UNKNOWN — " + ((cp && cp.waiting_note) || "could not read the wallet (showing UNKNOWN, not a zero)"));
+  }
+  dset("compdec", (cp && cp.decision) ? cp.decision.action + " — " + cp.decision.reason
+                                     : "UNKNOWN — no gas/viability reading");
+  dset("comppend", (cp && cp.pending_fee_note)
+      ? "none claimable — LFJ V2.2 folds fees into the bins at swap time"
+      : "UNKNOWN");
+
+  const dy = d.duty_cycle;
+  const dutyRows = ["duty7", "dutyout7", "dutystreak", "dutyavg", "dutymax", "dutyall"];
+  if (!dy || dy.status !== "ok") {
+    dutyRows.forEach(i => dset(i, "UNKNOWN"));
+    dset("dutynote", "UNKNOWN — "
+      + ((dy && dy.error) ? dy.error : "no duty-cycle reading was produced for this build")
+      + " (showing UNKNOWN, not a zero.)");
+  } else {
+    const W = dy.windows || {};
+    const w7 = W["7d"] || {}, wA = W["all"] || {};
+    dset("duty7", (w7.deployed_hours === null || w7.deployed_hours === undefined
+      ? "—"                                     // nothing measured: UNKNOWN reads as UNKNOWN
+      : (w7.deployed_hours === 0
+          ? "0h — not deployed at any point in this window"   // a REAL zero, said out loud
+          : dhh(w7.hours_in_range) + " of " + dhh(w7.deployed_hours) + " deployed · "
+            + dpct(w7.in_range_share_pct) + " in range"
+            + ((w7.accounting_covers_pct !== null && w7.accounting_covers_pct !== undefined
+                && w7.accounting_covers_pct < 99)
+                ? " (price series covers " + w7.accounting_covers_pct + "% of the window)"
+                : ""))));
+    dset("dutyout7", (w7.hours_out_of_range === undefined || w7.hours_out_of_range === null)
+      ? "—"
+      : dhh(w7.hours_out_of_range)
+        + (w7.unresolved_share_pct ? " (+" + w7.unresolved_share_pct + "% unresolved at "
+                                     + (w7.candle_tf || "candle") + " resolution)" : ""));
+    dset("dutystreak", dy.deployed_now ? dhh(dy.current_streak_hours) : "flat — not deployed");
+    dset("dutyavg", (w7.avg_hours_between_rebalances === null
+                     || w7.avg_hours_between_rebalances === undefined)
+      ? "—"
+      : dhh(w7.avg_hours_between_rebalances) + " over " + (w7.rebalances || 0) + " rebalances");
+    dset("dutymax", dhh(w7.longest_stretch_hours));
+    // Bounds are shown only when they actually differ. A point-sampled series has no straddling
+    // candles, so its low and high are identical — printing "88.6% (bounds 88.6%–88.6%)" would
+    // dress a sampled estimate up as an exact one. Where the bounds ARE tight the reason is in
+    // the note (the index, its resolution, and what it cannot see).
+    dset("dutyall", (wA.deployed_hours
+      ? dhh(wA.hours_in_range) + " of " + dhh(wA.deployed_hours) + " deployed · "
+        + dpct(wA.in_range_share_pct)
+        + ((wA.in_range_share_low_pct !== wA.in_range_share_high_pct)
+            ? " (bounds " + dpct(wA.in_range_share_low_pct) + "–"
+              + dpct(wA.in_range_share_high_pct) + ")"
+            : "")
+      : "—"));
+    // The provenance the reader needs to judge the number: where the rebalances come from, where
+    // the price path comes from, and what resolution the estimate is good to. The index that
+    // ANSWERED is named, not the one that usually answers — the fallback is a different
+    // instrument at a different resolution and must not be passed off as the primary.
+    dset("dutynote",
+      "Rebalances read on chain: one removeLiquidity → addLiquidity cycle from this wallet ("
+      + (dy.rebalance_count || 0) + " on record; last " + (dy.last_rebalance_utc || "—")
+      + " at block " + (dy.last_rebalance_block || "—") + "). Price path: "
+      + ((dy.source && dy.source.price) || "index not reported")
+      + " (" + (w7.window_label || "—") + "; " + (wA.window_label || "—") + ")"
+      + (dy.price_shape ? " — " + dy.price_shape : "") + ". "
+      + (w7.unresolved_share_pct
+          ? "A candle that straddles a band edge is genuinely unknowable at this resolution, so "
+            + "the share is bounded: " + dpct(w7.in_range_share_low_pct) + "–"
+            + dpct(w7.in_range_share_high_pct) + " for the 7-day window. "
+          : "")
+      + "FLAT (withdrawn) time is reported separately at " + dhh(w7.hours_flat)
+      + " over the last 7d and is not counted as out of range.");
+  }
+
+  document.getElementById("kind").textContent  = d.shape_kind || "unknown";
+  document.getElementById("nearspot").textContent =
+    (d.mass_near_spot_pct === null || d.mass_near_spot_pct === undefined) ? "—" : d.mass_near_spot_pct + "%";
+  // the window is scaled to binStep on the data side; say so here rather than hardcoding "3"
+  document.getElementById("nearlbl").textContent =
+    "Money within " + (d.near_bins || 3) + " bins of spot";
+  document.getElementById("bins").textContent  = (d.chain_bins ?? d.bins) + " bins";
+  document.getElementById("holds").textContent =
+    (d.holds_wavax === null || d.holds_wavax === undefined ||
+     d.holds_usdc === null || d.holds_usdc === undefined)
+      ? "—"
+      : d.holds_wavax.toFixed(4) + " WAVAX + " + money(d.holds_usdc);
+  document.getElementById("spotpx").textContent = "$" + d.price_usd;
+  document.getElementById("staker").textContent = d.benchmark_staker_apy + "%/yr";
+  // RE-AUDIT FIX (Kimi K3, N12): the sign was hardcoded "+", so a negative 30d move printed "+-12.3%".
+  const h = d.benchmark_hodl_30d;
+  document.getElementById("hodl").textContent = (h >= 0 ? "+" : "") + h + "%";
+  document.getElementById("wallet").textContent = d.wallet;
+  document.getElementById("updated").textContent = d.updated_at || "—";
+
+  // AUDIT FIX (Kimi K3): the page claimed "every number read from Avalanche, not from config"
+  // while showing two benchmark figures that are NOT chain reads — and the freshest of them is a
+  // one-time 29.9-day measurement rendered forever as a live number. A stale figure shown as live
+  // is the thing this footer exists to prevent, so it now says exactly what is what.
+  // RE-AUDIT FIX (Kimi K3, F4): a FUTURE timestamp gives a negative age, which satisfied
+  // `ageMin < 45` and read "fresh" — a check that cannot fail. Clamp at 0.
+  const rawAge = d.updated_at ? Math.round((Date.now() - new Date(d.updated_at).getTime()) / 60000) : null;
+  const ageMin = rawAge === null ? null : Math.max(0, rawAge);
+  document.getElementById("stale").textContent =
+    (ageMin === null) ? "age unknown"
+    : ageMin < 45 ? "fresh" + (ageMin >= 2 ? " (" + ageMin + " min old)" : "")
+    : "⚠ " + Math.round(ageMin / 60 * 10) / 10 + " h old — refresh may be stalled";
+  document.getElementById("prov").textContent =
+    "Capital, position, shape and efficiency: measured on-chain." +
+    (d.price_source === "chain" ? " AVAX price: chain fallback (ledger price unavailable)." : "") +
+    " Staker/hold benchmarks: reference figures, not live reads — holding data as of the " +
+    "measurement date, not this minute.";
+}
+
+async function load() {
+  try {
+    const r = await fetch(DATA + "?t=" + Date.now(), {cache: "no-store"});
+    if (!r.ok) throw new Error("HTTP " + r.status);
+    render(await r.json());
+  } catch (err) {
+    // textContent: the error string can carry server/RPC text and must never be parsed as HTML.
+    document.getElementById("sub").textContent =
+      "⚠ Could not load position data (" + err.message + "). Not showing stale numbers.";
+  }
+}
+load();
+setInterval(load, 120000);   // keep it fresh while the page is open
+</script>
+</body>
+</html>
