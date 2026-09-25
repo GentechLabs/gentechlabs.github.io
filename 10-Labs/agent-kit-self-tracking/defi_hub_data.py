@@ -887,8 +887,17 @@ PAGE = """<!DOCTYPE html>
   <div class="tiles">
     <div class="tile"><div class="k">Auto-compounded</div><div class="n" id="compflow">—</div>
       <div class="note" id="compflowfit">—</div></div>
-    <div class="tile"><div class="k">Waiting to compound</div><div class="n sm" id="compwait">—</div>
-      <div class="note" id="compwaitnote">—</div></div>
+    <!-- ── "WAITING TO COMPOUND" TILE RETIRED (Jordan, 2026-09-25) ─────────────────────────
+       Jordan: "we don't have to put the idle 20 cents that's being used for gas ... I think
+       that the user should just know in the back of their head that the agentic Treasury can
+       manage itself."
+       He is right, and the reason is structural, not cosmetic: on THIS venue the "waiting"
+       figure can only ever be the idle wallet dust (the gas/working float), because LFJ V2.2
+       has no pending fee to wait for at all -- fees fold into the bins at swap time. So the tile
+       was teaching the reader to watch the treasury's pocket change, which is the opposite of
+       what the page is for. The flow stays as the headline; the float is not the user's business.
+       `waiting_usd` is STILL in the JSON payload and still drives the HOLD/act decision -- it is
+       withdrawn from the page, not deleted from the data. -->
     <div class="tile"><div class="k">Position</div>
       <div class="n sm"><span class="pill" id="range">—</span></div>
       <div class="note" id="rangenote">—</div></div>
@@ -899,10 +908,11 @@ PAGE = """<!DOCTYPE html>
         that's used for gas, right? So we're not going to count the 20 cents. So I think knowing
         what's going to be compounded back into the pool is much better."
        The tile showed idle wallet capital as if it were part of the book. It is gas money, and
-       counting it made the page claim a position it did not have. The SAME $0.20 is still on the
-       page — as "Waiting to compound", which is the frame that says what it is FOR. Nothing was
-       lost, and `deployed_usd` / `deployed_pct` / `idle_usd` remain in the JSON payload for the
-       record; only the tile is gone. -->
+       counting it made the page claim a position it did not have. It was first re-framed as
+       "Waiting to compound" and then RETIRED ENTIRELY the same day — see the next block. The
+       datum itself is intact: `deployed_usd` / `deployed_pct` / `idle_usd` / `waiting_usd` all
+       remain in the JSON payload and still drive the HOLD/act decision. Withdrawn from the VIEW,
+       never from the system. -->
     <div class="tile"><div class="k">Capital in pool <span style="text-transform:none;letter-spacing:0">(stock — kept, no longer the headline)</span></div>
       <div class="n" id="cap">—</div>
       <div class="note" id="capnote">—</div></div>
@@ -913,7 +923,6 @@ PAGE = """<!DOCTYPE html>
     <div class="row"><span class="k">Compounded (last 7d)</span><span class="v" id="compperiod">—</span></div>
     <div class="row"><span class="k">Compounding rate</span><span class="v" id="comprate">—</span></div>
     <div class="row"><span class="k">On an annualised basis</span><span class="v" id="compapr">—</span></div>
-    <div class="row"><span class="k">Waiting to compound</span><span class="v" id="compwaitrow">—</span></div>
     <div class="row"><span class="k">Next cycle</span><span class="v" id="compdec">—</span></div>
     <div class="row"><span class="k">Unclaimed fees</span><span class="v" id="comppend">—</span></div>
     <div class="foot" style="text-align:left;margin-top:12px" id="compnote">—</div>
@@ -1359,17 +1368,13 @@ function render(d) {
     dset("compnote", "UNKNOWN — " + ((cp && cp.error) || "no compounding reading was produced for this build")
       + " (showing UNKNOWN, not a zero.)");
   }
-  // WAITING — "here's what you have waiting to be compounded on the next cycle"
-  if (cp && !cn(cp.waiting_usd)) {
-    dset("compwait", cusd(cp.waiting_usd));
-    dset("compwaitnote", "deployed on the next cycle"
-      + (cp.waiting_price_source ? " · priced from " + cp.waiting_price_source : ""));
-    dset("compwaitrow", cusd(cp.waiting_usd) + " — " + (cp.waiting_note || "idle working capital"));
-  } else {
-    dset("compwait", "UNKNOWN");
-    dset("compwaitnote", "UNKNOWN — not a zero");
-    dset("compwaitrow", "UNKNOWN — " + ((cp && cp.waiting_note) || "could not read the wallet (showing UNKNOWN, not a zero)"));
-  }
+  // ── WAITING: WITHDRAWN FROM THE PAGE (Jordan, 2026-09-25) ──────────────────────────────────
+  // The three writers that used to fill #compwait / #compwaitnote / #compwaitrow are gone with
+  // their nodes, on purpose. On this venue the "waiting" number is only ever the idle wallet
+  // float, so surfacing it told the reader to watch the treasury's pocket change. `cp.waiting_usd`
+  // is untouched in the payload and still decides the HOLD/act branch below -- the datum is
+  // dropped from the VIEW, not from the system. (dset() is null-safe, so these would no-op
+  // harmlessly, but a writer aimed at a node that no longer exists is a lie to the next reader.)
   dset("compdec", (cp && cp.decision) ? cp.decision.action + " — " + cp.decision.reason
                                      : "UNKNOWN — no gas/viability reading");
   dset("comppend", (cp && cp.pending_fee_note)
