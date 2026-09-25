@@ -79,6 +79,20 @@
   <h1>Jordan's DeFi Command Center</h1>
   <div class="sub" id="sub">loading…</div>
 
+  <!-- ── THE POOL PICTURE LEADS (Jordan, 2026-09-25) ──────────────────────────────────────────
+     "the picture of the pool should be at the top."
+     The shape chart now sits ABOVE the tiles: the first thing on the page is what the money
+     LOOKS like, and the numbers read underneath it, in the order the question is asked. -->
+  <div class="card">
+    <div class="lbl">Liquidity shape — where the money sits</div>
+    <svg id="chart" viewBox="0 0 600 150" preserveAspectRatio="none"></svg>
+    <div class="legend">
+      <span><i class="dot" style="background:var(--usd)"></i>USDC below spot — bids, buys WAVAX as price falls</span>
+      <span><i class="dot" style="background:var(--wax)"></i>WAVAX above spot — asks, sells as price rises</span>
+      <span><i class="dot" style="background:var(--txt)"></i>Spot</span>
+    </div>
+  </div>
+
   <!-- ── COMPOUNDING LEADS (Jordan, 2026-09-25) ────────────────────────────────────────────────
      "instead of showing how much work in capital that we have in the pool Why don't we instead
       talk about how much is being auto compounded back into the bins or back into Our LP ... if you
@@ -98,8 +112,15 @@
       <div class="note" id="rangenote">—</div></div>
     <div class="tile"><div class="k">Fee efficiency</div><div class="n" id="eff">—</div>
       <div class="note" id="effnote">—</div></div>
-    <div class="tile"><div class="k">Working capital</div><div class="n" id="depl">—</div>
-      <div class="note" id="deplnote">—</div></div>
+    <!-- ── WORKING CAPITAL TILE REMOVED (Jordan, 2026-09-25) ────────────────────────────────
+       "The working capital tab we could get rid of that ... we're not going to count the money
+        that's used for gas, right? So we're not going to count the 20 cents. So I think knowing
+        what's going to be compounded back into the pool is much better."
+       The tile showed idle wallet capital as if it were part of the book. It is gas money, and
+       counting it made the page claim a position it did not have. The SAME $0.20 is still on the
+       page — as "Waiting to compound", which is the frame that says what it is FOR. Nothing was
+       lost, and `deployed_usd` / `deployed_pct` / `idle_usd` remain in the JSON payload for the
+       record; only the tile is gone. -->
     <div class="tile"><div class="k">Capital in pool <span style="text-transform:none;letter-spacing:0">(stock — kept, no longer the headline)</span></div>
       <div class="n" id="cap">—</div>
       <div class="note" id="capnote">—</div></div>
@@ -114,16 +135,6 @@
     <div class="row"><span class="k">Next cycle</span><span class="v" id="compdec">—</span></div>
     <div class="row"><span class="k">Unclaimed fees</span><span class="v" id="comppend">—</span></div>
     <div class="foot" style="text-align:left;margin-top:12px" id="compnote">—</div>
-  </div>
-
-  <div class="card">
-    <div class="lbl">Liquidity shape — where the money sits</div>
-    <svg id="chart" viewBox="0 0 600 150" preserveAspectRatio="none"></svg>
-    <div class="legend">
-      <span><i class="dot" style="background:var(--usd)"></i>USDC below spot — bids, buys WAVAX as price falls</span>
-      <span><i class="dot" style="background:var(--wax)"></i>WAVAX above spot — asks, sells as price rises</span>
-      <span><i class="dot" style="background:var(--txt)"></i>Spot</span>
-    </div>
   </div>
 
   <div class="card">
@@ -149,6 +160,29 @@
     <div class="row"><span class="k">AVAX price</span><span class="v" id="spotpx">—</span></div>
   </div>
 
+  <!-- ── AUTONOMY / DUTY CYCLE (Jordan, 2026-09-25) ────────────────────────────────────────────
+     "Why don't we add the amount of hours that we've been active inside the pool between each
+      rebalance? I think that would also show us the benefits of what we're doing versus doing it
+      manually because you're able to rebalance and do stuff autonomously now."
+     A manual operator cannot re-center at 3am, so their capital sits OUT of range (deployed,
+     earning zero) for hours; an autonomous one is back inside in minutes. IN-RANGE hours against
+     OUT-OF-RANGE hours between rebalances IS the value of autonomy.
+     Measured in duty_cycle.py from the chain's own rebalance record plus the pool's own OHLCV
+     candles. If either source cannot be read the rows read UNKNOWN with the reason -- never 0.
+     MOVED ABOVE "Against doing nothing" (Jordan, 2026-09-25: "reorganize everything and make it
+     make sense"): this is what the book DID, so it belongs with the earnings story, before the
+     benchmarks that judge it. -->
+  <div class="card">
+    <div class="lbl">Autonomy — hours actually in the pool and EARNING, between rebalances</div>
+    <div class="row"><span class="k">In range (last 7d)</span><span class="v" id="duty7">—</span></div>
+    <div class="row"><span class="k">Out of range (last 7d)</span><span class="v" id="dutyout7">—</span></div>
+    <div class="row"><span class="k">Current streak in the pool</span><span class="v" id="dutystreak">—</span></div>
+    <div class="row"><span class="k">Avg. hours between rebalances</span><span class="v" id="dutyavg">—</span></div>
+    <div class="row"><span class="k">Longest stretch in the pool (7d)</span><span class="v" id="dutymax">—</span></div>
+    <div class="row"><span class="k">Since inception</span><span class="v" id="dutyall">—</span></div>
+    <div class="foot" style="text-align:left;margin-top:12px" id="dutynote">—</div>
+  </div>
+
   <div class="card">
     <div class="lbl">Against doing nothing</div>
     <div class="row"><span class="k">Average AVAX staker</span><span class="v" id="staker">—</span></div>
@@ -167,41 +201,16 @@
     <div class="foot" style="text-align:left;margin-top:12px" id="msnote">—</div>
   </div>
 
-  <!-- ── AUTONOMY / DUTY CYCLE (Jordan, 2026-09-25) ────────────────────────────────────────────
-     "Why don't we add the amount of hours that we've been active inside the pool between each
-      rebalance? I think that would also show us the benefits of what we're doing versus doing it
-      manually because you're able to rebalance and do stuff autonomously now."
-     A manual operator cannot re-center at 3am, so their capital sits OUT of range (deployed,
-     earning zero) for hours; an autonomous one is back inside in minutes. IN-RANGE hours against
-     OUT-OF-RANGE hours between rebalances IS the value of autonomy.
-     Measured in duty_cycle.py from the chain's own rebalance record plus the pool's own OHLCV
-     candles. If either source cannot be read the rows read UNKNOWN with the reason -- never 0. -->
-  <div class="card">
-    <div class="lbl">Autonomy — hours actually in the pool and EARNING, between rebalances</div>
-    <div class="row"><span class="k">In range (last 7d)</span><span class="v" id="duty7">—</span></div>
-    <div class="row"><span class="k">Out of range (last 7d)</span><span class="v" id="dutyout7">—</span></div>
-    <div class="row"><span class="k">Current streak in the pool</span><span class="v" id="dutystreak">—</span></div>
-    <div class="row"><span class="k">Avg. hours between rebalances</span><span class="v" id="dutyavg">—</span></div>
-    <div class="row"><span class="k">Longest stretch in the pool (7d)</span><span class="v" id="dutymax">—</span></div>
-    <div class="row"><span class="k">Since inception</span><span class="v" id="dutyall">—</span></div>
-    <div class="foot" style="text-align:left;margin-top:12px" id="dutynote">—</div>
-  </div>
-
-  <div class="foot">
-    Wallet <span id="wallet">—</span><br>
-    Position &amp; shape read from Avalanche contract state<br>
-    Updated <span id="updated">—</span> · <span id="stale"></span><br>
-    <span id="prov"></span>
-  </div>
-  </div>
-
   <!-- ── NEXT TRANSITION (Jordan, 2026-09-24) ────────────────────────────────────────────────
      "add a section next to the liquidity shape and put what transition works best and what
       transition is going NEXT based off of the market... maybe after 10 minutes, we're still
       earning well, but our fee efficiency is going down to 60 or maybe 45%. That's where we can
       start getting a projection of what we would rebalance to next, so we can see the scenario."
      Scenarios are STATES, moves are TRANSITIONS. This shows where the book IS and which rungs
-     are legal from here, with the efficiency projection underneath. -->
+     are legal from here, with the efficiency projection underneath.
+     MOVED INSIDE .wrap (fixed 2026-09-25). It was emitted AFTER the container closed, so this
+     card rendered full-bleed and unaligned with every other card on the page -- Jordan: "it looks
+     a little jumbled up". A card outside the wrapper is not a style choice, it is a layout leak. -->
   <div class="card">
   <div class="lbl">Next transition — where this book goes from here</div>
   <div class="trow"><span class="tk">Now</span><span class="tv" id="tnow">—</span></div>
@@ -210,6 +219,14 @@
   <div class="lbl" style="margin-top:14px">Projection — what would move it</div>
   <div id="tproj"></div>
   <div class="tnote" id="tfoot">—</div>
+  </div>
+
+  <div class="foot">
+    Wallet <span id="wallet">—</span><br>
+    Position &amp; shape read from Avalanche contract state<br>
+    Updated <span id="updated">—</span> · <span id="stale"></span><br>
+    <span id="prov"></span>
+  </div>
   </div>
 
   <script>
@@ -328,11 +345,16 @@ function render(d) {
   bar.style.width = (e || 0) + "%";
   bar.style.background = zoneColor(e);
 
-  document.getElementById("depl").textContent = (d.deployed_pct || 0) + "%";
-  // RE-AUDIT FIX (Kimi K3, N6): a null idle figure rendered "$0.00 idle" as if it were a fact.
-  document.getElementById("deplnote").textContent =
-    money(d.deployed_usd) + " · " +
-    (d.idle_usd === null || d.idle_usd === undefined ? "idle unknown" : money(d.idle_usd) + " idle");
+  // ── WORKING CAPITAL TILE REMOVED (Jordan, 2026-09-25) ──────────────────────────────────────
+  // The two bindings that used to be here --
+  //     document.getElementById("depl").textContent = (d.deployed_pct || 0) + "%";
+  //     document.getElementById("deplnote").textContent = money(d.deployed_usd) + ... idle ...
+  // -- are DELETED WITH THE TILE, not left behind. With no #depl in the document, either line
+  // would throw a TypeError on null, and because they sit inside the single render pass that
+  // would take out EVERY field below them -- a blank page, not a missing tile. Removing a DOM
+  // node and leaving its writer is how a tidy-up becomes an outage.
+  // `deployed_usd` / `deployed_pct` / `idle_usd` are still in the payload and still shown as the
+  // compounding decision, which is the honest frame for gas money.
 
   drawShape(d);
 
