@@ -4,6 +4,17 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<!-- ── NOT FOR SEARCH ENGINES (Jordan's call, 2026-09-26) ────────────────────────────────────────
+     This page NAMES a person and displays their live capital. Coin Bureau's Revolut breakdown
+     (2026-09-26) described the exact attack this enables: targets were identified ON CHAIN first
+     from public blockchain data, and only then were fraudulent requests used to attach a name,
+     face and street address to the wallet. The chain gives up the money; the public page is what
+     attaches the person. CertiK logged 52 verified physical "wrench" attacks in H1 2026, with
+     home invasions up from 1 to 20 — the risk is not reputational, it is physical.
+     noindex (not a robots.txt Disallow): a Disallow would stop crawlers from READING this directive.
+     Deliberately a per-page tag, NOT a site-wide robots.txt — gentechlabs.net is a public portfolio
+     and a blanket rule would take that down with it. -->
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
 <title>Jordan's DeFi Command Center — GenTech</title>
 <style>
   :root { --bg:#080a0d; --card:#111519; --card2:#161b21; --line:#222a33; --txt:#e9eef4;
@@ -50,6 +61,14 @@
   .proj .pa { font-weight:700; font-variant-numeric:tabular-nums; min-width:62px; }
   .proj .pr { color:var(--dim); flex:1; }
   .dot { display:inline-block; width:8px; height:8px; border-radius:2px; margin-right:5px; }
+  /* ── the shape verdict (2026-09-26): the chart states whether the shape is CORRECT, so a
+     textbook V with spot in the trough is not read as a fault. 'ok' = right, 'warn' = a real
+     fault worth acting on, 'info' = cannot judge (a crossed book is normal, not a fault). */
+  .shapetick { font-size:.78em; line-height:1.42; margin:9px 0 4px; padding:7px 9px;
+               border-radius:8px; border:1px solid var(--line); }
+  .shapetick.ok   { border-color:#1d5c3a; background:#0d1f16; color:#8fe0b4; }
+  .shapetick.warn { border-color:#6b4a12; background:#241a08; color:#f0c674; }
+  .shapetick.info { border-color:#2a3a4a; background:#0e141a; color:#9fb3c8; }
   /* range ruler */
   .ruler { position:relative; height:34px; margin:6px 0 2px; }
   .ruler .track { position:absolute; top:11px; left:0; right:0; height:5px; border-radius:99px;
@@ -86,6 +105,23 @@
   <div class="card">
     <div class="lbl">Liquidity shape — where the money sits</div>
     <svg id="chart" viewBox="0 0 600 150" preserveAspectRatio="none"></svg>
+    <!-- ── IS THIS SHAPE RIGHT? (added 2026-09-26) ───────────────────────────────────────────
+         Jordan has twice looked at this chart and read a CORRECT book as a fault — "we're stuck
+         in the middle of our bid-ask". He was right the first time (the ask leg was genuinely
+         flat) and wrong the second (it was a textbook V). The chart itself cannot tell him which,
+         because the two cases LOOK THE SAME: a bid-ask with spot at the junction always shows the
+         V with spot in the trough, and that IS the design.
+         So the chart now states its own verdict, and the verdict is driven by the SAME server-side
+         leg-orientation check that raises the alarm — one source of truth, never a second opinion
+         written in the page. Three states, and "cannot judge" is its own state (a crossed book is
+         a normal market outcome, not a fault). -->
+    <div id="shapetick" class="shapetick"></div>
+    <!-- ── WHY THIS SHAPE (added 2026-09-26) ──────────────────────────────────────────────────
+         Jordan: "the hub is still showing a bid-ask, are we doing a curve?" The chart showed the
+         shape but never said WHO chose it or why, so it read as an open question. This names the
+         layer that set it. Truth-only: if the resolver was unreadable it says so rather than
+         implying a reason. -->
+    <div id="shapewhy" class="shapetick info" style="display:none"></div>
     <div class="legend">
       <span><i class="dot" style="background:var(--usd)"></i>USDC below spot — bids, buys WAVAX as price falls</span>
       <span><i class="dot" style="background:var(--wax)"></i>WAVAX above spot — asks, sells as price rises</span>
@@ -103,8 +139,24 @@
      If the reading could not be produced every field below renders UNKNOWN with its reason. A 0
      would be read as "compounding is off", which is a claim about the venue we may not have. -->
   <div class="tiles">
-    <div class="tile"><div class="k">Auto-compounded</div><div class="n" id="compflow">—</div>
-      <div class="note" id="compflowfit">—</div></div>
+    <!-- ── FEE EARNINGS LEAD (Jordan, 2026-09-27) ────────────────────────────────────────────────
+       Jordan: *"can we take out the auto compound? I don't mean take out the feature. I just mean
+       on our DeFi web pages, me and my cousin. I think seeing that kind of confuses us on how much
+       we're earning per day. And I think we should focus more on looking at how much we're earning
+       fees daily, weekly, and monthly. So it can go alongside the goals that we've set as far as
+       getting to the next rank."*
+
+       The compounding TILE is retired from the view on purpose; auto_compound itself is untouched.
+
+       The headline is EARNINGS/DAY, because that is the number the rank goal is measured in — the
+       weekly and monthly tiles are that same rate multiplied out, and the card below says so. One
+       rate, three horizons, disclosed arithmetic. -->
+    <div class="tile"><div class="k">Earnings / day</div><div class="n" id="earnday">—</div>
+      <div class="note" id="earndaynote">—</div></div>
+    <div class="tile"><div class="k">Earnings / week</div><div class="n sm" id="earnweek">—</div>
+      <div class="note" id="earnweeknote">—</div></div>
+    <div class="tile"><div class="k">Earnings / month</div><div class="n sm" id="earnmonth">—</div>
+      <div class="note" id="earnmonthnote">—</div></div>
     <!-- ── "WAITING TO COMPOUND" TILE RETIRED (Jordan, 2026-09-25) ─────────────────────────
        Jordan: "we don't have to put the idle 20 cents that's being used for gas ... I think
        that the user should just know in the back of their head that the agentic Treasury can
@@ -137,13 +189,23 @@
   </div>
 
   <div class="card">
-    <div class="lbl">Auto-compounding — the flow, and what is waiting for the next cycle</div>
-    <div class="row"><span class="k">Compounded (last 7d)</span><span class="v" id="compperiod">—</span></div>
-    <div class="row"><span class="k">Compounding rate</span><span class="v" id="comprate">—</span></div>
-    <div class="row"><span class="k">On an annualised basis</span><span class="v" id="compapr">—</span></div>
-    <div class="row"><span class="k">Next cycle</span><span class="v" id="compdec">—</span></div>
-    <div class="row"><span class="k">Unclaimed fees</span><span class="v" id="comppend">—</span></div>
+    <div class="lbl">Fee earnings — the goal, and the pace you are earning it at</div>
+    <div class="row"><span class="k">Earnings per day</span><span class="v" id="compperiod">—</span></div>
+    <div class="row"><span class="k">Earnings per week</span><span class="v" id="comprate">—</span></div>
+    <div class="row"><span class="k">Earnings per month</span><span class="v" id="compapr">—</span></div>
+    <div class="row"><span class="k" id="earngoalk">Goal — next rank</span><span class="v" id="comppend">—</span></div>
     <div class="foot" style="text-align:left;margin-top:12px" id="compnote">—</div>
+  </div>
+
+  <div class="card" id="ledgercard">
+    <div class="lbl">Daily fees — VERIFIED, day by day (receipts, not an estimate)</div>
+    <div class="row"><span class="k">Days recorded</span><span class="v" id="leddays">—</span></div>
+    <div class="row"><span class="k">Pool fees, last completed day</span><span class="v" id="ledlast">—</span></div>
+    <div class="row"><span class="k">Pool fees, all recorded days</span><span class="v" id="ledtotal">—</span></div>
+    <div class="row"><span class="k">Swaps behind those fees</span><span class="v" id="ledswaps">—</span></div>
+    <div class="row"><span class="k">Our share of the pool <span style="text-transform:none;letter-spacing:0">(median per bin)</span></span><span class="v" id="ledshare">—</span></div>
+    <div class="foot" style="text-align:left;margin-top:12px" id="lednote">—</div>
+    <div id="ledrows" style="margin-top:12px"></div>
   </div>
 
   <div class="card">
@@ -452,7 +514,10 @@ function render(d) {
     // AUDIT FIX (Kimi K3): this used to be fabricated as `100 - e`. It is now whatever the real
     // efficiency function says for the other shape, and if we do not have it we do not claim it.
     const altTxt = (d.efficiency_alt_pct === null || d.efficiency_alt_pct === undefined)
-      ? "" : " The same liquidity as a " + alt + " would read about " + d.efficiency_alt_pct + "%.";
+      ? "" : " The same liquidity as a " + alt + " would read about " + d.efficiency_alt_pct +
+             "% — that is ARITHMETIC on the other shape's formula, not a recommendation: it says " +
+             "nothing about which shape the regime calls for, and a shape built for a different " +
+             "market is misplaced however high it scores.";
     sc.push("Your " + d.shape_kind + " shape is earning " + e + "% at this spot position." + altTxt);
   }
   // Say it plainly when the live distribution does not match the shape's name. The efficiency
@@ -471,18 +536,125 @@ function render(d) {
   const lo = d.leg_orientation;
   if (lo && lo.verdict && lo.verdict !== "OK") {
     const bad = [];
+    // The expectation depends on the book's OWN shape: a curve is a BELL (heaviest nearest
+    // spot) and a bid-ask is a U (heaviest at the far edges). Testing every book for a bell
+    // reported every correct bid-ask as upside down — see the note in defi_hub_data.py.
+    const want = (lo.shape === "curve") ? "bell" : "U";
+    const shapeTxt = (lo.shape === "curve")
+      ? "a curve is a bell — heaviest NEAREST spot"
+      : "a bid-ask is a U — heaviest at the FAR edge";
     if (lo.ask && !lo.ask.toward_spot)
       { bad.push("ask (above spot): " + money(lo.ask.nearest_usd) + " nearest vs " +
                  money(lo.ask.furthest_usd) + " furthest"); }
     if (lo.bid && !lo.bid.toward_spot)
       { bad.push("bid (below spot): " + money(lo.bid.nearest_usd) + " nearest vs " +
                  money(lo.bid.furthest_usd) + " furthest"); }
-    sc.push("A leg is deployed UPSIDE DOWN — " + bad.join("; ") + ". Liquidity should be heaviest " +
-            "nearest spot; here it is heaviest at the FAR edge, so the bulk of the capital converts " +
-            "last and earns least. The deploy script is fixed; rebuilding this position moves money, " +
-            "so it is waiting on your go-ahead.");
+    sc.push("A leg is deployed UPSIDE DOWN for a " + (lo.shape || "book") + " — " + bad.join("; ") +
+            ". " + shapeTxt + ", so the bulk of the capital converts last and earns least. " +
+            "The deploy script is fixed; rebuilding this position moves money, so it is " +
+            "waiting on your go-ahead.");
   }
+  // A CROSSED book is not an inverted one. When price runs through a bid leg the legs merge and
+  // their geometry can no longer be read back from the bins, so the server sends verdict=null and
+  // judgeable=false. Say THAT as an INFORMATIONAL note — no ⚠︎ alarm, because a crossed book is a
+  // normal market outcome and dressing it as a fault is how a false alarm gets raised. Prepend the
+  // note to the box's own text so a note is never suppressed by sc being empty.
+  let noteTxt = "";
+  if (lo && lo.judgeable === false && lo.note) {
+    noteTxt = lo.note.charAt(0).toUpperCase() + lo.note.slice(1) + ".";
+  }
+  // ── THE SHAPE'S OWN VERDICT (2026-09-26) ────────────────────────────────────────────────────
+  // Driven by the SAME server-side leg check that raises the alarm — never a second opinion
+  // written here. A textbook bid-ask shows the V with spot in the trough, and that is CORRECT:
+  // the trough is where the two legs meet, not a dead zone. Saying so on the chart is the whole
+  // point — the picture alone cannot distinguish "built as designed" from "a leg is upside down".
+  const st = document.getElementById("shapetick");
+  if (st) {
+    const L = d.leg_orientation;
+    if (!L || L.verdict === undefined || L.verdict === null && L.judgeable !== false) {
+      st.className = "shapetick info";
+      st.textContent = "Shape not checked in this build — no leg verdict was produced.";
+    } else if (d.shape_why && d.shape_why.partial_book && d.shape_why.agrees !== false) {
+      // ── A PARTIAL BOOK, EXPLAINED (2026-09-27) ────────────────────────────────────────────
+      // Jordan sent a screenshot of this chart: green box "✓ This shape is CORRECT" directly above
+      // amber "⚠ ... they DISAGREE". Both were about the same book and they read as a contradiction.
+      // The amber one was arithmetic, not a fault: the book holds fewer bins than any deployable
+      // geometry because a leg has been partially sold, so the bin count alone cannot confirm the
+      // shape. A reader who sees a warning next to a tick learns to distrust both — so a partial
+      // book with NO shape disagreement gets ONE calm explanation and no alarm.
+      //
+      // The `agrees !== false` guard is load-bearing. Without it this branch also swallowed the
+      // case where the held shape genuinely disagrees with what the market and regime point at —
+      // jordan's live payload: label bid-ask, both layers want curve, agrees=false. Under-width
+      // and shape-disagreement are different facts, and the first must not silence the second.
+      st.className = "shapetick info";
+      st.textContent = "▸ Partial book (" + (d.bins || "?") + " bins). The bin count cannot confirm "
+        + "the shape — a leg has been partially sold, so fewer bins are held than the shape was "
+        + "built with — but nothing here disagrees: the shape label stands. When the book is "
+        + "rebuilt it returns to its full width.";
+    } else if (L.judgeable === false && !(d.shape_why && d.shape_why.agrees === false)) {
+      st.className = "shapetick info";
+      st.textContent = "✓ Shape cannot be faulted: " + (L.note || "legs not separable") +
+                       " The V with spot in the trough is normal.";
+    } else if (L.verdict === "OK" && !(d.shape_why && d.shape_why.agrees === false)) {
+      // The `agrees !== false` guard here is the fix for the screenshot itself. Leg orientation
+      // being OK only says the legs point the right way — it says nothing about whether the SHAPE
+      // is the one the market and regime want. jordan's page printed "✓ This shape is CORRECT"
+      // directly above "⚠ ... they DISAGREE" because this branch never consulted shape_why. A green
+      // tick that contradicts the warning beneath it teaches the reader to trust neither.
+      st.className = "shapetick ok";
+      const j = (d.shape_kind === "curve") ? "centre (a bell)" : "the trough (a V)";
+      st.textContent = "✓ This shape is CORRECT — spot at " + j + " is where a " +
+                       (d.shape_kind || "book") + " is BUILT to sit. It is not stuck " +
+                       "mid-range; the two legs straddle spot by design.";
+    } else if (d.shape_why && d.shape_why.agrees === false) {
+      // The legs are fine but the SHAPE is the wrong one for this tape — say that, once, and point
+      // at the reason rather than repeating it here.
+      st.className = "shapetick warn";
+      st.textContent = "⚠ The legs point the right way, but this is a " + (d.shape_kind || "book") +
+                       " and the market and regime point at " + (d.shape_why.shape_for || "another " +
+                       "shape") + ". Leg orientation is not the whole story — see why, below.";
+    } else {
+      st.className = "shapetick warn";
+      st.textContent = "⚠ A leg is upside down for this " + (d.shape_kind || "book") +
+                       " — " + (L.verdict || "") + ". This is a real fault, not the design.";
+    }
+  }
+
+  // ── WHY THIS SHAPE AND NOT THE OTHER (2026-09-26) ───────────────────────────────────────────
+  // Names the layer that picked the shape, so the chart is a READING, not an open question.
+  const sw2 = document.getElementById("shapewhy");
+  if (sw2) {
+    const W = d.shape_why;
+    if (W && W.note) {
+      // ── AN ICON MUST MATCH THE SENTENCE (2026-09-27) ──────────────────────────────────────
+      // `W.agrees === false` drove the ⚠ and the amber styling, but a PARTIAL book also has
+      // agrees=false while its text now says "it is NOT a disagreement". A ⚠ beside a sentence
+      // denying a problem is the same contradiction as the green-tick-beside-amber-warning that
+      // Jordan screenshotted. The partial case gets the calm arrow and informational styling.
+      //
+      // ...BUT NOT AT THE COST OF THE ALARM (fixed same day, second pass). The first version
+      // demoted EVERY partial book to calm, including one where the held shape genuinely
+      // disagreed with what the market and regime point at — jordan's live payload, where the
+      // label is bid-ask and both layers want curve. Under-width and shape-disagreement are
+      // separate facts. So: partial alone is calm; partial AND disagreeing still warns.
+      const partial = !!W.partial_book;
+      const alarming = (W.agrees === false);
+      sw2.className = "shapetick " + (alarming ? "warn" : "info");
+      sw2.textContent = (alarming ? "⚠ " : "→ ") + "Why this shape: " + W.note + ".";
+      sw2.style.display = "block";
+    } else if (W && W.error) {
+      sw2.className = "shapetick info";
+      sw2.textContent = "Why this shape: the shape resolver could not be read (" + W.error +
+                        "), so no reason is claimed.";
+      sw2.style.display = "block";
+    } else {
+      sw2.style.display = "none";
+    }
+  }
+
   if (sc.length) { sw.style.display = "block"; sw.textContent = "⚠︎ " + sc.join(" "); }
+  else if (noteTxt) { sw.style.display = "block"; sw.textContent = "ℹ︎ " + noteTxt; }
   else { sw.style.display = "none"; }
 
   // ── THE GOAL — DeFi Milestone (Jordan, 2026-09-22: "Add the Defi Milestone for the goals") ──
@@ -552,52 +724,165 @@ function render(d) {
   // FLOW first, then WAITING. Every field degrades to UNKNOWN *with its reason*; no field may
   // render a 0 to mean "could not read it" -- a 0 here would read as "compounding is off", which
   // is a claim about the venue, and this project's most repeated bug is a false zero.
-  const cp = d.compound;
-  const cn = v => (v === null || v === undefined);
-  const cusd = v => cn(v) ? null : (v < 1 ? "$" + Number(v).toFixed(4) : "$" + Number(v).toFixed(2));
-  const flowOk = !!cp && cp.status === "ok" && !cn(cp.period_low_usd) && !cn(cp.period_high_usd);
-  if (flowOk) {
-    const same = cp.period_low_usd === cp.period_high_usd;
-    dset("compflow", same ? cusd(cp.period_low_usd) : cusd(cp.period_low_usd) + " – " + cusd(cp.period_high_usd));
-    dset("compflowfit", "folded back into the bins, over " + cp.period_days + "d"
-      + (cp.bracket_x && cp.bracket_x > 2
-          ? " · two sources disagree ×" + Number(cp.bracket_x).toFixed(2) + " — a RANGE, not a number"
-          : (cp.single_source ? " · single source — no cross-check available" : "")));
-    dset("compperiod", (same ? cusd(cp.period_low_usd)
-        : cusd(cp.period_low_usd) + " – " + cusd(cp.period_high_usd)) + " over " + cp.period_days + " days");
-    dset("comprate", cn(cp.rate_pct_per_day_low) ? "UNKNOWN"
-        : Number(cp.rate_pct_per_day_low).toFixed(6) + " – " + Number(cp.rate_pct_per_day_high).toFixed(6) + " %/day");
-    dset("compapr", cn(cp.apr_pct_low) ? "UNKNOWN"
-        : Number(cp.apr_pct_low).toFixed(2) + "% – " + Number(cp.apr_pct_high).toFixed(2) + "% /yr");
-    const dv = cp.derivations || {};
-    const parts = [];
-    Object.keys(dv).forEach(k => {
-      const o = dv[k] || {};
-      if (!cn(o.per_day_usd)) parts.push(k + " $" + Number(o.per_day_usd).toFixed(4) + "/day");
-      else if (o.error) parts.push(k + " UNKNOWN (" + o.error + ")");
-    });
-    dset("compnote", "Derivations: " + (parts.join(" · ") || "none") + ". They do not share a "
-      + "numerator, so where they agree the figure is solid and where they disagree the spread is "
-      + "shown rather than one end picked."
-      + (cp.pending_fee_note ? " " + cp.pending_fee_note + "." : ""));
+  // ── FEE EARNINGS — DAY / WEEK / MONTH (Jordan, 2026-09-27) ────────────────────────────────
+  // Replaces the auto-compound READOUT. Jordan: "can we take out the auto compound? I don't mean
+  // take out the feature. I just mean on our DeFi web pages... I think seeing that kind of confuses
+  // us on how much we're earning per day... focus more on looking at how much we're earning fees
+  // daily, weekly, and monthly. So it can go alongside the goals that we've set."
+  //
+  // The FEATURE is untouched — only the display is. The rate is the SAME estimate_daily_fees the
+  // rank goal is measured against, so the page cannot show a user two different "per day" numbers.
+  // Week and month are that single rate multiplied out; the caption says so rather than implying
+  // three independent measurements.
+  const en = d.earnings;
+  const eOk = !!en && en.status === "ok" && en.per_day_usd !== null && en.per_day_usd !== undefined;
+  // A real $0.00 is a MEASUREMENT (out of range / nothing deployed) and must print as a number, not
+  // as UNKNOWN. Only a MISSING value is UNKNOWN. This distinction is the whole honesty rule here.
+  const emoney = v => {
+    if (v === null || v === undefined) return "UNKNOWN";
+    const n = Number(v);
+    if (n === 0) return "$0.00";
+    if (n < 1) return "$" + n.toFixed(4);
+    return "$" + n.toFixed(2);
+  };
+  if (eOk) {
+    dset("earnday", emoney(en.per_day_usd));
+    dset("earnweek", emoney(en.per_week_usd));
+    dset("earnmonth", emoney(en.per_month_usd));
+    // "measured" would be an OVERCLAIM: this is `estimate_daily_fees` applied to the deployed
+    // in-range capital — a projection at a measured core rate, not fees read off the chain. Jordan's
+    // doctrine is on-chain proof before trusting a yield number, so the tile says estimated and the
+    // card names the basis. An honest estimate labelled as a measurement is the false-value class.
+    dset("earndaynote", "estimated (in range)");
+    dset("earnweeknote", "7 x the daily rate");
+    dset("earnmonthnote", "30 x the daily rate");
+    dset("compperiod", emoney(en.per_day_usd) + " per day");
+    dset("comprate", emoney(en.per_week_usd) + " per week");
+    dset("compapr", emoney(en.per_month_usd) + " per month");
+    // The zero case explains ITSELF. A bare $0.00 without a reason is how a measurement gets read
+    // as a broken page — and how a broken page gets read as $0.00.
+    const zeroWhy = (en.per_day_usd === 0 && en.reason) ? en.reason : null;
+    const xc = (en.cross_check_per_day_usd === null || en.cross_check_per_day_usd === undefined)
+      ? null : Number(en.cross_check_per_day_usd);
+    let note = "";
+    if (zeroWhy) {
+      note = "WHY THIS IS $0.00 — " + zeroWhy + ". This is a measurement, not a missing reading.";
+    } else {
+      note = "One rate (" + (en.basis || "estimate_daily_fees")
+        + ") multiplied across the horizons — the week and month are not separately measured, so "
+        + "they scale with the day. This is the same rate the rank goal below is measured against. "
+        + "In range: " + (en.in_range === false ? "NO" : (en.in_range === true ? "yes" : "could not be measured"));
+      if (xc !== null) {
+        note += ". Cross-check: " + emoney(xc) + "/day from the pool-economics derivation"
+          + (en.cross_check_spread_x ? " (sources disagree x" + Number(en.cross_check_spread_x).toFixed(2) + ", which is why this panel names its source instead of averaging them)" : "")
+          + ".";
+      }
+      note += " Fees fold into the bins automatically on this venue — nothing needs claiming.";
+    }
+    dset("compnote", note);
+    // ── THE GOAL, BESIDE THE PACE ────────────────────────────────────────────────────────────
+    // Jordan: "So it can go alongside the goals that we've set as far as getting to the next rank."
+    // Written from the SAME milestone object the rank card uses, so the two cannot disagree.
+    if (msz && !msz.error && msz.next_rank) {
+      dset("earngoalk", "Goal — next rank (" + (MSICONS[msz.next_rank] || "") + " " + msz.next_rank + ")");
+      const tgt = msz.next_target_daily_fees;
+      dset("comppend", (tgt === null || tgt === undefined)
+        ? "target not published"
+        : emoney(tgt) + "/day needed · " + (msz.progress_pct === null || msz.progress_pct === undefined ? "—" : Number(msz.progress_pct).toFixed(1) + "%") + " there");
+    } else {
+      dset("earngoalk", "Goal — next rank");
+      dset("comppend", "UNKNOWN — no milestone reading for this build");
+    }
   } else {
-    ["compflow", "compperiod", "comprate", "compapr"].forEach(i => dset(i, "UNKNOWN"));
-    dset("compflowfit", "UNKNOWN — " + ((cp && cp.error) || "no compounding reading was produced for this build"));
-    dset("compnote", "UNKNOWN — " + ((cp && cp.error) || "no compounding reading was produced for this build")
+    ["earnday", "earnweek", "earnmonth", "compperiod", "comprate", "compapr"].forEach(i => dset(i, "UNKNOWN"));
+    dset("earndaynote", "UNKNOWN");
+    dset("earnweeknote", "UNKNOWN");
+    dset("earnmonthnote", "UNKNOWN");
+    dset("compnote", "UNKNOWN — " + ((en && en.error) || "no earnings reading was produced for this build")
       + " (showing UNKNOWN, not a zero.)");
+    dset("comppend", "UNKNOWN");
   }
-  // ── WAITING: WITHDRAWN FROM THE PAGE (Jordan, 2026-09-25) ──────────────────────────────────
-  // The three writers that used to fill #compwait / #compwaitnote / #compwaitrow are gone with
-  // their nodes, on purpose. On this venue the "waiting" number is only ever the idle wallet
-  // float, so surfacing it told the reader to watch the treasury's pocket change. `cp.waiting_usd`
-  // is untouched in the payload and still decides the HOLD/act branch below -- the datum is
-  // dropped from the VIEW, not from the system. (dset() is null-safe, so these would no-op
-  // harmlessly, but a writer aimed at a node that no longer exists is a lie to the next reader.)
-  dset("compdec", (cp && cp.decision) ? cp.decision.action + " — " + cp.decision.reason
-                                     : "UNKNOWN — no gas/viability reading");
-  dset("comppend", (cp && cp.pending_fee_note)
-      ? "none claimable — LFJ V2.2 folds fees into the bins at swap time"
-      : "UNKNOWN");
+
+  // ── VERIFIED FEE LEDGER — receipts beside the estimate, never blended with it ─────────────────
+  // The card above is a forecast and says so. This one is receipts. Every row carries a proof
+  // block, and the two are never averaged into one number — the whole point is that a reader can
+  // tell which claim is backed by a transaction and which is a projection.
+  const fl = d.fee_ledger;
+  // A ledger total runs to five figures; the page's shared `emoney` has no thousands separator
+  // (deliberately — it is used for small per-day figures everywhere else). Rather than change a
+  // formatter that every other card depends on, the ledger gets its own: same edge-case behaviour,
+  // grouped digits. Contained to this card.
+  const ledmoney = v => {
+    if (v === null || v === undefined) return "UNKNOWN";
+    const n = Number(v);
+    if (n === 0) return "$0.00";
+    if (n < 1) return "$" + n.toFixed(4);
+    return "$" + n.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
+  };
+  if (!fl || fl.status === "not_yet_generated" || fl.status === "no_completed_days") {
+    ["leddays", "ledlast", "ledtotal", "ledswaps", "ledshare"].forEach(i => dset(i, "—"));
+    dset("lednote", (fl && fl.status === "not_yet_generated")
+      ? "NOT YET RECORDED — the ledger starts on its first run and only ever publishes days that have fully closed. It will not show an estimate here in place of a receipt."
+      : "NO COMPLETED DAYS YET — a day is published only once it has fully closed in UTC.");
+    dset("ledrows", "");
+  } else if (fl.status !== "ok") {
+    ["leddays", "ledlast", "ledtotal", "ledswaps", "ledshare"].forEach(i => dset(i, "UNKNOWN"));
+    // A broken ledger is reported as BROKEN. It must never fall through to the estimate and look
+    // like a receipt — that substitution is the exact failure this card exists to prevent.
+    dset("lednote", "UNKNOWN — the fee ledger could not be read (" + ((fl && fl.error) || fl.status)
+      + "). Showing UNKNOWN, not a zero and not the estimate.");
+    dset("ledrows", "");
+  } else {
+    const t = fl.totals || {};
+    const last = fl.latest || null;
+    dset("leddays", String(t.days || 0) + (t.days === 1 ? " day" : " days"));
+    dset("ledlast", last ? (ledmoney(last.pool_fees_usd) + "  ·  " + last.date) : "—");
+    dset("ledtotal", ledmoney(t.pool_fees_usd));
+    dset("ledswaps", Number(t.swaps || 0).toLocaleString());
+    const pbs = (fl.our_share && fl.our_share.per_bin_share) || null;
+    dset("ledshare", pbs ? (Number(pbs.median_pct).toFixed(3) + "%  (median of " + pbs.bins_measured + " bins)")
+      : "not measured");
+    let ln = "POOL FEES are receipts: every row is read from the pool's own Swap logs and carries "
+      + "a proof block you can open. ";
+    ln += "OUR SHARE of the pool is measured as of " + ((fl.generated_at || "").replace("T", " ").replace("+00:00", " UTC")) + " "
+      + "and recorded FORWARD — this RPC is not an archive node, so a past day's bin share cannot be "
+      + "read at all (measured: missing trie node 1,000 blocks back). Rather than guess a share and "
+      + "print a confident number, the ledger publishes only what it can prove. ";
+    if (pbs) {
+      ln += "Per-bin share now ranges " + Number(pbs.min_pct).toFixed(3) + "%–"
+        + Number(pbs.max_pct).toFixed(3) + "% (median " + Number(pbs.median_pct).toFixed(3) + "%). "
+        + "A single pool-wide percentage is deliberately NOT published: bins hold different token "
+        + "mixes, so adding them together mixes units and would produce a number that looks like a "
+        + "fact and means nothing. ";
+    }
+    ln += "This card is the VERIFIED half. The fee-earnings card above is an ESTIMATE and names "
+      + "itself as one; the two are never blended.";
+    dset("lednote", ln);
+
+    // the day-by-day table, each row with its receipt
+    const rows = (fl.days || []).slice().reverse();
+    let html = "<div style='font-size:12px;line-height:1.9;font-family:ui-monospace,SFMono-Regular,Menlo,monospace'>";
+    rows.forEach(r => {
+      const blk = r.last_block_with_swap || (r.block_range_half_open || [])[1];
+      const url = r.proof_url || ("https://snowtrace.io/block/" + blk);
+      html += "<div style='display:flex;justify-content:space-between;gap:10px;"
+        + "border-bottom:1px solid rgba(255,255,255,.07);padding:3px 0'>"
+        + "<span style='opacity:.8'>" + r.date + "</span>"
+        + "<span style='opacity:.55'>" + Number(r.swaps || 0).toLocaleString() + " swaps</span>"
+        + "<span style='font-weight:600'>" + ledmoney(r.pool_fees_usd) + "</span>"
+        + "<a href='" + url + "' target='_blank' rel='noopener' "
+        + "style='opacity:.6;text-decoration:underline'>proof ↗</a>"
+        + "</div>";
+    });
+    html += "</div>";
+    // ── dset() CANNOT RENDER HTML ─────────────────────────────────────────────────────────────
+    // `dset` sets `el.textContent`, so passing markup renders the TAGS AS VISIBLE TEXT. The
+    // day-by-day table therefore needed its own innerHTML writer. Caught by reading dset's
+    // definition instead of assuming it was an HTML setter — the table would have shipped as a
+    // wall of escaped <div> tags on a live page.
+    const lr = document.getElementById("ledrows");
+    if (lr) lr.innerHTML = html;
+  }
 
   const dy = d.duty_cycle;
   const dutyRows = ["duty7", "dutyout7", "dutystreak", "dutyavg", "dutymax", "dutyall"];
@@ -679,7 +964,18 @@ function render(d) {
   // RE-AUDIT FIX (Kimi K3, N12): the sign was hardcoded "+", so a negative 30d move printed "+-12.3%".
   const h = d.benchmark_hodl_30d;
   document.getElementById("hodl").textContent = (h >= 0 ? "+" : "") + h + "%";
-  document.getElementById("wallet").textContent = d.wallet;
+    // ── THE FULL WALLET IS NOT PUBLISHED (2026-09-26) ────────────────────────────────────────
+    // This printed a full `0x…` address on a public page under a page title that names its owner.
+    // The Revolut case (Coin Bureau, 2026-09-26) is the template: the wallet is found ON CHAIN
+    // first, and the public page is what attaches the person to it. Combined with the advertised
+    // holdings this told any reader "here is a named human and how much they control".
+    //
+    // Masked, not removed: the tail still makes a page IDENTITY-verifiable by its OWNER (Jordan can
+    // confirm the hub is showing his wallet) while removing the lookup handle a stranger would paste
+    // into a block explorer. The chain stays the source of every NUMBER on this page — this was
+    // never a number, it was an identifier, and the two are not the same thing.
+    // The server already masks it (wallet_masked); display as-is, never re-derive from a raw address.
+    document.getElementById("wallet").textContent = d.wallet_masked || "—";
   document.getElementById("updated").textContent = d.updated_at || "—";
 
   // AUDIT FIX (Kimi K3): the page claimed "every number read from Avalanche, not from config"
