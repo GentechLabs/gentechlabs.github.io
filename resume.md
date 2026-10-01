@@ -9,7 +9,7 @@
 
 ## SUMMARY
 
-Full-stack orchestrator and founder of GenTech Labs — an AI-agent product lab with 60+ shipped builds spanning x402 payment infrastructure, DeFi agents, and multi-agent orchestration. Ships production systems by architecting and directing AI agent fleets end-to-end: spec, build, audit, deploy. Reviews Python, JavaScript/TypeScript and Rust output rather than hand-writing it. Seeking remote AI-training and code-evaluation work.
+Full-stack orchestrator and founder of GenTech Labs — an AI-agent product lab with 60+ shipped builds spanning x402 payment infrastructure, DeFi agents, and multi-agent orchestration. Ships production systems by architecting and directing AI agent fleets end-to-end: spec, build, audit, deploy. Reviews Python, JavaScript/TypeScript and Rust output rather than hand-writing it. Runs the eval and guardrail tests that prove a deployed agent behaves. Seeking remote forward-deployed / applied-AI engineering roles.
 
 ---
 
