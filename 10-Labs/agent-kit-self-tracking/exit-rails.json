@@ -1,0 +1,196 @@
+{
+  "version": 1,
+  "note": "EXIT playbook per platform (Jordan, 2026-09-15). Same design principle as the rail-move bridge: one ruleset, applied per rail. Adding a platform = one block, never a new ruleset. WHY THIS EXISTS: on 2026-09-15 an orchestrator-authorized exit had NO rehearsed path and had to be built on the fly mid-withdrawal. Never again.",
+  "defaults": {
+    "principle": "Exit is a SEQUENCE, not a transaction. Never a single call.",
+    "steps": [
+      "1. SETTLE: re-read state 3x ~2s (public RPCs lag; take the highest/settled read)",
+      "2. HARVEST first: claim emissions BEFORE removing liquidity, or they strand",
+      "3. UNSTAKE from the gauge (if the position is staked)",
+      "4. REMOVE principal liquidity (decreaseLiquidity, full)",
+      "5. COLLECT owed tokens to the wallet",
+      "6. DRAIN REMNANTS: any sibling/empty position still holding dust",
+      "7. SWAP to the exit asset (usually USDC), with a PROVEN route (state-override probe)",
+      "8. TRANSFER to the destination address",
+      "9. VERIFY: read balances back and the tx receipt; report actual delta"
+    ],
+    "rules": [
+      "NEVER remit dust and call it a completed exit - abort instead (min $1.00)",
+      "A failed swap ABORTS the remit; capital stays as the source token",
+      "Harvest before withdraw, always - unclaimed emissions are lost capital",
+      "APPROVE EVERY TOKEN LEG, emissions included - an unapproved leg silently fails",
+      "NEVER approximate a post-harvest balance - RE-READ it on-chain before swapping",
+      "EVERY leg must exit as ONE remit - sweep residue into the exit asset first; a second send doubles gas for cents",
+      "FEE CORE IS THE PRIORITY (Jordan, Sep 15): fees are automatic and durable; emissions are staking-dependent and fragile. Before staking, ask whether the emissions half is real AND durable enough to justify the extra exit steps",
+      "Prove the swap route with a state-override call BEFORE spending gas",
+      "Exit is permitted even on QUARANTINED/PARKED rails (never trap capital)",
+      "Check the destination in the capital guard; unknown address = REFUSE",
+      "gauge.withdraw is an EXIT and is allowed; a re-center MUTATES and is guarded inbound",
+      "Log every tx hash; report per-leg, cents not vibes",
+      "VERIFY FINAL BALANCES of every token after the exit - a stranded balance means the exit is NOT done"
+    ],
+    "post_exit_check": "Re-read wallet balances for EVERY token touched (principal, emissions, gas token). A non-zero balance means a leg failed silently. This check is what caught 98.3657 BLACK stranded by a skipped approval on Sep 15 2026."
+  },
+  "exit_modes": {
+    "note": "Jordan (2026-09-17): 'we should probably update the exit plan to be able to go into whatever the pool mode is, which would be just holding the token, right?' The exit is not always to cash. Leaving the LP means leaving the FEE ENGINE, not necessarily the ASSET. Which of those we do is a MODE, decided at exit time, not a hardcoded destination.",
+    "default_mode": "STABLE",
+    "modes": {
+      "STABLE": {
+        "label": "Exit to cash (dry powder)",
+        "terminal_asset": "USDC",
+        "swaps": "ALL legs -> USDC",
+        "remit": true,
+        "when": "Hiking regime / capital needed elsewhere / event risk ahead. This was the Sep 15 2026 exit.",
+        "gives_up": "All price exposure. Correct when dry powder pays more than holding.",
+        "risk": "None directional. You hold the stable and wait."
+      },
+      "HOLD_SPLIT": {
+        "label": "Exit the pool, keep BOTH legs as received",
+        "terminal_asset": "the pool pair (e.g. WAVAX + USDC)",
+        "swaps": "NONE",
+        "remit": false,
+        "when": "You want out of impermanent loss and out of the venue, but you do NOT have a directional view. Cheapest possible exit.",
+        "gives_up": "Fees. Keeps a neutral, half-and-half exposure.",
+        "risk": "Lowest-cost and lowest-slippage exit of the three: no swap at all, so nothing leaks to the router, MEV, or price impact.",
+        "why_it_matters": "This is the honest default when you have no view. A swap into a single token IS a directional bet, and should be a deliberate choice, not an accident of the exit path."
+      },
+      "HOLD_TOKEN": {
+        "label": "Exit the pool, consolidate into the TOKEN (directional)",
+        "terminal_asset": "the volatile leg (e.g. WAVAX)",
+        "swaps": "stable leg -> token leg",
+        "remit": false,
+        "when": "You want to stop earning fees but you are still bullish the asset. This is Jordan's 'holding the token'.",
+        "gives_up": "Fees AND the stable half of the position.",
+        "risk": "Full directional exposure. If the asset falls 50%, so does this. It is a DIFFERENT strategy from an LP, not a softer version of one.",
+        "discipline": "Because this converts a fee position into a directional bet, it must be logged as a MODE CHANGE (YIELD_FARM -> HOLD), with the trigger and the thesis recorded. An LP that quietly becomes a holder stops paying for waiting."
+      }
+    },
+    "invariants": [
+      "The exit SEQUENCE is identical in every mode up to and including COLLECT. Modes differ ONLY in the terminal step.",
+      "HARVEST still happens before withdrawal in every mode - unclaimed emissions are lost capital regardless of where the principal goes.",
+      "HOLD modes SKIP the swap and remit steps entirely. Skipping a swap is not skipping verification.",
+      "The DRAIN REMNANTS step still runs in every mode - a remnant holds dust in ALL three cases.",
+      "VERIFY runs in every mode, against the mode's terminal asset.",
+      "A mode is a DECISION, not a default. The executor must refuse to run without an explicit exit_mode."
+    ]
+  },
+  "rails": {
+    "blackhole_cl": {
+      "status": "ACTIVE",
+      "script": "gta_full_exit.py",
+      "chain": "avalanche",
+      "staked_path": true,
+      "unstaked_path": true,
+      "unstaked_note": "Jordan (Sep 15 2026): 'the problem with Blackhole is we were in the pool AND staked for farming BLACK, and then when we try to exit it becomes a process to have everything come out together. I mainly cared about where I was earning the most FEES.' The unstaked path drops steps 1-3 entirely: no harvest, no BLACK approve/sell, no gauge.withdraw. Exit = decreaseLiquidity -> collect -> swap -> send. Fewer steps, fewer failure modes. You give up the emissions half (~120%) and keep the FEE core (~118%).",
+      "positions": {
+        "main": 3479882,
+        "remnant": 3476545
+      },
+      "contracts": {
+        "nfpm": "0x3fED017EC0f5517Cdf2E8a9a4156c64d74252146",
+        "router": "0xe946A9f39312E2346BA79DAb865B0e9A74f2F981",
+        "farming_center": "0xa47Ad2C95FaE476a73b85A355A5855aDb4b3A449",
+        "eternal_farming": "0x01A8A00A6fC8106B94f84aAbAef689Fd0D77271A",
+        "gauge_manager": "0x59aa177312Ff6Bdf39C8Af6F46dAe217bf76CBf6",
+        "pool": "0x41100c6d2c6920b10d12cd8d59c8a9aa2ef56fc7",
+        "black_wavax_pool": "0x14e4A5beD2e5E688EE1A5Ca3a4914250D1aBD573"
+      },
+      "steps": [
+        "1. harvest: farming_center.multicall([collectRewards(key,tid), claimReward(BLACK,wallet,0)])",
+        "2. sell BLACK -> WAVAX via black_wavax_pool (concentrated=FALSE - it is a solidly pool, NOT Algebra)",
+        "3. gauge.withdraw(tid) - unstake (SIMULATE first; a stale tokenId burned gas 22x on Sep 10)",
+        "4. nfpm.decreaseLiquidity({tid, liquidity, 0, 0, deadline}) - full removal",
+        "5. nfpm.collect({tid, wallet, MAX, MAX}) - ALWAYS, even at liq=0 (fees may be owed)",
+        "6. repeat 4-5 for the remnant tokenId",
+        "7. swap WAVAX -> USDC via the Algebra pool (concentrated=TRUE)",
+        "8. usdc.transfer(DEST, all)"
+      ],
+      "unstaked_steps": [
+        "1. nfpm.decreaseLiquidity({tid, liquidity, 0, 0, deadline}) - full removal",
+        "2. nfpm.collect({tid, wallet, MAX, MAX}) - always, even at liq=0",
+        "3. swap WAVAX -> USDC via the Algebra pool (concentrated=TRUE)",
+        "4. usdc.transfer(DEST, all)",
+        "NO harvest, NO BLACK approve/sell, NO gauge.withdraw - never staked"
+      ],
+      "pitfalls": [
+        "Algebra vs solidly: concentrated flag MUST differ per pool or the router takes the wrong path ('Zero liquidity swap')",
+        "gauge.withdraw reverts on a stale tokenId - simulate before sending",
+        "collect() must run even when liquidity is 0 (fees stay owed otherwise)",
+        "The Sep 10 quarantine (gauge 0x3ade52) was a STALE-TOKENID bug, not a broken gauge - the exit path still works"
+      ]
+    },
+    "lfj": {
+      "status": "ACTIVE",
+      "chain": "avalanche",
+      "venue_retired": false,
+      "script": "lfj_exit.py",
+      "note": "RE-ENTERED 2026-09-20 (was RETIRED/exit-only). Jordan directed the AVAX/USDC position into the V2 Liquidity Book venue because SHAPES are a Liquidity Book feature. This file previously said 'We hold no LFJ position' while a live position existed -- a stale-config trap where the exit planner reported PARKED/venue_retired for a rail we were actually in. Position: bid-ask, deltas -60..-5, single-sided USDC bid, tx 0x23fa8e14..., 69.870077 USDC. EXIT EXECUTOR WAS script=None AND HAS BEEN SET TO lfj_exit.py -- see the build note; until that script exists this rail has a PLAN but no verified executor.",
+      "pitfalls": [
+        "Sep 10 2026 incident: the add swapped composition one-sided and a re-center left EVERY bin out of range - the position looked funded but earned nothing",
+        "'no bins' withdraw refused = 0 real capital in the pool (not an error) - read find_lfj_bins.py output first",
+        "LFJ router 0x18556... is FLAT for our purposes; do not route through it",
+        "Two-sided deposits revert BinHelper__CompositionFactorFlawed; use SINGLE-SIDED entry (amountX=0, all-negative deltaIds, idSlippage>0 live)."
+      ],
+      "last_updated": "2026-09-20"
+    },
+    "meteora_solana": {
+      "status": "PENDING",
+      "chain": "solana",
+      "script": "gta_solana_leg.py",
+      "note": "NOT YET ENTERED - no position exists, so no exit is needed yet. Recorded now so the first Solana deploy ships WITH its exit. Meteora DLMM is BIN-based: exit = claim fees + remove liquidity by bin range + close position. Meteora pools are FEES-ONLY (has_farm=false) so there is no emissions step - simpler exit than Blackhole.",
+      "steps": [
+        "1. claim swap fees from the position",
+        "2. removeLiquidity (DLMM SDK: closePosition / removeLiquidityByRange)",
+        "3. swap remaining tokens -> USDC via Jupiter",
+        "4. transfer USDC to the destination",
+        "5. verify balances on-chain"
+      ],
+      "pitfalls": [
+        "Solana needs SOL for gas - an unfunded wallet cannot exit (check before entering)",
+        "Slippage on Jupiter quotes must be bounded and the route proven before signing"
+      ]
+    },
+    "arc_cctp": {
+      "chain": "arc",
+      "chain_id": 5042,
+      "status": "WATCH_NOT_YIELD",
+      "rpc": "https://rpc.mainnet.arc.io",
+      "rpc_requires_user_agent": true,
+      "rpc_note": "A bare request (no User-Agent) returns HTTP 403 / Cloudflare 'error code: 1010'. Always send a UA. Use scripts/arc_rail.py.",
+      "gas_token": "USDC (native, 18 decimals) \u2014 NOT the 6-dec ERC-20",
+      "gas_floor_usdc": 0.05,
+      "stablecoin": {
+        "symbol": "USDC",
+        "address": "0x3600000000000000000000000000000000000000",
+        "decimals": 6
+      },
+      "cctp_domain": 26,
+      "cctp_token_messenger_v2": "0x28b5a0e9C621a5BadaA536219b3a228C8168cf5d",
+      "funding_path": "CCTP domain 26 \u2014 burn USDC on Avalanche, mint on Arc. No traditional bridge.",
+      "exit_steps": [
+        "1. decreaseLiquidity (if in a position)",
+        "2. collect",
+        "3. swap -> USDC on Arc",
+        "4. CCTP burn on Arc (domain 26) -> mint on destination chain"
+      ],
+      "verified_2026_09_16": {
+        "chain_id": 5042,
+        "block": 21155109,
+        "usdc_decimals": 6,
+        "cctp_bytecode_bytes": 2176
+      },
+      "why_not_active": "Day-one yield is ZERO: Aave V4 USDC supply APY 0.00% (Main spoke cap full), Morpho Blue Arc USDC 0.00% ($148.0M supplied vs $9.79 borrowed), Aerodrome Slipstream Arc $300.8K TVL. Live rail, not a yield home.",
+      "deploy_triggers": [
+        "Arc USDC supply APY >= 4.0% sustained",
+        "Aerodrome Slipstream Arc USDC side >= $5M",
+        "treasury reserve >= $200"
+      ],
+      "re_review": "2026-10-16"
+    }
+  },
+  "arc_cctp": {
+    "funding_path": "CCTP domain 26 from Avalanche, USING THE FORWARDING SERVICE so the destination needs no gas: include the forward-request hook data (magic bytes cctp-forward) in depositForBurnWithHook on Avalanche; Circle signs the attestation and broadcasts the mint on Arc from its own keys. Verified 2026-09-18: Iris answers for sourceDomain 1 -> destinationDomain 26 (GET iris-api.circle.com/v2/burn/USDC/fees/1/26 -> 200, minimumFee 0 for both fast(1000) and standard(2000) finality), and CCTP v2 contracts return bytecode on Avalanche. CORRECTION: the earlier note that this path 'needs >=0.05 USDC gas before it can write' assumed we submit the destination mint ourselves. With forwarding we do not, so a zero-balance Arc wallet CAN be funded by CCTP.",
+    "forwarding_service": "https://developers.circle.com/cctp/concepts/forwarding-service \u2014 Circle broadcasts the destination mint; destination chain needs no native gas and no signing.",
+    "gas_floor_usdc_note": "gas_floor 0.05 only applies to transactions WE submit on Arc; irrelevant for an inbound forwarded mint."
+  }
+}

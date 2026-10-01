@@ -1,0 +1,112 @@
+[
+  {
+    "figure": "348",
+    "superseded_by": "~42-45 opencode-go + ~81-86 clawrouter EVENTS (by unique timestamp)",
+    "reason": "line count across two log destinations; the same event is written to agent.log AND errors.log",
+    "only_files_matching": "gentech-treasury-to-entertainment/2026-09-28"
+  },
+  {
+    "figure": "545",
+    "superseded_by": "the deduped EVENT bracket (floor ~325 / ceiling ~1436 fleet)",
+    "reason": "fleet total built from line counts across two destinations",
+    "only_files_matching": "gentech-treasury-to-entertainment/2026-09-28"
+  },
+  {
+    "figure": "1.22x",
+    "superseded_by": "0.95x-0.98x per-class (the pooled figure is a MIXED UNIVERSE)",
+    "reason": "all-classes seconds divided by one class's refs; the denominator never covered the numerator",
+    "only_files_matching": "gentech-treasury-to-entertainment/2026-09-28"
+  },
+  {
+    "figure": "548",
+    "superseded_by": "the deduped per-class event counts",
+    "reason": "ref-less figure that double-counted lines across destinations",
+    "only_files_matching": "gentech-treasury-to-entertainment/2026-09-28"
+  },
+  {
+    "figure": "503",
+    "superseded_by": "343 (the tool's 4-class patterns + RateLimitError)",
+    "reason": "treasury 'real' bucket was 160 lines wider than any check I can name; never re-derivable. Both partitions summed to the same 1110.",
+    "only_files_matching": "entertainment-to-gentech/2026-09-28"
+  },
+  {
+    "figure": "1.22x",
+    "superseded_by": "0.95x per-class (the pooled figure is a MIXED UNIVERSE)",
+    "reason": "all-classes seconds over one class's truth \u2014 the denominator never covered the numerator",
+    "only_files_matching": "entertainment-to-treasury/2026-09-28"
+  },
+  {
+    "figure": "2.13x",
+    "superseded_by": "0.95x (true seconds, not milliseconds)",
+    "reason": "the field NAMED 'seconds' was a MILLISECOND count \u2014 a 23-char timestamp truncation keeps the ,mmm",
+    "only_files_matching": "entertainment-to-treasury/2026-09-28"
+  },
+  {
+    "figure": "437",
+    "superseded_by": "194 (true distinct seconds)",
+    "reason": "distinct-MILLISECOND count published as 'distinct seconds'",
+    "only_files_matching": "entertainment-to-treasury/2026-09-28"
+  },
+  {
+    "figure": "6,455",
+    "superseded_by": "1,032 of 6,479 commits carry author=gentech (16%)",
+    "reason": "a 60-commit window stated over all of history; 17 distinct author values exist",
+    "only_files_matching": "entertainment-to-gentech/2026-09-28"
+  },
+  {
+    "figure": "670",
+    "superseded_by": "167.4 MB git payload (ls-tree -r -l HEAD and a worktree walk, agreeing within 0.1 MB)",
+    "reason": "charged four checkouts to a sync budget; also a du -k (block-rounded) number, not payload",
+    "only_files_matching": "entertainment-to-gentech/2026-09-28"
+  },
+  {
+    "figure": "5 MiB",
+    "superseded_by": "a CONSERVATIVE PRE-FILTER \u2014 the real value is perFileMax = 199 MiB, SET BY THE SERVER at login",
+    "reason": "published as 'Obsidian Sync's hard per-file limit'; measured at source, 5242880 has ZERO standalone occurrences and is a SUBSTRING of 52428800 (50 MiB, the PUBLISH path). Also: the skip is LOGGED per path via logSkip, not silent.",
+    "only_files_matching": null,
+    "also_scan_code": true,
+    "code_only_files_matching": "scripts/",
+    "code_forms": [
+      "5 * 1024 * 1024",
+      "5*1024*1024"
+    ],
+    "aliases": [
+      "5 MB",
+      "5MB",
+      "5242880",
+      "5*1024*1024"
+    ],
+    "assertion_cues": [
+      "per-file",
+      "per file",
+      "sync cap",
+      "hard 5",
+      "per-file sync cap"
+    ]
+  },
+  {
+    "phrase": "Obsidian Sync\u2019s hard per-file limit",
+    "superseded_by": "perFileMax = 199 MiB, SERVER-SET at login; 52428800 (50 MiB) is the PUBLISH path",
+    "reason": "the ASSERTION is withdrawn \u2014 the cap is a pre-filter, and the skip is LOGGED (logSkip), not silent"
+  },
+  {
+    "phrase": "Obsidian Sync's hard per-file limit",
+    "superseded_by": "perFileMax = 199 MiB, SERVER-SET at login; 52428800 (50 MiB) is the PUBLISH path",
+    "reason": "the ASSERTION is withdrawn \u2014 the cap is a pre-filter, and the skip is LOGGED (logSkip), not silent"
+  },
+  {
+    "phrase": "hard per-file limit",
+    "superseded_by": "perFileMax = 199 MiB, SERVER-SET at login; 52428800 (50 MiB) is the PUBLISH path",
+    "reason": "the ASSERTION is withdrawn \u2014 the cap is a pre-filter, and the skip is LOGGED (logSkip), not silent"
+  },
+  {
+    "phrase": "silently never uploaded",
+    "superseded_by": "perFileMax = 199 MiB, SERVER-SET at login; 52428800 (50 MiB) is the PUBLISH path",
+    "reason": "the ASSERTION is withdrawn \u2014 the cap is a pre-filter, and the skip is LOGGED (logSkip), not silent"
+  },
+  {
+    "phrase": "silently never sync",
+    "superseded_by": "perFileMax = 199 MiB, SERVER-SET at login; 52428800 (50 MiB) is the PUBLISH path",
+    "reason": "the ASSERTION is withdrawn \u2014 the cap is a pre-filter, and the skip is LOGGED (logSkip), not silent"
+  }
+]

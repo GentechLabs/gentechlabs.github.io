@@ -1,0 +1,197 @@
+{
+  "version": 2,
+  "note": "Approved capital destinations, venue-linked. Anything not listed -> REFUSED. Venue-level support is checked via venue-compat.py; a venue listed here as non-ACTIVE is refused for ENTRY even if its address is present. kind=exchange_deposit_transient marks a rotating exchange deposit address: approved for THIS exit only, and each new address needs a fresh orchestrator approval.",
+  "rails": [
+    {
+      "chain": "avalanche",
+      "address": "0x41100c6d2c6920b10d12cd8d59c8a9aa2ef56fc7",
+      "name": "Blackhole WAVAX/USDC CL pool",
+      "venue": "blackhole_cl",
+      "status": "ACTIVE"
+    },
+    {
+      "chain": "avalanche",
+      "address": "0x3fed017ec0f5517cdf2e8a9a4156c64d74252146",
+      "name": "Blackhole NFPM (position manager)",
+      "venue": "blackhole_cl",
+      "status": "ACTIVE"
+    },
+    {
+      "chain": "base",
+      "address": "0x7ebff188f2eba16518c02864589b1403a5d1296a",
+      "name": "x402 gateway payTo (Base)",
+      "venue": null,
+      "status": "ACTIVE"
+    },
+    {
+      "chain": "avalanche",
+      "address": "0x864d4e5ee7318e97483db7eb0912e09f161516ea",
+      "name": "LFJ LB pair (WAVAX/USDC)",
+      "venue": "lfj",
+      "status": "ACTIVE",
+      "reason": "Park lifted 2026-09-20 — Jordan directed the AVAX/USDC position into the V2 (Liquidity Book) venue because SHAPES are a Liquidity Book feature; Black Hole CL has ranges, not shapes. The Sep 10 composition incident is recorded in incident_history and was reproduced tonight as BinHelper__CompositionFactorFlawed on two-sided deposits. RESOLVED BY SHAPE: single-sided deposits have no composition to compute, so the failure path is bypassed. Deploy via lfj_bid_deploy.py.",
+      "incident_history": "Exited. Sep 10 incident: the add swapped composition one-sided and a re-center left every bin out of range. Re-enable only on a deliberate decision.",
+      "incident_date": "2026-09-10",
+      "live_position": {
+        "opened": "2026-09-20",
+        "tx": "0x23fa8e1423fb9fa983c955571e9958cddab052a7695aa708ae6ca0c0fdc53d8d",
+        "block": 95757699,
+        "pair": "0x864d4e5ee7318e97483db7eb0912e09f161516ea",
+        "shape": "bid-ask",
+        "bins": "deltas -60..-5 (56 bins)",
+        "range_usd": "10.1927 - 10.7687",
+        "side": "SINGLE-SIDED USDC bid (amountX=0)",
+        "capital_usdc": 69.870077,
+        "verified": "receipt logs (2 pool Mint events) + 2nd RPC + pool.balanceOf across 54 bins"
+      }
+    },
+    {
+      "chain": "avalanche",
+      "address": "0x18556da13313f3532c54711497a8fedac273220e",
+      "name": "LFJ router",
+      "venue": "lfj",
+      "status": "ACTIVE",
+      "reason": "Park lifted 2026-09-20 — Jordan directed the AVAX/USDC position into the V2 (Liquidity Book) venue because SHAPES are a Liquidity Book feature; Black Hole CL has ranges, not shapes. The Sep 10 composition incident is recorded in incident_history and was reproduced tonight as BinHelper__CompositionFactorFlawed on two-sided deposits. RESOLVED BY SHAPE: single-sided deposits have no composition to compute, so the failure path is bypassed. Deploy via lfj_bid_deploy.py.",
+      "incident_history": "Same rail as the parked LFJ pair. No routing into LFJ while parked.",
+      "incident_date": "2026-09-10",
+      "live_position": {
+        "opened": "2026-09-20",
+        "tx": "0x23fa8e1423fb9fa983c955571e9958cddab052a7695aa708ae6ca0c0fdc53d8d",
+        "block": 95757699,
+        "pair": "0x864d4e5ee7318e97483db7eb0912e09f161516ea",
+        "shape": "bid-ask",
+        "bins": "deltas -60..-5 (56 bins)",
+        "range_usd": "10.1927 - 10.7687",
+        "side": "SINGLE-SIDED USDC bid (amountX=0)",
+        "capital_usdc": 69.870077,
+        "verified": "receipt logs (2 pool Mint events) + 2nd RPC + pool.balanceOf across 54 bins"
+      }
+    },
+    {
+      "chain": "avalanche",
+      "address": "0x3ade52f9779c07471f4b6d5997444c3c2124c1c0",
+      "name": "Blackhole gauge",
+      "venue": "blackhole_cl",
+      "status": "QUARANTINED",
+      "reason": "22 failed withdraw(uint256) calls on Sep 10 (re-center path in blackhole_cl_adapter.py) burned gas on every retry. Quarantined until the call path is fixed and re-verified."
+    },
+    {
+      "chain": "avalanche",
+      "address": "0xeEe3fe6C5604C1069a50690043DE57848826e6C9",
+      "name": "Jordan Coinbase deposit (AVAX-USDC)",
+      "venue": null,
+      "status": "ACTIVE",
+      "kind": "exchange_deposit_transient",
+      "authorized_by": "Jordan (orchestrator), 2026-09-15",
+      "authorization": "Jordan, Sep 15 2026: 'what I sent you is approved' — approved the orchestrator-authorized treasury exit to this address, USDC on Avalanche. Also the same address that received our Aug 11 sweep (~43.72 USDC).",
+      "note": "Coinbase rotates deposit addresses — this is a TRANSIENT receive address, not a durable rail. Each new address needs a fresh orchestrator approval; do not generalize this entry to other Coinbase addresses."
+    },
+    {
+      "chain": "avalanche",
+      "address": "0x3d117Bf42218c3244AA0Ad011E8651A615230eCb",
+      "name": "Jordan (personal)",
+      "wallet_name": "jordan",
+      "venue": null,
+      "status": "ACTIVE",
+      "kind": "personal_durable",
+      "authorized_by": "Jordan, 2026-09-15",
+      "authorization": "Jordan, Sep 15 2026: 'for wallets that we're going to save permanently like my personal wallet, give those a name.' Named durable destination.",
+      "note": "Durable personal wallet. Refer to it as `--to jordan`. Long-term remit target."
+    },
+    {
+      "chain": "arc",
+      "address": "0x3600000000000000000000000000000000000000",
+      "name": "Arc USDC (ERC-20, 6-dec)",
+      "venue": "arc_cctp",
+      "status": "WATCH",
+      "note": "Registered so no script treats Arc as an unknown chain. status=WATCH means NOT approved for ENTRY — day-one yield is 0.00%. Do not route capital here until a deploy trigger fires. See exit-rails.json arc_cctp."
+    },
+    {
+      "venue": "hyperliquid",
+      "name": "Hyperliquid perps (crypto) — ARMED",
+      "status": "ACTIVE",
+      "status_note": "ARMED by Jordan 2026-09-21. Permission granted. Opening a position is a SEPARATE act and has NOT occurred. Limits live in risk-envelope.json and may be tightened by the agent, never loosened.",
+      "asset_classes": [
+        "crypto perps"
+      ],
+      "directions": [
+        "long",
+        "short"
+      ],
+      "verified": {
+        "checked": "2026-09-21",
+        "depth": "AVAX $43.2M OI / $90.7M 24h; BTC $3.60B OI / $3.21B 24h",
+        "funding": "AVAX +0.261%/day; BTC +0.030%/day"
+      },
+      "limits_source": "risk-envelope.json",
+      "not_covered": "metals, tokenized equities, FX — TradeSta (deceased) was our only route to these and NOTHING has replaced it",
+      "sdk_ready": "hyperliquid_trailing_perp, gmx_perp_lifecycle, gmx_v2_directional_perp already exist in the Almanak SDK",
+      "armed_at": "2026-09-21T12:56:21+00:00"
+    },
+    {
+      "chain": "avalanche",
+      "address": "0xeb7e0191f4054868d97f33ca7a4176b226ccbd2f",
+      "name": "LINK.e/WAVAX pool (Uniswap, Avalanche)",
+      "venue": "uniswap",
+      "status": "ACTIVE",
+      "authorized_by": "Jordan (orchestrator), 2026-09-24",
+      "authorization": "*** Sep 24 2026: 'we can add the other venues, besides LFJ and Black Hole, that's fine because I trust Uniswap, Pangolin, that's another Avax, good one, so that's fine.'",
+      "note": "Approved for LINK.e acquisition on Avalanche. Verified on chain: contract holds 22142 bytes of code at approval time; deepest LINK.e pair on this venue had $89,576 of liquidity. Used for USDC->LINK.e (two hops via WAVAX) and the reverse on exit. Canonical LINK is the Ethereum ERC-20; LINK.e is the Avalanche representation and is VALUED at canonical LINK.",
+      "verified": "on-chain code check + live DEX liquidity, 2026-09-24"
+    },
+    {
+      "chain": "avalanche",
+      "address": "0x6f3a0c89f611ef5dc9d96650324ac633d02265d3",
+      "name": "LINK.e/WAVAX pool (TraderJoe LB, Avalanche)",
+      "venue": "traderjoe",
+      "status": "ACTIVE",
+      "authorized_by": "Jordan (orchestrator), 2026-09-24",
+      "authorization": "*** Sep 24 2026: 'we can add the other venues, besides LFJ and Black Hole, that's fine because I trust Uniswap, Pangolin, that's another Avax, good one, so that's fine.'",
+      "note": "Approved for LINK.e acquisition on Avalanche. Verified on chain: contract holds 8945 bytes of code at approval time; deepest LINK.e pair on this venue had $62,513 of liquidity. Used for USDC->LINK.e (two hops via WAVAX) and the reverse on exit. Canonical LINK is the Ethereum ERC-20; LINK.e is the Avalanche representation and is VALUED at canonical LINK.",
+      "verified": "on-chain code check + live DEX liquidity, 2026-09-24"
+    },
+    {
+      "chain": "avalanche",
+      "address": "0x5875c368cddd5fb9bf2f410666ca5aad236dabd4",
+      "name": "LINK.e/WAVAX pool (Pangolin, Avalanche)",
+      "venue": "pangolin",
+      "status": "ACTIVE",
+      "authorized_by": "Jordan (orchestrator), 2026-09-24",
+      "authorization": "*** Sep 24 2026: 'we can add the other venues, besides LFJ and Black Hole, that's fine because I trust Uniswap, Pangolin, that's another Avax, good one, so that's fine.'",
+      "note": "Approved for LINK.e acquisition on Avalanche. Verified on chain: contract holds 14946 bytes of code at approval time; deepest LINK.e pair on this venue had $42,041 of liquidity. Used for USDC->LINK.e (two hops via WAVAX) and the reverse on exit. Canonical LINK is the Ethereum ERC-20; LINK.e is the Avalanche representation and is VALUED at canonical LINK.",
+      "verified": "on-chain code check + live DEX liquidity, 2026-09-24"
+    },
+    {
+      "chain": "avalanche",
+      "address": "0x6c69F8FD6C23A5b6b3ccbCB0d638AA6D527812Fe",
+      "name": "Dadrian (personal, cousin)",
+      "wallet_name": "dadrian",
+      "venue": null,
+      "status": "ACTIVE",
+      "kind": "personal_durable",
+      "authorized_by": "Jordan, 2026-09-27",
+      "authorization": "Jordan, 2026-09-27: dadrian's agentic treasury follows the same rules as his and Jordan manages it. His capital must be able to come BACK to him - so his own wallet is a durable approved destination, exactly as Jordan's personal wallet is.",
+      "note": "Durable personal wallet, READ FROM tenants.json (never retyped). Refer to it as `--to dadrian`. Without this there is no approved route to return a collaborator's own capital: the guard would refuse the destination itself, so his money could be stranded."
+    }
+  ],
+  "last_updated": "2026-09-24",
+  "policy": {
+    "rule": "Anything not listed -> REFUSED",
+    "why_it_was_missing": "The rails were listed; the rule governing them was never written down. An implied rule is re-derived differently every time it is read.",
+    "scope": "This guard constrains THE AGENT's destination choices when moving value. It is NOT a defence against key compromise — an attacker holding the key signs directly and never calls this code. Against key theft the only defences are a small hot balance, file permissions, and nobody reading the file.",
+    "enforcement": "Any action naming a destination absent from 'rails' below is refused. Unknown is a refusal, never a permissive default.",
+    "statuses": {
+      "ACTIVE": "may be used",
+      "WATCH": "may be used, but flag it in the report",
+      "QUARANTINED": "REFUSED until explicitly un-quarantined by Jordan",
+      "APPROVED_NOT_ARMED": "REFUSED until Jordan arms it. Approved is not armed."
+    },
+    "unlisted_destination": "REFUSED",
+    "hard_rules": [
+      "No perps: not listed, therefore refused",
+      "No new venue without a rail entry and an explicit decision",
+      "A rail approved for one TENANT is not approved for another (see tenants.json) - approve per tenant, never globally",
+      "The destination must be named, not pasted as a raw address at action time"
+    ]
+  }
+}

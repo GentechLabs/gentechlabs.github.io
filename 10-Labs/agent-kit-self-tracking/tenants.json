@@ -1,0 +1,203 @@
+{
+  "version": 1,
+  "note": "TENANT REGISTRY \u2014 collaborators running their own treasury alongside Jordan's (Jordan, 2026-09-20: 'finish building this out for other collaborators'). One machine can host several treasuries; each tenant gets its own profile, wallet, config and rails. Jordan's own treasury is tenant 'jordan' and is the reference implementation.",
+  "hard_rule": "A tenant's capital may NEVER touch another tenant's. Isolation is enforced by wallet identity, not by convention: steward_identity.py raises IdentityMismatch when the signer does not match the tenant's configured wallet, and every write path asserts the tenant first. A boundary enforced by discipline drifts; a boundary enforced by a hard stop does not.",
+  "custody_policy": {
+    "status": "REVISED 2026-09-22 (Jordan) - supersedes the self-custody-only rule below",
+    "jordan_verbatim": "most of our collaborators don't know... getting the private key is kind of difficult to do and they're going to run into the same issue I did. So I think it's okay if you create the wallet and the key pair for them, but just, you know, of course, keep it separate.",
+    "now": "The agent MAY generate a wallet and key pair for a collaborator. Keys are stored per-tenant, AES-256 encrypted, under /root/.blockrun/tenants/<tenant>/, each with that tenant's OWN passphrase file (mode 600, dir mode 700). Tool: provision_tenant_wallet.py.",
+    "why_the_old_rule_changed": "It assumed a collaborator who could safely self-custody. A rule only the technically capable can satisfy does not protect anyone - it just excludes people. Jordan's cousin hit exactly that wall.",
+    "the_risk_moved, it did not vanish": "While we hold a collaborator's key, the TENANT BOUNDARY is what keeps their capital and Jordan's apart - not custody. That boundary is real and tested (tenant_guard.assert_tenant + steward_identity.assert_tenant_boundary), but it is now load-bearing in a way it was not before. It must NEVER be described as equivalent to the collaborator holding their own key.",
+    "still_refused": [
+      "Accepting a key FROM a collaborator - we generate and hold, or they hold. Never a third party's key passed to us.",
+      "Overwriting an existing tenant key. A silent overwrite is how a funded wallet is lost.",
+      "Registering a wallet for a tenant that is not in this registry - an unbound wallet is the failure this file exists to prevent.",
+      "Activating the tenant at the same time as provisioning. A registered wallet is not a licensed one; Jordan flips PROPOSED -> ACTIVE deliberately."
+    ]
+  },
+  "isolation_model": {
+    "profile": "one Hermes profile per tenant, e.g. gentech-treasury-<tenant>",
+    "wallet": "STEWARD_WALLET env, highest precedence in steward_identity resolution",
+    "config": "treasury_config.json inside the tenant's own scripts dir",
+    "state": "state files (fee snapshots, streaks, breakout state) live in the tenant's own scripts dir",
+    "rails": "capital-guard-rails.json per tenant \u2014 a rail approved for one tenant is NOT approved for another",
+    "cron": "jobs created in the tenant's profile; they inherit that profile's wallet resolution"
+  },
+  "onboarding_requirements": [
+    "SUPERSEDED 2026-09-22 - see custody_policy above. Previously: 'The tenant creates and holds their OWN wallet keys. We never generate a key for a third party and never accept one.' The agent may now generate and hold a collaborator's key, kept separate per tenant. What is STILL refused: accepting a key FROM a collaborator, overwriting an existing key, and registering a wallet for an unregistered tenant.",
+    "A funded gas float on the tenant's chain (Avalanche: ~0.05 AVAX is days of rebalancing at ~$0.003/tx)",
+    "An explicit capital ceiling the tenant is willing to lose entirely",
+    "The tenant's own capital-guard-rails.json, starting from the reference but reviewed line by line"
+  ],
+  "wallets_json_boundary": "wallets.json is the human-facing NAMED DESTINATION registry (where money may be SENT). This file is the TENANT registry (whose treasury it IS). A name in wallets.json does not authorise a transfer; see capital-guard-rails.json for enforcement. Do not merge the two - one is a destination list, the other is an ownership boundary.",
+  "tenants": {
+    "jordan": {
+      "label": "Jordan (Vanito) \u2014 primary operator",
+      "status": "ACTIVE",
+      "role": "reference implementation",
+      "wallet": "0x572ABd6461BED2258615E6b99c585Ab7c5d05037",
+      "chain": "avalanche",
+      "profile": "gentech-treasury",
+      "since": "2026-08-11",
+      "notes": "The live treasury. ~$113 book as of 2026-09-20, LFJ Liquidity Book, autonomous re-center loop with tamper-bounded curve ratio.",
+      "shape": "curve",
+      "shape_source": "chain geometry (hub self-heal)",
+      "shape_note": "record corrected 2026-09-23: chain geometry showed a gap at spot = bid-ask, while this record said 'curve'. Shape is now derived from on-chain bins wherever it is read; this field is a fallback.",
+      "primary": true,
+      "capital_ceiling_usd": null,
+      "capital_ceiling_note": "Jordan's own treasury is the reference implementation and is not capped by a collaborator limit; his ceiling is his total allocation, set by him directly.",
+      "gas": {
+        "floor_usd": null,
+        "floor_cycles": null,
+        "_note": "None = use the module default ($0.10 / 1 cycle). Set a number to give this tenant a standing floor of their own."
+      },
+      "capital_ceiling_superseded": "2026-09-27 \u2014 Jordan REMOVED the ceiling: 'we don't need any gates for how much money can be in the Agentic Treasury... rules like that are stoppers, take them out.' Kept as a null field ONLY so the removal is on the record; nothing reads it. Detection/reporting of deposits continues, unjudged."
+    },
+    "dadrian": {
+      "label": "Dadrian \u2014 collaborator (Jordan's cousin)",
+      "status": "ACTIVE",
+      "role": "first external collaborator",
+      "wallet": "0x6c69F8FD6C23A5b6b3ccbCB0d638AA6D527812Fe",
+      "chain": "avalanche",
+      "profile": "gentech-treasury-dadrian",
+      "since": "2026-09-22",
+      "notes": "Jordan raised 2026-09-20. ACTIVE 2026-09-22. Wallet generated by the agent under Jordan's 2026-09-22 custody reversal ('it's okay if you create the wallet and the key pair for them, but just keep it separate') - key AES-256 at /root/.blockrun/tenants/dadrian/, its own passphrase, separate from the live treasury. Funding: 30 USDC (NATIVE 0xB97E...) + ~$1 AVAX, per Jordan 2026-09-22. Level L2_BOUNDED, ceiling $50. First deploy is human-instructed.",
+      "guardrails": [
+        "Start with a capital ceiling he is willing to lose entirely",
+        "Separate capital-guard-rails.json - reviewed line by line, not copied",
+        "No shared rails, no shared wallet, no shared state files"
+      ],
+      "stated_interest": "COQ (Jordan, 2026-09-20: 'he's also going to want to get it in on COQ and stuff')",
+      "watchlist": [
+        "COQ"
+      ],
+      "thesis": "(his own words, not yet captured - do not invent one for him)",
+      "activated": {
+        "by": "jordan",
+        "when": "2026-09-22",
+        "via": "telegram, Gentech Treasury group",
+        "verbatim": "he would prefer me to manage his wallet and stuff like that... Yes, he needs to be able to send and receive. For now, we'll manage his wallet.",
+        "note": "Promotion is human. This records Jordan's dated decision; it is not the agent raising its own privilege."
+      },
+      "funding": {
+        "reported_by_jordan": "2026-09-22",
+        "incoming": "30 USDC + ~$1 AVAX",
+        "usdc_contract_must_be": "0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E (NATIVE Avalanche USDC)",
+        "do_not_send": "0xA7D7079b0FEaD91F3e65f86E8915Cb59c1a4C664 (bridged USDC.e) - different contract, not usable in our flow"
+      },
+      "key_custody": "agent-held (Jordan, 2026-09-22). AES-256 at /root/.blockrun/tenants/dadrian/steward.key.enc with a per-tenant passphrase. SEPARATE from the live treasury key.",
+      "shape": "curve",
+      "shape_source": "chain geometry (hub self-heal)",
+      "shape_note": "record corrected 2026-09-23: chain geometry showed a gap at spot = bid-ask, while this record said 'curve'. Shape is now derived from on-chain bins wherever it is read; this field is a fallback.",
+      "primary": false,
+      "rails_policy": {
+        "status": "REVISED 2026-09-26 (Jordan) - supersedes the 'separate rails, reviewed line by line' guardrail",
+        "jordan_verbatim": "his rails or his agentic treasury should follow the same rules mine does. He would prefer I manage it for him ... He just wants to put money in it",
+        "now": "dadrian's treasury follows the SAME rules as jordan's: same approved-destination set, same doctrine, same shape logic. One codebase, one rails list - not a second list nobody reviews.",
+        "why_the_old_rule_changed": "It assumed a collaborator who would review their own rails line by line. Jordan is managing this treasury on his cousin's behalf, so a bespoke list would be maintained by nobody - and an unreviewed list is worse than a shared one that is actually true.",
+        "what_still_keeps_them_apart": "Wallet identity and state, NOT the rule list. Separate wallet, separate state files, separate profile, and the tenant boundary is asserted by steward_identity.assert_tenant_boundary on every write path. A shared rails list does NOT let one tenant's capital touch another's.",
+        "the_new_personal_number": "capital_ceiling_usd - the rules are shared, the CEILING is per-person."
+      },
+      "capital_ceiling_usd": null,
+      "capital_ceiling_note": "PROVISIONAL 2026-09-26 - proposed by the agent, NOT yet confirmed by Jordan or dadrian. Derived from the amount already funded (~$31). Change this one number to set the real limit.",
+      "gas": {
+        "floor_usd": null,
+        "floor_cycles": null,
+        "_note": "None = use the module default ($0.10 / 1 cycle). Set a number to give this tenant a standing floor of their own."
+      },
+      "capital_ceiling_superseded": "2026-09-27 \u2014 Jordan REMOVED the ceiling: 'we don't need any gates for how much money can be in the Agentic Treasury... rules like that are stoppers, take them out.' Kept as a null field ONLY so the removal is on the record; nothing reads it. Detection/reporting of deposits continues, unjudged."
+    },
+    "cuzzle": {
+      "label": "Cuzzle - prospective collaborator",
+      "status": "PROSPECT",
+      "role": "named 2026-09-20, not yet approached",
+      "wallet": null,
+      "chain": "avalanche",
+      "profile": "gentech-treasury-cuzzle",
+      "since": null,
+      "stated_interest": "Jordan to ask what coins Cuzzle specifically follows or has strategies about (Jordan, 2026-09-20)",
+      "watchlist": [],
+      "thesis": "(not captured yet)",
+      "notes": "Jordan will raise this conversation. Nothing is known about Cuzzle's interests yet - the open question is exactly what Jordan said: which coins does he follow, and does he have a strategy or a reason. Do not prefill this.",
+      "primary": false
+    }
+  },
+  "open_items": [
+    "No wallet-CREATION tooling exists in this repo - by design, since tenants hold their own keys. Confirm that is the intended posture before onboarding anyone.",
+    "A second live tenant has never been run. The isolation hooks exist; the end-to-end path does not.",
+    "RESOLVED 2026-09-22 - THE GUARDS ARE NOW WIRED. tenant_guard's three checks were a tested library that NOTHING called, so the boundary was enforced by convention. steward_identity.signer() now asserts the tenant boundary before returning a key (so every signing path inherits it), and lfj_recenter/lfj_exit/steward-send-usdc assert their autonomy class at the execution point. Verified by simulating a second tenant's box: unregistered wallet -> refused; registered but PROPOSED -> refused; ACTIVE -> allowed; acting for another tenant -> refused.",
+    "RESOLVED 2026-09-22 - 23 scripts hardcoded Jordan's wallet address instead of resolving it, so a second tenant running any of them would have read and acted on JORDAN's position while reporting success. The yield-farm path (lfj_recenter, lfj_fee_attribution, steward_heartbeat, steward-send-usdc, lfj-addliquidity-dryrun, lfj-bin-rehearsal, yield-rainbow) now resolves via steward_identity.wallet(). The remaining 16 are non-yield-path; they are listed in the 2026-09-22 handoff.",
+    "STILL OPEN: the tenant boundary is wired at signer() and at three execution points, but not yet at every script that can open a position (lfj_bid_deploy.py, lfj-curve-deploy.sh). A partial boundary is a boundary with a known hole; name the hole rather than claiming completeness.",
+    "Autonomy boundary: what a collaborator's treasury may do WITHOUT asking differs from Jordan's. Jordan reads every action and holds override; a remote collaborator cannot. Autonomy level must be a per-tenant setting, not a global one.",
+    "REPRESENTATION (new, Jordan 2026-09-20): per-tenant watchlists/theses need a data structure and a way to render them side by side, so a collaborator can see their own thesis tracked against the shared market picture. Not built.",
+    "COQ is un-shortable (no perp, no borrow market; GMX ~$1K/24h is too thin). Any COQ conviction - Jordan's or Dadrian's - can only be expressed as HOLD or LP. That bounds the design before anyone asks for a short.",
+    "A corrected COQ fact that matters here: the buy list claimed 'ZERO COQ pools above $50K TVL'. It is wrong - COQ/WAVAX on TraderJoe holds $705,404 liquidity with $323,960 24h volume (measured 2026-09-20). Anything built on the old figure would have been built on a false premise."
+  ],
+  "representation_model": {
+    "principle": "Jordan 2026-09-20: 'we could find a way to have us both represented.' One strategy copied N times is not representation - it is Jordan's book with more wallets. Each tenant brings their OWN coins and reasoning, tracked and acted on separately with their OWN capital.",
+    "why_isolation_matters_even_more_here": "if two tenants hold different theses, a shared position or a shared watchlist is not merely untidy - it is wrong. Jordan's COQ conviction and Dadrian's COQ conviction must be able to differ in size, entry and exit without either silently inheriting the other's settings.",
+    "per_tenant_fields": [
+      "watchlist (coins they follow)",
+      "thesis (why, in their words)",
+      "entry discipline",
+      "sizing ceiling",
+      "coins they explicitly do NOT want"
+    ],
+    "shared_layer": "MARKET DATA is shared (prices, pools, macro, rulemaking - the same facts for everyone, cheaper and more consistent). CAPITAL and POSITIONS are never shared. Facts are a public library; money is private.",
+    "attribution": "every position must be attributable to exactly one tenant. A position that cannot be attributed has no owner to consult and no loss to assign - it is an accounting failure waiting to happen."
+  },
+  "shape_field_note": "PER-TENANT SHAPE. Each tenant declares the liquidity shape currently deployed for them, because 'what shape is this position' is a fact about the position and must live with the tenant, not be inferred from whichever deploy script someone last ran. Consumers MUST treat a missing value as UNKNOWN rather than defaulting \u2014 a defaulted shape makes every downstream efficiency reading describe a position nobody verified.",
+  "yield_farm_defaults": {
+    "status": "STANDING RULE 2026-09-22 (Jordan)",
+    "jordan_verbatim": "in my head, I didn't even think about it that I didn't set rules for [Dadrian's] yield farm. I just kind of left them out there... so by default, our yield farms should follow the rules and guidelines that I've set in the brain because they work extremely well for what we're doing and for what most people want.",
+    "rule": "A tenant with NO rules of their own inherits the house rules from the brain, in full. A tenant is never left on an undefined default -- 'we forgot to set rules for them' must resolve to the reference implementation, not to whatever the code happened to do.",
+    "house_rules": {
+      "shape_default": "curve",
+      "curve_bins": 25,
+      "bidask_bins": 45,
+      "bidask_bins_is_a": "CEILING, not a default",
+      "allowed_splits": [
+        "50/50",
+        "60/40",
+        "70/30"
+      ],
+      "split_principle": "balanced; an unbalanced book drifts out of range",
+      "width_rule_source": "lfj_shapes.py (the ONE geometry table; nothing else may define widths)",
+      "rebalance_stance": "re-centering is cheap, so do it when the signal says to, not on a timer",
+      "fee_efficiency_trigger": "shape-aware (bid-ask = U-shape, curve = bell); act after 10 min sustained",
+      "never": [
+        "bridged token where a native one is expected (native USDC, never USDC.e on Avalanche)",
+        "a live book re-deployed into a new shape without the owner asking",
+        "touching another tenant's pool for any reason"
+      ]
+    },
+    "per_tenant_override": "A tenant MAY bring their own rules, stated in chat in plain language. Those get written to the vault as that tenant's rules. A rule that lives only in a conversation does not exist. Until then, they run the house rules above.",
+    "onboarding": "When a collaborator wants to manage their own yield themselves, the owner trains them in-chat. Until that happens, the operator manages the position under these defaults. Guide for collaborators: 09-Green Room/gentech-edu/how-to-talk-to-the-steward.md"
+  },
+  "design_model": {
+    "status": "RULING 2026-09-24 (Jordan)",
+    "jordan_verbatim": "One thing that I absolutely want to add to the design of the agentic treasury is it should be primarily built for one person with the option to add up to four people. I don't think it has to be any particular thing but something I'm realizing is it gets more difficult when you add the fleet or when you try to add other people. So let's not make it to where it's a standard supposed to work with multiple people. We'll say that it's open. It's mainly for a one person account, but you have the ability to add other users.",
+    "primary_design": "SINGLE PERSON. The system is built for one operator's capital.",
+    "optional_extension": "Up to FOUR total tenants. Adding a tenant is an option, not the premise.",
+    "framing": "OPEN, not multi-tenant-by-default. One-person account with the ABILITY to add users.",
+    "why": "Adding the fleet or extra people caused real complications. Promising multi-user sets an expectation the system does not intend to carry, and the cost lands on us.",
+    "max_tenants": 4,
+    "primary_tenant": "jordan",
+    "tenant_cap_enforced": true,
+    "current_tenant_count": 3,
+    "headroom": 1
+  },
+  "per_tenant_settings_note": "Per-person settings live HERE, in each tenant record - not as module constants. As of 2026-09-27: gas.floor_usd / gas.floor_cycles (their repair reserve; absent = module default $0.10 / 1 cycle), and the deposit baseline files derive from the tenant name. Precedence for gas: env var (one-off run) > this record > module default. There is NO capital ceiling: Jordan removed it 2026-09-27 as a stopper. The registry's own onboarding note once asked for one; his instruction supersedes it.",
+  "stoppers_removed": {
+    "date": "2026-09-27",
+    "by": "jordan",
+    "quote": "we don't need anything blocking anything... we don't need any gates for how much money can be in the Agentic Treasury... Any other rules like that are stoppers. We should just go ahead and take them out. We want to make this as simple and easy as possible.",
+    "removed": [
+      "per-tenant capital ceiling (capital_ceiling_usd) - enforced in capital-guard.check() and steward_progress deposit report"
+    ],
+    "kept_and_why": [
+      "rail/address approval in capital-guard.check() - not an amount gate: it stops payment to an UNKNOWN address or re-entry to a parked venue. Removing it would not simplify, it would send money somewhere unverified.",
+      "address/contract verification - native vs bridged USDC. Removes a way to lose money, gates nothing."
+    ]
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "version": 1,
+  "title": "MUTUAL AID — PEER TREASURIES MAY FUND EACH OTHER'S GAS",
+  "raised_by": "Jordan, 2026-09-27",
+  "the_problem": "An agent that cannot pay its own gas cannot be rescued by anyone, however willing. Measured 2026-09-27: dadrian's wallet sat below its gas floor and NO TOOL EXISTED to send it native AVAX — every transfer script was Base-only or USDC-only. That is not a policy gap; his wallet was already an approved destination. It was a missing primitive.",
+  "jordan_on_controls": {
+    "quote": "there's not really like a cap or anything like that. it's just pretty much sometimes we'll need just a little bit for gas or this or there. So, we don't really need to put like a spending cap or anything on it. It's more about getting the okay from the orchestrator to send.",
+    "decision": "NO SPENDING CAP. The control is the ORCHESTRATOR'S OKAY, not a number.",
+    "why_this_is_not_a_loosening": "A cap would have been a SECOND gate on top of one that already exists and is stricter. `move_capital` is action-class 4; the highest autonomy level (L3_AUTONOMOUS) reaches only 3. NO LEVEL can move capital alone. The okay is already mandatory, already recorded, and already append-only. Adding a cap would have been theatre."
+  },
+  "the_rule": {
+    "summary": "A peer treasury may fund another treasury's gas, with the orchestrator's explicit okay.",
+    "gated_by": "tenant_guard.assert_autonomy('move_capital') — requires a human authorization for EVERY tenant, at every level, including Jordan's",
+    "recorded_in": "human-authorizations.jsonl (append-only; who asked, what for, when)",
+    "no_cap": "There is deliberately no amount ceiling. A peer-funding send is small by nature (gas), and the ceiling that exists is the sender's OWN GAS FLOOR — see below.",
+    "the_two_rails_that_remain": [
+      "DESTINATION: the peer must be an approved named destination in capital-guard-rails.json. Unlisted -> REFUSED. A typo cannot become an irreversible send.",
+      "SELF-PRESERVATION: the send may not spend the sender's own gas floor. Spending your repair reserve to fix someone else leaves YOU unrepairable — the exact failure mutual aid exists to prevent. `--allow-below-floor` overrides loudly, never by default."
+    ]
+  },
+  "per_tenant_doctrine": {
+    "rule": "A rail approved for one TENANT is not approved for another — approve per tenant, never globally.",
+    "mutual_aid_implication": "Each treasury needs its PEER approved as a destination on its own rails. Jordan↔dadrian is approved in BOTH directions today: `jordan` (personal) and `dadrian` (personal, cousin) are both kind=personal_durable, status=ACTIVE, chain=avalanche.",
+    "not_retroactive": "This does NOT auto-approve future peers. A new collaborator needs their own rail entry, by an explicit decision."
+  },
+  "rails": {
+    "implemented": ["avalanche", "base"],
+    "registered_not_implemented": {
+      "solana": "Registered in steward-send-native.py's RAILS table with implemented=false, so it reports NOT IMPLEMENTED rather than pretending. Jordan, 2026-09-27: 'when I start yield farming on Solana, we'll also make sure Dage has one as well.' The gap is a SOLANA SIGNER — Base and Avalanche share the EVM path, Solana does not. One flag flips when a signer exists; nothing else changes."
+    }
+  },
+  "enforcement": "steward-send-native.py. Four rails verified live 2026-09-27: unlisted destination REFUSED; solana reports NOT IMPLEMENTED; --dry-run+--execute contradiction REFUSED; gas floor REFUSED a send that would have left the sender unable to repair itself.",
+  "measured_live": {
+    "what_happened": "A dry run of jordan -> dadrian 0.014 AVAX was REFUSED by the floor rail. Jordan held 0.01530015; his floor is ~0.00915, so the send would have left 0.00116 — below the floor.",
+    "why_it_matters": "Jordan is currently below self-sufficiency himself (a cycle+floor needs ~0.0272; he holds 0.0153). He could not fund dadrian without becoming the one who cannot be repaired. Nothing was sent.",
+    "conclusion": "Both books are healthy and earning, so no transfer is urgent. The rail that refused is the one that should have."
+  },
+  "open_items": [
+    "Jordan's own gas is below self-sufficiency (~0.0119 short of cycle+floor). Not urgent while his book is in range, but it means he cannot currently extend mutual aid to anyone.",
+    "Dadrian's gas is below his floor too (0.004584 vs ~0.00915). His book is in range and earning; he can bootstrap from his own LP in an emergency (exit returns ~0.257 WAVAX + $45.15 and WAVAX unwraps 1:1), but that costs a working position."
+  ]
+}

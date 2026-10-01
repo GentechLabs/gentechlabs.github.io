@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DeFi Command Centers — GenTech</title>
+<style>
+  :root { --bg:#0d0a07; --card:#191309; --card2:#1f1809; --line:#332714; --txt:#f4ece0; --dim:#97866c;
+          --good:#2fd07f; --warn:#f0b429; --bad:#f0554a; --accent:#e08a2e; --wax:#e08a2e; --usd:#d98c3a; }
+  * {{ box-sizing:border-box; }}
+  body {{ margin:0; background:var(--bg); color:var(--txt); -webkit-font-smoothing:antialiased;
+         font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif; }}
+  .wrap {{ max-width:680px; margin:0 auto; padding:26px 14px 46px; }}
+  h1 {{ font-size:1.34rem; margin:.1em 0 .12em; letter-spacing:-.4px; }}
+  .sub {{ color:var(--dim); font-size:.82em; margin-bottom:18px; line-height:1.5; }}
+  .cards {{ display:grid; gap:11px; }}
+  .tcard {{ display:block; background:var(--card); border:1px solid var(--line); border-radius:14px;
+            padding:14px 15px; text-decoration:none; color:var(--txt);
+            transition:border-color .15s ease, transform .15s ease; }}
+  .tcard:hover {{ border-color:var(--accent); transform:translateY(-1px); }}
+  .tcard-h {{ display:flex; justify-content:space-between; align-items:center; margin-bottom:3px; }}
+  .tname {{ font-weight:700; font-size:1.06rem; letter-spacing:-.3px; }}
+  .addr {{ color:var(--dim); font-size:.72em; font-variant-numeric:tabular-nums; margin-bottom:9px; }}
+  .row {{ display:flex; justify-content:space-between; align-items:baseline; padding:4px 0;
+          border-bottom:1px solid var(--line); }}
+  .row:last-of-type {{ border-bottom:0; }}
+  .row .k {{ color:var(--dim); font-size:.8em; }}
+  .row .v {{ font-weight:600; font-variant-numeric:tabular-nums; }}
+  .tcard-f {{ display:flex; justify-content:space-between; align-items:center; margin-top:10px; }}
+  .tnote {{ color:var(--dim); font-size:.74em; }}
+  .est { color:var(--dim); font-size:.72em; font-weight:400; }
+  .go {{ color:var(--accent); font-size:.8em; font-weight:600; }}
+  .pill {{ display:inline-block; padding:2px 9px; border-radius:99px; font-size:.66em;
+           font-weight:700; letter-spacing:.04em; background:var(--card2); color:var(--dim); }}
+  .pill.good {{ background:color-mix(in srgb, var(--good) 18%, transparent); color:var(--good); }}
+  .pill.warn {{ background:color-mix(in srgb, var(--warn) 18%, transparent); color:var(--warn); }}
+  .pill.bad  {{ background:color-mix(in srgb, var(--bad) 18%, transparent);  color:var(--bad); }}
+  .warnbox {{ background:var(--card); border:1px solid var(--bad); border-radius:11px;
+              padding:11px 13px; font-size:.82em; margin-bottom:12px; }}
+  .note {{ background:var(--card); border:1px solid var(--line); border-radius:11px;
+           padding:11px 13px; font-size:.78em; color:var(--dim); margin-top:16px; line-height:1.55; }}
+  .foot {{ color:var(--dim); font-size:.7em; text-align:center; margin-top:20px; line-height:1.75; }}
+  .foot a {{ color:var(--dim); }}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>DeFi Command Centers</h1>
+  <div class="sub">Live positions on Avalanche, one dashboard per book. Each page reports a single
+    treasury and nothing else &mdash; the numbers are the same ones the machine reads on-chain.</div>
+
+  <div class="cards">
+  <a class="card tcard" href="dadrian-defi.html">
+    <div class="tcard-h"><span class="tname">Dadrian</span><span class="pill">RANGE UNKNOWN</span></div>
+    <div class="addr">0x6c69F8FD&hellip;7812Fe</div>
+    <div class="row"><span class="k">Capital deployed</span><span class="v">$0.00</span></div>
+    <div class="row"><span class="k">Bins held</span><span class="v">0</span></div>
+    <div class="row"><span class="k">Earnings / day</span><span class="v">$0.00 <span class="est">est.</span></span></div>
+    <div class="tcard-f"><span class="tnote">updated 2026-10-01 00:12:21 UTC</span><span class="go">Open the hub &rarr;</span></div>
+  </a>
+  <a class="card tcard" href="jordan-defi.html">
+    <div class="tcard-h"><span class="tname">Jordan</span><span class="pill good">IN RANGE</span></div>
+    <div class="addr">0x572ABd64&hellip;d05037</div>
+    <div class="row"><span class="k">Capital deployed</span><span class="v">$104.07</span></div>
+    <div class="row"><span class="k">Bins held</span><span class="v">40</span></div>
+    <div class="row"><span class="k">Earnings / day</span><span class="v">$0.13 <span class="est">est.</span></span></div>
+    <div class="tcard-f"><span class="tnote">updated 2026-10-01 00:11:01 UTC</span><span class="go">Open the hub &rarr;</span></div>
+  </a>
+  </div>
+  <div class="note">
+    <b>What these pages are.</b> Each command center shows the real state of one range position:
+    where spot sits inside the bins we hold, what the pool has actually paid us, and the fee
+    efficiency of the shape. Nothing here is projected or annualised &mdash; measured fees only.
+  </div>
+  <div class="foot">
+    theme uptober &middot; generated 2026-10-01 00:12 UTC<br>
+    <a href="https://gentechlabs.net/">&larr; gentechlabs.net</a>
+  </div>
+</div>
+</body>
+</html>

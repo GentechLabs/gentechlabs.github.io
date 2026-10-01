@@ -1,0 +1,114 @@
+{
+  "version": 1,
+  "title": "PER-TENANT AUTONOMY MODEL",
+  "raised_by": "Jordan, 2026-09-20 \u2014 'autonomy is not the same for a remote collaborator as for you'",
+  "the_problem": "Jordan reads every action his treasury takes and holds override; if something looks wrong he intervenes within minutes and he is the one who pays for the mistake. A remote collaborator cannot. So an identical autonomy setting is not equal treatment \u2014 it is a bigger risk taken with someone else's money. Autonomy must be a per-tenant setting, and it must be smaller for whoever is further from the loop.",
+  "first_principles": [
+    "Autonomy is a LICENCE, not a default. It is granted, scoped, and revocable - never assumed from the fact that the code can do something.",
+    "A new tenant starts at the LOWEST level that is useful. Trust is earned by observed behaviour, not promised at signup.",
+    "Every level has a hard ceiling. No level means 'unlimited'. The ceiling is denominated in capital at risk, not in good intentions.",
+    "The operator's DISTANCE FROM THE LOOP is the primary input. In-room operator with live override = widest latitude. Remote collaborator = narrowest.",
+    "Autonomy never widens itself. Promotion is a human decision made by the tenant (or Jordan for Jordan), recorded with a reason and a date. A system that can raise its own privileges is not a treasury, it is an incident."
+  ],
+  "levels": {
+    "L0_OBSERVE": {
+      "summary": "Reads and reports. Moves nothing.",
+      "may": [
+        "read chain state",
+        "compute positions and fees",
+        "write reports and handoffs",
+        "raise alerts"
+      ],
+      "may_not": [
+        "sign anything",
+        "open or close a position",
+        "move capital",
+        "change config"
+      ],
+      "human_in_loop": "not required \u2014 it cannot act",
+      "use_for": "every new tenant on day one; the orientation period. The collaborator watches what the agent WOULD do with their money before any of it is at stake."
+    },
+    "L1_PROPOSE": {
+      "summary": "Recommends actions with full reasoning. A human executes.",
+      "may": [
+        "everything in L0",
+        "produce a ready-to-run action with its exact parameters and expected effect",
+        "simulate the action and report the simulation result"
+      ],
+      "may_not": [
+        "execute anything",
+        "sign"
+      ],
+      "human_in_loop": "required for every action",
+      "use_for": "a collaborator still learning the system, or one who wants to approve each move. This is the right level for anyone who has not watched a full rebalance cycle yet."
+    },
+    "L2_BOUNDED": {
+      "summary": "Acts alone inside pre-agreed limits; asks outside them.",
+      "may": [
+        "re-center an EXISTING position within its own rails",
+        "withdraw on a risk trigger (stop-loss, circuit breaker)",
+        "harvest and compound fees"
+      ],
+      "may_not": [
+        "open a NEW position from flat",
+        "change the rails file",
+        "exceed the capital-at-risk ceiling",
+        "touch any venue not explicitly approved for this tenant",
+        "act after the ceiling is breached \u2014 it stops and asks"
+      ],
+      "human_in_loop": "after the fact for permitted actions; required for anything else",
+      "use_for": "a collaborator who has run L1 successfully for a while and wants the farm to maintain itself. This is the level a remote collaborator should top out at without an explicit, deliberate decision."
+    },
+    "L3_AUTONOMOUS": {
+      "summary": "Jordan's level. Acts within rails, reports after, override held live.",
+      "may": [
+        "act within approved rails without asking",
+        "rotate structure on a confirmed tape signal",
+        "maintain and rebalance continuously"
+      ],
+      "may_not": [
+        "move capital off the approved rails",
+        "change its own autonomy level",
+        "act on a rail not approved for this tenant"
+      ],
+      "human_in_loop": "live override \u2014 the operator reads every action and can stop it",
+      "the_condition_that_justifies_it": "The operator is watching in real time AND owns the loss. Jordan qualifies. A remote collaborator does not, until they demonstrate they are reading the output and can intervene.",
+      "explicitly_not_a_signup_option": true
+    }
+  },
+  "the_rule_that_makes_this_real": "Promotion is human, demotion is automatic. Anything can drop a tenant a level without asking \u2014 a breach, an unacknowledged alert, a failed identity check \u2014 but nothing can raise a level except a dated, reasoned, human decision. Safety that requires a human to authorise the UNSAFE direction is the only safety that holds.",
+  "capital_ceiling_is_separate_from_level": "Autonomy level governs WHICH actions are permitted; the ceiling governs HOW MUCH can be at risk. They are independent. A tenant can hold L3 on a $50 book; that is a different risk from L3 on $50,000. Both must be set explicitly and neither implies the other.",
+  "per_tenant_settings": {
+    "jordan": {
+      "level": "L3_AUTONOMOUS",
+      "justification": "In-room operator, reads every action, holds live override, owns the loss. The original and the reference implementation.",
+      "ceiling_usd": null,
+      "set": "2026-08-11",
+      "reviewed": "2026-09-20"
+    },
+    "dadrian": {
+      "level": "L2_BOUNDED",
+      "justification": "Jordan, 2026-09-22: 'we'll manage his wallet'. Management is L2_BOUNDED - maintain an existing position within its rails, harvest, withdraw on a risk trigger. Set to $50 ceiling against a $30 starting book so ordinary price appreciation does not breach it. The FIRST deploy is class 3 (open_position, above L2) and is carried as a human-instructed action, not an autonomous one.",
+      "ceiling_usd": 50,
+      "path": "L0 during orientation -> L1 once he is reading the output -> L2 only after he has watched a full rebalance cycle and explicitly asked for it -> L3 not offered unless he demonstrates real-time engagement AND accepts the loss ownership that goes with it.",
+      "set": "2026-09-22",
+      "reviewed": "2026-09-22"
+    },
+    "cuzzle": {
+      "level": "L0_OBSERVE",
+      "justification": "Prospect. Nothing known yet \u2014 not even which coins he follows.",
+      "ceiling_usd": null,
+      "set": null,
+      "reviewed": "2026-09-20"
+    }
+  },
+  "what_this_requires_in_code_before_it_is_real": [
+    "tenant_guard.assert_tenant() is built and refuses. GOOD \u2014 that is the identity half.",
+    "NOT BUILT: tenant_guard.assert_autonomy(tenant, action) \u2014 every state-changing call site must declare the action class it is performing, and the guard must check that class against the tenant's level. Until this exists, the levels above are documented intent, not enforced behaviour.",
+    "NOT BUILT: per-tenant autonomy in tenants.json read at action time (the field exists; nothing consumes it yet).",
+    "NOT BUILT: the automatic DEMOTION path. A rule that cannot demote is a suggestion.",
+    "NOT BUILT: the capital ceiling as a separate hard check. It is the more important of the two controls and it does not exist yet.",
+    "HONEST STATUS: this document describes the model and records the decisions. The enforcement is one module (assert_autonomy) plus call-site wiring, and it is not written. Do not onboard anyone on the strength of this spec alone."
+  ],
+  "one_thing_to_say_to_dadrian_out_loud": "His agent will start by watching and reporting, not acting. That is deliberate and it is the opposite of a limitation \u2014 it means the first thing he learns about this system is what it does, not what it costs him. Everything after that is a decision he makes with evidence in hand."
+}

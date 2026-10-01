@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agentic Treasury — Live Demo | GenTech Labs</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;background:#0a0e17;color:#e2e8f0;min-height:100vh}
+.container{max-width:900px;margin:0 auto;padding:40px 24px 80px}
+.header{text-align:center;padding:40px 0 30px}
+.header .badge{display:inline-block;padding:6px 16px;border-radius:100px;background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.2);color:#22c55e;font-size:0.8rem;margin-bottom:16px}
+.header .badge.stale{background:rgba(227,179,65,0.1);border-color:rgba(227,179,65,0.3);color:#e3b341}
+.header h1{font-size:2.2rem;font-weight:800;background:linear-gradient(135deg,#60a5fa,#a78bfa,#f472b6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.header p{color:#6b7b8d;font-size:1.05rem;margin-top:12px;max-width:640px;margin-left:auto;margin-right:auto}
+.terminal{background:#0d1117;border:1px solid #1e293b;border-radius:16px;overflow:hidden;margin-top:32px;box-shadow:0 20px 60px rgba(0,0,0,0.4)}
+.terminal-bar{background:#161b22;padding:12px 16px;display:flex;align-items:center;gap:8px;border-bottom:1px solid #1e293b}
+.terminal-bar .dot{width:12px;height:12px;border-radius:50%}
+.terminal-bar .dot.red{background:#ff5f57}.terminal-bar .dot.yellow{background:#febc2e}.terminal-bar .dot.green{background:#28c840}
+.terminal-bar .title{color:#6b7b8d;font-size:0.8rem;margin-left:12px;font-family:'JetBrains Mono',monospace}
+.terminal-body{padding:24px;font-family:'JetBrains Mono',monospace;font-size:0.85rem;line-height:1.7;white-space:pre-wrap;color:#c9d1d9}
+.terminal-body .prompt{color:#22c55e}
+.terminal-body .cmd{color:#e2e8f0}
+.terminal-body .out{color:#c9d1d9}
+.terminal-body .green{color:#22c55e}
+.terminal-body .red{color:#f85149}
+.terminal-body .yellow{color:#e3b341}
+.terminal-body .blue{color:#58a6ff}
+.terminal-body .purple{color:#bc8cff}
+.terminal-body .dim{color:#6b7b8d}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-top:24px}
+.stat{background:#111827;border:1px solid #1e293b;border-radius:12px;padding:18px}
+.stat .label{color:#6b7b8d;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:6px}
+.stat .value{font-family:'JetBrains Mono',monospace;font-size:1.4rem;font-weight:600;color:#e2e8f0}
+.stat .value.green{color:#22c55e}.stat .value.red{color:#f85149}.stat .value.yellow{color:#e3b341}
+.stat .sub{color:#6b7b8d;font-size:0.75rem;margin-top:4px}
+.rules{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px}
+.rule{background:#111827;border:1px solid #1e293b;border-radius:10px;padding:12px 16px;font-size:0.8rem;color:#9aa7b5;flex:1;min-width:220px}
+.rule b{color:#e2e8f0;display:block;margin-bottom:4px;font-size:0.85rem}
+.legend{display:flex;flex-wrap:wrap;gap:16px;margin-top:24px;padding:16px;background:#111827;border:1px solid #1e293b;border-radius:12px;font-size:0.85rem;color:#6b7b8d}
+.legend span{display:flex;align-items:center;gap:6px}
+.legend .swatch{width:10px;height:10px;border-radius:3px;display:inline-block}
+.actions{display:flex;gap:12px;margin-top:24px;flex-wrap:wrap}
+.actions a{flex:1;min-width:200px;text-align:center;padding:14px 20px;border-radius:12px;text-decoration:none;font-weight:600;font-size:0.9rem;transition:opacity 0.2s}
+.actions a:hover{opacity:0.85}
+.actions .primary{background:linear-gradient(135deg,#60a5fa,#a78bfa);color:#0a0e17}
+.actions .secondary{background:#111827;border:1px solid #1e293b;color:#60a5fa}
+.footer{text-align:center;padding:40px 0;color:#475569;font-size:0.85rem;border-top:1px solid #1e293b;margin-top:60px}
+.footer a{color:#60a5fa;text-decoration:none}
+@media(max-width:640px){.header h1{font-size:1.6rem}.terminal-body{font-size:0.75rem}}
+</style>
+</head>
+<body>
+<div class="container">
+<div class="header">
+  <div class="badge" id="liveBadge">● LIVE · Real On-Chain Data</div>
+  <h1>Agentic Treasury</h1>
+  <p>An autonomous treasury agent that runs a real LFJ V2.2 LP on Avalanche: it deploys idle capital, rebalances the full position (never two pools, never an idle side), compounds fees, and re-centers on sustained weak fee capture. The numbers below are pulled live from the chain — the same data the agent acts on. No simulation. Real balances, real quotes, real settlement.</p>
+</div>
+
+<div class="grid" id="stats">
+  <div class="stat"><div class="label">Position Value</div><div class="value" id="sValue">—</div><div class="sub" id="sEntry">single position · full capital</div></div>
+  <div class="stat"><div class="label">Fee Efficiency</div><div class="value" id="sEff">—</div><div class="sub" id="sEffZone">100% = price at range center</div></div>
+  <div class="stat"><div class="label">Bin Range</div><div class="value" id="sRange">—</div><div class="sub" id="sBins"></div></div>
+  <div class="stat"><div class="label">Pool Price</div><div class="value" id="sPrice">—</div><div class="sub" id="sStatus"></div></div>
+</div>
+
+<div class="terminal">
+  <div class="terminal-bar">
+    <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+    <span class="title">gentech-treasury — live chain read</span>
+  </div>
+  <div class="terminal-body" id="terminalOut"><span class="dim">loading live chain data…</span></div>
+</div>
+
+<div class="rules">
+  <div class="rule"><b>🔇 Silence doctrine</b>Watchdogs alert once per condition, then stay silent until it resolves — never a repeated failure loop.</div>
+  <div class="rule"><b>📐 Soft-floor rule</b>Fee efficiency below 65% for 20 minutes (2 consecutive watchdog readings) → proactive re-center, even in range.</div>
+  <div class="rule"><b>💰 Full-capital rule</b>Every rebalance sweeps ALL working capital into one position — no idle side, no dust pools.</div>
+  <div class="rule"><b>♻️ Auto-compound</b>Idle capital folds back into the LP every cycle, guided by a sentiment-driven 60/40 allocation call.</div>
+</div>
+
+<div class="legend">
+  <span><span class="swatch" style="background:#22c55e"></span> Live on-chain position</span>
+  <span><span class="swatch" style="background:#f85149"></span> Out of range</span>
+  <span><span class="swatch" style="background:#e3b341"></span> Soft floor breach</span>
+  <span><span class="swatch" style="background:#58a6ff"></span> Data refreshed from chain</span>
+</div>
+
+<div class="actions">
+  <a href="https://gentechlabs.net/agentic-treasury-demo.mp4" class="primary">▶ Watch the Demo Video</a>
+  <a href="https://github.com/GentechLabs/genTech-agent-kit" class="secondary">📦 Agent Kit on GitHub</a>
+  <a href="https://gentechlabs.net/demo.html" class="secondary">← Back to Demo Suite</a>
+</div>
+
+<div class="footer">
+  <p>GenTech Labs · <a href="https://gentechlabs.net/demo.html">Demo Suite</a> · <a href="https://github.com/GentechLabs">GitHub</a></p>
+</div>
+</div>
+
+<script>
+const DATA_URLS = [
+  'https://gentechlabs.net/DeFi/defi-data.json',
+  'https://www.gentechlabs.net/defi-data.json'
+];
+
+function esc(s){const d=document.createElement('div');d.textContent=s;return d.innerHTML;}
+
+async function loadLive(){
+  for(const url of DATA_URLS){
+    try{
+      const res = await fetch(url + '?t=' + Date.now(), {cache:'no-store'});
+      if(!res.ok) continue;
+      const d = await res.json();
+      const lp = d.lpPosition || {};
+      if(!lp.totalValueUSD) continue;
+      render(d, lp);
+      return;
+    }catch(e){ /* try next source */ }
+  }
+  // honest degradation: badge flips, static sample stays labeled as sample
+  const b = document.getElementById('liveBadge');
+  b.textContent = '● OFFLINE — showing sample output';
+  b.classList.add('stale');
+  document.getElementById('terminalOut').innerHTML =
+    '<span class="yellow">⚠ live feed unreachable — this is a cached sample, not current chain state.</span>\n\n' +
+    esc(document.getElementById('terminalOut').textContent);
+}
+
+function render(d, lp){
+  const eff = d.efficiency ?? 0;
+  const inRange = lp.inRange;
+  const effColor = eff >= 65 ? 'green' : (inRange ? 'yellow' : 'red');
+  document.getElementById('sValue').textContent = '$' + Number(lp.totalValueUSD).toFixed(2);
+  document.getElementById('sEff').textContent = eff.toFixed(0) + '%';
+  document.getElementById('sEff').className = 'value ' + effColor;
+  document.getElementById('sEffZone').textContent = '100% = price at range center · soft floor 65%';
+  document.getElementById('sRange').textContent = '$' + Number(lp.rangeMin).toFixed(3) + ' – $' + Number(lp.rangeMax).toFixed(3);
+  document.getElementById('sBins').textContent = lp.totalBins + ' bins · LFJ V2.2 · curve shape';
+  document.getElementById('sPrice').textContent = '$' + Number(lp.currentPrice).toFixed(4);
+  const status = document.getElementById('sStatus');
+  status.textContent = (inRange ? '🟢 IN RANGE — earning fees' : '🔴 OUT OF RANGE');
+  status.style.color = inRange ? '#22c55e' : '#f85149';
+
+  const age = Math.max(0, Math.round((Date.now() - new Date(d.lastUpdated).getTime())/60000));
+  const ageStr = age < 1 ? 'just now' : age + ' min ago';
+  const comp = (lp.avaxAmount > 0.0001 || lp.usdcAmount > 0.01)
+    ? '\n💰 Composition      │ ' + Number(lp.avaxAmount).toFixed(6) + ' WAVAX + $' + Number(lp.usdcAmount).toFixed(2) + ' USDC'
+    : '';
+  document.getElementById('terminalOut').innerHTML =
+    '<span class="prompt">$</span> <span class="cmd">steward --read-chain</span>\n\n' +
+    '<span class="out">🌾 <span class="purple">STEWARD LP</span> — LFJ AVAX/USDC V2.2\n' +
+    '    <span class="dim">' + esc(new Date(d.lastUpdated).toISOString().replace('T',' ').slice(0,16)) + ' UTC · data age ' + ageStr + '</span>\n\n' +
+    '📊 Position Value   │ <span class="green">$' + Number(lp.totalValueUSD).toFixed(2) + '</span>\n' +
+    '📐 Bin Range        │ ' + Number(lp.rangeMin).toFixed(4) + ' – ' + Number(lp.rangeMax).toFixed(4) +
+      ' (' + lp.totalBins + ' bins)\n' +
+    '📍 Active Bin       │ ' + lp.activeBin + '\n' +
+    '💸 Pool Price       │ $' + Number(lp.currentPrice).toFixed(4) + '\n' +
+    '⚡ Fee Efficiency   │ <span class="' + (eff>=65?'green':(inRange?'yellow':'red')) + '">' + eff.toFixed(1) + '%</span>' +
+      (eff>=65 ? ' <span class="dim">(above soft floor)</span>' : ' <span class="yellow">(below 65% floor — watchdog timer running)</span>') + '\n' +
+    comp + '\n' +
+    '🎯 Status           │ <span class="' + (inRange?'green':'red') + '">' + (inRange?'IN RANGE — earning fees':'OUT OF RANGE — re-center armed') + '</span>\n\n' +
+    '<span class="dim">Autonomy stack: silence doctrine · soft-floor rebalancing · full-capital rule · auto-compound\nSource: discover_positions (live chain read) — regenerated every sync</span></span>';
+}
+loadLive();
+</script>
+</body>
+</html>

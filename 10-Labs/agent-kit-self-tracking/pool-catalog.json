@@ -1,0 +1,130 @@
+{
+  "entries": [
+    {
+      "id": "black-hole-clmm-wavax-usdc",
+      "venue": "Black Hole CLMM",
+      "pair": "WAVAX-USDC",
+      "chain": "Avalanche",
+      "status": "ACTIVE",
+      "note": "Our designated re-entry venue. Measured durable fee core 44.6-49.3% from on-chain accrual AS OF 2026-09-17 (4 days old - treat as stale, re-measure before sizing). $508K TVL, $2.26M daily vol, turnover 4.45x. DefiLlama reports apyBase=0 and attributes an 856% headline to emissions - treat that as emissions. The 47% is ours and it was measured rather than modelled, but an old measurement is not a current one.",
+      "added": "2026-09-18",
+      "last_reviewed": "2026-09-18",
+      "measured_fee_apr_pct": 47.0,
+      "audit": "Ramses fork; partial 2022 Solidly/PeckShield",
+      "fee_src": "on-chain (ours, 2026-09-17)"
+    },
+    {
+      "id": "lfj-joe-v2-2-wavax-usdc",
+      "venue": "LFJ (Joe v2.2)",
+      "pair": "WAVAX-USDC",
+      "chain": "Avalanche",
+      "status": "WATCH",
+      "note": "REHEARSED ON-CHAIN 2026-09-18. THE REAL POOL IS binStep 10 at 0x864d4e5Ee7318e97483DB7EB0912E09F161516EA (TVL ~$710,611; 27,486 WAVAX + 491,745 USDC). THERE ARE FOUR WAVAX/USDC PAIRS IN THE V2.2 FACTORY AND THREE ARE DECOYS with no liquidity (binStep 100 ~$132 quoting $10.15; binStep 25 ~$6 quoting $29.12; binStep 50 $0 quoting $34.85) against a REAL market of $7.96 — they answer every call normally and quote a confident wrong price 27-337% off market, AND they carry 5-15x higher fees. SELECT BY HIGHEST LIQUIDITY, never first result (same rule as the remnant-NFT bug). TOKEN ORDER VERIFIED: tokenX=WAVAX, tokenY=USDC, so price is USDC-per-WAVAX and a single-sided USDC position must sit BELOW the active bin (deltaIds negative, distributionX=[0]) where it acts as a BID. FEE LAW READ FROM CHAIN: baseFactor=5000, variableFeeControl=40000, maxVolatilityAccumulator=350000, protocolShare=1000 — base take 0.0500%, surge term 0.0018% at volatilityAccumulator 21257, TOTAL TAKE NOW 0.0518%, and 0.5400% at max volatility = a 10.4x SURGE. This INDEPENDENTLY CONFIRMS the 0.054% implied take backed out of DefiLlama. LIKELY ERROR IN THE HEADLINE: protocolShare=1000 means the protocol takes 10% BEFORE LPs are paid, so the LP-effective take is 0.0466% giving ~77.9% APR at current volume — DefiLlama's 90.7% is consistent with the GROSS take and does not appear to deduct the protocol share. Stated as a hypothesis, not asserted. ORDERING STILL HOLDS: ~78-90% beats Black Hole's measured 47% and is still pure fee income, zero emissions.",
+      "added": "2026-09-18",
+      "last_reviewed": "2026-09-18",
+      "measured_fee_apr_pct": 90.7,
+      "audit": "Trader Joe / LFJ, long-standing",
+      "fee_src": "on-chain (ours, 2026-09-18)"
+    },
+    {
+      "id": "pharaoh-v3-wavax-usdc",
+      "venue": "Pharaoh V3",
+      "pair": "WAVAX-USDC",
+      "chain": "Avalanche",
+      "status": "WATCH",
+      "note": "DEEPEST pool reviewed: $5.14M TVL, $8.75M vol. But the fee leg is UNKNOWN - DefiLlama reports apyBase=0, so the 196% headline is entirely emissions. Needs an on-chain fee read before it can be ranked on fees at all. Security is inherited, not reviewed.",
+      "added": "2026-09-18",
+      "last_reviewed": "2026-09-18",
+      "measured_fee_apr_pct": null,
+      "audit": "NO Pharaoh-specific audit (x(3,3) codebase; Ramses fork; CertiK not audited)"
+    },
+    {
+      "id": "uniswap-v3-wavax-usdc",
+      "venue": "Uniswap V3",
+      "pair": "WAVAX-USDC",
+      "chain": "Avalanche",
+      "status": "WATCH",
+      "note": "Lowest-risk venue reviewed. 13.1% pure fee APR, no emissions, implied take 0.050% (exactly the 0.05% tier). Largest TVL at $3.67M. Lower yield, best audit story - the safe comparator when we want yield without venue risk.",
+      "added": "2026-09-18",
+      "last_reviewed": "2026-09-18",
+      "measured_fee_apr_pct": 13.1,
+      "audit": "Uniswap, heavily audited",
+      "fee_src": "reported (DefiLlama, 2026-09-18)"
+    },
+    {
+      "id": "pangolin-v2-wavax-usdc",
+      "venue": "Pangolin V2",
+      "pair": "WAVAX-USDC",
+      "chain": "Avalanche",
+      "status": "AVOID",
+      "note": "Only $3,195 daily volume on $90K TVL. Fee APR too low and volume too thin to be worth managing a position. Rejected on numbers, not on risk.",
+      "added": "2026-09-18",
+      "last_reviewed": "2026-09-18",
+      "measured_fee_apr_pct": 3.9,
+      "audit": "",
+      "fee_src": "reported (DefiLlama, 2026-09-18)"
+    },
+    {
+      "id": "xagx-silver-token-xagx-usdc",
+      "venue": "XAGx Silver Token",
+      "pair": "XAGx-USDC",
+      "chain": "Avalanche",
+      "status": "AVOID",
+      "note": "REJECTED - A TRAP. $251.32 total pool liquidity, $0 daily volume, and three venues quoting $28.96 / $35.90 / $65.36 against a silver spot of $66.08. A 2.3x price disagreement across venues means there is no real market. CertiK flags the proxy as upgradeable. Do NOT re-litigate without new evidence.",
+      "added": "2026-09-18",
+      "last_reviewed": "2026-09-18",
+      "measured_fee_apr_pct": null,
+      "audit": ""
+    },
+    {
+      "id": "benqi-savax-savax-liquid-staking",
+      "venue": "Benqi sAVAX",
+      "pair": "sAVAX (liquid staking)",
+      "chain": "Avalanche",
+      "status": "WATCH",
+      "note": "HOLD-MODE option only: what a HELD asset can do rather than sit idle. 3.69% APR on $176.3M TVL. Well below the 47% fee core, so staking is a free IMPROVEMENT on the hold decision - never a reason to hold. Another unaudited surface.",
+      "added": "2026-09-18",
+      "last_reviewed": "2026-09-18",
+      "measured_fee_apr_pct": 3.69,
+      "audit": "Benqi - needs a full venue review before use",
+      "fee_src": "reported (DefiLlama, 2026-09-18)"
+    },
+    {
+      "id": "aerodrome-base-rail",
+      "venue": "Aerodrome",
+      "pair": "(Base rail)",
+      "chain": "Base",
+      "status": "WATCH",
+      "note": "Named as a target rail for the treasury. Not yet scoped - no pool selected, no venue review run. Wants the same treatment as the Avalanche venues.",
+      "added": "2026-09-18",
+      "last_reviewed": "2026-09-18",
+      "measured_fee_apr_pct": null,
+      "audit": ""
+    },
+    {
+      "id": "meteora-solana-rail",
+      "venue": "Meteora",
+      "pair": "(Solana rail)",
+      "chain": "Solana",
+      "status": "WATCH",
+      "note": "Named as the Solana rail target. Devnet blocked (solana-test-validator cannot bind port 8000; faucet 429). Not yet scoped for mainnet.",
+      "added": "2026-09-18",
+      "last_reviewed": "2026-09-18",
+      "measured_fee_apr_pct": null,
+      "audit": ""
+    },
+    {
+      "id": "uniswap-v4-avax-usdc",
+      "venue": "Uniswap V4",
+      "pair": "AVAX-USDC",
+      "chain": "Avalanche",
+      "status": "WATCH",
+      "note": "CANDIDATE-SET GAP found by the 2026-09-26 fee-rank run: this venue is NOT in pool-fee-rank.py's CANDIDATES dict, so it NEVER appears in the ranking despite being the highest fee-generating AVAX pair per TVL that run could see. Aggregator-reported apyBase 283.0% on $141,369 TVL with $2,192,241 daily volume = 15.5x turnover; implied take 283/(15.5x365) = 0.050%, exactly the standard 0.05% tier, which is why the number is arithmetically self-consistent rather than a spike artifact. TREAT THE LEVEL AS VOLATILE, NOT DURABLE: the pool's own 30d apyBase history runs median 8.6% and printed 9293.8% on a day when TVL was $78K (same volume, 1/5 the TVL). TVL grew $78K -> $141K over 30d, so the ratio is moving with deposits as well as volume. CHAIN READ PENDING - this is aggregator arithmetic only, no measurement of ours, so per standing rule it may NOT be ranked as a yield and must not be quoted as one. Note the pair is NATIVE AVAX-USDC (token0 = 0x0), not WAVAX-USDC, so a deposit is a different asset path from our LFJ book. Action needed before this can rank: (1) an on-chain read of the real V4 pool (TVL + fee tier + hook surface), (2) a decision on whether to enrol 'uniswap-v4' in CANDIDATES - that changes the ranked universe and the headline, so it is Jordan's call, not a silent edit.",
+      "added": "2026-09-26",
+      "last_reviewed": "2026-09-26",
+      "measured_fee_apr_pct": 283.0,
+      "audit": "Uniswap, heavily audited (V4 hooks are new surface)",
+      "fee_src": "reported (DefiLlama, 2026-09-26) — chain read PENDING"
+    }
+  ]
+}

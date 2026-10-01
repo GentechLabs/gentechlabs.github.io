@@ -1,0 +1,514 @@
+{
+  "name": "GenTech Labs \u2014 Agentic Treasury + x402 Rail",
+  "description": "AI agent economy infrastructure \u2014 risk scoring, market data, DeFi LP analytics, token security, and wallet intelligence for autonomous agents. 14 live x402-monetized endpoints on Base, Avalanche, and Ethereum. Every URL below returns a valid x402 402 challenge.",
+  "image": "https://gentechlabs.net/gentech-logo.png",
+  "version": "1.5.2",
+  "author": "GentechLabs",
+  "homepage": "https://gentechlabs.net",
+  "contact": "https://gentechlabs.net",
+  "services": [
+    {
+      "type": "x402",
+      "url": "https://api.gentechlabs.net/v1/agents/search",
+      "name": "Agent Discovery",
+      "description": "Search the ERC-8004 registry for on-chain AI agents",
+      "oasfVersion": "1.0",
+      "skills": [
+        "agent_verification",
+        "search",
+        "data_access"
+      ],
+      "domains": [
+        "ai-agents",
+        "identity",
+        "blockchain"
+      ],
+      "pricing": {
+        "model": "pay-per-query",
+        "amount": 0.01,
+        "currency": "USDC",
+        "protocol": "x402"
+      },
+      "chains": [
+        "base",
+        "ethereum",
+        "bnb",
+        "injective"
+      ],
+      "active": true,
+      "endpoint": "https://api.gentechlabs.net/v1/agents/search"
+    },
+    {
+      "type": "x402",
+      "url": "https://api.gentechlabs.net/v1/agent/research?task=x&topic=y",
+      "name": "Agent Research",
+      "description": "On-demand AI agent research, analysis, document creation, and summarization via local LLM",
+      "oasfVersion": "1.0",
+      "skills": [
+        "data_access",
+        "data_processing",
+        "retrieval_of_information"
+      ],
+      "domains": [
+        "blockchain",
+        "data",
+        "analytics"
+      ],
+      "pricing": {
+        "model": "pay-per-query",
+        "amount": 0.05,
+        "currency": "USDC",
+        "protocol": "x402"
+      },
+      "chains": [
+        "base",
+        "ethereum",
+        "avalanche",
+        "solana",
+        "bnb",
+        "arbitrum",
+        "algorand"
+      ],
+      "active": true,
+      "endpoint": "https://api.gentechlabs.net/v1/agent/research?task=x&topic=y"
+    },
+    {
+      "type": "x402",
+      "url": "https://api.gentechlabs.net/v1/deals/deals",
+      "name": "Deal Tracker",
+      "description": "Game deal tracking, price-watch, and release radar (CheapShark engine)",
+      "oasfVersion": "1.0",
+      "skills": [
+        "data_access",
+        "data_processing",
+        "retrieval_of_information"
+      ],
+      "domains": [
+        "blockchain",
+        "data",
+        "analytics"
+      ],
+      "pricing": {
+        "model": "pay-per-query",
+        "amount": 0.005,
+        "currency": "USDC",
+        "protocol": "x402"
+      },
+      "chains": [
+        "base",
+        "ethereum",
+        "avalanche",
+        "solana"
+      ],
+      "active": true,
+      "endpoint": "https://api.gentechlabs.net/v1/deals/deals"
+    },
+    {
+      "type": "x402",
+      "url": "https://api.gentechlabs.net/v1/defi/lp/0x1",
+      "name": "Defi Lp Analytics",
+      "description": "DeFi LP pool analysis with efficiency scoring via DexScreener",
+      "oasfVersion": "1.0",
+      "skills": [
+        "data_access",
+        "data_processing",
+        "retrieval_of_information"
+      ],
+      "domains": [
+        "blockchain",
+        "data",
+        "analytics"
+      ],
+      "pricing": {
+        "model": "pay-per-query",
+        "amount": 0.02,
+        "currency": "USDC",
+        "protocol": "x402"
+      },
+      "chains": [
+        "solana",
+        "base",
+        "ethereum",
+        "bnb"
+      ],
+      "active": true,
+      "endpoint": "https://api.gentechlabs.net/v1/defi/lp/0x1"
+    },
+    {
+      "type": "x402",
+      "url": "https://api.gentechlabs.net/v1/gas/gas",
+      "name": "Gas Oracle",
+      "description": "Live gas prices for Ethereum, Base and Polygon (live-RPC sourced)",
+      "oasfVersion": "1.0",
+      "skills": [
+        "data_access",
+        "data_processing",
+        "retrieval_of_information"
+      ],
+      "domains": [
+        "blockchain",
+        "data",
+        "analytics"
+      ],
+      "pricing": {
+        "model": "pay-per-query",
+        "amount": 0.005,
+        "currency": "USDC",
+        "protocol": "x402"
+      },
+      "chains": [
+        "ethereum",
+        "base",
+        "polygon"
+      ],
+      "active": true,
+      "endpoint": "https://api.gentechlabs.net/v1/gas/gas"
+    },
+    {
+      "type": "x402",
+      "url": "https://api.gentechlabs.net/v1/lineage/guard?urn=urn:x",
+      "name": "Lineage Guard",
+      "description": "Data lineage blast-radius guard: 'what breaks if I drop/change this table?' Walks DataHub downstream lineage, classifies affected assets (charts/dashboards/pipelines), issues BLOCK/REVIEW/SAFE verdict.",
+      "oasfVersion": "1.0",
+      "skills": [
+        "data_access",
+        "data_processing",
+        "retrieval_of_information"
+      ],
+      "domains": [
+        "blockchain",
+        "data",
+        "analytics"
+      ],
+      "pricing": {
+        "model": "pay-per-query",
+        "amount": 0.02,
+        "currency": "USDC",
+        "protocol": "x402"
+      },
+      "chains": [],
+      "active": true,
+      "endpoint": "https://api.gentechlabs.net/v1/lineage/guard?urn=urn:x"
+    },
+    {
+      "type": "x402",
+      "url": "https://api.gentechlabs.net/v1/market/price/ETH",
+      "name": "Market Intelligence",
+      "description": "Real-time crypto market price data",
+      "oasfVersion": "1.0",
+      "skills": [
+        "data_access",
+        "data_processing",
+        "retrieval_of_information"
+      ],
+      "domains": [
+        "blockchain",
+        "data",
+        "analytics"
+      ],
+      "pricing": {
+        "model": "pay-per-query",
+        "amount": 0.005,
+        "currency": "USDC",
+        "protocol": "x402"
+      },
+      "chains": [
+        "solana",
+        "base",
+        "ethereum",
+        "bnb"
+      ],
+      "active": true,
+      "endpoint": "https://api.gentechlabs.net/v1/market/price/ETH"
+    },
+    {
+      "type": "x402",
+      "url": "https://api.gentechlabs.net/v1/nft/search",
+      "name": "Nft Search",
+      "description": "NFT collection search across Solana via Magic Eden",
+      "oasfVersion": "1.0",
+      "skills": [
+        "data_access",
+        "data_processing",
+        "retrieval_of_information"
+      ],
+      "domains": [
+        "blockchain",
+        "data",
+        "analytics"
+      ],
+      "pricing": {
+        "model": "pay-per-query",
+        "amount": 0.01,
+        "currency": "USDC",
+        "protocol": "x402"
+      },
+      "chains": [
+        "solana"
+      ],
+      "active": true,
+      "endpoint": "https://api.gentechlabs.net/v1/nft/search"
+    },
+    {
+      "type": "x402",
+      "url": "https://api.gentechlabs.net/v1/providers",
+      "name": "Providers",
+      "description": "List registered model providers in the Sovereign Router pool",
+      "oasfVersion": "1.0",
+      "skills": [
+        "data_access",
+        "data_processing",
+        "retrieval_of_information"
+      ],
+      "domains": [
+        "blockchain",
+        "data",
+        "analytics"
+      ],
+      "pricing": {
+        "model": "pay-per-query",
+        "amount": 0.005,
+        "currency": "USDC",
+        "protocol": "x402"
+      },
+      "chains": [],
+      "active": true,
+      "endpoint": "https://api.gentechlabs.net/v1/providers"
+    },
+    {
+      "type": "x402",
+      "url": "https://api.gentechlabs.net/v1/route",
+      "name": "Route",
+      "description": "Route across registered model providers with x402 settlement (MSS v2 Sovereign Router)",
+      "oasfVersion": "1.0",
+      "skills": [
+        "data_access",
+        "data_processing",
+        "retrieval_of_information"
+      ],
+      "domains": [
+        "blockchain",
+        "data",
+        "analytics"
+      ],
+      "pricing": {
+        "model": "pay-per-query",
+        "amount": 0.05,
+        "currency": "USDC",
+        "protocol": "x402"
+      },
+      "chains": [],
+      "active": true,
+      "endpoint": "https://api.gentechlabs.net/v1/route"
+    },
+    {
+      "type": "x402",
+      "url": "https://api.gentechlabs.net/v1/score",
+      "name": "Score",
+      "description": "MSS v2 model strength + sovereignty score (0-850) - score any model profile",
+      "oasfVersion": "1.0",
+      "skills": [
+        "data_access",
+        "data_processing",
+        "retrieval_of_information"
+      ],
+      "domains": [
+        "blockchain",
+        "data",
+        "analytics"
+      ],
+      "pricing": {
+        "model": "pay-per-query",
+        "amount": 0.02,
+        "currency": "USDC",
+        "protocol": "x402"
+      },
+      "chains": [],
+      "active": true,
+      "endpoint": "https://api.gentechlabs.net/v1/score"
+    },
+    {
+      "type": "x402",
+      "url": "https://api.gentechlabs.net/v1/security/score/0x1",
+      "name": "Token Security",
+      "description": "Solana token risk scoring and rugcheck analysis (11 factors: honeypot, freeze authority, LP, holder distribution). SOLANA ONLY \u2014 rugcheck rejects an EVM address with 400 invalid_mint. For EVM token risk use treasury_defender instead.",
+      "oasfVersion": "1.0",
+      "skills": [
+        "data_access",
+        "data_processing",
+        "retrieval_of_information"
+      ],
+      "domains": [
+        "blockchain",
+        "data",
+        "analytics"
+      ],
+      "pricing": {
+        "model": "pay-per-query",
+        "amount": 0.01,
+        "currency": "USDC",
+        "protocol": "x402"
+      },
+      "chains": [
+        "solana"
+      ],
+      "active": true,
+      "endpoint": "https://api.gentechlabs.net/v1/security/score/0x1"
+    },
+    {
+      "type": "x402",
+      "url": "https://api.gentechlabs.net/v1/defender/classify/8453/0x1",
+      "name": "Treasury Defender",
+      "description": "Airdrop & dust-token defense: classify any token as KNOWN/SUSPICIOUS (homoglyph impersonation, no liquidity), quarantine flagged tokens, and get safe burn calldata. Protect your wallet from scam airdrops.",
+      "oasfVersion": "1.0",
+      "skills": [
+        "data_access",
+        "data_processing",
+        "retrieval_of_information"
+      ],
+      "domains": [
+        "blockchain",
+        "data",
+        "analytics"
+      ],
+      "pricing": {
+        "model": "pay-per-query",
+        "amount": 0.01,
+        "currency": "USDC",
+        "protocol": "x402"
+      },
+      "chains": [],
+      "active": true,
+      "endpoint": "https://api.gentechlabs.net/v1/defender/classify/8453/0x1"
+    },
+    {
+      "type": "x402",
+      "url": "https://api.gentechlabs.net/v1/wallet/portfolio/0x1",
+      "name": "Wallet Analysis",
+      "description": "Wallet portfolio analysis with token balances and USD valuation",
+      "oasfVersion": "1.0",
+      "skills": [
+        "data_access",
+        "data_processing",
+        "retrieval_of_information"
+      ],
+      "domains": [
+        "blockchain",
+        "data",
+        "analytics"
+      ],
+      "pricing": {
+        "model": "pay-per-query",
+        "amount": 0.02,
+        "currency": "USDC",
+        "protocol": "x402"
+      },
+      "chains": [
+        "solana"
+      ],
+      "active": true,
+      "endpoint": "https://api.gentechlabs.net/v1/wallet/portfolio/0x1"
+    }
+  ],
+  "skills": [
+    "decentralized_finance",
+    "defi_analytics",
+    "defi_monitoring",
+    "yield_farming",
+    "treasury_management",
+    "asset_management",
+    "payment_processing",
+    "agent_to_agent",
+    "on_chain_analysis",
+    "blockchain_analysis",
+    "market_analysis",
+    "risk_classification",
+    "token_analysis",
+    "retrieval_of_information",
+    "search",
+    "data_access",
+    "data_processing",
+    "semantic_search",
+    "api_integration",
+    "microservices",
+    "infrastructure",
+    "scalability",
+    "api_management",
+    "mcp_server",
+    "uvx_install",
+    "credit_scoring",
+    "reputation_analysis",
+    "agent_identity",
+    "agent_verification",
+    "fraud_detection"
+  ],
+  "domains": [
+    "treasury",
+    "defi",
+    "yield",
+    "payments",
+    "finance",
+    "blockchain",
+    "infrastructure",
+    "ai-agents",
+    "identity",
+    "data",
+    "analytics",
+    "security",
+    "technology"
+  ],
+  "metadata": {
+    "chain": "avalanche",
+    "erc8004": true,
+    "x402": true,
+    "mcp": true,
+    "openSource": true,
+    "license": "MIT",
+    "agentKit": "v0.3.0",
+    "tags": [
+      "agent-economy",
+      "x402",
+      "treasury",
+      "defi",
+      "yield",
+      "infrastructure",
+      "mcp",
+      "payments"
+    ],
+    "erc8004RegistrationFile": true
+  },
+  "retiredServices": [
+    {
+      "name": "Travel Intelligence",
+      "reason": "no /v1/travel route exists"
+    },
+    {
+      "name": "Content Intelligence",
+      "reason": "no /v1/content route exists"
+    },
+    {
+      "name": "ERC-8004 Identity",
+      "reason": "no /v1/identity route exists"
+    },
+    {
+      "name": "Smart Wallet Deploy",
+      "reason": "no /v1/wallet/deploy route exists"
+    },
+    {
+      "name": "Yield Opportunities",
+      "reason": "no /v1/yield route exists"
+    }
+  ],
+  "type": "https://eips.ethereum.org/EIPS/eip-8004#registration-v1",
+  "x402Support": true,
+  "active": true,
+  "registrations": [
+    {
+      "agentId": 1770,
+      "agentRegistry": "eip155:43114:0x8004a169fb4a3325136eb29fa0ceb6d2e539a432"
+    }
+  ],
+  "supportedTrust": [
+    "reputation"
+  ]
+}

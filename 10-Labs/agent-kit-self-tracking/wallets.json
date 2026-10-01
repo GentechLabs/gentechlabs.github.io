@@ -1,0 +1,51 @@
+{
+  "version": 1,
+  "note": "NAMED WALLETS — durable destinations we save permanently (Jordan, 2026-09-15). Refer to a wallet by NAME instead of pasting an address. Names are stable; addresses are the thing that changes. This file is the human-facing layer; capital-guard-rails.json remains the enforcement layer. A name here does NOT authorize a transfer by itself - the guard still checks the address.",
+  "principle": "Name the destination, not the address. Exchange addresses rotate; named wallets do not.",
+  "wallets": {
+    "jordan": {
+      "label": "Jordan (personal)",
+      "purpose": "Primary personal wallet - long-term savings, bills, personal use",
+      "chain": "avalanche",
+      "address": "0x3d117Bf42218c3244AA0Ad011E8651A615230eCb",
+      "kind": "personal_durable",
+      "status": "ACTIVE",
+      "asset": "USDC",
+      "notes": "The GTA remit target (gta_close_executor.py REMIT_TARGET). Durable - save permanently.",
+      "added": "2026-09-15"
+    },
+    "gentech-labs": {
+      "label": "GenTech Labs (x402 seller signer)",
+      "purpose": "x402 gateway payTo / seller signer on Base",
+      "chain": "base",
+      "address": "0x7ebff188f2Eba16518C02864589b1403a5d1296a",
+      "kind": "ops_durable",
+      "status": "ACTIVE",
+      "asset": "USDC",
+      "notes": "Verified on-chain. Approved rail for x402 payouts.",
+      "added": "2026-09-15"
+    }
+  },
+  "transient": {
+    "note": "One-time receive addresses that must NOT be saved as durable. Exchange deposit addresses rotate, so each new address needs a fresh orchestrator approval. Recorded here for audit history only.",
+    "wallets": {
+      "coinbase-deposit-2026-09-15": {
+        "label": "Coinbase deposit (rotating)",
+        "purpose": "One-time exit destination used 2026-09-15",
+        "chain": "avalanche",
+        "address": "0xeEe3fe6C5604C1069a50690043DE57848826e6C9",
+        "kind": "exchange_deposit_transient",
+        "status": "USED",
+        "used_for": "24.757229 USDC exit, 2026-09-15",
+        "notes": "Coinbase rotates deposit addresses. Jordan: 'sometimes I may send you a wallet and say send to this wallet, but it's just Coinbase.' NEVER reuse without a fresh approval.",
+        "added": "2026-09-15"
+      }
+    }
+  },
+  "usage": [
+    "Jordan says 'send to jordan' -> resolve the name, show the address, execute",
+    "Jordan pastes a raw address -> treat as TRANSIENT; approve for that one move only",
+    "Adding a durable wallet: create a block under wallets, give it a label + purpose",
+    "Adding a rotating exchange address: put it under transient, never under wallets"
+  ]
+}

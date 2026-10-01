@@ -1,0 +1,815 @@
+{
+  "version": 1,
+  "by_id": {
+    "cb641608c250": {
+      "profile": "gentech",
+      "name": "Brain Backup + Nightly Housekeeping (Consolidated)",
+      "intent": "Run the Hermes brain backup script.",
+      "source": "derived"
+    },
+    "ce23c5df747b": {
+      "profile": "gentech",
+      "name": "Portfolio Health Check \u2014 Sync + Verify + Deploy",
+      "intent": "daily portfolio health check.",
+      "source": "derived"
+    },
+    "794982294306": {
+      "profile": "gentech",
+      "name": "Cron Health Monitor \u2014 Auto-Fix",
+      "intent": "Health sentinel, gentech ring: parse the fleet's cron job state, auto-fix a missing script by restoring it from /root/.hermes/scripts/, and report only what it could not fix.",
+      "source": "curated"
+    },
+    "fcca23360df2": {
+      "profile": "gentech",
+      "name": "Context Snapshot \u2014 Mess Hall",
+      "intent": "If current time ET is before 08:00, respond with exactly \"Quiet hours \u2014 no report\" and do nothing else.",
+      "source": "derived"
+    },
+    "5fb8a3cf8160": {
+      "profile": "gentech",
+      "name": "Council Overnight Session \u2014 Midnight Pipeline + Build Queue",
+      "intent": "Council Overnight Session \u2014 the fleet's overnight maintenance force.",
+      "source": "derived"
+    },
+    "945edf9409af": {
+      "profile": "gentech",
+      "name": "End-of-Day Digest \u2014 Daily Summary + Build Queue Check",
+      "intent": "Good evening Jordan \u2014 here's your End-of-Day Digest.",
+      "source": "derived"
+    },
+    "d8d1c3adbbb4": {
+      "profile": "gentech",
+      "name": "Hub Nightly Sync \u2014 On-Chain \u2192 GitHub Pages",
+      "intent": "nightly Hub sync.",
+      "source": "derived"
+    },
+    "1cd4dd8b3cf0": {
+      "profile": "gentech",
+      "name": "Council Settlement Desk \u2014 Revenue & Seat Activity",
+      "intent": "Revenue Monitor for Jordan's wallets.",
+      "source": "derived"
+    },
+    "f854e4283771": {
+      "profile": "gentech",
+      "name": "Council Vault Audit \u2014 API/Listing Coverage",
+      "intent": "weekly API Marketplace Scout.",
+      "source": "derived"
+    },
+    "c20a22345ba7": {
+      "profile": "gentech",
+      "name": "x402 Council \u2014 Market Presence & Rail Watch",
+      "intent": "You are the x402 Council's Market Presence arm (Gentech account, GentechLabs, clean 5000 req/hr).",
+      "source": "derived"
+    },
+    "1e8d33a03513": {
+      "profile": "gentech",
+      "name": "Gaming Hub Sync \u2014 Build Data \u2192 VPS webroot",
+      "intent": "Run the Gaming Hub Sync script \u2014 deliver build data to the LIVE VPS webroot.",
+      "source": "derived"
+    },
+    "c00b01c74988": {
+      "profile": "gentech",
+      "name": "Morning Wakeup \u2014 Session Reset + Fresh Context (7am ET)",
+      "intent": "Morning Wakeup \u2014 Load Services + Fresh Context 1.",
+      "source": "derived"
+    },
+    "1a6d403954b9": {
+      "profile": "gentech",
+      "name": "Rate Limit Monitor \u2014 Auto-Escalate",
+      "intent": "Rate-limit monitor: escalate when a provider's rate limit actually bites.",
+      "source": "curated"
+    },
+    "f1fa47f76045": {
+      "profile": "gentech",
+      "name": "Council Maintenance \u2014 Overnight (V4 stack; renumbers to V5 when V5 ships)",
+      "intent": "Overnight maintenance: API/service health, skills sync, quota and disk sweeps, git push, nightly report. The fleet's nightly physical.",
+      "source": "curated"
+    },
+    "1c1a191de1d2": {
+      "profile": "gentech",
+      "name": "Build Queue \u2014 Overnight Maintenance",
+      "intent": "Build Queue \u2014 Overnight Maintenance.",
+      "source": "derived"
+    },
+    "59283121321a": {
+      "profile": "gentech",
+      "name": "API Safety Suite \u2014 6-hour Check",
+      "intent": "API Safety Suite \u2014 6-hour Check \u2014 runs api-safety-suite/run_safety_suite.py on schedule; purpose not recorded in the registry.",
+      "source": "derived"
+    },
+    "3acf59c82258": {
+      "profile": "gentech",
+      "name": "Vault Watcher \u2014 Health Check",
+      "intent": "Health of the vault watcher itself \u2014 the writer that records every vault change. A dead watcher means the brain's history silently stops.",
+      "source": "curated"
+    },
+    "22d8ad319fd4": {
+      "profile": "gentech",
+      "name": "Harness Evolution",
+      "intent": "Purpose not recorded \u2014 curate this job in cron-intents.json.",
+      "source": "derived"
+    },
+    "6e771a4bf8a3": {
+      "profile": "gentech",
+      "name": "Harness Verifier",
+      "intent": "Purpose not recorded \u2014 curate this job in cron-intents.json.",
+      "source": "derived"
+    },
+    "c1fc1e48409a": {
+      "profile": "gentech",
+      "name": "Harness Gardener",
+      "intent": "Purpose not recorded \u2014 curate this job in cron-intents.json.",
+      "source": "derived"
+    },
+    "8f71e23cbfd6": {
+      "profile": "gentech",
+      "name": "Harness Critic",
+      "intent": "Purpose not recorded \u2014 curate this job in cron-intents.json.",
+      "source": "derived"
+    },
+    "651bf76cee00": {
+      "profile": "gentech",
+      "name": "Council Yield Compare \u2014 Chain-to-Chain Data",
+      "intent": "Council Yield Compare \u2014 Chain-to-Chain Data \u2014 runs yield-rainbow.py on schedule; purpose not recorded in the registry.",
+      "source": "derived"
+    },
+    "dc205f189e82": {
+      "profile": "gentech",
+      "name": "Memory Dietician \u2014 Nightly Trim",
+      "intent": "Memory Dietician \u2014 Nightly Trim \u2014 runs memory-dietician.py on schedule; purpose not recorded in the registry.",
+      "source": "derived"
+    },
+    "eb6fffc08d0e": {
+      "profile": "gentech",
+      "name": "Port Health Monitor \u2014 Daily Check",
+      "intent": "Port Health Monitor \u2014 Daily Check \u2014 runs port-health-monitor.py on schedule; purpose not recorded in the registry.",
+      "source": "derived"
+    },
+    "d327bc212f26": {
+      "profile": "gentech",
+      "name": "GitHub Sync Scheduler \u2014 Budget-Aware (V4)",
+      "intent": "GitHub sync scheduler: spend the GitHub API budget where it matters most rather than burning it on noise.",
+      "source": "curated"
+    },
+    "b14fe104bd1d": {
+      "profile": "gentech",
+      "name": "tailscale-key-expiry-reminder",
+      "intent": "REMINDER: The Tailscale auth key (tskey-auth-kpQu6hUpks11CNTRL-WHSZdY6MQ4avzui8s1Dm4aatSgQ9LCUqK) expires TOMORROW (Oct 31, 2026).",
+      "source": "derived"
+    },
+    "5b33e162e31b": {
+      "profile": "gentech",
+      "name": "Agent Arena readiness watchdog (silent until ready)",
+      "intent": "Agent Arena readiness watchdog: stay silent until the arena becomes genuinely ready, then say so once.",
+      "source": "curated"
+    },
+    "b74b7289d8e3": {
+      "profile": "gentech",
+      "name": "Council Horizon Scanner \u2014 Grants/Hackathons/ODA Jobs",
+      "intent": "You are the Council Horizon Scanner (Gentech).",
+      "source": "derived"
+    },
+    "b82c59ec3a7b": {
+      "profile": "gentech",
+      "name": "routing-watcher",
+      "intent": "A new top-level folder appeared in the vault that is not yet described in ROUTING.md.",
+      "source": "derived"
+    },
+    "3a1e43cabd80": {
+      "profile": "gentech",
+      "name": "Quota sentinel \u2014 ollama+providers, burn-rate forecast, silent",
+      "intent": "Quota sentinel (no_agent).",
+      "source": "derived"
+    },
+    "prewake_save_0610": {
+      "profile": "gentech",
+      "name": "Pre-Wake Save \u2014 Brain checkpoint before 6:25 restart",
+      "intent": "Pre-Wake Save \u2014 Brain checkpoint before 6:25 restart \u2014 runs prewake_context_save.py on schedule; purpose not recorded in the registry.",
+      "source": "derived"
+    },
+    "selfheal_sweep_0550": {
+      "profile": "gentech",
+      "name": "Self-Heal Sweep \u2014 routing gap check",
+      "intent": "Self-Heal Sweep \u2014 routing gap check \u2014 runs /root/.hermes/profiles/gentech/scripts/self-heal-sweep.py on schedule; purpose not recorded in the registry.",
+      "source": "derived"
+    },
+    "52046df336a5": {
+      "profile": "gentech",
+      "name": "Build Queue Tick \u2014 Forge Task List Generator",
+      "intent": "Regenerate the Forge task list and Jordan action items from the build queue.",
+      "source": "derived"
+    },
+    "a1069d08e993": {
+      "profile": "gentech",
+      "name": "fleet-memory-posture-80pct-watchdog",
+      "intent": "Check all fleet agent memory files and alert if any profile's MEMORY.md or USER.md exceeds 80% of its character cap.",
+      "source": "derived"
+    },
+    "058ecaad8ca3": {
+      "profile": "gentech",
+      "name": "Handoff Watcher \u2014 15-min sweep, 7am-11pm ET (silent when clear)",
+      "intent": "Handoff watcher: 15-min sweep of this group's handoff inbox; wake the agent only on genuinely new work.",
+      "source": "curated"
+    },
+    "ac736cacf5e5": {
+      "profile": "gentech",
+      "name": "Jordan Personal Assistant Suite \u2014 2-hourly 7am-11pm ET (9 runs)",
+      "intent": "You are Jordan's Personal Assistant Suite \u2014 the SINGLE daily intelligence layer.",
+      "source": "derived"
+    },
+    "8e23053ea69b": {
+      "profile": "gentech",
+      "name": "Council Rail Watch \u2014 Mon/Thu SCAN (ledger moved to Sunday job)",
+      "intent": "You are the x402 Council's Rail Watch (Gentech), the watchful eye of the agent payment economy.",
+      "source": "derived"
+    },
+    "e152f82238f8": {
+      "profile": "gentech",
+      "name": "Grant & Gated-Opportunity Deadline Tracker",
+      "intent": "Grant & Gated-Opportunity Deadline Tracker \u2014 a quiet collector that feeds the Personal Assistant Suite.",
+      "source": "derived"
+    },
+    "6a57ead24769": {
+      "profile": "gentech",
+      "name": "Deep-Dive Auto-Trigger \u2014 intelligence for our intelligence",
+      "intent": "Deep-Dive Auto-Trigger \u2014 stateful silent watcher.",
+      "source": "derived"
+    },
+    "522001de3ce0": {
+      "profile": "gentech",
+      "name": "Wake Gizmo \u2014 new handoffs in inbox",
+      "intent": "Per-agent handoff wake-up for gizmo (Labs).",
+      "source": "derived"
+    },
+    "8b40d350641c": {
+      "profile": "gentech",
+      "name": "Wake Pixel \u2014 Entertainment handoffs in inbox",
+      "intent": "Per-agent handoff wakeup for pixel (Entertainment).",
+      "source": "derived"
+    },
+    "e3b81da6f3ba": {
+      "profile": "gentech",
+      "name": "Wake Treasury \u2014 Steward handoffs in inbox",
+      "intent": "Per-agent handoff wakeup for treasury (The Steward).",
+      "source": "derived"
+    },
+    "e2e54d78a7b9": {
+      "profile": "gentech",
+      "name": "Bazaar/Dexter Index Verify \u2014 flip row 8c to LIVE",
+      "intent": "Bazaar/Dexter Index Verify watcher.",
+      "source": "derived"
+    },
+    "4de11a0a2ec6": {
+      "profile": "gentech",
+      "name": "Council Minutes \u2014 Nightly Synthesis Loop",
+      "intent": "Council Minutes synthesis loop.",
+      "source": "derived"
+    },
+    "877b19f24f9f": {
+      "profile": "gentech",
+      "name": "Resume Sync \u2014 vault \u2192 web + portfolio repo",
+      "intent": "Resume Sync job.",
+      "source": "derived"
+    },
+    "8c8d133f59d7": {
+      "profile": "gentech",
+      "name": "Council Publish \u2014 daily drafts + Sunday Ledger edition",
+      "intent": "You are the Council Publish compiler for THE X402 COUNCIL's X account (@x402council \u2014 not yet authed; you NEVER post, you only draft).",
+      "source": "derived"
+    },
+    "3f523dff7d1a": {
+      "profile": "gentech",
+      "name": "PA Suite (Consigliere) \u2014 2-hourly 7am\u201311pm ET: digest with VERDICTS + stale-scan",
+      "intent": "You are Jordan's Personal Assistant \u2014 the Consigliere.",
+      "source": "derived"
+    },
+    "22b2467ded55": {
+      "profile": "gentech",
+      "name": "Hub Sync \u2014 Nightly DeFi Data Deploy",
+      "intent": "Hub Sync \u2014 Nightly DeFi Data Deploy \u2014 runs hub-sync-nightly.py on schedule; purpose not recorded in the registry.",
+      "source": "derived"
+    },
+    "a2e468868d46": {
+      "profile": "gentech",
+      "name": "Council RAILS LEDGER \u2014 Sunday edition (dedicated, split from scan)",
+      "intent": "You are the x402 Council's Rail Watch (Gentech) \u2014 SUNDAY RAILS LEDGER edition.",
+      "source": "derived"
+    },
+    "1c55388c5456": {
+      "profile": "gentech",
+      "name": "Surface Probe \u2014 advertised contract vs reality",
+      "intent": "Surface Probe \u2014 advertised contract vs reality \u2014 runs surface-probe.py on schedule; purpose not recorded in the registry.",
+      "source": "derived"
+    },
+    "c0aa86c56cf1": {
+      "profile": "gentech",
+      "name": "handoff-trigger-forge (hourly \u2014 DM unreliable on this seat)",
+      "intent": "handoff-trigger-forge (hourly \u2014 DM unreliable on this seat) \u2014 runs handoff-trigger-forge.py on schedule; purpose not recorded in the registry.",
+      "source": "derived"
+    },
+    "f2e95ef67410": {
+      "profile": "gentech",
+      "name": "Warning Watch \u2014 new Hermes warnings only (silent when clear)",
+      "intent": "Warning watch: report only NEW Hermes warnings; silent when clear. The warning list is where a quiet defect first shows up.",
+      "source": "curated"
+    },
+    "9f7c50046de7": {
+      "profile": "gentech",
+      "name": "Superteam Earn agent-listing watch",
+      "intent": "Watch the Superteam Earn agent-eligible listing board and report only new live listings.",
+      "source": "derived"
+    },
+    "8c82810ee145": {
+      "profile": "gentech",
+      "name": "Labs AI-watch bridge \u2192 HQ (weekly)",
+      "intent": "Bridge gizmo's weekly Labs AI watches into HQ: file the full output into the vault at 00-HQ/ai-watch/, and report to HQ only actionable items (verdicts, availability changes).",
+      "source": "derived"
+    },
+    "517c22ae874c": {
+      "profile": "gentech",
+      "name": "Intel watch \u2014 revenue & settlement deltas \u2192 HQ",
+      "intent": "Surface DELTAS from the fleet's intelligence jobs to HQ.",
+      "source": "derived"
+    },
+    "e9fa077aa647": {
+      "profile": "gentech",
+      "name": "Fleet liveness \u2014 is every agent UP and running CURRENT code (silent when healthy",
+      "intent": "Fleet liveness: is every GenTech agent process UP and running CURRENT code (not a stale pre-update process). A stale process is a healthy-looking agent doing the old thing.",
+      "source": "curated"
+    },
+    "fc81fc07ecd3": {
+      "profile": "gentech",
+      "name": "Nightly skills sync \u2014 shared core \u2192 all profiles",
+      "intent": "Run nightly-skills-sync.py: propagate the shared skills core (10-Labs/skills-distribution) to all four Hermes profiles, in the dark window so a skills change never lands mid-work.",
+      "source": "derived"
+    },
+    "47ba8aeb3c31": {
+      "profile": "gentech",
+      "name": "Disk Guard \u2014 85 SOFT/90 HARD (no_agent watchdog)",
+      "intent": "Disk guard: warn at 85% used, escalate hard at 90%. A full disk silently breaks every writer in the fleet.",
+      "source": "curated"
+    },
+    "8e64a4c8f970": {
+      "profile": "gentech",
+      "name": "Vanito \u2192 Drive Auto-Backup (incremental)",
+      "intent": "Vanito \u2192 Google Drive incremental backup.",
+      "source": "curated"
+    },
+    "a0c517cd6267": {
+      "profile": "gentech",
+      "name": "GitHub notification watch \u2014 4-hourly silent collector",
+      "intent": "GitHub notification watch: 4-hourly silent collector of repo notifications.",
+      "source": "curated"
+    },
+    "a6dc737bb1e3": {
+      "profile": "gentech",
+      "name": "CDP/GoPlausible index recheck",
+      "intent": "scheduled re-check of x402 discovery indexing, ~6h after our first real CDP-facilitator settlement (Base USDC).",
+      "source": "derived"
+    },
+    "21e708b42653": {
+      "profile": "gentech",
+      "name": "Upstream contribution finder \u2014 daily proactive scout (silent)",
+      "intent": "Upstream contribution finder (daily).",
+      "source": "derived"
+    },
+    "2a36021105a3": {
+      "profile": "gentech",
+      "name": "Flight watch \u2014 CVG to Cebu / Bangkok / Puerto Plata",
+      "intent": "Flight watch \u2014 CVG to Cebu / Bangkok / Puerto Plata \u2014 runs flight-tracker.py on schedule; purpose not recorded in the registry.",
+      "source": "derived"
+    },
+    "7c3ac39a23f9": {
+      "profile": "gentech",
+      "name": "Dollar watch \u2014 USD/PHP, THB, DOP, MXN",
+      "intent": "Dollar watch \u2014 USD/PHP, THB, DOP, MXN \u2014 runs fx-tracker.py on schedule; purpose not recorded in the registry.",
+      "source": "derived"
+    },
+    "f43ba4a3233f": {
+      "profile": "gentech",
+      "name": "DST boundary \u2014 re-time the fleet's ET-labelled schedules (fires before Nov 1)",
+      "intent": "One-shot maintenance check: US clocks fall back on Sunday 2026-11-01 (EDT UTC-4 -> EST UTC-5).",
+      "source": "derived"
+    },
+    "47d11a5f299f": {
+      "profile": "gentech",
+      "name": "Opportunity Scanner \u2014 junior/FDE/support roles, weekdays 8am ET (silent when not",
+      "intent": "Opportunity scanner: junior/FDE/support roles, weekdays \u2014 feeds Jordan's job search.",
+      "source": "curated"
+    },
+    "a1ffeaebb498": {
+      "profile": "gentech",
+      "name": "Fleet drift check \u2014 did a rule land and not travel? (silent when clean)",
+      "intent": "Fleet drift check: did a rule land in one place and never travel to the others? Silent when clean.",
+      "source": "curated"
+    },
+    "883eaed23b2d": {
+      "profile": "gentech",
+      "name": "Fleet hygiene \u2014 duplicates + stale sweep (silent when clean)",
+      "intent": "Fleet hygiene: sweep duplicate and stale cron jobs overnight; silent when clean.",
+      "source": "curated"
+    },
+    "d95a6ad5aca3": {
+      "profile": "gentech",
+      "name": "Rail switch \u2014 auto failover + timed switch-back",
+      "intent": "Rail switch \u2014 auto failover + timed switch-back \u2014 runs rail-switch.py on schedule; purpose not recorded in the registry.",
+      "source": "derived"
+    },
+    "f9de140c3984": {
+      "profile": "gentech",
+      "name": "Post-update integration check - daily 9am ET (silent when meshed)",
+      "intent": "Post-update integration check - daily 9am ET (silent when meshed) \u2014 runs post-update-integration-check.py on schedule; purpose not recorded in the registry.",
+      "source": "derived"
+    },
+    "6f21f710f983": {
+      "profile": "gentech",
+      "name": "Travel live feed rebuild",
+      "intent": "Travel live feed rebuild \u2014 runs travel-live-cron.sh on schedule; purpose not recorded in the registry.",
+      "source": "derived"
+    },
+    "05c6e2665ac6": {
+      "profile": "gentech",
+      "name": "Public surface parity \u2014 docs vs manifest (silent when clean)",
+      "intent": "Public surface parity detector (no_agent, script IS the job).",
+      "source": "derived"
+    },
+    "0e3db2c4ffcb": {
+      "profile": "gentech-treasury",
+      "name": "Steward Watch List \u2014 Rail-Aware Monitor",
+      "intent": "Steward Watch List \u2014 Rail-Aware Monitor \u2014 runs buylist-cron.sh on schedule; purpose not recorded in the registry.",
+      "source": "derived"
+    },
+    "a11f9e0205f3": {
+      "profile": "gentech-treasury",
+      "name": "Steward Trade Mode \u2014 Execution Engine (dry-run)",
+      "intent": "Execution engine in DRY-RUN: the gated path that would place a trade. It must stay dry-run until Jordan lifts the gate \u2014 a live exit here moves real money.",
+      "source": "curated"
+    },
+    "51bc9900e24d": {
+      "profile": "gentech-treasury",
+      "name": "Steward Position Watchdog (10m)",
+      "intent": "Position watchdog (10m): read the live LP book and act on it \u2014 the ONE thing managing the position. Pausing it leaves an unmanaged directional position.",
+      "source": "curated"
+    },
+    "bc885594238f": {
+      "profile": "gentech-treasury",
+      "name": "Steward Deposit Watchdog (15m)",
+      "intent": "Deposit watchdog (15m): detect capital that landed in the wallet and get it deployed rather than sitting idle.",
+      "source": "curated"
+    },
+    "73cdf5227ca4": {
+      "profile": "gentech-treasury",
+      "name": "Steward Yield Leaderboard (2x/hr) \u2014 all tenants ranked",
+      "intent": "Yield leaderboard: rank all tenants' positions by realized yield so a lagging book is visible.",
+      "source": "curated"
+    },
+    "0057e2e85dad": {
+      "profile": "gentech-treasury",
+      "name": "Fiat-Onramp-Agent-Watcher",
+      "intent": "Fiat on-ramp agent-readiness watcher (monthly).",
+      "source": "derived"
+    },
+    "b70de3653305": {
+      "profile": "gentech-treasury",
+      "name": "Steward Council \u2014 Treasury Meeting",
+      "intent": "Steward council: the treasury meeting \u2014 evaluates the book and proposes action. Advisory, not an executor.",
+      "source": "curated"
+    },
+    "b1b996a54de8": {
+      "profile": "gentech-treasury",
+      "name": "Arc Mainnet Launch \u2014 Sept 16 Watch",
+      "intent": "Arc by Circle mainnet launches TODAY (Sept 16, 2026).",
+      "source": "derived"
+    },
+    "d027777c8d29": {
+      "profile": "gentech-treasury",
+      "name": "Weekly Fed Council \u2014 Elder Statesman",
+      "intent": "Weekly Fed council meeting voiced by the Elder Statesman (council chair voice) \u2014 what happened this week, what we're looking forward to, and the decision for next week.",
+      "source": "derived"
+    },
+    "066ceb8c8024": {
+      "profile": "gentech-treasury",
+      "name": "Handoff Watcher \u2014 15-min sweep, 7am-11pm ET (silent when clear)",
+      "intent": "Scan the vault INBOX for open handoffs and report any that need picking up.",
+      "source": "derived"
+    },
+    "e8e9ca2e6d79": {
+      "profile": "gentech-treasury",
+      "name": "Vacation Mode End \u2014 Re-Engage Treasury",
+      "intent": "Jordan's vacation ends today (Oct 15, 2026).",
+      "source": "derived"
+    },
+    "a5cd86d007b0": {
+      "profile": "gentech-treasury",
+      "name": "Cebu Transition \u2014 Vacation Start",
+      "intent": "Jordan's Cebu trip starts today (Oct 8, 2026).",
+      "source": "derived"
+    },
+    "9b4580890771": {
+      "profile": "gentech-treasury",
+      "name": "Steward Post-Event Council",
+      "intent": "POST-EVENT COUNCIL.",
+      "source": "derived"
+    },
+    "ba728a382ea3": {
+      "profile": "gentech-treasury",
+      "name": "Country Adoption Scan \u2014 Blockchain/Coin Tracking",
+      "intent": "Weekly country/government blockchain-adoption scan (sovereign adoption of AVAX/Base/SOL/BTC/ETH/LINK) for the AVAX laggard thesis. Agent-prompt job: it CANNOT be re-fired mechanically \u2014 it has no script.",
+      "source": "curated"
+    },
+    "81a039cebb6a": {
+      "profile": "gentech-treasury",
+      "name": "Challenger \u2014 Estate Red Team",
+      "intent": "Challenger node \u2014 the dissenting governor (mandate v2, Jordan Aug 30 2026).",
+      "source": "derived"
+    },
+    "e4c0697ebd26": {
+      "profile": "gentech-treasury",
+      "name": "Benchmark Feeds \u2014 LP fee APY + staking benchmark",
+      "intent": "Benchmark Feeds \u2014 LP fee APY + staking benchmark \u2014 runs benchmark-feeds.py on schedule; purpose not recorded in the registry.",
+      "source": "derived"
+    },
+    "94257d5771be": {
+      "profile": "gentech-treasury",
+      "name": "Steward Auto-Compound Engine",
+      "intent": "Auto-compound: harvest fees and re-enter them into the position. Moves capital on the LP book.",
+      "source": "curated"
+    },
+    "5e7f8dcc204f": {
+      "profile": "gentech-treasury",
+      "name": "Steward Farm Report \u2014 Agentic Yield + Milestones",
+      "intent": "Farm report: agentic yield and milestone summary for the LP position.",
+      "source": "curated"
+    },
+    "345097e1b416": {
+      "profile": "gentech-treasury",
+      "name": "GenTech Strategy Desk \u2014 Mode Proposals",
+      "intent": "GenTech Strategy Desk \u2014 Mode Proposals \u2014 runs strategy-desk.sh on schedule; purpose not recorded in the registry.",
+      "source": "derived"
+    },
+    "prewake_save_gentech-treasury": {
+      "profile": "gentech-treasury",
+      "name": "Pre-Wake Save \u2014 Brain checkpoint before 6:25 restart",
+      "intent": "Pre-Wake Save \u2014 Brain checkpoint before 6:25 restart \u2014 runs prewake_context_save.py on schedule; purpose not recorded in the registry.",
+      "source": "derived"
+    },
+    "f4c4259799ba": {
+      "profile": "gentech-treasury",
+      "name": "Treasury Script Sync (vault\u2192repos+profile)",
+      "intent": "Treasury script sync: propagate vault \u2192 repos \u2192 profile and md5-verify. A file that is not in the manifest never reaches the executed copy.",
+      "source": "curated"
+    },
+    "dd68423b4f4b": {
+      "profile": "gentech-treasury",
+      "name": "Steward Self-Audit (silent-till-finding)",
+      "intent": "Self-audit: silent until it finds something wrong with the treasury's own machinery.",
+      "source": "curated"
+    },
+    "bdca7a14a78e": {
+      "profile": "gentech-treasury",
+      "name": "Steward Security Sentinel (silent-till-relevant)",
+      "intent": "Security sentinel: watch the security space for attacks relevant to the treasury; report only new relevant incidents.",
+      "source": "curated"
+    },
+    "2b55d88b54f5": {
+      "profile": "gentech-treasury",
+      "name": "Steward COQ Accumulator (dip-aware, daily)",
+      "intent": "COQ accumulator: dip-aware daily buy of COQ into the hold sleeve. Moves capital.",
+      "source": "curated"
+    },
+    "fd0c82bebb6d": {
+      "profile": "gentech-treasury",
+      "name": "Provider Canary \u2014 inference rails (hourly, silent-until-change)",
+      "intent": "Provider canary (hourly): check the inference rails; silent until something changes. A dead provider makes every agent job fail at once.",
+      "source": "curated"
+    },
+    "f9ddcade1837": {
+      "profile": "gentech-treasury",
+      "name": "Re-Entry Watch \u2014 BLACK health x price rainbow",
+      "intent": "daily RE-ENTRY WATCH.",
+      "source": "derived"
+    },
+    "6e21f38004d9": {
+      "profile": "gentech-treasury",
+      "name": "Agentic Treasury Report \u2014 yield x trading x research",
+      "intent": "You are The Steward (GenTech treasury agent) delivering the AGENTIC TREASURY REPORT \u2014 the weekly one-report view of the whole treasury.",
+      "source": "derived"
+    },
+    "17823b2f4c95": {
+      "profile": "gentech-treasury",
+      "name": "SEC / CFTC Rulemaking Watch",
+      "intent": "You are The Steward (GenTech treasury agent) delivering the SEC / CFTC RULEMAKING WATCH.",
+      "source": "derived"
+    },
+    "d88df391fa4b": {
+      "profile": "gentech-treasury",
+      "name": "Fed / Regulator Watch \u2014 what was said",
+      "intent": "FED / REGULATOR WATCH.",
+      "source": "derived"
+    },
+    "ed0d9f533e7b": {
+      "profile": "gentech-treasury",
+      "name": "Pool Fee Rank \u2014 which venue earns most in FEES",
+      "intent": "Run the pool fee ranking and report it.",
+      "source": "derived"
+    },
+    "26cee92c561c": {
+      "profile": "gentech-treasury",
+      "name": "Chain Fee Refresh \u2014 chain-measured pool cache",
+      "intent": "Refresh the chain-measured pool fee cache that the Agentic Treasury Report reads.",
+      "source": "derived"
+    },
+    "a4cae2e71105": {
+      "profile": "gentech-treasury",
+      "name": "LFJ Fee Snapshot (hourly, silent) \u2014 builds the history a real fee rate needs",
+      "intent": "LFJ Fee Snapshot (hourly, silent) \u2014 builds the history a real fee rate needs \u2014 runs lfj-fee-snapshot.sh on schedule; purpose not recorded in the registry.",
+      "source": "derived"
+    },
+    "eb1c8bc85bc6": {
+      "profile": "gentech-treasury",
+      "name": "AVAX $11.43 line \u2014 resolution watch (silent until it resolves)",
+      "intent": "Watch the AVAX $11.43 line until it resolves; silent until then.",
+      "source": "curated"
+    },
+    "b51ad12ffdd4": {
+      "profile": "gentech-treasury",
+      "name": "Steward Macro Watch \u2014 posture, separate from the position heartbeat",
+      "intent": "Steward Macro Watch \u2014 posture, separate from the position heartbeat \u2014 runs steward-macro-watch.sh on schedule; purpose not recorded in the registry.",
+      "source": "derived"
+    },
+    "316a700bcaae": {
+      "profile": "gentech-treasury",
+      "name": "Steward Regime Refresh (hourly, silent-till-change)",
+      "intent": "Steward Regime Refresh (hourly, silent-till-change) \u2014 runs regime-watch.sh on schedule; purpose not recorded in the registry.",
+      "source": "derived"
+    },
+    "1ca8e205befc": {
+      "profile": "gentech-treasury",
+      "name": "Vault Push Drain \u2014 the brain must never sit unpushed (silent unless stranded)",
+      "intent": "Vault push drain: retry a DEFERRED vault push. A deferred push nobody retries is a forgotten push \u2014 the brain sits unpushed.",
+      "source": "curated"
+    },
+    "3edb7c45fc88": {
+      "profile": "gentech-treasury",
+      "name": "Fee Ledger \u2014 snapshot position earnings (silent history-builder)",
+      "intent": "Fee ledger: snapshot what the position actually EARNED (LFJ compounds fees into bins, so without this reader earnings are invisible).",
+      "source": "curated"
+    },
+    "dcb074a180d3": {
+      "profile": "gentech-treasury",
+      "name": "DeFi Hub Refresh \u2014 keep the page following the chain (silent; alerts only if it ",
+      "intent": "Regenerate the DeFi hub pages and data for all tenants so the website follows the chain.",
+      "source": "derived"
+    },
+    "70a959e08d3a": {
+      "profile": "gentech-treasury",
+      "name": "Steward Cron Health Sentinel (self-healing, 30m)",
+      "intent": "Health sentinel, treasury ring (30m): read every job's recorded outcome, re-fire a failed SCRIPT job once, and speak only what the retry could not clear. Exempt from its own scan.",
+      "source": "curated"
+    },
+    "781c38a3c669": {
+      "profile": "gizmo",
+      "name": "Big-AI Impact Watch \u2014 Weekly (fleet timeline + GenTech verdicts)",
+      "intent": "weekly **Big-AI Impact Watch**.",
+      "source": "derived"
+    },
+    "ac3b22c5a4a0": {
+      "profile": "gizmo",
+      "name": "Agent Arena readiness watchdog (silent until ready)",
+      "intent": "Agent Arena readiness watchdog: stay silent until the arena becomes genuinely ready, then say so once.",
+      "source": "curated"
+    },
+    "9c1d6503c948": {
+      "profile": "gizmo",
+      "name": "Sunday Review \u2014 Brain Sync + Skills + Ecosystem",
+      "intent": "weekly Sunday Review.",
+      "source": "derived"
+    },
+    "577dce1eecdb": {
+      "profile": "gizmo",
+      "name": "Handoff Watcher \u2014 15-min sweep, 7am-11pm ET (silent when clear)",
+      "intent": "Scan the vault INBOX for open handoffs and report any that need picking up.",
+      "source": "derived"
+    },
+    "7788284e0b8a": {
+      "profile": "gizmo",
+      "name": "Fleet Command View \u2014 state refresh (silent unless changed)",
+      "intent": "Refresh the Fleet Command View state file; speak only when the state actually changed.",
+      "source": "curated"
+    },
+    "44bff2e2df03": {
+      "profile": "gizmo",
+      "name": "Big-AI Model Availability Watch \u2014 weekly probe (transition alerts)",
+      "intent": "Daily model availability probe for GenTech's LLM fleet.",
+      "source": "derived"
+    },
+    "prewake_save_gizmo": {
+      "profile": "gizmo",
+      "name": "Pre-Wake Save \u2014 Brain checkpoint before 6:25 restart",
+      "intent": "Pre-Wake Save \u2014 Brain checkpoint before 6:25 restart \u2014 runs prewake_context_save.py on schedule; purpose not recorded in the registry.",
+      "source": "derived"
+    },
+    "6af97a3b4bad": {
+      "profile": "gizmo",
+      "name": "Arb Log \u2014 Phase 0 (wire + cross-venue scan)",
+      "intent": "Arb Log \u2014 Phase 0 (wire + cross-venue scan) \u2014 runs arb-log-cron.py on schedule; purpose not recorded in the registry.",
+      "source": "derived"
+    },
+    "bcb9bb7e31f7": {
+      "profile": "gizmo",
+      "name": "Dexter facilitator recovery watcher",
+      "intent": "Dexter facilitator recovery watcher \u2014 runs dexter-recovery-watch.py on schedule; purpose not recorded in the registry.",
+      "source": "derived"
+    },
+    "73530a31a15b": {
+      "profile": "gizmo",
+      "name": "API & Service Health \u2014 drift watch + auto-fix (silent unless broken or self-heal",
+      "intent": "API & service health for the public rails: probe advertised endpoints against expected status codes, TLS expiry and Cloudflare route shadowing; auto-fix drift; silent unless something changed.",
+      "source": "curated"
+    },
+    "92549eb933b4": {
+      "profile": "gizmo",
+      "name": "Chain Upgrade Watch - Sun 12:30pm ET (biweekly) - Gentech Labs",
+      "intent": "Chain Upgrade Watch - Sun 12:30pm ET (biweekly) - Gentech Labs \u2014 runs chain-upgrade-watch.py on schedule; purpose not recorded in the registry.",
+      "source": "derived"
+    },
+    "80fd54684d86": {
+      "profile": "pixel",
+      "name": "[Jordan] GenTech Shop \u2014 Weekly Sales Sweep",
+      "intent": "You are Gentech delivering the WEEKLY SALES SWEEP for JORDAN ONLY.",
+      "source": "derived"
+    },
+    "41f8e6d0e24b": {
+      "profile": "pixel",
+      "name": "[Jordan] GenTech Shop \u2014 Game Release Intelligence",
+      "intent": "You are Gentech delivering Jordan's GENECH SHOP GAME RELEASE INTELLIGENCE \u2014 personalized game release intelligence for JORDAN ONLY.",
+      "source": "derived"
+    },
+    "02461aa0a77b": {
+      "profile": "pixel",
+      "name": "[Jordan] POE2 Build Health \u2014 Gaming Hub Sync",
+      "intent": "Run the POE2 Build Health script to monitor Path of Exile 2 patches and sync with gaming hub.",
+      "source": "derived"
+    },
+    "1c25463fc281": {
+      "profile": "pixel",
+      "name": "[Vanito] GenTech Shop \u2014 Weekly Sales Sweep",
+      "intent": "You are Gentech delivering the WEEKLY SALES SWEEP for VANITO ONLY.",
+      "source": "derived"
+    },
+    "e7b632043e30": {
+      "profile": "pixel",
+      "name": "Social Media Engine \u2014 Gentech + Forge Drafts",
+      "intent": "You are the Social Media Engine for GenTech's Entertainment group.",
+      "source": "derived"
+    },
+    "dad3fbe6663a": {
+      "profile": "pixel",
+      "name": "Handoff Watcher \u2014 15-min sweep, 7am-11pm ET (silent when clear)",
+      "intent": "Scan the vault INBOX for open handoffs and report any that need picking up.",
+      "source": "derived"
+    },
+    "73ec56e43a87": {
+      "profile": "pixel",
+      "name": "obsidian-sync-push",
+      "intent": "obsidian-sync-push \u2014 runs obsidian-sync-push.sh on schedule; purpose not recorded in the registry.",
+      "source": "derived"
+    },
+    "prewake_save_pixel": {
+      "profile": "pixel",
+      "name": "Pre-Wake Save \u2014 Brain checkpoint before 6:25 restart",
+      "intent": "Pre-Wake Save \u2014 Brain checkpoint before 6:25 restart \u2014 runs prewake_context_save.py on schedule; purpose not recorded in the registry.",
+      "source": "derived"
+    }
+  },
+  "updated": "2026-09-25",
+  "_doctrine": "Every cron job declares what it is FOR. A failure is triaged against INTENT, not reported as an opaque error string. Lookup order: (1) the job spec's own `intent` field, (2) by_id[<job id>] here, (3) the first matching by_name rule, (4) derived from the job's own prompt (flagged DERIVED \u2014 curate it here). Curate this file when you add a job; an intent that is not written down is an intent nobody can triage against.",
+  "lookup_order": [
+    "job.intent",
+    "by_id[<id>].intent",
+    "by_name[].match regex (first match)",
+    "derived from job spec (flagged DERIVED)"
+  ],
+  "by_name": [
+    {
+      "profile": "*",
+      "match": "^Wake ",
+      "intent": "Doorbell: wake the named agent when new work lands in its handoff inbox; silent when the inbox is empty."
+    },
+    {
+      "profile": "*",
+      "match": "^Handoff Watcher",
+      "intent": "Watch this group's handoff inbox on a 15-min sweep; wake the agent only on genuinely new work."
+    },
+    {
+      "profile": "*",
+      "match": "^Pre-Wake Save",
+      "intent": "Checkpoint the brain to disk before the 6:25 daily restart so context survives the restart."
+    },
+    {
+      "profile": "*",
+      "match": "Cron Health",
+      "intent": "Health sentinel (self-exempt from its own scan): read every job's recorded outcome, re-fire a failed SCRIPT job once, speak only what the retry could not clear."
+    }
+  ]
+}

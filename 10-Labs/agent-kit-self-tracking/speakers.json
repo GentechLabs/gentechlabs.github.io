@@ -1,0 +1,86 @@
+{
+  "version": 1,
+  "purpose": "SPEAKER IDENTITY \u2014 map a messaging identity to a TENANT, so the treasury knows WHO is asking before it decides WHAT it may do (Jordan, 2026-09-20: 'being able to tell the identities of me versus my cousin... who's speaking, who's asking about what strategies').",
+  "the_hole_this_closes": "Before this file, the guards checked WHERE (rails, addresses) and never WHO. Every message carries a platform-assigned sender id, but nothing consumed it. So any member of a group chat could ask the treasury to move capital and it could not tell them apart from the operator. Attribute BEFORE acting.",
+  "hard_rule": "AN UNKNOWN SPEAKER GETS NO PRIVILEGE - not Jordan's, not a default, not 'probably fine'. The resolver returns UNKNOWN and every privileged path refuses. An unrecognised sender is an error state, never a permissive one: the failure mode of guessing wrong here is someone else's capital moving.",
+  "why_platform_ids_not_display_names": "The sender id is assigned by the platform and cannot be set by the user. Display names can be changed to anything, including to the operator's name, so a name is a claim and an id is a fact. Never authorise on a name.",
+  "speakers": {
+    "7105876857": {
+      "tenant": "jordan",
+      "label": "Jordan (Vanito)",
+      "role": "primary operator",
+      "platform": "telegram",
+      "channel": "-1002916759037",
+      "verified": "2026-09-20",
+      "notes": "Observed as the origin of treasury sessions; the operator and the loss owner."
+    }
+  },
+  "unmapped_policy": {
+    "resolve_to": "UNKNOWN",
+    "privilege": "none",
+    "behaviour": "Answer questions about public market data if asked, because that is a shared library and costs nothing. Refuse everything else - no positions, no capital, no config, no strategy changes - and say plainly that the sender is not recognised. Then offer the one useful thing: tell Jordan, so he can add them deliberately.",
+    "never": "Never infer a tenant from conversational context, tone, claimed name, or the fact that someone is in the right group. Those are all spoofable or guessable; the id is not."
+  },
+  "strategy_attribution": {
+    "note": "Jordan's other requirement - 'who's asking about what strategies'. A strategy question must be answered AGAINST THE ASKING TENANT'S OWN BOOK. Jordan asking about COQ gets Jordan's COQ position and watchlist; Dadrian asking gets his. Shared market facts may be reused; positions and theses must not leak across the boundary.",
+    "rule": "Attribute the question before answering it. An answer that mixes two tenants' positions is a data leak even when every number in it is correct."
+  },
+  "open": [
+    "Dadrian's sender id is not known yet - he must message from his own account and be ADDED deliberately by Jordan, not auto-enrolled on first contact.",
+    "No call site consumes resolve_speaker() yet. Same honest gap as assert_autonomy: the guard exists, the wiring does not."
+  ],
+  "group_rosters": {
+    "why": "Jordan 2026-09-20: 'we should [have] a list of collaborators in each group.' A speaker map alone answers 'who is this id'; it does not answer 'is this person in THIS room'. Without the group check, membership of one group would silently grant standing in another - and a stranger added to the Entertainment group would be one message away from the treasury group's privileges.",
+    "rule": "Resolve the pair (group, sender). Both must match. A recognised speaker in the WRONG group has the privileges of a stranger in this one: none. Being on the roster is scoped to the room, not to the person.",
+    "groups": {
+      "-1002916759037": {
+        "name": "Gentech Treasury (Strategies)",
+        "purpose": "capital, DeFi, yield, market analysis, treasury decisions",
+        "tenant": "jordan",
+        "roster": {
+          "7105876857": {
+            "tenant": "jordan",
+            "label": "Jordan (Vanito)",
+            "role": "operator + loss owner",
+            "privilege": "full"
+          }
+        },
+        "open_seats": [
+          {
+            "person": "Dadrian",
+            "status": "proposed",
+            "note": "Jordan's cousin. When he joins he gets a roster entry AND a tenant entry - being listed here does not by itself create a treasury."
+          },
+          {
+            "person": "Cuzzle",
+            "status": "prospect",
+            "note": "Jordan to ask which coins he follows. Nothing known."
+          }
+        ],
+        "outsider_policy": "Market data questions: answerable (shared library). Anything touching capital, positions, rails, config or another tenant's strategy: refused, and say the sender is not on this roster."
+      },
+      "-1003872552815": {
+        "name": "Labs",
+        "purpose": "code, SDKs, smart contracts, technical build",
+        "tenant": null,
+        "roster": {},
+        "note": "Technical workstream. No capital authority here regardless of who speaks."
+      },
+      "-1003893562036": {
+        "name": "Entertainment",
+        "purpose": "content, arcade, film, social",
+        "tenant": null,
+        "roster": {},
+        "note": "No capital authority."
+      },
+      "-1003863540828": {
+        "name": "HQ",
+        "purpose": "coordination, decisions, blockers, status",
+        "tenant": null,
+        "roster": {},
+        "note": "Coordination only. A decision discussed here does not execute; it is recorded and executed from the owning group."
+      }
+    },
+    "cross_group_rule": "A person may appear on several rosters with DIFFERENT privileges in each. Privilege is never global - it is granted per (group, person). Otherwise access accumulates by accident as someone gets added to more rooms."
+  }
+}

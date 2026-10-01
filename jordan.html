@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>👑 Jordan's Hub — GenTech</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: #0a0a0a; color: #e2e8f0; min-height: 100vh; }
+        a { color: #3b82f6; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        .header { text-align: center; padding: 60px 20px 30px; background: linear-gradient(180deg, #0f172a 0%, #0a0a0a 100%); border-bottom: 1px solid #1e293b; }
+        .header .avatar { width: 100px; height: 100px; border-radius: 50%; background: linear-gradient(135deg, #3b82f6, #8b5cf6); margin: 0 auto 15px; display: flex; align-items: center; justify-content: center; font-size: 3em; border: 3px solid #3b82f6; }
+        .header h1 { font-size: 2.5em; color: #f1f5f9; }
+        .header .title { color: #3b82f6; font-size: 1.1em; margin-top: 5px; }
+        .header .sub { color: #64748b; font-size: 0.9em; margin-top: 8px; }
+
+        .tabs { display: flex; justify-content: center; gap: 4px; padding: 20px 10px; background: #0f0f0f; border-bottom: 1px solid #1e293b; flex-wrap: wrap; }
+        .tab-btn { background: transparent; border: 1px solid #333; color: #64748b; padding: 10px 24px; border-radius: 8px; cursor: pointer; font-size: 0.9em; transition: all 0.2s; }
+        .tab-btn:hover { border-color: #3b82f6; color: #e2e8f0; }
+        .tab-btn.active { background: #1e293b; border-color: #3b82f6; color: #3b82f6; font-weight: 600; }
+        .tab-content { display: none; max-width: 900px; margin: 30px auto; padding: 0 20px; }
+        .tab-content.active { display: block; }
+
+        .card { background: #111; border: 1px solid #222; border-radius: 12px; padding: 24px; margin-bottom: 16px; }
+        .card h3 { color: #3b82f6; margin-bottom: 8px; }
+        .card p { color: #94a3b8; line-height: 1.6; }
+        .card .meta { color: #64748b; font-size: 0.85em; margin-top: 8px; }
+        .card .emoji { font-size: 1.5em; margin-bottom: 8px; }
+
+        .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-bottom: 20px; }
+        .stat { background: #111; border: 1px solid #222; border-radius: 12px; padding: 16px; text-align: center; }
+        .stat .num { font-size: 1.5em; font-weight: 700; color: #3b82f6; }
+        .stat .label { color: #64748b; font-size: 0.8em; margin-top: 4px; }
+
+        .link-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 12px; }
+        .link-card { background: #111; border: 1px solid #222; border-radius: 12px; padding: 20px; text-align: center; transition: border-color 0.2s; }
+        .link-card:hover { border-color: #3b82f6; }
+        .link-card .icon { font-size: 2em; margin-bottom: 8px; }
+        .link-card span { color: #e2e8f0; font-weight: 600; }
+        .link-card .desc { color: #64748b; font-size: 0.85em; margin-top: 4px; }
+
+        .footer { text-align: center; padding: 30px; color: #475569; font-size: 0.85em; border-top: 1px solid #1e293b; margin-top: 40px; }
+
+        /* Travel checklist */
+        .check-item { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border: 1px solid #2a2a2a; border-radius: 10px; margin-bottom: 8px; cursor: pointer; transition: all 0.2s; background: #161616; }
+        .check-item:hover { border-color: #e8652a; }
+        .check-item .check-box { width: 22px; height: 22px; border-radius: 50%; border: 2px solid #475569; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 13px; transition: all 0.2s; margin-left: auto; }
+        .check-item.done { border-color: #2d8a4e; background: rgba(45,138,78,0.08); }
+        .check-item.done .check-box { background: #2d8a4e; border-color: #2d8a4e; }
+        .check-item.done .check-box::after { content: "✓"; color: #fff; }
+        .check-item.done b { color: #4ade80; }
+
+        @media (max-width: 600px) {
+            .header h1 { font-size: 1.8em; }
+            .stats { grid-template-columns: 1fr 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <div class="avatar">👑</div>
+    <h1>Jordan's Hub</h1>
+    <div class="title">GenTech Labs</div>
+    <div class="sub">Building · Gaming · Travel</div>
+</div>
+
+<div class="tabs">
+    <button class="tab-btn active" onclick="switchTab('travel')">✈️ Travel</button>
+    <button class="tab-btn" onclick="switchTab('poe2')">⚔️ POE2</button>
+    <button class="tab-btn" onclick="switchTab('gaming')">🎮 Gaming</button>
+    <button class="tab-btn" onclick="switchTab('shop')">🛒 GenTech Shop</button>
+    <button class="tab-btn" onclick="switchTab('defi')">💧 DeFi</button>
+</div>
+
+<!-- Travel Tab -->
+<div id="tab-travel" class="tab-content active">
+    <div class="card">
+        <div class="emoji">🌴</div>
+        <h3>Sep 8–15 · Lapu-Lapu, Mactan Island</h3>
+        <p>Scouting trip with Celine. Staying at Seukyang Village 1 Phase 3 (Marigondon Beach Rd). $300 budget for 2, 7 days. Chill + groceries, 2 nights out into Cebu City. No tours — sampling cheap local living to plan a return.</p>
+        <div class="meta">Updated Aug 22, 2026 · Rate ~₱56/$1 · Accomm already covered</div>
+    </div>
+
+    <div class="stats">
+        <div class="stat"><div class="num">$300</div><div class="label">Budget (2 people)</div></div>
+        <div class="stat"><div class="num">2</div><div class="label">Cebu City trips</div></div>
+        <div class="stat"><div class="num">₱56</div><div class="label">/$1 rate</div></div>
+        <div class="stat"><div class="num">7</div><div class="label">Nights (Sep 8–15)</div></div>
+    </div>
+
+    <div class="card">
+        <h3>🏞️ City Overlook</h3>
+        <p><strong>Tops Lookout (The Circle)</strong> — 360° Cebu City view, best at sunset/night.<br>
+        ₱100/person entrance · rooftop +₱50 · open 24hrs. TOPS shuttle ₱200 RT incl entrance. Nearby: Temple of Leah (₱100), Sirao Garden (₱100-200).</p>
+    </div>
+
+    <div class="card">
+        <h3>🌙 Night Markets & 🛍️ Malls</h3>
+        <p><strong>Colon Night Market</strong> (Cebu City) — Fri/Sat/Sun nights, street food + flea market. ₱200-400 to eat for 2.<br>
+        <strong>Mactan:</strong> Gaisano Grand Mall · Mactan Town Center · SM City Mactan · City Times Square.<br>
+        <strong>Cebu City (day trips):</strong> SM City Cebu · Ayala Center.</p>
+    </div>
+
+    <div class="card">
+        <h3>🎉 Nightlife — Mactan Newtown</h3>
+        <p>Walkable strip: <strong>LUX Lounge</strong> · Ibiza Beach Club · Kangaroo Bar · Azure · Liv Superclub.<br>
+        Newtown Beach night pass ₱850 (~$15) incl ₱600 food credit.</p>
+    </div>
+
+    <div class="card">
+        <h3>🌳 Parks & Near Your Stay (Seukyang Village 1)</h3>
+        <p><strong>Mactan Shrine</strong> (free, 20m Lapu-Lapu statue, gardens) · Mactan Island Memorial Garden (~1km) · HydroFarm (~0.8km) · Tonggo Beach (18-min walk) · Mactan Newtown (30-hectare walkable).<br>
+        <span class="meta">In area: 7-Eleven, near Shangri-La/JPark resorts, ~10-15 min from airport.</span></p>
+    </div>
+
+    <div class="card" style="border-color:#e8652a;">
+        <h3>✨ Pick & Choose — Not a to-do list</h3>
+        <p style="color:var(--text-sec);font-size:13px;">This is a <strong>menu of options</strong>, not obligations. Do whatever feels right in the moment. <strong>Tap an item</strong> when you've done it — it checks off, saves to your phone, and builds your trip memory for next time. (No pressure to do everything — that's the whole point.)</p>
+        <div id="travel-checklist" style="margin-top:14px;">
+            <div class="check-item" data-id="groceries"><span>🛒</span><div><b>Groceries run</b><div class="meta">SM Mactan / Gaisano Grand — stock the kitchen</div></div><div class="check-box"></div></div>
+            <div class="check-item" data-id="shrine"><span>🏛️</span><div><b>Mactan Shrine</b><div class="meta">Free · Lapu-Lapu statue + gardens</div></div><div class="check-box"></div></div>
+            <div class="check-item" data-id="newtown"><span>🌆</span><div><b>Mactan Newtown stroll</b><div class="meta">Walkable township + beach boardwalk</div></div><div class="check-box"></div></div>
+            <div class="check-item" data-id="beach"><span>🏖️</span><div><b>Tonggo Beach</b><div class="meta">18-min walk from stay</div></div><div class="check-box"></div></div>
+            <div class="check-item" data-id="tops"><span>🌄</span><div><b>Tops Lookout (sunset)</b><div class="meta">₱100/person · 360° city view</div></div><div class="check-box"></div></div>
+            <div class="check-item" data-id="temple"><span>🏛️</span><div><b>Temple of Leah + Sirao</b><div class="meta">₱100 each · combo with Tops</div></div><div class="check-box"></div></div>
+            <div class="check-item" data-id="colon"><span>🌙</span><div><b>Colon Night Market</b><div class="meta">Fri/Sat/Sun · street food</div></div><div class="check-box"></div></div>
+            <div class="check-item" data-id="lechon"><span>🍖</span><div><b>Cebu lechon</b><div class="meta">The must-eat · ₱500-900 for 2</div></div><div class="check-box"></div></div>
+            <div class="check-item" data-id="nightlife"><span>🎉</span><div><b>Newtown nightlife</b><div class="meta">LUX Lounge / Ibiza / Kangaroo</div></div><div class="check-box"></div></div>
+            <div class="check-item" data-id="sutukil"><span>🐟</span><div><b>Fresh seafood (sutukil)</b><div class="meta">Grilled on the beach · ₱400-700 for 2</div></div><div class="check-box"></div></div>
+            <div class="check-item" data-id="sunset"><span>🌅</span><div><b>Quiet sunset evening</b><div class="meta">Just us, no plan — the best kind</div></div><div class="check-box"></div></div>
+        </div>
+        <div class="meta" style="margin-top:12px;"><span id="check-count">0/11 done</span> · <button onclick="clearChecks()" style="background:none;border:none;color:#e8652a;cursor:pointer;text-decoration:underline;font-size:12px;">Reset</button></div>
+    </div>
+</div>
+
+<!-- POE2 Tab -->
+<div id="tab-poe2" class="tab-content">
+    <div class="card">
+        <div class="emoji">⚔️</div>
+        <h3>Path of Exile 2 Builds</h3>
+        <p>Build health monitor running — tracks patches, meta shifts, and build viability. Data synced to Gaming Hub.</p>
+    </div>
+
+    <div class="card">
+        <h3>Build Tracker</h3>
+        <p>POE2 build status updates available through GenTech Shop. Cron checks patch changes daily and alerts on build-breaking updates.</p>
+        <div class="meta"><a href="https://gentechlabs.net/portfolio/">📊 Check Portfolio →</a></div>
+    </div>
+</div>
+
+<!-- Gaming Tab -->
+<div id="tab-gaming" class="tab-content">
+    <div class="card">
+        <div class="emoji">🎮</div>
+        <h3>Gaming Hub</h3>
+        <p>Steam wishlist deals, game release intelligence, and multi-platform gaming data — all synced and tracked.</p>
+    </div>
+
+    <div class="link-grid">
+        <a href="https://glama.ai/mcp/servers/ProtoJay4789/genTech-shop" class="link-card">
+            <div class="icon">🛒</div>
+            <span>GenTech Shop on Glama</span>
+            <div class="desc">MCP server for game data</div>
+        </a>
+        <a href="https://github.com/GentechLabs/genTech-shop" class="link-card">
+            <div class="icon">🐙</div>
+            <span>GitHub Repo</span>
+            <div class="desc">Open source gaming MCP</div>
+        </a>
+        <a href="https://deals.gentechlabs.net" class="link-card">
+            <div class="icon">🏷️</div>
+            <span>Deal Tracker</span>
+            <div class="desc">Live Steam wishlist deals</div>
+        </a>
+    </div>
+</div>
+
+<!-- Shop Tab -->
+<div id="tab-shop" class="tab-content">
+    <div class="card">
+        <div class="emoji">🛒</div>
+        <h3>GenTech Shop</h3>
+        <p>Gaming intelligence for AI agents — price comparisons, game releases, POE2 builds, and hub status. All available via MCP tools.</p>
+    </div>
+
+    <div class="stats">
+        <div class="stat"><div class="num">4</div><div class="label">MCP Tools</div></div>
+        <div class="stat"><div class="num">✅</div><div class="label">Glama Live</div></div>
+        <div class="stat"><div class="num">🎮</div><div class="label">Steam + POE2</div></div>
+    </div>
+
+    <div class="card">
+        <h3>Services</h3>
+        <p>🔹 Steam Wishlist Deals — Track price drops on your wishlist<br>
+        🔹 Game Releases — Upcoming launch calendar<br>
+        🔹 POE2 Build Health — Meta tracking + patch alerts<br>
+        🔹 Hub Status — Gaming Hub sync health</p>
+        <div class="meta"><a href="https://deals.gentechlabs.net/docs">📄 API Docs →</a></div>
+    </div>
+</div>
+
+<div id="tab-defi" class="tab-content">
+    <div class="card">
+        <h3>DeFi</h3>
+        <p>Your live LFJ WAVAX/USDC position &mdash; capital, how much is deployed, the bin range you hold, and how it compares to staking or simply holding AVAX.</p>
+        <div class="meta"><a href="https://gentechlabs.net/DeFi/jordan-defi.html">💧 Open DeFi Hub →</a></div>
+    </div>
+</div>
+
+<div class="footer">
+    <p>👑 Jordan's Hub · GenTech Labs · <a href="https://gentechlabs.net">gentechlabs.net</a></p>
+</div>
+
+<script>
+function switchTab(name) {
+    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('tab-' + name).classList.add('active');
+    document.querySelector(`.tab-btn[onclick*="'${name}'"]`).classList.add('active');
+}
+
+/* ── Travel checklist: pick-and-choose menu ── */
+const CHECK_KEY = 'gentech-travel-sep2026';
+const MEMORY_KEY = 'gentech-travel-memory-sep2026';
+
+function loadChecks() {
+    try { return JSON.parse(localStorage.getItem(CHECK_KEY) || '{}'); } catch (e) { return {}; }
+}
+function saveChecks(state) {
+    localStorage.setItem(CHECK_KEY, JSON.stringify(state));
+    const done = document.querySelectorAll('.check-item.done').length;
+    document.getElementById('check-count').textContent = done + '/11 done';
+}
+function renderChecks() {
+    const state = loadChecks();
+    document.querySelectorAll('.check-item').forEach(item => {
+        if (state[item.dataset.id]) item.classList.add('done');
+    });
+    document.getElementById('check-count').textContent = document.querySelectorAll('.check-item.done').length + '/11 done';
+}
+document.querySelectorAll('.check-item').forEach(item => {
+    item.addEventListener('click', () => {
+        item.classList.toggle('done');
+        const state = loadChecks();
+        state[item.dataset.id] = item.classList.contains('done');
+        saveChecks(state);
+        // record to trip memory when checked
+        if (item.classList.contains('done')) {
+            const mem = JSON.parse(localStorage.getItem(MEMORY_KEY) || '[]');
+            mem.push({ id: item.dataset.id, date: new Date().toISOString().slice(0,10) });
+            localStorage.setItem(MEMORY_KEY, JSON.stringify(mem));
+        }
+    });
+});
+function clearChecks() {
+    if (!confirm('Reset all? This clears the checklist but keeps your trip memory record.')) return;
+    localStorage.removeItem(CHECK_KEY);
+    document.querySelectorAll('.check-item').forEach(i => i.classList.remove('done'));
+    document.getElementById('check-count').textContent = '0/11 done';
+}
+renderChecks();
+</script>
+
+</body>
+</html>
