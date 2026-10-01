@@ -2,7 +2,6 @@
 
 **Email:** jordanjones0902@gmail.com
 **Website:** https://gentechlabs.net
-**GitHub:** https://github.com/Gentech-Labs
 **Telegram:** @ProtoJay4789
 
 ---
