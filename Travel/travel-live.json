@@ -1,9 +1,9 @@
 {
- "_generated": "2026-09-30T16:29:04Z",
+ "_generated": "2026-10-01T18:46:54Z",
  "_source": "flight-tracker.py + fx-tracker.py (daily crons) · livingcost.org",
  "trip": {
   "name": "Philippines 2026 — Manila & Zambales",
-  "traveler": "Jordan",
+  "traveler": "Jordan & Josephine",
   "status": "Planning — targeting November",
   "startDate": "2026-11-08",
   "endDate": "2026-11-20"
@@ -14,19 +14,19 @@
    "label": "Manila (MNL), Philippines",
    "city": "Manila, PH",
    "latest": {
-    "date": "2026-09-30",
-    "round_trip": 1218,
-    "one_way": null,
-    "carrier": "AS-Alaska Airlines + NH-ANA",
-    "is_major": null,
-    "fastest": null,
+    "date": "2026-10-01",
+    "round_trip": 1028,
+    "one_way": 503,
+    "carrier": "Alaska, Asiana Airlines",
+    "is_major": true,
+    "fastest": "19 hr 27 min",
     "stops": null,
-    "window": "2026-11-08 → 2026-11-20",
-    "source": "letsfg",
-    "dated": true
+    "window": "Sat, Oct 24 → Mon, Nov 9",
+    "source": null,
+    "dated": false
    },
    "low": 1028,
-   "delta_vs_prev": null,
+   "delta_vs_prev": -48,
    "series": [
     {
      "date": "2026-09-24",
@@ -55,6 +55,10 @@
     {
      "date": "2026-09-30",
      "rt": 1076
+    },
+    {
+     "date": "2026-10-01",
+     "rt": 1028
     }
    ],
    "stale": null
@@ -64,19 +68,19 @@
    "label": "Bangkok (BKK), Thailand",
    "city": "Bangkok, TH",
    "latest": {
-    "date": "2026-09-30",
-    "round_trip": 1127,
-    "one_way": null,
-    "carrier": "IB-Iberia",
-    "is_major": null,
-    "fastest": null,
+    "date": "2026-10-01",
+    "round_trip": 1092,
+    "one_way": 550,
+    "carrier": "Delta, Korean Air",
+    "is_major": true,
+    "fastest": "22 hr 30 min",
     "stops": null,
-    "window": "2026-11-08 → 2026-11-20",
-    "source": "letsfg",
-    "dated": true
+    "window": "Fri, Oct 2 → Thu, Oct 15",
+    "source": null,
+    "dated": false
    },
    "low": 979,
-   "delta_vs_prev": null,
+   "delta_vs_prev": 0,
    "series": [
     {
      "date": "2026-09-16",
@@ -137,6 +141,10 @@
     {
      "date": "2026-09-30",
      "rt": 1092
+    },
+    {
+     "date": "2026-10-01",
+     "rt": 1092
     }
    ],
    "stale": null
@@ -144,8 +152,8 @@
  ],
  "fx": {
   "PHP": {
-   "rate": 62.596181,
-   "date": "2026-09-30",
+   "rate": 62.754655,
+   "date": "2026-10-01",
    "series": [
     {
      "date": "2026-09-16",
@@ -206,12 +214,16 @@
     {
      "date": "2026-09-30",
      "rate": 62.596181
+    },
+    {
+     "date": "2026-10-01",
+     "rate": 62.754655
     }
    ]
   },
   "THB": {
-   "rate": 33.573288,
-   "date": "2026-09-30",
+   "rate": 33.580261,
+   "date": "2026-10-01",
    "series": [
     {
      "date": "2026-09-16",
@@ -272,12 +284,16 @@
     {
      "date": "2026-09-30",
      "rate": 33.573288
+    },
+    {
+     "date": "2026-10-01",
+     "rate": 33.580261
     }
    ]
   },
   "DOP": {
-   "rate": 58.490172,
-   "date": "2026-09-30",
+   "rate": 59.495317,
+   "date": "2026-10-01",
    "series": [
     {
      "date": "2026-09-16",
@@ -338,12 +354,16 @@
     {
      "date": "2026-09-30",
      "rate": 58.490172
+    },
+    {
+     "date": "2026-10-01",
+     "rate": 59.495317
     }
    ]
   },
   "MXN": {
-   "rate": 18.024327,
-   "date": "2026-09-30",
+   "rate": 18.077867,
+   "date": "2026-10-01",
    "series": [
     {
      "date": "2026-09-16",
@@ -404,6 +424,10 @@
     {
      "date": "2026-09-30",
      "rate": 18.024327
+    },
+    {
+     "date": "2026-10-01",
+     "rate": 18.077867
     }
    ]
   }

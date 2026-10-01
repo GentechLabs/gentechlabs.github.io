@@ -1,7 +1,7 @@
 {
   "trip": {
-    "name": "Philippines 2026",
-    "traveler": "Jordan",
+    "name": "Philippines 2026 — Manila & Zambales",
+    "traveler": "Jordan & Josephine",
     "theme": {
       "style": "romantic",
       "palette": "philippines",
@@ -36,55 +36,77 @@
       },
       "headerGradient": "linear-gradient(135deg, #d4a017 0%, #e8652a 50%, #1a6bb5 100%)"
     },
-    "status": "Planning",
-    "startDate": "2026-09-01",
-    "endDate": "2026-09-14",
-    "homeBase": "Makati, Metro Manila",
+    "status": "Planning — targeting November",
+    "datesAreTargets": true,
+    "dateNote": "Dates below are the CURRENT TARGET, not booked. Jordan is aiming at November; the exact window is his call. Everything downstream (watchers, Travel Brief, this hub) derives from this file — so changing the dates here changes the whole suite.",
+    "startDate": "2026-11-08",
+    "endDate": "2026-11-20",
+    "nights": 12,
+    "homeBase": "Manila (1 week) then Zambales / Subic Bay (5 days)",
+    "mapLink": "https://maps.app.goo.gl/w4aexQwkuWNyU5Tq9?g_st=atm",
+    "vibe": "Two halves by design — Manila for the city and the food, then Zambales for the coast. Subic Bay Freeport is the resort-convenient option (it is IN Zambales, ~2.5h from Manila); the open Zambales coast is the more rustic one. Same province, different trip.",
     "legs": [
       {
-        "destination": "Makati, Metro Manila",
-        "arrive": "2026-09-02",
-        "depart": "2026-09-14",
-        "nights": 12,
-        "purpose": "Meet Christel",
-        "location": "Makati City",
-        "accommodation": "TBD \u2014 Airbnb/condo in Makati (Christel picks)"
+        "destination": "Manila",
+        "arrive": "2026-11-08",
+        "depart": "2026-11-15",
+        "nights": 7,
+        "purpose": "City week — food, history, Intramuros, and the base for the whole trip",
+        "location": "Metro Manila (NAIA arrival)",
+        "accommodation": "To book — 7 nights",
+        "currency": "PHP",
+        "currencyName": "Philippine peso"
+      },
+      {
+        "destination": "Zambales / Subic Bay",
+        "arrive": "2026-11-15",
+        "depart": "2026-11-20",
+        "nights": 5,
+        "purpose": "Coast — Subic Bay Freeport for resort convenience, or the open Zambales coast for the quieter version",
+        "location": "Zambales province (~2.5h from Manila)",
+        "accommodation": "To book — 5 nights",
+        "currency": "PHP",
+        "currencyName": "Philippine peso"
       }
     ],
     "flights": [
       {
-        "route": "CVG \u2192 MNL",
-        "airline": "TBD",
-        "departDate": "2026-09-01",
-        "arriveDate": "2026-09-02",
+        "route": "CVG → MNL (Manila)",
+        "airline": "United + Philippine Airlines (rule-12 pick)",
+        "departDate": "2026-11-08",
+        "arriveDate": "2026-11-09",
         "class": "Economy",
-        "cost": 850,
-        "status": "Not booked",
-        "notes": "1-2 layovers typical. Direct to NAIA."
+        "cost": 1314,
+        "status": "Researched — not booked",
+        "notes": "letsfg, verified 2026-09-30 for a real November window: $1,225 Frontier (51h42m — DISQUALIFIED), $1,265 Breeze ($30h59m), $1,314 United (21h07m). Under rule 12 the United option is the honest pick. Benchmark says $1,100–1,400 is 'Fair' — we are mid-range, not overpaying."
       },
       {
-        "route": "MNL \u2192 CVG",
+        "route": "MNL → CVG (return)",
         "airline": "TBD",
-        "departDate": "2026-09-14",
-        "arriveDate": "2026-09-14",
+        "departDate": "2026-11-20",
+        "arriveDate": "2026-11-20",
         "class": "Economy",
-        "cost": 850,
-        "status": "Not booked",
-        "notes": "Return flight. Check connections through Seoul or Tokyo."
+        "cost": "TBD",
+        "status": "To research",
+        "notes": "Book as part of the same round trip. Returns from Manila."
       }
     ],
     "budget": {
-      "total": 1000,
-      "minimum": 500,
+      "total": 2500,
+      "minimum": 1500,
       "spent": 0,
-      "note": "Spending budget only \u2014 flights and accommodation already paid before trip.",
+      "note": "Flight is the single biggest line (~$1,300). Philippines is cheap once you land — the daily cost is a fraction of US prices, so the airfare is the whole game.",
       "categories": {
+        "flight": {
+          "allocated": 1350,
+          "spent": 0
+        },
         "food": {
           "allocated": 400,
           "spent": 0
         },
-        "groceries": {
-          "allocated": 200,
+        "accommodation": {
+          "allocated": 450,
           "spent": 0
         },
         "activities": {
@@ -94,16 +116,62 @@
         "transport": {
           "allocated": 100,
           "spent": 0
-        },
-        "emergency": {
-          "allocated": 100,
-          "spent": 0
         }
       }
     },
+    "foodToLookForwardTo": {
+      "title": "Filipino food worth the flight",
+      "note": "The dish list, plus one Zambales-specific reason to go south.",
+      "items": [
+        {
+          "dish": "Lechon",
+          "what": "Whole roast pig, crisp skin — the celebration dish, and the national obsession."
+        },
+        {
+          "dish": "Chicken Adobo",
+          "what": "Soy, vinegar, garlic, bay. The everyday national dish and the one to learn first."
+        },
+        {
+          "dish": "Sinigang",
+          "what": "Sour tamarind soup — the one you will want on a humid day."
+        },
+        {
+          "dish": "Kare-Kare",
+          "what": "Peanut oxtail stew with bagoong (fermented shrimp paste) on the side."
+        },
+        {
+          "dish": "Sisig",
+          "what": "Sizzling chopped pork with calamansi and chili — a Pampanga export, everywhere in Manila."
+        },
+        {
+          "dish": "Pancit",
+          "what": "Noodles — long life, and at every birthday table."
+        },
+        {
+          "dish": "Lumpia",
+          "what": "Spring rolls, fresh or fried. The party food."
+        },
+        {
+          "dish": "Halo-halo",
+          "what": "Shaved ice, evaporated milk, ube, leche flan, jackfruit. The heat-beater."
+        },
+        {
+          "dish": "Tapsilog",
+          "what": "Cured beef, garlic fried rice, egg. Breakfast, and a reason to get up."
+        },
+        {
+          "dish": "Balut",
+          "what": "The notorious one. Optional. Nobody is grading you."
+        },
+        {
+          "dish": "Zambales mangoes",
+          "what": "Zambales grows the Dinamulag — widely called the sweetest mango in the Philippines. You are going to the right province for it."
+        }
+      ]
+    },
     "costComparison": {
-      "title": "Cost of Living: Makati vs Cincinnati",
-      "note": "How far your money goes in the Philippines",
+      "title": "Cost of Living: Philippines vs Cincinnati",
+      "note": "How far your money goes once you land",
       "items": [
         {
           "item": "Restaurant meal (mid-range)",
@@ -124,52 +192,10 @@
           "unit": "per plate"
         },
         {
-          "item": "Groceries (1 week, 2 people)",
-          "makati": 30,
-          "cincinnati": 120,
-          "unit": ""
-        },
-        {
-          "item": "Coffee (caf\u00e9 latte)",
-          "makati": 2.5,
-          "cincinnati": 5.5,
-          "unit": "per cup"
-        },
-        {
-          "item": "Grab ride (within Makati)",
+          "item": "Grab ride (within city)",
           "makati": 1.5,
           "cincinnati": null,
           "unit": "Uber equivalent"
-        },
-        {
-          "item": "Uber ride (similar distance)",
-          "makati": null,
-          "cincinnati": 12,
-          "unit": ""
-        },
-        {
-          "item": "Movie ticket",
-          "makati": 5,
-          "cincinnati": 12,
-          "unit": ""
-        },
-        {
-          "item": "Beer (local, bar)",
-          "makati": 2,
-          "cincinnati": 6,
-          "unit": ""
-        },
-        {
-          "item": "Rooftop drink",
-          "makati": 6,
-          "cincinnati": 14,
-          "unit": ""
-        },
-        {
-          "item": "Spa massage (1 hour)",
-          "makati": 12,
-          "cincinnati": 80,
-          "unit": ""
         },
         {
           "item": "SIM card (30 days, data)",
@@ -182,263 +208,129 @@
         "savingsPercent": 65,
         "dailyBudgetPH": 35,
         "dailyBudgetCincy": 100,
-        "verdict": "$1,000 in Makati = $2,850 equivalent in Cincinnati"
+        "verdict": "Budget-friendly — the airfare is the cost; everything after landing is cheap."
       }
     },
-    "vibe": "Chill romantic \u2014 mostly home, occasional outings. Cook together, explore when it feels right.",
+    "entryChecklist": {
+      "title": "Philippines Entry — Checklist",
+      "note": "US passport = 30 days visa-free under EO 408. No visa needed.",
+      "items": [
+        {
+          "item": "Passport valid 6+ months past arrival",
+          "status": "Confirmed"
+        },
+        {
+          "item": "Return/onward ticket within 30 days",
+          "status": "To book — researched, not booked"
+        },
+        {
+          "item": "eTravel registration (within 72h of travel)",
+          "status": "To do — etravel.gov.ph, free"
+        },
+        {
+          "item": "Proof of accommodation (Manila + Zambales)",
+          "status": "To book"
+        },
+        {
+          "item": "Proof of funds if asked (bank statement / card on phone)",
+          "status": "Not a fixed requirement — discretionary"
+        },
+        {
+          "item": "Cash rule: up to US$10,000 (or PHP 50,000) without declaring",
+          "status": "Noted"
+        }
+      ]
+    },
     "days": [
       {
         "day": 1,
-        "date": "2026-09-01",
-        "location": "Cincinnati \u2192 Manila",
-        "title": "Departure Day",
+        "date": "2026-11-08",
+        "location": "CVG → Manila",
+        "title": "Fly out",
         "type": "travel",
         "activities": [
-          "Depart CVG airport",
-          "Long flight \u2014 bring laptop, download shows"
+          "Depart CVG",
+          "Connect via a major carrier — watch the layovers, not just the total"
         ],
-        "notes": "Arrive MNL Sep 2 (crosses date line)"
+        "notes": "Under rule 12 the target is a ~1–1.5h connection and a total under 30h. A 51-hour routing is the same trip with a day and a half taken out of it."
       },
       {
         "day": 2,
-        "date": "2026-09-02",
-        "location": "Manila \u2192 Makati",
-        "title": "Arrival Day",
-        "type": "travel",
+        "date": "2026-11-09",
+        "location": "Manila",
+        "title": "Land in Manila",
+        "type": "arrival",
         "activities": [
-          "Land at NAIA",
-          "Grab to Makati (~30-45 min depending on traffic)",
-          "Check into accommodation",
-          "Meet Christel \ud83e\udd70",
-          "Light dinner nearby \u2014 let Christel pick"
+          "Arrive NAIA",
+          "eTravel cleared",
+          "Transfer and settle in"
         ],
-        "notes": "Don't overplan. First night = settle in."
-      },
-      {
-        "day": 3,
-        "date": "2026-09-03",
-        "location": "Makati",
-        "title": "Grocery Run + Home Dinner",
-        "type": "home",
-        "activities": [
-          "Morning: sleep in, adjust to timezone",
-          "Grocery run with Christel \u2014 SM Makati or Landmark",
-          "Cook dinner at home together",
-          "Movie night at the condo"
-        ],
-        "notes": "Christel wants to cook at home. Let her lead the grocery list."
-      },
-      {
-        "day": 4,
-        "date": "2026-09-04",
-        "location": "Makati",
-        "title": "Makati Exploration Day",
-        "type": "explore",
-        "activities": [
-          "Walk Ayala Center / Greenbelt \u2014 shops + restaurants",
-          "Lunch at Greenbelt (many restaurant options)",
-          "Visit Ayala Museum (small, air-conditioned, romantic)",
-          "Coffee at a Makati caf\u00e9",
-          "Home for dinner"
-        ],
-        "notes": "Greenbelt is the nice outdoor mall area. Good for a chill date."
-      },
-      {
-        "day": 5,
-        "date": "2026-09-05",
-        "location": "Makati",
-        "title": "Jollibee Day \ud83d\udc1d",
-        "type": "explore",
-        "activities": [
-          "Jollibee \u2014 get the Chickenjoy, Jolly Spaghetti, and Burger Steak",
-          "Walk around Makati after",
-          "Visit Poblacion \u2014 artsy/nightlife area (daytime is chill)",
-          "Home for rest"
-        ],
-        "notes": "Jollibee is mandatory. Order for two. Try the Peach Mango Pie."
-      },
-      {
-        "day": 6,
-        "date": "2026-09-06",
-        "location": "Makati",
-        "title": "Chill Home Day",
-        "type": "home",
-        "activities": [
-          "Slow morning \u2014 coffee, breakfast together",
-          "Christel cooks lunch",
-          "Afternoon: relax, read, nap, video games",
-          "Evening: grocery run for tomorrow's cooking",
-          "Cook dinner together"
-        ],
-        "notes": "Not every day needs to be an outing. Home days are the best days."
-      },
-      {
-        "day": 7,
-        "date": "2026-09-07",
-        "location": "BGC, Taguig",
-        "title": "BGC Day 1",
-        "type": "explore",
-        "activities": [
-          "Grab to BGC (~15 min from Makati)",
-          "Lunch at a BGC restaurant (Terra 22 or Toyo Eatery)",
-          "Walk The Mind Museum area \u2014 art installations",
-          "High Street shopping + window browsing",
-          "Coffee at a BGC caf\u00e9",
-          "Home for dinner or eat in BGC"
-        ],
-        "notes": "BGC is the cleanest, most walkable area in Metro Manila. Good for a date day."
+        "notes": "First full day is recovery, not sightseeing. Manila traffic is real — build the buffer in."
       },
       {
         "day": 8,
-        "date": "2026-09-08",
-        "location": "BGC, Taguig",
-        "title": "BGC Day 2",
-        "type": "explore",
+        "date": "2026-11-15",
+        "location": "Manila → Zambales",
+        "title": "South to the coast",
+        "type": "travel",
         "activities": [
-          "Return to BGC for anything missed",
-          "Venice Grand Canal Mall (boat ride + restaurants)",
-          "Market Market for local finds",
-          "Rooftop drink at a BGC bar (Z Hostel Roofdeck or similar)",
-          "Home"
+          "Travel Manila → Zambales (~2.5h)",
+          "Check in"
         ],
-        "notes": "Venice Mall has gondola-style boats \u2014 touristy but fun for couples."
-      },
-      {
-        "day": 9,
-        "date": "2026-09-08",
-        "location": "Makati",
-        "title": "Home Day + Date Night",
-        "type": "home",
-        "activities": [
-          "Morning: slow start, home breakfast",
-          "Afternoon: work/relax at condo",
-          "Evening: dress up for date night",
-          "Dinner at Blackbird Makati (romantic, art deco, fancy)",
-          "Night walk around Ayala Ave"
-        ],
-        "notes": "Blackbird is in the old Nielsons Tower. Elegant but not stuffy."
-      },
-      {
-        "day": 10,
-        "date": "2026-09-10",
-        "location": "Makati",
-        "title": "Cooking Day",
-        "type": "home",
-        "activities": [
-          "Big grocery run \u2014 cook something ambitious together",
-          "Try a Filipino recipe (adobo, sinigang, or kare-kare)",
-          "Afternoon: eat + nap",
-          "Evening: movie or walk around Legaspi Park"
-        ],
-        "notes": "Cooking together = best date activity. Legaspi Park has a Sunday market too."
-      },
-      {
-        "day": 11,
-        "date": "2026-09-11",
-        "location": "Makati",
-        "title": "Relaxation Day",
-        "type": "home",
-        "activities": [
-          "No plans. Sleep in.",
-          "Maybe walk to a nearby caf\u00e9",
-          "Home cooking for lunch",
-          "Afternoon: whatever feels right",
-          "Grocery restock for remaining days"
-        ],
-        "notes": "This is the beauty of staying in Makati. You're not rushing."
-      },
-      {
-        "day": 12,
-        "date": "2026-09-12",
-        "location": "Makati",
-        "title": "Legaspi Market + Chill",
-        "type": "explore",
-        "activities": [
-          "Legaspi Weekend Market (if Sunday) \u2014 local food, crafts, live music",
-          "Or: Salcedo Market (Saturday) \u2014 same vibe, different area",
-          "Pick up snacks/souvenirs",
-          "Home for afternoon",
-          "Dinner out \u2014 try Toyo Eatery or Manam"
-        ],
-        "notes": "Both markets are walking distance in Makati. Weekend only."
+        "notes": "Subic Bay Freeport is inside Zambales — the resort option. The open coast is the quieter one. Same province."
       },
       {
         "day": 13,
-        "date": "2026-09-13",
-        "location": "Makati",
-        "title": "Last Full Day",
-        "type": "relax",
-        "activities": [
-          "Pack together",
-          "Final grocery trip \u2014 grab pasalubong (gifts) to bring home",
-          "Last home-cooked meal with Christel",
-          "Evening: reflect on the trip"
-        ],
-        "notes": "Pasalubong ideas: dried mangoes, ube jam, polvoron, local coffee"
-      },
-      {
-        "day": 14,
-        "date": "2026-09-14",
-        "location": "Makati \u2192 Manila \u2192 Cincinnati",
-        "title": "Departure Day",
+        "date": "2026-11-20",
+        "location": "Zambales → Manila → CVG",
+        "title": "Departure",
         "type": "travel",
         "activities": [
-          "Check out of accommodation",
-          "Grab to NAIA",
-          "Fly home to CVG",
-          "Post-trip debrief + update dashboard"
+          "Return to Manila",
+          "Fly home"
         ],
-        "notes": "Allow 2+ hours for NAIA. Traffic can be brutal."
+        "notes": "Leave the buffer day — the drive back from Zambales is not the place to be tight."
       }
     ],
     "checklist": [
       {
-        "item": "Passport (valid 6+ months)",
+        "item": "Set the real November dates",
         "done": false,
-        "category": "docs"
+        "category": "plan",
+        "note": "Everything downstream derives from this file — lock the dates and the suite follows."
       },
       {
-        "item": "PH visa check (US passport = 30 days visa-free)",
-        "done": true,
-        "category": "docs"
-      },
-      {
-        "item": "Complete eTravel registration online (mandatory)",
+        "item": "Book CVG → MNL flight (United option researched)",
         "done": false,
-        "category": "docs",
-        "note": "https://etravel.gov.ph — do before departure"
+        "category": "flights",
+        "note": "letsfg found $1,314 United, 21h07m — the rule-12 pick"
       },
       {
-        "item": "Book CVG → MNL flight",
+        "item": "Book return MNL → CVG",
         "done": false,
         "category": "flights"
       },
       {
-        "item": "Book MNL → CVG return flight",
-        "done": false,
-        "category": "flights"
-      },
-      {
-        "item": "Accommodation: Makati (12 nights)",
+        "item": "Book Manila accommodation (7 nights)",
         "done": false,
         "category": "stay"
       },
       {
-        "item": "Travel insurance (Tin Leg Gold or World Nomads)",
+        "item": "Book Zambales/Subic accommodation (5 nights)",
+        "done": false,
+        "category": "stay",
+        "note": "Decide: Subic Bay Freeport (resort) vs open Zambales coast (rustic)"
+      },
+      {
+        "item": "Complete eTravel registration (within 72h of departure)",
         "done": false,
         "category": "docs",
-        "note": "Min $50K medical, $100K evacuation. ~$200-250. Buy before booking flights."
+        "note": "https://etravel.gov.ph"
       },
       {
-        "item": "Bring proof of funds (PHP cash preferred)",
+        "item": "Check passport validity (6+ months past arrival)",
         "done": false,
-        "category": "finance",
-        "note": "Not strictly enforced in PH unlike Thailand, but good to have."
-      },
-      {
-        "item": "Philippine SIM card (Globe or Smart)",
-        "done": false,
-        "category": "tech"
+        "category": "docs"
       },
       {
         "item": "Notify bank of travel dates",
@@ -446,9 +338,9 @@
         "category": "finance"
       },
       {
-        "item": "Exchange USD → PHP (don't do at airport)",
+        "item": "Philippine SIM card (Globe or Smart)",
         "done": false,
-        "category": "finance"
+        "category": "tech"
       },
       {
         "item": "Download Grab app",
@@ -456,158 +348,179 @@
         "category": "tech"
       },
       {
-        "item": "Download eTravel app",
-        "done": false,
-        "category": "tech",
-        "note": "Philippines mandatory arrival/departure form"
-      },
-      {
-        "item": "Pack light — 2 weeks casual",
-        "done": false,
-        "category": "pack"
-      },
-      {
-        "item": "Bring pasalubong ideas list",
+        "item": "Pack light — tropical, November is still hot",
         "done": false,
         "category": "pack"
       }
     ],
+    "lastUpdated": "2026-09-30",
     "restaurants": {
       "mustTry": [
         {
           "name": "Jollibee",
-          "type": "Fast food",
-          "order": "Chickenjoy, Jolly Spaghetti, Burger Steak, Peach Mango Pie",
-          "cost": "$"
+          "type": "Fast food · national institution",
+          "vibe": "Every Filipino's first stop. Order it once, understand the country.",
+          "order": "Chickenjoy (2pc) with rice and gravy",
+          "cost": "$3-4"
         },
         {
-          "name": "Blackbird Makati",
-          "type": "Fine dining",
-          "vibe": "Romantic, art deco, elegant",
-          "cost": "$$$"
+          "name": "Aristocrat",
+          "type": "Filipino · classic",
+          "vibe": "Manila institution since 1936 — the chicken barbecue is the reason.",
+          "order": "Chicken barbecue with java rice",
+          "cost": "$6-8"
         },
         {
-          "name": "Toyo Eatery",
-          "type": "Modern Filipino",
-          "vibe": "Trendy, innovative",
-          "cost": "$$"
+          "name": "Max's Restaurant",
+          "type": "Filipino · family",
+          "vibe": "Famous for the fried chicken — 'the house that fried chicken built.'",
+          "order": "Fried chicken with rice",
+          "cost": "$7-9"
         },
         {
-          "name": "Manam",
-          "type": "Filipino comfort",
-          "vibe": "Casual, shareable plates",
-          "cost": "$$"
+          "name": "Halo-halo spot (Razon's style)",
+          "type": "Dessert",
+          "vibe": "The heat-beater. First time here, order it and stop asking questions.",
+          "order": "Halo-halo",
+          "cost": "$2-3"
+        },
+        {
+          "name": "Local carinderia",
+          "type": "Street · home-style",
+          "vibe": "The cheapest real meal you'll eat — point at what looks good.",
+          "order": "Whatever is on the tray: adobo, sinigang, pancit",
+          "cost": "$1.50-2.50"
         }
       ],
       "nearby": [
-        "Greenbelt restaurants (many options, outdoor seating)",
-        "Legazpi Sunday Market (street food + live music)",
-        "Salcedo Saturday Market (local food + crafts)"
+        "Lechon — ask locally where the good whole-roast spot is; it is a celebration dish",
+        "Sisig — sizzling plate, everywhere in Manila",
+        "Tapsilog — the breakfast that starts the day right",
+        "Zambales mangoes when you get south — Dinamulag, the sweetest in the country"
       ]
     },
     "places": {
       "parks": [
         {
-          "name": "Legaspi Park",
-          "note": "Walking distance, Sunday market"
+          "name": "Rizal Park (Luneta)",
+          "note": "The historic heart of Manila — the national monument and the green lung of the city."
         },
         {
-          "name": "Salcedo Park",
-          "note": "Saturday market, chill vibes"
+          "name": "Paco Park",
+          "note": "Old circular cemetery turned quiet garden. A calm hour inside a loud city."
         },
         {
-          "name": "Ayala Triangle Gardens",
-          "note": "Green space in the middle of Makati"
+          "name": "La Mesa Eco Park",
+          "note": "Forest and reservoir north of the city — the one place that feels like woods."
         }
       ],
       "malls": [
         {
-          "name": "Greenbelt",
-          "note": "Nice outdoor mall, restaurants + shops"
+          "name": "SM Mall of Asia",
+          "note": "One of the largest malls in the world, on Manila Bay. Go for the sunset."
         },
         {
-          "name": "SM Makati",
-          "note": "Big mall, grocery store inside"
+          "name": "Greenbelt (Makati)",
+          "note": "The upscale one — gardens, restaurants, the polished side of Metro Manila."
         },
         {
-          "name": "Power Plant Mall",
-          "note": "Upscale, Rockwell area"
+          "name": "Robinsons Place Manila",
+          "note": "Central and easy, close to the Ermita/museum district."
         }
       ],
       "bgc": [
         {
-          "name": "BGC High Street",
-          "note": "Walkable strip, shops + restaurants"
-        },
-        {
-          "name": "Venice Grand Canal Mall",
-          "note": "Gondola boats, touristy but fun"
+          "name": "Bonifacio High Street",
+          "note": "Pedestrian strip in BGC — walkable, safe, and where Manila looks most modern."
         },
         {
           "name": "The Mind Museum",
-          "note": "Interactive science museum"
+          "note": "Science museum in BGC. Good rainy-afternoon plan."
+        },
+        {
+          "name": "Venice Grand Canal Mall",
+          "note": "Italian-themed mall at McKinley Hill — a canal, gondolas, and a novelty worth an hour."
         }
       ]
     },
     "packing": [
       {
-        "item": "Light clothes (2 weeks, tropical)",
+        "item": "Passport (6+ months validity)",
         "packed": false
       },
       {
-        "item": "Rain jacket/umbrella (Sept = rainy season)",
+        "item": "Printed/offline copy of return ticket",
         "packed": false
       },
       {
-        "item": "Comfortable walking shoes",
+        "item": "Lightweight tropical clothes",
         "packed": false
       },
       {
-        "item": "Phone charger + adapter (Type A/B, same as US)",
+        "item": "Rain shell — November still sees rain",
         "packed": false
       },
       {
-        "item": "Laptop + headphones",
+        "item": "Comfortable walking shoes (Manila is a walking city)",
         "packed": false
       },
       {
-        "item": "Toiletries (buy full-size there, cheaper)",
+        "item": "Reef-safe sunscreen + insect repellent",
         "packed": false
       },
       {
-        "item": "Pasalubong bag (for bringing gifts home)",
+        "item": "Universal power adapter (PH is 220V, type A/B)",
+        "packed": false
+      },
+      {
+        "item": "Power bank",
+        "packed": false
+      },
+      {
+        "item": "Card + enough cash for the first two days",
+        "packed": false
+      },
+      {
+        "item": "Medication + basic first aid",
         "packed": false
       }
     ],
     "tips": [
-      "Sept is rainy season — bring umbrella, mornings are usually clear",
-      "Grab is the Uber of PH. Use it for everything.",
-      "Makati is very walkable for a Manila city. Greenbelt area especially.",
-      "ATMs charge 250 PHP ($4.50) per withdrawal. Withdraw large amounts.",
-      "7-Eleven everywhere. Cheap meals, phone top-up, ATMs.",
-      "Christel's home base is Mindanao but she'll be in Makati with you.",
-      "Cooking at home saves money AND is more romantic than eating out every night.",
-      "Jollibee delivery via GrabFood if you don't want to go out.",
-      "eTravel registration is MANDATORY — complete online before departure at https://etravel.gov.ph"
+      "Manila traffic is real — give any airport run a generous buffer, especially the return.",
+      "Under-30-days visa-free with a US passport, but the onward ticket is checked: have it ready.",
+      "eTravel registration is free and mandatory — do it inside 72h of departure, not earlier.",
+      "Grab is the Uber equivalent and works everywhere; you rarely need a street taxi.",
+      "A local SIM (Globe or Smart) is a few dollars for 30 days of data — get one at the airport.",
+      "PHP is the currency everywhere; cards work in malls and hotels, cash for street food and markets.",
+      "Zambales is ~2.5 hours from Manila — Subic Bay Freeport is INSIDE Zambales, so 'Subic vs Zambales' is resort-convenient vs beach-rustic, not two different provinces.",
+      "Rule 12 for the flight: aim for a ~1-1.5h layover and a total under 30h — a 51-hour routing is the same trip with a day and a half removed.",
+      "Book direct with the airline, not an OTA. It matters the day something goes wrong.",
+      "Mangoes in Zambales are the point. Ask for Dinamulag."
     ],
-    "travelRules": {
-      "lastUpdated": "2026-06-15",
-      "philippines": {
-        "visaFreeStay": "30 days (US passport)",
-        "extendable": "Yes, up to 36 months via Bureau of Immigration (~Php 3,030 for 29-day extension)",
-        "proofOfFunds": "Required but rarely enforced",
-        "healthInsurance": "Not required",
-        "eTravel": "Mandatory — online registration before arrival",
-        "crackdown": "None — Philippines is not tightening rules like Thailand"
+    "watchCurrencies": [
+      {
+        "code": "PHP",
+        "name": "Philippine peso",
+        "why": "THE TRIP — Manila + Zambales"
       },
-      "thailand": {
-        "visaFreeStay": "30 days (was 60, reduced May 2026)",
-        "proofOfFunds": "20,000 Baht cash per person (~$550) — enforced randomly at immigration",
-        "healthInsurance": "May become mandatory (under review)",
-        "crackdown": "Zero tolerance — deportation for violations, driving without license = court",
-        "note": "If transiting through Thailand, same rules apply"
+      {
+        "code": "THB",
+        "name": "Thai baht",
+        "why": "Bangkok — the alternative still on the table"
+      },
+      {
+        "code": "DOP",
+        "name": "Dominican peso",
+        "why": "Puerto Plata — WATCHED, NOT RECOMMENDED: only $200-300 under Thailand, so it is the same money for a smaller trip (Jordan, 2026-09-30)"
+      },
+      {
+        "code": "MXN",
+        "name": "Mexican peso",
+        "why": "nearby fallback / day-trip proximity"
       }
-    },
-    "lastUpdated": "2026-06-15"
+    ],
+    "currencyNote": "The FX watch list is DERIVED from this file. Add a leg or a watchCurrencies entry and the dollar watcher follows — no code change. This replaced a hardcoded 4-currency list that could not tell PHP (the actual trip) from DOP (a maybe).",
+    "companion": "Josephine",
+    "companion_note": "Traveling together. Added 2026-10-01."
   }
 }
