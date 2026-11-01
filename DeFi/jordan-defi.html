@@ -298,7 +298,22 @@
     Updated <span id="updated">—</span> · <span id="stale"></span><br>
     <span id="prov"></span>
   </div>
-  </div>
+  
+<!-- ── SUNDAY COUNCIL RECAP (added 2026-11-01) ────────────────────────────────────────────────
+     Jordan: "every Sunday the meeting will pop up there." Rendered from the same JSON the rest of the
+     page uses, so there is no second source and no way for the recap to disagree with the numbers.
+     A missing recap renders as an explicit "no meeting yet" line — never as a blank panel. -->
+<section id="council" style="margin-top:18px">
+  <h2 style="font-size:15px;margin:0 0 8px">🏛️ Last council meeting</h2>
+  <div id="council-when" style="font-size:11px;opacity:.65;margin-bottom:8px">—</div>
+  <div id="council-number" style="font-size:13px;line-height:1.5;margin-bottom:10px">—</div>
+  <div id="council-verdict" style="font-size:12px;line-height:1.5;margin-bottom:10px">—</div>
+  <details id="council-more" style="font-size:12px;line-height:1.55">
+    <summary style="cursor:pointer;opacity:.8">the record · the tape · what would prove us wrong</summary>
+    <div id="council-body" style="margin-top:9px"></div>
+  </details>
+</section>
+</div>
 
   <script>
 // The tenant name is HARDCODED on this page. No URL parameter, no fallback, no shared list: this
@@ -995,7 +1010,42 @@ function render(d) {
     (d.price_source === "chain" ? " AVAX price: chain fallback (ledger price unavailable)." : "") +
     " Staker/hold benchmarks: reference figures, not live reads — holding data as of the " +
     "measurement date, not this minute.";
-}
+
+  renderRecap(d);}
+
+
+  // ── SUNDAY COUNCIL RECAP ────────────────────────────────────────────────────────────────────────
+  // Uses textContent everywhere: the recap is machine-generated text and must never be parsed as HTML.
+  function renderRecap(d) {
+    const cap = d.council;
+    const when = document.getElementById("council-when");
+    const num = document.getElementById("council-number");
+    const ver = document.getElementById("council-verdict");
+    const body = document.getElementById("council-body");
+    const more = document.getElementById("council-more");
+    if (!when || !num || !ver || !body) return;
+    if (!cap || !cap.as_of) {
+      when.textContent = "no meeting recorded yet";
+      num.textContent = "The next council recap appears here after the Sunday meeting.";
+      ver.textContent = "";
+      body.textContent = "";
+      if (more) more.open = false;
+      return;
+    }
+    const age = Math.max(0, Math.round((Date.now() - new Date(cap.as_of).getTime()) / 3600000));
+    when.textContent = cap.as_of.slice(0, 10) + " · " + (age < 1 ? "just now" : age + "h ago");
+    num.textContent = cap.one_number ? cap.one_number.label + " — " + cap.one_number.text : "—";
+    ver.textContent = cap.verdict ? "Verdict: " + cap.verdict : "—";
+    const lines = [];
+    if (cap.tape) lines.push(cap.tape);
+    if (cap.record) lines.push(cap.record);
+    if (cap.falsifiers && cap.falsifiers.length) {
+      lines.push("What would prove us wrong:");
+      cap.falsifiers.forEach(f => lines.push("  · " + f));
+    }
+    body.textContent = lines.join("\n");
+    body.style.whiteSpace = "pre-wrap";
+  }
 
 async function load() {
   try {
