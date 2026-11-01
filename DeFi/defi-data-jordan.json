@@ -1,669 +1,1328 @@
 {
+  "_source": "chain: LBPair getActiveId/getReserves/getBin + buylist-state.json \u2014 NOT the previous file",
+  "_rule": "a hub is a measurement, not a memory; absent position is stated, never inherited",
   "tenant": "jordan",
-  "wallet_masked": "0x572A\u20265037",
-  "updated_at": "2026-09-27T23:27:24Z",
-  "chain": "Avalanche",
-  "dex": "LFJ Liquidity Book",
-  "pool": "WAVAX / USDC",
-  "pool_address": "0x864d4E5Ee7318e97483DB7EB0912E09F161516EA",
-  "bin_step": 10,
-  "capital_usd": 147.03,
-  "deployed_usd": 146.63,
-  "idle_usd": 0.4,
-  "deployed_pct": 99.7,
-  "bins": 25,
-  "chain_bins": 25,
-  "active_id": 8363348,
-  "range_min": 10.6616,
-  "range_max": 10.9642,
-  "in_range": true,
-  "range_status": "In Range",
-  "price_usd": 10.8443,
-  "holds_wavax": 2.858505,
-  "holds_usdc": 115.67,
-  "shape": [
-    {
-      "bin": 8363331,
-      "price": 10.6616,
-      "wavax": 0.0,
-      "usdc": 1.22,
-      "usd": 1.22,
-      "active": false,
-      "resolved": true,
-      "pct_of_peak": 8.3
-    },
-    {
-      "bin": 8363332,
-      "price": 10.6723,
-      "wavax": 0.0,
-      "usdc": 2.44,
-      "usd": 2.44,
-      "active": false,
-      "resolved": true,
-      "pct_of_peak": 16.6
-    },
-    {
-      "bin": 8363333,
-      "price": 10.683,
-      "wavax": 0.0,
-      "usdc": 3.66,
-      "usd": 3.66,
-      "active": false,
-      "resolved": true,
-      "pct_of_peak": 24.9
-    },
-    {
-      "bin": 8363334,
-      "price": 10.6936,
-      "wavax": 0.0,
-      "usdc": 4.88,
-      "usd": 4.88,
-      "active": false,
-      "resolved": true,
-      "pct_of_peak": 33.2
-    },
-    {
-      "bin": 8363335,
-      "price": 10.7043,
-      "wavax": 0.0,
-      "usdc": 6.1,
-      "usd": 6.1,
-      "active": false,
-      "resolved": true,
-      "pct_of_peak": 41.5
-    },
-    {
-      "bin": 8363336,
-      "price": 10.715,
-      "wavax": 0.0,
-      "usdc": 7.34,
-      "usd": 7.34,
-      "active": false,
-      "resolved": true,
-      "pct_of_peak": 49.9
-    },
-    {
-      "bin": 8363337,
-      "price": 10.7258,
-      "wavax": 0.0,
-      "usdc": 8.55,
-      "usd": 8.55,
-      "active": false,
-      "resolved": true,
-      "pct_of_peak": 58.2
-    },
-    {
-      "bin": 8363338,
-      "price": 10.7365,
-      "wavax": 0.0,
-      "usdc": 9.77,
-      "usd": 9.77,
-      "active": false,
-      "resolved": true,
-      "pct_of_peak": 66.5
-    },
-    {
-      "bin": 8363339,
-      "price": 10.7472,
-      "wavax": 0.0,
-      "usdc": 11.0,
-      "usd": 11.0,
-      "active": false,
-      "resolved": true,
-      "pct_of_peak": 74.8
-    },
-    {
-      "bin": 8363340,
-      "price": 10.758,
-      "wavax": 0.0,
-      "usdc": 12.24,
-      "usd": 12.24,
-      "active": false,
-      "resolved": true,
-      "pct_of_peak": 83.3
-    },
-    {
-      "bin": 8363341,
-      "price": 10.7687,
-      "wavax": 0.0,
-      "usdc": 13.46,
-      "usd": 13.46,
-      "active": false,
-      "resolved": true,
-      "pct_of_peak": 91.6
-    },
-    {
-      "bin": 8363342,
-      "price": 10.7795,
-      "wavax": 0.0,
-      "usdc": 14.7,
-      "usd": 14.7,
-      "active": false,
-      "resolved": true,
-      "pct_of_peak": 100.0
-    },
-    {
-      "bin": 8363346,
-      "price": 10.8227,
-      "wavax": 0.0,
-      "usdc": 7.34,
-      "usd": 7.34,
-      "active": false,
-      "resolved": true,
-      "pct_of_peak": 49.9
-    },
-    {
-      "bin": 8363347,
-      "price": 10.8335,
-      "wavax": 0.0,
-      "usdc": 6.77,
-      "usd": 6.77,
-      "active": false,
-      "resolved": true,
-      "pct_of_peak": 46.1
-    },
-    {
-      "bin": 8363348,
-      "price": 10.8443,
-      "wavax": 1e-06,
-      "usdc": 6.22,
-      "usd": 6.22,
-      "active": true,
-      "resolved": true,
-      "pct_of_peak": 42.3
-    },
-    {
-      "bin": 8363349,
-      "price": 10.8552,
-      "wavax": 0.520619,
-      "usdc": 0.0,
-      "usd": 5.65,
-      "active": false,
-      "resolved": true,
-      "pct_of_peak": 38.4
-    },
-    {
-      "bin": 8363350,
-      "price": 10.866,
-      "wavax": 0.467585,
-      "usdc": 0.0,
-      "usd": 5.07,
-      "active": false,
-      "resolved": true,
-      "pct_of_peak": 34.5
-    },
-    {
-      "bin": 8363351,
-      "price": 10.8769,
-      "wavax": 0.415622,
-      "usdc": 0.0,
-      "usd": 4.51,
-      "active": false,
-      "resolved": true,
-      "pct_of_peak": 30.7
-    },
-    {
-      "bin": 8363352,
-      "price": 10.8878,
-      "wavax": 0.363669,
-      "usdc": 0.0,
-      "usd": 3.94,
-      "active": false,
-      "resolved": true,
-      "pct_of_peak": 26.8
-    },
-    {
-      "bin": 8363353,
-      "price": 10.8987,
-      "wavax": 0.311717,
-      "usdc": 0.0,
-      "usd": 3.38,
-      "active": false,
-      "resolved": true,
-      "pct_of_peak": 23.0
-    },
-    {
-      "bin": 8363354,
-      "price": 10.9096,
-      "wavax": 0.259764,
-      "usdc": 0.0,
-      "usd": 2.82,
-      "active": false,
-      "resolved": true,
-      "pct_of_peak": 19.2
-    },
-    {
-      "bin": 8363355,
-      "price": 10.9205,
-      "wavax": 0.207811,
-      "usdc": 0.0,
-      "usd": 2.25,
-      "active": false,
-      "resolved": true,
-      "pct_of_peak": 15.3
-    },
-    {
-      "bin": 8363356,
-      "price": 10.9314,
-      "wavax": 0.155858,
-      "usdc": 0.0,
-      "usd": 1.69,
-      "active": false,
-      "resolved": true,
-      "pct_of_peak": 11.5
-    },
-    {
-      "bin": 8363357,
-      "price": 10.9423,
-      "wavax": 0.103906,
-      "usdc": 0.0,
-      "usd": 1.13,
-      "active": false,
-      "resolved": true,
-      "pct_of_peak": 7.7
-    },
-    {
-      "bin": 8363358,
-      "price": 10.9533,
-      "wavax": 0.051953,
-      "usdc": 0.0,
-      "usd": 0.56,
-      "active": false,
-      "resolved": true,
-      "pct_of_peak": 3.8
-    }
-  ],
-  "shape_kind": "curve",
-  "shape_source": "chain geometry (25 bins, gap of 4 at spot)",
-  "shape_total_usd": 146.69,
-  "ledger_vs_shape_delta": 0.06,
-  "unresolved_bins": 0,
-  "scan_truncated": false,
-  "price_source": "chain-active-bin",
-  "efficiency_pct": 79.3,
-  "efficiency_zone": "\ud83d\udfe2 Hold & Earn \u2014 price at the centre, where a curve collects",
-  "efficiency_alt_pct": 20.7,
-  "shape_why": {
-    "label": "RANGE_BOUND",
-    "market": "curve",
-    "shape_for": "curve",
-    "agrees": true,
-    "note": "the market reads curve and the RANGE_BOUND regime resolves to curve \u2014 the layer that picks the shape agrees with the book we hold"
-  },
-  "transition": {
-    "state": "RANGE_DRY",
-    "state_shape": "curve",
-    "state_bins": 25,
-    "state_ratio_pct": 21.1,
-    "lean": "mildly bearish",
-    "why": "drifting lower inside a range: keep the bell, keep more USDC",
-    "rungs": [
-      {
-        "to": "RANGE_NEUTRAL",
-        "shape": "curve",
-        "bins": 25,
-        "ratio": 0.5,
-        "lean": "neutral",
-        "needs": "the pullback ended (tape flat again)",
-        "why": "stop carrying a lean that is no longer true",
-        "steps": 1
-      },
-      {
-        "to": "VOLATILE_DRY",
-        "shape": "bid-ask",
-        "bins": 45,
-        "ratio": 0.3,
-        "lean": "bearish",
-        "needs": "break DOWN confirmed (speed, not depth) -- sigma/hr, not a percentage",
-        "why": "a confirmed break needs the wide U with the money on the USDC side",
-        "steps": 1
-      }
-    ],
-    "projection": [
-      {
-        "at": ">= 70%",
-        "reading": "earning well",
-        "action": "hold \u2014 the book sits where its shape collects"
-      },
-      {
-        "at": "50\u201370%",
-        "reading": "drifting",
-        "action": "watch \u2014 if it holds, take the lean-neutral rung"
-      },
-      {
-        "at": "< 50%",
-        "reading": "poorly placed",
-        "action": "re-centre within the shape, or take the next rung"
-      }
-    ],
-    "now_eff": 79.3,
-    "now_eff_zone": "\ud83d\udfe2 Hold & Earn \u2014 price at the centre, where a curve collects"
-  },
-  "spot_pos_in_range_pct": 60.4,
-  "mass_center_bin": 8363342.4,
-  "mass_near_spot_pct": 24.2,
-  "near_bins": 3,
-  "label_matches_mass": null,
-  "leg_orientation": {
-    "shape": "curve",
-    "bid": null,
-    "ask": null,
-    "inverted": [],
-    "judgeable": false,
-    "verdict": null,
-    "note": "cannot judge: a leg has been crossed by price, so the legs are no longer separable from the bins \u2014 a crossed book is not an inverted one"
-  },
-  "milestone": {
-    "rank": "Untested",
-    "rank_icon": "\ud83c\udf31",
-    "current_daily_fees": 0.1888,
-    "progress_pct": 4.0,
-    "next_rank": "Scout",
-    "next_target_daily_fees": 5,
-    "fees_to_next": 4.8112,
-    "unlocks": "Entry strategies (CURVE)",
-    "source": "steward_progress.estimate_daily_fees",
-    "estimated": true,
-    "in_range_used": true,
-    "daily_fees_est": 0.1888
-  },
-  "benchmark_staker_apy": 4.97,
-  "benchmark_hodl_30d": 50.16,
-  "duty_cycle": {
-    "status": "ok",
+  "book": {
     "tenant": "jordan",
-    "updated_at": 1790551651,
-    "source": {
-      "rebalances": "on-chain tx list via api.snowtrace.io (removeLiquidity 0xc22159b6 on 0x18556da13313f3532c54711497a8fedac273220e)",
-      "price": "CoinGecko (fallback \u2014 GeckoTerminal unavailable) \u2014 AVAX/USD market prices",
-      "current_band": "live chain read (caller)"
-    },
-    "definition": "IN RANGE = deployed with spot inside the held bin band (earning); OUT OF RANGE = deployed with spot outside the band (earning zero); FLAT = withdrawn. One rebalance = one removeLiquidity -> addLiquidity cycle from this wallet.",
-    "rebalance_count": 231,
-    "last_rebalance_utc": "2026-09-27T22:17:51Z",
-    "last_rebalance_tx": null,
-    "last_rebalance_block": 96284938,
-    "current_streak_hours": 1.14,
-    "deployed_now": true,
+    "wallet_masked": "0xe485\u202659e3",
+    "key_status": "drilled_shamir_2of3",
+    "status": "ACTIVE",
+    "as_of": "2026-11-01T20:48:08Z",
+    "capital_usd": 0.0,
+    "deployed_usd": 0.0,
+    "position_status": "NO POSITION \u2014 not yet funded; this page shows the plan, not a holding",
+    "bins": [],
+    "in_range": null,
+    "range_min": null,
+    "range_max": null,
+    "fees_usd": null,
+    "share_of_pool_pct": null,
+    "previous_wallets": [
+      {
+        "address_masked": "0x572A\u20265037",
+        "status": "superseded",
+        "key_status": "lost"
+      }
+    ]
+  },
+  "pool": {
+    "address": "0x864d4E5Ee7318e97483DB7EB0912E09F161516EA",
+    "dex": "LFJ Liquidity Book (V2.2)",
+    "pair": "WAVAX / USDC",
     "bin_step": 10,
-    "windows": {
-      "7d": {
-        "hours_in_range": 120.0,
-        "hours_out_of_range": 8.25,
-        "hours_unresolved": 10.75,
-        "hours_flat": 29.0,
-        "deployed_hours": 139.0,
-        "hours_accounted": 168.0,
-        "window_hours": 168.0,
-        "accounting_covers_pct": 100.0,
-        "in_range_share_pct": 86.3,
-        "in_range_share_low_pct": 86.3,
-        "in_range_share_high_pct": 94.1,
-        "unresolved_share_pct": 7.7,
-        "share_basis": "in_range_share_pct = in / (in + out) over RESOLVED spans; the low/high bounds treat every unresolved (straddling) candle as out / as in",
-        "window_label": "last 7 days @ 15m candles",
-        "candle_tf": "15-min",
-        "window_start_utc": "2026-09-20T23:27:31Z",
-        "window_end_utc": "2026-09-27T23:27:31Z",
-        "candles": 673,
-        "rebalances": 107,
-        "avg_hours_between_rebalances": 1.42,
-        "longest_stretch_hours": 16.59
-      },
-      "all": {
-        "hours_in_range": 263.96,
-        "hours_out_of_range": 61.0,
-        "hours_unresolved": 0.0,
-        "hours_flat": 812.96,
-        "deployed_hours": 324.96,
-        "hours_accounted": 1137.92,
-        "window_hours": 1137.92,
-        "accounting_covers_pct": 100.0,
-        "in_range_share_pct": 81.2,
-        "in_range_share_low_pct": 81.2,
-        "in_range_share_high_pct": 81.2,
-        "unresolved_share_pct": 0.0,
-        "share_basis": "in_range_share_pct = in / (in + out) over RESOLVED spans; the low/high bounds treat every unresolved (straddling) candle as out / as in",
-        "window_label": "since inception @ 30m candles",
-        "candle_tf": "30-min",
-        "window_start_utc": "2026-08-11T13:32:14Z",
-        "window_end_utc": "2026-09-27T23:27:31Z",
-        "candles": 1139,
-        "rebalances": 231,
-        "avg_hours_between_rebalances": 4.93,
-        "longest_stretch_hours": 32.67
-      },
-      "now": {
-        "hours_in_range": 0.73,
-        "hours_out_of_range": 0.0,
-        "hours_unresolved": 0.0,
-        "hours_flat": 0.01,
-        "deployed_hours": 0.73,
-        "hours_accounted": 0.75,
-        "window_hours": 1.14,
-        "accounting_covers_pct": 65.6,
-        "in_range_share_pct": 100.0,
-        "in_range_share_low_pct": 100.0,
-        "in_range_share_high_pct": 100.0,
-        "unresolved_share_pct": 0.0,
-        "share_basis": "in_range_share_pct = in / (in + out) over RESOLVED spans; the low/high bounds treat every unresolved (straddling) candle as out / as in",
-        "window_label": "current interval @ 1m candles",
-        "candle_tf": "1-min",
-        "window_start_utc": "2026-09-27T22:19:12Z",
-        "window_end_utc": "2026-09-27T23:27:31Z",
-        "candles": 45,
-        "rebalances": 0,
-        "avg_hours_between_rebalances": null,
-        "longest_stretch_hours": 1.14
-      }
-    },
-    "band_now": {
-      "lo_px": 10.66162873620103,
-      "hi_px": 10.96421958332135
-    },
-    "price_shape": "point samples, so an excursion that starts and ends between samples is invisible",
-    "price_fallback_reason": "source unreadable: HTTPError: HTTP Error 400: Bad Request"
-  },
-  "compound": {
-    "tenant": "jordan",
-    "status": "ok",
-    "error": null,
-    "period_days": 7.0,
-    "per_day_low_usd": 0.1888,
-    "per_day_high_usd": 0.391045840936889,
-    "period_low_usd": 1.3215999999999999,
-    "period_high_usd": 2.737320886558223,
-    "rate_pct_per_day_low": 0.12875946259292095,
-    "rate_pct_per_day_high": 0.26668883648427266,
-    "apr_pct_low": 46.99720384641615,
-    "apr_pct_high": 97.34142531675953,
-    "bracket_x": 2.0712173778436918,
-    "single_source": false,
-    "derivations": {
-      "pool_economics": {
-        "bin_step": 10,
-        "fee_pct": 0.053296548264727094,
-        "fee_frac": 0.0005329654826472709,
-        "fee_detail": {
-          "bin_step": 10,
-          "base_factor": 5000,
-          "static_fee_frac": 0.0005,
-          "measured_fee_frac": 0.0005329654826472709,
-          "measured_from": "on-chain Swap events (topic 0xad7d6f97\u2026), median totalFees/amountIn over 111 legs in the last 900 blocks",
-          "measured_samples": 111,
-          "measured_range_frac": [
-            0.0005026037276443134,
-            0.0008932452281373077
-          ],
-          "fee_frac": 0.0005329654826472709,
-          "fee_source": "measured on-chain"
-        },
-        "volume_24h_usd": 3301778.49,
-        "pool_tvl_usd": 659845.38,
-        "our_lp_usd": 146.63,
-        "our_share_pct": 0.022221872645376405,
-        "per_day_usd": 0.391045840936889,
-        "price_usd": 10.84,
-        "source": "pool fee measured on-chain x DexScreener 24h vol x our share of pool TVL",
-        "caveat": "the share basis is WHOLE-POOL TVL, so for a book concentrated near spot this is a LOWER bound on the pool-economics estimate"
-      },
-      "house_estimator": {
-        "per_day_usd": 0.1888,
-        "in_range_used": true,
-        "source": "steward_progress.estimate_daily_fees"
-      }
-    },
-    "waiting_usd": 0.40138638405836097,
-    "waiting_usdc": 0.200006,
-    "waiting_wavax": 0.01857010213556175,
-    "waiting_note": "idle working capital in the wallet ($0.2000 USDC + 0.018570 WAVAX @ $10.8443) \u2014 deployed by the compound engine on its next cycle; native AVAX 0.031120 is gas, not working capital",
-    "pending_fee_usd": null,
-    "pending_fee_note": "LFJ V2.2 folds fees into the bin reserves at swap time; every pendingFees/collectFees selector reverts on this pair, so there is no claimable fee balance \u2014 nothing waits to be collected",
-    "compounding_is_automatic": true,
-    "gas": {
-      "gas_price_navax": 5.00000015,
-      "cycle_gas_units": 2856000,
-      "one_cycle_avax": 0.0142800004284,
-      "one_cycle_usd": 0.15485708961814282,
-      "reserve_avax": 0.018442811321861468,
-      "reserve_usd": 0.2,
-      "balance_avax": 0.031119981177116528,
-      "deployable_avax": 0.01267716985525506,
-      "above_floor": true,
-      "floor_cycles": 1,
-      "floor_usd": 0.2,
-      "source": "gas_reserve.reserve_info (the ONE floor)"
-    },
-    "decision": {
-      "action": "HOLD",
-      "reason": "idle $0.4014 below the $1.00 minimum deploy \u2014 not worth a tx"
-    },
-    "sources": [
-      "pool_economics",
-      "house_estimator"
-    ],
-    "waiting_price_source": "chain getPriceFromId",
-    "waiting_price_usd": 10.844333681542736,
-    "native_avax": 0.031119981177116528
-  },
-  "earnings": {
-    "status": "ok",
-    "per_day_usd": 0.1888,
-    "per_week_usd": 1.3216,
-    "per_month_usd": 5.664,
-    "basis": "estimate_daily_fees (the SAME rate the rank goal uses)",
-    "in_range": true,
-    "reason": null,
-    "note": "one measured daily rate multiplied across 7 and 30 days \u2014 not three independent readings, so the horizons scale with the day",
-    "cross_check_per_day_usd": 0.1888,
-    "cross_check_spread_x": 2.0712173778436918,
-    "cross_check_per_day_high_usd": 0.391045840936889
-  },
-  "fee_ledger": {
-    "status": "ok",
-    "generated_at": "2026-09-27T21:43:42+00:00",
-    "source": "onchain: LB Pair Swap events (totalFees)",
-    "archive_state": false,
-    "how_to_read": "pool fees are RECEIPTS (read from Swap logs, proof block on every row). Our share of them is snapshotted as of generated_at and recorded forward \u2014 it is not back-filled, because this RPC cannot serve historical state.",
-    "our_share": {
-      "status": "ok",
-      "bins": 25,
-      "bins_nonzero": 25,
-      "per_bin_share": {
-        "min_pct": 0.024496,
-        "median_pct": 0.219246,
-        "max_pct": 0.615103,
-        "bins_measured": 25
-      },
-      "aggregate_share_pct": null,
-      "why_no_aggregate": "bins hold different token mixes; a cross-bin sum mixes units and is not a valid pool share"
-    },
-    "days": [
-      {
-        "date": "2026-09-24",
-        "status": "closed",
-        "block_range_half_open": [
-          96014304,
-          96086157
-        ],
-        "block_range_meaning": "from b_lo inclusive to b_hi EXCLUSIVE (b_hi is next day's first)",
-        "last_block_with_swap": 96086156,
-        "swaps": 9151,
-        "pool_fees_wavax": 435.02901,
-        "pool_fees_usdc": 4416.9384,
-        "pool_fees_usd": 9172.4145,
-        "undecoded_swaps": 0,
-        "our_share": "ok",
-        "our_fees_usd": null,
-        "attribution": "pool receipts verified; our allocation NOT verified (needs archive state) \u2014 recorded forward from today",
-        "proof_block": 96086156,
-        "proof_url": "https://snowtrace.io/block/96086156"
-      },
-      {
-        "date": "2026-09-25",
-        "status": "closed",
-        "block_range_half_open": [
-          96086157,
-          96158214
-        ],
-        "block_range_meaning": "from b_lo inclusive to b_hi EXCLUSIVE (b_hi is next day's first)",
-        "last_block_with_swap": 96158156,
-        "swaps": 8166,
-        "pool_fees_wavax": 98.281161,
-        "pool_fees_usdc": 1049.265,
-        "pool_fees_usd": 2123.6157,
-        "undecoded_swaps": 0,
-        "our_share": "ok",
-        "our_fees_usd": null,
-        "attribution": "pool receipts verified; our allocation NOT verified (needs archive state) \u2014 recorded forward from today",
-        "proof_block": 96158156,
-        "proof_url": "https://snowtrace.io/block/96158156"
-      },
-      {
-        "date": "2026-09-26",
-        "status": "closed",
-        "block_range_half_open": [
-          96158214,
-          96224949
-        ],
-        "block_range_meaning": "from b_lo inclusive to b_hi EXCLUSIVE (b_hi is next day's first)",
-        "last_block_with_swap": 96224947,
-        "swaps": 6269,
-        "pool_fees_wavax": 82.989153,
-        "pool_fees_usdc": 912.6973,
-        "pool_fees_usd": 1819.8849,
-        "undecoded_swaps": 0,
-        "our_share": "ok",
-        "our_fees_usd": null,
-        "attribution": "pool receipts verified; our allocation NOT verified (needs archive state) \u2014 recorded forward from today",
-        "proof_block": 96224947,
-        "proof_url": "https://snowtrace.io/block/96224947"
-      }
-    ],
-    "totals": {
-      "days": 3,
-      "pool_fees_usd": 13115.92,
-      "swaps": 23586
-    },
-    "latest": {
-      "date": "2026-09-26",
-      "status": "closed",
-      "block_range_half_open": [
-        96158214,
-        96224949
+    "active_id": 8363126,
+    "price_usd": 8.686357,
+    "reserve_wavax": 24619.2546,
+    "reserve_usdc": 114795.7,
+    "reserve_value_usd": 328647.33,
+    "shape": [
+      [
+        8363066,
+        {
+          "wavax": 0.0,
+          "usdc": 155.655497,
+          "usd": 155.66,
+          "price": 8.180748,
+          "active": false
+        }
       ],
-      "block_range_meaning": "from b_lo inclusive to b_hi EXCLUSIVE (b_hi is next day's first)",
-      "last_block_with_swap": 96224947,
-      "swaps": 6269,
-      "pool_fees_wavax": 82.989153,
-      "pool_fees_usdc": 912.6973,
-      "pool_fees_usd": 1819.8849,
-      "undecoded_swaps": 0,
-      "our_share": "ok",
-      "our_fees_usd": null,
-      "attribution": "pool receipts verified; our allocation NOT verified (needs archive state) \u2014 recorded forward from today",
-      "proof_block": 96224947,
-      "proof_url": "https://snowtrace.io/block/96224947"
-    }
+      [
+        8363067,
+        {
+          "wavax": 0.0,
+          "usdc": 156.604491,
+          "usd": 156.6,
+          "price": 8.188929,
+          "active": false
+        }
+      ],
+      [
+        8363068,
+        {
+          "wavax": 0.0,
+          "usdc": 157.5666,
+          "usd": 157.57,
+          "price": 8.197118,
+          "active": false
+        }
+      ],
+      [
+        8363069,
+        {
+          "wavax": 0.0,
+          "usdc": 159.175931,
+          "usd": 159.18,
+          "price": 8.205315,
+          "active": false
+        }
+      ],
+      [
+        8363070,
+        {
+          "wavax": 0.0,
+          "usdc": 317.171502,
+          "usd": 317.17,
+          "price": 8.21352,
+          "active": false
+        }
+      ],
+      [
+        8363071,
+        {
+          "wavax": 0.0,
+          "usdc": 314.974666,
+          "usd": 314.97,
+          "price": 8.221734,
+          "active": false
+        }
+      ],
+      [
+        8363072,
+        {
+          "wavax": 0.0,
+          "usdc": 311.167167,
+          "usd": 311.17,
+          "price": 8.229956,
+          "active": false
+        }
+      ],
+      [
+        8363073,
+        {
+          "wavax": 0.0,
+          "usdc": 313.726595,
+          "usd": 313.73,
+          "price": 8.238185,
+          "active": false
+        }
+      ],
+      [
+        8363074,
+        {
+          "wavax": 0.0,
+          "usdc": 392.172092,
+          "usd": 392.17,
+          "price": 8.246424,
+          "active": false
+        }
+      ],
+      [
+        8363075,
+        {
+          "wavax": 0.0,
+          "usdc": 310.482342,
+          "usd": 310.48,
+          "price": 8.25467,
+          "active": false
+        }
+      ],
+      [
+        8363076,
+        {
+          "wavax": 0.0,
+          "usdc": 308.01847,
+          "usd": 308.02,
+          "price": 8.262925,
+          "active": false
+        }
+      ],
+      [
+        8363077,
+        {
+          "wavax": 0.0,
+          "usdc": 308.239192,
+          "usd": 308.24,
+          "price": 8.271188,
+          "active": false
+        }
+      ],
+      [
+        8363078,
+        {
+          "wavax": 0.0,
+          "usdc": 307.938712,
+          "usd": 307.94,
+          "price": 8.279459,
+          "active": false
+        }
+      ],
+      [
+        8363079,
+        {
+          "wavax": 0.0,
+          "usdc": 307.317718,
+          "usd": 307.32,
+          "price": 8.287738,
+          "active": false
+        }
+      ],
+      [
+        8363080,
+        {
+          "wavax": 0.0,
+          "usdc": 306.309535,
+          "usd": 306.31,
+          "price": 8.296026,
+          "active": false
+        }
+      ],
+      [
+        8363081,
+        {
+          "wavax": 0.0,
+          "usdc": 304.225445,
+          "usd": 304.23,
+          "price": 8.304322,
+          "active": false
+        }
+      ],
+      [
+        8363082,
+        {
+          "wavax": 0.0,
+          "usdc": 303.000597,
+          "usd": 303.0,
+          "price": 8.312626,
+          "active": false
+        }
+      ],
+      [
+        8363083,
+        {
+          "wavax": 0.0,
+          "usdc": 304.66267,
+          "usd": 304.66,
+          "price": 8.320939,
+          "active": false
+        }
+      ],
+      [
+        8363084,
+        {
+          "wavax": 0.0,
+          "usdc": 306.487002,
+          "usd": 306.49,
+          "price": 8.32926,
+          "active": false
+        }
+      ],
+      [
+        8363085,
+        {
+          "wavax": 0.0,
+          "usdc": 307.03961,
+          "usd": 307.04,
+          "price": 8.337589,
+          "active": false
+        }
+      ],
+      [
+        8363086,
+        {
+          "wavax": 0.0,
+          "usdc": 305.698118,
+          "usd": 305.7,
+          "price": 8.345927,
+          "active": false
+        }
+      ],
+      [
+        8363087,
+        {
+          "wavax": 0.0,
+          "usdc": 305.852488,
+          "usd": 305.85,
+          "price": 8.354273,
+          "active": false
+        }
+      ],
+      [
+        8363088,
+        {
+          "wavax": 0.0,
+          "usdc": 310.8006,
+          "usd": 310.8,
+          "price": 8.362627,
+          "active": false
+        }
+      ],
+      [
+        8363089,
+        {
+          "wavax": 0.0,
+          "usdc": 311.711283,
+          "usd": 311.71,
+          "price": 8.37099,
+          "active": false
+        }
+      ],
+      [
+        8363090,
+        {
+          "wavax": 0.0,
+          "usdc": 306.23056,
+          "usd": 306.23,
+          "price": 8.379361,
+          "active": false
+        }
+      ],
+      [
+        8363091,
+        {
+          "wavax": 0.0,
+          "usdc": 310.468264,
+          "usd": 310.47,
+          "price": 8.38774,
+          "active": false
+        }
+      ],
+      [
+        8363092,
+        {
+          "wavax": 0.0,
+          "usdc": 310.953027,
+          "usd": 310.95,
+          "price": 8.396128,
+          "active": false
+        }
+      ],
+      [
+        8363093,
+        {
+          "wavax": 0.0,
+          "usdc": 307.301184,
+          "usd": 307.3,
+          "price": 8.404524,
+          "active": false
+        }
+      ],
+      [
+        8363094,
+        {
+          "wavax": 0.0,
+          "usdc": 157.72974,
+          "usd": 157.73,
+          "price": 8.412928,
+          "active": false
+        }
+      ],
+      [
+        8363095,
+        {
+          "wavax": 0.0,
+          "usdc": 158.079687,
+          "usd": 158.08,
+          "price": 8.421341,
+          "active": false
+        }
+      ],
+      [
+        8363096,
+        {
+          "wavax": 0.0,
+          "usdc": 157.570013,
+          "usd": 157.57,
+          "price": 8.429763,
+          "active": false
+        }
+      ],
+      [
+        8363097,
+        {
+          "wavax": 0.0,
+          "usdc": 156.979588,
+          "usd": 156.98,
+          "price": 8.438192,
+          "active": false
+        }
+      ],
+      [
+        8363098,
+        {
+          "wavax": 0.0,
+          "usdc": 312.871325,
+          "usd": 312.87,
+          "price": 8.446631,
+          "active": false
+        }
+      ],
+      [
+        8363099,
+        {
+          "wavax": 0.0,
+          "usdc": 316.364122,
+          "usd": 316.36,
+          "price": 8.455077,
+          "active": false
+        }
+      ],
+      [
+        8363100,
+        {
+          "wavax": 0.0,
+          "usdc": 314.646127,
+          "usd": 314.65,
+          "price": 8.463532,
+          "active": false
+        }
+      ],
+      [
+        8363101,
+        {
+          "wavax": 0.0,
+          "usdc": 367.385872,
+          "usd": 367.39,
+          "price": 8.471996,
+          "active": false
+        }
+      ],
+      [
+        8363102,
+        {
+          "wavax": 0.0,
+          "usdc": 316.001055,
+          "usd": 316.0,
+          "price": 8.480468,
+          "active": false
+        }
+      ],
+      [
+        8363103,
+        {
+          "wavax": 0.0,
+          "usdc": 317.974625,
+          "usd": 317.97,
+          "price": 8.488948,
+          "active": false
+        }
+      ],
+      [
+        8363104,
+        {
+          "wavax": 0.0,
+          "usdc": 317.199868,
+          "usd": 317.2,
+          "price": 8.497437,
+          "active": false
+        }
+      ],
+      [
+        8363105,
+        {
+          "wavax": 0.0,
+          "usdc": 315.638221,
+          "usd": 315.64,
+          "price": 8.505935,
+          "active": false
+        }
+      ],
+      [
+        8363106,
+        {
+          "wavax": 0.0,
+          "usdc": 317.415355,
+          "usd": 317.42,
+          "price": 8.514441,
+          "active": false
+        }
+      ],
+      [
+        8363107,
+        {
+          "wavax": 0.0,
+          "usdc": 320.492492,
+          "usd": 320.49,
+          "price": 8.522955,
+          "active": false
+        }
+      ],
+      [
+        8363108,
+        {
+          "wavax": 0.0,
+          "usdc": 322.179049,
+          "usd": 322.18,
+          "price": 8.531478,
+          "active": false
+        }
+      ],
+      [
+        8363109,
+        {
+          "wavax": 0.0,
+          "usdc": 323.372218,
+          "usd": 323.37,
+          "price": 8.54001,
+          "active": false
+        }
+      ],
+      [
+        8363110,
+        {
+          "wavax": 0.0,
+          "usdc": 289.057381,
+          "usd": 289.06,
+          "price": 8.54855,
+          "active": false
+        }
+      ],
+      [
+        8363111,
+        {
+          "wavax": 0.0,
+          "usdc": 252.90008,
+          "usd": 252.9,
+          "price": 8.557098,
+          "active": false
+        }
+      ],
+      [
+        8363112,
+        {
+          "wavax": 0.0,
+          "usdc": 253.832003,
+          "usd": 253.83,
+          "price": 8.565655,
+          "active": false
+        }
+      ],
+      [
+        8363113,
+        {
+          "wavax": 0.0,
+          "usdc": 253.180503,
+          "usd": 253.18,
+          "price": 8.574221,
+          "active": false
+        }
+      ],
+      [
+        8363114,
+        {
+          "wavax": 0.0,
+          "usdc": 254.06065,
+          "usd": 254.06,
+          "price": 8.582795,
+          "active": false
+        }
+      ],
+      [
+        8363115,
+        {
+          "wavax": 0.0,
+          "usdc": 253.451081,
+          "usd": 253.45,
+          "price": 8.591378,
+          "active": false
+        }
+      ],
+      [
+        8363116,
+        {
+          "wavax": 0.0,
+          "usdc": 254.143074,
+          "usd": 254.14,
+          "price": 8.599969,
+          "active": false
+        }
+      ],
+      [
+        8363117,
+        {
+          "wavax": 0.0,
+          "usdc": 254.349914,
+          "usd": 254.35,
+          "price": 8.608569,
+          "active": false
+        }
+      ],
+      [
+        8363118,
+        {
+          "wavax": 0.0,
+          "usdc": 357.541521,
+          "usd": 357.54,
+          "price": 8.617178,
+          "active": false
+        }
+      ],
+      [
+        8363119,
+        {
+          "wavax": 0.0,
+          "usdc": 360.478469,
+          "usd": 360.48,
+          "price": 8.625795,
+          "active": false
+        }
+      ],
+      [
+        8363120,
+        {
+          "wavax": 0.0,
+          "usdc": 365.035523,
+          "usd": 365.04,
+          "price": 8.634421,
+          "active": false
+        }
+      ],
+      [
+        8363121,
+        {
+          "wavax": 0.0,
+          "usdc": 364.489983,
+          "usd": 364.49,
+          "price": 8.643055,
+          "active": false
+        }
+      ],
+      [
+        8363122,
+        {
+          "wavax": 0.0,
+          "usdc": 362.492898,
+          "usd": 362.49,
+          "price": 8.651698,
+          "active": false
+        }
+      ],
+      [
+        8363123,
+        {
+          "wavax": 0.0,
+          "usdc": 361.21829,
+          "usd": 361.22,
+          "price": 8.66035,
+          "active": false
+        }
+      ],
+      [
+        8363124,
+        {
+          "wavax": 0.0,
+          "usdc": 364.310518,
+          "usd": 364.31,
+          "price": 8.66901,
+          "active": false
+        }
+      ],
+      [
+        8363125,
+        {
+          "wavax": 0.0,
+          "usdc": 382.338961,
+          "usd": 382.34,
+          "price": 8.677679,
+          "active": false
+        }
+      ],
+      [
+        8363126,
+        {
+          "wavax": 44.7430491285715,
+          "usdc": 1e-06,
+          "usd": 388.65,
+          "price": 8.686357,
+          "active": true
+        }
+      ],
+      [
+        8363127,
+        {
+          "wavax": 44.28510248772886,
+          "usdc": 0.0,
+          "usd": 384.68,
+          "price": 8.695043,
+          "active": false
+        }
+      ],
+      [
+        8363128,
+        {
+          "wavax": 32.360793555248385,
+          "usdc": 0.0,
+          "usd": 281.1,
+          "price": 8.703738,
+          "active": false
+        }
+      ],
+      [
+        8363129,
+        {
+          "wavax": 35.88942035300781,
+          "usdc": 0.0,
+          "usd": 311.75,
+          "price": 8.712442,
+          "active": false
+        }
+      ],
+      [
+        8363130,
+        {
+          "wavax": 35.838790595059315,
+          "usdc": 0.0,
+          "usd": 311.31,
+          "price": 8.721155,
+          "active": false
+        }
+      ],
+      [
+        8363131,
+        {
+          "wavax": 35.905376208796824,
+          "usdc": 0.0,
+          "usd": 311.89,
+          "price": 8.729876,
+          "active": false
+        }
+      ],
+      [
+        8363132,
+        {
+          "wavax": 36.50147580903744,
+          "usdc": 0.0,
+          "usd": 317.06,
+          "price": 8.738606,
+          "active": false
+        }
+      ],
+      [
+        8363133,
+        {
+          "wavax": 36.26290672131772,
+          "usdc": 0.0,
+          "usd": 314.99,
+          "price": 8.747344,
+          "active": false
+        }
+      ],
+      [
+        8363134,
+        {
+          "wavax": 36.13682188081226,
+          "usdc": 0.0,
+          "usd": 313.9,
+          "price": 8.756092,
+          "active": false
+        }
+      ],
+      [
+        8363135,
+        {
+          "wavax": 36.37498677496424,
+          "usdc": 0.0,
+          "usd": 315.97,
+          "price": 8.764848,
+          "active": false
+        }
+      ],
+      [
+        8363136,
+        {
+          "wavax": 36.442147492805006,
+          "usdc": 0.0,
+          "usd": 316.55,
+          "price": 8.773612,
+          "active": false
+        }
+      ],
+      [
+        8363137,
+        {
+          "wavax": 39.453597354625096,
+          "usdc": 0.0,
+          "usd": 342.71,
+          "price": 8.782386,
+          "active": false
+        }
+      ],
+      [
+        8363138,
+        {
+          "wavax": 39.9638714610678,
+          "usdc": 0.0,
+          "usd": 347.14,
+          "price": 8.791168,
+          "active": false
+        }
+      ],
+      [
+        8363139,
+        {
+          "wavax": 40.24754062699465,
+          "usdc": 0.0,
+          "usd": 349.6,
+          "price": 8.79996,
+          "active": false
+        }
+      ],
+      [
+        8363140,
+        {
+          "wavax": 40.39592486619783,
+          "usdc": 0.0,
+          "usd": 350.89,
+          "price": 8.80876,
+          "active": false
+        }
+      ],
+      [
+        8363141,
+        {
+          "wavax": 49.305145159889136,
+          "usdc": 0.0,
+          "usd": 428.28,
+          "price": 8.817568,
+          "active": false
+        }
+      ],
+      [
+        8363142,
+        {
+          "wavax": 48.992278132633984,
+          "usdc": 0.0,
+          "usd": 425.56,
+          "price": 8.826386,
+          "active": false
+        }
+      ],
+      [
+        8363143,
+        {
+          "wavax": 49.00373263116123,
+          "usdc": 0.0,
+          "usd": 425.66,
+          "price": 8.835212,
+          "active": false
+        }
+      ],
+      [
+        8363144,
+        {
+          "wavax": 49.00543760720864,
+          "usdc": 0.0,
+          "usd": 425.68,
+          "price": 8.844048,
+          "active": false
+        }
+      ],
+      [
+        8363145,
+        {
+          "wavax": 49.48129423924106,
+          "usdc": 0.0,
+          "usd": 429.81,
+          "price": 8.852892,
+          "active": false
+        }
+      ],
+      [
+        8363146,
+        {
+          "wavax": 49.90064334234146,
+          "usdc": 0.0,
+          "usd": 433.45,
+          "price": 8.861744,
+          "active": false
+        }
+      ],
+      [
+        8363147,
+        {
+          "wavax": 49.634187329613184,
+          "usdc": 0.0,
+          "usd": 431.14,
+          "price": 8.870606,
+          "active": false
+        }
+      ],
+      [
+        8363148,
+        {
+          "wavax": 49.710558945089126,
+          "usdc": 0.0,
+          "usd": 431.8,
+          "price": 8.879477,
+          "active": false
+        }
+      ],
+      [
+        8363149,
+        {
+          "wavax": 50.089694758414026,
+          "usdc": 0.0,
+          "usd": 435.1,
+          "price": 8.888356,
+          "active": false
+        }
+      ],
+      [
+        8363150,
+        {
+          "wavax": 51.77697288814229,
+          "usdc": 0.0,
+          "usd": 449.75,
+          "price": 8.897245,
+          "active": false
+        }
+      ],
+      [
+        8363151,
+        {
+          "wavax": 52.31636152359353,
+          "usdc": 0.0,
+          "usd": 454.44,
+          "price": 8.906142,
+          "active": false
+        }
+      ],
+      [
+        8363152,
+        {
+          "wavax": 51.74467093446765,
+          "usdc": 0.0,
+          "usd": 449.47,
+          "price": 8.915048,
+          "active": false
+        }
+      ],
+      [
+        8363153,
+        {
+          "wavax": 52.776618199886286,
+          "usdc": 0.0,
+          "usd": 458.44,
+          "price": 8.923963,
+          "active": false
+        }
+      ],
+      [
+        8363154,
+        {
+          "wavax": 51.79217223642757,
+          "usdc": 0.0,
+          "usd": 449.89,
+          "price": 8.932887,
+          "active": false
+        }
+      ],
+      [
+        8363155,
+        {
+          "wavax": 50.74608428155451,
+          "usdc": 0.0,
+          "usd": 440.8,
+          "price": 8.94182,
+          "active": false
+        }
+      ],
+      [
+        8363156,
+        {
+          "wavax": 49.683322101894895,
+          "usdc": 0.0,
+          "usd": 431.57,
+          "price": 8.950762,
+          "active": false
+        }
+      ],
+      [
+        8363157,
+        {
+          "wavax": 49.64636342229793,
+          "usdc": 0.0,
+          "usd": 431.25,
+          "price": 8.959712,
+          "active": false
+        }
+      ],
+      [
+        8363158,
+        {
+          "wavax": 49.09528775380061,
+          "usdc": 0.0,
+          "usd": 426.46,
+          "price": 8.968672,
+          "active": false
+        }
+      ],
+      [
+        8363159,
+        {
+          "wavax": 49.280021216977964,
+          "usdc": 0.0,
+          "usd": 428.06,
+          "price": 8.977641,
+          "active": false
+        }
+      ],
+      [
+        8363160,
+        {
+          "wavax": 49.00905497135109,
+          "usdc": 0.0,
+          "usd": 425.71,
+          "price": 8.986619,
+          "active": false
+        }
+      ],
+      [
+        8363161,
+        {
+          "wavax": 49.808310673830164,
+          "usdc": 0.0,
+          "usd": 432.65,
+          "price": 8.995605,
+          "active": false
+        }
+      ],
+      [
+        8363162,
+        {
+          "wavax": 49.89999871611096,
+          "usdc": 0.0,
+          "usd": 433.45,
+          "price": 9.004601,
+          "active": false
+        }
+      ],
+      [
+        8363163,
+        {
+          "wavax": 50.013978314589906,
+          "usdc": 0.0,
+          "usd": 434.44,
+          "price": 9.013605,
+          "active": false
+        }
+      ],
+      [
+        8363164,
+        {
+          "wavax": 49.75929890645886,
+          "usdc": 0.0,
+          "usd": 432.23,
+          "price": 9.022619,
+          "active": false
+        }
+      ],
+      [
+        8363165,
+        {
+          "wavax": 50.257480456859746,
+          "usdc": 0.0,
+          "usd": 436.55,
+          "price": 9.031642,
+          "active": false
+        }
+      ],
+      [
+        8363166,
+        {
+          "wavax": 49.86293691581539,
+          "usdc": 0.0,
+          "usd": 433.13,
+          "price": 9.040673,
+          "active": false
+        }
+      ],
+      [
+        8363167,
+        {
+          "wavax": 49.56678425007263,
+          "usdc": 0.0,
+          "usd": 430.55,
+          "price": 9.049714,
+          "active": false
+        }
+      ],
+      [
+        8363168,
+        {
+          "wavax": 49.35850568563397,
+          "usdc": 0.0,
+          "usd": 428.75,
+          "price": 9.058764,
+          "active": false
+        }
+      ],
+      [
+        8363169,
+        {
+          "wavax": 48.85557816230701,
+          "usdc": 0.0,
+          "usd": 424.38,
+          "price": 9.067822,
+          "active": false
+        }
+      ],
+      [
+        8363170,
+        {
+          "wavax": 50.14257925497989,
+          "usdc": 0.0,
+          "usd": 435.56,
+          "price": 9.07689,
+          "active": false
+        }
+      ],
+      [
+        8363171,
+        {
+          "wavax": 50.62165708276973,
+          "usdc": 0.0,
+          "usd": 439.72,
+          "price": 9.085967,
+          "active": false
+        }
+      ],
+      [
+        8363172,
+        {
+          "wavax": 52.540817170750515,
+          "usdc": 0.0,
+          "usd": 456.39,
+          "price": 9.095053,
+          "active": false
+        }
+      ],
+      [
+        8363173,
+        {
+          "wavax": 52.27525355485445,
+          "usdc": 0.0,
+          "usd": 454.08,
+          "price": 9.104148,
+          "active": false
+        }
+      ],
+      [
+        8363174,
+        {
+          "wavax": 52.60879536387113,
+          "usdc": 0.0,
+          "usd": 456.98,
+          "price": 9.113252,
+          "active": false
+        }
+      ],
+      [
+        8363175,
+        {
+          "wavax": 52.87016372660131,
+          "usdc": 0.0,
+          "usd": 459.25,
+          "price": 9.122365,
+          "active": false
+        }
+      ],
+      [
+        8363176,
+        {
+          "wavax": 51.971999224477074,
+          "usdc": 0.0,
+          "usd": 451.45,
+          "price": 9.131488,
+          "active": false
+        }
+      ],
+      [
+        8363177,
+        {
+          "wavax": 51.40503470071017,
+          "usdc": 0.0,
+          "usd": 446.52,
+          "price": 9.140619,
+          "active": false
+        }
+      ],
+      [
+        8363178,
+        {
+          "wavax": 50.46502660745455,
+          "usdc": 0.0,
+          "usd": 438.36,
+          "price": 9.14976,
+          "active": false
+        }
+      ],
+      [
+        8363179,
+        {
+          "wavax": 50.557735518143744,
+          "usdc": 0.0,
+          "usd": 439.16,
+          "price": 9.15891,
+          "active": false
+        }
+      ],
+      [
+        8363180,
+        {
+          "wavax": 51.31519019818084,
+          "usdc": 0.0,
+          "usd": 445.74,
+          "price": 9.168069,
+          "active": false
+        }
+      ],
+      [
+        8363181,
+        {
+          "wavax": 51.61373328421935,
+          "usdc": 0.0,
+          "usd": 448.34,
+          "price": 9.177237,
+          "active": false
+        }
+      ],
+      [
+        8363182,
+        {
+          "wavax": 51.213819144474485,
+          "usdc": 0.0,
+          "usd": 444.86,
+          "price": 9.186414,
+          "active": false
+        }
+      ],
+      [
+        8363183,
+        {
+          "wavax": 50.96580193179855,
+          "usdc": 0.0,
+          "usd": 442.71,
+          "price": 9.1956,
+          "active": false
+        }
+      ],
+      [
+        8363184,
+        {
+          "wavax": 50.91120354842869,
+          "usdc": 0.0,
+          "usd": 442.23,
+          "price": 9.204796,
+          "active": false
+        }
+      ],
+      [
+        8363185,
+        {
+          "wavax": 51.02274927284053,
+          "usdc": 0.0,
+          "usd": 443.2,
+          "price": 9.214001,
+          "active": false
+        }
+      ],
+      [
+        8363186,
+        {
+          "wavax": 50.407531075681426,
+          "usdc": 0.0,
+          "usd": 437.86,
+          "price": 9.223215,
+          "active": false
+        }
+      ]
+    ],
+    "shape_bins": 121
+  },
+  "board": {
+    "avax": {
+      "sym": "AVAX",
+      "tag": "track",
+      "px": 8.66503081351888,
+      "ch7": -2.766063216096437,
+      "ch30": -18.393424358187694,
+      "pos60": 35.79559961322948,
+      "status": "WAIT",
+      "band": "BLEEDING",
+      "abs": "HARVEST",
+      "stale": false,
+      "st": {
+        "swing": 9.456396188086506,
+        "prev_swing": 10.056038159925519,
+        "broken": true,
+        "lower_low": true,
+        "off_high": -23.870428523341214
+      }
+    },
+    "btc": {
+      "sym": "BTC",
+      "tag": "track",
+      "px": 77739.88078496947,
+      "ch7": -3.3936232900102614,
+      "ch30": -7.612331351715862,
+      "pos60": 21.04716656316112,
+      "status": "WAIT",
+      "band": "BLEEDING",
+      "abs": "ACCUMULATE",
+      "stale": false,
+      "st": {
+        "swing": 79929.93147217875,
+        "prev_swing": 80960.1935674548,
+        "broken": true,
+        "lower_low": true,
+        "off_high": -10.124428184739532
+      }
+    },
+    "structure_broken": 8,
+    "assets": 8
+  },
+  "tenancy": {
+    "mode": "LINKED BUT SEPARATE",
+    "shared": [
+      "pool",
+      "structure",
+      "board",
+      "plan"
+    ],
+    "per_tenant": [
+      "wallet",
+      "capital",
+      "bins",
+      "fees",
+      "share",
+      "opinion"
+    ],
+    "note": "same chain, possibly different conclusions \u2014 this file assumes neither"
+  },
+  "council": {
+    "as_of": "2026-11-01T20:48:09Z",
+    "minutes": "2026-10-25-council-2030.md",
+    "one_number": {
+      "label": "STABLECOINS",
+      "text": "$298.5B \u2014 dry powder inside crypto. Falling while market cap falls = money leaving, not rotating."
+    },
+    "verdict": "\ud83d\udd34 HOLD \u2014 rule `R-HOLD`: fewer than 2 doctrine names pulled back -> HOLD; the doctrine's condition is not met",
+    "tape": "structure: 8 of 8 below the last swing low \u00b7 AVAX $8.6650 \u00b7 BLEEDING",
+    "record": "calls logged 12 \u00b7 resolved 1 \u00b7 HIT 0 \u00b7 MISS 1 \u00b7 VOID 0 \u00b7 sample too small for a ratio (5 needed)",
+    "falsifiers": [
+      "C1: BTC makes a new cycle ATH after 2026-12-31",
+      "C2: BTC closes October below the levels callers named",
+      "C3: no higher low prints before the FOMC"
+    ]
   }
 }
