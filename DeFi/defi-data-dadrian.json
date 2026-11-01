@@ -7,7 +7,7 @@
     "wallet_masked": "0x4E62\u2026b0E0",
     "key_status": "drilled_shamir_2of3",
     "status": "ACTIVE",
-    "as_of": "2026-11-01T20:57:03Z",
+    "as_of": "2026-11-01T21:50:23Z",
     "capital_usd": 0.0,
     "deployed_usd": 0.0,
     "position_status": "NO POSITION \u2014 not yet funded; this page shows the plan, not a holding",
@@ -32,9 +32,9 @@
     "bin_step": 10,
     "active_id": 8363126,
     "price_usd": 8.686357,
-    "reserve_wavax": 24619.2899,
-    "reserve_usdc": 114795.7,
-    "reserve_value_usd": 328647.64,
+    "reserve_wavax": 24610.1643,
+    "reserve_usdc": 114878.89,
+    "reserve_value_usd": 328651.57,
     "shape": [
       [
         8363066,
@@ -600,8 +600,8 @@
         8363122,
         {
           "wavax": 0.0,
-          "usdc": 362.492898,
-          "usd": 362.49,
+          "usdc": 363.016115,
+          "usd": 363.02,
           "price": 8.651698,
           "active": false
         }
@@ -610,8 +610,8 @@
         8363123,
         {
           "wavax": 0.0,
-          "usdc": 361.21829,
-          "usd": 361.22,
+          "usdc": 361.783552,
+          "usd": 361.78,
           "price": 8.66035,
           "active": false
         }
@@ -620,8 +620,8 @@
         8363124,
         {
           "wavax": 0.0,
-          "usdc": 364.310518,
-          "usd": 364.31,
+          "usdc": 365.205251,
+          "usd": 365.21,
           "price": 8.66901,
           "active": false
         }
@@ -630,8 +630,8 @@
         8363125,
         {
           "wavax": 0.0,
-          "usdc": 382.338961,
-          "usd": 382.34,
+          "usdc": 383.523969,
+          "usd": 383.52,
           "price": 8.677679,
           "active": false
         }
@@ -639,9 +639,9 @@
       [
         8363126,
         {
-          "wavax": 44.778288084894356,
-          "usdc": 1e-06,
-          "usd": 388.96,
+          "wavax": 44.87001425309202,
+          "usdc": 0.0,
+          "usd": 389.76,
           "price": 8.686357,
           "active": true
         }
@@ -1253,39 +1253,39 @@
     "avax": {
       "sym": "AVAX",
       "tag": "track",
-      "px": 8.66503081351888,
-      "ch7": -2.766063216096437,
-      "ch30": -18.393424358187694,
-      "pos60": 35.79559961322948,
+      "px": 8.66879642343399,
+      "ch7": -2.863392181213442,
+      "ch30": -17.999523469994816,
+      "pos60": 34.16110195998144,
       "status": "WAIT",
       "band": "BLEEDING",
       "abs": "HARVEST",
       "stale": false,
       "st": {
-        "swing": 9.456396188086506,
-        "prev_swing": 10.056038159925519,
+        "swing": 9.402014995330868,
+        "prev_swing": 10.087599590153841,
         "broken": true,
         "lower_low": true,
-        "off_high": -23.870428523341214
+        "off_high": -24.881470323687626
       }
     },
     "btc": {
       "sym": "BTC",
       "tag": "track",
-      "px": 77739.88078496947,
-      "ch7": -3.3936232900102614,
-      "ch30": -7.612331351715862,
-      "pos60": 21.04716656316112,
+      "px": 77816.69933779814,
+      "ch7": -3.2495473469239977,
+      "ch30": -7.820387698411501,
+      "pos60": 19.80610559729611,
       "status": "WAIT",
-      "band": "BLEEDING",
+      "band": "PANIC",
       "abs": "ACCUMULATE",
       "stale": false,
       "st": {
-        "swing": 79929.93147217875,
-        "prev_swing": 80960.1935674548,
+        "swing": 80898.94447869186,
+        "prev_swing": 81632.70079953631,
         "broken": true,
         "lower_low": true,
-        "off_high": -10.124428184739532
+        "off_high": -10.184117543201133
       }
     },
     "structure_broken": 8,
@@ -1308,5 +1308,21 @@
       "opinion"
     ],
     "note": "same chain, possibly different conclusions \u2014 this file assumes neither"
+  },
+  "council": {
+    "as_of": "2026-11-01T21:50:23Z",
+    "minutes": "2026-11-01-council-2140.md",
+    "one_number": {
+      "label": "STABLECOINS",
+      "text": "$298.5B \u2014 dry powder inside crypto. Falling while market cap falls = money leaving, not rotating."
+    },
+    "verdict": "\ud83d\udd34 HOLD \u2014 rule `R-HOLD`: fewer than 2 doctrine names pulled back -> HOLD; the doctrine's condition is not met",
+    "tape": "structure: 8 of 8 below the last swing low \u00b7 AVAX $8.6688 \u00b7 BLEEDING",
+    "record": "calls logged 12 \u00b7 resolved 1 \u00b7 HIT 0 \u00b7 MISS 1 \u00b7 VOID 0 \u00b7 sample too small for a ratio (5 needed)",
+    "falsifiers": [
+      "C1: BTC makes a new cycle ATH after 2026-12-31",
+      "C2: BTC closes October below the levels callers named",
+      "C3: no higher low prints before the FOMC"
+    ]
   }
 }
